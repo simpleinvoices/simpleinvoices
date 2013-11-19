@@ -14,12 +14,11 @@ $invoice = new invoice();
 $invoice->sort=$sort;
 $invoice->query=$_REQUEST['query'];
 $invoice->qtype=$_REQUEST['qtype'];
-$invoice->sort=$sort;
 $large_dataset = getDefaultLargeDataset();
 if($large_dataset == $LANG['enabled'])
 {
   $sth = $invoice->select_all('large', $dir, $rp, $page, $having);
-  $sth_count_rows = invoice::count();
+  $sth_count_rows = $invoice->count();
   $invoice_count = $sth_count_rows->fetch(PDO::FETCH_ASSOC);
   $invoice_count = $invoice_count['count'];
 } else {

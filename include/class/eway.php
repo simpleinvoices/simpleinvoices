@@ -7,7 +7,13 @@ class eway
     public $invoice;
     public $customer;
     public $preference;
+	public $domain_id;
     
+	public function __construct()
+	{
+		$this->domain_id = domain_id::get($this->domain_id);
+	}
+
     public function pre_check()
     {
         global $logger;
@@ -17,25 +23,23 @@ class eway
         //set customer,biller and preference if not defined
         if(empty($this->customer))
         {
-            $this->customer = getCustomer($this->invoice['customer_id']);
+            $this->customer = getCustomer($this->invoice['customer_id'], $this->domain_id);
         }
         if(empty($this->biller))
         {
-            $this->biller = getBiller($this->invoice['biller_id']);
+            $this->biller = getBiller($this->invoice['biller_id'], $this->domain_id);
         }
         if(empty($this->preference))
         {
-            $this->preference = getPreference($this->invoice['preference_id']);
+            $this->preference = getPreference($this->invoice['preference_id'], $this->domain_id);
         }
 
         if (
                 $this->invoice['owing'] > 0 
-                 AND
-                $this->biller['eway_customer_id'] != ''
-                AND
-                $this->customer['credit_card_number'] != ''
-                AND
-                in_array("eway_merchant_xml",explode(",", $this->preference['include_online_payment'])) )         
+            AND $this->biller['eway_customer_id'] != ''
+            AND $this->customer['credit_card_number'] != ''
+            AND in_array("eway_merchant_xml",explode(",", $this->preference['include_online_payment']))
+           )
         {
             $return = 'true';
         }
@@ -53,15 +57,15 @@ class eway
         //set customer,biller and preference if not defined
         if(empty($this->customer))
         {
-            $this->customer = getCustomer($this->invoice['customer_id']);
+            $this->customer = getCustomer($this->invoice['customer_id'], $this->domain_id);
         }
         if(empty($this->biller))
         {
-            $this->biller = getBiller($this->invoice['biller_id']);
+            $this->biller = getBiller($this->invoice['biller_id'], $this->domain_id);
         }
         if(empty($this->preference))
         {
-            $this->preference = getPreference($this->invoice['preference_id']);
+            $this->preference = getPreference($this->invoice['preference_id'], $this->domain_id);
         }
 
         $eway = new ewaylib($this->biller['eway_customer_id'],'REAL_TIME', false);
@@ -93,7 +97,8 @@ class eway
         $eway->setTransactionData("TrxnNumber", $this->invoice['id']);
         
         //special preferences for php Curl
-        $eway->setCurlPreferences(CURLOPT_SSL_VERIFYPEER, 0);  //pass a long that is set to a zero value to stop curl from verifying the peer's certificate 
+        //pass a long set to zero value stops curl from verifying peer's certificate 
+        $eway->setCurlPreferences(CURLOPT_SSL_VERIFYPEER, 0);
         $ewayResponseFields = $eway->doPayment();
         $this->message = $ewayResponseFields;
         $message ="";
@@ -123,11 +128,11 @@ class eway
             $payment->ac_notes = $message;
             $payment->ac_date = date( 'Y-m-d' );
             $payment->online_payment_id = $ewayResponseFields['EWAYTRXNNUMBER'];
-            $payment->domain_id = domain_id::get($this->domain_id);
+            $payment->domain_id = $this->domain_id;
 
                 $payment_type = new payment_type();
                 $payment_type->type = "Eway";
-                $payment_type->domain_id = $domain_id;
+                $payment_type->domain_id = $this->domain_id;
 
             $payment->ac_payment_type = $payment_type->select_or_insert_where();
             $logger->log('Paypal - payment_type='.$payment->ac_payment_type, Zend_Log::INFO);

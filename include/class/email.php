@@ -14,6 +14,7 @@ class email
 	public $end_date;
 	public $biller_id;
 	public $customer_id;
+	public $domain_id;
 
 	function send()
 	{
@@ -169,11 +170,17 @@ class email
     public function get_admin_email()
     {
     
-        global $db;
 		$domain_id = domain_id::get($this->domain_id);
-    
-        $sql = "select email from ".TB_PREFIX."user where role_id = '1' and domain_id =:domain_id LIMIT 1";
-        $sth  = $db->query($sql,':domain_id',$domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+
+		$sql = "SELECT u.email 
+				FROM ".TB_PREFIX."user u 
+					LEFT JOIN ".TB_PREFIX."user_role r 
+						ON (u.role_id = r.id) 
+				WHERE r.name = 'administrator' 
+					AND domain_id = :domain_id 
+				LIMIT 1
+		";
+        $sth  = dbQuery($sql,':domain_id',$domain_id);
  
         return $sth->fetchColumn();
 

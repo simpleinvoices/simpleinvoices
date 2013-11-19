@@ -1008,20 +1008,21 @@ function getInvoice($id, $domain_id='') {
 	//print_r($query);
 	$invoice = $sth->fetch();
 	
-	//print_r($invoice);
-	//exit();
-	
 	$invoice['calc_date'] = date('Y-m-d', strtotime( $invoice['date'] ) );
 	$invoice['date'] = siLocal::date( $invoice['date'] );
 	$invoice['total'] = getInvoiceTotal($invoice['id']);
-	$invoice['gross'] = invoice::getInvoiceGross($invoice['id']);
+
+	$invoiceobj = new invoice();
+	$invoiceobj->domain_id = $domain_id;
+	$invoice['gross'] = $invoiceobj->getInvoiceGross($invoice['id']);
+
 	$invoice['paid'] = calc_invoice_paid($invoice['id']);
 	$invoice['owing'] = $invoice['total'] - $invoice['paid'];
 
 	
 	#invoice total tax
 	$sql ="SELECT SUM(tax_amount) AS total_tax, SUM(total) AS total FROM ".TB_PREFIX."invoice_items WHERE invoice_id =  :id AND domain_id =  :domain_id";
-	$sth = dbQuery($sql, ':id', $id, ':domain_id', $domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+	$sth = dbQuery($sql, ':id', $id, ':domain_id', $domain_id);
 	$result = $sth->fetch();
 	//$invoice['total'] = number_format($result['total'],2);
 	$invoice['total_tax'] = $result['total_tax'];
@@ -1133,8 +1134,8 @@ function setStatusExtension($extension_id, $status=2, $domain_id='') {
 		$status = 1 - $extension_info['enabled'];
 	}
 
-	$sql = "UPDATE ".TB_PREFIX."extensions SET enabled =  :status WHERE id =  :id AND domain_id =  :domain_id LIMIT 1"; 
-	if (dbQuery($sql, ':status', $status,':id', $extension_id, ':domain_id', $auth_session->domain_id)) {
+	$sql = "UPDATE ".TB_PREFIX."extensions SET enabled =  :status WHERE id =  :id AND domain_id =  :domain_id"; 
+	if (dbQuery($sql, ':status', $status,':id', $extension_id, ':domain_id', $domain_id)) {
 		return true;
 	}
 	return false;
@@ -2005,10 +2006,11 @@ function updateInvoice($invoice_id, $domain_id='') {
     global $db_server;
     $domain_id = domain_id::get($domain_id);
 
-    $current_invoice = invoice::select($_POST['id']);
-    $current_pref_group = getPreference($current_invoice[preference_id]);
+	$invoiceobj = new invoice();
+    $current_invoice = $invoiceobj->select($_POST['id']);
+    $current_pref_group = getPreference($current_invoice['preference_id']);
 
-    $new_pref_group=getPreference($_POST[preference_id]);
+    $new_pref_group=getPreference($_POST['preference_id']);
 
     $index_id = $current_invoice['index_id'];
 
@@ -2338,7 +2340,7 @@ function updateInvoiceItem($id, $quantity, $product_id, $line_number, $line_item
 		':total', $total,
         ':attribute',json_encode($attr),
 		':id', $id,
-		':domain_id', $auth_session->domain_id
+		':domain_id', $domain_id
 		);
 
 	//if from a new invoice item in the edit page user lastInsertId()
@@ -3177,3 +3179,189 @@ function saveInitCustomField($id, $category, $name, $description) {
 	dbQuery($sql, ':id', $id, ':category', $category, ':name', $name, ':description', $description);
 //	echo "SAVED<br />";
 }
+
+// start of db query functions moved from functions.php on 2013-10-28
+
+/**
+* Function: get_custom_field_label
+* 
+* Prints the name of the custom field based on the input. If the custom field has not been defined by the user than use the default in the lang files
+*
+* Arguments:
+* field		- The custom field in question
+**/
+function get_custom_field_label($field, $domain_id='')         {
+	global $LANG;
+	$domain_id = domain_id::get($domain_id);
+	
+    $sql =  "SELECT cf_custom_label FROM ".TB_PREFIX."custom_fields WHERE cf_custom_field = :field AND domain_id = :domain_id";
+    $sth = dbQuery($sql, ':field', $field, ':domain_id', $domain_id);
+
+    $cf = $sth->fetch();
+
+    //grab the last character of the field variable
+    $get_cf_number = $field[strlen($field)-1];    
+
+    //if custom field is blank in db use the one from the LANG files
+    if ($cf['cf_custom_label'] == null) {
+       	$cf['cf_custom_label'] = $LANG['custom_field'] . $get_cf_number;
+    }
+        
+    return $cf['cf_custom_label'];
+}
+
+function calc_invoice_paid($inv_idField, $domain_id='') {
+	global $LANG;
+	$domain_id = domain_id::get($domain_id);
+
+	#amount paid calc - start
+	$x1 = "SELECT COALESCE(SUM(ac_amount), 0) AS amount FROM ".TB_PREFIX."payment WHERE ac_inv_id = :inv_id AND domain_id = :domain_id";
+	$sth = dbQuery($x1, ':inv_id', $inv_idField, ':domain_id',$domain_id);
+	while ($result_x1Array = $sth->fetch()) {
+		$invoice_paid_Field = $result_x1Array['amount'];
+		$invoice_paid_Field_format = number_format($result_x1Array['amount'],2);
+		#amount paid calc - end
+		return $invoice_paid_Field;
+	}
+}
+
+
+function calc_customer_total($customer_id, $domain_id='') {
+	global $LANG;
+	$domain_id = domain_id::get($domain_id);
+	
+    $sql ="SELECT
+		COALESCE(SUM(ii.total),  0) AS total 
+	FROM
+		".TB_PREFIX."invoice_items ii INNER JOIN
+		".TB_PREFIX."invoices iv ON (iv.id = ii.invoice_id AND iv.domain_id = ii.domain_id)
+	WHERE  
+		iv.customer_id  = :customer
+	AND ii.domain_id = :domain_id";
+	
+    $sth = dbQuery($sql, ':customer', $customer_id, ':domain_id',$domain_id);
+	$invoice = $sth->fetch();
+
+	//return number_format($invoice['total'],"#########.##");
+	return $invoice['total'];
+}
+
+function calc_customer_paid($customer_id, $domain_id='') {
+	global $LANG;
+	$domain_id = domain_id::get($domain_id);
+		
+#amount paid calc - start
+	$sql = "
+	SELECT COALESCE(SUM(ap.ac_amount), 0) AS amount 
+	FROM
+		".TB_PREFIX."payment ap INNER JOIN
+		".TB_PREFIX."invoices iv ON (iv.id = ap.ac_inv_id AND iv.domain_id = ap.domain_id)
+	WHERE 
+		iv.customer_id = :customer
+	AND ap.domain_id = :domain_id";
+	
+	$sth = dbQuery($sql, ':customer', $customer_id, ':domain_id',$domain_id);
+	$invoice = $sth->fetch();
+
+	return $invoice['amount'];
+}
+
+/**
+* Function: calc_invoice_tax
+* 
+* Calculates the total tax for a given invoices
+*
+* Arguments:
+* invoice_id		- The name of the field, ie. Custom Field 1, etc..
+**/
+function calc_invoice_tax($invoice_id, $domain_id='') {
+	global $LANG;
+	$domain_id = domain_id::get($domain_id);
+		
+	#invoice total tax
+	$sql ="SELECT SUM(tax_amount) AS total_tax FROM ".TB_PREFIX."invoice_items WHERE invoice_id = :invoice_id AND domain_id = :domain_id";
+	$sth = dbQuery($sql, ':invoice_id', $invoice_id, ':domain_id',$domain_id);
+
+	$tax = $sth->fetch();
+
+	return $tax['total_tax'];
+}
+
+/**
+* Function: show_custom_field
+* 
+* If a custom field has been defined then show it in the add,edit, or view invoice screen. This is used for the Invoice Custom Fields - may be used for the others as wll based on the situation
+*
+* Parameters:
+* custom_field		- the db name of the custom field ie invoice_cf1
+* custom_field_value	- the value of this custom field for a given invoice
+* permission		- the permission level - ie. in a print view its gets a read level, in an edit or add screen its write leve
+* css_class_tr		- the css class the the table row (tr)
+* css_class1		- the css class of the first td
+* css_class2		- the css class of the second td
+* td_col_span		- the column span of the right td
+* seperator		- used in the print view ie. adding a : between the 2 values
+*
+* Returns:
+* Depending on the permission passed, either a formatted input box and the label of the custom field or a table row and data
+**/
+
+function show_custom_field($custom_field,$custom_field_value,$permission,$css_class_tr,$css_class1,$css_class2,$td_col_span,$seperator) {
+
+	$domain_id = domain_id::get();
+
+		/*
+	*get the last character of the $custom field - used to set the name of the field
+	*/
+	$custom_field_number =  substr($custom_field, -1, 1);
+
+
+	#get the label for the custom field
+
+	$display_block = "";
+
+	$get_custom_label ="SELECT cf_custom_label FROM ".TB_PREFIX."custom_fields WHERE cf_custom_field = :field AND domain_id = :domain_id";
+	$sth = dbQuery($get_custom_label, ':field', $custom_field, ':domain_id', $domain_id);
+
+	while ($Array_cl = $sth->fetch()) {
+                $has_custom_label_value = $Array_cl['cf_custom_label'];
+	}
+	/*if permision is write then coming from a new invoice screen show show only the custom field and have a label
+	* if custom_field_value !null coming from existing invoice so show only the cf that they actually have
+	*/	
+	if ( (($has_custom_label_value != null) AND ( $permission == "write")) OR ($custom_field_value != null)) {
+
+		$custom_label_value = htmlsafe(get_custom_field_label($custom_field));
+
+		if ($permission == "read") {
+			$display_block = <<<EOD
+			<tr class="$css_class_tr" >
+				<th class="$css_class1">
+					$custom_label_value$seperator
+				</th>
+				<td class="$css_class2" colspan="$td_col_span" >
+					$custom_field_value
+				</td>
+			</tr>
+EOD;
+		}
+
+		else if ($permission == "write") {
+
+		$display_block = <<<EOD
+			<tr>
+				<th class="$css_class1">$custom_label_value
+					<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="Custom Fields"><img src="./images/common/help-small.png" alt="" /></a>
+				</th>
+				<td>
+					<input type="text" name="customField$custom_field_number" value="$custom_field_value" size="25" />
+				</td>
+			</tr>
+EOD;
+		}
+	}
+	return $display_block;
+}
+
+// end of db query functions moved from functions.php on 2013-10-28
+

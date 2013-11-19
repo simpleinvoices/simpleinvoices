@@ -23,7 +23,9 @@ IsSet($_GET['template']) && $master_invoice_id = $_GET['template'];
 $invoice = getInvoice($master_invoice_id);
 IsSet($_GET['template']) && $invoice['id']=null;
 
-$invoiceItems = invoice::getInvoiceItems($master_invoice_id);
+$invoiceobj = new invoice();
+$invoiceItems = $invoiceobj->getInvoiceItems($master_invoice_id);
+
 $customers = getActiveCustomers();
 $preference = getPreference($invoice['preference_id']);
 $billers = getActiveBillers();

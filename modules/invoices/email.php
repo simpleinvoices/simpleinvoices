@@ -16,15 +16,13 @@ checkLogin();
 #get the invoice id
 $invoice_id = $_GET['id'];
 
-$invoice = invoice::select($invoice_id);
+$invoiceobj = new invoice();
+$invoice = $invoiceobj->select($invoice_id);
+
 $preference = getPreference($invoice['preference_id']);
 $biller = getBiller($invoice['biller_id']);
 $customer = getCustomer($invoice['customer_id']);
-
-
-$sql = "SELECT inv_ty_description AS type FROM ".TB_PREFIX."invoice_type WHERE inv_ty_id = :type";
-$sth = dbQuery($sql, ':type', $invoice['type_id']);
-$invoiceType = $sth->fetch();
+$invoiceType = getInvoiceType($invoice['type_id']);
 
 #create PDF name
 $spc2us_pref = str_replace(" ", "_", $invoice['index_name']);

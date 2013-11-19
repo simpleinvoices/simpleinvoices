@@ -31,7 +31,10 @@ $customer = getCustomer($invoice['customer_id']);
 $biller = getBiller($invoice['biller_id']);
 $preference = getPreference($invoice['preference_id']);
 $defaults = getSystemDefaults();
-$invoiceItems = invoice::getInvoiceItems($invoice_id);
+
+$invoiceobj = new invoice();
+$invoiceItems = $invoiceobj->getInvoiceItems($invoice_id);
+
 $sub_customer = getCustomer($invoice['custom_field1']);
     $eway_check = new eway();
     $eway_check->invoice = $invoice;

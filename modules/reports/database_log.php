@@ -55,13 +55,11 @@ EOD;
 	}
 	
 	echo "<br /><b>Payment Process</b><br />";
-	global $db_server;
+
 	foreach($sqls as $sql) {
-		if ($db_server == 'pgsql') {
-			$pattern = "/.*INSERT\s+INTO\s+".TB_PREFIX."payment\s+/im";
-		} else {
-			$pattern = "/.*INSERT\s+INTO\s+".TB_PREFIX."payment\s+/im";
-		}
+	
+		$pattern = "/.*INSERT\s+INTO\s+".TB_PREFIX."payment\s+/im";
+		
 		if(preg_match($pattern,$sql['sqlquerie'],$match)) {
 			$user = htmlsafe($sql['email']).' (id '.htmlsafe($sql['userid']).')';
 			echo "User $user processed invoice $match[1] on $sql[timestamp] with amount $match[2].<br />";

@@ -5,28 +5,28 @@ class domain_id
 	public function get($id="")
 	{
 		global $auth_session;
-		//if user auth
-		if( empty($auth_session->domain_id) and $auth_session->fake_auth != '1')
-		{
-			$domain_id = $auth_session->domain_id;
-		}
-		//if user not auth
-		if( empty($auth_session->domain_id) and $auth_session->fake_auth == '1')
-		{
-			$domain_id = $auth_session->domain_id == "1" ? "1": $auth_session->domain_id ;
-		}
-		//something weird going on
-		if( !empty($auth_session->domain_id))
-		{
-			$domain_id = "1" ;
-		}
-		//if domain_id is set in the code then use this one
-		if( !empty($id) )
-		{
-			$domain_id = $id ;
+
+		// default when session value absent - fake auth, whether auth needed or not
+		$domain_id = "1";
+		
+		if( !empty($id) ) {
+
+			//if domain_id is set in the code then use this one
+			$domain_id = $id;
+			
+		} else {
+
+			// no preset value available
+
+			if (!empty($auth_session->domain_id)) {
+
+				// take session value since available 
+				// whether fake_auth or not
+				$domain_id = $auth_session->domain_id;
+
+			}
 		}
 
 		return $domain_id;
-
 	}
 }

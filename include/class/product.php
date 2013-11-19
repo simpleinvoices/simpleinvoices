@@ -2,40 +2,38 @@
 
 class product
 {
-    public static function count()
+	public $domain_id;
+    
+	public function __construct()
+	{
+		$this->domain_id = domain_id::get($this->domain_id);
+	}
+
+    public function count()
     {
 
-        global $db;
-         global $auth_session;
- 
          $sql = "SELECT count(id) as count FROM ".TB_PREFIX."products WHERE domain_id = :domain_id ORDER BY id";
-         $sth  = $db->query($sql,':domain_id',$auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+         $sth  = dbQuery($sql,':domain_id',$this->domain_id);
  
          return $sth->fetch();
 
     }
 
-    public static function get_all()
+    public function get_all()
     {
 
-         global $auth_session;
-         global $db;
- 
-         $sql = "SELECT * FROM ".TB_PREFIX."products WHERE domain_id = :domain_id and visible = 1 ORDER BY description, id";
-         $sth  = $db->query($sql,':domain_id',$auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+         $sql = "SELECT * FROM ".TB_PREFIX."products WHERE domain_id = :domain_id AND visible = 1 ORDER BY description, id";
+         $sth  = dbQuery($sql,':domain_id',$this->domain_id);
  
          return $sth->fetchAll();
 
     }
 
-    public static function get($id)
+    public function get($id)
     {
 
-         global $auth_session;
-         global $db;
- 
-         $sql = "SELECT * FROM ".TB_PREFIX."products WHERE domain_id = :domain_id and id = :id";
-         $sth  = $db->query($sql,':domain_id',$auth_session->domain_id, ':id',$id) or die(htmlsafe(end($dbh->errorInfo())));
+         $sql = "SELECT * FROM ".TB_PREFIX."products WHERE domain_id = :domain_id AND id = :id";
+         $sth  = dbQuery($sql,':domain_id',$this->domain_id, ':id',$id);
  
          return $sth->fetch();
 
@@ -45,16 +43,14 @@ class product
     {
         global $config;
         global $LANG;
-        global $auth_session;
         
         //SC: Safety checking values that will be directly subbed in
         if (intval($start) != $start) {
             $start = 0;
         }
-        $start = (($page-1) * $limit);
         
-        if (intval($limit) != $limit) {
-            $limit = 25;
+        if (intval($rp) != $rp) {
+            $rp = 25;
         }
         /*SQL Limit - start*/
         $start = (($page-1) * $rp);
@@ -74,7 +70,7 @@ class product
         $qtype = $_POST['qtype'];
         
         $where = "";
-        if ($query) $where = " AND $qtype LIKE '%$query%' ";
+        if ($query) $where .= " AND $qtype LIKE '%$query%' ";
         
         
         /*Check that the sort field is OK*/
@@ -90,23 +86,23 @@ class product
                         id, 
                         description,
                         unit_price, 
-                        (SELECT coalesce(sum(quantity),0) from ".TB_PREFIX."invoice_items where product_id = ".TB_PREFIX."products.id) as qty_out ,
-                        (SELECT coalesce(sum(quantity),0) from ".TB_PREFIX."inventory where product_id = ".TB_PREFIX."products.id) as qty_in ,
-                        (SELECT coalesce(reorder_level,0)) as reorder_level ,
-                        (SELECT qty_in - qty_out ) as quantity,
+                        (SELECT COALESCE(SUM(quantity),0) FROM ".TB_PREFIX."invoice_items WHERE product_id = ".TB_PREFIX."products.id) AS qty_out ,
+                        (SELECT COALESCE(SUM(quantity),0) FROM ".TB_PREFIX."inventory WHERE product_id = ".TB_PREFIX."products.id) AS qty_in ,
+                        (SELECT COALESCE(reorder_level,0)) AS reorder_level ,
+                        (SELECT qty_in - qty_out ) AS quantity,
                         (SELECT (CASE  WHEN enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled
                     FROM 
                         ".TB_PREFIX."products  
                     WHERE 
                         visible = 1
-                        AND domain_id = :domain_id
+                    AND domain_id = :domain_id
                         $where
                     ORDER BY 
                         $sort $dir 
                     $limit";
         
         
-        $result = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+        $result = dbQuery($sql, ':domain_id', $this->domain_id);
     
         return $result;
     }

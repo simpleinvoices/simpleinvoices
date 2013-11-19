@@ -24,7 +24,9 @@ $invoice = getInvoice($invoice_id);
 $preference = getPreference($invoice['preference_id']);
 $defaults = getSystemDefaults();
 $invoicePaid = calc_invoice_paid($invoice_id);
-$invoiceItems = invoice::getInvoiceItems($invoice_id);
+
+$invoiceobj = new invoice();
+$invoiceItems = $invoiceobj->getInvoiceItems($invoice_id);
 
 $smarty -> assign("invoice",$invoice);
 $smarty -> assign("preference",$preference);
@@ -44,9 +46,9 @@ if ( ($_GET['stage'] == 2 ) AND ($_POST['doDelete'] == 'y') ) {
 	$dbh->beginTransaction();
 	$error = false;
 
-    
     //delete line item taxes
-    $invoice_line_items = invoice::getInvoiceItems($invoice_id);
+	$invoiceobj = new invoice();
+    $invoice_line_items = $invoiceobj->getInvoiceItems($invoice_id);
 
     foreach( $invoice_line_items as $key => $value)
     {

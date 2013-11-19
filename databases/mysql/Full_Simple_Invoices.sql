@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS `si_biller` (
   `street_address2` varchar(255) DEFAULT NULL,
   `city` varchar(255) DEFAULT NULL,
   `state` varchar(255) DEFAULT NULL,
-  `zip_code` varchar(255) DEFAULT NULL,
+  `zip_code` varchar(20) DEFAULT NULL,
   `country` varchar(255) DEFAULT NULL,
   `phone` varchar(255) DEFAULT NULL,
   `mobile_phone` varchar(255) DEFAULT NULL,
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `si_biller` (
   `custom_field2` varchar(255) DEFAULT NULL,
   `custom_field3` varchar(255) DEFAULT NULL,
   `custom_field4` varchar(255) DEFAULT NULL,
-  `enabled` varchar(1) NOT NULL DEFAULT '1',
+  `enabled` TINYINT(1) DEFAULT 1 NOT NULL,
   PRIMARY KEY (`domain_id`,`id`)
 ) ENGINE=MyISAM;
 
@@ -44,8 +44,8 @@ CREATE TABLE IF NOT EXISTS `si_cron` (
   `end_date` varchar(10) DEFAULT NULL,
   `recurrence` int(11) NOT NULL,
   `recurrence_type` varchar(11) NOT NULL,
-  `email_biller` int(1) DEFAULT NULL,
-  `email_customer` int(1) DEFAULT NULL,
+  `email_biller` TINYINT(1) DEFAULT 0 NOT NULL,
+  `email_customer` TINYINT(1) DEFAULT 0 NOT NULL,
   PRIMARY KEY (`domain_id`,`id`)
 ) ENGINE=MyISAM;
 
@@ -54,14 +54,15 @@ CREATE TABLE IF NOT EXISTS `si_cron_log` (
   `domain_id` int(11) NOT NULL,
   `cron_id` varchar(25) DEFAULT NULL,
   `run_date` date NOT NULL,
-  PRIMARY KEY (`domain_id`,`id`)
+  PRIMARY KEY (`domain_id`,`id`),
+  UNIQUE KEY `CronIdUnq` (`domain_id`, `cron_id`, `run_date`)
 ) ENGINE=MyISAM;
 
 CREATE TABLE IF NOT EXISTS `si_custom_fields` (
   `cf_id` int(11) NOT NULL AUTO_INCREMENT,
   `cf_custom_field` varchar(255) DEFAULT NULL,
   `cf_custom_label` varchar(255) DEFAULT NULL,
-  `cf_display` varchar(1) NOT NULL DEFAULT '1',
+  `cf_display` TINYINT(1) DEFAULT 1 NOT NULL,
   `domain_id` int(11) NOT NULL,
   PRIMARY KEY (`cf_id`, `domain_id`)
 ) ENGINE=MyISAM;
@@ -93,14 +94,14 @@ CREATE TABLE IF NOT EXISTS `si_customers` (
   `street_address2` varchar(255) DEFAULT NULL,
   `city` varchar(255) DEFAULT NULL,
   `state` varchar(255) DEFAULT NULL,
-  `zip_code` varchar(255) DEFAULT NULL,
+  `zip_code` varchar(20) DEFAULT NULL,
   `country` varchar(255) DEFAULT NULL,
   `phone` varchar(255) DEFAULT NULL,
   `mobile_phone` varchar(255) DEFAULT NULL,
   `fax` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `credit_card_holder_name` varchar(255) DEFAULT NULL,
-  `credit_card_number` varchar(255) DEFAULT NULL,
+  `credit_card_number` varchar(20) DEFAULT NULL,
   `credit_card_expiry_month` varchar(2) DEFAULT NULL,
   `credit_card_expiry_year` varchar(4) DEFAULT NULL,
   `notes` text,
@@ -108,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `si_customers` (
   `custom_field2` varchar(255) DEFAULT NULL,
   `custom_field3` varchar(255) DEFAULT NULL,
   `custom_field4` varchar(255) DEFAULT NULL,
-  `enabled` varchar(1) NOT NULL DEFAULT '1',
+  `enabled` TINYINT(1) DEFAULT 1 NOT NULL,
   PRIMARY KEY (`domain_id`,`id`)
 ) ENGINE=MyISAM;
 
@@ -122,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `si_extensions` (
   `domain_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
-  `enabled` varchar(1) NOT NULL DEFAULT '0',
+  `enabled` TINYINT(1) DEFAULT 0 NOT NULL,
   PRIMARY KEY (`id`, `domain_id`)
 ) ENGINE=MyISAM;
 
@@ -155,10 +156,10 @@ CREATE TABLE IF NOT EXISTS `si_invoice_item_tax` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `invoice_item_id` int(11) NOT NULL,
   `tax_id` int(11) NOT NULL,
-  `tax_type` varchar(1) NOT NULL,
+  `tax_type` CHAR(1) DEFAULT '%' NOT NULL,
   `tax_rate` decimal(25,6) NOT NULL,
   `tax_amount` decimal(25,6) NOT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM;
 
 INSERT INTO `si_invoice_item_tax` (`id`, `invoice_item_id`, `tax_id`, `tax_type`, `tax_rate`, `tax_amount`) VALUES
@@ -257,7 +258,7 @@ CREATE TABLE IF NOT EXISTS `si_payment_types` (
   `pt_id` int(10) NOT NULL AUTO_INCREMENT,
   `domain_id` int(11) NOT NULL DEFAULT '1',
   `pt_description` varchar(250) NOT NULL,
-  `pt_enabled` varchar(1) NOT NULL DEFAULT '1',
+  `pt_enabled` TINYINT(1) DEFAULT 1 NOT NULL,
   PRIMARY KEY (`domain_id`,`pt_id`)
 ) ENGINE=MyISAM;
 
@@ -279,8 +280,8 @@ CREATE TABLE IF NOT EXISTS `si_preferences` (
   `pref_inv_payment_line1_value` varchar(50) DEFAULT NULL,
   `pref_inv_payment_line2_name` varchar(50) DEFAULT NULL,
   `pref_inv_payment_line2_value` varchar(50) DEFAULT NULL,
-  `pref_enabled` varchar(1) NOT NULL DEFAULT '1',
-  `status` int(1) NOT NULL,
+  `pref_enabled` TINYINT(1) DEFAULT 1 NOT NULL,
+  `status` TINYINT(1) NOT NULL,
   `locale` varchar(255) DEFAULT NULL,
   `language` varchar(255) DEFAULT NULL,
   `index_group` int(11) NOT NULL,
@@ -310,11 +311,11 @@ CREATE TABLE IF NOT EXISTS `si_products` (
   `custom_field3` varchar(255) DEFAULT NULL,
   `custom_field4` varchar(255) DEFAULT NULL,
   `notes` text NOT NULL,
-  `enabled` varchar(1) NOT NULL DEFAULT '1',
-  `visible` tinyint(1) NOT NULL DEFAULT '1',
+  `enabled` TINYINT(1) DEFAULT 1 NOT NULL,
+  `visible` TINYINT(1) DEFAULT 1 NOT NULL,
   `attribute` varchar(255) DEFAULT NULL,
-  `notes_as_description` varchar(1) DEFAULT NULL,
-  `show_description` varchar(1) DEFAULT NULL,
+  `notes_as_description` TINYINT(1) DEFAULT NULL,
+  `show_description` TINYINT(1) DEFAULT NULL,
   PRIMARY KEY (`domain_id`,`id`)
 ) ENGINE=MyISAM;
 
@@ -340,8 +341,8 @@ CREATE TABLE IF NOT EXISTS `si_products_attributes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `type_id` varchar(255) NOT NULL,
-  `enabled` varchar(1) DEFAULT '1',
-  `visible` varchar(1) DEFAULT '1',
+  `enabled` TINYINT(1) DEFAULT 1 NOT NULL,
+  `visible` TINYINT(1) DEFAULT 1 NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM;
 
@@ -353,7 +354,7 @@ CREATE TABLE IF NOT EXISTS `si_products_values` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `attribute_id` int(11) NOT NULL,
   `value` varchar(255) NOT NULL,
-  `enabled` varchar(1) DEFAULT '1',
+  `enabled` TINYINT(1) DEFAULT 1 NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM;
 
@@ -662,7 +663,9 @@ INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_rele
 ,(286,285,'','','')
 ,(287,286,'','','')
 ,(288,287,'','','')
-,(289,288,'','','');
+,(289,288,'','','')
+,(290,289,'','','')
+,(291,290,'','','');
 
 CREATE TABLE IF NOT EXISTS `si_system_defaults` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -706,8 +709,8 @@ CREATE TABLE IF NOT EXISTS `si_tax` (
   `tax_id` int(11) NOT NULL AUTO_INCREMENT,
   `tax_description` varchar(50) DEFAULT NULL,
   `tax_percentage` decimal(25,6) DEFAULT '0.000000',
-  `type` varchar(1) DEFAULT NULL,
-  `tax_enabled` varchar(1) NOT NULL DEFAULT '1',
+  `type` CHAR(1) DEFAULT '%' NOT NULL,
+  `tax_enabled` TINYINT(1) DEFAULT 1 NOT NULL,
   `domain_id` int(11) NOT NULL,
   PRIMARY KEY (`domain_id`,`tax_id`)
 ) ENGINE=MyISAM;
@@ -725,7 +728,7 @@ CREATE TABLE IF NOT EXISTS `si_user` (
   `role_id` int(11) DEFAULT NULL,
   `domain_id` int(11) NOT NULL DEFAULT '0',
   `password` varchar(64) DEFAULT NULL,
-  `enabled` int(1) NOT NULL,
+  `enabled` TINYINT(1) DEFAULT 1 NOT NULL,
   PRIMARY KEY (`domain_id`,`id`),
   UNIQUE KEY `UnqEMailPwd` (`email`, `password`)
 ) ENGINE=MyISAM;

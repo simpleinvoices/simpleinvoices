@@ -43,7 +43,8 @@ if ($_POST['pg_response_code']=='A01') {
 		$logger->log('ACH - payment_type='.$payment->ac_payment_type, Zend_Log::INFO);
 		$payment->insert();
 
-		$invoice = invoice::select($_POST['pg_consumerorderid']);
+		$invoiceobj = new invoice();
+		$invoice = $invoiceobj->select($_POST['pg_consumerorderid']);
 		$biller = getBiller($invoice['biller_id']);
 
 		//send email

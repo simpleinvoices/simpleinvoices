@@ -217,7 +217,7 @@ $LANG['help_insert_biller_text'] = "To select no logo please select '_default_bl
 $LANG['help_inv_pref_currency_sign'] = "This is the curreny symbol that will be used through-out the invoice. <br /><br /><b>Note:</b> Euro, Pound etc.. please use the html code for you currency sign in this field.  Refer to the list of html codes on the following website for your non $ currency sign <a href='http://www.ascii.cl/htmlcodes.htm'>http://www.ascii.cl/htmlcodes.htm</a>.  <br /><br />This is required so that PDF can work correctly with non $ symbols<br /><br /> &#38;#163; is the html code for the Pound,<br /> &#38;#8364; for the Euro, etc..";//1
 $LANG['help_inv_pref_description'] = "This is the name of the set of preference - it's not used on the invoice itself, just in the creation of the invoice when you select from the drop down list which Invoice Preference you wish to use.";//1
 $LANG['help_inv_pref_invoice_detail_heading'] = "This is what will appear as the heading of the footer/details section of the invoice.";//1
-$LANG['help_inv_pref_invoice_detail_line'] = "This is the text that appear under the details/footer heading. Normally used to define payment termns etc.";//1
+$LANG['help_inv_pref_invoice_detail_line'] = "This is the text that appear under the details/footer heading. Normally used to define payment terms etc.";//1
 $LANG['help_inv_pref_invoice_enabled'] = "This allows you to specify if the 'Invoice Preference' is enabled or disabled. If the 'Invoice Preference' is disabled then you will no longer be able to select it during the creation of a new invoice.";//1
 $LANG['help_inv_pref_invoice_heading'] = "This is the heading of the invoice and will be displayed at the top of the invoice.";//1
 $LANG['help_inv_pref_invoice_numbering_group'] = "An invoice can have different numbering ranges depending on the invoice preference selected. ie. you can have quote 1 and invoice 1. <br /> <br />This field indicates which 'group' you want this preference to number like.  If you group mulitple invoice preferences together then all invoices etc.. created using these preferences will increment in the same range.  If you leave this blank this invoice prefernece will increment in its own range.";//1
@@ -589,7 +589,7 @@ $LANG['zip'] = "Mã Zip";//1
 $LANG['title_module_index']				= "Trang Chính";//1
 $LANG['title_module_reports']			= "Home / Reports";//0
 $LANG['title_module_invoices']			= "Money / Invoices";//0
-$LANG['title_module_cron']				= "Money / Recurence";//0
+$LANG['title_module_cron']				= "Money / Recurrence";//0
 $LANG['title_module_payments']			= "Money / Payments";//0
 $LANG['title_module_billers']			= "People / Billers";//0
 $LANG['title_module_customers']			= "People / Customers";//0

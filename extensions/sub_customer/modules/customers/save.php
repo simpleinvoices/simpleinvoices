@@ -27,9 +27,11 @@ $op = !empty( $_POST['op'] ) ? addslashes( $_POST['op'] ) : NULL;
 
 $saved = false;
 
+$sub_customerobj = new sub_customer();
+
 if ($op === "insert_customer") {
 
-	if (sub_customer::insertCustomer()) {
+	if ($sub_customerobj->insertCustomer()) {
 		$saved = true;
 		// saveCustomFieldValues($_POST['categorie'],lastInsertId());
 	}
@@ -39,7 +41,7 @@ if ( $op === 'edit_customer' ) {
 
 	if (isset($_POST['save_customer'])) {
 		
-		if (sub_customer::updateCustomer()) {
+		if ($sub_customerobj->updateCustomer()) {
 
 			$saved = true;
 			//updateCustomFieldValues($_POST['categorie'],$_GET['customer']);

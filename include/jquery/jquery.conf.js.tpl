@@ -192,7 +192,7 @@ $(document).ready(function(){
 	{literal}
     });
 
-	//add new lien item in invoices
+	//add new line item in invoices
 	$("a.add_line_item").click(function (e) { 
 		e.preventDefault();
 		add_line_item();

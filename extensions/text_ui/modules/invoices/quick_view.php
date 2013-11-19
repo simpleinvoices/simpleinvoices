@@ -29,7 +29,9 @@ $customer = getCustomer($invoice['customer_id']);
 $biller = getBiller($invoice['biller_id']);
 $preference = getPreference($invoice['preference_id']);
 $defaults = getSystemDefaults();
-$invoiceItems = text_ui_invoice::getInvoiceItems($invoice_id);
+
+$text_ui_invoiceobj = new text_ui_invoice();
+$invoiceItems = $text_ui_invoiceobj->getInvoiceItems($invoice_id);
 
 #Invoice Age - number of days - start
 if ($invoice['owing'] > 0 ) {

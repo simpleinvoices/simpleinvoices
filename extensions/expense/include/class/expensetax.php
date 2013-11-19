@@ -2,25 +2,32 @@
 
 class expensetax
 {
-    public static function get_all($expense_id)
+	public $domain_id;
+    
+	public function __construct()
+	{
+		$this->domain_id = domain_id::get($this->domain_id);
+	}
+
+    public function get_all($expense_id)
     {
         
-        global $db;
-        
-        $sql = "SELECT * FROM ".TB_PREFIX."expense_item_tax WHERE  expense_id = :expense_id order by id";
-        $sth  = $db->query($sql,':expense_id',$expense_id ) or die(htmlsafe(end($dbh->errorInfo())));
+        $sql = "SELECT * FROM ".TB_PREFIX."expense_item_tax 
+				WHERE  expense_id = :expense_id 
+				ORDER BY id";
+        $sth  = dbQuery($sql,':expense_id',$expense_id );
         
         return $sth->fetchAll();
     
     }
 
-    public static function get_sum($expense_id)
+    public function get_sum($expense_id)
     {
         
-        global $db;
-        
-        $sql = "SELECT sum(tax_amount) as sum FROM ".TB_PREFIX."expense_item_tax WHERE  expense_id = :expense_id order by id";
-        $sth  = $db->query($sql,':expense_id',$expense_id ) or die(htmlsafe(end($dbh->errorInfo())));
+        $sql = "SELECT SUM(tax_amount) AS sum 
+				FROM ".TB_PREFIX."expense_item_tax 
+				WHERE  expense_id = :expense_id ORDER BY id";
+        $sth  = dbQuery($sql,':expense_id',$expense_id );
         
         return $sth->fetchColumn();
     
@@ -28,23 +35,22 @@ class expensetax
 
     function grouped($expense_id)
     {
-        $sql = "select 
-                    t.tax_description as tax_name, 
-                    sum(et.tax_amount) as tax_amount,
-                    count(*) as count
-                from 
-                    ".TB_PREFIX."expense_item_tax et, 
-                    ".TB_PREFIX."expense e,
-                    ".TB_PREFIX."tax t 
-                where 
-                    e.id = et.expense_id 
-                AND 
-                    t.tax_id = et.tax_id 
-                AND
+        $sql = "SELECT 
+                      t.tax_description AS tax_name 
+                    , SUM(et.tax_amount) AS tax_amount
+                    , COUNT(*) AS count
+                FROM 
+                    ".TB_PREFIX."expense_item_tax et 
+					INNER JOIN ".TB_PREFIX."expense e 
+						ON (e.id = et.expense_id)
+					INNER JOIN ".TB_PREFIX."tax t 
+						ON (t.tax_id = et.tax_id AND t.domain_id = e.domain_id)
+                WHERE 
                     e.id = :expense_id
+				AND e.domain_id = :domain_id
                 GROUP BY 
                     t.tax_id;";
-        $sth = dbQuery($sql, ':expense_id', $expense_id) or die(htmlsafe(end($dbh->errorInfo())));
+        $sth = dbQuery($sql, ':expense_id', $expense_id, ':domain_id', $this->domain_id);
         $result = $sth->fetchAll();
 
         return $result;

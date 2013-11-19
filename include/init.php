@@ -201,10 +201,7 @@ if (! $config->extension)
 
 include_once('./include/language.php');
 
-include_once('./include/functions.php');
-
 //add class files for extensions
-
 
 checkConnection();
 

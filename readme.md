@@ -8,7 +8,7 @@ When cloning the repository use the `--recursive` option to ensure that Zend is 
 
 ## Downloads
 * Bleeding Edge Code: [SI Git Master](http://github.com/simpleinvoices/simpleinvoices/archive/master.zip) (.zip)
-* Latest Beta Release: [2013.1 beta 6](http://download.simpleinvoices.org/simpleinvoices/downloads/simpleinvoices.2013.1.beta.6.zip) (.zip)
+* Latest Beta Release: [2013.1 beta 7](http://download.simpleinvoices.org/simpleinvoices/downloads/simpleinvoices.2013.1.beta.7.zip) (.zip)
 * Latest Stable Release: [2011.1](http://download.simpleinvoices.org/simpleinvoices/downloads/simpleinvoices.2011.1.zip) (.zip)
 
 ## Documentation

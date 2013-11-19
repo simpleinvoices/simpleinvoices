@@ -15,7 +15,8 @@ if ($_POST['op'] =='add' AND !empty($_POST['product_id']))
 	$saved = !empty($result) ? "true" : "false";
 }      
 
-$product_all = product::get_all();
+$productobj = new product();
+$product_all = $productobj->get_all();
 
 $smarty -> assign('product_all',$product_all);
 $smarty -> assign('saved',$saved);

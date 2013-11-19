@@ -19,18 +19,18 @@
 
 checkLogin();
 
+$domain_id = domain_id::get();
+
 function firstOfMonth() {
-return date("Y-m-d", strtotime('01-'.date('m').'-'.date('Y').' 00:00:00'));
+	return date("Y-m-d", strtotime('01-'.date('m').'-'.date('Y').' 00:00:00'));
 }
 
 function lastOfMonth() {
-return date("Y-m-d", strtotime('-1 second',strtotime('+1 month',strtotime('01-'.date('m').'-'.date('Y').' 00:00:00'))));
+	return date("Y-m-d", strtotime('-1 second',strtotime('+1 month',strtotime('01-'.date('m').'-'.date('Y').' 00:00:00'))));
 }
 
-
-
-isset($_POST['start_date']) ? $start_date = $_POST['start_date'] : $start_date = firstOfMonth() ;
-isset($_POST['end_date']) ? $end_date = $_POST['end_date'] : $end_date = lastOfMonth() ;
+$start_date = isset($_POST['start_date']) ? $_POST['start_date'] : firstOfMonth() ;
+$end_date   = isset($_POST['end_date'])   ? $_POST['end_date']   : lastOfMonth()  ;
 
 
 $sql="SELECT 
@@ -43,13 +43,13 @@ $sql="SELECT
               WHEN status = 0 THEN '".$LANG['not_paid']."'
          END) AS status_wording
     FROM 
-        ".TB_PREFIX."expense e, 
-        ".TB_PREFIX."expense_account ea 
-    WHERE 
-        e.expense_account_id = ea.id 
-        AND 
-        e.date BETWEEN '$start_date' AND '$end_date'";
-$sth = $db->query($sql);
+        ".TB_PREFIX."expense e 
+        LEFT JOIN ".TB_PREFIX."expense_account ea ON (e.expense_account_id = ea.id AND e.domain_id = ea.domain_id)
+    WHERE
+		e.domain_id = :domain_id
+    AND e.date BETWEEN '$start_date' AND '$end_date'";
+$sth = $db->query($sql, ':domain_id', $domain_id);
+
 $accounts = $sth->fetchAll();
 
 $payment = new payment();

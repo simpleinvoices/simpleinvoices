@@ -27,7 +27,8 @@ $get_inventory = new inventory();
 $get_inventory->id = $_GET['id'];
 $inventory = $get_inventory->select();
 
-$product_all = product::get_all();
+$productobj = new product();
+$product_all = $productobj->get_all();
 $smarty -> assign('product_all',$product_all);
 $smarty -> assign('saved',$saved);
 $smarty -> assign('inventory',$inventory);

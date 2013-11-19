@@ -4,46 +4,40 @@ class product_attributes
 {
     public function get($id)
     {
-        $sql = "select * from ".TB_PREFIX."products_attributes where id = :id";
-        $sth =  dbQuery($sql,':id',$id);
-        $attribute = $sth->fetch();
+        $sql = "SELECT pa.*, pat.name AS `type` 
+                FROM ".TB_PREFIX."products_attributes pa 
+	                LEFT JOIN ".TB_PREFIX."products_attribute_type pat 
+                        ON (pa.type_id = pat.id)
+				WHERE pa.id = :id";
 
-        $sql2 = "select * from ".TB_PREFIX."products_attribute_type where id = :id";
-        $sth2 =  dbQuery($sql2,':id',$attribute['type_id']);
-        $name = $sth2->fetch();
-        $attribute['type'] = $name['name'];
+		$sth =  dbQuery($sql,':id',$id);
+        $attribute = $sth->fetch();
 
         return $attribute;
     }
+
     public function getName($id)
     {
-        $sql = "select * from ".TB_PREFIX."products_attributes where id = :id";
+        $sql = "SELECT * FROM ".TB_PREFIX."products_attributes WHERE id = :id";
         $sth =  dbQuery($sql,':id',$id);
         $attribute = $sth->fetch();
         return $attribute['name'];
     }
+
     public function getType($id)
     {
-        $sql = "select 
-                    t.name as type 
-                from 
-                    ".TB_PREFIX."products_attributes as a, 
-                    ".TB_PREFIX."products_attribute_type as t 
-                where 
-                    a.id = :id 
-                    and a.type_id = t.id";
-        $sth =  dbQuery($sql,':id',$id);
-        $attribute = $sth->fetch();
+        $attribute = product_attributes::get($id);
         return $attribute['type'];
     }
+
     public function getValue($attribute_id, $value_id)
     {
        
-        $details = product_attributes::get($attribute_id);
+        $type = product_attributes::getType($attribute_id);
 
-        if($details['type'] == 'list')
+        if($type == 'list')
         {
-            $sql = "select value from ".TB_PREFIX."products_values where id = :id";
+            $sql = "SELECT value FROM ".TB_PREFIX."products_values WHERE id = :id";
             $sth =  dbQuery($sql,':id',$value_id);
             $attribute = $sth->fetch();
 
@@ -53,9 +47,10 @@ class product_attributes
         }
 
     }
-    public function getVisible($id)
+
+	public function getVisible($id)
     {
-        $sql = "select * from ".TB_PREFIX."products_attributes where id = :id";
+        $sql = "SELECT visible FROM ".TB_PREFIX."products_attributes WHERE id = :id";
         $sth =  dbQuery($sql,':id',$id);
         $attribute = $sth->fetch();
         if($attribute['visible'] =='1')
@@ -66,9 +61,10 @@ class product_attributes
         }
 
     }
-    public function getAll()
+
+	public function getAll()
     {
-        $sql = "select * from ".TB_PREFIX."products_attributes";
+        $sql = "SELECT * FROM ".TB_PREFIX."products_attributes";
         $sth =  dbQuery($sql);
         $attributes = $sth->fetchAll();
         return $attributes;

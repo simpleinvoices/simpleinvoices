@@ -50,18 +50,17 @@
             </td>
     </tr>
 	<tr>
-		<th>{$LANG.recur_each}</th>
-		<td>
-		<input name="recurrence" size="10" class="validate[required]">
-		</input>
-             <select name="recurrence_type" class="validate[required]">
-             <option value="day">{$LANG.days}</option>
-             <option value="week">{$LANG.weeks}</option>
-             <option value="month">{$LANG.months}</option>
-             <option value="year">{$LANG.years}</option>
-             </select>
-         </td>
-     </tr>
+        <th>{$LANG.recur_each}</th>
+        <td>
+            <input name="recurrence" size="10" class="validate[required]" />
+            <select name="recurrence_type" class="validate[required]">
+                <option value="day">{$LANG.days}</option>
+                <option value="week">{$LANG.weeks}</option>
+                <option value="month">{$LANG.months}</option>
+                <option value="year">{$LANG.years}</option>
+            </select>
+        </td>
+    </tr>
 	<tr>
 		<th>{$LANG.email_biller_after_cron}</th>
 		<td>

@@ -41,7 +41,7 @@
 	<tr>
 		<td class='index_table'>{$cronlog.id|htmlsafe}</td>
 		<td class='index_table'>{$cronlog.run_date|htmlsafe}</td>
-		<td class='index_table'>{$cronlog.cron_id|htmlsafe}</td>
+		<td class='index_table'><a href="index.php?module=cron&view=view&id={$cronlog.cron_id|htmlsafe}">{$cronlog.cron_id|htmlsafe}</a></td>
 	</tr>
 
 {/foreach}

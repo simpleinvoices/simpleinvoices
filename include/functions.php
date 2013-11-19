@@ -1,7 +1,7 @@
 <?php
 /*
 * Script: functions.php
-*	Contain all the functions used in Simple Invoices
+*	Contain all non db query functions used in Simple Invoices
 *
 * Authors:
 *	- Justin Kelly
@@ -10,7 +10,7 @@
 *	GNU GPL2 or above
 *
 * Date last edited:
-*	Fri Feb 16 21:48:02 EST 2007
+*	Mon Oct 28 12:00:00 IST 2013
 **/
 
 function checkLogin() {
@@ -48,59 +48,6 @@ function getLogo($biller) {
 		return $url."/templates/invoices/logos/_default_blank_logo.png";
 	}
 }
-
-/**
-* Function: get_custom_field_label
-* 
-* Prints the name of the custom field based on the input. If the custom field has not been defined by the user than use the default in the lang files
-*
-* Arguments:
-* field		- The custom field in question
-**/
-function get_custom_field_label($field, $domain_id='')         {
-	global $LANG;
-	$domain_id = domain_id::get($domain_id);
-	
-    $sql =  "SELECT cf_custom_label FROM ".TB_PREFIX."custom_fields WHERE cf_custom_field = :field AND domain_id = :domain_id";
-    $sth = dbQuery($sql, ':field', $field, ':domain_id', $domain_id);
-
-    $cf = $sth->fetch();
-
-    //grab the last character of the field variable
-    $get_cf_number = $field[strlen($field)-1];    
-
-    //if custom field is blank in db use the one from the LANG files
-    if ($cf['cf_custom_label'] == null) {
-       	$cf['cf_custom_label'] = $LANG['custom_field'] . $get_cf_number;
-    }
-        
-    return $cf['cf_custom_label'];
-}
-
-/* 
- * Function: getCustomFieldLabels
- * 
- * Used to get the names of the custom fields. If custom fields is blank in db then print 'Custom Field' and the ID
- * Arguments:
- * Type 	- is the module your getting the labels of the custom fields for, ie. biller
- *
-function getCustomFieldLabels($type) {
-	global $LANG;
-		
-	$sql = "SELECT cf_custom_label FROM ".TB_PREFIX."custom_fields WHERE cf_custom_field LIKE '".$type."_cf_'";
-	$result = mysqlQuery($sql) or die(mysql_error());
-	
-	for($i=1;$row = mysql_fetch_row($result);$i++) {
-		$cf[$i]=$row[0];
-		if($cf[$i] == null) {
-			$cf[$i] = $LANG["custom_field"].' '.$i;
-		}
-	}
-
-	//TODO: What's the value if null? change in database...
-	return $cf;
-}
- */
 
 /**
 * Function: get_custom_field_name
@@ -150,85 +97,6 @@ function get_custom_field_name($field) {
     return $custom_field_name;
 }
 
-function calc_invoice_paid($inv_idField, $domain_id='') {
-	global $LANG;
-	$domain_id = domain_id::get($domain_id);
-
-	#amount paid calc - start
-	$x1 = "SELECT COALESCE(SUM(ac_amount), 0) AS amount FROM ".TB_PREFIX."payment WHERE ac_inv_id = :inv_id AND domain_id = :domain_id";
-	$sth = dbQuery($x1, ':inv_id', $inv_idField, ':domain_id',$domain_id);
-	while ($result_x1Array = $sth->fetch()) {
-		$invoice_paid_Field = $result_x1Array['amount'];
-		$invoice_paid_Field_format = number_format($result_x1Array['amount'],2);
-		#amount paid calc - end
-		return $invoice_paid_Field;
-	}
-}
-
-
-function calc_customer_total($customer_id, $domain_id='') {
-	global $LANG;
-	$domain_id = domain_id::get($domain_id);
-	
-    $sql ="SELECT
-		COALESCE(SUM(ii.total),  0) AS total 
-	FROM
-		".TB_PREFIX."invoice_items ii INNER JOIN
-		".TB_PREFIX."invoices iv ON (iv.id = ii.invoice_id AND iv.domain_id = ii.domain_id)
-	WHERE  
-		iv.customer_id  = :customer
-	AND ii.domain_id = :domain_id";
-	
-    $sth = dbQuery($sql, ':customer', $customer_id, ':domain_id',$domain_id);
-	$invoice = $sth->fetch();
-
-	//return number_format($invoice['total'],"#########.##");
-	return $invoice['total'];
-}
-
-function calc_customer_paid($customer_id, $domain_id='') {
-	global $LANG;
-	$domain_id = domain_id::get($domain_id);
-		
-#amount paid calc - start
-	$sql = "
-	SELECT COALESCE(SUM(ap.ac_amount), 0) AS amount 
-	FROM
-		".TB_PREFIX."payment ap INNER JOIN
-		".TB_PREFIX."invoices iv ON (iv.id = ap.ac_inv_id AND iv.domain_id = ap.domain_id)
-	WHERE 
-		iv.customer_id = :customer
-	AND ap.domain_id = :domain_id";
-	
-	$sth = dbQuery($sql, ':customer', $customer_id, ':domain_id',$domain_id);
-	$invoice = $sth->fetch();
-
-	return $invoice['amount'];
-}
-
-
-
-/**
-* Function: calc_invoice_tax
-* 
-* Calculates the total tax for a given invoices
-*
-* Arguments:
-* invoice_id		- The name of the field, ie. Custom Field 1, etc..
-**/
-function calc_invoice_tax($invoice_id, $domain_id='') {
-	global $LANG;
-	$domain_id = domain_id::get($domain_id);
-		
-	#invoice total tax
-	$sql ="SELECT SUM(tax_amount) AS total_tax FROM ".TB_PREFIX."invoice_items WHERE invoice_id = :invoice_id AND domain_id = :domain_id";
-	$sth = dbQuery($sql, ':invoice_id', $invoice_id, ':domain_id',$domain_id);
-
-	$tax = $sth->fetch();
-
-	return $tax['total_tax'];
-}
-
 function dropDown($choiceArray, $defVal) {
 
 	$dropDown = '<select name="value">' . "\n";
@@ -244,82 +112,6 @@ function dropDown($choiceArray, $defVal) {
 	$dropDown .= "\n</select>";
 
 	return $dropDown;
-}
-
-/**
-* Function: show_custom_field
-* 
-* If a custom field has been defined then show it in the add,edit, or view invoice screen. This is used for the Invoice Custom Fields - may be used for the others as wll based on the situation
-*
-* Parameters:
-* custom_field		- the db name of the custom field ie invoice_cf1
-* custom_field_value	- the value of this custom field for a given invoice
-* permission		- the permission level - ie. in a print view its gets a read level, in an edit or add screen its write leve
-* css_class_tr		- the css class the the table row (tr)
-* css_class1		- the css class of the first td
-* css_class2		- the css class of the second td
-* td_col_span		- the column span of the right td
-* seperator		- used in the print view ie. adding a : between the 2 values
-*
-* Returns:
-* Depending on the permission passed, either a formatted input box and the label of the custom field or a table row and data
-**/
-
-function show_custom_field($custom_field,$custom_field_value,$permission,$css_class_tr,$css_class1,$css_class2,$td_col_span,$seperator) {
-
-	$domain_id = domain_id::get();
-
-		/*
-	*get the last character of the $custom field - used to set the name of the field
-	*/
-	$custom_field_number =  substr($custom_field, -1, 1);
-
-
-	#get the label for the custom field
-
-	$display_block = "";
-
-	$get_custom_label ="SELECT cf_custom_label FROM ".TB_PREFIX."custom_fields WHERE cf_custom_field = :field AND domain_id = :domain_id";
-	$sth = dbQuery($get_custom_label, ':field', $custom_field, ':domain_id', $domain_id);
-
-	while ($Array_cl = $sth->fetch()) {
-                $has_custom_label_value = $Array_cl['cf_custom_label'];
-	}
-	/*if permision is write then coming from a new invoice screen show show only the custom field and have a label
-	* if custom_field_value !null coming from existing invoice so show only the cf that they actually have
-	*/	
-	if ( (($has_custom_label_value != null) AND ( $permission == "write")) OR ($custom_field_value != null)) {
-
-		$custom_label_value = htmlsafe(get_custom_field_label($custom_field));
-
-		if ($permission == "read") {
-			$display_block = <<<EOD
-			<tr class="$css_class_tr" >
-				<th class="$css_class1">
-					$custom_label_value$seperator
-				</th>
-				<td class="$css_class2" colspan="$td_col_span" >
-					$custom_field_value
-				</td>
-			</tr>
-EOD;
-		}
-
-		else if ($permission == "write") {
-
-		$display_block = <<<EOD
-			<tr>
-				<th class="$css_class1">$custom_label_value
-					<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="Custom Fields"><img src="./images/common/help-small.png" alt="" /></a>
-				</th>
-				<td>
-					<input type="text" name="customField$custom_field_number" value="$custom_field_value" size="25" />
-				</td>
-			</tr>
-EOD;
-		}
-	}
-	return $display_block;
 }
 
 function simpleInvoicesError($type, $info1 = "", $info2 = "") 
@@ -427,27 +219,8 @@ function checkConnection() {
 	
 	if(!$dbh) {
 		simpleInvoicesError("dbConnection",$db_server,$dbh->errorInfo());
-/*
-		die('<br />
-		===========================================<br />
-		Simple Invoices database connection problem<br />
-		===========================================<br />
-		Could not connect to the Simple Invoices database<br /><br />
-		Please refer to the following database ('.$db_server.') error for for to fix this: <b>ERROR :' . end($dbh->errorInfo()) . '</b><br /><br />
-		If this is an Access denied error please make sure that the db_host, db_name, db_user, and db_password in config/config.php are correct 
-		<br />
-		===========================================<br />
-		');
-*/
 	}
 }
-
-function menuIsActive($module,$requestedModule) {
-	if ($module == $requestedModule) {
-		echo "id=active";
-	}
-}
-
 
 function getLangList() {
  $startdir = './lang/';
@@ -459,8 +232,6 @@ function getLangList() {
           while (($folder = readdir($dh)) !== false){
               if (!(array_search($folder,$ignoredDirectory) > -1)){
                 if (filetype($startdir . $folder) == "dir"){
-//                      $directorylist[$startdir . $folder]['name'] = $folder;
-//                     $directorylist[$startdir . $folder]['path'] = $startdir;
 					  $folderList[] = $folder;
                   }
               }
@@ -468,8 +239,8 @@ function getLangList() {
           closedir($dh);
       }
   }
-sort($folderList);
-return($folderList);
+  sort($folderList);
+  return($folderList);
 }
 
 function sql2xml($sth, $count) {
@@ -609,47 +380,3 @@ function antiCSRFHiddenInput($action = 'all', $userid = false)
 {
     return '<input type="hidden" name="csrfprotectionbysr" value="'.htmlsafe(siNonce($action, $userid)).'" />';
 }
-
-/*function addCSRFToken($matches)
-{
-    if(!preg_match('/method=[\'"]?post[\'"\s>]/i', $action[0])) //post only
-    {
-        return $matches[0];
-    }
-    
-    $token = siNonce('all');
-    $action = $matches[1];
-    //We need to work out if it is offsite.
-    //If not offsite then add protection.
-    //otherwise just return
-    $isOnSite = false;
-    if(strpos($action, ':') === false) //is not full URL
-    {
-        $isOnSite = true;
-    }
-    elseif(parse_url($action, PHP_URL_HOST) === $_SERVER['HTTP_HOST'] OR parse_url($action, PHP_URL_HOST) === $_SERVER['SERVER_NAME'])
-    {
-        $isOnSite = true;
-    }
-    
-    return $matches[0].(($isOnSite) ? '<input type="hidden" name="csrfprotectionbysr" value="'.htmlsafe($token).'" />' : '');
-}
-
-function addCSRFProtection($buffer)
-{
-    $rawheaders = headers_list();
-    $headers = array();
-    foreach($rawheaders as $header)
-    {
-        $header = explode(':', $header, 2);
-        $headers[strtolower($header[0])] = $header[1];
-    }
-    
-    // if not html then leave alone
-    if($headers['content-type'] AND strpos($headers['content-type'], 'html') === false)
-    {
-        return $buffer;
-    }
-     
-    return preg_replace_callback('/<form.+?action=[\'"]?([^\'"\s]+)[\'"\s].*?>/i', 'addCSRFToken', $buffer);
-}*/

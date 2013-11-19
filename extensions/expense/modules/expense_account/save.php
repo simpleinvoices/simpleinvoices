@@ -3,6 +3,8 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
+$expenseaccountobj = new expenseaccount();
+
 # Deal with op and add some basic sanity checking
 
 $op = !empty( $_POST['op'] ) ? addslashes( $_POST['op'] ) : NULL;
@@ -13,14 +15,14 @@ $saved = false;
 
 if (  $op === 'insert' ) {
 	
-	if(expenseaccount::insert()) {
+	if($expenseaccountobj->insert()) {
  		$saved = true;
  		//saveCustomFieldValues($_POST['categorie'], lastInsertId());
  	}
 }
 
 if ($op === 'edit' ) {
-	if (expenseaccount::update()) {
+	if ($expenseaccountobj->update()) {
 		$saved = true;
 	}
 }
