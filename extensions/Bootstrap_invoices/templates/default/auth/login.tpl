@@ -12,7 +12,7 @@
         <!--<label class="checkbox">
                 <input type="checkbox" value="remember-me"> Remember me
         </label>-->
-        <button class="btn btn-lg btn-primary btn-block" type="submit" value="login">Login</button>
+        <button class="btn btn-lg btn-default btn-block" type="submit" value="login">Login</button>
         </form>
         {if $errorMessage }
 

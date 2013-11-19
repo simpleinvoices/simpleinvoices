@@ -14,7 +14,6 @@
 	{if $smarty.post.op == 'add' AND $smarty.post.invoice_id == ''} 
 		<div class="validation_alert si_message_warning"><span class="glyphicon glyphicon-exclamation-sign"></span>
 		You must select an invoice</div>
-		<hr />
 	{/if}
 
 
