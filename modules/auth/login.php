@@ -118,6 +118,7 @@ if (!empty($_POST['user']) && !empty($_POST['pass']))
 		* chuck the user details sans password into the Zend_auth session
 		*/
 		$authNamespace = new Zend_Session_Namespace('Zend_Auth');
+        $authNamespace->setExpirationSeconds(60 * 60);
 		foreach ($result as $key => $value)
 		{
 			$authNamespace->$key = $value;

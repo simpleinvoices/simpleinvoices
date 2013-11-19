@@ -213,8 +213,8 @@
 	<div class="si_toolbar si_toolbar_inform">
 		{* onclick="add_line_item();" *}
 		<a href="#" class="add_line_item"><img src="./images/common/add.png" alt="" />{$LANG.add_new_row}</a>
-		<a href='#' class="show-details" onclick="javascript: $('.details').show();$('.show-details').hide();"><img src="./images/common/page_white_add.png" title="{$LANG.show_details}" alt="" />{$LANG.show_details}</a>
-		<a href='#' class="details" onclick="javascript: $('.details').hide();$('.show-details').show();" style="display:none"><img src="./images/common/page_white_delete.png" title="{$LANG.hide_details}" alt="" />{$LANG.hide_details}</a>
+		<a href='#' class="show-details" onclick="javascript: $('.details').addClass('si_show').removeClass('si_hide');$('.show-details').addClass('si_hide').removeClass('si_show');"><img src="./images/common/page_white_add.png" title="{$LANG.show_details}" alt="" />{$LANG.show_details}</a>
+		<a href='#' class="details si_hide" onclick="javascript: $('.details').removeClass('si_show').addClass('si_hide');$('.show-details').addClass('si_show').removeClass('si_hide');" ><img src="./images/common/page_white_delete.png" title="{$LANG.hide_details}" alt="" />{$LANG.hide_details}</a>
 	</div>
 
 	<table class="si_invoice_bot">
