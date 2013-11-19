@@ -14,7 +14,7 @@ if($_GET['id'])
 		$row = $states->fetch();
 
         $json_att = json_decode($row['attribute']);
-        if($json_att !== null)
+        if($json_att !== null AND $row['attribute'] !== '[]')
         {
         $html ="<tr id='json_html". $row_id ."'><td></td><td colspan='5'><table><tr>";
         foreach($json_att as $k=>$v)

@@ -2,8 +2,8 @@ IndexIgnore *
 
 <ifModule mod_php5.c>
 php_value max_execution_time = 90 ; Maximum execution time of each script, in seconds
-php_valuemax_input_time = 60 ; Maximum amount of time each script may spend parsing request data
-php_valuememory_limit = 24M ; Maximum amount of memory a script may consume
+php_value max_input_time = 60 ; Maximum amount of time each script may spend parsing request data
+php_value memory_limit = 64M ; Maximum amount of memory a script may consume
 ; As a reference some variables have to be set with php_admin_flag
 ;php_admin_flag safe_mode on
 </ifModule>

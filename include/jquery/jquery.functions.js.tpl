@@ -65,10 +65,9 @@
                 //do the product matric code
 				if (data['show_description'] =="Y") 
 				{	
-					$("tbody#row"+row_number+" tr.details").show();
-				} else {
-					$("tbody#row"+row_number+" tr.details").hide();
-
+					$("tbody#row"+row_number+" tr.details").removeClass('si_hide');
+                } else {
+					$("tbody#row"+row_number+" tr.details").addClass('si_hide');
                 }
                 if($("#description"+row_number).val() == $("#description"+row_number).attr('rel') || $("#description"+row_number).val() =='{/literal}{$LANG.description}{literal}')
                 {
@@ -262,6 +261,7 @@
 	        });							
 		 $("#export_dialog").dialog({ 
 		   modal: true, 
+           height: 230,
 		   buttons: { 
 	        "Cancel": function() { 
 	            $(this).dialog("destroy"); 

@@ -159,7 +159,7 @@ class inventory {
 	{
         //select qty and reorder level
 
-        $inventory = new inventory();
+        $inventory = new product();
         $sth = $inventory->select_all('count');
 
         $inventory_all = $sth->fetchAll(PDO::FETCH_ASSOC);
