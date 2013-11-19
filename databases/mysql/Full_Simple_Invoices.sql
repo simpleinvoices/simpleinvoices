@@ -314,8 +314,8 @@ CREATE TABLE IF NOT EXISTS `si_products` (
   `enabled` TINYINT(1) DEFAULT 1 NOT NULL,
   `visible` TINYINT(1) DEFAULT 1 NOT NULL,
   `attribute` varchar(255) DEFAULT NULL,
-  `notes_as_description` TINYINT(1) DEFAULT NULL,
-  `show_description` TINYINT(1) DEFAULT NULL,
+  `notes_as_description` CHAR(1) DEFAULT NULL,
+  `show_description` CHAR(1) DEFAULT NULL,
   PRIMARY KEY (`domain_id`,`id`)
 ) ENGINE=MyISAM;
 

@@ -1673,7 +1673,9 @@ PRIMARY KEY ( `domain_id`, `id` )
 		ALTER TABLE `".TB_PREFIX."payment_types` CHANGE `pt_enabled` `pt_enabled` TINYINT(1) DEFAULT 1 NOT NULL;
 		ALTER TABLE `".TB_PREFIX."preferences` CHANGE `pref_enabled` `pref_enabled` TINYINT(1) DEFAULT 1 NOT NULL,
 			CHANGE `status` `status` TINYINT(1) NOT NULL;
-		ALTER TABLE `".TB_PREFIX."products` CHANGE `enabled` `enabled` TINYINT(1) DEFAULT 1 NOT NULL;
+		ALTER TABLE `".TB_PREFIX."products` CHANGE `enabled` `enabled` TINYINT(1) DEFAULT 1 NOT NULL,
+			CHANGE `notes_as_description` `notes_as_description` CHAR(1) NULL,
+			CHANGE `show_description` `show_description` CHAR(1) NULL;
 		ALTER TABLE `".TB_PREFIX."tax` CHANGE `tax_enabled` `tax_enabled` TINYINT(1) DEFAULT 1 NOT NULL;
 		ALTER TABLE `".TB_PREFIX."cron` CHANGE `email_biller` `email_biller` TINYINT(1) DEFAULT 0 NOT NULL,
 			CHANGE `email_customer` `email_customer` TINYINT(1) DEFAULT 0 NOT NULL;
