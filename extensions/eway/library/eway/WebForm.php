@@ -78,7 +78,7 @@ else {
 <HTML>
 <HEAD><title>eWAY PHP Example</title></HEAD>
 <body>
-<form id="Form1" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" ENCTYPE="multipart/form-data">
+<form id="Form1" method="post" action="<?php echo htmlsafe($_SERVER['PHP_SELF']); ?>" ENCTYPE="multipart/form-data">
 
 <div id="pnlBeforeProcess" style="height:328px;width:488px;">&nbsp; * Fields in Red are required 
 <TABLE id=Table1 style="WIDTH: 352px; HEIGHT: 264px" cellSpacing=0 cellPadding=3 
