@@ -10,8 +10,8 @@ if ($_POST['value'] != "" ) {
 #get the invoice id
 $id = $_GET['id'];
 
-$sql = "SELECT * FROM ".TB_PREFIX."products_values WHERE id = $id";
-$sth =  dbQuery($sql);
+$sql = "SELECT * FROM ".TB_PREFIX."products_values WHERE id = :id";
+$sth =  dbQuery($sql, ':id', $id);
 $product_value = $sth->fetch();
 $smarty -> assign("product_value", $product_value);
 
