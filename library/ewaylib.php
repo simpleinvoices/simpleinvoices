@@ -124,11 +124,14 @@ class ewaylib {
 	
 	//obtain visitor IP even if is under a proxy
 	function getVisitorIP(){
-		$ip = $_SERVER["REMOTE_ADDR"];
-		$proxy = $_SERVER["HTTP_X_FORWARDED_FOR"];
-		if(ereg("^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$",$proxy))
-		        $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
-		return $ip;
+	    $ip = $_SERVER['REMOTE_ADDR'];
+	
+	    if (!filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
+	        if (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && filter_var($_SERVER['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP)) {
+	            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+	        }
+	    }
+	    return $ip;
 	}
 }
 ?>
