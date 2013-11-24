@@ -29,7 +29,7 @@ $query = $_POST['query'];
 $qtype = $_POST['qtype'];
 
 $where = "";
-if ($query) $where = " AND $qtype LIKE '%$query%' ";
+if ($query) $where = " AND :qtype LIKE '%:query%' ";
 
 
 /*Check that the sort field is OK*/
@@ -110,7 +110,11 @@ if ($db_server == 'pgsql') {
 		$limit";
 }
 
-$sth = dbQuery($sql, ':domain_id', $domain_id);
+if ($query) {
+	$sth = dbQuery($sql, ':domain_id', $domain_id, ':query', $_POST['query'], ':qtype', $_POST['qtype']);
+} else {
+	$sth = dbQuery($sql, ':domain_id', $domain_id);	
+}
 $invoices = $sth->fetchAll(PDO::FETCH_ASSOC);
 
 global $dbh;

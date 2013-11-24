@@ -261,7 +261,7 @@ class invoice {
         $qtype = $this->qtype;
 
         $where = "";
-        if ($query)             $where .= " AND $qtype LIKE '%$query%' ";
+        if ($query)             $where .= " AND :qtype LIKE '%:query%' ";
         if ($this->biller)      $where .= " AND b.id = '$this->biller' ";
         if ($this->customer)    $where .= " AND c.id = '$this->customer' ";
         if ($this->where_field) $where .= " AND $this->where_field = '$this->where_value' ";
@@ -414,7 +414,11 @@ class invoice {
                 break;
         }
         
-        $result =  dbQuery($sql,':domain_id', $domain_id);
+        if ($query) {
+        	$result =  dbQuery($sql,':domain_id', $domain_id, ':query', $query, ':qtype', $qtype);
+        } else {
+        	$result =  dbQuery($sql,':domain_id', $domain_id);
+        }
         return $result;
     }
 
