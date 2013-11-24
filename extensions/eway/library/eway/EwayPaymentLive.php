@@ -60,8 +60,8 @@ class eway {
 	    		break;
     	}
 	}
-	
-	
+
+
 	//Payment Function
 	function doPayment() {
 		$xmlRequest = "<ewaygateway><ewayCustomerID>" . $this->myCustomerID . "</ewayCustomerID>";
@@ -92,8 +92,8 @@ class eway {
         if(curl_errno( $ch ) == CURLE_OK)
         	return $xmlResponse;
 	}
-	
-	
+
+
 	//Parse XML response from eway and place them into an array
 	function parseResponse($xmlResponse){
 		$xml_parser = xml_parser_create();
@@ -104,8 +104,8 @@ class eway {
         		$responseFields[$data["tag"]] = $data["value"];
         return $responseFields;
 	}
-	
-	
+
+
 	//Set Transaction Data
 	//Possible fields: "TotalAmount", "CustomerFirstName", "CustomerLastName", "CustomerEmail", "CustomerAddress", "CustomerPostcode", "CustomerInvoiceDescription", "CustomerInvoiceRef",
 	//"CardHoldersName", "CardNumber", "CardExpiryMonth", "CardExpiryYear", "TrxnNumber", "Option1", "Option2", "Option3", "CVN", "CustomerIPAddress", "CustomerBillingCountry"
@@ -120,14 +120,16 @@ class eway {
 	function setCurlPreferences($field, $value) {
 		$this->myCurlPreferences[$field] = $value;
 	}
-		
 	
+
 	//obtain visitor IP even if is under a proxy
 	function getVisitorIP(){
-		$ip = $_SERVER["REMOTE_ADDR"];
-		$proxy = $_SERVER["HTTP_X_FORWARDED_FOR"];
-		if(preg_match("^/[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/",$proxy))
-		        $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+		$ip = $_SERVER['REMOTE_ADDR'];
+		if (!filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
+			if (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && filter_var($_SERVER['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP)) {
+				$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+			}
+		}
 		return $ip;
 	}
 }
