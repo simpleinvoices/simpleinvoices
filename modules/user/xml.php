@@ -41,7 +41,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 	$qtype = $_REQUEST['qtype'];
 	
 	$where = " WHERE u.domain_id = :domain_id AND u.role_id = ur.id";
-	if ($query) $where = " WHERE u.domain_id = :domain_id AND u.role_id = ur.id AND $qtype LIKE '%$query%' ";
+	if ($query) $where = " WHERE u.domain_id = :domain_id AND u.role_id = ur.id AND :qtype LIKE '%:query%' ";
 	
 	
 	
@@ -69,8 +69,12 @@ function sql($type='', $dir, $sort, $rp, $page )
 				ORDER BY 
 					$sort $dir 
 				$limit";
-	
-		$result = dbQuery($sql,':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+
+		if ($query) {
+			$result = dbQuery($sql,':domain_id', $auth_session->domain_id, ':query', $query, ':qtype', $qtype) or die(htmlsafe(end($dbh->errorInfo())));
+		} else {
+			$result = dbQuery($sql,':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+		}
 		return $result;
 }
 
@@ -106,4 +110,4 @@ foreach ($user as $row) {
 $xml .= "</rows>";
 echo $xml;
 
-?> 
+?> 
