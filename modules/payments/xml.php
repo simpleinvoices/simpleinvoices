@@ -38,7 +38,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 	/*SQL Limit - end*/
 
 	$where = "";
-	if ($query) $where .= " AND $qtype LIKE '%$query%' ";
+	if ($query) $where .= " AND :qtype LIKE '%:query%' ";
 
 
 	/*Check that the sort field is OK*/
@@ -92,7 +92,11 @@ function sql($type='', $dir, $sort, $rp, $page )
 				$limit";
 		
 		
-		$result = dbQuery($sql, ':domain_id', $auth_session->domain_id, ':invoice_id', $_GET['id']) or die(htmlsafe(end($dbh->errorInfo())));
+		if ($query) {
+			$result = dbQuery($sql, ':domain_id', $auth_session->domain_id, ':invoice_id', $_GET['id'], ':qtype', $qtype, ':query', $query) or die(htmlsafe(end($dbh->errorInfo())));
+		} else {
+			$result = dbQuery($sql, ':domain_id', $auth_session->domain_id, ':invoice_id', $_GET['id']) or die(htmlsafe(end($dbh->errorInfo())));
+		}
 		
 	}
 	#if coming from another page where you want to filter by just one customer
