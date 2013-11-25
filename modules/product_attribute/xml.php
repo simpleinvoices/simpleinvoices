@@ -25,7 +25,7 @@ $query = $_POST['query'];
 $qtype = $_POST['qtype'];
 
 $where = "";
-if ($query) $where = " WHERE $qtype LIKE '%$query%' ";
+if ($query) $where = " WHERE :qtype LIKE '%:query%' ";
 
 
 
@@ -52,7 +52,11 @@ if (in_array($sort, $validFields)) {
 			LIMIT 
 				$start, $limit";
 
-	$sth = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
+	if ($query) {
+		$sth = dbQuery($sql, ':qtype', $qtype, ':query', $query) or die(htmlsafe(end($dbh->errorInfo())));
+	} else {
+		$sth = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
+	}
 	$customers = $sth->fetchAll(PDO::FETCH_ASSOC);
 /*
 	$customers = null;
