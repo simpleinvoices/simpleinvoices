@@ -1,6 +1,6 @@
 <?php
 
-$row_id = $_GET['row'];
+$row_id = htmlsafe($_GET['row']);
 if($_GET['id'])
 {
 	//sleep(2);
