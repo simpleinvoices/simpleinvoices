@@ -16,18 +16,15 @@ function get_defined_langs() {
 //	Implementation - Forward Compatible
 */
 	try {
-		foreach (new DirectoryIterator($dir) as $entry) {
-			if ($entry->isDir() && !$entry->isDot() && preg_match('/^[a-z]{2}(_[A-Z]{2})?$/', $entry)) {
-				if (SI_DEBUG) {
-					echo "debug: language folder: $lang_dir\n";
-				}
-				$langs[] = $lang_dir;
+		foreach (new RegexIterator(new DirectoryIterator($dir), '/^[a-z]{2}(_[A-Z]{2})?$/') as $entry) {
+			if (SI_DEBUG) {
+				echo 'debug: language folder: ' . $entry->getFilename() . "\n";
 			}
+			$langs[] = $entry->getFilename();
 		}
 	} catch (UnexpectedValueException $e) {
 		die($e->getMessage());
 	}
-
 
 /* 
 // Implementation - Legacy
