@@ -10,7 +10,7 @@
 //			 The Source HTML would be the raw text for the lang.php file
 */
 
-$lang_cmp = (isset($_REQUEST['l']) ? trim($_REQUEST['l']) : (isset($argv[1]) ? trim($argv[1]) : false));
+$lang_cmp = ((isset($_REQUEST['l']) && (preg_match('/^[a-z]{2}_[a-z]{2}$/i', $_REQUEST['l']))) ? $_REQUEST['l'] : (isset($argv[1]) ? trim($argv[1]) : false));
 
 // $lang_cmp = "nb_NO";
 
