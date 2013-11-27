@@ -2,7 +2,7 @@
 
 class domain_id
 {
-	public function get($id="")
+	public static function get($id="")
 	{
 		global $auth_session;
 
