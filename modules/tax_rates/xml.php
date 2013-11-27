@@ -41,7 +41,7 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 	$qtype = $_POST['qtype'];
 
 	$where = " WHERE domain_id = :domain_id";
-	if ($query) $where = " WHERE domain_id = :domain_id AND :qtype LIKE '%:query%' ";
+	if ($query) $where .= " AND :qtype LIKE '%:query%' ";
 
 
 	/*Check that the sort field is OK*/
@@ -54,24 +54,24 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 	}
 
 	$sql = "SELECT 
-					tax_id, 
-					tax_description,
-					tax_percentage,
-					type,
-					(SELECT (CASE  WHEN tax_enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled
-				FROM 
-					".TB_PREFIX."tax
-				$where
-				ORDER BY 
-					$sort $dir 
-			    $limit";
-
+				tax_id, 
+				tax_description,
+				tax_percentage,
+				type,
+				(SELECT (CASE  WHEN tax_enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled
+			FROM 
+				".TB_PREFIX."tax
+			$where
+			ORDER BY 
+				$sort $dir 
+			$limit";
 
 	if ($query) {
-		$result = dbQuery($sql, ':domain_id', $auth_session->domain_id, ':qtype', $qtype, ':query', $query) or die(htmlsafe(end($dbh->errorInfo())));
+		$result = dbQuery($sql, ':domain_id', $auth_session->domain_id, ':query', $query, ':qtype', $qtype);
 	} else {
-		$result = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+		$result = dbQuery($sql, ':domain_id', $auth_session->domain_id);
 	}
+
 	return $result;
 
 }

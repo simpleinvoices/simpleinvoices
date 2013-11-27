@@ -41,7 +41,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 	$qtype = $_POST['qtype'];
 
 	$where = " WHERE domain_id = :domain_id ";
-	if ($query) $where = " WHERE domain_id = :domain_id AND :qtype LIKE '%:query%' ";
+	if ($query) $where .= " AND :qtype LIKE '%:query%' ";
 
 
 	/*Check that the sort field is OK*/
@@ -64,17 +64,16 @@ function sql($type='', $dir, $sort, $rp, $page )
 					$sort $dir 
 				$limit";
 
-
 	if ($query) {
-		$result = dbQuery($sql, ':domain_id', $auth_session->domain_id, ':query', $query, ':qtype', $qtype) or die(htmlsafe(end($dbh->errorInfo())));
+		$result = dbQuery($sql, ':domain_id', $auth_session->domain_id, ':query', $query, ':qtype', $qtype);
 	} else {
-		$result = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+		$result = dbQuery($sql, ':domain_id', $auth_session->domain_id);
 	}
+
 	return $result;
 }
 
 $sth = sql('', $dir, $sort, $rp, $page);
-$sth_count_rows = sql('count',$dir, $sort, $rp, $page);
 
 $preferences = $sth->fetchAll(PDO::FETCH_ASSOC);
 $count = $sth->rowCount();

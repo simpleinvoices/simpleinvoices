@@ -40,10 +40,8 @@ function sql($type='', $dir, $sort, $rp, $page )
 	$query = $_REQUEST['query'];
 	$qtype = $_REQUEST['qtype'];
 	
-	$where = " WHERE u.domain_id = :domain_id AND u.role_id = ur.id";
-	if ($query) $where = " WHERE u.domain_id = :domain_id AND u.role_id = ur.id AND :qtype LIKE '%:query%' ";
-	
-	
+	$where = " WHERE u.domain_id = :domain_id ";
+	if ($query) $where = " AND :qtype LIKE '%:query%' ";
 	
 	/*Check that the sort field is OK*/
 	$validFields = array('id', 'role', 'email');
@@ -54,36 +52,34 @@ function sql($type='', $dir, $sort, $rp, $page )
 		$sort = "email";
 	}
 	
-		//$sql = "SELECT * FROM ".TB_PREFIX."customers ORDER BY $sort $dir LIMIT $start, $limit";
-		$sql = "SELECT 
-					u.id, 
-					u.email, 
-					ur.name as role,
-					(SELECT (CASE WHEN u.enabled = ".ENABLED." THEN '".$LANG['enabled']."' ELSE '".$LANG['disabled']."' END )) AS enabled
-					
+	//$sql = "SELECT * FROM ".TB_PREFIX."customers ORDER BY $sort $dir LIMIT $start, $limit";
+	$sql = "SELECT 
+				u.id, 
+				u.email, 
+				ur.name as role,
+				(SELECT (CASE WHEN u.enabled = ".ENABLED." THEN '".$LANG['enabled']."' ELSE '".$LANG['disabled']."' END )) AS enabled
+			FROM 
+				".TB_PREFIX."user u LEFT JOIN
+				".TB_PREFIX."user_role ur ON (u.role_id = ur.id)
+			$where
+			ORDER BY 
+				$sort $dir 
+			$limit";
 	
-				FROM 
-					".TB_PREFIX."user u,
-					".TB_PREFIX."user_role ur
-				$where
-				ORDER BY 
-					$sort $dir 
-				$limit";
+	if ($query) {
+		$result = dbQuery($sql,':domain_id', $auth_session->domain_id, ':query', $query, ':qtype', $qtype);
+	} else {
+		$result = dbQuery($sql,':domain_id', $auth_session->domain_id);
+	}
 
-		if ($query) {
-			$result = dbQuery($sql,':domain_id', $auth_session->domain_id, ':query', $query, ':qtype', $qtype) or die(htmlsafe(end($dbh->errorInfo())));
-		} else {
-			$result = dbQuery($sql,':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
-		}
-		return $result;
+	return $result;
 }
 
 $sth = sql('', $dir, $sort, $rp, $page);
-$sth_count_rows = sql('count',$dir, $sort, $rp, $page);
 
 $user = $sth->fetchAll(PDO::FETCH_ASSOC);
 
-$count = $sth_count_rows->rowCount();
+$count = $sth->rowCount();
 
 //echo sql2xml($customers, $count);
 $xml .= "<rows>";
