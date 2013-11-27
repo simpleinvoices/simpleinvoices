@@ -43,7 +43,7 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 	$qtype = $_POST['qtype'];
 	
 	$where = " WHERE domain_id = :domain_id";
-	if ($query) $where = " WHERE domain_id = :domain_id AND $qtype LIKE '%$query%' ";
+	if ($query) $where .= " AND :qtype LIKE '%:query%' ";
 	
 	
 	
@@ -70,7 +70,12 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 					$sort $dir 
 				$limit";
 	
-		$result = dbQuery($sql,':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+		if ($query) {
+			$result = dbQuery($sql,':domain_id', $auth_session->domain_id, ':query', $query, ':qtype', $qtype);
+		} else {
+			$result = dbQuery($sql,':domain_id', $auth_session->domain_id);
+		}
+
 		return $result;
 }
 

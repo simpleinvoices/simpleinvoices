@@ -70,7 +70,7 @@ class product
         $qtype = $_POST['qtype'];
         
         $where = "";
-        if ($query) $where .= " AND $qtype LIKE '%$query%' ";
+        if ($query) $where .= " AND :qtype LIKE '%:query%' ";
         
         
         /*Check that the sort field is OK*/
@@ -102,8 +102,12 @@ class product
                     $limit";
         
         
-        $result = dbQuery($sql, ':domain_id', $this->domain_id);
-    
+        if ($query) {
+			$result = dbQuery($sql, ':domain_id', $this->domain_id, ':query', $query, ':qtype', $qtype);
+		} else {
+			$result = dbQuery($sql, ':domain_id', $this->domain_id);
+		}
+
         return $result;
     }
 

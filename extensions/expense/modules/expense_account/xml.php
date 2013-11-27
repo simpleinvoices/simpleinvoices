@@ -39,7 +39,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 	$qtype = $_POST['qtype'];
 	
 	$where = "";
-	if ($query) $where .= " AND $qtype LIKE '%$query%' ";
+	if ($query) $where .= " AND :qtype LIKE '%:query%' ";
 	
 	
 	/*Check that the sort field is OK*/
@@ -64,7 +64,11 @@ function sql($type='', $dir, $sort, $rp, $page )
 				$limit";
 	
 	
-	$result = dbQuery($sql, ':domain_id', $domain_id);
+	if ($query) {
+		$result = dbQuery($sql, ':domain_id', $domain_id, ':query', $query, ':qtype', $qtype);
+	} else {
+		$result = dbQuery($sql, ':domain_id', $domain_id);
+	}
 
 	return $result;
 }

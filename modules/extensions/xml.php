@@ -53,7 +53,7 @@ $light[2]  = " <img src='images/common/lightswitch16x16.png' alt='".$LANG['toggl
 
 
 $where = "";
-if ($query) $where .= " AND $qtype LIKE '%$query%' ";
+if ($query) $where .= " AND :qtype LIKE '%:query%' ";
 
 
 /*Check that the sort field is OK*/
@@ -74,7 +74,11 @@ $validFields = array('id', 'name','description','enabled');
 				$sort $dir 
 			$limit";
 
-	$sth = dbQuery($sql, ':domain_id', $domain_id);
+	if ($query) {
+		$sth = dbQuery($sql, ':domain_id', $domain_id, ':query', $query, ':qtype', $qtype);
+	} else {
+		$sth = dbQuery($sql, ':domain_id', $domain_id);
+	}
 
 	$registered_extensions = $sth->fetchAll(PDO::FETCH_ASSOC);
 

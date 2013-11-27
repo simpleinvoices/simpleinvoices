@@ -86,7 +86,7 @@ class inventory {
 		$query = (isset($_POST['query'])) ? $_POST['query'] : "" ;
 		$qtype = (isset($_POST['qtype'])) ? $_POST['qtype'] : "" ;
 
-		if (isset($_POST['query'])) $where .= "  AND $qtype LIKE '%$query%' ";
+		if (isset($_POST['query'])) $where .= "  AND :qtype LIKE '%:query%' ";
 		/*SQL where - end*/
 		
 
@@ -125,7 +125,12 @@ class inventory {
 			$sort $dir
 			$limit";
 
-		$sth = $db->query($sql, ':domain_id', $this->domain_id);
+		if ($query) {
+			$sth = $dbQuery($sql, ':domain_id', $this->domain_id, ':query', $query, ':qtype', $qtype);
+		} else {
+			$sth = $dbQuery($sql, ':domain_id', $this->domain_id);
+		}
+
 		if($type =="count")
 		{
 			return $sth->rowCount();
@@ -148,7 +153,7 @@ class inventory {
 			WHERE 
 				iv.domain_id = :domain_id
 			AND iv.id = :id;";
-		$sth = dbQuery($sql, ':domain_id', $this->domain_id, ':id',$this->id);
+		$sth = dbQuery($sql, ':domain_id', $this->domain_id, ':id', $this->id);
 
 		return $sth->fetch();
 	}

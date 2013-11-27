@@ -10,8 +10,8 @@ if ($_POST['name'] != "" ) {
 #get the invoice id
 $id = $_GET['id'];
 
-$sql_prod = "SELECT * FROM ".TB_PREFIX."products_attributes WHERE id = $id;";
-$sth_prod =  dbQuery($sql_prod);
+$sql_prod = "SELECT * FROM ".TB_PREFIX."products_attributes WHERE id = :id;";
+$sth_prod =  dbQuery($sql_prod, ':id', $id);
 $product_attribute = $sth_prod->fetch();
 $type = product_attributes::get($id);
 $product_attribute['type'] = $type['type'];

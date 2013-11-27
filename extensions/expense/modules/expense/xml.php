@@ -83,6 +83,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 					$sort $dir 
 				$limit";
 	
+	
 	if ($query!="") {
 		$result = dbQuery($sql, ':domain_id', $domain_id, ':qtype', $_REQUEST['qtype'], ':query', $_REQUEST['query']);
 	} else {

@@ -415,10 +415,10 @@ class invoice {
         }
         
         if ($query) {
-        	$result =  dbQuery($sql,':domain_id', $domain_id, ':query', $query, ':qtype', $qtype);
-        } else {
-        	$result =  dbQuery($sql,':domain_id', $domain_id);
-        }
+			$result =  dbQuery($sql,':domain_id', $domain_id, ':query', $query, ':qtype', $qtype);
+		} else {
+			$result =  dbQuery($sql,':domain_id', $domain_id);
+		}
         return $result;
     }
 

@@ -113,7 +113,7 @@ if ($db_server == 'pgsql') {
 if ($query) {
 	$sth = dbQuery($sql, ':domain_id', $domain_id, ':query', $_POST['query'], ':qtype', $_POST['qtype']);
 } else {
-	$sth = dbQuery($sql, ':domain_id', $domain_id);	
+	$sth = dbQuery($sql, ':domain_id', $domain_id);
 }
 $invoices = $sth->fetchAll(PDO::FETCH_ASSOC);
 

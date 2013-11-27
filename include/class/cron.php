@@ -106,10 +106,10 @@ class cron {
 		/*SQL Limit - end*/
 
 		/*SQL where - start*/
-		$query = (isset($_POST['query'])) ? $_POST['query'] : "" ;
-		$qtype = (isset($_POST['qtype'])) ? $_POST['qtype'] : "" ;
+//		$query = (isset($_POST['query'])) ? $_POST['query'] : "" ;
+//		$qtype = (isset($_POST['qtype'])) ? $_POST['qtype'] : "" ;
 
-		$where = (isset($_POST['query'])) ? "  AND $qtype LIKE '%$query%' " : "";
+//		$where = (isset($_POST['query'])) ? "  AND :qtype LIKE '%:query%' " : "";
 		/*SQL where - end*/
 		
 
