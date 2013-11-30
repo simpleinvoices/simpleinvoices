@@ -76,10 +76,11 @@ function sql($type='', $dir, $sort, $rp, $page )
 }
 
 $sth = sql('', $dir, $sort, $rp, $page);
+$sth_count_rows = sql('count',$dir, $sort, $rp, $page);
 
 $user = $sth->fetchAll(PDO::FETCH_ASSOC);
 
-$count = $sth->rowCount();
+$count = $sth_count_rows->rowCount();
 
 //echo sql2xml($customers, $count);
 $xml .= "<rows>";
