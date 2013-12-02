@@ -4,6 +4,7 @@ $auth_session = new Zend_Session_Namespace('Zend_Auth');
 
 //print_r($_SESSION);
 
+$acl_action = (isset($_GET['action']) ? $_GET['action'] : null);
 $checkPermission = $acl->isAllowed($auth_session->role_name, $module, $_GET['action']) ?  "allowed" : "denied"; // allowed
 
 //sbasic customer page check 
