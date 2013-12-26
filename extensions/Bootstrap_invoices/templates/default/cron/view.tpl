@@ -1,7 +1,7 @@
 <form name="frmpost" action="index.php?module=cron&view=edit&id={$cron.id|urlencode}" method="POST" id="frmpost" class="form-horizontal">
 	<h1 class="title"><a href="index.php?module=cron&amp;view=manage">{$LANG.recurrence}</a> <span>/</span> {$LANG.view} 
 						<a href="./index.php?module=cron&amp;view=edit&amp;id={$cron.id|urlencode}" class="btn btn-default">
-					<span class="glyphicon glyphicon-edit"></span> {$LANG.edit}</a></h1>
+					<span class="glyphicon glyphicon-pencil"></span> {$LANG.edit}</a></h1>
 <div class="table-responsive">	
 <table class="table table-striped table-hover">
     <tr>
@@ -48,7 +48,7 @@
 	<div class="form-group si_toolbar si_toolbar_form">
     	<div class="col-sm-offset-1 col-sm-6">
 						<a href="./index.php?module=cron&amp;view=edit&amp;id={$cron.id|urlencode}" class="btn btn-default">
-					<span class="glyphicon glyphicon-edit"></span> {$LANG.edit}</a>
+					<span class="glyphicon glyphicon-pencil"></span> {$LANG.edit}</a>
 	</div>
 
 	</div>

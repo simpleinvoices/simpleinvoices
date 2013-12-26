@@ -8,9 +8,7 @@
 
 /*! normalize.css v2.1.3 | MIT License | git.io/normalize */
 /*Added signin examples css without body and theme example css*/
-.flora {
-background-color: white;
-}
+
 article,
 aside,
 details,
@@ -1673,7 +1671,6 @@ th {
 .table-hover > tbody > tr > td,
 .table-hover > tbody > tr > th {
   color: #555555;
-  border: 1px solid #dddddd;
 }
 
 table col[class*="col-"] {
@@ -5953,7 +5950,7 @@ a.list-group-item.active:focus .list-group-item-text {
   border-radius: 3px;
 }
 
-.close, .ui-dialog-titlebar-close {
+.close {
   float: right;
   font-size: 21px;
   font-weight: bold;
@@ -5965,9 +5962,7 @@ a.list-group-item.active:focus .list-group-item-text {
 }
 
 .close:hover,
-.close:focus,
-.ui-dialog-titlebar-close:hover,
-.ui-dialog-titlebar-close:focus {
+.close:focus {
   color: #000000;
   text-decoration: none;
   cursor: pointer;
@@ -5975,8 +5970,7 @@ a.list-group-item.active:focus .list-group-item-text {
   filter: alpha(opacity=50);
 }
 
-button.close,
-.ui-dialog-titlebar-close {
+button.close {
   padding: 0;
   cursor: pointer;
   background: transparent;
@@ -6025,7 +6019,7 @@ button.close,
   margin-left: auto;
 }
 
-.modal-content, .ui-dialog-container {
+.modal-content {
   position: relative;
   background-color: #ffffff;
   border: 1px solid #999999;
@@ -6057,13 +6051,13 @@ button.close,
   filter: alpha(opacity=50);
 }
 
-.modal-header, .ui-dialog-titlebar {
+.modal-header {
   min-height: 16.428571429px;
   padding: 15px;
   border-bottom: 1px solid #e5e5e5;
 }
 
-.modal-header .close, .ui-dialog-titlebar-close {
+.modal-header .close {
   margin-top: -2px;
 }
 

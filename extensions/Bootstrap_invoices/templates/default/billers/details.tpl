@@ -14,7 +14,7 @@ n Script: details.tpl
 	
 	{ if $subPageActive == "biller_view"}
 		 {$LANG.view} 
-		 <a href="./index.php?module=billers&amp;view=details&amp;action=edit&amp;id={$biller.id}" class="btn btn-default"><span class="glyphicon glyphicon-edit"></span> {$LANG.edit}</a>{/if}
+		 <a href="./index.php?module=billers&amp;view=details&amp;action=edit&amp;id={$biller.id}" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span> {$LANG.edit}</a>{/if}
 
 	{ if $subPageActive == "biller_edit"}
 		 {$LANG.edit} 
@@ -138,7 +138,7 @@ n Script: details.tpl
 		</tr>
 	</table>
 	<div class="col-sm-offset-1 col-sm-6">
-		<a href="./index.php?module=billers&amp;view=details&amp;action=edit&amp;id={$biller.id}" class="btn btn-default"><span class="glyphicon glyphicon-edit"></span> {$LANG.edit}</a>
+		<a href="./index.php?module=billers&amp;view=details&amp;action=edit&amp;id={$biller.id}" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span> {$LANG.edit}</a>
     </div>
 </div>
 

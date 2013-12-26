@@ -14,7 +14,7 @@
 {if $smarty.get.action == 'view' }
 <div class="si_form si_form_view" id="si_form_cust">
 	<h1 class="title"><a href="index.php?module=customers&amp;view=manage">{$LANG.customers}</a> <span>/</span> {$LANG.view}
-		<a href="./index.php?module=customers&amp;view=details&amp;id={$customer.id|urlencode}&amp;action=edit" class="btn btn-default"> <span class="glyphicon glyphicon-edit"></span> {$LANG.edit}</a></h1>
+		<a href="./index.php?module=customers&amp;view=details&amp;id={$customer.id|urlencode}&amp;action=edit" class="btn btn-default"> <span class="glyphicon glyphicon-pencil"></span> {$LANG.edit}</a></h1>
 	<div class="si_cust_info table-responsive">
 		<table class="table table-striped table-hover">
 			<tr>
@@ -203,7 +203,7 @@
 </div>
 </div>
     	<div class="col-sm-offset-1 col-sm-6">
-						<a href="./index.php?module=customers&amp;view=details&amp;id={$customer.id|urlencode}&amp;action=edit" class="btn btn-default"> <span class="glyphicon glyphicon-edit"></span> {$LANG.edit}</a>
+						<a href="./index.php?module=customers&amp;view=details&amp;id={$customer.id|urlencode}&amp;action=edit" class="btn btn-default"> <span class="glyphicon glyphicon-pencil"></span> {$LANG.edit}</a>
 	</div>
 </div>
 {/if}
@@ -392,11 +392,12 @@
 				{html_options name=enabled class="form-control" options=$enabled selected=$customer.enabled}
 			</div>
 		</div>
-	</table>
-		
+	<div class="form-group">
 	<div class="col-sm-offset-3 col-sm-6 si_toolbar si_toolbar_form">
 	<button type="submit" class="btn btn-default positive" name="save_customer" value="{$LANG.save_customer}"> <span class="glyphicon glyphicon-ok"></span> {$LANG.save}</button>
 		<a href="./index.php?module=customers&amp;view=manage" class="btn btn-default negative"> <span class="glyphicon glyphicon-remove"></span> {$LANG.cancel}</a>
+	</div>
+
 	</div>
 
 </div>

@@ -16,7 +16,7 @@
 <h1 class="title">
 	<a href="index.php?module=custom_fields&amp;view=manage">{$LANG.custom_fields_upper}</a> <span>/</span>
 		 {$LANG.view} 
-		 <a href="./index.php?module=custom_fields&amp;view=details&amp;id={$cf.cf_id|urlencode}&amp;action=edit" class="btn btn-default"><span class="glyphicon glyphicon-edit"></span> {$LANG.edit}</a>
+		 <a href="./index.php?module=custom_fields&amp;view=details&amp;id={$cf.cf_id|urlencode}&amp;action=edit" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span> {$LANG.edit}</a>
 </h1>
 
 <div class="si_form si_form_view table-responsive">	
@@ -41,7 +41,7 @@
 </div>
 
 	<div class="col-sm-offset-1 col-sm-6">
-		<a href="./index.php?module=custom_fields&amp;view=details&amp;id={$cf.cf_id|urlencode}&amp;action=edit" class="btn btn-default"><span class="glyphicon glyphicon-edit"></span> {$LANG.edit}</a>
+		<a href="./index.php?module=custom_fields&amp;view=details&amp;id={$cf.cf_id|urlencode}&amp;action=edit" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span> {$LANG.edit}</a>
 	</div>
 
 {/if}
