@@ -13,18 +13,18 @@ $domain_id = domain_id::get();
 $xml =""; 
 
 $extension_dir = './extensions';
-$extension_entries = scandir($extension_dir);
-foreach ($extension_entries as $entry) {
-  	if (is_dir($extension_dir."/".$entry) and ! preg_match("^/\..*/",$entry) ) {	//Skip entries starting with a dot
-		if (file_exists ($extension_dir."/".$entry."/DESCRIPTION"))
-		{
-			$description = file_get_contents($extension_dir."/".$entry."/DESCRIPTION") ;
-		} else {
-			$description = "DESCRIPTION not available (in $extension_dir/$entry/)";
-		}
+$extension_entries = array_diff( scandir( $extension_dir ), Array( ".", ".." ) ); 	//Skip entries starting with a dot from dir list
+$available_extensions = Array();
 
-		$available_extensions[$entry] = array("name"=>$entry,"enabled"=>0, "registered"=>0, "description"=>$description , "id" =>"");
+foreach ($extension_entries as $entry) {
+	if (file_exists ($extension_dir."/".$entry."/DESCRIPTION"))
+	{
+		$description = file_get_contents($extension_dir."/".$entry."/DESCRIPTION") ;
+	} else {
+		$description = "DESCRIPTION not available (in $extension_dir/$entry/)";
 	}
+
+	$available_extensions[$entry] = array("name"=>$entry,"enabled"=>0, "registered"=>0, "description"=>$description , "id" =>"");
 }
 
 //SC: Safety checking values that will be directly subbed in
