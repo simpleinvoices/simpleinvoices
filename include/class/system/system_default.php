@@ -40,7 +40,7 @@ class system_default {
 			ON DUPLICATE KEY UPDATE
 				`value` =  :value";
 
-		if (db->query($sql, 
+		if ($db->query($sql, 
 			':value', $value, 
 			':domain_id', $domain_id, 
 			':name', $name, 
