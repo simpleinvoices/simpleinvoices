@@ -9,26 +9,26 @@
 *	 GPL v3 or above
 *}
 
-{* if customer is updated or saved.*} 
+{* if customer is updated or saved.*}
 
-{if $smarty.post.name != "" && $smarty.post.name != null } 
+{if $smarty.post.name != "" && $smarty.post.name != null }
 	{include file="../templates/default/customers/save.tpl"}
 
 {else}
-{* if  name was inserted *} 
-{if $smarty.post.id !=null} 
+{* if  name was inserted *}
+{if $smarty.post.id !=null}
 {*
 		<div class="validation_alert"><img src="./images/common/important.png" alt="" />
 		You must enter a description for the Customer</div>
 		<hr />
 *}
-	{/if}	
+	{/if}
 <form name="frmpost" action="index.php?module=customers&amp;view=add" method="post" id="frmpost" onsubmit="return checkForm(this);">
 <div class="si_form">
 	<table>
 	<tr>
 		<th>{$LANG.customer_name}
-		<a 
+		<a
 			class="cluetip"
 			href="#"
 			rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field"
@@ -38,6 +38,11 @@
 		</a>
 		</th>
 		<td><input type="text" name="name" id="name" value="{$smarty.post.name|htmlsafe}" size="25" class="validate[required]" /></td>
+	</tr>
+	<tr>
+		<th>{$LANG.customer_department}
+		</th>
+		<td><input type="text" name="department" id="department" value="{$smarty.post.department|htmlsafe}" size="25"  /></td>
 	</tr>
 	</tr>
 		<th>{$LANG.customer_contact}
@@ -63,7 +68,7 @@
 			href="#"
 			rel="index.php?module=documentation&amp;view=view&amp;page=help_street2"
 			title="{$LANG.street2}"
-		> 
+		>
 		<img src="./images/common/help-small.png" alt="" />
 		</a>
 		</th>
@@ -157,11 +162,11 @@
 			href="#"
 			rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 			title="{$LANG.custom_fields}"
-		> 
+		>
 		<img src="./images/common/help-small.png" alt="" />
 		</a>
 		</th>
-		<td><input type="text" name="custom_field2" value="{$smarty.post.custom_field2|htmlsafe}" size="25" /></td> 
+		<td><input type="text" name="custom_field2" value="{$smarty.post.custom_field2|htmlsafe}" size="25" /></td>
 	</tr>
 	<tr>
 		<th>{$customFieldLabel.customer_cf3|htmlsafe}
@@ -170,7 +175,7 @@
 			href="#"
 			rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 			title="{$LANG.custom_fields}"
-		> 
+		>
 		<img src="./images/common/help-small.png" alt="" />
 		</a>
 		</th>
@@ -183,7 +188,7 @@
 			href="#"
 			rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 			title="{$LANG.custom_fields}"
-		> 
+		>
 		<img src="./images/common/help-small.png" alt="" />
 		</a>
 		</th>
@@ -199,8 +204,8 @@
 			{html_options name=enabled options=$enabled selected=1}
 		</td>
 	</tr>
-	
-	{* 
+
+	{*
 		{showCustomFields categorieId="2"}
 	*}
 
@@ -208,7 +213,7 @@
 
 	<div class="si_toolbar si_toolbar_form">
             <button type="submit" class="positive" name="id" value="{$LANG.save}">
-                <img class="button_img" src="./images/common/tick.png" alt="" /> 
+                <img class="button_img" src="./images/common/tick.png" alt="" />
                 {$LANG.save}
             </button>
 

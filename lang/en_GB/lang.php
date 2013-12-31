@@ -107,6 +107,7 @@ $LANG['customer_details'] = "Customer details";//1
 $LANG['customer_edit'] = "Edit Customer";//1
 $LANG['customer_id'] = "Customer ID";//1
 $LANG['customer_name'] = "Customer Name";//1
+$LANG['customer_department'] = "Department";//1
 $LANG['customer_short'] = "Cust";//1
 $LANG['customers'] = "Customers";//1
 $LANG['customise_settings'] = "Customise the settings";//1
