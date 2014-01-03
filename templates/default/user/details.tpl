@@ -30,6 +30,10 @@
 			<th>{$LANG.enabled}</th>
 			<td>{$user.lang_enabled|htmlsafe}</td>
 		</tr>
+		<tr>
+			<th>{$LANG.users}</th>
+			<td>{$user.user_id|htmlsafe}</td>
+		</tr>
 	</table>
 </div>
 <div class="si_toolbar si_toolbar_form">
@@ -101,6 +105,10 @@
 		<tr>
 			<th>{$LANG.enabled}</th>
 			<td>{html_options name=enabled options=$enabled selected=$user.enabled}</td>
+		</tr>
+		<tr>
+			<th>{$LANG.users}</th>
+			<td><input type="text" name="user_id" autocomplete="off" value="{$user.user_id|htmlsafe}" size="12" id="user_id"  class="validate[required]"  /></td>
 		</tr>
 	</table>
 

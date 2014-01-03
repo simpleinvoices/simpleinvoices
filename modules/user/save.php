@@ -38,7 +38,8 @@ if ( $op === 'insert_user') {
                         password,
                         role_id,
                         domain_id,
-                        enabled
+                        enabled,
+						user_id
                     )
                     VALUES 
                     (
@@ -47,10 +48,11 @@ if ( $op === 'insert_user') {
                         :role,
 						:domain_id,
 						:enabled
+						:user_id
                     )
                 ";
 
-        return dbQuery($sql, ':email',$_POST['email'],':password',$_POST['password_field'],':role',$_POST['role'],':domain_id',$auth_session->domain_id,':enabled',$_POST['enabled']);
+        return dbQuery($sql, ':email',$_POST['email'],':password',$_POST['password_field'],':role',$_POST['role'],':domain_id',$auth_session->domain_id,':enabled',$_POST['enabled'],':user_id',$_POST['user_id']);
 
     }
     if( insertUser() ) {
@@ -71,11 +73,12 @@ if ($op === 'edit_user' ) {
                         $password
                         role_id = :role,
                         enabled = :enabled
+						user_id = :user_id
                     WHERE
                         id = :id
                 ";
 
-        return dbQuery($sql, ':email',$_POST['email'], ':role',$_POST['role'], ':enabled',$_POST['enabled'], ':id',$_POST['id']);
+        return dbQuery($sql, ':email',$_POST['email'], ':role',$_POST['role'], ':enabled',$_POST['enabled'], ':user_id',$_POST['user_id'], ':id',$_POST['id']);
 
     }
     if( editUser() ) {

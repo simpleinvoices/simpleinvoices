@@ -57,7 +57,8 @@ function sql($type='', $dir, $sort, $rp, $page )
 				u.id, 
 				u.email, 
 				ur.name as role,
-				(SELECT (CASE WHEN u.enabled = ".ENABLED." THEN '".$LANG['enabled']."' ELSE '".$LANG['disabled']."' END )) AS enabled
+				(SELECT (CASE WHEN u.enabled = ".ENABLED." THEN '".$LANG['enabled']."' ELSE '".$LANG['disabled']."' END )) AS enabled,
+				user_id
 			FROM 
 				".TB_PREFIX."user u LEFT JOIN
 				".TB_PREFIX."user_role ur ON (u.role_id = ur.id)
@@ -101,6 +102,7 @@ foreach ($user as $row) {
 	else {
 		$xml .= "<cell><![CDATA[<img src='images/common/cross.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
 	}
+	$xml .= "<cell><![CDATA[".$row['user_id']."]]></cell>";
 	$xml .= "</row>";		
 }
 

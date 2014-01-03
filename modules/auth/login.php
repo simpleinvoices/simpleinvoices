@@ -78,9 +78,10 @@ if (!empty($_POST['user']) && !empty($_POST['pass']))
 		* grab user data  from the database
 		*/
 
+		$PatchesDone = getNumberOfDoneSQLPatches();
+
 		//patch 147 adds user_role table - need to accomodate pre and post patch 147
-		if (getNumberOfDoneSQLPatches() < "147")
-		{
+		if ( $PatchesDone < "147" ) {
 			$result = $zendDb->fetchRow("
 				SELECT 
 					u.user_id AS id, u.user_email, u.user_name
@@ -90,28 +91,39 @@ if (!empty($_POST['user']) && !empty($_POST['pass']))
 					user_email = ?", $userEmail
 			);
 			$result['role_name']="administrator";
-		}
 
-		if ( (getNumberOfDoneSQLPatches() >= "147") && ( getNumberOfDoneSQLPatches() < "184") )
-		{
+		} elseif ( $PatchesDone < "184" ) {
 			$result = $zendDb->fetchRow("
 				SELECT 
 					u.user_id AS id, u.user_email, u.user_name, r.name AS role_name, u.user_domain_id
 				FROM 
-					".TB_PREFIX."user u,  ".TB_PREFIX."user_role r 
+					".TB_PREFIX."user u 
+					LEFT JOIN ".TB_PREFIX."user_role r ON (u.user_role_id = r.id)
 				WHERE 
-					u.user_email = ? AND u.user_role_id = r.id", $userEmail
+					u.user_email = ?", $userEmail
 			);
-		}		
-		if (getNumberOfDoneSQLPatches() >= "184")
-		{
+
+		} elseif ( $PatchesDone < "292" ) {
 			$result = $zendDb->fetchRow("
 				SELECT 
-					u.id, u.email, r.name AS role_name, u.domain_id
+					u.id, u.email, r.name AS role_name, u.domain_id, 0 AS user_id
 				FROM 
-					".TB_PREFIX."user u,  ".TB_PREFIX."user_role r 
+					".TB_PREFIX."user u 
+					LEFT JOIN ".TB_PREFIX."user_role r ON (u.role_id = r.id)
 				WHERE 
-					u.email = ? AND u.role_id = r.id AND u.enabled = '".ENABLED."'", $userEmail
+					u.email = ? AND u.enabled = '".ENABLED."'", $userEmail
+			);
+
+		// Customer / Biller User ID available on and after Patch 292
+		} else {
+			$result = $zendDb->fetchRow("
+				SELECT 
+					u.id, u.email, r.name AS role_name, u.domain_id, u.user_id
+				FROM 
+					".TB_PREFIX."user u 
+					LEFT JOIN ".TB_PREFIX."user_role r ON (u.role_id = r.id)
+				WHERE 
+					u.email = ? AND u.enabled = '".ENABLED."'", $userEmail
 			);
 		}		
 		/*
@@ -124,7 +136,11 @@ if (!empty($_POST['user']) && !empty($_POST['pass']))
 			$authNamespace->$key = $value;
 		}
 
-		header('Location: .');
+		if ($authNamespace->role_name == 'customer' && $authNamespace->user_id > 0) {
+			header('Location: index.php?module=customers&view=details&action=view&id='.$authNamespace->user_id);
+		} else {
+			header('Location: .');
+		}
 
 	} else {
 	

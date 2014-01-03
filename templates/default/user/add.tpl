@@ -59,6 +59,10 @@
 				{html_options name=enabled options=$enabled selected=1}
 			</td>
 		</tr>
+		<tr>
+			<th>{$LANG.users}</th>
+			<td><input type="text" name="user_id" value="{$smarty.post.user_id|htmlsafe}" size="12" id="user_id" autocomplete="off" class="validate[required]"  /></td>
+		</tr>
 	</table>
 
 	<div class="si_toolbar si_toolbar_form">

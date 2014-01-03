@@ -12,33 +12,34 @@ $acl->addRole(new Zend_Acl_Role('customer'));
 $acl->addRole(new Zend_Acl_Role('biller'));
 
 //create the resources
-$acl->add(new Zend_Acl_Resource('api'));
-$acl->add(new Zend_Acl_Resource('auth'));
-$acl->add(new Zend_Acl_Resource('export'));
-$acl->add(new Zend_Acl_Resource('customers'));
-$acl->add(new Zend_Acl_Resource('cron'));
-$acl->add(new Zend_Acl_Resource('documentation'));
-$acl->add(new Zend_Acl_Resource('extensions'));
-$acl->add(new Zend_Acl_Resource('expense'));
-$acl->add(new Zend_Acl_Resource('expense_account'));
-$acl->add(new Zend_Acl_Resource('index'));
-$acl->add(new Zend_Acl_Resource('install'));
-$acl->add(new Zend_Acl_Resource('inventory'));
-$acl->add(new Zend_Acl_Resource('invoices'));
-$acl->add(new Zend_Acl_Resource('billers'));
-$acl->add(new Zend_Acl_Resource('products'));
-$acl->add(new Zend_Acl_Resource('product_attribute'));
-$acl->add(new Zend_Acl_Resource('product_value'));
-$acl->add(new Zend_Acl_Resource('payments'));
-$acl->add(new Zend_Acl_Resource('reports'));
-$acl->add(new Zend_Acl_Resource('options'));
-$acl->add(new Zend_Acl_Resource('system_defaults'));
-$acl->add(new Zend_Acl_Resource('custom_fields'));
-$acl->add(new Zend_Acl_Resource('user'));
-$acl->add(new Zend_Acl_Resource('tax_rates'));
-$acl->add(new Zend_Acl_Resource('preferences'));
-$acl->add(new Zend_Acl_Resource('payment_types'));
-$acl->add(new Zend_Acl_Resource('statement'));
+$acl->addResource('api');
+$acl->addResource('auth');
+$acl->addResource('billers');
+$acl->addResource('cron');
+$acl->addResource('custom_fields');
+$acl->addResource('customers');
+$acl->addResource('documentation');
+$acl->addResource('export');
+$acl->addResource('extensions');
+$acl->addResource('index');
+$acl->addResource('install');
+$acl->addResource('inventory');
+$acl->addResource('invoices');
+$acl->addResource('options');
+$acl->addResource('payment_types');
+$acl->addResource('payments');
+$acl->addResource('preferences');
+$acl->addResource('product_attribute');
+$acl->addResource('product_value');
+$acl->addResource('products');
+$acl->addResource('reports');
+$acl->addResource('statement');
+$acl->addResource('system_defaults');
+$acl->addResource('tax_rates');
+$acl->addResource('user');
+
+$acl->addResource('expense');
+$acl->addResource('expense_account');
 
 //assign roles to resources
 
@@ -57,7 +58,7 @@ $acl->allow(null,'payments','ach');
 //TODO: not good !!! - no acl for invoices as can't get html2pdf to work with zend_auth :(
 $acl->allow(null,'invoices');
 
-//students only see student page
+//customers only see customer page (also invoices since no acl for it above)
 $acl->allow('customer', 'customers', 'view');
 
 // Editor inherits view, edit, submit, and revise privileges from staff,

@@ -665,7 +665,9 @@ INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_rele
 ,(288,287,'','','')
 ,(289,288,'','','')
 ,(290,289,'','','')
-,(291,290,'','','');
+,(291,290,'','','')
+,(292,291,'','','')
+,(293,292,'','','');
 
 CREATE TABLE IF NOT EXISTS `si_system_defaults` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -729,12 +731,13 @@ CREATE TABLE IF NOT EXISTS `si_user` (
   `domain_id` int(11) NOT NULL DEFAULT '0',
   `password` varchar(64) DEFAULT NULL,
   `enabled` TINYINT(1) DEFAULT 1 NOT NULL,
+  `user_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`domain_id`,`id`),
   UNIQUE KEY `UnqEMailPwd` (`email`, `password`)
 ) ENGINE=MyISAM;
 
-INSERT INTO `si_user` (`id`, `email`, `role_id`, `domain_id`, `password`, `enabled`) VALUES
- (1, 'demo@simpleinvoices.org', 1, 1, 'fe01ce2a7fbac8fafaed7c982a04e229', 1);
+INSERT INTO `si_user` (`id`, `email`, `role_id`, `domain_id`, `password`, `enabled`, `user_id`) VALUES
+ (1, 'demo@simpleinvoices.org', 1, 1, 'fe01ce2a7fbac8fafaed7c982a04e229', 1, 0);
 
 CREATE TABLE IF NOT EXISTS `si_user_domain` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
