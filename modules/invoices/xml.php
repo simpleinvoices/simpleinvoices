@@ -50,10 +50,21 @@ $xml ="";
 		<!--3 EXPORT DIALOG  onclick='export_invoice(".$row['id'].", \"".$config->export->spreadsheet."\", \"".$config->export->wordprocessor."\");'> -->	
 		<!--3 EXPORT TO PDF <a title='".$LANG['export_tooltip']." ".$row['preference']." ".$row['index_id']."' class='index_table' href='pdfmaker.php?id=".$row['id']."'><img src='images/common/page_white_acrobat.png' class='action' /></a> -->
 		<!--4 XLS <a title='".$LANG['export_tooltip']." ".$row['preference']." ".$row['index_id']." ".$LANG['export_xls_tooltip'].$config->export->spreadsheet." ".$LANG['format_tooltip']."' class='index_table' href='index.php?module=invoices&view=templates/template&invoice='".$row['id']."&action=view&location=print&export=".$config->export->spreadsheet."'><img src='images/common/page_white_excel.png' class='action' /></a> -->
+		";
 		
-		<!--6 Payment --><a title='".$LANG['process_payment_for']." ".$row['preference']." ".$row['index_id']."' class='index_table' href='index.php?module=payments&view=process&id=".$row['id']."&op=pay_selected_invoice'><img src='images/common/money_dollar.png' class='action' /></a>
-		<!--7 Email --><a title='".$LANG['email']." ".$row['preference']." ".$row['index_id']."' class='index_table' href='index.php?module=invoices&view=email&stage=1&id=".$row['id']."'><img src='images/common/mail-message-new.png' class='action' /></a>
-					]]>
+		// Alternatively: The Owing column can have the link on the amount instead of the payment icon code here
+		if ($row['status'] && $row['owing'] > 0) {
+			// Real Invoice Has Owing - Process payment
+			$xml .= "<!--6 Payment --><a title='".$LANG['process_payment_for']." ".$row['preference']." ".$row['index_id']."' class='index_table' href='index.php?module=payments&view=process&id=".$row['id']."&op=pay_selected_invoice'><img src='images/common/money_dollar.png' class='action' /></a>";
+		} elseif($row['status']) {
+			// Real Invoice Payment Details if not Owing (get different color payment icon)
+			$xml .= "<!--6 Payment --><a title='".$LANG['process_payment_for']." ".$row['preference']." ".$row['index_id']."' class='index_table' href='index.php?module=payments&view=details&id=".$row['id']."&action=view'><img src='images/common/money_dollar.png' class='action' /></a>";
+		} else {
+			// Draft Invoice Just Image to occupy space till blank or greyed out icon becomes available
+			$xml .= "<!--6 Payment --><img src='images/common/money_dollar.png' class='action' />";
+		}
+		$xml .= "<!--7 Email --><a title='".$LANG['email']." ".$row['preference']." ".$row['index_id']."' class='index_table' href='index.php?module=invoices&view=email&stage=1&id=".$row['id']."'><img src='images/common/mail-message-new.png' class='action' /></a>
+			]]>
 				</cell>";
 		$xml .= "<cell><![CDATA[".$row['index_name']."]]></cell>";		
 		$xml .= "<cell><![CDATA[".$row['biller']."]]></cell>";

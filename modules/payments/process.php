@@ -26,9 +26,15 @@ $invoice = null;
 if(isset($_GET['id'])) {
 	$invoiceobj = new invoice();
 	$invoice = $invoiceobj->select($master_invoice_id);
-}
-else {
-	$sth = dbQuery("SELECT * FROM ".TB_PREFIX."invoices");
+} else {
+	$sql = "SELECT * FROM ".TB_PREFIX."invoices WHERE domain_id = :domain_id";
+/*
+	$sql = "SELECT iv.* FROM ".TB_PREFIX."invoices iv 
+				LEFT JOIN ".TB_PREFIX."preferences pr 
+					ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id)
+			WHERE pr.status = '1'";
+*/
+	$sth = dbQuery($sql, ':domain_id', domain_id::get());
     $invoice = $sth->fetch();
     #$sth = new invoice();
     #$invoice = $sth->select_all();
@@ -41,6 +47,7 @@ $pt = getPaymentType($defaults['payment_type']);
 $invoices = new invoice();
 $invoices->sort='id';
 $invoices->having='money_owed';
+$invoices->having_and='real';
 $invoice_all = $invoices->select_all('count');
 
 $smarty -> assign('invoice_all',$invoice_all);
