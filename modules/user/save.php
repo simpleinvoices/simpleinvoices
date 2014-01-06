@@ -47,7 +47,7 @@ if ( $op === 'insert_user') {
                         MD5(:password),
                         :role,
 						:domain_id,
-						:enabled
+						:enabled,
 						:user_id
                     )
                 ";
@@ -72,7 +72,7 @@ if ($op === 'edit_user' ) {
                         email = :email,
                         $password
                         role_id = :role,
-                        enabled = :enabled
+                        enabled = :enabled,
 						user_id = :user_id
                     WHERE
                         id = :id
