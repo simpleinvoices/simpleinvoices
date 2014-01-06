@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The way to call the service -->
+<!-- authentication - send in header X-API-KEY coded in sha1 -->
+<!-- GET/preferences Returns all preferences : http:\\simpleinvoices.org/api/preferences -->
+<!-- GET/preferences/{preferenceId} Returns a single preference identified by preferenceId : http:\\simpleinvoices.org/api/preferences/1 -->
+<!-- POST/preferences Creates a new preference : http:\\simpleinvoices.org/api/preferences -->
+<!-- PUT/preferences/{preferenceId} Updates an existing preference : http:\\simpleinvoices.org/api/preferences/1 -->
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="preference">
+    <xs:complexType>
+      <xs:sequence>
+	    <!-- int(11) -->
+	    <xs:element minOccurs="0" name="pref_id" type="xs:unsignedInt" />
+        <!-- varchar(50) -->
+        <xs:element name="pref_description" type="xs:string" />
+        <!-- varchar(50) -->
+        <xs:element name="pref_currency_sign" type="xs:string" />
+        <!-- varchar(50) -->
+        <xs:element name="pref_inv_heading" type="xs:string" />
+        <!-- varchar(50) -->
+        <xs:element name="pref_inv_wording" type="xs:string" />
+        <!-- varchar(50) -->
+        <xs:element name="pref_inv_detail_heading" type="xs:string" />
+        <!-- text -->
+        <xs:element name="pref_inv_detail_line" type="xs:string" />
+        <!-- varchar(50) -->
+        <xs:element name="pref_inv_payment_method" type="xs:string" />
+        <!-- varchar(50) -->
+        <xs:element name="pref_inv_payment_line1_name" type="xs:string" />
+        <!-- varchar(50) -->
+        <xs:element name="pref_inv_payment_line1_value" type="xs:string" />
+        <!-- varchar(50) -->
+        <xs:element name="pref_inv_payment_line2_name" type="xs:string" />
+        <!-- varchar(50) -->
+        <xs:element name="pref_inv_payment_line2_value" type="xs:string" />
+        <!-- accepts only 0(disabled) or 1(enabled) -->
+        <xs:element name="pref_enabled" type="xs:unsignedByte" />
+        <!-- accepts only 0(disabled) or 1(enabled) -->
+        <xs:element name="status" type="xs:unsignedByte" />
+        <!-- varchar(255) -->
+        <xs:element name="locale" type="xs:string" />
+        <!-- varchar(255) -->
+        <xs:element name="language" type="xs:string" />
+        <!-- int(11) -->
+        <xs:element name="index_group" type="xs:unsignedInt" />
+        <!-- varchar(25) -->
+        <xs:element name="currency_code" type="xs:string" />
+        <!-- varchar(255) )-in this format devided by ","- paypal,eway_merchant_xml -->
+        <xs:element name="include_online_payment" type="xs:string" />
+        <!-- varchar(25) -->
+        <xs:element name="currency_position" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

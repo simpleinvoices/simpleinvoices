@@ -17,7 +17,9 @@ php_value memory_limit 64M
 
 RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^/?([a-zA-Z0-9_]+)-([a-zA-Z0-9_]+)-([a-zA-Z0-9_]+)?$ index.php?module=$1&view=$2&id=$3
+#RewriteRule ^/?([a-zA-Z0-9_]+)-([a-zA-Z0-9_]+)-([a-zA-Z0-9_]+)?$ index.php?module=$1&view=$2&id=$3 - changed by MariaPetrova for more convinient path to web services
+RewriteRule ^/?([a-zA-Z0-9_]+)/([a-zA-Z0-9_]+)/([a-zA-Z0-9_]+)?$ index.php?module=$1&view=$2&id=$3
 
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^/?([a-zA-Z0-9_]+)-([a-zA-Z0-9_]+)$ index.php?module=$1&view=$2 [L]
+#RewriteRule ^/?([a-zA-Z0-9_]+)-([a-zA-Z0-9_]+)$ index.php?module=$1&view=$2 [L] - changed by MariaPetrova for more convinient path to web services
+RewriteRule ^/?([a-zA-Z0-9_]+)/([a-zA-Z0-9_]+)$ index.php?module=$1&view=$2 [L]

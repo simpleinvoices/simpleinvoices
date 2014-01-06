@@ -26,7 +26,12 @@ $invoiceType = getInvoiceType($invoice['type_id']);
 
 #create PDF name
 $spc2us_pref = str_replace(" ", "_", $invoice['index_name']);
-$pdf_file_name = $spc2us_pref  . '.pdf';
+//Add by MariaPetrova - to be equal the file name of export and mail
+require_once('./library/pdf/destination._interface.class.php');
+$destination = new Destination();
+$pdf_file_name = $destination->filename_escape($spc2us_pref)  . '.pdf'; //$pdf_file_name = $spc2us_pref  . '.pdf';
+//end
+
       
 if ($_GET['stage'] == 2 ) {
 

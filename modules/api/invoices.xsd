@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The way to call the service -->
+<!-- authentication - send in header X-API-KEY coded in sha1 -->
+<!-- GET/invoices Returns all invoices : http:\\simpleinvoices.org/api/invoices -->
+<!-- GET/invoices/{invoiceId} Returns a single invoice identified by invoiceId : http:\\simpleinvoices.org/api/invoices/1 -->
+<!-- POST/invoices Creates a new invoice : http:\\simpleinvoices.org/api/invoices -->
+<!-- PUT/invoices/{invoiceId} Updates an existing invoice : http:\\simpleinvoices.org/api/invoices/1 -->
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="invoice">
+    <xs:complexType>
+      <xs:sequence>
+	    <!-- int(10) -->
+	    <xs:element minOccurs="0" name="id" type="xs:unsignedInt" />
+		<!-- int(11) -->
+        <xs:element name="index_id" type="xs:unsignedInt" />
+		<!-- int(10) inserted/updated with the default biller-->
+        <xs:element minOccurs="0" name="biller_id" type="xs:unsignedInt" />
+		<!-- int(10) -->
+        <xs:element name="customer_id" type="xs:unsignedInt" />
+		<!-- int(10) -->
+        <xs:element name="type_id" type="xs:unsignedInt" />
+		<!-- int(10) -->
+        <xs:element name="preference_id" type="xs:unsignedInt" />
+		<!-- datetime in format YYYY-MM-DD-->
+        <xs:element name="date" type="xs:date" />
+		<!-- text-->
+        <xs:element name="note" type="xs:string" />
+		<!-- varchar(50)-->
+        <xs:element name="custom_field1" type="xs:string" />
+		<!-- varchar(50)-->
+        <xs:element name="custom_field2" type="xs:string" />
+		<!-- varchar(50)-->
+        <xs:element name="custom_field3" type="xs:string" />
+		<!-- varchar(50)-->
+        <xs:element name="custom_field4" type="xs:string" />
+        <xs:element name="invoice_items">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="invoice_item">
+                <xs:complexType>
+                  <xs:sequence>
+				    <!-- int(10) necessary when need to update the item-->
+                    <xs:element minOccurs="0" name="invoice_item_id" type="xs:unsignedInt" />
+					<!-- int(10) -->
+					<xs:element minOccurs="0" name="invoice_id" type="xs:unsignedInt" />
+					<!-- decimal(25,6) only “.” as dec point -->
+                    <xs:element name="quantity" type="xs:decimal" />
+					<!-- int(10) -->
+                    <xs:element name="product_id" type="xs:unsignedInt" />
+					<!-- decimal(25,6) only “.” as dec point -->
+                    <xs:element name="unit_price" type="xs:decimal" />
+					<!-- decimal(25,6) only “.” as dec point -->
+                    <xs:element minOccurs="0" name="tax_amount" type="xs:decimal" />
+					<!-- decimal(25,6) only “.” as dec point -->
+                    <xs:element minOccurs="0" name="gross_total" type="xs:decimal" />
+					<!-- decimal(25,6) only “.” as dec point -->
+                    <xs:element minOccurs="0" name="total" type="xs:decimal" />
+					<!-- text-->
+					<xs:element name="description" type="xs:string" />
+					<!-- int(11) can be more than one -->
+                    <xs:element maxOccurs="unbounded" name="tax_id" type="xs:unsignedInt" />
+					<!--necessary only when need to delete the item - accepts only 1(true) -->
+					<xs:element minOccurs="0" name="delete" type="xs:unsignedByte" />
+                    <xs:element name="attributes">
+                      <xs:complexType>
+                        <xs:sequence minOccurs="0">
+                          <xs:element maxOccurs="unbounded" name="attribute">
+                            <xs:complexType>
+                              <xs:sequence>
+							    <!-- int(11) -->
+                                <xs:element name="prod_attribute_id" type="xs:unsignedInt" />
+								<!-- int(11) -->
+                                <xs:element name="prod_value_id" type="xs:unsignedInt" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -76,13 +76,15 @@ if ($_POST['action'] == "insert" ) {
 	}
 
 	if($type == total_invoice && $saved) {
+	    
+		$domain_id = domain_id::get(''); //add by MariaPetrova to successfully update the products
 		$logger->log('Total style invoice updated, product ID: '.$_POST['products0'], Zend_Log::INFO);
 		$sql = "UPDATE ".TB_PREFIX."products SET unit_price = :price, description = :description WHERE id = :id AND domain_id = :domain_id";
 		dbQuery($sql,
 			':price', $_POST['unit_price'],
 			':description', $_POST['description0'],
 			':id', $_POST['products0'],
-			':domain_id', $auth_session->domain_id
+			':domain_id', $domain_id //$auth_session->domain_id - changed by Maria to successfully update the products
 			);
 	}
 

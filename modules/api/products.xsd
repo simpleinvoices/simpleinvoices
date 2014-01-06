@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The way to call the service -->
+<!-- authentication - send in header X-API-KEY coded in sha1 -->
+<!-- GET/products Returns all products : http:\\simpleinvoices.org/api/products -->
+<!-- GET/products/{productId} Returns a single product identified by productId : http:\\simpleinvoices.org/api/products/1 -->
+<!-- POST/products Creates a new product : http:\\simpleinvoices.org/api/products -->
+<!-- PUT/products/{productId} Updates an existing product : http:\\simpleinvoices.org/api/products/1 -->
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="product">
+    <xs:complexType>
+      <xs:sequence>
+		<!-- int(11) -->
+	    <xs:element minOccurs="0" name="id" type="xs:unsignedInt" />
+        <!-- text -->
+        <xs:element name="description" type="xs:string" />
+        <!-- decimal(25,6) only '.' as dec point-->
+        <xs:element name="unit_price" type="xs:decimal" />
+        <!-- int(11)-->
+        <xs:element name="default_tax_id" type="xs:unsignedInt" />
+        <!-- int(11)-->
+        <xs:element minOccurs="0" name="default_tax_id_2" type="xs:unsignedInt" />
+        <!-- decimal(25,6) only '.' as dec point-->
+        <xs:element minOccurs="0" name="cost" type="xs:decimal" />
+        <!-- int(11)-->
+        <xs:element minOccurs="0" name="reorder_level" type="xs:unsignedInt" />
+        <!-- text -->
+        <xs:element name="notes" type="xs:string" />
+        <!-- varchar(255) -->
+        <xs:element name="custom_field1" type="xs:string" />
+        <!-- varchar(255) -->
+        <xs:element name="custom_field2" type="xs:string" />
+        <!-- varchar(255) -->
+        <xs:element name="custom_field3" type="xs:string" />
+        <!-- varchar(255) -->
+        <xs:element name="custom_field4" type="xs:string" />
+        <!-- accepts only 0(disabled) or 1(enabled) -->
+        <xs:element name="enabled" type="xs:unsignedByte" />
+        <!-- accepts only 0(disabled) or 1(enabled) -->
+        <xs:element name="visible" type="xs:unsignedByte" />
+        <!-- int(11)-->
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="attribute_id" type="xs:unsignedInt" />
+        <!-- accepts only 0(false) or 1(true) -->
+        <xs:element name="notes_as_description" type="xs:unsignedByte" />
+        <!-- accepts only 0(false) or 1(true) -->
+        <xs:element name="show_description" type="xs:unsignedByte" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

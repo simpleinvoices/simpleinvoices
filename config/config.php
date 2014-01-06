@@ -53,6 +53,10 @@ phpSettings.error_log   			= tmp/log/php.log
 ; Explicity confirm delete of line items from invoices? (yes/no)
 confirm.deleteLineItem				= no
 
+; Add by Maria -start
+xapikey                             = webServices_beta7
+; Add by Maria -end
+
 ; Staging site configuration data inherits from production and
 ; overrides values as necessary
 [staging : production]

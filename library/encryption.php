@@ -251,5 +251,5 @@ class encryption
 // **************************************************************************** 
 } // end encryption 
 // **************************************************************************** 
+//delete "? >" - changed by MariaPetrova in order to return code 201 for webservices
 
-?> 

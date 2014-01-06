@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- The way to call the service -->
+<!-- authentication - send in header X-API-KEY coded in sha1 -->
+<!-- GET/customers Returns all customers : http:\\simpleinvoices.org/api/customers -->
+<!-- GET/customers/{customerId} Returns a single customer identified by customerId : http:\\simpleinvoices.org/api/customers/1 -->
+<!-- POST/customers Creates a new customer : http:\\simpleinvoices.org/api/customers -->
+<!-- PUT/customers/{customerId} Updates an existing customer : http:\\simpleinvoices.org/api/customers/1 -->
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="customer">
+    <xs:complexType>
+      <xs:sequence>
+	    <!-- int(10) -->
+	    <xs:element minOccurs="0" name="id" type="xs:unsignedInt" />
+	    <!-- varchar(255) -->
+        <xs:element name="attention" type="xs:string" />
+		<!-- varchar(255) -->
+        <xs:element name="name" type="xs:string" />
+		<!-- varchar(255) -->
+        <xs:element name="street_address" type="xs:string" />
+		<!-- varchar(255) -->
+        <xs:element name="street_address2" type="xs:string" />
+		<!-- varchar(255) -->
+        <xs:element name="city" type="xs:string" />
+		<!-- varchar(255) -->
+        <xs:element name="state" type="xs:string" />
+		<!-- varchar(255) -->
+        <xs:element name="zip_code" type="xs:string" />
+		<!-- varchar(255) -->
+        <xs:element name="country" type="xs:string" />
+		<!-- varchar(255) -->
+        <xs:element name="phone" type="xs:string" />
+		<!-- varchar(255) -->
+        <xs:element name="mobile_phone" type="xs:string" />
+		<!-- varchar(255) -->
+        <xs:element name="fax" type="xs:string" />
+		<!-- varchar(255) -->
+        <xs:element name="email" type="xs:string" />
+		<!-- varchar(255) -->
+        <xs:element name="credit_card_holder_name" type="xs:string" />
+		<!-- varchar(255) -->
+        <xs:element name="credit_card_number" type="xs:string" />
+		<!-- 2 digits -->
+        <xs:element name="credit_card_expiry_month" type="xs:unsignedByte" />
+		<!-- 4 digits -->
+        <xs:element name="credit_card_expiry_year" type="xs:unsignedShort" />
+		<!-- varchar(255) -->
+        <xs:element name="notes" type="xs:string" />
+		<!-- varchar(255) -->
+        <xs:element name="custom_field1" type="xs:string" />
+		<!-- varchar(255) -->
+        <xs:element name="custom_field2" type="xs:string" />
+		<!-- varchar(255) -->
+        <xs:element name="custom_field3" type="xs:string" />
+		<!-- varchar(255) -->
+        <xs:element name="custom_field4" type="xs:string" />
+		<!-- decimal(25,6) only '.' as dec point-->
+		<xs:element minOccurs="0" name="total" type="xs:decimal" />
+		<!-- decimal(25,6) only '.' as dec point-->
+		<xs:element minOccurs="0" name="paid" type="xs:decimal" />
+		<!-- decimal(25,6) only '.' as dec point-->
+		<xs:element minOccurs="0" name="owing" type="xs:decimal" />
+		<!-- accepts only 0(disabled) or 1(enabled) -->
+        <xs:element name="enabled" type="xs:unsignedByte" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -5,8 +5,8 @@ class Destination {
   function Destination($filename) {
     $this->set_filename($filename);
   }
-
-  function filename_escape($filename) { return preg_replace("/[^a-z0-9-]/i","_",$filename); }
+  //return preg_replace("/[^a-z0-9-]/i","_",$filename); - changed by MariaPetrova to capture cyrillic
+  function filename_escape($filename) { return preg_replace("/[^\w0-9-]/u","_",$filename); }
 
   function get_filename() { return empty($this->filename) ? OUTPUT_DEFAULT_NAME : $this->filename; }
 
