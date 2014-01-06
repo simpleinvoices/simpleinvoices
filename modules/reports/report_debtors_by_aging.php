@@ -36,6 +36,8 @@
 	
           $sql = "SELECT
 			iv.id, 
+			iv.index_id,
+			pr.pref_inv_wording,
 			b.name AS biller, 
 			c.name AS customer, 
 --			COUNT(ii.invoice_id) AS items,
@@ -76,7 +78,7 @@
 		";
     }
 
-    $invoice_results = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+    $invoice_results = dbQuery($sql, ':domain_id', $auth_session->domain_id);
 
     $total_owed = 0;
     $periods = array();

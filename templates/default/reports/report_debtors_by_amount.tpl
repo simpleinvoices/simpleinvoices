@@ -4,10 +4,11 @@
 <table class="si_report_table">
 	<thead>
 		<tr>
-			<th colspan="6">{$LANG.debtors_by_amount_owed}</th>
+			<th colspan="7">{$LANG.debtors_by_amount_owed}</th>
 		</tr>
 		<tr>
 			<th>{$LANG.invoice_id}</th>
+			<th>{$LANG.invoice}</th>
 			<th>{$LANG.biller}</th>
 			<th>{$LANG.customer}</th>
 			<th>{$LANG.total}</th>
@@ -17,7 +18,7 @@
 	</thead>
 	<tfoot>
 		<tr>
-			<td align="RIGHT" colspan="5" class="PAGE_LAYER">{$LANG.total_owed}</td>
+			<td align="RIGHT" colspan="6" class="PAGE_LAYER">{$LANG.total_owed}</td>
 			<td align="LEFT" class="PAGE_LAYER"><span class="BOLD">{$total_owed|siLocal_number:'2'|default:'-'}</span></td>
 		</tr>
 	</tfoot>
@@ -25,6 +26,7 @@
 	{foreach item=invoice from=$data}
 		<tr>
 			<td>{$invoice.id|htmlsafe}</td>
+			<td>{$invoice.pref_inv_wording|htmlsafe} {$invoice.index_id|htmlsafe}</td>
 			<td>{$invoice.biller|htmlsafe}</td>
 			<td>{$invoice.customer|htmlsafe}</td>
 			<td>{$invoice.inv_total|siLocal_number:'2'|default:'0'}</td>

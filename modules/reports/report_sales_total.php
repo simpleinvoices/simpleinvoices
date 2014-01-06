@@ -2,7 +2,7 @@
     $sql = "SELECT 
 			  pr.index_group AS `group` 
 			, GROUP_CONCAT(DISTINCT pr.pref_description SEPARATOR ',') AS template 
-			, COUNT(*) AS `count`
+			, COUNT(DISTINCT ii.invoice_id) AS `count`
 			, SUM(ii.total) AS sum_total
     FROM 
         ".TB_PREFIX."invoice_items ii
@@ -15,7 +15,7 @@
 		pr.index_group
     ";
 
-    $sth = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+    $sth = dbQuery($sql, ':domain_id', $auth_session->domain_id);
 
     $grand_total_sales = 0;
 	$total_sales = Array();

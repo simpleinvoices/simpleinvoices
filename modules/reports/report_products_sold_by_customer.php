@@ -7,12 +7,14 @@
 		INNER JOIN ".TB_PREFIX."invoices iv      ON (c.id  = iv.customer_id AND c.domain_id  = iv.domain_id) 
         INNER JOIN ".TB_PREFIX."invoice_items ii ON (iv.id = ii.invoice_id  AND iv.domain_id = ii.domain_id) 
         INNER JOIN ".TB_PREFIX."products p       ON (p.id  = ii.product_id  AND p.domain_id  = ii.domain_id)
+        INNER JOIN ".TB_PREFIX."preferences pr   ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id)
       WHERE p.visible 
+	    AND pr.status = 1
 	    AND c.domain_id = :domain_id
       GROUP BY p.description, c.name
       ORDER BY c.name";
 
-   $product_result = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+   $product_result = dbQuery($sql, ':domain_id', $auth_session->domain_id);
 
    $customers = array();
 
