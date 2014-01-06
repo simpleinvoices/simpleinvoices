@@ -148,17 +148,21 @@
 			</thead>
 			<tbody>
 			{foreach from=$invoices item=invoice}
+{if $invoice.status > 0}
+	{if $invoice.owing != 0}
 			    <tr class="index_table">
 				<td class="first">
 			<!--6 Payment --><a title="{$LANG.process_payment_for} {$invoice.preference} {$invoice.id}"  href='index.php?module=payments&view=process&id={$invoice.id}&op=pay_selected_invoice'><img src='images/common/money_dollar.png' class='action' /></a>
 				<a href="index.php?module=invoices&amp;view=quick_view&id={$invoice.id|urlencode}"><img src='images/common/view.png' class='action' /></a>
 				</td>
-				<td ><a href="index.php?module=invoices&amp;view=quick_view&id={$invoice.id|urlencode}">{$invoice.index_id|htmlsafe}</a></td>
+				<td ><a href="index.php?module=invoices&amp;view=quick_view&id={$invoice.id|urlencode}">{$invoice.pref_inv_wording|htmlsafe} {$invoice.index_id|htmlsafe}</a></td>
 				<td>{$invoice.date|htmlsafe}</td>
 				<td>{$invoice.total|number_format:2}</td>
 				<td>{$invoice.paid|number_format:2}</td>
 				<td>{$invoice.owing|number_format:2}</td>
 			    </tr>
+	{/if}
+{/if}
 			{/foreach}
 			</tbody>
 		    </table>
@@ -179,11 +183,19 @@
 			<tbody>
 			{foreach from=$invoices item=invoice}
 			    <tr class="index_table">
-				<td class="first"><a href="index.php?module=invoices&amp;view=quick_view&id={$invoice.id|urlencode}">{$invoice.index_id|htmlsafe}</a></td>
+				<td class="first"><a href="index.php?module=invoices&amp;view=quick_view&id={$invoice.id|urlencode}">{$invoice.pref_inv_wording|htmlsafe} {$invoice.index_id|htmlsafe}</a></td>
 				<td>{$invoice.date|htmlsafe}</td>
 				<td>{$invoice.total|number_format:2}</td>
+{if $invoice.status > 0}
 				<td>{$invoice.paid|number_format:2}</td>
+	{if $invoice.owing != 0}
 				<td>{$invoice.owing|number_format:2}</td>
+	{else}
+				<td>&nbsp;</td>
+	{/if}
+{else}
+				<td colspan="2">&nbsp;</td>
+{/if}
 			    </tr>
 			{/foreach}
 			</tbody>

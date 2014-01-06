@@ -122,10 +122,10 @@
 				<th>{$LANG.total}:</th>	<td>{$statement.total|siLocal_number}</td>
 			</tr>
 			<tr>
-				<th>{$LANG.owing}:</th>	<td>{$statement.owing|siLocal_number}</td>
+				<th>{$LANG.paid}:</th>	<td>{$statement.paid|siLocal_number}</td>
 			</tr>
 			<tr>
-				<th>{$LANG.paid}:</th>	<td>{$statement.paid|siLocal_number}</td>
+				<th>{$LANG.owing}:</th>	<td>{$statement.owing|siLocal_number}</td>
 			</tr>
 		</table>
 	</div>
@@ -169,6 +169,7 @@
 				<td>
 					{$invoices[invoice].customer|htmlsafe}
 				</td>
+{if $invoices[invoice].status > 0}
 				<td class="si_right">
 					{$invoices[invoice].invoice_total|siLocal_number}
 				</td>
@@ -178,6 +179,12 @@
 				<td class="si_right">
 					{$invoices[invoice].owing|siLocal_number}
 				</td>
+{else}
+				<td class="si_right">
+					<i>{$invoices[invoice].invoice_total|siLocal_number}</i>
+				</td>
+				<td colspan="2">&nbsp;</td>
+{/if}
 			</tr>
 		 {/section}
 			</tbody>

@@ -72,10 +72,11 @@ if (isset($_POST['submit']))
 	$invoices = $invoice_all->fetchAll();
 
 	foreach ($invoices as $i => $row) {
-		$statement['total'] = $statement['total'] + $row['invoice_total'];
-		$statement['owing'] = $statement['owing'] + $row['owing'] ;
-		$statement['paid'] = $statement['paid'] + $row['INV_PAID'];
-		
+		if ($row['status'] > 0) {
+			$statement['total'] = $statement['total'] + $row['invoice_total'];
+			$statement['owing'] = $statement['owing'] + $row['owing'] ;
+			$statement['paid']  = $statement['paid']  + $row['INV_PAID'];
+		}
 	}
 }
 

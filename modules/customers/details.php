@@ -28,10 +28,10 @@ $customer['wording_for_enabled'] = $customer['enabled']==1?$LANG['enabled']:$LAN
 
 //TODO: Perhaps possible a bit nicer?
 $stuff = null;
-$stuff['total'] = calc_customer_total($customer['id']);
+$stuff['total'] = calc_customer_total($customer['id'],domain_id::get(),true);
 
 #amount paid calc - start
-$stuff['paid'] = calc_customer_paid($customer['id']);;
+$stuff['paid'] = calc_customer_paid($customer['id'],domain_id::get(),true);;
 #amount paid calc - end
 
 #amount owing calc - start
@@ -52,6 +52,7 @@ $page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
 //$sql = "SELECT * FROM ".TB_PREFIX."invoices LIMIT $start, $limit";
 $invoice_owing = new invoice();
 $invoice_owing->sort=$sort;
+$invoice_owing->having_and="real";
 $invoice_owing->query=$_REQUEST['query'];
 $invoice_owing->qtype=$_REQUEST['qtype'];
 

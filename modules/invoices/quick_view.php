@@ -65,8 +65,8 @@ $attributes = $sth->fetchAll();
 $smarty -> assign("attributes", $attributes);
 //Customer accounts sections
 $customerAccount = null;
-$customerAccount['total'] = calc_customer_total($customer['id']);
-$customerAccount['paid'] = calc_customer_paid($customer['id']);
+$customerAccount['total'] = calc_customer_total($customer['id'],'',true);
+$customerAccount['paid'] = calc_customer_paid($customer['id'],'',true);
 $customerAccount['owing'] = $customerAccount['total'] - $customerAccount['paid'];
 
 $smarty -> assign('pageActive', 'invoice');

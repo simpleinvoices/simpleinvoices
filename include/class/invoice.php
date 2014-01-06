@@ -292,9 +292,11 @@ class invoice {
                 break;
             case "money_owed":
                 $sql_having = "HAVING ( owing > 0 ) ";
+				$having_and = "real";
                 break;
             case "paid":
                 $sql_having = "HAVING ( owing ='' )  OR ( owing < 0 )";
+				$having_and = "real";
                 break;
             case "draft":
                 $sql_having = "HAVING ( status = 0 )";
@@ -310,10 +312,10 @@ class invoice {
                 $sql_having .= "AND ( date between '$this->start_date' and '$this->end_date' )";
                 break;
             case "money_owed":
-                $sql_having .= "AND ( owing > 0 ) ";
+                $sql_having .= "AND ( owing > 0 ) AND ( status = 1 ) ";
                 break;
             case "paid":
-                $sql_having .= "AND ( owing ='' ) OR ( owing < 0 )";
+                $sql_having .= "AND (( owing ='' ) OR ( owing < 0 )) AND ( status = 1 ) ";
                 break;
             case "draft":
                 $sql_having .= "AND ( status = 0 )";
@@ -344,7 +346,7 @@ class invoice {
                       ELSE '90+'
                      END) AS Aging,
                      iv.type_id As type_id,
-                     p.pref_description AS Type,
+                     p.pref_description AS type,
                      p.pref_inv_wording AS invoice_wording
                 FROM
                      " . TB_PREFIX . "invoices iv
@@ -378,7 +380,7 @@ class invoice {
                        (SELECT invoice_total - INV_PAID) As owing,
                        ";
 
-              //only run aging for real query
+              //only run aging for real full query ($type is empty for full query or count for count query)
                if($type == '')
                {
                     $sql .="
@@ -391,8 +393,8 @@ class invoice {
                                                       ELSE '90+'  END)) AS aging,";
                } else {
                    $sql .="
-                            (SELECT '') as Age,
-                            (SELECT '') as aging,
+                            '' as Age,
+                            '' as aging,
                             ";
                }
                $sql .="iv.type_id As type_id,
@@ -403,11 +405,11 @@ class invoice {
                                LEFT JOIN " . TB_PREFIX . "biller b       ON (b.id = iv.biller_id           AND b.domain_id  = iv.domain_id)
                                LEFT JOIN " . TB_PREFIX . "customers c    ON (c.id = iv.customer_id         AND c.domain_id  = iv.domain_id)
                                LEFT JOIN " . TB_PREFIX . "preferences pf ON (pf.pref_id = iv.preference_id AND pf.domain_id = iv.domain_id)
-                WHERE iv.domain_id = :domain_id 
+                WHERE iv.domain_id = :domain_id
 					$where
                 GROUP BY
                     iv.id
-                $sql_having
+				$sql_having
                 ORDER BY
 					$sort $dir
                 $limit";

@@ -71,8 +71,13 @@ $xml ="";
 		$xml .= "<cell><![CDATA[".$row['customer']."]]></cell>";
 		$xml .= "<cell><![CDATA[".siLocal::date($row['date'])."]]></cell>";
 		$xml .= "<cell><![CDATA[".siLocal::number($row['invoice_total'])."]]></cell>";
-		$xml .= "<cell><![CDATA[".siLocal::number($row['owing'])."]]></cell>";
-		$xml .= "<cell><![CDATA[".$row['aging']."]]></cell>";
+		if ($row['status']) {
+			$xml .= "<cell><![CDATA[".siLocal::number($row['owing'])."]]></cell>";
+			$xml .= "<cell><![CDATA[".$row['aging']."]]></cell>";
+		} else {
+			$xml .= "<cell><![CDATA[&nbsp;]]></cell>";
+			$xml .= "<cell><![CDATA[&nbsp;]]></cell>";
+		}
 		$xml .= "<cell><![CDATA[".$row['preference']."]]></cell>";				
 		$xml .= "</row>";		
 	}
