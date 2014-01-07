@@ -83,10 +83,9 @@
 <div id="tabs_customer">
 	<ul class="anchors">
 		<li><a href="#section-1" target="_top">{$LANG.summary_of_accounts}</a></li>
-		<li><a href="#section-2" target="_top">{$LANG.credit_card_details}</a></li>
-		<li><a href="#section-3" target="_top">{$LANG.unpaid_invoices}</a></li>
-		<li><a href="#section-4" target="_top">{$LANG.customer} {$LANG.invoice_listings}</a></li>
-		<li><a href="#section-5" target="_top">{$LANG.notes}</a></li>
+		<li><a href="#section-2" target="_top">{$LANG.unpaid_invoices}</a></li>
+		<li><a href="#section-3" target="_top">{$LANG.customer} {$LANG.invoice_listings}</a></li>
+		<li><a href="#section-4" target="_top">{$LANG.notes}</a></li>
 	</ul>
 	<div id="section-1" class="fragment">
 		<div class="si_cust_account">
@@ -107,31 +106,8 @@
 		</div>
 	</div>
 
-	<div id="section-2" class="fragment">
-
-		<div class="si_cust_card">
-		    <table>
-			<tr>
-			    <th>{$LANG.credit_card_holder_name}</th>
-			    <td>{$customer.credit_card_holder_name|htmlsafe}</td>
-			</tr>
-			<tr>
-			    <th>{$LANG.credit_card_number}</th>
-			    <td>{$customer.credit_card_number|regex_replace:'/^............/':"************"|htmlsafe}</td>
-			</tr>
-			<tr>
-			    <th>{$LANG.credit_card_expiry_month}</th>
-			    <td>{$customer.credit_card_expiry_month|htmlsafe}</td>
-			</tr>
-			<tr>
-			    <th>{$LANG.credit_card_expiry_year}</th>
-			    <td>{$customer.credit_card_expiry_year|htmlsafe}</td>
-			</tr>
-		    </table>
-		</div>
-        </div>
 	
-	<div id="section-3" class="fragment">
+	<div id="section-2" class="fragment">
 		<div class="si_cust_invoices">
 		    <table>
 			<thead>
@@ -168,7 +144,7 @@
 		    </table>
 		</div>
 	</div>
-	<div id="section-4" class="fragment">
+	<div id="section-3" class="fragment">
 		<div class="si_cust_invoices">
 		    <table>
 			<thead>
@@ -202,7 +178,7 @@
 		    </table>
 		</div>
 	</div>
-	<div id="section-5" class="fragment">
+	<div id="section-4" class="fragment">
 
 		<div class="si_cust_notes">
 		    {$customer.notes|outhtml}
@@ -288,48 +264,6 @@
 			<td>
 				<input type="text" name="email" value="{$customer.email|htmlsafe}" size="50" /></td
 		></tr>
-		<tr>
-			<th>{$LANG.credit_card_holder_name}</th>
-			<td>
-				<input
-					type="text" name="credit_card_holder_name"
-					value="{$customer.credit_card_holder_name|htmlsafe}" size="25"
-				 />
-			</td>
-		</tr>
-		<tr>
-			<th>{$LANG.credit_card_number}</th>
-			<td>
-						{$LANG.credit_card_number_encrypted}
-			</td>
-		</tr>
-		<tr>
-			<th>{$LANG.credit_card_number_new}</th>
-			<td>
-				<input
-					type="text" name="credit_card_number_new"
-					value="{$customer.credit_card_holder_name_new|htmlsafe}" size="25"
-				 />
-			</td>
-		</tr>
-		<tr>
-			<th>{$LANG.credit_card_expiry_month}</th>
-			<td>
-				<input
-					type="text" name="credit_card_expiry_month"
-					value="{$customer.credit_card_expiry_month|htmlsafe}" size="5"
-				 />
-			</td>
-		</tr>
-		<tr>
-			<th>{$LANG.credit_card_expiry_year}</th>
-			<td>
-				<input
-					type="text" name="credit_card_expiry_year"
-					value="{$customer.credit_card_expiry_year|htmlsafe}" size="5"
-				 />
-			</td>
-		</tr>
 		<tr>
 			<th>{$customFieldLabel.customer_cf1|htmlsafe}
 				<a

@@ -102,42 +102,6 @@
 		<td><input type="text" name="email" value="{$smarty.post.email|htmlsafe}" size="25" /></td>
 	</tr>
 	<tr>
-		<th>{$LANG.credit_card_holder_name}</th>
-		<td>
-			<input
-				type="text" name="credit_card_holder_name"
-			 	value="{$smarty.post.credit_card_holder_name|htmlsafe}" size="25"
-			 />
-		</td>
-	</tr>
-	<tr>
-		<th>{$LANG.credit_card_number}</th>
-		<td>
-			<input
-				type="text" name="credit_card_number"
-			 	value="{$smarty.post.credit_card_number|htmlsafe}" size="25"
-			 />
-		</td>
-	</tr>
-	<tr>
-		<th>{$LANG.credit_card_expiry_month}</th>
-		<td>
-			<input
-				type="text" name="credit_card_expiry_month"
-			 	value="{$smarty.post.credit_card_expiry_month|htmlsafe}" size="5"
-			 />
-		</td>
-	</tr>
-	<tr>
-		<th>{$LANG.credit_card_expiry_year}</th>
-		<td>
-			<input
-				type="text" name="credit_card_expiry_year"
-			 	value="{$smarty.post.credit_card_expiry_year|htmlsafe}" size="5"
-			 />
-		</td>
-	</tr>
-	<tr>
 		<th>{$customFieldLabel.customer_cf1|htmlsafe}
  		<a
 			class="cluetip"
