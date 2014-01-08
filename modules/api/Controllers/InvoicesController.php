@@ -278,7 +278,7 @@ class Invoices{
 		  $_POST['delete'][$i]=(string)$invoiceItem->delete;
 		  if ($_POST['delete'][$i]=="1")
 		  {
-		     $_POST['delete'][$i]=="yes";
+		     $_POST['delete'][$i]="yes";
 		     $j++; 
 		  }
 		
