@@ -10,7 +10,7 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 */
 
 
-			var columns = 6;
+			var columns = 7;
 			var padding = 12;
 			var grid_width = $('.col').width();
 			
@@ -24,12 +24,13 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 			url: 'index.php?module=customers&view=xml',
 			dataType: 'xml',
 			colModel : [
-				{display: '{/literal}{$LANG.actions}{literal}', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},
+				{display: '{/literal}{$LANG.actions}{literal}', name : 'actions', width : 7 * percentage_width, sortable : false, align: 'center'},
+				{display: '{/literal}{$LANG.id}{literal}', name : 'CID', width : 7 * percentage_width, sortable : true, align: 'right'},
 				{display: '{/literal}{$LANG.name}{literal}', name : 'name', width : 50 * percentage_width, sortable : true, align: 'left'},
 				{display: '{/literal}{$LANG.total}{literal}', name : 'customer_total', width : 10 * percentage_width, sortable : true, align: 'right'},
 				{display: '{/literal}{$LANG.paid}{literal}', name : 'paid', width : 10 * percentage_width, sortable : true, align: 'right'},
 				{display: '{/literal}{$LANG.owing}{literal}', name : 'owing', width : 10 * percentage_width, sortable : true, align: 'right'},
-				{display: '{/literal}{$LANG.enabled}{literal}', name : 'enabled', width : 10 * percentage_width, sortable : true, align: 'center'}
+				{display: '{/literal}{$LANG.enabled}{literal}', name : 'enabled', width : 6 * percentage_width, sortable : true, align: 'center'}
 				
 				],
 				
