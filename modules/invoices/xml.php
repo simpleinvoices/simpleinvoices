@@ -12,8 +12,10 @@ $page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
 //$sql = "SELECT * FROM ".TB_PREFIX."invoices LIMIT $start, $limit";
 $invoice = new invoice();
 $invoice->sort=$sort;
-$invoice->query=$_REQUEST['query'];
-$invoice->qtype=$_REQUEST['qtype'];
+
+$invoice->query=isset($_REQUEST['query']) ? $_REQUEST['query'] : null;
+$invoice->qtype=isset($_REQUEST['qtype']) ? $_REQUEST['qtype'] : null;
+
 $large_dataset = getDefaultLargeDataset();
 if($large_dataset == $LANG['enabled'])
 {

@@ -35,8 +35,8 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 				
 
 			searchitems : [
-				{display: '{/literal}{$LANG.id}{literal}', name : 'id'},
-				{display: '{/literal}{$LANG.name}{literal}', name : 'name', isdefault: true}
+				{display: '{/literal}{$LANG.id}{literal}', name : 'c.id'},
+				{display: '{/literal}{$LANG.name}{literal}', name : 'c.name', isdefault: true}
 				],
 			sortname: 'name',
 			sortorder: 'asc',

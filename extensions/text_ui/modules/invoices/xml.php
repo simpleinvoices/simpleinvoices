@@ -8,6 +8,7 @@ $rp = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
 $page = (isset($_GET['page'])) ? $_GET['page'] : "1" ;
 
 $domain_id = domain_id::get();
+$valid_search_fields = array('iv.index_id', 'b.name', 'c.name');
 
 //SC: Safety checking values that will be directly subbed in
 if (intval($start) != $start) {
@@ -25,11 +26,17 @@ $start = (($page-1) * $rp);
 $limit = "LIMIT $start, $rp";
 /*SQL Limit - end*/
 
-$query = $_POST['query'];
-$qtype = $_POST['qtype'];
-
 $where = "";
-if ($query) $where = " AND :qtype LIKE '%:query%' ";
+$query = isset($_POST['query']) ? $_POST['query'] : null;
+$qtype = isset($_POST['qtype']) ? $_POST['qtype'] : null;
+if (!(empty($query) || empty($qtype))) {
+	if ( in_array($qtype, $valid_search_fields) ) {
+		$where .= " AND $qtype LIKE :query ";
+	} else {
+		$this->query = $qtype = null;
+		$this->qtype = $query = null;
+	}
+}
 
 
 /*Check that the sort field is OK*/
@@ -110,10 +117,10 @@ if ($db_server == 'pgsql') {
 		$limit";
 }
 
-if ($query) {
-	$sth = dbQuery($sql, ':domain_id', $domain_id, ':query', $_POST['query'], ':qtype', $_POST['qtype']);
-} else {
+if (empty($query)) {
 	$sth = dbQuery($sql, ':domain_id', $domain_id);
+} else {
+	$sth = dbQuery($sql, ':domain_id', $domain_id, ':query', "%$query%");
 }
 $invoices = $sth->fetchAll(PDO::FETCH_ASSOC);
 

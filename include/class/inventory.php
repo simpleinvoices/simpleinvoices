@@ -74,6 +74,7 @@ class inventory {
     public function select_all($type='', $dir='DESC', $rp='25', $page='1')
 	{
 		global $LANG;
+		$valid_search_fields = array('p.description', 'iv.date', 'iv.quantity', 'iv.cost', 'iv.quantity * iv.cost');
 
 		/*SQL Limit - start*/
 		$start = (($page-1) * $rp);
@@ -81,12 +82,17 @@ class inventory {
 		/*SQL Limit - end*/
 
 		/*SQL where - start*/
-		$where = '';
-
-		$query = (isset($_POST['query'])) ? $_POST['query'] : "" ;
-		$qtype = (isset($_POST['qtype'])) ? $_POST['qtype'] : "" ;
-
-		if (isset($_POST['query'])) $where .= "  AND :qtype LIKE '%:query%' ";
+		$where = "";
+		$query = isset($_POST['query']) ? $_POST['query'] : null;
+		$qtype = isset($_POST['qtype']) ? $_POST['qtype'] : null;
+		if ( ! (empty($qtype) || empty($query)) ) {
+			if ( in_array($qtype, $valid_search_fields) ) {
+				$where = " AND $qtype LIKE :query ";
+			} else {
+				$qtype = null;
+				$query = null;
+			}
+		}
 		/*SQL where - end*/
 		
 
@@ -125,10 +131,10 @@ class inventory {
 			$sort $dir
 			$limit";
 
-		if ($query) {
-			$sth = $dbQuery($sql, ':domain_id', $this->domain_id, ':query', $query, ':qtype', $qtype);
-		} else {
+		if (empty($query)) {
 			$sth = $dbQuery($sql, ':domain_id', $this->domain_id);
+		} else {
+			$sth = $dbQuery($sql, ':domain_id', $this->domain_id, ':query', "%$query%");
 		}
 
 		if($type =="count")

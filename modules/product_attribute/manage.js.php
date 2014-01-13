@@ -15,10 +15,10 @@
 			dataType: 'xml',
 			colModel : [
 				{display: '{/literal}{$LANG.actions}{literal}', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},
-				{display: '{/literal}{$LANG.id}{literal}', name : 'id', width : 10 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.id}{literal}', name : 'id', width : 10 * percentage_width, sortable : true, align: 'right'},
 				{display: '{/literal}{$LANG.name}{literal}', name : 'name', width : 40 * percentage_width, sortable : true, align: 'left'},
-				{display: '{/literal}{$LANG.enabled}{literal}', name : 'enabled', width : 20 * percentage_width, sortable : true, align: 'left'},
-				{display: '{/literal}{$LANG.visible}{literal}', name : 'visible', width : 20 * percentage_width, sortable : true, align: 'left'}
+				{display: '{/literal}{$LANG.enabled}{literal}', name : 'enabled', width : 20 * percentage_width, sortable : true, align: 'center'},
+				{display: '{/literal}{$LANG.visible}{literal}', name : 'visible', width : 20 * percentage_width, sortable : true, align: 'center'}
 				],
 
 			searchitems : [

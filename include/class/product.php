@@ -43,36 +43,43 @@ class product
     {
         global $config;
         global $LANG;
-        
+
+		$valid_search_fields = array('id', 'description', 'unit_price');
+
         //SC: Safety checking values that will be directly subbed in
         if (intval($start) != $start) {
             $start = 0;
         }
-        
+
         if (intval($rp) != $rp) {
             $rp = 25;
         }
         /*SQL Limit - start*/
         $start = (($page-1) * $rp);
         $limit = "LIMIT $start, $rp";
-    
+
         if($type =="count")
         {
             unset($limit);
         }
         /*SQL Limit - end*/	
-            
+
         if (!preg_match('/^(asc|desc)$/iD', $dir)) {
             $dir = 'DESC';
         }
-        
-        $query = $_POST['query'];
-        $qtype = $_POST['qtype'];
-        
-        $where = "";
-        if ($query) $where .= " AND :qtype LIKE '%:query%' ";
-        
-        
+
+		$where = "";
+		$query = isset($_POST['query']) ? $_POST['query'] : null;
+		$qtype = isset($_POST['qtype']) ? $_POST['qtype'] : null;
+		if ( ! (empty($qtype) || empty($query)) ) {
+			if ( in_array($qtype, $valid_search_fields) ) {
+				$where = " AND $qtype LIKE :query ";
+			} else {
+				$qtype = null;
+				$query = null;
+			}
+		}
+
         /*Check that the sort field is OK*/
         $validFields = array('id','description','unit_price', 'enabled');
 
@@ -81,13 +88,13 @@ class product
         } else {
             $sort = "id";
         }
-        
+// need to make it compute qty_out for real invoices only        
             $sql = "SELECT 
                         id, 
                         description,
                         unit_price, 
-                        (SELECT COALESCE(SUM(quantity),0) FROM ".TB_PREFIX."invoice_items WHERE product_id = ".TB_PREFIX."products.id) AS qty_out ,
-                        (SELECT COALESCE(SUM(quantity),0) FROM ".TB_PREFIX."inventory WHERE product_id = ".TB_PREFIX."products.id) AS qty_in ,
+                        (SELECT COALESCE(SUM(quantity),0) FROM ".TB_PREFIX."invoice_items WHERE product_id = ".TB_PREFIX."products.id AND domain_id = :domain_id) AS qty_out ,
+                        (SELECT COALESCE(SUM(quantity),0) FROM ".TB_PREFIX."inventory WHERE product_id = ".TB_PREFIX."products.id AND domain_id = :domain_id) AS qty_in ,
                         (SELECT COALESCE(reorder_level,0)) AS reorder_level ,
                         (SELECT qty_in - qty_out ) AS quantity,
                         (SELECT (CASE  WHEN enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled
@@ -102,10 +109,10 @@ class product
                     $limit";
         
         
-        if ($query) {
-			$result = dbQuery($sql, ':domain_id', $this->domain_id, ':query', $query, ':qtype', $qtype);
-		} else {
+        if (empty($query)) {
 			$result = dbQuery($sql, ':domain_id', $this->domain_id);
+		} else {
+			$result = dbQuery($sql, ':domain_id', $this->domain_id, ':query', "%$query%");
 		}
 
         return $result;

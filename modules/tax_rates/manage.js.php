@@ -10,7 +10,7 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 		'<!--1 Edit View --><a class="index_table" title="'+  +''+ edit_tooltip +'"  href="index.php?module=products&view=details&id={1}&action=edit"><img src="images/common/edit.png" height="16" border="-5px" padding="-4px" valign="bottom" /><!-- print --></a>',
 */
 
-			var columns = 5;
+			var columns = 6;
 			var padding = 12;
 			var grid_width = $('.col').width();
 			
@@ -25,16 +25,18 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 			dataType: 'xml',
 			colModel : [
 				{display: '{/literal}{$LANG.actions}{literal}', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},
-				{display: '{/literal}{$LANG.description}{literal}', name : 'tax_description', width : 40 * percentage_width, sortable : true, align: 'left'},
-				{display: '{/literal}{$LANG.rate}{literal}', name : 'tax_percentage', width : 30 * percentage_width, sortable : true, align: 'left'},
-				{display: '{/literal}{$LANG.enabled}{literal}', name : 'enabled', width : 20 * percentage_width, sortable : true, align: 'left'}
+				{display: '{/literal}{$LANG.id}{literal}', name : 'tax_id', width : 10 * percentage_width, sortable : true, align: 'right'},
+				{display: '{/literal}{$LANG.description}{literal}', name : 'tax_description', width : 55 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.rate}{literal}', name : 'tax_percentage', width : 15 * percentage_width, sortable : true, align: 'right'},
+				{display: '{/literal}{$LANG.enabled}{literal}', name : 'enabled', width : 10 * percentage_width, sortable : true, align: 'center'}
 				
 				],
 				
 
 			searchitems : [
 				{display: '{/literal}{$LANG.id}{literal}', name : 'tax_id'},
-				{display: '{/literal}{$LANG.description}{literal}', name : 'tax_description', isdefault: true}
+				{display: '{/literal}{$LANG.description}{literal}', name : 'tax_description', isdefault: true},
+				{display: '{/literal}{$LANG.tax_percentage}{literal}', name : 'tax_percentage'}
 				],
 			sortname: 'tax_description',
 			sortorder: 'asc',

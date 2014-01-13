@@ -19,6 +19,7 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 	global $LANG;
 	global $auth_session;
 
+	$valid_search_fields = array('c.id', 'c.name');
 		
 	//SC: Safety checking values that will be directly subbed in
 	if (intval($page) != $page) {
@@ -45,12 +46,17 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 		$dir = 'DESC';
 	}
 	
-	$query = $_POST['query'];
-	$qtype = $_POST['qtype'];
-	
-	$where = " ";
-	if ($query) $where .= " AND :qtype LIKE '%:query%' ";
-	
+	$where = "";
+	$query = isset($_POST['query']) ? $_POST['query'] : null;
+	$qtype = isset($_POST['qtype']) ? $_POST['qtype'] : null;
+	if ( ! (empty($qtype) || empty($query)) ) {
+		if ( in_array($qtype, $valid_search_fields) ) {
+			$where = " AND $qtype LIKE :query ";
+		} else {
+			$qtype = null;
+			$query = null;
+		}
+	}
 	
 	/*Check that the sort field is OK*/
 	$validFields = array('CID', 'name', 'customer_total', 'paid', 'owing', 'enabled');
@@ -66,9 +72,9 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 					c.id as CID 
 					, c.name as name 
 					, (SELECT (CASE  WHEN c.enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled
-					, SUM(COALESCE(ii.total,  0)) AS customer_total
+					, SUM(COALESCE(IF(pr.status = 1, ii.total, 0),  0)) AS customer_total
 					, COALESCE(ap.amount,0) AS paid
-					, (SUM(COALESCE(ii.total,  0)) - COALESCE(ap.amount,0)) AS owing
+					, (SUM(COALESCE(IF(pr.status = 1, ii.total, 0),  0)) - COALESCE(ap.amount,0)) AS owing
 				FROM 
 					".TB_PREFIX."customers c  
 					LEFT JOIN ".TB_PREFIX."invoices iv ON (c.id = iv.customer_id AND iv.domain_id = c.domain_id)
@@ -79,17 +85,17 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 						ON (iv3.id = p.ac_inv_id AND iv3.domain_id = p.domain_id)
 							GROUP BY iv3.customer_id, p.domain_id
 						) ap ON (ap.customer_id = c.id AND ap.domain_id = c.domain_id)
-				WHERE pr.status = 1 AND c.domain_id = :domain_id
+				WHERE c.domain_id = :domain_id
 					  $where
 				GROUP BY CID
 				ORDER BY 
 					$sort $dir 
 				$limit";
 	
-		if ($query) {
-			$result = dbQuery($sql, ':domain_id', $auth_session->domain_id, ':query', $query, ':qtype', $qtype);
-		} else {
+		if (empty($query)) {
 			$result = dbQuery($sql, ':domain_id', $auth_session->domain_id);
+		} else {
+			$result = dbQuery($sql, ':domain_id', $auth_session->domain_id, ':query', "%$query%");
 		}
 
 		return $result;

@@ -99,6 +99,7 @@ class cron {
     public function select_all($type='', $dir='DESC', $rp='25', $page='1')
 	{
 		global $LANG;
+		$valid_search_fields = array('iv.id', 'b.name', 'cron.id', 'aging');
 
 		/*SQL Limit - start*/
 		$start = (($page-1) * $rp);
@@ -106,10 +107,19 @@ class cron {
 		/*SQL Limit - end*/
 
 		/*SQL where - start*/
-//		$query = (isset($_POST['query'])) ? $_POST['query'] : "" ;
-//		$qtype = (isset($_POST['qtype'])) ? $_POST['qtype'] : "" ;
 
-//		$where = (isset($_POST['query'])) ? "  AND :qtype LIKE '%:query%' " : "";
+		$where = "";
+		$query = isset($_POST['query']) ? $_POST['query'] : null;
+		$qtype = isset($_POST['qtype']) ? $_POST['qtype'] : null;
+		if ( ! (empty($qtype) || empty($query)) ) {
+			if ( in_array($qtype, $valid_search_fields) ) {
+				$where = " AND $qtype LIKE :query ";
+			} else {
+				$qtype = null;
+				$query = null;
+			}
+		}
+
 		/*SQL where - end*/
 		
 
@@ -139,13 +149,19 @@ class cron {
 					ON (iv.preference_id = pf.pref_id AND iv.domain_id = pf.domain_id)
 			 WHERE 
 				cron.domain_id = :domain_id
+				$where
 			GROUP BY
 			    cron.id
 			ORDER BY
-			$sort $dir
+				$sort $dir
 			$limit";
 
-		$sth = dbQuery($sql, ':domain_id', $this->domain_id);
+		if (empty($query)) {
+			$sth = dbQuery($sql, ':domain_id', $this->domain_id);
+		} else {
+			$sth = dbQuery($sql, ':domain_id', $this->domain_id, ':query', "%$query%");
+		}
+
 		if($type =="count")
 		{
 			return $sth->rowCount();

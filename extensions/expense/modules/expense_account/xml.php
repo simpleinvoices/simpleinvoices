@@ -11,8 +11,10 @@ function sql($type='', $dir, $sort, $rp, $page )
 {
 	global $config;
 	global $LANG;
+
 	$domain_id = domain_id::get();
-	
+	$valid_search_fields = array('id', 'name');
+
 	//SC: Safety checking values that will be directly subbed in
 	if (intval($page) != $page) {
 		$page = 1;
@@ -35,12 +37,17 @@ function sql($type='', $dir, $sort, $rp, $page )
 		$dir = 'DESC';
 	}
 	
-	$query = $_POST['query'];
-	$qtype = $_POST['qtype'];
-	
 	$where = "";
-	if ($query) $where .= " AND :qtype LIKE '%:query%' ";
-	
+	$query = isset($_POST['query']) ? $_POST['query'] : null;
+	$qtype = isset($_POST['qtype']) ? $_POST['qtype'] : null;
+	if ( ! (empty($qtype) || empty($query)) ) {
+		if ( in_array($qtype, $valid_search_fields) ) {
+			$where = " AND $qtype LIKE :query ";
+		} else {
+			$qtype = null;
+			$query = null;
+		}
+	}
 	
 	/*Check that the sort field is OK*/
 	$validFields = array('id', 'biller_id','customer_id');
@@ -64,10 +71,10 @@ function sql($type='', $dir, $sort, $rp, $page )
 				$limit";
 	
 	
-	if ($query) {
-		$result = dbQuery($sql, ':domain_id', $domain_id, ':query', $query, ':qtype', $qtype);
-	} else {
+	if (empty($query)) {
 		$result = dbQuery($sql, ':domain_id', $domain_id);
+	} else {
+		$result = dbQuery($sql, ':domain_id', $domain_id, ':query', "%$query%");
 	}
 
 	return $result;

@@ -15,6 +15,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 	global $auth_session;
 	global $LANG;
 
+	$valid_search_fields = array('pt_id', 'pt_description');
 
 	//SC: Safety checking values that will be directly subbed in
 	if (intval($start) != $start) {
@@ -38,12 +39,17 @@ function sql($type='', $dir, $sort, $rp, $page )
 		$dir = 'ASC';
 	}
 
-	$query = $_POST['query'];
-	$qtype = $_POST['qtype'];
-
-	$where = "  WHERE domain_id = :domain_id";
-	if ($query) $where .= " AND :qtype LIKE '%:query%' ";
-
+	$where = "";
+	$query = isset($_POST['query']) ? $_POST['query'] : null;
+	$qtype = isset($_POST['qtype']) ? $_POST['qtype'] : null;
+	if ( ! (empty($qtype) || empty($query)) ) {
+		if ( in_array($qtype, $valid_search_fields) ) {
+			$where = " AND $qtype LIKE :query ";
+		} else {
+			$qtype = null;
+			$query = null;
+		}
+	}
 
 	/*Check that the sort field is OK*/
 	$validFields = array('pt_id', 'pt_description','enabled');
@@ -60,15 +66,16 @@ function sql($type='', $dir, $sort, $rp, $page )
 					(SELECT (CASE  WHEN pt_enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled
 			FROM 
 					".TB_PREFIX."payment_types
-			$where
+			WHERE domain_id = :domain_id
+				$where
 			ORDER BY 
 					$sort $dir 
 			$limit";
 
-	if ($query) {
-		$result = dbQuery($sql,':domain_id', $auth_session->domain_id, ':query', $query, ':qtype', $qtype);
-	} else {
+	if (empty($query)) {
 		$result = dbQuery($sql,':domain_id', $auth_session->domain_id);
+	} else {
+		$result = dbQuery($sql,':domain_id', $auth_session->domain_id, ':query', "%$query%");
 	}
 
 	return $result;

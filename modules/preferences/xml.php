@@ -15,6 +15,8 @@ function sql($type='', $dir, $sort, $rp, $page )
 	global $LANG;
 	global $auth_session;
 
+	$valid_search_fields = array('pref_id', 'pref_description');
+
 	//SC: Safety checking values that will be directly subbed in
 	if (intval($start) != $start) {
 		$start = 0;
@@ -37,12 +39,17 @@ function sql($type='', $dir, $sort, $rp, $page )
 		$dir = 'ASC';
 	}
 
-	$query = $_POST['query'];
-	$qtype = $_POST['qtype'];
-
-	$where = " WHERE domain_id = :domain_id ";
-	if ($query) $where .= " AND :qtype LIKE '%:query%' ";
-
+	$where = "";
+	$query = isset($_POST['query']) ? $_POST['query'] : null;
+	$qtype = isset($_POST['qtype']) ? $_POST['qtype'] : null;
+	if ( ! (empty($qtype) || empty($query)) ) {
+		if ( in_array($qtype, $valid_search_fields) ) {
+			$where = " AND $qtype LIKE :query ";
+		} else {
+			$qtype = null;
+			$query = null;
+		}
+	}
 
 	/*Check that the sort field is OK*/
 	$validFields = array('pref_id', 'pref_description','enabled');
@@ -59,15 +66,16 @@ function sql($type='', $dir, $sort, $rp, $page )
 					(SELECT (CASE  WHEN pref_enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled
 				FROM 
 					".TB_PREFIX."preferences 
-				$where
+				WHERE domain_id = :domain_id 
+					$where
 				ORDER BY 
 					$sort $dir 
 				$limit";
 
-	if ($query) {
-		$result = dbQuery($sql, ':domain_id', $auth_session->domain_id, ':query', $query, ':qtype', $qtype);
-	} else {
+	if (empty($query)) {
 		$result = dbQuery($sql, ':domain_id', $auth_session->domain_id);
+	} else {
+		$result = dbQuery($sql, ':domain_id', $auth_session->domain_id, ':query', "%$query%");
 	}
 
 	return $result;

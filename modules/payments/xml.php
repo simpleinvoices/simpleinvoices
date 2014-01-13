@@ -13,6 +13,8 @@ function sql($type='', $dir, $sort, $rp, $page )
 	global $config;
 	global $auth_session;
 
+	$valid_search_fields = array('ap.id','b.name', 'c.name');
+
 	//SC: Safety checking values that will be directly subbed in
 	if (intval($start) != $start) {
 		$start = 0;
@@ -23,9 +25,6 @@ function sql($type='', $dir, $sort, $rp, $page )
 	if (!preg_match('/^(asc|desc)$/iD', $dir)) {
 		$dir = 'DESC';
 	}
-
-	$query = $_POST['query'];
-	$qtype = $_POST['qtype'];
 
 	/*SQL Limit - start*/
 	$start = (($page-1) * $rp);
@@ -38,7 +37,16 @@ function sql($type='', $dir, $sort, $rp, $page )
 	/*SQL Limit - end*/
 
 	$where = "";
-	if ($query) $where .= " AND :qtype LIKE '%:query%' ";
+	$query = isset($_POST['query']) ? $_POST['query'] : null;
+	$qtype = isset($_POST['qtype']) ? $_POST['qtype'] : null;
+	if ( ! (empty($qtype) || empty($query)) ) {
+		if ( in_array($qtype, $valid_search_fields) ) {
+			$where = " AND $qtype LIKE :query ";
+		} else {
+			$qtype = null;
+			$query = null;
+		}
+	}
 
 
 	/*Check that the sort field is OK*/
@@ -50,51 +58,40 @@ function sql($type='', $dir, $sort, $rp, $page )
 		$sort = "ap.id";
 	}
 
-	$query = null;
+	$sql = "SELECT 
+				ap.*
+				, c.name as cname
+				, (SELECT CONCAT(pr.pref_inv_wording,' ',iv.index_id)) as index_name
+				, b.name as bname
+				, pt.pt_description AS description
+				, ac_notes AS notes
+				, DATE_FORMAT(ac_date,'%Y-%m-%d') AS date
+			FROM 
+				".TB_PREFIX."payment ap
+				INNER JOIN ".TB_PREFIX."invoices iv      ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
+				INNER JOIN ".TB_PREFIX."customers c      ON (c.id = iv.customer_id AND c.domain_id = iv.domain_id)
+				INNER JOIN ".TB_PREFIX."biller b         ON (b.id = iv.biller_id AND b.domain_id = iv.domain_id)
+				INNER JOIN ".TB_PREFIX."preferences pr   ON (pr.pref_id = iv.preference_id AND pr.domain_id = ap.domain_id)
+				INNER JOIN ".TB_PREFIX."payment_types pt ON (pt.pt_id = ap.ac_payment_type AND pt.domain_id = ap.domain_id)
+			WHERE 
+				ap.domain_id = :domain_id ";
+
 	#if coming from another page where you want to filter by just one invoice
 	if (!empty($_GET['id'])) {
 
 		$id = $_GET['id'];
-		//$query = getInvoicePayments($_GET['id']);
 		
-		//$sql = "SELECT ap.*, c.name as cname, b.name as bname from ".TB_PREFIX."payment ap, ".TB_PREFIX."invoices iv, ".TB_PREFIX."customers c, ".TB_PREFIX."biller b where ap.ac_inv_id = iv.id and iv.customer_id = c.id and iv.biller_id = b.id and ap.ac_inv_id = :id ORDER BY ap.id DESC";
-		$sql = "SELECT 
-					ap.*, 
-					c.name as cname, 
-					(SELECT CONCAT(p.pref_inv_wording,' ',iv.index_id)) as index_name,
-					b.name as bname,
-					pt.pt_description AS description,
-					ac_notes AS notes,
-					DATE_FORMAT(ac_date,'%Y-%m-%d') AS date
-			FROM 
-				".TB_PREFIX."payment ap,
-				".TB_PREFIX."invoices iv,
-				".TB_PREFIX."customers c,
-				".TB_PREFIX."preferences p,
-				".TB_PREFIX."biller b ,
-				".TB_PREFIX."payment_types pt 
-			WHERE 
-				ap.ac_inv_id = :invoice_id
-			AND ap.domain_id = :domain_id
-			AND ap.ac_inv_id = iv.id 
-			AND iv.domain_id = ap.domain_id
-			AND iv.customer_id = c.id 
-			AND c.domain_id = iv.domain_id
-			AND iv.biller_id = b.id 
-			AND b.domain_id = iv.domain_id
-			AND iv.preference_id = p.pref_id
-			AND p.domain_id = ap.domain_id
-			AND ap.ac_payment_type = pt.pt_id 
-			AND pt.domain_id = ap.domain_id
-				$where
+		$sql .= " 
+			AND ap.ac_inv_id = :invoice_id
+			$where
 			ORDER BY 
 				$sort $dir 
-				$limit";
+			$limit";
 		
-		if ($query) {
-			$result = dbQuery($sql, ':domain_id', $auth_session->domain_id, ':invoice_id', $_GET['id'], ':query', $query, ':qtype', $qtype);
+		if (empty($query)) {
+			$result = dbQuery($sql, ':domain_id', $auth_session->domain_id, ':invoice_id', $id);
 		} else {
-			$result = dbQuery($sql, ':domain_id', $auth_session->domain_id, ':invoice_id', $_GET['id']);
+			$result = dbQuery($sql, ':domain_id', $auth_session->domain_id, ':invoice_id', $id, ':query', "%$query%");
 		}
 	}
 	#if coming from another page where you want to filter by just one customer
@@ -102,81 +99,29 @@ function sql($type='', $dir, $sort, $rp, $page )
 		
 		//$query = getCustomerPayments($_GET['c_id']);
 		$id = $_GET['c_id'];
-		$sql = "SELECT 
-					ap.*, 
-					c.name as cname, 
-					(SELECT CONCAT(p.pref_inv_wording,' ',iv.index_id)) as index_name,
-					b.name as bname,
-					pt.pt_description AS description,
-					ac_notes AS notes,
-					DATE_FORMAT(ac_date,'%Y-%m-%d') AS date
-			FROM 
-				".TB_PREFIX."payment ap, 
-				".TB_PREFIX."invoices iv, 
-				".TB_PREFIX."customers c, 
-				".TB_PREFIX."preferences p,
-				".TB_PREFIX."biller b  ,
-				".TB_PREFIX."payment_types pt 
-			WHERE 
-				c.id = :id 
-			AND ap.domain_id = :domain_id
-			AND ap.ac_inv_id = iv.id 
-			AND iv.domain_id = ap.domain_id
-			AND iv.customer_id = c.id 
-			AND c.domain_id = iv.domain_id
-			AND iv.biller_id = b.id 
-			AND b.domain_id = iv.domain_id
-			AND iv.preference_id = p.pref_id
-			AND p.domain_id = ap.domain_id
-			AND ap.ac_payment_type = pt.pt_id 
-			AND pt.domain_id = ap.domain_id
+		$sql .= " 
+			AND c.id = :id 
 			ORDER BY 
 				$sort $dir  
-				$limit";
+			$limit";
 
-		$result = dbQuery($sql, ':id', $id,':domain_id', $auth_session->domain_id);
+		$result = dbQuery($sql, ':id', $id, ':domain_id', $auth_session->domain_id);
 		
 	}
 	#if you want to show all invoices - no filters
 	else {
 		//$query = getPayments();
 		
-		$sql = "SELECT 
-					ap.*, 
-					c.name as cname, 
-					b.name as bname,
-					pt.pt_description AS description,
-					ac_notes AS notes,
-					(SELECT CONCAT(p.pref_inv_wording,' ',iv.index_id)) as index_name,
-					DATE_FORMAT(ac_date,'%Y-%m-%d') AS date
-			FROM 
-				".TB_PREFIX."payment ap, 
-				".TB_PREFIX."invoices iv, 
-				".TB_PREFIX."customers c, 
-				".TB_PREFIX."biller b ,
-				".TB_PREFIX."preferences p,
-				".TB_PREFIX."payment_types pt 
-			WHERE 
-				ap.domain_id = :domain_id
-			AND ap.ac_inv_id = iv.id 
-			AND iv.domain_id = ap.domain_id
-			AND iv.customer_id = c.id 
-			AND c.domain_id = iv.domain_id
-			AND iv.biller_id = b.id 
-			AND b.domain_id = iv.domain_id
-			AND iv.preference_id = p.pref_id
-			AND p.domain_id = ap.domain_id
-			AND ap.ac_payment_type = pt.pt_id 
-			AND pt.domain_id = ap.domain_id
+		$sql .= " 
 				$where
 			ORDER BY 
 				$sort $dir 
-				$limit";
+			$limit";
 					
-		if ($query) {
-			$result =  dbQuery($sql,':domain_id', $auth_session->domain_id, ':query', $query, ':qtype', $qtype);
+		if (empty($query)) {
+			$result =  dbQuery($sql, ':domain_id', $auth_session->domain_id);
 		} else {
-			$result =  dbQuery($sql,':domain_id', $auth_session->domain_id);
+			$result =  dbQuery($sql, ':domain_id', $auth_session->domain_id, ':query', "%$query%");
 		}
 	}
 	

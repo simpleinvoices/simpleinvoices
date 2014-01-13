@@ -8,6 +8,7 @@ $rp = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
 $page = (isset($_GET['page'])) ? $_GET['page'] : "1" ;
 
 $domain_id = domain_id::get();
+$valid_search_fields = array('id', 'description', 'unit_price');
 
 //SC: Safety checking values that will be directly subbed in
 if (intval($page) != $page) {
@@ -25,12 +26,17 @@ $start = (($page-1) * $rp);
 $limit = "LIMIT $start, $rp";
 /*SQL Limit - end*/
 
-$query = $_POST['query'];
-$qtype = $_POST['qtype'];
-
-$where = "";
-if ($query) $where .= " AND :qtype LIKE '%:query%' ";
-
+		$where = "";
+		$query = isset($_POST['query']) ? $_POST['query'] : null;
+		$qtype = isset($_POST['qtype']) ? $_POST['qtype'] : null;
+		if ( ! (empty($qtype) || empty($query)) ) {
+			if ( in_array($qtype, $valid_search_fields) ) {
+				$where = " AND $qtype LIKE :query ";
+			} else {
+				$qtype = null;
+				$query = null;
+			}
+		}
 
 /*Check that the sort field is OK*/
 $validFields = array('id', 'description','customer_id');
@@ -49,17 +55,17 @@ if (in_array($sort, $validFields)) {
 			FROM 
 				".TB_PREFIX."products  
 			WHERE 
-				domain_id = :domain_id
-			AND visible = 1
+				visible = 1
+			AND domain_id = :domain_id
 				$where
 			ORDER BY 
 				$sort $dir 
 			$limit";
 				
-	if ($query) (
-		$sth = dbQuery($sql, ':domain_id', $domain_id, ':query', $query, ':qtype', $qtype);
-	} else {
+	if (empty($query)) {
 		$sth = dbQuery($sql, ':domain_id', $domain_id);
+	} else {
+		$sth = dbQuery($sql, ':domain_id', $domain_id, ':query', "%$query%");
 	}
 
 	$customers = $sth->fetchAll(PDO::FETCH_ASSOC);

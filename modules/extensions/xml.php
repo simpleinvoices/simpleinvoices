@@ -10,6 +10,9 @@ $page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
 
 $domain_id = domain_id::get();
 
+$valid_search_fields = array('id', 'name', 'description');
+
+
 $xml =""; 
 
 $extension_dir = './extensions';
@@ -40,8 +43,17 @@ if (!preg_match('/^(asc|desc)$/iD', $dir)) {
 
 $limit = " LIMIT $start, $rp";
 
-$query = (isset($_POST['query'])) ? $_POST['query'] : "" ; 
-$qtype = (isset($_POST['qtype'])) ? $_POST['qtype'] : "" ; 
+	$where = "";
+	$query = isset($_POST['query']) ? $_POST['query'] : null;
+	$qtype = isset($_POST['qtype']) ? $_POST['qtype'] : null;
+	if ( ! (empty($qtype) || empty($query)) ) {
+		if ( in_array($qtype, $valid_search_fields) ) {
+			$where = " AND $qtype LIKE :query ";
+		} else {
+			$qtype = null;
+			$query = null;
+		}
+	}
 
 $plugin[0] = " <img src='images/famfam/plugin_disabled.png' alt='".$LANG['plugin_not_registered']."' />";
 $plugin[1] = " <img src='images/famfam/plugin.png' alt='".$LANG['plugin_registered']."' />";
@@ -50,11 +62,6 @@ $plugin[3] = " <img src='images/famfam/plugin_add.png' alt='".$LANG['plugin_regi
 $light[0]  = " <img src='images/famfam/lightbulb_off.png' alt='".$LANG['disabled']."' />";
 $light[1]  = " <img src='images/famfam/lightbulb.png' alt='".$LANG['enabled']."' />";
 $light[2]  = " <img src='images/common/lightswitch16x16.png' alt='".$LANG['toggle_status']."' />";
-
-
-$where = "";
-if ($query) $where .= " AND :qtype LIKE '%:query%' ";
-
 
 /*Check that the sort field is OK*/
 $validFields = array('id', 'name','description','enabled');
@@ -74,10 +81,10 @@ $validFields = array('id', 'name','description','enabled');
 				$sort $dir 
 			$limit";
 
-	if ($query) {
-		$sth = dbQuery($sql, ':domain_id', $domain_id, ':query', $query, ':qtype', $qtype);
-	} else {
+	if (empty($query)) {
 		$sth = dbQuery($sql, ':domain_id', $domain_id);
+	} else {
+		$sth = dbQuery($sql, ':domain_id', $domain_id, ':query', "%$query%");
 	}
 
 	$registered_extensions = $sth->fetchAll(PDO::FETCH_ASSOC);

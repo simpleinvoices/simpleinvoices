@@ -14,6 +14,8 @@ function sql($type='', $dir, $sort, $rp, $page )
 	global $config;
 	global $LANG;
 	global $auth_session;
+
+	$valid_search_fields = array('email', 'ur.name');
 	
 	//SC: Safety checking values that will be directly subbed in
 	if (intval($start) != $start) {
@@ -36,13 +38,19 @@ function sql($type='', $dir, $sort, $rp, $page )
 	if (!preg_match('/^(asc|desc)$/iD', $dir)) {
 		$dir = 'ASC';
 	}
-	
-	$query = $_REQUEST['query'];
-	$qtype = $_REQUEST['qtype'];
-	
-	$where = " WHERE u.domain_id = :domain_id ";
-	if ($query) $where = " AND :qtype LIKE '%:query%' ";
-	
+
+	$where = "";
+	$query = isset($_REQUEST['query']) ? $_REQUEST['query'] : null;
+	$qtype = isset($_REQUEST['qtype']) ? $_REQUEST['qtype'] : null;
+	if ( ! (empty($qtype) || empty($query)) ) {
+		if ( in_array($qtype, $valid_search_fields) ) {
+			$where = " AND $qtype LIKE :query ";
+		} else {
+			$qtype = null;
+			$query = null;
+		}
+	}
+
 	/*Check that the sort field is OK*/
 	$validFields = array('id', 'role', 'email');
 	
@@ -62,15 +70,16 @@ function sql($type='', $dir, $sort, $rp, $page )
 			FROM 
 				".TB_PREFIX."user u LEFT JOIN
 				".TB_PREFIX."user_role ur ON (u.role_id = ur.id)
-			$where
+			WHERE u.domain_id = :domain_id 
+				$where
 			ORDER BY 
 				$sort $dir 
 			$limit";
-	
-	if ($query) {
-		$result = dbQuery($sql,':domain_id', $auth_session->domain_id, ':query', $query, ':qtype', $qtype);
-	} else {
+
+	if (empty($query)) {
 		$result = dbQuery($sql,':domain_id', $auth_session->domain_id);
+	} else {
+		$result = dbQuery($sql,':domain_id', $auth_session->domain_id, ':query', "%$query%");
 	}
 
 	return $result;

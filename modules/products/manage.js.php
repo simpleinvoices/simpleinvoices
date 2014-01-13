@@ -7,14 +7,14 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 var inventory = "{/literal}{$defaults.inventory}{literal}";
 
 
-			var columns = 5;
+			var columns = 6;
 			var padding = 12;
 			var grid_width = $('.col').width();
-			
+		
 			grid_width = grid_width - (columns * padding);
 			percentage_width = grid_width / 100; 
-		
-            /*
+
+			/*
             * If Inventory in SImple Invoices is enabled than show quantity etc..
             */
     
@@ -22,17 +22,19 @@ var inventory = "{/literal}{$defaults.inventory}{literal}";
             {
                 col_model = [ 
 				    {display: '{/literal}{$LANG.actions}{literal}', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},
+				    {display: '{/literal}{$LANG.id}{literal}', name : 'id', width : 10 * percentage_width, sortable : true, align: 'right'},
 				    {display: '{/literal}{$LANG.name}{literal}', name : 'description', width : 50 * percentage_width, sortable : true, align: 'left'},
 				    {display: '{/literal}{$LANG.unit_price}{literal}', name : 'unit_price', width : 10 * percentage_width, sortable : true, align: 'right'},
-				    {display: '{/literal}{$LANG.quantity}{literal}', name : 'quantity', width : 10 * percentage_width, sortable : true, align: 'left'},
-				    {display: '{/literal}{$LANG.enabled}{literal}', name : 'enabled', width : 20 * percentage_width, sortable : true, align: 'left'}
+				    {display: '{/literal}{$LANG.quantity}{literal}', name : 'quantity', width : 10 * percentage_width, sortable : true, align: 'right'},
+				    {display: '{/literal}{$LANG.enabled}{literal}', name : 'enabled', width : 10 * percentage_width, sortable : true, align: 'center'}
 				];
             } else {
                 col_model = [ 
 				    {display: '{/literal}{$LANG.actions}{literal}', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},
-                    {display: '{/literal}{$LANG.name}{literal}', name : 'description', width : 50 * percentage_width, sortable : true, align: 'left'},
-				    {display: '{/literal}{$LANG.unit_price}{literal}', name : 'unit_price', width : 20 * percentage_width, sortable : true, align: 'right'},
-				    {display: '{/literal}{$LANG.enabled}{literal}', name : 'enabled', width : 20 * percentage_width, sortable : true, align: 'left'}
+				    {display: '{/literal}{$LANG.id}{literal}', name : 'id', width : 10 * percentage_width, sortable : true, align: 'right'},
+				    {display: '{/literal}{$LANG.name}{literal}', name : 'description', width : 55 * percentage_width, sortable : true, align: 'left'},
+				    {display: '{/literal}{$LANG.unit_price}{literal}', name : 'unit_price', width : 15 * percentage_width, sortable : true, align: 'right'},
+				    {display: '{/literal}{$LANG.enabled}{literal}', name : 'enabled', width : 10 * percentage_width, sortable : true, align: 'center'}
 				];
             }
 
@@ -47,7 +49,8 @@ var inventory = "{/literal}{$defaults.inventory}{literal}";
 			colModel : col_model,
 			searchitems : [
 				{display: '{/literal}{$LANG.id}{literal}', name : 'id'},
-				{display: '{/literal}{$LANG.name}{literal}', name : 'description', isdefault: true}
+				{display: '{/literal}{$LANG.name}{literal}', name : 'description', isdefault: true},
+				{display: '{/literal}{$LANG.unit_price}{literal}', name : 'unit_price'}
 				],
 			sortname: 'description',
 			sortorder: 'asc',

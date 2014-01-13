@@ -245,6 +245,7 @@ class invoice {
         global $config;
 
 		$domain_id = domain_id::get($this->domain_id);
+		$valid_search_fields = array('iv.index_id', 'b.name', 'c.name');
 
         if(empty($having)) $having = $this->having;
         $having_and = ($this->having_and) ? $this->having_and : false;
@@ -261,7 +262,14 @@ class invoice {
         $qtype = $this->qtype;
 
         $where = "";
-        if ($query)             $where .= " AND :qtype LIKE '%:query%' ";
+        if (!(empty($query) || empty($qtype))) {
+			if ( in_array($qtype, $valid_search_fields) ) {
+				$where .= " AND $qtype LIKE :query ";
+			} else {
+				$this->query = $qtype = null;
+				$this->qtype = $query = null;
+			}
+		}
         if ($this->biller)      $where .= " AND b.id = '$this->biller' ";
         if ($this->customer)    $where .= " AND c.id = '$this->customer' ";
         if ($this->where_field) $where .= " AND $this->where_field = '$this->where_value' ";
@@ -416,10 +424,10 @@ class invoice {
                 break;
         }
         
-        if ($query) {
-			$result =  dbQuery($sql,':domain_id', $domain_id, ':query', $query, ':qtype', $qtype);
-		} else {
+        if (empty($query)) {
 			$result =  dbQuery($sql,':domain_id', $domain_id);
+		} else {
+			$result =  dbQuery($sql,':domain_id', $domain_id, ':query', "%$query%");
 		}
         return $result;
     }

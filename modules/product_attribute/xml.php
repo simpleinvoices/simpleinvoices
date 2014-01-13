@@ -7,6 +7,8 @@ $sort = (isset($_POST['sortname'])) ? $_POST['sortname'] : "id" ;
 $limit = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
 $page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
 
+$valid_search_fields = array('id', 'name');
+
 //SC: Safety checking values that will be directly subbed in
 if (intval($page) != $page) {
 	$start = 0;
@@ -20,14 +22,17 @@ if (!preg_match('/^(asc|desc)$/iD', $dir)) {
 	$dir = 'DESC';
 }
 
-
-$query = $_POST['query'];
-$qtype = $_POST['qtype'];
-
-$where = "";
-if ($query) $where .= " WHERE :qtype LIKE '%:query%' ";
-
-
+	$where = "";
+	$query = isset($_POST['query']) ? $_POST['query'] : null;
+	$qtype = isset($_POST['qtype']) ? $_POST['qtype'] : null;
+	if ( ! (empty($qtype) || empty($query)) ) {
+		if ( in_array($qtype, $valid_search_fields) ) {
+			$where = " AND $qtype LIKE :query ";
+		} else {
+			$qtype = null;
+			$query = null;
+		}
+	}
 
 /*Check that the sort field is OK*/
 $validFields = array('id', 'name','enabled','visible');
@@ -46,16 +51,17 @@ if (in_array($sort, $validFields)) {
                 visible
 			FROM 
 				".TB_PREFIX."products_attributes
-			$where
+			WHERE 1
+				$where
 			ORDER BY 
 				$sort $dir 
 			LIMIT 
 				$start, $limit";
 
-	if ($query) {
-		$sth = dbQuery($sql, ':query', $query, ':qtype', $qtype);
-	} else {
+	if (empty($query)) {
 		$sth = dbQuery($sql);
+	} else {
+		$sth = dbQuery($sql, ':query', "%$query%");
 	}
 
 	$customers = $sth->fetchAll(PDO::FETCH_ASSOC);
