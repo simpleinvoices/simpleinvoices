@@ -1696,7 +1696,11 @@ PRIMARY KEY ( `domain_id`, `id` )
 		ALTER TABLE `".TB_PREFIX."biller` CHANGE `zip_code` `zip_code` VARCHAR(20) NULL;
 	";
     $patch['291']['date']  = "20131111";
+    
+    $patch['292']['name'] = "Added Customer/Biller User ID column to user table";
+    $patch['292']['patch'] = "ALTER TABLE `".TB_PREFIX."user` ADD COLUMN `user_id` INT DEFAULT 0 NOT NULL AFTER `enabled`;";
+    $patch['292']['date'] = "20140103";
 
-    $patch['292']['name']  = "Add department to the customers";
-    $patch['292']['patch'] = "ALTER TABLE `".TB_PREFIX."customers` ADD COLUMN `department` VARCHAR(40) NULL AFTER `name`";
-    $patch['292']['date']  = "20131231";
+    $patch['293']['name']  = "Add department to the customers";
+    $patch['293']['patch'] = "ALTER TABLE `".TB_PREFIX."customers` ADD COLUMN `department` VARCHAR(256) NULL AFTER `name`";
+    $patch['293']['date']  = "20140114";
