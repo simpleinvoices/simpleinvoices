@@ -10,7 +10,7 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 */
 
 
-	var columns = 6;
+	var columns = 7;
 	var padding = 12;
 	var grid_width = $('.col').width();
 
