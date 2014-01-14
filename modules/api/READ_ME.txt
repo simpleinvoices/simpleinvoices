@@ -1,6 +1,6 @@
 Made changes so that the services can work:
 
-1. In simpleinvoices\config\config.php - added xapikey=webServices_beta7 - coded with sha1 is 735dec47f77b80088ed11f7886a2d92bc98088d7
+1. In simpleinvoices\config\config.php - added xapikey=webServices_beta7 
 
 2. Create simpleinvoices\modules\api\Controllers folder where to put the controller files
  

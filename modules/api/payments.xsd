@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- The way to call the service -->
-<!-- authentication - send in header X-API-KEY coded in sha1 -->
+<!-- authentication - send in header X-API-KEY -->
 <!-- GET/payments Returns all payments : http:\\simpleinvoices.org/api/payments -->
 <!-- GET/payments/{paymentId} Returns a single payment identified by paymentId : http:\\simpleinvoices.org/api/payments/1 -->
 <!-- POST/payments Creates a new payment : http:\\simpleinvoices.org/api/payments -->

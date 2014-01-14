@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- The way to call the service -->
-<!-- authentication - send in header X-API-KEY coded in sha1 -->
+<!-- authentication - send in header X-API-KEY -->
 <!-- GET/preferences Returns all preferences : http:\\simpleinvoices.org/api/preferences -->
 <!-- GET/preferences/{preferenceId} Returns a single preference identified by preferenceId : http:\\simpleinvoices.org/api/preferences/1 -->
 <!-- POST/preferences Creates a new preference : http:\\simpleinvoices.org/api/preferences -->

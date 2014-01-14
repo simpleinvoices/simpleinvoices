@@ -15,7 +15,7 @@ if (!isset($_SERVER["HTTP_X_API_KEY"]))
 else
 {
 	$xapikey =$_SERVER["HTTP_X_API_KEY"]; //$this->_request->getHeader('X-API-KEY'); 
-	if (sha1($config->xapikey)!=$xapikey) //sha1 php crypt returns hash
+	if ($config->xapikey!=$xapikey) //sha1 php crypt returns hash
 	{
 		header('HTTP/1.1 401 Unauthorized - Invalid API Key');//or 403 not Forbidden
 	    exit();

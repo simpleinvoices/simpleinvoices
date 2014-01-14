@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- The way to call the service -->
-<!-- authentication - send in header X-API-KEY coded in sha1 -->
+<!-- authentication - send in header X-API-KEY -->
 <!-- GET/products Returns all products : http:\\simpleinvoices.org/api/products -->
 <!-- GET/products/{productId} Returns a single product identified by productId : http:\\simpleinvoices.org/api/products/1 -->
 <!-- POST/products Creates a new product : http:\\simpleinvoices.org/api/products -->
