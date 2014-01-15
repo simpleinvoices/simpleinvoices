@@ -28,11 +28,11 @@ class user
 					user_id
 				FROM 
 					".TB_PREFIX."user u LEFT JOIN 
-					".TB_PREFIX."user_role ur ON (u.domain_id = :domain_id AND u.role_id = ur.id)
-				WHERE 
-					u.id = :id 
+					".TB_PREFIX."user_role ur ON (u.role_id = ur.id)
+				WHERE u.domain_id = :domain_id
+				  AND u.id = :id 
 				";
-		$result = dbQuery($sql,':id',$id,':domain_id',$auth_session->domain_id);
+		$result = dbQuery($sql,':id', $id, ':domain_id', $auth_session->domain_id);
 
 		return $result->fetch();
 
