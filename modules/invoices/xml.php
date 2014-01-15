@@ -13,6 +13,12 @@ $page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
 $invoice = new invoice();
 $invoice->sort=$sort;
 
+if($auth_session->role_name =='customer') {
+	$invoice->customer = $auth_session->user_id;
+} elseif ($auth_session->role_name =='biller') {
+	$invoice->biller = $auth_session->user_id;
+}
+
 $invoice->query=isset($_REQUEST['query']) ? $_REQUEST['query'] : null;
 $invoice->qtype=isset($_REQUEST['qtype']) ? $_REQUEST['qtype'] : null;
 
