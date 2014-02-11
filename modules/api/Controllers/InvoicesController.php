@@ -135,18 +135,34 @@ class Invoices{
 		$product_id = $doc->createElement("product_id");
 		$product_id->appendChild($doc->createTextNode($invoiceItem['product_id']));
 		$root_element->appendChild($product_id);
+		if (!is_numeric($invoiceItem['product_id']))
+		{
+			$product_id->setAttribute("xsi:nil", "true");
+		}
 		
 		$unit_price = $doc->createElement("unit_price");
 		$unit_price->appendChild($doc->createTextNode($invoiceItem['unit_price']));
 		$root_element->appendChild($unit_price);
+		if (!is_numeric($invoiceItem['unit_price']))
+		{
+			$unit_price->setAttribute("xsi:nil", "true");
+		}
 		
 		$tax_amount = $doc->createElement("tax_amount");
 		$tax_amount->appendChild($doc->createTextNode($invoiceItem['tax_amount']));
 		$root_element->appendChild($tax_amount);
+		if (!is_numeric($invoiceItem['tax_amount']))
+		{
+			$tax_amount->setAttribute("xsi:nil", "true");
+		}
 		
 		$gross_total = $doc->createElement("gross_total");
 		$gross_total->appendChild($doc->createTextNode($invoiceItem['gross_total']));
 		$root_element->appendChild($gross_total);
+		if (!is_numeric($invoiceItem['gross_total']))
+		{
+			$gross_total->setAttribute("xsi:nil", "true");
+		}
 
 		$description = $doc->createElement("description");
 		$description->appendChild($doc->createTextNode($invoiceItem['description']));
@@ -155,12 +171,20 @@ class Invoices{
 		$total = $doc->createElement("total");
 		$total->appendChild($doc->createTextNode($invoiceItem['total']));
 		$root_element->appendChild($total);
+		if (!is_numeric($invoiceItem['total']))
+		{
+			$total->setAttribute("xsi:nil", "true");
+		}
 		
 		foreach($invoiceItem['tax'] as $tax) //in xml <tax_id>1</tax_id> few times
 		{
 			$tax_id = $doc->createElement("tax_id");
 			$tax_id->appendChild($doc->createTextNode($tax));
 			$root_element->appendChild($tax_id);
+			if (!is_numeric($tax))
+			{
+				$tax_id->setAttribute("xsi:nil", "true");
+			}
 		}
 		
 		//attributes -start
@@ -175,11 +199,18 @@ class Invoices{
 			$prod_attribute_id = $doc->createElement("prod_attribute_id");
 			$prod_attribute_id->appendChild($doc->createTextNode($key));
 			$attribute->appendChild($prod_attribute_id);
+			if (!is_numeric($key))
+			{
+				$prod_attribute_id->setAttribute("xsi:nil", "true");
+			}
 			
 			$prod_value_id = $doc->createElement("prod_value_id");
 			$prod_value_id->appendChild($doc->createTextNode($value));
 			$attribute->appendChild($prod_value_id);
-			
+			if (!is_numeric($value))
+			{
+				$prod_value_id->setAttribute("xsi:nil", "true");
+			}
 			
 		}
 		//$attribute = $doc->createElement("attribute");
@@ -236,10 +267,10 @@ class Invoices{
 		  {
 			 return "Inavlid number format for unit_price of item".($i+1)."!" ;
 		  }
-          //Type_id is not total
-		  if ($_POST[type_id]!=1 && trim($_POST[product_id][$i])=="")
+          //Type_id is not total=1
+		  if ($_POST[type_id]!=1 && (!is_numeric($_POST[product_id][$i]) || trim($_POST[product_id][$i])<=0 ))
 		  {
-			 return "Not numeric product_id of item".($i+1)."!" ;
+			 return "Not valid product_id of item".($i+1)."!" ;
 		  }
 		  if (trim($_POST[product_id][$i])!="" && !is_numeric($_POST[product_id][$i]))
 		  {
@@ -256,9 +287,9 @@ class Invoices{
 		  foreach($invoiceItem->tax_id as $tax)
 		  {
 			$taxID =(string)$tax;
-			if (trim($taxID)=="" || !is_numeric($taxID))
+			if (trim($taxID)=="" || !is_numeric($taxID) || $taxID<=0)
 			{
-				return "Not numeric tax_id of item".($i+1)."!" ;
+				return "Not valid tax_id of item".($i+1)."!" ;
 			}
 		    $_POST[tax_id][$i][] = $taxID; 
 		  }
@@ -316,19 +347,19 @@ class Invoices{
 		{
 			return "Not numeric index_id field!";
 		}
-		if (!is_numeric($_POST[biller_id]))
+		if (!is_numeric($_POST[biller_id]) || $_POST[biller_id]<=0 )
 		{
-			return "Not numeric biller_id field!";
+			return "Not valid biller_id field!";
 		}
-		if (!is_numeric($_POST[customer_id]))
+		if (!is_numeric($_POST[customer_id]) || $_POST[customer_id]<=0)
 		{
-			return "Not numeric customer_id field!";
+			return "Not valid customer_id field!";
 		}
-		if (!is_numeric($_POST[type_id]))
+		if (!is_numeric($_POST[type_id]) || $_POST[type_id]<=0)
 		{
-			return "Not numeric type_id field!";
+			return "Not valid type_id field!";
 		}
-		if (!is_numeric($_POST[preference_id]))
+		if (!is_numeric($_POST[preference_id]) || $_POST[preference_id]<=0)
 		{
 			return "Not numeric preference_id field!";
 		}
@@ -378,6 +409,8 @@ class Invoices{
 		
 		$root_element = $doc->createElement("invoice");
 		$doc->appendChild($root_element);
+		$root_element->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:xsd', 'http://www.w3.org/2001/XMLSchema');
+        $root_element->setAttributeNS('http://www.w3.org/2000/xmlns/' ,'xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
 
 		try
 		{
@@ -431,6 +464,8 @@ class Invoices{
 	  
 	  $root_element = $doc->createElement("invoices");
 	  $doc->appendChild($root_element);
+	  $root_element->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:xsd', 'http://www.w3.org/2001/XMLSchema');
+      $root_element->setAttributeNS('http://www.w3.org/2000/xmlns/' ,'xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
 	  
 	  if($this->_method!="GET")
 	  {     
@@ -745,7 +780,7 @@ class Invoices{
 				header('HTTP/1.1 500 Internal Server Error - can not update the invoice itself');
 				exit();
 			}
-			
+			//type_id=1 total type
 			if($_POST[type_id] == 1 && $saved) 
 			{
 				//$logger->log('Total style invoice updated, product ID: '.$_POST['products0'], Zend_Log::INFO);
@@ -777,7 +812,7 @@ class Invoices{
 						if($_POST["quantity"][$i] != null)
 						{
 							//new line item added in edit page
-							if($_POST["invoice_item_id"][$i] == "")
+							if($_POST["invoice_item_id"][$i] == "" || $_POST["invoice_item_id"][$i] == 0)
 							{
 								if (
 								      insertInvoiceItem($invoiceID,$_POST["quantity"][$i],$_POST["product_id"][$i],$i,$_POST["tax_id"][$i],$_POST["description"][$i], $_POST["unit_price"][$i],$_POST["attribute"][$i])
@@ -790,7 +825,7 @@ class Invoices{
 								}
 							}
 							
-							if($_POST["invoice_item_id"][$i] != "")
+							if($_POST["invoice_item_id"][$i] != "" || $_POST["invoice_item_id"][$i]>0)
 							{
 								if (
 								    updateInvoiceItem($_POST["invoice_item_id"][$i],$_POST["quantity"][$i],$_POST["product_id"][$i],$i,$_POST["tax_id"][$i],$_POST["description"][$i], $_POST["unit_price"][$i],$_POST["attribute"][$i])

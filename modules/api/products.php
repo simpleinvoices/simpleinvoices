@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-//authentication - send in header X-API-KEY coded in sha1
+//authentication - send in header X-API-KEY
 if (!isset($_SERVER["HTTP_X_API_KEY"]))
 {
 	header('HTTP/1.1 406 Not Acceptable - No API Key provided');//or 404 Not Found

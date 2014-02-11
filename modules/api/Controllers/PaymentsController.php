@@ -38,7 +38,7 @@ class Payments{
 	protected function CreateItemNodes(&$root_element,&$doc,$payment)
 	{
 		global $LANG;
-	
+
 		$id = $doc->createElement("id");
 		$id->appendChild($doc->createTextNode($payment['id']));
 		$root_element->appendChild($id);
@@ -50,6 +50,10 @@ class Payments{
 		$biller_id = $doc->createElement("biller_id");
 		$biller_id->appendChild($doc->createTextNode($payment['biller_id']));
 		$root_element->appendChild($biller_id);
+		if (!is_numeric($payment['biller_id']))
+		{
+			$biller_id->setAttribute("xsi:nil", "true");
+		}
 		
 		$biller_name = $doc->createElement("biller_name");
 		$biller_name->appendChild($doc->createTextNode($payment['biller']));
@@ -58,6 +62,10 @@ class Payments{
 		$customer_id = $doc->createElement("customer_id");
 		$customer_id->appendChild($doc->createTextNode($payment['customer_id']));
 		$root_element->appendChild($customer_id);
+		if (!is_numeric($payment['customer_id']))
+		{
+			$customer_id->setAttribute("xsi:nil", "true");
+		}
 		
 		$customer_name = $doc->createElement("customer_name");
 		$customer_name->appendChild($doc->createTextNode($payment['customer']));
@@ -72,7 +80,7 @@ class Payments{
 		$root_element->appendChild($notes);
 		
 		$date = $doc->createElement("date");
-		$date->appendChild($doc->createTextNode($payment['ac_date']));
+		$date->appendChild($doc->createTextNode( date('Y-m-d H:i:s', strtotime( $payment['ac_date'] ) )));
 		$root_element->appendChild($date);
 		
 		$payment_type_id = $doc->createElement("payment_type_id");
@@ -196,6 +204,8 @@ class Payments{
 	  
 	  $root_element = $doc->createElement("payments");
 	  $doc->appendChild($root_element);
+	  $root_element->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:xsd', 'http://www.w3.org/2001/XMLSchema');
+	  $root_element->setAttributeNS('http://www.w3.org/2000/xmlns/' ,'xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
 	  
 	  if($this->_method!="GET")
 	  {     
@@ -296,6 +306,8 @@ class Payments{
 		
 		$root_element = $doc->createElement("payment");
 		$doc->appendChild($root_element);
+		$root_element->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:xsd', 'http://www.w3.org/2001/XMLSchema');
+	    $root_element->setAttributeNS('http://www.w3.org/2000/xmlns/' ,'xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
 
 		try
 		{

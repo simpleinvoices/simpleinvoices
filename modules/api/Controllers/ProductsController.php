@@ -54,22 +54,42 @@ class Products{
 		$unit_price = $doc->createElement("unit_price");
 		$unit_price->appendChild($doc->createTextNode($product['unit_price']));
 		$root_element->appendChild($unit_price);
+		if (!is_numeric($product['unit_price']))
+		{
+			$unit_price->setAttribute("xsi:nil", "true");
+		}
 		
 		$default_tax_id = $doc->createElement("default_tax_id");
 		$default_tax_id->appendChild($doc->createTextNode($product['default_tax_id']));
 		$root_element->appendChild($default_tax_id);
+		if (!is_numeric($product['default_tax_id']))
+		{
+			$default_tax_id->setAttribute("xsi:nil", "true");
+		}
 		
 		$default_tax_id_2 = $doc->createElement("default_tax_id_2");
 		$default_tax_id_2->appendChild($doc->createTextNode($product['default_tax_id_2']));
 		$root_element->appendChild($default_tax_id_2);
+		if (!is_numeric($product['default_tax_id_2']))
+		{
+			$default_tax_id_2->setAttribute("xsi:nil", "true");
+		}
 		
 		$cost = $doc->createElement("cost");
 		$cost->appendChild($doc->createTextNode($product['cost']));
 		$root_element->appendChild($cost);
+		if (!is_numeric($product['cost']))
+		{
+			$cost->setAttribute("xsi:nil", "true");
+		}
 		
 		$reorder_level = $doc->createElement("reorder_level");
 		$reorder_level->appendChild($doc->createTextNode($product['reorder_level']));
 		$root_element->appendChild($reorder_level);
+		if (!is_numeric($product['reorder_level']))
+		{
+			$reorder_level->setAttribute("xsi:nil", "true");
+		}
 
 		$notes = $doc->createElement("notes");
 		$notes->appendChild($doc->createTextNode($product['notes']));
@@ -117,6 +137,10 @@ class Products{
 			$attribute_id = $doc->createElement("attribute_id");
 			$attribute_id->appendChild($doc->createTextNode($key));
 			$root_element->appendChild($attribute_id);
+			if (!is_numeric($key))
+			{
+				$attribute_id->setAttribute("xsi:nil", "true");
+			}
 		}
 		
 		$nsDesc;
@@ -167,9 +191,9 @@ class Products{
 		foreach($products->attribute_id as $attribute)
 		{
 			$attributeID =(string)$attribute;
-			if (trim($attributeID)=="" || !is_numeric($attributeID))
+			if (trim($attributeID)=="" || !is_numeric($attributeID) || $attributeID<=0)
 			{
-				return "Not numeric attribute_id of the product!" ;
+				return "Not valid attribute_id of the product!" ;
 			}
 			$_POST['attribute'.$attributeID] = 'true';
 		}
@@ -187,9 +211,9 @@ class Products{
 			 return "Inavlid number format for unit_price!" ;
 		}
 		
-		if (!is_numeric($_POST[default_tax_id]))
+		if (!is_numeric($_POST[default_tax_id])|| $_POST[default_tax_id]<=0)
 		{
-			return "Not numeric default_tax_id field!";
+			return "Not valid default_tax_id field!";
 		}
 		
 		if (trim($_POST[cost])=="")
@@ -258,6 +282,8 @@ class Products{
 	  
 	  $root_element = $doc->createElement("products");
 	  $doc->appendChild($root_element);
+	  $root_element->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:xsd', 'http://www.w3.org/2001/XMLSchema');
+      $root_element->setAttributeNS('http://www.w3.org/2000/xmlns/' ,'xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
 	  
 	  if($this->_method!="GET")
 	  {     
@@ -357,6 +383,8 @@ class Products{
 		
 		$root_element = $doc->createElement("product");
 		$doc->appendChild($root_element);
+		$root_element->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:xsd', 'http://www.w3.org/2001/XMLSchema');
+        $root_element->setAttributeNS('http://www.w3.org/2000/xmlns/' ,'xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
 
 		try
 		{
