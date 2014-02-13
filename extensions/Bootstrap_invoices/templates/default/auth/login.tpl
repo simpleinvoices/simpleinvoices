@@ -1,5 +1,5 @@
 {* preload the headers (for faster browsing) *}
-
+Simple Invoices
 {include file=$path|cat:'../header.tpl'}
 
 <div class="container">
@@ -13,6 +13,7 @@
                 <input type="checkbox" value="remember-me"> Remember me
         </label>-->
         <button class="btn btn-lg btn-default btn-block" type="submit" value="login">Login</button>
+            <a href="http://www.simpleinvoices.org">{$LANG.simple_invoices_powered_by}</a>
         </form>
         {if $errorMessage }
 
@@ -22,11 +23,7 @@
 
 </div>
 
-<div id="si_footer">
-        <div class="si_wrap">
-            <a href="http://www.simpleinvoices.org">{$LANG.simple_invoices_powered_by}</a>
-        </div>
-</div>
+
 
 {literal}
 <script language="JavaScript">
