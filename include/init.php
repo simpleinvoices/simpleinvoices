@@ -46,6 +46,11 @@ include_once('./include/functions.php');
 
 //ob_start('addCSRFProtection');
 
+if (!is_writable('./tmp')) {
+    
+   simpleInvoicesError('notWriteable','directory','./tmp');
+}
+
 /*
  * log file - start
  */
