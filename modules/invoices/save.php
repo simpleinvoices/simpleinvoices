@@ -19,7 +19,6 @@ $smarty -> assign('active_tab', '#money');
 
 # Deal with op and add some basic sanity checking
 
-
 if(!isset( $_POST['type']) && !isset($_POST['action'])) {
 	exit("no save action");
 }
@@ -27,6 +26,12 @@ if(!isset( $_POST['type']) && !isset($_POST['action'])) {
 $saved = false;
 $type = $_POST['type'];
 
+/*
+ * EXP.:
+ * Sanitize decimal values to floats
+ * Fn defined in /include/sql_queries.php
+ */
+$unit_price = clean_decimal( $_POST['unit_price'] );
 
 
 if ($_POST['action'] == "insert" ) {
@@ -48,7 +53,7 @@ if ($_POST['action'] == "insert" ) {
 		insertProduct(0,0);
 		$product_id = lastInsertId();
 
-		insertInvoiceItem($id, 1 , $product_id, 1, $_POST['tax_id'][0], $_POST['description'], $_POST['unit_price']);
+		insertInvoiceItem($id, 1 , $product_id, 1, $_POST['tax_id'][0], $_POST['description'], $unit_price);
 	}
 	elseif ($saved) {
 		
@@ -59,7 +64,7 @@ if ($_POST['action'] == "insert" ) {
 			$logger->log('qty='.$_POST["quantity$i"], Zend_Log::INFO);
 			if($_POST["quantity$i"] != null)
 			{
-				insertInvoiceItem($id, $_POST["quantity$i"], $_POST["products$i"], $i, $_POST["tax_id"][$i], $_POST["description$i"], $_POST["unit_price$i"], $_POST["attribute"][$i]);
+				insertInvoiceItem($id, $_POST["quantity$i"], $_POST["products$i"], $i, $_POST["tax_id"][$i], $_POST["description$i"], clean_decimal( $_POST["unit_price$i"] ), $_POST["attribute"][$i]);
 			}
 			$i++;
 		}
@@ -79,7 +84,7 @@ if ($_POST['action'] == "insert" ) {
 		$logger->log('Total style invoice updated, product ID: '.$_POST['products0'], Zend_Log::INFO);
 		$sql = "UPDATE ".TB_PREFIX."products SET unit_price = :price, description = :description WHERE id = :id AND domain_id = :domain_id";
 		dbQuery($sql,
-			':price', $_POST['unit_price'],
+			':price', $unit_price,
 			':description', $_POST['description0'],
 			':id', $_POST['products0'],
 			':domain_id', $auth_session->domain_id
@@ -110,12 +115,12 @@ if ($_POST['action'] == "insert" ) {
 				//new line item added in edit page
 				if($_POST["line_item$i"] == "")
 				{
-					insertInvoiceItem($id,$_POST["quantity$i"],$_POST["products$i"],$i,$_POST["tax_id"][$i],$_POST["description$i"], $_POST["unit_price$i"],$_POST["attribute"][$i]);
+					insertInvoiceItem($id,$_POST["quantity$i"],$_POST["products$i"],$i,$_POST["tax_id"][$i],$_POST["description$i"], clean_decimal( $_POST["unit_price$i"] ),$_POST["attribute"][$i]);
 				}
 				
 				if($_POST["line_item$i"] != "")
 				{
-					updateInvoiceItem($_POST["line_item$i"],$_POST["quantity$i"],$_POST["products$i"],$i,$_POST['tax_id'][$i],$_POST["description$i"],$_POST["unit_price$i"],$_POST["attribute"][$i]);
+					updateInvoiceItem($_POST["line_item$i"],$_POST["quantity$i"],$_POST["products$i"],$i,$_POST['tax_id'][$i],$_POST["description$i"], clean_decimal( $_POST["unit_price$i"] ),$_POST["attribute"][$i]);
 //					$saved;
 					// $saved =  true;
 				}

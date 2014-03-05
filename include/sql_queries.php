@@ -684,6 +684,27 @@ function insertProductComplete($enabled=1,$visible=1,$description, $unit_price, 
 		);
 }
 
+/*
+ * EXP.:
+ * Sanitize decimal values to floats
+ */
+if ( !function_exists('clean_decimal') ) :
+function clean_decimal( $val )
+{
+	/* 
+	1. change commas to dots: 
+	*/
+	$val = str_replace( ',', '.', $val );
+	/* 
+	2. Leave only digits, commas, dots & minus, remove all but last dot:
+	3. Remove all but first minus:
+	*/
+	$val = preg_replace( '/[^0-9,.-]|[.](?=.*[.])/', '', $val );
+	$val = preg_replace( '/(?<=.)-/', '', $val );
+	return $val;
+}
+endif;
+
 function insertProduct($enabled=1,$visible=1, $domain_id='') {
     global $logger;
 	$domain_id = domain_id::get($domain_id);
@@ -712,6 +733,8 @@ function insertProduct($enabled=1,$visible=1, $domain_id='') {
 	$logger->log('Attr array: '.var_export($attr,true), Zend_Log::INFO);
 	$notes_as_description = ($_POST['notes_as_description'] == 'true' ? 'Y' : NULL) ;
     $show_description =  ($_POST['show_description'] == 'true' ? 'Y' : NULL) ;
+
+    $unit_price = clean_decimal( $_POST['unit_price'] );
 
 	$sql = "INSERT into
 		".TB_PREFIX."products
@@ -756,7 +779,7 @@ function insertProduct($enabled=1,$visible=1, $domain_id='') {
 	return dbQuery($sql,
 		':domain_id',$domain_id,	
 		':description', $_POST['description'],
-		':unit_price', $_POST['unit_price'],
+		':unit_price', $unit_price,
 		':cost', $_POST['cost'],
 		':reorder_level', $_POST['reorder_level'],
 		':custom_field1', $_POST['custom_field1'],
@@ -772,7 +795,6 @@ function insertProduct($enabled=1,$visible=1, $domain_id='') {
 		':show_description', $show_description
 		);
 }
-
 
 function updateProduct($domain_id='') {
 
