@@ -685,7 +685,6 @@ function insertProductComplete($enabled=1,$visible=1,$description, $unit_price, 
 }
 
 /*
- * EXP.:
  * Sanitize decimal values to floats
  */
 if ( !function_exists('clean_decimal') ) :
@@ -700,7 +699,7 @@ function clean_decimal( $val )
 	3. Remove all but first minus:
 	*/
 	$val = preg_replace( '/[^0-9,.-]|[.](?=.*[.])/', '', $val );
-	$val = preg_replace( '/(?<=.)-/', '', $val );
+    $val = (float) preg_replace( '/(?<=.)-/', '', $val );
 	return $val;
 }
 endif;
@@ -733,8 +732,8 @@ function insertProduct($enabled=1,$visible=1, $domain_id='') {
 	$logger->log('Attr array: '.var_export($attr,true), Zend_Log::INFO);
 	$notes_as_description = ($_POST['notes_as_description'] == 'true' ? 'Y' : NULL) ;
     $show_description =  ($_POST['show_description'] == 'true' ? 'Y' : NULL) ;
-
-    $unit_price = clean_decimal( $_POST['unit_price'] );
+    $p_unit_price = clean_decimal( $_POST['unit_price'] );
+    $p_cost = clean_decimal( $_POST['cost'] );
 
 	$sql = "INSERT into
 		".TB_PREFIX."products
@@ -779,8 +778,8 @@ function insertProduct($enabled=1,$visible=1, $domain_id='') {
 	return dbQuery($sql,
 		':domain_id',$domain_id,	
 		':description', $_POST['description'],
-		':unit_price', $unit_price,
-		':cost', $_POST['cost'],
+		':unit_price', $p_unit_price,
+		':cost', $p_cost,
 		':reorder_level', $_POST['reorder_level'],
 		':custom_field1', $_POST['custom_field1'],
 		':custom_field2', $_POST['custom_field2'],
@@ -816,6 +815,8 @@ function updateProduct($domain_id='') {
     }
 	$notes_as_description = ($_POST['notes_as_description'] == 'true' ? 'Y' : NULL) ;
     $show_description =  ($_POST['show_description'] == 'true' ? 'Y' : NULL) ;
+    $p_unit_price = clean_decimal( $_POST['unit_price'] );
+    $p_cost = clean_decimal( $_POST['cost'] );
 
 	$sql = "UPDATE ".TB_PREFIX."products
 			SET
@@ -847,8 +848,8 @@ function updateProduct($domain_id='') {
 		':custom_field2', $_POST[custom_field2],
 		':custom_field3', $_POST[custom_field3],
 		':custom_field4', $_POST[custom_field4],
-		':unit_price', $_POST[unit_price],
-		':cost', $_POST[cost],
+		':unit_price', $p_unit_price,
+		':cost', $p_cost,
 		':reorder_level', $_POST[reorder_level],
 		':attribute', json_encode($attr),
 		':notes_as_description', $notes_as_description,
