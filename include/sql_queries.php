@@ -699,7 +699,7 @@ function clean_decimal( $val )
 	3. Remove all but first minus:
 	*/
 	$val = preg_replace( '/[^0-9,.-]|[.](?=.*[.])/', '', $val );
-    $val = (float) preg_replace( '/(?<=.)-/', '', $val );
+	$val = (float) preg_replace( '/(?<=.)-/', '', $val );
 	return $val;
 }
 endif;
