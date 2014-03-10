@@ -202,6 +202,64 @@ class Customers{
 		
 		return "";
 	}
+	
+	protected function GetCustomer($ID)
+	{
+		$customer;
+		try
+		{
+			$customer = getCustomer($ID);
+		}
+		catch (Exception $e)
+		{
+			//An unexpected error occurred
+			header('HTTP/1.1 500 Internal Server Error');
+			exit();
+		}
+		
+		if(!isset($customer['id']))
+		{
+			//No resource at the specified URL
+			header('HTTP/1.1 404 Not Found');
+			exit();
+		}
+		else
+		{
+			#invoice total calc - start
+			$customer['total'] = calc_customer_total($customer['id']);
+			#invoice total calc - end
+
+			#amount paid calc - start
+			$customer['paid'] = calc_customer_paid($customer['id']);
+			#amount paid calc - end
+
+			#amount owing calc - start
+			$customer['owing'] = $customer['total'] - $customer['paid'];
+			#amount owing calc - end
+		}
+
+		$doc = new DOMDocument('1.0','UTF-8');
+		$doc->formatOutput = true;
+		
+		$root_element = $doc->createElement("customer");
+		$doc->appendChild($root_element);
+
+		try
+		{
+			$this->CreateCustomerNodes($root_element,$doc,$customer);
+		}
+		catch (Exception $e)
+		{
+			//An unexpected error occurred
+			header('HTTP/1.1 500 Internal Server Error');
+			exit();
+		}
+		//$xml = $doc->saveXML();
+		//$xml = simplexml_load_string($xml);
+		
+		return $doc;//$xml;
+	}
+	
 	public  function index()
 	{
 	  $doc = new DOMDocument('1.0','UTF-8');
@@ -285,59 +343,8 @@ class Customers{
 			exit();
 		}
 		
-		$customer;
-		try
-		{
-			$customer = getCustomer($this->_queryStr["id"]);
-		}
-		catch (Exception $e)
-		{
-			//An unexpected error occurred
-			header('HTTP/1.1 500 Internal Server Error');
-			exit();
-		}
+		return $this->GetCustomer($this->_queryStr["id"]);
 		
-		if(!isset($customer['id']))
-		{
-			//No resource at the specified URL
-			header('HTTP/1.1 404 Not Found');
-			exit();
-		}
-		else
-		{
-			#invoice total calc - start
-			$customer['total'] = calc_customer_total($customer['id']);
-			#invoice total calc - end
-
-			#amount paid calc - start
-			$customer['paid'] = calc_customer_paid($customer['id']);
-			#amount paid calc - end
-
-			#amount owing calc - start
-			$customer['owing'] = $customer['total'] - $customer['paid'];
-			#amount owing calc - end
-		}
-
-		$doc = new DOMDocument('1.0','UTF-8');
-		$doc->formatOutput = true;
-		
-		$root_element = $doc->createElement("customer");
-		$doc->appendChild($root_element);
-
-		try
-		{
-			$this->CreateCustomerNodes($root_element,$doc,$customer);
-		}
-		catch (Exception $e)
-		{
-			//An unexpected error occurred
-			header('HTTP/1.1 500 Internal Server Error');
-			exit();
-		}
-		//$xml = $doc->saveXML();
-		//$xml = simplexml_load_string($xml);
-		
-		return $doc;//$xml;
 	}
      
 	//Creates a new customer 
@@ -402,17 +409,17 @@ class Customers{
 				}
 				
 				$saved = true;
-				$doc = new DOMDocument('1.0','UTF-8');
-				$doc->formatOutput = true;
-				$root_element = $doc->createElement("customer");
-				$doc->appendChild($root_element);
-				$id = $doc->createElement("id");
-				$id->appendChild($doc->createTextNode($insertID));
-				$root_element->appendChild($id);
+				// $doc = new DOMDocument('1.0','UTF-8');
+				// $doc->formatOutput = true;
+				// $root_element = $doc->createElement("customer");
+				// $doc->appendChild($root_element);
+				// $id = $doc->createElement("id");
+				// $id->appendChild($doc->createTextNode($insertID));
+				// $root_element->appendChild($id);
 				
 				//Successful request when something is created at another URL 
 				header('HTTP/1.1 201 Created');
-				return $doc;
+				return $this->GetCustomer($insertID);//$doc;
 			}
 		}
 		catch (Exception $e)
@@ -472,7 +479,7 @@ class Customers{
 				// saveCustomFieldValues($_POST['categorie'],lastInsertId());
 				//Successful request when something is updated at another URL 
 				header('HTTP/1.1 200 OK - Updated successfully');
-				exit();
+				return $this->GetCustomer($this->_queryStr['id']);//exit();
 			}
 		}
 		catch (Exception $e)

@@ -275,6 +275,52 @@ class Products{
 		
 		return "";
 	}
+	
+	protected function GetProduct($ID)
+	{
+		$product;
+		try
+		{
+			$product = getProduct($ID);
+		}
+		catch (Exception $e)
+		{
+			//An unexpected error occurred
+			header('HTTP/1.1 500 Internal Server Error');
+			exit();
+		}
+		
+		if(!isset($product['id']))
+		{
+			//No resource at the specified URL
+			header('HTTP/1.1 404 Not Found');
+			exit();
+		}
+
+		$doc = new DOMDocument('1.0','UTF-8');
+		$doc->formatOutput = true;
+		
+		$root_element = $doc->createElement("product");
+		$doc->appendChild($root_element);
+		$root_element->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:xsd', 'http://www.w3.org/2001/XMLSchema');
+        $root_element->setAttributeNS('http://www.w3.org/2000/xmlns/' ,'xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
+
+		try
+		{
+			$this->CreateItemNodes($root_element,$doc,$product);
+		}
+		catch (Exception $e)
+		{
+			//An unexpected error occurred
+			header('HTTP/1.1 500 Internal Server Error');
+			exit();
+		}
+		//$xml = $doc->saveXML();
+		//$xml = simplexml_load_string($xml);
+		
+		return $doc;//$xml;
+	}
+	
 	public  function index()
 	{
 	  $doc = new DOMDocument('1.0','UTF-8');
@@ -358,48 +404,7 @@ class Products{
 			header('HTTP/1.1 400 Bad Request');
 			exit();
 		}
-		
-		$product;
-		try
-		{
-			$product = getProduct($this->_queryStr["id"]);
-		}
-		catch (Exception $e)
-		{
-			//An unexpected error occurred
-			header('HTTP/1.1 500 Internal Server Error');
-			exit();
-		}
-		
-		if(!isset($product['id']))
-		{
-			//No resource at the specified URL
-			header('HTTP/1.1 404 Not Found');
-			exit();
-		}
-
-		$doc = new DOMDocument('1.0','UTF-8');
-		$doc->formatOutput = true;
-		
-		$root_element = $doc->createElement("product");
-		$doc->appendChild($root_element);
-		$root_element->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:xsd', 'http://www.w3.org/2001/XMLSchema');
-        $root_element->setAttributeNS('http://www.w3.org/2000/xmlns/' ,'xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
-
-		try
-		{
-			$this->CreateItemNodes($root_element,$doc,$product);
-		}
-		catch (Exception $e)
-		{
-			//An unexpected error occurred
-			header('HTTP/1.1 500 Internal Server Error');
-			exit();
-		}
-		//$xml = $doc->saveXML();
-		//$xml = simplexml_load_string($xml);
-		
-		return $doc;//$xml;
+		return $this->GetProduct($this->_queryStr["id"]);
 	}
      
 	//Creates a new product 
@@ -460,17 +465,17 @@ class Products{
 				}
 				
 				$saved = true;
-				$doc = new DOMDocument('1.0','UTF-8');
-				$doc->formatOutput = true;
-				$root_element = $doc->createElement("product");
-				$doc->appendChild($root_element);
-				$id = $doc->createElement("id");
-				$id->appendChild($doc->createTextNode($insertID));
-				$root_element->appendChild($id);
+				// $doc = new DOMDocument('1.0','UTF-8');
+				// $doc->formatOutput = true;
+				// $root_element = $doc->createElement("product");
+				// $doc->appendChild($root_element);
+				// $id = $doc->createElement("id");
+				// $id->appendChild($doc->createTextNode($insertID));
+				// $root_element->appendChild($id);
 				
 				//Successful request when something is created at another URL 
 				header('HTTP/1.1 201 Created');
-				return $doc;
+				return $this->GetProduct($insertID); //$doc;
 			}
 		}
 		catch (Exception $e)
@@ -529,7 +534,7 @@ class Products{
 				$saved = true;
 				//Successful request when something is updated at another URL 
 				header('HTTP/1.1 200 OK - Updated successfully');
-				exit();
+				return $this->GetProduct($this->_queryStr["id"]);//exit();
 			}
 		}
 		catch (Exception $e)

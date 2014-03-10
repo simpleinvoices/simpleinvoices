@@ -197,6 +197,51 @@ class Payments{
 		return $payments;
 	}
 	
+	protected function GetPayment($ID)
+	{
+		$payment;
+		try
+		{
+			$payment = $this->getPayments($ID); //getPayment($this->_queryStr["id"]);
+		}
+		catch (Exception $e)
+		{
+			//An unexpected error occurred
+			header('HTTP/1.1 500 Internal Server Error');
+			exit();
+		}
+		
+		if(!isset($payment['id']))
+		{
+			//No resource at the specified URL
+			header('HTTP/1.1 404 Not Found');
+			exit();
+		}
+
+		$doc = new DOMDocument('1.0','UTF-8');
+		$doc->formatOutput = true;
+		
+		$root_element = $doc->createElement("payment");
+		$doc->appendChild($root_element);
+		$root_element->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:xsd', 'http://www.w3.org/2001/XMLSchema');
+	    $root_element->setAttributeNS('http://www.w3.org/2000/xmlns/' ,'xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
+
+		try
+		{
+			$this->CreateItemNodes($root_element,$doc,$payment);
+		}
+		catch (Exception $e)
+		{
+			//An unexpected error occurred
+			header('HTTP/1.1 500 Internal Server Error');
+			exit();
+		}
+		//$xml = $doc->saveXML();
+		//$xml = simplexml_load_string($xml);
+		
+		return $doc;//$xml;
+	}
+	
 	public  function index()
 	{
 	  $doc = new DOMDocument('1.0','UTF-8');
@@ -281,48 +326,7 @@ class Payments{
 			header('HTTP/1.1 400 Bad Request');
 			exit();
 		}
-		
-		$payment;
-		try
-		{
-			$payment = $this->getPayments($this->_queryStr["id"]); //getPayment($this->_queryStr["id"]);
-		}
-		catch (Exception $e)
-		{
-			//An unexpected error occurred
-			header('HTTP/1.1 500 Internal Server Error');
-			exit();
-		}
-		
-		if(!isset($payment['id']))
-		{
-			//No resource at the specified URL
-			header('HTTP/1.1 404 Not Found');
-			exit();
-		}
-
-		$doc = new DOMDocument('1.0','UTF-8');
-		$doc->formatOutput = true;
-		
-		$root_element = $doc->createElement("payment");
-		$doc->appendChild($root_element);
-		$root_element->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:xsd', 'http://www.w3.org/2001/XMLSchema');
-	    $root_element->setAttributeNS('http://www.w3.org/2000/xmlns/' ,'xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
-
-		try
-		{
-			$this->CreateItemNodes($root_element,$doc,$payment);
-		}
-		catch (Exception $e)
-		{
-			//An unexpected error occurred
-			header('HTTP/1.1 500 Internal Server Error');
-			exit();
-		}
-		//$xml = $doc->saveXML();
-		//$xml = simplexml_load_string($xml);
-		
-		return $doc;//$xml;
+		return $this->GetPayment($this->_queryStr["id"]);
 	}
      
 	//Creates a new payment 
@@ -394,17 +398,17 @@ class Payments{
 					exit();
 				}
 				
-				$doc = new DOMDocument('1.0','UTF-8');
-				$doc->formatOutput = true;
-				$root_element = $doc->createElement("payment");
-				$doc->appendChild($root_element);
-				$id = $doc->createElement("id");
-				$id->appendChild($doc->createTextNode($insertID));
-				$root_element->appendChild($id);
+				// $doc = new DOMDocument('1.0','UTF-8');
+				// $doc->formatOutput = true;
+				// $root_element = $doc->createElement("payment");
+				// $doc->appendChild($root_element);
+				// $id = $doc->createElement("id");
+				// $id->appendChild($doc->createTextNode($insertID));
+				// $root_element->appendChild($id);
 				
 				//Successful request when something is created at another URL 
 				header('HTTP/1.1 201 Created');
-				return $doc;
+				return $this->GetPayment($insertID); //$doc;
 			}
 		}
 		catch (Exception $e)

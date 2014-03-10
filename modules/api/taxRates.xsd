@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+  <xsd:element name="taxRate">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="tax_id" type="xsd:unsignedByte" />
+        <xsd:element name="tax_description" type="xsd:string" />
+        <xsd:element name="tax_percentage" type="xsd:decimal" />
+        <xsd:element name="type" type="xsd:string" />
+        <xsd:element name="enabled" type="xsd:unsignedByte" />
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xs:schema>
