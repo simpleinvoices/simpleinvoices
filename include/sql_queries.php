@@ -691,15 +691,36 @@ if ( !function_exists('clean_decimal') ) :
 function clean_decimal( $val )
 {
 	/* 
-	1. change commas to dots: 
+	Process only if string contains other than digits: 
 	*/
-	$val = str_replace( ',', '.', $val );
-	/* 
-	2. Leave only digits, commas, dots & minus, remove all but last dot:
-	3. Remove all but first minus:
-	*/
-	$val = preg_replace( '/[^0-9,.-]|[.](?=.*[.])/', '', $val );
-	$val = (float) preg_replace( '/(?<=.)-/', '', $val );
+	if ( !preg_match( '/^\d+$/', $val ) ){
+		/* 
+		Leave only digits, commas, dots & minus:
+		*/
+		$val = preg_replace( '/[^0-9,.-]/', '', $val );
+		/* 
+		Check three digits and comma from end, 
+		imperial thousands preferred over three continental decimals:
+		*/
+		if ( preg_match('/[.\d](\d{3})[,](\d{3}$)/', $val) ){
+			$val = preg_replace('/(?<=\d),(?=\d{3})/', '.', $val);			
+		}
+		if ( preg_match('/(\d{1})[,](\d{3}$)/', $val) ){
+			$val = preg_replace('/(?<=\d),(?=\d{3})/', '', $val);			
+		}
+		/* 
+		Change commas to dots: 
+		*/
+		$val = str_replace( ',', '.', $val );
+		/* 
+		Remove all but last dot:
+		*/
+		$val = preg_replace( '/[.](?=.*[.])/', '', $val );
+		/*
+		Remove all but first minus:
+		*/
+		$val = (float) preg_replace( '/(?<=.)-/', '', $val );
+	} 
 	return $val;
 }
 endif;
