@@ -132,9 +132,9 @@ class inventory {
 			$limit";
 
 		if (empty($query)) {
-			$sth = $dbQuery($sql, ':domain_id', $this->domain_id);
+			$sth = dbQuery($sql, ':domain_id', $this->domain_id);
 		} else {
-			$sth = $dbQuery($sql, ':domain_id', $this->domain_id, ':query', "%$query%");
+			$sth = dbQuery($sql, ':domain_id', $this->domain_id, ':query', "%$query%");
 		}
 
 		if($type =="count")
