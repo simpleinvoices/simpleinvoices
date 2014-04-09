@@ -82,7 +82,8 @@ class TaxRates{
 		$_POST[type]=(string)$taxRates->type;
 		$_POST[tax_enabled]=(string)$taxRates->enabled;
 		
-		if (trim($_POST[tax_description])=="" || strlen($_POST[tax_description])>50) 
+		//use mb_strlen instead of strlen because of cyrillic characters
+		if (trim($_POST[tax_description])=="" || mb_strlen($_POST[tax_description])>50) 
 		{
 		    return "Inavlid length of tax_description!";
 		}
@@ -94,7 +95,7 @@ class TaxRates{
 		{
 			 return "Inavlid number format for tax_percentage!" ;
 		}
-		if(trim($_POST[type])=="" || strlen($_POST[type])>1)
+		if(trim($_POST[type])=="" || mb_strlen($_POST[type])>1)
 		{
 			return "Inavlid length of type!";
 		}

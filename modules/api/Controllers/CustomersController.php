@@ -182,16 +182,16 @@ class Customers{
 		$_POST[custom_field4]=(string)$customers->custom_field4;
 		$_POST['enabled']=(string)$customers->enabled;
 		
-		
-		if (trim($_POST[name])=="" || strlen($_POST[name])>255) 
+		//use mb_strlen instead of strlen because of cyrillic characters
+		if (trim($_POST[name])=="" || mb_strlen($_POST[name])>255) 
 		{
 		    return "Inavlid length of customer name!";
 		}
-		if (strlen($_POST[credit_card_expiry_month])>2)
+		if (mb_strlen($_POST[credit_card_expiry_month])>2)
 		{
 			return "Inavlid length of customer credit card expiry month!";
 		}
-		if (strlen($_POST[credit_card_expiry_year])>4)
+		if (mb_strlen($_POST[credit_card_expiry_year])>4)
 		{
 			return "Inavlid length of customer credit card expiry year!";
 		}

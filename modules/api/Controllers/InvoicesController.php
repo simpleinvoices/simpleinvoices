@@ -363,19 +363,20 @@ class Invoices{
 		{
 			return "Not numeric preference_id field!";
 		}
-		if (strlen($_POST[customField1])>50)
+		//use mb_strlen instead of strlen because of cyrillic characters
+		if (mb_strlen($_POST[customField1])>50)
 		{
 			return "Inavlid length of customField1!";
 		}
-		if (strlen($_POST[customField2])>50)
+		if (mb_strlen($_POST[customField2])>50)
 		{
 			return "Inavlid length of customField2!";
 		}
-		if (strlen($_POST[customField3])>50)
+		if (mb_strlen($_POST[customField3])>50)
 		{
 			return "Inavlid length of customField3!";
 		}
-		if (strlen($_POST[customField4])>50)
+		if (mb_strlen($_POST[customField4])>50)
 		{
 			return "Inavlid length of customField4!";
 		}
