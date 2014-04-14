@@ -16,14 +16,14 @@
 	{/if}
 <form name="frmpost" action="index.php?module=product_value&amp;view=add" method="post">
 
-<h3>Add product value</h3>
+<h3>{$LANG.add_product_value}</h3> <!--Maria - translation Add product value-->
 
 <hr />
 
 
 <table align="center">
 <tr>
-	<td class="details_screen">Attribute</td>
+	<td class="details_screen">{$LANG.attribute}</td> <!--Maria - translation Attribute-->
 	<td>
             <select name="attribute_id">
             {foreach from=$product_attributes item=product_attribute}
@@ -33,7 +33,7 @@
 	</td>
 </tr>
 <tr>
-	<td class="details_screen">Value</td>
+	<td class="details_screen">{$LANG.value}</td> <!--Maria - translation Value-->
 	<td><input type="text" name="value" value="{$smarty.post.value}" size="25" /></td>
 </tr>
 		<tr>
@@ -46,7 +46,7 @@
 <!-- </div> -->
 <hr />
 <div style="text-align:center;">
-	<input type="submit" name="submit" value="Insert Product Value" />
+	<input type="submit" name="submit" value="{$LANG.insert_product_value}" /> <!--Maria - translation Insert Product Value-->
 	<input type="hidden" name="op" value="insert_product_value" />
 </div>
 </form>
