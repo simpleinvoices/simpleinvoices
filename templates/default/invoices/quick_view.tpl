@@ -20,11 +20,7 @@
 <div class="si_toolbar si_toolbar_top">
 	<a title="{$LANG.print_preview_tooltip} {$preference.pref_inv_wording|htmlsafe} {$invoice.index_id|htmlsafe}" href="index.php?module=export&amp;view=invoice&amp;id={$invoice.id|urlencode}&amp;format=print"><img src='images/common/printer.png' class='action' />&nbsp;{$LANG.print_preview}</a>
 	<a title="{$LANG.edit} {$preference.pref_inv_wording|htmlsafe} {$invoice.index_id|htmlsafe}" href="index.php?module=invoices&amp;view=details&amp;id={$invoice.id|urlencode}&amp;action=view"><img src='images/common/edit.png' class='action' />&nbsp;{$LANG.edit}</a>
-{if $preference.status > 0}
-	{if $invoice.owing != 0}
-		<a title="{$LANG.process_payment_for} {$preference.pref_inv_wording|htmlsafe} {$invoice.index_id|htmlsafe}" href="index.php?module=payments&amp;view=process&amp;id={$invoice.id|urlencode}&amp;op=pay_selected_invoice"><img src='images/common/money_dollar.png' class='action' />&nbsp;{$LANG.process_payment} </a>
-	{/if}
-{/if}
+	 <a title="{$LANG.process_payment_for} {$preference.pref_inv_wording|htmlsafe} {$invoice.index_id|htmlsafe}" href="index.php?module=payments&amp;view=process&amp;id={$invoice.id|urlencode}&amp;op=pay_selected_invoice"><img src='images/common/money_dollar.png' class='action' />&nbsp;{$LANG.process_payment} </a>
 {if $eway_pre_check == 'true'}
 	 <a title="{$LANG.process_payment_for} {$preference.pref_inv_wording|htmlsafe} {$invoice.index_id|htmlsafe}" href="index.php?module=payments&amp;view=eway&amp;id={$invoice.id|urlencode}"><img src='images/common/money_dollar.png' class='action' />&nbsp;{$LANG.process_payment_via_eway} </a>
 {/if}
@@ -152,20 +148,20 @@
 		<tr class="customer">
 			<th>{$LANG.city}:</th>
 			<td colspan="3">{$customer.city|htmlsafe}</td>
-			<th>Ph:</th>
+			<th>{$LANG.phone_short}:</th> <!--Maria translate ph-->
 			<td>{$customer.phone|htmlsafe}</td>
 		</tr>	
 		<tr class="customer">
-			<th>{$LANG.state}, ZIP:</th>
+			<th>{$LANG.state}, {$LANG.zip}:</th> <!--Maria translate zip-->
 			<td colspan="3">{$customer.state|htmlsafe}, {$customer.zip_code|htmlsafe}</td>
-			<th>{$LANG.fax}:</th>
-			<td>{$customer.fax|htmlsafe}</td>
+			<th>{$LANG.mobile_short}:</th> <!--Maria translate mobile-->
+			<td>{$customer.mobile_phone|htmlsafe}</td>
 		</tr>	
 		<tr class="customer">
 			<th>{$LANG.country}:</th>
 			<td colspan="3">{$customer.country|htmlsafe}</td>
-			<th>Mobile:</th>
-			<td>{$customer.mobile_phone|htmlsafe}</td>
+			<th>{$LANG.fax}:</th>
+			<td>{$customer.fax|htmlsafe}</td>
 		</tr>	
 		<tr class="customer">
 			<th>{$LANG.email}:</th>
@@ -414,11 +410,7 @@
 			<table>
 				<tr>
 					<th>{$LANG.total}</th>
-{if $preference.status > 0}
 					<th><a href="index.php?module=payments&amp;view=manage&amp;id={$invoice.id|urlencode}">{$LANG.paid}</a></th>
-{else}
-					<th>{$LANG.paid}</td>
-{/if}
 					<th>{$LANG.owing}</th>
 					<th>{$LANG.age}
 						<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_age" title="{$LANG.age}"><img src="./images/common/help-small.png" alt="" /></a>
@@ -426,13 +418,9 @@
 				</tr>
 				<tr>
 					<td>{$preference.pref_currency_sign} {$invoice.total|siLocal_number}</td>
-{if $preference.status > 0}
 					<td>{$preference.pref_currency_sign} {$invoice.paid|siLocal_number}</td>
 					<td>{$preference.pref_currency_sign} {$invoice.owing|siLocal_number}</td>
 					<td>{$invoice_age|htmlsafe}</td>
-{else}
-					<td colspan="3">&nbsp;</td>
-{/if}
 				</tr>
 			</table>
 		</div>

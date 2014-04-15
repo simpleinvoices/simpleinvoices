@@ -589,6 +589,14 @@ $LANG['years'] = "years";//0
 $LANG['yes'] = "Da";//1
 $LANG['your_reports'] = "Your reports";//0
 $LANG['zip'] = "Cod Postal";//1
+$LANG['manage_product_attributes'] = "Manage Product Attributes";//1
+$LANG['add_product_attribute'] = "Add Product Attribute";//1
+$LANG['insert_product_attribute'] = "Insert Product Attribute";//1
+$LANG['product_attribute'] = "Product Attribute";//1
+$LANG['add_product_value'] = "Add Product Value";//1
+$LANG['insert_product_value'] = "Insert Product Value";//1
+$LANG['product_value'] = "Product Value";//1
+$LANG['manage_product_values'] = "Manage Product Value";//1
 
 $LANG['title_module_index']				= "Acasa";//1
 $LANG['title_module_reports']			= "Home / Reports";//0

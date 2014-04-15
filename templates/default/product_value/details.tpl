@@ -31,7 +31,7 @@
 
 {if $smarty.get.action== 'edit' }
 
-<b>Preferences</b>
+<b>{$LANG.product_value}</b> <!--Maria tanslate Preferences-->
 	<hr />
 
 	<table align="center">
@@ -48,7 +48,7 @@
 		            </select>
 			</td>
 		<tr>
-			<td class="details_screen">Value</td><td><input type="text" name="value" value="{$product_value.value}" size="50" /></td>
+			<td class="details_screen">{$LANG.value}</td><td><input type="text" name="value" value="{$product_value.value}" size="50" /></td> <!--Maria tanslate Value-->
 		</tr>
 		<th>{$LANG.enabled}</th>
 		<td>
@@ -59,8 +59,9 @@
 
 	</table>
 	<hr />
-
-<input type="submit" name="save_product_value" value="{$LANG.save}" />
-<input type="hidden" name="op" value="edit_product_value" />
+<div style="text-align:center;"> <!--Maria add align-->
+	<input type="submit" name="save_product_value" value="{$LANG.save}" />
+	<input type="hidden" name="op" value="edit_product_value" />
+</div>
 {/if}
 </form>
