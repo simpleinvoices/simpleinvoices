@@ -593,6 +593,9 @@ $LANG['add_product_value'] = "Add Product Value";//1
 $LANG['insert_product_value'] = "Insert Product Value";//1
 $LANG['product_value'] = "Product Value";//1
 $LANG['manage_product_values'] = "Manage Product Value";//1
+$LANG['system_settings'] = "System settings";
+$LANG['invoice_settings'] = "Invoice settings";
+$LANG['database_stuff'] = "Database stuff";
 
 $LANG['title_module_index']				= "Home";//1
 $LANG['title_module_reports']			= "Home / Report";//1

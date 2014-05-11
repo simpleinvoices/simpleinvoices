@@ -7,14 +7,14 @@
 <div class="si_form si_form_view">
 	<table>
 		<tr>	
-			<th>Description 
+			<th>{$LANG.description} 
 				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_description" title="{$LANG.description}">
 				<img src="./images/common/help-small.png" alt="" /> </a>
 			</th>
 			<td>{$preference.pref_description}</td>
 		</tr>
 		<tr>
-			<th>Currency sign 
+			<th>{$LANG.currency_sign} 
 				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_currency_sign" title="{$LANG.currency_sign}">
 				<img src="./images/common/help-small.png" alt="" /> </a>
 			</th>
@@ -28,21 +28,21 @@
 			<td>{$preference.currency_code|htmlsafe}</td>
 		</tr>
 		<tr>
-			<th>Invoice heading 
+			<th>{$LANG.invoice_heading} 
 				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_heading" title="{$LANG.invoice_heading}">
 				<img src="./images/common/help-small.png" alt="" /> </a> 
 			</th>
 			<td>{$preference.pref_inv_heading|htmlsafe}</td>
 		</tr>
 		<tr>
-			<th>Invoice wording 
+			<th>{$LANG.invoice_wording} 
 				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_wording" title="{$LANG.invoice_wording}">
 				<img src="./images/common/help-small.png" alt="" /> </a>
 			</th>
 			<td>{$preference.pref_inv_wording|htmlsafe}</td>
 		</tr>
 		<tr>
-			<th>Invoice detail heading 
+			<th>{$LANG.invoice_detail_heading} 
 				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_detail_heading" title="{$LANG.invoice_detail_heading}">
 				<img src="./images/common/help-small.png" alt="" /> </a>
 			</th>
@@ -50,7 +50,7 @@
 		</tr>
 		<tr>
 			<th>{$LANG.include_online_payment}
-				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_detail_line" title="{$LANG.invoice_detail_line}">
+				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_payment_method" title="{$LANG.include_online_payment}">
 				<img src="./images/common/help-small.png" alt="" /></a>
 			</th>
 			<td>
@@ -60,35 +60,35 @@
 			</td>
 		</tr>
 		<tr>
-			<th>Invoice payment method 
+			<th>{$LANG.invoice_payment_method} 
 				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_payment_method" title="{$LANG.invoice_payment_method}">
 				<img src="./images/common/help-small.png" alt="" /></a>
 			</th>
 			<td>{$preference.pref_inv_payment_method|htmlsafe}</td>
 		</tr>
 		<tr>
-			<th>Invoice payment line1 name 
+			<th>{$LANG.invoice_payment_line_1_name} 
 				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_payment_line1_name" title="{$LANG.invoice_payment_line_1_name}">
 				<img src="./images/common/help-small.png" alt="" /></a>
 			</th>
 			<td>{$preference.pref_inv_payment_line1_name|htmlsafe}</td>
 		</tr>
 		<tr>
-			<th>Invoice payment line1 value 
+			<th>{$LANG.invoice_payment_line_1_value} 
 				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_payment_line1_value" title="{$LANG.invoice_payment_line_1_value}">
 				<img src="./images/common/help-small.png" alt="" /></a>
 			</th>
 			<td>{$preference.pref_inv_payment_line1_value|htmlsafe}</td>
 		</tr>
 		<tr>
-			<th>Invoice payment line2 name 
+			<th>{$LANG.invoice_payment_line_2_name} 
 				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_payment_line2_name" title="{$LANG.invoice_payment_line_2_name}">
 				<img src="./images/common/help-small.png" alt="" /></a>
 			</th>
 			<td>{$preference.pref_inv_payment_line2_name|htmlsafe}</td>
 		</tr>
 		<tr>
-			<th>Invoice payment line2 value 
+			<th>{$LANG.invoice_payment_line_2_value} 
 				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_payment_line2_value" title="{$LANG.invoice_payment_line_2_value}">
 				<img src="./images/common/help-small.png" alt="" /></a>
 			</th>
@@ -157,7 +157,7 @@
 <div class="si_form">
 	<table>
 		<tr>
-			<th>Description 
+			<th>{$LANG.description} 
 				<a 
 					class="cluetip"
 					href="#"
@@ -173,7 +173,7 @@
 			<td><input type="text" class="validate[required]" name='pref_description' value="{$preference.pref_description|htmlsafe}" size="50" /></td>
 		</tr>
 		<tr>
-			<th>Currency sign 
+			<th>{$LANG.currency_sign} 
 				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_currency_sign" title="{$LANG.currency_sign}">
 				<img src="./images/common/help-small.png" alt="" /> </a>
 			</th>
@@ -195,28 +195,28 @@
             </td>
 		</tr>
 		<tr>
-			<th>Invoice heading 
+			<th>{$LANG.invoice_heading} 
 				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_heading" title="{$LANG.invoice_heading}">
 				<img src="./images/common/help-small.png" alt="" /> </a>
 			</th>
 			<td><input type="text" name='pref_inv_heading' value="{$preference.pref_inv_heading|htmlsafe}" size="50" /></td>
 		</tr>
 		<tr>
-			<th>Invoice wording 
+			<th>{$LANG.invoice_wording} 
 				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_wording" title="{$LANG.invoice_wording}">
 				<img src="./images/common/help-small.png" alt="" /> </a> 
 			</th>
 			<td><input type="text" name='pref_inv_wording' value="{$preference.pref_inv_wording|htmlsafe}" size="50" /></td>
 		</tr>
 		<tr>
-			<th>Invoice detail heading 
+			<th>{$LANG.invoice_detail_heading} 
 				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_detail_heading" title="{$LANG.invoice_detail_heading}">
 				<img src="./images/common/help-small.png" alt="" /> </a>
 			</th>
 			<td><input type="text" name='pref_inv_detail_heading' value="{$preference.pref_inv_detail_heading|htmlsafe}" size="50" /></td>
 		</tr>
 		<tr>
-			<th>Invoice detail line 
+			<th>{$LANG.invoice_detail_line} 
 				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_detail_line" title="{$LANG.invoice_detail_line}">
 				<img src="./images/common/help-small.png" alt="" /></a>
 			</th>
@@ -224,7 +224,7 @@
 		</tr>
 		<tr>
 			<th>{$LANG.include_online_payment}
-				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_detail_line" title="{$LANG.invoice_detail_line}">
+				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_payment_method" title="{$LANG.include_online_payment}">
 				<img src="./images/common/help-small.png" alt="" /></a>
 			</th>
 			<td>
@@ -234,35 +234,35 @@
 			</td>
 		</tr>
 		<tr>
-			<th>Invoice payment method 
+			<th>{$LANG.invoice_payment_method} 
 				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_payment_method" title="{$LANG.invoice_payment_method}">
 				<img src="./images/common/help-small.png" alt="" /></a>
 			</th>
 			<td><input type="text" name='pref_inv_payment_method' value="{$preference.pref_inv_payment_method|htmlsafe}" size="50" /></td>
 		</tr>
 		<tr>
-			<th>Invoice payment line1 name 
+			<th>{$LANG.invoice_payment_line_1_name} 
 				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_payment_line1_name" title="{$LANG.invoice_payment_line_1_name}">
 				<img src="./images/common/help-small.png" alt="" /></a>
 			</th>
 			<td><input type="text" name='pref_inv_payment_line1_name' value="{$preference.pref_inv_payment_line1_name|htmlsafe}" size="50" /></td>
 		</tr>
 		<tr>
-			<th>Invoice payment line1 value 
+			<th>{$LANG.invoice_payment_line_1_value}
 				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_payment_line1_value" title="{$LANG.invoice_payment_line_1_value}">
 				<img src="./images/common/help-small.png" alt="" /></a>
 			</th>
 			<td><input type="text" name='pref_inv_payment_line1_value' value="{$preference.pref_inv_payment_line1_value|htmlsafe}" size="50" /></td>
 		</tr>
 		<tr>
-			<th>Invoice payment line2 name 
+			<th>{$LANG.invoice_payment_line_2_name} 
 				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_payment_line2_name" title="{$LANG.invoice_payment_line_2_name}">
 				<img src="./images/common/help-small.png" alt="" /></a>
 			</th>
 			<td><input type="text" name='pref_inv_payment_line2_name' value="{$preference.pref_inv_payment_line2_name|htmlsafe}" size="50" /></td>
 		</tr>
 		<tr>
-			<th>Invoice payment line2 value 
+			<th>{$LANG.invoice_payment_line_2_value} 
 				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_payment_line2_value" title="{$LANG.invoice_payment_line_2_value}">
 				<img src="./images/common/help-small.png" alt="" /></a>
 			</th>

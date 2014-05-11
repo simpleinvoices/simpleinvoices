@@ -77,7 +77,7 @@
 		</tr>
 		<tr>
 			<th>{$LANG.include_online_payment}
-				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_detail_line" title="{$LANG.invoice_detail_line}">
+				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_payment_method" title="{$LANG.include_online_payment}">
 				<img src="./images/common/help-small.png" alt="" /></a>
 			</th>
 			<td>

@@ -31,7 +31,7 @@ if ( $op === 'insert_biller') {
 	
 	if($id = insertBiller()) {
  		$saved = true;
- 		//saveCustomFieldValues($_POST['categorie'],lastInsertId());
+ 		//saveCustomFieldValues($_POST['categorie'],$db->lastInsertId());
  	}
 }
 

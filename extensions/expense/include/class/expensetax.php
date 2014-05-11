@@ -11,11 +11,11 @@ class expensetax
 
     public function get_all($expense_id)
     {
-        
+        global $db;
         $sql = "SELECT * FROM ".TB_PREFIX."expense_item_tax 
 				WHERE  expense_id = :expense_id 
 				ORDER BY id";
-        $sth  = dbQuery($sql,':expense_id',$expense_id );
+        $sth  = $db->query($sql,':expense_id',$expense_id );
         
         return $sth->fetchAll();
     
@@ -23,11 +23,11 @@ class expensetax
 
     public function get_sum($expense_id)
     {
-        
+        global $db;
         $sql = "SELECT SUM(tax_amount) AS sum 
 				FROM ".TB_PREFIX."expense_item_tax 
 				WHERE  expense_id = :expense_id ORDER BY id";
-        $sth  = dbQuery($sql,':expense_id',$expense_id );
+        $sth  = $db->query($sql,':expense_id',$expense_id );
         
         return $sth->fetchColumn();
     
@@ -35,6 +35,7 @@ class expensetax
 
     function grouped($expense_id)
     {
+        global $db;
         $sql = "SELECT 
                       t.tax_description AS tax_name 
                     , SUM(et.tax_amount) AS tax_amount
@@ -50,7 +51,7 @@ class expensetax
 				AND e.domain_id = :domain_id
                 GROUP BY 
                     t.tax_id;";
-        $sth = dbQuery($sql, ':expense_id', $expense_id, ':domain_id', $this->domain_id);
+        $sth = $db->uery($sql, ':expense_id', $expense_id, ':domain_id', $this->domain_id);
         $result = $sth->fetchAll();
 
         return $result;

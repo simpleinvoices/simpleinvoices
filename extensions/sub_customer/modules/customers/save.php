@@ -33,7 +33,7 @@ if ($op === "insert_customer") {
 
 	if ($sub_customerobj->insertCustomer()) {
 		$saved = true;
-		// saveCustomFieldValues($_POST['categorie'],lastInsertId());
+		// saveCustomFieldValues($_POST['categorie'],$db->lastInsertId());
 	}
 }
 

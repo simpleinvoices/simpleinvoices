@@ -11,17 +11,17 @@ class expense
 
     public function count()
     {
-
+        global $db;
         $sql = "SELECT count(id) as count FROM ".TB_PREFIX."expense WHERE domain_id = :domain_id ORDER BY id";
-        $sth = dbQuery($sql, ':domain_id', $this->domain_id);
+        $sth = $db->query($sql, ':domain_id', $this->domain_id);
 
         return $sth->fetch();
     }
     public function get_all()
     {
-        
+        global $db;
         $sql = "SELECT * FROM ".TB_PREFIX."expense WHERE domain_id = :domain_id ORDER BY id";
-        $sth  = dbQuery($sql,':domain_id',$this->domain_id);
+        $sth  = $db->query($sql,':domain_id',$this->domain_id);
         
         return $sth->fetchAll();
     
@@ -55,9 +55,9 @@ class expense
 
     public function get($id)
     {
-
+        global $db;
         $sql = "SELECT * FROM ".TB_PREFIX."expense WHERE domain_id = :domain_id and id = :id";
-        $sth  = dbQuery($sql,':domain_id',$this->domain_id ,':id',$id);
+        $sth  = $db->query($sql,':domain_id',$this->domain_id ,':id',$id);
 
         return $sth->fetch();
 
@@ -93,6 +93,7 @@ class expense
     public function save()
     {
         global $logger;
+        global $db;
         
         $sql = "INSERT into
             ".TB_PREFIX."expense
@@ -122,7 +123,7 @@ class expense
                 :note
             )";
 
-        dbQuery($sql,
+        $db->query($sql,
             ':domain_id',$this->domain_id,	
             ':amount', $_POST['amount'],
             ':expense_account_id', $_POST['expense_account_id'],
@@ -136,15 +137,15 @@ class expense
             );
 	
 
-        $logger->log("Exp ITEM tax- last insert ID-".lastInsertId(), Zend_Log::INFO);
-        $this->expense_item_tax(lastInsertId(),$_POST['tax_id'][0],$_POST['amount'],"1","insert");
+        $logger->log("Exp ITEM tax- last insert ID-".$db->lastInsertId(), Zend_Log::INFO);
+        $this->expense_item_tax($db->lastInsertId(),$_POST['tax_id'][0],$_POST['amount'],"1","insert");
 
         return true;
     }
 
     public function update()
     {
-
+        global $db;
         
         $sql = "UPDATE
             ".TB_PREFIX."expense
@@ -164,7 +165,7 @@ class expense
                     domain_id = :domain_id
             ";
 
-        dbQuery($sql,
+        $db->query($sql,
             ':id',$_POST['id'],	
             ':domain_id',$this->domain_id,	
             ':amount', $_POST['amount'],
@@ -191,6 +192,7 @@ class expense
     public function expense_item_tax($expense_id,$line_item_tax_id,$unit_price,$quantity,$action="") {
         
         global $logger;
+        global $db;
         $logger->log("Exp ITEM :: Key: ".$key." Value: ".$value, Zend_Log::INFO);
 
         //if editing invoice delete all tax info then insert first then do insert again
@@ -204,7 +206,7 @@ class expense
                                 expense_id = :expense_id";
             $logger->log("Expense item: ".$expense_id." tax lines deleted", Zend_Log::INFO);
 
-            dbQuery($sql_delete,':expense_id',$expense_id);
+            $db->query($sql_delete,':expense_id',$expense_id);
 
 
         }
@@ -244,7 +246,7 @@ class expense
                             :tax_amount
                         )";
 
-                dbQuery($sql,
+                $db->query($sql,
                     ':expense_id', $expense_id,
                     ':tax_id', $tax[tax_id],
                     ':tax_type', $tax[type],

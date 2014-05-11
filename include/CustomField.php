@@ -46,14 +46,15 @@ abstract class CustomField {
 	
 	/* Updates the custom field value */
 	function updateInput($value, $itemId) {
-		global $dbh;
-		
+		global $db;
+                
 		$sql = "SELECT * FROM ".TB_PREFIX."customFieldValues WHERE customFieldID = $this->fieldId AND itemID = $itemId";
 		
-		error_log($sql);
-		$sth = $dbh->prepare('SELECT * FROM '.TB_PREFIX.'customFieldValues WHERE customFieldID = :field AND itemID = :item');
-		$sth->execute(':field', $this->fieldId, ':item', $itemId);
-		$result = $sth->fetch();
+		error_log($sql);                
+                
+                $sql = 'SELECT * FROM '.TB_PREFIX.'customFieldValues WHERE customFieldID = :field AND itemID = :item';
+                $sth = $db->query($sql, ':value', $value, ':field', $this->fieldId, ':item', $itemId);
+                $result = $sth->fetch();
 		
 		if($result == null) {
 			//error_log("no value -> set value");
@@ -61,14 +62,16 @@ abstract class CustomField {
 		}
 		else {
 			$sql = "UPDATE ".TB_PREFIX."customFieldValues SET value = :value WHERE customFieldId = :field AND itemId = :item" ;
-			dbQuery($sql, ':value', $value, ':field', $this->fieldId, ':item', $itemId);
+			$db->query($sql, ':value', $value, ':field', $this->fieldId, ':item', $itemId);
 		}
 	}
 	
 	/* Returns the value for a choosen field and item. Should be unique, because the itemId for each categorie is unique. */
 	function getFieldValue($customFieldId, $itemId) {
-		$sql = "SELECT * FROM ".TB_PREFIX."customFieldValues WHERE (customFieldId = :field AND itemId = :item)";
-		$sth = dbQuery($sql, ':field', $customFieldId, ':item', $itemId);
+                global $db;
+            
+                $sql = "SELECT * FROM ".TB_PREFIX."customFieldValues WHERE (customFieldId = :field AND itemId = :item)";
+		$sth = $db->query($sql, ':field', $customFieldId, ':item', $itemId);
 		
 		if($sth) {
 			$value = $sth->fetch();
@@ -79,8 +82,10 @@ abstract class CustomField {
 	}
 	
 	function getValue($id) {
-		$sql = "SELECT * FROM ".TB_PREFIX."customFieldValues WHERE id = :id";
-		$sth = dbQuery($sql, ':id', $id);
+                global $db;
+            
+                $sql = "SELECT * FROM ".TB_PREFIX."customFieldValues WHERE id = :id";
+		$sth = $db->query($sql, ':id', $id);
 		
 		if($sth) {
 			$value = $sth->fetch();
@@ -92,10 +97,12 @@ abstract class CustomField {
 	
 	/* Stores the input into the database */
 	function saveInput($value,$itemId) {
-		//error_log($value." aaa".$itemId);
+		global $db;
+                
+                //error_log($value." aaa".$itemId);
 		$sql = "INSERT INTO ".TB_PREFIX."customFieldValues (customFieldId,itemId,value) VALUES(:field, :item, :value);";
 		//error_log($sql);
-		dbQuery($sql, ':field', $this->fieldId, ':item', $itemId, ':value', $value);
+		$db->query($sql, ':field', $this->fieldId, ':item', $itemId, ':value', $value);
 	}
 	
 	function showField() {
@@ -121,9 +128,10 @@ abstract class CustomField {
 	 */
 	function getDescription($id) {
 		global $LANG;
-
+                global $db;
+                
 		$sql = "SELECT description FROM ".TB_PREFIX."customFields WHERE id = :id";
-		$sth = dbQuery($sql, ':id', $id);
+		$sth = $db_>query($sql, ':id', $id);
 		$field = $sth->fetch();
 		
 		return eval('return "'.$field['description'].'";');
@@ -135,11 +143,9 @@ abstract class CustomField {
 	}?*/
 	
 	function getCustomFieldValues($id) {
-		global $dbh;
-			
-		$sql = "SELECT * FROM ".TB_PREFIX."customFieldValues WHERE id = ?";
-		$sth = $dbh->prepare($sql);
-		$sth->execute(array($id));
+		global $db;
+		$sql = "SELECT * FROM ".TB_PREFIX."customFieldValues WHERE id = :id";
+                $sth = $db->query($sql,':id', $id);
 		return $sth->fetch();
 	}
 }

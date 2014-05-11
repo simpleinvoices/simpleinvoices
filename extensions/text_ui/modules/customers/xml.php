@@ -80,15 +80,15 @@ if (in_array($sort, $validFields)) {
 			$limit";
 
 	if (empty($query)) {
-		$sth = dbQuery($sql, ':domain_id', $domain_id);
+		$sth = $db->query($sql, ':domain_id', $domain_id);
 	} else {
-		$sth = dbQuery($sql, ':domain_id', $domain_id, ':query', "%$query%");
+		$sth = $db->query($sql, ':domain_id', $domain_id, ':query', "%$query%");
 	}
 
 	$customers = $sth->fetchAll(PDO::FETCH_ASSOC);
 
 $sqlTotal = "SELECT count(id) AS count FROM ".TB_PREFIX."customers WHERE domain_id = :domain_id";
-$tth = dbQuery($sqlTotal, ':domain_id', $domain_id);
+$tth = $db->query($sqlTotal, ':domain_id', $domain_id);
 $resultCount = $tth->fetch();
 $count = $resultCount[0];
 

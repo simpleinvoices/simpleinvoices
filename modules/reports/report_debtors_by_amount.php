@@ -56,7 +56,7 @@ ORDER BY
 ";
    }
 
-  $invoice_results = dbQuery($sql, ':domain_id', $auth_session->domain_id);
+  $invoice_results = $db->query($sql, ':domain_id', $auth_session->domain_id);
 
   $total_owed = 0;
   $invoices = array();

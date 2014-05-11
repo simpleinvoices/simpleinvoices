@@ -6,10 +6,10 @@ class user
 
 	function getUserRoles()
 	{
-	
+            global $db;
 //		$sql = "select id, name from ".TB_PREFIX."user_role where name != 'biller' AND name != 'customer' order by id";
 		$sql = "SELECT id, name FROM ".TB_PREFIX."user_role ORDER BY id";
-		$result = dbQuery($sql);
+		$result = $db->query($sql);
 
 		return $result->fetchAll();
 
@@ -20,7 +20,7 @@ class user
 	
 		global $auth_session;
 		global $LANG;
-
+                global $db;
 		$sql = "SELECT 
 					u.*, 
 					ur.name AS role_name,
@@ -32,7 +32,7 @@ class user
 				WHERE u.domain_id = :domain_id
 				  AND u.id = :id 
 				";
-		$result = dbQuery($sql,':id', $id, ':domain_id', $auth_session->domain_id);
+		$result = $db->query($sql,':id', $id, ':domain_id', $auth_session->domain_id);
 
 		return $result->fetch();
 

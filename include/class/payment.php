@@ -16,7 +16,7 @@ class payment
 
     public function count()
     {
-
+        global $db;
         $where = '';
 
         if($this->filter == "online_payment_id")
@@ -32,7 +32,7 @@ class payment
                     domain_id = :domain_id
 					$where";
 
-        $sth = dbQuery($sql, ':domain_id', $this->domain_id);
+        $sth = $db->query($sql, ':domain_id', $this->domain_id);
         $payment = $sth->fetch();
 
         return $payment['count'];
@@ -40,7 +40,7 @@ class payment
 
 
     public function select_all() {
-
+        global $db;
         $where = '';
         if($this->filter == "date")
         {
@@ -72,12 +72,12 @@ class payment
                     $where
                 ORDER BY ap.id DESC";
         
-        return dbQuery($sql, ':domain_id', $this->domain_id);
+        return $db->query($sql, ':domain_id', $this->domain_id);
     }
 
     public function insert()
     {
-       
+       global $db;
         $sql = "INSERT INTO ".TB_PREFIX."payment (
             ac_inv_id,
             ac_amount,
@@ -95,7 +95,7 @@ class payment
             :online_payment_id,
             :domain_id
         )";
-        $sth = dbQuery($sql,
+        $sth = $db->query($sql,
             ':ac_inv_id',$this->ac_inv_id,
             ':ac_amount',$this->ac_amount,
             ':ac_notes',$this->ac_notes,

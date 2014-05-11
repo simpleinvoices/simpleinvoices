@@ -13,10 +13,10 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-global $dbh;
+
 
 $sql = "SELECT * FROM ".TB_PREFIX."custom_fields WHERE domain_id = :domain_id ORDER BY cf_custom_field";
-$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(end($dbh->errorInfo()));
+$sth = $db->query($sql, ':domain_id', $auth_session->domain_id);
 
 $cfs = null;
 

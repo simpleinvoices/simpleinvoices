@@ -12,7 +12,7 @@ class payment_type
 	}
 
     function select_or_insert_where() {
-
+        global $db;
         $sql = "SELECT 
                     pt_id,
 		            count(DISTINCT pt_id) as count
@@ -26,7 +26,7 @@ class payment_type
                 GROUP BY
                     pt_id;";
         
-        $sth = dbQuery($sql, ':pt_description', $this->type, ':domain_id', $this->domain_id);
+        $sth = $db->query($sql, ':pt_description', $this->type, ':domain_id', $this->domain_id);
 	    $pt = $sth->fetch();
 	
 	    if($pt['count'] =="1")
@@ -50,7 +50,8 @@ class payment_type
 
 	public function insert()
 	{
-	        $sql = "INSERT INTO ".TB_PREFIX."payment_types (
+            global $db;
+	    $sql = "INSERT INTO ".TB_PREFIX."payment_types (
 				pt_description,
 				pt_enabled,
 				domain_id
@@ -59,13 +60,13 @@ class payment_type
 				:pt_enabled,
 				:domain_id
 			)";
-        	$sth = dbQuery($sql,
+            $sth = $db->query($sql,
 				':pt_description',$this->pt_description,
 				':pt_enabled',$this->pt_enabled,
 				':domain_id',$this->domain_id 
 			);
         
- 	       return $sth;
+ 	    return $sth;
 	}
 
 }

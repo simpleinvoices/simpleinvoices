@@ -6,6 +6,7 @@ class sub_customer
         global $db_server;
         global $auth_session;
         global $config;
+        global $db;
         extract( $_POST );
         $sql = "INSERT INTO 
             ".TB_PREFIX."customers
@@ -35,7 +36,7 @@ class sub_customer
         $key = $config->encryption->default->key;	
         $encrypted_credit_card_number = $enc->encrypt($key, $credit_card_number);
 
-        return dbQuery($sql,
+        return $db->query($sql,
                 ':attention', $attention,
                 ':name', $name,
                 ':street_address', $street_address,

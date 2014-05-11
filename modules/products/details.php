@@ -20,7 +20,7 @@ $smarty -> assign('tax_selected',$tax_selected);
 $smarty -> assign('customFieldLabel',$customFieldLabel);
 
 $sql = "select * from ".TB_PREFIX."products_attributes";
-$sth =  dbQuery($sql);
+$sth =  $db->query($sql);
 $attributes = $sth->fetchAll();
 $smarty -> assign("attributes", $attributes);
 

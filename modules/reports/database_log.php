@@ -21,7 +21,7 @@ $smarty -> assign('active_tab', '#home');
 	  AND l.timestamp BETWEEN :start AND :end 
 	ORDER BY l.timestamp";
 	
-	$sth = dbQuery($sql, ':start', $startdate, ':end', $enddate, ':domain_id', $auth_session->domain_id);
+	$sth = $db->query($sql, ':start', $startdate, ':end', $enddate, ':domain_id', $auth_session->domain_id);
 	$sqls = null;
 	$sqls = $sth->fetchAll();
 	

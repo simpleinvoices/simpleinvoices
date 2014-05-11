@@ -29,7 +29,7 @@ $sql = "INSERT INTO ".TB_PREFIX."tax VALUES ('$_POST[tax_description]','$_POST[t
 				(NULL, :domain_id, :description, :enabled)";
 	}
 	
-	if (dbQuery($sql, ':domain_id', $auth_session->domain_id, ':description', $_POST['pt_description'], ':enabled', $_POST['pt_enabled'])) {
+	if ($db->query($sql, ':domain_id', $auth_session->domain_id, ':description', $_POST['pt_description'], ':enabled', $_POST['pt_enabled'])) {
 		$saved = true;
 		//$display_block = $LANG['save_payment_type_success'];
 	} else {
@@ -59,7 +59,7 @@ else if (  $op === 'edit_payment_type' ) {
 			WHERE
 				pt_id = :id";
 
-		if (dbQuery($sql, ':description', $_POST['pt_description'], ':enabled', $_POST['pt_enabled'], ':id', $_GET['id'])) {
+		if ($db->query($sql, ':description', $_POST['pt_description'], ':enabled', $_POST['pt_enabled'], ':id', $_GET['id'])) {
 			$saved = true;
 			//$display_block = $LANG['save_payment_type_success'];
 		} else {

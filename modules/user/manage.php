@@ -11,7 +11,7 @@
  */
 
 $sql = "SELECT count(*) as count FROM ".TB_PREFIX."user";
-$sth = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
+$sth = $db->query($sql);
 $number_of_rows  = $sth->fetch(PDO::FETCH_ASSOC);
 
 $smarty -> assign("number_of_rows",$number_of_rows);

@@ -11,9 +11,9 @@ class customer
 
     public function get($id)
     {
-
+        global $db;
         $sql = "SELECT * FROM ".TB_PREFIX."customers WHERE domain_id = :domain_id and id = :id";
-        $sth = dbQuery($sql,':domain_id', $this->domain_id, ':id', $id );
+        $sth = $db->query($sql,':domain_id', $this->domain_id, ':id', $id );
     
         return $sth->fetch();
     }
@@ -21,9 +21,9 @@ class customer
     public function get_all()
     {
         global $LANG;
-
+        global $db;
         $sql = "SELECT * FROM ".TB_PREFIX."customers WHERE domain_id = :domain_id";
-        $sth = dbQuery($sql,':domain_id', $this->domain_id);
+        $sth = $db->query($sql,':domain_id', $this->domain_id);
 
         $customers = null;
         $customer  = null;
@@ -56,7 +56,7 @@ class customer
     }
 
 	function insert() {
-	
+            global $db;
 		$sql = "INSERT INTO ".TB_PREFIX."customers (
 					domain_id, attention, name, street_address, street_address2,
 					city, state, zip_code, country, phone, mobile_phone,
@@ -69,7 +69,7 @@ class customer
 					:custom_field3, :custom_field4, :enabled
 				)";
 
-		return dbQuery($sql,
+		return $db->query($sql,
 			':attention', $this->attention,
 			':name', $this->name,
 			':street_address', $this->street_address,

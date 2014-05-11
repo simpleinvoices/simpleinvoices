@@ -49,7 +49,7 @@ if (in_array($sort, $validFields)) {
 				$start, $limit";
 
 
-	$sth = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
+	$sth = $db->query($sql);
 	$payment_types = $sth->fetchAll(PDO::FETCH_ASSOC);
 	$count = $sth->rowCount();
 */
@@ -66,7 +66,7 @@ if (in_array($sort, $validFields)) {
 			LIMIT 
 				$start, $limit";
 			
-	$sth = dbQuery($sql,':domain_id', $auth_session->domain_id);
+	$sth = $db->query($sql,':domain_id', $auth_session->domain_id);
 	$count = $sth->rowCount();
 	
 	$cfs = null;

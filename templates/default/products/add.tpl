@@ -115,7 +115,7 @@
     <table>
 		<tr>
 			<th>{$LANG.notes}</th>
-			<td><textarea input type="text" class="editor" name='notes' rows="8" cols="50">{$smarty.post.notes|unescape}</textarea></td>
+			<td><textarea class="editor" name="notes" rows="8" cols="50">{$smarty.post.notes|unescape}</textarea></td>
 		</tr>
             <tr>
                 <th class="details_screen">{$LANG.note_attributes}</th>

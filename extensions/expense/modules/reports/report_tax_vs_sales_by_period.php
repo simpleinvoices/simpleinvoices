@@ -25,10 +25,10 @@ $domain_id = domain_id::get();
 * Get earliest invoice date
 */
 $sql="SELECT MIN(date) AS date FROM ".TB_PREFIX."invoices WHERE domain_id = :domain_id";
-$sth = dbQuery($sql, ':domain_id', $domain_id);
+$sth = $db->query($sql, ':domain_id', $domain_id);
 $invoice_start_array = $sth->fetch();
 
-//$invoice_start = dbQuery($sql);
+//$invoice_start = $db->query($sql);
 //$invoice_start_array= mysql_fetch_array($invoice_start);
 $first_invoice_year = date('Y', strtotime( $invoice_start_array['date'] ) );
 /*
@@ -68,7 +68,7 @@ while ( $year <= $this_year )
 		//$total_month_sales = mysqlQuery($total_month_sales_sql);
 		//$total_month_sales_array= mysql_fetch_array($total_month_sales);
 
-		$total_month_sales = dbQuery($total_month_sales_sql, ':domain_id', $domain_id);
+		$total_month_sales = $db->query($total_month_sales_sql, ':domain_id', $domain_id);
 		$total_month_sales_array = $total_month_sales -> fetch();
 
 		$total_sales[$year][$month] = $total_month_sales_array['month_total'];
@@ -87,7 +87,7 @@ while ( $year <= $this_year )
 				e.domain_id = :domain_id
 			AND e.date LIKE '$year-$month%'";
 
-		$total_month_payments = dbQuery($total_month_payments_sql, ':domain_id', $domain_id);
+		$total_month_payments = $db->query($total_month_payments_sql, ':domain_id', $domain_id);
 		$total_month_payments_array = $total_month_payments -> fetch();
 
 		$total_payments[$year][$month] = $total_month_payments_array['month_total_payments'];
@@ -115,7 +115,7 @@ while ( $year <= $this_year )
 		AND p.status = '1' 
 		AND i.date LIKE '$year%'";
 
-	$total_year_sales = dbQuery($total_year_sales_sql, ':domain_id', $domain_id);
+	$total_year_sales = $db->query($total_year_sales_sql, ':domain_id', $domain_id);
 	$total_year_sales_array = $total_year_sales -> fetch();
 
 	$total_sales[$year]['Total'] = $total_year_sales_array['year_total'];
@@ -134,7 +134,7 @@ while ( $year <= $this_year )
 			e.domain_id = :domain_id
 		AND e.date LIKE '$year%'";
 
-	$total_year_payments = dbQuery($total_year_payments_sql, ':domain_id', $domain_id);
+	$total_year_payments = $db->query($total_year_payments_sql, ':domain_id', $domain_id);
 	$total_year_payments_array = $total_year_payments -> fetch();
 
 	$total_payments[$year]['Total'] = $total_year_payments_array['year_total_payments'];

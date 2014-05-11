@@ -15,6 +15,7 @@ class cronlog {
 
 	public function insert()
 	{
+            global $db;
 		$today = date('Y-m-d');
 		$run_date = empty($this->run_date) ? $today : $this->run_date;
 
@@ -28,7 +29,7 @@ class cronlog {
 				:run_date
 			);";
 
-        	$sth  = dbQuery($sql,
+        	$sth  = $db->query($sql,
 				  ':domain_id',$this->domain_id, 
 				  ':cron_id',  $this->cron_id, 
 				  ':run_date', $this->run_date
@@ -39,7 +40,7 @@ class cronlog {
 
 	public function check()
 	{
-
+            global $db;
 		$run_date = empty($this->run_date) ? $today : $this->run_date;
 		$sql = "SELECT count(*) AS count 
                 FROM ".TB_PREFIX."cron_log 
@@ -47,7 +48,7 @@ class cronlog {
                   AND run_date  = :run_date
 				  AND domain_id = :domain_id 
                 ";
-        	$sth = dbQuery($sql,
+        	$sth = $db->query($sql,
 				 ':cron_id',  $this->cron_id, 
 				 ':run_date', $this->run_date, 
 				 ':domain_id',$this->domain_id
@@ -58,13 +59,13 @@ class cronlog {
 
 	public function select()
 	{
-
+            global $db;
 		$sql = "SELECT * FROM ".TB_PREFIX."cron_log 
 			WHERE domain_id = :domain_id
 			ORDER BY run_date DESC, id DESC;
 		";
 
-        	$sth  = dbQuery($sql, ':domain_id', $this->domain_id);
+        	$sth  = $db->query($sql, ':domain_id', $this->domain_id);
 
  	       return $sth;
 	}

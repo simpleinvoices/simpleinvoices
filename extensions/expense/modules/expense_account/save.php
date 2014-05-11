@@ -17,7 +17,7 @@ if (  $op === 'insert' ) {
 	
 	if($expenseaccountobj->insert()) {
  		$saved = true;
- 		//saveCustomFieldValues($_POST['categorie'], lastInsertId());
+ 		//saveCustomFieldValues($_POST['categorie'], $db->lastInsertId());
  	}
 }
 

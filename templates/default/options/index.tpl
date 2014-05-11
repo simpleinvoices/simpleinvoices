@@ -1,6 +1,6 @@
 <div class="si_index si_index_settings">
 
-	<h2>System settings</h2>
+	<h2>{$LANG.system_settings}</h2>
 	<div class="si_toolbar">
             <a href="index.php?module=system_defaults&amp;view=manage" class="">
                 <img src="./images/common/cog_edit.png" alt="" />
@@ -18,7 +18,7 @@
             </a>
 	</div>
 
-	<h2>Invoice settings</h2>
+	<h2>{$LANG.invoice_settings}</h2>
 	<div class="si_toolbar">
            <a href="index.php?module=tax_rates&amp;view=manage" class="">
                 <img src="./images/common/money_delete.png" alt="" />
@@ -36,7 +36,7 @@
             </a>
 	</div>
 
-	<h2>Database stuff</h2>
+	<h2>{$LANG.database_stuff}</h2>
 	<div class="si_toolbar">
              <a href="index.php?module=options&amp;view=backup_database" class="">
                 <img src="./images/common/database_save.png" alt="" />

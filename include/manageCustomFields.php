@@ -16,10 +16,11 @@ include("./include/CustomField.php");
 
 
 function saveCustomField($id, $category, $name, $description) {
-	$sql = "INSERT INTO ".TB_PREFIX."customFields  (pluginId, categorieId, name, description) 
+    global $db;
+    $sql = "INSERT INTO ".TB_PREFIX."customFields  (pluginId, categorieId, name, description) 
 		VALUES (:id, :category, :name, :description)";
-	dbQuery($sql, ':id', $id, ':category', $category, ':name', $name, ':description', $description);
-	echo "SAVED<br />";
+    $db->query($sql, ':id', $id, ':category', $category, ':name', $name, ':description', $description);
+    echo "SAVED<br />";
 }
 
 
@@ -53,8 +54,9 @@ function updateCustomFieldValues($categorieId,$itemId) {
 }
 
 function getPluginsByCategorie($categoryId) {
+    global $db;
 	$sql = "SELECT * FROM ".TB_PREFIX."customFields WHERE categorieID = :category";
-	$sth = dbQuery($sql, ':category', $categoryId);
+	$sth = $db->query($sql, ':category', $categoryId);
 	
 	$plugins = null;
 	
@@ -67,8 +69,9 @@ function getPluginsByCategorie($categoryId) {
 }
 
 function showCustomFields($categoryId) {
+    global $db;
 	$sql = "SELECT * FROM ".TB_PREFIX."customFields WHERE categorieID = :category";
-	$sth = dbQuery($sql, ':category', $categoryId);
+	$sth = $db->query($sql, ':category', $categoryId);
 	
 	while($field = $sth->fetch()) {
 		$plugin = getPluginById($field['pluginId']);		
@@ -99,10 +102,9 @@ function getPluginArray() {
  TODO: Custom field output. Should be in Smarty.
  ******/
 function printCustomFieldsList() {
-	global $dbh;
+	global $db;
 	$sql = "SELECT * FROM ".TB_PREFIX."customFields;";
-	$sth = $dbh->prepare($sql);
-	$sth->execute();
+	$sth = $db->query($sql);
 	
 	echo <<<EOD
 	<table>
@@ -151,10 +153,9 @@ function readPlugins() {
 }
 
 function getCategories() {
-	global $dbh;
+	global $db;
 	$sql = "SELECT * FROM ".TB_PREFIX."customFieldCategories";
-	$sth = $dbh->prepare($sql);
-	$sth->execute();
+	$sth = $db->query($sql);
 	
 	for($i=0;$cat = $sth->fetch();$i++) {
 		$categories[$i] = $cat;

@@ -14,7 +14,7 @@
 checkLogin();
 
 	$sql = "SELECT count(*) AS count FROM ".TB_PREFIX."inventory where domain_id = :domain_id";
-	$sth = dbQuery($sql, ':domain_id',domain_id::get()) or die(htmlsafe(end($dbh->errorInfo())));
+	$sth = $db->query($sql, ':domain_id',domain_id::get());
 	$number_of_rows  = $sth->fetch(PDO::FETCH_ASSOC);
 
 //all funky xml - sql stuff done in xml.php
