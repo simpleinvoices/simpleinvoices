@@ -31,6 +31,7 @@ if ( $op === 'insert_user') {
 
     function insertUser() {
 		global $auth_session;
+                global $db;
 
         $sql = "INSERT INTO ".TB_PREFIX."user
                     (
@@ -52,7 +53,7 @@ if ( $op === 'insert_user') {
                     )
                 ";
 
-        return dbQuery($sql, ':email',$_POST['email'],':password',$_POST['password_field'],':role',$_POST['role'],':domain_id',$auth_session->domain_id,':enabled',$_POST['enabled'],':user_id',$_POST['user_id']);
+        return $db->query($sql, ':email',$_POST['email'],':password',$_POST['password_field'],':role',$_POST['role'],':domain_id',$auth_session->domain_id,':enabled',$_POST['enabled'],':user_id',$_POST['user_id']);
 
     }
     if( insertUser() ) {
@@ -64,7 +65,7 @@ if ( $op === 'insert_user') {
 if ($op === 'edit_user' ) {
 
     function editUser() {
-
+        global $db;
 	    empty($_POST[password_field]) ? $password = "" : $password = "password = '".md5($_POST[password_field])."',"  ;
 
         $sql = "UPDATE ".TB_PREFIX."user
@@ -78,7 +79,7 @@ if ($op === 'edit_user' ) {
                         id = :id
                 ";
 
-        return dbQuery($sql, ':email',$_POST['email'], ':role',$_POST['role'], ':enabled',$_POST['enabled'], ':user_id',$_POST['user_id'], ':id',$_POST['id']);
+        return $db->query($sql, ':email',$_POST['email'], ':role',$_POST['role'], ':enabled',$_POST['enabled'], ':user_id',$_POST['user_id'], ':id',$_POST['id']);
 
     }
     if( editUser() ) {

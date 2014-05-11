@@ -17,7 +17,7 @@ $smarty -> assign('save',$save);
 $smarty -> assign('taxes',$taxes);
 
 $sql = "select * from ".TB_PREFIX."products_attributes where enabled ='1'";
-$sth =  dbQuery($sql);
+$sth =  $db->query($sql);
 $attributes = $sth->fetchAll();
 
 $smarty -> assign("attributes", $attributes);

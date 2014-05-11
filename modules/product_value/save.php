@@ -21,7 +21,7 @@ if (  $op === 'insert_product_value' ) {
             :enabled
 		 )";
 
-	if (dbQuery($sql,
+	if ($db->query($sql,
 	  ':attribute_id', $_POST['attribute_id'],
 	  ':value', $_POST['value'],
 	  ':enabled', $_POST['enabled']
@@ -50,7 +50,7 @@ if (  $op === 'edit_product_value' ) {
 			WHERE
 				id = :id";
 
-		if (dbQuery($sql, 
+		if ($db->query($sql, 
 		  ':attribute_id', $_POST['attribute_id'],
 		  ':value', $_POST['value'],
 		  ':enabled', $_POST['enabled'],

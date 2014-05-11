@@ -38,12 +38,10 @@ if (  $op === 'edit_custom_field' ) {
                 cf_id = :id
 			AND domain_id = :domain_id";
 
-		if (dbQuery($sql, ':id', $_GET['id'], ':label', $_POST['cf_custom_label'], ':domain_id', $auth_session->domain_id)) {
+		if ($db->query($sql, ':id', $_GET['id'], ':label', $_POST['cf_custom_label'], ':domain_id', $auth_session->domain_id)) {
 			$display_block =  $LANG['save_custom_field_success'];
 		} else {
-			$display_block =  $LANG['save_custom_field_success'];
-			global $dbh;
-			$display_block .=  end($dbh->errorInfo());
+			$display_block =  $LANG['save_custom_field_success'];			
 		}
 
 		//header( 'refresh: 2; url=manage_custom_fields.php' );

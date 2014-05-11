@@ -13,10 +13,11 @@
  */
 function smarty_function_showCustomFields($params, &$smarty)
 {
+    global $db;
 	echo "<input type='hidden' name='categorie' value='$params[categorieId]'>";
 	
 	$sql = "SELECT * FROM ".TB_PREFIX."customFields WHERE categorieID = :id";
-	$sth = dbQuery($sql, ':id', $params['categorieId']);
+	$sth = $db->query($sql, ':id', $params['categorieId']);
 	
 	while($field = $sth->fetch()) {
 		$plugin = getPluginById($field['pluginId']);

@@ -11,7 +11,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 {
 	global $config;
 	global $LANG;
-
+        global $db;
 	$domain_id = domain_id::get();
 	$valid_search_fields = array('id', 'name');
 
@@ -72,9 +72,9 @@ function sql($type='', $dir, $sort, $rp, $page )
 	
 	
 	if (empty($query)) {
-		$result = dbQuery($sql, ':domain_id', $domain_id);
+		$result = $db->query($sql, ':domain_id', $domain_id);
 	} else {
-		$result = dbQuery($sql, ':domain_id', $domain_id, ':query', "%$query%");
+		$result = $db->query($sql, ':domain_id', $domain_id, ':query', "%$query%");
 	}
 
 	return $result;

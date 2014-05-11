@@ -11,18 +11,18 @@ class expenseaccount
 
     public function count()
     {
-
+        global $db;
         $sql = "SELECT count(id) as count FROM ".TB_PREFIX."expense_account WHERE domain_id = :domain_id ORDER BY id";
-        $sth  = dbQuery($sql,':domain_id',$this->domain_id);
+        $sth  = $db->query($sql,':domain_id',$this->domain_id);
 
         return $sth->fetch();
     }
 
     public function get_all()
     {
-        
+        global $db;
         $sql = "SELECT * FROM ".TB_PREFIX."expense_account WHERE domain_id = :domain_id ORDER BY id";
-        $sth  = dbQuery($sql,':domain_id',$this->domain_id);
+        $sth  = $db->query($sql,':domain_id',$this->domain_id);
         
         return $sth->fetchAll();
     
@@ -30,9 +30,9 @@ class expenseaccount
 
     public function select($id)
     {
-        
+        global $db;
         $sql = "SELECT * FROM ".TB_PREFIX."expense_account WHERE domain_id = :domain_id and id = :id";
-        $sth  = dbQuery($sql,':domain_id',$this->domain_id, ':id', $id);
+        $sth  = $db->query($sql,':domain_id',$this->domain_id, ':id', $id);
         
         return $sth->fetch();
     
@@ -40,7 +40,7 @@ class expenseaccount
 
     public function insert()
     {
-
+        global $db;
         $sql = "INSERT into
             ".TB_PREFIX."expense_account
             (
@@ -53,7 +53,7 @@ class expenseaccount
                 :name
             )";
 
-        return dbQuery($sql,
+        return $db->query($sql,
             ':domain_id',$this->domain_id,	
             ':name', $_POST['name']
             );
@@ -61,7 +61,7 @@ class expenseaccount
 
     public function update()
     {
-
+        global $db;
         $sql = "UPDATE
             ".TB_PREFIX."expense_account
                 SET
@@ -72,7 +72,7 @@ class expenseaccount
                     domain_id = :domain_id
             ";
 
-        return dbQuery($sql,
+        return $db->query($sql,
             ':id',$_GET['id'],	
             ':domain_id',$this->domain_id,	
             ':name', $_POST['name']

@@ -12,9 +12,9 @@ class biller
     public function get_all()
     {
         global $LANG;
-
+        global $db;
         $sql = "SELECT * FROM ".TB_PREFIX."biller WHERE domain_id = :domain_id ORDER BY name";
-        $sth  = dbQuery($sql,':domain_id',$this->domain_id);
+        $sth  = $db->query($sql,':domain_id',$this->domain_id);
         
         $billers = null;
         
@@ -34,9 +34,9 @@ class biller
     public function select($id)
     {
         global $LANG;
-        
+        global $db;
         $sql = "SELECT * FROM ".TB_PREFIX."biller WHERE domain_id = :domain_id AND id = :id";
-        $sth  = dbQuery($sql,':domain_id',$this->domain_id, ':id',$id);
+        $sth  = $db->query($sql,':domain_id',$this->domain_id, ':id',$id);
         
 		$biller = $sth->fetch();
 		$biller['wording_for_enabled'] = $biller['enabled']==1?$LANG['enabled']:$LANG['disabled'];

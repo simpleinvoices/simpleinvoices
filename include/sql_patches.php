@@ -13,11 +13,11 @@
 	$patch['2']['date'] = "20060514";
 
 	$patch['3']['name'] = "Add a row into the defaults table to handle the default number of line items";
-	$patch['3']['patch'] = "ALTER TABLE ".TB_PREFIX."defaults ADD def_number_line_items INT( 25 ) NOT NULL";
+	$patch['3']['patch'] = "ALTER TABLE ".TB_PREFIX."system_defaults ADD def_number_line_items INT( 25 ) NOT NULL";
 	$patch['3']['date'] = "20060514";
 
 	$patch['4']['name'] = "Set the default number of line items to 5";
-	$patch['4']['patch'] = "UPDATE ".TB_PREFIX."defaults SET def_number_line_items = 5 WHERE def_id =1 LIMIT 1";
+	$patch['4']['patch'] = "UPDATE ".TB_PREFIX."system_defaults SET def_number_line_items = 5 WHERE def_id =1 LIMIT 1";
 	$patch['4']['date'] = "20060514";
 
 	$patch['5']['name'] = "Add logo and invoice footer support to biller";
@@ -25,7 +25,7 @@
 	$patch['5']['date'] = "20060514";
 
 	$patch['6']['name'] = "Add default invoice template option";
-	$patch['6']['patch'] = "ALTER TABLE ".TB_PREFIX."defaults ADD def_inv_template VARCHAR( 25 ) DEFAULT 'print_preview.php' NOT NULL";
+	$patch['6']['patch'] = "ALTER TABLE ".TB_PREFIX."system_defaults ADD def_inv_template VARCHAR( 25 ) DEFAULT 'print_preview.php' NOT NULL";
 	$patch['6']['date'] = "20060514";
 
 	$patch['7']['name'] = "Edit tax description field lenght to 50";
@@ -33,7 +33,7 @@
 	$patch['7']['date'] = "20060526";
 
 	$patch['8']['name'] = "Edit default invoice template field lenght to 50";
-	$patch['8']['patch'] = "ALTER TABLE ".TB_PREFIX."defaults CHANGE def_inv_template def_inv_template VARCHAR( 50 ) DEFAULT NULL";
+	$patch['8']['patch'] = "ALTER TABLE ".TB_PREFIX."system_defaults CHANGE def_inv_template def_inv_template VARCHAR( 50 ) DEFAULT NULL";
 	$patch['8']['date'] = "20060526";
 
 	$patch['9']['name'] = "Add consulting style invoice";
@@ -91,7 +91,7 @@
 	$patch['20']['date'] = "20060909";
 
 	$patch['21']['name'] = "Adjust the defautls table to add a payment type field";
-	$patch['21']['patch'] = "ALTER TABLE `".TB_PREFIX."defaults` ADD `def_payment_type` VARCHAR( 25 ) DEFAULT '1'";
+	$patch['21']['patch'] = "ALTER TABLE `".TB_PREFIX."system_defaults` ADD `def_payment_type` VARCHAR( 25 ) DEFAULT '1'";
 	$patch['21']['date'] = "20060909";
 
 	$patch['22']['name'] = "Add note field to customer";
@@ -176,7 +176,7 @@ ADD `prod_custom_field4` VARCHAR( 50 ) AFTER `prod_custom_field3` ;
 	$patch['33']['date'] = "20061214";
 
 	$patch['34']['name'] = "Reset invoice template to default refer Issue 70";
-	$patch['34']['patch'] = "UPDATE `".TB_PREFIX."defaults` SET `def_inv_template` = 'default' WHERE `def_id` =1 LIMIT 1;";
+	$patch['34']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET `def_inv_template` = 'default' WHERE `def_id` =1 LIMIT 1;";
 	$patch['34']['date'] = "20070125";
 
 	$patch['35']['name'] = "Adding data to the custom fields table for invoices";
@@ -198,7 +198,7 @@ ADD `invoice_custom_field4` VARCHAR( 50 ) AFTER `invoice_custom_field3` ;
 	$patch['36']['date'] = "20070204";
 
 	$patch['37']['name'] = "Reset invoice template to default due to new invoice template system";
-	$patch['37']['patch'] = "UPDATE `".TB_PREFIX."defaults` SET `def_inv_template` = 'default' WHERE `def_id` =1 LIMIT 1 ;";
+	$patch['37']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET `def_inv_template` = 'default' WHERE `def_id` =1 LIMIT 1 ;";
 	$patch['37']['date'] = "20070523";
 
 	$patch['38']['name'] = "Alter custom field table - field length now 255 for field name";
@@ -557,8 +557,8 @@ INSERT INTO `".TB_PREFIX."system_defaults` (`id`, `name`, `value`) VALUES
 	if ($numpatchesdone < 124) {
 		// system defaults conversion patch
 		// defaults query and DEFAULT NUMBER OF LINE ITEMS
-		$sql_defaults = "SELECT * FROM ".TB_PREFIX."defaults";
-		$sth = dbQuery($sql_defaults);
+		$sql_defaults = "SELECT * FROM ".TB_PREFIX."system_defaults";
+		$sth = $db->query($sql_defaults);
 		$defaults = $sth->fetch();
 	}
 
@@ -1116,9 +1116,9 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
     //TODO: postgres and sqlite patch
 
     $patch['185']['name'] = "Drop old defaults table";
-    $patch['185']['patch'] = "DROP TABLE `".TB_PREFIX."defaults` ;";
+    $patch['185']['patch'] = "DROP TABLE `".TB_PREFIX."system_defaults` ;";
     if ($config->database->adapter == "pdo_pgsql") {
-	    $patch['185']['patch'] = "DROP TABLE `".TB_PREFIX."defaults`  ;";
+	    $patch['185']['patch'] = "DROP TABLE `".TB_PREFIX."system_defaults`  ;";
     }
     $patch['185']['date'] = "20081230";
     //TODO: postgres and sqlite patch

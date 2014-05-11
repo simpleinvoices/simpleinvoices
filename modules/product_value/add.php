@@ -10,7 +10,7 @@ if ($_POST['value'] !== '' ) {
 }
 
 $sql = "SELECT * FROM ".TB_PREFIX."products_attributes";
-$sth =  dbQuery($sql);
+$sth =  $db->query($sql);
 $product_attributes = $sth->fetchAll();
 
 $pageActive = "product_value_add";

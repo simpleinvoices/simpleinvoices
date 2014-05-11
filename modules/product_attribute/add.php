@@ -10,7 +10,7 @@ if ($_POST['name'] != "" ) {
 }
 
 $sql2= "SELECT id, name FROM ".TB_PREFIX."products_attribute_type";
-$sth2 =  dbQuery($sql2);
+$sth2 =  $db->query($sql2);
 $types = $sth2->fetchAll(PDO::FETCH_ASSOC);
 
 $smarty -> assign("types", $types);

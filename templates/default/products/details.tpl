@@ -185,7 +185,7 @@
                 <tr>
                     <td></td>
                     <th class="details_screen product_attribute">
-                    <input type="checkbox" name="attribute{$i}" {if $product.attribute_decode[$i] } == 'true'} checked{/if} value="true"/>
+                    <input type="checkbox" name="attribute{$i}" {if $product.attribute_decode[$i]  == 'true'} checked{/if} value="true"/>
                     {$attribute.name}
                     </th>
                 </tr>

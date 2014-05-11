@@ -2,7 +2,7 @@
 <form name="frmpost" action="index.php?module=reports&amp;view=report_invoice_profit" method="post">
 <table align="center">
     <tr>
-        <td wrap="nowrap">Start date (YYYY-MM-DD)
+        <td wrap="nowrap">{$LANG.start_date}
                 <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="start_date" id="date1" value='{$start_date|htmlsafe}' />   
          </td>
         <td>
@@ -12,7 +12,7 @@
             &nbsp;
             &nbsp;
         </td>
-        <td wrap="nowrap" >End date (YYYY-MM-DD)
+        <td wrap="nowrap" >{$LANG.end_date}
                 <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="end_date" id="date1" value='{$end_date|htmlsafe}' />   
             </td>
     </tr>
@@ -23,7 +23,7 @@
         <td>
             <button type="submit" class="positive" name="submit" value="{$LANG.insert_biller}">
                 <img class="button_img" src="./images/common/tick.png" alt="" /> 
-                Run report
+                {$LANG.run_report}
             </button>
 
         </td>
@@ -43,28 +43,28 @@
             &nbsp;
         </td>
         <td  class="details_screen">
-            <b>Biller</b>
+            <b>{$LANG.biller}</b>
         </td>
         <td>
             &nbsp;
             &nbsp;
         </td>
         <td  class="details_screen">
-            <b>Customer</b>
+            <b>{$LANG.customer}</b>
         </td>
         <td>
             &nbsp;
             &nbsp;
         </td>
         <td class="details_screen">
-            <b>Total</b>
+            <b>{$LANG.total}</b>
         </td>
         <td>
             &nbsp;
             &nbsp;
         </td>
         <td class="details_screen">
-            <b>Cost</b>
+            <b>{$LANG.cost}</b>
         </td>
         <td>
             &nbsp;
@@ -74,7 +74,7 @@
             &nbsp;
         </td>
         <td class="details_screen">
-            <b>Profit</b>
+            <b>{$LANG.profit}</b>
         </td>
 	</tr>
  {section name=invoice loop=$invoices}
@@ -168,7 +168,7 @@
 	</tr>
     <tr>
         <td class="details_screen">
-            TOTALS:
+            {$LANG.totals}:
         </td>
         <td>
             &nbsp;

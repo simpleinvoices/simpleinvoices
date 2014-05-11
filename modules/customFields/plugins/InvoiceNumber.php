@@ -57,8 +57,9 @@ class InvoiceNumber extends CustomField {
 	}
 	
 	function getLastValue() {
+            global $db;
 		$sql = "SELECT value FROM ".TB_PREFIX."customFieldValues WHERE customFieldId = 7 ORDER BY id DESC LIMIT 1;";
-		$sth = dbQuery($sql);
+		$sth = $db->query($sql);
 		$result = $sth->fetch();
 		error_log($sql);
 		return $result['value'];

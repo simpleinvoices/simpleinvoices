@@ -7,7 +7,7 @@ FROM ".TB_PREFIX."invoice_items ii
 WHERE pr.status = 1 AND ii.domain_id = :domain_id
 ";
 
-  $sth = dbQuery($sql, ':domain_id', $auth_session->domain_id);
+  $sth = $db->query($sql, ':domain_id', $auth_session->domain_id);
 
   $smarty->assign('total_taxes', $sth->fetchColumn());
 	$smarty -> assign('pageActive', 'report');

@@ -39,10 +39,9 @@ while($custom = mysql_fetch_array($query)) {
 
 function convertCustomFields() {
 	/* check if any value set -> keeps all data for sure */
-	global $dbh;
+	global $db;
 	$sql = "SELECT * FROM ".TB_PREFIX."custom_fields";
-	$sth = $dbh->prepare($sql);
-	$sth->execute();
+	$sth = $db->query($sql);
 
 	while($custom = $sth->fetch()) {
         $match = array();
@@ -78,10 +77,7 @@ function convertCustomFields() {
 
 
 			//error_log($sql);
-			$tth = $dbh->prepare($sql);
-			$tth->bindValue(':table', $tablename);
-			$tth->bindValue(':field', $cf_field);
-			$tth->execute();
+                        $tth = $db->query($sql,':table', $tablename,':field', $cf_field);
 			$store = false;
 
 			/*
@@ -101,15 +97,12 @@ function convertCustomFields() {
 
 				//create new text custom field
 				saveCustomField(3,$cat,$custom['cf_custom_field'],$custom['cf_custom_label']);
-				$id = lastInsertId();
+				$id = $db->lastInsertId();
 				error_log($id);
 				$plugin = getPluginById($id);
 
 				//insert all data
-				$uth = $dbh->prepare($sql);
-				$uth->bindValue(':table', $tablename);
-				$uth->bindValue(':field', $cf_field);
-				$uth->execute();
+				$uth = $db->query($sql,':table', $tablename,':field', $cf_field);
 				while($res2 = $uth->fetch()) {
 					$plugin->saveInput($res2[$cf_field], $res2['id']);
 				}

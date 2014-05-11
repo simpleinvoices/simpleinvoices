@@ -32,7 +32,7 @@ $type = $_POST['type'];
 if ($_POST['action'] == "insert" ) {
 	
 	if(insertInvoice($type)) {
-		$id = lastInsertId();
+		$id = $db->lastInsertId();
 		//saveCustomFieldValues($_POST['categorie'],$invoice_id);
 		$saved = true;
 	}
@@ -46,7 +46,7 @@ if ($_POST['action'] == "insert" ) {
 		$logger->log('Total style invoice created, ID: '.$id, Zend_Log::INFO);
 
 		insertProduct(0,0);
-		$product_id = lastInsertId();
+		$product_id = $db->lastInsertId();
 
 		insertInvoiceItem($id, 1 , $product_id, 1, $_POST['tax_id'][0], $_POST['description'], $_POST['unit_price']);
 	}
@@ -78,7 +78,7 @@ if ($_POST['action'] == "insert" ) {
 	if($type == total_invoice && $saved) {
 		$logger->log('Total style invoice updated, product ID: '.$_POST['products0'], Zend_Log::INFO);
 		$sql = "UPDATE ".TB_PREFIX."products SET unit_price = :price, description = :description WHERE id = :id AND domain_id = :domain_id";
-		dbQuery($sql,
+		$db->query($sql,
 			':price', $_POST['unit_price'],
 			':description', $_POST['description0'],
 			':id', $_POST['products0'],

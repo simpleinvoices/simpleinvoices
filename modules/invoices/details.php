@@ -57,7 +57,7 @@ foreach($invoiceItems as $key=>$value)
                    where 
                         a.type_id = t.id
                         AND a.id = %d', $k);
-                $attr_name = dbQuery($attr_name_sql);
+                $attr_name = $db->query($attr_name_sql);
                 $attr_name = $attr_name->fetch();
 
                 $sql2 = sprintf('select 
@@ -71,7 +71,7 @@ foreach($invoiceItems as $key=>$value)
                    where 
                         a.id = v.attribute_id 
                         AND a.id = %d', $k);
-                $states2 = dbQuery($sql2);
+                $states2 = $db->query($sql2);
 
                 if($attr_name['enabled'] =='1' AND $attr_name['type'] == 'list')
                 {

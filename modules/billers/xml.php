@@ -15,6 +15,7 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 	global $config;
 	global $LANG;
 	global $auth_session;
+        global $db;
 
 	$valid_search_fields = array('id', 'name', 'email');
 
@@ -77,9 +78,9 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 				$limit";
 	
 		if (empty($query)) {
-			$result = dbQuery($sql,':domain_id', $auth_session->domain_id);
+                    $result = $db->query($sql,':domain_id', $auth_session->domain_id);
 		} else {
-			$result = dbQuery($sql,':domain_id', $auth_session->domain_id, ':query', "%$query%");
+                    $result = $db->query($sql,':domain_id', $auth_session->domain_id, ':query', "%$query%");
 		}
 
 		return $result;

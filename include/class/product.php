@@ -11,9 +11,9 @@ class product
 
     public function count()
     {
-
+        global $db;
          $sql = "SELECT count(id) as count FROM ".TB_PREFIX."products WHERE domain_id = :domain_id ORDER BY id";
-         $sth  = dbQuery($sql,':domain_id',$this->domain_id);
+         $sth  = $db->query($sql,':domain_id',$this->domain_id);
  
          return $sth->fetch();
 
@@ -21,9 +21,9 @@ class product
 
     public function get_all()
     {
-
+        global $db;
          $sql = "SELECT * FROM ".TB_PREFIX."products WHERE domain_id = :domain_id AND visible = 1 ORDER BY description, id";
-         $sth  = dbQuery($sql,':domain_id',$this->domain_id);
+         $sth  = $db->query($sql,':domain_id',$this->domain_id);
  
          return $sth->fetchAll();
 
@@ -31,9 +31,9 @@ class product
 
     public function get($id)
     {
-
+        global $db;
          $sql = "SELECT * FROM ".TB_PREFIX."products WHERE domain_id = :domain_id AND id = :id";
-         $sth  = dbQuery($sql,':domain_id',$this->domain_id, ':id',$id);
+         $sth  = $db->query($sql,':domain_id',$this->domain_id, ':id',$id);
  
          return $sth->fetch();
 
@@ -43,7 +43,7 @@ class product
     {
         global $config;
         global $LANG;
-
+        global $db;
 		$valid_search_fields = array('id', 'description', 'unit_price');
 
         //SC: Safety checking values that will be directly subbed in
@@ -110,9 +110,9 @@ class product
         
         
         if (empty($query)) {
-			$result = dbQuery($sql, ':domain_id', $this->domain_id);
+			$result = $db->query($sql, ':domain_id', $this->domain_id);
 		} else {
-			$result = dbQuery($sql, ':domain_id', $this->domain_id, ':query', "%$query%");
+			$result = $db->query($sql, ':domain_id', $this->domain_id, ':query', "%$query%");
 		}
 
         return $result;

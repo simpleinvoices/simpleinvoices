@@ -1,5 +1,5 @@
 <div class="si_center">
-	<h2>Statement of Invoices</h2>
+	<h2>{$LANG.statement_of_invoices}</h2>
 </div>
 
 

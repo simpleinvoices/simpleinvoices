@@ -12,6 +12,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 {
 	global $config;
 	global $auth_session;
+        global $db;
 
 	$valid_search_fields = array('ap.id','b.name', 'c.name');
 
@@ -89,9 +90,9 @@ function sql($type='', $dir, $sort, $rp, $page )
 			$limit";
 		
 		if (empty($query)) {
-			$result = dbQuery($sql, ':domain_id', $auth_session->domain_id, ':invoice_id', $id);
+			$result = $db->query($sql, ':domain_id', $auth_session->domain_id, ':invoice_id', $id);
 		} else {
-			$result = dbQuery($sql, ':domain_id', $auth_session->domain_id, ':invoice_id', $id, ':query', "%$query%");
+			$result = $db->query($sql, ':domain_id', $auth_session->domain_id, ':invoice_id', $id, ':query', "%$query%");
 		}
 	}
 	#if coming from another page where you want to filter by just one customer
@@ -105,7 +106,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 				$sort $dir  
 			$limit";
 
-		$result = dbQuery($sql, ':id', $id, ':domain_id', $auth_session->domain_id);
+		$result = $db->query($sql, ':id', $id, ':domain_id', $auth_session->domain_id);
 		
 	}
 	#if you want to show all invoices - no filters
@@ -119,9 +120,9 @@ function sql($type='', $dir, $sort, $rp, $page )
 			$limit";
 					
 		if (empty($query)) {
-			$result =  dbQuery($sql, ':domain_id', $auth_session->domain_id);
+			$result =  $db->query($sql, ':domain_id', $auth_session->domain_id);
 		} else {
-			$result =  dbQuery($sql, ':domain_id', $auth_session->domain_id, ':query', "%$query%");
+			$result =  $db->query($sql, ':domain_id', $auth_session->domain_id, ':query', "%$query%");
 		}
 	}
 	
@@ -135,7 +136,7 @@ $payments = $sth->fetchAll(PDO::FETCH_ASSOC);
 $count = $sth_count_rows->rowCount();
 /*
 $sqlTotal = "SELECT count(id) AS count FROM ".TB_PREFIX."payment";
-$tth = dbQuery($sqlTotal) or die(end($dbh->errorInfo()));
+$tth = $db->query($sqlTotal);
 $resultCount = $tth->fetch();
 $count = $resultCount[0];
 //echo sql2xml($customers, $count);

@@ -4,11 +4,12 @@
 checkLogin();
 function getExtensions() {
 	global $LANG;
+        global $db;
 	$domain_id = domain_id::get();
 	
 	$sql = "SELECT * FROM ".TB_PREFIX."extensions WHERE domain_id = 0 OR domain_id = :domain_id ORDER BY name";
 
-	$sth = dbQuery($sql, ':domain_id', $domain_id);
+	$sth = $db->query($sql, ':domain_id', $domain_id);
 	
 	$exts = null;
 	

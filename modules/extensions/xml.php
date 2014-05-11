@@ -82,9 +82,9 @@ $validFields = array('id', 'name','description','enabled');
 			$limit";
 
 	if (empty($query)) {
-		$sth = dbQuery($sql, ':domain_id', $domain_id);
+		$sth = $db->query($sql, ':domain_id', $domain_id);
 	} else {
-		$sth = dbQuery($sql, ':domain_id', $domain_id, ':query', "%$query%");
+		$sth = $db->query($sql, ':domain_id', $domain_id, ':query', "%$query%");
 	}
 
 	$registered_extensions = $sth->fetchAll(PDO::FETCH_ASSOC);

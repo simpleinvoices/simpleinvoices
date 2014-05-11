@@ -22,7 +22,7 @@ if (  $op === 'insert_product_attribute' ) {
 			:visible
 		 )";
 
-	if (dbQuery($sql,
+	if ($db->query($sql,
 	  ':name', $_POST['name'],
 	  ':type_id', $_POST['type_id'],
 	  ':enabled', $_POST['enabled'],
@@ -53,7 +53,7 @@ else if (  $op === 'edit_product_attribute' ) {
 			WHERE
 				id = :id";
 
-		if (dbQuery($sql, 
+		if ($db->query($sql, 
 		  ':name', $_POST['name'],
 		  ':type_id', $_POST['type_id'],
 		  ':enabled', $_POST['enabled'],

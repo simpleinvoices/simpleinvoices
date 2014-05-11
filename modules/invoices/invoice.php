@@ -54,7 +54,7 @@ $sql = "SELECT CONCAT(a.id, '-', v.id) as id
 		FROM ".TB_PREFIX."products_attributes a 
 			LEFT JOIN ".TB_PREFIX."products_values v 
 				ON (a.id = v.attribute_id);";
-$sth =  dbQuery($sql);
+$sth =  $db->query($sql);
 $matrix = $sth->fetchAll();
 $smarty -> assign("matrix", $matrix);
 

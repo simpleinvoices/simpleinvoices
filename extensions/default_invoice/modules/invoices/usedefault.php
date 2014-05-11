@@ -28,7 +28,7 @@ $customer = getCustomer($master_customer_id);
 if ($_GET['action'] == 'update_template') {	/* update default template for customer */
 
  $sql = "UPDATE ".TB_PREFIX."customers SET custom_field4 = :cf4 WHERE id = :id";
- dbQuery($sql,
+ $db->query($sql,
 	':cf4', $_GET['id'],
  	':id', $master_customer_id
 	);

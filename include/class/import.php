@@ -27,7 +27,8 @@ class import {
 	}
 	public function execute()
 	{
-		dbQuery($this->collate());
+            global $db;
+            $db->query($this->collate());
 	}
 
 }

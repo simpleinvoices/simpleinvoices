@@ -17,10 +17,9 @@ checkLogin();
 #get the invoice id
 $cf_id = $_GET["id"];
 
-global $dbh;
 #customer query
 $print_product = "SELECT * FROM ".TB_PREFIX."custom_fields WHERE cf_id = :id AND domain_id = :domain_id";
-$sth = dbQuery($print_product, ':id', $cf_id, ':domain_id', $auth_session->domain_id) or die(end($dbh->errorInfo()));
+$sth = $db->query($print_product, ':id', $cf_id, ':domain_id', $auth_session->domain_id);
 
 $cf = $sth->fetch();
 $cf['name'] = get_custom_field_name($cf['cf_custom_field']);

@@ -34,7 +34,7 @@ if(isset($_GET['id'])) {
 					ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id)
 			WHERE pr.status = '1'";
 */
-	$sth = dbQuery($sql, ':domain_id', domain_id::get());
+	$sth = $db->query($sql, ':domain_id', domain_id::get());
     $invoice = $sth->fetch();
     #$sth = new invoice();
     #$invoice = $sth->select_all();

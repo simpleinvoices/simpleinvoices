@@ -59,9 +59,9 @@ if (in_array($sort, $validFields)) {
 				$start, $limit";
 
 	if (empty($query)) {
-		$sth = dbQuery($sql);
+		$sth = $db->query($sql);
 	} else {
-		$sth = dbQuery($sql, ':query', "%$query%");
+		$sth = $db->query($sql, ':query', "%$query%");
 	}
 
 	$customers = $sth->fetchAll(PDO::FETCH_ASSOC);
@@ -77,7 +77,7 @@ if (in_array($sort, $validFields)) {
 */
 
 $sqlTotal = "SELECT count(id) AS count FROM ".TB_PREFIX."products_values";
-$tth = dbQuery($sqlTotal);
+$tth = $db->query($sqlTotal);
 $resultCount = $tth->fetch();
 $count = $resultCount[0];
 //echo sql2xml($customers, $count);

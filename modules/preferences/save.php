@@ -62,7 +62,7 @@ if (  $op === 'insert_preference' ) {
 			:include_online_payment
 		 )";
 
-	if (dbQuery($sql,
+	if ($db->query($sql,
 	  ':domain_id', $auth_session->domain_id,
 	  ':description', $_POST['p_description'],
 	  ':currency_sign', $_POST['p_currency_sign'],
@@ -79,7 +79,7 @@ if (  $op === 'insert_preference' ) {
 	  ':status', $_POST['status'],
 	  ':locale', $_POST['locale'],
 	  ':language', $_POST['locale'],
-	  ':index_group', empty($_POST['index_group']) ? lastInsertId() : $_POST['index_group']  ,
+	  ':index_group', empty($_POST['index_group']) ? $db->lastInsertId() : $_POST['index_group']  ,
 	  ':include_online_payment', $include_online_payment,
 	  ':enabled', $_POST['pref_enabled']
 	  )) {
@@ -94,9 +94,9 @@ if (  $op === 'insert_preference' ) {
                 WHERE 
                     pref_id = :pref_id
             ";
-            dbQuery($sql_update, 
-                ':index_group',lastInsertId(),
-                ':pref_id',lastInsertId()
+            $db->query($sql_update, 
+                ':index_group',$db->lastInsertId(),
+                ':pref_id',$db->lastInsertId()
             );
 		}
         //$display_block = $LANG['save_preference_success'];
@@ -137,7 +137,7 @@ else if (  $op === 'edit_preference' ) {
 			WHERE
 				pref_id = :id";
 
-		if (dbQuery($sql, 
+		if ($db->query($sql, 
 		  ':description', $_POST['pref_description'],
 		  ':currency_sign', $_POST['pref_currency_sign'],
 		  ':currency_code', $_POST['currency_code'],

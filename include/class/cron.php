@@ -20,8 +20,8 @@ class cron {
 
 	public function insert()
 	{
-
-		$today = date('Y-m-d');
+            global $db;
+            $today = date('Y-m-d');
 
         
 	    $sql = "INSERT INTO ".TB_PREFIX."cron (
@@ -43,7 +43,7 @@ class cron {
 				:email_biller,
 				:email_customer
 		)";
-        $sth = dbQuery($sql,
+        $sth = $db->query($sql,
 				':domain_id',$this->domain_id, 
 				':invoice_id',$this->invoice_id,
 				':start_date',$this->start_date,
@@ -60,7 +60,7 @@ class cron {
 
 	public function update()
 	{
-        
+            global $db;
 	    $sql = "UPDATE 
 				".TB_PREFIX."cron 
 			SET 
@@ -76,7 +76,7 @@ class cron {
 				AND 
 				domain_id = :domain_id
 		";
-        $sth = dbQuery($sql,
+        $sth = $db->query($sql,
 				':id',$this->id, 
 				':domain_id',$this->domain_id, 
 				':invoice_id',$this->invoice_id,
@@ -99,6 +99,7 @@ class cron {
     public function select_all($type='', $dir='DESC', $rp='25', $page='1')
 	{
 		global $LANG;
+                global $db;
 		$valid_search_fields = array('iv.id', 'b.name', 'cron.id', 'aging');
 
 		/*SQL Limit - start*/
@@ -157,9 +158,9 @@ class cron {
 			$limit";
 
 		if (empty($query)) {
-			$sth = dbQuery($sql, ':domain_id', $this->domain_id);
+			$sth = $db->query($sql, ':domain_id', $this->domain_id);
 		} else {
-			$sth = dbQuery($sql, ':domain_id', $this->domain_id, ':query', "%$query%");
+			$sth = $db->query($sql, ':domain_id', $this->domain_id, ':query', "%$query%");
 		}
 
 		if($type =="count")
@@ -173,7 +174,7 @@ class cron {
     public function select_crons_to_run()
     {
         // Use this function to select crons that need to run each day across all domain_id values
-
+        global $db;
         $sql = "SELECT
                   cron.*
                 , cron.id as cron_id
@@ -188,7 +189,7 @@ class cron {
             GROUP BY cron.id, cron.domain_id
         ";
 
-        $sth = dbQuery($sql);
+        $sth = $db->query($sql);
 
         return $sth->fetchAll();
 
@@ -197,7 +198,7 @@ class cron {
 	public function select()
 	{
 		global $LANG;
-
+                global $db;
 		$sql = "SELECT
 				cron.*
                 , (SELECT CONCAT(pf.pref_description,' ',iv.index_id)) as index_name
@@ -209,7 +210,7 @@ class cron {
 					ON (iv.preference_id = pf.pref_id AND iv.domain_id = pf.domain_id)
 			WHERE cron.domain_id = :domain_id
 			  AND cron.id = :id;";
-		$sth = dbQuery($sql, ':domain_id', $this->domain_id, ':id', $this->id);
+		$sth = $db->query($sql, ':domain_id', $this->domain_id, ':id', $this->id);
 
 		return $sth->fetch();
 	}

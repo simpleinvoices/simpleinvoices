@@ -11,6 +11,7 @@ class inventory {
 
 	public function insert()
 	{
+            global $db;
 	        $sql = "INSERT INTO ".TB_PREFIX."inventory (
 				domain_id,
 				product_id,
@@ -26,7 +27,7 @@ class inventory {
 				:date,
 				:note
 			)";
-        	$sth = dbQuery($sql,
+        	$sth = $db->query($sql,
 				':domain_id',$this->domain_id, 
 				':product_id',$this->product_id,
 				':quantity',$this->quantity,
@@ -41,6 +42,7 @@ class inventory {
 
 	public function update()
 	{
+            global $db;
 	        $sql = "UPDATE 
 				".TB_PREFIX."inventory
 			SET 
@@ -53,7 +55,7 @@ class inventory {
 				id = :id 
 			AND domain_id = :domain_id
 			";
-        	$sth = dbQuery($sql,
+        	$sth = $db->query($sql,
 				':id',$this->id, 
 				':domain_id',$this->domain_id, 
 				':product_id',$this->product_id,
@@ -74,6 +76,7 @@ class inventory {
     public function select_all($type='', $dir='DESC', $rp='25', $page='1')
 	{
 		global $LANG;
+                global $db;
 		$valid_search_fields = array('p.description', 'iv.date', 'iv.quantity', 'iv.cost', 'iv.quantity * iv.cost');
 
 		/*SQL Limit - start*/
@@ -132,9 +135,9 @@ class inventory {
 			$limit";
 
 		if (empty($query)) {
-			$sth = dbQuery($sql, ':domain_id', $this->domain_id);
+			$sth = $db->query($sql, ':domain_id', $this->domain_id);
 		} else {
-			$sth = dbQuery($sql, ':domain_id', $this->domain_id, ':query', "%$query%");
+			$sth = $db->query($sql, ':domain_id', $this->domain_id, ':query', "%$query%");
 		}
 
 		if($type =="count")
@@ -148,6 +151,7 @@ class inventory {
 	public function select()
 	{
 		global $LANG;
+                global $db;
 
 		$sql = "SELECT
 				iv.*,
@@ -159,7 +163,7 @@ class inventory {
 			WHERE 
 				iv.domain_id = :domain_id
 			AND iv.id = :id;";
-		$sth = dbQuery($sql, ':domain_id', $this->domain_id, ':id', $this->id);
+		$sth = $db->Query($sql, ':domain_id', $this->domain_id, ':id', $this->id);
 
 		return $sth->fetch();
 	}

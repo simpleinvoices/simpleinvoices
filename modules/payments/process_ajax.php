@@ -14,9 +14,7 @@ define("BROWSE","browse");
 $domain_id = domain_id::get();
 
 #$sql = "SELECT * FROM ".TB_PREFIX."invoices where domain_id = ".$domain_id;
-
-#global $dbh;
-#$sth = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
+#$sth = $db->query($sql);
 
 //$sql = "SELECT * FROM ".TB_PREFIX."invoices LIMIT $start, $limit";
 $invoice = new invoice();

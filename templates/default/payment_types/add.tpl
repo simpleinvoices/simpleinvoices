@@ -22,7 +22,7 @@
 
 	<table>
 		<tr>
-			<th>Payment type description 
+			<th>{$LANG.payment_type_description} 
 				<a 
 					class="cluetip"
 					href="#"

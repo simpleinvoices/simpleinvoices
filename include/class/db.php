@@ -93,9 +93,8 @@ class db
 
 	function query($sqlQuery)
 	{
-		//dbQuery($sql);
-		
-		try {	
+		//global $dbh;
+                try {	
 		//$dbh = $this->connection;
 		//var_dump($this->_db);
 		$argc = func_num_args();
@@ -113,6 +112,7 @@ class db
 				
 			//var_dump($this->_db);
 			$result = $sth->execute();
+                        dbLogger($sqlQuery);
 			//$sth->closeCursor();
 			if ($sth->errorCode() > '0')
 			{
@@ -127,9 +127,9 @@ class db
 		return $sth;
 		#return $result;
 
-		$sth->closeCursor();
+		$sth->closeCursor(); //?
 		
-		$sth = NULL;
+		$sth = NULL; //?
 			
 	}
     /*
@@ -159,5 +159,19 @@ class db
 	//$this->connection->closeCursor();
 	 //$this->connection = null;
 	}
-	
+        
+    function beginTransaction()
+    {
+        $this->_db->beginTransaction();
+    }
+    
+    function commit()
+    {
+        $this->_db->commit();
+    }
+    
+    function rollBack()
+    {
+        $this->_db->rollBack();
+    }
 }
