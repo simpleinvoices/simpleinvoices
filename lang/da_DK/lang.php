@@ -2,13 +2,22 @@
 
 /*
 * Script: lang.php
-* 	English translation file
+* 	Danish translation file
+*
+* Authors:
+*	 Michael Larsen,  Claus MÃ¸lgaard Nielsen
 *
 * Last edited:
-*    2013-10-16
+*    2014-05-25
 *
 * License:
 *	 GPL v3 or above
+*æ;=&#230;
+*Æ=&#198;
+*ø=&#248;
+*Ø=&#216;
+*å=&#229;
+*Å=&#197;
 */
 
 /*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
@@ -586,14 +595,14 @@ $LANG['years'] = "&#229;r";//1
 $LANG['yes'] = "Ja";//1
 $LANG['your_reports'] = "Dine rapporter";//1
 $LANG['zip'] = "Postnummer";//1
-$LANG['manage_product_attributes'] = "Manage Product Attributes";//1
-$LANG['add_product_attribute'] = "Add Product Attribute";//1
-$LANG['insert_product_attribute'] = "Insert Product Attribute";//1
-$LANG['product_attribute'] = "Product Attribute";//1
-$LANG['add_product_value'] = "Add Product Value";//1
-$LANG['insert_product_value'] = "Insert Product Value";//1
-$LANG['product_value'] = "Product Value";//1
-$LANG['manage_product_values'] = "Manage Product Value";//1
+$LANG['manage_product_attributes'] = "Manage Product Attributes";//0
+$LANG['add_product_attribute'] = "Add Product Attribute";//0
+$LANG['insert_product_attribute'] = "Insert Product Attribute";//0
+$LANG['product_attribute'] = "Product Attribute";//0
+$LANG['add_product_value'] = "Add Product Value";//0
+$LANG['insert_product_value'] = "Insert Product Value";//0
+$LANG['product_value'] = "Product Value";//0
+$LANG['manage_product_values'] = "Manage Product Value";//0
 
 $LANG['title_module_index']				= "Hjem";//1
 $LANG['title_module_reports']			= "Hjem / Rapporter";//1

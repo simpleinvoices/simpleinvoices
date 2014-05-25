@@ -2,10 +2,10 @@
 
 /*
 * Script: lang.php
-* 	English translation file
+* 	Bulgarian translation file
 *
 * Last edited:
-*    2013-10-16
+*    2014-05-25
 *
 * License:
 *	 GPL v3 or above
