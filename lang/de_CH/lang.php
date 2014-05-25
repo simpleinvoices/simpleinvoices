@@ -2,10 +2,13 @@
 
 /*
 * Script: lang.php
-* 	English translation file
+* 	Deutsch - German (Swiss) translation file
+*
+* Authors:
+*	 Herz Hermann (heart1010@gmail.com)
 *
 * Last edited:
-*    2013-10-16
+*    2014-05-25
 *
 * License:
 *	 GPL v3 or above
@@ -585,14 +588,14 @@ $LANG['years'] = "Jahre";//1
 $LANG['yes'] = "Ja";//1
 $LANG['your_reports'] = "Ihre Berichte";//1
 $LANG['zip'] = "PLZ";//1
-$LANG['manage_product_attributes'] = "Manage Product Attributes";//1
-$LANG['add_product_attribute'] = "Add Product Attribute";//1
-$LANG['insert_product_attribute'] = "Insert Product Attribute";//1
-$LANG['product_attribute'] = "Product Attribute";//1
-$LANG['add_product_value'] = "Add Product Value";//1
-$LANG['insert_product_value'] = "Insert Product Value";//1
-$LANG['product_value'] = "Product Value";//1
-$LANG['manage_product_values'] = "Manage Product Value";//1
+$LANG['manage_product_attributes'] = "Manage Product Attributes";//0
+$LANG['add_product_attribute'] = "Add Product Attribute";//0
+$LANG['insert_product_attribute'] = "Insert Product Attribute";//0
+$LANG['product_attribute'] = "Product Attribute";//0
+$LANG['add_product_value'] = "Add Product Value";//0
+$LANG['insert_product_value'] = "Insert Product Value";//0
+$LANG['product_value'] = "Product Value";//0
+$LANG['manage_product_values'] = "Manage Product Value";//0
 
 $LANG['title_module_index']				= "Startseite";//1
 $LANG['title_module_reports']			= "Startseite / Berichte";//1
