@@ -6,9 +6,10 @@
 *
 * Authors:
 *	 Boštjan Jerko
+*  Sebastijan Bandur
 *
 * Last edited:
-* 	 2013-10-19
+* 	 2014-05-24
 *
 * License:
 *	 GPL v2 or above
