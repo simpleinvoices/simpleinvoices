@@ -1446,7 +1446,7 @@
         },
         {
             "id": "4",
-            "name": "viewer"
+            "name": "operator"
         },
         {
             "id": "5",
@@ -1455,6 +1455,10 @@
         {
             "id": "6",
             "name": "biller"
+        },
+        {
+            "id": "7",
+            "name": "viewer"
         }
     ]
 }

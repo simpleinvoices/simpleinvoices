@@ -6,7 +6,16 @@ $auth_session = new Zend_Session_Namespace('Zend_Auth');
 
 $acl_view   = (isset($_GET['view']) ? $_GET['view'] : null);
 $acl_action = (isset($_GET['action']) ? $_GET['action'] : null);
-$checkPermission = $acl->isAllowed($auth_session->role_name, $module, $acl_action) ?  "allowed" : "denied"; // allowed
+if (empty($acl_action)) {
+	// no action is given
+	if (!empty($acl_view)) {
+		// view is available with no action
+		$checkPermission = $acl->isAllowed($auth_session->role_name, $module, $acl_view) ?  "allowed" : "denied"; // allowed
+	}
+} else {
+	// action available
+	$checkPermission = $acl->isAllowed($auth_session->role_name, $module, $acl_action) ?  "allowed" : "denied"; // allowed
+}
 
 //basic customer page check 
 if( ($auth_session->role_name =='customer') AND ($module == 'customers') AND ($_GET['id'] != $auth_session->user_id) )

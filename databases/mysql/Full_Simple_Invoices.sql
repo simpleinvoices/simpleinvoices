@@ -760,7 +760,8 @@ INSERT INTO `si_user_role` (`id`, `name`) VALUES
  (1, 'administrator')
 ,(2, 'domain_administrator')
 ,(3, 'user')
-,(4, 'viewer')
+,(4, 'operator')
 ,(5, 'customer')
-,(6, 'biller');
+,(6, 'biller')
+,(7, 'viewer');
 
