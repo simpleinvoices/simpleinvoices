@@ -6,9 +6,10 @@
 *
 * Authors:
 *	 Boštjan Jerko
+*  Sebastijan Bandur
 *
 * Last edited:
-* 	 2013-10-19
+* 	 2014-05-24
 *
 * License:
 *	 GPL v2 or above
@@ -22,18 +23,18 @@ regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
 $LANG['about'] = "O programu";//1
 $LANG['account_info'] = "Podatki o računu";//1
 $LANG['actions'] = "Dejanja";//1
-$LANG['add'] = "Add";//0
+$LANG['add'] = "Dodaj";//1
 $LANG['add_biller'] = "Dodaj ponudnika";//1
 $LANG['add_customer'] = "Dodaj stranko";//1
-$LANG['add_invoice_item'] = "Add Invoice Item";//0
+$LANG['add_invoice_item'] = "Dodaj postavko računa";//1
 $LANG['add_invoice_preference'] = "Dodaj nastavitve predračuna";//1
-$LANG['add_item'] = "Add Item";//0
-$LANG['add_new_biller'] = "Dodaj novega ponudnika";//1
-$LANG['add_new_invoice'] = "Dodaj novo ponudbo";//1
-$LANG['add_new_payment_type'] = "Dodaj nov način plačila";//1
-$LANG['add_new_preference'] = "Dodaj nove nastavitve predračuna";//1
-$LANG['add_new_product'] = "Dodaj nov izdelek";//1
-$LANG['add_new_row'] = "Add new row";//0
+$LANG['add_item'] = "Dodaj postavko";//1
+$LANG['add_new_biller'] = "Dodaj ponudnika";//1
+$LANG['add_new_invoice'] = "Dodaj ponudbo";//1
+$LANG['add_new_payment_type'] = "Dodaj način plačila";//1
+$LANG['add_new_preference'] = "Dodaj nastavitve predračuna";//1
+$LANG['add_new_product'] = "Dodaj izdelek";//1
+$LANG['add_new_row'] = "Vstavi prazno vrstico";//1
 $LANG['add_new_tax_rate'] = "Dodaj novo davčno stopnjo";//1
 $LANG['add_payment_type'] = "Dodaj nov tip plačila";//1
 $LANG['add_product'] = "Dodaj izdelek";//1
@@ -46,21 +47,21 @@ $LANG['address_street'] = "Naslov: ulica";//1
 $LANG['address_zip'] = "Naslov: poštna št.";//1
 $LANG['age'] = "Starost";//1
 $LANG['aging'] = "Staranje";//1
-$LANG['all'] = "All";//0
-$LANG['all_reports'] = "All reports";//0
+$LANG['all'] = "Vse";//1
+$LANG['all_reports'] = "Vsa poročila";//1
 $LANG['amount'] = "Znesek";//1
-$LANG['as_template'] = "as template";//0
+$LANG['as_template'] = "kot predloga";//1
 $LANG['attention_short'] = "Za";//1
-$LANG['attribute'] = "Attribute";//0
-$LANG['attribute_short'] = "Attr";//0
-$LANG['back'] = "Back";//0
-$LANG['backup_database'] = "Varna kopija baze";//1
-$LANG['backup_database_now'] = "BACKUP DATABASE NOW";//0
-$LANG['backup_done'] = "Your database has now been backed up to the file %s, you can now continue using Simple Invoices as normal.";//0
-$LANG['backup_howto'] = "To make a backup of your Simple Invoices database click the below link";//0
-$LANG['backup_note_to_file'] = "This will backup your database to a file into your database_backups directory.";//0
-$LANG['backup_your_database'] = "Backup your database";//0
-$LANG['before_starting'] = "There are just a couple of things to do before you can start invoicing";//0
+$LANG['attribute'] = "Lastnost";//1
+$LANG['attribute_short'] = "Lastnost";//1
+$LANG['back'] = "Nazaj";//1
+$LANG['backup_database'] = "Varnostno kopiraj podatkovno bazo";//1
+$LANG['backup_database_now'] = "VARNOSTNO KOPIRAJ SEDAJ";//1
+$LANG['backup_done'] = "Varnostna kopija podatkovne baze je shranjena v datoteko %s, sedaj lahko nadaljujete z delom.";//1
+$LANG['backup_howto'] = "Za varnostno kopijo mikroRAČUNOV pritisnite na spodnjo bližnjico";//1
+$LANG['backup_note_to_file'] = "Kopija podatkovne baze bo shranjena v mapo z varnostnimi kopijami.";//1
+$LANG['backup_your_database'] = "Varnostno kopiraj podatkovno bazo";//1
+$LANG['before_starting'] = "Samo še nekaj korakov in računi se lahko začnejo izdajati";//1
 $LANG['biller'] = "Ponudnik";//1
 $LANG['biller_details'] = "Podatki ponudnika";//1
 $LANG['biller_edit'] = "Uredi ponudnika";//1
@@ -71,22 +72,22 @@ $LANG['biller_sales_by_customer_totals'] = "Prodaja ponudnika po strankah - Skup
 $LANG['biller_sales_total'] = "Prodaja ponudnika - Skupaj";//1
 $LANG['biller_to_add'] = "Dodaj ponudnika";//1
 $LANG['billers'] = "Ponudniki";//1
-$LANG['blog'] = "Blog";//0
+$LANG['blog'] = "Blog";//1
 $LANG['cancel'] = "Prekliči";//1
-$LANG['cannot_delete_first_row'] = "The first row cannot be deleted";//0
+$LANG['cannot_delete_first_row'] = "Prva vrstica ne more biti izbrisana";//1
 $LANG['change_log'] = "Dnevnik sprememb";//1
 $LANG['city'] = "Mesto";//1
-$LANG['confirm_delete'] = "Are you sure you want to delete";//0
+$LANG['confirm_delete'] = "Ste prepričani, da želite izbrisati";//0
 $LANG['consulting'] = "Svetovanje";//1
 $LANG['consulting_style'] = "Svetovalna oblika";//1
-$LANG['cost'] = "Cost";//0
+$LANG['cost'] = "Cena";//1
 $LANG['country'] = "Država";//1
 $LANG['create_invoice'] = "Pripravi ponudbo";//1
-$LANG['credit_card_details'] = "Credit card details";//0
-$LANG['credit_card_expiry_month'] = "Credit card expiry month";//0
-$LANG['credit_card_expiry_year'] = "Credit card expiry year";//0
-$LANG['credit_card_holder_name'] = "Credit card holder name";//0
-$LANG['credit_card_number'] = "Credit card number";//0
+$LANG['credit_card_details'] = "Podrobnosti kreditne kartice";//1
+$LANG['credit_card_expiry_month'] = "Mesec izteka veljavnosti";//1
+$LANG['credit_card_expiry_year'] = "Leto izteka veljavnosti";//1
+$LANG['credit_card_holder_name'] = "Lastnik kreditne kartice";//1
+$LANG['credit_card_number'] = "Številka kreditne kartice";//1
 $LANG['credit_card_number_encrypted'] = "The credit card number has been encrypted and is not displayed in Simple Invoices";//0
 $LANG['credit_card_number_new'] = "New credit card number";//0
 $LANG['credits'] = "Prispevki";//1
