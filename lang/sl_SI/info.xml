@@ -3,8 +3,9 @@
 	<name>Slovenščina</name>
 	<shortname>sl_SI</shortname>
 	<englishname>Slovenian</englishname>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<creationDate>2004-09-20</creationDate>
-	<author>Nicolas Ruflin</author>
-	<authorEmail>justin@kelly.org.au</authorEmail>
+	<editDate>2014-05-25</editDate>
+	<author>Sebastijan Bandur</author>
+	<authorEmail>software@smikro.org</authorEmail>
 </langfile>
