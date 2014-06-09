@@ -2,13 +2,16 @@
 
 /*
 * Script: lang.php
-* 	English translation file
+*    Swedish translation file
+*
+* Author:
+*    Joakim Nyman
 *
 * Last edited:
-*    2013-10-16
+*    2014-06-09
 *
 * License:
-*	 GPL v3 or above
+*    GPL v3 or above
 */
 
 /*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
@@ -78,7 +81,7 @@ $LANG['consulting'] = "Konsultering";//1
 $LANG['consulting_style'] = "Konsulterings Stil";//1
 $LANG['cost'] = "Pris/Kostnad";//1
 $LANG['country'] = "Land";//1
-$LANG['create_invoice'] ="Skapa Ny Faktura";//1
+$LANG['create_invoice'] = "Skapa Ny Faktura";//1
 $LANG['credit_card_details'] = "Kreditkort Detaljer";//1
 $LANG['credit_card_expiry_month'] = "Giltigt t.o.m. månad";//1
 $LANG['credit_card_expiry_year'] = "Giltigt t.o.m. år";//1
@@ -122,8 +125,8 @@ $LANG['days'] = "dagar";//1
 $LANG['debtors'] = "Fordringar";//1
 $LANG['debtors_by_aging_periods'] = "Fordringar efter betalningsfrist";//1
 $LANG['debtors_by_amount_owed'] = "Fordringar efter utestående summa";//1
-$LANG['debtors_by_amount_owing_customer'] = "Debtors by Amount Owing per Customer";//1
-$LANG['decimal'] = "Decimal";//1
+$LANG['debtors_by_amount_owing_customer'] = "Debtors by Amount Owing per Customer";//0
+$LANG['decimal'] = "Decimal";//0
 $LANG['default_biller'] = "Standard Fordringsägare";//1
 $LANG['default_customer'] = "Standard Kund";//1
 $LANG['default_inv_template'] = "Standard Faktura Mall ";//1
@@ -178,10 +181,10 @@ $LANG['export_xls'] = "Exportera till XLS";//1
 $LANG['export_xls_tooltip'] = "till kalkylblad som";//1
 $LANG['extensions'] = "Utbyggnad";//1
 $LANG['faqs'] = "Frequently Asked Questions";//1
-$LANG['faqs_how'] ="Hur skapar jag fakturor?";//1
-$LANG['faqs_need'] ="Vad behöver jag för att börja fakturera?";//1
-$LANG['faqs_type'] ="Vad är skillnaden mellan de olika typerna av fakturor?";//1
-$LANG['faqs_what'] ="Vad är Simple Invoices?";//1
+$LANG['faqs_how'] = "Hur skapar jag fakturor?";//1
+$LANG['faqs_need'] = "Vad behöver jag för att börja fakturera?";//1
+$LANG['faqs_type'] = "Vad är skillnaden mellan de olika typerna av fakturor?";//1
+$LANG['faqs_what'] = "Vad är Simple Invoices?";//1
 $LANG['fax'] = "Fax";//1
 $LANG['filter_by_dates'] = "sortera efter datum";//1
 $LANG['filters'] = "Sortera";//1
@@ -193,7 +196,7 @@ $LANG['free'] = "Gratis";//1
 $LANG['from'] = "Från";//1
 $LANG['fwrite_error'] = "Fick du fwrite felmeddelanden?";//1
 $LANG['get_help'] = "Få Hjälp";//1
-$LANG['getting_started'] ="Kom i gång";//1
+$LANG['getting_started'] = "Kom i gång";//1
 $LANG['gross_total'] = "Brutto";//1
 $LANG['hello'] = "Hello";//1
 $LANG['help'] = "Hjälp";//1
@@ -217,7 +220,7 @@ $LANG['help_insert_biller_text'] = "För att inte välja någon logo välj '_def
 $LANG['help_inv_pref_currency_sign'] = "Detta är valuta tecknet som kommer användas på fakturan.<br /><br /><b>Obs:</b> Euro, Pund osv.. Vänligen använd html koden för ditt valuta tecken i detta fält. Hänvisa till listan med html koder på följande webbsida för valuta tecken <a href='http://www.ascii.cl/htmlcodes.htm'>http://www.ascii.cl/htmlcodes.htm</a>.<br /><br />Detta krävs för att PDF kan fungera korrekt med andra valutor än $.<br /><br /> &#38;#163; är html koden för Pund,<br /> &#38;#8364; för Euro, osv..";//1
 $LANG['help_inv_pref_description'] = "Detta är namnet för faktura mallen - det används inte på själva fakturan, bara vid skapandet av fakturor när du väljer i drop down menyn vilken Faktura Mall du vill använda.";//1
 $LANG['help_inv_pref_invoice_detail_heading'] = "Detta är vad som kommer synas som rubrik i sidfoten/detaljerna för fakturan.";//1
-$LANG['help_inv_pref_invoice_detail_line'] = "This is the text that appear under the details/footer heading. Normally used to define payment terms etc.";//1
+$LANG['help_inv_pref_invoice_detail_line'] = "Detta är den text som kommer synas under detaljer/sidfots rubriken. Vanligen använt för att ange betalnings villkor osv.";//1
 $LANG['help_inv_pref_invoice_enabled'] = "Detta låter dig specificera om 'Faktura Mallen' är aktiverad eller inaktiverad. Om 'Faktura Mallen' är inaktiverad kan du inte lägre välja den vid skapandet av nya fakturor.";//1
 $LANG['help_inv_pref_invoice_heading'] = "Detta är rubriken för fakturan och kommer visas uppe på fakturan.";//1
 $LANG['help_inv_pref_invoice_numbering_group'] = "En faktura kan ha olika numrering beroende på Faktura Mall. T.ex. kan du ha Offert 1 och Faktura 1.<br /><br />Detta fält indikerar vilken 'grupp' du vill att denna mall ska numreras som. Om du grupperar flera faktura mallar tillsammas så kommer alla fakturor osv.. skapade med dessa mallar att öka inom samma skala. Om du lämnar detta blankt kommer denna faktura mall att öka inom en egen skala.";//1
@@ -232,10 +235,7 @@ $LANG['help_inv_pref_status'] = "En mall kan ha status 'Utkast' eller 'Öppen'. 
 $LANG['help_inv_pref_what_the'] = "Faktura Mallar låter dig ange texten i fakturan. Du kan ha hur många olika 'Faktura Mallar' angivna i Simple Invoices som du vill, men du kan endast välja 1 'Faktura Mall' per faktura.<br /><br />T.ex. Om du ville ha rubriken för fakturan att säga 'Moes Tavern - Faktura' istället för standard 'Faktura', så kan du redigera 'Faktura rubrik' fältet i den relevanta Faktura Mallen för att åstadkomma detta.";//1
 $LANG['help_invoice_create'] = "Att skapa fakturor är lätt. När en fordringsägare och kund har lagts till i Simple Invoices behöver du bara välja en fakturamall, fylla i detaljerna och klicka på 'Spara Faktura'.";//1
 $LANG['help_invoice_custom_fields'] = "Behöver du fler fält i faktura vyn? Vill du ha dina egna fält så som 'Inköpsordning', 'Projekt Namn' osv..<br /><br />Simple Invoices låter dig lägga till vilka fält du vill till fakturorna. Dessa kallas 'egendefinierade fält', för att redigera eller sätta upp dina egna fält välj Egendefinierade Fält i Inställningar menyn.";//1
-$LANG['help_invoice_types'] = "I Simple Invoices finns det 2 typer av fakturor tillgängliga<br /><br />
-En <b>Artikelvis Faktura</b> är en faktura som listar många olika poster på samma faktura, med valfritt antecknings fält för varje post - tänk mataffärs faktura.
-<br/ ><br />
-En <b>Totalt Faktura</b> är t.ex. en faktura från rörmokaren som listar vad som gjorts och sedan har ett slutpris och skatt.";//1
+$LANG['help_invoice_types'] = "I Simple Invoices finns det 2 typer av fakturor tillgängliga<br /><br />En <b>Artikelvis Faktura</b> är en faktura som listar många olika poster på samma faktura, med valfritt antecknings fält för varje post - tänk mataffärs faktura.<br/ ><br />En <b>Totalt Faktura</b> är t.ex. en faktura från rörmokaren som listar vad som gjorts och sedan har ett slutpris och skatt.";//1
 $LANG['help_logging'] = "För att logga handlingar som gör i Simple Invoices aktivera denna inställning. Detta skapar en logg i databasen på vad som gjorts.<br /><br />Obs: För tillfället är det ända sättet att se loggen att logga in i databasen. Vi kommer snart lägga till en snygg logg visare i Simple Invoices.";//1
 $LANG['help_mailing_list'] = "Mejllista";//1
 $LANG['help_manage_custom_fields'] = "Egendefinierade Fält är speciella fält som du kan namnge efter behov.<br /><br />Denna sida låter dig ange upp till 4 egendefinierade fält för var och en av följande: produkter, kunder, fordringsägare, och fakturor.<br /><br />När du namnger ett av fälten blir det genast tillgängligt för användning. T.ex. om du redigerar 'Faktura :: Egendefinierat fält 1' och ger det namnet 'Projekt namn', nästa gång du skapar en faktura kommer det finnas ett nytt fält i faktura vyn som kallas 'Projekt namn'.";//1
@@ -304,17 +304,17 @@ $LANG['large_dataset'] = "Stor Datamängd";//1
 $LANG['license'] = "Licens";//1
 $LANG['list'] = "Lista";//1
 $LANG['loading'] = "Laddar";//1
-$LANG['locale'] = "Locale";//1
+$LANG['locale'] = "Locale";//0
 $LANG['logging'] = "Loggning";//1
 $LANG['login'] = "Logga in";//1
-$LANG['logo_file'] = "Logo fil";//1
+$LANG['logo_file'] = "Logo Fil";//1
 $LANG['logout'] = "Logga ut";//1
 $LANG['manage'] = "Hantera";//1
 $LANG['manage_billers'] = "Hantera Fordringsägare";//1
 $LANG['manage_custom_fields'] = "Hantera Egendefinierade Fält";//1
 $LANG['manage_customers'] = "Hantera Kunder";//1
-$LANG['manage_data'] ="Hantera data";//1
-$LANG['manage_existing_invoice'] ="Hantera existerande fakturor";//1
+$LANG['manage_data'] = "Hantera data";//1
+$LANG['manage_existing_invoice'] = "Hantera existerande fakturor";//1
 $LANG['manage_invoice_preferences'] = "Hantera Faktura Inställningar";//1
 $LANG['manage_invoices'] = "Hantera Fakturor";//1
 $LANG['manage_payment_types'] = "Hantera Betalningsformer";//1
@@ -346,7 +346,7 @@ $LANG['no_crons'] = "Det finns inga återkommande fakturor. Klicka på 'Ny åter
 $LANG['no_customers'] = "Inga kunder har blivit skapade. Klicka på 'Lägg till Ny Kund' ovan för att skapa en";//1
 $LANG['no_defaults'] = "Det finns inga förhandsinställningar";//1
 $LANG['no_help_page'] = "Det finns ingen hjälp sida för önskat ämne";//1
-$LANG['no_inventory_movements'] = "There have been no inventory movements recorded. Click the 'New Inventory movement' button above to create one";//1
+$LANG['no_inventory_movements'] = "There have been no inventory movements recorded. Click the 'New Inventory movement' button above to create one";//0
 $LANG['no_invoices'] = "Inga fakturor har blivit skapade. Klicka på 'Lägg till Ny Faktura' ovan för att skapa en faktura";//1
 $LANG['no_items'] = "Inga artiklar hittades";//1
 $LANG['no_payment_types'] = "Inga betalningsformer har blivit skapade. Klicka på 'Lägg till Ny Betalningsform' ovan för att skapa en";//1
@@ -390,8 +390,8 @@ $LANG['payments'] = "Betalningar";//1
 $LANG['payments_filtered'] = "Filtrerat efter ";//1
 $LANG['payments_filtered_customer'] = "Filtrerat efter kund";//1
 $LANG['payments_filtered_invoice'] = "Behandla Betalning för denna Faktura";//1
-$LANG['paymentsgateway'] = "PaymentsGateway.com";//1
-$LANG['paymentsgateway_api_id'] = "PaymentsGateway API ID";//1
+$LANG['paymentsgateway'] = "PaymentsGateway.com";//0
+$LANG['paymentsgateway_api_id'] = "PaymentsGateway API ID";//0
 $LANG['paypal'] = "Paypal";//1
 $LANG['paypal_business_name'] = "Paypal konto namn";//1
 $LANG['paypal_link'] = "Paypal länk";//1
@@ -474,7 +474,7 @@ $LANG['save_defaults_failure'] = "Någonting blev fel, försök att ange system 
 $LANG['save_defaults_success'] = "System standarden har uppdaterats,<br /> du kommer att bli vidarebefodrad till sidan System Standarder";//1
 $LANG['save_eway_check_failed'] = "Eway transaktionen kunde inte genomföras då det ser ut somom fakturan redan är betald eller så har kunden eller fakturahanteraren inte de Eway uppgifter som behövs";//1
 $LANG['save_eway_failure'] = "Något gick fel vid Eway transaktionen - kontrollera i tmp/log/si.log för merinformation, vänligen försök Eway överföringen igen";//1
-$LANG['save_eway_success'] = "Eway transaction successful,<br /> you will be redirected back to the Manage Payments page";//1
+$LANG['save_eway_success'] = "Eway transaction successful,<br /> you will be redirected back to the Manage Payments page";//0
 $LANG['save_inventory_failure'] = "Något gick fel. vänligen försök att spara flytten av inventarier igen";//1
 $LANG['save_inventory_success'] = "Hanterar inventarie flytten,<br />du kommer nu att bli vidarebefodrad till Hantera Inventarier";//1
 $LANG['save_invoice'] = "Spara Faktura";//1
@@ -506,11 +506,11 @@ $LANG['setup_add_taxrate'] = "Lägg till en skattesats, klicka ";//1
 $LANG['setup_as_biller'] = "Klicka för att ange dig själv som fordringsägare";//1
 $LANG['setup_create_invoices'] = "Börja skapa fakturor, klicka ";//1
 $LANG['setup_customisation'] = "Om du behöver skräddarsy inställningarna (ex. språk, standarder, osv..), klicka ";//1
-$LANG['shortcut'] ="Genvägs meny";//1
+$LANG['shortcut'] = "Genvägs meny";//1
 $LANG['show_details'] = "Visa detaljer";//1
 $LANG['show_only_unpaid_invoices'] = "Visa endast obetalda fakturor";//1
 $LANG['simple_invoices'] = "Simple Invoices";//1
-$LANG['simple_invoices_powered_by'] = "Powered by Simple Invoices";//1
+$LANG['simple_invoices_powered_by'] = "Powered by Simple Invoices";//0
 $LANG['start_date'] = "Startdatum (ÅÅÅÅ-MM-DD)";//1
 $LANG['start_date_short'] = "Startdatum";//1
 $LANG['start_working'] = "Börja jobba";//1
@@ -520,11 +520,11 @@ $LANG['statement_for_the_period'] = "Periodrapport";//1
 $LANG['statement_of_invoices'] = "Fakturarapport";//1
 $LANG['statement_summary'] = "Summering av redogörelser";//1
 $LANG['statements'] = "Utdrag";//1
-$LANG['stats'] ="Snabbrapporter";//1
-$LANG['stats_biller'] ="Topp Fordringsägare - efter antal fakturerade";//1
-$LANG['stats_customer'] ="Topp Kund - efter belopp fakturerad";//1
-$LANG['stats_debtor'] ="Största skuld";//1
-$LANG['status'] ="Status";//1
+$LANG['stats'] = "Snabbrapporter";//1
+$LANG['stats_biller'] = "Topp Fordringsägare - efter antal fakturerade";//1
+$LANG['stats_customer'] = "Topp Kund - efter belopp fakturerad";//1
+$LANG['stats_debtor'] = "Största skuld";//1
+$LANG['status'] = "Status";//1
 $LANG['street'] = "Gatuadress";//1
 $LANG['street2'] = "Gatuadress 2";//1
 $LANG['sub_total'] = "Totalt";//1
@@ -588,19 +588,19 @@ $LANG['years'] = "år";//1
 $LANG['yes'] = "Ja";//1
 $LANG['your_reports'] = "Dina rapporter";//1
 $LANG['zip'] = "Postnummer";//1
-$LANG['manage_product_attributes'] = "Manage Product Attributes";//1
-$LANG['add_product_attribute'] = "Add Product Attribute";//1
-$LANG['insert_product_attribute'] = "Insert Product Attribute";//1
-$LANG['product_attribute'] = "Product Attribute";//1
-$LANG['add_product_value'] = "Add Product Value";//1
-$LANG['insert_product_value'] = "Insert Product Value";//1
-$LANG['product_value'] = "Product Value";//1
-$LANG['manage_product_values'] = "Manage Product Value";//1
+$LANG['manage_product_attributes'] = "Manage Product Attributes";//0
+$LANG['add_product_attribute'] = "Add Product Attribute";//0
+$LANG['insert_product_attribute'] = "Insert Product Attribute";//0
+$LANG['product_attribute'] = "Product Attribute";//0
+$LANG['add_product_value'] = "Add Product Value";//0
+$LANG['insert_product_value'] = "Insert Product Value";//0
+$LANG['product_value'] = "Product Value";//0
+$LANG['manage_product_values'] = "Manage Product Value";//0
 
 $LANG['title_module_index']				= "Hem";//1
 $LANG['title_module_reports']			= "Hem / Rapporter";//1
 $LANG['title_module_invoices']			= "Pengar / Fakturor";//1
-$LANG['title_module_cron']				= "Money / Recurrence";//1
+$LANG['title_module_cron']				= "Money / Recurrence";//0
 $LANG['title_module_payments']			= "Pengar / Betalningar";//1
 $LANG['title_module_billers']			= "Användare / Fordringsägare";//1
 $LANG['title_module_customers']			= "Personer / Kunder";//1

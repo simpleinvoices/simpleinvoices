@@ -9,10 +9,10 @@
 *   Horia Negura aka "FakeMoth"
 *
 * Last edited:
-* 	 2013-10-19
+* 	 2014-06-09
 *
 * License:
-*	 GPL v2 or above
+*	 GPL v3 or above
 */
 
 /*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
@@ -589,14 +589,14 @@ $LANG['years'] = "years";//0
 $LANG['yes'] = "Da";//1
 $LANG['your_reports'] = "Your reports";//0
 $LANG['zip'] = "Cod Postal";//1
-$LANG['manage_product_attributes'] = "Manage Product Attributes";//1
-$LANG['add_product_attribute'] = "Add Product Attribute";//1
-$LANG['insert_product_attribute'] = "Insert Product Attribute";//1
-$LANG['product_attribute'] = "Product Attribute";//1
-$LANG['add_product_value'] = "Add Product Value";//1
-$LANG['insert_product_value'] = "Insert Product Value";//1
-$LANG['product_value'] = "Product Value";//1
-$LANG['manage_product_values'] = "Manage Product Value";//1
+$LANG['manage_product_attributes'] = "Manage Product Attributes";//0
+$LANG['add_product_attribute'] = "Add Product Attribute";//0
+$LANG['insert_product_attribute'] = "Insert Product Attribute";//0
+$LANG['product_attribute'] = "Product Attribute";//0
+$LANG['add_product_value'] = "Add Product Value";//0
+$LANG['insert_product_value'] = "Insert Product Value";//0
+$LANG['product_value'] = "Product Value";//0
+$LANG['manage_product_values'] = "Manage Product Value";//0
 
 $LANG['title_module_index']				= "Acasa";//1
 $LANG['title_module_reports']			= "Home / Reports";//0
