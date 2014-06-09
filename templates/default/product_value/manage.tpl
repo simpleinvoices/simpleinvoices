@@ -10,7 +10,7 @@
 {if preferences == null}
 <P><em>{$LANG.no_preferences}.</em></p>
 {else}
-<h3>{$LANG.manage_product_values} :: <a href="index.php?module=product_value&view=add">{$LANG.add_product_value}</a></h3> <!--Maria tanslate Manage Product Value and Add Product Value-->
+<h3>{$LANG.manage_product_values} :: <a href="index.php?module=product_value&view=add">{$LANG.add_product_value}</a></h3>
 <hr />
 <table id="manageGrid" style="display:none"></table>
 

@@ -37,7 +37,7 @@
 
 {if $smarty.get.action== 'edit' }
 
-<b>{$LANG.product_attribute}</b> <!--Maria - tanslation-->
+<b>{$LANG.product_attribute}</b>
 	<hr />
 
         <table align="center">
@@ -52,7 +52,7 @@
 			<td>
                 <select name="type_id">
                     {foreach from=$types key=k item=v}
-        				<option value="{$v.id}" {if $product_attribute.type_id == $v.id} selected {/if}>{$LANG[$v.name]}</option> <!--Maria - tanslation-->
+        				<option value="{$v.id}" {if $product_attribute.type_id == $v.id} selected {/if}>{$LANG[$v.name]}</option>
                     {/foreach}
                 </select>
 			</td>
@@ -72,7 +72,7 @@
                 </table>
 		<hr />
 
-<div style="text-align:center;"> <!--Maria - align-->
+<div style="text-align:center;">
 	<input type="submit" name="save_product_attribute" value="{$LANG.save}" />
 	<input type="hidden" name="op" value="edit_product_attribute" />
 </div>

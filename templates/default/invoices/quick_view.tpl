@@ -148,13 +148,13 @@
 		<tr class="customer">
 			<th>{$LANG.city}:</th>
 			<td colspan="3">{$customer.city|htmlsafe}</td>
-			<th>{$LANG.phone_short}:</th> <!--Maria translate ph-->
+			<th>{$LANG.phone_short}:</th>
 			<td>{$customer.phone|htmlsafe}</td>
 		</tr>	
 		<tr class="customer">
-			<th>{$LANG.state}, {$LANG.zip}:</th> <!--Maria translate zip-->
+			<th>{$LANG.state}, {$LANG.zip}:</th>
 			<td colspan="3">{$customer.state|htmlsafe}, {$customer.zip_code|htmlsafe}</td>
-			<th>{$LANG.mobile_short}:</th> <!--Maria translate mobile-->
+			<th>{$LANG.mobile_short}:</th>
 			<td>{$customer.mobile_phone|htmlsafe}</td>
 		</tr>	
 		<tr class="customer">

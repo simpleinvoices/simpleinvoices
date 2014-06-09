@@ -19,14 +19,14 @@
 	{/if}
 <form name="frmpost" action="index.php?module=product_attribute&amp;view=add" method="post">
 
-<h3>{$LANG.add_product_attribute}</h3> <!--Maria - tanslation-->
+<h3>{$LANG.add_product_attribute}</h3>
 
 <hr />
 
 
 <table align="center">
 <tr>
-	<td class="details_screen">{$LANG.name}</td> <!--Maria - tanslation-->
+	<td class="details_screen">{$LANG.name}</td>
 	<td><input type="text" name="name" value="{$smarty.post.name}" size="25" /></td>
 </tr>
 		<tr>
@@ -55,7 +55,7 @@
 
 <hr />
 <div style="text-align:center;">
-	<input type="submit" name="submit" value="{$LANG.insert_product_attribute}" /> <!--Maria - tanslation-->
+	<input type="submit" name="submit" value="{$LANG.insert_product_attribute}" />
 	<input type="hidden" name="op" value="insert_product_attribute" />
 </div>
 </form>
