@@ -87,7 +87,7 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 						) ap ON (ap.customer_id = c.id AND ap.domain_id = c.domain_id)
 				WHERE c.domain_id = :domain_id
 					  $where
-				GROUP BY CID
+				GROUP BY CID, name, enabled, ap.amount
 				ORDER BY 
 					$sort $dir 
 				$limit";
