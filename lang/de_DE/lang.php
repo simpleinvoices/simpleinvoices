@@ -9,7 +9,7 @@
 * 	 Ali Akar [ali_akar@gmx.de]
 *
 * Last edited:
-*    2013-10-16
+*    2014-07-29
 *
 * License:
 *	 GPL v3 or above
@@ -17,17 +17,17 @@
 
 /*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
 regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
- */
+*/
 
 #all
 $LANG['about'] = "Über";//1
-$LANG['account_info'] = "Kontoinformation";//1
-$LANG['actions'] = "Aktionen";//1
+$LANG['account_info'] = "Konto-Information";//1
+$LANG['actions'] = "Aktion";//1
 $LANG['add'] = "Hinzufügen";//1
 $LANG['add_biller'] = "Gläubiger anlegen";//1
 $LANG['add_customer'] = "Kunde anlegen";//1
-$LANG['add_invoice_item'] = "Neuen Position anlegen";//1
-$LANG['add_invoice_preference'] = "Neue Rechnungspräferenz hinzufügen";//1
+$LANG['add_invoice_item'] = "Rechnungsposition hinzufügen";//1
+$LANG['add_invoice_preference'] = "Rechnungspräferenz hinzufügen";//1
 $LANG['add_item'] = "Position hinzufügen";//1
 $LANG['add_new_biller'] = "Neuen Gläubiger hinzufügen";//1
 $LANG['add_new_invoice'] = "Neue Rechnung";//1
@@ -42,7 +42,7 @@ $LANG['add_tax_rate'] = "Steuersatz anlegen";//1
 $LANG['address'] = "Adresse";//1
 $LANG['address_city'] = "Stadt";//1
 $LANG['address_country'] = "Land";//1
-$LANG['address_state'] = "Provinz";//1
+$LANG['address_state'] = "Bundesland";//1
 $LANG['address_street'] = "Strasse";//1
 $LANG['address_zip'] = "PLZ";//1
 $LANG['age'] = "Alter";//1
@@ -60,7 +60,7 @@ $LANG['backup_database_now'] = "Datenbank Backup jetzt erstellen";//1
 $LANG['backup_done'] = "Ihre Datenbank wurde unter der Datei %s gesichert. Sie können nun Simple Invoices wie gewohnt weiter benutzen.";//1
 $LANG['backup_howto'] = "Um eine Sicherung Ihrer Simple Invoices Datenbank zu erstellen klicken Sie auf den unteren Link.";//1
 $LANG['backup_note_to_file'] = "Eine Sicherung Ihrer Datenbank wird als Datei in das Verzeichnis database_backups geschrieben.";//1
-$LANG['backup_your_database'] = "Sichern sie Ihre Datenbank.";//1
+$LANG['backup_your_database'] = "Datenbank sichern";//1
 $LANG['before_starting'] = "Es sind nur wenige Dinge zu tun bevor sie mit der Erstellung von Rechnungen beginnen können.";//1
 $LANG['biller'] = "Gläubiger";//1
 $LANG['biller_details'] = "Gläubigerdetails";//1
@@ -82,7 +82,7 @@ $LANG['consulting'] = "Beratung";//1
 $LANG['consulting_style'] = "Beratungsart";//1
 $LANG['cost'] = "Kostet";//1
 $LANG['country'] = "Land";//1
-$LANG['create_invoice'] ="Rechnung erstellen";//1
+$LANG['create_invoice'] = "Rechnung erstellen";//1
 $LANG['credit_card_details'] = "Kreditkartendetails";//1
 $LANG['credit_card_expiry_month'] = "Kreditkartennummer Verfallsmonat";//1
 $LANG['credit_card_expiry_year'] = "Kreditkartennummer Verfallsjahr";//1
@@ -104,7 +104,7 @@ $LANG['custom_fields'] = "Benutzerdefinierte Felder";//1
 $LANG['custom_fields_upper'] = "Benutzerdefinierte Felder";//1
 $LANG['custom_label'] = "Benutzerdefinierte Bezeichnung";//1
 $LANG['customer'] = "Kunde";//1
-$LANG['customer_account'] = "Kundenkonto";//1
+$LANG['customer_account'] = "Kunden-Konto";//1
 $LANG['customer_add'] = "Neuen Kunden hinzufügen";//1
 $LANG['customer_contact'] = "Kundenkontakt (z. Hdn.)";//1
 $LANG['customer_details'] = "Kundendetails";//1
@@ -115,11 +115,11 @@ $LANG['customer_short'] = "Kd.";//1
 $LANG['customers'] = "Kunden";//1
 $LANG['customise_settings'] = "Einstellungen anpassen";//1
 $LANG['dashboard'] = "Dashboard";//1
-$LANG['database_backup'] = "Datenbankbackup";//1
-$LANG['database_log'] = "Datenbankprotokoll";//1
+$LANG['database_backup'] = "Datenbank Sicherung";//1
+$LANG['database_log'] = "Datenbank Log";//1
 $LANG['database_upgrade_manager'] = "Datenbank Aktualisierungsmanager";//1
 $LANG['date'] = "Datum";//1
-$LANG['date_created'] = "Erstelldatum";//1
+$LANG['date_created'] = "Erstellungsdatum";//1
 $LANG['date_formatted'] = "Datum (JJJJ-MM-TT)";//1
 $LANG['date_upper'] = "Datum";//1
 $LANG['days'] = "Tage";//1
@@ -425,7 +425,7 @@ $LANG['product_attributes'] = "Produkt Attribute";//1
 $LANG['product_description'] = "Produkt Beschreibung";//1
 $LANG['product_description_prompt'] = "Sie müssen eine Beschreibung für das Produkt eingeben";//1
 $LANG['product_edit'] = "Produkt bearbeiten";//1
-$LANG['product_enabled'] = "Produkt aktiv";//1
+$LANG['product_enabled'] = "Produkt aktiviert";//1
 $LANG['product_id'] = "Produkt ID";//1
 $LANG['product_sales'] = "Produktverkäufe";//1
 $LANG['product_to_add'] = "Produkt hinzufügen";//1
@@ -507,7 +507,7 @@ $LANG['setup_add_taxrate'] = "Eine Steuerrate hinzufügen, klicken";//1
 $LANG['setup_as_biller'] = "Sich selbst als Gläubiger einstellen, klicken";//1
 $LANG['setup_create_invoices'] = "Rechnungen erstellen, klicken";//1
 $LANG['setup_customisation'] = "Wenn sie die Präferenzen (z. B. Sprache, Standardoptionen usw.) anpassen möchten, klicken ";//1
-$LANG['shortcut'] ="Schnellzugriffsmenü";//1
+$LANG['shortcut'] = "Schnellzugriffsmenü";//1
 $LANG['show_details'] = "Details anzeigen";//1
 $LANG['show_only_unpaid_invoices'] = "Nur unbezahlte Rechnungen anzeigen";//1
 $LANG['simple_invoices'] = "Simple Invoices";//1
@@ -520,12 +520,12 @@ $LANG['statement'] = "Bericht";//1
 $LANG['statement_for_the_period'] = "Quartalsbericht";//1
 $LANG['statement_of_invoices'] = "Rechnungsbericht";//1
 $LANG['statement_summary'] = "Zusammenfassungsbericht ";//1
-$LANG['statements'] = "Berichte";//1
-$LANG['stats'] ="Schnellberichte";//1
-$LANG['stats_biller'] ="Top Gläubiger - nach Rechnungssumme";//1
-$LANG['stats_customer'] ="Top Kunde - nach Rechnungssumme";//1
-$LANG['stats_debtor'] ="Grö&szlig;ter Schuldner";//1
-$LANG['status'] ="Status";//1
+$LANG['statements'] =  "Berichte";//1
+$LANG['stats'] = "Schnellberichte";//1
+$LANG['stats_biller'] = "Top Gläubiger - nach Rechnungssumme";//1
+$LANG['stats_customer'] = "Top Kunde - nach Rechnungssumme";//1
+$LANG['stats_debtor'] = "Grösster Schuldner";//1
+$LANG['status'] = "Status";//1
 $LANG['street'] = "Strasse";//1
 $LANG['street2'] = "Strasse 2";//1
 $LANG['sub_total'] = "Zwischensumme";//1
@@ -556,7 +556,7 @@ $LANG['total'] = "Gesamtsumme";//1
 $LANG['total_amount'] = "Rechnungsbetrag";//1
 $LANG['total_by_aging_periods'] = "Nach Zahlungsdauer - Gesamt";//1
 $LANG['total_invoices'] = "Rechnungen gesamt";//1
-$LANG['total_owed'] = "Total Schulden";//1
+$LANG['total_owed'] = "Gesamtschulden";//1
 $LANG['total_owed_per_customer'] = "Offener Rechnungsbetrag je Kunde - Gesamt";//1
 $LANG['total_owing'] = "Schuldend gesamt";//1
 $LANG['total_paid'] = "Bezahlt gesamt";//1
