@@ -7,7 +7,6 @@
 
 {* ------------------------------------------------------------------------------- *}
 
-{* keep only years to show*}
 {assign var=years_shown value=$all_years|@count}
 {assign var=years_shown value=$years_shown-1}
 {assign var=years value=$all_years.0|range:$all_years.$years_shown}
