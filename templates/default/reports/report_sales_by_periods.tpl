@@ -1,17 +1,13 @@
 {* Display the rate column ? *}
 {assign var=show_rates value=1}
 
-{* How many years to show?  *}
-{assign var=years_shown value=5}
-
 {* How may decimals for rate (0-2)  *}
 {assign var=rate_precision value='1'}
 
 
 {* ------------------------------------------------------------------------------- *}
 
-{* keep only years to show*}
-{if $years_shown > $all_years|@count}{assign var=years_shown value=$all_years|@count}{/if}
+{assign var=years_shown value=$all_years|@count}
 {assign var=years_shown value=$years_shown-1}
 {assign var=years value=$all_years.0|range:$all_years.$years_shown}
 
