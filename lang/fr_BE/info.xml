@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<langfile version="1.0.0" type="language">
+	<name>Français (Belge)</name>
+	<shortname>fr_BE</shortname>
+	<englishname>French (Belgian)</englishname>
+	<version>1.0.0</version>
+	<creationDate>2015-01-01</creationDate>
+	<author>kouinkouin</author>
+	<authorEmail>me@kouinkouin.com</authorEmail>
+</langfile>
