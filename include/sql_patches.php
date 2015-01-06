@@ -28,11 +28,11 @@
 	$patch['6']['patch'] = "ALTER TABLE ".TB_PREFIX."defaults ADD def_inv_template VARCHAR( 25 ) DEFAULT 'print_preview.php' NOT NULL";
 	$patch['6']['date'] = "20060514";
 
-	$patch['7']['name'] = "Edit tax description field lenght to 50";
+	$patch['7']['name'] = "Edit tax description field length to 50";
 	$patch['7']['patch'] = "ALTER TABLE ".TB_PREFIX."tax CHANGE tax_description tax_description VARCHAR( 50 ) DEFAULT NULL";
 	$patch['7']['date'] = "20060526";
 
-	$patch['8']['name'] = "Edit default invoice template field lenght to 50";
+	$patch['8']['name'] = "Edit default invoice template field length to 50";
 	$patch['8']['patch'] = "ALTER TABLE ".TB_PREFIX."defaults CHANGE def_inv_template def_inv_template VARCHAR( 50 ) DEFAULT NULL";
 	$patch['8']['date'] = "20060526";
 

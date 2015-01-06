@@ -284,7 +284,7 @@ function sql2xml($sth, $count) {
 * 
 * Parameters:
 * string	- the string to truncate
-* max		- the max lenght in characters to truncate the string to 
+* max		- the max length in characters to truncate the string to 
 * rep		- characters to be added at end of truncated string
 
 *
