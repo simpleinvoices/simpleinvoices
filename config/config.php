@@ -26,6 +26,8 @@ export.pdf.bottommargin 			= 15
 
 local.locale	    				= en_GB
 local.precision		    			= 2
+; datelength can be any of the Zend_Date lenghts - full, long, medium, short
+local.datelength                               = short
 
 email.host 				            = localhost
 email.smtp_auth			    		= false
