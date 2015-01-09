@@ -45,10 +45,13 @@ class siLocal
         //get the precision and add 1 - for the decimal place and reverse the sign
         $position = ($config->local->precision + 1 ) * -1;
 
+        // 140.000 -> 140 // 0.5 -> .5
         if(substr($formatted_number,$position,'1') == ".")
         {
 		    $formatted_number = rtrim(trim($formatted_number, '0'), '.');
         }
+
+        // 140,000 -> 140 // 0,5 -> ,5
         if(substr($formatted_number,$position,'1') == ",")
         {
             $formatted_number = rtrim(trim($formatted_number, '0'), ','); /* Added to deal with "," */
