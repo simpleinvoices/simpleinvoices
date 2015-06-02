@@ -351,7 +351,13 @@
 	<tr class="">
 		<td class="" colspan="6" ><br /></td>
 	</tr>
-
+{* Added by RJT - shows subtotal before tax.*}
+        <tr>
+                <td class="" colspan="2"></td>
+                <td align="right" colspan="3">{$LANG.sub_total}</td>
+                <td align="right" class="">{$preference.pref_currency_sign} {$invoice.gross|siLocal_number}</td>
+        </tr>
+{* End addition by RJT*}
     {* tax section - start *}
 	{if $invoice_number_of_taxes > 0}
 	<tr>
@@ -394,14 +400,8 @@
 		<td colspan="1" align="right"><span class="double_underline"><u>{$preference.pref_currency_sign} {$invoice.total|siLocal_number}</u></span></td>
     </tr>
     {* tax section - end *}
-{*
-		<tr>
-			<td class="" colspan="2"></td>
-			<td align="right" colspan="3">{$LANG.sub_total}</td>
-			<td align="right" class="">{$preference.pref_currency_sign} {$invoice.gross|siLocal_number}</td>
-		</tr>
-	
-	
+
+{*//RJT this was already commented out.	
     {section name=line start=0 loop=$invoice.tax_grouped step=1}
 
 		{if ($invoice.tax_grouped[line].tax_amount != "0") }  
@@ -431,11 +431,11 @@
 		<td class="" align="right" colspan="3"><b>{$preference.pref_inv_wording|htmlsafe} {$LANG.amount}</b></td>
 		<td  class="" align="right"><span class="double_underline" >{$preference.pref_currency_sign} {$invoice.total|siLocal_number}</span></td>
 	</tr>
-*}
+
 	<tr>
 		<td colspan="6"><br /><br /></td>
 	</tr>
-	
+*}	
 	<!-- invoice details section - start -->
 
 	<tr>
