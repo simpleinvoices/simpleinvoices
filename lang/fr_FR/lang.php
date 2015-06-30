@@ -8,7 +8,7 @@
 *	 Catherine, Lionel
 *
 * Last Edited:
-* 2014-06-09
+* 2015-06-30
 *
 * License:
 *	 GPL v3 or above
@@ -615,5 +615,10 @@ $LANG['title_module_tax_rates']			= "Réglages / Taxes";//1
 $LANG['title_module_preferences']		= "Réglages / Préférences des factures";//1
 $LANG['title_module_payment_types']		= "Réglages / Types des paiements";//1
 $LANG['title_view_index']				= "Tableau de bord";//1
+
+$LANG['quantity_sold'] = 'Quantit&eacute; vendue';//1
+$LANG['run_the_report'] = 'Lancer le rapport';//1
+$LANG['for_the_period'] = 'Pour la p&eacute;riode de';//1
+$LANG['quantity_sold_all_time'] = 'Toute p&eacute;riode confondue';//1
 
 ?>

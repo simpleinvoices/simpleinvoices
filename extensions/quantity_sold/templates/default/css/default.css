@@ -1,0 +1,26 @@
+p {
+  font-size: inherit;
+}
+
+table#quantity-sold-results  {
+  width: 100%;
+}
+table#quantity-sold-results th,
+table#quantity-sold-results td {
+  border: 1px solid #dedede;
+  border-collapse: collapse;
+  padding: 10px 20px;
+}
+
+table#quantity-sold-results th {
+  background-color: #dedede;
+}
+
+.description {
+  text-align: left;
+  width: 75%;
+}
+.qty {
+  text-align: right;
+  width: 25%;
+}
