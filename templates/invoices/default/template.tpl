@@ -28,7 +28,7 @@
 		</tr>
 		<tr>
 				<td class="">{$preference.pref_inv_wording|htmlsafe} {$LANG.number_short}:</td>
-				<td class="" align="right" colspan="3">Hello {$invoice.index_id}</td>
+				<td class="" align="right" colspan="3">{$invoice.index_id}</td>
 		</tr>
 		<tr>
 				<td nowrap class="">{$preference.pref_inv_wording|htmlsafe} {$LANG.date}:</td>
