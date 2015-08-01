@@ -2831,3 +2831,995 @@ Includes:
 2015-06-02T18:59:56+01:00 INFO (6): Invoice: 14 Item id: 27 Tax 0 Tax ID: 1
 2015-06-02T18:59:56+01:00 INFO (6): Invoice: 14 Item id: 28 Tax 0 Tax ID: 1
 2015-06-02T18:59:56+01:00 INFO (6): Invoice: 14 Item id: 29 Tax 0 Tax ID: 1
+2015-06-02T19:03:12+01:00 INFO (6): Max Invoice: 14
+2015-06-02T19:03:12+01:00 INFO (6): Invoice: 14 Item id: 26 Tax 0 Tax ID: 1
+2015-06-02T19:03:12+01:00 INFO (6): Invoice: 14 Item id: 27 Tax 0 Tax ID: 1
+2015-06-02T19:03:12+01:00 INFO (6): Invoice: 14 Item id: 28 Tax 0 Tax ID: 1
+2015-06-02T19:03:12+01:00 INFO (6): Invoice: 14 Item id: 29 Tax 0 Tax ID: 1
+2015-06-02T19:03:12+01:00 INFO (6): Invoice: 14 Item id: 26 Tax 0 Tax ID: 1
+2015-06-02T19:03:12+01:00 INFO (6): Invoice: 14 Item id: 27 Tax 0 Tax ID: 1
+2015-06-02T19:03:12+01:00 INFO (6): Invoice: 14 Item id: 28 Tax 0 Tax ID: 1
+2015-06-02T19:03:12+01:00 INFO (6): Invoice: 14 Item id: 29 Tax 0 Tax ID: 1
+2015-06-08T20:26:15+01:00 INFO (6): Max Invoice: 14
+2015-06-08T20:26:16+01:00 INFO (6): Max Invoice: 14
+2015-06-08T20:26:33+01:00 INFO (6): Max Invoice: 14
+2015-06-08T20:26:33+01:00 INFO (6): Invoice: 6 Item id: 15 Tax 0 Tax ID: 1
+2015-06-08T20:26:39+01:00 INFO (6): Max Invoice: 14
+2015-06-08T20:26:40+01:00 INFO (6): Max Invoice: 14
+2015-06-08T20:26:45+01:00 INFO (6): Max Invoice: 14
+2015-06-08T20:26:45+01:00 INFO (6): Invoice: 6 Item id: 15 Tax 0 Tax ID: 1
+2015-06-08T20:26:45+01:00 INFO (6): Invoice: 6 Item id: 15 Tax 0 Tax ID: 1
+2015-06-08T20:29:33+01:00 INFO (6): Max Invoice: 14
+2015-06-08T20:29:33+01:00 INFO (6): Invoice: 6 Item id: 15 Tax 0 Tax ID: 1
+2015-06-08T20:29:36+01:00 INFO (6): Max Invoice: 14
+2015-06-08T20:29:37+01:00 INFO (6): Max Invoice: 14
+2015-06-08T20:29:47+01:00 INFO (6): Max Invoice: 14
+2015-06-08T20:29:47+01:00 INFO (6): Max Invoice: 14
+2015-06-08T20:30:26+01:00 INFO (6): Max Invoice: 14
+2015-06-08T20:30:26+01:00 INFO (6): Invoice: 6 Item id: 15 Tax 0 Tax ID: 1
+2015-06-08T20:30:26+01:00 INFO (6): eway pre check: false
+2015-06-10T20:25:29+01:00 INFO (6): Max Invoice: 14
+2015-06-10T20:25:30+01:00 INFO (6): Max Invoice: 14
+2015-06-10T20:25:34+01:00 INFO (6): Max Invoice: 14
+2015-06-10T20:25:34+01:00 INFO (6): Invoice: 14 Item id: 26 Tax 0 Tax ID: 1
+2015-06-10T20:25:34+01:00 INFO (6): Invoice: 14 Item id: 27 Tax 0 Tax ID: 1
+2015-06-10T20:25:34+01:00 INFO (6): Invoice: 14 Item id: 28 Tax 0 Tax ID: 1
+2015-06-10T20:25:34+01:00 INFO (6): Invoice: 14 Item id: 29 Tax 0 Tax ID: 1
+2015-06-10T20:25:34+01:00 INFO (6): eway pre check: false
+2015-06-10T20:35:03+01:00 INFO (6): Max Invoice: 14
+2015-06-10T20:35:03+01:00 INFO (6): Invoice: 14 Item id: 26 Tax 0 Tax ID: 1
+2015-06-10T20:35:03+01:00 INFO (6): Invoice: 14 Item id: 27 Tax 0 Tax ID: 1
+2015-06-10T20:35:03+01:00 INFO (6): Invoice: 14 Item id: 28 Tax 0 Tax ID: 1
+2015-06-10T20:35:03+01:00 INFO (6): Invoice: 14 Item id: 29 Tax 0 Tax ID: 1
+2015-06-10T20:35:03+01:00 INFO (6): Invoice: 14 Item id: 26 Tax 0 Tax ID: 1
+2015-06-10T20:35:03+01:00 INFO (6): Invoice: 14 Item id: 27 Tax 0 Tax ID: 1
+2015-06-10T20:35:03+01:00 INFO (6): Invoice: 14 Item id: 28 Tax 0 Tax ID: 1
+2015-06-10T20:35:03+01:00 INFO (6): Invoice: 14 Item id: 29 Tax 0 Tax ID: 1
+2015-06-12T15:27:43+01:00 INFO (6): Max Invoice: 14
+2015-06-12T15:27:44+01:00 INFO (6): Max Invoice: 14
+2015-06-12T15:27:50+01:00 INFO (6): Max Invoice: 14
+2015-06-12T15:27:50+01:00 INFO (6): Itemised invoice created
+2015-06-12T15:27:59+01:00 INFO (6): Max Invoice: 14
+2015-06-12T15:28:08+01:00 INFO (6): Max Invoice: 14
+2015-06-12T15:29:28+01:00 INFO (6): Max Invoice: 14
+2015-06-12T15:29:28+01:00 INFO (6): Max items:4
+2015-06-12T15:29:28+01:00 INFO (6): i=0
+2015-06-12T15:29:28+01:00 INFO (6): qty=1
+2015-06-12T15:29:28+01:00 INFO (6): Line item attributes: NULL
+2015-06-12T15:29:28+01:00 INFO (6): Key: 0 Value: 1
+2015-06-12T15:29:28+01:00 INFO (6): tax rate: 13.000000
+2015-06-12T15:29:28+01:00 INFO (6):  
+2015-06-12T15:29:28+01:00 INFO (6):  
+2015-06-12T15:29:28+01:00 INFO (6): Invoice: 15 Tax Array for line item 0: 72.8
+2015-06-12T15:29:28+01:00 INFO (6): Description: Description
+2015-06-12T15:29:28+01:00 INFO (6):  
+2015-06-12T15:29:28+01:00 INFO (6): ITEM :: Key: 0 Value: 1
+2015-06-12T15:29:28+01:00 INFO (6): ITEM :: tax rate: 13.000000
+2015-06-12T15:29:28+01:00 INFO (6): ITEM :: domain_id: 1
+2015-06-12T15:29:28+01:00 INFO (6): ITEM :: Qty: 1 Unit price: 560
+2015-06-12T15:29:28+01:00 INFO (6): ITEM :: Tax rate: 13.000000 Tax type: % Tax $: 72.8
+2015-06-12T15:29:28+01:00 INFO (6): i=1
+2015-06-12T15:29:28+01:00 INFO (6): qty=1
+2015-06-12T15:29:28+01:00 INFO (6): Line item attributes: NULL
+2015-06-12T15:29:28+01:00 INFO (6): Key: 0 Value: 1
+2015-06-12T15:29:28+01:00 INFO (6): tax rate: 13.000000
+2015-06-12T15:29:28+01:00 INFO (6):  
+2015-06-12T15:29:28+01:00 INFO (6):  
+2015-06-12T15:29:28+01:00 INFO (6): Invoice: 15 Tax Array for line item 1: 28.4869
+2015-06-12T15:29:28+01:00 INFO (6): Description: Description
+2015-06-12T15:29:28+01:00 INFO (6):  
+2015-06-12T15:29:28+01:00 INFO (6): ITEM :: Key: 0 Value: 1
+2015-06-12T15:29:28+01:00 INFO (6): ITEM :: tax rate: 13.000000
+2015-06-12T15:29:28+01:00 INFO (6): ITEM :: domain_id: 1
+2015-06-12T15:29:28+01:00 INFO (6): ITEM :: Qty: 1 Unit price: 219.13
+2015-06-12T15:29:28+01:00 INFO (6): ITEM :: Tax rate: 13.000000 Tax type: % Tax $: 28.4869
+2015-06-12T15:29:28+01:00 INFO (6): i=2
+2015-06-12T15:29:28+01:00 INFO (6): qty=
+2015-06-12T15:29:28+01:00 INFO (6): i=3
+2015-06-12T15:29:28+01:00 INFO (6): qty=
+2015-06-12T15:29:28+01:00 INFO (6): i=4
+2015-06-12T15:29:28+01:00 INFO (6): qty=
+2015-06-12T15:29:30+01:00 INFO (6): Max Invoice: 15
+2015-06-12T15:29:30+01:00 INFO (6): Invoice: 15 Item id: 30 Tax 0 Tax ID: 1
+2015-06-12T15:29:30+01:00 INFO (6): Invoice: 15 Item id: 31 Tax 0 Tax ID: 1
+2015-06-12T15:29:30+01:00 INFO (6): eway pre check: false
+2015-06-12T15:29:38+01:00 INFO (6): Max Invoice: 15
+2015-06-12T15:29:38+01:00 INFO (6): Invoice: 15 Item id: 30 Tax 0 Tax ID: 1
+2015-06-12T15:29:38+01:00 INFO (6): Invoice: 15 Item id: 31 Tax 0 Tax ID: 1
+2015-06-12T15:29:38+01:00 INFO (6): Invoice: 15 Item id: 30 Tax 0 Tax ID: 1
+2015-06-12T15:29:38+01:00 INFO (6): Invoice: 15 Item id: 31 Tax 0 Tax ID: 1
+2015-06-12T15:30:08+01:00 INFO (6): Max Invoice: 15
+2015-06-12T15:30:08+01:00 INFO (6): Invoice: 15 Item id: 30 Tax 0 Tax ID: 1
+2015-06-12T15:30:08+01:00 INFO (6): Invoice: 15 Item id: 31 Tax 0 Tax ID: 1
+2015-06-12T15:30:08+01:00 INFO (6): Invoice: 15 Item id: 30 Tax 0 Tax ID: 1
+2015-06-12T15:30:08+01:00 INFO (6): Invoice: 15 Item id: 31 Tax 0 Tax ID: 1
+2015-06-12T15:30:27+01:00 INFO (6): Max Invoice: 15
+2015-06-12T15:30:27+01:00 INFO (6): Invoice: 15 Item id: 30 Tax 0 Tax ID: 1
+2015-06-12T15:30:27+01:00 INFO (6): Invoice: 15 Item id: 31 Tax 0 Tax ID: 1
+2015-06-12T15:30:27+01:00 INFO (6): eway pre check: false
+2015-06-12T15:30:33+01:00 INFO (6): Max Invoice: 15
+2015-06-12T15:30:33+01:00 INFO (6): Invoice: 15 Item id: 30 Tax 0 Tax ID: 1
+2015-06-12T15:30:33+01:00 INFO (6): Invoice: 15 Item id: 31 Tax 0 Tax ID: 1
+2015-06-12T15:31:05+01:00 INFO (6): Max Invoice: 15
+2015-06-12T15:31:05+01:00 INFO (6): Invoice: 15 Item id: 30 Tax 0 Tax ID: 1
+2015-06-12T15:31:05+01:00 INFO (6): Invoice: 15 Item id: 31 Tax 0 Tax ID: 1
+2015-06-12T15:31:05+01:00 INFO (6): Invoice: 15 Item id: 30 Tax 0 Tax ID: 1
+2015-06-12T15:31:05+01:00 INFO (6): Invoice: 15 Item id: 31 Tax 0 Tax ID: 1
+2015-06-12T15:31:05+01:00 INFO (6): Invoice: 15 Item id: 30 Tax 0 Tax ID: 1
+2015-06-12T15:31:05+01:00 INFO (6): Invoice: 15 Item id: 31 Tax 0 Tax ID: 1
+2015-06-12T15:31:09+01:00 INFO (6): Max Invoice: 15
+2015-06-12T15:31:09+01:00 INFO (6): Max Invoice: 15
+2015-06-17T19:43:04+01:00 INFO (6): Max Invoice: 15
+2015-06-17T19:43:05+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:07:18+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:07:19+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:07:26+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:07:26+01:00 INFO (6): Invoice: 14 Item id: 26 Tax 0 Tax ID: 1
+2015-06-24T16:07:26+01:00 INFO (6): Invoice: 14 Item id: 27 Tax 0 Tax ID: 1
+2015-06-24T16:07:26+01:00 INFO (6): Invoice: 14 Item id: 28 Tax 0 Tax ID: 1
+2015-06-24T16:07:26+01:00 INFO (6): Invoice: 14 Item id: 29 Tax 0 Tax ID: 1
+2015-06-24T16:07:33+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:07:35+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:07:36+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:07:40+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:07:41+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:07:51+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:07:51+01:00 INFO (6): Invoice: 12 Item id: 22 Tax 0 Tax ID: 1
+2015-06-24T16:07:59+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:08:01+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:08:02+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:08:05+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:08:06+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:08:33+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:08:33+01:00 INFO (6): Invoice: 1 Item id: 6 Tax 0 Tax ID: 1
+2015-06-24T16:08:33+01:00 INFO (6): Invoice: 1 Item id: 7 Tax 0 Tax ID: 1
+2015-06-24T16:08:33+01:00 INFO (6): Invoice: 1 Item id: 8 Tax 0 Tax ID: 1
+2015-06-24T16:08:35+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:08:37+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:08:38+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:08:41+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:08:41+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:08:48+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:08:48+01:00 INFO (6): Invoice: 9 Item id: 18 Tax 0 Tax ID: 1
+2015-06-24T16:08:49+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:08:52+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:08:52+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:08:55+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:08:56+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:09:02+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:09:02+01:00 INFO (6): Invoice: 8 Item id: 17 Tax 0 Tax ID: 1
+2015-06-24T16:09:04+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:09:06+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:09:07+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:09:10+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:09:16+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:09:17+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:09:20+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:09:21+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:09:28+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:09:34+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:09:34+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:09:51+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:09:52+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:09:56+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:09:56+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:09:58+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:09:58+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:10:00+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:10:01+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:10:04+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:10:04+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:10:07+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:10:07+01:00 INFO (6): Itemised invoice created
+2015-06-24T16:10:15+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:10:16+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:10:18+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:13:31+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:13:34+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:13:34+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:13:39+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:13:39+01:00 INFO (6): Itemised invoice created
+2015-06-24T16:14:20+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:14:21+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:14:21+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:14:21+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:14:23+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:14:23+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:14:24+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:14:26+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:14:26+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:14:27+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:14:27+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:14:27+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:14:27+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:14:32+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:16:14+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:16:37+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:16:38+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:16:38+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:16:38+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:16:39+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:18:24+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:19:59+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:20:34+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:21:24+01:00 INFO (6): Max Invoice: 15
+2015-06-24T16:21:24+01:00 INFO (6): Max items:7
+2015-06-24T16:21:24+01:00 INFO (6): i=0
+2015-06-24T16:21:24+01:00 INFO (6): qty=5
+2015-06-24T16:21:24+01:00 INFO (6): Line item attributes: NULL
+2015-06-24T16:21:24+01:00 INFO (6): Key: 0 Value: 1
+2015-06-24T16:21:24+01:00 INFO (6): tax rate: 13.000000
+2015-06-24T16:21:24+01:00 INFO (6):  
+2015-06-24T16:21:24+01:00 INFO (6):  
+2015-06-24T16:21:24+01:00 INFO (6): Invoice: 16 Tax Array for line item 0: 48.75
+2015-06-24T16:21:24+01:00 INFO (6): Description: 11 December 2014. Accessories new feature. Update to Wordpress. New options.
+2015-06-24T16:21:24+01:00 INFO (6):  
+2015-06-24T16:21:24+01:00 INFO (6): ITEM :: Key: 0 Value: 1
+2015-06-24T16:21:24+01:00 INFO (6): ITEM :: tax rate: 13.000000
+2015-06-24T16:21:24+01:00 INFO (6): ITEM :: domain_id: 1
+2015-06-24T16:21:24+01:00 INFO (6): ITEM :: Qty: 5 Unit price: 75
+2015-06-24T16:21:24+01:00 INFO (6): ITEM :: Tax rate: 13.000000 Tax type: % Tax $: 48.75
+2015-06-24T16:21:24+01:00 INFO (6): i=1
+2015-06-24T16:21:24+01:00 INFO (6): qty=
+2015-06-24T16:21:24+01:00 INFO (6): i=2
+2015-06-24T16:21:24+01:00 INFO (6): qty=
+2015-06-24T16:21:24+01:00 INFO (6): i=3
+2015-06-24T16:21:24+01:00 INFO (6): qty=3.5
+2015-06-24T16:21:24+01:00 INFO (6): Line item attributes: NULL
+2015-06-24T16:21:24+01:00 INFO (6): Key: 0 Value: 1
+2015-06-24T16:21:24+01:00 INFO (6): tax rate: 13.000000
+2015-06-24T16:21:24+01:00 INFO (6):  
+2015-06-24T16:21:24+01:00 INFO (6):  
+2015-06-24T16:21:24+01:00 INFO (6): Invoice: 16 Tax Array for line item 3: 34.125
+2015-06-24T16:21:24+01:00 INFO (6): Description: 14 Decemebr 2014. Further changes to accessories new feature. Addition of 3rd type of product page.
+2015-06-24T16:21:24+01:00 INFO (6):  
+2015-06-24T16:21:24+01:00 INFO (6): ITEM :: Key: 0 Value: 1
+2015-06-24T16:21:24+01:00 INFO (6): ITEM :: tax rate: 13.000000
+2015-06-24T16:21:24+01:00 INFO (6): ITEM :: domain_id: 1
+2015-06-24T16:21:24+01:00 INFO (6): ITEM :: Qty: 3.5 Unit price: 75
+2015-06-24T16:21:24+01:00 INFO (6): ITEM :: Tax rate: 13.000000 Tax type: % Tax $: 34.125
+2015-06-24T16:21:24+01:00 INFO (6): i=4
+2015-06-24T16:21:24+01:00 INFO (6): qty=9
+2015-06-24T16:21:24+01:00 INFO (6): Line item attributes: NULL
+2015-06-24T16:21:24+01:00 INFO (6): Key: 0 Value: 1
+2015-06-24T16:21:24+01:00 INFO (6): tax rate: 13.000000
+2015-06-24T16:21:24+01:00 INFO (6):  
+2015-06-24T16:21:24+01:00 INFO (6):  
+2015-06-24T16:21:24+01:00 INFO (6): Invoice: 16 Tax Array for line item 4: 87.75
+2015-06-24T16:21:24+01:00 INFO (6): Description: 13-20 January 2015. Modification/redesign of checkout address handling with PayPal.
+2015-06-24T16:21:24+01:00 INFO (6):  
+2015-06-24T16:21:24+01:00 INFO (6): ITEM :: Key: 0 Value: 1
+2015-06-24T16:21:24+01:00 INFO (6): ITEM :: tax rate: 13.000000
+2015-06-24T16:21:24+01:00 INFO (6): ITEM :: domain_id: 1
+2015-06-24T16:21:24+01:00 INFO (6): ITEM :: Qty: 9 Unit price: 75
+2015-06-24T16:21:24+01:00 INFO (6): ITEM :: Tax rate: 13.000000 Tax type: % Tax $: 87.75
+2015-06-24T16:21:24+01:00 INFO (6): i=5
+2015-06-24T16:21:24+01:00 INFO (6): qty=0.25
+2015-06-24T16:21:24+01:00 INFO (6): Line item attributes: NULL
+2015-06-24T16:21:24+01:00 INFO (6): Key: 0 Value: 1
+2015-06-24T16:21:24+01:00 INFO (6): tax rate: 13.000000
+2015-06-24T16:21:24+01:00 INFO (6):  
+2015-06-24T16:21:24+01:00 INFO (6):  
+2015-06-24T16:21:24+01:00 INFO (6): Invoice: 16 Tax Array for line item 5: 2.4375
+2015-06-24T16:21:24+01:00 INFO (6): Description: 22 March 2015. Update plugins
+2015-06-24T16:21:24+01:00 INFO (6):  
+2015-06-24T16:21:24+01:00 INFO (6): ITEM :: Key: 0 Value: 1
+2015-06-24T16:21:24+01:00 INFO (6): ITEM :: tax rate: 13.000000
+2015-06-24T16:21:24+01:00 INFO (6): ITEM :: domain_id: 1
+2015-06-24T16:21:24+01:00 INFO (6): ITEM :: Qty: 0.25 Unit price: 75
+2015-06-24T16:21:24+01:00 INFO (6): ITEM :: Tax rate: 13.000000 Tax type: % Tax $: 2.4375
+2015-06-24T16:21:24+01:00 INFO (6): i=6
+2015-06-24T16:21:24+01:00 INFO (6): qty=0.5
+2015-06-24T16:21:24+01:00 INFO (6): Line item attributes: NULL
+2015-06-24T16:21:24+01:00 INFO (6): Key: 0 Value: 1
+2015-06-24T16:21:24+01:00 INFO (6): tax rate: 13.000000
+2015-06-24T16:21:24+01:00 INFO (6):  
+2015-06-24T16:21:24+01:00 INFO (6):  
+2015-06-24T16:21:24+01:00 INFO (6): Invoice: 16 Tax Array for line item 6: 4.875
+2015-06-24T16:21:24+01:00 INFO (6): Description: 8 May 2015. Login/logout handling and menu items.
+2015-06-24T16:21:24+01:00 INFO (6):  
+2015-06-24T16:21:24+01:00 INFO (6): ITEM :: Key: 0 Value: 1
+2015-06-24T16:21:24+01:00 INFO (6): ITEM :: tax rate: 13.000000
+2015-06-24T16:21:24+01:00 INFO (6): ITEM :: domain_id: 1
+2015-06-24T16:21:24+01:00 INFO (6): ITEM :: Qty: 0.5 Unit price: 75
+2015-06-24T16:21:24+01:00 INFO (6): ITEM :: Tax rate: 13.000000 Tax type: % Tax $: 4.875
+2015-06-24T16:21:24+01:00 INFO (6): i=7
+2015-06-24T16:21:24+01:00 INFO (6): qty=1.5
+2015-06-24T16:21:24+01:00 INFO (6): Line item attributes: NULL
+2015-06-24T16:21:24+01:00 INFO (6): Key: 0 Value: 1
+2015-06-24T16:21:24+01:00 INFO (6): tax rate: 13.000000
+2015-06-24T16:21:24+01:00 INFO (6):  
+2015-06-24T16:21:24+01:00 INFO (6):  
+2015-06-24T16:21:24+01:00 INFO (6): Invoice: 16 Tax Array for line item 7: 14.625
+2015-06-24T16:21:24+01:00 INFO (6): Description: 22 June 2015. New acoustic guitar product and menu links. New options (left hand/right hand).
+2015-06-24T16:21:24+01:00 INFO (6):  
+2015-06-24T16:21:24+01:00 INFO (6): ITEM :: Key: 0 Value: 1
+2015-06-24T16:21:24+01:00 INFO (6): ITEM :: tax rate: 13.000000
+2015-06-24T16:21:24+01:00 INFO (6): ITEM :: domain_id: 1
+2015-06-24T16:21:24+01:00 INFO (6): ITEM :: Qty: 1.5 Unit price: 75
+2015-06-24T16:21:24+01:00 INFO (6): ITEM :: Tax rate: 13.000000 Tax type: % Tax $: 14.625
+2015-06-24T16:21:26+01:00 INFO (6): Max Invoice: 16
+2015-06-24T16:21:27+01:00 INFO (6): Invoice: 16 Item id: 32 Tax 0 Tax ID: 1
+2015-06-24T16:21:27+01:00 INFO (6): Invoice: 16 Item id: 33 Tax 0 Tax ID: 1
+2015-06-24T16:21:27+01:00 INFO (6): Invoice: 16 Item id: 34 Tax 0 Tax ID: 1
+2015-06-24T16:21:27+01:00 INFO (6): Invoice: 16 Item id: 35 Tax 0 Tax ID: 1
+2015-06-24T16:21:27+01:00 INFO (6): Invoice: 16 Item id: 36 Tax 0 Tax ID: 1
+2015-06-24T16:21:27+01:00 INFO (6): Invoice: 16 Item id: 37 Tax 0 Tax ID: 1
+2015-06-24T16:21:27+01:00 INFO (6): eway pre check: false
+2015-06-24T16:21:58+01:00 INFO (6): Max Invoice: 16
+2015-06-24T16:21:58+01:00 INFO (6): Invoice: 16 Item id: 32 Tax 0 Tax ID: 1
+2015-06-24T16:21:58+01:00 INFO (6): Invoice: 16 Item id: 33 Tax 0 Tax ID: 1
+2015-06-24T16:21:58+01:00 INFO (6): Invoice: 16 Item id: 34 Tax 0 Tax ID: 1
+2015-06-24T16:21:58+01:00 INFO (6): Invoice: 16 Item id: 35 Tax 0 Tax ID: 1
+2015-06-24T16:21:58+01:00 INFO (6): Invoice: 16 Item id: 36 Tax 0 Tax ID: 1
+2015-06-24T16:21:58+01:00 INFO (6): Invoice: 16 Item id: 37 Tax 0 Tax ID: 1
+2015-06-24T16:21:58+01:00 INFO (6): Invoice: 16 Item id: 32 Tax 0 Tax ID: 1
+2015-06-24T16:21:58+01:00 INFO (6): Invoice: 16 Item id: 33 Tax 0 Tax ID: 1
+2015-06-24T16:21:58+01:00 INFO (6): Invoice: 16 Item id: 34 Tax 0 Tax ID: 1
+2015-06-24T16:21:58+01:00 INFO (6): Invoice: 16 Item id: 35 Tax 0 Tax ID: 1
+2015-06-24T16:21:58+01:00 INFO (6): Invoice: 16 Item id: 36 Tax 0 Tax ID: 1
+2015-06-24T16:21:58+01:00 INFO (6): Invoice: 16 Item id: 37 Tax 0 Tax ID: 1
+2015-06-24T16:22:24+01:00 INFO (6): Max Invoice: 16
+2015-06-24T16:22:24+01:00 INFO (6): Invoice: 16 Item id: 32 Tax 0 Tax ID: 1
+2015-06-24T16:22:24+01:00 INFO (6): Invoice: 16 Item id: 33 Tax 0 Tax ID: 1
+2015-06-24T16:22:24+01:00 INFO (6): Invoice: 16 Item id: 34 Tax 0 Tax ID: 1
+2015-06-24T16:22:24+01:00 INFO (6): Invoice: 16 Item id: 35 Tax 0 Tax ID: 1
+2015-06-24T16:22:24+01:00 INFO (6): Invoice: 16 Item id: 36 Tax 0 Tax ID: 1
+2015-06-24T16:22:24+01:00 INFO (6): Invoice: 16 Item id: 37 Tax 0 Tax ID: 1
+2015-06-24T16:23:38+01:00 INFO (6): Max Invoice: 16
+2015-06-24T16:23:38+01:00 INFO (6): Invoice: 16 Item id: 32 Tax 0 Tax ID: 1
+2015-06-24T16:23:38+01:00 INFO (6): Invoice: 16 Item id: 33 Tax 0 Tax ID: 1
+2015-06-24T16:23:38+01:00 INFO (6): Invoice: 16 Item id: 34 Tax 0 Tax ID: 1
+2015-06-24T16:23:38+01:00 INFO (6): Invoice: 16 Item id: 35 Tax 0 Tax ID: 1
+2015-06-24T16:23:38+01:00 INFO (6): Invoice: 16 Item id: 36 Tax 0 Tax ID: 1
+2015-06-24T16:23:38+01:00 INFO (6): Invoice: 16 Item id: 37 Tax 0 Tax ID: 1
+2015-06-24T16:23:38+01:00 INFO (6): Invoice: 16 Item id: 32 Tax 0 Tax ID: 1
+2015-06-24T16:23:38+01:00 INFO (6): Invoice: 16 Item id: 33 Tax 0 Tax ID: 1
+2015-06-24T16:23:38+01:00 INFO (6): Invoice: 16 Item id: 34 Tax 0 Tax ID: 1
+2015-06-24T16:23:38+01:00 INFO (6): Invoice: 16 Item id: 35 Tax 0 Tax ID: 1
+2015-06-24T16:23:38+01:00 INFO (6): Invoice: 16 Item id: 36 Tax 0 Tax ID: 1
+2015-06-24T16:23:38+01:00 INFO (6): Invoice: 16 Item id: 37 Tax 0 Tax ID: 1
+2015-06-24T16:23:38+01:00 INFO (6): Invoice: 16 Item id: 32 Tax 0 Tax ID: 1
+2015-06-24T16:23:38+01:00 INFO (6): Invoice: 16 Item id: 33 Tax 0 Tax ID: 1
+2015-06-24T16:23:38+01:00 INFO (6): Invoice: 16 Item id: 34 Tax 0 Tax ID: 1
+2015-06-24T16:23:38+01:00 INFO (6): Invoice: 16 Item id: 35 Tax 0 Tax ID: 1
+2015-06-24T16:23:38+01:00 INFO (6): Invoice: 16 Item id: 36 Tax 0 Tax ID: 1
+2015-06-24T16:23:38+01:00 INFO (6): Invoice: 16 Item id: 37 Tax 0 Tax ID: 1
+2015-06-24T16:23:42+01:00 INFO (6): Max Invoice: 16
+2015-06-24T16:23:43+01:00 INFO (6): Max Invoice: 16
+2015-06-24T16:23:51+01:00 INFO (6): Max Invoice: 16
+2015-06-24T16:23:51+01:00 INFO (6): Invoice: 16 Item id: 32 Tax 0 Tax ID: 1
+2015-06-24T16:23:51+01:00 INFO (6): Invoice: 16 Item id: 33 Tax 0 Tax ID: 1
+2015-06-24T16:23:51+01:00 INFO (6): Invoice: 16 Item id: 34 Tax 0 Tax ID: 1
+2015-06-24T16:23:51+01:00 INFO (6): Invoice: 16 Item id: 35 Tax 0 Tax ID: 1
+2015-06-24T16:23:51+01:00 INFO (6): Invoice: 16 Item id: 36 Tax 0 Tax ID: 1
+2015-06-24T16:23:51+01:00 INFO (6): Invoice: 16 Item id: 37 Tax 0 Tax ID: 1
+2015-06-24T16:23:51+01:00 INFO (6): eway pre check: false
+2015-06-24T16:29:13+01:00 INFO (6): Max Invoice: 16
+2015-06-24T16:29:26+01:00 INFO (6): Max Invoice: 16
+2015-06-24T16:29:26+01:00 INFO (6): Max Invoice: 16
+2015-06-24T16:29:43+01:00 INFO (6): Max Invoice: 16
+2015-06-24T16:29:44+01:00 INFO (6): Max Invoice: 16
+2015-06-24T23:16:07+01:00 INFO (6): Max Invoice: 16
+2015-06-24T23:16:08+01:00 INFO (6): Max Invoice: 16
+2015-06-24T23:16:15+01:00 INFO (6): Max Invoice: 16
+2015-06-24T23:16:18+01:00 INFO (6): Max Invoice: 16
+2015-06-24T23:16:32+01:00 INFO (6): Max Invoice: 16
+2015-06-24T23:16:48+01:00 INFO (6): Max Invoice: 16
+2015-06-24T23:16:51+01:00 INFO (6): Max Invoice: 16
+2015-06-24T23:16:56+01:00 INFO (6): Max Invoice: 16
+2015-06-24T23:17:14+01:00 INFO (6): Max Invoice: 16
+2015-06-24T23:17:17+01:00 INFO (6): Max Invoice: 16
+2015-06-24T23:17:34+01:00 INFO (6): Max Invoice: 16
+2015-06-24T23:17:41+01:00 INFO (6): Max Invoice: 16
+2015-06-24T23:17:43+01:00 INFO (6): Max Invoice: 16
+2015-06-24T23:17:46+01:00 INFO (6): Max Invoice: 16
+2015-06-24T23:17:52+01:00 INFO (6): Max Invoice: 16
+2015-06-24T23:17:56+01:00 INFO (6): Max Invoice: 16
+2015-06-24T23:18:04+01:00 INFO (6): Max Invoice: 16
+2015-07-14T20:59:25+01:00 INFO (6): Max Invoice: 16
+2015-07-14T20:59:26+01:00 INFO (6): Max Invoice: 16
+2015-07-15T14:47:48+01:00 INFO (6): Max Invoice: 16
+2015-07-15T14:47:49+01:00 INFO (6): Max Invoice: 16
+2015-07-15T14:47:56+01:00 INFO (6): Max Invoice: 16
+2015-07-15T14:47:56+01:00 INFO (6): Itemised invoice created
+2015-07-15T14:48:07+01:00 INFO (6): Max Invoice: 16
+2015-07-15T14:48:23+01:00 INFO (6): Max Invoice: 16
+2015-07-15T14:49:37+01:00 INFO (6): Max Invoice: 16
+2015-07-15T14:49:49+01:00 INFO (6): Max Invoice: 16
+2015-07-15T14:49:49+01:00 INFO (6): Itemised invoice created
+2015-07-15T14:49:56+01:00 INFO (6): Max Invoice: 16
+2015-07-15T14:49:56+01:00 INFO (6): Max items:4
+2015-07-15T14:49:56+01:00 INFO (6): i=0
+2015-07-15T14:49:56+01:00 INFO (6): qty=1
+2015-07-15T14:49:56+01:00 INFO (6): Line item attributes: NULL
+2015-07-15T14:49:56+01:00 INFO (6): Key: 0 Value: 1
+2015-07-15T14:49:56+01:00 INFO (6): tax rate: 13.000000
+2015-07-15T14:49:56+01:00 INFO (6):  
+2015-07-15T14:49:56+01:00 INFO (6):  
+2015-07-15T14:49:56+01:00 INFO (6): Invoice: 17 Tax Array for line item 0: 72.8
+2015-07-15T14:49:56+01:00 INFO (6): Description: Description
+2015-07-15T14:49:56+01:00 INFO (6):  
+2015-07-15T14:49:56+01:00 INFO (6): ITEM :: Key: 0 Value: 1
+2015-07-15T14:49:56+01:00 INFO (6): ITEM :: tax rate: 13.000000
+2015-07-15T14:49:56+01:00 INFO (6): ITEM :: domain_id: 1
+2015-07-15T14:49:56+01:00 INFO (6): ITEM :: Qty: 1 Unit price: 560
+2015-07-15T14:49:56+01:00 INFO (6): ITEM :: Tax rate: 13.000000 Tax type: % Tax $: 72.8
+2015-07-15T14:49:56+01:00 INFO (6): i=1
+2015-07-15T14:49:56+01:00 INFO (6): qty=1
+2015-07-15T14:49:56+01:00 INFO (6): Line item attributes: NULL
+2015-07-15T14:49:56+01:00 INFO (6): Key: 0 Value: 1
+2015-07-15T14:49:56+01:00 INFO (6): tax rate: 13.000000
+2015-07-15T14:49:56+01:00 INFO (6):  
+2015-07-15T14:49:56+01:00 INFO (6):  
+2015-07-15T14:49:56+01:00 INFO (6): Invoice: 17 Tax Array for line item 1: 28.6104
+2015-07-15T14:49:56+01:00 INFO (6): Description: Description
+2015-07-15T14:49:56+01:00 INFO (6):  
+2015-07-15T14:49:56+01:00 INFO (6): ITEM :: Key: 0 Value: 1
+2015-07-15T14:49:56+01:00 INFO (6): ITEM :: tax rate: 13.000000
+2015-07-15T14:49:56+01:00 INFO (6): ITEM :: domain_id: 1
+2015-07-15T14:49:56+01:00 INFO (6): ITEM :: Qty: 1 Unit price: 220.08
+2015-07-15T14:49:56+01:00 INFO (6): ITEM :: Tax rate: 13.000000 Tax type: % Tax $: 28.6104
+2015-07-15T14:49:56+01:00 INFO (6): i=2
+2015-07-15T14:49:56+01:00 INFO (6): qty=
+2015-07-15T14:49:56+01:00 INFO (6): i=3
+2015-07-15T14:49:56+01:00 INFO (6): qty=
+2015-07-15T14:49:56+01:00 INFO (6): i=4
+2015-07-15T14:49:56+01:00 INFO (6): qty=
+2015-07-15T14:49:58+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:49:58+01:00 INFO (6): Invoice: 17 Item id: 38 Tax 0 Tax ID: 1
+2015-07-15T14:49:58+01:00 INFO (6): Invoice: 17 Item id: 39 Tax 0 Tax ID: 1
+2015-07-15T14:49:58+01:00 INFO (6): eway pre check: false
+2015-07-15T14:50:17+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:50:17+01:00 INFO (6): Invoice: 17 Item id: 38 Tax 0 Tax ID: 1
+2015-07-15T14:50:17+01:00 INFO (6): Invoice: 17 Item id: 39 Tax 0 Tax ID: 1
+2015-07-15T14:50:17+01:00 INFO (6): Invoice: 17 Item id: 38 Tax 0 Tax ID: 1
+2015-07-15T14:50:17+01:00 INFO (6): Invoice: 17 Item id: 39 Tax 0 Tax ID: 1
+2015-07-15T14:50:53+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:50:54+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:51:12+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:51:40+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:51:43+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:51:43+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:51:45+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:51:45+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:51:56+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:51:56+01:00 INFO (6): Invoice: 16 Item id: 32 Tax 0 Tax ID: 1
+2015-07-15T14:51:56+01:00 INFO (6): Invoice: 16 Item id: 33 Tax 0 Tax ID: 1
+2015-07-15T14:51:56+01:00 INFO (6): Invoice: 16 Item id: 34 Tax 0 Tax ID: 1
+2015-07-15T14:51:56+01:00 INFO (6): Invoice: 16 Item id: 35 Tax 0 Tax ID: 1
+2015-07-15T14:51:56+01:00 INFO (6): Invoice: 16 Item id: 36 Tax 0 Tax ID: 1
+2015-07-15T14:51:56+01:00 INFO (6): Invoice: 16 Item id: 37 Tax 0 Tax ID: 1
+2015-07-15T14:52:07+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:52:09+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:52:09+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:52:19+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:52:19+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:52:27+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:52:32+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:52:33+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:52:42+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:52:42+01:00 INFO (6): Invoice: 10 Item id: 19 Tax 0 Tax ID: 1
+2015-07-15T14:52:42+01:00 INFO (6): Invoice: 10 Item id: 20 Tax 0 Tax ID: 1
+2015-07-15T14:52:44+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:52:47+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:52:47+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:52:50+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:52:51+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:52:54+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:52:55+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:53:02+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:53:02+01:00 INFO (6): Invoice: 11 Item id: 21 Tax 0 Tax ID: 1
+2015-07-15T14:53:04+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:53:06+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:53:07+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:53:09+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:53:09+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:53:11+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:53:12+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:53:17+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:53:17+01:00 INFO (6): Invoice: 16 Item id: 32 Tax 0 Tax ID: 1
+2015-07-15T14:53:17+01:00 INFO (6): Invoice: 16 Item id: 33 Tax 0 Tax ID: 1
+2015-07-15T14:53:17+01:00 INFO (6): Invoice: 16 Item id: 34 Tax 0 Tax ID: 1
+2015-07-15T14:53:17+01:00 INFO (6): Invoice: 16 Item id: 35 Tax 0 Tax ID: 1
+2015-07-15T14:53:17+01:00 INFO (6): Invoice: 16 Item id: 36 Tax 0 Tax ID: 1
+2015-07-15T14:53:17+01:00 INFO (6): Invoice: 16 Item id: 37 Tax 0 Tax ID: 1
+2015-07-15T14:53:23+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:53:26+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:53:26+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:53:29+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:53:29+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:53:30+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:53:31+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:53:37+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:53:37+01:00 INFO (6): Invoice: 13 Item id: 23 Tax 0 Tax ID: 1
+2015-07-15T14:53:37+01:00 INFO (6): Invoice: 13 Item id: 24 Tax 0 Tax ID: 1
+2015-07-15T14:53:37+01:00 INFO (6): Invoice: 13 Item id: 25 Tax 0 Tax ID: 1
+2015-07-15T14:53:39+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:53:41+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:53:42+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:53:45+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:53:45+01:00 INFO (6): Invoice: 13 Item id: 23 Tax 0 Tax ID: 1
+2015-07-15T14:53:45+01:00 INFO (6): Invoice: 13 Item id: 24 Tax 0 Tax ID: 1
+2015-07-15T14:53:45+01:00 INFO (6): Invoice: 13 Item id: 25 Tax 0 Tax ID: 1
+2015-07-15T14:53:46+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:53:46+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:54:02+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:54:09+01:00 INFO (6): Max Invoice: 17
+2015-07-15T14:54:09+01:00 INFO (6): Max Invoice: 17
+2015-07-15T15:06:03+01:00 INFO (6): Max Invoice: 17
+2015-07-15T15:06:03+01:00 INFO (6): Invoice: 17 Item id: 38 Tax 0 Tax ID: 1
+2015-07-15T15:06:03+01:00 INFO (6): Invoice: 17 Item id: 39 Tax 0 Tax ID: 1
+2015-07-15T15:06:48+01:00 INFO (6): Max Invoice: 17
+2015-07-15T15:06:48+01:00 INFO (6): Invoice: 17 Item id: 38 Tax 0 Tax ID: 1
+2015-07-15T15:06:48+01:00 INFO (6): Invoice: 17 Item id: 39 Tax 0 Tax ID: 1
+2015-07-15T15:07:24+01:00 INFO (6): Max Invoice: 17
+2015-07-15T15:07:24+01:00 INFO (6): Invoice: 17 Item id: 38 Tax 0 Tax ID: 1
+2015-07-15T15:07:24+01:00 INFO (6): Invoice: 17 Item id: 39 Tax 0 Tax ID: 1
+2015-07-15T15:07:24+01:00 INFO (6): Invoice: 17 Item id: 38 Tax 0 Tax ID: 1
+2015-07-15T15:07:24+01:00 INFO (6): Invoice: 17 Item id: 39 Tax 0 Tax ID: 1
+2015-07-15T15:07:24+01:00 INFO (6): Invoice: 17 Item id: 38 Tax 0 Tax ID: 1
+2015-07-15T15:07:24+01:00 INFO (6): Invoice: 17 Item id: 39 Tax 0 Tax ID: 1
+2015-07-15T15:07:28+01:00 INFO (6): Max Invoice: 17
+2015-07-15T15:07:28+01:00 INFO (6): Max Invoice: 17
+2015-07-15T15:26:44+01:00 INFO (6): Max Invoice: 17
+2015-07-15T15:26:45+01:00 INFO (6): Max Invoice: 17
+2015-07-15T15:26:48+01:00 INFO (6): Max Invoice: 17
+2015-07-15T15:27:01+01:00 INFO (6): Max Invoice: 17
+2015-07-15T15:27:07+01:00 INFO (6): Max Invoice: 17
+2015-07-15T15:27:09+01:00 INFO (6): Max Invoice: 17
+2015-07-15T15:27:11+01:00 INFO (6): Max Invoice: 17
+2015-07-15T15:27:15+01:00 INFO (6): Max Invoice: 17
+2015-07-15T15:27:26+01:00 INFO (6): Max Invoice: 17
+2015-07-15T15:27:29+01:00 INFO (6): Max Invoice: 17
+2015-07-15T15:27:39+01:00 INFO (6): Max Invoice: 17
+2015-07-15T15:28:03+01:00 INFO (6): Max Invoice: 17
+2015-07-17T20:18:43+01:00 INFO (6): Max Invoice: 17
+2015-07-17T20:18:44+01:00 INFO (6): Max Invoice: 17
+2015-07-17T20:18:55+01:00 INFO (6): Max Invoice: 17
+2015-07-17T20:18:55+01:00 INFO (6): Invoice: 15 Item id: 30 Tax 0 Tax ID: 1
+2015-07-17T20:18:55+01:00 INFO (6): Invoice: 15 Item id: 31 Tax 0 Tax ID: 1
+2015-07-17T20:19:01+01:00 INFO (6): Max Invoice: 17
+2015-07-17T20:19:02+01:00 INFO (6): Max Invoice: 17
+2015-07-17T20:19:08+01:00 INFO (6): Max Invoice: 17
+2015-07-17T20:19:08+01:00 INFO (6): Invoice: 17 Item id: 38 Tax 0 Tax ID: 1
+2015-07-17T20:19:08+01:00 INFO (6): Invoice: 17 Item id: 39 Tax 0 Tax ID: 1
+2015-07-17T20:19:18+01:00 INFO (6): Max Invoice: 17
+2015-07-17T20:19:18+01:00 INFO (6): Invoice: 17 Item id: 38 Tax 0 Tax ID: 1
+2015-07-17T20:19:18+01:00 INFO (6): Invoice: 17 Item id: 39 Tax 0 Tax ID: 1
+2015-07-17T20:19:18+01:00 INFO (6): Invoice: 17 Item id: 38 Tax 0 Tax ID: 1
+2015-07-17T20:19:18+01:00 INFO (6): Invoice: 17 Item id: 39 Tax 0 Tax ID: 1
+2015-07-17T20:19:18+01:00 INFO (6): Invoice: 17 Item id: 38 Tax 0 Tax ID: 1
+2015-07-17T20:19:18+01:00 INFO (6): Invoice: 17 Item id: 39 Tax 0 Tax ID: 1
+2015-07-17T20:19:22+01:00 INFO (6): Max Invoice: 17
+2015-07-17T20:19:23+01:00 INFO (6): Max Invoice: 17
+2015-07-17T20:20:37+01:00 INFO (6): Max Invoice: 17
+2015-07-24T20:17:55+01:00 INFO (6): Max Invoice: 17
+2015-07-24T20:17:56+01:00 INFO (6): Max Invoice: 17
+2015-07-24T20:17:57+01:00 INFO (6): Max Invoice: 17
+2015-07-24T20:17:57+01:00 INFO (6): Itemised invoice created
+2015-07-24T20:19:08+01:00 INFO (6): Max Invoice: 17
+2015-07-24T20:21:01+01:00 INFO (6): Max Invoice: 17
+2015-07-24T20:21:01+01:00 INFO (6): Total style invoice created, ID: 18
+2015-07-24T20:21:01+01:00 INFO (6): Attr: array (
+  0 => 
+  array (
+    'id' => '1',
+    0 => '1',
+    'name' => 'Size',
+    1 => 'Size',
+    'type_id' => '1',
+    2 => '1',
+    'enabled' => '1',
+    3 => '1',
+    'visible' => '1',
+    4 => '1',
+  ),
+  1 => 
+  array (
+    'id' => '2',
+    0 => '2',
+    'name' => 'Colour',
+    1 => 'Colour',
+    'type_id' => '1',
+    2 => '1',
+    'enabled' => '1',
+    3 => '1',
+    'visible' => '1',
+    4 => '1',
+  ),
+)
+2015-07-24T20:21:01+01:00 INFO (6): Attr key: 0
+2015-07-24T20:21:01+01:00 INFO (6): Attr value: array (
+  'id' => '1',
+  0 => '1',
+  'name' => 'Size',
+  1 => 'Size',
+  'type_id' => '1',
+  2 => '1',
+  'enabled' => '1',
+  3 => '1',
+  'visible' => '1',
+  4 => '1',
+)
+2015-07-24T20:21:01+01:00 INFO (6): Attr set value: 0
+2015-07-24T20:21:01+01:00 INFO (6): Attr key: 1
+2015-07-24T20:21:01+01:00 INFO (6): Attr value: array (
+  'id' => '2',
+  0 => '2',
+  'name' => 'Colour',
+  1 => 'Colour',
+  'type_id' => '1',
+  2 => '1',
+  'enabled' => '1',
+  3 => '1',
+  'visible' => '1',
+  4 => '1',
+)
+2015-07-24T20:21:01+01:00 INFO (6): Attr set value: 1
+2015-07-24T20:21:01+01:00 INFO (6): Attr array: array (
+)
+2015-07-24T20:21:01+01:00 INFO (6): Line item attributes: ''
+2015-07-24T20:21:01+01:00 INFO (6): Key: 0 Value: 1
+2015-07-24T20:21:01+01:00 INFO (6): tax rate: 13.000000
+2015-07-24T20:21:01+01:00 INFO (6):  
+2015-07-24T20:21:01+01:00 INFO (6):  
+2015-07-24T20:21:01+01:00 INFO (6): Invoice: 18 Tax Array for line item 1: 2218.125
+2015-07-24T20:21:01+01:00 INFO (6): Description: conservationhamilton.ca website redesign and migration to Wordpress CMS.<div><br></div><div>Features as outlined in Quotation HCA redesign-2015-2-10.</div>
+2015-07-24T20:21:01+01:00 INFO (6):  
+2015-07-24T20:21:01+01:00 INFO (6): ITEM :: Key: 0 Value: 1
+2015-07-24T20:21:01+01:00 INFO (6): ITEM :: tax rate: 13.000000
+2015-07-24T20:21:01+01:00 INFO (6): ITEM :: domain_id: 1
+2015-07-24T20:21:01+01:00 INFO (6): ITEM :: Qty: 1 Unit price: 17062.50
+2015-07-24T20:21:01+01:00 INFO (6): ITEM :: Tax rate: 13.000000 Tax type: % Tax $: 2218.125
+2015-07-24T20:21:04+01:00 INFO (6): Max Invoice: 18
+2015-07-24T20:21:04+01:00 INFO (6): Invoice: 18 Item id: 40 Tax 0 Tax ID: 1
+2015-07-24T20:21:04+01:00 INFO (6): eway pre check: false
+2015-07-24T20:21:09+01:00 INFO (6): Max Invoice: 18
+2015-07-24T20:21:09+01:00 INFO (6): Invoice: 18 Item id: 40 Tax 0 Tax ID: 1
+2015-07-24T20:21:24+01:00 INFO (6): Max Invoice: 18
+2015-07-24T20:21:24+01:00 INFO (6): Invoice: 18 Item id: 40 Tax 0 Tax ID: 1
+2015-07-24T20:21:24+01:00 INFO (6): Total style invoice updated, product ID: 14
+2015-07-24T20:21:24+01:00 INFO (6): Max items:1
+2015-07-24T20:21:24+01:00 INFO (6): i=0
+2015-07-24T20:21:24+01:00 INFO (6): qty=1.00
+2015-07-24T20:21:24+01:00 INFO (6): product=14
+2015-07-24T20:21:24+01:00 INFO (6): Line item attributes: NULL
+2015-07-24T20:21:24+01:00 INFO (6): Key: 0 Value: 1
+2015-07-24T20:21:24+01:00 INFO (6): tax rate: 13.000000
+2015-07-24T20:21:24+01:00 INFO (6): Invoice:  Tax Array for line item 0: 2218.125
+2015-07-24T20:21:24+01:00 INFO (6): Description: conservationhamilton.ca website and child websites redesign and migration to Wordpress CMS.<div><br></div><div>Features as outlined in Quotation HCA redesign-2015-2-10.</div>
+2015-07-24T20:21:24+01:00 INFO (6):  
+2015-07-24T20:21:24+01:00 INFO (6): Invoice item: 40 tax lines deleted
+2015-07-24T20:21:24+01:00 INFO (6): ITEM :: Key: 0 Value: 1
+2015-07-24T20:21:24+01:00 INFO (6): ITEM :: tax rate: 13.000000
+2015-07-24T20:21:24+01:00 INFO (6): ITEM :: domain_id: 1
+2015-07-24T20:21:24+01:00 INFO (6): ITEM :: Qty: 1.00 Unit price: 17062.50
+2015-07-24T20:21:24+01:00 INFO (6): ITEM :: Tax rate: 13.000000 Tax type: % Tax $: 2218.125
+2015-07-24T20:21:24+01:00 INFO (6): i=1
+2015-07-24T20:21:24+01:00 INFO (6): qty=
+2015-07-24T20:21:24+01:00 INFO (6): product=
+2015-07-24T20:21:27+01:00 INFO (6): Max Invoice: 18
+2015-07-24T20:21:27+01:00 INFO (6): Invoice: 18 Item id: 40 Tax 0 Tax ID: 1
+2015-07-24T20:21:27+01:00 INFO (6): eway pre check: false
+2015-07-24T20:21:30+01:00 INFO (6): Max Invoice: 18
+2015-07-24T20:21:30+01:00 INFO (6): Invoice: 18 Item id: 40 Tax 0 Tax ID: 1
+2015-07-24T20:21:30+01:00 INFO (6): Invoice: 18 Item id: 40 Tax 0 Tax ID: 1
+2015-07-24T20:21:40+01:00 INFO (6): Max Invoice: 18
+2015-07-24T20:21:40+01:00 INFO (6): Invoice: 18 Item id: 40 Tax 0 Tax ID: 1
+2015-07-24T20:21:41+01:00 INFO (6): Invoice: 18 Item id: 40 Tax 0 Tax ID: 1
+2015-07-24T20:22:20+01:00 INFO (6): Max Invoice: 18
+2015-07-24T20:22:20+01:00 INFO (6): Invoice: 18 Item id: 40 Tax 0 Tax ID: 1
+2015-07-24T20:22:25+01:00 INFO (6): Max Invoice: 18
+2015-07-24T20:22:25+01:00 INFO (6): Invoice: 18 Item id: 40 Tax 0 Tax ID: 1
+2015-07-24T20:22:25+01:00 INFO (6): Total style invoice updated, product ID: 14
+2015-07-24T20:22:25+01:00 INFO (6): Max items:1
+2015-07-24T20:22:25+01:00 INFO (6): i=0
+2015-07-24T20:22:25+01:00 INFO (6): qty=1.00
+2015-07-24T20:22:25+01:00 INFO (6): product=14
+2015-07-24T20:22:25+01:00 INFO (6): Line item attributes: NULL
+2015-07-24T20:22:25+01:00 INFO (6): Key: 0 Value: 1
+2015-07-24T20:22:25+01:00 INFO (6): tax rate: 13.000000
+2015-07-24T20:22:25+01:00 INFO (6): Invoice:  Tax Array for line item 0: 2218.125
+2015-07-24T20:22:25+01:00 INFO (6): Description: conservationhamilton.ca website and child websites redesign and migration to Wordpress CMS.<div><br></div><div>Features as outlined in Quotation HCA redesign-2015-2-10.</div>
+2015-07-24T20:22:25+01:00 INFO (6):  
+2015-07-24T20:22:25+01:00 INFO (6): Invoice item: 40 tax lines deleted
+2015-07-24T20:22:25+01:00 INFO (6): ITEM :: Key: 0 Value: 1
+2015-07-24T20:22:25+01:00 INFO (6): ITEM :: tax rate: 13.000000
+2015-07-24T20:22:25+01:00 INFO (6): ITEM :: domain_id: 1
+2015-07-24T20:22:25+01:00 INFO (6): ITEM :: Qty: 1.00 Unit price: 17062.50
+2015-07-24T20:22:25+01:00 INFO (6): ITEM :: Tax rate: 13.000000 Tax type: % Tax $: 2218.125
+2015-07-24T20:22:25+01:00 INFO (6): i=1
+2015-07-24T20:22:25+01:00 INFO (6): qty=
+2015-07-24T20:22:25+01:00 INFO (6): product=
+2015-07-24T20:22:27+01:00 INFO (6): Max Invoice: 18
+2015-07-24T20:22:27+01:00 INFO (6): Invoice: 18 Item id: 40 Tax 0 Tax ID: 1
+2015-07-24T20:22:27+01:00 INFO (6): eway pre check: false
+2015-07-24T20:22:29+01:00 INFO (6): Max Invoice: 18
+2015-07-24T20:22:29+01:00 INFO (6): Invoice: 18 Item id: 40 Tax 0 Tax ID: 1
+2015-07-24T20:22:29+01:00 INFO (6): Invoice: 18 Item id: 40 Tax 0 Tax ID: 1
+2015-07-24T20:23:06+01:00 INFO (6): Max Invoice: 18
+2015-07-24T20:23:06+01:00 INFO (6): Invoice: 18 Item id: 40 Tax 0 Tax ID: 1
+2015-07-24T20:24:28+01:00 INFO (6): Max Invoice: 18
+2015-07-24T20:24:28+01:00 INFO (6): Invoice: 18 Item id: 40 Tax 0 Tax ID: 1
+2015-07-24T20:24:28+01:00 INFO (6): Invoice: 18 Item id: 40 Tax 0 Tax ID: 1
+2015-07-24T20:24:28+01:00 INFO (6): Invoice: 18 Item id: 40 Tax 0 Tax ID: 1
+2015-07-24T20:24:32+01:00 INFO (6): Max Invoice: 18
+2015-07-24T20:24:33+01:00 INFO (6): Max Invoice: 18
+2015-07-24T20:24:38+01:00 INFO (6): Max Invoice: 18
+2015-07-24T20:24:38+01:00 INFO (6): Max Invoice: 18
+2015-07-24T20:24:40+01:00 INFO (6): Max Invoice: 18
+2015-07-24T21:17:16+01:00 INFO (6): Max Invoice: 18
+2015-07-24T21:17:23+01:00 INFO (6): Max Invoice: 18
+2015-07-24T21:17:24+01:00 INFO (6): Max Invoice: 18
+2015-07-31T17:27:38+01:00 INFO (6): Max Invoice: 18
+2015-07-31T17:27:39+01:00 INFO (6): Max Invoice: 18
+2015-07-31T17:27:45+01:00 INFO (6): Max Invoice: 18
+2015-07-31T17:27:45+01:00 INFO (6): Itemised invoice created
+2015-07-31T17:28:10+01:00 INFO (6): Max Invoice: 18
+2015-07-31T17:28:10+01:00 INFO (6): Max Invoice: 18
+2015-07-31T17:28:22+01:00 INFO (6): Max Invoice: 18
+2015-07-31T17:28:22+01:00 INFO (6): Invoice: 9 Item id: 18 Tax 0 Tax ID: 1
+2015-07-31T17:28:22+01:00 INFO (6): Invoice: 9 Item id: 18 Tax 0 Tax ID: 1
+2015-07-31T17:28:48+01:00 INFO (6): Max Invoice: 18
+2015-07-31T17:28:49+01:00 INFO (6): Max Invoice: 18
+2015-07-31T17:39:44+01:00 INFO (6): Max Invoice: 18
+2015-07-31T17:39:45+01:00 INFO (6): Max Invoice: 18
+2015-07-31T17:39:53+01:00 INFO (6): Max Invoice: 18
+2015-07-31T17:39:57+01:00 INFO (6): Max Invoice: 18
+2015-07-31T17:39:57+01:00 INFO (6): Max Invoice: 18
+2015-07-31T17:40:33+01:00 INFO (6): Max Invoice: 18
+2015-07-31T17:40:40+01:00 INFO (6): Max Invoice: 18
+2015-07-31T17:40:40+01:00 INFO (6): Max Invoice: 18
+2015-07-31T17:40:40+01:00 INFO (6): Max Invoice: 18
+2015-07-31T17:40:49+01:00 INFO (6): Max Invoice: 18
+2015-07-31T17:40:57+01:00 INFO (6): Max Invoice: 18
+2015-07-31T17:40:57+01:00 INFO (6): Max Invoice: 18
+2015-07-31T17:40:59+01:00 INFO (6): Max Invoice: 18
+2015-07-31T17:40:59+01:00 INFO (6): Invoice: 15 Item id: 30 Tax 0 Tax ID: 1
+2015-07-31T17:40:59+01:00 INFO (6): Invoice: 15 Item id: 31 Tax 0 Tax ID: 1
+2015-07-31T17:41:07+01:00 INFO (6): Max Invoice: 18
+2015-07-31T17:41:08+01:00 INFO (6): Max Invoice: 18
+2015-07-31T18:55:41+01:00 INFO (6): Max Invoice: 18
+2015-07-31T18:55:42+01:00 INFO (6): Max Invoice: 18
+2015-07-31T18:55:52+01:00 INFO (6): Max Invoice: 18
+2015-07-31T18:55:52+01:00 INFO (6): Max Invoice: 18
+2015-07-31T18:56:08+01:00 INFO (6): Max Invoice: 18
+2015-07-31T18:56:23+01:00 INFO (6): Max Invoice: 18
+2015-07-31T18:56:25+01:00 INFO (6): Max Invoice: 18
+2015-07-31T18:56:26+01:00 INFO (6): Max Invoice: 18
+2015-07-31T18:56:34+01:00 INFO (6): Max Invoice: 18
+2015-07-31T18:56:34+01:00 INFO (6): Itemised invoice created
+2015-07-31T18:56:40+01:00 INFO (6): Max Invoice: 18
+2015-07-31T18:56:56+01:00 INFO (6): Max Invoice: 18
+2015-07-31T18:56:57+01:00 INFO (6): Max Invoice: 18
+2015-07-31T18:56:58+01:00 INFO (6): Max Invoice: 18
+2015-07-31T18:59:02+01:00 INFO (6): Max Invoice: 18
+2015-07-31T18:59:04+01:00 INFO (6): Max Invoice: 18
+2015-07-31T18:59:05+01:00 INFO (6): Max Invoice: 18
+2015-07-31T18:59:15+01:00 INFO (6): Max Invoice: 18
+2015-07-31T18:59:15+01:00 INFO (6): Itemised invoice created
+2015-07-31T19:00:55+01:00 INFO (6): Max Invoice: 18
+2015-07-31T19:03:15+01:00 INFO (6): Max Invoice: 18
+2015-07-31T19:04:41+01:00 INFO (6): Max Invoice: 18
+2015-07-31T19:04:41+01:00 INFO (6): Max Invoice: 18
+2015-07-31T19:04:41+01:00 INFO (6): Max Invoice: 18
+2015-07-31T19:04:42+01:00 INFO (6): Max Invoice: 18
+2015-07-31T19:08:05+01:00 INFO (6): Max Invoice: 18
+2015-07-31T19:08:12+01:00 INFO (6): Max Invoice: 18
+2015-07-31T19:09:30+01:00 INFO (6): Max Invoice: 18
+2015-07-31T19:10:15+01:00 INFO (6): Max Invoice: 18
+2015-07-31T19:10:15+01:00 INFO (6): Max items:4
+2015-07-31T19:10:15+01:00 INFO (6): i=0
+2015-07-31T19:10:15+01:00 INFO (6): qty=22
+2015-07-31T19:10:15+01:00 INFO (6): Line item attributes: NULL
+2015-07-31T19:10:15+01:00 INFO (6): Key: 0 Value: 1
+2015-07-31T19:10:15+01:00 INFO (6): tax rate: 13.000000
+2015-07-31T19:10:15+01:00 INFO (6):  
+2015-07-31T19:10:15+01:00 INFO (6):  
+2015-07-31T19:10:15+01:00 INFO (6): Invoice: 19 Tax Array for line item 0: 214.5
+2015-07-31T19:10:15+01:00 INFO (6): Description: 22 Hours incurred 1 December 2014- 19 January 2015 - upgrade Joomla version 2.5 website to version 3.4. Debug themes, update themes to 3.4 compatability. Upgrade CiviCRM, plugins and debug.
+2015-07-31T19:10:15+01:00 INFO (6):  
+2015-07-31T19:10:15+01:00 INFO (6): ITEM :: Key: 0 Value: 1
+2015-07-31T19:10:15+01:00 INFO (6): ITEM :: tax rate: 13.000000
+2015-07-31T19:10:15+01:00 INFO (6): ITEM :: domain_id: 1
+2015-07-31T19:10:15+01:00 INFO (6): ITEM :: Qty: 22 Unit price: 75
+2015-07-31T19:10:15+01:00 INFO (6): ITEM :: Tax rate: 13.000000 Tax type: % Tax $: 214.5
+2015-07-31T19:10:15+01:00 INFO (6): i=1
+2015-07-31T19:10:15+01:00 INFO (6): qty=1.5
+2015-07-31T19:10:15+01:00 INFO (6): Line item attributes: NULL
+2015-07-31T19:10:15+01:00 INFO (6): Key: 0 Value: 1
+2015-07-31T19:10:15+01:00 INFO (6): tax rate: 13.000000
+2015-07-31T19:10:15+01:00 INFO (6):  
+2015-07-31T19:10:15+01:00 INFO (6):  
+2015-07-31T19:10:15+01:00 INFO (6): Invoice: 19 Tax Array for line item 1: 14.625
+2015-07-31T19:10:15+01:00 INFO (6): Description: Setup Wordpress network installation for use on CDHalton subsidiary pages. 15/4/15
+2015-07-31T19:10:15+01:00 INFO (6):  
+2015-07-31T19:10:15+01:00 INFO (6): ITEM :: Key: 0 Value: 1
+2015-07-31T19:10:15+01:00 INFO (6): ITEM :: tax rate: 13.000000
+2015-07-31T19:10:15+01:00 INFO (6): ITEM :: domain_id: 1
+2015-07-31T19:10:15+01:00 INFO (6): ITEM :: Qty: 1.5 Unit price: 75
+2015-07-31T19:10:15+01:00 INFO (6): ITEM :: Tax rate: 13.000000 Tax type: % Tax $: 14.625
+2015-07-31T19:10:15+01:00 INFO (6): i=2
+2015-07-31T19:10:15+01:00 INFO (6): qty=4
+2015-07-31T19:10:15+01:00 INFO (6): Line item attributes: NULL
+2015-07-31T19:10:15+01:00 INFO (6): Key: 0 Value: 1
+2015-07-31T19:10:15+01:00 INFO (6): tax rate: 13.000000
+2015-07-31T19:10:15+01:00 INFO (6):  
+2015-07-31T19:10:15+01:00 INFO (6):  
+2015-07-31T19:10:15+01:00 INFO (6): Invoice: 19 Tax Array for line item 2: 291.2
+2015-07-31T19:10:15+01:00 INFO (6): Description: Adjustments to CDH/VH mobile themes and integration with Google web master tools. 4/5/15
+2015-07-31T19:10:15+01:00 INFO (6):  
+2015-07-31T19:10:15+01:00 INFO (6): ITEM :: Key: 0 Value: 1
+2015-07-31T19:10:15+01:00 INFO (6): ITEM :: tax rate: 13.000000
+2015-07-31T19:10:15+01:00 INFO (6): ITEM :: domain_id: 1
+2015-07-31T19:10:15+01:00 INFO (6): ITEM :: Qty: 4 Unit price: 560
+2015-07-31T19:10:15+01:00 INFO (6): ITEM :: Tax rate: 13.000000 Tax type: % Tax $: 291.2
+2015-07-31T19:10:15+01:00 INFO (6): i=3
+2015-07-31T19:10:15+01:00 INFO (6): qty=1
+2015-07-31T19:10:15+01:00 INFO (6): Line item attributes: NULL
+2015-07-31T19:10:15+01:00 INFO (6): Key: 0 Value: 1
+2015-07-31T19:10:15+01:00 INFO (6): tax rate: 13.000000
+2015-07-31T19:10:15+01:00 INFO (6):  
+2015-07-31T19:10:15+01:00 INFO (6):  
+2015-07-31T19:10:15+01:00 INFO (6): Invoice: 19 Tax Array for line item 3: 9.75
+2015-07-31T19:10:15+01:00 INFO (6): Description: Debugging/resolving Mail error in CiviCRM. 20/5/15
+2015-07-31T19:10:15+01:00 INFO (6):  
+2015-07-31T19:10:15+01:00 INFO (6): ITEM :: Key: 0 Value: 1
+2015-07-31T19:10:15+01:00 INFO (6): ITEM :: tax rate: 13.000000
+2015-07-31T19:10:15+01:00 INFO (6): ITEM :: domain_id: 1
+2015-07-31T19:10:15+01:00 INFO (6): ITEM :: Qty: 1 Unit price: 75
+2015-07-31T19:10:15+01:00 INFO (6): ITEM :: Tax rate: 13.000000 Tax type: % Tax $: 9.75
+2015-07-31T19:10:15+01:00 INFO (6): i=4
+2015-07-31T19:10:15+01:00 INFO (6): qty=.5
+2015-07-31T19:10:15+01:00 INFO (6): Line item attributes: NULL
+2015-07-31T19:10:15+01:00 INFO (6): Key: 0 Value: 1
+2015-07-31T19:10:15+01:00 INFO (6): tax rate: 13.000000
+2015-07-31T19:10:15+01:00 INFO (6):  
+2015-07-31T19:10:15+01:00 INFO (6):  
+2015-07-31T19:10:15+01:00 INFO (6): Invoice: 19 Tax Array for line item 4: 4.875
+2015-07-31T19:10:15+01:00 INFO (6): Description: General support - investigating CiviCRM mail behaviour. 29/7/15
+2015-07-31T19:10:15+01:00 INFO (6):  
+2015-07-31T19:10:15+01:00 INFO (6): ITEM :: Key: 0 Value: 1
+2015-07-31T19:10:15+01:00 INFO (6): ITEM :: tax rate: 13.000000
+2015-07-31T19:10:15+01:00 INFO (6): ITEM :: domain_id: 1
+2015-07-31T19:10:15+01:00 INFO (6): ITEM :: Qty: .5 Unit price: 75
+2015-07-31T19:10:15+01:00 INFO (6): ITEM :: Tax rate: 13.000000 Tax type: % Tax $: 4.875
+2015-07-31T19:10:18+01:00 INFO (6): Max Invoice: 19
+2015-07-31T19:10:18+01:00 INFO (6): Invoice: 19 Item id: 41 Tax 0 Tax ID: 1
+2015-07-31T19:10:18+01:00 INFO (6): Invoice: 19 Item id: 42 Tax 0 Tax ID: 1
+2015-07-31T19:10:18+01:00 INFO (6): Invoice: 19 Item id: 43 Tax 0 Tax ID: 1
+2015-07-31T19:10:18+01:00 INFO (6): Invoice: 19 Item id: 44 Tax 0 Tax ID: 1
+2015-07-31T19:10:18+01:00 INFO (6): Invoice: 19 Item id: 45 Tax 0 Tax ID: 1
+2015-07-31T19:10:18+01:00 INFO (6): eway pre check: false
+2015-07-31T19:10:43+01:00 INFO (6): Max Invoice: 19
+2015-07-31T19:10:43+01:00 INFO (6): Invoice: 19 Item id: 41 Tax 0 Tax ID: 1
+2015-07-31T19:10:43+01:00 INFO (6): Invoice: 19 Item id: 42 Tax 0 Tax ID: 1
+2015-07-31T19:10:43+01:00 INFO (6): Invoice: 19 Item id: 43 Tax 0 Tax ID: 1
+2015-07-31T19:10:43+01:00 INFO (6): Invoice: 19 Item id: 44 Tax 0 Tax ID: 1
+2015-07-31T19:10:43+01:00 INFO (6): Invoice: 19 Item id: 45 Tax 0 Tax ID: 1
+2015-07-31T19:10:51+01:00 INFO (6): Max Invoice: 19
+2015-07-31T19:10:51+01:00 INFO (6): Invoice: 19 Item id: 41 Tax 0 Tax ID: 1
+2015-07-31T19:10:51+01:00 INFO (6): Invoice: 19 Item id: 42 Tax 0 Tax ID: 1
+2015-07-31T19:10:51+01:00 INFO (6): Invoice: 19 Item id: 43 Tax 0 Tax ID: 1
+2015-07-31T19:10:51+01:00 INFO (6): Invoice: 19 Item id: 44 Tax 0 Tax ID: 1
+2015-07-31T19:10:51+01:00 INFO (6): Invoice: 19 Item id: 45 Tax 0 Tax ID: 1
+2015-07-31T19:10:51+01:00 INFO (6): Max items:4
+2015-07-31T19:10:51+01:00 INFO (6): i=0
+2015-07-31T19:10:51+01:00 INFO (6): qty=22.00
+2015-07-31T19:10:51+01:00 INFO (6): product=11
+2015-07-31T19:10:51+01:00 INFO (6): Line item attributes: NULL
+2015-07-31T19:10:51+01:00 INFO (6): Key: 0 Value: 1
+2015-07-31T19:10:51+01:00 INFO (6): tax rate: 13.000000
+2015-07-31T19:10:51+01:00 INFO (6): Invoice:  Tax Array for line item 0: 214.5
+2015-07-31T19:10:51+01:00 INFO (6): Description: 22 Hours incurred 1 December 2014- 19 January 2015 - upgrade Joomla version 2.5 website to version 3.4. Debug themes, update themes to 3.4 compatability. Upgrade CiviCRM, plugins and debug.
+2015-07-31T19:10:51+01:00 INFO (6):  
+2015-07-31T19:10:51+01:00 INFO (6): Invoice item: 41 tax lines deleted
+2015-07-31T19:10:51+01:00 INFO (6): ITEM :: Key: 0 Value: 1
+2015-07-31T19:10:51+01:00 INFO (6): ITEM :: tax rate: 13.000000
+2015-07-31T19:10:51+01:00 INFO (6): ITEM :: domain_id: 1
+2015-07-31T19:10:51+01:00 INFO (6): ITEM :: Qty: 22.00 Unit price: 75
+2015-07-31T19:10:51+01:00 INFO (6): ITEM :: Tax rate: 13.000000 Tax type: % Tax $: 214.5
+2015-07-31T19:10:51+01:00 INFO (6): i=1
+2015-07-31T19:10:51+01:00 INFO (6): qty=1.50
+2015-07-31T19:10:51+01:00 INFO (6): product=11
+2015-07-31T19:10:51+01:00 INFO (6): Line item attributes: NULL
+2015-07-31T19:10:51+01:00 INFO (6): Key: 0 Value: 1
+2015-07-31T19:10:51+01:00 INFO (6): tax rate: 13.000000
+2015-07-31T19:10:51+01:00 INFO (6): Invoice:  Tax Array for line item 1: 14.625
+2015-07-31T19:10:51+01:00 INFO (6): Description: Setup Wordpress network installation for use on CDHalton subsidiary pages. 15/4/15
+2015-07-31T19:10:51+01:00 INFO (6):  
+2015-07-31T19:10:51+01:00 INFO (6): Invoice item: 42 tax lines deleted
+2015-07-31T19:10:51+01:00 INFO (6): ITEM :: Key: 0 Value: 1
+2015-07-31T19:10:51+01:00 INFO (6): ITEM :: tax rate: 13.000000
+2015-07-31T19:10:51+01:00 INFO (6): ITEM :: domain_id: 1
+2015-07-31T19:10:51+01:00 INFO (6): ITEM :: Qty: 1.50 Unit price: 75
+2015-07-31T19:10:51+01:00 INFO (6): ITEM :: Tax rate: 13.000000 Tax type: % Tax $: 14.625
+2015-07-31T19:10:51+01:00 INFO (6): i=2
+2015-07-31T19:10:51+01:00 INFO (6): qty=4.00
+2015-07-31T19:10:51+01:00 INFO (6): product=11
+2015-07-31T19:10:51+01:00 INFO (6): Line item attributes: NULL
+2015-07-31T19:10:51+01:00 INFO (6): Key: 0 Value: 1
+2015-07-31T19:10:51+01:00 INFO (6): tax rate: 13.000000
+2015-07-31T19:10:51+01:00 INFO (6): Invoice:  Tax Array for line item 2: 39
+2015-07-31T19:10:51+01:00 INFO (6): Description: Adjustments to CDH/VH mobile themes and integration with Google web master tools. 4/5/15
+2015-07-31T19:10:51+01:00 INFO (6):  
+2015-07-31T19:10:51+01:00 INFO (6): Invoice item: 43 tax lines deleted
+2015-07-31T19:10:51+01:00 INFO (6): ITEM :: Key: 0 Value: 1
+2015-07-31T19:10:51+01:00 INFO (6): ITEM :: tax rate: 13.000000
+2015-07-31T19:10:51+01:00 INFO (6): ITEM :: domain_id: 1
+2015-07-31T19:10:51+01:00 INFO (6): ITEM :: Qty: 4.00 Unit price: 75
+2015-07-31T19:10:51+01:00 INFO (6): ITEM :: Tax rate: 13.000000 Tax type: % Tax $: 39
+2015-07-31T19:10:51+01:00 INFO (6): i=3
+2015-07-31T19:10:51+01:00 INFO (6): qty=1.00
+2015-07-31T19:10:51+01:00 INFO (6): product=11
+2015-07-31T19:10:51+01:00 INFO (6): Line item attributes: NULL
+2015-07-31T19:10:51+01:00 INFO (6): Key: 0 Value: 1
+2015-07-31T19:10:51+01:00 INFO (6): tax rate: 13.000000
+2015-07-31T19:10:51+01:00 INFO (6): Invoice:  Tax Array for line item 3: 9.75
+2015-07-31T19:10:51+01:00 INFO (6): Description: Debugging/resolving Mail error in CiviCRM. 20/5/15
+2015-07-31T19:10:51+01:00 INFO (6):  
+2015-07-31T19:10:51+01:00 INFO (6): Invoice item: 44 tax lines deleted
+2015-07-31T19:10:51+01:00 INFO (6): ITEM :: Key: 0 Value: 1
+2015-07-31T19:10:51+01:00 INFO (6): ITEM :: tax rate: 13.000000
+2015-07-31T19:10:51+01:00 INFO (6): ITEM :: domain_id: 1
+2015-07-31T19:10:51+01:00 INFO (6): ITEM :: Qty: 1.00 Unit price: 75
+2015-07-31T19:10:51+01:00 INFO (6): ITEM :: Tax rate: 13.000000 Tax type: % Tax $: 9.75
+2015-07-31T19:10:51+01:00 INFO (6): i=4
+2015-07-31T19:10:51+01:00 INFO (6): qty=0.50
+2015-07-31T19:10:51+01:00 INFO (6): product=11
+2015-07-31T19:10:51+01:00 INFO (6): Line item attributes: NULL
+2015-07-31T19:10:51+01:00 INFO (6): Key: 0 Value: 1
+2015-07-31T19:10:51+01:00 INFO (6): tax rate: 13.000000
+2015-07-31T19:10:51+01:00 INFO (6): Invoice:  Tax Array for line item 4: 4.875
+2015-07-31T19:10:51+01:00 INFO (6): Description: General support - investigating CiviCRM mail behaviour. 29/7/15
+2015-07-31T19:10:51+01:00 INFO (6):  
+2015-07-31T19:10:51+01:00 INFO (6): Invoice item: 45 tax lines deleted
+2015-07-31T19:10:51+01:00 INFO (6): ITEM :: Key: 0 Value: 1
+2015-07-31T19:10:51+01:00 INFO (6): ITEM :: tax rate: 13.000000
+2015-07-31T19:10:51+01:00 INFO (6): ITEM :: domain_id: 1
+2015-07-31T19:10:51+01:00 INFO (6): ITEM :: Qty: 0.50 Unit price: 75
+2015-07-31T19:10:51+01:00 INFO (6): ITEM :: Tax rate: 13.000000 Tax type: % Tax $: 4.875
+2015-07-31T19:10:53+01:00 INFO (6): Max Invoice: 19
+2015-07-31T19:10:53+01:00 INFO (6): Invoice: 19 Item id: 41 Tax 0 Tax ID: 1
+2015-07-31T19:10:53+01:00 INFO (6): Invoice: 19 Item id: 42 Tax 0 Tax ID: 1
+2015-07-31T19:10:53+01:00 INFO (6): Invoice: 19 Item id: 43 Tax 0 Tax ID: 1
+2015-07-31T19:10:53+01:00 INFO (6): Invoice: 19 Item id: 44 Tax 0 Tax ID: 1
+2015-07-31T19:10:53+01:00 INFO (6): Invoice: 19 Item id: 45 Tax 0 Tax ID: 1
+2015-07-31T19:10:53+01:00 INFO (6): eway pre check: false
+2015-07-31T19:14:17+01:00 INFO (6): Max Invoice: 19
+2015-07-31T19:14:17+01:00 INFO (6): Invoice: 19 Item id: 41 Tax 0 Tax ID: 1
+2015-07-31T19:14:17+01:00 INFO (6): Invoice: 19 Item id: 42 Tax 0 Tax ID: 1
+2015-07-31T19:14:17+01:00 INFO (6): Invoice: 19 Item id: 43 Tax 0 Tax ID: 1
+2015-07-31T19:14:17+01:00 INFO (6): Invoice: 19 Item id: 44 Tax 0 Tax ID: 1
+2015-07-31T19:14:17+01:00 INFO (6): Invoice: 19 Item id: 45 Tax 0 Tax ID: 1
+2015-07-31T19:14:17+01:00 INFO (6): Invoice: 19 Item id: 41 Tax 0 Tax ID: 1
+2015-07-31T19:14:17+01:00 INFO (6): Invoice: 19 Item id: 42 Tax 0 Tax ID: 1
+2015-07-31T19:14:17+01:00 INFO (6): Invoice: 19 Item id: 43 Tax 0 Tax ID: 1
+2015-07-31T19:14:17+01:00 INFO (6): Invoice: 19 Item id: 44 Tax 0 Tax ID: 1
+2015-07-31T19:14:17+01:00 INFO (6): Invoice: 19 Item id: 45 Tax 0 Tax ID: 1
+2015-07-31T19:14:38+01:00 INFO (6): Max Invoice: 19
+2015-07-31T19:14:38+01:00 INFO (6): Invoice: 19 Item id: 41 Tax 0 Tax ID: 1
+2015-07-31T19:14:38+01:00 INFO (6): Invoice: 19 Item id: 42 Tax 0 Tax ID: 1
+2015-07-31T19:14:38+01:00 INFO (6): Invoice: 19 Item id: 43 Tax 0 Tax ID: 1
+2015-07-31T19:14:38+01:00 INFO (6): Invoice: 19 Item id: 44 Tax 0 Tax ID: 1
+2015-07-31T19:14:38+01:00 INFO (6): Invoice: 19 Item id: 45 Tax 0 Tax ID: 1
+2015-07-31T19:14:45+01:00 INFO (6): Max Invoice: 19
+2015-07-31T19:16:04+01:00 INFO (6): Max Invoice: 19
+2015-07-31T19:16:05+01:00 INFO (6): Invoice: 19 Item id: 41 Tax 0 Tax ID: 1
+2015-07-31T19:16:05+01:00 INFO (6): Invoice: 19 Item id: 42 Tax 0 Tax ID: 1
+2015-07-31T19:16:05+01:00 INFO (6): Invoice: 19 Item id: 43 Tax 0 Tax ID: 1
+2015-07-31T19:16:05+01:00 INFO (6): Invoice: 19 Item id: 44 Tax 0 Tax ID: 1
+2015-07-31T19:16:05+01:00 INFO (6): Invoice: 19 Item id: 45 Tax 0 Tax ID: 1
+2015-07-31T19:16:05+01:00 INFO (6): Invoice: 19 Item id: 41 Tax 0 Tax ID: 1
+2015-07-31T19:16:05+01:00 INFO (6): Invoice: 19 Item id: 42 Tax 0 Tax ID: 1
+2015-07-31T19:16:05+01:00 INFO (6): Invoice: 19 Item id: 43 Tax 0 Tax ID: 1
+2015-07-31T19:16:05+01:00 INFO (6): Invoice: 19 Item id: 44 Tax 0 Tax ID: 1
+2015-07-31T19:16:05+01:00 INFO (6): Invoice: 19 Item id: 45 Tax 0 Tax ID: 1
+2015-07-31T19:16:05+01:00 INFO (6): Invoice: 19 Item id: 41 Tax 0 Tax ID: 1
+2015-07-31T19:16:05+01:00 INFO (6): Invoice: 19 Item id: 42 Tax 0 Tax ID: 1
+2015-07-31T19:16:05+01:00 INFO (6): Invoice: 19 Item id: 43 Tax 0 Tax ID: 1
+2015-07-31T19:16:05+01:00 INFO (6): Invoice: 19 Item id: 44 Tax 0 Tax ID: 1
+2015-07-31T19:16:05+01:00 INFO (6): Invoice: 19 Item id: 45 Tax 0 Tax ID: 1
+2015-07-31T19:16:09+01:00 INFO (6): Max Invoice: 19
+2015-07-31T19:16:10+01:00 INFO (6): Max Invoice: 19
