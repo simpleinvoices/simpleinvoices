@@ -88,12 +88,11 @@ class product
         } else {
             $sort = "id";
         }
-// need to make it compute qty_out for real invoices only        
             $sql = "SELECT 
                         id, 
                         description,
                         unit_price, 
-                        (SELECT COALESCE(SUM(quantity),0) FROM ".TB_PREFIX."invoice_items WHERE product_id = ".TB_PREFIX."products.id AND domain_id = :domain_id) AS qty_out ,
+                        (SELECT COALESCE(SUM(quantity),0) FROM ".TB_PREFIX."invoice_items, ".TB_PREFIX."invoices, ".TB_PREFIX."preferences WHERE product_id = ".TB_PREFIX."products.id AND ".TB_PREFIX."invoice_items.domain_id = :domain_id AND ".TB_PREFIX."invoice_items.invoice_id = ".TB_PREFIX."invoices.id AND ".TB_PREFIX."invoices.preference_id = ".TB_PREFIX."preferences.pref_id AND ".TB_PREFIX."preferences.status = 1 ) AS qty_out ,
                         (SELECT COALESCE(SUM(quantity),0) FROM ".TB_PREFIX."inventory WHERE product_id = ".TB_PREFIX."products.id AND domain_id = :domain_id) AS qty_in ,
                         (SELECT COALESCE(reorder_level,0)) AS reorder_level ,
                         (SELECT qty_in - qty_out ) AS quantity,
