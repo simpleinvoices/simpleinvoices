@@ -7,12 +7,8 @@ set_include_path(get_include_path() . PATH_SEPARATOR . "./library/");
 set_include_path(get_include_path() . PATH_SEPARATOR . "./library/pdf");
 set_include_path(get_include_path() . PATH_SEPARATOR . "./include/");
 
-require_once 'Zend/Loader/Autoloader.php';
-
 $autoloader = Zend_Loader_Autoloader::getInstance();
 $autoloader->setFallbackAutoloader(true);
-#Zend_Loader::registerAutoload();
-
 
 //session_start();
 Zend_Session::start();
@@ -38,10 +34,7 @@ $frontendOptions = array(
 
 #ini_set('display_errors',true);
 
-require_once("smarty/Smarty.class.php");
 require_once("library/paypal/paypal.class.php");
-
-require_once('./library/HTMLPurifier/HTMLPurifier.standalone.php');
 include_once('./include/functions.php');
 
 //ob_start('addCSRFProtection');
