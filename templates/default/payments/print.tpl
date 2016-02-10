@@ -154,7 +154,7 @@
 
 		<tr class="" >
 			<td class="">{$payment.id|htmlsafe}</td>
-			<td class="" colspan="3">{$payment.ac_inv_id|htmlsafe}</td>
+			<td class="" colspan="3">{$invoice.index_id|htmlsafe}</td>
 			<td class="" align="right">{$preference.pref_currency_sign} {$payment.ac_amount|siLocal_number}</td>
 			<td class="" align="right">{$payment.date|htmlsafe}</td>
 			<td class="" align="right">{$paymentType.pt_description|htmlsafe}</td>
