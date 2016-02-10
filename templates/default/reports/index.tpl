@@ -5,6 +5,13 @@
 			<img src="./images/famfam/money.png" alt="" />
 			{$LANG.statement_of_invoices}
 		</a>
+        {if $report_index == true}
+          {section name=idx loop=$report_extensions}
+            {if $LANG.statements|lower == $report_extensions[idx].section}
+              {include file=$report_extensions[idx].file}
+            {/if}
+          {/section}
+        {/if}
 	</div>
 	
 	<h2>{$LANG.sales}<a name="sales" href=""></a></h2>
@@ -21,6 +28,13 @@
 			<img src="./images/famfam/money.png" alt="" />
 			{$LANG.sales_by_customers} 
 		</a>					  
+        {if $report_index == true}
+          {section name=idx loop=$report_extensions}
+            {if $LANG.sales|lower == $report_extensions[idx].section}
+              {include file=$report_extensions[idx].file}
+            {/if}
+          {/section}
+        {/if}
 	</div>
 	
 	{if $defaults.inventory == "1"}
@@ -30,6 +44,13 @@
 				<img src="./images/famfam/money.png" alt="" />
 				{$LANG.profit_per_invoice}
 			</a>
+        {if $report_index == true}
+          {section name=idx loop=$report_extensions}
+            {if $LANG.debtors|lower == $report_extensions[idx].section}
+              {include file=$report_extensions[idx].file}
+            {/if}
+          {/section}
+        {/if}
 	</div>
 	{/if}
 	
@@ -39,6 +60,13 @@
 			<img src="./images/famfam/money_delete.png" alt="" />
 			{$LANG.total_taxes}
 		</a>
+        {if $report_index == true}
+          {section name=idx loop=$report_extensions}
+            {if $LANG.tax|lower == $report_extensions[idx].section}
+              {include file=$report_extensions[idx].file}
+            {/if}
+          {/section}
+        {/if}
 	</div>
 	
 	<h2>{$LANG.products}</h2>
@@ -47,13 +75,18 @@
 			<img src="./images/famfam/cart.png" alt="" />
 			{$LANG.product_sales}
 		</a>
-	
 		<a href="index.php?module=reports&view=report_products_sold_by_customer" class="">
 			<img src="./images/famfam/cart.png" alt="" />
 			{$LANG.products_by_customer}
 		</a>
+        {if $report_index == true}
+          {section name=idx loop=$report_extensions}
+            {if $LANG.products|lower == $report_extensions[idx].section}
+              {include file=$report_extensions[idx].file}
+            {/if}
+          {/section}
+        {/if}
 	</div>
-	
 	
 	<h2>{$LANG.biller_sales}</h2>
 	<div class="si_toolbar">
@@ -61,11 +94,17 @@
 			<img src="./images/famfam/user_suit.png" alt="" />
 			{$LANG.biller_sales}
 		</a>
-	
 		<a href="index.php?module=reports&view=report_biller_by_customer" class="">
 			<img src="./images/famfam/user_suit.png" alt="" />
 			{$LANG.biller_sales_by_customer_totals} {* TODO change this - remove total *}
 		</a>
+        {if $report_index == true}
+          {section name=idx loop=$report_extensions}
+            {if $LANG.biller_sales|lower == $report_extensions[idx].section}
+              {include file=$report_extensions[idx].file}
+            {/if}
+          {/section}
+        {/if}
 	</div>
 	
 	<h2>{$LANG.debtors}</h2>
@@ -74,21 +113,25 @@
 			<img src="./images/famfam/vcard.png" alt="" />
 			{$LANG.debtors_by_amount_owed}
 		</a>
-	
 	   <a href="index.php?module=reports&view=report_debtors_by_aging" class="">
 			<img src="./images/famfam/vcard.png" alt="" />
 			 {$LANG.debtors_by_aging_periods}
 		</a>
-		
 		 <a href="index.php?module=reports&view=report_debtors_owing_by_customer" class="">
 			<img src="./images/famfam/vcard.png" alt="" />
 			 {$LANG.total_owed_per_customer}
 		</a>
-	
 	   <a href="index.php?module=reports&view=report_debtors_aging_total" class="">
 			<img src="./images/famfam/vcard.png" alt="" />
 			 {$LANG.total_by_aging_periods}
 		</a>
+        {if $report_index == true}
+          {section name=idx loop=$report_extensions}
+            {if $LANG.debtors|lower == $report_extensions[idx].section}
+              {include file=$report_extensions[idx].file}
+            {/if}
+          {/section}
+        {/if}
 	</div>
 	
 	<h2>{$LANG.other}</h2>
@@ -97,6 +140,12 @@
 			<img src="./images/famfam/database.png" alt="" />
 			{$LANG.database_log}
 		</a>
-	</div>
-
+        {if $report_index == true}
+          {section name=idx loop=$report_extensions}
+            {if $LANG.other|lower == $report_extensions[idx].section}
+              {include file=$report_extensions[idx].file}
+            {/if}
+          {/section}
+        {/if}
+    </div>
 </div>
