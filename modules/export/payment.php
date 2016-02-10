@@ -9,8 +9,6 @@
 * Website:
 * 	http://www.simpleinvoices.org
  */
-#define("BROWSE","browse");
-
 $invoiceID = $_GET['id'];
 $get_format = $_GET['format'];
 $get_file_type = $_GET['filetype'];
@@ -23,6 +21,3 @@ $export -> file_location = 'download';
 $export -> module = 'payment';
 $export -> id = $invoiceID;
 $export -> execute();
-
-
-?>
