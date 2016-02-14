@@ -18,6 +18,7 @@
 			{$tax_selected.tax_description} {$tax_selected.type}
 		</td>
 	</tr>
+    {if !empty($customFieldLabel.product_cf1)}
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf1} 
 		<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}">
@@ -25,6 +26,8 @@
 		</td>
 		<td>{$product.custom_field1}</td>
 	</tr>
+	{/if}
+    {if !empty($customFieldLabel.product_cf2)}
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf2} 
 		<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}">
@@ -32,6 +35,8 @@
 		</td>
 		<td>{$product.custom_field2}</td>
 	</tr>
+    {/if}
+    {if !empty($customFieldLabel.product_cf3)}
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf3} 
 		<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}">
@@ -39,6 +44,8 @@
 		</td>
 		<td>{$product.custom_field3}</td>
 	</tr>
+    {/if}
+    {if !empty($customFieldLabel.product_cf4)}
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf4} 
 		<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}">
@@ -46,6 +53,7 @@
 		</td>
 		<td>{$product.custom_field4}</td>
 	</tr>
+    {/if}
 		{*
 			{showCustomFields categorieId="3" itemId=$smarty.get.id } 
 		*}
@@ -69,11 +77,7 @@
 			</td>
 		</tr>
 	</table>
-{/if}
-
-
-{if $smarty.get.action== 'edit' }
-
+{elseif $smarty.get.action== 'edit' }
 	<h3>{$LANG.product_edit}</h3>
 
 	<table align="center">
@@ -90,15 +94,20 @@
 		<td>
 		<select name="default_tax_id">
 			{foreach from=$taxes item=tax}
-				<option value="{$tax.tax_id}" {if $tax.tax_id == $product.default_tax_id}selected{/if}>{$tax.tax_description}</option>
+            <option value="{$tax.tax_id}" {if $tax.tax_id == $product.default_tax_id}selected{/if}>
+              {$tax.tax_description}
+            </option>
 			{/foreach}
 		</select>
 		</td>
 	</tr>
+    {if !empty($customFieldLabel.product_cf1)}
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf1} 
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}">
-		<img src="./images/common/help-small.png" alt="" /></a>
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
+           title="{$LANG.custom_fields}">
+		  <img src="./images/common/help-small.png" alt="" />
+        </a>
 		</td>
 		<td>
 		<select name="custom_field1">
@@ -109,27 +118,40 @@
 		</select>
 		</td>
 	</tr>
+    {/if}
+    {if !empty($customFieldLabel.product_cf2)}
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf2} 
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}">
-		<img src="./images/common/help-small.png" alt="" /></a>
+        <a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
+           title="{$LANG.custom_fields}">
+          <img src="./images/common/help-small.png" alt="" />
+        </a>
 		</td>
 		<td><input type="text" name="custom_field2" size="50" value="{$product.custom_field2}" /></td>
 	</tr>
+    {/if}
+    {if !empty($customFieldLabel.product_cf3)}
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf3} 
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}">
-		<img src="./images/common/help-small.png" alt="" /></a>
+        <a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
+          title="{$LANG.custom_fields}">
+		  <img src="./images/common/help-small.png" alt="" />
+        </a>
 		</td>
 		<td><input type="text" name="custom_field3" size="50" value="{$product.custom_field3}" /></td>
 	</tr>
+    {/if}
+    {if !empty($customFieldLabel.product_cf4)}
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf4} 
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}">
-		<img src="./images/common/help-small.png" alt="" /></a>
+        <a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
+           title="{$LANG.custom_fields}">
+          <img src="./images/common/help-small.png" alt="" />
+        </a>
 		</td>
 		<td><input type="text" name="custom_field4" size="50" value="{$product.custom_field4}" /></td>
 	</tr>
+    {/if}
 	{*	{showCustomFields categorieId="3" itemId=$smarty.get.id } *}
 	<tr>
 		<td class="details_screen">{$LANG.notes}</td>
@@ -137,13 +159,9 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.product_enabled}</td>
-		<td>
-			{html_options name=enabled options=$enabled selected=$product.enabled}
-		</td>
+      <td>{html_options name=enabled options=$enabled selected=$product.enabled}</td>
 	</tr>
 	</table>
-{/if} 
-{if $smarty.get.action== 'edit' }
 	<br />
 	<table class="buttons" align="center">
 	<tr>
@@ -154,15 +172,12 @@
 			</button>
 
 			<input type="hidden" name="op" value="edit_product">
-		
 			<a href="./index.php?module=products&amp;view=manage" class="negative">
 		        <img src="./images/common/cross.png" alt="" />
 	        	{$LANG.cancel}
     		</a>
-	
 		</td>
 	</tr>
 </table>
-		
 	{/if}
 </form>

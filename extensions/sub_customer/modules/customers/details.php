@@ -40,7 +40,7 @@ $stuff['owing'] = $stuff['total'] - $stuff['paid'];
 #get custom field labels
 
 
-$customFieldLabel = getCustomFieldLabels();
+$customFieldLabel = getCustomFieldLabels('',true);
 $invoices = getCustomerInvoices($customer_id);
 
 $parent_customers = getActiveCustomers();

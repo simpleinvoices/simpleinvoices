@@ -30,6 +30,7 @@ $patchCount        = false;
 
 // Note: include/functions.php and include/sql_queries.php loaded by this include.
 require_once ("./include/init.php");
+error_log("GET - " . print_r($_GET,true));
 
 // Remove disabled extensions from the array
 $ext_names = array();
@@ -51,11 +52,11 @@ foreach ($ext_names as $ext_name) {
 // @formatter:off
 $smarty->assign("ext_names", $ext_names);
 $smarty->assign("config"   , $config);
-$smarty->assign("module"   ,$module);
-$smarty->assign("view"     ,$view);
+$smarty->assign("module"   , $module);
+$smarty->assign("view"     , $view);
 $smarty->assign("siUrl"    , $siUrl);
-$smarty->assign("LANG"     ,$LANG);
-$smarty->assign("enabled"  ,array($LANG['disabled'],$LANG['enabled']));
+$smarty->assign("LANG"     , $LANG);
+$smarty->assign("enabled"  , array($LANG['disabled'],$LANG['enabled']));
 // @formatter:on
 
 // Menu - hide or show menu
@@ -132,9 +133,8 @@ if (($module == "invoices") && (strstr($view, "template"))) {
     }
     exit(0);
 }
-
 // Check for "api" module or a "xml" or "ajax" "page requeset" (aka view)
-if (strstr($module, "api") or (strstr($view, "xml") or (strstr($view, "ajax")))) {
+if (strstr($module, "api") || (strstr($view, "xml") || (strstr($view, "ajax")))) {
     $extensionXml = 0;
     foreach ($ext_names as $ext_name) {
         if (file_exists("./extensions/$ext_name/modules/$module/$view.php")) {

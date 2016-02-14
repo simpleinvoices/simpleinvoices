@@ -124,22 +124,30 @@
 		<td class='details_screen'>{$LANG.email}:</td>
 		<td class='details_screen' colspan="5">{$biller.email}</td>
 	</tr>	
+    {if !empty($customFieldLabels.biller_cf1)}
 	<tr class='details_screen biller'>
 		<td class='details_screen'>{$customFieldLabels.biller_cf1}:</td>
 		<td class='details_screen' colspan="5">{$biller.custom_field1}</td>
 	</tr>	
+    {/if}	
+    {if !empty($customFieldLabels.biller_cf2)}
 	<tr class='details_screen biller'>
 		<td class='details_screen'>{$customFieldLabels.biller_cf2}:</td>
 		<td class='details_screen' colspan="5">{$biller.custom_field2}</td>
 	</tr>	
+    {/if} 
+    {if !empty($customFieldLabels.biller_cf3)}
 	<tr class='details_screen biller'>
 		<td class='details_screen'>{$customFieldLabels.biller_cf3}:</td>
 		<td class='details_screen' colspan="5">{$biller.custom_field3}</td>
 	</tr>	
+    {/if} 
+    {if !empty($customFieldLabels.biller_cf4)}
 	<tr class='details_screen biller'>
 		<td class='details_screen'>{$customFieldLabels.biller_cf4}:</td>
 		<td class='details_screen' colspan="5">{$biller.custom_field4}</td>
 	</tr>
+    {/if} 
 	{*
 		{showCustomFields categorieId="1" itemId=$biller.id }
 	*}
@@ -190,21 +198,31 @@
 		<td class='details_screen'>{$LANG.email}:</td>
 		<td class='details_screen'colspan="5">{$customer.email}</td>
 	</tr>	
+    {if !empty($customFieldLabels.customer_cf1)}
 	<tr class='details_screen customer'>
 		<td class='details_screen'>{$customFieldLabels.customer_cf1}:</td>
 		<td colspan="5" class='details_screen'>{$customer.custom_field1}</td>
 	</tr>	
+    {/if} 
+    {if !empty($customFieldLabels.customer_cf2)}
 	<tr class='details_screen customer'>
 		<td class='details_screen'>{$customFieldLabels.customer_cf2}:</td>
 		<td colspan="5" class='details_screen'>{$customer.custom_field2}</td>
 	</tr>	
+    {/if} 
+    {if !empty($customFieldLabels.customer_cf3)}
 	<tr class='details_screen customer'>
 		<td class='details_screen'>{$customFieldLabels.customer_cf3}:</td>
 		<td class='details_screen' colspan="5">{$customer.custom_field3}</td>
 	</tr>	
+    {/if} 
 	<tr class='details_screen customer'>
+        {if !empty($customFieldLabels.customer_cf4)}
 		<td class='details_screen'>{$customFieldLabels.customer_cf4}:</td>
 		<td class='details_screen' colspan=4>{$customer.custom_field4}</td>
+        {else}
+        <td colspan="5"></td>
+        {/if}
 		<td class='details_screen align_right'>
 		<a href="?module=invoices&view=usedefault&action=update_template&id={$invoice.id}&customer_id={$customer.id}"><img src="./images/flexigrid/load.png" title='{$LANG.invoice} {$invoice.id} {$LANG.as_template} {$LANG.for} {$customer.name}' alt="" /></a>
 		</td>
@@ -329,12 +347,32 @@
 				<td colspan="6">
 					<table width=100%>
 						<tr>
-							<td width="50%" class='details_screen'>{$customFieldLabels.product_cf1}: {$invoiceItem.product.custom_field1}</td>
-							<td width="50%" class='details_screen'>{$customFieldLabels.product_cf2}: {$invoiceItem.product.custom_field2}</td>
+                            {if !empty($customFieldLabels.product_cf1)}
+							<td width="50%" class='details_screen'>
+                                {$customFieldLabels.product_cf1}: {$invoiceItem.product.custom_field1}
+                            </td>
+                            {else}
+                            <td></td>
+                            {/if}
+                            {if !empty($customFieldLabels.product_cf2)}
+							<td width="50%" class='details_screen'>
+                                {$customFieldLabels.product_cf2}: {$invoiceItem.product.custom_field2}
+                            </td>
+                            {/if}
 						</tr>
 						<tr>       
-							<td width="50%" class='details_screen'>{$customFieldLabels.product_cf3}: {$invoiceItem.product.custom_field3}</td>
-							<td width="50%" class='details_screen'>{$customFieldLabels.product_cf4}: {$invoiceItem.product.custom_field4}</td>
+                            {if !empty($customFieldLabels.product_cf3)}
+							<td width="50%" class='details_screen'>
+                                {$customFieldLabels.product_cf3}: {$invoiceItem.product.custom_field3}
+                            </td>
+                            {else}
+                            <td></td>
+                            {/if}
+                            {if !empty($customFieldLabels.product_cf4)}
+							<td width="50%" class='details_screen'>
+                                {$customFieldLabels.product_cf4}: {$invoiceItem.product.custom_field4}
+                            </td>
+                            {/if}
 						</tr>
 					</table>
 				</td>
@@ -361,12 +399,32 @@
 				<td colspan="6">
 					<table width="100%">
 						<tr>
-                            <td width="50%" class='details_screen'>{$customFieldLabels.product_cf1}: {$invoiceItem.product.custom_field1}</td>
-							<td width=50% class='details_screen'>{$customFieldLabels.product_cf2}: {$invoiceItem.product.custom_field2}</td>
+                            {if !empty($customFieldLabels.product_cf1)}
+                            <td width="50%" class='details_screen'>
+                                {$customFieldLabels.product_cf1}: {$invoiceItem.product.custom_field1}
+                            </td>
+                            {else}
+                            <td></td>
+                            {/if}
+                            {if !empty($customFieldLabels.product_cf2)}
+							<td width=50% class='details_screen'>
+                                {$customFieldLabels.product_cf2}: {$invoiceItem.product.custom_field2}
+                            </td>
+                            {/if}
 						</tr>
 						<tr>       
-                            <td width="50%" class='details_screen'>{$customFieldLabels.product_cf3}: {$invoiceItem.product.custom_field3}</td>
-							<td width="50%" class='details_screen'>{$customFieldLabels.product_cf4}: {$invoiceItem.product.custom_field4}</td>
+                            {if !empty($customFieldLabels.product_cf3)}
+                            <td width="50%" class='details_screen'>
+                                {$customFieldLabels.product_cf3}: {$invoiceItem.product.custom_field3}
+                            </td>
+                            {else}
+                            <td></td>
+                            {/if}
+                            {if !empty($customFieldLabels.product_cf4)}
+							<td width="50%" class='details_screen'>
+                                {$customFieldLabels.product_cf4}: {$invoiceItem.product.custom_field4}
+                            </td>
+                            {/if}
 						</tr>
 					</table>
 				</td>

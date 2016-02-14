@@ -1,7 +1,7 @@
 <?php
-/* ************************************************************
+/* *************************************************************
  * Zend framework init - start
- * ************************************************************/
+ * *************************************************************/
 set_include_path(get_include_path() . PATH_SEPARATOR . "./include/class");
 set_include_path(get_include_path() . PATH_SEPARATOR . "./library/");
 set_include_path(get_include_path() . PATH_SEPARATOR . "./library/pdf");
@@ -17,13 +17,13 @@ $auth_session = new Zend_Session_Namespace('Zend_Auth');
 
 // start use of zend_cache and set the lifetime for 2 hours.
 // $frontendOptions = array('lifetime' => 7200, 'automatic_serialization' => true);
-/* ************************************************************
+/* *************************************************************
  * Zend framework init - end
- * ************************************************************/
+ * *************************************************************/
 
-/* ************************************************************
+/* *************************************************************
  * Smarty inint - start
- * ************************************************************/
+ * *************************************************************/
 require_once ("smarty/Smarty.class.php");
 require_once ("library/paypal/paypal.class.php");
 
@@ -34,9 +34,9 @@ if (!is_writable('./tmp')) {
     simpleInvoicesError('notWriteable', 'directory', './tmp');
 }
 
-/* ************************************************************
+/* *************************************************************
  * log file - start
- * ************************************************************/
+ * *************************************************************/
 $logFile = "./tmp/log/si.log";
 if (!is_file($logFile)) {
     $createLogFile = fopen($logFile, 'w') or die(simpleInvoicesError('notWriteable', 'folder', 'tmp/log'));
@@ -47,9 +47,9 @@ if (!is_writable($logFile)) {
 }
 $writer = new Zend_Log_Writer_Stream($logFile);
 $logger = new Zend_Log($writer);
-/* ************************************************************
+/* *************************************************************
  * log file - end
- * ************************************************************/
+ * *************************************************************/
 
 if (!is_writable('./tmp/cache')) {
     simpleInvoicesError('notWriteable', 'file', './tmp/cache');
@@ -95,10 +95,10 @@ if ($timeout <= 0) {
 // $frontendOptions = array('lifetime' => 7200, 'automatic_serialization' => true);
 $frontendOptions = array('lifetime' => ($timeout * 60), 'automatic_serialization' => true);
 
-/* ************************************************************
+/* *************************************************************
  * Zend Framework cache section - start
  * -- must come after the tmp dir writeable check
- * ************************************************************/
+ * *************************************************************/
 $backendOptions = array('cache_dir' => './tmp/'); // Directory where to put the cache files
                                                   
 // getting a Zend_Cache_Core object
@@ -106,9 +106,9 @@ $cache = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
 
 // required for some servers
 Zend_Date::setOptions(array('cache' => $cache)); // Active aussi pour Zend_Locale
-/* ************************************************************
+/* *************************************************************
  * Zend Framework cache section - end
- * ************************************************************/
+ * *************************************************************/
 
 $smarty = new Smarty();
 
@@ -125,11 +125,9 @@ $smarty->plugins_dir = array("plugins", "include/smarty_plugins");
 
 // add stripslash smarty function
 $smarty->register_modifier("unescape", "stripslashes");
-/*
- * ************************************************************
+/* *************************************************************
  * Smarty inint - end
- * ************************************************************
- */
+ * *************************************************************/
 
 $path = pathinfo($_SERVER['REQUEST_URI']);
 // SC: Install path handling will need changes if used in non-HTML contexts
@@ -208,12 +206,10 @@ if ($config->authentication->enabled == 1) {
     include_once ("./include/check_permission.php");
 }
 
-/*
- * ************************************************************
+/* *************************************************************
  * Array: $early_exit - Add pages that don't need a header or
  * that exit prior to adding the template add in here
- * ************************************************************
- */
+ * *************************************************************/
 $early_exit = array();
 $early_exit[] = "auth_login";
 $early_exit[] = "api_cron";
@@ -237,11 +233,11 @@ switch ($module) {
 // get the url - used for templates / pdf
 $siUrl = getURL();
 
-/* ************************************************************
+/* *************************************************************
  * If using the folowing line, the DB settings should be
  * appended to the config array, instead of replacing it
  * (NOTE: NOT TESTED!)
- * ************************************************************/
+ * *************************************************************/
 include_once ("./include/backup.lib.php");
 
 $defaults = getSystemDefaults();

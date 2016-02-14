@@ -24,7 +24,7 @@ $files = getLogoList();
 $smarty->assign("files", $files);
 
 #get custom field labels
-$customFieldLabel = getCustomFieldLabels();
+$customFieldLabel = getCustomFieldLabels('',true);
 
 if ($_POST['name'] != "") {
 	include ("./modules/billers/save.php");
@@ -34,8 +34,7 @@ $smarty->assign('files', $files);
 $smarty->assign('customFieldLabel', $customFieldLabel);
 $smarty->assign('save', $save);
 
-$smarty -> assign('pageActive', 'biller');
-$smarty -> assign('subPageActive', 'biller_add');
-$smarty -> assign('active_tab', '#people');
-
+$smarty->assign('pageActive', 'biller');
+$smarty->assign('subPageActive', 'biller_add');
+$smarty->assign('active_tab', '#people');
 ?>

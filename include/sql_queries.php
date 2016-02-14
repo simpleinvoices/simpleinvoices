@@ -406,9 +406,8 @@ function pdoRequest($request, $table, $excluded_fields, $whereClause = NULL) {
 
     $wherePresent = !empty($whereClause);
     if ($wherePresent && !($whereClause instanceof WhereClause)) {
-        throw new Exception(
-                        "pdoRequest - Non-empty \$whereClause parameter is not an " .
-                        "instance of the WhereClause class.");
+        throw new Exception("pdoRequest - Non-empty \$whereClause parameter is not an " .
+                            "instance of the WhereClause class.");
     }
 
     $value_pairs = array();

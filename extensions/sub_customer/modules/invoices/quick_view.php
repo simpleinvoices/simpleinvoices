@@ -53,7 +53,7 @@ else {
         
 	$invoice['url_for_pdf'] = $url_for_pdf;
 
-$customFieldLabels = getCustomFieldLabels();
+$customFieldLabels = getCustomFieldLabels('',true);
 
 for($i=1;$i<=4;$i++) {
 	$customField[$i] = show_custom_field("invoice_cf$i",$invoice["custom_field$i"],"read",'details_screen summary', 'details_screen','details_screen',5,':');
