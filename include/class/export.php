@@ -20,13 +20,13 @@ class export {
         if ($this->file_name == '' && $this->module == 'payment') {
             $this->file_name = 'payment' . $this->id;
         }
-        
+
         // @formatter:off
         switch ($this->format) {
             case "print":
                 echo ($data);
                 break;
-            
+
             case "pdf":
                 pdfThis($data, $this->file_location, $this->file_name);
                 if ($this->file_location == "download") exit();
@@ -35,7 +35,7 @@ class export {
             case "file":
                 $invoice    = getInvoice($this->id, $this->domain_id);
                 $preference = getPreference($invoice['preference_id'], $this->domain_id);
-                    
+
                 // xls/doc export no longer uses the export template $template = "export";
                 header("Content-type: application/octet-stream");
 
@@ -57,7 +57,7 @@ class export {
                                $this->file_type) . '"');
                         break;
                 }
-                    
+
                 header("Pragma: no-cache");
                 header("Expires: 0");
                 echo ($data);
@@ -69,7 +69,7 @@ class export {
     function getData() {
         global $smarty;
         global $siUrl;
-        
+
         // @formatter:off
         $invoice = new invoice();
         switch ($this->module) {
@@ -77,7 +77,7 @@ class export {
                 $invoice->domain_id = $this->domain_id;
                 $invoice->biller    = $this->biller_id;
                 $invoice->customer  = $this->customer_id;
-                
+
                 if ($this->filter_by_date == "yes") {
                     if (isset($this->start_date)) $invoice->start_date = $this->start_date;
                     if (isset($this->end_date)  ) $invoice->end_date   = $this->end_date;
@@ -85,21 +85,21 @@ class export {
                         isset($this->end_date)  ) $invoice->having     = "date_between";
                     $having_count = 1;
                 }
-                
+
                 if ($this->show_only_unpaid == "yes") {
                     if ($having_count == 1) $invoice->having_and = "money_owed";
                     else $invoice->having = "money_owed";
                 }
-                
+
                 $invoice_all = $invoice->select_all('count');
                 $invoices    = $invoice_all->fetchAll();
-                
+
                 foreach ($invoices as $i => $row) {
                     $statement['total'] = $statement['total'] + $row['invoice_total'];
                     $statement['owing'] = $statement['owing'] + $row['owing'];
                     $statement['paid']  = $statement['paid']  + $row['INV_PAID'];
                 }
-                
+
                 $templatePath     = "./templates/default/statement/index.tpl";
                 $biller_details   = getBiller($this->biller_id, $this->domain_id);
                 $billers          = $biller_details;
@@ -109,7 +109,7 @@ class export {
                                     $this->customer_id   . "_" .
                                     $invoice->start_date . "_" .
                                     $invoice->end_date;
-                
+
                 $smarty->assign('biller_id'       , $biller_id);
                 $smarty->assign('biller_details'  , $biller_details);
                 $smarty->assign('billers'         , $billers);
@@ -124,23 +124,23 @@ class export {
 
                 $data = $smarty->fetch("." . $templatePath);
                 break;
-                
+
             case "payment":
                 $payment = getPayment($this->id);
-                
+
                 // Get Invoice preference to link from this screen back to the invoice
                 $invoice = getInvoice($payment['ac_inv_id'], $this->domain_id);
                 $biller  = getBiller($payment['biller_id'] , $this->domain_id);
-                
+
                 $logo = getLogo($biller);
                 $logo = str_replace(" ", "%20", $logo);
-                
+
                 $customer          = getCustomer($payment['customer_id'], $this->domain_id);
                 $invoiceType       = getInvoiceType($invoice['type_id']);
                 $customFieldLabels = getCustomFieldLabels($this->domain_id, true);
                 $paymentType       = getPaymentType($payment['ac_payment_type'], $this->domain_id);
                 $preference        = getPreference($invoice['preference_id'], $this->domain_id);
-                
+
                 $smarty->assign("payment"          , $payment);
                 $smarty->assign("invoice"          , $invoice);
                 $smarty->assign("biller"           , $biller);
@@ -152,10 +152,10 @@ class export {
                 $smarty->assign("customFieldLabels", $customFieldLabels);
                 $smarty->assign('pageActive'       , 'payment');
                 $smarty->assign('active_tab'       , '#money');
-                
+
                 $css = $siUrl . "/templates/invoices/default/style.css";
                 $smarty->assign('css', $css);
-                
+
                 $templatePath = "./templates/default/payments/print.tpl";
                 $data = $smarty->fetch("." . $templatePath);
                 break;
@@ -163,45 +163,45 @@ class export {
             case "invoice":
                 $invoiceobj = new invoice();
                 $invoiceobj->domain_id = $this->domain_id;
-                
+
                 $invoice = $invoiceobj->select($this->id, $this->domain_id);
-                
+
                 $invoice_number_of_taxes = numberOfTaxesForInvoice($this->id, $this->domain_id);
-                
+
                 $customer = getCustomer($invoice['customer_id'], $this->domain_id);
-                
+
                 $billerobj = new biller();
                 $billerobj->domain_id = $this->domain_id;
-                
+
                 $biller     = $billerobj->select($invoice['biller_id']);
                 $preference = getPreference($invoice['preference_id'], $this->domain_id);
                 $defaults   = getSystemDefaults($this->domain_id);
-                
+
                 $logo = getLogo($biller);
                 $logo = str_replace(" ", "%20", $logo);
-                
+
                 $invoiceItems    = $invoiceobj->getInvoiceItems($this->id, $this->domain_id);
                 $spc2us_pref     = str_replace(" ", "_", $invoice['index_name']);
                 $this->file_name = $spc2us_pref;
-                
+
                 $customFieldLabels = getCustomFieldLabels($this->domain_id, true);
-                
+
                 // Set the template to the default
                 $template = $defaults['template'];
-                
+
                 $templatePath  = "./templates/invoices/${template}/template.tpl";
                 $template_path = "../templates/invoices/${template}";
                 $pluginsdir    = "./templates/invoices/${template}/plugins/";
                 $css           = $siUrl . "/templates/invoices/${template}/style.css";
-                
+
                 $smarty->plugins_dir = $pluginsdir;
-                
+
                 $pageActive = "invoices";
                 $smarty->assign('pageActive', $pageActive);
-                
+
                 if (file_exists($templatePath)) {
                     $this->assignTemplateLanguage($preference);
-                    
+
                     $smarty->assign('biller'                 , $biller);
                     $smarty->assign('customer'               , $customer);
                     $smarty->assign('invoice'                , $invoice);
@@ -213,10 +213,10 @@ class export {
                     $smarty->assign('template_path'          , $template_path);
                     $smarty->assign('css'                    , $css);
                     $smarty->assign('customFieldLabels'      , $customFieldLabels);
-                    
+
                     $data = $smarty->fetch("." . $templatePath);
                 }
-                
+
                 break;
         }
         // @formatter:on
@@ -227,7 +227,7 @@ class export {
     function execute() {
         $this->showData($this->getData());
     }
-    
+
     // assign the language and set the locale from the preference
     function assignTemplateLanguage($preference) {
         // get and assign the language file from the preference table

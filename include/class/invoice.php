@@ -551,7 +551,7 @@ class invoice {
         }
 
         $count = $sth->fetch();
-		$logger->log('Max Invoice: '.$count['max'], Zend_Log::INFO);
+		//$logger->log('Max Invoice: '.$count['max'], Zend_Log::INFO);
         return $count['max'];
     }
 

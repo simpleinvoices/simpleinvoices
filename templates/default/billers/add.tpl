@@ -22,8 +22,8 @@
         <th>{$LANG.biller_name}
           <a class="cluetip" href="#"
              rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field"
-             title="{$LANG.required_field}"> <img
-             src="./images/common/required-small.png" alt="" />
+             title="{$LANG.required_field}">
+            <img src="./images/common/required-small.png" alt="" />
           </a>
         </th>
         <td><input type="text" name="name"
@@ -39,8 +39,8 @@
         <th>{$LANG.street2}
           <a class="cluetip" href="#"
              rel="index.php?module=documentation&amp;view=view&amp;page=help_street2"
-             title="{$LANG.street2}"> <img
-             src="./images/common/help-small.png" alt="" />
+             title="{$LANG.street2}">
+            <img src="./images/common/help-small.png" alt="" />
           </a>
         </th>
         <td><input type="text" name="street_address2"
@@ -117,8 +117,8 @@
         <th>{$customFieldLabel.biller_cf1|htmlsafe}
           <a class="cluetip" href="#"
              rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
-             title="{$LANG.custom_fields}"> <img
-             src="./images/common/help-small.png" alt="" />
+             title="{$LANG.custom_fields}">
+            <img src="./images/common/help-small.png" alt="" />
           </a>
         </th>
         <td><input type="text" name="custom_field1"
@@ -129,8 +129,8 @@
         <th>{$customFieldLabel.biller_cf2}
           <a class="cluetip" href="#"
              rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
-             title="{$LANG.custom_fields}"> <img
-             src="./images/common/help-small.png" alt="" />
+             title="{$LANG.custom_fields}">
+            <img src="./images/common/help-small.png" alt="" />
           </a>
         </th>
         <td><input type="text" name="custom_field2"
@@ -141,8 +141,8 @@
         <th>{$customFieldLabel.biller_cf3|htmlsafe}
           <a class="cluetip" href="#"
              rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
-             title="{$LANG.custom_fields}"> <img
-             src="./images/common/help-small.png" alt="" />
+             title="{$LANG.custom_fields}">
+            <img src="./images/common/help-small.png" alt="" />
           </a>
         </th>
         <td><input type="text" name="custom_field3"
@@ -153,8 +153,8 @@
         <th>{$customFieldLabel.biller_cf4|htmlsafe}
           <a class="cluetip" href="#"
              rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
-             title="{$LANG.custom_fields}"> <img
-             src="./images/common/help-small.png" alt="" />
+             title="{$LANG.custom_fields}">
+            <img src="./images/common/help-small.png" alt="" />
           </a>
         </th>
         <td><input type="text" name="custom_field4"
@@ -165,8 +165,8 @@
         <th>{$LANG.logo_file}
           <a class="cluetip" href="#"
              rel="index.php?module=documentation&amp;view=view&amp;page=help_insert_biller_text"
-             title="{$LANG.logo_file}"> <img
-             src="./images/common/help-small.png" alt="" />
+             title="{$LANG.logo_file}">
+            <img src="./images/common/help-small.png" alt="" />
           </a>
         </th>
         <td>{html_options name=logo output=$files values=$files selected=$files[0] }</td>

@@ -17,7 +17,8 @@
  */
 
 checkLogin();
-
+echo "this file was flagged as not needed anymore! path: modules/customers/seaarch.php";
+/*
 $smarty -> display("../templates/default/menu.tpl");
 $smarty -> display("../templates/default/main.tpl");
 
@@ -49,5 +50,4 @@ echo "</table></div>";
 
 //getMenuStructure();
 exit(); //Fix double menu display ;-) - Gates
-
-?>
+*/

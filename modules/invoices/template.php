@@ -1,4 +1,5 @@
 <?php
+error_log("in modules/invoices/template.php which isn't supposed to be used anymore.");
 /*
 * Script: template.php
 * 	invoice template page

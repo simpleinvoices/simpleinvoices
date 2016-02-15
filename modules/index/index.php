@@ -22,14 +22,11 @@ if (empty($billers)   ||
 
 $smarty->assign("mysql"      , $mysql);
 $smarty->assign("db_server"  , $db_server);
-$smarty->assign("biller"     , $biller);
 $smarty->assign("billers"    , $billers);
-$smarty->assign("customer"   , $customer);
 $smarty->assign("customers"  , $customers);
 $smarty->assign("taxes"      , $taxes);
 $smarty->assign("products"   , $products);
 $smarty->assign("preferences", $preferences);
-$smarty->assign("debtor"     , $debtor);
 $smarty->assign('pageActive' , 'dashboard');
 $smarty->assign('active_tab' , '#home');
-// @formatter:off
+// @formatter:on

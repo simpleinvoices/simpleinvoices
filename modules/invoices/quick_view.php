@@ -11,7 +11,7 @@
  *
  * License:
  *   GPL v2 or above
- *	 
+ *     
  * Website:
  *   http://www.simpleinvoices.or
  */
@@ -36,10 +36,10 @@ $eway_check          = new eway();
 $eway_check->invoice = $invoice;
 $eway_pre_check      = $eway_check->pre_check();
 
-#Invoice Age - number of days
+//Invoice Age - number of days
 if ($invoice['owing'] > 0 ) {
     $invoice_age_days =  number_format((strtotime(date('Y-m-d')) - strtotime($invoice['calc_date'])) / (60 * 60 * 24),0);
-	$invoice_age      = "$invoice_age_days {$LANG['days']}";
+    $invoice_age      = "$invoice_age_days {$LANG['days']}";
 }
 else {
     $invoice_age = "";
@@ -52,8 +52,8 @@ $invoice['url_for_pdf'] = $url_for_pdf;
 $customFieldLabels = getCustomFieldLabels('',true);
 
 for($i=1;$i<=4;$i++) {
-	$customField[$i] =
-	   show_custom_field("invoice_cf$i",$invoice["custom_field$i"],"read",'summary', '','',5,':');
+    $customField[$i] =
+       show_custom_field("invoice_cf$i",$invoice["custom_field$i"],"read",'summary', '','',5,':');
 }
 
 $sth =  dbQuery("SELECT * FROM ".TB_PREFIX."products_attributes");

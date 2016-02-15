@@ -91,7 +91,6 @@
       </tr>
     </table>
   </div>
-
   <div id="tabs_customer">
     <ul class="anchors">
       <li><a href="#section-1" target="_top">{$LANG.summary_of_accounts}</a></li>
@@ -233,7 +232,6 @@
       <div class="si_cust_notes">{$customer.notes|outhtml}</div>
     </div>
   </div>
-
   <div class="si_toolbar si_toolbar_form">
     <a href="./index.php?module=customers&amp;view=details&amp;id={$customer.id|urlencode}&amp;action=edit"
        class="positive">
@@ -253,8 +251,8 @@
         <th>{$LANG.customer_name}
           <a class="cluetip" href="#"
              rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field"
-             title="{$LANG.required_field}"> <img
-             src="./images/common/required-small.png" alt="" />
+             title="{$LANG.required_field}">
+            <img src="./images/common/required-small.png" alt="" />
           </a>
         </th>
         <td>
@@ -283,8 +281,8 @@
         <th>{$LANG.street2}
           <a class="cluetip" href="#"
              rel="index.php?module=documentation&amp;view=view&amp;page=help_street2"
-             title="{$LANG.street2}"> <img
-             src="./images/common/help-small.png" alt="" />
+             title="{$LANG.street2}">
+            <img src="./images/common/help-small.png" alt="" />
           </a>
         </th>
         <td>
@@ -378,8 +376,8 @@
         <th>{$customFieldLabel.customer_cf2|htmlsafe}
           <a class="cluetip" href="#"
              rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
-             title="{$LANG.custom_fields}"> <img
-             src="./images/common/help-small.png" alt="" />
+             title="{$LANG.custom_fields}">
+            <img src="./images/common/help-small.png" alt="" />
           </a>
         </th>
         <td>
@@ -393,8 +391,8 @@
         <th>{$customFieldLabel.customer_cf3|htmlsafe}
           <a class="cluetip" href="#"
              rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
-             title="{$LANG.custom_fields}"> <img
-             src="./images/common/help-small.png" alt="" />
+             title="{$LANG.custom_fields}">
+            <img src="./images/common/help-small.png" alt="" />
           </a>
         </th>
         <td>
@@ -408,8 +406,8 @@
         <th>{$customFieldLabel.customer_cf4|htmlsafe}
           <a class="cluetip" href="#"
              rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
-             title="{$LANG.custom_fields}"> <img
-             src="./images/common/help-small.png" alt="" />
+             title="{$LANG.custom_fields}">
+            <img src="./images/common/help-small.png" alt="" />
           </a>
         </th>
         <td>

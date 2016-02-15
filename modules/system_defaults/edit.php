@@ -210,9 +210,7 @@ EOD;
 else if ($_GET["submit"] == "def_payment_type") {
 
 	$payments = getActivePaymentTypes();
-	
-
-	if ($payments == null) {
+	if (empty($payments)) {
 		//no records
 		$display_block_payment_type = "<p><em>{$LANG['payment_type']}</em></p>";
 

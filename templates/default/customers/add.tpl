@@ -16,7 +16,7 @@
   {if $smarty.post.id !=null} 
   {*
     <div class="validation_alert"><img src="./images/common/important.png" alt="" />
-  You must enter a description for the Customer
+      You must enter a description for the Customer
     </div>
     <hr />
   *}
@@ -29,8 +29,8 @@
           <th>{$LANG.customer_name}
             <a class="cluetip" href="#"
                rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field"
-               title="{$LANG.required_field}"> <img
-               src="./images/common/required-small.png" alt="" />
+               title="{$LANG.required_field}">
+              <img src="./images/common/required-small.png" alt="" />
             </a>
           </th>
           <td>
@@ -54,14 +54,15 @@
           <th>{$LANG.street}</th>
           <td>
             <input type="text" name="street_address"
-            value="{$smarty.post.street_address|htmlsafe}" size="25" /></td>
+                   value="{$smarty.post.street_address|htmlsafe}" size="25" />
+          </td>
         </tr>
         <tr>
           <th>{$LANG.street2}
             <a class="cluetip" href="#"
                rel="index.php?module=documentation&amp;view=view&amp;page=help_street2"
-               title="{$LANG.street2}"> <img
-               src="./images/common/help-small.png" alt="" />
+               title="{$LANG.street2}">
+              <img src="./images/common/help-small.png" alt="" />
             </a>
           </th>
           <td><input type="text" name="street_address2"
@@ -132,44 +133,47 @@
           <th>{$customFieldLabel.customer_cf1|htmlsafe}
             <a class="cluetip" href="#"
                rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
-               title="{$LANG.custom_fields}"> <img
-               src="./images/common/help-small.png" alt="" />
+               title="{$LANG.custom_fields}">
+              <img src="./images/common/help-small.png" alt="" />
             </a>
           </th>
           <td><input type="text" name="custom_field1"
                      value="{$smarty.post.custom_field1|htmlsafe}" size="25" /></td>
         </tr>
-        {/if} {if !empty($customFieldLabel.customer_cf2)}
+        {/if}
+        {if !empty($customFieldLabel.customer_cf2)}
         <tr>
           <th>{$customFieldLabel.customer_cf2|htmlsafe}
             <a class="cluetip" href="#"
                rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
-               title="{$LANG.custom_fields}"> <img
-               src="./images/common/help-small.png" alt="" />
+               title="{$LANG.custom_fields}">
+              <img src="./images/common/help-small.png" alt="" />
             </a>
           </th>
           <td><input type="text" name="custom_field2"
                      value="{$smarty.post.custom_field2|htmlsafe}" size="25" /></td>
         </tr>
-        {/if} {if !empty($customFieldLabel.customer_cf3)}
+        {/if}
+        {if !empty($customFieldLabel.customer_cf3)}
         <tr>
           <th>{$customFieldLabel.customer_cf3|htmlsafe}
             <a class="cluetip" href="#"
                rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
-               title="{$LANG.custom_fields}"> <img
-               src="./images/common/help-small.png" alt="" />
+               title="{$LANG.custom_fields}">
+              <img src="./images/common/help-small.png" alt="" />
             </a>
           </th>
           <td><input type="text" name="custom_field3"
                      value="{$smarty.post.custom_field3|htmlsafe}" size="25" /></td>
         </tr>
-        {/if} {if !empty($customFieldLabel.customer_cf4)}
+        {/if}
+        {if !empty($customFieldLabel.customer_cf4)}
         <tr>
           <th>{$customFieldLabel.customer_cf4|htmlsafe}
             <a class="cluetip" href="#"
                rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
-               title="{$LANG.custom_fields}"> <img
-               src="./images/common/help-small.png" alt="" />
+               title="{$LANG.custom_fields}">
+              <img src="./images/common/help-small.png" alt="" />
             </a>
           </th>
           <td><input type="text" name="custom_field4"
@@ -195,9 +199,9 @@
           <img class="button_img" src="./images/common/tick.png" alt="" />
           {$LANG.save}
         </button>
-        <a href="./index.php?module=customers&amp;view=manage"
-           class="negative"> <img src="./images/common/cross.png"
-           alt="" /> {$LANG.cancel}
+        <a href="./index.php?module=customers&amp;view=manage" class="negative">
+          <img src="./images/common/cross.png" alt="" />
+          {$LANG.cancel}
         </a>
       </div>
     </div>

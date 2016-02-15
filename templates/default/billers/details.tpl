@@ -1,12 +1,12 @@
 {*
  * Script: details.tpl
- * Biller details template
+ *   Biller details template
  *
  * Last edited:
  *   2008-08-25
  *
  * License:
- * GPL v3 or above
+ *   GPL v3 or above
  *}
 <form name="frmpost"
       action="index.php?module=billers&amp;view=save&amp;id={$smarty.get.id}"
@@ -83,17 +83,20 @@
         <th>{$customFieldLabel.biller_cf1|htmlsafe}</th>
         <td>{$biller.custom_field1}</td>
       </tr>
-      {/if} {if !empty($customFieldLabel.biller_cf2)}
+      {/if}
+      {if !empty($customFieldLabel.biller_cf2)}
       <tr>
         <th>{$customFieldLabel.biller_cf2|htmlsafe}</th>
         <td>{$biller.custom_field2}</td>
       </tr>
-      {/if} {if !empty($customFieldLabel.biller_cf3)}
+      {/if}
+      {if !empty($customFieldLabel.biller_cf3)}
       <tr>
         <th>{$customFieldLabel.biller_cf3|htmlsafe}</th>
         <td>{$biller.custom_field3}</td>
       </tr>
-      {/if} {if !empty($customFieldLabel.biller_cf4)}
+      {/if}
+      {if !empty($customFieldLabel.biller_cf4)}
       <tr>
         <th>{$customFieldLabel.biller_cf4|htmlsafe}</th>
         <td>{$biller.custom_field4}</td>
@@ -126,9 +129,8 @@
     </table>
   </div>
   <div class="si_toolbar si_toolbar_form">
-    <a href="./index.php?module=billers&amp;view=details&amp;action=edit&amp;id={$biller.id}"
-       class="positive"><img src="./images/famfam/report_edit.png"
-       alt="" />
+    <a href="./index.php?module=billers&amp;view=details&amp;action=edit&amp;id={$biller.id}" class="positive">
+      <img src="./images/famfam/report_edit.png" alt="" />
       {$LANG.edit}
     </a>
   </div>
@@ -141,8 +143,8 @@
         <th>{$LANG.biller_name}
           <a class="cluetip" href="#"
              rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field"
-             title="{$LANG.required_field}"> <img
-             src="./images/common/required-small.png" alt="" />
+             title="{$LANG.required_field}">
+            <img src="./images/common/required-small.png" alt="" />
           </a>
         </th>
         <td><input type="text" name="name"
@@ -158,8 +160,8 @@
         <th>{$LANG.street2}
           <a class="cluetip" href="#"
              rel="index.php?module=documentation&amp;view=view&amp;page=help_street2"
-             title="{$LANG.street2}"> <img
-             src="./images/common/help-small.png" alt="" />
+             title="{$LANG.street2}">
+            <img src="./images/common/help-small.png" alt="" />
           </a>
         </th>
         <td><input type="text" name="street_address2"
@@ -235,44 +237,47 @@
         <th>{$customFieldLabel.biller_cf1|htmlsafe}
           <a class="cluetip" href="#"
              rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
-             title="{$LANG.custom_fields}"> <img
-             src="./images/common/help-small.png" alt="" />
+             title="{$LANG.custom_fields}">
+            <img src="./images/common/help-small.png" alt="" />
           </a>
         </th>
         <td><input type="text" name="custom_field1"
                    value="{$biller.custom_field1|htmlsafe}" size="50"></td>
       </tr>
-      {/if} {if !empty($customFieldLabel.biller_cf2)}
+      {/if}
+      {if !empty($customFieldLabel.biller_cf2)}
       <tr>
         <th>{$customFieldLabel.biller_cf2|htmlsafe}
           <a class="cluetip" href="#"
              rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
-             title="{$LANG.custom_fields}"> <img
-             src="./images/common/help-small.png" alt="" />
+             title="{$LANG.custom_fields}">
+            <img src="./images/common/help-small.png" alt="" />
           </a>
         </th>
         <td><input type="text" name="custom_field2"
                    value="{$biller.custom_field2}" size="50"></td>
       </tr>
-      {/if} {if !empty($customFieldLabel.biller_cf3)}
+      {/if}
+      {if !empty($customFieldLabel.biller_cf3)}
       <tr>
         <th>{$customFieldLabel.biller_cf3|htmlsafe}
           <a class="cluetip" href="#"
              rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
-             title="{$LANG.custom_fields|htmlsafe}"> <img
-             src="./images/common/help-small.png" alt="" />
+             title="{$LANG.custom_fields|htmlsafe}">
+            <img src="./images/common/help-small.png" alt="" />
           </a>
         </th>
         <td><input type="text" name="custom_field3"
                    value="{$biller.custom_field3|htmlsafe}" size="50"></td>
       </tr>
-      {/if} {if !empty($customFieldLabel.biller_cf4)}
+      {/if}
+      {if !empty($customFieldLabel.biller_cf4)}
       <tr>
         <th>{$customFieldLabel.biller_cf4|htmlsafe}
           <a class="cluetip" href="#"
              rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
-             title="{$LANG.custom_fields}"> <img
-             src="./images/common/help-small.png" alt="" />
+             title="{$LANG.custom_fields}">
+            <img src="./images/common/help-small.png" alt="" />
           </a>
         </th>
         <td><input type="text" name="custom_field4"
@@ -283,8 +288,8 @@
         <th>{$LANG.logo_file}
           <a class="cluetip" href="#"
              rel="index.php?module=documentation&amp;view=view&amp;page=help_insert_biller_text"
-             title="{$LANG.logo_file}"> <img
-             src="./images/common/help-small.png" alt="" />
+             title="{$LANG.logo_file}">
+            <img src="./images/common/help-small.png" alt="" />
           </a>
         </th>
         <td>{html_options name=logo output=$files values=$files selected=$biller.logo }</td>
@@ -309,8 +314,8 @@
         {$LANG.save}
       </button>
       <a href="./index.php?module=billers&amp;view=manage"
-         class="negative"> <img src="./images/common/cross.png"
-         alt="" />
+         class="negative">
+        <img src="./images/common/cross.png" alt="" />
         {$LANG.cancel}
       </a>
     </div>

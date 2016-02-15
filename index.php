@@ -30,7 +30,6 @@ $patchCount        = false;
 
 // Note: include/functions.php and include/sql_queries.php loaded by this include.
 require_once ("./include/init.php");
-error_log("GET - " . print_r($_GET,true));
 
 // Remove disabled extensions from the array
 $ext_names = array();
@@ -133,6 +132,7 @@ if (($module == "invoices") && (strstr($view, "template"))) {
     }
     exit(0);
 }
+
 // Check for "api" module or a "xml" or "ajax" "page requeset" (aka view)
 if (strstr($module, "api") || (strstr($view, "xml") || (strstr($view, "ajax")))) {
     $extensionXml = 0;
