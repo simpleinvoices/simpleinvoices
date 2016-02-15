@@ -5,10 +5,11 @@
 			<img src="./images/famfam/money.png" alt="" />
 			{$LANG.statement_of_invoices}
 		</a>
-        {if $report_index == true}
-          {section name=idx loop=$report_extensions}
-            {if $LANG.statements|lower == $report_extensions[idx].section}
-              {include file=$report_extensions[idx].file}
+        {if $perform_extension_insertions == true}
+          {section name=idx loop=$extension_insertion_files}
+            {if $extension_insertion_files[idx].module  == 'reports' &&
+                $extension_insertion_files[idx].section == strtolower($LANG.statements)}
+              {include file=$extension_insertion_files[idx].file}
             {/if}
           {/section}
         {/if}
@@ -28,10 +29,11 @@
 			<img src="./images/famfam/money.png" alt="" />
 			{$LANG.sales_by_customers} 
 		</a>					  
-        {if $report_index == true}
-          {section name=idx loop=$report_extensions}
-            {if $LANG.sales|lower == $report_extensions[idx].section}
-              {include file=$report_extensions[idx].file}
+        {if $perform_extension_insertions == true}
+          {section name=idx loop=$extension_insertion_files}
+            {if $extension_insertion_files[idx].module  == 'reports' &&
+                $extension_insertion_files[idx].section == strtolower($LANG.sales)}
+              {include file=$extension_insertion_files[idx].file}
             {/if}
           {/section}
         {/if}
@@ -44,10 +46,11 @@
 				<img src="./images/famfam/money.png" alt="" />
 				{$LANG.profit_per_invoice}
 			</a>
-        {if $report_index == true}
-          {section name=idx loop=$report_extensions}
-            {if $LANG.debtors|lower == $report_extensions[idx].section}
-              {include file=$report_extensions[idx].file}
+        {if $perform_extension_insertions == true}
+          {section name=idx loop=$extension_insertion_files}
+            {if $extension_insertion_files[idx].module  == 'reports' &&
+                $extension_insertion_files[idx].section == strtolower($LANG.debtors)}
+              {include file=$extension_insertion_files[idx].file}
             {/if}
           {/section}
         {/if}
@@ -60,10 +63,11 @@
 			<img src="./images/famfam/money_delete.png" alt="" />
 			{$LANG.total_taxes}
 		</a>
-        {if $report_index == true}
-          {section name=idx loop=$report_extensions}
-            {if $LANG.tax|lower == $report_extensions[idx].section}
-              {include file=$report_extensions[idx].file}
+        {if $perform_extension_insertions == true}
+          {section name=idx loop=$extension_insertion_files}
+            {if $extension_insertion_files[idx].module  == 'reports' &&
+                $extension_insertion_files[idx].section == strtolower($LANG.tax)}
+              {include file=$extension_insertion_files[idx].file}
             {/if}
           {/section}
         {/if}
@@ -79,10 +83,11 @@
 			<img src="./images/famfam/cart.png" alt="" />
 			{$LANG.products_by_customer}
 		</a>
-        {if $report_index == true}
-          {section name=idx loop=$report_extensions}
-            {if $LANG.products|lower == $report_extensions[idx].section}
-              {include file=$report_extensions[idx].file}
+        {if $perform_extension_insertions == true}
+          {section name=idx loop=$extension_insertion_files}
+            {if $extension_insertion_files[idx].module  == 'reports' &&
+                $extension_insertion_files[idx].section == strtolower($LANG.products)}
+              {include file=$extension_insertion_files[idx].file}
             {/if}
           {/section}
         {/if}
@@ -98,10 +103,11 @@
 			<img src="./images/famfam/user_suit.png" alt="" />
 			{$LANG.biller_sales_by_customer_totals} {* TODO change this - remove total *}
 		</a>
-        {if $report_index == true}
-          {section name=idx loop=$report_extensions}
-            {if $LANG.biller_sales|lower == $report_extensions[idx].section}
-              {include file=$report_extensions[idx].file}
+        {if $perform_extension_insertions == true}
+          {section name=idx loop=$extension_insertion_files}
+            {if $extension_insertion_files[idx].module  == 'reports' &&
+                $extension_insertion_files[idx].section == strtolower($LANG.biller_sales)}
+              {include file=$extension_insertion_files[idx].file}
             {/if}
           {/section}
         {/if}
@@ -125,10 +131,11 @@
 			<img src="./images/famfam/vcard.png" alt="" />
 			 {$LANG.total_by_aging_periods}
 		</a>
-        {if $report_index == true}
-          {section name=idx loop=$report_extensions}
-            {if $LANG.debtors|lower == $report_extensions[idx].section}
-              {include file=$report_extensions[idx].file}
+        {if $perform_extension_insertions == true}
+          {section name=idx loop=$extension_insertion_files}
+            {if $extension_insertion_files[idx].module  == 'reports' &&
+                $extension_insertion_files[idx].section == strtolower($LANG.debtors)}
+              {include file=$extension_insertion_files[idx].file}
             {/if}
           {/section}
         {/if}
@@ -140,10 +147,11 @@
 			<img src="./images/famfam/database.png" alt="" />
 			{$LANG.database_log}
 		</a>
-        {if $report_index == true}
-          {section name=idx loop=$report_extensions}
-            {if $LANG.other|lower == $report_extensions[idx].section}
-              {include file=$report_extensions[idx].file}
+        {if $perform_extension_insertions == true}
+          {section name=idx loop=$extension_insertion_files}
+            {if $extension_insertion_files[idx].module  == 'reports' &&
+                $extension_insertion_files[idx].section == strtolower($LANG.other)}
+              {include file=$extension_insertion_files[idx].file}
             {/if}
           {/section}
         {/if}
