@@ -316,22 +316,26 @@ $extensionTemplates = 0;
 $my_tpl_path = '';
 
 $path = '';
-// This change allows the index.tpl set up for report in an extension, to
-// contain just the few lines needed for that report to show in the
-// templates/default/reports/index.tpl file. For an example, look at the
-// extension/past_due_report/templates/default/index.tpl file. Note the
-// "data-section" attribute in the \<span\> tag. The value in this tag
+// This change allows template files modified with necessary logic, to
+// include sections defined in extentions. The benefit is that multiple
+// extensions that affect the same tpl file can be written without being
+// concerned that the tpl file for one extension will overwrite the tpl
+// for another extension. For an example, look at the file,
+// "extension/past_due_report/templates/default/index.tpl." Note the
+// "data-section" attribute in the <span> tag. The value in this tag
 // is what allows logic in the reports default index.tpl to know where
-// to include the extension's index.tpl file.
-$report_extensions = array();
-$report_index = ($module == 'reports' && $view == 'index');
+// to include the past_due_report extension's index.tpl file.
+$extension_insertion_files = array();
+$perform_extension_insertions =
+    (($module == 'reports'         && $view == 'index') ||
+     ($module == 'system_defaults' && $view == 'manage'));
 
 foreach ($ext_names as $ext_name) {
     if (file_exists("./extensions/$ext_name/templates/default/$module/$view.tpl")) {
-        // If $report_index is true, the $path and $extensionTemplates are not set/incremented intentionally.
+        // If $perform_extension_insertions is true, the $path and $extensionTemplates are not set/incremented intentionally.
         // The logic runs through the normal report template logic with the index.tpl files for each one
         // of the extensions reports will be loaded for the section it goes in.
-        if ($report_index) {
+        if ($perform_extension_insertions) {
             $tpl_file = "./extensions/$ext_name/templates/default/$module/$view.tpl";
             $content = file_get_contents($tpl_file);
             if (($pos = strpos($content, 'data-section="{$LANG')) === false) {
@@ -347,8 +351,13 @@ foreach ($ext_names as $ext_name) {
                 }
             }
             $section = strtolower($section);
-            $vals = array("file" => "." . $tpl_file, "section" => $section, "added" => "0");
-            $report_extensions[] = $vals;
+            // @formatter:off
+            $vals = array("file"    => "." . $tpl_file,
+                          "module"  => $module,
+                          "section" => $section,
+                          "added"   => "0");
+            $extension_insertion_files[] = $vals;
+            // @formatter:on
         } else {
             $path = "../extensions/$ext_name/templates/default/$module/";
             $my_tpl_path = "../extensions/{$ext_name}/templates/default/$module/$view.tpl";
@@ -366,11 +375,13 @@ if ($extensionTemplates == 0) {
         $extensionTemplates++;
     }
 }
+error_log("perform_extension_insertions[$perform_extension_insertions]");
+error_log(print_r($extension_insertion_files,true));
 
 // @formatter:off
-$smarty->assign("report_extensions", $report_extensions);
-$smarty->assign("report_index"     , $report_index);
-$smarty->assign("path"             ,$path);
+$smarty->assign("extension_insertion_files"   , $extension_insertion_files);
+$smarty->assign("perform_extension_insertions", $perform_extension_insertions);
+$smarty->assign("path"                        ,$path);
 $smarty->$smarty_output($my_tpl_path);
 // @formatter:on
 
