@@ -1,0 +1,15 @@
+Add the custom flags feature to Simple Invoices.
+This will add the "Custom Flags" menu option to the Settings.
+The first time this menu option is selected, a new database table,
+si_custom_flags, will be created and populated. Also, a new field,
+custom_flags, will be added to the tables that can have custom flags
+set. Currently only the products table (si_products) can have custom
+flags. A maximum of 10 custom flags can be defined for a table. Once
+the tables have been created/updated, the new, si_custom_flags table
+will be populated. The Settings/Custom Flags option will allow you to
+enter information for each flag you wish to define and to enable them.
+Once enabled, the flag option will appear in the maintenance screen for
+the tables that support them (aka Products).
+
+NOTE: To enable the "field_help" feature, the "documentation" enhancement
+extension needs to be enabled.
