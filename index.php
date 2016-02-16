@@ -194,16 +194,42 @@ if (!in_array($module . "_" . $view, $early_exit)) {
 // **********************************************************
 // Include php file for the requested page section - START
 // **********************************************************
-$extensionPHPFile = 0;
+// This change allows template files modified with necessary logic, to
+// include sections defined in extentions. The benefit is that multiple
+// extensions that affect the same tpl file can be written without being
+// concerned that the tpl file for one extension will overwrite the tpl
+// for another extension. For an example, look at the file,
+// "extension/past_due_report/templates/default/index.tpl." Note the
+// "data-section" attribute in the <span> tag. The value in this tag
+// is what allows logic in the reports default index.tpl to know where
+// to include the past_due_report extension's index.tpl file.
+$extension_php_insert_files = array();
+$perform_extension_php_insertions =
+    (($module == 'system_defaults' && $view == 'edit'));
+
+    $extensionPhpFile = 0;
 foreach ($ext_names as $ext_name) {
-    if (file_exists("./extensions/$ext_name/modules/$module/$view.php")) {
-        include_once ("./extensions/$ext_name/modules/$module/$view.php");
-        $extensionPHPFile++;
+    $phpfile = "./extensions/$ext_name/modules/$module/$view.php";
+    if (file_exists($phpfile)) {
+        // If $perform_extension_php_insertions is true, then the extension php
+        // file content is to be included in the standard php file. Otherwise,
+        // the file is a replacement for the standard php file.
+        if ($perform_extension_php_insertions) {
+            // @formatter:off
+            $vals = array("file"   => $phpfile,
+                          "module" => $module,
+                          "view"   => $view);
+            $extension_php_insert_files[$ext_name] = $vals;
+            // @formatter:on
+        } else {
+            include $phpfile;
+            $extensionPhpFile++;
+        }
     }
 }
 
-if (($extensionPHPFile == 0) && $my_path = getCustomPath("$module/$view", 'module')) {
-    include ($my_path);
+if ($extensionPhpFile == 0 && ($my_path = getCustomPath("$module/$view", 'module'))) {
+    include $my_path;
 }
 // **********************************************************
 // Include php file for the requested page section - END
@@ -327,16 +353,16 @@ $path = '';
 // to include the past_due_report extension's index.tpl file.
 $extension_insertion_files = array();
 $perform_extension_insertions =
-    (($module == 'reports'         && $view == 'index') ||
+    (($module == 'reports'         && $view == 'index')  ||
      ($module == 'system_defaults' && $view == 'manage'));
 
 foreach ($ext_names as $ext_name) {
-    if (file_exists("./extensions/$ext_name/templates/default/$module/$view.tpl")) {
+    $tpl_file = "./extensions/$ext_name/templates/default/$module/$view.tpl";
+    if (file_exists($tpl_file)) {
         // If $perform_extension_insertions is true, the $path and $extensionTemplates are not set/incremented intentionally.
         // The logic runs through the normal report template logic with the index.tpl files for each one
         // of the extensions reports will be loaded for the section it goes in.
         if ($perform_extension_insertions) {
-            $tpl_file = "./extensions/$ext_name/templates/default/$module/$view.tpl";
             $content = file_get_contents($tpl_file);
             if (($pos = strpos($content, 'data-section="{$LANG')) === false) {
                 $section = $smarty->_tpl_vars['LANG']['other'];
@@ -354,13 +380,12 @@ foreach ($ext_names as $ext_name) {
             // @formatter:off
             $vals = array("file"    => "." . $tpl_file,
                           "module"  => $module,
-                          "section" => $section,
-                          "added"   => "0");
+                          "section" => $section);
             $extension_insertion_files[] = $vals;
             // @formatter:on
         } else {
             $path = "../extensions/$ext_name/templates/default/$module/";
-            $my_tpl_path = "../extensions/{$ext_name}/templates/default/$module/$view.tpl";
+            $my_tpl_path = "." . $tpl_file;
             $extensionTemplates++;
         }
     }
@@ -375,8 +400,6 @@ if ($extensionTemplates == 0) {
         $extensionTemplates++;
     }
 }
-error_log("perform_extension_insertions[$perform_extension_insertions]");
-error_log(print_r($extension_insertion_files,true));
 
 // @formatter:off
 $smarty->assign("extension_insertion_files"   , $extension_insertion_files);

@@ -77,5 +77,14 @@
 			<td><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=large_dataset'><img src="images/common/edit.png" title="{$LANG.edit}" alt="{$LANG.edit}" /></a></td>
 			<td>{$defaultLargeDataset|htmlsafe}</td>
 		</tr>
+        {* This section will insert any extensions that add system-default fields *}
+        {if $perform_extension_insertions}
+          {section name=idx loop=$extension_insertion_files}
+            {if $extension_insertion_files[idx].module  == 'system_defaults'}
+              {include file=$extension_insertion_files[idx].file}
+            {/if}
+          {/section}
+        {/if}
+
 	</table>
 </div> 
