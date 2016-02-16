@@ -1,0 +1,5 @@
+Modify field documentation to support custom help via the "help" keyword.
+
+Ex: Note the "help=" that is followed by the field help information.
+
+<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;help={$cflg.field_help}" title="{$LANG.custom_flags_upper}"><img src="./images/common/help-small.png" alt="" /></a>
