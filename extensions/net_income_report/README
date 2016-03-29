@@ -1,0 +1,7 @@
+Net Income Report w/Custom Flag Exclusion Option.
+This report includes only information for Invoice type documents
+by date range. If the Custom Flags extension is enabled, the
+option to exclude invoice items with a specified custom flag
+set. This is useful if there are items included on invoices
+that are non-income items. For instance, costs that are pre-paid
+by the client and should not be reported as income.
