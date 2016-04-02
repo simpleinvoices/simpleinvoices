@@ -1,3 +1,10 @@
-This extension changes the screen that you are returned to after posting
-a payment. Rather than the default "Payments" screen, you will return to
-the "Invoices screen.
+This extension adds the check number field to the payment table and 
+changes the logic to return to the "Invoices" screen rather than the
+"Payments" screen after a payment is posted.
+
+After this extension is enabled, the first time you access a payment
+screen the new "ac_check_number" field will be added to the payment
+table. If there is a check number in the "ac_notes" field, it will be
+moved to the new "ac_check_number" field. Check numbers in the notes
+field must be at the front of the notes field. It can begin with a
+hashtag, "#", or not.
