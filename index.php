@@ -142,7 +142,6 @@ if (strstr($module, "api") || (strstr($view, "xml") || (strstr($view, "ajax"))))
             $extensionXml++;
         }
     }
-
     // Load default if none found for enabled extensions.
     if ($extensionXml == 0 && $my_path = getCustomPath("$module/$view", 'module')) {
         include ($my_path);
@@ -162,7 +161,7 @@ $extension_jquery_files = "";
 foreach ($ext_names as $ext_name) {
     if (file_exists("./extensions/$ext_name/include/jquery/$ext_name.jquery.ext.js")) {
         // @formatter:off
-        $extension_jquery_files .= 
+        $extension_jquery_files .=
             '<script type="text/javascript" src="./extensions/' .
                      $ext_name . '/include/jquery/' .
                      $ext_name . '.jquery.ext.js">' .
@@ -404,7 +403,7 @@ if ($extensionTemplates == 0) {
 // @formatter:off
 $smarty->assign("extension_insertion_files"   , $extension_insertion_files);
 $smarty->assign("perform_extension_insertions", $perform_extension_insertions);
-$smarty->assign("path"                        ,$path);
+$smarty->assign("path"                        , $path);
 $smarty->$smarty_output($my_tpl_path);
 // @formatter:on
 

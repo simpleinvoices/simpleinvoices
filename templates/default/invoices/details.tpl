@@ -129,7 +129,7 @@
             {/section}
             </tr>
           </table>
-        <td>
+        </td>
       </tr>
       {$customFields.1} {$customFields.2} {$customFields.3} {$customFields.4}
       {* {showCustomFields categorieId="4" itemId=$smarty.get.invoice} *}
@@ -275,7 +275,7 @@
         {/if}
         </td>
       </tr>
-    {* This is the end of the non-terminated tables in the IF statements *>
+    {* This is the end of the non-terminated tables in the IF statements *}
     </table>
     <div class="si_toolbar si_toolbar_form">
       <button type="submit" class="invoice_save positive"
