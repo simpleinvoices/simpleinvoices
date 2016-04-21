@@ -18,7 +18,6 @@ class email
 	function send()
 	{
 		global $config;
-		//echo "export show data";
 		
 		$mail = new PHPMailer(true);
 
@@ -50,6 +49,7 @@ class email
 					$mail->addBCC($bcc);
 				}
 			}
+
 			//allow self signed certs
 			$mail->SMTPOptions = array(
 					'ssl' => array(
@@ -60,14 +60,11 @@ class email
 					);
 			if($this->attachment)
 			{
-				// Create attachment
 				$mail->addAttachment('./tmp/cache/'.$this->attachment);
 			}
 			$mail->Send();
 
 		} catch  (phpmailerException $e) {
-			echo $e->errorMessage(); //Pretty error messages from PHPMailer
-		} catch (Exception $e) {
 			echo '<strong>Mail Protocol Exception:</strong> ' .  $e->getMessage();
 			exit;
 		}
