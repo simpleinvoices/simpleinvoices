@@ -50,14 +50,26 @@ class email
 				}
 			}
 
-			//allow self signed certs
+			//Custom connection options
 			$mail->SMTPOptions = array(
-					'ssl' => array(
-						'verify_peer' => false,
-						'verify_peer_name' => false,
-						'allow_self_signed' => true
-						)
-					);
+				//allow self signed certs
+				'ssl' => array(
+					'verify_peer' => false,
+					'verify_peer_name' => false,
+					'allow_self_signed' => true
+				)
+				/* More secure SMTP settings - certs required */
+				/*
+				   'ssl' => array(
+				   'verify_peer'  => true,
+				   'verify_depth' => 3,
+				   'allow_self_signed' => true,
+				   'peer_name' => 'smtp.example.com',
+				   'cafile' => '/etc/ssl/ca_cert.pem',
+				   )
+				 */
+			);
+
 			if($this->attachment)
 			{
 				$mail->addAttachment('./tmp/cache/'.$this->attachment);
