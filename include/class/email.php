@@ -20,55 +20,55 @@ class email
 		global $config;
 		//echo "export show data";
 		
-		// Create authentication with SMTP server
-		$authentication = array();
-		if($config->email->smtp_auth == true) {
-			$authentication = array(
-				'auth' => 'login',
-				'username' => $config->email->username,
-				'password' => $config->email->password,
-				'ssl' => $config->email->secure,
-				'port' => $config->email->smtpport
-				);
-		}
-		$transport = new Zend_Mail_Transport_Smtp($config->email->host, $authentication);
+		$mail = new PHPMailer(true);
 
-		// Create e-mail message
-		$mail = new Zend_Mail('utf-8');
-		$mail->setType(Zend_Mime::MULTIPART_MIXED);
-		$mail->setBodyText($this->notes);
-		$mail->setBodyHTML($this->notes);
-		$mail->setFrom($this->from, $this->from_friendly);
-
-		$to_addresses = preg_split('/\s*[,;]\s*/', $this->to);
-		if (!empty($to_addresses)) {
-			foreach ($to_addresses as $to) {
-			    $mail->addTo($to);
-		   }
-		}
-		if (!empty($this->bcc)) {
-		    $bcc_addresses = preg_split('/\s*[,;]\s*/', $this->bcc);
-		foreach ($bcc_addresses as $bcc) {
-				$mail->addBcc($bcc);
-			}
-		}
-		$mail->setSubject($this->subject);
-
-        if($this->attachment)
-        {
-            // Create attachment
-            #$spc2us_pref = str_replace(" ", "_", $preference[pref_inv_wording]);
-            $content = file_get_contents('./tmp/cache/'.$this->attachment);
-            $at = $mail->createAttachment($content);
-            $at->type = 'application/pdf';
-            $at->disposition = Zend_Mime::DISPOSITION_ATTACHMENT;
-            $at->filename = $this->attachment;
-        }
-		// Send e-mail through SMTP
 		try {
-			$mail->send($transport);
-		} catch(Zend_Mail_Protocol_Exception $e) {
-			echo '<strong>Zend Mail Protocol Exception:</strong> ' .  $e->getMessage();
+			$mail->Host = $config->email->host;
+
+			if($config->email->smtp_auth == true) {
+				$mail->SMTPAuth = true;
+				$mail->Username = $config->email->username;
+				$mail->Password = $config->email->password;
+				$mail->SMTPSecure = $config->email->secure;
+				$mail->Port = $config->email->smtpport;
+			}
+
+			$mail->isHTML(true);
+			$mail->Subject = $this->subject;
+			$mail->msgHTML($this->notes);
+			$mail->setFrom($this->from, $this->from_friendly);
+
+			$to_addresses = preg_split('/\s*[,;]\s*/', $this->to);
+			if (!empty($to_addresses)) {
+				foreach ($to_addresses as $to) {
+					$mail->addAddress($to);
+				}
+			}
+			if (!empty($this->bcc)) {
+				$bcc_addresses = preg_split('/\s*[,;]\s*/', $this->bcc);
+				foreach ($bcc_addresses as $bcc) {
+					$mail->addBCC($bcc);
+				}
+			}
+			//allow self signed certs
+			$mail->SMTPOptions = array(
+					'ssl' => array(
+						'verify_peer' => false,
+						'verify_peer_name' => false,
+						'allow_self_signed' => true
+						)
+					);
+			if($this->attachment)
+			{
+				// Create attachment
+				$mail->addAttachment('./tmp/cache/'.$this->attachment);
+			}
+			$mail->Send();
+
+		} catch  (phpmailerException $e) {
+			echo $e->errorMessage(); //Pretty error messages from PHPMailer
+		} catch (Exception $e) {
+			echo '<strong>Mail Protocol Exception:</strong> ' .  $e->getMessage();
 			exit;
 		}
 
@@ -78,40 +78,40 @@ class email
 		switch ($this->format)
 		{
 			case "invoice":
-			{
+				{
 
-				// Create succes message
-				$message  = "<meta http-equiv=\"refresh\" content=\"2;URL=index.php?module=invoices&amp;view=manage\">";
-				$message .= "<br />$this->attachment has been emailed";
+					// Create succes message
+					$message  = "<meta http-equiv=\"refresh\" content=\"2;URL=index.php?module=invoices&amp;view=manage\">";
+					$message .= "<br />$this->attachment has been emailed";
 
-				break;
-			}	
+					break;
+				}	
 			case "statement":
-			{
+				{
 
-				// Create succes message
-				$message  = "<meta http-equiv=\"refresh\" content=\"2;URL=index.php?module=statement&amp;view=index\">";
-				$message .= "<br />$this->attachment has been emailed";
+					// Create succes message
+					$message  = "<meta http-equiv=\"refresh\" content=\"2;URL=index.php?module=statement&amp;view=index\">";
+					$message .= "<br />$this->attachment has been emailed";
 
-				break;
-			}	
+					break;
+				}	
 			case "cron":
-			{
+				{
 
-				// Create succes message
-				$message .= "<br />Cron email for today has been sent";
+					// Create succes message
+					$message .= "<br />Cron email for today has been sent";
 
-				break;
-			}
+					break;
+				}
 			case "cron_invoice":
-			{
+				{
 
-				// Create succes message
-				$message .= "$this->attachment has been emailed";
+					// Create succes message
+					$message .= "$this->attachment has been emailed";
 
-				break;
-			
-			}	
+					break;
+
+				}	
 		}	
 
 
@@ -119,56 +119,56 @@ class email
 		return $message;
 	}
 
-    public function set_subject($type='')
-    {
+	public function set_subject($type='')
+	{
 
 		switch ($type)
 		{
 			case "invoice_eway":
-			{
+				{
 
-				$message = "$this->invoice_name ready for automatic credit card payment";
+					$message = "$this->invoice_name ready for automatic credit card payment";
 
-				break;
-			}	
+					break;
+				}	
 			case "invoice_eway_receipt":
-			{
+				{
 
-				$message = "$this->invoice_name secure credit card payment successful";
+					$message = "$this->invoice_name secure credit card payment successful";
 
-				break;
-			}	
+					break;
+				}	
 			case "invoice_receipt":
-			{
+				{
 
-				$message = "$this->attachment has been emailed";
+					$message = "$this->attachment has been emailed";
 
-				break;
-			}	
+					break;
+				}	
 			case "invoice":
-            default:
-			{
+			default:
+				{
 
-				$message = "$this->attachment from $this->from_friendly";
+					$message = "$this->attachment from $this->from_friendly";
 
-				break;
-			}	
-        }    
-    
-        return $message;
-    }
+					break;
+				}	
+		}    
 
-    public function get_admin_email()
-    {
-    
-        global $db;
+		return $message;
+	}
+
+	public function get_admin_email()
+	{
+
+		global $db;
 		$domain_id = domain_id::get($this->domain_id);
-    
-        $sql = "select email from si_user where role_id = '1' and domain_id =:domain_id LIMIT 1";
-        $sth  = $db->query($sql,':domain_id',$domain_id) or die(htmlsafe(end($dbh->errorInfo())));
- 
-        return $sth->fetchColumn();
 
-    }
+		$sql = "select email from si_user where role_id = '1' and domain_id =:domain_id LIMIT 1";
+		$sth  = $db->query($sql,':domain_id',$domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+
+		return $sth->fetchColumn();
+
+	}
 
 }
