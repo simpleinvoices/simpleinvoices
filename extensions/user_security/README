@@ -1,0 +1,7 @@
+Adds session_timeout to si_system_defaults table. Currently, the system
+will timeout in 2 hours. This extenson allows you to specify the timeout
+period and to renew the timeout period upon SI entry.. The default
+timeout period will be set to 15 minutes. As long as users make entries
+within this limit, their session timeout interval will be renewed to
+another 15 minutes. If the default is not sufficient, you can change it
+to any value from 10 to 999 minutes.
