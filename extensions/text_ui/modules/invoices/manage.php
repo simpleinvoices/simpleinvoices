@@ -41,9 +41,6 @@ $url = getURL();
 $xml_file = $url . '/index.php?module=invoices&view=xml&page=' . $page;
 $smarty->assign('xml', $xml_file);
 
-// $xml = simplexml_load_file($xml_file);
-//$smarty->assign('xml', $xml);
-
 $smarty->assign('page', $page);
 $smarty->assign('page_prev', $page_prev);
 $smarty->assign('page_next', $page_next);

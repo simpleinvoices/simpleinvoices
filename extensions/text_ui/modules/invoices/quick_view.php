@@ -65,7 +65,6 @@ $customerAccount = null;
 $customerAccount['total'] = calc_customer_total($customer['id']);
 $customerAccount['paid']  = calc_customer_paid($customer['id']);;
 $customerAccount['owing'] = $customerAccount['total'] - $customerAccount['paid'];
-error_log("index.php 170");
 
 $smarty->assign('pageActive'       , $pageActive);
 $smarty->assign("customField"      , $customField);

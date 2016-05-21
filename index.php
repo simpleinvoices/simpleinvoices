@@ -15,7 +15,7 @@ if (!defined("BROWSE")) define("BROWSE", "browse");
 // **********************************************************
 
 // Load stuff required before init.php
-require_once ("./include/init_pre.php");
+require_once "./include/init_pre.php";
 
 // @formatter:off
 $module = isset($_GET['module']) ? filenameEscape($_GET['module']) : null;
@@ -29,7 +29,7 @@ $patchCount        = false;
 // @formatter:on
 
 // Note: include/functions.php and include/sql_queries.php loaded by this include.
-require_once ("./include/init.php");
+require_once "./include/init.php";
 
 // Remove disabled extensions from the array
 $ext_names = array();
@@ -203,8 +203,7 @@ if (!in_array($module . "_" . $view, $early_exit)) {
 // is what allows logic in the reports default index.tpl to know where
 // to include the past_due_report extension's index.tpl file.
 $extension_php_insert_files = array();
-$perform_extension_php_insertions =
-    (($module == 'system_defaults' && $view == 'edit'));
+$perform_extension_php_insertions = (($module == 'system_defaults' && $view == 'edit'));
 
     $extensionPhpFile = 0;
 foreach ($ext_names as $ext_name) {
@@ -234,7 +233,7 @@ if ($extensionPhpFile == 0 && ($my_path = getCustomPath("$module/$view", 'module
 // Include php file for the requested page section - END
 // **********************************************************
 
-if ($module == "export" or $view == "export" or $module == "api") {
+if ($module == "export" || $view == "export" || $module == "api") {
     exit(0);
 }
 
@@ -341,15 +340,19 @@ $extensionTemplates = 0;
 $my_tpl_path = '';
 
 $path = '';
-// This change allows template files modified with necessary logic, to
-// include sections defined in extentions. The benefit is that multiple
-// extensions that affect the same tpl file can be written without being
-// concerned that the tpl file for one extension will overwrite the tpl
-// for another extension. For an example, look at the file,
-// "extension/past_due_report/templates/default/index.tpl." Note the
-// "data-section" attribute in the <span> tag. The value in this tag
-// is what allows logic in the reports default index.tpl to know where
-// to include the past_due_report extension's index.tpl file.
+// For extensions with a report, this logic allows them to be inserted into the
+// the report menu (index.tpl) without having to replicate the content of that
+// file. There two ways to insert content; either as a new menu section or as
+// an appendage to an existing section. There are examples of each of these.
+// Refer to the "expense" extension report index.tpl file for insertion of
+// a new menu section. Note the "data-section" with the "BEFORE" entry. This
+// tells the program to insert the menu before the menu section with the
+// "$LANG.xxxxx" value that appears following the "BEFORE" statement. To
+// append to an existing menu section, refer to the report index.tpl file
+// for the "past_due_report" extension. Note the "data-section" attribute
+// in the "<span ...>" tag. This tells the program to insert the report
+// menu item at the end of the section with "$LANG.xxxxx" value assigned
+// to the attribute.
 $extension_insertion_files = array();
 $perform_extension_insertions =
     (($module == 'reports'         && $view == 'index')  ||
@@ -363,23 +366,27 @@ foreach ($ext_names as $ext_name) {
         // of the extensions reports will be loaded for the section it goes in.
         if ($perform_extension_insertions) {
             $content = file_get_contents($tpl_file);
-            if (($pos = strpos($content, 'data-section="{$LANG')) === false) {
+            if (($pos = strpos($content,'data-section="')) === false) {
                 $section = $smarty->_tpl_vars['LANG']['other'];
             } else {
-                $pos += 21;
-                if (($end = strpos($content, '}"', $pos)) === false) {
-                    $section = $smarty->_tpl_vars['LANG']['other'];
+                $pos += 14;
+                $str = substr($content,$pos);
+                if (preg_match('/^BEFORE \{\$LANG\./', $str)) {
+                    $pos += 14;
+                    $type = "BEFORE ";
                 } else {
+                    $pos += 7;
+                    $type = "";
+                }
+                $end = strpos($content, '}', $pos);
                     $len = $end - $pos;
                     $lang_element = substr($content, $pos, $len);
                     $section = $smarty->_tpl_vars['LANG'][$lang_element];
                 }
-            }
-            $section = strtolower($section);
             // @formatter:off
             $vals = array("file"    => "." . $tpl_file,
                           "module"  => $module,
-                          "section" => $section);
+                          "section" => $type . $section);
             $extension_insertion_files[] = $vals;
             // @formatter:on
         } else {
@@ -391,8 +398,9 @@ foreach ($ext_names as $ext_name) {
 }
 
 // TODO: if more than one extension has a template for the requested file, thats trouble :(
-// This won't happen for reports given the changes with the addition of logic for
-// "report_extensions" and "report_index".
+// This won't happen for reports, standard menu.tpl and system_defaults menu.tpl given
+// changes implimented in this file for them. Similar changes should be implimented for
+// other templates as needed.
 if ($extensionTemplates == 0) {
     if ($my_tpl_path = getCustomPath("$module/$view")) {
         $path = dirname($my_tpl_path) . '/';

@@ -105,7 +105,7 @@ if (empty($query)) {
     $sth = dbQuery($sql, ':domain_id', $domain_id, ':query', "%$query%");
 }
 $invoices = $sth->fetchAll(PDO::FETCH_ASSOC);
-error_log("xml.php - " . print_r($invoices,true));
+
 $sqlTotal = "SELECT count(id) AS count FROM " . TB_PREFIX . "invoices WHERE domain_id = :domain_id";
 $tth = dbQuery($sqlTotal, ':domain_id', $domain_id);
 $resultCount = $tth->fetch();
@@ -128,7 +128,6 @@ foreach ($invoices as $row) {
     $xml .= "</row>";
 }
 $xml .= "</rows>";
-error_log("xml[$xml]");
 echo $xml;
 
 ?> 

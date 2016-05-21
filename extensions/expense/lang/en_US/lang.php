@@ -1,9 +1,10 @@
 <?php
 // @formatter:off
 $LCL_LANG = array(
+                'add_new_expense' => "Add new expense",
                 'add_new_expense_account' => "Add new account",
                 'expenses' => "Expenses",
-                'expense_accounts' => "Expense Accounts",
+                'expense_accounts' => "Expense accounts",
                 'not_paid' => "Not paid",
                 'paid' => "Paid",
                 'save_expense_failure' => "Something went wrong, please try saving the expense again",
