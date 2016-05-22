@@ -19,7 +19,7 @@ class UserSecurity {
             $ext_id = getExtensionID('user_security');
             $sql = "INSERT INTO `" . TB_PREFIX . "system_defaults`
                      (`domain_id`,`name`           ,`value`,`extension_id`)
-              VALUES ($domain_id, 'user_security', 15    , $ext_id);";
+              VALUES ($domain_id, 'session_timeout', 15    , $ext_id);";
             if (!($sth = dbQuery($sql))) {
                 $arr = $sth->errorInfo();
                 error_log('UserSecurity - addSessionTimeout(): Failed to insert new record. sql[' . $sql . ']');
