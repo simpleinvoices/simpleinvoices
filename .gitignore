@@ -1,6 +1,15 @@
-custom.config.ini
+custom.config.php
 %%*
 *.tpl.php
 zend_cache---*
 *.log
-tmp/cache/*
+tmp/**
+.buildpath
+.project
+.settings/**
+templates/invoices/**
+!templates/invoices/default/**
+!templates/invoices/export/**
+!templates/invoices/logos/_default_blank_logo.png
+!templates/invoices/logos/simple_invoices_logo.png
+!templates/invoices/logos/ubuntulogo.png
