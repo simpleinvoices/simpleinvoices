@@ -8,7 +8,6 @@
 $menu = false;
 
 if (!defined("BROWSE")) define("BROWSE", "browse");
-error_log("patchCount[$patchCount]");
 
 // The error on any authentication attempt needs to be the same for all situations.
 if (!defined("STD_LOGIN_FAILED_MSG")) define("STD_LOGIN_FAILED_MSG", "Invalid User ID and/or Password!");
