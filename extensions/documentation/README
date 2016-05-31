@@ -1,5 +1,9 @@
 Modify field documentation to support custom help via the "help" keyword.
 
-Ex: Note the "help=" that is followed by the field help information.
+Note the "help=" that is followed by an object field (ie Database field)
+help information. This is useful when you want to have a user definable
+help message associated with a particular database field.
 
-<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;help={$cflg.field_help}" title="{$LANG.custom_flags_upper}"><img src="./images/common/help-small.png" alt="" /></a>
+Ex:
+<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;help={$cflg.field_help}"
+   title="{$LANG.custom_flags_upper}"><img src="./images/common/help-small.png" alt="" /></a>
