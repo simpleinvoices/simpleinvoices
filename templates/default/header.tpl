@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html
-		PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
 {strip}
 	{include file='../custom/hooks.tpl'}
-	{assign var='tmp_lang_module' value="title_module_`$module`"}{assign var='tmp_lang_module' value=$LANG.$tmp_lang_module|default:$LANG.$module|default:$module}
-	{assign var='tmp_lang_view' value="title_view_`$view`"}{assign var='tmp_lang_view' value=$LANG.$tmp_lang_view|default:$LANG.$view|default:$view}
+	{assign var='tmp_lang_module' value="title_module_`$module`"}
+    {assign var='tmp_lang_module' value=$LANG.$tmp_lang_module|default:$LANG.$module|default:$module}
+	{assign var='tmp_lang_view' value="title_view_`$view`"}
+    {assign var='tmp_lang_view' value=$LANG.$tmp_lang_view|default:$LANG.$view|default:$view}
 	{$smarty.capture.hook_head_start}
 {/strip}
-	<title>{$tmp_lang_module} : {$tmp_lang_view} - {$LANG.simple_invoices} </title>
+	<title>{$tmp_lang_module} : {$tmp_lang_view} - {$LANG.company_name} </title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="Content-Script-Type" content="text/javascript" />
 	<meta http-equiv="Content-Style-Type" content="text/css" />

@@ -14,8 +14,11 @@
 *	 GPL v3 or above
 */
 
-/*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
-regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
+/*
+ *    "//1" means that the variable has been translated
+ *    "//0" means that the variable has not been translated
+ *    These values are used by a script to calculate how much of each file has been translated.
+ *    Use the regex pattern :%s/;/ /1/;// 1\/\/1/g - remove the spaces
  */
 
 #all
@@ -37,6 +40,8 @@ $LANG['add_new_row'] = "Προσθήκη νέας σειράς";//1
 $LANG['add_new_tax_rate'] = "Προσθήκη Νέου Φορολογικού Συντελεστή";//1
 $LANG['add_payment_type'] = "Προσθήκη Τρόπου Πληρωμής";//1
 $LANG['add_product'] = "Προσθήκη Προϊόντος";//1
+$LANG['add_product_attribute'] = "Add Product Attribute";//0
+$LANG['add_product_value'] = "Add Product Value";//0
 $LANG['add_tax_rate'] = "Προσθήκη Φορολογικού Συντελεστή";//1
 $LANG['address'] = "Διεύθυνση";//1
 $LANG['address_city'] = "Διεύθυνση: Πόλη";//1
@@ -76,6 +81,7 @@ $LANG['cancel'] = "Ακύρωση";//1
 $LANG['cannot_delete_first_row'] = "Η πρώτη γραμμή δεν μπορεί να διαγραφεί";//1
 $LANG['change_log'] = "Αρχείο αλλαγών";//1
 $LANG['city'] = "Πόλη";//1
+$LANG['company_name'] = "Simple Invoices";//0
 $LANG['confirm_delete'] = "Θέλετε σίγουρα διαγραφή;";//1
 $LANG['consulting'] = "Παροχής Υπηρεσιών";//1
 $LANG['consulting_style'] = "Παροχής Υπηρεσιών";//1
@@ -265,6 +271,8 @@ $LANG['insert_customer'] = "Εισαγωγή Πελάτη";//1
 $LANG['insert_payment_type'] = "Εισαγωγή Τρόπου Πληρωμής";//1
 $LANG['insert_preference'] = "Εισαγωγή Τύπου";//1
 $LANG['insert_product'] = "Εισαγωγή Προϊόντος";//1
+$LANG['insert_product_attribute'] = "Insert Product Attribute";//0
+$LANG['insert_product_value'] = "Insert Product Value";//0
 $LANG['insert_tax_rate'] = "Εισαγωγή Φορολογικού Συντελεστή";//1
 $LANG['installation'] = "Εγκατάσταση";//1
 $LANG['inv'] = "Τιμολόγιο";//1
@@ -320,6 +328,8 @@ $LANG['manage_invoices'] = "Διαχειρίζομαι Τιμολόγια";//1
 $LANG['manage_payment_types'] = "Διαχειρίζομαι Τρόπους Πληρωμής";//1
 $LANG['manage_payments'] = "Διαχειρίζομαι Πληρωμές";//1
 $LANG['manage_preferences'] = "Διαχειρίζομαι Τύπους Τιμολογίων";//1
+$LANG['manage_product_attributes'] = "Manage Product Attributes";//0
+$LANG['manage_product_values'] = "Manage Product Value";//0
 $LANG['manage_products'] = "Διαχειρίζομαι Προϊόντα";//1
 $LANG['manage_tax_rates'] = "Διαχειρίζομαι Φορολογικούς Συντελεστές";//1
 $LANG['mandatory_fields'] = "Υποχρεωτικά Πεδία";//1
@@ -404,6 +414,7 @@ $LANG['plugin_not_registered'] = "Ανενεργό";//1
 $LANG['plugin_register'] = "Εγγραφή";//1
 $LANG['plugin_registered'] = "Εγγεγραμμένος";//1
 $LANG['plugin_unregister'] = "Διαγραφή";//1
+$LANG['powered_by'] = "Powered by";//0
 $LANG['preference'] = "preference";//0
 $LANG['preference_id'] = "Κωδικός Τύπου";//1
 $LANG['preferences'] = "Ρυθμίσεις";//1
@@ -420,6 +431,7 @@ $LANG['process_payment_inv_id'] = "Process Payment Invoice ID";//0
 $LANG['process_payment_via_eway'] = "Process Payment via Eway";//0
 $LANG['processing'] = "Processing, please wait ...";//0
 $LANG['product'] = "Προϊόν";//1
+$LANG['product_attribute'] = "Product Attribute";//0
 $LANG['product_attributes'] = "Product Attributes";//0
 $LANG['product_description'] = "Περιγραφή Είδους";//1
 $LANG['product_description_prompt'] = "You must enter a description for the product";//0
@@ -429,6 +441,7 @@ $LANG['product_id'] = "Κωδικός Είδους";//1
 $LANG['product_sales'] = "Πωλήσεις Προϊόντων";//1
 $LANG['product_to_add'] = "Προσθήκη Προϊόντος";//1
 $LANG['product_unit_price'] = "Τιμή Μονάδας";//1
+$LANG['product_value'] = "Product Value";//0
 $LANG['product_values'] = "Product Values";//0
 $LANG['products'] = "Προϊόντα";//1
 $LANG['products_by_customer'] = "Προϊόντα ανά Πελάτη";//1
@@ -510,7 +523,6 @@ $LANG['shortcut'] = "Σύντομη Εισαγωγή";//1
 $LANG['show_details'] = "Προβολή Λεπτομερειών";//1
 $LANG['show_only_unpaid_invoices'] = "Εμφάνιση μόνο απλήρωτων τιμολογίων";//1
 $LANG['simple_invoices'] = "Simple Invoices";//0
-$LANG['simple_invoices_powered_by'] = "Powered by Simple Invoices";//0
 $LANG['start_date'] = "Αρχική ημερομηνία (εεεε-μμ-ηη)";//1
 $LANG['start_date_short'] = "Αρχική ημερομηνία";//1
 $LANG['start_working'] = "Start working";//0
@@ -548,6 +560,24 @@ $LANG['tax_total'] = "Συνολικός Φόρος";//1
 $LANG['telephone_short'] = "Τηλ.";//1
 $LANG['thank_you'] = "Thank you for choosing Simple Invoices!";//0
 $LANG['thank_you_inv'] = "Thank you for invoicing with ";//0
+$LANG['title_module_billers'] = "Πωλητές";//1
+$LANG['title_module_cron'] = "Money / Recurrence";//0
+$LANG['title_module_custom_fields'] = "Διαχείριση ελεύθερων πεδίων";//1
+$LANG['title_module_customers'] = "Πελάτες";//1
+$LANG['title_module_index'] = "Αρχική";//1
+$LANG['title_module_invoices'] = "Παραστατικά";//1
+$LANG['title_module_options'] = "Ρυθμίσεις";//1
+$LANG['title_module_payment_types'] = "Ρυθμίσεις τύπων πληρωμών";//1
+$LANG['title_module_payments'] = "Πληρωμές";//1
+$LANG['title_module_preferences'] = "Επιλογές τιμολόγησης";//1
+$LANG['title_module_product_attribute'] = "Products / Product Attributes";//0
+$LANG['title_module_product_value'] = "Products / Product Values";//0
+$LANG['title_module_products'] = "Προϊόντα";//1
+$LANG['title_module_reports'] = "Αρχική / Αναφορές";//1
+$LANG['title_module_system_defaults'] = "Ρυθμίσεις Συστήματος";//1
+$LANG['title_module_tax_rates'] = "Ρυθμίσεις Φ.Π.Α.";//1
+$LANG['title_module_user'] = "Χρήστες";//1
+$LANG['title_view_index'] = "Πίνακας ελέγχου";//1
 $LANG['to'] = "To";//0
 $LANG['to_lowercase'] = "to";//0
 $LANG['toggle_status'] = "Εναλλαγή κατάστασης";//1
@@ -588,32 +618,3 @@ $LANG['years'] = "έτη";//1
 $LANG['yes'] = "Yes";//1
 $LANG['your_reports'] = "Οι εκτυπώσεις μου";//1
 $LANG['zip'] = "Ταχ. Κωδ.";//1
-$LANG['manage_product_attributes'] = "Manage Product Attributes";//0
-$LANG['add_product_attribute'] = "Add Product Attribute";//0
-$LANG['insert_product_attribute'] = "Insert Product Attribute";//0
-$LANG['product_attribute'] = "Product Attribute";//0
-$LANG['add_product_value'] = "Add Product Value";//0
-$LANG['insert_product_value'] = "Insert Product Value";//0
-$LANG['product_value'] = "Product Value";//0
-$LANG['manage_product_values'] = "Manage Product Value";//0
-
-$LANG['title_module_index']				= "Αρχική";//1
-$LANG['title_module_reports']			= "Αρχική / Αναφορές";//1
-$LANG['title_module_invoices']			= "Παραστατικά";//1
-$LANG['title_module_cron']				= "Money / Recurrence";//0
-$LANG['title_module_payments']			= "Πληρωμές";//1
-$LANG['title_module_billers']			= "Πωλητές";//1
-$LANG['title_module_customers']			= "Πελάτες";//1
-$LANG['title_module_user']				= "Χρήστες";//1
-$LANG['title_module_products']			= "Προϊόντα";//1
-$LANG['title_module_product_attribute']	= "Products / Product Attributes";//0
-$LANG['title_module_product_value']		= "Products / Product Values";//0
-$LANG['title_module_options']			= "Ρυθμίσεις";//1
-$LANG['title_module_system_defaults']	= "Ρυθμίσεις Συστήματος";//1
-$LANG['title_module_custom_fields']		= "Διαχείριση ελεύθερων πεδίων";//1
-$LANG['title_module_tax_rates']			= "Ρυθμίσεις Φ.Π.Α.";//1
-$LANG['title_module_preferences']		= "Επιλογές τιμολόγησης";//1
-$LANG['title_module_payment_types']		= "Ρυθμίσεις τύπων πληρωμών";//1
-$LANG['title_view_index']				= "Πίνακας ελέγχου";//1
-
-?>

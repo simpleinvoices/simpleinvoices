@@ -2,20 +2,24 @@
 
 /*
 * Script: NO_lang.php
-* 	Norwegian translation file
+*    Norwegian translation file
 *
 * Last edited:
 * 	 2014-06-09
 *
 * License:
-*	 GPL v3 or above
+*    GPL v3 or above
 */
 
-/*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
-regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
+/*
+ *    "//1" means that the variable has been translated
+ *    "//0" means that the variable has not been translated
+ *    These values are used by a script to calculate how much of each file has been translated.
+ *    Use the regex pattern :%s/;/ /1/;// 1\/\/1/g - remove the spaces
  */
 
 #all
+
 $LANG['about'] = "Om";//1
 $LANG['account_info'] = "Kontoinformasjon";//1
 $LANG['actions'] = "Valg";//1
@@ -34,6 +38,8 @@ $LANG['add_new_row'] = "Legg til ny rad";//1
 $LANG['add_new_tax_rate'] = "Legg til ny avgiftsklasse";//1
 $LANG['add_payment_type'] = "Legg til betalingstype";//1
 $LANG['add_product'] = "Legg til produkt";//1
+$LANG['add_product_attribute'] = "Add Product Attribute";//0
+$LANG['add_product_value'] = "Add Product Value";//0
 $LANG['add_tax_rate'] = "Legg til avgiftsklasse";//1
 $LANG['address'] = "Adresse";//1
 $LANG['address_city'] = "Adresse: By";//1
@@ -73,6 +79,7 @@ $LANG['cancel'] = "Avbryt";//1
 $LANG['cannot_delete_first_row'] = "Den første raden kan ikke slettes";//1
 $LANG['change_log'] = "Endringslogg";//1
 $LANG['city'] = "By";//1
+$LANG['company_name'] = "Simple Invoices";//0
 $LANG['confirm_delete'] = "Er du sikker på at du vil slette";//1
 $LANG['consulting'] = "Konsultasjon";//1
 $LANG['consulting_style'] = "Konsultasjonsstil";//1
@@ -262,6 +269,8 @@ $LANG['insert_customer'] = "Sett inn kunde";//1
 $LANG['insert_payment_type'] = "Sett inn betalingstype";//1
 $LANG['insert_preference'] = "Sett inn preferanse";//1
 $LANG['insert_product'] = "Sett inn produkt";//1
+$LANG['insert_product_attribute'] = "Insert Product Attribute";//0
+$LANG['insert_product_value'] = "Insert Product Value";//0
 $LANG['insert_tax_rate'] = "Sett inn avgiftsklasse";//1
 $LANG['installation'] = "Installasjon";//1
 $LANG['inv'] = "Faktura";//1
@@ -317,6 +326,8 @@ $LANG['manage_invoices'] = "Håndter fakturaer";//1
 $LANG['manage_payment_types'] = "Håndter betalingstyper";//1
 $LANG['manage_payments'] = "Håndter betalinger";//1
 $LANG['manage_preferences'] = "Håndter preferanser";//1
+$LANG['manage_product_attributes'] = "Manage Product Attributes";//0
+$LANG['manage_product_values'] = "Manage Product Value";//0
 $LANG['manage_products'] = "Håndter produkter";//1
 $LANG['manage_tax_rates'] = "Håndter avgiftsklasser";//1
 $LANG['mandatory_fields'] = "Alle felter er obligatoriske";//1
@@ -401,6 +412,7 @@ $LANG['plugin_not_registered'] = "Ikke registrert";//1
 $LANG['plugin_register'] = "Registrer";//1
 $LANG['plugin_registered'] = "Registrert";//1
 $LANG['plugin_unregister'] = "Uregistrert";//1
+$LANG['powered_by'] = "Powered by";//0
 $LANG['preference'] = "preferanse";//1
 $LANG['preference_id'] = "Preferanse ID";//1
 $LANG['preferences'] = "Preferanser";//1
@@ -417,6 +429,7 @@ $LANG['process_payment_inv_id'] = "Kjør betaling faktura ID";//1
 $LANG['process_payment_via_eway'] = "Process Payment via Eway";//0
 $LANG['processing'] = "Behandler, vennligst vent ...";//1
 $LANG['product'] = "Produkt";//1
+$LANG['product_attribute'] = "Product Attribute";//0
 $LANG['product_attributes'] = "Product Attributes";//0
 $LANG['product_description'] = "Produktbeskrivelse";//1
 $LANG['product_description_prompt'] = "You must enter a description for the product";//0
@@ -426,6 +439,7 @@ $LANG['product_id'] = "Produkt ID";//1
 $LANG['product_sales'] = "Produktsalg";//1
 $LANG['product_to_add'] = "Produkt å legge til";//1
 $LANG['product_unit_price'] = "Produkt enhetspris";//1
+$LANG['product_value'] = "Product Value";//0
 $LANG['product_values'] = "Product Values";//0
 $LANG['products'] = "Produkter";//1
 $LANG['products_by_customer'] = "Produkter etter kunde";//1
@@ -507,7 +521,6 @@ $LANG['shortcut'] = " Snarvei meny";//1
 $LANG['show_details'] = "Vis detaljer";//1
 $LANG['show_only_unpaid_invoices'] = "Show only unpaid invoices";//0
 $LANG['simple_invoices'] = "Simple Invoices";//1
-$LANG['simple_invoices_powered_by'] = "Powered by Simple Invoices";//0
 $LANG['start_date'] = "Start date (YYYY-MM-DD)";//0
 $LANG['start_date_short'] = "Start date";//0
 $LANG['start_working'] = "Start å jobb";//1
@@ -545,6 +558,24 @@ $LANG['tax_total'] = "Total inkludert avgift";//1
 $LANG['telephone_short'] = "Tlf";//1
 $LANG['thank_you'] = "Takk for at du valgte Simple Invoices!";//1
 $LANG['thank_you_inv'] = "Takk for at du fakturerer med ";//1
+$LANG['title_module_billers'] = "People / Billers";//0
+$LANG['title_module_cron'] = "Money / Recurrence";//0
+$LANG['title_module_custom_fields'] = "Settings / Custom Fields";//0
+$LANG['title_module_customers'] = "People / Customers";//0
+$LANG['title_module_index'] = "Hjem";//1
+$LANG['title_module_invoices'] = "Money / Invoices";//0
+$LANG['title_module_options'] = "Settings";//0
+$LANG['title_module_payment_types'] = "Settings / Payment Types";//0
+$LANG['title_module_payments'] = "Money / Payments";//0
+$LANG['title_module_preferences'] = "Settings / Invoice Preferences";//0
+$LANG['title_module_product_attribute'] = "Products / Product Attributes";//0
+$LANG['title_module_product_value'] = "Products / Product Values";//0
+$LANG['title_module_products'] = "Products";//0
+$LANG['title_module_reports'] = "Home / Reports";//0
+$LANG['title_module_system_defaults'] = "Settings / System Preferences";//0
+$LANG['title_module_tax_rates'] = "Settings / Tax Rates";//0
+$LANG['title_module_user'] = "People / Users";//0
+$LANG['title_view_index'] = "Dashboard";//0
 $LANG['to'] = "Til";//1
 $LANG['to_lowercase'] = "to";//0
 $LANG['toggle_status'] = "Skifte status";//1
@@ -585,32 +616,3 @@ $LANG['years'] = "years";//0
 $LANG['yes'] = "Ja";//1
 $LANG['your_reports'] = "Dine rapporter";//1
 $LANG['zip'] = "Postnummer";//1
-$LANG['manage_product_attributes'] = "Manage Product Attributes";//0
-$LANG['add_product_attribute'] = "Add Product Attribute";//0
-$LANG['insert_product_attribute'] = "Insert Product Attribute";//0
-$LANG['product_attribute'] = "Product Attribute";//0
-$LANG['add_product_value'] = "Add Product Value";//0
-$LANG['insert_product_value'] = "Insert Product Value";//0
-$LANG['product_value'] = "Product Value";//0
-$LANG['manage_product_values'] = "Manage Product Value";//0
-
-$LANG['title_module_index']				= "Hjem";//1
-$LANG['title_module_reports']			= "Home / Reports";//0
-$LANG['title_module_invoices']			= "Money / Invoices";//0
-$LANG['title_module_cron']				= "Money / Recurrence";//0
-$LANG['title_module_payments']			= "Money / Payments";//0
-$LANG['title_module_billers']			= "People / Billers";//0
-$LANG['title_module_customers']			= "People / Customers";//0
-$LANG['title_module_user']				= "People / Users";//0
-$LANG['title_module_products']			= "Products";//0
-$LANG['title_module_product_attribute']	= "Products / Product Attributes";//0
-$LANG['title_module_product_value']		= "Products / Product Values";//0
-$LANG['title_module_options']			= "Settings";//0
-$LANG['title_module_system_defaults']	= "Settings / System Preferences";//0
-$LANG['title_module_custom_fields']		= "Settings / Custom Fields";//0
-$LANG['title_module_tax_rates']			= "Settings / Tax Rates";//0
-$LANG['title_module_preferences']		= "Settings / Invoice Preferences";//0
-$LANG['title_module_payment_types']		= "Settings / Payment Types";//0
-$LANG['title_view_index']				= "Dashboard";//0
-
-?>

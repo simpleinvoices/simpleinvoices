@@ -2,7 +2,7 @@
 
 /*
 * Script: lang.php
-* 	Turkish translation file
+*    Turkish translation file
 *
 * Authors:
 *	 Don Camillo
@@ -11,11 +11,14 @@
 *    2014-06-09
 *
 * License:
-*	 GPL v3 or above
+*    GPL v3 or above
 */
 
-/*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
-regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
+/*
+ *    "//1" means that the variable has been translated
+ *    "//0" means that the variable has not been translated
+ *    These values are used by a script to calculate how much of each file has been translated.
+ *    Use the regex pattern :%s/;/ /1/;// 1\/\/1/g - remove the spaces
  */
 
 #all
@@ -37,6 +40,8 @@ $LANG['add_new_row'] = "Add new row";//0
 $LANG['add_new_tax_rate'] = "Yeni Vergi Oraný Ekle";//1
 $LANG['add_payment_type'] = "Ödeme Þekli Ekle";//1
 $LANG['add_product'] = "Ürün Ekle";//1
+$LANG['add_product_attribute'] = "Add Product Attribute";//0
+$LANG['add_product_value'] = "Add Product Value";//0
 $LANG['add_tax_rate'] = "Vergi Oraný Ekle";//1
 $LANG['address'] = "Adres";//1
 $LANG['address_city'] = "Adres: Þehir";//1
@@ -76,6 +81,7 @@ $LANG['cancel'] = "Ýptal";//1
 $LANG['cannot_delete_first_row'] = "The first row cannot be deleted";//0
 $LANG['change_log'] = "Change Log";//1
 $LANG['city'] = "Þehir";//1
+$LANG['company_name'] = "Simple Invoices";//0
 $LANG['confirm_delete'] = "Are you sure you want to delete";//0
 $LANG['consulting'] = "Detaylý";//1
 $LANG['consulting_style'] = "Detaylý Fatura";//1
@@ -265,6 +271,8 @@ $LANG['insert_customer'] = "Müþteri Ekle";//1
 $LANG['insert_payment_type'] = "Ödeme Þekli Ekle";//1
 $LANG['insert_preference'] = "Özellik Ekle";//1
 $LANG['insert_product'] = "Ürün Ekle";//1
+$LANG['insert_product_attribute'] = "Insert Product Attribute";//0
+$LANG['insert_product_value'] = "Insert Product Value";//0
 $LANG['insert_tax_rate'] = "Vergi Oraný Ekle";//1
 $LANG['installation'] = "Kurulum";//1
 $LANG['inv'] = "Fatura";//1
@@ -320,6 +328,8 @@ $LANG['manage_invoices'] = "Faturalarý Düzenle";//1
 $LANG['manage_payment_types'] = "Ödeme Türlerini Düzenle";//1
 $LANG['manage_payments'] = "Ödemeleri Düzenle";//1
 $LANG['manage_preferences'] = "Özellikleri Düzenle";//1
+$LANG['manage_product_attributes'] = "Manage Product Attributes";//0
+$LANG['manage_product_values'] = "Manage Product Value";//0
 $LANG['manage_products'] = "Ürünleri Düzenle";//1
 $LANG['manage_tax_rates'] = "Vergi Oranlarýný Düzenle";//1
 $LANG['mandatory_fields'] = "Tüm alanlar zorunlu";//1
@@ -404,6 +414,7 @@ $LANG['plugin_not_registered'] = "Not registered";//0
 $LANG['plugin_register'] = "Register";//0
 $LANG['plugin_registered'] = "Registered";//0
 $LANG['plugin_unregister'] = "Unregister";//0
+$LANG['powered_by'] = "Powered by";//0
 $LANG['preference'] = "preference";//0
 $LANG['preference_id'] = "Özellik ID";//1
 $LANG['preferences'] = "Özellikler";//1
@@ -420,6 +431,7 @@ $LANG['process_payment_inv_id'] = "Process Payment Invoice ID";//0
 $LANG['process_payment_via_eway'] = "Process Payment via Eway";//0
 $LANG['processing'] = "Processing, please wait ...";//0
 $LANG['product'] = "Ürün";//1
+$LANG['product_attribute'] = "Product Attribute";//0
 $LANG['product_attributes'] = "Product Attributes";//0
 $LANG['product_description'] = "Ürün Açýklamasý";//1
 $LANG['product_description_prompt'] = "You must enter a description for the product";//0
@@ -429,6 +441,7 @@ $LANG['product_id'] = "Ürün ID";//1
 $LANG['product_sales'] = "Ürün Satýþý";//1
 $LANG['product_to_add'] = "Eklenecek Ürün";//1
 $LANG['product_unit_price'] = "Ürün Birim Fiyatý";//1
+$LANG['product_value'] = "Product Value";//0
 $LANG['product_values'] = "Product Values";//0
 $LANG['products'] = "Ürünler";//1
 $LANG['products_by_customer'] = "Müþeriye Göre Ürünler";//1
@@ -510,7 +523,6 @@ $LANG['shortcut'] = " Kýsayol Menüsü";//1
 $LANG['show_details'] = "Detaylarý Göster";//1
 $LANG['show_only_unpaid_invoices'] = "Show only unpaid invoices";//0
 $LANG['simple_invoices'] = "Simple Invoices";//0
-$LANG['simple_invoices_powered_by'] = "Powered by Simple Invoices";//0
 $LANG['start_date'] = "Start date (YYYY-MM-DD)";//0
 $LANG['start_date_short'] = "Start date";//0
 $LANG['start_working'] = "Start working";//0
@@ -548,6 +560,24 @@ $LANG['tax_total'] = "Vergi Dahil";//1
 $LANG['telephone_short'] = "Tel";//1
 $LANG['thank_you'] = "Thank you for choosing Simple Invoices!";//0
 $LANG['thank_you_inv'] = "Thank you for invoicing with ";//0
+$LANG['title_module_billers'] = "People / Billers";//0
+$LANG['title_module_cron'] = "Money / Recurrence";//0
+$LANG['title_module_custom_fields'] = "Settings / Custom Fields";//0
+$LANG['title_module_customers'] = "People / Customers";//0
+$LANG['title_module_index'] = "Anasayfa";//1
+$LANG['title_module_invoices'] = "Money / Invoices";//0
+$LANG['title_module_options'] = "Settings";//0
+$LANG['title_module_payment_types'] = "Settings / Payment Types";//0
+$LANG['title_module_payments'] = "Money / Payments";//0
+$LANG['title_module_preferences'] = "Settings / Invoice Preferences";//0
+$LANG['title_module_product_attribute'] = "Products / Product Attributes";//0
+$LANG['title_module_product_value'] = "Products / Product Values";//0
+$LANG['title_module_products'] = "Ürünler";//1
+$LANG['title_module_reports'] = "Home / Reports";//0
+$LANG['title_module_system_defaults'] = "Settings / System Preferences";//0
+$LANG['title_module_tax_rates'] = "Settings / Tax Rates";//0
+$LANG['title_module_user'] = "People / Users";//0
+$LANG['title_view_index'] = "Dashboard";//0
 $LANG['to'] = "To";//0
 $LANG['to_lowercase'] = "to";//0
 $LANG['toggle_status'] = "Toggle status";//0
@@ -588,32 +618,3 @@ $LANG['years'] = "years";//0
 $LANG['yes'] = "Yes";//0
 $LANG['your_reports'] = "Your reports";//0
 $LANG['zip'] = "Posta Kodu";//1
-$LANG['manage_product_attributes'] = "Manage Product Attributes";//0
-$LANG['add_product_attribute'] = "Add Product Attribute";//0
-$LANG['insert_product_attribute'] = "Insert Product Attribute";//0
-$LANG['product_attribute'] = "Product Attribute";//0
-$LANG['add_product_value'] = "Add Product Value";//0
-$LANG['insert_product_value'] = "Insert Product Value";//0
-$LANG['product_value'] = "Product Value";//0
-$LANG['manage_product_values'] = "Manage Product Value";//0
-
-$LANG['title_module_index']				= "Anasayfa";//1
-$LANG['title_module_reports']			= "Home / Reports";//0
-$LANG['title_module_invoices']			= "Money / Invoices";//0
-$LANG['title_module_cron']				= "Money / Recurrence";//0
-$LANG['title_module_payments']			= "Money / Payments";//0
-$LANG['title_module_billers']			= "People / Billers";//0
-$LANG['title_module_customers']			= "People / Customers";//0
-$LANG['title_module_user']				= "People / Users";//0
-$LANG['title_module_products']			= "Ürünler";//1
-$LANG['title_module_product_attribute']	= "Products / Product Attributes";//0
-$LANG['title_module_product_value']		= "Products / Product Values";//0
-$LANG['title_module_options']			= "Settings";//0
-$LANG['title_module_system_defaults']	= "Settings / System Preferences";//0
-$LANG['title_module_custom_fields']		= "Settings / Custom Fields";//0
-$LANG['title_module_tax_rates']			= "Settings / Tax Rates";//0
-$LANG['title_module_preferences']		= "Settings / Invoice Preferences";//0
-$LANG['title_module_payment_types']		= "Settings / Payment Types";//0
-$LANG['title_view_index']				= "Dashboard";//0
-
-?>

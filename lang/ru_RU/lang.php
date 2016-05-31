@@ -1,7 +1,7 @@
 <?php
 
 /*
-* Script: lang.php 
+* Script: lang.php
 *    Russian translation file
 *
 * Last edited:
@@ -10,11 +10,14 @@
 * Author:
 *    nurkamol@gmail.com
 * License:
-*	 GPL v3 or above
+*    GPL v3 or above
 */
 
-/*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
-regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
+/*
+ *    "//1" means that the variable has been translated
+ *    "//0" means that the variable has not been translated
+ *    These values are used by a script to calculate how much of each file has been translated.
+ *    Use the regex pattern :%s/;/ /1/;// 1\/\/1/g - remove the spaces
  */
 
 #all
@@ -36,6 +39,8 @@ $LANG['add_new_row'] = "Добавить строку";//1
 $LANG['add_new_tax_rate'] = "Добавить новый налог";//1
 $LANG['add_payment_type'] = "Добавить тип оплаты";//1
 $LANG['add_product'] = "Добавить продукт";//1
+$LANG['add_product_attribute'] = "Add Product Attribute";//0
+$LANG['add_product_value'] = "Add Product Value";//0
 $LANG['add_tax_rate'] = "Добавить налог";//1
 $LANG['address'] = "Адрес";//1
 $LANG['address_city'] = "Адрес: Город";//1
@@ -75,6 +80,7 @@ $LANG['cancel'] = "Отмена";//1
 $LANG['cannot_delete_first_row'] = "Первая строка не может быть удалена";//1
 $LANG['change_log'] = "Изменить лог";//1
 $LANG['city'] = "Город";//1
+$LANG['company_name'] = "Simple Invoices";//0
 $LANG['confirm_delete'] = "Уверенны, что хотите удалить?";//1
 $LANG['consulting'] = "Консалтинг";//1
 $LANG['consulting_style'] = "Консалтинг стиль";//1
@@ -264,6 +270,8 @@ $LANG['insert_customer'] = "Вставьте клиента";//1
 $LANG['insert_payment_type'] = "Вставьте тип оплаты";//1
 $LANG['insert_preference'] = "Вставьте шаблон";//1
 $LANG['insert_product'] = "Вставьте продукт";//1
+$LANG['insert_product_attribute'] = "Insert Product Attribute";//0
+$LANG['insert_product_value'] = "Insert Product Value";//0
 $LANG['insert_tax_rate'] = "Вставьте налог";//1
 $LANG['installation'] = "Установка";//1
 $LANG['inv'] = "Счет-фактура";//1
@@ -319,6 +327,8 @@ $LANG['manage_invoices'] = "Менеджер счетов";//1
 $LANG['manage_payment_types'] = "Менеджер типов оплаты";//1
 $LANG['manage_payments'] = "Менеджер оплат";//1
 $LANG['manage_preferences'] = "Менеджер шаблонов";//1
+$LANG['manage_product_attributes'] = "Manage Product Attributes";//0
+$LANG['manage_product_values'] = "Manage Product Value";//0
 $LANG['manage_products'] = "Менеджер продуктов";//1
 $LANG['manage_tax_rates'] = "Менеджер налогов";//1
 $LANG['mandatory_fields'] = "Все поля обязательны для заполнения";//1
@@ -403,6 +413,7 @@ $LANG['plugin_not_registered'] = "Не зарегистрирован";//1
 $LANG['plugin_register'] = "Регистрация";//1
 $LANG['plugin_registered'] = "Зарегистрированный";//1
 $LANG['plugin_unregister'] = "Отменить регистрацию";//1
+$LANG['powered_by'] = "Создано в";//1
 $LANG['preference'] = "шаблон";//1
 $LANG['preference_id'] = "ID шаблона";//1
 $LANG['preferences'] = "Шаблоны";//1
@@ -419,6 +430,7 @@ $LANG['process_payment_inv_id'] = "ID процесса оплаты счетов
 $LANG['process_payment_via_eway'] = "Процесс оплаты через Eway";//1
 $LANG['processing'] = "Обработка, пожалуйста, подождите ...";//1
 $LANG['product'] = "Продукт";//1
+$LANG['product_attribute'] = "Product Attribute";//0
 $LANG['product_attributes'] = "Атрибуты продукта";//1
 $LANG['product_description'] = "Описание продукта";//1
 $LANG['product_description_prompt'] = "Вы должны ввести описание продукта";//1
@@ -428,6 +440,7 @@ $LANG['product_id'] = "ID продукта";//1
 $LANG['product_sales'] = "Продажи продукта";//1
 $LANG['product_to_add'] = "Продукт для добавления";//1
 $LANG['product_unit_price'] = "Цена за единицу продукта";//1
+$LANG['product_value'] = "Product Value";//0
 $LANG['product_values'] = "Значение продукта";//1
 $LANG['products'] = "Продукты";//1
 $LANG['products_by_customer'] = "Продукты по клиенту";//1
@@ -509,7 +522,6 @@ $LANG['shortcut'] = "Контекстное меню";//1
 $LANG['show_details'] = "Показать подробности";//1
 $LANG['show_only_unpaid_invoices'] = "Показать только неоплаченные счета";//1
 $LANG['simple_invoices'] = "Simple Invoices";//0
-$LANG['simple_invoices_powered_by'] = "Создано в Simple Invoices";//1
 $LANG['start_date'] = "Дата начала (гггг-мм-дд)";//1
 $LANG['start_date_short'] = "Дата начала";//1
 $LANG['start_working'] = "Начало работы";//1
@@ -547,6 +559,24 @@ $LANG['tax_total'] = "Общая сумма налога";//1
 $LANG['telephone_short'] = "Тел";//1
 $LANG['thank_you'] = "Благодарим Вас за выбор Simple Invoices!";//1
 $LANG['thank_you_inv'] = "Спасибо за работу с";//1
+$LANG['title_module_billers'] = "Клиенты / Компании";//1
+$LANG['title_module_cron']              = "Финансы / Возврат";//1
+$LANG['title_module_custom_fields'] = "Настройки / Пользовательские поля";//1
+$LANG['title_module_customers'] = "Клиенты / Клиенты";//1
+$LANG['title_module_index'] = "Главная";//1
+$LANG['title_module_invoices'] = "Финансы / Счета";//1
+$LANG['title_module_options'] = "Настройки";//1
+$LANG['title_module_payment_types'] = "Настройки / Виды оплаты";//1
+$LANG['title_module_payments'] = "Финансы / Платежи";//1
+$LANG['title_module_preferences'] = "Настройки / Шаблоны счетов";//1
+$LANG['title_module_product_attribute'] = "Продукты / Атрибуты продукта";//1
+$LANG['title_module_product_value'] = "Продукты / Значение продукта";//1
+$LANG['title_module_products'] = "Продукты";//1
+$LANG['title_module_reports'] = "Главная / Отчеты";//1
+$LANG['title_module_system_defaults'] = "Настройки / Системные настройки";//1
+$LANG['title_module_tax_rates'] = "Настройки / Налоговые ставки";//1
+$LANG['title_module_user'] = "Клиенты / Пользователи";//1
+$LANG['title_view_index'] = "Рабочий стол";//1
 $LANG['to'] = "К";//1
 $LANG['to_lowercase'] = "к";//1
 $LANG['toggle_status'] = "Переключения статуса";//1
@@ -587,32 +617,3 @@ $LANG['years'] = "лет";//1
 $LANG['yes'] = "Да";//1
 $LANG['your_reports'] = "Ваши отчеты";//1
 $LANG['zip'] = "Индекс";//1
-$LANG['manage_product_attributes'] = "Manage Product Attributes";//0
-$LANG['add_product_attribute'] = "Add Product Attribute";//0
-$LANG['insert_product_attribute'] = "Insert Product Attribute";//0
-$LANG['product_attribute'] = "Product Attribute";//0
-$LANG['add_product_value'] = "Add Product Value";//0
-$LANG['insert_product_value'] = "Insert Product Value";//0
-$LANG['product_value'] = "Product Value";//0
-$LANG['manage_product_values'] = "Manage Product Value";//0
-
-$LANG['title_module_index']				= "Главная";//1
-$LANG['title_module_reports']			= "Главная / Отчеты";//1
-$LANG['title_module_invoices']			= "Финансы / Счета";//1
-$LANG['title_module_cron']              = "Финансы / Возврат";//1
-$LANG['title_module_payments']			= "Финансы / Платежи";//1
-$LANG['title_module_billers']			= "Клиенты / Компании";//1
-$LANG['title_module_customers']			= "Клиенты / Клиенты";//1
-$LANG['title_module_user']				= "Клиенты / Пользователи";//1
-$LANG['title_module_products']			= "Продукты";//1
-$LANG['title_module_product_attribute']	= "Продукты / Атрибуты продукта";//1
-$LANG['title_module_product_value']		= "Продукты / Значение продукта";//1
-$LANG['title_module_options']			= "Настройки";//1
-$LANG['title_module_system_defaults']	= "Настройки / Системные настройки";//1
-$LANG['title_module_custom_fields']		= "Настройки / Пользовательские поля";//1
-$LANG['title_module_tax_rates']			= "Настройки / Налоговые ставки";//1
-$LANG['title_module_preferences']		= "Настройки / Шаблоны счетов";//1
-$LANG['title_module_payment_types']		= "Настройки / Виды оплаты";//1
-$LANG['title_view_index']				= "Рабочий стол";//1
-
-?>

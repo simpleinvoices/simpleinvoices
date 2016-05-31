@@ -2,7 +2,7 @@
 
 /*
 * Script: maltese_MT.inc.php
-* 	Maltese translation file
+*    Maltese translation file
 *
 * Authors:
 *	 Michel Bugeja - http://oss.org.mt
@@ -11,14 +11,18 @@
 *    2014-06-09
 *
 * License:
-*	 GPL v3 or above
+*    GPL v3 or above
 */
 
-/*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
-regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
+/*
+ *    "//1" means that the variable has been translated
+ *    "//0" means that the variable has not been translated
+ *    These values are used by a script to calculate how much of each file has been translated.
+ *    Use the regex pattern :%s/;/ /1/;// 1\/\/1/g - remove the spaces
  */
 
 #all
+
 $LANG['about'] = "Dwar";//1
 $LANG['account_info'] = "Informazzjoni tal-Kont";//1
 $LANG['actions'] = "Azzjonijiet";//1
@@ -37,6 +41,8 @@ $LANG['add_new_row'] = "Add new row";//0
 $LANG['add_new_tax_rate'] = "Żid Rata tat-Taxxa Ġdida";//1
 $LANG['add_payment_type'] = "Żid Tip ta' Pagament";//1
 $LANG['add_product'] = "Żid Prodott";//1
+$LANG['add_product_attribute'] = "Add Product Attribute";//0
+$LANG['add_product_value'] = "Add Product Value";//0
 $LANG['add_tax_rate'] = "Żid Rata tat-Taxxa";//1
 $LANG['address'] = "Indirizz";//1
 $LANG['address_city'] = "Indirizz: Post";//1
@@ -76,6 +82,7 @@ $LANG['cancel'] = "Ikkanċella";//1
 $LANG['cannot_delete_first_row'] = "The first row cannot be deleted";//0
 $LANG['change_log'] = "Rendikont tat-Tibdiel";//1
 $LANG['city'] = "Post";//1
+$LANG['company_name'] = "Simple Invoices";//0
 $LANG['confirm_delete'] = "Are you sure you want to delete";//0
 $LANG['consulting'] = "Konsulenza";//1
 $LANG['consulting_style'] = "Stil għal-Konsulenza";//1
@@ -265,6 +272,8 @@ $LANG['insert_customer'] = "Daħħal Klijent";//1
 $LANG['insert_payment_type'] = "Daħħal Tip ta' Pagament";//1
 $LANG['insert_preference'] = "Daħħal Preferenzi";//1
 $LANG['insert_product'] = "Daħħal Prodott";//1
+$LANG['insert_product_attribute'] = "Insert Product Attribute";//0
+$LANG['insert_product_value'] = "Insert Product Value";//0
 $LANG['insert_tax_rate'] = "Daħħal Rata tat-Taxxa";//1
 $LANG['installation'] = "Installazzjoni";//1
 $LANG['inv'] = "Invoice";//1
@@ -320,6 +329,8 @@ $LANG['manage_invoices'] = "Organizza Invoices";//1
 $LANG['manage_payment_types'] = "Organizza Tipi ta' Payment";//1
 $LANG['manage_payments'] = "Organizza Pagamenti";//1
 $LANG['manage_preferences'] = "Organizza Preferenzi";//1
+$LANG['manage_product_attributes'] = "Manage Product Attributes";//0
+$LANG['manage_product_values'] = "Manage Product Value";//0
 $LANG['manage_products'] = "Organizza Prodotti";//1
 $LANG['manage_tax_rates'] = "Organizza Rati tat-Taxxa";//1
 $LANG['mandatory_fields'] = "Kaxxi kollha mandatroji";//1
@@ -404,6 +415,7 @@ $LANG['plugin_not_registered'] = "Not registered";//0
 $LANG['plugin_register'] = "Register";//0
 $LANG['plugin_registered'] = "Registered";//0
 $LANG['plugin_unregister'] = "Unregister";//0
+$LANG['powered_by'] = "Powered by";//0
 $LANG['preference'] = "preference";//0
 $LANG['preference_id'] = "Referenzja tal-Preferenza";//1
 $LANG['preferences'] = "Preferenzi";//1
@@ -420,6 +432,7 @@ $LANG['process_payment_inv_id'] = "Process Payment Invoice ID";//0
 $LANG['process_payment_via_eway'] = "Process Payment via Eway";//0
 $LANG['processing'] = "Processing, please wait ...";//0
 $LANG['product'] = "Prodott";//1
+$LANG['product_attribute'] = "Product Attribute";//0
 $LANG['product_attributes'] = "Product Attributes";//0
 $LANG['product_description'] = "Deskrizzjoni tal-Prodott";//1
 $LANG['product_description_prompt'] = "You must enter a description for the product";//0
@@ -429,6 +442,7 @@ $LANG['product_id'] = "Referenza tal-Prodott";//1
 $LANG['product_sales'] = "Bejgħ tal-Prodott";//1
 $LANG['product_to_add'] = "Prodott biex jiżdied";//1
 $LANG['product_unit_price'] = "Prezz kull Prodott";//1
+$LANG['product_value'] = "Product Value";//0
 $LANG['product_values'] = "Product Values";//0
 $LANG['products'] = "Prodotti";//1
 $LANG['products_by_customer'] = "Prodotti kull Klijent";//1
@@ -510,7 +524,6 @@ $LANG['shortcut'] = " Shortcut menu";//0
 $LANG['show_details'] = "Uri dettalji";//1
 $LANG['show_only_unpaid_invoices'] = "Show only unpaid invoices";//0
 $LANG['simple_invoices'] = "Simple Invoices";//0
-$LANG['simple_invoices_powered_by'] = "Powered by Simple Invoices";//0
 $LANG['start_date'] = "Start date (YYYY-MM-DD)";//0
 $LANG['start_date_short'] = "Start date";//0
 $LANG['start_working'] = "Start working";//0
@@ -548,6 +561,24 @@ $LANG['tax_total'] = "Taxxa inkluża Totali";//1
 $LANG['telephone_short'] = "Tel";//1
 $LANG['thank_you'] = "Thank you for choosing Simple Invoices!";//0
 $LANG['thank_you_inv'] = "Thank you for invoicing with ";//0
+$LANG['title_module_billers'] = "People / Billers";//0
+$LANG['title_module_cron'] = "Money / Recurrence";//0
+$LANG['title_module_custom_fields'] = "Settings / Custom Fields";//0
+$LANG['title_module_customers'] = "People / Customers";//0
+$LANG['title_module_index'] = "Dħul";//1
+$LANG['title_module_invoices'] = "Money / Invoices";//0
+$LANG['title_module_options'] = "Settings";//0
+$LANG['title_module_payment_types'] = "Settings / Payment Types";//0
+$LANG['title_module_payments'] = "Money / Payments";//0
+$LANG['title_module_preferences'] = "Settings / Invoice Preferences";//0
+$LANG['title_module_product_attribute'] = "Products / Product Attributes";//0
+$LANG['title_module_product_value'] = "Products / Product Values";//0
+$LANG['title_module_products'] = "Products";//0
+$LANG['title_module_reports'] = "Home / Reports";//0
+$LANG['title_module_system_defaults'] = "Settings / System Preferences";//0
+$LANG['title_module_tax_rates'] = "Settings / Tax Rates";//0
+$LANG['title_module_user'] = "People / Users";//0
+$LANG['title_view_index'] = "Dashboard";//0
 $LANG['to'] = "To";//0
 $LANG['to_lowercase'] = "to";//0
 $LANG['toggle_status'] = "Toggle status";//0
@@ -588,32 +619,3 @@ $LANG['years'] = "years";//0
 $LANG['yes'] = "Yes";//0
 $LANG['your_reports'] = "Your reports";//0
 $LANG['zip'] = "Kodiċi Postali";//1
-$LANG['manage_product_attributes'] = "Manage Product Attributes";//0
-$LANG['add_product_attribute'] = "Add Product Attribute";//0
-$LANG['insert_product_attribute'] = "Insert Product Attribute";//0
-$LANG['product_attribute'] = "Product Attribute";//0
-$LANG['add_product_value'] = "Add Product Value";//0
-$LANG['insert_product_value'] = "Insert Product Value";//0
-$LANG['product_value'] = "Product Value";//0
-$LANG['manage_product_values'] = "Manage Product Value";//0
-
-$LANG['title_module_index']				= "Dħul";//1
-$LANG['title_module_reports']			= "Home / Reports";//0
-$LANG['title_module_invoices']			= "Money / Invoices";//0
-$LANG['title_module_cron']				= "Money / Recurrence";//0
-$LANG['title_module_payments']			= "Money / Payments";//0
-$LANG['title_module_billers']			= "People / Billers";//0
-$LANG['title_module_customers']			= "People / Customers";//0
-$LANG['title_module_user']				= "People / Users";//0
-$LANG['title_module_products']			= "Products";//0
-$LANG['title_module_product_attribute']	= "Products / Product Attributes";//0
-$LANG['title_module_product_value']		= "Products / Product Values";//0
-$LANG['title_module_options']			= "Settings";//0
-$LANG['title_module_system_defaults']	= "Settings / System Preferences";//0
-$LANG['title_module_custom_fields']		= "Settings / Custom Fields";//0
-$LANG['title_module_tax_rates']			= "Settings / Tax Rates";//0
-$LANG['title_module_preferences']		= "Settings / Invoice Preferences";//0
-$LANG['title_module_payment_types']		= "Settings / Payment Types";//0
-$LANG['title_view_index']				= "Dashboard";//0
-
-?>

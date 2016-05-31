@@ -2,17 +2,20 @@
 
 /*
 * Script: lang.php
-* 	Chinese (Hong Kong) translation file
+*    Chinese (Hong Kong) translation file
 *
 * Last edited:
 *    2014-06-03
 *
 * License:
-*	 GPL v3 or above
+*    GPL v3 or above
 */
 
-/*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
-regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
+/*
+ *    "//1" means that the variable has been translated
+ *    "//0" means that the variable has not been translated
+ *    These values are used by a script to calculate how much of each file has been translated.
+ *    Use the regex pattern :%s/;/ /1/;// 1\/\/1/g - remove the spaces
  */
 
 #all
@@ -34,6 +37,8 @@ $LANG['add_new_row'] = "添加一行記錄";//1
 $LANG['add_new_tax_rate'] = "添加新稅率";//1
 $LANG['add_payment_type'] = "添加付款方式";//1
 $LANG['add_product'] = "添加產品";//1
+$LANG['add_product_attribute'] = "Add Product Attribute";//0
+$LANG['add_product_value'] = "Add Product Value";//0
 $LANG['add_tax_rate'] = "添加稅率";//1
 $LANG['address'] = "地址";//1
 $LANG['address_city'] = "地址: 城市";//1
@@ -73,6 +78,7 @@ $LANG['cancel'] = "取消";//1
 $LANG['cannot_delete_first_row'] = "無法刪除第一行記錄";//1
 $LANG['change_log'] = "更改日誌";//1
 $LANG['city'] = "城市";//1
+$LANG['company_name'] = "Simple Invoices";//0
 $LANG['confirm_delete'] = "你確定要刪除嗎";//1
 $LANG['consulting'] = "咨詢";//1
 $LANG['consulting_style'] = "咨詢方式";//1
@@ -198,10 +204,8 @@ $LANG['gross_total'] = "總額";//1
 $LANG['hello'] = "你好";//1
 $LANG['help'] = "幫助";//1
 $LANG['help_age'] = "在“年齡”字段指示多久發票已未付。如果發票創建於本月1日起，在該月的21日，如果發票仍沒有被全部發票'年齡'將是21天。<br/><br/>如果發票有被付清那麼“年齡”字段將顯示為空白。";//1
-$LANG['help_backup_database'] = "為備份正常運作，網頁伺服器的用戶(希望你正在運行Apache)必須具有讀/寫權限database_backups目錄中的Simple Invoices文件夾<br/><br/>另外，如果你有多餘的偏執狂(像我一樣:) )關於數據的，我建議使用phpMyAdmin。此備份腳本應該工作正常，但如果需要“企業級”的備份可靠性phpMyAdmin會好一些<br/><br/>注：如果您在演示環境在SourceForge上使用Simple Invoices，備份不會正常運作因為這是他們服務器的設定。
-";//1
-$LANG['help_backup_database_fwrite'] = "<b>有fwrite()的錯誤？</b><br />如果您試圖備份時收到fwrite()的錯誤您簡單的發票數據庫，這意味著，網頁伺服器的用戶(希望你正在運行Apache)沒有讀/寫權限的 tmp/database_backups目錄中的Simple Invoice<br/> <br />請更改該目錄的權限，然後再次嘗試備份。要更改的Unix /Linux/ OSX 入 tmp/database_backups目錄的權限，以Simple Invoice目錄( <i> 入 / var/ www / html/ simpleinvoices</i> )，然後發出chmod命令給網絡服務器的用戶讀/寫權限( <i>chmod -Rv 777 tmp/database_backups</i> )
-";//1
+$LANG['help_backup_database'] = "為備份正常運作，網頁伺服器的用戶(希望你正在運行Apache)必須具有讀/寫權限database_backups目錄中的Simple Invoices文件夾<br/><br/>另外，如果你有多餘的偏執狂(像我一樣:) )關於數據的，我建議使用phpMyAdmin。此備份腳本應該工作正常，但如果需要“企業級”的備份可靠性phpMyAdmin會好一些<br/><br/>注：如果您在演示環境在SourceForge上使用Simple Invoices，備份不會正常運作因為這是他們服務器的設定。 ";//1
+$LANG['help_backup_database_fwrite'] = "<b>有fwrite()的錯誤？</b><br />如果您試圖備份時收到fwrite()的錯誤您簡單的發票數據庫，這意味著，網頁伺服器的用戶(希望你正在運行Apache)沒有讀/寫權限的 tmp/database_backups目錄中的Simple Invoice<br/> <br />請更改該目錄的權限，然後再次嘗試備份。要更改的Unix /Linux/ OSX 入 tmp/database_backups目錄的權限，以Simple Invoice目錄( <i> 入 / var/ www / html/ simpleinvoices</i> )，然後發出chmod命令給網絡服務器的用戶讀/寫權限( <i>chmod -Rv 777 tmp/database_backups</i> ) ";//1
 $LANG['help_blog'] = "Simple Invoices Blog";//1
 $LANG['help_community_forums'] = "社區論壇";//1
 $LANG['help_cost'] = "“費用”指的是，這款產品花費你的成本 - 這是用於庫存和利潤計算之用";//1
@@ -213,10 +217,10 @@ $LANG['help_default_invoice_template_text'] = "您進入默認的發票模板的
 $LANG['help_delete'] = "通過啟用刪除，你將能夠通過該發票的快速查看，刪除不再需要的任何發票。<br/><br/>要刪除的發票，啟用該選項，然後去到發票管理頁面，然後選擇你要刪除的發票快速查看。在快速瀏覽畫面現在將有於操作菜單中的刪除選項。單擊該按鈕，然後按照提示 - 您的發票將被刪除<br/><br/>注：目前只發票可以刪除，但在不久的將來，這將擴大到所有的其他部分(即記帳方 ，客戶等。)";//1
 $LANG['help_email_bcc'] = "此字段是不是強制性的，從獲取默認值記帳方的電子郵件地址<br/><br/>建議，您密件副本自己到這個郵箱，這樣你也可以得到它的副本。你知道這種方式對於確保該郵件已被正確發送，你總是有電子郵件的備份副本<br/><br/><i>注意：您可以在這裡添加多個郵件地址 - 只使用eith, 或 ; 分割地址</ I>";//1
 $LANG['help_email_cc'] = "這個欄位是不是強制性的。在這裡你可以指定你想要的任何電子郵件地址到CC，但<br/><br/>不能添加在這個領域超過1電子郵件地址<i>注意：您可以在這裡添加多個郵件地址 - 只使用eith, 或; 到分裂地址</i>";//1
-$LANG['help_email_from'] = "此字段是必填字段，並從記帳方的電子郵件地址得到的默認值根據您的需要，但不能在這一領域<br/><br/><i>注意增加超過1的電子郵件地址，您可以更改此電子郵件地址：有可能在這一領域只有1電子郵件地址</ I>";//1
+$LANG['help_email_from'] = "此字段是必填字段，並從記帳方的電子郵件地址得到的默認值根據您的需要，但不能在這一領域<br/><br/><i>注意增加超過1的電子郵件地址，您可以更改此電子郵件地址：有可能在這一領域只有1電子郵件地址</i>";//1
 $LANG['help_email_to'] = "此字段是必填字段，並從客戶的電子郵件地址，得到的默認值根據您的需要<br/><br/><i>注意您可以更改此電子郵件地址：您可以在這裡添加多個郵件地址 - 只使用兩種或; 分割地址</i>";//1
 $LANG['help_insert_biller_text'] = "要選擇沒有標識，請從列表中選擇“_default_blank_logo.png”<br/><br/>要添加其他標識成簡單的發票, 徽標文件複製到標識目錄中的簡單的發票文件夾";//1
-$LANG['help_inv_pref_currency_sign'] = "這是通過將出發票所使用的貨幣符號。 <br/><br/><b>注意：</b>歐元，英鎊等請在此字段中使用html代碼給你貨幣符號。請參閱HTML代碼在以下網站的清單，讓您非$貨幣符號<a href='http://www.ascii.cl/htmlcodes.htm'> http://www.ascii.cl/htmlcodes.htm </b> <br/><br/>這是必需的，這樣的PDF可以用<br/>非$符號正常工作<br/>&#38;#163;是HTML代碼為英鎊, <br/>於&#38;#8364;歐元等";//1
+$LANG['help_inv_pref_currency_sign'] = "這是通過將出發票所使用的貨幣符號。 <br/><br/><b>注意：</b>歐元，英鎊等請在此字段中使用html代碼給你貨幣符號。請參閱HTML代碼在以下網站的清單，讓您非$貨幣符號<a href='http://www.ascii.cl/htmlcodes.htm'>http://www.ascii.cl/htmlcodes.htm</b><br/><br/>這是必需的，這樣的PDF可以用<br/>非$符號正常工作<br/>&#38;#163;是HTML代碼為英鎊, <br/>於&#38;#8364;歐元等";//1
 $LANG['help_inv_pref_description'] = "這是一組偏好的名稱 - 它沒有使用在發票上自身, 只是在創建發票時，從下拉列表中，您希望使用的發票偏好選擇。";//1
 $LANG['help_inv_pref_invoice_detail_heading'] = "這是會出現什麼作為發票的頁腳/細節部分的標題。";//1
 $LANG['help_inv_pref_invoice_detail_line'] = "This is the text that appear under the details/footer heading. Normally used to define payment terms etc.";//1
@@ -227,12 +231,9 @@ $LANG['help_inv_pref_invoice_payment_method'] = "這是您指定你想怎樣顧�
 $LANG['help_inv_pref_invoice_wording'] = "這就是發票的措詞將是 - 也就是說，如果你輸入報價 - 於管理發票屏幕它會說報價在發票類型字段，並通過該發票是會說，而不是發票即報價。報價編號, 報價日期等。";//1
 $LANG['help_inv_pref_locale'] = "語言環境";//1
 $LANG['help_inv_pref_payment_line1_name'] = "在這裡，您可以即“帳戶名”指定的付款行1名。";//1
-$LANG['help_inv_pref_payment_line1_value'] = "在這裡，您可以指定付款行1的值
-您的銀行帳戶亦即這個名字 - 'H。 ＆M.辛普森。'";//1
-$LANG['help_inv_pref_payment_line2_name'] = "在這裡，您可以指定付款行2的值 
- 也就是'帳號'。";//1
-$LANG['help_inv_pref_payment_line2_value'] = "在這裡，您可以指定付款行2的值 
- 也就是賬號'0123-4567-89'。";//1
+$LANG['help_inv_pref_payment_line1_value'] = "在這裡，您可以指定付款行1的值 您的銀行帳戶亦即這個名字 - 'H。 ＆M.辛普森。'";//1
+$LANG['help_inv_pref_payment_line2_name'] = "在這裡，您可以指定付款行2的值  也就是'帳號'。";//1
+$LANG['help_inv_pref_payment_line2_value'] = "在這裡，您可以指定付款行2的值  也就是賬號'0123-4567-89'。";//1
 $LANG['help_inv_pref_status'] = "發票可以有“草稿”或“真正的”的狀態。草稿表示這是一個類似的報價並且不包含在銷售報告。 “真正的'意味著是一個真正的發票，並包含在銷售報告。";//1
 $LANG['help_inv_pref_what_the'] = "發票偏好可讓您定義發票的字眼。你可以有很多不同的“發票偏好設定\"在簡單的發票界定為你想要的，但你只能選擇每張發票每1'發票偏好“。<br /><br />即如果你想要的發票的標題說“MOES酒館 - 發票'，而不是默認的'發票'，你可以編輯”發票標題“字段在的有關發票偏好來實現這個結果";//1
 $LANG['help_invoice_create'] = "創建發票是很容易。一旦記帳方和客戶已被添加到的系統，所有你需要做的是選擇從“發票+”菜單中的發票類型，填寫詳細信息，並點擊“保存發票”。";//1
@@ -267,6 +268,8 @@ $LANG['insert_customer'] = "插入客戶";//1
 $LANG['insert_payment_type'] = "插入付款方式";//1
 $LANG['insert_preference'] = "插入偏好";//1
 $LANG['insert_product'] = "插入產品";//1
+$LANG['insert_product_attribute'] = "Insert Product Attribute";//0
+$LANG['insert_product_value'] = "Insert Product Value";//0
 $LANG['insert_tax_rate'] = "插入稅率";//1
 $LANG['installation'] = "安裝";//1
 $LANG['inv'] = "發票";//1
@@ -322,6 +325,8 @@ $LANG['manage_invoices'] = "發票管理";//1
 $LANG['manage_payment_types'] = "管理付款類型";//1
 $LANG['manage_payments'] = "管理款項";//1
 $LANG['manage_preferences'] = "管理喜好設定";//1
+$LANG['manage_product_attributes'] = "Manage Product Attributes";//0
+$LANG['manage_product_values'] = "Manage Product Value";//0
 $LANG['manage_products'] = "管理產品";//1
 $LANG['manage_tax_rates'] = "管理稅率";//1
 $LANG['mandatory_fields'] = "所有字段是強制性的";//1
@@ -406,6 +411,7 @@ $LANG['plugin_not_registered'] = "未註冊";//1
 $LANG['plugin_register'] = "註冊";//1
 $LANG['plugin_registered'] = "己註冊";//1
 $LANG['plugin_unregister'] = "取消註冊";//1
+$LANG['powered_by'] = "Powered by";//0
 $LANG['preference'] = "偏好";//1
 $LANG['preference_id'] = "偏好編號";//1
 $LANG['preferences'] = "偏好";//1
@@ -422,6 +428,7 @@ $LANG['process_payment_inv_id'] = "處理付款發票編號";//1
 $LANG['process_payment_via_eway'] = "通過Eway處理付款";//1
 $LANG['processing'] = "處理中，請稍候...";//1
 $LANG['product'] = "產品";//1
+$LANG['product_attribute'] = "Product Attribute";//0
 $LANG['product_attributes'] = "Product Attributes";//0
 $LANG['product_description'] = "產品描述";//1
 $LANG['product_description_prompt'] = "You must enter a description for the product";//0
@@ -431,6 +438,7 @@ $LANG['product_id'] = "產品編號";//1
 $LANG['product_sales'] = "產品銷售";//1
 $LANG['product_to_add'] = "要添加的產品";//1
 $LANG['product_unit_price'] = "產品單價";//1
+$LANG['product_value'] = "Product Value";//0
 $LANG['product_values'] = "Product Values";//0
 $LANG['products'] = "產品";//1
 $LANG['products_by_customer'] = "產品按客戶";//1
@@ -512,7 +520,6 @@ $LANG['shortcut'] =" Shortcut menu";//0
 $LANG['show_details'] = "Show details";//0
 $LANG['show_only_unpaid_invoices'] = "Show only unpaid invoices";//0
 $LANG['simple_invoices'] = "Simple Invoices";//0
-$LANG['simple_invoices_powered_by'] = "Powered by Simple Invoices";//0
 $LANG['start_date'] = "Start date (YYYY-MM-DD)";//0
 $LANG['start_date_short'] = "Start date";//0
 $LANG['start_working'] = "Start working";//0
@@ -550,6 +557,24 @@ $LANG['tax_total'] = "Total tax";//0
 $LANG['telephone_short'] = "Tel";//0
 $LANG['thank_you'] = "Thank you for choosing Simple Invoices!";//0
 $LANG['thank_you_inv'] = "Thank you for invoicing with ";//0
+$LANG['title_module_billers'] = "People / Billers";//0
+$LANG['title_module_cron'] = "Money / Recurrence";//0
+$LANG['title_module_custom_fields'] = "Settings / Custom Fields";//0
+$LANG['title_module_customers'] = "People / Customers";//0
+$LANG['title_module_index'] = "Home";//0
+$LANG['title_module_invoices'] = "Money / Invoices";//0
+$LANG['title_module_options'] = "Settings";//0
+$LANG['title_module_payment_types'] = "Settings / Payment Types";//0
+$LANG['title_module_payments'] = "Money / Payments";//0
+$LANG['title_module_preferences'] = "Settings / Invoice Preferences";//0
+$LANG['title_module_product_attribute'] = "Products / Product Attributes";//0
+$LANG['title_module_product_value'] = "Products / Product Values";//0
+$LANG['title_module_products'] = "Products";//0
+$LANG['title_module_reports'] = "Home / Reports";//0
+$LANG['title_module_system_defaults'] = "Settings / System Preferences";//0
+$LANG['title_module_tax_rates'] = "Settings / Tax Rates";//0
+$LANG['title_module_user'] = "People / Users";//0
+$LANG['title_view_index'] = "Dashboard";//0
 $LANG['to'] = "To";//0
 $LANG['to_lowercase'] = "to";//0
 $LANG['toggle_status'] = "Toggle status";//0
@@ -590,32 +615,3 @@ $LANG['years'] = "years";//0
 $LANG['yes'] = "Yes";//0
 $LANG['your_reports'] = "Your reports";//0
 $LANG['zip'] = "Zip code";//0
-$LANG['manage_product_attributes'] = "Manage Product Attributes";//0
-$LANG['add_product_attribute'] = "Add Product Attribute";//0
-$LANG['insert_product_attribute'] = "Insert Product Attribute";//0
-$LANG['product_attribute'] = "Product Attribute";//0
-$LANG['add_product_value'] = "Add Product Value";//0
-$LANG['insert_product_value'] = "Insert Product Value";//0
-$LANG['product_value'] = "Product Value";//0
-$LANG['manage_product_values'] = "Manage Product Value";//0
-
-$LANG['title_module_index']				= "Home";//0
-$LANG['title_module_reports']			= "Home / Reports";//0
-$LANG['title_module_invoices']			= "Money / Invoices";//0
-$LANG['title_module_cron']				= "Money / Recurrence";//0
-$LANG['title_module_payments']			= "Money / Payments";//0
-$LANG['title_module_billers']			= "People / Billers";//0
-$LANG['title_module_customers']			= "People / Customers";//0
-$LANG['title_module_user']				= "People / Users";//0
-$LANG['title_module_products']			= "Products";//0
-$LANG['title_module_product_attribute']	= "Products / Product Attributes";//0
-$LANG['title_module_product_value']		= "Products / Product Values";//0
-$LANG['title_module_options']			= "Settings";//0
-$LANG['title_module_system_defaults']	= "Settings / System Preferences";//0
-$LANG['title_module_custom_fields']		= "Settings / Custom Fields";//0
-$LANG['title_module_tax_rates']			= "Settings / Tax Rates";//0
-$LANG['title_module_preferences']		= "Settings / Invoice Preferences";//0
-$LANG['title_module_payment_types']		= "Settings / Payment Types";//0
-$LANG['title_view_index']				= "Dashboard";//0
-
-?>

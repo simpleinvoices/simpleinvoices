@@ -2,17 +2,20 @@
 
 /*
 * Script: lang.php
-* 	Chinese (China) translation file
+*    Chinese (China) translation file
 *
 * Last edited:
 *    2014-06-03
 *
 * License:
-*	 GPL v3 or above
+*    GPL v3 or above
 */
 
-/*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
-regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
+/*
+ *    "//1" means that the variable has been translated
+ *    "//0" means that the variable has not been translated
+ *    These values are used by a script to calculate how much of each file has been translated.
+ *    Use the regex pattern :%s/;/ /1/;// 1\/\/1/g - remove the spaces
  */
 
 #all
@@ -34,6 +37,8 @@ $LANG['add_new_row'] = "添加一行记录";//1
 $LANG['add_new_tax_rate'] = "添加新税率";//1
 $LANG['add_payment_type'] = "添加付款方式";//1
 $LANG['add_product'] = "添加产品";//1
+$LANG['add_product_attribute'] = "Add Product Attribute";//0
+$LANG['add_product_value'] = "Add Product Value";//0
 $LANG['add_tax_rate'] = "添加税率";//1
 $LANG['address'] = "地址";//1
 $LANG['address_city'] = "地址: 城市";//1
@@ -73,6 +78,7 @@ $LANG['cancel'] = "取消";//1
 $LANG['cannot_delete_first_row'] = "无法删除第一行记录";//1
 $LANG['change_log'] = "更改日志";//1
 $LANG['city'] = "城市";//1
+$LANG['company_name'] = "Simple Invoices";//0
 $LANG['confirm_delete'] = "你确定要删除吗";//1
 $LANG['consulting'] = "咨询";//1
 $LANG['consulting_style'] = "咨询方式";//1
@@ -262,6 +268,8 @@ $LANG['insert_customer'] = "Insert Customer";//0
 $LANG['insert_payment_type'] = "Insert Payment Type";//0
 $LANG['insert_preference'] = "Insert Preference";//0
 $LANG['insert_product'] = "Insert Product";//0
+$LANG['insert_product_attribute'] = "Insert Product Attribute";//0
+$LANG['insert_product_value'] = "Insert Product Value";//0
 $LANG['insert_tax_rate'] = "Insert Tax Rate";//0
 $LANG['installation'] = "Installation";//0
 $LANG['inv'] = "Invoice";//0
@@ -317,6 +325,8 @@ $LANG['manage_invoices'] = "Manage Invoices";//0
 $LANG['manage_payment_types'] = "Manage Payment Types";//0
 $LANG['manage_payments'] = "Manage Payments";//0
 $LANG['manage_preferences'] = "Manage Preferences";//0
+$LANG['manage_product_attributes'] = "Manage Product Attributes";//0
+$LANG['manage_product_values'] = "Manage Product Value";//0
 $LANG['manage_products'] = "Manage Products";//0
 $LANG['manage_tax_rates'] = "Manage Tax Rates";//0
 $LANG['mandatory_fields'] = "All fields are mandatory";//0
@@ -401,6 +411,7 @@ $LANG['plugin_not_registered'] = "Not registered";//0
 $LANG['plugin_register'] = "Register";//0
 $LANG['plugin_registered'] = "Registered";//0
 $LANG['plugin_unregister'] = "Unregister";//0
+$LANG['powered_by'] = "Powered by";//0
 $LANG['preference'] = "preference";//0
 $LANG['preference_id'] = "Preference ID";//0
 $LANG['preferences'] = "Preferences";//0
@@ -417,6 +428,7 @@ $LANG['process_payment_inv_id'] = "Process Payment Invoice ID";//0
 $LANG['process_payment_via_eway'] = "Process Payment via Eway";//0
 $LANG['processing'] = "Processing, please wait ...";//0
 $LANG['product'] = "Product";//0
+$LANG['product_attribute'] = "Product Attribute";//0
 $LANG['product_attributes'] = "产品属性";//1
 $LANG['product_description'] = "Product Description";//0
 $LANG['product_description_prompt'] = "必须输入产品的描述";//1
@@ -426,6 +438,7 @@ $LANG['product_id'] = "Product ID";//0
 $LANG['product_sales'] = "Product Sales";//0
 $LANG['product_to_add'] = "Product to add";//0
 $LANG['product_unit_price'] = "Product Unit Price";//0
+$LANG['product_value'] = "Product Value";//0
 $LANG['product_values'] = "产品价值";//1
 $LANG['products'] = "Products";//0
 $LANG['products_by_customer'] = "Products by Customer";//0
@@ -507,7 +520,6 @@ $LANG['shortcut'] =" Shortcut menu";//0
 $LANG['show_details'] = "Show details";//0
 $LANG['show_only_unpaid_invoices'] = "Show only unpaid invoices";//0
 $LANG['simple_invoices'] = "Simple Invoices";//0
-$LANG['simple_invoices_powered_by'] = "Powered by Simple Invoices";//0
 $LANG['start_date'] = "Start date (YYYY-MM-DD)";//0
 $LANG['start_date_short'] = "Start date";//0
 $LANG['start_working'] = "Start working";//0
@@ -545,6 +557,24 @@ $LANG['tax_total'] = "总税款额";//1
 $LANG['telephone_short'] = "Tel";//0
 $LANG['thank_you'] = "Thank you for choosing Simple Invoices!";//0
 $LANG['thank_you_inv'] = "Thank you for invoicing with ";//0
+$LANG['title_module_billers'] = "People / Billers";//0
+$LANG['title_module_cron'] = "Money / Recurrence";//0
+$LANG['title_module_custom_fields'] = "设置 / 自定义子段";//1
+$LANG['title_module_customers'] = "People / Customers";//0
+$LANG['title_module_index'] = "主页";//1
+$LANG['title_module_invoices'] = "钱 / 发票";//1
+$LANG['title_module_options'] = "设置";//1
+$LANG['title_module_payment_types'] = "设置 / 支付方式";//1
+$LANG['title_module_payments'] = "钱 / 付款";//1
+$LANG['title_module_preferences'] = "设置 / 发票选项";//1
+$LANG['title_module_product_attribute'] = "产品属性";//1
+$LANG['title_module_product_value'] = "产品价值";//1
+$LANG['title_module_products'] = "产品";//1
+$LANG['title_module_reports'] = "主页 / 报告";//1
+$LANG['title_module_system_defaults'] = "设置 / 系统选项";//1
+$LANG['title_module_tax_rates'] = "设置 / 税率";//1
+$LANG['title_module_user'] = "People / Users";//0
+$LANG['title_view_index'] = "仪表盘";//1
 $LANG['to'] = "To";//0
 $LANG['to_lowercase'] = "to";//0
 $LANG['toggle_status'] = "Toggle status";//0
@@ -585,32 +615,3 @@ $LANG['years'] = "年";//1
 $LANG['yes'] = "是";//1
 $LANG['your_reports'] = "个人报告";//1
 $LANG['zip'] = "邮编";//1
-$LANG['manage_product_attributes'] = "Manage Product Attributes";//0
-$LANG['add_product_attribute'] = "Add Product Attribute";//0
-$LANG['insert_product_attribute'] = "Insert Product Attribute";//0
-$LANG['product_attribute'] = "Product Attribute";//0
-$LANG['add_product_value'] = "Add Product Value";//0
-$LANG['insert_product_value'] = "Insert Product Value";//0
-$LANG['product_value'] = "Product Value";//0
-$LANG['manage_product_values'] = "Manage Product Value";//0
-
-$LANG['title_module_index']				= "主页";//1
-$LANG['title_module_reports']			= "主页 / 报告";//1
-$LANG['title_module_invoices']			= "钱 / 发票";//1
-$LANG['title_module_cron']				= "Money / Recurrence";//0
-$LANG['title_module_payments']			= "钱 / 付款";//1
-$LANG['title_module_billers']			= "People / Billers";//0
-$LANG['title_module_customers']			= "People / Customers";//0
-$LANG['title_module_user']				= "People / Users";//0
-$LANG['title_module_products']			= "产品";//1
-$LANG['title_module_product_attribute']	= "产品属性";//1
-$LANG['title_module_product_value']		= "产品价值";//1
-$LANG['title_module_options']			= "设置";//1
-$LANG['title_module_system_defaults']	= "设置 / 系统选项";//1
-$LANG['title_module_custom_fields']		= "设置 / 自定义子段";//1
-$LANG['title_module_tax_rates']			= "设置 / 税率";//1
-$LANG['title_module_preferences']		= "设置 / 发票选项";//1
-$LANG['title_module_payment_types']		= "设置 / 支付方式";//1
-$LANG['title_view_index']				= "仪表盘";//1
-
-?>

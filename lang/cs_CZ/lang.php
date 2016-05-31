@@ -11,11 +11,15 @@
 *	 GPL v3 or above
 */
 
-/*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
-regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
+/*
+ *    "//1" means that the variable has been translated
+ *    "//0" means that the variable has not been translated
+ *    These values are used by a script to calculate how much of each file has been translated.
+ *    Use the regex pattern :%s/;/ /1/;// 1\/\/1/g - remove the spaces
  */
 
 #all
+
 $LANG['about'] = "O programu";//1
 $LANG['account_info'] = "Informace o účtu";//1
 $LANG['actions'] = "Akce";//1
@@ -34,6 +38,8 @@ $LANG['add_new_row'] = "Přidat nový řádek";//1
 $LANG['add_new_tax_rate'] = "Přidat novou sazbu daně";//1
 $LANG['add_payment_type'] = "Přidat způsob úhrady";//1
 $LANG['add_product'] = "Přidat produkt";//1
+$LANG['add_product_attribute'] = "Add Product Attribute";//0
+$LANG['add_product_value'] = "Add Product Value";//0
 $LANG['add_tax_rate'] = "Přidat sazbu daně";//1
 $LANG['address'] = "Adresa";//1
 $LANG['address_city'] = "Adresa: Město";//1
@@ -73,6 +79,7 @@ $LANG['cancel'] = "Zrušit";//1
 $LANG['cannot_delete_first_row'] = "První řádek nejde smazat";//1
 $LANG['change_log'] = "Přehled změn";//1
 $LANG['city'] = "Město";//1
+$LANG['company_name'] = "Simple Invoices";//1
 $LANG['confirm_delete'] = "Opravdu chcete smazat";//1
 $LANG['consulting'] = "Poradenství";//1
 $LANG['consulting_style'] = "Styl Poradenství";//1
@@ -262,6 +269,8 @@ $LANG['insert_customer'] = "Vložit odběratele";//1
 $LANG['insert_payment_type'] = "Vložit způsob úhrady";//1
 $LANG['insert_preference'] = "Vložit volbu";//1
 $LANG['insert_product'] = "Vložit položku";//1
+$LANG['insert_product_attribute'] = "Insert Product Attribute";//0
+$LANG['insert_product_value'] = "Insert Product Value";//0
 $LANG['insert_tax_rate'] = "Vložit sazbu daně";//1
 $LANG['installation'] = "Instalace";//1
 $LANG['inv'] = "Faktura";//1
@@ -317,6 +326,8 @@ $LANG['manage_invoices'] = "Spravovat faktury";//1
 $LANG['manage_payment_types'] = "Spravovat způsoby úhrady";//1
 $LANG['manage_payments'] = "Spravovat platby";//1
 $LANG['manage_preferences'] = "Spravovat volby";//1
+$LANG['manage_product_attributes'] = "Manage Product Attributes";//0
+$LANG['manage_product_values'] = "Manage Product Value";//0
 $LANG['manage_products'] = "Spravovat produkty";//1
 $LANG['manage_tax_rates'] = "Spravovat sazby daní";//1
 $LANG['mandatory_fields'] = "Všechna pole jsou povinná";//1
@@ -401,6 +412,7 @@ $LANG['plugin_not_registered'] = "Neregistrované";//1
 $LANG['plugin_register'] = "Registr";//1
 $LANG['plugin_registered'] = "Registrováno";//1
 $LANG['plugin_unregister'] = "Odregistrovat";//1
+$LANG['powered_by'] = "Zpracováno systémem";//1
 $LANG['preference'] = "předvolby";//1
 $LANG['preference_id'] = "Kód volby";//1
 $LANG['preferences'] = "Předvolby";//1
@@ -417,6 +429,7 @@ $LANG['process_payment_inv_id'] = "Zpracovat platbu faktury č.";//1
 $LANG['process_payment_via_eway'] = "Zpracovt platbu přes Eway";//1
 $LANG['processing'] = "Vydržte prosím, pracuji…";//1
 $LANG['product'] = "Produkt";//1
+$LANG['product_attribute'] = "Product Attribute";//0
 $LANG['product_attributes'] = "Product Attributes";//0
 $LANG['product_description'] = "Popis produktu";//1
 $LANG['product_description_prompt'] = "You must enter a description for the product";//1
@@ -426,6 +439,7 @@ $LANG['product_id'] = "Kód produktu";//1
 $LANG['product_sales'] = "Prodej produktu";//1
 $LANG['product_to_add'] = "Produkt k přidání";//1
 $LANG['product_unit_price'] = "Cena za jednotku";//1
+$LANG['product_value'] = "Product Value";//0
 $LANG['product_values'] = "Product Values";//0
 $LANG['products'] = "Produkty";//1
 $LANG['products_by_customer'] = "Produkty podle odběratele";//1
@@ -507,7 +521,6 @@ $LANG['shortcut'] ="Menu odkazů";//1
 $LANG['show_details'] = "Zobrazit podrobnosti";//1
 $LANG['show_only_unpaid_invoices'] = "Zobrazit jen nezaplacené faktury";//1
 $LANG['simple_invoices'] = "Simple Invoices";//1
-$LANG['simple_invoices_powered_by'] = "Zpracováno systémem Simple Invoices";//1
 $LANG['start_date'] = "Počáteční datum (RRRR-MM-DD)";//1
 $LANG['start_date_short'] = "Počáteční datum";//1
 $LANG['start_working'] = "Začít pracovat";//1
@@ -545,6 +558,24 @@ $LANG['tax_total'] = "Celkem daň";//1
 $LANG['telephone_short'] = "Tel.";//1
 $LANG['thank_you'] = "Thank you for choosing Simple Invoices!";//1
 $LANG['thank_you_inv'] = "Děkujeme, že fakturujete v&nbsp;";//1
+$LANG['title_module_billers'] = "Peníze / Dodavatelé";//1
+$LANG['title_module_cron'] = "Money / Recurrence";//1
+$LANG['title_module_custom_fields'] = "Nastavení / Volitelná pole";//1
+$LANG['title_module_customers'] = "Peníze / Odběratelé";//1
+$LANG['title_module_index'] = "Domácí";//1
+$LANG['title_module_invoices'] = "Peníze / Faktury";//1
+$LANG['title_module_options'] = "Nastavení";//1
+$LANG['title_module_payment_types'] = "Nastavení / Typy plateb";//1
+$LANG['title_module_payments'] = "Peníze / Platby";//1
+$LANG['title_module_preferences'] = "Nastavení / Předvolby faktur";//1
+$LANG['title_module_product_attribute'] = "Products / Product Attributes";//0
+$LANG['title_module_product_value'] = "Products / Product Values";//0
+$LANG['title_module_products'] = "Products";//1
+$LANG['title_module_reports'] = "Domácí / Přehledy";//1
+$LANG['title_module_system_defaults'] = "Nastavení / Předvolby systému";//1
+$LANG['title_module_tax_rates'] = "Nastavení / Sazby daně";//1
+$LANG['title_module_user'] = "Lidé / Uživatelé";//1
+$LANG['title_view_index'] = "Nástěnka";//1
 $LANG['to'] = "To";//1
 $LANG['to_lowercase'] = "to";//1
 $LANG['toggle_status'] = "Přepnout stav";//1
@@ -585,32 +616,3 @@ $LANG['years'] = "roky";//1
 $LANG['yes'] = "Ano";//1
 $LANG['your_reports'] = "Vaše přehledy";//1
 $LANG['zip'] = "PSČ";//1
-$LANG['manage_product_attributes'] = "Manage Product Attributes";//0
-$LANG['add_product_attribute'] = "Add Product Attribute";//0
-$LANG['insert_product_attribute'] = "Insert Product Attribute";//0
-$LANG['product_attribute'] = "Product Attribute";//0
-$LANG['add_product_value'] = "Add Product Value";//0
-$LANG['insert_product_value'] = "Insert Product Value";//0
-$LANG['product_value'] = "Product Value";//0
-$LANG['manage_product_values'] = "Manage Product Value";//0
-
-$LANG['title_module_index']				= "Domácí";//1
-$LANG['title_module_reports']			= "Domácí / Přehledy";//1
-$LANG['title_module_invoices']			= "Peníze / Faktury";//1
-$LANG['title_module_cron']				= "Money / Recurrence";//1
-$LANG['title_module_payments']			= "Peníze / Platby";//1
-$LANG['title_module_billers']			= "Peníze / Dodavatelé";//1
-$LANG['title_module_customers']			= "Peníze / Odběratelé";//1
-$LANG['title_module_user']				= "Lidé / Uživatelé";//1
-$LANG['title_module_products']			= "Products";//1
-$LANG['title_module_product_attribute']	= "Products / Product Attributes";//0
-$LANG['title_module_product_value']		= "Products / Product Values";//0
-$LANG['title_module_options']			= "Nastavení";//1
-$LANG['title_module_system_defaults']	= "Nastavení / Předvolby systému";//1
-$LANG['title_module_custom_fields']		= "Nastavení / Volitelná pole";//1
-$LANG['title_module_tax_rates']			= "Nastavení / Sazby daně";//1
-$LANG['title_module_preferences']		= "Nastavení / Předvolby faktur";//1
-$LANG['title_module_payment_types']		= "Nastavení / Typy plateb";//1
-$LANG['title_view_index']				= "Nástěnka";//1
-
-?>

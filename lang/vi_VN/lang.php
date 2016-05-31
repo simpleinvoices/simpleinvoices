@@ -2,17 +2,20 @@
 
 /*
 * Script: lang.php
-* 	Vietnamese translation file
+*    Vietnamese translation file
 *
 * Last edited:
 *    2014-06-09
 *
 * License:
-*	 GPL v3 or above
+*    GPL v3 or above
 */
 
-/*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
-regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
+/*
+ *    "//1" means that the variable has been translated
+ *    "//0" means that the variable has not been translated
+ *    These values are used by a script to calculate how much of each file has been translated.
+ *    Use the regex pattern :%s/;/ /1/;// 1\/\/1/g - remove the spaces
  */
 
 #all
@@ -34,6 +37,8 @@ $LANG['add_new_row'] = "Thêm dòng mới";//1
 $LANG['add_new_tax_rate'] = "Thêm mới thuế";//1
 $LANG['add_payment_type'] = "Thêm loại thanh toán";//1
 $LANG['add_product'] = "Thêm sản phẩm";//1
+$LANG['add_product_attribute'] = "Thêm thuộc tính sản phẩm";//1
+$LANG['add_product_value'] = "Thêm giá trị sản phẩm";//1
 $LANG['add_tax_rate'] = "Thêm thuế";//1
 $LANG['address'] = "Địa chỉ";//1
 $LANG['address_city'] = "Địa chỉ: Thành phố";//1
@@ -73,6 +78,7 @@ $LANG['cancel'] = "Hủy";//1
 $LANG['cannot_delete_first_row'] = "Dòng đầu tiên không xóa được";//1
 $LANG['change_log'] = "Lịch sử thay đổi";//1
 $LANG['city'] = "Thành phố";//1
+$LANG['company_name'] = "Simple Invoices";//0
 $LANG['confirm_delete'] = "Bạn có chắc chắn muốn xóa không";//1
 $LANG['consulting'] = "Tư vấn";//1
 $LANG['consulting_style'] = "Kiểu tư vấn";//1
@@ -262,6 +268,8 @@ $LANG['insert_customer'] = "Chèn Khách Hàng";//1
 $LANG['insert_payment_type'] = "Chèn laọi thanh toán";//1
 $LANG['insert_preference'] = "Chèn laọi Hóa Đơn";//1
 $LANG['insert_product'] = "Chèn Sản Phẩm";//1
+$LANG['insert_product_attribute'] = "Chèn thuộc tính sản phẩm";//1
+$LANG['insert_product_value'] = "Giá trị sản phẩm chèn";//1
 $LANG['insert_tax_rate'] = "Chèn tỷ lệ Thuấ";//1
 $LANG['installation'] = "Cài đặt";//1
 $LANG['inv'] = "Hóa Đơn";//1
@@ -317,6 +325,8 @@ $LANG['manage_invoices'] = "Danh sách Hóa Đơn";//1
 $LANG['manage_payment_types'] = "Danh sách loại thanh toán";//1
 $LANG['manage_payments'] = "Danh sách Thu Chi";//1
 $LANG['manage_preferences'] = "Danh sách loại Hóa đơn";//1
+$LANG['manage_product_attributes'] = "Quản lý thuộc tính sản phẩm";//1
+$LANG['manage_product_values'] = "Quản lý Giá trị sản phẩm";//1
 $LANG['manage_products'] = "Danh sách sản phẩm";//1
 $LANG['manage_tax_rates'] = "Danh sách loại thuế";//1
 $LANG['mandatory_fields'] = "Tất cả các trường đều bắt buộc nhập";//1
@@ -401,6 +411,7 @@ $LANG['plugin_not_registered'] = "Chưa đăng ký";//1
 $LANG['plugin_register'] = "Đăng Ký";//1
 $LANG['plugin_registered'] = "Đã đang8 ký";//1
 $LANG['plugin_unregister'] = "Hủy Đặng Ký";//1
+$LANG['powered_by'] = "Hiệu chỉnh bởi";//1
 $LANG['preference'] = "Loại Hóa Đơn";//1
 $LANG['preference_id'] = "ID Loại Hóa Đơn";//1
 $LANG['preferences'] = "Danh sách Loại Hóa Đơn";//1
@@ -417,6 +428,7 @@ $LANG['process_payment_inv_id'] = "Thực hiện Thanh Toán Mã số Hóa đơn
 $LANG['process_payment_via_eway'] = "Thực hiện Thanh Toán cúng với Eway";//1
 $LANG['processing'] = "Đang thực hiện , vui lòng chờ...";//1
 $LANG['product'] = "Sản phẩm";//1
+$LANG['product_attribute'] = "Thuộc tính sản phẩm";//1
 $LANG['product_attributes'] = "Thuộc tính sản phẩm";//1
 $LANG['product_description'] = "Mô tả Sản phẩm";//1
 $LANG['product_description_prompt'] = "You must enter a description for the product";//0
@@ -426,6 +438,7 @@ $LANG['product_id'] = "ID Sản phẩm";//1
 $LANG['product_sales'] = "Sản phẩm Bán hàng";//1
 $LANG['product_to_add'] = "Sản phẩm để thêm";//1
 $LANG['product_unit_price'] = "Đơn giá Sản phẩm";//1
+$LANG['product_value'] = "Giá trị sản phẩm";//1
 $LANG['product_values'] = "Giá trị sản phẩm";//1
 $LANG['products'] = "Sản phẩm";//1
 $LANG['products_by_customer'] = "Sản phẩm/ Khách hàng";//1
@@ -507,7 +520,6 @@ $LANG['shortcut'] = " Đường tắt";//1
 $LANG['show_details'] = "Hiển thị chi tiết";//1
 $LANG['show_only_unpaid_invoices'] = "Chỉ hiển thị Hóa đơn chưa Thanh Tóan";//1
 $LANG['simple_invoices'] = "Quản lý IN Hóa Đơn";//1
-$LANG['simple_invoices_powered_by'] = "Hiệu chỉnh bởi Phuong Nam Solution";//1
 $LANG['start_date'] = "Ngày bắt đầu (YYYY-MM-DD)";//1
 $LANG['start_date_short'] = "Ngày bắt đầu";//1
 $LANG['start_working'] = "Bắt đầu làm việc";//1
@@ -545,6 +557,24 @@ $LANG['tax_total'] = "Tổng Thuế";//1
 $LANG['telephone_short'] = "ĐT";//1
 $LANG['thank_you'] = "Cảm ơn các bạn đã tin dùng Phần Mềm Quàn Lý Hóa Đơn!";//1
 $LANG['thank_you_inv'] = "Cảm ơn bạn đã lập Hóa Đơn với ";//1
+$LANG['title_module_billers'] = "Người / NV Bán Hàng";//1
+$LANG['title_module_cron'] = "Quản lý Hóa Đơn / Hóa Đơn Tự Động";//1
+$LANG['title_module_custom_fields'] = "Cài Đặt / Trường dữ liệu mỡ rộng";//1
+$LANG['title_module_customers'] = "Người / Khách hàng";//1
+$LANG['title_module_index'] = "Trang Chính";//1
+$LANG['title_module_invoices'] = "Quản lý Hóa Đơn / Danh sách Hóa Đơn";//1
+$LANG['title_module_options'] = "Cài Đặt";//1
+$LANG['title_module_payment_types'] = "Cài Đặt / Danh sách Loại Thanh Toán";//1
+$LANG['title_module_payments'] = "Quản lý Hóa Đơn / Danh sách Phiéu Thu";//1
+$LANG['title_module_preferences'] = "Cài Đặt / Phương thức thanh toán";//1
+$LANG['title_module_product_attribute'] = "Sản phẩm / Thuộc tính sản phẩm";//1
+$LANG['title_module_product_value'] = "Sản phẩm / Giá trị sản phẩm";//1
+$LANG['title_module_products'] = "Sản phẩm";//1
+$LANG['title_module_reports'] = "Trang Chính / Những Báo cáo";//1
+$LANG['title_module_system_defaults'] = "Cài Đặt / Cài Đặc mặc định";//1
+$LANG['title_module_tax_rates'] = "Cài Đặt / Danh sách Tỷ lệ Thuế";//1
+$LANG['title_module_user'] = "Người / Người sử dụng";//1
+$LANG['title_view_index'] = "Bản thông tin tổng hợp";//1
 $LANG['to'] = "Đến";//1
 $LANG['to_lowercase'] = "Đến";//1
 $LANG['toggle_status'] = "Trạn thái chốt";//1
@@ -585,32 +615,3 @@ $LANG['years'] = "Năm";//1
 $LANG['yes'] = "Đồng ý";//1
 $LANG['your_reports'] = "Báo cáo của bạn";//1
 $LANG['zip'] = "Mã Zip";//1
-$LANG['manage_product_attributes'] = "Quản lý thuộc tính sản phẩm";//1
-$LANG['add_product_attribute'] = "Thêm thuộc tính sản phẩm";//1
-$LANG['insert_product_attribute'] = "Chèn thuộc tính sản phẩm";//1
-$LANG['product_attribute'] = "Thuộc tính sản phẩm";//1
-$LANG['add_product_value'] = "Thêm giá trị sản phẩm";//1
-$LANG['insert_product_value'] = "Giá trị sản phẩm chèn";//1
-$LANG['product_value'] = "Giá trị sản phẩm";//1
-$LANG['manage_product_values'] = "Quản lý Giá trị sản phẩm";//1
-
-$LANG['title_module_index']				= "Trang Chính";//1
-$LANG['title_module_reports']			= "Trang Chính / Những Báo cáo";//1
-$LANG['title_module_invoices']			= "Quản lý Hóa Đơn / Danh sách Hóa Đơn";//1
-$LANG['title_module_cron']				= "Quản lý Hóa Đơn / Hóa Đơn Tự Động";//1
-$LANG['title_module_payments']			= "Quản lý Hóa Đơn / Danh sách Phiéu Thu";//1
-$LANG['title_module_billers']			= "Người / NV Bán Hàng";//1
-$LANG['title_module_customers']			= "Người / Khách hàng";//1
-$LANG['title_module_user']				= "Người / Người sử dụng";//1
-$LANG['title_module_products']			= "Sản phẩm";//1
-$LANG['title_module_product_attribute']	= "Sản phẩm / Thuộc tính sản phẩm";//1
-$LANG['title_module_product_value']		= "Sản phẩm / Giá trị sản phẩm";//1
-$LANG['title_module_options']			= "Cài Đặt";//1
-$LANG['title_module_system_defaults']	= "Cài Đặt / Cài Đặc mặc định";//1
-$LANG['title_module_custom_fields']		= "Cài Đặt / Trường dữ liệu mỡ rộng";//1
-$LANG['title_module_tax_rates']			= "Cài Đặt / Danh sách Tỷ lệ Thuế";//1
-$LANG['title_module_preferences']		= "Cài Đặt / Phương thức thanh toán";//1
-$LANG['title_module_payment_types']		= "Cài Đặt / Danh sách Loại Thanh Toán";//1
-$LANG['title_view_index']				= "Bản thông tin tổng hợp";//1
-
-?>

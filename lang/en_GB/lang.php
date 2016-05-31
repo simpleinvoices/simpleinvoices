@@ -11,11 +11,15 @@
 *	 GPL v3 or above
 */
 
-/*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
-regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
+/*
+ *    "//1" means that the variable has been translated
+ *    "//0" means that the variable has not been translated
+ *    These values are used by a script to calculate how much of each file has been translated.
+ *    Use the regex pattern :%s/;/ /1/;// 1\/\/1/g - remove the spaces
  */
 
 #all
+
 $LANG['about'] = "About";//1
 $LANG['account_info'] = "Account Info";//1
 $LANG['actions'] = "Actions";//1
@@ -34,6 +38,8 @@ $LANG['add_new_row'] = "Add new row";//1
 $LANG['add_new_tax_rate'] = "Add New Tax Rate";//1
 $LANG['add_payment_type'] = "Add Payment Type";//1
 $LANG['add_product'] = "Add Product";//1
+$LANG['add_product_attribute'] = "Add Product Attribute";//1
+$LANG['add_product_value'] = "Add Product Value";//1
 $LANG['add_tax_rate'] = "Add Tax Rate";//1
 $LANG['address'] = "Address";//1
 $LANG['address_city'] = "Address: City";//1
@@ -73,6 +79,7 @@ $LANG['cancel'] = "Cancel";//1
 $LANG['cannot_delete_first_row'] = "The first row cannot be deleted";//1
 $LANG['change_log'] = "Change Log";//1
 $LANG['city'] = "City";//1
+$LANG['company_name'] = "Simple Invoices";//1
 $LANG['confirm_delete'] = "Are you sure you want to delete";//1
 $LANG['consulting'] = "Consulting";//1
 $LANG['consulting_style'] = "Consulting style";//1
@@ -207,7 +214,7 @@ $LANG['help_currency_code'] = "Currency code is the 3 letter abbreviation for yo
 $LANG['help_custom_fields'] = "This field is a 'Custom Field'. This means that the label can be defined as whatever you want (ie. Barcode, Tax number, MSN, etc...). <br /><br />To edit or view existing 'Custom Fields' please select the Custom Fields option from the Options menu.";//1
 $LANG['help_customer_contact'] = "The 'Attn.' or Customer Contact field allow you to specify a contact within your customers business.<br /><br />This is usefull if you customer has many employees and you need to directly specify on the invoice who within your customers business this invoice is for.<br /><br /> ie. Within the customer 'Springfield Power Plant'  you may want to specify Mr Burns (or Smithers) as the customer contact as they are the person who gets the invoice.<br /><br />So an Invoice will look like <br /><br />Customer: Springfield Power Plant<br />Attn.: Mr Burns<br />";//1
 $LANG['help_database_patches'] = "<b>Database patches need to be applied</b><br />There are database patches that need to be applied, please select 'Database Upgrade Manager' from the Options menu and follow the instructions.<br /><br />The 'Database Upgrade Manager' is how Simple Invocies manages modification to the structure of the Simple Invoices database. With each new release there may be 'Database patches' that need to be applied. Database Upgrade Manage looks after these database patches.<br /><br />Database patches are individual modifications to the Simple Invoices database. With a new release there may be multiple patches that need to be applied.";//1
-$LANG['help_default_invoice_template_text'] = "The drop down list contains the folder names in the \"./templates/invoices/\" path. Select the folder with the template you want to use to generate formatted invoices.<br/><br/>The formatted invoice can be printed, attached to an email, or downloaded to your computer in PDF, WORD (doc) or EXCEL (cvs) file format.<br /><br />";//1
+$LANG['help_default_invoice_template_text'] = "The value you enter into the detault invoice template MUST be the actual folder name of the template you wish to select.  The invoice templates folders are located in (./templates/invoices/)<br /><br />";//1
 $LANG['help_delete'] = "By enabling Delete, you will be able to delete any invoices you no longer want via the Quick View of that invoice.<br /><br />To delete an invoice, enable this option, then go to the Manage Invoice page and select the Quick View for the invoice you wish to delete.  In the Quick View screen there will now be a delete option in the actions menu.  Click this button and follow the prompts - Your invoice will now be deleted.<br /><br />Note: Currently only invoices can be deleted, but in the near future this will be extended to all the other sections (ie. billers, customers, etc..)";//1
 $LANG['help_email_bcc'] = "This field is not mandatory and gets the default value from the Billers email address.<br /><br />It's recommended that you BCC yourself onto this email so that you also get a copy of it.  This way you know for sure that the email has been correctly sent and you always have a backup copy of the email.<br /><br /><i>Note: You can add multiple email addresses here - just use eith , or ; to split the addresses</i>";//1
 $LANG['help_email_cc'] = "This field is not mandatory.  Here you can specify any email address you want to CC but cannot add more than 1 email address in this field<br /><br /><i>Note: You can add multiple email addresses here - just use eith , or ; to split the addresses</i>";//1
@@ -262,6 +269,8 @@ $LANG['insert_customer'] = "Insert Customer";//1
 $LANG['insert_payment_type'] = "Insert Payment Type";//1
 $LANG['insert_preference'] = "Insert Preference";//1
 $LANG['insert_product'] = "Insert Product";//1
+$LANG['insert_product_attribute'] = "Insert Product Attribute";//1
+$LANG['insert_product_value'] = "Insert Product Value";//1
 $LANG['insert_tax_rate'] = "Insert Tax Rate";//1
 $LANG['installation'] = "Installation";//1
 $LANG['inv'] = "Invoice";//1
@@ -317,6 +326,8 @@ $LANG['manage_invoices'] = "Manage Invoices";//1
 $LANG['manage_payment_types'] = "Manage Payment Types";//1
 $LANG['manage_payments'] = "Manage Payments";//1
 $LANG['manage_preferences'] = "Manage Preferences";//1
+$LANG['manage_product_attributes'] = "Manage Product Attributes";//1
+$LANG['manage_product_values'] = "Manage Product Value";//1
 $LANG['manage_products'] = "Manage Products";//1
 $LANG['manage_tax_rates'] = "Manage Tax Rates";//1
 $LANG['mandatory_fields'] = "All fields are mandatory";//1
@@ -401,6 +412,7 @@ $LANG['plugin_not_registered'] = "Not registered";//1
 $LANG['plugin_register'] = "Register";//1
 $LANG['plugin_registered'] = "Registered";//1
 $LANG['plugin_unregister'] = "Unregister";//1
+$LANG['powered_by'] = "Powered by";//1
 $LANG['preference'] = "preference";//1
 $LANG['preference_id'] = "Preference ID";//1
 $LANG['preferences'] = "Preferences";//1
@@ -417,6 +429,7 @@ $LANG['process_payment_inv_id'] = "Process Payment Invoice ID";//1
 $LANG['process_payment_via_eway'] = "Process Payment via Eway";//1
 $LANG['processing'] = "Processing, please wait ...";//1
 $LANG['product'] = "Product";//1
+$LANG['product_attribute'] = "Product Attribute";//1
 $LANG['product_attributes'] = "Product Attributes";//1
 $LANG['product_description'] = "Product Description";//1
 $LANG['product_description_prompt'] = "You must enter a description for the product";//1
@@ -426,6 +439,7 @@ $LANG['product_id'] = "Product ID";//1
 $LANG['product_sales'] = "Product Sales";//1
 $LANG['product_to_add'] = "Product to add";//1
 $LANG['product_unit_price'] = "Product Unit Price";//1
+$LANG['product_value'] = "Product Value";//1
 $LANG['product_values'] = "Product Values";//1
 $LANG['products'] = "Products";//1
 $LANG['products_by_customer'] = "Products by Customer";//1
@@ -507,7 +521,6 @@ $LANG['shortcut'] =" Shortcut menu";//1
 $LANG['show_details'] = "Show details";//1
 $LANG['show_only_unpaid_invoices'] = "Show only unpaid invoices";//1
 $LANG['simple_invoices'] = "Simple Invoices";//1
-$LANG['simple_invoices_powered_by'] = "Powered by Simple Invoices";//1
 $LANG['start_date'] = "Start date (YYYY-MM-DD)";//1
 $LANG['start_date_short'] = "Start date";//1
 $LANG['start_working'] = "Start working";//1
@@ -545,6 +558,24 @@ $LANG['tax_total'] = "Total tax";//1
 $LANG['telephone_short'] = "Tel";//1
 $LANG['thank_you'] = "Thank you for choosing Simple Invoices!";//1
 $LANG['thank_you_inv'] = "Thank you for invoicing with ";//1
+$LANG['title_module_billers'] = "People / Billers";//1
+$LANG['title_module_cron'] = "Money / Recurrence";//1
+$LANG['title_module_custom_fields'] = "Settings / Custom Fields";//1
+$LANG['title_module_customers'] = "People / Customers";//1
+$LANG['title_module_index'] = "Home";//1
+$LANG['title_module_invoices'] = "Money / Invoices";//1
+$LANG['title_module_options'] = "Settings";//1
+$LANG['title_module_payment_types'] = "Settings / Payment Types";//1
+$LANG['title_module_payments'] = "Money / Payments";//1
+$LANG['title_module_preferences'] = "Settings / Invoice Preferences";//1
+$LANG['title_module_product_attribute'] = "Products / Product Attributes";//1
+$LANG['title_module_product_value'] = "Products / Product Values";//1
+$LANG['title_module_products'] = "Products";//1
+$LANG['title_module_reports'] = "Home / Reports";//1
+$LANG['title_module_system_defaults'] = "Settings / System Preferences";//1
+$LANG['title_module_tax_rates'] = "Settings / Tax Rates";//1
+$LANG['title_module_user'] = "People / Users";//1
+$LANG['title_view_index'] = "Dashboard";//1
 $LANG['to'] = "To";//1
 $LANG['to_lowercase'] = "to";//1
 $LANG['toggle_status'] = "Toggle status";//1
@@ -585,32 +616,3 @@ $LANG['years'] = "years";//1
 $LANG['yes'] = "Yes";//1
 $LANG['your_reports'] = "Your reports";//1
 $LANG['zip'] = "Zip code";//1
-$LANG['manage_product_attributes'] = "Manage Product Attributes";//1
-$LANG['add_product_attribute'] = "Add Product Attribute";//1
-$LANG['insert_product_attribute'] = "Insert Product Attribute";//1
-$LANG['product_attribute'] = "Product Attribute";//1
-$LANG['add_product_value'] = "Add Product Value";//1
-$LANG['insert_product_value'] = "Insert Product Value";//1
-$LANG['product_value'] = "Product Value";//1
-$LANG['manage_product_values'] = "Manage Product Value";//1
-
-$LANG['title_module_index']				= "Home";//1
-$LANG['title_module_reports']			= "Home / Reports";//1
-$LANG['title_module_invoices']			= "Money / Invoices";//1
-$LANG['title_module_cron']				= "Money / Recurrence";//1
-$LANG['title_module_payments']			= "Money / Payments";//1
-$LANG['title_module_billers']			= "People / Billers";//1
-$LANG['title_module_customers']			= "People / Customers";//1
-$LANG['title_module_user']				= "People / Users";//1
-$LANG['title_module_products']			= "Products";//1
-$LANG['title_module_product_attribute']	= "Products / Product Attributes";//1
-$LANG['title_module_product_value']		= "Products / Product Values";//1
-$LANG['title_module_options']			= "Settings";//1
-$LANG['title_module_system_defaults']	= "Settings / System Preferences";//1
-$LANG['title_module_custom_fields']		= "Settings / Custom Fields";//1
-$LANG['title_module_tax_rates']			= "Settings / Tax Rates";//1
-$LANG['title_module_preferences']		= "Settings / Invoice Preferences";//1
-$LANG['title_module_payment_types']		= "Settings / Payment Types";//1
-$LANG['title_view_index']				= "Dashboard";//1
-
-?>

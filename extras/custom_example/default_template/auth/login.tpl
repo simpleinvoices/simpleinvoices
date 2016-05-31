@@ -21,7 +21,7 @@
 {/if}
 	<div id="Dialog">
 		<center>
-            <h1>{$LANG.simple_invoices}</h1>
+            <h1>{$LANG.company_name}</h1>
 		<form action="" method="post" id="frmLogin" name="frmLogin">
 	        <input type="hidden" name="action" value="login" />
 		<dl>
@@ -55,7 +55,7 @@
         <br/>
 	</div>
     <br/>
-        <a href="http://www.simpleinvoices.org">{$LANG.simple_invoices_powered_by}</a>
+        <a href="http://www.simpleinvoices.org">{$LANG.powered_by}&nbsp;{$LANG.simple_invoices}</a>
 </div>
 
 <script language="JavaScript">

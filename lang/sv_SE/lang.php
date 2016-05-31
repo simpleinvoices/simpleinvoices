@@ -14,11 +14,15 @@
 *    GPL v3 or above
 */
 
-/*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
-regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
+/*
+ *    "//1" means that the variable has been translated
+ *    "//0" means that the variable has not been translated
+ *    These values are used by a script to calculate how much of each file has been translated.
+ *    Use the regex pattern :%s/;/ /1/;// 1\/\/1/g - remove the spaces
  */
 
 #all
+
 $LANG['about'] = "Om";//1
 $LANG['account_info'] = "Konto Information";//1
 $LANG['actions'] = "Handlingar";//1
@@ -37,6 +41,8 @@ $LANG['add_new_row'] = "Lägg till ny rad";//1
 $LANG['add_new_tax_rate'] = "Lägg till Ny Skattesats";//1
 $LANG['add_payment_type'] = "Lägg till Betalningsform";//1
 $LANG['add_product'] = "Lägg till Produkt";//1
+$LANG['add_product_attribute'] = "Add Product Attribute";//0
+$LANG['add_product_value'] = "Add Product Value";//0
 $LANG['add_tax_rate'] = "Lägg till Skattesats";//1
 $LANG['address'] = "Adress";//1
 $LANG['address_city'] = "Stad";//1
@@ -76,6 +82,7 @@ $LANG['cancel'] = "Avbryt";//1
 $LANG['cannot_delete_first_row'] = "Första raden kan inte raderas";//1
 $LANG['change_log'] = "Ändra Logg";//1
 $LANG['city'] = "Stad";//1
+$LANG['company_name'] = "Simple Invoices";//0
 $LANG['confirm_delete'] = "Är du säker att du vill radera";//1
 $LANG['consulting'] = "Konsultering";//1
 $LANG['consulting_style'] = "Konsulterings Stil";//1
@@ -265,6 +272,8 @@ $LANG['insert_customer'] = "Spara Kund";//1
 $LANG['insert_payment_type'] = "Spara Betalningsform";//1
 $LANG['insert_preference'] = "Spara Inställning";//1
 $LANG['insert_product'] = "Spara Produkt";//1
+$LANG['insert_product_attribute'] = "Insert Product Attribute";//0
+$LANG['insert_product_value'] = "Insert Product Value";//0
 $LANG['insert_tax_rate'] = "Spara Skattesats";//1
 $LANG['installation'] = "Installation";//1
 $LANG['inv'] = "Faktura";//1
@@ -320,6 +329,8 @@ $LANG['manage_invoices'] = "Hantera Fakturor";//1
 $LANG['manage_payment_types'] = "Hantera Betalningsformer";//1
 $LANG['manage_payments'] = "Hantera Betalningar";//1
 $LANG['manage_preferences'] = "Hantera Inställningar";//1
+$LANG['manage_product_attributes'] = "Manage Product Attributes";//0
+$LANG['manage_product_values'] = "Manage Product Value";//0
 $LANG['manage_products'] = "Hantera Produkter";//1
 $LANG['manage_tax_rates'] = "Hantera Skattesatser";//1
 $LANG['mandatory_fields'] = "Alla fält är obligatoriska";//1
@@ -404,6 +415,7 @@ $LANG['plugin_not_registered'] = "Ej registrerad";//1
 $LANG['plugin_register'] = "Registrera tillägget 'plugin'";//1
 $LANG['plugin_registered'] = "Tillägget 'plugin' registrerat";//1
 $LANG['plugin_unregister'] = "Avregistrera tillägg 'plugin'";//1
+$LANG['powered_by'] = "Powered by";//0
 $LANG['preference'] = "inställning";//1
 $LANG['preference_id'] = "Inställnings ID";//1
 $LANG['preferences'] = "Inställningar";//1
@@ -420,6 +432,7 @@ $LANG['process_payment_inv_id'] = "Behandla Betalning Faktura ID";//1
 $LANG['process_payment_via_eway'] = "Behandla Betalning via Eway";//1
 $LANG['processing'] = "Behandling pågår, vänligen vänta...";//1
 $LANG['product'] = "Produkt";//1
+$LANG['product_attribute'] = "Product Attribute";//0
 $LANG['product_attributes'] = "Produktattribut";//1
 $LANG['product_description'] = "Produkt Beskrivning";//1
 $LANG['product_description_prompt'] = "Man måste fylla i en beskrivning av produkten";//1
@@ -429,6 +442,7 @@ $LANG['product_id'] = "Produkt ID";//1
 $LANG['product_sales'] = "Produkt Försäljning";//1
 $LANG['product_to_add'] = "Produkt som skall läggas till";//1
 $LANG['product_unit_price'] = "Produkt Enhetspris";//1
+$LANG['product_value'] = "Product Value";//0
 $LANG['product_values'] = "Produktvärde";//1
 $LANG['products'] = "Produkter";//1
 $LANG['products_by_customer'] = "Produkter efter Kund";//1
@@ -509,8 +523,7 @@ $LANG['setup_customisation'] = "Om du behöver skräddarsy inställningarna (ex.
 $LANG['shortcut'] = "Genvägs meny";//1
 $LANG['show_details'] = "Visa detaljer";//1
 $LANG['show_only_unpaid_invoices'] = "Visa endast obetalda fakturor";//1
-$LANG['simple_invoices'] = "Simple Invoices";//1
-$LANG['simple_invoices_powered_by'] = "Powered by Simple Invoices";//0
+$LANG['simple_invoices'] = "Simple Invoices";//0
 $LANG['start_date'] = "Startdatum (ÅÅÅÅ-MM-DD)";//1
 $LANG['start_date_short'] = "Startdatum";//1
 $LANG['start_working'] = "Börja jobba";//1
@@ -548,6 +561,24 @@ $LANG['tax_total'] = "Skatte Summa";//1
 $LANG['telephone_short'] = "Tel";//1
 $LANG['thank_you'] = "Tack för att du valt Simple Invoices!";//1
 $LANG['thank_you_inv'] = "Tack för att du fakturerar med ";//1
+$LANG['title_module_billers'] = "Användare / Fordringsägare";//1
+$LANG['title_module_cron'] = "Money / Recurrence";//0
+$LANG['title_module_custom_fields'] = "Inställningar / Egendefinerade fält";//1
+$LANG['title_module_customers'] = "Personer / Kunder";//1
+$LANG['title_module_index'] = "Hem";//1
+$LANG['title_module_invoices'] = "Pengar / Fakturor";//1
+$LANG['title_module_options'] = "Inställningar";//1
+$LANG['title_module_payment_types'] = "Inställningar / Betalningstyper";//1
+$LANG['title_module_payments'] = "Pengar / Betalningar";//1
+$LANG['title_module_preferences'] = "Inställningar / Fakturor";//1
+$LANG['title_module_product_attribute'] = "Produkter / Produktattribut";//1
+$LANG['title_module_product_value'] = "Produkter / Produktvärde";//1
+$LANG['title_module_products'] = "Produkter";//1
+$LANG['title_module_reports'] = "Hem / Rapporter";//1
+$LANG['title_module_system_defaults'] = "Inställningar / System inställningar";//1
+$LANG['title_module_tax_rates'] = "Inställningar / Skattesatser";//1
+$LANG['title_module_user'] = "Personer / Användare";//1
+$LANG['title_view_index'] = "Kontrollpanel";//1
 $LANG['to'] = "Till";//1
 $LANG['to_lowercase'] = "till";//1
 $LANG['toggle_status'] = "Växla status";//1
@@ -588,32 +619,3 @@ $LANG['years'] = "år";//1
 $LANG['yes'] = "Ja";//1
 $LANG['your_reports'] = "Dina rapporter";//1
 $LANG['zip'] = "Postnummer";//1
-$LANG['manage_product_attributes'] = "Manage Product Attributes";//0
-$LANG['add_product_attribute'] = "Add Product Attribute";//0
-$LANG['insert_product_attribute'] = "Insert Product Attribute";//0
-$LANG['product_attribute'] = "Product Attribute";//0
-$LANG['add_product_value'] = "Add Product Value";//0
-$LANG['insert_product_value'] = "Insert Product Value";//0
-$LANG['product_value'] = "Product Value";//0
-$LANG['manage_product_values'] = "Manage Product Value";//0
-
-$LANG['title_module_index']				= "Hem";//1
-$LANG['title_module_reports']			= "Hem / Rapporter";//1
-$LANG['title_module_invoices']			= "Pengar / Fakturor";//1
-$LANG['title_module_cron']				= "Money / Recurrence";//0
-$LANG['title_module_payments']			= "Pengar / Betalningar";//1
-$LANG['title_module_billers']			= "Användare / Fordringsägare";//1
-$LANG['title_module_customers']			= "Personer / Kunder";//1
-$LANG['title_module_user']				= "Personer / Användare";//1
-$LANG['title_module_products']			= "Produkter";//1
-$LANG['title_module_product_attribute']	= "Produkter / Produktattribut";//1
-$LANG['title_module_product_value']		= "Produkter / Produktvärde";//1
-$LANG['title_module_options']			= "Inställningar";//1
-$LANG['title_module_system_defaults']	= "Inställningar / System inställningar";//1
-$LANG['title_module_custom_fields']		= "Inställningar / Egendefinerade fält";//1
-$LANG['title_module_tax_rates']			= "Inställningar / Skattesatser";//1
-$LANG['title_module_preferences']		= "Inställningar / Fakturor";//1
-$LANG['title_module_payment_types']		= "Inställningar / Betalningstyper";//1
-$LANG['title_view_index']				= "Kontrollpanel";//1
-
-?>

@@ -8,7 +8,7 @@
 	<input type="hidden" name="action" value="login" />	
 	
 	<div class="si_box">
-		<h1>{$LANG.simple_invoices}</h1>
+		<h1>{$LANG.company_name}</h1>
 	
 		<div class="si_box_auth_pad">
 			<table>
@@ -51,12 +51,12 @@
 
 <div id="si_footer">
 	<div class="si_wrap">
-	    <a href="http://www.simpleinvoices.org">{$LANG.simple_invoices_powered_by}</a>
+	    <a href="http://www.simpleinvoices.org">{$LANG.powered_by}&nbsp;{$LANG.simple_invoices}</a>
 	</div>
 </div>
 
 {literal}
-<script language="JavaScript">
+<script>
 	$(document).ready(function(){
 		$('.si_box').hide();
 		$('.si_box').slideDown(500);

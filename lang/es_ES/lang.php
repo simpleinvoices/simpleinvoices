@@ -11,14 +11,18 @@
 *    2014-06-03
 *
 * License:
-*	 GPL v3 or above
+*   GPL v3 or above
 */
 
-/*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
-regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
+/*
+ *    "//1" means that the variable has been translated
+ *    "//0" means that the variable has not been translated
+ *    These values are used by a script to calculate how much of each file has been translated.
+ *    Use the regex pattern :%s/;/ /1/;// 1\/\/1/g - remove the spaces
  */
 
 #all
+
 $LANG['about'] = "Acerca de";//1
 $LANG['account_info'] = "Información de la Cuenta";//1
 $LANG['actions'] = "Acciones";//1
@@ -37,6 +41,8 @@ $LANG['add_new_row'] = "Añadir nueva fila";//1
 $LANG['add_new_tax_rate'] = "Añadir Nuevo Impuesto";//1
 $LANG['add_payment_type'] = "Añadir Forma de Pago";//1
 $LANG['add_product'] = "Añadir Producto";//1
+$LANG['add_product_attribute'] = "Add Product Attribute";//0
+$LANG['add_product_value'] = "Add Product Value";//0
 $LANG['add_tax_rate'] = "Añadir Impuesto";//1
 $LANG['address'] = "Dirección";//1
 $LANG['address_city'] = "Dirección: Ciudad";//1
@@ -76,6 +82,7 @@ $LANG['cancel'] = "Cancelar";//1
 $LANG['cannot_delete_first_row'] = "La primera fila no puede ser eliminada";//1
 $LANG['change_log'] = "Registro de Cambios";//1
 $LANG['city'] = "Ciudad";//1
+$LANG['company_name'] = "Simple Invoices";//0
 $LANG['confirm_delete'] = "¿Está seguro que desea eliminar";//1
 $LANG['consulting'] = "Consultoría";//1
 $LANG['consulting_style'] = "Estilo de consultoría";//1
@@ -265,6 +272,8 @@ $LANG['insert_customer'] = "Insertar Cliente";//1
 $LANG['insert_payment_type'] = "Insertar Forma de Pago";//1
 $LANG['insert_preference'] = "Insertar Preferencia";//1
 $LANG['insert_product'] = "Insertar Producto";//1
+$LANG['insert_product_attribute'] = "Insert Product Attribute";//0
+$LANG['insert_product_value'] = "Insert Product Value";//0
 $LANG['insert_tax_rate'] = "Insertar Impuesto";//1
 $LANG['installation'] = "Instalación";//1
 $LANG['inv'] = "Factura";//1
@@ -320,6 +329,8 @@ $LANG['manage_invoices'] = "Administrar Facturas";//1
 $LANG['manage_payment_types'] = "Administrar Formas de Pago";//1
 $LANG['manage_payments'] = "Administrar Pagos";//1
 $LANG['manage_preferences'] = "Administrar Preferencias";//1
+$LANG['manage_product_attributes'] = "Manage Product Attributes";//0
+$LANG['manage_product_values'] = "Manage Product Value";//0
 $LANG['manage_products'] = "Administrar Productos";//1
 $LANG['manage_tax_rates'] = "Administrar Impuestos";//1
 $LANG['mandatory_fields'] = "Todos los campos son obligatorios";//1
@@ -404,6 +415,7 @@ $LANG['plugin_not_registered'] = "No registrado";//1
 $LANG['plugin_register'] = "Registrar";//1
 $LANG['plugin_registered'] = "Registrado";//1
 $LANG['plugin_unregister'] = "Sin registrar";//1
+$LANG['powered_by'] = "Desarrollado por";//1
 $LANG['preference'] = "preferencia";//1
 $LANG['preference_id'] = "ID Preferencia";//1
 $LANG['preferences'] = "Preferencias";//1
@@ -420,6 +432,7 @@ $LANG['process_payment_inv_id'] = "ID de factura del proceso de pago";//1
 $LANG['process_payment_via_eway'] = "Procesar pago por Eway";//1
 $LANG['processing'] = "Procesando, por favor, espere...";//1
 $LANG['product'] = "Producto";//1
+$LANG['product_attribute'] = "Product Attribute";//0
 $LANG['product_attributes'] = "Atributos del Producto";//1
 $LANG['product_description'] = "Descripción del Producto";//1
 $LANG['product_description_prompt'] = "Debe introducir una descripción para el producto";//1
@@ -429,6 +442,7 @@ $LANG['product_id'] = "ID Producto";//1
 $LANG['product_sales'] = "Ventas de Producto";//1
 $LANG['product_to_add'] = "Producto a añadir";//1
 $LANG['product_unit_price'] = "Precio Unitario del Producto";//1
+$LANG['product_value'] = "Product Value";//0
 $LANG['product_values'] = "Valores del Producto";//1
 $LANG['products'] = "Productos";//1
 $LANG['products_by_customer'] = "Productos por Cliente";//1
@@ -510,7 +524,6 @@ $LANG['shortcut'] ="Menú de atajos";//1
 $LANG['show_details'] = "Mostrar detalles";//1
 $LANG['show_only_unpaid_invoices'] = "Mostrar únicamente facturas pendientes de pago";//1
 $LANG['simple_invoices'] = "Simple Invoices";//1
-$LANG['simple_invoices_powered_by'] = "Desarrollado por Simple Invoices";//1
 $LANG['start_date'] = "Fecha de inicio (AAAA-MM-DD)";//1
 $LANG['start_date_short'] = "Fecha de inicio";//1
 $LANG['start_working'] = "Comenzar a trabajar";//1
@@ -548,6 +561,24 @@ $LANG['tax_total'] = "Total impuesto";//1
 $LANG['telephone_short'] = "Tel";//1
 $LANG['thank_you'] = "¡Gracias por elegir Simple Invoices!";//1
 $LANG['thank_you_inv'] = "Gracias por facturar con ";//1
+$LANG['title_module_billers'] = "Personas / Emisores";//1
+$LANG['title_module_cron'] = "Dinero / Recurrencia";//1
+$LANG['title_module_custom_fields'] = "Configuración / Campos Personalizados";//1
+$LANG['title_module_customers'] = "Personas / Clientes";//1
+$LANG['title_module_index'] = "Inicio";//1
+$LANG['title_module_invoices'] = "Dinero / Facturas";//1
+$LANG['title_module_options'] = "Configuración";//1
+$LANG['title_module_payment_types'] = "Configuración / Formas de Pago";//1
+$LANG['title_module_payments'] = "Dinero / Pagos";//1
+$LANG['title_module_preferences'] = "Dinero / Preferencias de factura";//1
+$LANG['title_module_product_attribute'] = "Productos / Atributos del Producto";//1
+$LANG['title_module_product_value'] = "Productos / Valores del Producto";//1
+$LANG['title_module_products'] = "Productos";//1
+$LANG['title_module_reports'] = "Inicio / Informes";//1
+$LANG['title_module_system_defaults'] = "Configuración / Preferencias del Sistema";//1
+$LANG['title_module_tax_rates'] = "Configuración / Impuestos";//1
+$LANG['title_module_user'] = "Personas / Usuarios";//1
+$LANG['title_view_index'] = "Tablero";//1
 $LANG['to'] = "Para";//1
 $LANG['to_lowercase'] = "para";//1
 $LANG['toggle_status'] = "Cambiar estado";//1
@@ -588,32 +619,3 @@ $LANG['years'] = "años";//1
 $LANG['yes'] = "Si";//1
 $LANG['your_reports'] = "Sus informes";//1
 $LANG['zip'] = "Código postal";//1
-$LANG['manage_product_attributes'] = "Manage Product Attributes";//0
-$LANG['add_product_attribute'] = "Add Product Attribute";//0
-$LANG['insert_product_attribute'] = "Insert Product Attribute";//0
-$LANG['product_attribute'] = "Product Attribute";//0
-$LANG['add_product_value'] = "Add Product Value";//0
-$LANG['insert_product_value'] = "Insert Product Value";//0
-$LANG['product_value'] = "Product Value";//0
-$LANG['manage_product_values'] = "Manage Product Value";//0
-
-$LANG['title_module_index']				= "Inicio";//1
-$LANG['title_module_reports']			= "Inicio / Informes";//1
-$LANG['title_module_invoices']			= "Dinero / Facturas";//1
-$LANG['title_module_cron']				= "Dinero / Recurrencia";//1
-$LANG['title_module_payments']			= "Dinero / Pagos";//1
-$LANG['title_module_billers']			= "Personas / Emisores";//1
-$LANG['title_module_customers']			= "Personas / Clientes";//1
-$LANG['title_module_user']				= "Personas / Usuarios";//1
-$LANG['title_module_products']			= "Productos";//1
-$LANG['title_module_product_attribute']	= "Productos / Atributos del Producto";//1
-$LANG['title_module_product_value']		= "Productos / Valores del Producto";//1
-$LANG['title_module_options']			= "Configuración";//1
-$LANG['title_module_system_defaults']	= "Configuración / Preferencias del Sistema";//1
-$LANG['title_module_custom_fields']		= "Configuración / Campos Personalizados";//1
-$LANG['title_module_tax_rates']			= "Configuración / Impuestos";//1
-$LANG['title_module_preferences']		= "Dinero / Preferencias de factura";//1
-$LANG['title_module_payment_types']		= "Configuración / Formas de Pago";//1
-$LANG['title_view_index']				= "Tablero";//1
-
-?>

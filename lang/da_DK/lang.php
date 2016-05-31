@@ -20,8 +20,11 @@
 *�=&#197;
 */
 
-/*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
-regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
+/*
+ *    "//1" means that the variable has been translated
+ *    "//0" means that the variable has not been translated
+ *    These values are used by a script to calculate how much of each file has been translated.
+ *    Use the regex pattern :%s/;/ /1/;// 1\/\/1/g - remove the spaces
  */
 
 #all
@@ -43,6 +46,8 @@ $LANG['add_new_row'] = "Tilf&#248;j ny r&#230;kke";//1
 $LANG['add_new_tax_rate'] = "Tilf&#248;j ny momssats";//1
 $LANG['add_payment_type'] = "Tilf&#248;j betalingsform";//1
 $LANG['add_product'] = "Tilf&#248;j produkt";//1
+$LANG['add_product_attribute'] = "Add Product Attribute";//0
+$LANG['add_product_value'] = "Add Product Value";//0
 $LANG['add_tax_rate'] = "Tilf&#248;j momssats";//1
 $LANG['address'] = "Adresse";//1
 $LANG['address_city'] = "Adresse: by";//1
@@ -82,6 +87,7 @@ $LANG['cancel'] = "Annuller";//1
 $LANG['cannot_delete_first_row'] = "Den f&#248;rste r&#230;kke kan ikke slettes";//1
 $LANG['change_log'] = "&#198;ndrings oversigt";//1
 $LANG['city'] = "By";//1
+$LANG['company_name'] = "Simple Invoices";//1
 $LANG['confirm_delete'] = "Er du sikker p&#229; at slette";//1
 $LANG['consulting'] = "R&#229;dgivning";//1
 $LANG['consulting_style'] = "R&#229;dgivnings type";//1
@@ -223,8 +229,7 @@ $LANG['help_email_cc'] = "Dette felt er ikke obligatorisk. Her kan du indtaste e
 $LANG['help_email_from'] = "Dette felt er ikke obligatorisk og f&#229;r sin standard v&#230;rdi fra Kreditorens email adresse. Du kan &#230;ndre denne email adresse efter behov, men du kan ikke tilf&#248;je mere end 1 email adresse i dette fejt.<br /><br /><i>Bem&#230;rk:: Der kan kun v&#230;re 1 email adresse i dette felt</i>";//1
 $LANG['help_email_to'] = "Dette felt er obligatorisk og f&#229;r sin standard v&#230;rdi fra Kundens email adresse. Du kan &#230;ndre denne email adresse efter behov.<br /><br /><i>Bem&#230;rk: Du kan tilf&#248;je flere email adresser her - bare adskil adresserne med enten et , eller et ;</i>";//1
 $LANG['help_insert_biller_text'] = "For at inds&#230;tte et blankt logo v&#230;lges '_default_blank_logo.png' fra listen.<br /><br />For at tilf&#248;je nye logoer til Simple Invoices, kopieres logo filen til logo biblioteket i Simple Invoices folderen.";//1
-$LANG['help_inv_pref_currency_sign'] = "Dette er valutasymbolet som vil blive anvendt i hele fakturaen. <br /><br />
-<b>Bem&#230;rk:</b> Euro, Pund etc.. Anvend venligst html-koden for valutasymbolet i dette felt. Referer til denne liste af html-koder p&#229; f&#248;lgende hjemmeside for ikke $ valutasymbol <a href='http://www.ascii.cl/htmlcodes.htm'>http://www.ascii.cl/htmlcodes.htm</a>. <br /><br /> Dette er p&#229;kr&#230;vet, s&#229; PDF'en kan fungere korrekt ved ikke $ symboler<br /><br />&#38;#163; er html-koden for Pund.,<br /> &#38;#8364; for Euro, etc..";//1
+$LANG['help_inv_pref_currency_sign'] = "Dette er valutasymbolet som vil blive anvendt i hele fakturaen. <br /><br /><b>Bem&#230;rk:</b> Euro, Pund etc.. Anvend venligst html-koden for valutasymbolet i dette felt. Referer til denne liste af html-koder p&#229; f&#248;lgende hjemmeside for ikke $ valutasymbol <a href='http://www.ascii.cl/htmlcodes.htm'>http://www.ascii.cl/htmlcodes.htm</a>. <br /><br /> Dette er p&#229;kr&#230;vet, s&#229; PDF'en kan fungere korrekt ved ikke $ symboler<br /><br />&#38;#163; er html-koden for Pund.,<br /> &#38;#8364; for Euro, etc..";//1
 $LANG['help_inv_pref_description'] = "Dette er navnet for den fastsatte pr&#230;ference - denne bliver ikke anvendt p&#229; selve fakturaen, kun ved oprettelsen af fakturaen n&#229;r du v&#230;lger, hvilken faktura pr&#230;ference du vil anvende, fra dropdown listen.";//1
 $LANG['help_inv_pref_invoice_detail_heading'] = "Dette vil st&#229; som overskrift i fodnote/detalje sektionen p&#229; fakturaen.";//1
 $LANG['help_inv_pref_invoice_detail_line'] = "Dette vil st&#229; under fodnote/detalje sektionen. Normalt brugt til at definere betalingsbetingelser etc.";//1
@@ -272,6 +277,8 @@ $LANG['insert_customer'] = "Inds&#230;t kunde";//1
 $LANG['insert_payment_type'] = "Inds&#230;t betalingsform";//1
 $LANG['insert_preference'] = "Tilf&#248;j pr&#230;ference";//1
 $LANG['insert_product'] = "Inds&#230;t produkt";//1
+$LANG['insert_product_attribute'] = "Insert Product Attribute";//0
+$LANG['insert_product_value'] = "Insert Product Value";//0
 $LANG['insert_tax_rate'] = "Inds&#230;t momssats";//1
 $LANG['installation'] = "Installation";//1
 $LANG['inv'] = "Faktura";//1
@@ -327,6 +334,8 @@ $LANG['manage_invoices'] = "Administrer fakturaer";//1
 $LANG['manage_payment_types'] = "Administrer betalingsformer";//1
 $LANG['manage_payments'] = "Administrer betalinger";//1
 $LANG['manage_preferences'] = "Administrer pr&#230;ferencer";//1
+$LANG['manage_product_attributes'] = "Manage Product Attributes";//0
+$LANG['manage_product_values'] = "Manage Product Value";//0
 $LANG['manage_products'] = "Administrer produkter";//1
 $LANG['manage_tax_rates'] = "Administrer momssatser";//1
 $LANG['mandatory_fields'] = "Alle felter er p&#229;kr&#230;vede";//1
@@ -411,6 +420,7 @@ $LANG['plugin_not_registered'] = "Ikke registreret";//1
 $LANG['plugin_register'] = "Registrer";//1
 $LANG['plugin_registered'] = "Registreret";//1
 $LANG['plugin_unregister'] = "Afmeld";//1
+$LANG['powered_by'] = "Powered by";//1
 $LANG['preference'] = "pr&#230;ference";//1
 $LANG['preference_id'] = "Pr&#230;ference ID";//1
 $LANG['preferences'] = "Pr&#230;ferencer";//1
@@ -427,6 +437,7 @@ $LANG['process_payment_inv_id'] = "Behandl Betalingsfaktura ID";//1
 $LANG['process_payment_via_eway'] = "Behandl Betaling via Eway";//1
 $LANG['processing'] = "Behandler, vent venligst ...";//1
 $LANG['product'] = "Produkt";//1
+$LANG['product_attribute'] = "Product Attribute";//0
 $LANG['product_attributes'] = "Produkt egenskaber";//1
 $LANG['product_description'] = "Produkt beskrivelse";//1
 $LANG['product_description_prompt'] = "Du skal angive en beskrivelse af produktet";//1
@@ -436,6 +447,7 @@ $LANG['product_id'] = "Produkt ID";//1
 $LANG['product_sales'] = "Produkt salg";//1
 $LANG['product_to_add'] = "Produkt at tilf&#248;je";//1
 $LANG['product_unit_price'] = "Produkt enheds pris";//1
+$LANG['product_value'] = "Product Value";//0
 $LANG['product_values'] = "Produkt værdier";//1
 $LANG['products'] = "Produkter";//1
 $LANG['products_by_customer'] = "Produkter efter kunde";//1
@@ -517,7 +529,6 @@ $LANG['shortcut'] ="Genvejs menu";//1
 $LANG['show_details'] = "Vis detaljer";//1
 $LANG['show_only_unpaid_invoices'] = "Vis kun ubetalte fakturaer";//1
 $LANG['simple_invoices'] = "Simple Invoices";//1
-$LANG['simple_invoices_powered_by'] = "Powered by Simple Invoices";//1
 $LANG['start_date'] = "Start dato (&#197;&#197;&#197;&#197;-MM-DD)";//1
 $LANG['start_date_short'] = "Start dato";//1
 $LANG['start_working'] = "Begynd at arbejde";//1
@@ -555,6 +566,24 @@ $LANG['tax_total'] = "Moms total";//1
 $LANG['telephone_short'] = "Tlf";//1
 $LANG['thank_you'] = "Tak fordi du valgte Simple Invoices!";//1
 $LANG['thank_you_inv'] = "Tak fordi du fakturerer med";//1
+$LANG['title_module_billers'] = "Mennesker / Kreditor";//1
+$LANG['title_module_cron'] = "Penge / Fast overf&#248;rsel";//1
+$LANG['title_module_custom_fields'] = "Indstillinger / Brugerdefinerede felter";//1
+$LANG['title_module_customers'] = "Mennesker / Kunder";//1
+$LANG['title_module_index'] = "Hjem";//1
+$LANG['title_module_invoices'] = "Penge / Fakturaer";//1
+$LANG['title_module_options'] = "Indstillinger";//1
+$LANG['title_module_payment_types'] = "Indstillinger / Betalingsformer";//1
+$LANG['title_module_payments'] = "Penge / Betalinger";//1
+$LANG['title_module_preferences'] = "Indstillinger / Faktura Pr&#230;ferencer";//1
+$LANG['title_module_product_attribute'] = "Produkter / Produkt egenskaber";//1
+$LANG['title_module_product_value'] = "Produkter / Produkt værdier";//1
+$LANG['title_module_products'] = "Produkter";//1
+$LANG['title_module_reports'] = "Hjem / Rapporter";//1
+$LANG['title_module_system_defaults'] = "Indstillinger / System Indstillinger";//1
+$LANG['title_module_tax_rates'] = "Indstillinger / Momssatser";//1
+$LANG['title_module_user'] = "Mennesker / Brugere";//1
+$LANG['title_view_index'] = "Kontrolpanel";//1
 $LANG['to'] = "Til";//1
 $LANG['to_lowercase'] = "til";//1
 $LANG['toggle_status'] = "Skift status";//1
@@ -595,32 +624,3 @@ $LANG['years'] = "&#229;r";//1
 $LANG['yes'] = "Ja";//1
 $LANG['your_reports'] = "Dine rapporter";//1
 $LANG['zip'] = "Postnummer";//1
-$LANG['manage_product_attributes'] = "Manage Product Attributes";//0
-$LANG['add_product_attribute'] = "Add Product Attribute";//0
-$LANG['insert_product_attribute'] = "Insert Product Attribute";//0
-$LANG['product_attribute'] = "Product Attribute";//0
-$LANG['add_product_value'] = "Add Product Value";//0
-$LANG['insert_product_value'] = "Insert Product Value";//0
-$LANG['product_value'] = "Product Value";//0
-$LANG['manage_product_values'] = "Manage Product Value";//0
-
-$LANG['title_module_index']				= "Hjem";//1
-$LANG['title_module_reports']			= "Hjem / Rapporter";//1
-$LANG['title_module_invoices']			= "Penge / Fakturaer";//1
-$LANG['title_module_cron']				= "Penge / Fast overf&#248;rsel";//1
-$LANG['title_module_payments']			= "Penge / Betalinger";//1
-$LANG['title_module_billers']			= "Mennesker / Kreditor";//1
-$LANG['title_module_customers']			= "Mennesker / Kunder";//1
-$LANG['title_module_user']				= "Mennesker / Brugere";//1
-$LANG['title_module_products']			= "Produkter";//1
-$LANG['title_module_product_attribute']	= "Produkter / Produkt egenskaber";//1
-$LANG['title_module_product_value']		= "Produkter / Produkt værdier";//1
-$LANG['title_module_options']			= "Indstillinger";//1
-$LANG['title_module_system_defaults']	= "Indstillinger / System Indstillinger";//1
-$LANG['title_module_custom_fields']		= "Indstillinger / Brugerdefinerede felter";//1
-$LANG['title_module_tax_rates']			= "Indstillinger / Momssatser";//1
-$LANG['title_module_preferences']		= "Indstillinger / Faktura Pr&#230;ferencer";//1
-$LANG['title_module_payment_types']		= "Indstillinger / Betalingsformer";//1
-$LANG['title_view_index']				= "Kontrolpanel";//1
-
-?>
