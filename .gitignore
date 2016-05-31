@@ -3,7 +3,7 @@ custom.config.php
 *.tpl.php
 zend_cache---*
 *.log
-tmp/**
+tmp
 .buildpath
 .project
 .settings/**
