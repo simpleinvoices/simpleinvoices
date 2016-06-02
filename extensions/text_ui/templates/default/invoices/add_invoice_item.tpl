@@ -81,8 +81,7 @@
     </tr>
     <tr>
       <td colspan="2">
-        <textarea input type="text" name="description" rows="3" cols="80" wrap="nowrap" />
-        </textarea>
+        <textarea input type="text" name="description" rows="3" cols="80" /></textarea>
       </td>
     </tr>
     {/if}

@@ -2,7 +2,7 @@
 <form name="frmpost" action="index.php?module=reports&amp;view=report_summary" method="post">
 <table align="center">
     <tr>
-        <td wrap="nowrap">Start date (YYYY-MM-DD)
+        <td>Start date (YYYY-MM-DD)
                 <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="start_date" id="date1" value='{$start_date}' />   
          </td>
         <td>
@@ -12,9 +12,9 @@
             &nbsp;
             &nbsp;
         </td>
-        <td wrap="nowrap" >End date (YYYY-MM-DD)
-                <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="end_date" id="date1" value='{$end_date}' />   
-            </td>
+        <td>End date (YYYY-MM-DD)
+          <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="end_date" id="date1" value='{$end_date}' />   
+        </td>
     </tr>
 </table>
 <br />

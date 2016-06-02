@@ -55,16 +55,16 @@
 				{/if}
 			</td>
 		</tr>
-		<tr wrap="nowrap">
-			<th >{$LANG.date_formatted}</th>
-			<td wrap="nowrap">
-				<input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="date" id="date1" 
-				{if $smarty.get.date}
-					value="{$smarty.get.date}" />
-				{else}
-					value='{$smarty.now|date_format:"%Y-%m-%d"}' />
-				{/if}
-			</td>
+		<tr>
+          <th>{$LANG.date_formatted}</th>
+          <td>
+            <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="date" id="date1" 
+                 {if $smarty.get.date}
+                   value="{$smarty.get.date}" />
+                 {else}
+                   value='{$smarty.now|date_format:"%Y-%m-%d"}' />
+                 {/if}
+          </td>
 		</tr>
 	</table>
 

@@ -37,17 +37,17 @@
 		</select>
 		</td>
 	</tr>
-    <tr wrap="nowrap">
-            <th>{$LANG.start_date}</th>
-            <td wrap="nowrap">
-                <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="start_date" id="date" value='{"+1 days"|date_format:"%Y-%m-%d"}' />   
-            </td>
+    <tr>
+      <th>{$LANG.start_date}</th>
+      <td>
+        <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="start_date" id="date" value='{"+1 days"|date_format:"%Y-%m-%d"}' />   
+      </td>
     </tr>
-    <tr wrap="nowrap">
-            <th>{$LANG.end_date}</th>
-            <td wrap="nowrap">
-                <input type="text" class="date-picker" size="10" name="end_date" id="date" value='' />   
-            </td>
+    <tr>
+      <th>{$LANG.end_date}</th>
+      <td>
+        <input type="text" class="date-picker" size="10" name="end_date" id="date" value='' />   
+      </td>
     </tr>
 	<tr>
         <th>{$LANG.recur_each}</th>

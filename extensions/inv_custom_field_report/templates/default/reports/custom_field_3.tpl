@@ -33,14 +33,15 @@
 	</td>
 	</tr>
     <tr>
-        <td wrap="nowrap" class="details_screen">
+      <td class="details_screen">
 		Start date
-	</td><td>
-                <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="start_date" id="date1" value='{$start_date}' />   
-         </td>
+	  </td>
+      <td>
+        <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="start_date" id="date1" value='{$start_date}' />   
+      </td>
 	</tr>
 	<tr>
-        <td wrap="nowrap" class="details_screen"  >
+        <td class="details_screen"  >
 		End date
 	</td><td>
                 <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="end_date" id="date1" value='{$end_date}' />   

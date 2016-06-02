@@ -203,7 +203,7 @@
 			<tr class="details si_hide">
 				<td></td>
 				<td colspan="4">
-					<textarea input type="text" class="detail" name="description{$smarty.section.line.index|htmlsafe}" id="description{$smarty.section.line.index|htmlsafe}" rows="3" cols=3 WRAP=nowrap></textarea>
+					<textarea type="text" class="detail" name="description{$smarty.section.line.index|htmlsafe}" id="description{$smarty.section.line.index|htmlsafe}" rows="3" cols=3></textarea>
 				</td>
 			</tr>
 		</tbody>
@@ -229,9 +229,9 @@
 
 		<tr>
 			<td class='si_invoice_notes' colspan="2">
-				<H5>{$LANG.notes}</H5>
-				<textarea input type="text" class="editor" name="note" rows="5" cols="50" wrap="nowrap">
-						{$smarty.get.note}
+				<ht>{$LANG.notes}</h5>
+				<textarea class="editor" name="note" rows="5" cols="50">
+                  {$smarty.get.note}
 				</textarea>
 			</td>
 		</tr>

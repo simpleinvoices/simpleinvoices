@@ -7,13 +7,13 @@
 			<a href="index.php?module=invoices&view=quick_view&id={$cron.invoice_id|htmlsafe}">{$cron.index_name|htmlsafe}</a>
 		</td>
 	</tr>
-    <tr wrap="nowrap">
-        <td class="details_screen">{$LANG.start_date}</td>
-        <td>{$cron.start_date|htmlsafe}</td>
+    <tr>
+      <td class="details_screen">{$LANG.start_date}</td>
+      <td>{$cron.start_date|htmlsafe}</td>
     </tr>
-    <tr wrap="nowrap">
-        <td class="details_screen">{$LANG.end_date}</td>
-        <td>{$cron.end_date|htmlsafe} </td>
+    <tr>
+      <td class="details_screen">{$LANG.end_date}</td>
+      <td>{$cron.end_date|htmlsafe} </td>
     </tr>
 	<tr>
 		<td class="details_screen">{$LANG.recur_each}</td>

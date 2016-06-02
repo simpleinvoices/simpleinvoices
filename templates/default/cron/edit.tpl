@@ -38,17 +38,17 @@
 		</select>
 		</td>
 	</tr>
-    <tr wrap="nowrap">
-            <td class="details_screen">{$LANG.start_date}</td>
-            <td wrap="nowrap">
-                <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="start_date" id="date" value='{$cron.start_date|htmlsafe}' />   
-            </td>
+    <tr>
+      <td class="details_screen">{$LANG.start_date}</td>
+      <td>
+        <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="start_date" id="date" value='{$cron.start_date|htmlsafe}' />   
+      </td>
     </tr>
-    <tr wrap="nowrap">
-            <td class="details_screen">{$LANG.end_date}</td>
-            <td wrap="nowrap">
-                <input type="text" class="date-picker" size="10" name="end_date" id="date" value='{$cron.end_date|htmlsafe}' />   
-            </td>
+    <tr>
+      <td class="details_screen">{$LANG.end_date}</td>
+      <td>
+        <input type="text" class="date-picker" size="10" name="end_date" id="date" value='{$cron.end_date|htmlsafe}' />   
+      </td>
     </tr>
 	<tr>
 		<td class="details_screen">{$LANG.recur_each}</td>

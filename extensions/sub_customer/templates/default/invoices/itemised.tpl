@@ -239,12 +239,11 @@
 					</tr>
 							
 					<tr class="note">
-							<td>
-							</td>
-							<td colspan="4">
-								<textarea input type="text" class="note" name="description{$smarty.section.line.index|htmlsafe}" id="description{$smarty.section.line.index|htmlsafe}" rows="3" cols=3 WRAP=nowrap></textarea>
-								
-								</td>
+						<td>
+						</td>
+						<td colspan="4">
+							<textarea input type="text" class="note" name="description{$smarty.section.line.index|htmlsafe}" id="description{$smarty.section.line.index|htmlsafe}" rows="3" cols="3"></textarea>
+						</td>
 					</tr>
 				</tbody>
 	        {/section}
@@ -292,7 +291,7 @@
 	
 	<tr>
 		<td colspan="4">
-			<textarea input type="text" class="editor" name="note" rows="5" cols="50" wrap="nowrap">
+			<textarea input type="text" class="editor" name="note" rows="5" cols="50">
 				{$smarty.get.note}
 			</textarea>
 		</td>

@@ -9,7 +9,7 @@
 <div class="si_form si_form_search{if $smarty.post.submit == null} si_form_search_null{/if}">
    <table>
     <tr>
-      <td wrap="nowrap" class="details_screen">
+      <td class="details_screen">
         {$LANG.start_date}
       </td>
       <td>
@@ -17,7 +17,7 @@
        </td>
     </tr>
     <tr>
-      <td wrap="nowrap" class="details_screen"  >
+      <td class="details_screen"  >
         {$LANG.end_date}
       </td>
       <td>

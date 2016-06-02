@@ -15,9 +15,7 @@
 
 {* Steel needed ?*}
 <div id="gmail_loading" class="gmailLoader" style="float: right; display: none;">
-  <img src="images/common/gmail-loader.gif" alt="{$LANG.loading} ..." />
-  {$LANG.loading} ...
-</div>
+  <img src="images/common/gmail-loader.gif" alt="{$LANG.loading} ..." />{$LANG.loading} ...</div>
 <form name="frmpost" action="index.php?module=invoices&amp;view=save" method="post">
   <div class="si_invoice_form">
     <table class='si_invoice_top'>
@@ -47,9 +45,8 @@
         {else}
           <select name="biller_id">
             {foreach from=$billers item=biller}
-            <option {if $biller.id == $invoice.biller_id} selected {/if} value="{$biller.id|htmlsafe}">
-              {$biller.name|htmlsafe}
-            </option>
+            <option {if $biller.id == $invoice.biller_id} selected {/if}
+                    value="{$biller.id|htmlsafe}">{$biller.name|htmlsafe}</option>
             {/foreach}
           </select>
         {/if}
@@ -63,9 +60,8 @@
         {else}
           <select name="customer_id">
           {foreach from=$customers item=customer}
-            <option {if $customer.id == $invoice.customer_id} selected {/if} value="{$customer.id|htmlsafe}">
-              {$customer.name|htmlsafe}
-            </option>
+            <option {if $customer.id == $invoice.customer_id} selected {/if}
+                    value="{$customer.id|htmlsafe}">{$customer.name|htmlsafe}</option>
           {/foreach}
           </select>
         {/if}
@@ -77,8 +73,8 @@
         <td>
           <select name="status_id">
             <option value="0">New</option>
-            <option {if $invoice.status_id== 1} selected{/if} value="1">Sent</option>
-            <option {if $invoice.status_id== 2} selected{/if} value="1">Paid</option>
+            <option {if $invoice.status_id == 1} selected{/if} value="1">Sent</option>
+            <option {if $invoice.status_id == 2} selected{/if} value="1">Paid</option>
           </select>
         </td>
       </tr>
@@ -90,9 +86,7 @@
         <td class='si_invoice_notes' colspan="2">
           <h5>{$LANG.description}</h5>
           <textarea class="editor" name="description0" rows="10" cols="70"
-                    style="white-space:nowrap;overflow:scroll;">
-            {$invoiceItems.0.description|outhtml}
-          </textarea>
+                    style="overflow:scroll;">{$invoiceItems.0.description|outhtml}</textarea>
         </td>
       </tr>
     </table>
@@ -120,9 +114,7 @@
                   {assign var="index" value=$smarty.section.tax.index}
                   {foreach from=$taxes item=tax}
                     <option {if $tax.tax_id === $invoiceItems.0.tax.$index} selected {/if}
-                            value="{$tax.tax_id|htmlsafe}">
-                      {$tax.tax_description|htmlsafe}
-                    </option>
+                            value="{$tax.tax_id|htmlsafe}">{$tax.tax_description|htmlsafe}</option>
                   {/foreach}
                 </select>
               </td>
@@ -133,7 +125,7 @@
       </tr>
       {$customFields.1} {$customFields.2} {$customFields.3} {$customFields.4}
       {* {showCustomFields categorieId="4" itemId=$smarty.get.invoice} *}
-      {* This is intentionally not the teminous of the table *}
+      {* This is intentionally not the terminous of the table *}
     {/if}
     {if $invoice.type_id == 2 || $invoice.type_id == 3 }
     <table id="itemtable" class="si_invoice_items">
@@ -143,12 +135,7 @@
           <td>{$LANG.quantity_short}</td>
           <td>{$LANG.description}</td>
           {section name=tax_header loop=$defaults.tax_per_line_item }
-            <td>
-              {$LANG.tax}
-              {if $defaults.tax_per_line_item > 1}
-                {$smarty.section.tax_header.index+1|htmlsafe}
-              {/if}
-            </td>
+          <td>{$LANG.tax}{if $defaults.tax_per_line_item > 1}{$smarty.section.tax_header.index+1|htmlsafe}{/if}</td>
           {/section}
           <td>{$LANG.unit_price}</td>
         </tr>
@@ -190,9 +177,7 @@
                     rel="{$line|htmlsafe}" class="product_change">
             {foreach from=$products item=product}
               <option {if $product.id == $invoiceItem.product_id} selected {/if}
-                value="{$product.id|htmlsafe}">
-                {$product.description|htmlsafe}
-              </option>
+                      value="{$product.id|htmlsafe}">{$product.description|htmlsafe}</option>
             {/foreach}
             </select>
           {/if}
@@ -205,9 +190,7 @@
               {assign var="index" value=$smarty.section.tax.index}
               {foreach from=$taxes item=tax}
               <option {if $tax.tax_id === $invoiceItem.tax.$index} selected {/if}
-                      value="{$tax.tax_id|htmlsafe}">
-                {$tax.tax_description|htmlsafe}
-              </option>
+                      value="{$tax.tax_id|htmlsafe}">{$tax.tax_description|htmlsafe}</option>
               {/foreach}
             </select>
           </td>
@@ -222,10 +205,8 @@
         <tr class="details si_hide">
           <td></td>
           <td colspan="4">
-            <textarea class="detail" name="description{$line|htmlsafe}" style="white-space:nowrap;overflow:scroll;"
-                      id="description{$line|htmlsafe}" rows="3" cols="3" >
-              {$invoiceItem.description|outhtml}
-            </textarea>
+            <textarea class="detail" name="description{$line|htmlsafe}" style="overflow:scroll;"
+                      id="description{$line|htmlsafe}" rows="3" cols="3" >{$invoiceItem.description|outhtml}</textarea>
           </td>
         </tr>
       </tbody>
@@ -233,17 +214,14 @@
     </table>
     <div class="si_toolbar si_toolbar_inform">
       {* onclick="add_line_item();" *}
-      <a href="#" class="add_line_item"> <img src="./images/common/add.png" alt="" />
-        {$LANG.add_new_row}
-      </a>
+      <a href="#" class="add_line_item">
+        <img src="./images/common/add.png" alt="" />{$LANG.add_new_row}</a>
       <a href='#' class="show-details" onclick="javascript: $('.details').show();$('.show-details').hide();">
-        <img src="./images/common/page_white_add.png" title="{$LANG.show_details}" alt="" />
-        {$LANG.show_details}
-      </a>
+        <img src="./images/common/page_white_add.png"
+             title="{$LANG.show_details}" alt="" />{$LANG.show_details}</a>
       <a href='#' class="details" onclick="javascript: $('.details').hide();$('.show-details').show();" style="display: none">
-        <img src="./images/common/page_white_delete.png" title="{$LANG.hide_details}" alt="" />
-        {$LANG.hide_details}
-      </a>
+        <img src="./images/common/page_white_delete.png"
+             title="{$LANG.hide_details}" alt="" />{$LANG.hide_details}</a>
     </div>
     <table class="si_invoice_bot">
       {$customFields.1} {$customFields.2} {$customFields.3} {$customFields.4}
@@ -251,9 +229,8 @@
       <tr>
         <td class='si_invoice_notes' colspan="2">
           <h5>{$LANG.notes}</h5>
-          <textarea class="editor" name="note" rows="10" cols="70" style="white-space:nowrap;overflow:scroll;">
-            {$invoice.note|outhtml}
-          </textarea>
+          <textarea class="editor" name="note" rows="10" cols="70"
+                    style="overflow:scroll;">{$invoice.note|outhtml}</textarea>
         </td>
       </tr>
       {* This is intentionally not the terminous of the table *}
@@ -267,9 +244,7 @@
           <select name="preference_id">
           {foreach from=$preferences item=preference}
             <option {if $preference.pref_id == $invoice.preference_id} selected {/if}
-                    value="{$preference.pref_id|htmlsafe}">
-              {$preference.pref_description|htmlsafe}
-            </option>
+                    value="{$preference.pref_id|htmlsafe}">{$preference.pref_description|htmlsafe}</option>
           {/foreach}
           </select>
         {/if}
@@ -278,29 +253,25 @@
     {* This is the end of the non-terminated tables in the IF statements *}
     </table>
     <div class="si_toolbar si_toolbar_form">
-      <button type="submit" class="invoice_save positive"
-        name="submit" value="{$LANG.save}">
-        <img class="button_img" src="./images/common/tick.png" alt="" />
-        {$LANG.save}
-      </button>
-
+      <button type="submit" class="invoice_save positive" name="submit" value="{$LANG.save}">
+        <img class="button_img" src="./images/common/tick.png" alt="" />{$LANG.save}</button>
       <a href="./index.php?module=invoices&amp;view=manage"
-        class="negative"> <img src="./images/common/cross.png"
-        alt="" /> {$LANG.cancel}
-      </a>
+        class="negative"> <img src="./images/common/cross.png" alt="" />{$LANG.cancel}</a>
     </div>
   </div>
-  {if $invoice.id == null}
+  <div>
+    {if $invoice.id == null}
     <input type="hidden" name="action" value="insert" />
-  {else}
+    {else}
     <input type="hidden" name="id" value="{$invoice.id|htmlsafe}" />
     <input type="hidden" name="action" value="edit" />
-  {/if}
-  {if $invoice.type_id == 1 }
+    {/if}
+    {if $invoice.type_id == 1 }
     <input id="quantity0" type="hidden" size="10" value="1.00" name="quantity0" />
     <input id="line_item0" type="hidden" value="{$invoiceItems.0.id|htmlsafe}" name="line_item0" />
-  {/if}
-  <input type="hidden" name="type" value="{$invoice.type_id|htmlsafe}" />
-  <input type="hidden" name="op" value="insert_preference" />
-  <input type="hidden" id="max_items" name="max_items" value="{$lines|htmlsafe}" />
+    {/if}
+    <input type="hidden" name="type" value="{$invoice.type_id|htmlsafe}" />
+    <input type="hidden" name="op" value="insert_preference" />
+    <input type="hidden" id="max_items" name="max_items" value="{$lines|htmlsafe}" />
+  </div>
 </form>

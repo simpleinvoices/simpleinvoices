@@ -55,7 +55,7 @@
              </tr>
                 
                 <tr class="text{$smarty.section.line.index|htmlsafe} hide">
-      				<td colspan="3"><textarea input type="text" class="editor" name='description{$smarty.section.line.index|htmlsafe}' rows="3" cols="80" wrap="nowrap"></textarea></td>
+      				<td colspan="3"><textarea class="editor" name='description{$smarty.section.line.index|htmlsafe}' rows="3" cols="80"></textarea></td>
 </tr>
 
         {/section}
@@ -74,7 +74,7 @@
 </tr>
 
 <tr>
-        <td colspan="3"><textarea input type="text" class="editor" height="60px" name="note" rows="5" cols="70" wrap="nowrap"></textarea></td>
+        <td colspan="3"><textarea class="editor" height="60px" name="note" rows="5" cols="70"></textarea></td>
 </tr>
 
 <tr><td class="details_screen">{$LANG.tax}</td><td><input type="text" name="tax" size="15" />

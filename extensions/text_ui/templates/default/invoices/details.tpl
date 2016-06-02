@@ -86,7 +86,7 @@
     </tr>
     <tr>
       <td colspan="6">
-        <textarea name="description0" rows="10" cols="70" style="white-space:nowrap;overflow:scroll;">
+        <textarea name="description0" rows="10" cols="70" style="overflow:scroll;">
           {$invoiceItems.0.description}
         </textarea>
       </td>
@@ -190,7 +190,7 @@
           </tr>
           <tr>
             <td colspan="6">
-              <textarea name="description{$line}" rows="5" cols="70" style="white-space:nowrap;overflow:scroll;">
+              <textarea name="description{$line}" rows="5" cols="70" style="overflow:scroll;">
                 {$invoiceItem.description}
               </textarea>
             </td>

@@ -87,9 +87,9 @@
     </select>
     </td>
   </tr>
-  <tr wrap="nowrap">
+  <tr>
     <td class="details_screen">{$LANG.date_formatted}</td>
-    <td wrap="nowrap">
+    <td>
       <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="date" id="date" value='{$expense.date}' />   
     </td>
   </tr>
