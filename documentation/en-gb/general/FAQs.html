@@ -1,31 +1,37 @@
 <html>
 <head>
-<title>
-Simple Invoices - Frequently Asked Questions
-</title>
+<title>Simple Invoices - Frequently Asked Questions</title>
 </head>
 
 <ul>
-	<li>The FAQs page is still a work in progress
-	<ul>
-		<li>SI Cron
-			<ul>
-				<li>To use cron to generate recurrent invoices, prepare a file <b>si_cron</b> and place it in the <b>/etc/cron.d</b> folder in linux with the following contents:
-<pre>#Simple Invoices recurrence - run each day at 1AM
-0 1 * * * /usr/bin/wget -q -O - http://localhost/api-cron  >/dev/null 2>&1</pre>
-				<li>Now run the command: <tt>crontab /etc/cron.d/si_cron</tt>
-			</ul>
-		<li>Sample Apache configuration file in debian (/etc/apache2/sites-available/simpleinvoices)
+  <li>The FAQs page is still a work in progress
+    <ul>
+      <li>SI Cron
+        <ul>
+          <li>
+            To use cron to generate recurrent invoices, prepare a file <b>si_cron</b> and place it in the <b>/etc/cron.d</b>
+            folder in linux with the following contents:
+            <br/>
+            <b>#Simple Invoices recurrence - run each day at 1 AM</b>
+            <br/>
+            <b>0 1 * * * &#47;usr&#47;bin&#47;wget -q -O - http:&#47;&#47;localhost&#47;api-cron &gt;/dev/null 2&gt;&#38;1</b>
+           </li>
+          <li>
+            Now run the command: <b>crontab&nbsp;/etc/cron.d/si_cron</b>
+          </li>
+        </ul>
+        <ul>
+          <li>Sample Apache configuration file in debian (/etc/apache2/sites-available/simpleinvoices)
 <pre>
 ServerAdmin webmaster@localhost
 ServerSignature Off
 ServerTokens Prod
 
 &lt;IfModule mpm_prefork_module&gt;
-    StartServers 2
-    MinSpareServers 1 
-    MaxSpareServers 2
-    MaxClients          50
+    StartServers          2
+    MinSpareServers       1 
+    MaxSpareServers       2
+    MaxClients           50
     MaxRequestsPerChild 100
 &lt;/IfModule&gt;
 
@@ -77,7 +83,6 @@ DocumentRoot /var/www/simpleinvoices
 # Disable directory listings.
 Options -Indexes
 
-
 ErrorLog /var/log/apache2/error.log
 
 # Possible values include: debug, info, notice, warn, error, crit,
@@ -88,9 +93,11 @@ CustomLog /var/log/apache2/access.log combined
 
 &lt;/VirtualHost&gt;
 </pre>
-		<li>  
-		<li>  
+        </li>
+        </ul>
+      </li>
     </ul>
+  </li>
 </ul>
 </html>
 

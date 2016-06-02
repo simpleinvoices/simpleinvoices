@@ -204,8 +204,7 @@ if (!in_array($module . "_" . $view, $early_exit)) {
 // to include the past_due_report extension's index.tpl file.
 $extension_php_insert_files = array();
 $perform_extension_php_insertions = (($module == 'system_defaults' && $view == 'edit'));
-
-    $extensionPhpFile = 0;
+$extensionPhpFile = 0;
 foreach ($ext_names as $ext_name) {
     $phpfile = "./extensions/$ext_name/modules/$module/$view.php";
     if (file_exists($phpfile)) {
