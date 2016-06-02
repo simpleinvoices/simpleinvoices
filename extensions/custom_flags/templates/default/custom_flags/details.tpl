@@ -95,7 +95,11 @@
           <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_flags_field_help"
              title="{$LANG.field_help_upper}"><img src="./images/common/help-small.png" alt="" /></a>
         </th>
-        <td><textarea name="{$LANG.field_help_upper|lower}" cols="100" maxlength="255" >{$cflg.field_help|escape}</textarea></td>
+        <td>
+          <textarea name="{$LANG.field_help_upper|lower}" class="editor" rows="3" cols="100" maxlength="255" wrap="soft" >
+            {$cflg.field_help|escape}
+          </textarea>
+        </td>
       </tr>
     </table>
     <div class="si_toolbar si_toolbar_form">

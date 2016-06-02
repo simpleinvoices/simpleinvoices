@@ -63,36 +63,67 @@
       </div>
       <div id="section-2" class="fragment">
         <table>
-		  <tr>
-			<th>{$customFieldLabel.product_cf1|htmlsafe} 
-				<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png" alt="" /></a>
-			</th>
-			<td><input type="text" class="edit" name="custom_field1" value="{$smarty.post.custom_field1|htmlsafe}"  size="50" /></td>
-		  </tr>
-		  <tr>
-			<th>{$customFieldLabel.product_cf2|htmlsafe} 
-				<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png" alt="" /></a>
-			</th>
-			<td><input type="text" class="edit" name="custom_field2" value="{$smarty.post.custom_field2|htmlsafe}" size="50" /></td>
-		  </tr>
-		  <tr>
-			<th>{$customFieldLabel.product_cf3|htmlsafe} 
-				<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png" alt="" /></a>
-			</th>
-			<td><input type="text" class="edit" name="custom_field3" value="{$smarty.post.custom_field3|htmlsafe}" size="50" /></td>
-		  </tr>
-		  <tr>
-			<th>{$customFieldLabel.product_cf4|htmlsafe} 
-				<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png" alt="" /></a>
-			</th>
-			<td><input type="text" class="edit" name="custom_field4" value="{$smarty.post.custom_field4|htmlsafe}" size="50" /></td>
-		  </tr>
+          {if !empty($customFieldLabel.product_cf1)}
+          <tr>
+            <th>{$customFieldLabel.product_cf1|htmlsafe}
+              <a class="cluetip" href="#"
+                 rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
+                 title="{$LANG.custom_fields}">
+                <img src="./images/common/help-small.png" alt="" />
+              </a>
+            </th>
+            <td><input type="text" class="edit" name="custom_field1"
+                       value="{$smarty.post.custom_field1|htmlsafe}" size="50" /></td>
+          </tr>
+          {/if}
+          {if !empty($customFieldLabel.product_cf2)}
+          <tr>
+            <th>{$customFieldLabel.product_cf2|htmlsafe}
+              <a class="cluetip" href="#"
+                 rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
+                 title="{$LANG.custom_fields}">
+                <img src="./images/common/help-small.png" alt="" />
+              </a>
+            </th>
+            <td><input type="text" class="edit" name="custom_field2"
+                       value="{$smarty.post.custom_field2|htmlsafe}" size="50" /></td>
+          </tr>
+          {/if} {if !empty($customFieldLabel.product_cf3)}
+          <tr>
+            <th>{$customFieldLabel.product_cf3|htmlsafe}
+              <a class="cluetip" href="#"
+                 rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
+                 title="{$LANG.custom_fields}">
+               <img src="./images/common/help-small.png" alt="" />
+              </a>
+            </th>
+            <td><input type="text" class="edit" name="custom_field3"
+                       value="{$smarty.post.custom_field3|htmlsafe}" size="50" /></td>
+          </tr>
+          {/if}
+          {if !empty($customFieldLabel.product_cf4)}
+          <tr>
+            <th>{$customFieldLabel.product_cf4|htmlsafe}
+              <a class="cluetip" href="#"
+                 rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
+                 title="{$LANG.custom_fields}">
+                <img src="./images/common/help-small.png" alt="" />
+              </a>
+            </th>
+            <td><input type="text" class="edit" name="custom_field4"
+                       value="{$smarty.post.custom_field4|htmlsafe}" size="50" /></td>
+          </tr>
+          {/if}
           {foreach from=$cflgs item=cflg}
             <tr>
               <th>
                 {$cflg.field_label|trim|htmlsafe}
                 {if strlen($cflg.field_help) > 0}
-                  <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;help={$cflg.field_help}" title="{$LANG.custom_flags_upper}"><img src="./images/common/help-small.png" alt="" /></a>
+                  <a class="cluetip" href="#"
+                     rel="index.php?module=documentation&amp;view=view&amp;help={$cflg.field_help}"
+                     title="{$cflg.field_label}">
+                    <img src="./images/common/help-small.png" alt="" />
+                  </a>
                 {/if}
               </th>
               <td><input type="checkbox" name="custom_flags_{$cflg.flg_id}" value="1"/></td>
@@ -119,7 +150,11 @@
         <table>
 		  <tr>
 			<th>{$LANG.notes}</th>
-			<td><textarea input type="text" class="editor" name='notes' rows="8" cols="50">{$smarty.post.notes|unescape}</textarea></td>
+			<td>
+              <textarea class="editor" name='notes' rows="8" cols="50" wrap="soft" >
+                {$smarty.post.notes|unescape}
+              </textarea>
+            </td>
 		  </tr>
           <tr>
             <th class="details_screen">{$LANG.note_attributes}</th>

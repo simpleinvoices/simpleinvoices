@@ -196,7 +196,7 @@
           <th>
             {$cflg.field_label|trim|htmlsafe}
             {if strlen($cflg.field_help) > 0}
-              <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;help={$cflg.field_help}" title="{$LANG.custom_flags_upper}"><img src="./images/common/help-small.png" alt="" /></a>
+              <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;help={$cflg.field_help}" title="{$cflg.field_label}"><img src="./images/common/help-small.png" alt="" /></a>
             {/if}
           </th>
           <td style="float:left;margin-left:auto;width:10px;"><input type="checkbox" name="custom_flags_{$cflg.flg_id}" {if substr($product.custom_flags,$i,1) == '1'} checked {/if} value="1" /></td>
