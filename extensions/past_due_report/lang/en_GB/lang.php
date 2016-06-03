@@ -1,11 +1,2 @@
 <?php
-$LCL_LANG = array(
-    'billed' => "Billed",
-    'billing' => "Billing",
-    'on' => "On",
-    'outstanding' => "Outstanding",
-    'past_due_upper' => "Past Due",
-    'previously' => "Previously"
-    );
-$LANG = array_merge($LANG,$LCL_LANG);
-?>
+require './extensions/past_due_report/lang/en_US/lang.php';

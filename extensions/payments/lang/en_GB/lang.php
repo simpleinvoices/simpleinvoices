@@ -1,7 +1,2 @@
 <?php
-// @formatter:off
-$LCL_LANG = array(
-  'check_number' => "Check #"
-);
-// @formatter:on
-$LANG = array_merge($LANG,$LCL_LANG);
+require './extensions/payments/lang/en_US/lang.php';
