@@ -20,7 +20,7 @@
 	    	<a href="index.php?module=invoices&amp;view=total" class="{if $view=='total'}selected{/if}"><img class="action" src="./images/common/page_white_edit.png"/>{$LANG.total_style}</a>
 		</span>
     	<span class="si_filters_title">
-			<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_invoice_types" title="{$LANG.invoice_type}"><img class="" src="./images/common/help-small.png" alt="" /></a>
+			<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_invoice_types" title="{$LANG.invoice_type}"><img class="" src="{$help_image_path}help-small.png" alt="" /></a>
 		</span>
 	</div>
 

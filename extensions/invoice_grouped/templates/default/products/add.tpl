@@ -19,7 +19,7 @@
 	<tr>
 		<td class="details_screen">{$LANG.description} 
 			<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field" title="{$LANG.required_field}">
-			<img src="./images/common/required-small.png" /></a>
+			<img src="{$help_image_path}required-small.png" /></a>
 		</td>
 		<td><input type="text" name="description" value="{$smarty.post.description}" size="50" id="description" class="required edit" onblur="checkField(this);" /></td>
 	</tr>
@@ -41,7 +41,7 @@
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf1} 
 			<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}">
-			<img src="./images/common/help-small.png" /></a>
+			<img src="{$help_image_path}help-small.png" /></a>
 		</td>
 		<td>
 		<select name="custom_field1">
@@ -55,21 +55,21 @@
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf2} 
 			<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}">
-			<img src="./images/common/help-small.png" alt="" /></a>
+			<img src="{$help_image_path}help-small.png" alt="" /></a>
 		</td>
 		<td><input type="text" class="edit" name="custom_field2" value="{$smarty.post.custom_field2}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf3} 
 			<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}">
-			<img src="./images/common/help-small.png" alt="" /></a>
+			<img src="{$help_image_path}help-small.png" alt="" /></a>
 		</td>
 		<td><input type="text" class="edit" name="custom_field3" value="{$smarty.post.custom_field3}" size="50" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf4} 
 			<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}">
-			<img src="./images/common/help-small.png" alt="" /></a>
+			<img src="{$help_image_path}help-small.png" alt="" /></a>
 		</td>
 		<td><input type="text" class="edit" name="custom_field4" value="{$smarty.post.custom_field4}" size="50" /></td>
 	</tr>

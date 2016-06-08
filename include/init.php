@@ -100,7 +100,7 @@ $frontendOptions = array('lifetime' => ($timeout * 60), 'automatic_serialization
  * -- must come after the tmp dir writeable check
  * *************************************************************/
 $backendOptions = array('cache_dir' => './tmp/'); // Directory where to put the cache files
-                                                  
+
 // getting a Zend_Cache_Core object
 $cache = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
 
@@ -164,45 +164,30 @@ $smarty->register_modifier('urlsafe'  , 'urlsafe');
 $smarty->register_modifier('urlencode', 'urlencode');
 $smarty->register_modifier('outhtml'  , 'outhtml');
 $smarty->register_modifier('htmlout'  , 'outhtml');   //common typo
-$smarty->register_modifier('urlescape', 'urlencode'); //common typo 
+$smarty->register_modifier('urlescape', 'urlencode'); //common typo
 // @formatter:on
 
 loadSiExtentions();
 
-// If no extension loaded, load Core
-if (!$config->extension) {
-    // @formatter:off
-    $extension_core = new Zend_Config(
-            array('core' => array('id' => 1,
-                                  'domain_id'=>1,
-                                  'name'=>'core',
-                                  'description'=>'Core part of Simple Invoices - always enabled',
-                                  'enabled' => 1)));
-    $config->extension = $extension_core;
-    // @formatter:on
-}
+checkConnection();
+
+$defaults = getSystemDefaults();
+$smarty->assign("defaults", $defaults);
 
 include_once ('./include/language.php');
-
-// add class files for extensions
-checkConnection();
 
 include ('./include/include_auth.php');
 include_once ('./include/manageCustomFields.php');
 include_once ("./include/validation.php");
 
-// if authentication enabled then do acl check etc..
 if ($config->authentication->enabled == 1) {
     include_once ("./include/acl.php");
-    foreach ($config->extension as $extension) {
-        // If extension is enabled, include the requested file for that extension if it exists
-        if ($extension->enabled == "1") {
-            if (file_exists("./extensions/$extension->name/include/acl.php")) {
-                require_once ("./extensions/$extension->name/include/acl.php");
-            }
+    // if authentication enabled then do acl check etc..
+    foreach ($ext_names as $ext_name) {
+        if (file_exists("./extensions/$ext_name/include/acl.php")) {
+            require_once ("./extensions/$ext_name/include/acl.php");
         }
     }
-    
     include_once ("./include/check_permission.php");
 }
 
@@ -239,6 +224,3 @@ $siUrl = getURL();
  * (NOTE: NOT TESTED!)
  * *************************************************************/
 include_once ("./include/backup.lib.php");
-
-$defaults = getSystemDefaults();
-$smarty->assign("defaults", $defaults);

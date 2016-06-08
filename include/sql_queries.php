@@ -253,6 +253,8 @@ function loadSiExtentions() {
     global $dbh;
     global $databasePopulated;
     global $patchCount;
+    global $ext_names;
+
     $domain_id = domain_id::get();
 
     if ($databasePopulated) {
@@ -269,6 +271,27 @@ function loadSiExtentions() {
                 $DB_extensions[$this_extension['name']] = $this_extension;
             }
             $config->extension = $DB_extensions;
+
+            // If no extension loaded, load Core
+            if (!$config->extension) {
+                // @formatter:off
+                $extension_core = new Zend_Config(
+                                array('core' => array('id'   => 1,
+                                                'domain_id'  => 1,
+                                                'name'       => 'core',
+                                                'description'=> 'Core part of Simple Invoices - always enabled',
+                                                'enabled'    => 1)));
+                $config->extension = $extension_core;
+                // @formatter:on
+            }
+
+            // Populate the array of enabled extensions.
+            foreach ($config->extension as $extension) {
+                if ($extension->enabled == "1") {
+                    $ext_names[] = $extension->name;
+                }
+            }
+
         }
     }
 }
@@ -3424,7 +3447,7 @@ function show_custom_field($custom_field, $custom_field_value, $permission, $css
     <th class="$css_class_th">$custom_label_value
         <a class="cluetip" href="#"
            rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
-           title="Custom Fields"><img src="./images/common/help-small.png" alt="" />
+           title="Custom Fields"><img src="{$help_image_path}help-small.png" alt="" />
         </a>
     </th>
     <td><input type="text" name="customField$cfn" value="$custom_field_value" size="25" /></td>

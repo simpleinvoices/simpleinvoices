@@ -44,7 +44,7 @@
         {$LANG.invoice_id}
         <a href="index.php?module=documentation&amp;view=view&amp;page=help_process_payment_inv_id"
            rel="gb_page_center[450, 450]">
-          <img src="./images/common/help-small.png" alt="({$LANG.help})" />
+          <img src="{$help_image_path}help-small.png" alt="({$LANG.help})" />
         </a>
       </td>
       <td><input type="text" id="ac_me" name="ac_inv_id" /></td>
@@ -54,7 +54,7 @@
         {$LANG.details}
         <a href="index.php?module=documentation&amp;view=view&amp;page=help_process_payment_details"
            rel="gb_page_center[450, 450]">
-          <img src="./images/common/help-small.png" alt="({$LANG.help})" />
+          <img src="{$help_image_path}help-small.png" alt="({$LANG.help})" />
         </a>
       </td>
       <td id="js_total"><i>{$LANG.select_invoice}</i></td>

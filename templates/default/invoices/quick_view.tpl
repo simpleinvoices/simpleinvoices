@@ -471,7 +471,7 @@
             <a class="cluetip" href="#"
                rel="index.php?module=documentation&amp;view=view&amp;page=help_age"
                title="{$LANG.age}"><img
-               src="./images/common/help-small.png" alt="" />
+               src="{$help_image_path}help-small.png" alt="" />
             </a>
           </th>
         </tr>

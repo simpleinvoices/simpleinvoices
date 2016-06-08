@@ -31,7 +31,7 @@
         <a class="cluetip" href="#"
            rel="index.php?module=documentation&amp;view=view&amp;page=help_email_from"
            title="{$LANG.email_from}">
-          <img src="./images/common/help-small.png" alt="" />
+          <img src="{$help_image_path}help-small.png" alt="" />
         </a>
       </th>
       <td><input type="text" name="email_from" size="50" value="{$biller.email|htmlsafe}" /></td>
@@ -41,7 +41,7 @@
         <a class="cluetip" href="#"
            rel="index.php?module=documentation&amp;view=view&amp;page=help_email_to"
            title="{$LANG.email_to}">
-          <img src="./images/common/help-small.png" alt="" />
+          <img src="{$help_image_path}help-small.png" alt="" />
         </a>
       </th>
       <td><input type="text" name="email_to" size="50" value="{$customer.email|htmlsafe}" /></td>
@@ -51,7 +51,7 @@
         <a class="cluetip" href="#"
            rel="index.php?module=documentation&amp;view=view&amp;page=help_email_bcc"
            title="{$LANG.email_bcc}">
-          <img src="./images/common/help-small.png" alt="" />
+          <img src="{$help_image_path}help-small.png" alt="" />
         </a>
       </th>
       <td><input type="text" name="email_bcc" size="50" value="{$biller.email|htmlsafe}" /></td>

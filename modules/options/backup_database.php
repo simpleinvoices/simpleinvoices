@@ -28,7 +28,7 @@ if ($_GET['op'] == "backup_db") {
 </div>
 $txt
 	<div class="si_help_div">
-			<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_backup_database_fwrite" title="{$LANG['fwrite_error']}"><img src="./images/common/help-small.png" alt="" />{$LANG['fwrite_error']}</a>
+			<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_backup_database_fwrite" title="{$LANG['fwrite_error']}"><img src="{$help_image_path}help-small.png" alt="" />{$LANG['fwrite_error']}</a>
 	</div>
 
 EOF;

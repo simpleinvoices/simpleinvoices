@@ -27,7 +27,7 @@
 		</tr>
 		<tr>
 			<th>{$LANG.default_inv_template}
-				<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_default_invoice_template_text" title="{$LANG.default_inv_template}"><img src="./images/common/help-small.png" alt="" /></a>
+				<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_default_invoice_template_text" title="{$LANG.default_inv_template}"><img src="{$help_image_path}help-small.png" alt="" /></a>
 			</th>
 			<td><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=def_inv_template'><img src="images/common/edit.png" title="{$LANG.edit}" alt="{$LANG.edit}" /></a></td>
 			<td>{$defaults.template|htmlsafe}</td>
@@ -39,7 +39,7 @@
 		</tr>
 		<tr>
 			<th>{$LANG.delete}
-				<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_delete" title="{$LANG.delete}"><img src="./images/common/help-small.png" alt="" /></a>
+				<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_delete" title="{$LANG.delete}"><img src="{$help_image_path}help-small.png" alt="" /></a>
 			</th>
 			<td>
 				<a href='index.php?module=system_defaults&amp;view=edit&amp;submit=delete'><img src="images/common/edit.png" title="{$LANG.edit}" alt="{$LANG.edit}" /></a></td>
@@ -47,7 +47,7 @@
 		</tr>
 		<tr>
 			<th>{$LANG.logging} 
-				<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_logging" title="{$LANG.logging}"><img src="./images/common/help-small.png" alt="" /></a>
+				<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_logging" title="{$LANG.logging}"><img src="{$help_image_path}help-small.png" alt="" /></a>
 			</th>
 			<td><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=logging'><img src="images/common/edit.png" title="{$LANG.edit}" alt="{$LANG.edit}" /></a></td>
 			<td>{$defaultLogging|htmlsafe}</td>

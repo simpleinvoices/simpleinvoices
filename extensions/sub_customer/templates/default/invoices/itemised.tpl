@@ -316,7 +316,7 @@
 	</tr>	
 	<tr>
 		<td class=""> 
-			<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_invoice_custom_fields" title="{$LANG.want_more_fields}"><img src="./images/common/help-small.png" alt="" /> {$LANG.want_more_fields}</a>
+			<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_invoice_custom_fields" title="{$LANG.want_more_fields}"><img src="{$help_image_path}help-small.png" alt="" /> {$LANG.want_more_fields}</a>
 		</td>
 	</tr>
 

@@ -134,7 +134,7 @@
           <th>
             {$LANG.cost}
             <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_cost" title="{$LANG.cost}">
-               <img src="./images/common/help-small.png" alt="" />
+               <img src="{$help_image_path}help-small.png" alt="" />
             </a>
           </th>
           <td><input type="text" class="edit" name="cost" value="{$product.cost|siLocal_number_formatted}"  size="25" /></td>
@@ -161,7 +161,7 @@
       {if !empty($customFieldLabel.product_cf1)}
       <tr>
         <th>{$customFieldLabel.product_cf1|htmlsafe} 
-          <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png" alt="" /></a>
+          <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="{$help_image_path}help-small.png" alt="" /></a>
         </th>
         <td><input type="text" name="custom_field1" size="50" value="{$product.custom_field1|htmlsafe}" /></td>
       </tr>
@@ -169,7 +169,7 @@
       {if !empty($customFieldLabel.product_cf2)}
       <tr>
         <th>{$customFieldLabel.product_cf2|htmlsafe} 
-          <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png" alt="" /></a>
+          <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="{$help_image_path}help-small.png" alt="" /></a>
         </th>
         <td><input type="text" name="custom_field2" size="50" value="{$product.custom_field2|htmlsafe}" /></td>
       </tr>
@@ -177,7 +177,7 @@
       {if !empty($customFieldLabel.product_cf3)}
       <tr>
         <th>{$customFieldLabel.product_cf3|htmlsafe} 
-          <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png" alt="" /></a>
+          <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="{$help_image_path}help-small.png" alt="" /></a>
         </th>
         <td><input type="text" name="custom_field3" size="50" value="{$product.custom_field3|htmlsafe}" /></td>
       </tr>
@@ -185,7 +185,7 @@
       {if !empty($customFieldLabel.product_cf4)}
       <tr>
         <th>{$customFieldLabel.product_cf4|htmlsafe} 
-          <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="./images/common/help-small.png" alt="" /></a>
+          <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="{$help_image_path}help-small.png" alt="" /></a>
         </th>
         <td><input type="text" name="custom_field4" size="50" value="{$product.custom_field4|htmlsafe}" /></td>
       </tr>
@@ -196,7 +196,7 @@
           <th>
             {$cflg.field_label|trim|htmlsafe}
             {if strlen($cflg.field_help) > 0}
-              <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;help={$cflg.field_help}" title="{$cflg.field_label}"><img src="./images/common/help-small.png" alt="" /></a>
+              <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;help={$cflg.field_help}" title="{$cflg.field_label}"><img src="{$help_image_path}help-small.png" alt="" /></a>
             {/if}
           </th>
           <td style="float:left;margin-left:auto;width:10px;"><input type="checkbox" name="custom_flags_{$cflg.flg_id}" {if substr($product.custom_flags,$i,1) == '1'} checked {/if} value="1" /></td>

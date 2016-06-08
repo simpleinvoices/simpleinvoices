@@ -28,22 +28,19 @@ $databasePopulated = false;
 $patchCount        = false;
 // @formatter:on
 
+// Will be set in the following init.php call to extensions that are enabled.
+$ext_names = array();
+$help_image_path = "./images/common/";
+
 // Note: include/functions.php and include/sql_queries.php loaded by this include.
 require_once "./include/init.php";
-
-// Remove disabled extensions from the array
-$ext_names = array();
-foreach ($config->extension as $extension) {
-    if ($extension->enabled == "1") {
-        $ext_names[] = $extension->name;
-    }
-}
 
 foreach ($ext_names as $ext_name) {
     if (file_exists("./extensions/$ext_name/include/init.php")) {
         require_once ("./extensions/$ext_name/include/init.php");
     }
 }
+$smarty->assign("help_image_path", $help_image_path);
 
 // **********************************************************
 // The include configs and requirements stuff section - END
@@ -224,7 +221,6 @@ foreach ($ext_names as $ext_name) {
         }
     }
 }
-
 if ($extensionPhpFile == 0 && ($my_path = getCustomPath("$module/$view", 'module'))) {
     include $my_path;
 }
@@ -337,7 +333,6 @@ if (!in_array($module . "_" . $view, $early_exit)) {
 // **********************************************************
 $extensionTemplates = 0;
 $my_tpl_path = '';
-
 $path = '';
 // For extensions with a report, this logic allows them to be inserted into the
 // the report menu (index.tpl) without having to replicate the content of that
@@ -406,7 +401,6 @@ if ($extensionTemplates == 0) {
         $extensionTemplates++;
     }
 }
-
 // @formatter:off
 $smarty->assign("extension_insertion_files"   , $extension_insertion_files);
 $smarty->assign("perform_extension_insertions", $perform_extension_insertions);

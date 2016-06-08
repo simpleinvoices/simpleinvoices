@@ -130,7 +130,7 @@
           <a class="cluetip" href="#"
              rel="index.php?module=documentation&amp;view=view&amp;page=help_cost"
              title="{$LANG.cost}">
-            <img src="./images/common/help-small.png" alt="" />
+            <img src="{$help_image_path}help-small.png" alt="" />
           </a>
         </th>
         <td><input type="text" class="edit" name="cost"
@@ -161,7 +161,7 @@
           <a class="cluetip" href="#"
              rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
              title="{$LANG.custom_fields}">
-            <img src="./images/common/help-small.png" alt="" />
+            <img src="{$help_image_path}help-small.png" alt="" />
           </a>
         </th>
         <td><input type="text" name="custom_field1" size="50"
@@ -174,7 +174,7 @@
           <a class="cluetip" href="#"
              rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
              title="{$LANG.custom_fields}">
-            <img src="./images/common/help-small.png" alt="" />
+            <img src="{$help_image_path}help-small.png" alt="" />
           </a>
         </th>
         <td><input type="text" name="custom_field2" size="50"
@@ -187,7 +187,7 @@
           <a class="cluetip" href="#"
              rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
              title="{$LANG.custom_fields}">
-            <img src="./images/common/help-small.png" alt="" />
+            <img src="{$help_image_path}help-small.png" alt="" />
           </a>
         </th>
         <td><input type="text" name="custom_field3" size="50"
@@ -200,7 +200,7 @@
           <a class="cluetip" href="#"
              rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
              title="{$LANG.custom_fields}">
-            <img src="./images/common/help-small.png" alt="" />
+            <img src="{$help_image_path}help-small.png" alt="" />
           </a>
         </th>
         <td><input type="text" name="custom_field4" size="50"

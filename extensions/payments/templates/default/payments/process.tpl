@@ -28,7 +28,7 @@
           <a class="cluetip" href="#"
              rel="index.php?module=documentation&amp;view=view&amp;page=help_process_payment_auto_amount"
              title="{$LANG.process_payment_auto_amount}">
-            <img src="./images/common/help-small.png" alt="" />
+            <img src="{$help_image_path}help-small.png" alt="" />
           </a>
         </td>
       </tr>

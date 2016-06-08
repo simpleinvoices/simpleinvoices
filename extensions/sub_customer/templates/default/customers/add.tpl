@@ -34,7 +34,7 @@
 			rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field"
 			title="{$LANG.required_field}"
 		>
-		<img src="./images/common/required-small.png" alt="" />
+		<img src="{$help_image_path}required-small.png" alt="" />
 		</a>
 		</td>
 		<td><input type="text" name="name" id="name" value="{$smarty.post.name|htmlsafe}" size="25" class="validate[required]" /></td>
@@ -47,7 +47,7 @@
 			class="cluetip"
 			title="{$LANG.customer_contact}"
 		>
-		<img src="./images/common/help-small.png" alt="" />
+		<img src="{$help_image_path}help-small.png" alt="" />
 		</a>
 		</td>
 		<td><input type="text" name="attention" value="{$smarty.post.attention|htmlsafe}" size="25" /></td>
@@ -64,7 +64,7 @@
 			rel="index.php?module=documentation&amp;view=view&amp;page=help_street2"
 			title="{$LANG.street2}"
 		> 
-		<img src="./images/common/help-small.png" alt="" />
+		<img src="{$help_image_path}help-small.png" alt="" />
 		</a>
 		</td>
 		<td><input type="text" name="street_address2" value="{$smarty.post.street_address2|htmlsafe}" size="25" /></td>
@@ -162,7 +162,7 @@
 			rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 			title="{$LANG.custom_fields}"
 		>
-		<img src="./images/common/help-small.png" alt="" />
+		<img src="{$help_image_path}help-small.png" alt="" />
 		</a>
 		</td>
 		<td><input type="text" name="custom_field1" value="{$smarty.post.custom_field1|htmlsafe}" size="25" /></td>
@@ -175,7 +175,7 @@
 			rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 			title="{$LANG.custom_fields}"
 		> 
-		<img src="./images/common/help-small.png" alt="" />
+		<img src="{$help_image_path}help-small.png" alt="" />
 		</a>
 		</td>
 		<td><input type="text" name="custom_field2" value="{$smarty.post.custom_field2|htmlsafe}" size="25" /></td> 
@@ -188,7 +188,7 @@
 			rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 			title="{$LANG.custom_fields}"
 		> 
-		<img src="./images/common/help-small.png" alt="" />
+		<img src="{$help_image_path}help-small.png" alt="" />
 		</a>
 		</td>
 		<td><input type="text" name="custom_field3" value="{$smarty.post.custom_field3|htmlsafe}" size="25" /></td>
@@ -201,7 +201,7 @@
 			rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 			title="{$LANG.custom_fields}"
 		> 
-		<img src="./images/common/help-small.png" alt="" />
+		<img src="{$help_image_path}help-small.png" alt="" />
 		</a>
 		</td>
 		<td><input type="text" name="custom_field4" value="{$smarty.post.custom_field4|htmlsafe}" size="25" /></td>
