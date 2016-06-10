@@ -169,6 +169,16 @@ foreach ($ext_names as $ext_name) {
 
 $smarty->assign("extension_jquery_files", $extension_jquery_files);
 
+// Load any hooks that are defined for extensions
+foreach ($ext_names as $ext_name) {
+    if (file_exists("./extensions/$ext_name/templates/default/hooks.tpl")) {
+        $smarty->$smarty_output("../extensions/$ext_name/templates/default/hooks.tpl");
+    }
+}
+// Load standard hooks file. Note that any module hooks loaded will not be
+// impacted by loading this file.
+$smarty->$smarty_output("../custom/hooks.tpl");
+
 if (!in_array($module . "_" . $view, $early_exit)) {
     $extensionHeader = 0;
     foreach ($ext_names as $ext_name) {

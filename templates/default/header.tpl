@@ -3,7 +3,6 @@
 <html>
 <head>
 {strip}
-	{include file='../custom/hooks.tpl'}
 	{assign var='tmp_lang_module' value="title_module_`$module`"}
     {assign var='tmp_lang_module' value=$LANG.$tmp_lang_module|default:$LANG.$module|default:$module}
 	{assign var='tmp_lang_view' value="title_view_`$view`"}

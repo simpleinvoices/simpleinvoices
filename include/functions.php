@@ -25,7 +25,7 @@ function checkLogin() {
  * Build path for the specified file type if it exists.
  * The first attempt is to make a custom path, if that file doesn't
  * exist, the regular path is checked. The first path that is for an
- * existing file is the path returned. 
+ * existing file is the path returned.
  * @param $name Name or dir/name of file without an extension.
  * @param $mode Set to "template" or "module".
  * @return file path or NULL if no file path determined.
@@ -51,8 +51,7 @@ function getCustomPath($name, $mode = 'template') {
 }
 
 /**
- * See if custom_flags extension is enabled.
- * Note that this function needs to be available globally.
+ * Global function to see if an extension is enabled.
  * @param $ext_name Name of the extension to check for.
  * @return true if enabled, false if not.
  */
@@ -81,14 +80,14 @@ function getLogoList() {
         }
         closedir($handle);
     }
-    
+
     sort($files);
     return $files;
 }
 
 function getLogo($biller) {
     $url = getURL();
-    
+
     if (empty($biller['logo'])) {
         return $url . "/templates/invoices/logos/_default_blank_logo.png";
     }
@@ -106,12 +105,12 @@ function getLogo($biller) {
  */
 function get_custom_field_name($field) {
     global $LANG;
-    
+
     // grab the first character of the field variable
     $get_cf_letter = $field[0];
     // grab the last character of the field variable
     $get_cf_number = $field[strlen($field) - 1];
-    
+
     // functon to return false if invalid custom_field
     $custom_field_name = "";
     switch ($get_cf_letter) {
@@ -130,7 +129,7 @@ function get_custom_field_name($field) {
         default:
             $custom_field_name = false;
     }
-    
+
     // Append the rest of the string
     $custom_field_name .= " :: " . $LANG["custom_field"] . " " . $get_cf_number;
     return $custom_field_name;
@@ -173,7 +172,7 @@ function simpleInvoicesError($type, $info1 = "", $info2 = "") {
             <br />
             The " . $info1 . " <b>" . $info2 . "</b> has to be writeable");
             break;
-        
+
         case "dbConnection":
             $error = exit("
             <br />
@@ -195,7 +194,7 @@ function simpleInvoicesError($type, $info1 = "", $info2 = "") {
             If this is an Access denied error please enter the correct database connection details config/config.php
             <br />
             <br />
-            <b>Note:</b> If you are installing Simple Invoices please follow the below steps: 
+            <b>Note:</b> If you are installing Simple Invoices please follow the below steps:
             <br />
             1. Create a blank MySQL database
             <br />
@@ -208,7 +207,7 @@ function simpleInvoicesError($type, $info1 = "", $info2 = "") {
             <br />
             ");
             break;
-        
+
         case "PDO":
             $error = exit("
             <br />
@@ -220,7 +219,7 @@ function simpleInvoicesError($type, $info1 = "", $info2 = "") {
             <br />
             <br />
             PDO is not configured in your PHP installation.
-            <br />  
+            <br />
             This means that Simple Invoices can't be used.
             <br />
             <br />
@@ -235,7 +234,7 @@ function simpleInvoicesError($type, $info1 = "", $info2 = "") {
             <br />
             ");
             break;
-        
+
         case "sql":
             $error = exit("
             <br />
@@ -247,7 +246,7 @@ function simpleInvoicesError($type, $info1 = "", $info2 = "") {
             <br />
             <br />
             The following sql statement:
-            <br />  
+            <br />
             $info2
             <br />
             <br />
@@ -275,7 +274,7 @@ function simpleInvoicesError($type, $info1 = "", $info2 = "") {
             <br />
             database settings 'database.utf8'.
             <br />
-            <br />  
+            <br />
             To fix this please edit config/config.php and
             <br />
             set 'database.utf8' to 'false'
@@ -287,14 +286,14 @@ function simpleInvoicesError($type, $info1 = "", $info2 = "") {
             break;
     }
     // @formatter:off
-    
+
     return $error;
 }
 
 function checkConnection() {
     global $dbh;
     global $db_server;
-    
+
     if (!$dbh) {
         simpleInvoicesError("dbConnection", $db_server, $dbh->errorInfo());
     }
@@ -329,7 +328,7 @@ function sql2xml($sth, $count) {
     foreach ($sth as $row) {
         // count the no. of columns in the table
         $fcount = count($row);
-        
+
         $xml .= ("<tablerow>");
         foreach ($row as $key => $value) {
             $xml .= ("<$key>" . htmlsafe($value) . "</$key>");
@@ -337,7 +336,7 @@ function sql2xml($sth, $count) {
         $xml .= ("</tablerow>");
     }
     $xml .= ("</result>");
-    
+
     return $xml;
 }
 
@@ -380,11 +379,11 @@ function urlsafe($str) {
 /* Sanitises HTML for output stuff */
 function outhtml($html) {
     $config = HTMLPurifier_Config::createDefault();
-    
+
     // configuration goes here:
     $config->set('Core.Encoding', 'UTF-8'); // replace with your encoding
     $config->set('HTML.Doctype', 'XHTML 1.0 Strict'); // replace with your doctype
-    
+
     $purifier = new HTMLPurifier($config);
     return $purifier->purify($html);
 }
@@ -393,28 +392,28 @@ function outhtml($html) {
 function siNonce($action = false, $userid = false, $tickTock = false) {
     global $config;
     global $auth_session;
-    
+
     $tickTock = ($tickTock) ? $tickTock : floor(time() / $config->nonce->timelimit);
-    
+
     if (!$userid) {
         $userid = $auth_session->id;
     }
-    
+
     $hash = md5($tickTock . ':' . $config->nonce->key . ':' . $userid . ':' . $action);
-    
+
     return $hash;
 }
 
 // Verify a nonce token
 function verifySiNonce($hash, $action, $userid = false) {
     global $config;
-    
+
     $tickTock = floor(time() / $config->nonce->timelimit);
     if (!isempty($hash) &&
         ($hash === siNonce($action, $userid) || $hash === siNonce($action, $userid, $tickTock - 1))) {
         return true;
     }
-    
+
     return false;
 }
 

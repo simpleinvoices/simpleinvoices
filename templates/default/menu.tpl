@@ -1,6 +1,9 @@
 
 <div id="si_header">
 {$smarty.capture.hook_topmenu_start}
+{if $smarty.capture.hook_topmenu_section01_replace ne ""}
+  {$smarty.capture.hook_topmenu_section01_replace}
+{else}
   <div class="si_wrap">
     {$LANG.hello} {$smarty.session.Zend_Auth.email|htmlsafe} | <a href="http://www.simpleinvoices.org/help" target="blank">{$LANG.help}</a>
     {if $config->authentication->enabled == 1} |
@@ -12,6 +15,7 @@
       {/if}
     {/if}
   </div>
+{/if}
 {$smarty.capture.hook_topmenu_end}
 </div>
 <div id="tabmenu" class="flora si_wrap" >
