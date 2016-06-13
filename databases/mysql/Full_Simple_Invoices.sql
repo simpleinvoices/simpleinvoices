@@ -159,7 +159,8 @@ CREATE TABLE IF NOT EXISTS `si_invoice_item_tax` (
   `tax_type` CHAR(1) DEFAULT '%' NOT NULL,
   `tax_rate` decimal(25,6) NOT NULL,
   `tax_amount` decimal(25,6) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UnqInvTax` (`invoice_item_id`, `tax_id`)
 ) ENGINE=MyISAM;
 
 INSERT INTO `si_invoice_item_tax` (`id`, `invoice_item_id`, `tax_id`, `tax_type`, `tax_rate`, `tax_amount`) VALUES
