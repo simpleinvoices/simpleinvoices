@@ -1584,6 +1584,8 @@ function getExtensionID($extension_name = "none", $domain_id = '') {
 }
 
 function getSystemDefaults($domain_id = '') {
+    global $patchCount;
+
     $domain_id = domain_id::get($domain_id);
 
     $db = new db();
@@ -1603,10 +1605,11 @@ function getSystemDefaults($domain_id = '') {
         // @formatter:off
         $sql_default = "SELECT def.name, def.value
                         FROM " . TB_PREFIX . "system_defaults def
-                        INNER JOIN " . TB_PREFIX . "extensions ext
+                        INNER JOIN " . TB_PREFIX . "extensions ext ON (def.domain_id = ext.domain_id)
+                        WHERE enabled = 1
                           AND ext.name = 'core'
                           AND def.domain_id = :domain_id
-                        ORDER BY extension_id ASC";
+                        ORDER BY extension_id ASC";		// order is important for overriding setting
         // @formatter:on
         $sth = $db->query($sql_default, ':domain_id', 0);
     }
