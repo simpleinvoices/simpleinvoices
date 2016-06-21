@@ -65,6 +65,22 @@ table {
 	border-collapse: collapse;
 }
 
+table.center {
+	margin: 0 auto;
+}
+table.left {
+  float:left;
+  margin-left:auto;
+}
+
+table.buttons {
+    margin: 0 auto;
+    padding: 0;
+    border: none;
+    width: 16px;
+    height: 16px;
+}
+
 td, div {
 	font-family: verdana, arial, helvetica, sans-serif;
 	text-align: left;

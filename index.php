@@ -25,7 +25,7 @@ $action = isset($_GET['case'])   ? filenameEscape($_GET['case'])   : null;
 // globals set in the init.php logic
 $databaseBuilt     = false;
 $databasePopulated = false;
-$patchCount        = false;
+$patchCount        = 0;
 // @formatter:on
 
 // Will be set in the following init.php call to extensions that are enabled.

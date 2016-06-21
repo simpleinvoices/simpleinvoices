@@ -58,11 +58,14 @@ if (!is_writable('./tmp/cache')) {
 include_once ('./config/define.php');
 
 // Include another config file if required
+$config_file_path = "";
 if (is_file('./config/custom.config.php')) {
     $config = new Zend_Config_Ini('./config/custom.config.php', $environment, true);
+    $config_file_path = "config/custom.config.php";
 } else {
     // added 'true' to allow modifications from db
     $config = new Zend_Config_Ini('./config/config.php', $environment, true);
+    $config_file_path = "config/config.php";
 }
 
 // set up app with relevant php setting
@@ -82,8 +85,12 @@ $zendDb = Zend_Db::factory($config->database->adapter,
                                 'dbname'   => $config->database->params->dbname,
                                 'port'     => $config->database->params->port));
 
-$session_timeout = $zendDb->fetchRow("SELECT value FROM ". TB_PREFIX . "system_defaults
-                                      WHERE name='session_timeout'");
+try {
+    $session_timeout = $zendDb->fetchRow("SELECT value FROM ". TB_PREFIX . "system_defaults
+                                          WHERE name='session_timeout'");
+} catch (Exception $ex) {
+    $session_timeout = 60;
+}
 // @formatter:on
 $timeout = intval($session_timeout['value']);
 if ($timeout <= 0) {
@@ -111,6 +118,8 @@ Zend_Date::setOptions(array('cache' => $cache)); // Active aussi pour Zend_Local
  * *************************************************************/
 
 $smarty = new Smarty();
+
+$smarty->assign("config_file_path", $config_file_path);
 
 $smarty->debugging = false;
 
@@ -146,9 +155,8 @@ include_once ("./include/sql_queries.php");
 $databaseBuilt = checkTableExists(TB_PREFIX . "biller");
 if ($databaseBuilt) {
     // This is a global variable as well as a smarty value.
-    // Note that this $patchCount is used to see if the database has been populated.
     $patchCount = getNumberOfDoneSQLPatches();
-    $databasePopulated = checkDataExists();
+    $databasePopulated = $patchCount > 0;
 }
 $smarty->assign('patchCount', $patchCount);
 
@@ -180,7 +188,7 @@ include ('./include/include_auth.php');
 include_once ('./include/manageCustomFields.php');
 include_once ("./include/validation.php");
 
-if ($config->authentication->enabled == 1) {
+if ($databaseBuilt && $config->authentication->enabled == 1) {
     include_once ("./include/acl.php");
     // if authentication enabled then do acl check etc..
     foreach ($ext_names as $ext_name) {

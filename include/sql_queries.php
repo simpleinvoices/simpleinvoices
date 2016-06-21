@@ -251,13 +251,13 @@ function lastInsertId() {
 function loadSiExtentions() {
     global $config;
     global $dbh;
-    global $databasePopulated;
+    global $databaseBuilt;
     global $patchCount;
     global $ext_names;
 
     $domain_id = domain_id::get();
 
-    if ($databasePopulated) {
+    if ($databaseBuilt) {
         if ($patchCount > "196") {
             // @formatter:off
             $sql = "SELECT * from " . TB_PREFIX . "extensions
@@ -271,27 +271,26 @@ function loadSiExtentions() {
                 $DB_extensions[$this_extension['name']] = $this_extension;
             }
             $config->extension = $DB_extensions;
+        }
+    }
 
-            // If no extension loaded, load Core
-            if (!$config->extension) {
-                // @formatter:off
-                $extension_core = new Zend_Config(
-                                array('core' => array('id'   => 1,
-                                                'domain_id'  => 1,
-                                                'name'       => 'core',
-                                                'description'=> 'Core part of Simple Invoices - always enabled',
-                                                'enabled'    => 1)));
-                $config->extension = $extension_core;
-                // @formatter:on
-            }
+    // If no extension loaded, load Core
+    if (!$config->extension) {
+        // @formatter:off
+        $extension_core = new Zend_Config(
+                        array('core' => array('id'   => 1,
+                                        'domain_id'  => 1,
+                                        'name'       => 'core',
+                                        'description'=> 'Core part of Simple Invoices - always enabled',
+                                        'enabled'    => 1)));
+        $config->extension = $extension_core;
+        // @formatter:on
+    }
 
-            // Populate the array of enabled extensions.
-            foreach ($config->extension as $extension) {
-                if ($extension->enabled == "1") {
-                    $ext_names[] = $extension->name;
-                }
-            }
-
+    // Populate the array of enabled extensions.
+    foreach ($config->extension as $extension) {
+        if ($extension->enabled == "1") {
+            $ext_names[] = $extension->name;
         }
     }
 }
@@ -1594,6 +1593,7 @@ function getSystemDefaults($domain_id = '') {
     if ((checkTableExists(TB_PREFIX . "system_defaults") == false)) {
         return NULL;
     }
+
     if ($patchCount < "198") {
         // @formatter:off
         $sql_default = "SELECT def.name, def.value
@@ -2805,15 +2805,6 @@ function getTableFields($table_in) {
     return $columns;
 }
 
-/**
- * Determine if database has been populated.
- * @return boolean
- */
-function checkDataExists() {
-    global $patchCount;
-    return $patchCount > 0;
-}
-
 function getURL() {
     global $config;
 
@@ -3023,7 +3014,7 @@ function runPatches() {
 }
 
 function donePatches() {
-    $smarty_datas['message'] = "The database patches are uptodate. You can continue working with Simple Invoices";
+    $smarty_datas['message'] = "The database patches are up to date. You can continue working with Simple Invoices";
     $smarty_datas['html']    = "<div class='si_toolbar si_toolbar_form'><a href='index.php'>HOME</a></div>";
     $smarty_datas['refresh'] = 3;
     global $smarty;
