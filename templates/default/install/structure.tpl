@@ -1,11 +1,9 @@
 {include file=$path|cat:'inc_head.tpl'}
 
-<div style="width:50%;margin:0 auto 30px auto;">
-  <ul>
-    <li>The Simple Invoices database has now been installed.</li>
-    <li>The next step is to import the essential data.</li>
-    <li>Click the 'Install Essential Data' button below to continue the installation.</li>
-  </ul>
+<div style="margin:0 auto 40px auto;width:50%;text-align:center;">
+  <p>The SimpleInvoices database tables have been created. Click the
+     <strong>Install Essential Data</strong> button below to
+     continue with the installation.</p>
 </div>
 <div class="si_toolbar si_toolbar_form">
   <a href="./index.php?module=install&amp;view=essential" class="positive">

@@ -281,7 +281,7 @@ function loadSiExtentions() {
                         array('core' => array('id'   => 1,
                                         'domain_id'  => 1,
                                         'name'       => 'core',
-                                        'description'=> 'Core part of Simple Invoices - always enabled',
+                                        'description'=> 'Core part of SimpleInvoices - always enabled',
                                         'enabled'    => 1)));
         $config->extension = $extension_core;
         // @formatter:on
@@ -2993,7 +2993,7 @@ function runPatches() {
             $dbh->commit();
         }
 
-        $smarty_datas['message'] = "The database patches have now been applied. You can now start working with Simple Invoices";
+        $smarty_datas['message'] = "The database patches have now been applied. You can now start working with SimpleInvoices";
         $smarty_datas['html']    = "<div class='si_toolbar si_toolbar_form'><a href='index.php'>HOME</a></div>";
         $smarty_datas['refresh'] = 5;
     } else {
@@ -3014,7 +3014,7 @@ function runPatches() {
 }
 
 function donePatches() {
-    $smarty_datas['message'] = "The database patches are up to date. You can continue working with Simple Invoices";
+    $smarty_datas['message'] = "The database patches are up to date. You can continue working with SimpleInvoices";
     $smarty_datas['html']    = "<div class='si_toolbar si_toolbar_form'><a href='index.php'>HOME</a></div>";
     $smarty_datas['refresh'] = 3;
     global $smarty;
@@ -3025,12 +3025,12 @@ function listPatches() {
     global $patch;
 
     $smarty_datas = array();
-    $smarty_datas['message'] = "Your version of Simple Invoices can now be upgraded. With this new release there are database patches that need to be applied";
+    $smarty_datas['message'] = "Your version of SimpleInvoices can now be upgraded. With this new release there are database patches that need to be applied";
     $smarty_datas['html']    = <<<EOD
 	<p>The list below describes which patches have and have not been applied to the database,
        the aim is to have them all applied.
        <br />
-	   If there are patches that have not been applied to the Simple Invoices database,
+	   If there are patches that have not been applied to the SimpleInvoices database,
        please run the Update database by clicking update.
 	</p>
 	<div class="si_message_warning">Warning: Please backup your database before upgrading!</div>

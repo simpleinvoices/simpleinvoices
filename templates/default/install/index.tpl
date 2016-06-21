@@ -14,7 +14,7 @@
         <li>Enter the correct database connection details in the
             <strong><em>{$config_file_path}</em></strong> file.</li>
         <li>Review the connection details below and if correct
-            click the 'Install Database' button.</li>
+            click the <strong>Install Database</strong> button.</li>
       </ol>
     </th>
   </tr>
