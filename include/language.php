@@ -8,17 +8,21 @@
  */
 unset($LANG);
 
-$tables = $zendDb->listTables(); // TEST: print db tables
-
-// if upgrading from old version then getDefaultLang wont work during install
-if (in_array(TB_PREFIX . 'system_defaults', $tables)) {
-    $language = getDefaultLanguage();
+if ($databaseBuilt) {
+    $tables = $zendDb->listTables(); // TEST: print db tables
+    // if upgrading from old version then getDefaultLang wont work during install
+    if (in_array(TB_PREFIX . 'system_defaults', $tables)) {
+        $language = getDefaultLanguage();
+    } else {
+        $language = "en_GB";
+    }
 } else {
     $language = "en_GB";
 }
 
 function getLanguageArray($lang = '') {
-    global $defaults, $ext_names;
+    global $defaults;
+    global $ext_names;
 
     if ($lang) {
         $language = $lang;
@@ -71,6 +75,7 @@ function getLanguageList() {
 }
 
 $LANG = getLanguageArray();
+
 //TODO: if (getenv("HTTP_ACCEPT_LANGUAGE") != available language) AND (config lang != en) ) {
 // then use config lang
 // }

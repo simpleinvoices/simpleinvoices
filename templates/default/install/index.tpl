@@ -1,25 +1,35 @@
 {include file=$path|cat:'inc_head.tpl'}
 
-<table class="center">
+<table class="center" style="width:60%">
   <tr>
-    <th colspan="2" style="font-weight: bold;">
+    <th style="font-weight: bold;">
       To install SimpleInvoices please:
     </th>
   </tr>
   <tr>
-    <th colspan="2" style="font-weight:normal;">
+    <th style="font-weight:normal;">
       <ol>
         <li>Create a blank MySQL database preferably with UTF-8
             collation.</li>
         <li>Enter the correct database connection details in the
-            <strong><em>{$config_file_path}</em></strong> file.</li>
-        <li>Review the connection details below and if correct
+            <strong><em>{$config_file_path}</em></strong> file.
+            {if $config_file_path == "config/config.php"}
+            <p style="margin: 0 0 0 10px;">
+            <strong>NOTE:</strong> You can copy the <strong>config.php</strong>
+            file to a file named <strong>custom.config.php</strong> and make
+            your changes to it. The advantage is that future updates to SimpleInvoices
+            will not write over the <strong>custom.config.php</strong> file; thus
+            preserving your settings.
+            </p>
+            {/if}
+        </li>
+        <li>Review the connection details below and if correct,
             click the <strong>Install Database</strong> button.</li>
       </ol>
     </th>
   </tr>
   <tr>
-    <th colspan="2" style="text-align: center; font-weight: bold; text-decoration: underline;">
+    <th style="text-align: center; font-weight: bold; text-decoration: underline;">
       <em>{$config_file_path} Database</em> settings
     </th>
   </tr>

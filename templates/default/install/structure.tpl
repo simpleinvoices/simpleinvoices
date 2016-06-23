@@ -1,6 +1,6 @@
 {include file=$path|cat:'inc_head.tpl'}
 
-<div style="margin:0 auto 40px auto;width:50%;text-align:center;">
+<div style="margin:0 auto 40px auto;width:50%;text-align:left;">
   <p>The SimpleInvoices database tables have been created. Click the
      <strong>Install Essential Data</strong> button below to
      continue with the installation.</p>

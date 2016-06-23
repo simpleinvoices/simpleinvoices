@@ -2,7 +2,7 @@
 
 /*
  * Script: functions.php
- * Contain all non db query functions used in Simple Invoices
+ * Contain all non db query functions used in SimpleInvoices
  *
  * Authors:
  * - Justin Kelly
@@ -159,6 +159,12 @@ function dropDown($choiceArray, $defVal) {
 }
 
 function simpleInvoicesError($type, $info1 = "", $info2 = "") {
+    if ($type == "dbConnection" && strstr($info1, "Unknown database") !== false) {
+        $type = "install";
+        $parts = explode("'", $info1);
+        $dbname = $parts[1];
+error_log("dbname[$dbname] parts - " . print_r($parts,true));
+    }
     // @formatter:off
     switch ($type) {
         case "notWriteable":
@@ -166,7 +172,7 @@ function simpleInvoicesError($type, $info1 = "", $info2 = "") {
             <br />
             ===========================================
             <br />
-            Simple Invoices error
+            SimpleInvoices error
             <br />
             ===========================================
             <br />
@@ -191,7 +197,8 @@ function simpleInvoicesError($type, $info1 = "", $info2 = "") {
             --> <b>$info1</b>
             <br />
             <br />
-            If this is an Access denied error please enter the correct database connection details config/config.php
+            If this is an &quot;Access denied&quot; error please enter the correct database
+            connection details config/config.php
             <br />
             <br />
             <b>Note:</b> If you are installing Simple Invoices please follow the below steps:
@@ -208,19 +215,73 @@ function simpleInvoicesError($type, $info1 = "", $info2 = "") {
             ");
             break;
 
+        case "install":
+            global $config_file_path;
+            $error = exit("
+              <div id='Container' class='col si_wrap'>
+                <div id='si_install_logo'>
+                  <img src='images/common/simple_invoices_logo.jpg' class='si_install_logo' width='300'/>
+                </div>
+                <table class='center' style='width:50%'>
+                  <tr>
+                    <th style='font-weight: bold;text-align:center;'>
+                      ===========================================
+                    </th>
+                  </tr>
+                  <tr>
+                    <th style='font-weight: bold;text-align:center;'>
+                      SimpleInvoices database connection problem
+                    </th>
+                  </tr>
+                  <tr>
+                    <th style='font-weight: bold;text-align:center;'>
+                      ===========================================
+                    </th>
+                  </tr>
+                  <tr>
+                    <th style='font-weight:normal;'>
+                      You&#39;ve reached this page because the name of the database in your
+                      configuration file has not been created. Please follow the the following
+                      instructions before leaving this page.
+                      <ol>
+                        <li>Using your database admin program, phpMyAdmin for MySQL, create a database
+                            preferably with UTF-8 collation. It can be named whatever you like but the
+                            name currently in the configuration file is, $dbname.</li>
+                        <li>Assign an administrative user and password to the database.</li>
+                        <li>Enter the database connection details in the <strong>$config_file_path</strong> file.
+                            The fields that need to be set are:
+                            <ul style='font-family:\"Lucida Console\", \"Courier New\"'>
+                                <li>database.params.host&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;localhost</li>
+                                <li>database.params.username&nbsp;=&nbsp;root</li>
+                                <li>database.params.password&nbsp;=&nbsp;&#39;mypassword&#39;</li>
+                                <li>database.params.dbname&nbsp;&nbsp;&nbsp;=&nbsp;simple_invoices</li>
+                                <li>database.params.port&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;3306</li>
+                            </ul>
+                        </li>
+                        <li>When you have completed these steps, simply refresh this page and follow
+                            the instructions to complete installation of SimpleInvoices.</li>
+                      </ol>
+                    </th>
+                  </tr>
+                </table>
+              </div>
+            ");
+            break;
+
+
         case "PDO":
             $error = exit("
             <br />
             ===========================================
             <br />
-            Simple Invoices - PDO problem
+            SimpleInvoices - PDO problem
             <br />
             ===========================================
             <br />
             <br />
             PDO is not configured in your PHP installation.
             <br />
-            This means that Simple Invoices can't be used.
+            This means that SimpleInvoices can't be used.
             <br />
             <br />
             To fix this please installed the pdo_mysql php extension.
@@ -240,7 +301,7 @@ function simpleInvoicesError($type, $info1 = "", $info2 = "") {
             <br />
             ===========================================
             <br />
-            Simple Invoices - SQL problem
+            SimpleInvoices - SQL problem
             <br />
             ===========================================
             <br />
@@ -265,12 +326,12 @@ function simpleInvoicesError($type, $info1 = "", $info2 = "") {
             <br />
             ===========================================
             <br />
-            Simple Invoices - PDO - MySQL problem
+            SimpleInvoices - PDO - MySQL problem
             <br />
             ===========================================
             <br />
             <br />
-            Your Simple Invoices installation can't use the
+            Your SimpleInvoices installation can't use the
             <br />
             database settings 'database.utf8'.
             <br />
@@ -288,15 +349,6 @@ function simpleInvoicesError($type, $info1 = "", $info2 = "") {
     // @formatter:off
 
     return $error;
-}
-
-function checkConnection() {
-    global $dbh;
-    global $db_server;
-
-    if (!$dbh) {
-        simpleInvoicesError("dbConnection", $db_server, $dbh->errorInfo());
-    }
 }
 
 function getLangList() {

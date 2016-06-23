@@ -9,12 +9,14 @@ function getCustomFlagLabels($customFlagsEnabled, $domain_id = '') {
     $sql = "SELECT * FROM " . TB_PREFIX . "custom_flags WHERE domain_id = :domain_id";
     $sth = dbQuery($sql, ':domain_id', $domain_id);
     $custom_flag_labels = array('','','','','','','','','','');
-    $ndx = 0;
-    while ($custom_flag_label = $sth->fetch()) {
-        if ($custom_flag_label['enabled'] == '1') {
-            $custom_flag_labels[$ndx] = $custom_flag_label['field_label'];
+    if ($sth !== false) {
+        $ndx = 0;
+        while ($custom_flag_label = $sth->fetch()) {
+            if ($custom_flag_label['enabled'] == '1') {
+                $custom_flag_labels[$ndx] = $custom_flag_label['field_label'];
+            }
+            $ndx++;
         }
-        $ndx++;
     }
     return $custom_flag_labels;
 }
@@ -30,8 +32,8 @@ function getCustomFlag($associated_table, $flg_id, $domain_id = '') {
     global $LANG;
     $domain_id = domain_id::get($domain_id);
     // @formatter:off
-    $sql = "SELECT * 
-            FROM `" . TB_PREFIX . "custom_flags` 
+    $sql = "SELECT *
+            FROM `" . TB_PREFIX . "custom_flags`
             WHERE `domain_id`        = :domain_id        AND
                   `associated_table` = :associated_table AND
                   `flg_id`           = :flg_id;";
@@ -39,6 +41,8 @@ function getCustomFlag($associated_table, $flg_id, $domain_id = '') {
                          ':associated_table', $associated_table,
                          ':flg_id'          , $flg_id);
     // @formatter:on
+    if ($sth === false) return array();
+
     $cflg = $sth->fetch(PDO::FETCH_ASSOC);
     $cflg['wording_for_enabled'] = ($cflg['enabled'] == 1 ? $LANG['enabled'] : $LANG['disabled']);
     return $cflg;
@@ -73,9 +77,11 @@ function getCustomFlagsQualified($qualifier, $domain_id = '') {
     // @fomatter:on
     $sth = dbQuery($sql, ':domain_id', $domain_id);
     $cflgs = array();
-    while ($cflg = $sth->fetch(PDO::FETCH_ASSOC)) {
-        $cflg['wording_for_enabled'] = ($cflg['enabled'] == 1 ? $LANG['enabled'] : $LANG['disabled']);
-        $cflgs[] = $cflg;
+    if($sth !== false) {
+        while ($cflg = $sth->fetch(PDO::FETCH_ASSOC)) {
+            $cflg['wording_for_enabled'] = ($cflg['enabled'] == 1 ? $LANG['enabled'] : $LANG['disabled']);
+            $cflgs[] = $cflg;
+        }
     }
     return $cflgs;
 }
@@ -102,7 +108,7 @@ function updateCustomFlags($associated_table, $flg_id, $field_label, $enabled, $
                     $enabled == 'Disabled' ? 0 : intval($enabled));
         // @formatter:on
     }
-  
+
     // If the reset flags option was specified, do so now. Note that this is not considered
     // critical. Therefore failure to update will report in the error log for will not otherwise
     // affect the update.
@@ -113,21 +119,21 @@ function updateCustomFlags($associated_table, $flg_id, $field_label, $enabled, $
 
             // @formatter:off
             $sql = "UPDATE " . TB_PREFIX . "products
-    		        SET custom_flags = :custom_flags
-    			    WHERE id        = :id
-    			      AND domain_id = :domain_id";
-      
+                    SET custom_flags = :custom_flags
+                    WHERE id        = :id
+                      AND domain_id = :domain_id";
+
             $result = dbQuery($sql, ':domain_id'    , $product['domain_id'],
                                     ':id'           , $product['id'],
                                     ':custom_flags' , $custom_flags
                              );
-            if (!$result) {
+            if ($result === false) {
                 error_log('updateCustomFlags(): Failed to reset custom flag #'.$flg_id.' for product ID, '.$product['id'].'.');
             }
             // @formatter:on
         }
     }
-    
+
     // @formatter:off
     $sql = "UPDATE " .
                 TB_PREFIX . "custom_flags
@@ -140,12 +146,12 @@ function updateCustomFlags($associated_table, $flg_id, $field_label, $enabled, $
 
     $sth = dbQuery($sql, ':associated_table', $associated_table,
                          ':flg_id'          , $flg_id,
-                         ':field_label'     , $field_label, 
+                         ':field_label'     , $field_label,
                          ':enabled'         , $enabled,
-                         ':field_help'      , $field_help, 
+                         ':field_help'      , $field_help,
                          ':domain_id'       , domain_id::get($domain_id));
     // @formatter:on
-    return ($sth->errorCode() == 0);
+    return ($sth !== false && $sth->errorCode() == 0);
 }
 
 /**
@@ -155,33 +161,35 @@ function updateCustomFlags($associated_table, $flg_id, $field_label, $enabled, $
  */
 function updateProduct_cflgs($domain_id = '') {
     $domain_id = domain_id::get($domain_id);
-    
+
     // select all attributes
     $sql = "SELECT * FROM " . TB_PREFIX . "products_attributes";
     $sth = dbQuery($sql);
+    if ($sth === false) return false;
+
     $attributes = $sth->fetchAll();
-    
+
     $attr = array();
     foreach ($attributes as $k => $v) {
         if ($_POST['attribute' . $v[id]] == 'true') {
             $attr[$v['id']] = $_POST['attribute' . $v[id]];
         }
     }
-    
+
     $notes_as_description = ($_POST['notes_as_description'] == 'true' ? 'Y' : NULL);
     $show_description = ($_POST['show_description'] == 'true' ? 'Y' : NULL);
-    
+
     $custom_flags = '0000000000';
     for ($i = 1; $i <= 10; $i++) {
         if (isset($_POST['custom_flags_' . $i]) && $_POST['custom_flags_' . $i] == '1') {
             $custom_flags = substr_replace($custom_flags, '1', $i - 1, 1);
         }
     }
-    
+
     // @formatter:off
     $sql = "UPDATE " .
                 TB_PREFIX . "products
-		    SET description          = :description,
+            SET description          = :description,
                 enabled              = :enabled,
                 default_tax_id       = :default_tax_id,
                 notes                = :notes,
@@ -201,10 +209,10 @@ function updateProduct_cflgs($domain_id = '') {
 
     return dbQuery($sql, ':domain_id'           , $domain_id              ,
                          ':description'         , $_POST[description]     ,
-                         ':enabled'             , $_POST['enabled']       , 
+                         ':enabled'             , $_POST['enabled']       ,
                          ':notes'               , $_POST[notes]           ,
                          ':default_tax_id'      , $_POST['default_tax_id'],
-                         ':custom_field1'       , $_POST[custom_field1]   , 
+                         ':custom_field1'       , $_POST[custom_field1]   ,
                          ':custom_field2'       , $_POST[custom_field2]   ,
                          ':custom_field3'       , $_POST[custom_field3]   ,
                          ':custom_field4'       , $_POST[custom_field4]   ,
@@ -212,7 +220,7 @@ function updateProduct_cflgs($domain_id = '') {
                          ':cost'                , $_POST[cost]            ,
                          ':reorder_level'       , $_POST[reorder_level]   ,
                          ':attribute'           , json_encode($attr)      ,
-                         ':notes_as_description', $notes_as_description   , 
+                         ':notes_as_description', $notes_as_description   ,
                          ':show_description'    , $show_description       ,
                          ':custom_flags'        , $custom_flags           ,
                          ':id'                  , $_GET[id]
@@ -230,20 +238,21 @@ function updateProduct_cflgs($domain_id = '') {
 function insertProduct_cflgs($enabled = 1, $visible = 1, $domain_id = '') {
     global $logger;
     $domain_id = domain_id::get($domain_id);
-    
+
     if (isset($_POST['enabled'])) $enabled = $_POST['enabled'];
-    
+
     $sql = "SELECT * FROM " . TB_PREFIX . "products_attributes";
     $sth = dbQuery($sql);
+    if ($sth === false) return false;
+
     $attributes = $sth->fetchAll();
-    
     $custom_flags = '0000000000';
     for ($i = 1; $i <= 10; $i++) {
         if (isset($_POST['custom_flags_' . $i]) && $_POST['custom_flags_' . $i] == '1') {
             $custom_flags = substr_replace($custom_flags, '1', $i, 1);
         }
     }
-    
+
     $logger->log('Attr: ' . var_export($attributes, true), Zend_Log::INFO);
     $attr = array();
     foreach ($attributes as $k => $v) {
@@ -259,19 +268,19 @@ function insertProduct_cflgs($enabled = 1, $visible = 1, $domain_id = '') {
     //$logger->log('Attr array: ' . var_export($attr, true), Zend_Log::INFO);
     $notes_as_description = ($_POST['notes_as_description'] == 'true' ? 'Y' : NULL);
     $show_description = ($_POST['show_description'] == 'true' ? 'Y' : NULL);
-    
+
     // @formatter:off
     $sql = "INSERT into
-            	".TB_PREFIX."products
-            	(
-            		domain_id,
+                ".TB_PREFIX."products
+                (
+                    domain_id,
                     description,
                     unit_price,
                     cost,
                     reorder_level,
                     custom_field1,
                     custom_field2,
-            		custom_field3,
+                    custom_field3,
                     custom_field4,
                     notes,
                     default_tax_id,
@@ -280,28 +289,28 @@ function insertProduct_cflgs($enabled = 1, $visible = 1, $domain_id = '') {
                     attribute,
                     notes_as_description,
                     show_description,
-            	    custom_flags
-            	)
+                    custom_flags
+                )
             VALUES
-            	(
-            		:domain_id,
-            		:description,
-            		:unit_price,
-            		:cost,
-            		:reorder_level,
-            		:custom_field1,
-            		:custom_field2,
-            		:custom_field3,
-            		:custom_field4,
-            		:notes,
-            		:default_tax_id,
-            		:enabled,
-            		:visible,
+                (
+                    :domain_id,
+                    :description,
+                    :unit_price,
+                    :cost,
+                    :reorder_level,
+                    :custom_field1,
+                    :custom_field2,
+                    :custom_field3,
+                    :custom_field4,
+                    :notes,
+                    :default_tax_id,
+                    :enabled,
+                    :visible,
                     :attribute,
                     :notes_as_description,
                     :show_description,
-            	    :custom_flags
-            	)";
+                    :custom_flags
+                )";
 
     return dbQuery($sql, ':domain_id'           ,$domain_id,
                          ':description'         , $_POST['description'],

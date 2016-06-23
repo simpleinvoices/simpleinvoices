@@ -22,7 +22,7 @@ $auth_session = new Zend_Session_Namespace('Zend_Auth');
  * *************************************************************/
 
 /* *************************************************************
- * Smarty inint - start
+ * Smarty init - start
  * *************************************************************/
 require_once ("smarty/Smarty.class.php");
 require_once ("library/paypal/paypal.class.php");
@@ -60,13 +60,12 @@ include_once ('./config/define.php');
 // Include another config file if required
 $config_file_path = "";
 if (is_file('./config/custom.config.php')) {
-    $config = new Zend_Config_Ini('./config/custom.config.php', $environment, true);
     $config_file_path = "config/custom.config.php";
 } else {
-    // added 'true' to allow modifications from db
-    $config = new Zend_Config_Ini('./config/config.php', $environment, true);
     $config_file_path = "config/config.php";
 }
+// added 'true' to allow modifications from db
+$config = new Zend_Config_Ini("./" . $config_file_path, $environment, true);
 
 // set up app with relevant php setting
 date_default_timezone_set($config->phpSettings->date->timezone);
@@ -85,22 +84,30 @@ $zendDb = Zend_Db::factory($config->database->adapter,
                                 'dbname'   => $config->database->params->dbname,
                                 'port'     => $config->database->params->port));
 
+// It's possible that we are in the initial install mode. If so, set
+// a flag so we won't terminate on an "Unknown database" error later.
 try {
-    $session_timeout = $zendDb->fetchRow("SELECT value FROM ". TB_PREFIX . "system_defaults
-                                          WHERE name='session_timeout'");
-} catch (Exception $ex) {
-    $session_timeout = 60;
-}
-// @formatter:on
-$timeout = intval($session_timeout['value']);
-if ($timeout <= 0) {
-    error_log("Extension - system Defaults - invalid timeout value[$timeout]");
-    $timeout = 60;
+    $tbl_info = $zendDb->describeTable(TB_PREFIX . "biller");
+    $databaseBuilt = !empty($tbl_info);
+} catch (Zend_Db_Exception $zde) {
+    $databaseBuilt = false;
 }
 
-// start use of zend_cache and set the lifetime for 2 hours.
-// $frontendOptions = array('lifetime' => 7200, 'automatic_serialization' => true);
-$frontendOptions = array('lifetime' => ($timeout * 60), 'automatic_serialization' => true);
+// If session_timeout is defined in the database, use it. If not
+// set it to the 60-minute default.
+$session_timeout = 60; // default
+if ($databaseBuilt) {
+    try {
+        $timeout = $zendDb->fetchRow("SELECT value FROM ". TB_PREFIX . "system_defaults
+                                      WHERE name='session_timeout'");
+        $session_timeout = intval($timeout['value']);
+    } catch (Zend_Db_Exception $zde) {
+        $session_timeout = 0;
+    }
+}
+if ($session_timeout <= 0) $session_timeout = 60;
+$frontendOptions = array('lifetime' => ($session_timeout * 60), 'automatic_serialization' => true);
+// @formatter:on
 
 /* *************************************************************
  * Zend Framework cache section - start
@@ -135,29 +142,35 @@ $smarty->plugins_dir = array("plugins", "include/smarty_plugins");
 // add stripslash smarty function
 $smarty->register_modifier("unescape", "stripslashes");
 /* *************************************************************
- * Smarty inint - end
+ * Smarty init - end
  * *************************************************************/
-
 $path = pathinfo($_SERVER['REQUEST_URI']);
 // SC: Install path handling will need changes if used in non-HTML contexts
 $install_path = htmlsafe($path['dirname']);
 
 include_once ("./include/class/db.php");
-include_once ("./include/class/index.php");
-$db = db::getInstance();
+// With the database built, a connection should be able to be made
+// if the configuration user, password, etc. are set correctly.
+$db = ($databaseBuilt ? db::getInstance() : NULL);
 
+include_once ("./include/class/index.php");
 include_once ("./include/sql_queries.php");
 
-// Set these global variables. $databaseBuilt says that there is structure
-// in the database and $databasePopulated says there is data in the database.
-// Not that the si_biller table is used to determine if there is structure
-// by the presence of a table that will always exist regardless of version.
-$databaseBuilt = checkTableExists(TB_PREFIX . "biller");
+$patchCount = 0;
 if ($databaseBuilt) {
-    // This is a global variable as well as a smarty value.
+    // Set these global variables.
     $patchCount = getNumberOfDoneSQLPatches();
     $databasePopulated = $patchCount > 0;
 }
+
+// Turn authorization off until database is built. It messes up the
+// install screens.
+if ((!$databaseBuilt || !$databasePopulated) && $config->authentication->enabled == 1) {
+    $config->authentication->enabled = 0;
+    $module="";
+}
+
+// Make $patchCount available to templates.
 $smarty->assign('patchCount', $patchCount);
 
 // @formatter:off
@@ -177,8 +190,6 @@ $smarty->register_modifier('urlescape', 'urlencode'); //common typo
 
 loadSiExtentions();
 
-checkConnection();
-
 $defaults = getSystemDefaults();
 $smarty->assign("defaults", $defaults);
 
@@ -188,7 +199,7 @@ include ('./include/include_auth.php');
 include_once ('./include/manageCustomFields.php');
 include_once ("./include/validation.php");
 
-if ($databaseBuilt && $config->authentication->enabled == 1) {
+if ($databaseBuilt && $databasePopulated && $config->authentication->enabled == 1) {
     include_once ("./include/acl.php");
     // if authentication enabled then do acl check etc..
     foreach ($ext_names as $ext_name) {
