@@ -74,9 +74,9 @@
           <img src="{$help_image_path}help-small.png" alt="" />
         </a>
         </th>
-        <td><input type="password" name="password" size="20" pattern="{$pwd_pattern}"
-                   title="See help for details."
-                   onchange="form.confirm_password.pattern = this.value;"/></td>
+        <td><input type="password" name="password" id="password_id" size="20"
+                   pattern="{$pwd_pattern}" title="See help for details."
+                   onchange="genConfirmPattern(this,'confirm_pwd_id');"/></td>
       </tr>
       <tr>
         <th>{$LANG.confirm_password}
@@ -86,7 +86,8 @@
             <img src="{$help_image_path}help-small.png" alt="" />
         </a>
         </th>
-        <td><input type="password" name="confirm_password" size="20" pattern="{$pwd_pattern}" /></td>
+        <td><input type="password" name="confirm_password" id="confirm_pwd_id" size="20"
+                   pattern="{$pattern}" /></td>
       </tr>
       <tr>
         <th>{$LANG.role}

@@ -2,9 +2,20 @@
 <script type="text/javascript">
 	/*
 	* Script: jquery.functions.js
-	* Purpose: jquery/javascript functions for Simple Invoices 
+	* Purpose: jquery/javascript functions for SimpleInvoices 
 	*/
-	
+
+    // *** YIKES *** MISSING FUNCTION STUB  ADDED
+    function checkForm(frm) {
+	}
+
+    // for generation of confirm_password pattern.
+	function genConfirmPattern(fld, lbl) {
+        var str = document.getElementById(fld.id).value;
+        var pat = str.replace(/\$/g,"\\\$");
+        document.getElementById(lbl).pattern = pat;
+    }
+
 	// for autocomplete in papyment page
 	function selectItem(li) {
 		if (li.extra)
