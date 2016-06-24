@@ -9,7 +9,7 @@ $LCL_LANG = array(
                                     appear to the left of the company name. The logo must be placed in the
                                     <b>extensions/user_security/images</b> folder.<br/><br/>You will need to size
                                     the logo so that it will display properly on the login screen.",
-    'help_company_name_item'    => "Enter the name of your company to brand your implementation of Simple Invoices.
+    'help_company_name_item'    => "Enter the name of your company to brand your implementation of SimpleInvoices.
                                     You can use <i>HTML</i> tags such as <b><i>&lt;br/&gt;</i></b> to force a line
                                     break for long names.",
     'help_email_address'        => "Enter the email address for this user. This value is required and must conform to

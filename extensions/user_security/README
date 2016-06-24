@@ -12,7 +12,7 @@ could in some cases contribute to password discovery.
 
 The company_name_item allows the user to change the labeling on the
 logon screen to show a company name rather than the default
-Simple Invoices value.
+SimpleInvoices value.
 
 The session_timeout allows a user specified value to control the
 elapsed time before an inactive user session times out. The default

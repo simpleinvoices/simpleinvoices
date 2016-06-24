@@ -25,6 +25,8 @@ if (!empty($_POST['password'])) {
     if (empty($_POST['confirm_password']) || $_POST['password'] != $_POST['confirm_password']) {
         $smarty->assign('confirm_error', 'Password and Confirm Password do not match.');
         $ok = false;
+    } else {
+        $_POST['password'] = MD5($_POST['password']);
     }
 }
 
