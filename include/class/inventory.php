@@ -1,6 +1,6 @@
 <?php
 class inventory {
-	
+
  	public $start_date;
  	public $domain_id;
 
@@ -27,42 +27,42 @@ class inventory {
 				:note
 			)";
         	$sth = dbQuery($sql,
-				':domain_id',$this->domain_id, 
+				':domain_id',$this->domain_id,
 				':product_id',$this->product_id,
 				':quantity',$this->quantity,
 				':cost',$this->cost,
 				':date',$this->date,
 				':note',$this->note
 			);
-        
+
  	       return $sth;
 
 	}
 
 	public function update()
 	{
-	        $sql = "UPDATE 
+	        $sql = "UPDATE
 				".TB_PREFIX."inventory
-			SET 
+			SET
 				product_id = :product_id,
 				quantity = :quantity,
 				cost = :cost,
 				date = :date,
 				note = :note
-			WHERE 
-				id = :id 
+			WHERE
+				id = :id
 			AND domain_id = :domain_id
 			";
         	$sth = dbQuery($sql,
-				':id',$this->id, 
-				':domain_id',$this->domain_id, 
+				':id',$this->id,
+				':domain_id',$this->domain_id,
 				':product_id',$this->product_id,
 				':quantity',$this->quantity,
 				':cost',$this->cost,
 				':date',$this->date,
 				':note',$this->note
 			);
-        
+
  	       return $sth;
 	}
 
@@ -94,7 +94,7 @@ class inventory {
 			}
 		}
 		/*SQL where - end*/
-		
+
 
 		/*Check that the sort field is OK*/
 		if (!empty($this->sort)) {
@@ -118,11 +118,11 @@ class inventory {
                 (select coalesce(p.reorder_level,0) as reorder_level),
 				inv.cost,
 				inv.quantity * inv.cost as total_cost
-			FROM 
+			FROM
 				".TB_PREFIX."products p
 				LEFT JOIN ".TB_PREFIX."inventory inv
 					ON (p.id = inv.product_id AND p.domain_id = inv.domain_id)
-			 WHERE 
+			 WHERE
 				inv.domain_id = :domain_id
 				$where
 			GROUP BY
@@ -152,11 +152,11 @@ class inventory {
 		$sql = "SELECT
 				iv.*,
                 p.description
-			FROM 
+			FROM
 				".TB_PREFIX."products p
-				LEFT JOIN ".TB_PREFIX."inventory iv 
+				LEFT JOIN ".TB_PREFIX."inventory iv
 					ON (p.id = iv.product_id AND p.domain_id = iv.domain_id)
-			WHERE 
+			WHERE
 				iv.domain_id = :domain_id
 			AND iv.id = :id;";
 		$sth = dbQuery($sql, ':domain_id', $this->domain_id, ':id', $this->id);
@@ -174,9 +174,9 @@ class inventory {
         $sth = $inventory->select_all('count');
 
         $inventory_all = $sth->fetchAll(PDO::FETCH_ASSOC);
-        
+
         $email="";
-        foreach ($inventory_all as $row) 
+        foreach ($inventory_all as $row)
         {
              if($row['quantity'] <= $row['reorder_level'])
              {
@@ -195,11 +195,11 @@ class inventory {
         $email -> from = $email->get_admin_email();
         $email -> to = $email->get_admin_email();
         #$email -> bcc = "justin@localhost";
-        $email -> subject = "Simple Invoices reorder level email";
+        $email -> subject = "SimpleInvoices reorder level email";
         $email -> send ();
 
         return $return;
-        
+
     }
 
 }

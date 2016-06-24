@@ -1223,7 +1223,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
     $patch['199']['name'] = "Update extensions table";
     $patch['199']['patch'] = "INSERT INTO ".TB_PREFIX."extensions (
 			`id`,`domain_id`,`name`,`description`,`enabled`)
-			VALUES ('1','1','core','Core part of Simple Invoices - always enabled','1');";
+			VALUES ('1','1','core','Core part of SimpleInvoices - always enabled','1');";
     $patch['199']['date'] = "20090529";
 
     $patch['200']['name'] = "Update extensions table";
@@ -1426,11 +1426,11 @@ ADD `language` VARCHAR( 255 ) NULL ;";
 
     $patch['240']['name'] = "si_system_defaults - add composite primary key";
     $patch['240']['patch'] = "
-		ALTER TABLE  `".TB_PREFIX."system_defaults` ADD `new_id` INT( 11 ) NOT NULL FIRST; 
-		UPDATE `".TB_PREFIX."system_defaults` SET new_id = id; 
-		ALTER TABLE  `".TB_PREFIX."system_defaults` DROP  `id` ; 
-		ALTER TABLE  `".TB_PREFIX."system_defaults` DROP INDEX `name` ; 
-		ALTER TABLE  `".TB_PREFIX."system_defaults` CHANGE  `new_id`  `id` INT( 11 ) NOT NULL; 
+		ALTER TABLE  `".TB_PREFIX."system_defaults` ADD `new_id` INT( 11 ) NOT NULL FIRST;
+		UPDATE `".TB_PREFIX."system_defaults` SET new_id = id;
+		ALTER TABLE  `".TB_PREFIX."system_defaults` DROP  `id` ;
+		ALTER TABLE  `".TB_PREFIX."system_defaults` DROP INDEX `name` ;
+		ALTER TABLE  `".TB_PREFIX."system_defaults` CHANGE  `new_id`  `id` INT( 11 ) NOT NULL;
 		ALTER TABLE  `".TB_PREFIX."system_defaults` ADD PRIMARY KEY(`domain_id`,`id` );";
     $patch['240']['date'] = "20100305";
 
@@ -1471,19 +1471,19 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['247']['patch'] = "update ".TB_PREFIX."custom_fields set domain_id = '1';";
     $patch['247']['date'] = "20100419";
 
-    $patch['248']['name'] = "Make Simple Invoices faster - add index";
+    $patch['248']['name'] = "Make SimpleInvoices faster - add index";
     $patch['248']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices` ADD INDEX(`domain_id`);";
     $patch['248']['date'] = "20100419";
 
-    $patch['249']['name'] = "Make Simple Invoices faster - add index";
+    $patch['249']['name'] = "Make SimpleInvoices faster - add index";
     $patch['249']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices` ADD INDEX(`biller_id`) ;";
     $patch['249']['date'] = "20100419";
 
-    $patch['250']['name'] = "Make Simple Invoices faster - add index";
+    $patch['250']['name'] = "Make SimpleInvoices faster - add index";
     $patch['250']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices` ADD INDEX(`customer_id`);";
     $patch['250']['date'] = "20100419";
 
-    $patch['251']['name'] = "Make Simple Invoices faster - add index";
+    $patch['251']['name'] = "Make SimpleInvoices faster - add index";
     $patch['251']['patch'] = "ALTER TABLE `".TB_PREFIX."payment` ADD INDEX(`domain_id`);";
     $patch['251']['date'] = "20100419";
 
@@ -1500,7 +1500,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['254']['date'] = "20130313";
 
     $patch['255']['name'] = "Product Matrix - update line items table";
-    $patch['255']['patch'] = " 
+    $patch['255']['patch'] = "
         CREATE TABLE `".TB_PREFIX."products_attributes` (
             `id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
             `name` VARCHAR( 255 ) NOT NULL,
@@ -1581,11 +1581,11 @@ PRIMARY KEY ( `domain_id`, `id` )
 
 
 
-    $patch['270']['name'] = "Make Simple Invoices faster - add index";
+    $patch['270']['name'] = "Make SimpleInvoices faster - add index";
     $patch['270']['patch'] = "ALTER TABLE `".TB_PREFIX."payment` ADD INDEX(`ac_inv_id`);";
     $patch['270']['date'] = "20100419";
 
-    $patch['271']['name'] = "Make Simple Invoices faster - add index";
+    $patch['271']['name'] = "Make SimpleInvoices faster - add index";
     $patch['271']['patch'] = "ALTER TABLE `".TB_PREFIX."payment` ADD INDEX(`ac_amount`);";
     $patch['271']['date'] = "20100419";
 
@@ -1593,7 +1593,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['272']['patch'] = "INSERT INTO ".TB_PREFIX."system_defaults (id, name ,value ,domain_id ,extension_id ) VALUES (NULL , 'large_dataset', '0', '1', '1');";
     $patch['272']['date'] = "20130313";
 
-    $patch['273']['name'] = "Make Simple Invoices faster - add index";
+    $patch['273']['name'] = "Make SimpleInvoices faster - add index";
     $patch['273']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` ADD INDEX(`invoice_id`);";
     $patch['273']['date'] = "20130927";
 
@@ -1684,8 +1684,8 @@ PRIMARY KEY ( `domain_id`, `id` )
 		ALTER TABLE `".TB_PREFIX."tax` CHANGE `type` `type` CHAR(1) DEFAULT '%' NOT NULL;
 		ALTER TABLE `".TB_PREFIX."products_attributes` CHANGE `enabled` `enabled` TINYINT(1) DEFAULT 1 NOT NULL,
 			CHANGE `visible` `visible` TINYINT(1) DEFAULT 1 NOT NULL;
-		ALTER TABLE `".TB_PREFIX."products_values` CHANGE `enabled` `enabled` TINYINT(1) DEFAULT 1 NOT NULL; 
-		ALTER TABLE `".TB_PREFIX."user` CHANGE `enabled` `enabled` TINYINT(1) DEFAULT 1 NOT NULL; 
+		ALTER TABLE `".TB_PREFIX."products_values` CHANGE `enabled` `enabled` TINYINT(1) DEFAULT 1 NOT NULL;
+		ALTER TABLE `".TB_PREFIX."user` CHANGE `enabled` `enabled` TINYINT(1) DEFAULT 1 NOT NULL;
 	";
     $patch['290']['date']  = "20131109";
 

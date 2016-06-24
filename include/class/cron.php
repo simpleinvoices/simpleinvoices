@@ -1,7 +1,7 @@
 <?php
 
 class cron {
-	
+
  	public $start_date;
  	public $domain_id;
 	public $invoice_id;
@@ -23,7 +23,7 @@ class cron {
 
 		$today = date('Y-m-d');
 
-        
+
 	    $sql = "INSERT INTO ".TB_PREFIX."cron (
 				domain_id,
 				invoice_id,
@@ -44,7 +44,7 @@ class cron {
 				:email_customer
 		)";
         $sth = dbQuery($sql,
-				':domain_id',$this->domain_id, 
+				':domain_id',$this->domain_id,
 				':invoice_id',$this->invoice_id,
 				':start_date',$this->start_date,
 				':end_date',$this->end_date,
@@ -53,17 +53,17 @@ class cron {
 				':email_biller',$this->email_biller,
 				':email_customer',$this->email_customer
 		);
-        
+
  	    return $sth;
 
 	}
 
 	public function update()
 	{
-        
-	    $sql = "UPDATE 
-				".TB_PREFIX."cron 
-			SET 
+
+	    $sql = "UPDATE
+				".TB_PREFIX."cron
+			SET
 				invoice_id = :invoice_id,
 				start_date = :start_date,
 				end_date = :end_date,
@@ -71,14 +71,14 @@ class cron {
 				recurrence_type = :recurrence_type,
 				email_biller = :email_biller,
 				email_customer = :email_customer
-			WHERE 
-				id = :id 
-				AND 
+			WHERE
+				id = :id
+				AND
 				domain_id = :domain_id
 		";
         $sth = dbQuery($sql,
-				':id',$this->id, 
-				':domain_id',$this->domain_id, 
+				':id',$this->id,
+				':domain_id',$this->domain_id,
 				':invoice_id',$this->invoice_id,
 				':start_date',$this->start_date,
 				':end_date',$this->end_date,
@@ -87,7 +87,7 @@ class cron {
 				':email_biller',$this->email_biller,
 				':email_customer',$this->email_customer
 		);
-        
+
  	    return $sth;
 	}
 
@@ -121,7 +121,7 @@ class cron {
 		}
 
 		/*SQL where - end*/
-		
+
 
 		/*Check that the sort field is OK*/
 		if (!empty($this->sort)) {
@@ -141,13 +141,13 @@ class cron {
 				cron.*
                 , cron.id as cron_id
                 , (SELECT CONCAT(pf.pref_description,' ',iv.index_id)) as index_name
-			FROM 
-				".TB_PREFIX."cron cron 
-				INNER JOIN ".TB_PREFIX."invoices iv 
+			FROM
+				".TB_PREFIX."cron cron
+				INNER JOIN ".TB_PREFIX."invoices iv
 					ON (cron.invoice_id = iv.id AND cron.domain_id = iv.domain_id)
-				INNER JOIN ".TB_PREFIX."preferences pf 
+				INNER JOIN ".TB_PREFIX."preferences pf
 					ON (iv.preference_id = pf.pref_id AND iv.domain_id = pf.domain_id)
-			 WHERE 
+			 WHERE
 				cron.domain_id = :domain_id
 				$where
 			GROUP BY
@@ -178,11 +178,11 @@ class cron {
                   cron.*
                 , cron.id as cron_id
                 , (SELECT CONCAT(pf.pref_description,' ',iv.index_id)) as index_name
-            FROM 
-                ".TB_PREFIX."cron cron 
-                INNER JOIN ".TB_PREFIX."invoices iv 
+            FROM
+                ".TB_PREFIX."cron cron
+                INNER JOIN ".TB_PREFIX."invoices iv
                     ON (cron.invoice_id = iv.id AND cron.domain_id = iv.domain_id)
-                INNER JOIN ".TB_PREFIX."preferences pf 
+                INNER JOIN ".TB_PREFIX."preferences pf
                     ON (iv.preference_id = pf.pref_id AND iv.domain_id = pf.domain_id)
             WHERE NOW() BETWEEN cron.start_date AND cron.end_date
             GROUP BY cron.id, cron.domain_id
@@ -201,11 +201,11 @@ class cron {
 		$sql = "SELECT
 				cron.*
                 , (SELECT CONCAT(pf.pref_description,' ',iv.index_id)) as index_name
-			FROM 
-				".TB_PREFIX."cron cron 
-				INNER JOIN ".TB_PREFIX."invoices iv 
+			FROM
+				".TB_PREFIX."cron cron
+				INNER JOIN ".TB_PREFIX."invoices iv
 					ON (cron.invoice_id = iv.id AND cron.domain_id = iv.domain_id)
-				INNER JOIN ".TB_PREFIX."preferences pf 
+				INNER JOIN ".TB_PREFIX."preferences pf
 					ON (iv.preference_id = pf.pref_id AND iv.domain_id = pf.domain_id)
 			WHERE cron.domain_id = :domain_id
 			  AND cron.id = :id;";
@@ -217,9 +217,9 @@ class cron {
 	private function getEmailSendAddresses($src_array, $customer_email, $biller_email)
 	{
 		$email_to_addresses = Array();
-        if($src_array['email_customer'] == "1") 
+        if($src_array['email_customer'] == "1")
 			$email_to_addresses[] = $customer_email;
-        if($src_array['email_biller'] == "1") 
+        if($src_array['email_biller'] == "1")
 			$email_to_addresses[] = $biller_email;
 		return implode(";", $email_to_addresses);
 	}
@@ -244,7 +244,7 @@ class cron {
 
             $cron_log->cron_id   = $value['id'];
             $cron_log->domain_id = $domain_id = $value['domain_id'];
-            $check_cron_log      = $cron_log->check();        	
+            $check_cron_log      = $cron_log->check();
 
             $i="0";
             if ($check_cron_log == 0)
@@ -256,7 +256,7 @@ class cron {
 
 				// Seconds in a day = 60 * 60 * 24 = 86400
                 $diff = number_format((strtotime($today) - strtotime($start_date)) / 86400, 0);
-                
+
 
                 //only check if diff is positive
                 if (($diff >= 0) AND ($end_date =="" OR $end_date >= $today))
@@ -266,7 +266,7 @@ class cron {
                     {
                         $modulus = $diff % $value['recurrence'] ;
                         if($modulus == 0)
-                        { 
+                        {
                             $run_cron = true;
                         } else {
                             #$return .= "cron does not runs TODAY-days";
@@ -280,7 +280,7 @@ class cron {
                         $period = 7 * $value['recurrence'];
                         $modulus = $diff % $period ;
                         if($modulus == 0)
-                        { 
+                        {
                             $run_cron = true;
                         } else {
                             #$return .= "cron is not runs TODAY-week";
@@ -292,14 +292,14 @@ class cron {
                         $start_day   = date('d', strtotime( $value['start_date'] ) );
                         $start_month = date('m', strtotime( $value['start_date'] ) );
                         $start_year  = date('Y', strtotime( $value['start_date'] ) );
-                        $today_day   = date('d');	
-                        $today_month = date('m');	
-                        $today_year  = date('Y'); 	
+                        $today_day   = date('d');
+                        $today_month = date('m');
+                        $today_year  = date('Y');
 
                         $months = ($today_month-$start_month)+12*($today_year-$start_year);
                         $modulus =  $months % $value['recurrence']  ;
                         if( ($modulus == 0) AND ( $start_day == $today_day ) )
-                        { 
+                        {
                             $run_cron = true;
                         } else {
                             #$return .= "cron is not runs TODAY-month";
@@ -311,14 +311,14 @@ class cron {
                         $start_day = date('d', strtotime( $value['start_date'] ) );
                         $start_month = date('m', strtotime( $value['start_date'] ) );
                         $start_year = date('Y', strtotime( $value['start_date'] ) );
-                        $today_day = date('d');	
-                        $today_month = date('m');	
-                        $today_year = date('Y'); 	
+                        $today_day = date('d');
+                        $today_month = date('m');
+                        $today_year = date('Y');
 
                         $years = $today_year-$start_year;
                         $modulus =  $years % $value['recurrence']  ;
                         if( ($modulus == 0) AND ( $start_day == $today_day ) AND  ( $start_month == $today_month ) )
-                        { 
+                        {
                             $run_cron = true;
                         } else {
                             #$return .= "cron is not runs TODAY-year";
@@ -327,7 +327,7 @@ class cron {
                     //run the recurrence for this invoice
                     if ($run_cron)
                     {
-                        $number_of_crons_run++;	
+                        $number_of_crons_run++;
                         $return['cron_message_'.$value['cron_id']] = "Cron ID: ". $value['cron_id'] ." - Cron for ".$value['index_name']." with start date of ".$value['start_date'].", end date of ".$value['end_date']." where it runs each ".$value['recurrence']." ".$value['recurrence_type']." was run today :: Info diff=".$diff;
                         $i++;
 
@@ -345,7 +345,7 @@ class cron {
                         $cron_log->insert();
 
                         ## email the people
-                        
+
 						$invoiceobj = new invoice();
                         $invoice= $invoiceobj->select($new_invoice_id, $domain_id);
                         $preference = getPreference($invoice['preference_id'], $domain_id);
@@ -355,8 +355,8 @@ class cron {
                         #create PDF nameVj
                         $spc2us_pref = str_replace(" ", "_", $invoice['index_name']);
                         $pdf_file_name_invoice = $spc2us_pref.".pdf";
-                            
-                            
+
+
                         // email invoice
                         if( ($value['email_biller'] == "1") OR ($value['email_customer'] == "1") )
                         {
@@ -378,7 +378,7 @@ class cron {
                                 $email_body->customer_name = $customer['name'];
                                 $email_body->invoice_name = $invoice['index_name'];
                                 $email_body->biller_name = $biller['name'];
-                            
+
                             $email -> notes = $email_body->create();
                             $email -> from = $biller['email'];
                             $email -> from_friendly = $biller['name'];
@@ -400,17 +400,17 @@ class cron {
                         $eway_pre_check = $eway_check->pre_check();
 
                         //do eway payment
-                        if ($eway_pre_check == 'true')         
+                        if ($eway_pre_check == 'true')
                         {
-                            
+
                             // input customerID,  method (REAL_TIME, REAL_TIME_CVN, GEO_IP_ANTI_FRAUD) and liveGateway or not
                             $eway = new eway();
                             $eway->domain_id = $domain_id;
                             $eway->invoice   = $invoice;
                             $eway->biller    = $biller ;
                             $eway->customer  = $customer;
-                            $payment_done = $eway->payment();  
-                            
+                            $payment_done = $eway->payment();
+
                             $payment_id = $db->lastInsertID();
 
                             $pdf_file_name_receipt = 'payment'.$payment_id.'.pdf';
@@ -421,7 +421,7 @@ class cron {
                                 {
 
                                     /*
-                                    * If you want a new copy of the invoice being emailed to the customer 
+                                    * If you want a new copy of the invoice being emailed to the customer
                                     * use this code
                                     */
                                     $export_rec = new export();
@@ -442,7 +442,7 @@ class cron {
                                         $email_body_rec->customer_name = $customer['name'];
                                         $email_body_rec->invoice_name = $invoice['index_name'];
                                         $email_body_rec->biller_name = $biller['name'];
-                                    
+
                                     $email_rec -> notes = $email_body_rec->create();
                                     $email_rec -> from = $biller['email'];
                                     $email_rec -> from_friendly = $biller['name'];
@@ -473,7 +473,7 @@ class cron {
                                         $email_body->customer_name = $customer['name'];
                                         $email_body->invoice_name = 'payment'.$payment_id;
                                         $email_body->biller_name = $biller['name'];
-                                    
+
                                     $email -> notes = $email_body->create();
                                     $email -> from = $biller['email'];
                                     $email -> from_friendly = $biller['name'];
@@ -522,7 +522,7 @@ class cron {
 
                     }
 
-                } else {		
+                } else {
 
                         //days diff is negative - whats going on
                         $return['cron_message_'.$value['cron_id']] = "Cron ID: ". $value['cron_id'] ." NOT RUN: - Not cheduled for today - Cron for ".$value['index_name']." with start date of ".$value['start_date'].", end date of ".$value['end_date']." where it runs each ".$value['recurrence']." ".$value['recurrence_type']." did not recur today :: Info diff=".$diff;
@@ -535,7 +535,7 @@ class cron {
             }
         }
 
-        // no crons scheduled for today	
+        // no crons scheduled for today
         if ($number_of_crons_run  == '0')
         {
             $return['id'] = $i;
@@ -559,15 +559,15 @@ class cron {
         $email -> format = 'cron';
         #$email -> notes = $return;
         $email -> from = "simpleinvoices@localhost";
-        $email -> from_friendly = "Simple Invoices - Cron";
+        $email -> from_friendly = "SimpleInvoices - Cron";
         $email -> to = "simpleinvoices@localhost";
         #$email -> bcc = $_POST['email_bcc'];
-        $email -> subject = "Cron for Simple Invoices has been run for today:";
+        $email -> subject = "Cron for SimpleInvoices has been run for today:";
         $email -> send ();
     */
 
         return $return;
-        
+
     }
 
 }

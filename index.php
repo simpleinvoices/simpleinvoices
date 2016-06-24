@@ -1,7 +1,7 @@
 <?php
 /*
  * Script: index.php
- * Main controller file for Simple Invoices
+ * Main controller file for SimpleInvoices
  *
  * License:
  * GPL v3 or above

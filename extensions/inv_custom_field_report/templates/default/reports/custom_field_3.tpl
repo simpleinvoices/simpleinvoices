@@ -6,7 +6,7 @@
 <div class="welcome">
 <form name="frmpost" action="index.php?module=reports&amp;view=custom_field_3" method="post">
 
-       <table align="center">
+       <table class="center">
 
                <tr>
                       <td class="details_screen">
@@ -50,7 +50,7 @@
 
 <tr>
 <td colspan="2"><br />
-<table class="buttons" align="center">
+<table class="center" >
     <tr>
         <td>
             <button type="submit" class="positive" name="submit" value="statement_report">
@@ -95,7 +95,7 @@
 <br />
 {/if}
 
-<table align="center" width="100%">
+<table class="center" width="100%">
     <tr>
         <td  class="details_screen">
             <b>{$LANG.id}</b>

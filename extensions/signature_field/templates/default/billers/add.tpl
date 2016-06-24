@@ -171,7 +171,7 @@
       <tr>
         <th>{$LANG.invoice_footer}</th>
         <td>
-          <textarea input type="text" class="editor" name="footer" rows="4" cols="50">
+          <textarea class="editor" name="footer" rows="4" cols="50">
                     {$smarty.post.footer|htmlsafe}
           </textarea>
        </td>
@@ -179,7 +179,7 @@
       <tr>
         <th>{$LANG.notes}</th>
         <td>
-          <textarea input type="text" class="editor" name="notes" rows="8" cols="50">
+          <textarea class="editor" name="notes" rows="8" cols="50">
                     {$smarty.post.notes|htmlsafe}
           </textarea>
         </td>

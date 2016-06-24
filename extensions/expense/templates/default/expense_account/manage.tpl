@@ -11,7 +11,7 @@
 *	http://www.simpleinvoices.org
 */
 *}
-<table class="buttons" align="center">
+<table class="center" >
     <tr>
         <td>
             <a href="./index.php?module=expense_account&view=add" class="positive">

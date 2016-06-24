@@ -3,7 +3,7 @@
 <form name="frmpost"
   action="index.php?module=reports&amp;view=past_due_report" 
   method="post" >
-  <table style="margin-left:auto;margin-right:auto;">
+  <table class="center" >
     <tr>
       <td class="details_screen">Display Detail</td>
       <td><input type="checkbox" name="display_detail"
@@ -13,7 +13,7 @@
     </tr>
     <tr>
       <td colspan="2">
-        <table class="buttons" style="margin-left:auto;margin-right:auto;">
+        <table class="center">
           <tr>
             <td>
               <button type="submit" class="positive" name="submit" value="past_due_report">
@@ -29,7 +29,7 @@
 </form>
 <br/>
 <br/>
-<table style="margin-left:auto;margin-right:auto;width:60%;">
+<table class="center" style="width:60%;">
   <thead>
     <tr style="font-weight: bold;">
       <th class="details_screen" style="text-align: LEFT;">{$LANG.customer}</th>

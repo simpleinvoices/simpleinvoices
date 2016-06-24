@@ -246,7 +246,7 @@
       action="index.php?module=customers&amp;view=save&amp;id={$customer.id|urlencode}"
       method="post" id="frmpost" onsubmit="return checkForm(this);">
   <div class="si_form" id="si_form_cust_edit">
-    <table style="margin-right:auto;margin-left:auto;">
+    <table class="center">
       <tr>
         <th>{$LANG.customer_name}
           <a class="cluetip" href="#"

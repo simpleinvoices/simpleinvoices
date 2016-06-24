@@ -3,7 +3,7 @@
 
 {if $smarty.get.action== 'view' }
 
-	<table align="center">
+	<table class="center">
 	<tr>
 		<td class="details_screen">{$LANG.product_description}</td>
 		<td>{$product.description}</td>
@@ -66,7 +66,7 @@
 	</tr>
 </table>
 	<br />
-	<table class="buttons" align="center">
+	<table class="center" >
 		<tr>
 			<td>
 				<a href="./index.php?module=products&amp;view=details&amp;id={$product.id}&amp;action=edit" class="positive">
@@ -80,7 +80,7 @@
 {elseif $smarty.get.action== 'edit' }
 	<h3>{$LANG.product_edit}</h3>
 
-	<table align="center">
+	<table class="center">
 	<tr>
 		<td class="details_screen">{$LANG.product_description}</td>
 		<td><input type="text" name="description" size="50" value="{$product.description}" id="description" class="required" onblur="checkField(this);"/></td>
@@ -163,7 +163,7 @@
 	</tr>
 	</table>
 	<br />
-	<table class="buttons" align="center">
+	<table class="center" >
 	<tr>
 		<td>
 			<button type="submit" class="positive" name="save_product" value="{$LANG.save}">

@@ -18,7 +18,7 @@
 *}
 <hr />
 <input type="hidden" name="action" value="insert" />
-<table align="center">
+<table class="center">
 
 <tr>
 	<td class="details_screen">{$LANG.biller}</td>

@@ -21,7 +21,7 @@
 <hr />
 
 
-<table align="center">
+<table class="center">
 <tr>
 	<td class="details_screen">{$LANG.attribute}</td>
 	<td>

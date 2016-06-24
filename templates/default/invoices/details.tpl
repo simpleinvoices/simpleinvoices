@@ -1,21 +1,24 @@
 {*
- * Script: details.tpl
+ *  Script: details.tpl
  *    Invoice details template
  *
  *  Modified for 'default_invoices' by Marcel van Dorp. Version 20090208
- *  if no invoice_id set, the date will be today, and the action will be 'insert' instead of 'edit'
+ *    if no invoice_id set, the date will be today, and the action will be
+ *    'insert' instead of 'edit'
  *  Modified by Rich Rowley 20160212 to fix missing closing <td> tag and format for readability.
  *
- * License:
- *  GPL v3 or above
+ *  License:
+ *    GPL v3 or above
  *
- * Website:
- * http://www.simpleinvoices.org
+ *  Website:
+ *    http://www.simpleinvoices.org
  *}
 
-{* Steel needed ?*}
-<div id="gmail_loading" class="gmailLoader" style="float: right; display: none;">
-  <img src="images/common/gmail-loader.gif" alt="{$LANG.loading} ..." />{$LANG.loading} ...</div>
+{* Still needed ?*}
+<div id="gmail_loading" class="gmailLoader" style="float:right; display: none;">
+  <img src="images/common/gmail-loader.gif" alt="{$LANG.loading} ..." />
+  {$LANG.loading} ...
+</div>
 <form name="frmpost" action="index.php?module=invoices&amp;view=save" method="post">
   <div class="si_invoice_form">
     <table class='si_invoice_top'>
@@ -41,7 +44,7 @@
         <th>{$LANG.biller}</th>
         <td>
         {if $billers == null }
-          <p><em>{$LANG.no_billers}</em></p>
+          <em>{$LANG.no_billers}</em>
         {else}
           <select name="biller_id">
             {foreach from=$billers item=biller}
@@ -56,13 +59,13 @@
         <th>{$LANG.customer}</th>
         <td>
         {if $customers == null}
-          <p><em>{$LANG.no_customers}</em></p>
+          <em>{$LANG.no_customers}</em>
         {else}
           <select name="customer_id">
-          {foreach from=$customers item=customer}
+            {foreach from=$customers item=customer}
             <option {if $customer.id == $invoice.customer_id} selected {/if}
                     value="{$customer.id|htmlsafe}">{$customer.name|htmlsafe}</option>
-          {/foreach}
+            {/foreach}
           </select>
         {/if}
         </td>
@@ -113,8 +116,8 @@
                   <option value=""></option>
                   {assign var="index" value=$smarty.section.tax.index}
                   {foreach from=$taxes item=tax}
-                    <option {if $tax.tax_id === $invoiceItems.0.tax.$index} selected {/if}
-                            value="{$tax.tax_id|htmlsafe}">{$tax.tax_description|htmlsafe}</option>
+                  <option {if $tax.tax_id === $invoiceItems.0.tax.$index} selected {/if}
+                          value="{$tax.tax_id|htmlsafe}">{$tax.tax_description|htmlsafe}</option>
                   {/foreach}
                 </select>
               </td>
@@ -135,44 +138,36 @@
           <td>{$LANG.quantity_short}</td>
           <td>{$LANG.description}</td>
           {section name=tax_header loop=$defaults.tax_per_line_item }
-          <td>{$LANG.tax}{if $defaults.tax_per_line_item > 1}{$smarty.section.tax_header.index+1|htmlsafe}{/if}</td>
+          <td>{$LANG.tax}{if $defaults.tax_per_line_item > 1} {$smarty.section.tax_header.index+1|htmlsafe}{/if}</td>
           {/section}
           <td>{$LANG.unit_price}</td>
         </tr>
       </thead>
       {foreach key=line from=$invoiceItems item=invoiceItem name=line_item_number}
       <tbody class="line_item" id="row{$line|htmlsafe}">
-        <tr class="tr_{cycle name=" values="A,B"}">
+        <tr class="tr_{cycle name="rows" values="A,B"}">
+          <input type="hidden" id="delete{$line|htmlsafe}" name="delete{$line|htmlsafe}" size="3" />
+          <input type="hidden" name="line_item{$line|htmlsafe}" id="line_item{$line|htmlsafe}"
+                 value="{$invoiceItem.id|htmlsafe}" />
           <td>
-          {if $line != "0"}
             <a id="trash_link_edit{$line|htmlsafe}" class="trash_link_edit"
-               title="{$LANG.delete_line_item}" href="#" style="display: inline;"
+               title="{$LANG.delete_line_item}" href="#" style="display:inline;"
                rel="{$line|htmlsafe}">
-              <img id="delete_image{$line|htmlsafe}" src="./images/common/delete_item.png" alt="" />
+              <img id="delete_image{$line|htmlsafe}"
+                   src="./images/common/{if $line == "0"}blank.gif{else}delete_item.png{/if}" alt="" />
             </a>
-          {/if}
-          {if $line == "0"}
-            <a id="trash_link_edit{$line|htmlsafe}" class="trash_link_edit"
-               title="{$LANG.delete_line_item}" href="#" style="display: inline;"
-               rel="{$line|htmlsafe}">
-              <img id="delete_image{$line|htmlsafe}" src="./images/common/blank.gif" alt="" />
-            </a>
-          {/if}
           </td>
           <td>
-            <input type="hidden" id="delete{$line|htmlsafe}" name="delete{$line|htmlsafe}" size="3" />
             <input class="si_right" type="text" name='quantity{$line|htmlsafe}'
-                   id='quantity{$line|htmlsafe}' 
+                   id='quantity{$line|htmlsafe}'
                    value='{$invoiceItem.quantity|siLocal_number_formatted}' size="10" />
-            <input type="hidden" name='line_item{$line|htmlsafe}' id='line_item{$line|htmlsafe}'
-                   value='{$invoiceItem.id|htmlsafe}' />
           </td>
           <td>
           {if $products == null }
-            <p><em>{$LANG.no_products}</em></p>
+            <em>{$LANG.no_products}</em>
           {else}
             {* onchange="invoice_product_change_price($(this).val(), {$line|htmlsafe},
-                                             jQuery('#quantity{$line|htmlsafe}').val() );" *}
+                                                      jQuery('#quantity{$line|htmlsafe}').val() );" *}
             <select name="products{$line|htmlsafe}" id="products{$line|htmlsafe}"
                     rel="{$line|htmlsafe}" class="product_change">
             {foreach from=$products item=product}
@@ -205,8 +200,8 @@
         <tr class="details si_hide">
           <td></td>
           <td colspan="4">
-            <textarea class="detail" name="description{$line|htmlsafe}" style="overflow:scroll;"
-                      id="description{$line|htmlsafe}" rows="3" cols="3" >{$invoiceItem.description|outhtml}</textarea>
+            <textarea class="editor" name="description{$line|htmlsafe}" style="overflow:scroll;"
+                      id="description{$line|htmlsafe}" rows="3" cols="70">{$invoiceItem.description|outhtml}</textarea>
           </td>
         </tr>
       </tbody>
@@ -215,11 +210,11 @@
     <div class="si_toolbar si_toolbar_inform">
       {* onclick="add_line_item();" *}
       <a href="#" class="add_line_item">
-        <img src="./images/common/add.png" alt="" />{$LANG.add_new_row}</a>
+        <img src="./images/common/add.png" alt=""/>{$LANG.add_new_row}</a>
       <a href='#' class="show-details" onclick="javascript: $('.details').show();$('.show-details').hide();">
         <img src="./images/common/page_white_add.png"
              title="{$LANG.show_details}" alt="" />{$LANG.show_details}</a>
-      <a href='#' class="details" onclick="javascript: $('.details').hide();$('.show-details').show();" style="display: none">
+      <a href='#' class="details" onclick="javascript: $('.details').hide();$('.show-details').show();" style="display:none">
         <img src="./images/common/page_white_delete.png"
              title="{$LANG.hide_details}" alt="" />{$LANG.hide_details}</a>
     </div>
@@ -254,9 +249,12 @@
     </table>
     <div class="si_toolbar si_toolbar_form">
       <button type="submit" class="invoice_save positive" name="submit" value="{$LANG.save}">
-        <img class="button_img" src="./images/common/tick.png" alt="" />{$LANG.save}</button>
-      <a href="./index.php?module=invoices&amp;view=manage"
-        class="negative"> <img src="./images/common/cross.png" alt="" />{$LANG.cancel}</a>
+        <img class="button_img" src="./images/common/tick.png" alt="" />{$LANG.save}
+      </button>
+      <a href="./index.php?module=invoices&amp;view=manage" class="negative">
+        <img src="./images/common/cross.png" alt="" />
+        {$LANG.cancel}
+      </a>
     </div>
   </div>
   <div>
@@ -267,8 +265,8 @@
     <input type="hidden" name="action" value="edit" />
     {/if}
     {if $invoice.type_id == 1 }
-    <input id="quantity0" type="hidden" size="10" value="1.00" name="quantity0" />
-    <input id="line_item0" type="hidden" value="{$invoiceItems.0.id|htmlsafe}" name="line_item0" />
+    <input id="quantity0" type="hidden" size="10" value="1.00" name="quantity0"/>
+    <input id="line_item0" type="hidden" value="{$invoiceItems.0.id|htmlsafe}" name="line_item0"/>
     {/if}
     <input type="hidden" name="type" value="{$invoice.type_id|htmlsafe}" />
     <input type="hidden" name="op" value="insert_preference" />

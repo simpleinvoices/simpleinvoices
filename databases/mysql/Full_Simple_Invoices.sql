@@ -128,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `si_extensions` (
 ) ENGINE=MyISAM;
 
 INSERT INTO `si_extensions` (`id`, `domain_id`, `name`, `description`, `enabled`) VALUES
- (1, 0, 'core', 'Core part of Simple Invoices - always enabled', '1');
+ (1, 0, 'core', 'Core part of SimpleInvoices - always enabled', '1');
 
 CREATE TABLE IF NOT EXISTS `si_index` (
   `id` int(11) NOT NULL,

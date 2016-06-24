@@ -2,7 +2,7 @@
       method="post" onsubmit="return frmpost_Validator(this)">
   <h3>{$LANG.process_payment}</h3>
   <hr />
-  <table style="margin-right:auto;margin-left:auto;">
+  <table class="center">
     {if $smarty.get.op === "pay_selected_invoice"}
     <tr>
       <td class="details_screen">{$LANG.invoice_id}</td>

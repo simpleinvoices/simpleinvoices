@@ -29,7 +29,7 @@
     <form name="frmpost"
           action="index.php?module=invoices&amp;view=delete&amp;stage=2&amp;id={$smarty.get.id|urlencode}"
           method="post">
-        <table class="buttons" align="center">
+        <table class="center" >
             <tr>
                 <td>
 					<div class="si_toolbar si_toolbar_form">

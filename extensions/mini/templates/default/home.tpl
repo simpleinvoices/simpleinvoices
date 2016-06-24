@@ -23,7 +23,7 @@
 		</div>
 	</div>
 
-<div class="iLayer" id="waCreate" title="Simple Invoices">
+<div class="iLayer" id="waCreate" title="SimpleInvoices">
 		<div class="iList">
 			<h2>Create New</h2>
 			<ul class="iArrow">
@@ -35,7 +35,7 @@
 		</div>
 	</div>
 
-<div class="iLayer" id="waData" title="Simple Invoices">
+<div class="iLayer" id="waData" title="SimpleInvoices">
 		<div class="iList">
 			<h2>Manage Data</h2>
 			<ul class="iArrow">

@@ -1,4 +1,4 @@
-# Simple Invoices
+# SimpleInvoices
 
 [![Join the chat at https://gitter.im/simpleinvoices/simpleinvoices](https://badges.gitter.im/simpleinvoices/simpleinvoices.svg)](https://gitter.im/simpleinvoices/simpleinvoices?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 Making invoicing rock since '05.
@@ -23,13 +23,13 @@ When cloning the repository use the `--recursive` option to ensure that Zend is 
 * [ERD Schema with Primary and Foreign Keys](https://github.com/apmuthu/simpleinvoices/raw/master/databases/mysql/SI_Schema_2013.1.beta.5.1_PKFK.png)
 
 ## About
-* Simple Invoices is released under the GPL v3 license - refer license.txt for details
+* SimpleInvoices is released under the GPL v3 license - refer license.txt for details
 * For installation instructions refer: http://simpleinvoices.org/install
 * For any other help or comments jump on our website or post on the forum at http://simpleinvoices.org/forum
 
 ## Get Involved
-* Developer Discussion: [Simple Invoices Google+ Community](https://plus.google.com/communities/102476804981627142204)
-* Developer Mailing List: [Simple Invoices Google Groups](https://groups.google.com/forum/#!forum/simpleinvoices)
+* Developer Discussion: [SimpleInvoices Google+ Community](https://plus.google.com/communities/102476804981627142204)
+* Developer Mailing List: [SimpleInvoices Google Groups](https://groups.google.com/forum/#!forum/simpleinvoices)
 
 We also have a mailing list for tracking commit activity. This is hosted on Google Groups. You can find it here: https://groups.google.com/forum/?fromgroups#!forum/simpleinvoices-trac
 

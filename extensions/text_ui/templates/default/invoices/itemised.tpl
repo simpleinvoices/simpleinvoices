@@ -114,7 +114,7 @@
   </tr>
   <tr>
     <td colspan="2">
-      <textarea input type="text" name="note" rows="5" cols="70" style="overflow:scroll;"></textarea>
+      <textarea name="note" class="editor" rows="5" cols="70" style="overflow:scroll;"></textarea>
     </td>
   </tr>
   *}

@@ -27,7 +27,7 @@
 
 
 {*
-<table class="manage" id="live-grid" align="center">
+<table class="manage" id="live-grid" class="center">
 	<colgroup>
 		<col style='width:7%;' />
 		<col style='width:10%;' />

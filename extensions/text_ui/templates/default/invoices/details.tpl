@@ -20,7 +20,7 @@
 --
 <br />
 <form name="frmpost" action="index.php?module=invoices&amp;view=save" method="post">
-  <table align="center">
+  <table class="center">
     <tr>
       <td colspan="6" align="center"></td>
     </tr>
@@ -86,7 +86,7 @@
     </tr>
     <tr>
       <td colspan="6">
-        <textarea name="description0" rows="10" cols="70" style="overflow:scroll;">
+        <textarea name="description0" class="editor" rows="10" cols="70" style="overflow:scroll;">
           {$invoiceItems.0.description}
         </textarea>
       </td>
@@ -190,7 +190,7 @@
           </tr>
           <tr>
             <td colspan="6">
-              <textarea name="description{$line}" rows="5" cols="70" style="overflow:scroll;">
+              <textarea name="description{$line}" class="editor" rows="5" cols="70" style="overflow:scroll;">
                 {$invoiceItem.description}
               </textarea>
             </td>

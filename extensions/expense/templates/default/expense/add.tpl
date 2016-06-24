@@ -104,11 +104,11 @@
       </tr>
       <tr>
         <td class="details_screen">{$LANG.notes}</td>
-        <td><textarea input type="text" class="editor" name='note' rows="8" cols="50">{$smarty.post.notes|unescape}</textarea></td>
+        <td><textarea class="editor" name='note' rows="8" cols="50">{$smarty.post.notes|unescape}</textarea></td>
       </tr>
     </table>
     <br />
-    <table class="buttons" align="center">
+    <table class="center" >
       <tr>
         <td>
           <button type="submit" class="positive" name="id" value="{$LANG.save}">

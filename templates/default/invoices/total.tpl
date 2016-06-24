@@ -25,7 +25,7 @@
 		<tr>
 			<td class="si_invoice_notes" colspan="5">
 				<h5>{$LANG.description}</h5>
-				<textarea inputclass="editor" name="description" rows="10" cols="100"></textarea>
+				<textarea class="editor" name="description" rows="10" cols="50"></textarea>
 			</td>
 		</tr>
 	</table>

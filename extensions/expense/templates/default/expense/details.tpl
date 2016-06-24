@@ -1,7 +1,7 @@
 <form name="frmpost" action="index.php?module=expense&view=save&id={$smarty.get.id}" method="post">
 {if $smarty.get.action== 'view' }
 <br />
-<table align="center">
+<table class="center">
   <tr>
     <td class="details_screen">{$LANG.amount}</td>
     <td>{$expense.amount|siLocal_number}</td>
@@ -55,7 +55,7 @@
   </tr>
 </table>
   <br />
-  <table class="buttons" align="center">
+  <table class="center" >
     <tr>
       <td>
         <a href="./index.php?module=expense&view=details&id={$expense.id}&action=edit" class="positive">
@@ -69,7 +69,7 @@
 
 {if $smarty.get.action== 'edit' }
   <br />
-  <table align="center">
+  <table class="center">
   <tr>
     <td class="details_screen">{$LANG.amount}</td>
     <td>
@@ -173,13 +173,13 @@
   </tr>
   <tr>
     <td class="details_screen">{$LANG.notes}</td>
-    <td><textarea input type="text" class="editor" name='note' rows="8" cols="50">{$expense.note|unescape}</textarea></td>
+    <td><textarea class="editor" name='note' rows="8" cols="50">{$expense.note|unescape}</textarea></td>
   </tr>
   </table>
 {/if} 
 {if $smarty.get.action== 'edit' }
   <br />
-  <table class="buttons" align="center">
+  <table class="center" >
     <tr>
       <td>
         <button type="submit" class="positive" name="save_product" value="{$LANG.save}">

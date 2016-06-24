@@ -17,10 +17,10 @@ if ($_POST['pg_response_code']=='A01') {
 	$check_payment->domain_id = '1';
     $number_of_payments = $check_payment->count();
 	$logger->log('ACH - number of times this payment is in the db: '.$number_of_payments, Zend_Log::INFO);
-	
+
 	if($number_of_payments > 0)
 	{
-		$xml_message = 'Online payment for invoices: '.$_POST['pg_consumerorderid'].' has already been entered into Simple Invoices';
+		$xml_message = 'Online payment for invoices: '.$_POST['pg_consumerorderid'].' has already been entered into SimpleInvoices';
 		$logger->log($xml_message, Zend_Log::INFO);
 	}
 
@@ -48,7 +48,7 @@ if ($_POST['pg_response_code']=='A01') {
 		$biller = getBiller($invoice['biller_id']);
 
 		//send email
-		$body =  "A PaymentsGateway.com payment of ".$_POST['pg_total_amount']." was successfully received into Simple Invoices\n";
+		$body =  "A PaymentsGateway.com payment of ".$_POST['pg_total_amount']." was successfully received into SimpleInvoices\n";
 		$body .= "for invoice: ".$_POST['pg_consumerorderid'] ;
 		$body .= " from ".$_POST['pg_billto_postal_name_company']." on ".date('m/d/Y');
 		$body .= " at ".date('g:i A')."\n\nDetails:\n";

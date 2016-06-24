@@ -8,7 +8,7 @@ Ext.onReady(function(){
     // Group box containing actions
     var invoicePanel = new Ext.Panel({
     	frame:true,
-    	title: 'Simple Invoices : Menu',
+    	title: 'SimpleInvoices : Menu',
     	collapsible:false,
     	collapsed:false,
     	contentEl:'invoices',

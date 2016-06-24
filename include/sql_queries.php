@@ -160,8 +160,12 @@ function dbQuery($sqlQuery) {
 /**
  * Log database modification entries in the si_log table.
  * @param string $sqlQuery Query to be logged.
+ * @param boolean $dump If true, the information will be written to
+ *        the error log regardless of the transaction type. If false,
+ *        the default, the normal logging is performed and only errors
+ *        are written to the error log.
  */
-function dbLogger($sqlQuery) {
+function dbLogger($sqlQuery, $dump=false) {
     // For PDO it gives only the skeleton sql before merging with data
     global $log_dbh;
     global $dbh;
@@ -517,6 +521,8 @@ function pdoRequest($request, $table, $excluded_fields, $whereClause = NULL) {
                 error_log("pdoRequest - execute() error." . print_r($sth->errorInfo(), true));
                 throw new Exception('pdoRequest - execute() error. See error_log.');
             }
+
+            dbLogger(interpolateQuery($sql, $parm_list));
             break;
 
         default:

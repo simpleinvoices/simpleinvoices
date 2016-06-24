@@ -120,7 +120,7 @@
     </ul>
   </div>
   <div id="section-1" class="fragment">
-    <table align="center">
+    <table class="center">
       <tr>
         <th>{$LANG.product_description}</th>
         <td><input type="text" name="description" size="50" value="{$product.description|htmlsafe}" id="description"  class="validate[required]" /></td>

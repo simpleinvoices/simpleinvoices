@@ -139,7 +139,7 @@
 {/if}
 
 <div class="si_list">
-  <table align="center" width="100%">
+  <table class="center" width="100%">
     <thead>
       <tr>
         <th class="si_right">{$LANG.id}</th>

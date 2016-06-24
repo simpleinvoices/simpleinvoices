@@ -14,7 +14,7 @@
        method="post" id="frmpost" onSubmit="return checkForm(this);">
     <h3>{$LANG.customer_add}</h3>
     <hr />
-    <table style="margin-right:auto;margin-left:auto;">
+    <table class="center">
       <tr>
         <td class="details_screen">{$LANG.customer_name}</td>
         <td>

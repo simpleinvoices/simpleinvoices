@@ -1,6 +1,6 @@
 <br />	 
 
-<table align="center">
+<table class="center">
 	<tr>
 		<td class="details_screen">{$LANG.invoice}</td>
 		<td>
@@ -37,7 +37,7 @@
 
 </table>
 <br />
-<table class="buttons" align="center">
+<table class="center" >
 	<tr>
 		<td class="si_toolbar si_toolbar_form">
 				<a href="./index.php?module=cron&amp;view=edit&amp;id={$cron.id|urlencode}" class="positive">

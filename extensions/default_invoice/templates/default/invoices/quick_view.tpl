@@ -51,7 +51,7 @@
 <br />
 <!-- #PDF end -->
 
-	<table align="center">
+	<table class="center">
 {*
 	<tr>
 		<td colspan="6" class="align_center"><b>{$preference.pref_inv_heading}</b></td>
@@ -526,7 +526,7 @@
 </table>
 
 <br /><br />
-	<table align="center">
+	<table class="center">
 	<tr class='details_screen'>
 		<td class='details_screen' colspan="16">
 		{$LANG.financial_status}

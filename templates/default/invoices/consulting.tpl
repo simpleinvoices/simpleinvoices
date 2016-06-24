@@ -121,7 +121,7 @@
 </table>
 <!-- </div> -->
 <hr />
-<table class="buttons" align="center">
+<table class="center" >
 	<tr>
 	        <td>
 			<button type="submit" class="positive" name="submit" value="{$LANG.save}">

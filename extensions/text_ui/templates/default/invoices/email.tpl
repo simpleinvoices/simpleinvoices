@@ -21,7 +21,7 @@
     <h3>Email Invoice to Customer as PDF</h3>
   </div>
   <hr />
-  <table style="margin-right:auto;margin-left:auto;">
+  <table class="center">
     <tr>
       <td class="details_screen">{$LANG.from}</td>
       <td>
@@ -50,7 +50,7 @@
     <tr>
       <td class="details_screen">{$LANG.message}</td>
       <td>
-        <textarea name="email_notes" rows="3" cols="20"></textarea>
+        <textarea name="email_notes" class="editor" rows="3" cols="20"></textarea>
       </td>
     </tr>
   </table>
@@ -61,7 +61,7 @@
 {/if}
 {if $smarty.get.stage == 2}
 <div id="top"></div>
-<table style="margin-right:auto;margin-left:auto;">
+<table class="center">
   <tr>
     <td>{$message}</td>
   </tr>

@@ -1,4 +1,4 @@
-Add the custom flags feature to Simple Invoices.
+Add the custom flags feature to SimpleInvoices.
 This will add the "Custom Flags" menu option to the Settings.
 The first time this menu option is selected, a new database table,
 si_custom_flags, will be created and populated. Also, a new field,

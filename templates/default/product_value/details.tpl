@@ -8,7 +8,7 @@
 	<hr />
 
 	
-	<table align="center">
+	<table class="center">
 		<tr>
   			<td class="details_screen">{$LANG.id}</td><td>{$product_value.id}</td>
                 </tr>
@@ -34,7 +34,7 @@
 <b>{$LANG.product_value}</b>
 	<hr />
 
-	<table align="center">
+	<table class="center">
 		<tr>
 			<td class="details_screen">{$LANG.id}</td><td>{$product_value.id}</td>
 		</tr>

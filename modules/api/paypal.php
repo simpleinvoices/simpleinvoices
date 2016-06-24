@@ -33,7 +33,7 @@ if ($p->validate_ipn()) {
 	}
 
 	$logger->log('Paypal - domain_id='.$domain_id.'EOM', Zend_Log::INFO);
-	
+
 	//check if payment has already been entered
 
 	$check_payment = new payment();
@@ -42,10 +42,10 @@ if ($p->validate_ipn()) {
 	$check_payment->domain_id = $domain_id;
     $number_of_payments = $check_payment->count();
 	$logger->log('Paypal - number of times this payment is in the db: '.$number_of_payments, Zend_Log::INFO);
-	
+
 	if($number_of_payments > 0)
 	{
-		$xml_message .= 'Online payment '.$p->ipn_data['tnx_id'].' has already been entered into Simple Invoices - exiting for domain_id='.$domain_id;
+		$xml_message .= 'Online payment '.$p->ipn_data['tnx_id'].' has already been entered into SimpleInvoices - exiting for domain_id='.$domain_id;
 		$logger->log($xml_message, Zend_Log::INFO);
 	}
 
@@ -78,7 +78,7 @@ if ($p->validate_ipn()) {
 		$biller = getBiller($invoice['biller_id']);
 
 		//send email
-		$body =  "A Paypal instant payment notification was successfully recieved into Simple Invoices\n";
+		$body =  "A Paypal instant payment notification was successfully recieved into SimpleInvoices\n";
 		$body .= "from ".$p->ipn_data['payer_email']." on ".date('m/d/Y');
 		$body .= " at ".date('g:i A')."\n\nDetails:\n";
 		$body .= $paypal_data;
@@ -99,13 +99,13 @@ if ($p->validate_ipn()) {
 }
 
 header('Content-type: application/xml');
-try 
+try
 {
     $xml = new encode();
     $xml->xml( $xml_message );
     echo $xml;
-} 
-catch (Exception $e) 
+}
+catch (Exception $e)
 {
     echo $e->getMessage();
 }

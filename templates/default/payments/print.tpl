@@ -10,7 +10,7 @@
     <div id="header"></div>
     <div id="container">
       <div id="header"></div>
-      <table style="width: 100%; margin-right: auto; margin-left: auto;">
+      <table class="center">
         <tr>
           <td colspan="5"><img src="{$logo|urlsafe}" border="0" hspace="0" align="left"></td>
           <th align="right">

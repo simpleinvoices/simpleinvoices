@@ -3,7 +3,7 @@
 <form name="frmpost"
       action="index.php?module=reports&amp;view=net_income_report"
       method="post">
-  <table style="margin: 0, auto; width: 100%;">
+  <table class="center" >
     <tr>
       <td colspan="2"
         style="font-weight: bold; font-size: 1.5em; text-align: center; text-decoration: underline;">
@@ -54,7 +54,7 @@
     <tr>
       <td colspan="2">
         <br />
-        <table class="buttons" style="margin: 0 auto;">
+        <table class="center">
           <tr>
             <td>
               <button type="submit" class="positive" name="submit" value="statement_report">
@@ -84,7 +84,7 @@
   </strong>
 </div>
 <br />
-<table style="margin:0 auto; width:75%;">
+<table class="center" style="width:90%" >
   <thead>
     <tr style="font-weight: bold;">
       <th class="details_screen" width="8%" style="text-align:right;">{$LANG.invoice}</th>

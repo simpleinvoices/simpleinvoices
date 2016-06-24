@@ -25,7 +25,7 @@
 	{/if}	
 <form name="frmpost" action="index.php?module=customers&amp;view=add" method="post" id="frmpost" onsubmit="return checkForm(this);">
 <br />
-<table align="center">
+<table class="center">
 	<tr>
 		<td class="details_screen">{$LANG.customer_name}
 		<a 
@@ -223,7 +223,7 @@
 
 </table>
 <br />
-<table class="buttons" align="center">
+<table class="center" >
     <tr>
         <td>
             <button type="submit" class="positive" name="id" value="{$LANG.save}">

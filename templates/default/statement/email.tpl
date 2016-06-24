@@ -21,7 +21,7 @@
 <form name="frmpost" action="index.php?module=statement&amp;view=email&amp;stage=2&amp;biller_id={$smarty.get.biller_id|urlencode}&amp;customer_id={$smarty.get.customer_id|urlencode}&amp;start_date={$smarty.get.start_date|urlencode}&amp;end_date={$smarty.get.end_date|urlencode}&amp;show_only_unpaid={$smarty.get.show_only_unpaid|urlencode}&amp;format=file" method="post">
 <div id="top"><h3>{$LANG.email_statement_as_pdf}</h3></div>
 
-<table align="center">
+<table class="center">
 	<tr>
 		<td class="details_screen">{$LANG.email_from}
 		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_email_from" title="{$LANG.email_from}"><img src="{$help_image_path}help-small.png" alt="" /></a>
@@ -51,7 +51,7 @@
 </table>
 
 <br />
-	<table class="buttons" align="center">
+	<table class="center" >
 	    <tr>
 	        <td>
 	            <button type="submit" class="invoice_save positive" name="submit" value="{$LANG.email}">
@@ -71,7 +71,7 @@
 
 <div id="top"></b></div>
 
-<table align="center">
+<table class="center">
 	<tr>
 		<td>{$message|outhtml}</td>
 	</tr>

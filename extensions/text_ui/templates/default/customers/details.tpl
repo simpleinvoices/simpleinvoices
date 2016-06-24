@@ -102,7 +102,7 @@
   </table>
   <br />
   <b>{$LANG.invoice_listings}</b>
-  <table width="100%" align="center">
+  <table width="100%" class="center">
     <tr class="sortHeader">
       <th class="sortable">{$LANG.id}</th>
       <th class="sortable_rt">{$LANG.total}</th>

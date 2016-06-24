@@ -1,7 +1,7 @@
 <?php
 /* 
 // Typical Cron Job to run each day:
-// #Simple Invoices recurrence - run each day at 1AM
+// #SimpleInvoices recurrence - run each day at 1AM
 // 0 1 * * * /usr/bin/wget -q -O - http://localhost/api-cron  >/dev/null 2>&1
 //
 // Typical expansion of mod rewrite using the .htaccess file

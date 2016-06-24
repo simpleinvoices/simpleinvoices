@@ -110,7 +110,7 @@
   {/if}
   {if $smarty.get.action== 'edit' }
   <div class="si_form">
-    <table style="margin-right:auto;margin-left:auto;">
+    <table class="center">
       <tr>
         <th>{$LANG.product_description}</th>
         <td>

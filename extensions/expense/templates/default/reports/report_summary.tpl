@@ -1,6 +1,6 @@
 
 <form name="frmpost" action="index.php?module=reports&amp;view=report_summary" method="post">
-<table align="center">
+<table class="center">
     <tr>
         <td>Start date (YYYY-MM-DD)
                 <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="start_date" id="date1" value='{$start_date}' />   
@@ -18,7 +18,7 @@
     </tr>
 </table>
 <br />
-<table class="buttons" align="center">
+<table class="center" >
     <tr>
         <td>
             <button type="submit" class="positive" name="submit" value="{$LANG.insert_biller}">
@@ -32,7 +32,7 @@
 </form>
 <div id="top"><h3>Expense account summary for the period {$start_date} to {$end_date}</h3></div>
 
-<table align="center">
+<table class="center">
     <tr>
         <td  class="details_screen">
             <b>Account</b>
@@ -111,7 +111,7 @@
 
 <div id="top"><h3>Invoice/Quote summary for the period {$start_date} to {$end_date}</h3></div>
 
-<table align="center">
+<table class="center">
     <tr>
         <td  class="details_screen">
             <b>ID</b>
@@ -181,7 +181,7 @@
 
 <div id="top"><h3>Payment summary for the period {$start_date} to {$end_date}</h3></div>
 
-<table align="center">
+<table class="center">
     <tr>
         <td  class="details_screen">
             <b>ID</b>

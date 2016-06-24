@@ -12,7 +12,7 @@
 </div>
 <hr />
 <form name="add_invoice_item" action="index.php?module=invoices&amp;view=add_invoice_item" method="post">
-  <table align="center">
+  <table class="center">
     <tr>
       <td class="details_screen">{$LANG.quantity}</td>
       <td>
@@ -81,7 +81,7 @@
     </tr>
     <tr>
       <td colspan="2">
-        <textarea input type="text" name="description" rows="3" cols="80" /></textarea>
+        <textarea class="editor" name="description" rows="3" cols="80" /></textarea>
       </td>
     </tr>
     {/if}

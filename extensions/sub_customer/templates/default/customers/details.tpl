@@ -13,7 +13,7 @@
 
 {if $smarty.get.action == 'view' }
 <br />
-<table align="center">
+<table class="center">
 	<tr>
 		<td colspan="7" align="center"> </td>
 	</tr>
@@ -193,7 +193,7 @@
 	</div>
 	<div id="section-3" class="fragment">
 		<p >
-		<table width="100%" align="center">
+		<table width="100%" class="center">
 			<tr class="sortHeader">
 
 				<th class="sortable">{$LANG.id}</th>
@@ -229,7 +229,7 @@
 	<div id="section-5" class="fragment">
 
 		<p>
-		<table width="100%" align="center">
+		<table width="100%" class="center">
 			<tr class="sortHeader">
 
 				<th class="sortable"></th>
@@ -256,7 +256,7 @@
 
 
 <br />
-<table class="buttons" align="center">
+<table class="center" >
     <tr>
         <td>
             <a href="./index.php?module=customers&amp;view=details&amp;id={$customer.id|urlencode}&amp;action=edit" class="positive">
@@ -273,7 +273,7 @@
 
 <form name="frmpost" action="index.php?module=customers&amp;view=save&amp;id={$customer.id|urlencode}" method="post" id="frmpost" onsubmit="return checkForm(this);">
 <br />
-<table align="center">
+<table class="center">
 	<tr>
 		<td class="details_screen">{$LANG.customer_name}
 		<a 
@@ -477,7 +477,7 @@
 
 <br />
 
-<table class="buttons" align="center">
+<table class="center" >
     <tr>
         <td>
             <button type="submit" class="positive" name="save_customer" value="{$LANG.save_customer}">

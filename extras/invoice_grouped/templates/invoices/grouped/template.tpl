@@ -8,7 +8,7 @@
   <br>
   <div id="container">
     <div id="header"></div>
-    <table style="width:100%;margin-right:auto;margin-left:auto;">
+    <table class="center">
       <tr>
         <th style="text-align:centered;" colspan="6">
           <span class="font1">{$biller.name|htmlsafe}</span>
@@ -24,7 +24,7 @@
       </tr>
     </table>
     <!-- Summary - start -->
-    <table style="width:100%;">
+    <table>
       <tr>
         <td>To:</td>
         <td colspan="3">{$customer.name|htmlsafe}</td>
