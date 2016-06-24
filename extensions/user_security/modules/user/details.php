@@ -3,7 +3,8 @@
  * Script: details.php
  *      User details page
  * Authors:
- *      Justin Kelly, Nicolas Ruflin, Rich Rowley
+ *      Justin Kelly, Nicolas Ruflin,
+ *      Rich Rowley
  *
  * Last edited:
  *      2016-06-06

@@ -17,6 +17,8 @@
  *           - options    (required if no values supplied) - associative array
  *           - selected   (optional) - string default not set
  *           - output     (required if not options supplied) - array
+ *           - tabindex   (optional) - value to set tabindex to. If not specified,
+ *                                     there is no tabindex.
  * Purpose:  Prints the list of <option> tags generated from
  *           the passed parameters
  * @link http://smarty.php.net/manual/en/language.function.html.options.php {html_image}
@@ -30,25 +32,25 @@
 function smarty_function_html_options($params, &$smarty)
 {
     require_once $smarty->_get_plugin_filepath('shared','escape_special_chars');
-    
+
     $name = null;
     $values = null;
     $options = null;
     $selected = array();
     $output = null;
-    
+
     $extra = '';
-    
+
     foreach($params as $_key => $_val) {
         switch($_key) {
             case 'name':
                 $$_key = (string)$_val;
                 break;
-            
+
             case 'options':
                 $$_key = (array)$_val;
                 break;
-                
+
             case 'values':
             case 'output':
                 $$_key = array_values((array)$_val);
@@ -57,7 +59,7 @@ function smarty_function_html_options($params, &$smarty)
             case 'selected':
                 $$_key = array_map('strval', array_values((array)$_val));
                 break;
-                
+
             default:
                 if(!is_array($_val)) {
                     $extra .= ' '.$_key.'="'.smarty_function_escape_special_chars($_val).'"';
@@ -68,23 +70,19 @@ function smarty_function_html_options($params, &$smarty)
         }
     }
 
-    if (!isset($options) && !isset($values))
+    if (!isset($options) && !isset($values) && !isset($tabindex))
         return ''; /* raise error here? */
 
     $_html_result = '';
 
     if (isset($options)) {
-        
         foreach ($options as $_key=>$_val)
             $_html_result .= smarty_function_html_options_optoutput($_key, $_val, $selected);
-
     } else {
-        
         foreach ($values as $_i=>$_key) {
             $_val = isset($output[$_i]) ? $output[$_i] : '';
             $_html_result .= smarty_function_html_options_optoutput($_key, $_val, $selected);
         }
-
     }
 
     if(!empty($name)) {

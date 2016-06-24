@@ -11,7 +11,7 @@
  *    2016-05-28
  *
  * License:
- *  GPL v2 or above
+ *  GPL v3 or above
  */
 
 // stop the direct browsing to this file - let index.php handle which files get displayed
@@ -26,13 +26,14 @@ if (!empty($_POST['password'])) {
         $smarty->assign('confirm_error', 'Password and Confirm Password do not match.');
         $ok = false;
     } else {
-        $_POST['password'] = MD5($_POST['password']);
+        $_POST['password'] = MD5($_POST['password']); // OK. Save hashed password
     }
 }
 
 // @formatter:off
 if ($ok) {
     if ($op === 'insert_user') {
+        $_POST['domain_id'] = domain_id::get();
         // From add.tpl
         try {
             pdoRequest('INSERT', 'user', array('id'));
@@ -45,11 +46,11 @@ if ($ok) {
             $whereClause = new WhereClause();
             $whereClause->addItem(new WhereItem(false, 'id', '=', $_POST['id'], false, 'AND'));
             $whereClause->addItem(new WhereItem(false, 'domain_id', '=', $_POST['domain_id'], false));
-
             pdoRequest('UPDATE', 'user', array('id' => ':id', 'domain_id' => ':domain_id'), $whereClause);
             $saved = true;
         } catch (Exception $e) {
             error_log("Unable to update the " . TB_PREFIX . "user record. Error reported: " . $e->getMessage());
+            echo '<h1>Unable to update the ' . TB_PREFIX . 'user record.</h1>';
         }
     }
 }
