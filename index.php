@@ -2,7 +2,6 @@
 /*
  * Script: index.php
  * Main controller file for SimpleInvoices
- *
  * License:
  * GPL v3 or above
  */
@@ -26,6 +25,7 @@ $action = isset($_GET['case'])   ? filenameEscape($_GET['case'])   : null;
 $databaseBuilt     = false;
 $databasePopulated = false;
 $patchCount        = 0;
+$smarty            = null;
 // @formatter:on
 
 // Will be set in the following init.php call to extensions that are enabled.
@@ -40,6 +40,7 @@ foreach ($ext_names as $ext_name) {
         require_once ("./extensions/$ext_name/include/init.php");
     }
 }
+
 $smarty->assign("help_image_path", $help_image_path);
 
 // **********************************************************
@@ -268,26 +269,26 @@ if ($module != 'auth') {
 if ($menu == "true") {
     // Check for menu.tpl files for extensions. The content of these files is:
     //
-    //      <!-- BEFORE:tax_rates -->
-    //      <li>
-    //        <a {if $pageActive == "custom_flags"} class="active"{/if} href="index.php?module=custom_flags&amp;view=manage">
-    //          {$LANG.custom_flags_upper}
-    //        </a>
-    //      </li>
-    //      {if $subPageActive == "custom_flags_view"}
-    //        <li>
-    //          <a class="active active_subpage" href="#">
-    //            {$LANG.view}
-    //          </a>
-    //        </li>
-    //      {/if}
-    //      {if $subPageActive == "custom_flags_edit"}
-    //        <li>
-    //          <a class="active active_subpage" href="#">
-    //            {$LANG.edit}
-    //          </a>
-    //        </li>
-    //      {/if}
+    // <!-- BEFORE:tax_rates -->
+    // <li>
+    // <a {if $pageActive == "custom_flags"} class="active"{/if} href="index.php?module=custom_flags&amp;view=manage">
+    // {$LANG.custom_flags_upper}
+    // </a>
+    // </li>
+    // {if $subPageActive == "custom_flags_view"}
+    // <li>
+    // <a class="active active_subpage" href="#">
+    // {$LANG.view}
+    // </a>
+    // </li>
+    // {/if}
+    // {if $subPageActive == "custom_flags_edit"}
+    // <li>
+    // <a class="active active_subpage" href="#">
+    // {$LANG.edit}
+    // </a>
+    // </li>
+    // {/if}
     //
     // This means the content of the extension's menu.tpl file will be inserted before the
     // following line in the default menu.tpl file:
@@ -358,23 +359,25 @@ $path = '';
 // menu item at the end of the section with "$LANG.xxxxx" value assigned
 // to the attribute.
 $extension_insertion_files = array();
-$perform_extension_insertions =
-    (($module == 'reports'         && $view == 'index')  ||
-     ($module == 'system_defaults' && $view == 'manage'));
+$perform_extension_insertions = (($module == 'reports' && $view == 'index') ||
+                 ($module == 'system_defaults' && $view == 'manage'));
 
 foreach ($ext_names as $ext_name) {
     $tpl_file = "./extensions/$ext_name/templates/default/$module/$view.tpl";
     if (file_exists($tpl_file)) {
-        // If $perform_extension_insertions is true, the $path and $extensionTemplates are not set/incremented intentionally.
-        // The logic runs through the normal report template logic with the index.tpl files for each one
-        // of the extensions reports will be loaded for the section it goes in.
+        // If $perform_extension_insertions is true, the $path and
+        // $extensionTemplates are not set/incremented intentionally.
+        // The logic runs through the normal report template logic
+        // with the index.tpl files for each one of the extensions
+        // reports will be loaded for the section it goes in.
         if ($perform_extension_insertions) {
             $content = file_get_contents($tpl_file);
-            if (($pos = strpos($content,'data-section="')) === false) {
+            $type = "";
+            if (($pos = strpos($content, 'data-section="')) === false) {
                 $section = $smarty->_tpl_vars['LANG']['other'];
             } else {
                 $pos += 14;
-                $str = substr($content,$pos);
+                $str = substr($content, $pos);
                 if (preg_match('/^BEFORE \{\$LANG\./', $str)) {
                     $pos += 14;
                     $type = "BEFORE ";
@@ -383,10 +386,10 @@ foreach ($ext_names as $ext_name) {
                     $type = "";
                 }
                 $end = strpos($content, '}', $pos);
-                    $len = $end - $pos;
-                    $lang_element = substr($content, $pos, $len);
-                    $section = $smarty->_tpl_vars['LANG'][$lang_element];
-                }
+                $len = $end - $pos;
+                $lang_element = substr($content, $pos, $len);
+                $section = $smarty->_tpl_vars['LANG'][$lang_element];
+            }
             // @formatter:off
             $vals = array("file"    => "." . $tpl_file,
                           "module"  => $module,

@@ -1,13 +1,14 @@
 {*
  * Script: details.tpl
- * Biller details template
- * Last edited: * 2008-08-25 
+ *     Biller details template
+ * Last edited:
+ *     2008-08-25 
  * License: GPL v3 or above
  *}
 <form name="frmpost"
       action="index.php?module=user&view=save&id={$smarty.get.id|urlencode}"
       method="post" id="frmpost" onsubmit="return checkForm(this);">
-  {if $smarty.get.action== 'view' }
+{if $smarty.get.action== 'view' }
   <div class="si_form si_form_view">
     <table>
       <tr>
@@ -47,8 +48,7 @@
       {$LANG.cancel}
     </a>
   </div>
-  {/if}
-  {if $smarty.get.action== 'edit' }
+{elseif $smarty.get.action== 'edit' }
   <div class="si_form">
     <table>
       <tr>
@@ -151,7 +151,6 @@
     </div>
   </div>
   <input type="hidden" name="op" value="edit_user" />
-  <input type="hidden" name="id" value="{$user.id|htmlsafe}" />
   <input type="hidden" name="domain_id" value="{$user.domain_id|htmlsafe}" />
-  {/if}
+{/if}
 </form>

@@ -37,7 +37,7 @@ class FeatureFactory {
   function &get_instance() {
     static $instance = null;
     if (is_null($instance)) {
-      $instance =& new FeatureFactory();
+      $instance =  new FeatureFactory();
     };
 
     return $instance;

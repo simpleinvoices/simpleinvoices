@@ -1,5 +1,9 @@
 <?php
+global $module,
+       $LANG,
+       $acl;
 try {
+    $checkPermission = "";
     $auth_session = new Zend_Session_Namespace('Zend_Auth');
 
     $acl_view = (isset($_GET['view']) ? $_GET['view'] : null);

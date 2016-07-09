@@ -3,9 +3,9 @@
 require_once(HTML2PS_DIR.'box.generic.formatted.php');
 
 class SimpleInlineBox extends GenericBox {
-  function SimpleInlineBox() {
-    $this->GenericBox();
-  }
+    function __construct() {
+      parent::__construct();
+    }
 
   function readCSS(&$state) {
     parent::readCSS($state);
@@ -13,11 +13,11 @@ class SimpleInlineBox extends GenericBox {
     $this->_readCSS($state,
                     array(CSS_TEXT_DECORATION,
                           CSS_TEXT_TRANSFORM));
-    
+
     // '-html2ps-link-target'
     global $g_config;
     if ($g_config["renderlinks"]) {
-      $this->_readCSS($state, 
+      $this->_readCSS($state,
                       array(CSS_HTML2PS_LINK_TARGET));
     };
   }
@@ -41,7 +41,7 @@ class SimpleInlineBox extends GenericBox {
   function show(&$driver) {
     parent::show($driver);
 
-    $strategy =& new StrategyLinkRenderingNormal();
+    $strategy =  new StrategyLinkRenderingNormal();
     $strategy->apply($this, $driver);
   }
 }

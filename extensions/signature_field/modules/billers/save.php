@@ -16,6 +16,8 @@
  * Website:
  * http://www.simpleinvoices.org
  */
+global $smarty,
+       $pdoDb;
 
 // stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
@@ -24,30 +26,31 @@ checkLogin();
 $op = !empty($_POST['op']) ? addslashes($_POST['op']) : NULL;
 
 $saved = false;
-
-// @formatter:off
 if ($op === 'insert_biller') {
     // From add.tpl
     try {
-        pdoRequest('INSERT', 'biller', array('id'));
+        $pdoDb->setExcludedFields(array('id' => 1));
+        $pdoDb->re('INSERT', 'biller');
         $saved = true;
     } catch (Exception $e) {
         echo '<h1>Unable to add the new ' . TB_PREFIX . 'biller record.</h1>';
     }
 } elseif ($op === 'edit_biller' && isset($_POST['save_biller'])) {
     try {
-        $whereClause = new WhereClause();
-        $whereClause->addItem(new WhereItem(false, 'id', '=', $_POST['id'], false, 'AND'));
-        $whereClause->addItem(new WhereItem(false, 'domain_id', '=', $_POST['domain_id'], false));
-        
-        pdoRequest('UPDATE', 'biller', array('id' => ':id', 'domain_id' => ':domain_id'), $whereClause);
+        $where = new WhereClause();
+        $where->addItem(new WhereItem(false, 'id', '=', $_GET['id'], false, 'AND'));
+        $where->addItem(new WhereItem(false, 'domain_id', '=', $_POST['domain_id'], false));
+
+        $pdoDb->addToWhere($where);
+        $pdoDb->setExcludedFields(array('id' => 1, 'domain_id' => 1));
+        $pdoDb->request('UPDATE', 'biller');
         $saved = true;
     } catch (Exception $e) {
         error_log("Unable to update the " . TB_PREFIX . "biller record. Error reported: " . $e->getMessage());
     }
 }
 
-$smarty->assign('saved'     , $saved);
+$smarty->assign('saved', $saved);
+
 $smarty->assign('pageActive', 'biller');
 $smarty->assign('active_tab', '#people');
-// @formatter:on

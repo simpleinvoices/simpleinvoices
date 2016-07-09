@@ -1,4 +1,5 @@
 <?php
+require_once 'include/class/PdoDb.php';
 
 /**
  * Class for a single test item in the <b>WHERE</b> clause.
@@ -6,14 +7,15 @@
  */
 class WhereItem {
     const CONNECTORS = '/AND|OR/';
-    const OPERATORS = '/^(=|<>|<|>|<=|>=)$/';
-    private $open_paren;
-    private $field;
-    private $operator;
-    private $value;
+    const OPERATORS = '/^(=|<>|<|>|<=|>=|BETWEEN|LIKE|IN)$/';
+
     private $close_paren;
     private $connector;
+    private $field;
+    private $open_paren;
+    private $operator;
     private $token;
+    private $value;
 
     /**
      * Class constructor
@@ -35,10 +37,8 @@ class WhereItem {
         $this->open_paren = $open_paren;
         $this->field = $field;
         $this->operator = strtoupper($operator);
-        $this->value = $value;
         $this->close_paren = $close_paren;
         $this->connector = (isset($connector) ? strtoupper($connector) : '');
-        $this->token = ':' . $field;
 
         if (!preg_match(self::OPERATORS, $this->operator)) {
             throw new Exception("WhereItem - Invalid operator, $this->operator, specified.");
@@ -47,26 +47,74 @@ class WhereItem {
         if (!empty($this->connector) && !preg_match(self::CONNECTORS, $this->connector)) {
             throw new Exception("WhereItem - Invalid connector, $this->connector, specified.");
         }
+
+        switch ($this->operator) {
+            case 'BETWEEN':
+                if (!is_array($value) || count($value) != 2) {
+                    throw new Exception("WhereItem - Invalid value for BETWEEN operator. Must be an array of two elements.");
+                }
+                $this->value = $value;
+                break;
+
+            case 'IN':
+                if (!is_array($value)) {
+                    throw new Exception("WhereItem - Invalid value for IN operator. Must be an array.");
+                }
+                $this->value = $value;
+                break;
+
+            default:
+                $this->value = $value;
+                break;
+        }
+        $this->token = ':' . $field; // Made unique in build.
     }
 
     /**
      * Builds the formatted selection criterion for this object.
+     * @param integer $cnt Number of tokens processed in this build.
+     *        Note this parameter is <i>passed by reference</i> so it's updated
+     *        value will be returned in it. Set it to <b>0</b> on the initial call and
+     *        return the updated variable in subsequent calls.
      * @param array $keyPairs Associative array indexed by the PDO <i>token</i> that
      *        references the value of the token. Example: $keyParis[<b>':domain_id'</b>] with
      *        a value of <b>1</b>.
      * @return string Formatted <b>WHERE</b> clause component for this criterion.
      */
-    public function build(&$keyPairs) {
+    public function build(&$cnt, &$keyPairs) {
         $item = '';
         if ($this->open_paren) $item .= '(';
+        $item .= "`$this->field` $this->operator ";
+        switch ($this->operator) {
+            case 'BETWEEN':
+                $tk1 = PdoDb::makeToken($this->token, $cnt);
+                $tk2 = PdoDb::makeToken($this->token, $cnt);
+                $item .= "$tk1 AND $tk2";
+                $keyPairs[$tk1] = $this->value[0];
+                $keyPairs[$tk2] = $this->value[1];
+                break;
 
-        $item .= $this->field . ' ' . $this->operator . ' ' . $this->token . ' ';
+            case 'IN':
+                $item = '(';
+                for($i=0; $i<count($this->token); $i++) {
+                    $tk = PdoDb::makeToken($this->token[$i], $cnt);
+                    $item .= ($i == 0 ? '' : ', ');
+                    $item .= $tk;
+                    $keyPairs[$tk] = $this->value[$i];
+                }
+                $item .= ')';
+                break;
+
+            default:
+                $tk = PdoDb::makeToken($this->token, $cnt);
+                $item .= $tk . ' ';
+                $keyPairs[$tk] = $this->value;
+                break;
+        }
 
         if ($this->close_paren) $item .= ') ';
 
-        $item .= (empty($this->connector) ? ';' : $this->connector . ' ');
-
-        $keyPairs[$this->token] = $this->value;
+        $item .= (empty($this->connector) ? '' : $this->connector . ' ');
 
         return $item;
     }

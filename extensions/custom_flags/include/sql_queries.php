@@ -170,14 +170,15 @@ function updateProduct_cflgs($domain_id = '') {
     $attributes = $sth->fetchAll();
 
     $attr = array();
-    foreach ($attributes as $k => $v) {
-        if ($_POST['attribute' . $v[id]] == 'true') {
-            $attr[$v['id']] = $_POST['attribute' . $v[id]];
+    foreach ($attributes as $v) {
+        $tmp = (isset($_POST['attribute' . $v['id']]) ? $_POST['attribute' . $v['id']] : "");
+        if ($tmp == 'true') {
+            $attr[$v['id']] = $tmp;
         }
     }
 
-    $notes_as_description = ($_POST['notes_as_description'] == 'true' ? 'Y' : NULL);
-    $show_description = ($_POST['show_description'] == 'true' ? 'Y' : NULL);
+    $notes_as_description = (isset($_POST['notes_as_description']) && $_POST['notes_as_description'] == 'true' ? 'Y' : NULL);
+    $show_description = (isset($_POST['show_description']) && $_POST['show_description'] == 'true' ? 'Y' : NULL);
 
     $custom_flags = '0000000000';
     for ($i = 1; $i <= 10; $i++) {
@@ -187,8 +188,7 @@ function updateProduct_cflgs($domain_id = '') {
     }
 
     // @formatter:off
-    $sql = "UPDATE " .
-                TB_PREFIX . "products
+    $sql = "UPDATE " . TB_PREFIX . "products
             SET description          = :description,
                 enabled              = :enabled,
                 default_tax_id       = :default_tax_id,
@@ -208,22 +208,22 @@ function updateProduct_cflgs($domain_id = '') {
               AND domain_id = :domain_id";
 
     return dbQuery($sql, ':domain_id'           , $domain_id              ,
-                         ':description'         , $_POST[description]     ,
-                         ':enabled'             , $_POST['enabled']       ,
-                         ':notes'               , $_POST[notes]           ,
-                         ':default_tax_id'      , $_POST['default_tax_id'],
-                         ':custom_field1'       , $_POST[custom_field1]   ,
-                         ':custom_field2'       , $_POST[custom_field2]   ,
-                         ':custom_field3'       , $_POST[custom_field3]   ,
-                         ':custom_field4'       , $_POST[custom_field4]   ,
-                         ':unit_price'          , $_POST[unit_price]      ,
-                         ':cost'                , $_POST[cost]            ,
-                         ':reorder_level'       , $_POST[reorder_level]   ,
+                         ':description'         , (isset($_POST['description'])    ? $_POST['description']    : ""),
+                         ':enabled'             , (isset($_POST['enabled'])        ? $_POST['enabled']        : ""),
+                         ':notes'               , (isset($_POST['notes'])          ? $_POST['notes']          : ""),
+                         ':default_tax_id'      , (isset($_POST['default_tax_id']) ? $_POST['default_tax_id'] : ""),
+                         ':custom_field1'       , (isset($_POST['custom_field1'])  ? $_POST['custom_field1']  : ""),
+                         ':custom_field2'       , (isset($_POST['custom_field2'])  ? $_POST['custom_field2']  : ""),
+                         ':custom_field3'       , (isset($_POST['custom_field3'])  ? $_POST['custom_field3']  : ""),
+                         ':custom_field4'       , (isset($_POST['custom_field4'])  ? $_POST['custom_field4']  : ""),
+                         ':unit_price'          , (isset($_POST['unit_price'])     ? $_POST['unit_price']     : ""),
+                         ':cost'                , (isset($_POST['cost'])           ? $_POST['cost']           : ""),
+                         ':reorder_level'       , (isset($_POST['reorder_level'])  ? $_POST['reorder_level']  : ""),
                          ':attribute'           , json_encode($attr)      ,
                          ':notes_as_description', $notes_as_description   ,
                          ':show_description'    , $show_description       ,
                          ':custom_flags'        , $custom_flags           ,
-                         ':id'                  , $_GET[id]
+                         ':id'                  , $_GET['id']
                   );
     // @formatter:on
 }
@@ -236,7 +236,6 @@ function updateProduct_cflgs($domain_id = '') {
  * @return PDOStatement result from dbQuery.
  */
 function insertProduct_cflgs($enabled = 1, $visible = 1, $domain_id = '') {
-    global $logger;
     $domain_id = domain_id::get($domain_id);
 
     if (isset($_POST['enabled'])) $enabled = $_POST['enabled'];
@@ -253,23 +252,17 @@ function insertProduct_cflgs($enabled = 1, $visible = 1, $domain_id = '') {
         }
     }
 
-    $logger->log('Attr: ' . var_export($attributes, true), Zend_Log::INFO);
     $attr = array();
-    foreach ($attributes as $k => $v) {
-        //$logger->log('Attr key: ' . $k, Zend_Log::INFO);
-        //$logger->log('Attr value: ' . var_export($v, true), Zend_Log::INFO);
-        //$logger->log('Attr set value: ' . $k, Zend_Log::INFO);
-        if ($_POST['attribute' . $v[id]] == 'true') {
-            // $attr[$k]['attr_id'] = $v['id'];
-            $attr[$v['id']] = $_POST['attribute' . $v[id]];
-            // $attr[$k]['a$v['id']] = $_POST['attribute'.$v[id]];
+    foreach ($attributes as $v) {
+        if ($_POST['attribute' . $v['id']] == 'true') {
+            $attr[$v['id']] = $_POST['attribute' . $v['id']];
         }
     }
-    //$logger->log('Attr array: ' . var_export($attr, true), Zend_Log::INFO);
     $notes_as_description = ($_POST['notes_as_description'] == 'true' ? 'Y' : NULL);
     $show_description = ($_POST['show_description'] == 'true' ? 'Y' : NULL);
 
     // @formatter:off
+    $cost = (isset($_POST['cost']) ? $_POST['cost'] : "");
     $sql = "INSERT into
                 ".TB_PREFIX."products
                 (
@@ -315,7 +308,7 @@ function insertProduct_cflgs($enabled = 1, $visible = 1, $domain_id = '') {
     return dbQuery($sql, ':domain_id'           ,$domain_id,
                          ':description'         , $_POST['description'],
                          ':unit_price'          , $_POST['unit_price'],
-                         ':cost'                , $_POST['cost'],
+                         ':cost'                , $cost,
                          ':reorder_level'       , $_POST['reorder_level'],
                          ':custom_field1'       , $_POST['custom_field1'],
                          ':custom_field2'       , $_POST['custom_field2'],

@@ -12,6 +12,8 @@
  */
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
+global $smarty;
+
 checkLogin();
 
 $smarty -> assign('pageActive', 'invoice_new');
@@ -33,7 +35,6 @@ if ($_POST['action'] == "insert" ) {
 
     // 1 = Total Invoices
     if($type == total_invoice && $saved) {
-        $logger->log('Total style invoice created, ID: '.$id, Zend_Log::INFO);
         insertProduct(0,0);
         $product_id = lastInsertId();
         // @formatter:off
@@ -63,15 +64,15 @@ if ($_POST['action'] == "insert" ) {
 
     if($type == total_invoice && $saved) {
         // @formatter:off
-        $sql = "UPDATE " . TB_PREFIX . "products 
+        $sql = "UPDATE " . TB_PREFIX . "products
                 SET unit_price  = :price,
-                    description = :description 
+                    description = :description
                 WHERE id       = :id
                  AND domain_id = :domain_id";
         dbQuery($sql, ':price'      , $_POST['unit_price']  ,
                       ':description', $_POST['description0'],
                       ':id'         , $_POST['products0'],
-                      ':domain_id'  , $auth_session->domain_id);
+                      ':domain_id'  , domain_id::get());
         // @formatter:on
     }
 
@@ -84,16 +85,17 @@ if ($_POST['action'] == "insert" ) {
             if ($_POST["quantity$i"] != null) {
                 // @formatter:off
                 //new line item added in edit page
-                if ($_POST["line_item$i"] == "") {
-                    insertInvoiceItem($id, $_POST["quantity$i"]  , $_POST["products$i"]   ,
-                                       $i, $_POST["tax_id"][$i]  , $_POST["description$i"],
-                                           $_POST["unit_price$i"], $_POST["attribute"][$i]);
-                }
-
-                if ($_POST["line_item$i"] != "") {
-                    updateInvoiceItem($_POST["line_item$i"], $_POST["quantity$i"]  , $_POST["products$i"]   ,
-                                      $i                   , $_POST['tax_id'][$i]  , $_POST["description$i"],
-                                                             $_POST["unit_price$i"], $_POST["attribute"][$i]);
+                $item    = (isset($_POST["line_item$i"]  ) ? $_POST["line_item$i"  ] : "");
+                $qty     = (isset($_POST["quantity$i"]   ) ? $_POST["quantity$i"   ] : "");
+                $product = (isset($_POST["products$i"]   ) ? $_POST["products$i"   ] : "");
+                $desc    = (isset($_POST["description$i"]) ? $_POST["description$i"] : "");
+                $price   = (isset($_POST["unit_price$i"] ) ? $_POST["unit_price$i" ] : "");
+                $attr    = (isset($_POST["attribute$i"]  ) ? $_POST["attribute$i"  ] : "");
+                $tax_id  = (isset($_POST["tax_id$i"]     ) ? $_POST["tax_id$i"     ] : "");
+                if ($item == "") {
+                    insertInvoiceItem($id  , $qty, $product, $i, $tax_id, $desc, $price, $attr);
+                } else {
+                    updateInvoiceItem($item, $qty, $product, $i, $tax_id, $desc, $price, $attr);
                 }
                 // @formatter:on
             }
@@ -106,5 +108,3 @@ if ($_POST['action'] == "insert" ) {
 //Get type id - so do add into redirector header
 $smarty->assign('saved', $saved);
 $smarty->assign('id', $id);
-
-?>

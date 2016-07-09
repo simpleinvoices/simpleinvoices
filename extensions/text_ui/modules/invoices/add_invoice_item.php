@@ -36,4 +36,3 @@ $smarty -> assign("number_of_attributes", $number_of_products['0']['count']);
 
 */
 
-?>

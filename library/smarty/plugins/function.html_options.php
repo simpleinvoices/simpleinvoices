@@ -29,8 +29,7 @@
  * @return string
  * @uses smarty_function_escape_special_chars()
  */
-function smarty_function_html_options($params, &$smarty)
-{
+function smarty_function_html_options($params, &$smarty) {
     require_once $smarty->_get_plugin_filepath('shared','escape_special_chars');
 
     $name = null;
@@ -38,9 +37,8 @@ function smarty_function_html_options($params, &$smarty)
     $options = null;
     $selected = array();
     $output = null;
-
+    $tabindex = null;
     $extra = '';
-
     foreach($params as $_key => $_val) {
         switch($_key) {
             case 'name':
@@ -70,14 +68,13 @@ function smarty_function_html_options($params, &$smarty)
         }
     }
 
-    if (!isset($options) && !isset($values) && !isset($tabindex))
-        return ''; /* raise error here? */
+    if (!isset($options) && !isset($values) && !isset($tabindex)) return ''; // raise error here?
 
     $_html_result = '';
-
     if (isset($options)) {
-        foreach ($options as $_key=>$_val)
+        foreach ($options as $_key=>$_val) {
             $_html_result .= smarty_function_html_options_optoutput($_key, $_val, $selected);
+        }
     } else {
         foreach ($values as $_i=>$_key) {
             $_val = isset($output[$_i]) ? $output[$_i] : '';
@@ -90,15 +87,15 @@ function smarty_function_html_options($params, &$smarty)
     }
 
     return $_html_result;
-
 }
 
 function smarty_function_html_options_optoutput($key, $value, $selected) {
     if(!is_array($value)) {
-        $_html_result = '<option label="' . smarty_function_escape_special_chars($value) . '" value="' .
-            smarty_function_escape_special_chars($key) . '"';
-        if (in_array((string)$key, $selected))
+        $_html_result = '<option label="' . smarty_function_escape_special_chars($value) .
+                              '" value="' . smarty_function_escape_special_chars($key) . '"';
+        if (in_array((string)$key, $selected)) {
             $_html_result .= ' selected="selected"';
+        }
         $_html_result .= '>' . smarty_function_escape_special_chars($value) . '</option>' . "\n";
     } else {
         $_html_result = smarty_function_html_options_optgroup($key, $value, $selected);
@@ -114,7 +111,3 @@ function smarty_function_html_options_optgroup($key, $values, $selected) {
     $optgroup_html .= "</optgroup>\n";
     return $optgroup_html;
 }
-
-/* vim: set expandtab: */
-
-?>

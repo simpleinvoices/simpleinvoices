@@ -1,14 +1,14 @@
 {*
-* Script: details.tpl
-*   Biller details template
-*
-* Last edited:
-*    2016-01-16 by Rich Rowley to add signature field.
-*    2008-08-25
-*
-* License:
-*  GPL v3 or above
-*}
+ * Script: details.tpl
+ *   Biller details template
+ *
+ * Last edited:
+ *    2016-01-16 by Rich Rowley to add signature field.
+ *    2008-08-25
+ *
+ * License:
+ *  GPL v3 or above
+ *}
 <form name="frmpost"
       action="index.php?module=billers&amp;view=save&amp;id={$smarty.get.id}"
       method="post"
@@ -150,7 +150,6 @@
 
 {if $smarty.get.action== 'edit' }
 <div class="si_form">
-  <input type="hidden" name="id" value="{$biller.id}" />
   <input type="hidden" name="domain_id" value="{$biller.domain_id}" />
   <table>
     <tr>

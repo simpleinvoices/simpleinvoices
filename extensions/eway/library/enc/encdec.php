@@ -1,48 +1,51 @@
-<HTML>
-
-<HEAD>
+<html>
+<head>
 <?php
-include('clsencrypt.php');
 // Create a new Encryption Object
-$enc = new Encryption;
+$enc = new Encryption();
 $encstr = '';
 $decstr = '';
-if (isset($HTTP_POST_VARS['encrypt'])) {
-    $key = $HTTP_POST_VARS['keystr']; 
+if (isset($_POST['encrypt'])) {
+    $key = $_POST['keystr'];
     // Encrypt the Source Text
-    $encstr = $enc->encrypt($key, $HTTP_POST_VARS['text']);
-} elseif (isset($HTTP_POST_VARS['decrypt'])) {
-    $encstr = $HTTP_POST_VARS['enctext'];
-    $key = $HTTP_POST_VARS['keystr']; 
+    $encstr = $enc->encrypt($key, $_POST['text']);
+} elseif (isset($_POST['decrypt'])) {
+    $encstr = $_POST['enctext'];
+    $key = $_POST['keystr'];
     // Decrypt the Encrypted Text
-    $decstr = $enc->decrypt($key, $HTTP_POST_VARS['enctext']);
-} 
-
+    $decstr = $enc->decrypt($key, $_POST['enctext']);
+}
 ?>
-</HEAD>	
-	
-<BODY>
-
-<FORM action = '<?php echo urlsafe($_SERVER['PHP_SELF']) ?>' method = 'post'>
-<BR>Original Text<BR>
-<TEXTAREA name = 'text' cols="40" rows="8" wrap="soft">Welcome to the Real World.</TEXTAREA>
-<BR>Enter Key String<BR>
-<INPUT name = 'keystr' type = 'text' value = 'halih'>
-<BR><Input type='submit' value = 'Encrypt' name='encrypt'><Input type='submit' value = 'Decrypt' name='decrypt'>
-<BR>Encrypted Text<BR>
-<TEXTAREA name = 'enctext' cols="40" rows="8" wrap="soft"><?php
-if (isset($HTTP_POST_VARS['encrypt']) || isset($HTTP_POST_VARS['decrypt']))
+</head>
+<body>
+<form action = '<?php echo urlsafe($_SERVER['PHP_SELF']) ?>' method = 'post'>
+<br/>
+Original Text
+<br/>
+<textarea name = 'text' cols="40" rows="8" wrap="soft">Welcome to the Real World.</textarea>
+<br/>
+Enter Key String
+<br/>
+<input name = 'keystr' type = 'text' value = 'halih'/>
+<br/>
+<input type='submit' value = 'Encrypt' name='encrypt'/>
+<input type='submit' value = 'Decrypt' name='decrypt'/>
+<br/>Encrypted Text<br/>
+<textarea name = 'enctext' cols="40" rows="8" wrap="soft">
+<?php
+if (isset($_POST['encrypt']) || isset($_POST['decrypt']))
     echo htmlsafe($encstr);
-
-?></TEXTAREA>
-<BR>Decrypted Text<BR>
-<TEXTAREA name = 'dectext' cols="40" rows="8" wrap="soft"><?php
-if (isset($HTTP_POST_VARS['encrypt']) || isset($HTTP_POST_VARS['decrypt']))
+?>
+</textarea>
+<br/>
+Decrypted Text
+<br/>
+<textarea name = 'dectext' cols="40" rows="8" wrap="soft">
+<?php
+if (isset($_POST['encrypt']) || isset($_POST['decrypt']))
     echo htmlsafe($decstr);
-
-?></TEXTAREA>
-</FORM>
-
-</BODY>
-
-</HTML>
+?>
+</textarea>
+</form>
+</body>
+</html>

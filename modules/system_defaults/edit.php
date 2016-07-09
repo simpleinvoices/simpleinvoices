@@ -1,4 +1,8 @@
 <?php
+global $LANG,
+       $smarty,
+       $extension_php_insert_files,
+       $perform_extension_php_insertions;
 
 // stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
@@ -37,6 +41,7 @@ switch ($get_val) {
      * Note: Only show the folder names in src/invoices/templates
      ****************************************************************/
     $handle = opendir("./templates/invoices/");
+    $files = array();
     while ($template = readdir($handle)) {
       if ($template != ".."           &&
           $template != "."            &&
@@ -147,7 +152,7 @@ switch ($get_val) {
     break;
 
   case "preference_id":
-    $pref        = getPreference($defaults['preference']);
+//    $pref        = getPreference($defaults['preference']);
     $preferences = getActivePreferences();
 
     if (empty($preferences)) {

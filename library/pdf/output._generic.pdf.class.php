@@ -11,11 +11,11 @@ class OutputDriverGenericPDF extends OutputDriverGeneric {
 
   function content_type() { return ContentType::pdf(); }
 
-  function get_pdf_version() { 
-    return $this->pdf_version; 
+  function get_pdf_version() {
+    return $this->pdf_version;
   }
 
-  function reset($media) {
+  function reset(&$media) {
     OutputDriverGeneric::reset($media);
   }
 
@@ -23,4 +23,3 @@ class OutputDriverGenericPDF extends OutputDriverGeneric {
     $this->pdf_version = $version;
   }
 }
-?>

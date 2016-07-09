@@ -12,8 +12,6 @@ class eway {
     }
 
     public function pre_check() {
-        global $logger;
-
         $return = 'false';
 
         //set customer,biller and preference if not defined
@@ -34,7 +32,6 @@ class eway {
             $return = 'true';
         }
 
-        // $logger->log("eway pre check: " . $return, Zend_Log::INFO);
         return $return;
     }
 
@@ -60,8 +57,8 @@ class eway {
         $eway_invoice_total = htmlsafe(trim($value));
         $logger->log("eway total: " . $eway_invoice_total, Zend_Log::INFO);
 
-        $enc = new encryption();
         $key = $config->encryption->default->key;
+        $enc = new Encryption();
         $credit_card_number = $enc->decrypt($key, $this->customer['credit_card_number']);
 
         $eway->setTransactionData("TotalAmount", $eway_invoice_total); //mandatory field

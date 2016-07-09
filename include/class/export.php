@@ -16,7 +16,7 @@ class export {
         $this->domain_id = domain_id::get($this->domain_id);
     }
 
-    function showData($data) {
+    public function showData($data) {
         if ($this->file_name == '' && $this->module == 'payment') {
             $this->file_name = 'payment' . $this->id;
         }
@@ -53,7 +53,7 @@ class export {
 
                     default:
                         header('Content-Disposition: attachment; filename="' .
-                               addslashes($preference[pref_inv_heading] . $this->id . '.' .
+                               addslashes($preference['pref_inv_heading'] . $this->id . '.' .
                                $this->file_type) . '"');
                         break;
                 }
@@ -66,9 +66,10 @@ class export {
         // @formatter:on
     }
 
-    function getData() {
+    public function getData() {
         global $smarty;
         global $siUrl;
+        global $show_only_unpaid;
 
         // @formatter:off
         $invoice = new invoice();
@@ -86,18 +87,18 @@ class export {
                     $having_count = 1;
                 }
 
-                if ($this->show_only_unpaid == "yes") {
+                if ($show_only_unpaid == "yes") {
                     if ($having_count == 1) $invoice->having_and = "money_owed";
                     else $invoice->having = "money_owed";
                 }
 
                 $invoice_all = $invoice->select_all('count');
                 $invoices    = $invoice_all->fetchAll();
-
-                foreach ($invoices as $i => $row) {
-                    $statement['total'] = $statement['total'] + $row['invoice_total'];
-                    $statement['owing'] = $statement['owing'] + $row['owing'];
-                    $statement['paid']  = $statement['paid']  + $row['INV_PAID'];
+                $statement   = array();
+                foreach ($invoices as $row) {
+                    $statement['total'] += $row['invoice_total'];
+                    $statement['owing'] += $row['owing'];
+                    $statement['paid']  += $row['INV_PAID'];
                 }
 
                 $templatePath     = "./templates/default/statement/index.tpl";
@@ -110,10 +111,10 @@ class export {
                                     $invoice->start_date . "_" .
                                     $invoice->end_date;
 
-                $smarty->assign('biller_id'       , $biller_id);
+                $smarty->assign('biller_id'       , $billers['id']);
                 $smarty->assign('biller_details'  , $biller_details);
                 $smarty->assign('billers'         , $billers);
-                $smarty->assign('customer_id'     , $customer_id);
+                $smarty->assign('customer_id'     , $this->customer_id);
                 $smarty->assign('customer_details', $customer_details);
                 $smarty->assign('show_only_unpaid', $show_only_unpaid);
                 $smarty->assign('filter_by_date'  , $this->filter_by_date);

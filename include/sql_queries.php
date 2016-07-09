@@ -1,10 +1,28 @@
 <?php
+require_once "include/class/PdoDb.php";
+
+global $config, $auth_session;
 $pdoAdapter = substr($config->database->adapter, 4);
 if (LOGGING) {
     // Logging connection to prevent mysql_insert_id problems. Need to be called before the second connect...
     $log_dbh = db_connector();
 }
+
+/**
+ *
+ * @deprecated - Migrate to PdoDb class
+ *             Rich Rowley 20160702
+ */
 $dbh = db_connector();
+
+// @formatter:off
+$pdoDb = new PdoDb(new DbInfo($pdoAdapter,
+                              $config->database->params->dbname,
+                              $config->database->params->host,
+                              $config->database->params->password,
+                              $config->database->params->username));
+$pdoDb->clearAll(); // to eliminate never used warning.
+// @formatter:on
 
 // Cannot redfine LOGGING (withour PHP PECL runkit extension) since already true in define.php
 // Ref: http://php.net/manual/en/function.runkit-method-redefine.php
@@ -48,25 +66,11 @@ function db_connector() {
                 break;
 
             case "mysql":
-                switch ($config->database->utf8) {
-                    case true:
-                        $connlink = new PDO('mysql:host='   . $config->database->params->host .
-                                                '; port='   . $config->database->params->port .
-                                                '; dbname=' . $config->database->params->dbname,
-                                                              $config->database->params->username,
-                                                              $config->database->params->password,
-                                                array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8;"));
-                        break;
-
-                    case false:
-                    default:
-                        $connlink = new PDO($pdoAdapter . ':host='   . $config->database->params->host .
-                                                         '; port='   . $config->database->params->port .
-                                                         '; dbname=' . $config->database->params->dbname,
-                                                                       $config->database->params->username,
-                                                                       $config->database->params->password);
-                        break;
-                }
+                $connlink = new PDO($pdoAdapter . ':host='   . $config->database->params->host .
+                                                 '; port='   . $config->database->params->port .
+                                                 '; dbname=' . $config->database->params->dbname,
+                                                               $config->database->params->username,
+                                                               $config->database->params->password);
                 break;
         }
         // @formatter:on
@@ -105,7 +109,7 @@ function interpolateQuery($query, $params) {
 
     // Walk the array to see if we can add single-quotes to strings
     array_walk($values, create_function('&$v, $k', 'if (!is_numeric($v) && $v!="NULL") $v = "\'".$v."\'";'));
-    $query = preg_replace($keys, $values, $query, 1, $count);
+    $query = preg_replace($keys, $values, $query, 1);
     return $query;
 }
 
@@ -165,7 +169,7 @@ function dbQuery($sqlQuery) {
  *        the default, the normal logging is performed and only errors
  *        are written to the error log.
  */
-function dbLogger($sqlQuery, $dump=false) {
+function dbLogger($sqlQuery, $dump = false) {
     // For PDO it gives only the skeleton sql before merging with data
     global $log_dbh;
     global $dbh;
@@ -177,7 +181,7 @@ function dbLogger($sqlQuery, $dump=false) {
     // Compact query to be logged
     $sqlQuery = preg_replace('/  +/', ' ', str_replace(PHP_EOL, '', $sqlQuery));
     if ($can_log && (preg_match('/^\s*select/iD', $sqlQuery) == 0) &&
-                    (preg_match('/^\s*show\s*tables\s*like/iD', $sqlQuery) == 0)) {
+                     (preg_match('/^\s*show\s*tables\s*like/iD', $sqlQuery) == 0)) {
 
         // Only log queries that could result in data/database modification
         $last = NULL;
@@ -215,23 +219,6 @@ function dbLogger($sqlQuery, $dump=false) {
 }
 
 /**
- * Replace field/value pairs in a string.
- * @param string $str_in String to update.
- * @param array $fields This is an array with a key/value pairs to replace in the string.
- */
-function replaceFields($str_in, $fields) {
-    $str = $str_in;
-    if (is_array($fields)) {
-        foreach ($pairs as $old => $new) {
-            $pattern = '/' . $old . '/';
-            $replace = $new;
-            $str = fieldReplace($str, $pattern, $replace);
-        }
-    }
-    return $str;
-}
-
-/**
  * Retrieves the record ID of the most recently inserted row for the session.
  * Note: That the session is for the $dbh whose id was created by AUTO_INCREMENT
  * (MySQL) or a sequence (PostgreSQL). This is a convenience function to handle
@@ -257,12 +244,11 @@ function lastInsertId() {
 /**
  * Load SI Extention information into $config->extension.
  */
-function loadSiExtentions() {
+function loadSiExtentions(&$ext_names) {
     global $config;
     global $dbh;
     global $databaseBuilt;
     global $patchCount;
-    global $ext_names;
 
     $domain_id = domain_id::get();
 
@@ -275,11 +261,11 @@ function loadSiExtentions() {
                     ORDER BY domain_id ASC";
             // @formatter:on
             $sth = dbQuery($sql, ':domain_id', $domain_id) or die(htmlsafe(end($dbh->errorInfo())));
-
+            $DbExtensions = array();
             while ($this_extension = $sth->fetch()) {
-                $DB_extensions[$this_extension['name']] = $this_extension;
+                $DbExtensions[$this_extension['name']] = $this_extension;
             }
-            $config->extension = $DB_extensions;
+            $config->extension = $DbExtensions;
         }
     }
 
@@ -297,6 +283,7 @@ function loadSiExtentions() {
     }
 
     // Populate the array of enabled extensions.
+    $ext_names = array();
     foreach ($config->extension as $extension) {
         if ($extension->enabled == "1") {
             $ext_names[] = $extension->name;
@@ -408,128 +395,10 @@ function _invoice_items_check_fk($invoice, $product, $tax, $update) {
 function getGenericRecord($table, $id, $domain_id = '', $id_field = 'id') {
     $domain_id = domain_id::get($domain_id);
 
-    $record_sql = "SELECT * FROM `" . TB_PREFIX . $table ."`
+    $record_sql = "SELECT * FROM `" . TB_PREFIX . $table . "`
                    WHERE `$id_field` = :id and `domain_id` = :domain_id";
     $sth = dbQuery($record_sql, ':id', $id, ':domain_id', $domain_id);
     return $sth->fetch();
-}
-
-require_once './include/class/WhereClause.php';
-/**
- * Dynamically builds and executes a PDO request for a specified table.
- * @param string $request Type of request. Valid settings are: <b>INSERT</b>, <b>UPDATE</b>, <b>DELETE</b>.
- * @param string $table Database table name. Note that <b>TB_PREFIX</b> will be pre-pended
- *        to this value if not already present.
- * @param array $excluded_fields Array of column names to not use from the <b>$_POST</b> array. These
- *        fields might be present in the WHERE clause but are to be excluded from the INSERT or UPDATE
- *        fields. Typically this is the unique identifier for the record.
- * @param WhereClause $whereClause Object with information needed to build the
- *        <b>WHERE</b> clause for the requested statement.
- * @throws Exception if any unexpected setting or missing information is encountered.
- */
-function pdoRequest($request, $table, $excluded_fields, $whereClause = NULL) {
-    global $dbh;
-    global $pdoAdapter;
-
-    if (!($columns = getTableFields($table))) {
-        throw new Exception("pdoRequest - Invalid table, $table, specified.");
-    }
-
-    $wherePresent = !empty($whereClause);
-    if ($wherePresent && !($whereClause instanceof WhereClause)) {
-        throw new Exception("pdoRequest - Non-empty \$whereClause parameter is not an " .
-                            "instance of the WhereClause class.");
-    }
-
-    $value_pairs = array();
-    $where = ($wherePresent ? $whereClause->build($parm_list) : '');
-    // @formatter:off
-
-    $sql = "";
-    switch ($pdoAdapter) {
-        case "pgsql":
-            break;
-
-        case "mysql":
-            foreach ($columns as $column) {
-                if (isset($_POST[$column])) {
-                    $value_pairs[$column] = $_POST[$column];
-                }
-            }
-
-            $parm_list = array();
-            switch (strtoupper($request)) {
-                case "INSERT":
-                    $sql = "INSERT INTO " . TB_PREFIX . $table . " (\n";
-                    $col_list = "";
-                    $val_list = "";
-                    $first = true;
-                    foreach ($value_pairs as $column => $value) {
-                        $token = ':' . $column;
-                        // Don't add excluded fields to the fields being updated but
-                        // do add them to the parameter list incase they are needed
-                        // the WHERE clause.
-                        if (!isset($excluded_fields[$column])) {
-                            $col_list .= ($first ? "" : ",\n") . $column;
-                            $val_list .= ($first ? "" : ",\n") . $token;
-                            $first     = false;
-                        }
-                        $parm_list[$token] = $value;
-                    }
-                    $sql .= $col_list . ")\n VALUES (\n" . $val_list . ")";
-                    break;
-
-                case "UPDATE":
-                    $sql = "UPDATE " . TB_PREFIX . $table . " SET \n";
-                    $col_token_list = "";
-                    $first = true;
-                    foreach ($value_pairs as $column => $value) {
-                        $token = ':' . $column;
-                        // Don't add excluded fields to the fields being updated but
-                        // do add them to the parameter list incase they are needed
-                        // the WHERE clause.
-                        if (!isset($excluded_fields[$column])) {
-                            $col_token_list .= ($first ? "" : ",\n") . $column . " = " . $token;
-                            $first = false;
-                        }
-                        $parm_list[$token] = $value;
-                    }
-                    $sql .= $col_token_list . ' ' . $where;
-                    break;
-
-                case "DELETE":
-                    break;
-
-                default:
-                    error_log("pdoRequest - Request, $request, not implemented.");
-                    throw new Exception("pdoRequest - Request, $request, not implemented.");
-            }
-
-            if (!($sth = $dbh->prepare($sql))) {
-                error_log("pdoRequest - prepare() error." . print_r($sth->errorInfo(),true));
-                throw new Exception('pdoRequest - prepare() error. See error_log.');
-            }
-
-            foreach ($parm_list as $key => $val) {
-                if (!$sth->bindValue($key, $val)) {
-                    error_log("pdoRequest - bindParm error." . print_r($sth->errorInfo(),true));
-                    throw new Exception('pdoRequest - bindParam() error. See error_log.');
-                }
-            }
-
-            if (!$sth->execute()) {
-                error_log("pdoRequest - execute() error." . print_r($sth->errorInfo(), true));
-                throw new Exception('pdoRequest - execute() error. See error_log.');
-            }
-
-            dbLogger(interpolateQuery($sql, $parm_list));
-            break;
-
-        default:
-            error_log("pdoRequest - Server type, $db_server, not supported.");
-            throw new Exception("pdoRequest - Server type, $db_server, not supported.");
-    }
-    // @formatter:on
 }
 
 /**
@@ -691,6 +560,7 @@ function getCustomFieldLabels($domain_id = '', $noUndefinedLabels = FALSE) {
     $sth = dbQuery($sql, ':domain_id', $domain_id);
 
     $cfl = $LANG['custom_field'] . ' ';
+    $customFields = array();
     for ($i = 0; $customField = $sth->fetch(); $i++) {
         // @formatter:off
         $customFields[$customField['cf_custom_field']] =
@@ -1033,9 +903,9 @@ function insertProduct($enabled = 1, $visible = 1, $domain_id = '') {
     $attributes = $sth->fetchAll();
 
     $attr = array();
-    foreach ($attributes as $k => $v) {
-        if ($_POST['attribute' . $v[id]] == 'true') {
-            $attr[$v['id']] = $_POST['attribute' . $v[id]];
+    foreach ($attributes as $v) {
+        if ($_POST['attribute' . $v['id']] == 'true') {
+            $attr[$v['id']] = $_POST['attribute' . $v['id']];
         }
     }
 
@@ -1104,7 +974,7 @@ function insertProduct($enabled = 1, $visible = 1, $domain_id = '') {
  * @return PDO statement object on success, false on failure.
  */
 function updateProduct($domain_id = '') {
-    if (function_exists(updateProduct_cflgs)) {
+    if (function_exists('updateProduct_cflgs')) {
         return updateProduct_cflgs($domain_id);
     }
     $domain_id = domain_id::get($domain_id);
@@ -1115,9 +985,9 @@ function updateProduct($domain_id = '') {
     $attributes = $sth->fetchAll();
 
     $attr = array();
-    foreach ($attributes as $k => $v) {
-        if ($_POST['attribute' . $v[id]] == 'true') {
-            $attr[$v['id']] = $_POST['attribute' . $v[id]];
+    foreach ($attributes as $v) {
+        if ($_POST['attribute' . $v['id']] == 'true') {
+            $attr[$v['id']] = $_POST['attribute' . $v['id']];
         }
     }
     $notes_as_description = ($_POST['notes_as_description'] == 'true' ? 'Y' : NULL);
@@ -1142,21 +1012,21 @@ function updateProduct($domain_id = '') {
             WHERE id        = :id
               AND domain_id = :domain_id";
     return dbQuery($sql, ':domain_id'           , $domain_id,
-                         ':description'         , $_POST[description],
+                         ':description'         , $_POST['description'],
                          ':enabled'             , $_POST['enabled'],
-                         ':notes'               , $_POST[notes],
+                         ':notes'               , $_POST['notes'],
                          ':default_tax_id'      , $_POST['default_tax_id'],
-                         ':custom_field1'       , $_POST[custom_field1],
-                         ':custom_field2'       , $_POST[custom_field2],
-                         ':custom_field3'       , $_POST[custom_field3],
-                         ':custom_field4'       , $_POST[custom_field4],
-                         ':unit_price'          , $_POST[unit_price],
-                         ':cost'                , $_POST[cost],
-                         ':reorder_level'       , $_POST[reorder_level],
+                         ':custom_field1'       , $_POST['custom_field1'],
+                         ':custom_field2'       , $_POST['custom_field2'],
+                         ':custom_field3'       , $_POST['custom_field3'],
+                         ':custom_field4'       , $_POST['custom_field4'],
+                         ':unit_price'          , $_POST['unit_price'],
+                         ':cost'                , $_POST['cost'],
+                         ':reorder_level'       , $_POST['reorder_level'],
                          ':attribute'           , json_encode($attr),
                          ':notes_as_description', $notes_as_description,
                          ':show_description'    , $show_description,
-                         ':id'                  , $_GET[id]);
+                         ':id'                  , $_GET['id']);
     // @formatter:on
 }
 
@@ -1277,7 +1147,7 @@ function getDefaultGeneric($name, $bool = true, $domain_id = '') {
 function getDefaultCustomer($domain_id = '') {
     $domain_id = domain_id::get($domain_id);
     // @formatter:off
-    $sql = "SELECT c.name AS name FROM " .
+    $sql = "SELECT c.name, c.id AS name FROM " .
                 TB_PREFIX . "customers c, " .
                 TB_PREFIX . "system_defaults s
             WHERE ( s.name      = 'customer'
@@ -1444,7 +1314,7 @@ function setInvoiceStatus($invoice, $status, $domain_id = '') {
             SET status_id =  :status
             WHERE id = :id AND domain_id = :domain_id";
     // @formatter:on
-    $sth = dbQuery($sql, ':status', $status, ':id', $invoice, ':domain_id', $domain_id);
+    dbQuery($sql, ':status', $status, ':id', $invoice, ':domain_id', $domain_id);
 }
 
 function getInvoice($id, $domain_id = '') {
@@ -1621,7 +1491,7 @@ function getSystemDefaults($domain_id = '') {
                         FROM " . TB_PREFIX . "system_defaults def";
         // @formatter:on
         $sth = $db->query($sql_default);
-    } else  {
+    } else {
         // @formatter:off
         $sql_default = "SELECT def.name, def.value
                         FROM " . TB_PREFIX . "system_defaults def
@@ -1636,9 +1506,9 @@ function getSystemDefaults($domain_id = '') {
 
     $lcl_defaults = NULL;
     $default = NULL;
-
     while ($default = $sth->fetch()) {
-        $lcl_defaults["$default[name]"] = $default['value'];
+        $nam = $default['name'];
+        $lcl_defaults["$nam"] = $default['value'];
     }
 
     if ($patchCount > "198") {
@@ -1654,7 +1524,8 @@ function getSystemDefaults($domain_id = '') {
         $default = NULL;
 
         while ($default = $sth->fetch()) {
-            $lcl_defaults["$default[name]"] = $default['value']; // if setting is redefined, overwrite the previous value
+            $nam = $default['name'];
+            $lcl_defaults["$nam"] = $default['value']; // if setting is redefined, overwrite the previous value
         }
     }
 
@@ -1666,7 +1537,7 @@ function updateDefault($name, $value, $extension_name = "core") {
 
     $extension_id = getExtensionID($extension_name);
     if (!($extension_id >= 0)) {
-        die(htmlsafe("Invalid extension name: " . $extension));
+        die(htmlsafe("Invalid extension name: " . $extension_name));
     }
 
     // @formatter:off
@@ -1696,6 +1567,7 @@ function getInvoiceType($id) {
 }
 
 function insertBiller() {
+    global $db_server;
     $domain_id = domain_id::get();
 
     // @formatter:off
@@ -1879,176 +1751,7 @@ function updateBiller() {
                          ':custom_field3'           , $_POST['custom_field3'],
                          ':custom_field4'           , $_POST['custom_field4'],
                          ':enabled'                 , $_POST['enabled'],
-                         ':id'                      , $_GET[id]);
-    // @formatter:on
-}
-
-function updateCustomer() {
-    global $config;
-    $domain_id = domain_id::get();
-
-    $cc = $_POST['credit_card_number_new'];
-    if (empty($cc)) {
-        $cc1 = '';
-        $cc2 = '';
-    } else {
-        $key = $config->encryption->default->key;
-        $cc1 = ', credit_card_number = :credit_card_number,';
-        $enc = new encryption();
-        $cc2 = ", ':credit_card_number', $enc->encrypt($key, $cc),";
-    }
-
-    // The $sql and dbQuery statements are structed in a special way.
-    // Note that the last item in the $sql SET list has no comma at the end
-    // of field prior to the $cc1 variable. Similarly the dbQuery last
-    // field before the $cc2 has no comma and appends the $cc2 variable to it.
-    // This allows the credit_card_number field to be added when it is present
-    // and not added when it is not present. If new fields are added, make sure
-    // this special structure is maintained.
-    // @formatter:off
-    $sql = "UPDATE " . TB_PREFIX . "customers
-            SET domain_id                = :domain_id,
-                name                     = :name,
-                attention                = :attention,
-                street_address           = :street_address,
-                street_address2          = :street_address2,
-                city                     = :city,
-                state                    = :state,
-                zip_code                 = :zip_code,
-                country                  = :country,
-                phone                    = :phone,
-                mobile_phone             = :mobile_phone,
-                fax                      = :fax,
-                email                    = :email,
-                notes                    = :notes,
-                custom_field1            = :custom_field1,
-                custom_field2            = :custom_field2,
-                custom_field3            = :custom_field3,
-                custom_field4            = :custom_field4,
-                enabled                  = :enabled,
-                credit_card_holder_name  = :credit_card_holder_name,
-                credit_card_expiry_month = :credit_card_expiry_month,
-                credit_card_expiry_year  = :credit_card_expiry_year
-                $cc1
-            WHERE id = :id";
-
-        return dbQuery($sql,
-                        ':domain_id'                , $domain_id,
-                        ':name'                     , $_POST['name'],
-                        ':attention'                , $_POST['attention'],
-                        ':street_address'           , $_POST['street_address'],
-                        ':street_address2'          , $_POST['street_address2'],
-                        ':city'                     , $_POST['city'],
-                        ':state'                    , $_POST['state'],
-                        ':zip_code'                 , $_POST['zip_code'],
-                        ':country'                  , $_POST['country'],
-                        ':phone'                    , $_POST['phone'],
-                        ':mobile_phone'             , $_POST['mobile_phone'],
-                        ':fax'                      , $_POST['fax'],
-                        ':email'                    , $_POST['email'],
-                        ':notes'                    , $_POST['notes'],
-                        ':custom_field1'            , $_POST['custom_field1'],
-                        ':custom_field2'            , $_POST['custom_field2'],
-                        ':custom_field3'            , $_POST['custom_field3'],
-                        ':custom_field4'            , $_POST['custom_field4'],
-                        ':enabled'                  , $_POST['enabled'],
-                        ':id'                       , $_GET['id'],
-                        ':credit_card_holder_name'  , $_POST['credit_card_holder_name'],
-                        ':credit_card_expiry_month' , $_POST['credit_card_expiry_month'],
-                        ':credit_card_expiry_year'  , $_POST['credit_card_expiry_year'] .
-                        $cc2);
-    // @formatter:on
-}
-
-function insertCustomer() {
-    global $config;
-    $domain_id = domain_id::get();
-
-    // Extract all the fields from the $_POST associative array into fields
-    // named by the field's key in the associative array. For example:
-    // $_POST['field1'] contains 'value1'
-    // $_POST['field2'] contains 'value2'
-    // So export($_POST) results in the following variables and values:
-    // $field1 contains 'value1'
-    // $field2 contains 'value2'
-    extract($_POST);
-
-    $enc = new encryption();
-    $key = $config->encryption->default->key;
-    $encrypted_credit_card_number = $enc->encrypt($key, $credit_card_number);
-    // @formatter:off
-    $sql = "INSERT INTO " . TB_PREFIX . "customers (
-                    domain_id,
-                    attention, name,
-                    street_address,
-                    street_address2,
-                    city,
-                    state,
-                    zip_code,
-                    country,
-                    phone,
-                    mobile_phone,
-                    fax,
-                    email,
-                    notes,
-                    credit_card_holder_name,
-                    credit_card_number,
-                    credit_card_expiry_month,
-                    credit_card_expiry_year,
-                    custom_field1,
-                    custom_field2,
-                    custom_field3,
-                    custom_field4,
-                    enabled)
-            VALUES (
-                    :domain_id,
-                    :attention,
-                    :name,
-                    :street_address,
-                    :street_address2,
-                    :city,
-                    :state,
-                    :zip_code,
-                    :country,
-                    :phone,
-                    :mobile_phone,
-                    :fax,
-                    :email,
-                    :notes,
-                    :credit_card_holder_name,
-                    :credit_card_number,
-                    :credit_card_expiry_month,
-                    :credit_card_expiry_year,
-                    :custom_field1,
-                    :custom_field2,
-                    :custom_field3,
-                    :custom_field4,
-                    :enabled)";
-
-    return dbQuery($sql,
-                    ':attention'               , $attention,
-                    ':name'                    , $name,
-                    ':street_address'          , $street_address,
-                    ':street_address2'         , $street_address2,
-                    ':city'                    , $city,
-                    ':state'                   , $state,
-                    ':zip_code'                , $zip_code,
-                    ':country'                 , $country,
-                    ':phone'                   , $phone,
-                    ':mobile_phone'            , $mobile_phone,
-                    ':fax'                     , $fax,
-                    ':email'                   , $email,
-                    ':notes'                   , $notes,
-                    ':credit_card_holder_name' , $credit_card_holder_name,
-                    ':credit_card_number'      , $encrypted_credit_card_number,
-                    ':credit_card_expiry_month', $credit_card_expiry_month,
-                    ':credit_card_expiry_year' , $credit_card_expiry_year,
-                    ':custom_field1'           , $custom_field1,
-                    ':custom_field2'           , $custom_field2,
-                    ':custom_field3'           , $custom_field3,
-                    ':custom_field4'           , $custom_field4,
-                    ':enabled'                 , $enabled,
-                    ':domain_id'               , $domain_id);
+                         ':id'                      , $_GET['id']);
     // @formatter:on
 }
 
@@ -2108,20 +1811,22 @@ function getCustomerInvoices($id, $domain_id = '') {
 }
 
 function getCustomers($domain_id = '') {
-    global $LANG;
+    global $LANG, $pdoDb;
     $domain_id = domain_id::get($domain_id);
 
-    $sql = "SELECT * FROM " . TB_PREFIX . "customers WHERE domain_id = :domain_id";
-    $sth = dbQuery($sql, ':domain_id', $domain_id);
+    $pdoDb->addSimpleWhere('domain_id', $domain_id);
+    $rows = $pdoDb->request("SELECT", "customers");
 
     $customers = array();
-    for ($i = 0; $customer = $sth->fetch(); $i++) {
+    $i = 0;
+    foreach ($rows as $customer) {
         // @formatter:off
         $customer['enabled'] = ($customer['enabled'] == 1 ? $LANG['enabled'] : $LANG['disabled']);
         $customer['total']   = calc_customer_total($customer['id']);
         $customer['paid']    = calc_customer_paid($customer['id']);
         $customer['owing']   = $customer['total'] - $customer['paid'];
         $customers[$i]       = $customer;
+        $i++;
         // @formatter:on
     }
 
@@ -2224,7 +1929,7 @@ function insertInvoice($type, $domain_id = '') {
         return NULL;
     }
 
-    $pref_group = getPreference($_POST[preference_id]);
+    $pref_group = getPreference($_POST['preference_id']);
 
     // also set the current time (if NULL or =00:00:00)
     $clean_date = sqlDateWithTime($_POST['date']);
@@ -2312,7 +2017,7 @@ function insertInvoice($type, $domain_id = '') {
     // @formatter:on
 
     // Needed only if si_index table exists
-    index::increment('invoice', $pref_group[index_group], $domain_id);
+    index::increment('invoice', $pref_group['index_group'], $domain_id);
 
     return $sth;
 }
@@ -2334,6 +2039,7 @@ function updateInvoice($invoice_id, $domain_id = '') {
         $index_id = index::increment('invoice', $new_pref_group['index_group']);
     }
 
+    $type = $current_invoice['type_id'];
     if ($db_server == 'mysql' &&
                      !_invoice_check_fk($_POST['biller_id'], $_POST['customer_id'], $type, $_POST['preference_id'])) {
         return NULL;
@@ -2369,16 +2075,21 @@ function updateInvoice($invoice_id, $domain_id = '') {
     // @formatter:on
 }
 
-function insertInvoiceItem($invoice_id, $quantity, $product_id, $line_number, $line_item_tax_id, $description = "",
-                $unit_price = "", $attribute = "", $domain_id = '') {
-    global $logger;
+function insertInvoiceItem($invoice_id,
+                           $quantity,
+                           $product_id,
+                           $line_number,
+                           $line_item_tax_id,
+                           $description = "",
+                           $unit_price = "",
+                           $attribute = "",
+                           $domain_id = '') {
     global $db_server;
     global $LANG;
     $domain_id = domain_id::get($domain_id);
 
     // do taxes
     $attr = array();
-    // $logger->log('Line item attributes: ' . var_export($attribute, true), Zend_Log::INFO);
     foreach ($attribute as $k => $v) {
         if ($attribute[$v] !== '') {
             $attr[$k] = $v;
@@ -2386,15 +2097,6 @@ function insertInvoiceItem($invoice_id, $quantity, $product_id, $line_number, $l
     }
 
     $tax_total = getTaxesPerLineItem($line_item_tax_id, $quantity, $unit_price, $domain_id);
-
-    /*
-     * $logger->log(' ', Zend_Log::INFO);
-     * $logger->log(' ', Zend_Log::INFO);
-     * $logger->log('Invoice: ' . $invoice_id . ' Tax ' . $line_item_tax_id . ' for line item ' . $line_number . ': ' .
-     * $tax_total, Zend_Log::INFO);
-     * $logger->log('Description: ' . $description, Zend_Log::INFO);
-     * $logger->log(' ', Zend_Log::INFO);
-     */
 
     // line item gross total
     $gross_total = $unit_price * $quantity;
@@ -2407,7 +2109,7 @@ function insertInvoiceItem($invoice_id, $quantity, $product_id, $line_number, $l
         $description = "";
     }
 
-    if ($db_server == 'mysql' && !_invoice_items_check_fk($invoice_id, $product_id, $tax['tax_id'])) {
+    if ($db_server == 'mysql' && !_invoice_items_check_fk($invoice_id, $product_id, $line_item_tax_id)) {
         return NULL;
     }
 
@@ -2460,10 +2162,12 @@ function getTaxesPerLineItem($line_item_tax_id, $quantity, $unit_price, $domain_
     $domain_id = domain_id::get($domain_id);
 
     $tax_total = 0;
-    foreach ($line_item_tax_id as $key => $value) {
-        $tax = getTaxRate($value, $domain_id);
-        $tax_amount = lineItemTaxCalc($tax, $unit_price, $quantity);
-        $tax_total = $tax_total + $tax_amount;
+    if (is_array($line_item_tax_id)) {
+        foreach ($line_item_tax_id as $value) {
+            $tax = getTaxRate($value, $domain_id);
+            $tax_amount = lineItemTaxCalc($tax, $unit_price, $quantity);
+            $tax_total = $tax_total + $tax_amount;
+        }
     }
     return $tax_total;
 }
@@ -2503,33 +2207,34 @@ function invoice_item_tax($invoice_item_id, $line_item_tax_id, $unit_price, $qua
         dbQuery($sql_delete, ':invoice_item_id', $invoice_item_id);
     }
 
-    foreach ($line_item_tax_id as $key => $value) {
-        if ($value !== "") {
-            $tax = getTaxRate($value, $domain_id);
+    if (is_array($line_item_tax_id)) {
+        foreach ($line_item_tax_id as $value) {
+            if ($value !== "") {
+                $tax = getTaxRate($value, $domain_id);
 
-            $tax_amount = lineItemTaxCalc($tax, $unit_price, $quantity);
+                $tax_amount = lineItemTaxCalc($tax, $unit_price, $quantity);
 
-            // @formatter:off
-            $sql = "INSERT INTO " . TB_PREFIX . "invoice_item_tax (
-                            invoice_item_id,
-                            tax_id,
-                            tax_type,
-                            tax_rate,
-                            tax_amount)
-                    VALUES (:invoice_item_id,
-                            :tax_id,
-                            :tax_type,
-                            :tax_rate,
-                            :tax_amount)";
-            dbQuery($sql, ':invoice_item_id', $invoice_item_id,
-                          ':tax_id'         , $tax['tax_id'],
-                          ':tax_type'       , $tax['type'],
-                          ':tax_rate'       , $tax['tax_percentage'],
-                          ':tax_amount'     , $tax_amount);
-            // @formatter:on
+                // @formatter:off
+                $sql = "INSERT INTO " . TB_PREFIX . "invoice_item_tax (
+                                invoice_item_id,
+                                tax_id,
+                                tax_type,
+                                tax_rate,
+                                tax_amount)
+                        VALUES (:invoice_item_id,
+                                :tax_id,
+                                :tax_type,
+                                :tax_rate,
+                                :tax_amount)";
+                dbQuery($sql, ':invoice_item_id', $invoice_item_id,
+                              ':tax_id'         , $tax['tax_id'],
+                              ':tax_type'       , $tax['type'],
+                              ':tax_rate'       , $tax['tax_percentage'],
+                              ':tax_amount'     , $tax_amount);
+                // @formatter:on
+            }
         }
     }
-    // TODO fix this
     return true;
 }
 
@@ -2546,17 +2251,19 @@ function invoice_item_tax($invoice_item_id, $line_item_tax_id, $unit_price, $qua
  * @param int $domain_id (Optional) Domain ID number for this entry.
  * @return boolean true always returned.
  */
-function updateInvoiceItem($id, $quantity, $product_id, $line_number, $line_item_tax_id, $description, $unit_price,
-                $attribute = "", $domain_id = '') {
+function updateInvoiceItem($id         , $quantity  , $product_id    , $line_number, $line_item_tax_id,
+                           $description, $unit_price, $attribute = "", $domain_id = '') {
     global $LANG;
     global $db_server;
 
     $domain_id = domain_id::get($domain_id);
 
     $attr = array();
-    foreach ($attribute as $k => $v) {
-        if ($attribute[$v] !== '') {
-            $attr[$k] = $v;
+    if (is_array($attribute)) {
+        foreach ($attribute as $k => $v) {
+            if ($attribute[$v] !== '') {
+                $attr[$k] = $v;
+            }
         }
     }
 
@@ -2573,7 +2280,7 @@ function updateInvoiceItem($id, $quantity, $product_id, $line_number, $line_item
         $description = "";
     }
 
-    if ($db_server == 'mysql' && !_invoice_items_check_fk(null, $product_id, $tax_id, 'update')) {
+    if ($db_server == 'mysql' && !_invoice_items_check_fk(null, $product_id, $line_item_tax_id, 'update')) {
         return NULL;
     }
 
@@ -2624,7 +2331,6 @@ function updateInvoiceItem($id, $quantity, $product_id, $line_number, $line_item
  */
 function delete($module, $idField, $id, $domain_id = '') {
     global $dbh;
-    global $logger;
     $domain_id = domain_id::get($domain_id);
 
     $has_domain_id = false;
@@ -2658,7 +2364,7 @@ function delete($module, $idField, $id, $domain_id = '') {
                                   WHERE product_id = :id AND domain_id = :domain_id');
             // @formatter:on
             $sth->execute(array(':id' => $id, ':domain_id', $domain_id));
-            $ref = $sth->fetch();
+            $sth->fetch();
             if ($sth->fetchColumn() != 0) {
                 return false; // Fail, product still in use
             }
@@ -2828,7 +2534,6 @@ function getTableFields($table_in) {
 function getURL() {
     global $config;
 
-    $port = "";
     $dir = dirname($_SERVER['PHP_SELF']);
     // remove incorrect slashes for WinXP etc.
     $dir = str_replace('\\', '', $dir);
@@ -2878,11 +2583,10 @@ function pdfThis($html, $file_location = "", $pdfname) {
     require_once ('./library/pdf/pipeline.factory.class.php');
     require_once ('./library/pdf/pipeline.class.php');
     parse_config_file('./library/pdf/html2ps.config');
-
-    require_once ("./include/init.php"); // for getInvoice() and getPreference()
+    // RCR 20160708 test
+    //    require_once ("./include/init.php"); // for getInvoice() and getPreference()
 
     if (!function_exists('convert_to_pdf')) {
-
         /**
          * Runs the HTML->PDF conversion with default settings
          *
@@ -2895,25 +2599,27 @@ function pdfThis($html, $file_location = "", $pdfname) {
         function convert_to_pdf($html_to_pdf, $pdfname, $file_location = "") {
             global $config;
 
-            $destination = $file_location == "download" ? "DestinationDownload" : "DestinationFile";
             // Handles the saving generated PDF to user-defined output file on server
             if (!class_exists('MyFetcherLocalFile')) {
+                require_once('./library/pdf/fetcher_interface.class.php');
                 class MyFetcherLocalFile extends Fetcher {
-                    var $_content;
+                    public $_content;
 
-                    function MyFetcherLocalFile($html_to_pdf) {
+                    public function MyFetcherLocalFile($html_to_pdf) {
                         $this->_content = $html_to_pdf;
                     }
 
-                    function get_data($dummy1) {
+                    public function get_data($dummy1) {
                         return new FetchedDataURL($this->_content, array(), "");
                     }
 
-                    function get_base_url() {
+                    public function get_base_url() {
                         return "";
                     }
                 }
             }
+
+            $destination = $file_location == "download" ? "DestinationDownload" : "DestinationFile";
 
             $pipeline = PipelineFactory::create_default_pipeline("", ""); // Attempt to auto-detect encoding
 
@@ -2971,29 +2677,27 @@ function pdfThis($html, $file_location = "", $pdfname) {
 function getNumberOfDonePatches() {
     $check_patches_sql = "SELECT max(sql_patch_ref) AS count FROM " . TB_PREFIX . "sql_patchmanager ";
     $sth = dbQuery($check_patches_sql);
-
     $patches = $sth->fetch();
-
     // Returns number of patches applied
     return $patches['count'];
 }
 
 function getNumberOfPatches() {
-    global $patch;
+    global $si_patches;
     $patches = getNumberOfDonePatches();
-    $patch_count = max(array_keys($patch));
+    $patch_count = max(array_keys($si_patches));
     return $patch_count - $patches;
 }
 
 function runPatches() {
-    global $patch;
+    global $si_patch;
     global $db_server;
     global $dbh;
 
-    $display_block = "";
-    $sql = "SHOW TABLES LIKE '" . TB_PREFIX . "sql_patchmanager'";
     if ($db_server == 'pgsql') {
         $sql = "SELECT 1 FROM pg_tables WHERE tablename ='" . TB_PREFIX . "sql_patchmanager'";
+    } else {
+        $sql = "SHOW TABLES LIKE '" . TB_PREFIX . "sql_patchmanager'";
     }
     $sth = dbQuery($sql);
     $rows = $sth->fetchAll();
@@ -3005,8 +2709,8 @@ function runPatches() {
             $dbh->beginTransaction();
         }
 
-        for ($i = 0; $i < count($patch); $i++) {
-            $smarty_datas['rows'][$i] = run_sql_patch($i, $patch[$i]);
+        for ($i = 0; $i < count($si_patch); $i++) {
+            $smarty_datas['rows'][$i] = run_sql_patch($i, $si_patch[$i]);
         }
 
         if ($db_server == 'pgsql') {
@@ -3014,10 +2718,10 @@ function runPatches() {
         }
 
         $smarty_datas['message'] = "The database patches have now been applied. You can now start working with SimpleInvoices";
-        $smarty_datas['html']    = "<div class='si_toolbar si_toolbar_form'><a href='index.php'>HOME</a></div>";
+        $smarty_datas['html'] = "<div class='si_toolbar si_toolbar_form'><a href='index.php'>HOME</a></div>";
         $smarty_datas['refresh'] = 5;
     } else {
-        $smarty_datas['html']  = "Step 1 - This is the first time Database Updates has been run";
+        $smarty_datas['html'] = "Step 1 - This is the first time Database Updates has been run";
         $smarty_datas['html'] .= initialise_sql_patch();
         $smarty_datas['html'] .= "<br />
         Now that the Database upgrade table has been initialised,
@@ -3034,19 +2738,20 @@ function runPatches() {
 }
 
 function donePatches() {
+    $smarty_datas = array();
     $smarty_datas['message'] = "The database patches are up to date. You can continue working with SimpleInvoices";
-    $smarty_datas['html']    = "<div class='si_toolbar si_toolbar_form'><a href='index.php'>HOME</a></div>";
+    $smarty_datas['html'] = "<div class='si_toolbar si_toolbar_form'><a href='index.php'>HOME</a></div>";
     $smarty_datas['refresh'] = 3;
     global $smarty;
     $smarty->assign("page", $smarty_datas);
 }
 
 function listPatches() {
-    global $patch;
+    global $si_patch;
 
     $smarty_datas = array();
     $smarty_datas['message'] = "Your version of SimpleInvoices can now be upgraded. With this new release there are database patches that need to be applied";
-    $smarty_datas['html']    = <<<EOD
+    $smarty_datas['html'] = <<<EOD
     <p>The list below describes which patches have and have not been applied to the database,
        the aim is to have them all applied.
        <br />
@@ -3060,10 +2765,10 @@ function listPatches() {
     </div>
 EOD;
 
-    for ($p = 0; $p < count($patch); $p++) {
-        $patch_name = htmlsafe($patch[$p]['name']);
-        $patch_date = htmlsafe($patch[$p]['date']);
-        if (check_sql_patch($p, $patch[$p]['name'])) {
+    for ($p = 0; $p < count($si_patch); $p++) {
+        $patch_name = htmlsafe($si_patch[$p]['name']);
+        $patch_date = htmlsafe($si_patch[$p]['date']);
+        if (check_sql_patch($p, $si_patch[$p]['name'])) {
             $smarty_datas['rows'][$p]['text'] = "SQL patch $p, $patch_name <i>has</i> already been applied in release $patch_date";
             $smarty_datas['rows'][$p]['result'] = 'skip';
         } else {
@@ -3087,8 +2792,6 @@ function check_sql_patch($check_sql_patch_ref, $check_sql_patch_field) {
 
 function run_sql_patch($id, $patch) {
     global $dbh;
-    global $db_server;
-    $display_block = "";
 
     $sql = "SELECT * FROM " . TB_PREFIX . "sql_patchmanager WHERE sql_patch_ref = :id";
     $sth = dbQuery($sql, ':id', $id);
@@ -3154,7 +2857,6 @@ function initialise_sql_patch() {
 
     $log = "Step 2 - The SQL patch table has been created<br />";
 
-    echo $display_block;
     // @formatter:off
     $sql_insert = "INSERT INTO " . TB_PREFIX . "sql_patchmanager (
                        sql_id,
@@ -3194,15 +2896,15 @@ function patch126() {
                         :gross_total,
                         '0',
                         '0')";
-        dbQuery($sql, ':description', $res[description],
-                      ':total'      , $res[gross_total]);
+        dbQuery($sql, ':description', $res['description'],
+                      ':total'      , $res['gross_total']);
         $id = lastInsertId();
 
         $sql = "UPDATE  " . TB_PREFIX . "invoice_items
                 SET product_id = :id,
                     unit_price = :price
                 WHERE " . TB_PREFIX . "invoice_items.id = :item";
-        dbQuery($sql, ':id', $id[0], ':price', $res[gross_total], ':item', $res[id]);
+        dbQuery($sql, ':id', $id[0], ':price', $res['gross_total'], ':item', $res['id']);
         // @formatter:on
     }
 }
@@ -3221,6 +2923,7 @@ function convertInitCustomFields() {
     $sth->execute();
 
     while ($custom = $sth->fetch()) {
+        $match = array();
         if (preg_match("/(.+)_cf([1-4])/", $custom['cf_custom_field'], $match)) {
             switch ($match[1]) {
                 case "biller":
@@ -3236,7 +2939,7 @@ function convertInitCustomFields() {
                     $cat = 4;
                     break;
                 default:
-                    $case = 0;
+                    $cat = 0;
             }
 
             $cf_field = "custom_field" . $match[2];
@@ -3429,8 +3132,13 @@ function calc_invoice_tax($invoice_id, $domain_id = '') {
  * @return string Display/input string for a custom field. For "read" permission, the field to
  *         display the data. For "write" permission, the formatted label and field.
  */
-function show_custom_field($custom_field, $custom_field_value, $permission, $css_class_tr, $css_class_th, $css_class_td,
-                $td_col_span, $seperator) {
+// @formatter:off
+function show_custom_field($custom_field, $custom_field_value, $permission,
+                           $css_class_tr, $css_class_th      , $css_class_td,
+                           $td_col_span , $seperator) {
+// @formatter:on
+    global $help_image_path;
+
     $domain_id = domain_id::get();
 
     $write_mode = ($permission == 'write'); // if falst then in read mode.
@@ -3439,7 +3147,6 @@ function show_custom_field($custom_field, $custom_field_value, $permission, $css
     $cfn = substr($custom_field, -1, 1);
 
     // Get custom field label
-    $display_block = "";
     // @formatter:off
     $get_custom_label = "SELECT cf_custom_label
                          FROM " . TB_PREFIX . "custom_fields
@@ -3451,30 +3158,28 @@ function show_custom_field($custom_field, $custom_field_value, $permission, $css
     $row = $sth->fetch();
     if (!empty($row['cf_custom_label'])) $cf_label = $row['cf_custom_label'];
 
+    $display_block = "";
     if (!empty($custom_field_value) || ($write_mode && !empty($cf_label))) {
         $custom_label_value = htmlsafe(get_custom_field_label($custom_field));
         // @formatter:off
         if ($write_mode) {
-            $display_block =
-<<<EOD
-<tr>
-    <th class="$css_class_th">$custom_label_value
-        <a class="cluetip" href="#"
-           rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
-           title="Custom Fields"><img src="{$help_image_path}help-small.png" alt="" />
-        </a>
-    </th>
-    <td><input type="text" name="customField$cfn" value="$custom_field_value" size="25" /></td>
-</tr>
-EOD;
+            $display_block = "<tr>\n" .
+                             "  <th class='$css_class_th'>$custom_label_value\n" .
+                             "    <a class='cluetip' href='#'\n" .
+                             "       rel='index.php?module=documentation&amp;view=view&amp;page=help_custom_fields'\n" .
+                             "       title='Custom Fields'>\n" .
+                             "      <img src='{$help_image_path}help-small.png' alt='' />\n" .
+                             "    </a>\n" .
+                             "  </th>\n" .
+                             "  <td>\n" .
+                             "    <input type='text' name='customField$cfn' value='$custom_field_value' size='25' />\n" .
+                             "  </td>\n" .
+                             "</tr>\n";
         } else {
-            $display_block =
-<<<EOD
-<tr class="$css_class_tr" >
-    <th class="$css_class_th">$custom_label_value$seperator</th>
-    <td class="$css_class_td" colspan="$td_col_span" >$custom_field_value</td>
-</tr>
-EOD;
+            $display_block = "<tr class='$css_class_tr'>\n" .
+                             "  <th class='$css_class_th'>$custom_label_value$seperator</th>\n" .
+                             "  <td class='$css_class_td' colspan='$td_col_span'>$custom_field_value</td>\n" .
+                             "</tr>\n";
         }
         // @formatter:on
     }

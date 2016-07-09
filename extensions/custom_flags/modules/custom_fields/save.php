@@ -7,15 +7,19 @@
  * Justin Kelly, Nicolas Ruflin
  *
  * Last edited:
- * 2016-01-23 Richard Rowley
- * 2007-07-19
+ *   2016-07-05 Richard Rowley
  *
  * License:
- * GPL v2 or above
+ *   GPL v3 or above
  *
  * Website:
- * http://www.simpleinvoices.org
+ *   http://www.simpleinvoices.org
  */
+global $LANG,
+       $dbh,
+       $auth_session,
+       $smarty;
+
 // Stop the direct browsing to this file.
 // Let index.php handle which files get displayed
 checkLogin();
@@ -30,7 +34,7 @@ if ($op === 'edit_custom_field') {
         // the associated table. This can only happen if the field was changed
         // from non-blank to blank and the check box set on the custrom field
         // maintenance screen.
-        if ($_POST['clear_data'] == "yes") {
+        if (isset($_POST['clear_data']) && $_POST['clear_data'] == "yes") {
             // There is logic on the screen that prevents the clear data field from
             // being set when the associated custom field label is not blank. However,
             // we will still verify this here just to make sure something isn't
@@ -46,43 +50,43 @@ if ($op === 'edit_custom_field') {
                 error_log("Custom Field[".$_POST['cr_custom_field']. "] Label[".$_POST['cf_custom_label']."]");
             }
         }
-        
+
         if (!$error_found) {
             // @formatter:off
-    		$sql = "UPDATE ".TB_PREFIX."custom_fields
+            $sql = "UPDATE ".TB_PREFIX."custom_fields
                     SET cf_custom_label = :label
                     WHERE cf_id     = :id
-    			      AND domain_id = :domain_id";
-    		if (dbQuery($sql        ,
-    		            ':id'       , $_GET['id'],
-    		            ':label'    , $_POST['cf_custom_label'],
-    		            ':domain_id', $auth_session->domain_id)) {
-    		    if ($clear_field) {
-    		        // Split the value of the field name into parts and use that data to build
-    		        // the sql statement to clear the field in the associated table.
-    		        // EX: Field name is: customer_cf2. The split values are "customer" and "cf2".
-    		        //     The test for a missing "s" will cause the table name to be "customers".
-    		        //     The field name will be the constant, "custom_field", with the field number
-    		        //     from the end of "cf2" to be appended resulting in "custom_field2".
-    		        $parts = split("_", $_POST['cf_custom_field']);
-    		        if (count($parts) == 2 && preg_match("/cf[1-4]/", $parts[1])) {
-    		            // The table name part of cf_custom_field doesn't contain the needed "s" except for biller.
-        		        $table = $parts[0] . (preg_match("/^(customer|product|invoice)$/", $parts[0]) ? 's':'');
-        		        $field = "custom_field" . substr($parts[1], 2, 1);
-        		        $sql = "UPDATE " . TB_PREFIX . $table .
-        		              " SET " . $field . "='' 
-        		                WHERE domain_id = :domain_id";
-        		        if (!dbQuery($sql, ':domain_id', $auth_session->domain_id)) {
-        		            error_log("dbQuery error: " . $dbh->errorInfo() . " for sql[$sql]");
-        		        }
-    		        }
-    		    }
-    			$display_block  =  $LANG['save_custom_field_success'];
-    		} else {
-    			$display_block  =  '<span class="si_message_warning">' .
-    			                      $LANG['save_custom_field_failure'] . end($dbh->errorInfo()) .
-    			                   '</span>';
-    		}
+                      AND domain_id = :domain_id";
+            if (dbQuery($sql        ,
+                        ':id'       , $_GET['id'],
+                        ':label'    , $_POST['cf_custom_label'],
+                        ':domain_id', $auth_session->domain_id)) {
+                if ($clear_field) {
+                    // Split the value of the field name into parts and use that data to build
+                    // the sql statement to clear the field in the associated table.
+                    // EX: Field name is: customer_cf2. The split values are "customer" and "cf2".
+                    //     The test for a missing "s" will cause the table name to be "customers".
+                    //     The field name will be the constant, "custom_field", with the field number
+                    //     from the end of "cf2" to be appended resulting in "custom_field2".
+                    $parts = split("_", $_POST['cf_custom_field']);
+                    if (count($parts) == 2 && preg_match("/cf[1-4]/", $parts[1])) {
+                        // The table name part of cf_custom_field doesn't contain the needed "s" except for biller.
+                        $table = $parts[0] . (preg_match("/^(customer|product|invoice)$/", $parts[0]) ? 's':'');
+                        $field = "custom_field" . substr($parts[1], 2, 1);
+                        $sql = "UPDATE " . TB_PREFIX . $table .
+                              " SET " . $field . "=''
+                                WHERE domain_id = :domain_id";
+                        if (!dbQuery($sql, ':domain_id', $auth_session->domain_id)) {
+                            error_log("dbQuery error: " . $dbh->errorInfo() . " for sql[$sql]");
+                        }
+                    }
+                }
+                $display_block  =  $LANG['save_custom_field_success'];
+            } else {
+                $display_block  =  '<span class="si_message_warning">' .
+                                      $LANG['save_custom_field_failure'] . end($dbh->errorInfo()) .
+                                   '</span>';
+            }
             // @formatter:on
             $refresh_total = "<meta http-equiv='refresh' content='2;url=index.php?module=custom_fields&amp;view=manage' />";
         }

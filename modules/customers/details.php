@@ -42,8 +42,8 @@ $page   = (isset($_POST['page']) ? $_POST['page'] : "1");
 $invoice_owing = new invoice();
 $invoice_owing->sort       = $sort;
 $invoice_owing->having_and = "real";
-$invoice_owing->query      = $_REQUEST['query'];
-$invoice_owing->qtype      = $_REQUEST['qtype'];
+$invoice_owing->query      = (isset($_REQUEST['query']) ? $_REQUEST['query'] : "");
+$invoice_owing->qtype      = (isset($_REQUEST['qtype']) ? $_REQUEST['qtype'] : "");
 
 $large_dataset = getDefaultLargeDataset();
 if($large_dataset == $LANG['enabled']) {

@@ -3,7 +3,7 @@
 require_once(HTML2PS_DIR.'value.generic.php');
 
 // Stack value is an array containing two values:
-// string value of text-indent proprty and 
+// string value of text-indent proprty and
 // boolean flag indication of this value is relative (true) or absolute (false)
 
 class TextIndentValuePDF extends CSSValue {
@@ -15,11 +15,11 @@ class TextIndentValuePDF extends CSSValue {
       return $box->get_width() * $this->raw_value[0] / 100;
     } else {
       return $this->raw_value[0];
-    };
+    }
   }
 
   function &copy() {
-    $value =& new TextIndentValuePDF($this->raw_value);
+    $value =  new TextIndentValuePDF($this->raw_value);
     return $value;
   }
 
@@ -35,5 +35,3 @@ class TextIndentValuePDF extends CSSValue {
     $this->raw_value[0] = units2pt($this->raw_value[0], $base);
   }
 }
-
-?>

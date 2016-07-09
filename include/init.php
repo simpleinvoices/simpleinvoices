@@ -188,7 +188,8 @@ $smarty->register_modifier('htmlout'  , 'outhtml');   //common typo
 $smarty->register_modifier('urlescape', 'urlencode'); //common typo
 // @formatter:on
 
-loadSiExtentions();
+global $ext_names;
+loadSiExtentions($ext_names);
 
 $defaults = getSystemDefaults();
 $smarty->assign("defaults", $defaults);
@@ -242,4 +243,5 @@ $siUrl = getURL();
  * appended to the config array, instead of replacing it
  * (NOTE: NOT TESTED!)
  * *************************************************************/
-include_once ("./include/backup.lib.php");
+include_once ("./include/BackupDb.php");
+

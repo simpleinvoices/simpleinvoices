@@ -4,7 +4,7 @@
 require_once(HTML2PS_DIR.'output.pdflib.class.php');
 
 class OutputDriverPdflibOld extends OutputDriverPdflib {
-  function field_multiline_text($x, $y, $w, $h, $value, $name) { 
+  function field_multiline_text($x, $y, $w, $h, $value, $name) {
   }
 
   function field_text($x, $y, $w, $h, $value, $name) {
@@ -31,10 +31,9 @@ class OutputDriverPdflibOld extends OutputDriverPdflib {
   function field_radio($x, $y, $w, $h, $groupname, $value, $checked) {
   }
 
-  function field_select($x, $y, $w, $h, $name, $value, $options) { 
+  function field_select($x, $y, $w, $h, $name, $value, $options) {
   }
 
   function new_form($name) {
   }
 }
-?>

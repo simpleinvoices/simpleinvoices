@@ -38,7 +38,7 @@
 <tr>
 	<td class="details_screen">{$LANG.customer}</td>
 	<td><input type="text" name="customer_block" size="25" />
-		
+
 {if $customers == null }
 	<p><em>{$LANG.no_customers}</em></p>
 {else}

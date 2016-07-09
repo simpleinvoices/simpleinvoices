@@ -5,31 +5,17 @@
  * License:
  * GPL v3 or above
  */
-$menu = false;
-
-if (!defined("BROWSE")) define("BROWSE", "browse");
-
-// The error on any authentication attempt needs to be the same for all situations.
-if (!defined("STD_LOGIN_FAILED_MSG")) define("STD_LOGIN_FAILED_MSG", "Invalid User ID and/or Password!");
-
-Zend_Session::start();
-$errorMessage = '';
-if ($patchCount < "294") {
-    $errorMessage = "Extension \"user_security\" requires sql patch level 294 or greater.";
-} else if (empty($_POST['user']) || empty($_POST['pass'])) {
-    if (isset($_POST['action']) && $_POST['action'] == 'login') {
-        $errorMessage = STD_LOGIN_FAILED_MSG;
-    } else {
+if (!function_exists('loginLogo')) {
+    function loginLogo($smarty, $defaults) {
         // Not a post action so set up company logo and name to display on login screen.
         //<img src="./extensions/user_security/images/{$defaults.company_logo}" alt="User Logo">
-
         $image = "./extensions/user_security/images/" . $defaults['company_logo'];
         $imgWidth = 0;
         $imgHeight = 0;
         $maxWidth = 100;
         $maxHeight = 100;
         list($width, $height, $type, $attr) = getimagesize($image);
-        if (($width > $maxWidth || $height > maxHeight)) {
+        if (($width > $maxWidth || $height > $maxHeight)) {
             $wp = $maxWidth / $width;
             $hp = $maxHeight / $height;
             $percent = ($wp > $hp ? $hp : $wp);
@@ -45,8 +31,8 @@ if ($patchCount < "294") {
         }
         $comp_logo_lines = "<div style='display:inline-block;width:$w1;'>" .
                            "  <img src='$image' alt='Company Logo' " .
-                                 ($imgHeight == 0 ? "" : "height='$imgHeight' ") .
-                                 ($imgWidth  == 0 ? "" : "width='$imgWidth' ") . "/>" .
+                              ($imgHeight == 0 ? "" : "height='$imgHeight' ") .
+                              ($imgWidth  == 0 ? "" : "width='$imgWidth' ") . "/>" .
                            "</div>";
         $comp_name_lines = "<div style='display:inline-block;width:$w2;vertical-align:middle;'>" .
                            "  <h1 style='margin-left:20px;text-align:left;'>" . $defaults['company_name_item'] . "</h1>" .
@@ -54,6 +40,30 @@ if ($patchCount < "294") {
 
         $smarty->assign('comp_logo_lines', $comp_logo_lines);
         $smarty->assign('comp_name_lines', $comp_name_lines);
+    }
+}
+
+global $patchCount,
+       $defaults,
+       $smarty,
+       $zendDb;
+
+$menu = false;
+
+if (!defined("BROWSE")) define("BROWSE", "browse");
+
+// The error on any authentication attempt needs to be the same for all situations.
+if (!defined("STD_LOGIN_FAILED_MSG")) define("STD_LOGIN_FAILED_MSG", "Invalid User ID and/or Password!");
+
+Zend_Session::start();
+$errorMessage = '';
+loginLogo($smarty, $defaults);
+
+if ($patchCount < "294") {
+    $errorMessage = "Extension \"user_security\" requires sql patch level 294 or greater.";
+} else if (empty($_POST['user']) || empty($_POST['pass'])) {
+    if (isset($_POST['action']) && $_POST['action'] == 'login') {
+        $errorMessage = STD_LOGIN_FAILED_MSG;
     }
 } else {
     $authAdapter = new Zend_Auth_Adapter_DbTable($zendDb);
@@ -69,8 +79,7 @@ if ($patchCount < "294") {
     // @formatter:on
 
     // Set the input credential values (e.g., from a login form)
-    $authAdapter->setIdentity($username)
-        ->setCredential($password);
+    $authAdapter->setIdentity($username)->setCredential($password);
 
     // Perform the authentication query, saving the result
     $result = $authAdapter->authenticate();

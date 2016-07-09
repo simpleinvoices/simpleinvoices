@@ -1,5 +1,7 @@
 <?php
 header("Content-type: text/xml");
+global $LANG;
+
 // @formatter:off
 $start = (isset($_POST['start'])    ) ? $_POST['start']     : "0" ;
 $dir   = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "ASC" ;
@@ -8,7 +10,7 @@ $rp    = (isset($_POST['rp'])       ) ? $_POST['rp']        : "25" ;
 $page  = (isset($_POST['page'])     ) ? $_POST['page']      : "1" ;
 // @formatter:on
 function sql($type = '', $dir, $sort, $rp, $page) {
-    global $config, $LANG, $auth_session;
+    global $LANG, $auth_session, $start;
 
     $valid_search_fields = array('username' , 'email', 'ur.name');
 
@@ -25,7 +27,7 @@ function sql($type = '', $dir, $sort, $rp, $page) {
     $limit = "LIMIT $start, $rp";
 
     if ($type == "count") {
-        unset($limit);
+        $limit = "";
     }
     // SQL Limit - end
 
@@ -56,20 +58,20 @@ function sql($type = '', $dir, $sort, $rp, $page) {
 
     // $sql = "SELECT * FROM ".TB_PREFIX."customers ORDER BY $sort $dir LIMIT $start, $limit";
     $sql = "SELECT
-				u.id,
+                u.id,
                 u.username,
-				u.email,
-				ur.name as role,
-				(SELECT (CASE WHEN u.enabled = " .
+                u.email,
+                ur.name as role,
+                (SELECT (CASE WHEN u.enabled = " .
                      ENABLED . " THEN '" . $LANG['enabled'] . "' ELSE '" . $LANG['disabled'] . "' END )) AS enabled,
-				user_id
+                user_id
             FROM "      . TB_PREFIX . "user u
             LEFT JOIN " . TB_PREFIX . "user_role ur ON (u.role_id = ur.id)
-			WHERE u.domain_id = :domain_id
-				$where
-			ORDER BY
-				$sort $dir
-			$limit";
+            WHERE u.domain_id = :domain_id
+                $where
+            ORDER BY
+                $sort $dir
+            $limit";
 
     if (empty($query)) {
         $result = dbQuery($sql, ':domain_id', $auth_session->domain_id);
@@ -88,34 +90,33 @@ $user = $sth->fetchAll(PDO::FETCH_ASSOC);
 $count = $sth_count_rows->rowCount();
 
 // echo sql2xml($customers, $count);
-$XML  = "";
+$xml  = "";
 $xml .= "<rows>";
 $xml .= "<page>$page</page>";
 $xml .= "<total>$count</total>";
-
 foreach ($user as $row) {
-    $xml .= "<row id='" . $row['iso'] . "'>";
+    $xml .= "<row id='" . (isset($row['iso']) ? $row['iso'] : "") . "'>";
     $xml .= "<cell><![CDATA[
-	   <a class='index_table' title='$LANG[view] " . $row['name'] . "'
-	      href='index.php?module=user&view=details&id=$row[id]&action=view'>
+       <a class='index_table' title='$LANG[view] " . (isset($row['name']) ? $row['name'] : "") . "'
+          href='index.php?module=user&view=details&id=$row[id]&action=view'>
          <img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' />
        </a>
-       <a class='index_table' title='$LANG[edit] " . $row['name'] . "'
+       <a class='index_table' title='$LANG[edit] " . (isset($row['name']) ? $row['name'] : "") . "'
           href='index.php?module=user&view=details&id=$row[id]&action=edit'>
          <img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' />
        </a>
-	]]></cell>";
+    ]]></cell>";
     $xml .= "<cell><![CDATA[" . $row['username'] . "]]></cell>";
     $xml .= "<cell><![CDATA[" . $row['email']    . "]]></cell>";
     $xml .= "<cell><![CDATA[" . $row['role']     . "]]></cell>";
     if ($row['enabled'] == $LANG['enabled']) {
-        $xml .= "<cell><![CDATA[<img src='images/common/tick.png'  alt='" . $row['enabled'] . "' title='" .
-                         $row['enabled'] . "' />]]></cell>";
+        $xml .= "<cell><![CDATA[<img src='images/common/tick.png'  alt='" . $row['enabled'] .
+                                  "' title='" . $row['enabled'] . "' />]]></cell>";
     } else {
-        $xml .= "<cell><![CDATA[<img src='images/common/cross.png' alt='" . $row['enabled'] . "' title='" .
-                         $row['enabled'] . "' />]]></cell>";
+        $xml .= "<cell><![CDATA[<img src='images/common/cross.png' alt='" . $row['enabled'] .
+                                  "' title='" . $row['enabled'] . "' />]]></cell>";
     }
-	$xml .= "<cell><![CDATA[".$row['user_id']."]]></cell>";
+    $xml .= "<cell><![CDATA[".$row['user_id']."]]></cell>";
     $xml .= "</row>";
 }
 

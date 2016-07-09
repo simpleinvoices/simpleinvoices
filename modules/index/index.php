@@ -1,4 +1,5 @@
 <?php
+global $smarty;
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
@@ -9,7 +10,6 @@ $customers   = getCustomers();
 $taxes       = getTaxes();
 $products    = getProducts();
 $preferences = getPreferences();
-$defaults    = getSystemDefaults();
 
 if (empty($billers)   ||
     empty($customers) ||
@@ -20,7 +20,6 @@ if (empty($billers)   ||
     $smarty->assign("first_run_wizard",$first_run_wizard);
 }
 
-$smarty->assign("mysql"      , $mysql);
 $smarty->assign("db_server"  , $db_server);
 $smarty->assign("billers"    , $billers);
 $smarty->assign("customers"  , $customers);

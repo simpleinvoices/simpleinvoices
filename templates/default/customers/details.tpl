@@ -245,6 +245,8 @@
 <form name="frmpost"
       action="index.php?module=customers&amp;view=save&amp;id={$customer.id|urlencode}"
       method="post" id="frmpost" onsubmit="return checkForm(this);">
+  <input type="hidden" name="op" value="edit_customer"/>
+  <input type="hidden" name="domain_id" value="{$customer.domain_id}" />
   <div class="si_form" id="si_form_cust_edit">
     <table class="center">
       <tr>
@@ -257,7 +259,7 @@
         </th>
         <td>
           <input type="text" name="name" value="{$customer.name|htmlsafe}" size="50" id="name"
-                 class="validate[required]" />
+                 class="validate[required]" tabindex="10" />
         </td>
       </tr>
       <tr>
@@ -268,13 +270,15 @@
           </a>
         </th>
         <td>
-          <input type="text" name="attention" value="{$customer.attention|htmlsafe}" size="50" />
+          <input type="text" name="attention" value="{$customer.attention|htmlsafe}"
+                 size="50" tabindex="20" />
         </td>
       </tr>
       <tr>
         <th>{$LANG.street}</th>
         <td>
-          <input type="text" name="street_address" value="{$customer.street_address|htmlsafe}" size="50" />
+          <input type="text" name="street_address" value="{$customer.street_address|htmlsafe}"
+                 size="50" tabindex="30" />
         </td>
       </tr>
       <tr>
@@ -286,49 +290,71 @@
           </a>
         </th>
         <td>
-          <input type="text" name="street_address2"
-                 value="{$customer.street_address2|htmlsafe}" size="50" />
+          <input type="text" name="street_address2" value="{$customer.street_address2|htmlsafe}"
+                 size="50" tabindex="40" />
         </td>
       </tr>
       <tr>
         <th>{$LANG.city}</th>
-        <td><input type="text" name="city" value="{$customer.city|htmlsafe}" size="50" /></td>
+        <td>
+          <input type="text" name="city" value="{$customer.city|htmlsafe}"
+                 size="50" tabindex="50" />
+        </td>
       </tr>
       <tr>
         <th>{$LANG.zip}</th>
-        <td><input type="text" name="zip_code" value="{$customer.zip_code|htmlsafe}" size="50" /></td>
+        <td>
+          <input type="text" name="zip_code" value="{$customer.zip_code|htmlsafe}"
+                 size="50" tabindex="60" />
+        </td>
       </tr>
       <tr>
         <th>{$LANG.state}</th>
-        <td><input type="text" name="state" value="{$customer.state|htmlsafe}" size="50" /></td>
+        <td>
+          <input type="text" name="state" value="{$customer.state|htmlsafe}"
+                 size="50" tabindex="70" />
+        </td>
       </tr>
       <tr>
         <th>{$LANG.country}</th>
-        <td><input type="text" name="country" value="{$customer.country|htmlsafe}" size="50" /></td>
+        <td>
+          <input type="text" name="country" value="{$customer.country|htmlsafe}"
+                 size="50" tabindex="80" />
+        </td>
       </tr>
       <tr>
         <th>{$LANG.phone}</th>
-        <td><input type="text" name="phone" value="{$customer.phone|htmlsafe}" size="50" /></td>
+        <td>
+          <input type="text" name="phone" value="{$customer.phone|htmlsafe}"
+                 size="50" tabindex="90" />
+        </td>
       </tr>
       <tr>
         <th>{$LANG.mobile_phone}</th>
         <td>
-          <input type="text" name="mobile_phone" value="{$customer.mobile_phone|htmlsafe}" size="50" />
+          <input type="text" name="mobile_phone" value="{$customer.mobile_phone|htmlsafe}"
+                 size="50" tabindex="100" />
         </td>
       </tr>
       <tr>
         <th>{$LANG.fax}</th>
-        <td><input type="text" name="fax" value="{$customer.fax|htmlsafe}" size="50" /></td>
+        <td>
+          <input type="text" name="fax" value="{$customer.fax|htmlsafe}"
+                 size="50" tabindex="110" />
+        </td>
       </tr>
       <tr>
         <th>{$LANG.email}</th>
-        <td><input type="text" name="email" value="{$customer.email|htmlsafe}" size="50" /></td>
+        <td>
+          <input type="text" name="email" value="{$customer.email|htmlsafe}"
+                 size="50" tabindex="120" />
+        </td>
       </tr>
       <tr>
         <th>{$LANG.credit_card_holder_name}</th>
         <td>
           <input type="text" name="credit_card_holder_name"
-                 value="{$customer.credit_card_holder_name|htmlsafe}" size="25" />
+                 value="{$customer.credit_card_holder_name|htmlsafe}" size="25" tabindex="130" />
         </td>
       </tr>
       <tr>
@@ -338,22 +364,23 @@
       <tr>
         <th>{$LANG.credit_card_number_new}</th>
         <td>
-          <input type="text" name="credit_card_number_new"
-                 value="{$customer.credit_card_holder_name_new|htmlsafe}" size="25" />
+          {* Note that no value is put in this field and the name is the 
+             actual database name *}
+          <input type="text" name="credit_card_number" size="25" tabindex="140" />
         </td>
       </tr>
       <tr>
         <th>{$LANG.credit_card_expiry_month}</th>
         <td>
           <input type="text" name="credit_card_expiry_month"
-                 value="{$customer.credit_card_expiry_month|htmlsafe}" size="5" />
+                 value="{$customer.credit_card_expiry_month|htmlsafe}" size="5" tabindex="150" />
         </td>
       </tr>
       <tr>
         <th>{$LANG.credit_card_expiry_year}</th>
         <td>
           <input type="text" name="credit_card_expiry_year"
-                 value="{$customer.credit_card_expiry_year|htmlsafe}" size="5" />
+                 value="{$customer.credit_card_expiry_year|htmlsafe}" size="5" tabindex="160" />
         </td>
       </tr>
       {if !empty($customFieldLabel.customer_cf1)}
@@ -367,7 +394,7 @@
         </th>
         <td>
           <input type="text" name="custom_field1"
-                 value="{$customer.custom_field1|htmlsafe}" size="50" />
+                 value="{$customer.custom_field1|htmlsafe}" size="50" tabindex="170" />
         </td>
       </tr>
       {/if}
@@ -382,7 +409,7 @@
         </th>
         <td>
           <input type="text" name="custom_field2"
-                 value="{$customer.custom_field2|htmlsafe}" size="50" />
+                 value="{$customer.custom_field2|htmlsafe}" size="50" tabindex="180" />
         </td>
       </tr>
       {/if}
@@ -397,7 +424,7 @@
         </th>
         <td>
           <input type="text" name="custom_field3"
-                 value="{$customer.custom_field3|htmlsafe}" size="50" />
+                 value="{$customer.custom_field3|htmlsafe}" size="50" tabindex="190" />
         </td>
       </tr>
       {/if}
@@ -412,14 +439,14 @@
         </th>
         <td>
           <input type="text" name="custom_field4"
-                 value="{$customer.custom_field4|htmlsafe}" size="50" />
+                 value="{$customer.custom_field4|htmlsafe}" size="50" tabindex="200" />
         </td>
       </tr>
       {/if}
       <tr>
         <th>{$LANG.notes}</th>
         <td>
-          <textarea name="notes" class="editor" rows="8" cols="50">
+          <textarea name="notes" class="editor" rows="8" cols="50" tabindex="210" >
             {$customer.notes|outhtml}
           </textarea>
         </td>
@@ -427,19 +454,17 @@
       {* {showCustomFields categorieId="2" itemId=$smarty.get.customer } *}
       <tr>
         <th>{$LANG.enabled}</th>
-        <td>{html_options name=enabled options=$enabled selected=$customer.enabled}</td>
+        <td>{html_options name=enabled options=$enabled selected=$customer.enabled tabindex=220}</td>
       </tr>
     </table>
     <div class="si_toolbar si_toolbar_form">
       <button type="submit" class="positive" name="save_customer"
-              value="{$LANG.save_customer}">
+              value="{$LANG.save_customer}" tabindex="230" >
         <img class="button_img" src="./images/common/tick.png" alt="" />{$LANG.save}
       </button>
       <a href="./index.php?module=customers&amp;view=manage"
          class="negative"><img src="./images/common/cross.png" alt="" />{$LANG.cancel}</a>
     </div>
   </div>
-  <input type="hidden" name="op" value="edit_customer">
 </form>
 {/if}
-

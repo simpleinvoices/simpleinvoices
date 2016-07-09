@@ -1,16 +1,17 @@
 <?php
+global $smarty;
 
-//stop the direct browsing to this file - let index.php handle which files get displayed
+// stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-//gets the long language name out of the short name
+// gets the long language name out of the short name
 $lang = getDefaultLanguage();
 $languages = getLanguageList();
-foreach($languages as $language) {
-	if($language->shortname == $lang) {
-		$lang = $language->name;
-		break;
-	}
+foreach ($languages as $language) {
+    if ($language->shortname == $lang) {
+        $lang = $language->name;
+        break;
+    }
 }
 
 $smarty->assign("defaults", getSystemDefaults());
