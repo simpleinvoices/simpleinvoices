@@ -78,15 +78,15 @@ class FetcherUrl extends Fetcher {
         }
 
         // Commented out by RCR - 20160708
-        $_server_response = $this->headers;
-        $_url = htmlspecialchars($data_id);
+        //$_server_response = $this->headers;
+        //$_url = htmlspecialchars($data_id);
 
         ob_start();
         include('templates/error._connection.tpl');
         $this->error_message .= ob_get_contents();
         ob_end_clean();
 
-        error_log("FetcherUrl - Cannot open $data_id");
+        if (!empty($data_id)) error_log("FetcherUrl - Cannot open $data_id");
 
         return null;
     }

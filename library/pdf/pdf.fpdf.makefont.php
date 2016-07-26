@@ -376,7 +376,6 @@ function MakeFont($fontfile, $afmfile, $destdir, $destfile, $enc) {
 
     $fm = ReadAFM($afmfile, $map);
     if (is_null($fm)) {
-        error_log("Notice: Missing AFM file, $afmfile. Attempting to parse font file, $fontfile, directly");
         $fm = ReadTTF($fontfile, $manager->getEncodingVector($enc));
         if (is_null($fm)) {
             $str = "Cannot get font metrics for $fontfile";

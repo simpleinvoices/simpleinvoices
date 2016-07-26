@@ -13,7 +13,7 @@ if (!defined('HTML2PS_DIR')) {
 // User-Agent HTTP header to send when requesting a file
 define('DEFAULT_USER_AGENT',"Mozilla/5.0 (Windows; U; Windows NT 5.1; rv:1.7) Gecko/20040803 Firefox/0.9.3");
 
-// Default PDF or PS file name to use 
+// Default PDF or PS file name to use
 define('OUTPUT_DEFAULT_NAME','unnamed');
 
 // Default text encoding to use when no encoding information is available
@@ -28,7 +28,7 @@ define('DEFAULT_ENCODING', 'utf-8');
 // Path to Ghostscript executable
 define('GS_PATH','c:\gs\gs8.51\bin\gswin32c.exe');
 
-// Path to font metric files (AFM files). 
+// Path to font metric files (AFM files).
 // NOTE: Trailing backslash required
 define('TYPE1_FONTS_REPOSITORY',"c:\\gs\\fonts\\");
 // define('TYPE1_FONTS_REPOSITORY',"/usr/share/ghostscript/fonts/");
@@ -44,7 +44,7 @@ define('PDFLIB_DL_PATH','pdflib.so');
 // define('PDFLIB_LICENSE', 'YOUR LICENSE KEY');
 
 // This variable defines the path to PDFLIB configuration file; in particular, it contains
-// information about the supported encodings. 
+// information about the supported encodings.
 //
 // define('PDFLIB_UPR_PATH',"c:/php/php4.4.0/pdf-related/pdflib.upr");
 // define('PDFLIB_UPR_PATH',"c:/php/pdf-related/pdflib.upr");
@@ -81,7 +81,7 @@ define('EM_KOEFF',1);
 
 // Note that Firefox calculated ex for each font separately, while
 // IE uses fixed value of 'ex' unit. We behave like IE here.
-define('EX_KOEFF',0.50); 
+define('EX_KOEFF',0.50);
 
 define('DEFAULT_CHAR_WIDTH', 600);
 define('WHITESPACE_FONT_SIZE_FRACTION', 0.25);
@@ -97,9 +97,9 @@ define('MAX_JUSTIFY_FRACTION',0.33);
 define('HILIGHT_COLOR_ALPHA',0.6);
 define('MAX_REDIRECTS',5);
 
-// Maximal length of line inside the stream data 
-// (we need to limit this, as most postscript interpreters will complain 
-// on long strings) 
+// Maximal length of line inside the stream data
+// (we need to limit this, as most postscript interpreters will complain
+// on long strings)
 //
 // Note it is measured in BYTES! Each byte will be represented by TWO characters
 // in the hexadecimal form
@@ -110,7 +110,9 @@ define('MAX_TRANSPARENT_IMAGE_ROW_LEN',16);
 
 define('CACHE_DIR', HTML2PS_DIR.'../../tmp/cache/');
 define('OUTPUT_FILE_DIRECTORY', HTML2PS_DIR.'../../tmp/cache/');
-define('FPDF_PATH', HTML2PS_DIR.'fpdf/');
+// Changed by Rich Rowley 20160723
+//define('FPDF_PATH', HTML2PS_DIR.'fpdf/');
+define('FPDF_PATH', HTML2PS_DIR);
 
 // Trailing directory separator ('/' or '\', depending on your system)
 // SHOULD BE OMITTED

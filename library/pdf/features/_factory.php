@@ -30,7 +30,7 @@ class FeatureFactory {
     };
 
     require_once($file_name);
-    $feature_object =& new $class_name;
+    $feature_object = new $class_name;
     return $feature_object;
   }
 
