@@ -1,7 +1,5 @@
 <?php
-global $module,
-       $LANG,
-       $acl;
+global $module, $LANG, $acl;
 try {
     $checkPermission = "";
     $auth_session = new Zend_Session_Namespace('Zend_Auth');
@@ -12,15 +10,18 @@ try {
         // no action is given
         if (!empty($acl_view)) {
             // view is available with no action
-            $checkPermission = $acl->isAllowed($auth_session->role_name, $module, $acl_view) ? "allowed" : "denied"; // allowed
+            $checkPermission = $acl->isAllowed($auth_session->role_name,
+                                               $module, $acl_view) ? "allowed" : "denied"; // allowed
         }
     } else {
         // action available
-        $checkPermission = $acl->isAllowed($auth_session->role_name, $module, $acl_action) ? "allowed" : "denied"; // allowed
+        $checkPermission = $acl->isAllowed($auth_session->role_name,
+                                           $module, $acl_action) ? "allowed" : "denied"; // allowed
     }
 
     // basic customer page check
-    if ($auth_session->role_name == 'customer' && $module == 'customers' && $_GET['id'] != $auth_session->user_id) {
+    if ($auth_session->role_name == 'customer' && $module == 'customers' &&
+        $_GET['id'] != $auth_session->user_id) {
         $checkPermission = "denied";
     }
 

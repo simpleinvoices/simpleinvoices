@@ -1,12 +1,12 @@
 {*
  * Script: itemised.tpl
- *    Itemised invoice template
+ *   Itemised invoice template
  *
  * License:
  *   GPL v3 or above
  *
  * Website:
- *  http://www.simpleinvoices.org
+ *   http://www.simpleinvoices.org
  *}
 <form name="frmpost" action="index.php?module=invoices&amp;view=save" method="post" onsubmit="return frmpost_Validator(this)">
   <div id="gmail_loading" class="gmailLoader si_hide" style="float:right;" >

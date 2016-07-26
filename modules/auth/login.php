@@ -1,12 +1,15 @@
 <?php
 /*
-* Script: login.php
-* 	Login page
-*
-* License:
-*	 GPL v3 or above
+ * Script: login.php
+ *   Login page
+ *
+ * License:
+ *   GPL v3 or above
 */
+global $zendDb, $patchCount, $smarty;
+
 $menu = false;
+if ($menu) {} // eliminate unused variable warning.
 
 if (!defined("BROWSE")) define("BROWSE", "browse");
 
@@ -55,7 +58,7 @@ if (!empty($_POST['user']) && !empty($_POST['pass'])) {
                                                 u.user_name,
                                                 r.name AS role_name,
                                                 u.user_domain_id
-                                         FROM " . TB_PREFIX . "user u 
+                                         FROM " . TB_PREFIX . "user u
                                          LEFT JOIN ".TB_PREFIX."user_role r ON (u.user_role_id = r.id)
                                          WHERE u.user_email = ?", $userEmail);
         } elseif ($patchCount < "292") {
@@ -63,7 +66,7 @@ if (!empty($_POST['user']) && !empty($_POST['pass'])) {
                                                 r.name AS role_name,
                                                 u.domain_id,
                                                 0 AS user_id
-                                         FROM " . TB_PREFIX . "user u 
+                                         FROM " . TB_PREFIX . "user u
                                          LEFT JOIN ".TB_PREFIX."user_role r ON (u.role_id = r.id)
                                          WHERE u.email = ? AND u.enabled = '" . ENABLED . "'", $userEmail);
         } else {
@@ -72,12 +75,12 @@ if (!empty($_POST['user']) && !empty($_POST['pass'])) {
                                                 r.name AS role_name,
                                                 u.domain_id,
                                                 u.user_id
-                                         FROM " . TB_PREFIX . "user u 
+                                         FROM " . TB_PREFIX . "user u
                                          LEFT JOIN ".TB_PREFIX."user_role r ON (u.role_id = r.id)
                                          WHERE  u.email = ? AND u.enabled = '" . ENABLED . "'", $userEmail);
         }
         // @formatter:on
-        
+
         // Chuck the user details sans password into the Zend_auth session
         $authNamespace = new Zend_Session_Namespace('Zend_Auth');
         $authNamespace->setExpirationSeconds(60 * 60);
@@ -95,11 +98,10 @@ if (!empty($_POST['user']) && !empty($_POST['pass'])) {
     }
 }
 
-if ($_POST['action'] == 'login' && (empty($_POST['user']) or empty($_POST['pass']))) {
-
+if (isset($_POST['action']) && $_POST['action'] == 'login' &&
+   (empty($_POST['user']) or empty($_POST['pass']))) {
         $errorMessage = 'Username and password required';
 }
 
 // No translations for login since user's lang not known as yet
 $smarty->assign("errorMessage",$errorMessage);
-

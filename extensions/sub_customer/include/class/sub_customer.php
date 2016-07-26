@@ -26,13 +26,12 @@ class sub_customer {
     }
 
     public static function insertCustomer() {
-        global $config,
-               $pdoDb;
+        global $config, $pdoDb;
 
-        $key = $config->encryption->default->key;
-        $enc = new Encryption();
-        $_POST['credit_card_number'] = $enc->encrypt($key, $_POST['credit_card_number']);
         try {
+            $key = $config->encryption->default->key;
+            $enc = new Encryption();
+            $_POST['credit_card_number'] = $enc->encrypt($key, $_POST['credit_card_number']);
             $pdoDb->setExcludedFields(array('id' => 1));
             $pdoDb->request('INSERT', 'customers');
         } catch (Exception $e) {
@@ -41,19 +40,17 @@ class sub_customer {
     }
 
     public static function updateCustomer() {
-        global $config,
-               $pdoDb;
-
-        // $encrypted_credit_card_number = '';
-        $excludedFields = array('id' => 1);
-        if ($_POST['credit_card_number_new'] != '') {
-            $key = $config->encryption->default->key;
-            $enc = new Encryption();
-            $_POST['credit_card_number'] = $enc->encrypt($key, $_POST['credit_card_number_new']);
-        } else {
-            $excludedFields['credit_card_number'] = 1;
-        }
+        global $config, $pdoDb;
         try {
+            // $encrypted_credit_card_number = '';
+            $excludedFields = array('id' => 1);
+            if ($_POST['credit_card_number_new'] != '') {
+                $key = $config->encryption->default->key;
+                $enc = new Encryption();
+                $_POST['credit_card_number'] = $enc->encrypt($key, $_POST['credit_card_number_new']);
+            } else {
+                $excludedFields['credit_card_number'] = 1;
+            }
             $pdoDb->setExcludedFields($excludedFields);
             $pdoDb->addSimpleWhere("id", $_GET['id']);
             $pdoDb('UPDATE', 'customers');

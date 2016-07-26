@@ -2583,10 +2583,11 @@ function pdfThis($html, $file_location = "", $pdfname) {
     require_once ('./library/pdf/pipeline.factory.class.php');
     require_once ('./library/pdf/pipeline.class.php');
     parse_config_file('./library/pdf/html2ps.config');
-    // RCR 20160708 test
-    //    require_once ("./include/init.php"); // for getInvoice() and getPreference()
+
+    require_once ("./include/init.php"); // for getInvoice() and getPreference()
 
     if (!function_exists('convert_to_pdf')) {
+
         /**
          * Runs the HTML->PDF conversion with default settings
          *
@@ -2599,27 +2600,25 @@ function pdfThis($html, $file_location = "", $pdfname) {
         function convert_to_pdf($html_to_pdf, $pdfname, $file_location = "") {
             global $config;
 
+            $destination = $file_location == "download" ? "DestinationDownload" : "DestinationFile";
             // Handles the saving generated PDF to user-defined output file on server
             if (!class_exists('MyFetcherLocalFile')) {
-                require_once('./library/pdf/fetcher_interface.class.php');
                 class MyFetcherLocalFile extends Fetcher {
-                    public $_content;
+                    var $_content;
 
-                    public function MyFetcherLocalFile($html_to_pdf) {
+                    function MyFetcherLocalFile($html_to_pdf) {
                         $this->_content = $html_to_pdf;
                     }
 
-                    public function get_data($dummy1) {
+                    function get_data($dummy1) {
                         return new FetchedDataURL($this->_content, array(), "");
                     }
 
-                    public function get_base_url() {
+                    function get_base_url() {
                         return "";
                     }
                 }
             }
-
-            $destination = $file_location == "download" ? "DestinationDownload" : "DestinationFile";
 
             $pipeline = PipelineFactory::create_default_pipeline("", ""); // Attempt to auto-detect encoding
 
@@ -2663,6 +2662,7 @@ function pdfThis($html, $file_location = "", $pdfname) {
 
             global $g_pt_scale;
             $g_pt_scale = $g_px_scale * (72 / 96);
+            if ($g_pt_scale) {}; // to eliminate unused variable warning
 
             $pipeline->configure($g_config);
             $pipeline->data_filters[] = new DataFilterUTF8("");

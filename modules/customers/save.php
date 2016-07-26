@@ -15,9 +15,7 @@
  * Website:
  *     http://www.simpleinvoices.org
  */
-global $config,
-       $smarty,
-       $pdoDb;
+global $config, $smarty, $pdoDb;
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
@@ -27,10 +25,10 @@ $op = !empty( $_POST['op'] ) ? addslashes( $_POST['op'] ) : NULL;
 
 $saved = false;
 if ($op === "insert_customer") {
-    $key = $config->encryption->default->key;
-    $enc = new Encryption();
-    $_POST['credit_card_number'] = $enc->encrypt($key, $_POST['credit_card_number']);
     try {
+        $key = $config->encryption->default->key;
+        $enc = new Encryption();
+        $_POST['credit_card_number'] = $enc->encrypt($key, $_POST['credit_card_number']);
         $pdoDb->setExcludedFields(array('id' => 1));
         $pdoDb('INSERT', 'customers');
         $saved = true;
@@ -44,9 +42,13 @@ if ($op === "insert_customer") {
     if (empty($_POST['credit_card_number'])) {
         $excludedFields['credit_card_number'] = 1;
     } else {
-        $key = $config->encryption->default->key;
-        $enc = new Encryption();
-        $_POST['credit_card_number'] = $enc->encrypt($key, $_POST['credit_card_number']);
+        try {
+            $key = $config->encryption->default->key;
+            $enc = new Encryption();
+            $_POST['credit_card_number'] = $enc->encrypt($key, $_POST['credit_card_number']);
+        } catch (Exception $e) {
+            echo '<h1>Unable to encrypt the card number.</h1>';
+        }
     }
 
     try {

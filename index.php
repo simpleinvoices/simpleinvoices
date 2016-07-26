@@ -24,8 +24,6 @@ $action = isset($_GET['case'])   ? filenameEscape($_GET['case'])   : null;
 // globals set in the init.php logic
 $databaseBuilt     = false;
 $databasePopulated = false;
-$patchCount        = 0;
-$smarty            = null;
 // @formatter:on
 
 // Will be set in the following init.php call to extensions that are enabled.
@@ -34,6 +32,14 @@ $help_image_path = "./images/common/";
 
 // Note: include/functions.php and include/sql_queries.php loaded by this include.
 require_once "./include/init.php";
+global $smarty,
+       $smarty_output,
+       $menu,
+       $LANG,
+       $siUrl,
+       $config,
+       $auth_session,
+       $early_exit;
 
 foreach ($ext_names as $ext_name) {
     if (file_exists("./extensions/$ext_name/include/init.php")) {
@@ -211,6 +217,8 @@ if (!in_array($module . "_" . $view, $early_exit)) {
 // is what allows logic in the reports default index.tpl to know where
 // to include the past_due_report extension's index.tpl file.
 $extension_php_insert_files = array();
+if ($extension_php_insert_files) {} // Show variable as used.
+
 $perform_extension_php_insertions = (($module == 'system_defaults' && $view == 'edit'));
 $extensionPhpFile = 0;
 foreach ($ext_names as $ext_name) {

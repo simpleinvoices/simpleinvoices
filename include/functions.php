@@ -163,7 +163,6 @@ function simpleInvoicesError($type, $info1 = "", $info2 = "") {
         $type = "install";
         $parts = explode("'", $info1);
         $dbname = $parts[1];
-error_log("dbname[$dbname] parts - " . print_r($parts,true));
     }
     // @formatter:off
     switch ($type) {
@@ -353,9 +352,11 @@ error_log("dbname[$dbname] parts - " . print_r($parts,true));
 
 function getLangList() {
     $startdir = './lang/';
+    $ignoredDirectory = array();
     $ignoredDirectory[] = '.';
     $ignoredDirectory[] = '..';
     $ignoredDirectory[] = '.svn';
+    $folderList = array();
     if (is_dir($startdir)) {
         if ($dh = opendir($startdir)) {
             while (($folder = readdir($dh)) !== false) {
@@ -378,9 +379,6 @@ function sql2xml($sth, $count) {
     $xml .= "<page>1</page>";
     $xml .= "<total>" . $count . "</total>";
     foreach ($sth as $row) {
-        // count the no. of columns in the table
-        $fcount = count($row);
-
         $xml .= ("<tablerow>");
         foreach ($row as $key => $value) {
             $xml .= ("<$key>" . htmlsafe($value) . "</$key>");
@@ -476,4 +474,21 @@ function requireCSRFProtection($action = 'all', $userid = false) {
 
 function antiCSRFHiddenInput($action = 'all', $userid = false) {
     return '<input type="hidden" name="csrfprotectionbysr" value="' . htmlsafe(siNonce($action, $userid)) . '" />';
+}
+
+/**
+ * Mask a string with specified string of characters exposed.
+ * @param string $value Value to be masked.
+ * @param string $chr Character to replace masked characters.
+ * @param number $num_to_show Number of characters to leave exposed.
+ * @return string Masked value.
+ */
+function maskValue($value, $chr='x', $num_to_show=4) {
+    $len = strlen($value);
+    if ($len <= $num_to_show) return $value;
+    $mask_len = $len - $num_to_show;
+    $masked_value = "";
+    for ($i=0; $i<$mask_len; $i++) $masked_value .= $chr;
+    $masked_value .= substr($value, $mask_len);
+    return $masked_value;
 }

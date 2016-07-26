@@ -57,9 +57,13 @@ class eway {
         $eway_invoice_total = htmlsafe(trim($value));
         $logger->log("eway total: " . $eway_invoice_total, Zend_Log::INFO);
 
+        try {
         $key = $config->encryption->default->key;
         $enc = new Encryption();
         $credit_card_number = $enc->decrypt($key, $this->customer['credit_card_number']);
+        } catch (Exception $e) {
+            return;
+        }
 
         $eway->setTransactionData("TotalAmount", $eway_invoice_total); //mandatory field
         $eway->setTransactionData("CustomerFirstName", $this->customer['name']);
@@ -117,7 +121,7 @@ class eway {
             $return = 'true';
         }
 
-        return $return ;
+        return $return;
     }
 
     function get_message() {

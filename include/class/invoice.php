@@ -1,4 +1,6 @@
 <?php
+require_once 'include/class/ProductAttributes.php';
+
 class invoice {
     public $id;
     public $domain_id;
@@ -164,7 +166,7 @@ class invoice {
                  FROM " . TB_PREFIX . "invoice_items
                  WHERE invoice_id =  :id AND domain_id = :domain_id";
         $sth2 = dbQuery($sql2, ':id', $id, ':domain_id', $this->domain_id);
-        $result2 = $sth2->fetch();
+        $result2 = $sth2->fetch(PDO::FETCH_ASSOC);
 
         $invoice['total_tax']   = $result2['total_tax'];
         $invoice['tax_grouped'] = taxesGroupedForInvoice($id);
@@ -431,18 +433,18 @@ class invoice {
         $sth = dbQuery($sql, ':id', $id, ':domain_id', $this->domain_id);
 
         $invoiceItems = null;
-        for ($i = 0; $invoiceItem = $sth->fetch(); $i++) {
+        for ($i = 0; $invoiceItem = $sth->fetch(PDO::FETCH_ASSOC); $i++) {
             $invoiceItem['attribute_decode'] = json_decode($invoiceItem['attribute'], true);
             foreach ($invoiceItem['attribute_decode'] as $key => $value) {
-                $invoiceItem['attribute_json'][$key]['name']    = product_attributes::getName($key);
-                $invoiceItem['attribute_json'][$key]['value']   = product_attributes::getValue($key, $value);
-                $invoiceItem['attribute_json'][$key]['type']    = product_attributes::getType($key);
-                $invoiceItem['attribute_json'][$key]['visible'] = product_attributes::getVisible($key);
+                $invoiceItem['attribute_json'][$key]['name']    = ProductAttributes::getName($key);
+                $invoiceItem['attribute_json'][$key]['value']   = ProductAttributes::getValue($key, $value);
+                $invoiceItem['attribute_json'][$key]['type']    = ProductAttributes::getType($key);
+                $invoiceItem['attribute_json'][$key]['visible'] = ProductAttributes::getVisible($key);
             }
 
             $sql = "SELECT * FROM " . TB_PREFIX . "products WHERE id = :id AND domain_id = :domain_id";
             $tth = dbQuery($sql, ':id', $invoiceItem['product_id'], ':domain_id', $this->domain_id);
-            $invoiceItem['product'] = $tth->fetch();
+            $invoiceItem['product'] = $tth->fetch(PDO::FETCH_ASSOC);
 
             $tax = taxesGroupedForInvoiceItem($invoiceItem['id']);
             foreach ($tax as $key => $value) {

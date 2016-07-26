@@ -7,42 +7,33 @@ class product {
     }
 
     public function count() {
-        $sql = "SELECT count(id) as count FROM " . TB_PREFIX . "products WHERE domain_id = :domain_id ORDER BY id";
-        $sth = dbQuery($sql, ':domain_id', $this->domain_id);
-        return $sth->fetch();
+        global $pdoDb;
+        $pdoDb->setSelectList(array());
+        $pdoDb->addToFunctions("count(id) as count");
+        $pdoDb->addSimpleWhere("domain_id", $this->domain_id);
+        return $pdoDb->request("SELECT", "products");
     }
 
     public function get_all() {
-        $sql = "SELECT * FROM " . TB_PREFIX . "products WHERE domain_id = :domain_id AND visible = 1 ORDER BY description, id";
-        $sth = dbQuery($sql, ':domain_id', $this->domain_id);
-        return $sth->fetchAll();
+        global $pdoDb;
+        $pdoDb->addSimpleWhere("domain_id", $this->domain_id, 'AND');
+        $pdoDb->addSimpleWhere("visible", "1");
+        $pdoDb->setOrderBy("description");
+        $pdoDb->setOrderBy("id");
+        return $pdoDb->request("SELECT", "products");
     }
 
     public function get($id) {
-        $sql = "SELECT * FROM " . TB_PREFIX . "products WHERE domain_id = :domain_id AND id = :id";
-        $sth = dbQuery($sql, ':domain_id', $this->domain_id, ':id', $id);
-        return $sth->fetch();
+        global $pdoDb;
+        $pdoDb->addSimpleWhere("id", $id, "AND");
+        $pdoDb->addSimpleWhere("domain_id", $this->domain_id);
+        return $pdoDb->request("SELECT", "products");
     }
 
     public function select_all($type = '', $dir, $sort, $rp, $page) {
-        global $LANG;
+        global $LANG, $pdoDb;
 
         $valid_search_fields = array('id', 'description', 'unit_price');
-
-        if (intval($rp) != $rp) {
-            $rp = 25;
-        }
-
-        $start = (($page - 1) * $rp);
-        $limit = "LIMIT $start, $rp";
-
-        if ($type == "count") {
-            $limit = "";
-        }
-
-        if (!preg_match('/^(asc|desc)$/iD', $dir)) {
-            $dir = 'DESC';
-        }
 
         $where = "";
         $query = isset($_POST['query']) ? $_POST['query'] : null;
@@ -56,58 +47,60 @@ class product {
             }
         }
 
-        // Check that the sort field is OK
-        $validFields = array('id', 'description', 'unit_price', 'enabled');
+        $where = "WHERE visible = 1 AND domain_id = $this->domain_id $where";
 
-        if (in_array($sort, $validFields)) {
-            $sort = $sort;
+        $prd = TB_PREFIX . "products";
+        if (($type == "count")) {
+            $sql = "SELECT count(id) as count FROM $prd $where";
         } else {
-            $sort = "id";
+            if (!in_array($sort, array('id', 'description', 'unit_price', 'enabled'))) $sort = "id";
+
+            // @formatter:off
+            $inv_itms        = TB_PREFIX . "invoice_items";
+            $inv             = TB_PREFIX . "invoices";
+            $pref            = TB_PREFIX . "preferences";
+            $invent          = TB_PREFIX . "inventory";
+
+            $inv_id          = $inv      . ".id";
+            $inv_prefid      = $inv      . ".preference_id";
+            $inv_itms_dom_id = $inv_itms . ".domain_id";
+            $inv_itms_inv_id = $inv_itms . ".invoice_id";
+            $prd_id          = $prd      . ".id";
+            $pref_id         = $pref     . ".pref_id";
+            $pref_stat       = $pref     . ".status";
+
+            if (intval($rp) != $rp) $rp = 25;
+            $start = (($page - 1) * $rp);
+            $limit = "LIMIT $start, $rp";
+
+            if (!preg_match('/^(asc|desc)$/iD', $dir)) $dir = 'DESC';
+
+            $qty_out = "(SELECT COALESCE(SUM(quantity),0) FROM $inv_itms, $inv, $pref
+                             WHERE product_id       = $prd_id
+                               AND $inv_itms_dom_id = $this->domain_id
+                               AND $inv_itms_inv_id = $inv_id
+                               AND $inv_prefid      = $pref_id
+                               AND $pref_stat       = 1 ) AS qty_out";
+
+            $qty_in  = "(SELECT COALESCE(SUM(quantity),0) FROM $invent
+                             WHERE product_id = $prd_id
+                               AND domain_id = $this->domain_id) AS qty_in";
+
+            $qty = "(SELECT qty_in - qty_out ) AS quantity";
+
+            $reorder_lvl = "(SELECT COALESCE(reorder_level,0)) AS reorder_level";
+
+            $enabled = "(SELECT (CASE WHEN enabled = '1' THEN '" .
+                                      $LANG['enabled']  . "' ELSE '" .
+                                      $LANG['disabled'] . "' END )) AS enabled";
+
+            $sql = "SELECT id, description, unit_price, $qty_out, $qty_in, $reorder_lvl, $qty, $enabled
+                    FROM $prd $where ORDER BY $sort $dir $limit;";
+            // @formatter:on
         }
 
-        // @formatter:off
-        $inv_itms = TB_PREFIX . "invoice_items";
-        $inv      = TB_PREFIX . "invoices";
-        $pref     = TB_PREFIX . "preferences";
-        $prd      = TB_PREFIX . "products";
-        $invent   = TB_PREFIX . "inventory";
-        $inv_id          = $inv      . ".id";
-        $inv_prefid      = $inv      . ".preference_id";
-        $inv_itms_dom_id = $inv_itms . ".domain_id";
-        $inv_itms_inv_id = $inv_itms . ".invoice_id";
-        $prd_id          = $prd      . ".id";
-        $pref_id         = $pref     . ".pref_id";
-        $pref_stat       = $pref     . ".status";
-
-        $enabled  = $LANG['enabled'];
-        $disabled = $LANG['disabled'];
-
-        $sql = "SELECT id, description, unit_price,
-                       (SELECT COALESCE(SUM(quantity),0) FROM $inv_itms, $inv, $pref
-                         WHERE product_id       = $prd_id
-                           AND $inv_itms_dom_id = :domain_id
-                           AND $inv_itms_inv_id = $inv_id
-                           AND $inv_prefid      = $pref_id
-                           AND $pref_stat       = 1 ) AS qty_out,
-                        (SELECT COALESCE(SUM(quantity),0) FROM $invent
-                          WHERE product_id = $prd_id
-                            AND domain_id = :domain_id) AS qty_in,
-                        (SELECT COALESCE(reorder_level,0)) AS reorder_level ,
-                        (SELECT qty_in - qty_out ) AS quantity,
-                        (SELECT (CASE WHEN enabled = 0 THEN '$disabled' ELSE '$enabled' END )) AS enabled
-                FROM $prd
-                WHERE visible = 1
-                  AND domain_id = :domain_id
-                  $where
-                ORDER BY $sort $dir
-                $limit;";
-        // @formatter:on
-
-        if (empty($query)) {
-            $result = dbQuery($sql, ':domain_id', $this->domain_id);
-        } else {
-            $result = dbQuery($sql, ':domain_id', $this->domain_id, ':query', "%$query%");
-        }
-        return $result;
+        $parms = array(':domain_id' => $this->domain_id);
+        if (!empty($query)) $parms[':query'] = "%$query%";
+        return $pdoDb->query($sql, $parms);
     }
 }

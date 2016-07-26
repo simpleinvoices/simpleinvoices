@@ -1,5 +1,6 @@
 <?php
 header("Content-type: text/xml");
+global $auth_session, $config, $LANG;
 
 // @formatter:off
 $dir    = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "DESC";
@@ -38,11 +39,11 @@ $invoices = $sth->fetchAll(PDO::FETCH_ASSOC);
 $xml  = "";
 $xml .= "<rows>";
 $xml .= "<page>$page</page>";
-$xml .= "<total>" . $invoice_count . "</total>";
+$xml .= "<total>$invoice_count</total>";
 
 foreach ($invoices as $row) {
     $xml .= "<row id='" . $row['id'] . "'>";
-    $xml .= 
+    $xml .=
         "<cell><![CDATA[" .
             "<a class='index_table' title='" .
                 $LANG['quick_view_tooltip'] . " " .

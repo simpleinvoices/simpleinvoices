@@ -6,7 +6,9 @@
  * 3. make some editing (Upper-Case etc.)
  * Not in each translated file need to be each all translations, only in the default-lang-file (english)
  */
+global $LANG, $databaseBuilt, $zendDb;
 unset($LANG);
+$LANG = array();
 
 if ($databaseBuilt) {
     $tables = $zendDb->listTables(); // TEST: print db tables
@@ -21,10 +23,9 @@ if ($databaseBuilt) {
 }
 
 function getLanguageArray($lang = '') {
-    global $defaults;
-    global $ext_names;
+    global $ext_names, $LANG;
 
-    if ($lang) {
+    if (!empty($lang)) {
         $language = $lang;
     } else {
         global $language;

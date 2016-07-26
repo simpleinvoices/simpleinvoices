@@ -15,16 +15,34 @@
  * Website:
  * 	http://www.simpleinvoices.org
  */
+global $smarty, $LANG, $pdoDb, $config;
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
 // @formatter:off
-$customer_id = $_GET['id'];
-$customer    = getCustomer($customer_id);
-$customer['wording_for_enabled'] = $customer['enabled']==1?$LANG['enabled']:$LANG['disabled'];
+$cid = $_GET['id'];
+$domain_id = domain_id::get();
 
-$invoices = getCustomerInvoices($customer_id);
+$pdoDb->addSimpleWhere("id", $cid, "AND");
+$pdoDb->addSimpleWhere("domain_id", $domain_id);
+$rows = $pdoDb->request("SELECT", "customers");
+$customer = $rows[0];
+$customer['wording_for_enabled'] = ($customer['enabled'] == 1 ? $LANG['enabled'] : $LANG['disabled']);
+if (empty($customer['credit_card_number'])) {
+    $customer['credit_card_number_masked'] = "";
+} else {
+    try {
+        $key = $config->encryption->default->key;
+        $enc = new Encryption();
+        $credit_card_number = $enc->decrypt($key, $customer['credit_card_number']);
+        $customer['credit_card_number_masked'] = maskValue($credit_card_number);
+    } catch (Exception $e) {
+        throw new Exception("details.php - Unable to decrypt credit card for Customer, " .
+                            $cid . ". " . $e->getMessage());
+    }
+}
+$invoices = getCustomerInvoices($cid);
 
 $stuff = array();
 $stuff['total'] = calc_customer_total($customer['id'],domain_id::get(),true);
@@ -53,7 +71,7 @@ if($large_dataset == $LANG['enabled']) {
 }
 
 $invoices_owing = $sth->fetchAll(PDO::FETCH_ASSOC);
-$subPageActive  = $_GET['action'] =="view"  ? "customer_view" : "customer_edit" ;
+$subPageActive  = ($_GET['action'] == "view"  ? "customer_view" : "customer_edit");
 
 $smarty->assign("stuff"           , $stuff);
 $smarty->assign('customer'        , $customer);
@@ -65,4 +83,3 @@ $smarty->assign('subPageActive'   , $subPageActive);
 $smarty->assign('pageActive'      , 'customer');
 $smarty->assign('active_tab'      , '#people');
 // @formatter:on
-?>
