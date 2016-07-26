@@ -130,7 +130,7 @@
           </tr>
           <tr>
             <th>{$LANG.credit_card_number}</th>
-            <td>{$customer.credit_card_number|regex_replace:'/^............/':"************"|htmlsafe}</td>
+            <td>{$customer.credit_card_number_masked|htmlsafe}</td>
           </tr>
           <tr>
             <th>{$LANG.credit_card_expiry_month}</th>
@@ -359,7 +359,7 @@
       </tr>
       <tr>
         <th>{$LANG.credit_card_number}</th>
-        <td>{$LANG.credit_card_number_encrypted}</td>
+        <td>{$customer.credit_card_number_masked}</td>
       </tr>
       <tr>
         <th>{$LANG.credit_card_number_new}</th>

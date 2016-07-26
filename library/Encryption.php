@@ -3,20 +3,27 @@ class Encryption {
     const SCRAMBLE1 = '! "#%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~';
     const SCRAMBLE2 = 'f^jAE]okI\OzU[2&q1{3`h5w_794p@6s8?BgP>dFV=m D<TcS%Ze|r:lGK/uCy.Jx)HiQ!"#\'~(;Lt-R}Ma,NvW+Ynb*0X';
 
-    private $errors; // array of error messages
     private $adj;    // 1st adjustment value (optional)
     private $mod;
 
+    /**
+     * class constructor
+     */
     public function __construct() {
-        $this->errors = array();
         $this->adj = 1.75; // this value is added to the rolling fudgefactors
         $this->mod = 3; // if divisible by this the adjustment is made negative
     }
 
+    /**
+     * Decrypt previously encrypted key.
+     * @param string $key Encroption key.
+     * @param string $source Value to be encrypted.
+     * @return boolean|string Encrypted value.
+     * @throws new Exception if an error occurs.
+     */
     public function decrypt($key, $source) {
         if (empty($source)) {
-            $this->errors[] = 'No value has been supplied for decryption';
-            return;
+             throw new Exception('No value has been supplied for decryption');
         }
 
         $target = null;
@@ -25,9 +32,9 @@ class Encryption {
         $key .= "" . strlen($source);
         $key = md5($key);
 
-        // convert $key into a sequence of numbers
+        // Convert $key into a sequence of numbers. Note that if an error
+        // is thrown, it will be pass on.
         $fudgefactor = $this->_convertKey($key);
-        if ($this->errors) return;
 
         for ($i = 0; $i < strlen($source); $i++) {
             // extract a character from $source
@@ -35,8 +42,7 @@ class Encryption {
             // identify its position in $scramble2
             $num2 = strpos(self::SCRAMBLE2, $char2);
             if ($num2 === false) {
-                $this->errors[] = "Source string contains an invalid character ($char2)";
-                return;
+                throw new Exception("Source string contains an invalid character ($char2)");
             }
 
             // get an adjustment value using $fudgefactor
@@ -56,10 +62,18 @@ class Encryption {
         return rtrim($target);
     }
 
+    /**
+     * Encrypt specified value.
+     * @param string $key Value prepended to source to produce a more
+     *        secure Encryption/
+     * @param string $source Value to encrypt.
+     * @param number $sourcelen Lenght of resulting encrypted value.
+     * @return string Encrypted value.
+     * @throws Exception if an error occurs.
+     */
     public function encrypt($key, $source, $sourcelen = 0) {
         if (empty($source)) {
-            $this->errors[] = 'No value has been supplied for Encryption';
-            return;
+            throw new Exception("No value has been supplied for Encryption");
         }
 
         str_pad($source, $sourcelen, " ");
@@ -67,9 +81,9 @@ class Encryption {
         $key .= "" . strlen($source);
         $key = md5($key);
 
-        // convert $key into a sequence of numbers
+        // convert $key into a sequence of numbers. If error thrown
+        // it will be passed on.
         $fudgefactor = $this->_convertKey($key);
-        if (!empty($this->errors)) return;
 
         $target = null;
         $factor2 = 0;
@@ -77,8 +91,7 @@ class Encryption {
             $char1 = substr($source, $i, 1);         // extract a character from $source
             $num1 = strpos(self::SCRAMBLE1, $char1); // identify its position in $scramble1
             if ($num1 === false) {
-                $this->errors[] = "Source string contains an invalid character ($char1)";
-                return;
+                throw new Exception("Source string contains an invalid character ($char1)");
             }
 
             // get an adjustment value using $fudgefactor
@@ -98,24 +111,44 @@ class Encryption {
         return $target;
     }
 
+    /**
+     * getter of class property.
+     * @return number Adjustment setting.
+     */
     public function getAdjustment() {
         return $this->adj;
     }
 
+    /**
+     * getter of class property
+     * @return number Modulus setting.
+     */
     public function getModulus() {
         return $this->mod;
     }
 
+    /**
+     * setter for class property
+     * @param number $adj New adjustment setting
+     */
     public function setAdjustment($adj) {
         $this->adj = (float)$adj;
     }
 
+    /**
+     * Set modulus value to use in encryption
+     * @param number $mod New modulus value. Note that it will be
+     *        made a positive integer.
+     */
     public function setModulus($mod) {
         $this->mod = (int)abs($mod); // must be a positive whole number
     }
 
-    // return an adjustment value based on the contents of $fudgefactor
-    // NOTE: $fudgefactor is passed by reference so that it can be modified
+    /**
+     * Apply a specified fudge factor to the <b>adj</b> value.
+     * @param array $fudgefactor Array of fudge factor values.
+     * @return number Adjustment after fudge facktor applied.
+     */
     private function _applyFudgeFactor(&$fudgefactor) {
         $fudge = array_shift($fudgefactor); // extract 1st number from array
         $fudge += $this->adj;               // add in adjustment value
@@ -133,6 +166,11 @@ class Encryption {
         return $fudge;
     }
 
+    /**
+     * Adjust number to be within calculated limit.
+     * @param number $num Value to adjust as necessary.
+     * @return number Adjusted value.
+     */
     private function _checkRange($num) {
         $num = round($num); // round up to nearest whole number
 
@@ -143,10 +181,15 @@ class Encryption {
         return $num;
     }
 
+    /**
+     * Convert the encryption key into the required form.
+     * @param string $key Key value
+     * @return string Converted key.
+     * @throws Exception if error occurs.
+     */
     private function _convertKey($key) {
         if (empty($key)) {
-            $this->errors[] = 'No value has been supplied for the Encryption key';
-            return;
+            throw new Exception('No value has been supplied for the Encryption key');
         }
 
         $lcl_array = array();
@@ -158,8 +201,7 @@ class Encryption {
             $char = substr($key, $i, 1);
             // identify its position in $scramble1
             if (($num = strpos(self::SCRAMBLE1, $char)) === false) {
-                $this->errors[] = "Key contains an invalid character ($char)";
-                return;
+                throw new Exception("Key contains an invalid character ($char)");
             }
 
             $lcl_array[] = $num; // store in output array
@@ -170,4 +212,3 @@ class Encryption {
         return $lcl_array;
     }
 }
-
