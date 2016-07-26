@@ -1,7 +1,12 @@
 <?php
+require_once 'include/class/PdoDbException.php';
 require_once 'include/class/WhereClause.php';
+require_once 'include/class/WhereItem.php';
+require_once 'include/class/CaseStmt.php';
 require_once 'include/class/OrderBy.php';
 require_once 'include/class/DbInfo.php';
+require_once 'include/class/DbField.php';
+require_once 'include/class/Join.php';
 
 /**
  * PdoDb class
@@ -12,17 +17,21 @@ require_once 'include/class/DbInfo.php';
  * @author Rich Rowley
  */
 class PdoDb {
+    private $caseStmts;
     private $constraints;
     private $debug;
     private $distinct;
     private $excludedFields;
     private $fauxPost;
     private $fieldPrefix;
+    private $functions;
+    private $joinStmts;
     private $keyPairs;
     private $limit;
     private $orderBy;
     private $pdoDb;
     private $pdoDb2;
+    private $selectAll;
     private $selectList;
     private $table_schema;
     private $transaction;
@@ -62,7 +71,7 @@ class PdoDb {
         } catch (PDOException $e) {
             $str = "PdoDb - construct error: " . $e->getMessage();
             error_log($str);
-            throw new Exception($str);
+            throw new PdoDbException($str);
         }
     }
 
@@ -85,14 +94,18 @@ class PdoDb {
      */
     public function clearAll($clearTran=true) {
         // @formatter:off
+        $this->caseStmts      = null;
         $this->constraints    = null;
         $this->distinct       = false;
         $this->excludedFields = null;
         $this->fauxPost       = null;
         $this->fieldPrefix    = null;
+        $this->functions      = null;
+        $this->joinStmts      = null;
         $this->keyPairs       = null;
         $this->limit          = 0;
         $this->orderBy        = null;
+        $this->selectAll      = false;
         $this->selectList     = null;
         $this->usePost        = true;
         $this->whereClause    = null;
@@ -126,6 +139,7 @@ class PdoDb {
      * @return string Unique token name.
      */
     public static function makeToken($token, &$cnt) {
+        $token = preg_replace('/\./', '_', $token);
         return sprintf("%s_%03d", $token, $cnt++);
     }
 
@@ -175,12 +189,48 @@ class PdoDb {
         } else if (is_a($where, "WhereClause")) {
             $this->whereClause = $where;
         } else {
-            throw new Exception("PdoDb.php - addToWhere(): Item must be an object of WhereItem or WhereClause");
+            throw new PdoDbException("PdoDb.php - addToWhere(): Item must be an object of WhereItem or WhereClause");
         }
     }
 
     /**
+     * Specify functions with parameters to list of those to perform
+     * @param mixed $function Function to include in parameter list. Example: count(id).
+     */
+    public function addToFunctions($function) {
+        if (isset($this->function)) {
+            $this->functions[] = $function;
+        } else {
+            $this->functions = array($function);
+        }
+    }
+
+    /**
+     * Add a <b>Join</b> object to this request.
+     * @param Join $join Object to build a <b>JOIN</b> clause from.
+     */
+    public function addToJoins(Join $join) {
+        if (isset($this->joinStmts)) {
+            $this->joinStmts[] = $join;
+        } else {
+            $this->joinStmts = array($join);
+        }
+    }
+
+    /**
+     * Add a <b>CaseStmt</b> object to this request.
+     * @param CaseStmt $caseStmt Object to build a <b>CASE</b> statement from.
+     */
+    public function addToCaseStmts(CaseStmt $caseStmt) {
+        if (isset($this->caseStmt)) {
+            $this->caseStmts[] = $caseStmt;
+        } else {
+            $this->caseStmts = array($caseStmt);
+        }
+    }
+    /**
      * Set the <b>ORDER BY</b> statement object to generate when the next request is performed.
+     * Note that this method can be called multiple times to add additional values.
      * @param OrderBy $orderBy Can take several forms.
      *        1) A string that is the name of the field to order by in ascending order.
      *           Ex: "street_address".
@@ -197,24 +247,29 @@ class PdoDb {
         } else {
             if (!isset($this->orderBy)) $this->orderBy = new OrderBy();
             if (is_array($orderBy)) {
-                foreach($orderBy as $item) {
-                    if (is_array($item)) {
+                if (is_array($orderBy[0])) {
+                    foreach($orderBy as $item) {
                         if (count($item) != 2) {
                             $str = "PdoDb setOrderby - field array is invalid. Must be <b>field</b> and <b>order</b>.";
                             error_log($str);
-                            throw new Exception($str);
+                            throw new PdoDbException($str);
                         }
                         $this->orderBy->addField($item[0], $item[1]);
-                    } else {
-                        $this->orderBy->addField($item);
                     }
+                } else {
+                    if (count($orderBy) != 2) {
+                        $str = "PdoDb setOrderby - field array is invalid. Must be <b>field</b> and <b>order</b>.";
+                        error_log($str);
+                        throw new PdoDbException($str);
+                    }
+                    $this->orderBy->addField($orderBy[0], $orderBy[1]);
                 }
             } else if (is_string($orderBy)) {
                 $this->orderBy->addField($orderBy);
             } else {
                 $str = "PdoDb setOrderBy(): Invalid parameter type. " . print_r($orderBy, true);
                 error_log($str);
-                throw new Exception($str);
+                throw new PdoDbException($str);
             }
         }
     }
@@ -222,9 +277,10 @@ class PdoDb {
     /**
      * Set a limit on records accessed
      * @param integer $limit Value to specify in the <i>LIMIT</i> parameter.
+     * @param integer $offset Number of records to skip before reading the next $limit amount.
      */
-    public function setLimit($limit) {
-        $this->limit = $limit;
+    public function setLimit($limit, $offset=0) {
+        $this->limit = ($offset > 0 ? $offset . ", " : "") . $limit;
     }
 
     /**
@@ -244,7 +300,7 @@ class PdoDb {
             $this->clearAll();
             $str = "PdoDb - setExcludedFields(): \"\$excludedFields\" parameter is not an array.";
             error_log($str);
-            throw new Exception($str);
+            throw new PdoDbException($str);
         }
     }
 
@@ -276,12 +332,33 @@ class PdoDb {
     }
 
     /**
+     * setter for class property.
+     * @param boolean $selectAll
+     */
+    public function setSelectAll($selectAll) {
+        $this->selectAll = $selectAll;
+    }
+
+    /**
      * Specify the subset of fields that a <i>SELECT</i> is to access.
      * Note that default is to select all fields.
-     * @param array $selectList List of field names to select.
+     * @param mixed $selectList Can take one of two forms.
+     *        1) A string with the field name to select from the table.
+     *           Ex: "street_address".
+     *        2) An array of field names to select from the table.
+     *           Ex: array("name", "street_address", "city", "state", "zip").
+     * @throws Exception if an invalid parameter type is found.
      */
     public function setSelectList($selectList) {
-        $this->selectList = $selectList;
+        if (is_array($selectList)) {
+            $this->selectList = $selectList;
+        } else if (is_string($selectList)) {
+            $this->selectList = $selectList;
+        } else {
+            $str = "PdoDb setSelectList(): Invalid parameter type. " . print_r($selectList, true);
+            error_log($str);
+            throw new PdoDbException($str);
+        }
     }
 
     /**
@@ -313,6 +390,7 @@ class PdoDb {
                 }
 
                 // Walk the array to see if we can add single-quotes to strings
+                $count = null;
                 array_walk($values, create_function('&$v, $k', 'if (!is_numeric($v) && $v!="NULL") $v = "\'".$v."\'";'));
                 $sql = preg_replace($keys, $values, $sql, 1, $count);
 
@@ -338,7 +416,7 @@ class PdoDb {
         } else {
             $this->clearAll();
             error_log("PdoDb - lastInsertId(): Prepare error." . print_r($sth->errorInfo(), true));
-            throw new Exception('PdoDb lastInsertId(): Prepare error.');
+            throw new PdoDbException('PdoDb lastInsertId(): Prepare error.');
         }
     }
 
@@ -370,9 +448,10 @@ class PdoDb {
                                  WHERE `column_name` =:column_name
                                    AND `table_schema`=:table_schema
                                    AND `table_name`  =:table;";
-                        $token_pairs = array(':column_name' =>$nam,
-                                             ':table_schema'=>$this->table_schema,
-                                             ':table'       =>$table);
+                        $token_pairs = array(':column_name' => $nam,
+                                             ':table_schema'=> $this->table_schema,
+                                             ':table'       => $table
+                        );
                         if ($tth = $this->pdoDb2->prepare($sql)) {
                             if ($tth->execute($token_pairs)) {
                                 while ($row2 = $tth->fetch(PDO::FETCH_ASSOC)) {
@@ -432,13 +511,13 @@ class PdoDb {
 
     /**
      * Begin a transaction.
-     * @throw new Exception if a transaction is already in process.
+     * @throw new PdoDbException if a transaction is already in process.
      */
     public function begin() {
         if ($this->debug) error_log("begin()");
         if ($this->transaction) {
             $this->rollback();
-            throw new Exception("PdoDb begin(): Called when transaction already in process.");
+            throw new PdoDbException("PdoDb begin(): Called when transaction already in process.");
         }
         $this->clearAll();
         $this->transaction = true;
@@ -456,7 +535,7 @@ class PdoDb {
             $this->clearAll();
         } else {
             $this->clearAll();
-            throw new Exception("PdoDb rollback(): Called when no transaction is in process.");
+            throw new PdoDbException("PdoDb rollback(): Called when no transaction is in process.");
         }
     }
 
@@ -472,8 +551,32 @@ class PdoDb {
             $this->clearAll();
         } else {
             $this->clearAll();
-            throw new Exception("PdoDb commit(): Called when no transaction is in process.");
+            throw new PdoDbException("PdoDb commit(): Called when no transaction is in process.");
         }
+    }
+
+    /**
+     * Enclose field in <b>back-ticks</b> and add table alias if
+     * specified and not one already present.
+     * @param string $field Field to modify.
+     * @param string $alias Table alias or <b>null</b> if none.
+     * @return string Updated field.
+     */
+    public static function formatField($field, $alias = null) {
+        $matches = array();
+        if (preg_match('/^([a-z]+)\.(.*)$/', $field, $matches)) {
+            $parts = array();
+            if (preg_match('/(.*) +([aA][sS]) +(.*)/', $matches[2], $parts)) {
+                $field = '`' . $matches[1] . '`.`' . $parts[1] . '` AS ' . $parts[3];
+            } else {
+                // Already and alias present
+                $field = '`' . $matches[1] . '`.`' . $matches[2] . '`';
+            }
+        } else if (isset($alias)) {
+            // Needs to have alias added.
+            $field = '`' . $alias . '`.`' . $field . '`';
+        }
+        return $field;
     }
 
     /**
@@ -482,6 +585,8 @@ class PdoDb {
      *        <b>INSERT</b>, <b>UPDATE</b> and <b>DELETE</b>. Note that letter
      *        case of this parameter does not matter.
      * @param string $table Database table name.
+     * @param string $alias (Optional) Alias for table name. Note that the alias need
+     *         be in the select list. If not present, it will be added to selected fields.
      * @return mixed value based on <b>$request</b>.
      *         <b>SELECT</b> returns array of rows selected.
      *         <b>INSERT</b> returns the unique ID assigned to the inserted record if an
@@ -489,7 +594,7 @@ class PdoDb {
      *         <b>UPDATE</b> and <b>DELETE</b> returns <b>true</b>.
      * @throws Exception if any unexpected setting or missing information is encountered.
      */
-    public function request($request, $table) {
+    public function request($request, $table, $alias = null) {
         $request = strtoupper($request);
         $pattern = '/^' . TB_PREFIX . '/';
         if ((preg_match($pattern, $table)) != 1) {
@@ -498,35 +603,34 @@ class PdoDb {
 
         if (!($columns = $this->getTableFields($table))) {
             $this->clearAll();
-            throw new Exception("PdoDb - request(): Invalid table, $table, specified.");
+            throw new PdoDbException("PdoDb - request(): Invalid table, $table, specified.");
         }
 
         $sql = "";
         $valuePairs = array();
         $this->keyPairs = array();
+        $token_cnt = 0;
 
         // Build WHERE clause and get value pair list for tokens in the clause.
-        if (empty($this->whereClause)) {
-            $where = '';
-            $token_cnt = 0;
-        } else {
-            $where = (empty($this->whereClause) ? '' : $this->whereClause->build($this->keyPairs));
-            $token_cnt = $this->whereClause->getTokenCnt();
+        $where = "";
+        if (!empty($this->whereClause)) {
+            $where = $this->whereClause->build($this->keyPairs, $alias);
+            $token_cnt += $this->whereClause->getTokenCnt();
         }
 
         // Build ORDER BY statement
-        $order = (empty($this->orderBy) ? '' : $this->orderBy->buildOrder());
+        $order = (empty($this->orderBy) ? '' : $this->orderBy->buildOrder($alias));
 
         // Build LIMIT
         $limit = (empty($this->limit) ? '' : " LIMIT $this->limit");
 
         // Make an array of paired column name and values. The column name is the
         // index and the value is the content at that column.
-        foreach ($columns as $column => $constraints) {
-            // If present, prepend the prefix followed by an underscore to the column name
-            // used to index the $_POST array.
+        foreach ($columns as $column => $this->constraints) {
+            // Check to see if a field prefix was specified and that there is no
+            // table alias present. If so, prepend the prefix followed by an underscore.
             // @formatter:off
-            $postColumn = (isset($this->fieldPrefix) ? $this->fieldPrefix . '_' . $column : $column);
+            $postColumn = $column;
             if (( $this->usePost && isset($_POST[$postColumn])) ||
                 (!$this->usePost && isset($this->fauxPost[$postColumn]))) {
                 $valuePairs[$column] = ($this->usePost ? $_POST[$postColumn] : $this->fauxPost[$postColumn]);
@@ -539,34 +643,61 @@ class PdoDb {
         switch ($request) {
             case "SELECT":
                 $useValueList = false;
-                if (isset($this->selectList)) {
+                if (!$this->selectAll &&
+                    (isset($this->selectList) || isset($this->functions) || isset($this->caseStmts))) {
                     $list = "";
-                    foreach($this->selectList as $column) {
-                        if (!empty($list)) $list .= ',';
-                        $list .= '`' . $column . '`';
-                    }
                 } else {
                     $list = "*";
                 }
-                $sql  = "SELECT " . ($this->distinct ? "DISTINCT " : "") . $list . " FROM `" . $table . "` \n";
+
+                if (isset($this->selectList)) {
+                    foreach($this->selectList as $column) {
+                        if (!empty($list)) $list .= ', ';
+                        $list .= $this->formatField($column, $alias);
+                    }
+                }
+
+                if (isset($this->functions)) {
+                    foreach($this->functions as $function) {
+                        if (!empty($list)) $list .= ", ";
+                        $list .= $function;
+                    }
+                }
+
+                if (isset($this->caseStmts)) {
+                    foreach($this->caseStmts as $caseStmt) {
+                        if (!empty($list)) $list .= ", ";
+                        $list .= $caseStmt->build();
+                    }
+                }
+
+                $sql  = "SELECT " . ($this->distinct ? "DISTINCT " : "") . "$list FROM `$table` " .
+                        (isset($alias) ? "`$alias` " : "") . "\n";
+
+                if (isset($this->joinStmts)) {
+                    foreach($this->joinStmts as $join) {
+                        $sql .= $join->build($this->keyPairs) . "\n";
+                    }
+                }
+
                 break;
 
             case "INSERT":
-                $sql  = "INSERT INTO `" . $table . "` \n";
+                $sql  = "INSERT INTO `$table` \n";
                 break;
 
             case "UPDATE":
-                $sql  = "UPDATE `" . $table . "` SET \n";
+                $sql  = "UPDATE `$table` SET \n";
                 break;
 
             case "DELETE":
-                $sql  = "DELETE FROM `" . $table . "` \n";
+                $sql  = "DELETE FROM `$table` \n";
                 break;
 
             default:
                 error_log("PdoDb - request(): Request, $request, not implemented.");
                 $this->clearAll();
-                throw new Exception("PdoDb - request():  Request, $request, not implemented.");
+                throw new PdoDbException("PdoDb - request():  Request, $request, not implemented.");
         }
 
         if ($useValueList) $sql .= $this->makeValueList($request, $valuePairs, $token_cnt) . "\n";
@@ -597,18 +728,17 @@ class PdoDb {
         if (!($sth = $this->pdoDb->prepare($sql))) {
             error_log("PdoDb - query(): Prepare error." . print_r($sth->errorInfo(), true));
             $this->clearAll();
-            throw new Exception('PdoDb query(): Prepare error.');
+            throw new PdoDbException('PdoDb query(): Prepare error.');
         }
 
         if (isset($valuePairs) && is_array($valuePairs)) {
             foreach ($valuePairs as $key => $val) {
                 $pattern = "/[^a-zA-Z0-9_\-]" . $key . "[^a-zA-Z0-9_\-]|[^a-zA-Z0-9_\-]" . $key . "$/";
-                $result = (preg_match($pattern, $sql));
                 if (preg_match($pattern, $sql) == 1) {
                     if (!$sth->bindValue($key, $val)) {
-                        error_log("PdoDb - query(): Unable to bind values" . print_r($sth->errorInfo(), true));
+                        // error_log("PdoDb - query(): Unable to bind values" . print_r($sth->errorInfo(), true));
                         $this->clearAll();
-                        throw new Exception('PdoDb - query(): Unable to bind values.');
+                        throw new PdoDbException('PdoDb - query(): Unable to bind values.');
                     }
                 }
             }
@@ -621,7 +751,7 @@ class PdoDb {
             $this->debug = $tmp;
             error_log("PdoDb - query(): Execute error." . print_r($sth->errorInfo(), true));
             $this->clearAll();
-            throw new Exception('PdoDb - query(): Execute error. See error_log.');
+            throw new PdoDbException('PdoDb - query(): Execute error. See error_log.');
         }
 
         $parts = explode(' ', $sql);

@@ -42,7 +42,7 @@ class OrderBy {
         if ($lcl_order != 'A' && $lcl_order != 'D') {
             $str = "OrderBy - addField(): Invalid order, $lcl_order, specified.";
             error_log($str);
-            throw new Exception(str);
+            throw new PdoDbException(str);
         }
 
         $lcl_order = ($lcl_order == 'A' ? 'ASC' : 'DESC');
@@ -61,7 +61,7 @@ class OrderBy {
                                  count($item) == 1 ? "field name: $item[0]" :
                                                      "Too many elements. Dimensions: " . count($item));
                         error_log($str);
-                        throw new Exception($str);
+                        throw new PdoDbException($str);
                     }
                 } else {
                     $this->orderByFields[] = array($fields, $lcl_order);

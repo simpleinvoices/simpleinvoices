@@ -1,12 +1,12 @@
 <?php
 require_once 'include/class/PdoDb.php';
-
+require_once 'include/class/DbField.php';
 /**
  * Class for a single test item in the <b>WHERE</b> clause.
  * @author Rich Rowley
  */
 class WhereItem {
-    const CONNECTORS = '/AND|OR/';
+    const CONNECTORS = '/^(AND|OR)$/';
     const OPERATORS = '/^(=|<>|<|>|<=|>=|BETWEEN|LIKE|IN)$/';
 
     private $close_paren;
@@ -41,24 +41,24 @@ class WhereItem {
         $this->connector = (isset($connector) ? strtoupper($connector) : '');
 
         if (!preg_match(self::OPERATORS, $this->operator)) {
-            throw new Exception("WhereItem - Invalid operator, $this->operator, specified.");
+            throw new PdoDbException("WhereItem - Invalid operator, $this->operator, specified.");
         }
 
         if (!empty($this->connector) && !preg_match(self::CONNECTORS, $this->connector)) {
-            throw new Exception("WhereItem - Invalid connector, $this->connector, specified.");
+            throw new PdoDbException("WhereItem - Invalid connector, $this->connector, specified.");
         }
 
         switch ($this->operator) {
             case 'BETWEEN':
                 if (!is_array($value) || count($value) != 2) {
-                    throw new Exception("WhereItem - Invalid value for BETWEEN operator. Must be an array of two elements.");
+                    throw new PdoDbException("WhereItem - Invalid value for BETWEEN operator. Must be an array of two elements.");
                 }
                 $this->value = $value;
                 break;
 
             case 'IN':
                 if (!is_array($value)) {
-                    throw new Exception("WhereItem - Invalid value for IN operator. Must be an array.");
+                    throw new PdoDbException("WhereItem - Invalid value for IN operator. Must be an array.");
                 }
                 $this->value = $value;
                 break;
@@ -84,7 +84,8 @@ class WhereItem {
     public function build(&$cnt, &$keyPairs) {
         $item = '';
         if ($this->open_paren) $item .= '(';
-        $item .= "`$this->field` $this->operator ";
+        $field = PdoDb::formatField($this->field);
+        $item .= "$field $this->operator ";
         switch ($this->operator) {
             case 'BETWEEN':
                 $tk1 = PdoDb::makeToken($this->token, $cnt);
@@ -106,9 +107,13 @@ class WhereItem {
                 break;
 
             default:
-                $tk = PdoDb::makeToken($this->token, $cnt);
-                $item .= $tk . ' ';
-                $keyPairs[$tk] = $this->value;
+                if (DbField::isField($this->value, "Field")) {
+                    $item .= $this->value->genParm();
+                } else {
+                    $tk = PdoDb::makeToken($this->token, $cnt);
+                    $item .= $tk . ' ';
+                    $keyPairs[$tk] = $this->value;
+                }
                 break;
         }
 

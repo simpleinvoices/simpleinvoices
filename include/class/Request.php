@@ -153,7 +153,7 @@ class Request {
             // @formatter:on
             return $pdoDb->request($this->request, $this->table);
         } catch (Exception $e) {
-            throw new Exception("Request performRequest() - " . $e->getMessage());
+            throw new PdoDbException("Request performRequest() - " . $e->getMessage());
         }
     }
 

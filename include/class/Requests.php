@@ -85,7 +85,7 @@ class Requests {
             $this->pdoDb->rollback();
             $str = "Requests process(): " . $request->describe() . ". Error: " . $e->getMessage();
             error_log($str);
-            throw new Exception($str);
+            throw new PdoDbException($str);
         }
     }
 
