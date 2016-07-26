@@ -1,4 +1,5 @@
 <?php
+global $LANG;
 // @formatter:off
 $LCL_LANG = array(
     'billed'         => "Billed",

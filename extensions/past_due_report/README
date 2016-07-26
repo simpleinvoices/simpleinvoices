@@ -2,7 +2,6 @@ This extension provides a report that shows customers with invoices
 that are 30-days or more past due and optionally, the past due
 invoices. 
 
-This extension can be used in concert with the "invoice_export"
-extension to make the calculated value, "past_due_amt," available
-for use in the invoice that is being exported to printer, pdf,
-excel spreedsheet or word document.
+This extension also provides a smarty value, $past_due_amt, available
+for use on invoice generated for print or export as a PDF, Word or
+Excel file.
