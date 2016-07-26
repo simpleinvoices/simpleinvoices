@@ -4,7 +4,7 @@ checkLogin();
 
 //if valid then do save
 if ($_POST['name'] != "" ) {
-	include("./modules/product_attribute/save.php");
+    include("./modules/product_attribute/save.php");
 }
 
 #get the invoice id
@@ -13,7 +13,7 @@ $id = $_GET['id'];
 $sql_prod = "SELECT * FROM ".TB_PREFIX."products_attributes WHERE id = :id;";
 $sth_prod =  dbQuery($sql_prod, ':id', $id);
 $product_attribute = $sth_prod->fetch();
-$type = product_attributes::get($id);
+$type = ProductAttributes::get($id);
 $product_attribute['type'] = $type['type'];
 
 $sql2= "SELECT id, name FROM ".TB_PREFIX."products_attribute_type";
