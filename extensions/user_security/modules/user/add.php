@@ -16,13 +16,14 @@
  * Website:
  *     http://www.simpleinvoices.org
  */
+global $smarty;
 
 checkLogin();
 
 //get user roles
 $roles = user::getUserRoles();
 
-if ($_POST['username'] != "") {
+if (isset($_POST['username']) && $_POST['username'] != "") {
     include ("./extensions/user_security/modules/user/save.php");
 }
 

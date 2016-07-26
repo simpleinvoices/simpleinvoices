@@ -19,9 +19,9 @@
     <table>
       <tr>
         <th>{$LANG.username}
-          <a class="cluetip" href="#" tabindex="900"
-             rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field"
-             title="{$LANG.required_field}">
+          <a class="cluetip" href="#" tabindex="910"
+             rel="index.php?module=documentation&amp;view=view&amp;page=help_username"
+             title="{$LANG.username}">
             <img src="{$help_image_path}required-small.png" alt="" />
           </a>
         </th>
@@ -32,34 +32,35 @@
       </tr>
       <tr>
         <th>{$LANG.new_password}
-          <a class="cluetip" href="#" tabindex="910"
+          <a class="cluetip" href="#" tabindex="920"
              rel="index.php?module=documentation&amp;view=view&amp;page=help_new_password"
              title="{$LANG.new_password}">
-          <img src="{$help_image_path}help-small.png" alt="" />
-        </a>
+            <img src="{$help_image_path}required-small.png" alt="" />
+          </a>
         </th>
         <td><input type="password" name="password" size="20" pattern="{$pwd_pattern}"
                    title="See help for details." tabindex="20"
+                   class="validate[required]"
                    onchange="genConfirmPattern(this,'confirm_pwd_id');"/></td>
       </tr>
       <tr>
         <th>{$LANG.confirm_password}
-          <a class="cluetip" href="#" tabindex="920"
+          <a class="cluetip" href="#" tabindex="930"
              rel="index.php?module=documentation&amp;view=view&amp;page=help_confirm_password"
              title="{$LANG.confirm_password}">
-            <img src="{$help_image_path}help-small.png" alt="" />
-        </a>
+            <img src="{$help_image_path}required-small.png" alt="" />
+          </a>
         </th>
         <td><input type="password" name="confirm_password" size="20" tabindex="30"
-                   pattern="{$pwd_pattern}" /></td>
+                   class="validate[required]" pattern="{$pwd_pattern}" /></td>
       </tr>
       <tr>
         <th>{$LANG.email}
-          <a class="cluetip" href="#" tabindex="930"
+          <a class="cluetip" href="#" tabindex="940"
              rel="index.php?module=documentation&amp;view=view&amp;page=help_email_address"
              title="{$LANG.required_field}">
             <img src="{$help_image_path}required-small.png" alt="" />
-        </a>
+          </a>
         </th>
         <td>
           <input type="text" name="email" size="35" id="email"
@@ -68,11 +69,11 @@
       </tr>
       <tr>
         <th>{$LANG.role}
-          <a class="cluetip" href="#" tabindex="940"
+          <a class="cluetip" href="#" tabindex="950"
              rel="index.php?module=documentation&amp;view=view&amp;page=help_user_role"
              title="{$LANG.role}">
-            <img src="{$help_image_path}help-small.png" alt="" />
-        </a>
+            <img src="{$help_image_path}required-small.png" alt="" />
+          </a>
         </th>
         <td>
           <select name="role_id" tabindex="50" >
@@ -89,8 +90,23 @@
         <td>{html_options name=enabled options=$enabled selected=1 tabindex=60}</td>
       </tr>
       <tr>
-        <th>{$LANG.users}</th>
+        <th>{$LANG.user_id}
+          <a class="cluetip" href="#" tabindex="970"
+             rel="index.php?module=documentation&amp;view=view&amp;page=help_user_id"
+             title="{$LANG.user_id}">
+            <img src="{$help_image_path}required-small.png" alt="" />
+          </a>
+        </th>
+
+        </th>
         <td>
+          <select name="user_id" tabindex="60">
+            <option selected value="0">0 - USER</option>
+            {foreach from=$cust_info item=cust}
+            <option value="{$cust.id|htmlsafe}">{$cust.id|htmlsafe} - {$cust.name|htmlsafe}</option>
+            {/foreach}
+          </select>
+
           <input type="text" name="user_id" value="0" size="12" id="user_id"
                  autocomplete="off" class="validate[required]"  tabindex="70"/>
         </td>

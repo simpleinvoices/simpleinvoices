@@ -1,4 +1,6 @@
 <?php
+global $get_val, $description, $LANG, $defaults, $value, $found;
+
 switch ($get_val) {
     // @formatter:off
     case "company_logo":
@@ -68,3 +70,4 @@ switch ($get_val) {
         break;
     // @formatter:on
 }
+if ($description || $value || $found) {} // Here to stop unused variable warnings.

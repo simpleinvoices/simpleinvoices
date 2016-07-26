@@ -10,35 +10,42 @@ if (!function_exists('loginLogo')) {
         // Not a post action so set up company logo and name to display on login screen.
         //<img src="./extensions/user_security/images/{$defaults.company_logo}" alt="User Logo">
         $image = "./extensions/user_security/images/" . $defaults['company_logo'];
-        $imgWidth = 0;
-        $imgHeight = 0;
-        $maxWidth = 100;
-        $maxHeight = 100;
-        list($width, $height, $type, $attr) = getimagesize($image);
-        if (($width > $maxWidth || $height > $maxHeight)) {
-            $wp = $maxWidth / $width;
-            $hp = $maxHeight / $height;
-            $percent = ($wp > $hp ? $hp : $wp);
-            $imgWidth = ($width * $percent);
-            $imgHeight = ($height * $percent);
-        }
-        if ($imgWidth > 0 && $imgWidth > $imgHeight) {
-            $w1 = "20%";
-            $w2 = "78%";
+        if (is_readable($image)) {
+            $imgWidth = 0;
+            $imgHeight = 0;
+            $maxWidth = 100;
+            $maxHeight = 100;
+            list($width, $height, $type, $attr) = getimagesize($image);
+            if (($width > $maxWidth || $height > $maxHeight)) {
+                $wp = $maxWidth / $width;
+                $hp = $maxHeight / $height;
+                $percent = ($wp > $hp ? $hp : $wp);
+                $imgWidth = ($width * $percent);
+                $imgHeight = ($height * $percent);
+            }
+            if ($imgWidth > 0 && $imgWidth > $imgHeight) {
+                $w1 = "20%";
+                $w2 = "78%";
+            } else {
+                $w1 = "18%";
+                $w2 = "80%";
+            }
+            $comp_logo_lines = "<div style='display:inline-block;width:$w1;'>" .
+                               "  <img src='$image' alt='Company Logo' " .
+                                  ($imgHeight == 0 ? "" : "height='$imgHeight' ") .
+                                  ($imgWidth  == 0 ? "" : "width='$imgWidth' ") . "/>" .
+                               "</div>";
+            $smarty->assign('comp_logo_lines', $comp_logo_lines);
+            $txt_align = "left";
         } else {
-            $w1 = "18%";
-            $w2 = "80%";
+            $w2 = "100%";
+            $txt_align = "center";
         }
-        $comp_logo_lines = "<div style='display:inline-block;width:$w1;'>" .
-                           "  <img src='$image' alt='Company Logo' " .
-                              ($imgHeight == 0 ? "" : "height='$imgHeight' ") .
-                              ($imgWidth  == 0 ? "" : "width='$imgWidth' ") . "/>" .
-                           "</div>";
         $comp_name_lines = "<div style='display:inline-block;width:$w2;vertical-align:middle;'>" .
-                           "  <h1 style='margin-left:20px;text-align:left;'>" . $defaults['company_name_item'] . "</h1>" .
+                           "  <h1 style='margin-left:20px;text-align:$txt_align;'>" .
+                                  $defaults['company_name_item'] . "</h1>" .
                            "</div>";
 
-        $smarty->assign('comp_logo_lines', $comp_logo_lines);
         $smarty->assign('comp_name_lines', $comp_name_lines);
     }
 }
@@ -59,8 +66,8 @@ Zend_Session::start();
 $errorMessage = '';
 loginLogo($smarty, $defaults);
 
-if ($patchCount < "294") {
-    $errorMessage = "Extension \"user_security\" requires sql patch level 294 or greater.";
+if ($patchCount < "293") {
+    $errorMessage = "Extension \"user_security\" requires sql patch level 293 or greater.";
 } else if (empty($_POST['user']) || empty($_POST['pass'])) {
     if (isset($_POST['action']) && $_POST['action'] == 'login') {
         $errorMessage = STD_LOGIN_FAILED_MSG;
@@ -96,7 +103,6 @@ if ($patchCount < "294") {
         // @formatter:on
 
         if ($timeout <= 0) {
-            error_log("Extension \"system_defaults\" invalid timeout value[$timeout]. Set to default of 60 minutes.");
             $timeout = 60;
         }
         $authNamespace->setExpirationSeconds($timeout * 60);

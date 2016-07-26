@@ -1,5 +1,7 @@
 <?php
-if ($patchCount >= "294") {
+global $patchCount, $help_image_path, $zendDb;
+
+if ($patchCount >= "293") {
     include_once './extensions/user_security/include/sql_queries.php';
     include_once './extensions/user_security/include/class/UserSecurity.php';
     UserSecurity::addUserName();
@@ -12,7 +14,6 @@ if ($patchCount >= "294") {
     // @formatter:on
     $timeout = intval($session_timeout['value']);
     if ($timeout <= 0) {
-      error_log("Extension - session_timeout - init.php: Invalid timeout value, $timeout. Set to default of 60 minutes.");
       $timeout = 60;
     }
 
@@ -21,4 +22,5 @@ if ($patchCount >= "294") {
     $authNamespace->setExpirationSeconds($timeout * 60);
 
     $help_image_path = "./extensions/user_security/images/common/";
+    if ($help_image_path) {} // Remove unused variable warning.
 }

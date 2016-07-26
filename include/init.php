@@ -2,10 +2,11 @@
 /* *************************************************************
  * Zend framework init - start
  * *************************************************************/
-set_include_path(get_include_path() . PATH_SEPARATOR . "./include/class");
 set_include_path(get_include_path() . PATH_SEPARATOR . "./library/");
 set_include_path(get_include_path() . PATH_SEPARATOR . "./library/pdf");
+set_include_path(get_include_path() . PATH_SEPARATOR . "./library/pdf/fpdf");
 set_include_path(get_include_path() . PATH_SEPARATOR . "./include/");
+set_include_path(get_include_path() . PATH_SEPARATOR . "./include/class");
 
 require_once 'Zend/Loader/Autoloader.php';
 
@@ -14,6 +15,7 @@ $autoloader->setFallbackAutoloader(true);
 
 Zend_Session::start();
 $auth_session = new Zend_Session_Namespace('Zend_Auth');
+if ($auth_session) {} // Show variable as used.
 
 // start use of zend_cache and set the lifetime for 2 hours.
 // $frontendOptions = array('lifetime' => 7200, 'automatic_serialization' => true);
@@ -47,6 +49,7 @@ if (!is_writable($logFile)) {
 }
 $writer = new Zend_Log_Writer_Stream($logFile);
 $logger = new Zend_Log($writer);
+if ($logger) {} // Show variable as used.
 /* *************************************************************
  * log file - end
  * *************************************************************/
@@ -56,6 +59,7 @@ if (!is_writable('./tmp/cache')) {
 }
 
 include_once ('./config/define.php');
+global $environment;
 
 // Include another config file if required
 $config_file_path = "";
@@ -147,11 +151,13 @@ $smarty->register_modifier("unescape", "stripslashes");
 $path = pathinfo($_SERVER['REQUEST_URI']);
 // SC: Install path handling will need changes if used in non-HTML contexts
 $install_path = htmlsafe($path['dirname']);
+if ($install_path) {} // Show variable as used.
 
 include_once ("./include/class/db.php");
 // With the database built, a connection should be able to be made
 // if the configuration user, password, etc. are set correctly.
 $db = ($databaseBuilt ? db::getInstance() : NULL);
+if ($db) {} // Show variable as used.
 
 include_once ("./include/class/index.php");
 include_once ("./include/sql_queries.php");
@@ -225,6 +231,7 @@ $early_exit[] = "statement_export";
 $early_exit[] = "invoice_template";
 $early_exit[] = "payments_print";
 $early_exit[] = "documentation_view";
+if ($early_exit) {} // Show variable as used.
 
 switch ($module) {
     case "export":
@@ -234,9 +241,11 @@ switch ($module) {
         $smarty_output = "display";
         break;
 }
+if ($smarty_output) {} // Show variable as used.
 
 // get the url - used for templates / pdf
 $siUrl = getURL();
+if ($siUrl) {} // Show variable as used.
 
 /* *************************************************************
  * If using the folowing line, the DB settings should be

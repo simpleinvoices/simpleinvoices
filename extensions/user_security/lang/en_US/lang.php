@@ -28,6 +28,12 @@ $LCL_LANG = array(
                                     setting is 15 (minutes) and the maximum is 999 (minutes) which is effectively no
                                     timeout. The period is renewed each time the user submits an entry.",
     'help_user_enabled'         => "Select <b>Enabled</b> or <b>Disabled</b> to allow or disallow access by this user.",
+    'help_user_id'              => "This field identifies the user as being a <b>Biller</b>, <b>Customer</b> or <b>User</b>.
+                                    It is used in conjunction with the <b><i>Role</i></b> setting. If <b><i>Role</i></b>
+                                    is set to <b><i>Customer</i></b> then this field specifies the Customer ID of invoices
+                                    this user can access. Similarly, if the <b<i>Role</i></b> is set to <b><i>Biller</i></b>,
+                                    this field specifies the Biller ID of invoices this user can access. The remaining
+                                    <b><i>Role</i></b> settings are for a <b><i>User</i></b>.",
     'help_username'             => "Enter a unique <b><i>User Name</i></b> to be assigned to this user. It must be at least
                                     6-characters long and begin with an alpha character. The remaining characters can be
                                     upper or lower case alpha or numberic characters as well as any of the following
@@ -39,9 +45,11 @@ $LCL_LANG = array(
     'password_special'          => "Password Special Required",
     'password_upper'            => "Password Upper Required",
     'session_timeout'           => "Session Timeout",
-    'username'                  => "User Name"
+    'username'                  => "User Name",
+    'user_id'                   => "User ID"
 );
 // @formatter:on
+global $defaults;
 $pwd_msg = "Passwords must:
             <ul>
               <li>Begin with an alpha character</li>
