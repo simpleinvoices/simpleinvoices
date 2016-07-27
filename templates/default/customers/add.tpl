@@ -1,15 +1,15 @@
 {*
  * Script: add.tpl
- * Customers add template
+ *      Customers add template
  *
  * Last edited:
- *   2008-08-25
+ *      2016-07-27
  *
  * License:
- *   GPL v3 or above
+ *      GPL v3 or above
  *}
 {* if customer is updated or saved.*} 
-{if $smarty.post.name != "" && $smarty.post.name != null } 
+{if $smarty.post.name != null && $smarty.post.name != "" } 
   {include file="../templates/default/customers/save.tpl"}
 {else}
   {* if  name was inserted *} 

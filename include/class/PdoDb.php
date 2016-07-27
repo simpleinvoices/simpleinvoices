@@ -719,7 +719,7 @@ class PdoDb {
      * @return Result varies with the request type. <b>INSERT</b> returns the
      *         auto increment unique ID (or blank if no such field), <b>SELECT</b>
      *         returns the associative array for selected rows, <b>SHOW</b> returns
-     *         the numberic array of specified show request, otherwise <b>true</b>
+     *         the numberic array of specified <b>SHOW</b> request, otherwise <b>true</b>
      *         on success.
      * @throws Exception If unable to bind values or execute request.
      */

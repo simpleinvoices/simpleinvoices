@@ -254,18 +254,17 @@ function insertProduct_cflgs($enabled = 1, $visible = 1, $domain_id = '') {
 
     $attr = array();
     foreach ($attributes as $v) {
-        if ($_POST['attribute' . $v['id']] == 'true') {
+        if (isset($_POST['attribute' . $v['id']]) && $_POST['attribute' . $v['id']] == 'true') {
             $attr[$v['id']] = $_POST['attribute' . $v['id']];
         }
     }
-    $notes_as_description = ($_POST['notes_as_description'] == 'true' ? 'Y' : NULL);
-    $show_description = ($_POST['show_description'] == 'true' ? 'Y' : NULL);
 
     // @formatter:off
+    $notes_as_description = (isset($_POST['notes_as_description']) && $_POST['notes_as_description'] == 'true' ? 'Y' : NULL);
+    $show_description     = (isset($_POST['show_description']    ) && $_POST['show_description'    ] == 'true' ? 'Y' : NULL);
+
     $cost = (isset($_POST['cost']) ? $_POST['cost'] : "");
-    $sql = "INSERT into
-                ".TB_PREFIX."products
-                (
+    $sql = "INSERT into ".TB_PREFIX."products (
                     domain_id,
                     description,
                     unit_price,
@@ -306,16 +305,16 @@ function insertProduct_cflgs($enabled = 1, $visible = 1, $domain_id = '') {
                 )";
 
     return dbQuery($sql, ':domain_id'           ,$domain_id,
-                         ':description'         , $_POST['description'],
-                         ':unit_price'          , $_POST['unit_price'],
+                         ':description'         , (isset($_POST['description']   ) ? $_POST['description']    : ""),
+                         ':unit_price'          , (isset($_POST['unit_price']    ) ? $_POST['unit_price']     : ""),
                          ':cost'                , $cost,
-                         ':reorder_level'       , $_POST['reorder_level'],
-                         ':custom_field1'       , $_POST['custom_field1'],
-                         ':custom_field2'       , $_POST['custom_field2'],
-                         ':custom_field3'       , $_POST['custom_field3'],
-                         ':custom_field4'       , $_POST['custom_field4'],
-                         ':notes'               , "".$_POST['notes'],
-                         ':default_tax_id'      , $_POST['default_tax_id'],
+                         ':reorder_level'       , (isset($_POST['reorder_level'] ) ? $_POST['reorder_level']  : ""),
+                         ':custom_field1'       , (isset($_POST['custom_field1'] ) ? $_POST['custom_field1']  : ""),
+                         ':custom_field2'       , (isset($_POST['custom_field2'] ) ? $_POST['custom_field2']  : ""),
+                         ':custom_field3'       , (isset($_POST['custom_field3'] ) ? $_POST['custom_field3']  : ""),
+                         ':custom_field4'       , (isset($_POST['custom_field4'] ) ? $_POST['custom_field4']  : ""),
+                         ':notes'               , (isset($_POST['notes']         ) ? $_POST['notes']          : ""),
+                         ':default_tax_id'      , (isset($_POST['default_tax_id']) ? $_POST['default_tax_id'] : ""),
                          ':enabled'             , $enabled,
                          ':visible'             , $visible,
                          ':attribute'           , json_encode($attr),

@@ -7,7 +7,7 @@ checkLogin();
 $customFieldLabel = getCustomFieldLabels('',true);
 $taxes = getActiveTaxes();
 
-if ($_POST['description'] != "" ) {
+if (!empty($_POST['description'])) {
     include("./modules/products/save.php");
 }
 
@@ -16,10 +16,8 @@ $attributes = $sth->fetchAll();
 
 $smarty->assign("defaults"        , getSystemDefaults());
 $smarty->assign('customFieldLabel', $customFieldLabel);
-$smarty->assign('save'            , $save);
 $smarty->assign('taxes'           , $taxes);
 $smarty->assign("attributes"      , $attributes);
 $smarty->assign('pageActive'      , 'product_add');
 $smarty->assign('active_tab'      , '#product');
 // @formatter:on
-?>

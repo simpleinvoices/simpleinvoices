@@ -890,7 +890,7 @@ function getProduct($id, $domain_id = '') {
  * @return PDO statement object on success, false on failure.
  */
 function insertProduct($enabled = 1, $visible = 1, $domain_id = '') {
-    if (function_exists(insertProduct_cflgs)) {
+    if (function_exists('insertProduct_cflgs')) {
         return insertProduct_cflgs($enabled, $visible, $domain_id);
     }
 
@@ -904,15 +904,15 @@ function insertProduct($enabled = 1, $visible = 1, $domain_id = '') {
 
     $attr = array();
     foreach ($attributes as $v) {
-        if ($_POST['attribute' . $v['id']] == 'true') {
+        if (isset($_POST['attribute' . $v['id']]) && $_POST['attribute' . $v['id']] == 'true') {
             $attr[$v['id']] = $_POST['attribute' . $v['id']];
         }
     }
 
-    $notes_as_description = ($_POST['notes_as_description'] == 'true' ? 'Y' : NULL);
-    $show_description = ($_POST['show_description'] == 'true' ? 'Y' : NULL);
-
     // @formatter:off
+    $notes_as_description = (isset($_POST['notes_as_description']) && $_POST['notes_as_description'] == 'true' ? 'Y' : NULL);
+    $show_description     = (isset($_POST['show_description']    ) && $_POST['show_description'    ] == 'true' ? 'Y' : NULL);
+
     $sql = "INSERT into " . TB_PREFIX . "products (
                     domain_id,
                     description,
@@ -950,16 +950,16 @@ function insertProduct($enabled = 1, $visible = 1, $domain_id = '') {
                     :show_description
                    )";
     return dbQuery($sql, ':domain_id'           , $domain_id,
-                         ':description'         , $_POST['description'],
-                         ':unit_price'          , $_POST['unit_price'],
-                         ':cost'                , $_POST['cost'],
-                         ':reorder_level'       , $_POST['reorder_level'],
-                         ':custom_field1'       , $_POST['custom_field1'],
-                         ':custom_field2'       , $_POST['custom_field2'],
-                         ':custom_field3'       , $_POST['custom_field3'],
-                         ':custom_field4'       , $_POST['custom_field4'],
-                         ':notes'               , $_POST['notes'],
-                         ':default_tax_id'      , $_POST['default_tax_id'],
+                         ':description'         , (isset($_POST['description']   ) ? $_POST['description']    : ""),
+                         ':unit_price'          , (isset($_POST['unit_price']    ) ? $_POST['unit_price']     : ""),
+                         ':cost'                , (isset($_POST['cost']          ) ? $_POST['cost']           : ""),
+                         ':reorder_level'       , (isset($_POST['reorder_level'] ) ? $_POST['reorder_level']  : ""),
+                         ':custom_field1'       , (isset($_POST['custom_field1'] ) ? $_POST['custom_field1']  : ""),
+                         ':custom_field2'       , (isset($_POST['custom_field2'] ) ? $_POST['custom_field2']  : ""),
+                         ':custom_field3'       , (isset($_POST['custom_field3'] ) ? $_POST['custom_field3']  : ""),
+                         ':custom_field4'       , (isset($_POST['custom_field4'] ) ? $_POST['custom_field4']  : ""),
+                         ':notes'               , (isset($_POST['notes']         ) ? $_POST['notes']          : ""),
+                         ':default_tax_id'      , (isset($_POST['default_tax_id']) ? $_POST['default_tax_id'] : ""),
                          ':enabled'             , $enabled,
                          ':visible'             , $visible,
                          ':attribute'           , json_encode($attr),
@@ -986,14 +986,15 @@ function updateProduct($domain_id = '') {
 
     $attr = array();
     foreach ($attributes as $v) {
-        if ($_POST['attribute' . $v['id']] == 'true') {
+        if (isset($_POST['attribute' . $v['id']]) && $_POST['attribute' . $v['id']] == 'true') {
             $attr[$v['id']] = $_POST['attribute' . $v['id']];
         }
     }
-    $notes_as_description = ($_POST['notes_as_description'] == 'true' ? 'Y' : NULL);
-    $show_description = ($_POST['show_description'] == 'true' ? 'Y' : NULL);
 
     // @formatter:off
+    $notes_as_description = (isset($_POST['notes_as_description']) && $_POST['notes_as_description'] == 'true' ? 'Y' : NULL);
+    $show_description     = (isset($_POST['show_description']    ) && $_POST['show_description'    ] == 'true' ? 'Y' : NULL);
+    
     $sql = "UPDATE " . TB_PREFIX . "products
             SET description          = :description,
                 enabled              = :enabled,
@@ -1012,17 +1013,17 @@ function updateProduct($domain_id = '') {
             WHERE id        = :id
               AND domain_id = :domain_id";
     return dbQuery($sql, ':domain_id'           , $domain_id,
-                         ':description'         , $_POST['description'],
-                         ':enabled'             , $_POST['enabled'],
-                         ':notes'               , $_POST['notes'],
-                         ':default_tax_id'      , $_POST['default_tax_id'],
-                         ':custom_field1'       , $_POST['custom_field1'],
-                         ':custom_field2'       , $_POST['custom_field2'],
-                         ':custom_field3'       , $_POST['custom_field3'],
-                         ':custom_field4'       , $_POST['custom_field4'],
-                         ':unit_price'          , $_POST['unit_price'],
-                         ':cost'                , $_POST['cost'],
-                         ':reorder_level'       , $_POST['reorder_level'],
+                         ':description'         , (isset($_POST['description']   ) ? $_POST['description']    : ""),
+                         ':unit_price'          , (isset($_POST['unit_price']    ) ? $_POST['unit_price']     : ""),
+                         ':cost'                , (isset($_POST['cost']          ) ? $_POST['cost']           : ""),
+                         ':reorder_level'       , (isset($_POST['reorder_level'] ) ? $_POST['reorder_level']  : ""),
+                         ':custom_field1'       , (isset($_POST['custom_field1'] ) ? $_POST['custom_field1']  : ""),
+                         ':custom_field2'       , (isset($_POST['custom_field2'] ) ? $_POST['custom_field2']  : ""),
+                         ':custom_field3'       , (isset($_POST['custom_field3'] ) ? $_POST['custom_field3']  : ""),
+                         ':custom_field4'       , (isset($_POST['custom_field4'] ) ? $_POST['custom_field4']  : ""),
+                         ':notes'               , (isset($_POST['notes']         ) ? $_POST['notes']          : ""),
+                         ':default_tax_id'      , (isset($_POST['default_tax_id']) ? $_POST['default_tax_id'] : ""),
+                         ':enabled'             , (isset($_POST['enabled']       ) ? $_POST['enabled']        : ""),
                          ':attribute'           , json_encode($attr),
                          ':notes_as_description', $notes_as_description,
                          ':show_description'    , $show_description,

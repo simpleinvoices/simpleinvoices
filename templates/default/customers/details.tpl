@@ -1,14 +1,18 @@
 {*
  * Script: details.tpl
- * Customer details template
+ *      Customer details template
+ *
+ * Last modified:
+ *      2016-07-27
  *
  * License:
- *   GPL v3 or above
+ *      GPL v3 or above
  *
  * Website:
- *   http://www.simpleinvoices.org
+ *      http://www.simpleinvoices.org
  *}
 {if $smarty.get.action == 'view' }
+<br/>
 <div class="si_form si_form_view" id="si_form_cust">
   <div class="si_cust_info">
     <table>
@@ -239,9 +243,7 @@
     </a>
   </div>
 </div>
-{/if}
-{* ##################################################################################################### *}
-{if $smarty.get.action == 'edit' }
+{elseif $smarty.get.action == 'edit' }
 <form name="frmpost"
       action="index.php?module=customers&amp;view=save&amp;id={$customer.id|urlencode}"
       method="post" id="frmpost" onsubmit="return checkForm(this);">
@@ -251,9 +253,8 @@
     <table class="center">
       <tr>
         <th>{$LANG.customer_name}
-          <a class="cluetip" href="#"
-             rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field"
-             title="{$LANG.required_field}">
+          <a class="cluetip" href="#" title="{$LANG.required_field}"
+             rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field" >
             <img src="{$help_image_path}required-small.png" alt="" />
           </a>
         </th>
@@ -270,22 +271,19 @@
           </a>
         </th>
         <td>
-          <input type="text" name="attention" value="{$customer.attention|htmlsafe}"
-                 size="50" tabindex="20" />
+          <input type="text" name="attention" value="{$customer.attention|htmlsafe}" size="50" tabindex="20" />
         </td>
       </tr>
       <tr>
         <th>{$LANG.street}</th>
         <td>
-          <input type="text" name="street_address" value="{$customer.street_address|htmlsafe}"
-                 size="50" tabindex="30" />
+          <input type="text" name="street_address" value="{$customer.street_address|htmlsafe}" size="50" tabindex="30" />
         </td>
       </tr>
       <tr>
         <th>{$LANG.street2}
-          <a class="cluetip" href="#"
-             rel="index.php?module=documentation&amp;view=view&amp;page=help_street2"
-             title="{$LANG.street2}">
+          <a class="cluetip" href="#" title="{$LANG.street2}"
+             rel="index.php?module=documentation&amp;view=view&amp;page=help_street2" >
             <img src="{$help_image_path}help-small.png" alt="" />
           </a>
         </th>
@@ -297,36 +295,31 @@
       <tr>
         <th>{$LANG.city}</th>
         <td>
-          <input type="text" name="city" value="{$customer.city|htmlsafe}"
-                 size="50" tabindex="50" />
+          <input type="text" name="city" value="{$customer.city|htmlsafe}" size="50" tabindex="50" />
         </td>
       </tr>
       <tr>
         <th>{$LANG.zip}</th>
         <td>
-          <input type="text" name="zip_code" value="{$customer.zip_code|htmlsafe}"
-                 size="50" tabindex="60" />
+          <input type="text" name="zip_code" value="{$customer.zip_code|htmlsafe}" size="50" tabindex="60" />
         </td>
       </tr>
       <tr>
         <th>{$LANG.state}</th>
         <td>
-          <input type="text" name="state" value="{$customer.state|htmlsafe}"
-                 size="50" tabindex="70" />
+          <input type="text" name="state" value="{$customer.state|htmlsafe}" size="50" tabindex="70" />
         </td>
       </tr>
       <tr>
         <th>{$LANG.country}</th>
         <td>
-          <input type="text" name="country" value="{$customer.country|htmlsafe}"
-                 size="50" tabindex="80" />
+          <input type="text" name="country" value="{$customer.country|htmlsafe}" size="50" tabindex="80" />
         </td>
       </tr>
       <tr>
         <th>{$LANG.phone}</th>
         <td>
-          <input type="text" name="phone" value="{$customer.phone|htmlsafe}"
-                 size="50" tabindex="90" />
+          <input type="text" name="phone" value="{$customer.phone|htmlsafe}" size="50" tabindex="90" />
         </td>
       </tr>
       <tr>
@@ -339,15 +332,13 @@
       <tr>
         <th>{$LANG.fax}</th>
         <td>
-          <input type="text" name="fax" value="{$customer.fax|htmlsafe}"
-                 size="50" tabindex="110" />
+          <input type="text" name="fax" value="{$customer.fax|htmlsafe}" size="50" tabindex="110" />
         </td>
       </tr>
       <tr>
         <th>{$LANG.email}</th>
         <td>
-          <input type="text" name="email" value="{$customer.email|htmlsafe}"
-                 size="50" tabindex="120" />
+          <input type="text" name="email" value="{$customer.email|htmlsafe}" size="50" tabindex="120" />
         </td>
       </tr>
       <tr>
@@ -364,8 +355,7 @@
       <tr>
         <th>{$LANG.credit_card_number_new}</th>
         <td>
-          {* Note that no value is put in this field and the name is the 
-             actual database name *}
+          {* Note that no value is put in this field and the name is the actual database name *}
           <input type="text" name="credit_card_number" size="25" tabindex="140" />
         </td>
       </tr>
@@ -386,9 +376,8 @@
       {if !empty($customFieldLabel.customer_cf1)}
       <tr>
         <th>{$customFieldLabel.customer_cf1|htmlsafe}
-          <a class="cluetip" href="#"
-             rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
-             title="{$LANG.custom_fields}">
+          <a class="cluetip" href="#" title="{$LANG.custom_fields}"
+             rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" >
             <img src="{$help_image_path}help-small.png" alt="" />
           </a>
         </th>
@@ -401,9 +390,8 @@
       {if !empty($customFieldLabel.customer_cf2)}
       <tr>
         <th>{$customFieldLabel.customer_cf2|htmlsafe}
-          <a class="cluetip" href="#"
-             rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
-             title="{$LANG.custom_fields}">
+          <a class="cluetip" href="#" title="{$LANG.custom_fields}"
+             rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" >
             <img src="{$help_image_path}help-small.png" alt="" />
           </a>
         </th>
@@ -416,9 +404,8 @@
       {if !empty($customFieldLabel.customer_cf3)}
       <tr>
         <th>{$customFieldLabel.customer_cf3|htmlsafe}
-          <a class="cluetip" href="#"
-             rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
-             title="{$LANG.custom_fields}">
+          <a class="cluetip" href="#" title="{$LANG.custom_fields}"
+             rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" >
             <img src="{$help_image_path}help-small.png" alt="" />
           </a>
         </th>
@@ -431,9 +418,8 @@
       {if !empty($customFieldLabel.customer_cf4)}
       <tr>
         <th>{$customFieldLabel.customer_cf4|htmlsafe}
-          <a class="cluetip" href="#"
-             rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
-             title="{$LANG.custom_fields}">
+          <a class="cluetip" href="#" title="{$LANG.custom_fields}"
+             rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" >
             <img src="{$help_image_path}help-small.png" alt="" />
           </a>
         </th>

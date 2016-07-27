@@ -6,6 +6,22 @@
 <body>
   <div id="left">
     <ul>
+      <li>2016-07-27 - <b>2016.0.beta.2</b>
+        <ul>
+          <li>Sub-Customers extension enhancements. Changes made are:
+            <ul>
+              <li>Extension now automatically adds the new <b>parent_customer_id</b> field to the
+                  <i>si_customers</i> table when the extension is enabled and the customer information
+                  is accesed.</li>
+              <li>The credit card information is masked leaving the last four digits showing.</li>
+            </ul>
+          </li>
+          <li>Fixed issue causing standard <i>si_customers</i> to fail when adding new records.</li>
+          <li>Added logic to prevent addition of new <i>si_customers</i> record with the same name
+              as an existing record.</li>
+          <li>Fixed issue with undefined variable issue causing new product records to not post.</li>
+        </ul>
+      </li>
       <li>2016-07-25 - <b>2016.0.beta.1</b>
         <ul>
           <li>Zend library updated to version 1.12.18

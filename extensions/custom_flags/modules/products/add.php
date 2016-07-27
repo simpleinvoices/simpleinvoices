@@ -7,19 +7,17 @@ $customFieldLabel = getCustomFieldLabels('',true);
 $cflgs = getCustomFlagsQualified('E');
 $taxes = getActiveTaxes();
 // if valid then do save
-if ($_POST['description'] != "") {
-    // Use standard file for now.
+if (!empty($_POST['description'])) {
     include ("./modules/products/save.php");
 }
+
 $smarty->assign("defaults", getSystemDefaults());
 $smarty->assign('customFieldLabel', $customFieldLabel);
 $smarty->assign('cflgs', $cflgs);
-$smarty->assign('save', $save);
 $smarty->assign('taxes', $taxes);
 
-$sql = "select * from " . TB_PREFIX . "products_attributes where enabled ='1'";
-$sth = dbQuery($sql);
-$attributes = $sth->fetchAll();
+$pdoDb->addSimpleWhere("enabled", "1");
+$attributes = $pdoDb->request("SELECT", "products_attributes");
 
 $smarty->assign("attributes", $attributes);
 $smarty->assign('pageActive', 'product_add');

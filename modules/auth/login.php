@@ -1,11 +1,14 @@
 <?php
 /*
- * Script: login.php
- *   Login page
+ *  Script: login.php
+ *      Login page
  *
- * License:
- *   GPL v3 or above
-*/
+ *  Last modified:
+ *      2016-07-27
+ *
+ *  License:
+ *      GPL v3 or above
+ */
 global $zendDb, $patchCount, $smarty;
 
 $menu = false;
@@ -16,7 +19,6 @@ if (!defined("BROWSE")) define("BROWSE", "browse");
 Zend_Session::start();
 
 $errorMessage = '';
-
 if (!empty($_POST['user']) && !empty($_POST['pass'])) {
     $authAdapter = new Zend_Auth_Adapter_DbTable($zendDb);
 
@@ -30,15 +32,15 @@ if (!empty($_POST['user']) && !empty($_POST['pass'])) {
                         ->setCredentialColumn($user_password)
                             ->setCredentialTreatment('MD5(?)');
 
-    $userEmail   = $_POST['user'];
-    $password = $_POST['pass'];
+    $userEmail = $_POST['user'];
+    $password  = $_POST['pass'];
 
     // Set the input credential values (e.g., from a login form)
     $authAdapter->setIdentity($userEmail)->setCredential($password);
 
     // Perform the authentication query, saving the result
     $result = $authAdapter->authenticate();
-
+/* debug */ //error_log("moudles/auth/login.php: patchCount[$patchCount] result - " . print_r($result,true));
     if ($result->isValid()) {
         Zend_Session::start();
 
@@ -99,7 +101,7 @@ if (!empty($_POST['user']) && !empty($_POST['pass'])) {
 }
 
 if (isset($_POST['action']) && $_POST['action'] == 'login' &&
-   (empty($_POST['user']) or empty($_POST['pass']))) {
+   (empty($_POST['user']) || empty($_POST['pass']))) {
         $errorMessage = 'Username and password required';
 }
 
