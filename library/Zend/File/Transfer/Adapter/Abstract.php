@@ -664,7 +664,7 @@ abstract class Zend_File_Transfer_Adapter_Abstract
                         $validator->setTranslator($translator);
                     }
 
-                    if (($class === 'Zend_Validate_File_Upload') and (empty($content['tmp_name']))) {
+                    if (($class === 'Zend_Validate_File_Upload') && (empty($content['tmp_name']))) {
                         $tocheck = $key;
                     } else {
                         $tocheck = $content['tmp_name'];
@@ -674,16 +674,16 @@ abstract class Zend_File_Transfer_Adapter_Abstract
                         $fileerrors += $validator->getMessages();
                     }
 
-                    if (!empty($content['options']['ignoreNoFile']) and (isset($fileerrors['fileUploadErrorNoFile']))) {
+                    if (!empty($content['options']['ignoreNoFile']) && (isset($fileerrors['fileUploadErrorNoFile']))) {
                         unset($fileerrors['fileUploadErrorNoFile']);
                         break;
                     }
 
-                    if (($class === 'Zend_Validate_File_Upload') and (count($fileerrors) > 0)) {
+                    if (($class === 'Zend_Validate_File_Upload') && (count($fileerrors) > 0)) {
                         break;
                     }
 
-                    if (($this->_break[$class]) and (count($fileerrors) > 0)) {
+                    if (($this->_break[$class]) && (count($fileerrors) > 0)) {
                         $break = true;
                         break;
                     }
@@ -1051,7 +1051,7 @@ abstract class Zend_File_Transfer_Adapter_Abstract
             }
         } else {
             $files = $this->_getFiles($files, true, true);
-            if (empty($files) and is_string($orig)) {
+            if (empty($files) && is_string($orig)) {
                 $this->_files[$orig]['destination'] = $destination;
             }
 
@@ -1075,7 +1075,7 @@ abstract class Zend_File_Transfer_Adapter_Abstract
         $orig  = $files;
         $files = $this->_getFiles($files, false, true);
         $destinations = array();
-        if (empty($files) and is_string($orig)) {
+        if (empty($files) && is_string($orig)) {
             if (isset($this->_files[$orig]['destination'])) {
                 $destinations[$orig] = $this->_files[$orig]['destination'];
             } else {

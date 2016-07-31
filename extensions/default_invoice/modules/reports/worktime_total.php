@@ -9,7 +9,7 @@ $myParms=Array();
 
     $order = '';
     $sSQL  = "SELECT customer_id, tn, title, time_unit FROM ticket LEFT JOIN time_accounting ON ticket_id = ticket.id ";
-    if (isset($_GET["tn"]) or isset($_GET["customer_id"])) {
+    if (isset($_GET["tn"]) || isset($_GET["customer_id"])) {
         $sSQL .= "WHERE ";
         if (isset($_GET["tn"])) {
             $sSQL .= "tn LIKE '$_GET[tn]' ";

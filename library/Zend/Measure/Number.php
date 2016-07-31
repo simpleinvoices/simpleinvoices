@@ -144,7 +144,7 @@ class Zend_Measure_Number extends Zend_Measure_Abstract
      */
     public function __construct($value, $type, $locale = null)
     {
-        if (($type !== null) and (Zend_Locale::isLocale($type, null, false))) {
+        if (($type !== null) && (Zend_Locale::isLocale($type, null, false))) {
             $locale = $type;
             $type = null;
         }
@@ -303,7 +303,7 @@ class Zend_Measure_Number extends Zend_Measure_Abstract
                 }
 
                 $num = self::$_roman[$split[$x]];
-                if (($x > 0 and ($split[$x-1] != '/') and ($num < self::$_roman[$split[$x-1]]))) {
+                if (($x > 0 && ($split[$x-1] != '/') && ($num < self::$_roman[$split[$x-1]]))) {
                     $num -= $num;
                 }
 

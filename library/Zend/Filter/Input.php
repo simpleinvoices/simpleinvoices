@@ -1146,7 +1146,7 @@ class Zend_Filter_Input
      */
     protected function _getNotEmptyValidatorInstance($validatorRule) {
         foreach ($validatorRule as $rule => $value) {
-            if (is_object($value) and $value instanceof Zend_Validate_NotEmpty) {
+            if (is_object($value) && $value instanceof Zend_Validate_NotEmpty) {
                 return $value;
             }
         }

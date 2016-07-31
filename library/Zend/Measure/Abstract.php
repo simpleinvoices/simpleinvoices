@@ -81,7 +81,7 @@ abstract class Zend_Measure_Abstract
      */
     public function __construct($value, $type = null, $locale = null)
     {
-        if (($type !== null) and (Zend_Locale::isLocale($type, null, false))) {
+        if (($type !== null) && (Zend_Locale::isLocale($type, null, false))) {
             $locale = $type;
             $type = null;
         }
@@ -179,7 +179,7 @@ abstract class Zend_Measure_Abstract
      */
     public function setValue($value, $type = null, $locale = null)
     {
-        if (($type !== null) and (Zend_Locale::isLocale($type, null, false))) {
+        if (($type !== null) && (Zend_Locale::isLocale($type, null, false))) {
             $locale = $type;
             $type = null;
         }

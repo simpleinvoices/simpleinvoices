@@ -1,7 +1,7 @@
 <?php
 
 
-if ($_POST['op'] =='edit' AND !empty($_POST['invoice_id']))
+if ($_POST['op'] =='edit' && !empty($_POST['invoice_id']))
 {
 	$cron = new cron();
 	$cron->domain_id=domain_id::get();

@@ -114,7 +114,7 @@ function ReadAFM($file,&$map)
     {
       if(!isset($widths['.notdef']))
         $widths['.notdef']=600;
-      if(!isset($widths['Delta']) and isset($widths['increment']))
+      if(!isset($widths['Delta']) && isset($widths['increment']))
         $widths['Delta']=$widths['increment'];
       //Order widths according to map
       for($i=0;$i<=255;$i++)
@@ -150,13 +150,13 @@ function MakeFontDescriptor($fm,$symbolic)
   $fd.=",'CapHeight'=>".$ch;
   //Flags
   $flags=0;
-  if(isset($fm['IsFixedPitch']) and $fm['IsFixedPitch'])
+  if(isset($fm['IsFixedPitch']) && $fm['IsFixedPitch'])
     $flags+=1<<0;
   if($symbolic)
     $flags+=1<<2;
   if(!$symbolic)
     $flags+=1<<5;
-  if(isset($fm['ItalicAngle']) and $fm['ItalicAngle']!=0)
+  if(isset($fm['ItalicAngle']) && $fm['ItalicAngle']!=0)
     $flags+=1<<6;
   $fd.=",'Flags'=>".$flags;
   //FontBBox
@@ -171,7 +171,7 @@ function MakeFontDescriptor($fm,$symbolic)
   //StemV
   if(isset($fm['StdVW']))
     $stemv=$fm['StdVW'];
-  elseif(isset($fm['Weight']) and preg_match('/(bold|black)/i',$fm['Weight']))
+  elseif(isset($fm['Weight']) && preg_match('/(bold|black)/i',$fm['Weight']))
     $stemv=120;
   else
     $stemv=70;
@@ -194,7 +194,7 @@ function MakeWidthArray($fm)
         $s.="'\\''";
       elseif(chr($i)=="\\")
         $s.="'\\\\'";
-      elseif($i>=32 and $i<=126)
+      elseif($i>=32 && $i<=126)
         $s.="'".chr($i)."'";
       else
         $s.="chr($i)";
@@ -284,14 +284,14 @@ function CheckTTF($file)
   $pp=($fsType & 0x04)!=0;
   $e=($fsType & 0x08)!=0;
   fclose($f);
-  if($rl and !$pp and !$e)
+  if($rl && !$pp && !$e)
     echo '<B>Warning:</B> font license does not allow embedding';
 }
 
 /*******************************************************************************
- * $fontfile : chemin du fichier TTF (ou chaîne vide si pas d'incorporation)    *
+ * $fontfile : chemin du fichier TTF (ou chaï¿½ne vide si pas d'incorporation)    *
  * $afmfile :  chemin du fichier AFM                                            *
- * $enc :      encodage (ou chaîne vide si la police est symbolique)            *
+ * $enc :      encodage (ou chaï¿½ne vide si la police est symbolique)            *
  * $patch :    patch optionnel pour l'encodage                                  *
  * $type :     type de la police si $fontfile est vide                          *
  *******************************************************************************/
@@ -330,7 +330,7 @@ error_log("In MakeFont - library/pdf/fpdf/font/makefont/makefont.php");
     }
   else
     {
-      if($type!='TrueType' and $type!='Type1')
+      if($type!='TrueType' && $type!='Type1')
         die('<B>Error:</B> incorrect font type: '.$type);
     }
   //Start generation
@@ -374,7 +374,7 @@ error_log("In MakeFont - library/pdf/fpdf/font/makefont/makefont.php");
           if(!$pos)
             die('<B>Error:</B> font file does not seem to be valid Type1');
           $size1=$pos+6;
-          if($header and ord($file{$size1})==128)
+          if($header && ord($file{$size1})==128)
             {
               //Strip second binary header
               $file=substr($file,0,$size1).substr($file,$size1+6);

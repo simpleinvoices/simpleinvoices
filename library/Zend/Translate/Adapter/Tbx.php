@@ -128,7 +128,7 @@ class Zend_Translate_Adapter_Tbx extends Zend_Translate_Adapter {
 
     private function _endElement($file, $name)
     {
-        if (($this->_term !== null) and ($name != "term")) {
+        if (($this->_term !== null) && ($name != "term")) {
             $this->_content .= "</".$name.">";
         } else {
             switch (strtolower($name)) {
@@ -140,7 +140,7 @@ class Zend_Translate_Adapter_Tbx extends Zend_Translate_Adapter {
                     if (empty($this->_termentry)) {
                         $this->_termentry = $this->_content;
                     }
-                    if (!empty($this->_content) or (isset($this->_data[$this->_langset][$this->_termentry]) === false)) {
+                    if (!empty($this->_content) || (isset($this->_data[$this->_langset][$this->_termentry]) === false)) {
                         $this->_data[$this->_langset][$this->_termentry] = $this->_content;
                     }
                     break;

@@ -160,7 +160,7 @@ class Zend_Validate_File_Exists extends Zend_Validate_Abstract
     public function isValid($value, $file = null)
     {
         $directories = $this->getDirectory(true);
-        if (($file !== null) and (!empty($file['destination']))) {
+        if (($file !== null) && (!empty($file['destination']))) {
             $directories[] = $file['destination'];
         } else if (!isset($file['name'])) {
             $file['name'] = $value;

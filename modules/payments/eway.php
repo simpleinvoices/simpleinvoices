@@ -5,7 +5,7 @@ $saved = false;
 $invoiceobj = new invoice();
 $invoice_all = $invoiceobj->get_all();
 
-if ( ($_POST['op'] =='add') AND (!empty($_POST['invoice_id'])) )
+if ( ($_POST['op'] =='add') && (!empty($_POST['invoice_id'])) )
 {
 
 	$invoice = $invoiceobj->select($_POST['invoice_id']);

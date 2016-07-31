@@ -177,7 +177,7 @@ class Zend_Locale_Math
         $value = str_replace($convert['thousands_sep'], "",(string) $value);
         $value = str_replace($convert['positive_sign'], "", $value);
         $value = str_replace($convert['decimal_point'], ".",$value);
-        if (!empty($convert['negative_sign']) and (strpos($value, $convert['negative_sign']))) {
+        if (!empty($convert['negative_sign']) && (strpos($value, $convert['negative_sign']))) {
             $value = str_replace($convert['negative_sign'], "", $value);
             $value = "-" . $value;
         }
@@ -196,7 +196,7 @@ class Zend_Locale_Math
     {
         $convert = localeconv();
         $value = str_replace(".", $convert['decimal_point'], (string) $value);
-        if (!empty($convert['negative_sign']) and (strpos($value, "-"))) {
+        if (!empty($convert['negative_sign']) && (strpos($value, "-"))) {
             $value = str_replace("-", $convert['negative_sign'], $value);
         }
         return $value;

@@ -179,7 +179,7 @@ class Zend_Translate_Adapter_Tmx extends Zend_Translate_Adapter {
      */
     protected function _endElement($file, $name)
     {
-        if (($this->_seg !== null) and ($name !== 'seg')) {
+        if (($this->_seg !== null) && ($name !== 'seg')) {
             $this->_content .= "</".$name.">";
         } else {
             switch (strtolower($name)) {
@@ -195,7 +195,7 @@ class Zend_Translate_Adapter_Tmx extends Zend_Translate_Adapter {
                         $this->_tu = $this->_content;
                     }
 
-                    if (!empty($this->_content) or (!isset($this->_data[$this->_tuv][$this->_tu]))) {
+                    if (!empty($this->_content) || (!isset($this->_data[$this->_tuv][$this->_tu]))) {
                         $this->_data[$this->_tuv][$this->_tu] = $this->_content;
                     }
                     break;
@@ -213,7 +213,7 @@ class Zend_Translate_Adapter_Tmx extends Zend_Translate_Adapter {
      */
     protected function _contentElement($file, $data)
     {
-        if (($this->_seg !== null) and ($this->_tu !== null) and ($this->_tuv !== null)) {
+        if (($this->_seg !== null) && ($this->_tu !== null) && ($this->_tuv !== null)) {
             $this->_content .= $data;
         }
     }

@@ -111,7 +111,7 @@ class Zend_Translate_Adapter_XmlTm extends Zend_Translate_Adapter {
     {
         switch (strtolower($name)) {
             case 'tm:tu':
-                if (!empty($this->_tag) and !empty($this->_content) or
+                if (!empty($this->_tag) && !empty($this->_content) or
                     (isset($this->_data[$this->_lang][$this->_tag]) === false)) {
                     $this->_data[$this->_lang][$this->_tag] = $this->_content;
                 }

@@ -3,7 +3,7 @@ global $config, $auth_session;
 
 // if user logged into SimpleInvoices with authentication set to false,
 // then use the fake authentication, killing the session that was started.
-if (($config->authentication->enabled == 1) and ($auth_session->fake_auth == "1")) {
+if (($config->authentication->enabled == 1) && ($auth_session->fake_auth == "1")) {
     Zend_Session::start();
     Zend_Session::destroy(true);
     header('Location: .');

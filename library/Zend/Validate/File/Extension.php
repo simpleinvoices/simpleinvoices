@@ -84,7 +84,7 @@ class Zend_Validate_File_Extension extends Zend_Validate_Abstract
             $this->setCase($case);
         }
 
-        if (is_array($options) and isset($options['case'])) {
+        if (is_array($options) && isset($options['case'])) {
             $this->setCase($options['case']);
             unset($options['case']);
         }

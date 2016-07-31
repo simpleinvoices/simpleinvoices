@@ -73,7 +73,7 @@ foreach($invoiceItems as $key=>$value)
                         AND a.id = %d', $k);
                 $states2 = dbQuery($sql2);
 
-                if($attr_name['enabled'] =='1' AND $attr_name['type'] == 'list')
+                if($attr_name['enabled'] =='1' && $attr_name['type'] == 'list')
                 {
                     $html .= "<td>".$attr_name['name']."<select name='attribute[".$key."][".$k."]'>";
                     $html .= "<option value=''></option>";
@@ -83,7 +83,7 @@ foreach($invoiceItems as $key=>$value)
                         {
                             foreach ($value['attribute_decode'] as $a_key => $a_value)
                             {
-                                if($k == $a_key AND $a_value == $att_val['id'])
+                                if($k == $a_key && $a_value == $att_val['id'])
                                 {
                                     $selected = "selected";
                                     break;
@@ -97,7 +97,7 @@ foreach($invoiceItems as $key=>$value)
                     }
                     $html .= "</select></td>";
                 }
-                if($attr_name['enabled'] =='1' AND $attr_name['type'] == 'free'  )
+                if($attr_name['enabled'] =='1' && $attr_name['type'] == 'free'  )
                 {
                             $attribute_value ='';
                             foreach ($value['attribute_decode'] as $a_key => $a_value)
@@ -106,7 +106,7 @@ foreach($invoiceItems as $key=>$value)
                             }
                     $html .= "<td>".$attr_name['name']."<input name='attribute[".$key."][".$k."]'  value='". $attribute_value ."' /></td>";
                 }
-                if($attr_name['enabled'] =='1' AND $attr_name['type'] == 'decimal' )
+                if($attr_name['enabled'] =='1' && $attr_name['type'] == 'decimal' )
                 {
                             $attribute_value ='';
                             foreach ($value['attribute_decode'] as $a_key => $a_value)

@@ -40,7 +40,7 @@ if ( $defaults['delete'] == 'N' ) {
 }
 
 
-if ( ($_GET['stage'] == 2 ) AND ($_POST['doDelete'] == 'y') ) {
+if ( ($_GET['stage'] == 2 ) && ($_POST['doDelete'] == 'y') ) {
 	global $dbh;
 
 	$dbh->beginTransaction();

@@ -164,9 +164,9 @@ class Zend_Translate_Adapter_Xliff extends Zend_Translate_Adapter {
 
     private function _endElement($file, $name)
     {
-        if (($this->_stag === true) and ($name !== 'source')) {
+        if (($this->_stag === true) && ($name !== 'source')) {
             $this->_scontent .= "</".$name.">";
-        } else if (($this->_ttag === true) and ($name !== 'target')) {
+        } else if (($this->_ttag === true) && ($name !== 'target')) {
             $this->_tcontent .= "</".$name.">";
         } else {
             switch (strtolower($name)) {
@@ -212,11 +212,11 @@ class Zend_Translate_Adapter_Xliff extends Zend_Translate_Adapter {
 
     private function _contentElement($file, $data)
     {
-        if (($this->_transunit !== null) and ($this->_source !== null) and ($this->_stag === true)) {
+        if (($this->_transunit !== null) && ($this->_source !== null) && ($this->_stag === true)) {
             $this->_scontent .= $data;
         }
 
-        if (($this->_transunit !== null) and ($this->_target !== null) and ($this->_ttag === true)) {
+        if (($this->_transunit !== null) && ($this->_target !== null) && ($this->_ttag === true)) {
             $this->_tcontent .= $data;
         }
     }

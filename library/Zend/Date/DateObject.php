@@ -146,12 +146,12 @@ abstract class Zend_Date_DateObject {
     protected function mktime($hour, $minute, $second, $month, $day, $year, $gmt = false)
     {
         // complete date but in 32bit timestamp - use PHP internal
-        if ((1901 < $year) and ($year < 2038)) {
+        if ((1901 < $year) && ($year < 2038)) {
 
             $oldzone = @date_default_timezone_get();
             // Timezone also includes DST settings, therefor substracting the GMT offset is not enough
             // We have to set the correct timezone to get the right value
-            if (($this->_timezone != $oldzone) and ($gmt === false)) {
+            if (($this->_timezone != $oldzone) && ($gmt === false)) {
                 date_default_timezone_set($this->_timezone);
             }
             $result = ($gmt) ? @gmmktime($hour, $minute, $second, $month, $day, $year)
@@ -208,7 +208,7 @@ abstract class Zend_Date_DateObject {
 
                     for ($mcount = 0; $mcount < ($month - 1); $mcount++) {
                         $date += self::$_monthTable[$mcount];
-                        if (($leapyear === true) and ($mcount == 1)) {
+                        if (($leapyear === true) && ($mcount == 1)) {
                             $date++;
                         }
 
@@ -235,7 +235,7 @@ abstract class Zend_Date_DateObject {
 
                     for ($mcount = 11; $mcount > ($month - 1); $mcount--) {
                         $date += self::$_monthTable[$mcount];
-                        if (($leapyear === true) and ($mcount == 2)) {
+                        if (($leapyear === true) && ($mcount == 2)) {
                             $date++;
                         }
 
@@ -281,7 +281,7 @@ abstract class Zend_Date_DateObject {
         // all leapyears can be divided through 400
         if ($year % 400 == 0) {
             return true;
-        } else if (($year > 1582) and ($year % 100 == 0)) {
+        } else if (($year > 1582) && ($year % 100 == 0)) {
             return false;
         }
 
@@ -335,7 +335,7 @@ abstract class Zend_Date_DateObject {
         }
 
         // check on false or null alone fails
-        if (empty($gmt) and empty($jump)) {
+        if (empty($gmt) && empty($jump)) {
             $tempstamp = $timestamp;
             if ($tempstamp > 0) {
                 while (abs($tempstamp) > 0x7FFFFFFF) {
@@ -360,7 +360,7 @@ abstract class Zend_Date_DateObject {
             }
         }
 
-        if (($timestamp < 0) and ($gmt !== true)) {
+        if (($timestamp < 0) && ($gmt !== true)) {
             $timestamp -= $this->_offset;
         }
 
@@ -399,7 +399,7 @@ abstract class Zend_Date_DateObject {
                 case 'S':  // english suffix for day of month, st nd rd th
                     if (($date['mday'] % 10) == 1) {
                         $output .= 'st';
-                    } else if ((($date['mday'] % 10) == 2) and ($date['mday'] != 12)) {
+                    } else if ((($date['mday'] % 10) == 2) && ($date['mday'] != 12)) {
                         $output .= 'nd';
                     } else if (($date['mday'] % 10) == 3) {
                         $output .= 'rd';
@@ -452,7 +452,7 @@ abstract class Zend_Date_DateObject {
 
                 case 'o':  // ISO 8601 year number
                     $week = $this->weekNumber($date['year'], $date['mon'], $date['mday']);
-                    if (($week > 50) and ($date['mon'] == 1)) {
+                    if (($week > 50) && ($date['mon'] == 1)) {
                         $output .= ($date['year'] - 1);
                     } else {
                         $output .= $date['year'];
@@ -635,13 +635,13 @@ abstract class Zend_Date_DateObject {
      */
     protected static function dayOfWeek($year, $month, $day)
     {
-        if ((1901 < $year) and ($year < 2038)) {
+        if ((1901 < $year) && ($year < 2038)) {
             return (int) date('w', mktime(0, 0, 0, $month, $day, $year));
         }
 
         // gregorian correction
         $correction = 0;
-        if (($year < 1582) or (($year == 1582) and (($month < 10) or (($month == 10) && ($day < 15))))) {
+        if (($year < 1582) || (($year == 1582) && (($month < 10) || (($month == 10) && ($day < 15))))) {
             $correction = 3;
         }
 
@@ -744,14 +744,14 @@ abstract class Zend_Date_DateObject {
                 $day = $timestamp;
 
                 $timestamp += self::$_monthTable[$i] * 86400;
-                if (($leapyear === true) and ($i == 1)) {
+                if (($leapyear === true) && ($i == 1)) {
                     $timestamp += 86400;
                 }
 
                 if ($timestamp >= 0) {
                     $month  = $i;
                     $numday = self::$_monthTable[$i];
-                    if (($leapyear === true) and ($i == 1)) {
+                    if (($leapyear === true) && ($i == 1)) {
                         ++$numday;
                     }
                     break;
@@ -789,14 +789,14 @@ abstract class Zend_Date_DateObject {
                 $day = $timestamp;
                 $timestamp -= self::$_monthTable[$i] * 86400;
 
-                if (($leapyear === true) and ($i == 1)) {
+                if (($leapyear === true) && ($i == 1)) {
                     $timestamp -= 86400;
                 }
 
                 if ($timestamp < 0) {
                     $month  = $i;
                     $numday = self::$_monthTable[$i];
-                    if (($leapyear === true) and ($i == 1)) {
+                    if (($leapyear === true) && ($i == 1)) {
                         ++$numday;
                     }
                     break;
@@ -866,18 +866,18 @@ abstract class Zend_Date_DateObject {
      */
     protected function weekNumber($year, $month, $day)
     {
-        if ((1901 < $year) and ($year < 2038)) {
+        if ((1901 < $year) && ($year < 2038)) {
             return (int) date('W', mktime(0, 0, 0, $month, $day, $year));
         }
 
         $dayofweek = self::dayOfWeek($year, $month, $day);
         $firstday  = self::dayOfWeek($year, 1, 1);
-        if (($month == 1) and (($firstday < 1) or ($firstday > 4)) and ($day < 4)) {
+        if (($month == 1) && (($firstday < 1) || ($firstday > 4)) && ($day < 4)) {
             $firstday  = self::dayOfWeek($year - 1, 1, 1);
             $month     = 12;
             $day       = 31;
 
-        } else if (($month == 12) and ((self::dayOfWeek($year + 1, 1, 1) < 5) and
+        } else if (($month == 12) && ((self::dayOfWeek($year + 1, 1, 1) < 5) &&
                    (self::dayOfWeek($year + 1, 1, 1) > 0))) {
             return 1;
         }
@@ -1033,7 +1033,7 @@ abstract class Zend_Date_DateObject {
         }
         date_default_timezone_set($oldzone);
 
-        if (($zone == 'UTC') or ($zone == 'GMT')) {
+        if (($zone == 'UTC') || ($zone == 'GMT')) {
             $this->_dst = false;
         } else {
             $this->_dst = true;
