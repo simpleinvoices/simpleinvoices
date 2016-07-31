@@ -1,4 +1,5 @@
 <?php
+require_once "include/class/PdoDbException.php";
 /**
  * DbField class
  * @author Rich
@@ -29,6 +30,6 @@ class DbField {
      * @return string Field name enacapsulated in back-tic for use in SQL statement.
      */
     public function genParm() {
-        return "`" . $this->field . "`";
+        return PdoDb::formatField($this->field);
     }
 }

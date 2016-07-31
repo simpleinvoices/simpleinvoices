@@ -432,14 +432,16 @@ class invoice {
         // @formatter:on
         $sth = dbQuery($sql, ':id', $id, ':domain_id', $this->domain_id);
 
-        $invoiceItems = null;
-        for ($i = 0; $invoiceItem = $sth->fetch(PDO::FETCH_ASSOC); $i++) {
-            $invoiceItem['attribute_decode'] = json_decode($invoiceItem['attribute'], true);
-            foreach ($invoiceItem['attribute_decode'] as $key => $value) {
-                $invoiceItem['attribute_json'][$key]['name']    = ProductAttributes::getName($key);
-                $invoiceItem['attribute_json'][$key]['value']   = ProductAttributes::getValue($key, $value);
-                $invoiceItem['attribute_json'][$key]['type']    = ProductAttributes::getType($key);
-                $invoiceItem['attribute_json'][$key]['visible'] = ProductAttributes::getVisible($key);
+        $invoiceItems = array();
+        while ($invoiceItem = $sth->fetch(PDO::FETCH_ASSOC)) {
+            if (isset($invoiceItem['attribute'])) {
+                $invoiceItem['attribute_decode'] = json_decode($invoiceItem['attribute'], true);
+                foreach ($invoiceItem['attribute_decode'] as $key => $value) {
+                    $invoiceItem['attribute_json'][$key]['name']    = ProductAttributes::getName($key);
+                    $invoiceItem['attribute_json'][$key]['value']   = ProductAttributes::getValue($key, $value);
+                    $invoiceItem['attribute_json'][$key]['type']    = ProductAttributes::getType($key);
+                    $invoiceItem['attribute_json'][$key]['visible'] = ProductAttributes::getVisible($key);
+                }
             }
 
             $sql = "SELECT * FROM " . TB_PREFIX . "products WHERE id = :id AND domain_id = :domain_id";
@@ -450,7 +452,7 @@ class invoice {
             foreach ($tax as $key => $value) {
                 $invoiceItem['tax'][$key] = $value['tax_id'];
             }
-            $invoiceItems[$i] = $invoiceItem;
+            $invoiceItems[] = $invoiceItem;
         }
 
         return $invoiceItems;

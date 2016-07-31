@@ -119,7 +119,7 @@ class WhereItem {
 
         if ($this->close_paren) $item .= ') ';
 
-        $item .= (empty($this->connector) ? '' : $this->connector . ' ');
+        $item .= (empty($this->connector) ? '' : ' ' . $this->connector . ' ');
 
         return $item;
     }

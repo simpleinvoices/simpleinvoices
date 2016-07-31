@@ -23,7 +23,7 @@ checkLogin();
 //get user roles
 $roles = user::getUserRoles();
 
-if (isset($_POST['username']) && $_POST['username'] != "") {
+if (!empty($_POST['username'])) {
     include ("./extensions/user_security/modules/user/save.php");
 }
 
@@ -31,6 +31,6 @@ $smarty->assign("pwd_pattern", UserSecurity::buildPwdPattern());
 
 $smarty->assign('roles', $roles);
 
-$smarty -> assign('pageActive', 'user');
-$smarty -> assign('subPageActive', 'user_add');
-$smarty -> assign('active_tab', '#people');
+$smarty->assign('pageActive', 'user');
+$smarty->assign('subPageActive', 'user_add');
+$smarty->assign('active_tab', '#people');

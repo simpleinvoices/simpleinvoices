@@ -1913,8 +1913,10 @@ function updateTaxRate($domain_id = '') {
  * @return string Datetime string with time set.
  */
 function sqlDateWithTime($in_date) {
-    list ($date, $time) = explode(' ', $in_date);
-    if (!$time or $time == '00:00:00') {
+    $parts = explode(' ', $in_date);
+    $date  = (isset($parts[0]) ? $parts[0] : "");
+    $time  = (isset($parts[1]) ? $parts[1] : "00:00:00");
+    if (!$time || $time == '00:00:00') {
         $time = date('H:i:s');
     }
     $out_date = "$date $time";

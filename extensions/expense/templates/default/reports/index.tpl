@@ -8,5 +8,9 @@
     <img src="./images/famfam/money_delete.png" alt="" />
     Expense accounts summary
   </a>
+  <a href="index.php?module=reports&view=report_summary" class="">
+    <img src="./images/famfam/money_delete.png" alt="" />
+    Expense accounts summary
+  </a>
 </div>
 

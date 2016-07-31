@@ -22,13 +22,13 @@ checkLogin();
 $roles = user::getUserRoles();
 
 $saved = false;
-if ($_POST['email'] != "") {
+if (!empty($_POST['email'])) {
 	include ("./modules/user/save.php");
 }
 
 $smarty->assign('save', $saved);
 $smarty->assign('roles', $roles);
 
-$smarty -> assign('pageActive', 'user');
-$smarty -> assign('subPageActive', 'user_add');
-$smarty -> assign('active_tab', '#people');
+$smarty->assign('pageActive', 'user');
+$smarty->assign('subPageActive', 'user_add');
+$smarty->assign('active_tab', '#people');

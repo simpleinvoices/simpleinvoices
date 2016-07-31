@@ -1,15 +1,13 @@
 <?php
-global $smarty, $save;
+global $smarty;
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
 //if valid then do save
-if (isset($_POST['p_description']) && $_POST['p_description'] != "" ) {
+if (!empty($_POST['p_description'])) {
 	include("./modules/preferences/save.php");
 }
-$smarty->assign('save',$save);
-
 $defaults = getSystemDefaults();
 $preferences = getActivePreferences();
 
@@ -23,3 +21,4 @@ $smarty->assign('pageActive', 'preference');
 
 $smarty->assign('subPageActive', 'preferences_add');
 $smarty->assign('active_tab', '#setting');
+

@@ -13,17 +13,13 @@ function sql($type = '', $dir, $sort, $rp, $page) {
     global $auth_session;
     $valid_search_fields = array('ap.id','b.name', 'c.name');
 
-    //SC: Safety checking values that will be directly subbed in
-    if (intval($start) != $start) $start = 0;
-    if (intval($limit) != $limit) $limit = 25;
-
     if (!preg_match('/^(asc|desc)$/iD', $dir)) $dir = 'DESC';
 
     // SQL Limit - start
     $start = (($page-1) * $rp);
     $limit = "LIMIT $start, $rp";
 
-    if ($type == "count") unset($limit);
+    if ($type == "count") $limit = "";
     // SQL Limit - end
 
     $where = "";
@@ -102,16 +98,17 @@ $xml .= "<total>$count</total>";
 foreach ($payments as $row) {
     $notes = si_truncate($row['ac_notes'],'13','...');
     $xml .= "<row id='".$row['id']."'>";
-    $xml .= "<cell><![CDATA[
-    <a class='index_table' title='$LANG[view] ".$row['name']."'
-    href='index.php?module=payments&view=details&id=$row[id]&action=view'>
-    <img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' />
-    </a>
-    <a class='index_table' title='$LANG[print_preview_tooltip] ".$row['id']."'
-    href='index.php?module=payments&view=print&id=$row[id]'>
-    <img src='images/common/printer.png' height='16' border='-5px' padding='-4px' valign='bottom' />
-    </a>
-    ]]></cell>";
+    $xml .= 
+        "<cell><![CDATA[
+           <a class='index_table' title='$LANG[view] ".$row['index_name']."'
+              href='index.php?module=payments&view=details&id=$row[id]&action=view'>
+             <img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' />
+           </a>
+           <a class='index_table' title='$LANG[print_preview_tooltip] ".$row['id']."'
+              href='index.php?module=payments&view=print&id=$row[id]'>
+             <img src='images/common/printer.png' height='16' border='-5px' padding='-4px' valign='bottom' />
+           </a>
+         ]]></cell>";
 
     $xml .= "<cell><![CDATA[".$row['id']."]]></cell>";
     $xml .= "<cell><![CDATA[".$row['index_name']."]]></cell>";

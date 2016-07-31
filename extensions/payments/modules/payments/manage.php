@@ -11,6 +11,8 @@ payment::addNewFields();
 $query = null;
 $inv_id = null;
 $c_id = null;
+$preference = null;
+$customer = null;
 
 if (!empty($_GET['id'])) {
     // Filter by just one invoice
@@ -34,14 +36,11 @@ else {
 
 $payments = progressPayments($query);
 
-$smarty -> assign("payments",$payments);
-$smarty -> assign("preference",$preference);
-$smarty -> assign("customer",$customer);
-
-$smarty -> assign("c_id",$c_id);
-$smarty -> assign("inv_id",$inv_id);
-
-$smarty -> assign('subPageActive', $subPageActive);
-$smarty -> assign('pageActive', 'payment');
-$smarty -> assign('active_tab', '#money');
-?>
+$smarty->assign("payments",$payments);
+$smarty->assign("preference",$preference);
+$smarty->assign("customer",$customer);
+$smarty->assign("c_id",$c_id);
+$smarty->assign("inv_id",$inv_id);
+$smarty->assign('subPageActive', $subPageActive);
+$smarty->assign('pageActive', 'payment');
+$smarty->assign('active_tab', '#money');

@@ -25,6 +25,7 @@ class PdoDb {
     private $fauxPost;
     private $fieldPrefix;
     private $functions;
+    private $groupBy;
     private $joinStmts;
     private $keyPairs;
     private $limit;
@@ -33,6 +34,9 @@ class PdoDb {
     private $pdoDb2;
     private $selectAll;
     private $selectList;
+    private $table_columns;
+    private $table_constrants;
+    private $table_engine;
     private $table_schema;
     private $transaction;
     private $usePost;
@@ -94,21 +98,24 @@ class PdoDb {
      */
     public function clearAll($clearTran=true) {
         // @formatter:off
-        $this->caseStmts      = null;
-        $this->constraints    = null;
-        $this->distinct       = false;
-        $this->excludedFields = null;
-        $this->fauxPost       = null;
-        $this->fieldPrefix    = null;
-        $this->functions      = null;
-        $this->joinStmts      = null;
-        $this->keyPairs       = null;
-        $this->limit          = 0;
-        $this->orderBy        = null;
-        $this->selectAll      = false;
-        $this->selectList     = null;
-        $this->usePost        = true;
-        $this->whereClause    = null;
+        $this->caseStmts        = null;
+        $this->constraints      = null;
+        $this->distinct         = false;
+        $this->excludedFields   = null;
+        $this->fauxPost         = null;
+        $this->fieldPrefix      = null;
+        $this->functions        = null;
+        $this->groupBy          = null;
+        $this->joinStmts        = null;
+        $this->keyPairs         = null;
+        $this->limit            = 0;
+        $this->orderBy          = null;
+        $this->selectAll        = false;
+        $this->selectList       = null;
+        $this->table_columns    = null;
+        $this->table_constrants = null;
+        $this->usePost          = true;
+        $this->whereClause      = null;
         if ($clearTran && $this->transaction) {
             $this->rollback();
         }
@@ -172,6 +179,42 @@ class PdoDb {
     }
 
     /**
+     * Add and entry for a table column to correct.
+     * @param string $column Name of table field.
+     * @param string $type Data type of the table column, ex: VARCHAR(255)
+     * @param string $attributes Additional column attributs, 
+     *        ex: NOT NULL AUTO_INCREMENT
+     */
+    public function addTableColumns($column, $type, $attributes) {
+        $structure = $type . " " . $attributes;
+        if (empty($this->table_columns)) {
+            $this->table_columns = array();
+        }
+        $this->table_columns[$column] = $structure;
+    }
+
+    /**
+     * Specify the table engine
+     * @param unknown $engine
+     */
+    public function addTableEngine($engine) {
+        $this->table_engine = $engine;
+    }
+
+    /**
+     * Specify <b>ALTER TABLE</b> contraints to add to table columns.
+     * @param string $column Name of table field the contraint is being aplied to.
+     * @param string $constrant Constrant to apply to the table field. Note that
+     *        the <b>$column</b> will be appended to the end of the <b>$constrant</b>
+     *        unless there is a <i>tilde</i>, <b>~</b>, character in it. If present,
+     *        the <b>$column</b> will be added in place of the <i>tilde</i>.
+     */
+    public function addTableConstraints($column, $constrant) {
+        if (empty($this->table_constrants)) $this->table_constrants = array();
+        $this->table_constrants[$column] = $constrant;
+    }
+
+    /**
      * Set the <b>WHERE</b> clause object to generate when the next request is performed.
      * @param Object $where Either an instance of <i>WhereItem</i> or <i>WhereClause</i>.
      *        Note: If a <i>WhereItem</i> is submitted, it will be added to the <i>WhereClause</i>.
@@ -198,7 +241,7 @@ class PdoDb {
      * @param mixed $function Function to include in parameter list. Example: count(id).
      */
     public function addToFunctions($function) {
-        if (isset($this->function)) {
+        if (isset($this->functions)) {
             $this->functions[] = $function;
         } else {
             $this->functions = array($function);
@@ -207,13 +250,71 @@ class PdoDb {
 
     /**
      * Add a <b>Join</b> object to this request.
-     * @param Join $join Object to build a <b>JOIN</b> clause from.
+     * @param Join $join Parameter can take several forms:
+     *        <ol>
+     *          <li><b>Join class object</b></li>
+     *          <li><b>Array with 4 values</b>. The values are:
+     *            <ol>
+     *              <li><b>string</b>: Type of join.</li>
+     *              <li><b>string</b>: Table to join.</li>
+     *              <li><b>string</b>: Alias for table.</li>
+     *              <li><b>OnClause</b>: Object with join information.</li>
+     *            </ol>
+     *          <li><b>Array with 5 values</b>. The values are:
+     *            <ol>
+     *              <li><b>string</b>: Type of join.</li>
+     *              <li><b>string</b>: Table to join.</li>
+     *              <li><b>string</b>: Alias for table.</li>
+     *              <li><b>string</b>: Left field to join on.</li>
+     *              <li><b>string</b>: Right field to join on.</li>
+     *            </ol>
+     *          </li>
+     *        </ol>
+     * @throws PdoDbException If invalid values are passed.
      */
-    public function addToJoins(Join $join) {
-        if (isset($this->joinStmts)) {
+    public function addToJoins($join) {
+        if (empty($this->joinStmts)) $this->joinStmts = array();
+        if (is_a($join, "Join")) {
             $this->joinStmts[] = $join;
+            return;
+        }
+
+        if (!is_array($join)) {
+            error_log("PdoDb - addToJoins(): parameter join - " . print_r($join,true));
+            throw new PdoDbException("PdoDb - addToJoins(): Invalid parameter type specified. See error_log for details.");
+        }
+
+        // type, table, alias, OnClause
+        // type, table, alias, field, value
+        if (count($join) == 4) {
+            $type = $join[0];
+            $table = $join[1];
+            $alias = $join[2];
+            $onClause = $join[3];
+            if (!is_string($type) || !is_string($table) || !is_string($alias) || !is_a($onClause, "OnClause")) {
+                if (is_a($onStmt, "OnClause")) {
+                    throw new PdoDbException("PdoDb - addToJoins(): Array submitted. Non-string content where string required.");
+                } else {
+                    throw new PdoDbException("PdoDb - addToJoins(): Array submitted. Non-class (OnClause) data where class object required.");
+                }
+            }
+            $jn = new Join($type, $table, $alias);
+            $jn->setOnClause($onClause);
+            $this->joinStmts[] = $jn;
+        } else if (count($join) == 5) {
+            $type = $join[0];
+            $table = $join[1];
+            $alias = $join[2];
+            $field = $join[3];
+            $value = $join[4];
+            if (!is_string($type) || !is_string($table) || !is_string($alias) || !is_string($field) || !is_string($value)) {
+                throw new PdoDbException("PdoDb - addToJoins(): Array submitted contains non-string fields.");
+            }
+            $jn = new Join($type, $table, $alias);
+            $jn->addSimpleItem($field, $value);
+            $this->joinStmts[] = $jn;
         } else {
-            $this->joinStmts = array($join);
+            throw new PdoDbException("PdoDb - addToJoins(): Array submitted with invalid content.");
         }
     }
 
@@ -228,6 +329,7 @@ class PdoDb {
             $this->caseStmts = array($caseStmt);
         }
     }
+
     /**
      * Set the <b>ORDER BY</b> statement object to generate when the next request is performed.
      * Note that this method can be called multiple times to add additional values.
@@ -275,6 +377,36 @@ class PdoDb {
     }
 
     /**
+     * Set the <b>GROUP BY</b> statement object to generate when the next request is performed.
+     * Note that this method can be called multiple times to add additional values.
+     * @param mixed $groupBy Can take one of two forms.
+     *        1) A string that is the name of the field to group by.
+     *           Ex: "street_address".
+     *        2) An ordered array that contains a list of field names to group by. The list is
+     *           high to low group by levels.
+     * @throws Exception if an invalid parameter type is found.
+     */
+    public function setGroupBy($groupBy) {
+        if (!isset($this->groupBy)) $this->groupBy = array();
+        if (is_array($groupBy)) {
+            foreach($groupBy as $item) {
+                if (!is_string($item)) {
+                    $str = "PdoDb setGroupBy - <b>\$groupBy</b> parameter is not valid.";
+                    error_log($str);
+                    throw new PdoDbException($str);
+                }
+                $this->groupBy[] = $item;
+            }
+        } else if (is_string($groupBy)) {
+            $this->groupBy[] = $groupBy;
+        } else {
+            $str = "PdoDb setGroupBy(): Invalid parameter type. " . print_r($groupBy, true);
+            error_log($str);
+            throw new PdoDbException($str);
+        }
+    }
+
+    /**
      * Set a limit on records accessed
      * @param integer $limit Value to specify in the <i>LIMIT</i> parameter.
      * @param integer $offset Number of records to skip before reading the next $limit amount.
@@ -282,6 +414,7 @@ class PdoDb {
     public function setLimit($limit, $offset=0) {
         $this->limit = ($offset > 0 ? $offset . ", " : "") . $limit;
     }
+
 
     /**
      * Set the list of fields to be excluded from those included in the list of fields
@@ -353,7 +486,7 @@ class PdoDb {
         if (is_array($selectList)) {
             $this->selectList = $selectList;
         } else if (is_string($selectList)) {
-            $this->selectList = $selectList;
+            $this->selectList = array($selectList);
         } else {
             $str = "PdoDb setSelectList(): Invalid parameter type. " . print_r($selectList, true);
             error_log($str);
@@ -565,12 +698,15 @@ class PdoDb {
     public static function formatField($field, $alias = null) {
         $matches = array();
         if (preg_match('/^([a-z]+)\.(.*)$/', $field, $matches)) {
+            // Already an alias present
             $parts = array();
             if (preg_match('/(.*) +([aA][sS]) +(.*)/', $matches[2], $parts)) {
-                $field = '`' . $matches[1] . '`.`' . $parts[1] . '` AS ' . $parts[3];
+                // x.y AS z
+                $field = '`' . $matches[1] . '`.' . ($parts[1] == '*' ? $parts[1] : '`' . $parts[1] . '`') . 
+                         ' AS ' . $parts[3];
             } else {
-                // Already and alias present
-                $field = '`' . $matches[1] . '`.`' . $matches[2] . '`';
+                // x.y
+                $field = '`' . $matches[1] . '`.' . ($matches[2] == '*' ? $matches[2] : '`' . $matches[2] . '`');
             }
         } else if (isset($alias)) {
             // Needs to have alias added.
@@ -601,46 +737,105 @@ class PdoDb {
             $table = TB_PREFIX . $table;
         }
 
-        if (!($columns = $this->getTableFields($table))) {
-            $this->clearAll();
-            throw new PdoDbException("PdoDb - request(): Invalid table, $table, specified.");
-        }
-
         $sql = "";
         $valuePairs = array();
         $this->keyPairs = array();
         $token_cnt = 0;
 
-        // Build WHERE clause and get value pair list for tokens in the clause.
-        $where = "";
-        if (!empty($this->whereClause)) {
-            $where = $this->whereClause->build($this->keyPairs, $alias);
-            $token_cnt += $this->whereClause->getTokenCnt();
-        }
+        if ($request != "DROP") {
+            if ($request == "ALTER TABLE") {
+                if (empty($this->table_constrants)) {
+                    throw new PdoDbException("PdoDb - request():");
+                }
 
-        // Build ORDER BY statement
-        $order = (empty($this->orderBy) ? '' : $this->orderBy->buildOrder($alias));
+                foreach ($this->table_constrants as $column => $constraint) {
+                    if (preg_match('/compound/', $column)) {
+                        $column = preg_replace('/compound *(\(.*\)).*$/', '\1', $column);
+                    }
 
-        // Build LIMIT
-        $limit = (empty($this->limit) ? '' : " LIMIT $this->limit");
+                    if (strstr($constraint, '~') === false) {
+                        $constraint .= " " . $column;
+                    } else {
+                        $constraint = preg_replace('/~/', $column, $constraint);
+                    }
 
-        // Make an array of paired column name and values. The column name is the
-        // index and the value is the content at that column.
-        foreach ($columns as $column => $this->constraints) {
-            // Check to see if a field prefix was specified and that there is no
-            // table alias present. If so, prepend the prefix followed by an underscore.
-            // @formatter:off
-            $postColumn = $column;
-            if (( $this->usePost && isset($_POST[$postColumn])) ||
-                (!$this->usePost && isset($this->fauxPost[$postColumn]))) {
-                $valuePairs[$column] = ($this->usePost ? $_POST[$postColumn] : $this->fauxPost[$postColumn]);
+                    $sql .= "ALTER TABLE `$table` $constraint;";
+                }
+            } else if ($request == "CREATE TABLE") {
+                foreach ($this->table_columns as $column => $structure) {
+                    if (empty($sql)) {
+                        $sql = "(";
+                    } else {
+                        $sql .= ", ";
+                    }
+                    $sql .= $column . " " . $structure;
+                }
+
+                if (empty($this->table_engine)) {
+                    $this->clearAll();
+                    throw new PdoDbException("PdoDb - request(): No engine specified for CREATE TABLE ($table).");
+                }
+
+                if (empty($sql)) {
+                    throw new PdoDbException("PdoDb - request(): No columns specified to CREATE TABLE ($table).");
+                }
+
+                $sql .= ") ENGINE = " . $this->table_engine . ";";
+            } else {
+                if (!($columns = $this->getTableFields($table))) {
+                    $this->clearAll();
+                    throw new PdoDbException("PdoDb - request(): Invalid table, $table, specified.");
+                }
+    
+                // Build WHERE clause and get value pair list for tokens in the clause.
+                $where = "";
+                if (!empty($this->whereClause)) {
+                    $where = $this->whereClause->build($this->keyPairs, $alias);
+                    $token_cnt += $this->whereClause->getTokenCnt();
+                }
+        
+                // Build ORDER BY statement
+                $order = (empty($this->orderBy) ? '' : $this->orderBy->buildOrder($alias));
+
+                // Build GROUP BY
+                $group = (empty($this->groupBy) ? "" : "GROUP BY " . implode(',', $this->groupBy));
+
+                // Build LIMIT
+                $limit = (empty($this->limit) ? '' : " LIMIT $this->limit");
+        
+                // Make an array of paired column name and values. The column name is the
+                // index and the value is the content at that column.
+                foreach ($columns as $column => $this->constraints) {
+                    // Check to see if a field prefix was specified and that there is no
+                    // table alias present. If so, prepend the prefix followed by an underscore.
+                    // @formatter:off
+                    $postColumn = $column;
+                    if (( $this->usePost && isset($_POST[$postColumn])) ||
+                        (!$this->usePost && isset($this->fauxPost[$postColumn]))) {
+                        $valuePairs[$column] = ($this->usePost ? $_POST[$postColumn] : $this->fauxPost[$postColumn]);
+                    }
+                    // @formatter:on
+                }
             }
-            // @formatter:on
         }
 
         // @formatter:off
-        $useValueList = true;
+        $useValueList = ($request != "ALTER TABLE"  &&
+                         $request != "CREATE TABLE" &&
+                         $request != "DROP");
         switch ($request) {
+            case "ALTER TABLE":
+                // $sql containts the complete command
+                break;
+
+            case "CREATE TABLE":
+                $sql = "CREATE TABLE `$table` $sql";
+                break;
+
+            case "DROP":
+                $sql = "DROP TABLE IF EXISTS `$table` $sql";
+                break;
+
             case "SELECT":
                 $useValueList = false;
                 if (!$this->selectAll &&
@@ -701,8 +896,9 @@ class PdoDb {
         }
 
         if ($useValueList) $sql .= $this->makeValueList($request, $valuePairs, $token_cnt) . "\n";
-        $sql .= (empty($where) ? "" : " " . $where) .
-                (empty($order) ? "" : " " . $order) .
+        $sql .= (empty($where) ? "" : " " . $where . "\n") .
+                (empty($group) ? "" : " " . $group . "\n") .
+                (empty($order) ? "" : " " . $order . "\n") .
                 (empty($limit) ? "" : " " . $limit);
         // @formatter:on
         return $this->query($sql, $this->keyPairs);

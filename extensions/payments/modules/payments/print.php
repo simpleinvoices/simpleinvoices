@@ -17,7 +17,6 @@ $paymentType       = getPaymentType($payment['ac_payment_type']);
 $preference        = getPreference($invoice['preference_id']);
 $logo              = getLogo($biller);
 $logo              = str_replace(" ", "%20", $logo);
-error_log("print.php logl[$logo]");
 
 $lang = $smarty->get_template_vars('LANG');
 
@@ -130,4 +129,3 @@ $smarty->assign("customFieldLabels", $customFieldLabels);
 $smarty->assign('pageActive'       , 'payment');
 $smarty->assign('active_tab'       , '#money');
 // @formatter:on
-?>

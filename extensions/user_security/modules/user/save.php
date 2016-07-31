@@ -1,14 +1,17 @@
 <?php
 /*
- * Script: save.tpl
- * User save template
- * Authors:
- * Justin Kelly, Nicolas Ruflin,
- * Rich Rowley
- * Last edited:
- * 2016-05-28
- * License:
- * GPL v3 or above
+ *  Script: save.tpl
+ *      User save template
+ *
+ *  Authors:
+ *      Justin Kelly, Nicolas Ruflin,
+ *      Rich Rowley
+ *
+ *  Last edited:
+ *      2016-07-29
+ *
+ *  License:
+ *      GPL v3 or above
  */
 global $smarty, $pdoDb;
 
