@@ -24,7 +24,7 @@
       <tr>
         <th>{$LANG.amount}</th>
         <td colspan="5">
-          <input type="text" name="ac_amount" size="25" value="{$invoice.owing|htmlsafe}" />
+          <input type="text" name="ac_amount" size="25" value="{$invoice.owing|siLocal_number}" />
           <a class="cluetip" href="#"
              rel="index.php?module=documentation&amp;view=view&amp;page=help_process_payment_auto_amount"
              title="{$LANG.process_payment_auto_amount}">
