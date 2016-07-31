@@ -22,7 +22,7 @@ $end_date    = isset($_POST['end_date'])    ? $_POST['end_date']    : lastOfMont
 $custom_flag = isset($_POST['custom_flag']) ? $_POST['custom_flag'] : null;
 
 $custom_flags_enabled = isExtensionEnabled('custom_flags');
-$custom_flag_labels   = getCustomFlagLabels($customFlagsEnabled);
+$custom_flag_labels   = getCustomFlagLabels($custom_flags_enabled);
 // @formatter:on
 
 $items = array();
@@ -30,7 +30,7 @@ $tot_income = 0;
 if (isset($_POST['submit'])) {
     $neti = new NetIncomeReport();
     $invoices = $neti->select_rpt_items($start_date , $end_date, $custom_flag);
-    
+
     foreach ($invoices as $invoice) {
         $tot_income += $invoice->total_period_payments;
     }

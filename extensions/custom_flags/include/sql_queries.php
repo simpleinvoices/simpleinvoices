@@ -5,17 +5,19 @@
  *        this session will be used.
  */
 function getCustomFlagLabels($customFlagsEnabled, $domain_id = '') {
-    $domain_id = domain_id::get($domain_id);
-    $sql = "SELECT * FROM " . TB_PREFIX . "custom_flags WHERE domain_id = :domain_id";
-    $sth = dbQuery($sql, ':domain_id', $domain_id);
     $custom_flag_labels = array('','','','','','','','','','');
-    if ($sth !== false) {
-        $ndx = 0;
-        while ($custom_flag_label = $sth->fetch()) {
-            if ($custom_flag_label['enabled'] == '1') {
-                $custom_flag_labels[$ndx] = $custom_flag_label['field_label'];
+    if ($customFlagsEnabled) {
+        $domain_id = domain_id::get($domain_id);
+        $sql = "SELECT * FROM " . TB_PREFIX . "custom_flags WHERE domain_id = :domain_id";
+        $sth = dbQuery($sql, ':domain_id', $domain_id);
+        if ($sth !== false) {
+            $ndx = 0;
+            while ($custom_flag_label = $sth->fetch()) {
+                if ($custom_flag_label['enabled'] == '1') {
+                    $custom_flag_labels[$ndx] = $custom_flag_label['field_label'];
+                }
+                $ndx++;
             }
-            $ndx++;
         }
     }
     return $custom_flag_labels;

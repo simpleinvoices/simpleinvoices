@@ -87,7 +87,7 @@ class OrderBy {
             } else {
                 $orderBy .= ', ';
             }
-            $orderBy .= '`' . $items[0] . '` ' . $items[1];
+            $orderBy .= PdoDb::formatField($items[0]) . ' ' . $items[1];
         }
         return $orderBy;
     }

@@ -7,7 +7,7 @@ require_once 'include/class/DbField.php';
  */
 class WhereItem {
     const CONNECTORS = '/^(AND|OR)$/';
-    const OPERATORS = '/^(=|<>|<|>|<=|>=|BETWEEN|LIKE|IN)$/';
+    const OPERATORS = '/^(=|<>|<|>|<=|>=|BETWEEN|LIKE|IN|REGEXP)$/';
 
     private $close_paren;
     private $connector;
@@ -26,7 +26,7 @@ class WhereItem {
      * @param string $operator Valid SQL comparison operator to the <b>$field</b> record
      *        content test against the <b>$value</b> parameter. Currently only the relational
      *        operator are allowed: <b>=</b>, <b><></b>, <b><</b>, <b>></b>, <b><=</b> and <b>>=</b>.
-     * @param mixed $value Value to use in the test.
+     * @param mixed $value Value to use in the test. Note for <b>BETWEEN</b> this will be: <b>array(beginval,endval)</b>.
      * @param boolean $close_paren Set to <b>true</b> if a closing parenthesis should be
      *        iinserted after this term; otherwise set to <b>false</b>.
      * @param string $connector The "AND" or "OR" connector if additional terms will be
@@ -38,7 +38,12 @@ class WhereItem {
         $this->field = $field;
         $this->operator = strtoupper($operator);
         $this->close_paren = $close_paren;
-        $this->connector = (isset($connector) ? strtoupper($connector) : '');
+
+        if (isset($connector) && !is_string($connector)) {
+            error_log("WhereItem - __construct(): Non-string connector specified. Connector - " . print_r($this->connector,true));
+            throw new PdoDbException("WhereItem - Non-string connector specified. See error log for details.");
+        }
+        $this->connector = (isset($connector) ? (is_string($connector) ? strtoupper($connector) : $connector) : '');
 
         if (!preg_match(self::OPERATORS, $this->operator)) {
             throw new PdoDbException("WhereItem - Invalid operator, $this->operator, specified.");
@@ -103,6 +108,14 @@ class WhereItem {
                     $item .= $tk;
                     $keyPairs[$tk] = $this->value[$i];
                 }
+                $item .= ')';
+                break;
+
+            case 'REGEXP':
+                $item = '(' . $item;
+                $tk = PdoDb::makeToken($this->token, $cnt);
+                $item .= $tk . ' ';
+                $keyPairs[$tk] = $this->value;
                 $item .= ')';
                 break;
 
