@@ -26,20 +26,22 @@ class OrderBy {
      *        The following forms are valid:
      *          <i>string</i> - A <i>field name</i> to be added to the collection
      *                          of ordered items with the specified <b>$order</b>.
-     *          <i>array</i>  - An array of <i>field names</i> or of <i>arrays</i>. If an
-     *                          <i>array of field names</i>, each <i>field name</i>is added
-     *                          to the list of ordered items with the specified <b>$order</b>.
-     *                          If an <i>array of arrays</i>, each element contains can be <i>one</i>
-     *                          or <i>two</i> dimensional. A <i>two</i> dimensional array contains a
-     *                          <i>field name</i> and an order value of <i>A</i> or <i>D</i>. If <i>one</i>
-     *                          dimensional, it contains a <i>field name</i> and use the <b>$order</b>
-     *                          field for sorting.
+     *          <i>array</i>  - An array of <i>field names</i> or of <i>arrays</i>.<br/>
+     *                          If an <i>array of field names</i>, each <i>field name</i> is added
+     *                          to the list of ordered items with default order of <b>ASC</b>.<br/>.
+     *                          If an <i>array of arrays</i>, each element array can have <i>one</i>
+     *                          or <i>two</i> elements. Element arrays of <i>two</dimensions contains
+     *                          a <i>field name</i> for the first index and a sort order value in the
+     *                          second element. Valid sort order values are: <b>A</b>, <b>ASC</b>, <b>D</b>
+     *                          or <b>DESC</b>. Element arrays of <i>one</i> dimension contains a
+     *                          <i>field name</i> and will use the value specified in the <b>$order</b>
+     *                          parameter field for sorting.
      * @param string $order Order <b>A</b> ascending, <b>D</b> descending. Defaults to <b>A</b>.
      * @throws Exception if either parameter does not contain the form and values spcified for them.
      */
     public function addField($field, $order = 'A') {
         $lcl_order = strtoupper($order);
-        if ($lcl_order != 'A' && $lcl_order != 'D') {
+        if (preg_match('/^(A|D|ASC|DESC)$/', $lcl_order) != 1) {
             $str = "OrderBy - addField(): Invalid order, $lcl_order, specified.";
             error_log($str);
             throw new PdoDbException(str);

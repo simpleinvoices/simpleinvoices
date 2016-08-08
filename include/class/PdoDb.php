@@ -1,9 +1,12 @@
 <?php
 require_once 'include/class/PdoDbException.php';
+require_once 'include/class/FunctionStmt.php';
 require_once 'include/class/WhereClause.php';
 require_once 'include/class/WhereItem.php';
+require_once 'include/class/FromStmt.php';
 require_once 'include/class/CaseStmt.php';
 require_once 'include/class/OrderBy.php';
+require_once 'include/class/Select.php';
 require_once 'include/class/DbInfo.php';
 require_once 'include/class/DbField.php';
 require_once 'include/class/Join.php';
@@ -17,6 +20,8 @@ require_once 'include/class/Join.php';
  * @author Rich Rowley
  */
 class PdoDb {
+    const TBPREFIX_PATTERN = '/^' . TB_PREFIX . '/';
+    
     private $caseStmts;
     private $constraints;
     private $debug;
@@ -34,6 +39,7 @@ class PdoDb {
     private $pdoDb2;
     private $selectAll;
     private $selectList;
+    private $selectStmts;
     private $table_columns;
     private $table_constrants;
     private $table_engine;
@@ -49,7 +55,7 @@ class PdoDb {
      * @param DbInfo $dbinfo Object with database access information.
      * @param boolean $debug Set to <b>true</b> to have the debug information
      *        written to the <i>error.log</i>.
-     * @throws Exception if a database error occurs.
+     * @throws PdoDbException if a database error occurs.
      */
     public function __construct(DbInfo $dbinfo, $debug=false) {
         $this->clearAll();
@@ -112,6 +118,7 @@ class PdoDb {
         $this->orderBy          = null;
         $this->selectAll        = false;
         $this->selectList       = null;
+        $this->selectStmts      = null;
         $this->table_columns    = null;
         $this->table_constrants = null;
         $this->usePost          = true;
@@ -220,7 +227,7 @@ class PdoDb {
      *        Note: If a <i>WhereItem</i> is submitted, it will be added to the <i>WhereClause</i>.
      *        If a <i>WhereClause</i> is submitted, it will be set as the initial value replacing
      *        any previously set values.
-     * @throws Exception if an invalid parameter type is submitted.
+     * @throws PdoDbException if an invalid parameter type is submitted.
      */
     public function addToWhere($where) {
         if (is_a($where, "WhereItem")) {
@@ -245,6 +252,18 @@ class PdoDb {
             $this->functions[] = $function;
         } else {
             $this->functions = array($function);
+        }
+    }
+
+    /**
+     * Specify <b>Select</b> object to add to the select list.
+     * @param Select $selectStmt Object to include in parameter list.
+     */
+    public function addToSelectStmts(Select $selectStmt) {
+        if (isset($this->selectStmts)) {
+            $this->selectStmts[] = $selectStmt;
+        } else {
+            $this->selectStmts = array($selectStmt);
         }
     }
 
@@ -336,12 +355,11 @@ class PdoDb {
      * @param OrderBy $orderBy Can take several forms.
      *        1) A string that is the name of the field to order by in ascending order.
      *           Ex: "street_address".
-     *        2) A two dimensional array that can contains the field name and the order to
-     *           sort it by. Ex: array("street_address", "D").
-     *        3) An array of arrays where each internal array has two dimensions with contents
-     *           explained in #2 above.
+     *        2) An array with two elements. The first is the field name and the second is the
+     *           order to sort it by. Ex: array("street_address", "D").
+     *        3) An array of arrays where each internal array has two elements as explained in #2 above.
      *        4) An OrderBy object that will replace any previous settings.
-     * @throws Exception if an invalid parameter type is found.
+     * @throws PdoDbException if an invalid parameter type is found.
      */
     public function setOrderBy($orderBy) {
         if (is_a($orderBy, "OrderBy")) {
@@ -384,7 +402,7 @@ class PdoDb {
      *           Ex: "street_address".
      *        2) An ordered array that contains a list of field names to group by. The list is
      *           high to low group by levels.
-     * @throws Exception if an invalid parameter type is found.
+     * @throws PdoDbException if an invalid parameter type is found.
      */
     public function setGroupBy($groupBy) {
         if (!isset($this->groupBy)) $this->groupBy = array();
@@ -419,12 +437,12 @@ class PdoDb {
     /**
      * Set the list of fields to be excluded from those included in the list of fields
      * specified in the request.
-     * @param array $excludedFields Array of field names to exclude from the <i>$_POST</i> or if used,
-     *        the <i>FAUX POST</i> array. These fields might be present in the <i>WHERE</i> clause
-     *        but are to be excluded from the INSERT or UPDATE fields. Typically this is the unique
-     *        identifier for the record but can be any field that would otherwie be included from
-     *        the <i>$_POST</i> or <i>FAUX POST</i> file.
-     * @throws Exception if the parameter is not an array.
+     * @param array $excludedFields An associative array keyed by the <b>column names</b> to exclude
+     *        from the <i>$_POST</i> or if used, the <i>FAUX POST</i> array. These fields might be
+     *        present in the <i>WHERE</i> clause but are to be excluded from the INSERT or UPDATE
+     *        fields. Typically this is the unique identifier for the record but can be any field
+     *        that would otherwie be included from the <i>$_POST</i> or <i>FAUX POST</i> file.
+     * @throws PdoDbException if the parameter is not an array.
      */
     public function setExcludedFields($excludedFields) {
         if (is_array($excludedFields)) {
@@ -457,7 +475,10 @@ class PdoDb {
 
     /**
      * Set faux post mode and file.
-     * @param array $fauxPost Array to use in place of the <b>$_POST</b> array.
+     * @param array $fauxPost Array to use in place of the <b>$_POST</b> superglobal.
+     *        Use the <b>table column name</b> as the index and the value to set the
+     *        column to as the value of the array at the column name index.
+     *        Ex: $fauxPost['name'] = "New name"; 
      */
     public function setFauxPost($fauxPost) {
         $this->usePost = false;
@@ -480,7 +501,7 @@ class PdoDb {
      *           Ex: "street_address".
      *        2) An array of field names to select from the table.
      *           Ex: array("name", "street_address", "city", "state", "zip").
-     * @throws Exception if an invalid parameter type is found.
+     * @throws PdoDbException if an invalid parameter type is found.
      */
     public function setSelectList($selectList) {
         if (is_array($selectList)) {
@@ -537,7 +558,7 @@ class PdoDb {
     /**
      * Retrieves the record ID of the row just inserted.
      * @return Record ID
-     * @throws Exception if database error occurs.
+     * @throws PdoDbException if database error occurs.
      */
     private function lastInsertId() {
         $sql = 'SELECT last_insert_id()';
@@ -674,7 +695,7 @@ class PdoDb {
 
     /**
      * Commit actions performed in this transaction.
-     * @throws Exception if called when no transaction is in process.
+     * @throws PdoDbException if called when no transaction is in process.
      */
     public function commit() {
         if ($this->transaction) {
@@ -715,6 +736,13 @@ class PdoDb {
         return $field;
     }
 
+    public static function addTbPrefix($table) {
+        if ((preg_match(self::TBPREFIX_PATTERN, $table)) != 1) {
+            return TB_PREFIX . $table;
+        }
+        return $table;
+    }
+
     /**
      * Dynamically builds and executes a PDO request for a specified table.
      * @param string $request Type of request. Valid settings are: <b>SELECT</b>,
@@ -728,14 +756,11 @@ class PdoDb {
      *         <b>INSERT</b> returns the unique ID assigned to the inserted record if an
      *         auto increment field exisst, otherwise <b>true</b>.
      *         <b>UPDATE</b> and <b>DELETE</b> returns <b>true</b>.
-     * @throws Exception if any unexpected setting or missing information is encountered.
+     * @throws PdoDbException if any unexpected setting or missing information is encountered.
      */
     public function request($request, $table, $alias = null) {
         $request = strtoupper($request);
-        $pattern = '/^' . TB_PREFIX . '/';
-        if ((preg_match($pattern, $table)) != 1) {
-            $table = TB_PREFIX . $table;
-        }
+        $table = self::addTbPrefix($table);
 
         $sql = "";
         $valuePairs = array();
@@ -852,6 +877,13 @@ class PdoDb {
                     }
                 }
 
+                if (isset($this->selectStmts)) {
+                    foreach($this->selectStmts as $selectStmt) {
+                        if (!empty($list)) $list .= ", ";
+                        $list .= $selectStmt->build($this->keyPairs);
+                    }
+                }
+
                 if (isset($this->functions)) {
                     foreach($this->functions as $function) {
                         if (!empty($list)) $list .= ", ";
@@ -862,7 +894,7 @@ class PdoDb {
                 if (isset($this->caseStmts)) {
                     foreach($this->caseStmts as $caseStmt) {
                         if (!empty($list)) $list .= ", ";
-                        $list .= $caseStmt->build();
+                        $list .= $caseStmt->build($this->keyPairs);
                     }
                 }
 
@@ -914,10 +946,10 @@ class PdoDb {
      *        Example: array(':id' => '7', ':domain_id' => '1');
      * @return Result varies with the request type. <b>INSERT</b> returns the
      *         auto increment unique ID (or blank if no such field), <b>SELECT</b>
-     *         returns the associative array for selected rows, <b>SHOW</b> returns
-     *         the numberic array of specified <b>SHOW</b> request, otherwise <b>true</b>
-     *         on success.
-     * @throws Exception If unable to bind values or execute request.
+     *         returns the associative array for selected rows or an empty array if
+     *         no rows are found, <b>SHOW</b> returns the numberic array of
+     *         specified <b>SHOW</b> request, otherwise <b>true</b> on success.
+     * @throws PdoDbException If unable to bind values or execute request.
      */
     public function query($sql, $valuePairs = null) {
         $this->debugger($sql);

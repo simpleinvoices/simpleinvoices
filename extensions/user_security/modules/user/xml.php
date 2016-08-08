@@ -1,7 +1,7 @@
 <?php
 header("Content-type: text/xml");
 
-global $LANG, $pdoDb;
+global $LANG;
 
 // @formatter:off
 $start = (isset($_POST['start'])    ) ? $_POST['start']     : "0" ;
@@ -11,8 +11,8 @@ $rp    = (isset($_POST['rp'])       ) ? $_POST['rp']        : "25" ;
 $page  = (isset($_POST['page'])     ) ? $_POST['page']      : "1" ;
 // @formatter:on
 
-function selectRecords(PdoDb $pdoDb, $type, $dir, $sort, $rp, $page) {
-    global $LANG, $start, $auth_session;
+function selectRecords($type, $dir, $sort, $rp, $page) {
+    global $LANG, $start, $auth_session, $pdoDb;
 
     $domain_id = $auth_session->domain_id;
 
@@ -47,7 +47,9 @@ function selectRecords(PdoDb $pdoDb, $type, $dir, $sort, $rp, $page) {
     $list = array("id", "username", "email", "user_id", "enabled", "ur.name AS role_name");
     $pdoDb->setSelectList($list);
 
-    $caseStmt = new CaseStmt("u.enabled", "=", ENABLED, $LANG['enabled'], $LANG['disabled'], "enabled");
+    $caseStmt = new CaseStmt("u.enabled", "enabled");
+    $caseStmt->addWhen("=", ENABLED, $LANG['enabled']);
+    $caseStmt->addWhen("!=", ENABLED, $LANG['disabled'], true);
     $pdoDb->addToCaseStmts($caseStmt);
 
     $join = new Join("LEFT", "user_role", "ur");
@@ -78,8 +80,8 @@ function selectRecords(PdoDb $pdoDb, $type, $dir, $sort, $rp, $page) {
     }
     return $result;
 }
-$rows  = selectRecords($pdoDb, '', $dir, $sort, $rp, $page);
-$count = selectRecords($pdoDb, 'count', $dir, $sort, $rp, $page);
+$rows  = selectRecords('', $dir, $sort, $rp, $page);
+$count = selectRecords('count', $dir, $sort, $rp, $page);
 
 $xml  = "";
 $xml .= "<rows>";

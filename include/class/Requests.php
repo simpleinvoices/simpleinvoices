@@ -1,6 +1,4 @@
 <?php
-require_once 'ftcc/db/PdoDb.php';
-require_once 'ftcc/db/Request.php';
 
 /**
  * Requests class
@@ -17,7 +15,12 @@ class Requests {
      * Opens database and initializes class properties.
      */
     public function __construct() {
-        $this->pdoDb = new PdoDb(new DbInfo());
+        global $pdoAdapter, $config;
+        $this->pdoDb = new PdoDb(new DbInfo($pdoAdapter,
+                                            $config->database->params->dbname,
+                                            $config->database->params->host,
+                                            $config->database->params->password,
+                                            $config->database->params->username));
         $this->reset();
     }
 
@@ -32,7 +35,7 @@ class Requests {
      * Reset class properties.
      */
     public function reset() {
-        $this->pdoDb->clearAll();
+        $this->pdoDb->clearAll(true);
         $this->requests = array();
         $this->addIds = array();
     }
@@ -65,9 +68,10 @@ class Requests {
 
     /**
      * Process all requests.
-     * process
-     * @throws Exception
-     * @return return_type
+     * Note: This performs a PDO transaction. If an error is thrown, all changes
+     *       will be rolled back and the database will not be changed. Only upon
+     *       success will all changes be applied.
+     * @throws PdoDbException If an error occurs while processing requests.
      */
     public function process() {
         try {
@@ -99,4 +103,3 @@ class Requests {
         return 0;
     }
 }
-?>

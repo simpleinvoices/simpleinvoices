@@ -120,7 +120,7 @@ class WhereItem {
                 break;
 
             default:
-                if (DbField::isField($this->value, "Field")) {
+                if (is_a($this->value, "DbField")) {
                     $item .= $this->value->genParm();
                 } else {
                     $tk = PdoDb::makeToken($this->token, $cnt);

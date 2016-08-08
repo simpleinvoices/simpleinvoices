@@ -29,7 +29,7 @@ class CaseStmt {
      *        <b>&gt;</b> and <b>&gt;=</b>.
      * @param string $value Value or field to place on the right side of the operator.
      * @param string $result Value to assign if the test is true.
-     * @param string $end (Optional) Defaults to <b>false</b>. Specify <b>true</b> when the last
+     * @param boolean $end (Optional) Defaults to <b>false</b>. Specify <b>true</b> when the last
      *        <b>WHEN</b> test is specified.
      * @throws PdoDbException When called after the end has been flagged.
      */
@@ -56,7 +56,7 @@ class CaseStmt {
             $case .= $when->build();
         }
         $case .= "END)";
-        if (!empty($this->as)) $case .= " AS " . $this->as;
+        if (!empty($this->alias)) $case .= " AS " . $this->alias;
 
         return $case;
     }

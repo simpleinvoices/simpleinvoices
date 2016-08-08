@@ -1,7 +1,94 @@
 <?php
-header("Content-type: text/xml");
 
-global $LANG;
+function sql($type = '', $start, $dir, $sort, $rp, $page) {
+    global $LANG, $pdoDb;
+
+    $valid_search_fields = array('c.id', 'c.name');
+
+    $query = isset($_POST['query']) ? $_POST['query'] : null;
+    $qtype = isset($_POST['qtype']) ? $_POST['qtype'] : null;
+    if (!empty($qtype) && !empty($query)) {
+        if ( in_array($qtype, $valid_search_fields) ) {
+            $pdoDb->addToWhere(new WhereItem(false, $qtype, "LIKE", "%$query%", false, "AND"));
+        }
+    }
+    $pdoDb->addSimpleWhere("c.domain_id", domain_id::get());
+
+    if($type =="count") {
+        $pdoDb->addToFunctions("count(*) AS count");
+        $rows = $pdoDb->request("SELECT", "customers", "c");
+        return $rows[0]['count'];
+    }
+
+    if (intval($page) != $page) $start = 0;
+    if (intval($rp)   != $rp  ) $rp = 25;
+
+    $start = (($page - 1) * $rp);
+
+    $validFields = array('CID', 'name', 'customer_total', 'paid', 'owing', 'enabled');
+    if (!in_array($sort, $validFields)) {
+        $sortlist = array(array("enabled", "D"), array("name", "A"));
+    } else {
+        $dir = (preg_match('/^(asc|desc)$/iD', $dir) ? 'A' : 'D');
+        $sortlist = array(array("enabled", "D"), array($sort, $dir));
+    }
+    $pdoDb->setOrderBy($sortlist);
+
+    $join = new Join("LEFT", "invoices", "iv");
+    $join->addSimpleItem("iv.customer_id", new DbField("c.id"), "AND");
+    $join->addSimpleItem("iv.domain_id"  , new DbField("c.domain_id"));
+    $pdoDb->addToJoins($join);
+
+    $join = new Join("LEFT", "preferences", "pr");
+    $join->addSimpleItem("pr.pref_id"  , new DbField("iv.preference_id"), "AND");
+    $join->addSimpleItem("pr.domain_id", new DbField("iv.domain_id"));
+    $pdoDb->addToJoins($join);
+
+    $join = new Join("LEFT", "invoice_items", "ii");
+    $join->addSimpleItem("iv.id"       , new DbField("ii.invoice_id"), "AND");
+    $join->addSimpleItem("iv.domain_id", new DbField("ii.domain_id"));
+    $pdoDb->addToJoins($join);
+
+    $ij = new Join("INNER", "invoices", "iv3");
+    $ij->addSimpleItem("iv3.id", new DbField("p.ac_inv_id"), "AND");
+    $ij->addSimpleItem("iv3.domain_id", new DbField("p.domain_id"));
+    $ij->addGroupBy(new GroupBy(array("iv3.customer_id", "p.domain_id")));
+    $select = new Select(array("iv3.customer_id AS customer_id", "p.domain_id AS domain_id",
+              new FunctionStmt("SUM","COALESCE(p.ac_amount,0)", "amount")),
+              new FromStmt("payment", "p"));
+    $select->addJoin($ij);
+    $join = new Join("LEFT", $select, "ap");
+    $oc = new OnClause(new OnItem(false, "ap.customer_id", "=", new DbField("c.id"), false, "AND"));
+    $oc->addSimpleItem("ap.domain_id", new DbField("c.domain_id"));
+    $join->setOnClause($oc);
+    $pdoDb->addToJoins($join);
+    // @formatter:off
+
+    $case = new CaseStmt("c.enabled", "enabled_txt");
+    $case->addWhen( "=", ENABLED, $LANG['enabled']);
+    $case->addWhen("!=", ENABLED, $LANG['disabled'], true);
+    $pdoDb->addToCaseStmts($case);
+
+    $cust_tot = new FunctionStmt("SUM", "COALESCE(IF(pr.status = 1, ii.total, 0),  0)", "customer_total");
+    $pdoDb->addToFunctions($cust_tot->build());
+
+    $paid = new FunctionStmt("COALESCE", "ap.amount,0", "paid");
+    $pdoDb->addToFunctions($paid->build());
+
+    $owing = new FunctionStmt("SUM", "COALESCE(IF(pr.status = 1, ii.total, 0),  0)", "owing");
+    $owing->addPart("-", "COALESCE(ap.amount,0)");
+    $pdoDb->addToFunctions($owing->build());
+
+    $pdoDb->setGroupBy("CID");
+
+    $pdoDb->setLimit($rp, $start);
+
+    $pdoDb->setSelectList(array("c.id as CID", "c.name", "c.enabled"));
+    $result = $pdoDb->request("SELECT", "customers", "c");
+    return $result;
+}
+
+header("Content-type: text/xml");
 
 $start = (isset($_POST['start'])    ) ? $_POST['start']     : "0";
 $dir   = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "ASC";
@@ -9,96 +96,8 @@ $sort  = (isset($_POST['sortname']) ) ? $_POST['sortname']  : "name";
 $rp    = (isset($_POST['rp'])       ) ? $_POST['rp']        : "25";
 $page  = (isset($_POST['page'])     ) ? $_POST['page']      : "1";
 
-function sql($type = '', $start, $dir, $sort, $rp, $page) {
-    global $LANG, $auth_session;
-
-    $valid_search_fields = array('c.id', 'c.name');
-
-    // SC: Safety checking values that will be directly subbed in
-    if (intval($page) != $page) {
-        $start = 0;
-    }
-
-    if (intval($rp) != $rp) {
-        $rp = 25;
-    }
-
-    /* SQL Limit - start */
-    $start = (($page - 1) * $rp);
-    $limit = "LIMIT $start, $rp";
-
-    if ($type == "count") {
-        $limit = "";
-    }
-    /* SQL Limit - end */
-
-    if (!preg_match('/^(asc|desc)$/iD', $dir)) {
-        $dir = 'DESC';
-    }
-
-    $where = "";
-    $query = isset($_POST['query']) ? $_POST['query'] : null;
-    $qtype = isset($_POST['qtype']) ? $_POST['qtype'] : null;
-    if (!(empty($qtype) || empty($query))) {
-        if (in_array($qtype, $valid_search_fields)) {
-            $where = " AND $qtype LIKE :query ";
-        } else {
-            $qtype = null;
-            $query = null;
-        }
-    }
-
-    /* Check that the sort field is OK */
-    $validFields = array('CID', 'name', 'customer_total', 'paid', 'owing', 'enabled');
-
-    if (in_array($sort, $validFields)) {
-        $sort = $sort;
-    } else {
-        $sort = "CID";
-    }
-
-    // $sql = "SELECT * FROM ".TB_PREFIX."customers ORDER BY $sort $dir LIMIT $start, $limit";
-    $disabled = $LANG['disabled'];
-    $enabled  = $LANG['enabled'];
-    $si_customers     = TB_PREFIX . "customers";
-    $si_invoices      = TB_PREFIX . "invoices";
-    $si_preferences   = TB_PREFIX . "preferences";
-    $si_invoice_items = TB_PREFIX . "invoice_items";
-    $si_payment       = TB_PREFIX . "payment";
-    $sql = "SELECT c.id as CID, c.name, c.enabled,
-                   (SELECT (CASE WHEN c.enabled = 0 THEN '$disabled' ELSE '$enabled' END)) AS enabled_txt,
-                   SUM(COALESCE(IF(pr.status = 1, ii.total, 0),  0)) AS customer_total,
-                   COALESCE(ap.amount,0) AS paid,
-                   (SUM(COALESCE(IF(pr.status = 1, ii.total, 0),  0)) - COALESCE(ap.amount,0)) AS owing
-            FROM $si_customers c
-            LEFT JOIN $si_invoices      iv ON (c.id       = iv.customer_id   AND iv.domain_id = c.domain_id)
-            LEFT JOIN $si_preferences   pr ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id)
-            LEFT JOIN $si_invoice_items ii ON (iv.id      = ii.invoice_id    AND iv.domain_id = ii.domain_id)
-            LEFT JOIN (SELECT iv3.customer_id, p.domain_id, SUM(COALESCE(p.ac_amount, 0)) AS amount
-            FROM $si_payment p
-            INNER JOIN si_invoices iv3 ON (iv3.id = p.ac_inv_id AND iv3.domain_id = p.domain_id)
-            GROUP BY iv3.customer_id, p.domain_id ) ap ON (ap.customer_id = c.id AND ap.domain_id = c.domain_id)
-            WHERE c.domain_id = :domain_id
-                  $where
-            GROUP BY CID
-            ORDER BY $sort $dir
-            $limit";
-
-    if (empty($query)) {
-        $result = dbQuery($sql, ':domain_id', $auth_session->domain_id);
-    } else {
-        $result = dbQuery($sql, ':domain_id', $auth_session->domain_id, ':query', "%$query%");
-    }
-
-    return $result;
-}
-
-$sth = sql('', $start, $dir, $sort, $rp, $page);
-$sth_count_rows = sql('count', $start, $dir, $sort, $rp, $page);
-
-$customers = $sth->fetchAll(PDO::FETCH_ASSOC);
-
-$count = $sth_count_rows->rowCount();
+$customers = sql('', $start, $dir, $sort, $rp, $page);
+$count = sql('count', $start, $dir, $sort, $rp, $page);
 
 $xml  = "";
 $xml .= "<rows>";

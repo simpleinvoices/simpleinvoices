@@ -18,12 +18,12 @@ $saved = false;
 if ($op === 'edit_custom_flag') {
     $flg_id = $_POST['flg_id'];
     // @formatter:off
-    updateCustomFlags($_POST['associated_table'],
+    updateCustomFlags($_POST["associated_table"],
                       intval($flg_id),
-                      $_POST['field_label'],
-                      $_POST['enabled'], 
-                      $_POST['clear_custom_flags' . $flg_id],
-                      $_POST['field_help']);
+                      $_POST["field_label"],
+                      $_POST["enabled"], 
+                      (isset($_POST["clear_custom_flags_$flg_id"]) ? $_POST["clear_custom_flags_$flg_id"] : DISABLED),
+                      $_POST["field_help"]);
     // @formatter:on
     $saved = true;
 }

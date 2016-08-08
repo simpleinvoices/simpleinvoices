@@ -14,9 +14,11 @@ class OnClause extends WhereClause {
 
     /**
      * Add an <b>OnItem</b> object constructed from simple parameters.
-     * @param string $field Field (column) of the in the table being joined.
-     * @param mixed $value Value to use in the test. This can be a constant or a qualified field in
-     *        the table being joined to.
+     * @param string $field Field (aka column) of table to be joined or available in the scope
+     *        of fields from tables in the join statement.
+     * @param mixed $value Value to use in the test. This can be a constant or a field in
+     *        the table being joined to. Note that if this is a table field, the <i>DbField</i>
+     *        class should be used to render it. Ex: obj->addSimpleItem(iv.id, new DbField(ii.id)).
      * @param string $connector The "AND" or "OR" connector if additional terms will be
      *        clause. Optional parameter.
      * @throws PdoDbException If an invalid operator or connector is found.

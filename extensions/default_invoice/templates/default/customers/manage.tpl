@@ -15,7 +15,7 @@
     </a>
 </div>
  
-{if $number_of_customers.count == 0}
+{if $number_of_customers == 0}
     <div class="si_message">{$LANG.no_customers}</div>
 {else}
     <br />

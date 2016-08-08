@@ -12,7 +12,7 @@
  */
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
-global $smarty;
+global $smarty, $pdoDb;
 
 checkLogin();
 
@@ -33,23 +33,21 @@ if ($_POST['action'] == "insert" ) {
         $saved = true;
     }
 
-    // 1 = Total Invoices
-    if($type == total_invoice && $saved) {
+    if($saved && $type == TOTAL_INVOICE) {
         insertProduct(0,0);
         $product_id = lastInsertId();
-        // @formatter:off
-        insertInvoiceItem($id, 1, $product_id          ,
-                               1, $_POST['tax_id'][0]  ,
-                                  $_POST['description'], $_POST['unit_price']);
-        // @formatter:on
+        $tax_id = (empty($_POST["tax_id"][0] ) ? "" : $_POST["tax_id"][0]);
+        insertInvoiceItem($id, 1, $product_id, 1, $tax_id, $_POST['description'], $_POST['unit_price']);
     } elseif ($saved) {
         $i = 0;
         while ($i <= $_POST['max_items']) {
-            if ($_POST["quantity$i"] != null) {
+            if (!empty($_POST["quantity$i"])) {
                 // @formatter:off
+                $tax_id = (empty($_POST["tax_id"][$i] ) ? "" : $_POST["tax_id"][$i]);
+                $attr = (empty($_POST["attribute"][$i]) ? "" : $_POST["attribute"][$i]);
                 insertInvoiceItem($id, $_POST["quantity$i"]  , $_POST["products$i"]   ,
-                                  $i , $_POST["tax_id"][$i]  , $_POST["description$i"],
-                                       $_POST["unit_price$i"], $_POST["attribute"][$i]);
+                                  $i , $tax_id               , $_POST["description$i"],
+                                       $_POST["unit_price$i"], $attr);
                 // @formatter:on
             }
             $i++;
@@ -58,25 +56,17 @@ if ($_POST['action'] == "insert" ) {
 } elseif ( $_POST['action'] == "edit") {
     //Get type id - so do add into redirector header
     $id = $_POST['id'];
-    if (updateInvoice($_POST['id'])) {
-        $saved = true;
+    $saved = updateInvoice($_POST['id']);
+
+    if($type == TOTAL_INVOICE && $saved) {
+        $pdoDb->setFauxPost(array("unit_price" => $_POST['unit_price'], "description" => $_POST['description0']));
+        $pdoDb->addSimpleWhere("id", $_POST['products0'], "AND");
+        $pdoDb->addSimpleWhere("domain_id", domain_id::get());
+        if (!$pdoDb->request("UPDATE", "products")) {
+            error_log("modules/invoices/save.php - Unable to update product 0 - _POST - " . print_r($_POST,true));
+        }
     }
 
-    if($type == total_invoice && $saved) {
-        // @formatter:off
-        $sql = "UPDATE " . TB_PREFIX . "products
-                SET unit_price  = :price,
-                    description = :description
-                WHERE id       = :id
-                 AND domain_id = :domain_id";
-        dbQuery($sql, ':price'      , $_POST['unit_price']  ,
-                      ':description', $_POST['description0'],
-                      ':id'         , $_POST['products0'],
-                      ':domain_id'  , domain_id::get());
-        // @formatter:on
-    }
-
-    // $logger->log('Max items:'.$_POST['max_items'], Zend_Log::INFO);
     $i = 0;
     while ($i <= $_POST['max_items']) {
         if ($_POST["delete$i"] == "yes") {
@@ -100,7 +90,6 @@ if ($_POST['action'] == "insert" ) {
                 // @formatter:on
             }
         }
-
         $i++;
     }
 }

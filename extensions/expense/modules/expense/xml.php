@@ -2,18 +2,55 @@
 function sql($type='', $dir, $sort, $rp, $page ) {
     global $config, $LANG, $pdoDb;
 
-    $valid_search_fields = array('e.id', 'b.name', 'c.name', 'ea.name', 'p.description', 'status_wording');
-
+    $table_alias = "";
     $query = isset($_REQUEST['query']) ? $_REQUEST['query'] : null;
     $qtype = isset($_REQUEST['qtype']) ? $_REQUEST['qtype'] : null;
     if ( ! (empty($qtype) || empty($query)) ) {
-        if ( in_array($qtype, $valid_search_fields) ) {
-            $pdoDb->addToWhere(new WhereItem(false, 'e.' . $qtype, "LINK", "%$query%", false, "AND"));
+        $valid_search_fields = array('e.id', 'ea.name', 'b.name', 'c.name', 'i.id', 'e.status_wording');
+        if (in_array($qtype, $valid_search_fields)) {
+            $pdoDb->addToWhere(new WhereItem(false, $qtype, "LIKE", "%$query%", false, "AND"));
+            $table_alias = strstr($qtype, ".", true);
         }
     }
     $pdoDb->addSimpleWhere("e.domain_id", domain_id::get());
 
-    if($type =="count") {
+    $get_count = ($type =="count");
+    if (!$get_count || $table_alias == "ea") {
+        $join = new Join("LEFT", "expense_account", "ea");
+        $join->addSimpleItem("ea.id"       , new DbField("e.expense_account_id"), "AND");
+        $join->addSimpleItem("ea.domain_id", new DbField("e.domain_id"));
+        $pdoDb->addToJoins($join);
+    }
+
+    if (!$get_count || $table_alias == "b") {
+        $join = new Join("LEFT", "biller", "b");
+        $join->addSimpleItem("b.id"       , new DbField("e.biller_id"), "AND");
+        $join->addSimpleItem("b.domain_id", new DbField("e.domain_id"));
+        $pdoDb->addToJoins($join);
+    }
+
+    if (!$get_count || $table_alias == "c") {
+        $join = new Join("LEFT", "customers", "c");
+        $join->addSimpleItem("c.id"       , new DbField("e.customer_id"), "AND");
+        $join->addSimpleItem("c.domain_id", new DbField("e.domain_id"));
+        $pdoDb->addToJoins($join);
+    }
+
+    if (!$get_count || $table_alias == "p") {
+        $join = new Join("LEFT", "products", "p");
+        $join->addSimpleItem("p.id"       , new DbField("e.product_id"), "AND");
+        $join->addSimpleItem("p.domain_id", new DbField("e.domain_id"));
+        $pdoDb->addToJoins($join);
+    }
+
+    if (!$get_count || $table_alias == "i") {
+        $join = new Join("LEFT", "invoices", "i");
+        $join->addSimpleItem("i.id"       , new DbField("e.invoice_id"), "AND");
+        $join->addSimpleItem("i.domain_id", new DbField("e.domain_id"));
+        $pdoDb->addToJoins($join);
+    }
+
+    if($get_count) {
         $pdoDb->addToFunctions("count(*) AS count");
         $rows = $pdoDb->request("SELECT", "expense", "e");
         return $rows[0]['count'];
@@ -30,35 +67,10 @@ function sql($type='', $dir, $sort, $rp, $page ) {
 
     $dir = (preg_match('/^(asc|desc)$/iD', $dir) ? 'A' : 'D');
     $pdoDb->setOrderBy(array($sort, $dir));
-    
-    $join = new Join("LEFT", "expense_account", "ea");
-    $join->addSimpleItem("ea.id"       , new DbField("e.expense_account_id"), "AND");
-    $join->addSimpleItem("ea.domain_id", new DbField("e.domain_id"));
-    $pdoDb->addToJoins($join);
-
-    $join = new Join("LEFT", "biller", "b");
-    $join->addSimpleItem("b.id"       , new DbField("e.biller_id"), "AND");
-    $join->addSimpleItem("b.domain_id", new DbField("e.domain_id"));
-    $pdoDb->addToJoins($join);
-
-    $join = new Join("LEFT", "customers", "c");
-    $join->addSimpleItem("c.id"       , new DbField("e.customer_id"), "AND");
-    $join->addSimpleItem("c.domain_id", new DbField("e.domain_id"));
-    $pdoDb->addToJoins($join);
-
-    $join = new Join("LEFT", "products", "p");
-    $join->addSimpleItem("p.id"       , new DbField("e.product_id"), "AND");
-    $join->addSimpleItem("p.domain_id", new DbField("e.domain_id"));
-    $pdoDb->addToJoins($join);
-
-    $join = new Join("LEFT", "invoices", "i");
-    $join->addSimpleItem("i.id"       , new DbField("e.invoice_id"), "AND");
-    $join->addSimpleItem("i.domain_id", new DbField("e.domain_id"));
-    $pdoDb->addToJoins($join);
 
     $case = new CaseStmt("status", "status_wording");
-    $case->addWhen( "=", "1", $LANG['paid']);
-    $case->addWhen("!=", "1", $LANG['not_paid'], true);
+    $case->addWhen( "=", ENABLED, $LANG['paid']);
+    $case->addWhen("!=", ENABLED, $LANG['not_paid'], true);
     $pdoDb->addToCaseStmts($case);
 
     // This is a fudge until sub-select can be added to the features.
@@ -91,13 +103,14 @@ foreach ($rows as $row) {
     $status_wording = ($row['status'] == 1 ? $LANG['paid'] : $LANG['not_paid']);
 
     $xml .= "<row id='".$row['id']."'>";
-    $xml .= "<cell><![CDATA[
-            <a class='index_table' title='$LANG[view] ".$row['p_desc']."' href='index.php?module=expense&view=details&id=".$row['id']."&action=view'>
-              <img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' />
-            </a>
-            <a class='index_table' title='$LANG[edit] ".$row['p_desc']."' href='index.php?module=expense&view=details&id=".$row['id']."&action=edit'>
-              <img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' />
-            </a>
+    $xml .=
+        "<cell><![CDATA[
+           <a class='index_table' title='$LANG[view] ".$row['p_desc']."' href='index.php?module=expense&view=details&id=".$row['id']."&action=view'>
+             <img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' />
+           </a>
+           <a class='index_table' title='$LANG[edit] ".$row['p_desc']."' href='index.php?module=expense&view=details&id=".$row['id']."&action=edit'>
+             <img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' />
+           </a>
         ]]></cell>";        
     $xml .= "<cell><![CDATA[".siLocal::date($row['date'])."]]></cell>";        
     $xml .= "<cell><![CDATA[".siLocal::number_trim($row['amount'])."]]></cell>";

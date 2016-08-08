@@ -1,15 +1,18 @@
 <?php
 require_once 'include/class/PdoDbException.php';
 require_once 'include/class/OnClause.php';
+require_once 'include/class/GroupBy.php';
 require_once 'include/class/DbField.php';
 
 class Join {
     const PREFIX = '/^' . TB_PREFIX . '/';
     const TYPE = '/^(INNER|LEFT|RIGHT|FULL)$/';
-    private $type;
+
+    private $groupBy;
+    private $onClause;
     private $table;
     private $tableAlias;
-    private $onClause;
+    private $type;
 
     /**
      * Make a JOIN statement
@@ -24,8 +27,13 @@ class Join {
             throw new PdoDbException("Join() - Invalid type, $type, specified.");
         }
 
-        $this->table = self::addPrefix($table);
+        if (is_a($table, "Select")) {
+            $this->table = $table;
+        } else {
+            $this->table = self::addPrefix($table);
+        }
         $this->tableAlias = $tableAlias;
+        $this->groupBy = null;
         $this->onClause = null;
     }
 
@@ -36,8 +44,11 @@ class Join {
 
     /**
      * Add a simple item to the <b>OnClause</b>.
-     * @param string $field DbField to compare.
-     * @param string $value Value or field to compare to.
+     * @param string $field Field (aka column) of table to be joined or available in the scope
+     *        of fields from tables in the join statement.
+     * @param mixed $value Value to use in the test. This can be a constant or a field in
+     *        the table being joined to. Note that if this is a table field, the <i>DbField</i>
+     *        class should be used to render it. Ex: obj->addSimpleItem(iv.id, new DbField(ii.id)).
      * @param string $connector Connector to the next item, <b>AND</b> or <b>OR</b>. If not
      *        specified, this is the last item in the <b>OnClause</b>.
      */
@@ -58,6 +69,14 @@ class Join {
     }
 
     /**
+     * Add a <b>GROUP BY</b> object for this join.
+     * @param GroupBy $groupBy
+     */
+    public function addGroupBy(GroupBy $groupBy) {
+        $this->groupBy = $groupBy;
+    }
+
+    /**
      * Build the <b>JOIN<\b> statement from the specified components.
      * @param array $keyPairs Array of PDO token and value pairs to bind to the PDO statement.
      *              Note that this array is initialized to empty by this method.
@@ -65,8 +84,18 @@ class Join {
      * @throws PdoDbException if unbalanced parenthesis have been specified.
      */
     public function build(&$keypairs) {
-        $join = $this->type . " JOIN `" . $this->table . "` `" . $this->tableAlias . "` ";
+        $isSelect = is_a($this->table, "SELECT");
+        $join = $this->type . " JOIN ";
+        if ($isSelect) {
+            $join .= "(" . $this->table->build() . ") ";
+        } else {
+            $join .= "`" . $this->table . "` ";
+        }
+        $join .= "AS " . $this->tableAlias . " ";
         $join .= $this->onClause->build($keypairs);
+        if (isset($this->groupBy)) {
+            $join .= " " . $this->groupBy->build();
+        }
         return $join;
     }
 }

@@ -25,7 +25,9 @@ class user {
         $list = array("id", "username", "email", "password", "user_id", "domain_id", "role_id", "enabled", "ur.name AS role_name");
         $pdoDb->setSelectList($list);
 
-        $caseExpr = new CaseStmt("u.enabled", "=", ENABLED, $LANG['enabled'], $LANG['disabled'], "enabled_txt");
+        $caseStmt = new CaseStmt("u.enabled", "enabled_txt");
+        $caseStmt->addWhen( "=", ENABLED, $LANG['enabled']);
+        $caseStmt->addWhen("!=", ENABLED, $LANG['disabled'], true);
         $pdoDb->addToCaseStmts($caseStmt);
 
         $join = new Join("LEFT", "user_role", "ur");

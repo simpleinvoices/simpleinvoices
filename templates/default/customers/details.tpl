@@ -199,7 +199,7 @@
         <table>
           <thead>
             <tr class="tr_head">
-              <th class="first">{$LANG.id}</th>
+              <th class="first">{$LANG.invoice}</th>
               <th>{$LANG.date_created}</th>
               <th>{$LANG.total}</th>
               <th>{$LANG.paid}</th>
@@ -215,11 +215,11 @@
                 </a>
               </td>
               <td>{$invoice.date|htmlsafe}</td>
-              <td>{$invoice.total|number_format:2}</td>
+              <td class="right">{$invoice.total|number_format:2}</td>
               {if $invoice.status > 0}
-                <td>{$invoice.paid|number_format:2}</td>
+                <td class="right"">{$invoice.paid|number_format:2}</td>
                 {if $invoice.owing != 0}
-                  <td>{$invoice.owing|number_format:2}</td>
+                  <td class="right">{$invoice.owing|number_format:2}</td>
                 {else}
                   <td>&nbsp;</td>
                 {/if}

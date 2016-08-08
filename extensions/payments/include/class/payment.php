@@ -39,8 +39,8 @@ class payment {
         }
 
         $domain_id = domain_id::get();
-        $sql = "SELECT pmt.id,pmt.ac_notes,pmt.ac_check_number FROM si_payment pmt
-                INNER JOIN si_payment_types typ ON (typ.pt_id=pmt.ac_payment_type)
+        $sql = "SELECT pmt.id,pmt.ac_notes,pmt.ac_check_number FROM " . TB_PREFIX . "payment pmt
+                INNER JOIN " . TB_PREFIX . "payment_types typ ON (typ.pt_id=pmt.ac_payment_type)
                 WHERE pmt.domain_id=:domain_id
                   AND LCASE(typ.pt_description)='check'
                   AND MID(pmt.ac_notes,1,1) IN ('#','1','2','3','4','5','6','7','8','9','0');";

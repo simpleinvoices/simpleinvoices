@@ -35,7 +35,7 @@ class ExpenseAccount {
         $pdoDb->addSimpleWhere("domain_id", domain_id::get(), 'AND');
         $pdoDb->addSimpleWhere("id", $id);
         $rows = $pdoDb->request("SELECT", "expense_account");
-        return $rows;
+        return $rows[0];
     }
 
     /**

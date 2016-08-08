@@ -100,6 +100,7 @@ class email {
                 break;
 
             default:
+                error_log("include/class/email.php - Undefined format, " . $this->format);
                 echo '<strong>Undefined format (' . $this->format . ')</strong>';
                 exit();
         }

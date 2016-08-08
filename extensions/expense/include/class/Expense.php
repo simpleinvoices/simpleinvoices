@@ -21,8 +21,7 @@ class Expense {
         $add['expense_account_all'] = ExpenseAccount::get_all();
 
         //get customers with domain_id from session by constructor
-        $customerobj = new customer();
-        $add['customer_all'] = $customerobj->get_all();
+        $add['customer_all'] = Customer::get_all(true);
 
         //get billers with domain_id from session by constructor
         $billerobj = new biller();
@@ -33,8 +32,7 @@ class Expense {
         $add['invoice_all'] = $invoiceobj->get_all();
 
         //get products
-        $productobj = new product();
-        $add['product_all'] = $productobj->get_all();
+        $add['product_all'] = product::get_all();
 
         return $add;
     }
@@ -43,7 +41,8 @@ class Expense {
         global $pdoDb;
         $pdoDb->addSimpleWhere("domain_id", domain_id::get(), "AND");
         $pdoDb->addSimpleWhere("id", $id);
-        return $pdoDb->request("SELECT", "expense");
+        $rows =  $pdoDb->request("SELECT", "expense");
+        return $rows;
     }
 
     public static function detail() {
@@ -52,9 +51,7 @@ class Expense {
         $detail['expense_account_all'] = ExpenseAccount::get_all();
 
         //get customers with domain_id from session by constructor
-        $customerobj = new customer();
-        //$detail['customer']     = $customerobj->get();
-        $detail['customer_all'] = $customerobj->get_all();
+        $detail['customer_all'] = Customer::get_all(true);
 
         //get billers with domain_id from session by constructor
         $billerobj = new biller();
@@ -65,8 +62,7 @@ class Expense {
         $detail['invoice_all'] = $invoiceobj->get_all();
 
         //get products
-        $productobj = new product();
-        $detail['product_all'] = $productobj->get_all();
+        $detail['product_all'] = product::get_all();
 
         return $detail;
     }

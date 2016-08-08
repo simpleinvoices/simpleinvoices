@@ -1,6 +1,5 @@
 <?php
 header("Content-type: text/xml");
-global $smarty, $LANG;
 
 // @formatter:off
 //$start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
@@ -13,9 +12,8 @@ $page  = (isset($_POST['page']))      ? $_POST['page']      : "1" ;
 $defaults = getSystemDefaults();
 $smarty->assign("defaults",$defaults);
 
-$products = new product();
-$products_all = $products->select_all('', $dir, $sort, $rp, $page);
-$rows = $products->select_all('count',$dir, $sort, $rp, $page);
+$products_all = Products::select_all('', $dir, $sort, $rp, $page);
+$rows = Products::select_all('count',$dir, $sort, $rp, $page);
 $count = $rows[0]['count'];
 
 $xml  = "";

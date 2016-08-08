@@ -1,5 +1,4 @@
 <?php
-require_once 'ftcc/db/PdoDb.php';
 
 /**
  * Request class.
@@ -40,34 +39,58 @@ class Request {
 
     /**
      * Add a simple <b>WhereItem</b> that test for equality.
-     * @param string $field
-     * @param string $value
+     * @param string $field The actual name of the field (column) in the table. This is
+     *        a required parameter and <b>MUST</b> exist in the table.
+     * @param mixed $value Value to use in the test. Note for <b>BETWEEN</b> this will be:
+     *        <b>array(beginval,endval)</b>.
+     * @param string $connector The "AND" or "OR" connector if additional terms will be
+     *        clause. Optional parameter.
      */
-    public function addSimpleWhere($field, $value) {
-        $this->addWhereItem(false, $field, "=", $value, false);
+    public function addSimpleWhere($field, $value, $connector = null) {
+        $this->addWhereItem(false, $field, "=", $value, false, $connector);
     }
 
     /**
      * addWhereItem
-     * @param boolean $lft_paren
-     * @param string $field
-     * @param string $operator
-     * @param string $value
-     * @param boolean $rht_paren
-     * @param string $connector
+     * @param boolean $open_paren Set to <b>true</b> if an opening parenthesis should be
+     *        inserted before this term; otherwise set to <b>false</b>.
+     * @param string $field The actual name of the field (column) in the table. This is
+     *        a required parameter and <b>MUST</b> exist in the table.
+     * @param string $operator Valid SQL comparison operator to the <b>$field</b> record
+     *        content test against the <b>$value</b> parameter. Currently only the relational
+     *        operator are allowed: <b>=</b>, <b><></b>, <b><</b>, <b>></b>, <b><=</b> and <b>>=</b>.
+     * @param mixed $value Value to use in the test. Note for <b>BETWEEN</b> this will be: <b>array(beginval,endval)</b>.
+     * @param boolean $close_paren Set to <b>true</b> if a closing parenthesis should be
+     *        iinserted after this term; otherwise set to <b>false</b>.
+     * @param string $connector The "AND" or "OR" connector if additional terms will be
+     *        clause. Optional parameter.
      */
-    public function addWhereItem($lft_paren, $field, $operator, $value, $rht_paren, $connector=null) {
+    public function addWhereItem($open_paren, $field, $operator, $value, $close_paren, $connector=null) {
         if (empty($this->whereClause)) {
-            $this->whereClause = new WhereClause(new WhereItem($lft_paren, $field, $operator, $value, $rht_paren, $connector));
+            $this->whereClause = new WhereClause(new WhereItem($open_paren, $field, $operator, $value, $close_paren, $connector));
         } else {
-            $this->whereClause->addItem(new WhereItem($lft_paren, $field, $operator, $value, $rht_paren, $connector));
+            $this->whereClause->addItem(new WhereItem($open_paren, $field, $operator, $value, $close_paren, $connector));
         }
     }
 
     /**
-     * addOrderBy
-     * @param unknown $field
-     * @param string $order
+     * Add a field to order by and its sort attribute.
+     * @param mixed $field Either an <i>array</i> or <i>string</i>.
+     *        The following forms are valid:
+     *          <i>string</i> - A <i>field name</i> to be added to the collection
+     *                          of ordered items with the specified <b>$order</b>.
+     *          <i>array</i>  - An array of <i>field names</i> or of <i>arrays</i>.<br/>
+     *                          If an <i>array of field names</i>, each <i>field name</i> is added
+     *                          to the list of ordered items with default order of <b>ASC</b>.<br/>.
+     *                          If an <i>array of arrays</i>, each element array can have <i>one</i>
+     *                          or <i>two</i> elements. Element arrays of <i>two</dimensions contains
+     *                          a <i>field name</i> for the first index and a sort order value in the
+     *                          second element. Valid sort order values are: <b>A</b>, <b>ASC</b>, <b>D</b>
+     *                          or <b>DESC</b>. Element arrays of <i>one</i> dimension contains a
+     *                          <i>field name</i> and will use the value specified in the <b>$order</b>
+     *                          parameter field for sorting.
+     * @param string $order Order <b>A</b> ascending, <b>D</b> descending. Defaults to <b>A</b>.
+     * @throws Exception if either parameter does not contain the form and values spcified for them.
      */
     public function addOrderBy($field, $order="A") {
         if (empty($this->orderBy)) {
@@ -78,10 +101,15 @@ class Request {
     }
 
     /**
-     * addSelectList
-     * @param unknown $list
+     * Specify the subset of fields that a <i>SELECT</i> is to access.
+     * Note that default is to select all fields.
+     * @param mixed $selectList Can take one of two forms.
+     *        1) A string with the field name to select from the table.
+     *           Ex: "street_address".
+     *        2) An array of field names to select from the table.
+     *           Ex: array("name", "street_address", "city", "state", "zip").
      */
-    public function addSelectList($list) {
+    public function addSelectList($selectList) {
         if (is_array($list)) {
             foreach ($list as $field) {
                 if (!in_array($field, $this->selectList)) {
@@ -107,16 +135,42 @@ class Request {
         }
     }
 
-    public function addExcludedField($field) {
-        $this->excludedFields[$field] = 1;
+    /**
+     * Set faux post mode and file.
+     * @param array $fauxPost Array to use in place of the <b>$_POST</b> superglobal.
+     *        Use the <b>table column name</b> as the index and the value to set the
+     *        column to as the value of the array at the column name index.
+     *        Ex: $fauxPost['name'] = "New name";
+     */
+    public function setFauxPost($fauxPost) {
+        if (empty($this->addFauxPostList())) {
+            $this->fauxPostList = $fauxPost;
+        } else {
+            $this->addFauxPostList($fauxPost);
+        }
     }
 
     /**
-     * Set the <i>LIMIT</i>.
-     * @param integer $limit Maximum number of rows to retrieve.
+     * Set the list of fields to be excluded from those included in the list of fields
+     * specified in the request.
+     * @param array $excludedFields An associative array keyed by the <b>column names</b> to exclude
+     *        from the <i>$_POST</i> or if used, the <i>FAUX POST</i> array. These fields might be
+     *        present in the <i>WHERE</i> clause but are to be excluded from the INSERT or UPDATE
+     *        fields. Typically this is the unique identifier for the record but can be any field
+     *        that would otherwie be included from the <i>$_POST</i> or <i>FAUX POST</i> file.
      */
-    public function setLimit($limit) {
-        $this->limit = intval($limit);
+    public function setExcludedFields($excludedFields) {
+        $this->excludedFields = $excludedFields;
+    }
+
+
+    /**
+     * Set a limit on records accessed
+     * @param integer $limit Value to specify in the <i>LIMIT</i> parameter.
+     * @param integer $offset Number of records to skip before reading the next $limit amount.
+     */
+    public function setLimit($limit, $offset=0) {
+        $this->limit = ($offset > 0 ? $offset . ", " : "") . $limit;
     }
 
     /**
@@ -139,7 +193,7 @@ class Request {
      * Perform this request.
      * @param PdoDb $pdoDb
      * @return mixed Result of the request.
-     * @throws Exception if an error is thrown when the <b>request</b> is performed.
+     * @throws PdoDbException if an error is thrown when the <b>request</b> is performed.
      */
     public function performRequest(PdoDb $pdoDb) {
         try {

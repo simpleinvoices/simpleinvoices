@@ -1,5 +1,5 @@
 <form name="frmpost" action="index.php?module=expense_account&view=save&id={$smarty.get.id}" method="post">
-{if $smarty.get.action== 'view' }
+{if $smarty.get.action == 'view'}
 <br />
 <table class="center">
   <tr>
@@ -14,7 +14,7 @@
     {$LANG.edit}
   </a>
 </div>
-{else if $smarty.get.action== 'edit' }
+{else if $smarty.get.action == 'edit'}
 <input type="hidden" name="op" value="edit" />
 <input type="hidden" name="domain_id" value="{$expense_account.domain_id}" />
 <br />

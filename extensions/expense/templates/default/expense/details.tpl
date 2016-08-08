@@ -51,16 +51,12 @@
     </tr>
   </table>
   <br />
-  <table class="center">
-    <tr>
-      <td>
-        <a href="./index.php?module=expense&view=details&id={$expense.id}&action=edit"
-           class="positive"> <img src="./images/famfam/add.png" alt="" />
-          {$LANG.edit}
-        </a>
-      </td>
-    </tr>
-  </table>
+  <div class="si_toolbar si_toolbar_form">
+    <a href="./index.php?module=expense&view=details&id={$expense.id}&action=edit" class="positive">
+      <img src="./images/famfam/add.png" alt=""/>
+      {$LANG.edit}
+    </a>
+  </div>
   {else if $smarty.get.action== 'edit' }
   <br />
   <input type="hidden" name="op" value="edit" />
@@ -189,7 +185,8 @@
   <br />
   <div class="si_toolbar si_toolbar_form">
     <button type="submit" class="positive" name="save_product" value="{$LANG.save}">
-      <img class="button_img" src="./images/common/tick.png" alt="" />{$LANG.save}
+      <img class="button_img" src="./images/common/tick.png" alt="" />
+      {$LANG.save}
     </button>
     <a href="./index.php?module=expense&amp;view=manage" class="negative">
       <img src="./images/common/cross.png" alt="" />

@@ -994,7 +994,7 @@ function updateProduct($domain_id = '') {
     // @formatter:off
     $notes_as_description = (isset($_POST['notes_as_description']) && $_POST['notes_as_description'] == 'true' ? 'Y' : NULL);
     $show_description     = (isset($_POST['show_description']    ) && $_POST['show_description'    ] == 'true' ? 'Y' : NULL);
-    
+
     $sql = "UPDATE " . TB_PREFIX . "products
             SET description          = :description,
                 enabled              = :enabled,
@@ -1319,38 +1319,42 @@ function setInvoiceStatus($invoice, $status, $domain_id = '') {
 }
 
 function getInvoice($id, $domain_id = '') {
-    global $config;
+    global $config, $pdoDb;
+
     $domain_id = domain_id::get($domain_id);
-    // @formatter:off
-    $sql = "SELECT * FROM " . TB_PREFIX . "invoices
-            WHERE id =  :id AND domain_id =  :domain_id";
-    // @formatter:on
-    $sth = dbQuery($sql, ':id', $id, ':domain_id', $domain_id);
 
-    $invoice = $sth->fetch();
-
-    $invoice['calc_date'] = date('Y-m-d', strtotime($invoice['date']));
-    $invoice['date'] = siLocal::date($invoice['date']);
-    $invoice['total'] = getInvoiceTotal($invoice['id']);
-
-    $invoiceobj = new invoice();
-    $invoiceobj->domain_id = $domain_id;
-
-    $invoice['gross'] = $invoiceobj->getInvoiceGross($invoice['id']);
-    $invoice['paid'] = calc_invoice_paid($invoice['id']);
-    $invoice['owing'] = $invoice['total'] - $invoice['paid'];
-
-    // invoice total tax
-    // @formatter:off
-    $sql = "SELECT SUM(tax_amount) AS total_tax, SUM(total) AS total
-            FROM " . TB_PREFIX . "invoice_items
-            WHERE invoice_id =  :id AND domain_id =  :domain_id";
-    // @formatter:on
-    $sth = dbQuery($sql, ':id', $id, ':domain_id', $domain_id);
-    $result = $sth->fetch();
-
-    $invoice['total_tax'] = $result['total_tax'];
-    $invoice['tax_grouped'] = taxesGroupedForInvoice($id);
+    $pdoDb->addSimpleWhere("id", $id, "AND");
+    $pdoDb->addSimpleWhere("domain_id", $domain_id);
+    $row = $pdoDb->request("SELECT", "invoices");
+    if (empty($row)) {
+        $invoice = array();
+    } else {
+        $invoice = $row[0];
+    
+        // @formatter:off
+        $invoice['calc_date'] = date('Y-m-d', strtotime($invoice['date']));
+        $invoice['date']      = siLocal::date($invoice['date']);
+        $invoice['total']     = getInvoiceTotal($invoice['id']);
+    
+        $invoiceobj = new invoice();
+        $invoiceobj->domain_id = $domain_id;
+    
+        $invoice['gross'] = $invoiceobj->getInvoiceGross($invoice['id']);
+        $invoice['paid']  = calc_invoice_paid($invoice['id']);
+        $invoice['owing'] = $invoice['total'] - $invoice['paid'];
+    
+        // invoice total tax
+        $pdoDb->addToFunctions("SUM(tax_amount) AS total_tax");
+        $pdoDb->addToFunctions("SUM(total) AS total");
+        $pdoDb->addSimpleWhere("invoice_id", $id, "AND");
+        $pdoDb->addSimpleWhere("domain_id", $domain_id);
+        $row = $pdoDb->request("SELECT", "invoice_items");
+        $invoice_item_tax = $row[0];
+    
+        $invoice['total_tax']   = $invoice_item_tax['total_tax'];
+        $invoice['tax_grouped'] = taxesGroupedForInvoice($id);
+        // @formatter:on
+    }
 
     return $invoice;
 }
@@ -2003,6 +2007,10 @@ function insertInvoice($type, $domain_id = '') {
     }
 
     // @formatter:off
+    $cf1 = (empty($_POST['customField1']) ? "" : $_POST['customField1']);
+    $cf2 = (empty($_POST['customField2']) ? "" : $_POST['customField2']);
+    $cf3 = (empty($_POST['customField3']) ? "" : $_POST['customField3']);
+    $cf4 = (empty($_POST['customField4']) ? "" : $_POST['customField4']);
     $sth = dbQuery( $sql,
                     ':index_id'     , index::next('invoice', $pref_group['index_group'], $domain_id),
                     ':domain_id'    , $domain_id,
@@ -2012,10 +2020,10 @@ function insertInvoice($type, $domain_id = '') {
                     ':preference_id', $_POST['preference_id'],
                     ':date'         , $clean_date,
                     ':note'         , trim($_POST['note']),
-                    ':customField1' , $_POST['customField1'],
-                    ':customField2' , $_POST['customField2'],
-                    ':customField3' , $_POST['customField3'],
-                    ':customField4' , $_POST['customField4']
+                    ':customField1' , $cf1,
+                    ':customField2' , $cf2,
+                    ':customField3' , $cf3,
+                    ':customField4' , $cf4
                   );
     // @formatter:on
 
@@ -2093,9 +2101,11 @@ function insertInvoiceItem($invoice_id,
 
     // do taxes
     $attr = array();
-    foreach ($attribute as $k => $v) {
-        if ($attribute[$v] !== '') {
-            $attr[$k] = $v;
+    if (!empty($attribute)) {
+        foreach ($attribute as $k => $v) {
+            if ($attribute[$v] !== '') {
+                $attr[$k] = $v;
+            }
         }
     }
 

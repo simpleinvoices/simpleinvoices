@@ -8,55 +8,60 @@
  *     'Customer' section has an extra button to set the default invoice
  *
  * Last edited:
- *      2008-01-03
+ *      2016-07-31
  *
  * License:
- *     GPL v2 or above
+ *     GPL v3 or above
  *
  * Website:
  *    http://www.simpleinvoices.org
  *}
-
-<div class="align_center">
-  {$LANG.quick_view_of} {$preference.pref_inv_wording} {$invoice.id}
-  <br /><br />
-
-
-  <!--Actions heading - start-->
-  <span class="welcome">
-    <a title="{$LANG.print_preview_tooltip} {$preference.pref_inv_wording} {$invoice.id}" href="index.php?module=invoices&view=template&id={$invoice.id}&action=view"> {$LANG.print_preview}</a>
-    ::
-    <a href="index.php?module=invoices&view=details&id={$invoice.id}&action=view"> {$LANG.edit}</a>
-    ::
-    <a href='index.php?module=payments&view=process&id={$invoice.id}&op=pay_selected_invoice'> {$LANG.process_payment} </a>
-    ::
-    <!-- EXPORT TO PDF -->
-    <a href='index.php?module=invoices&view=template&id={$invoice.id}&action=view&location=pdf'>{$LANG.export_pdf}</a>
-    ::
-    <a href="index.php?module=invoices&view=template&id={$invoice.id}&action=view&export={$spreadsheet}">{$LANG.export_as} .{$spreadsheet}</a>
-    ::
-    <a href="index.php?module=invoices&view=template&id={$invoice.id}&action=view&export={$wordprocessor}">{$LANG.export_as} .{$wordprocessor} </a>
-    ::
-    <a href="index.php?module=invoices&view=email&stage=1&invoice={$invoice.id}">{$LANG.email}</a>
-    {if $defaults.delete == '1'}
-    ::
-    <a href="index.php?module=invoices&view=delete&stage=1&invoice={$invoice.id}">{$LANG.delete}</a>
-    {/if}
-  </span>
+<div class="si_toolbar si_toolbar_top">
+  <a title="{$LANG.print_preview_tooltip} {$preference.pref_inv_wording|htmlsafe} {$invoice.index_id|htmlsafe}"
+     href="index.php?module=export&amp;view=invoice&amp;id={$invoice.id|urlencode}&amp;format=print">
+    <img src='images/common/printer.png' class='action' />&nbsp;{$LANG.print_preview}
+  </a>
+  <a title="{$LANG.edit} {$preference.pref_inv_wording|htmlsafe} {$invoice.index_id|htmlsafe}"
+     href="index.php?module=invoices&amp;view=details&amp;id={$invoice.id|urlencode}&amp;action=view">
+    <img src='images/common/edit.png' class='action' />&nbsp;{$LANG.edit}
+  </a>
+  <a title="{$LANG.process_payment_for} {$preference.pref_inv_wording|htmlsafe} {$invoice.index_id|htmlsafe}"
+     href="index.php?module=payments&amp;view=process&amp;id={$invoice.id|urlencode}&amp;op=pay_selected_invoice">
+    <img src='images/common/money_dollar.png' class='action' />&nbsp;{$LANG.process_payment}
+  </a>
+  {if $eway_pre_check == 'true'}
+    <a title="{$LANG.process_payment_for} {$preference.pref_inv_wording|htmlsafe} {$invoice.index_id|htmlsafe}"
+       href="index.php?module=payments&amp;view=eway&amp;id={$invoice.id|urlencode}">
+      <img src='images/common/money_dollar.png' class='action' />&nbsp;{$LANG.process_payment_via_eway}
+    </a>
+  {/if}
+  <!-- EXPORT TO PDF -->
+  <a title="{$LANG.export_tooltip} {$preference.pref_inv_wording|htmlsafe} {$invoice.index_id|htmlsafe} {$LANG.export_pdf_tooltip}"
+     href="index.php?module=export&amp;view=invoice&amp;id={$invoice.id}&amp;format=pdf">
+    <img src='images/common/page_white_acrobat.png' class='action' />&nbsp;{$LANG.export_pdf}
+  </a>
+  <a title="{$LANG.export_tooltip} {$preference.pref_inv_wording|htmlsafe} {$invoice.index_id|htmlsafe} {$LANG.export_xls_tooltip} .{$config->export->spreadsheet|htmlsafe} {$LANG.format_tooltip}"
+     href="index.php?module=export&amp;view=invoice&amp;id={$invoice.id}&amp;format=file&amp;filetype={$spreadsheet|urlencode}">
+    <img src='images/common/page_white_excel.png' class='action' />&nbsp;{$LANG.export_as}.{$spreadsheet|htmlsafe}
+  </a>
+  <a title="{$LANG.export_tooltip} {$preference.pref_inv_wording} {$invoice.index_id|htmlsafe} {$LANG.export_doc_tooltip} .{$config->export->wordprocessor|htmlsafe} {$LANG.format_tooltip}"
+     href="index.php?module=export&amp;view=invoice&amp;id={$invoice.id}&amp;format=file&amp;filetype={$wordprocessor|urlencode}">
+    <img src='images/common/page_white_word.png' class='action' />&nbsp;{$LANG.export_as}.{$wordprocessor|htmlsafe}
+  </a>
+  <a title="{$LANG.email} {$preference.pref_inv_wording|htmlsafe} {$invoice.index_id|htmlsafe}"
+     href="index.php?module=invoices&amp;view=email&amp;stage=1&amp;id={$invoice.id|urlencode}">
+    <img src='images/common/mail-message-new.png' class='action' />&nbsp;{$LANG.email}
+  </a>
+  {if $defaults.delete == '1'}
+    <a title="{$LANG.delete} {$preference.pref_inv_wording|htmlsafe} {$invoice.index_id|htmlsafe}"
+       href="index.php?module=invoices&amp;view=delete&amp;stage=1&amp;id={$invoice.id|urlencode}">
+      <img src='images/common/delete.png' class='action' />&nbsp;{$LANG.delete}
+    </a>
+  {/if}
 </div>
 <!--Actions heading - start-->
-<br />
-<br />
 <!-- #PDF end -->
-<table class="center">
-  {*
-  <tr>
-    <td colspan="6" class="align_center"><b>{$preference.pref_inv_heading}</b></td>
-  </tr>
-  <tr>
-    <td colspan="6"><br /></td>
-  </tr>
-  *}
+<table class='si_invoice_view'>
   <!-- Invoice Summary section -->
   <tr class='details_screen'>
     <td class='details_screen'><b>{$preference.pref_inv_wording} {$LANG.summary}:</b></td>

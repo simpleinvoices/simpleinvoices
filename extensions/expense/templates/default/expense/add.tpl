@@ -3,7 +3,7 @@
   {include file="../extensions/expense/templates/default/expense/save.tpl"}
 {else}
   {* if  name was inserted *} 
-  {if $smarty.post.id !=null} 
+  {if $smarty.post.id != null} 
     <div class="validation_alert"><img src="./images/common/important.png" alt="" />
       You must enter a description for the product
     </div>

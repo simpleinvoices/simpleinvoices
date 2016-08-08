@@ -57,6 +57,17 @@ class WhereClause {
     }
 
     /**
+     * Add a <b>WhereItem</b> that performs an equality check.
+     * @param string $field Table column for the left side of the test. 
+     * @param string $value Constant or <b>DbField</b> for the right side of the test.
+     * @param string $connector (Optional) <b>AND</b> or <b>OR</b> connector if this
+     *        is not that last statement in the <b>WHERE</b> clause.
+     */
+    public function addSimpleItem($field, $value, $connector=null) {
+        $this->addItem(new WhereItem(false, $field, "=", $value, false, $connector));
+    }
+
+    /**
      * Class property getter
      * return $paren_cnt;
      */
