@@ -22,7 +22,7 @@ class user {
         $pdoDb->addSimpleWhere("u.id", $id, "AND");
         $pdoDb->addSimpleWhere("domain_id", $auth_session->domain_id);
 
-        $list = array("id", "username", "email", "password", "user_id", "domain_id", "role_id", "enabled", "ur.name AS role_name");
+        $list = array("u.*", "ur.name AS role_name");
         $pdoDb->setSelectList($list);
 
         $caseStmt = new CaseStmt("u.enabled", "enabled_txt");

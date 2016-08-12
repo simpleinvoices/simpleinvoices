@@ -99,8 +99,8 @@ function sql($type = '', $dir, $sort, $rp, $page) {
     return $result;
 }
 
-$payments = sql('', $dir, $sort, $rp, $page);
-$count = sql('count',$dir, $sort, $rp, $page);
+$payments = sql(     '', $dir, $sort, $rp, $page);
+$count    = sql('count', $dir, $sort, $rp, $page);
 
 // @formatter:off
 $xml  = "";
@@ -122,14 +122,13 @@ foreach ($payments as $row) {
              <img src='images/common/printer.png' height='16' border='-5px' padding='-4px' valign='bottom' />
            </a>
          ]]></cell>";
-
-    $xml .= "<cell><![CDATA[".$row['id']."]]></cell>";
-    $xml .= "<cell><![CDATA[".$row['index_name']."]]></cell>";
-    $xml .= "<cell><![CDATA[".$row['cname']."]]></cell>";
-    $xml .= "<cell><![CDATA[".$row['bname']."]]></cell>";
+    $xml .= "<cell><![CDATA[$row[id]]]></cell>";
+    $xml .= "<cell><![CDATA[$row[index_name]]]></cell>";
+    $xml .= "<cell><![CDATA[$row[cname]]]></cell>";
+    $xml .= "<cell><![CDATA[$row[bname]]]></cell>";
     $xml .= "<cell><![CDATA[".siLocal::number($row['ac_amount'])."]]></cell>";
-    $xml .= "<cell><![CDATA[".$notes."]]></cell>";
-    $xml .= "<cell><![CDATA[".$row['description']." ".$row['ac_check_number']."]]></cell>";
+    $xml .= "<cell><![CDATA[$notes]]></cell>";
+    $xml .= "<cell><![CDATA[$row[description] $row[ac_check_number]]]></cell>";
     $xml .= "<cell><![CDATA[".siLocal::date($row['date'])."]]></cell>";
     $xml .= "</row>";
 }

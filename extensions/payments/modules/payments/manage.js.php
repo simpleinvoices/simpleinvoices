@@ -1,8 +1,9 @@
-<script type="text/javascript">
+<script>
 {literal}
     var columns      = 9;
     var padding      = 12;
     var grid_width   = $('.col').width();
+
     grid_width       = grid_width - (columns * padding);
     percentage_width = grid_width / 100;
 

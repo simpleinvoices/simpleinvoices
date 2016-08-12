@@ -35,9 +35,9 @@ class OnClause extends WhereClause {
      * @param OnItem $onItem
      * @throws PdoDbException If end of clause shows out of balance parenthesis.
      */
-    public function addItem(OnItem $onItem) {
+    public function addItem(WhereItem $whereItem) {
         try {
-            parent::addItem($onItem);
+            parent::addItem($whereItem);
         } catch (PdoDbException $pde) {
             throw new PdoDbException(preg_replace('/WhereClause/', 'OnClause', $pde->getMessage()));
         }

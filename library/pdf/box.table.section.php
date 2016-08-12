@@ -24,7 +24,7 @@ class TableSectionBox extends GenericContainerBox {
   }
   
   function TableSectionBox() {
-    $this->GenericContainerBox();
+    $this->__construct();
   }
 
   // Overrides default 'add_child' in GenericFormattedBox

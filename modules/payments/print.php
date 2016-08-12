@@ -7,6 +7,7 @@ checkLogin();
 $menu    = false;
 $payment = getPayment($_GET['id']);
 
+// Get Invoice preference - so can link from this screen back to the invoice
 $invoice           = getInvoice($payment['ac_inv_id']);
 $biller            = getBiller($payment['biller_id']);
 $customer          = getCustomer($payment['customer_id']);
@@ -29,4 +30,3 @@ $smarty->assign("customFieldLabels", $customFieldLabels);
 $smarty->assign('pageActive'       , 'payment');
 $smarty->assign('active_tab'       , '#money');
 // @formatter:on
-?>

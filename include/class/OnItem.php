@@ -1,5 +1,5 @@
 <?php
-require_once 'include/class/WhereItem.php';
+require_once 'include/class/WhereClause.php';
 
 class OnItem extends WhereItem {
     const OPERATORS = '/^(=|<>|<|>|<=|>=)$/';

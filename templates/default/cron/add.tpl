@@ -1,19 +1,15 @@
 {if isset($saved)}
   {if $saved == 'true' }
   <meta http-equiv="refresh" content="2;URL=index.php?module=cron&amp;view=manage" />
-  <br />
-  {$LANG.save_cron_success}
-  <br />
-  <br />
+    <div class="si_message_ok">{$LANG.save_cron_success}</div>
 {else if $saved == 'false' }
   <meta http-equiv="refresh" content="2;URL=index.php?module=cron&amp;view=manage" />
-  <br />
-  {$LANG.save_cron_failure}
-  <br />
-  <br />
+    <div class="si_message_error">{$LANG.save_cron_failure}</div>
     {if $smarty.post.op == 'add' AND $smarty.post.invoice_id == ''} 
-      <div class="validation_alert"><img src="./images/common/important.png" alt="" />
-      You must select an invoice</div>
+      <div class="validation_alert">
+        <img src="./images/common/important.png" alt="" />
+        You must select an invoice
+      </div>
       <hr />
     {/if}
   {/if}

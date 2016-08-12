@@ -42,19 +42,19 @@ $today = date("Y-m-d");
 $invoice = null;
 
 if(isset($_GET['id'])) {
-	$invoiceobj = new invoice();
-	$invoice = $invoiceobj->select($_GET['id']);
+    $invoiceobj = new invoice();
+    $invoice = $invoiceobj->select($_GET['id']);
 } else {
-	$sql = "SELECT * FROM ".TB_PREFIX."invoices WHERE domain_id = :domain_id";
-	$sth = dbQuery($sql, ':domain_id', domain_id::get());
+    $sql = "SELECT * FROM ".TB_PREFIX."invoices WHERE domain_id = :domain_id";
+    $sth = dbQuery($sql, ':domain_id', domain_id::get());
     $invoice = $sth->fetch(PDO::FETCH_ASSOC);
 }
 
 // @formatter:off
-$customer     = getCustomer($invoice['customer_id']);
-$biller       = getBiller($invoice['biller_id']);
-$defaults     = getSystemDefaults();
-$pt           = getPaymentType($defaults['payment_type']);
+$customer = getCustomer($invoice['customer_id']);
+$biller   = getBiller($invoice['biller_id']);
+$defaults = getSystemDefaults();
+$pt       = getPaymentType($defaults['payment_type']);
 // @formatter:on
 
 $invoices = new invoice();

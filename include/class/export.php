@@ -1,16 +1,15 @@
 <?php
 class export {
-    public $format;
-    public $file_type;
-    public $file_location;
-    public $file_name;
-    public $module;
-    public $id;
-    public $start_date;
-    public $end_date;
     public $biller_id;
     public $customer_id;
     public $domain_id;
+    public $file_type;
+    public $file_location;
+    public $file_name;
+    public $format;
+    public $id;
+    public $module;
+    public $start_date;
 
     public function __construct() {
         $this->domain_id = domain_id::get($this->domain_id);
@@ -94,7 +93,7 @@ class export {
 
                 $invoice_all = $invoice->select_all('count');
                 $invoices    = $invoice_all->fetchAll();
-                $statement   = array();
+                $statement   = array ("total" => 0, "owing" => 0, "paid" => 0);
                 foreach ($invoices as $row) {
                     $statement['total'] += $row['invoice_total'];
                     $statement['owing'] += $row['owing'];
