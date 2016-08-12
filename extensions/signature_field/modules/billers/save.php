@@ -1,36 +1,34 @@
 <?php
 /*
- * Script: save.php
- * Biller save page
+ *  Script: save.php
+ *      Biller save page
  *
- * Authors:
- * Justin Kelly, Nicolas Ruflin
+ *  Authors:
+ *      Justin Kelly, Nicolas Ruflin
  *
- * Last edited:
- * 2016-01-16 by Rich Rowley to add signature field
- * 2007-07-19
+ *  Last edited:
+ *      2016-01-16 by Rich Rowley to add signature field
  *
- * License:
- * GPL v2 or above
+ *  License:
+ *      GPL v3 or above
  *
- * Website:
- * http://www.simpleinvoices.org
+ *  Website:
+ *      http://www.simpleinvoices.org
  */
-global $smarty,
-       $pdoDb;
+global $smarty, $pdoDb;
 
 // stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
 // Deal with op and add some basic sanity checking
-$op = !empty($_POST['op']) ? addslashes($_POST['op']) : NULL;
+$op = (empty($_POST['op']) ? "" : $_POST['op']);
 
 $saved = false;
 if ($op === 'insert_biller') {
     // From add.tpl
     try {
         $pdoDb->setExcludedFields(array('id' => 1));
-        $pdoDb->re('INSERT', 'biller');
+        $pdoDb->request('INSERT', 'biller');
         $saved = true;
     } catch (Exception $e) {
         echo '<h1>Unable to add the new ' . TB_PREFIX . 'biller record.</h1>';

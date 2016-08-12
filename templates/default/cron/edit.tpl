@@ -1,16 +1,20 @@
-{if $saved == 'true' }
-  <meta http-equiv="refresh" content="2;URL=index.php?module=cron&amp;view=manage" />
-  <br />
-  {$LANG.save_cron_success}
-  <br />
-  <br />
-{else if $saved == 'false' }
-  {if $smarty.post.op == 'add' AND $smarty.post.invoice_id == ''} 
-  <div class="validation_alert">
-    <img src="./images/common/important.png" alt="" />
-    You must select an invoice</div>
-    <hr />
+{if isset($saved)}
+  {if $saved == 'true' }
+    <meta http-equiv="refresh" content="2;URL=index.php?module=cron&amp;view=manage" />
+    <div class="si_message_ok">{$LANG.save_cron_success}</div>
+  {else if $saved == 'false' }
+    <meta http-equiv="refresh" content="2;URL=index.php?module=cron&amp;view=manage" />
+    <div class="si_message_error">{$LANG.save_icron_failure}</div>
+    {if $smarty.post.op == 'add' AND $smarty.post.invoice_id == ''} 
+      <div class="validation_alert">
+        <img src="./images/common/important.png" alt="" />
+        You must select an invoice
+      </div>
+      <hr />
+    {/if}
   {/if}
+{/if}
+{if !isset($saved) || $saved == 'false'}
   <form name="frmpost" action="index.php?module=cron&view=edit&id={$cron.id|urlencode}" method="POST" id="frmpost">
     <br />   
     <table class="center">

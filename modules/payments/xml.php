@@ -1,4 +1,6 @@
 <?php
+global $LANG;
+
 header("Content-type: text/xml");
 
 // @formatter:off
@@ -9,14 +11,7 @@ $page = (isset($_POST['page'])     ) ? $_POST['page']      : "1" ;
 // @formatter:on
 
 function sql($type = '', $dir, $sort, $rp, $page) {
-    global $config;
     global $auth_session;
-
-    $valid_search_fields = array('ap.id','b.name', 'c.name');
-
-    //SC: Safety checking values that will be directly subbed in
-    if (intval($start) != $start) $start = 0;
-    if (intval($limit) != $limit) $limit = 25;
 
     if (!preg_match('/^(asc|desc)$/iD', $dir)) $dir = 'DESC';
 
@@ -24,14 +19,14 @@ function sql($type = '', $dir, $sort, $rp, $page) {
     $start = (($page-1) * $rp);
     $limit = "LIMIT $start, $rp";
 
-    if ($type == "count") unset($limit);
+    if ($type == "count") $limit = "";
     // SQL Limit - end
 
     $where = "";
     $query = isset($_POST['query']) ? $_POST['query'] : null;
     $qtype = isset($_POST['qtype']) ? $_POST['qtype'] : null;
     if ( ! (empty($qtype) || empty($query)) ) {
-        if ( in_array($qtype, $valid_search_fields) ) {
+        if ( in_array($qtype, array('ap.id','b.name', 'c.name')) ) {
             $where = " AND $qtype LIKE :query ";
         } else {
             $qtype = null;
@@ -40,7 +35,7 @@ function sql($type = '', $dir, $sort, $rp, $page) {
     }
 
     // Check that the sort field is OK
-    $validFields = array('ap.id', 'ac_inv_id', 'description', 'unit_price','enabled');
+    $validFields = array('ap.id', 'ap.ac_inv_id', 'description');
 
     if (in_array($sort, $validFields)) {
         $sort = $sort;
@@ -101,14 +96,14 @@ $count    = $sth_count_rows->rowCount();
   $xml .= "<total>$count</total>";
   
   foreach ($payments as $row) {
-    $notes = si_truncate($row['ac_notes'],'13','...');
+    $notes = si_truncate($row['notes'],'13','...');
     $xml .= "<row id='".$row['id']."'>";
     $xml .= "<cell><![CDATA[
-                <a class='index_table' title='$LANG[view] ".$row['name']."'
+                <a class='index_table' title='$LANG[view] $row[name]'
                    href='index.php?module=payments&view=details&id=$row[id]&action=view'>
                   <img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' />
                 </a>
-                <a class='index_table' title='$LANG[print_preview_tooltip] ".$row['id']."'
+                <a class='index_table' title='$LANG[print_preview_tooltip] $row[id]'
                    href='index.php?module=payments&view=print&id=$row[id]'>
                   <img src='images/common/printer.png' height='16' border='-5px' padding='-4px' valign='bottom' />
                 </a>

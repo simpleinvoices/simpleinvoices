@@ -1,17 +1,13 @@
 <?php
 /**
- * 
- * @author Rich
- *
+ * Class Inventory
  */
 class Inventory {
 
     public static function insert() {
         global $pdoDb;
         $pdoDb->setExcludedFields(array("id" => 1));
-$pdoDb->debugOn();
         $result = $pdoDb->request("INSERT", "inventory");
-$pdoDb->debugOff();
         return $result;
     }
 
@@ -20,16 +16,22 @@ $pdoDb->debugOff();
         $pdoDb->setExcludedFields(array("id" => 1, "domain_id" => 1));
         $pdoDb->addSimpleWhere("id", $_GET['id'], "AND");
         $pdoDb->addSimpleWhere("domain_id", domain_id::get());
-$pdoDb->debugOn();
         $result = $pdoDb->request("UPDATE", "inventory");
-$pdoDb->debugOff();
         return $result;
     }
 
     public static function delete() {
         throw new Exception("inventory.php delete(): delete not supported.");
     }
-    
+
+    public static function count() {
+        global $pdoDb;
+        $pdoDb->addSimpleWhere("domain_id", domain_id::get());
+        $pdoDb->addToFunctions("COUNT(*) AS count");
+        $rows = $pdoDb->request("SELECT", "inventory");
+        return $rows[0]['count'];
+    }
+
     public static function select_all($type, $sort, $dir, $rp, $page) {
         global $pdoDb;
 
@@ -60,17 +62,15 @@ $pdoDb->debugOff();
         }
 
         $start = (($page - 1) * $rp);
-        $limit = " LIMIT $start, $rp";
-        $pdoDb->setLimit($limit, $start);
+        $pdoDb->setLimit($rp, $start);
 
         $pdoDb->addToFunctions("coalesce(p.reorder_level,0) AS reorder_level");
         $pdoDb->addToFunctions("coalesce(inv.quantity * inv.cost,0) AS total_cost");
         $list = array("inv.id as id", "inv.product_id", "inv.date", "inv.quantity", "p.description", "inv.cost");
         $pdoDb->setSelectList($list);
         $pdoDb->setGroupBy("inv.id");
-$pdoDb->debugOn();
+
         $result = $pdoDb->request("SELECT", "products", "p");
-$pdoDb->debugOff();
         return $result;
     }
 
@@ -78,22 +78,21 @@ $pdoDb->debugOff();
         global $pdoDb;
         $join = new Join("LEFT", "inventory", "iv");
         $join->addSimpleItem("p.id", new DbField("iv.product_id"), "AND");
-        $join->addSimpleItem("p.domain_id", new DbField("iv.domain"));
+        $join->addSimpleItem("p.domain_id", new DbField("iv.domain_id"));
         $pdoDb->addToJoins($join);
         
-        $pdoDb->addSimpleWhere("iv.domain_id", domain_id::get());
+        $pdoDb->addSimpleWhere("iv.domain_id", domain_id::get(), "AND");
         $pdoDb->addSimpleWhere("iv.id", $_GET['id']);
         
         $pdoDb->setSelectList(array("iv.*", "p.description"));
-$pdoDb->debugOn();
         $result = $pdoDb->request("SELECT", "products", "p");
-$pdoDb->debugOff();
-        return $result;
+        return $result[0];
     }
 
     public static function check_reorder_level() {
         $rows = Product::select_all('count');
         $email = "";
+        $result = array();
         $email_message = "";
         foreach ( $rows as $row ) {
             if ($row['quantity'] <= $row['reorder_level']) {

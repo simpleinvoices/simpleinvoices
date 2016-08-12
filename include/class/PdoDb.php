@@ -732,10 +732,17 @@ class PdoDb {
         } else if (isset($alias)) {
             // Needs to have alias added.
             $field = '`' . $alias . '`.`' . $field . '`';
+        } else {
+            $field = '`' . $field . '`';
         }
         return $field;
     }
 
+    /**
+     * Add the <b>SimpleInvoices</b> database table prefix, <b>si_</b>, if not already present.
+     * @param string $table Table name that a prefix will be prepended to.
+     * @return string Updated table name.
+     */
     public static function addTbPrefix($table) {
         if ((preg_match(self::TBPREFIX_PATTERN, $table)) != 1) {
             return TB_PREFIX . $table;
@@ -751,11 +758,12 @@ class PdoDb {
      * @param string $table Database table name.
      * @param string $alias (Optional) Alias for table name. Note that the alias need
      *         be in the select list. If not present, it will be added to selected fields.
-     * @return mixed value based on <b>$request</b>.
-     *         <b>SELECT</b> returns array of rows selected.
-     *         <b>INSERT</b> returns the unique ID assigned to the inserted record if an
-     *         auto increment field exisst, otherwise <b>true</b>.
-     *         <b>UPDATE</b> and <b>DELETE</b> returns <b>true</b>.
+     * @return Result varies with the request type. <b>INSERT</b> returns the
+     *         auto increment unique ID (or blank if no such field), <b>SELECT</b>
+     *         returns the associative array for selected rows or an empty array if
+     *         no rows are found, <b>SHOW</b> returns the numberic array of
+     *         specified <b>SHOW</b> request, otherwise <b>true</b> on success of
+     *         <b>false</b> on failure..
      * @throws PdoDbException if any unexpected setting or missing information is encountered.
      */
     public function request($request, $table, $alias = null) {
@@ -815,12 +823,12 @@ class PdoDb {
                 // Build WHERE clause and get value pair list for tokens in the clause.
                 $where = "";
                 if (!empty($this->whereClause)) {
-                    $where = $this->whereClause->build($this->keyPairs, $alias);
+                    $where = $this->whereClause->build($this->keyPairs);
                     $token_cnt += $this->whereClause->getTokenCnt();
                 }
         
                 // Build ORDER BY statement
-                $order = (empty($this->orderBy) ? '' : $this->orderBy->buildOrder($alias));
+                $order = (empty($this->orderBy) ? '' : $this->orderBy->build());
 
                 // Build GROUP BY
                 $group = (empty($this->groupBy) ? "" : "GROUP BY " . implode(',', $this->groupBy));
@@ -881,6 +889,7 @@ class PdoDb {
                     foreach($this->selectStmts as $selectStmt) {
                         if (!empty($list)) $list .= ", ";
                         $list .= $selectStmt->build($this->keyPairs);
+                        $token_cnt += $selectStmt->getTokenCnt();
                     }
                 }
 
@@ -964,7 +973,6 @@ class PdoDb {
                 $pattern = "/[^a-zA-Z0-9_\-]" . $key . "[^a-zA-Z0-9_\-]|[^a-zA-Z0-9_\-]" . $key . "$/";
                 if (preg_match($pattern, $sql) == 1) {
                     if (!$sth->bindValue($key, $val)) {
-                        // error_log("PdoDb - query(): Unable to bind values" . print_r($sth->errorInfo(), true));
                         $this->clearAll();
                         throw new PdoDbException('PdoDb - query(): Unable to bind values.');
                     }
@@ -986,7 +994,7 @@ class PdoDb {
         $request = strtoupper($parts[0]);
         if ($request == "INSERT") {
             if (empty($this->constraints) || preg_match('/:ID[:$]', $this->constraints)) {
-            $result = $this->lastInsertId();
+                $result = $this->lastInsertId();
             } else {
                 $result = "";
             }

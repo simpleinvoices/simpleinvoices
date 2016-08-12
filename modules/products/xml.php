@@ -1,4 +1,6 @@
 <?php
+global $smarty, $LANG;
+
 header("Content-type: text/xml");
 
 // @formatter:off
@@ -12,23 +14,24 @@ $page  = (isset($_POST['page']))      ? $_POST['page']      : "1" ;
 $defaults = getSystemDefaults();
 $smarty->assign("defaults",$defaults);
 
-$products_all = Products::select_all('', $dir, $sort, $rp, $page);
-$rows = Products::select_all('count',$dir, $sort, $rp, $page);
-$count = $rows[0]['count'];
+$products_all = Product::select_all('', $dir, $sort, $rp, $page);
+$count = Product::select_all('count',$dir, $sort, $rp, $page);
 
 $xml  = "";
 $xml .= "<rows>";
 $xml .= "  <page>$page</page>";
 $xml .= "  <total>$count</total>";
 foreach ($products_all as $row) {
-    $xml .= "<row id='" . $row['id'] . "'>";
+    $image = ($row['enabled'] == $LANG['enabled'] ? "images/common/tick.png" : "images/common/cross.png");
+
+    $xml .= "<row id='$row[id]'>";
     $xml .= "<cell><![CDATA[
-               <a class='index_table' title='" . $LANG['view'] . " " . $row['description'] . "'
-                  href='index.php?module=products&view=details&id=" . $row['id'] . "&action=view'>
+               <a class='index_table' title='$LANG[view]  $row[description]'
+                  href='index.php?module=products&view=details&id=$row[id]&action=view'>
                  <img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' />
                </a>
-               <a class='index_table' title='" . $LANG['edit'] . " " . $row['description'] . "'
-                  href='index.php?module=products&view=details&id=" . $row['id'] . "&action=edit'>
+               <a class='index_table' title='$LANG[edit] $row[description]'
+                  href='index.php?module=products&view=details&id=$row[id]&action=edit'>
                  <img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' />
                </a>
                ]]>
@@ -40,15 +43,7 @@ foreach ($products_all as $row) {
         $xml .= "<cell><![CDATA[" . siLocal::number_trim($row['quantity']) . "]]></cell>";
     }
 
-    if ($row['enabled']==$LANG['enabled']) {
-        $xml .= "<cell><![CDATA[<img src='images/common/tick.png' alt='" .
-                                     $row['enabled'] . "' title='" .
-                                     $row['enabled'] . "' />]]></cell>";
-    } else {
-        $xml .= "<cell><![CDATA[<img src='images/common/cross.png' alt='" .
-                                     $row['enabled'] . "' title='" .
-                                     $row['enabled'] . "' />]]></cell>";
-    }
+    $xml .= "<cell><![CDATA[<img src='$image' alt='$row[enabled]' title='$row[enabled]' />]]></cell>";
     $xml .= "</row>";
 }
 $xml .= "</rows>";

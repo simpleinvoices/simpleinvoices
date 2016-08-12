@@ -5,6 +5,7 @@ class Select {
     private $fromStmt;
     private $whereClause;
     private $joins;
+    private $token_cnt;
 
     /**
      * Class constructor
@@ -43,8 +44,19 @@ class Select {
         $this->whereClause = $whereClause;
         $this->joins = null;
         $this->alias = $alias;
+        $this->token_cnt = 0;
     }
 
+    /**
+     * getter for $token_cnt.
+     * Note that the current token count value has <b>NOT</b> been used to
+     * make a unique token.
+     * @return integer Current token count value.
+     */
+    public function getTokenCnt() {
+        return $this->token_cnt;
+    }
+    
     /**
      * Add a <b>JOIN</b> to this <b>SELECT</b> statement.
      * @param Join $join <b>JOIN</b> statement to include.
@@ -70,11 +82,22 @@ class Select {
             foreach ($this->list as $item) {
                 if ($first) $first = false;
                 else $select .= ", ";
-                $select .= $item;
+                if (is_object($item)) {
+                    if (get_class($item) == "WhereClause") {
+                        $select .= $item->build($keyPairs);
+                        
+                    } else {
+                        $select .= $item->build();
+                     }
+                } else {
+                    $select .= $item;
+                }
             }
         } else {
-            $select .= $this->list->build();
+            $select .= $this->list->build($keyPairs);
         }
+
+        if (!empty($this->fromStmt)) $select .= " " . $this->fromStmt->build();
 
         if (!empty($this->joins)) {
             foreach ($this->joins as $join) {
@@ -82,10 +105,10 @@ class Select {
             }
         }
 
-        if (!empty($this->fromStmt)) $select .= " " . $this->fromStmt->build();
-
         if (!empty($this->whereClause)) {
             $select .= " " . $this->whereClause->build($keyPairs);
+            $this->token_cnt += $this->whereClause->getTokenCnt();
+            
         }
 
         $select .= ")";

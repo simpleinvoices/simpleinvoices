@@ -11,6 +11,7 @@
  *  Website:
  *      http://www.simpleinvoices.org
  */
+global $pdoDb, $smarty;
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
@@ -18,11 +19,12 @@ checkLogin();
 $pdoDb->addSimpleWhere("domain_id", domain_id::get());
 $pdoDb->addToFunctions("COUNT(*) as count");
 $rows = $pdoDb->request("SELECT", "cron");
-$number_of_crons  = $rows[0]['count'];;
-$smarty -> assign("number_of_crons", $number_of_crons);
+$number_of_crons  = $rows[0]['count'];
 
-$smarty -> assign('pageActive', 'cron');
-$smarty -> assign('active_tab', '#money');
+$smarty->assign("number_of_crons", $number_of_crons);
+
+$smarty->assign('pageActive', 'cron');
+$smarty->assign('active_tab', '#money');
 
 $url =  'index.php?module=cron&view=xml';
-$smarty -> assign('url', $url);
+$smarty->assign('url', $url);

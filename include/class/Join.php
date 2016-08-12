@@ -87,14 +87,14 @@ class Join {
         $isSelect = is_a($this->table, "SELECT");
         $join = $this->type . " JOIN ";
         if ($isSelect) {
-            $join .= "(" . $this->table->build() . ") ";
+            $join .= "(" . $this->table->build($keypairs) . ") ";
         } else {
             $join .= "`" . $this->table . "` ";
         }
         $join .= "AS " . $this->tableAlias . " ";
         $join .= $this->onClause->build($keypairs);
         if (isset($this->groupBy)) {
-            $join .= " " . $this->groupBy->build();
+            $join .= " " . $this->groupBy->build($keypairs);
         }
         return $join;
     }

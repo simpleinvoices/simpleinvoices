@@ -79,9 +79,11 @@ class OrderBy {
 
     /**
      * Build the <b>ORDER BY</b> statement.
+     * @param array $keypairs (Optional) Parameter exists for function call compatibility
+     *        with other <i>PdoDb</i> class SQL build objects. 
      * @return Formatted <b>ORDER by</b> string.
      */
-    public function buildOrder() {
+    public function build($keypairs = null) {
         $orderBy = '';
         foreach ($this->orderByFields as $items) {
             if (empty($orderBy)) {

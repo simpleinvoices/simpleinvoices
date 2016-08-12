@@ -52,7 +52,7 @@ if ( $op === 'insert_user') {
 
 if ($op === 'edit_user' ) {
     function editUser() {
-        empty($_POST[password_field]) ? $password = "" : $password = "password = '".md5($_POST[password_field])."',"  ;
+        empty($_POST['password_field']) ? $password = "" : $password = "password = '".md5($_POST['password_field'])."',"  ;
         $sql = "UPDATE ".TB_PREFIX."user
                 SET email = :email,
                     $password

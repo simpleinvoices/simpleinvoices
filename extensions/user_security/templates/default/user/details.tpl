@@ -1,9 +1,10 @@
 {*
- * Script: details.tpl
- *     User detail template
- * Last edited:
- *     2016-07-09
- * License: GPL v3 or above
+ *  Script: details.tpl
+ *      User detail template
+ *  Last edited:
+ *      2016-08-10
+ *  License:
+ *      GPL v3 or above
  *}
 {literal}
 <script>
@@ -15,7 +16,7 @@ function setuseridlist() {
   var orole_val = document.getElementById("origrole1").value ;
   if (role_text == orole_val) return;
   
-  var crole_elem = document.getElementById('currrole1");
+  var crole_elem = document.getElementById("currrole1");
   crole_elem.value = role_text;
 
   var list = document.getElementById("user_id1");
@@ -77,8 +78,7 @@ function setuseridlist() {
     </table>
   </div>
   <div class="si_toolbar si_toolbar_form">
-    <a href="./index.php?module=user&view=details&id={$user.id|urlencode}&action=edit"
-       class="positive">
+    <a href="./index.php?module=user&view=details&id={$user.id|urlencode}&action=edit" class="positive">
       <img src="./images/famfam/report_edit.png" alt="" />
       {$LANG.edit}
     </a>

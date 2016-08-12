@@ -36,13 +36,17 @@
   </tr>
 </table>
 <br />
-<div class="si_toolbar si_toolbar_form">
-  <a href="./index.php?module=cron&amp;view=edit&amp;id={$cron.id|urlencode}" class="positive">
-    <img src="./images/famfam/report_edit.png" alt="" />
-    {$LANG.edit}
-  </a>
-  <a href="./index.php?module=cron&view=manage" class="negative">
-    <img src="./images/common/cross.png" alt="" />
-    {$LANG.cancel}
-  </a>
-</div>
+<form name="frmpost"
+      action="index.php?module=cron&amp;view=edit&amp;id={$cron.id|urlencode}" method="POST" id="frmpost">
+  <input type="hidden" name="domain_id" value="{$cron.domain_id}" />
+  <div class="si_toolbar si_toolbar_form">
+    <button type="submit" class="positive" name="id" value="{$LANG.edit}">
+      <img class="button_img" src="./images/famfam/report_edit.png" alt="" />
+      {$LANG.edit}
+    </button>
+    <a href="./index.php?module=cron&view=manage" class="negative">
+      <img src="./images/common/cross.png" alt="" />
+      {$LANG.cancel}
+    </a>
+  </div>
+</form>

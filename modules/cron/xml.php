@@ -1,13 +1,15 @@
 <?php
+global $LANG;
+
 header ( "Content-type: text/xml" );
 
 $dir  = (isset($_POST ['sortorder'])) ? $_POST ['sortorder'] : "DESC";
-$sort = (isset($_POST ['sortname']) ) ? $_POST ['sortname']  : "id";
+$sort = (isset($_POST ['sortname']) ) ? $_POST ['sortname']  : "cron.id";
 $rp   = (isset($_POST ['rp'])       ) ? $_POST ['rp']        : "25";
 $page = (isset($_POST ['page'])     ) ? $_POST ['page']      : "1";
 
-$crons = cron::select_all(     '', $sort, $dir, $rp, $page);
-$count = cron::select_all('count', $sort, $dir, $rp, $page);
+$crons = Cron::select_all(     '', $sort, $dir, $rp, $page);
+$count = Cron::select_all('count', $sort, $dir, $rp, $page);
 
 $xml  = "";
 $xml .= "<rows>";

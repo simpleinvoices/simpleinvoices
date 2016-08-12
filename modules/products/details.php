@@ -1,4 +1,6 @@
 <?php
+global $smarty;
+
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
@@ -28,4 +30,3 @@ $smarty->assign('pageActive'      , 'product_manage');
 $smarty->assign('subPageActive'   , $subPageActive);
 $smarty->assign('active_tab'      , '#product');
 // @formatter:on
-?>

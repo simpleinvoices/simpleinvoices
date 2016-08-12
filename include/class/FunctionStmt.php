@@ -9,9 +9,9 @@ class FunctionStmt {
 
     /**
      * Class constructor.
-     * @param string $function
-     * @param string $parameter
-     * @param string $alias (Optional)
+     * @param string $function Function to be performed. Can be set to <b>null</b> if necessary.
+     * @param mixed $parameter The first parameter of the function. Can be a string
+     * @param string $alias (Optional) Name to assign to the function result.
      */
     public function __construct($function, $parameter, $alias=null) {
         $this->function = $function;
@@ -22,9 +22,9 @@ class FunctionStmt {
 
     /**
      * Add another part of the function.
-     * @param string $operator
-     * @param string $part
-     * @throws PdoDbException
+     * @param string $operator Math operator value is <b>+</b>, <b>-</b>, <b>*</b> or <b>/</b>.
+     * @param mixed $part <b>DbField</b> object ot <b>string</b>.
+     * @throws PdoDbException if an invalid <b>$operator</b> is specified.
      */
     public function addPart($operator, $part) {
         if (!preg_match(self::OPERATORS, $operator)) {
@@ -39,14 +39,30 @@ class FunctionStmt {
 
     /**
      * Build function string from specified parameter.
+     * @param $keypairs (Optional) parameter. It is <b>not</b> used in this function. It is
+     *        included to maintain call consistency but can be ommitted if needed.
      * @return string Function string.
      */
-    public function build() {
-//  (SUM(COALESCE(IF(pr.status = 1, ii.total, 0),  0)) - COALESCE(ap.amount,0)) AS owing,
-        $stmt = $this->function . "(" . $this->parameter . ")";
+    public function build($keypairs = null) {
+        if (is_a($this->parameter, "DbField")) {
+            $parm = $this->parameter->genParm();
+        } else {
+            $parm = $this->parameter;
+        }
+
+        if (empty($this->function)) {
+            $stmt = $parm;
+        } else {
+            $stmt = $this->function . "(" . $parm . ")";
+        }
         if (!empty($this->parts)) {
             foreach($this->parts as $part) {
-                $stmt = "(" . $stmt . ") " . $part[0] . " " . $part[1];
+                if (is_a($part[1], "DbField")) {
+                    $parm = $part[1]->genParm();
+                } else {
+                    $parm = $part[1];
+                }
+                $stmt = "(" . $stmt . ") " . $part[0] . " " . $parm;
             }
         }
         if (isset($this->alias)) {

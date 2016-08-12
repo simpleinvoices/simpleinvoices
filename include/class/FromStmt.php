@@ -23,16 +23,18 @@ class FromStmt {
 
     /**
      * Build <b>FROM</b> statement.
+     * @param array $keypairs (Optional) Parameter exists for function call compatibility
+     *        with other <i>PdoDb</i> class SQL build objects. 
      * @return string
      */
-    public function build() {
+    public function build($keypairs = null) {
         $stmt = "FROM ";
         $first = true;
         foreach ($this->table as $table) {
             if ($first) $first = false;
             else $stmt .= ", ";
-            $stmt .= PdoDb::addTbPrefix($table[0]);
-            if (!empty($table[1])) $stmt .= " " . $table[1];
+            $stmt .= PdoDb::formatField(PdoDb::addTbPrefix($table[0]));
+            if (!empty($table[1])) $stmt .= " " . PdoDb::formatField($table[1]);
         }
         return $stmt;
     }

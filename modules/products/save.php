@@ -1,5 +1,5 @@
 <?php
-
+global $smarty;
 // stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin ();
 
@@ -8,12 +8,13 @@ $op = (!empty ( $_POST ['op'] ) ? addslashes($_POST['op']) : NULL);
 
 $saved = false;
 if ($op === 'insert_product') {
-    if ($id = insertProduct()) $saved = true;
+    if (insertProduct()) $saved = true;
 } else if ($op === 'edit_product') {
     if (isset($_POST ['save_product']) && updateProduct()) $saved = true;
 }
 
-$refresh_total = isset ( $refresh_total ) ? $refresh_total : '&nbsp';
+if (!isset($refresh_total)) $refresh_total = '&nbsp';
+if ($refresh_total) {} // to eliminate not used warning.
 
 $smarty->assign ( 'saved'     , $saved );
 $smarty->assign ( 'pageActive', 'product_manage' );

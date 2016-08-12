@@ -2,8 +2,7 @@
 class Product {
     public static function count() {
         global $pdoDb;
-        $pdoDb->setSelectList(array());
-        $pdoDb->addToFunctions("count(id) as count");
+        $pdoDb->addToFunctions("COUNT(id) as count");
         $pdoDb->addSimpleWhere("domain_id", domain_id::get());
         return $pdoDb->request("SELECT", "products");
     }
@@ -11,7 +10,7 @@ class Product {
     public static function get_all() {
         global $pdoDb;
         $pdoDb->addSimpleWhere("domain_id", domain_id::get(), 'AND');
-        $pdoDb->addSimpleWhere("visible", "1");
+        $pdoDb->addSimpleWhere("visible", ENABLED);
         $pdoDb->setOrderBy("description");
         $pdoDb->setOrderBy("id");
         return $pdoDb->request("SELECT", "products");
@@ -27,9 +26,6 @@ class Product {
     public static function select_all($type = '', $dir, $sort, $rp, $page) {
         global $LANG, $pdoDb;
 
-        $domain_id = domain_id::get();
-
-        $where = "";
         $query = isset($_POST['query']) ? $_POST['query'] : null;
         $qtype = isset($_POST['qtype']) ? $_POST['qtype'] : null;
         if (!empty($qtype) && !empty($query)) {
@@ -39,7 +35,7 @@ class Product {
             }
         }
         $pdoDb->addSimpleWhere("p.visible", ENABLED, "AND");
-        $pdoDb->addSimpleWhere("p.domain_id", $domain_id);
+        $pdoDb->addSimpleWhere("p.domain_id", domain_id::get());
 
         if (($type == "count")) {
             $pdoDb->addToFunctions("COUNT(*) as count");
@@ -63,30 +59,35 @@ class Product {
         // @formatter:off
         $pdoDb->setSelectList(array("p.id", "p.description", "p.unit_price", "p.enabled"));
 
-        $wc = new WhereClause();
-        $wc->addSimpleItem("ii.product_id"   , new DbField("p.id")      , "AND");
-        $wc->addSimpleItem("ii.domain_id"    , $domain_id               , "AND");
-        $wc->addSimpleItem("ii.invoice_id"   , new DbField("iv.id")     , "AND");
-        $wc->addSimpleItem("iv.preference_id", new DbField("pr.pref_id"), "AND");
-        $wc->addSimpleItem("pr.status"       , ENABLED);
+        $fn = new FunctionStmt("COALESCE", "SUM(ii.quantity),0");
         $fr = new FromStmt("invoice_items", "ii");
-        $fr->addTable("invoices"   , "iv");
+        $fr->addTable("invoices", "iv");
         $fr->addTable("preferences", "pr");
-        $select = new Select(new FunctionStmt("SUM","COALESCE(ii.quantity,0)"), $fr, $wc, "qty_out");
-        $pdoDb->addToSelectStmts($select);
+        $wh = new WhereClause();
+        $wh->addSimpleItem("ii.product_id", new DbField("p.id"), "AND");
+        $wh->addSimpleItem("ii.domain_id", new DbField("p.domain_id"), "AND");
+        $wh->addSimpleItem("ii.invoice_id", new DbField("iv.id"), "AND");
+        $wh->addSimpleItem("iv.preference_id", new DbField("pr.pref_id"), "AND");
+        $wh->addSimpleItem("pr.status", ENABLED);
+        $se = new Select($fn, $fr, $wh, "qty_out");
+        $pdoDb->addToSelectStmts($se);
 
+        $fn = new FunctionStmt("COALESCE", "SUM(inv.quantity),0");
+        $fr = new FromStmt("inventory", "inv");
         $wc = new WhereClause();
         $wc->addSimpleItem("inv.product_id", new DbField("p.id"), "AND");
-        $wc->addSimpleItem("inv.domain_id" , $domain_id);
-        $fr = new FromStmt("inventory", "inv");
-        $select = new Select(new FunctionStmt("SUM", "COALESCE(inv.quantity,0)"), $fr, $wc, "qty_in");
-        $pdoDb->addToSelectStmts($select);
+        $wc->addSimpleItem("inv.domain_id" , new DbField("p.domain_id"));
+        $se = new Select($fn, $fr, $wc, "qty_in");
+        $pdoDb->addToSelectStmts($se);
 
-        $select = new Select(new FunctionStmt("COALESCE", "p.reorder_level,0"), null, null, "reorder_level");
-        $pdoDb->addToSelectStmts($select);
+        $fn = new FunctionStmt("COALESCE", "p.reorder_level,0");
+        $se = new Select($fn, null, null, "reorder_level");
+        $pdoDb->addToSelectStmts($se);
 
-        $select = new Select(new FunctionStmt("", "qty_in - qty_out"), null, null, "quantity");
-        $pdoDb->addToSelectStmts($select);
+        $fn = new FunctionStmt("", "qty_in");
+        $fn->addPart("-",  "qty_out");
+        $se = new Select($fn, null, null, "quantity");
+        $pdoDb->addToSelectStmts($se);
 
         $cs = new CaseStmt("p.enabled");
         $cs->addWhen( "=", ENABLED, $LANG['enabled']);

@@ -12,6 +12,7 @@
       action="index.php?module=billers&amp;view=save&amp;id={$smarty.get.id}"
       method="post" id="frmpost" onsubmit="return checkForm(this);">
   {if $smarty.get.action== 'view' }
+  <input type="hidden" name="op" value="view_biller">
   <div class="si_form si_form_view">
     <table>
       <tr>

@@ -15,6 +15,7 @@
  * Website:
  *   http://www.simpleinvoices.org
  */
+global $smarty;
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
@@ -36,4 +37,3 @@ $smarty->assign('pageActive', 'biller');
 $subPageActive = $_GET['action'] =="view"  ? "biller_view" : "biller_edit" ;
 $smarty->assign('subPageActive', $subPageActive);
 $smarty->assign('active_tab', '#people');
-?>

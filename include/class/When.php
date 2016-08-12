@@ -29,7 +29,13 @@ class When {
         }
     }
 
-    public function build() {
+    /**
+     * Build this clause.
+     * @param array $keypairs (Optional) Parameter exists for function call compatibility
+     *        with other <i>PdoDb</i> class SQL build objects. 
+     * @return string <b>WHEN</b> clause rendered from values in this object.
+     */
+    public function build($keypairs=null) {
         $when = "WHEN " . $this->field . " " . $this->operator . " " .
                           $this->value . " THEN '" . $this->result . "' ";
         return $when;

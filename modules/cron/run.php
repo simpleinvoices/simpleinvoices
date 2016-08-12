@@ -1,4 +1,5 @@
 <?php
+global $smarty;
 
-$message = cron::run();
-$smarty -> assign('message', $message);
+$message = Cron::run();
+$smarty->assign('message', $message);

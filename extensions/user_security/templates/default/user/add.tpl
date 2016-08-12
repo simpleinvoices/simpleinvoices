@@ -6,7 +6,7 @@
  *  Justin Kelly, Nicolas Ruflin, Soif, Rich Rowley
  *
  * Last edited:
- *    2016-05-28
+ *    2016-08-10
  *
  * License:
  *  GPL v3 or above
@@ -97,8 +97,6 @@
             <img src="{$help_image_path}required-small.png" alt="" />
           </a>
         </th>
-
-        </th>
         <td>
           <select name="user_id" tabindex="60">
             <option selected value="0">0 - USER</option>
@@ -106,9 +104,6 @@
             <option value="{$cust.id|htmlsafe}">{$cust.id|htmlsafe} - {$cust.name|htmlsafe}</option>
             {/foreach}
           </select>
-
-          <input type="text" name="user_id" value="0" size="12" id="user_id"
-                 autocomplete="off" class="validate[required]"  tabindex="70"/>
         </td>
       </tr>
     </table>

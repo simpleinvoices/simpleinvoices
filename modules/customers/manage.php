@@ -17,7 +17,7 @@ checkLogin();
 
 // @formatter:off
 $pdoDb->addSimpleWhere("domain_id", domain_id::get());
-$pdoDb->addToFunctions("count(*) AS count");
+$pdoDb->addToFunctions("COUNT(*) AS count");
 $rows  = $pdoDb->request("SELECT", "customers");
 $row   = $rows[0];
 $count = $row["count"];

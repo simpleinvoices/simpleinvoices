@@ -1,21 +1,20 @@
 <?php
 /*
  *  Script: manage.php
- *    Manage Invoices page
+ *      Manage Invoices page
  *
  *  License:
- *    GPL v3 or above
+ *      GPL v3 or above
  *
  *  Website:
- *    http://www.simpleinvoices.org
+ *      http://www.simpleinvoices.org
  */
+global $smarty;
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-$pdoDb->addSimpleWhere("domain_id", domain_id::get());
-$pdoDb->addToFunctions("COUNT(*) AS count");
-$number_of_rows = $pdoDb->request("SELECT", "inventory");
+$number_of_rows = Inventory::count();
 $smarty->assign("number_of_rows",$number_of_rows);
 
 $smarty->assign('pageActive', 'inventory');

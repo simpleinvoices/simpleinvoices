@@ -44,16 +44,18 @@ class CaseStmt {
 
     /**
      * Builds the formatted <b>CASE</b> for this object.
+     * @param $keypairs (Optional) Parameter exists for function call compatibility
+     *        with other <i>PdoDb</i> class SQL build objects. 
      * @return string Formatted <b>CASE</b> statement this criterion.
      */
-    public function build() {
+    public function build($keypairs=null) {
         if (!$this->end) {
             throw new PdoDbException("CaseStmt - build(): End of CASE statment not specified.");
         }
 
         $case = "(CASE ";
         foreach($this->when as $when) {
-            $case .= $when->build();
+            $case .= $when->build($keypairs);
         }
         $case .= "END)";
         if (!empty($this->alias)) $case .= " AS " . $this->alias;

@@ -1,16 +1,20 @@
-{if $saved == 'true' }
-<meta http-equiv="refresh" content="2;URL=index.php?module=inventory&amp;view=manage" />
-<div class="si_message_ok">{$LANG.save_inventory_success}</div>
-{else if $saved == 'false' }
-<meta http-equiv="refresh" content="2;URL=index.php?module=inventory&amp;view=manage" />
-<div class="si_message_error">{$LANG.save_inventory_failure}</div>
-  {if $smarty.post.op == 'add' AND $smarty.post.product_id == ''}
-  <div class="validation_alert">
-    <img src="./images/common/important.png" alt="" />
-    You must select a product
-  </div>
-  <hr />
+{if isset($saved)}
+  {if $saved == 'true' }
+    <meta http-equiv="refresh" content="2;URL=index.php?module=inventory&amp;view=manage" />
+    <div class="si_message_ok">{$LANG.save_inventory_success}</div>
+  {else if $saved == 'false' }
+    <meta http-equiv="refresh" content="2;URL=index.php?module=inventory&amp;view=manage" />
+    <div class="si_message_error">{$LANG.save_inventory_failure}</div>
+    {if $smarty.post.op == 'add' AND $smarty.post.product_id == ''}
+      <div class="validation_alert">
+        <img src="./images/common/important.png" alt="" />
+        You must select a product
+      </div>
+      <hr />
+    {/if}
   {/if}
+{/if}
+{if !isset($saved) || $saved == 'false'}
   {* is this still needed ?*}
   <div id="gmail_loading" class="gmailLoader" style="float: right; display: none;">
     <img src="images/common/gmail-loader.gif" alt="{$LANG.loading} ..." />
@@ -24,7 +28,7 @@
           <td class="details_screen">{$LANG.date_upper}</td>
           <td>
             <input type="text" class="validate[required,custom[date],length[0,10]] date-picker"
-                   size="10" name="date" id="date" value='{$inventory.date|htmlsafe}' />
+                   size="10" name="date" id="date" value="{$inventory.date|htmlsafe}" />
           </td>
         </tr>
         <tr>
@@ -33,7 +37,7 @@
             <select name="product_id" class="validate[required] product_inventory_change">
               <option value=''></option>
               {foreach from=$product_all item=product}
-              <option value="{$product.id|htmlsafe}" {if $product.id==$inventory.product_id}selected{/if} >
+              <option value="{$product.id|htmlsafe}" {if $product.id == $inventory.product_id}selected{/if} >
 	            {$product.description|htmlsafe}
 	          </option>
               {/foreach}
