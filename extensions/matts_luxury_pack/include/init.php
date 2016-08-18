@@ -1,5 +1,7 @@
 <?php
 
+//include_once './extensions/<THIS NAME>/include/sql_queries.php';	// not active yet...
+
 /*
 function myNoticeStrictHandler($errstr, $errfile, $errline) {//$errno=null, 
 }
