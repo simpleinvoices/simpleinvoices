@@ -1,3 +1,6 @@
+2016 08 18: menu.tpl won't display
+		problem with system_preferences screen
+		repair core sql_queries.php to make database log work
 2016 08 05: no function to write product-lwhw to database
 		db product columns not made on install
 2016 08 03: cannot save new date on old invoice (or biller, customer, terms, ship_to (no d.n.), P.O. number, etc.)

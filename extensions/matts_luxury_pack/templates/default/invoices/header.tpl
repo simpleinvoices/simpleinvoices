@@ -18,8 +18,8 @@
 
     <div class="si_filters si_buttons_invoice_header">
     	<span class="si_filters_links">
-	    	<a href="index.php?module=invoices&amp;view=itemised" class="first{if $view=='itemised'} selected{/if}"><img class="action" src="./images/common/edit.png"/>{$LANG.itemised_style}</a>
-	    	<a href="index.php?module=invoices&amp;view=total" class="{if $view=='total'}selected{/if}"><img class="action" src="./images/common/page_white_edit.png"/>{$LANG.total_style}</a>
+	    	<a href="index.php?module=invoices&amp;view=itemised" class="first{if $view=='itemised'} selected{/if}"><img class="action" src="./images/common/edit.png" alt="itemised" />{$LANG.itemised_style}</a>
+	    	<a href="index.php?module=invoices&amp;view=total" class="{if $view=='total'}selected{/if}"><img class="action" src="./images/common/page_white_edit.png" alt="total" />{$LANG.total_style}</a>
 		</span>
     	<span class="si_filters_title">
 			<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_invoice_types" title="{$LANG.invoice_type}"><img class="" src="./images/common/help-small.png" alt="help" /></a>
@@ -38,10 +38,12 @@
 	$smarty->assign("inv_details", $idetils);
 {/php}
 			<td>{$inv_details.id+1}</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
 		</tr>
-		<tr wrap="nowrap">
+		<tr>
 			<th>{$LANG.date_formatted}</th>
-			<td wrap="nowrap">
+			<td>
 				<input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="date" id="date1" 
 				{if $smarty.get.date}
 					value="{$smarty.get.date}" />
@@ -49,6 +51,7 @@
 					value='{$smarty.now|date_format:"%Y-%m-%d"}' />
 				{/if}
 			</td>
+			<td>&nbsp;</td>
 			<td>&nbsp;</td>
 		</tr>
 		<tr>
@@ -64,6 +67,8 @@
 				</select>
 			{/if}
 			</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
 		</tr>
 		<tr>
 			<th>{$LANG.customer}</th>
@@ -79,7 +84,7 @@
 			{/if}
 			</td>
 			<td style="width:21px;"></td>
-			<td id="customer_street_address" style="font-size: 9px;">{if $defaults.use_modal}<a rel="superbox[iframe][1075x600]" class="show-details modal customer_view" title="{$LANG.view} {$LANG.customer}" href="index.php?module=customers&view=details&id=&action=view">{/if}<img src="images/common/view.png">&nbsp;{if $defaults.use_modal}</a>{/if}
+			<td id="customer_street_address" style="font-size: 9px;">{if $defaults.use_modal}<a rel="superbox[iframe][1075x600]" class="show-details modal customer_view" title="{$LANG.view} {$LANG.customer}" href="index.php?module=customers&view=details&id=&action=view">{/if}<img src="images/common/view.png" alt="view" />&nbsp;{if $defaults.use_modal}</a>{/if}
 </td>
 		</tr>
 <!-- Ship To - added by Matt 2016-07-23 -->
@@ -95,16 +100,16 @@
 				</select>
 			</td>
 			<td style="width:21px;"></td>
-			<td id="ship_street_address" style="font-size: 9px;">{if $defaults.use_modal}<a rel="superbox[iframe][1075x600]" class="show-details modal customer_view" title="{$LANG.view} {$LANG.customer}" href="index.php?module=customers&view=details&id=&action=view">{/if}<img src="images/common/view.png">&nbsp;{if $defaults.use_modal}</a>{/if}</td>
+			<td id="ship_street_address" style="font-size: 9px;">{if $defaults.use_modal}<a rel="superbox[iframe][1075x600]" class="show-details modal customer_view" title="{$LANG.view} {$LANG.customer}" href="index.php?module=customers&view=details&id=&action=view">{/if}<img src="images/common/view.png" alt="view" />&nbsp;{if $defaults.use_modal}</a>{/if}</td>
 		</tr>
 {/if}
 <!-- end Ship To -->
 
 <!-- terms :: Added by Matt 20160802 -->
 {if $defaults.use_terms}
-		<tr wrap="nowrap">
-			<th >{$LANG.terms}</th>
-			<td wrap="nowrap">
+		<tr>
+			<th>{$LANG.terms}</th>
+			<td>
 				<input type="text" class="terms" size="30" name="terms" id="terms" 
 				{if $smarty.get.terms}
 					value="{$smarty.get.terms|htmlsafe}" />
@@ -112,6 +117,8 @@
 					value="{$invoice.terms|htmlsafe}" />
 				{/if}
 			</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
 		</tr>
 {/if}
 <!-- end terms -->
@@ -127,7 +134,7 @@ function putAddress(val, where) {
 	for (var i=0; i<json_customers.length; i++) {
 		if (json_customers[i].id == val) {
 			child.href = "index.php?module=customers&view=details&id="+ val+ "&action=view";
-			child.innerHTML = '(<img src="images/common/view.png">&nbsp;' + json_customers[i].street_address + ' - ' + json_customers[i].attention + '{/literal}{if $defaults.use_modal}</a>{/if}{literal})';
+			child.innerHTML = '(<img src="images/common/view.png" alt="view" />&nbsp;' + json_customers[i].street_address + ' - ' + json_customers[i].attention + '{/literal}{if $defaults.use_modal}</a>{/if}{literal})';
 			break;
 		}
 	}

@@ -120,7 +120,7 @@
 				<td>
 					{if $smarty.section.line.index == "0"}
 					<a href="#" class="trash_link" id="trash_link{$smarty.section.line.index|htmlsafe}" title="{$LANG.cannot_delete_first_row|htmlsafe}" >
-						<img id="trash_image{$smarty.section.line.index|htmlsafe}" src="./images/common/blank.gif" height="16px" width="16px" title="{$LANG.cannot_delete_first_row}" alt="cant" />
+						<img id="trash_image{$smarty.section.line.index|htmlsafe}" src="./images/common/blank.gif" height="16" width="16" title="{$LANG.cannot_delete_first_row}" alt="cant" />
 					</a>
 					{/if}
 
@@ -161,7 +161,7 @@
 					class="{if $smarty.section.line.index == "0"}validate[required] {/if}modal{*changeProduct*}{*product__change*}"
 					{**}onchange="changeProductSelection(this)"{**}
 				>
-					<option value=""></option>
+					<option value="">&nbsp;</option>
 				{foreach from=$products item=product}
 					<option 
 						{if $product.id == $smarty.get.product.$lineNumber}
@@ -184,7 +184,7 @@
 						id="tax_id[{$smarty.section.line.index|htmlsafe}][{$smarty.section.tax.index|htmlsafe}]"
 						name="tax_id[{$smarty.section.line.index|htmlsafe}][{$smarty.section.tax.index|htmlsafe}]"
 					>
-					<option value=""></option>
+					<option value="">&nbsp;</option>
 					{foreach from=$taxes item=tax}
 						<option 
 							{if $tax.tax_id == $smarty.get.tax.$lineNumber.$taxNumber}
@@ -219,7 +219,7 @@
 			<tr class="details si_hide">
 				<td></td>
 				<td colspan="4">
-					<textarea input type="text" class="detail" name="description{$smarty.section.line.index|htmlsafe}" id="description{$smarty.section.line.index|htmlsafe}" rows="3" cols=3 WRAP=nowrap></textarea>
+					<textarea class="detail" name="description{$smarty.section.line.index|htmlsafe}" id="description{$smarty.section.line.index|htmlsafe}" rows="3" cols="3"></textarea>
 				</td>
 			</tr>
 		</tbody>
@@ -245,7 +245,7 @@
 		<tr>
 			<td class='si_invoice_notes' colspan="2">
 				<H5>{$LANG.notes}</H5>
-				<textarea input type="text" class="editor" name="note" rows="5" cols="50" wrap="nowrap">
+				<textarea class="editor" name="note" rows="5" cols="50">
 						{$smarty.get.note}
 				</textarea>
 			</td>
