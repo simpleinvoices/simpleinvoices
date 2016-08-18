@@ -2,7 +2,7 @@
 {assign var=myroot value=$smarty.template|substr:1:$mypos-1}
 
 {capture name="hook_head_end"}
-{$hook_head_end}{*append*}
+{$smarty.capture.hook_head_end}
 {if $defaults.use_modal}
 <!-- hook_head_end_add_superbox : {$LANG.Modal} -->{literal}
 	<link rel="stylesheet" href="{/literal}{$myroot|cat:"/../../include/jquery/jquery.superbox.css"}{literal}" type="text/css" media="all" />
@@ -72,7 +72,7 @@
 
 
 {capture name="hook_body_end"}
-{$hook_body_end}{*append*}
+{$smarty.capture.hook_body_end}{*append*}
 {if $defaults.use_modal}
 {literal}
 	<script type="text/javascript"><!--
@@ -116,3 +116,9 @@
 	</script>{/literal}
 { */if* }
 {/capture*}
+
+{*
+{capture name="hook_topmenu_section01_replace"}
+{php}get_file_contents("menu.tpl");{/php}
+{/capture}
+*}
