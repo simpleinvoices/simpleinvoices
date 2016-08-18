@@ -1,0 +1,11 @@
+2016 08 05: no function to write product-lwhw to database
+		db product columns not made on install
+2016 08 03: cannot save new date on old invoice (or biller, customer, terms, ship_to (no d.n.), P.O. number, etc.)
+
+
+invoice:
+sql - ALTER TABLE `si_invoices` ADD `terms` VARCHAR( 100 ) NOT NULL ;
+
+product:
+make getDefaultProductLWHW() (as defined in include/sql_queries.php) available in manage.php
+(set $defaults.product_lwhw in settings>system_preferences)

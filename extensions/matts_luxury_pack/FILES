@@ -1,0 +1,16 @@
+extensions/matts_luxury_pack/include/sql_queries.php
+extensions/matts_luxury_pack/install/adjust.sql
+extensions/matts_luxury_pack/lang/en_CA/info.xml, lang.php
+extensions/matts_luxury_pack/modules/customers/manage.js.php, xml.php
+extensions/matts_luxury_pack/modules/invoices/add_invoice_item.php, consulting.php, delete.php, details.php, email.php, invoice.php, itemised.php, manage.js.php,
+manage.php, product_ajax.php, product_consulting.php, product_inventory_ajax.php, quick_view.php, save.php, search.php, template.php,
+total.php, xml.php
+extensions/matts_luxury_pack/modules/products/details.php, manage.js.php, manage.php, save.php, xml.php
+extensions/matts_luxury_pack/modules/system_defaults/edit.php, manage.php, save.php
+extensions/matts_luxury_pack/templates/default/customers/add.tpl, details.tpl, manage.tpl, save.tpl
+extensions/matts_luxury_pack/templates/default/invoices/add_invoice_item.tpl, consulting.tpl, delete.tpl, details.tpl, email.tpl, header.tpl, invoice.tpl,
+itemised.tpl, manage.tpl, product_consulting.tpl, quick_view.tpl, save.tpl, search.tpl, total.tpl
+extensions/matts_luxury_pack/templates/default/products/add.tpl, details.tpl, manage.tpl, save.tpl
+extensions/matts_luxury_pack/templates/default/product_attribute/add.tpl, details.tpl, manage.tpl, save.tpl
+extensions/matts_luxury_pack/templates/default/payments/details.tpl, eway.tpl, manage.tpl, print.tpl, process.tpl, save.tpl
+extensions/matts_luxury_pack/templates/default/system_defaults/add.tpl, manage.tpl, save.tpl

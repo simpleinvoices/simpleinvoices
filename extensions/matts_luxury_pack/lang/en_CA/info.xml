@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<langfile version="1.0.0" type="language">
+	<name>English</name>
+	<shortname>en_CA</shortname>
+	<englishname>Canada</englishname>
+	<version>1.0.0</version>
+	<creationDate>2016-07-18</creationDate>
+	<author>Matt Scott</author>
+	<authorEmail>matt.scott@sohnetwork.com</authorEmail>
+</langfile>

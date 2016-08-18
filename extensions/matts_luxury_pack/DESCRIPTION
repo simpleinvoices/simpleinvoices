@@ -1,0 +1,12 @@
+Separates add-new-customer fields into navigational tabs.
+Sets the focus on the first form-field.
+Display the proposed invoice number when about add a new invoice.
+Adds a box on the invoice to specify the terms.
+Adds a select box of typical rows-per-page to display.
+Adds table columns to the procduct table database.  For length, width, height and weight.
+List Products +Category column.
+Changed System_Preferences > Default_number_of_line_items and System_Preferences > Number_of_taxes_per_line_item dropdown select.
+Save button on top also (eg. Product edit).
+Added extra language descriptions.
+Can specify a price list number for each customer and specify up four different prices for each procduct, and invoice inserts the price (of price list in customer).
+A simple expenses extension for Simple Invoices
