@@ -51,7 +51,8 @@
 
 <div id="si_footer">
 	<div class="si_wrap">
-	    <a href="http://www.simpleinvoices.org">{$LANG.simple_invoices_powered_by}</a>
+	    <a href="http://www.simpleinvoices.org">{if $LANG.simple_invoices_powered_by}{$LANG.simple_invoices_powered_by}{else}{$LANG.powered_by} {$LANG.simple_invoices}{/if}</a> |
+		{$version_name|htmlsafe}
 	</div>
 </div>
 

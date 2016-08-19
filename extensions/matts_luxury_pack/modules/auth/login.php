@@ -156,4 +156,5 @@ if (isset ($_POST['action']) && $_POST['action'] == 'login' && (empty($_POST['us
 
 // No translations for login since user's lang not known as yet
 $smarty->assign("errorMessage",$errorMessage);
+$smarty->assign("version_name",$config->version->name);
 

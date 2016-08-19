@@ -1,5 +1,7 @@
 <?php
 
+$smarty->assign("version_name",$config->version->name);
+
 //include_once './extensions/<THIS NAME>/include/sql_queries.php';	// not active yet...
 
 /*
