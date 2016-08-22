@@ -306,11 +306,21 @@ if ($menu == "true") {
     // If no matching section is found, the file will NOT be instered.
     $my_path = getCustomPath('menu');
     $menutpl = $smarty->fetch($my_path);
-    $lines = array();
-    $sections = array();
-    Funcs::menuSections($menutpl, $lines, $sections);
-    $menutpl = Funcs::mergeMenuSections($ext_names, $lines, $sections);
-error_log("menutpl after[$menutpl]");
+    foreach ($ext_names as $ext_name) {
+        if (file_exists("./extensions/$ext_name/templates/default/menu.tpl")) {
+            $menu_extension = $smarty->fetch("../extensions/$ext_name/templates/default/menu.tpl");
+            if (($pos = stripos($menu_extension, '<!-- BEFORE:')) !== false) {
+                $pos += 12;
+                $end = stripos($menu_extension, ' ', $pos);
+                $len = $end - $pos;
+                $section = substr($menu_extension, $pos, $len);
+                $pattern = "<!-- SECTION:" . $section . " -->";
+                if (($pos = stripos($menutpl, $pattern)) !== false) {
+                    $menutpl = substr($menutpl, 0, $pos - 1) . $menu_extension . substr($menutpl, $pos);
+                }
+            }
+        }
+    }
     echo $menutpl;
 }
 // **********************************************************
