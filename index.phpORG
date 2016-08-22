@@ -8,28 +8,22 @@
 // stop browsing to files directly - all viewing to be handled by index.php
 // if browse not defined then the page will exit
 if (!defined("BROWSE")) define("BROWSE", "browse");
-
 // **********************************************************
 // The include configs and requirements stuff section - START
 // **********************************************************
-
 // Load stuff required before init.php
 require_once "./include/init_pre.php";
-
 // @formatter:off
 $module = isset($_GET['module']) ? filenameEscape($_GET['module']) : null;
 $view   = isset($_GET['view'])   ? filenameEscape($_GET['view'])   : null;
 $action = isset($_GET['case'])   ? filenameEscape($_GET['case'])   : null;
-
 // globals set in the init.php logic
 $databaseBuilt     = false;
 $databasePopulated = false;
 // @formatter:on
-
 // Will be set in the following init.php call to extensions that are enabled.
 $ext_names = array();
 $help_image_path = "./images/common/";
-
 // Note: include/functions.php and include/sql_queries.php loaded by this include.
 require_once "./include/init.php";
 global $smarty,
@@ -40,15 +34,12 @@ global $smarty,
        $config,
        $auth_session,
        $early_exit;
-
 foreach ($ext_names as $ext_name) {
     if (file_exists("./extensions/$ext_name/include/init.php")) {
         require_once ("./extensions/$ext_name/include/init.php");
     }
 }
-
 $smarty->assign("help_image_path", $help_image_path);
-
 // **********************************************************
 // The include configs and requirements stuff section - END
 // **********************************************************
@@ -61,10 +52,8 @@ $smarty->assign("siUrl"    , $siUrl);
 $smarty->assign("LANG"     , $LANG);
 $smarty->assign("enabled"  , array($LANG['disabled'],$LANG['enabled']));
 // @formatter:on
-
 // Menu - hide or show menu
 $menu = (isset($menu) ? $menu : true);
-
 // Check for any unapplied SQL patches when going home
 // TODO - redo this code
 if (($module == "options") && ($view == "database_sqlpatches")) {
@@ -82,7 +71,6 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
         $view == "essential" ? $view = "essential" : $view = "structure";
         $skip_db_patches = true; // do installer
     }
-
     // See if we need to verify patches have been loaded.
     if ($skip_db_patches == false) {
         // If default user or an active session exists, proceed with check.
@@ -116,7 +104,6 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
         }
     }
 }
-
 // Don't include the header if requested file is an invoice template.
 // For print preview etc.. header is not needed
 if (($module == "invoices") && (strstr($view, "template"))) {
@@ -129,14 +116,12 @@ if (($module == "invoices") && (strstr($view, "template"))) {
             $extensionInvoiceTemplateFile++;
         }
     }
-
     // Get the default module path php if their aren't any for enabled extensions.
     if (($extensionInvoiceTemplateFile == 0) && ($my_path = getCustomPath("invoices/template", 'module'))) {
         include_once ($my_path);
     }
     exit(0);
 }
-
 // Check for "api" module or a "xml" or "ajax" "page requeset" (aka view)
 if (strstr($module, "api") || (strstr($view, "xml") || (strstr($view, "ajax")))) {
     $extensionXml = 0;
@@ -152,11 +137,9 @@ if (strstr($module, "api") || (strstr($view, "xml") || (strstr($view, "ajax"))))
     }
     exit(0);
 }
-
 // **********************************************************
 // Prep the page - load the header stuff - START
 // **********************************************************
-
 // To remove the js error due to multiple document.ready.function()
 // in jquery.datePicker.js, jquery.autocomplete.conf.js and jquery.accordian.js
 // without instances in manage pages - Ap.Muthu
@@ -173,9 +156,7 @@ foreach ($ext_names as $ext_name) {
         // @formatter:on
     }
 }
-
 $smarty->assign("extension_jquery_files", $extension_jquery_files);
-
 // Load any hooks that are defined for extensions
 foreach ($ext_names as $ext_name) {
     if (file_exists("./extensions/$ext_name/templates/default/hooks.tpl")) {
@@ -185,7 +166,6 @@ foreach ($ext_names as $ext_name) {
 // Load standard hooks file. Note that any module hooks loaded will not be
 // impacted by loading this file.
 $smarty->$smarty_output("../custom/hooks.tpl");
-
 if (!in_array($module . "_" . $view, $early_exit)) {
     $extensionHeader = 0;
     foreach ($ext_names as $ext_name) {
@@ -194,7 +174,6 @@ if (!in_array($module . "_" . $view, $early_exit)) {
             $extensionHeader++;
         }
     }
-
     if ($extensionHeader == 0) {
         $my_path = getCustomPath('header');
         $smarty->$smarty_output($my_path);
@@ -203,7 +182,6 @@ if (!in_array($module . "_" . $view, $early_exit)) {
 // **********************************************************
 // Prep the page - load the header stuff - END
 // **********************************************************
-
 // **********************************************************
 // Include php file for the requested page section - START
 // **********************************************************
@@ -218,7 +196,6 @@ if (!in_array($module . "_" . $view, $early_exit)) {
 // to include the past_due_report extension's index.tpl file.
 $extension_php_insert_files = array();
 if ($extension_php_insert_files) {} // Show variable as used.
-
 $perform_extension_php_insertions = (($module == 'system_defaults' && $view == 'edit'));
 $extensionPhpFile = 0;
 foreach ($ext_names as $ext_name) {
@@ -246,11 +223,9 @@ if ($extensionPhpFile == 0 && ($my_path = getCustomPath("$module/$view", 'module
 // **********************************************************
 // Include php file for the requested page section - END
 // **********************************************************
-
 if ($module == "export" || $view == "export" || $module == "api") {
     exit(0);
 }
-
 // **********************************************************
 // Post load javascript files - START
 // NOTE: This is loaded after the .php file so that it can
@@ -261,7 +236,6 @@ foreach ($ext_names as $ext_name) {
         $smarty->$smarty_output("../extensions/$ext_name/include/jquery/$ext_name.post_load.jquery.ext.js.tpl");
     }
 }
-
 // NOTE: Don't load the default file if we are processing an authentication "auth" request.
 // if ($extensionPostLoadJquery == 0 && $module != 'auth') {
 if ($module != 'auth') {
@@ -270,7 +244,6 @@ if ($module != 'auth') {
 // **********************************************************
 // Post load javascript files - END
 // **********************************************************
-
 // **********************************************************
 // Main: Custom menu - START
 // **********************************************************
@@ -305,59 +278,27 @@ if ($menu == "true") {
     //
     // If no matching section is found, the file will NOT be instered.
     $my_path = getCustomPath('menu');
-    $menutpl = $smarty->fetch($my_path);	// read original menu
-	$menuSections = explode ("<!-- SECTION:", $menutpl);	// divide menu tpl into sections
-	$newMenuHead = array_shift ($menuSections);	// remove head and store for later
-	$newMenu = array();	// create new array
-	foreach ($menuSections as $menuSection) {	// each section of menu tpl 
-		$matches = explode (" -->", $menuSection, 2);
-		if (strtoupper($matches[0]) != "END")	// ignore section:end
-			$newMenu[$matches[0]] = $matches[1];	// put each section into new array
-	}
-    foreach ($ext_names as $ext_name) {	// each extension
-		if (file_exists("./extensions/$ext_name/templates/default/menu.tpl"))
-		{
-			$menu_extension = $smarty->fetch("../extensions/$ext_name/templates/default/menu.tpl");	// grab ext menu.tpl
-			$exploded = explode ("<!-- SECTION:", $menu_extension);	// separate this ext menu tpl into sections
-			$menuPart0 = array_shift ($exploded);	// store & erase first element
-			foreach ($exploded as $part) {	// each section to be inserted
-				$temp = explode(':', $part);
-				$menuAction = $temp[0];	// <!-- section:<THIS>:~ -->~
-				$temp = explode (' -->', $temp[1]);
-				$sectionName = $temp[0];	// <!-- section:<action>:<THIS> -->~
-				$sectionContents = $temp[1];	// <!-- section:<action>:<name> --><THIS>
-				switch (strtoupper ($menuAction)) {
-					case 'AFTER':
-						$newMenu[$sectionName] = $newMenu[$sectionName] . $sectionContents;	// append
-						break;
-					case 'NEWHEAD':
-						$newMenuHead = $sectionContents;	// replace head
-						break;
-					case 'BEFORE':
-						$newMenu[$sectionName] = $sectionContents . $newMenu[$sectionName];	// pre-pend
-						break;
-					case 'REPLACE':
-						$newMenu[$sectionName] = $sectionContents;	// replace
-						break;
-					case 'END':
-						break;	// ignore
-				}
-			}
-		}
-	}
-	$menutpl = $newMenuHead;	// begin with new menu head
-	foreach ($menuSections as $menuSection) {	// each section of menu tpl
-		preg_match ("/^(\w+) /", $menuSection, $matches);
-		if (!empty($newMenu[$matches[1]]))
-			$menutpl.= "<!-- SECTION:" . $matches[1] . " -->" . $newMenu[$matches[1]];// . "<!-- SECTION:END -->";
-		else $menutpl.= "<!-- SECTION:" . $menuSection;
-	}
+    $menutpl = $smarty->fetch($my_path);
+    foreach ($ext_names as $ext_name) {
+        if (file_exists("./extensions/$ext_name/templates/default/menu.tpl")) {
+            $menu_extension = $smarty->fetch("../extensions/$ext_name/templates/default/menu.tpl");
+            if (($pos = stripos($menu_extension, '<!-- BEFORE:')) !== false) {
+                $pos += 12;
+                $end = stripos($menu_extension, ' ', $pos);
+                $len = $end - $pos;
+                $section = substr($menu_extension, $pos, $len);
+                $pattern = "<!-- SECTION:" . $section . " -->";
+                if (($pos = stripos($menutpl, $pattern)) !== false) {
+                    $menutpl = substr($menutpl, 0, $pos - 1) . $menu_extension . substr($menutpl, $pos);
+                }
+            }
+        }
+    }
     echo $menutpl;
 }
 // **********************************************************
 // Main: Custom menu - END
 // **********************************************************
-
 // **********************************************************
 // Main: Custom layout - START
 // **********************************************************
@@ -369,7 +310,6 @@ if (!in_array($module . "_" . $view, $early_exit)) {
             $extensionMain++;
         }
     }
-
     if ($extensionMain == "0") {
         $smarty->$smarty_output(getCustomPath('main'));
     }
@@ -377,7 +317,6 @@ if (!in_array($module . "_" . $view, $early_exit)) {
 // **********************************************************
 // Main: Custom layout - END
 // **********************************************************
-
 // **********************************************************
 // Smarty template load - START
 // **********************************************************
@@ -400,7 +339,6 @@ $path = '';
 $extension_insertion_files = array();
 $perform_extension_insertions = (($module == 'reports' && $view == 'index') ||
                  ($module == 'system_defaults' && $view == 'manage'));
-
 foreach ($ext_names as $ext_name) {
     $tpl_file = "./extensions/$ext_name/templates/default/$module/$view.tpl";
     if (file_exists($tpl_file)) {
@@ -442,7 +380,6 @@ foreach ($ext_names as $ext_name) {
         }
     }
 }
-
 // TODO: if more than one extension has a template for the requested file, thats trouble :(
 // This won't happen for reports, standard menu.tpl and system_defaults menu.tpl given
 // changes implimented in this file for them. Similar changes should be implimented for
@@ -459,7 +396,6 @@ $smarty->assign("perform_extension_insertions", $perform_extension_insertions);
 $smarty->assign("path"                        , $path);
 $smarty->$smarty_output($my_tpl_path);
 // @formatter:on
-
 // If no smarty template - add message
 if ($extensionTemplates == 0) {
     error_log("NO TEMPLATE!!! for module[$module] view[$view]");
@@ -467,7 +403,6 @@ if ($extensionTemplates == 0) {
 // **********************************************************
 // Smarty template load - END
 // **********************************************************
-
 // **********************************************************
 // Footer - START
 // **********************************************************
@@ -479,7 +414,6 @@ if (!in_array($module . "_" . $view, $early_exit)) {
             $extensionFooter++;
         }
     }
-
     if ($extensionFooter == 0) {
         $smarty->$smarty_output(getCustomPath('footer'));
     }

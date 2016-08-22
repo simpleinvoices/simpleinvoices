@@ -6,7 +6,7 @@ checkLogin();
 # Deal with op and add some basic sanity checking
 
 $op = !empty( $_POST['op'] ) ? addslashes( $_POST['op'] ) : NULL;
-
+$display_block = "";
 
 #insert invoice_preference
 if (  $op === 'insert_product_value' ) {
