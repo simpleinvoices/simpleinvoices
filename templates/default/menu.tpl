@@ -1,4 +1,3 @@
-
 <div id="si_header">
 {$smarty.capture.hook_topmenu_start}
 {if $smarty.capture.hook_topmenu_section01_replace ne ""}
