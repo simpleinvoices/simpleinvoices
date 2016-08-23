@@ -58,7 +58,8 @@ if ($op === 'edit_customer') {
 }
 
 $smarty -> assign('saved',$saved); 
-$smarty -> assign('last_id',$_POST['last_id']);
+if (isset($_POST['last_id']))
+	$smarty -> assign('last_id',$_POST['last_id']);
 $smarty -> assign('pageActive', 'customer');
 $smarty -> assign('active_tab', '#people');
 ?>

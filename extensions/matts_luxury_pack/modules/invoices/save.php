@@ -48,7 +48,7 @@ if ($_POST['action'] == "insert" ) {
     * 1 = Total Invoices
     */
 
-	if( $type == total_invoice && $saved) {
+	if ($type == "total_invoice" && $saved) {
 
 		$logger->log('Total style invoice created, ID: '.$id, Zend_Log::INFO);
 
@@ -86,7 +86,7 @@ if ($_POST['action'] == "insert" ) {
 		$saved = true;
 	}
 
-	if ($type == total_invoice && $saved) {
+	if ($type == "total_invoice" && $saved) {
 
 		$logger->log('Total style invoice updated, product ID: '.$_POST['products0'], Zend_Log::INFO);
 		$sql = "UPDATE ".TB_PREFIX."products
@@ -122,7 +122,7 @@ if ($_POST['action'] == "insert" ) {
 				//new line item added in edit page
 				if ($_POST["line_item$i"] == "")
 				{
-					insertInvoiceItem ($id, $_POST["quantity$i"], $_POST["products$i"], $i, $_POST["tax_id"][$i], $_POST["description$i"], $_POST["unit_price$i"],$_POST["attribute"][$i]);
+					insertInvoiceItem ($id, $_POST["quantity$i"], $_POST["products$i"], $i, $_POST["tax_id"][$i], $_POST["description$i"], $_POST["unit_price$i"], isset($_POST["attribute"][$i]) ? $_POST["attribute"][$i] : null);
 				}
 				
 				if ($_POST["line_item$i"] != "")

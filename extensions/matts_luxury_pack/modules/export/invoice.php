@@ -51,7 +51,6 @@ class export2
             $this->file_name = 'payment'.$this->id;
         }
 
-
 		//echo "export show data";
 		switch ($this->format)
 		{
@@ -108,9 +107,10 @@ class export2
 	
 	function getData()
 	{
-		//echo "export - get data";
 		global $smarty;
 		global $siUrl;
+		
+		$data = "";
 		
 		switch ($this->module)
 		{
@@ -226,13 +226,13 @@ class export2
             }
 			case "invoice":
 			{
-/**/
+/*
 		global $LANG;
 		if (empty ($LANG['ship_to']))		$LANG['ship_to']		= "Ship To";
 		if (empty ($LANG['deliver_to']))	$LANG['deliver_to']		= "Deliver To";
 		if (empty ($LANG['no_ship_to']))	$LANG['no_ship_to']		= "empty";
 		if (empty ($LANG['pro_invoice']))	$LANG['pro_invoice']	= "Proposed Invoice #";
-/**/			
+*/			
 				$invoiceobj = new invoice();
 				$invoiceobj->domain_id = $this->domain_id;
 				$invoice = $invoiceobj->select($this->id, $this->domain_id);
@@ -251,8 +251,15 @@ class export2
 				$logo = getLogo($biller);
 				$logo = str_replace(" ", "%20", $logo);
 				$invoiceItems = $invoiceobj->getInvoiceItems($this->id, $this->domain_id);
+
+			//global $LANG;
+			//echo $LANG['ship_to'];
+			//echo "export - get data module:".$this->module. 'pref_id='.$invoice['preference_id']. print_r($invoice,true). print_r($preference,true);
+
+				/*Set the template to the default*/
+				$template = $defaults['template'];
 				
-				if ($invoice['preference_id']==5) {
+				if ($invoice['preference_id']==5) {	// only if deliverynote
 				//	$sql = "SELECT * FROM ".TB_PREFIX."invoices WHERE index_id = :inv_id AND id = ".$this->id." AND domain_id = :domain_id";
 					$sql = "SELECT * FROM ".TB_PREFIX."invoices WHERE index_id=".$invoice['index_id']." AND preference_id=1 AND domain_id=".$this->domain_id;
 					$sth = dbQuery($sql);
@@ -261,19 +268,18 @@ class export2
 					$this->id = $master_invoice['id'];
 					$invoiceItems = $invoiceobj->getInvoiceItems($this->id, $this->domain_id);
 				//	$invoice = $invoiceobj->select($this->id, $this->domain_id);
+					$template = "YumaDeliveryNote";
 				}
 				$spc2us_pref = str_replace(" ", "_", $invoice['index_name']);
 				$this->file_name = $spc2us_pref;
 				
 				$customFieldLabels = getCustomFieldLabels($this->domain_id);
 	
-				/*Set the template to the default*/
-/**/
-				if ($preference['pref_id']==5)
-					$template = "YumaDeliveryNote";
-				else
-					$template = $defaults['template'];
-/**/			
+				if (!file_exists("./templates/invoices/${template}/template.tpl")) {
+					echo '<script type="text/javascript">alert("Template Not Found (./templates/invoices/'.$template.'/template.tpl) - Using default")</script>';//'.$template.'
+					// TODO: Add other language support for above message
+					$template = "default";
+				}
 				$templatePath = "./templates/invoices/${template}/template.tpl";
 				$template_path = "../templates/invoices/${template}";
 				$css = $siUrl."/templates/invoices/${template}/style.css";
@@ -285,30 +291,25 @@ class export2
 				 
 				$pageActive = "invoices";
 				$smarty->assign('pageActive', $pageActive);
-				
-				if(file_exists($templatePath)) {
-					//echo "test";
-					$this->assignTemplateLanguage($preference);
 
-					$smarty -> assign('biller',$biller);
-					$smarty -> assign('customer',$customer);
-/**/
-					$smarty -> assign('ship_to_customer',$ship_to_customer);
-/**/
-					$smarty -> assign('invoice',$invoice);
-					$smarty -> assign('invoice_number_of_taxes',$invoice_number_of_taxes);
-					$smarty -> assign('preference',$preference);
-					$smarty -> assign('logo',$logo);
-					$smarty -> assign('template',$template);
-					$smarty -> assign('invoiceItems',$invoiceItems);
-					$smarty -> assign('template_path',$template_path);
-					$smarty -> assign('css',$css);
-					$smarty -> assign('customFieldLabels',$customFieldLabels);					
+				$this->assignTemplateLanguage($preference);
 
-					$data = $smarty -> fetch(".".$templatePath);
-				
-				}
-				
+				$smarty -> assign('biller',$biller);
+				$smarty -> assign('customer',$customer);
+/**/
+				$smarty -> assign('ship_to_customer',$ship_to_customer);
+/**/
+				$smarty -> assign('invoice',$invoice);
+				$smarty -> assign('invoice_number_of_taxes',$invoice_number_of_taxes);
+				$smarty -> assign('preference',$preference);
+				$smarty -> assign('logo',$logo);
+				$smarty -> assign('template',$template);
+				$smarty -> assign('invoiceItems',$invoiceItems);
+				$smarty -> assign('template_path',$template_path);
+				$smarty -> assign('css',$css);
+				$smarty -> assign('customFieldLabels',$customFieldLabels);					
+
+				$data = $smarty -> fetch(".".$templatePath);
 				break;			
 			}
 			case "deliverynote":
@@ -402,4 +403,3 @@ $export -> file_location = 'download';
 $export -> module = 'invoice';
 $export -> id = $invoiceID;
 $export -> execute();
-?>

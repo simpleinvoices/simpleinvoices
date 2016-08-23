@@ -1,6 +1,6 @@
 {*
 /*
-* Script: /simple/extensions/payment_rows_per_page/templates/default/payments/manage.tpl
+* Script: /simple/extensions/ /templates/default/payments/manage.tpl
 * 	 Payments manage template
 *
 *
@@ -15,7 +15,9 @@
 */
 *}
 
-<!--d={$d|htmlsafe}-->
+{assign var=pos value=$smarty.template|strrpos:'/'}
+{assign var=inc value=$smarty.template|substr:0:$pos}
+
 {foreach from=$array item=v key=k}
 	{if $d==$k && $smarty.get.rp==''}
 	<script type="text/javascript">
@@ -47,7 +49,8 @@
 	{else}
         	<table id="manageGrid" style="display:none"></table>
         	{*include file='../modules/payments/manage.js.php' get=$smarty.get*}
-	{include file='../extensions/payment_rows_per_page/templates/default/payments/manage.js.php'}
+{include file=$inc|cat:"/../../../templates/default/payments/manage.js.php"}
+	{*include file='../extensions/payment_rows_per_page/templates/default/payments/manage.js.php'*}
 	{/if}
 
 {elseif $smarty.get.c_id }
@@ -60,7 +63,8 @@
         {else}
 		<table id="manageGrid" style="display:none"></table>
         	{*include file='../modules/payments/manage.js.php' get=$smarty.get*}
-	{include file='../extensions/payment_rows_per_page/templates/default/payments/manage.js.php'}
+{include file=$inc|cat:"/../../../templates/default/payments/manage.js.php"}
+	{*include file='../extensions/payment_rows_per_page/templates/default/payments/manage.js.php'*}
         {/if}
 
 	{else}
@@ -73,7 +77,8 @@
         {else}
         	<table id="manageGrid" style="display:none"></table>
         	{*include file='../modules/payments/manage.js.php' get=$smarty.get*}
-	{include file='../extensions/payment_rows_per_page/templates/default/payments/manage.js.php'}
+{include file=$inc|cat:"/../../../templates/default/payments/manage.js.php"}
+	{*include file='../extensions/payment_rows_per_page/templates/default/payments/manage.js.php'*}
         {/if}
 
 {/if}
