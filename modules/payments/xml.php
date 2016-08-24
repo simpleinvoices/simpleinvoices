@@ -141,7 +141,7 @@ $count = $resultCount[0];
 //echo sql2xml($customers, $count);
 */
 
-	$xml .= "<rows>";
+	$xml  = "<rows>";
 	$xml .= "<page>$page</page>";
 	$xml .= "<total>$count</total>";
 	
