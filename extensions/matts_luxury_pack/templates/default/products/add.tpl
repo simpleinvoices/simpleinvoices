@@ -184,7 +184,7 @@
 	<input type="hidden" name="op" value="insert_product" />
 </form>
 
-<script type="text/javascript" language="JavaScript">
-document.forms['frmpost'].elements['description'].focus();
+<script type="text/javascript">
+	document.forms['frmpost'].elements['description'].focus();
 </script>
 {/if}

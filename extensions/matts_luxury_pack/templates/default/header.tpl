@@ -14,13 +14,30 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="robots" content="noindex, nofollow" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
 {php}
 if (isset($_SERVER['HTTP_USER_AGENT']))
 	if (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== false)
 		header('X-UA-Compatible: IE=edge,chrome=1');
 	else
 		header('X-UA-Compatible: IE=edge');
+if (file_exists ("./extensions/matts_luxury_pack/templates/default/css/main.css"))
+	$link = '	<link rel="stylesheet" type="text/css" href="./extensions/matts_luxury_pack/templates/default/css/main.css" media="all"/>';
+else
+	$link = '	<link rel="stylesheet" type="text/css" href="./templates/default/css/main.css" media="all"/>';
+$link.= "\n";
+if (file_exists ("./extensions/matts_luxury_pack/templates/default/css/print.css"))
+	$link.= '	<link rel="stylesheet" type="text/css" href="./extensions/matts_luxury_pack/templates/default/css/print.css" media="print" />';
+else
+	$link.= '	<link rel="stylesheet" type="text/css" href="./templates/default/css/print.css" media="print" />';
+$link.= "\n<!--[if IE]>\n";
+if (file_exists ("./extensions/matts_luxury_pack/templates/default/css/main_ie.css"))
+	$link.= '	<link rel="stylesheet" type="text/css" href="./extensions/matts_luxury_pack/templates/default/css/main_ie.css" media="all" />';
+else
+	$link.= '	<link rel="stylesheet" type="text/css" href="./templates/default/css/main_ie.css" media="all" />';
+$link.= "\n<![endif]-->";
 {/php}
+
 {strip}
 	{$smarty.capture.hook_head_meta}
 {/strip}
@@ -30,12 +47,8 @@ if (isset($_SERVER['HTTP_USER_AGENT']))
 	<link rel="stylesheet" type="text/css" href="./include/jquery/jquery.plugins.css" title="default" media="screen" />
 	<link rel="stylesheet" type="text/css" href="./include/jquery/rte/rte.css" />	
 	<link rel="stylesheet" type="text/css" href="./include/jquery/cluetip/jquery.cluetip.css" />
-	<link rel="stylesheet" type="text/css" href="./templates/default/css/main.css" media="all"/>
-	<link rel="stylesheet" type="text/css" href="./templates/default/css/print.css" media="print" />
-<!--[if IE]>
-	<link rel="stylesheet" type="text/css" href="./templates/default/css/main_ie.css" media="all" />
-<![endif]-->
-{/literal}{strip}
+{/literal}{php}echo $link;{/php}
+{strip}
 	{$smarty.capture.hook_head_link}
 {/strip}{literal}
 	<script type="text/javascript" src="./include/jquery/jquery-1.2.6.min.js"></script>
