@@ -137,19 +137,29 @@
 				<tr>
 					<th>{$LANG.credit_card_expiry_month}</th>
 					<td>
-						<input
+						<select name="credit_card_expiry_month">
+{foreach from=$cc_months item=mon key=k}
+							<option value="{$k}"{if $k==$smarty.post.credit_card_expiry_month} selected="selected"{/if}>{$mon}</option>
+{/foreach}
+						</select>
+						<!--<input
 							type="text" name="credit_card_expiry_month"
 							value="{$smarty.post.credit_card_expiry_month|htmlsafe}" size="5"
-						 />
+						 />-->
 					</td>
 				</tr>
 				<tr>
 					<th>{$LANG.credit_card_expiry_year}</th>
 					<td>
-						<input
+					<select name="credit_card_expiry_year">
+{foreach from=$cc_years item=year key=k}
+						<option value="{$k}"{if $k==$smarty.post.credit_card_expiry_year} selected="selected"{/if}>{$year}</option>
+{/foreach}
+					</select>
+						<!--<input
 							type="text" name="credit_card_expiry_year"
 							value="{$smarty.post.credit_card_expiry_year|htmlsafe}" size="5"
-						 />
+						 />-->
 					</td>
 				</tr>
 			</table>
@@ -214,17 +224,19 @@
 
 		<div id="section-4" class="fragment">
 			<table>
+			{if $defaults.price_list}
 				<tr>
 					<th>{$LANG.price_list}</th>
 					<td>
 						<select name="price_list">
-							<option value="1"{if $customer.price_list<2 || !$customer.price_list} selected="selected"{/if}>1</option>
-							<option value="2"{if $customer.price_list==2} selected="selected"{/if}>2</option>
-							<option value="3"{if $customer.price_list==3} selected="selected"{/if}>3</option>
-							<option value="4"{if $customer.price_list==4} selected="selected"{/if}>4</option>
+							<option value="0"{if !$customer.price_list} selected="selected"{/if}>1</option>
+							<option value="1"{if $customer.price_list==1} selected="selected"{/if}>2</option>
+							<option value="2"{if $customer.price_list==2} selected="selected"{/if}>3</option>
+							<option value="3"{if $customer.price_list==3} selected="selected"{/if}>4</option>
 						</select>
 					</td>
 				</tr>
+			{/if}
 				<tr>
 					<th>{$LANG.notes}</th>
 					<td><textarea  name="notes" class="editor" rows="8" cols="50">{$smarty.post.notes|outhtml}</textarea></td>

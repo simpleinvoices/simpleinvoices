@@ -3,7 +3,7 @@
 // /simple/extensions/product_add_LxWxH_weight/modules/invoices
 
 $row_id = htmlsafe ($_GET['row']);
-if ($_GET['id'])
+if (isset($_GET['id']) && $_GET['id'])
 {
 	$list = "";
 	$html = "";
@@ -16,8 +16,12 @@ if ($_GET['id'])
 		if (isset ($row) && isset ($row['price_list']) && !empty ($row['price_list']) && $row['price_list']>0)		$list = $row['price_list'];
 	}
 	//sleep(2);
-	$sql = sprintf ("SELECT unit_price$list AS unit_price, default_tax_id, default_tax_id_2, attribute, notes, notes_as_description, show_description FROM ".TB_PREFIX."products WHERE id = %d AND domain_id = %d LIMIT 1", $_GET['id'], $auth_session->domain_id);
+	if (!$list)		$sql1 = "SELECT unit_price";
+	else			$sql1 = "SELECT unit_list_price".($list+1);
+	$sql2 = sprintf (" AS unit_price, default_tax_id, default_tax_id_2, attribute, notes, notes_as_description, show_description FROM ".TB_PREFIX."products WHERE id = %d AND domain_id = %d LIMIT 1", $_GET['id'], $auth_session->domain_id);
+	$sql = $sql1.$sql2;
 	$states = dbQuery ($sql);
+	//$output = $sql;
     $output = '';
 
 	if ($states->rowCount() > 0)
@@ -83,14 +87,14 @@ if ($_GET['id'])
 	//	$output .= $_POST['id'];
 		
 	} else {
-		$output .= '';
+		$output .= 'no such item in db';
 	}
 
 	echo json_encode ($output);
 	
 	exit();
 } else {
-	echo "";
+	echo "empty".print_r($_REQUEST,true);
 }
 
 // Perform teh Queries!

@@ -6,7 +6,6 @@ checkLogin();
 
 $saved = false;
 
-
 error_log ($_POST['name']."  ".$_POST['value']);
 
 //echo $_POST['value']."VAL";
@@ -20,4 +19,3 @@ $smarty->assign("saved", $saved);
 
 $smarty->assign('pageActive', 'system_default');
 $smarty->assign('active_tab', '#setting');
-?>

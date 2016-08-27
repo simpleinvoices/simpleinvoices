@@ -2,6 +2,7 @@
 // /simple/extensions/payment_rows_per_page/modules/payments/manage.php
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
+global $pagerows;
 //TODO - replace get..Payments with simple count - as data is got by xml.php now
 $query = null; $inv_id = null; $c_id = null; $preference = null; $customer = null;
 #if coming from another page where you want to filter by just one invoice
@@ -38,11 +39,7 @@ $smarty -> assign('subPageActive', $subPageActive);
 $smarty -> assign('pageActive', 'payment');
 $smarty -> assign('active_tab', '#money');
 
-/**/
-//	global $smarty;
-	$defaults = getSystemDefaults();
-	$smarty->assign ("d", $defaults['default_nrows']);
-	$smarty->assign ("array", array(5, 10, 15, 20, 25, 30, 35, 50, 100, 500));
+$defaults = getSystemDefaults();
+$smarty->assign ("d", $defaults['default_nrows']);
+$smarty->assign ("array", $pagerows);
 //$smarty -> assign("number_of_payment", npayment());
-/**/
-?>

@@ -20,6 +20,7 @@
 checkLogin();
 
 $customFieldLabel = getCustomFieldLabels();
+global $cc_months, $cc_years;
 
 //if valid then do save
 if (!isset($_POST['name']) || $_POST['name'] != "" ) {
@@ -30,4 +31,5 @@ $smarty -> assign('number_of_customers', ncustomers()['count']);
 $smarty -> assign('pageActive', 'customer');
 $smarty -> assign('subPageActive', 'customer_add');
 $smarty -> assign('active_tab', '#people');
-?>
+$smarty->assign('cc_months', $cc_months);
+$smarty->assign('cc_years', $cc_years);

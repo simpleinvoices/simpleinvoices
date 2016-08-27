@@ -17,12 +17,12 @@
 
 	<div class="si_toolbar si_toolbar_form">
             <button type="submit" class="positive" name="submit" value="{$LANG.save}">
-                <img class="button_img" src="./images/common/tick.png" alt="" />
+                <img class="button_img" src="./images/common/tick.png" alt="tick" />
                 {$LANG.save}
             </button>
 
             <a href="./index.php?module=system_defaults&view=manage" class="negative">
-                <img src="./images/common/cross.png" alt="" />
+                <img src="./images/common/cross.png" alt="cross" />
                 {$LANG.cancel}
             </a>
     </div>

@@ -25,15 +25,8 @@
 
 {else}
 
-{php}
-	global $smarty;
-	$defaults = getSystemDefaults();
-	$smarty->assign ("d", $defaults['default_nrows']);
-	$smarty->assign ("array", array(5, 10, 15, 20, 25, 30, 35, 50, 100, 500));
-{/php}
-<!--d={$d|htmlsafe}-->
 {foreach from=$array item=v key=k}
-	{if $d==$k && $smarty.get.rp==''}
+	{if $defaults.default_nrows==$k && $smarty.get.rp==''}
 	<script type="text/javascript">
 		location.href = './index.php?module=products&view=manage&rp={$v}';
 	</script>

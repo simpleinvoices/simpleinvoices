@@ -12,7 +12,7 @@
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
-
+global $pagerows;
 $pageActive = "invoice";
 
 //$smarty -> assign("number_of_invoices", $myinvoice->numberof());
@@ -29,9 +29,6 @@ $url =  'index.php?module=invoices&view=xml'.$having;
 
 $smarty -> assign('url', $url);
 
-/**/
-	$defaults = getSystemDefaults();
-	$smarty->assign ("d", $defaults['default_nrows']);
-	$smarty->assign ("array", array(5, 10, 15, 20, 25, 30, 35, 50, 100, 500));
-/**/
-
+$defaults = getSystemDefaults();
+$smarty->assign ("d", $defaults['default_nrows']);
+$smarty->assign ("array", $pagerows);

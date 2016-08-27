@@ -1643,7 +1643,6 @@ padding-left;0px;
 
 */
 
-
 #tabs_customer .anchors a {
     background-color:#fff;
     margin-top:2px;
@@ -1673,7 +1672,7 @@ padding-left;0px;
 
 #tabs_customer {
 /*    border-bottom: 0px #efefef solid;*/
-    border-bottom: 1px #efefef solid;
+    /*border-bottom: 1px #efefef solid;*/
 }
 
 .ui-wrapper {
@@ -1754,7 +1753,6 @@ padding-left;0px;
 }
 
 .ui-tabs-nav .ui-tabs-selected a {
-
     position: relative;
     top: 1px;
     margin-top: 0;
@@ -3397,4 +3395,26 @@ div.colCopy.ie div {
     overflow: hidden;
 }
 
+/* mine */
+#section-1, #section-2, #section-3, #section-4, #section-5 {
+	/*background-color: #E9E9DA;*/
+	/*border: 10px solid #E9E9DA;
+	border-left: 50px solid #E9E9DA;
+	border-right: 50px solid #E9E9DA;*/
+	border-radius: 5px;
+	padding-bottom: 15px;
+	padding-top: 15px;
+	box-shadow: inset 50px 10px 10px #E9E9DA, inset -50px -10px 10px #E9E9DA;
+}
+.si_form .ui-tabs-nav .ui-tabs-selected a {
+	border-bottom-color: transparent;/*#E9E9DA;*/
+}
+.si_toolbar .si_toolbar_inform {
+    text-align: center;
+}
+.si_toolbar.modal {
+	padding: 5px;
+	border: 1px solid #eee;/*rgb(204, 204, 204);*/
+	border-radius: 5px;
+}
 /* @end */

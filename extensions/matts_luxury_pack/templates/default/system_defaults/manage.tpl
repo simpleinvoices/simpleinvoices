@@ -1,5 +1,12 @@
 {* This section will be added to the system_defaults manage screen. *}
 		<tr>
+			<th>{$LANG.default_delnote}
+				<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_default_delnote" title="{$LANG.default_delnote}"><img src="./images/common/help-small.png" alt="help" /></a>
+			</th>
+			<td><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=default_delnote'><img src="images/common/edit.png" title="{$LANG.edit}" alt="{$LANG.edit}" /></a></td>
+			<td>{$default_delnote|htmlsafe}</td>
+		</tr>
+		<tr>
 			<th>{$LANG.product_lwhw}
 				<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_product_lwhw" title="{$LANG.product_lwhw}"><img src="./images/common/help-small.png" alt="help" /></a>
 			</th>

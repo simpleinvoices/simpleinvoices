@@ -31,9 +31,8 @@
 		</span>
 	</div>
 
-<!--d={$d|htmlsafe}-->
 {foreach from=$array item=v key=k}
-	{if $d==$k && $smarty.get.rp==''}
+	{if $defaults.default_nrows==$k && $smarty.get.rp==''}
 	<script type="text/javascript">
 		location.href = './index.php?module=invoices&view=manage&rp={$v}';
 	</script>

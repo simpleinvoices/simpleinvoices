@@ -15,7 +15,7 @@ if ($_GET["submit"] == "line_items") {
 /**/
 	jsBegin();
 	jsFormValidationBegin("frmpost");
-	jsValidateifNum("def_num_line_items","Default number of line items");
+	jsValidateifNum("def_num_line_items","{$LANG['def_num_line_items']}");
 	jsFormValidationEnd();
 	jsEnd();
 
@@ -42,23 +42,23 @@ else if ($_GET["submit"] == "def_inv_template") {
 	closedir($handle);
 	sort($files);
 
-	$escaped = htmlsafe($defaults[template]);
+	$escaped = htmlsafe($defaults['template']);
 	$display_block_templates_list = <<<EOD
 	<select name="value">
 EOD;
 
 	$display_block_templates_list .= <<<EOD
-	<option selected value='$escaped' style="font-weight: bold" >$escaped</option>
+		<option selected value='$escaped' style="font-weight: bold" >$escaped</option>
 EOD;
 
-	foreach ( $files as $var )
+	foreach ($files as $var)
 	{
 		$var = htmlsafe($var);
-		$display_block_templates_list .= "<option value='$var' >";
+/*		$display_block_templates_list .= "\t\t<option value='$var' label='$var'>";
 		$display_block_templates_list .= $var;
-		$display_block_templates_list .= "</option>";
+		$display_block_templates_list .= "</option>\n";*/
+		$display_block_templates_list .= "\t\t<option value='$var' label='$var'>$var</option>\n";
 	}
-
 	$display_block_templates_list .= "</select>";
 
 	/*end drop down list section */
@@ -295,6 +295,56 @@ else if ($_GET['submit'] == "product_attributes") {
 	$description = $LANG['product_attributes'];
 	$value = dropDown($array, $defaults[$default]);
 }
+/******************************************************************/
+else if ($_GET["submit"] == "default_delnote") {
+	
+	$default = "template";
+	/*drop down list code for invoice template - only show the folder names in src/invoices/templates*/
+
+	$handle=opendir("./templates/invoices/");
+	while ($template = readdir($handle)) {
+		if ($template != ".." && $template != "." && $template !="logos" && $template !=".svn" && $template !="template.php" && $template !="template.php~" ) {
+			$files[] = $template;
+		}
+	}
+	closedir($handle);
+	sort($files);
+
+	$escaped = htmlsafe($defaults['template']);
+	$display_block_templates_list = <<<EOD
+	<select name="value">
+EOD;
+
+	$display_block_templates_list .= <<<EOD
+	<option selected value='$escaped' style="font-weight: bold" >$escaped</option>
+EOD;
+
+	foreach ( $files as $var )
+	{
+		$var = htmlsafe($var);
+		$display_block_templates_list .= "<option value='$var' >";
+		$display_block_templates_list .= $var;
+		$display_block_templates_list .= "</option>";
+	}
+
+	$display_block_templates_list .= "</select>";
+
+	/*end drop down list section */
+	/*start validataion section */
+
+	jsBegin();
+	jsFormValidationBegin("frmpost");
+//	jsValidateRequired("def_inv_template","{$LANG['default_inv_template']}");
+	jsValidateRequired("def_inv_template","{$LANG['default_delnote']}");
+	jsFormValidationEnd();
+	jsEnd();
+	/*end validataion section */
+
+	$description = $LANG['default_delnote'];
+	
+	$value = $display_block_templates_list;
+	//error_log($value);
+}
 else if ($_GET['submit'] == "product_lwhw") {
 
 	$array = array(0 => $LANG['disabled'], 1=>$LANG['enabled']);
@@ -366,7 +416,7 @@ $smarty->assign('default',$default);
 /**
  * Help function for sorting the language array by name
  */
-function compareNameIndex($a,$b) {
+/*function compareNameIndex($a,$b) {
 	$a = $a->name."";
 	$b = $b->name."";
 	
@@ -374,7 +424,7 @@ function compareNameIndex($a,$b) {
 		return 1;
 	}
 	return -1;
-}
+}*/
 
 $smarty -> assign('pageActive', 'system_default');
 $smarty -> assign('active_tab', '#setting');

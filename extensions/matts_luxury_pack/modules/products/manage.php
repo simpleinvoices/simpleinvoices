@@ -4,6 +4,7 @@
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
+global $pagerows;
 
 //$products = getProducts();
 $sql = "SELECT count(*) AS count FROM ".TB_PREFIX."products WHERE domain_id = :domain_id";
@@ -17,10 +18,9 @@ for($i=0; $cf = $sth->fetch(); $i++) {
 	$cfs[$cf['cf_custom_field']] = $cf['cf_custom_label'];
 }
 $smarty -> assign("cfs", $cfs);
-/**/
 $smarty->assign ("defaults", getSystemDefaults());
 $smarty -> assign("number_of_rows",$number_of_rows);
+$smarty -> assign("array", $pagerows);
 
 $smarty -> assign('pageActive', 'product_manage');
 $smarty -> assign('active_tab', '#product');
-?>

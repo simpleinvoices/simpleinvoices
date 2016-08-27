@@ -75,25 +75,23 @@
 
 {else}
 
-<div class="si_toolbar" style="float: right;">
-	<div class="si_toolbar_form">
-		<button type="submit" class="invoice_save" name="submit" value="{$LANG.save}"><img class="button_img" src="./images/common/tick.png" alt="tick" />{$LANG.save}</button><br />
-	</div>
+<div style="float: right;">
+	<div class="si_toolbar">
+		<div class="si_toolbar_form">
+			<button type="submit" class="invoice_save" name="submit" value="{$LANG.save}"><img class="button_img" src="./images/common/tick.png" alt="tick" />{$LANG.save}</button><br />
+		</div>
 {if $defaults.use_modal}
-	<div class="si_toolbar_inform">
-		<br />{$LANG.Modal}:<br /><br />
-		<a rel="superbox[iframe][1075x600]" href="index.php?module=customers&view=add" class="show-details modal customer_add" title="{$LANG.add_customer}">
-			<img class="button_img" src="./images/common/add.png" alt="add" />{$LANG.add_customer}</a><br /><br />
-{*		<a rel="superbox[iframe][1200x750]" href="extensions/matts_luxury_pack/modules/iframe_customers/add.php" class="show-details modal customer_add" title="{$LANG.add_customer}">
-			<img class="button_img" src="./images/common/add.png" alt="add" />{$LANG.add_customer}</a><br /><br />*}
-{*		<a rel="superbox[ajax][extensions/matts_luxury_pack/modules/iframe_customers/add.php][1000x1100]" href="#" class="show-details modal customer_add" id="modal_customer_add" title="{$LANG.add_customer}"><!--javascript:void(false)-->
-			<img class="button_img" src="./images/common/add.png" alt="add" />{$LANG.add_customer}</a><br /><br />*}
-		<a rel="superbox[iframe][1075x600]" href="index.php?module=products&view=add" class="show-details modal product_add" title="{$LANG.add_product}">
-			<img class="button_img" src="./images/common/add.png" alt="add" />{$LANG.add_product}</a>
-{*		<a rel="superbox[ajax][index.php?module=products&view=add][1075x600]" href="#" class="show-details modal product_add" id="modal_product_add" title="{$LANG.add_product}">
-			<img class="button_img" src="./images/common/add.png" alt="add" />{$LANG.add_product}</a>*}
 	</div>
+	<br /><br /><a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_invoice_Modal" title="{$LANG.Modal}"><img src="./images/common/help-small.png" alt="help" /> {$LANG.Modal}</a>:<br /><br />
+	<div class="si_toolbar modal">
+		<div class="si_toolbar_inform">
+			<a rel="superbox[iframe][1075x600]" href="index.php?module=customers&view=add" class="show-details modal customer_add" title="{$LANG.add_customer}">
+				<img class="button_img" src="./images/common/add.png" alt="add" />{$LANG.add_customer}</a><br /><br />
+			<a rel="superbox[iframe][1075x600]" href="index.php?module=products&view=add" class="show-details modal product_add" title="{$LANG.add_product}">
+				<img class="button_img" src="./images/common/add.png" alt="add" />{$LANG.add_product}</a>
+		</div>
 {/if}
+	</div>
 </div>
 
 <div class="si_invoice_form">

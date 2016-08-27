@@ -1,5 +1,26 @@
 <?php
 
+global $LANG;
+$cc_months = array ();
+$cc_months[] = ($LANG['select'])	? $LANG['select'] 	: "--";
+$cc_months[] = "01 ".(($LANG['jan'])	? $LANG['jan'] 	: "Jan");
+$cc_months[] = "02 ".(($LANG['feb'])	? $LANG['feb'] 	: "Feb");
+$cc_months[] = "03 ".(($LANG['mar'])	? $LANG['mar'] 	: "Mar");
+$cc_months[] = "04 ".(($LANG['apr'])	? $LANG['apr'] 	: "Apr");
+$cc_months[] = "05 ".(($LANG['may'])	? $LANG['may'] 	: "May");
+$cc_months[] = "06 ".(($LANG['jun'])	? $LANG['jun'] 	: "Jun");
+$cc_months[] = "07 ".(($LANG['jul'])	? $LANG['jul'] 	: "Jul");
+$cc_months[] = "08 ".(($LANG['aug'])	? $LANG['aug'] 	: "Aug");
+$cc_months[] = "09 ".(($LANG['sep'])	? $LANG['sep'] 	: "Sep");
+$cc_months[] = "10 ".(($LANG['oct'])	? $LANG['oct'] 	: "Oct");
+$cc_months[] = "11 ".(($LANG['nov'])	? $LANG['nov'] 	: "Nov");
+$cc_months[] = "12 ".(($LANG['dec'])	? $LANG['dec'] 	: "Dec");
+$cc_years = array();
+$cc_years[] = ($LANG['select'])	? $LANG['select'] 	: "--";
+for ($i=0; $i<6; $i++) {
+	$cc_years[] = date("Y")+$i;
+}
+$pagerows = array(5, 10, 15, 20, 25, 30, 35, 50, 100, 500);
 $smarty->assign("version_name",$config->version->name);
 
 //include_once './extensions/<THIS NAME>/include/sql_queries.php';	// not active yet...
