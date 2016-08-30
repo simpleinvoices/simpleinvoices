@@ -57,15 +57,15 @@ switch ($get_val) {
 
     $escaped = htmlsafe($defaults['template']);
     $value   = '<select name="value">' . "\n";
-    $value  .= '  <option selected value="'.$escaped.'" style="font-weight:bold;" >';
+    $value  .= '  <option selected value="'.$escaped.'" style="font-weight:bold;">';
     $value  .= '    '.$escaped;
     $value  .= '  </option>' . "\n";
 
     foreach ($files as $var) {
       $var    = htmlsafe($var);
-      $value .= '  <option value="'.$var.'" >';
+      $value .= '  <option value="'.$var.'">';
       $value .= '    '.$var;
-      $value .= '  </option> . "\n"';
+		$value .= '  </option>' . "\n";
     }
 
     $value .= '</select>' . "\n";

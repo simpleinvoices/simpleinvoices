@@ -305,6 +305,7 @@ if ($menu == "true") {
     //
     // If no matching section is found, the file will NOT be instered.
     $my_path = getCustomPath('menu');
+<<<<<<< HEAD
     $menutpl = $smarty->fetch($my_path);	// read original menu
 	$menuSections = explode ("<!-- SECTION:", $menutpl);	// divide menu tpl into sections
 	$newMenuHead = array_shift ($menuSections);	// remove head and store for later
@@ -352,6 +353,13 @@ if ($menu == "true") {
 			$menutpl.= "<!-- SECTION:" . $matches[1] . " -->" . $newMenu[$matches[1]];// . "<!-- SECTION:END -->";
 		else $menutpl.= "<!-- SECTION:" . $menuSection;
 	}
+=======
+    $menutpl = $smarty->fetch($my_path);
+    $lines = array();
+    $sections = array();
+    Funcs::menuSections($menutpl, $lines, $sections);
+    $menutpl = Funcs::mergeMenuSections($ext_names, $lines, $sections);
+>>>>>>> a213cf0e2a644b6db8702effedf566b14ec250a5
     echo $menutpl;
 }
 // **********************************************************

@@ -1,7 +1,7 @@
 <?php
 
 function jsBegin(){
-  echo "<script Language=\"JavaScript\">\n";
+  echo "<script type=\"text/javascript\">\n";
   echo "<!--\n";
 }
 

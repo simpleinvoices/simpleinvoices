@@ -1,10 +1,28 @@
+{*
+/*
+ * Script: ./extensions/matts_luxury_pack/templates/default/system_defaults/manage.tpl
+ * 	Edit a System Preference
+ *
+ * Authors:
+ *	 yumatechnical@gmail.com
+ *
+ * Last edited:
+ * 	 2016-08-30
+ *
+ * License:
+ *	 GPL v2 or above
+ *
+ * Website:
+ * 	http://www.simpleinvoices.org
+ */
+*}
 {* This section will be added to the system_defaults manage screen. *}
 		<tr>
 			<th>{$LANG.default_delnote}
 				<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_default_delnote" title="{$LANG.default_delnote}"><img src="./images/common/help-small.png" alt="help" /></a>
 			</th>
 			<td><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=default_delnote'><img src="images/common/edit.png" title="{$LANG.edit}" alt="{$LANG.edit}" /></a></td>
-			<td>{$default_delnote|htmlsafe}</td>
+			<td>{$defaults.delnote|htmlsafe}</td>
 		</tr>
 		<tr>
 			<th>{$LANG.product_lwhw}
@@ -21,7 +39,7 @@
 			<td>{$defaultNrows|htmlsafe}</td>
 		</tr>
 		<tr>
-			<th>{$LANG.price_list}
+			<th>{$LANG.price_lists}
 				<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_price_list" title="{$LANG.price_list}"><img src="./images/common/help-small.png" alt="help" /></a>
 			</th>
 			<td><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=price_list'><img src="images/common/edit.png" title="{$LANG.edit}" alt="{$LANG.edit}" /></a></td>

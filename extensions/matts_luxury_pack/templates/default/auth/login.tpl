@@ -4,7 +4,7 @@
 
 <div class="si_wrap">
 
-<form action="" method="post" id="frmLogin" name="frmLogin">
+<form action="./index.php" method="post" id="frmLogin" name="frmLogin">
 	<input type="hidden" name="action" value="login" />	
 	
 	<div class="si_box">
@@ -57,7 +57,7 @@
 </div>
 
 {literal}
-<script language="JavaScript">
+<script type="text/javascript">
 	$(document).ready(function(){
 		$('.si_box').hide();
 		$('.si_box').slideDown(500);

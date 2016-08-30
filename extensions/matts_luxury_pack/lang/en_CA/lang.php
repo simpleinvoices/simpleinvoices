@@ -5,6 +5,7 @@ $MYC_LANG = array(
 	'rows_per_page'		=> "Rows per page",
 	'simple_invoices' 	=> "My Invoicing System",
 	'price_list'		=> "Price list",
+	'price_lists'		=> "Multiple Price Lists",
 	'simple_invoices_powered_by'	=> "Powered by SimpleInvoices",
 	'select'			=> "-select-",
 	'jan'				=> "Jan",
