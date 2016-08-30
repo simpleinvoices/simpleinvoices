@@ -21,16 +21,16 @@ global $smarty, $LANG, $pdoDb, $config;
 global $cc_months, $cc_years, $pagerows;//Matt
 
 // @formatter:off
-/*$pdoDb->addSimpleWhere("domain_id", domain_id::get());
+$pdoDb->addSimpleWhere("domain_id", domain_id::get());
 $pdoDb->addToFunctions("COUNT(*) AS count");
 $rows  = $pdoDb->request("SELECT", "customers");
 $row   = $rows[0];
 $count = $row["count"];
-$smarty->assign('number_of_customers', $count);*/
+$smarty->assign('number_of_customers', $count);
 $smarty->assign('pageActive', 'customer');
 $smarty->assign('active_tab', '#people');
 /**/
-$smarty -> assign('number_of_customers', ncustomers());
+//$smarty -> assign('number_of_customers', ncustomers());
 $smarty->assign ("defaults", getSystemDefaults());
 $smarty->assign ("array", $pagerows);
 $smarty->assign('cc_months', $cc_months);

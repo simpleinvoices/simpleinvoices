@@ -3417,4 +3417,10 @@ div.colCopy.ie div {
 	border: 1px solid #eee;/*rgb(204, 204, 204);*/
 	border-radius: 5px;
 }
+.subnav li a {
+    border-bottom: 3px solid transparent;
+}
+.subnav li a:hover {
+    border-bottom: 3px solid #D54E21;
+}
 /* @end */

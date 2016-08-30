@@ -7,7 +7,7 @@
 *	 yumatechnical@gmail.com
 *
 * Last edited:
-* 	 2016-08-29
+* 	 2016-08-30
 *
 * License:
 *	 GPL v2 or above
@@ -27,7 +27,7 @@ if (!isset($_POST['name']) || $_POST['name'] != "" ) {
 	include("./modules/customers/save.php");
 }
 $smarty -> assign('customFieldLabel',$customFieldLabel);
-$smarty -> assign('number_of_customers', ncustomers()['count']);//Matt
+//$smarty -> assign('number_of_customers', ncustomers()['count']);//Matt
 $smarty -> assign('pageActive', 'customer');
 $smarty -> assign('subPageActive', 'customer_add');
 $smarty -> assign('active_tab', '#people');
