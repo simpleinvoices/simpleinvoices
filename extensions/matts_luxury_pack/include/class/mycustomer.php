@@ -1,8 +1,23 @@
 <?php
+/*
+* Script: ./extensions/matts_luxury_pack/include/class/mycustomer.php
+* 	Customers list XML page
+*
+* Authors:
+*	 yumatechnical@gmail.com
+*
+* Last edited:
+* 	 2016-08-29
+*
+* License:
+*	 GPL v2 or above
+*
+* Website:
+* 	http://www.simpleinvoices.org
+ */
 
-// /simple/extensions/matts_luxury_pack/include/class
-
-class mycustomer extends customer
+/*
+class mycustomer extends Customer
 {
 	public $domain_id;
 	
@@ -11,8 +26,7 @@ class mycustomer extends customer
 		parent::__construct();
 	}
 
-/**/
-	function insert()
+	public static function insert()
 	{
 		$sql = "INSERT INTO ".TB_PREFIX."customers (
 					domain_id, attention, name, street_address, street_address2,
@@ -48,8 +62,7 @@ class mycustomer extends customer
 			':domain_id',$this->domain_id
 		);
 	}
-/**/	
-
+*/
 /*
 	public function sql($type='', $start, $dir, $sort, $rp, $page )
 	{
@@ -138,8 +151,8 @@ class mycustomer extends customer
                         $result = dbQuery($sql, ':domain_id', $auth_session->domain_id, ':query', "%$query%");
                 }
                 return $result;
-	}*/
-}
+	}*//*
+}*/
 
 /**********************************************************/
 
@@ -186,7 +199,7 @@ function update_Customer() {
 		$credit_card_number = $_POST['credit_card_number_new'];
         
         //cc
-        $enc = new encryption();
+        $enc = new Encryption();//encryption();
         $key = $config->encryption->default->key;	
         $encrypted_credit_card_number = $enc->encrypt($key, $credit_card_number);
 
@@ -275,7 +288,7 @@ function insert_Customer() {
 				:custom_field3, :custom_field4, :price_list, :enabled
 			)";
 	//cc
-	$enc = new encryption();
+	$enc = new Encryption();//encryption();
     $key = $config->encryption->default->key;	
 	$encrypted_credit_card_number = $enc->encrypt ($key, $credit_card_number);
 

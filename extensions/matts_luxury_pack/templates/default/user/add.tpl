@@ -44,7 +44,7 @@
 			<td>
 					<select name="role">
 						{foreach from=$roles item=role}
-							<option  value="{$role.id|htmlsafe}">{$role.name|htmlsafe}</option>
+							<option value="{$role.id|htmlsafe}">{$role.name|htmlsafe}</option>
 						{/foreach}
 					</select>
 			</td>

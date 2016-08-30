@@ -1,19 +1,19 @@
 <?php
 /*
- * Script: details.php
- *Biller details page
+ * Script: ./extensions/matts_luxury_pack/modules/user/details.php
+ * 	add a user details page
  *
  * Authors:
- *  Justin Kelly, Nicolas Ruflin
+ *	yumatechnical@gmail.com
  *
  * Last edited:
- *  2007-07-19
+ * 	2016-08-29
  *
  * License:
- *  GPL v2 or above
+ *	GPL v2 or above
  *
  * Website:
- *  http://www.simpleinvoices.org
+ * 	http://www.simpleinvoices.org
  */
 global $smarty, $LANG;
 //stop the direct browsing to this file - let index.php handle which files get displayed
@@ -28,8 +28,8 @@ $smarty->assign('enabled_options', array(0 => $LANG['disabled'], 1 => $LANG['ena
 
 $smarty->assign('user', $user);
 $smarty->assign('roles', $roles);
-$smarty->assign('customers', getActiveCustomers());
-$smarty->assign('billers', getActiveBillers());
+$smarty->assign('customers', getActiveCustomers());//Matt
+$smarty->assign('billers', getActiveBillers());//Matt
 
 $smarty -> assign('pageActive', 'user');
 

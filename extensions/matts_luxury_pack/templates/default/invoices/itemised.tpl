@@ -287,6 +287,7 @@
 
 <script type="text/javascript">
 <!--
+//alert("{$smarty.session.Zend_Auth|@debug_print_var}");//|htmlsafe}");//$smarty.session.Zend_Auth.role_name
 {literal}
 /*
 function init() {

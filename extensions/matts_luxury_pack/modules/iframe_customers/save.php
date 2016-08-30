@@ -21,7 +21,7 @@
 //checkLogin();
 $cwd = getcwd();
 chdir(dirname(__FILE__)."/../../../..");
-require_once("./library/encryption.php");
+//require_once("./library/encryption.php");
 require_once("./include/sql_queries.php");
 
 function update_Customer() {
@@ -66,7 +66,7 @@ $domain_id = $auth_session->domain_id;//	$domain_id = domain_id::get();
 		$credit_card_number = $_POST['credit_card_number_new'];
         
 	        //cc
-        	$enc = new encryption();
+        	$enc = new Encryption();//encryption();
         	$key = $config->encryption->default->key;	
         	$encrypted_credit_card_number = $enc->encrypt($key, $credit_card_number);
 
@@ -152,7 +152,7 @@ $domain_id = $auth_session->domain_id;//	$domain_id = domain_id::get();
 				:custom_field3, :custom_field4, :enabled
 			)";
 	//cc
-	$enc = new encryption();
+	$enc = new Encryption();//encryption();
 	$key = $config->encryption->default->key;	
 	$encrypted_credit_card_number = $enc->encrypt($key, $credit_card_number);
 
@@ -214,22 +214,41 @@ $op = !empty( $_POST['op'] ) ? addslashes( $_POST['op'] ) : NULL;
 
 $saved = false;
 
-if ($op === "insert_customer") {
-
-	if (insert_Customer()) {
-		$saved = true;
-		// saveCustomFieldValues($_POST['categorie'],lastInsertId());
-	}
+$error = false;
+$excludedFields = array("id" => 1);
+// The field is only non-empty if the user entered a value.
+// TODO: A proper entry and confirmation new credit card value.
+if (empty($_POST['credit_card_number'])) {
+    $excludedFields['credit_card_number'] = 1;
+} else {
+    try {
+        $key = $config->encryption->default->key;
+        $enc = new Encryption();
+        $_POST['credit_card_number'] = $enc->encrypt($key, $_POST['credit_card_number']);
+    } catch (Exception $e) {
+        echo '<h1>Unable to encrypt the card number.</h1>';
+        error_log("Unable to encrypt the credit card number. Error reported: " . $e->getMessage());
+        $error = true;
+    }
 }
 
-if ($op === 'edit_customer') {
+if (!$error) {
+	if ($op === "insert_customer") {
 
-	if (isset($_POST['save_customer'])) {
-		
-		if (update_Customer()) {
-
+		if (insert_Customer()) {
 			$saved = true;
-			//updateCustomFieldValues($_POST['categorie'],$_GET['customer']);
+			// saveCustomFieldValues($_POST['categorie'],lastInsertId());
+		}
+		
+	} else if ($op === 'edit_customer' && isset($_POST['save_customer'])) {
+
+		if (isset($_POST['save_customer'])) {
+			
+			if (update_Customer()) {
+
+				$saved = true;
+				//updateCustomFieldValues($_POST['categorie'],$_GET['customer']);
+			}
 		}
 	}
 }

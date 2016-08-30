@@ -14,8 +14,7 @@ foreach($languages as $language) {
 	}
 }
 
-/*$_defaultNrows = array(5, 10, 15, 20, 25, 30, 35, 50, 100, 500);*/
-global $pagerows;
+global $pagerows;//Matt
 
 $sysdefaults = getSystemDefaults();
 function getdefaultNrowsRecord() {
@@ -26,8 +25,8 @@ function getdefaultNrowsRecord() {
 	$sth = dbQuery($record_sql);
 	return $sth->fetch();
 }
-$defaultNrows = getdefaultNrowsRecord();
-$defaultNrows_value = $pagerows[$defaultNrows['value']];/*$_defaultNrows[$defaultNrows['value']];*/
+$defaultNrows = getdefaultNrowsRecord();//Matt
+$defaultNrows_value = $pagerows[$defaultNrows['value']];/*$_defaultNrows[$defaultNrows['value']];*///Matt
 
 $smarty -> assign("defaults", $sysdefaults);
 $smarty -> assign("defaultBiller", getDefaultBiller());
@@ -50,4 +49,3 @@ $smarty -> assign("use_terms", getDefaultGeneric('use_terms'));
 $smarty -> assign("defaultLanguage", $lang);
 $smarty -> assign('pageActive', 'system_default');
 $smarty -> assign('active_tab', '#setting');
-?>

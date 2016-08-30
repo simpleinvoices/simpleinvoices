@@ -11,8 +11,7 @@
 */
 *}
 
-
-{if $number_of_invoices.count == 0}	
+{if $number_of_invoices == 0}
 
 	<div class="si_message">
 		{$LANG.no_invoices}

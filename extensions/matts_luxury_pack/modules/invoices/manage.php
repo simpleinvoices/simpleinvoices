@@ -1,34 +1,44 @@
 <?php
 /*
-* Script: /simple/extensions/invoice_add_display_no/modules/invoices/manage.php
-* 	Manage Invoices page
-*
-* License:
-*	 GPL v2 or above
-*
-* Website:
-* 	http://www.simpleinvoices.org
+ * Script: ./extensions/matts_luxury_pack/modules/invoice/manage.php
+ * 	Manage Invoices page
+ *
+ * Authors:
+ *	 yumatechnical@gmail.com
+ *
+ * Last edited:
+ * 	 2016-08-30
+ *
+ * License:
+ *	 GPL v2 or above
+ *
+ * Website:
+ * 	http://www.simpleinvoices.org
  */
+global $smarty, $pdoDb, $auth_session;
 
-//stop the direct browsing to this file - let index.php handle which files get displayed
+// stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
-global $pagerows;
-$pageActive = "invoice";
+global $cc_months, $cc_years, $pagerows;//Matt
+//$sql = "SELECT count(*) AS count FROM " . TB_PREFIX . "invoices WHERE domain_id = :domain_id";
+//$sth = dbQuery($sql, ':domain_id', domain_id::get());
+//$number_of_invoices = $sth->fetch(PDO::FETCH_ASSOC);
+$pdoDb->setSelectList(array());
+$pdoDb->addSimpleWhere("domain_id", $auth_session->domain_id);
+$pdoDb->addToFunctions("count(id) AS count");
+$rows = $pdoDb->request("SELECT", "invoices");
 
-//$smarty -> assign("number_of_invoices", $myinvoice->numberof());
-$smarty -> assign("number_of_invoices", ninvoices());
-$smarty -> assign('pageActive', $pageActive);
-$smarty -> assign('active_tab', '#money');
+$smarty->assign("number_of_invoices", $rows[0]['count']);
 
-$having="";
-if (isset($_GET['having']))
-{
-    $having = "&having=".$_GET['having'];
+$having = "";
+if (isset($_GET['having'])) {
+    $having = "&having=" . $_GET['having'];
 }
-$url =  'index.php?module=invoices&view=xml'.$having;
+$url = 'index.php?module=invoices&view=xml' . $having;
+$smarty->assign('url', $url);
 
-$smarty -> assign('url', $url);
-
-$defaults = getSystemDefaults();
-$smarty->assign ("d", $defaults['default_nrows']);
+$smarty->assign('pageActive', "invoice");
+$smarty->assign('active_tab', '#money');
+$smarty->assign ("defaults", getSystemDefaults());
 $smarty->assign ("array", $pagerows);
+$smarty->assign('cc_months', $cc_months);

@@ -1,12 +1,20 @@
 {*
-* Script: add.tpl
-* 	 Customers add template
-*
-* Last edited:
-* 	 2008-08-25
-*
-* License:
-*	 GPL v3 or above
+/*
+ * Script: ./extensions/matts_luxury_pack/templates/default/customers/add.tpl
+ * 	Customers add template
+ *
+ * Authors:
+ *	 yumatechnical@gmail.com
+ *
+ * Last edited:
+ * 	 2016-08-30
+ *
+ * License:
+ *	 GPL v2 or above
+ *
+ * Website:
+ * 	http://www.simpleinvoices.org
+ */
 *}
 
 {* if customer is updated or saved.*} 
@@ -117,7 +125,16 @@
 		<div id="section-2" class="fragment">
 			<table>
 				<tr>
-					<th>{$LANG.credit_card_holder_name}</th>
+					<th>{$LANG.credit_card_holder_name}
+						<a
+							class="cluetip"
+							href="#"
+							rel="index.php?module=documentation&amp;view=view&amp;page=help_credit_card_name"
+							title="{$LANG.credit_card_holder_name}"
+						> 
+						<img src="./images/common/help-small.png" alt="help" />
+						</a>
+					</th>
 					<td>
 						<input
 							type="text" name="credit_card_holder_name"
@@ -126,7 +143,16 @@
 					</td>
 				</tr>
 				<tr>
-					<th>{$LANG.credit_card_number}</th>
+					<th>{$LANG.credit_card_number}
+						<a
+							class="cluetip"
+							href="#"
+							rel="index.php?module=documentation&amp;view=view&amp;page=help_credit_card_number"
+							title="{$LANG.credit_card_number}"
+						> 
+						<img src="./images/common/help-small.png" alt="help" />
+						</a>
+					</th>
 					<td>
 						<input
 							type="text" name="credit_card_number"
@@ -135,7 +161,29 @@
 					</td>
 				</tr>
 				<tr>
-					<th>{$LANG.credit_card_expiry_month}</th>
+					<th>{$LANG.credit_card_cvc}
+						<a
+							class="cluetip"
+							href="#"
+							rel="index.php?module=documentation&amp;view=view&amp;page=help_credit_card_cvc"
+							title="{$LANG.credit_card_cvc}"
+						> 
+						<img src="./images/common/help-small.png" alt="help" />
+						</a>
+					</th>
+					<td><input type="text" name="credit_card_cvc" value"{$smarty.post.credit_card_cvc|htmlsafe}" size="25" /></td>
+				</tr>
+				<tr>
+					<th>{$LANG.credit_card_expiry_month}
+						<a
+							class="cluetip"
+							href="#"
+							rel="index.php?module=documentation&amp;view=view&amp;page=help_credit_card_expiry_month"
+							title="{$LANG.credit_card_expiry_month}"
+						> 
+							<img src="./images/common/help-small.png" alt="help" />
+						</a>
+					</th>
 					<td>
 						<select name="credit_card_expiry_month">
 {foreach from=$cc_months item=mon key=k}
@@ -149,13 +197,22 @@
 					</td>
 				</tr>
 				<tr>
-					<th>{$LANG.credit_card_expiry_year}</th>
+					<th>{$LANG.credit_card_expiry_year}
+						<a
+							class="cluetip"
+							href="#"
+							rel="index.php?module=documentation&amp;view=view&amp;page=help_credit_card_expiry_year"
+							title="{$LANG.credit_card_expiry_year}"
+						> 
+							<img src="./images/common/help-small.png" alt="help" />
+						</a>
+					</th>
 					<td>
-					<select name="credit_card_expiry_year">
+						<select name="credit_card_expiry_year">
 {foreach from=$cc_years item=year key=k}
-						<option value="{$k}"{if $k==$smarty.post.credit_card_expiry_year} selected="selected"{/if}>{$year}</option>
+							<option value="{$k}"{if $k==$smarty.post.credit_card_expiry_year} selected="selected"{/if}>{$year}</option>
 {/foreach}
-					</select>
+						</select>
 						<!--<input
 							type="text" name="credit_card_expiry_year"
 							value="{$smarty.post.credit_card_expiry_year|htmlsafe}" size="5"

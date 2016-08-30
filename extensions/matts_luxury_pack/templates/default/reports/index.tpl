@@ -1,3 +1,4 @@
+{*
 <div class="si_index si_index_reports">
   {assign var=before value='BEFORE '}
   {if $perform_extension_insertions == true}
@@ -156,7 +157,7 @@
     </a>
     <a href="index.php?module=reports&view=report_biller_by_customer" class="">
       <img src="./images/famfam/user_suit.png" alt="" />
-      {$LANG.biller_sales_by_customer_totals} {* TODO change this - remove total *}
+      {$LANG.biller_sales_by_customer_totals} { * TODO change this - remove total * }
     </a>
     {if $perform_extension_insertions == true}
       {section name=idx loop=$extension_insertion_files}
@@ -230,3 +231,4 @@
     {/if}
   </div>
 </div>
+*}

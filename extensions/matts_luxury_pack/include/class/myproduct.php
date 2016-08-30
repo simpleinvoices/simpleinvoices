@@ -1,15 +1,29 @@
 <?php
+/*
+* Script: ./extensions/matts_luxury_pack/include/class/myproduct.php
+* 	Customers list XML page
+*
+* Authors:
+*	 yumatechnical@gmail.com
+*
+* Last edited:
+* 	 2016-08-29
+*
+* License:
+*	 GPL v2 or above
+*
+* Website:
+* 	http://www.simpleinvoices.org
+ */
 
-// /simple/extensions/matts_luxury_pack/include/class
-
-class myproduct extends product
+class myproduct extends Product
 {
 	public $domain_id;
 	public $defaults;
 	
 	public function __construct()
 	{
-		parent::__construct();
+		//parent::__construct();
 		$this->defaults = getSystemDefaults();
 		$this->domain_id = isset($domain_id) ? domain_id::get($domain_id) : 1;
 	}
@@ -93,10 +107,10 @@ class myproduct extends product
 			':domain_id',			$domain_id,	
 			':description', 		$_POST['description'],
 			':unit_price', 			$_POST['unit_price'],
-			':unit_price_list2', 		$_POST['unit_price_list2'],
-			':unit_price_list3', 		$_POST['unit_price_list3'],
-			':unit_price_list4', 		$_POST['unit_price_list4'],
-			':cost', 			$_POST['cost'],
+			':unit_list_price2', 	$_POST['unit_list_price2'],
+			':unit_list_price3', 	$_POST['unit_list_price3'],
+			':unit_list_price4', 	$_POST['unit_list_price4'],
+			':cost', 				$_POST['cost'],
 			':reorder_level', 		$_POST['reorder_level'],
 			':custom_field1', 		$_POST['custom_field1'],
 			':custom_field2', 		$_POST['custom_field2'],
@@ -179,8 +193,8 @@ class myproduct extends product
 		);
 	}
 
-/*
-	public function insertComplete($enabled=1, $visible=1, $description, $unit_price, $custom_field1=NULL, $custom_field2, $custom_field3, $custom_field4, $weight, $length, $width, $height, $notes, $unit_price_list2, $unit_price_list3, $unit_price_list4, $domain_id='')
+/* CHANGE unit_list_price *
+	public function insertComplete($enabled=1, $visible=1, $description, $unit_price, $custom_field1=NULL, $custom_field2, $custom_field3, $custom_field4, $weight, $length, $width, $height, $notes, $unit_list_price2, $unit_list_price3, $unit_list_price4, $domain_id='')
 	{
 		$sql = "INSERT into
 		".TB_PREFIX."products (
@@ -195,7 +209,7 @@ class myproduct extends product
 		$sql.= ", notes, 
 				enabled, 
 				visible";
-		if ($defaults['price_list'])		$sql.= ", unit_price_list2, unit_price_list3, unit_price_list4";
+		if ($defaults['price_list'])		$sql.= ", unit_list_price2, unit_list_price3, unit_list_price4";
 		$sql.= ") VALUES (	
 				:domain_id,
 				:description,

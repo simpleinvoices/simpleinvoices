@@ -1,4 +1,5 @@
-<!-- SECTION:BEFORE:customers -->
+<!-- ./extensions/matts_luxury_pack/templates/default -->
+<!-- SECTION:AFTER:customers -->
 			<li><a{if $pageActive == "customer_add"} class="active"{/if} href="index.php?module=customers&amp;view=add">{$LANG.add_customer}</a></li>
 <!-- SECTION:END:customers -->
 <!-- SECTION:REPLACE:add_product -->

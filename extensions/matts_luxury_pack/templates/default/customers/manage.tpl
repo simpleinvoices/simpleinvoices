@@ -1,14 +1,20 @@
 {*
 /*
-* Script: extensions/customer_add_tabbed/templates/default/customers/manage.tpl
-* 	 Customer manage template
-*
-* License:
-*	 GPL v3 or above
-*
-* Website:
-*	http://www.simpleinvoices.org
-*/
+ * Script: ./extensions/matts_luxury_pack/templates/default/customers/manage.tpl
+ * 	Customer manage template
+ *
+ * Authors:
+ *	 yumatechnical@gmail.com
+ *
+ * Last edited:
+ * 	 2016-08-30
+ *
+ * License:
+ *	 GPL v2 or above
+ *
+ * Website:
+ * 	http://www.simpleinvoices.org
+ */
 *}
 
 	<div class="si_toolbar si_toolbar_top">
@@ -17,7 +23,7 @@
                 {$LANG.customer_add}
             </a>
  
-{if $number_of_customers.count == 0}
+{if $number_of_customers == 0}
 		</div>
 		<div class="si_message">
 			{$LANG.no_customers}

@@ -1,6 +1,20 @@
 <?php
-
-// /simple/extensions/matts_luxury_pack/modules/iframe_customers/add.php
+/*
+ * Script: ./extensions/matts_luxury_pack/modules/iframe_customers/add.php
+ * 	payment grid page
+ *
+ * Authors:
+ *	yumatechnical@gmail.com
+ *
+ * Last edited:
+ * 	2016-08-29
+ *
+ * License:
+ *	GPL v2 or above
+ *
+ * Website:
+ * 	http://www.simpleinvoices.org
+ */
 
 if (!defined("BROWSE"))		define("BROWSE","browse");
 
@@ -30,11 +44,6 @@ if (file_exists(dirname(__FILE__)."/../../templates/default/main.tpl"))
 else
 	$smarty -> display(dirname(__FILE__)."/../../../../templates/default/main.tpl");
 
-//$smarty -> display("./templates/default/iframe_customers/add.tpl");
-//$smarty -> display("../templates/default/iframe_customers/add.tpl");
-//$smarty -> display("../../templates/default/iframe_customers/add.tpl");
-//$smarty -> display("../../../templates/default/iframe_customers/add.tpl");
-//$smarty -> display("../../../../templates/default/iframe_customers/add.tpl");
 $smarty -> display(dirname(__FILE__)."/../../templates/default/iframe_customers/add.tpl");
 chdir($cwd);
 

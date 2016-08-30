@@ -2,7 +2,7 @@
 {assign var=myroot value=$smarty.template|substr:1:$mypos-1}
 
 {capture name="hook_head_end"}
-{$smarty.capture.hook_head_end}
+{*$smarty.capture.hook_head_end*}
 {if $defaults.use_modal}
 <!-- hook_head_end_add_superbox : {$LANG.Modal} -->{literal}
 	<link rel="stylesheet" href="{/literal}{$myroot|cat:"/../../include/jquery/jquery.superbox.css"}{literal}" type="text/css" media="all" />

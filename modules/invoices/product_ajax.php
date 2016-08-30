@@ -1,10 +1,48 @@
 <?php
+/*
+ * Script: ./extensions/matts_luxury_pack/modules/invoice/product_ajax.php
+ * 	New invoice get product details via ajax
+ *
+ * Authors:
+ *	yumatechnical@gmail.com
+ *
+ * Last edited:
+ * 	2016-08-29
+ *
+ * License:
+ *	GPL v2 or above
+ *
+ * Website:
+ * 	http://www.simpleinvoices.org
+ */
 global $pdoDb, $auth_session;
 
 $row_id = htmlsafe($_GET['row']);
 $id = $_GET['id'];
 if (!empty($id)) {
     $output = array();
+	/**/
+	if (isset($_GET['cid']) && $_GET['cid'])
+	{
+		$pdoDb->addSimpleWhere("id", $_GET['cid'], "AND");
+		$pdoDb->addSimpleWhere("domain_id", $auth_session->domain_id);
+		$pdoDb->setLimit(1);
+		$row = $pdoDb->request("SELECT", "products");
+/*		$sql = sprintf ("SELECT * FROM ".TB_PREFIX."customers WHERE id = %d AND domain_id = %d LIMIT 1", $_GET['cid'], $auth_session->domain_id);
+//		echo "<script>alert('sql 1=$sql')</script>";
+		$sth = dbQuery ($sql);
+		$row = $sth->fetch();
+*/		if (isset ($row) && isset ($row['price_list']) && !empty ($row['price_list']) && $row['price_list']>0)		$list = $row['price_list'];
+	}
+	//sleep(2);
+	if (!$list)		$sql1 = "SELECT unit_price";
+	else			$sql1 = "SELECT unit_list_price".($list+1);
+	$sql2 = sprintf (" AS unit_price, default_tax_id, default_tax_id_2, attribute, notes, notes_as_description, show_description FROM ".TB_PREFIX."products WHERE id = %d AND domain_id = %d LIMIT 1", $_GET['id'], $auth_session->domain_id);
+	$sql = $sql1.$sql2;
+	$states = dbQuery ($sql);
+	//$output = $sql;
+    $output = '';
+	/**/
     $pdoDb->addSimpleWhere("id", $id, "AND");
     $pdoDb->addSimpleWhere("domain_id", $auth_session->domain_id);
     $pdoDb->setLimit(1);

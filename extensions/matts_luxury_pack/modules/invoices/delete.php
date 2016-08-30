@@ -1,20 +1,20 @@
 <?php
 /*
-* Script: delete.php
+* Script: ./extensions/matts_luxury_pack/modules/invoice/delete.php
 * 	Do the deletion of an invoice page
 *
 * Authors:
-*	 Justin Kelly, Nicolas Ruflin
+*	 yumatechnical@gmail.com
 *
 * Last edited:
-* 	 2007-07-27
+* 	 2016-08-29
 *
 * License:
 *	 GPL v2 or above
 *
 * Website:
 * 	http://www.simpleinvoices.org
-*/
+ */
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
@@ -39,37 +39,38 @@ if ( $defaults['delete'] == 'N' ) {
 	die('Invoice deletion has been disabled, you are not supposed to be here');
 }
 
-if ( ($_GET['stage'] == 2 ) AND ($_POST['doDelete'] == 'y') ) {
+
+if ( ($_GET['stage'] == 2 ) && ($_POST['doDelete'] == 'y') ) {
 	global $dbh;
 
 	$dbh->beginTransaction();
 	$error = false;
 
-	//delete line item taxes
+    //delete line item taxes
 	$invoiceobj = new invoice();
-	$invoice_line_items = $invoiceobj->getInvoiceItems($invoice_id);
+    $invoice_line_items = $invoiceobj->getInvoiceItems($invoice_id);
 
-	foreach ($invoice_line_items as $key => $value)
-	{
-		//echo "line item id: ".$invoice_line_items[$key]['id']."<br />";
-		delete('invoice_item_tax', 'invoice_item_id', $invoice_line_items[$key]['id']);
-	}
+    foreach( $invoice_line_items as $key => $value)
+    {
+            //echo "line item id: ".$invoice_line_items[$key]['id']."<br />";
+            delete('invoice_item_tax','invoice_item_id',$invoice_line_items[$key]['id']);
+    }
 
 	// Start by deleting the line items
-	if (! delete('invoice_items', 'invoice_id', $invoice_id)) {
+	if (! delete('invoice_items','invoice_id',$invoice_id)) {
 		$error = true;
 	}
 
 	//delete products from products table for total style
 	if ($invoice['type_id'] == 1) 
 	{
-		if ($error || ! delete('products', 'id', $invoiceItems['0']['product']['id'])) {
+		if ($error || ! delete('products','id',$invoiceItems['0']['product']['id'])) {
 			$error = true;
 		}
 	}
 
 	//delete the info from the invoice table
-	if ($error || ! delete('invoices', 'id', $invoice_id)) {
+	if ($error || ! delete('invoices','id',$invoice_id)) {
 		$error = true;
 	} 
 	if ($error) {
@@ -77,13 +78,11 @@ if ( ($_GET['stage'] == 2 ) AND ($_POST['doDelete'] == 'y') ) {
 	} else {
 		$dbh->commit();
 	}
-
-	//if latest invoice reduce index counter??
-
 	//TODO - what about the stuff in the products table for the total style invoices?
 	echo "<meta http-equiv='refresh' content='2;URL=index.php?module=invoices&view=manage' />";
 
 }
+
 $smarty -> assign('pageActive', 'invoice');
 $smarty -> assign('active_tab', '#money');
 ?>

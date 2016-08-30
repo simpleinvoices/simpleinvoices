@@ -32,4 +32,5 @@ $smarty -> assign('pageActive', 'setting');
 $smarty -> assign('active_tab', '#setting');
 $smarty -> assign('subPageActive', 'setting_extensions');
 */
+$smarty -> assign('active_tab', '#setting');
 $smarty -> assign('pageActive', 'setting_extensions');

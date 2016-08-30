@@ -17,6 +17,15 @@ $master_invoice_id = $_GET ['id'];
 $invoice = getInvoice ( $master_invoice_id );
 // @formatter:off
 $invoiceobj   = new invoice ();
+/**/
+if ($invoice['preference_id']==5) {
+	$sql = "SELECT * FROM ".TB_PREFIX."invoices WHERE index_id = :inv_id AND preference_id = 1 AND domain_id = :domain_id";
+	$sth = dbQuery($sql, ':domain_id', $domain_id, ':inv_id', $invoice['index_id']);
+	$master_invoice = $sth->fetch(PDO::FETCH_ASSOC);
+//	echo '<script>alert(":domain_id'. $domain_id. 'master_invoice='. print_r ($master_invoice, true). '")</script>';
+	$master_invoice_id = $master_invoice['id'];
+}
+/**/
 $invoiceItems = $invoiceobj->getInvoiceItems ( $master_invoice_id );
 
 $customers   = getActiveCustomers ();

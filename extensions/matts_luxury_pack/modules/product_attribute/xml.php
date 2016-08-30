@@ -1,4 +1,20 @@
 <?php
+/*
+ * Script: ./extensions/matts_luxury_pack/modules/product_attribute/xml.php
+ * 	product attribute data XML
+ *
+ * Authors:
+ *	yumatechnical@gmail.com
+ *
+ * Last edited:
+ * 	2016-08-29
+ *
+ * License:
+ *	GPL v2 or above
+ *
+ * Website:
+ * 	http://www.simpleinvoices.org
+ */
 header("Content-type: text/xml");
 
 $start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
@@ -92,9 +108,9 @@ foreach ($customers as $row) {
 
 //	$xml .= "<row id='".print_r($row, true)."'>";
 	$xml .= "<row id='".$row['id']."'>";
-	$xml .= "<cell><![CDATA[<a class='index_table' title='$LANG[view] ".$row['name']."' href='index.php?module=product_attribute&view=details&action=view&id=".$row['id']."&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a> <a class='index_table' title='$LANG[edit] ".$row['name']."' href='index.php?module=product_attribute&view=details&action=edit&id=".$row['id']."&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>]]></cell>";
+	$xml .= "<cell><![CDATA[<a class='index_table' title='$LANG[view] ".$row['name']."' href='index.php?module=product_attribute&view=details&action=view&id=".$row['id']."&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a> <a class='index_table' title='$LANG[edit] ".$row['name']."' href='index.php?module=product_attribute&view=details&action=edit&id=".$row['id']."&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>]]></cell>";//Matt
 	$xml .= "<cell><![CDATA[".$row['id']."]]></cell>";		
-	$xml .= "<cell><![CDATA[".utf8_encode($row['name'])."]]></cell>";
+	$xml .= "<cell><![CDATA[".utf8_encode($row['name'])."]]></cell>";//Matt
 	if ($row['enabled']=='1') {
 		$xml .= "<cell><![CDATA[<img src='images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
 	}	

@@ -1,15 +1,20 @@
 <?php
-
 /*
-* Script: /simple/extensions/matts_luxury_pack/modules/invoices/save.php
-* 	Invoice save file
-*
-* License:
-*	 GPL v3 or above
-*	 
-* Website:
-* 	http://www.simpleinvoices.or
-*/
+ * Script: ./extensions/matts_luxury_pack/modules/invoice/save.php
+ * 	Invoice save file
+ *
+ * Authors:
+ *	yumatechnical@gmail.com
+ *
+ * Last edited:
+ * 	2016-08-29
+ *
+ * License:
+ *	GPL v2 or above
+ *
+ * Website:
+ * 	http://www.simpleinvoices.org
+ */
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
@@ -28,18 +33,18 @@ if (!isset ($_POST['type']) && !isset ($_POST['action'])) {
 $saved = false;
 $type = $_POST['type'];
 
-$logger->log('extensions/matts_luxury_pack/modules/invoices/save.php', Zend_Log::INFO);
+$logger->log('extensions/matts_luxury_pack/modules/invoices/save.php', Zend_Log::INFO);//Matt
 $logger->log('action='.$_POST['action'], Zend_Log::INFO);
-$myinvoice = new myinvoice;
+$myinvoice = new myinvoice;//Matt
 
 if ($_POST['action'] == "insert" ) {
 	
-	if ($myinvoice->insertNew($type)) {
+	if ($myinvoice->insertNew($type)) {//Matt
 		$id = lastInsertId();
 		//saveCustomFieldValues($_POST['categorie'],$invoice_id);
 	//echo "insert_DeliveryNote";
-		if (isset($_POST['ship_to_customer_id']) && $_POST['ship_to_customer_id']>0 && $defaults['use_ship_to'])
-			if ($myinvoice->insert_DeliveryNote($type))
+		if (isset($_POST['ship_to_customer_id']) && $_POST['ship_to_customer_id']>0 && $defaults['use_ship_to'])//Matt
+			if ($myinvoice->insert_DeliveryNote($type))//Matt
 				$saved = true;
 		$saved = true;
 	}
@@ -78,10 +83,10 @@ if ($_POST['action'] == "insert" ) {
 	$id = $_POST['id'];
 	$domain_id = isset($domain_id) ? domain_id::get($domain_id) : 1;
 	
-	if ($myinvoice->update($_POST['id'])) {
+	if ($myinvoice->update($_POST['id'])) {//Matt
 		//updateCustomFieldValues($_POST['categorie'],$_POST['invoice_id']);
-		if (isset($_POST['ship_to_customer_id']) && $_POST['ship_to_customer_id']>0 && $defaults['use_ship_to'])
-			if ($myinvoice->update_DeliveryNote($_POST['id']))
+		if (isset($_POST['ship_to_customer_id']) && $_POST['ship_to_customer_id']>0 && $defaults['use_ship_to'])//Matt
+			if ($myinvoice->update_DeliveryNote($_POST['id']))//Matt
 				$saved = true;
 		$saved = true;
 	}

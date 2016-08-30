@@ -5,14 +5,11 @@
 checkLogin();
 
 #system defaults query
-
+global $array0to9;
 $defaults = getSystemDefaults();
 
 if ($_GET["submit"] == "line_items") {
-/**/
-	$array = array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
-	$value = dropDown($array, $defaults['line_items']);
-/**/
+	$value = dropDown($array0to9, $defaults['line_items']);//Matt
 	jsBegin();
 	jsFormValidationBegin("frmpost");
 	jsValidateifNum("def_num_line_items","{$LANG['def_num_line_items']}");
@@ -119,11 +116,9 @@ else if ($_GET["submit"] == "customer") {
 		$display_block_customer = '<select name="value">
                 <option value="0"> </option>';
 
-
 		foreach($customers as $customer) {
 
 			$selected = $customer['id'] == $defaults['customer']?"selected style='font-weight: bold'":"";
-			
 
 			$escaped = htmlsafe($customer['name']);
 			$display_block_customer .= <<<EOD
@@ -203,7 +198,6 @@ EOD;
 else if ($_GET["submit"] == "def_payment_type") {
 
 	$payments = getActivePaymentTypes();
-	
 
 	if ($payments == null) {
 		//no records
@@ -268,10 +262,7 @@ else if($_GET['submit'] == "language") {
 }
 elseif ($_GET["submit"] == "tax_per_line_item") {
 
-/**/
-	$array = array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
-	$value = dropDown($array, $defaults['tax_per_line_item']);
-/**/
+	$value = dropDown($array0to9, $defaults['tax_per_line_item']);//Matt
 	$default = "tax_per_line_item";
 
 	$escaped = htmlsafe($defaults[tax_per_line_item]);
@@ -362,10 +353,10 @@ else if ($_GET['submit'] == "large_dataset") {
 /**/
 else if ($_GET['submit'] == "default_nrows") {
 
-	$array = array(5, 10, 15, 20, 25, 30, 35, 50, 100, 500);
+/*	$array = array(5, 10, 15, 20, 25, 30, 35, 50, 100, 500);*/
 	$default = "default_nrows";
 	$description = $LANG['default_nrows'];
-	$value = dropDown($array, $defaults[$default]);
+	$value = dropDown($pagerows, $defaults[$default]);
 }
 else if ($_GET['submit'] == "price_list") {
 
@@ -412,7 +403,6 @@ $smarty->assign('value',$value);
 $smarty->assign('description',$description);
 $smarty->assign('default',$default);
 
-
 /**
  * Help function for sorting the language array by name
  */
@@ -428,4 +418,3 @@ $smarty->assign('default',$default);
 
 $smarty -> assign('pageActive', 'system_default');
 $smarty -> assign('active_tab', '#setting');
-?>
