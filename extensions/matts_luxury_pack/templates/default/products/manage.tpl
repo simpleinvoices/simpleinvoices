@@ -1,12 +1,20 @@
 {*
 /*
-* Script: /simple/extensions/product_add_LxWxH_weight/templates/default/products/manage.tpl
-* 	 Products manage template
-*
-*
-* License:
-*	 GPL v3 or above
-*/
+ * Script: ./extensions/matts_luxury_pack/templates/default/products/manage.tpl
+ * 	Products manage template
+ *
+ * Authors:
+ *	 yumatechnical@gmail.com
+ *
+ * Last edited:
+ * 	 2016-08-31
+ *
+ * License:
+ *	 GPL v2 or above
+ *
+ * Website:
+ * 	http://www.simpleinvoices.org
+ */
 *}
 	<div class="si_toolbar si_toolbar_top">
 		<a href="./index.php?module=products&view=add" class="">
@@ -25,10 +33,10 @@
 
 {else}
 
-{foreach from=$array item=v key=k}
-	{if $defaults.default_nrows==$k && $smarty.get.rp==''}
+{foreach from=$array item=v}
+	{if $defaults.default_nrows==$v && $smarty.get.rp==''}
 	<script type="text/javascript">
-		location.href = './index.php?module=products&view=manage&rp={$v}';
+		location.href += '&rp={$v}';
 	</script>
 	{/if}
 {/foreach}

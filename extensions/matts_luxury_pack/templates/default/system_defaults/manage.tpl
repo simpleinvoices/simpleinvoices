@@ -36,7 +36,7 @@
 				<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_nrows" title="{$LANG.default_nrows}"><img src="./images/common/help-small.png" alt="help" /></a>
 			</th>
 			<td><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=default_nrows'><img src="images/common/edit.png" title="{$LANG.edit}" alt="{$LANG.edit}" /></a></td>
-			<td>{$defaultNrows|htmlsafe}</td>
+			<td>{$defaults.default_nrows|htmlsafe}</td>
 		</tr>
 		<tr>
 			<th>{$LANG.price_lists}

@@ -1,14 +1,20 @@
 {*
 /*
-* Script: /simple/extensions/invoice_add_display_no/templates/default/invoices/manage.tpl
-* 	 Manage invoices template
-*
-* License:
-*	 GPL v2 or above
-*
-* Website:
-*	http://www.simpleinvoices.org
-*/
+ * Script: ./extensions/matts_luxury_pack/templates/default/invoices/manage.tpl
+ * 	Manage invoices template
+ *
+ * Authors:
+ *	 yumatechnical@gmail.com
+ *
+ * Last edited:
+ * 	 2016-08-31
+ *
+ * License:
+ *	 GPL v2 or above
+ *
+ * Website:
+ * 	http://www.simpleinvoices.org
+ */
 *}
 
 {if $number_of_invoices == 0}
@@ -30,10 +36,10 @@
 		</span>
 	</div>
 
-{foreach from=$array item=v key=k}
-	{if $defaults.default_nrows==$k && $smarty.get.rp==''}
+{foreach from=$array item=v}
+	{if $defaults.default_nrows==$v && $smarty.get.rp==''}
 	<script type="text/javascript">
-		location.href = './index.php?module=invoices&view=manage&rp={$v}';
+		location.href += '&rp={$v}';
 	</script>
 	{/if}
 {/foreach}
@@ -45,7 +51,7 @@
 			<span class="si_filters_title">{$LANG.rows_per_page}:</span>
 			<select id="selectrp" name="rp" onchange="location.href='./index.php?module=invoices&amp;view=manage&amp;rp='+this.value">
 {foreach from=$array item=v key=k}
-				<option value="{$v}"{if $smarty.get.rp==$v || ($smarty.get.rp=='' && $d==$k)} selected="selected"{/if}>{$v}</option>
+				<option value="{$v}"{if $smarty.get.rp==$v || ($smarty.get.rp=='' && $defaults.default_nrows==$v)} selected="selected"{/if}>{$v}</option>
 {/foreach}
 			</select>
 		</span>
@@ -55,7 +61,8 @@
 {assign var=pos value=$smarty.template|strrpos:'/'}
 {assign var=inc value=$smarty.template|substr:0:$pos}
 {*include file=$inc|cat:"/manage.js.tpl"*}
-{include file=$inc|cat:"/../../../modules/invoices/manage.js.mine.php"}
+{*include file=$inc|cat:"/../../../modules/invoices/manage.js.mine.php"*}
+{include file=$inc|cat:"/manage.js.php"}
 {*include file='../extensions/invoice_add_display_no/templates/default/invoices/manage.js.php'*}
 	{*include file='../modules/invoices/manage.js.php'*}
 

@@ -1,12 +1,23 @@
+{*
+/*
+ * Script: ./extensions/matts_luxury_pack/templates/default/customers/manage.js.tpl
+ * 	Customer manage template
+ *
+ * Authors:
+ *	 yumatechnical@gmail.com
+ *
+ * Last edited:
+ * 	 2016-08-31
+ *
+ * License:
+ *	 GPL v2 or above
+ *
+ * Website:
+ * 	http://www.simpleinvoices.org
+ */
+*}
 <script type="text/javascript">
-// /simple/extensions/customer_add_tabbed/templates/default/customers
 
-{*/*
-var view_tooltip ="{/literal}{$LANG.quick_view_tooltip} {ldelim}1{rdelim}{literal}";
-var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pref_inv_wording} {ldelim}1{rdelim}{literal}";
-'<!--0 Quick View --><a class="index_table" href="index.php?module=customers&view=details&id={1}&action=view"> <img src="images/common/view.png" height="16" border="-5px" padding="-4px" valign="bottom" /></a>',
-'<!--1 Edit View --><a class="index_table" href="index.php?module=customers&view=details&id={1}&action=edit"><img src="images/common/edit.png" height="16" border="-5px" padding="-4px" valign="bottom" /><!-- print --></a>',
-*/*}
 	var columns = 8;{*/*7*/*}
 	var padding = 12;
 	var grid_width = $('.col').width();
@@ -50,7 +61,7 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 			pagemsg: '{/literal}{$LANG.page}{literal}',
 			ofmsg: '{/literal}{$LANG.of}{literal}',
 			useRp: false,
-			rp: {/literal}{$smarty.get.rp|default:'15'}{literal},
+			rp: {/literal}{if $smarty.get.rp}{$smarty.get.rp}{elseif $defaults.default_nrows}{$defaults.default_nrows}{else}15{/if}{literal},
 			showToggleBtn: false,
 			showTableToggleBtn: false,
 			height: 'auto'

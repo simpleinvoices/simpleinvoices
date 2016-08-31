@@ -373,7 +373,7 @@ switch ($get_val) {
 		$default 		= $get_val;
 		$description 	= "{$LANG['default_nrows']}";
 		$found 			= true;
-		$value 			= dropDown($pagerows, $defaults[$default]);
+		$value 			= dropDown($pagerows, array_search($defaults[$default], $pagerows));
 		break;
 
 	case "price_list":

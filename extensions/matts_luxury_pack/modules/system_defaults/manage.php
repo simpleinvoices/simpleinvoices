@@ -30,7 +30,7 @@ foreach ($languages as $language) {
 }
 /**/
 global $pagerows;//Matt
-
+/*
 function getdefaultNrowsRecord() {
 	$domain_id = 1;
 	$domain_id = domain_id::get($domain_id);
@@ -41,7 +41,7 @@ function getdefaultNrowsRecord() {
 }
 $defaultNrows = getdefaultNrowsRecord();
 $defaultNrows_value = $pagerows[$defaultNrows['value']];
-/**/
+*//**/
 $defaults = getSystemDefaults();
 $smarty -> assign("defaults", $defaults);
 $smarty -> assign("defaultLanguage", $lang);
@@ -56,7 +56,7 @@ $smarty -> assign("defaultInventory", getDefaultInventory());
 $smarty -> assign("defaultProductAttributes", getDefaultProductAttributes());
 $smarty -> assign("defaultLargeDataset", getDefaultLargeDataset());
 $smarty -> assign("defaultProductLWHW", getDefaultGeneric('product_lwhw'));//Matt
-$smarty -> assign("defaultNrows", $defaultNrows_value);//Matt
+//$smarty -> assign("defaultNrows", getDefaultGeneric('default_nrows'));//$defaultNrows_value);//Matt
 $smarty -> assign("price_list", getDefaultGeneric('price_list'));//Matt
 $smarty -> assign("use_modal", getDefaultGeneric('use_modal'));//Matt
 $smarty -> assign("use_ship_to", getDefaultGeneric('use_ship_to'));//Matt

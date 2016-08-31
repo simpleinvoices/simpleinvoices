@@ -7,7 +7,7 @@
  *	 yumatechnical@gmail.com
  *
  * Last edited:
- * 	 2016-08-30
+ * 	 2016-08-31
  *
  * License:
  *	 GPL v2 or above
@@ -31,11 +31,11 @@
 
 {else}
 
-	{foreach from=$array item=v key=k}
-		{if $defaults.default_nrows==$k && $smarty.get.rp==''}
-	<script type="text/javascript">
-		location.href = './index.php?module=customers&view=manage&rp={$v}';
-	</script>
+	{foreach from=$array item=v}
+		{if $defaults.default_nrows==$v && $smarty.get.rp==''}
+		<script type="text/javascript">
+			location.href += '&rp={$v}';
+		</script>
 		{/if}
 	{/foreach}
 

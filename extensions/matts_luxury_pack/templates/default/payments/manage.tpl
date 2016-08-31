@@ -1,27 +1,26 @@
 {*
 /*
-* Script: /simple/extensions/ /templates/default/payments/manage.tpl
-* 	 Payments manage template
-*
-*
-* Last edited:
-* 	 2008-09-01
-*
-* License:
-*	 GPL v3 or above
-*
-* Website:
-*	http://www.simpleinvoices.org
-*/
+ * Script: /simple/extensions/matts_luxury_pack/templates/default/payments/manage.tpl
+ * 	 Payments manage template
+ *
+ * Last edited:
+ * 	 2008-09-01
+ *
+ * License:
+ *	 GPL v3 or above
+ *
+ * Website:
+ *	http://www.simpleinvoices.org
+ */
 *}
 
 {assign var=pos value=$smarty.template|strrpos:'/'}
 {assign var=inc value=$smarty.template|substr:0:$pos}
 
-{foreach from=$array item=v key=k}
-	{if $defaults.default_nrows==$k && $smarty.get.rp==''}
+{foreach from=$array item=v}
+	{if $defaults.default_nrows==$v && $smarty.get.rp==''}
 	<script type="text/javascript">
-		location.href='./index.php?module=payments&view=manage&rp={$v}';
+		location.href += '&rp={$v}';
 	</script>
 	{/if}
 {/foreach}
