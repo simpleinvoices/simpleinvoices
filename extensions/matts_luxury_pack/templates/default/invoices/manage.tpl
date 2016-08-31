@@ -36,20 +36,21 @@
 		</span>
 	</div>
 
-{foreach from=$array item=v}
+{*foreach from=$array item=v}
 	{if $defaults.default_nrows==$v && $smarty.get.rp==''}
 	<script type="text/javascript">
-		location.href += '&rp={$v}';
+		if (/=manage/.test(window.location.href))
+			location.href += '&rp={$v}';
 	</script>
 	{/if}
-{/foreach}
+{/foreach*}
 
 	<div class="si_toolbar si_toolbar_top si_toolbar_top_left">
 		<a href="index.php?module=invoices&amp;view=itemised"><img src="./images/common/add.png" alt="add" />{$LANG.new_invoice}</a>
 
 		<span style="float: right;">
 			<span class="si_filters_title">{$LANG.rows_per_page}:</span>
-			<select id="selectrp" name="rp" onchange="location.href='./index.php?module=invoices&amp;view=manage&amp;rp='+this.value">
+			<select id="selectrp" name="rp" onchange="location.href+='&amp;rp='+this.value">{*./index.php?module=invoices&amp;view=manage*}
 {foreach from=$array item=v key=k}
 				<option value="{$v}"{if $smarty.get.rp==$v || ($smarty.get.rp=='' && $defaults.default_nrows==$v)} selected="selected"{/if}>{$v}</option>
 {/foreach}

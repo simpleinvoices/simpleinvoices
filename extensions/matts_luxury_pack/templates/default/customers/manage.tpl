@@ -31,19 +31,19 @@
 
 {else}
 
-	{foreach from=$array item=v}
+	{*foreach from=$array item=v}
 		{if $defaults.default_nrows==$v && $smarty.get.rp==''}
 		<script type="text/javascript">
 			location.href += '&rp={$v}';
 		</script>
 		{/if}
-	{/foreach}
+	{/foreach*}
 
 		<span style="float: right;">
 			<span class="si_filters_title">{$LANG.rows_per_page}:</span>
-			<select id="selectrp" name="rp" onchange="location.href='./index.php?module=customers&amp;view=manage&amp;rp='+this.value">
-	{foreach from=$array item=v key=k}
-				<option value="{$v}"{if $smarty.get.rp==$v || ($smarty.get.rp=='' && $defaults.default_nrows==$k)} selected="selected"{/if}>{$v}</option>
+			<select id="selectrp" name="rp" onchange="location.href+='&amp;rp='+this.value">{*./index.php?module=customers&amp;view=manage*}
+	{foreach from=$array item=v}
+				<option value="{$v}"{if $smarty.get.rp==$v || ($smarty.get.rp=='' && $defaults.default_nrows==$v)} selected="selected"{/if}>{$v}</option>
 	{/foreach}
 			</select>
 		</span>

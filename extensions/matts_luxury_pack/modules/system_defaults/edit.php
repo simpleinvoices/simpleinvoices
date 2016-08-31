@@ -373,7 +373,18 @@ switch ($get_val) {
 		$default 		= $get_val;
 		$description 	= "{$LANG['default_nrows']}";
 		$found 			= true;
-		$value 			= dropDown($pagerows, array_search($defaults[$default], $pagerows));
+		$value 			= '<select name="value">' . "\n";
+		$temp 			= $defaults[$default];
+		foreach ($pagerows as $v) {
+			// @formatter:off
+			$value 		.= '	<option value="' . htmlsafe($v) . '"' .
+									($v == $temp ? ' selected="selected" style="font-weight: bold">' : '>') .
+									htmlsafe($v) . '</option>' . "\n";
+			// @formatter:on
+		}
+		$value 			.= "</select>\n";
+
+
 		break;
 
 	case "price_list":

@@ -17,22 +17,23 @@
 {assign var=pos value=$smarty.template|strrpos:'/'}
 {assign var=inc value=$smarty.template|substr:0:$pos}
 
-{foreach from=$array item=v}
+{*foreach from=$array item=v}
 	{if $defaults.default_nrows==$v && $smarty.get.rp==''}
 	<script type="text/javascript">
-		location.href += '&rp={$v}';
+		if (/=manage/.test(window.location.href))
+			location.href += '&rp={$v}';
 	</script>
 	{/if}
-{/foreach}
+{/foreach*}
 
 	<div class="si_toolbar si_toolbar_top">
 		<a href="./index.php?module=payments&amp;view=process&amp;op=pay_invoice" class="process"><img src="./images/famfam/add.png" alt="add"/>{$LANG.process_payment}</a>
 
 		<span style="float: right;">
 			<span class="si_filters_title">{$LANG.rows_per_page}:</span>
-			<select id="selectrp" name="rp" onchange="location.href='./index.php?module=payments&amp;view=manage&amp;rp='+this.value">
-{foreach from=$array item=v key=k}
-				<option value="{$v}"{if $smarty.get.rp==$v || ($smarty.get.rp=='' && $d==$k)} selected="selected"{/if}>{$v}</option>
+			<select id="selectrp" name="rp" onchange="location.href+='&amp;rp='+this.value">{*./index.php?module=payments&amp;view=manage*}
+{foreach from=$array item=v}
+				<option value="{$v}"{if $smarty.get.rp==$v || ($smarty.get.rp=='' && $defaults.default_nrows==$v)} selected="selected"{/if}>{$v}</option>
 {/foreach}
 			</select>
 		</span>
