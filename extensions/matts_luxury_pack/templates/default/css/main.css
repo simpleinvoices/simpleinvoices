@@ -1,6 +1,6 @@
 /*
     SimpleInvoice Main CSS stylesheet.
-    by Soif
+    by yumatechnical@gmail.com
 
     merged from all previous CSS files
     (work in Progress)
@@ -3418,9 +3418,29 @@ div.colCopy.ie div {
 	border-radius: 5px;
 }
 .subnav li a {
-    border-bottom: 3px solid transparent;
+/*    border-bottom: 3px solid transparent;
+    border-top: 3px solid transparent;*/
+    border: 3px solid transparent;
 }
 .subnav li a:hover {
     border-bottom: 3px solid #D54E21;
 }
+/**/
+#Container {
+	display: none;
+}
+#pageLoading {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 100;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(192, 192, 192, 0.5);
+	background-image: url("http://i.stack.imgur.com/MnyxU.gif");
+	background-repeat: no-repeat;
+	background-position: center;
+}
+/**/
 /* @end */

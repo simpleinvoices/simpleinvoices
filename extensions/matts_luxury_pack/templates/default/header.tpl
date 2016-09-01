@@ -1,20 +1,44 @@
+{*
+/*
+ * Script: ./extensions/matts_luxury_pack/templates/default/header.tpl
+ * 	HTML header
+ *
+ * Authors:
+ *	yumatechnical@gmail.com
+ *
+ * Last edited:
+ * 	2016-08-31
+ *
+ * License:
+ *	GPL v2 or above
+ *
+ * Website:
+ * 	http://www.simpleinvoices.org
+ */
+*}
+{assign var=inc value=$smarty.template|dirname}
+{assign var=pos value=$inc|strrpos:'/':-4}
+{assign var=vis value=$inc|substr:1:$pos-1}
 {*< ?xml version="1.0" encoding="utf-8"? >*}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head class="./extensions/matts_luxury_pack/templates/default">
 {strip}
-	{include file='../extensions/matts_luxury_pack/templates/default/hooks.tpl'}
+	{*include file='../extensions/matts_luxury_pack/templates/default/hooks.tpl'*}
+	{include file=$inc|cat:'/hooks.tpl'}
+<!-- {$vis|cat:"/css/main.css"} -->
 	{assign var='tmp_lang_module' value="title_module_`$module`"}
 	{assign var='tmp_lang_module' value=$LANG.$tmp_lang_module|default:$LANG.$module|default:$module}
 	{assign var='tmp_lang_view' value="title_view_`$view`"}
 	{assign var='tmp_lang_view' value=$LANG.$tmp_lang_view|default:$LANG.$view|default:$view}
 	{$smarty.capture.hook_head_start}
 {/strip}
-	<title>{$tmp_lang_module} : {$tmp_lang_view} - {$LANG.simple_invoices} </title>
+	<title>{if $tmp_lang_module}{$tmp_lang_module} : {/if}{if $tmp_lang_view}{$tmp_lang_view} - {/if}{$LANG.simple_invoices}</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="robots" content="noindex, nofollow" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 {php}
+//	$mybase = {$vis};
 	if (isset($_SERVER['HTTP_USER_AGENT']))
 		if (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== false)
 			header('X-UA-Compatible: IE=edge,chrome=1');
@@ -22,6 +46,7 @@
 			header('X-UA-Compatible: IE=edge');
 	if (file_exists ("./extensions/matts_luxury_pack/templates/default/css/main.css"))
 		$link = '	<link rel="stylesheet" type="text/css" href="./extensions/matts_luxury_pack/templates/default/css/main.css" media="all"/>';
+//		$link = '	<link rel="stylesheet" type="text/css" href="'.$base.'/css/main.css" media="all"/>';
 	else
 		$link = '	<link rel="stylesheet" type="text/css" href="./templates/default/css/main.css" media="all"/>';
 	$link.= "\n";
@@ -64,10 +89,10 @@
     {$extension_jquery_files}
 	{include file='../include/jquery/jquery.functions.js.tpl'}
 	{include file='../include/jquery/jquery.conf.js.tpl'}
-{if $config->debug->level == "All"}
+{*if $config->debug->level == "All"}
 	<link rel="stylesheet" type="text/css" href="./library/blackbirdjs/blackbird.css" />	
 	<script type="text/javascript" src="./library/blackbirdjs/blackbird.js"></script>
-{/if}
+{/if*}
 {literal}
 	<script type="text/javascript" src="./include/jquery/jquery.validationEngine.js"></script>
 {/literal}
