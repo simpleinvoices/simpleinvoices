@@ -15,7 +15,7 @@
 * Website:
 * 	http://www.simpleinvoices.org
  */
-global $LANG;
+//global $LANG;
 
 $array0to9 = array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
 $pagerows = array(5, 10, 15, 20, 25, 30, 35, 50, 100, 500);
@@ -50,7 +50,7 @@ function DBcolumnExists($table, $column) {
 			if (strtolower($row['data_type']) != strtolower($type))
 			{
 				$length = str_replace('.', ',', $length);
-				$sql = "ALTER TABLE `".TB_PREFIX."$table` ADD COLUMN `$column` $type( $length )";
+				$sql = "ALTER TABLE `$table` ADD COLUMN `$column` $type( $length )";
 				$sql.= $cannull ? " NOT NULL" : " NULL";
 				$sql.= $default ? " DEFAULT '$default'" : "";
 				$sql.= $after ? " AFTER `$after`" : "";
@@ -59,7 +59,7 @@ function DBcolumnExists($table, $column) {
 				if (($sth = $dbh->query ($sql)) === false)
 				{
 					// Non-critical error so continue with next action.
-					error_log ("Error: ".print_r($sth->errorInfo(),true)." in matts_luxury_pack - addDatabaseColumn: $sql");
+//					error_log ("Error: ".print_r($sth->errorInfo(),true)." in matts_luxury_pack - addDatabaseColumn: $sql");
 				}
 			}
 		}
@@ -72,26 +72,6 @@ include_once ('extensions/matts_luxury_pack/include/class/myexport.php');
 /********************* customer section ***********************/
 //include_once ('extensions/matts_luxury_pack/include/class/mycustomer.php');
 include_once ('extensions/matts_luxury_pack/include/customer.functs.php');
-
-$cc_months = array ();
-$cc_months[] = ($LANG['select'])	? $LANG['select'] 	: "--";
-$cc_months[] = "01 ".(($LANG['jan'])	? $LANG['jan'] 	: "Jan");
-$cc_months[] = "02 ".(($LANG['feb'])	? $LANG['feb'] 	: "Feb");
-$cc_months[] = "03 ".(($LANG['mar'])	? $LANG['mar'] 	: "Mar");
-$cc_months[] = "04 ".(($LANG['apr'])	? $LANG['apr'] 	: "Apr");
-$cc_months[] = "05 ".(($LANG['may'])	? $LANG['may'] 	: "May");
-$cc_months[] = "06 ".(($LANG['jun'])	? $LANG['jun'] 	: "Jun");
-$cc_months[] = "07 ".(($LANG['jul'])	? $LANG['jul'] 	: "Jul");
-$cc_months[] = "08 ".(($LANG['aug'])	? $LANG['aug'] 	: "Aug");
-$cc_months[] = "09 ".(($LANG['sep'])	? $LANG['sep'] 	: "Sep");
-$cc_months[] = "10 ".(($LANG['oct'])	? $LANG['oct'] 	: "Oct");
-$cc_months[] = "11 ".(($LANG['nov'])	? $LANG['nov'] 	: "Nov");
-$cc_months[] = "12 ".(($LANG['dec'])	? $LANG['dec'] 	: "Dec");
-$cc_years = array();
-$cc_years[] = ($LANG['select'])	? $LANG['select'] 	: "--";
-for ($i=0; $i<6; $i++) {
-	$cc_years[] = date("Y")+$i;
-}
 
 if (!DBcolumnExists(TB_PREFIX."customers", "credit_card_cvc")) {
 	//checkFieldExists(TB_PREFIX."customers", "credit_card_cvc")) {
@@ -117,9 +97,9 @@ if (!DBcolumnExists(TB_PREFIX."customers", "price_list")) {
 /******************************** product section **************************/
 include_once ('extensions/matts_luxury_pack/include/class/myproduct.php');
 
-addDatabaseColumn ('unit_list_price2', TB_PREFIX.'products', 'DECIMAL', 25.6);
-addDatabaseColumn ('unit_list_price3', TB_PREFIX.'products', 'DECIMAL', 25.6);
-addDatabaseColumn ('unit_list_price4', TB_PREFIX.'products', 'DECIMAL', 25.6);
+addDatabaseColumn ('unit_list_price2', TB_PREFIX.'products', 'DECIMAL', 25.6, false, 0);
+addDatabaseColumn ('unit_list_price3', TB_PREFIX.'products', 'DECIMAL', 25.6, false, 0);
+addDatabaseColumn ('unit_list_price4', TB_PREFIX.'products', 'DECIMAL', 25.6, false, 0);
 
 /******************************** invoice section *******************************/
 include_once ('extensions/matts_luxury_pack/include/class/myinvoice.php');
