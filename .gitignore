@@ -8,6 +8,7 @@ custom
 .buildpath
 .project
 .settings/**
+config/config.php
 library/HTMLPurifier/DefinitionCache/Serializer/HTML/*
 templates/invoices/**
 !templates/invoices/default/**
