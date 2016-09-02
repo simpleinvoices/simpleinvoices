@@ -7,10 +7,12 @@ class siLocal
 	{
 		global $config;
 		
-		$locale == "" ? $locale = new Zend_Locale($config->local->locale) : $locale = $locale;
+//		$locale == "" ? $locale = new Zend_Locale($config->local->locale) : $locale = $locale;
+		$locale = $locale == "" ? new Zend_Locale($config->local->locale) : $locale;
 		$load_precision = $config->local->precision; 
 		
-		$precision == "" ? $precision = $load_precision : $precision = $precision;
+//		$precision == "" ? $precision = $load_precision : $precision = $precision;
+		$precision = $precision == "" ? $load_precision : $precision;
 		$formatted_number = Zend_Locale_Format::toNumber($number, array('precision' => $precision, 'locale' => $locale));
 		
 		//trim zeros from decimal point if enabled
@@ -61,7 +63,8 @@ class siLocal
 	{
 		global $config;
 		
-		$locale == "" ? $locale = new Zend_Locale($config->local->locale) : $locale = $locale;
+//		$locale == "" ? $locale = new Zend_Locale($config->local->locale) : $locale = $locale;
+		$locale = $locale == "" ? new Zend_Locale($config->local->locale) : $locale;
 		$length == "" ? $length = "medium" : $length = $length;
 		/*
 		 * Length can be any of the Zend_Date lengths - FULL, LONG, MEDIUM, SHORT
