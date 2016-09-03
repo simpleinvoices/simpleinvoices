@@ -8,6 +8,7 @@
 
     Please dont remove the |* @group name *| (css block) |* end *|
     comments, used by the amazing CSSEdit application
+    
 */
 
 
@@ -3438,7 +3439,8 @@ div.colCopy.ie div {
 	width: 100vw;
 	height: 100vh;
 	background-color: rgba(192, 192, 192, 0.5);
-	background-image: url("http://i.stack.imgur.com/MnyxU.gif");
+	background-image: url("../../../images/common/loading.png");
+	/*background-image: url("http://i.stack.imgur.com/MnyxU.gif");*/
 	background-repeat: no-repeat;
 	background-position: center;
 }

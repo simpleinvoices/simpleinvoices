@@ -37,7 +37,6 @@ function DBcolumnExists($table, $column) {
 	{
 		global $LANG, $dbh;
 
-//		$sql = "SELECT `data_type` FROM `information_schema`.`columns` WHERE `table_name`='$table' AND `column_name`='$column';";
 		$sql = "SELECT data_type FROM information_schema.columns WHERE table_name='$table' AND column_name='$column';";
 	error_log ("testing...$sql|");
 		if (($sth = $dbh->query ($sql)) === false)
@@ -59,7 +58,8 @@ function DBcolumnExists($table, $column) {
 				if (($sth = $dbh->query ($sql)) === false)
 				{
 					// Non-critical error so continue with next action.
-//					error_log ("Error: ".print_r($sth->errorInfo(),true)." in matts_luxury_pack - addDatabaseColumn: $sql");
+					if ($sth)      $error = print_r($sth->errorInfo(), true);
+//					error_log ("Error: $error in matts_luxury_pack - addDatabaseColumn: $sql");
 				}
 			}
 		}
@@ -74,7 +74,6 @@ include_once ('extensions/matts_luxury_pack/include/class/myexport.php');
 include_once ('extensions/matts_luxury_pack/include/customer.functs.php');
 
 if (!DBcolumnExists(TB_PREFIX."customers", "credit_card_cvc")) {
-	//checkFieldExists(TB_PREFIX."customers", "credit_card_cvc")) {
 	$dbh->beginTransaction();
 	$sth = $dbh->exec("ALTER TABLE ".TB_PREFIX."customers ADD credit_card_cvc INT(11) NOT NULL AFTER credit_card_number");
 	//My SQL / Oracle (prior version 10G):
@@ -86,7 +85,6 @@ if (!DBcolumnExists(TB_PREFIX."customers", "credit_card_cvc")) {
 	//ALTER TABLE table_name MODIFY column_name datatype
 	$dbh->commit();
 }
-//addDatabaseColumn ("credit_card_cvc", TB_PREFIX."customers", "int", 3, false, "", "credit_card_number");
 //addDatabaseColumn ('price_list', TB_PREFIX.'customers', 'int', 11);
 if (!DBcolumnExists(TB_PREFIX."customers", "price_list")) {
 	$dbh->beginTransaction();
