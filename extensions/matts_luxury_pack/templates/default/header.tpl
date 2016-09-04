@@ -16,17 +16,21 @@
  * 	http://www.simpleinvoices.org
  */
 *}
-{assign var=inc value=$smarty.template|dirname}
-{assign var=pos value=$inc|strrpos:'/':-4}
-{assign var=vis value=$inc|substr:1:$pos-1}
-{*< ?xml version="1.0" encoding="utf-8"? >*}
+{strip}
+{	assign var=inc value=$smarty.template|dirname}
+{	assign var=pos value=$inc|strrpos:'/':-4}
+{	assign var=vis value=$inc|substr:1:$pos-1}
+
+
+{/strip}{*< ?xml version="1.0" encoding="utf-8"? >*}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-<head class="./extensions/matts_luxury_pack/templates/default">
+<head>
+<!--  ./extensions/matts_luxury_pack/templates/default/header.tpl -->
 {strip}
 	{*include file='../extensions/matts_luxury_pack/templates/default/hooks.tpl'*}
 	{include file=$inc|cat:'/hooks.tpl'}
-<!-- {$vis|cat:"/css/main.css"} -->
+{*<!-- {$vis|cat:"/css/main.css"} -->*}
 	{assign var='tmp_lang_module' value="title_module_`$module`"}
 	{assign var='tmp_lang_module' value=$LANG.$tmp_lang_module|default:$LANG.$module|default:$module}
 	{assign var='tmp_lang_view' value="title_view_`$view`"}
@@ -85,14 +89,15 @@
 	<script type="text/javascript" src="./include/jquery/wysiwyg/wysiwyg.modified.packed.js"></script>
 	<script type="text/javascript" src="./include/jquery/jquery.livequery.pack.js"></script> {/literal}{strip}
 	{$smarty.capture.hook_head_script}
-{/strip}
     {$extension_jquery_files}
+{/strip}
 	{include file='../include/jquery/jquery.functions.js.tpl'}
 	{include file='../include/jquery/jquery.conf.js.tpl'}
-{*if $config->debug->level == "All"}
+
+{if $config->debug->level == "All"}
 	<link rel="stylesheet" type="text/css" href="./library/blackbirdjs/blackbird.css" />	
 	<script type="text/javascript" src="./library/blackbirdjs/blackbird.js"></script>
-{/if*}
+{/if}
 {literal}
 	<script type="text/javascript" src="./include/jquery/jquery.validationEngine.js"></script>
 {/literal}
@@ -102,5 +107,5 @@
 {/strip}
 </head>
 <body class="body_si body_module_{$module} body_view_{$view}">
-{$smarty.capture.hook_body_start}
-<div class="si_grey_background"></div>
+	{$smarty.capture.hook_body_start}
+	<div class="si_grey_background"></div>

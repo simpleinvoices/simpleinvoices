@@ -16,15 +16,18 @@
  * 	http://www.simpleinvoices.org
  */
 *}
+{strip}
 {assign var=inc value=$smarty.template|dirname}
 {assign var=pos value=$inc|strrpos:'/':-4}
 {assign var=pth value=$inc|substr:0:$pos}
 {assign var=mypos value=$smarty.template|strrpos:'/'}
 {assign var=myroot value=$smarty.template|substr:1:$mypos-1}
 
+
 {*	$pth|cat:"/hooks/head_end.php"	*}
 {*	$smarty->fetch("/hooks/head_end.php")	*}
 {*	php}file_get_contents('{$inc|cat:"/hooks/head_end.php"}');{/php	*}
+
 {*	hook_head_end	*}
 {capture name="hook_head_end"}
 {if $defaults.use_modal}
@@ -67,7 +70,8 @@
 
 {**}
 <script type="text/javascript">{literal}
-if (!Array.prototype.indexOf) {		/* add prototype called indexOf, if not exists */
+/* add prototype called indexOf, if not exists */
+if (!Array.prototype.indexOf) {
 	Array.prototype.indexOf = function (obj, fromIndex) {
 		if (fromIndex == null) {
 			fromIndex = 0;
@@ -81,6 +85,7 @@ if (!Array.prototype.indexOf) {		/* add prototype called indexOf, if not exists 
 		return -1;
 	};
 }
+
 //eg. var myExtScriptArray = [ {"count":"0", "name":"GA", "src":"js/google-analytics.js"}, {"count":"1", "name":"jQuery-plugin-xyz", "src":"js/jquery/xyz.js"} ];
 //eg2.	var myExtLinkArray = [ {"count":"0", "name":"-", 			"./noname"} ];
 	var myArray = {		/* arrays of external files to load */
@@ -96,8 +101,8 @@ if (!Array.prototype.indexOf) {		/* add prototype called indexOf, if not exists 
 					, {"count":"9", 	"name":"livequery-pack",	"src":"./include/jquery/jquery.livequery.pack.js"}
 
 					, {"count":"10", 	"name":"blackbird", 		"src":"./library/blackbirdjs/blackbird.js"}
-					, {"count":"11", 	"name":"validationEngine", 	"src":"./include/jquery/jquery.validationEngine.js"}	],
-		"links":	[	{"count":"0", "name":"./noname"}
+					, {"count":"11", 	"name":"validationEngine", 	"src":"./include/jquery/jquery.validationEngine.js"}	]
+		,"links":	[	{"count":"0", "name":"./noname"}
 					, {"count":"1", 	"name":"blackbird", 	"href":"./library/blackbirdjs/blackbird.css"}
 		]	};
 	var doneArray = {	"scripts":	[],	"links":	[]	};
@@ -298,6 +303,7 @@ if (!Array.prototype.indexOf) {		/* add prototype called indexOf, if not exists 
 
 
 {capture name="hook_body_start"}
-	<div id="pageLoading"></div>
+{*	<div id="pageLoading"></div>*}
 {*	<a id="dofuncts" onclick="downloadJSAtOnload()"> CLICK ME </a>	*}
 {/capture}
+{/strip}
