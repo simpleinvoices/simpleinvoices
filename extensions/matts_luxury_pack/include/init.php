@@ -33,12 +33,12 @@ function DBcolumnExists($table, $column) {
 }
 /*if (!function_exists ('addDatabaseColumn'))
 {		^*TAKES TOO LONG*/
-	function addDatabaseColumn ($column, $table, $type, $length, $cannull=false, $default="", $after="")
+	function addDatabaseColumn ($column, $table, $type, $length, $cannull=false, $def_value="", $after="")
 	{
 		global $LANG, $dbh;
 
 		$sql = "SELECT data_type FROM information_schema.columns WHERE table_name='$table' AND column_name='$column';";
-	error_log ("testing...$sql|");
+	error_log ("exists($table.$column)...$sql");
 		if (($sth = $dbh->query ($sql)) === false)
 		{
 			// Non-critical error so continue with next action.
@@ -51,10 +51,10 @@ function DBcolumnExists($table, $column) {
 				$length = str_replace('.', ',', $length);
 				$sql = "ALTER TABLE `$table` ADD COLUMN `$column` $type( $length )";
 				$sql.= $cannull ? " NOT NULL" : " NULL";
-				$sql.= $default ? " DEFAULT '$default'" : "";
+				$sql.= isset($def_value) ? " DEFAULT '$def_value'" : "";
 				$sql.= $after ? " AFTER `$after`" : "";
 				$sql.= ";";
-	error_log ("no! trying...$sql|");
+	error_log ("add($table.$column)...$sql|");
 				if (($sth = $dbh->query ($sql)) === false)
 				{
 					// Non-critical error so continue with next action.

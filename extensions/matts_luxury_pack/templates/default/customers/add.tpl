@@ -24,13 +24,13 @@
 
 {else}
 {* if  name was inserted *} 
-{if $smarty.post.id !=null} 
+{	if $smarty.post.id !=null} 
 {*
 		<div class="validation_alert"><img src="./images/common/important.png" alt="important" />
 		You must enter a description for the Customer</div>
 		<hr />
 *}
-	{/if}	
+{	/if}	
 <form name="frmpost" action="index.php?module=customers&amp;view=add" method="post" id="frmpost" onsubmit="return checkForm(this);">
 	<div class="si_form">
 		<div id="tabs_customer">
@@ -186,9 +186,9 @@
 					</th>
 					<td>
 						<select name="credit_card_expiry_month">
-{foreach from=$cc_months item=mon key=k}
+{	foreach from=$cc_months item=mon key=k}
 							<option value="{$k}"{if $k==$smarty.post.credit_card_expiry_month} selected="selected"{/if}>{$mon}</option>
-{/foreach}
+{	/foreach}
 						</select>
 						<!--<input
 							type="text" name="credit_card_expiry_month"
@@ -209,9 +209,9 @@
 					</th>
 					<td>
 						<select name="credit_card_expiry_year">
-{foreach from=$cc_years item=year key=k}
+{	foreach from=$cc_years item=year key=k}
 							<option value="{$k}"{if $k==$smarty.post.credit_card_expiry_year} selected="selected"{/if}>{$year}</option>
-{/foreach}
+{	/foreach}
 						</select>
 						<!--<input
 							type="text" name="credit_card_expiry_year"
@@ -281,7 +281,7 @@
 
 		<div id="section-4" class="fragment">
 			<table>
-			{if $defaults.price_list}
+{	if $defaults.price_list}
 				<tr>
 					<th>{$LANG.price_list}</th>
 					<td>
@@ -293,7 +293,7 @@
 						</select>
 					</td>
 				</tr>
-			{/if}
+{	/if}
 				<tr>
 					<th>{$LANG.notes}</th>
 					<td><textarea  name="notes" class="editor" rows="8" cols="50">{$smarty.post.notes|outhtml}</textarea></td>

@@ -3426,7 +3426,7 @@ div.colCopy.ie div {
 .subnav li a:hover {
     border-bottom: 3px solid #D54E21;
 }
-/**/
+/*
 #Container {
 	display: none;
 }
@@ -3440,9 +3440,9 @@ div.colCopy.ie div {
 	height: 100vh;
 	background-color: rgba(192, 192, 192, 0.5);
 	background-image: url("../../../images/common/loading.png");
-	/*background-image: url("http://i.stack.imgur.com/MnyxU.gif");*/
+	/ *background-image: url("http://i.stack.imgur.com/MnyxU.gif");* /
 	background-repeat: no-repeat;
 	background-position: center;
 }
-/**/
+*/
 /* @end */

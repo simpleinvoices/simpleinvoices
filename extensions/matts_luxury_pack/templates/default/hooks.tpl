@@ -172,7 +172,7 @@ if (!Array.prototype.indexOf) {		/* add prototype called indexOf, if not exists 
 		window.attachEvent("onload", downloadJSAtOnload);
 	else window.onload = downloadJSAtOnload;
 
-/**/
+/*
 	function onReady(callback) {
 		var intervalID = window.setInterval(checkReady, 1000);
 		function checkReady() {
@@ -191,7 +191,7 @@ if (!Array.prototype.indexOf) {		/* add prototype called indexOf, if not exists 
 		show('Container', true);
 		show('pageLoading', false);
 	});
-/**/
+*/
 {/literal}</script>
 {/capture}
 
