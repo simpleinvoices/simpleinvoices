@@ -70,6 +70,7 @@ function DBcolumnExists($table, $column) {
 include_once ('extensions/matts_luxury_pack/include/class/myexport.php');
 
 /********************* customer section ***********************/
+
 //include_once ('extensions/matts_luxury_pack/include/class/mycustomer.php');
 include_once ('extensions/matts_luxury_pack/include/customer.functs.php');
 

@@ -469,6 +469,7 @@ $smarty->assign("perform_extension_insertions", $perform_extension_insertions);
 $smarty->assign("path"                        , $path);
 $smarty->$smarty_output($my_tpl_path);
 // @formatter:on
+/*ACTUAL OUTPUT HAS BEEN DONE*/
 
 // If no smarty template - add message
 if ($extensionTemplates == 0) {
