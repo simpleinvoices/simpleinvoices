@@ -64,6 +64,7 @@ class MyCrypt {
      * @return array $pieces The two parts of the line previously joined by the equal sign.
      */
     public static function unjoin($line, $prefix) {
+        $line = preg_replace('/^(.*);.*$/', '$1', $line);
         $pieces = explode("=", $line);
         if (count($pieces) != 2) return array("","");
 
