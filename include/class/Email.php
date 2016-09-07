@@ -1,5 +1,5 @@
 <?php
-class email {
+class Email {
     public $format;
     public $notes;
     public $file_location;
@@ -52,9 +52,9 @@ class email {
         }
         $mail->setSubject($this->subject);
 
-        if ($this->attachment) {
+        if (!empty($this->attachment)) {
             // Create attachment
-            $content = file_get_contents('./tmp/cache/' . $this->attachment);
+            $content = file_get_contents($this->attachment);
             $at = $mail->createAttachment($content);
             $at->type = 'application/pdf';
             $at->disposition = Zend_Mime::DISPOSITION_ATTACHMENT;
@@ -69,7 +69,7 @@ class email {
             }
         } catch (Zend_Mail_Protocol_Exception $e) {
             echo '<strong>Zend Mail Protocol Exception:</strong> ' . $e->getMessage();
-            error_log("email.php mail error - " . print_r($e,true));
+            error_log("Email.php mail error - " . print_r($e,true));
             exit();
         }
 
@@ -100,7 +100,7 @@ class email {
                 break;
 
             default:
-                error_log("include/class/email.php - Undefined format, " . $this->format);
+                error_log("include/class/Email.php - Undefined format, " . $this->format);
                 echo '<strong>Undefined format (' . $this->format . ')</strong>';
                 exit();
         }
@@ -146,4 +146,103 @@ class email {
 
         return $sth->fetchColumn();
     }
+
+    /**
+     * Verify the $_FILES[] values for upload files.
+     * @param $varname The variable name for the upload entry.
+     */
+    private function verifyFiles($varname, $validtypes, $max_size, &$lines, &$files) {
+        // Undefined | Multiple Files | $_FILES Corruption Attack
+        // If this request falls under any of them, treat as invalid.
+        if (!isset($_FILES[$varname]['error'])) {
+            $lines[] = '<p class="warnMsg">Invalid value found. Verify all fields set and re-submit.</p>';
+            return false;
+        }
+    
+        if (is_array($_FILES[$varname]['error'])) {
+            $files = array();
+            for ($i = 0; $i < count($_FILES[$varname]['error']); $i++) {
+                $files[] = $_FILES[$varname]['name'][$i];
+                if (!verifyOneFile($varname, $_FILES[$varname]['error'][$i], $validtypes, $_FILES[$varname]['size'][$i],
+                        $max_size, $_FILES[$varname]['tmp_name'][$i], $_FILES[$varname]['name'][$i], $lines)) {
+                            return false;
+                        }
+            }
+        } else {
+            $files = $_FILES[$varname]['name'];
+            if (!verifyOneFile($varname, $_FILES[$varname]['error'], $validtypes, $_FILES[$varname]['size'], $max_size,
+                    $_FILES[$varname]['tmp_name'], $_FILES[$varname]['name'], $lines)) {
+                        return false;
+                    }
+        }
+        return true;
+    }
+    
+    private function verifyOneFile($varname, $error, $validtypes, $size, $max_size, $tmp_name, $name, &$lines) {
+        // Check $error value.
+        if (strstr($varname, 'pic')) {
+            $desc = 'Picture';
+        } else {
+            $desc = 'Media';
+        }
+    
+        switch ($error) {
+            case UPLOAD_ERR_OK:
+                break;
+    
+            case UPLOAD_ERR_NO_FILE:
+                $lines[] = '<p class="warnMsg">No ' . $desc . ' file transmitted. Verify file specified and re-submit.</p>';
+                return false;
+    
+            case UPLOAD_ERR_INI_SIZE:
+            case UPLOAD_ERR_FORM_SIZE:
+                $lines[] = '<p class="warnMsg">' . $desc . ' file,' . $name . ', is too large.</p>';
+                return false;
+    
+            default:
+                $lines[] = '<p class="warnMsg">Undefined error reported for ' . $desc . '.</p>';
+                return false;
+        }
+    
+        if ($max_size < 1024) {
+            $maxsiz = 1024 * 1024 * 1024;
+            $maxsizstr = '100Mb';
+        } else if ($max_size < (1024 * 1024)) {
+            $maxsiz = $max_size;
+            $maxsizstr = sprintf('%uKb', ($max_size / 1024));
+        } else {
+            $maxsiz = $max_size;
+            $maxsizstr = sprintf('%uMb', ($max_size / (1024 * 1024)));
+        }
+    
+        // You should also check file size here.
+        if ($size > $maxsiz) {
+            $lines[] = '<p class="warnMsg">' . $desc . ' file,' . $name . ' exceeds specified file size limit, ' . $maxsizstr .
+            '.</p>';
+            return false;
+        }
+    
+        $typs = $_FILES[$varname]['type'];
+        if (is_string($typs)) $typs = array($typs);
+        foreach($typs as $typ) {
+            $error=false;
+            if (($key = array_search($typ, $validtypes)) === false) {
+                $error = true;
+            } else if (strlen($key) > 3 && substr($key,3) != "-any") {
+                $browser = strtolower(getBrowser());
+                $typ_browser = strtolower(substr($key,4));
+                if ($browser != $typ_browser) $error = true;
+            }
+    
+            if ($error) {
+                error_log("media_form_functions verifyOneFile(): File type, $typ, not allowed. Validtypes are: " .
+                        print_r($validtypes,true));
+                $lines[] = '<p class="warnMsg">' . $desc . ' file, ' . $name . ' is not an allowed file type.</p>';
+                return false;
+            }
+        }
+    
+        return true;
+    }
+    
 }

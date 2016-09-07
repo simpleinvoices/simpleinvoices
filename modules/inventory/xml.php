@@ -8,8 +8,8 @@ $sort  = (isset($_POST['sortname']) ) ? $_POST ['sortname']  : "id";
 $rp    = (isset($_POST['rp'])       ) ? $_POST ['rp']        : "25";
 $page  = (isset($_POST['page'])     ) ? $_POST ['page']      : "1";
 
-$inventory_all  = Inventory::select_all(     '', $sort, $dir, $rp, $page);
-$count = Inventory::select_all('count', $sort, $dir, $rp, $page);
+$inventory_all  = Inventory::xml_select(     '', $sort, $dir, $rp, $page);
+$count = Inventory::xml_select('count', $sort, $dir, $rp, $page);
 
 $xml  = "";
 $xml .= "<rows>";

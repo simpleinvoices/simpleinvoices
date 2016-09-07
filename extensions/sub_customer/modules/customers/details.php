@@ -15,6 +15,7 @@
  *  Website:
  *      http://www.simpleinvoices.org
  */
+global $smarty, $pdoDb, $LANG, $config;
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
@@ -50,9 +51,9 @@ $stuff['paid' ] = calc_customer_paid($customer['id']);;
 $stuff['owing'] = $stuff['total'] - $stuff['paid'];
 
 $customFieldLabel = getCustomFieldLabels('',true);
-$invoices = getCustomerInvoices($cid);
+$invoices = Customer::getCustomerInvoices($cid);
 
-$parent_customers = getActiveCustomers();
+$parent_customers = Customer::get_all(true);
 $smarty->assign('parent_customers', $parent_customers);
 
 $smarty->assign("stuff",$stuff);

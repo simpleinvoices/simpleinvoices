@@ -5,10 +5,10 @@ global $smarty;
 checkLogin();
 
 // @formatter:off
-$billers     = getBillers();
-$customers   = getCustomers();
+$billers     = Biller::get_all();
+$customers   = Customer::get_all();
 $taxes       = getTaxes();
-$products    = getProducts();
+$products    = Product::select_all();
 $preferences = getPreferences();
 
 if (empty($billers)   ||
@@ -20,7 +20,6 @@ if (empty($billers)   ||
     $smarty->assign("first_run_wizard",$first_run_wizard);
 }
 
-$smarty->assign("db_server"  , $db_server);
 $smarty->assign("billers"    , $billers);
 $smarty->assign("customers"  , $customers);
 $smarty->assign("taxes"      , $taxes);

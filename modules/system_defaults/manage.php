@@ -16,7 +16,7 @@ foreach ($languages as $language) {
 
 $smarty->assign("defaults", getSystemDefaults());
 $smarty->assign("defaultBiller", getDefaultBiller());
-$smarty->assign("defaultCustomer", getDefaultCustomer());
+$smarty->assign("defaultCustomer", Customer::getDefaultCustomer());
 $smarty->assign("defaultTax", getDefaultTax());
 $smarty->assign("defaultPreference", getDefaultPreference());
 $smarty->assign("defaultPaymentType", getDefaultPaymentType());

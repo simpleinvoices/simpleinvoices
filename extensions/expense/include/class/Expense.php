@@ -24,15 +24,14 @@ class Expense {
         $add['customer_all'] = Customer::get_all(true);
 
         //get billers with domain_id from session by constructor
-        $billerobj = new biller();
-        $add['biller_all'] = $billerobj->get_all();
+        $add['biller_all'] = Biller::get_all();
 
         //get invoices
         $invoiceobj = new invoice();
         $add['invoice_all'] = $invoiceobj->get_all();
 
         //get products
-        $add['product_all'] = product::get_all();
+        $add['product_all'] = Product::select_all();
 
         return $add;
     }
@@ -54,15 +53,14 @@ class Expense {
         $detail['customer_all'] = Customer::get_all(true);
 
         //get billers with domain_id from session by constructor
-        $billerobj = new biller();
-        $detail['biller_all'] = $billerobj->get_all();
+        $detail['biller_all'] = Biller::get_all();
 
         //get invoices
         $invoiceobj = new invoice();
         $detail['invoice_all'] = $invoiceobj->get_all();
 
         //get products
-        $detail['product_all'] = product::get_all();
+        $detail['product_all'] = Product::select_all();
 
         return $detail;
     }

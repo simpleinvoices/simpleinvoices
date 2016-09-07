@@ -3,12 +3,16 @@
  *  Script: email.php
  *      Email invoice page
  *
+ *  Last Modified:
+ *      2016-08-15
+ *
  *  License:
  *      GPL v3 or above
  *
  *  Website:
  *      http://www.simpleinvoices.org
  */
+global $smarty;
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
@@ -19,13 +23,13 @@ $invoiceobj = new invoice();
 $invoice    = $invoiceobj->select($invoice_id);
 
 $preference  = getPreference($invoice['preference_id']);
-$biller      = getBiller($invoice['biller_id']);
-$customer    = getCustomer($invoice['customer_id']);
-$invoiceType = getInvoiceType($invoice['type_id']);
+$biller      = Biller::select($invoice['biller_id']);
+$customer    = Customer::get($invoice['customer_id']);
 
 $spc2us_pref   = str_replace(" ", "_", $invoice['index_name']);
 $pdf_file_name = $spc2us_pref  . '.pdf';
 
+$error = false;
 $message = "Unable to process email request.";
 if ($_GET['stage'] == 2 ) {
     $export = new export();
@@ -35,9 +39,9 @@ if ($_GET['stage'] == 2 ) {
     $export->id            = $invoice_id;
     $export->execute();
 
-    #$attachment = file_get_contents('./tmp/cache/' . $pdf_file_name);
+    $attachments = $_POST['attachments'];
 
-    $email = new email();
+    $email = new Email();
     $email->format        = 'invoice';
     $email->notes         = $_POST['email_notes'];
     $email->from          = $_POST['email_from'];
@@ -45,19 +49,22 @@ if ($_GET['stage'] == 2 ) {
     $email->to            = $_POST['email_to'];
     $email->bcc           = $_POST['email_bcc'];
     $email->subject       = $_POST['email_subject'];
-    $email->attachment    = $pdf_file_name;
+    $email->attachments   = $attachments;
     $message = $email->send();
 
 } else if ($_GET['stage'] == 3 ) {
     //stage 3 = assemble email and send
     $message = "Invalid routing to stage 3 of email processing. Probably a process error.";
+    $error = true;
 }
 
-$smarty->assign('message'    , $message);
-$smarty->assign('biller'     , $biller);
-$smarty->assign('customer'   , $customer);
-$smarty->assign('invoice'    , $invoice);
-$smarty->assign('preferences', $preference);
+$smarty->assign('error'            , ($error ? "1":"0"));
+$smarty->assign('message'          , $message);
+$smarty->assign('biller'           , $biller);
+$smarty->assign('customer'         , $customer);
+$smarty->assign('invoice'          , $invoice);
+$smarty->assign('preferences'      , $preference);
 
 $smarty->assign('pageActive', 'invoice');
 $smarty->assign('active_tab', '#money');
+// @formatter:on

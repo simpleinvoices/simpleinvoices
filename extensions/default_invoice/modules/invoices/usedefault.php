@@ -21,7 +21,7 @@ global $defaults, $pdoDb;
 checkLogin ();
 
 $master_customer_id = $_GET ['customer_id'];
-$customer = getCustomer($master_customer_id);
+$customer = Customer::get($master_customer_id);
 
 if ($_GET ['action'] == 'update_template') {
     // Update the default template for this customer

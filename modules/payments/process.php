@@ -1,8 +1,7 @@
 <?php
+global $smarty, $LANG, $pdoDb;
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
-
-$maxInvoice = maxInvoice();
 
 // Generate form validation script
 jsBegin();
@@ -15,22 +14,19 @@ jsEnd();
 
 $today = date("Y-m-d");
 
-$invoice = null;
-
 if(isset($_GET['id'])) {
     $invoiceobj = new invoice();
     $invoice = $invoiceobj->select($_GET['id']);
 } else {
-    $sql = "SELECT * FROM ".TB_PREFIX."invoices WHERE domain_id = :domain_id";
-    $sth = dbQuery($sql, ':domain_id', domain_id::get());
-    $invoice = $sth->fetch(PDO::FETCH_ASSOC);
+    $pdoDb->addSimpleWhere("domain_id", domain_id::get());
+    $invoice = $pdoDb->request("SELECT", "invoices");
 }
 
 // @formatter:off
-$customer = getCustomer($invoice['customer_id']);
-$biller   = getBiller($invoice['biller_id']);
+$customer = Customer::get($invoice['customer_id']);
+$biller   = Biller::select($invoice['biller_id']);
 $defaults = getSystemDefaults();
-$pt       = getPaymentType($defaults['payment_type']);
+//$pt       = PaymentType::select($defaults['payment_type']);
 // @formatter:on
 
 $invoices = new invoice();
@@ -40,7 +36,7 @@ $invoices->having_and='real';
 $invoice_all = $invoices->select_all('count');
 
 $smarty->assign('invoice_all',$invoice_all);
-$paymentTypes = getActivePaymentTypes();
+$paymentTypes = PaymentType::select_all(true);
 
 // @formatter:off
 $smarty->assign("paymentTypes", $paymentTypes);

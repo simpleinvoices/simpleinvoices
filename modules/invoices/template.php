@@ -25,8 +25,8 @@ $invoiceID = $_GET['id'];
 //mysql_select_db( $db_name, $conn );
 
 $invoice = getInvoice($invoiceID);
-$customer = getCustomer($invoice['customer_id']);
-$biller = getBiller($invoice['biller_id']);
+$customer = Customer::get($invoice['customer_id']);
+$biller = Biller::select($invoice['biller_id']);
 $preference = getPreference($invoice['preference_id']);
 $defaults = getSystemDefaults();
 $logo = getLogo($biller);

@@ -72,11 +72,11 @@ if (isset($_POST['submit'])) {
     }
 }
 
-$billers   = getActiveBillers();
-$customers = getActiveCustomers();
+$billers   = Biller::get_all(true);
+$customers = Customer::get_all(true);
 
-$biller_details   = getBiller($biller_id);
-$customer_details = getCustomer($customer_id);
+$biller_details   = Biller::select($biller_id);
+$customer_details = Customer::get($customer_id);
 
 $smarty->assign('biller_id'       , $biller_id);
 $smarty->assign('biller_details'  , $biller_details);

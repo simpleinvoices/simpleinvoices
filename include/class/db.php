@@ -29,7 +29,7 @@ class db {
                     break;
 
                 case "sqlite":
-                    $connlink = new PDO($this->_pdoAdapter .
+                    $this->db = new PDO($this->_pdoAdapter .
                                     ':host=' .  $config->database->params->host . '; ' .
                                     'dbname=' . $config->database->params->dbname,
                                                 $config->database->params->username,
@@ -51,11 +51,11 @@ class db {
 
                         case false:
                             $this->_db = new PDO($this->_pdoAdapter .
-                                    ':host=' . $config->database->params->host . '; ' .
-                                    'port='  . $config->database->params->port . '; dbname=' .
-                                               $config->database->params->dbname,
-                                               $config->database->params->username,
-                                               $config->database->params->password);
+                                    ':host='  . $config->database->params->host . '; ' .
+                                    'port='   . $config->database->params->port . '; ' . 
+                                    'dbname=' . $config->database->params->dbname,
+                                                $config->database->params->username,
+                                                $config->database->params->password);
                             break;
                     }
                     break;
@@ -75,7 +75,7 @@ class db {
         return self::$_instance;
     }
 
-    function query($sqlQuery) {
+    public function query($sqlQuery) {
         try {
             $argc = func_num_args();
             $binds = func_get_args();
@@ -87,7 +87,7 @@ class db {
                 }
             }
 
-            $result = $sth->execute();
+            $sth->execute();
             if ($sth->errorCode() > '0') {
                 simpleInvoicesError('sql', $sth->errorInfo(), $sqlQuery);
             }
@@ -107,9 +107,7 @@ class db {
      * (PostgreSQL). This is a convenience function to handle the backend-
      * specific details so you don't have to.
      */
-    function lastInsertId() {
-        global $config;
-
+    public function lastInsertId() {
         if ($this->_pdoAdapter == 'pgsql') {
             $sql = 'SELECT lastval()';
         } elseif ($this->_pdoAdapter == 'mysql') {

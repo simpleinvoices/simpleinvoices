@@ -19,14 +19,11 @@ function sql($type = '', $dir, $sort, $rp, $page) {
         $id = $_GET['c_id'];
         $pdoDb->addSimpleWhere("c.id", $id, "AND");
     }
-    
+
     $query = isset($_POST['query']) ? $_POST['query'] : null;
     $qtype = isset($_POST['qtype']) ? $_POST['qtype'] : null;
     if (!empty($qtype) && !empty($query)) {
-        $valid_search_fields = array('ap.id','b.name', 'c.name');
-        if ( in_array($qtype, $valid_search_fields) ) {
-            $pdoDb->addSimpleWhere($qtype, "%$query%", "AND");
-        }
+        $pdoDb->addToWhere(new WhereItem(false, $qtype, "LIKE", "%$query%", false, "AND"));
     }
     $pdoDb->addSimpleWhere("ap.domain_id", domain_id::get());
 
@@ -74,20 +71,20 @@ function sql($type = '', $dir, $sort, $rp, $page) {
     $start = (($page-1) * $rp);
     $pdoDb->setLimit($rp, $start);
 
-    if (in_array($sort, array('ap.id', 'ap.ac_inv_id', 'description'))) {
+    if (in_array($sort, array('ap.id', 'ap.ac_inv_id', 'date'))) {
         if (!preg_match('/^(asc|desc)$/iD', $dir)) $dir = 'D';
         $oc = new OrderBy($sort, $dir);
     } else {
-        $oc = new OrderBy("description");
+        $oc = new OrderBy("ap.ac_inv_id", "D");
     }
+    $pdoDb->setOrderBy($oc);
 
     $fn = new FunctionStmt("DATE_FORMAT", "ac_date,'%Y-%m-%d'");
     $se = new Select($fn, null, null, "date");
     $pdoDb->addToSelectStmts($se);
 
-    $pdoDb->setOrderBy($oc);
 
-    $list = array("ap.*", "c.name as cname", "b.name as bname", "pt.pt_description AS description",
+    $list = array("ap.*", "c.name AS cname", "b.name AS bname", "pt.pt_description AS description",
                   "ap.ac_notes AS notes");
     $pdoDb->setSelectList($list);
     
@@ -99,10 +96,10 @@ function sql($type = '', $dir, $sort, $rp, $page) {
     return $result;
 }
 
+// @formatter:off
 $payments = sql(     '', $dir, $sort, $rp, $page);
 $count    = sql('count', $dir, $sort, $rp, $page);
 
-// @formatter:off
 $xml  = "";
 $xml .= "<rows>";
 $xml .= "<page>$page</page>";
@@ -122,13 +119,13 @@ foreach ($payments as $row) {
              <img src='images/common/printer.png' height='16' border='-5px' padding='-4px' valign='bottom' />
            </a>
          ]]></cell>";
-    $xml .= "<cell><![CDATA[$row[id]]]></cell>";
-    $xml .= "<cell><![CDATA[$row[index_name]]]></cell>";
-    $xml .= "<cell><![CDATA[$row[cname]]]></cell>";
-    $xml .= "<cell><![CDATA[$row[bname]]]></cell>";
+    $xml .= "<cell><![CDATA[".$row['id']."]]></cell>";
+    $xml .= "<cell><![CDATA[".$row['index_name']."]]></cell>";
+    $xml .= "<cell><![CDATA[".$row['cname']."]]></cell>";
+    $xml .= "<cell><![CDATA[".$row['bname']."]]></cell>";
     $xml .= "<cell><![CDATA[".siLocal::number($row['ac_amount'])."]]></cell>";
-    $xml .= "<cell><![CDATA[$notes]]></cell>";
-    $xml .= "<cell><![CDATA[$row[description] $row[ac_check_number]]]></cell>";
+    $xml .= "<cell><![CDATA[".$notes."]]></cell>";
+    $xml .= "<cell><![CDATA[".$row['description']." ".$row['ac_check_number']."]]></cell>";
     $xml .= "<cell><![CDATA[".siLocal::date($row['date'])."]]></cell>";
     $xml .= "</row>";
 }

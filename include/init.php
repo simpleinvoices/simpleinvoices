@@ -61,15 +61,9 @@ if (!is_writable('./tmp/cache')) {
 include_once ('./config/define.php');
 global $environment;
 
-// Include another config file if required
-$config_file_path = "";
-if (is_file('./config/custom.config.php')) {
-    $config_file_path = "config/custom.config.php";
-} else {
-    $config_file_path = "config/config.php";
-}
 // added 'true' to allow modifications from db
-$config = new Zend_Config_Ini("./" . $config_file_path, $environment, true);
+$config = new Zend_Config_Ini("./" . CONFIG_FILE_PATH, $environment, true);
+$dbInfo = new DbInfo(CONFIG_FILE_PATH, "production");
 
 // set up app with relevant php setting
 date_default_timezone_set($config->phpSettings->date->timezone);
@@ -82,11 +76,11 @@ ini_set('log_errors',             $config->phpSettings->log_errors);
 ini_set('error_log',              $config->phpSettings->error_log);
 
 $zendDb = Zend_Db::factory($config->database->adapter,
-                          array('host'     => $config->database->params->host,
-                                'username' => $config->database->params->username,
-                                'password' => $config->database->params->password,
-                                'dbname'   => $config->database->params->dbname,
-                                'port'     => $config->database->params->port));
+                           array('host'     => $dbInfo->getHost(),
+                                 'username' => $dbInfo->getUsername(),
+                                 'password' => $dbInfo->getPassword(),
+                                 'dbname'   => $dbInfo->getDbname(),
+                                 'port'     => $dbInfo->getPort()));
 
 // It's possible that we are in the initial install mode. If so, set
 // a flag so we won't terminate on an "Unknown database" error later.
@@ -130,7 +124,7 @@ Zend_Date::setOptions(array('cache' => $cache)); // Active aussi pour Zend_Local
 
 $smarty = new Smarty();
 
-$smarty->assign("config_file_path", $config_file_path);
+$smarty->assign("config_file_path", CONFIG_FILE_PATH);
 
 $smarty->debugging = false;
 

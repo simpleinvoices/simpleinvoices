@@ -37,7 +37,7 @@ class invoice {
     public $where_value;
 
     public function __construct() {
-        $this->domain_id = domain_id::get($this->domain_id);
+        $this->domain_id = domain_id::get();
     }
 
     public function insert() {
@@ -323,7 +323,7 @@ class invoice {
                                      WHEN now()::date - iv.date <= '90 days'::interval THEN '61-90'
                                      ELSE '90+'
                                 END) AS Aging,
-                               iv.type_id As type_id,
+                               iv.type_id AS type_id,
                                p.pref_description AS type,
                                p.pref_inv_wording AS invoice_wording
                         FROM " . TB_PREFIX . "invoices iv
@@ -456,6 +456,18 @@ class invoice {
         }
 
         return $invoiceItems;
+    }
+
+    /**
+     * Get invoice type.
+     * @param string $id Invoice type ID.
+     * @return array Associative array for <i>invoice_type</i> record accessed.
+     */
+    public static function getInvoiceType($id) {
+        global $pdoDb;
+        $pdoDb->addSimpleWhere("inv_ty_id", $id);
+        $result = $pdoDb->request("SELECT", "invoice_type");
+        return $result;
     }
 
     /**

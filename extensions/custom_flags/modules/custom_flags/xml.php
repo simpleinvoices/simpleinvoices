@@ -28,10 +28,10 @@ function sql($type = '', $dir, $sort, $rp, $page) {
     $dir = (preg_match('/^(asc|desc)$/iD', $dir) ? 'A' : 'D');
     $pdoDb->setOrderBy(array($sort, $dir));
 
-    $caseStmt = new CaseStmt("enabled", "wording_for_enabled");
-    $caseStmt->addWhen("=", ENABLED, $LANG['enabled']);
-    $caseStmt->addWhen("!=", ENABLED, $LANG['disabled'], true);
-    $pdoDb->addToCaseStmts($caseStmt);
+    $ca = new CaseStmt("enabled", "wording_for_enabled");
+    $ca->addWhen("=", ENABLED, $LANG['enabled']);
+    $ca->addWhen("!=", ENABLED, $LANG['disabled'], true);
+    $pdoDb->addToCaseStmts($ca);
 
     $pdoDb->setSelectList(array("associated_table", "flg_id", "field_label", "enabled", "field_help"));
 

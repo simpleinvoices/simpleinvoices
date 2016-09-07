@@ -8,9 +8,9 @@ $op = (!empty ( $_POST ['op'] ) ? addslashes($_POST['op']) : NULL);
 
 $saved = false;
 if ($op === 'insert_product') {
-    if (insertProduct()) $saved = true;
+    if (Product::insertProduct()) $saved = true;
 } else if ($op === 'edit_product') {
-    if (isset($_POST ['save_product']) && updateProduct()) $saved = true;
+    if (isset($_POST ['save_product']) && Product::updateProduct()) $saved = true;
 }
 
 if (!isset($refresh_total)) $refresh_total = '&nbsp';

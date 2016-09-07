@@ -22,7 +22,7 @@ global $smarty;
 checkLogin();
 
 $biller_id = $_GET['id'];
-$biller = getBiller($biller_id);
+$biller = Biller::select($biller_id);
 
 // Drop down list code for invoice logo
 $files = getLogoList();

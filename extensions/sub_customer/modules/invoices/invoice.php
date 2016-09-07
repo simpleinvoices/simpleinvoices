@@ -19,10 +19,10 @@ global $smarty;
 checkLogin();
 
 // @formatter:off
-$billers     = getActiveBillers();
-$customers   = getActiveCustomers();
+$billers     = Biller::get_all(true);
+$customers   = Customer::get_all(true);
 $taxes       = getActiveTaxes();
-$products    = getActiveProducts();
+$products    = Product::select_all();
 $preferences = getActivePreferences();
 $defaults    = getSystemDefaults();
 
@@ -38,7 +38,7 @@ $defaults['preference'] = (isset($_GET['preference'])) ? $_GET['preference'] : $
 
 $defaultTax        = getDefaultTax();
 $defaultPreference = getDefaultPreference();
-$defaultCustomer   = getDefaultCustomer();
+$defaultCustomer   = Customer::getDefaultCustomer();
 $sub_customers     = SubCustomers::getSubCustomers($defaults['customer']);
 if (!empty( $_GET['line_items'] )) {
     $dynamic_line_items = $_GET['line_items'];

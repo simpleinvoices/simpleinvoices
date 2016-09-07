@@ -4,7 +4,7 @@ checkLogin();
 
 $product_id = $_GET['id'];
 
-$product = getProduct($product_id);
+$product = Product::select($product_id);
 
 $customFieldLabel = getCustomFieldLabels('',true);
 $cflgs = getCustomFlagsQualified('E');

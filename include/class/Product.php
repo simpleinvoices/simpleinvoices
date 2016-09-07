@@ -7,23 +7,42 @@ class Product {
         return $pdoDb->request("SELECT", "products");
     }
 
-    public static function get_all() {
-        global $pdoDb;
-        $pdoDb->addSimpleWhere("domain_id", domain_id::get(), 'AND');
-        $pdoDb->addSimpleWhere("visible", ENABLED);
-        $pdoDb->setOrderBy("description");
-        $pdoDb->setOrderBy("id");
-        return $pdoDb->request("SELECT", "products");
-    }
+    public static function select($id) {
+        global $pdoDb, $LANG;
 
-    public static function get($id) {
-        global $pdoDb;
+        $cs = new CaseStmt("enabled", "wording_for_enabled");
+        $cs->addWhen("=", ENABLED, $LANG['enabled']);
+        $cs->addWhen("!=", ENABLED, $LANG['disabled'], true);
+        $pdoDb->addToCaseStmts($cs);
+
         $pdoDb->addSimpleWhere("id", $id, "AND");
         $pdoDb->addSimpleWhere("domain_id", domain_id::get());
+
+        $pdoDb->setSelectAll(true);
+
+        $rows = $pdoDb->request("SELECT", "products");
+        return $rows['0'];
+    }
+
+    public static function select_all($active = true) {
+        global $pdoDb, $LANG;
+
+        $cs = new CaseStmt("enabled", "wording_for_enabled");
+        $cs->addWhen("=", ENABLED, $LANG['enabled']);
+        $cs->addWhen("!=", ENABLED, $LANG['disabled'], true);
+        $pdoDb->addToCaseStmts($cs);
+
+        $pdoDb->addSimpleWhere("domain_id", domain_id::get(), 'AND');
+        $pdoDb->addSimpleWhere("enabled", ENABLED);
+
+        $pdoDb->setOrderBy(array(array("description","A"), array("id","A")));
+
+        $pdoDb->setSelectAll(true);
+
         return $pdoDb->request("SELECT", "products");
     }
 
-    public static function select_all($type = '', $dir, $sort, $rp, $page) {
+    public static function xml_select($type, $dir, $sort, $rp, $page) {
         global $LANG, $pdoDb;
 
         $query = isset($_POST['query']) ? $_POST['query'] : null;
@@ -89,14 +108,139 @@ class Product {
         $se = new Select($fn, null, null, "quantity");
         $pdoDb->addToSelectStmts($se);
 
-        $cs = new CaseStmt("p.enabled");
-        $cs->addWhen( "=", ENABLED, $LANG['enabled']);
-        $cs->addWhen("!=", ENABLED, $LANG['disabled'], true);
-        $select = new Select($cs, null, null, "enabled");
-        $pdoDb->addToSelectStmts($select);
+        $ca = new CaseStmt("p.enabled", "enabled");
+        $ca->addWhen( "=", ENABLED, $LANG['enabled']);
+        $ca->addWhen("!=", ENABLED, $LANG['disabled'], true);
+        $pdoDb->addToCaseStmts($ca);
         // @formatter:on
 
         $rows = $pdoDb->request("SELECT", "products", "p");
         return $rows;
+    }
+
+    /**
+     * Insert a new record in the products table.
+     * @param number $enabled Product enabled/disabled status used if not present in
+     *        the <b>$_POST</b> array. Set to 1 (default) for enabled; 0 for disabled.
+     * @param number $visible Flags record seen in list. Defaults to 1 (visible).
+     *        Set to 0 for not visible.
+     * @param string $domain_id Domain user is logged into.
+     * @return PDO statement object on success, false on failure.
+     */
+    public static function insertProduct($enabled=ENABLED, $visible=1) {
+        global $pdoDb;
+
+        $cflgs_enabled = isExtensionEnabled('custom_flags');
+
+        if (isset($_POST['enabled'])) $enabled = $_POST['enabled'];
+
+        if (($attributes = $pdoDb->request("SELECT", "products_attributes")) === false) return false;
+
+        $attr = array();
+        foreach ($attributes as $v) {
+            if (isset($_POST['attribute' . $v['id']]) && $_POST['attribute' . $v['id']] == 'true') {
+                $attr[$v['id']] = $_POST['attribute' . $v['id']];
+            }
+        }
+
+        // @formatter:off
+        $notes_as_description = (isset($_POST['notes_as_description']) && $_POST['notes_as_description'] == 'true' ? 'Y' : NULL);
+        $show_description     = (isset($_POST['show_description']    ) && $_POST['show_description'    ] == 'true' ? 'Y' : NULL);
+
+        if ($cflgs_enabled) {
+            $custom_flags = '0000000000';
+            for ($i = 1; $i <= 10; $i++) {
+                if (isset($_POST['custom_flags_' . $i]) && $_POST['custom_flags_' . $i] == ENABLED) {
+                    $custom_flags = substr_replace($custom_flags, ENABLED, $i, 1);
+                }
+            }
+        }
+
+        $fauxPost = array('domain_id'            => domain_id::get(),
+                          'description'          => (isset($_POST['description']   ) ? $_POST['description']    : ""),
+                          'unit_price'           => (isset($_POST['unit_price']    ) ? $_POST['unit_price']     : ""),
+                          'cost'                 => (isset($_POST['cost']          ) ? $_POST['cost'] : ""),
+                          'reorder_level'        => (isset($_POST['reorder_level'] ) ? $_POST['reorder_level']  : ""),
+                          'custom_field1'        => (isset($_POST['custom_field1'] ) ? $_POST['custom_field1']  : ""),
+                          'custom_field2'        => (isset($_POST['custom_field2'] ) ? $_POST['custom_field2']  : ""),
+                          'custom_field3'        => (isset($_POST['custom_field3'] ) ? $_POST['custom_field3']  : ""),
+                          'custom_field4'        => (isset($_POST['custom_field4'] ) ? $_POST['custom_field4']  : ""),
+                          'notes'                => (isset($_POST['notes']         ) ? $_POST['notes']          : ""),
+                          'default_tax_id'       => (isset($_POST['default_tax_id']) ? $_POST['default_tax_id'] : ""),
+                          'enabled'              => $enabled,
+                          'visible'              => $visible,
+                          'attribute'            => json_encode($attr),
+                          'notes_as_description' => $notes_as_description,
+                          'show_description'     => $show_description);
+        if ($cflgs_enabled) {
+            $fauxPost['custom_flags'] = $custom_flags;
+        }
+        $pdoDb->setFauxPost($fauxPost);
+        $pdoDb->setExcludedFields(array("id" => 1));
+        // @formatter:on
+
+        if ($pdoDb->request("INSERT", "products") === false) return false;
+        return true;
+    }
+
+    /**
+     * Update a product record.
+     * @param string $domain_id Domain user is logged into.
+     * @return PDO statement object on success, false on failure.
+     */
+    public static function updateProduct() {
+        global $pdoDb;
+
+        $cflgs_enabled = isExtensionEnabled('custom_flags');
+
+        if (($attributes = $pdoDb->request("SELECT", "products_attributes")) === false) return false;
+
+        $attr = array();
+        foreach ($attributes as $v) {
+            $tmp = (isset($_POST['attribute' . $v['id']]) ? $_POST['attribute' . $v['id']] : "");
+            if ($tmp == 'true') {
+                $attr[$v['id']] = $tmp;
+            }
+        }
+
+        // @formatter:off
+        $notes_as_description = (isset($_POST['notes_as_description']) && $_POST['notes_as_description'] == 'true' ? 'Y' : NULL);
+        $show_description     = (isset($_POST['show_description'])     && $_POST['show_description']     == 'true' ? 'Y' : NULL);
+
+        if ($cflgs_enabled) {
+            $custom_flags = '0000000000';
+            for ($i = 1; $i <= 10; $i++) {
+                if (isset($_POST['custom_flags_' . $i]) && $_POST['custom_flags_' . $i] == ENABLED) {
+                    $custom_flags = substr_replace($custom_flags, ENABLED, $i - 1, 1);
+                }
+            }
+        }
+
+        $fauxPost = array('description'          => (isset($_POST['description'])    ? $_POST['description']    : ""),
+            'enabled'              => (isset($_POST['enabled'])        ? $_POST['enabled']        : ""),
+            'notes'                => (isset($_POST['notes'])          ? $_POST['notes']          : ""),
+            'default_tax_id'       => (isset($_POST['default_tax_id']) ? $_POST['default_tax_id'] : ""),
+            'custom_field1'        => (isset($_POST['custom_field1'])  ? $_POST['custom_field1']  : ""),
+            'custom_field2'        => (isset($_POST['custom_field2'])  ? $_POST['custom_field2']  : ""),
+            'custom_field3'        => (isset($_POST['custom_field3'])  ? $_POST['custom_field3']  : ""),
+            'custom_field4'        => (isset($_POST['custom_field4'])  ? $_POST['custom_field4']  : ""),
+            'unit_price'           => (isset($_POST['unit_price'])     ? $_POST['unit_price']     : ""),
+            'cost'                 => (isset($_POST['cost'])           ? $_POST['cost']           : ""),
+            'reorder_level'        => (isset($_POST['reorder_level'])  ? $_POST['reorder_level']  : ""),
+            'attribute'            => json_encode($attr),
+            'notes_as_description' => $notes_as_description,
+            'show_description'     => $show_description);
+        if ($cflgs_enabled) {
+            $fauxPost['custom_flags'] = $custom_flags;
+        }
+        $pdoDb->setFauxPost($fauxPost);
+
+        $pdoDb->addSimpleWhere("id", $_GET['id'], "AND");
+        $pdoDb->addSimpleWhere("domain_id", domain_id::get());
+
+        $pdoDb->setExcludedFields(array("id", "domain_id"));
+        // @formatter:on
+
+        return $pdoDb->request("UPDATE", "products");
     }
 }

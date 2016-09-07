@@ -15,7 +15,7 @@ $customer   = null;
 if (!empty($_GET['id'])) {
     // Filter by just one invoice
     $inv_id        = $_GET['id'];
-    $query         = getInvoicePayments($_GET['id']);
+    $query         = Payment::getInvoicePayments($_GET['id']);
     $invoice       = getInvoice($_GET['id']);
     $preference    = getPreference($invoice['preference_id']);
     $subPageActive = "payment_filter_invoice";
@@ -23,11 +23,11 @@ if (!empty($_GET['id'])) {
     // Filter by just one customer
     $c_id          = $_GET['c_id'];
     $query         = getCustomerPayments($_GET['c_id']);
-    $customer      = getCustomer($_GET['c_id']);
+    $customer      = Customer::get($_GET['c_id']);
     $subPageActive = "payment_filter_customer";
 } else {
     // No filters
-    $query = getPayments();
+    $query = Payment::select_all();
     $subPageActive = "payment_manage";
 }
 

@@ -22,7 +22,7 @@ checkLogin();
 
 //get the invoice id
 $biller_id = $_GET['id'];
-$biller = getBiller($biller_id);
+$biller = Biller::select($biller_id);
 
 // drop down list code for invoice logo
 $files = getLogoList();

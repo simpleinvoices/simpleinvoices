@@ -25,17 +25,17 @@ $invoice_id = $_GET['id'];
 
 $invoice = getInvoice($invoice_id);
 $invoice_number_of_taxes = numberOfTaxesForInvoice($invoice_id);
-$invoice_type =  getInvoiceType($invoice['type_id']);
+$invoice_type = invoice::getInvoiceType($invoice['type_id']);
 
-$customer = getCustomer($invoice['customer_id']);
-$biller = getBiller($invoice['biller_id']);
+$customer = Customer::get($invoice['customer_id']);
+$biller = Biller::select($invoice['biller_id']);
 $preference = getPreference($invoice['preference_id']);
 $defaults = getSystemDefaults();
 
 $invoiceobj = new invoice();
 $invoiceItems = $invoiceobj->getInvoiceItems($invoice_id);
 
-$sub_customer = getCustomer($invoice['custom_field1']);
+$sub_customer = Customer::get($invoice['custom_field1']);
     $eway_check = new eway();
     $eway_check->invoice = $invoice;
     $eway_pre_check = $eway_check->pre_check();

@@ -14,6 +14,13 @@ define("CONSULTING_INVOICE","3");
 define("LOGGING",false);
 //define("LOGGING",true);
 
+// Include another config file if required
+if (is_file('./config/custom.config.php')) {
+    define("CONFIG_FILE_PATH", "config/custom.config.php");
+} else {
+    define("CONFIG_FILE_PATH", "config/config.php");
+}
+
 ####################
 /* Environment*/
 ####################
@@ -25,3 +32,4 @@ any config.php setting in this extra file(which wont be kept in svn) will overwr
 RELEASE TODO: make sure $environment is set back to live
 */
 $environment = "production"; //test,staging,dev,live etc..
+if ($environment) {} // remove unused warning.

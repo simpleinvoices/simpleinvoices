@@ -4,26 +4,6 @@
  */
 class Inventory {
 
-    public static function insert() {
-        global $pdoDb;
-        $pdoDb->setExcludedFields(array("id" => 1));
-        $result = $pdoDb->request("INSERT", "inventory");
-        return $result;
-    }
-
-    public static function update() {
-        global $pdoDb;
-        $pdoDb->setExcludedFields(array("id" => 1, "domain_id" => 1));
-        $pdoDb->addSimpleWhere("id", $_GET['id'], "AND");
-        $pdoDb->addSimpleWhere("domain_id", domain_id::get());
-        $result = $pdoDb->request("UPDATE", "inventory");
-        return $result;
-    }
-
-    public static function delete() {
-        throw new Exception("inventory.php delete(): delete not supported.");
-    }
-
     public static function count() {
         global $pdoDb;
         $pdoDb->addSimpleWhere("domain_id", domain_id::get());
@@ -32,7 +12,22 @@ class Inventory {
         return $rows[0]['count'];
     }
 
-    public static function select_all($type, $sort, $dir, $rp, $page) {
+    public static function select() {
+        global $pdoDb;
+        $join = new Join("LEFT", "inventory", "iv");
+        $join->addSimpleItem("p.id", new DbField("iv.product_id"), "AND");
+        $join->addSimpleItem("p.domain_id", new DbField("iv.domain_id"));
+        $pdoDb->addToJoins($join);
+
+        $pdoDb->addSimpleWhere("iv.domain_id", domain_id::get(), "AND");
+        $pdoDb->addSimpleWhere("iv.id", $_GET['id']);
+
+        $pdoDb->setSelectList(array("iv.*", "p.description"));
+        $result = $pdoDb->request("SELECT", "products", "p");
+        return $result[0];
+    }
+
+    public static function xml_select($type, $sort, $dir, $rp, $page) {
         global $pdoDb;
 
         $query = isset ( $_POST ['query'] ) ? $_POST ['query'] : null;
@@ -74,23 +69,28 @@ class Inventory {
         return $result;
     }
 
-    public static function select() {
+    public static function insert() {
         global $pdoDb;
-        $join = new Join("LEFT", "inventory", "iv");
-        $join->addSimpleItem("p.id", new DbField("iv.product_id"), "AND");
-        $join->addSimpleItem("p.domain_id", new DbField("iv.domain_id"));
-        $pdoDb->addToJoins($join);
-        
-        $pdoDb->addSimpleWhere("iv.domain_id", domain_id::get(), "AND");
-        $pdoDb->addSimpleWhere("iv.id", $_GET['id']);
-        
-        $pdoDb->setSelectList(array("iv.*", "p.description"));
-        $result = $pdoDb->request("SELECT", "products", "p");
-        return $result[0];
+        $pdoDb->setExcludedFields(array("id" => 1));
+        $result = $pdoDb->request("INSERT", "inventory");
+        return $result;
+    }
+
+    public static function update() {
+        global $pdoDb;
+        $pdoDb->setExcludedFields(array("id" => 1, "domain_id" => 1));
+        $pdoDb->addSimpleWhere("id", $_GET['id'], "AND");
+        $pdoDb->addSimpleWhere("domain_id", domain_id::get());
+        $result = $pdoDb->request("UPDATE", "inventory");
+        return $result;
+    }
+
+    public static function delete() {
+        throw new Exception("inventory.php delete(): delete not supported.");
     }
 
     public static function check_reorder_level() {
-        $rows = Product::select_all('count');
+        $rows = Product::xml_select('count',"","","","");
         $email = "";
         $result = array();
         $email_message = "";

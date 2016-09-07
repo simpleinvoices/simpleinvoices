@@ -215,7 +215,6 @@ function simpleInvoicesError($type, $info1 = "", $info2 = "") {
             break;
 
         case "install":
-            global $config_file_path;
             $error = exit("
               <div id='Container' class='col si_wrap'>
                 <div id='si_install_logo'>
@@ -247,7 +246,7 @@ function simpleInvoicesError($type, $info1 = "", $info2 = "") {
                             preferably with UTF-8 collation. It can be named whatever you like but the
                             name currently in the configuration file is, $dbname.</li>
                         <li>Assign an administrative user and password to the database.</li>
-                        <li>Enter the database connection details in the <strong>$config_file_path</strong> file.
+                        <li>Enter the database connection details in the <strong>" . CONFIG_FILE_PATH . "</strong> file.
                             The fields that need to be set are:
                             <ul style='font-family:\"Lucida Console\", \"Courier New\"'>
                                 <li>database.params.host&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;localhost</li>

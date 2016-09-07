@@ -238,8 +238,8 @@ class Cron {
                         $invoiceobj = new invoice ();
                         $invoice               = $invoiceobj->select($new_invoice_id, $domain_id);
                         $preference            = getPreference($invoice['preference_id'], $domain_id);
-                        $biller                = getBiller($invoice['biller_id'], $domain_id);
-                        $customer              = getCustomer($invoice['customer_id'], $domain_id);
+                        $biller                = Biller::select($invoice['biller_id']);
+                        $customer              = Customer::get($invoice['customer_id']);
                         $spc2us_pref           = str_replace(" ", "_", $invoice['index_name']);
                         $pdf_file_name_invoice = $spc2us_pref . ".pdf";
 

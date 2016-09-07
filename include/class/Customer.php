@@ -1,14 +1,27 @@
 <?php
 
 class Customer {
+
+    /**
+     * Get a customer record.
+     * @param string $id Unique ID record to retrieve.
+     * @return array Row retrieved. Test for "=== false" to check for failure.
+     */
     public static function get($id) {
         global $pdoDb;
 
         $pdoDb->addSimpleWhere("domain_id", domain_id::get(), "AND");
         $pdoDb->addSimpleWhere("id", $id);
-        return $pdoDb->request("SELECT", "customers");
+        $rows = $pdoDb->request("SELECT", "customers");
+        return $rows[0];
     }
 
+    /**
+     * Retrieve all <b>customers</b> records per specified option.
+     * @param boolean $enabled_only (Defaults to <b>false</b>) If set to <b>true</b> only Customers 
+     *        that are <i>Enabled</i> will be selected. Otherwise all <b>customers</b> records are returned.
+     * @return array Customers selected.
+     */
     public static function get_all($enabled_only = false) {
         global $LANG, $pdoDb;
 
@@ -30,33 +43,87 @@ class Customer {
 
         return $customers;
     }
+    public static function getCustomerInvoices($id) {
+        global $pdoDb;
+        $fn = new FunctionStmt("SUM", "COALESCE(ii.total,0)");
+        $fr = new FromStmt("invoice_items", "ii");
+        $wh = new WhereClause();
+        $wh->addSimpleItem("ii.invoice_id", new DbField("iv.id"), "AND");
+        $wh->addSimpleItem("ii.domain_id", new DbField("iv.domain_id"));
+        $se = new Select($fn, $fr, $wh, "invd");
+        $pdoDb->addToSelectStmts($se);
 
-    public static function insert() {
+        $fn = new FunctionStmt("SUM", "COALESCE(ap.ac_amount, 0)");
+        $fr = new FromStmt("payment", "ap");
+        $wh = new WhereClause();
+        $wh->addSimpleItem("ap.ac_inv_id", new DbField("iv.id"), "AND");
+        $wh->addSimpleItem("ap.domain_id", new DbField("iv.domain_id"));
+        $se = new Select($fn, $fr, $wh, "pmt");
+        $pdoDb->addToSelectStmts($se);
+
+        $fn = new FunctionStmt("COALESCE", "invd, 0");
+        $se = new Select($fn, null, null, "total");
+        $pdoDb->addToSelectStmts($se);
+
+        $fn = new FunctionStmt("COALESCE", "pmt, 0");
+        $se = new Select($fn, null, null, "paid");
+        $pdoDb->addToSelectStmts($se);
+
+        $pdoDb->addToFunctions(new FunctionStmt("SELECT", "total - paid", "owing"));
+
+        $pdoDb->setSelectList(array("iv.id", "iv.index_id", "iv.date", "iv.type_id",
+                                    "pr.status", "pr.pref_inv_wording"));
+
+        $jn = new Join("LEFT", "preferences", "pr");
+        $oc = new OnClause();
+        $oc->addSimpleItem("pr.pref_id", new DbField("iv.preference_id"), "AND");
+        $oc->addSimpleItem("pr.domain_id", new DbField("iv.domain_id"));
+        $jn->setOnClause($oc);
+        $pdoDb->addToJoins($jn);
+
+        $pdoDb->addSimpleWhere("iv.customer_id", $id, "AND");
+        $pdoDb->addSimpleWhere("iv.domain_id", domain_id::get());
+
+        $pdoDb->setOrderBy(array("iv.id", "D"));
+
+        $rows = $pdoDb->request("SELECT", "invoices", "iv");
+
+        $invoices = array();
+        foreach ($rows as $row) {
+            $row['calc_date'] = date('Y-m-d', strtotime($row['date']));
+            $row['date'] = siLocal::date($row['date']);
+            $invoices[] = $row;
+        }
+
+        return $invoices;
+    }
+
+    /**
+     * Get a default customer name.
+     * @param string $domain_id Domain user is logged into.
+     * @return string Default customer name
+     */
+    public static function getDefaultCustomer($domain_id = '') {
         global $pdoDb;
 
-        // @formatter:off
-        $pdoDb->setExcludedFields(array("id" => 1));
-        $fauxPost = array('attention'       => $this->attention,
-                          'name'            => $this->name,
-                          'street_address'  => $this->street_address,
-                          'street_address2' => $this->street_address2,
-                          'city'            => $this->city,
-                          'state'           => $this->state,
-                          'zip_code'        => $this->zip_code,
-                          'country'         => $this->country,
-                          'phone'           => $this->phone,
-                          'mobile_phone'    => $this->mobile_phone,
-                          'fax'             => $this->fax,
-                          'email'           => $this->email,
-                          'notes'           => $this->notes,
-                          'custom_field1'   => $this->custom_field1,
-                          'custom_field2'   => $this->custom_field2,
-                          'custom_field3'   => $this->custom_field3,
-                          'custom_field4'   => $this->custom_field4,
-                          'enabled'         => $this->enabled,
-                          'domain_id'       => domain_id::get());
-        // @formatter:on
-        $pdoDb->setFauxPost($fauxPost);
-        return $pdoDb->request("INSERT", "customers");
+        $pdoDb->addSimpleWhere("s.name", "customer", "AND");
+        $pdoDb->addSimpleWhere("s.domain_id", domain_id::get());
+
+        $jn = new Join("INNER", "customer", "c");
+        $jn->addSimpleItem("c.id", new DbField("s.value"), "AND");
+        $jn->addSimpleItem("c.domain_id", new DbField("s.domain_id"));
+        $pdoDb->addToJoins($jn);
+
+        $pdoDb->setSelectList(array("c.name AS name", "C.id"));
+
+        $rows = $pdoDb->request("SELECT", "system_defaults", "s");
+/*
+        $sql = "SELECT c.name, c.id AS name FROM " . TB_PREFIX . "customers c, " . TB_PREFIX . "system_defaults s
+                WHERE (s.name = 'customer' AND c.id = s.value AND c.domain_id = s.domain_id AND s.domain_id = :domain_id)";
+        $sth = dbQuery($sql, ':domain_id', $domain_id);
+        return $sth->fetch();
+*/
+        return $rows[0];
     }
+    
 }

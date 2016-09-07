@@ -26,8 +26,8 @@ $get_format = $_GET['format'];
 $get_file_type = $_GET['filetype'];
 
 
-$biller = getBiller($_GET['biller_id']);
-$customer = getCustomer($_GET['customer_id']);
+$biller = Biller::select($_GET['biller_id']);
+$customer = Customer::get($_GET['customer_id']);
 
 #create PDF name
       
@@ -53,7 +53,7 @@ if ($_GET['stage'] == 2 ) {
 	#$attachment = file_get_contents('./tmp/cache/statement_'.$biller_id.'_'.$customer_id.'_'.$start_date.'_'.$end_date.'.pdf');
 	$attachment = 'statement_'.$biller_id.'_'.$customer_id.'_'.$start_date.'_'.$end_date.'.pdf';
 
-	$email = new email();
+	$email = new Email();
 	$email -> format = 'statement';
 	$email -> notes = $_POST['email_notes'];
 	$email -> from = $_POST['email_from'];

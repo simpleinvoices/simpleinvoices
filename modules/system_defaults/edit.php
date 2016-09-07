@@ -90,7 +90,7 @@ switch ($get_val) {
 
   case "biller":
     $default = "biller";
-    $billers = getActiveBillers();
+    $billers = Biller::get_all(true);
     if (empty($billers)) {
       $value = "<p><em>{$LANG['no_billers']}</em></p>" . "\n";
     }
@@ -111,7 +111,7 @@ switch ($get_val) {
 
   case "customer":
     $default   = "customer";
-    $customers = getActiveCustomers();
+    $customers = Customer::get_all(true);
 
     if (empty($customers)) {
       $value = "<p><em>{$LANG['no_customers']}</em></p>" . "\n";
@@ -176,7 +176,7 @@ switch ($get_val) {
     break;
 
   case "def_payment_type":
-    $payments = getActivePaymentTypes();
+    $payments = PaymentType::select_all(true);
     if (empty($payments)) {
       $value = "<p><em>{$LANG['payment_type']}</em></p>";
     }

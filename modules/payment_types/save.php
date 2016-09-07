@@ -1,5 +1,5 @@
 <?php
-global $db_server, $auth_session, $smarty;
+global $smarty;
 
 // Stop the direct browsing to this file.
 // Let index.php handle which files get displayed.
@@ -10,36 +10,10 @@ $op = !empty($_POST['op']) ? addslashes($_POST['op']) : NULL;
 
 $saved = false;
 if ($op === 'insert_payment_type') {
-    // $formatter:off
-    if ($db_server == 'pgsql') {
-        $sql = "INSERT into " . TB_PREFIX . "payment_types
-                       (domain_id  , pt_description, pt_enabled)
-                VALUES (:domain_id', :description  , :enabled)";
-    } else {
-        $sql = "INSERT INTO " . TB_PREFIX . "payment_types
-                       (domain_id , pt_description, pt_enabled)
-                VALUES (:domain_id, :description  , :enabled)";
-    }
-
-    if (dbQuery($sql, ':domain_id'  , $auth_session->domain_id,
-                      ':description', $_POST['pt_description'],
-                      ':enabled'    , $_POST['pt_enabled'])) {
-        $saved = true;
-    }
-    // @formatter:on
+    if (PaymentType::insert(domain_id::get(), $_POST['pt_description'], $_POST['pt_enabled']) > 0) $saved = true;
 } else if ($op === 'edit_payment_type') {
     if (isset($_POST['save_payment_type'])) {
-        // @formatter:off
-        $sql = "UPDATE " . TB_PREFIX . "payment_types
-                SET pt_description = :description,
-                    pt_enabled = :enabled
-                WHERE pt_id = :id";
-        if (dbQuery($sql, ':description', $_POST['pt_description'],
-                          ':enabled'    , $_POST['pt_enabled'],
-                          ':id'         , $_GET['id'])) {
-            $saved = true;
-        }
-        // @formatter:on
+        $saved = PaymentType::update($_GET['id'], $_POST['pt_description'], $_POST['pt_enabled']);
     }
 }
 

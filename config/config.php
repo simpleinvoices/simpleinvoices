@@ -40,7 +40,7 @@ encryption.default.key              = this_is_the_encryption_key_change_it
 nonce.key                           = this_should_be_random_and_secret_so_change_it
 nonce.timelimit                     = 3600
 
-version.name                        = 2016.0.beta.2
+version.name                        = 2016.0.beta.3
 
 debug.level                         = All
 debug.error_reporting               = E_ERROR

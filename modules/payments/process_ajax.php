@@ -27,7 +27,7 @@ if (!$q) return;
 
 while ($invoice = getInvoices($sth)) {
 
-	$invoiceType = getInvoiceType($invoice['type_id']);
+	$invoiceType = invoice::getInvoiceType($invoice['type_id']);
 
 	if (strpos(strtolower($invoice['index_id']), $q) !== false) {
 		$invoice['id'] = htmlsafe($invoice['id']);

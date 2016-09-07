@@ -8,16 +8,8 @@ class BackupDb {
     public function __construct() {
         $this->output = "";
 
-        global $config;
-        // @formatter:off
-        $type = substr($config->database->adapter, 4);
-        $host = $config->database->params->host . ':' .
-                $config->database->params->port;
-        $name = $config->database->params->dbname;
-        $user = $config->database->params->username;
-        $pwrd = $config->database->params->password;
-        // @formatter:on
-        $this->pdoDb = new PdoDb(new DbInfo($type, $name, $host, $pwrd, $user));
+        global $environment;
+        $this->pdoDb = new PdoDb(new DbInfo(CONFIG_FILE_PATH, $environment, "database"));
     }
 
     public function start_backup($filename) {

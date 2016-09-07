@@ -1,17 +1,16 @@
 <?php
+global $smarty, $LANG, $pdoDb;
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
 // Add check_number field to the database if not present.
-require_once "./extensions/payments/include/class/payment.php";
-payment::addNewFields();
+require_once "./extensions/payments/include/class/CheckNumber.php";
+CheckNumber::addNewFields();
 
-$maxInvoice = maxInvoice();
-
-$paymentTypes = getActivePaymentTypes();
+$paymentTypes = PaymentType::select_all(true);
 $chk_pt = 0;
 foreach ($paymentTypes as $ptyp) {
-    if (strtolower($ptyp['pt_description']) == 'check') {
+    if (preg_match('/^check$/iD', $ptyp['pt_description'])) {
         $chk_pt = trim($ptyp['pt_id']);
         break;
     }
@@ -32,33 +31,28 @@ echo "        return (false);\n";
 echo "    };\n";
 echo "    theForm.ac_check_number.value = cknum;\n";
 echo "}\n";
-//jsValidateifNum("ac_check_number",$LANG['check_number']);
 jsFormValidationEnd();
 jsEnd();
 // end validation generation
 
 $today = date("Y-m-d");
-
 $invoice = null;
-
 if(isset($_GET['id'])) {
     $invoiceobj = new invoice();
     $invoice = $invoiceobj->select($_GET['id']);
 } else {
-    $sql = "SELECT * FROM ".TB_PREFIX."invoices WHERE domain_id = :domain_id";
-    $sth = dbQuery($sql, ':domain_id', domain_id::get());
-    $invoice = $sth->fetch(PDO::FETCH_ASSOC);
+    $pdoDb->addSimpleWhere("domain_id", domain_id::get());
+    $rows = $pdoDb->request("SELECT", "invoices");
+    $invoice = $rows[0];
 }
 
 // @formatter:off
-$customer = getCustomer($invoice['customer_id']);
-$biller   = getBiller($invoice['biller_id']);
+$customer = Customer::get($invoice['customer_id']);
+$biller   = Biller::select($invoice['biller_id']);
 $defaults = getSystemDefaults();
-$pt       = getPaymentType($defaults['payment_type']);
 // @formatter:on
 
 $invoices = new invoice();
-$invoices->sort='id';
 $invoices->having='money_owed';
 $invoices->having_and='real';
 $invoice_all = $invoices->select_all('count');
@@ -78,4 +72,3 @@ $smarty->assign('pageActive'   , 'payment');
 $smarty->assign('subPageActive', $subPageActive);
 $smarty->assign('active_tab'   , '#money');
 // @formatter:on
-

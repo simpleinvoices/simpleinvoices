@@ -12,8 +12,8 @@ $page = (isset($_POST['page']))      ? $_POST['page']      : "1";
 $defaults = getSystemDefaults();
 $smarty->assign("defaults", $defaults);
 
-$products_all = Product::select_all(''     , $dir, $sort, $rp, $page);
-$count        = Product::select_all('count', $dir, $sort, $rp, $page);
+$products_all = Product::xml_select(''     , $dir, $sort, $rp, $page);
+$count        = Product::xml_select('count', $dir, $sort, $rp, $page);
 
 $xml = "";
 $xml .= "<rows>";

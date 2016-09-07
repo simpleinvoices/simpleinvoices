@@ -102,9 +102,9 @@ class export {
                 }
 
                 $templatePath     = "./templates/default/statement/index.tpl";
-                $biller_details   = getBiller($this->biller_id, $this->domain_id);
+                $biller_details   = Biller::select($this->biller_id);
                 $billers          = $biller_details;
-                $customer_details = getCustomer($this->customer_id, $this->domain_id);
+                $customer_details = Customer::get($this->customer_id);
                 $this->file_name  = "statement_" .
                                 $this->biller_id     . "_" .
                                 $this->customer_id   . "_" .
@@ -127,19 +127,19 @@ class export {
                                 break;
 
             case "payment":
-                $payment = getPayment($this->id);
+                $payment = Payment::select($this->id);
 
                 // Get Invoice preference to link from this screen back to the invoice
                 $invoice = getInvoice($payment['ac_inv_id'], $this->domain_id);
-                $biller  = getBiller($payment['biller_id'] , $this->domain_id);
+                $biller  = Biller::select($payment['biller_id']);
 
                 $logo = getLogo($biller);
                 $logo = str_replace(" ", "%20", $logo);
 
-                $customer          = getCustomer($payment['customer_id'], $this->domain_id);
-                $invoiceType       = getInvoiceType($invoice['type_id']);
+                $customer          = Customer::get($payment['customer_id']);
+                $invoiceType       = invoice::getInvoiceType($invoice['type_id']);
                 $customFieldLabels = getCustomFieldLabels($this->domain_id, true);
-                $paymentType       = getPaymentType($payment['ac_payment_type'], $this->domain_id);
+                $paymentType       = PaymentType::select($payment['ac_payment_type']);
                 $preference        = getPreference($invoice['preference_id'], $this->domain_id);
 
                 $smarty->assign("payment"          , $payment);
@@ -169,15 +169,12 @@ class export {
 
                 $invoice_number_of_taxes = numberOfTaxesForInvoice($this->id, $this->domain_id);
 
-                $customer = getCustomer($invoice['customer_id'], $this->domain_id);
+                $customer = Customer::get($invoice['customer_id']);
 
                 $past_due_date = (date("Y-m-d", strtotime('-30 days')) . ' 00:00:00');
                 $past_due_amt = CustomersPastDue::getCustomerPastDue($invoice['customer_id'], $this->id, $past_due_date);
 
-                $billerobj = new biller();
-                $billerobj->domain_id = $this->domain_id;
-
-                $biller     = $billerobj->select($invoice['biller_id']);
+                $biller     = Biller::select($invoice['biller_id']);
                 $preference = getPreference($invoice['preference_id'], $this->domain_id);
                 $defaults   = getSystemDefaults($this->domain_id);
 

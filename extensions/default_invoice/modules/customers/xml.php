@@ -27,10 +27,10 @@ function sql($type='', $start, $dir, $sort, $rp, $page ) {
 
     $pdoDb->setSelectList(array("c.id as CID", "c.name", "c.enabled"));
 
-    $case = new CaseStmt("c.enabled", "enabled_txt");
-    $case->addWhen( "=", ENABLED, $LANG['enabled']);
-    $case->addWhen("!=", ENABLED, $LANG['disabled'], true);
-    $pdoDb->addToCaseStmts($case);
+    $ca = new CaseStmt("c.enabled", "enabled_txt");
+    $ca->addWhen( "=", ENABLED, $LANG['enabled']);
+    $ca->addWhen("!=", ENABLED, $LANG['disabled'], true);
+    $pdoDb->addToCaseStmts($ca);
 
     $fn = new FunctionStmt("SUM", "COALESCE(ii.total, 0)", "total");
     $fr = new FromStmt("invoice_items", "ii");

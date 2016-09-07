@@ -1,8 +1,7 @@
 <?php
 require_once "include/class/PdoDb.php";
+global $auth_session, $config, $dbInfo;
 
-global $config, $auth_session;
-$pdoAdapter = substr($config->database->adapter, 4);
 if (LOGGING) {
     // Logging connection to prevent mysql_insert_id problems. Need to be called before the second connect...
     $log_dbh = db_connector();
@@ -11,16 +10,12 @@ if (LOGGING) {
 /**
  *
  * @deprecated - Migrate to PdoDb class
- *             Rich Rowley 20160702
+ *               Rich Rowley 20160702
  */
 $dbh = db_connector();
 
 // @formatter:off
-$pdoDb = new PdoDb(new DbInfo($pdoAdapter,
-                              $config->database->params->dbname,
-                              $config->database->params->host,
-                              $config->database->params->password,
-                              $config->database->params->username));
+$pdoDb = new PdoDb($dbInfo);
 $pdoDb->clearAll(); // to eliminate never used warning.
 // @formatter:on
 
@@ -38,39 +33,31 @@ unset($can_chk_log);
  * @return PDO
  */
 function db_connector() {
-    global $config;
-    global $databaseBuilt;
-    global $pdoAdapter;
+    global $config, $databaseBuilt, $dbInfo;
 
     if (!$databaseBuilt) return NULL;
 
-    if (!defined('PDO::MYSQL_ATTR_INIT_COMMAND') && $pdoAdapter == "mysql" && $config->database->adapter->utf8 == true) {
+    if (!defined('PDO::MYSQL_ATTR_INIT_COMMAND') && $dbInfo->getAdapter() == "mysql" && $config->database->adapter->utf8 == true) {
         simpleInvoicesError("PDO::mysql_attr");
     }
 
     try {
         // @formatter:off
-        switch ($pdoAdapter) {
+        switch ($dbInfo->getAdapter()) {
             case "pgsql":
-                $connlink = new PDO($pdoAdapter . ':host=' . $config->database->params->host .
-                                               '; dbname=' . $config->database->params->dbname,
-                                                             $config->database->params->username,
-                                                             $config->database->params->password);
-                break;
-
             case "sqlite":
-                $connlink = new PDO($pdoAdapter . ':host=' . $config->database->params->host .
-                                               '; dbname=' . $config->database->params->dbname,
-                                                             $config->database->params->username,
-                                                             $config->database->params->password);
+                $connlink = new PDO($dbInfo->getAdapter() . ':host=' . $dbInfo->getHost() .
+                                                         '; dbname=' . $dbInfo->getDbname(),
+                                                                       $dbInfo->getUsername(),
+                                                                       $dbInfo->getPassword());
                 break;
 
             case "mysql":
-                $connlink = new PDO($pdoAdapter . ':host='   . $config->database->params->host .
-                                                 '; port='   . $config->database->params->port .
-                                                 '; dbname=' . $config->database->params->dbname,
-                                                               $config->database->params->username,
-                                                               $config->database->params->password);
+                $connlink = new PDO($dbInfo->getAdapter() . ':host=' . $dbInfo->getHost() .
+                                                           '; port=' . $dbInfo->getPort() .
+                                                         '; dbname=' . $dbInfo->getDbname(),
+                                                                       $dbInfo->getUsername(),
+                                                                       $dbInfo->getPassword());
                 break;
         }
         // @formatter:on
@@ -226,13 +213,11 @@ function dbLogger($sqlQuery, $dump = false) {
  * @return Record ID
  */
 function lastInsertId() {
-    global $config;
-    global $dbh;
-    $pdoAdapter = substr($config->database->adapter, 4);
+    global $config, $dbh, $dbInfo;
 
-    if ($pdoAdapter == 'pgsql') {
+    if ($dbInfo->getAdapter() == 'pgsql') {
         $sql = 'SELECT lastval()';
-    } elseif ($pdoAdapter == 'mysql') {
+    } elseif (adapter == 'mysql') {
         $sql = 'SELECT last_insert_id()';
     }
     // echo $sql;
@@ -402,29 +387,6 @@ function getGenericRecord($table, $id, $domain_id = '', $id_field = 'id') {
 }
 
 /**
- * Get a customer record.
- * @param string $id Unique ID record to retrieve.
- * @param string $domain_id Domain ID logged into.
- * @return array Row retrieved. Test for "=== false" to check for failure.
- */
-function getCustomer($id, $domain_id = '') {
-    return getGenericRecord('customers', $id, $domain_id);
-}
-
-/**
- * Get a biller record.
- * @param string $id Unique ID record to retrieve.
- * @param string $domain_id Domain ID logged into.
- * @return array Row retrieved. Test for "=== false" to check for failure.
- */
-function getBiller($id, $domain_id = '') {
-    global $LANG;
-    $record = getGenericRecord('biller', $id, $domain_id);
-    $record['wording_for_enabled'] = $record['enabled'] == 1 ? $LANG['enabled'] : $LANG['disabled'];
-    return $record;
-}
-
-/**
  * Get a preference record.
  * @param string $id Unique ID record to retrieve.
  * @param string $domain_id Domain ID logged into.
@@ -433,8 +395,8 @@ function getBiller($id, $domain_id = '') {
 function getPreference($id, $domain_id = '') {
     global $LANG;
     $record = getGenericRecord('preferences', $id, $domain_id, 'pref_id');
-    $record['status_wording'] = $record['status'] == 1 ? $LANG['real'] : $LANG['draft'];
-    $record['enabled'] = $record['pref_enabled'] == 1 ? $LANG['enabled'] : $LANG['disabled'];
+    $record['status_wording'] = $record['status'] == ENABLED ? $LANG['real'] : $LANG['draft'];
+    $record['enabled'] = $record['pref_enabled'] == ENABLED ? $LANG['enabled'] : $LANG['disabled'];
     return $record;
 }
 
@@ -447,7 +409,7 @@ function getPreference($id, $domain_id = '') {
 function getTaxRate($id, $domain_id = '') {
     global $LANG;
     $record = getGenericRecord('tax', $id, $domain_id, 'tax_id');
-    $record['enabled'] = $record['tax_enabled'] == 1 ? $LANG['enabled'] : $LANG['disabled'];
+    $record['enabled'] = $record['tax_enabled'] == ENABLED ? $LANG['enabled'] : $LANG['disabled'];
     return $record;
 }
 
@@ -482,7 +444,7 @@ function getPreferences($domain_id = '') {
     $preferences = NULL;
 
     for ($i = 0; $preference = $sth->fetch(); $i++) {
-        $preference['enabled'] = ($preference['pref_enabled'] == 1 ? $LANG['enabled'] : $LANG['disabled']);
+        $preference['enabled'] = ($preference['pref_enabled'] == ENABLED ? $LANG['enabled'] : $LANG['disabled']);
         $preferences[$i] = $preference;
     }
 
@@ -508,7 +470,7 @@ function getActiveTaxes($domain_id = '') {
                 ORDER BY tax_description";
     } else {
         $sql = "SELECT * FROM " . TB_PREFIX . "tax
-                WHERE tax_enabled != 0 and domain_id = :domain_id
+                WHERE tax_enabled == " . ENABLED . " and domain_id = :domain_id
                 ORDER BY tax_description";
     }
     // @formatter:on
@@ -572,515 +534,12 @@ function getCustomFieldLabels($domain_id = '', $noUndefinedLabels = FALSE) {
 }
 
 /**
- * Get biller records.
- * @param string $domain_id Domain ID logged info.
- * @return array Rows retrieved. Test for "=== false" to check for failure.
- *         Note that a field named, "enabled", was added to store the $LANG
- *         enable or disabled word depending on the "pref_enabled" setting
- *         of the record.
- */
-function getBillers($domain_id = '') {
-    global $LANG;
-    $domain_id = domain_id::get($domain_id);
-
-    $sql = "SELECT * FROM " . TB_PREFIX . "biller WHERE domain_id = :domain_id ORDER BY name";
-    $sth = dbQuery($sql, ':domain_id', $domain_id);
-
-    $billers = NULL;
-
-    for ($i = 0; $biller = $sth->fetch(); $i++) {
-        $biller['enabled'] = ($biller['enabled'] == 1 ? $LANG['enabled'] : $LANG['disabled']);
-        $billers[$i] = $biller;
-    }
-
-    return $billers;
-}
-
-/**
- * Get active biller records.
- * @param string $domain_id Domain ID logged info.
- * @return array Rows retrieved. Test for "=== false" to check for failure.
- */
-function getActiveBillers($domain_id = '') {
-    global $db_server;
-    $domain_id = domain_id::get($domain_id);
-
-    if ($db_server == 'pgsql') {
-        $sql = "SELECT * FROM " . TB_PREFIX . "biller
-                WHERE enabled AND domain_id = :domain_id ORDER BY name";
-    } else {
-        $sql = "SELECT * FROM " . TB_PREFIX . "biller
-                WHERE enabled != 0 AND domain_id = :domain_id ORDER BY name";
-    }
-    $sth = dbQuery($sql, ':domain_id', $domain_id);
-
-    return $sth->fetchAll();
-}
-
-/**
  * Get tax types
  * @return string[] Types of tax records (% - percentage, $ - dollars)
  */
 function getTaxTypes() {
     $types = array('%' => '%', '$' => '$');
     return $types;
-}
-
-/**
- * Get a specific payment type record.
- * @param int $id Unique ID of record to retrieve.
- * @param string $domain_id Domain ID logged into.
- * @return array Rows retrieved. Test for "=== false" to check for failure.
- *         Note that a field named, "enabled", was added to store the $LANG
- *         enable or disabled word depending on the "pref_enabled" setting
- *         of the record.
- */
-function getPaymentType($id, $domain_id = '') {
-    global $LANG;
-    $domain_id = domain_id::get($domain_id);
-
-    $sql = "SELECT * FROM " . TB_PREFIX . "payment_types
-            WHERE pt_id = :id AND domain_id = :domain_id";
-    $sth = dbQuery($sql, ':id', $id, ':domain_id', $domain_id);
-    $paymentType = $sth->fetch();
-    $paymentType['enabled'] = ($paymentType['pt_enabled'] == 1 ? $LANG['enabled'] : $LANG['disabled']);
-
-    return $paymentType;
-}
-
-/**
- * Get a specific payment record.
- * @param int $id Unique ID of record to retrieve.
- * @param string $domain_id Domain ID logged into.
- * @return array Rows retrieved. Test for "=== false" to check for failure.
- */
-function getPayment($id, $domain_id = '') {
-    global $config;
-    $domain_id = domain_id::get($domain_id);
-    // @formatter:off
-    $sql = "SELECT
-                ap.*,
-                c.id   AS customer_id,
-                c.name AS customer,
-                b.id   AS biller_id,
-                b.name AS biller
-            FROM " . TB_PREFIX . "payment ap,
-                 " . TB_PREFIX . "invoices iv,
-                 " . TB_PREFIX . "customers c,
-                 " . TB_PREFIX . "biller b
-            WHERE ap.ac_inv_id   = iv.id
-              AND iv.customer_id = c.id
-              AND iv.biller_id   = b.id
-              AND ap.id          = :id
-              AND ap.domain_id   = :domain_id";
-    // @formatter:on
-    $sth = dbQuery($sql, ':id', $id, ':domain_id', $domain_id);
-    $payment = $sth->fetch();
-    $payment['date'] = siLocal::date($payment['ac_date']);
-    return $payment;
-}
-
-/**
- * Get a specific payment type record.
- * @param int $id Unique ID of invoice to retrieve payments for.
- * @param string $domain_id Domain ID logged into.
- * @return array Rows retrieved. Test for "=== false" to check for failure.
- */
-function getInvoicePayments($id, $domain_id = '') {
-    $domain_id = domain_id::get($domain_id);
-    // @formatter:off
-    $sql = "SELECT
-                ap.*,
-                c.name AS cname,
-                b.name AS bname
-            FROM
-                " . TB_PREFIX . "payment ap,
-                " . TB_PREFIX . "invoices iv,
-                " . TB_PREFIX . "customers c,
-                " . TB_PREFIX . "biller b
-            WHERE ap.ac_inv_id   = :id
-              AND ap.domain_id   = :domain_id
-              AND ap.ac_inv_id   = iv.id
-              AND iv.domain_id   = ap.domain_id
-              AND iv.customer_id = c.id
-              AND c.domain_id    = iv.domain_id
-              AND iv.biller_id   = b.id
-              AND b.domain_id    = iv.domain_id
-            ORDER BY
-                ap.id DESC";
-    // @formatter:on
-    return dbQuery($sql, ':id', $id, ':domain_id', $domain_id);
-}
-
-/**
- * Get a specific payment type record.
- * @param int $id Unique ID of customer to retrieve payments for.
- * @param string $domain_id Domain ID logged into.
- * @return array Rows retrieved. Test for "=== false" to check for failure.
- */
-function getCustomerPayments($id, $domain_id = '') {
-    $domain_id = domain_id::get($domain_id);
-    // @formatter:off
-    $sql = "SELECT
-                ap.*,
-                c.name AS cname,
-                b.name AS bname
-            FROM
-                " . TB_PREFIX . "payment ap,
-                " . TB_PREFIX . "invoices iv,
-                " . TB_PREFIX . "customers c,
-                " . TB_PREFIX . "biller b
-            WHERE c.id = :id
-              AND ap.domain_id   = :domain_id
-              AND ap.ac_inv_id   = iv.id
-              AND iv.domain_id   = ap.domain_id
-              AND iv.customer_id = c.id
-              AND c.domain_id    = iv.domain_id
-              AND iv.biller_id   = b.id
-              AND b.domain_id    = iv.domain_id
-            ORDER BY
-                ap.id DESC";
-    // @formatter:on
-    return dbQuery($sql, ':id', $id, ':domain_id', $domain_id);
-}
-
-/**
- * Get a all payment records.
- * @param string $domain_id Domain ID logged into.
- * @return array Rows retrieved. Test for "=== false" to check for failure.
- */
-function getPayments($domain_id = '') {
-    $domain_id = domain_id::get($domain_id);
-    // @formatter:off
-    $sql = "SELECT
-                ap.*,
-                c.name AS cname,
-                b.name AS bname
-            FROM
-                " . TB_PREFIX . "payment ap,
-                " . TB_PREFIX . "invoices iv,
-                " . TB_PREFIX . "customers c,
-                " . TB_PREFIX . "biller b
-            WHERE ap.domain_id   = :domain_id
-              AND ap.ac_inv_id   = iv.id
-              AND iv.domain_id   = ap.domain_id
-              AND iv.customer_id = c.id
-              AND c.domain_id    = iv.domain_id
-              AND iv.biller_id   = b.id
-              AND b.domain_id    = iv.domain_id
-            ORDER BY
-                ap.id DESC";
-    // @formatter:on
-    return dbQuery($sql, ':domain_id', $domain_id);
-}
-
-/**
- * Add payment description to retrieved payment records.
- * @param mixed $sth Result of dbQuery() on payment records.
- * @param string $domain_id Domain ID logged into.
- * @return array Payment records with "description" added.
- */
-function progressPayments($sth, $domain_id = '') {
-    $domain_id = domain_id::get($domain_id);
-    $payments = NULL;
-
-    for ($i = 0; $payment = $sth->fetch(); $i++) {
-        $sql = "SELECT pt_description FROM " . TB_PREFIX . "payment_types
-                WHERE pt_id = :id and domain_id = :domain_id";
-        $tth = dbQuery($sql, ':id', $payment['ac_payment_type'], ':domain_id', $domain_id);
-
-        $pt = $tth->fetch();
-
-        $payments[$i] = $payment;
-        $payments[$i]['description'] = $pt['pt_description'];
-    }
-
-    return $payments;
-}
-
-/**
- * Get payment type records.
- * @param string $domain_id Domain ID logged into.
- * @return array Rows retrieved. Test for "=== false" to check for failure.
- *         Note that a field named, "enabled", was added to store the $LANG
- *         enable or disabled word depending on the "pref_enabled" setting
- *         of the record.
- */
-function getPaymentTypes($domain_id = '') {
-    global $LANG;
-    $domain_id = domain_id::get($domain_id);
-
-    $sql = "SELECT * FROM " . TB_PREFIX . "payment_types
-            WHERE domain_id = :domain_id ORDER BY pt_description";
-    $sth = dbQuery($sql, ':domain_id', $domain_id);
-
-    $paymentTypes = NULL;
-
-    for ($i = 0; $paymentType = $sth->fetch(); $i++) {
-        $paymentType['pt_enabled'] = ($paymentType['pt_enabled'] == 1 ? $LANG['enabled'] : $LANG['disabled']);
-        $paymentTypes[$i] = $paymentType;
-    }
-
-    return $paymentTypes;
-}
-
-/**
- * Get payment type records.
- * @param string $domain_id Domain ID logged into.
- * @return array Rows retrieved. Test for "=== false" to check for failure.
- *         Note that a field named, "enabled", was added to store the $LANG
- *         enable or disabled word depending on the "pref_enabled" setting
- *         of the record.
- */
-function getActivePaymentTypes($domain_id = '') {
-    global $LANG;
-    global $db_server;
-    $domain_id = domain_id::get($domain_id);
-
-    // @formatter:off
-    if ($db_server == 'pgsql') {
-        $sql = "SELECT * FROM " . TB_PREFIX . "payment_types
-                WHERE pt_enabled and domain_id = :domain_id
-                ORDER BY pt_description";
-    } else {
-        $sql = "SELECT * FROM " . TB_PREFIX . "payment_types
-                WHERE pt_enabled != 0 and domain_id = :domain_id
-                ORDER BY pt_description";
-    }
-    // @formatter:on
-    $sth = dbQuery($sql, ':domain_id', $domain_id);
-
-    $paymentTypes = array();
-    for ($i = 0; $paymentType = $sth->fetch(); $i++) {
-        $paymentType['enabled'] = ($paymentType['pt_enabled'] != 0 ? $LANG['enabled'] : $LANG['disabled']);
-        $paymentTypes[$i] = $paymentType;
-    }
-
-    return $paymentTypes;
-}
-
-/**
- * Get a specific product record.
- * @param int $id Unique ID of record to retrieve.
- * @param string $domain_id Domain ID logged into.
- * @return array Rows retrieved. Test for "=== false" to check for failure.
- *         Note that a field named, "wording_for_enabled", was added to store the $LANG
- *         enable or disabled word depending on the "pref_enabled" setting
- *         of the record.
- */
-function getProduct($id, $domain_id = '') {
-    global $LANG;
-    $domain_id = domain_id::get($domain_id);
-
-    $sql = "SELECT * FROM " . TB_PREFIX . "products
-            WHERE id = :id and domain_id = :domain_id";
-    $sth = dbQuery($sql, ':id', $id, ':domain_id', $domain_id);
-    $product = $sth->fetch();
-    $product['wording_for_enabled'] = ($product['enabled'] == 1 ? $LANG['enabled'] : $LANG['disabled']);
-    return $product;
-}
-
-/**
- * Insert a new record in the products table.
- * @param number $enabled Product enabled/disabled status.
- *        Set to 1 (default) for enabled; 0 for disabled.
- * @param number $visible Flags record seen in list. Defaults to 1 (visible).
- *        Set to 0 for not visible.
- * @param string $domain_id Domain user is logged into.
- * @return PDO statement object on success, false on failure.
- */
-function insertProduct($enabled = 1, $visible = 1, $domain_id = '') {
-    if (function_exists('insertProduct_cflgs')) {
-        return insertProduct_cflgs($enabled, $visible, $domain_id);
-    }
-
-    $domain_id = domain_id::get($domain_id);
-
-    if (isset($_POST['enabled'])) $enabled = $_POST['enabled'];
-    // select all attribts
-    $sql = "SELECT * FROM " . TB_PREFIX . "products_attributes";
-    $sth = dbQuery($sql);
-    $attributes = $sth->fetchAll();
-
-    $attr = array();
-    foreach ($attributes as $v) {
-        if (isset($_POST['attribute' . $v['id']]) && $_POST['attribute' . $v['id']] == 'true') {
-            $attr[$v['id']] = $_POST['attribute' . $v['id']];
-        }
-    }
-
-    // @formatter:off
-    $notes_as_description = (isset($_POST['notes_as_description']) && $_POST['notes_as_description'] == 'true' ? 'Y' : NULL);
-    $show_description     = (isset($_POST['show_description']    ) && $_POST['show_description'    ] == 'true' ? 'Y' : NULL);
-
-    $sql = "INSERT into " . TB_PREFIX . "products (
-                    domain_id,
-                    description,
-                    unit_price,
-                    cost,
-                    reorder_level,
-                    custom_field1,
-                    custom_field2,
-                    custom_field3,
-                    custom_field4,
-                    notes,
-                    default_tax_id,
-                    enabled,
-                    visible,
-                    attribute,
-                    notes_as_description,
-                    show_description
-                   )
-            VALUES (
-                    :domain_id,
-                    :description,
-                    :unit_price,
-                    :cost,
-                    :reorder_level,
-                    :custom_field1,
-                    :custom_field2,
-                    :custom_field3,
-                    :custom_field4,
-                    :notes,
-                    :default_tax_id,
-                    :enabled,
-                    :visible,
-                    :attribute,
-                    :notes_as_description,
-                    :show_description
-                   )";
-    return dbQuery($sql, ':domain_id'           , $domain_id,
-                         ':description'         , (isset($_POST['description']   ) ? $_POST['description']    : ""),
-                         ':unit_price'          , (isset($_POST['unit_price']    ) ? $_POST['unit_price']     : ""),
-                         ':cost'                , (isset($_POST['cost']          ) ? $_POST['cost']           : ""),
-                         ':reorder_level'       , (isset($_POST['reorder_level'] ) ? $_POST['reorder_level']  : ""),
-                         ':custom_field1'       , (isset($_POST['custom_field1'] ) ? $_POST['custom_field1']  : ""),
-                         ':custom_field2'       , (isset($_POST['custom_field2'] ) ? $_POST['custom_field2']  : ""),
-                         ':custom_field3'       , (isset($_POST['custom_field3'] ) ? $_POST['custom_field3']  : ""),
-                         ':custom_field4'       , (isset($_POST['custom_field4'] ) ? $_POST['custom_field4']  : ""),
-                         ':notes'               , (isset($_POST['notes']         ) ? $_POST['notes']          : ""),
-                         ':default_tax_id'      , (isset($_POST['default_tax_id']) ? $_POST['default_tax_id'] : ""),
-                         ':enabled'             , $enabled,
-                         ':visible'             , $visible,
-                         ':attribute'           , json_encode($attr),
-                         ':notes_as_description', $notes_as_description,
-                         ':show_description'    , $show_description);
-    // @formatter:off
-}
-
-/**
- * Update a product record.
- * @param string $domain_id Domain user is logged into.
- * @return PDO statement object on success, false on failure.
- */
-function updateProduct($domain_id = '') {
-    if (function_exists('updateProduct_cflgs')) {
-        return updateProduct_cflgs($domain_id);
-    }
-    $domain_id = domain_id::get($domain_id);
-
-    // select all attributes
-    $sql = "SELECT * FROM " . TB_PREFIX . "products_attributes";
-    $sth = dbQuery($sql);
-    $attributes = $sth->fetchAll();
-
-    $attr = array();
-    foreach ($attributes as $v) {
-        if (isset($_POST['attribute' . $v['id']]) && $_POST['attribute' . $v['id']] == 'true') {
-            $attr[$v['id']] = $_POST['attribute' . $v['id']];
-        }
-    }
-
-    // @formatter:off
-    $notes_as_description = (isset($_POST['notes_as_description']) && $_POST['notes_as_description'] == 'true' ? 'Y' : NULL);
-    $show_description     = (isset($_POST['show_description']    ) && $_POST['show_description'    ] == 'true' ? 'Y' : NULL);
-
-    $sql = "UPDATE " . TB_PREFIX . "products
-            SET description          = :description,
-                enabled              = :enabled,
-                default_tax_id       = :default_tax_id,
-                notes                = :notes,
-                custom_field1        = :custom_field1,
-                custom_field2        = :custom_field2,
-                custom_field3        = :custom_field3,
-                custom_field4        = :custom_field4,
-                unit_price           = :unit_price,
-                cost                 = :cost,
-                reorder_level        = :reorder_level,
-                attribute            = :attribute,
-                notes_as_description = :notes_as_description,
-                show_description     = :show_description
-            WHERE id        = :id
-              AND domain_id = :domain_id";
-    return dbQuery($sql, ':domain_id'           , $domain_id,
-                         ':description'         , (isset($_POST['description']   ) ? $_POST['description']    : ""),
-                         ':unit_price'          , (isset($_POST['unit_price']    ) ? $_POST['unit_price']     : ""),
-                         ':cost'                , (isset($_POST['cost']          ) ? $_POST['cost']           : ""),
-                         ':reorder_level'       , (isset($_POST['reorder_level'] ) ? $_POST['reorder_level']  : ""),
-                         ':custom_field1'       , (isset($_POST['custom_field1'] ) ? $_POST['custom_field1']  : ""),
-                         ':custom_field2'       , (isset($_POST['custom_field2'] ) ? $_POST['custom_field2']  : ""),
-                         ':custom_field3'       , (isset($_POST['custom_field3'] ) ? $_POST['custom_field3']  : ""),
-                         ':custom_field4'       , (isset($_POST['custom_field4'] ) ? $_POST['custom_field4']  : ""),
-                         ':notes'               , (isset($_POST['notes']         ) ? $_POST['notes']          : ""),
-                         ':default_tax_id'      , (isset($_POST['default_tax_id']) ? $_POST['default_tax_id'] : ""),
-                         ':enabled'             , (isset($_POST['enabled']       ) ? $_POST['enabled']        : ""),
-                         ':attribute'           , json_encode($attr),
-                         ':notes_as_description', $notes_as_description,
-                         ':show_description'    , $show_description,
-                         ':id'                  , $_GET['id']);
-    // @formatter:on
-}
-
-/**
- * Get all product records that are flagged visible.
- * @param string $domain_id Domain user is logged into.
- * @return PDO statement object on success, false on failure.
- */
-function getProducts($domain_id = '') {
-    global $LANG;
-    global $db_server;
-    $domain_id = domain_id::get($domain_id);
-
-    // @formatter:off
-    if ($db_server == 'pgsql') {
-        $sql = "SELECT * FROM " . TB_PREFIX . "products
-                WHERE visible and domain_id = :domain_id ORDER BY description";
-    } else {
-        $sql = "SELECT * FROM " . TB_PREFIX . "products
-                WHERE visible = 1 AND domain_id = :domain_id ORDER BY description";
-    }
-    // @formatter:on
-    $sth = dbQuery($sql, ':domain_id', $domain_id);
-
-    $products = NULL;
-
-    for ($i = 0; $product = $sth->fetch(); $i++) {
-        if ($product['enabled'] == 1) {
-            $product['enabled'] = $LANG['enabled'];
-        } else {
-            $product['enabled'] = $LANG['disabled'];
-        }
-
-        $products[$i] = $product;
-    }
-
-    return $products;
-}
-
-/**
- * Get active (enabled) product rows.
- * @param string $domain_id Domain user is logged into.
- * @return array Rows retrieved.
- */
-function getActiveProducts($domain_id = '') {
-    $domain_id = domain_id::get($domain_id);
-    // @formatter:off
-    $sql = "SELECT * FROM " . TB_PREFIX . "products
-            WHERE enabled AND domain_id = :domain_id ORDER BY description";
-    // @formatter:on
-    $sth = dbQuery($sql, ':domain_id', $domain_id);
-
-    return $sth->fetchAll();
 }
 
 /**
@@ -1103,7 +562,7 @@ function getTaxes($domain_id = '') {
     $taxes = NULL;
 
     for ($i = 0; $tax = $sth->fetch(); $i++) {
-        $tax['enabled'] = ($tax['tax_enabled'] == 1 ? $LANG['enabled'] : $LANG['disabled']);
+        $tax['enabled'] = ($tax['tax_enabled'] == ENABLED ? $LANG['enabled'] : $LANG['disabled']);
         $taxes[$i] = $tax;
     }
 
@@ -1136,28 +595,8 @@ function getDefaultGeneric($name, $bool = true, $domain_id = '') {
     if ($sth === false) return $failed;
 
     $array = $sth->fetch();
-    $nameval = ($bool ? ($array['value'] == 1 ? $LANG['enabled'] : $LANG['disabled']) : $array['value']);
+    $nameval = ($bool ? ($array['value'] == ENABLED ? $LANG['enabled'] : $LANG['disabled']) : $array['value']);
     return $nameval;
-}
-
-/**
- * Get a default customer name.
- * @param string $domain_id Domain user is logged into.
- * @return string Default customer name
- */
-function getDefaultCustomer($domain_id = '') {
-    $domain_id = domain_id::get($domain_id);
-    // @formatter:off
-    $sql = "SELECT c.name, c.id AS name FROM " .
-                TB_PREFIX . "customers c, " .
-                TB_PREFIX . "system_defaults s
-            WHERE ( s.name      = 'customer'
-                AND c.id        = s.value
-                AND c.domain_id = s.domain_id
-                AND s.domain_id = :domain_id)";
-    // @formatter:on
-    $sth = dbQuery($sql, ':domain_id', $domain_id);
-    return $sth->fetch();
 }
 
 /**
@@ -1258,7 +697,7 @@ function getDefaultLogging() {
 
 /**
  * Get "loggin" entry from the system_defaults table.
- * @return string "1" or "0"
+ * @return boolean <b>true</b> "1" or "0"
  */
 function getDefaultLoggingStatus() {
     return (getDefaultGeneric('logging', false) == 1);
@@ -1470,7 +909,7 @@ function getExtensionID($extension_name = "none", $domain_id = '') {
     $extension_info = $sth->fetch();
     if (!$extension_info) {
         return -2; // -2 = no result set = extension not found
-    } elseif ($extension_info['enabled'] == 0) {
+    } elseif ($extension_info['enabled'] != ENABLED) {
         return -1; // -1 = extension not enabled
     }
     return $extension_info['id']; // 0 = core, >0 is extension id
@@ -1563,12 +1002,6 @@ function updateDefault($name, $value, $extension_name = "core") {
                 ':extension_id', $extension_id)) return true;
     // @formatter:on
     return false;
-}
-
-function getInvoiceType($id) {
-    $sql = "SELECT * FROM " . TB_PREFIX . "invoice_type WHERE inv_ty_id = :id";
-    $sth = dbQuery($sql, ':id', $id);
-    return $sth->fetch();
 }
 
 function insertBiller() {
@@ -1726,87 +1159,6 @@ function getInvoices(&$sth) {
         $invoice['owing'] = $invoice['total'] - $invoice['paid'];
     }
     return $invoice;
-}
-
-function getCustomerInvoices($id, $domain_id = '') {
-    global $config;
-    $domain_id = domain_id::get($domain_id);
-    // @formatter:off
-    $sql = "SELECT
-                iv.id,
-                iv.index_id,
-                iv.date,
-                iv.type_id,
-                (SELECT SUM( COALESCE(ii.total, 0))
-                 FROM " . TB_PREFIX . "invoice_items ii
-                 WHERE ii.invoice_id = iv.id
-                   AND ii.domain_id  = iv.domain_id) AS invd,
-                (SELECT SUM( COALESCE(ap.ac_amount, 0))
-                 FROM " . TB_PREFIX . "payment ap
-                 WHERE ap.ac_inv_id = iv.id
-                   AND ap.domain_id = iv.domain_id) AS pmt,
-                (SELECT COALESCE(invd, 0)) AS total,
-                (SELECT COALESCE(pmt, 0)) AS paid,
-                (SELECT (total - paid)) AS owing,
-                pr.status,
-                pr.pref_inv_wording
-            FROM " . TB_PREFIX . "invoices iv
-            LEFT JOIN " . TB_PREFIX . "preferences pr
-                ON (pr.pref_id   = iv.preference_id
-                AND pr.domain_id = iv.domain_id)
-            WHERE iv.customer_id = :id
-              AND iv.domain_id   = :domain_id
-            ORDER BY iv.id DESC;";
-    // @formatter:on
-    $sth = dbQuery($sql, ':id', $id, ':domain_id', $domain_id);
-
-    $invoices = NULL;
-    while ($invoice = $sth->fetch()) {
-        $invoice['calc_date'] = date('Y-m-d', strtotime($invoice['date']));
-        $invoice['date'] = siLocal::date($invoice['date']);
-        $invoices[] = $invoice;
-    }
-    return $invoices;
-}
-
-function getCustomers($domain_id = '') {
-    global $LANG, $pdoDb;
-    $domain_id = domain_id::get($domain_id);
-
-    $pdoDb->addSimpleWhere('domain_id', $domain_id);
-    $rows = $pdoDb->request("SELECT", "customers");
-
-    $customers = array();
-    $i = 0;
-    foreach ($rows as $customer) {
-        // @formatter:off
-        $customer['enabled'] = ($customer['enabled'] == 1 ? $LANG['enabled'] : $LANG['disabled']);
-        $customer['total']   = calc_customer_total($customer['id']);
-        $customer['paid']    = calc_customer_paid($customer['id']);
-        $customer['owing']   = $customer['total'] - $customer['paid'];
-        $customers[$i]       = $customer;
-        $i++;
-        // @formatter:on
-    }
-
-    return $customers;
-}
-
-function getActiveCustomers($domain_id = '') {
-    global $db_server;
-    $domain_id = domain_id::get($domain_id);
-    // @formatter:off
-    if ($db_server == 'pgsql') {
-        $sql = "SELECT * FROM " . TB_PREFIX . "customers
-                WHERE enabled and domain_id = :domain_id ORDER BY name";
-    } else {
-        $sql = "SELECT * FROM " . TB_PREFIX . "customers
-                WHERE enabled != 0 and domain_id = :domain_id ORDER BY name";
-    }
-    // @formatter:on
-    $sth = dbQuery($sql, ':domain_id', $domain_id);
-
-    return $sth->fetchAll();
 }
 
 function insertTaxRate($domain_id = '') {
@@ -2426,10 +1778,9 @@ function checkTableExists($table) {
 }
 
 function checkFieldExists($table, $field) {
-    global $dbh;
-    global $pdoAdapter;
+    global $dbh, $dbInfo;
 
-    if ($pdoAdapter == 'pgsql') {
+    if ($dbInfo->getAdapter() == 'pgsql') {
         // @formatter:off
         $sql = "SELECT 1 FROM pg_attribute a
                 INNER JOIN pg_class c ON (a.attrelid = c.oid)
@@ -2462,8 +1813,7 @@ function checkFieldExists($table, $field) {
  *         returned if no columns found.
  */
 function getTableFields($table_in) {
-    global $dbh;
-    global $pdoAdapter;
+    global $dbh, $dbInfo;
 
     $pattern = '/^' . TB_PREFIX . '/';
     if (!preg_match($pattern, $table_in)) {
@@ -2471,7 +1821,7 @@ function getTableFields($table_in) {
     } else {
         $table = $table_in;
     }
-    if ($pdoAdapter == 'pgsql') {
+    if ($dbInfo->getAdapter() == 'pgsql') {
         // @formatter:off
         $sql = "SELECT column_name FROM pg_attribute a
                 INNER JOIN pg_class c ON (a.attrelid = c.oid)

@@ -5,8 +5,8 @@ global $smarty;
 checkLogin();
 
 // Add check_number field to the database if not present.
-require_once "./extensions/payments/include/class/payment.php";
-payment::addNewFields();
+require_once "./extensions/payments/include/class/CheckNumber.php";
+CheckNumber::addNewFields();
 
 // TODO - replace get..Payments with simple count - as data is got by xml.php now
 // @formatter:off
@@ -20,7 +20,7 @@ $customer   = null;
 if (!empty($_GET['id'])) {
     // Filter by just one invoice
     $inv_id        = $_GET['id'];
-    $query         = getInvoicePayments($_GET['id']);
+    $query         = Payment::getInvoicePayments($_GET['id']);
     $invoice       = getInvoice($_GET['id']);
     $preference    = getPreference($invoice['preference_id']);
     $subPageActive = "payment_filter_invoice";
@@ -28,11 +28,11 @@ if (!empty($_GET['id'])) {
     // Filter by just one customer
     $c_id          = $_GET['c_id'];
     $query         = getCustomerPayments($_GET['c_id']);
-    $customer      = getCustomer($_GET['c_id']);
+    $customer      = Customer::get($_GET['c_id']);
     $subPageActive = "payment_filter_customer";
 } else {
     // No filters
-    $query = getPayments();
+    $query = Payment::select_all();
     $subPageActive = "payment_manage";
 }
 

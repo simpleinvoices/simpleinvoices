@@ -1,72 +1,54 @@
 <?php
-header("Content-type: text/xml");
+function sql($type = '', $dir, $sort, $rp, $page, $domain_id) {
+    global $pdoDb, $LANG;
 
-function sql($type = '', $dir, $sort, $rp, $page, $start, $LANG, $domain_id) {
-    $valid_search_fields = array('pt_id', 'pt_description');
-
-    // @formatter:off
-    if (intval($start) != $start) $start = 0;
-    if (intval($rp)    != $rp   ) $rp = 25;
-
-    $start = (($page - 1) * $rp);
-
-    if ($type == "count") $limit = "";
-    else                  $limit = "LIMIT $start, $rp";
-
-    if (!preg_match('/^(asc|desc)$/iD', $dir)) $dir = 'ASC';
-
-    $where = "";
     $query = isset($_POST['query']) ? $_POST['query'] : null;
     $qtype = isset($_POST['qtype']) ? $_POST['qtype'] : null;
     if (!(empty($qtype) || empty($query))) {
-        if (in_array($qtype, $valid_search_fields)) {
-            $where = " AND $qtype LIKE :query ";
-        } else {
-            $qtype = null;
-            $query = null;
+        if (in_array($qtype, array('pt_id', 'pt_description'))) {
+            $pdoDb->addToWhere(new WhereItem(false, $qtype, "LIKE", "%$query%", false, "AND"));
         }
+    }
+    $pdoDb->addSimpleWhere("domain_id", $domain_id);
+
+    if ($type == "count") {
+        $pdoDb->addToFunctions("COUNT(*) AS count");
+        $rows = $pdoDb->request("SELECT", "payments_types");
+        return $rows[0]['count'];
     }
 
     // Check that the sort field is OK
-   $validFields = array('pt_id', 'pt_description', 'enabled');
-    if (in_array($sort, $validFields)) {
-        $sort = $sort;
-    } else {
+    if (!preg_match('/^(asc|desc|A|D)$/iD', $dir)) $dir = 'A';
+    if (!in_array($sort, array('pt_id', 'pt_description', 'enabled'))) {
         $sort = "pt_description";
+        $dir  = "A";
     }
+    $pdoDb->setOrderBy(array($sort, $dir));
 
-    $sql = "SELECT pt_id, pt_description,
-                   (SELECT (CASE  WHEN pt_enabled = 0 THEN '" . $LANG['disabled'] . "' ELSE '" . $LANG['enabled'] . "' END )) AS enabled
-            FROM " . TB_PREFIX . "payment_types
-            WHERE domain_id = :domain_id
-                  $where
-            ORDER BY $sort $dir
-            $limit";
+    if (intval($rp) != $rp   ) $rp = 25;
+    $start = (($page - 1) * $rp);
+    $pdoDb->setLimit($rp, $start);
 
-    if (empty($query)) {
-        $result = dbQuery($sql, ':domain_id', $domain_id);
-    } else {
-        $result = dbQuery($sql, ':domain_id', $domain_id, ':query', "%$query%");
-    }
-    // @formatter:on
+    $oc = new CaseStmt("pt_enabled", "enabled");
+    $oc->addWhen("=", ENABLED, $LANG['enabled']);
+    $oc->addWhen("!=", ENABLED, $LANG['disabled'], true);
+    $pdoDb->addToCaseStmts($oc);
 
-    return $result;
+    $pdoDb->setSelectAll(true);
+
+    return $pdoDb->request("SELECT", "payment_types");
 }
 
 global $LANG, $auth_session;
 
 // @formatter:off
-$start = (isset($_POST['start'])    ) ? $_POST['start']     : "0";
-$dir   = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "ASC";
+$dir   = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "A";
 $sort  = (isset($_POST['sortname']) ) ? $_POST['sortname']  : "pt_description";
 $rp    = (isset($_POST['rp'])       ) ? $_POST['rp']        : "25";
 $page  = (isset($_POST['page'])     ) ? $_POST['page']      : "1";
 
-$sth = sql('', $dir, $sort, $rp, $page, $start, $LANG, $auth_session->domain_id);
-$sth_count_rows = sql('count', $dir, $sort, $rp, $page, $start, $LANG, $auth_session->domain_id);
-
-$payment_types = $sth->fetchAll(PDO::FETCH_ASSOC);
-$count = $sth_count_rows->rowCount();
+$payment_types = sql('', $dir, $sort, $rp, $page, $auth_session->domain_id);
+$count = sql('count', $dir, $sort, $rp, $page, $auth_session->domain_id);
 
 $xml  = "";
 $xml .= "<rows>";

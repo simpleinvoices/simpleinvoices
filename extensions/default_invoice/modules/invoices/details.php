@@ -29,13 +29,13 @@ if ($default_template_set) $invoice ['id'] = null;
 $invoiceobj = new invoice ();
 $invoiceItems = $invoiceobj->getInvoiceItems ( $master_invoice_id );
 
-$customers   = getActiveCustomers ();
+$customers   = Customer::get_all(true);
 $preference  = getPreference ( $invoice ['preference_id'] );
-$billers     = getActiveBillers ();
+$billers     = Biller::getAllActive();
 $defaults    = getSystemDefaults ();
 $taxes       = getTaxes ();
 $preferences = getActivePreferences ();
-$products    = getActiveProducts ();
+$products    = Product::select_all ();
 
 for($i = 1; $i <= 4; $i ++) {
     $customFields [$i] = show_custom_field ( "invoice_cf$i", $invoice ["custom_field$i"], "write", '', "details_screen", '', '', '' );

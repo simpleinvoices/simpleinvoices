@@ -24,7 +24,8 @@
         searchitems : [
             {display: '{/literal}{$LANG.id}{literal}'      , name : 'ap.id'},
             {display: '{/literal}{$LANG.biller}{literal}'  , name : 'b.name', isdefault: true},
-            {display: '{/literal}{$LANG.customer}{literal}', name : 'c.name'}
+            {display: '{/literal}{$LANG.customer}{literal}', name : 'c.name'},
+            {display: '{/literal}{$LANG.notes}{literal}'   , name : 'ac_notes'}
         ],
         sortname:  "{/literal}{$smarty.get.sortname|default:'id'}{literal}",
         sortorder: "{/literal}{$smarty.get.sortorder|default:'desc'}{literal}",

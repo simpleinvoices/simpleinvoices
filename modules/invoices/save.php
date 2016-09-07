@@ -34,7 +34,7 @@ if ($_POST['action'] == "insert" ) {
     }
 
     if($saved && $type == TOTAL_INVOICE) {
-        insertProduct(0,0);
+        Product::insertProduct(0,0);
         $product_id = lastInsertId();
         $tax_id = (empty($_POST["tax_id"][0] ) ? "" : $_POST["tax_id"][0]);
         insertInvoiceItem($id, 1, $product_id, 1, $tax_id, $_POST['description'], $_POST['unit_price']);

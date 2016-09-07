@@ -19,14 +19,14 @@ global $smarty;
 // stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-$billers = getActiveBillers();
-$customers = getActiveCustomers();
+$billers = Biller::get_all(true);
+$customers = Customer::get_all(true);
 $taxes = getActiveTaxes();
 $defaultTax = getDefaultTax();
-$products = getActiveProducts();
+$products = Product::select_all();
 $preferences = getActivePreferences();
 $defaultPreference = getDefaultPreference();
-$defaultCustomer = getDefaultCustomer();
+$defaultCustomer = Customer::getDefaultCustomer();
 $defaults = getSystemDefaults();
 
 if ($billers == null || $customers == null ||

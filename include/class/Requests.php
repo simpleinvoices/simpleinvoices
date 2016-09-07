@@ -15,12 +15,8 @@ class Requests {
      * Opens database and initializes class properties.
      */
     public function __construct() {
-        global $pdoAdapter, $config;
-        $this->pdoDb = new PdoDb(new DbInfo($pdoAdapter,
-                                            $config->database->params->dbname,
-                                            $config->database->params->host,
-                                            $config->database->params->password,
-                                            $config->database->params->username));
+        global $environment;
+        $this->pdoDb = new PdoDb(new DbInfo(CONFIG_FILE_PATH, $environment, "database"));
         $this->reset();
     }
 

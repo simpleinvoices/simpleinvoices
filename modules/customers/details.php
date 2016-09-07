@@ -42,7 +42,7 @@ if (empty($customer['credit_card_number'])) {
                             $cid . ". " . $e->getMessage());
     }
 }
-$invoices = getCustomerInvoices($cid);
+$invoices = Customer::getCustomerInvoices($cid);
 
 $stuff = array();
 $stuff['total'] = calc_customer_total($customer['id'],domain_id::get(),true);

@@ -1,5 +1,4 @@
 <?php
-
 class eway {
     public $biller;
     public $invoice;
@@ -8,18 +7,16 @@ class eway {
     public $domain_id;
 
     public function __construct() {
-        $this->domain_id = domain_id::get($this->domain_id);
+        $this->domain_id = domain_id::get();
     }
 
     public function pre_check() {
-        $return = 'false';
-
         //set customer,biller and preference if not defined
         if(empty($this->customer)) {
-            $this->customer = getCustomer($this->invoice['customer_id'], $this->domain_id);
+            $this->customer = Customer::get($this->invoice['customer_id']);
         }
         if(empty($this->biller)) {
-            $this->biller = getBiller($this->invoice['biller_id'], $this->domain_id);
+            $this->biller = Biller::select($this->invoice['biller_id']);
         }
         if(empty($this->preference)) {
             $this->preference = getPreference($this->invoice['preference_id'], $this->domain_id);
@@ -29,23 +26,24 @@ class eway {
             $this->biller['eway_customer_id'] != '' &&
             $this->customer['credit_card_number'] != '' &&
             in_array("eway_merchant_xml",explode(",", $this->preference['include_online_payment']))) {
-            $return = 'true';
+            return 'true';
         }
 
-        return $return;
+        return 'false';
     }
 
     public function payment() {
-        global $config;
-        global $logger;
+        global $config, $logger;
 
         //set customer,biller and preference if not defined
         if(empty($this->customer)) {
-            $this->customer = getCustomer($this->invoice['customer_id'], $this->domain_id);
+            $this->customer = Customer::get($this->invoice['customer_id']);
         }
+
         if(empty($this->biller)) {
-            $this->biller = getBiller($this->invoice['biller_id'], $this->domain_id);
+            $this->biller = Biller::select($this->invoice['biller_id']);
         }
+
         if(empty($this->preference)) {
             $this->preference = getPreference($this->invoice['preference_id'], $this->domain_id);
         }
@@ -53,34 +51,36 @@ class eway {
         $eway = new ewaylib($this->biller['eway_customer_id'],'REAL_TIME', false);
 
         //Eway only accepts amount in cents - so times 100
-        $value = $this->invoice['total']*100;
+        $value = $this->invoice['total'] * 100;
         $eway_invoice_total = htmlsafe(trim($value));
         $logger->log("eway total: " . $eway_invoice_total, Zend_Log::INFO);
 
         try {
-        $key = $config->encryption->default->key;
-        $enc = new Encryption();
-        $credit_card_number = $enc->decrypt($key, $this->customer['credit_card_number']);
+            $key = $config->encryption->default->key;
+            $enc = new Encryption();
+            $credit_card_number = $enc->decrypt($key, $this->customer['credit_card_number']);
         } catch (Exception $e) {
-            return;
+            return 'false';
         }
 
-        $eway->setTransactionData("TotalAmount", $eway_invoice_total); //mandatory field
-        $eway->setTransactionData("CustomerFirstName", $this->customer['name']);
-        $eway->setTransactionData("CustomerLastName", "");
-        $eway->setTransactionData("CustomerAddress", "");
-        $eway->setTransactionData("CustomerPostcode", "");
+        // @formatter:off
+        $eway->setTransactionData("TotalAmount"               , $eway_invoice_total); //mandatory field
+        $eway->setTransactionData("CustomerFirstName"         , $this->customer['name']);
+        $eway->setTransactionData("CustomerLastName"          , "");
+        $eway->setTransactionData("CustomerAddress"           , "");
+        $eway->setTransactionData("CustomerPostcode"          , "");
         $eway->setTransactionData("CustomerInvoiceDescription", "");
-        $eway->setTransactionData("CustomerEmail", $this->customer['email']);
-        $eway->setTransactionData("CustomerInvoiceRef", $this->invoice['index_name']);
-        $eway->setTransactionData("CardHoldersName", $this->customer['credit_card_holder_name']); //mandatory field
-        $eway->setTransactionData("CardNumber", $credit_card_number); //mandatory field
-        $eway->setTransactionData("CardExpiryMonth", $this->customer['credit_card_expiry_month']); //mandatory field
-        $eway->setTransactionData("CardExpiryYear", $this->customer['credit_card_expiry_year']); //mandatory field
-        $eway->setTransactionData("Option1", "");
-        $eway->setTransactionData("Option2", "");
-        $eway->setTransactionData("Option3", "");
-        $eway->setTransactionData("TrxnNumber", $this->invoice['id']);
+        $eway->setTransactionData("CustomerEmail"             , $this->customer['email']);
+        $eway->setTransactionData("CustomerInvoiceRef"        , $this->invoice['index_name']);
+        $eway->setTransactionData("CardHoldersName"           , $this->customer['credit_card_holder_name']); //mandatory field
+        $eway->setTransactionData("CardNumber"                , $credit_card_number); //mandatory field
+        $eway->setTransactionData("CardExpiryMonth"           , $this->customer['credit_card_expiry_month']); //mandatory field
+        $eway->setTransactionData("CardExpiryYear"            , $this->customer['credit_card_expiry_year']); //mandatory field
+        $eway->setTransactionData("Option1"                   , "");
+        $eway->setTransactionData("Option2"                   , "");
+        $eway->setTransactionData("Option3"                   , "");
+        $eway->setTransactionData("TrxnNumber"                , $this->invoice['id']);
+        // @formatter:on
 
         //special preferences for php Curl
         //pass a long set to zero value stops curl from verifying peer's certificate
@@ -94,34 +94,29 @@ class eway {
                 $message .= "\n<br>\$ewayResponseFields[\"$key\"] = $value";
             }
             $logger->log("Eway message: " . $message . "<br>\n", Zend_Log::INFO);
-            $return = 'false';
-        } else if($ewayResponseFields["EWAYTRXNSTATUS"]=="True") {
+            return 'false';
+        }
 
+        if($ewayResponseFields["EWAYTRXNSTATUS"]=="True") {
             $logger->log("Transaction Success: " . $ewayResponseFields["EWAYTRXNERROR"] . "<br>\n", Zend_Log::INFO);
             foreach($ewayResponseFields as $key => $value) {
                 $message .= "\n<br>\$ewayResponseFields[\"$key\"] = $value";
             }
             $logger->log("Eway message: " . $message . "<br>\n", Zend_Log::INFO);
 
-            $payment = new payment();
-            $payment->ac_inv_id = $this->invoice['id'];
-            $payment->ac_amount = $this->invoice['total'];
-            $payment->ac_notes = $message;
-            $payment->ac_date = date( 'Y-m-d' );
-            $payment->online_payment_id = $ewayResponseFields['EWAYTRXNNUMBER'];
-            $payment->domain_id = $this->domain_id;
-
-            $payment_type = new payment_type();
-            $payment_type->type = "Eway";
-            $payment_type->domain_id = $this->domain_id;
-
-            $payment->ac_payment_type = $payment_type->select_or_insert_where();
-            $logger->log('Paypal - payment_type='.$payment->ac_payment_type, Zend_Log::INFO);
-            $payment->insert();
-            $return = 'true';
+            // @formatter:off
+            Payment::insert(array("ac_inv_id"         => $this->invoice['id'],
+                                   "ac_amount"         => $this->invoice['total'],
+                                   "ac_notes"          => $message,
+                                   "ac_date"           => date('Y-m-d'),
+                                   "online_payment_id" => $ewayResponseFields['EWAYTRXNNUMBER'],
+                                   "domain_id"         => $this->domain_id,
+                                   "ac_payment_type"   => PaymentType::specialSelect("Eway")));
+            // @formatter:on
+            return 'true';
         }
 
-        return $return;
+        return 'false';
     }
 
     function get_message() {

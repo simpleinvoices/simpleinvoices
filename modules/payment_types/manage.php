@@ -5,7 +5,7 @@ global $smarty;
 // Let index.php handle which files get displayed.
 checkLogin();
 
-$paymentTypes = getPaymentTypes();
+$paymentTypes = PaymentType::select_all();
 
 $smarty->assign('paymentTypes',$paymentTypes);
 

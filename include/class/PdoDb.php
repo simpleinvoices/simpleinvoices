@@ -68,14 +68,14 @@ class PdoDb {
             // Used for user requests.
             $this->pdoDb = new PDO('mysql:host=' . $dbinfo->getHost() .
                                      '; dbname=' . $dbinfo->getDbname(),
-                                                   $dbinfo->getAdmin(),
+                                                   $dbinfo->getUsername(),
                                                    $dbinfo->getPassword());
 
             // Used internally to perform table structure lookups, etc. so these
             // queries will not impact inprocess activity for the user's requests.
             $this->pdoDb2 = new PDO('mysql:host=' . $dbinfo->getHost() .
                                       '; dbname=' . $dbinfo->getDbname(),
-                                                    $dbinfo->getAdmin(),
+                                                    $dbinfo->getUsername(),
                                                     $dbinfo->getPassword());
             // @formatter:on
         } catch (PDOException $e) {
@@ -245,13 +245,17 @@ class PdoDb {
 
     /**
      * Specify functions with parameters to list of those to perform
-     * @param mixed $function Function to include in parameter list. Example: count(id).
+     * @param string $function Function to include in parameter list. Example: count(id).
      */
     public function addToFunctions($function) {
-        if (isset($this->functions)) {
-            $this->functions[] = $function;
+        if (is_string($function) || is_a($function, "FunctionStmt")) {
+            if (isset($this->functions)) {
+                $this->functions[] = $function;
+            } else {
+                $this->functions = array($function);
+            }
         } else {
-            $this->functions = array($function);
+            throw new PdoDbException("PdoDb - addToFunctions(): Parameter number be a string or a FunctionStmt.");
         }
     }
 
@@ -311,7 +315,7 @@ class PdoDb {
             $alias = $join[2];
             $onClause = $join[3];
             if (!is_string($type) || !is_string($table) || !is_string($alias) || !is_a($onClause, "OnClause")) {
-                if (is_a($onStmt, "OnClause")) {
+                if (is_a($onClause, "OnClause")) {
                     throw new PdoDbException("PdoDb - addToJoins(): Array submitted. Non-string content where string required.");
                 } else {
                     throw new PdoDbException("PdoDb - addToJoins(): Array submitted. Non-class (OnClause) data where class object required.");
@@ -895,6 +899,9 @@ class PdoDb {
 
                 if (isset($this->functions)) {
                     foreach($this->functions as $function) {
+                        if (is_a($function, "FunctionStmt")) {
+                            $function = $function->build($this->keyPairs);
+                        }
                         if (!empty($list)) $list .= ", ";
                         $list .= $function;
                     }

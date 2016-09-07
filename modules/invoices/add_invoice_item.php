@@ -22,7 +22,7 @@ if(isset($_POST['submit'])) {
     );
 }
 else {
-    $products = getActiveProducts();
+    $products = Product::select_all();
     $smarty -> assign("products",$products);
 }
 
