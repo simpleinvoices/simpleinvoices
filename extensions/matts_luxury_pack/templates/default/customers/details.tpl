@@ -70,12 +70,12 @@
 				<th>{$customFieldLabel.customer_cf3}</th>
 				<td>{$customer.custom_field3|htmlsafe}</td>
 			</tr>
-	{if $defaults.price_list}
+{	if $defaults.price_list}
 			<tr>
 				<th>{$LANG.price_list}</th>
 				<td>{if $customer.price_list==0}default (1){else}{$customer.price_list+1}{/if}</td>
 			</tr>
-	{/if}
+{	/if}
 			<tr>
 				<th>{$LANG.enabled}</th>
 				<td>{$customer.wording_for_enabled|htmlsafe}</td>
@@ -157,9 +157,9 @@
 						</tr>
 					</thead>
 					<tbody>
-{foreach from=$invoices item=invoice}
-{if $invoice.status > 0}
-{if $invoice.owing != 0}
+{	foreach from=$invoices item=invoice}
+{		if $invoice.status > 0}
+{			if $invoice.owing != 0}
 						<tr class="index_table">
 							<td class="first">
 						<!--6 Payment --><a title="{$LANG.process_payment_for} {$invoice.preference} {$invoice.id}"  href='index.php?module=payments&view=process&id={$invoice.id}&op=pay_selected_invoice'><img src='images/common/money_dollar.png' class='action' /></a>
@@ -171,9 +171,9 @@
 							<td>{$invoice.paid|number_format:2}</td>
 							<td>{$invoice.owing|number_format:2}</td>
 						</tr>
-{/if}
-{/if}
-{/foreach}
+{			/if}
+{		/if}
+{	/foreach}
 					</tbody>
 				</table>
 			</div>
@@ -191,23 +191,23 @@
 						</tr>
 					</thead>
 					<tbody>
-{foreach from=$invoices item=invoice}
+{	foreach from=$invoices item=invoice}
 						<tr class="index_table">
 							<td class="first"><a href="index.php?module=invoices&amp;view=quick_view&id={$invoice.id|urlencode}">{$invoice.pref_inv_wording|htmlsafe} {$invoice.index_id|htmlsafe}</a></td>
 							<td>{$invoice.date|htmlsafe}</td>
 							<td>{$invoice.total|number_format:2}</td>
-{if $invoice.status > 0}
+{		if $invoice.status > 0}
 							<td>{$invoice.paid|number_format:2}</td>
-{if $invoice.owing != 0}
+{			if $invoice.owing != 0}
 							<td>{$invoice.owing|number_format:2}</td>
-{else}
+{			else}
 							<td>&nbsp;</td>
-{/if}
-{else}
+{			/if}
+{		else}
 							<td colspan="2">&nbsp;</td>
-{/if}
+{		/if}
 						</tr>
-{/foreach}
+{	/foreach}
 					</tbody>
 				</table>
 			</div>
@@ -386,9 +386,9 @@
 					</th>
 					<td>
 						<select name="credit_card_expiry_month">
-{foreach from=$cc_months item=mon key=k}
+{	foreach from=$cc_months item=mon key=k}
 							<option value="{$k}"{if $k==$customer.credit_card_expiry_month} selected="selected"{/if}>{$mon}</option>
-{/foreach}
+{	/foreach}
 						</select>
 						<!--<input
 							type="text" name="credit_card_expiry_month"
@@ -409,9 +409,9 @@
 					</th>
 					<td>
 						<select name="credit_card_expiry_year">
-{foreach from=$cc_years item=year key=k}
+{	foreach from=$cc_years item=year key=k}
 							<option value="{$k}"{if $k==$customer.credit_card_expiry_year} selected="selected"{/if}>{$year}</option>
-{/foreach}
+{	/foreach}
 						</select>
 						<!--<input
 							type="text" name="credit_card_expiry_year"
@@ -423,7 +423,7 @@
 		</div>
 		<div id="section-3" class="fragment">
 			<table>
-{if $customFieldLabel.customer_cf1}
+{	if $customFieldLabel.customer_cf1}
 				<tr>
 					<th>{$customFieldLabel.customer_cf1|htmlsafe}
 						<a
@@ -438,8 +438,8 @@
 						<input type="text" name="custom_field1" value="{$customer.custom_field1|htmlsafe}" size="50" />
 					</td>
 				</tr>
-{/if}
-{if $customFieldLabel.customer_cf2}
+{	/if}
+{	if $customFieldLabel.customer_cf2}
 				<tr>
 					<th>{$customFieldLabel.customer_cf2|htmlsafe}
 						<a
@@ -454,8 +454,8 @@
 						<input type="text" name="custom_field2" value="{$customer.custom_field2|htmlsafe}" size="50" />
 					</td>
 				</tr>
-{/if}
-{if $customFieldLabel.customer_cf3}
+{	/if}
+{	if $customFieldLabel.customer_cf3}
 				<tr>
 					<th>{$customFieldLabel.customer_cf3|htmlsafe} 
 						<a
@@ -470,8 +470,8 @@
 						<input type="text" name="custom_field3" value="{$customer.custom_field3|htmlsafe}" size="50" />
 					</td>
 				</tr>
-{/if}
-{if $customFieldLabel.customer_cf4}
+{	/if}
+{	if $customFieldLabel.customer_cf4}
 				<tr>
 					<th>{$customFieldLabel.customer_cf4|htmlsafe}
 						<a
@@ -486,12 +486,12 @@
 						<input type="text" name="custom_field4" value="{$customer.custom_field4|htmlsafe}" size="50" />
 					</td>
 				</tr>
-{/if}
+{	/if}
 			</table>
 		</div>
 		<div id="section-4" class="fragment">
 			<table>
-{if $defaults.price_list}
+{	if $defaults.price_list}
 				<tr>
 					<th>{$LANG.price_list}</th>
 					<td>
@@ -503,7 +503,7 @@
 						</select>
 					</td>
 				</tr>
-{/if}
+{	/if}
 				<tr>
 					<th>{$LANG.notes}</th>
 					<td><textarea  name="notes"  class="editor" rows="8" cols="50">{$customer.notes|outhtml}</textarea></td>
