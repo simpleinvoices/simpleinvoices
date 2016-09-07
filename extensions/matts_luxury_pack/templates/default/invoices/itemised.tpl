@@ -13,7 +13,7 @@
 
 <form name="frmpost" action="index.php?module=invoices&amp;view=save" method="post" onsubmit="return frmpost_Validator(this)">
 
-	<div id="gmail_loading" class="gmailLoader si_hide" style="float:right;"><img src="images/common/gmail-loader.gif" alt="{$LANG.loading} ..." /> {$LANG.loading} ...</div>
+	{$hook_loading}
 
 
 {if $first_run_wizard == true}

@@ -306,4 +306,10 @@ if (!Array.prototype.indexOf) {
 {*	<div id="pageLoading"></div>*}
 {*	<a id="dofuncts" onclick="downloadJSAtOnload()"> CLICK ME </a>	*}
 {/capture}
+
+
+{capture name="hook_loading"}
+<div id="gmail_loading" class="gmailLoader" style="display: none;"></div>
+{*<div id="gmail_loading" class="gmailLoader" style="float:right; display: none;"><img src="images/common/gmail-loader.gif" alt="{$LANG.loading} ..." /> {$LANG.loading} ...</div>*}
+{/capture}
 {/strip}

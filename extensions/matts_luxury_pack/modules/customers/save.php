@@ -68,7 +68,7 @@ if (!$error) {
 				$excludedFields['domain_id'] = 1;
 				$pdoDb->setExcludedFields($excludedFields);
 				$pdoDb->addSimpleWhere('id', $_GET['id'], 'AND');
-				$pdoDb->addSimpleWhere('domain_id', $_POST['domain_id']);
+				$pdoDb->addSimpleWhere('domain_id', isset($_POST['domain_id']) ? $_POST['domain_id'] : 1 );
 				$pdoDb->request('UPDATE', 'customers');
 				$saved = true;
 /*			}*/

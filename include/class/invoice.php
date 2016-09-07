@@ -434,13 +434,15 @@ class invoice {
 
         $invoiceItems = array();
         while ($invoiceItem = $sth->fetch(PDO::FETCH_ASSOC)) {
-            if (isset($invoiceItem['attribute'])) {
+            if (isset($invoiceItem['attribute']) && $invoiceItem['attribute']!='[]') {
                 $invoiceItem['attribute_decode'] = json_decode($invoiceItem['attribute'], true);
-                foreach ($invoiceItem['attribute_decode'] as $key => $value) {
-                    $invoiceItem['attribute_json'][$key]['name']    = ProductAttributes::getName($key);
-                    $invoiceItem['attribute_json'][$key]['value']   = ProductAttributes::getValue($key, $value);
-                    $invoiceItem['attribute_json'][$key]['type']    = ProductAttributes::getType($key);
-                    $invoiceItem['attribute_json'][$key]['visible'] = ProductAttributes::getVisible($key);
+				if (isset($invoiceItem['attribute_decode'])) {
+					foreach ($invoiceItem['attribute_decode'] as $key => $value) {
+						$invoiceItem['attribute_json'][$key]['name']    = ProductAttributes::getName($key);
+						$invoiceItem['attribute_json'][$key]['value']   = ProductAttributes::getValue($key, $value);
+						$invoiceItem['attribute_json'][$key]['type']    = ProductAttributes::getType($key);
+						$invoiceItem['attribute_json'][$key]['visible'] = ProductAttributes::getVisible($key);
+					}
                 }
             }
 

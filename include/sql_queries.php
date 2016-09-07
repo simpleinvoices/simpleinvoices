@@ -1234,7 +1234,7 @@ function getDefaultTax($domain_id = '') {
             WHERE ( s.name      = 'tax'
                 AND t.tax_id    = s.value
                 AND t.domain_id = s.domain_id
-                AND s.domain_id = :domain_id";
+                AND s.domain_id = :domain_id )";
     // @formatter:on
     $sth = dbQuery($sql, ':domain_id', $domain_id);
     return $sth->fetch();
@@ -2350,9 +2350,9 @@ function delete($module, $idField, $id, $domain_id = '') {
                                         WHERE invoice_id = :id AND domain_id = :domain_id
                                           UNION ALL
                                         SELECT id FROM ' . TB_PREFIX . 'payment
-                                        WHERE ac_inv_id = :id AND domain_id = :domain_id) x');
+                                        WHERE ac_inv_id = :id2 AND domain_id = :domain_id2) x');
             // @formatter:on
-            $sth->execute(array(':id' => $id, ':domain_id', $domain_id));
+            $sth->execute(array(':id' => $id, ':domain_id', $domain_id, ':id2' => $id, ':domain_id2', $domain_id));
             if ($sth->fetchColumn() != 0) {
                 return false; // Fail, line items or payments still exist
             }

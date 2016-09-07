@@ -29,7 +29,7 @@ $biller      = getBiller($invoice['biller_id']);
 $customer    = getCustomer($invoice['customer_id']);
 $invoiceType = getInvoiceType($invoice['type_id']);
 
-$spc2us_pref   = str_replace(" ", "_", $invoice['index_name']);
+$spc2us_pref   = strstr($invoice['index_name'], ' ', '_');//str_replace(" ", "_", $invoice['index_name']);
 $pdf_file_name = $spc2us_pref  . '.pdf';
 
 $message = "Unable to process email request.";

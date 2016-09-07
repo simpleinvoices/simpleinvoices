@@ -172,7 +172,7 @@ class export
 				$invoice = getInvoice($payment['ac_inv_id'], $this->domain_id);
 				$biller = getBiller($payment['biller_id'], $this->domain_id);
 				$logo = getLogo($biller);
-				$logo = str_replace(" ", "%20", $logo);
+				$logo = strstr($logo, ' ', '%20');//str_replace(" ", "%20", $logo);
 				$customer = getCustomer($payment['customer_id'], $this->domain_id);
 				$invoiceType = getInvoiceType($invoice['type_id']);
 				$customFieldLabels = getCustomFieldLabels($this->domain_id);
@@ -218,10 +218,10 @@ class export
 				$preference = getPreference($invoice['preference_id'], $this->domain_id);
 				$defaults = getSystemDefaults($this->domain_id);
 				$logo = getLogo($biller);
-				$logo = str_replace(" ", "%20", $logo);
+				$logo = strstr($logo, ' ', '%20');//str_replace(" ", "%20", $logo);
 				$invoiceItems = $invoiceobj->getInvoiceItems($this->id, $this->domain_id);
 				
-				$spc2us_pref = str_replace(" ", "_", $invoice['index_name']);
+				$spc2us_pref = strstr($invoice['index_name'], ' ', '_');//str_replace(" ", "_", $invoice['index_name']);
 				$this->file_name = $spc2us_pref;
 				
 				$customFieldLabels = getCustomFieldLabels($this->domain_id);
@@ -280,10 +280,10 @@ class export
 				$preference = getPreference($invoice['preference_id'], $this->domain_id);
 				$defaults = getSystemDefaults($this->domain_id);
 				$logo = getLogo($biller);
-				$logo = str_replace(" ", "%20", $logo);
+				$logo = strstr($logo, ' ', '%20');//str_replace(" ", "%20", $logo);
 				$invoiceItems = $invoiceobj->getInvoiceItems($this->id, $this->domain_id);
 				
-				$spc2us_pref = str_replace(" ", "_", $invoice['index_name']);
+				$spc2us_pref = strstr($invoice['index_name'], ' ', '_');//str_replace(" ", "_", $invoice['index_name']);
 				$this->file_name = $spc2us_pref;
 				
 				$customFieldLabels = getCustomFieldLabels($this->domain_id);
@@ -342,7 +342,7 @@ class export
 			$smarty -> assign('LANG',$LANG);
 		}
 		//overide the config's locale with the one assigned from the preference table
-		if($pref_locale=$preference['locale'] and strlen($pref_locale) > 4 ){
+		if($pref_locale=$preference['locale'] and isset($pref_locale{4})){//strlen($pref_locale) > 4 ){
 			global $config;
 			$config->local->locale=$pref_locale;
 		}

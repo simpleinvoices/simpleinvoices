@@ -24,13 +24,13 @@
 
 {else}
 {* if  name was inserted *} 
-{	if $smarty.post.id !=null} 
+{if $smarty.post.id !=null} 
 {*
 		<div class="validation_alert"><img src="./images/common/important.png" alt="important" />
 		You must enter a description for the Customer</div>
 		<hr />
 *}
-{	/if}	
+{/if}	
 <form name="frmpost" action="index.php?module=customers&amp;view=add" method="post" id="frmpost" onsubmit="return checkForm(this);">
 	<div class="si_form">
 		<div id="tabs_customer">
@@ -171,7 +171,7 @@
 						<img src="./images/common/help-small.png" alt="help" />
 						</a>
 					</th>
-					<td><input type="text" name="credit_card_cvc" value"{$smarty.post.credit_card_cvc|htmlsafe}" size="25" /></td>
+					<td><input type="text" name="credit_card_cvc" value"{$smarty.post.credit_card_cvc|htmlsafe}" size="5" /></td>
 				</tr>
 				<tr>
 					<th>{$LANG.credit_card_expiry_month}
@@ -186,9 +186,9 @@
 					</th>
 					<td>
 						<select name="credit_card_expiry_month">
-{	foreach from=$cc_months item=mon key=k}
+{foreach from=$cc_months item=mon key=k}
 							<option value="{$k}"{if $k==$smarty.post.credit_card_expiry_month} selected="selected"{/if}>{$mon}</option>
-{	/foreach}
+{/foreach}
 						</select>
 						<!--<input
 							type="text" name="credit_card_expiry_month"
@@ -209,9 +209,9 @@
 					</th>
 					<td>
 						<select name="credit_card_expiry_year">
-{	foreach from=$cc_years item=year key=k}
+{foreach from=$cc_years item=year key=k}
 							<option value="{$k}"{if $k==$smarty.post.credit_card_expiry_year} selected="selected"{/if}>{$year}</option>
-{	/foreach}
+{/foreach}
 						</select>
 						<!--<input
 							type="text" name="credit_card_expiry_year"
@@ -224,6 +224,7 @@
 
 		<div id="section-3" class="fragment">
 			<table>
+{if $customFieldLabel.customer_cf1}
 				<tr>
 					<th>{$customFieldLabel.customer_cf1|htmlsafe}
 						<a
@@ -237,6 +238,8 @@
 					</th>
 					<td><input type="text" name="custom_field1" value="{$smarty.post.custom_field1|htmlsafe}" size="25" /></td>
 				</tr>
+{/if}
+{if $customFieldLabel.customer_cf2}
 				<tr>
 					<th>{$customFieldLabel.customer_cf2|htmlsafe}
 						<a
@@ -250,6 +253,8 @@
 					</th>
 					<td><input type="text" name="custom_field2" value="{$smarty.post.custom_field2|htmlsafe}" size="25" /></td> 
 				</tr>
+{/if}
+{if $customFieldLabel.customer_cf3}
 				<tr>
 					<th>{$customFieldLabel.customer_cf3|htmlsafe}
 						<a
@@ -263,6 +268,8 @@
 					</th>
 					<td><input type="text" name="custom_field3" value="{$smarty.post.custom_field3|htmlsafe}" size="25" /></td>
 				</tr>
+{/if}
+{if $customFieldLabel.customer_cf4}
 				<tr>
 					<th>{$customFieldLabel.customer_cf4|htmlsafe}
 						<a
@@ -276,12 +283,13 @@
 					</th>
 					<td><input type="text" name="custom_field4" value="{$smarty.post.custom_field4|htmlsafe}" size="25" /></td>
 				</tr>
+{/if}
 			</table>
 		</div>
 
 		<div id="section-4" class="fragment">
 			<table>
-{	if $defaults.price_list}
+{if $defaults.price_list}
 				<tr>
 					<th>{$LANG.price_list}</th>
 					<td>
@@ -293,7 +301,7 @@
 						</select>
 					</td>
 				</tr>
-{	/if}
+{/if}
 				<tr>
 					<th>{$LANG.notes}</th>
 					<td><textarea  name="notes" class="editor" rows="8" cols="50">{$smarty.post.notes|outhtml}</textarea></td>

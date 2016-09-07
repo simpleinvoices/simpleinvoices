@@ -371,7 +371,7 @@
 							<img src="./images/common/help-small.png" alt="help" />
 							</a>
 					</th>
-					<td><input type="text" name="credit_card_cvc" value"{$smarty.post.credit_card_cvc|htmlsafe}" size="25" /></td>
+					<td><input type="text" name="credit_card_cvc" value"{$smarty.post.credit_card_cvc|htmlsafe}" size="5" /></td>
 				</tr>
 				<tr>
 					<th>{$LANG.credit_card_expiry_month}
@@ -423,6 +423,7 @@
 		</div>
 		<div id="section-3" class="fragment">
 			<table>
+{if $customFieldLabel.customer_cf1}
 				<tr>
 					<th>{$customFieldLabel.customer_cf1|htmlsafe}
 						<a
@@ -437,6 +438,8 @@
 						<input type="text" name="custom_field1" value="{$customer.custom_field1|htmlsafe}" size="50" />
 					</td>
 				</tr>
+{/if}
+{if $customFieldLabel.customer_cf2}
 				<tr>
 					<th>{$customFieldLabel.customer_cf2|htmlsafe}
 						<a
@@ -451,6 +454,8 @@
 						<input type="text" name="custom_field2" value="{$customer.custom_field2|htmlsafe}" size="50" />
 					</td>
 				</tr>
+{/if}
+{if $customFieldLabel.customer_cf3}
 				<tr>
 					<th>{$customFieldLabel.customer_cf3|htmlsafe} 
 						<a
@@ -465,6 +470,8 @@
 						<input type="text" name="custom_field3" value="{$customer.custom_field3|htmlsafe}" size="50" />
 					</td>
 				</tr>
+{/if}
+{if $customFieldLabel.customer_cf4}
 				<tr>
 					<th>{$customFieldLabel.customer_cf4|htmlsafe}
 						<a
@@ -479,6 +486,7 @@
 						<input type="text" name="custom_field4" value="{$customer.custom_field4|htmlsafe}" size="50" />
 					</td>
 				</tr>
+{/if}
 			</table>
 		</div>
 		<div id="section-4" class="fragment">

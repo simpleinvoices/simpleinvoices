@@ -21,7 +21,6 @@
 {	assign var=pos value=$inc|strrpos:'/':-4}
 {	assign var=vis value=$inc|substr:1:$pos-1}
 
-
 {/strip}{*< ?xml version="1.0" encoding="utf-8"? >*}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
