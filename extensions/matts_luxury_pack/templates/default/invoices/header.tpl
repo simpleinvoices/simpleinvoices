@@ -1,19 +1,23 @@
 {*
-	/*
-	* Script: /simple/extensions/invoice_add_display_no/templates/default/invoices/header.tpl
-	* 	 Header file for invoice template
-	* called by itemised.tpl
-	*
-	* License:
-	*	 GPL v3 or above
-	*
-	* Website:
-	*	http://www.simpleinvoices.org
-	*/
+/*
+ * Script: ./extensions/matts_luxury_packtemplates/default/invoices/header.tpl
+ * 	Header file for invoice template, called by itemised.tpl
+ *
+ * Authors:
+ *	yumatechnical@gmail.com
+ *
+ * Last edited:
+ * 	2016-09-09
+ *
+ * License:
+ *	GPL v2 or above
+ *
+ * Website:
+ * 	http://www.simpleinvoices.org
+ */
 #$Id$
 *}
-
-
+<!--./extensions/matts_luxury_packtemplates/default/invoices/header.tpl-->
 	<input type="hidden" name="action" value="insert" />
 
     <div class="si_filters si_buttons_invoice_header">
@@ -57,15 +61,15 @@
 		<tr>
 			<th>{$LANG.biller}</th>
 			<td>
-			{if $billers == null }
+{if $billers == null }
 				<p><em>{$LANG.no_billers}</em></p>
-			{else}
+{else}
 				<select name="biller_id">
-				{foreach from=$billers item=biller}
-					<option {if $biller.id == $defaults.biller} selected {/if} value="{$biller.id|htmlsafe}">{$biller.name|htmlsafe}</option>
-				{/foreach}
+{	foreach from=$billers item=biller}
+					<option {if $biller.id == $defaults.biller }selected {/if }value="{$biller.id|htmlsafe}">{$biller.name|htmlsafe}</option>
+{	/foreach}
 				</select>
-			{/if}
+{/if}
 			</td>
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
@@ -73,15 +77,15 @@
 		<tr>
 			<th>{$LANG.customer}</th>
 			<td>
-			{if $customers == null }
+{if $customers == null }
 				<em>{$LANG.no_customers}</em>
-			{else}
+{else}
 				<select name="customer_id" id="customer_id">
-				{foreach from=$customers item=customer}
+{	foreach from=$customers item=customer}
 					<option {if $customer.id == $defaults.customer}selected="selected" {/if}value="{$customer.id|htmlsafe}">{$customer.name|htmlsafe}</option>
-				{/foreach}
+{	/foreach}
 				</select>
-			{/if}
+{/if}
 			</td>
 			<td style="width:21px;"></td>
 			<td id="customer_street_address" style="font-size: 9px;">{if $defaults.use_modal}<a rel="superbox[iframe][1075x600]" class="show-details modal customer_view" title="{$LANG.view} {$LANG.customer}" href="index.php?module=customers&view=details&id=&action=view">{/if}<img src="images/common/view.png" alt="view" />&nbsp;{if $defaults.use_modal}</a>{/if}
@@ -94,9 +98,9 @@
 			<td>
 				<select name="ship_to_customer_id" id="ship_to_customer_id">
 					<option value="0" selected="selected">{$LANG.no_ship_to}</option>
-				{foreach from=$customers item=customer}
+{	foreach from=$customers item=customer}
 					<option value="{$customer.id|htmlsafe}">{$customer.name|htmlsafe}</option>
-				{/foreach}
+{	/foreach}
 				</select>
 			</td>
 			<td style="width:21px;"></td>
@@ -111,11 +115,11 @@
 			<th>{$LANG.terms}</th>
 			<td>
 				<input type="text" class="terms" size="30" name="terms" id="terms" 
-				{if $smarty.get.terms}
+{	if $smarty.get.terms}
 					value="{$smarty.get.terms|htmlsafe}" />
-				{else}
+{	else}
 					value="{$invoice.terms|htmlsafe}" />
-				{/if}
+{	/if}
 			</td>
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
@@ -194,7 +198,7 @@ function changeProductSelection (objct) {
 	siLog('debug', 'Description');
 }
 
-function initial() {
+function invoiceHeaderInitial() {
 	var elem = document.getElementById("customer_id");
 	var cto = document.getElementById("customer_street_address");
 	cto.style.display = 'none';
@@ -234,11 +238,11 @@ function initial() {
 };
 
 if (window.addEventListener) {
-	window.addEventListener("load", initial, false);
+	window.addEventListener("load", invoiceHeaderInitial, false);
 } else if (window.attachEvent) {
-	window.attachEvent("onload", initial);
+	window.attachEvent("onload", invoiceHeaderInitial);
 } else {
-	document.addEventListener("load", initial, false);
+	document.addEventListener("load", invoiceHeaderInitial, false);
 }
 {/literal}
 //-->

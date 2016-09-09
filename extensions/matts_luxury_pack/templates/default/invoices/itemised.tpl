@@ -25,7 +25,7 @@
 
 {	if $billers == null}
 		<tr>
-			<th>{$LANG.setup_as_biller}</th>
+			<th>{ $LANG.setup_as_biller }</th>
 			<td>
 				<a href="./index.php?module=billers&amp;view=add" class="positive"><img src="./images/common/user_add.png" alt="add" />{$LANG.add_new_biller}</a>
 			</td>
@@ -34,7 +34,7 @@
 
 {	if $customers == null}
 		<tr>
-			<th>{$LANG.setup_add_customer}</th>
+			<th>{ $LANG.setup_add_customer }</th>
 			<td>
 				<a href="./index.php?module=customers&amp;view=add" class="positive"><img src="./images/common/vcard_add.png" alt="vcard" />{$LANG.customer_add}</a>
 			</td>
@@ -43,7 +43,7 @@
 
 {	if $products == null}
 		<tr>
-			<th>{$LANG.setup_add_products}</th>
+			<th>{ $LANG.setup_add_products }</th>
 			<td>
 				<a href="./index.php?module=products&amp;view=add" class="positive"><img src="./images/common/cart_add.png" alt="cart" />{$LANG.add_new_product}</a>
 			</td>
@@ -53,7 +53,7 @@
 
 {	if $taxes == null}
 		<tr>
-			<th>{$LANG.setup_add_taxrate}</th>
+			<th>{ $LANG.setup_add_taxrate }</th>
 			<td>
 				<a href="index.php?module=tax_rates&amp;view=add" class="positive"><img src="./images/common/money_delete.png" alt="delete" />{$LANG.add_new_tax_rate}</a>
 			</td>
@@ -62,7 +62,7 @@
 
 {	if $preferences == null}
 		<tr>
-			<th>{$LANG.setup_add_inv_pref}</th>
+			<th>{ $LANG.setup_add_inv_pref }</th>
 			<td>
 				</a>
 				<a href="./index.php?module=preferences&amp;view=add" class="positive"><img src="./images/common/page_white_edit.png" alt="edit" />{$LANG.add_new_preference}</a>
@@ -76,8 +76,8 @@
 <div style="float: right;">
 	<div class="si_toolbar">
 		<div class="si_toolbar_form">
-			<button type="submit" class="invoice_save" name="submit" value="{$LANG.save}">
-				<img class="button_img" src="./images/common/tick.png" alt="tick" />{$LANG.save}</button><br />
+			<button type="submit" class="invoice_save" name="submit" value="{ $LANG.save }">
+				<img class="button_img" src="./images/common/tick.png" alt="tick" />{ $LANG.save }</button><br />
 		</div>
 {	if $defaults.use_modal}
 	</div>
@@ -85,9 +85,11 @@
 	<div class="si_toolbar modal">
 		<div class="si_toolbar_inform">
 			<a rel="superbox[iframe][1075x600]" href="index.php?module=customers&view=add" class="show-details modal customer_add" title="{$LANG.add_customer}">
-				<img class="button_img" src="./images/common/add.png" alt="add" />{$LANG.add_customer}</a><br /><br />
+				<img class="button_img" src="./images/common/add.png" alt="add" />{ $LANG.add_customer }</a><br /><br />
+			<a href="javascript:void(false)" id="regenCusts">{ $LANG.regenerate }</a><br /><br /><!--onclick="regenCusts()" -->
 			<a rel="superbox[iframe][1075x600]" href="index.php?module=products&view=add" class="show-details modal product_add" title="{$LANG.add_product}">
-				<img class="button_img" src="./images/common/add.png" alt="add" />{$LANG.add_product}</a>
+				<img class="button_img" src="./images/common/add.png" alt="add" />{ $LANG.add_product }</a>
+			<a href="javascript:void(false)" id="regenProds">{ $LANG.regenerate }</a><br /><br /><!-- onclick="regenProds()"-->
 		</div>
 {	/if}
 	</div>
@@ -122,15 +124,10 @@
 {		/if}
 
 {		if $smarty.section.line.index != 0}
-					{* can't delete line 0 *}
-					<!-- onclick="delete_row({$smarty.section.line.index|htmlsafe});" --> 
-					<a 
-						id="trash_link{$smarty.section.line.index|htmlsafe}"
-						class="trash_link modal"
-						title="{$LANG.delete_row}" 
+					<a id="trash_link{$smarty.section.line.index|htmlsafe}"
+						class="trash_link modal" title="{$LANG.delete_row}" 
 						rel="{$smarty.section.line.index|htmlsafe}"
-						href="#" 
-						style="display: inline;"
+						href="#" style="display: inline;"
 					>
 						<img src="./images/common/delete_item.png" alt="delete" />
 					</a>
@@ -138,38 +135,31 @@
 				</td>
 				<td>
 					<input type="text" 
-						class="si_right{if $smarty.section.line.index == "0"} validate[required]{/if}" 
+						class="{if $smarty.section.line.index == "0" }validate[required] {/if }si_right" 
 						name="quantity{$smarty.section.line.index|htmlsafe}" 
 						id="quantity{$smarty.section.line.index|htmlsafe}" size="5" 
 {		if $smarty.get.quantity.$lineNumber}
-							value="{$smarty.get.quantity.$lineNumber}"
-{		/if}
-						/>
+						value="{$smarty.get.quantity.$lineNumber}"
+{		/if}		/>
 				</td>
 				<td>
-								
 {		if $products == null }
 				<p><em>{$LANG.no_products}</em></p>
 {		else}
-				<select 
-					id="products{$smarty.section.line.index|htmlsafe}"
+				<select id="products{$smarty.section.line.index|htmlsafe}"
 					name="products{$smarty.section.line.index|htmlsafe}"
 					rel="{$smarty.section.line.index|htmlsafe}"
-					class="{if $smarty.section.line.index == "0"}validate[required] {/if}modal{*changeProduct*}{*product__change*}"
-					{**}onchange="changeProductSelection(this)"{**}
+					class="{if $smarty.section.line.index == "0" }validate[required] {/if }changeProduct"
 				>
 					<option value="">&nbsp;</option>
 {			foreach from=$products item=product}
 					<option 
-{				if $product.id == $smarty.get.product.$lineNumber}
-							value="{$smarty.get.product.$lineNumber}"
-							selected
-{				else}
-							value="{$product.id|htmlsafe}"
-{				/if}
-					>
-{				$product.description|htmlsafe}
-					</option>
+{				if $product.id == $smarty.get.product.$lineNumber} 
+							value="{$smarty.get.product.$lineNumber}" 
+							selected="selected"
+{				else}		value="{$product.id|htmlsafe}"
+{				/if}>
+{				$product.description|htmlsafe} </option>
 {			/foreach}
 				</select>
 {		/if}
@@ -177,42 +167,34 @@
 {		section name=tax start=0 loop=$defaults.tax_per_line_item step=1}
 {			assign var="taxNumber" value=$smarty.section.tax.index}
 				<td>				                				                
-					<select 
-						id="tax_id[{$smarty.section.line.index|htmlsafe}][{$smarty.section.tax.index|htmlsafe}]"
-						name="tax_id[{$smarty.section.line.index|htmlsafe}][{$smarty.section.tax.index|htmlsafe}]"
-					>
-					<option value="">&nbsp;</option>
+					<select id="tax_id[{$smarty.section.line.index|htmlsafe}][{$smarty.section.tax.index|htmlsafe}]"
+						name="tax_id[{$smarty.section.line.index|htmlsafe}][{$smarty.section.tax.index|htmlsafe}]">
+						<option value="">&nbsp;</option>
 {			foreach from=$taxes item=tax}
 						<option 
 {				if $tax.tax_id == $smarty.get.tax.$lineNumber.$taxNumber}
-							value="{$smarty.get.tax.$lineNumber.$taxNumber}"
-							selected
+							value="{$smarty.get.tax.$lineNumber.$taxNumber}" 
+							selected="selected"
 {				else}
-							   value="{$tax.tax_id|htmlsafe}"
-{				/if}
-						>
-{						$tax.tax_description|htmlsafe}
+							value="{$tax.tax_id|htmlsafe}"
+{				/if}	>
+{							$tax.tax_description|htmlsafe}
 						</option>
 {			/foreach}
-				</select>
+					</select>
 				</td>
 {		/section}
-
 				<td>
 					<input id="unit_price{$smarty.section.line.index|htmlsafe}" 
-						name="unit_price{$smarty.section.line.index|htmlsafe}" 
-						size="7"
+						name="unit_price{$smarty.section.line.index|htmlsafe}" size="7"
 {		if $smarty.get.unit_price.$lineNumber}
 						value="{$smarty.get.unit_price.$lineNumber}"
 {		else}
 						value=""
 {		/if}
-						class="si_right{if $smarty.section.line.index == "0"} validate[required]{/if}" 
-					/>
+						class="{if $smarty.section.line.index == "0" }validate[required] {/if}si_right" />
 				</td>	
-
 			</tr>
-					
 			<tr class="details si_hide">
 				<td></td>
 				<td colspan="4">
@@ -258,7 +240,7 @@
 {	else}
 				<select name="preference_id">
 {		foreach from=$preferences item=preference}
-					<option {if $preference.pref_id == $defaults.preference} selected {/if} value="{$preference.pref_id|htmlsafe}">{$preference.pref_description|htmlsafe}</option>
+					<option{ if $preference.pref_id == $defaults.preference} selected{ /if} value="{$preference.pref_id|htmlsafe}">{$preference.pref_description|htmlsafe}</option>
 {		/foreach}
 				</select>
 {	/if}
@@ -285,31 +267,122 @@
 {/if}
 
 <script type="text/javascript">
-<!--
-//alert("{$smarty.session.Zend_Auth|@debug_print_var}");//|htmlsafe}");//$smarty.session.Zend_Auth.role_name
-{literal}
-/*
-function init() {
-	var el = getElementsByClassName("changeProduct");
-	alert('el.length='+ el.length);
-	for (var i=0; i<el.length; i++) {
-	alert('el['+ i+ ']='+ el[i]);
-		if (el[i].addEventListener){
-			el[i].addEventListener("change", function() { changeProductSelection(this); }, false);
-		} else if (el[i].attachEvent){
-			el[i].attachEvent("onchange", function() { changeProductSelection(this); });
+<!--{literal}
+
+function optionsParseXML(myxml,tag1,tag2)
+{
+	var rows = myxml.getElementsByTagName("rows")[0];
+	if (rows) {
+		var items = [],
+			nodes = rows.childNodes;
+		if (nodes)
+		{
+			for (var i=0; i<nodes.length; i++)
+			{
+				var id = nodes[i].getAttribute(tag1);
+				if (id)
+				{
+					var cells = nodes[i].childNodes;
+					for (var j=0; j<cells.length; j++)
+					{
+						if (cells[j].getAttribute("name")==tag2)
+						{
+							var name = cells[j].textContent;
+							items.push ('<option value="'+ id+ '">'+ name+ '</option>'+ "\n");
+						}
+					}
+				}
+			}
 		}
 	}
-};
-
-if (window.addEventListener) {
-	window.addEventListener("load", init, false);
-} else if (window.attachEvent) {
-	window.attachEvent("onload", init);
-} else {
-	document.addEventListener("load", init, false);
+	return items;
 }
+
+function regenCusts()
+{
+	$('#gmail_loading').show();
+	document.getElementById('customer_id').options.length = 0;	// clear previous options
+	document.getElementById('ship_to_customer_id').options.length = 0;
+	$.ajax({
+		url:		'index.php?module=customers&view=xml',							// get output (json) of php script
+		type:		'POST',
+		data:		'rp=32768',
+		success: 	function(response)
+					{
+						items = optionsParseXML(response, 'id', 'name');
+						$('#customer_id').append(items.join("\n"));					// fill customer list
+{/literal}{if $defaults.use_ship_to}
+						items.unshift('<option value="0" selected="selected">{ $LANG.no_ship_to }</option>'+ "\n");
+						$('#ship_to_customer_id').append(items.join("\n"));			// fill ship-to-customer list
+{/if}{literal}
+					},
+		error: 		function(jqXHR, textStatus, errorThrown)
+					{
+						console.log('error');
+						console.log(errorThrown);
+						console.log(jqXHR);
+					},
+		complete: 	function() {	$('#gmail_loading').hide();	}
+	});
+}
+
+function regenProds()
+{
+	$('#gmail_loading').show();
+	$.ajax({
+		url: 		'index.php?module=products&view=xml',				// get output (json) of php script//{*	/literal}{$inc|cat:"/mylist.php"}{literal	*}
+		type: 		'POST',
+		data:		'rp=32768',
+		success: 	function(response)
+					{
+						var allprows = document.getElementsByClassName('products');
+						for (var k=0; k<allprows.length; k++)
+						{
+							if (allprows[k].selectedIndex == 0)
+							{
+								items = optionsParseXML(response, 'id', 'description');
+								allprows[k].options.length = 0;			// clear previous options
+								items.unshift('<option value="">&nbsp;</option>'+ "\n");//selected="selected"
+								$(allprows[k]).append(items.join("\n"));	// fill products list
+							}
+						}
+					},
+		error: 		function(jqXHR, textStatus, errorThrown)
+					{
+						console.log('error');
+						console.log(errorThrown);
+						console.log(jqXHR);
+					},
+		complete: 	function() {	$('#gmail_loading').hide();	}
+	});
+}
+
+$('#regenCusts').click(function () { 						// launch regenCusts() when #regenCusts clicked
+	regenCusts();
+});
+$('#regenProds').click(function () { 						// launch regenProds() when #regenProds clicked
+	regenProds();
+});
+
+$('.changeProduct').change(function () { 					// launch changeProductSelection() when #changeProduct changed
+	changeProductSelection(this);
+});
+/*
+$("#cancelAddCustomer").livequery('click',function (e) { 	// launch superbox.close() when #cancelAddCustomer clicked
+	e.preventDefault();
+	$.superbox.close();
+	//$('#sb-close').trigger('click')
+});
+$("#cancelEditCustomer").livequery('click',function (e) { 	// launch superbox.close() when #cancelEditCustomer clicked
+	e.preventDefault();
+	//$.superbox.close();
+	$('#sb-close').trigger('click')
+});
+$("#cancelAddProduct").livequery('click',function (e) { 	// launch superbox.close() when #cancelAddProduct clicked
+	e.preventDefault();
+	$.superbox.close();
+	//$('#sb-close').trigger('click')
+});
 */
-{/literal}
-//-->
+//-->{/literal}
 </script>
