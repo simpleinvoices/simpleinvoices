@@ -10,7 +10,7 @@ CheckNumber::addNewFields();
 
 // TODO - replace get..Payments with simple count - as data is got by xml.php now
 // @formatter:off
-$query      = null;
+$payments   = array();
 $inv_id     = null;
 $c_id       = null;
 $preference = null;
@@ -20,23 +20,23 @@ $customer   = null;
 if (!empty($_GET['id'])) {
     // Filter by just one invoice
     $inv_id        = $_GET['id'];
-    $query         = Payment::getInvoicePayments($_GET['id']);
+    $payments      = Payment::getInvoicePayments($_GET['id']);
     $invoice       = getInvoice($_GET['id']);
     $preference    = getPreference($invoice['preference_id']);
     $subPageActive = "payment_filter_invoice";
 } else if (!empty($_GET['c_id'])) {
     // Filter by just one customer
     $c_id          = $_GET['c_id'];
-    $query         = getCustomerPayments($_GET['c_id']);
+    $payments      = Payment::getCustomerPayments($_GET['c_id']);
     $customer      = Customer::get($_GET['c_id']);
     $subPageActive = "payment_filter_customer";
 } else {
     // No filters
-    $query = Payment::select_all();
+    $payments = Payment::select_all();
     $subPageActive = "payment_manage";
 }
 
-$payments = progressPayments($query);
+$payments = Payment::progressPayments($payments); // payment type description to payments.
 
 $smarty->assign("payments"  , $payments);
 $smarty->assign("preference", $preference);

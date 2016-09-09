@@ -16,7 +16,7 @@
  *  Website:
  *      http://www.simpleinvoices.org
  */
-global $smarty, $pdoDb;
+global $menu, $pdoDb, $smarty;
 
 checkLogin ();
 

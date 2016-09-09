@@ -17,17 +17,10 @@ class WhereClause {
      * @param WhereItem $whereItem (Optional) If set, will add to this newly instantiated object.
      */
     public function __construct(WhereItem $whereItem = NULL) {
-        $this->clear();
-        if (isset($whereItem)) $this->addItem($whereItem);
-    }
-
-    /**
-     * Clear object contents
-     */
-    public function clear() {
         $this->whereItems = array();
         $this->paren_cnt = 0;
         $this->token_cnt = 0;
+        if (isset($whereItem)) $this->addItem($whereItem);
     }
 
     /**

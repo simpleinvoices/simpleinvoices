@@ -104,7 +104,7 @@ class Inventory {
             }
         }
 
-        $email = new email ();
+        $email = new Email ();
         $email->notes   = $email_message;
         $email->from    = $email->get_admin_email ();
         $email->to      = $email->get_admin_email ();

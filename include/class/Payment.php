@@ -37,22 +37,22 @@ class Payment {
         $oc->addSimpleItem("ap.ac_payment_type", new DbField("pt.pt_id"));
         $pdoDb->addToJoins(array("LEFT", "payment_types", "pt", $oc));
 
-        $oc->clear();
+        $oc = new OnClause();
         $oc->addSimpleItem("ap.ac_inv_id", new DbField("iv.id"), "AND");
         $oc->addSimpleItem("ap.domain_id", new DbField("iv.domain_id"));
         $pdoDb->addToJoins(array("LEFT", "invoices", "iv"));
 
-        $oc->clear();
+        $oc = new OnClause();
         $oc->addSimpleItem("iv.customer_id", new DbField("c.id"));
         $oc->addSimpleItem("iv.domain_id", new DbField("c.comain_id"));
         $pdoDb->addToJoins(array("LEFT", "customers", "c"));
 
-        $oc->clear();
+        $oc = new OnClause();
         $oc->addSimpleItem("iv.biller_id", new DbField("b.id"));
         $oc->addSimpleItem("iv.domain_id", new DbField("b.domain_id"));
         $pdoDb->addToJoins(array("LEFT", "biller", "b", $oc));
 
-        $oc->clear();
+        $oc = new OnClause();
         $oc->addSimpleItem("iv.preference_id", new DbField("pref.pref_id"));
         $oc->addSimpleItem("iv.domain_id", new DbField("pref.domain_id"));
         $pdoDb->addToJoins(array("LEFT", "preferences", "pref", $oc));
@@ -74,17 +74,17 @@ class Payment {
         $oc = new OnClause();
         $oc->addSimpleItem("ap.ac_inv_id", new DbField("iv.id"), "AND");
         $oc->addSimpleItem("ap.domain_id", new DbField("iv.domain_id"));
-        $pdoDb->addToJoins("LEFT", "payment", "ap", $oc);
+        $pdoDb->addToJoins(array("LEFT", "payment", "ap", $oc));
 
-        $oc->clear();
+        $oc = new OnClause();
         $oc->addSimpleItem("iv.customer_id", new DbField("c.id"), "AND");
         $oc->addSimpleItem("iv.domain_id", new DbField("c.domain_id"));
-        $pdoDb->addToJoins("LEFT", "customers", "c", $oc);
+        $pdoDb->addToJoins(array("LEFT", "customers", "c", $oc));
 
-        $oc->clear();
+        $oc = new OnClause();
         $oc->addSimpleItem("iv.biller_id", new DbField("b.id"), "AND");
         $oc->addSimpleItem("iv.domain_id", new DbField("b.domain_id"));
-        $pdoDb->addToJoins("LEFT", "biller", "b", $oc);
+        $pdoDb->addToJoins(array("LEFT", "biller", "b", $oc));
 
         $pdoDb->addSimpleWhere("iv.id", $id, "AND");
         $pdoDb->addSimpleWhere("iv.domain_id", domain_id::get());
@@ -107,17 +107,17 @@ class Payment {
         $oc = new OnClause();
         $oc->addSimpleItem("iv.customer_id", new DbField("c.id"), "AND");
         $oc->addSimpleItem("iv.domain_id", new DbField("c.domain_id"));
-        $pdoDb->addToJoins("LEFT", "invoices", "iv", $oc);
+        $pdoDb->addToJoins(array("LEFT", "invoices", "iv", $oc));
 
-        $oc->clear();
+        $oc = new OnClause();
         $oc->addSimpleItem("ap.ac_inv_id", new DbField("iv.id"), "AND");
         $oc->addSimpleItem("ap.domain_id", new DbField("iv.domain_id"));
-        $pdoDb->addToJoins("LEFT", "payment", "ap", $oc);
+        $pdoDb->addToJoins(array("LEFT", "payment", "ap", $oc));
         
-        $oc->clear();
+        $oc = new OnClause();
         $oc->addSimpleItem("iv.biller_id", new DbField("b.id"), "AND");
         $oc->addSimpleItem("iv.domain_id", new DbField("b.domain_id"));
-        $pdoDb->addToJoins("LEFT", "biller", "b", $oc);
+        $pdoDb->addToJoins(array("LEFT", "biller", "b", $oc));
 
         $pdoDb->addSimpleWhere("c.id", $id, "AND");
         $pdoDb->addSimpleWhere("ap.domain_id", domain_id::get());
@@ -140,17 +140,17 @@ class Payment {
         $oc = new OnClause();
         $oc->addSimpleItem("ap.ac_inv_id", new DbField("iv.id"), "AND");
         $oc->addSimpleItem("ap.domain_id", new DbField("iv.domain_id"));
-        $pdoDb->addToJoins("LEFT", "invoices", "iv", $oc);
+        $pdoDb->addToJoins(array("LEFT", "invoices", "iv", $oc));
 
-        $oc->clear();
+        $oc = new OnClause();
         $oc->addSimpleItem("iv.customer_id", new DbField("c.id"), "AND");
         $oc->addSimpleItem("iv.domain_id", new DbField("c.domain_id"));
-        $pdoDb->addToJoins("LEFT", "customers", "c", $oc);
+        $pdoDb->addToJoins(array("LEFT", "customers", "c", $oc));
 
-        $oc->clear();
+        $oc = new OnClause();
         $oc->addSimpleItem("iv.biller_id", new DbField("b.id"), "AND");
         $oc->addSimpleItem("iv.domain_id", new DbField("b.domain_id"));
-        $pdoDb->addToJoins("LEFT", "biller", "b", $oc);
+        $pdoDb->addToJoins(array("LEFT", "biller", "b", $oc));
 
         $pdoDb->addSimpleWhere("ap.id", domain_id::get(), "AND");
         $pdoDb->addSimpleWhere("ap.domain_id", domain_id::get());
@@ -176,17 +176,17 @@ class Payment {
         $oc = new OnClause();
         $oc->addSimpleItem("ap.ac_inv_id", new DbField("iv.id"), "AND");
         $oc->addSimpleItem("ap.domain_id", new DbField("iv.domain_id"));
-        $pdoDb->addToJoins("LEFT", "invoices", "iv", $oc);
+        $pdoDb->addToJoins(array("LEFT", "invoices", "iv", $oc));
 
-        $oc->clear();
+        $oc = new OnClause();
         $oc->addSimpleItem("iv.customer_id", new DbField("c.id"), "AND");
         $oc->addSimpleItem("iv.domain_id", new DbField("c.domain_id"));
-        $pdoDb->addToJoins("LEFT", "customers", "c", $oc);
+        $pdoDb->addToJoins(array("LEFT", "customers", "c", $oc));
 
-        $oc->clear();
+        $oc = new OnClause();
         $oc->addSimpleItem("iv.biller_id", new DbField("b.id"), "AND");
         $oc->addSimpleItem("iv.domain_id", new DbField("b.domain_id"));
-        $pdoDb->addToJoins("LEFT", "biller", "b", $oc);
+        $pdoDb->addToJoins(array("LEFT", "biller", "b", $oc));
 
         $pdoDb->addSimpleWhere("ap.domain_id", domain_id::get());
 
@@ -198,37 +198,40 @@ class Payment {
     }
     
     /**
-     * Add payment description to retrieved payment records.
-     * @param mixed $sth Result of dbQuery() on payment records.
-     * @param string $domain_id Domain ID logged into.
-     * @return array Payment records with "description" added.
+     * Add payment type description to retrieved payment records.
+     * @param array $payments Array of <i>Payment</i> object to update.
+     * @return array <i>Payment</i> records with payment type description added.
      */
-    function progressPayments($sth, $domain_id = '') {
+    public static function progressPayments($payments) {
         global $pdoDb;
 
-        
-        $domain_id = domain_id::get($domain_id);
-        $payments = NULL;
-    
-        for ($i = 0; $payment = $sth->fetch(); $i++) {
-            $sql = "SELECT pt_description FROM " . TB_PREFIX . "payment_types
-                WHERE pt_id = :id and domain_id = :domain_id";
-            $tth = dbQuery($sql, ':id', $payment['ac_payment_type'], ':domain_id', $domain_id);
-    
-            $pt = $tth->fetch();
-    
-            $payments[$i] = $payment;
-            $payments[$i]['description'] = $pt['pt_description'];
+        $progressPayments = array();
+        foreach($payments as $payment) {
+            $pdoDb->addSimpleWhere("pt_id", $payment['ac_payment_type'], "AND");
+            $pdoDb->addSimpleWhere("domain_id", domain_id::get());
+            $pdoDb->setSelectList("pt_description");
+            $result = $pdoDb->request("SELECT", "payment_types");
+            if (empty($result)) {
+                $payment['descripiton'] = "";
+            } else {
+                $payment['description'] = $result[0]['pt_description'];
+            }
+            $progressPayments[] = $payment;
         }
-    
-        return $payments;
+        return $progressPayments;
     }
 
+    /**
+     * Insert a new payment record
+     * @param array $list <i>Faux Post</i> list of record's values.
+     * @return integer <b>ID</b> of record inserted. Test for <i>=== false</i> for failure.
+     */
     public static function insert($list) {
         global $pdoDb;
 
         $pdoDb->setExcludedFields(array("id" => 1));
         $pdoDb->setFauxPost($list);
-        return $pdoDb->request("INSERT", "payment");
+        $result = $pdoDb->request("INSERT", "payment");
+        return $result;
     }
 }

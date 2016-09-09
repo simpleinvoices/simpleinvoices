@@ -1,21 +1,22 @@
 <?php
 /*
  * Script: quick_view.php
- * 	Quick view model
+ *     Quick view model
  *
  * Authors:
- *	 Justin Kelly, Nicolas Ruflin, Ap.Muthu
+ *     Justin Kelly, Nicolas Ruflin, Ap.Muthu
  *
  * Last edited:
  *   2016-02-11 Rich Rowley to make it work!
- * 	 2008-01-03
+ *      2008-01-03
  *
  * License:
- *	 GPL v2 or above
- *	 
+ *     GPL v2 or above
+ *     
  * Website:
- * 	http://www.simpleinvoices.or
+ *     http://www.simpleinvoices.or
  */
+global $LANG, $smarty;
 
 checkLogin();
 
@@ -35,7 +36,7 @@ $invoiceItems  = $textUiInvoice->getInvoiceItems($invoice_id);
 if ($invoice['owing'] > 0 ) {
     $invoice_age_days = number_format((strtotime(date('Y-m-d')) - 
                                        strtotime($invoice['calc_date'])) / (60 * 60 * 24),0);
-	$invoice_age = "$invoice_age_days {$LANG['days']}";
+    $invoice_age = "$invoice_age_days {$LANG['days']}";
 }
 else {
     $invoice_age ="";
@@ -47,16 +48,17 @@ $invoice['url_for_pdf'] = $url_for_pdf;
 
 $customFieldLabels = getCustomFieldLabels('',true);
 
+$customField = array();
 for($i=1;$i<=4;$i++) {
-	$customField[$i] = 
-	   show_custom_field("invoice_cf$i",
-	                     $invoice["custom_field$i"],
-	                     "read",
-	                     'details_screen summary',
-	                     'details_screen',
-	                     'details_screen',
-	                     5,
-	                     ':');
+    $customField[$i] = 
+       show_custom_field("invoice_cf$i",
+                         $invoice["custom_field$i"],
+                         "read",
+                         'details_screen summary',
+                         'details_screen',
+                         'details_screen',
+                         5,
+                         ':');
 }
 $pageActive = "invoices";
 
@@ -65,6 +67,9 @@ $customerAccount = null;
 $customerAccount['total'] = calc_customer_total($customer['id']);
 $customerAccount['paid']  = calc_customer_paid($customer['id']);;
 $customerAccount['owing'] = $customerAccount['total'] - $customerAccount['paid'];
+
+$word_processor = null;
+$spreadsheet = null;
 
 $smarty->assign('pageActive'       , $pageActive);
 $smarty->assign("customField"      , $customField);
@@ -81,4 +86,3 @@ $smarty->assign("word_processor"   , $word_processor);
 $smarty->assign("spreadsheet"      , $spreadsheet);
 $smarty->assign("customerAccount"  , $customerAccount);
 // @formatter:on
-?>

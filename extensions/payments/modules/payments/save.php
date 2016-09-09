@@ -7,11 +7,12 @@ checkLogin();
 if (isset($_POST['process_payment'])) {
     // @formatter:off
     $result = Payment::insert(array("ac_inv_id"       => $_POST['invoice_id'],
-                                     "ac_amount"       => $_POST['ac_amount'],
-                                     "ac_notes"        => $_POST['ac_notes'],
-                                     "ac_date"         => sqlDateWithTime($_POST['ac_date']),
-                                     "ac_payment_type" => $_POST['ac_payment_type'],
-                                     "ac_check_number" => $_POST['ac_check_number']));
+                                    "ac_amount"       => $_POST['ac_amount'],
+                                    "ac_notes"        => $_POST['ac_notes'],
+                                    "ac_date"         => sqlDateWithTime($_POST['ac_date']),
+                                    "ac_payment_type" => $_POST['ac_payment_type'],
+                                    "domain_id"       => domain_id::get(),
+                                    "ac_check_number" => $_POST['ac_check_number']));
     $saved  = !empty($result) ? "true" : "false";
 
     // @formatter:on

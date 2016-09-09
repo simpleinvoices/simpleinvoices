@@ -254,7 +254,7 @@ class Cron {
                             $export->execute ();
 
                             // $attachment = file_get_contents('./tmp/cache/' . $pdf_file_name);
-                            $email = new email ();
+                            $email = new Email ();
                             $email->domain_id = $domain_id;
                             $email->format    = 'cron_invoice';
 
@@ -308,7 +308,7 @@ class Cron {
                                     $export_rec->id            = $invoice['id'];
                                     $export_rec->execute ();
 
-                                    $email_rec = new email ();
+                                    $email_rec = new Email ();
                                     $email_rec->domain_id = $domain_id;
                                     $email_rec->format    = 'cron_invoice';
 
@@ -329,7 +329,7 @@ class Cron {
                                 }
                             } else {
                                 // do email to biller/admin - say error
-                                $email = new email ();
+                                $email = new Email ();
                                 $email->domain_id     = $domain_id;
                                 $email->format        = 'cron_payment';
                                 $email->from          = $biller['email'];

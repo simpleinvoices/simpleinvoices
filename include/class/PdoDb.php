@@ -993,6 +993,7 @@ class PdoDb {
             $this->debugger($sql);
             $this->debug = $tmp;
             error_log("PdoDb - query(): Execute error." . print_r($sth->errorInfo(), true));
+            error_log("PdoDb - backtrace: " . print_r(debug_backtrace(),true));
             $this->clearAll();
             throw new PdoDbException('PdoDb - query(): Execute error. See error_log.');
         }
