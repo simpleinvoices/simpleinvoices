@@ -125,7 +125,7 @@ foreach ($customers as $row) {
     $xml .= "<row id='".	$row["CID"].	"'>";
 //	$xml .= "<cell><![CDATA[" . htmlentities(print_r($row,true)) . "]]></cell>";
     $xml .=
-        "<cell><![CDATA[
+        "<cell class='links'><![CDATA[
           <a class='index_table' title='$vname' href='index.php?module=customers&view=details&id=".$row["CID"].	"&action=view'>
             <img src='images/common/view.png' class='action' />
           </a>
@@ -133,16 +133,16 @@ foreach ($customers as $row) {
             <img src='images/common/edit.png' class='action' />
           </a>
         ]]></cell>";
-    $xml .= "<cell><![CDATA[" . $row['CID'] . "]]></cell>";
-    $xml .= "<cell><![CDATA[" . $row['name'] . "]]></cell>";
+    $xml .= "<cell class='CID'><![CDATA[" . $row['CID'] . "]]></cell>";
+    $xml .= "<cell class='name'><![CDATA[" . $row['name'] . "]]></cell>";
 /**/
-	$xml .= "<cell><![CDATA[".	$row['street_address'].	"]]></cell>";//Matt
-	$xml .= "<cell><![CDATA[".	$row['attention'].	"]]></cell>";//Matt
+	$xml .= "<cell class='street_address'><![CDATA[".	$row['street_address'].	"]]></cell>";//Matt
+	$xml .= "<cell class='attention'><![CDATA[".	$row['attention'].	"]]></cell>";//Matt
 /**/
-    $xml .= "<cell><![CDATA[" . siLocal::number($row['customer_total']) . "]]></cell>";
-    $xml .= "<cell><![CDATA[" . siLocal::number($row['paid']) . "]]></cell>";
-    $xml .= "<cell><![CDATA[" . siLocal::number($row['owing']) . "]]></cell>";
-    $xml .= "<cell><![CDATA[<img src='$image' alt='" . $row['enabled_txt'] .
+    $xml .= "<cell class='customer_total'><![CDATA[" . siLocal::number($row['customer_total']) . "]]></cell>";
+    $xml .= "<cell class='paid'><![CDATA[" . siLocal::number($row['paid']) . "]]></cell>";
+    $xml .= "<cell class='owing'><![CDATA[" . siLocal::number($row['owing']) . "]]></cell>";
+    $xml .= "<cell class='enabled_img'><![CDATA[<img src='$image' alt='" . $row['enabled_txt'] .
                                          "' title='" . $row['enabled_txt'] . "' />]]></cell>";
     $xml .= "</row>";
 }

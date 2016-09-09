@@ -13,76 +13,75 @@
 
 <form name="frmpost" action="index.php?module=invoices&amp;view=save" method="post" onsubmit="return frmpost_Validator(this)">
 
-	{$hook_loading}
-
+{$smarty.capture.hook_loading}
 
 {if $first_run_wizard == true}
 
-		<div class="si_message">
-            {$LANG.before_starting}
-		</div>
- 
-		<table class="buttons" align="center">
+	<div class="si_message">
+		{$LANG.before_starting}
+	</div>
 
-    {if $billers == null}
-			<tr>
-				<th>{$LANG.setup_as_biller}</th>
-                <td>
-                    <a href="./index.php?module=billers&amp;view=add" class="positive"><img src="./images/common/user_add.png" alt="add" />{$LANG.add_new_biller}</a>
-                </td>
+	<table class="buttons" align="center">
+
+{	if $billers == null}
+		<tr>
+			<th>{$LANG.setup_as_biller}</th>
+			<td>
+				<a href="./index.php?module=billers&amp;view=add" class="positive"><img src="./images/common/user_add.png" alt="add" />{$LANG.add_new_biller}</a>
+			</td>
         </tr>
-    {/if}
+{	/if}
 
-    {if $customers == null}
-			<tr>
-				<th>{$LANG.setup_add_customer}</th>
-                <td>
-                    <a href="./index.php?module=customers&amp;view=add" class="positive"><img src="./images/common/vcard_add.png" alt="vcard" />{$LANG.customer_add}</a>
-                </td>
-            </tr>
-    {/if}
+{	if $customers == null}
+		<tr>
+			<th>{$LANG.setup_add_customer}</th>
+			<td>
+				<a href="./index.php?module=customers&amp;view=add" class="positive"><img src="./images/common/vcard_add.png" alt="vcard" />{$LANG.customer_add}</a>
+			</td>
+		</tr>
+{	/if}
 
-    {if $products == null}
-			<tr>
-				<th>{$LANG.setup_add_products}</th>
-                <td>
-                    <a href="./index.php?module=products&amp;view=add" class="positive"><img src="./images/common/cart_add.png" alt="cart" />{$LANG.add_new_product}</a>
-                </td>
-            </tr>
+{	if $products == null}
+		<tr>
+			<th>{$LANG.setup_add_products}</th>
+			<td>
+				<a href="./index.php?module=products&amp;view=add" class="positive"><img src="./images/common/cart_add.png" alt="cart" />{$LANG.add_new_product}</a>
+			</td>
+		</tr>
 
-    {/if}
+{	/if}
 
-    {if $taxes == null}
-			<tr>
-				<th>{$LANG.setup_add_taxrate}</th>
-                <td>
-                    <a href="index.php?module=tax_rates&amp;view=add" class="positive"><img src="./images/common/money_delete.png" alt="delete" />{$LANG.add_new_tax_rate}</a>
-                </td>
-            </tr>
+{	if $taxes == null}
+		<tr>
+			<th>{$LANG.setup_add_taxrate}</th>
+			<td>
+				<a href="index.php?module=tax_rates&amp;view=add" class="positive"><img src="./images/common/money_delete.png" alt="delete" />{$LANG.add_new_tax_rate}</a>
+			</td>
+		</tr>
+{	/if}
 
-    {/if}
-
-    {if $preferences == null}
-            <tr>
-				<th>{$LANG.setup_add_inv_pref}</th>
-                <td>
-                    </a>
-                    <a href="./index.php?module=preferences&amp;view=add" class="positive"><img src="./images/common/page_white_edit.png" alt="edit" />{$LANG.add_new_preference}</a>
-                </td>
-            </tr>
-    {/if}
-		</table>
+{	if $preferences == null}
+		<tr>
+			<th>{$LANG.setup_add_inv_pref}</th>
+			<td>
+				</a>
+				<a href="./index.php?module=preferences&amp;view=add" class="positive"><img src="./images/common/page_white_edit.png" alt="edit" />{$LANG.add_new_preference}</a>
+			</td>
+		</tr>
+{	/if}
+	</table>
 
 {else}
 
 <div style="float: right;">
 	<div class="si_toolbar">
 		<div class="si_toolbar_form">
-			<button type="submit" class="invoice_save" name="submit" value="{$LANG.save}"><img class="button_img" src="./images/common/tick.png" alt="tick" />{$LANG.save}</button><br />
+			<button type="submit" class="invoice_save" name="submit" value="{$LANG.save}">
+				<img class="button_img" src="./images/common/tick.png" alt="tick" />{$LANG.save}</button><br />
 		</div>
-{if $defaults.use_modal}
+{	if $defaults.use_modal}
 	</div>
-	<br /><br /><a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_invoice_Modal" title="{$LANG.Modal}"><img src="./images/common/help-small.png" alt="help" /> {$LANG.Modal}</a>:<br /><br />
+	<br /><br /><a class="cluetip" href="#" rel="./index.php?module=documentation&amp;view=view&amp;page=help_invoice_Modal" title="{$LANG.Modal}"><img src="./images/common/help-small.png" alt="help" /> {$LANG.Modal}</a>:<br /><br />
 	<div class="si_toolbar modal">
 		<div class="si_toolbar_inform">
 			<a rel="superbox[iframe][1075x600]" href="index.php?module=customers&view=add" class="show-details modal customer_add" title="{$LANG.add_customer}">
@@ -90,13 +89,13 @@
 			<a rel="superbox[iframe][1075x600]" href="index.php?module=products&view=add" class="show-details modal product_add" title="{$LANG.add_product}">
 				<img class="button_img" src="./images/common/add.png" alt="add" />{$LANG.add_product}</a>
 		</div>
-{/if}
+{	/if}
 	</div>
 </div>
 
 <div class="si_invoice_form">
 
-	{include file="$path/header.tpl"}
+{	include file="$path/header.tpl"}
 
 	<table id="itemtable" class="si_invoice_items">
 		<thead>
@@ -104,25 +103,25 @@
 				<td class=""></td>
 				<td class="">{$LANG.quantity}</td>
 				<td class="">{$LANG.item}</td>
-			{section name=tax_header loop=$defaults.tax_per_line_item }
+{	section name=tax_header loop=$defaults.tax_per_line_item}
 				<td class="">{$LANG.tax} {if $defaults.tax_per_line_item > 1}{$smarty.section.tax_header.index+1|htmlsafe}{/if} </td>
-			{/section}
+{	/section}
 				<td class="">{$LANG.unit_price}</td>
 			</tr>
 		</thead>
 
-		{section name=line start=0 loop=$dynamic_line_items step=1}
+{	section name=line start=0 loop=$dynamic_line_items step=1}
 		<tbody class="line_item" id="row{$smarty.section.line.index|htmlsafe}">
-			{assign var="lineNumber" value=$smarty.section.line.index}
+{		assign var="lineNumber" value=$smarty.section.line.index}
 			<tr>
 				<td>
-					{if $smarty.section.line.index == "0"}
+{		if $smarty.section.line.index == "0"}
 					<a href="#" class="trash_link" id="trash_link{$smarty.section.line.index|htmlsafe}" title="{$LANG.cannot_delete_first_row|htmlsafe}" >
 						<img id="trash_image{$smarty.section.line.index|htmlsafe}" src="./images/common/blank.gif" height="16" width="16" title="{$LANG.cannot_delete_first_row}" alt="cant" />
 					</a>
-					{/if}
+{		/if}
 
-					{if $smarty.section.line.index != 0}
+{		if $smarty.section.line.index != 0}
 					{* can't delete line 0 *}
 					<!-- onclick="delete_row({$smarty.section.line.index|htmlsafe});" --> 
 					<a 
@@ -135,23 +134,23 @@
 					>
 						<img src="./images/common/delete_item.png" alt="delete" />
 					</a>
-					{/if}
+{		/if}
 				</td>
 				<td>
 					<input type="text" 
 						class="si_right{if $smarty.section.line.index == "0"} validate[required]{/if}" 
 						name="quantity{$smarty.section.line.index|htmlsafe}" 
 						id="quantity{$smarty.section.line.index|htmlsafe}" size="5" 
-						{if $smarty.get.quantity.$lineNumber}
+{		if $smarty.get.quantity.$lineNumber}
 							value="{$smarty.get.quantity.$lineNumber}"
-						{/if}
+{		/if}
 						/>
 				</td>
 				<td>
 								
-			{if $products == null }
+{		if $products == null }
 				<p><em>{$LANG.no_products}</em></p>
-			{else}
+{		else}
 				<select 
 					id="products{$smarty.section.line.index|htmlsafe}"
 					name="products{$smarty.section.line.index|htmlsafe}"
@@ -160,54 +159,54 @@
 					{**}onchange="changeProductSelection(this)"{**}
 				>
 					<option value="">&nbsp;</option>
-				{foreach from=$products item=product}
+{			foreach from=$products item=product}
 					<option 
-						{if $product.id == $smarty.get.product.$lineNumber}
+{				if $product.id == $smarty.get.product.$lineNumber}
 							value="{$smarty.get.product.$lineNumber}"
 							selected
-						{else}
+{				else}
 							value="{$product.id|htmlsafe}"
-						{/if}
+{				/if}
 					>
-						{$product.description|htmlsafe}
+{				$product.description|htmlsafe}
 					</option>
-				{/foreach}
+{			/foreach}
 				</select>
-			{/if}
+{		/if}
 				</td>
-				{section name=tax start=0 loop=$defaults.tax_per_line_item step=1}
-							{ assign var="taxNumber" value=$smarty.section.tax.index } 
+{		section name=tax start=0 loop=$defaults.tax_per_line_item step=1}
+{			assign var="taxNumber" value=$smarty.section.tax.index}
 				<td>				                				                
 					<select 
 						id="tax_id[{$smarty.section.line.index|htmlsafe}][{$smarty.section.tax.index|htmlsafe}]"
 						name="tax_id[{$smarty.section.line.index|htmlsafe}][{$smarty.section.tax.index|htmlsafe}]"
 					>
 					<option value="">&nbsp;</option>
-					{foreach from=$taxes item=tax}
+{			foreach from=$taxes item=tax}
 						<option 
-							{if $tax.tax_id == $smarty.get.tax.$lineNumber.$taxNumber}
+{				if $tax.tax_id == $smarty.get.tax.$lineNumber.$taxNumber}
 							value="{$smarty.get.tax.$lineNumber.$taxNumber}"
 							selected
-							{else}
+{				else}
 							   value="{$tax.tax_id|htmlsafe}"
-							{/if}
+{				/if}
 						>
-							{$tax.tax_description|htmlsafe}
+{						$tax.tax_description|htmlsafe}
 						</option>
-					{/foreach}
+{			/foreach}
 				</select>
 				</td>
-				{/section}
+{		/section}
 
 				<td>
 					<input id="unit_price{$smarty.section.line.index|htmlsafe}" 
 						name="unit_price{$smarty.section.line.index|htmlsafe}" 
 						size="7"
-						{if $smarty.get.unit_price.$lineNumber}
-							value="{$smarty.get.unit_price.$lineNumber}"
-						{else}
-							value=""
-						{/if}
+{		if $smarty.get.unit_price.$lineNumber}
+						value="{$smarty.get.unit_price.$lineNumber}"
+{		else}
+						value=""
+{		/if}
 						class="si_right{if $smarty.section.line.index == "0"} validate[required]{/if}" 
 					/>
 				</td>	
@@ -221,7 +220,7 @@
 				</td>
 			</tr>
 		</tbody>
-		{/section}
+{	/section}
 	</table>
 
 	<div class="si_toolbar si_toolbar_inform">
@@ -244,7 +243,7 @@
 			<td class='si_invoice_notes' colspan="2">
 				<H5>{$LANG.notes}</H5>
 				<textarea class="editor" name="note" rows="5" cols="50">
-						{$smarty.get.note}
+					{$smarty.get.note}
 				</textarea>
 			</td>
 		</tr>
@@ -254,15 +253,15 @@
 				{$LANG.inv_pref}
 			</th>
 			<td>
-			{if $preferences == null }
+{	if $preferences == null }
 				<em>{$LANG.no_preferences}</em>
-			{else}
+{	else}
 				<select name="preference_id">
-				{foreach from=$preferences item=preference}
+{		foreach from=$preferences item=preference}
 					<option {if $preference.pref_id == $defaults.preference} selected {/if} value="{$preference.pref_id|htmlsafe}">{$preference.pref_description|htmlsafe}</option>
-				{/foreach}
+{		/foreach}
 				</select>
-			{/if}
+{	/if}
 			</td>
 		</tr>	
 	</table>
