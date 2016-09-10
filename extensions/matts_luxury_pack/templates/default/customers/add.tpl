@@ -326,7 +326,7 @@
 				{$LANG.save}
 			</button>
 
-			<a href="./index.php?module=customers&amp;view=manage" class="negative">
+			<a id="cancelAddCustomer" href="./index.php?module=customers&amp;view=manage" class="negative">
 				<img src="./images/common/cross.png" alt="cross" />
 				{$LANG.cancel}
 			</a>

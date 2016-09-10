@@ -22,13 +22,19 @@ checkLogin();
 #get the invoice id
 $invoice_id = $_GET['id'];
 
-
 $invoice = getInvoice($invoice_id);
 $invoice_number_of_taxes = numberOfTaxesForInvoice($invoice_id);
 $invoice_type = isset($invoice['type_id']) ? getInvoiceType($invoice['type_id']) : 5;
 
 $customer = isset($invoice['customer_id']) ? getCustomer($invoice['customer_id']) : 1;
-$ship_to_customer = isset($invoice['ship_to_customer_id']) ? getCustomer($invoice['ship_to_customer_id']) : 0;
+if (isset($invoice['ship_to_customer_id']) && $invoice['ship_to_customer_id'])
+{
+	$ship_to_customer = getCustomer($invoice['ship_to_customer_id']);
+	$delnote_id = ($_GET['id'] +1);
+	$delnote = getInvoice($delnote_id);
+	$delnote_link = isset($delnote['preference_id']) ? ('index.php?module=invoices&view=quick_view&id=' . $delnote_id) : 'javascript:void(false)';
+} else
+	$ship_to_customer = 0;
 $biller = isset($invoice['biller_id']) ? getBiller($invoice['biller_id']) : 1;
 $preference = isset($invoice['preference_id']) ? getPreference($invoice['preference_id']) : 1;
 $defaults = getSystemDefaults();
@@ -89,4 +95,4 @@ $smarty -> assign("wordprocessor",$config->export->wordprocessor);
 $smarty -> assign("spreadsheet",$config->export->spreadsheet);
 $smarty -> assign("customerAccount",$customerAccount);
 $smarty -> assign("eway_pre_check",$eway_pre_check);
-?>
+if (isset($delnote_link))	$smarty->assign('delnote_link',$delnote_link);

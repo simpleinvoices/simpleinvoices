@@ -86,10 +86,10 @@
 		<div class="si_toolbar_inform">
 			<a rel="superbox[iframe][1075x600]" href="index.php?module=customers&view=add" class="show-details modal customer_add" title="{$LANG.add_customer}">
 				<img class="button_img" src="./images/common/add.png" alt="add" />{ $LANG.add_customer }</a><br /><br />
-			<a href="javascript:void(false)" id="regenCusts">{ $LANG.regenerate }</a><br /><br /><!--onclick="regenCusts()" -->
+			<a href="javascript:void(false)" id="regenCusts">{ $LANG.regenCusts }</a><br /><br /><!--onclick="regenCusts()" -->
 			<a rel="superbox[iframe][1075x600]" href="index.php?module=products&view=add" class="show-details modal product_add" title="{$LANG.add_product}">
 				<img class="button_img" src="./images/common/add.png" alt="add" />{ $LANG.add_product }</a>
-			<a href="javascript:void(false)" id="regenProds">{ $LANG.regenerate }</a><br /><br /><!-- onclick="regenProds()"-->
+			<a href="javascript:void(false)" id="regenProds">{ $LANG.regenProds }</a><br /><br /><!-- onclick="regenProds()"-->
 		</div>
 {	/if}
 	</div>
@@ -311,10 +311,15 @@ function regenCusts()
 					{
 						items = optionsParseXML(response, 'id', 'name');
 						$('#customer_id').append(items.join("\n"));					// fill customer list
+						$('#inserted_customer_street_address').innerHTML = '';
+						$('#inserted_customer_street_address').href = '';			// clear customer address link
 {/literal}{if $defaults.use_ship_to}
 						items.unshift('<option value="0" selected="selected">{ $LANG.no_ship_to }</option>'+ "\n");
 						$('#ship_to_customer_id').append(items.join("\n"));			// fill ship-to-customer list
+						$('#inserted_ship_street_address').innerHTML = '';
+						$('#inserted_ship_street_address').href = '';				// clear ship-to address link
 {/if}{literal}
+						json_customers = {/literal}{$customers|@json_encode}{literal};
 					},
 		error: 		function(jqXHR, textStatus, errorThrown)
 					{
@@ -335,10 +340,10 @@ function regenProds()
 		data:		'rp=32768',
 		success: 	function(response)
 					{
-						var allprows = document.getElementsByClassName('products');
+						var allprows = document.getElementsByClassName('changeProduct');
 						for (var k=0; k<allprows.length; k++)
 						{
-							if (allprows[k].selectedIndex == 0)
+							if (allprows[k].selectedIndex == 0 || typeof allprows[k].selectedIndex === "undefined")
 							{
 								items = optionsParseXML(response, 'id', 'description');
 								allprows[k].options.length = 0;			// clear previous options
@@ -367,22 +372,5 @@ $('#regenProds').click(function () { 						// launch regenProds() when #regenPro
 $('.changeProduct').change(function () { 					// launch changeProductSelection() when #changeProduct changed
 	changeProductSelection(this);
 });
-/*
-$("#cancelAddCustomer").livequery('click',function (e) { 	// launch superbox.close() when #cancelAddCustomer clicked
-	e.preventDefault();
-	$.superbox.close();
-	//$('#sb-close').trigger('click')
-});
-$("#cancelEditCustomer").livequery('click',function (e) { 	// launch superbox.close() when #cancelEditCustomer clicked
-	e.preventDefault();
-	//$.superbox.close();
-	$('#sb-close').trigger('click')
-});
-$("#cancelAddProduct").livequery('click',function (e) { 	// launch superbox.close() when #cancelAddProduct clicked
-	e.preventDefault();
-	$.superbox.close();
-	//$('#sb-close').trigger('click')
-});
-*/
 //-->{/literal}
 </script>

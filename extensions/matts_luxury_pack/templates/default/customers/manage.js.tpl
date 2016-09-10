@@ -48,8 +48,9 @@
 			searchitems : [
 				{display: '{/literal}{$LANG.id}{literal}', name : 'c.id'},
 				{display: '{/literal}{$LANG.name}{literal}', name : 'c.name', isdefault: true},
-				{display: '{/literal}{$LANG.street}{literal}', name : 'c.street_address'},
-				{display: '{/literal}{$LANG.contactp}{literal}', name : 'c.attention'}
+				{display: '{/literal}{$LANG.street}{literal}', name : 'c.street_address'}/*Matt*/,
+				{display: '{/literal}{$LANG.contactp}{literal}', name : 'c.attention'}/*Matt*/,
+				{display: '{/literal}{$LANG.phone}{literal}', name : 'c.phone'}/*Matt*/
 				],
 			sortname: '{/literal}{$smarty.get.sortname|default:'name'}{literal}',
 			sortorder: '{/literal}{$smarty.get.sortorder|default:'asc'}{literal}',

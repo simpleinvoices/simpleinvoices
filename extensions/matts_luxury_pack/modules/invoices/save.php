@@ -113,16 +113,16 @@ if ($_POST['action'] == "insert" ) {
 	{
 //	for($i=0;(!empty($_POST["quantity$i"]) && $i < $_POST['max_items']);$i++) {
 		$logger->log('i='.$i, Zend_Log::INFO);
-		$logger->log('qty='.$_POST["quantity$i"], Zend_Log::INFO);
-		$logger->log('product='.$_POST["products$i"], Zend_Log::INFO);
+		if (isset($_POST["quantity$i"]))		$logger->log('qty='.$_POST["quantity$i"], Zend_Log::INFO);
+		if (isset($_POST["products$i"]))		$logger->log('product='.$_POST["products$i"], Zend_Log::INFO);
 
-		if ($_POST["delete$i"] == "yes")
+		if (isset($_POST["delete$i") && $_POST["delete$i"] == "yes")
 		{
 			delete ('invoice_items','id',$_POST["line_item$i"]);
 		}
-		if ($_POST["delete$i"] !== "yes")
+		if (isset($_POST["delete$i") && $_POST["delete$i"] !== "yes")
 		{
-			if ($_POST["quantity$i"] != null)
+			if (isset($_POST["quantity$i"]) && $_POST["quantity$i"] != null)
 			{
 				//new line item added in edit page
 				if ($_POST["line_item$i"] == "")

@@ -2569,7 +2569,7 @@ body .ui-resizable-autohide .ui-resizable-handle { display: none; } /* use 'body
     text-decoration: none;
     font-size: 100%;
     list-style: none;
-    background: url(../../../../../../../images/jquery-ui/888888_11x11_icon_close.gif) 0 0 no-repeat;
+    background: url(../../../../../images/jquery-ui/888888_11x11_icon_close.gif) 0 0 no-repeat;/*****/
     position: absolute;
     right: 8px;
     top: .7em;
@@ -3419,30 +3419,46 @@ div.colCopy.ie div {
 	border-radius: 5px;
 }
 .subnav li a {
-/*    border-bottom: 3px solid transparent;
-    border-top: 3px solid transparent;*/
-    border: 3px solid transparent;
+	border-bottom: 3px solid transparent;
+	border-top: 3px solid transparent;
+/*	border-left: 3px solid transparent;
+	border-right: 3px solid transparent;	*/
+/*    border: 3px solid transparent;	*/
+	padding: 0 4px;
+}
+#tabmenu .subnav .active {
+	padding: 5px 12px;
+}
+.subnav li a.active:hover {
+    border-bottom: 3px solid transparent;
+}
+.subnav li a.active_subpage:hover {
+    border-bottom: 3px solid transparent;
 }
 .subnav li a:hover {
     border-bottom: 3px solid #D54E21;
+}
+.si_invoice_account, .tr_total {
+	display: none;
 }
 /*
 #Container {
 	display: none;
 }
-#pageLoading {
+#pageLoading {*/
+#gmail_loading {
 	display: block;
 	position: absolute;
 	top: 0;
-	left: 0;
+/*	left: 0;*/
 	z-index: 100;
 	width: 100vw;
 	height: 100vh;
 	background-color: rgba(192, 192, 192, 0.5);
 	background-image: url("../../../images/common/loading.png");
-	/ *background-image: url("http://i.stack.imgur.com/MnyxU.gif");* /
+	/*background-image: url("http://i.stack.imgur.com/MnyxU.gif");*/
 	background-repeat: no-repeat;
 	background-position: center;
 }
-*/
+/**/
 /* @end */

@@ -120,9 +120,6 @@
 		{*
 			{showCustomFields categorieId="1" itemId=$biller.id }
 		*}
-	
-	
-	
 		
 		<!-- Customer section -->
 		<tr class="tr_head">
@@ -191,7 +188,7 @@
 <!-- Ship To Customer section (inv.ship_id={$invoice.ship_to_customer_id}, ship.id={$ship_to_customer.id})-->
 		<tr class="tr_head">
 			<th>{$LANG.ship_to}:</th>
-			<td colspan="4">{$ship_to_customer.name|htmlsafe}</td>
+			<td colspan="4">{	if $delnote_link}<a href="{$delnote_link|htmlsafe}">{	/if} {$ship_to_customer.name|htmlsafe} {	if $delnote_link}</a>{	/if}</td>
 			<td class="si_switch">
 				<a href='#' class="show-ship_to_customer" {literal} onclick="$('.ship_to_customer').show(); $('.show-ship_to_customer').hide(); {/literal}"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a>
 				<a href='#' class="ship_to_customer" {literal} onclick="$('.ship_to_customer').hide(); $('.show-ship_to_customer').show(); {/literal}"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" /></a>
@@ -256,29 +253,29 @@
 <!-- end ship_to_customer -->
 {/if}
 
-	{if $invoice.type_id == 1 }
+{if $invoice.type_id == 1}
 		<tr class="tr_head">
 			<th colspan="6">{$LANG.description}</th>
 		</tr>
 		<tr>
 			<td colspan="6">{$invoiceItems.0.description|outhtml}</td>
 		</tr>
-	{/if}
+{/if}
 
-	{if $invoice.type_id == 2 || $invoice.type_id == 3}
+{if $invoice.type_id == 2 || $invoice.type_id == 3}
 
 		<tr class="tr_head">
 			<th colspan=5></th>
 			<td class="si_switch">
-	{if $invoice.type_id == 2 }
-                    <a href='#' class="show-itemised" onclick="$('.itemised').show();$('.show-itemised').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a>
-                    <a href='#' class="itemised" onclick="$('.itemised').hide();$('.show-itemised').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a>
-	{/if}
+{	if $invoice.type_id == 2}
+				<a href='#' class="show-itemised" onclick="$('.itemised').show();$('.show-itemised').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a>
+				<a href='#' class="itemised" onclick="$('.itemised').hide();$('.show-itemised').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a>
+{	/if}
 
-    {if $invoice.type_id == 3 }
-					<a href='#' class="show-consulting" onclick="$('.consulting').show();$('.show-consulting').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a>
-					<a href='#' class="consulting" onclick="$('.consulting').hide();$('.show-consulting').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a>
-    {/if}
+{	if $invoice.type_id == 3}
+				<a href='#' class="show-consulting" onclick="$('.consulting').show();$('.show-consulting').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a>
+				<a href='#' class="consulting" onclick="$('.consulting').hide();$('.show-consulting').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a>
+{	/if}
         	</td>
         </tr>
 		<tr>
@@ -286,60 +283,57 @@
 
 				<table class="si_invoice_view_items"> 
 					<tr class="tr_head_items">
-							<th class="si_quantity">{$LANG.quantity_short}</th>
-							<th colspan="2">{$LANG.item}</th>
-							<th class="si_right">{$LANG.unit_cost}</th>
-							<th class="si_right">{$LANG.price}</th>
+						<th class="si_quantity">{$LANG.quantity_short}</th>
+						<th colspan="2">{$LANG.item}</th>
+						<th class="si_right">{$LANG.unit_cost}</th>
+						<th class="si_right">{$LANG.price}</th>
 					</tr>
-		
-		
-		{foreach from=$invoiceItems item=invoiceItem }
+
+{	foreach from=$invoiceItems item=invoiceItem}
 					
-				{if $invoice.type_id == 2 }
-			
+{		if $invoice.type_id == 2}
 					<tr>
-							<td class="si_quantity">{$invoiceItem.quantity|siLocal_number_trim}</td>
-							<td class="td_product" colspan="2">{$invoiceItem.product.description|htmlsafe}</td>
-							<td class="si_right">{$preference.pref_currency_sign} {$invoiceItem.unit_price|siLocal_number}</td>
-							<td class="si_right">{$preference.pref_currency_sign} {$invoiceItem.gross_total|siLocal_number}</td>
+						<td class="si_quantity">{$invoiceItem.quantity|siLocal_number_trim}</td>
+						<td class="td_product" colspan="2">{$invoiceItem.product.description|htmlsafe}</td>
+						<td class="si_right">{$preference.pref_currency_sign} {$invoiceItem.unit_price|siLocal_number}</td>
+						<td class="si_right">{$preference.pref_currency_sign} {$invoiceItem.gross_total|siLocal_number}</td>
 					</tr>
-					{if $invoiceItem.attribute != null}
-                            <tr class="si_product_attribute">
-                                <td></td>
-                                <td>
-                                <table>
-                                    <tr class="si_product_attribute">
-                                    {foreach from=$invoiceItem.attribute_json key=k item=v}
-                                        <td class="si_product_attribute">
-                                            {if $v.type == 'decimal'}
-                                              {$v.name}: {$preference.pref_currency_sign} {$v.value|siLocal_number} ;
-                                             {else}
-                                               {$v.name}: {$v.value} ;
-                                            {/if}
-                                        </td>
-                                    {/foreach}
-                                    </tr>
-                                </table>
-                                </td>
-                            </tr>
-					{/if}
-					
-					{if $invoiceItem.description != null}
+{			if $invoiceItem.attribute != null}
+					<tr class="si_product_attribute">
+						<td></td>
+						<td>
+							<table>
+								<tr class="si_product_attribute">
+{				foreach from=$invoiceItem.attribute_json key=k item=v}
+									<td class="si_product_attribute">
+{					if $v.type == 'decimal'}
+										{$v.name}: {$preference.pref_currency_sign} {$v.value|siLocal_number} ;
+{					else}
+										{$v.name}: {$v.value} ;
+{					/if}
+									</td>
+{				/foreach}
+								</tr>
+							</table>
+						</td>
+					</tr>
+{			/if}
+
+{			if $invoiceItem.description != null}
 					<tr class="show-itemised tr_desc" >
-							<td></td>	
-							<td colspan="5" class="">
-								{$invoiceItem.description|truncate:80:"...":true|htmlsafe}
-							</td>
+						<td></td>	
+						<td colspan="5" class="">
+							{$invoiceItem.description|truncate:80:"...":true|htmlsafe}
+						</td>
 					</tr>
 					<tr class="itemised tr_desc" >	
-							<td></td>	
-							<td colspan="5" class="">
-								{$invoiceItem.description|htmlsafe}
-							</td>
+						<td></td>	
+						<td colspan="5" class="">
+							{$invoiceItem.description|htmlsafe}
+						</td>
 					</tr>
-					{/if}
-					
-		
+{			/if}
+
 					<tr class="itemised tr_custom">       
 						<td></td>	
 						<td colspan="5">
@@ -355,22 +349,19 @@
 							</table>
 						</td>
 					</tr>
-					 {*TODO: CustomField is normaly stored for a product. Here it needs to be added to the invoices Item
-						-> categorie 5 *}
-					{*
-						{showCustomFields categorieId="3" itemId=$invoiceItem.productId }
-					*}
+	{*TODO: CustomField is normaly stored for a product. Here it needs to be added to the invoices Item -> categorie 5 *}
+	{*
+		{showCustomFields categorieId="3" itemId=$invoiceItem.productId}
+	*}
 		
-			{/if}	
-			
-		
-			{if $invoice.type_id == 3 }
-		
+{		/if}	
+
+{		if $invoice.type_id == 3}
 					<tr>
-							<td class="si_quantity">{$invoiceItem.quantity|siLocal_number}</td>
-							<td class="td_product" colspan="2">{$invoiceItem.product.description|htmlsafe}</td>
-							<td class="si_right">{$preference.pref_currency_sign} {$invoiceItem.unit_price|siLocal_number}</td>
-							<td class="si_right">{$preference.pref_currency_sign} {$invoiceItem.gross_total|siLocal_number}</td>		
+						<td class="si_quantity">{$invoiceItem.quantity|siLocal_number}</td>
+						<td class="td_product" colspan="2">{$invoiceItem.product.description|htmlsafe}</td>
+						<td class="si_right">{$preference.pref_currency_sign} {$invoiceItem.unit_price|siLocal_number}</td>
+						<td class="si_right">{$preference.pref_currency_sign} {$invoiceItem.gross_total|siLocal_number}</td>		
 					</tr>
 
 					<tr  class="consulting tr_custom" >	
@@ -388,30 +379,26 @@
 							</table>
 						</td>
 					</tr>
-				 
+{		/if}
 		
-			{/if}
-		
-		{/foreach}
+{	/foreach}
 		
 		<!-- we are still in the itemised or consulting loop -->
 				</table>
 			</td>
 		</tr>
 
-	{if ($invoice.note != null) }
-
+{	if ($invoice.note != null)}
 		<tr class="tr_head">
 			<th>{$LANG.notes}:</th>
 			<td colspan="4"></td>
 			<td class="si_switch">
-				{if ($invoice.note|count_characters:true > 25)}
-					<a href='#' class="show-notes" onclick="$('.notes').show();$('.show-notes').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" /></a>
-					<a href='#' class="notes si_hide" onclick="$('.notes').hide();$('.show-notes').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" /></a>
-				{/if}
+{		if ($invoice.note|count_characters:true > 25)}
+				<a href='#' class="show-notes" onclick="$('.notes').show();$('.show-notes').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" /></a>
+				<a href='#' class="notes si_hide" onclick="$('.notes').hide();$('.show-notes').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" /></a>
+{		/if}
 			</td>
 		</tr>	
-
 
 		<!-- if hide detail click - the stripped note will be displayed -->
 		<tr class="show-notes tr_notes">
@@ -419,13 +406,12 @@
 		</tr>
 		
 		<!-- if show detail click - the full note will be displayed -->
-		<tr class="notes tr_notes">
+		<tr class="notes tr_notes" style="display: none">
 			<td colspan="6">{$invoice.note|outhtml}</td>
 		</tr>
-	{/if}
+{	/if}
 {* end itemised invoice *}
-{/if} 
-
+{	/if} 
 
     {* tax section - start  --------------------- *}
 	{if $invoice_number_of_taxes > 0}
@@ -474,8 +460,6 @@
 		</tr>
 <!-- end terms -->
 	</table>
-
-
 
 <div class="si_center">
 	<div class="si_invoice_account">

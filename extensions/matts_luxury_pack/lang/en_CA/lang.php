@@ -45,7 +45,9 @@ $MYI_LANG = array(
 	'Modal'			=> "Modal Iframe",
 	'help_invoice_Modal' => "The below buttons will cause the operation to load in a pop-up window. This will allow the user to input other details while having another pending operation at hand.",
 	'help_modal'	=> "Enable a modal iframe window on some links when creating an invoice.",
-	'help_price_list'	=> "Enable up to 4 prices for each product; and each customer can be assigned a price-list number corresponding to the price, so every product purchased by that customner has the price in that price-list number box."
+	'help_price_list'	=> "Enable up to 4 prices for each product; and each customer can be assigned a price-list number corresponding to the price, so every product purchased by that customner has the price in that price-list number box.",
+	'regenCusts'	=> "Reload Customers",
+	'regenProds'	=> "Reload Products"
 );
 
 /**************************************************************/

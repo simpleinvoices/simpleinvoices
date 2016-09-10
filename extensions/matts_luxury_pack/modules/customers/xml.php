@@ -7,7 +7,7 @@
 *	 yumatechnical@gmail.com
 *
 * Last edited:
-* 	 2016-08-29
+* 	 2016-09-09
 *
 * License:
 *	 GPL v2 or above
@@ -19,7 +19,7 @@
 function sql($type = '', $start, $dir, $sort, $rp, $page) {
     global $LANG, $pdoDb;
 
-    $valid_search_fields = array('c.id', 'c.name');
+    $valid_search_fields = array('c.id', 'c.name', 'c.attention', 'c.street_address', 'c.phone');
 
     $query = isset($_POST['query']) ? $_POST['query'] : null;
     $qtype = isset($_POST['qtype']) ? $_POST['qtype'] : null;
@@ -30,7 +30,7 @@ function sql($type = '', $start, $dir, $sort, $rp, $page) {
     }
     $pdoDb->addSimpleWhere("c.domain_id", domain_id::get());
 
-    if($type =="count") {
+    if ($type =="count") {
         $pdoDb->addToFunctions("COUNT(*) AS count");
         $rows = $pdoDb->request("SELECT", "customers", "c");
         return $rows[0]['count'];
@@ -125,24 +125,24 @@ foreach ($customers as $row) {
     $xml .= "<row id='".	$row["CID"].	"'>";
 //	$xml .= "<cell><![CDATA[" . htmlentities(print_r($row,true)) . "]]></cell>";
     $xml .=
-        "<cell class='links'><![CDATA[
+        "<cell name='links'><![CDATA[
           <a class='index_table' title='$vname' href='index.php?module=customers&view=details&id=".$row["CID"].	"&action=view'>
             <img src='images/common/view.png' class='action' />
           </a>
-          <a class='index_table' title='$ename' href='index.php?module=customers&view=details&id=".$row["CID"].	"&action=edit'>
+          <a name='index_table' title='$ename' href='index.php?module=customers&view=details&id=".$row["CID"].	"&action=edit'>
             <img src='images/common/edit.png' class='action' />
           </a>
         ]]></cell>";
-    $xml .= "<cell class='CID'><![CDATA[" . $row['CID'] . "]]></cell>";
-    $xml .= "<cell class='name'><![CDATA[" . $row['name'] . "]]></cell>";
+    $xml .= "<cell name='CID'><![CDATA[" . $row['CID'] . "]]></cell>";
+    $xml .= "<cell name='name'><![CDATA[" . $row['name'] . "]]></cell>";
 /**/
-	$xml .= "<cell class='street_address'><![CDATA[".	$row['street_address'].	"]]></cell>";//Matt
-	$xml .= "<cell class='attention'><![CDATA[".	$row['attention'].	"]]></cell>";//Matt
+	$xml .= "<cell name='street_address'><![CDATA[".	$row['street_address'].	"]]></cell>";//Matt
+	$xml .= "<cell name='attention'><![CDATA[".	$row['attention'].	"]]></cell>";//Matt
 /**/
-    $xml .= "<cell class='customer_total'><![CDATA[" . siLocal::number($row['customer_total']) . "]]></cell>";
-    $xml .= "<cell class='paid'><![CDATA[" . siLocal::number($row['paid']) . "]]></cell>";
-    $xml .= "<cell class='owing'><![CDATA[" . siLocal::number($row['owing']) . "]]></cell>";
-    $xml .= "<cell class='enabled_img'><![CDATA[<img src='$image' alt='" . $row['enabled_txt'] .
+    $xml .= "<cell name='customer_total'><![CDATA[" . siLocal::number($row['customer_total']) . "]]></cell>";
+    $xml .= "<cell name='paid'><![CDATA[" . siLocal::number($row['paid']) . "]]></cell>";
+    $xml .= "<cell name='owing'><![CDATA[" . siLocal::number($row['owing']) . "]]></cell>";
+    $xml .= "<cell name='enabled_img'><![CDATA[<img src='$image' alt='" . $row['enabled_txt'] .
                                          "' title='" . $row['enabled_txt'] . "' />]]></cell>";
     $xml .= "</row>";
 }

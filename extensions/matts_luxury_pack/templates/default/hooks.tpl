@@ -248,29 +248,44 @@ if (!Array.prototype.indexOf) {
 {if $defaults.use_modal}
 {literal}
 	<script type="text/javascript"><!--
+		$(iframe.contenWindow.document.body).find("#cancelAddCustomer").bind('click',function (e) { 
+			e.preventDefault();
+			$.superbox.close();
+			//$(iframe.contenWindow.document.body).find('#sb-close').trigger('click')
+		});
+		$(iframe.contenWindow.document.body).find("#cancelEditCustomer").bind('click',function (e) { 
+			e.preventDefault();
+			//$.superbox.close();
+			$(iframe.contenWindow.document.body).find('#sb-close').trigger('click')
+		});
+		$(iframe.contenWindow.document.body).find("#cancelAddProduct").bind('click',function (e) { 
+			e.preventDefault();
+			$.superbox.close();
+			//$(iframe.contenWindow.document.body).find('#sb-close').trigger('click')
+		});
 /*	if (inIframe())
-	{*/
-		var elem = document.getElementById("cancelAddCustomer");
+	{
+		var elem = document.getElementById("cancelAddCustomer");//(iframe.contenWindow.document.body).find
 		if (elem.addEventListener){
 			elem.addEventListener("click", function() { elem.preventDefault(); $.superbox.close(); document.getElementById("sb-close").trigger('click'); }, false);
 		} else if (elem.attachEvent){
 			elem.attachEvent("onclick", function() { elem.preventDefault(); $.superbox.close(); document.getElementById("sb-close").trigger('click'); });
 		}
 
-		var elem = document.getElementById("cancelEditCustomer");
+		var elem = document.getElementById("cancelEditCustomer");//(iframe.contenWindow.document.body).find
 		if (elem.addEventListener){
-			elem.addEventListener("click", function() { elem.preventDefault(); $.superbox.close(); closeModal();/*$('#sb-close').trigger('click');*/ }, false);
+			elem.addEventListener("click", function() { elem.preventDefault(); $.superbox.close(); closeModal();/ *$('#sb-close').trigger('click');* / }, false);
 		} else if (elem.attachEvent){
-			elem.attachEvent("onclick", function() { elem.preventDefault(); $.superbox.close(); closeModal();/*$('#sb-close').trigger('click');*/ });
+			elem.attachEvent("onclick", function() { elem.preventDefault(); $.superbox.close(); closeModal();/ *$('#sb-close').trigger('click');* / });
 		}
 
-		var elem = document.getElementById("cancelAddProduct");
+		var elem = document.getElementById("cancelAddProduct");//(iframe.contenWindow.document.body).find
 		if (elem.addEventListener){
-			elem.addEventListener("click", function() { elem.preventDefault(); /*document.getElementById*/$('#sb-close').trigger('click'); }, false);
+			elem.addEventListener("click", function() { elem.preventDefault(); / *document.getElementById* /$('#sb-close').trigger('click'); }, false);
 		} else if (elem.attachEvent){
-			elem.attachEvent("onclick", function() { elem.preventDefault(); /*document.getElementById*/$('#sb-close').trigger('click'); });
+			elem.attachEvent("onclick", function() { elem.preventDefault(); / *document.getElementById* /$('#sb-close').trigger('click'); });
 		}
-/*	}*/
+	}*/
 	//-->
 	</script>{/literal}
 {/if}

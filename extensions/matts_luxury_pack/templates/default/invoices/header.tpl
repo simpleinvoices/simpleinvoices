@@ -88,7 +88,7 @@
 {/if}
 			</td>
 			<td style="width:21px;"></td>
-			<td id="customer_street_address" style="font-size: 9px;">{if $defaults.use_modal}<a rel="superbox[iframe][1075x600]" class="show-details modal customer_view" title="{$LANG.view} {$LANG.customer}" href="index.php?module=customers&view=details&id=&action=view">{/if}<img src="images/common/view.png" alt="view" />&nbsp;{if $defaults.use_modal}</a>{/if}
+			<td id="customer_street_address" style="font-size: 9px;">{if $defaults.use_modal}<a id="inserted_customer_street_address" rel="superbox[iframe][1075x600]" class="show-details modal customer_view" title="{$LANG.view} {$LANG.customer}" href="index.php?module=customers&view=details&id=&action=view">{/if}<img src="images/common/view.png" alt="view" />&nbsp;{if $defaults.use_modal}</a>{/if}
 </td>
 		</tr>
 <!-- Ship To - added by Matt 2016-07-23 -->
@@ -104,7 +104,7 @@
 				</select>
 			</td>
 			<td style="width:21px;"></td>
-			<td id="ship_street_address" style="font-size: 9px;">{if $defaults.use_modal}<a rel="superbox[iframe][1075x600]" class="show-details modal customer_view" title="{$LANG.view} {$LANG.customer}" href="index.php?module=customers&view=details&id=&action=view">{/if}<img src="images/common/view.png" alt="view" />&nbsp;{if $defaults.use_modal}</a>{/if}</td>
+			<td id="ship_street_address" style="font-size: 9px;">{if $defaults.use_modal}<a id="inserted_ship_street_address" rel="superbox[iframe][1075x600]" class="show-details modal customer_view" title="{$LANG.view} {$LANG.customer}" href="index.php?module=customers&view=details&id=&action=view">{/if}<img src="images/common/view.png" alt="view" />&nbsp;{if $defaults.use_modal}</a>{/if}</td>
 		</tr>
 {/if}
 <!-- end Ship To -->
@@ -135,10 +135,12 @@ var json_customers = {$customers|@json_encode};
 function putAddress(val, where) {
 	var elem = document.getElementById(where);
 	var child = elem.firstElementChild || elem.firstChild;
+	child.href = 		'javascript:void(false)';
+	child.innerHTML = 	'';
 	for (var i=0; i<json_customers.length; i++) {
 		if (json_customers[i].id == val) {
-			child.href = "index.php?module=customers&view=details&id="+ val+ "&action=view";
-			child.innerHTML = '(<img src="images/common/view.png" alt="view" />&nbsp;' + json_customers[i].street_address + ' - ' + json_customers[i].attention + '{/literal}{if $defaults.use_modal}</a>{/if}{literal})';
+			child.href = 		'index.php?module=customers&view=details&id='+ val+ '&action=view';
+			child.innerHTML = 	'(<img src="images/common/view.png" alt="view" />&nbsp;' + json_customers[i].street_address + ' - ' + json_customers[i].attention + '{/literal}{if $defaults.use_modal}</a>{/if}{literal})';
 			break;
 		}
 	}
@@ -147,42 +149,49 @@ function putAddress(val, where) {
 function invoice_changeProduct (product, row_number, quantity, cust_id) {
 	$('#gmail_loading').show();
 	$.ajax({
-		type: 'GET',
-		url: './index.php?module=invoices&view=product_ajax&id='+product+'&row='+row_number+'&cid='+cust_id,
-		data: "id: "+product,
-		dataType: "json",
-		success: function(data) {
+		type: 		'GET',
+		url: 		'./index.php?module=invoices&view=product_ajax&id='+ product+ '&row='+ row_number+ '&cid='+ cust_id,
+		data: 		'id: '+ product,
+		dataType: 	'json',
+		success: 	function(data)
+		{
 			$('#gmail_loading').hide();
-			$("#json_html"+row_number).remove();
-			if (quantity=="") {	
-				$("#quantity"+row_number).attr("value","1");
+			$("#json_html"+ row_number).remove();
+			if (quantity=="")
+			{
+				$("#quantity"+ row_number).attr("value","1");
 			}
-			$("#unit_price"+row_number).attr("value",data['unit_price']);
-			$("#tax_id\\["+row_number+"\\]\\[0\\]").val(data['default_tax_id']);
-			if (data['default_tax_id_2']== null) {
-				$("#tax_id\\["+row_number+"\\]\\[1\\]").val('');
+			$("#unit_price"+ row_number).attr("value",data['unit_price']);
+			$("#tax_id\\["+ row_number+ "\\]\\[0\\]").val(data['default_tax_id']);
+			if (data['default_tax_id_2']== null)
+			{
+				$("#tax_id\\["+ row_number+ "\\]\\[1\\]").val('');
 			}
-			if (data['default_tax_id_2'] !== null) {
-				$("#tax_id\\["+row_number+"\\]\\[1\\]").val(data['default_tax_id_2']);
+			if (data['default_tax_id_2'] !== null)
+			{
+				$("#tax_id\\["+ row_number+ "\\]\\[1\\]").val(data['default_tax_id_2']);
 			}
 			//do the product matric code
-			if (data['show_description'] =="Y") {	
-				$("tbody#row"+row_number+" tr.details").removeClass('si_hide');
-			} else {
-				$("tbody#row"+row_number+" tr.details").addClass('si_hide');
+			if (data['show_description'] =="Y")
+			{
+				$("tbody#row"+ row_number+" tr.details").removeClass('si_hide');
+			} else
+			{
+				$("tbody#row"+ row_number+" tr.details").addClass('si_hide');
 			}
-			if($("#description"+row_number).val() == $("#description"+row_number).attr('rel') || $("#description"+row_number).val() =='Description')
+			if ($("#description"+ row_number).val() == $("#description"+ row_number).attr('rel') || $("#description"+ row_number).val() =='Description')
 			{
 				if (data['notes_as_description'] =="Y") {	
-					$("#description"+row_number).val(data['notes']);
-					$("#description"+row_number).attr('rel',data['notes']);
+					$("#description"+ row_number).val(data['notes']);
+					$("#description"+ row_number).attr('rel',data['notes']);
 				} else {
-					$("#description"+row_number).val('Description');
-					$("#description"+row_number).attr('rel','Description');
+					$("#description"+ row_number).val('Description');
+					$("#description"+ row_number).attr('rel','Description');
 				}
 			} 
-			if (data['json_html'] !=="") {
-				$("tbody#row"+row_number+" tr.details").before(data['json_html']);
+			if (data['json_html'] !=="")
+			{
+				$("tbody#row"+ row_number+ " tr.details").before(data['json_html']);
 			}
 		}
 	});
@@ -202,16 +211,20 @@ function invoiceHeaderInitial() {
 	var elem = document.getElementById("customer_id");
 	var cto = document.getElementById("customer_street_address");
 	cto.style.display = 'none';
-	if (elem.addEventListener){
+	if (elem.addEventListener)
+	{
 		elem.addEventListener("change", function(){
-			if (window.getSelection){
+			if (window.getSelection)
+			{
 				cto.style.display='block';
 				putAddress(this.value,'customer_street_address');
 			}
 		}, false);
-	} else if (elem.attachEvent){
+	} else if (elem.attachEvent)
+	{
 		elem.attachEvent("onchange", function(){
-			if (window.getSelection){
+			if (window.getSelection)
+			{
 				cto.style.display='block';
 				putAddress(this.value,'customer_street_address');
 			}
@@ -220,16 +233,20 @@ function invoiceHeaderInitial() {
 	var ele = document.getElementById("ship_to_customer_id");
 	var csto = document.getElementById("ship_street_address");
 	csto.style.display = 'none';
-	if (ele.addEventListener){
+	if (ele.addEventListener)
+	{
 		ele.addEventListener("change", function(){
-			if (window.getSelection){
+			if (window.getSelection)
+			{
 				putAddress(this.value,'ship_street_address');
 				csto.style.display='block';
 			}
 		}, false);
-	} else if (ele.attachEvent){
+	} else if (ele.attachEvent)
+	{
 		ele.attachEvent("onchange", function(){
-			if (window.getSelection){
+			if (window.getSelection)
+			{
 				putAddress(this.value,'ship_street_address');
 				csto.style.display='block';
 			}
@@ -237,12 +254,15 @@ function invoiceHeaderInitial() {
 	}
 };
 
-if (window.addEventListener) {
-	window.addEventListener("load", invoiceHeaderInitial, false);
-} else if (window.attachEvent) {
-	window.attachEvent("onload", invoiceHeaderInitial);
-} else {
-	document.addEventListener("load", invoiceHeaderInitial, false);
+if (window.addEventListener)
+{
+	window.addEventListener("load", 	invoiceHeaderInitial, false);
+} else if (window.attachEvent)
+{
+	window.attachEvent("onload", 		invoiceHeaderInitial);
+} else
+{
+	document.addEventListener("load", 	invoiceHeaderInitial, false);
 }
 {/literal}
 //-->

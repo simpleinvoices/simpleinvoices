@@ -24,6 +24,7 @@ $invoice = getInvoice ( $master_invoice_id );
 // @formatter:off
 $invoiceobj   = new invoice ();
 /**/
+$domain_id = (isset($invoiceobj->domain_id) && $invoiceobj->domain_id) ? $invoiceobj->domain_id : 1;//????
 if ($invoice['preference_id']==5) {
 	$sql = "SELECT * FROM ".TB_PREFIX."invoices WHERE index_id = :inv_id AND preference_id = 1 AND domain_id = :domain_id";
 	$sth = dbQuery($sql, ':domain_id', $domain_id, ':inv_id', $invoice['index_id']);
