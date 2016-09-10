@@ -5,10 +5,10 @@
 * 	Quick view model
 *
 * Authors:
-*	 Justin Kelly, Nicolas Ruflin, Ap.Muthu
+*	 Justin Kelly, Nicolas Ruflin, Ap.Muthu, git0matt@gmail.com
 *
 * Last edited:
-* 	 2008-01-03
+* 	 2016-09-10
 *
 * License:
 *	 GPL v2 or above

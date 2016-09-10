@@ -4,10 +4,10 @@
  * 	invoice details page
  *
  * Authors:
- *	yumatechnical@gmail.com
+ *	git0matt@gmail.com
  *
  * Last edited:
- * 	2016-08-29
+ * 	2016-09-10
  *
  * License:
  *	GPL v2 or above

@@ -4,10 +4,10 @@
  * 	Put code into sections via code hooks
  *
  * Authors:
- *	yumatechnical@gmail.com
+ *	git0matt@gmail.com
  *
  * Last edited:
- * 	2016-08-31
+ * 	2016-09-10
  *
  * License:
  *	GPL v2 or above

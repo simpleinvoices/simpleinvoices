@@ -4,10 +4,10 @@
 * 	Customers list XML page
 *
 * Authors:
-*	 yumatechnical@gmail.com
+*	 git0matt@gmail.com
 *
 * Last edited:
-* 	 2016-09-09
+* 	 2016-09-10
 *
 * License:
 *	 GPL v2 or above
@@ -41,7 +41,7 @@ function sql($type = '', $start, $dir, $sort, $rp, $page) {
 
     $start = (($page - 1) * $rp);
 
-    $pdoDb->setSelectList(array("c.id as CID", "c.name", "c.enabled", "c.street_address", "c.attention"));
+    $pdoDb->setSelectList(array("c.id as CID", "c.name", "c.enabled", "c.street_address", "c.attention"));//Matt
 
     $case = new CaseStmt("c.enabled", "enabled_txt");
     $case->addWhen( "=", ENABLED, $LANG['enabled']);
@@ -116,8 +116,8 @@ $xml .= "<rows>";
 $xml .= "<page>$page</page>";
 $xml .= "<total>$count</total>";
 
-$viewcust = $LANG['view'] . " " . $LANG['customer'];
-$editcust = $LANG['edit'] . " " . $LANG['customer'];
+$viewcust = $LANG['view'] . ' ' . $LANG['customer'] . ' ';//Matt
+$editcust = $LANG['edit'] . ' ' . $LANG['customer'] . ' ';//Matt
 foreach ($customers as $row) {
     $vname = $viewcust . $row['name'];
     $ename = $editcust . $row['name'];

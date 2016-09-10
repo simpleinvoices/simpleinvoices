@@ -4,10 +4,10 @@
 * 	 Quick view of invoice template
 *
 * Authors:
-*	 Justin Kelly, Nicolas Ruflin, Ap.Muthu
+*	 Justin Kelly, Nicolas Ruflin, Ap.Muthu, git0matt@gmail.com
 *
 * Last edited:
-* 	 2008-01-03
+* 	 2016-09-10
 *
 * License:
 *	 GPL v2 or above
@@ -184,14 +184,14 @@
 					{showCustomFields categorieId="2" itemId=$customer.id }
 				*}
 
-{if $invoice.ship_to_customer_id>0}
+{if $preference.pref_id<5}
 <!-- Ship To Customer section (inv.ship_id={$invoice.ship_to_customer_id}, ship.id={$ship_to_customer.id})-->
 		<tr class="tr_head">
 			<th>{$LANG.ship_to}:</th>
 			<td colspan="4">{	if $delnote_link}<a href="{$delnote_link|htmlsafe}">{	/if} {$ship_to_customer.name|htmlsafe} {	if $delnote_link}</a>{	/if}</td>
 			<td class="si_switch">
-				<a href='#' class="show-ship_to_customer" {literal} onclick="$('.ship_to_customer').show(); $('.show-ship_to_customer').hide(); {/literal}"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a>
-				<a href='#' class="ship_to_customer" {literal} onclick="$('.ship_to_customer').hide(); $('.show-ship_to_customer').show(); {/literal}"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" /></a>
+				<a href='#' class="show-ship_to_customer" {literal }onclick="$('.ship_to_customer').show(); $('.show-ship_to_customer').hide(); {/literal}"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a>
+				<a href='#' class="ship_to_customer" {literal }onclick="$('.ship_to_customer').hide(); $('.show-ship_to_customer').show(); {/literal}"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" /></a>
 			</td>
 		</tr>	
 		<tr class="ship_to_customer">
@@ -413,6 +413,7 @@
 {* end itemised invoice *}
 {	/if} 
 
+{if $preference.pref_id<5}
     {* tax section - start  --------------------- *}
 	{if $invoice_number_of_taxes > 0}
 		<tr class="tr_tax">
@@ -453,6 +454,7 @@
 			<td class="si_right">{$preference.pref_currency_sign} {$invoice.total|siLocal_number}</td>
 	    </tr>
     {* tax section - end *}
+{/if}
 <!-- terms :: Added by Matt 20160802 -->
 		<tr wrap="nowrap">
 			<th>{$LANG.terms}</th>
@@ -460,7 +462,7 @@
 		</tr>
 <!-- end terms -->
 	</table>
-
+{if $preference.pref_id<5}
 <div class="si_center">
 	<div class="si_invoice_account">
 		<h4>{$LANG.financial_status}</h4>
@@ -500,3 +502,4 @@
 		</div>
 	</div>
 </div>
+{/if}

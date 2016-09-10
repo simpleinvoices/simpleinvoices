@@ -4,10 +4,10 @@
  * 	Invoice save file
  *
  * Authors:
- *	yumatechnical@gmail.com
+ *	git0matt@gmail.com
  *
  * Last edited:
- * 	2016-08-29
+ * 	2016-09-10
  *
  * License:
  *	GPL v2 or above
@@ -116,11 +116,11 @@ if ($_POST['action'] == "insert" ) {
 		if (isset($_POST["quantity$i"]))		$logger->log('qty='.$_POST["quantity$i"], Zend_Log::INFO);
 		if (isset($_POST["products$i"]))		$logger->log('product='.$_POST["products$i"], Zend_Log::INFO);
 
-		if (isset($_POST["delete$i") && $_POST["delete$i"] == "yes")
+		if (isset($_POST["delete$i"]) && $_POST["delete$i"] == "yes")
 		{
 			delete ('invoice_items','id',$_POST["line_item$i"]);
 		}
-		if (isset($_POST["delete$i") && $_POST["delete$i"] !== "yes")
+		if (isset($_POST["delete$i"]) && $_POST["delete$i"] !== "yes")
 		{
 			if (isset($_POST["quantity$i"]) && $_POST["quantity$i"] != null)
 			{
