@@ -945,7 +945,7 @@ function getDefaultTax($domain_id='') {
 
 	$domain_id = domain_id::get($domain_id);
 	
-	$sql = "SELECT * FROM ".TB_PREFIX."tax t, ".TB_PREFIX."system_defaults s WHERE (s.name = 'tax' AND t.tax_id = s.value) AND t.domain_id = s.domain_id AND s.domain_id = :domain_id";
+	$sql = "SELECT * FROM ".TB_PREFIX."tax t, ".TB_PREFIX."system_defaults s WHERE s.name = 'tax' AND t.tax_id = s.value AND t.domain_id = s.domain_id AND s.domain_id = :domain_id";
 	$sth = dbQuery($sql,':domain_id',$domain_id);
 	return $sth->fetch();
 }
@@ -2510,7 +2510,7 @@ function delete($module, $idField, $id, $domain_id='') {
 			$sth = $dbh->prepare('SELECT count(*)
 				FROM '.TB_PREFIX.'invoice_items
 				WHERE product_id = :id AND domain_id = :domain_id');
-			$sth->execute(array(':id' => $id, ':domain_id', $domain_id));
+			$sth->execute(array(':id' => $id, ':domain_id' => $domain_id));
 			$ref = $sth->fetch();
 			if ($sth->fetchColumn() != 0) {
 				// Fail, product still in use
@@ -2533,7 +2533,7 @@ function delete($module, $idField, $id, $domain_id='') {
 				UNION ALL
 				SELECT id FROM '.TB_PREFIX.'payment
 				WHERE ac_inv_id = :id AND domain_id = :domain_id) x');
-			$sth->execute(array(':id' => $id, ':domain_id', $domain_id));
+			$sth->execute(array(':id' => $id, ':domain_id' => $domain_id));
 			if ($sth->fetchColumn() != 0) {
 				// Fail, line items or payments still exist
 				return false;
