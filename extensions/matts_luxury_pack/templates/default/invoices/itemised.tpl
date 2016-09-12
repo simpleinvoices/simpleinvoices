@@ -289,6 +289,7 @@ function optionsParseXML(myxml,tag1,tag2)
 						{
 							var name = cells[j].textContent;
 							items.push ('<option value="'+ id+ '">'+ name+ '</option>'+ "\n");
+							break;
 						}
 					}
 				}
@@ -301,8 +302,12 @@ function optionsParseXML(myxml,tag1,tag2)
 function regenCusts()
 {
 	$('#gmail_loading').show();
-	document.getElementById('customer_id').options.length = 0;	// clear previous options
-	document.getElementById('ship_to_customer_id').options.length = 0;
+	document.getElementById('customer_id').options.length = 				0;	// clear previous options
+	document.getElementById('inserted_customer_street_address').href = 		'javascript:void(false)';
+	document.getElementById('inserted_customer_street_address').innerHTML = '';
+	document.getElementById('ship_to_customer_id').options.length = 		0;
+	document.getElementById('inserted_ship_street_address').href = 			'javascript:void(false)';
+	document.getElementById('inserted_ship_street_address').innerHTML = 	'';
 	$.ajax({
 		url:		'index.php?module=customers&view=xml',							// get output (json) of php script
 		type:		'POST',
@@ -319,7 +324,7 @@ function regenCusts()
 						$('#inserted_ship_street_address').innerHTML = '';
 						$('#inserted_ship_street_address').href = '';				// clear ship-to address link
 {/if}{literal}
-						json_customers = {/literal}{$customers|@json_encode}{literal};
+						json_customers = $.xml2json(response);//{/literal}{$customers|@json_encode}{literal};
 					},
 		error: 		function(jqXHR, textStatus, errorThrown)
 					{
@@ -343,7 +348,11 @@ function regenProds()
 						var allprows = document.getElementsByClassName('changeProduct');
 						for (var k=0; k<allprows.length; k++)
 						{
-							if (allprows[k].selectedIndex == 0 || typeof allprows[k].selectedIndex === "undefined")
+							if (allprows[k].selectedIndex>0)
+							{
+								var answer = confirm('{/literal}{$LANG.load_product}{literal} ("' + allprows[k].id + '")');//,'{/literal}{$LANG.yes}{literal}','{/literal}{$LANG.no}{literal});
+							}
+							if (allprows[k].selectedIndex == 0 || typeof allprows[k].selectedIndex === "undefined" || answer)
 							{
 								items = optionsParseXML(response, 'id', 'description');
 								allprows[k].options.length = 0;			// clear previous options

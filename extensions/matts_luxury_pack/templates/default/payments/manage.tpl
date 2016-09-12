@@ -17,15 +17,6 @@
 {assign var=pos value=$smarty.template|strrpos:'/'}
 {assign var=inc value=$smarty.template|substr:0:$pos}
 
-{*foreach from=$array item=v}
-	{if $defaults.default_nrows==$v && $smarty.get.rp==''}
-	<script type="text/javascript">
-		if (/=manage/.test(window.location.href))
-			location.href += '&rp={$v}';
-	</script>
-	{/if}
-{/foreach*}
-
 	<div class="si_toolbar si_toolbar_top">
 		<a href="./index.php?module=payments&amp;view=process&amp;op=pay_invoice" class="process"><img src="./images/famfam/add.png" alt="add"/>{$LANG.process_payment}</a>
 
@@ -39,50 +30,50 @@
 		</span>
  
 {if $smarty.get.id}
-        	<a href="./index.php?module=payments&amp;view=process&amp;id={$smarty.get.id|urlencode}&amp;op=pay_selected_invoice" class=""><img src="./images/famfam/money.png" alt=""/>{$LANG.payments_filtered_invoice}</a>
+		<a href="./index.php?module=payments&amp;view=process&amp;id={$smarty.get.id|urlencode}&amp;op=pay_selected_invoice" class=""><img src="./images/famfam/money.png" alt=""/>{$LANG.payments_filtered_invoice}</a>
 	</div>
         
-	{if $payments == null}
-		<div class="si_message">
-        		{$LANG.no_payments_invoice}
-		</div>        		
-	{else}
-        	<table id="manageGrid" style="display:none"></table>
-        	{*include file='../modules/payments/manage.js.php' get=$smarty.get*}
+{	if $payments == null}
+	<div class="si_message">
+		{$LANG.no_payments_invoice}
+	</div>        		
+{	else}
+	<table id="manageGrid" style="display:none"></table>
+{*include file='../modules/payments/manage.js.php' get=$smarty.get*}
 {include file=$inc|cat:"/../../../templates/default/payments/manage.js.php"}
-	{*include file='../extensions/payment_rows_per_page/templates/default/payments/manage.js.php'*}
-	{/if}
+{*include file='../extensions/payment_rows_per_page/templates/default/payments/manage.js.php'*}
+{	/if}
 
-{elseif $smarty.get.c_id }
+{elseif $smarty.get.c_id}
 	</div>
 
-        {if $payments == null}
-		<div class="si_message">
-			{$LANG.no_payments_customer}
-		</div>        		
-        {else}
-		<table id="manageGrid" style="display:none"></table>
-        	{*include file='../modules/payments/manage.js.php' get=$smarty.get*}
+{	if $payments == null}
+	<div class="si_message">
+		{$LANG.no_payments_customer}
+	</div>        		
+{	else}
+	<table id="manageGrid" style="display:none"></table>
+{*include file='../modules/payments/manage.js.php' get=$smarty.get*}
 {include file=$inc|cat:"/../../../templates/default/payments/manage.js.php"}
-	{*include file='../extensions/payment_rows_per_page/templates/default/payments/manage.js.php'*}
-        {/if}
+{*include file='../extensions/payment_rows_per_page/templates/default/payments/manage.js.php'*}
+{	/if}
 
-	{else}
+{else}
 	</div>
 
-        {if $payments == null}
-		<div class="si_message">
-        		{$LANG.no_payments}
-		</div>        		
-        {else}
-        	<table id="manageGrid" style="display:none"></table>
-        	{*include file='../modules/payments/manage.js.php' get=$smarty.get*}
+{	if $payments == null}
+	<div class="si_message">
+		{$LANG.no_payments}
+	</div>        		
+{	else}
+	<table id="manageGrid" style="display:none"></table>
+{*include file='../modules/payments/manage.js.php' get=$smarty.get*}
 {include file=$inc|cat:"/../../../templates/default/payments/manage.js.php"}
-	{*include file='../extensions/payment_rows_per_page/templates/default/payments/manage.js.php'*}
-        {/if}
+{*include file='../extensions/payment_rows_per_page/templates/default/payments/manage.js.php'*}
+{	/if}
 
 {/if}
 
-<div class="si_help_div">
-	<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_wheres_the_edit_button" title="{$LANG.wheres_the_edit_button}"><img src="./images/common/help-small.png" alt="help" />{$LANG.wheres_the_edit_button}<!--Where's the Edit button?--></a>
-</div>
+	<div class="si_help_div">
+		<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_wheres_the_edit_button" title="{$LANG.wheres_the_edit_button}"><img src="./images/common/help-small.png" alt="help" />{$LANG.wheres_the_edit_button}<!--Where's the Edit button?--></a>
+	</div>

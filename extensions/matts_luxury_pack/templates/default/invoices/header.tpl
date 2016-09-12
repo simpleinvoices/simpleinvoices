@@ -4,10 +4,10 @@
  * 	Header file for invoice template, called by itemised.tpl
  *
  * Authors:
- *	yumatechnical@gmail.com
+ *	git0matt@gmail.com
  *
  * Last edited:
- * 	2016-09-09
+ * 	2016-09-10
  *
  * License:
  *	GPL v2 or above
@@ -130,7 +130,10 @@
 
 <script type="text/javascript">
 <!--
-var json_customers = {$customers|@json_encode};
+if (typeof json_customers === undefined)
+{
+	var json_customers = {$customers|@json_encode};
+}
 {literal}
 function putAddress(val, where) {
 	var elem = document.getElementById(where);

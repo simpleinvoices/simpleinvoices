@@ -29,7 +29,8 @@
 {*	php}file_get_contents('{$inc|cat:"/hooks/head_end.php"}');{/php	*}
 
 {*	hook_head_end	*}
-{capture name="hook_head_end"}
+{capture name="hook_head_end"}{literal}
+	<script type="text/javascript" src="{/literal}{$myroot|cat:"/../../include/jquery/xml2json.js"}{literal}"></script>{/literal}
 {if $defaults.use_modal}
 <!-- hook_head_end_add_superbox : {$LANG.Modal} -->{literal}
 	<link rel="stylesheet" href="{/literal}{$myroot|cat:"/../../include/jquery/jquery.superbox.css"}{literal}" type="text/css" media="all" />
@@ -248,20 +249,20 @@ if (!Array.prototype.indexOf) {
 {if $defaults.use_modal}
 {literal}
 	<script type="text/javascript"><!--
-		$(iframe.contenWindow.document.body).find("#cancelAddCustomer").bind('click',function (e) { 
+		$(iframe.contentWindow.document.body).find("#cancelAddCustomer").bind('click',function (e) { 
 			e.preventDefault();
 			$.superbox.close();
-			//$(iframe.contenWindow.document.body).find('#sb-close').trigger('click')
+			//$(iframe.contentWindow.document.body).find('#sb-close').trigger('click')
 		});
-		$(iframe.contenWindow.document.body).find("#cancelEditCustomer").bind('click',function (e) { 
+		$(iframe.contentWindow.document.body).find("#cancelEditCustomer").bind('click',function (e) { 
 			e.preventDefault();
 			//$.superbox.close();
-			$(iframe.contenWindow.document.body).find('#sb-close').trigger('click')
+			$(iframe.contentWindow.document.body).find('#sb-close').trigger('click')
 		});
-		$(iframe.contenWindow.document.body).find("#cancelAddProduct").bind('click',function (e) { 
+		$(iframe.contentWindow.document.body).find("#cancelAddProduct").bind('click',function (e) { 
 			e.preventDefault();
 			$.superbox.close();
-			//$(iframe.contenWindow.document.body).find('#sb-close').trigger('click')
+			//$(iframe.contentWindow.document.body).find('#sb-close').trigger('click')
 		});
 /*	if (inIframe())
 	{

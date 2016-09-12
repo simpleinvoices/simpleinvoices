@@ -65,7 +65,7 @@
 	
 		<tr class="tr_head">
 			<th>{$LANG.biller}:</th>
-			<td colspan="4">{$biller.name|htmlsafe}</td>
+			<td colspan="4"><a rel="superbox[iframe][1075x600]" href="index.php?module=billers&amp;view=details&amp;action=edit&amp;id={$biller.id|htmlsafe}" class="edit-details modal" title="{$LANG.edit} {$LANG.biller}">{$biller.name|htmlsafe}</a></td>
 			<td class="si_switch">
 				<a href='#' class="show-biller" onclick="$('.biller').show();$('.show-biller').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" /></a>
 				<a href='#' class="biller" onclick="$('.biller').hide();$('.show-biller').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" /></a>
@@ -124,7 +124,7 @@
 		<!-- Customer section -->
 		<tr class="tr_head">
 			<th>{$LANG.customer}:</th>
-			<td colspan="4">{$customer.name|htmlsafe}</td>
+			<td colspan="4"><a rel="superbox[iframe][1075x600]" href="index.php?module=customers&view=details&action=edit&id={$customer.id|htmlsafe}" class="edit-details modal" title="{$LANG.edit} {$LANG.customer}">{$customer.name|htmlsafe}</td>
 			<td class="si_switch">
 				<a href='#' class="show-customer" {literal} onclick="$('.customer').show(); $('.show-customer').hide(); {/literal}"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a>
 				<a href='#' class="customer" {literal} onclick="$('.customer').hide(); $('.show-customer').show(); {/literal}"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" /></a>
@@ -184,7 +184,7 @@
 					{showCustomFields categorieId="2" itemId=$customer.id }
 				*}
 
-{if $preference.pref_id<5}
+{if $invoice.ship_to_customer_id>0}
 <!-- Ship To Customer section (inv.ship_id={$invoice.ship_to_customer_id}, ship.id={$ship_to_customer.id})-->
 		<tr class="tr_head">
 			<th>{$LANG.ship_to}:</th>
@@ -364,7 +364,7 @@
 						<td class="si_right">{$preference.pref_currency_sign} {$invoiceItem.gross_total|siLocal_number}</td>		
 					</tr>
 
-					<tr  class="consulting tr_custom" >	
+					<tr class="consulting tr_custom">
 						<td></td>	
 						<td colspan="5">
 							<table class="si_invoice_view_custom_items">
@@ -448,7 +448,7 @@
 	{if $invoice_number_of_taxes > 1}
 
     {/if}
-		<tr class="tr_total">
+		<tr class="tr_head tr_total">
 	        <td colspan="4"></td>
 			<th>{$preference.pref_inv_wording|htmlsafe} {$LANG.amount}</th>
 			<td class="si_right">{$preference.pref_currency_sign} {$invoice.total|siLocal_number}</td>

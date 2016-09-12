@@ -47,7 +47,8 @@ $MYI_LANG = array(
 	'help_modal'	=> "Enable a modal iframe window on some links when creating an invoice.",
 	'help_price_list'	=> "Enable up to 4 prices for each product; and each customer can be assigned a price-list number corresponding to the price, so every product purchased by that customner has the price in that price-list number box.",
 	'regenCusts'	=> "Reload Customers",
-	'regenProds'	=> "Reload Products"
+	'regenProds'	=> "Reload Products",
+	'load_product'	=> "Reload Product Select"
 );
 
 /**************************************************************/
@@ -61,7 +62,15 @@ $MYP_LANG = array(
 	'product_lwhw'		=> "LxWxH+Weight",
 	'help_product_lwhw'	=> "Enable to put boxes for product length, width, height and weight when creating and viewing and editing a product.",
 	'default_nrows'		=> "Default rows-per-page",
-	'help_nrows'		=> "Number of rows initially displayed on the list of customers, invoices or products."
+	'help_nrows'		=> "Number of rows initially displayed on the list of customers, invoices or products.",
+	'invoices_created' 	=> "Invoices created",
+	'created' 			=> "created",
+	'period' 			=> "for the period",
+	'invoices_modified' => "Invoices modified",
+	'modified'			=> "modified",
+	'payment_processed' => "Payments processed",
+	'user' 				=> "User",
+	'on' 				=> "on"
 );
 // @formatter:on
 global $defaults;
