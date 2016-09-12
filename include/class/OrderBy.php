@@ -66,7 +66,7 @@ class OrderBy {
                         throw new PdoDbException($str);
                     }
                 } else {
-                    $this->orderByFields[] = array($fields, $lcl_order);
+                    $this->orderByFields[] = array($field, $lcl_order);
                 }
             }
         } else if (is_string($field)) {

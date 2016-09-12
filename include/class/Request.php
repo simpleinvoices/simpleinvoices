@@ -110,15 +110,15 @@ class Request {
      *           Ex: array("name", "street_address", "city", "state", "zip").
      */
     public function addSelectList($selectList) {
-        if (is_array($list)) {
-            foreach ($list as $field) {
+        if (is_array($selectList)) {
+            foreach ($selectList as $field) {
                 if (!in_array($field, $this->selectList)) {
                     $this->selectList[] = $field;
                 }
             }
         } else {
-            if (!in_array($list, $this->selectList)) {
-                $this->selectList[] = $list;
+            if (!in_array($selectList, $this->selectList)) {
+                $this->selectList[] = $selectList;
             }
         }
     }
@@ -216,6 +216,6 @@ class Request {
      * @return_string Description of the request
      */
     public function describe() {
-        $msg = "$this->request for $this->table";
+        return "$this->request for $this->table";
     }
 }

@@ -1,5 +1,5 @@
 <?php
-
+require_once 'include/class/Request.php';
 /**
  * Requests class
  * @author Rich

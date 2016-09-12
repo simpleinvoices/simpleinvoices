@@ -245,7 +245,7 @@ class PdoDb {
 
     /**
      * Specify functions with parameters to list of those to perform
-     * @param string $function Function to include in parameter list. Example: count(id).
+     * @param mixed $function Function to include in parameter list. Example: count(id).
      */
     public function addToFunctions($function) {
         if (is_string($function) || is_a($function, "FunctionStmt")) {
@@ -748,7 +748,7 @@ class PdoDb {
      * @return string Updated table name.
      */
     public static function addTbPrefix($table) {
-        if ((preg_match(self::TBPREFIX_PATTERN, $table)) != 1) {
+        if (self::TBPREFIX_PATTERN != null && preg_match(self::TBPREFIX_PATTERN, $table) != 1) {
             return TB_PREFIX . $table;
         }
         return $table;
