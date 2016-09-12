@@ -15,6 +15,7 @@
  *  Website:
  *      http://www.simpleinvoices.org
  */
+global $customFields, $smarty;
 
 // stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin ();
@@ -31,7 +32,7 @@ $invoiceItems = $invoiceobj->getInvoiceItems ( $master_invoice_id );
 
 $customers   = Customer::get_all(true);
 $preference  = getPreference ( $invoice ['preference_id'] );
-$billers     = Biller::getAllActive();
+$billers     = Biller::get_all(true);
 $defaults    = getSystemDefaults ();
 $taxes       = getTaxes ();
 $preferences = getActivePreferences ();
