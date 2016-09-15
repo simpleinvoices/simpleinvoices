@@ -16,7 +16,7 @@ G.load(function(){g(G,H);e({boxClasses:"image "+A.boxClasses,boxId:A.boxId});u()
 })})},gallery:function(B,A){var C=f(B.get(0));if(!x[C[0]]){x[C[0]]=[]}x[C[0]].push(B);
 B.get(0)._superboxGroupKey=(x[C[0]].length-1);i.superbox.image(B,A,"gallery")},iframe:function(B,A){var C=f(B.get(0));
 B.click(function(D){D.preventDefault();k();y(function(){var F=false,E;if(C){F=C[0].split("x")
-}A=i.extend({},A,{boxWidth:F[0]||A.boxWidth,boxHeight:F[1]||A.boxHeight});E=i('<iframe src="'+B.attr("href")+'" name="'+B.attr("href")+'" frameborder="0" scrolling="auto" hspace="0" width="'+A.boxWidth+'" height="'+A.boxHeight+'"></iframe>');
+}A=i.extend({},A,{boxWidth:F[0]||A.boxWidth,boxHeight:F[1]||A.boxHeight});E=i('<iframe class="superbox-iframe" src="'+B.attr("href")+'" name="'+B.attr("href")+'" frameborder="0" scrolling="auto" hspace="0" width="'+A.boxWidth+'" height="'+A.boxHeight+'"></iframe>');
 E.load(function(){q.width(A.boxWidth+"px");$innerbox.height(A.boxHeight+"px");e({boxClasses:"iframe "+A.boxClasses,boxId:A.boxId});
 u()}).appendTo($innerbox)})})},content:function(B,A){var C=f(B.get(0));B.click(function(D){D.preventDefault();
 k();y(function(){var E=false;if(C){E=C[0].split("x")}A=i.extend({},A,{boxWidth:E[0]||A.boxWidth,boxHeight:E[1]||A.boxHeight});

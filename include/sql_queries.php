@@ -180,8 +180,10 @@ function dbLogger($sqlQuery, $dump = false) {
 
     // Compact query to be logged
     $sqlQuery = preg_replace('/  +/', ' ', str_replace(PHP_EOL, '', $sqlQuery));
-    if ($can_log && (preg_match('/^\s*select/iD', $sqlQuery) == 0) &&
-                     (preg_match('/^\s*show\s*tables\s*like/iD', $sqlQuery) == 0)) {
+    if ($can_log 
+/*		&& (preg_match('/^\s*select/iD', $sqlQuery) == 0) 
+		&& (preg_match('/^\s*show\s*tables\s*like/iD', $sqlQuery) == 0)	*/
+		) {
 
         // Only log queries that could result in data/database modification
         $last = NULL;
@@ -2307,7 +2309,7 @@ function delete($module, $idField, $id, $domain_id = '') {
 
     // SC: $valid_tables contains the base names of all tables that can have rows
     // deleted using this function. This is used for whitelisting deletion targets.
-    $valid_tables = array('invoices', 'invoice_items', 'invoice_item_tax', 'products');
+    $valid_tables = array('invoices', 'invoice_items', 'invoice_item_tax', 'products', 'customers');
 
     if (in_array($lctable, $valid_tables)) {
         // A quick once-over on the dependencies of the possible tables
@@ -2330,7 +2332,7 @@ function delete($module, $idField, $id, $domain_id = '') {
             $sth = $dbh->prepare('SELECT count(*) FROM ' . TB_PREFIX . 'invoice_items
                                   WHERE product_id = :id AND domain_id = :domain_id');
             // @formatter:on
-            $sth->execute(array(':id' => $id, ':domain_id', $domain_id));
+            $sth->execute(array(':id' => $id, ':domain_id' => $domain_id));
             $sth->fetch();
             if ($sth->fetchColumn() != 0) {
                 return false; // Fail, product still in use

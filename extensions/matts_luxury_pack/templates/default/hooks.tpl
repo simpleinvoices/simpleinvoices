@@ -30,7 +30,8 @@
 
 {*	hook_head_end	*}
 {capture name="hook_head_end"}{literal}
-	<script type="text/javascript" src="{/literal}{$myroot|cat:"/../../include/jquery/xml2json.js"}{literal}"></script>{/literal}
+	<script type="text/javascript" src="{/literal}{$myroot|cat:"/../../include/jquery/xml2json.js"}{literal}"></script>
+	{/literal}
 {if $defaults.use_modal}
 <!-- hook_head_end_add_superbox : {$LANG.Modal} -->{literal}
 	<link rel="stylesheet" href="{/literal}{$myroot|cat:"/../../include/jquery/jquery.superbox.css"}{literal}" type="text/css" media="all" />
@@ -248,21 +249,36 @@ if (!Array.prototype.indexOf) {
 {*	$smarty.capture.hook_body_end	*}{*	append	*}
 {if $defaults.use_modal}
 {literal}
-	<script type="text/javascript"><!--
-		$(iframe.contentWindow.document.body).find("#cancelAddCustomer").bind('click',function (e) { 
-			e.preventDefault();
-			$.superbox.close();
-			//$(iframe.contentWindow.document.body).find('#sb-close').trigger('click')
-		});
-		$(iframe.contentWindow.document.body).find("#cancelEditCustomer").bind('click',function (e) { 
-			e.preventDefault();
-			//$.superbox.close();
-			$(iframe.contentWindow.document.body).find('#sb-close').trigger('click')
-		});
-		$(iframe.contentWindow.document.body).find("#cancelAddProduct").bind('click',function (e) { 
-			e.preventDefault();
-			$.superbox.close();
-			//$(iframe.contentWindow.document.body).find('#sb-close').trigger('click')
+<!--	<script type="text/javascript"><!--
+		$('.superbox-iframe').livequery('load',function(){
+/*			$(iframe.contentWindow.document.body).find("#cancelAddCustomer").livequery('click',function (e) { */
+			$(this).contents().find("#cancelAddCustomer").livequery('click',function (e) {\
+				if (inIframe())
+				{
+					e.preventDefault();
+					$.superbox.close();
+					//$(iframe.contentWindow.document.body).find('#sb-close').trigger('click');
+				}
+			});
+/*			$(iframe.contentWindow.document.body)	*/
+			$(this).contents().find("#cancelEditCustomer").livequery('click',function (e) { 
+				if (inIframe())
+				{
+					e.preventDefault();
+					//$.superbox.close();
+/*				$(iframe.contentWindow.document.body)	*/
+					$(this).contents().find('#sb-close').trigger('click');
+				}
+			});
+/*			$(iframe.contentWindow.document.body)	*/
+			$(this).contents().find("#cancelAddProduct").livequery('click',function (e) { 
+				if (inIframe())
+				{
+					e.preventDefault();
+					$.superbox.close();
+					//$(iframe.contentWindow.document.body).find('#sb-close').trigger('click');
+				}
+			});
 		});
 /*	if (inIframe())
 	{
@@ -288,7 +304,7 @@ if (!Array.prototype.indexOf) {
 		}
 	}*/
 	//-->
-	</script>{/literal}
+	</script>{/literal}-->
 {/if}
 {*	/if	*}
 {/capture}

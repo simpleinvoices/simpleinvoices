@@ -126,10 +126,10 @@ foreach ($customers as $row) {
 //	$xml .= "<cell><![CDATA[" . htmlentities(print_r($row,true)) . "]]></cell>";
     $xml .=
         "<cell name='links'><![CDATA[
-          <a class='index_table' title='$vname' href='index.php?module=customers&view=details&id=".$row["CID"].	"&action=view'>
+          <a class='index_table' title='$vname' href='index.php?module=customers&view=details&id=". $row["CID"]. "&action=view'>
             <img src='images/common/view.png' class='action' />
           </a>
-          <a name='index_table' title='$ename' href='index.php?module=customers&view=details&id=".$row["CID"].	"&action=edit'>
+          <a name='index_table' title='$ename' href='index.php?module=customers&view=details&id=". $row["CID"].	"&action=edit'>
             <img src='images/common/edit.png' class='action' />
           </a>
         ]]></cell>";

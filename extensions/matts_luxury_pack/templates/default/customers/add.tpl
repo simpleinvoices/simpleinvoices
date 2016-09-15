@@ -171,7 +171,7 @@
 						<img src="./images/common/help-small.png" alt="help" />
 						</a>
 					</th>
-					<td><input type="text" name="credit_card_cvc" value"{$smarty.post.credit_card_cvc|htmlsafe}" size="5" /></td>
+					<td><input type="text" name="credit_card_cvc" value="{$smarty.post.credit_card_cvc|htmlsafe}" size="5" /></td>
 				</tr>
 				<tr>
 					<th>{$LANG.credit_card_expiry_month}

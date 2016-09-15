@@ -1,3 +1,21 @@
+{*
+/*
+* Script: extensions/matts_luxury_pack/templates/default/products/details.tpl
+* 	product template
+*
+* Authors:
+*	 git0matt@gmail.com
+*
+* Last edited:
+* 	 2016-09-14
+*
+* License:
+*	 GPL v2 or above
+*
+* Website:
+* 	http://www.simpleinvoices.org
+ */
+*}
 <!-- extensions/matts_luxury_pack/templates/default/products/details.tpl -->
 <form name="frmpost" action="index.php?module=products&view=save&id={$smarty.get.id|urlencode}" method="post" id="frmpost" onsubmit="return checkForm(this);">
 
@@ -128,6 +146,10 @@
 		</table>
 	</div>
 	<div class="si_toolbar si_toolbar_form">
+{	if $defaults.delete == '1'}
+		<a title="{$LANG.delete} {$LANG.product} '{$product.description|htmlsafe}'" href="index.php?module=products&amp;view=delete&amp;stage=1&amp;id={$product.id|urlencode}">
+			<img src='images/common/delete.png' class='action' />&nbsp;{$LANG.delete}</a>
+{	/if}
 		<a href="./index.php?module=products&view=details&id={$product.id|htmlsafe}&action=edit" class="positive">
 			<img src="./images/famfam/add.png" alt=""/>
 			{$LANG.edit}
@@ -301,11 +323,11 @@
 
 		<div class="si_toolbar si_toolbar_form">
 			<button type="submit" class="positive" name="save_product" value="{$LANG.save}">
-				<img class="button_img" src="./images/common/tick.png" alt="" /> 
+				<img class="button_img" src="./images/common/tick.png" alt="tick" /> 
 				{$LANG.save}
 			</button>	
 			<a href="./index.php?module=products&view=manage" class="negative">
-				<img src="./images/common/cross.png" alt="" />
+				<img src="./images/common/cross.png" alt="cross" />
 				{$LANG.cancel}
 			</a>
 		</div>

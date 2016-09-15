@@ -1,6 +1,14 @@
 {* preload the headers (for faster browsing) *}
 {include file=$path|cat:'../header.tpl'}
 
+<script language="JavaScript" type="text/javascript">{literal}
+<!--
+	if (top.location != location) {
+		top.location.href = document.location.href ;
+	}
+//-->
+</script>{/literal}
+
 <div class="si_wrap">
 	<form action="#" method="post" id="frmLogin" name="frmLogin">
 		<input type="hidden" name="action" value="login" />	

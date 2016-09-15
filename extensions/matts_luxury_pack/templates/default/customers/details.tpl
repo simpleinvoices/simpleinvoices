@@ -221,7 +221,12 @@
 	</div>
 
 	<div class="si_toolbar si_toolbar_form">
-		<a href="./index.php?module=customers&amp;view=details&amp;id={$customer.id|urlencode}&amp;action=edit" class="positive"><img src="./images/common/tick.png" alt="tick" />{$LANG.edit}</a>
+{	if $defaults.delete == '1'}
+		<a title="{$LANG.delete} {$LANG.customer} '{$customer.name|htmlsafe}'" href="index.php?module=customers&amp;view=delete&amp;stage=1&amp;id={$customer.id|urlencode}">
+			<img src='images/common/delete.png' class='action' />&nbsp;{$LANG.delete}</a>
+{	/if}
+		<a href="./index.php?module=customers&amp;view=details&amp;id={$customer.id|urlencode}&amp;action=edit" class="positive">
+			<img src="./images/common/tick.png" alt="tick" />{$LANG.edit}</a>
 	</div>
 </div>
 {/if}
@@ -371,7 +376,7 @@
 							<img src="./images/common/help-small.png" alt="help" />
 							</a>
 					</th>
-					<td><input type="text" name="credit_card_cvc" value"{$smarty.post.credit_card_cvc|htmlsafe}" size="5" /></td>
+					<td><input type="text" name="credit_card_cvc" value="{$smarty.post.credit_card_cvc|htmlsafe}" size="5" /></td>
 				</tr>
 				<tr>
 					<th>{$LANG.credit_card_expiry_month}
@@ -506,7 +511,7 @@
 {	/if}
 				<tr>
 					<th>{$LANG.notes}</th>
-					<td><textarea  name="notes"  class="editor" rows="8" cols="50">{$customer.notes|outhtml}</textarea></td>
+					<td><textarea name="notes" class="editor" rows="8" cols="50">{$customer.notes|outhtml}</textarea></td>
 				</tr>
 		{*
 					{showCustomFields categorieId="2" itemId=$smarty.get.customer}

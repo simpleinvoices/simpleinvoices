@@ -10,7 +10,6 @@
 *	http://www.simpleinvoices.org
 */
 *}
-
 <form name="frmpost" action="index.php?module=invoices&amp;view=save" method="post" onsubmit="return frmpost_Validator(this)">
 
 {$smarty.capture.hook_loading}
@@ -86,10 +85,10 @@
 		<div class="si_toolbar_inform">
 			<a rel="superbox[iframe][1075x600]" href="index.php?module=customers&view=add" class="show-details modal customer_add" title="{$LANG.add_customer}">
 				<img class="button_img" src="./images/common/add.png" alt="add" />{ $LANG.add_customer }</a><br /><br />
-			<a href="javascript:void(false)" id="regenCusts">{ $LANG.regenCusts }</a><br /><br /><!--onclick="regenCusts()" -->
+			<a href="javascript:void(false)" id="regenCusts">{ $LANG.regenCusts }</a><br /><br />
 			<a rel="superbox[iframe][1075x600]" href="index.php?module=products&view=add" class="show-details modal product_add" title="{$LANG.add_product}">
 				<img class="button_img" src="./images/common/add.png" alt="add" />{ $LANG.add_product }</a>
-			<a href="javascript:void(false)" id="regenProds">{ $LANG.regenProds }</a><br /><br /><!-- onclick="regenProds()"-->
+			<a href="javascript:void(false)" id="regenProds">{ $LANG.regenProds }</a><br /><br />
 		</div>
 {	/if}
 	</div>
@@ -192,7 +191,7 @@
 {		else}
 						value=""
 {		/if}
-						class="{if $smarty.section.line.index == "0" }validate[required] {/if}si_right" />
+						class="{if $smarty.section.line.index == "0" }validate[required] {/if}si_right unit_price" />
 				</td>	
 			</tr>
 			<tr class="details si_hide">
@@ -299,6 +298,21 @@ function optionsParseXML(myxml,tag1,tag2)
 	return items;
 }
 
+function regenCustsSuccess(response)
+{
+	items = optionsParseXML(response, 'id', 'name');
+	$('#customer_id').append(items.join("\n"));					// fill customer list
+	$('#inserted_customer_street_address').innerHTML = '';
+	$('#inserted_customer_street_address').href = '';			// clear customer address link
+{/literal}{if $defaults.use_ship_to}
+	items.unshift('<option value="0" selected="selected">{ $LANG.no_ship_to }</option>'+ "\n");
+	$('#ship_to_customer_id').append(items.join("\n"));			// fill ship-to-customer list
+	$('#inserted_ship_street_address').innerHTML = '';
+	$('#inserted_ship_street_address').href = '';				// clear ship-to address link
+{/if}{literal}
+	//json_customers = $.xml2json(response);//{/literal}{$customers|@json_encode}{literal};
+}
+
 function regenCusts()
 {
 	$('#gmail_loading').show();
@@ -312,28 +326,34 @@ function regenCusts()
 		url:		'index.php?module=customers&view=xml',							// get output (json) of php script
 		type:		'POST',
 		data:		'rp=32768',
-		success: 	function(response)
-					{
-						items = optionsParseXML(response, 'id', 'name');
-						$('#customer_id').append(items.join("\n"));					// fill customer list
-						$('#inserted_customer_street_address').innerHTML = '';
-						$('#inserted_customer_street_address').href = '';			// clear customer address link
-{/literal}{if $defaults.use_ship_to}
-						items.unshift('<option value="0" selected="selected">{ $LANG.no_ship_to }</option>'+ "\n");
-						$('#ship_to_customer_id').append(items.join("\n"));			// fill ship-to-customer list
-						$('#inserted_ship_street_address').innerHTML = '';
-						$('#inserted_ship_street_address').href = '';				// clear ship-to address link
-{/if}{literal}
-						json_customers = $.xml2json(response);//{/literal}{$customers|@json_encode}{literal};
-					},
+		success: 	function(response) {		regenCustsSuccess(response);		},
 		error: 		function(jqXHR, textStatus, errorThrown)
 					{
-						console.log('error');
-						console.log(errorThrown);
+						console.log('error');	console.log(errorThrown);
 						console.log(jqXHR);
 					},
-		complete: 	function() {	$('#gmail_loading').hide();	}
+		complete: 	function() {				$('#gmail_loading').hide();		}
 	});
+}
+
+function regenProdsSuccess(response)
+{
+	var allprows = document.getElementsByClassName('changeProduct');
+	for (var k=0; k<allprows.length; k++)
+	{
+		var ele = allprows[k];
+		if (ele.selectedIndex>0)
+		{
+			var answer = confirm('{/literal}{$LANG.regenProds} {$LANG.into} ("' + ele.id + '"), {$LANG.overwrite_product} ("' + ele.options[ele.selectedIndex].text +'"){literal}');
+		}
+		if (ele.selectedIndex == 0 || typeof ele.selectedIndex === "undefined" || answer)
+		{
+			items = optionsParseXML(response, 'id', 'description');
+			ele.options.length = 0;			// clear previous options
+			items.unshift('<option value="">&nbsp;</option>'+ "\n");
+			$(ele).append(items.join("\n"));	// fill products list
+		}
+	}
 }
 
 function regenProds()
@@ -343,31 +363,13 @@ function regenProds()
 		url: 		'index.php?module=products&view=xml',				// get output (json) of php script//{*	/literal}{$inc|cat:"/mylist.php"}{literal	*}
 		type: 		'POST',
 		data:		'rp=32768',
-		success: 	function(response)
-					{
-						var allprows = document.getElementsByClassName('changeProduct');
-						for (var k=0; k<allprows.length; k++)
-						{
-							if (allprows[k].selectedIndex>0)
-							{
-								var answer = confirm('{/literal}{$LANG.load_product}{literal} ("' + allprows[k].id + '")');//,'{/literal}{$LANG.yes}{literal}','{/literal}{$LANG.no}{literal});
-							}
-							if (allprows[k].selectedIndex == 0 || typeof allprows[k].selectedIndex === "undefined" || answer)
-							{
-								items = optionsParseXML(response, 'id', 'description');
-								allprows[k].options.length = 0;			// clear previous options
-								items.unshift('<option value="">&nbsp;</option>'+ "\n");//selected="selected"
-								$(allprows[k]).append(items.join("\n"));	// fill products list
-							}
-						}
-					},
+		success: 	function(response) {		regenProdsSuccess(response);		},
 		error: 		function(jqXHR, textStatus, errorThrown)
 					{
-						console.log('error');
-						console.log(errorThrown);
+						console.log('error');	console.log(errorThrown);
 						console.log(jqXHR);
 					},
-		complete: 	function() {	$('#gmail_loading').hide();	}
+		complete: 	function() {				$('#gmail_loading').hide();	}
 	});
 }
 
@@ -378,8 +380,40 @@ $('#regenProds').click(function () { 						// launch regenProds() when #regenPro
 	regenProds();
 });
 
-$('.changeProduct').change(function () { 					// launch changeProductSelection() when #changeProduct changed
+$('.changeProduct').livequery('change', function () { 		// launch changeProductSelection() when #changeProduct changed
 	changeProductSelection(this);
+});
+
+$('.unit_price').livequery('blur', function () {
+	//$('#gmail_loading').show();
+	var nowval = this.value;
+	var row = this.parentElement.parentElement.parentElement.id.substr(3);
+	var prodel = document.getElementById('products'+ row);/*$('#products'+ row);*/
+	if (prodel.selectedIndex)
+	{
+		var prod = prodel.options[prodel.selectedIndex].text;
+		var valu = prodel.options[prodel.selectedIndex].value;
+	}
+	if (nowval)
+	{
+		var answer = confirm('{/literal}{$LANG.update} {$LANG.product} ("'+ prod+ '") {$LANG.with_new_price} ("'+ nowval+'") {$LANG.in} {$LANG.price_list}?{literal}');
+	}
+	if (answer)
+	{
+		// save nowval in db product table
+		$.ajax({
+			url: 		'index.php?module=products&view=update',				// send data to php script
+			type: 		'POST',
+			data:		'val='+ valu+ '&unit_price=' + nowval,
+			success: 	function(response) {		alert("{/literal}{$LANG.saved} ('"+ prod+ "' => '"+ nowval+"'){literal}");		},
+			error: 		function(jqXHR, textStatus, errorThrown)
+						{
+							console.log('error');	console.log(errorThrown);
+							console.log(jqXHR);
+						},
+			complete: 	function() {				$('#gmail_loading').hide();		}
+		});
+	}
 });
 //-->{/literal}
 </script>
