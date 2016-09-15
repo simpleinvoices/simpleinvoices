@@ -476,8 +476,7 @@ function getActiveTaxes($domain_id = '') {
     // @formatter:on
     $sth = dbQuery($sql, ':domain_id', $domain_id);
 
-    $taxes = NULL;
-
+    $taxes = array();
     for ($i = 0; $tax = $sth->fetch(); $i++) {
         $tax['enabled'] = $LANG['enabled'];
         $taxes[$i] = $tax;

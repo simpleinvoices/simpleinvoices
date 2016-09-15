@@ -23,7 +23,7 @@ class FunctionStmt {
     /**
      * Add another part of the function.
      * @param string $operator Math operator value is <b>+</b>, <b>-</b>, <b>*</b> or <b>/</b>.
-     * @param mixed $part <b>DbField</b> object ot <b>string</b>.
+     * @param mixed $part <b>DbField</b> object or <b>string</b>.
      * @throws PdoDbException if an invalid <b>$operator</b> is specified.
      */
     public function addPart($operator, $part) {

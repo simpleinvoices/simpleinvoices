@@ -20,7 +20,6 @@ class ProductAttributes {
         $oc = new OnClause(new OnItem(false, "pa.type_id", "=", new DbField("pat.id"), false));
         $pdoDb->addToJoins("LEFT", "products_attribute_type", "pat", $oc);
         $result = $pdoDb->request("SELECT", "products_attributes", "pa");
-error_log("ProductAttributes - get() - id[$id] result - " . print_r($result,true));
         return $result;
     }
 
@@ -34,7 +33,6 @@ error_log("ProductAttributes - get() - id[$id] result - " . print_r($result,true
         $pdoDb->addSimpleWhere("id", $id);
         $pdoDb->setSelectList("name");
         $attribute = $pdoDb->request("SELECT","products_attributes");
-error_log("ProductAttributes - getName - id[$id] addribute - " . print_r($attribute,true));
         return $attribute['name'];
     }
 
@@ -48,7 +46,6 @@ error_log("ProductAttributes - getName - id[$id] addribute - " . print_r($attrib
         $pdoDb->addSimpleWhere("id", $id);
         $pdoDb->setSelectList("type");
         $attribute = $pdoDb->request("SELECT","products_attributes");
-error_log("ProductAttributes - getType - id[$id] addribute - " . print_r($attribute,true));
         return $attribute['type'];
     }
 
@@ -68,7 +65,6 @@ error_log("ProductAttributes - getType - id[$id] addribute - " . print_r($attrib
             $pdoDb->addSimpleWhere("id", $value_id);
             $pdoDb->setSelectList("value");
             $attribute = $pdoDb->request("SELECT", "product_values");
-error_log("ProductAttributes - getValue - attribute_id[$attribute_id] value_id[$value_id] addribute - " . print_r($attribute,true));
             return $attribute['value'];
         }
         return $value_id;
@@ -84,7 +80,6 @@ error_log("ProductAttributes - getValue - attribute_id[$attribute_id] value_id[$
         $pdoDb->addSimpleWhere("id", $id);
         $pdoDb->setSelectList("visible");
         $attribute = $pdoDb->request("SELECT", "products_attributes");
-error_log("ProductAttributes - getVisible() - id[$id] addribute - " . print_r($attribute,true));
         return ($attribute['visible'] == ENABLED);
     }
 
@@ -94,8 +89,26 @@ error_log("ProductAttributes - getVisible() - id[$id] addribute - " . print_r($a
      */
     public static function getAll() {
         global $pdoDb;
-        $result = $pdoDb->request("SELECT", "products_attributes");
-error_log("ProductAttributes - getAll() - result - " . print_r($result,true));
-        return $result;
+        return $pdoDb->request("SELECT", "products_attributes");
+    }
+
+    /**
+     * Get matrix of product attributes.
+     * @return array Matrix values array of <i>product_attributes</i> with associated
+     *         <i>products_values</i>.
+     */
+    public static function getMatrix() {
+        global $pdoDb;
+        $fn = new FunctionStmt(null,"CONCAT(a.id, '-', v.id)","id");
+        $pdoDb->addToFunctions($fn);
+
+        $fn = new FunctionStmt(null, "CONCAT(a.name, '-', v.value)", "display");
+        $pdoDb->addToFunctions($fn);
+
+        $jn = new Join("LEFT", "products_values", "v");
+        $jn->addSimpleItem("a.id", new DbField("v.attribute_id"));
+        $pdoDb->addToJoins($jn);
+
+        return $pdoDb->request("SELECT", "products_attributes", "a");
     }
 }

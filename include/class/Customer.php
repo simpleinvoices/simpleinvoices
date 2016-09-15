@@ -109,20 +109,13 @@ class Customer {
         $pdoDb->addSimpleWhere("s.name", "customer", "AND");
         $pdoDb->addSimpleWhere("s.domain_id", domain_id::get());
 
-        $jn = new Join("INNER", "customer", "c");
+        $jn = new Join("LEFT", "customers", "c");
         $jn->addSimpleItem("c.id", new DbField("s.value"), "AND");
         $jn->addSimpleItem("c.domain_id", new DbField("s.domain_id"));
         $pdoDb->addToJoins($jn);
 
-        $pdoDb->setSelectList(array("c.name AS name", "C.id"));
-
+        $pdoDb->setSelectList(array("c.name AS name", "s.value AS id"));
         $rows = $pdoDb->request("SELECT", "system_defaults", "s");
-/*
-        $sql = "SELECT c.name, c.id AS name FROM " . TB_PREFIX . "customers c, " . TB_PREFIX . "system_defaults s
-                WHERE (s.name = 'customer' AND c.id = s.value AND c.domain_id = s.domain_id AND s.domain_id = :domain_id)";
-        $sth = dbQuery($sql, ':domain_id', $domain_id);
-        return $sth->fetch();
-*/
         return $rows[0];
     }
     
