@@ -1,1 +1,0 @@
-Chmod My parent folder to 777

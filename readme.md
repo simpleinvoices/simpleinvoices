@@ -3,10 +3,13 @@
 [![Join the chat at https://gitter.im/simpleinvoices/simpleinvoices](https://badges.gitter.im/simpleinvoices/simpleinvoices.svg)](https://gitter.im/simpleinvoices/simpleinvoices?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 Making invoicing rock since '05.
 
-## Cloning
-SimpleInvoices using gitsubmodules to load the Zend Framework.  
-When cloning the repository use the `--recursive` option to ensure that Zend is retrieved.  
-`git clone --recursive git@github.com:simpleinvoices/simpleinvoices.git`
+## Composer (Dependencies)
+SimpleInvoices uses composer to load and update dependencies.
+On your first install run
+`composer install`
+
+You may also update the dependencies by running 
+`composer update`
 
 ## Downloads
 * Bleeding Edge Code: [SI Git Master](http://github.com/simpleinvoices/simpleinvoices/archive/master.zip) (.zip)
