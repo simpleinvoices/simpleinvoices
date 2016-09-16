@@ -3,16 +3,23 @@ class export {
     public $biller_id;
     public $customer_id;
     public $domain_id;
-    public $file_type;
-    public $file_location;
+    public $end_date;
     public $file_name;
+    public $file_type;
     public $format;
     public $id;
     public $module;
     public $start_date;
 
+    private $download;
+
     public function __construct() {
-        $this->domain_id = domain_id::get($this->domain_id);
+        $this->domain_id = domain_id::get();
+        $this->download = false;
+    }
+
+    public function setDownload($download) {
+        $this->download = $download;
     }
 
     public function showData($data) {
@@ -27,8 +34,8 @@ class export {
                 break;
 
             case "pdf":
-                pdfThis($data, $this->file_location, $this->file_name);
-                if ($this->file_location == "download") exit();
+                pdfThis($data, $this->file_name, $this->download);
+                if ($this->download) exit();
                 break;
 
             case "file":
@@ -93,7 +100,7 @@ class export {
 
                 $invoice_all = $invoice->select_all('count');
                 $invoices    = $invoice_all->fetchAll();
-                $statement   = array ("total" => 0, "owing" => 0, "paid" => 0);
+                $statement   = array("total" => 0, "owing" => 0, "paid" => 0);
                 foreach ($invoices as $row) {
                     $statement['total'] += $row['invoice_total'];
                     $statement['owing'] += $row['owing'];
@@ -221,12 +228,12 @@ class export {
         return $data;
     }
 
-    function execute() {
+    public function execute() {
         $this->showData($this->getData());
     }
 
     // assign the language and set the locale from the preference
-    function assignTemplateLanguage($preference) {
+    public function assignTemplateLanguage($preference) {
         // get and assign the language file from the preference table
         $pref_language = $preference['language'];
         if (isset($pref_language)) {

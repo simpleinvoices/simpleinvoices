@@ -281,29 +281,30 @@ require_once (HTML2PS_DIR . 'autofix.url.php');
 
 require_once (HTML2PS_DIR . 'fetcher._interface.class.php');
 require_once (HTML2PS_DIR . 'features/_factory.php');
-class Pipeline {
-    var $fetchers;
-    var $data_filters;
-    var $error_message;
-    var $parser;
-    var $pre_tree_filters;
-    var $layout_engine;
-    var $post_tree_filters;
-    var $output_driver;
-    var $output_filters;
-    var $destination;
-    var $_base_url;
-    var $_page_at_rules;
-    var $_counters;
-    var $_footnotes;
-    var $_cssState;
-    var $_css;
-    var $_defaultCSS;
-    var $_dispatcher;
-    var $_current_page_name;
-    var $_page_break_strategy;
 
-    function Pipeline() {
+class Pipeline {
+    public $fetchers;
+    public $data_filters;
+    public $error_message;
+    public $parser;
+    public $pre_tree_filters;
+    public $layout_engine;
+    public $post_tree_filters;
+    public $output_driver;
+    public $output_filters;
+    public $destination;
+    public $_base_url;
+    public $_page_at_rules;
+    public $_counters;
+    public $_footnotes;
+    public $_cssState;
+    public $_css;
+    public $_defaultCSS;
+    public $_dispatcher;
+    public $_current_page_name;
+    public $_page_break_strategy;
+
+    public function __construct() {
         $this->_counters = array();
         $this->_footnotes = array();
 
@@ -328,28 +329,27 @@ class Pipeline {
         $this->_page_break_strategy = new StrategyPageBreakSimple();
     }
 
-    function add_feature($feature_name, $params = array()) {
+    public function add_feature($feature_name, $params = array()) {
         $feature_object = & FeatureFactory::get($feature_name);
         if (is_null($feature_object)) {
             die(sprintf('No feature "%s" found', $feature_name));
         }
-
         $feature_object->install($this, $params);
     }
 
-    function add_fetcher(&$fetcher) {
+    public function add_fetcher(&$fetcher) {
         array_unshift($this->fetchers, $fetcher);
     }
 
-    function calculate_page_heights(&$media, &$box) {
+    public function calculate_page_heights(&$media, &$box) {
         return $this->_page_break_strategy->run($this, $media, $box);
     }
 
-    function clear_box_id_map() {
+    public function clear_box_id_map() {
         $GLOBALS['__html_box_id_map'] = array();
     }
 
-    function close() {
+    public function close() {
         $this->_dispatcher->fire('after-batch', array('pipeline' => &$this));
 
         $this->output_driver->close();
@@ -357,11 +357,10 @@ class Pipeline {
         $this->output_driver->release();
 
         // Non HTML-specific cleanup
-        //
         Image::clear_cache();
     }
 
-    function configure($options) {
+    public function configure($options) {
         // @formatter:off
         $defaults = array('compress'                => false,
                           'cssmedia'                => 'screen',
@@ -393,8 +392,8 @@ class Pipeline {
                           'transparency_workaround' => false);
         // @formatter:on
 
-        // As a reminder: If the input arrays have the same string keys, then the later value for that key will
-        // overwrite the previous one.
+        // As a reminder: If the input arrays have the same string keys, then the later value
+        // for that key will overwrite the previous one.
         $GLOBALS['g_config'] = array_merge($defaults, $options);
 
         // Note that CSS media names should be case-insensitive
@@ -407,38 +406,39 @@ class Pipeline {
         }
     }
 
-    function _addFootnote(&$note_call) {
+    public function _addFootnote(&$note_call) {
         $this->_footnotes[] = & $note_call;
     }
+/*
+    public function _fillContent($content) {
+        $filled = "";
+    
+        while (preg_match("/^.*?('.*?'|\".*?\"|counter\(.*?\))(.*)$/", $content, $matches)) {
+            $data = $matches[1];
+            $content = $matches[2];
+        
+            if ($data{0} != '\'' && $data{0} != '"') {
+                $filled .= $this->_fillContentCounter($data);
+            } else {
+                $filled .= $this->_fillContentString($data);
+            }
+        }
+        return $filled;
+    }
 
-    // function _fillContent($content) {
-    // $filled = "";
+    public function _fillContentString($content) {
+        $unescaped_content = css_process_escapes($content);
+        $unquoted_content = css_remove_value_quotes($unescaped_content);
+        return $unquoted_content;
+    }
 
-    // while (preg_match("/^.*?('.*?'|\".*?\"|counter\(.*?\))(.*)$/", $content, $matches)) {
-    // $data = $matches[1];
-    // $content = $matches[2];
+    public function _fillContentCounter($content) {
+        preg_match("/counter\((.*?)\)/", $content, $matches);
+        return $this->_getCounter($matches[1]);
+    }
+*/
 
-    // if ($data{0} != '\'' && $data{0} != '"') {
-    // $filled .= $this->_fillContentCounter($data);
-    // } else {
-    // $filled .= $this->_fillContentString($data);
-    // }
-    // }
-
-    // return $filled;
-    // }
-
-    // function _fillContentString($content) {
-    // $unescaped_content = css_process_escapes($content);
-    // $unquoted_content = css_remove_value_quotes($unescaped_content);
-    // return $unquoted_content;
-    // }
-
-    // function _fillContentCounter($content) {
-    // preg_match("/counter\((.*?)\)/", $content, $matches);
-    // return $this->_getCounter($matches[1]);
-    // }
-    function &get_counters() {
+    public function &get_counters() {
         $counter_collection =  new CSSCounterCollection();
 
         foreach ($this->_counters as $counter_name => $counter_value) {
@@ -450,38 +450,35 @@ class Pipeline {
         return $counter_collection;
     }
 
-    function &get_dispatcher() {
+    public function &get_dispatcher() {
         return $this->_dispatcher;
     }
 
-    function _getCounter($counter) {
+    private function _getCounter($counter) {
         if (isset($this->_counters[$counter])) {
             return $this->_counters[$counter];
         }
 
-        /**
-         * CSS 2.1: Counters that are not in the scope of any
-         * 'counter-reset', are assumed to have been reset to 0 by a
-         * 'counter-reset' on the root element.
-         */
+        // CSS 2.1: Counters that are not in the scope of any 'counter-reset', are
+        // assumed to have been reset to 0 by a 'counter-reset' on the root element.
         return 0;
     }
 
-    function _resetCounter($counter, $value) {
+    private function _resetCounter($counter, $value) {
         $this->_counters[$counter] = $value;
     }
 
-    function _incrementCounter($counter, $value) {
+    private function _incrementCounter($counter, $value) {
         $this->_counters[$counter] += $value;
     }
 
-    function add_at_rule_page($at_rule) {
+    private function add_at_rule_page($at_rule) {
         $selector = & $at_rule->getSelector();
         $type = $selector->get_type();
         $this->_page_at_rules[$type][] = $at_rule;
     }
 
-    function _reset_page_at_rules() {
+    private function _reset_page_at_rules() {
         $this->_page_at_rules = array(CSS_PAGE_SELECTOR_ALL   => array(),
                                       CSS_PAGE_SELECTOR_FIRST => array(),
                                       CSS_PAGE_SELECTOR_LEFT  => array(),
@@ -489,40 +486,39 @@ class Pipeline {
                                       CSS_PAGE_SELECTOR_NAMED => array());
     }
 
-    function &getDefaultCSS() {
+    public function &getDefaultCSS() {
         return $this->_defaultCSS;
     }
 
-    function &getCurrentCSS() {
+    public function &getCurrentCSS() {
         return $this->_css[0];
     }
 
-    function &getCurrentCSSState() {
+    public function &getCurrentCSSState() {
         return $this->_cssState[0];
     }
 
-    function pushCSS() {
+    public function pushCSS() {
         array_unshift($this->_css, new CSSRuleset());
     }
 
-    function popCSS() {
+    public function popCSS() {
         array_shift($this->_css);
     }
 
     /**
-     * Note that different pages may define different margin boxes (for
-     * example, left and right pages may have different headers). In
-     * this case, we should process @page rules in order of their
-     * specificity (no selector < :left / :right < :first) and extract
-     * margin boxes to be drawn
-     *
-     * @param $page_no Integer current page index (1-based)
-     * @param $media
+     * Different pages may define different margin boxes (for example, left and right pages
+     * may have different headers). In this case, we should process <i>@page</i> rules in order
+     * of their specificity (<i>no selector &lt; :left</i> / <i>:right &lt; :first</i>) and
+     * extract margin boxes to be drawn.
+     * @param integer $page_no Current page index (1-based)
+     * @param mixed $media
      */
-    function render_margin_boxes($page_no, &$media) {
+    public function render_margin_boxes($page_no, &$media) {
         $boxes = & $this->reflow_margin_boxes($page_no, $media);
 
         foreach ($boxes as $selector => $box) {
+            if ($box) {} // Eliminate unused warning
             $boxes[$selector]->show($this->output_driver);
         }
 
@@ -533,7 +529,7 @@ class Pipeline {
         unset($boxes);
     }
 
-    function get_page_media($page_no, &$media) {
+    public function get_page_media($page_no, &$media) {
         $page_rules = & $this->get_page_rules($page_no);
         $size_landscape = $page_rules->getPropertyValue(CSS_SIZE);
         if (!is_null($size_landscape)) {
@@ -576,16 +572,14 @@ class Pipeline {
         }
     }
 
-    function &get_page_rules($page_no) {
+    public function &get_page_rules($page_no) {
         $collection =  new CSSPropertyCollection();
 
         foreach ($this->_page_at_rules[CSS_PAGE_SELECTOR_ALL] as $rule) {
             $collection->merge($rule->css);
         }
 
-        /**
-         * Check which one of :right/:left selector is applicable (assuming that first page matches :right)
-         */
+        // Check which one of :right/:left selector is applicable (assuming that first page matches :right)
         if ($page_no % 2 == 0) {
             foreach ($this->_page_at_rules[CSS_PAGE_SELECTOR_LEFT] as $rule) {
                 $collection->merge($rule->css);
@@ -605,21 +599,21 @@ class Pipeline {
         return $collection;
     }
 
-    function &reflow_page_box($page_no, &$media) {
+    public function &reflow_page_box($page_no, &$media) {
         $rules = & $this->get_page_rules($page_no);
         $box = & BoxPage::create($this, $rules);
         $box->reflow($media);
         return $box;
     }
 
-    function render_page_box($page_no, &$media) {
+    public function render_page_box($page_no, &$media) {
         $box = & $this->reflow_page_box($page_no, $media);
         $box->show($this->output_driver);
         $box->destroy();
         unset($box);
     }
 
-    function &reflow_margin_boxes($page_no, &$media) {
+    public function &reflow_margin_boxes($page_no, &$media) {
         $at_rules = $this->_getMarginBoxes($page_no, $media);
 
         $boxes = array();
@@ -629,6 +623,7 @@ class Pipeline {
         }
 
         foreach ($boxes as $selector => $box) {
+            if ($box) {} // Eliminate unused warning
             $linebox_started = false;
             $previous_whitespace = false;
             $boxes[$selector]->reflow_whitespace($linebox_started, $previous_whitespace);
@@ -646,21 +641,17 @@ class Pipeline {
      * Note that "+" operation on arrays will preserve existing elements; thus
      * we need to process @page rules in order of decreasing specificity
      */
-    function _getMarginBoxes($page_no, $media) {
+    private function _getMarginBoxes($page_no, $media) {
         $applicable_margin_boxes = array();
 
-        /**
-         * Check if :first selector is applicable
-         */
+        // Check if :first selector is applicable
         if ($page_no == 1) {
             foreach ($this->_page_at_rules[CSS_PAGE_SELECTOR_FIRST] as $rule) {
                 $applicable_margin_boxes = $applicable_margin_boxes + $rule->getAtRuleMarginBoxes();
             }
         }
 
-        /**
-         * Check which one of :right/:left selector is applicable (assuming that first page matches :right)
-         */
+        // Check which one of :right/:left selector is applicable (assuming that first page matches :right)
         if ($page_no % 2 == 0) {
             foreach ($this->_page_at_rules[CSS_PAGE_SELECTOR_LEFT] as $rule) {
                 $applicable_margin_boxes = $applicable_margin_boxes + $rule->getAtRuleMarginBoxes();
@@ -671,108 +662,105 @@ class Pipeline {
             }
         }
 
-        /**
-         * Extract margin boxes from plain @page rules
-         */
+        // Extract margin boxes from plain @page rules
         foreach ($this->_page_at_rules[CSS_PAGE_SELECTOR_ALL] as $rule) {
             $applicable_margin_boxes = $applicable_margin_boxes + $rule->getAtRuleMarginBoxes();
         }
 
         if (!isset($applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_TOP])) {
             $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_TOP] =
-        new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_TOP,
-                            $this);
+                new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_TOP, $this);
         }
 
         if (!isset($applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_TOP_LEFT_CORNER])) {
             $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_TOP_LEFT_CORNER] =
-              new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_TOP_LEFT_CORNER, $this);
+                new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_TOP_LEFT_CORNER, $this);
         }
 
         if (!isset($applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_TOP_LEFT])) {
             $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_TOP_LEFT] =
-              new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_TOP_LEFT, $this);
+                new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_TOP_LEFT, $this);
         }
 
         if (!isset($applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_TOP_CENTER])) {
             $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_TOP_CENTER] =
-              new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_TOP_CENTER, $this);
+                new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_TOP_CENTER, $this);
         }
 
         if (!isset($applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_TOP_RIGHT])) {
             $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_TOP_RIGHT] =
-              new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_TOP_RIGHT, $this);
+                new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_TOP_RIGHT, $this);
         }
 
         if (!isset($applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_TOP_RIGHT_CORNER])) {
             $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_TOP_RIGHT_CORNER] =
-              new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_TOP_RIGHT_CORNER, $this);
+                new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_TOP_RIGHT_CORNER, $this);
         }
 
         if (!isset($applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_BOTTOM])) {
             $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_BOTTOM] =
-              new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_BOTTOM, $this);
+                new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_BOTTOM, $this);
         }
 
         if (!isset($applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_BOTTOM_LEFT_CORNER])) {
             $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_BOTTOM_LEFT_CORNER] =
-              new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_BOTTOM_LEFT_CORNER, $this);
+                new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_BOTTOM_LEFT_CORNER, $this);
         }
 
         if (!isset($applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_BOTTOM_LEFT])) {
             $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_BOTTOM_LEFT] =
-              new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_BOTTOM_LEFT, $this);
+                new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_BOTTOM_LEFT, $this);
         }
 
         if (!isset($applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_BOTTOM_CENTER])) {
             $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_BOTTOM_CENTER] =
-              new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_BOTTOM_CENTER, $this);
+                new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_BOTTOM_CENTER, $this);
         }
 
         if (!isset($applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_BOTTOM_RIGHT])) {
             $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_BOTTOM_RIGHT] =
-              new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_BOTTOM_RIGHT, $this);
+                new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_BOTTOM_RIGHT, $this);
         }
 
         if (!isset($applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_BOTTOM_RIGHT_CORNER])) {
             $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_BOTTOM_RIGHT_CORNER] =
-              new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_BOTTOM_RIGHT_CORNER, $this);
+                new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_BOTTOM_RIGHT_CORNER, $this);
         }
 
         if (!isset($applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_LEFT_TOP])) {
             $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_LEFT_TOP] =
-              new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_LEFT_TOP, $this);
+                new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_LEFT_TOP, $this);
         }
 
         if (!isset($applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_LEFT_MIDDLE])) {
             $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_LEFT_MIDDLE] =
-              new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_LEFT_MIDDLE, $this);
+                new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_LEFT_MIDDLE, $this);
         }
 
         if (!isset($applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_LEFT_BOTTOM])) {
             $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_LEFT_BOTTOM] =
-              new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_LEFT_BOTTOM, $this);
+                new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_LEFT_BOTTOM, $this);
         }
 
         if (!isset($applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_RIGHT_TOP])) {
             $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_RIGHT_TOP] =
-              new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_RIGHT_TOP, $this);
+                new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_RIGHT_TOP, $this);
         }
 
         if (!isset($applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_RIGHT_MIDDLE])) {
             $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_RIGHT_MIDDLE] =
-              new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_RIGHT_MIDDLE, $this);
+                new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_RIGHT_MIDDLE, $this);
         }
 
         if (!isset($applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_RIGHT_BOTTOM])) {
             $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_RIGHT_BOTTOM] =
-              new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_RIGHT_BOTTOM, $this);
+                new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_RIGHT_BOTTOM, $this);
         }
 
         return $applicable_margin_boxes;
     }
 
-    function _process_item($data_id, &$media, $offset = 0) {
+    private function _process_item($data_id, &$media, $offset = 0) {
         $this->_dispatcher->fire('before-batch-item', array('pipeline' => &$this));
 
         $context = null;
@@ -797,7 +785,7 @@ class Pipeline {
         return true;
     }
 
-    function _show_item(&$box, $offset, &$context, &$media, &$postponed_filter) {
+    private function _show_item(&$box, $offset, &$context, &$media, &$postponed_filter) {
         $context->sort_absolute_positioned_by_z_index();
 
         $this->_dispatcher->fire('before-page-heights',
@@ -842,10 +830,8 @@ class Pipeline {
 
             $this->output_driver->save();
 
-            /**
-             * Note that margin boxes should be rendered before 'setup_clip', as it will trim all
-             * content rendered outside the 'main' page area
-             */
+            // Note that margin boxes should be rendered before 'setup_clip', as it will trim all
+            // content rendered outside the 'main' page area
             $this->render_margin_boxes($i + 1, $media);
             $this->render_page_box($i + 1, $media);
 
@@ -862,10 +848,8 @@ class Pipeline {
                 return null;
             }
 
-            /**
-             * Show postponed boxes - relative and floating boxes, as they should be
-             * shown over boxes on the same layer
-             */
+            // Show postponed boxes - relative and floating boxes, as they should be
+            // shown over boxes on the same layer
             $this->output_driver->show_postponed();
 
             $this->renderAbsolutePositioned($context);
@@ -889,7 +873,7 @@ class Pipeline {
                                        'document' => &$box));
     }
 
-    function _output() {
+    private function _output() {
         $temporary_output_filename = $this->output_driver->get_filename();
 
         for ($i = 0; $i < count($this->output_filters); $i++) {
@@ -912,15 +896,15 @@ class Pipeline {
         unlink($temporary_output_filename);
     }
 
-    function set_destination(&$destination) {
+    public function set_destination(&$destination) {
         $this->destination = & $destination;
     }
 
-    function set_output_driver(&$output_driver) {
+    public function set_output_driver(&$output_driver) {
         $this->output_driver = & $output_driver;
     }
 
-    function &fetch($data_id) {
+    public function &fetch($data_id) {
         if (count($this->fetchers) == 0) {
             ob_start();
             include (HTML2PS_DIR . '/templates/error._no_fetchers.tpl');
@@ -948,14 +932,13 @@ class Pipeline {
         return $null;
     }
 
-    function process($data_id, &$media) {
+    public function process($data_id, &$media) {
         return $this->process_batch(array($data_id), $media);
     }
 
-    function _setupScales(&$media) {
-        global $g_config,
-               $g_px_scale,
-               $g_pt_scale;
+    public function _setupScales(&$media) {
+        global $g_config, $g_px_scale, $g_pt_scale;
+        if ($g_pt_scale) {} // eliminate unused warning
 
         $g_px_scale = floor(mm2pt($media->width() - $media->margins['left'] - $media->margins['right'])) / $media->pixels;
         if ($g_config['scalepoints']) {
@@ -966,45 +949,29 @@ class Pipeline {
     }
 
     /**
-     * Processes an set of URLs ot once; every URL is rendered on the separate page and
-     * merged to one PDF file.
-     *
-     * Note: to reduce peak memory requirement, URLs are processed one-after-one.
-     *
-     * @param Array $data_id_array Array of page identifiers to be processed (usually URLs or files paths)
+     * Processes a set of URLs once; every URL is rendered on a separate page and
+     * merged to one PDF file. Note: to reduce peak memory requirement, URLs are
+     * processed one-after-one.
+     * @param array $data_id_array Array of page identifiers to be processed (usually URLs or files paths)
      * @param Media $media Object describing the media to render for (size, margins, orientaiton & resolution)
      */
-    function process_batch($data_id_array, &$media) {
+    public function process_batch($data_id_array, &$media) {
         $this->clear_box_id_map();
-
-        // Save and disable magic_quotes_runtime
-        $mq_runtime = get_magic_quotes_runtime();
-        set_magic_quotes_runtime(0);
-
         $this->_prepare($media);
-
         $this->_dispatcher->fire('before-batch', array('pipeline' => &$this));
 
-        $i = 0;
         $offset = 0;
         foreach ($data_id_array as $data_id) {
             $this->_process_item($data_id, $media, $offset);
-
-            $i++;
             $offset = $this->output_driver->offset;
         }
-
         $this->close();
-
-        // Restore magic_quotes_runtime setting
-        set_magic_quotes_runtime($mq_runtime);
-
         return true;
     }
 
-    function error_message() {
-        $message = file_get_contents(HTML2PS_DIR . '/templates/error._header.tpl');
-
+    public function error_message() {
+        // @formatter:off
+        $message  = file_get_contents(HTML2PS_DIR . '/templates/error._header.tpl');
         $message .= $this->error_message;
 
         for ($i = 0; $i < count($this->fetchers); $i++) {
@@ -1012,32 +979,32 @@ class Pipeline {
         }
 
         $message .= $this->output_driver->error_message();
-
         $message .= file_get_contents(HTML2PS_DIR . '/templates/error._footer.tpl');
+        // @formatter:on
         return $message;
     }
 
-    function push_base_url($url) {
+    public function push_base_url($url) {
         array_unshift($this->_base_url, $url);
     }
 
-    function pop_base_url() {
+    public function pop_base_url() {
         array_shift($this->_base_url);
     }
 
-    function get_base_url() {
+    public function get_base_url() {
         return $this->_base_url[0];
     }
 
-    function &get_output_driver() {
+    public function &get_output_driver() {
         return $this->output_driver;
     }
 
-    function guess_url($src) {
+    public function guess_url($src) {
         return guess_url($src, $this->get_base_url());
     }
 
-    function renderFootnotes() {
+    public function renderFootnotes() {
         // Render every footnote defined (note-call element is visible) on a current page
         $footnote_y = $this->output_driver->getFootnoteTop() - FOOTNOTE_LINE_TOP_GAP - FOOTNOTE_LINE_BOTTOM_GAP;
         $footnote_x = $this->output_driver->getPageLeft();
@@ -1059,16 +1026,15 @@ class Pipeline {
         if ($footnotes_found) {
             $this->output_driver->setrgbcolor(0, 0, 0);
             $this->output_driver->moveto($this->output_driver->getPageLeft(),
-                            $this->output_driver->getFootnoteTop() - FOOTNOTE_LINE_TOP_GAP);
-            $this->output_driver->lineto(
-                            $this->output_driver->getPageLeft() +
-                                             $this->output_driver->getPageWidth() * FOOTNOTE_LINE_PERCENT / 100,
-                                            $this->output_driver->getFootnoteTop() - FOOTNOTE_LINE_TOP_GAP);
+                                         $this->output_driver->getFootnoteTop() - FOOTNOTE_LINE_TOP_GAP);
+            $this->output_driver->lineto($this->output_driver->getPageLeft() +
+                                            $this->output_driver->getPageWidth() * FOOTNOTE_LINE_PERCENT / 100,
+                                         $this->output_driver->getFootnoteTop() - FOOTNOTE_LINE_TOP_GAP);
             $this->output_driver->stroke();
         }
     }
 
-    function renderAbsolutePositioned(&$context) {
+    public function renderAbsolutePositioned(&$context) {
         for ($j = 0, $size = count($context->absolute_positioned); $j < $size; $j++) {
             $current_box = & $context->absolute_positioned[$j];
             if ($current_box->getCSSProperty(CSS_VISIBILITY) === VISIBILITY_VISIBLE) {
@@ -1083,7 +1049,7 @@ class Pipeline {
         $this->output_driver->show_postponed_in_absolute();
     }
 
-    function renderFixedPositioned(&$context) {
+    public function renderFixedPositioned(&$context) {
         for ($j = 0, $size = count($context->fixed_positioned); $j < $size; $j++) {
             $current_box = & $context->fixed_positioned[$j];
             if ($current_box->getCSSProperty(CSS_VISIBILITY) === VISIBILITY_VISIBLE) {
@@ -1098,13 +1064,13 @@ class Pipeline {
         $this->output_driver->show_postponed_in_fixed();
     }
 
-    function _prepare(&$media) {
+    private function _prepare(&$media) {
         $this->_setupScales($media);
         $GLOBALS['g_media'] = & $media;
         $this->output_driver->reset($media);
     }
 
-    function &_layout_item($data_id, &$media, $offset, &$context, &$postponed_filter) {
+    private function &_layout_item($data_id, &$media, $offset, &$context, &$postponed_filter) {
         $this->_reset_page_at_rules();
 
         $css_cache = CSSCache::get();
@@ -1139,19 +1105,11 @@ class Pipeline {
                                        'document' => &$box,
                                        'media'    => $media));
 
-        /**
-         * Run obligatory tree filters
-         */
-
-        /**
-         * height-constraint processing filter;
-         */
+        // Height-constraint processing filter;
         $filter = new PreTreeFilterHeightConstraint();
         $filter->process($box, $data, $this);
 
-        /**
-         * Footnote support filter
-         */
+        // Footnote support filter
         $filter = new PreTreeFilterFootnotes();
         $filter->process($box, $data, $this);
 
@@ -1162,9 +1120,7 @@ class Pipeline {
 
         $context = new FlowContext();
 
-        /**
-         * Extract absolute/fixed positioned boxes
-         */
+        // Extract absolute/fixed positioned boxes
         $positioned_filter = new PostTreeFilterPositioned($context);
         $positioned_filter->process($box, null, $this);
 
@@ -1188,17 +1144,15 @@ class Pipeline {
         return $box;
     }
 
-    function &getDispatcher() {
+    public function &getDispatcher() {
         return $this->_dispatcher;
     }
 
-    function get_current_page_name() {
+    public function get_current_page_name() {
         return $this->_current_page_name;
     }
 
-    function set_current_page_name($name) {
+    public function set_current_page_name($name) {
         $this->_current_page_name = $name;
     }
 }
-
-?>

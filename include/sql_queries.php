@@ -217,10 +217,9 @@ function lastInsertId() {
 
     if ($dbInfo->getAdapter() == 'pgsql') {
         $sql = 'SELECT lastval()';
-    } elseif (adapter == 'mysql') {
+    } else {
         $sql = 'SELECT last_insert_id()';
     }
-    // echo $sql;
     $sth = $dbh->prepare($sql);
     $sth->execute();
     return $sth->fetchColumn();
@@ -1891,7 +1890,16 @@ function getNumberOfDoneSQLPatches() {
     return $patches['count'];
 }
 
-function pdfThis($html, $file_location = "", $pdfname) {
+/**
+ * Runs the HTML->PDF conversion with default settings
+ * Warning: if you have any files (like CSS stylesheets and/or images referenced by this file,
+ * use absolute links (like http://my.host/image.gif).
+ * @param $path_to_html String path to source html file.
+ * @param $path_to_pdf String path to file to save generated PDF to.
+ * @param boolean $download <b>true</b> sets <i>DestinationDownload</i> for the output destination.
+ *        <b>false</b> sets <i>DestinationFile</i> for the output destination.
+ */ 
+function pdfThis($html_to_pdf, $pdfname, $download) {
     global $config;
 
     // set_include_path("../../../../library/pdf/");
@@ -1903,20 +1911,11 @@ function pdfThis($html, $file_location = "", $pdfname) {
     require_once ("./include/init.php"); // for getInvoice() and getPreference()
 
     if (!function_exists('convert_to_pdf')) {
-
-        /**
-         * Runs the HTML->PDF conversion with default settings
-         *
-         * Warning: if you have any files (like CSS stylesheets and/or images referenced by this file,
-         * use absolute links (like http://my.host/image.gif).
-         *
-         * @param $path_to_html String path to source html file.
-         * @param $path_to_pdf String path to file to save generated PDF to.
-         */
-        function convert_to_pdf($html_to_pdf, $pdfname, $file_location = "") {
+        function convert_to_pdf($html_to_pdf, $pdfname, $download) {
             global $config;
 
-            $destination = $file_location == "download" ? "DestinationDownload" : "DestinationFile";
+            $destination = $download ? "DestinationDownload" : "DestinationFile";
+
             // Handles the saving generated PDF to user-defined output file on server
             if (!class_exists('MyFetcherLocalFile')) {
                 class MyFetcherLocalFile extends Fetcher {
@@ -1987,8 +1986,9 @@ function pdfThis($html, $file_location = "", $pdfname) {
         }
     }
 
-    convert_to_pdf($html, $pdfname, $file_location);
+    convert_to_pdf($html_to_pdf, $pdfname, $download);
 }
+
 
 function getNumberOfDonePatches() {
     $check_patches_sql = "SELECT max(sql_patch_ref) AS count FROM " . TB_PREFIX . "sql_patchmanager ";

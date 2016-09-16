@@ -18,17 +18,15 @@ global $smarty;
 checkLogin();
 
 // @formatter:off
-$invoice_id = $_GET['id'];
-$invoiceobj = new invoice();
-$invoice    = $invoiceobj->select($invoice_id);
-
+$invoice_id  = $_GET['id'];
+$invoiceobj  = new invoice();
+$invoice     = $invoiceobj->select($invoice_id);
 $preference  = getPreference($invoice['preference_id']);
 $biller      = Biller::select($invoice['biller_id']);
 $customer    = Customer::get($invoice['customer_id']);
 
 $spc2us_pref   = str_replace(" ", "_", $invoice['index_name']);
 $pdf_file_name = $spc2us_pref  . '.pdf';
-
 $error = false;
 $message = "Unable to process email request.";
 if ($_GET['stage'] == 2 ) {
@@ -39,8 +37,6 @@ if ($_GET['stage'] == 2 ) {
     $export->id            = $invoice_id;
     $export->execute();
 
-    $attachments = $_POST['attachments'];
-
     $email = new Email();
     $email->format        = 'invoice';
     $email->notes         = $_POST['email_notes'];
@@ -49,7 +45,7 @@ if ($_GET['stage'] == 2 ) {
     $email->to            = $_POST['email_to'];
     $email->bcc           = $_POST['email_bcc'];
     $email->subject       = $_POST['email_subject'];
-    $email->attachments   = $attachments;
+    $email->attachment    = $pdf_file_name;
     $message = $email->send();
 
 } else if ($_GET['stage'] == 3 ) {

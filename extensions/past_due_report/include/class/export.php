@@ -1,19 +1,25 @@
 <?php
 class export {
-    public $format;
-    public $file_type;
-    public $file_location;
-    public $file_name;
-    public $module;
-    public $id;
-    public $start_date;
-    public $end_date;
     public $biller_id;
     public $customer_id;
     public $domain_id;
+    public $end_date;
+    public $file_name;
+    public $file_type;
+    public $format;
+    public $id;
+    public $module;
+    public $start_date;
+
+    private $download;
 
     public function __construct() {
-        $this->domain_id = domain_id::get($this->domain_id);
+        $this->domain_id = domain_id::get();
+        $this->download = false;
+    }
+
+    public function setDownload($download) {
+        $this->download = $download;
     }
 
     public function showData($data) {
@@ -28,8 +34,8 @@ class export {
                 break;
 
             case "pdf":
-                pdfThis($data, $this->file_location, $this->file_name);
-                if ($this->file_location == "download") exit();
+                pdfThis($data, $this->file_name, $this->download);
+                if ($this->download) exit();
                 break;
 
             case "file":
@@ -43,18 +49,18 @@ class export {
                 switch ($this->module) {
                     case "statement":
                         header('Content-Disposition: attachment; filename="statement.' .
-                                        addslashes($this->file_type) . '"');
+                               addslashes($this->file_type) . '"');
                         break;
 
                     case "payment":
                         header('Content-Disposition: attachment; filename="payment' .
-                                        addslashes($this->id . '.' . $this->file_type) . '"');
+                               addslashes($this->id . '.' . $this->file_type) . '"');
                         break;
 
                     default:
                         header('Content-Disposition: attachment; filename="' .
-                                        addslashes($preference['pref_inv_heading'] . $this->id . '.' .
-                                                        $this->file_type) . '"');
+                               addslashes($preference['pref_inv_heading'] . $this->id . '.' .
+                               $this->file_type) . '"');
                         break;
                 }
 
@@ -83,8 +89,8 @@ class export {
                     if (isset($this->start_date)) $invoice->start_date = $this->start_date;
                     if (isset($this->end_date)  ) $invoice->end_date   = $this->end_date;
                     if (isset($this->start_date) &&
-                                    isset($this->end_date)  ) $invoice->having     = "date_between";
-                                    $having_count = 1;
+                        isset($this->end_date)  ) $invoice->having     = "date_between";
+                    $having_count = 1;
                 }
 
                 if ($show_only_unpaid == "yes") {
@@ -94,7 +100,7 @@ class export {
 
                 $invoice_all = $invoice->select_all('count');
                 $invoices    = $invoice_all->fetchAll();
-                $statement   = array();
+                $statement   = array("total" => 0, "owing" => 0, "paid" => 0);
                 foreach ($invoices as $row) {
                     $statement['total'] += $row['invoice_total'];
                     $statement['owing'] += $row['owing'];
@@ -106,25 +112,25 @@ class export {
                 $billers          = $biller_details;
                 $customer_details = Customer::get($this->customer_id);
                 $this->file_name  = "statement_" .
-                                $this->biller_id     . "_" .
-                                $this->customer_id   . "_" .
-                                $invoice->start_date . "_" .
-                                $invoice->end_date;
+                                    $this->biller_id     . "_" .
+                                    $this->customer_id   . "_" .
+                                    $invoice->start_date . "_" .
+                                    $invoice->end_date;
 
-                                $smarty->assign('biller_id'       , $billers['id']);
-                                $smarty->assign('biller_details'  , $biller_details);
-                                $smarty->assign('billers'         , $billers);
-                                $smarty->assign('customer_id'     , $this->customer_id);
-                                $smarty->assign('customer_details', $customer_details);
-                                $smarty->assign('show_only_unpaid', $show_only_unpaid);
-                                $smarty->assign('filter_by_date'  , $this->filter_by_date);
-                                $smarty->assign('invoices'        , $invoices);
-                                $smarty->assign('start_date'      , $this->start_date);
-                                $smarty->assign('end_date'        , $this->end_date);
-                                $smarty->assign('statement'       , $statement);
+                $smarty->assign('biller_id'       , $billers['id']);
+                $smarty->assign('biller_details'  , $biller_details);
+                $smarty->assign('billers'         , $billers);
+                $smarty->assign('customer_id'     , $this->customer_id);
+                $smarty->assign('customer_details', $customer_details);
+                $smarty->assign('show_only_unpaid', $show_only_unpaid);
+                $smarty->assign('filter_by_date'  , $this->filter_by_date);
+                $smarty->assign('invoices'        , $invoices);
+                $smarty->assign('start_date'      , $this->start_date);
+                $smarty->assign('end_date'        , $this->end_date);
+                $smarty->assign('statement'       , $statement);
 
-                                $data = $smarty->fetch("." . $templatePath);
-                                break;
+                $data = $smarty->fetch("." . $templatePath);
+                break;
 
             case "payment":
                 $payment = Payment::select($this->id);
@@ -219,33 +225,34 @@ class export {
                 }
 
                 break;
-}
-// @formatter:on
+        }
+        // @formatter:on
 
-return $data;
-}
+        return $data;
+    }
 
-function execute() {
-    $this->showData($this->getData());
-}
+    public function execute() {
+        $this->showData($this->getData());
+    }
 
-// assign the language and set the locale from the preference
-function assignTemplateLanguage($preference) {
-    // get and assign the language file from the preference table
-    $pref_language = $preference['language'];
-    if (isset($pref_language)) {
-        $LANG = getLanguageArray($pref_language);
-        if (isset($LANG) && is_array($LANG) && count($LANG) > 0) {
-            global $smarty;
-            $smarty->assign('LANG', $LANG);
+    // assign the language and set the locale from the preference
+    public function assignTemplateLanguage($preference) {
+        // get and assign the language file from the preference table
+        $pref_language = $preference['language'];
+        if (isset($pref_language)) {
+            $LANG = getLanguageArray($pref_language);
+            if (isset($LANG) && is_array($LANG) && count($LANG) > 0) {
+                global $smarty;
+                $smarty->assign('LANG', $LANG);
+            }
+        }
+
+        // Overide config's locale with the one assigned from the preference table
+        $pref_locale = $preference['locale'];
+        if (isset($pref_language) && strlen($pref_locale) > 4) {
+            global $config;
+            $config->local->locale = $pref_locale;
         }
     }
+}
 
-    // Overide config's locale with the one assigned from the preference table
-    $pref_locale = $preference['locale'];
-    if (isset($pref_language) && strlen($pref_locale) > 4) {
-        global $config;
-        $config->local->locale = $pref_locale;
-    }
-}
-}

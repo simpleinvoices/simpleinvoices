@@ -1,15 +1,15 @@
 <?php
 class Email {
-    public $format;
-    public $notes;
-    public $file_location;
     public $attachment;
-    public $id;
-    public $start_date;
-    public $end_date;
     public $biller_id;
     public $customer_id;
     public $domain_id;
+    public $end_date;
+    public $file_location;
+    public $format;
+    public $id;
+    public $notes;
+    public $start_date;
 
     function send() {
         global $config;
@@ -26,7 +26,7 @@ class Email {
             // @formatter:on
         }
 
-        if (!$config->email->use_local_sendmail) {
+        if ($config->email->use_local_sendmail == false) {
             $transport = new Zend_Mail_Transport_Smtp($config->email->host, $authentication);
         }
 
@@ -54,12 +54,13 @@ class Email {
 
         if (!empty($this->attachment)) {
             // Create attachment
-            $content = file_get_contents($this->attachment);
+            $content = file_get_contents('./tmp/cache/' . $this->attachment);
             $at = $mail->createAttachment($content);
             $at->type = 'application/pdf';
             $at->disposition = Zend_Mime::DISPOSITION_ATTACHMENT;
             $at->filename = $this->attachment;
         }
+
         // Send e-mail through SMTP
         try {
             if ($config->email->use_local_sendmail) {
@@ -73,8 +74,8 @@ class Email {
             exit();
         }
 
-        // Remove temp invoice
-        unlink("./tmp/cache/$this->attachment");
+        // Remove temp invoice if present
+        if (!empty($this->attachment)) unlink("./tmp/cache/$this->attachment");
 
         switch ($this->format) {
             case "invoice":
@@ -133,18 +134,17 @@ class Email {
     }
 
     public function get_admin_email() {
-        $domain_id = domain_id::get($this->domain_id);
+        global $pdoDb;
 
-        // @formatter:off
-        $sql = "SELECT u.email " .
-               "FROM " . TB_PREFIX . "user u " .
-               "LEFT JOIN " . TB_PREFIX . "user_role r ON (u.role_id = r.id) " .
-               "WHERE r.name = administrator AND domain_id = :domain_id " .
-               "LIMIT 1";
-        // @formatter:on
-        $sth = dbQuery($sql, ':domain_id', $domain_id);
+        $jn = new Join("LEFT", "user_role", "r");
+        $jn->addSimpleItem("u.role_id", new DbField("r.id"));
+        $pdoDb->addToJoins($jn);
 
-        return $sth->fetchColumn();
+        $pdoDb->addSimpleWhere("r.name", "administrator", "AND");
+        $pdoDb->addSimpleWhere("domain_id", domain_id::get());
+
+        $pdoDb->setSelectList("u.email");
+        return $pdoDb->request("SELECT", "user", "u");
     }
 
     /**
