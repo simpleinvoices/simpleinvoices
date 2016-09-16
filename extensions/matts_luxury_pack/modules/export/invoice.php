@@ -4,10 +4,10 @@
 * 	invoice export page
 *
 * Authors:
-*	 yumatechnical@gmail.com
+*	 git0matt@gmail.com
 *
 * Last edited:
-* 	 2016-08-29
+* 	 2016-09-15
 *
 * License:
 *	 GPL v2 or above
@@ -24,7 +24,7 @@ $get_format    = (isset($_GET['format']  ) ? $_GET['format']   : "");
 $get_file_type = (isset($_GET['filetype']) ? $_GET['filetype'] : "");
 /**/
 #get the invoice id
-$export 				= new export2();
+$export 				= new myexport();
 $export->format 		= $get_format;
 if (isset($get_file_type))
 	$export->file_type 	= $get_file_type;

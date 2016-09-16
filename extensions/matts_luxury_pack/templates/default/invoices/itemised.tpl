@@ -267,6 +267,7 @@
 
 <script type="text/javascript">
 <!--{literal}
+var total;
 
 function optionsParseXML(myxml,tag1,tag2)
 {
@@ -291,6 +292,9 @@ function optionsParseXML(myxml,tag1,tag2)
 							break;
 						}
 					}
+				} else if (nodes[i].nodeName=='total')
+				{
+					total = nodes[i].textContent;
 				}
 			}
 		}
@@ -301,9 +305,12 @@ function optionsParseXML(myxml,tag1,tag2)
 function regenCustsSuccess(response)
 {
 	items = optionsParseXML(response, 'id', 'name');
-	$('#customer_id').append(items.join("\n"));					// fill customer list
-	$('#inserted_customer_street_address').innerHTML = '';
-	$('#inserted_customer_street_address').href = '';			// clear customer address link
+	var ele = $('#customer_id');
+	ele.append(items.join("\n"));								// fill customer list
+	ele.selectedIndex = total-1;								// select latest
+	var ele = $('#inserted_customer_street_address');
+	ele.innerHTML = '';
+	ele.href = '';												// clear customer address link
 {/literal}{if $defaults.use_ship_to}
 	items.unshift('<option value="0" selected="selected">{ $LANG.no_ship_to }</option>'+ "\n");
 	$('#ship_to_customer_id').append(items.join("\n"));			// fill ship-to-customer list
@@ -349,9 +356,10 @@ function regenProdsSuccess(response)
 		if (ele.selectedIndex == 0 || typeof ele.selectedIndex === "undefined" || answer)
 		{
 			items = optionsParseXML(response, 'id', 'description');
-			ele.options.length = 0;			// clear previous options
+			ele.options.length = 0;										// clear previous options
 			items.unshift('<option value="">&nbsp;</option>'+ "\n");
-			$(ele).append(items.join("\n"));	// fill products list
+			$(ele).append(items.join("\n"));							// fill products list
+			$(ele).selectedIndex = total-1;								// select last added
 		}
 	}
 }
@@ -384,8 +392,14 @@ $('.changeProduct').livequery('change', function () { 		// launch changeProductS
 	changeProductSelection(this);
 });
 
-$('.unit_price').livequery('blur', function () {
-	//$('#gmail_loading').show();
+$('.unit_price').livequery('blur', function (e) {
+	e.preventDefault();
+	if (document.selection) {
+		document.selection.empty();
+    } else if (window.getSelection) {
+		window.getSelection().removeAllRanges();
+    }
+	$('#gmail_loading').show();
 	var nowval = this.value;
 	var row = this.parentElement.parentElement.parentElement.id.substr(3);
 	var prodel = document.getElementById('products'+ row);/*$('#products'+ row);*/
@@ -405,15 +419,16 @@ $('.unit_price').livequery('blur', function () {
 			url: 		'index.php?module=products&view=update',				// send data to php script
 			type: 		'POST',
 			data:		'val='+ valu+ '&unit_price=' + nowval,
-			success: 	function(response) {		alert("{/literal}{$LANG.saved} ('"+ prod+ "' => '"+ nowval+"'){literal}");		},
+			/*success: 	function(response) {		alert("{/literal}{$LANG.saved} ('"+ prod+ "' => '"+ nowval+"'){literal}");		},*/
 			error: 		function(jqXHR, textStatus, errorThrown)
 						{
 							console.log('error');	console.log(errorThrown);
 							console.log(jqXHR);
 						},
-			complete: 	function() {				$('#gmail_loading').hide();		}
+			/*complete: 	function() {				$('#gmail_loading').hide();		}*/
 		});
 	}
+	$('#gmail_loading').hide();
 });
 //-->{/literal}
 </script>
