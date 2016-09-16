@@ -41,98 +41,53 @@ class invoice {
     }
 
     public function insert() {
-        $sql = "INSERT INTO " . TB_PREFIX . "invoices (
-                    index_id,
-                    domain_id,
-                    biller_id,
-                    customer_id,
-                    type_id,
-                    preference_id,
-                    date,
-                    note,
-                    custom_field1,
-                    custom_field2,
-                    custom_field3,
-                    custom_field4
-                )
-                VALUES
-                (
-                    :index_id,
-                    :domain_id,
-                    :biller_id,
-                    :customer_id,
-                    :type_id,
-                    :preference_id,
-                    :date,
-                    :note,
-                    :custom_field1,
-                    :custom_field2,
-                    :custom_field3,
-                    :custom_field4
-                )";
+        global $pdoDb;
 
-        $pref_group = getPreference($this->preference_id, $this->domain_id);
         // @formatter:off
-        dbQuery($sql, ':index_id'     , index::next('invoice', $pref_group['index_group'], $this->domain_id),
-                      ':domain_id'    , $this->domain_id,
-                      ':biller_id'    , $this->biller_id,
-                      ':customer_id'  , $this->customer_id,
-                      ':type_id'      , $this->type_id,
-                      ':preference_id', $this->preference_id,
-                      ':date'         , $this->date,
-                      ':note'         , trim($this->note),
-                      ':custom_field1', $this->custom_field1,
-                      ':custom_field2', $this->custom_field2,
-                      ':custom_field3', $this->custom_field3,
-                      ':custom_field4', $this->custom_field4);
+        $pref_group = getPreference($this->preference_id, $this->domain_id);
+        $index_id   = index::next('invoice', $pref_group['index_group'], $this->domain_id);
+        $pdoDb->setFauxPost(array('index_id'      => $index_id,
+                                  'domain_id'     => $this->domain_id,
+                                  'biller_id'     => $this->biller_id,
+                                  'customer_id'   => $this->customer_id,
+                                  'type_id'       => $this->type_id,
+                                  'preference_id' => $this->preference_id,
+                                  'date'          => $this->date,
+                                  'note'          => trim($this->note),
+                                  'custom_field1' => $this->custom_field1,
+                                  'custom_field2' => $this->custom_field2,
+                                  'custom_field3' => $this->custom_field3,
+                                  'custom_field4' => $this->custom_field4));
+$pdoDb->debugOn();
+        $id = $pdoDb->request("INSERT", "invoices");
+$pdoDb->debugOff();
         // @formatter:on
 
         index::increment('invoice', $pref_group['index_group'], $this->domain_id);
-        return lastInsertID();
+        return $id;
     }
 
     public function insert_item() {
+        global $pdoDb;
+
         // @formatter:off
-        $sql = "INSERT INTO " . TB_PREFIX . "invoice_items
-                (
-                    invoice_id,
-                    domain_id,
-                    quantity,
-                    product_id,
-                    unit_price,
-                    tax_amount,
-                    gross_total,
-                    description,
-                    total,
-                    attribute
-                )
-                VALUES
-                (
-                    :invoice_id,
-                    :domain_id,
-                    :quantity,
-                    :product_id,
-                    :unit_price,
-                    :tax_amount,
-                    :gross_total,
-                    :description,
-                    :total,
-                    :attribute
-                )";
-        dbQuery($sql, ':invoice_id' , $this->invoice_id,
-                      ':domain_id'  , $this->domain_id,
-                      ':quantity'   , $this->quantity,
-                      ':product_id' , $this->product_id,
-                      ':unit_price' , $this->unit_price,
-                      ':tax_amount' , $this->tax_amount,
-                      ':gross_total', $this->gross_total,
-                      ':description', trim($this->description),
-                      ':total'      , $this->total,
-                      ':attribute'  , $this->attribute);
+        $pdoDb->setFauxPost(array('invoice_id'  => $this->invoice_id,
+                                  'domain_id'   => $this->domain_id,
+                                  'quantity'    => $this->quantity,
+                                  'product_id'  => $this->product_id,
+                                  'unit_price'  => $this->unit_price,
+                                  'tax_amount'  => $this->tax_amount,
+                                  'gross_total' => $this->gross_total,
+                                  'description' => trim($this->description),
+                                  'total'       => $this->total,
+                                  'attribute'   => $this->attribute));
+$pdoDb->debugOn();
+        $id = $pdoDb("INSERT", "invoice_items");
+$pdoDb->debugOff();
         // @formatter:on
-        $inv_item_id = lastInsertId();
-        invoice_item_tax($inv_item_id, $this->tax, $this->unit_price, $this->quantity, 'insert', $this->domain_id);
-        return $inv_item_id;
+
+        invoice_item_tax($id, $this->tax, $this->unit_price, $this->quantity, 'insert', $this->domain_id);
+        return $id;
     }
 
     public function select($id, $domain_id = '') {
