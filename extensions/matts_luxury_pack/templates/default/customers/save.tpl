@@ -47,6 +47,11 @@ if (inIframe())
 	'		</tr>' +
 	'	</table>' +
 	'</div>');
+{	if $smarty.post.cancel == null}
+	document.write('<meta http-equiv="refresh" content="10;URL=index.php?module=customers&view=manage" />');
+{	else}
+	document.write('<meta http-equiv="refresh" content="0;URL=index.php?module=customers&view=manage" />');
+{	/if}
 {rdelim}
 else
 {ldelim}

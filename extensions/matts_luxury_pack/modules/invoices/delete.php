@@ -39,7 +39,6 @@ if ( $defaults['delete'] == 'N' ) {
 	die('Invoice deletion has been disabled, you are not supposed to be here');
 }
 
-
 if ( ($_GET['stage'] == 2 ) && ($_POST['doDelete'] == 'y') ) {
 	global $dbh;
 
@@ -80,9 +79,7 @@ if ( ($_GET['stage'] == 2 ) && ($_POST['doDelete'] == 'y') ) {
 	}
 	//TODO - what about the stuff in the products table for the total style invoices?
 	echo "<meta http-equiv='refresh' content='2;URL=index.php?module=invoices&view=manage' />";
-
 }
 
 $smarty -> assign('pageActive', 'invoice');
 $smarty -> assign('active_tab', '#money');
-?>

@@ -17,9 +17,9 @@
 	<br /><br />
 {else}
 <div id="top"><h3>{$LANG.add_invoice_item}</h3></div>
-<div id="gmail_loading" class="gmailLoader" style="float:right; display: none;">
+{$hook_loading}<!--<div id="gmail_loading" class="gmailLoader" style="float:right; display: none;">
 	<img src="images/common/gmail-loader.gif" alt="{$LANG.loading} ..." /> {$LANG.loading} ...
-</div>
+</div>-->
 <hr />
 <form name="add_invoice_item" action="index.php?module=invoices&amp;view=add_invoice_item" method="post">
 	<table align="center">

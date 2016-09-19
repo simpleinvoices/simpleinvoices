@@ -47,7 +47,7 @@ $invoiceItems = $invoiceobj->getInvoiceItems($invoice_id);
     $eway_pre_check = $eway_check->pre_check();
 
 #Invoice Age - number of days - start
-if ($invoice['owing'] > 0 ) {
+if (isset($invoice['owing']) && $invoice['owing'] > 0 ) {
     $invoice_age_days =  number_format((strtotime(date('Y-m-d')) - strtotime($invoice['calc_date'])) / (60 * 60 * 24),0);
 	$invoice_age = "$invoice_age_days {$LANG['days']}";
 }

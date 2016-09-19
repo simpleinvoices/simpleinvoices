@@ -1,6 +1,20 @@
 <?php
-
-// /simple/extensions/matts_luxury_pack/include/class
+/*
+ * Script: ./extensions/matts_luxury_pack/include/class/myinvoice.php
+ * 	invoice class
+ *
+ * Authors:
+ *	 git0matt@gmail.com
+ *
+ * Last edited:
+ * 	 2016-09-16
+ *
+ * License:
+ *	 GPL v2 or above
+ *
+ * Website:
+ * 	http://www.simpleinvoices.org
+ */
 
 class myinvoice extends invoice
 {
@@ -58,7 +72,6 @@ class myinvoice extends invoice
         if ($this->customer)    $where .= " AND c.id = '$this->customer' ";
         if ($this->where_field) $where .= " AND $this->where_field = '$this->where_value' ";
         /*SQL where - end*/
-	
 
         /*Check that the sort field is OK*/
         $validFields = array('index_id','index_name','iv.id', 'biller', 'customer', 'invoice_total',
@@ -240,8 +253,9 @@ class myinvoice extends invoice
 		if ($this->defaults['use_ship_to'])		$sql.= ", ship_to_customer_id";
 		$sql.= ", type_id
 				, preference_id
-				, date
-				, note
+				, date";
+		if ($this->defaults['use_attn'])		$sql.= ", attention";
+		$sql.= ", note
 				, custom_field1
 				, custom_field2
 				, custom_field3
@@ -258,8 +272,9 @@ class myinvoice extends invoice
 		if ($this->defaults['use_ship_to'])		$sql.= ", :ship_to_customer_id";
 		$sql.= ", :type_id
 				, :preference_id
-				, :date
-				, :note
+				, :date";
+		if ($this->defaults['use_attn'])		$sql.= ", :attention";
+		$sql.= ", :note
 				, :customField1
 				, :customField2
 				, :customField3
@@ -277,8 +292,9 @@ class myinvoice extends invoice
 		if ($this->defaults['use_ship_to'])		$sql.= ", ship_to_customer_id";
 		$sql.= ", type_id
 				, preference_id
-				, date
-				, note
+				, date";
+		if ($this->defaults['use_attn'])		$sql.= ", attention";
+		$sql.= ", note
 				, custom_field1
 				, custom_field2
 				, custom_field3
@@ -294,8 +310,9 @@ class myinvoice extends invoice
 		if ($this->defaults['use_ship_to'])		$sql.= ", :ship_to_customer_id";
 		$sql.= ", :type_id
 				, :preference_id
-				, :date
-				, :note
+				, :date";
+		if ($this->defaults['use_attn'])		$sql.= ", :attention";
+		$sql.= ", :note
 				, :customField1
 				, :customField2
 				, :customField3
@@ -323,6 +340,7 @@ class myinvoice extends invoice
 				':type_id',				$type_id,
 				':preference_id',		$_POST['preference_id'],
 				':date', 				$clean_date,
+				':attention',			$_POST['attention'],
 				':note', 				trim($_POST['note']),
 				':customField1',		$_POST['customField1'],
 				':customField2',		$_POST['customField2'],
@@ -342,6 +360,7 @@ class myinvoice extends invoice
 				':type_id',				$type_id,
 				':preference_id',		$_POST['preference_id'],
 				':date', 				$clean_date,
+				':attention',			$_POST['attention'],
 				':note', 				trim($_POST['note']),
 				':customField1',		$_POST['customField1'],
 				':customField2',		$_POST['customField2'],
@@ -358,6 +377,7 @@ class myinvoice extends invoice
 				':type_id',				$type_id,
 				':preference_id',		$_POST['preference_id'],
 				':date', 				$clean_date,
+				':attention',			$_POST['attention'],
 				':note', 				trim($_POST['note']),
 				':customField1',		$_POST['customField1'],
 				':customField2',		$_POST['customField2'],
@@ -375,6 +395,7 @@ class myinvoice extends invoice
 				':type_id',				$type_id,
 				':preference_id',		$_POST['preference_id'],
 				':date', 				$clean_date,
+				':attention',			$_POST['attention'],
 				':note', 				trim($_POST['note']),
 				':customField1',		$_POST['customField1'],
 				':customField2',		$_POST['customField2'],
@@ -424,8 +445,9 @@ class myinvoice extends invoice
 				, customer_id = :customer_id";
 		if ($this->defaults['use_ship_to'])		$sql.=", ship_to_customer_id = :ship_to_customer_id";
 		$sql.= ", preference_id = :preference_id
-				, date = :date
-				, note = :note
+				, date = :date";
+		if ($this->defaults['use_attn'])		$sql.= ", attention = :attention";
+		$sql.= ", note = :note
 				, custom_field1 = :customField1
 				, custom_field2 = :customField2
 				, custom_field3 = :customField3
@@ -447,6 +469,7 @@ class myinvoice extends invoice
 				':ship_to_customer_id', $_POST['ship_to_customer_id'],
 				':preference_id', 		$_POST['preference_id'],
 				':date', 				$_POST['date'],
+				':attention',			$_POST['attention'],
 				':note', 				trim($_POST['note']),
 				':customField1', 		$_POST['customField1'],
 				':customField2', 		$_POST['customField2'],
@@ -464,6 +487,7 @@ class myinvoice extends invoice
 				':customer_id', 		$_POST['customer_id'],
 				':preference_id', 		$_POST['preference_id'],
 				':date', 				$_POST['date'],
+				':attention',			$_POST['attention'],
 				':note', 				trim($_POST['note']),
 				':customField1', 		$_POST['customField1'],
 				':customField2', 		$_POST['customField2'],
@@ -482,6 +506,7 @@ class myinvoice extends invoice
 				':ship_to_customer_id', $_POST['ship_to_customer_id'],
 				':preference_id', 		$_POST['preference_id'],
 				':date', 				$_POST['date'],
+				':attention',			$_POST['attention'],
 				':note', 				trim($_POST['note']),
 				':customField1', 		$_POST['customField1'],
 				':customField2', 		$_POST['customField2'],
@@ -498,6 +523,7 @@ class myinvoice extends invoice
 				':customer_id', 		$_POST['customer_id'],
 				':preference_id', 		$_POST['preference_id'],
 				':date', 				$_POST['date'],
+				':attention',			$_POST['attention'],
 				':note', 				trim($_POST['note']),
 				':customField1', 		$_POST['customField1'],
 				':customField2', 		$_POST['customField2'],
@@ -526,70 +552,78 @@ class myinvoice extends invoice
 		}
 		$sql = "INSERT INTO
 			".TB_PREFIX."invoices (
-				id, 
-				index_id,
-				domain_id,
-				biller_id, 
-				customer_id, 
-				type_id,
-				preference_id, 
-				date, 
-				note,
-				custom_field1,
-				custom_field2,
-				custom_field3,
-				custom_field4";
+				id
+				, index_id
+				, domain_id
+				, biller_id
+				, customer_id";
+		if ($this->defaults['use_ship_to'])		$sql.= ", ship_to_customer_id";
+		$sql.= ", type_id
+				, preference_id
+				, date";
+		if ($this->defaults['use_attn'])		$sql.= ", attention";
+		$sql.= ", note
+				, custom_field1
+				, custom_field2
+				, custom_field3
+				, custom_field4";
 		if ($this->defaults['use_terms'])		$sql.= ", terms";
 		$sql.= ")
 			VALUES
 			(
-				NULL,
-				:index_id,
-				:domain_id,
-				:biller_id,
-				:customer_id,
-				:type_id,
-				:preference_id,
-				:date,
-				:note,
-				:customField1,
-				:customField2,
-				:customField3,
-				:customField4";
+				NULL
+				, :index_id
+				, :domain_id
+				, :biller_id
+				, :customer_id";
+		if ($this->defaults['use_ship_to'])		$sql.= ", :ship_to_customer_id";
+		$sql.= ", :type_id
+				, :preference_id
+				, :date";
+		if ($this->defaults['use_attn'])		$sql.= ", :attention";
+		$sql.= ", :note
+				, :custom_field1
+				, :custom_field2
+				, :custom_field3
+				, :custom_field4";
 		if ($this->defaults['use_terms'])		$sql.= ", :terms";
 		$sql.= ")";
 
 		if ($db_server == 'pgsql') {
 			$sql = "INSERT INTO
 				".TB_PREFIX."invoices (
-					index_id,
-					domain_id,
-					biller_id,
-					customer_id,
-					type_id,
-					preference_id,
-					date,
-					note,
-					custom_field1,
-					custom_field2,
-					custom_field3,
-					custom_field4";
+				index_id
+				, domain_id
+				, biller_id
+				, customer_id";
+		if ($this->defaults['use_ship_to'])		$sql.= ", ship_to_customer_id";
+		$sql.= ", type_id
+				, preference_id
+				, date";
+		if ($this->defaults['use_attn'])		$sql.= ", attention";
+		$sql.= ", note
+				, custom_field1
+				, custom_field2
+				, custom_field3
+				, custom_field4";
 		if ($this->defaults['use_terms'])		$sql.= ", terms";
 		$sql.= ")
 				VALUES
 				(
-					:index_id,
-					:domain_id,
-					:biller_id,
-					:customer_id,
-					:type_id,
-					:preference_id,
-					:date,
-					:note,
-					:customField1,
-					:customField2,
-					:customField3,
-					:customField4";
+				:index_id
+				, :domain_id
+				, :biller_id
+				, :customer_id";
+		if ($this->defaults['use_ship_to'])		$sql.= ", :ship_to_customer_id";
+		$sql.= ", :type_id
+				, :preference_id
+				, :date";
+		if ($this->defaults['use_attn'])		$sql.= ", :attention";
+		$sql.= ", :note
+				, :custom_field1
+				, :custom_field2
+				, :custom_field3
+				, :custom_field4";
 		if ($this->defaults['use_terms'])		$sql.= ", :terms";
 		$sql.= ")";
 		}
@@ -611,6 +645,7 @@ class myinvoice extends invoice
 			':type_id',			$type_id,
 			':preference_id',	$_POST['preference_id'],
 			':date', 			$clean_date,
+			':attention',		$_POST['attention'],
 			':note', 			trim($_POST['note']),
 			':customField1',	$_POST['customField1'],
 			':customField2',	$_POST['customField2'],
@@ -657,17 +692,21 @@ class myinvoice extends invoice
 		$sql = "UPDATE
 				".TB_PREFIX."invoices
 			SET
-				index_id = :index_id,
-				biller_id = :biller_id,
-				customer_id = :customer_id,
-				preference_id = :preference_id,
-				date = :date,
-				note = :note,
-				custom_field1 = :customField1,
-				custom_field2 = :customField2,
-				custom_field3 = :customField3,
-				custom_field4 = :customField4 ";
-		if ($this->defaults['use_terms'])		$sql.= ", terms = :terms ";
+				, index_id = :index_id
+				, domain_id = :domain_id
+				, biller_id = :biller_id
+				, customer_id = :customer_id";
+		if ($this->defaults['use_ship_to'])		$sql.= ", ship_to_customer_id = :ship_to_customer_id";
+		$sql.= ", type_id = :type_id
+				, preference_id = :preference_id
+				, date = :date";
+		if ($this->defaults['use_attn'])		$sql.= ", attention = :attention";
+		$sql.= ", note = :note
+				, custom_field1 = :custom_field1
+				, custom_field2 = :custom_field2
+				, custom_field3 = :custom_field3
+				, custom_field4 = :custom_field4";
+		if ($this->defaults['use_terms'])		$sql.= ", terms = :terms";
 		$sql.= "WHERE
 				id = :invoice_id
 			AND domain_id = :domain_id";
@@ -680,6 +719,8 @@ class myinvoice extends invoice
 			':customer_id', 	$_POST['ship_to_customer_id'],
 			':preference_id', 	$_POST['preference_id'],
 			':date', 			$_POST['date'],
+			':attention',		$_POST['attention'],
+			':attention',		$_POST['attention'],
 			':note', 			trim($_POST['note']),
 			':customField1', 	$_POST['customField1'],
 			':customField2', 	$_POST['customField2'],

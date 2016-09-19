@@ -1,10 +1,10 @@
 {*
 /*
-* Script: quick_view.tpl
-* 	 Quick view of invoice template
+* Script: ./extensions/matts_luxury_pack/templates/default/invoices/delete.tpl
+* 	 delete an invoice template
 *
 * Authors:
-*	 Justin Kelly, Nicolas Ruflin
+*	 git0matt@gmail.com, Justin Kelly, Nicolas Ruflin
 *
 * Last edited:
 * 	 2016-09-06
@@ -21,7 +21,7 @@
 
 	<br />
 	{if $invoicePaid == 0}
-		{$LANG.confirm_delete} {$preference.pref_inv_wording|htmlsafe} {$invoice.index_id|htmlsafe}
+		<div class="si_message">{$LANG.confirm_delete} {$preference.pref_inv_wording|htmlsafe} {$invoice.index_id|htmlsafe}</div>
 	<br />
 	<br />
 	<form name="frmpost" action="index.php?module=invoices&amp;view=delete&amp;stage=2&amp;id={$smarty.get.id|urlencode}" method="post">
@@ -42,7 +42,7 @@
 	
 	{if $invoicePaid != 0}
 	<span class="welcome">
-		{$preference.pref_inv_wording|htmlsafe} {$invoice.index_id|htmlsafe} {$LANG.delete_has_payments1} {$preference.pref_currency_sign} {$invoicePaid|siLocal_number} {$LANG.delete_has_payments2}
+		<div class="si_message_error">{$preference.pref_inv_wording|htmlsafe} {$invoice.index_id|htmlsafe} {$LANG.delete_has_payments1} {$preference.pref_currency_sign} {$invoicePaid|siLocal_number} {$LANG.delete_has_payments2}</div>
 	</span>
 	<br />
 		{* LANG_TODO: Add help section here!! *}
@@ -51,11 +51,16 @@
 
 {/if}
 
-{if $smarty.get.stage == 2 }
+{if $smarty.get.stage == 2}
 
 	<div id="top"></b></div>
 	<br /><br />
-		{$preference.pref_inv_wording|htmlsafe} {$id|htmlsafe} {$LANG.deleted}
+		<div class="si_message_ok">{$preference.pref_inv_wording|htmlsafe} {$id|htmlsafe} {$LANG.deleted}</div>
 	<br /><br />
+{	if $smarty.post.cancel == null}
+	<meta http-equiv="refresh" content="2;URL=index.php?module=invoices&view=manage" />
+{	else}
+	<meta http-equiv="refresh" content="0;URL=index.php?module=invoices&view=manage" />
+{	/if}
 
 {/if}

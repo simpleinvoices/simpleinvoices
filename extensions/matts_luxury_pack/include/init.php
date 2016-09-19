@@ -1,36 +1,30 @@
 <?php
 /*
-* Script: ./extensions/matts_luxury_pack/include/init.php
-* 	initialization
-*
-* Authors:
-*	 yumatechnical@gmail.com
-*
-* Last edited:
-* 	 2016-08-31
-*
-* License:
-*	 GPL v2 or above
-*
-* Website:
-* 	http://www.simpleinvoices.org
+ * Script: ./extensions/matts_luxury_pack/init.php
+ * 	Initialization
+ *
+ * Authors:
+ *	 git0matt@gmail.com
+ *
+ * Last edited:
+ * 	 2016-09-16
+ *
+ * License:
+ *	 GPL v2 or above
+ *
+ * Website:
+ * 	http://www.simpleinvoices.org
  */
-//global $LANG;
-
-$array0to9 = array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
-$pagerows = array(5, 10, 15, 20, 25, 30, 35, 50, 100, 500);
-$smarty->assign("version_name", $config->version->name);
-
-//include_once './extensions/<THIS NAME>/include/sql_queries.php';	// not active yet...
-
-/*
-function myNoticeStrictHandler($errstr, $errfile, $errline) {//$errno=null, 
-}
-set_error_handler('myNoticeStrictHandler', E_NOTICE | E_STRICT);
+set_include_path(get_include_path() . PATH_SEPARATOR . "./extensions/matts_luxury_pack/include/class/");	// load classes
+/*include_once ('extensions/matts_luxury_pack/include/class/myinvoice.php');
+$logger->log('include_once ("extensions/matts_luxury_pack/include/class/myinvoice.php")', Zend_Log::INFO);
+include_once ('extensions/matts_luxury_pack/include/class/myproduct.php');
+$logger->log('include_once ("extensions/matts_luxury_pack/include/class/myproduct.php")', Zend_Log::INFO);
+include_once ('extensions/matts_luxury_pack/include/class/myexport.php');
+$logger->log('include_once ("extensions/matts_luxury_pack/include/class/myexport.php")', Zend_Log::INFO);
 */
-function DBcolumnExists($table, $column) {
-	return checkFieldExists($table, $column);
-}
+//include_once('extensions/matts_luxury_pack/include/sql_queries.php');
+
 /*if (!function_exists ('addDatabaseColumn'))
 {		^*TAKES TOO LONG*/
 	function addDatabaseColumn ($column, $table, $type, $length, $cannull=false, $def_value="", $after="")
@@ -48,7 +42,7 @@ function DBcolumnExists($table, $column) {
 			$row = $sth->fetch (PDO::FETCH_ASSOC);
 			if (strtolower($row['data_type']) != strtolower($type))
 			{
-				$length = str_replace('.', ',', $length);
+				$length = strstr($length, '.', ',');//str_replace('.', ',', $length);
 				$sql = "ALTER TABLE `$table` ADD COLUMN `$column` $type( $length )";
 				$sql.= $cannull ? " NOT NULL" : " NULL";
 				$sql.= isset($def_value) ? " DEFAULT '$def_value'" : "";
@@ -67,45 +61,30 @@ function DBcolumnExists($table, $column) {
 	}
 /*}			*TAKES TOO LONG*/
 
-include_once ('extensions/matts_luxury_pack/include/class/myexport.php');
+modifyDB::log();
+$array0to9 = array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);	// often used array
+$pagerows = array(5, 10, 15, 20, 25, 30, 35, 50, 100, 500);	// rows-per-page array
+$smarty->assign("version_name", $config->version->name);	// put version_name into page header template
 
-/********************* customer section ***********************/
-
-//include_once ('extensions/matts_luxury_pack/include/class/mycustomer.php');
 include_once ('extensions/matts_luxury_pack/include/customer.functs.php');
-
-if (!DBcolumnExists(TB_PREFIX."customers", "credit_card_cvc")) {
-	$dbh->beginTransaction();
-	$sth = $dbh->exec("ALTER TABLE ".TB_PREFIX."customers ADD credit_card_cvc INT(11) NOT NULL AFTER credit_card_number");
-	//My SQL / Oracle (prior version 10G):
-	$sth = $dbh->exec("ALTER TABLE ".TB_PREFIX."customers MODIFY COLUMN credit_card_expiry_year INT(11) NULL DEFAULT NULL");
-	$sth = $dbh->exec("ALTER TABLE ".TB_PREFIX."customers MODIFY COLUMN credit_card_expiry_month INT(11) NULL DEFAULT NULL");
-	//SQL Server / MS Access:
-	//ALTER TABLE table_name ALTER COLUMN column_name datatype
-	//Oracle 10G and later:
-	//ALTER TABLE table_name MODIFY column_name datatype
-	$dbh->commit();
-}
-//addDatabaseColumn ('price_list', TB_PREFIX.'customers', 'int', 11);
-if (!DBcolumnExists(TB_PREFIX."customers", "price_list")) {
-	$dbh->beginTransaction();
-	$sth = $dbh->exec("ALTER TABLE ".TB_PREFIX."customers ADD COLUMN price_list INT(11) NOT NULL");
-	$dbh->commit();
-}
-
-/******************************** product section **************************/
-include_once ('extensions/matts_luxury_pack/include/class/myproduct.php');
-
-addDatabaseColumn ('unit_list_price2', TB_PREFIX.'products', 'DECIMAL', 25.6, false, 0);
-addDatabaseColumn ('unit_list_price3', TB_PREFIX.'products', 'DECIMAL', 25.6, false, 0);
-addDatabaseColumn ('unit_list_price4', TB_PREFIX.'products', 'DECIMAL', 25.6, false, 0);
-
-/******************************** invoice section *******************************/
-include_once ('extensions/matts_luxury_pack/include/class/myinvoice.php');
-
-addDatabaseColumn ('ship_to_customer_id', TB_PREFIX.'invoices', 'int', 11, false, 0, 'customer_id');
-addDatabaseColumn ("terms", TB_PREFIX."invoices", "varchar", 100);
-
-/****************************** payments section *********************************/
-//include ('extensions/matts_luxury_pack/include/class/mypayments.php');
+$logger->log('include_once ("extensions/matts_luxury_pack/include/customer.functs.php")', Zend_Log::INFO);
 include_once ('extensions/matts_luxury_pack/include/payments.functs.php');
+$logger->log('include_once ("extensions/matts_luxury_pack/include/payments.functs.php")', Zend_Log::INFO);
+/*
+function microtime_float()
+{
+    list($usec, $sec) = explode(" ", microtime());
+    return ((float)$usec + (float)$sec);
+}
+$start_time = microtime_float();
+//echo '<script>alert("matts_luxury_pack-init:req ['.$_SERVER['REQUEST_TIME_FLOAT'].']['.$start_time.']")</script>';
+*/
+
+/*
+function myNoticeStrictHandler($errstr, $errfile, $errline) {//$errno=null, 
+}
+set_error_handler('myNoticeStrictHandler', E_NOTICE | E_STRICT);
+*/
+function DBcolumnExists($table, $column) {	// use another name for ...
+	return checkFieldExists($table, $column);
+}

@@ -406,7 +406,7 @@
 		</tr>
 		
 		<!-- if show detail click - the full note will be displayed -->
-		<tr class="notes tr_notes" style="display: none">
+		<tr class="notes tr_notes si_hide" xstyle="display: none">
 			<td colspan="6">{$invoice.note|outhtml}</td>
 		</tr>
 {	/if}

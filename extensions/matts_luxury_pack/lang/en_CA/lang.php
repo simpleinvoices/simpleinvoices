@@ -77,6 +77,8 @@ $MYC_LANG = array(
 	'overwrite_product'				=> 'Overwrite Product',
 	'saved_invoice' 				=> 'Processed Invoice.',
 	'redirect_invoices' 			=> 'You will be redirected Quick View of this invoice.',
+	'use_attn' 						=> 'Use a specified attention',
+	'help_use_attn' 				=> 'Use this field to specify an attention which is different from (and will overwrite) the default attention that stored with the customer details',
 // payment
 	'saved_payment' 				=> 'Payment successfully Processed.',
 	'redirect_payments' 			=> 'You will be redirected back to the Manage Payments page.',
@@ -96,7 +98,18 @@ $MYC_LANG = array(
 	'modified'						=> 'modified',
 	'payment_processed' 			=> 'Payments processed',
 	'user' 							=> 'User',
-	'on' 							=> 'on'
+	'on' 							=> 'on',
+// debug
+	'debug' 						=> 'debug',
+	'cookies' 						=> 'Cookies',
+	'request' 						=> 'Request',
+	'get' 							=> 'GET',
+	'post' 							=> 'POST',
+	'key' 							=> 'key',
+	'value'							=> 'value',
+	'server' 						=> 'Server',
+	'session' 						=> 'Session',
+	'env' 							=> 'Environment'
 );
 // @formatter:on
 global $defaults;

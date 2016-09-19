@@ -221,7 +221,7 @@
 	</div>
 
 	<div class="si_toolbar si_toolbar_form">
-{	if $defaults.delete == '1'}
+{	if $defaults.delete == '1' && $invoice.owing<1}
 		<a title="{$LANG.delete} {$LANG.customer} '{$customer.name|htmlsafe}'" href="index.php?module=customers&amp;view=delete&amp;stage=1&amp;id={$customer.id|urlencode}">
 			<img src='images/common/delete.png' class='action' />&nbsp;{$LANG.delete}</a>
 {	/if}

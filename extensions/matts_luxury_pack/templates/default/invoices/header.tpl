@@ -126,15 +126,36 @@
 		</tr>
 {/if}
 <!-- end terms -->
+
+{if $defaults.use_attn}
+		<tr>
+			<th>{$LANG.attention}
+				<a class='cluetip' href='#'
+					rel='index.php?module=documentation&amp;view=view&amp;page=help_use_attn'
+					title='{ $LANG.attention }'>
+					<img src='./images/common/help-small.png' alt='help' />
+				</a>
+			</th>
+			<td>
+				<input type="text" class="attention" size="30" name="terms" id="terms" 
+{	if $smarty.get.attention}
+					value="{$smarty.get.attention|htmlsafe}" />
+{	else}
+					value="{$invoice.attention|htmlsafe}" />
+{	/if}
+			</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
+{/if}
 	</table>
 
 <script type="text/javascript">
 <!--
-if (typeof json_customers === undefined)
-{
-	var json_customers = {$customers|@json_encode};
-}
-{literal}
+{*if (typeof json_customers === undefined){literal}
+*}{literal}
+	var json_customers = {/literal}{$customers|@json_encode}{literal};
+
 function putAddress(val, where) {
 	var elem = document.getElementById(where);
 	var child = elem.firstElementChild || elem.firstChild;

@@ -125,28 +125,27 @@ $xml .= "<total>$count</total>";
 foreach ($products as $row) {
 
 	$xml .= "<row id='".$row['id']."'>";//$row['iso']."'>";
-	$xml .= "<cell><![CDATA[
+	$xml .= "<cell name='links'><![CDATA[
 			<a class='index_table' title='$LANG[view] ".$row['description']."' href='index.php?module=products&view=details&id=".$row['id']."&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 			<a class='index_table' title='$LANG[edit] ".$row['description']."' href='index.php?module=products&view=details&id=".$row['id']."&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 		]]></cell>";		
 	
-	$xml .= "<cell><![CDATA[".$row['id']."]]></cell>";
-	$xml .= "<cell><![CDATA[".$row['description']."]]></cell>";
+	$xml .= "<cell name='id'><![CDATA[".$row['id']."]]></cell>";
+	$xml .= "<cell name='description'><![CDATA[".$row['description']."]]></cell>";
 /**/
-//	$xml .= "<!--cell><![CDATA[".$row['custom_field1']."]]></cell-->";
-	$xml .= "<cell><![CDATA[".$row['custom_field1']."]]></cell>";
+	$xml .= "<cell name='custom_field1'><![CDATA[".$row['custom_field1']."]]></cell>";
 /**/
-	$xml .= "<cell><![CDATA[".siLocal::number($row['unit_price'])."]]></cell>";
-    if($defaults['inventory'] == '1')
+	$xml .= "<cell name='unit_price'><![CDATA[".siLocal::number($row['unit_price'])."]]></cell>";
+    if ($defaults['inventory'] == '1')
     {
-      	$xml .= "<cell><![CDATA[".siLocal::number_trim($row['quantity'])."]]></cell>";
+      	$xml .= "<cell name='quantity'><![CDATA[".siLocal::number_trim($row['quantity'])."]]></cell>";
     }
 
 	if ($row['enabled']==$LANG['enabled']) {
-		$xml .= "<cell><![CDATA[<img src='images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
+		$xml .= "<cell name='enabled'><![CDATA[<img src='images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
 	}	
 	else {
-		$xml .= "<cell><![CDATA[<img src='images/common/cross.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
+		$xml .= "<cell name='enabled'><![CDATA[<img src='images/common/cross.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
 	}
 	$xml .= "</row>";		
 }
@@ -154,5 +153,3 @@ foreach ($products as $row) {
 $xml .= "</rows>";
 
 echo $xml;
-
-?> 

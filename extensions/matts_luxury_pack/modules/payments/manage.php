@@ -18,6 +18,7 @@
 global $smarty;
 // stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
+modifyDB::payments();
 global $pagerows;//Matt
 // TODO - replace get..Payments with simple count - as data is got by xml.php now
 // @formatter:off

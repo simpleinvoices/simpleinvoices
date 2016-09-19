@@ -33,7 +33,7 @@ if (!isset ($_POST['type']) && !isset ($_POST['action'])) {
 $saved = false;
 $type = $_POST['type'];
 
-$logger->log('extensions/matts_luxury_pack/modules/invoices/save.php', Zend_Log::INFO);//Matt
+//$logger->log('extensions/matts_luxury_pack/modules/invoices/save.php', Zend_Log::INFO);//Matt
 $logger->log('action='.$_POST['action'], Zend_Log::INFO);
 $myinvoice = new myinvoice;//Matt
 
@@ -68,7 +68,7 @@ if ($_POST['action'] == "insert" ) {
 		$i = 0;
 		while ($i <= $_POST['max_items']) {
 			$logger->log('i='.$i, Zend_Log::INFO);
-			$logger->log('qty='.$_POST["quantity$i"], Zend_Log::INFO);
+			if (isset($_POST["quantity$i"]))	$logger->log('qty='.$_POST["quantity$i"], Zend_Log::INFO);
 			if ($_POST["quantity$i"] != null)
 			{
 				insertInvoiceItem($id, $_POST["quantity$i"], $_POST["products$i"], $i, $_POST["tax_id"][$i], $_POST["description$i"], $_POST["unit_price$i"], isset($_POST["attribute"][$i]) ? $_POST["attribute"][$i] : null);

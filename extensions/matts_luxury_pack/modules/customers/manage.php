@@ -19,6 +19,7 @@
 checkLogin();
 global $smarty, $LANG, $pdoDb, $config;
 global $cc_months, $cc_years, $pagerows;//Matt
+modifyDB::customers();
 
 // @formatter:off
 $pdoDb->addSimpleWhere("domain_id", domain_id::get());

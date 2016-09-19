@@ -20,7 +20,8 @@
 {* if customer is updated or saved.*} 
 
 {if $smarty.post.name != "" && $smarty.post.name != null } 
-	{include file="../templates/default/customers/save.tpl"}
+	{*include file="../templates/default/customers/save.tpl"*}
+	{include file=$path|cat:"save.tpl"}
 
 {else}
 {* if  name was inserted *} 

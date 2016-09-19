@@ -1,5 +1,22 @@
 <?php
-/* Class: wrapper class for zend locale*/
+/*
+ * Script: ./extensions/matts_luxury_pack/class/siLocal.php
+ * 	wrapper class for zend locale class
+ *
+ * Created by
+ *	SimpleInvoices
+  * Modified by:
+ *	 git0matt@gmail.com
+ *
+ * Last edited:
+ * 	 2016-09-16
+ *
+ * License:
+ *	 GPL v2 or above
+ *
+ * Website:
+ * 	http://www.simpleinvoices.org
+ */
 class siLocal 
 {
 	/*Function: wrapper function for zend_locale_format::toNumber*/

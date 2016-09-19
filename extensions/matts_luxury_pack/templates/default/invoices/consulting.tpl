@@ -13,9 +13,9 @@
 <form name="frmpost" action="index.php?module=invoices&amp;view=save" method="post" onsubmit="return frmpost_Validator(this);">
 
 <h3>{$LANG.inv} {$LANG.inv_consulting}
-<div id="gmail_loading" class="gmailLoader" style="float:right; display: none;">
-        	<img src="images/common/gmail-loader.gif" alt="{$LANG.loading} ..." /> {$LANG.loading} ...
-</div>
+{$hook_loading}<!--<div id="gmail_loading" class="gmailLoader" style="float:right; display: none;">
+	<img src="images/common/gmail-loader.gif" alt="{$LANG.loading} ..." /> {$LANG.loading} ...
+</div>-->
 </h3>
 
 {include file="$path/header.tpl" }
