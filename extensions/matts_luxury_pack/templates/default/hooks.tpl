@@ -63,15 +63,16 @@
 	}
 	if (inIframe())
 	{
-		document.write('<link rel="stylesheet" type="text/css" href="{/literal}{$myroot|cat:"/../../modules/iframe_customers/style.css"}{literal}">');
+		document.write('<link rel="stylesheet" type="text/css" href="{/literal}{$myroot|cat:"/css/iframe.css"}{literal}">');
 	}
 	//-->
 	</script>{/literal}
 <!-- end hook_head_end_add_superbox -->
 {/if}
 
-{**}
-<script type="text/javascript">{literal}
+{literal}
+
+<script type="text/javascript"><!--
 /* add prototype called indexOf, if not exists */
 if (!Array.prototype.indexOf) {
 	Array.prototype.indexOf = function (obj, fromIndex) {
@@ -199,7 +200,7 @@ if (!Array.prototype.indexOf) {
 		show('pageLoading', false);
 	});
 */
-{/literal}</script>
+//-->{/literal}</script>
 {/capture}
 
 
@@ -237,7 +238,7 @@ if (!Array.prototype.indexOf) {
 {php}file_get_contents("{$inc|cat:"/hooks/head_link.php"}");{/php}
 {if $defaults.use_modal}
 {literal}
-	<link rel="stylesheet" href="{/literal}{$myroot|cat:"/../../modules/iframe_customers/style.css"}{literal}" type="text/css" media="all" />
+	<link rel="stylesheet" href="{/literal}{$myroot|cat:"/css/iframe.css"}{literal}" type="text/css" media="all" />
 {/literal}
 {/if}
 {/capture	*}
@@ -249,7 +250,7 @@ if (!Array.prototype.indexOf) {
 {*	$smarty.capture.hook_body_end	*}{*	append	*}
 {if $defaults.use_modal}
 {literal}
-<!--	<script type="text/javascript"><!--
+<!--	<script type="text/javascript"><!- -
 		$('.superbox-iframe').livequery('load',function(){
 /*			$(iframe.contentWindow.document.body).find("#cancelAddCustomer").livequery('click',function (e) { */
 			$(this).contents().find("#cancelAddCustomer").livequery('click',function (e) {\
@@ -303,7 +304,7 @@ if (!Array.prototype.indexOf) {
 			elem.attachEvent("onclick", function() { elem.preventDefault(); / *document.getElementById* /$('#sb-close').trigger('click'); });
 		}
 	}*/
-	//-->
+	//- - >
 	</script>{/literal}-->
 {/if}
 {*	/if	*}
@@ -331,6 +332,75 @@ if (!Array.prototype.indexOf) {
 		window.attachEvent("onload", downloadJSAtOnload);
 	else window.onload = downloadJSAtOnload;
 </script>
+
+
+<script type="text/javascript">
+{php}
+	$OUTTime = $_SERVER['REQUEST_TIME'] + 1800;
+	//$OUTTime = $TimeOUT + 1800; // calculate timeout from session. $TimeOUT was registered in the session
+	$date = date("M d  Y H:i:s",$OUTTime);
+{/php}
+function getTime() { <!-- counting backwards and reLoad if session has expired -->
+	now = new Date();   <!-- current Time -->
+	later = new Date("<?=$date?>"); <!-- TimeOUT of session -->
+
+	days = (later - now) / 1000 / 60 / 60 / 24;
+	var daysRound = Math.floor(days);
+	hours = (later - now) / 1000 / 60 / 60 - (24 * daysRound);
+	var hoursRound = Math.floor(hours);
+
+	minutes = (later - now) / 1000 / 60 - (24 * 60 * daysRound) - (60 * hoursRound);
+	var minutesRound = Math.floor(minutes);
+	if(minutesRound < 10){ minutesRound = "0" + minutesRound; } 
+ 
+	seconds = (later - now) / 1000 - (24 * 60 * 60 * daysRound) - (60 * 60 * hoursRound) - (60 * minutesRound) - 1;
+	var secondsRound = Math.round(seconds);
+	if(secondsRound == 60){ secondsRound = "00"; }    <!-- Bug -->
+	if(secondsRound < 10){ secondsRound = "0" + secondsRound; }  <!-- Bug -->
+	if(secondsRound == "000"){ secondsRound = "00"; }   <!-- Bug -->
+	if(secondsRound == "0"){ secondsRound = "00"; }   <!-- Bug -->
+	if(secondsRound == "0-1"){ <!-- Bug -->
+		secondsRound = "59"; 
+		minutesRound = minutesRound - 1;
+	}
+/*
+	var Time1 = minutesRound + ":" + secondsRound;
+	if (Time1 == "00:00"){ <!-- RELOAD window if session-time has expired -->
+		window.parent.location.reload(); 
+	}
+*/
+	window.parent.status = "Time to expire: " + minutesRound + ":" + secondsRound;
+	newtime = window.setTimeout("getTime();", 1000);
+}
+$(document).ready(function(){	getTime()	});
+</script>
+
+
+<!--
+<div class="modal fade" id="logout_popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div style="width:100%;height:100%;margin: 0px; padding:0px">
+					<div style="width:25%;margin: 0px; padding:0px;float:left;">
+						<i class="fa fa-warning" style="font-size: 140px;color:#da4f49"></i>
+					</div>
+					<div style="width:70%;margin: 0px; padding:0px;float:right;padding-top: 10px;padding-left: 3%;">
+						<h4>Your session is about to expire!</h4>
+						<p style="font-size: 15px;">You will be logged out in <span id="timer" style="display: inline;font-size: 30px;font-style: bold">10</span> seconds.</p>				
+						<p style="font-size: 15px;">Do you want to stay signed in?</p>
+					</div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<div style="margin-left: 30%;margin-bottom: 20px;margin-top: 20px;">
+				<a href="javascript:;" onclick="resetTimer()" class="btn btn-primary" aria-hidden="true">Yes, Keep me signed in</a>
+				<a href="<?php echo BASE_PATH.'logout.php';?>" class="btn btn-danger" aria-hidden="true">No, Sign me out</a>
+			</div>
+		</div>
+	</div>
+</div>
+-->
 {/capture	*}
 
 
@@ -341,7 +411,7 @@ if (!Array.prototype.indexOf) {
 
 
 {capture name="hook_loading"}
-<div id="gmail_loading" class="gmailLoader" style="display: none;"></div>
+<div id="gmail_loading" class="gmailLoader si_hide" style="display: none;"></div><!-- style="display: none;"-->
 {*<div id="gmail_loading" class="gmailLoader" style="float:right; display: none;"><img src="images/common/gmail-loader.gif" alt="{$LANG.loading} ..." /> {$LANG.loading} ...</div>*}
 {/capture}
 {/strip}
