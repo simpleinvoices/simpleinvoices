@@ -5,7 +5,8 @@ require_once 'include/class/GroupBy.php';
 require_once 'include/class/DbField.php';
 
 class Join {
-    const PREFIX = '/^' . TB_PREFIX . '/';
+    const PREFIX = '/^' . TB_PREFIX . '/';//Matt
+    //public $PREFIX;//Matt
     const TYPE = '/^(INNER|LEFT|RIGHT|FULL)$/';
 
     private $groupBy;
@@ -22,6 +23,7 @@ class Join {
      * @throws PdoDbException if invalid values are passed.
      */
     public function __construct($type, $table, $tableAlias = null) {
+        //$this->PREFIX = '/^' . TB_PREFIX . '/';//Matt
         $this->type = strtoupper($type);
         if (preg_match(self::TYPE, $this->type) != 1) {
             throw new PdoDbException("Join() - Invalid type, $type, specified.");

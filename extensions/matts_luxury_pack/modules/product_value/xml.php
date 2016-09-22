@@ -53,11 +53,12 @@ if (!preg_match('/^(asc|desc)$/iD', $dir)) {
 /*Check that the sort field is OK*/
 $validFields = array('id', 'name', 'value','enabled');
 
-if (in_array($sort, $validFields)) {
+/*if (in_array($sort, $validFields)) {
 	$sort = $sort;
 } else {
 	$sort = "id";
-}
+}*/
+$sort = (in_array($sort, $validFields)) ? $sort : "id";
 
 	$sql = "SELECT 
 				v.id as id, 

@@ -27,6 +27,7 @@ $MYC_LANG = array(
 	'another' 						=> 'Add Another',
 	'saved'							=> 'Saved',
 	'close' 						=> 'Close',
+	'redirect' 						=> 'You will be redirected',
 // settings
 	'price_list'					=> 'Price list',
 	'help_price_list'				=> 'Enable up to 4 prices for each product; and each customer can be assigned a price-list number corresponding to the price, so every product purchased by that customner has the price in that price-list number box.',
@@ -109,7 +110,8 @@ $MYC_LANG = array(
 	'value'							=> 'value',
 	'server' 						=> 'Server',
 	'session' 						=> 'Session',
-	'env' 							=> 'Environment'
+	'env' 							=> 'Environment',
+	'rewind' 						=> 'rewind'
 );
 // @formatter:on
 global $defaults;

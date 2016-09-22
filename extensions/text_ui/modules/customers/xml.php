@@ -41,11 +41,12 @@ if ( ! (empty($qtype) || empty($query)) ) {
 /*Check that the sort field is OK*/
 $validFields = array('CID', 'name', 'customer_total','owing','enabled');
 
-if (in_array($sort, $validFields)) {
+/*if (in_array($sort, $validFields)) {
 	$sort = $sort;
 } else {
 	$sort = "CID";
-}
+}*/
+$sort = (in_array($sort, $validFields)) ? $sort : "id";
 
 	//$sql = "SELECT * FROM ".TB_PREFIX."customers ORDER BY $sort $dir LIMIT $start, $limit";
 	$sql = "SELECT 

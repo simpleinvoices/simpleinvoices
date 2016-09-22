@@ -63,11 +63,12 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 	/*Check that the sort field is OK*/
         $validFields = array('id', 'description', 'unit_price', 'custom_field1', 'enabled');
 	
-	if (in_array($sort, $validFields)) {
+	/*if (in_array($sort, $validFields)) {
 		$sort = $sort;
 	} else {
 		$sort = "id";
-	}
+	}*/
+    $sort = (in_array($sort, $validFields)) ? $sort : "id";
 	
 		//$sql = "SELECT * FROM ".TB_PREFIX."customers ORDER BY $sort $dir LIMIT $start, $limit";
 	$sql = "SELECT 

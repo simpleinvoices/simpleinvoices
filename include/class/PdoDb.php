@@ -20,8 +20,8 @@ require_once 'include/class/Join.php';
  * @author Rich Rowley
  */
 class PdoDb {
-    const TBPREFIX_PATTERN = '/^' . TB_PREFIX . '/';
-    
+    const TBPREFIX_PATTERN = '/^' . TB_PREFIX . '/';//Matt
+    //public $TBPREFIX_PATTERN;//Matt
     private $caseStmts;
     private $constraints;
     private $debug;
@@ -59,6 +59,7 @@ class PdoDb {
      */
     public function __construct(DbInfo $dbinfo, $debug=false) {
         $this->clearAll();
+        //$this->TBPREFIX_PATTERN = '/^' . TB_PREFIX . '/';//Matt
 
         $this->table_schema = $dbinfo->getDbname();
         $this->debug = $debug;

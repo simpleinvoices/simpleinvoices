@@ -127,7 +127,7 @@
 {/if}
 <!-- end terms -->
 
-{if $defaults.use_attn}
+{*if $defaults.use_attn*}
 		<tr>
 			<th>{$LANG.attention}
 				<a class='cluetip' href='#'
@@ -137,7 +137,7 @@
 				</a>
 			</th>
 			<td>
-				<input type="text" class="attention" size="30" name="terms" id="terms" 
+				<input type="text" class="attention" size="30" name="attention" id="attention" 
 {	if $smarty.get.attention}
 					value="{$smarty.get.attention|htmlsafe}" />
 {	else}
@@ -147,7 +147,7 @@
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
 		</tr>
-{/if}
+{*/if*}
 	</table>
 
 <script type="text/javascript">

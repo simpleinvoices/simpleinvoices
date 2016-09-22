@@ -254,11 +254,12 @@ class invoice {
                              'type_id');
         // @formatter:on
 
-        if (in_array($sort, $validFields)) {
+        /*if (in_array($sort, $validFields)) {
             $sort = $sort;
         } else {
             $sort = "id";
-        }
+        }*/
+        $sort = (in_array($sort, $validFields)) ? $sort : "id";
 
         if (strstr($type, "count")) {
             // unset($limit);

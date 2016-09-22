@@ -82,7 +82,8 @@ class siLocal
 		
 //		$locale == "" ? $locale = new Zend_Locale($config->local->locale) : $locale = $locale;
 		$locale = $locale == "" ? new Zend_Locale($config->local->locale) : $locale;
-		$length == "" ? $length = "medium" : $length = $length;
+		//$length == "" ? $length = "medium" : $length = $length;
+		$length == "" ? $length = "medium" : $length;
 		/*
 		 * Length can be any of the Zend_Date lengths - FULL, LONG, MEDIUM, SHORT
 		 */

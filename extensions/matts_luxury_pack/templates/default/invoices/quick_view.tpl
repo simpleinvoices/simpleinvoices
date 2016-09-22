@@ -65,7 +65,7 @@
 	
 		<tr class="tr_head">
 			<th>{$LANG.biller}:</th>
-			<td colspan="4"><a rel="superbox[iframe][1075x600]" href="index.php?module=billers&amp;view=details&amp;action=edit&amp;id={$biller.id|htmlsafe}" class="edit-details modal" title="{$LANG.edit} {$LANG.biller}">{$biller.name|htmlsafe}</a></td>
+			<td colspan="4"><a rel="superbox[iframe][1075x600]" href="index.php?module=billers&amp;view=details&amp;action=edit&amp;id={$biller.id|htmlsafe}" class="edit-details modal" title="{$LANG.edit} {$LANG.biller} &ldquo;{ $biller.name|htmlsafe}&rdquo;">{$biller.name|htmlsafe}</a></td>
 			<td class="si_switch">
 				<a href='#' class="show-biller" onclick="$('.biller').show();$('.show-biller').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" /></a>
 				<a href='#' class="biller" onclick="$('.biller').hide();$('.show-biller').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" /></a>
@@ -123,11 +123,11 @@
 		
 		<!-- Customer section -->
 		<tr class="tr_head">
-			<th>{$LANG.customer}:</th>
-			<td colspan="4"><a rel="superbox[iframe][1075x600]" href="index.php?module=customers&view=details&action=edit&id={$customer.id|htmlsafe}" class="edit-details modal" title="{$LANG.edit} {$LANG.customer}">{$customer.name|htmlsafe}</td>
+			<th>{ $LANG.customer }:</th>
+			<td colspan="4"><a rel="superbox[iframe][1075x600]" href="index.php?module=customers&view=details&action=edit&id={ $customer.id|htmlsafe}" class="edit-details modal" title="{ $LANG.edit} &quot;{ $customer.name|htmlsafe}&quot;">{$customer.name|htmlsafe}</td>
 			<td class="si_switch">
-				<a href='#' class="show-customer" {literal} onclick="$('.customer').show(); $('.show-customer').hide(); {/literal}"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a>
-				<a href='#' class="customer" {literal} onclick="$('.customer').hide(); $('.show-customer').show(); {/literal}"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" /></a>
+				<a href='#' class="show-customer" {literal}onclick="$('.customer').show(); $('.show-customer').hide();{/literal}"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a>
+				<a href='#' class="customer" {literal}onclick="$('.customer').hide(); $('.show-customer').show();{/literal}"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" /></a>
 			</td>
 		</tr>	
 		<tr class="customer">
@@ -188,7 +188,7 @@
 <!-- Ship To Customer section (inv.ship_id={$invoice.ship_to_customer_id}, ship.id={$ship_to_customer.id})-->
 		<tr class="tr_head">
 			<th>{$LANG.ship_to}:</th>
-			<td colspan="4">{	if $delnote_link}<a href="{$delnote_link|htmlsafe}">{	/if} {$ship_to_customer.name|htmlsafe} {	if $delnote_link}</a>{	/if}</td>
+			<td colspan="4">{	if $delnote_link}<a rel="superbox[iframe][1075x600]" href="index.php?module=customers&view=details&action=edit&id={ $ship_to_customer.id|htmlsafe}" class="{ $delnote_link|htmlsafe}" title="{ $LANG.edit} &quot;{$ship_to_customer.name|htmlsafe}&quot;">{	/if}{ $ship_to_customer.name|htmlsafe} {	if $delnote_link}</a>{	/if}</td>
 			<td class="si_switch">
 				<a href='#' class="show-ship_to_customer" {literal }onclick="$('.ship_to_customer').show(); $('.show-ship_to_customer').hide(); {/literal}"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a>
 				<a href='#' class="ship_to_customer" {literal }onclick="$('.ship_to_customer').hide(); $('.show-ship_to_customer').show(); {/literal}"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" /></a>
@@ -390,7 +390,7 @@
 
 {	if ($invoice.note != null)}
 		<tr class="tr_head">
-			<th>{$LANG.notes}:</th>
+			<th>{ $LANG.notes }:</th>
 			<td colspan="4"></td>
 			<td class="si_switch">
 {		if ($invoice.note|count_characters:true > 25)}
@@ -473,10 +473,10 @@
 			<table>
 				<tr>
 					<th>{$LANG.total}</th>
-					<th><a href="index.php?module=payments&amp;view=manage&amp;id={$invoice.id|urlencode}">{$LANG.paid}</a></th>
+					<th><a href="index.php?module=payments&amp;view=manage&amp;id={$invoice.id|urlencode}" title="{ $LANG.view } { $LANG.invoice } { $LANG.payment }">{ $LANG.paid }</a></th>
 					<th>{$LANG.owing}</th>
 					<th>{$LANG.age}
-						<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_age" title="{$LANG.age}"><img src="./images/common/help-small.png" alt="help" /></a>
+						<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_age" title="{ $LANG.age }"><img src="./images/common/help-small.png" alt="help" /></a>
 					</th>
 				</tr>
 				<tr>
@@ -488,11 +488,11 @@
 			</table>
 		</div>
 		<div class="si_invoice_account2">
-			<h5><a href="index.php?module=customers&amp;view=details&amp;id={$customer.id|urlencode}&amp;action=view">{$LANG.customer_account}</a></h5>
+			<h5><a href="index.php?module=customers&amp;view=details&amp;id={$customer.id|urlencode}&amp;action=view" title="{ $LANG.view } { $LANG.customer_account }">{ $LANG.customer_account }</a></h5>
 			<table>
 				<tr>
 					<th>{$LANG.total}</th>
-					<th><a href="index.php?module=payments&amp;view=manage&amp;c_id={$customer.id|urlencode}">{$LANG.paid}</a></th>
+					<th><a href="index.php?module=payments&amp;view=manage&amp;c_id={$customer.id|urlencode}" title="{ $LANG.customer } { $LANG.payments }">{ $LANG.paid }</a></th>
 					<th>{$LANG.owing}</th>
 				</tr>
 				<tr>
