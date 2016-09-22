@@ -329,14 +329,14 @@ class myinvoice extends invoice
 		if (isset($this->defaults['use_ship_to']) && $this->defaults['use_ship_to'])	$sql.= ', '. $_POST['ship_to_customer_id'];
 		if (isset($type_id))		$sql.= ', '. $type_id;
 		if (isset($_POST['preference_id']))		$sql.= ', '. $_POST['preference_id'];
-		if (isset($clean_date))		$sql.= ', '. $clean_date;
-		if (isset($this->defaults['use_attn']) && $this->defaults['use_attn'])			$sql.= ', '. $_POST['attention'];
-		if (isset($_POST['note']))		$sql.= ', '. trim($_POST['note']);
-		if (isset($_POST['customField1']))		$sql.= ', '. $_POST['customField1'];
-		if (isset($_POST['customField2']))		$sql.= ', '. $_POST['customField2'];
-		if (isset($_POST['customField3']))		$sql.= ', '. $_POST['customField3'];
-		if (isset($_POST['customField4']))		$sql.= ', '. $_POST['customField4'];
-		if (isset($this->defaults['use_terms']) && $this->defaults['use_terms'])		$sql.= ', '. $_POST['terms'];
+		if (isset($clean_date))		$sql.= ', \''. $clean_date. '\'';
+		if (isset($this->defaults['use_attn']) && $this->defaults['use_attn'])			$sql.= ', \''. $_POST['attention']. '\'';
+		if (isset($_POST['note']))		$sql.= ', \''. trim($_POST['note']). '\'';
+		if (isset($_POST['customField1']))		$sql.= ', \''. $_POST['customField1']. '\'';
+		if (isset($_POST['customField2']))		$sql.= ', \''. $_POST['customField2']. '\'';
+		if (isset($_POST['customField3']))		$sql.= ', \''. $_POST['customField3']. '\'';
+		if (isset($_POST['customField4']))		$sql.= ', \''. $_POST['customField4']. '\'';
+		if (isset($this->defaults['use_terms']) && $this->defaults['use_terms'])		$sql.= ', \''. $_POST['terms']. '\'';
 /*
 				:index_id
 				, :domain_id
@@ -356,6 +356,7 @@ class myinvoice extends invoice
 */
 		$sql.= ")";
 /*		}*/
+		error_log("insertNew:$sql");
 		$sth = dbQuery ($sql);//
 		/*
 	//$logger->log('myinvoice::insert:', Zend_Log::INFO);
@@ -498,8 +499,8 @@ class myinvoice extends invoice
 			return null;
 		}
 		$sql = "	UPDATE ". TB_PREFIX. "invoices
-					SET
-				index_id = :index_id
+					SET ";
+/*				index_id = :index_id
 				, biller_id = :biller_id
 				, customer_id = :customer_id";
 		if (isset($this->defaults['use_ship_to']) && $this->defaults['use_ship_to'])		$sql.=", ship_to_customer_id = :ship_to_customer_id";
@@ -515,7 +516,25 @@ class myinvoice extends invoice
 		$sql.= "WHERE
 				id = :invoice_id
 			AND domain_id = :domain_id";
-
+*/
+		$sql.= 'index_id = '. index::next('invoice', $pref_group['index_group'], $this->domain_id);
+		if (isset($_POST['biller_id']))		$sql.= ', biller_id = '. $_POST['biller_id'];
+		if (isset($_POST['customer_id']))		$sql.= ', customer_id = '. $_POST['customer_id'];
+		if (isset($this->defaults['use_ship_to']) && $this->defaults['use_ship_to'])	$sql.= ', ship_to_customer_id = '. $_POST['ship_to_customer_id'];
+		if (isset($_POST['preference_id']))		$sql.= ', preference_id = '. $_POST['preference_id'];
+		if (isset($clean_date))		$sql.= ', date = \''. $clean_date. '\'';
+		if (isset($this->defaults['use_attn']) && $this->defaults['use_attn'])			$sql.= ', attention = \''. $_POST['attention']. '\'';
+		if (isset($_POST['note']))		$sql.= ', note = \''. trim($_POST['note']). '\'';
+		if (isset($_POST['customField1']))		$sql.= ', customField1 = \''. $_POST['customField1']. '\'';
+		if (isset($_POST['customField2']))		$sql.= ', customField2 = \''. $_POST['customField2']. '\'';
+		if (isset($_POST['customField3']))		$sql.= ', customField3 = \''. $_POST['customField3']. '\'';
+		if (isset($_POST['customField4']))		$sql.= ', customField4 = \''. $_POST['customField4']. '\'';
+		if (isset($this->defaults['use_terms']) && $this->defaults['use_terms'])		$sql.= ', terms = \''. $_POST['terms']. '\'';
+		if (isset($this->domain_id))		$sql.= 'WHERE id = '. $id;
+		if (isset($this->domain_id))		$sql.= ' AND domain_id = '. $this->domain_id;
+		error_log("update:$sql");
+		return dbQuery($sql);
+/*
 	//$logger->log('myinvoice::update:', Zend_Log::INFO);
 	//$logger->log('sql='.$sql, Zend_Log::INFO);
 	//	echo "<script>alert('sql 1=$sql')</script>";
@@ -541,6 +560,7 @@ class myinvoice extends invoice
 		$params[':domain_id'] = 		$this->domain_id;
 		$sth= dbQuery2($sql, $params);
 		error_log("update:$sql -=- ".print_r($params,true));
+*/
 /*
 		if ($this->defaults['use_ship_to'] && $this->defaults['use_terms']) {
 			return dbQuery($sql,
@@ -626,6 +646,11 @@ class myinvoice extends invoice
 		$_POST['preference_id'] = 5;
 		//insert entry as new delivery note
 		
+		$pref_group = getPreference($_POST['preference_id']);
+
+		//also set the current time (if null or =00:00:00)
+		$clean_date=SqlDateWithTime($_POST['date']);
+
 		if ($db_server == 'mysql' && !_invoice_check_fk(
 			$_POST['biller_id'], $_POST['customer_id'],
 			$type, $_POST['preference_id'])) {
@@ -651,7 +676,7 @@ class myinvoice extends invoice
 		$sql.= ")
 			VALUES
 			(
-				NULL";
+				NULL, ";
 /*				, :index_id
 				, :domain_id
 				, :biller_id
@@ -710,14 +735,17 @@ class myinvoice extends invoice
 		if (isset($_POST['customer_id']))		$sql.= ', '. $_POST['ship_to_customer_id'];
 		if (isset($type_id))		$sql.= ', '. $type_id;
 		if (isset($_POST['preference_id']))		$sql.= ', '. $_POST['preference_id'];
-		if (isset($clean_date))		$sql.= ', '. $clean_date;
-		if (isset($this->defaults['use_attn']) && $this->defaults['use_attn'])			$sql.= ', '. $_POST['attention'];
-		if (isset($_POST['note']))		$sql.= ', '. trim($_POST['note']);
-		if (isset($_POST['customField1']))		$sql.= ', '. $_POST['customField1'];
-		if (isset($_POST['customField2']))		$sql.= ', '. $_POST['customField2'];
-		if (isset($_POST['customField3']))		$sql.= ', '. $_POST['customField3'];
-		if (isset($_POST['customField4']))		$sql.= ', '. $_POST['customField4'];
-		if (isset($this->defaults['use_terms']) && $this->defaults['use_terms'])		$sql.= ', '. $_POST['terms'];
+		if (isset($clean_date))		$sql.= ', \''. $clean_date. '\'';
+		if (isset($this->defaults['use_attn']) && $this->defaults['use_attn'])			$sql.= ', \''. $_POST['attention']. '\'';
+		if (isset($_POST['note']))		$sql.= ', \''. trim($_POST['note']). '\'';
+		if (isset($_POST['customField1']))		$sql.= ', \''. $_POST['customField1']. '\'';
+		if (isset($_POST['customField2']))		$sql.= ', \''. $_POST['customField2']. '\'';
+		if (isset($_POST['customField3']))		$sql.= ', \''. $_POST['customField3']. '\'';
+		if (isset($_POST['customField4']))		$sql.= ', \''. $_POST['customField4']. '\'';
+		if (isset($this->defaults['use_terms']) && $this->defaults['use_terms'])		$sql.= ', \''. $_POST['terms']. '\'';
+		$sql .=')';
+		error_log("insert_DeliveryNote:$sql");
+		$sth = dbQuery($sql);
 /*
 	//$logger->log('myinvoice::insertDN:', Zend_Log::INFO);
 	//$logger->log('sql='.$sql, Zend_Log::INFO);
@@ -803,13 +831,10 @@ class myinvoice extends invoice
 		}
 		$sql = "UPDATE
 				".TB_PREFIX."invoices
-			SET
-				, index_id = :index_id
-//				, domain_id = :domain_id
+			SET ";
+/*				index_id = :index_id
 				, biller_id = :biller_id
 				, customer_id = :customer_id";
-//		if (isset($this->defaults['use_ship_to']) && $this->defaults['use_ship_to'])		$sql.= ", ship_to_customer_id = :ship_to_customer_id";
-//		$sql.= ", type_id = :type_id
 		$sql.= ", preference_id = :preference_id
 				, date = :date";
 		if (isset($this->defaults['use_attn']) && $this->defaults['use_attn'])				$sql.= ", attention = :attention";
@@ -822,7 +847,25 @@ class myinvoice extends invoice
 		$sql.= "WHERE
 				id = :invoice_id
 			AND domain_id = :domain_id";
-				
+*/
+		$sql.= 'index_id = '. index::next('invoice', $pref_group['index_group'], $this->domain_id);
+		if (isset($_POST['biller_id']))		$sql.= ', biller_id = '. $_POST['biller_id'];
+		if (isset($_POST['customer_id']))		$sql.= ', customer_id = '. $_POST['customer_id'];
+		if (isset($_POST['preference_id']))		$sql.= ', preference_id = '. $_POST['preference_id'];
+		if (isset($clean_date))		$sql.= ', date = \''. $clean_date. '\'';
+		if (isset($this->defaults['use_attn']) && $this->defaults['use_attn'])			$sql.= ', attention = \''. $_POST['attention']. '\'';
+		if (isset($_POST['note']))		$sql.= ', note = \''. trim($_POST['note']). '\'';
+		if (isset($_POST['customField1']))		$sql.= ', customField1 = \''. $_POST['customField1']. '\'';
+		if (isset($_POST['customField2']))		$sql.= ', customField2 = \''. $_POST['customField2']. '\'';
+		if (isset($_POST['customField3']))		$sql.= ', customField3 = \''. $_POST['customField3']. '\'';
+		if (isset($_POST['customField4']))		$sql.= ', customField4 = \''. $_POST['customField4']. '\'';
+		if (isset($this->defaults['use_terms']) && $this->defaults['use_terms'])		$sql.= ', terms = \''. $_POST['terms']. '\'';
+		if (isset($this->domain_id))		$sql.= 'WHERE id = '. $id;
+		if (isset($this->domain_id))		$sql.= ' AND domain_id = '. $this->domain_id;
+		$sql .=')';
+		error_log("update_DeliveryNote:$sql");
+		return dbQuery($sql);
+/*				
 	//$logger->log('myinvoice::updateDN:', Zend_Log::INFO);
 	//$logger->log('sql='.$sql, Zend_Log::INFO);
 		$params = array(
@@ -846,6 +889,7 @@ class myinvoice extends invoice
 		$params[':domain_id'] = 		$this->domain_id;
 		return dbQuery2($sql, $params);
 		error_log("update_DeliveryNote:$sql -=- ".print_r($params,true));
+*/
 /*
 		return dbQuery($sql,
 			':index_id', 		$index_id,
