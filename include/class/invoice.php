@@ -279,11 +279,8 @@ class invoice {
         /*Check that the sort field is OK*/
         $validFields = array('index_id','index_name','iv.id', 'biller', 'customer', 'invoice_total','owing','date','aging','type','preference','type_id');
 
-        if (in_array($sort, $validFields)) {
-            $sort = $sort;
-        } else {
+        if (!in_array($sort, $validFields))
             $sort = "id";
-        }
 
         if(strstr($type,"count"))
         {
