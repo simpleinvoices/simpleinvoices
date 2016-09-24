@@ -13,7 +13,7 @@ $LANG = array();
 if ($databaseBuilt) {
     $tables = $zendDb->listTables(); // TEST: print db tables
     // if upgrading from old version then getDefaultLang wont work during install
-    if (in_array(TB_PREFIX . 'system_defaults', $tables)) {
+    if (in_array(TB_PREFIX. 'system_defaults', $tables)) {
         $language = getDefaultLanguage();
     } else {
         $language = "en_GB";
@@ -21,6 +21,7 @@ if ($databaseBuilt) {
 } else {
     $language = "en_GB";
 }
+$logger->log('language is '. $language. '.', Zend_Log::INFO);//Matt
 
 function getLanguageArray($lang = '') {
     global $ext_names, $LANG;
@@ -41,6 +42,7 @@ function getLanguageArray($lang = '') {
     foreach ($ext_names as $ext_name) {
         if (file_exists("./extensions/$ext_name/lang/$language/lang.php")) {
             include_once ("./extensions/$ext_name/lang/$language/lang.php");
+//$logger->log('language.php:include_once (./extensions/'. $ext_name. '/lang/'. $language. '/lang.php)', Zend_Log::INFO);//Matt
         }
     }
 
@@ -76,6 +78,7 @@ function getLanguageList() {
 }
 
 $LANG = getLanguageArray();
+//$logger->log('language array is '. print_r($LANG,true), Zend_Log::INFO);//Matt
 
 //TODO: if (getenv("HTTP_ACCEPT_LANGUAGE") != available language) && (config lang != en) ) {
 // then use config lang

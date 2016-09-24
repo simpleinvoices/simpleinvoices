@@ -96,15 +96,13 @@
 {if $config->debug->level == "All"}
 	<link rel="stylesheet" type="text/css" href="./library/blackbirdjs/blackbird.css" />	
 	<script type="text/javascript" src="./library/blackbirdjs/blackbird.js"></script>
-{/if}
-{literal}
-	<script type="text/javascript" src="./include/jquery/jquery.validationEngine.js"></script>
-{/literal}
-{strip}
+{/if}{literal}
+	<script type="text/javascript" src="./include/jquery/jquery.validationEngine.js"></script>{/literal}{strip}
 	{*$smarty.capture.hook_head_incscript*}
 	{$smarty.capture.hook_head_end}
 {/strip}
 </head>
+
 <body class="body_si body_module_{$module} body_view_{$view}">
 	{$smarty.capture.hook_body_start}
 	<div class="si_grey_background"></div>

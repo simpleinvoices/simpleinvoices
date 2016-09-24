@@ -299,7 +299,7 @@ class myinvoice extends invoice
 		if (isset($_POST['customField4']))		$sql.= ', \''. $_POST['customField4']. '\'';
 		if (isset($this->defaults['use_terms']) && $this->defaults['use_terms'])		$sql.= ', \''. $_POST['terms']. '\'';
 		$sql.= ")";
-		error_log("insertNew:$sql");
+//		error_log("myinvoice::insertNew:$sql");
 		$sth = dbQuery ($sql);
 		index::increment('invoice', $pref_group['index_group'], $this->domain_id);
 
@@ -347,7 +347,7 @@ class myinvoice extends invoice
 		if (isset($this->defaults['use_terms']) && $this->defaults['use_terms'])		$sql.= ', terms = \''. $_POST['terms']. '\'';
 		if (isset($this->domain_id))		$sql.= 'WHERE id = '. $id;
 		if (isset($this->domain_id))		$sql.= ' AND domain_id = '. $this->domain_id;
-		error_log("update:$sql");
+//		error_log("myinvoice::update:$sql");
 		return dbQuery($sql);
 	}
 
@@ -428,7 +428,7 @@ class myinvoice extends invoice
 		if (isset($_POST['customField4']))		$sql.= ', \''. $_POST['customField4']. '\'';
 		if (isset($this->defaults['use_terms']) && $this->defaults['use_terms'])		$sql.= ', \''. $_POST['terms']. '\'';
 		$sql .=')';
-		error_log("insert_DeliveryNote:$sql");
+//		error_log("myinvoice::insert_DeliveryNote:$sql");
 		$sth = dbQuery($sql);
 
 		return $sth;
@@ -478,7 +478,7 @@ class myinvoice extends invoice
 		if (isset($this->domain_id))		$sql.= 'WHERE id = '. $id;
 		if (isset($this->domain_id))		$sql.= ' AND domain_id = '. $this->domain_id;
 		$sql .=')';
-		error_log("update_DeliveryNote:$sql");
+//		error_log("myinvoice::update_DeliveryNote:$sql");
 		return dbQuery($sql);
 	}
 

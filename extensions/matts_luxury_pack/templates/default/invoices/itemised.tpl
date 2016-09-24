@@ -358,8 +358,8 @@
 						{
 							console.log('error');	console.log(errorThrown);
 							console.log(jqXHR);
-						}/*,
-			complete: 	function() {				$('#gmail_loading').hide();		}*/
+						},
+			complete: 	function() {				$('#gmail_loading').hide();		}
 		});
 		$('#gmail_loading').hide();
 	}
@@ -397,8 +397,8 @@
 						{
 							console.log('error');	console.log(errorThrown);
 							console.log(jqXHR);
-						}/*,
-			complete: 	function() {				$('#gmail_loading').hide();	}*/
+						},
+			complete: 	function() {				$('#gmail_loading').hide();		}
 		});
 		$('#gmail_loading').hide();
 	}

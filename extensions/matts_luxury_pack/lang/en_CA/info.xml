@@ -3,8 +3,8 @@
 	<name>English</name>
 	<shortname>en_CA</shortname>
 	<englishname>Canada</englishname>
-	<version>1.0.0</version>
+	<version>1.2.3</version>
 	<creationDate>2016-07-18</creationDate>
-	<author>Matt Scott</author>
-	<authorEmail>matt.scott@sohnetwork.com</authorEmail>
+	<author>Matt</author>
+	<authorEmail>git0matt@gmail.com</authorEmail>
 </langfile>

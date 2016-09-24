@@ -59,6 +59,7 @@ if (!is_writable('./tmp/cache')) {
 }
 
 include_once ('./config/define.php');
+$logger->log('init.php:include_once (./config/define.php)', Zend_Log::INFO);//Matt
 global $environment;
 
 // Include another config file if required
@@ -70,6 +71,7 @@ if (is_file('./config/custom.config.php')) {
 }
 // added 'true' to allow modifications from db
 $config = new Zend_Config_Ini("./" . $config_file_path, $environment, true);
+$logger->log('init.php:config_file_path = '. $config_file_path, Zend_Log::INFO);//Matt
 
 // set up app with relevant php setting
 date_default_timezone_set($config->phpSettings->date->timezone);
@@ -154,14 +156,29 @@ $install_path = htmlsafe($path['dirname']);
 if ($install_path) {} // Show variable as used.
 
 include_once ("./include/class/db.php");
+$logger->log('init.php:include_once (./include/class/db.php)', Zend_Log::INFO);//Matt
 // With the database built, a connection should be able to be made
 // if the configuration user, password, etc. are set correctly.
 $db = ($databaseBuilt ? db::getInstance() : NULL);
 if ($db) {} // Show variable as used.
 
 include_once ("./include/class/index.php");
+$logger->log('init.php:include_once (./include/class/index.php)', Zend_Log::INFO);//Matt
+/*
+global $ext_names;
+loadSiExtentions($ext_names);
+$done = false;
+foreach ($ext_names as $ext_name) {
+    if (file_exists("./extensions/$ext_name/include/sql_queries.php")) {
+        require_once ("./extensions/$ext_name/include/sql_queries.php");
+        $done = true;
+        break;
+    }
+}
+if (!$done)     include_once ("./include/sql_queries.php");
+*/
 include_once ("./include/sql_queries.php");
-
+$logger->log('init.php:include_once (./include/sql_queries.php)', Zend_Log::INFO);//Matt
 $patchCount = 0;
 if ($databaseBuilt) {
     // Set these global variables.
@@ -201,19 +218,35 @@ $defaults = getSystemDefaults();
 $smarty->assign("defaults", $defaults);
 
 include_once ('./include/language.php');
+$logger->log('init.php:include_once (./include/language.php)', Zend_Log::INFO);//Matt
 
-include ('./include/include_auth.php');
+$done = false;
+foreach ($ext_names as $ext_name) {
+    if (file_exists("./extensions/$ext_name/include/include_auth.php")) {
+        require_once ("./extensions/$ext_name/include/include_auth.php");
+$logger->log('init.php:require_once (./extensions/'. $ext_name. '/include/include_auth.php)', Zend_Log::INFO);//Matt
+        $done = true;
+        break;
+    }
+}
+if (!$done)     include ('./include/include_auth.php');
+$logger->log('init.php:include_once (./include/include_auth.php)', Zend_Log::INFO);//Matt
 include_once ('./include/manageCustomFields.php');
+$logger->log('init.php:include_once (./include/manageCustomFields.php)', Zend_Log::INFO);//Matt
 include_once ("./include/validation.php");
+$logger->log('init.php:include_once (./include/validation.php)', Zend_Log::INFO);//Matt
 if ($databaseBuilt && $databasePopulated && $config->authentication->enabled == 1) {
     include_once ("./include/acl.php");
+$logger->log('init.php:include_once (./include/acl.php)', Zend_Log::INFO);//Matt
     // if authentication enabled then do acl check etc..
     foreach ($ext_names as $ext_name) {
         if (file_exists("./extensions/$ext_name/include/acl.php")) {
             require_once ("./extensions/$ext_name/include/acl.php");
+$logger->log('init.php:require_once (./extensions/'. $ext_name. '/include/acl.php)', Zend_Log::INFO);//Matt
         }
     }
     include_once ("./include/check_permission.php");
+$logger->log('init.php:include_once (./include/check_permission.php)', Zend_Log::INFO);//Matt
 }
 
 /* *************************************************************
@@ -252,4 +285,4 @@ if ($siUrl) {} // Show variable as used.
  * (NOTE: NOT TESTED!)
  * *************************************************************/
 include_once ("./include/BackupDb.php");
-
+$logger->log('init.php:include_once (./include/BackupDb.php)', Zend_Log::INFO);//Matt

@@ -15,7 +15,16 @@ if ($config->authentication->enabled == 1) {
     if ($auth_session->domain_id == null) {
         $auth_session->domain_id = "1";
     }
-    include ('./include/auth/auth.php');
+    global $ext_names;
+    $done = false;
+    foreach ($ext_names as $ext_name) {
+        if (file_exists("./extensions/$ext_name/include/auth/auth.php")) {
+            require_once ("./extensions/$ext_name/include/auth/auth.php");
+            $done = true;
+            break;
+        }
+    }
+    if (!$done)     include ('./include/auth/auth.php');
 } else {
     // If auth not on - use default domain and user id of 1
     // Chuck the user details sans password into the Zend_auth session

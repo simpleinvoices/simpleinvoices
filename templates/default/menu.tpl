@@ -30,8 +30,11 @@
 	</ul>
 	<div id="home">
 		<ul class="subnav">
+<!-- SECTION:dashboard -->
 			<li><a {if $pageActive== "dashboard"} class="active"{/if} href="index.php?module=index&amp;view=index">{$LANG.dashboard} </a></li>
+<!-- SECTION:report -->
 			<li><a {if $pageActive== "report"} class="active"{/if} href="index.php?module=reports&amp;view=index">{$LANG.all_reports} </a></li>
+<!-- SECTION:END -->
 		</ul>
 	</div>
 	<div id="money">
@@ -40,25 +43,21 @@
 			<li><a {if $pageActive== "invoice"} class="active"{/if} href="index.php?module=invoices&amp;view=manage">{$LANG.invoices}</a></li>
 			{if $subPageActive == "invoice_edit"}<li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}
 			{if $subPageActive == "invoice_view"}<li><a class="active active_subpage" href="#">{$LANG.quick_view} </a></li>{/if}
-<!-- SECTION:END -->
 <!-- SECTION:new_invoice -->
 			<li><a {if $pageActive== "invoice_new"}class="active" {/if}id="invoice_dialogx" href="index.php?module=invoices&amp;view=itemised">{$LANG.new_invoice}</a></li>
 			{if $subPageActive == "invoice_new_itemised"}<li><a class="active active_subpage" href="#">{$LANG.itemised}</a></li>{/if}
 			{if $subPageActive == "invoice_new_total"}<li><a class="active active_subpage" href="#">{$LANG.total}</a></li>{/if}
-<!-- SECTION:END -->
 <!-- SECTION:recurrence -->
 			<li><a {if $pageActive== "cron"} class="active"{/if} href="index.php?module=cron&amp;view=manage">{$LANG.recurrence}</a></li>
 			{if $subPageActive == "cron_add"}<li><a class="active active_subpage" href="#">{$LANG.add}</a></li>{/if}
 			{if $subPageActive == "cron_edit"}<li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}
 			{if $subPageActive == "cron_view"}<li><a class="active active_subpage" href="#">{$LANG.view}</a></li>{/if}
-<!-- SECTION:END -->
 <!-- SECTION:payments -->
 			<li><a {if $pageActive== "payment"}class="active" {/if}href="index.php?module=payments&amp;view=manage">{$LANG.payments}</a></li>
 			{if $subPageActive == "payment_process"}<li><a class="active active_subpage" href="#">{$LANG.process}</a></li>{/if}
 			{if $subPageActive == "payment_eway"}<li><a class="active active_subpage" href="#">{$LANG.eway}</a></li>{/if}
 			{if $subPageActive == "payment_filter_invoice"}<li><a class="active active_subpage" href="#">{$LANG.payments_filtered} {$preference.pref_inv_wording|htmlsafe} {$smarty.get.id|htmlsafe}</a></li>{/if}
 			{if $subPageActive == "payment_filter_customer"}<li><a class="active active_subpage" href="#">{$LANG.payments_filtered_customer} '{$customer.name}'</a></li>{/if}
-<!-- SECTION:END -->
 <!-- SECTION:sales_report -->
 			<li><a {if $pageActive== "report_sale"}class="active" {/if}href="index.php?module=reports&amp;view=report_sales_total">{$LANG.sales_report}</a></li>
 <!-- SECTION:END -->
@@ -71,13 +70,11 @@
 			{if $subPageActive == "customer_add"}<li><a class="active active_subpage" href="#">{$LANG.add}</a></li>{/if}
 			{if $subPageActive == "customer_view"}<li><a class="active active_subpage" href="#">{$LANG.view}</a></li>{/if}
 			{if $subPageActive == "customer_edit"}<li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}
-<!-- SECTION:END -->
 <!-- SECTION:billers -->
 			<li><a {if $pageActive== "biller"}class="active" {/if}href="index.php?module=billers&amp;view=manage">{$LANG.billers}</a></li>
 			{if $subPageActive == "biller_add"}<li><a class="active active_subpage" href="#">{$LANG.add}</a></li>{/if}
 			{if $subPageActive == "biller_view"}<li><a class="active active_subpage" href="#">{$LANG.view}</a></li>{/if}
 			{if $subPageActive == "biller_edit"}<li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}
-<!-- SECTION:END -->
 <!-- SECTION:users -->
 			<li><a {if $pageActive== "user"}class="active" {/if}href="index.php?module=user&amp;view=manage">{$LANG.users}</a></li>
 			{if $subPageActive == "user_add"}<li><a class="active active_subpage" href="#">{$LANG.add}</a></li>{/if}
@@ -92,7 +89,6 @@
 			<li><a {if $pageActive== "product_manage"}class="active" {/if}href="index.php?module=products&amp;view=manage">{$LANG.manage_products}</a></li>
 			{if $subPageActive == "product_view"}<li><a class="active active_subpage" href="#">{$LANG.view}</a></li>{/if}
 			{if $subPageActive == "product_edit"}<li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}
-<!-- SECTION:END -->
 <!-- SECTION:add_product -->
 			<li><a {if $pageActive== "product_add"}class="active" {/if}href="index.php?module=products&amp;view=add">{$LANG.add_product}</a></li>
 			{if $defaults.inventory == "1"}
@@ -101,7 +97,6 @@
 				{if $subPageActive == "inventory_edit"}<li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}
 				{if $subPageActive == "inventory_add"}<li><a class="active active_subpage" href="#">{$LANG.add}</a></li>{/if}
 			{/if}
-<!-- SECTION:END -->
 <!-- SECTION:product_attributes -->
 			{if $defaults.product_attributes}
 				<li><a {if $pageActive== "inventory"}class="active" {/if}href="index.php?module=product_attribute&amp;view=manage">{$LANG.product_attributes}</a></li>
@@ -121,27 +116,22 @@
 <!-- SECTION:settings -->
 			<li><a {if $pageActive== "setting"}class="active" {/if}href="index.php?module=options&amp;view=index">{$LANG.settings}</a></li>
 			{if $subPageActive == "setting_extensions"}<li><a class="active active_subpage" href="#">{$LANG.extensions}</a></li>{/if}
-<!-- SECTION:END -->
 <!-- SECTION:system_preferences -->
 			<li><a {if $pageActive== "system_default"}class="active" {/if}href="index.php?module=system_defaults&amp;view=manage">{$LANG.system_preferences}</a></li>
-<!-- SECTION:END -->
 <!-- SECTION:custom_fields -->
 			<li><a {if $pageActive== "custom_field"}class="active" {/if}href="index.php?module=custom_fields&amp;view=manage">{$LANG.custom_fields_upper}</a></li>
 			{if $subPageActive == "custom_fields_view"}<li><a class="active active_subpage" href="#">{$LANG.view}</a></li>{/if}
 			{if $subPageActive == "custom_fields_edit"}<li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}
-<!-- SECTION:END -->
 <!-- SECTION:tax_rates -->
 			<li><a {if $pageActive== "tax_rate"}class="active" {/if}href="index.php?module=tax_rates&amp;view=manage">{$LANG.tax_rates}</a></li>
 			{if $subPageActive == "tax_rates_add"}<li><a class="active active_subpage" href="#">{$LANG.add}</a></li>{/if}
 			{if $subPageActive == "tax_rates_view"}<li><a class="active active_subpage" href="#">{$LANG.view}</a></li>{/if}
 			{if $subPageActive == "tax_rates_edit"}<li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}
-<!-- SECTION:END -->
 <!-- SECTION:invoice_preferences -->
 			<li><a {if $pageActive== "preference"}class="active" {/if}href="index.php?module=preferences&amp;view=manage">{$LANG.invoice_preferences}</a></li>
 			{if $subPageActive == "preferences_add"}<li><a class="active active_subpage" href="#">{$LANG.add}</a></li>{/if}
 			{if $subPageActive == "preferences_view"}<li><a class="active active_subpage" href="#">{$LANG.view}</a></li>{/if}
 			{if $subPageActive == "preferences_edit"}<li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}
-<!-- SECTION:END -->
 <!-- SECTION:payment_types -->
 			<li><a {if $pageActive== "payment_type"}class="active" {/if}href="index.php?module=payment_types&amp;view=manage">{$LANG.payment_types}</a></li>
 			{if $subPageActive == "payment_types_add"}<li><a class="active active_subpage" href="#">{$LANG.add}</a></li>{/if}

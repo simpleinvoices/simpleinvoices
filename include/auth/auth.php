@@ -9,6 +9,7 @@ if ($module != 'api'){
 	    $_GET['module'] = '';
 	  }
 		if  ($_GET['module'] !== "auth") {
+		    error_log('login from '. isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '');
 			header('Location: index.php?module=auth&view=login');       
 			exit;
 		}
