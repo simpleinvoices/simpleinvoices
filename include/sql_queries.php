@@ -671,7 +671,7 @@ function getDefaultTax($domain_id = '') {
             WHERE ( s.name      = 'tax'
                 AND t.tax_id    = s.value
                 AND t.domain_id = s.domain_id
-                AND s.domain_id = :domain_id";
+                AND s.domain_id = :domain_id)";
     // @formatter:on
     $sth = dbQuery($sql, ':domain_id', $domain_id);
     return $sth->fetch();
