@@ -340,14 +340,14 @@ class myinvoice extends invoice
 		if (isset($clean_date))		$sql.= ', date = \''. $clean_date. '\'';
 		if (isset($this->defaults['use_attn']) && $this->defaults['use_attn'])			$sql.= ', attention = \''. $_POST['attention']. '\'';
 		if (isset($_POST['note']))		$sql.= ', note = \''. trim($_POST['note']). '\'';
-		if (isset($_POST['customField1']))		$sql.= ', customField1 = \''. $_POST['customField1']. '\'';
-		if (isset($_POST['customField2']))		$sql.= ', customField2 = \''. $_POST['customField2']. '\'';
-		if (isset($_POST['customField3']))		$sql.= ', customField3 = \''. $_POST['customField3']. '\'';
-		if (isset($_POST['customField4']))		$sql.= ', customField4 = \''. $_POST['customField4']. '\'';
+		if (isset($_POST['customField1']))		$sql.= ', custom_field1 = \''. $_POST['customField1']. '\'';
+		if (isset($_POST['customField2']))		$sql.= ', custom_field2 = \''. $_POST['customField2']. '\'';
+		if (isset($_POST['customField3']))		$sql.= ', custom_field3 = \''. $_POST['customField3']. '\'';
+		if (isset($_POST['customField4']))		$sql.= ', custom_field4 = \''. $_POST['customField4']. '\'';
 		if (isset($this->defaults['use_terms']) && $this->defaults['use_terms'])		$sql.= ', terms = \''. $_POST['terms']. '\'';
-		if (isset($this->domain_id))		$sql.= 'WHERE id = '. $id;
+		if (isset($this->domain_id))		$sql.= ' WHERE id = '. $id;
 		if (isset($this->domain_id))		$sql.= ' AND domain_id = '. $this->domain_id;
-//		error_log("myinvoice::update:$sql");
+		error_log("myinvoice::update:$sql");
 		return dbQuery($sql);
 	}
 
