@@ -267,7 +267,45 @@
 
 <script type="text/javascript">
 <!--{literal}
-	var latest = 0;
+//	var latest = 0;
+	
+	function makeJSONcustXML(xml)
+	{
+		var output = '[';
+		for (var root=0; root<xml.childNodes.length; root++)
+		{
+			var myroot = xml.childNodes[root];
+			for (var c=0; c<myroot.childNodes.length; c++)
+			{
+				if (myroot.childNodes[c].tagName == 'row')
+				{
+					var myc = myroot.childNodes[c];
+					if (output.slice(-1)=='}')
+						output += ',';
+					output += '{';
+					for (var a=0; a<myc.attributes.length; a++)
+					{
+						var mya = myc.attributes[a];
+					//	if (a > 0)
+					//		output += ',';
+						output += '"'+ mya.name+ '":"'+ mya.value+'"';
+					}
+					for (var ac=0; ac<myc.childNodes.length; ac++)
+					{
+						var myaa = myc.childNodes[ac];
+						for (var aa=0; aa<myaa.attributes.length; aa++)
+						{
+						//	if (ac > 0)
+								output += ',';
+							output += '"'+ myaa.attributes[aa].value+ '":"'+ myaa.textContent.trim()+'"';
+						}
+					}
+					output += '}';
+				}
+			}
+		}
+		return output;
+	}
 
 	/* 
 	arguments:
@@ -283,7 +321,9 @@
 		if (rows) {
 			var items = [],
 				nodes = rows.childNodes,
-				latest = 0;
+				latest = 0,
+				counter = 0,
+				selected = 0;
 			if (nodes)
 			{
 				for (var i=0; i<nodes.length; i++)
@@ -304,10 +344,12 @@
 								var string = '<option value="'+ theid+ '"';
 								if (theid == latest)
 								{
-									string += ' selected="selected"';	// select latest
+//									string += ' selected="selected"';	// select latest
+									selected = counter;
 								}
 								string += '>'+ thename+ '</option>'+ "\n";
 								items.push (string);
+								counter += 1;
 								break;
 							}
 						}
@@ -318,37 +360,36 @@
 				}
 			}
 		}
+		items.unshift (selected);
 		return items;
 	}
 
 	function regenCustsSuccess(response)
 	{
-		items = optionsParseXML(response, 'id', 'name', true);
-		var ele = $('#customer_id');
+		var items = 				optionsParseXML(response, 'id', 'name', true);
+		var latest = 				items[0];
+		items.shift();
+		var ele = 					$('#customer_id');
+		ele[0].options.length = 	0;								// clear previous options
 		ele.append(items.join("\n"));								// fill customer list
-	//	ele[0].selectedIndex = total-1;								// select latest
-		var ele = $('#inserted_customer_street_address');
-		ele[0].innerHTML = '';
-		ele[0].href = '';											// clear customer address link
+		ele[0].selectedIndex = 		latest;
+		//json_customers = 			$.xml2json(response);//{*/literal}{$customers|@json_encode}{literal*};
+		var json_customers = 		makeJSONcustXML(response);
+		putAddress(ele[0].options[latest].value, 'customer_street_address');
 	{/literal}{if $defaults.use_ship_to}
-		items = optionsParseXML(response, 'id', 'name');
+		items = 					optionsParseXML(response, 'id', 'name');
+		items.shift();
 		items.unshift('<option value="0" selected="selected">{ $LANG.no_ship_to }</option>'+ "\n");
-		$('#ship_to_customer_id').append(items.join("\n"));			// fill ship-to-customer list
-		$('#inserted_ship_street_address').innerHTML = '';
-		$('#inserted_ship_street_address').href = '';				// clear ship-to address link
+		var ele = 					$('#ship_to_customer_id');
+		ele[0].options.length = 	0;
+		ele.append(items.join("\n"));								// fill ship-to-customer list
+//		putAddress(ele[0].options[latest].value, 'ship_street_address');
 	{/if}{literal}
-		//json_customers = $.xml2json(response);//{/literal}{$customers|@json_encode}{literal};
 	}
 
 	function regenCusts()
 	{
 		$('#gmail_loading').show();
-		document.getElementById('customer_id').options.length = 				0;	// clear previous options
-		document.getElementById('inserted_customer_street_address').href = 		'javascript:void(false)';
-		document.getElementById('inserted_customer_street_address').innerHTML = '';
-		document.getElementById('ship_to_customer_id').options.length = 		0;
-		document.getElementById('inserted_ship_street_address').href = 			'javascript:void(false)';
-		document.getElementById('inserted_ship_street_address').innerHTML = 	'';
 		$.ajax({
 			url:		'index.php?module=customers&view=xml',							// get output (json) of php script
 			type:		'POST',
@@ -357,11 +398,10 @@
 			error: 		function(jqXHR, textStatus, errorThrown)
 						{
 							console.log('error');	console.log(errorThrown);
-							console.log(jqXHR);
+							console.log(jqXHR);		$('#gmail_loading').hide();
 						},
 			complete: 	function() {				$('#gmail_loading').hide();		}
 		});
-		$('#gmail_loading').hide();
 	}
 
 	function regenProdsSuccess(response)
@@ -376,11 +416,13 @@
 			}
 			if (ele.selectedIndex == 0 || typeof ele.selectedIndex === "undefined" || answer)
 			{
-				items = optionsParseXML(response, 'id', 'description');
+				var items = optionsParseXML(response, 'id', 'description');
+				var latest = items[0];
+				items.shift();
 				ele.options.length = 0;										// clear previous options
 				items.unshift('<option value="">&nbsp;</option>'+ "\n");
 				$(ele).append(items.join("\n"));							// fill products list
-				$(ele).selectedIndex = total-1;								// select last added
+				ele.selectedIndex = latest;
 			}
 		}
 	}
@@ -396,11 +438,10 @@
 			error: 		function(jqXHR, textStatus, errorThrown)
 						{
 							console.log('error');	console.log(errorThrown);
-							console.log(jqXHR);
+							console.log(jqXHR);		$('#gmail_loading').hide();
 						},
 			complete: 	function() {				$('#gmail_loading').hide();		}
 		});
-		$('#gmail_loading').hide();
 	}
 
 	$('#regenCusts').click(function () { 						// launch regenCusts() when #regenCusts clicked

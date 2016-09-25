@@ -7,7 +7,7 @@
 *	 git0matt@gmail.com, Justin Kelly, Nicolas Ruflin, Soif
 *
 * Last edited:
-* 	 2016-09-14
+* 	 2016-09-25
 *
 * License:
 *	 GPL v2 or above
@@ -40,11 +40,11 @@ if (inIframe())
 	'					<img src="./images/common/database_table.png" alt="manage" />{ $LANG.manage_customers }</a>' +
 	'			</td>' +
 	'			<td>&nbsp;</td>' +
-	'			<td>' +
+/*	'			<td>' +
 	'				<a id="cancelAddProduct" href="javascript:void(0)" onclick="top.closeModal();top.regenCusts()" class="button">' +
 	'					<img src="./images/common/cog_edit.png" alt="close_reload" />{ $LANG.close }+{ $LANG.regenCusts }</a>' +
 	'			</td>' +
-	'		</tr>' +
+*/	'		</tr>' +
 	'	</table>' +
 	'</div>');
 {	if $smarty.post.cancel == null}
