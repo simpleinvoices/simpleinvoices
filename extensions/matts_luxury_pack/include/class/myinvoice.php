@@ -475,7 +475,7 @@ class myinvoice extends invoice
 		if (isset($_POST['customField3']))		$sql.= ', customField3 = \''. $_POST['customField3']. '\'';
 		if (isset($_POST['customField4']))		$sql.= ', customField4 = \''. $_POST['customField4']. '\'';
 		if (isset($this->defaults['use_terms']) && $this->defaults['use_terms'])		$sql.= ', terms = \''. $_POST['terms']. '\'';
-		if (isset($this->domain_id))		$sql.= 'WHERE id = '. $id;
+		if (isset($this->domain_id))		$sql.= ' WHERE id = '. $id;
 		if (isset($this->domain_id))		$sql.= ' AND domain_id = '. $this->domain_id;
 		$sql .=')';
 //		error_log("myinvoice::update_DeliveryNote:$sql");
