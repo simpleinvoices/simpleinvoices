@@ -62,7 +62,7 @@ class Payment {
         $rows = $pdoDb->request("SELECT", "payment", "ap");
         return $rows;
     }
-    
+
     /**
      * Get a specific payment type record.
      * @param int $id Unique ID of invoice to retrieve payments for.
@@ -95,7 +95,7 @@ class Payment {
 
         return $pdoDb->request("SELECT", "invoices", "iv");
     }
-    
+
     /**
      * Get a specific payment type record.
      * @param int $id Unique ID of customer to retrieve payments for.
@@ -113,7 +113,7 @@ class Payment {
         $oc->addSimpleItem("ap.ac_inv_id", new DbField("iv.id"), "AND");
         $oc->addSimpleItem("ap.domain_id", new DbField("iv.domain_id"));
         $pdoDb->addToJoins(array("LEFT", "payment", "ap", $oc));
-        
+
         $oc = new OnClause();
         $oc->addSimpleItem("iv.biller_id", new DbField("b.id"), "AND");
         $oc->addSimpleItem("iv.domain_id", new DbField("b.domain_id"));
@@ -152,7 +152,7 @@ class Payment {
         $oc->addSimpleItem("iv.domain_id", new DbField("b.domain_id"));
         $pdoDb->addToJoins(array("LEFT", "biller", "b", $oc));
 
-        $pdoDb->addSimpleWhere("ap.id", domain_id::get(), "AND");
+        $pdoDb->addSimpleWhere("ap.id", $id, "AND");
         $pdoDb->addSimpleWhere("ap.domain_id", domain_id::get());
 
         $pdoDb->setSelectList(array("ap.*", "c.id AS customer_id", "c.name AS customer",
@@ -196,7 +196,7 @@ class Payment {
 
         return $pdoDb->request("SELECT", "payment", "ap");
     }
-    
+
     /**
      * Add payment type description to retrieved payment records.
      * @param array $payments Array of <i>Payment</i> object to update.
