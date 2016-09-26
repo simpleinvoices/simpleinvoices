@@ -347,7 +347,7 @@ class myinvoice extends invoice
 		if (isset($this->defaults['use_terms']) && $this->defaults['use_terms'])		$sql.= ', terms = \''. $_POST['terms']. '\'';
 		if (isset($this->domain_id))		$sql.= ' WHERE id = '. $id;
 		if (isset($this->domain_id))		$sql.= ' AND domain_id = '. $this->domain_id;
-		error_log("myinvoice::update:$sql");
+		//error_log("myinvoice::update:$sql");
 		return dbQuery($sql);
 	}
 
