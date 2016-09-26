@@ -49,7 +49,8 @@ class PaymentType {
 
         $pdoDb->setSelectAll(true);
 
-        return $pdoDb->request("SELECT", "payment_types");
+        $rows = $pdoDb->request("SELECT", "payment_types");
+        return (empty($rows) ? $rows : $rows[0]);
     }
 
     /**
