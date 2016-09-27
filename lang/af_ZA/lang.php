@@ -20,6 +20,9 @@
 
 #all
 
+global $LANG;
+if ($LANG) {} // eliminates unused warning
+
 $LANG['about'] = "کے بارے میں";//1
 $LANG['account_info'] = "بیان کے";//1
 $LANG['actions'] = "Actions";//0

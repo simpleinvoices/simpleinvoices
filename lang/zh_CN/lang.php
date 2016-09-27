@@ -19,6 +19,9 @@
  */
 
 #all
+global $LANG;
+if ($LANG) {} // eliminates unused warning
+
 $LANG['about'] = "关于";//1
 $LANG['account_info'] = "账户资料";//1
 $LANG['actions'] = "操作";//1

@@ -22,6 +22,9 @@
  */
 
 #all
+global $LANG;
+if ($LANG) {} // eliminates unused warning
+
 $LANG['about'] = "Sobre";//1
 $LANG['account_info'] = "Informação de Conta";//1
 $LANG['actions'] = "Acções";//1

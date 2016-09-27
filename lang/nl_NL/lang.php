@@ -23,6 +23,9 @@
 
 #all
 
+global $LANG;
+if ($LANG) {} // eliminates unused warning
+
 $LANG['about'] = "Over SimpleInvoices";//1
 $LANG['account_info'] = "Account informatie";//1
 $LANG['actions'] = "Acties";//1

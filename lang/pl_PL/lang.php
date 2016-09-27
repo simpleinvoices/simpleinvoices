@@ -20,6 +20,9 @@
 
 #all
 
+global $LANG;
+if ($LANG) {} // eliminates unused warning
+
 $LANG['about'] = "O Programie";//1
 $LANG['account_info'] = "Informacje o koncie";//1
 $LANG['actions'] = "Akcje";//1

@@ -1,4 +1,6 @@
 <?php
+global $LANG;
+
 // @formatter:off
 $LCL_LANG = array(
     'for_the_period_upper'   => "For The Period",

@@ -1,4 +1,6 @@
 <?php
+global $LANG;
+
 // @formatter:off
 $CLANG = array(
     'parent_customer' => "Parent customer",

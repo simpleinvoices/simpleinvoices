@@ -22,6 +22,9 @@
  */
 
 #all
+global $LANG;
+if ($LANG) {} // eliminates unused warning
+
 $LANG['about'] = "Σχετικά";//1
 $LANG['account_info'] = "Πληροφορίες Λογαριασμών";//1
 $LANG['actions'] = "Ενέργειες";//1

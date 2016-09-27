@@ -1,4 +1,6 @@
 <?php
+global $LANG;
+
 // @formatter:off
 $LCL_LANG = array(
     'add_new_expense'               => "Add New Expense",

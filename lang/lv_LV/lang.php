@@ -23,6 +23,9 @@
 
 #all
 
+global $LANG;
+if ($LANG) {} // eliminates unused warning
+
 $LANG['about'] = "Par mums";//1
 $LANG['account_info'] = "Rēķina info";//1
 $LANG['actions'] = "Darbība";//1

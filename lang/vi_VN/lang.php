@@ -19,6 +19,9 @@
  */
 
 #all
+global $LANG;
+if ($LANG) {} // eliminates unused warning
+
 $LANG['about'] = "Giới thiệu";//1
 $LANG['account_info'] = "Thông tin tài khoản";//1
 $LANG['actions'] = "Thao tác";//1

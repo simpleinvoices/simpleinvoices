@@ -1,4 +1,6 @@
 <?php
+global $LANG;
+
 // @formatter:off
 $LCL_LANG = array(
     'company_logo'              => "Company Logo File Name",

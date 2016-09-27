@@ -23,6 +23,9 @@
 
 #all
 
+global $LANG;
+if ($LANG) {} // eliminates unused warning
+
 $LANG['about'] = "Tietoja ohjelmasta";//1
 $LANG['account_info'] = "Tilin tiedot";//1
 $LANG['actions'] = "Toiminnot";//1
