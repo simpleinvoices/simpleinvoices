@@ -58,9 +58,7 @@ class invoice {
                                   'custom_field2' => $this->custom_field2,
                                   'custom_field3' => $this->custom_field3,
                                   'custom_field4' => $this->custom_field4));
-$pdoDb->debugOn();
         $id = $pdoDb->request("INSERT", "invoices");
-$pdoDb->debugOff();
         // @formatter:on
 
         index::increment('invoice', $pref_group['index_group'], $this->domain_id);
@@ -81,9 +79,7 @@ $pdoDb->debugOff();
                                   'description' => trim($this->description),
                                   'total'       => $this->total,
                                   'attribute'   => $this->attribute));
-$pdoDb->debugOn();
         $id = $pdoDb("INSERT", "invoice_items");
-$pdoDb->debugOff();
         // @formatter:on
 
         invoice_item_tax($id, $this->tax, $this->unit_price, $this->quantity, 'insert', $this->domain_id);
