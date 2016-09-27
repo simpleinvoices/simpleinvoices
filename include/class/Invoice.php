@@ -1,7 +1,7 @@
 <?php
 require_once 'include/class/ProductAttributes.php';
 
-class invoice {
+class Invoice {
     public $id;
     public $domain_id;
     public $biller_id;
@@ -111,7 +111,7 @@ class invoice {
         $invoice['owing']         = $invoice['total'] - $invoice['paid'];
         $invoice['invoice_items'] = $this->getInvoiceItems($id, $this->domain_id);
 
-        // invoice total tax
+        // Invoice total tax
         $sql2 = "SELECT SUM(tax_amount) AS total_tax,
                         SUM(total) AS total
                  FROM " . TB_PREFIX . "invoice_items
@@ -410,7 +410,7 @@ class invoice {
     }
 
     /**
-     * Get invoice type.
+     * Get Invoice type.
      * @param string $id Invoice type ID.
      * @return array Associative array for <i>invoice_type</i> record accessed.
      */
@@ -425,7 +425,7 @@ class invoice {
      * Function: are_there_any
      *
      * Used to see if there are any invoices in the database for a given domain
-     * Called directly from index.php with invoice::are_there_any()
+     * Called directly from index.php with Invoice::are_there_any()
      * and hence cannot use the $this property
      */
     public function are_there_any($domain_id = '') {
@@ -441,7 +441,7 @@ class invoice {
     /**
      * Function getInvoiceGross
      *
-     * Used to get the gross total for a given invoice number
+     * Used to get the gross total for a given Invoice number
      */
     public function getInvoiceGross($invoice_id, $domain_id = '') {
         if (!empty($domain_id)) $this->domain_id = $domain_id;
@@ -458,10 +458,10 @@ class invoice {
     }
 
     /**
-     * Function invoice::max
+     * Function Invoice::max
      *
-     * Used to get the max invoice id
-     * is called directly from sql_patches.php with invoice::max()
+     * Used to get the max Invoice id
+     * is called directly from sql_patches.php with Invoice::max()
      * and hence $this->domain_id is not usable
      */
     public function max($domain_id = '') {
@@ -483,7 +483,7 @@ class invoice {
     public function recur() {
         $invoice = $this->select($this->id, $this->domain_id);
         // @formatter:off
-        $ni = new invoice();
+        $ni = new Invoice();
         $ni->domain_id     = $invoice['domain_id'];
         $ni->biller_id     = $invoice['biller_id'];
         $ni->customer_id   = $invoice['customer_id'];
@@ -498,7 +498,7 @@ class invoice {
         $ni_id = $ni->insert();
 
         // insert each line item
-        $nii = new invoice();
+        $nii = new Invoice();
         $nii->invoice_id = $ni_id;
         $nii->domain_id  = $ni->domain_id;
         foreach ($invoice['invoice_items'] as $v) {

@@ -31,7 +31,7 @@ $preference = getPreference($invoice['preference_id']);
 $defaults = getSystemDefaults();
 $logo = getLogo($biller);
 $logo = str_replace(" ", "%20", $logo);
-$invoiceItems = invoice::getInvoiceItems($invoiceID);
+$invoiceItems = Invoice::getInvoiceItems($invoiceID);
 
 //for($i=1;$i<=4;$i++) {
 //	$show["custom_field$i"] = show_custom_field("invoice_cf$i",$invoice["invoice_custom_field$i"],"read",'','tbl1-left','tbl1-right',3,':');

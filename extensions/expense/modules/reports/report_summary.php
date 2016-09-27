@@ -54,7 +54,7 @@ $accounts = $sth->fetchAll();
 // @formatter:off
 $payments = Payment::select_by_date($start_date, $end_date, "date", "");
 
-$invoice = new invoice();
+$invoice = new Invoice();
 $invoice->start_date = $start_date;
 $invoice->end_date   = $end_date;
 $invoice->having     = "date_between";

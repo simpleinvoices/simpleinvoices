@@ -6,7 +6,7 @@ checkLogin();
 
 // @formatter:off
 $expense_id  = $_GET['id'];
-$invoiceobj  = new invoice();
+$invoiceobj  = new Invoice();
 
 $rows = Expense::get($expense_id);
 $expense = $rows[0];

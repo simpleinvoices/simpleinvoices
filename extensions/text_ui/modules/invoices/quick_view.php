@@ -23,7 +23,7 @@ checkLogin();
 // @formatter:off
 $invoice_id   = $_GET['invoice'];
 $invoice      = getInvoice($invoice_id);
-$invoice_type = invoice::getInvoiceType($invoice['type_id']);
+$invoice_type = Invoice::getInvoiceType($invoice['type_id']);
 $customer     = Customer::get($invoice['customer_id']);
 $biller       = Biller::select($invoice['biller_id']);
 $preference   = getPreference($invoice['preference_id']);

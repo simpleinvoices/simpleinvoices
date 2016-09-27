@@ -16,7 +16,7 @@ checkLogin ();
 $master_invoice_id = $_GET['id'];
 $invoice = getInvoice ($master_invoice_id);
 // @formatter:off
-$invoiceobj   = new invoice ();
+$invoiceobj   = new Invoice();
 $invoiceItems = $invoiceobj->getInvoiceItems ( $master_invoice_id );
 
 $customers   = Customer::get_all(true);

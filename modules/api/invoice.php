@@ -2,7 +2,7 @@
 
 //get invoice details
 
-$invoiceobj = new invoice();
+$invoiceobj = new Invoice();
 // why hardcode invoice number below?
 $invoice = $invoiceobj->select('1');
 

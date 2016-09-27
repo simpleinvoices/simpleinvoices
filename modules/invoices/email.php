@@ -19,7 +19,7 @@ checkLogin();
 
 // @formatter:off
 $invoice_id  = $_GET['id'];
-$invoiceobj  = new invoice();
+$invoiceobj  = new Invoice();
 $invoice     = $invoiceobj->select($invoice_id);
 $preference  = getPreference($invoice['preference_id']);
 $biller      = Biller::select($invoice['biller_id']);

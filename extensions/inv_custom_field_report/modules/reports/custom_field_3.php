@@ -33,7 +33,7 @@ $custom_field3  = (isset($_POST['custom_field3'])  ? $_POST['custom_field3']  : 
 $filter_by_date = (isset($_POST['filter_by_date']) ? $_POST['filter_by_date'] : "no");
 
 if (isset($_POST['submit'])) {
-    $invoice = new invoice();
+    $invoice = new Invoice();
     $invoice->start_date  = $start_date;
     $invoice->end_date    = $end_date;
     $invoice->where_field = 'iv.custom_field3';

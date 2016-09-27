@@ -11,7 +11,7 @@
 define("BROWSE","browse");
 //if this page has error with auth remove the above line and figure out how to do it right
 
-$invoice = new invoice();
+$invoice = new Invoice();
 $sth = $invoice->select_all();
 
 $q = strtolower($_GET["q"]);

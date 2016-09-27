@@ -57,7 +57,7 @@ $having = "money_owed";
 $rp     = (isset($_POST['rp'])   ? $_POST['rp']   : "25");
 $page   = (isset($_POST['page']) ? $_POST['page'] : "1");
 
-$invoice_owing = new invoice();
+$invoice_owing = new Invoice();
 $invoice_owing->sort       = $sort;
 $invoice_owing->having_and = "real";
 $invoice_owing->query      = (isset($_REQUEST['query']) ? $_REQUEST['query'] : "");

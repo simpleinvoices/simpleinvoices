@@ -1332,7 +1332,7 @@ $patchlines['patch'] = "update `".TB_PREFIX."invoices` set index_id = id;";
 $patchlines['date' ] = "20090902";
 patchmaker('212', $patchlines, $si_patches);
 
-$invoiceobj = new invoice();
+$invoiceobj = new Invoice();
 $max_invoice = $invoiceobj->max();
 unset($invoiceobj);
 $patchlines['name' ] = "Update the index table with max invoice id - if required";

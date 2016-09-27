@@ -39,7 +39,7 @@ $statement        = array ("total" => 0, "owing" => 0, "paid" => 0);
 
 
 if (isset($_POST['submit'])) {
-    $invoice = new invoice();
+    $invoice = new Invoice();
     $invoice->start_date = $start_date;
     $invoice->end_date   = $end_date;
     $invoice->biller     = $biller_id;

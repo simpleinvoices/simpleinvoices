@@ -10,7 +10,7 @@ $having = (isset($_GET['having'])    ) ? $_GET['having']     : "";
 $page   = (isset($_POST['page'])     ) ? $_POST['page']      : "1";
 // @formatter:on
 
-$invoice = new invoice();
+$invoice = new Invoice();
 $invoice->sort = $sort;
 
 if ($auth_session->role_name == 'customer') {

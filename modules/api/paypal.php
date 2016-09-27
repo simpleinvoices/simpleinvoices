@@ -49,7 +49,7 @@ if ($p->validate_ipn ()) {
                                "ac_payment_type"   => $pmt_type));
         $logger->log('Paypal - payment_type=' . $pmt_type, Zend_Log::INFO);
 
-        $invoiceobj = new invoice ();
+        $invoiceobj = new Invoice();
         $invoice = $invoiceobj->select ( $p->ipn_data ['invoice'] );
 
         $biller = Biller::select ( $invoice ['biller_id'] );

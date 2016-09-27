@@ -38,7 +38,7 @@ jsEnd();
 $today = date("Y-m-d");
 $invoice = null;
 if(isset($_GET['id'])) {
-    $invoiceobj = new invoice();
+    $invoiceobj = new Invoice();
     $invoice = $invoiceobj->select($_GET['id']);
 } else {
     $pdoDb->addSimpleWhere("domain_id", domain_id::get());
@@ -52,7 +52,7 @@ $biller   = Biller::select($invoice['biller_id']);
 $defaults = getSystemDefaults();
 // @formatter:on
 
-$invoices = new invoice();
+$invoices = new Invoice();
 $invoices->having='money_owed';
 $invoices->having_and='real';
 $invoice_all = $invoices->select_all('count');

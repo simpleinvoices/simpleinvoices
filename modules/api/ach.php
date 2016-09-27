@@ -29,7 +29,7 @@ if ($_POST['pg_response_code'] == 'A01') {
                                "ac_payment_type"   => $pmt_type));
         $logger->log('ACH - payment_type='.$pmt_type, Zend_Log::INFO);
 
-        $invoiceobj = new invoice();
+        $invoiceobj = new Invoice();
         $invoice    = $invoiceobj->select($_POST['pg_consumerorderid']);
         $biller     = Biller::select($invoice['biller_id']);
 

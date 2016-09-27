@@ -32,6 +32,13 @@ $help_image_path = "./images/common/";
 
 // Note: include/functions.php and include/sql_queries.php loaded by this include.
 require_once "./include/init.php";
+/* Keep for potential future debug use
+error_log("index.php af init_pre.php - module[" . (empty($module) ? "" : $module) .
+        "] view[" . (empty($view) ? "" : $view) .
+        "] action[" . (empty($action) ? "" : $action) .
+        "] id[" . (empty($_GET['id']) ? "" : $_GET['id']) .
+        "]");
+*/
 global $smarty,
        $smarty_output,
        $menu,
@@ -102,7 +109,7 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
                 // There aren't patches to apply. So check to see if there are invoices in db.
                 // If so, show the home page as default. Otherwise show Manage Invoices page
                 if ($module == null) {
-                    $invoiceobj = new invoice();
+                    $invoiceobj = new Invoice();
                     if ($invoiceobj->are_there_any() > "0") {
                         $module = "invoices";
                         $view = "manage";
@@ -240,13 +247,14 @@ foreach ($ext_names as $ext_name) {
         }
     }
 }
+
 if ($extensionPhpFile == 0 && ($my_path = getCustomPath("$module/$view", 'module'))) {
     include $my_path;
 }
+
 // **********************************************************
 // Include php file for the requested page section - END
 // **********************************************************
-
 if ($module == "export" || $view == "export" || $module == "api") {
     exit(0);
 }
@@ -355,9 +363,11 @@ $path = '';
 // in the "<span ...>" tag. This tells the program to insert the report
 // menu item at the end of the section with "$LANG.xxxxx" value assigned
 // to the attribute.
+// @formatter:off
 $extension_insertion_files = array();
-$perform_extension_insertions = (($module == 'reports' && $view == 'index') ||
-                 ($module == 'system_defaults' && $view == 'manage'));
+$perform_extension_insertions = (($module == 'reports'         && $view == 'index') ||
+                                 ($module == 'system_defaults' && $view == 'manage'));
+// @formatter:on
 
 foreach ($ext_names as $ext_name) {
     $tpl_file = "./extensions/$ext_name/templates/default/$module/$view.tpl";
@@ -415,6 +425,7 @@ if ($extensionTemplates == 0) {
 $smarty->assign("extension_insertion_files"   , $extension_insertion_files);
 $smarty->assign("perform_extension_insertions", $perform_extension_insertions);
 $smarty->assign("path"                        , $path);
+
 $smarty->$smarty_output($my_tpl_path);
 // @formatter:on
 

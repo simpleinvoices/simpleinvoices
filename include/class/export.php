@@ -78,7 +78,7 @@ class export {
         global $show_only_unpaid;
 
         // @formatter:off
-        $invoice = new invoice();
+        $invoice = new Invoice();
         switch ($this->module) {
             case "statement":
                 $invoice->domain_id = $this->domain_id;
@@ -143,7 +143,7 @@ class export {
                 $logo = str_replace(" ", "%20", $logo);
 
                 $customer          = Customer::get($payment['customer_id']);
-                $invoiceType       = invoice::getInvoiceType($invoice['type_id']);
+                $invoiceType       = Invoice::getInvoiceType($invoice['type_id']);
                 $customFieldLabels = getCustomFieldLabels($this->domain_id, true);
                 $paymentType       = PaymentType::select($payment['ac_payment_type']);
                 $preference        = getPreference($invoice['preference_id'], $this->domain_id);
@@ -168,7 +168,7 @@ class export {
                 break;
 
             case "invoice":
-                $invoiceobj = new invoice();
+                $invoiceobj = new Invoice();
                 $invoiceobj->domain_id = $this->domain_id;
 
                 $invoice = $invoiceobj->select($this->id, $this->domain_id);

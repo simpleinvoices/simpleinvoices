@@ -11,7 +11,7 @@ if (isset($_POST['op']) && $_POST['op'] =='edit' && !empty($_POST['invoice_id'])
     $smarty->assign('saved', $saved);
 }
 
-$invoices = new invoice();
+$invoices = new Invoice();
 $invoices->sort='id';
 $invoice_all = $invoices->select_all('count');
 

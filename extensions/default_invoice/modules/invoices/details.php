@@ -27,7 +27,7 @@ $master_invoice_id = ($default_template_set ? $_GET ['template'] : $_GET ['id'])
 $invoice = getInvoice ( $master_invoice_id );
 if ($default_template_set) $invoice ['id'] = null;
 
-$invoiceobj = new invoice ();
+$invoiceobj = new Invoice();
 $invoiceItems = $invoiceobj->getInvoiceItems ( $master_invoice_id );
 
 $customers   = Customer::get_all(true);
@@ -42,7 +42,7 @@ for($i = 1; $i <= 4; $i ++) {
     $customFields [$i] = show_custom_field ( "invoice_cf$i", $invoice ["custom_field$i"], "write", '', "details_screen", '', '', '' );
 }
 
-$smarty->assign ( "invoice", $invoice );
+$smarty->assign ( "invoice"     , $invoice );
 $smarty->assign ( "defaults"    , $defaults );
 $smarty->assign ( "invoiceItems", $invoiceItems );
 $smarty->assign ( "customers"   , $customers );

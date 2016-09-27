@@ -3,7 +3,7 @@ global $smarty;
 
 $saved = false;
 
-$invoiceobj = new invoice ();
+$invoiceobj = new Invoice();
 $invoice_all = $invoiceobj->get_all ();
 
 if (($_POST ['op'] == 'add') && (! empty ( $_POST ['invoice_id'] ))) {

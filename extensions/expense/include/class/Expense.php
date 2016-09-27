@@ -27,7 +27,7 @@ class Expense {
         $add['biller_all'] = Biller::get_all();
 
         //get invoices
-        $invoiceobj = new invoice();
+        $invoiceobj = new Invoice();
         $add['invoice_all'] = $invoiceobj->get_all();
 
         //get products
@@ -56,7 +56,7 @@ class Expense {
         $detail['biller_all'] = Biller::get_all();
 
         //get invoices
-        $invoiceobj = new invoice();
+        $invoiceobj = new Invoice();
         $detail['invoice_all'] = $invoiceobj->get_all();
 
         //get products

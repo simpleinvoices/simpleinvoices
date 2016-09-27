@@ -227,7 +227,7 @@ class Cron {
                                 $value['recurrence_type'] . " was run today :: Info diff=" . $diff;
                         $i++;
 
-                        $ni = new invoice ();
+                        $ni = new Invoice();
                         $ni->id         = $value['invoice_id'];
                         $ni->domain_id  = $domain_id;
                         // $domain_id gets propagated from invoice to be copied from
@@ -235,7 +235,7 @@ class Cron {
 
                         $cron_log->insert ();
 
-                        $invoiceobj = new invoice ();
+                        $invoiceobj = new Invoice();
                         $invoice               = $invoiceobj->select($new_invoice_id, $domain_id);
                         $preference            = getPreference($invoice['preference_id'], $domain_id);
                         $biller                = Biller::select($invoice['biller_id']);

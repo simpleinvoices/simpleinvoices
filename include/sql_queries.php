@@ -773,7 +773,7 @@ function getInvoice($id, $domain_id = '') {
         $invoice['date']      = siLocal::date($invoice['date']);
         $invoice['total']     = getInvoiceTotal($invoice['id']);
     
-        $invoiceobj = new invoice();
+        $invoiceobj = new Invoice();
         $invoiceobj->domain_id = $domain_id;
     
         $invoice['gross'] = $invoiceobj->getInvoiceGross($invoice['id']);
@@ -1342,7 +1342,7 @@ function updateInvoice($invoice_id, $domain_id = '') {
 
     $domain_id = domain_id::get($domain_id);
 
-    $invoiceobj = new invoice();
+    $invoiceobj = new Invoice();
     $current_invoice = $invoiceobj->select($_POST['id']);
     $current_pref_group = getPreference($current_invoice['preference_id']);
 

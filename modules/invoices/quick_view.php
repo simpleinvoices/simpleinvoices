@@ -15,6 +15,8 @@
  * Website:
  *   http://www.simpleinvoices.or
  */
+global $config, $LANG, $smarty;
+
 // @formatter:off
 checkLogin();
 
@@ -22,14 +24,14 @@ $invoice_id = $_GET['id'];
 
 $invoice                 = getInvoice($invoice_id);
 $invoice_number_of_taxes = numberOfTaxesForInvoice($invoice_id);
-$invoice_type            = invoice::getInvoiceType($invoice['type_id']);
+$invoice_type            = Invoice::getInvoiceType($invoice['type_id']);
 
 $customer   = Customer::get($invoice['customer_id']);
 $biller     = Biller::select($invoice['biller_id']);
 $preference = getPreference($invoice['preference_id']);
 $defaults   = getSystemDefaults();
 
-$invoiceobj   = new invoice();
+$invoiceobj   = new Invoice();
 $invoiceItems = $invoiceobj->getInvoiceItems($invoice_id);
 
 $eway_check          = new eway();
@@ -51,6 +53,7 @@ $invoice['url_for_pdf'] = $url_for_pdf;
 
 $customFieldLabels = getCustomFieldLabels('',true);
 
+$customField = array();
 for($i=1;$i<=4;$i++) {
     $customField[$i] =
        show_custom_field("invoice_cf$i",$invoice["custom_field$i"],"read",'summary', '','',5,':');
