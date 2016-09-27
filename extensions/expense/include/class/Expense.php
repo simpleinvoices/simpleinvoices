@@ -67,7 +67,7 @@ class Expense {
 
     public static function save() {
         global $logger, $pdoDb;
-        $pdoDb->setExcludedFields(array("id" => 1));
+        $pdoDb->setExcludedFields("id");
         $id = $pdoDb->request("INSERT", "expense");
 
         $logger->log("Exp ITEM tax- last insert ID-$id", Zend_Log::INFO);
@@ -78,7 +78,7 @@ class Expense {
 
     public static function update() {
         global $pdoDb;
-        $pdoDb->setExcludedFields(array("id" => 1, "domain_id" => 1));
+        $pdoDb->setExcludedFields(array("id", "domain_id"));
         $pdoDb->addSimpleWhere("domain_id", $_POST['domain_id'], "AND");
         $pdoDb->addSimpleWhere("id", $_GET['id']);
         $result = $pdoDb->request("UPDATE", "expense");
@@ -111,7 +111,7 @@ class Expense {
 
                     $tax_amount = lineItemTaxCalc($tax,$unit_price,$quantity);
     
-                    $pdoDb->setExcludedFields(array("id" => 1));
+                    $pdoDb->setExcludedFields("id");
                     $list = array("expense_id" => $expense_id,
                                   "tax_id"     => $tax['tax_id'],
                                   "tax_type"   => $tax['type'],

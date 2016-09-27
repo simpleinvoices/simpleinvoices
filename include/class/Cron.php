@@ -4,7 +4,7 @@ class Cron {
     public static function insert() {
         global $pdoDb;
         try {
-            $pdoDb->setExcludedFields(array("id" => 1));
+            $pdoDb->setExcludedFields("id");
             $pdoDb->request("INSERT", "cron");
         } catch (PDOException $pde) {
             error_log("Cron insert error - " . $pde->getMessage());
@@ -16,7 +16,7 @@ class Cron {
     public static function update() {
         global $pdoDb;
         try {
-            $pdoDb->setExcludedFields(array("id" => 1, "domain_id" => 1));
+            $pdoDb->setExcludedFields(array("id", "domain_id"));
             $result = $pdoDb->request("UPDATE", "cron");
         } catch (PDOException $pde) {
             error_log("Cron update error - " . $pde->getMessage());

@@ -44,7 +44,7 @@ class ExpenseAccount {
      */
     public static function insert() {
         global $pdoDb;
-        $pdoDb->setExcludedFields(array("id" => 1));
+        $pdoDb->setExcludedFields("id");
         $pdoDb->setFauxPost(array("domain_id" => domain_id::get(), "name" => $_POST["name"]));
         return $pdoDb->request("INSERT", "expense_account");
     }
@@ -55,7 +55,7 @@ class ExpenseAccount {
      */
     public static function update() {
         global $pdoDb;
-        $pdoDb->setExcludedFields(array("id" => 1, "domain_id" => 1));
+        $pdoDb->setExcludedFields(array("id", "domain_id"));
         $pdoDb->setFauxPost(array("name" => $_POST["name"]));
         $pdoDb->addSimpleWhere("domain_id", domain_id::get(), "AND");
         $pdoDb->addSimpleWhere("id", $_GET["id"]);

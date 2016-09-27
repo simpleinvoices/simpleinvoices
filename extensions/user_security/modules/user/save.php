@@ -41,7 +41,7 @@ if ($ok) {
         // From add.tpl
         $_POST['domain_id'] = domain_id::get();
         try {
-            $pdoDb->setExcludedFields(array('id' => 1));
+            $pdoDb->setExcludedFields('id');
             $pdoDb->request('INSERT', 'user');
             $saved = true;
         } catch (Exception $e) {
@@ -49,9 +49,9 @@ if ($ok) {
         }
     } elseif ($op === 'edit_user' && isset($_POST['save_user'])) {
         try {
-            $exclude_fields = array('id' => 1, 'domain_id' => 1);
-            if ($exclude_pwd) $exclude_fields['password'] = 1;
-            $pdoDb->setExcludedFields($exclude_fields);
+            $excludedFields = array('id', 'domain_id');
+            if ($exclude_pwd) $excludedFields[] = 'password';
+            $pdoDb->setExcludedFields($excludedFields);
             $pdoDb->addSimpleWhere('id', $_GET['id'], 'AND');
             $pdoDb->addSimpleWhere('domain_id', $_POST['domain_id']);
             $pdoDb->request('UPDATE', 'user');

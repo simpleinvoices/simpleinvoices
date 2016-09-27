@@ -71,14 +71,14 @@ class Inventory {
 
     public static function insert() {
         global $pdoDb;
-        $pdoDb->setExcludedFields(array("id" => 1));
+        $pdoDb->setExcludedFields("id");
         $result = $pdoDb->request("INSERT", "inventory");
         return $result;
     }
 
     public static function update() {
         global $pdoDb;
-        $pdoDb->setExcludedFields(array("id" => 1, "domain_id" => 1));
+        $pdoDb->setExcludedFields(array("id", "domain_id"));
         $pdoDb->addSimpleWhere("id", $_GET['id'], "AND");
         $pdoDb->addSimpleWhere("domain_id", domain_id::get());
         $result = $pdoDb->request("UPDATE", "inventory");

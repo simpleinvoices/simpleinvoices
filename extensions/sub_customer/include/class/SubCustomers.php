@@ -38,9 +38,9 @@ class SubCustomers {
 
         $saved = false;
         try {
-            $excludeFields = array("id" => 1);
+            $excludeFields = array("id");
             if (empty($_POST['credit_card_number'])) {
-                $excludeFields['credit_card_number'] = 1;
+                $excludeFields[] = 'credit_card_number';
             } else {
                 $key = $config->encryption->default->key;
                 $enc = new Encryption();
@@ -66,9 +66,9 @@ class SubCustomers {
 
         $saved = false;
         try {
-            $excludedFields = array('id' => 1, 'domain_id' => 1);
+            $excludedFields = array('id', 'domain_id');
             if (empty($_POST['credit_card_number'])) {
-                $excludedFields['credit_card_number'] = 1;
+                $excludedFields[] = 'credit_card_number';
             } else {
                 $key = $config->encryption->default->key;
                 $enc = new Encryption();

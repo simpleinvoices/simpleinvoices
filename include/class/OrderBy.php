@@ -44,7 +44,7 @@ class OrderBy {
         if (preg_match('/^(A|D|ASC|DESC)$/', $lcl_order) != 1) {
             $str = "OrderBy - addField(): Invalid order, $lcl_order, specified.";
             error_log($str);
-            throw new PdoDbException(str);
+            throw new PdoDbException($str);
         }
 
         $lcl_order = ($lcl_order == 'A' ? 'ASC' : 'DESC');

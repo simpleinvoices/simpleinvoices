@@ -107,7 +107,7 @@ class PdoDb {
         $this->caseStmts        = null;
         $this->constraints      = null;
         $this->distinct         = false;
-        $this->excludedFields   = null;
+        $this->excludedFields   = array();
         $this->fauxPost         = null;
         $this->fieldPrefix      = null;
         $this->functions        = null;
@@ -437,20 +437,34 @@ class PdoDb {
         $this->limit = ($offset > 0 ? $offset . ", " : "") . $limit;
     }
 
-
     /**
-     * Set the list of fields to be excluded from those included in the list of fields
-     * specified in the request.
-     * @param array $excludedFields An associative array keyed by the <b>column names</b> to exclude
-     *        from the <i>$_POST</i> or if used, the <i>FAUX POST</i> array. These fields might be
-     *        present in the <i>WHERE</i> clause but are to be excluded from the INSERT or UPDATE
-     *        fields. Typically this is the unique identifier for the record but can be any field
-     *        that would otherwie be included from the <i>$_POST</i> or <i>FAUX POST</i> file.
+     * Updates the list of fields to be excluded from the table fields found in the <i>$_POST</i>
+     * or if used, the <i>FAUX POST</i> array. These fields might be present in the <i>WHERE</i>
+     * clause but are to be excluded from the <i>INSERT</i> or </i>UPDATE</i> fields. Typically
+     * excluded fields are the unique identifier for the record which cannot be updated. However,
+     * any field may be specified for exclusion..
+     * @param array $excludedFields Can be one of the following:
+     *        <ol>
+     *          <li>A string with <i><u>one</u> field name</i> in it. Ex: <b>"name"</b>.</li>
+     *          <li>An ordered array of <i>field names</i>. Ex: <b>array("id", "user_id")</b></li>
+     *          <li>An associative array with the <i>key</i> as the <i>field name</i>
+     *              and the <i>value</i> as anything (typically 1).<br/>
+     *              Ex: array("id" => 1, "name" => 1).</li>`
+     *        </ol> 
      * @throws PdoDbException if the parameter is not an array.
      */
     public function setExcludedFields($excludedFields) {
         if (is_array($excludedFields)) {
-            $this->excludedFields = $excludedFields;
+            $i = 0;
+            foreach ($excludedFields as $key => $val) {
+                if (is_numeric($key) && intval(($key)) == $i) {
+                    $this->excludedFields[$val] = 1;
+                } else {
+                    $this->excludedFields[$key] = $val;
+                }
+            }
+        } else if (is_string($excludedFields)) {
+            $this->excludedFields[$excludedFields] = 1;
         } else {
             $this->clearAll();
             $str = "PdoDb - setExcludedFields(): \"\$excludedFields\" parameter is not an array.";

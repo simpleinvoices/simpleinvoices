@@ -1140,7 +1140,7 @@ function updateBiller() {
     global $pdoDb;
     // The fields to be update must be in the $_POST array indexed by their
     // actual field name.
-    $pdoDb->setExcludedFields(array("id" => 1, "domain_id" => 1));
+    $pdoDb->setExcludedFields(array("id", "domain_id"));
     $pdoDb->addSimpleWhere("id", $_GET['id']);
     return $pdoDb->request("UPDATE", "biller");
 }

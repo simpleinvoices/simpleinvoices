@@ -25,11 +25,11 @@ $op = !empty( $_POST['op'] ) ? addslashes( $_POST['op'] ) : NULL;
 
 $saved = false;
 $error = false;
-$excludedFields = array("id" => 1);
+$excludedFields = array("id");
 // The field is only non-empty if the user entered a value.
 // TODO: A proper entry and confirmation new credit card value.
 if (empty($_POST['credit_card_number'])) {
-    $excludedFields['credit_card_number'] = 1;
+    $excludedFields[] = 'credit_card_number';
 } else {
     try {
         $key = $config->encryption->default->key;
@@ -55,7 +55,7 @@ if (!$error) {
         }
     } else if ($op === 'edit_customer' && isset($_POST['save_customer'])) {
         try {
-            $excludedFields['domain_id'] = 1;
+            $excludedFields[] = 'domain_id';
             $pdoDb->setExcludedFields($excludedFields);
             $pdoDb->addSimpleWhere('id', $_GET['id'], 'AND');
             $pdoDb->addSimpleWhere('domain_id', $_POST['domain_id']);

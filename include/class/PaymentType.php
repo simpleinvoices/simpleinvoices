@@ -91,7 +91,7 @@ class PaymentType {
      */
     public static function insert($pt_description, $pt_enabled) {
         global $pdoDb;
-        $pdoDb->setExcludedFields(array("pt_id" => 1));
+        $pdoDb->setExcludedFields("pt_id");
         $pdoDb->setFauxPost(array("pt_description" => $pt_description,
                                   "pt_enabled"     => ($pt_enabled == ENABLED ? ENABLED : DISABLED),
                                   "domain_id"      => domain_id::get()));
@@ -107,7 +107,7 @@ class PaymentType {
      */
     public static function update($pt_id, $pt_description, $pt_enabled) {
         global $pdoDb;
-        $pdoDb->setExcludedFields(array("pt_id" => 1, "domain_id" => 1));
+        $pdoDb->setExcludedFields(array("pt_id", "domain_id"));
         $pdoDb->setFauxPost(array("pt_description" => $pt_description,
                                   "pt_enabled"     => ($pt_enabled == ENABLED ? ENABLED : DISABLED)));
 

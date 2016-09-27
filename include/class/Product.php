@@ -176,7 +176,7 @@ class Product {
             $fauxPost['custom_flags'] = $custom_flags;
         }
         $pdoDb->setFauxPost($fauxPost);
-        $pdoDb->setExcludedFields(array("id" => 1));
+        $pdoDb->setExcludedFields("id");
         // @formatter:on
 
         if ($pdoDb->request("INSERT", "products") === false) return false;

@@ -27,7 +27,7 @@ $saved = false;
 if ($op === 'insert_biller') {
     // From add.tpl
     try {
-        $pdoDb->setExcludedFields(array('id' => 1));
+        $pdoDb->setExcludedFields('id');
         $pdoDb->request('INSERT', 'biller');
         $saved = true;
     } catch (Exception $e) {
@@ -40,7 +40,7 @@ if ($op === 'insert_biller') {
         $where->addItem(new WhereItem(false, 'domain_id', '=', $_POST['domain_id'], false));
 
         $pdoDb->addToWhere($where);
-        $pdoDb->setExcludedFields(array('id' => 1, 'domain_id' => 1));
+        $pdoDb->setExcludedFields(array('id', 'domain_id'));
         $pdoDb->request('UPDATE', 'biller');
         $saved = true;
     } catch (Exception $e) {
