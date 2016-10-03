@@ -15,7 +15,7 @@
 
 
 <table id="manageGrid" style="display:none"></table>
- {include file='../modules/custom_fields/manage.js.php'}
+ {include file='../templates/default/custom_fields/manage.js.tpl'}
 
 
 <div class="si_help_div">

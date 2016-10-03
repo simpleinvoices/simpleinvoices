@@ -28,6 +28,6 @@
 {else}
 
 	<table id="manageGrid" style="display:none"></table>
-	{include file='../modules/tax_rates/manage.js.php'}
+	{include file='../templates/default/tax_rates/manage.js.tpl'}
  
 {/if}

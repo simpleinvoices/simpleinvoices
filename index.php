@@ -59,6 +59,35 @@ function GetCustomPath($name,$mode='template'){
 	}
 	return $out;
 }
+
+/**
+ * New method for loading the modules.
+ * 
+ * This is a slightapproach toa more MVC method.
+ * 
+ * @param string $module
+ * @param string $view
+ */
+function callControllerAction($module, $view)
+{
+    $controllerName = str_replace(' ', '', ucwords(str_replace('_', ' ', $module))) . 'Controller';
+    $action         = str_replace(' ', '', ucwords(str_replace('_', ' ', $view))) . 'Action';
+    $action[0]      = strtolower($action[0]);
+    $controllerPath = './modules/SimpleInvoices/Controller/' . $controllerName . '.php';
+    
+    if (file_exists($controllerPath)) {
+        include($controllerPath);
+        $controllerClass = '\\SimpleInvoices\\Controller\\' . $controllerName;
+        
+        if (class_exists($controllerClass)) {
+            $controller = new $controllerClass();
+    
+            if (method_exists($controller, $action)) {
+                $controller->$action();
+            }
+        }
+    }
+}
 	
 
 foreach($config->extension as $extension)
@@ -231,11 +260,17 @@ if (($module == "invoices" ) && (strstr($view,"template"))) {
 				}
 			}
 		}
+		
 		/*
-		* If no extension php file for requested file load the normal php file if it exists
-		*/
-		if($extensionXml == 0 and $my_path=GetCustomPath("$module/$view",'module')){
-			include($my_path);
+		 * If no extension php file for requested file load the normal php file if it exists
+		 */
+		if ($extensionXml == 0) {
+		    $my_path=GetCustomPath("$module/$view",'module');
+		    if (!empty($my_path)) {
+		        include($my_path);
+		    } else {
+		        callControllerAction($module, $view);
+		    }
 		}
 
 		exit(0);
@@ -344,10 +379,15 @@ if( !in_array($module."_".$view, $early_exit) )
 			}
 		}
 		/*
-		* If no extension php file for requested file load the normal php file if it exists
-		*/
-		if( ($extensionPHPFile == 0) and  $my_path=GetCustomPath("$module/$view",'module') ){
-			include($my_path);
+		 * If no extension php file for requested file load the normal php file if it exists
+		 */
+		if ($extensionPHPFile == 0) {
+		    $my_path=GetCustomPath("$module/$view",'module');
+		    if (!empty($my_path)) {
+		        include($my_path);
+		    } else {
+		       callControllerAction($module, $view);
+		    }
 		}
 
 /*
