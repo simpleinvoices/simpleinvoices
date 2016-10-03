@@ -107,16 +107,16 @@ class CustomFieldsController
     public function xmlAction()
     {
         global $LANG;
+        global $auth_session;
         
         header("Content-type: text/xml");
         
-        $start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
-        $dir = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "ASC" ;
-        $sort = (isset($_POST['sortname'])) ? $_POST['sortname'] : "cf_id" ;
-        $limit = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
-        $page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
-        
-        $xml = "";
+        $start = (isset($_POST['start']))     ? $_POST['start']     : "0" ;
+        $dir   = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "ASC" ;
+        $sort  = (isset($_POST['sortname']))  ? $_POST['sortname']  : "cf_id" ;
+        $limit = (isset($_POST['rp']))        ? $_POST['rp'] : "25" ;
+        $page  = (isset($_POST['page'])) ?    $_POST['page'] : "1"  ;
+        $xml   = "";
         
         //SC: Safety checking values that will be directly subbed in
         if (intval($start) != $start) {
