@@ -20,34 +20,36 @@
 				<th>{$LANG.customer_name}</th>
 				<td>{$customer.name}</td>
 				<td class="td_sep"></td>
-				<th>{$LANG.phone}</th>
-				<td>{$customer.phone|htmlsafe}</td>
+				<th>{$LANG.customer_department}</th>
+				<td>{$customer.department|htmlsafe}</td>
 			</tr>
 			<tr>
 				<th>{$LANG.attention_short}</th>
 				<td>{$customer.attention|htmlsafe}</td>
 				<td class="td_sep"></td>
-				<th>{$LANG.mobile_phone}</th>
-				<td>{$customer.mobile_phone|htmlsafe}</td>
+				<th>{$LANG.phone}</th>
+				<td>{$customer.phone|htmlsafe}</td>
 			</tr>
 			<tr>
 				<th>{$LANG.street}</th>
 				<td>{$customer.street_address|htmlsafe}</td>
 				<td class="td_sep"></td>
-				<th>{$LANG.fax}</th>
-				<td>{$customer.fax|htmlsafe}</td>
+				<th>{$LANG.mobile_phone}</th>
+				<td>{$customer.mobile_phone|htmlsafe}</td>
 			</tr>
 			<tr>
 				<th>{$LANG.street2}</th>
 				<td>{$customer.street_address2|htmlsafe}</td>
 				<td class="td_sep"></td>
-				<th>{$LANG.email}</th>
-				<td><a href="mailto:{$customer.email|htmlsafe}">{$customer.email|htmlsafe}</a></td>
+				<th>{$LANG.fax}</th>
+				<td>{$customer.fax|htmlsafe}</td>
 			</tr>
 			<tr>
 				<th>{$LANG.city}</th>
 				<td>{$customer.city|htmlsafe}</td>
-				<td colspan="3"></td>
+				<td class="td_sep"></td>
+				<th>{$LANG.email}</th>
+				<td><a href="mailto:{$customer.email|htmlsafe}">{$customer.email|htmlsafe}</a></td>
 			</tr>
 			<tr>
 				<th>{$LANG.zip}</th>
@@ -234,6 +236,10 @@
 				</a>
 			</th>
 			<td><input type="text" name="name" value="{$customer.name|htmlsafe}" size="50" id="name" class="validate[required]" /></td>
+		</tr>
+		<tr>
+			<th>{$LANG.customer_department}</th>
+			<td><input type="text" name="department" value="{$customer.department|htmlsafe}" size="50" id="department" /></td>
 		</tr>
 		<tr>
 			<th>{$LANG.attention_short}

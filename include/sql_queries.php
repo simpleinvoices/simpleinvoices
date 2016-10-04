@@ -1435,8 +1435,9 @@ function updateCustomer() {
 				".TB_PREFIX."customers
 			SET
 				domain_id = :domain_id,
-				name = :name,
 				attention = :attention,
+				name = :name,
+				department = :department,
 				street_address = :street_address,
 				street_address2 = :street_address2,
 				city = :city,
@@ -1471,8 +1472,9 @@ function updateCustomer() {
 
 		return dbQuery($sql,
 			':domain_id', $domain_id,
-			':name', $_POST['name'],
 			':attention', $_POST['attention'],
+			':name', $_POST['name'],
+			':department', $_POST['department'],
 			':street_address', $_POST['street_address'],
 			':street_address2', $_POST['street_address2'],
 			':city', $_POST['city'],
@@ -1498,8 +1500,9 @@ function updateCustomer() {
 	} else {
 		return dbQuery($sql,
 			':domain_id', $domain_id,
-			':name', $_POST['name'],
 			':attention', $_POST['attention'],
+			':name', $_POST['name'],
+			':department', $_POST['department'],
 			':street_address', $_POST['street_address'],
 			':street_address2', $_POST['street_address2'],
 			':city', $_POST['city'],
@@ -1532,7 +1535,7 @@ function insertCustomer() {
 	$sql = "INSERT INTO 
 			".TB_PREFIX."customers
 			(
-				domain_id, attention, name, street_address, street_address2,
+				domain_id, attention, name, department, street_address, street_address2,
 				city, state, zip_code, country, phone, mobile_phone,
 				fax, email, notes,
 				credit_card_holder_name, credit_card_number,
@@ -1542,7 +1545,7 @@ function insertCustomer() {
 			)
 			VALUES 
 			(
-				:domain_id ,:attention, :name, :street_address, :street_address2,
+				:domain_id ,:attention, :name, :department, :street_address, :street_address2,
 				:city, :state, :zip_code, :country, :phone, :mobile_phone,
 				:fax, :email, :notes, 
 				:credit_card_holder_name, :credit_card_number,
@@ -1558,6 +1561,7 @@ function insertCustomer() {
 	return dbQuery($sql,
 		':attention', $attention,
 		':name', $name,
+		':department', $department,
 		':street_address', $street_address,
 		':street_address2', $street_address2,
 		':city', $city,

@@ -134,6 +134,10 @@
 			</td>
 		</tr>	
 		<tr class="customer">
+			<th>{$LANG.customer_department}:</th>
+			<td colspan="5" align="left">{$customer.department|htmlsafe}</td>
+		</tr>
+		<tr class="customer">
 			<th>{$LANG.attention_short}:</th>
 			<td colspan="5" align="left">{$customer.attention|htmlsafe},</td>
 		</tr>

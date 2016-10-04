@@ -39,6 +39,10 @@
 		</th>
 		<td><input type="text" name="name" id="name" value="{$smarty.post.name|htmlsafe}" size="25" class="validate[required]" /></td>
 	</tr>
+	<tr>
+		<th>{$LANG.customer_department}</th>
+		<td><input type="text" name="department" id="department" value="{$smarty.post.department|htmlsafe}" size="25" /></td>
+	</tr>
 	</tr>
 		<th>{$LANG.customer_contact}
 		<a

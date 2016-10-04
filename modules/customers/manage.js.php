@@ -1,6 +1,5 @@
 <script type="text/javascript">
 
-
 {literal}
 /*
 var view_tooltip ="{/literal}{$LANG.quick_view_tooltip} {ldelim}1{rdelim}{literal}";
@@ -9,15 +8,14 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 '<!--1 Edit View --><a class="index_table" href="index.php?module=customers&view=details&id={1}&action=edit"><img src="images/common/edit.png" height="16" border="-5px" padding="-4px" valign="bottom" /><!-- print --></a>',
 */
 
-
-			var columns = 7;
+			var columns = 8;
 			var padding = 12;
 			var grid_width = $('.col').width();
-			
+
 			grid_width = grid_width - (columns * padding);
 			percentage_width = grid_width / 100; 
-		
-			
+
+
 			$('#manageGrid').flexigrid
 			(
 			{
@@ -26,14 +24,14 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 			colModel : [
 				{display: '{/literal}{$LANG.actions}{literal}', name : 'actions', width : 7 * percentage_width, sortable : false, align: 'center'},
 				{display: '{/literal}{$LANG.id}{literal}', name : 'CID', width : 7 * percentage_width, sortable : true, align: 'right'},
-				{display: '{/literal}{$LANG.name}{literal}', name : 'name', width : 50 * percentage_width, sortable : true, align: 'left'},
-				{display: '{/literal}{$LANG.total}{literal}', name : 'customer_total', width : 10 * percentage_width, sortable : true, align: 'right'},
-				{display: '{/literal}{$LANG.paid}{literal}', name : 'paid', width : 10 * percentage_width, sortable : true, align: 'right'},
-				{display: '{/literal}{$LANG.owing}{literal}', name : 'owing', width : 10 * percentage_width, sortable : true, align: 'right'},
+				{display: '{/literal}{$LANG.name}{literal}', name : 'name', width : 38 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.customer_department}{literal}', name : 'department', width : 18 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.total}{literal}', name : 'customer_total', width : 8 * percentage_width, sortable : true, align: 'right'},
+				{display: '{/literal}{$LANG.paid}{literal}', name : 'paid', width : 8 * percentage_width, sortable : true, align: 'right'},
+				{display: '{/literal}{$LANG.owing}{literal}', name : 'owing', width : 8 * percentage_width, sortable : true, align: 'right'},
 				{display: '{/literal}{$LANG.enabled}{literal}', name : 'enabled', width : 6 * percentage_width, sortable : true, align: 'center'}
 				
 				],
-				
 
 			searchitems : [
 				{display: '{/literal}{$LANG.id}{literal}', name : 'c.id'},

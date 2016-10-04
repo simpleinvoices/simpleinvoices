@@ -58,7 +58,7 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 	}
 
 	/*Check that the sort field is OK*/
-	$validFields = array('CID', 'name', 'customer_total', 'paid', 'owing', 'enabled');
+	$validFields = array('CID', 'name', 'department', 'customer_total', 'paid', 'owing', 'enabled');
 
 	if (in_array($sort, $validFields)) {
 		$sort = $sort;
@@ -70,6 +70,7 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 	$sql = "SELECT 
 					c.id as CID 
 					, c.name as name 
+					, c.department as department
 					, (SELECT (CASE  WHEN c.enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled
 					, SUM(COALESCE(IF(pr.status = 1, ii.total, 0),  0)) AS customer_total
 					, COALESCE(ap.amount,0) AS paid
@@ -120,6 +121,7 @@ $count = $sth_count_rows->rowCount();
 		]]></cell>";		
 		$xml .= "<cell><![CDATA[".$row['CID']."]]></cell>";
 		$xml .= "<cell><![CDATA[".$row['name']."]]></cell>";
+		$xml .= "<cell><![CDATA[".$row['department']."]]></cell>";
 		$xml .= "<cell><![CDATA[".siLocal::number($row['customer_total'])."]]></cell>";
 		$xml .= "<cell><![CDATA[".siLocal::number($row['paid'])."]]></cell>";
 		$xml .= "<cell><![CDATA[".siLocal::number($row['owing'])."]]></cell>";

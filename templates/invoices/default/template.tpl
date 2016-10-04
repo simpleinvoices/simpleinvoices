@@ -141,18 +141,27 @@
 			<td class="tbl1-bottom col1" colspan="3">{$customer.name|htmlsafe}</td>
 	</tr>
 
+        {if $customer.department != null }
+    <tr>
+            <td class=''>{$LANG.customer_department}:</td>
+			<td align=left class='' colspan="3" >{$customer.department|htmlsafe}</td>
+    </tr>
+       {/if}
+
         {if $customer.attention != null }
     <tr>
             <td class=''>{$LANG.attention_short}:</td>
 			<td align=left class='' colspan="3" >{$customer.attention|htmlsafe}</td>
     </tr>
        {/if}
+
         {if $customer.street_address != null }
     <tr >
             <td class=''>{$LANG.address}:</td>
 			<td class='' align=left colspan="3">{$customer.street_address|htmlsafe}</td>
     </tr>
         {/if}
+
         {if $customer.street_address2 != null}
                 {if $customer.street_address == null}
     <tr>
@@ -160,6 +169,7 @@
 			<td class='' align=left colspan="3">{$customer.street_address2|htmlsafe}</td>
     </tr>
                 {/if}
+
                 {if $customer.street_address != null}
     <tr>
 			<td class=''></td>
