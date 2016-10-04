@@ -15,7 +15,7 @@ foreach($languages as $language) {
 }
 
 $smarty->assign("defaults"                , getSystemDefaults());
-$smarty->assign("defaultBiller"           , getDefaultBiller());
+$smarty->assign("defaultBiller"           , Biller::getDefaultBiller());
 $smarty->assign("defaultCustomer"         , Customer::getDefaultCustomer());
 $smarty->assign("defaultDelete"           , getDefaultDelete());
 $smarty->assign("defaultInventory"        , getDefaultInventory());
