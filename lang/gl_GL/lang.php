@@ -2,10 +2,10 @@
 
 /*
 * Script: lang.php
-* 	English translation file
+* 	Galego-Português translation file
 *
 * Last edited:
-*    2013-10-16
+*    2016-10-04
 *
 * License:
 *	 GPL v3 or above
@@ -103,6 +103,7 @@ $LANG['customer'] = "Cliente";//1
 $LANG['customer_account'] = "Conta de cliente";//1
 $LANG['customer_add'] = "Engadir un novo cliente";//1
 $LANG['customer_contact'] = "Customer Contact (Attn)";//1
+$LANG['customer_department'] = "Departamento";//1
 $LANG['customer_details'] = "Detalles do cliente";//1
 $LANG['customer_edit'] = "Edit Customer";//1
 $LANG['customer_id'] = "ID de cliente";//1

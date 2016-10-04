@@ -5,7 +5,7 @@
 * 	Arabic translation file
 *
 * Last edited:
-*    2014-05-25
+*    2016-10-04
 *
 * License:
 *	 GPL v3 or above
@@ -103,6 +103,7 @@ $LANG['customer'] = "عميل";//1
 $LANG['customer_account'] = "حساب العميل";//1
 $LANG['customer_add'] = "اضافة عميل";//1
 $LANG['customer_contact'] = "بيانات اتصال العميل (عناية)";//1
+$LANG['customer_department'] = "قسم";//1
 $LANG['customer_details'] = "تفاصيل العميل ";//1
 $LANG['customer_edit'] = "تحرير عميل";//1
 $LANG['customer_id'] = "تسلسل العميل";//1

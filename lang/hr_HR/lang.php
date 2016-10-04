@@ -2,10 +2,10 @@
 
 /*
 * Script: lang.php
-* 	English translation file
+* 	Croatian translation file
 *
 * Last edited:
-*    2013-10-16
+*    2016-10-04
 *
 * License:
 *	 GPL v3 or above
@@ -103,6 +103,7 @@ $LANG['customer'] = "Kupac";//1
 $LANG['customer_account'] = "Račun kupca";//1
 $LANG['customer_add'] = "Dodaj novog kupca";//1
 $LANG['customer_contact'] = "Kontakt kupca (Za pažnju)";//1
+$LANG['customer_department'] = "Odsjek";//1
 $LANG['customer_details'] = "Detalji kupca";//1
 $LANG['customer_edit'] = "Uredi kupca";//1
 $LANG['customer_id'] = "ID kupca";//1

@@ -8,7 +8,7 @@
 *	 Michael Larsen,  Claus Mølgaard Nielsen
 *
 * Last edited:
-*    2014-05-25
+*    2016-10-04
 *
 * License:
 *	 GPL v3 or above
@@ -112,6 +112,7 @@ $LANG['customer'] = "Kunde";//1
 $LANG['customer_account'] = "Kundekonto";//1
 $LANG['customer_add'] = "Tilf&#216;j ny kunde";//1
 $LANG['customer_contact'] = "Kunde kontakt (Att)";//1
+$LANG['customer_department'] = "Afdeling";//1
 $LANG['customer_details'] = "Kunde detaljer";//1
 $LANG['customer_edit'] = "Rediger kunde";//1
 $LANG['customer_id'] = "Kunde ID";//1

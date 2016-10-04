@@ -8,7 +8,7 @@
 *	 Herz Hermann (heart1010@gmail.com)
 *
 * Last edited:
-*    2014-05-25
+*    2016-10-04
 *
 * License:
 *	 GPL v3 or above
@@ -106,6 +106,7 @@ $LANG['customer'] = "Kunde";//1
 $LANG['customer_account'] = "Kundenkonto";//1
 $LANG['customer_add'] = "Neuen Kunden hinzufügen";//1
 $LANG['customer_contact'] = "Kundenkontakt (z. Hdn.)";//1
+$LANG['customer_department'] = "Abteilung";//1
 $LANG['customer_details'] = "Kundendetails";//1
 $LANG['customer_edit'] = "Kunden bearbeiten";//1
 $LANG['customer_id'] = "Kunden-Nr";//1

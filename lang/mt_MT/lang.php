@@ -1,14 +1,14 @@
 <?php
 
 /*
-* Script: maltese_MT.inc.php
+* Script: lang.php
 * 	Maltese translation file
 *
 * Authors:
 *	 Michel Bugeja - http://oss.org.mt
 *
 * Last edited:
-*    2014-06-09
+*    2016-10-04
 *
 * License:
 *	 GPL v3 or above
@@ -106,6 +106,7 @@ $LANG['customer'] = "Klijent";//1
 $LANG['customer_account'] = "Kont tal-Klijent";//1
 $LANG['customer_add'] = "Żid Klijent Ġdid";//1
 $LANG['customer_contact'] = "Kuntatt tal-Klijent (Attn)";//1
+$LANG['customer_department'] = "Dipartiment";//1
 $LANG['customer_details'] = "Dettalji tal-Klijent";//1
 $LANG['customer_edit'] = "Biddel Klijent";//1
 $LANG['customer_id'] = "Referenza tal-Klijent";//1

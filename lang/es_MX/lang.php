@@ -2,10 +2,10 @@
 
 /*
 * Script: lang.php
-* 	English translation file
+* 	Spanish Mexican translation file
 *
 * Last edited:
-*    2013-10-16
+*    2016-10-04
 *
 * License:
 *	 GPL v3 or above
@@ -104,6 +104,7 @@ $LANG['customer'] = "Cliente";//1
 $LANG['customer_account'] = "Cuenta de Cliente";//1
 $LANG['customer_add'] = "Agregar un Cliente";//1
 $LANG['customer_contact'] = "Agregar Contacto (Attn)";//1
+$LANG['customer_department'] = "Departamento";//1
 $LANG['customer_details'] = "Detalles de Cliente";//1
 $LANG['customer_edit'] = "Editar Cliente";//1
 $LANG['customer_id'] = "ID de Cliente";//1
@@ -130,8 +131,7 @@ $LANG['default_customer'] = "Cliente Default";//1
 $LANG['default_inv_template'] = "Plantilla Default de factura";//1
 $LANG['default_invoice_preference'] = "Ajustes default de factura";//1
 $LANG['default_number_items'] = "Numero default de items";//1
-$LANG['default_payment_type'] = "
-Tipo Predeterminado de Pago";//1
+$LANG['default_payment_type'] = "Tipo Predeterminado de Pago";//1
 $LANG['default_tax'] = "Impuesto default";//1
 $LANG['delete'] = "Borrar ";//1
 $LANG['delete_has_payments1'] = "No se puede borrar porque ya existe un pago";//1

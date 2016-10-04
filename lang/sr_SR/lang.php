@@ -5,7 +5,7 @@
 * 	Serbian translation file
 *
 * Last edited:
-*    2014-06-03
+*    2016-10-04
 *
 * License:
 *	 GPL v3 or above
@@ -103,6 +103,7 @@ $LANG['customer'] = "Customer";//0
 $LANG['customer_account'] = "Customer Account";//0
 $LANG['customer_add'] = "Add New Customer";//0
 $LANG['customer_contact'] = "Customer Contact (Attn)";//0
+$LANG['customer_department'] = "одељење";//1
 $LANG['customer_details'] = "Customer details";//0
 $LANG['customer_edit'] = "Edit Customer";//0
 $LANG['customer_id'] = "Customer ID";//0

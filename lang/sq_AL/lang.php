@@ -8,7 +8,7 @@
 *	Gjergj Sheldija
 *
 * Last edited:
-*	2014-06-09
+*	2016-10-04
 *
 * License:
 *	GPL v3 or above
@@ -106,6 +106,7 @@ $LANG['customer'] = "Klient";//1
 $LANG['customer_account'] = "Llogari e Klientit";//1
 $LANG['customer_add'] = "Shto klient te ri";//1
 $LANG['customer_contact'] = "Kontakt Klient (Kuj)";//1
+$LANG['customer_department'] = "Departamenti";//1
 $LANG['customer_details'] = "Detaje te klientit";//1
 $LANG['customer_edit'] = "Edito Klientin";//1
 $LANG['customer_id'] = "ID Klient";//1

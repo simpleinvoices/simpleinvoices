@@ -9,7 +9,7 @@
 *  Sebastijan Bandur
 *
 * Last edited:
-* 	 2014-05-24
+* 	 2016-10-04
 *
 * License:
 *	 GPL v2 or above
@@ -107,6 +107,7 @@ $LANG['customer'] = "Stranka";//1
 $LANG['customer_account'] = "Račun stranke";//1
 $LANG['customer_add'] = "Dodaj novo stranko";//1
 $LANG['customer_contact'] = "Kontaktna oseba stranke";//1
+$LANG['customer_department'] = "Oddelek";//1
 $LANG['customer_details'] = "Podrobno o stranki";//1
 $LANG['customer_edit'] = "Uredi stranko";//1
 $LANG['customer_id'] = "Oznaka stranke";//1

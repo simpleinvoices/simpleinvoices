@@ -5,7 +5,7 @@
 * 	Czech translation file
 *
 * Last edited:
-*    2014-05-25
+*    2016-10-04
 *
 * License:
 *	 GPL v3 or above
@@ -103,6 +103,7 @@ $LANG['customer'] = "Odběratel";//1
 $LANG['customer_account'] = "Účet odběratele";//1
 $LANG['customer_add'] = "Přidat nového odběratele";//1
 $LANG['customer_contact'] = "Kontakt odběratele (k rukám)";//1
+$LANG['customer_department'] = "Oddělení";//1
 $LANG['customer_details'] = "Údaje odběratele";//1
 $LANG['customer_edit'] = "Editovat odběratele";//1
 $LANG['customer_id'] = "Kód odběratele";//1

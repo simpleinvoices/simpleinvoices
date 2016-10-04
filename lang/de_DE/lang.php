@@ -9,7 +9,7 @@
 * 	 Ali Akar [ali_akar@gmx.de]
 *
 * Last edited:
-*    2014-07-29
+*    2016-10-04
 *
 * License:
 *	 GPL v3 or above
@@ -107,6 +107,7 @@ $LANG['customer'] = "Kunde";//1
 $LANG['customer_account'] = "Kunden-Konto";//1
 $LANG['customer_add'] = "Neuen Kunden hinzufügen";//1
 $LANG['customer_contact'] = "Kundenkontakt (z. Hdn.)";//1
+$LANG['customer_department'] = "Abteilung";//1
 $LANG['customer_details'] = "Kundendetails";//1
 $LANG['customer_edit'] = "Kunden bearbeiten";//1
 $LANG['customer_id'] = "Kunden-Nr";//1

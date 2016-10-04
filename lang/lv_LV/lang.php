@@ -1,14 +1,14 @@
 <?php
 
 /*
-* Script: latviesu_latvian.inc.php
+* Script: lang.php
 * 	Latviesu valodas tulkojums
 *
 * Authors:
 *	 Iveta N. Thetford
 *
 * Last edited:
-*    2014-06-09
+*    2016-10-04
 *
 * License:
 *	 GPL v3 or above
@@ -106,6 +106,7 @@ $LANG['customer'] = "Klients";//1
 $LANG['customer_account'] = "Klienta konts";//1
 $LANG['customer_add'] = "Pievienot jaunu klientu";//1
 $LANG['customer_contact'] = "Klienta kontaktpersona (Uzm.)";//1
+$LANG['customer_department'] = "Nodaļa";//`
 $LANG['customer_details'] = "Klienta info";//1
 $LANG['customer_edit'] = "Labot klientu";//1
 $LANG['customer_id'] = "Klienta ID";//1

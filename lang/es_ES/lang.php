@@ -8,7 +8,7 @@
 *  Esteban Mat&iacute;as Vergara, Anton Meixome, Agustin Henze, Facundo Ameal
 *
 * Last edited:
-*    2014-06-03
+*    2016-10-04
 *
 * License:
 *	 GPL v3 or above
@@ -106,6 +106,7 @@ $LANG['customer'] = "Cliente";//1
 $LANG['customer_account'] = "Cuenta del Cliente";//1
 $LANG['customer_add'] = "Añadir Nuevo Cliente";//1
 $LANG['customer_contact'] = "Contacto del cliente (a la atención de)";//1
+$LANG['customer_department'] = "Departamento";//1
 $LANG['customer_details'] = "Detalles del cliente";//1
 $LANG['customer_edit'] = "Editar Cliente";//1
 $LANG['customer_id'] = "ID Cliente";//1

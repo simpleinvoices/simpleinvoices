@@ -8,7 +8,7 @@
 *  	Antoni Bertran (3&Punt Sol Informatiques), Anton Meixome
 *
 * Last edited:
-*    2013-10-19
+*    2016-10-04
 *
 * License:
 *	 GPL v2 or above
@@ -106,6 +106,7 @@ $LANG['customer'] = "Client";//1
 $LANG['customer_account'] = "Compte Client";//1
 $LANG['customer_add'] = "Afegir Nou Client";//1
 $LANG['customer_contact'] = "Contactar Client (Att)";//1
+$LANG['customer_department'] = "Departamento";//1
 $LANG['customer_details'] = "Detalls Client";//1
 $LANG['customer_edit'] = "Editar Client";//1
 $LANG['customer_id'] = "ID Client";//1

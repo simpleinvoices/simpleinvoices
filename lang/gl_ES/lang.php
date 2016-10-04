@@ -1,14 +1,14 @@
 <?php
 
 /*
-* Script: galego-galician.inc.php
+* Script: lang.php
 * 	Galician translation file
 *
 * Authors:
 *
 *
 * Last edited:
-*    2014-06-09
+*    2016-10-04
 *
 * License:
 *	 GPL v3 or above
@@ -106,6 +106,7 @@ $LANG['customer'] = "Cliente";//1
 $LANG['customer_account'] = "Conta de Cliente";//1
 $LANG['customer_add'] = "Engadir Novo Cliente";//1
 $LANG['customer_contact'] = "Contacto de Cliente (Attn)";//1
+$LANG['customer_department'] = "Departamento";//1
 $LANG['customer_details'] = "Detalles de Cliente";//1
 $LANG['customer_edit'] = "Edit Customer";//0
 $LANG['customer_id'] = "ID de Cliente";//1

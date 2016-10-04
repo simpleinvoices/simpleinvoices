@@ -8,7 +8,7 @@
 *      Frank Heinen, David (darym3 _at_ hotmail.com), Ruben Bloemgarten (ruben@abubble.nl), Kai (level411@gmail.com), Wouter Gelderblom (wjgelderblom@gmail.com)
 *
 * Last edited:
-*    2014-06-09
+*    2016-10-04
 *
 * License:
 *	 GPL v3 or above
@@ -106,6 +106,7 @@ $LANG['customer'] = "Klant";//1
 $LANG['customer_account'] = "Account klant";//1
 $LANG['customer_add'] = "Klant toevoegen";//1
 $LANG['customer_contact'] = "Contactpersoon";//1
+$LANG['customer_department'] = "Afdeling";//1
 $LANG['customer_details'] = "Klant details";//1
 $LANG['customer_edit'] = "Klant wijzigen";//1
 $LANG['customer_id'] = "Klant ID";//1

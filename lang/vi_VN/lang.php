@@ -5,7 +5,7 @@
 * 	Vietnamese translation file
 *
 * Last edited:
-*    2014-06-09
+*    2016-10-04
 *
 * License:
 *	 GPL v3 or above
@@ -103,6 +103,7 @@ $LANG['customer'] = "Khách hàng";//1
 $LANG['customer_account'] = "Thông tin Khách hàng";//1
 $LANG['customer_add'] = "Thêm mới Khách hàng";//1
 $LANG['customer_contact'] = "Người đại diện";//1
+$LANG['customer_department'] = "ngành";//1
 $LANG['customer_details'] = "Chi tiết Khách hàng";//1
 $LANG['customer_edit'] = "Sửa Khách hàng";//1
 $LANG['customer_id'] = "Mã Khách hàng";//1

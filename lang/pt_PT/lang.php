@@ -8,7 +8,7 @@
 *	Murray Buckley, Max, Augusto Campos, Rui Gouveia
 *
 * Last edited:
-*   2014-06-09
+*   2016-10-04
 *
 * License:
 *	GPL v3 or above
@@ -110,6 +110,7 @@ $LANG['customer'] = "Cliente";//1
 $LANG['customer_account'] = "Conta do Cliente";//1
 $LANG['customer_add'] = "Adicionar Novo Cliente";//1
 $LANG['customer_contact'] = "Contacto do Cliente (Att.)";//1
+$LANG['customer_department'] = "Departamento";//1
 $LANG['customer_details'] = "Cliente detalhas";//1
 $LANG['customer_edit'] = "Editar Cliente";//1
 $LANG['customer_id'] = "Número de Cliente";//1

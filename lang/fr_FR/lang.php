@@ -5,13 +5,13 @@
 * 	French translation file
 *
 * Authors:
-*	 Catherine, Lionel
+*	Catherine, Lionel
 *
 * Last Edited:
-* 2014-06-09
+*	2016-10-04
 *
 * License:
-*	 GPL v3 or above
+*	GPL v3 or above
 */
 
 /*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
@@ -106,6 +106,7 @@ $LANG['customer'] = "Destinataire";//1
 $LANG['customer_account'] = "Compte client";//1
 $LANG['customer_add'] = "Nouveau client";//1
 $LANG['customer_contact'] = "Contact client (Attn)";//1
+$LANG['customer_department'] = "Département";//1
 $LANG['customer_details'] = "Coordonn&eacute;s client";//1
 $LANG['customer_edit'] = "&Eacute;diter client";//1
 $LANG['customer_id'] = "ID client";//1

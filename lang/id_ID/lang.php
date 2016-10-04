@@ -2,10 +2,10 @@
 
 /*
 * Script: lang.php
-* 	English translation file
+* 	Indonesian translation file
 *
 * Last edited:
-*    2013-10-16
+*    2016-10-04
 *
 * License:
 *	 GPL v3 or above
@@ -16,7 +16,7 @@ regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
  */
 
 #all
-$LANG['about'] = "About";//1
+$LANG['about'] = "Tentang";//1
 $LANG['account_info'] = "Informasi Akun";//1
 $LANG['actions'] = "Modul";//1
 $LANG['add'] = "Tambah";//1
@@ -103,6 +103,7 @@ $LANG['customer'] = "Pelanggan";//1
 $LANG['customer_account'] = "Akun Pelanggan";//1
 $LANG['customer_add'] = "Tambah Pelanggan Baru";//1
 $LANG['customer_contact'] = "Customer Contact (Attn)";//1
+$LANG['customer_department'] = "Departemen";//1
 $LANG['customer_details'] = "Informasi Pelanggan";//1
 $LANG['customer_edit'] = "Edit Informasi Pelanggan";//1
 $LANG['customer_id'] = "ID Pelanggan";//1
@@ -516,10 +517,10 @@ $LANG['statement'] = "Statement";//1
 $LANG['statement_for_the_period'] = "Statement for the period";//1
 $LANG['statement_of_invoices'] = "Statement of Invoices";//1
 $LANG['statement_summary'] = "Statement summary";//1
-$LANG['statements'] = "Statements";//1
-$LANG['stats'] =" Quick reports";//1
+$LANG['statements'] = "Statements";//0
+$LANG['stats'] =" Quick reports";//0
 $LANG['stats_biller'] ="Biller teratas - berdasarkan jumlah nota";//1
-$LANG['stats_customer'] ="Top Customer - by amount invoiced";//1
+$LANG['stats_customer'] ="Top Customer - by amount invoiced";//0
 $LANG['stats_debtor'] ="Largest debtor";//1
 $LANG['status'] ="Status";//1
 $LANG['street'] = "Street address";//1

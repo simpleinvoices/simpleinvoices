@@ -8,7 +8,7 @@
 *	 Petri Hartoma, Joakim Nyman
 *
 * Last edited:
-* 	 2014-06-09
+* 	 2016-10-04
 *
 * License:
 *	 GPL v3 or above
@@ -106,6 +106,7 @@ $LANG['customer'] = "Asiakas";//1
 $LANG['customer_account'] = "Asiakastili";//1
 $LANG['customer_add'] = "Uusi asiakas";//1
 $LANG['customer_contact'] = "Yhteyshenkil&ouml (viite)";//1
+$LANG['customer_department'] = "Osasto";//1
 $LANG['customer_details'] = "Asiakkaan tiedot";//1
 $LANG['customer_edit'] = "Muokkaa asiakasta";//1
 $LANG['customer_id'] = "Asiakasnumero";//1

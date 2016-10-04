@@ -5,7 +5,7 @@
 * 	Norwegian translation file
 *
 * Last edited:
-* 	 2014-06-09
+* 	 2016-10-04
 *
 * License:
 *	 GPL v3 or above
@@ -103,6 +103,7 @@ $LANG['customer'] = "Kunde";//1
 $LANG['customer_account'] = "Kundekonto";//1
 $LANG['customer_add'] = "Legg til ny kunde";//1
 $LANG['customer_contact'] = "Kundekontakt (Attn)";//1
+$LANG['customer_department'] = "Avdeling";//1
 $LANG['customer_details'] = "Kundedetaljer";//1
 $LANG['customer_edit'] = "Rediger kunde";//1
 $LANG['customer_id'] = "Kunde ID";//1

@@ -5,7 +5,7 @@
 *    Russian translation file
 *
 * Last edited:
-*    2014-06-09
+*    2016-10-04
 *
 * Author:
 *    nurkamol@gmail.com
@@ -105,6 +105,7 @@ $LANG['customer'] = "Клиент";//1
 $LANG['customer_account'] = "Счет клиента";//1
 $LANG['customer_add'] = "Добавить нового клиента";//1
 $LANG['customer_contact'] = "Контакты клиента";//1
+$LANG['customer_department'] = "отдел";//1
 $LANG['customer_details'] = "Подробней о клиенте";//1
 $LANG['customer_edit'] = "Редактировать клиента";//1
 $LANG['customer_id'] = "ID клиента";//1

@@ -9,7 +9,7 @@
 *   Horia Negura aka "FakeMoth"
 *
 * Last edited:
-* 	 2014-06-09
+* 	 2016-10-04
 *
 * License:
 *	 GPL v3 or above
@@ -107,6 +107,7 @@ $LANG['customer'] = "Client";//1
 $LANG['customer_account'] = "Cont Client";//1
 $LANG['customer_add'] = "Adauga Client Nou";//1
 $LANG['customer_contact'] = "Contact client (In atentia)";//1
+$LANG['customer_department'] = "Departament";//1
 $LANG['customer_details'] = "Detalii Client";//1
 $LANG['customer_edit'] = "Modifica Client";//1
 $LANG['customer_id'] = "ID Client";//1

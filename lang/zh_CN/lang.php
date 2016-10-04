@@ -103,6 +103,7 @@ $LANG['customer'] = "客户";//1
 $LANG['customer_account'] = "客户帐号";//1
 $LANG['customer_add'] = "添加新客户";//1
 $LANG['customer_contact'] = "客户联系人 (Attn)";//1
+$LANG['customer_department'] = "Department";//0
 $LANG['customer_details'] = "客户详情";//1
 $LANG['customer_edit'] = "编辑客户";//1
 $LANG['customer_id'] = "客户编号";//1

@@ -8,7 +8,7 @@
 *    Joakim Nyman
 *
 * Last edited:
-*    2014-06-09
+*    2016-10-04
 *
 * License:
 *    GPL v3 or above
@@ -106,6 +106,7 @@ $LANG['customer'] = "Kund";//1
 $LANG['customer_account'] = "Kund Konto";//1
 $LANG['customer_add'] = "Lägg till Ny Kund";//1
 $LANG['customer_contact'] = "Kontaktperson";//1
+$LANG['customer_department'] = "Avdelning";//1
 $LANG['customer_details'] = "Kund detaljer";//1
 $LANG['customer_edit'] = "Redigera Kund";//1
 $LANG['customer_id'] = "Kund ID";//1

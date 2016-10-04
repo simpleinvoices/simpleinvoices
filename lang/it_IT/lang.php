@@ -1,13 +1,13 @@
 <?php
 /* 
-* Script: italian.inc.php
+* Script: lang.php
 * 	Italian translation file
 *
 * Authors: 
 *   Fabio Utili
 *
 * Last edited: 
-*   2014-06-09
+*   2016-10-04
 *
 * License:
 *   GPL v3 or above
@@ -106,6 +106,7 @@ $LANG['customer'] = "Cliente";//1
 $LANG['customer_account'] = "Conto del Cliente";//1
 $LANG['customer_add'] = "Aggiungi un Nuovo Cliente";//1
 $LANG['customer_contact'] = "Contatti del Cliente (Att)";//1
+$LANG['customer_department'] = "Dipartimento";//1
 $LANG['customer_details'] = "Dettagli del Cliente";//1
 $LANG['customer_edit'] = "Modifica Cliente";//1
 $LANG['customer_id'] = "ID Cliente";//1

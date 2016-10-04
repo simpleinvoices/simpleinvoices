@@ -1,14 +1,14 @@
 <?php
 
 /*
-* Script: greek.inc.php
+* Script: lang.php
 * 	Greek translation file
 *
 * Authors:
 *	 Panos Milis
 *
 * Last edited:
-*    2014-06-03
+*    2016-10-04
 *
 * License:
 *	 GPL v3 or above
@@ -106,6 +106,7 @@ $LANG['customer'] = "Πελάτης";//1
 $LANG['customer_account'] = "Λογαριασμός Πελάτη";//1
 $LANG['customer_add'] = "Προσθήκη Νέου Πελάτη";//1
 $LANG['customer_contact'] = "Υπεύθυνος που ερχόμαστε σε επαφή";//1
+$LANG['customer_department'] = "Τμήμα";//1
 $LANG['customer_details'] = "Πληροφορίες Πελάτη";//1
 $LANG['customer_edit'] = "Εισαγωγή Στοιχείων Πελάτη";//1
 $LANG['customer_id'] = "Στοιχεία Πελάτη";//1
