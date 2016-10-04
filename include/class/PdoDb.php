@@ -245,7 +245,8 @@ class PdoDb {
 
     /**
      * Specify functions with parameters to list of those to perform
-     * @param mixed $function Function to include in parameter list. Example: count(id).
+     * @param mixed $function FunctionStmt object or a string with a preformatted function
+     *        to include in parameter list. For example, "count(id)".
      */
     public function addToFunctions($function) {
         if (is_string($function) || is_a($function, "FunctionStmt")) {
