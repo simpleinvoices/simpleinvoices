@@ -6,6 +6,8 @@
  * License: GPL v3
  * Website: http://www.simpleinvoices.org
  */
+global $menu, $smarty;
+
 checkLogin();
 
 function firstOfMonth() {
@@ -23,9 +25,8 @@ $custom_flag = isset($_POST['custom_flag']) ? $_POST['custom_flag'] : null;
 
 $custom_flags_enabled = isExtensionEnabled('custom_flags');
 $custom_flag_labels   = getCustomFlagLabels($custom_flags_enabled);
-// @formatter:on
 
-$items = array();
+$invoices = array();
 $tot_income = 0;
 if (isset($_POST['submit'])) {
     $neti = new NetIncomeReport();
@@ -36,10 +37,10 @@ if (isset($_POST['submit'])) {
     }
 }
 
-$smarty->assign('invoices', $invoices);
+$smarty->assign('invoices'  , $invoices);
 $smarty->assign('tot_income', $tot_income);
 $smarty->assign('start_date', $start_date);
-$smarty->assign('end_date', $end_date);
+$smarty->assign('end_date'  , $end_date);
 
 $smarty->assign('custom_flags_enabled', ($custom_flags_enabled ? '1':'0'));
 $smarty->assign('custom_flag', $custom_flag);
@@ -47,4 +48,5 @@ $smarty->assign('custom_flag_labels', $custom_flag_labels);
 
 $smarty->assign('pageActive', 'report');
 $smarty->assign('active_tab', '#home');
-$smarty->assign('menu', $menu);
+$smarty->assign('menu'      , $menu);
+// @formatter:on
