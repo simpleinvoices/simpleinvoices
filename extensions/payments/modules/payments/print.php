@@ -9,7 +9,7 @@ $menu    = false;
 $payment = Payment::select($_GET['id']);
 
 // Get Invoice preference - so can link from this screen back to the invoice
-$invoice           = getInvoice($payment['ac_inv_id']);
+$invoice           = Invoice::getInvoice($payment['ac_inv_id']);
 $biller            = Biller::select($payment['biller_id']);
 $customer          = Customer::get($payment['customer_id']);
 $invoiceType       = Invoice::getInvoiceType($invoice['type_id']);

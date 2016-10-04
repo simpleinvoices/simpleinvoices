@@ -22,7 +22,7 @@ checkLogin();
 
 // get the invoice id
 $invoice_id = $_GET['id'];
-$invoice = getInvoice($invoice_id);
+$invoice = Invoice::getInvoice($invoice_id);
 $preference = getPreference($invoice['preference_id']);
 $defaults = getSystemDefaults();
 $invoicePaid = calc_invoice_paid($invoice_id);

@@ -16,7 +16,7 @@ if (!empty($_GET['id'])) {
     // Filter by just one invoice
     $inv_id        = $_GET['id'];
     $payments      = Payment::getInvoicePayments($_GET['id']);
-    $invoice       = getInvoice($_GET['id']);
+    $invoice       = Invoice::getInvoice($_GET['id']);
     $preference    = getPreference($invoice['preference_id']);
     $subPageActive = "payment_filter_invoice";
 } else if (!empty($_GET['c_id'])) {

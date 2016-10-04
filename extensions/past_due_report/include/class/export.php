@@ -39,7 +39,7 @@ class export {
                 break;
 
             case "file":
-                $invoice    = getInvoice($this->id, $this->domain_id);
+                $invoice    = Invoice::getInvoice($this->id, $this->domain_id);
                 $preference = getPreference($invoice['preference_id'], $this->domain_id);
 
                 // xls/doc export no longer uses the export template $template = "export";
@@ -136,7 +136,7 @@ class export {
                 $payment = Payment::select($this->id);
 
                 // Get Invoice preference to link from this screen back to the invoice
-                $invoice = getInvoice($payment['ac_inv_id'], $this->domain_id);
+                $invoice = Invoice::getInvoice($payment['ac_inv_id'], $this->domain_id);
                 $biller  = Biller::select($payment['biller_id']);
 
                 $logo = getLogo($biller);

@@ -733,69 +733,6 @@ function getDefaultLanguage() {
     return getDefaultGeneric('language', false);
 }
 
-function getInvoiceTotal($invoice_id, $domain_id = '') {
-    $domain_id = domain_id::get($domain_id);
-    // @formatter:off
-    $sql = "SELECT SUM(total) AS total FROM " . TB_PREFIX . "invoice_items
-            WHERE invoice_id =  :invoice_id AND domain_id = :domain_id";
-    // @formatter:on
-    $sth = dbQuery($sql, ':invoice_id', $invoice_id, ':domain_id', $domain_id);
-    $res = $sth->fetch();
-
-    return $res['total'];
-}
-
-function setInvoiceStatus($invoice, $status, $domain_id = '') {
-    $domain_id = domain_id::get($domain_id);
-    // @formatter:off
-    $sql = "UPDATE " . TB_PREFIX . "invoices
-            SET status_id =  :status
-            WHERE id = :id AND domain_id = :domain_id";
-    // @formatter:on
-    dbQuery($sql, ':status', $status, ':id', $invoice, ':domain_id', $domain_id);
-}
-
-function getInvoice($id, $domain_id = '') {
-    global $config, $pdoDb;
-
-    $domain_id = domain_id::get($domain_id);
-
-    $pdoDb->addSimpleWhere("id", $id, "AND");
-    $pdoDb->addSimpleWhere("domain_id", $domain_id);
-    $row = $pdoDb->request("SELECT", "invoices");
-    if (empty($row)) {
-        $invoice = array();
-    } else {
-        $invoice = $row[0];
-    
-        // @formatter:off
-        $invoice['calc_date'] = date('Y-m-d', strtotime($invoice['date']));
-        $invoice['date']      = siLocal::date($invoice['date']);
-        $invoice['total']     = getInvoiceTotal($invoice['id']);
-    
-        $invoiceobj = new Invoice();
-        $invoiceobj->domain_id = $domain_id;
-    
-        $invoice['gross'] = $invoiceobj->getInvoiceGross($invoice['id']);
-        $invoice['paid']  = calc_invoice_paid($invoice['id']);
-        $invoice['owing'] = $invoice['total'] - $invoice['paid'];
-    
-        // invoice total tax
-        $pdoDb->addToFunctions("SUM(tax_amount) AS total_tax");
-        $pdoDb->addToFunctions("SUM(total) AS total");
-        $pdoDb->addSimpleWhere("invoice_id", $id, "AND");
-        $pdoDb->addSimpleWhere("domain_id", $domain_id);
-        $row = $pdoDb->request("SELECT", "invoice_items");
-        $invoice_item_tax = $row[0];
-    
-        $invoice['total_tax']   = $invoice_item_tax['total_tax'];
-        $invoice['tax_grouped'] = taxesGroupedForInvoice($id);
-        // @formatter:on
-    }
-
-    return $invoice;
-}
-
 /*
  * Function: taxesGroupedForInvoice
  * Purpose: to show a nice summary of total $ for tax for an invoice
@@ -1145,20 +1082,6 @@ function updateBiller() {
     return $pdoDb->request("UPDATE", "biller");
 }
 
-function getInvoices(&$sth) {
-    global $config;
-    $invoice = NULL;
-
-    if ($invoice = $sth->fetch()) {
-        $invoice['calc_date'] = date('Y-m-d', strtotime($invoice['date']));
-        $invoice['date'] = siLocal::date($invoice['date']);
-        $invoice['total'] = getInvoiceTotal($invoice['id']);
-        $invoice['paid'] = calc_invoice_paid($invoice['id']);
-        $invoice['owing'] = $invoice['total'] - $invoice['paid'];
-    }
-    return $invoice;
-}
-
 function insertTaxRate($domain_id = '') {
     global $LANG;
     $domain_id = domain_id::get($domain_id);
@@ -1229,165 +1152,6 @@ function sqlDateWithTime($in_date) {
     }
     $out_date = "$date $time";
     return $out_date;
-}
-
-function insertInvoice($type, $domain_id = '') {
-    global $db_server;
-    $domain_id = domain_id::get($domain_id);
-
-    if ($db_server == 'mysql' &&
-                     !_invoice_check_fk($_POST['biller_id'], $_POST['customer_id'], $type, $_POST['preference_id'])) {
-        return NULL;
-    }
-
-    $pref_group = getPreference($_POST['preference_id']);
-
-    // also set the current time (if NULL or =00:00:00)
-    $clean_date = sqlDateWithTime($_POST['date']);
-
-    // @formatter:off
-    switch ($db_server) {
-        case 'pgsql':
-            $sql = "INSERT INTO " . TB_PREFIX . "invoices (
-                        index_id,
-                        domain_id,
-                        biller_id,
-                        customer_id,
-                        type_id,
-                        preference_id,
-                        date,
-                        note,
-                        custom_field1,
-                        custom_field2,
-                        custom_field3,
-                        custom_field4
-                    )
-                    VALUES (
-                        :index_id,
-                        :domain_id,
-                        :biller_id,
-                        :customer_id,
-                        :type,
-                        :preference_id,
-                        :date,
-                        :note,
-                        :customField1,
-                        :customField2,
-                        :customField3,
-                        :customField4
-                    )";
-            break;
-
-        default:
-            $sql = "INSERT INTO " . TB_PREFIX . "invoices (
-                        index_id,
-                        domain_id,
-                        biller_id,
-                        customer_id,
-                        type_id,
-                        preference_id,
-                        date,
-                        note,
-                        custom_field1,
-                        custom_field2,
-                        custom_field3,
-                        custom_field4
-                    )
-                    VALUES (
-                        :index_id,
-                        :domain_id,
-                        :biller_id,
-                        :customer_id,
-                        :type,
-                        :preference_id,
-                        :date,
-                        :note,
-                        :customField1,
-                        :customField2,
-                        :customField3,
-                        :customField4
-                    )";
-            break;
-    }
-
-    // @formatter:off
-    $cf1 = (empty($_POST['customField1']) ? "" : $_POST['customField1']);
-    $cf2 = (empty($_POST['customField2']) ? "" : $_POST['customField2']);
-    $cf3 = (empty($_POST['customField3']) ? "" : $_POST['customField3']);
-    $cf4 = (empty($_POST['customField4']) ? "" : $_POST['customField4']);
-    $sth = dbQuery( $sql,
-                    ':index_id'     , index::next('invoice', $pref_group['index_group'], $domain_id),
-                    ':domain_id'    , $domain_id,
-                    ':biller_id'    , $_POST['biller_id'],
-                    ':customer_id'  , $_POST['customer_id'],
-                    ':type'         , $type,
-                    ':preference_id', $_POST['preference_id'],
-                    ':date'         , $clean_date,
-                    ':note'         , trim($_POST['note']),
-                    ':customField1' , $cf1,
-                    ':customField2' , $cf2,
-                    ':customField3' , $cf3,
-                    ':customField4' , $cf4
-                  );
-    // @formatter:on
-
-    // Needed only if si_index table exists
-    index::increment('invoice', $pref_group['index_group'], $domain_id);
-
-    return $sth;
-}
-
-function updateInvoice($invoice_id, $domain_id = '') {
-    global $db_server;
-
-    $domain_id = domain_id::get($domain_id);
-
-    $invoiceobj = new Invoice();
-    $current_invoice = $invoiceobj->select($_POST['id']);
-    $current_pref_group = getPreference($current_invoice['preference_id']);
-
-    $new_pref_group = getPreference($_POST['preference_id']);
-
-    $index_id = $current_invoice['index_id'];
-
-    if ($current_pref_group['index_group'] != $new_pref_group['index_group']) {
-        $index_id = index::increment('invoice', $new_pref_group['index_group']);
-    }
-
-    $type = $current_invoice['type_id'];
-    if ($db_server == 'mysql' &&
-                     !_invoice_check_fk($_POST['biller_id'], $_POST['customer_id'], $type, $_POST['preference_id'])) {
-        return NULL;
-    }
-
-    // @formatter:off
-    $sql = "UPDATE  " . TB_PREFIX . "invoices
-            SET index_id      = :index_id,
-                biller_id     = :biller_id,
-                customer_id   = :customer_id,
-                preference_id = :preference_id,
-                date          = :date,
-                note          = :note,
-                custom_field1 = :customField1,
-                custom_field2 = :customField2,
-                custom_field3 = :customField3,
-                custom_field4 = :customField4
-            WHERE id        = :invoice_id AND
-                  domain_id = :domain_id";
-    return dbQuery( $sql,
-                    ':index_id'     , $index_id,
-                    ':biller_id'    , $_POST['biller_id'],
-                    ':customer_id'  , $_POST['customer_id'],
-                    ':preference_id', $_POST['preference_id'],
-                    ':date'         , $_POST['date'],
-                    ':note'         , trim($_POST['note']),
-                    ':customField1' , (isset($_POST['customField1']) ? $_POST['customField1'] : ''),
-                    ':customField2' , (isset($_POST['customField2']) ? $_POST['customField2'] : ''),
-                    ':customField3' , (isset($_POST['customField3']) ? $_POST['customField3'] : ''),
-                    ':customField4' , (isset($_POST['customField4']) ? $_POST['customField4'] : ''),
-                    ':invoice_id'   , $invoice_id,
-                    ':domain_id'    , $domain_id);
-    // @formatter:on
 }
 
 function insertInvoiceItem($invoice_id,
@@ -1908,7 +1672,7 @@ function pdfThis($html_to_pdf, $pdfname, $download) {
     require_once ('./library/pdf/pipeline.class.php');
     parse_config_file('./library/pdf/html2ps.config');
 
-    require_once ("./include/init.php"); // for getInvoice() and getPreference()
+    require_once ("./include/init.php"); // getPreference()
 
     if (!function_exists('convert_to_pdf')) {
         function convert_to_pdf($html_to_pdf, $pdfname, $download) {
@@ -2346,20 +2110,6 @@ function get_custom_field_label($field, $domain_id = '') {
     }
 
     return $cf['cf_custom_label'];
-}
-
-function calc_invoice_paid($inv_idField, $domain_id = '') {
-    $domain_id = domain_id::get($domain_id);
-    // @formatter:off
-    $x1 = "SELECT COALESCE(SUM(ac_amount), 0) AS amount
-           FROM " . TB_PREFIX . "payment
-           WHERE ac_inv_id = :inv_id AND domain_id = :domain_id";
-    // @formatter:on
-    $sth = dbQuery($x1, ':inv_id', $inv_idField, ':domain_id', $domain_id);
-    if (!$result_x1Array = $sth->fetch()) return 0;
-
-    $invoice_paid_Field = $result_x1Array['amount'];
-    return $invoice_paid_Field;
 }
 
 function calc_customer_total($customer_id, $domain_id = '', $isReal = false) {

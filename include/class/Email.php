@@ -78,9 +78,25 @@ class Email {
         if (!empty($this->attachment)) unlink("./tmp/cache/$this->attachment");
 
         switch ($this->format) {
+            case "cron":
+                // Create succes message
+                $message .= "<br />Cron email for today has been sent";
+                break;
+            
+            case "cron_invoice":
+                // Create succes message
+                $message .= "$this->attachment has been emailed";
+                break;
+
             case "invoice":
                 // Create succes message
                 $message = "<meta http-equiv=\"refresh\" content=\"2;URL=index.php?module=invoices&amp;view=manage\">";
+                $message .= "<br />$this->attachment has been emailed";
+                break;
+
+            case "payment":
+                // Create succes message
+                $message = "<meta http-equiv=\"refresh\" content=\"2;URL=index.php?module=payment&amp;view=manage\">";
                 $message .= "<br />$this->attachment has been emailed";
                 break;
 
@@ -88,16 +104,6 @@ class Email {
                 // Create succes message
                 $message = "<meta http-equiv=\"refresh\" content=\"2;URL=index.php?module=statement&amp;view=index\">";
                 $message .= "<br />$this->attachment has been emailed";
-                break;
-
-            case "cron":
-                // Create succes message
-                $message .= "<br />Cron email for today has been sent";
-                break;
-
-            case "cron_invoice":
-                // Create succes message
-                $message .= "$this->attachment has been emailed";
                 break;
 
             default:

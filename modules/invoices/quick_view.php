@@ -22,7 +22,7 @@ checkLogin();
 
 $invoice_id = $_GET['id'];
 
-$invoice                 = getInvoice($invoice_id);
+$invoice                 = Invoice::getInvoice($invoice_id);
 $invoice_number_of_taxes = numberOfTaxesForInvoice($invoice_id);
 $invoice_type            = Invoice::getInvoiceType($invoice['type_id']);
 

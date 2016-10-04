@@ -39,7 +39,7 @@ class export {
                 break;
 
             case "file":
-                $invoice    = getInvoice($this->id, $this->domain_id);
+                $invoice    = Invoice::getInvoice($this->id, $this->domain_id);
                 $preference = getPreference($invoice['preference_id'], $this->domain_id);
 
                 // xls/doc export no longer uses the export template $template = "export";
@@ -136,35 +136,43 @@ class export {
                 $payment = Payment::select($this->id);
 
                 // Get Invoice preference to link from this screen back to the invoice
-                $invoice = getInvoice($payment['ac_inv_id'], $this->domain_id);
+                $invoice = Invoice::getInvoice($payment['ac_inv_id'], $this->domain_id);
                 $biller  = Biller::select($payment['biller_id']);
+
+                $customer            = Customer::get($payment['customer_id']);
+                $invoiceType         = Invoice::getInvoiceType($invoice['type_id']);
+                $customFieldLabels   = getCustomFieldLabels($this->domain_id, true);
+                $paymentType         = PaymentType::select($payment['ac_payment_type']);
+                $preference          = getPreference($invoice['preference_id'], $this->domain_id);
 
                 $logo = getLogo($biller);
                 $logo = str_replace(" ", "%20", $logo);
+                
+                $css                 = $siUrl . "/templates/invoices/default/style.css";
+                $pluginsdir          = "./templates/invoices/default/plugins";
+                $smarty->plugins_dir = $pluginsdir;
+                $templatePath        = "./templates/default/payments/print.tpl";
+                $template_path       = "../templates/default/payments";
 
-                $customer          = Customer::get($payment['customer_id']);
-                $invoiceType       = Invoice::getInvoiceType($invoice['type_id']);
-                $customFieldLabels = getCustomFieldLabels($this->domain_id, true);
-                $paymentType       = PaymentType::select($payment['ac_payment_type']);
-                $preference        = getPreference($invoice['preference_id'], $this->domain_id);
+                $smarty->assign('template_path', $template_path);
+                $smarty->assign('css'          , $css);
 
-                $smarty->assign("payment"          , $payment);
-                $smarty->assign("invoice"          , $invoice);
-                $smarty->assign("biller"           , $biller);
-                $smarty->assign("logo"             , $logo);
-                $smarty->assign("customer"         , $customer);
-                $smarty->assign("invoiceType"      , $invoiceType);
-                $smarty->assign("paymentType"      , $paymentType);
-                $smarty->assign("preference"       , $preference);
-                $smarty->assign("customFieldLabels", $customFieldLabels);
-                $smarty->assign('pageActive'       , 'payment');
-                $smarty->assign('active_tab'       , '#money');
+                if (file_exists($templatePath)) {
+                    $smarty->assign("payment"          , $payment);
+                    $smarty->assign("invoice"          , $invoice);
+                    $smarty->assign("biller"           , $biller);
+                    $smarty->assign("logo"             , $logo);
+                    $smarty->assign("customer"         , $customer);
+                    $smarty->assign("invoiceType"      , $invoiceType);
+                    $smarty->assign("paymentType"      , $paymentType);
+                    $smarty->assign("preference"       , $preference);
+                    $smarty->assign("customFieldLabels", $customFieldLabels);
+    
+                    $smarty->assign('pageActive'       , 'payment');
+                    $smarty->assign('active_tab'       , '#money');
 
-                $css = $siUrl . "/templates/invoices/default/style.css";
-                $smarty->assign('css', $css);
-
-                $templatePath = "./templates/default/payments/print.tpl";
-                $data = $smarty->fetch("." . $templatePath);
+                    $data = $smarty->fetch("." . $templatePath);
+                }
                 break;
 
             case "invoice":
@@ -174,17 +182,15 @@ class export {
                 $invoice = $invoiceobj->select($this->id, $this->domain_id);
 
                 $invoice_number_of_taxes = numberOfTaxesForInvoice($this->id, $this->domain_id);
-
-                $customer = Customer::get($invoice['customer_id']);
-
-                $biller     = Biller::select($invoice['biller_id']);
-                $preference = getPreference($invoice['preference_id'], $this->domain_id);
-                $defaults   = getSystemDefaults($this->domain_id);
+                $invoiceItems            = $invoiceobj->getInvoiceItems($this->id, $this->domain_id);
+                $customer                = Customer::get($invoice['customer_id']);
+                $biller                  = Biller::select($invoice['biller_id']);
+                $preference              = getPreference($invoice['preference_id'], $this->domain_id);
+                $defaults                = getSystemDefaults($this->domain_id);
 
                 $logo = getLogo($biller);
                 $logo = str_replace(" ", "%20", $logo);
 
-                $invoiceItems    = $invoiceobj->getInvoiceItems($this->id, $this->domain_id);
                 $spc2us_pref     = str_replace(" ", "_", $invoice['index_name']);
                 $this->file_name = $spc2us_pref;
 
@@ -193,15 +199,18 @@ class export {
                 // Set the template to the default
                 $template = $defaults['template'];
 
+                $pluginsdir = "./templates/invoices/${template}/plugins/";
+                if (!is_dir($pluginsdir)) {
+                    $pluginsdir = "./templates/invoices/default/plugins";
+                }
+
                 $templatePath  = "./templates/invoices/${template}/template.tpl";
                 $template_path = "../templates/invoices/${template}";
-                $pluginsdir    = "./templates/invoices/${template}/plugins/";
                 $css           = $siUrl . "/templates/invoices/${template}/style.css";
 
                 $smarty->plugins_dir = $pluginsdir;
 
-                $pageActive = "invoices";
-                $smarty->assign('pageActive', $pageActive);
+                $smarty->assign('pageActive', "invoices");
 
                 if (file_exists($templatePath)) {
                     $this->assignTemplateLanguage($preference);

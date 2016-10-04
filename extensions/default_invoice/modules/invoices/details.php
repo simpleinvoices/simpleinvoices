@@ -15,7 +15,7 @@
  *  Website:
  *      http://www.simpleinvoices.org
  */
-global $customFields, $smarty;
+global $smarty;
 
 // stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin ();
@@ -24,8 +24,8 @@ $default_template_set = (!empty($_GET['template']));
 
 $master_invoice_id = ($default_template_set ? $_GET ['template'] : $_GET ['id']);
 
-$invoice = getInvoice ( $master_invoice_id );
-if ($default_template_set) $invoice ['id'] = null;
+$invoice = Invoice::getInvoice( $master_invoice_id );
+if ($default_template_set) $invoice['id'] = null;
 
 $invoiceobj = new Invoice();
 $invoiceItems = $invoiceobj->getInvoiceItems ( $master_invoice_id );
@@ -38,8 +38,9 @@ $taxes       = getTaxes ();
 $preferences = getActivePreferences ();
 $products    = Product::select_all ();
 
+$customFields = array();
 for($i = 1; $i <= 4; $i ++) {
-    $customFields [$i] = show_custom_field ( "invoice_cf$i", $invoice ["custom_field$i"], "write", '', "details_screen", '', '', '' );
+    $customFields[$i] = show_custom_field( "invoice_cf$i", $invoice ["custom_field$i"], "write", '', "details_screen", '', '', '' );
 }
 
 $smarty->assign ( "invoice"     , $invoice );

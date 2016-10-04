@@ -3,7 +3,6 @@ require_once 'include/class/ProductAttributes.php';
 
 class Invoice {
     public $id;
-    public $domain_id;
     public $biller_id;
     public $customer_id;
     public $type_id;
@@ -36,18 +35,16 @@ class Invoice {
     public $where_field;
     public $where_value;
 
-    public function __construct() {
-        $this->domain_id = domain_id::get();
-    }
-
-    public function insert() {
+    public function insert($domain_id="") {
         global $pdoDb;
 
+        $domain_id = domain_id::get($domain_id);
+
         // @formatter:off
-        $pref_group = getPreference($this->preference_id, $this->domain_id);
-        $index_id   = index::next('invoice', $pref_group['index_group'], $this->domain_id);
+        $pref_group = getPreference($this->preference_id, $domain_id);
+        $index_id   = index::next('invoice', $pref_group['index_group'], $domain_id);
         $pdoDb->setFauxPost(array('index_id'      => $index_id,
-                                  'domain_id'     => $this->domain_id,
+                                  'domain_id'     => $domain_id,
                                   'biller_id'     => $this->biller_id,
                                   'customer_id'   => $this->customer_id,
                                   'type_id'       => $this->type_id,
@@ -61,16 +58,18 @@ class Invoice {
         $id = $pdoDb->request("INSERT", "invoices");
         // @formatter:on
 
-        index::increment('invoice', $pref_group['index_group'], $this->domain_id);
+        index::increment('invoice', $pref_group['index_group'], $domain_id);
         return $id;
     }
 
-    public function insert_item() {
+    public function insert_item($domain_id="") {
         global $pdoDb;
+
+        $domain_id = domain_id::get($domain_id);
 
         // @formatter:off
         $pdoDb->setFauxPost(array('invoice_id'  => $this->invoice_id,
-                                  'domain_id'   => $this->domain_id,
+                                  'domain_id'   => $domain_id,
                                   'quantity'    => $this->quantity,
                                   'product_id'  => $this->product_id,
                                   'unit_price'  => $this->unit_price,
@@ -82,13 +81,133 @@ class Invoice {
         $id = $pdoDb("INSERT", "invoice_items");
         // @formatter:on
 
-        invoice_item_tax($id, $this->tax, $this->unit_price, $this->quantity, 'insert', $this->domain_id);
+        invoice_item_tax($id, $this->tax, $this->unit_price, $this->quantity, 'insert', $domain_id);
         return $id;
     }
 
-    public function select($id, $domain_id = '') {
-        if (!empty($domain_id)) $this->domain_id = $domain_id;
+    public static function insertInvoice($type, $domain_id = '') {
+        global $db_server;
+        $domain_id = domain_id::get($domain_id);
+        // TODO: Add FK check to table
+        if ($db_server == 'mysql' &&
+            !_invoice_check_fk($_POST['biller_id'], $_POST['customer_id'], $type, $_POST['preference_id'])) {
+            return NULL;
+        }
 
+        $pref_group = getPreference($_POST['preference_id']);
+    
+        // also set the current time (if NULL or =00:00:00)
+        $clean_date = sqlDateWithTime($_POST['date']);
+
+        $sql = "INSERT INTO " . TB_PREFIX . "invoices (
+                    index_id,
+                    domain_id,
+                    biller_id,
+                    customer_id,
+                    type_id,
+                    preference_id,
+                    date,
+                    note,
+                    custom_field1,
+                    custom_field2,
+                    custom_field3,
+                    custom_field4
+                )
+                VALUES (
+                    :index_id,
+                    :domain_id,
+                    :biller_id,
+                    :customer_id,
+                    :type,
+                    :preference_id,
+                    :date,
+                    :note,
+                    :customField1,
+                    :customField2,
+                    :customField3,
+                    :customField4)";
+        // @formatter:off
+        $cf1 = (empty($_POST['customField1']) ? "" : $_POST['customField1']);
+        $cf2 = (empty($_POST['customField2']) ? "" : $_POST['customField2']);
+        $cf3 = (empty($_POST['customField3']) ? "" : $_POST['customField3']);
+        $cf4 = (empty($_POST['customField4']) ? "" : $_POST['customField4']);
+        $sth = dbQuery( $sql,
+                       ':index_id'     , index::next('invoice', $pref_group['index_group'], $domain_id),
+                       ':domain_id'    , $domain_id,
+                       ':biller_id'    , $_POST['biller_id'],
+                       ':customer_id'  , $_POST['customer_id'],
+                       ':type'         , $type,
+                       ':preference_id', $_POST['preference_id'],
+                       ':date'         , $clean_date,
+                       ':note'         , trim($_POST['note']),
+                       ':customField1' , $cf1,
+                       ':customField2' , $cf2,
+                       ':customField3' , $cf3,
+                       ':customField4' , $cf4);
+                // @formatter:on
+    
+                // Needed only if si_index table exists
+                index::increment('invoice', $pref_group['index_group'], $domain_id);
+    
+                return $sth;
+    }
+
+    public static function updateInvoice($invoice_id, $domain_id = '') {
+        global $db_server;
+    
+        $domain_id = domain_id::get($domain_id);
+    
+        $invoiceobj = new Invoice();
+        $current_invoice = $invoiceobj->select($_POST['id']);
+        $current_pref_group = getPreference($current_invoice['preference_id']);
+    
+        $new_pref_group = getPreference($_POST['preference_id']);
+    
+        $index_id = $current_invoice['index_id'];
+    
+        if ($current_pref_group['index_group'] != $new_pref_group['index_group']) {
+            $index_id = index::increment('invoice', $new_pref_group['index_group']);
+        }
+    
+        $type = $current_invoice['type_id'];
+        if ($db_server == 'mysql' &&
+                !_invoice_check_fk($_POST['biller_id'], $_POST['customer_id'], $type, $_POST['preference_id'])) {
+                    return NULL;
+                }
+    
+                // @formatter:off
+                $sql = "UPDATE  " . TB_PREFIX . "invoices
+            SET index_id      = :index_id,
+                biller_id     = :biller_id,
+                customer_id   = :customer_id,
+                preference_id = :preference_id,
+                date          = :date,
+                note          = :note,
+                custom_field1 = :customField1,
+                custom_field2 = :customField2,
+                custom_field3 = :customField3,
+                custom_field4 = :customField4
+            WHERE id        = :invoice_id AND
+                  domain_id = :domain_id";
+                return dbQuery( $sql,
+                        ':index_id'     , $index_id,
+                        ':biller_id'    , $_POST['biller_id'],
+                        ':customer_id'  , $_POST['customer_id'],
+                        ':preference_id', $_POST['preference_id'],
+                        ':date'         , $_POST['date'],
+                        ':note'         , trim($_POST['note']),
+                        ':customField1' , (isset($_POST['customField1']) ? $_POST['customField1'] : ''),
+                        ':customField2' , (isset($_POST['customField2']) ? $_POST['customField2'] : ''),
+                        ':customField3' , (isset($_POST['customField3']) ? $_POST['customField3'] : ''),
+                        ':customField4' , (isset($_POST['customField4']) ? $_POST['customField4'] : ''),
+                        ':invoice_id'   , $invoice_id,
+                        ':domain_id'    , $domain_id);
+                // @formatter:on
+    }
+
+    public function select($id, $domain_id = '') {
+        $domain_id = domain_id::get($domain_id);
+        
         // @formatter:off
         $sql = "SELECT i.*,
                        i.date as date_original,
@@ -100,23 +219,23 @@ class Invoice {
                           ON (i.preference_id = p.pref_id AND i.domain_id = p.domain_id)
                 WHERE i.domain_id = :domain_id
                   AND i.id = :id";
-        $sth = dbQuery($sql, ':id', $id, ':domain_id', $this->domain_id);
+        $sth = dbQuery($sql, ':id', $id, ':domain_id', $domain_id);
 
         $invoice = $sth->fetch();
         $invoice['calc_date']     = date('Y-m-d', strtotime($invoice['date']));
         $invoice['date']          = siLocal::date($invoice['date']);
-        $invoice['total']         = getInvoiceTotal($invoice['id'], $domain_id);
-        $invoice['gross']         = $this->getInvoiceGross($invoice['id'], $this->domain_id);
-        $invoice['paid']          = calc_invoice_paid($invoice['id'], $domain_id);
+        $invoice['total']         = self::getInvoiceTotal($invoice['id'], $domain_id);
+        $invoice['gross']         = self::getInvoiceGross($invoice['id'], $domain_id);
+        $invoice['paid']          = self::calc_invoice_paid($invoice['id'], $domain_id);
         $invoice['owing']         = $invoice['total'] - $invoice['paid'];
-        $invoice['invoice_items'] = $this->getInvoiceItems($id, $this->domain_id);
+        $invoice['invoice_items'] = $this->getInvoiceItems($id, $domain_id);
 
         // Invoice total tax
         $sql2 = "SELECT SUM(tax_amount) AS total_tax,
                         SUM(total) AS total
                  FROM " . TB_PREFIX . "invoice_items
                  WHERE invoice_id =  :id AND domain_id = :domain_id";
-        $sth2 = dbQuery($sql2, ':id', $id, ':domain_id', $this->domain_id);
+        $sth2 = dbQuery($sql2, ':id', $id, ':domain_id', $domain_id);
         $result2 = $sth2->fetch(PDO::FETCH_ASSOC);
 
         $invoice['total_tax']   = $result2['total_tax'];
@@ -158,7 +277,7 @@ class Invoice {
     function select_all($type = '', $dir = 'DESC', $rp = '25', $page = '1', $having = '') {
         global $config;
 
-        $domain_id = domain_id::get($this->domain_id);
+        $domain_id = domain_id::get();
         $valid_search_fields = array('iv.index_id', 'b.name', 'c.name');
 
         if (empty($having)) $having = $this->having;
@@ -184,8 +303,8 @@ class Invoice {
                 $this->qtype = $query = null;
             }
         }
-        if ($this->biller) $where .= " AND b.id = '$this->biller' ";
-        if ($this->customer) $where .= " AND c.id = '$this->customer' ";
+        if ($this->biller     ) $where .= " AND b.id = '$this->biller' ";
+        if ($this->customer   ) $where .= " AND c.id = '$this->customer' ";
         if ($this->where_field) $where .= " AND $this->where_field = '$this->where_value' ";
         // SQL where - end
 
@@ -348,40 +467,40 @@ class Invoice {
         return $result;
     }
 
-    public function select_all_where() {
-        $domain_id = domain_id::get($this->domain_id);
+    public static function getInvoiceTotal($invoice_id, $domain_id = '') {
+        global $pdoDb;
 
-        $where = "";
-        if ($this->filter == "date") {
-            $where = "AND date BETWEEN '$this->start_date' AND '$this->end_date'";
-            // NOTE - Rich Rowley add the $where value to the $sql below. Previously
-            //        it was defined here but not used below.
-        }
+        $domain_id = domain_id::get($domain_id);
 
-        // @formatter:off
-        $sql = "SELECT i.*,
-                       p.pref_description AS preference
-                FROM " . TB_PREFIX . "invoices i
-                LEFT JOIN " . TB_PREFIX . "preferences p
-                      ON (i.preference_id = p.pref_id AND i.domain_id = p.domain_id)
-                WHERE i.domain_id = :domain_id
-                      $where
-                ORDER BY i.id";
-        $sth = dbQuery($sql, ':domain_id', $domain_id);
-        // @formatter:on
+        $fn = new FunctionStmt("COALESCE", "SUM(total),0", "total");
+        $pdoDb->addToFunctions($fn);
 
-        return $sth->fetchAll();
+        $pdoDb->addSimpleWhere("invoice_id", $invoice_id, "AND");
+        $pdoDb->addSimpleWhere("domain_id", $domain_id);
+
+$pdoDb->debugOn();
+        $rows = $pdoDb->request("SELECT", "invoice_items");
+$pdoDb->debugOff();
+error_log("getInvoiceTotal - " . print_r($rows,true));
+        return $rows[0]['total'];
+/*
+        $sql = "SELECT SUM(total) AS total FROM " . TB_PREFIX . "invoice_items
+            WHERE invoice_id =  :invoice_id AND domain_id = :domain_id";
+        $sth = dbQuery($sql, ':invoice_id', $invoice_id, ':domain_id', $domain_id);
+        $res = $sth->fetch();
+        return $res['total'];
+ */
     }
 
     public function getInvoiceItems($id, $domain_id = '') {
-        if (!empty($domain_id)) $this->domain_id = $domain_id;
-
+        $domain_id = domain_id::get($domain_id);
+        
         // @formatter:off
         $sql = "SELECT * FROM " . TB_PREFIX . "invoice_items
                 WHERE invoice_id = :id AND domain_id = :domain_id
                 ORDER BY id";
         // @formatter:on
-        $sth = dbQuery($sql, ':id', $id, ':domain_id', $this->domain_id);
+        $sth = dbQuery($sql, ':id', $id, ':domain_id', $domain_id);
 
         $invoiceItems = array();
         while ($invoiceItem = $sth->fetch(PDO::FETCH_ASSOC)) {
@@ -396,7 +515,7 @@ class Invoice {
             }
 
             $sql = "SELECT * FROM " . TB_PREFIX . "products WHERE id = :id AND domain_id = :domain_id";
-            $tth = dbQuery($sql, ':id', $invoiceItem['product_id'], ':domain_id', $this->domain_id);
+            $tth = dbQuery($sql, ':id', $invoiceItem['product_id'], ':domain_id', $domain_id);
             $invoiceItem['product'] = $tth->fetch(PDO::FETCH_ASSOC);
 
             $tax = taxesGroupedForInvoiceItem($invoiceItem['id']);
@@ -407,6 +526,43 @@ class Invoice {
         }
 
         return $invoiceItems;
+    }
+
+    public static function getInvoice($id, $domain_id = '') {
+        global $pdoDb;
+    
+        $domain_id = domain_id::get($domain_id);
+    
+        $pdoDb->addSimpleWhere("id", $id, "AND");
+        $pdoDb->addSimpleWhere("domain_id", $domain_id);
+        $row = $pdoDb->request("SELECT", "invoices");
+        if (empty($row)) {
+            return array();
+        }
+
+        $invoice = $row[0];
+    
+        // @formatter:off
+        $invoice['calc_date'] = date('Y-m-d', strtotime($invoice['date']));
+        $invoice['date']      = siLocal::date($invoice['date']);
+        $invoice['total']     = self::getInvoiceTotal($invoice['id'], $domain_id);
+        $invoice['gross']     = self::getInvoiceGross($invoice['id'], $domain_id);
+        $invoice['paid']      = self::calc_invoice_paid($invoice['id']);
+        $invoice['owing']     = $invoice['total'] - $invoice['paid'];
+
+        // invoice total tax
+        $pdoDb->addToFunctions("SUM(tax_amount) AS total_tax");
+        $pdoDb->addToFunctions("SUM(total) AS total");
+        $pdoDb->addSimpleWhere("invoice_id", $id, "AND");
+        $pdoDb->addSimpleWhere("domain_id", $domain_id);
+        $row = $pdoDb->request("SELECT", "invoice_items");
+        $invoice_item_tax = $row[0];
+
+        $invoice['total_tax']   = $invoice_item_tax['total_tax'];
+        $invoice['tax_grouped'] = taxesGroupedForInvoice($id);
+        // @formatter:on
+
+        return $invoice;
     }
 
     /**
@@ -429,62 +585,73 @@ class Invoice {
      * and hence cannot use the $this property
      */
     public function are_there_any($domain_id = '') {
-        if (!empty($domain_id)) $this->domain_id = $domain_id;
+        $domain_id = domain_id::get($domain_id);
 
         $sql = "SELECT count(*) AS count FROM " . TB_PREFIX . "invoices WHERE domain_id = :domain_id";
-        $sth = dbQuery($sql, ':domain_id', $this->domain_id);
+        $sth = dbQuery($sql, ':domain_id', $domain_id);
 
         $count = $sth->fetch();
         return $count['count'];
     }
 
+    public static function calc_invoice_paid($ac_inv_id, $domain_id = '') {
+        global $pdoDb;
+
+        $domain_id = domain_id::get($domain_id);
+
+        // @formatter:off
+        $pdoDb->addSimpleWhere("ac_inv_id", $ac_inv_id, "AND");
+        $pdoDb->addSimpleWhere("domain_id", $domain_id);
+        $fn = new FunctionStmt("COALESCE", "SUM(ac_amount),0","amount");
+        $pdoDb->addToFunctions($fn);
+        $rows = $pdoDb->request("SELECT", "payment");
+        return $rows[0]['amount'];
+    }
+    
     /**
      * Function getInvoiceGross
      *
      * Used to get the gross total for a given Invoice number
      */
-    public function getInvoiceGross($invoice_id, $domain_id = '') {
-        if (!empty($domain_id)) $this->domain_id = $domain_id;
+    public static function getInvoiceGross($invoice_id, $domain_id = '') {
+        global $pdoDb;
 
-        // @formatter:off
-        $sql = "SELECT SUM(gross_total) AS gross_total
-                FROM " . TB_PREFIX . "invoice_items
-                WHERE invoice_id = :invoice_id AND domain_id = :domain_id";
-        // @formatter:on
-        $sth = dbQuery($sql, ':invoice_id', $invoice_id, ':domain_id', $this->domain_id);
-        $res = $sth->fetch();
+        $domain_id = domain_id::get($domain_id);
 
-        return $res['gross_total'];
+        $pdoDb->addSimpleWhere("invoice_id", $invoice_id, "AND");
+        $pdoDb->addSimpleWhere("domain_id" , $domain_id);
+
+        $fn = new FunctionStmt("COALESCE", "SUM(gross_total),0", "gross_total");
+        $pdoDb->addToFunctions($fn);
+
+        $rows = $pdoDb->request("SELECT", "invoice_items");
+        return $rows[0]['gross_total'];
     }
 
     /**
-     * Function Invoice::max
-     *
-     * Used to get the max Invoice id
-     * is called directly from sql_patches.php with Invoice::max()
-     * and hence $this->domain_id is not usable
+     * Get the maximum assigned invoice ID.
+     * @param string $domain_id Domain ID for this this invoice.
+     * @return integer Maximum assigned invoice ID. 
      */
-    public function max($domain_id = '') {
-        global $patchCount;
+    public static function max($domain_id = '') {
+        global $patchCount, $pdoDb;
 
-        if ($patchCount < '179') {
-            $sql = "SELECT MAX(id) AS max FROM " . TB_PREFIX . "invoices";
-            $sth = dbQuery($sql);
-        } else {
-            if (!empty($domain_id)) $this->domain_id = $domain_id;
-            $sql = "SELECT MAX(id) AS max FROM " . TB_PREFIX . "invoices WHERE domain_id = :domain_id";
-            $sth = dbQuery($sql, ':domain_id', $this->domain_id);
-        }
+        $domain_id = domain_id::get($domain_id);
 
-        $count = $sth->fetch();
-        return $count['max'];
+        $fn = new FunctionStmt("COALESCE", "MAX(id),0", "max");
+        $pdoDb->addToFunctions($fn);
+
+        if ($patchCount <= '179') $pdoDb->addSimpleWhere("domain_id", $domain_id);
+
+        $rows = $pdoDb->request("SELECT", "invoices");
+        return $rows[0]['max'];
     }
 
-    public function recur() {
-        $invoice = $this->select($this->id, $this->domain_id);
+    public function recur($domain_id="") {
+        $domain_id = domain_id::get($domain_id);
+        $invoice = $this->select($this->id, $domain_id);
         // @formatter:off
         $ni = new Invoice();
-        $ni->domain_id     = $invoice['domain_id'];
         $ni->biller_id     = $invoice['biller_id'];
         $ni->customer_id   = $invoice['customer_id'];
         $ni->type_id       = $invoice['type_id'];
@@ -494,13 +661,13 @@ class Invoice {
         $ni->custom_field2 = $invoice['custom_field2'];
         $ni->custom_field3 = $invoice['custom_field3'];
         $ni->custom_field4 = $invoice['custom_field4'];
-        $ni->note = $invoice['note'];
+        $ni->note          = $invoice['note'];
+
         $ni_id = $ni->insert();
 
         // insert each line item
         $nii = new Invoice();
         $nii->invoice_id = $ni_id;
-        $nii->domain_id  = $ni->domain_id;
         foreach ($invoice['invoice_items'] as $v) {
             $nii->quantity    = $v['quantity'];
             $nii->product_id  = $v['product_id'];

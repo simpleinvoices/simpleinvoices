@@ -14,7 +14,7 @@ global $smarty;
 checkLogin ();
 
 $master_invoice_id = $_GET['id'];
-$invoice = getInvoice ($master_invoice_id);
+$invoice = Invoice::getInvoice($master_invoice_id);
 // @formatter:off
 $invoiceobj   = new Invoice();
 $invoiceItems = $invoiceobj->getInvoiceItems ( $master_invoice_id );
