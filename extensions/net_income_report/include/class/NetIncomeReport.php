@@ -54,7 +54,6 @@ class NetIncomeReport {
             // @formatter:on
 
             foreach($iv_recs as $iv) {
-
                 // Create an invoice object for the report. This object holds the payments and
                 // invoice items for the invoice. We know that a payment to this invoice was
                 // made in this reporting period. However, it is possible that not all payments
@@ -78,7 +77,7 @@ class NetIncomeReport {
                                   $stop_date  >= $py['ac_date']);
                     $invoice->addPayment($py['ac_amount'], $py['ac_date'], $in_period);
                 }
-                
+
                 // Now get all the invoice items with the exception of those flagged
                 // as non-income items provided the option to exclude them was specified.
                 // @formatter:off
@@ -102,6 +101,9 @@ class NetIncomeReport {
                     $invoice->addItem($py['amount'], $py['description'],
                                       ($custom_flags_enabled ? $py['custom_flags'] : NULL));
                 }
+
+                $invoice->adjustPymtsForNonIncome();
+
                 $invoices[] = $invoice;
             }
         }

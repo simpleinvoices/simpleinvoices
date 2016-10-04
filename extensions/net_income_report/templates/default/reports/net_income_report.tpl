@@ -103,7 +103,11 @@
   <tbody>
     {section name=idx loop=$invoices}
     <tr>
-      <td class="details_screen" style="text-align:right;">{$invoices[idx]->number}</td>
+      <td class="details_screen" style="text-align:right;">
+        <a href="index.php?module=invoices&amp;view=quick_view&amp;id={$invoices[idx]->number}&amp;action=view">
+          {$invoices[idx]->number}
+        </a>
+      </td>
       <td>&nbsp;</td>
       <td class="details_screen" style="text-align:center;">{$invoices[idx]->date|date_format:"%m/%d/%Y"}</td>
       <td>&nbsp;</td>
