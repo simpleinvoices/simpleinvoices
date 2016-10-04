@@ -1701,3 +1701,6 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['292']['patch'] = "ALTER TABLE `".TB_PREFIX."user` ADD COLUMN `user_id` INT  DEFAULT 0 NOT NULL AFTER `enabled`;";
     $patch['292']['date']  = "20140103";
 
+    $patch['293']['name']  = "Add department to the customers";
+    $patch['293']['patch'] = "ALTER TABLE `".TB_PREFIX."customers` ADD COLUMN `department` VARCHAR(255) NULL AFTER `name`";
+    $patch['293']['date']  = "20161004";

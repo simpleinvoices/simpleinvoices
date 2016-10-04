@@ -1186,6 +1186,12 @@
         },
         {
             "sql_patch_ref": "292"
+        },
+        {
+            "sql_patch_ref": "293"
+            "sql_patch": "Add department to the customers",
+            "sql_release": "20161004",
+            "sql_statement": "ALTER TABLE si_customers ADD COLUMN department VARCHAR(255) NULL AFTER name"
         }
     ],
     "si_system_defaults": [
