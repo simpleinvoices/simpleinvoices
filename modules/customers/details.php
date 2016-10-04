@@ -45,8 +45,8 @@ if (empty($customer['credit_card_number'])) {
 $invoices = Customer::getCustomerInvoices($cid);
 
 $stuff = array();
-$stuff['total'] = calc_customer_total($customer['id'],domain_id::get(),true);
-$stuff['paid']  = calc_customer_paid( $customer['id'],domain_id::get(),true);
+$stuff['total'] = Customer::calc_customer_total($customer['id'],domain_id::get(),true);
+$stuff['paid']  = Customer::calc_customer_paid( $customer['id'],domain_id::get(),true);
 $stuff['owing'] = $stuff['total'] - $stuff['paid'];
 
 $customFieldLabel = getCustomFieldLabels('',true);

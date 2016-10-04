@@ -46,8 +46,8 @@ $sub_customers = SubCustomers::getSubCustomers($cid);
 
 //TODO: Perhaps possible a bit nicer?
 $stuff = array();
-$stuff['total'] = calc_customer_total($customer['id']);
-$stuff['paid' ] = calc_customer_paid($customer['id']);;
+$stuff['total'] = Customer::calc_customer_total($customer['id']);
+$stuff['paid' ] = Customer::calc_customer_paid($customer['id']);;
 $stuff['owing'] = $stuff['total'] - $stuff['paid'];
 
 $customFieldLabel = getCustomFieldLabels('',true);

@@ -64,8 +64,8 @@ $pageActive = "invoices";
 
 //Customer accounts sections
 $customerAccount = null;
-$customerAccount['total'] = calc_customer_total($customer['id']);
-$customerAccount['paid']  = calc_customer_paid($customer['id']);;
+$customerAccount['total'] = Customer::calc_customer_total($customer['id']);
+$customerAccount['paid']  = Customer::calc_customer_paid($customer['id']);;
 $customerAccount['owing'] = $customerAccount['total'] - $customerAccount['paid'];
 
 $word_processor = null;
