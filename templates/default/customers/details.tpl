@@ -130,7 +130,7 @@
 		    </table>
 		</div>
         </div>
-	
+
 	<div id="section-3" class="fragment">
 		<div class="si_cust_invoices">
 		    <table>
@@ -249,7 +249,7 @@
 		</tr>
 		<tr>
 			<th>{$LANG.street2}
-				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_street2" title="{$LANG.street2}"> 
+				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_street2" title="{$LANG.street2}">
 					<img src="./images/common/help-small.png" alt="" />
 				</a>
 			</th>
@@ -337,7 +337,7 @@
 					href="#"
 					rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 					title="{$LANG.custom_fields}"
-				> 
+				>
 			 <img src="./images/common/help-small.png" alt="" /></a>
 			</th>
 			<td>
@@ -351,7 +351,7 @@
 					href="#"
 					rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 					title="{$LANG.custom_fields}"
-				> 
+				>
 			 <img src="./images/common/help-small.png" alt="" /></a>
 			</th>
 			<td>
@@ -379,7 +379,7 @@
 					href="#"
 					rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 					title="{$LANG.custom_fields}"
-				> 
+				>
 			 <img src="./images/common/help-small.png" alt="" /></a>
 			</th>
 			<td>
@@ -400,7 +400,7 @@
 			</td>
 		</tr>
 	</table>
-		
+
 	<div class="si_toolbar si_toolbar_form">
 		<button type="submit" class="positive" name="save_customer" value="{$LANG.save_customer}"><img class="button_img" src="./images/common/tick.png" alt="" />{$LANG.save}</button>
 		<a href="./index.php?module=customers&amp;view=manage" class="negative"><img src="./images/common/cross.png" alt="" />{$LANG.cancel}</a>
@@ -411,4 +411,3 @@
 <input type="hidden" name="op" value="edit_customer">
 </form>
 {/if}
-

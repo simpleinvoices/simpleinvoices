@@ -3,7 +3,7 @@
 class customer
 {
 	public $domain_id;
-    
+
 	public function __construct()
 	{
 		$this->domain_id = domain_id::get($this->domain_id);
@@ -14,7 +14,7 @@ class customer
 
         $sql = "SELECT * FROM ".TB_PREFIX."customers WHERE domain_id = :domain_id and id = :id";
         $sth = dbQuery($sql,':domain_id', $this->domain_id, ':id', $id );
-    
+
         return $sth->fetch();
     }
 
@@ -45,18 +45,18 @@ class customer
 
             #amount owing calc - start
             $customer['owing'] = $customer['total'] - $customer['paid'];
-            
+
             #amount owing calc - end
             $customers[$i] = $customer;
 
         }
-        
+
         return $customers;
 
     }
 
 	function insert() {
-	
+
 		$sql = "INSERT INTO ".TB_PREFIX."customers (
 					domain_id, attention, name, street_address, street_address2,
 					city, state, zip_code, country, phone, mobile_phone,
@@ -90,7 +90,7 @@ class customer
 			':enabled', $this->enabled,
 			':domain_id',$this->domain_id
 		);
-		
+
 	}
-    
+
 }
