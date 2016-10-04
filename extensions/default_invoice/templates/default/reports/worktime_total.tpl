@@ -1,4 +1,4 @@
-<h3>Totale werktijd</h3>
+<h3>Total Time Worked</h3>
 <hr />
 
 {$showReport}

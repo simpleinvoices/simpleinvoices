@@ -102,7 +102,7 @@
             "id": "1",
             "domain_id": "0",
             "name": "core",
-            "description": "Core part of Simple Invoices - always enabled",
+            "description": "Core part of SimpleInvoices - always enabled",
             "enabled": "1"
         }
     ] ,
@@ -193,7 +193,7 @@
             "pref_inv_payment_line1_value": "",
             "pref_inv_payment_line2_name": "",
             "pref_inv_payment_line2_value": "",
-            "status":"1",
+            "status":"0",
             "locale":"LOCALE",
             "language":"LANGUAGE",
             "index_group":"1",
@@ -215,13 +215,24 @@
             "pref_inv_payment_line1_value": "",
             "pref_inv_payment_line2_name": "",
             "pref_inv_payment_line2_value": "",
-            "status":"1",
+            "status":"0",
             "locale":"LOCALE",
             "language":"LANGUAGE",
             "index_group":"1",
             "currency_code":"USD",
             "currency_position":"left",
             "pref_enabled": "1"
+        }
+    ],
+    "si_products_attribute_type": [
+        {
+            "name": "list"
+        },
+        {
+            "name": "decimal"
+        },
+        {
+            "name": "free"
         }
     ],
     "si_sql_patchmanager": [
@@ -931,9 +942,6 @@
             "sql_patch_ref": "210"
         },
         {
-            "sql_patch_ref": "210"
-        },
-        {
             "sql_patch_ref": "211"
         },
         {
@@ -1061,20 +1069,137 @@
         },
         {
             "sql_patch_ref": "253"
+        },
+        {
+            "sql_patch_ref": "254"
+        },
+        {
+            "sql_patch_ref": "255"
+        },
+        {
+            "sql_patch_ref": "256"
+        },
+        {
+            "sql_patch_ref": "257"
+        },
+        {
+            "sql_patch_ref": "258"
+        },
+        {
+            "sql_patch_ref": "259"
+        },
+        {
+            "sql_patch_ref": "260"
+        },
+        {
+            "sql_patch_ref": "261"
+        },
+        {
+            "sql_patch_ref": "262"
+        },
+        {
+            "sql_patch_ref": "263"
+        },
+        {
+            "sql_patch_ref": "264"
+        },
+        {
+            "sql_patch_ref": "265"
+        },
+        {
+            "sql_patch_ref": "266"
+        },
+        {
+            "sql_patch_ref": "267"
+        },
+        {
+            "sql_patch_ref": "268"
+        },
+        {
+            "sql_patch_ref": "269"
+        },
+        {
+            "sql_patch_ref": "270"
+        },
+        {
+            "sql_patch_ref": "271"
+        },
+        {
+            "sql_patch_ref": "272"
+        },
+        {
+            "sql_patch_ref": "273"
+        },
+        {
+            "sql_patch_ref": "274"
+        },
+        {
+            "sql_patch_ref": "275"
+        },
+        {
+            "sql_patch_ref": "276"
+        },
+        {
+            "sql_patch_ref": "277"
+        },
+        {
+            "sql_patch_ref": "278"
+        },
+        {
+            "sql_patch_ref": "279"
+        },
+        {
+            "sql_patch_ref": "280"
+        },
+        {
+            "sql_patch_ref": "281"
+        },
+        {
+            "sql_patch_ref": "282"
+        },
+        {
+            "sql_patch_ref": "283"
+        },
+        {
+            "sql_patch_ref": "284"
+        },
+        {
+            "sql_patch_ref": "285"
+        },
+        {
+            "sql_patch_ref": "286"
+        },
+        {
+            "sql_patch_ref": "287"
+        },
+        {
+            "sql_patch_ref": "288"
+        },
+        {
+            "sql_patch_ref": "289"
+        },
+        {
+            "sql_patch_ref": "290"
+        },
+        {
+            "sql_patch_ref": "291"
+        },
+        {
+            "sql_patch_ref": "292"
         }
     ],
     "si_system_defaults": [
         {
             "id": "1",
             "name": "biller",
-            "value": "4",
+            "value": "",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },
         {
             "id": "2",
             "name": "customer",
-            "value": "3",
+            "value": "",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },
@@ -1231,6 +1356,20 @@
             "value": "0",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
+        },
+        {
+            "id": "25",
+            "name": "product_attributes",
+            "value": "0",
+            "domain_id": "DOMAIN-ID",
+            "extension_id": "1"
+        },
+        {
+            "id": "26",
+            "name": "large_dataset",
+            "value": "0",
+            "domain_id": "DOMAIN-ID",
+            "extension_id": "1"
         }
     ],
     "si_tax": [
@@ -1282,7 +1421,8 @@
             "role_id": "1",
             "domain_id": "DOMAIN-ID",
             "password": "fe01ce2a7fbac8fafaed7c982a04e229",
-            "enabled":"1"
+            "enabled":"1",
+            "user_id":"0"
         }
     ],
     "si_user_domain": [
@@ -1295,6 +1435,30 @@
         {
             "id": "1",
             "name": "administrator"
+        },
+        {
+            "id": "2",
+            "name": "domain_administrator"
+        },
+        {
+            "id": "3",
+            "name": "user"
+        },
+        {
+            "id": "4",
+            "name": "operator"
+        },
+        {
+            "id": "5",
+            "name": "customer"
+        },
+        {
+            "id": "6",
+            "name": "biller"
+        },
+        {
+            "id": "7",
+            "name": "viewer"
         }
     ]
 }

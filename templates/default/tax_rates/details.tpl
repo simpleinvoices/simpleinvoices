@@ -16,7 +16,7 @@
 					rel="index.php?module=documentation&amp;view=view&amp;page=help_tax_rate_sign"
 					title="{$LANG.tax_rate}"
 				>
-				<img src="./images/common/help-small.png" />
+				<img src="{$help_image_path}help-small.png" />
 				</a>
 			</th>
 			<td>
@@ -57,7 +57,7 @@
 				rel="index.php?module=documentation&amp;view=view&amp;page=help_tax_rate_sign"
 				title="{$LANG.tax_rate}"
 			>
-				<img src="./images/common/help-small.png" />
+				<img src="{$help_image_path}help-small.png" />
 			</a>
 			</th>
 			<td>

@@ -27,12 +27,12 @@ class PCLEscapeSequence {
 
 /**
  * Two-character escape sequences have the following form:
- * 
+ *
  * <Escape> X
- * 
- * where  “X”  is  a  character  that  defines  the  operation  to  be
- * performed. “X” may be any character from the ASCII table within the
- * range 48-126 decimal (“0” through “~” - see Appendix A).
+ *
+ * where  "X"  is  a  character  that  defines  the  operation  to  be
+ * performed. "X" may be any character from the ASCII table within the
+ * range 48-126 decimal ("0" through "~" - see Appendix A).
  */
 class PCLEscapeGenericSimple {
   function getSequenceString() {
@@ -43,15 +43,15 @@ class PCLEscapeGenericSimple {
 
 /**
  * Parameterized escape sequences have the following form:
- * 
+ *
  * <Escape> X y z1 # z2 # z3 ... # Zn[data]
- * 
+ *
  * where  y,  #,  zi (z1,  z2,  z3...)  and  [data] may  be  optional,
  * depending on the command.
  */
 class PCLEscapeGenericParametric {
   function getSequenceString() {
-    $result = 
+    $result =
       $this->_getEscapedCharacter().
       $this->_getGroupCharacter();
     $groups = $this->_getGroups();
@@ -93,7 +93,7 @@ class PCLEscapeGroup {
  * Environment, deletes  temporary fonts, macros,  user-defined symbol
  * sets and patterns.  It also prints any partial  pages of data which
  * may have been received.
- * 
+ *
  * <Escape> E
  */
 class PCLEscapeReset extends PCLEscapeGenericSimple {
@@ -106,10 +106,10 @@ class PCLEscapeReset extends PCLEscapeGenericSimple {
  * Printer Job Language  (PJL). Both PCL 5 and  HP-GL/2 recognize this
  * command.
  *
- * <Escape> % – 1 2 3 4 5 X
+ * <Escape> % â€“ 1 2 3 4 5 X
  *
  * Default = N/A
- * Range = –12345
+ * Range = â€“12345
  * This command performs the following actions:
  * .. Prints all data received before the Exit Language command.
  * .. Performs a printer reset (same effect as ? E).
@@ -126,7 +126,7 @@ class PCLEscapeUEL extends PCLEscapeGenericParametric {
 
 /**
  * The Number of Copies command designates the number of printed copies of each page.
- * 
+ *
  * <Escape> & l # X
  *
  * # = Number of copies (1 to 32767 maximum)
@@ -191,7 +191,7 @@ class PCLEscapeSimplexDuplex extends PCLEscapeGenericParametric {
  * Print Job
  *
  * Structure of a Typical Job
- * <Escape>%–12345X UEL Command (exit language)
+ * <Escape>%ï¿½12345X UEL Command (exit language)
  * <Escape>E Printer Reset Command.
  * Preamble Job Control Commands.
  * Page 1 Page Control Commands.
@@ -202,7 +202,7 @@ class PCLEscapeSimplexDuplex extends PCLEscapeGenericParametric {
  * Page n Page Control Commands.
  * Data.
  * <Escape>E Printer Reset Command.
- * <Escape>%–12345X UEL Command (exit language).
+ * <Escape>%ï¿½12345X UEL Command (exit language).
  */
 class PCLPrintJob {
   function output(&$stream) {
@@ -227,7 +227,7 @@ class PCLPrintJobPreamble {
 }
 
 class PCLPrintJobPage {
-  var $_control
+  var $_control;
   var $_data;
 
   function output(&$stream) {
@@ -260,7 +260,7 @@ class OutputDriverPCL extends OutputDriverGeneric {
   function field_pushbuttonimage($x, $y, $w, $h, $field_name, $value, $actionURL) { /* N/A */ }
   function field_pushbuttonreset($x, $y, $w, $h) { /* N/A */ }
   function field_pushbuttonsubmit($x, $y, $w, $h, $field_name, $value, $actionURL) { /* N/A */ }
-  function field_checkbox($x, $y, $w, $h, $name, $value) { /* N/A */ }
+  function field_checkbox($x, $y, $w, $h, $name, $value, $checked) { /* N/A */ }
   function field_radio($x, $y, $w, $h, $groupname, $value, $checked) { /* N/A */ }
   function field_select($x, $y, $w, $h, $name, $value, $options) { /* N/A */ }
 

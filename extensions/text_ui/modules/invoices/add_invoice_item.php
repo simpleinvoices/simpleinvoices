@@ -12,11 +12,11 @@
 
 /*
 if(isset($_POST['submit'])) {
-	matrix_invoice::insertInvoiceItem($_POST['invoice_id'],$_POST['quantity1'],$_POST['product1'],$_POST['tax_id'],$_POST['description'],$_POST["attr1"],$_POST["attr2"], $_POST["attr3"], $_POST["unit_price1"]);
+	matrix_Invoice::insertInvoiceItem($_POST['invoice_id'],$_POST['quantity1'],$_POST['product1'],$_POST['tax_id'],$_POST['description'],$_POST["attr1"],$_POST["attr2"], $_POST["attr3"], $_POST["unit_price1"]);
 }
 else {
 
-$products = getActiveProducts();
+$products = Product::select_all();
 
 
 $smarty -> assign("products",$products);
@@ -36,4 +36,3 @@ $smarty -> assign("number_of_attributes", $number_of_products['0']['count']);
 
 */
 
-?>

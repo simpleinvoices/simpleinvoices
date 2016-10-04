@@ -34,7 +34,7 @@ class encode
                         $multi_tags = true;
                     }
                 }
-                if (!$multi_tags and count($value)>0) {
+                if (!$multi_tags && count($value)>0) {
                     $xml .= str_repeat("\t",$level)."<$key>\n";
                     $xml .= array_to_xml($value, $level+1);
                     $xml .= str_repeat("\t",$level)."</$key>\n";

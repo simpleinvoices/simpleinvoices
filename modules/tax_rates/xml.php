@@ -16,6 +16,8 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 	global $LANG;
 	global $auth_session;
 
+	$valid_search_fields = array('tax_id', 'tax_description', 'tax_percentage');
+
 	//SC: Safety checking values that will be directly subbed in
 	if (intval($start) != $start) {
 		$start = 0;
@@ -37,12 +39,17 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 		$dir = 'ASC';
 	}
 
-	$query = $_POST['query'];
-	$qtype = $_POST['qtype'];
-
-	$where = " WHERE domain_id = :domain_id";
-	if ($query) $where = " WHERE domain_id = :domain_id AND $qtype LIKE '%$query%' ";
-
+	$where = "";
+	$query = isset($_POST['query']) ? $_POST['query'] : null;
+	$qtype = isset($_POST['qtype']) ? $_POST['qtype'] : null;
+	if ( ! (empty($qtype) || empty($query)) ) {
+		if ( in_array($qtype, $valid_search_fields) ) {
+			$where = " AND $qtype LIKE :query ";
+		} else {
+			$qtype = null;
+			$query = null;
+		}
+	}
 
 	/*Check that the sort field is OK*/
 	$validFields = array('tax_id', 'tax_description','tax_percentage','enabled');
@@ -54,20 +61,25 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 	}
 
 	$sql = "SELECT 
-					tax_id, 
-					tax_description,
-					tax_percentage,
-					type,
-					(SELECT (CASE  WHEN tax_enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled
-				FROM 
-					".TB_PREFIX."tax
+				tax_id, 
+				tax_description,
+				tax_percentage,
+				type,
+				(SELECT (CASE  WHEN tax_enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled
+			FROM 
+				".TB_PREFIX."tax
+			WHERE domain_id = :domain_id
 				$where
-				ORDER BY 
-					$sort $dir 
-			    $limit";
+			ORDER BY 
+				$sort $dir 
+			$limit";
 
+	if (empty($query)) {
+		$result = dbQuery($sql, ':domain_id', $auth_session->domain_id);
+	} else {
+		$result = dbQuery($sql, ':domain_id', $auth_session->domain_id, ':query', "%$query%");
+	}
 
-	$result = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
 	return $result;
 
 }
@@ -89,6 +101,7 @@ foreach ($tax as $row) {
 		<a class='index_table' title='$LANG[view] $LANG[tax_rate] ".$row['tax_description']."' href='index.php?module=tax_rates&view=details&id=$row[tax_id]&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 		<a class='index_table' title='$LANG[edit] $LANG[tax_rate] ".$row['tax_description']."' href='index.php?module=tax_rates&view=details&id=$row[tax_id]&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 	]]></cell>";
+	$xml .= "<cell><![CDATA[".$row['tax_id']."]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['tax_description']."]]></cell>";
 	$xml .= "<cell><![CDATA[".siLocal::number($row['tax_percentage'])." ".$row['type']."]]></cell>";
 	if ($row['enabled']==$LANG['enabled']) {

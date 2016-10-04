@@ -171,17 +171,6 @@
 			}
         ]
     ,
-	"si_index":
-        [
-            {
-				"id":"1",
-				"domain_id":"DOMAIN-ID",
-				"node":"invoice",
-				"sub_node":"1",
-				"sub_node_2":""
-			}
-        ]
-    ,
 	"si_invoices":
         [
             {
@@ -206,6 +195,7 @@
             {
 				"id":"1",
 				"invoice_id":"1",
+				"domain_id":"1",
 				"quantity":"1",
 				"product_id":"5",
 				"unit_price":"125",
@@ -217,6 +207,7 @@
 			{
 				"id":"2",
 				"invoice_id":"1",
+				"domain_id":"1",
 				"quantity":"1",
 				"product_id":"3",
 				"unit_price":"125",
@@ -228,6 +219,7 @@
 			{
 				"id":"3",
 				"invoice_id":"1",
+				"domain_id":"1",
 				"quantity":"1",
 				"product_id":"2",
 				"unit_price":"140",
@@ -239,6 +231,7 @@
 			{
 				"id":"4",
 				"invoice_id":"1",
+				"domain_id":"1",
 				"quantity":"1",
 				"product_id":"2",
 				"unit_price":"140",
@@ -250,6 +243,7 @@
 			{
 				"id":"5",
 				"invoice_id":"1",
+				"domain_id":"1",
 				"quantity":"1",
 				"product_id":"1",
 				"unit_price":"150",
@@ -387,5 +381,47 @@
 				"visible":"1"
 			}
         ]
-
+    ,
+	"si_products_attributes":
+        [
+            {
+                "id": "1",
+                "name": "Size",
+                "type_id": "1"
+            },
+            {
+                "id": "2",
+                "name": "Colour",
+                "type_id": "1"
+            }
+        ]
+    ,
+	"si_products_values":
+        [
+            {
+                "attribute_id": "1",
+                "value": "S",
+                "enabled": "1"
+            },
+            {
+                "attribute_id": "1",
+                "value": "M",
+                "enabled": "1"
+            },
+            {
+                "attribute_id": "1",
+                "value": "L",
+                "enabled": "1"
+            },
+            {
+                "attribute_id": "2",
+                "value": "Red",
+                "enabled": "1"
+            },
+            {
+                "attribute_id": "2",
+                "value": "White",
+                "enabled": "1"
+            }
+        ]
 }

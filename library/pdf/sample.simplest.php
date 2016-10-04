@@ -53,7 +53,7 @@ function convert_to_pdf($path_to_html, $path_to_pdf) {
   $pipeline = PipelineFactory::create_default_pipeline("", // Attempt to auto-detect encoding
                                                        "");
 
-  // Override HTML source 
+  // Override HTML source
   $pipeline->fetchers = array(new MyFetcherLocalFile($path_to_html));
 
   // Override destination to local file
@@ -66,7 +66,7 @@ function convert_to_pdf($path_to_html, $path_to_pdf) {
                             'right'  => 0,
                             'top'    => 0,
                             'bottom' => 0));
-  $media->set_pixels(1024); 
+  $media->set_pixels(1024);
 
   global $g_config;
   $g_config = array(
@@ -83,13 +83,11 @@ function convert_to_pdf($path_to_html, $path_to_pdf) {
                     );
 
   global $g_px_scale;
-  $g_px_scale = mm2pt($media->width() - $media->margins['left'] - $media->margins['right']) / $media->pixels; 
+  $g_px_scale = mm2pt($media->width() - $media->margins['left'] - $media->margins['right']) / $media->pixels;
   global $g_pt_scale;
-  $g_pt_scale = $g_px_scale * 1.43; 
+  $g_pt_scale = $g_px_scale * 1.43;
 
   $pipeline->process($baseurl, $media);
 }
 
 convert_to_pdf("./testing/forms.html", "./testing/forms.pdf");
-
-?>

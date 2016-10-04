@@ -443,9 +443,9 @@ INSERT INTO si_sql_patchmanager (sql_id, sql_patch_ref, sql_patch, sql_release, 
 INSERT INTO si_sql_patchmanager (sql_id, sql_patch_ref, sql_patch, sql_release, sql_statement) VALUES 
 (6, '6', 'Add default invoice template option', '20060514', '');
 INSERT INTO si_sql_patchmanager (sql_id, sql_patch_ref, sql_patch, sql_release, sql_statement) VALUES 
-(7, '7', 'Edit tax description field lenght to 50', '20060526', '');
+(7, '7', 'Edit tax description field length to 50', '20060526', '');
 INSERT INTO si_sql_patchmanager (sql_id, sql_patch_ref, sql_patch, sql_release, sql_statement) VALUES 
-(8, '8', 'Edit default invoice template field lenght to 50', '20060526', '');
+(8, '8', 'Edit default invoice template field length to 50', '20060526', '');
 INSERT INTO si_sql_patchmanager (sql_id, sql_patch_ref, sql_patch, sql_release, sql_statement) VALUES 
 (9, '9', 'Add consulting style invoice', '20060531', '');
 INSERT INTO si_sql_patchmanager (sql_id, sql_patch_ref, sql_patch, sql_release, sql_statement) VALUES 

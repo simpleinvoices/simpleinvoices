@@ -25,7 +25,7 @@
 <tr>
 <td class="details_screen">{$LANG.quantity}</td>
 <td class="details_screen">{$LANG.description}</td>
-<td class="details_screen">{$LANG.Price}</td>
+<td class="details_screen">{$LANG.price}</td>
 
 </tr>
 
@@ -39,7 +39,7 @@
             </tr>
                 
 			<tr class="text{$smarty.section.line.index|htmlsafe} hide">
-        		<td colspan="3" ><textarea input type="text" class="editor"  name='notes{$smarty.section.line.index|htmlsafe}' rows="3" cols="80" wrap="nowrap"></textarea></td>
+        		<td colspan="3" ><textarea class="editor"  name='notes{$smarty.section.line.index|htmlsafe}' rows="3" cols="80"></textarea></td>
 			</tr>
 
         {/section}
@@ -56,7 +56,7 @@
 </tr>
 
 <tr>
-        <td colspan="2"><textarea input type="text" class="editor" name="note" rows="5" cols="70" wrap="nowrap"></textarea></td>
+        <td colspan="2"><textarea class="editor" name="note" rows="5" cols="70"></textarea></td>
 </tr>
 
 <tr><td class="details_screen">{$LANG.tax}</td><td><input type="text" name="tax" size="15" />
@@ -91,7 +91,7 @@
 </tr>	
 <tr>
 	<td align=left>
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.Custom_Fields}"><img src="./images/common/help-small.png" alt="" /> {$LANG.want_more_fields}</a>
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}"><img src="{$help_image_path}help-small.png" alt="" /> {$LANG.want_more_fields}</a>
 	</td>
 </tr>
 <!--Add more line items while in an itemeised invoice - Get style - has problems- wipes the current values of the existing rows - not good

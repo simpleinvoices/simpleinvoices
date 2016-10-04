@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Simple Invoices - Read Me</title>
+<title>SimpleInvoices - Read Me</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 
@@ -13,14 +13,14 @@
 	<a href="#backup"> --  Database backup</a><br> 
 	<a href="#login">Enabling the login system</a><br> 
 	<a href="#upgrading">Upgrading</a><br>
-	<a href="#prepare">Preparing Simple Invoices for use</a><br>
-	<a href="#use">Using Simple Invoices</a><br>
+	<a href="#prepare">Preparing SimpleInvoices for use</a><br>
+	<a href="#use">Using SimpleInvoices</a><br>
 	<a href="#logos"> -- Biller Logos</a><br>
 	<a href="#templates"> -- Invoice Templates</a><br>
 	<a href ="#defaults"> -- System Defaults</a><br>
 	<a href ="#export"> -- Export to Excel/Word</a><br>
 	<a href ="#faqs">Frequently Asked Questions (FAQs)</a><br>
-	<a href ="#faqs-what"> -- What is Simple Invoices?</a><br>
+	<a href ="#faqs-what"> -- What is SimpleInvoices?</a><br>
 	<a href ="#faqs-need"> -- What do i need to start invoicings?</a><br>
 	<a href ="#faqs-how"> -- How do I create invoices?</a><br>
 	<a href ="#faqs-types"> -- What are the different invoice types?</a><br>
@@ -45,7 +45,7 @@
 							<li>xsl support (in PHP5)
 						</ul>
 				</ul>
-			<li>The cache/ directory in the Simple Invoices folder must be writeable by the webserver user (ie chown apache:apache cache)  
+			<li>The cache/ directory in the SimpleInvoices folder must be writeable by the webserver user (ie chown apache:apache cache)  
 		</ul>
 	</ul>
 	<ul>
@@ -62,9 +62,9 @@
 		</ul>
 	</ul>
 	<ul>
-		<li>Installation on Simple Invoices
+		<li>Installation on SimpleInvoices
 		<ul>
-			<li>Now the required software has been installed and is running, download the latest Simple Invoices package from htt://simpleinvoices.sf.net
+			<li>Now the required software has been installed and is running, download the latest SimpleInvoices package from htt://simpleinvoices.sf.net
 			<li>Extract the contents of the simple_invoices_yyyymmdd.zip to a simpleinvoices folder in your web servers document root (ie. /var/www in Debian)
 			<li>Create a simple_invoices database on your database server.  I recommend you use phpMyAdmin to create/manage your new database.
 			<li>Once this database has been created populate the database with tables and test data by running the SimpleInvoicesDatabase.sql file in your database
@@ -74,23 +74,23 @@
 				<li>Note: SimpleInvoicesDatabase.sql works fine with MySQL 4.1 and above.
 			</ul>
 			<li>Now the database has data and files have been 'installed' in the webservers document root, SimpleInvoice just need to have its configuration file edited and then its fine to use
-			<ul><li>Open the Simple Invoices coniguration file (which is config.ini in the config/ folder) up in your favourite text editor
+			<ul><li>Open the SimpleInvoices coniguration file (which is config.php in the config/ folder) up in your favourite text editor
 			<li>Edit the file so that 
 			<ul><li>$db_host equals the name of your database server (normally "localhost"), 
 			<li>$db_name to the name of the database (normally "simple_invoices"), 
 			<li>$db_user to the database username for the database specified in $db_name,
 			<li>$db_password to the password of the database user
-			<li>Set the cache directory as writeable.  To do this cd to the Simple Invoices directory (<i>cd /var/www/html/simpleinvoices</i>) and chown the cache directory to the apache(web server) user (<i>chown apache:apache cache</i>) or if your lazy just chmod 777 the directory (<i>chmod -Rv 777 cache*</i>)
+			<li>Set the cache directory as writeable.  To do this cd to the SimpleInvoices directory (<i>cd /var/www/html/simpleinvoices</i>) and chown the cache directory to the apache(web server) user (<i>chown apache:apache cache</i>) or if your lazy just chmod 777 the directory (<i>chmod -Rv 777 cache*</i>)
 			</ul>
 		</ul>
-		<li>The base of Simple invoices has been setup now, there are a couple of changes that need to be made on your system to enable Export to PDF and Simple Invoices database backup 
+		<li>The base of Simple invoices has been setup now, there are a couple of changes that need to be made on your system to enable Export to PDF and SimpleInvoices database backup 
 			<ul>
 				<li><a name="pdf">Export to PDF</a>
 				<ul>
 					<li>For 'Export to PDF' to work there are two modifcation that needs to be made to your system:
 					<li>The first step is to make the pdf exports directory writeable by the webserver
 						<ul>
-							<li>To do this the cachce directory in your Simple Invoices folder must be writeable, in unix cd to the Simple Invoices directory (<i>cd /var/www/html/simpleinvoices</i>) and chown the cache directory to the apache (webserver user) (<i>chown apache:apache cache</i>), in windows just browse to the cache folder and make sure its writeable by all users.
+							<li>To do this the cachce directory in your SimpleInvoices folder must be writeable, in unix cd to the SimpleInvoices directory (<i>cd /var/www/html/simpleinvoices</i>) and chown the cache directory to the apache (webserver user) (<i>chown apache:apache cache</i>), in windows just browse to the cache folder and make sure its writeable by all users.
                                                         <li>We also need to make the pdf fonts directory writeable. To do this in unix chown the pdf/fpdf directory to the apache(web server) user (<i>chmown apache:apache pdf/fpdf/*</i>), in windows just browse to the fdpf folder(in the pdf folder) and make sure its writeable by all users.
 						</ul>
 					<li><i>gd2</i> Once this cache folder has been made writeable the next step is to test if version of PHP has GD2 support
@@ -107,7 +107,7 @@ GD Version 	2.0 or higher
 						</ul>						
 					<li>Once you have confirmed your PHP has GD2 support we must test if your php.ini file needs to be altered to enable pdf creation
 						<ul>
-							<li>To test if you need to modify your php.ini file open your internet browser and go to your Simple Invoices directory <a href="library/pdf">pdf/</a> (<i>http://localhost/simpleinvoices/library/pdf</i>)
+							<li>To test if you need to modify your php.ini file open your internet browser and go to your SimpleInvoices directory <a href="library/pdf">pdf/</a> (<i>http://localhost/simpleinvoices/library/pdf</i>)
 							<li>This page 'html2ps/pdf demo' is used to test if your system is capable of generating pdf files
 							<li>The 'Source' area the 'Single URL' is set to www.google.com by default, if you are connected to the internet just leave this as is but if your currently not connected to the internet change this to a valid webpage on your system ie. <i>http://localhost/simpleinvoices</i> and scroll to the bottom of the page and click the 'Convert File' button
 							<li>If all goes well a pdf of www.google.com homepage(or the valid url you entered) will be created and displayed in your pdf viewer
@@ -152,55 +152,55 @@ memory_limit = 24M      ; Maximum amount of memory a script may consume (8MB)
 			<ul>
 				<li><a name="backup">Simple invoices database backup</a>
 					<ul>
-                                     		 <li>For 'Simple invoices database backup' to work the first step is to make the database_backups directory(which is in the Simple Invoices directory writeable by the webserver
-                                        	 <li>To do this the  in unix cd to the Simple Invoices directory (<i>cd /var/www/html/simpleinvoices</i>) and chown the database_backups directory to the apache(web server) user (<i>chown apache:apache database_backups</i>), in windows just browse to the database_backups folder and make sure its writeable by all users.
+                                     		 <li>For 'Simple invoices database backup' to work the first step is to make the database_backups directory(which is in the SimpleInvoices directory writeable by the webserver
+                                        	 <li>To do this the  in unix cd to the SimpleInvoices directory (<i>cd /var/www/html/simpleinvoices</i>) and chown the database_backups directory to the apache(web server) user (<i>chown apache:apache database_backups</i>), in windows just browse to the database_backups folder and make sure its writeable by all users.
                                        </ul>
 
 			</ul>
 		<li>Everything has been setup and configured now, Simple Invoice is ready to be used
-		<li>Open your Internet browser and go to http://localhost/simpleinvoices and user Simple Invoices as you wish
+		<li>Open your Internet browser and go to http://localhost/simpleinvoices and user SimpleInvoices as you wish
 		<li>Installation is finished
 	</ul>
 	</ul>
 </ul>
 <a name="login"><b>Enabling the login/authentication system</b></a>
 <ul>
-	<li>Simple Invoices has a login system which can allow you to protect your Simple Invoices with a username and password login system.  By default this is turned off.
-	<li>To turn on the login system in Simple Invoices all you have to do is
-	<li>Open the config/config.ini file and change the line $authentication.enabled = "false" to $authentication.enabled = "true"
-	<li>Done :), now just open up Simple Invoices and it should redirect you to a login page
+	<li>SimpleInvoices has a login system which can allow you to protect your SimpleInvoices with a username and password login system.  By default this is turned off.
+	<li>To turn on the login system in SimpleInvoices all you have to do is
+	<li>Open the config/config.php file and change the line $authentication.enabled = "false" to $authentication.enabled = "true"
+	<li>Done :), now just open up SimpleInvoices and it should redirect you to a login page
 </ul>
-<a name="upgrading"><b>Ugrading Simple Invoices from one version to another</b></a>
+<a name="upgrading"><b>Ugrading SimpleInvoices from one version to another</b></a>
 <ul>
-	<li>To upgrade Simple Invoices from one version to another, the first step is to download the updated version of Simple Invoices from our <a href="http://www.simpleinvoices.org">website</a>
+	<li>To upgrade SimpleInvoices from one version to another, the first step is to download the updated version of SimpleInvoices from our <a href="http://www.simpleinvoices.org">website</a>
 	<li>The next step is to backup (make a copy) of your config.php file which is located in the config folder
-	<li>Once this file has been backed up, extract (unzip) the contents of the Simple Invoices file which you downloaded into the simpleinvoices directory in your webservers document root
+	<li>Once this file has been backed up, extract (unzip) the contents of the SimpleInvoices file which you downloaded into the simpleinvoices directory in your webservers document root
 	<li>open up the config.php file thats in the config directory and enter you database details (db_host, $db_name, $db_user and $db_password) into the file and save it
-	<li>Now that most of the work has been done open up Simple Invoices in your browser (usually http://localhost/simpleinvoices) and from the Options menu in Simple Invoices select Database Upgrade Manager
+	<li>Now that most of the work has been done open up SimpleInvoices in your browser (usually http://localhost/simpleinvoices) and from the Options menu in SimpleInvoices select Database Upgrade Manager
 	<ul><li>If this is the first time that the Database Upgrade Manager has run
 	<ul><li> you'll be preseneted with a screen promting you to Initialise the Database Upgrade
 		<li>click on the INITIALISE DATABASE UPGRADE button to start the database upgrade process
 		<li>Once the Initialisation has complete you'll be prompted to go back to the Database Upgrade Manager screen from which you can run the remaining patches
 		<li>Go back to the Database Upgrade Manager screen by clicking the HERE button
-		<li>Once back at the Database Upgrade Manager screen it will list which of the patches have and have not been run.  If all patches say they have been applied then the upgrade process is complete and you can continue to use Simple Invoices as normal.  If it says that some pathces have not been applied click on the UPDATE button to apply the remaining patches
-		<li>Once the remaining patches have been applied you'll be prompted to go back to the Database Upgrade Manager screen.  From the Database Upgrade Manager screen you'll be able to double-check that all the patches have been applied.  If they now say that they are all applied the upgrade process is complete and you can use Simple Invoices as normal
+		<li>Once back at the Database Upgrade Manager screen it will list which of the patches have and have not been run.  If all patches say they have been applied then the upgrade process is complete and you can continue to use SimpleInvoices as normal.  If it says that some pathces have not been applied click on the UPDATE button to apply the remaining patches
+		<li>Once the remaining patches have been applied you'll be prompted to go back to the Database Upgrade Manager screen.  From the Database Upgrade Manager screen you'll be able to double-check that all the patches have been applied.  If they now say that they are all applied the upgrade process is complete and you can use SimpleInvoices as normal
 	</ul>
 	<li>If the Database Manager Upgrade has been run before
 		<ul>
-		<li>the Database Upgrade Manager screen it will list which of the patches have and have not been run.  If all patches say they have been applied then the upgrade process is complete and you can continue to use Simple Invoices as normal.  If it says that some pathces have not been applied click on the UPDATE button to apply the remaining patches
-		<li>Once the remaining patches have been applied you'll be prompted to go back to the Database Upgrade Manager screen.  From the Database Upgrade Manager screen you'll be able to double-check that all the patches have been applied.  If they now say that they are all applied the upgrade process is complete and you can use Simple Invoices as normal
+		<li>the Database Upgrade Manager screen it will list which of the patches have and have not been run.  If all patches say they have been applied then the upgrade process is complete and you can continue to use SimpleInvoices as normal.  If it says that some pathces have not been applied click on the UPDATE button to apply the remaining patches
+		<li>Once the remaining patches have been applied you'll be prompted to go back to the Database Upgrade Manager screen.  From the Database Upgrade Manager screen you'll be able to double-check that all the patches have been applied.  If they now say that they are all applied the upgrade process is complete and you can use SimpleInvoices as normal
 		</ul>
 	</ul>
 </ul>
-<a name="prepare"><b>Preparing Simple Invoices for use</b></a>
+<a name="prepare"><b>Preparing SimpleInvoices for use</b></a>
 <ul>
-	<li>The first steps in using Simple Invoices is to setup the base information, that is billers, customers, products, tax rates, and invoice preferences
+	<li>The first steps in using SimpleInvoices is to setup the base information, that is billers, customers, products, tax rates, and invoice preferences
 </ul>
 	<ul>
 		<li>Add biller
 			<ul>
 				<li>A biller is the name and details of the person creating the invoice, ie you or your company
-				<li>Open up Simple Invoices in your browser (normally http://localhost/simpleinvoice)
+				<li>Open up SimpleInvoices in your browser (normally http://localhost/simpleinvoice)
 				<li>In the main page click on the Insert Biller button
 				<li>Once in the Insert Biller screen fill in the required fileds and click the Insert Biller button
 				<li>Now when you create an Invoice you will be able to select this biller
@@ -227,9 +227,9 @@ memory_limit = 24M      ; Maximum amount of memory a script may consume (8MB)
 	<ul>
 		<li>check and adjust the tax rate
 			<ul>
-				<li>In some countries ie, Australia, England, New Zealand there are taxes on sales, normally called sales tax, GST( goods and services tax), or VAT (value added tax). Simple Invoices has the ability to allow the user to setup and define tax rates.
+				<li>In some countries ie, Australia, England, New Zealand there are taxes on sales, normally called sales tax, GST( goods and services tax), or VAT (value added tax). SimpleInvoices has the ability to allow the user to setup and define tax rates.
 				<li>To view the default tax rates select Manage Tax Rates from the Option menu.
-				<li>This will now display all the available tax rates in Simple Invoices
+				<li>This will now display all the available tax rates in SimpleInvoices
 				<li>To edit an existing tax rate select the edit button next to the tax rate and in the edit screen update it with the new information and click the Sav Tax Rate button
 				<li>To add a new tax rate select from the Option menu Insert New Tax Rate
 				<li>Fill in the required fields and click the Insert Tax Rate button
@@ -267,14 +267,14 @@ memory_limit = 24M      ; Maximum amount of memory a script may consume (8MB)
 				</ul>
 			</ul>
 			</ul>		
-			<a name="use"><b>Using Simple Invoices</b></a>
+			<a name="use"><b>Using SimpleInvoices</b></a>
 <ul>
 	<li><b>The basics</b>
 	<br>
 	<br>
 	<ul>
-	<li>Now that Simple Invoices has been installed and setup will all the required information, you can start to do some invoices :)
-	<li>Open Simple Invoices in your browser (http://localhost/simpleinvoices)
+	<li>Now that SimpleInvoices has been installed and setup will all the required information, you can start to do some invoices :)
+	<li>Open SimpleInvoices in your browser (http://localhost/simpleinvoices)
 	<li>To create an invoice, in the main page click on the style of invoice you wish to create, Invoice - Total or Invoice - Itemised
 	<ul>
 		<li>A Total Invoice is an invoice that - think an invoice from a plumber that lists the actions and then has one price and the tax assocaited 
@@ -297,8 +297,8 @@ memory_limit = 24M      ; Maximum amount of memory a script may consume (8MB)
 	<br>
 	<br>
 <ul>
-	<li>Simple Invoices allows for each biller to have their own logo displayed in the Print Preview of their invoices.
-	<li>To add a logo to a biller the first step is to upload your billers logo into the logo folder into Simple Invoices directory on your system
+	<li>SimpleInvoices allows for each biller to have their own logo displayed in the Print Preview of their invoices.
+	<li>To add a logo to a biller the first step is to upload your billers logo into the logo folder into SimpleInvoices directory on your system
 	<li>Once the logo has been uploaded the last step is to go into the Manage Billers page and edit the biller in question and in the field 'Biller logo' select the name of the logo your just uploaded and select save
 	<li>Now when you to a Print Preview of any of that billers invoices their logo will be displayed
 
@@ -309,10 +309,10 @@ memory_limit = 24M      ; Maximum amount of memory a script may consume (8MB)
 	<br>
 	<br>
 <ul>
-	<li>An Invoice Template is the template that Simple Invoices will use to create the Print Preview of the invoice
-	<li>To choose which Invoice Template your Simple Invoices will use go to the Options menu and select System Defaults
+	<li>An Invoice Template is the template that SimpleInvoices will use to create the Print Preview of the invoice
+	<li>To choose which Invoice Template your SimpleInvoices will use go to the Options menu and select System Defaults
 	<li>In the System Default page to tell which Invoice Template your system is using look at the 'Default invoice template:' field and that will be the default thats currently used
-	<li>If you wish to change what Invoice Template is the default for your Simple Invoices click the edit button next to 'Default invoice template:' and from the drop down menu select another template to use and click save
+	<li>If you wish to change what Invoice Template is the default for your SimpleInvoices click the edit button next to 'Default invoice template:' and from the drop down menu select another template to use and click save
 	<li>Now when you do a Print Preview of an invoice it will use this new Invoice Template
 
 </ul>
@@ -321,7 +321,7 @@ memory_limit = 24M      ; Maximum amount of memory a script may consume (8MB)
 	<br>
 	<br>
 <ul>
-	<li>In Simple Invoices its possible to setup defaults of various values that the system will use by default, these default values can be defined in the System Defaults page which is available from the Option menu
+	<li>In SimpleInvoices its possible to setup defaults of various values that the system will use by default, these default values can be defined in the System Defaults page which is available from the Option menu
 	<li>In the System Defaults page the following values can be set as default:
 		<ul>
 			<li>Default biller - this defines when creating a new invoice what the default(already selected from the drop down list) biller
@@ -339,7 +339,7 @@ memory_limit = 24M      ; Maximum amount of memory a script may consume (8MB)
 	<br>
 	<br>
 <ul>
-		<li>Simple Invoices allows to the export of an invoice from the Quick View to Excel, Word and the Open Document formats
+		<li>SimpleInvoices allows to the export of an invoice from the Quick View to Excel, Word and the Open Document formats
 		<li>The default export formats are set to .xls(Excel) for spreadsheets and .doc(Word) for word processors
 		<li>These defaults can be changed in the config/config.php to be the Open Document formats, .ods for spreadsheets and .odt dor word processors
 		<li>Note: in the config/config.php any file format can be used as long as their associated programs can read a html document
@@ -350,27 +350,27 @@ memory_limit = 24M      ; Maximum amount of memory a script may consume (8MB)
 
 <a name="faqs"><b>Frequently Asked Questions (FAQs)</b></a>
 <ul>
-                <li><a name="faqs-what"><b>What is Simple Invoices?</b></a><br><br>
-Simple Invoices is a basic invoicing system designed with simplicity and functionality in mind.  Catering for the neds of small organisations and home users.  For more information please refer to the Simple Invoices website <a href="http://www.simpleinvoices.org">http://www.simpleinvoices.org</a>
+                <li><a name="faqs-what"><b>What is SimpleInvoices?</b></a><br><br>
+SimpleInvoices is a basic invoicing system designed with simplicity and functionality in mind.  Catering for the neds of small organisations and home users.  For more information please refer to the SimpleInvoices website <a href="http://www.simpleinvoices.org">http://www.simpleinvoices.org</a>
 			<br>
 			<br>
 		<li><a name="faqs-need"><b>What do I need to start invoicing?</b></a>
 			<br>
 			<br>
-				Once you've got Simple Invoices installed on your system (refer Installation documentation for more info) all you need to do is enter a Biller ( this is normally you or your organisation) details, a Customer (the person your are invoicing).<br>
+				Once you've got SimpleInvoices installed on your system (refer Installation documentation for more info) all you need to do is enter a Biller ( this is normally you or your organisation) details, a Customer (the person your are invoicing).<br>
 				Once these 2 pieces of information have been entered you can now start creating invoices.<br>
-Note: If you are creating invoices based on products sales( ie a computer store) you will also need to enter some products into Simple Invoices
+Note: If you are creating invoices based on products sales( ie a computer store) you will also need to enter some products into SimpleInvoices
 			<br>
 			<br>
 		<li><a name="faqs-how"><b>How do I create invoices?</b></a>
 			<br>
 			<br>
-			Creating invoices is easy.  Once a biller and customer have been entered into Simple Invoices all you need to do is select .... from the New Invoice menu, fill in the details and click 'Save Invoice'
+			Creating invoices is easy.  Once a biller and customer have been entered into SimpleInvoices all you need to do is select .... from the New Invoice menu, fill in the details and click 'Save Invoice'
 <br>
 			<br>		
 		<li><a name="faqs-types"><b>What are the different invoice types?</b></a>
 			<br>
-			<br>In Simple Invoices there are 3 types of invoices available, Total invoices, Itemised invoices and Consulting invoices
+			<br>In SimpleInvoices there are 3 types of invoices available, Total invoices, Itemised invoices and Consulting invoices
 		        <ul>                 
 				<li>A Total Invoice is an invoice that - think an invoice from a plumber that lists the actions and then has one price and the tax assocaited                 
 				<li>An Itemised Invoice is an invoice that list many different items in the same invoice - think a grocery store invoice

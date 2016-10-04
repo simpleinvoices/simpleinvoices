@@ -4,7 +4,7 @@
      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Simple Invoices</title>
+<title>SimpleInvoices</title>
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
 <link rel="Stylesheet" href="library/WebApp/Design/Render.css" />
 	<script type="text/javascript" src="library/WebApp/Action/Logic.js"></script>
@@ -14,7 +14,7 @@
 	{$extension_jquery_files }
 	<script type="text/javascript" src="./include/jquery/jquery.plugins.js"></script>
 	<script type="text/javascript" src="./include/jquery/jquery.conf.js"></script>
-	<link rel="stylesheet" type="text/css" href="./templates/default/css/flexigrid.css" />
+	<link rel="stylesheet" type="text/css" href="./extensions/mini/templates/default/css/flexigrid.css" />
 	<link rel="stylesheet" type="text/css" href="./include/jquery/jquery.plugins.css" title="default" media="screen" />
 
 
@@ -77,7 +77,7 @@
 
 	<a href="#" id="waBackButton">Back</a>
 	<a href="#" id="waHomeButton">Home</a>
-	<a href="#" onclick="return WA.HideBar()"><span id="waHeadTitle">Simple Invoices</span></a>
+	<a href="#" onclick="return WA.HideBar()"><span id="waHeadTitle">SimpleInvoices</span></a>
 
 	
 </div>

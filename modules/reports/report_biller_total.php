@@ -1,21 +1,20 @@
 <?php
-  $sql = "SELECT 
-                b.name, 
-                sum(ii.total) AS sum_total
-            FROM 
-                ".TB_PREFIX."biller b 
-            INNER JOIN
-              ".TB_PREFIX."invoices iv ON (b.id = iv.biller_id)
-            INNER JOIN
-              ".TB_PREFIX."invoice_items ii ON (ii.invoice_id = iv.id)
-            INNER JOIN
-              ".TB_PREFIX."preferences p ON (p.pref_id = iv.preference_id)
-            WHERE
-                p.status ='1'
-            GROUP BY 
-                b.name";
+  $sql = "
+SELECT 
+    b.name 
+  , SUM(ii.total) AS sum_total
+FROM ".TB_PREFIX."biller b 
+    INNER JOIN ".TB_PREFIX."invoices iv ON (b.id = iv.biller_id AND b.domain_id = iv.domain_id)
+    INNER JOIN ".TB_PREFIX."invoice_items ii ON (ii.invoice_id = iv.id AND ii.domain_id = iv.domain_id)
+    INNER JOIN ".TB_PREFIX."preferences pr ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id)
+WHERE
+	    pr.status ='1'
+	AND b.domain_id = :domain_id
+GROUP BY 
+	b.name
+";
 
-  $biller_sales = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
+  $biller_sales = dbQuery($sql, ':domain_id', $auth_session->domain_id);
 
   $total_sales = 0;
   $billers = array();

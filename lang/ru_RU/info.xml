@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<langfile version="1.0.0" type="language">
+  <name>Russian</name>
+	<shortname>ru_RU</shortname>
+	<englishname>Russian</englishname>
+	<version>1.0.0</version>
+	<creationDate>2013-03-10</creationDate>
+	<author>Nurkamol Vakhidov</author>
+	<authorEmail>nurkamol@gmail.com</authorEmail>
+</langfile>

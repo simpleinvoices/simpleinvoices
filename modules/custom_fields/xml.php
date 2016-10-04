@@ -25,8 +25,6 @@ if (!preg_match('/^(asc|desc)$/iD', $dir)) {
 //$qtype = $_POST['qtype'];
 
 $where = " WHERE domain_id = :domain_id";
-//if ($query) $where = " WHERE domain_id = :domain_id AND $qtype LIKE '%$query%' ";
-
 
 /*Check that the sort field is OK*/
 $validFields = array('cf_id', 'cf_custom_label','enabled');
@@ -68,7 +66,7 @@ if (in_array($sort, $validFields)) {
 			LIMIT 
 				$start, $limit";
 			
-	$sth = dbQuery($sql,':domain_id', $auth_session->domain_id) or die(end($dbh->errorInfo()));
+	$sth = dbQuery($sql,':domain_id', $auth_session->domain_id);
 	$count = $sth->rowCount();
 	
 	$cfs = null;

@@ -47,6 +47,11 @@
                 <img src="./images/common/database.png" alt="" />
                  {$LANG.database_upgrade_manager}
             </a>
+
+			<a href="index.php?module=options&amp;view=manage_cronlog" class="">
+                <img src="./images/common/database_table.png" alt="" />
+                 Cron {$LANG.database_log}
+            </a>
 	</div>
 
 </div>

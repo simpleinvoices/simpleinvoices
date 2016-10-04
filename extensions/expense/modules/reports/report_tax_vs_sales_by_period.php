@@ -19,12 +19,13 @@
 
 checkLogin();
 
+$domain_id = domain_id::get();
 
 /*
 * Get earliest invoice date
 */
-$sql="select min(date) as date from ".TB_PREFIX."invoices";
-$sth = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
+$sql="SELECT MIN(date) AS date FROM ".TB_PREFIX."invoices WHERE domain_id = :domain_id";
+$sth = dbQuery($sql, ':domain_id', $domain_id);
 $invoice_start_array = $sth->fetch();
 
 //$invoice_start = dbQuery($sql);
@@ -55,11 +56,19 @@ while ( $year <= $this_year )
 		/*
 		* Sales
 		*/
-		$total_month_sales_sql = "select sum(iit.tax_amount) as month_total from ".TB_PREFIX."invoice_item_tax iit, si_invoice_items ii, si_invoices i, si_preferences p where i.id = ii.invoice_id AND iit.invoice_item_id = ii.id AND i.preference_id = p.pref_id AND p.status = '1' AND i.date like '$year-$month%'";
+		$total_month_sales_sql = "SELECT SUM(iit.tax_amount) AS month_total 
+			FROM ".TB_PREFIX."invoice_item_tax iit 
+				LEFT JOIN ".TB_PREFIX."invoice_items ii ON (iit.invoice_item_id = ii.id)
+				LEFT JOIN ".TB_PREFIX."invoices i ON (i.id = ii.invoice_id AND i.domain_id = ii.domain_id)
+				LEFT JOIN ".TB_PREFIX."preferences p ON (i.preference_id = p.pref_id AND i.domain_id = p.domain_id)
+			WHERE  
+				ii.domain_id = :domain_id
+			AND p.status = '1' 
+			AND i.date LIKE '$year-$month%'";
 		//$total_month_sales = mysqlQuery($total_month_sales_sql);
 		//$total_month_sales_array= mysql_fetch_array($total_month_sales);
 
-		$total_month_sales = dbQuery($total_month_sales_sql) or die(htmlsafe(end($dbh->errorInfo())));
+		$total_month_sales = dbQuery($total_month_sales_sql, ':domain_id', $domain_id);
 		$total_month_sales_array = $total_month_sales -> fetch();
 
 		$total_sales[$year][$month] = $total_month_sales_array['month_total'];
@@ -71,11 +80,14 @@ while ( $year <= $this_year )
 		/*
 		* Payment
 		*/
-		$total_month_payments_sql = " select sum(et.tax_amount) as month_total_payments from ".TB_PREFIX."expense_item_tax et, si_expense e where e.id = et.expense_id AND e.date like '$year-$month%'";
-		//$total_month_payments = mysqlQuery($total_month_payments_sql);
-		//$total_month_payments_array= mysql_fetch_array($total_month_payments);
+		$total_month_payments_sql = "SELECT SUM(et.tax_amount) AS month_total_payments 
+			FROM ".TB_PREFIX."expense_item_tax et 
+				 LEFT JOIN ".TB_PREFIX."expense e ON (e.id = et.expense_id)
+			WHERE
+				e.domain_id = :domain_id
+			AND e.date LIKE '$year-$month%'";
 
-		$total_month_payments = dbQuery($total_month_payments_sql) or die(htmlsafe(end($dbh->errorInfo())));
+		$total_month_payments = dbQuery($total_month_payments_sql, ':domain_id', $domain_id);
 		$total_month_payments_array = $total_month_payments -> fetch();
 
 		$total_payments[$year][$month] = $total_month_payments_array['month_total_payments'];
@@ -93,12 +105,17 @@ while ( $year <= $this_year )
 	/*
 	* Sales
 	*/
-	#$total_year_sales_sql = "select sum(ii.total) as year_total from ".TB_PREFIX."invoice_items ii, si_invoices i where i.id = ii.invoice_id AND i.date like '$year%'";
-    $total_year_sales_sql = "select sum(iit.tax_amount) as year_total from ".TB_PREFIX."invoice_item_tax iit, si_invoice_items ii, si_invoices i, si_preferences p where i.id = ii.invoice_id AND iit.invoice_item_id = ii.id AND i.preference_id = p.pref_id AND p.status = '1' AND i.date like '$year%'";
-	//$total_year_sales = mysqlQuery($total_year_sales_sql);
-	//$total_year_sales_array= mysql_fetch_array($total_year_sales);
+    $total_year_sales_sql = "SELECT SUM(iit.tax_amount) AS year_total 
+		FROM ".TB_PREFIX."invoice_item_tax iit 
+			LEFT JOIN ".TB_PREFIX."invoice_items ii ON (iit.invoice_item_id = ii.id)
+			LEFT JOIN ".TB_PREFIX."invoices i ON (i.id = ii.invoice_id AND i.domain_id = ii.domain_id)
+			LEFT JOIN ".TB_PREFIX."preferences p ON (i.preference_id = p.pref_id AND i.domain_id = p.domain_id)
+		WHERE  
+			ii.domain_id = :domain_id
+		AND p.status = '1' 
+		AND i.date LIKE '$year%'";
 
-	$total_year_sales = dbQuery($total_year_sales_sql) or die(htmlsafe(end($dbh->errorInfo())));
+	$total_year_sales = dbQuery($total_year_sales_sql, ':domain_id', $domain_id);
 	$total_year_sales_array = $total_year_sales -> fetch();
 
 	$total_sales[$year]['Total'] = $total_year_sales_array['year_total'];
@@ -110,12 +127,14 @@ while ( $year <= $this_year )
 	/*
 	* Payment
 	*/
-	#$total_year_payments_sql = " select sum(ac_amount) as year_total_payments from ".TB_PREFIX."payment where ac_date like '$year%'";
-	$total_year_payments_sql = " select sum(et.tax_amount) as year_total_payments from ".TB_PREFIX."expense_item_tax et, si_expense e where e.id = et.expense_id AND e.date like '$year%'";
-	//$total_year_payments = mysqlQuery($total_year_payments_sql);
-	//$total_year_payments_array= mysql_fetch_array($total_year_payments);
+	$total_year_payments_sql = "SELECT SUM(et.tax_amount) AS year_total_payments 
+		FROM ".TB_PREFIX."expense_item_tax et 
+			 LEFT JOIN ".TB_PREFIX."expense e ON (e.id = et.expense_id)
+		WHERE
+			e.domain_id = :domain_id
+		AND e.date LIKE '$year%'";
 
-	$total_year_payments = dbQuery($total_year_payments_sql) or die(htmlsafe(end($dbh->errorInfo())));
+	$total_year_payments = dbQuery($total_year_payments_sql, ':domain_id', $domain_id);
 	$total_year_payments_array = $total_year_payments -> fetch();
 
 	$total_payments[$year]['Total'] = $total_year_payments_array['year_total_payments'];
@@ -129,13 +148,7 @@ while ( $year <= $this_year )
 	$years[]=$year ;
 	$year++;
 }
-/*
-echo "Total Sales<pre>";
-print_r($total_sales);
-echo "</pre><br />Total Payments<pre>";
-print_r($total_payments);
-echo "</pre>";
-*/
+
 $smarty->assign('total_sales', $total_sales);
 $smarty->assign('total_payments', $total_payments);
 $smarty->assign('tax_summary', $tax_summary);

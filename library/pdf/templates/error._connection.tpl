@@ -1,3 +1,4 @@
+<?php global $_server_response, $_url; ?>
 <h1>Connection error</h1>
 <p>Could not open URL <?php echo $_url?> you've specified. </p>
 

@@ -2,10 +2,10 @@
 	//fetch the page to write the pdf
 	$invoice_id = $_GET['invoice'];
 
-	$invoice = getInvoice($invoice_id);
+	$invoice = Invoice::getInvoice($invoice_id);
 	$preference = getPreference($invoice['preference_id']);
-	$biller = getBiller($invoice['biller_id']);
-	$customer = getCustomer($invoice['customer_id']);
+	$biller = Biller::select($invoice['biller_id']);
+	$customer = Customer::get($invoice['customer_id']);
 	
 	$sql = "SELECT inv_ty_description AS type FROM ".TB_PREFIX."invoice_type WHERE inv_ty_id = :id";
 	$sth = dbQuery($sql, ':id', $invoice['type_id']);
@@ -19,4 +19,3 @@
 	//we should now have the pdf and location
 	//email the pdf
 	//delete the pdf
-?>

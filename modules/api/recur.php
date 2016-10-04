@@ -1,5 +1,5 @@
 <?php
 
-$ni = new invoice();
+$ni = new Invoice();
 $ni->id = $_GET['id'];
 $ni->recur();

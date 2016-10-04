@@ -24,29 +24,39 @@ ORDER BY
         inv_owing DESC;
    ";
   } else {
-      $sql = "SELECT
-          c.id as cid,
-          c.name as customer,
-          (select coalesce(sum(ii2.total), 0) from ".TB_PREFIX."invoice_items ii2,".TB_PREFIX."invoices iv2 where ii2.invoice_id = iv2.id and iv2.customer_id = c.id) as inv_total,
-          (select coalesce(sum(ap.ac_amount), 0) from ".TB_PREFIX."payment ap, ".TB_PREFIX."invoices iv3 where ap.ac_inv_id = iv3.id and iv3.customer_id = c.id) as inv_paid,
-          (select (inv_total - inv_paid)) as inv_owing
-
-  FROM
-          ".TB_PREFIX."customers c,".TB_PREFIX."invoices,".TB_PREFIX."invoice_items, ".TB_PREFIX."preferences
+      $sql = "
+SELECT
+        c.id AS cid
+      , c.name AS customer
+      , SUM(COALESCE(ii.total, 0)) AS inv_total
+      , COALESCE(ap.inv_paid, 0) AS inv_paid
+      , SUM(COALESCE(ii.total, 0)) - COALESCE(ap.inv_paid, 0) AS inv_owing
+FROM
+      ".TB_PREFIX."customers c 
+      LEFT JOIN ".TB_PREFIX."invoices iv      ON (iv.customer_id = c.id AND iv.domain_id = c.domain_id)
+      LEFT JOIN ".TB_PREFIX."invoice_items ii ON (ii.invoice_id = iv.id AND ii.domain_id = iv.domain_id)
+      LEFT JOIN ".TB_PREFIX."preferences pr   ON (iv.preference_id = pr.pref_id AND pr.domain_id = iv.domain_id)
+      LEFT JOIN (
+  SELECT 
+	  iv1.customer_id
+	, ap1.domain_id
+	, SUM(COALESCE(ap1.ac_amount, 0)) AS inv_paid 
+  FROM  ".TB_PREFIX."payment ap1
+      LEFT JOIN ".TB_PREFIX."invoices iv1   ON (ap1.ac_inv_id = iv1.id AND ap1.domain_id = iv1.domain_id)
+      LEFT JOIN ".TB_PREFIX."preferences pr1 ON (pr1.pref_id = iv1.preference_id AND pr1.domain_id = iv1.domain_id)
   WHERE
-          ".TB_PREFIX."invoice_items.invoice_id = ".TB_PREFIX."invoices.id and ".TB_PREFIX."invoices.customer_id = c.id
-          AND ".TB_PREFIX."invoices.preference_id = ".TB_PREFIX."preferences.pref_id
-          AND ".TB_PREFIX."preferences.status = 1
-  GROUP BY
-          c.id
-  HAVING
-          inv_owing > 0 
-  ORDER BY
-          inv_owing DESC;
-     ";
+      pr1.status = 1
+  GROUP BY iv1.customer_id, ap1.domain_id
+      ) ap ON (ap.customer_id = c.id AND ap.domain_id = c.domain_id)
+WHERE
+          pr.status   = 1
+      AND c.domain_id = :domain_id
+GROUP BY 
+	c.id;
+";
   }
 
-  $customer_results = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
+  $customer_results = dbQuery($sql, ':domain_id', $auth_session->domain_id);
 
   $total_owed = 0;
   $customers = array();

@@ -2,37 +2,41 @@
 
 header("Content-type: text/xml");
 
-//$start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
 $dir = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "ASC" ;
 $sort = (isset($_POST['sortname'])) ? $_POST['sortname'] : "description" ;
 $rp = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
 $page = (isset($_GET['page'])) ? $_GET['page'] : "1" ;
 
+$domain_id = domain_id::get();
+$valid_search_fields = array('id', 'description', 'unit_price');
+
 //SC: Safety checking values that will be directly subbed in
 if (intval($page) != $page) {
 	$start = 0;
 }
-$start = (($page-1) * $limit);
-
-if (intval($limit) != $limit) {
-	$limit = 25;
+if (intval($rp) != $rp) {
+	$rp = 25;
 }
 if (!preg_match('/^(asc|desc)$/iD', $dir)) {
 	$dir = 'ASC';
 }
-
 
 /*SQL Limit - start*/
 $start = (($page-1) * $rp);
 $limit = "LIMIT $start, $rp";
 /*SQL Limit - end*/
 
-$query = $_POST['query'];
-$qtype = $_POST['qtype'];
-
-$where = "";
-if ($query) $where = " AND $qtype LIKE '%$query%' ";
-
+		$where = "";
+		$query = isset($_POST['query']) ? $_POST['query'] : null;
+		$qtype = isset($_POST['qtype']) ? $_POST['qtype'] : null;
+		if ( ! (empty($qtype) || empty($query)) ) {
+			if ( in_array($qtype, $valid_search_fields) ) {
+				$where = " AND $qtype LIKE :query ";
+			} else {
+				$qtype = null;
+				$query = null;
+			}
+		}
 
 /*Check that the sort field is OK*/
 $validFields = array('id', 'description','customer_id');
@@ -52,29 +56,22 @@ if (in_array($sort, $validFields)) {
 				".TB_PREFIX."products  
 			WHERE 
 				visible = 1
+			AND domain_id = :domain_id
 				$where
 			ORDER BY 
 				$sort $dir 
 			$limit";
 				
-			
+	if (empty($query)) {
+		$sth = dbQuery($sql, ':domain_id', $domain_id);
+	} else {
+		$sth = dbQuery($sql, ':domain_id', $domain_id, ':query', "%$query%");
+	}
 
-	$sth = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
 	$customers = $sth->fetchAll(PDO::FETCH_ASSOC);
-/*
-	$customers = null;
 
-	for($i=0; $customer = $sth->fetch(PDO::FETCH_ASSOC); $i++) {
-		if ($customer['enabled'] == 1) {
-			$customer['enabled'] = $LANG['enabled'];
-		} else {
-			$customer['enabled'] = $LANG['disabled'];
-		}
-*/
-global $dbh;
-
-$sqlTotal = "SELECT count(id) AS count FROM ".TB_PREFIX."products where visible =1";
-$tth = dbQuery($sqlTotal) or die(end($dbh->errorInfo()));
+$sqlTotal = "SELECT count(id) AS count FROM ".TB_PREFIX."products WHERE domain_id = :domain_id AND visible =1";
+$tth = dbQuery($sqlTotal, ':domain_id', $domain_id);
 $resultCount = $tth->fetch();
 $count = $resultCount[0];
 //echo sql2xml($customers, $count);

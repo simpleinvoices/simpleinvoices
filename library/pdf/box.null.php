@@ -6,18 +6,18 @@ class NullBox extends GenericInlineBox {
   function get_max_width(&$context) { return 0; }
   function get_height() { return 0; }
 
-  function NullBox() {
-    $this->GenericInlineBox();
+  function __construct() {
+    parent::__construct();
   }
-  
-  function &create() { 
-    $box =& new NullBox;
+
+  function &create() {
+    $box =  new NullBox;
 
     $css_state = new CSSState(CSS::get());
     $css_state->pushState();
     $box->readCSS($css_state);
 
-    return $box; 
+    return $box;
   }
 
   function show(&$viewport) {
@@ -31,7 +31,7 @@ class NullBox extends GenericInlineBox {
       return;
     };
 
-    // Move current "box" to parent current coordinates. It is REQUIRED, 
+    // Move current "box" to parent current coordinates. It is REQUIRED,
     // as some other routines uses box coordinates.
     $this->put_left($parent->get_left());
     $this->put_top($parent->get_top());

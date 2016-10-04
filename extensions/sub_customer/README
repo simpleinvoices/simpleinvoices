@@ -3,10 +3,13 @@ Sub-customer extensions
 
 This allows you to have parent and child customers
 
-When you create an invoice you select which parent company to invoice - then a drop down list will appear to enable the selection of child company
+When you create an invoice you select which parent company to invoice.
+Then a drop down list will appear to enable the selection of child company
 
-You can also use this have various 'locations' for one customer - the invoice template can be adjsuted to print the sub customer info on it for whatever purposes you want
+You can also use this to have various 'locations' for one customer.
+The invoice template can be adjsuted to print the sub customer info on it
+for whatever purposes you want
 
-run the sql in ./database/changes
-
-Invoice.custom_field1 is used to store teh sub customer ID in the invoice
+A new field, parent_customer_id, will be added to the si_customers table
+automatically after this extension is enabled and you perform the first
+customer lookup.

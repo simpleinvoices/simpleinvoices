@@ -23,9 +23,9 @@
 					class="cluetip"
 					href="#"
 					rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field"
-					title="{$LANG.Required_Field}"
+					title="{$LANG.required_field}"
 			>
-			<img src="./images/common/required-small.png" alt="" />
+			<img src="{$help_image_path}required-small.png" alt="" />
 			</a>	
 			</th>
 			<td><input type="text" name="email" value="{$smarty.post.email|htmlsafe}" size="35" id="email" autocomplete="off" class="validate[required]"  /></td>
@@ -38,7 +38,7 @@
 					rel="index.php?module=documentation&amp;view=view&amp;page=help_user_role"
 					title="{$LANG.role}"
 				> 
-				<img src="./images/common/help-small.png" alt="" />
+				<img src="{$help_image_path}help-small.png" alt="" />
 				</a>
 			</th>
 			<td>
@@ -58,6 +58,10 @@
 			<td>
 				{html_options name=enabled options=$enabled selected=1}
 			</td>
+		</tr>
+		<tr>
+			<th>{$LANG.users}</th>
+			<td><input type="text" name="user_id" value="{$smarty.post.user_id|htmlsafe}" size="12" id="user_id" autocomplete="off" class="validate[required]"  /></td>
 		</tr>
 	</table>
 

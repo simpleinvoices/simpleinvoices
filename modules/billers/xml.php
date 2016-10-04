@@ -15,7 +15,9 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 	global $config;
 	global $LANG;
 	global $auth_session;
-	
+
+	$valid_search_fields = array('id', 'name', 'email');
+
 	//SC: Safety checking values that will be directly subbed in
 	if (intval($start) != $start) {
 		$start = 0;
@@ -39,13 +41,17 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 		$dir = 'ASC';
 	}
 	
-	$query = $_POST['query'];
-	$qtype = $_POST['qtype'];
-	
-	$where = " WHERE domain_id = :domain_id";
-	if ($query) $where = " WHERE domain_id = :domain_id AND $qtype LIKE '%$query%' ";
-	
-	
+	$where = "";
+	$query = isset($_POST['query']) ? $_POST['query'] : null;
+	$qtype = isset($_POST['qtype']) ? $_POST['qtype'] : null;
+	if ( ! (empty($qtype) || empty($query)) ) {
+		if ( in_array($qtype, $valid_search_fields) ) {
+			$where = " AND $qtype LIKE :query ";
+		} else {
+			$qtype = null;
+			$query = null;
+		}
+	}
 	
 	/*Check that the sort field is OK*/
 	$validFields = array('id', 'name', 'email','enabled');
@@ -62,15 +68,20 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 					name, 
 					email,
 					(SELECT (CASE  WHEN enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled
-	
 				FROM 
-					".TB_PREFIX."biller  
-				$where
+					".TB_PREFIX."biller 
+				WHERE domain_id = :domain_id
+					$where
 				ORDER BY 
 					$sort $dir 
 				$limit";
 	
-		$result = dbQuery($sql,':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+		if (empty($query)) {
+			$result = dbQuery($sql,':domain_id', $auth_session->domain_id);
+		} else {
+			$result = dbQuery($sql,':domain_id', $auth_session->domain_id, ':query', "%$query%");
+		}
+
 		return $result;
 }
 
@@ -92,6 +103,7 @@ foreach ($billers as $row) {
 	<a class='index_table' title='$LANG[view] ".$row['name']."' href='index.php?module=billers&view=details&id=$row[id]&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 	<a class='index_table' title='$LANG[edit] ".$row['name']."' href='index.php?module=billers&view=details&id=$row[id]&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 	]]></cell>";
+	$xml .= "<cell><![CDATA[".$row['id']."]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['name']."]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['email']."]]></cell>";
 	if ($row['enabled']==$LANG['enabled']) {

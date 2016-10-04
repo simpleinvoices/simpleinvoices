@@ -48,5 +48,6 @@ div.popup-calendar table th.weekend, div.popup-calendar table td.weekend { backg
 div.popup-calendar table td a { display: block; border: 1px solid #eee; width: 22px; height: 18px; text-decoration:none; color: #000;}
 div.popup-calendar table td.today a { border-color: #aaa;}
 div.popup-calendar table td a.selected, div.popup-calendar table td a:hover { background: #036;  color: #fff;}
-
- 
+/* Added by RCR 20151226 to move calendar off of the popup link */
+div.popup-calendar {margin-left:20px;}
+/* End Added */

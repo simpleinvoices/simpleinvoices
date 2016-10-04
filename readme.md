@@ -1,4 +1,6 @@
-# Simple Invoices
+# SimpleInvoices
+
+[![Join the chat at https://gitter.im/simpleinvoices/simpleinvoices](https://badges.gitter.im/simpleinvoices/simpleinvoices.svg)](https://gitter.im/simpleinvoices/simpleinvoices?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 Making invoicing rock since '05.
 
 ## Cloning
@@ -6,20 +8,38 @@ SimpleInvoices using gitsubmodules to load the Zend Framework.
 When cloning the repository use the `--recursive` option to ensure that Zend is retrieved.  
 `git clone --recursive git@github.com:simpleinvoices/simpleinvoices.git`
 
+## Downloads
+* Bleeding Edge Code: [SI Git Master](http://github.com/simpleinvoices/simpleinvoices/archive/master.zip) (.zip)
+* Latest Beta Release: [2013.1 beta 8](https://github.com/simpleinvoices/simpleinvoices/archive/2013.1.beta.8.tar.gz) (tar.gz)
+* Latest Stable Release: [2011.1](http://download.simpleinvoices.org/simpleinvoices/downloads/simpleinvoices.2011.1.zip) (.zip)
+
 ## Documentation
 * Installation: http://simpleinvoices.org/install
 * Frequently Asked Questions: http://simpleinvoices.org/wiki/faqs
 * Help: http://simpleinvoices.org/help
 
+## Schema
+* The Entity Relationship Diagram for SI is available in the <b>databases/mysql folder</b>
+* [ERD Schema with Primary and Foreign Keys](https://github.com/apmuthu/simpleinvoices/raw/master/databases/mysql/SI_Schema_2013.1.beta.5.1_PKFK.png)
+
 ## About
-* Simple Invoices is released under the GPL v3 license - refer license.txt for details
+* SimpleInvoices is released under the GPL v3 license - refer license.txt for details
 * For installation instructions refer: http://simpleinvoices.org/install
 * For any other help or comments jump on our website or post on the forum at http://simpleinvoices.org/forum
 
 ## Get Involved
-Developer Discussion now takes place on the [Simple Invoices Google+ Community](https://plus.google.com/communities/102476804981627142204).
+* Developer Discussion: [SimpleInvoices Google+ Community](https://plus.google.com/communities/102476804981627142204)
+* Developer Mailing List: [SimpleInvoices Google Groups](https://groups.google.com/forum/#!forum/simpleinvoices)
 
-We also have a mailing list for tracking commit activity. This is hosted on Google Groups (sigh). You can find it here: https://groups.google.com/forum/?fromgroups#!forum/simpleinvoices-trac
+We also have a mailing list for tracking commit activity. This is hosted on Google Groups. You can find it here: https://groups.google.com/forum/?fromgroups#!forum/simpleinvoices-trac
+
+
+## Translations
+We are proud that SimpleInvoices is currently available in 25 different languages but we would love for that number to be even bigger!  
+
+If you would like to help translate SimpleInvoices into your language check out our [translation project](https://www.transifex.com/projects/p/SimpleInvoices/).
+
+For more information refer: [simpleinvoices.org/translate](http://www.simpleinvoices.org/translate)
 
 
 ## Reporting Bugs
