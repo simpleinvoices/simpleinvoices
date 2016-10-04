@@ -25,7 +25,7 @@
 {else}
 
 	<table id="manageGrid" style="display:none"></table>
-	{include file='../modules/inventory/manage.js.php'}
+	{include file='../templates/default/inventory/manage.js.tpl'}
 
 {/if}
 

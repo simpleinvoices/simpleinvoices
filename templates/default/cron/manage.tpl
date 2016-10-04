@@ -24,7 +24,7 @@
 {else}
 
 	<table id="manageGrid" style="display:none"></table>
-	{include file='../modules/cron/manage.js.php'}
+	{include file='../templates/default/cron/manage.js.tpl'}
 
 {/if}
 
