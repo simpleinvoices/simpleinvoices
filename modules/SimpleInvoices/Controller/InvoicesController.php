@@ -784,6 +784,11 @@ EOD;
          6. All"*/
     }
     
+    public function templateAction()
+    {
+        // TODO: The file was empty. Shall we remove this action?
+    }
+    
     public function totalAction()
     {
         $pageActive = "invoices";
