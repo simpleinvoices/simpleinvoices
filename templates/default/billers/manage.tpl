@@ -22,6 +22,6 @@
 {else}
 
 	<table id="manageGrid" style="display:none"></table>
-	{include file='../modules/billers/manage.js.php' LANG=$LANG}
+	{include file='../templates/default/billers/manage.js.tpl' LANG=$LANG}
 
 {/if}

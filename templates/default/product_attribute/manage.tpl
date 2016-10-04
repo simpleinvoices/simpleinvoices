@@ -20,5 +20,5 @@
 <hr />
 <table id="manageGrid" style="display:none"></table>
 
- {include file='../modules/product_attribute/manage.js.php'}
+ {include file='../templates/default/product_attribute/manage.js.tpl'}
 {/if}
