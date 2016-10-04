@@ -32,7 +32,7 @@ $help_image_path = "./images/common/";
 
 // Note: include/functions.php and include/sql_queries.php loaded by this include.
 require_once "./include/init.php";
-/* Keep this for potential future debug use
+/* Keep for potential future debug use
 error_log("index.php af init_pre.php - module[" . (empty($module) ? "" : $module) .
         "] view[" . (empty($view) ? "" : $view) .
         "] action[" . (empty($action) ? "" : $action) .

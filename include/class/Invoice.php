@@ -62,6 +62,168 @@ class Invoice {
         return $id;
     }
 
+    public static function insertInvoiceItem($invoice_id,
+                                             $quantity,
+                                             $product_id,
+                                             $line_number,
+                                             $line_item_tax_id,
+                                             $description = "",
+                                             $unit_price = "",
+                                             $attribute = "",
+                                             $domain_id = '') {
+        global $db_server, $LANG;
+        $domain_id = domain_id::get($domain_id);
+    
+        // do taxes
+        $attr = array();
+        if (!empty($attribute)) {
+            foreach ($attribute as $k => $v) {
+                if ($attribute[$v] !== '') {
+                    $attr[$k] = $v;
+                }
+            }
+        }
+
+        $tax_total = getTaxesPerLineItem($line_item_tax_id, $quantity, $unit_price, $domain_id);
+
+        // line item gross total
+        $gross_total = $unit_price * $quantity;
+
+        // line item total
+        $total = $gross_total + $tax_total;
+
+        // Remove jquery auto-fill description - refer jquery.conf.js.tpl autofill section
+        if ($description == $LANG['description']) {
+            $description = "";
+        }
+
+        if ($db_server == 'mysql' && !_invoice_items_check_fk($invoice_id, $product_id, $line_item_tax_id)) {
+            return null;
+        }
+
+        // @formatter:off
+        $sql = "INSERT INTO " . TB_PREFIX . "invoice_items (
+                    invoice_id,
+                    domain_id,
+                    quantity,
+                    product_id,
+                    unit_price,
+                    tax_amount,
+                    gross_total,
+                    description,
+                    total,
+                    attribute)
+                VALUES (:invoice_id,
+                    :domain_id,
+                    :quantity,
+                    :product_id,
+                    :unit_price,
+                    :tax_amount,
+                    :gross_total,
+                    :description,
+                    :total,
+                    :attribute)";
+        dbQuery($sql,
+                ':invoice_id' , $invoice_id,
+                ':domain_id'  , $domain_id,
+                ':quantity'   , $quantity,
+                ':product_id' , $product_id,
+                ':unit_price' , $unit_price,
+                ':tax_amount' , $tax_total,
+                ':gross_total', $gross_total,
+                ':description', trim($description),
+                ':total'      , $total,
+                ':attribute'  , json_encode($attr));
+
+        invoice_item_tax(lastInsertId(), $line_item_tax_id, $unit_price, $quantity, "insert");
+        // TODO fix this
+        return true;
+    }
+
+    /**
+     * Update invoice_items table for a specific entry.
+     * @param int $id Unique id for the record to be updated.
+     * @param int $quantity Number of items
+     * @param int $product_id Unique id of the si_products record for this item.
+     * @param int $line_number Line item number for the position on the invoice.
+     * @param int $line_item_tax_id Unique id for the taxes to apply to this line item.
+     * @param string $description Extended description for this line item.
+     * @param decimal $unit_price Price of each unit of this item.
+     * @param string $attribute (Optional) Attributes for invoice.
+     * @param int $domain_id (Optional) Domain ID number for this entry.
+     * @return boolean true always returned.
+     */
+    public static function updateInvoiceItem($id,
+                                             $quantity,
+                                             $product_id,
+                                             $line_number,
+                                             $line_item_tax_id,
+                                             $description,
+                                             $unit_price,
+                                             $attribute="",
+                                             $domain_id="") {
+        global $db_server, $LANG;
+    
+        $domain_id = domain_id::get($domain_id);
+    
+        $attr = array();
+        if (is_array($attribute)) {
+            foreach ($attribute as $k => $v) {
+                if ($attribute[$v] !== '') {
+                    $attr[$k] = $v;
+                }
+            }
+        }
+    
+        $tax_total = getTaxesPerLineItem($line_item_tax_id, $quantity, $unit_price);
+
+        // line item gross total
+        $gross_total = $unit_price * $quantity;
+
+        // line item total
+        $total = $gross_total + $tax_total;
+
+        // Remove jquery auto-fill description - refer jquery.conf.js.tpl autofill section
+        if ($description == $LANG['description']) {
+            $description = "";
+        }
+
+        if ($db_server == 'mysql' && !_invoice_items_check_fk(null, $product_id, $line_item_tax_id, 'update')) {
+            return NULL;
+        }
+
+        // @formatter:off
+        $sql = "UPDATE " . TB_PREFIX . "invoice_items
+                SET quantity    =  :quantity,
+                    product_id  = :product_id,
+                    unit_price  = :unit_price,
+                    tax_amount  = :tax_amount,
+                    gross_total = :gross_total,
+                    description = :description,
+                    total       = :total,
+                    attribute   = :attribute
+                WHERE id = :id AND domain_id = :domain_id";
+        dbQuery($sql, ':quantity'   , $quantity,
+                      ':product_id' , $product_id,
+                      ':unit_price' , $unit_price,
+                      ':tax_amount' , $tax_total,
+                      ':gross_total', $gross_total,
+                      ':description', $description,
+                      ':total'      , $total,
+                      ':attribute'  , json_encode($attr),
+                      ':id'         , $id,
+                      ':domain_id'  , $domain_id);
+        // @formatter:on
+
+        // if from a new invoice item in the edit page user lastInsertId()
+        ($id == NULL) ? $id = lastInsertId() : $id = $id;
+
+        invoice_item_tax($id, $line_item_tax_id, $unit_price, $quantity, "update");
+
+        // TODO: Fix to send a real result (possibly throw an error
+        return true;
+    }
+
     public function insert_item($domain_id="") {
         global $pdoDb;
 
@@ -641,7 +803,7 @@ error_log("getInvoiceTotal - " . print_r($rows,true));
         $fn = new FunctionStmt("COALESCE", "MAX(id),0", "max");
         $pdoDb->addToFunctions($fn);
 
-        if ($patchCount <= '179') $pdoDb->addSimpleWhere("domain_id", $domain_id);
+        if ($patchCount >= '179') $pdoDb->addSimpleWhere("domain_id", $domain_id);
 
         $rows = $pdoDb->request("SELECT", "invoices");
         return $rows[0]['max'];
