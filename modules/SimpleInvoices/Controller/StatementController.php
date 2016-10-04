@@ -1,13 +1,14 @@
 <?php
+/**
+ * Simple Invoices (http://www.simpleinvoices.org/)
+ *
+ * @link      http://github.com/simpleinvoices/simpleinvoices for the source repository
+ * @copyright Copyright (c) 2005-2016 Simple Invoices Community (http://www.simpleinvoices.org)
+ * @license   https://www.gnu.org/licenses/gpl-3.0.html GPL v3
+ */
+
 namespace SimpleInvoices\Controller;
 
-/**
- * TODO:
- *     - Get rid of global variables.
- *     - Split template and code
- *
- * @author Juan Pedro Gonzalez Gutierrez
- */
 class StatementController
 {
     protected $smarty;
