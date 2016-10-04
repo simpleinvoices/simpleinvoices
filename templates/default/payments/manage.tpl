@@ -41,7 +41,7 @@
 			</div>        		
         {else}
     	    <table id="manageGrid" style="display:none"></table>
-        	{include file='../templates/default/payments/manage.js.php' get=$smarty.get}
+        	{include file='../templates/default/payments/manage.js.tpl' get=$smarty.get}
         {/if}
 
 	{else}
@@ -53,7 +53,7 @@
 			</div>        		
         {else}
         	<table id="manageGrid" style="display:none"></table>
-        	{include file='../templates/default/payments/manage.js.php' get=$smarty.get}
+        	{include file='../templates/default/payments/manage.js.tpl' get=$smarty.get}
         {/if}
 
 	{/if}

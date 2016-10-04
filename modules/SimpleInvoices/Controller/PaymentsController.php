@@ -252,6 +252,10 @@ class PaymentsController
         $this->smarty->assign('active_tab', '#money');
     }
     
+    /**
+     * TODO: Fix this! Does not return payments!
+     * @return PDOStatement
+     */
     public function xmlAction()
     {
         global $LANG;
@@ -260,11 +264,11 @@ class PaymentsController
         
         header("Content-type: text/xml");
         
-        //$start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
+        //$start = (isset($_POST['start'])) ? $_POST['start']     : "0" ;
         $dir = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "DESC" ;
-        $sort = (isset($_POST['sortname'])) ? $_POST['sortname'] : "ap.id" ;
-        $rp = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
-        $page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
+        $sort = (isset($_POST['sortname'])) ? $_POST['sortname']  : "ap.id" ;
+        $rp = (isset($_POST['rp'])) ? $_POST['rp']                : "25" ;
+        $page = (isset($_POST['page'])) ? $_POST['page']          : "1" ;
         
         function sql($type='', $dir, $sort, $rp, $page )
         {
