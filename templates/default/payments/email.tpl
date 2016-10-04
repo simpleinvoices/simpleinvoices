@@ -1,9 +1,9 @@
 {*
 *  Script: email.tpl
-*      Send invoice via email page template
+*      Send payment via email page template
 *
 *  Authors:
-*      Justin Kelly, Nicolas Ruflin
+*      Richard Rowley
 *
 *  Last edited:
 *      2016-09-27
@@ -15,15 +15,15 @@
 *      http://www.simpleinvoices.org
 *}
 {if $smarty.get.stage == 1 }
-  {if $error == 1}
+  {if $error == 1 }
   <div class="si_message_error">
     <h2>{$message}</h2>
   </div>
   {/if}
   <div class="si_center">
-    <h3>Email {$invoice.index_name|htmlsafe} to Customer as PDF</h3>
+    <h3>Email {$LANG.payment_id|htmlsafe}#{$payment.id} for {$invoice.index_name|htmlsafe} to {$customer.name} as PDF</h3>
   </div>
-  <form name="frmpost" action="index.php?module=invoices&amp;view=email&amp;stage=2&amp;id={$smarty.get.id|urlencode}" method="post">
+  <form name="frmpost" action="index.php?module=payments&amp;view=email&amp;stage=2&amp;id={$smarty.get.id|urlencode}" method="post">
     <div class="si_form">
       <table>
         <tr>
@@ -68,7 +68,8 @@
           </th>
           <td>
             <input type="text" name="email_subject" size="70" class="validate[required]" tabindex="40"
-                   value="{$invoice.index_name|htmlsafe} from {$biller.name|htmlsafe} is attached" />
+            Payment #nnn received and applied to invoice#nnn
+                   value="{$LANG.payment|htmlsafe}&#35;{$payment.id} {$invoice.index_name|htmlsafe} from {$biller.name|htmlsafe} is attached" />
           </td>
         </tr>
         <tr>

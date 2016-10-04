@@ -110,13 +110,17 @@ foreach ($payments as $row) {
     $xml .= "<row id='$row[id]'>";
     $xml .= 
         "<cell><![CDATA[
-           <a class='index_table' title='$LANG[view] $row[index_name]'
+           <a class='index_table' title='$LANG[view] $LANG[payment_id] $row[id]'
               href='index.php?module=payments&view=details&id=$row[id]&action=view'>
              <img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' />
            </a>
            <a class='index_table' title='$LANG[print_preview_tooltip] $row[id]'
               href='index.php?module=payments&view=print&id=$row[id]'>
              <img src='images/common/printer.png' height='16' border='-5px' padding='-4px' valign='bottom' />
+           </a>
+           <a class='index_table' title='$LANG[email] $LANG[payment_id] $row[id]'
+              href='index.php?module=payments&view=email&stage=1&id=$row[id]'>
+             <img src='images/common/mail-message-new.png' class='action'>
            </a>
          ]]></cell>";
     $xml .= "<cell><![CDATA[".$row['id']."]]></cell>";
