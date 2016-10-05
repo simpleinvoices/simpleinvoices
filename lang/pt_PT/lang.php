@@ -1,7 +1,7 @@
 <?php
 
 /*
-* Script:
+* Script: lang.php
 * 	Portugues - Portuguese translation file
 *
 * Authors:

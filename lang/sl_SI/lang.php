@@ -1,7 +1,7 @@
 <?php
 
 /*
-* Script: slovenščina_SI.inc.php
+* Script: lang.php
 * 	Slovene translation file
 *
 * Authors:

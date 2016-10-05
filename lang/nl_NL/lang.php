@@ -1,7 +1,7 @@
 <?php
 
 /*
-* Script: Dutch lang.php
+* Script: lang.php
 * 	Nederland - Dutch translation file
 *
 * Authors:

@@ -1,7 +1,7 @@
 <?php
 
 /*
-* Script: NO_lang.php
+* Script: lang.php
 * 	Norwegian translation file
 *
 * Last edited:

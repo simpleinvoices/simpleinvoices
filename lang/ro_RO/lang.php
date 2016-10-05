@@ -1,7 +1,7 @@
 <?php
 
 /*
-* Script: romana_romanian.inc.php
+* Script: lang.php
 * 	Romana - Romanian translation file
 *
 * Authors:

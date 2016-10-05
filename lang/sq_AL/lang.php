@@ -1,7 +1,7 @@
 <?php
 
 /*
-* Script: english_UK.inc.php
+* Script: lang.php
 *	Albanian translation file
 *
 * Authors:

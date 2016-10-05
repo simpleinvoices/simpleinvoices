@@ -1,7 +1,7 @@
 <?php
 
 /*
-* Script: suomi_finnish.inc.php
+* Script: lang.php
 * 	Suomi - Finnish translation file
 *
 * Authors:
