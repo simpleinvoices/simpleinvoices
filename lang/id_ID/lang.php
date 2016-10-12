@@ -89,7 +89,7 @@ $LANG['credit_card_number_new'] = "Nomor kartu kredit baru";//1
 $LANG['credits'] = "Kredit";//1
 $LANG['currency_code'] = "Kode mata uang";//1
 $LANG['currency_sign'] = "Simbol mata uang";//1
-$LANG['currency_sign_non_dollar'] = "Untuk mata uang Euro, Poundsterling, dan non-$, bacalah pesan berikut ";//1
+$LANG['currency_sign_non_dollar'] = "Untuk mata uang Euro, Poundsterling, dan non-\$, bacalah pesan berikut ";//1
 $LANG['custom_field'] = "Custom field";//1
 $LANG['custom_field1'] = "Custom field 1";//1
 $LANG['custom_field2'] = "Custom field 2";//1
@@ -215,7 +215,7 @@ $LANG['help_email_cc'] = "Kolom ini boleh tidak diisi. Gunakan kolom ini untuk m
 $LANG['help_email_from'] = "Kolom ini wajib diisi dan akan terisi dengan default dari alamat email biller. Anda dapat merubah alamat email ini tetapi tidak dapat menambah lebih dari 1 alamat email<br /><br /><i>Catatan: Kolom ini hanya dapat terisi dengan 1 alamat email</i>";//1
 $LANG['help_email_to'] = "This field is a mandatory field and gets the default value from the Customers email address.  You can change this email address as you require<br /><br /><i>Note: You can add multiple email addresses here - just use either , or ; to split the addresses</i>";//1
 $LANG['help_insert_biller_text'] = "To select no logo please select '_default_blank_logo.png' from the list.<br /><br />To add additional logos into Simple Invoices, copy the logo file into the logo directory in the Simple Invoices folder.";//1
-$LANG['help_inv_pref_currency_sign'] = "This is the curreny symbol that will be used through-out the invoice. <br /><br /><b>Note:</b> Euro, Pound etc.. please use the html code for you currency sign in this field.  Refer to the list of html codes on the following website for your non $ currency sign <a href='http://www.ascii.cl/htmlcodes.htm'>http://www.ascii.cl/htmlcodes.htm</a>.  <br /><br />This is required so that PDF can work correctly with non $ symbols<br /><br /> &#38;#163; is the html code for the Pound,<br /> &#38;#8364; for the Euro, etc..";//1
+$LANG['help_inv_pref_currency_sign'] = "This is the curreny symbol that will be used through-out the invoice. <br /><br /><b>Note:</b> Euro, Pound etc.. please use the html code for your currency sign in this field.  Refer to the list of html codes on the following website for your non \$ currency sign <a href='http://www.ascii.cl/htmlcodes.htm'>http://www.ascii.cl/htmlcodes.htm</a>.  <br /><br />This is required so that PDF can work correctly with non $ symbols<br /><br /> &#38;#163; is the html code for the Pound,<br /> &#38;#8364; for the Euro, etc..";//1
 $LANG['help_inv_pref_description'] = "This is the name of the set of preference - it's not used on the invoice itself, just in the creation of the invoice when you select from the drop down list which Invoice Preference you wish to use.";//1
 $LANG['help_inv_pref_invoice_detail_heading'] = "This is what will appear as the heading of the footer/details section of the invoice.";//1
 $LANG['help_inv_pref_invoice_detail_line'] = "This is the text that appear under the details/footer heading. Normally used to define payment terms etc.";//1
