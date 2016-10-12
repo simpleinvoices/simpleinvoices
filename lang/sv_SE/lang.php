@@ -92,7 +92,7 @@ $LANG['credit_card_number_new'] = "Nytt kreditkort nummer";//1
 $LANG['credits'] = "Krediter";//1
 $LANG['currency_code'] = "Valuta tecken";//1
 $LANG['currency_sign'] = "Valuta tecken";//1
-$LANG['currency_sign_non_dollar'] = "Euro, Pund, icke-$ tecken läs detta";//1
+$LANG['currency_sign_non_dollar'] = "Euro, Pund, icke-\$ tecken läs detta";//1
 $LANG['custom_field'] = "Egendefinierat fält";//1
 $LANG['custom_field1'] = "Egendefinierat fält 1";//1
 $LANG['custom_field2'] = "Egendefinierat fält 2";//1
@@ -218,7 +218,7 @@ $LANG['help_email_cc'] = "Detta fält är inte obligatoriskt. Här kan du specif
 $LANG['help_email_from'] = "Detta fält är obligatoriskt och får sitt standard värde från Fordringsägarens e-post adress. Du kan ändra denna e-post adress efter behov men kan inte lägga till mer än en (1) adress i detta fält.<br /><br /><i>Obs: Det kan endast finnas en (1) e-post adress i detta fält.</i>";//1
 $LANG['help_email_to'] = "Detta fält är obligatoriskt och får sitt standard värde från Kundens e-post adress. Du kan ändra denna e-post adress efter behov.<br /><br /><i>Obs: Du kan lägga till flera e-post adresser här - bara använd antingen , eller ; för att sära på adresserna</i>";//1
 $LANG['help_insert_biller_text'] = "För att inte välja någon logo välj '_default_blank_logo.png' från listan.<br /><br />För att lägga till ytterligare logon till Simple Invoices, kopiera logo filen till logo mappen i Simple Invoices mappen.";//1
-$LANG['help_inv_pref_currency_sign'] = "Detta är valuta tecknet som kommer användas på fakturan.<br /><br /><b>Obs:</b> Euro, Pund osv.. Vänligen använd html koden för ditt valuta tecken i detta fält. Hänvisa till listan med html koder på följande webbsida för valuta tecken <a href='http://www.ascii.cl/htmlcodes.htm'>http://www.ascii.cl/htmlcodes.htm</a>.<br /><br />Detta krävs för att PDF kan fungera korrekt med andra valutor än $.<br /><br /> &#38;#163; är html koden för Pund,<br /> &#38;#8364; för Euro, osv..";//1
+$LANG['help_inv_pref_currency_sign'] = "Detta är valuta tecknet som kommer användas på fakturan.<br /><br /><b>Obs:</b> Euro, Pund osv.. Vänligen använd html koden för ditt valuta tecken i detta fält. Hänvisa till listan med html koder på följande webbsida för valuta tecken <a href='http://www.ascii.cl/htmlcodes.htm'>http://www.ascii.cl/htmlcodes.htm</a>.<br /><br />Detta krävs för att PDF kan fungera korrekt med andra valutor än \$.<br /><br /> &#38;#163; är html koden för Pund,<br /> &#38;#8364; för Euro, osv..";//1
 $LANG['help_inv_pref_description'] = "Detta är namnet för faktura mallen - det används inte på själva fakturan, bara vid skapandet av fakturor när du väljer i drop down menyn vilken Faktura Mall du vill använda.";//1
 $LANG['help_inv_pref_invoice_detail_heading'] = "Detta är vad som kommer synas som rubrik i sidfoten/detaljerna för fakturan.";//1
 $LANG['help_inv_pref_invoice_detail_line'] = "Detta är den text som kommer synas under detaljer/sidfots rubriken. Vanligen använt för att ange betalnings villkor osv.";//1
