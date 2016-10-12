@@ -30,8 +30,6 @@ $saved = false;
 if ( $op === 'insert_user') {
 
     function insertUser() {
-		global $auth_session;
-
         $sql = "INSERT INTO ".TB_PREFIX."user
                     (
                         email,
@@ -52,7 +50,7 @@ if ( $op === 'insert_user') {
                     )
                 ";
 
-        return dbQuery($sql, ':email',$_POST['email'],':password',$_POST['password_field'],':role',$_POST['role'],':domain_id',$auth_session->domain_id,':enabled',$_POST['enabled'],':user_id',$_POST['user_id']);
+        return dbQuery($sql, ':email',$_POST['email'],':password',$_POST['password_field'],':role',$_POST['role'],':domain_id', domain_id::get(),':enabled',$_POST['enabled'],':user_id',$_POST['user_id']);
 
     }
     if( insertUser() ) {

@@ -78,7 +78,7 @@
 		";
     }
 
-    $invoice_results = dbQuery($sql, ':domain_id', $auth_session->domain_id);
+    $invoice_results = dbQuery($sql, ':domain_id', domain_id::get());
 
     $total_owed = 0;
     $periods = array();

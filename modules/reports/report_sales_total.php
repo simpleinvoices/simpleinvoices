@@ -15,7 +15,7 @@
 		pr.index_group
     ";
 
-    $sth = dbQuery($sql, ':domain_id', $auth_session->domain_id);
+    $sth = dbQuery($sql, ':domain_id', domain_id::get());
 
     $grand_total_sales = 0;
 	$total_sales = Array();

@@ -11,7 +11,7 @@
        AND c.domain_id = :domain_id
     GROUP BY c.name;";
 
-  $customer_sales = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+  $customer_sales = dbQuery($sql, ':domain_id', domain_id::get()) or die(htmlsafe(end($dbh->errorInfo())));
 
   $total_sales = 0;
   $customers = array();

@@ -17,8 +17,6 @@ class user
 
 	function getUser($id)
 	{
-	
-		global $auth_session;
 		global $LANG;
 
 		$sql = "SELECT 
@@ -32,7 +30,7 @@ class user
 				WHERE u.domain_id = :domain_id
 				  AND u.id = :id 
 				";
-		$result = dbQuery($sql,':id', $id, ':domain_id', $auth_session->domain_id);
+		$result = dbQuery($sql,':id', $id, ':domain_id', domain_id::get());
 
 		return $result->fetch();
 

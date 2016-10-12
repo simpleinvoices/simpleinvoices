@@ -82,7 +82,7 @@ if ($_POST['action'] == "insert" ) {
 			':price', $_POST['unit_price'],
 			':description', $_POST['description0'],
 			':id', $_POST['products0'],
-			':domain_id', $auth_session->domain_id
+			':domain_id', domain_id::get()
 			);
 	}
 

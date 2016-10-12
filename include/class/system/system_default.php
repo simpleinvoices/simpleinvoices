@@ -10,10 +10,9 @@ class system_default {
 	
 	public function update()
 	{
-
 		global $db;
-		global $auth_session;
-		$domain_id = $auth_session->domain_id;
+		
+		$domain_id = domain_id::get();
 
 		//dont worry about checking db if were using the core extension
 		if (  $this->extension_name != "core" )

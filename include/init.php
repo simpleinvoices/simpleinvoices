@@ -181,7 +181,7 @@ if ( $install_tables_exists != false )
 	if (getNumberOfDoneSQLPatches() > "196")
 	{
 	    $sql="SELECT * from ".TB_PREFIX."extensions WHERE (domain_id = :domain_id OR domain_id =  0 ) ORDER BY domain_id ASC";
-	    $sth = dbQuery($sql,':domain_id', $auth_session->domain_id ) or die(htmlsafe(end($dbh->errorInfo())));
+	    $sth = dbQuery($sql,':domain_id', domain_id::get() ) or die(htmlsafe(end($dbh->errorInfo())));
 
 	    while ( $this_extension = $sth->fetch() ) 
 	    { 

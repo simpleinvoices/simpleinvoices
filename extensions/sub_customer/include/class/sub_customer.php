@@ -4,8 +4,8 @@ class sub_customer
 {
     public static function insertCustomer() {
         global $db_server;
-        global $auth_session;
         global $config;
+                
         extract( $_POST );
         $sql = "INSERT INTO 
             ".TB_PREFIX."customers
@@ -59,7 +59,7 @@ class sub_customer
                 ':custom_field3', $custom_field3,
                 ':custom_field4', $custom_field4,
                 ':enabled', $enabled,
-                ':domain_id',$auth_session->domain_id
+                ':domain_id', domain_id::get()
                 );
     }
 

@@ -142,8 +142,9 @@ function dbLogger($sqlQuery) {
 
 	global $log_dbh;
 	global $dbh;
-	global $auth_session;
 	global $can_log;
+	
+	$auth_session = new Zend_Session_Namespace('Zend_Auth');
 
 	$userid = $auth_session->id;
 	if($can_log
@@ -173,7 +174,7 @@ function dbLogger($sqlQuery) {
 		} else {
 			$tth = $log_dbh->prepare($sql);
 		}
-		$tth->execute(array($auth_session->domain_id, $userid, trim($sqlQuery), $last));
+		$tth->execute(array(domain_id::get(), $userid, trim($sqlQuery), $last));
 		unset($tth);
 	}
 }
@@ -1048,7 +1049,7 @@ function numberOfTaxesForInvoice($invoice_id, $domain_id='')
 			AND tax.domain_id = :domain_id
 			GROUP BY
 				tax.tax_id;";
-	$sth = dbQuery($sql, ':invoice_id', $invoice_id, ':domain_id', $auth_session->domain_id);
+	$sth = dbQuery($sql, ':invoice_id', $invoice_id, ':domain_id', domain_id::get());
 	$result = $sth->rowCount();
 
 	return $result;
@@ -1205,7 +1206,7 @@ function getSystemDefaults($domain_id='') {
         $sql .= " ORDER BY extension_id ASC";		// order is important for overriding settings
 
         // add all settings from current domain
-        //$sth = dbQuery($sql.$current_settings.$order, 'domain_id', $auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+        //$sth = dbQuery($sql.$current_settings.$order, 'domain_id', domain_id::get()) or die(htmlsafe(end($dbh->errorInfo())));
         $sth = $db->query($sql, 'domain_id', $domain_id);
         $default = null;
 
