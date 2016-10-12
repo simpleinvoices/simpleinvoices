@@ -32,7 +32,7 @@ if (  $op === 'edit_custom_field' ) {
 			  AND domain_id = :domain_id";
 
 		// @formatter:on
-		if (dbQuery($sql, ':id', $_GET['id'], ':label', $_POST['cf_custom_label'], ':domain_id', $auth_session->domain_id)) {
+		if (dbQuery($sql, ':id', $_GET['id'], ':label', $_POST['cf_custom_label'], ':domain_id', domain_id::get())) {
 			$display_block =  $LANG['save_custom_field_success'];
 		} else {
 			$display_block =  $LANG['save_custom_field_failure'];

@@ -15,7 +15,7 @@ GROUP BY
 	p.description
 ";
 
-  $product_sales = dbQuery($sql, ':domain_id', $auth_session->domain_id);
+  $product_sales = dbQuery($sql, ':domain_id', domain_id::get());
 
   $total_quantity = 0;
   $products = array();

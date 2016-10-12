@@ -4,7 +4,7 @@ $row_id = htmlsafe($_GET['row']);
 if($_GET['id'])
 {
 	//sleep(2);
-	$sql = sprintf("SELECT unit_price, default_tax_id, default_tax_id_2,attribute,notes,notes_as_description,show_description FROM ".TB_PREFIX."products WHERE id = %d AND domain_id = %d LIMIT 1", $_GET['id'], $auth_session->domain_id);
+	$sql = sprintf("SELECT unit_price, default_tax_id, default_tax_id_2,attribute,notes,notes_as_description,show_description FROM ".TB_PREFIX."products WHERE id = %d AND domain_id = %d LIMIT 1", $_GET['id'], domain_id::get());
 	$states = dbQuery($sql);
     //	$output = '';
 

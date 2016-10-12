@@ -2,7 +2,6 @@
 
 header("Content-type: text/xml");
 
-//global $auth_session;
 //global $dbh;
 
 $start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
@@ -17,7 +16,6 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 {
 	global $config;
 	global $LANG;
-	global $auth_session;
 
 	$valid_search_fields = array('c.id', 'c.name');
 
@@ -93,9 +91,9 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 				$limit";
 
 	if (empty($query)) {
-		$result = dbQuery($sql, ':domain_id', $auth_session->domain_id);
+		$result = dbQuery($sql, ':domain_id', domain_id::get());
 	} else {
-		$result = dbQuery($sql, ':domain_id', $auth_session->domain_id, ':query', "%$query%");
+		$result = dbQuery($sql, ':domain_id', domain_id::get(), ':query', "%$query%");
 	}
 
 	return $result;

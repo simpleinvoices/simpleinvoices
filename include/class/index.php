@@ -130,7 +130,7 @@ class index
                     node = :node
                ".$subnode.$subnode2;
 
-        $sth = $db->query($sql,':node',$node,':domain_id',$auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+        $sth = $db->query($sql,':node',$node,':domain_id',domain_id::get()) or die(htmlsafe(end($dbh->errorInfo())));
  
         $index = $sth->fetch();
 
@@ -146,7 +146,6 @@ class index
     {
 
         global $db;
-        global $auth_session;
 
 	$defaults = getSystemDefaults();
 	#
@@ -173,7 +172,7 @@ class index
                     node = :node
                ".$subnode.$subnode2;
 
-        $sth = $db->query($sql,':node',$node,':domain_id',$auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+        $sth = $db->query($sql,':node',$node,':domain_id',domain_id::get()) or die(htmlsafe(end($dbh->errorInfo())));
 
         $index = $sth->fetch();
 
@@ -191,7 +190,7 @@ class index
 			    node = :node
 		       ".$subnode;
 
-                $sth2 = $db->query($sql2,':node',$node,':domain_id',$auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+                $sth2 = $db->query($sql2,':node',$node,':domain_id',domain_id::get()) or die(htmlsafe(end($dbh->errorInfo())));
                 $index2 = $sth2->fetch();
                 $index['id'] = $index2['id'];
         }
@@ -217,7 +216,6 @@ class index
 	$defaults = getSystemDefaults();
 
 	global $db;
-        global $auth_session;
 
      #   if ($sub_node !="") 
      #   {
@@ -301,9 +299,9 @@ class index
 
 	if ($defaults['invoice_numbering_by_biller'] == '0')
 	{
-		$sth = $db->query($sql,':id',$next,':node',$node,':sub_node', $sub_node,':domain_id',$auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+		$sth = $db->query($sql,':id',$next,':node',$node,':sub_node', $sub_node,':domain_id',domain_id::get()) or die(htmlsafe(end($dbh->errorInfo())));
 	} else {
-		$sth = $db->query($sql,':id',$next,':node',$node,':sub_node', $sub_node,':sub_node_2',$sub_node_2,':domain_id',$auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+		$sth = $db->query($sql,':id',$next,':node',$node,':sub_node', $sub_node,':sub_node_2',$sub_node_2,':domain_id',domain_id::get()) or die(htmlsafe(end($dbh->errorInfo())));
 	}
 
         return $next;
@@ -315,7 +313,6 @@ class index
     {
 
         global $db;
-        global $auth_session;
 
         if ($sub_node !="")
         {
@@ -336,7 +333,7 @@ class index
                     domain_id = :domain_id
                 ".$subnode.$subnode2;
 
-        $sth = $db->query($sql,':node',$node,':domain_id',$auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+        $sth = $db->query($sql,':node',$node,':domain_id',domain_id::get()) or die(htmlsafe(end($dbh->errorInfo())));
 
         return $sth;
 

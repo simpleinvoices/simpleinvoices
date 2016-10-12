@@ -341,7 +341,8 @@ function outhtml($html) {
 function siNonce($action = false, $userid = false, $tickTock = false)
 {
     global $config;
-    global $auth_session;
+    
+    $auth_session = new Zend_Session_Namespace('Zend_Auth');;
     
     $tickTock = ($tickTock) ? $tickTock : floor(time()/$config->nonce->timelimit);
     
