@@ -46,6 +46,9 @@ var inventory = "{/literal}{$defaults.inventory}{literal}";
 			{
 			url: 'index.php?module=products&view=xml',
 			dataType: 'xml',
+			'onError': function(data) {
+				$("#manageGrid").flexAddData(null);
+			},
 			colModel : col_model,
 			searchitems : [
 				{display: '{/literal}{$LANG.id}{literal}', name : 'id'},

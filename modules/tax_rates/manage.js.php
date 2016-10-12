@@ -23,6 +23,9 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 			{
 			url: 'index.php?module=tax_rates&view=xml',
 			dataType: 'xml',
+			'onError': function(data) {
+				$("#manageGrid").flexAddData(null);
+			},
 			colModel : [
 				{display: '{/literal}{$LANG.actions}{literal}', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},
 				{display: '{/literal}{$LANG.id}{literal}', name : 'tax_id', width : 10 * percentage_width, sortable : true, align: 'right'},
