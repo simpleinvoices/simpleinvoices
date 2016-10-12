@@ -27,6 +27,9 @@
 			{
 			url: "{/literal}{$url}{literal}",
 			dataType: 'xml',
+			'onError': function(data) {
+				$("#manageGrid").flexAddData(null);
+			},
 			colModel : [
 				{display: '{/literal}{$LANG.actions}{literal}', name : 'actions', width : action_menu, sortable : false, align: 'center'},
 				{display: '{/literal}{$LANG.id}{literal}', name : 'index_name', width :15 * percentage_width, sortable : true, align: 'left'},
