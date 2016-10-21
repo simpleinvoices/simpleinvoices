@@ -199,7 +199,7 @@ include_once ('./include/language.php');
 include ('./include/include_auth.php');
 include_once ('./include/manageCustomFields.php');
 include_once ("./include/validation.php");
-if ($databaseBuilt && $databasePopulated && $config->authentication->enabled == 1) {
+if ($databaseBuilt && $databasePopulated && $config->authentication->enabled == ENABLED) {
     include_once ("./include/acl.php");
     // if authentication enabled then do acl check etc..
     foreach ($ext_names as $ext_name) {

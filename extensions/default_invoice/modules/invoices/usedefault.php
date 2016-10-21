@@ -15,7 +15,7 @@
  *  Website:
  *      http://www.simpleinvoices.org
  */
-global $defaults, $pdoDb;
+global $defaults, $pdoDb, $smarty;
 
 // stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin ();
@@ -42,7 +42,7 @@ if ($_GET ['action'] == 'update_template') {
         $template = $customer['custom_field4'];
     }
 
-    $invoice = getInvoice($template);
+    $invoice = Invoice::getInvoice($template);
 
     // Set values based on presence of customer specific template.
     if (empty($invoice ['id'])) {

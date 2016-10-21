@@ -1,8 +1,9 @@
 <?php
+global $default_rp, $LANG;
+
 header("Content-type: text/xml");
 
 function sql($type = '', $start, $dir, $sort, $rp, $page) {
-    global $config;
     global $LANG;
     global $auth_session;
     
@@ -62,6 +63,7 @@ function sql($type = '', $start, $dir, $sort, $rp, $page) {
     
     return $result;
 }
+
 // @formatter:off
 $start     = (isset($_POST['start']))     ? $_POST['start']     : "0" ;
 $dir       = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "ASC" ;

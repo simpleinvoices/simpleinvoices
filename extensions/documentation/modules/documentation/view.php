@@ -1,5 +1,8 @@
 <?php
+global $LANG, $smarty;
+
 $menu = false;
+if ($menu) {} // eliminates unused warning
 
 if (isset($_GET['help'])) {
     $page = $_GET['help'];

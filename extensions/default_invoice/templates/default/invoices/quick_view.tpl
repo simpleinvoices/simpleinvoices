@@ -432,14 +432,15 @@
   <tr>
     <td colspan="6"><br /></td>
   </tr>
-  {section name=line start=0 loop=$invoice.tax_grouped step=1}
-    {if ($invoice.tax_grouped[line].tax_amount == "0") } {php}break;{/php} {/if}
+  {foreach from=$invoice.tax_grouped item=taxg}
+    {if $taxg.tax_amount != 0}
     <tr class='details_screen'>
       <td colspan="3"></td>
-      <td colspan="2" class="align_right">{$invoice.tax_grouped[line].tax_name}</td>
-      <td colspan="1" class="align_right">{$preference.pref_currency_sign}{$invoice.tax_grouped[line].tax_amount|siLocal_number}</td>
+      <td colspan="2" class="align_right">{$taxg.tax_name}</td>
+      <td colspan="1" class="align_right">{$preference.pref_currency_sign}{$taxg.tax_amount|siLocal_number}</td>
     </tr>
-  {/section}
+    {/if}
+  {/foreach}
   <tr class='details_screen'>
     <td colspan="3"></td>
     <td colspan="2" class="align_right">{$LANG.tax_total}</td>

@@ -1,15 +1,16 @@
 <?php
-require_once 'include/class/PdoDbException.php';
-require_once 'include/class/FunctionStmt.php';
-require_once 'include/class/WhereClause.php';
-require_once 'include/class/WhereItem.php';
-require_once 'include/class/FromStmt.php';
 require_once 'include/class/CaseStmt.php';
+require_once 'include/class/DbField.php';
+require_once 'include/class/DbInfo.php';
+require_once 'include/class/FunctionStmt.php';
+require_once 'include/class/FromStmt.php';
+require_once 'include/class/Havings.php';
+require_once 'include/class/Join.php';
+require_once 'include/class/PdoDbException.php';
 require_once 'include/class/OrderBy.php';
 require_once 'include/class/Select.php';
-require_once 'include/class/DbInfo.php';
-require_once 'include/class/DbField.php';
-require_once 'include/class/Join.php';
+require_once 'include/class/WhereClause.php';
+require_once 'include/class/WhereItem.php';
 
 /**
  * PdoDb class
@@ -25,12 +26,15 @@ class PdoDb {
     private $caseStmts;
     private $constraints;
     private $debug;
+    private $debug_label;
+    private $debug_microtime;
     private $distinct;
     private $excludedFields;
     private $fauxPost;
     private $fieldPrefix;
     private $functions;
     private $groupBy;
+    private $havings;
     private $joinStmts;
     private $keyPairs;
     private $limit;
@@ -106,12 +110,14 @@ class PdoDb {
         // @formatter:off
         $this->caseStmts        = null;
         $this->constraints      = null;
+        $this->debug_microtime  = 0;
         $this->distinct         = false;
         $this->excludedFields   = array();
         $this->fauxPost         = null;
         $this->fieldPrefix      = null;
         $this->functions        = null;
         $this->groupBy          = null;
+        $this->havings          = new Havings();
         $this->joinStmts        = null;
         $this->keyPairs         = null;
         $this->limit            = 0;
@@ -133,8 +139,18 @@ class PdoDb {
      * Turn on debug mode.
      * Enables error log display of query requests.
      */
-    public function debugOn() {
+    public function debugOn($debug_label="") {
         $this->debug = true;
+        if (empty($debug_label)) {
+            $bt = debug_backtrace();
+            $i = 1;
+            while($i < count($bt)) {
+                $debug_label = $bt[$i]['function'];
+                if ($debug_label != "debugOn") break;
+                $i++;
+            }
+        }
+        $this->debug_label = $debug_label;
     }
 
     /**
@@ -402,11 +418,13 @@ class PdoDb {
     /**
      * Set the <b>GROUP BY</b> statement object to generate when the next request is performed.
      * Note that this method can be called multiple times to add additional values.
-     * @param mixed $groupBy Can take one of two forms.
-     *        1) A string that is the name of the field to group by.
-     *           Ex: "street_address".
-     *        2) An ordered array that contains a list of field names to group by. The list is
-     *           high to low group by levels.
+     * @param mixed $groupBy Can take one of the following forms.
+     *        <ol>
+     *          <li>A string that is the name of the field to group by. Ex: "street_address".</li>
+     *          <li>An ordered array that contains a list of field names to group by. The list is
+     *              high to low group by levels.</li>
+     *          <li>A <i>DbField</i> object. Ex: new DbField("tax.tax_id"). Needed to properly 
+     *              encapsulate the field name as `tax`.`tax_id`.
      * @throws PdoDbException if an invalid parameter type is found.
      */
     public function setGroupBy($groupBy) {
@@ -420,6 +438,8 @@ class PdoDb {
                 }
                 $this->groupBy[] = $item;
             }
+        } else if (is_a($groupBy, "DbField")) {
+            $this->groupBy = $groupBy->genParm();
         } else if (is_string($groupBy)) {
             $this->groupBy[] = $groupBy;
         } else {
@@ -430,9 +450,38 @@ class PdoDb {
     }
 
     /**
+     * Set/add to <b>Havings</b> values using reduced parameter list.
+     * @param mixed $field
+     * @param string $operator
+     * @param mixed $value
+     * @param string $connector
+     */
+    public function setSimpleHavings($field, $operator, $value, $connector="") {
+        $this->havings[] = new Having($field, $operator, $value, $connector);
+    }
+
+    /**
+     * Set the <b>HAVING</b> statement object generate when the next <b>request</b> is performed.
+     * Note: This method can be called multiple times to add additional values.
+     * @param havings $havings <b>HAVING</b> or <b>HAVINGS</b> object to add.
+     * @throws PdoDbException If parameter is not valid.
+     */
+    public function setHavings($havings) {
+        if (!isset($this->havings)) $this->havings = new Havings();
+        if (is_a($havings,"Having") || is_a($havings, "Havings")) {
+            $this->havings->addHavings($havings);
+        } else {
+            error_log(print_r(debug_backtrace(),true));
+            $str = "PdoDb setHavings(): Invalid parameter type. " . print_r($havings, true);
+            error_log($str);
+            throw new PdoDbException($str);
+        }
+    }
+
+    /**
      * Set a limit on records accessed
      * @param integer $limit Value to specify in the <i>LIMIT</i> parameter.
-     * @param integer $offset Number of records to skip before reading the next $limit amount.
+     * @param integer $offset (Optional) Number of records to skip before reading the next $limit amount.
      */
     public function setLimit($limit, $offset=0) {
         $this->limit = ($offset > 0 ? $offset . ", " : "") . $limit;
@@ -514,7 +563,8 @@ class PdoDb {
 
     /**
      * Specify the subset of fields that a <i>SELECT</i> is to access.
-     * Note that default is to select all fields.
+     * Note that default is to select all fields. This function can be called multiple
+     * times to build the list conditionally.
      * @param mixed $selectList Can take one of two forms.
      *        1) A string with the field name to select from the table.
      *           Ex: "street_address".
@@ -523,10 +573,11 @@ class PdoDb {
      * @throws PdoDbException if an invalid parameter type is found.
      */
     public function setSelectList($selectList) {
+        if (!isset($this->selectList)) $this->selectList = array();
         if (is_array($selectList)) {
-            $this->selectList = $selectList;
-        } else if (is_string($selectList)) {
-            $this->selectList = array($selectList);
+            $this->selectList = array_merge($this->selectList, $selectList);
+        } else if (is_string($selectList) || is_a($selectList, "DbField")) {
+            $this->selectList[] = $selectList;
         } else {
             $str = "PdoDb setSelectList(): Invalid parameter type. " . print_r($selectList, true);
             error_log($str);
@@ -570,7 +621,7 @@ class PdoDb {
                 // Compact query to be logged
                 $sql = preg_replace('/  +/', ' ', str_replace(PHP_EOL, '', $sql));
             }
-            error_log("PdoDb - debugger: $sql");
+            error_log("PdoDb - debugger($this->debug_label): $sql");
         }
     }
 
@@ -601,10 +652,10 @@ class PdoDb {
      */
     private function getTableFields($table_in) {
         try {
-        $table = $table_in;
-        $columns = array();
-
-        // @formatter:off
+            $table = $table_in;
+            $columns = array();
+    
+            // @formatter:off
             $sql = "SELECT `column_name`
                       FROM `information_schema`.`columns`
                      WHERE `table_schema`=:table_schema
@@ -612,8 +663,8 @@ class PdoDb {
             $token_pairs = array(':table_schema'=>$this->table_schema,
                                  ':table'       =>$table);
             if ($sth = $this->pdoDb2->prepare($sql)) {
-            if ($sth->execute($token_pairs)) {
-                while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
+                if ($sth->execute($token_pairs)) {
+                    while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
                         $nam = $row['column_name'];
                         $columns[$nam] = "";
                         $sql = "SELECT `constraint_name`
@@ -736,8 +787,9 @@ class PdoDb {
      * @return string Updated field.
      */
     public static function formatField($field, $alias = null) {
+        if (preg_match('/^["\']/', $field)) return $field;
         $matches = array();
-        if (preg_match('/^([a-z]+)\.(.*)$/', $field, $matches)) {
+        if (preg_match('/^([a-z_]+)\.(.*)$/', $field, $matches)) {
             // Already an alias present
             $parts = array();
             if (preg_match('/(.*) +([aA][sS]) +(.*)/', $matches[2], $parts)) {
@@ -786,9 +838,11 @@ class PdoDb {
      * @throws PdoDbException if any unexpected setting or missing information is encountered.
      */
     public function request($request, $table, $alias = null) {
+        if ($this->debug) {
+            $this->debug_microtime = microtime(true);
+        }
         $request = strtoupper($request);
         $table = self::addTbPrefix($table);
-
         $sql = "";
         $valuePairs = array();
         $this->keyPairs = array();
@@ -852,21 +906,25 @@ class PdoDb {
                 // Build GROUP BY
                 $group = (empty($this->groupBy) ? "" : "GROUP BY " . implode(',', $this->groupBy));
 
+                // Build HAVING statement
+                $havings = "";
+                if (!empty($this->havings)) {
+                    $havings = $this->havings->build($this->keyPairs);
+                }
+
                 // Build LIMIT
                 $limit = (empty($this->limit) ? '' : " LIMIT $this->limit");
-        
+
                 // Make an array of paired column name and values. The column name is the
                 // index and the value is the content at that column.
                 foreach ($columns as $column => $this->constraints) {
                     // Check to see if a field prefix was specified and that there is no
                     // table alias present. If so, prepend the prefix followed by an underscore.
-                    // @formatter:off
                     $postColumn = $column;
                     if (( $this->usePost && isset($_POST[$postColumn])) ||
                         (!$this->usePost && isset($this->fauxPost[$postColumn]))) {
                         $valuePairs[$column] = ($this->usePost ? $_POST[$postColumn] : $this->fauxPost[$postColumn]);
                     }
-                    // @formatter:on
                 }
             }
         }
@@ -899,16 +957,16 @@ class PdoDb {
 
                 if (isset($this->selectList)) {
                     foreach($this->selectList as $column) {
-                        if (!empty($list)) $list .= ', ';
-                        $list .= $this->formatField($column, $alias);
-                    }
-                }
+                        $is_a_dbf = (is_a($column, "DbField") ? true : false);
+                        if (!empty($list)) {
+                            $list .= ', ';
+                        }
 
-                if (isset($this->selectStmts)) {
-                    foreach($this->selectStmts as $selectStmt) {
-                        if (!empty($list)) $list .= ", ";
-                        $list .= $selectStmt->build($this->keyPairs);
-                        $token_cnt += $selectStmt->getTokenCnt();
+                        if ($is_a_dbf) {
+                            $list .= $column->genParm();
+                        } else {
+                            $list .= $this->formatField($column, $alias);
+                        }
                     }
                 }
 
@@ -919,6 +977,14 @@ class PdoDb {
                         }
                         if (!empty($list)) $list .= ", ";
                         $list .= $function;
+                    }
+                }
+
+                if (isset($this->selectStmts)) {
+                    foreach($this->selectStmts as $selectStmt) {
+                        if (!empty($list)) $list .= ", ";
+                        $list .= $selectStmt->build($this->keyPairs);
+                        $token_cnt += $selectStmt->getTokenCnt();
                     }
                 }
 
@@ -959,10 +1025,12 @@ class PdoDb {
         }
 
         if ($useValueList) $sql .= $this->makeValueList($request, $valuePairs, $token_cnt) . "\n";
-        $sql .= (empty($where) ? "" : " " . $where . "\n") .
-                (empty($group) ? "" : " " . $group . "\n") .
-                (empty($order) ? "" : " " . $order . "\n") .
-                (empty($limit) ? "" : " " . $limit);
+
+        $sql .= (empty($where  ) ? "" : " " . $where   . "\n") .
+                (empty($group  ) ? "" : " " . $group   . "\n") .
+                (empty($havings) ? "" : " " . $havings . "\n") .
+                (empty($order  ) ? "" : " " . $order   . "\n") .
+                (empty($limit  ) ? "" : " " . $limit);
         // @formatter:on
         return $this->query($sql, $this->keyPairs);
     }
@@ -1027,6 +1095,11 @@ class PdoDb {
             $result = $sth->fetchAll(PDO::FETCH_NUM);
         } else {
             $result = true;
+        }
+
+        if ($this->debug) {
+            $msc = microtime(true) - $this->debug_microtime;
+            error_log("Processing time: " . ($msc * 1000) . "ms"); // in millseconds
         }
 
         // Don't clear the transaction setting.

@@ -23,7 +23,6 @@ $get_file_type    = (isset($_GET ['filetype'])         ? $_GET ['filetype']     
 $export = new export ();
 $export->format           = $get_format;
 $export->file_type        = $get_file_type;
-$export->file_location    = 'download';
 $export->module           = 'statement';
 $export->biller_id        = $biller_id;
 $export->customer_id      = $customer_id;
@@ -31,5 +30,6 @@ $export->start_date       = $start_date;
 $export->end_date         = $end_date;
 $export->show_only_unpaid = $show_only_unpaid;
 $export->filter_by_date   = $filter_by_date;
+$export->setDownload(true);
 $export->execute ();
 // @formatter:on

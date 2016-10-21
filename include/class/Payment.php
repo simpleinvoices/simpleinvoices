@@ -1,5 +1,11 @@
 <?php
 class Payment {
+    /**
+     * Count of optionally filtered payments
+     * @param string $filter 
+     * @param unknown $ol_pmt_id
+     * @return Result
+     */
     public static function count($filter, $ol_pmt_id) {
         global $pdoDb;
 
@@ -234,4 +240,43 @@ class Payment {
         $result = $pdoDb->request("INSERT", "payment");
         return $result;
     }
+
+    /**
+     * Calculate amount paid on the specified invoice
+     * @param integer $ac_inv_id Invoice ID to sum payments for.
+     * @return float Total paid on the invoice.
+     */
+    public static function calc_invoice_paid($ac_inv_id) {
+        global $pdoDb;
+        $pdoDb->addSimpleWhere("ac_inv_id", $ac_inv_id); // domain_id not needed
+        $pdoDb->addToFunctions(new FunctionStmt("COALESCE", "SUM(ac_amount),0", "amount"));
+        $rows = $pdoDb->request("SELECT", "payment");
+        return $rows[0]['amount'];
+    }
+
+    public static function calc_customer_paid($customer_id, $isReal = false) {
+        global $pdoDb;
+
+        if ($isReal) {
+            $jn = new Join("LEFT", "preferences", "pr");
+            $jn->addSimpleItem("pr.pref_id", new DbField("iv.preference_id"), "AND");
+            $jn->addSimpleItem("pr.domain_id", new DbField("iv.domain_id"));
+            $pdoDb->addToJoins($jn);
+
+            $pdoDb->addSimpleWhere("pr.status", ENABLED, "AND");
+        }
+
+        $pdoDb->addToFunctions(new FunctionStmt("COALESCE", "SUM(ap.ac_amount),0", "amount"));
+        $jn = new Join("INNER", "invoices", "iv");
+        $jn->addSimpleItem("iv.id", new DbField("ap.ac_inv_id"), "AND");
+        $jn->addSimpleItem("iv.domain_id", new DbField("ap.domain_id"));
+        $pdoDb->addToJoins($jn);
+
+        $pdoDb->addSimpleWhere("iv.customer_id", $customer_id, "AND");
+        $pdoDb->addSimpleWhere("ap.domain_id", domain_id::get());
+
+        $rows = $pdoDb->request("SELECT", "payment", "ap");
+        return $rows[0]['amount'];
+    }
+
 }

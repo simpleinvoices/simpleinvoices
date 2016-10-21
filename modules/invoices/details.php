@@ -14,23 +14,25 @@ global $smarty;
 checkLogin ();
 
 $master_invoice_id = $_GET['id'];
-$invoice = getInvoice ($master_invoice_id);
-// @formatter:off
-$invoiceobj   = new Invoice();
-$invoiceItems = $invoiceobj->getInvoiceItems ( $master_invoice_id );
 
-$customers   = Customer::get_all(true);
-$preference  = getPreference ( $invoice ['preference_id'] );
-$billers     = Biller::get_all(true);
-$defaults    = getSystemDefaults ();
-$taxes       = getTaxes ();
-$preferences = getActivePreferences ();
-$products    = Product::select_all ();
+// @formatter:off
+$invoice      = Invoice::getInvoice ($master_invoice_id);
+$invoiceItems = Invoice::getInvoiceItems ( $master_invoice_id );
+$customers    = Customer::get_all(true);
+$preference   = Preferences::getPreference( $invoice ['preference_id'] );
+$billers      = Biller::get_all(true);
+$defaults     = getSystemDefaults ();
+$taxes        = Taxes::getTaxes ();
+$preferences  = Preferences::getActivePreferences ();
+$products     = Product::select_all ();
 // @formatter:on
 
 $customFields = array ();
 for ($i = 1; $i <= 4; $i++) {
-    $customFields[$i] = show_custom_field ("invoice_cf$i", $invoice["custom_field$i"], "write", '', "details_screen", '', '', '');
+    $customFields[$i] = CustomFields::show_custom_field("invoice_cf$i"  , $invoice["custom_field$i"],
+                                                        "write"         , ''                        ,
+                                                        "details_screen", ''                        ,
+                                                        ''              , '');
 }
 
 foreach ($invoiceItems as $key => $value) {

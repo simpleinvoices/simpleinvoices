@@ -22,15 +22,14 @@ checkLogin();
 
 // @formatter:off
 $invoice_id   = $_GET['invoice'];
-$invoice      = getInvoice($invoice_id);
+$invoice      = Invoice::getInvoice($invoice_id);
 $invoice_type = Invoice::getInvoiceType($invoice['type_id']);
 $customer     = Customer::get($invoice['customer_id']);
 $biller       = Biller::select($invoice['biller_id']);
-$preference   = getPreference($invoice['preference_id']);
+$preference   = Preferences::getPreference($invoice['preference_id']);
 $defaults     = getSystemDefaults();
 
-$textUiInvoice = new TextUiInvoice();
-$invoiceItems  = $textUiInvoice->getInvoiceItems($invoice_id);
+$invoiceItems  = TextUiInvoice::getInvoiceItems($invoice_id);
 
 #Invoice Age - number of days - start
 if ($invoice['owing'] > 0 ) {
@@ -50,22 +49,17 @@ $customFieldLabels = getCustomFieldLabels('',true);
 
 $customField = array();
 for($i=1;$i<=4;$i++) {
-    $customField[$i] = 
-       show_custom_field("invoice_cf$i",
-                         $invoice["custom_field$i"],
-                         "read",
-                         'details_screen summary',
-                         'details_screen',
-                         'details_screen',
-                         5,
-                         ':');
+    $customField[$i] = CustomFields::show_custom_field("invoice_cf$i"  , $invoice["custom_field$i"],
+                                                       "read"          , 'details_screen summary'  ,
+                                                       'details_screen', 'details_screen'          ,
+                                                       5               , ':');
 }
 $pageActive = "invoices";
 
 //Customer accounts sections
 $customerAccount = null;
-$customerAccount['total'] = calc_customer_total($customer['id']);
-$customerAccount['paid']  = calc_customer_paid($customer['id']);;
+$customerAccount['total'] = Customer::calc_customer_total($customer['id']);
+$customerAccount['paid']  = Payment::calc_customer_paid($customer['id']);
 $customerAccount['owing'] = $customerAccount['total'] - $customerAccount['paid'];
 
 $word_processor = null;

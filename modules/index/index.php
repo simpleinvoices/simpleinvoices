@@ -7,9 +7,9 @@ checkLogin();
 // @formatter:off
 $billers     = Biller::get_all();
 $customers   = Customer::get_all();
-$taxes       = getTaxes();
+$taxes       = Taxes::getTaxes();
 $products    = Product::select_all();
-$preferences = getPreferences();
+$preferences = Preferences::getPreferences();
 
 if (empty($billers)   ||
     empty($customers) ||

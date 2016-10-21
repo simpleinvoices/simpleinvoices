@@ -38,7 +38,7 @@ error_log("index.php af init_pre.php - module[" . (empty($module) ? "" : $module
         "] action[" . (empty($action) ? "" : $action) .
         "] id[" . (empty($_GET['id']) ? "" : $_GET['id']) .
         "]");
-*/
+ */
 global $smarty,
        $smarty_output,
        $menu,
@@ -109,15 +109,13 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
                 // There aren't patches to apply. So check to see if there are invoices in db.
                 // If so, show the home page as default. Otherwise show Manage Invoices page
                 if ($module == null) {
-                    $invoiceobj = new Invoice();
-                    if ($invoiceobj->are_there_any() > "0") {
+                    if (Invoice::count() > 0) {
                         $module = "invoices";
                         $view = "manage";
                     } else {
                         $module = "index";
                         $view = "index";
                     }
-                    unset($invoiceobj);
                 }
             }
         }

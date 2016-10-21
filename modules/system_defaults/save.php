@@ -1,4 +1,5 @@
 <?php
+global $smarty;
 
 checkLogin();
 

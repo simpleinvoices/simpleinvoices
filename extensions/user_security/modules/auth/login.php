@@ -15,7 +15,11 @@ if (!function_exists('loginLogo')) {
             $imgHeight = 0;
             $maxWidth = 100;
             $maxHeight = 100;
+            $type = "";
+            $attr = "";
             list($width, $height, $type, $attr) = getimagesize($image);
+            if ($type || $attr) {} // eliminates unused warning.
+
             if (($width > $maxWidth || $height > $maxHeight)) {
                 $wp = $maxWidth / $width;
                 $hp = $maxHeight / $height;
@@ -56,6 +60,7 @@ global $patchCount,
        $zendDb;
 
 $menu = false;
+if ($menu) {} // eliminates unused warning.
 
 if (!defined("BROWSE")) define("BROWSE", "browse");
 

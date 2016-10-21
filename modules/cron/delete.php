@@ -15,6 +15,8 @@
  *  Website:
  *      http://www.simpleinvoices.org
  */
+global $pdoDb, $smarty;
+
 checkLogin();
 $err_message = "";
 $cron = "";

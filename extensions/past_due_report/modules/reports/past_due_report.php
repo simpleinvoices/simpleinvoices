@@ -3,6 +3,9 @@
  * Script: past_due_report.php collecting past due information.
  * Author: Richard Rowley
  */
+global $smarty;
+$menu = false;
+
 checkLogin();
 $defaults = $smarty->_tpl_vars['defaults'];
 $language = $defaults['language'];

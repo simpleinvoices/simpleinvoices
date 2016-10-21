@@ -1,6 +1,6 @@
 <?php
 function sql($type='', $dir, $sort, $rp, $page ) {
-    global $config, $LANG, $pdoDb;
+    global $LANG, $pdoDb;
 
     $table_alias = "";
     $query = isset($_REQUEST['query']) ? $_REQUEST['query'] : null;
@@ -84,6 +84,8 @@ function sql($type='', $dir, $sort, $rp, $page ) {
     $result = $pdoDb->request("SELECT", "expense", "e");
     return $result;
 }
+
+global $LANG;
 
 header("Content-type: text/xml");
 

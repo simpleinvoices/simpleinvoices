@@ -1,4 +1,5 @@
 <?php
+global $smarty;
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
@@ -8,7 +9,7 @@ if (!empty($_POST['tax_description'])) {
 	include("./modules/tax_rates/save.php");
 }
 
-$types = getTaxTypes();
+$types = Taxes::getTaxTypes();
 
 $smarty->assign("types",$types);
 $smarty->assign('pageActive', 'tax_rate');

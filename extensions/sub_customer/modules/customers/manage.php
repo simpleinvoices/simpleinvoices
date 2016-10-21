@@ -9,6 +9,8 @@
  *  Website:
  *      http://www.simpleinvoices.org
  */
+global $pdoDb, $smarty;
+
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
@@ -25,8 +27,7 @@ SubCustomers::addParentCustomerId();
 $pdoDb->addSimpleWhere("domain_id", domain_id::get());
 $pdoDb->addToFunctions("count(*) AS count");
 $rows = $pdoDb->request("SELECT", "customers");
-$row = $rows[0];
-$count = $row["count"];
+$count = $rows[0]["count"];
 $smarty->assign('number_of_customers', $count);
 
 $smarty->assign('pageActive', 'customer');

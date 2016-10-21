@@ -20,23 +20,22 @@ global $smarty;
 // stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-// get the invoice id
-$invoice_id = $_GET['id'];
-$invoice = getInvoice($invoice_id);
-$preference = getPreference($invoice['preference_id']);
-$defaults = getSystemDefaults();
-$invoicePaid = calc_invoice_paid($invoice_id);
+// @formatter:off
+$id           = $_GET['id'];
+$invoice      = Invoice::getInvoice($id);
+$preference   = Preferences::getPreference($invoice['preference_id']);
+$defaults     = getSystemDefaults();
+$invoicePaid  = Payment::calc_invoice_paid($id);
+$invoiceItems = Invoice::getInvoiceItems($id);
 
-$invoiceobj = new Invoice();
-$invoiceItems = $invoiceobj->getInvoiceItems($invoice_id);
-
-$smarty->assign("invoice", $invoice);
-$smarty->assign("preference", $preference);
-$smarty->assign("defaults", $defaults);
-$smarty->assign("invoicePaid", $invoicePaid);
+$smarty->assign("invoice"     , $invoice);
+$smarty->assign("preference"  , $preference);
+$smarty->assign("defaults"    , $defaults);
+$smarty->assign("invoicePaid" , $invoicePaid);
 $smarty->assign("invoiceItems", $invoiceItems);
+// @formatter:on
 
-/* If delete is disabled - dont allow people to view this page */
+// If delete is disabled - dont allow people to view this page
 if ($defaults['delete'] == 'N') {
     die('Invoice deletion has been disabled, you are not supposed to be here');
 }
@@ -48,8 +47,7 @@ if (($_GET['stage'] == 2) && ($_POST['doDelete'] == 'y')) {
     $error = false;
 
     // delete line item taxes
-    $invoiceobj = new Invoice();
-    $invoice_line_items = $invoiceobj->getInvoiceItems($invoice_id);
+    $invoice_line_items = Invoice::getInvoiceItems($id);
 
     foreach($invoice_line_items as $key => $value) {
         if ($value) {} // elimiates unused warning
@@ -57,7 +55,7 @@ if (($_GET['stage'] == 2) && ($_POST['doDelete'] == 'y')) {
     }
 
     // Start by deleting the line items
-    if (!delete('invoice_items', 'invoice_id', $invoice_id)) {
+    if (!delete('invoice_items', 'invoice_id', $id)) {
         $error = true;
     }
 
@@ -69,7 +67,7 @@ if (($_GET['stage'] == 2) && ($_POST['doDelete'] == 'y')) {
     }
 
     // delete the info from the invoice table
-    if ($error || !delete('invoices', 'id', $invoice_id)) {
+    if ($error || !delete('invoices', 'id', $id)) {
         $error = true;
     }
     if ($error) {

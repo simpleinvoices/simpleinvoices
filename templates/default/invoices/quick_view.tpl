@@ -425,17 +425,15 @@
     </tr>
   {/if}
   {if $invoice_number_of_taxes > 1 } {/if}
-  {section name=line start=0 loop=$invoice.tax_grouped step=1}
-    {if ($invoice.tax_grouped[line].tax_amount != "0") }
+  {foreach from=$invoice.tax_grouped item=taxg}
+    {if $taxg.tax_amount != 0}
       <tr class="tr_tax">
         <td colspan="4"></td>
-        <th>{$invoice.tax_grouped[line].tax_name|htmlsafe}</th>
-        <td class="si_right">
-          {$preference.pref_currency_sign}{$invoice.tax_grouped[line].tax_amount|siLocal_number}
-        </td>
+        <th>{$taxg.tax_name|htmlsafe}</th>
+        <td class="si_right">{$preference.pref_currency_sign}{$taxg.tax_amount|siLocal_number}</td>
       </tr>
     {/if}
-  {/section}
+  {/foreach}
   {if $invoice_number_of_taxes > 1}
     <tr class="tr_tax">
       <td colspan="4"></td>

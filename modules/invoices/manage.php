@@ -9,20 +9,12 @@
  * Website:
  * http://www.simpleinvoices.org
  */
-global $smarty, $pdoDb, $auth_session;
+global $smarty;
 
 // stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-//$sql = "SELECT count(*) AS count FROM " . TB_PREFIX . "invoices WHERE domain_id = :domain_id";
-//$sth = dbQuery($sql, ':domain_id', domain_id::get());
-//$number_of_invoices = $sth->fetch(PDO::FETCH_ASSOC);
-$pdoDb->setSelectList(array());
-$pdoDb->addSimpleWhere("domain_id", $auth_session->domain_id);
-$pdoDb->addToFunctions("count(id) AS count");
-$rows = $pdoDb->request("SELECT", "invoices");
-
-$smarty->assign("number_of_invoices", $rows[0]['count']);
+$smarty->assign("number_of_invoices", Invoice::count());
 
 $having = "";
 if (isset($_GET['having'])) {

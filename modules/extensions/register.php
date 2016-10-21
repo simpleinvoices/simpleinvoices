@@ -1,7 +1,8 @@
 <?php
+global $smarty;
+
 //Stop direct browsing to this file
 checkLogin();
-
 
 $extension_id = $_GET['id'];
 $extension_name = $_GET['name'];
@@ -34,4 +35,3 @@ $smarty-> assign('count',$count);
 $smarty-> assign('description',$extension_desc);
 $smarty-> assign('pageActive','extensions');
 $smarty-> assign('active_tab','#settings');
-?>

@@ -10,7 +10,8 @@ class FunctionStmt {
     /**
      * Class constructor.
      * @param string $function Function to be performed. Can be set to <b>null</b> if necessary.
-     * @param mixed $parameter The first parameter of the function. Can be a string
+     * @param mixed $parameter The field the operation is performed on. Can be a string such as
+     *        "SUM(amount)" or "amount" or can be a DbField.
      * @param string $alias (Optional) Name to assign to the function result.
      */
     public function __construct($function, $parameter, $alias=null) {

@@ -39,30 +39,29 @@ $statement        = array ("total" => 0, "owing" => 0, "paid" => 0);
 
 
 if (isset($_POST['submit'])) {
-    $invoice = new Invoice();
-    $invoice->start_date = $start_date;
-    $invoice->end_date   = $end_date;
-    $invoice->biller     = $biller_id;
-    $invoice->customer   = $customer_id;
-    $invoice->having     = "open";
+    $values = array("start_date" => $start_date,
+                    "end_date"   => $end_date,
+                    "biller"     => $biller_id,
+                    "customer"   => $customer_id,
+                    "having"     => "open");
     if (isset($_POST['filter_by_date'])) {
-        $invoice->having  = "date_between";
+        $values["having"] = "date_between";
         $filter_by_date   = "yes";
         $having_and_count = 1;
     }
 
     if (isset($_POST['show_only_unpaid'])) {
         if ($having_and_count == 1) {
-            $invoice->having_and = "money_owed";
+            $values["having_and"] = "money_owed";
         } else {
-            $invoice->having = "money_owed";
+            $values["having"] = "money_owed";
         }
         $show_only_unpaid = "yes";
     }
 
-    $invoice->sort = "date";
-    $invoice_all   = $invoice->select_all ();
-    $invoices      = $invoice_all->fetchAll ();
+    $values["sort"] = "date";
+    $invoice_all    = Invoice::select_all($values);
+    $invoices       = $invoice_all->fetchAll(PDO::FETCH_ASSOC);
     foreach ( $invoices as $row ) {
         if ($row ['status'] > 0) {
             $statement ['total'] += $row ['invoice_total'];

@@ -14,18 +14,21 @@ foreach ($languages as $language) {
     }
 }
 
-$smarty->assign("defaults", getSystemDefaults());
-$smarty->assign("defaultBiller", getDefaultBiller());
-$smarty->assign("defaultCustomer", Customer::getDefaultCustomer());
-$smarty->assign("defaultTax", getDefaultTax());
-$smarty->assign("defaultPreference", getDefaultPreference());
-$smarty->assign("defaultPaymentType", getDefaultPaymentType());
-$smarty->assign("defaultDelete", getDefaultDelete());
-$smarty->assign("defaultLogging", getDefaultLogging());
-$smarty->assign("defaultInventory", getDefaultInventory());
+// @formatter:off
+$smarty->assign("defaults"                , getSystemDefaults());
+$smarty->assign("defaultBiller"           , Biller::getDefaultBiller());
+$smarty->assign("defaultCustomer"         , Customer::getDefaultCustomer());
+$smarty->assign("defaultTax"              , Taxes::getDefaultTax());
+$smarty->assign("defaultPreference"       , Preferences::getDefaultPreference());
+$smarty->assign("defaultPaymentType"      , PaymentType::getDefaultPaymentType());
+$smarty->assign("defaultDelete"           , getDefaultDelete());
+$smarty->assign("defaultLogging"          , getDefaultLogging());
+$smarty->assign("defaultInventory"        , getDefaultInventory());
 $smarty->assign("defaultProductAttributes", getDefaultProductAttributes());
-$smarty->assign("defaultLargeDataset", getDefaultLargeDataset());
-$smarty->assign("defaultLanguage", $lang);
+$smarty->assign("defaultLargeDataset"     , getDefaultLargeDataset());
+$smarty->assign("defaultLanguage"         , $lang);
 
 $smarty->assign('pageActive', 'system_default');
 $smarty->assign('active_tab', '#setting');
+// @formatter:on
+

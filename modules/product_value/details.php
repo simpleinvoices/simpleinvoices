@@ -1,4 +1,6 @@
 <?php
+global $smarty;
+
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
@@ -24,7 +26,8 @@ $pageActive = "product_value_manage";
 $smarty->assign('pageActive', $pageActive);
 $smarty->assign('active_tab', '#product');
 
-$smarty->assign('preference',$preference);
+// Commented out by RCR 20161015 as undefined. TODO: Verify truly unused
+//$smarty->assign('preference',$preference);
 
 $sql_attr = "select * from ".TB_PREFIX."products_attributes";
 $sth_attr =  dbquery($sql_attr);

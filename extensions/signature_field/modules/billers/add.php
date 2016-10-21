@@ -16,6 +16,8 @@
  * Website:
  * http://www.simpleinvoices.org
  */
+global $smarty;
+
 checkLogin();
 
 $files = getLogoList();

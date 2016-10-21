@@ -11,9 +11,7 @@ if (isset($_POST['op']) && $_POST['op'] =='edit' && !empty($_POST['invoice_id'])
     $smarty->assign('saved', $saved);
 }
 
-$invoices = new Invoice();
-$invoices->sort='id';
-$invoice_all = $invoices->select_all('count');
+$invoice_all = Invoice::select_all('no_age', 'id', "", "", "", "", "");
 
 $cron = Cron::select();
 
@@ -24,3 +22,4 @@ $smarty->assign("domain_id"  , domain_id::get());
 $smarty->assign('pageActive'   , 'cron');
 $smarty->assign('subPageActive', 'cron_edit');
 $smarty->assign('active_tab'   , '#money');
+

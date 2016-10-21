@@ -217,19 +217,19 @@ class Product {
         }
 
         $fauxPost = array('description'          => (isset($_POST['description'])    ? $_POST['description']    : ""),
-            'enabled'              => (isset($_POST['enabled'])        ? $_POST['enabled']        : ""),
-            'notes'                => (isset($_POST['notes'])          ? $_POST['notes']          : ""),
-            'default_tax_id'       => (isset($_POST['default_tax_id']) ? $_POST['default_tax_id'] : ""),
-            'custom_field1'        => (isset($_POST['custom_field1'])  ? $_POST['custom_field1']  : ""),
-            'custom_field2'        => (isset($_POST['custom_field2'])  ? $_POST['custom_field2']  : ""),
-            'custom_field3'        => (isset($_POST['custom_field3'])  ? $_POST['custom_field3']  : ""),
-            'custom_field4'        => (isset($_POST['custom_field4'])  ? $_POST['custom_field4']  : ""),
-            'unit_price'           => (isset($_POST['unit_price'])     ? $_POST['unit_price']     : ""),
-            'cost'                 => (isset($_POST['cost'])           ? $_POST['cost']           : ""),
-            'reorder_level'        => (isset($_POST['reorder_level'])  ? $_POST['reorder_level']  : ""),
-            'attribute'            => json_encode($attr),
-            'notes_as_description' => $notes_as_description,
-            'show_description'     => $show_description);
+                          'enabled'              => (isset($_POST['enabled'])        ? $_POST['enabled']        : ""),
+                          'notes'                => (isset($_POST['notes'])          ? $_POST['notes']          : ""),
+                          'default_tax_id'       => (isset($_POST['default_tax_id']) ? $_POST['default_tax_id'] : ""),
+                          'custom_field1'        => (isset($_POST['custom_field1'])  ? $_POST['custom_field1']  : ""),
+                          'custom_field2'        => (isset($_POST['custom_field2'])  ? $_POST['custom_field2']  : ""),
+                          'custom_field3'        => (isset($_POST['custom_field3'])  ? $_POST['custom_field3']  : ""),
+                          'custom_field4'        => (isset($_POST['custom_field4'])  ? $_POST['custom_field4']  : ""),
+                          'unit_price'           => (isset($_POST['unit_price'])     ? $_POST['unit_price']     : ""),
+                          'cost'                 => (isset($_POST['cost'])           ? $_POST['cost']           : ""),
+                          'reorder_level'        => (isset($_POST['reorder_level'])  ? $_POST['reorder_level']  : ""),
+                          'attribute'            => json_encode($attr),
+                          'notes_as_description' => $notes_as_description,
+                          'show_description'     => $show_description);
         if ($cflgs_enabled) {
             $fauxPost['custom_flags'] = $custom_flags;
         }

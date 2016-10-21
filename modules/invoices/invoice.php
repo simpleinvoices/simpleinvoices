@@ -22,11 +22,11 @@ checkLogin();
 // @formatter:off
 $billers           = Biller::get_all(true);
 $customers         = Customer::get_all(true);
-$taxes             = getActiveTaxes();
-$defaultTax        = getDefaultTax();
+$taxes             = Taxes::getActiveTaxes();
+$defaultTax        = Taxes::getDefaultTax();
 $products          = Product::select_all();
-$preferences       = getActivePreferences();
-$defaultPreference = getDefaultPreference();
+$preferences       = Preferences::getActivePreferences();
+$defaultPreference = Preferences::getDefaultPreference();
 $defaultCustomer   = Customer::getDefaultCustomer();
 $defaults          = getSystemDefaults();
 $matrix            = ProductAttributes::getMatrix();
@@ -48,7 +48,10 @@ if (!empty($_GET['line_items'])) {
 $show_custom_field = array();
 for ($i = 1; $i <= 4; $i++) {
     // Note that this is a 1 based array not a 0 based array.
-    $show_custom_field[$i] = show_custom_field("invoice_cf$i", '', "write", '', "details_screen", '', '', '');
+    $show_custom_field[$i] = CustomFields::show_custom_field("invoice_cf$i"  , '',
+                                                             "write"         , '',
+                                                             "details_screen", '',
+                                                             ''              , '');
 }
 
 $smarty->assign("matrix"            , $matrix);

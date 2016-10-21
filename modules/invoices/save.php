@@ -26,10 +26,10 @@ if(!isset( $_POST['type']) && !isset($_POST['action'])) {
 
 $saved = false;
 $type = $_POST['type'];
-
+error_log("save.php _POST- " . print_r($_POST,true));
 if ($_POST['action'] == "insert" ) {
-    if(insertInvoice($type)) {
-        $id = lastInsertId();
+    if($id = Invoice::insert($_POST['biller_id'], $_POST['customer_id'], $type, $_POST['preference_id'], $_POST['date'], $_POST['note'],
+                             $_POST['custom_field1'], $_POST['custom_field2'], $_POST['custom_field3'], $_POST['custom_field4'])) {
         $saved = true;
     }
 
@@ -37,7 +37,7 @@ if ($_POST['action'] == "insert" ) {
         Product::insertProduct(0,0);
         $product_id = lastInsertId();
         $tax_id = (empty($_POST["tax_id"][0] ) ? "" : $_POST["tax_id"][0]);
-        insertInvoiceItem($id, 1, $product_id, 1, $tax_id, $_POST['description'], $_POST['unit_price']);
+        Invoice::insertInvoiceItem($id, 1, $product_id, 1, $tax_id, $_POST['description'], $_POST['unit_price']);
     } elseif ($saved) {
         $i = 0;
         while ($i <= $_POST['max_items']) {
@@ -45,21 +45,23 @@ if ($_POST['action'] == "insert" ) {
                 // @formatter:off
                 $tax_id = (empty($_POST["tax_id"][$i] ) ? "" : $_POST["tax_id"][$i]);
                 $attr = (empty($_POST["attribute"][$i]) ? "" : $_POST["attribute"][$i]);
-                insertInvoiceItem($id, $_POST["quantity$i"]  , $_POST["products$i"]   ,
-                                  $i , $tax_id               , $_POST["description$i"],
-                                       $_POST["unit_price$i"], $attr);
+                Invoice::insertInvoiceItem($id    , $_POST["quantity$i"]   , $_POST["products$i"]  , $i,
+                                           $tax_id, $_POST["description$i"], $_POST["unit_price$i"], $attr);
                 // @formatter:on
             }
             $i++;
         }
     }
-} elseif ( $_POST['action'] == "edit") {
+} else if ( $_POST['action'] == "edit") {
     //Get type id - so do add into redirector header
     $id = $_POST['id'];
-    $saved = updateInvoice($_POST['id']);
+    $saved = Invoice::updateInvoice($_POST['id']);
 
     if($type == TOTAL_INVOICE && $saved) {
-        $pdoDb->setFauxPost(array("unit_price" => $_POST['unit_price'], "description" => $_POST['description0']));
+        // @formatter:off
+        $pdoDb->setFauxPost(array("unit_price"  => $_POST['unit_price'],
+                                  "description" => $_POST['description0']));
+        // @formatter:on
         $pdoDb->addSimpleWhere("id", $_POST['products0'], "AND");
         $pdoDb->addSimpleWhere("domain_id", domain_id::get());
         if (!$pdoDb->request("UPDATE", "products")) {
@@ -75,17 +77,18 @@ if ($_POST['action'] == "insert" ) {
             if ($_POST["quantity$i"] != null) {
                 // @formatter:off
                 //new line item added in edit page
-                $item    = (isset($_POST["line_item$i"]  ) ? $_POST["line_item$i"  ] : "");
-                $qty     = (isset($_POST["quantity$i"]   ) ? $_POST["quantity$i"   ] : "");
-                $product = (isset($_POST["products$i"]   ) ? $_POST["products$i"   ] : "");
+                $item    = (isset($_POST["line_item$i"]  ) ? $_POST["line_item$i"]   : "");
+                $qty     = (isset($_POST["quantity$i"]   ) ? $_POST["quantity$i"]    : "");
+                $product = (isset($_POST["products$i"]   ) ? $_POST["products$i"]    : "");
                 $desc    = (isset($_POST["description$i"]) ? $_POST["description$i"] : "");
-                $price   = (isset($_POST["unit_price$i"] ) ? $_POST["unit_price$i" ] : "");
-                $attr    = (isset($_POST["attribute$i"]  ) ? $_POST["attribute$i"  ] : "");
-                $tax_id  = (isset($_POST["tax_id$i"]     ) ? $_POST["tax_id$i"     ] : "");
+                $price   = (isset($_POST["unit_price$i"] ) ? $_POST["unit_price$i"]  : "");
+                $attr    = (isset($_POST["attribute$i"]  ) ? $_POST["attribute$i"]   : "");
+                $tax_id  = (isset($_POST["tax_id"][$i]   ) ? $_POST["tax_id"][$i]    : "");
+
                 if ($item == "") {
-                    insertInvoiceItem($id  , $qty, $product, $i, $tax_id, $desc, $price, $attr);
+                    Invoice::insertInvoiceItem($id  , $qty, $product, $i, $tax_id, $desc, $price, $attr);
                 } else {
-                    updateInvoiceItem($item, $qty, $product, $i, $tax_id, $desc, $price, $attr);
+                    Invoice::updateInvoiceItem($item, $qty, $product, $i, $tax_id, $desc, $price, $attr);
                 }
                 // @formatter:on
             }

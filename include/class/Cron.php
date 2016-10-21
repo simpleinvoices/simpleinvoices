@@ -227,17 +227,13 @@ class Cron {
                                 $value['recurrence_type'] . " was run today :: Info diff=" . $diff;
                         $i++;
 
-                        $ni = new Invoice();
-                        $ni->id         = $value['invoice_id'];
-                        $ni->domain_id  = $domain_id;
                         // $domain_id gets propagated from invoice to be copied from
-                        $new_invoice_id = $ni->recur ();
+                        $new_invoice_id = Invoice::recur ($value['invoice_id']);
 
                         $cron_log->insert ();
 
-                        $invoiceobj = new Invoice();
-                        $invoice               = $invoiceobj->select($new_invoice_id, $domain_id);
-                        $preference            = getPreference($invoice['preference_id'], $domain_id);
+                        $invoice               = Invoice::select($new_invoice_id);
+                        $preference            = Preferences::getPreference($invoice['preference_id'], $domain_id);
                         $biller                = Biller::select($invoice['biller_id']);
                         $customer              = Customer::get($invoice['customer_id']);
                         $spc2us_pref           = str_replace(" ", "_", $invoice['index_name']);
@@ -248,9 +244,9 @@ class Cron {
                             $export = new export ();
                             $export->domain_id     = $domain_id;
                             $export->format        = "pdf";
-                            $export->file_location = 'file';
                             $export->module        = 'invoice';
                             $export->id            = $invoice['id'];
+                            $export->setDownload(false);
                             $export->execute ();
 
                             // $attachment = file_get_contents('./tmp/cache/' . $pdf_file_name);
@@ -303,9 +299,9 @@ class Cron {
                                     $export_rec = new export ();
                                     $export_rec->domain_id     = $domain_id;
                                     $export_rec->format        = "pdf";
-                                    $export_rec->file_location = 'file';
                                     $export_rec->module        = 'invoice';
                                     $export_rec->id            = $invoice['id'];
+                                    $export_rec->setDownload(false);
                                     $export_rec->execute ();
 
                                     $email_rec = new Email ();

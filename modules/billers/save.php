@@ -24,9 +24,11 @@ $op = (empty($_POST['op']) ? "" : $_POST['op']);
 
 $saved = false;
 if ( $op === 'insert_biller') {
-    if (insertBiller()) $saved = true;
+    if (Biller::insertBiller()) $saved = true;
 } else if ($op === 'edit_biller') {
-    if (isset($_POST['save_biller']) && updateBiller()) $saved = true;
+    if (isset($_POST['save_biller'])) {
+        if (Biller::updateBiller()) $saved = true;
+    }
 }
 
 $smarty->assign('saved',$saved);

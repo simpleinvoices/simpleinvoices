@@ -343,7 +343,30 @@ function simpleInvoicesError($type, $info1 = "", $info2 = "") {
             <br />
             ");
             break;
-    }
+
+            case "PDO_not_mysql":
+            $error = exit("
+            <br />
+            ===========================================
+            <br />
+            SimpleInvoices - PDO - MySQL problem
+            <br />
+            ===========================================
+            <br />
+            <br />
+            Your SimpleInvoices installation can't use database types other than 'mysql'.
+            <br />
+            <br />
+            To fix this please edit config/config.php (or config/custom.config.php)
+            <br />
+            file and set database.adapter to 'pdo_mysql' and database.utf8 to 'true'.
+            <br />
+            <br />
+            ===========================================
+            <br />
+            ");
+                break;
+            }
     // @formatter:off
 
     return $error;

@@ -1,18 +1,19 @@
 <?php
+global $pdoDb, $smarty;
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
 // @formatter:off
 $customFieldLabel = getCustomFieldLabels('',true);
-$taxes = getActiveTaxes();
+$taxes = Taxes::getActiveTaxes();
 
 if (!empty($_POST['description'])) {
     include("./modules/products/save.php");
 }
 
-$sth = dbQuery("select * from ".TB_PREFIX."products_attributes where enabled ='1'");
-$attributes = $sth->fetchAll();
+$pdoDb->addSimpleWhere("enabled", ENABLED);
+$attributes = $pdoDb("SELECT", "products_attributes");
 
 $smarty->assign("defaults"        , getSystemDefaults());
 $smarty->assign('customFieldLabel', $customFieldLabel);
@@ -21,3 +22,4 @@ $smarty->assign("attributes"      , $attributes);
 $smarty->assign('pageActive'      , 'product_add');
 $smarty->assign('active_tab'      , '#product');
 // @formatter:on
+

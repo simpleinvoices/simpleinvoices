@@ -45,7 +45,8 @@ class ExpenseAccount {
     public static function insert() {
         global $pdoDb;
         $pdoDb->setExcludedFields("id");
-        $pdoDb->setFauxPost(array("domain_id" => domain_id::get(), "name" => $_POST["name"]));
+        $pdoDb->setFauxPost(array("domain_id" => domain_id::get(),
+                                  "name"      => $_POST["name"]));
         return $pdoDb->request("INSERT", "expense_account");
     }
 

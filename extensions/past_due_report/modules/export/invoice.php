@@ -1,25 +1,25 @@
 <?php
 /*
- * Script: template.php
-*     invoice export page
-*
-* License:
-*     GPL v3 or above
-*
-* Website:
-*     http://www.simpleinvoices.org
-*/
+ *  Script: template.php
+ *      invoice export page
+ *
+ *  License:
+ *      GPL v3 or above
+ *
+ *  Website:
+ *      http://www.simpleinvoices.org
+ */
 include 'extensions/past_due_report/include/class/export.php';
 // @formatter:off
-$invoiceID     = (isset($_GET['id']      ) ? $_GET['id']       : "");
-$get_format    = (isset($_GET['format']  ) ? $_GET['format']   : "");
-$get_file_type = (isset($_GET['filetype']) ? $_GET['filetype'] : "");
+$id        = (isset($_GET['id']      ) ? $_GET['id']       : "");
+$format    = (isset($_GET['format']  ) ? $_GET['format']   : "");
+$file_type = (isset($_GET['filetype']) ? $_GET['filetype'] : "");
 
 $export                = new export();
-$export->format        = $get_format;
-$export->file_type     = $get_file_type;
-$export->file_location = 'download';
+$export->id            = $id;
+$export->format        = $format;
+$export->file_type     = $file_type;
 $export->module        = 'invoice';
-$export->id            = $invoiceID;
+$export->setDownload(true);
 $export->execute();
 // @formatter:on

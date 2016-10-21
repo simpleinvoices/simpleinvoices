@@ -6,7 +6,6 @@ checkLogin();
 
 // @formatter:off
 $expense_id  = $_GET['id'];
-$invoiceobj  = new Invoice();
 
 $rows = Expense::get($expense_id);
 $expense = $rows[0];
@@ -14,7 +13,7 @@ $expense = $rows[0];
 $detail  = Expense::detail();
 $detail['customer']            = Customer::get($expense['customer_id']);
 $detail['biller']              = Biller::select($expense['biller_id']);
-$detail['invoice']             = $invoiceobj->select($expense['invoice_id']);
+$detail['invoice']             = Invoice::select($expense['invoice_id']);
 $detail['product']             = Product::select($expense['product_id']);
 $detail['expense_account']     = ExpenseAccount::select($expense['expense_account_id']);
 $detail['expense_tax']         = ExpenseTax::get_all($expense_id);

@@ -1,4 +1,5 @@
 <?php
+global $smarty;
 
 // stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin ();
@@ -6,7 +7,7 @@ checkLogin ();
 // @formatter:off
 $expense_add = Expense::add ();
 $defaults    = getSystemDefaults();
-$taxes       = getActiveTaxes();
+$taxes       = Taxes::getActiveTaxes();
 
 // if valid then do save
 if (!empty( $_POST ['expense_account_id'] )) {

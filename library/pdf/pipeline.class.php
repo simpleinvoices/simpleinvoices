@@ -787,7 +787,7 @@ class Pipeline {
 
     private function _show_item(&$box, $offset, &$context, &$media, &$postponed_filter) {
         $context->sort_absolute_positioned_by_z_index();
-
+        // @formatter:off
         $this->_dispatcher->fire('before-page-heights',
                                  array('pipeline' => &$this,
                                        'document' => &$box,
@@ -800,11 +800,11 @@ class Pipeline {
         $box->reflow_anchors($this->output_driver, $this->output_driver->anchors, $page_heights);
 
         $this->_dispatcher->fire('before-document',
-                                 array('pipeline'    => &$this,
-                                      'document'     => &$box,
-                                      'page-heights' => &$page_heights,
-                                      'media'        => &$media));
-
+                                 array('pipeline'     => &$this,
+                                       'document'     => &$box,
+                                       'page-heights' => &$page_heights,
+                                       'media'        => &$media));
+        // @formatter:on
         $expected_pages = count($page_heights);
         $this->output_driver->set_expected_pages($expected_pages);
         $this->_resetCounter('pages', $expected_pages);
@@ -837,12 +837,12 @@ class Pipeline {
 
             $this->output_driver->setPageHeight($current_page_height);
             $this->output_driver->setup_clip();
-
+            // @formatter:off
             $this->_dispatcher->fire('before-page',
                                      array('pipeline' => &$this,
                                            'document' => &$box,
                                            'pageno'   => $i));
-
+            // @formatter:on
             if (is_null($box->show($this->output_driver))) {
                 error_log('Pipeline::_process_item: output routine failed');
                 return null;
@@ -861,21 +861,22 @@ class Pipeline {
             if ($g_config['draw_page_border']) {
                 $this->output_driver->draw_page_border();
             }
-
+            // @formatter:off
             $this->_dispatcher->fire('after-page',
                                      array('pipeline' => &$this,
                                            'document' => &$box,
                                            'pageno'   => $i));
+            // @formatter:on
         }
-
+        // @formatter:off
         $this->_dispatcher->fire('after-document',
                                  array('pipeline' => &$this,
                                        'document' => &$box));
+        // @formatter:on
     }
 
     private function _output() {
         $temporary_output_filename = $this->output_driver->get_filename();
-
         for ($i = 0; $i < count($this->output_filters); $i++) {
             $temporary_output_filename = $this->output_filters[$i]->process($temporary_output_filename);
         }
@@ -959,12 +960,12 @@ class Pipeline {
         $this->clear_box_id_map();
         $this->_prepare($media);
         $this->_dispatcher->fire('before-batch', array('pipeline' => &$this));
-
         $offset = 0;
         foreach ($data_id_array as $data_id) {
             $this->_process_item($data_id, $media, $offset);
             $offset = $this->output_driver->offset;
         }
+
         $this->close();
         return true;
     }

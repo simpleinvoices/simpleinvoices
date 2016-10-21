@@ -16,6 +16,8 @@
  * Website:
  * http://www.simpleinvoices.org
  */
+global $smarty;
+
 // Stop the direct browsing to this file.
 // Let index.php handle which files get displayed
 checkLogin();

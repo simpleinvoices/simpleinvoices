@@ -45,32 +45,24 @@ if (empty($customer['credit_card_number'])) {
 $invoices = Customer::getCustomerInvoices($cid);
 
 $stuff = array();
-$stuff['total'] = calc_customer_total($customer['id'],domain_id::get(),true);
-$stuff['paid']  = calc_customer_paid( $customer['id'],domain_id::get(),true);
+$stuff['total'] = Customer::calc_customer_total($customer['id'], true);
+$stuff['paid']  = Payment::calc_customer_paid( $customer['id'], true);
 $stuff['owing'] = $stuff['total'] - $stuff['paid'];
 
 $customFieldLabel = getCustomFieldLabels('',true);
 
 $dir    =  "DESC";
 $sort   =  "id";
-$having = "money_owed";
-$rp     = (isset($_POST['rp'])   ? $_POST['rp']   : "25");
-$page   = (isset($_POST['page']) ? $_POST['page'] : "1");
+$rp     = (isset($_POST['rp'])       ? $_POST['rp']       : "25");
+$page   = (isset($_POST['page'])     ? $_POST['page']     : "1");
+$query  = (isset($_REQUEST['query']) ? $_REQUEST['query'] : "");
+$qtype  = (isset($_REQUEST['qtype']) ? $_REQUEST['qtype'] : "");
 
-$invoice_owing = new Invoice();
-$invoice_owing->sort       = $sort;
-$invoice_owing->having_and = "real";
-$invoice_owing->query      = (isset($_REQUEST['query']) ? $_REQUEST['query'] : "");
-$invoice_owing->qtype      = (isset($_REQUEST['qtype']) ? $_REQUEST['qtype'] : "");
+$type = (getDefaultLargeDataset == $LANG['enabled'] ? "count" : "");
 
-$large_dataset = getDefaultLargeDataset();
-if($large_dataset == $LANG['enabled']) {
-  $sth = $invoice_owing->select_all('large_count', $dir, $rp, $page, $having);
-} else {
-  $sth = $invoice_owing->select_all('', $dir, $rp, $page, $having);
-}
+$pdoDb->setHavings(Invoice::buildHavings("money_owed"));
 
-$invoices_owing = $sth->fetchAll(PDO::FETCH_ASSOC);
+$invoices_owing = Invoice::select_all($type, $sort, $dir, $rp, $page, $query, $qtype);
 $subPageActive  = ($_GET['action'] == "view"  ? "customer_view" : "customer_edit");
 
 $smarty->assign("stuff"           , $stuff);
@@ -80,6 +72,5 @@ $smarty->assign('invoices_owing'  , $invoices_owing);
 $smarty->assign('customFieldLabel', $customFieldLabel);
 $smarty->assign('pageActive'      , 'customer');
 $smarty->assign('subPageActive'   , $subPageActive);
-$smarty->assign('pageActive'      , 'customer');
 $smarty->assign('active_tab'      , '#people');
 // @formatter:on

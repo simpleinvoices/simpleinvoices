@@ -19,7 +19,7 @@ class eway {
             $this->biller = Biller::select($this->invoice['biller_id']);
         }
         if(empty($this->preference)) {
-            $this->preference = getPreference($this->invoice['preference_id'], $this->domain_id);
+            $this->preference = Preferences::getPreference($this->invoice['preference_id'], $this->domain_id);
         }
 
         if ($this->invoice['owing'] > 0 &&
@@ -45,7 +45,7 @@ class eway {
         }
 
         if(empty($this->preference)) {
-            $this->preference = getPreference($this->invoice['preference_id'], $this->domain_id);
+            $this->preference = Preferences::getPreference($this->invoice['preference_id'], $this->domain_id);
         }
 
         $eway = new ewaylib($this->biller['eway_customer_id'],'REAL_TIME', false);

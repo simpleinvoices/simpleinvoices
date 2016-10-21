@@ -1,6 +1,6 @@
 <?php
 function sql($type='', $dir, $sort, $rp, $page ) {
-    global $config, $LANG, $pdoDb;
+    global $pdoDb;
 
     $validFields = array('id', 'name');
 
@@ -29,11 +29,14 @@ function sql($type='', $dir, $sort, $rp, $page ) {
     if (intval($rp) != $rp) $rp = 25;
 
     $start = (($page-1) * $rp);
-    $limit = "LIMIT $start, $rp";
+    $pdoDb->setLimit($rp, $start);
+
     if (!preg_match('/^(asc|desc)$/iD', $dir)) $sort .= ' DESC';
 
     return $pdoDb->request("SELECT", "expense_account");
 }
+
+global $LANG;
 
 header("Content-type: text/xml");
 

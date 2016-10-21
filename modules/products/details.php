@@ -1,5 +1,5 @@
 <?php
-global $smarty;
+global $pdoDb, $smarty;
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
@@ -10,13 +10,12 @@ $product_id = $_GET['id'];
 $product = Product::select($product_id);
 
 $customFieldLabel = getCustomFieldLabels('',true);
-$taxes = getActiveTaxes();
-$tax_selected = getTaxRate($product['default_tax_id']);
+$taxes = Taxes::getActiveTaxes();
+$tax_selected = Taxes::getTaxRate($product['default_tax_id']);
 
 $product['attribute_decode'] = json_decode($product['attribute'],true);
 
-$sth = dbQuery("SELECT * FROM " . TB_PREFIX . "products_attributes");
-$attributes = $sth->fetchAll();
+$attributes = $pdoDb->request("SELECT", "products_attributes");
 
 $subPageActive = $_GET['action'] =="view"  ? "product_view" : "product_edit" ;
 

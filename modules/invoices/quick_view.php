@@ -15,24 +15,21 @@
  * Website:
  *   http://www.simpleinvoices.or
  */
-global $config, $LANG, $smarty;
+global $config, $LANG, $pdoDb, $smarty;
 
 // @formatter:off
 checkLogin();
 
 $invoice_id = $_GET['id'];
 
-$invoice                 = getInvoice($invoice_id);
-$invoice_number_of_taxes = numberOfTaxesForInvoice($invoice_id);
+$invoice                 = Invoice::getInvoice($invoice_id);
+$invoice_number_of_taxes = Invoice::numberOfTaxesForInvoice($invoice_id);
 $invoice_type            = Invoice::getInvoiceType($invoice['type_id']);
-
-$customer   = Customer::get($invoice['customer_id']);
-$biller     = Biller::select($invoice['biller_id']);
-$preference = getPreference($invoice['preference_id']);
-$defaults   = getSystemDefaults();
-
-$invoiceobj   = new Invoice();
-$invoiceItems = $invoiceobj->getInvoiceItems($invoice_id);
+$customer                = Customer::get($invoice['customer_id']);
+$biller                  = Biller::select($invoice['biller_id']);
+$preference              = Preferences::getPreference($invoice['preference_id']);
+$defaults                = getSystemDefaults();
+$invoiceItems            = Invoice::getInvoiceItems($invoice_id);
 
 $eway_check          = new eway();
 $eway_check->invoice = $invoice;
@@ -55,18 +52,18 @@ $customFieldLabels = getCustomFieldLabels('',true);
 
 $customField = array();
 for($i=1;$i<=4;$i++) {
-    $customField[$i] =
-       show_custom_field("invoice_cf$i",$invoice["custom_field$i"],"read",'summary', '','',5,':');
+    $customField[$i] = CustomFields::show_custom_field("invoice_cf$i", $invoice["custom_field$i"],
+                                                       "read"        , 'summary'                 ,
+                                                       ''            , ''                        ,
+                                                       5             , ':');
 }
 
-$sth =  dbQuery("SELECT * FROM ".TB_PREFIX."products_attributes");
-
-$attributes = $sth->fetchAll();
+$attributes = $pdoDb->request("SELECT", "products_attributes");
 
 //Customer accounts sections
 $customerAccount = null;
-$customerAccount['total'] = calc_customer_total($customer['id'],'',true);
-$customerAccount['paid']  = calc_customer_paid($customer['id'] ,'',true);
+$customerAccount['total'] = Customer::calc_customer_total($customer['id'], true);
+$customerAccount['paid']  = Payment::calc_customer_paid($customer['id'] , true);
 $customerAccount['owing'] = $customerAccount['total'] - $customerAccount['paid'];
 
 $smarty->assign("attributes"             , $attributes);
@@ -89,4 +86,3 @@ $smarty->assign("spreadsheet"            , $config->export->spreadsheet);
 $smarty->assign("customerAccount"        , $customerAccount);
 $smarty->assign("eway_pre_check"         , $eway_pre_check);
 // @formatter:on
-?>

@@ -10,16 +10,10 @@
  *     http://www.simpleinvoices.org
  */
 global $smarty;
-
+error_log("add_invoice_item - _POST - " . print_r($_POST,true));
 if(isset($_POST['submit'])) {
-    insertInvoiceItem(
-        $_POST['id'],
-        $_POST['quantity1'],
-        $_POST['product1'],
-        $_POST['tax_id'],
-        trim($_POST['description']),
-        $_POST['unit_price1']
-    );
+    Invoice::insertInvoiceItem($_POST['id'], $_POST['quantity1'], $_POST['product1'], $_POST['tax_id'],
+                               trim($_POST['description']), $_POST['unit_price1']);
 }
 else {
     $products = Product::select_all();

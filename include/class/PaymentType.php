@@ -29,6 +29,26 @@ class PaymentType {
     }
 
     /**
+     * Get a default payment type.
+     * @param string $domain_id Domain user is logged into.
+     * @return string Default payment type.
+     */
+    public static function getDefaultPaymentType($domain_id = '') {
+        $domain_id = domain_id::get($domain_id);
+        // @formatter:off
+        $sql = "SELECT p.pt_description AS pt_description
+            FROM " . TB_PREFIX . "payment_types p, " .
+                TB_PREFIX . "system_defaults s
+            WHERE ( s.name      = 'payment_type'
+                AND p.pt_id     = s.value
+                AND p.domain_id = s.domain_id
+                AND s.domain_id = :domain_id)";
+                // @formatter:on
+                $sth = dbQuery($sql, ':domain_id', $domain_id);
+                return $sth->fetch();
+    }
+
+    /**
      * Get a specific payment type record.
      * @param int $id Unique ID of record to retrieve.
      * @return array Row retrieved. Test for "=== false" to check for failure.

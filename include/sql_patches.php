@@ -11,7 +11,8 @@ function patchmaker($num, $patchlines, &$patches) {
 global $config,
        $language;
 
-$is_mysql = $config->database->adapter != "pdo_pgsql";
+//$is_mysql = $config->database->adapter != "pdo_pgsql";
+$is_mysql = true;
 $defaults = null;
 $numpatchesdone = getNumberOfDonePatches();
 if ($numpatchesdone < 124) {
@@ -1332,9 +1333,7 @@ $patchlines['patch'] = "update `".TB_PREFIX."invoices` set index_id = id;";
 $patchlines['date' ] = "20090902";
 patchmaker('212', $patchlines, $si_patches);
 
-$invoiceobj = new Invoice();
-$max_invoice = $invoiceobj->max();
-unset($invoiceobj);
+$max_invoice = Invoice::maxIndexId();
 $patchlines['name' ] = "Update the index table with max invoice id - if required";
 $patchlines['patch'] =
 ($max_invoice > "0" ?

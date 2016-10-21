@@ -1,14 +1,15 @@
 <?php
 /*
- * Script: manage.php
- * Manage Invoices page
+ *  Script: manage.php
+ *      Manage Invoices page
  *
- * License:
- * GPL v3 or above
+ *  License:
+ *      GPL v3 or above
  *
- * Website:
- * http://www.simpleinvoices.org
+ *  Website:
+ *      http://www.simpleinvoices.org
  */
+global $smarty;
 
 // stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
@@ -26,6 +27,9 @@ $invoices = TextUiInvoice::getInvoiceItems();
 $number_of_invoices = array_shift($invoices);
 
 $pageActive = "invoice";
+
+$word_processor = null;
+$spreadsheet = null;
 
 $smarty->assign("invoices"          , $invoices);
 $smarty->assign("number_of_invoices", $number_of_invoices);
@@ -45,4 +49,3 @@ $smarty->assign('page', $page);
 $smarty->assign('page_prev', $page_prev);
 $smarty->assign('page_next', $page_next);
 // @formatter:on
-?>

@@ -15,8 +15,7 @@ jsEnd();
 $today = date("Y-m-d");
 
 if(isset($_GET['id'])) {
-    $invoiceobj = new Invoice();
-    $invoice = $invoiceobj->select($_GET['id']);
+    $invoice = Invoice::select($_GET['id']);
 } else {
     $pdoDb->addSimpleWhere("domain_id", domain_id::get());
     $invoice = $pdoDb->request("SELECT", "invoices");
@@ -26,19 +25,13 @@ if(isset($_GET['id'])) {
 $customer = Customer::get($invoice['customer_id']);
 $biller   = Biller::select($invoice['biller_id']);
 $defaults = getSystemDefaults();
-//$pt       = PaymentType::select($defaults['payment_type']);
-// @formatter:on
 
-$invoices = new Invoice();
-$invoices->sort='id';
-$invoices->having='money_owed';
-$invoices->having_and='real';
-$invoice_all = $invoices->select_all('count');
+$pdoDb->setHavings(Invoice::buildHavings("money_owed"));
+$invoice_all = Invoice::select_all("count", "id", "", null, "", "", "");
 
 $smarty->assign('invoice_all',$invoice_all);
 $paymentTypes = PaymentType::select_all(true);
 
-// @formatter:off
 $smarty->assign("paymentTypes", $paymentTypes);
 $smarty->assign("defaults"    , $defaults);
 $smarty->assign("biller"      , $biller);
@@ -46,9 +39,7 @@ $smarty->assign("customer"    , $customer);
 $smarty->assign("invoice"     , $invoice);
 $smarty->assign("today"       , $today);
 
-$subPageActive =  "payment_process" ;
 $smarty->assign('pageActive'   , 'payment');
-$smarty->assign('subPageActive', $subPageActive);
+$smarty->assign('subPageActive', "payment_process");
 $smarty->assign('active_tab'   , '#money');
 // @formatter:on
-

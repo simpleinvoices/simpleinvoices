@@ -12,6 +12,7 @@
  * License:
  * GPL v3 or above
  */
+global $smarty;
 
 // stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();

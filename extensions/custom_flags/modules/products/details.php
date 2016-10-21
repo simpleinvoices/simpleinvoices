@@ -1,4 +1,6 @@
 <?php
+global $smarty;
+
 // stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
@@ -9,8 +11,8 @@ $product = Product::select($product_id);
 $customFieldLabel = getCustomFieldLabels('',true);
 $cflgs = getCustomFlagsQualified('E');
 
-$taxes = getActiveTaxes();
-$tax_selected = getTaxRate($product['default_tax_id']);
+$taxes = Taxes::getActiveTaxes();
+$tax_selected = Taxes::getTaxRate($product['default_tax_id']);
 
 $smarty->assign("defaults", getSystemDefaults());
 $product['attribute_decode'] = json_decode($product['attribute'], true);

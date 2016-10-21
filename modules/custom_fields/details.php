@@ -1,14 +1,16 @@
 <?php
 /*
-* Script: details.php
-* 	Custom fields details page
-*
-* License:
-*	 GPL v3 or above
-*
-* Website:
-* 	http://www.simpleinvoices.org
+ * Script: details.php
+ *     Custom fields details page
+ *
+ * License:
+ *     GPL v3 or above
+ *
+ * Website:
+ *     http://www.simpleinvoices.org
  */
+global $auth_session, $dbh, $smarty;
+
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 

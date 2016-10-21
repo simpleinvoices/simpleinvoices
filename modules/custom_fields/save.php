@@ -15,6 +15,8 @@
  * Website:
  *   http://www.simpleinvoices.org
  */
+global $auth_session, $LANG, $smarty;
+
 // stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
@@ -53,4 +55,3 @@ $smarty->assign('display_block', $display_block);
 $smarty->assign('refresh_total', $refresh_total);
 $smarty->assign('pageActive'   , 'custom_field');
 $smarty->assign('active_tab'   , '#setting');
-?>

@@ -11,11 +11,9 @@ if (!empty($_POST['op']) && $_POST['op'] =='add' && !empty($_POST['invoice_id'])
     $smarty->assign('saved'      , $saved);
 }
 
-$invoices = new Invoice();
-$invoices->sort='id';
-$invoice_all = $invoices->select_all('count');
+$invoices = Invoice::select_all("no_age", "id", "", "", "", "", "");
 
-$smarty->assign('invoice_all', $invoice_all);
+$smarty->assign('invoice_all', $invoices);
 $smarty->assign("domain_id"  , domain_id::get());
 
 $smarty->assign('pageActive'   , 'cron');

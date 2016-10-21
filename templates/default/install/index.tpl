@@ -12,8 +12,8 @@
         <li>Create a blank MySQL database preferably with UTF-8
             collation.</li>
         <li>Enter the correct database connection details in the
-            <strong><em>{CONFIG_FILE_PATH}</em></strong> file.
-            {if CONFIG_FILE_PATH == "config/config.php"}
+            <strong><em>{config_file_path}</em></strong> file.
+            {if config_file_path == "config/config.php"}
             <p style="margin: 0 0 0 10px;">
             <strong>NOTE:</strong> You can copy the <strong>config.php</strong>
             file to a file named <strong>custom.config.php</strong> and make
@@ -30,7 +30,7 @@
   </tr>
   <tr>
     <th style="text-align: center; font-weight: bold; text-decoration: underline;">
-      <em>{CONFIG_FILE_PATH} Database</em> settings
+      <em>{config_file_path} Database</em> settings
     </th>
   </tr>
 </table>

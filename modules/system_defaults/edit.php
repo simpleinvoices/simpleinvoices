@@ -133,7 +133,7 @@ switch ($get_val) {
 
   case "tax":
     $default = "tax";
-    $taxes = getActiveTaxes();
+    $taxes = Taxes::getActiveTaxes();
     if (empty($taxes)) {
       $value = "<p><em>{$LANG['no_tax_rates']}</em></p>" . "\n";
     }
@@ -152,8 +152,8 @@ switch ($get_val) {
     break;
 
   case "preference_id":
-//    $pref        = getPreference($defaults['preference']);
-    $preferences = getActivePreferences();
+//    $pref        = Preferences::getPreference($defaults['preference']);
+    $preferences = Preferences::getActivePreferences();
 
     if (empty($preferences)) {
       $value = "<p><em>{$LANG['no_preferences']}</em></p>" . "\n";

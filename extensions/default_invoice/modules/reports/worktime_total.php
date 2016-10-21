@@ -5,6 +5,8 @@
 //   include phpreports library
 require_once("./include/reportlib.php");
 
+global $oRpt, $smarty;
+
 $myParms=Array();
 
 $order = '';

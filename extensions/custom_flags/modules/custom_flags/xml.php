@@ -1,7 +1,7 @@
 <?php
 
 function sql($type = '', $dir, $sort, $rp, $page) {
-    global $config, $LANG, $auth_session, $pdoDb;
+    global $LANG, $pdoDb;
 
     $query = isset($_POST['query']) ? $_POST['query'] : null;
     $qtype = isset($_POST['qtype']) ? $_POST['qtype'] : null;
@@ -38,10 +38,11 @@ function sql($type = '', $dir, $sort, $rp, $page) {
     return $pdoDb->request("SELECT", "custom_flags");
 }
 
+global $LANG;
+
 header("Content-type: text/xml");
 
 // @formatter:off
-$start = (isset($_POST['start']))     ? $_POST['start']     : "0";
 $dir   = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "ASC";
 $sort  = (isset($_POST['sortname']))  ? $_POST['sortname']  : "associated_table";
 $rp    = (isset($_POST['rp']))        ? $_POST['rp']        : "25";

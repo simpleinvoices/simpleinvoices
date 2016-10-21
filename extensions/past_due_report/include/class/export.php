@@ -39,8 +39,8 @@ class export {
                 break;
 
             case "file":
-                $invoice    = getInvoice($this->id, $this->domain_id);
-                $preference = getPreference($invoice['preference_id'], $this->domain_id);
+                $invoice    = Invoice::getInvoice($this->id);
+                $preference = Preferences::getPreference($invoice['preference_id'], $this->domain_id);
 
                 // xls/doc export no longer uses the export template $template = "export";
                 header("Content-type: application/octet-stream");
@@ -73,34 +73,29 @@ class export {
     }
 
     public function getData() {
-        global $smarty;
-        global $siUrl;
-        global $show_only_unpaid;
+        global $pdoDb, $smarty, $siUrl, $show_only_unpaid;
 
         // @formatter:off
-        $invoice = new Invoice();
         switch ($this->module) {
             case "statement":
-                $invoice->domain_id = $this->domain_id;
-                $invoice->biller    = $this->biller_id;
-                $invoice->customer  = $this->customer_id;
-
-                if ($this->filter_by_date == "yes") {
-                    if (isset($this->start_date)) $invoice->start_date = $this->start_date;
-                    if (isset($this->end_date)  ) $invoice->end_date   = $this->end_date;
-                    if (isset($this->start_date) &&
-                        isset($this->end_date)  ) $invoice->having     = "date_between";
-                    $having_count = 1;
+                $havings = new Havings();
+                if ($this->filter_by_date == "yes" &&
+                    isset($this->start_date) &&
+                    isset($this->end_date)) {
+                        $havings->addHavings(Invoice::buildHavings("date_between", array($this->start_date, $this->end_date)));
                 }
 
                 if ($show_only_unpaid == "yes") {
-                    if ($having_count == 1) $invoice->having_and = "money_owed";
-                    else $invoice->having = "money_owed";
+                    $havings->addHavings(Invoice::buildHavings("money_owed"));
                 }
+                $pdoDb->setHavings($havings);
 
-                $invoice_all = $invoice->select_all('count');
-                $invoices    = $invoice_all->fetchAll();
-                $statement   = array("total" => 0, "owing" => 0, "paid" => 0);
+                $pdoDb->addSimpleWhere("b.id", $this->biller, "AND");
+                $pdoDb->addSimpleWhere("c.id", $this->customer_id, "AND");
+
+                $invoices  = Invoice::select_all("count", "", "", null, "", "", "");
+
+                $statement = array("total" => 0, "owing" => 0, "paid" => 0);
                 foreach ($invoices as $row) {
                     $statement['total'] += $row['invoice_total'];
                     $statement['owing'] += $row['owing'];
@@ -114,8 +109,8 @@ class export {
                 $this->file_name  = "statement_" .
                                     $this->biller_id     . "_" .
                                     $this->customer_id   . "_" .
-                                    $invoice->start_date . "_" .
-                                    $invoice->end_date;
+                                    $this->start_date . "_" .
+                                    $this->end_date;
 
                 $smarty->assign('biller_id'       , $billers['id']);
                 $smarty->assign('biller_details'  , $biller_details);
@@ -136,7 +131,7 @@ class export {
                 $payment = Payment::select($this->id);
 
                 // Get Invoice preference to link from this screen back to the invoice
-                $invoice = getInvoice($payment['ac_inv_id'], $this->domain_id);
+                $invoice = Invoice::getInvoice($payment['ac_inv_id']);
                 $biller  = Biller::select($payment['biller_id']);
 
                 $logo = getLogo($biller);
@@ -146,7 +141,7 @@ class export {
                 $invoiceType       = Invoice::getInvoiceType($invoice['type_id']);
                 $customFieldLabels = getCustomFieldLabels($this->domain_id, true);
                 $paymentType       = PaymentType::select($payment['ac_payment_type']);
-                $preference        = getPreference($invoice['preference_id'], $this->domain_id);
+                $preference        = Preferences::getPreference($invoice['preference_id'], $this->domain_id);
 
                 $smarty->assign("payment"          , $payment);
                 $smarty->assign("invoice"          , $invoice);
@@ -168,26 +163,23 @@ class export {
                 break;
 
             case "invoice":
-                $invoiceobj = new Invoice();
-                $invoiceobj->domain_id = $this->domain_id;
+                $invoice = Invoice::select($this->id);
 
-                $invoice = $invoiceobj->select($this->id, $this->domain_id);
-
-                $invoice_number_of_taxes = numberOfTaxesForInvoice($this->id, $this->domain_id);
+                $invoice_number_of_taxes = Invoice::numberOfTaxesForInvoice($this->id, $this->domain_id);
 
                 $customer = Customer::get($invoice['customer_id']);
 
                 $past_due_date = (date("Y-m-d", strtotime('-30 days')) . ' 00:00:00');
-                $past_due_amt = CustomersPastDue::getCustomerPastDue($invoice['customer_id'], $this->id, $past_due_date);
+                $past_due_amt  = CustomersPastDue::getCustomerPastDue($invoice['customer_id'], $this->id, $past_due_date);
 
                 $biller     = Biller::select($invoice['biller_id']);
-                $preference = getPreference($invoice['preference_id'], $this->domain_id);
+                $preference = Preferences::getPreference($invoice['preference_id'], $this->domain_id);
                 $defaults   = getSystemDefaults($this->domain_id);
 
                 $logo = getLogo($biller);
                 $logo = str_replace(" ", "%20", $logo);
 
-                $invoiceItems    = $invoiceobj->getInvoiceItems($this->id, $this->domain_id);
+                $invoiceItems    = Invoice::getInvoiceItems($this->id);
                 $spc2us_pref     = str_replace(" ", "_", $invoice['index_name']);
                 $this->file_name = $spc2us_pref;
 
@@ -205,7 +197,6 @@ class export {
 
                 $pageActive = "invoices";
                 $smarty->assign('pageActive', $pageActive);
-
                 if (file_exists($templatePath)) {
                     $this->assignTemplateLanguage($preference);
 
@@ -255,4 +246,3 @@ class export {
         }
     }
 }
-

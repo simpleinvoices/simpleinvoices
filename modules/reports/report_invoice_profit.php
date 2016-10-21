@@ -24,14 +24,13 @@ isset($_POST['start_date']) ? $start_date = $_POST['start_date'] : $start_date =
 isset($_POST['end_date']) ? $end_date = $_POST['end_date'] : $end_date = lastOfMonth();
 
 // @formatter:off
-$invoice = new Invoice();
-$invoice->start_date = $start_date;
-$invoice->end_date   = $end_date;
-$invoice->having     = "date_between";
-$invoice->having_and = "real";
-$invoice_all = $invoice->select_all();
+$values = array("start_date" => $start_date,
+                "end_date"   => $end_date,
+                "having"     => "date_between",
+                "having_and" => "real");
+$invoice_all = Invoice::select_all($values);
 
-$invoices = $invoice_all->fetchAll();
+$invoices = $invoice_all->fetchAll(PDO::FETCH_ASSOC);
 $invoice_totals = array();
 foreach($invoices as $k=>$v) {
     //get list of all products

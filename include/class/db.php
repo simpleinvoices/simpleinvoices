@@ -12,54 +12,20 @@ class db {
 
         // Strip the pdo_ section from the adapter
         $this->_pdoAdapter = substr($config->database->adapter, 4);
-        if (!defined('PDO::MYSQL_ATTR_INIT_COMMAND') &&
-            $this->_pdoAdapter == "mysql" and $config->database->utf8 == true) {
-            simpleInvoicesError("PDO_mysql_attr");
+        if ($this->_pdoAdapter != "mysql") {
+            simpleInvoicesError("PDO_not_mysql");
         }
 
         // @formatter:off
         try {
-            switch ($this->_pdoAdapter) {
-                case "pgsql":
-                    $this->_db = new PDO($this->_pdoAdapter .
-                                    ':host=' .  $config->database->params->host . '; ' .
-                                    'dbname=' . $config->database->params->dbname,
-                                                $config->database->params->username,
-                                                $config->database->params->password);
-                    break;
-
-                case "sqlite":
-                    $this->db = new PDO($this->_pdoAdapter .
-                                    ':host=' .  $config->database->params->host . '; ' .
-                                    'dbname=' . $config->database->params->dbname,
-                                                $config->database->params->username,
-                                                $config->database->params->password);
-                    break;
-
-                case "mysql":
-                    switch ($config->database->utf8) {
-                        case true:
-                            $this->_db = new PDO(
-                                    'mysql:host=' . $config->database->params->host . '; ' .
-                                    'port='       . $config->database->params->port . '; ' .
-                                    'dbname='     . $config->database->params->dbname,
-                                                    $config->database->params->username,
-                                                    $config->database->params->password,
-                                                    array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8;"));
-                            $this->_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                            break;
-
-                        case false:
-                            $this->_db = new PDO($this->_pdoAdapter .
-                                    ':host='  . $config->database->params->host . '; ' .
-                                    'port='   . $config->database->params->port . '; ' . 
-                                    'dbname=' . $config->database->params->dbname,
-                                                $config->database->params->username,
-                                                $config->database->params->password);
-                            break;
-                    }
-                    break;
-            }
+            $this->_db = new PDO(
+                    'mysql:host=' . $config->database->params->host . '; ' .
+                    'port='       . $config->database->params->port . '; ' .
+                    'dbname='     . $config->database->params->dbname,
+                                    $config->database->params->username,
+                                    $config->database->params->password,
+                                    array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8;"));
+            $this->_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $exception) {
             simpleInvoicesError("dbConnection", $exception->getMessage());
             die($exception->getMessage());
@@ -108,12 +74,7 @@ class db {
      * specific details so you don't have to.
      */
     public function lastInsertId() {
-        if ($this->_pdoAdapter == 'pgsql') {
-            $sql = 'SELECT lastval()';
-        } elseif ($this->_pdoAdapter == 'mysql') {
-            $sql = 'SELECT last_insert_id()';
-        }
-        // echo $sql;
+        $sql = 'SELECT last_insert_id()';
         $sth = $this->query($sql);
         return $sth->fetchColumn();
     }

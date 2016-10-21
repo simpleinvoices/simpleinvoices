@@ -24,17 +24,17 @@ $invoiceID = $_GET['id'];
 //$conn = mysql_connect( $db_host, $db_user, $db_password );
 //mysql_select_db( $db_name, $conn );
 
-$invoice = getInvoice($invoiceID);
+$invoice = Invoice::getInvoice($invoiceID);
 $customer = Customer::get($invoice['customer_id']);
 $biller = Biller::select($invoice['biller_id']);
-$preference = getPreference($invoice['preference_id']);
+$preference = Preferences::getPreference($invoice['preference_id']);
 $defaults = getSystemDefaults();
 $logo = getLogo($biller);
 $logo = str_replace(" ", "%20", $logo);
 $invoiceItems = Invoice::getInvoiceItems($invoiceID);
 
 //for($i=1;$i<=4;$i++) {
-//	$show["custom_field$i"] = show_custom_field("invoice_cf$i",$invoice["invoice_custom_field$i"],"read",'','tbl1-left','tbl1-right',3,':');
+//	$show["custom_field$i"] = CustomFields::show_custom_field("invoice_cf$i",$invoice["invoice_custom_field$i"],"read",'','tbl1-left','tbl1-right',3,':');
 //
 
 $customFieldLabels = getCustomFieldLabels();

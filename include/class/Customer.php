@@ -35,8 +35,8 @@ class Customer {
         $customers = array();
         foreach($rows as $customer) {
             $customer['enabled'] = ($customer['enabled'] == ENABLED ? $LANG['enabled'] : $LANG['disabled']);
-            $customer['total']   = calc_customer_total($customer['id']);
-            $customer['paid']    = calc_customer_paid($customer['id']);
+            $customer['total']   = self::calc_customer_total($customer['id']);
+            $customer['paid']    = Payment::calc_customer_paid($customer['id']);
             $customer['owing']   = $customer['total'] - $customer['paid'];
             $customers[]         = $customer;
         }
@@ -69,7 +69,9 @@ class Customer {
         $se = new Select($fn, null, null, "paid");
         $pdoDb->addToSelectStmts($se);
 
-        $pdoDb->addToFunctions(new FunctionStmt("SELECT", "total - paid", "owing"));
+        $fn = new FunctionStmt("", "total - paid");
+        $se = new Select($fn, null, null, "owing");
+        $pdoDb->addToSelectStmts($se);
 
         $pdoDb->setSelectList(array("iv.id", "iv.index_id", "iv.date", "iv.type_id",
                                     "pr.status", "pr.pref_inv_wording"));
@@ -118,5 +120,31 @@ class Customer {
         $rows = $pdoDb->request("SELECT", "system_defaults", "s");
         return $rows[0];
     }
-    
+
+    public static function calc_customer_total($customer_id, $isReal = false) {
+        global $pdoDb;
+
+        if ($isReal) {
+            $jn = new Join("LEFT", "preferences", "pr");
+            $jn->addSimpleItem("pr.pref_id", new DbField("iv.preference_id"), "AND");
+            $jn->addSimpleItem("pr.domain_id", new DbField("iv.domain_id"));
+            $pdoDb->addToJoins($jn);
+
+            $pdoDb->addSimpleWhere("pr.status", ENABLED, "AND");
+        }
+
+        $pdoDb->addToFunctions(new FunctionStmt("COALESCE", "SUM(ii.total),0", "total"));
+
+        $jn = new Join("INNER", "invoices", "iv");
+        $jn->addSimpleItem("iv.id", new DbField("ii.invoice_id"), "AND");
+        $jn->addSimpleItem("iv.domain_id", new DbField("ii.domain_id"));
+        $pdoDb->addToJoins($jn);
+
+        $pdoDb->addSimpleWhere("iv.customer_id", $customer_id, "AND");
+        $pdoDb->addSimpleWhere("ii.domain_id", domain_id::get());
+
+        $rows = $pdoDb->request("SELECT", "invoice_items", "ii");
+        return $rows[0]['total'];
+    }
+
 }

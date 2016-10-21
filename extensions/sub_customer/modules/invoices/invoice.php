@@ -22,9 +22,9 @@ checkLogin();
 // @formatter:off
 $billers     = Biller::get_all(true);
 $customers   = Customer::get_all(true);
-$taxes       = getActiveTaxes();
+$taxes       = Taxes::getActiveTaxes();
 $products    = Product::select_all();
-$preferences = getActivePreferences();
+$preferences = Preferences::getActivePreferences();
 $defaults    = getSystemDefaults();
 $matrix      = ProductAttributes::getMatrix();
 
@@ -37,8 +37,8 @@ $defaults['biller']     = (isset($_GET['biller']))     ? $_GET['biller']     : $
 $defaults['customer']   = (isset($_GET['customer']))   ? $_GET['customer']   : $defaults['customer'];
 $defaults['preference'] = (isset($_GET['preference'])) ? $_GET['preference'] : $defaults['preference'];
 
-$defaultTax        = getDefaultTax();
-$defaultPreference = getDefaultPreference();
+$defaultTax        = Taxes::getDefaultTax();
+$defaultPreference = Preferences::getDefaultPreference();
 $defaultCustomer   = Customer::getDefaultCustomer();
 $sub_customers     = SubCustomers::getSubCustomers($defaults['customer']);
 if (!empty( $_GET['line_items'] )) {
@@ -50,7 +50,8 @@ if (!empty( $_GET['line_items'] )) {
 $show_custom_field = array();
 for($i=1;$i<=4;$i++) {
     // Note that this is a 1's based array and not a 0's based array.
-    $show_custom_field[$i] = show_custom_field("invoice_cf$i",'',"write",'',"details_screen",'','','');
+    $show_custom_field[$i] = CustomFields::show_custom_field("invoice_cf$i"  , '', "write", '',
+                                                             "details_screen", '', ''     , '');
 }
 
 $smarty->assign("matrix"            , $matrix);

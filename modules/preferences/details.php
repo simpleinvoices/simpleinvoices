@@ -10,10 +10,10 @@ if (isset($_POST['p_description']) && $_POST['p_description'] != "" ) {
 
 $preference_id = $_GET['id'];
 
-$preference = getPreference($preference_id);
-$index_group = getPreference($preference['index_group']);
+$preference = Preferences::getPreference($preference_id);
+$index_group = Preferences::getPreference($preference['index_group']);
 
-$preferences = getActivePreferences();
+$preferences = Preferences::getActivePreferences();
 $defaults = getSystemDefaults();
 $status = array(array('id'=>'0','status'=>$LANG['draft']), array('id'=>'1','status'=>$LANG['real']));
 $localelist = Zend_Locale::getLocaleList();
