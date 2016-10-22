@@ -3,7 +3,7 @@ global $smarty;
 
 // stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
-// TODO - replace get..Payments with simple count - as data is got by xml.php now
+
 // @formatter:off
 $payments   = array();
 $inv_id     = null;
@@ -31,7 +31,7 @@ if (!empty($_GET['id'])) {
     $subPageActive = "payment_manage";
 }
 
-$payments = progressPayments($payments);
+$payments = Payment::progressPayments($payments);
 
 $smarty->assign("payments"  , $payments);
 $smarty->assign("preference", $preference);

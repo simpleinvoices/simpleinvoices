@@ -15,7 +15,7 @@ class Preferences {
         $pdoDb->addSimpleWhere("domain_id", $domain_id);
 
         $ca = new CaseStmt("status", "status_wording");
-        $ca->addWhen( "=", ENABLED, $LANG['read']);
+        $ca->addWhen( "=", ENABLED, $LANG['real']);
         $ca->addWhen("!=", ENABLED, $LANG['draft'], true);
         $pdoDb->addToCaseStmts($ca);
 

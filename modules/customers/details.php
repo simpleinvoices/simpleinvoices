@@ -7,10 +7,10 @@
  *	 Justin Kelly, Nicolas Ruflin
  *
  * Last edited:
- * 	 2007-07-19
+ * 	    2016-10-21
  *
  * License:
- *	 GPL v2 or above
+ *	    GPL v3 or above
  *
  * Website:
  * 	http://www.simpleinvoices.org
@@ -28,7 +28,7 @@ $pdoDb->addSimpleWhere("id", $cid, "AND");
 $pdoDb->addSimpleWhere("domain_id", $domain_id);
 $rows = $pdoDb->request("SELECT", "customers");
 $customer = $rows[0];
-$customer['wording_for_enabled'] = ($customer['enabled'] == 1 ? $LANG['enabled'] : $LANG['disabled']);
+$customer['wording_for_enabled'] = ($customer['enabled'] == ENABLED ? $LANG['enabled'] : $LANG['disabled']);
 if (empty($customer['credit_card_number'])) {
     $customer['credit_card_number_masked'] = "";
 } else {
@@ -58,7 +58,7 @@ $page   = (isset($_POST['page'])     ? $_POST['page']     : "1");
 $query  = (isset($_REQUEST['query']) ? $_REQUEST['query'] : "");
 $qtype  = (isset($_REQUEST['qtype']) ? $_REQUEST['qtype'] : "");
 
-$type = (getDefaultLargeDataset == $LANG['enabled'] ? "count" : "");
+$type = (getDefaultLargeDataset() == $LANG['enabled'] ? "count" : "");
 
 $pdoDb->setHavings(Invoice::buildHavings("money_owed"));
 

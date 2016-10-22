@@ -1,5 +1,6 @@
 <?php
 global $smarty, $LANG, $pdoDb;
+
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
@@ -18,7 +19,8 @@ if(isset($_GET['id'])) {
     $invoice = Invoice::select($_GET['id']);
 } else {
     $pdoDb->addSimpleWhere("domain_id", domain_id::get());
-    $invoice = $pdoDb->request("SELECT", "invoices");
+    $rows = $pdoDb->request("SELECT", "invoices");
+    $invoice = $rows[0];
 }
 
 // @formatter:off

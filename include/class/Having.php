@@ -39,11 +39,10 @@ class Having {
             }
         }
 
-        if (empty($this-field)) {
+        if (empty($this->field)) {
             error_log("Having - _construct(): field parameter type is invalid. field - " . print_r($field,true));
             throw new PdoDbException("Having - Invalid field parameter. See error log for details.");
         }
-
 
         if (!preg_match(self::OPERATORS, $operator)) {
             error_log(print_r(debug_backtrace(),true));

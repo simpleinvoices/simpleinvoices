@@ -257,6 +257,13 @@ class Payment {
     public static function calc_customer_paid($customer_id, $isReal = false) {
         global $pdoDb;
 
+        $pdoDb->addToFunctions(new FunctionStmt("COALESCE", "SUM(ap.ac_amount),0", "amount"));
+
+        $jn = new Join("INNER", "invoices", "iv");
+        $jn->addSimpleItem("iv.id", new DbField("ap.ac_inv_id"), "AND");
+        $jn->addSimpleItem("iv.domain_id", new DbField("ap.domain_id"));
+        $pdoDb->addToJoins($jn);
+
         if ($isReal) {
             $jn = new Join("LEFT", "preferences", "pr");
             $jn->addSimpleItem("pr.pref_id", new DbField("iv.preference_id"), "AND");
@@ -266,17 +273,10 @@ class Payment {
             $pdoDb->addSimpleWhere("pr.status", ENABLED, "AND");
         }
 
-        $pdoDb->addToFunctions(new FunctionStmt("COALESCE", "SUM(ap.ac_amount),0", "amount"));
-        $jn = new Join("INNER", "invoices", "iv");
-        $jn->addSimpleItem("iv.id", new DbField("ap.ac_inv_id"), "AND");
-        $jn->addSimpleItem("iv.domain_id", new DbField("ap.domain_id"));
-        $pdoDb->addToJoins($jn);
-
         $pdoDb->addSimpleWhere("iv.customer_id", $customer_id, "AND");
         $pdoDb->addSimpleWhere("ap.domain_id", domain_id::get());
 
         $rows = $pdoDb->request("SELECT", "payment", "ap");
         return $rows[0]['amount'];
     }
-
 }
