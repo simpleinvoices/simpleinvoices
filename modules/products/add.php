@@ -13,7 +13,7 @@ if (!empty($_POST['description'])) {
 }
 
 $pdoDb->addSimpleWhere("enabled", ENABLED);
-$attributes = $pdoDb("SELECT", "products_attributes");
+$attributes = $pdoDb->request("SELECT", "products_attributes");
 
 $smarty->assign("defaults"        , getSystemDefaults());
 $smarty->assign('customFieldLabel', $customFieldLabel);

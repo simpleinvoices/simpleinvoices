@@ -31,7 +31,7 @@ if (!empty($_GET['id'])) {
     $subPageActive = "payment_manage";
 }
 
-$payments = progressPayments($payments);
+$payments = Payment::progressPayments($payments);
 
 $smarty->assign("payments"  , $payments);
 $smarty->assign("preference", $preference);
