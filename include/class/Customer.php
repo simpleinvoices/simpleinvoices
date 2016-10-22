@@ -123,6 +123,12 @@ class Customer {
 
     public static function calc_customer_total($customer_id, $isReal = false) {
         global $pdoDb;
+        $pdoDb->addToFunctions(new FunctionStmt("COALESCE", "SUM(ii.total),0", "total"));
+
+        $jn = new Join("INNER", "invoices", "iv");
+        $jn->addSimpleItem("iv.id", new DbField("ii.invoice_id"), "AND");
+        $jn->addSimpleItem("iv.domain_id", new DbField("ii.domain_id"));
+        $pdoDb->addToJoins($jn);
 
         if ($isReal) {
             $jn = new Join("LEFT", "preferences", "pr");
@@ -132,13 +138,6 @@ class Customer {
 
             $pdoDb->addSimpleWhere("pr.status", ENABLED, "AND");
         }
-
-        $pdoDb->addToFunctions(new FunctionStmt("COALESCE", "SUM(ii.total),0", "total"));
-
-        $jn = new Join("INNER", "invoices", "iv");
-        $jn->addSimpleItem("iv.id", new DbField("ii.invoice_id"), "AND");
-        $jn->addSimpleItem("iv.domain_id", new DbField("ii.domain_id"));
-        $pdoDb->addToJoins($jn);
 
         $pdoDb->addSimpleWhere("iv.customer_id", $customer_id, "AND");
         $pdoDb->addSimpleWhere("ii.domain_id", domain_id::get());
