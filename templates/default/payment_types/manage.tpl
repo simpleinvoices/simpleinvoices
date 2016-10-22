@@ -14,14 +14,13 @@
  *  Website:
  *      http://www.simpleinvoices.org
  *}
-
 <div class="si_toolbar si_toolbar_top">
   <a href="./index.php?module=payment_types&amp;view=add" class="">
     <img src="./images/famfam/add.png" alt="" />
     {$LANG.add_new_payment_type}
   </a>
 </div>
-{if $paymentTypes==null }
+{if empty($paymentTypes) }
 <div class="si_message">{$LANG.no_payment_types}</div>
 {else}
 <table id="manageGrid" style="display:none"></table>

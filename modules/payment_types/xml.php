@@ -1,4 +1,5 @@
 <?php
+header("Content-type: text/xml");
 
 function sql($type = '', $dir, $sort, $rp, $page, $domain_id) {
     global $pdoDb, $LANG;
