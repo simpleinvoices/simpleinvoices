@@ -13,6 +13,8 @@ When cloning the repository use the `--recursive` option to ensure that Zend is 
 * Latest Beta Release: [2013.1 beta 8](https://github.com/simpleinvoices/simpleinvoices/archive/2013.1.beta.8.tar.gz) (tar.gz)
 * Latest Stable Release: [2011.1](http://download.simpleinvoices.org/simpleinvoices/downloads/simpleinvoices.2011.1.zip) (.zip)
 
+**WARNING:** If you download the `Bleeding Edge Code` you will also need to download the [Zend Framework 1 library](https://github.com/dmelo/Zend-1.11/archive/27d7f1b3f45a436a9c795881db1d41689b8f9224.zip) and uncompress it in your `library\Zend`folder.
+
 ## Documentation
 * Installation: http://simpleinvoices.org/install
 * Frequently Asked Questions: http://simpleinvoices.org/wiki/faqs
