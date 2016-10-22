@@ -719,12 +719,12 @@ class Invoice {
      * @param string $domain_id
      * @return Maximum invoice number assigned.
      */
-    public static function maxIndexId($domain_id="") {
+    public static function maxIndexId($domain_id) {
         global $pdoDb;
 
         $pdoDb->addToFunctions(new FunctionStmt("MAX", "index_id", "maxIndexId"));
 
-        $pdoDb->addSimpleWhere("domain_id", domain_id::get($domain_id));
+        $pdoDb->addSimpleWhere("domain_id", $domain_id);
 
         $rows = $pdoDb->request("SELECT", "invoices");
         return $rows[0]['maxIndexId'];

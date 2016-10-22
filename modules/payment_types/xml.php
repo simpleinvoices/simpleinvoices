@@ -13,7 +13,7 @@ function sql($type = '', $dir, $sort, $rp, $page, $domain_id) {
 
     if ($type == "count") {
         $pdoDb->addToFunctions("COUNT(*) AS count");
-        $rows = $pdoDb->request("SELECT", "payment_types");
+        $rows = $pdoDb->request("SELECT", "payments_types");
         return $rows[0]['count'];
     }
 
@@ -39,9 +39,7 @@ function sql($type = '', $dir, $sort, $rp, $page, $domain_id) {
     return $pdoDb->request("SELECT", "payment_types");
 }
 
-global $LANG;
-
-$domain_id = domain_id::get();
+global $LANG, $auth_session;
 
 // @formatter:off
 $dir   = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "A";
@@ -49,8 +47,8 @@ $sort  = (isset($_POST['sortname']) ) ? $_POST['sortname']  : "pt_description";
 $rp    = (isset($_POST['rp'])       ) ? $_POST['rp']        : "25";
 $page  = (isset($_POST['page'])     ) ? $_POST['page']      : "1";
 
-$payment_types = sql(''     , $dir, $sort, $rp, $page, $domain_id);
-$count         = sql('count', $dir, $sort, $rp, $page, $domain_id);
+$payment_types = sql('', $dir, $sort, $rp, $page, $auth_session->domain_id);
+$count = sql('count', $dir, $sort, $rp, $page, $auth_session->domain_id);
 
 $xml  = "";
 $xml .= "<rows>";
@@ -59,24 +57,22 @@ $xml .= "<total>$count</total>";
 
 foreach ($payment_types as $row) {
     $pt_desc = $row['pt_description'];
-    $pt_id   = $row['pt_id'];
+    $pt_id = $row['pt_id'];
     $enabled = $row['enabled'];
-    $title   = "$LANG[view] $LANG[payment_type] $pt_desc";
-    $pic     = ($enabled == $LANG['enabled'] ? "images/common/tick.png" : "images/common/cross.png");
+    $title = $LANG['view'] . " " . $LANG['payment_type'] . " " . $pt_desc;
+    $pic = ($enabled == $LANG['enabled'] ? "images/common/tick.png" : "images/common/cross.png");
 
     $xml .= "<row id='$pt_id'>";
-    $xml .=
-        "<cell><![CDATA[
-            <a class='index_table' title='$title'
-               href='index.php?module=payment_types&view=details&id=$pt_id&action=view'>
-              <img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' />
-            </a>";
-    $xml .= 
-           "<a class='index_table' title='$title'
-               href='index.php?module=payment_types&view=details&id=$pt_id&action=edit'>
-              <img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' />
-            </a>
-         ]]></cell>";
+    $xml .= "<cell><![CDATA[
+        <a class='index_table' title='$title'
+           href='index.php?module=payment_types&view=details&id=$pt_id&action=view'>
+          <img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' />
+        </a>
+        <a class='index_table' title='$title'
+           href='index.php?module=payment_types&view=details&id=$pt_id&action=edit'>
+          <img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' />
+        </a>
+    ]]></cell>";
     $xml .= "<cell><![CDATA[$pt_desc]]></cell>";
     $xml .= "<cell><![CDATA[<img src='$pic' alt='$enabled' title='$enabled' />]]></cell>";
     $xml .= "</row>";

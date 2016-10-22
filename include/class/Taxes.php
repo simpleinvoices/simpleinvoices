@@ -7,7 +7,7 @@ class Taxes {
      * @param string $domain_id Domain ID logged into.
      * @return array Row retrieved. Test for "=== false" to check for failure.
      */
-    public static function getTaxRate($tax_id, $domain_id="") {
+    public static function getTaxRate($tax_id, $domain_id) {
         global $LANG, $pdoDb;
 
         $pdoDb->addSimpleWhere("tax_id", $tax_id, "AND");

@@ -18,8 +18,7 @@ if(isset($_GET['id'])) {
     $invoice = Invoice::select($_GET['id']);
 } else {
     $pdoDb->addSimpleWhere("domain_id", domain_id::get());
-    $rows = $pdoDb->request("SELECT", "invoices");
-    $invoice = $rows[0];
+    $invoice = $pdoDb->request("SELECT", "invoices");
 }
 
 // @formatter:off
