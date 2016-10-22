@@ -224,8 +224,10 @@ function getSQLPatches() {
     $pdoDb_admin->addToWhere(new WhereItem(false, "sql_patch"    , "<>", "", false, "OR"));
     $pdoDb_admin->addToWhere(new WhereItem(false, "sql_release"  , "<>", "", false, "OR"));
     $pdoDb_admin->addToWhere(new WhereItem(false, "sql_statement", "<>", "", false));
-    $pdoDb_admin->setOrderBy(array(array("sql-release","A"), array("sql_patch_ref","A")));
+    $pdoDb_admin->setOrderBy(array(array("sql_release","A"), array("sql_patch_ref","A")));
+$pdoDb_admin->debugOn();
     $rows = $pdoDb_admin->request("SELECT", "sql_patchmanager");
+$pdoDb_admin->debugOff();
     return $rows;
 }
 

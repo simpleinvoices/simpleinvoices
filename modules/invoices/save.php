@@ -26,7 +26,6 @@ if(!isset( $_POST['type']) && !isset($_POST['action'])) {
 
 $saved = false;
 $type = $_POST['type'];
-error_log("save.php _POST- " . print_r($_POST,true));
 if ($_POST['action'] == "insert" ) {
     if($id = Invoice::insert($_POST['biller_id'], $_POST['customer_id'], $type, $_POST['preference_id'], $_POST['date'], $_POST['note'],
                              $_POST['custom_field1'], $_POST['custom_field2'], $_POST['custom_field3'], $_POST['custom_field4'])) {

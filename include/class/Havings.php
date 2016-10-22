@@ -51,7 +51,6 @@ class Havings {
      */
     public function addSimple($field, $operator, $value, $connector="") {
         $this->addDefaultConnector();
-error_log("field[$field] operator[$operator] value[$value] connector[$connector]");
         $having = new Having(false, $field, $operator, $value, $connector, false);
         $this->havings[] = $having;
     }
