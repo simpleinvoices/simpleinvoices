@@ -217,7 +217,7 @@ $LANG['help_email_cc'] = "這個欄位是不是強制性的。在這裡你可以
 $LANG['help_email_from'] = "此字段是必填字段，並從記帳方的電子郵件地址得到的默認值根據您的需要，但不能在這一領域<br/><br/><i>注意增加超過1的電子郵件地址，您可以更改此電子郵件地址：有可能在這一領域只有1電子郵件地址</ I>";//1
 $LANG['help_email_to'] = "此字段是必填字段，並從客戶的電子郵件地址，得到的默認值根據您的需要<br/><br/><i>注意您可以更改此電子郵件地址：您可以在這裡添加多個郵件地址 - 只使用兩種或; 分割地址</i>";//1
 $LANG['help_insert_biller_text'] = "要選擇沒有標識，請從列表中選擇“_default_blank_logo.png”<br/><br/>要添加其他標識成簡單的發票, 徽標文件複製到標識目錄中的簡單的發票文件夾";//1
-$LANG['help_inv_pref_currency_sign'] = "這是通過將出發票所使用的貨幣符號。 <br/><br/><b>注意：</b>歐元，英鎊等請在此字段中使用html代碼給你貨幣符號。請參閱HTML代碼在以下網站的清單，讓您非\$貨幣符號<a href='http://www.ascii.cl/htmlcodes.htm'> http://www.ascii.cl/htmlcodes.htm </b> <br/><br/>這是必需的，這樣的PDF可以用<br/>非$符號正常工作<br/>&#38;#163;是HTML代碼為英鎊, <br/>於&#38;#8364;歐元等";//1
+$LANG['help_inv_pref_currency_sign'] = "這是通過將出發票所使用的貨幣符號。 <br/><br/><b>注意：</b>歐元，英鎊等請在此字段中使用html代碼給你貨幣符號。請參閱HTML代碼在以下網站的清單，讓您非\$貨幣符號<a href='http://www.ascii.cl/htmlcodes.htm'> http://www.ascii.cl/htmlcodes.htm </b> <br/><br/>這是必需的，這樣的PDF可以用<br/>非\$符號正常工作<br/>&#38;#163;是HTML代碼為英鎊, <br/>於&#38;#8364;歐元等";//1
 $LANG['help_inv_pref_description'] = "這是一組偏好的名稱 - 它沒有使用在發票上自身, 只是在創建發票時，從下拉列表中，您希望使用的發票偏好選擇。";//1
 $LANG['help_inv_pref_invoice_detail_heading'] = "這是會出現什麼作為發票的頁腳/細節部分的標題。";//1
 $LANG['help_inv_pref_invoice_detail_line'] = "This is the text that appear under the details/footer heading. Normally used to define payment terms etc.";//1
