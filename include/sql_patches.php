@@ -1426,15 +1426,14 @@ ADD `language` VARCHAR( 255 ) NULL ;";
 
     $patch['240']['name'] = "si_system_defaults - add composite primary key";
     $patch['240']['patch'] = "
-		ALTER TABLE  `".TB_PREFIX."system_defaults` ADD `new_id` INT( 11 ) NOT NULL FIRST;
-		UPDATE `".TB_PREFIX."system_defaults` SET new_id = id;
-		ALTER TABLE  `".TB_PREFIX."system_defaults` DROP `id`;
-		ALTER TABLE  `".TB_PREFIX."system_defaults` DROP INDEX `name`;
-		ALTER TABLE  `".TB_PREFIX."system_defaults` CHANGE `new_id` `id` INT( 11 ) NOT NULL;
-		ALTER TABLE  `".TB_PREFIX."system_defaults` ADD PRIMARY KEY(`domain_id`,`id` );";
+		ALTER TABLE `".TB_PREFIX."system_defaults` CHANGE `id` `id` INT(11) NOT NULL;
+		ALTER TABLE `".TB_PREFIX."system_defaults` DROP PRIMARY KEY;
+		ALTER TABLE `".TB_PREFIX."system_defaults` ADD PRIMARY KEY(`domain_id`,`id` );
+		ALTER TABLE `".TB_PREFIX."system_defaults` DROP INDEX `name`;
+		ALTER TABLE `".TB_PREFIX."system_defaults` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT;";
     $patch['240']['date'] = "20100305";
 
-    $patch['241']['name'] = "si_system_defaults - add composite primary key";
+    $patch['241']['name'] = "si_system_defaults - add inventory default";
     $patch['241']['patch'] = "insert into `".TB_PREFIX."system_defaults` values ('','inventory','0','1','1');";
     $patch['241']['date'] = "20100409";
 
