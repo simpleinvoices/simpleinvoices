@@ -96,7 +96,7 @@
             "cf_display": "0",
             "domain_id": "DOMAIN-ID"
         }
-    ] ,
+    ],
     "si_extensions": [
         {
             "id": "1",
@@ -105,7 +105,7 @@
             "description": "Core part of Simple Invoices - always enabled",
             "enabled": "1"
         }
-    ] ,
+    ],
     "si_invoice_type": [
         {
             "inv_ty_id": "1",
@@ -119,21 +119,21 @@
             "inv_ty_id": "3",
             "inv_ty_description": "Consulting"
         }
-    ] ,
+    ],
     "si_payment_types": [
         {
-			"pt_id": "1",
+            "pt_id": "1",
             "domain_id": "DOMAIN-ID",
             "pt_description": "Cash",
             "pt_enabled": "1"
         },
         {
-			"pt_id": "2",
+            "pt_id": "2",
             "domain_id": "1",
             "pt_description": "Credit Card",
             "pt_enabled": "1"
         }
-    ] ,
+    ],
     "si_preferences": [
         {
             "pref_id": "1",
@@ -149,12 +149,12 @@
             "pref_inv_payment_line1_value": "H. & M. Simpson",
             "pref_inv_payment_line2_name": "Account number:",
             "pref_inv_payment_line2_value": "0123-4567-7890",
-            "status":"1",
-            "locale":"LOCALE",
-            "language":"LANGUAGE",
-            "index_group":"1",
-            "currency_code":"USD",
-            "currency_position":"left",
+            "status": "1",
+            "locale": "LOCALE",
+            "language": "LANGUAGE",
+            "index_group": "1",
+            "currency_code": "USD",
+            "currency_position": "left",
             "pref_enabled": "1"
         },
         {
@@ -171,12 +171,12 @@
             "pref_inv_payment_line1_value": "",
             "pref_inv_payment_line2_name": "",
             "pref_inv_payment_line2_value": "",
-            "status":"1",
-            "locale":"LOCALE",
-            "language":"LANGUAGE",
-            "index_group":"1",
-            "currency_code":"USD",
-            "currency_position":"left",
+            "status": "1",
+            "locale": "LOCALE",
+            "language": "LANGUAGE",
+            "index_group": "1",
+            "currency_code": "USD",
+            "currency_position": "left",
             "pref_enabled": "1"
         },
         {
@@ -193,12 +193,12 @@
             "pref_inv_payment_line1_value": "",
             "pref_inv_payment_line2_name": "",
             "pref_inv_payment_line2_value": "",
-            "status":"0",
-            "locale":"LOCALE",
-            "language":"LANGUAGE",
-            "index_group":"1",
-            "currency_code":"USD",
-            "currency_position":"left",
+            "status": "0",
+            "locale": "LOCALE",
+            "language": "LANGUAGE",
+            "index_group": "1",
+            "currency_code": "USD",
+            "currency_position": "left",
             "pref_enabled": "1"
         },
         {
@@ -215,12 +215,12 @@
             "pref_inv_payment_line1_value": "",
             "pref_inv_payment_line2_name": "",
             "pref_inv_payment_line2_value": "",
-            "status":"0",
-            "locale":"LOCALE",
-            "language":"LANGUAGE",
-            "index_group":"1",
-            "currency_code":"USD",
-            "currency_position":"left",
+            "status": "0",
+            "locale": "LOCALE",
+            "language": "LANGUAGE",
+            "index_group": "1",
+            "currency_code": "USD",
+            "currency_position": "left",
             "pref_enabled": "1"
         }
     ],
@@ -245,143 +245,248 @@
         },
         {
             "sql_id": "2",
-            "sql_patch_ref": "2"
+            "sql_patch_ref": "2",
+            "sql_patch": "Update invoice no details to have a default currency sign",
+            "sql_release": "20060514",
+            "sql_statement": "UPDATE si_preferences SET pref_currency_sign = \\'$\\' WHERE pref_id =2 LIMIT 1"
         },
         {
             "sql_id": "3",
-            "sql_patch_ref": "3"
+            "sql_patch_ref": "3",
+            "sql_patch": "Add a row into the defaults table to handle the default number of line items",
+            "sql_release": "20060514",
+            "sql_statement": "ALTER TABLE si_defaults ADD def_number_line_items INT( 25 ) NOT NULL"
         },
         {
             "sql_id": "4",
-            "sql_patch_ref": "4"
+            "sql_patch_ref": "4",
+            "sql_patch": "Set the default number of line items to 5",
+            "sql_release": "20060514",
+            "sql_statement": "UPDATE si_defaults SET def_number_line_items = 5 WHERE def_id =1 LIMIT 1"
         },
         {
             "sql_id": "5",
-            "sql_patch_ref": "5"
+            "sql_patch_ref": "5",
+            "sql_patch": "Add logo and invoice footer support to biller",
+            "sql_release": "20060514",
+            "sql_statement": "ALTER TABLE si_biller ADD b_co_logo VARCHAR( 50 ), ADD b_co_footer TEXT"
         },
         {
             "sql_id": "6",
-            "sql_patch_ref": "6"
+            "sql_patch_ref": "6",
+            "sql_patch": "Add default invoice template option",
+            "sql_release": "20060514",
+            "sql_statement": "ALTER TABLE si_defaults ADD def_inv_template VARCHAR( 25 ) DEFAULT \\'print_preview.php\\' NOT NULL"
         },
         {
             "sql_id": "7",
-            "sql_patch_ref": "7"
+            "sql_patch_ref": "7",
+            "sql_patch": "Edit tax description field length to 50",
+            "sql_release": "20060526",
+            "sql_statement": "ALTER TABLE si_tax CHANGE tax_description tax_description VARCHAR( 50 ) DEFAULT NULL"
         },
         {
             "sql_id": "8",
-            "sql_patch_ref": "8"
+            "sql_patch_ref": "8",
+            "sql_patch": "Edit default invoice template field length to 50",
+            "sql_release": "20060526",
+            "sql_statement": "ALTER TABLE si_defaults CHANGE def_inv_template def_inv_template VARCHAR( 50 ) DEFAULT NULL"
         },
         {
             "sql_id": "9",
-            "sql_patch_ref": "9"
+            "sql_patch_ref": "9",
+            "sql_patch": "Add consulting style invoice",
+            "sql_release": "20060531",
+            "sql_statement": "INSERT INTO si_invoice_type ( inv_ty_id , inv_ty_description ) VALUES (3, \\'Consulting\\')"
         },
         {
             "sql_id": "10",
-            "sql_patch_ref": "10"
+            "sql_patch_ref": "10",
+            "sql_patch": "Add enabled to biller",
+            "sql_release": "20060815",
+            "sql_statement": "ALTER TABLE si_biller ADD b_enabled varchar(1) NOT NULL default \\'1\\'"
         },
         {
             "sql_id": "11",
-            "sql_patch_ref": "11"
+            "sql_patch_ref": "11",
+            "sql_patch": "Add enabled to customers",
+            "sql_release": "20060815",
+            "sql_statement": "ALTER TABLE si_customers ADD c_enabled varchar(1) NOT NULL default \\'1\\'"
         },
         {
             "sql_id": "12",
-            "sql_patch_ref": "12"
+            "sql_patch_ref": "12",
+            "sql_patch": "Add enabled to preferences",
+            "sql_release": "20060815",
+            "sql_statement": "ALTER TABLE si_preferences ADD pref_enabled varchar(1) NOT NULL default \\'1\\'"
         },
         {
             "sql_id": "13",
-            "sql_patch_ref": "13"
+            "sql_patch_ref": "13",
+            "sql_patch": "Add enabled to products",
+            "sql_release": "20060815",
+            "sql_statement": "ALTER TABLE si_products ADD prod_enabled varchar(1) NOT NULL default \\'1\\'"
         },
         {
             "sql_id": "14",
-            "sql_patch_ref": "14"
+            "sql_patch_ref": "14",
+            "sql_patch": "Add enabled to products",
+            "sql_release": "20060815",
+            "sql_statement": "ALTER TABLE si_tax ADD tax_enabled varchar(1) NOT NULL default \\'1\\'"
         },
         {
             "sql_id": "15",
-            "sql_patch_ref": "15"
+            "sql_patch_ref": "15",
+            "sql_patch": "Add tax_id into invoice_items table",
+            "sql_release": "20060815",
+            "sql_statement": "ALTER TABLE si_invoice_items ADD inv_it_tax_id VARCHAR( 25 ) NOT NULL default \\'0\\'  AFTER inv_it_unit_price"
         },
         {
             "sql_id": "16",
-            "sql_patch_ref": "16"
+            "sql_patch_ref": "16",
+            "sql_patch": "Add Payments table",
+            "sql_release": "20060827",
+            "sql_statement": "CREATE TABLE `si_account_payments` (\\r\\n`ac_id` INT( 10 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,\\r\\n`ac_inv_id` VARCHAR( 10 ) NOT NULL ,\\r\\n`ac_amount` DOUBLE( 25, 2 ) NOT NULL ,\\r\\n`ac_notes` TEXT NOT NULL ,\\r\\n`ac_date` DATETIME NOT NULL) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;\\r\\n"
         },
         {
             "sql_id": "17",
-            "sql_patch_ref": "17"
+            "sql_patch_ref": "17",
+            "sql_patch": "Adjust data type of quantity field",
+            "sql_release": "20060827",
+            "sql_statement": "ALTER TABLE `si_invoice_items` CHANGE `inv_it_quantity` `inv_it_quantity` FLOAT NOT NULL DEFAULT \\'0\\'"
         },
         {
             "sql_id": "18",
-            "sql_patch_ref": "18"
+            "sql_patch_ref": "18",
+            "sql_patch": "Create Payment Types table",
+            "sql_release": "20060909",
+            "sql_statement": "CREATE TABLE `si_payment_types` (`pt_id` INT( 10 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,`pt_description` VARCHAR( 250 ) NOT NULL ,`pt_enabled` VARCHAR( 1 ) NOT NULL DEFAULT \\'1\\') ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci"
         },
         {
             "sql_id": "19",
-            "sql_patch_ref": "19"
+            "sql_patch_ref": "19",
+            "sql_patch": "Add info into the Payment Type table",
+            "sql_release": "20060909",
+            "sql_statement": "INSERT INTO `si_payment_types` ( `pt_id` , `pt_description` ) VALUES (NULL , \\'Cash\\'), (NULL , \\'Credit Card\\')"
         },
         {
             "sql_id": "20",
-            "sql_patch_ref": "20"
+            "sql_patch_ref": "20",
+            "sql_patch": "Adjust accounts payments table to add a type field",
+            "sql_release": "20060909",
+            "sql_statement": "ALTER TABLE `si_account_payments` ADD `ac_payment_type` INT( 10 ) NOT NULL DEFAULT \\'1\\'"
         },
         {
             "sql_id": "21",
-            "sql_patch_ref": "21"
+            "sql_patch_ref": "21",
+            "sql_patch": "Adjust the defautls table to add a payment type field",
+            "sql_release": "20060909",
+            "sql_statement": "ALTER TABLE `si_defaults` ADD `def_payment_type` VARCHAR( 25 ) DEFAULT \\'1\\'"
         },
         {
             "sql_id": "22",
-            "sql_patch_ref": "22"
+            "sql_patch_ref": "22",
+            "sql_patch": "Add note field to customer",
+            "sql_release": "20061026",
+            "sql_statement": "ALTER TABLE `si_customers` ADD `c_notes` TEXT NULL AFTER `c_email`"
         },
         {
             "sql_id": "23",
-            "sql_patch_ref": "23"
+            "sql_patch_ref": "23",
+            "sql_patch": "Add note field to Biller",
+            "sql_release": "20061026",
+            "sql_statement": "ALTER TABLE `si_biller` ADD `b_notes` TEXT NULL AFTER `b_co_footer`"
         },
         {
             "sql_id": "24",
-            "sql_patch_ref": "24"
+            "sql_patch_ref": "24",
+            "sql_patch": "Add note field to Products",
+            "sql_release": "20061026",
+            "sql_statement": "ALTER TABLE `si_products` ADD `prod_notes` TEXT NOT NULL AFTER `prod_unit_price`"
         },
         {
             "sql_id": "25",
-            "sql_patch_ref": "25"
+            "sql_patch_ref": "25",
+            "sql_patch": "Add street address 2 to customers",
+            "sql_release": "20061211",
+            "sql_statement": "ALTER TABLE `si_customers` ADD `c_street_address2` VARCHAR( 50 ) AFTER `c_street_address` "
         },
         {
             "sql_id": "26",
-            "sql_patch_ref": "26"
+            "sql_patch_ref": "26",
+            "sql_patch": "Add custom fields to customers",
+            "sql_release": "20061211",
+            "sql_statement": "ALTER TABLE `si_customers` ADD `c_custom_field1` VARCHAR( 50 ) AFTER `c_notes` ,\\r\\nADD `c_custom_field2` VARCHAR( 50 ) AFTER `c_custom_field1` ,\\r\\nADD `c_custom_field3` VARCHAR( 50 ) AFTER `c_custom_field2` ,\\r\\nADD `c_custom_field4` VARCHAR( 50 ) AFTER `c_custom_field3` ;\\r\\n"
         },
         {
             "sql_id": "27",
-            "sql_patch_ref": "27"
+            "sql_patch_ref": "27",
+            "sql_patch": "Add mobile phone to customers",
+            "sql_release": "20061211",
+            "sql_statement": "ALTER TABLE `si_customers` ADD `c_mobile_phone` VARCHAR( 50 ) AFTER `c_phone`"
         },
         {
             "sql_id": "28",
-            "sql_patch_ref": "28"
+            "sql_patch_ref": "28",
+            "sql_patch": "Add street address 2 to billers",
+            "sql_release": "20061211",
+            "sql_statement": "ALTER TABLE `si_biller` ADD `b_street_address2` VARCHAR( 50 ) AFTER `b_street_address` "
         },
         {
             "sql_id": "29",
-            "sql_patch_ref": "29"
+            "sql_patch_ref": "29",
+            "sql_patch": "Add custom fields to billers",
+            "sql_release": "20061211",
+            "sql_statement": "ALTER TABLE `si_biller` ADD `b_custom_field1` VARCHAR( 50 ) AFTER `b_notes` ,\\r\\nADD `b_custom_field2` VARCHAR( 50 ) AFTER `b_custom_field1` ,\\r\\nADD `b_custom_field3` VARCHAR( 50 ) AFTER `b_custom_field2` ,\\r\\nADD `b_custom_field4` VARCHAR( 50 ) AFTER `b_custom_field3` ;\\r\\n"
         },
         {
             "sql_id": "30",
-            "sql_patch_ref": "30"
+            "sql_patch_ref": "30",
+            "sql_patch": "Creating the custom fields table",
+            "sql_release": "20061211",
+            "sql_statement": "CREATE TABLE `si_custom_fields` (\\r\\n`cf_id` INT NOT NULL AUTO_INCREMENT ,\\r\\n`cf_custom_field` VARCHAR( 50 ) NOT NULL ,\\r\\n`cf_custom_label` VARCHAR( 50 ) ,\\r\\n`cf_display` VARCHAR( 1 ) DEFAULT \\'1\\' NOT NULL ,\\r\\nPRIMARY KEY ( `cf_id` )\t) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;\\r\\n"
         },
         {
             "sql_id": "31",
-            "sql_patch_ref": "31"
+            "sql_patch_ref": "31",
+            "sql_patch": "Adding data to the custom fields table",
+            "sql_release": "20061211",
+            "sql_statement": "INSERT INTO `si_custom_fields` ( `cf_id` , `cf_custom_field` , `cf_custom_label` , `cf_display` ) VALUES\\r\\n(NULL, \\'biller_cf1\\', NULL , \\'0\\'),\\r\\n(NULL, \\'biller_cf2\\', NULL , \\'0\\'),\\r\\n(NULL, \\'biller_cf3\\', NULL , \\'0\\'),\\r\\n(NULL, \\'biller_cf4\\', NULL , \\'0\\'),\\r\\n(NULL, \\'customer_cf1\\', NULL , \\'0\\'),\\r\\n(NULL, \\'customer_cf2\\', NULL , \\'0\\'),\\r\\n(NULL, \\'customer_cf3\\', NULL , \\'0\\'),\\r\\n(NULL, \\'customer_cf4\\', NULL , \\'0\\'),\\r\\n(NULL, \\'product_cf1\\', NULL , \\'0\\'),\\r\\n(NULL, \\'product_cf2\\', NULL , \\'0\\'),\\r\\n(NULL, \\'product_cf3\\', NULL , \\'0\\'),\\r\\n(NULL, \\'product_cf4\\', NULL , \\'0\\');\\r\\n"
         },
         {
             "sql_id": "32",
-            "sql_patch_ref": "32"
+            "sql_patch_ref": "32",
+            "sql_patch": "Adding custom fields to products",
+            "sql_release": "20061211",
+            "sql_statement": "ALTER TABLE `si_products`\\r\\nADD `prod_custom_field1` VARCHAR( 50 ) AFTER `prod_unit_price` ,\\r\\nADD `prod_custom_field2` VARCHAR( 50 ) AFTER `prod_custom_field1` ,\\r\\nADD `prod_custom_field3` VARCHAR( 50 ) AFTER `prod_custom_field2` ,\\r\\nADD `prod_custom_field4` VARCHAR( 50 ) AFTER `prod_custom_field3` ;\\r\\n"
         },
         {
             "sql_id": "33",
-            "sql_patch_ref": "33"
+            "sql_patch_ref": "33",
+            "sql_patch": "Alter product custom field 4",
+            "sql_release": "20061214",
+            "sql_statement": "UPDATE `si_custom_fields` SET `cf_custom_field` = \\'product_cf4\\' WHERE `si_custom_fields`.`cf_id` =12 LIMIT 1 ;"
         },
         {
             "sql_id": "34",
-            "sql_patch_ref": "34"
+            "sql_patch_ref": "34",
+            "sql_patch": "Reset invoice template to default refer Issue 70",
+            "sql_release": "20070125",
+            "sql_statement": "UPDATE `si_defaults` SET `def_inv_template` = \\'default\\' WHERE `def_id` =1 LIMIT 1;"
         },
         {
             "sql_id": "35",
-            "sql_patch_ref": "35"
+            "sql_patch_ref": "35",
+            "sql_patch": "Adding data to the custom fields table for invoices",
+            "sql_release": "20070204",
+            "sql_statement": "INSERT INTO `si_custom_fields` ( `cf_id` , `cf_custom_field` , `cf_custom_label` , `cf_display` ) VALUES\\r\\n(NULL, \\'invoice_cf1\\', NULL , \\'0\\'),\\r\\n(NULL, \\'invoice_cf2\\', NULL , \\'0\\'),\\r\\n(NULL, \\'invoice_cf3\\', NULL , \\'0\\'),\\r\\n(NULL, \\'invoice_cf4\\', NULL , \\'0\\');\\r\\n"
         },
         {
             "sql_id": "36",
-            "sql_patch_ref": "36"
+            "sql_patch_ref": "36",
+            "sql_patch": "Adding custom fields to the invoices table",
+            "sql_release": "20070204",
+            "sql_statement": "ALTER TABLE `si_invoices`\\r\\nADD `invoice_custom_field1` VARCHAR( 50 ) AFTER `inv_date` ,\\r\\nADD `invoice_custom_field2` VARCHAR( 50 ) AFTER `invoice_custom_field1` ,\\r\\nADD `invoice_custom_field3` VARCHAR( 50 ) AFTER `invoice_custom_field2` ,\\r\\nADD `invoice_custom_field4` VARCHAR( 50 ) AFTER `invoice_custom_field3` ;\\r\\n"
         },
         {
             "sql_id": "37",
@@ -392,509 +497,998 @@
         },
         {
             "sql_id": "38",
-            "sql_patch_ref": "37"
+            "sql_patch_ref": "37",
+            "sql_patch": "Reset invoice template to default due to new invoice template system",
+            "sql_release": "20070523",
+            "sql_statement": "UPDATE `si_defaults` SET `def_inv_template` = \\'default\\' WHERE `def_id` =1 LIMIT 1 ;"
         },
         {
             "sql_id": "39",
-            "sql_patch_ref": "38"
+            "sql_patch_ref": "38",
+            "sql_patch": "Alter custom field table - field length now 255 for field name",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_custom_fields` CHANGE `cf_custom_field` `cf_custom_field` VARCHAR( 255 )"
         },
         {
             "sql_id": "40",
-            "sql_patch_ref": "39"
+            "sql_patch_ref": "39",
+            "sql_patch": "Alter custom field table - field length now 255 for field label",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_custom_fields` CHANGE `cf_custom_label` `cf_custom_label` VARCHAR( 255 )"
         },
         {
             "sql_id": "41",
-            "sql_patch_ref": "40"
+            "sql_patch_ref": "40",
+            "sql_patch": "Alter field name in sql_patchmanager",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_sql_patchmanager` CHANGE `sql_patch` `sql_patch` VARCHAR( 255 ) NOT NULL"
         },
         {
             "sql_id": "42",
-            "sql_patch_ref": "41"
+            "sql_patch_ref": "41",
+            "sql_patch": "Alter field name in si_account_payments",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE  `si_account_payments` CHANGE  `ac_id`  `id` INT( 10 ) NOT NULL AUTO_INCREMENT"
         },
         {
             "sql_id": "43",
-            "sql_patch_ref": "42"
+            "sql_patch_ref": "42",
+            "sql_patch": "Alter field name b_name to name",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE  `si_biller` CHANGE  `b_name`  `name` VARCHAR( 255 ) NULL DEFAULT NULL;"
         },
         {
             "sql_id": "44",
-            "sql_patch_ref": "43"
+            "sql_patch_ref": "43",
+            "sql_patch": "Alter field name b_id to id",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE  `si_biller` CHANGE  `b_id`  `id` INT( 10 ) NOT NULL AUTO_INCREMENT"
         },
         {
             "sql_id": "45",
-            "sql_patch_ref": "44"
+            "sql_patch_ref": "44",
+            "sql_patch": "Alter field name b_street_address to street_address",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE  `si_biller` CHANGE  `b_street_address`  `street_address` VARCHAR( 255 ) NULL DEFAULT NULL"
         },
         {
             "sql_id": "46",
-            "sql_patch_ref": "45"
+            "sql_patch_ref": "45",
+            "sql_patch": "Alter field name b_street_address2 to street_address2",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE  `si_biller` CHANGE  `b_street_address2`  `street_address2` VARCHAR( 255 ) NULL DEFAULT NULL"
         },
         {
             "sql_id": "47",
-            "sql_patch_ref": "46"
+            "sql_patch_ref": "46",
+            "sql_patch": "Alter field name b_city to city",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE  `si_biller` CHANGE  `b_city`  `city` VARCHAR( 255 ) NULL DEFAULT NULL"
         },
         {
             "sql_id": "48",
-            "sql_patch_ref": "47"
+            "sql_patch_ref": "47",
+            "sql_patch": "Alter field name b_state to state",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE  `si_biller` CHANGE  `b_state`  `state` VARCHAR( 255 ) NULL DEFAULT NULL"
         },
         {
             "sql_id": "49",
-            "sql_patch_ref": "48"
+            "sql_patch_ref": "48",
+            "sql_patch": "Alter field name b_zip_code to zip_code",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE  `si_biller` CHANGE  `b_zip_code`  `zip_code` VARCHAR( 255 ) NULL DEFAULT NULL"
         },
         {
             "sql_id": "50",
-            "sql_patch_ref": "49"
+            "sql_patch_ref": "49",
+            "sql_patch": "Alter field name b_country to country",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE  `si_biller` CHANGE  `b_country`  `country` VARCHAR( 255 ) NULL DEFAULT NULL"
         },
         {
             "sql_id": "51",
-            "sql_patch_ref": "50"
+            "sql_patch_ref": "50",
+            "sql_patch": "Alter field name b_phone to phone",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE  `si_biller` CHANGE  `b_phone`  `phone` VARCHAR( 255 ) NULL DEFAULT NULL"
         },
         {
             "sql_id": "52",
-            "sql_patch_ref": "51"
+            "sql_patch_ref": "51",
+            "sql_patch": "Alter field name b_mobile_phone to mobile_phone",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE  `si_biller` CHANGE  `b_mobile_phone`  `mobile_phone` VARCHAR( 255 ) NULL DEFAULT NULL"
         },
         {
             "sql_id": "53",
-            "sql_patch_ref": "52"
+            "sql_patch_ref": "52",
+            "sql_patch": "Alter field name b_fax to fax",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE  `si_biller` CHANGE  `b_fax`  `fax` VARCHAR( 255 ) NULL DEFAULT NULL"
         },
         {
             "sql_id": "54",
-            "sql_patch_ref": "53"
+            "sql_patch_ref": "53",
+            "sql_patch": "Alter field name b_email to email",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE  `si_biller` CHANGE  `b_email`  `email` VARCHAR( 255 ) NULL DEFAULT NULL"
         },
         {
-            "sql_patch_ref": "54"
+            "sql_patch_ref": "54",
+            "sql_patch": "Alter field name b_co_logo to logo",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE  `si_biller` CHANGE  `b_co_logo`  `logo` VARCHAR( 255 ) NULL DEFAULT NULL"
         },
         {
-            "sql_patch_ref": "55"
+            "sql_patch_ref": "55",
+            "sql_patch": "Alter field name b_co_footer to footer",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_biller` CHANGE `b_co_footer` `footer` TEXT NULL DEFAULT NULL "
         },
         {
-            "sql_patch_ref": "56"
+            "sql_patch_ref": "56",
+            "sql_patch": "Alter field name b_notes to notes",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_biller` CHANGE `b_notes` `notes` TEXT NULL DEFAULT NULL "
         },
         {
-            "sql_patch_ref": "57"
+            "sql_patch_ref": "57",
+            "sql_patch": "Alter field name b_enabled to enabled",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_biller` CHANGE `b_enabled` `enabled` VARCHAR( 1 ) NOT NULL DEFAULT \\'1\\'"
         },
         {
-            "sql_patch_ref": "58"
+            "sql_patch_ref": "58",
+            "sql_patch": "Alter field name b_custom_field1 to custom_field1",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_biller` CHANGE `b_custom_field1` `custom_field1` VARCHAR( 255 ) NULL DEFAULT NULL"
         },
         {
-            "sql_patch_ref": "59"
+            "sql_patch_ref": "59",
+            "sql_patch": "Alter field name b_custom_field2 to custom_field2",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_biller` CHANGE `b_custom_field2` `custom_field2` VARCHAR( 255 ) NULL DEFAULT NULL"
         },
         {
-            "sql_patch_ref": "60"
+            "sql_patch_ref": "60",
+            "sql_patch": "Alter field name b_custom_field3 to custom_field3",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_biller` CHANGE `b_custom_field3` `custom_field3` VARCHAR( 255 ) NULL DEFAULT NULL"
         },
         {
-            "sql_patch_ref": "61"
+            "sql_patch_ref": "61",
+            "sql_patch": "Alter field name b_custom_field4 to custom_field4",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_biller` CHANGE `b_custom_field4` `custom_field4` VARCHAR( 255 ) NULL DEFAULT NULL"
         },
         {
-            "sql_patch_ref": "62"
+            "sql_patch_ref": "62",
+            "sql_patch": "Introduce system_defaults table",
+            "sql_release": "20070523",
+            "sql_statement": "CREATE TABLE `si_system_defaults` (\\r\\n`id` int(11) NOT NULL auto_increment,\\r\\n`name` varchar(30) NOT NULL,\\r\\n`value` varchar(30) NOT NULL,\\r\\nPRIMARY KEY  (`id`),\\r\\nUNIQUE KEY `name` (`name`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci\\r\\n"
         },
         {
-            "sql_patch_ref": "63"
+            "sql_patch_ref": "63",
+            "sql_patch": "Insert date into the system_defaults table",
+            "sql_release": "20070523",
+            "sql_statement": "\\r\\nINSERT INTO `si_system_defaults` (`id`, `name`, `value`) VALUES\\r\\n(1, \\'biller\\', \\'4\\'),\\r\\n(2, \\'customer\\', \\'3\\'),\\r\\n(3, \\'tax\\', \\'1\\'),\\r\\n(4, \\'preference\\', \\'1\\'),\\r\\n(5, \\'line_items\\', \\'5\\'),\\r\\n(6, \\'template\\', \\'default\\'),\\r\\n(7, \\'payment_type\\', \\'1\\'),\\r\\n(8, \\'language\\', \\'en\\'),\\r\\n(9, \\'dateformat\\', \\'Y-m-d\\'),\\r\\n(10, \\'spreadsheet\\', \\'xls\\'),\\r\\n(11, \\'wordprocessor\\', \\'doc\\'),\\r\\n(12, \\'pdfscreensize\\', \\'800\\'),\\r\\n(13, \\'pdfpapersize\\', \\'A4\\'),\\r\\n(14, \\'pdfleftmargin\\', \\'15\\'),\\r\\n(15, \\'pdfrightmargin\\', \\'15\\'),\\r\\n(16, \\'pdftopmargin\\', \\'15\\'),\\r\\n(17, \\'pdfbottommargin\\', \\'15\\'),\\r\\n(18, \\'emailhost\\', \\'localhost\\'),\\r\\n(19, \\'emailusername\\', \\'\\'),\\r\\n(20, \\'emailpassword\\', \\'\\');\\r\\n"
         },
         {
-            "sql_patch_ref": "64"
+            "sql_patch_ref": "64",
+            "sql_patch": "Alter field name prod_id to id",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_products` CHANGE `prod_id` `id` INT( 11 ) NOT NULL AUTO_INCREMENT"
         },
         {
-            "sql_patch_ref": "65"
+            "sql_patch_ref": "65",
+            "sql_patch": "Alter field name prod_description to description",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_products` CHANGE `prod_description` `description` TEXT NOT NULL "
         },
         {
-            "sql_patch_ref": "66"
+            "sql_patch_ref": "66",
+            "sql_patch": "Alter field name prod_unit_price to unit_price",
+            "sql_release": "20070523",
+            "sql_statement": " ALTER TABLE `si_products` CHANGE `prod_unit_price` `unit_price` DECIMAL( 25, 2 ) NULL DEFAULT NULL"
         },
         {
-            "sql_patch_ref": "67"
+            "sql_patch_ref": "67",
+            "sql_patch": "Alter field name prod_custom_field1 to custom_field1",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_products` CHANGE `prod_custom_field1` `custom_field1` VARCHAR( 255 ) NULL DEFAULT NULL"
         },
         {
-            "sql_patch_ref": "68"
+            "sql_patch_ref": "68",
+            "sql_patch": "Alter field name prod_custom_field2 to custom_field2",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_products` CHANGE `prod_custom_field2` `custom_field2` VARCHAR( 255 ) NULL DEFAULT NULL"
         },
         {
-            "sql_patch_ref": "69"
+            "sql_patch_ref": "69",
+            "sql_patch": "Alter field name prod_custom_field3 to custom_field3",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_products` CHANGE `prod_custom_field3` `custom_field3` VARCHAR( 255 ) NULL DEFAULT NULL"
         },
         {
-            "sql_patch_ref": "70"
+            "sql_patch_ref": "70",
+            "sql_patch": "Alter field name prod_custom_field4 to custom_field4",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_products` CHANGE `prod_custom_field4` `custom_field4` VARCHAR( 255 ) NULL DEFAULT NULL"
         },
         {
-            "sql_patch_ref": "71"
+            "sql_patch_ref": "71",
+            "sql_patch": "Alter field name prod_notes to notes",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_products` CHANGE `prod_notes` `notes` TEXT NOT NULL"
         },
         {
-            "sql_patch_ref": "72"
+            "sql_patch_ref": "72",
+            "sql_patch": "Alter field name prod_enabled to enabled",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_products` CHANGE `prod_enabled` `enabled` VARCHAR( 1 ) NOT NULL DEFAULT \\'1\\'"
         },
         {
-            "sql_patch_ref": "73"
+            "sql_patch_ref": "73",
+            "sql_patch": "Alter field name c_id to id",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_customers` CHANGE `c_id` `id` INT( 10 ) NOT NULL AUTO_INCREMENT"
         },
         {
-            "sql_patch_ref": "74"
+            "sql_patch_ref": "74",
+            "sql_patch": "Alter field name c_attention to attention",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_customers` CHANGE `c_attention` `attention` VARCHAR( 255 ) NULL DEFAULT NULL"
         },
         {
-            "sql_patch_ref": "75"
+            "sql_patch_ref": "75",
+            "sql_patch": "Alter field name c_name to name",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_customers` CHANGE `c_name` `name` VARCHAR( 255 ) NULL DEFAULT NULL"
         },
         {
-            "sql_patch_ref": "76"
+            "sql_patch_ref": "76",
+            "sql_patch": "Alter field name c_street_address to street_address",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_customers` CHANGE `c_street_address` `street_address` VARCHAR( 255 ) NULL DEFAULT NULL"
         },
         {
-            "sql_patch_ref": "77"
+            "sql_patch_ref": "77",
+            "sql_patch": "Alter field name c_street_address2 to street_address2",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_customers` CHANGE `c_street_address2` `street_address2` VARCHAR( 255 ) NULL DEFAULT NULL"
         },
         {
-            "sql_patch_ref": "78"
+            "sql_patch_ref": "78",
+            "sql_patch": "Alter field name c_city to city",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_customers` CHANGE `c_city` `city` VARCHAR( 255 ) NULL DEFAULT NULL"
         },
         {
-            "sql_patch_ref": "79"
+            "sql_patch_ref": "79",
+            "sql_patch": "Alter field name c_state to state",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_customers` CHANGE `c_state` `state` VARCHAR( 255 ) NULL DEFAULT NULL"
         },
         {
-            "sql_patch_ref": "80"
+            "sql_patch_ref": "80",
+            "sql_patch": "Alter field name c_zip_code to zip_code",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_customers` CHANGE `c_zip_code` `zip_code` VARCHAR( 255 ) NULL DEFAULT NULL"
         },
         {
-            "sql_patch_ref": "81"
+            "sql_patch_ref": "81",
+            "sql_patch": "Alter field name c_country to country",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_customers` CHANGE `c_country` `country` VARCHAR( 255 ) NULL DEFAULT NULL"
         },
         {
-            "sql_patch_ref": "82"
+            "sql_patch_ref": "82",
+            "sql_patch": "Alter field name c_phone to phone",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_customers` CHANGE `c_phone` `phone` VARCHAR( 255 ) NULL DEFAULT NULL"
         },
         {
-            "sql_patch_ref": "83"
+            "sql_patch_ref": "83",
+            "sql_patch": "Alter field name c_mobile_phone to mobile_phone",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_customers` CHANGE `c_mobile_phone` `mobile_phone` VARCHAR( 255 ) NULL DEFAULT NULL"
         },
         {
-            "sql_patch_ref": "84"
+            "sql_patch_ref": "84",
+            "sql_patch": "Alter field name c_fax to fax",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_customers` CHANGE `c_fax` `fax` VARCHAR( 255 ) NULL DEFAULT NULL"
         },
         {
-            "sql_patch_ref": "85"
+            "sql_patch_ref": "85",
+            "sql_patch": "Alter field name c_email to email",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_customers` CHANGE `c_email` `email` VARCHAR( 255 ) NULL DEFAULT NULL"
         },
         {
-            "sql_patch_ref": "86"
+            "sql_patch_ref": "86",
+            "sql_patch": "Alter field name c_notes to notes",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_customers` CHANGE `c_notes` `notes` TEXT  NULL DEFAULT NULL"
         },
         {
-            "sql_patch_ref": "87"
+            "sql_patch_ref": "87",
+            "sql_patch": "Alter field name c_custom_field1 to custom_field1",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_customers` CHANGE `c_custom_field1` `custom_field1` VARCHAR( 255 ) NULL DEFAULT NULL"
         },
         {
-            "sql_patch_ref": "88"
+            "sql_patch_ref": "88",
+            "sql_patch": "Alter field name c_custom_field2 to custom_field2",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_customers` CHANGE `c_custom_field2` `custom_field2` VARCHAR( 255 ) NULL DEFAULT NULL"
         },
         {
-            "sql_patch_ref": "89"
+            "sql_patch_ref": "89",
+            "sql_patch": "Alter field name c_custom_field3 to custom_field3",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_customers` CHANGE `c_custom_field3` `custom_field3` VARCHAR( 255 ) NULL DEFAULT NULL"
         },
         {
-            "sql_patch_ref": "90"
+            "sql_patch_ref": "90",
+            "sql_patch": "Alter field name c_custom_field4 to custom_field4",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_customers` CHANGE `c_custom_field4` `custom_field4` VARCHAR( 255 ) NULL DEFAULT NULL"
         },
         {
-            "sql_patch_ref": "91"
+            "sql_patch_ref": "91",
+            "sql_patch": "Alter field name c_enabled to enabled",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_customers` CHANGE `c_enabled` `enabled` VARCHAR( 1 ) NOT NULL DEFAULT \\'1\\'"
         },
         {
-            "sql_patch_ref": "92"
+            "sql_patch_ref": "92",
+            "sql_patch": "Alter field name inv_id to id",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_invoices` CHANGE `inv_id` `id` INT( 10 ) NOT NULL AUTO_INCREMENT"
         },
         {
-            "sql_patch_ref": "93"
+            "sql_patch_ref": "93",
+            "sql_patch": "Alter field name inv_biller_id to biller_id",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_invoices` CHANGE `inv_biller_id` `biller_id` INT( 10 ) NOT NULL DEFAULT \\'0\\'"
         },
         {
-            "sql_patch_ref": "94"
+            "sql_patch_ref": "94",
+            "sql_patch": "Alter field name inv_customer_id to customer_id",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_invoices` CHANGE `inv_customer_id` `customer_id` INT( 10 ) NOT NULL DEFAULT \\'0\\'"
         },
         {
-            "sql_patch_ref": "95"
+            "sql_patch_ref": "95",
+            "sql_patch": "Alter field name inv_type type_id",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_invoices` CHANGE `inv_type` `type_id` INT( 10 ) NOT NULL DEFAULT \\'0\\'"
         },
         {
-            "sql_patch_ref": "96"
+            "sql_patch_ref": "96",
+            "sql_patch": "Alter field name inv_preference to preference_id",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_invoices` CHANGE `inv_preference` `preference_id` INT( 10 ) NOT NULL DEFAULT \\'0\\'"
         },
         {
-            "sql_patch_ref": "97"
+            "sql_patch_ref": "97",
+            "sql_patch": "Alter field name inv_date to date",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_invoices` CHANGE `inv_date` `date` DATETIME NOT NULL DEFAULT \\'0000-00-00 00:00:00\\'"
         },
         {
-            "sql_patch_ref": "98"
+            "sql_patch_ref": "98",
+            "sql_patch": "Alter field name invoice_custom_field1 to custom_field1",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_invoices` CHANGE `invoice_custom_field1` `custom_field1` VARCHAR( 50 ) NULL DEFAULT NULL"
         },
         {
-            "sql_patch_ref": "99"
+            "sql_patch_ref": "99",
+            "sql_patch": "Alter field name invoice_custom_field2 to custom_field2",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_invoices` CHANGE `invoice_custom_field2` `custom_field2` VARCHAR( 50 ) NULL DEFAULT NULL"
         },
         {
-            "sql_patch_ref": "100"
+            "sql_patch_ref": "100",
+            "sql_patch": "Alter field name invoice_custom_field3 to custom_field3",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_invoices` CHANGE `invoice_custom_field3` `custom_field3` VARCHAR( 50 ) NULL DEFAULT NULL"
         },
         {
-            "sql_patch_ref": "101"
+            "sql_patch_ref": "101",
+            "sql_patch": "Alter field name invoice_custom_field4 to custom_field4",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_invoices` CHANGE `invoice_custom_field4` `custom_field4` VARCHAR( 50 ) NULL DEFAULT NULL"
         },
         {
-            "sql_patch_ref": "102"
+            "sql_patch_ref": "102",
+            "sql_patch": "Alter field name inv_note to note ",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_invoices` CHANGE `inv_note` `note` TEXT NULL DEFAULT NULL"
         },
         {
-            "sql_patch_ref": "103"
+            "sql_patch_ref": "103",
+            "sql_patch": "Alter field name inv_it_id to id ",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_invoice_items` CHANGE `inv_it_id` `id` INT( 10 ) NOT NULL AUTO_INCREMENT"
         },
         {
-            "sql_patch_ref": "104"
+            "sql_patch_ref": "104",
+            "sql_patch": "Alter field name inv_it_invoice_id to invoice_id ",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_invoice_items` CHANGE `inv_it_invoice_id` `invoice_id` INT( 10 ) NOT NULL DEFAULT \\'0\\'"
         },
         {
-            "sql_patch_ref": "105"
+            "sql_patch_ref": "105",
+            "sql_patch": "Alter field name inv_it_quantity to quantity ",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_invoice_items` CHANGE `inv_it_quantity` `quantity` FLOAT NOT NULL DEFAULT \\'0\\'"
         },
         {
-            "sql_patch_ref": "106"
+            "sql_patch_ref": "106",
+            "sql_patch": "Alter field name inv_it_product_id to product_id ",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_invoice_items` CHANGE `inv_it_product_id` `product_id` INT( 10 ) NULL DEFAULT \\'0\\'"
         },
         {
-            "sql_patch_ref": "107"
+            "sql_patch_ref": "107",
+            "sql_patch": "Alter field name inv_it_unit_price to unit_price ",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_invoice_items` CHANGE `inv_it_unit_price` `unit_price` DOUBLE( 25, 2 ) NULL DEFAULT \\'0.00\\'"
         },
         {
-            "sql_patch_ref": "108"
+            "sql_patch_ref": "108",
+            "sql_patch": "Alter field name inv_it_tax_id to tax_id  ",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_invoice_items` CHANGE `inv_it_tax_id` `tax_id` VARCHAR( 25 ) NOT NULL DEFAULT \\'0\\'"
         },
         {
-            "sql_patch_ref": "109"
+            "sql_patch_ref": "109",
+            "sql_patch": "Alter field name inv_it_tax to tax  ",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_invoice_items` CHANGE `inv_it_tax` `tax` DOUBLE( 25, 2 ) NULL DEFAULT \\'0.00\\'"
         },
         {
-            "sql_patch_ref": "110"
+            "sql_patch_ref": "110",
+            "sql_patch": "Alter field name inv_it_tax_amount to tax_amount  ",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_invoice_items` CHANGE `inv_it_tax_amount` `tax_amount` DOUBLE( 25, 2 ) NULL DEFAULT NULL "
         },
         {
-            "sql_patch_ref": "111"
+            "sql_patch_ref": "111",
+            "sql_patch": "Alter field name inv_it_gross_total to gross_total ",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_invoice_items` CHANGE `inv_it_gross_total` `gross_total` DOUBLE( 25, 2 ) NULL DEFAULT \\'0.00\\'"
         },
         {
-            "sql_patch_ref": "112"
+            "sql_patch_ref": "112",
+            "sql_patch": "Alter field name inv_it_description to description ",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_invoice_items` CHANGE `inv_it_description` `description` TEXT NULL DEFAULT NULL"
         },
         {
-            "sql_patch_ref": "113"
+            "sql_patch_ref": "113",
+            "sql_patch": "Alter field name inv_it_total to total",
+            "sql_release": "20070523",
+            "sql_statement": "ALTER TABLE `si_invoice_items` CHANGE `inv_it_total` `total` DOUBLE( 25, 2 ) NULL DEFAULT \\'0.00\\'"
         },
         {
-            "sql_patch_ref": "114"
+            "sql_patch_ref": "114",
+            "sql_patch": "Add logging table",
+            "sql_release": "20070523",
+            "sql_statement": "CREATE TABLE `si_log` (\\r\\n`id` BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY ,\\r\\n`timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,\\r\\n`userid` INT NOT NULL ,\\r\\n`sqlquerie` TEXT NOT NULL\\r\\n) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;\\r\\n"
         },
         {
-            "sql_patch_ref": "115"
+            "sql_patch_ref": "115",
+            "sql_patch": "Add logging system preference",
+            "sql_release": "20070523",
+            "sql_statement": "INSERT INTO `si_system_defaults` ( `id` , `name` , `value` ) VALUES (NULL , \\'logging\\', \\'0\\');"
         },
         {
-            "sql_patch_ref": "116"
+            "sql_patch_ref": "116",
+            "sql_patch": "System defaults conversion patch - set default biller",
+            "sql_release": "20070523",
+            "sql_statement": "UPDATE `si_system_defaults` SET value =  where name = \\'biller\\'"
         },
         {
-            "sql_patch_ref": "117"
+            "sql_patch_ref": "117",
+            "sql_patch": "System defaults conversion patch - set default customer",
+            "sql_release": "20070523",
+            "sql_statement": "UPDATE `si_system_defaults` SET value =  where name = \\'customer\\'"
         },
         {
-            "sql_patch_ref": "118"
+            "sql_patch_ref": "118",
+            "sql_patch": "System defaults conversion patch - set default tax",
+            "sql_release": "20070523",
+            "sql_statement": "UPDATE `si_system_defaults` SET value =  where name = \\'tax\\'"
         },
         {
-            "sql_patch_ref": "119"
+            "sql_patch_ref": "119",
+            "sql_patch": "System defaults conversion patch - set default invoice reference",
+            "sql_release": "20070523",
+            "sql_statement": "UPDATE `si_system_defaults` SET value =  where name = \\'preference\\'"
         },
         {
-            "sql_patch_ref": "120"
+            "sql_patch_ref": "120",
+            "sql_patch": "System defaults conversion patch - set default number of line items",
+            "sql_release": "20070523",
+            "sql_statement": "UPDATE `si_system_defaults` SET value =  where name = \\'line_items\\'"
         },
         {
-            "sql_patch_ref": "121"
+            "sql_patch_ref": "121",
+            "sql_patch": "System defaults conversion patch - set default invoice template",
+            "sql_release": "20070523",
+            "sql_statement": "UPDATE `si_system_defaults` SET value = \\'\\' where name = \\'template\\'"
         },
         {
-            "sql_patch_ref": "122"
+            "sql_patch_ref": "122",
+            "sql_patch": "System defaults conversion patch - set default paymemt type",
+            "sql_release": "20070523",
+            "sql_statement": "UPDATE `si_system_defaults` SET value =  where name = \\'payment_type\\'"
         },
         {
-            "sql_patch_ref": "123"
+            "sql_patch_ref": "123",
+            "sql_patch": "Add option to delete invoices into the system_defaults table",
+            "sql_release": "200709",
+            "sql_statement": "INSERT INTO `si_system_defaults` (`id`, `name`, `value`) VALUES (NULL, \\'delete\\', \\'N\\');"
         },
         {
-            "sql_patch_ref": "124"
+            "sql_patch_ref": "124",
+            "sql_patch": "Set default language in new lang system",
+            "sql_release": "200709",
+            "sql_statement": "UPDATE `si_system_defaults` SET value = \\'en-gb\\' where name =\\'language\\';"
         },
         {
-            "sql_patch_ref": "125"
+            "sql_patch_ref": "125",
+            "sql_patch": "Change log table that usernames are also possible as id",
+            "sql_release": "200709",
+            "sql_statement": "ALTER TABLE `si_log` CHANGE `userid` `userid` VARCHAR( 40 ) NOT NULL DEFAULT \\'0\\'"
         },
         {
-            "sql_patch_ref": "126"
+            "sql_patch_ref": "126",
+            "sql_patch": "Add visible attribute to the products table",
+            "sql_release": "200709",
+            "sql_statement": "ALTER TABLE  `si_products` ADD  `visible` BOOL NOT NULL DEFAULT  \\'1\\';"
         },
         {
-            "sql_patch_ref": "127"
+            "sql_patch_ref": "127",
+            "sql_patch": "Add last_id to logging table",
+            "sql_release": "200709",
+            "sql_statement": "ALTER TABLE  `si_log` ADD  `last_id` INT NULL ;"
         },
         {
-            "sql_patch_ref": "128"
+            "sql_patch_ref": "128",
+            "sql_patch": "Add user table",
+            "sql_release": "200709",
+            "sql_statement": "ALTER TABLE `si_users` ADD `user_domain` VARCHAR( 255 ) NOT NULL AFTER `user_group` ;"
         },
         {
-            "sql_patch_ref": "129"
+            "sql_patch_ref": "129",
+            "sql_patch": "Fill user table with default values",
+            "sql_release": "200709",
+            "sql_statement": "INSERT INTO `si_users` (`user_id`, `user_email`, `user_name`, `user_group`, `user_domain`, `user_password`) VALUES (NULL, \\'demo@simpleinvoices.org\\', \\'demo\\', \\'1\\', \\'1\\', MD5(\\'demo\\'))"
         },
         {
-            "sql_patch_ref": "130"
+            "sql_patch_ref": "130",
+            "sql_patch": "Create auth_challenges table",
+            "sql_release": "200709",
+            "sql_statement": "CREATE TABLE IF NOT EXISTS `si_auth_challenges` (\\r\\n`challenges_key` int(11) NOT NULL,\\r\\n`challenges_timestamp` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP);\\r\\n"
         },
         {
-            "sql_patch_ref": "131"
+            "sql_patch_ref": "131",
+            "sql_patch": "Make tax field 3 decimal places",
+            "sql_release": "200709",
+            "sql_statement": "ALTER TABLE `si_tax` CHANGE `tax_percentage` `tax_percentage` DECIMAL (10,3)  NULL"
         },
         {
-            "sql_patch_ref": "132"
+            "sql_patch_ref": "132",
+            "sql_patch": "Correct Foreign Key Tax ID Field Type in Invoice Items Table",
+            "sql_release": "20071126",
+            "sql_statement": "ALTER TABLE  `si_invoice_items` CHANGE `tax_id` `tax_id` int  DEFAULT \\'0\\' NOT NULL ;"
         },
         {
-            "sql_patch_ref": "133"
+            "sql_patch_ref": "133",
+            "sql_patch": "Correct Foreign Key Invoice ID Field Type in Ac Payments Table",
+            "sql_release": "20071126",
+            "sql_statement": "ALTER TABLE  `si_account_payments` CHANGE `ac_inv_id` `ac_inv_id` int  NOT NULL ;"
         },
         {
-            "sql_patch_ref": "134"
+            "sql_patch_ref": "134",
+            "sql_patch": "Drop non-int compatible default from si_sql_patchmanager",
+            "sql_release": "20071218",
+            "sql_statement": "SELECT 1+1;"
         },
         {
-            "sql_patch_ref": "135"
+            "sql_patch_ref": "135",
+            "sql_patch": "Change sql_patch_ref type in sql_patchmanager to int",
+            "sql_release": "20071218",
+            "sql_statement": "ALTER TABLE  `si_sql_patchmanager` change `sql_patch_ref` `sql_patch_ref` int NOT NULL ;"
         },
         {
-            "sql_patch_ref": "136"
+            "sql_patch_ref": "136",
+            "sql_patch": "Create domain mapping table",
+            "sql_release": "200712",
+            "sql_statement": "CREATE TABLE si_user_domain (\\r\\n\t    \t\t`id` int(11) NOT NULL auto_increment  PRIMARY KEY,\\r\\n            \t`name` varchar(255) UNIQUE NOT NULL\\r\\n            \t) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci"
         },
         {
-            "sql_patch_ref": "137"
+            "sql_patch_ref": "137",
+            "sql_patch": "Insert default domain",
+            "sql_release": "200712",
+            "sql_statement": "INSERT INTO si_user_domain (name) VALUES (\\'default\\');"
         },
         {
-            "sql_patch_ref": "138"
+            "sql_patch_ref": "138",
+            "sql_patch": "Add domain_id to payment_types table",
+            "sql_release": "200712",
+            "sql_statement": "ALTER TABLE `si_payment_types` ADD `domain_id` INT  NOT NULL AFTER `pt_id` ;"
         },
         {
-            "sql_patch_ref": "139"
+            "sql_patch_ref": "139",
+            "sql_patch": "Add domain_id to preferences table",
+            "sql_release": "200712",
+            "sql_statement": "ALTER TABLE `si_preferences` ADD `domain_id` INT  NOT NULL AFTER `pref_id` ;"
         },
         {
-            "sql_patch_ref": "140"
+            "sql_patch_ref": "140",
+            "sql_patch": "Add domain_id to products table",
+            "sql_release": "200712",
+            "sql_statement": "ALTER TABLE `si_products` ADD `domain_id` INT  NOT NULL AFTER `id` ;"
         },
         {
-            "sql_patch_ref": "141"
+            "sql_patch_ref": "141",
+            "sql_patch": "Add domain_id to billers table",
+            "sql_release": "200712",
+            "sql_statement": "ALTER TABLE `si_biller` ADD `domain_id` INT  NOT NULL AFTER `id` ;"
         },
         {
-            "sql_patch_ref": "142"
+            "sql_patch_ref": "142",
+            "sql_patch": "Add domain_id to invoices table",
+            "sql_release": "200712",
+            "sql_statement": "ALTER TABLE `si_invoices` ADD `domain_id` INT NOT NULL AFTER `id` ;"
         },
         {
-            "sql_patch_ref": "143"
+            "sql_patch_ref": "143",
+            "sql_patch": "Add domain_id to customers table",
+            "sql_release": "200712",
+            "sql_statement": "ALTER TABLE `si_customers` ADD `domain_id` INT NOT NULL AFTER `id` ;"
         },
         {
-            "sql_patch_ref": "144"
+            "sql_patch_ref": "144",
+            "sql_patch": "Change group field to user_role_id in users table",
+            "sql_release": "20080102",
+            "sql_statement": "ALTER TABLE `si_users` CHANGE `user_group` `user_role_id` INT  DEFAULT \\'1\\' NOT NULL;"
         },
         {
-            "sql_patch_ref": "145"
+            "sql_patch_ref": "145",
+            "sql_patch": "Change domain field to user_domain_id in users table",
+            "sql_release": "20080102",
+            "sql_statement": "ALTER TABLE `si_users` CHANGE `user_domain` `user_domain_id` INT  DEFAULT \\'1\\' NOT NULL;"
         },
         {
-            "sql_patch_ref": "146"
+            "sql_patch_ref": "146",
+            "sql_patch": "Drop old auth_challenges table",
+            "sql_release": "20080102",
+            "sql_statement": "DROP TABLE IF EXISTS `si_auth_challenges`;"
         },
         {
-            "sql_patch_ref": "147"
+            "sql_patch_ref": "147",
+            "sql_patch": "Create user_role table",
+            "sql_release": "20080102",
+            "sql_statement": "CREATE TABLE si_user_role (\\r\\n\t    `id` int(11) NOT NULL auto_increment  PRIMARY KEY,\\r\\n            `name` varchar(255) UNIQUE NOT NULL\\r\\n            ) ENGINE=MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;"
         },
         {
-            "sql_patch_ref": "148"
+            "sql_patch_ref": "148",
+            "sql_patch": "Insert default user group",
+            "sql_release": "20080102",
+            "sql_statement": "INSERT INTO si_user_role (name) VALUES (\\'administrator\\');"
         },
         {
-            "sql_patch_ref": "149"
+            "sql_patch_ref": "149",
+            "sql_patch": "Table = Account_payments Field = ac_amount : change field type and length to decimal",
+            "sql_release": "20080128",
+            "sql_statement": "ALTER TABLE `si_account_payments` CHANGE `ac_amount` `ac_amount` DECIMAL( 25, 6 ) NOT NULL;"
         },
         {
-            "sql_patch_ref": "150"
+            "sql_patch_ref": "150",
+            "sql_patch": "Table = Invoice_items Field = quantity : change field type and length to decimal",
+            "sql_release": "20080128",
+            "sql_statement": "ALTER TABLE `si_invoice_items` CHANGE `quantity` `quantity` DECIMAL( 25, 6 ) NOT NULL DEFAULT \\'0\\' "
         },
         {
-            "sql_patch_ref": "151"
+            "sql_patch_ref": "151",
+            "sql_patch": "Table = Invoice_items Field = unit_price : change field type and length to decimal",
+            "sql_release": "20080128",
+            "sql_statement": "ALTER TABLE `si_invoice_items` CHANGE `unit_price` `unit_price` DECIMAL( 25, 6 ) NULL DEFAULT \\'0.00\\' "
         },
         {
-            "sql_patch_ref": "152"
+            "sql_patch_ref": "152",
+            "sql_patch": "Table = Invoice_items Field = tax : change field type and length to decimal",
+            "sql_release": "20080128",
+            "sql_statement": "ALTER TABLE `si_invoice_items` CHANGE `tax` `tax` DECIMAL( 25, 6 ) NULL DEFAULT \\'0.00\\' "
         },
         {
-            "sql_patch_ref": "153"
+            "sql_patch_ref": "153",
+            "sql_patch": "Table = Invoice_items Field = tax_amount : change field type and length to decimal",
+            "sql_release": "20080128",
+            "sql_statement": "ALTER TABLE `si_invoice_items` CHANGE `tax_amount` `tax_amount` DECIMAL( 25, 6 ) NULL DEFAULT \\'0.00\\'"
         },
         {
-            "sql_patch_ref": "154"
+            "sql_patch_ref": "154",
+            "sql_patch": "Table = Invoice_items Field = gross_total : change field type and length to decimal",
+            "sql_release": "20080128",
+            "sql_statement": "ALTER TABLE `si_invoice_items` CHANGE `gross_total` `gross_total` DECIMAL( 25, 6 ) NULL DEFAULT \\'0.00\\'"
         },
         {
-            "sql_patch_ref": "155"
+            "sql_patch_ref": "155",
+            "sql_patch": "Table = Invoice_items Field = total : change field type and length to decimal",
+            "sql_release": "20080128",
+            "sql_statement": "ALTER TABLE `si_invoice_items` CHANGE `total` `total` DECIMAL( 25, 6 ) NULL DEFAULT \\'0.00\\' "
         },
         {
-            "sql_patch_ref": "156"
+            "sql_patch_ref": "156",
+            "sql_patch": "Table = Products Field = unit_price : change field type and length to decimal",
+            "sql_release": "20080128",
+            "sql_statement": "ALTER TABLE `si_products` CHANGE `unit_price` `unit_price` DECIMAL( 25, 6 ) NULL DEFAULT \\'0.00\\'"
         },
         {
-            "sql_patch_ref": "157"
+            "sql_patch_ref": "157",
+            "sql_patch": "Table = Tax Field = quantity : change field type and length to decimal",
+            "sql_release": "20080128",
+            "sql_statement": "ALTER TABLE `si_tax` CHANGE `tax_percentage` `tax_percentage` DECIMAL( 25, 6 ) NULL DEFAULT \\'0.00\\'"
         },
         {
-            "sql_patch_ref": "158"
+            "sql_patch_ref": "158",
+            "sql_patch": "Rename table si_account_payments to si_payment",
+            "sql_release": "20081201",
+            "sql_statement": "RENAME TABLE `si_account_payments` TO  `si_payment`;"
         },
         {
-            "sql_patch_ref": "159"
+            "sql_patch_ref": "159",
+            "sql_patch": "Add domain_id to payments table",
+            "sql_release": "20081201",
+            "sql_statement": "ALTER TABLE  `si_payment` ADD  `domain_id` INT NOT NULL ;"
         },
         {
-            "sql_patch_ref": "160"
+            "sql_patch_ref": "160",
+            "sql_patch": "Add domain_id to tax table",
+            "sql_release": "20081201",
+            "sql_statement": "ALTER TABLE  `si_tax` ADD  `domain_id` INT NOT NULL ;"
         },
         {
-            "sql_patch_ref": "161"
+            "sql_patch_ref": "161",
+            "sql_patch": "Change user table from si_users to si_user",
+            "sql_release": "20081201",
+            "sql_statement": "RENAME TABLE `si_users` TO  `si_user` ;"
         },
         {
-            "sql_patch_ref": "162"
+            "sql_patch_ref": "162",
+            "sql_patch": "Add new invoice items tax table",
+            "sql_release": "20081212",
+            "sql_statement": "CREATE TABLE `si_invoice_item_tax` (\\r\\n\t\t`id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,\\r\\n\t\t`invoice_item_id` INT( 11 ) NOT NULL ,\\r\\n\t\t`tax_id` INT( 11 ) NOT NULL ,\\r\\n\t\t`tax_type` VARCHAR( 1 ) NOT NULL ,\\r\\n\t\t`tax_rate` DECIMAL( 25, 6 ) NOT NULL ,\\r\\n\t\t`tax_amount` DECIMAL( 25, 6 ) NOT NULL\\r\\n\t\t) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;"
         },
         {
-            "sql_patch_ref": "163"
+            "sql_patch_ref": "163",
+            "sql_patch": "Convert tax info in si_invoice_items to si_invoice_item_tax",
+            "sql_release": "20081212",
+            "sql_statement": "insert into `si_invoice_item_tax` (invoice_item_id, tax_id, tax_type, tax_rate, tax_amount) select id, tax_id, \\'%\\', tax, tax_amount from `si_invoice_items`;"
         },
         {
-            "sql_patch_ref": "164"
+            "sql_patch_ref": "164",
+            "sql_patch": "Add default tax id into products table",
+            "sql_release": "20081212",
+            "sql_statement": "ALTER TABLE `si_products` ADD `default_tax_id` INT( 11 ) NULL AFTER `unit_price` ;"
         },
         {
-            "sql_patch_ref": "165"
+            "sql_patch_ref": "165",
+            "sql_patch": "Add default tax id 2 into products table",
+            "sql_release": "20081212",
+            "sql_statement": "ALTER TABLE `si_products` ADD `default_tax_id_2` INT( 11 ) NULL AFTER `default_tax_id` ;"
         },
         {
-            "sql_patch_ref": "166"
+            "sql_patch_ref": "166",
+            "sql_patch": "Add default tax into product items",
+            "sql_release": "20081212",
+            "sql_statement": "update `si_products` set default_tax_id = (select value from `si_system_defaults` where name =\\'tax\\');"
         },
         {
-            "sql_patch_ref": "167"
+            "sql_patch_ref": "167",
+            "sql_patch": "Add default number of taxes per line item into system_defaults",
+            "sql_release": "20081212",
+            "sql_statement": "insert into `si_system_defaults` values (\\'\\',\\'tax_per_line_item\\',\\'1\\')"
         },
         {
-            "sql_patch_ref": "168"
+            "sql_patch_ref": "168",
+            "sql_patch": "Add tax type",
+            "sql_release": "20081212",
+            "sql_statement": "ALTER TABLE `si_tax` ADD `type` VARCHAR( 1 ) NULL AFTER `tax_percentage` ;"
         },
         {
-            "sql_patch_ref": "169"
+            "sql_patch_ref": "169",
+            "sql_patch": "Set tax type on current taxes to %",
+            "sql_release": "20081212",
+            "sql_statement": "UPDATE `si_tax` SET `type` = \\'%\\' ;"
         },
         {
-            "sql_patch_ref": "170"
+            "sql_patch_ref": "170",
+            "sql_patch": "Set domain_id on tax table to 1",
+            "sql_release": "20081229",
+            "sql_statement": "UPDATE `si_tax` SET `domain_id` = \\'1\\' ;"
         },
         {
-            "sql_patch_ref": "171"
+            "sql_patch_ref": "171",
+            "sql_patch": "Set domain_id on payment table to 1",
+            "sql_release": "20081229",
+            "sql_statement": "UPDATE `si_payment` SET `domain_id` = \\'1\\' ;"
         },
         {
-            "sql_patch_ref": "172"
+            "sql_patch_ref": "172",
+            "sql_patch": "Set domain_id on payment_types table to 1",
+            "sql_release": "20081229",
+            "sql_statement": "UPDATE `si_payment_types` SET `domain_id` = \\'1\\' ;"
         },
         {
-            "sql_patch_ref": "173"
+            "sql_patch_ref": "173",
+            "sql_patch": "Set domain_id on preference table to 1",
+            "sql_release": "20081229",
+            "sql_statement": "UPDATE `si_preferences` SET `domain_id` = \\'1\\' ;"
         },
         {
-            "sql_patch_ref": "174"
+            "sql_patch_ref": "174",
+            "sql_patch": "Set domain_id on products table to 1",
+            "sql_release": "20081229",
+            "sql_statement": "UPDATE `si_products` SET `domain_id` = \\'1\\' ;"
         },
         {
-            "sql_patch_ref": "175"
+            "sql_patch_ref": "175",
+            "sql_patch": "Set domain_id on biller table to 1",
+            "sql_release": "20081229",
+            "sql_statement": "UPDATE `si_biller` SET `domain_id` = \\'1\\' ;"
         },
         {
-            "sql_patch_ref": "176"
+            "sql_patch_ref": "176",
+            "sql_patch": "Set domain_id on invoices table to 1",
+            "sql_release": "20081229",
+            "sql_statement": "UPDATE `si_invoices` SET `domain_id` = \\'1\\' ;"
         },
         {
-            "sql_patch_ref": "177"
+            "sql_patch_ref": "177",
+            "sql_patch": "Set domain_id on customers table to 1",
+            "sql_release": "20081229",
+            "sql_statement": "UPDATE `si_customers` SET `domain_id` = \\'1\\' ;"
         },
         {
-            "sql_patch_ref": "178"
+            "sql_patch_ref": "178",
+            "sql_patch": "Rename si_user.user_id to si_user.id",
+            "sql_release": "20081229",
+            "sql_statement": "ALTER TABLE `si_user` CHANGE `user_id` `id` int(11) ;"
         },
         {
-            "sql_patch_ref": "179"
+            "sql_patch_ref": "179",
+            "sql_patch": "Rename si_user.user_email to si_user.email",
+            "sql_release": "20081229",
+            "sql_statement": "ALTER TABLE `si_user` CHANGE `user_email` `email` VARCHAR( 255 );"
         },
         {
-            "sql_patch_ref": "180"
+            "sql_patch_ref": "180",
+            "sql_patch": "Rename si_user.user_name to si_user.name",
+            "sql_release": "20081229",
+            "sql_statement": "ALTER TABLE `si_user` CHANGE `user_name` `name` VARCHAR( 255 );"
         },
         {
-            "sql_patch_ref": "181"
+            "sql_patch_ref": "181",
+            "sql_patch": "Rename si_user.user_role_id to si_user.role_id",
+            "sql_release": "20081229",
+            "sql_statement": "ALTER TABLE `si_user` CHANGE `user_role_id` `role_id` int(11);"
         },
         {
-            "sql_patch_ref": "182"
+            "sql_patch_ref": "182",
+            "sql_patch": "Rename si_user.user_domain_id to si_user.domain_id",
+            "sql_release": "20081229",
+            "sql_statement": "ALTER TABLE `si_user` CHANGE `user_domain_id` `domain_id` int(11) ;"
         },
         {
-            "sql_patch_ref": "183"
+            "sql_patch_ref": "183",
+            "sql_patch": "Rename si_user.user_password to si_user.password",
+            "sql_release": "20081229",
+            "sql_statement": "ALTER TABLE `si_user` CHANGE `user_password` `password` VARCHAR( 255 )  ;"
         },
         {
-            "sql_patch_ref": "184"
+            "sql_patch_ref": "184",
+            "sql_patch": "Drop name column from si_user table",
+            "sql_release": "20081230",
+            "sql_statement": "ALTER TABLE `si_user` DROP `name`  ;"
         },
         {
-            "sql_patch_ref": "185"
+            "sql_patch_ref": "185",
+            "sql_patch": "Drop old defaults table",
+            "sql_release": "20081230",
+            "sql_statement": "DROP TABLE `si_defaults` ;"
         },
         {
-            "sql_patch_ref": "186"
+            "sql_patch_ref": "186",
+            "sql_patch": "Set domain_id on customers table to 1",
+            "sql_release": "20081230",
+            "sql_statement": "ALTER TABLE  `si_custom_fields` ADD  `domain_id` INT NOT NULL ;"
         },
         {
-            "sql_patch_ref": "187"
+            "sql_patch_ref": "187",
+            "sql_patch": "Set domain_id on custom_feilds table to 1",
+            "sql_release": "20081230",
+            "sql_statement": "UPDATE `si_custom_fields` SET `domain_id` = \\'1\\' ;"
         },
         {
-            "sql_patch_ref": "188"
+            "sql_patch_ref": "188",
+            "sql_patch": "Drop tax_id column from si_invoice_items table",
+            "sql_release": "20090118",
+            "sql_statement": "ALTER TABLE `si_invoice_items` DROP `tax_id`  ;"
         },
         {
-            "sql_patch_ref": "189"
+            "sql_patch_ref": "189",
+            "sql_patch": "Drop tax column from si_invoice_items table",
+            "sql_release": "20090118",
+            "sql_statement": "ALTER TABLE `si_invoice_items` DROP `tax`  ;"
         },
         {
-            "sql_patch_ref": "190"
+            "sql_patch_ref": "190",
+            "sql_patch": "Insert user role - user",
+            "sql_release": "20090215",
+            "sql_statement": "INSERT INTO si_user_role (name) VALUES (\\'user\\');"
         },
         {
-            "sql_patch_ref": "191"
+            "sql_patch_ref": "191",
+            "sql_patch": "Insert user role - viewer",
+            "sql_release": "20090215",
+            "sql_statement": "INSERT INTO si_user_role (name) VALUES (\\'viewer\\');"
         },
         {
-            "sql_patch_ref": "192"
+            "sql_patch_ref": "192",
+            "sql_patch": "Insert user role - customer",
+            "sql_release": "20090215",
+            "sql_statement": "INSERT INTO si_user_role (name) VALUES (\\'customer\\');"
         },
         {
-            "sql_patch_ref": "193"
+            "sql_patch_ref": "193",
+            "sql_patch": "Insert user role - biller",
+            "sql_release": "20090215",
+            "sql_statement": "INSERT INTO si_user_role (name) VALUES (\\'biller\\');"
         },
         {
-            "sql_patch_ref": "194"
+            "sql_patch_ref": "194",
+            "sql_patch": "User table - auto increment",
+            "sql_release": "20090215",
+            "sql_statement": "ALTER TABLE si_user CHANGE id id INT( 11 ) NOT NULL AUTO_INCREMENT;"
         },
         {
-            "sql_patch_ref": "195"
+            "sql_patch_ref": "195",
+            "sql_patch": "User table - add enabled field",
+            "sql_release": "20090215",
+            "sql_statement": "ALTER TABLE si_user ADD enabled INT( 1 ) NOT NULL ;"
         },
         {
-            "sql_patch_ref": "196"
+            "sql_patch_ref": "196",
+            "sql_patch": "User table - make all existing users enabled",
+            "sql_release": "20090217",
+            "sql_statement": "UPDATE si_user SET enabled = 1 ;"
         },
         {
-            "sql_patch_ref": "197"
+            "sql_patch_ref": "197",
+            "sql_patch": "Defaults table - add domain_id and extension_id field",
+            "sql_release": "20090321",
+            "sql_statement": "ALTER TABLE si_system_defaults\\r\\n\t\t\t\tADD `domain_id` INT( 5 ) NOT NULL DEFAULT \\'1\\',\\r\\n\t\t\t\tADD `extension_id` INT( 5 ) NOT NULL DEFAULT \\'1\\',\\r\\n\t\t\t\tDROP INDEX `name`,\\r\\n\t\t\t\tADD INDEX `name` ( `name` );"
         },
         {
-            "sql_patch_ref": "198"
+            "sql_patch_ref": "198",
+            "sql_patch": "Extension table - create table to hold extension status",
+            "sql_release": "20090322",
+            "sql_statement": "CREATE TABLE si_extensions (\\r\\n\t\t`id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,\\r\\n\t\t`domain_id` INT( 11 ) NOT NULL ,\\r\\n\t\t`name` VARCHAR( 255 ) NOT NULL ,\\r\\n\t\t`description` VARCHAR( 255 ) NOT NULL ,\\r\\n\t\t`enabled` VARCHAR( 1 ) NOT NULL DEFAULT \\'0\\') ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;"
         },
         {
-            "sql_patch_ref": "199"
+            "sql_patch_ref": "199",
+            "sql_patch": "Update extensions table",
+            "sql_release": "20090529",
+            "sql_statement": "INSERT INTO si_extensions (\\r\\n\t\t\t`id`,`domain_id`,`name`,`description`,`enabled`)\\r\\n\t\t\tVALUES (\\'1\\',\\'1\\',\\'core\\',\\'Core part of Simple Invoices - always enabled\\',\\'1\\');"
         },
         {
             "sql_patch_ref": "200",
@@ -921,271 +1515,538 @@
             "sql_statement": "UPDATE si_invoices SET type_id = 2 where type_id = 3"
         },
         {
-            "sql_patch_ref": "204"
+            "sql_patch_ref": "204",
+            "sql_patch": "Create index table to handle new invoice numbering system",
+            "sql_release": "20090818",
+            "sql_statement": "CREATE TABLE `si_index` (\\r\\n`id` INT( 11 ) NOT NULL ,\\r\\n`node` VARCHAR( 255 ) NOT NULL ,\\r\\n`sub_node` VARCHAR( 255 ) NULL ,\\r\\n`domain_id` INT( 11 ) NOT NULL\\r\\n) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;"
         },
         {
-            "sql_patch_ref": "205"
+            "sql_patch_ref": "205",
+            "sql_patch": "Add index_id to invoice table - new invoice numbering",
+            "sql_release": "20090818",
+            "sql_statement": "ALTER TABLE `si_invoices` ADD `index_id` INT( 11 ) NOT NULL AFTER `id`;"
         },
         {
-            "sql_patch_ref": "206"
+            "sql_patch_ref": "206",
+            "sql_patch": "Add status and locale to preferences",
+            "sql_release": "20090826",
+            "sql_statement": "ALTER TABLE `si_preferences` ADD `status` INT( 1 ) NOT NULL ,\\r\\nADD `locale` VARCHAR( 255 ) NULL ,\\r\\nADD `language` VARCHAR( 255 ) NULL ;"
         },
         {
-            "sql_patch_ref": "207"
+            "sql_patch_ref": "207",
+            "sql_patch": "Populate the status, locale, and language fields in preferences table",
+            "sql_release": "20090826",
+            "sql_statement": "UPDATE `si_preferences` SET status = \\'1\\', locale = \\'en_GB\\', language = \\'en_GB\\' ;"
         },
         {
-            "sql_patch_ref": "208"
+            "sql_patch_ref": "208",
+            "sql_patch": "Populate the status, locale, and language fields in preferences table",
+            "sql_release": "20090826",
+            "sql_statement": "ALTER TABLE `si_preferences` ADD `index_group` INT( 11 ) NOT NULL ;"
         },
         {
-            "sql_patch_ref": "209"
+            "sql_patch_ref": "209",
+            "sql_patch": "Populate the status, locale, and language fields in preferences table",
+            "sql_release": "20090826",
+            "sql_statement": "UPDATE `si_preferences` SET index_group = \\'1\\' ;"
         },
         {
-            "sql_patch_ref": "210"
+            "sql_patch_ref": "210",
+            "sql_patch": "Create composite primary key for invoice table",
+            "sql_release": "20090826",
+            "sql_statement": "ALTER TABLE `si_invoices` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`,`id` );"
         },
         {
-            "sql_patch_ref": "211"
+            "sql_patch_ref": "211",
+            "sql_patch": "Reset auto-increment for invoice table",
+            "sql_release": "20090826",
+            "sql_statement": "ALTER TABLE `si_invoices` AUTO_INCREMENT = 1;"
         },
         {
-            "sql_patch_ref": "212"
+            "sql_patch_ref": "212",
+            "sql_patch": "Copy invoice.id into invoice.index_id",
+            "sql_release": "20090902",
+            "sql_statement": "update `si_invoices` set index_id = id;"
         },
         {
-            "sql_patch_ref": "213"
+            "sql_patch_ref": "213",
+            "sql_patch": "Update the index table with max invoice id - if required",
+            "sql_release": "20090902",
+            "sql_statement": "select 1+1;"
         },
         {
-            "sql_patch_ref": "214"
+            "sql_patch_ref": "214",
+            "sql_patch": "Add sub_node_2 to si_index table",
+            "sql_release": "20090912",
+            "sql_statement": "ALTER TABLE  `si_index` ADD  `sub_node_2` VARCHAR( 255 ) NULL AFTER  `sub_node`"
         },
         {
-            "sql_patch_ref": "215"
+            "sql_patch_ref": "215",
+            "sql_patch": "si_invoices - add composite primary key - patch removed",
+            "sql_release": "20090912",
+            "sql_statement": "select 1+1;"
         },
         {
-            "sql_patch_ref": "216"
+            "sql_patch_ref": "216",
+            "sql_patch": "si_payment - add composite primary key",
+            "sql_release": "20090912",
+            "sql_statement": "ALTER TABLE  `si_payment` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)"
         },
         {
-            "sql_patch_ref": "217"
+            "sql_patch_ref": "217",
+            "sql_patch": "si_payment_types - add composite primary key",
+            "sql_release": "20090912",
+            "sql_statement": "ALTER TABLE  `si_payment_types` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `pt_id`)"
         },
         {
-            "sql_patch_ref": "218"
+            "sql_patch_ref": "218",
+            "sql_patch": "si_preferences - add composite primary key",
+            "sql_release": "20090912",
+            "sql_statement": "ALTER TABLE  `si_preferences` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `pref_id`)"
         },
         {
-            "sql_patch_ref": "219"
+            "sql_patch_ref": "219",
+            "sql_patch": "si_products - add composite primary key",
+            "sql_release": "20090912",
+            "sql_statement": "ALTER TABLE  `si_products` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)"
         },
         {
-            "sql_patch_ref": "220"
+            "sql_patch_ref": "220",
+            "sql_patch": "si_tax - add composite primary key",
+            "sql_release": "20090912",
+            "sql_statement": "ALTER TABLE  `si_tax` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `tax_id`)"
         },
         {
-            "sql_patch_ref": "221"
+            "sql_patch_ref": "221",
+            "sql_patch": "si_user - add composite primary key",
+            "sql_release": "20090912",
+            "sql_statement": "ALTER TABLE  `si_user` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)"
         },
         {
-            "sql_patch_ref": "222"
+            "sql_patch_ref": "222",
+            "sql_patch": "si_biller - add composite primary key",
+            "sql_release": "20100209",
+            "sql_statement": "ALTER TABLE  `si_biller` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)"
         },
         {
-            "sql_patch_ref": "223"
+            "sql_patch_ref": "223",
+            "sql_patch": "si_customers - add composite primary key",
+            "sql_release": "20100209",
+            "sql_statement": "ALTER TABLE  `si_customers` DROP PRIMARY KEY, ADD PRIMARY KEY(`domain_id`, `id`)"
         },
         {
-            "sql_patch_ref": "224"
+            "sql_patch_ref": "224",
+            "sql_patch": "Add paypal business name",
+            "sql_release": "20100209",
+            "sql_statement": "ALTER TABLE  `si_biller` ADD `paypal_business_name` VARCHAR( 255 ) NULL AFTER  `footer`"
         },
         {
-            "sql_patch_ref": "225"
+            "sql_patch_ref": "225",
+            "sql_patch": "Add paypal notify url",
+            "sql_release": "20100209",
+            "sql_statement": "ALTER TABLE  `si_biller` ADD `paypal_notify_url` VARCHAR( 255 ) NULL AFTER  `paypal_business_name`"
         },
         {
-            "sql_patch_ref": "226"
+            "sql_patch_ref": "226",
+            "sql_patch": "Define currency in preferences",
+            "sql_release": "20100209",
+            "sql_statement": "ALTER TABLE `si_preferences` ADD `currency_code` VARCHAR( 25 ) NULL ;"
         },
         {
-            "sql_patch_ref": "227"
+            "sql_patch_ref": "227",
+            "sql_patch": "Create cron table to handle recurrence",
+            "sql_release": "20100215",
+            "sql_statement": "CREATE TABLE `si_cron` (\\r\\n                `id` INT( 11 ) NOT NULL AUTO_INCREMENT ,\\r\\n                `domain_id` INT( 11 ) NOT NULL ,\\r\\n                `invoice_id` INT( 11 ) NOT NULL ,\\r\\n                `start_date` DATE NOT NULL ,\\r\\n                `end_date` VARCHAR( 10 ) NULL ,\\r\\n                `recurrence` INT( 11 ) NOT NULL ,\\r\\n                `recurrence_type` VARCHAR( 11 ) NOT NULL ,\\r\\n                `email_biller` INT( 1 ) NULL ,\\r\\n                `email_customer` INT( 1 ) NULL ,\\r\\n                PRIMARY KEY (`domain_id` ,`id`)\\r\\n            ) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;"
         },
         {
-            "sql_patch_ref": "228"
+            "sql_patch_ref": "228",
+            "sql_patch": "Create cron_log table to handle record when cron was run",
+            "sql_release": "20100216",
+            "sql_statement": "CREATE TABLE `si_cron_log` (\\r\\n            `id` INT( 11 ) NOT NULL AUTO_INCREMENT ,\\r\\n            `domain_id` INT( 11 ) NOT NULL ,\\r\\n            `run_date` DATE NOT NULL ,\\r\\n            PRIMARY KEY (  `domain_id` ,  `id` )\\r\\n            ) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;"
         },
         {
-            "sql_patch_ref": "229"
+            "sql_patch_ref": "229",
+            "sql_patch": "preferences - add online payment type",
+            "sql_release": "20100209",
+            "sql_statement": "ALTER TABLE `si_preferences` ADD `include_online_payment` VARCHAR( 255 ) NULL ;"
         },
         {
-            "sql_patch_ref": "230"
+            "sql_patch_ref": "230",
+            "sql_patch": "Add paypal notify url",
+            "sql_release": "20100223",
+            "sql_statement": "ALTER TABLE  `si_biller` ADD `paypal_return_url` VARCHAR( 255 ) NULL AFTER  `paypal_notify_url`"
         },
         {
-            "sql_patch_ref": "231"
+            "sql_patch_ref": "231",
+            "sql_patch": "Add paypal payment id into payment table",
+            "sql_release": "20100226",
+            "sql_statement": "ALTER TABLE  `si_payment` ADD `online_payment_id` VARCHAR( 255 ) NULL AFTER  `domain_id`"
         },
         {
-            "sql_patch_ref": "232"
+            "sql_patch_ref": "232",
+            "sql_patch": "Define currency display in preferences",
+            "sql_release": "20100227",
+            "sql_statement": "ALTER TABLE `si_preferences` ADD `currency_position` VARCHAR( 25 ) NULL ;"
         },
         {
-            "sql_patch_ref": "233"
+            "sql_patch_ref": "233",
+            "sql_patch": "Add system default to control invoice number by biller -- dummy patch -- this sql was removed",
+            "sql_release": "20100302",
+            "sql_statement": "select 1+1;"
         },
         {
-            "sql_patch_ref": "234"
+            "sql_patch_ref": "234",
+            "sql_patch": "Add eway customer ID",
+            "sql_release": "20100315",
+            "sql_statement": "ALTER TABLE  `si_biller` ADD `eway_customer_id` VARCHAR( 255 ) NULL AFTER `paypal_return_url`;"
         },
         {
-            "sql_patch_ref": "235"
+            "sql_patch_ref": "235",
+            "sql_patch": "Add eway card holder name",
+            "sql_release": "20100315",
+            "sql_statement": "ALTER TABLE  `si_customers` ADD `credit_card_holder_name` VARCHAR( 255 ) NULL AFTER `email`;"
         },
         {
-            "sql_patch_ref": "236"
+            "sql_patch_ref": "236",
+            "sql_patch": "Add eway card number",
+            "sql_release": "20100315",
+            "sql_statement": "ALTER TABLE  `si_customers` ADD `credit_card_number` VARCHAR( 255 ) NULL AFTER `credit_card_holder_name`;"
         },
         {
-            "sql_patch_ref": "237"
+            "sql_patch_ref": "237",
+            "sql_patch": "Add eway card expiry month",
+            "sql_release": "20100315",
+            "sql_statement": "ALTER TABLE  `si_customers` ADD `credit_card_expiry_month` VARCHAR( 02 ) NULL AFTER `credit_card_number`;"
         },
         {
-            "sql_patch_ref": "238"
+            "sql_patch_ref": "238",
+            "sql_patch": "Add eway card expirt year",
+            "sql_release": "20100315",
+            "sql_statement": "ALTER TABLE  `si_customers` ADD `credit_card_expiry_year` VARCHAR( 04 ) NULL AFTER `credit_card_expiry_month` ;"
         },
         {
-            "sql_patch_ref": "239"
+            "sql_patch_ref": "239",
+            "sql_patch": "cronlog - add invoice id",
+            "sql_release": "20100321",
+            "sql_statement": "ALTER TABLE `si_cron_log` ADD `cron_id` VARCHAR( 25 ) NULL AFTER `domain_id` ;"
         },
         {
-            "sql_patch_ref": "240"
+            "sql_patch_ref": "240",
+            "sql_patch": "si_system_defaults - add composite primary key",
+            "sql_release": "20100305",
+            "sql_statement": "\\r\\n\t\tALTER TABLE `si_system_defaults` CHANGE `id` `id` INT(11) NOT NULL;\\r\\n\t\tALTER TABLE `si_system_defaults` DROP PRIMARY KEY;\\r\\n\t\tALTER TABLE `si_system_defaults` ADD PRIMARY KEY(`domain_id`,`id` );\\r\\n\t\tALTER TABLE `si_system_defaults` DROP INDEX `name`;\\r\\n\t\tALTER TABLE `si_system_defaults` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT;"
         },
         {
-            "sql_patch_ref": "241"
+            "sql_patch_ref": "241",
+            "sql_patch": "si_system_defaults - add inventory default",
+            "sql_release": "20100409",
+            "sql_statement": "insert into `si_system_defaults` values (\\'\\',\\'inventory\\',\\'0\\',\\'1\\',\\'1\\');"
         },
         {
-            "sql_patch_ref": "242"
+            "sql_patch_ref": "242",
+            "sql_patch": "Add cost to products table",
+            "sql_release": "20100409",
+            "sql_statement": "ALTER TABLE `si_products` ADD `cost` DECIMAL( 25, 6 ) NULL DEFAULT \\'0.00\\' AFTER `default_tax_id_2`;"
         },
         {
-            "sql_patch_ref": "243"
+            "sql_patch_ref": "243",
+            "sql_patch": "Add reorder_level to products table",
+            "sql_release": "20100409",
+            "sql_statement": "ALTER TABLE `si_products` ADD `reorder_level` INT( 11 ) NULL AFTER `cost` ;"
         },
         {
-            "sql_patch_ref": "244"
+            "sql_patch_ref": "244",
+            "sql_patch": "Create inventory table",
+            "sql_release": "20100409",
+            "sql_statement": "CREATE TABLE  `si_inventory` (\\r\\n`id` INT( 11 ) NOT NULL AUTO_INCREMENT ,\\r\\n`domain_id` INT( 11 ) NOT NULL ,\\r\\n`product_id` INT( 11 ) NOT NULL ,\\r\\n`quantity` DECIMAL( 25, 6 ) NOT NULL ,\\r\\n`cost` DECIMAL( 25, 6 ) NULL ,\\r\\n`date` DATE NOT NULL ,\\r\\n`note` TEXT NULL ,\\r\\nPRIMARY KEY ( `domain_id`, `id` )\\r\\n) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;"
         },
         {
-            "sql_patch_ref": "245"
+            "sql_patch_ref": "245",
+            "sql_patch": "Preferences - make locale null field",
+            "sql_release": "20100419",
+            "sql_statement": "ALTER TABLE  `si_preferences` CHANGE  `locale`  `locale` VARCHAR( 255 ) NULL ;"
         },
         {
-            "sql_patch_ref": "246"
+            "sql_patch_ref": "246",
+            "sql_patch": "Preferences - make language a null field",
+            "sql_release": "20100419",
+            "sql_statement": "ALTER TABLE  `si_preferences` CHANGE  `language`  `language` VARCHAR( 255 ) NULL;"
         },
         {
-            "sql_patch_ref": "247"
+            "sql_patch_ref": "247",
+            "sql_patch": "Custom fields - make sure domain_id is 1",
+            "sql_release": "20100419",
+            "sql_statement": "update si_custom_fields set domain_id = \\'1\\';"
         },
         {
-            "sql_patch_ref": "248"
+            "sql_patch_ref": "248",
+            "sql_patch": "Make Simple Invoices faster - add index",
+            "sql_release": "20100419",
+            "sql_statement": "ALTER TABLE `si_invoices` ADD INDEX(`domain_id`);"
         },
         {
-            "sql_patch_ref": "249"
+            "sql_patch_ref": "249",
+            "sql_patch": "Make Simple Invoices faster - add index",
+            "sql_release": "20100419",
+            "sql_statement": "ALTER TABLE `si_invoices` ADD INDEX(`biller_id`) ;"
         },
         {
-            "sql_patch_ref": "250"
+            "sql_patch_ref": "250",
+            "sql_patch": "Make Simple Invoices faster - add index",
+            "sql_release": "20100419",
+            "sql_statement": "ALTER TABLE `si_invoices` ADD INDEX(`customer_id`);"
         },
         {
-            "sql_patch_ref": "251"
+            "sql_patch_ref": "251",
+            "sql_patch": "Make Simple Invoices faster - add index",
+            "sql_release": "20100419",
+            "sql_statement": "ALTER TABLE `si_payment` ADD INDEX(`domain_id`);"
         },
         {
-            "sql_patch_ref": "252"
+            "sql_patch_ref": "252",
+            "sql_patch": "Language - reset to en_GB - due to folder renaming",
+            "sql_release": "20100419",
+            "sql_statement": "UPDATE `si_system_defaults` SET value =\\'en_GB\\' where name=\\'language\\';"
         },
         {
-            "sql_patch_ref": "253"
+            "sql_patch_ref": "253",
+            "sql_patch": "Add PaymentsGateway API ID field",
+            "sql_release": "20110918",
+            "sql_statement": "ALTER TABLE `si_biller` ADD  `paymentsgateway_api_id` VARCHAR( 255 ) NULL AFTER `eway_customer_id`;"
         },
         {
-            "sql_patch_ref": "254"
+            "sql_patch_ref": "254",
+            "sql_patch": "Product Matrix - update line items table",
+            "sql_release": "20130313",
+            "sql_statement": "ALTER TABLE `si_invoice_items` ADD `attribute` VARCHAR( 255 ) NULL ;"
         },
         {
-            "sql_patch_ref": "255"
+            "sql_patch_ref": "255",
+            "sql_patch": "Product Matrix - update line items table",
+            "sql_release": "20130313",
+            "sql_statement": "\\r\\n        CREATE TABLE `si_products_attributes` (\\r\\n            `id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,\\r\\n            `name` VARCHAR( 255 ) NOT NULL,\\r\\n            `type_id` VARCHAR( 255 ) NOT NULL\\r\\n            ) ENGINE = MYISAM ;"
         },
         {
-            "sql_patch_ref": "256"
+            "sql_patch_ref": "256",
+            "sql_patch": "Product Matrix - update line items table",
+            "sql_release": "20130313",
+            "sql_statement": "INSERT INTO `si_products_attributes` (`id`, `name`, `type_id`) VALUES (NULL, \\'Size\\',\\'1\\'), (NULL,\\'Colour\\',\\'1\\');"
         },
         {
-            "sql_patch_ref": "257"
+            "sql_patch_ref": "257",
+            "sql_patch": "Product Matrix - update line items table",
+            "sql_release": "20130313",
+            "sql_statement": "CREATE TABLE `si_products_values` (\\r\\n`id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,\\r\\n`attribute_id` INT( 11 ) NOT NULL ,\\r\\n`value` VARCHAR( 255 ) NOT NULL\\r\\n) ENGINE = MYISAM ;"
         },
         {
-            "sql_patch_ref": "258"
+            "sql_patch_ref": "258",
+            "sql_patch": "Product Matrix - update line items table",
+            "sql_release": "20130313",
+            "sql_statement": "INSERT INTO `si_products_values` (`id`, `attribute_id`,`value`) VALUES (NULL,\\'1\\', \\'S\\'),  (NULL,\\'1\\', \\'M\\'), (NULL,\\'1\\', \\'L\\'),  (NULL,\\'2\\', \\'Red\\'),  (NULL,\\'2\\', \\'White\\');"
         },
         {
-            "sql_patch_ref": "259"
+            "sql_patch_ref": "259",
+            "sql_patch": "Product Matrix - update line items table",
+            "sql_release": "20130313",
+            "sql_statement": "SELECT 1+1;"
         },
         {
-            "sql_patch_ref": "260"
+            "sql_patch_ref": "260",
+            "sql_patch": "Product Matrix - update line items table",
+            "sql_release": "20130313",
+            "sql_statement": "SELECT 1+1;"
         },
         {
-            "sql_patch_ref": "261"
+            "sql_patch_ref": "261",
+            "sql_patch": "Product Matrix - update line items table",
+            "sql_release": "20130313",
+            "sql_statement": "SELECT 1+1;"
         },
         {
-            "sql_patch_ref": "262"
+            "sql_patch_ref": "262",
+            "sql_patch": "Add product attributes system preference",
+            "sql_release": "20130313",
+            "sql_statement": "INSERT INTO si_system_defaults (id, name ,value ,domain_id ,extension_id ) VALUES (NULL , \\'product_attributes\\', \\'0\\', \\'1\\', \\'1\\');"
         },
         {
-            "sql_patch_ref": "263"
+            "sql_patch_ref": "263",
+            "sql_patch": "Product Matrix - update line items table",
+            "sql_release": "20130313",
+            "sql_statement": "ALTER TABLE `si_products` ADD `attribute` VARCHAR( 255 ) NULL ;"
         },
         {
-            "sql_patch_ref": "264"
+            "sql_patch_ref": "264",
+            "sql_patch": "Product - use notes as default line item description",
+            "sql_release": "20130314",
+            "sql_statement": "ALTER TABLE `si_products` ADD `notes_as_description` VARCHAR( 1 ) NULL ;"
         },
         {
-            "sql_patch_ref": "265"
+            "sql_patch_ref": "265",
+            "sql_patch": "Product - expand/show line item description",
+            "sql_release": "20130314",
+            "sql_statement": "ALTER TABLE `si_products` ADD `show_description` VARCHAR( 1 ) NULL ;"
         },
         {
-            "sql_patch_ref": "266"
+            "sql_patch_ref": "266",
+            "sql_patch": "Product - expand/show line item description",
+            "sql_release": "20130322",
+            "sql_statement": "CREATE TABLE `si_products_attribute_type` (\\r\\n            `id` int(11) NOT NULL AUTO_INCREMENT,\\r\\n                `name` varchar(255) NOT NULL,\\r\\n                  PRIMARY KEY (`id`)\\r\\n              ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;"
         },
         {
-            "sql_patch_ref": "267"
+            "sql_patch_ref": "267",
+            "sql_patch": "Product Matrix - insert attribute types",
+            "sql_release": "20130325",
+            "sql_statement": "INSERT INTO `si_products_attribute_type` (`id`, `name`) VALUES (NULL,\\'list\\'),  (NULL,\\'decimal\\'), (NULL,\\'free\\');"
         },
         {
-            "sql_patch_ref": "268"
+            "sql_patch_ref": "268",
+            "sql_patch": "Product Matrix - insert attribute types",
+            "sql_release": "20130327",
+            "sql_statement": "ALTER TABLE  `si_products_attributes` ADD  `enabled` VARCHAR( 1 ) NULL DEFAULT  \\'1\\',\\r\\n        ADD  `visible` VARCHAR( 1 ) NULL DEFAULT  \\'1\\';"
         },
         {
-            "sql_patch_ref": "269"
+            "sql_patch_ref": "269",
+            "sql_patch": "Product Matrix - insert attribute types",
+            "sql_release": "20130327",
+            "sql_statement": "ALTER TABLE  `si_products_values` ADD  `enabled` VARCHAR( 1 ) NULL DEFAULT  \\'1\\';"
         },
         {
-            "sql_patch_ref": "270"
+            "sql_patch_ref": "270",
+            "sql_patch": "Make Simple Invoices faster - add index",
+            "sql_release": "20100419",
+            "sql_statement": "ALTER TABLE `si_payment` ADD INDEX(`ac_inv_id`);"
         },
         {
-            "sql_patch_ref": "271"
+            "sql_patch_ref": "271",
+            "sql_patch": "Make Simple Invoices faster - add index",
+            "sql_release": "20100419",
+            "sql_statement": "ALTER TABLE `si_payment` ADD INDEX(`ac_amount`);"
         },
         {
-            "sql_patch_ref": "272"
+            "sql_patch_ref": "272",
+            "sql_patch": "Add product attributes system preference",
+            "sql_release": "20130313",
+            "sql_statement": "INSERT INTO si_system_defaults (id, name ,value ,domain_id ,extension_id ) VALUES (NULL , \\'large_dataset\\', \\'0\\', \\'1\\', \\'1\\');"
         },
         {
-            "sql_patch_ref": "273"
+            "sql_patch_ref": "273",
+            "sql_patch": "Make Simple Invoices faster - add index",
+            "sql_release": "20130927",
+            "sql_statement": "ALTER TABLE `si_invoice_items` ADD INDEX(`invoice_id`);"
         },
         {
-            "sql_patch_ref": "274"
+            "sql_patch_ref": "274",
+            "sql_patch": "Only One Default Variable name per domain allowed - add unique index",
+            "sql_release": "20131007",
+            "sql_statement": "ALTER TABLE `si_system_defaults` ADD UNIQUE INDEX `UnqNameInDomain` (`domain_id`, `name`);"
         },
         {
-            "sql_patch_ref": "275"
+            "sql_patch_ref": "275",
+            "sql_patch": "Make EMail / Password pair unique per domain - add unique index",
+            "sql_release": "20131007",
+            "sql_statement": "ALTER TABLE `si_user` CHANGE `password` `password` VARCHAR(64) NULL, ADD UNIQUE INDEX `UnqEMailPwd` (`email`, `password`);"
         },
         {
-            "sql_patch_ref": "276"
+            "sql_patch_ref": "276",
+            "sql_patch": "Each invoice Item must belong to a specific Invoice with a specific domain_id",
+            "sql_release": "20131008",
+            "sql_statement": "ALTER TABLE `si_invoice_items` ADD COLUMN `domain_id` INT NOT NULL DEFAULT \\'1\\' AFTER `invoice_id`;"
         },
         {
-            "sql_patch_ref": "277"
+            "sql_patch_ref": "277",
+            "sql_patch": "Add Index for Quick Invoice Item Search for a domain_id",
+            "sql_release": "20131008",
+            "sql_statement": "ALTER TABLE `si_invoice_items` ADD INDEX `DomainInv` (`invoice_id`, `domain_id`);"
         },
         {
-            "sql_patch_ref": "278"
+            "sql_patch_ref": "278",
+            "sql_patch": "Each Invoice Item can have only one instance of each tax",
+            "sql_release": "20131008",
+            "sql_statement": "SELECT 1+1;"
         },
         {
-            "sql_patch_ref": "279"
+            "sql_patch_ref": "279",
+            "sql_patch": "Drop unused superceeded table si_product_matrix if present",
+            "sql_release": "20131009",
+            "sql_statement": "DROP TABLE IF EXISTS `si_products_matrix`;"
         },
         {
-            "sql_patch_ref": "280"
+            "sql_patch_ref": "280",
+            "sql_patch": "Each domain has their own extension instances",
+            "sql_release": "20131011",
+            "sql_statement": "ALTER TABLE `si_extensions` DROP PRIMARY KEY, ADD PRIMARY KEY (`id`, `domain_id`);"
         },
         {
-            "sql_patch_ref": "281"
+            "sql_patch_ref": "281",
+            "sql_patch": "Each domain has their own custom_field id sets",
+            "sql_release": "20131011",
+            "sql_statement": "ALTER TABLE `si_custom_fields` DROP PRIMARY KEY, ADD PRIMARY KEY (`cf_id`, `domain_id`);"
         },
         {
-            "sql_patch_ref": "282"
+            "sql_patch_ref": "282",
+            "sql_patch": "Each domain has their own logs",
+            "sql_release": "20131011",
+            "sql_statement": "ALTER TABLE `si_log` ADD COLUMN `domain_id` INT NOT NULL DEFAULT \\'1\\' AFTER `id`, DROP PRIMARY KEY, ADD PRIMARY KEY (`id`, `domain_id`);"
         },
         {
-            "sql_patch_ref": "283"
+            "sql_patch_ref": "283",
+            "sql_patch": "Match field type with foreign key field si_user.id",
+            "sql_release": "20131012",
+            "sql_statement": "ALTER TABLE `si_log` CHANGE `userid` `userid` INT NOT NULL DEFAULT \\'1\\';"
         },
         {
-            "sql_patch_ref": "284"
+            "sql_patch_ref": "284",
+            "sql_patch": "Make si_index sub_node and sub_node_2 fields as integer",
+            "sql_release": "20131016",
+            "sql_statement": "ALTER TABLE `si_index` CHANGE `node` `node` VARCHAR(64) NOT NULL, CHANGE `sub_node` `sub_node` INT NOT NULL, CHANGE `sub_node_2` `sub_node_2` INT NOT NULL;"
         },
         {
-            "sql_patch_ref": "285"
+            "sql_patch_ref": "285",
+            "sql_patch": "Fix compound Primary Key for si_index table",
+            "sql_release": "20131016",
+            "sql_statement": "ALTER TABLE `si_index` ADD PRIMARY KEY (`node`, `sub_node`, `sub_node_2`, `domain_id`);"
         },
         {
-            "sql_patch_ref": "286"
+            "sql_patch_ref": "286",
+            "sql_patch": "Speedup lookups from si_index table with indices in si_invoices table",
+            "sql_release": "20131016",
+            "sql_statement": "ALTER TABLE `si_invoices` ADD UNIQUE INDEX `UniqDIB` (`index_id`, `preference_id`, `biller_id`, `domain_id`), ADD INDEX `IdxDI` (`index_id`, `preference_id`, `domain_id`);"
         },
         {
-            "sql_patch_ref": "287"
+            "sql_patch_ref": "287",
+            "sql_patch": "Populate additional user roles like domain_administrator",
+            "sql_release": "20131017",
+            "sql_statement": "INSERT IGNORE INTO `si_user_role` (`name`) VALUES (\\'domain_administrator\\'), (\\'customer\\'), (\\'biller\\');"
         },
         {
-            "sql_patch_ref": "288"
+            "sql_patch_ref": "288",
+            "sql_patch": "Fully relational now - do away with the si_index table",
+            "sql_release": "20131017",
+            "sql_statement": "SELECT 1+1;"
         },
         {
-            "sql_patch_ref": "289"
+            "sql_patch_ref": "289",
+            "sql_patch": "Each cron_id can run a maximum of only once a day for each domain_id",
+            "sql_release": "20131108",
+            "sql_statement": "ALTER TABLE `si_cron_log` ADD UNIQUE INDEX `CronIdUnq` (`domain_id`, `cron_id`, `run_date`);"
         },
         {
-            "sql_patch_ref": "290"
+            "sql_patch_ref": "290",
+            "sql_patch": "Set all Flag fields to tinyint(1) and other 1 byte fields to char",
+            "sql_release": "20131109",
+            "sql_statement": "\\r\\n\t\tALTER TABLE `si_biller` CHANGE `enabled` `enabled` TINYINT(1) DEFAULT 1 NOT NULL;\\r\\n\t\tALTER TABLE `si_customers` CHANGE `enabled` `enabled` TINYINT(1) DEFAULT 1 NOT NULL;\\r\\n\t\tALTER TABLE `si_extensions` CHANGE `enabled` `enabled` TINYINT(1) DEFAULT 0 NOT NULL;\\r\\n\t\tALTER TABLE `si_payment_types` CHANGE `pt_enabled` `pt_enabled` TINYINT(1) DEFAULT 1 NOT NULL;\\r\\n\t\tALTER TABLE `si_preferences` CHANGE `pref_enabled` `pref_enabled` TINYINT(1) DEFAULT 1 NOT NULL,\\r\\n\t\t\tCHANGE `status` `status` TINYINT(1) NOT NULL;\\r\\n\t\tALTER TABLE `si_products` CHANGE `enabled` `enabled` TINYINT(1) DEFAULT 1 NOT NULL,\\r\\n\t\t\tCHANGE `notes_as_description` `notes_as_description` CHAR(1) NULL,\\r\\n\t\t\tCHANGE `show_description` `show_description` CHAR(1) NULL;\\r\\n\t\tALTER TABLE `si_tax` CHANGE `tax_enabled` `tax_enabled` TINYINT(1) DEFAULT 1 NOT NULL;\\r\\n\t\tALTER TABLE `si_cron` CHANGE `email_biller` `email_biller` TINYINT(1) DEFAULT 0 NOT NULL,\\r\\n\t\t\tCHANGE `email_customer` `email_customer` TINYINT(1) DEFAULT 0 NOT NULL;\\r\\n\t\tALTER TABLE `si_custom_fields` CHANGE `cf_display` `cf_display` TINYINT(1) DEFAULT 1 NOT NULL;\\r\\n\t\tALTER TABLE `si_invoice_item_tax` CHANGE `tax_type` `tax_type` CHAR(1) DEFAULT \\'%\\' NOT NULL;\\r\\n\t\tALTER TABLE `si_tax` CHANGE `type` `type` CHAR(1) DEFAULT \\'%\\' NOT NULL;\\r\\n\t\tALTER TABLE `si_products_attributes` CHANGE `enabled` `enabled` TINYINT(1) DEFAULT 1 NOT NULL,\\r\\n\t\t\tCHANGE `visible` `visible` TINYINT(1) DEFAULT 1 NOT NULL;\\r\\n\t\tALTER TABLE `si_products_values` CHANGE `enabled` `enabled` TINYINT(1) DEFAULT 1 NOT NULL;\\r\\n\t\tALTER TABLE `si_user` CHANGE `enabled` `enabled` TINYINT(1) DEFAULT 1 NOT NULL;\\r\\n\t"
         },
         {
-            "sql_patch_ref": "291"
+            "sql_patch_ref": "291",
+            "sql_patch": "Clipped size of zip_code and credit_card_number fields to realistic values",
+            "sql_release": "20131111",
+            "sql_statement": "\\r\\n\t\tALTER TABLE `si_customers` CHANGE `zip_code` `zip_code` VARCHAR(20) NULL,\\r\\n\t\tCHANGE `credit_card_number` `credit_card_number` VARCHAR(20) NULL;\\r\\n\t\tALTER TABLE `si_biller` CHANGE `zip_code` `zip_code` VARCHAR(20) NULL;\\r\\n\t"
         },
         {
-            "sql_patch_ref": "292"
+            "sql_patch_ref": "292",
+            "sql_patch": "Added Customer/Biller User ID column to user table",
+            "sql_release": "20140103",
+            "sql_statement": "ALTER TABLE `si_user` ADD COLUMN `user_id` INT  DEFAULT 0 NOT NULL AFTER `enabled`;"
         },
         {
             "sql_patch_ref": "293",
@@ -1427,8 +2288,8 @@
             "role_id": "1",
             "domain_id": "DOMAIN-ID",
             "password": "fe01ce2a7fbac8fafaed7c982a04e229",
-            "enabled":"1",
-            "user_id":"0"
+            "enabled": "1",
+            "user_id": "0"
         }
     ],
     "si_user_domain": [
