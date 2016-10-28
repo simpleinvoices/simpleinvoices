@@ -2867,7 +2867,7 @@ function runPatches() {
 
 	$smarty_datas=array();	
 
-	if(count($rows) == 1) {
+	if(count($rows) >= 1) {
 
 		if ($db_server == 'pgsql') {
 			// Yay!  Transactional DDL
