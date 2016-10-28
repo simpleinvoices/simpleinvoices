@@ -96,7 +96,7 @@
             "cf_display": "0",
             "domain_id": "DOMAIN-ID"
         }
-    ] ,
+    ],
     "si_extensions": [
         {
             "id": "1",
@@ -105,7 +105,7 @@
             "description": "Core part of Simple Invoices - always enabled",
             "enabled": "1"
         }
-    ] ,
+    ],
     "si_invoice_type": [
         {
             "inv_ty_id": "1",
@@ -119,21 +119,21 @@
             "inv_ty_id": "3",
             "inv_ty_description": "Consulting"
         }
-    ] ,
+    ],
     "si_payment_types": [
         {
-			"pt_id": "1",
+            "pt_id": "1",
             "domain_id": "DOMAIN-ID",
             "pt_description": "Cash",
             "pt_enabled": "1"
         },
         {
-			"pt_id": "2",
+            "pt_id": "2",
             "domain_id": "1",
             "pt_description": "Credit Card",
             "pt_enabled": "1"
         }
-    ] ,
+    ],
     "si_preferences": [
         {
             "pref_id": "1",
@@ -149,12 +149,12 @@
             "pref_inv_payment_line1_value": "H. & M. Simpson",
             "pref_inv_payment_line2_name": "Account number:",
             "pref_inv_payment_line2_value": "0123-4567-7890",
-            "status":"1",
-            "locale":"LOCALE",
-            "language":"LANGUAGE",
-            "index_group":"1",
-            "currency_code":"USD",
-            "currency_position":"left",
+            "status": "1",
+            "locale": "LOCALE",
+            "language": "LANGUAGE",
+            "index_group": "1",
+            "currency_code": "USD",
+            "currency_position": "left",
             "pref_enabled": "1"
         },
         {
@@ -171,12 +171,12 @@
             "pref_inv_payment_line1_value": "",
             "pref_inv_payment_line2_name": "",
             "pref_inv_payment_line2_value": "",
-            "status":"1",
-            "locale":"LOCALE",
-            "language":"LANGUAGE",
-            "index_group":"1",
-            "currency_code":"USD",
-            "currency_position":"left",
+            "status": "1",
+            "locale": "LOCALE",
+            "language": "LANGUAGE",
+            "index_group": "1",
+            "currency_code": "USD",
+            "currency_position": "left",
             "pref_enabled": "1"
         },
         {
@@ -193,12 +193,12 @@
             "pref_inv_payment_line1_value": "",
             "pref_inv_payment_line2_name": "",
             "pref_inv_payment_line2_value": "",
-            "status":"0",
-            "locale":"LOCALE",
-            "language":"LANGUAGE",
-            "index_group":"1",
-            "currency_code":"USD",
-            "currency_position":"left",
+            "status": "0",
+            "locale": "LOCALE",
+            "language": "LANGUAGE",
+            "index_group": "1",
+            "currency_code": "USD",
+            "currency_position": "left",
             "pref_enabled": "1"
         },
         {
@@ -215,12 +215,12 @@
             "pref_inv_payment_line1_value": "",
             "pref_inv_payment_line2_name": "",
             "pref_inv_payment_line2_value": "",
-            "status":"0",
-            "locale":"LOCALE",
-            "language":"LANGUAGE",
-            "index_group":"1",
-            "currency_code":"USD",
-            "currency_position":"left",
+            "status": "0",
+            "locale": "LOCALE",
+            "language": "LANGUAGE",
+            "index_group": "1",
+            "currency_code": "USD",
+            "currency_position": "left",
             "pref_enabled": "1"
         }
     ],
@@ -1427,8 +1427,8 @@
             "role_id": "1",
             "domain_id": "DOMAIN-ID",
             "password": "fe01ce2a7fbac8fafaed7c982a04e229",
-            "enabled":"1",
-            "user_id":"0"
+            "enabled": "1",
+            "user_id": "0"
         }
     ],
     "si_user_domain": [
