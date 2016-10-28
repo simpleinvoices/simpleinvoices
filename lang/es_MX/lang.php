@@ -84,8 +84,7 @@ $LANG['credit_card_expiry_month'] = "Mes de expiración de tarjeta de crédito "
 $LANG['credit_card_expiry_year'] = "Año de exploración de tarjeta de crédito ";//1
 $LANG['credit_card_holder_name'] = "Titular de la tarjeta de credito";//1
 $LANG['credit_card_number'] = "Número de tarjeta de credito";//1
-$LANG['credit_card_number_encrypted'] = "Nuevo numero de tarjeta de crédito
-";//1
+$LANG['credit_card_number_encrypted'] = "Nuevo numero de tarjeta de crédito";//1
 $LANG['credit_card_number_new'] = "Nuevo numero de tarjeta de crédito";//1
 $LANG['credits'] = "Creditos";//1
 $LANG['currency_code'] = "Código de moneda";//1
