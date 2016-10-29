@@ -226,12 +226,9 @@ $LANG['help_inv_pref_invoice_payment_method'] = "這是您指定你想怎樣顧�
 $LANG['help_inv_pref_invoice_wording'] = "這就是發票的措詞將是 - 也就是說，如果你輸入報價 - 於管理發票屏幕它會說報價在發票類型字段，並通過該發票是會說，而不是發票即報價。報價編號, 報價日期等。";//1
 $LANG['help_inv_pref_locale'] = "語言環境";//1
 $LANG['help_inv_pref_payment_line1_name'] = "在這裡，您可以即“帳戶名”指定的付款行1名。";//1
-$LANG['help_inv_pref_payment_line1_value'] = "在這裡，您可以指定付款行1的值
-您的銀行帳戶亦即這個名字 - 'H。 ＆M.辛普森。'";//1
-$LANG['help_inv_pref_payment_line2_name'] = "在這裡，您可以指定付款行2的值 
- 也就是'帳號'。";//1
-$LANG['help_inv_pref_payment_line2_value'] = "在這裡，您可以指定付款行2的值 
- 也就是賬號'0123-4567-89'。";//1
+$LANG['help_inv_pref_payment_line1_value'] = "在這裡，您可以指定付款行1的值您的銀行帳戶亦即這個名字 - 'H。 ＆M.辛普森。'";//1
+$LANG['help_inv_pref_payment_line2_name'] = "在這裡，您可以指定付款行2的值  也就是'帳號'。";//1
+$LANG['help_inv_pref_payment_line2_value'] = "在這裡，您可以指定付款行2的值  也就是賬號'0123-4567-89'。";//1
 $LANG['help_inv_pref_status'] = "發票可以有“草稿”或“真正的”的狀態。草稿表示這是一個類似的報價並且不包含在銷售報告。 “真正的'意味著是一個真正的發票，並包含在銷售報告。";//1
 $LANG['help_inv_pref_what_the'] = "發票偏好可讓您定義發票的字眼。你可以有很多不同的“發票偏好設定\"在簡單的發票界定為你想要的，但你只能選擇每張發票每1'發票偏好“。<br /><br />即如果你想要的發票的標題說“MOES酒館 - 發票'，而不是默認的'發票'，你可以編輯”發票標題“字段在的有關發票偏好來實現這個結果";//1
 $LANG['help_invoice_create'] = "創建發票是很容易。一旦記帳方和客戶已被添加到的系統，所有你需要做的是選擇從“發票+”菜單中的發票類型，填寫詳細信息，並點擊“保存發票”。";//1
