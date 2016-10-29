@@ -199,10 +199,8 @@ $LANG['gross_total'] = "總額";//1
 $LANG['hello'] = "你好";//1
 $LANG['help'] = "幫助";//1
 $LANG['help_age'] = "在“年齡”字段指示多久發票已未付。如果發票創建於本月1日起，在該月的21日，如果發票仍沒有被全部發票'年齡'將是21天。<br/><br/>如果發票有被付清那麼“年齡”字段將顯示為空白。";//1
-$LANG['help_backup_database'] = "為備份正常運作，網頁伺服器的用戶(希望你正在運行Apache)必須具有讀/寫權限database_backups目錄中的Simple Invoices文件夾<br/><br/>另外，如果你有多餘的偏執狂(像我一樣:) )關於數據的，我建議使用phpMyAdmin。此備份腳本應該工作正常，但如果需要“企業級”的備份可靠性phpMyAdmin會好一些<br/><br/>注：如果您在演示環境在SourceForge上使用Simple Invoices，備份不會正常運作因為這是他們服務器的設定。
-";//1
-$LANG['help_backup_database_fwrite'] = "<b>有fwrite()的錯誤？</b><br />如果您試圖備份時收到fwrite()的錯誤您簡單的發票數據庫，這意味著，網頁伺服器的用戶(希望你正在運行Apache)沒有讀/寫權限的 tmp/database_backups目錄中的Simple Invoice<br/> <br />請更改該目錄的權限，然後再次嘗試備份。要更改的Unix /Linux/ OSX 入 tmp/database_backups目錄的權限，以Simple Invoice目錄( <i> 入 / var/ www / html/ simpleinvoices</i> )，然後發出chmod命令給網絡服務器的用戶讀/寫權限( <i>chmod -Rv 777 tmp/database_backups</i> )
-";//1
+$LANG['help_backup_database'] = "為備份正常運作，網頁伺服器的用戶(希望你正在運行Apache)必須具有讀/寫權限database_backups目錄中的Simple Invoices文件夾<br/><br/>另外，如果你有多餘的偏執狂(像我一樣:) )關於數據的，我建議使用phpMyAdmin。此備份腳本應該工作正常，但如果需要“企業級”的備份可靠性phpMyAdmin會好一些<br/><br/>注：如果您在演示環境在SourceForge上使用Simple Invoices，備份不會正常運作因為這是他們服務器的設定。";//1
+$LANG['help_backup_database_fwrite'] = "<b>有fwrite()的錯誤？</b><br />如果您試圖備份時收到fwrite()的錯誤您簡單的發票數據庫，這意味著，網頁伺服器的用戶(希望你正在運行Apache)沒有讀/寫權限的 tmp/database_backups目錄中的Simple Invoice<br/> <br />請更改該目錄的權限，然後再次嘗試備份。要更改的Unix /Linux/ OSX 入 tmp/database_backups目錄的權限，以Simple Invoice目錄( <i> 入 / var/ www / html/ simpleinvoices</i> )，然後發出chmod命令給網絡服務器的用戶讀/寫權限( <i>chmod -Rv 777 tmp/database_backups</i> )";//1
 $LANG['help_blog'] = "Simple Invoices Blog";//1
 $LANG['help_community_forums'] = "社區論壇";//1
 $LANG['help_cost'] = "“費用”指的是，這款產品花費你的成本 - 這是用於庫存和利潤計算之用";//1
