@@ -245,143 +245,248 @@
         },
         {
             "sql_id": "2",
-            "sql_patch_ref": "2"
+            "sql_patch_ref": "2",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "3",
-            "sql_patch_ref": "3"
+            "sql_patch_ref": "3",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "4",
-            "sql_patch_ref": "4"
+            "sql_patch_ref": "4",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "5",
-            "sql_patch_ref": "5"
+            "sql_patch_ref": "5",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "6",
-            "sql_patch_ref": "6"
+            "sql_patch_ref": "6",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "7",
-            "sql_patch_ref": "7"
+            "sql_patch_ref": "7",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "8",
-            "sql_patch_ref": "8"
+            "sql_patch_ref": "8",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "9",
-            "sql_patch_ref": "9"
+            "sql_patch_ref": "9",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "10",
-            "sql_patch_ref": "10"
+            "sql_patch_ref": "10",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "11",
-            "sql_patch_ref": "11"
+            "sql_patch_ref": "11",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "12",
-            "sql_patch_ref": "12"
+            "sql_patch_ref": "12",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "13",
-            "sql_patch_ref": "13"
+            "sql_patch_ref": "13",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "14",
-            "sql_patch_ref": "14"
+            "sql_patch_ref": "14",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "15",
-            "sql_patch_ref": "15"
+            "sql_patch_ref": "15",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "16",
-            "sql_patch_ref": "16"
+            "sql_patch_ref": "16",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "17",
-            "sql_patch_ref": "17"
+            "sql_patch_ref": "17",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "18",
-            "sql_patch_ref": "18"
+            "sql_patch_ref": "18",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "19",
-            "sql_patch_ref": "19"
+            "sql_patch_ref": "19",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "20",
-            "sql_patch_ref": "20"
+            "sql_patch_ref": "20",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "21",
-            "sql_patch_ref": "21"
+            "sql_patch_ref": "21",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "22",
-            "sql_patch_ref": "22"
+            "sql_patch_ref": "22",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "23",
-            "sql_patch_ref": "23"
+            "sql_patch_ref": "23",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "24",
-            "sql_patch_ref": "24"
+            "sql_patch_ref": "24",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "25",
-            "sql_patch_ref": "25"
+            "sql_patch_ref": "25",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "26",
-            "sql_patch_ref": "26"
+            "sql_patch_ref": "26",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "27",
-            "sql_patch_ref": "27"
+            "sql_patch_ref": "27",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "28",
-            "sql_patch_ref": "28"
+            "sql_patch_ref": "28",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "29",
-            "sql_patch_ref": "29"
+            "sql_patch_ref": "29",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "30",
-            "sql_patch_ref": "30"
+            "sql_patch_ref": "30",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "31",
-            "sql_patch_ref": "31"
+            "sql_patch_ref": "31",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "32",
-            "sql_patch_ref": "32"
+            "sql_patch_ref": "32",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "33",
-            "sql_patch_ref": "33"
+            "sql_patch_ref": "33",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "34",
-            "sql_patch_ref": "34"
+            "sql_patch_ref": "34",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "35",
-            "sql_patch_ref": "35"
+            "sql_patch_ref": "35",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "36",
-            "sql_patch_ref": "36"
+            "sql_patch_ref": "36",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "37",
@@ -392,509 +497,998 @@
         },
         {
             "sql_id": "38",
-            "sql_patch_ref": "37"
+            "sql_patch_ref": "37",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "39",
-            "sql_patch_ref": "38"
+            "sql_patch_ref": "38",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "40",
-            "sql_patch_ref": "39"
+            "sql_patch_ref": "39",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "41",
-            "sql_patch_ref": "40"
+            "sql_patch_ref": "40",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "42",
-            "sql_patch_ref": "41"
+            "sql_patch_ref": "41",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "43",
-            "sql_patch_ref": "42"
+            "sql_patch_ref": "42",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "44",
-            "sql_patch_ref": "43"
+            "sql_patch_ref": "43",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "45",
-            "sql_patch_ref": "44"
+            "sql_patch_ref": "44",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "46",
-            "sql_patch_ref": "45"
+            "sql_patch_ref": "45",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "47",
-            "sql_patch_ref": "46"
+            "sql_patch_ref": "46",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "48",
-            "sql_patch_ref": "47"
+            "sql_patch_ref": "47",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "49",
-            "sql_patch_ref": "48"
+            "sql_patch_ref": "48",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "50",
-            "sql_patch_ref": "49"
+            "sql_patch_ref": "49",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "51",
-            "sql_patch_ref": "50"
+            "sql_patch_ref": "50",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "52",
-            "sql_patch_ref": "51"
+            "sql_patch_ref": "51",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "53",
-            "sql_patch_ref": "52"
+            "sql_patch_ref": "52",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_id": "54",
-            "sql_patch_ref": "53"
+            "sql_patch_ref": "53",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "54"
+            "sql_patch_ref": "54",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "55"
+            "sql_patch_ref": "55",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "56"
+            "sql_patch_ref": "56",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "57"
+            "sql_patch_ref": "57",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "58"
+            "sql_patch_ref": "58",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "59"
+            "sql_patch_ref": "59",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "60"
+            "sql_patch_ref": "60",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "61"
+            "sql_patch_ref": "61",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "62"
+            "sql_patch_ref": "62",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "63"
+            "sql_patch_ref": "63",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "64"
+            "sql_patch_ref": "64",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "65"
+            "sql_patch_ref": "65",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "66"
+            "sql_patch_ref": "66",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "67"
+            "sql_patch_ref": "67",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "68"
+            "sql_patch_ref": "68",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "69"
+            "sql_patch_ref": "69",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "70"
+            "sql_patch_ref": "70",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "71"
+            "sql_patch_ref": "71",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "72"
+            "sql_patch_ref": "72",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "73"
+            "sql_patch_ref": "73",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "74"
+            "sql_patch_ref": "74",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "75"
+            "sql_patch_ref": "75",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "76"
+            "sql_patch_ref": "76",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "77"
+            "sql_patch_ref": "77",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "78"
+            "sql_patch_ref": "78",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "79"
+            "sql_patch_ref": "79",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "80"
+            "sql_patch_ref": "80",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "81"
+            "sql_patch_ref": "81",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "82"
+            "sql_patch_ref": "82",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "83"
+            "sql_patch_ref": "83",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "84"
+            "sql_patch_ref": "84",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "85"
+            "sql_patch_ref": "85",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "86"
+            "sql_patch_ref": "86",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "87"
+            "sql_patch_ref": "87",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "88"
+            "sql_patch_ref": "88",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "89"
+            "sql_patch_ref": "89",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "90"
+            "sql_patch_ref": "90",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "91"
+            "sql_patch_ref": "91",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "92"
+            "sql_patch_ref": "92",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "93"
+            "sql_patch_ref": "93",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "94"
+            "sql_patch_ref": "94",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "95"
+            "sql_patch_ref": "95",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "96"
+            "sql_patch_ref": "96",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "97"
+            "sql_patch_ref": "97",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "98"
+            "sql_patch_ref": "98",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "99"
+            "sql_patch_ref": "99",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "100"
+            "sql_patch_ref": "100",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "101"
+            "sql_patch_ref": "101",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "102"
+            "sql_patch_ref": "102",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "103"
+            "sql_patch_ref": "103",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "104"
+            "sql_patch_ref": "104",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "105"
+            "sql_patch_ref": "105",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "106"
+            "sql_patch_ref": "106",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "107"
+            "sql_patch_ref": "107",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "108"
+            "sql_patch_ref": "108",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "109"
+            "sql_patch_ref": "109",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "110"
+            "sql_patch_ref": "110",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "111"
+            "sql_patch_ref": "111",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "112"
+            "sql_patch_ref": "112",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "113"
+            "sql_patch_ref": "113",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "114"
+            "sql_patch_ref": "114",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "115"
+            "sql_patch_ref": "115",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "116"
+            "sql_patch_ref": "116",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "117"
+            "sql_patch_ref": "117",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "118"
+            "sql_patch_ref": "118",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "119"
+            "sql_patch_ref": "119",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "120"
+            "sql_patch_ref": "120",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "121"
+            "sql_patch_ref": "121",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "122"
+            "sql_patch_ref": "122",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "123"
+            "sql_patch_ref": "123",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "124"
+            "sql_patch_ref": "124",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "125"
+            "sql_patch_ref": "125",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "126"
+            "sql_patch_ref": "126",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "127"
+            "sql_patch_ref": "127",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "128"
+            "sql_patch_ref": "128",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "129"
+            "sql_patch_ref": "129",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "130"
+            "sql_patch_ref": "130",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "131"
+            "sql_patch_ref": "131",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "132"
+            "sql_patch_ref": "132",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "133"
+            "sql_patch_ref": "133",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "134"
+            "sql_patch_ref": "134",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "135"
+            "sql_patch_ref": "135",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "136"
+            "sql_patch_ref": "136",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "137"
+            "sql_patch_ref": "137",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "138"
+            "sql_patch_ref": "138",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "139"
+            "sql_patch_ref": "139",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "140"
+            "sql_patch_ref": "140",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "141"
+            "sql_patch_ref": "141",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "142"
+            "sql_patch_ref": "142",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "143"
+            "sql_patch_ref": "143",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "144"
+            "sql_patch_ref": "144",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "145"
+            "sql_patch_ref": "145",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "146"
+            "sql_patch_ref": "146",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "147"
+            "sql_patch_ref": "147",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "148"
+            "sql_patch_ref": "148",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "149"
+            "sql_patch_ref": "149",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "150"
+            "sql_patch_ref": "150",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "151"
+            "sql_patch_ref": "151",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "152"
+            "sql_patch_ref": "152",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "153"
+            "sql_patch_ref": "153",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "154"
+            "sql_patch_ref": "154",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "155"
+            "sql_patch_ref": "155",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "156"
+            "sql_patch_ref": "156",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "157"
+            "sql_patch_ref": "157",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "158"
+            "sql_patch_ref": "158",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "159"
+            "sql_patch_ref": "159",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "160"
+            "sql_patch_ref": "160",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "161"
+            "sql_patch_ref": "161",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "162"
+            "sql_patch_ref": "162",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "163"
+            "sql_patch_ref": "163",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "164"
+            "sql_patch_ref": "164",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "165"
+            "sql_patch_ref": "165",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "166"
+            "sql_patch_ref": "166",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "167"
+            "sql_patch_ref": "167",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "168"
+            "sql_patch_ref": "168",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "169"
+            "sql_patch_ref": "169",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "170"
+            "sql_patch_ref": "170",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "171"
+            "sql_patch_ref": "171",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "172"
+            "sql_patch_ref": "172",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "173"
+            "sql_patch_ref": "173",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "174"
+            "sql_patch_ref": "174",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "175"
+            "sql_patch_ref": "175",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "176"
+            "sql_patch_ref": "176",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "177"
+            "sql_patch_ref": "177",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "178"
+            "sql_patch_ref": "178",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "179"
+            "sql_patch_ref": "179",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "180"
+            "sql_patch_ref": "180",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "181"
+            "sql_patch_ref": "181",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "182"
+            "sql_patch_ref": "182",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "183"
+            "sql_patch_ref": "183",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "184"
+            "sql_patch_ref": "184",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "185"
+            "sql_patch_ref": "185",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "186"
+            "sql_patch_ref": "186",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "187"
+            "sql_patch_ref": "187",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "188"
+            "sql_patch_ref": "188",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "189"
+            "sql_patch_ref": "189",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "190"
+            "sql_patch_ref": "190",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "191"
+            "sql_patch_ref": "191",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "192"
+            "sql_patch_ref": "192",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "193"
+            "sql_patch_ref": "193",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "194"
+            "sql_patch_ref": "194",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "195"
+            "sql_patch_ref": "195",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "196"
+            "sql_patch_ref": "196",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "197"
+            "sql_patch_ref": "197",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "198"
+            "sql_patch_ref": "198",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "199"
+            "sql_patch_ref": "199",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_patch_ref": "200",
@@ -921,271 +1515,538 @@
             "sql_statement": "UPDATE si_invoices SET type_id = 2 where type_id = 3"
         },
         {
-            "sql_patch_ref": "204"
+            "sql_patch_ref": "204",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "205"
+            "sql_patch_ref": "205",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "206"
+            "sql_patch_ref": "206",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "207"
+            "sql_patch_ref": "207",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "208"
+            "sql_patch_ref": "208",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "209"
+            "sql_patch_ref": "209",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "210"
+            "sql_patch_ref": "210",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "211"
+            "sql_patch_ref": "211",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "212"
+            "sql_patch_ref": "212",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "213"
+            "sql_patch_ref": "213",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "214"
+            "sql_patch_ref": "214",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "215"
+            "sql_patch_ref": "215",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "216"
+            "sql_patch_ref": "216",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "217"
+            "sql_patch_ref": "217",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "218"
+            "sql_patch_ref": "218",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "219"
+            "sql_patch_ref": "219",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "220"
+            "sql_patch_ref": "220",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "221"
+            "sql_patch_ref": "221",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "222"
+            "sql_patch_ref": "222",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "223"
+            "sql_patch_ref": "223",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "224"
+            "sql_patch_ref": "224",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "225"
+            "sql_patch_ref": "225",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "226"
+            "sql_patch_ref": "226",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "227"
+            "sql_patch_ref": "227",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "228"
+            "sql_patch_ref": "228",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "229"
+            "sql_patch_ref": "229",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "230"
+            "sql_patch_ref": "230",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "231"
+            "sql_patch_ref": "231",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "232"
+            "sql_patch_ref": "232",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "233"
+            "sql_patch_ref": "233",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "234"
+            "sql_patch_ref": "234",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "235"
+            "sql_patch_ref": "235",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "236"
+            "sql_patch_ref": "236",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "237"
+            "sql_patch_ref": "237",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "238"
+            "sql_patch_ref": "238",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "239"
+            "sql_patch_ref": "239",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "240"
+            "sql_patch_ref": "240",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "241"
+            "sql_patch_ref": "241",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "242"
+            "sql_patch_ref": "242",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "243"
+            "sql_patch_ref": "243",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "244"
+            "sql_patch_ref": "244",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "245"
+            "sql_patch_ref": "245",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "246"
+            "sql_patch_ref": "246",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "247"
+            "sql_patch_ref": "247",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "248"
+            "sql_patch_ref": "248",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "249"
+            "sql_patch_ref": "249",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "250"
+            "sql_patch_ref": "250",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "251"
+            "sql_patch_ref": "251",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "252"
+            "sql_patch_ref": "252",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "253"
+            "sql_patch_ref": "253",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "254"
+            "sql_patch_ref": "254",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "255"
+            "sql_patch_ref": "255",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "256"
+            "sql_patch_ref": "256",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "257"
+            "sql_patch_ref": "257",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "258"
+            "sql_patch_ref": "258",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "259"
+            "sql_patch_ref": "259",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "260"
+            "sql_patch_ref": "260",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "261"
+            "sql_patch_ref": "261",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "262"
+            "sql_patch_ref": "262",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "263"
+            "sql_patch_ref": "263",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "264"
+            "sql_patch_ref": "264",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "265"
+            "sql_patch_ref": "265",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "266"
+            "sql_patch_ref": "266",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "267"
+            "sql_patch_ref": "267",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "268"
+            "sql_patch_ref": "268",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "269"
+            "sql_patch_ref": "269",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "270"
+            "sql_patch_ref": "270",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "271"
+            "sql_patch_ref": "271",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "272"
+            "sql_patch_ref": "272",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "273"
+            "sql_patch_ref": "273",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "274"
+            "sql_patch_ref": "274",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "275"
+            "sql_patch_ref": "275",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "276"
+            "sql_patch_ref": "276",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "277"
+            "sql_patch_ref": "277",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "278"
+            "sql_patch_ref": "278",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "279"
+            "sql_patch_ref": "279",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "280"
+            "sql_patch_ref": "280",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "281"
+            "sql_patch_ref": "281",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "282"
+            "sql_patch_ref": "282",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "283"
+            "sql_patch_ref": "283",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "284"
+            "sql_patch_ref": "284",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "285"
+            "sql_patch_ref": "285",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "286"
+            "sql_patch_ref": "286",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "287"
+            "sql_patch_ref": "287",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "288"
+            "sql_patch_ref": "288",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "289"
+            "sql_patch_ref": "289",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "290"
+            "sql_patch_ref": "290",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "291"
+            "sql_patch_ref": "291",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
-            "sql_patch_ref": "292"
+            "sql_patch_ref": "292",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
         },
         {
             "sql_patch_ref": "293",
