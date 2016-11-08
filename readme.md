@@ -13,7 +13,7 @@ If a [non-release download](https://github.com/simpleinvoices/simpleinvoices/arc
 ## Downloads
 * Bleeding Edge Code: [SI Git Master](http://github.com/simpleinvoices/simpleinvoices/archive/master.zip) (.zip)
 * Latest Beta Release: [2013.1 beta 8](https://github.com/simpleinvoices/simpleinvoices/archive/2013.1.beta.8.tar.gz) (tar.gz)
-* Latest Stable Release: [2011.1](http://download.simpleinvoices.org/simpleinvoices/downloads/simpleinvoices.2011.1.zip) (.zip)
+* Latest Stable Release: [2011.1](https://bitbucket.org/simpleinvoices/simpleinvoices/downloads/simpleinvoices.2011.1.zip) (.zip)
 
 ## Documentation
 * Installation: http://simpleinvoices.org/install
