@@ -87,9 +87,10 @@ class Having {
         $having .= " " . $this->operator . " ";
 
         if (is_array($this->value)) {
-            $having .= $this->value[0] . " AND " . $this->value[1];
+            $having .= (empty($this->value[0]) ? "''" : $this->value[0]). " AND " .
+                       (empty($this->value[1]) ? "''" : $this->value[1]);
         } else {
-            $having .= $this->value;
+            $having .= (empty($this->value) ? "''" : $this->value);
         }
 
         $having .= ($this->right_paren ? ")" : "");

@@ -17,10 +17,12 @@ $qtype  = (isset($_POST['qtype'])    ) ? $_POST['qtype']     : null;
 // on those invoices generatred for them.
 $read_only = ($auth_session->role_name == 'customer');
 
+$large_dataset = getDefaultLargeDataset();
+
 if (!empty($having)) {
     $pdoDb->setHavings(Invoice::buildHavings($having));
 }
-$large_dataset = getDefaultLargeDataset();
+
 // @formatter:off
 if ($large_dataset == $LANG['enabled']) {
     // There are two things here that are different. First, there is no aging information
