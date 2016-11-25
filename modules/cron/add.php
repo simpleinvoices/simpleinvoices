@@ -7,7 +7,11 @@ if ($_POST['op'] =='add' AND !empty($_POST['invoice_id']))
 	$cron->domain_id=domain_id::get();
 	$cron->invoice_id=$_POST['invoice_id'];
 	$cron->start_date=$_POST['start_date'];
+	if (date_diff($_POST['end_date'],date())<=0) {
+			$cron->end_date='9999-12-31';
+		} else {
 	$cron->end_date=$_POST['end_date'];
+		}
 	$cron->recurrence=$_POST['recurrence'];
 	$cron->recurrence_type=$_POST['recurrence_type'];
 	$cron->email_biller=$_POST['email_biller'];
