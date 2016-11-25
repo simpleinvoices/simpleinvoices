@@ -151,7 +151,7 @@ class cron {
 				cron.domain_id = :domain_id
 				$where
 			GROUP BY
-			    cron.id
+			    cron.id, domain_id, invoice_id, start_date, end_date, recurrence, recurrence_type, email_biller, email_customer, index_name
 			ORDER BY
 				$sort $dir
 			$limit";
@@ -185,7 +185,7 @@ class cron {
                 INNER JOIN ".TB_PREFIX."preferences pf 
                     ON (iv.preference_id = pf.pref_id AND iv.domain_id = pf.domain_id)
             WHERE NOW() BETWEEN cron.start_date AND cron.end_date
-            GROUP BY cron.id, cron.domain_id
+            GROUP BY cron.id, cron.domain_id, invoice_id, start_date, end_date, recurrence, recurrence_type, email_biller, email_customer, index_name
         ";
 
         $sth = dbQuery($sql);
