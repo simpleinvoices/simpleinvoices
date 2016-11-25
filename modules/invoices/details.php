@@ -26,9 +26,9 @@ $invoiceItems = $invoiceobj->getInvoiceItems($master_invoice_id);
 $customers = getActiveCustomers();
 $preference = getPreference($invoice['preference_id']);
 $billers = getActiveBillers();
-//$taxes = getActiveTaxes(); <--- look into this
 $defaults = getSystemDefaults();
-$taxes = getTaxes();
+//$taxes = getTaxes();
+$taxes = getActiveTaxes();
 $preferences = getActivePreferences();
 $products = getActiveProducts();
 
