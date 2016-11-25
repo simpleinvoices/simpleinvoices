@@ -14,6 +14,10 @@
 //if browse not defined then the page will exit
 define("BROWSE","browse");
 
+// Composer autoloading
+if (file_exists('vendor/autoload.php')) {
+    $loader = include 'vendor/autoload.php';
+}
 
 /*
 * The include configs and requirements stuff section - start
