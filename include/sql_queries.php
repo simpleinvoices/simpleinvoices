@@ -1231,11 +1231,11 @@ function updateDefault($name,$value,$extension_name="core") {
 	$sql = "INSERT INTO 
 		`".TB_PREFIX."system_defaults`
 		(
-			`name`, `value`, domain_id, extension_id
+			`name`, `value`, domain_id, extension_id, new_id
 		)
 		VALUES 
 		(
-			:name, :value, :domain_id, :extension_id
+			:name, :value, :domain_id, :extension_id, (SELECT b.new_id FROM `".TB_PREFIX."system_defaults` AS b WHERE b.name = :name AND b.domain_id = :domain_id)
 		) 
 		ON DUPLICATE KEY UPDATE
 			`value` =  :value";
