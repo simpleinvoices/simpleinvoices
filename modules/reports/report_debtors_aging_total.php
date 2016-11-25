@@ -59,7 +59,7 @@ GROUP BY
   ";
   }
 
-  $results = dbQuery($sql, ':domain_id', $auth_session->domain_id);
+  $results = dbQuery($sql, ':domain_id', domain_id::get());
 
   $sum_total = 0;
   $sum_paid = 0;

@@ -17,7 +17,7 @@ GROUP BY
 	b.name, c.name
 ";
 
-	$customer_result = dbQuery($sql, ':domain_id', $auth_session->domain_id);
+	$customer_result = dbQuery($sql, ':domain_id', domain_id::get());
 
 	$billers = array();
 	$total_sales = 0;

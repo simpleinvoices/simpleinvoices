@@ -63,7 +63,7 @@ if (  $op === 'insert_preference' ) {
 		 )";
 
 	if (dbQuery($sql,
-	  ':domain_id', $auth_session->domain_id,
+	  ':domain_id', domain_id::get(),
 	  ':description', $_POST['p_description'],
 	  ':currency_sign', $_POST['p_currency_sign'],
 	  ':currency_code', $_POST['currency_code'],

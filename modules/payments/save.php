@@ -10,7 +10,7 @@ checkLogin();
 #op=pay_invoice means the user came from the process_paymen page
 
 global $db_server;
-global $auth_session;
+
 if ( isset($_POST['process_payment']) ) {
 	
 	$payment = new payment();

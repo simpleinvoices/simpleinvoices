@@ -2,28 +2,24 @@
 
 class domain_id
 {
-	public static function get($id="")
+    /**
+     * Get the current domain id for the application.
+     * 
+     * @param string $id
+     * @return string
+     */
+	public static function get($id = "")
 	{
-		global $auth_session;
-
+		$auth_session = new Zend_Session_Namespace('Zend_Auth');
+		
 		// default when session value absent - fake auth, whether auth needed or not
 		$domain_id = "1";
 		
-		if( !empty($id) ) {
-
-			//if domain_id is set in the code then use this one
-			$domain_id = $id;
-			
-		} else {
-
-			// no preset value available
-
+		if( empty($id) && isset($auth_session->domain_id) ) {
 			if (!empty($auth_session->domain_id)) {
-
 				// take session value since available 
 				// whether fake_auth or not
 				$domain_id = $auth_session->domain_id;
-
 			}
 		}
 

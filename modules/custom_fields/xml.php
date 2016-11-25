@@ -66,7 +66,7 @@ if (in_array($sort, $validFields)) {
 			LIMIT 
 				$start, $limit";
 			
-	$sth = dbQuery($sql,':domain_id', $auth_session->domain_id);
+	$sth = dbQuery($sql,':domain_id', domain_id::get());
 	$count = $sth->rowCount();
 	
 	$cfs = null;

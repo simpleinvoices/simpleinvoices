@@ -56,7 +56,7 @@ GROUP BY
 ";
   }
 
-  $customer_results = dbQuery($sql, ':domain_id', $auth_session->domain_id);
+  $customer_results = dbQuery($sql, ':domain_id', domain_id::get());
 
   $total_owed = 0;
   $customers = array();

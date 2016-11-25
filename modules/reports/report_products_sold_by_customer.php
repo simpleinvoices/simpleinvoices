@@ -14,7 +14,7 @@
       GROUP BY p.description, c.name
       ORDER BY c.name";
 
-   $product_result = dbQuery($sql, ':domain_id', $auth_session->domain_id);
+   $product_result = dbQuery($sql, ':domain_id', domain_id::get());
 
    $customers = array();
 

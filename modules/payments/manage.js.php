@@ -16,6 +16,9 @@
 
 			url: 'index.php?module=payments&view=xml&id={/literal}{$inv_id}{literal}&c_id={/literal}{$c_id}{literal}',
 			dataType: 'xml',
+			'onError': function(data) {
+				$("#manageGrid").flexAddData(null);
+			},
 			colModel : [
 				{display: '{/literal}{$LANG.actions}{literal}', name : 'actions', width : 08 * percentage_width, sortable : false, align: 'center'},
 				{display: '{/literal}{$LANG.payment}{literal}', name : 'id', width : 07 * percentage_width, sortable : true, align: 'right'},

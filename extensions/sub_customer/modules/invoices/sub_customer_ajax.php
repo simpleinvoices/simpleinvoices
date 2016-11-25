@@ -4,10 +4,9 @@
 function getSubCustomer($parent_customer_id='') {
 	global $dbh;
 	global $db_server;
-	global $auth_session;
 	
 	$sql = "SELECT * FROM ".TB_PREFIX."customers WHERE parent_customer_id = :parent_customer_id and domain_id = :domain_id ;";
-	$sth = dbQuery($sql, ':domain_id',$auth_session->domain_id, ':parent_customer_id',$parent_customer_id) or die(htmlsafe(end($dbh->errorInfo())));
+	$sth = dbQuery($sql, ':domain_id', domain_id::get(), ':parent_customer_id',$parent_customer_id) or die(htmlsafe(end($dbh->errorInfo())));
 	
     $code = $sth->fetchAll();
     

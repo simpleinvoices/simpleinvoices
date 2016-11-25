@@ -18,6 +18,9 @@
 			{
 			url: 'index.php?module=user&view=xml',
 			dataType: 'xml',
+			'onError': function(data) {
+				$("#manageGrid").flexAddData(null);
+			},
 			colModel : [
 				{display: '{/literal}{$LANG.actions}{literal}', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},
 				{display: '{/literal}{$LANG.email}{literal}', name : 'email', width : 50 * percentage_width, sortable : true, align: 'left'},
