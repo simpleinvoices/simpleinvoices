@@ -14,6 +14,10 @@
 //if browse not defined then the page will exit
 define("BROWSE","browse");
 
+/*
+ * Composer
+ */
+require 'vendor/autoload.php';
 
 /*
 * The include configs and requirements stuff section - start

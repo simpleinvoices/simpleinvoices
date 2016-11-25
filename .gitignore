@@ -4,3 +4,7 @@ custom.config.ini
 zend_cache---*
 *.log
 tmp/cache/*
+/vendor/
+/.settings/
+/.buildpath
+/.project

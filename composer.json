@@ -1,0 +1,16 @@
+{
+    "name": "simpleinvoices/simpleinvoices",
+    "description": "Making invoicing rock since '05",
+    "license": "GPLv3",
+    "keywords": [
+        "simpleinvoices",
+        "invoice"
+    ],
+    "homepage": "http://www.simpleinvoices.org/",
+    "require": {
+        "php": ">=5.2.11",
+        "zendframework/zendframework1": "~1.12",
+        "smarty/smarty": "v2.6.28",
+        "ezyang/htmlpurifier": "v4.8.0"
+    }
+}
