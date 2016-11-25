@@ -413,7 +413,7 @@ class invoice {
                 WHERE iv.domain_id = :domain_id
 					$where
                 GROUP BY
-                    iv.id
+                    iv.id, index_id, biller, customer, date, type_id, preference, status, index_name
 				$sql_having
                 ORDER BY
 					$sort $dir
