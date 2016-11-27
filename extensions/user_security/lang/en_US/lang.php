@@ -58,19 +58,19 @@ $pwd_msg = "Passwords must:
               <li>Be at least " . $defaults['password_min_length'] . "-characters long</li>
               <li>Contain no blanks</li>";
 
-if ($defaults['password_upper'] == 1) {
+if (isset($defaults['password_upper']) && $defaults['password_upper'] == 1) {
     $pwd_msg .= "<li>Contain at least one upper case character</li>";
 }
 
-if ($defaults['password_lower'] == 1) {
+if (isset($defaults['password_lower']) && $defaults['password_lower'] == 1) {
     $pwd_msg .= "<li>Contain at least one lower case character</li>";
 }
 
-if ($defaults['password_number'] == 1) {
+if (isset($defaults['password_number']) && $defaults['password_number'] == 1) {
     $pwd_msg .= "<li>Contain at least one numeric character</li>";
 }
 
-if ($defaults['password_special'] == 1) {
+if (isset($defaults['password_special']) && $defaults['password_special'] == 1) {
     $pwd_msg .= "<li>Contain at least one special character</li>";
 }
 

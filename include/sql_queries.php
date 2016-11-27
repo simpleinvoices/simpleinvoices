@@ -10,13 +10,17 @@ global $auth_session, $config, $dbInfo;
 $dbh = db_connector();
 
 // @formatter:off
-$pdoDb = new PdoDb($dbInfo);
-$pdoDb->clearAll(); // to eliminate never used warning.
+try {
+    $pdoDb = new PdoDb($dbInfo);
+    $pdoDb->clearAll(); // to eliminate never used warning.
 
-// For use by admin functions only. This avoids issues of
-// concurrent use with user app object, <i>$pdoDb</i>.
-$pdoDb_admin = new PdoDb($dbInfo);
-$pdoDb_admin->clearAll();
+    // For use by admin functions only. This avoids issues of
+    // concurrent use with user app object, <i>$pdoDb</i>.
+    $pdoDb_admin = new PdoDb($dbInfo);
+    $pdoDb_admin->clearAll();
+} catch (PdoDbException $pde) {
+    error_log($pde->getMessage());
+}
 // @formatter:on
 
 // Cannot redfine LOGGING (withour PHP PECL runkit extension) since already true in define.php
@@ -606,16 +610,15 @@ function checkTableExists($table) {
     return false;
 }
 
-function checkFieldExists($table, $field) {
-    global $dbh;
-    // @formatter:off
-    $sql = "SELECT 1 FROM information_schema.columns
-            WHERE column_name = :field AND table_name = :table LIMIT 1";
-    // @formatter:on
-
-    $sth = $dbh->prepare($sql);
-    if ($sth && $sth->execute(array(':field' => $field, ':table' => $table))) {
-        if ($sth->fetch()) return true;
+function checkFieldExists($table_in, $column) {
+    global $pdoDb_admin;
+    try {
+        $pdoDb_admin->setNoErrorLog();
+        $table = PdoDb::addTbPrefix($table_in);
+        $result = $pdoDb_admin->query("SELECT 1 FROM information_schema.columns
+                                       WHERE column_name = '$column' AND table_name = '$table' LIMIT 1");
+        return !empty($result);
+    } catch (PdoDbException $pde) {
     }
     return false;
 }
@@ -704,7 +707,6 @@ function getNumberOfDoneSQLPatches() {
  *        <b>false</b> sets <i>DestinationFile</i> for the output destination.
  */
 function pdfThis($html_to_pdf, $pdfname, $download) {
-     // set_include_path("../../../../library/pdf/");
     require_once ('./library/pdf/config.inc.php');
     require_once ('./library/pdf/pipeline.factory.class.php');
     require_once ('./library/pdf/pipeline.class.php');
@@ -718,10 +720,8 @@ function pdfThis($html_to_pdf, $pdfname, $download) {
             global $config;
 
             $destination = $download ? "DestinationDownload" : "DestinationFile";
-
             $pipeline = PipelineFactory::create_default_pipeline("", ""); // Attempt to auto-detect encoding
             $pipeline->fetchers[] = new MyFetcherLocalFile($html_to_pdf); // Override HTML source
-
             $baseurl = "";
             $media = Media::predefined($config->export->pdf->papersize);
             $media->set_landscape(false);

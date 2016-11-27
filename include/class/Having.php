@@ -28,7 +28,7 @@ class Having {
      * @param boolean $right_paren (Optional) <b>true</b> if a right parenthesis should be placed after the
      *        <i>$value</i> parameter; else <b>false</b> (default) if no right parenthesis is to be added.
      */
-    public function __construct($left_paren=false, $field, $operator, $value, $connector="", $right_paren=false) {
+    public function __construct($left_paren=false, $field, $operator, $value, $right_paren=false, $connector="") {
         $this->left_paren = $left_paren;
         $this->right_paren = $right_paren;
 
@@ -87,10 +87,10 @@ class Having {
         $having .= " " . $this->operator . " ";
 
         if (is_array($this->value)) {
-            $having .= (empty($this->value[0]) ? "''" : $this->value[0]). " AND " .
-                       (empty($this->value[1]) ? "''" : $this->value[1]);
+            $having .= (empty($this->value[0]) ? "''" : "'" . $this->value[0] . "'") . " AND " .
+                       (empty($this->value[1]) ? "''" : "'" . $this->value[1] . "'");
         } else {
-            $having .= (empty($this->value) ? "''" : $this->value);
+            $having .= (empty($this->value) ? "''" : "'" . $this->value . "'");
         }
 
         $having .= ($this->right_paren ? ")" : "");

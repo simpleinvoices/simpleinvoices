@@ -411,7 +411,7 @@ class Invoice {
         $havings = new Havings();
         switch ($option) {
             case "date_between":
-                $havings->add("date", "BETWEEN", $parms);
+                $havings->add(true, "date", "BETWEEN", $parms, true);
                 break;
             case "money_owed":
                 $havings->addSimple("owing", ">", 0);

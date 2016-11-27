@@ -739,22 +739,24 @@ patchmaker('127', $patchlines, $si_patches);
 $u = (checkTableExists(TB_PREFIX.'users'));
 $ud = (checkFieldExists(TB_PREFIX.'users','user_domain'));
 $patchlines['name' ] = "Add user table";
-$patchlines['patch'] =
-($u ? ($ud ? "SELECT * FROM ".TB_PREFIX."users;" :
-       "ALTER TABLE `".TB_PREFIX."users` ADD `user_domain` VARCHAR( 255 ) NOT NULL AFTER `user_group`;") :
- "CREATE TABLE IF NOT EXISTS `".TB_PREFIX."users` (
-   `user_id` int(11) NOT NULL auto_increment,
-   `user_email` varchar(255) NOT NULL,
-   `user_name` varchar(255) NOT NULL,
-   `user_group` varchar(255) NOT NULL,
-   `user_domain` varchar(255) NOT NULL,
-   `user_password` varchar(255) NOT NULL,
-   PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;");
+// @formatter:off
+$patchlines['patch'] = ($u ? ($ud ? "SELECT * FROM ".TB_PREFIX."users;" :
+                                        "ALTER TABLE `".TB_PREFIX."users` ADD `user_domain` VARCHAR( 255 ) NOT NULL AFTER `user_group`;") :
+                                    "CREATE TABLE IF NOT EXISTS `".TB_PREFIX."users` (`user_id` int(11) NOT NULL auto_increment,
+                                                                                      `user_email` varchar(255) NOT NULL,
+                                                                                      `user_name` varchar(255) NOT NULL,
+                                                                                      `user_group` varchar(255) NOT NULL,
+                                                                                      `user_domain` varchar(255) NOT NULL,
+                                                                                      `user_password` varchar(255) NOT NULL,
+                                                                                      PRIMARY KEY(`user_id`))
+                                                                                      ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;");
+// @formatter:on
 $patchlines['date' ] = "200709";
 patchmaker('128', $patchlines, $si_patches);
 
 $patchlines['name' ] = "Fill user table with default values";
-$patchlines['patch'] = "INSERT INTO `".TB_PREFIX."users` (`user_id`, `user_email`, `user_name`, `user_group`, `user_domain`, `user_password`) VALUES (NULL, 'demo@simpleinvoices.org', 'demo', '1', '1', MD5('demo'))";
+$patchlines['patch'] = "INSERT INTO `".TB_PREFIX."users` (`user_id`, `user_email`, `user_name`, `user_group`, `user_domain`, `user_password`)
+                                                  VALUES (NULL, 'demo@simpleinvoices.org', 'demo', '1', '1', MD5('demo'))";
 $patchlines['date' ] = "200709";
 patchmaker('129', $patchlines, $si_patches);
 

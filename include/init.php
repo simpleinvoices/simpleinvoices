@@ -29,8 +29,8 @@ if ($auth_session) {} // Show variable as used.
 require_once ("smarty/Smarty.class.php");
 require_once ("library/paypal/paypal.class.php");
 
-require_once ('./library/HTMLPurifier/HTMLPurifier.standalone.php');
-include_once ('./include/functions.php');
+require_once ('library/HTMLPurifier/HTMLPurifier.standalone.php');
+include_once ('include/functions.php');
 
 if (!is_writable('./tmp')) {
     simpleInvoicesError('notWriteable', 'directory', './tmp');
@@ -58,12 +58,25 @@ if (!is_writable('./tmp/cache')) {
     simpleInvoicesError('notWriteable', 'file', './tmp/cache');
 }
 
-include_once ('./config/define.php');
+include_once ('config/define.php');
 global $environment;
 
 // added 'true' to allow modifications from db
 $config = new Zend_Config_Ini("./" . CONFIG_FILE_PATH, $environment, true);
-$dbInfo = new DbInfo(CONFIG_FILE_PATH, "production");
+try {
+    $dbInfo = new DbInfo(CONFIG_FILE_PATH, "production");
+} catch (PdoDbException $pde) {
+    if (preg_match('/.*{dbname|password|username}/', $pde->getMessage())) {
+        echo "<h1 style='font-weigth:bold;color:red;'>";
+        echo "  Update database information in config/config.php";
+        echo "</h1>";
+    } else {
+        echo "<h1 style='font-weigth:bold;color:red;'>";
+        echo "  " . $pde->getMessage() . " (Error code: {$pde->getCode})";
+        echo "</h1>";
+    }
+    exit();
+}
 
 // set up app with relevant php setting
 date_default_timezone_set($config->phpSettings->date->timezone);
@@ -147,14 +160,14 @@ $path = pathinfo($_SERVER['REQUEST_URI']);
 $install_path = htmlsafe($path['dirname']);
 if ($install_path) {} // Show variable as used.
 
-include_once ("./include/class/db.php");
+include_once ("include/class/db.php");
 // With the database built, a connection should be able to be made
 // if the configuration user, password, etc. are set correctly.
 $db = ($databaseBuilt ? db::getInstance() : NULL);
 if ($db) {} // Show variable as used.
 
-include_once ("./include/class/index.php");
-include_once ("./include/sql_queries.php");
+include_once ("include/class/Index.php");
+include_once ("include/sql_queries.php");
 
 $patchCount = 0;
 if ($databaseBuilt) {
@@ -194,20 +207,20 @@ loadSiExtentions($ext_names);
 $defaults = getSystemDefaults();
 $smarty->assign("defaults", $defaults);
 
-include_once ('./include/language.php');
+include_once ('include/language.php');
 
-include ('./include/include_auth.php');
-include_once ('./include/manageCustomFields.php');
-include_once ("./include/validation.php");
+include ('include/include_auth.php');
+include_once ('include/manageCustomFields.php');
+include_once ("include/validation.php");
 if ($databaseBuilt && $databasePopulated && $config->authentication->enabled == ENABLED) {
-    include_once ("./include/acl.php");
+    include_once ("include/acl.php");
     // if authentication enabled then do acl check etc..
     foreach ($ext_names as $ext_name) {
-        if (file_exists("./extensions/$ext_name/include/acl.php")) {
-            require_once ("./extensions/$ext_name/include/acl.php");
+        if (file_exists("extensions/$ext_name/include/acl.php")) {
+            require_once ("extensions/$ext_name/include/acl.php");
         }
     }
-    include_once ("./include/check_permission.php");
+    include_once ("include/check_permission.php");
 }
 
 /* *************************************************************
@@ -245,5 +258,5 @@ if ($siUrl) {} // Show variable as used.
  * appended to the config array, instead of replacing it
  * (NOTE: NOT TESTED!)
  * *************************************************************/
-include_once ("./include/BackupDb.php");
+include_once ("include/BackupDb.php");
 

@@ -38,6 +38,7 @@ class PdoDb {
     private $joinStmts;
     private $keyPairs;
     private $limit;
+    private $noErrorLog;
     private $orderBy;
     private $pdoDb;
     private $pdoDb2;
@@ -121,6 +122,7 @@ class PdoDb {
         $this->joinStmts        = null;
         $this->keyPairs         = null;
         $this->limit            = 0;
+        $this->noErrorLog       = false;
         $this->orderBy          = null;
         $this->selectAll        = false;
         $this->selectList       = null;
@@ -822,6 +824,15 @@ class PdoDb {
     }
 
     /**
+     * Set no output to error_log condition for errors that are thrown.
+     * Set only for the current request. If debug option is set, the error
+     * will be reported in the error_log.
+     */
+    public function setNoErrorLog() {
+        $this->noErrorLog = true;
+    }
+
+    /**
      * Dynamically builds and executes a PDO request for a specified table.
      * @param string $request Type of request. Valid settings are: <b>SELECT</b>,
      *        <b>INSERT</b>, <b>UPDATE</b> and <b>DELETE</b>. Note that letter
@@ -1053,7 +1064,9 @@ class PdoDb {
     public function query($sql, $valuePairs = null) {
         $this->debugger($sql);
         if (!($sth = $this->pdoDb->prepare($sql))) {
-            error_log("PdoDb - query(): Prepare error." . print_r($sth->errorInfo(), true));
+            if ($this->debug || !$this->noErrorLog) {
+                error_log("PdoDb - query(): Prepare error." . print_r($sth->errorInfo(), true));
+            }
             $this->clearAll();
             throw new PdoDbException('PdoDb query(): Prepare error.');
         }
@@ -1075,8 +1088,10 @@ class PdoDb {
             $this->debug = true;
             $this->debugger($sql);
             $this->debug = $tmp;
-            error_log("PdoDb - query(): Execute error." . print_r($sth->errorInfo(), true));
-            error_log("PdoDb - backtrace: " . print_r(debug_backtrace(),true));
+            if ($this->debug || !$this->noErrorLog) {
+                error_log("PdoDb - query(): Execute error." . print_r($sth->errorInfo(), true));
+                error_log("PdoDb - backtrace: " . print_r(debug_backtrace(),true));
+            }
             $this->clearAll();
             throw new PdoDbException('PdoDb - query(): Execute error. See error_log.');
         }

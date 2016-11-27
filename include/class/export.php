@@ -2,6 +2,7 @@
 class export {
     public $biller_id;
     public $customer_id;
+    public $do_not_filter_by_date;
     public $domain_id;
     public $end_date;
     public $file_name;
@@ -9,13 +10,27 @@ class export {
     public $format;
     public $id;
     public $module;
+    public $show_only_unpaid;
     public $start_date;
 
     private $download;
 
     public function __construct() {
-        $this->domain_id = domain_id::get();
-        $this->download = false;
+        // @formatter:off
+        $this->domain_id             = domain_id::get();
+        $this->download              = false;
+        $this->biller_id             = 0;
+        $this->customer_id           = 0;
+        $this->do_not_filter_by_date = "no";
+        $this->end_date              = "";
+        $this->file_name             = "";
+        $this->file_type             = "";
+        $this->format                = "";
+        $this->id                    = 0;
+        $this->module                = "";
+        $this->show_only_unpaid      = "no";
+        $this->start_date            = "";
+        // @formatter:on
     }
 
     public function setDownload($download) {
@@ -73,31 +88,30 @@ class export {
     }
 
     public function getData() {
-        global $smarty, $pdoDb, $siUrl, $show_only_unpaid;
+        global $smarty, $pdoDb, $siUrl;
 
         // @formatter:off
         switch ($this->module) {
             case "statement":
-                $havings = new Havings();
-                if ($this->filter_by_date == "yes" && isset($this->start_date) && isset($this->end_date)) {
-                    $havings->addHavings(Invoice::buildHavings("date_between", array($this->start_date, $this->end_date)));
+                if ($this->do_not_filter_by_date != "yes" && isset($this->start_date) && isset($this->end_date)) {
+                    $pdoDb->setHavings(Invoice::buildHavings("date_between", array($this->start_date, $this->end_date)));
                 }
-
+                
                 if ($show_only_unpaid == "yes") {
-                    $havings->addHavings(Invoice::buildHavings("money_owed"));
+                    $pdoDb->setHavings(Invoice::buildHavings("money_owed"));
                 }
-                $pdoDb->setHavings($havings);
 
-                $pdoDb->addSimpleWhere("b.id", $this->biller, "AND");
-                $pdoDb->addSimpleWhere("c.id", $this->customer_id, "AND");
+                if (!empty($this->biller_id)  ) $pdoDb->addSimpleWhere("biller_id"  , $this->biller_id  , "AND");
+                if (!empty($this->customer_id)) $pdoDb->addSimpleWhere("customer_id", $this->customer_id, "AND");
 
-                $invoices  = Invoice::select_all("count", "", "", null, "", "", "");
-
-                $statement   = array("total" => 0, "owing" => 0, "paid" => 0);
-                foreach ($invoices as $row) {
-                    $statement['total'] += $row['invoice_total'];
-                    $statement['owing'] += $row['owing'];
-                    $statement['paid']  += $row['INV_PAID'];
+                $invoices  = Invoice::select_all("", "date", "D");
+                $statement = array("total" => 0, "owing" => 0, "paid" => 0);
+                foreach ( $invoices as $row ) {
+                    if ($row ['status'] > 0) {
+                        $statement ['total'] += $row ['invoice_total'];
+                        $statement ['owing'] += $row ['owing'];
+                        $statement ['paid']  += $row ['INV_PAID'];
+                    }
                 }
 
                 $templatePath     = "./templates/default/statement/index.tpl";
@@ -110,17 +124,17 @@ class export {
                                     $this->start_date . "_" .
                                     $this->end_date;
 
-                $smarty->assign('biller_id'       , $billers['id']);
-                $smarty->assign('biller_details'  , $biller_details);
-                $smarty->assign('billers'         , $billers);
-                $smarty->assign('customer_id'     , $this->customer_id);
-                $smarty->assign('customer_details', $customer_details);
-                $smarty->assign('show_only_unpaid', $show_only_unpaid);
-                $smarty->assign('filter_by_date'  , $this->filter_by_date);
-                $smarty->assign('invoices'        , $invoices);
-                $smarty->assign('start_date'      , $this->start_date);
-                $smarty->assign('end_date'        , $this->end_date);
-                $smarty->assign('statement'       , $statement);
+                $smarty->assign('biller_id'            , $this->biller_id);
+                $smarty->assign('biller_details'       , $biller_details);
+                $smarty->assign('billers'              , $billers);
+                $smarty->assign('customer_id'          , $this->customer_id);
+                $smarty->assign('customer_details'     , $customer_details);
+                $smarty->assign('show_only_unpaid'     , $this->show_only_unpaid);
+                $smarty->assign('do_not_filter_by_date', $this->do_not_filter_by_date);
+                $smarty->assign('invoices'             , $invoices);
+                $smarty->assign('start_date'           , $this->start_date);
+                $smarty->assign('end_date'             , $this->end_date);
+                $smarty->assign('statement'            , $statement);
 
                 $data = $smarty->fetch("." . $templatePath);
                 break;

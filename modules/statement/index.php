@@ -15,7 +15,7 @@
  * Website:
  * http://www.simpleinvoices.org
  */
-global $smarty, $menu;
+global $menu, $pdoDb, $smarty;
 
 checkLogin ();
 
@@ -32,36 +32,26 @@ $end_date    = (isset($_POST['end_date']   ) ? $_POST['end_date']    : lastOfMon
 $biller_id   = (isset($_POST['biller_id']  ) ? $_POST['biller_id']   : "");
 $customer_id = (isset($_POST['customer_id']) ? $_POST['customer_id'] : "");
 
-$show_only_unpaid = "no";
-$filter_by_date   = "no";
-$invoices         = array();
-$statement        = array ("total" => 0, "owing" => 0, "paid" => 0);
-
+$show_only_unpaid      = "no";
+$do_not_filter_by_date = "no";
+$invoices              = array();
+$statement             = array ("total" => 0, "owing" => 0, "paid" => 0);
 
 if (isset($_POST['submit'])) {
-    $values = array("start_date" => $start_date,
-                    "end_date"   => $end_date,
-                    "biller"     => $biller_id,
-                    "customer"   => $customer_id,
-                    "having"     => "open");
-    if (isset($_POST['filter_by_date'])) {
-        $values["having"] = "date_between";
-        $filter_by_date   = "yes";
-        $having_and_count = 1;
+    $do_not_filter_by_date = (isset($_POST['do_not_filter_by_date']) ? "yes" : "no");
+    if ($do_not_filter_by_date != "yes") {
+        $pdoDb->setHavings(Invoice::buildHavings("date_between", array($start_date, $end_date)));
     }
 
-    if (isset($_POST['show_only_unpaid'])) {
-        if ($having_and_count == 1) {
-            $values["having_and"] = "money_owed";
-        } else {
-            $values["having"] = "money_owed";
-        }
-        $show_only_unpaid = "yes";
+    $show_only_unpaid = (isset($_POST['show_only_unpaid']) ? "yes" : "no");
+    if ($show_only_unpaid == "yes") {
+        $pdoDb->setHavings(Invoice::buildHavings("money_owed"));
     }
 
-    $values["sort"] = "date";
-    $invoice_all    = Invoice::select_all($values);
-    $invoices       = $invoice_all->fetchAll(PDO::FETCH_ASSOC);
+    if (!empty($biller_id)  ) $pdoDb->addSimpleWhere("biller_id"  , $biller_id  , "AND");
+    if (!empty($customer_id)) $pdoDb->addSimpleWhere("customer_id", $customer_id, "AND");
+
+    $invoices = Invoice::select_all("", "date", "D");
     foreach ( $invoices as $row ) {
         if ($row ['status'] > 0) {
             $statement ['total'] += $row ['invoice_total'];
@@ -82,8 +72,8 @@ $smarty->assign('biller_details'  , $biller_details);
 $smarty->assign('customer_id'     , $customer_id);
 $smarty->assign('customer_details', $customer_details);
 
-$smarty->assign('show_only_unpaid', $show_only_unpaid);
-$smarty->assign('filter_by_date'  , $filter_by_date);
+$smarty->assign('show_only_unpaid'     , $show_only_unpaid);
+$smarty->assign('do_not_filter_by_date', $do_not_filter_by_date);
 
 $smarty->assign('billers'   , $billers);
 $smarty->assign('customers' , $customers);

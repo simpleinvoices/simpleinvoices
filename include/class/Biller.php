@@ -80,7 +80,7 @@ class Biller {
         if (empty($_POST['custom_field3'])) $_POST['custom_field3'] = "";
         if (empty($_POST['custom_field4'])) $_POST['custom_field4'] = "";
 
-        $_POST['notes'] = trim($_POST['note']);
+        $_POST['notes'] = (empty($_POST['note']) ? "" : trim($_POST['note']));
     
         $pdoDb->setExcludedFields("id");
         // @formatter:off
@@ -112,7 +112,7 @@ class Biller {
       */
       // @formatter:on
       $id = $pdoDb->request("INSERT", "biller");
-      return is_integer($id);
+      return !empty($id);
     }
 
     /**

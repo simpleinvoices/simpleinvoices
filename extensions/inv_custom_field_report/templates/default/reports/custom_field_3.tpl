@@ -1,7 +1,7 @@
 <center>
   <h2>Sales Report</h2>
 </center>
-{if $menu != false}
+{if $menu}
 <div class="welcome">
   <form name="frmpost" action="index.php?module=reports&amp;view=custom_field_3" method="post">
     <table class="center">
@@ -63,7 +63,7 @@
 <br />
 {/if}
 {if $smarty.post.submit != null OR $view == export}
-  {if $menu == false}
+  {if !$menu}
   <hr />
   <br />
   {/if}

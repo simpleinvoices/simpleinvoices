@@ -32,13 +32,6 @@ $help_image_path = "./images/common/";
 
 // Note: include/functions.php and include/sql_queries.php loaded by this include.
 require_once "./include/init.php";
-/* Keep for potential future debug use
-error_log("index.php af init_pre.php - module[" . (empty($module) ? "" : $module) .
-        "] view[" . (empty($view) ? "" : $view) .
-        "] action[" . (empty($action) ? "" : $action) .
-        "] id[" . (empty($_GET['id']) ? "" : $_GET['id']) .
-        "]");
- */
 global $smarty,
        $smarty_output,
        $menu,
@@ -91,7 +84,7 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
     }
 
     // See if we need to verify patches have been loaded.
-    if ($skip_db_patches == false) {
+    if (!$skip_db_patches) {
         // If default user or an active session exists, proceed with check.
         if ($config->authentication->enabled == 0 || isset($auth_session->id)) {
             include_once ('./include/sql_patches.php');
@@ -121,6 +114,13 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
         }
     }
 }
+/* Keep for potential future debug use
+error_log("index.php module["   . (empty($module) ? "" : $module) .
+          "] view[" . (empty($view) ? "" : $view) .
+          "] action[" . (empty($action) ? "" : $action) .
+          "] id[" . (empty($_GET['id']) ? "" : $_GET['id']) .
+          "]");
+*/
 
 // Don't include the header if requested file is an invoice template.
 // For print preview etc.. header is not needed
@@ -280,7 +280,7 @@ if ($module != 'auth') {
 // **********************************************************
 // Main: Custom menu - START
 // **********************************************************
-if ($menu == "true") {
+if ($menu) {
     // Check for menu.tpl files for extensions. The content of these files is:
     //
     // <!-- BEFORE:tax_rates -->
@@ -309,7 +309,7 @@ if ($menu == "true") {
     //
     // <!~- SECTION:tax_rates -->
     //
-    // If no matching section is found, the file will NOT be instered.
+    // If no matching section is found, the file will NOT be inserted.
     $my_path = getCustomPath('menu');
     $menutpl = $smarty->fetch($my_path);
     $lines = array();
@@ -419,6 +419,7 @@ if ($extensionTemplates == 0) {
         $extensionTemplates++;
     }
 }
+
 // @formatter:off
 $smarty->assign("extension_insertion_files"   , $extension_insertion_files);
 $smarty->assign("perform_extension_insertions", $perform_extension_insertions);

@@ -135,8 +135,7 @@ class UserSecurity {
      */
     public static function addUserName() {
         global $dbh;
-
-        if (checkFieldExists(TB_PREFIX . "user", "username")) return true;
+        if (checkFieldExists("user", "username")) return true;
         $sqls = array();
         $sqls[] = "ALTER TABLE `" . TB_PREFIX . "user` ADD `username` VARCHAR(255) DEFAULT '' AFTER `id`;";
         $sqls[] = "ALTER TABLE `" . TB_PREFIX . "user` DROP INDEX `UnqEMailPwd`;";

@@ -14,11 +14,11 @@ global $smarty;
 // stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-$biller_id      = $_GET['biller_id'];
-$customer_id    = $_GET['customer_id'];
+$biller_id   = (isset($_GET['biller_id']  ) ? $_GET['biller_id']   : "");
+$customer_id = (isset($_GET['customer_id']) ? $_GET['customer_id'] : "");
 
-$filter_by_date = $_GET['filter_by_date'];
-if ($filter_by_date == "yes") {
+$do_not_filter_by_date = (isset($_GET['do_not_filter_by_date']) ? $_GET['do_not_filter_by_date'] : "no");
+if ($do_not_filter_by_date != "yes") {
     $start_date = $_GET['start_date'];
     $end_date   = $_GET['end_date'];
 }
@@ -33,15 +33,15 @@ $customer = Customer::get($_GET['customer_id']);
 
 if ($_GET['stage'] == 2) {
     $export = new export();
-    $export->format           = 'pdf';
-    $export->file_type        = $get_file_type;
-    $export->module           = 'statement';
-    $export->biller_id        = $biller_id;
-    $export->customer_id      = $customer_id;
-    $export->start_date       = $start_date;
-    $export->end_date         = $end_date;
-    $export->show_only_unpaid = $show_only_unpaid;
-    $export->filter_by_date   = $filter_by_date;
+    $export->format                = 'pdf';
+    $export->file_type             = $get_file_type;
+    $export->module                = 'statement';
+    $export->biller_id             = $biller_id;
+    $export->customer_id           = $customer_id;
+    $export->start_date            = $start_date;
+    $export->end_date              = $end_date;
+    $export->show_only_unpaid      = $show_only_unpaid;
+    $export->do_not_filter_by_date = $do_not_filter_by_date;
     $export->setDownload(false);
     $export->execute();
     

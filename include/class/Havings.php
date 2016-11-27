@@ -21,23 +21,24 @@ class Havings {
         if (empty($field) || empty($operator) || empty($value)) {
             $this->havings = array();
         } else {
-            $having = new Having(false, $field, $operator, $value, $connector);
+            $having = new Having(false, $field, $operator, $value, false, $connector);
             $this->havings = array($having);
         }
     }
 
     /**
-     * Add a <b>Having</b> object 
-     * @param string $field
+     * Add a <b>Having</b> object
+     * @param boolean $left_paren <b>true</b> if left parenthsis should be included; <b>false</b> if not.
+     * @param string $field Field name to use.
      * @param string $operator
      * @param mixed $value Can be a any data type needed by the specified <b>$operator</b>.
      * @param string (Optional) If specified, should be set to <b>AND</b> or <b>OR</b>. If
      *        not specified, it will be set automaticvally to <b>AND</b> if a subsequent
      *        criterion is added.
      */
-    public function add($left_paren=false, $field, $operator, $value, $connector="", $right_paren=false) {
+    public function add($left_paren, $field, $operator, $value, $right_paren=false, $connector="") {
         $this->addDefaultConnector();
-        $this->havings[] = new Having($left_paren, $field, $operator, $value, $connector, $right_paren);
+        $this->havings[] = new Having($left_paren, $field, $operator, $value, $right_paren, $connector);
     }
 
     /**
@@ -51,7 +52,7 @@ class Havings {
      */
     public function addSimple($field, $operator, $value, $connector="") {
         $this->addDefaultConnector();
-        $having = new Having(false, $field, $operator, $value, $connector, false);
+        $having = new Having(false, $field, $operator, $value, false, $connector);
         $this->havings[] = $having;
     }
 
