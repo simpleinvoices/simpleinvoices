@@ -46,7 +46,7 @@ class Biller {
         $pdoDb->setSelectAll(true);
 
         $rows = $pdoDb->request("SELECT", "biller");
-        return $rows[0];
+        return (empty($rows) ? $rows : $rows[0]);
     }
 
     /**

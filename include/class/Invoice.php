@@ -451,7 +451,7 @@ class Invoice {
      * @param string $query Value to look for. Will be enclosed in wildcards and searched using <i>LIKE</i>.
      * @return array Selected rows.
      */
-    public static function select_all($type, $sort, $dir, $rp, $page, $qtype, $query) {
+    public static function select_all($type="", $sort="", $dir="", $rp=null, $page="", $qtype="", $query="") {
         global $auth_session, $pdoDb;
 
         // If user role is customer or biller, then restrict invoices to those they have access to.

@@ -97,7 +97,7 @@ class export {
                     $pdoDb->setHavings(Invoice::buildHavings("date_between", array($this->start_date, $this->end_date)));
                 }
                 
-                if ($show_only_unpaid == "yes") {
+                if ($this->show_only_unpaid == "yes") {
                     $pdoDb->setHavings(Invoice::buildHavings("money_owed"));
                 }
 

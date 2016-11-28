@@ -13,7 +13,7 @@ class Customer {
         $pdoDb->addSimpleWhere("domain_id", domain_id::get(), "AND");
         $pdoDb->addSimpleWhere("id", $id);
         $rows = $pdoDb->request("SELECT", "customers");
-        return $rows[0];
+        return (empty($rows) ? $rows : $rows[0]);
     }
 
     /**
