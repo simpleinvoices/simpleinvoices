@@ -22,11 +22,16 @@ class Customer {
      *        that are <i>Enabled</i> will be selected. Otherwise all <b>customers</b> records are returned.
      * @return array Customers selected.
      */
-    public static function get_all($enabled_only = false) {
+    public static function get_all($enabled_only = false, $incl_cust_id=null) {
         global $LANG, $pdoDb;
 
         if ($enabled_only) {
-            $pdoDb->addSimpleWhere("enabled", ENABLED, "AND");
+            if (!empty($incl_cust_id)) {
+                $pdoDb->addToWhere(new WhereItem(true, "id", "=", $incl_cust_id, false, "OR"));
+                $pdoDb->addToWhere(new WhereItem(false, "enabled", "=", ENABLED, true, "AND"));
+            } else {
+                $pdoDb->addSimpleWhere("enabled", ENABLED, "AND");
+            }
         }
         $pdoDb->addSimpleWhere("domain_id", domain_id::get());
         $pdoDb->setOrderBy("name");
@@ -118,6 +123,7 @@ class Customer {
 
         $pdoDb->setSelectList(array("c.name AS name", "s.value AS id"));
         $rows = $pdoDb->request("SELECT", "system_defaults", "s");
+        if (empty($rows)) return $rows;
         return $rows[0];
     }
 

@@ -18,7 +18,7 @@ $master_invoice_id = $_GET['id'];
 // @formatter:off
 $invoice      = Invoice::getInvoice ($master_invoice_id);
 $invoiceItems = Invoice::getInvoiceItems ( $master_invoice_id );
-$customers    = Customer::get_all(true);
+$customers    = Customer::get_all(true, $invoice['customer_id']);
 $preference   = Preferences::getPreference( $invoice ['preference_id'] );
 $billers      = Biller::get_all(true);
 $defaults     = getSystemDefaults ();
