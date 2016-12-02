@@ -2,6 +2,7 @@
 if (!function_exists("patchmaker")) {
     function patchmaker($num, $patchlines, &$patches) {
         static $last = -1;
+        if ($num == 0 && $patchlines['name'] == "Start") $last = -1;
         if (++$last != $num) {
             throw new Exception("patchmaker - Patch #$num is out of sequence.");
         }
