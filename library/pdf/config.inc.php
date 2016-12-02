@@ -8,7 +8,7 @@
 // Directory containing HTML2PS script files (with traling slash)
 if (!defined('HTML2PS_DIR')) {
   define('HTML2PS_DIR', dirname(__FILE__).'/');
-};
+}
 
 // User-Agent HTTP header to send when requesting a file
 define('DEFAULT_USER_AGENT',"Mozilla/5.0 (Windows; U; Windows NT 5.1; rv:1.7) Gecko/20040803 Firefox/0.9.3");
@@ -138,7 +138,7 @@ define('FOOTNOTE_GAP', 2); // Space between footnotes
 
 if (!defined('DEBUG_MODE')) {
   //  define('DEBUG_MODE',1);
-};
+}
 
 define('HTML2PS_VERSION_MAJOR', 2);
 define('HTML2PS_VERSION_MINOR', 0);
@@ -160,5 +160,3 @@ define('PAGE_BREAK_BORDER_PENALTY',        150);
 define('OVERLINE_POSITION', 1);
 define('UNDERLINE_POSITION', 0.1);
 define('LINE_THROUGH_POSITION', 0.4);
-
-?>

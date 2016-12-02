@@ -38,14 +38,18 @@ $invoices              = array();
 $statement             = array ("total" => 0, "owing" => 0, "paid" => 0);
 
 if (isset($_POST['submit'])) {
-    $do_not_filter_by_date = (isset($_POST['do_not_filter_by_date']) ? "yes" : "no");
-    if ($do_not_filter_by_date != "yes") {
+    if (isset($_POST['do_not_filter_by_date'])) {
+        $do_not_filter_by_date = "yes";
+    } else {
+        $do_not_filter_by_date = "no";
         $pdoDb->setHavings(Invoice::buildHavings("date_between", array($start_date, $end_date)));
     }
 
-    $show_only_unpaid = (isset($_POST['show_only_unpaid']) ? "yes" : "no");
-    if ($show_only_unpaid == "yes") {
+    if (isset($_POST['show_only_unpaid'])) {
+        $show_only_unpaid = "yes";
         $pdoDb->setHavings(Invoice::buildHavings("money_owed"));
+    } else {
+        $show_only_unpaid = "no";
     }
 
     if (!empty($biller_id)  ) $pdoDb->addSimpleWhere("biller_id"  , $biller_id  , "AND");
@@ -61,22 +65,26 @@ if (isset($_POST['submit'])) {
     }
 }
 
-$billers   = Biller::get_all(true);
-$customers = Customer::get_all(true);
-
+// @formatter:off
+$billers          = Biller::get_all(true);
+$biller_count     = count($billers);
+$customers        = Customer::get_all(true);
+$customer_count   = count($customers);
 $biller_details   = Biller::select($biller_id);
 $customer_details = Customer::get($customer_id);
 
 $smarty->assign('biller_id'       , $biller_id);
+$smarty->assign('billers'         , $billers);
+$smarty->assign('biller_count'    , $biller_count);
 $smarty->assign('biller_details'  , $biller_details);
 $smarty->assign('customer_id'     , $customer_id);
+$smarty->assign('customers'       , $customers);
+$smarty->assign('customer_count'  , $customer_count);
 $smarty->assign('customer_details', $customer_details);
 
 $smarty->assign('show_only_unpaid'     , $show_only_unpaid);
 $smarty->assign('do_not_filter_by_date', $do_not_filter_by_date);
 
-$smarty->assign('billers'   , $billers);
-$smarty->assign('customers' , $customers);
 $smarty->assign('invoices'  , $invoices);
 $smarty->assign('statement' , $statement);
 $smarty->assign('start_date', $start_date);
@@ -85,5 +93,5 @@ $smarty->assign('end_date'  , $end_date);
 $smarty->assign('pageActive', 'report');
 $smarty->assign('active_tab', '#home');
 
-if (!isset($menu)) $menu = true;
+if (!isset($menu)) $menu = true; // Causes menu section of report gen page to display.
 $smarty->assign('menu', $menu);

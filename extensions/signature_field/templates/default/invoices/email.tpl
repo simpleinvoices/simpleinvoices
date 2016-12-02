@@ -78,6 +78,12 @@
           </textarea>
         </td>
       </tr>
+      {*  TODO: Eventual use for adding additional attachments
+      <tr>
+        <th>{$LANG.attachments}</th>
+        <td><input type="file" name="attachments[]" accept=".pdf|.txt|.doc|.docx|image/*" tabindex="60" /></td>
+      </tr>
+      *}
     </table>
   </div>
   <div class="si_toolbar si_toolbar_form">

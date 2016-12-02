@@ -1,13 +1,16 @@
 <?php
-function patchmaker($num, $patchlines, &$patches) {
-    static $last = -1;
-    if (++$last != $num) {
-        throw new Exception("patchmaker - Patch #$num is out of sequence.");
+if (!function_exists("patchmaker")) {
+    function patchmaker($num, $patchlines, &$patches) {
+        static $last = -1;
+        if (++$last != $num) {
+            throw new Exception("patchmaker - Patch #$num is out of sequence.");
+        }
+        $patches[$num]['name' ] = $patchlines['name' ];
+        $patches[$num]['patch'] = $patchlines['patch'];
+        $patches[$num]['date' ] = $patchlines['date' ];
     }
-    $patches[$num]['name' ] = $patchlines['name' ];
-    $patches[$num]['patch'] = $patchlines['patch'];
-    $patches[$num]['date' ] = $patchlines['date' ];
 }
+
 global $config,
        $language;
 

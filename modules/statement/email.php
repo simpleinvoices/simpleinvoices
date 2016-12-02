@@ -14,27 +14,39 @@ global $smarty;
 // stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-$biller_id   = (isset($_GET['biller_id']  ) ? $_GET['biller_id']   : "");
-$customer_id = (isset($_GET['customer_id']) ? $_GET['customer_id'] : "");
+$error = false;
+$message = "Unable to process email request.";
 
-$do_not_filter_by_date = (isset($_GET['do_not_filter_by_date']) ? $_GET['do_not_filter_by_date'] : "no");
-if ($do_not_filter_by_date != "yes") {
-    $start_date = $_GET['start_date'];
-    $end_date   = $_GET['end_date'];
+if (empty($_GET['biller_id'])) {
+    $biller = Biller::getDefaultBiller();
+} else {
+    $biller = Biller::select($_GET['biller_id']);
 }
 
-$show_only_unpaid = $_GET['show_only_unpaid'];
-$get_format       = $_GET['format'];
-if ($get_format()) {} // eliminates unused warning TODO: Is this used?
-$get_file_type    = $_GET['filetype'];
+if (empty($biller)) {
+    $error = true;
+    $message = "Must specify a biller to send an e-mail";
+    $biller_id = 0;
+} else {
+    $biller_id = $biller['id'];
+}
 
-$biller   = Biller::select($_GET['biller_id']);
-$customer = Customer::get($_GET['customer_id']);
+if (empty($_GET['customer_id'])) {
+    $customer = array("id" => 0, "name" => "All");
+} else {
+    $customer = Customer::get($_GET['customer_id']);
+}
+$customer_id = $customer['id'];
+
+$do_not_filter_by_date = (empty($_GET['do_not_filter_by_date']) ? 'no' : $_GET['do_not_filter_by_date']);
+$start_date = (isset($_GET['start_date']) ? $_GET['start_date'] : "");
+$end_date   = (isset($_GET['end_date']  ) ? $_GET['end_date']   : "");
+
+$show_only_unpaid = (empty($_GET['show_only_unpaid']) ? "no" : $_GET['show_only_unpaid']);
 
 if ($_GET['stage'] == 2) {
     $export = new export();
     $export->format                = 'pdf';
-    $export->file_type             = $get_file_type;
     $export->module                = 'statement';
     $export->biller_id             = $biller_id;
     $export->customer_id           = $customer_id;
@@ -44,34 +56,30 @@ if ($_GET['stage'] == 2) {
     $export->do_not_filter_by_date = $do_not_filter_by_date;
     $export->setDownload(false);
     $export->execute();
-    
-    // $attachment = file_get_contents('./tmp/cache/statement_'.$biller_id.'_'.$customer_id.'_'.$start_date.'_'.$end_date.'.pdf');
-    $attachment = 'statement_' . $biller_id . '_' . $customer_id . '_' . $start_date . '_' . $end_date . '.pdf';
+
+    $attachment = $export->file_name . '.pdf';
     
     $email = new Email();
     $email->format        = 'statement';
-    $email->notes         = $_POST['email_notes'];
+    $email->notes         = trim($_POST['email_notes']);
     $email->from          = $_POST['email_from'];
     $email->from_friendly = $biller['name'];
     $email->to            = $_POST['email_to'];
     $email->bcc           = $_POST['email_bcc'];
     $email->subject       = $_POST['email_subject'];
     $email->attachment    = $attachment;
-
     $message = $email->send();
-} 
 
-// stage 3 = assemble email and send
-else if ($_GET['stage'] == 3) {
-    $message = "How did you get here :)";
+} else if ($_GET['stage'] == 3) {
+    // stage 3 = assemble email and send
+    $message = "Invalid routing to stage 3 of email processing. Probably a process error.";
+    $error - true;
 }
 
-$smarty->assign('message'    , $message);
-$smarty->assign('biller'     , $biller);
-$smarty->assign('customer'   , $customer);
-// Commented out by RCR 20161015 because appear undefined TODO: Verify if needed
-//$smarty->assign('invoice'    , $invoice);
-//$smarty->assign('preferences', $preference);
+$smarty->assign('error'   , ($error ? "1":"0"));
+$smarty->assign('message' , $message);
+$smarty->assign('biller'  , $biller);
+$smarty->assign('customer', $customer);
 
 $smarty->assign('pageActive', 'report');
 $smarty->assign('active_tab', '#home');

@@ -3,25 +3,33 @@
   <form name="frmpost" action="index.php?module=statement&amp;view=index" method="post">
     <div class="si_form si_form_search{if $smarty.post.submit == null} si_form_search_null{/if}">
       <table>
-        <tr>
-          <td class="details_screen">{$LANG.start_date}</td>
+        <tr style="margin: 0 auto; width: 100%;">
+          <td style="text-align: left; padding-right: 10px; white-space: nowrap; width: 47%;">
+            {$LANG.start_date}
+          </td>
           <td>
-            <input type="text" class="validate[required,custom[date],length[0,10]] date-picker"
+            <input type="text" tabindex="10"
+                   class="validate[required,custom[date],length[0,10]] date-picker"
                    size="10" name="start_date" id="date1" value='{$start_date|htmlsafe}' />
           </td>
         </tr>
-        <tr>
-          <td class="details_screen">{$LANG.end_date}</td>
+        <tr style="margin: 0 auto; width: 100%;">
+          <td style="text-align: left; padding-right: 10px; white-space: nowrap; width: 47%;">
+            {$LANG.end_date}
+          </td>
           <td>
-            <input type="text" class="validate[required,custom[date],length[0,10]] date-picker"
+            <input type="text" tabindex="20"
+                   class="validate[required,custom[date],length[0,10]] date-picker"
                    size="10" name="end_date" id="date1" value='{$end_date|htmlsafe}' />
           </td>
         </tr>
         <tr>
           <th>{$LANG.biller}</th>
           <td>
-            <select name="biller_id">
+            <select name="biller_id" tabindex="30" >
+              {if $biller_count != 1}
               <option value=""></option>
+              {/if}
               {foreach from=$billers item=list_biller}
               <option {if $list_biller.id==$biller_id} selected {/if} value="{$list_biller.id|htmlsafe}">
                 {$list_biller.name|htmlsafe}
@@ -33,8 +41,10 @@
         <tr>
           <th>{$LANG.customer}</th>
           <td>
-            <select name="customer_id">
+            <select name="customer_id" tabindex="40" >
+              {if $customer_count != 1}
               <option value=""></option>
+              {/if}
               {foreach from=$customers item=list_customer}
               <option {if $list_customer.id== $customer_id} selected {/if} value="{$list_customer.id|htmlsafe}">
                 {$list_customer.name|htmlsafe}
@@ -45,17 +55,18 @@
         </tr>
         <tr>
           <th>Do not {$LANG.filter_by_dates}</th>
-          <td class="">
-            <input type="checkbox" name="do_not_filter_by_date"{if $do_not_filter_by_date== "yes"} checked {/if} value="yes">
+          <td>
+            <input type="checkbox" name="do_not_filter_by_date" tabindex="50"
+                   {if $do_not_filter_by_date== "yes"} checked {/if} value="yes">
           </td>
         </tr>
         <tr>
           <th>{$LANG.show_only_unpaid_invoices}</th>
-          <td class="">
-            <input type="checkbox" name="show_only_unpaid" {if $show_only_unpaid== "yes"} checked {/if} value="yes">
+          <td>
+            <input type="checkbox" name="show_only_unpaid" tabindex="60"
+                   {if $show_only_unpaid== "yes"} checked {/if} value="yes">
           </td>
         </tr>
-        <!-- Here to add space so calendar shows -->
       </table>
       <div class="si_toolbar si_toolbar_form">
         <button type="submit" class="positive" name="submit" value="statement_report">
@@ -63,9 +74,10 @@
           {$LANG.run_report}
         </button>
       </div>
+      <br/><!-- Here to add space so calendar shows -->
     </div>
   </form>
-  {if $smarty.post.submit != null}
+  {if isset($smarty.post.submit)}
   <div class="si_toolbar si_toolbar_top">
     <a title="{$LANG.print_preview_tooltip} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe}"
        href="index.php?module=statement&amp;view=export&amp;biller_id={$biller_id|urlencode}&amp;customer_id={$customer_id}&amp;start_date={$start_date|urlencode}&amp;end_date={$end_date|urlencode}&amp;show_only_unpaid={$show_only_unpaid|urlencode}&amp;do_not_filter_by_date={$do_not_filter_by_date|urlencode}&amp;format=print">
@@ -73,23 +85,20 @@
     </a>
     <!-- EXPORT TO PDF -->
     <a title="{$LANG.export_tooltip} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe} {$LANG.export_pdf_tooltip}"
-       href="index.php?module=statement&amp;view=export&amp;biller_id={$biller_id|urlencode}&amp;customer_id={$customer_id|urlencode}&amp;start_date={$start_date|urlencode}&amp;end_date={$end_date|urlencode}&amp;show_only_unpaid={$show_only_unpaid|urlencode}&amp;do_not_filter_by_date={$do_not_filter_by_date|urlencode}&amp;format=pdf"><img
-       src='images/common/page_white_acrobat.png' class='action' />
-      &nbsp;{$LANG.export_pdf}
+       href="index.php?module=statement&amp;view=export&amp;biller_id={$biller_id|urlencode}&amp;customer_id={$customer_id|urlencode}&amp;start_date={$start_date|urlencode}&amp;end_date={$end_date|urlencode}&amp;show_only_unpaid={$show_only_unpaid|urlencode}&amp;do_not_filter_by_date={$do_not_filter_by_date|urlencode}&amp;format=pdf">
+      <img src='images/common/page_white_acrobat.png' class='action' />&nbsp;{$LANG.export_pdf}
     </a>
     <a title="{$LANG.export_tooltip} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe} {$LANG.export_xls_tooltip} .{$config->export->spreadsheet} {$LANG.format_tooltip}"
-       href="index.php?module=statement&amp;view=export&amp;biller_id={$biller_id|urlencode}&amp;customer_id={$customer_id|urlencode}&amp;start_date={$start_date|urlencode}&amp;end_date={$end_date|urlencode}&amp;show_only_unpaid={$show_only_unpaid|urlencode}&amp;do_not_filter_by_date={$do_not_filter_by_date|urlencode}&amp;format=file&amp;filetype={$config->export->spreadsheet}"><img
-       src='images/common/page_white_excel.png' class='action' />
-      &nbsp;{$LANG.export_as}.{$config->export->spreadsheet}
+       href="index.php?module=statement&amp;view=export&amp;biller_id={$biller_id|urlencode}&amp;customer_id={$customer_id|urlencode}&amp;start_date={$start_date|urlencode}&amp;end_date={$end_date|urlencode}&amp;show_only_unpaid={$show_only_unpaid|urlencode}&amp;do_not_filter_by_date={$do_not_filter_by_date|urlencode}&amp;format=file&amp;filetype={$config->export->spreadsheet}">
+       <img src='images/common/page_white_excel.png' class='action' />&nbsp;{$LANG.export_as}.{$config->export->spreadsheet}
     </a>
     <a title="{$LANG.export_tooltip} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe} {$LANG.export_doc_tooltip} .{$config->export->wordprocessor} {$LANG.format_tooltip}"
-       href="index.php?module=statement&amp;view=export&amp;biller_id={$biller_id|urlencode}&amp;customer_id={$customer_id|urlencode}&amp;start_date={$start_date|urlencode}&amp;end_date={$end_date|urlencode}&amp;show_only_unpaid={$show_only_unpaid|urlencode}&amp;do_not_filter_by_date={$do_not_filter_by_date|urlencode}&amp;format=file&amp;filetype={$config->export->wordprocessor}"><img
-       src='images/common/page_white_word.png' class='action' />
-      &nbsp;{$LANG.export_as}.{$config->export->wordprocessor}
+       href="index.php?module=statement&amp;view=export&amp;biller_id={$biller_id|urlencode}&amp;customer_id={$customer_id|urlencode}&amp;start_date={$start_date|urlencode}&amp;end_date={$end_date|urlencode}&amp;show_only_unpaid={$show_only_unpaid|urlencode}&amp;do_not_filter_by_date={$do_not_filter_by_date|urlencode}&amp;format=file&amp;filetype={$config->export->wordprocessor}">
+       <img src='images/common/page_white_word.png' class='action' />&nbsp;{$LANG.export_as}.{$config->export->wordprocessor}
     </a>
     <a title="{$LANG.email} {$preference.pref_inv_wording|htmlsafe} {$invoice.id|htmlsafe}"
-       href="index.php?module=statement&amp;view=email&amp;stage=1&amp;biller_id={$biller_id|urlencode}&amp;customer_id={$customer_id|urlencode}&amp;start_date={$start_date|urlencode}&amp;end_date={$end_date|urlencode}&amp;show_only_unpaid={$show_only_unpaid|urlencode}&amp;do_not_filter_by_date={$do_not_filter_by_date|urlencode}&amp;format=file"><img
-       src='images/common/mail-message-new.png' class='action' />&nbsp;{$LANG.email}
+       href="index.php?module=statement&amp;view=email&amp;stage=1&amp;biller_id={$biller_id|urlencode}&amp;customer_id={$customer_id|urlencode}&amp;start_date={$start_date|urlencode}&amp;end_date={$end_date|urlencode}&amp;show_only_unpaid={$show_only_unpaid|urlencode}&amp;do_not_filter_by_date={$do_not_filter_by_date|urlencode}&amp;format=file">
+       <img src='images/common/mail-message-new.png' class='action' />&nbsp;{$LANG.email}
     </a>
   </div>
   {/if}

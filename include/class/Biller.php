@@ -54,18 +54,16 @@ class Biller {
      * @return string Default biller name
      */
     public static function getDefaultBiller() {
-        $domain_id = domain_id::get();
-        // @formatter:off
-        $sql = "SELECT b.name AS name FROM " .
-                TB_PREFIX . "biller b, " .
-                TB_PREFIX . "system_defaults s
-            WHERE ( s.name      = 'biller'
-                AND b.id        = s.value
-                AND b.domain_id = s.domain_id
-                AND s.domain_id = :domain_id)";
-                // @formatter:on
-                $sth = dbQuery($sql, ':domain_id', $domain_id);
-                return $sth->fetch();
+        global $pdoDb;
+        $pdoDb->addSimpleWhere("s.name", "biller", "AND");
+        $pdoDb->addSimpleWhere("s.domain_id", domain_id::get());
+        $jn = new Join('LEFT', 'biller', 'b');
+        $jn->addSimpleItem("b.id", new DbField("s.value"), "AND");
+        $jn->addSimpleItem("b.domain_id", new DbField("s.domain_id"));
+        $pdoDb->addToJoins($jn);
+        $rows = $pdoDb->request("SELECT", "system_defaults", "s");
+        if (empty($rows)) return $rows;
+        return $rows[0];
     }
 
     /**

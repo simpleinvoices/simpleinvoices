@@ -1,17 +1,17 @@
 <?php
 /*
  *  Script: email.php
- *      Email invoice page
- *
- *  Last Modified:
- *      2016-08-15
- *
- *  License:
- *      GPL v3 or above
- *
- *  Website:
- *      http://www.simpleinvoices.org
- */
+*      Email invoice page
+*
+*  Last Modified:
+*      2016-08-15
+*
+*  License:
+*      GPL v3 or above
+*
+*  Website:
+*      http://www.simpleinvoices.org
+*/
 global $smarty;
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
@@ -24,17 +24,21 @@ $preference  = Preferences::getPreference($invoice['preference_id']);
 $biller      = Biller::select($invoice['biller_id']);
 $customer    = Customer::get($invoice['customer_id']);
 
-$spc2us_pref   = str_replace(" ", "_", $invoice['index_name']);
-$pdf_file_name = $spc2us_pref  . '.pdf';
 $error = false;
 $message = "Unable to process email request.";
 if ($_GET['stage'] == 2 ) {
     $export = new export();
-    $export->format = "pdf";
-    $export->module = 'invoice';
-    $export->id     = $invoice_id;
+    $export->format     = "pdf";
+    $export->module     = 'invoice';
+    $export->id         = $invoice_id;
+    $export->invoice    = $invoice;
+    $export->preference = $preference;
+    $export->biller     = $biller;
+    $export->customer   = $customer;
     $export->setDownload(false);;
     $export->execute();
+
+    $pdf_file_name = $export->file_name . '.pdf';
 
     $email = new Email();
     $email->format        = 'invoice';

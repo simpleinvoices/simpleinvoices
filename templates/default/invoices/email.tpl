@@ -14,11 +14,9 @@
 *  Website:
 *      http://www.simpleinvoices.org
 *}
-  {if $smarty.get.stage == 1 }
-  {if $smarty.error == 1}
-  <div class="si_message_error">
-    <h2>{$smarty.message}</h2>
-  </div>
+{if $smarty.get.stage == 1 }
+  {if $error == 1 }
+  <div class="si_message_error"><h2>{$message}</h2></div>
   {/if}
   <div class="si_center">
     <h3>Email {$invoice.index_name|htmlsafe} to Customer as PDF</h3>
@@ -75,9 +73,12 @@
           <th>{$LANG.message}</th>
           <td><textarea name="email_notes" class="editor" rows="16" cols="70" tabindex="50" ></textarea></td>
         </tr>
+<!--  TODO: Eventual use for adding additional attachments
         <tr>
           <th>{$LANG.attachments}</th>
-          <td><input type="file" name="attachments[]" accept=".pdf|.txt|.doc|.docx|image/*" tabindex="60" />
+          <td><input type="file" name="attachments[]" accept=".pdf|.txt|.doc|.docx|image/*" tabindex="60" /></td>
+        </tr>
+ -->
       </table>
     </div>
     <div class="si_toolbar si_toolbar_form">

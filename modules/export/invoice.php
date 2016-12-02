@@ -1,13 +1,13 @@
 <?php
 /*
- * Script: template.php
- * 	invoice export page
+ *  Script: template.php
+ *      invoice export page
  *
- * License:
- *	 GPL v3 or above
+ *  License:
+ *      GPL v3 or above
  *
- * Website:
- * 	http://www.simpleinvoices.org
+ *  Website:
+ *      http://www.simpleinvoices.org
  */
 // @formatter:off
 $export            = new export();

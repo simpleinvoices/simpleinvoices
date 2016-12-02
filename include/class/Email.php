@@ -1,12 +1,14 @@
 <?php
 class Email {
     public $attachment;
+    // public $attachments;
     public $biller_id;
     public $customer_id;
     public $domain_id;
     public $end_date;
     public $file_location;
     public $format;
+    public $from_friendly;
     public $id;
     public $notes;
     public $start_date;
@@ -61,6 +63,17 @@ class Email {
             $at->filename = $this->attachment;
         }
 
+/* TODO: Add support for other attachment types
+        foreach ($this->attachments as $attachment) {
+            $content = file_get_contents("path to pdf file"); // e.g. ("attachment/abc.pdf")
+            $attachment = new Zend_Mime_Part($content);
+            $attachment->type = 'application/pdf';
+            $attachment->disposition = Zend_Mime::DISPOSITION_ATTACHMENT;
+            $attachment->encoding = Zend_Mime::ENCODING_BASE64;
+            $attachment->filename = 'filename.pdf'; // name of file
+        }
+        $mail->addAttachment($attachment);
+ */
         // Send e-mail through SMTP
         try {
             if ($config->email->use_local_sendmail) {

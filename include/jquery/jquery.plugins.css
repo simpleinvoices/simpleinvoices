@@ -17,7 +17,7 @@ a.date-picker span { margin: 0 0 0 -2000px;}
 div.date-picker-holder, div.date-picker-holder * { /*margin: 0; padding: 0;*/}
 div.date-picker-holder { position: relative;}
 div.date-picker-holder input { float: left;}
-div.popup-calendar { display: none; position: absolute; z-index: 2; top: 0; left: -16px; /* value for IE */ padding: 0; border: 3px solid #1A4F85; background: #fff; color: #000; overflow:hidden; width: 180px;}
+div.popup-calendar { display: none; position: absolute; z-index: 2; top: 0; left: -16px; /* value for IE */ padding: 0; border: 3px solid #1A4F85; background: #fff; color: #000; overflow:hidden; width: 220px;}
 * html div.popup-calendar { width: 188px;}
 html>body div.popup-calendar { left: 113px; /* value for decent browsers */}
 
