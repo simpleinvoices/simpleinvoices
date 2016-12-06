@@ -788,7 +788,7 @@ function getNumberOfPatches() {
 }
 
 function runPatches() {
-    global $si_patch;
+    global $si_patches;
     global $dbh;
 
     $sql = "SHOW TABLES LIKE '" . TB_PREFIX . "sql_patchmanager'";
@@ -800,8 +800,8 @@ function runPatches() {
     if (count($rows) == 1) {
         $dbh->beginTransaction();
 
-        for ($i = 0; $i < count($si_patch); $i++) {
-            $smarty_datas['rows'][$i] = run_sql_patch($i, $si_patch[$i]);
+        for ($i = 0; $i < count($si_patches); $i++) {
+            $smarty_datas['rows'][$i] = run_sql_patch($i, $si_patches[$i]);
         }
 
         $dbh->commit();
@@ -836,7 +836,7 @@ function donePatches() {
 }
 
 function listPatches() {
-    global $si_patch;
+    global $si_patches;
 
     $smarty_datas = array();
     $smarty_datas['message'] = "Your version of SimpleInvoices can now be upgraded. With this new release there are database patches that need to be applied";
@@ -854,10 +854,10 @@ function listPatches() {
     </div>
 EOD;
 
-    for ($p = 0; $p < count($si_patch); $p++) {
-        $patch_name = htmlsafe($si_patch[$p]['name']);
-        $patch_date = htmlsafe($si_patch[$p]['date']);
-        if (check_sql_patch($p, $si_patch[$p]['name'])) {
+    for ($p = 0; $p < count($si_patches); $p++) {
+        $patch_name = htmlsafe($si_patches[$p]['name']);
+        $patch_date = htmlsafe($si_patches[$p]['date']);
+        if (check_sql_patch($p, $si_patches[$p]['name'])) {
             $smarty_datas['rows'][$p]['text'] = "SQL patch $p, $patch_name <i>has</i> already been applied in release $patch_date";
             $smarty_datas['rows'][$p]['result'] = 'skip';
         } else {
