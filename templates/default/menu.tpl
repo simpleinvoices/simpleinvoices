@@ -26,6 +26,7 @@
     <li><a href="#money"><span>{$LANG.money}</span></a></li>
     <li><a href="#people"><span>{$LANG.people}</span></a></li>
     <li><a href="#product"><span>{$LANG.products}</span></a></li>
+    <!-- SECTION:tabs -->
     {$smarty.capture.hook_tabmenu_main_end}
     <li id="si_tab_settings"><a href="#setting"><span>{$LANG.settings}</span></a></li>
   </ul>
