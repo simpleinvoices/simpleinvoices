@@ -78,26 +78,32 @@ class Cron {
     }
 
     public static function select_crons_to_run() {
-        global $pdoDb;
+        global $config, $pdoDb;
+
         // Use this function to select crons that need to run each day across all domain_id values
-        $oc = new OnClause();
-        $oc->addSimpleItem("cron.invoice_id", new DbField("iv.id"), "AND");
-        $oc->addSimpleItem("cron.domain_id", new DbField("iv.domain_id"));
-        $pdoDb->addToJoins(array("INNER", "invoices", "iv", $oc));
-
-        $oc = new OnClause();
-        $oc->addSimpleItem("iv.preference_id", new DbField("pf.pref_id"), "AND");
-        $oc->addSimpleItem("iv.domain_id", new DbField("pf.domain_id"));
-        $pdoDb->addToJoins(array("INNER", "preferences", "pf", $oc));
-
+        $jn = new Join("INNER", "invoices", "iv");
+        $jn->addSimpleItem("cron.invoice_id", new DbField("iv.id"), "AND");
+        $jn->addSimpleItem("cron.domain_id", new DbField("iv.domain_id"));
+        $pdoDb->addToJoins($jn);
+        
+        $jn = new Join("INNER", "preferences", "pf");
+        $jn->addSimpleItem("iv.preference_id", new DbField("pf.pref_id"), "AND");
+        $jn->addSimpleItem("iv.domain_id", new DbField("pf.domain_id"));
+        $pdoDb->addToJoins($jn);
+        
         $fn = new FunctionStmt("CONCAT", "pf.pref_description, ' ', iv.index_id");
         $se = new Select($fn, null, null, "index_name");
         $pdoDb->addToSelectStmts($se);
-
-        $wi = new WhereItem(false, "NOW()", "BETWEEN", array("cron.start_date", "cron.end_date"), false, "AND");
-        $pdoDb->addToWhere($wi);
+        
+        $dtm = new DateTime(null,new DateTimeZone($config->phpSettings->date->timezone));
+        $dt = $dtm->format("Y-m-d");
+        $pdoDb->addToWhere(new WhereItem(false, "cron.start_date", ">=", $dt, false, "AND"));
+        $pdoDb->addToWhere(new WhereItem(false, "cron.end_date"  , "<=", $dt, false, "AND"));
+        
         $pdoDb->addSimpleWhere("cron.domain_id", domain_id::get());
-
+        
+        $pdoDb->setSelectList("cron.*");
+        
         $pdoDb->setGroupBy(array("cron.id", "cron.domain_id"));
 
         $result = $pdoDb->request("SELECT", "cron", "cron");
