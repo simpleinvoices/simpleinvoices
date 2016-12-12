@@ -105,8 +105,9 @@ class Cron {
         $pdoDb->setSelectList("cron.*");
         
         $pdoDb->setGroupBy(array("cron.id", "cron.domain_id"));
-
+$pdoDb->debugOn();
         $result = $pdoDb->request("SELECT", "cron", "cron");
+$pdoDb->debugOff();
         return $result;
     }
 
