@@ -5,23 +5,12 @@
   <title>{$preference.pref_inv_wording|htmlsafe} {$LANG.number_short|htmlsafe}: {$invoice.id|htmlsafe}</title>
 </head>
 <body>
-  {php}
-  global $smarty;
-  $now = new DateTime();
-  $curr_month = $now->format('m');
-  if ($curr_month == '12') {
-    $logo = $smarty->get_template_vars('logo');
-    $len = strlen($logo) - 4;
-    $new_logo = substr($logo,0,$len).'Christmas.gif';
-    $smarty->assign('logo', $new_logo);
-  }
-  {/php}
   <br />
   <div id="container">
     <div id="header"></div>
     <table class="center">
       <tr>
-        <td colspan="5"><img src="{$logo|urlsafe}" border="0" hspace="0" align="left"></td>
+        <td colspan="5"><img src="{holiday_logo logo=$logo|urlsafe}" border="0" hspace="0" align="left"></td>
         <th align="right">
           <span class="font1">Receipt for {$LANG.payment_id}&nbsp;{$payment.id|htmlsafe}</span>
         </th>

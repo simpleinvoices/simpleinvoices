@@ -11,7 +11,7 @@
     <div id="header"></div>
     <table width="100%" class="center">
       <tr>
-        <td colspan="5"><img src="{$logo|urlsafe}" border="0" hspace="0" align="left"></td>
+        <td colspan="5"><img src="{holiday_logo logo=$logo|urlsafe}" border="0" hspace="0" align="left"></td>
         <th align="right"><span class="font1">{$preference.pref_inv_heading|htmlsafe}</span></th>
       </tr>
       <tr>
