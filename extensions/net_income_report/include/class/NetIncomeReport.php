@@ -43,13 +43,15 @@ class NetIncomeReport {
         $invoices = array();
         foreach($iv_ids as $id) {
             // @formatter:off
-            $onClause = new OnClause();
-            $onClause->addSimpleItem("cu.id", new DbField("iv.customer_id"), "AND");
-            $onClause->addSimpleItem("cu.domain_id", new DbField("iv.domain_id"));
-            $pdoDb->addToJoins(array("INNER", "customers", "cu", $onClause));
+            $jn = new Join("INNER", "customers", "cu");
+            $jn->addSimpleItem("cu.id", new DbField("iv.customer_id"), "AND");
+            $jn->addSimpleItem("cu.domain_id", new DbField("iv.domain_id"));
+            $pdoDb->addToJoins($jn);
+
             $pdoDb->addSimpleWhere("iv.id", $id, "AND");
             $pdoDb->addSimpleWhere("iv.domain_id", $domain_id);
             $pdoDb->setSelectList(array("iv.id", "iv.index_id AS iv_number", "iv.date AS iv_date", "cu.name AS customer"));
+
             $iv_recs = $pdoDb->request("SELECT", "invoices", "iv");
             // @formatter:on
 
@@ -96,11 +98,12 @@ class NetIncomeReport {
                 $join->addSimpleItem("pr.domain_id", new DbField("ii.domain_id"));
                 $pdoDb->addToJoins($join);
                 $pdoDb->setSelectList($list);
+
                 $ii_recs = $pdoDb->request("SELECT", "invoice_items", "ii");
 
                 foreach($ii_recs as $py) {
                     $invoice->addItem($py['amount'], $py['description'],
-                                      ($custom_flags_enabled ? $py['custom_flags'] : NULL));
+                                      ($custom_flags_enabled ? $py['custom_flags'] : null));
                 }
                 $invoices[] = $invoice;
             }

@@ -1,5 +1,4 @@
 <?php
-
 /*
 * Script: report_sales_by_period.php
 * 	Sales reports by period add page
