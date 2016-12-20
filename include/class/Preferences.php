@@ -83,7 +83,7 @@ class Preferences {
         $pdoDb->addToJoins($jn);
 
         $rows = $pdoDb->request("SELECT", "system_defaults", "s");
-        return $rows;
+        return (empty($rows) ? $rows : $rows[0]);
     }
 
 }
