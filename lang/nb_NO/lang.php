@@ -1,11 +1,16 @@
 <?php
 
 /*
+<<<<<<< HEAD
 * Script: NO_lang.php
 *    Norwegian translation file
+=======
+* Script: lang.php
+* 	Norwegian translation file
+>>>>>>> refs/remotes/simpleinvoices/master
 *
 * Last edited:
-* 	 2014-06-09
+* 	 2016-10-04
 *
 * License:
 *    GPL v3 or above
@@ -99,7 +104,7 @@ $LANG['credit_card_number_new'] = "New credit card number";//0
 $LANG['credits'] = "Kreditt";//1
 $LANG['currency_code'] = "Currency code";//0
 $LANG['currency_sign'] = "Valutategn";//1
-$LANG['currency_sign_non_dollar'] = "Euro, Pund, ikke-$ tegn vennligst les dette";//1
+$LANG['currency_sign_non_dollar'] = "Euro, Pund, ikke-\$ tegn vennligst les dette";//1
 $LANG['custom_field'] = "Egendefinert felt";//1
 $LANG['custom_field1'] = "Egendefinert felt 1";//1
 $LANG['custom_field2'] = "Egendefinert felt 2";//1
@@ -113,6 +118,7 @@ $LANG['customer'] = "Kunde";//1
 $LANG['customer_account'] = "Kundekonto";//1
 $LANG['customer_add'] = "Legg til ny kunde";//1
 $LANG['customer_contact'] = "Kundekontakt (Attn)";//1
+$LANG['customer_department'] = "Avdeling";//1
 $LANG['customer_details'] = "Kundedetaljer";//1
 $LANG['customer_edit'] = "Rediger kunde";//1
 $LANG['customer_id'] = "Kunde ID";//1
@@ -260,7 +266,11 @@ $LANG['help_tax_rate_sign'] = "A tax can be either a percentage based (ie. Sales
 $LANG['help_text'] = "<b>Warning</b><br /><br />Please backup your SimpleInvoices database before running the database update, just incase anything bad happens.<br /><br />To backup the database, select 'Backup Database' from the Options menu, or use phpMyAdmin(if you have this installed) to back up the database.";//0
 $LANG['help_user_role'] = "There are 3 roles available <br /><br />Administrator:<br />which has access to all of SimpleInvoices<br /><br />User:<br />which has read/write acess to all of SimpleInvoices but with no access to the Settings menu <br /><br />Viewer:<br />which has read-only version of User.";//0
 $LANG['help_what_are_custom_fields'] = "Custom Fields are special fields in billers, products, customers, and invoices that you can label as whatever you want.<br /><br />Wish there was a Tax ID field in biller, just go to the Custom Fields page and define one of the blank Biller Custom Fields as Tax ID.<br /><br />Now when you go to edit a Biller there'll be a new field there called Tax ID or whatever you specified it as.";//0
+<<<<<<< HEAD
 $LANG['help_wheres_the_edit_button'] = "In the Manage Payment screen there is no 'Edit' button. This is to provide a proper 'audit trail' of payments recorded in SimpleInvoices.<br /><br />If you've made a mistake with a payment entry the best option is to reverse the entry and entery it again correctly<br /><br />Reverse the entry - what the?<br /> This basically means just doing a negative entry for the same amount as the original entry.<br /><br />ie.<br />If your entered $110<br />but you should've entered $1100<br />to reverse this entry enter -$110 against the same invoice and then enter the correct amount of $1100";//0
+=======
+$LANG['help_wheres_the_edit_button'] = "In the Manage Payment screen there is no 'Edit' button. This is to provide a proper 'audit trail' of payments recorded in Simple Invoices.<br /><br />If you've made a mistake with a payment entry the best option is to reverse the entry and entery it again correctly<br /><br />Reverse the entry - what the?<br /> This basically means just doing a negative entry for the same amount as the original entry.<br /><br />ie.<br />If your entered \$110<br />but you should've entered \$1100<br />to reverse this entry enter -$110 against the same invoice and then enter the correct amount of \$1100";//0
+>>>>>>> refs/remotes/simpleinvoices/master
 $LANG['hide_details'] = "Skjul detaljer";//1
 $LANG['home'] = "Hjem";//1
 $LANG['id'] = "ID";//1

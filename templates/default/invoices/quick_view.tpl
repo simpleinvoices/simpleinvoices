@@ -59,6 +59,7 @@
 </div>
 <!--Actions heading - start-->
 <!-- #PDF end -->
+<<<<<<< HEAD
 <table class='si_invoice_view'>
   <!-- Invoice Summary section -->
   <tr class="tr_head">
@@ -411,6 +412,183 @@
       <tr class="notes tr_notes si_notes_hide">
         <td colspan="6">{$invoice.note|outhtml}</td>
       </tr>
+=======
+
+	<table class='si_invoice_view'>
+
+	<!-- Invoice Summary section -->
+		<tr class="tr_head">
+			<th class="">{$preference.pref_inv_wording|htmlsafe} {$LANG.number_short}:</th>
+			<td colspan="4">{$invoice.index_id|htmlsafe}</td>
+			<td class="si_switch">
+				<a href='#' class="show-summary" onclick="$('.summary').show();$('.show-summary').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" /></a>
+				<a href='#' class="summary" onclick="$('.summary').hide();$('.show-summary').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" /></a>
+			</td>
+		</tr>
+		<tr class="summary">
+			<th class="">{$LANG.date_upper}:</th>
+			<td colspan="5">{$invoice.date|htmlsafe}</td>
+		</tr>
+	
+		{$customField.1}
+		{$customField.2}
+		{$customField.3}
+		{$customField.4}
+	
+	
+		<!-- Biller section -->
+	
+		<tr class="tr_head">
+			<th>{$LANG.biller}:</th>
+			<td colspan="4">{$biller.name|htmlsafe}</td>
+			<td class="si_switch">
+				<a href='#' class="show-biller" onclick="$('.biller').show();$('.show-biller').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" /></a>
+				<a href='#' class="biller" onclick="$('.biller').hide();$('.show-biller').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" /></a>
+			</td>
+		</tr>
+		<tr class="biller">
+			<th>{$LANG.street}:</th>
+			<td colspan="5">{$biller.street_address|htmlsafe}</td>
+		</tr>	
+		<tr class="biller">
+			<th>{$LANG.street2}:</th>
+			<td colspan="5">{$biller.street_address2|htmlsafe}</td>
+		</tr>	
+		<tr class="biller">
+			<th>{$LANG.city}:</th>
+			<td colspan="3">{$biller.city|htmlsafe}</td>
+			<th>{$LANG.phone_short}:</th>
+			<td>{$biller.phone|htmlsafe}</td>
+		</tr>	
+		<tr class="biller">
+			<th>{$LANG.state}, {$LANG.zip}:</th>
+			<td colspan="3">{$biller.state|htmlsafe}, {$biller.zip_cod|htmlsafe}</td>
+			<th>{$LANG.mobile_short}:</th>
+			<td>{$biller.mobile_phone|htmlsafe}</td>
+		</tr>	
+		<tr class="biller">
+			<th>{$LANG.country}:</th>
+			<td colspan="3">{$biller.country|htmlsafe}</td>
+			<th>{$LANG.fax}:</th>
+			<td>{$biller.fax|htmlsafe}</td>
+		</tr>	
+		<tr class="biller">
+			<th>{$LANG.email}:</th>
+			<td colspan="5">{$biller.email|htmlsafe}</td>
+		</tr>	
+		<tr class="biller">
+			<th>{$customFieldLabels.biller_cf1|htmlsafe}:</th>
+			<td colspan="5">{$biller.custom_field1|htmlsafe}</td>
+		</tr>	
+		<tr class="biller">
+			<th>{$customFieldLabels.biller_cf2|htmlsafe}:</th>
+			<td colspan="5">{$biller.custom_field2|htmlsafe}</td>
+		</tr>	
+		<tr class="biller">
+			<th>{$customFieldLabels.biller_cf3|htmlsafe}:</th>
+			<td colspan="5">{$biller.custom_field3|htmlsafe}</td>
+		</tr>	
+		<tr class="biller">
+			<th>{$customFieldLabels.biller_cf4|htmlsafe}:</th>
+			<td colspan="5">{$biller.custom_field4|htmlsafe}</td>
+		</tr>
+		{*
+			{showCustomFields categorieId="1" itemId=$biller.id }
+		*}
+	
+	
+	
+		
+		<!-- Customer section -->
+		<tr class="tr_head">
+			<th>{$LANG.customer}:</th>
+			<td colspan="4">{$customer.name|htmlsafe}</td>
+			<td class="si_switch">
+				<a href='#' class="show-customer" {literal} onclick="$('.customer').show(); $('.show-customer').hide(); {/literal}"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a>
+				<a href='#' class="customer" {literal} onclick="$('.customer').hide(); $('.show-customer').show(); {/literal}"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" /></a>
+			</td>
+		</tr>	
+		<tr class="customer">
+			<th>{$LANG.customer_department}:</th>
+			<td colspan="5" align="left">{$customer.department|htmlsafe}</td>
+		</tr>
+		<tr class="customer">
+			<th>{$LANG.attention_short}:</th>
+			<td colspan="5" align="left">{$customer.attention|htmlsafe},</td>
+		</tr>
+		<tr class="customer">
+			<th>{$LANG.street}:</th>
+			<td colspan="5" align="left">{$customer.street_address|htmlsafe}</td>
+		</tr>	
+		<tr class="customer">
+			<th>{$LANG.street2}:</th>
+			<td colspan="5" align="left">{$customer.street_address2|htmlsafe}</td>
+		</tr>	
+		<tr class="customer">
+			<th>{$LANG.city}:</th>
+			<td colspan="3">{$customer.city|htmlsafe}</td>
+			<th>{$LANG.phone_short}:</th>
+			<td>{$customer.phone|htmlsafe}</td>
+		</tr>	
+		<tr class="customer">
+			<th>{$LANG.state}, {$LANG.zip}:</th>
+			<td colspan="3">{$customer.state|htmlsafe}, {$customer.zip_code|htmlsafe}</td>
+			<th>{$LANG.mobile_short}:</th>
+			<td>{$customer.mobile_phone|htmlsafe}</td>
+		</tr>	
+		<tr class="customer">
+			<th>{$LANG.country}:</th>
+			<td colspan="3">{$customer.country|htmlsafe}</td>
+			<th>{$LANG.fax}:</th>
+			<td>{$customer.fax|htmlsafe}</td>
+		</tr>	
+		<tr class="customer">
+			<th>{$LANG.email}:</th>
+			<td colspan="5">{$customer.email|htmlsafe}</td>
+		</tr>	
+		<tr class="customer">
+			<th>{$customFieldLabels.customer_cf1}:</th>
+			<td colspan="5">{$customer.custom_field1|htmlsafe}</td>
+		</tr>	
+		<tr class="customer">
+			<th>{$customFieldLabels.customer_cf2}:</th>
+			<td colspan="5">{$customer.custom_field2|htmlsafe}</td>
+		</tr>	
+		<tr class="customer">
+			<th>{$customFieldLabels.customer_cf3}:</th>
+			<td colspan="5">{$customer.custom_field3|htmlsafe}</td>
+		</tr>	
+		<tr class="customer">
+			<th>{$customFieldLabels.customer_cf4}:</th>
+			<td colspan="5">{$customer.custom_field4|htmlsafe}</td>
+		</tr>	
+				{*
+					{showCustomFields categorieId="2" itemId=$customer.id }
+				*}
+	
+	{if $invoice.type_id == 1 }
+		<tr class="tr_head">
+			<th colspan="6">{$LANG.description}</th>
+		</tr>
+		<tr>
+			<td colspan="6">{$invoiceItems.0.description|outhtml}</td>
+		</tr>
+	{/if}
+
+	{if $invoice.type_id == 2 || $invoice.type_id == 3}
+
+		<tr class="tr_head">
+			<th colspan=5></th>
+			<td class="si_switch">
+	{if $invoice.type_id == 2 }
+                    <a href='#' class="show-itemised" onclick="$('.itemised').show();$('.show-itemised').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a>
+                    <a href='#' class="itemised" onclick="$('.itemised').hide();$('.show-itemised').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a>
+	{/if}
+
+    {if $invoice.type_id == 3 }
+					<a href='#' class="show-consulting" onclick="$('.consulting').show();$('.show-consulting').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a>
+					<a href='#' class="consulting" onclick="$('.consulting').hide();$('.show-consulting').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a>
+>>>>>>> refs/remotes/simpleinvoices/master
     {/if}
     {* end itemised invoice *}
   {/if}
