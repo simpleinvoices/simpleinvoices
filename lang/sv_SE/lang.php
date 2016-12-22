@@ -14,11 +14,18 @@
 *    GPL v3 or above
 */
 
-/*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
-regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
+/*
+ *    "//1" means that the variable has been translated
+ *    "//0" means that the variable has not been translated
+ *    These values are used by a script to calculate how much of each file has been translated.
+ *    Use the regex pattern :%s/;/ /1/;// 1\/\/1/g - remove the spaces
  */
 
 #all
+
+global $LANG;
+if ($LANG) {} // eliminates unused warning
+
 $LANG['about'] = "Om";//1
 $LANG['account_info'] = "Konto Information";//1
 $LANG['actions'] = "Handlingar";//1
@@ -37,6 +44,8 @@ $LANG['add_new_row'] = "Lägg till ny rad";//1
 $LANG['add_new_tax_rate'] = "Lägg till Ny Skattesats";//1
 $LANG['add_payment_type'] = "Lägg till Betalningsform";//1
 $LANG['add_product'] = "Lägg till Produkt";//1
+$LANG['add_product_attribute'] = "Add Product Attribute";//0
+$LANG['add_product_value'] = "Add Product Value";//0
 $LANG['add_tax_rate'] = "Lägg till Skattesats";//1
 $LANG['address'] = "Adress";//1
 $LANG['address_city'] = "Stad";//1
@@ -56,8 +65,8 @@ $LANG['attribute_short'] = "Attr";//1
 $LANG['back'] = "Tillbaka";//1
 $LANG['backup_database'] = "Säkerhetskopiera Databas";//1
 $LANG['backup_database_now'] = "Spara din databas nu";//1
-$LANG['backup_done'] = "Din databas är nu kopierad till fil %s, du kan nu fortsätta använda Simple Invoices som vanligt.";//1
-$LANG['backup_howto'] = "För att skapa en säkerhetskopia av din Simple Invoices databas, klicka på länken nedan";//1
+$LANG['backup_done'] = "Din databas är nu kopierad till fil %s, du kan nu fortsätta använda SimpleInvoices som vanligt.";//1
+$LANG['backup_howto'] = "För att skapa en säkerhetskopia av din SimpleInvoices databas, klicka på länken nedan";//1
 $LANG['backup_note_to_file'] = "Detta skapar en säkerhetskopia av din databas till en fil i database_backups katalogen";//1
 $LANG['backup_your_database'] = "Säkerhetskopiera din databas";//1
 $LANG['before_starting'] = "Det finns bara ett fåtal saker att göra innan du kan börja fakturera";//1
@@ -76,6 +85,7 @@ $LANG['cancel'] = "Avbryt";//1
 $LANG['cannot_delete_first_row'] = "Första raden kan inte raderas";//1
 $LANG['change_log'] = "Ändra Logg";//1
 $LANG['city'] = "Stad";//1
+$LANG['company_name'] = "SimpleInvoices";//0
 $LANG['confirm_delete'] = "Är du säker att du vill radera";//1
 $LANG['consulting'] = "Konsultering";//1
 $LANG['consulting_style'] = "Konsulterings Stil";//1
@@ -87,7 +97,7 @@ $LANG['credit_card_expiry_month'] = "Giltigt t.o.m. månad";//1
 $LANG['credit_card_expiry_year'] = "Giltigt t.o.m. år";//1
 $LANG['credit_card_holder_name'] = "Kreditkortets ägare, namn";//1
 $LANG['credit_card_number'] = "Kreditkort nummer";//1
-$LANG['credit_card_number_encrypted'] = "Kreditkortets nummer är krypterad, och visas inte i Simple Invoices";//1
+$LANG['credit_card_number_encrypted'] = "Kreditkortets nummer är krypterad, och visas inte i SimpleInvoices";//1
 $LANG['credit_card_number_new'] = "Nytt kreditkort nummer";//1
 $LANG['credits'] = "Krediter";//1
 $LANG['currency_code'] = "Valuta tecken";//1
@@ -185,7 +195,7 @@ $LANG['faqs'] = "Frequently Asked Questions";//1
 $LANG['faqs_how'] = "Hur skapar jag fakturor?";//1
 $LANG['faqs_need'] = "Vad behöver jag för att börja fakturera?";//1
 $LANG['faqs_type'] = "Vad är skillnaden mellan de olika typerna av fakturor?";//1
-$LANG['faqs_what'] = "Vad är Simple Invoices?";//1
+$LANG['faqs_what'] = "Vad är SimpleInvoices?";//1
 $LANG['fax'] = "Fax";//1
 $LANG['filter_by_dates'] = "sortera efter datum";//1
 $LANG['filters'] = "Sortera";//1
@@ -202,23 +212,23 @@ $LANG['gross_total'] = "Brutto";//1
 $LANG['hello'] = "Hello";//1
 $LANG['help'] = "Hjälp";//1
 $LANG['help_age'] = "Fältet 'Ålder' indikerar hur länge fakturan har varit obetald. Om fakturan skapades den 1:a i månaden, om vid fakturan varit obetald den 21:a den månaden skulle fakturans 'Ålder' vara 21 dagar.<br /><br />Om fakturan har blivit betalad är fakturans 'Ålder' fält blankt.";//1
-$LANG['help_backup_database'] = "För att säkerhetskopieringen skall fungera måste webbserver användaren (förhopningsvis kör du Apache) ha läs/skriv rättigheter till database_backups katalogen i Simple Invoices mappen.<br /><br />Och om du är extra paranoid (som jag :) ) om din data så rekommenderar jag att använda phpMyAdmin. Detta säkerhetskopierings skript borde fungera som det skall, men om du kräver 'enterprise grade' säkerhetskopierings pålitlighet så är phpMyAdmin ett bra val.<br /><br />Obs: Om du använder Simple Invoices i demo miljön på SourceForge, så fungerar inte säkerhetskopieringen p.g.a. hur de har satt upp sina servrar.";//1
-$LANG['help_backup_database_fwrite'] = "<b>Fick du fwrite() felmeddelanden?</b><br />Om du fick fwrite() felmeddelanden när du försökte säkerhetkopiera din Simple Invoices databas betyder detta att webbserverns användare (förhoppningsvis kör du Apache) inte har läs/skriv rättigheter till tmp/database_backups katalogen i Simple Invoices mappen.<br /><br />Vänligen ändra rättigheterna på denna katalog och försök köra säkerhetskopieringen igen. För att ändra rättigheterna för tmp/database_backups katalogen i Unix/Linux/OSX cd:a dig till Simple Invoices mappen (<i>cd /var/www/html/simpleinvoices</i>) och sen kör chmod kommandot för att ge webbserver användaren läs/skriv rättigheter (<i>chmod -Rv 777 tmp/database_backups</i>)";//1
-$LANG['help_blog'] = "Simple Invoices Blogg";//1
+$LANG['help_backup_database'] = "För att säkerhetskopieringen skall fungera måste webbserver användaren (förhopningsvis kör du Apache) ha läs/skriv rättigheter till database_backups katalogen i SimpleInvoices mappen.<br /><br />Och om du är extra paranoid (som jag :) ) om din data så rekommenderar jag att använda phpMyAdmin. Detta säkerhetskopierings skript borde fungera som det skall, men om du kräver 'enterprise grade' säkerhetskopierings pålitlighet så är phpMyAdmin ett bra val.<br /><br />Obs: Om du använder SimpleInvoices i demo miljön på SourceForge, så fungerar inte säkerhetskopieringen p.g.a. hur de har satt upp sina servrar.";//1
+$LANG['help_backup_database_fwrite'] = "<b>Fick du fwrite() felmeddelanden?</b><br />Om du fick fwrite() felmeddelanden när du försökte säkerhetkopiera din SimpleInvoices databas betyder detta att webbserverns användare (förhoppningsvis kör du Apache) inte har läs/skriv rättigheter till tmp/database_backups katalogen i SimpleInvoices mappen.<br /><br />Vänligen ändra rättigheterna på denna katalog och försök köra säkerhetskopieringen igen. För att ändra rättigheterna för tmp/database_backups katalogen i Unix/Linux/OSX cd:a dig till SimpleInvoices mappen (<i>cd /var/www/html/simpleinvoices</i>) och sen kör chmod kommandot för att ge webbserver användaren läs/skriv rättigheter (<i>chmod -Rv 777 tmp/database_backups</i>)";//1
+$LANG['help_blog'] = "SimpleInvoices Blogg";//1
 $LANG['help_community_forums'] = "Diskussions Forum";//1
 $LANG['help_cost'] = "'Kostnad' avser kostnaden för vad produkten kostar dig - detta används till lager och vinst beräkning";//1
 $LANG['help_currency_code'] = "Valuta kod är förkortningen, 3 tecken, för din valda valuta. T. Ex. för US Dollar är den 'USD' etc.. OBS!: denna information används vid online betalnings metoder så som Paypal för att ange valutan";//1
 $LANG['help_custom_fields'] = "Detta fält är ett 'Egendefinierat Fält'. Detta betyder att beskrivningen kan sättas till vad du själv vill (t.ex. Streckkod, Moms nummer, MSN, osv...). <br /><br />För att redigera eller visa existerande 'Egendefinierade Fält' välj Egendefinierade Fält i Inställningar menyn.";//1
 $LANG['help_customer_contact'] = "Kontaktperson fältet ger dig möjlighet att specificera en kontaktperson inom din kunds verksamhet.<br /><br />Detta är användbart om din kund har många anställda och du måste markera på fakturan åt vem inom verksamheten denna faktura är.<br /><br />T.ex. Inom kunden 'Springfield Power Plant' vill du kanske specificera Mr Burns (eller Smithers) som kundens kontaktperson eftersom de är personen som får fakturan.<br /><br />Så en faktura kommer se ut som följande<br /><br />Kund: Springfield Power Plant<br />Kontaktperson: Mr Burns<br />";//1
-$LANG['help_database_patches'] = "<b>Databas patchar behöver tillämpas</b><br />Det finns databas patchar som behöver tillämpas. Vänligen välj Databas Uppgraderings Hantering' från Inställningar menyn och följ instruktionerna.<br /><br />'Databas Uppgraderings Hanteringen' är hur Simple Invoices behandlar modifikationer i strukturen för Simple Invoices databasen. Med varje ny release kan det finnas 'Databas Patchar' som måste tillämpas. Databas Uppgraderings Hanteringen ser efter dessa Databas Patchar.<br /><br />Databas patchar är individuella modifikationer i Simple Invoices databasen. Med en ny release kan det finnas flera patchar som måste tillämpas.";//1
+$LANG['help_database_patches'] = "<b>Databas patchar behöver tillämpas</b><br />Det finns databas patchar som behöver tillämpas. Vänligen välj Databas Uppgraderings Hantering' från Inställningar menyn och följ instruktionerna.<br /><br />'Databas Uppgraderings Hanteringen' är hur SimpleInvoices behandlar modifikationer i strukturen för SimpleInvoices databasen. Med varje ny release kan det finnas 'Databas Patchar' som måste tillämpas. Databas Uppgraderings Hanteringen ser efter dessa Databas Patchar.<br /><br />Databas patchar är individuella modifikationer i SimpleInvoices databasen. Med en ny release kan det finnas flera patchar som måste tillämpas.";//1
 $LANG['help_default_invoice_template_text'] = "<b>Obs</b><br />Värdet du fyller in i standard faktura mallen MÅSTE vara det aktuella mappnamnet för mallen du väljer. Faktura mallarna finns i (./templates/invoices/)<br /><br />";//1
 $LANG['help_delete'] = "Genom att aktivera Radering, kommer du ha möjlighet att radera fakturor du inte lägre vill ha via Snabbvisningen för den fakturan.<br /><br />För att radera en faktura, aktivera denna inställning, gå till sidan Hantera Fakturor och välj Snabbvisning för fakturan du vill radera. I Snabbnvisnings vyn kommer det nu finnas en Radera valmöjlighet i handlingar menyn. Klicka på denna knapp och följ textrutorna - Din faktura kommer nu att raderas.<br /><br />Obs: För tillfället kan endast fakturor raderas, men inom en nära framtid kommer detta utvidgas till de andra sektionerna (t.ex. fordringsägare, kunder, osv..)";//1
 $LANG['help_email_bcc'] = "Detta fält är inte obligatoriskt och får sitt standardvärde från Fordringsägarens e-post adress.<br /><br />Det rekommenderas att du lägger till dig själv som BCC för detta e-post meddelande så att du själv får en kopia. På så sätt vet du att meddelandet har skickats korrekt och du alltid har en kopia av meddelandet.<br /><br /><i>Obs: Du kan lägga till flera e-post adresser här - bara använd antingen , eller ; för att sära på adresserna</i>";//1
 $LANG['help_email_cc'] = "Detta fält är inte obligatoriskt. Här kan du specificera den e-post adress du vill skicka en CC till, men du kan inte lägga till mer än en (1) adress i detta fält.<br /><br /><i>Obs: Det kan endast finnas en (1) e-post adress i detta fält.</i>";//1
 $LANG['help_email_from'] = "Detta fält är obligatoriskt och får sitt standard värde från Fordringsägarens e-post adress. Du kan ändra denna e-post adress efter behov men kan inte lägga till mer än en (1) adress i detta fält.<br /><br /><i>Obs: Det kan endast finnas en (1) e-post adress i detta fält.</i>";//1
 $LANG['help_email_to'] = "Detta fält är obligatoriskt och får sitt standard värde från Kundens e-post adress. Du kan ändra denna e-post adress efter behov.<br /><br /><i>Obs: Du kan lägga till flera e-post adresser här - bara använd antingen , eller ; för att sära på adresserna</i>";//1
-$LANG['help_insert_biller_text'] = "För att inte välja någon logo välj '_default_blank_logo.png' från listan.<br /><br />För att lägga till ytterligare logon till Simple Invoices, kopiera logo filen till logo mappen i Simple Invoices mappen.";//1
-$LANG['help_inv_pref_currency_sign'] = "Detta är valuta tecknet som kommer användas på fakturan.<br /><br /><b>Obs:</b> Euro, Pund osv.. Vänligen använd html koden för ditt valuta tecken i detta fält. Hänvisa till listan med html koder på följande webbsida för valuta tecken <a href='http://www.ascii.cl/htmlcodes.htm'>http://www.ascii.cl/htmlcodes.htm</a>.<br /><br />Detta krävs för att PDF kan fungera korrekt med andra valutor än \$.<br /><br /> &#38;#163; är html koden för Pund,<br /> &#38;#8364; för Euro, osv..";//1
+$LANG['help_insert_biller_text'] = "För att inte välja någon logo välj '_default_blank_logo.png' från listan.<br /><br />För att lägga till ytterligare logon till SimpleInvoices, kopiera logo filen till logo mappen i SimpleInvoices mappen.";//1
+$LANG['help_inv_pref_currency_sign'] = "Detta är valuta tecknet som kommer användas på fakturan.<br /><br /><b>Obs:</b> Euro, Pund osv.. Vänligen använd html koden för ditt valuta tecken i detta fält. Hänvisa till listan med html koder på följande webbsida för valuta tecken <a href='http://www.ascii.cl/htmlcodes.htm'>http://www.ascii.cl/htmlcodes.htm</a>.<br /><br />Detta krävs för att PDF kan fungera korrekt med andra valutor än $.<br /><br /> &#38;#163; är html koden för Pund,<br /> &#38;#8364; för Euro, osv..";//1
 $LANG['help_inv_pref_description'] = "Detta är namnet för faktura mallen - det används inte på själva fakturan, bara vid skapandet av fakturor när du väljer i drop down menyn vilken Faktura Mall du vill använda.";//1
 $LANG['help_inv_pref_invoice_detail_heading'] = "Detta är vad som kommer synas som rubrik i sidfoten/detaljerna för fakturan.";//1
 $LANG['help_inv_pref_invoice_detail_line'] = "Detta är den text som kommer synas under detaljer/sidfots rubriken. Vanligen använt för att ange betalnings villkor osv.";//1
@@ -233,28 +243,28 @@ $LANG['help_inv_pref_payment_line1_value'] = "Här kan du specificera värdet f�
 $LANG['help_inv_pref_payment_line2_name'] = "Här kan du specificera namnet för betalnings linje 2 t.ex. 'Konto nummer'.";//1
 $LANG['help_inv_pref_payment_line2_value'] = "Här kan du specificera värdet för betalnings linje 2 t.ex. Konto nummer '0123-4567-89'.";//1
 $LANG['help_inv_pref_status'] = "En mall kan ha status 'Utkast' eller 'Öppen'. Utkast indikerar att den är liknande till en offert och inkluderas inte i försäljnings rapporterna. Öppen betyder att detta är en äkta faktura och inkluderas i försäljnings rapporterna.";//1
-$LANG['help_inv_pref_what_the'] = "Faktura Mallar låter dig ange texten i fakturan. Du kan ha hur många olika 'Faktura Mallar' angivna i Simple Invoices som du vill, men du kan endast välja 1 'Faktura Mall' per faktura.<br /><br />T.ex. Om du ville ha rubriken för fakturan att säga 'Moes Tavern - Faktura' istället för standard 'Faktura', så kan du redigera 'Faktura rubrik' fältet i den relevanta Faktura Mallen för att åstadkomma detta.";//1
-$LANG['help_invoice_create'] = "Att skapa fakturor är lätt. När en fordringsägare och kund har lagts till i Simple Invoices behöver du bara välja en fakturamall, fylla i detaljerna och klicka på 'Spara Faktura'.";//1
-$LANG['help_invoice_custom_fields'] = "Behöver du fler fält i faktura vyn? Vill du ha dina egna fält så som 'Inköpsordning', 'Projekt Namn' osv..<br /><br />Simple Invoices låter dig lägga till vilka fält du vill till fakturorna. Dessa kallas 'egendefinierade fält', för att redigera eller sätta upp dina egna fält välj Egendefinierade Fält i Inställningar menyn.";//1
-$LANG['help_invoice_types'] = "I Simple Invoices finns det 2 typer av fakturor tillgängliga<br /><br />En <b>Artikelvis Faktura</b> är en faktura som listar många olika poster på samma faktura, med valfritt antecknings fält för varje post - tänk mataffärs faktura.<br/ ><br />En <b>Totalt Faktura</b> är t.ex. en faktura från rörmokaren som listar vad som gjorts och sedan har ett slutpris och skatt.";//1
-$LANG['help_logging'] = "För att logga handlingar som gör i Simple Invoices aktivera denna inställning. Detta skapar en logg i databasen på vad som gjorts.<br /><br />Obs: För tillfället är det ända sättet att se loggen att logga in i databasen. Vi kommer snart lägga till en snygg logg visare i Simple Invoices.";//1
+$LANG['help_inv_pref_what_the'] = "Faktura Mallar låter dig ange texten i fakturan. Du kan ha hur många olika 'Faktura Mallar' angivna i SimpleInvoices som du vill, men du kan endast välja 1 'Faktura Mall' per faktura.<br /><br />T.ex. Om du ville ha rubriken för fakturan att säga 'Moes Tavern - Faktura' istället för standard 'Faktura', så kan du redigera 'Faktura rubrik' fältet i den relevanta Faktura Mallen för att åstadkomma detta.";//1
+$LANG['help_invoice_create'] = "Att skapa fakturor är lätt. När en fordringsägare och kund har lagts till i SimpleInvoices behöver du bara välja en fakturamall, fylla i detaljerna och klicka på 'Spara Faktura'.";//1
+$LANG['help_invoice_custom_fields'] = "Behöver du fler fält i faktura vyn? Vill du ha dina egna fält så som 'Inköpsordning', 'Projekt Namn' osv..<br /><br />SimpleInvoices låter dig lägga till vilka fält du vill till fakturorna. Dessa kallas 'egendefinierade fält', för att redigera eller sätta upp dina egna fält välj Egendefinierade Fält i Inställningar menyn.";//1
+$LANG['help_invoice_types'] = "I SimpleInvoices finns det 2 typer av fakturor tillgängliga<br /><br />En <b>Artikelvis Faktura</b> är en faktura som listar många olika poster på samma faktura, med valfritt antecknings fält för varje post - tänk mataffärs faktura.<br/ ><br />En <b>Totalt Faktura</b> är t.ex. en faktura från rörmokaren som listar vad som gjorts och sedan har ett slutpris och skatt.";//1
+$LANG['help_logging'] = "För att logga handlingar som gör i SimpleInvoices aktivera denna inställning. Detta skapar en logg i databasen på vad som gjorts.<br /><br />Obs: För tillfället är det ända sättet att se loggen att logga in i databasen. Vi kommer snart lägga till en snygg logg visare i SimpleInvoices.";//1
 $LANG['help_mailing_list'] = "Mejllista";//1
 $LANG['help_manage_custom_fields'] = "Egendefinierade Fält är speciella fält som du kan namnge efter behov.<br /><br />Denna sida låter dig ange upp till 4 egendefinierade fält för var och en av följande: produkter, kunder, fordringsägare, och fakturor.<br /><br />När du namnger ett av fälten blir det genast tillgängligt för användning. T.ex. om du redigerar 'Faktura :: Egendefinierat fält 1' och ger det namnet 'Projekt namn', nästa gång du skapar en faktura kommer det finnas ett nytt fält i faktura vyn som kallas 'Projekt namn'.";//1
-$LANG['help_mysql4'] = "Eftersom du använder MySQL 4 eller äldre som din databas server har vissa funktioner i Simple Invoices inaktiverats. Några SQL-satser i Simple Invoices drar nytta av de nya funktionerna i MySQL 5, så saker som snabbrapporter här i Panelen, några skuldrapporter och en del andra funktioner har inaktiverats.";//1
+$LANG['help_mysql4'] = "Eftersom du använder MySQL 4 eller äldre som din databas server har vissa funktioner i SimpleInvoices inaktiverats. Några SQL-satser i SimpleInvoices drar nytta av de nya funktionerna i MySQL 5, så saker som snabbrapporter här i Panelen, några skuldrapporter och en del andra funktioner har inaktiverats.";//1
 $LANG['help_new_password'] = "Om du vill byta användarens lösenord fyll i detta fält.<br /><br />OBS: Om du inte vill byta lösenord lämna detta fält blankt.";//1
 $LANG['help_process_payment_auto_amount'] = "Värdet i fältet <b>Summa</b> sätts automatiskt till summan för obetalda fordringar för vald faktura. Detta fält är redigerbart och du kan ändra summan till den verkliga summan som inbetalats.<br /><br />Detta fält sätts automatiskt till summan för obetalda fordringar eftersom den vanligaste summan som skall behandlas är samma som fordringens summa.";//1
 $LANG['help_process_payment_details'] = "När en faktura har valts i 'Faktura ID' fältet visas fordringsägarens namn, kundens namn, fakturans summa, redan inbetalad summa och utestående summa i sektionen 'Detaljer' i 'Behandla Betalning' vyn.<br /><br />Om du inte ser någon information i 'Detaljer' sektionen har du antingen inte valt en giltig faktura i 'Faktura ID' eller så har du inte angett fakturans ID rätt. Vänligen hänvisa till Faktura ID på denna sida om hur man anger fakturans ID på rätt sätt.";//1
 $LANG['help_process_payment_inv_id'] = "För att välja en faktura att behandla betalning emot vänligen ange faktura numret i 'Faktura ID' fältet. Detta fält är ett 'auto-complete' fält, vilket innebär säg att du har 12 fakturor i din databas, när du anger '1' i fältet kommer det returnera en drop down lista med alla fakturor med '1' i sitt <b>Faktura ID</b>.<br /><br />Så fakturorna 1,10,11, och 12 kommer returneras om du anger '1'. För att välja faktura använd antingen pil tangenterna på ditt tangentbord och tryck Enter på rätt faktura eller använd musen och klicka på rätt faktura.<br /><br />När en faktura har valts med ovanstående process kommer alla detaljer för denna faktura att visas i 'Detaljer' sektionen i Behandla Betalnings vyn.";//1
-$LANG['help_reports_xsl'] = "<b>Rapportera fel</b><br />Om du fick ett 'OOOOPS, THERE'S AN ERROR HERE.' felmeddelande när du försökte köra en rapport i Simple Invoices betyder detta att din version av PHP inte har de nödvändiga tilläggen installerade (eller aktiverade).<br /><br />Om du kör en Windows server och använder WAMP5 vänligen hänvisa till sidan på Simple Invoices wiki för information om hur man löser detta http://simpleinvoices.org/wiki/doku.php?id=how_to_i_get_reports_working_in_windows_wamp5<br /><br />Om du kör Unix/Linux och PHP5 kontrollera att du har xsl tillägget installerat och aktiverat i php.ini. I Ubuntu GNU/Linux vänligen installera php-xsl paketet för PHP5<br /><br />Om du använder PHP4 vänligen kontrollera att PHP har Sablotron support '--enable-xslt'<br /><br />Obs: Om du använder Simple Invoices i demo miljön på SourceForge så fungerar inte rapporterna p.g.a. hur de har satt upp sina servrar.";//1
+$LANG['help_reports_xsl'] = "<b>Rapportera fel</b><br />Om du fick ett 'OOOOPS, THERE'S AN ERROR HERE.' felmeddelande när du försökte köra en rapport i SimpleInvoices betyder detta att din version av PHP inte har de nödvändiga tilläggen installerade (eller aktiverade).<br /><br />Om du kör en Windows server och använder WAMP5 vänligen hänvisa till sidan på SimpleInvoices wiki för information om hur man löser detta http://simpleinvoices.org/wiki/doku.php?id=how_to_i_get_reports_working_in_windows_wamp5<br /><br />Om du kör Unix/Linux och PHP5 kontrollera att du har xsl tillägget installerat och aktiverat i php.ini. I Ubuntu GNU/Linux vänligen installera php-xsl paketet för PHP5<br /><br />Om du använder PHP4 vänligen kontrollera att PHP har Sablotron support '--enable-xslt'<br /><br />Obs: Om du använder SimpleInvoices i demo miljön på SourceForge så fungerar inte rapporterna p.g.a. hur de har satt upp sina servrar.";//1
 $LANG['help_required_field'] = "Detta är ett obligatoriskt fält. Du måste ange ett värde i detta fält innan du kan spara formuläret<br /><br />";//1
 $LANG['help_si_help'] = "Simple Invoice Hjälp";//1
-$LANG['help_simple_invoices'] = "Simple Invoices är ett simpelt faktureringssystem designat med enkelhet och funktionalitet i tanken. Det tillgodoser behoven för små organisationer och hemma användare.<br /><br />För mera information vänligen hänvisa till Simple Invoices webbsida: <a href='http://www.simpleinvoices.org' target='_blank'><b>http://www.simpleinvoices.org</b></a>";//1
+$LANG['help_simple_invoices'] = "SimpleInvoices är ett simpelt faktureringssystem designat med enkelhet och funktionalitet i tanken. Det tillgodoser behoven för små organisationer och hemma användare.<br /><br />För mera information vänligen hänvisa till SimpleInvoices webbsida: <a href='http://www.simpleinvoices.org' target='_blank'><b>http://www.simpleinvoices.org</b></a>";//1
 $LANG['help_street2'] = "Fältet 'Gatuadress 2' används när adressen för fordringsägaren eller kunden är antingen för långt för att rymmas på en rad eller innehåller flera delar.<br /><br />T.ex. gatuadressen 'Level 234, 325 South Malvern Road' kan delas upp till<br /><br />Gatuadress 1: Level 234<br />Gatuadress 2: 325 South Malvern Road";//1
 $LANG['help_tax_rate_sign'] = "En skattesats kan antingen vara procentbaserad (ex. Försäljnings Skatt 10%) eller penga värden (ex. $10 eller £20).<br /><br />$-tecknet i drop down menyn indikerar endast att detta kommer vara en penga värdes skala, inte valuta tecknet. 'Faktura Inställningen' som du använder bestämmer vilken valuta symbol som används på dina fakturor.";//1
-$LANG['help_text'] = "<b>Varning</b><br /><br />Vänligen säkerhetskopiera din Simple Invoices databas innan du kör databas uppdateringen, ifall om något dåligt skulle hända.<br /><br />För att säkerhetskopiera databasen, välj 'Säkerhetskopiera Databas' i Inställningar menyn, eller använd phpMyAdmin (om du har detta installerat) för att säkerhetskopiera databasen.";//1
-$LANG['help_user_role'] = "Det finns 3 roller tillgängliga<br /><br />Administrator:<br />som har tillgång till allt i Simple Invoices<br /><br />User:<br />som har läs/skriv rättigheter till allt i Simple Invoices, men inte tillgång till Inställningar menyn<br /><br />Viewer:<br />som endast har läs rättigheter";//1
+$LANG['help_text'] = "<b>Varning</b><br /><br />Vänligen säkerhetskopiera din SimpleInvoices databas innan du kör databas uppdateringen, ifall om något dåligt skulle hända.<br /><br />För att säkerhetskopiera databasen, välj 'Säkerhetskopiera Databas' i Inställningar menyn, eller använd phpMyAdmin (om du har detta installerat) för att säkerhetskopiera databasen.";//1
+$LANG['help_user_role'] = "Det finns 3 roller tillgängliga<br /><br />Administrator:<br />som har tillgång till allt i SimpleInvoices<br /><br />User:<br />som har läs/skriv rättigheter till allt i SimpleInvoices, men inte tillgång till Inställningar menyn<br /><br />Viewer:<br />som endast har läs rättigheter";//1
 $LANG['help_what_are_custom_fields'] = "Egendefinierade Fält är special fält i fordringsägare, produkter, kunder, och fakturor som du kan namnge hur du vill.<br /><br />Om du öskar att det fanns ett Skattesats ID fält i fordringsägare, gå till Egendefinierade Fält sidan och namnge ett av de blanka Fordringsägare Egendefinerat Fält till Skattesats ID.<br /><br />Nu när du går och redigerar en Fordringsägare kommer det finnas ett nytt fält kallat Skattesats ID eller vad annat du döpt det till.";//1
-$LANG['help_wheres_the_edit_button'] = "På Behandla Betalning sidan finns det ingen 'Redigera' knapp. Detta är för att ge ett korrekt 'revisions spår' för betalningar som registrerats i Simple Invoices.<br /><br />Om du gjort ett misstag med en betalning är det bästa alternativet att återkalla posten och lägga till en ny post korrekt.<br /><br />Återkalla posten - vad i?<br />Detta betyder helt enkelt bara att lägga till en negativ post på samma summa som original posten.<br /><br />Ex.<br />Om du angav \$110<br />men borde ha angivit \$1100<br />för att återkalla denna post ange -$110 emot samma faktura och sen ange den rätta summan på \$1100";//1
+$LANG['help_wheres_the_edit_button'] = "På Behandla Betalning sidan finns det ingen 'Redigera' knapp. Detta är för att ge ett korrekt 'revisions spår' för betalningar som registrerats i SimpleInvoices.<br /><br />Om du gjort ett misstag med en betalning är det bästa alternativet att återkalla posten och lägga till en ny post korrekt.<br /><br />Återkalla posten - vad i?<br />Detta betyder helt enkelt bara att lägga till en negativ post på samma summa som original posten.<br /><br />Ex.<br />Om du angav $110<br />men borde ha angivit $1100<br />för att återkalla denna post ange -$110 emot samma faktura och sen ange den rätta summan på $1100";//1
 $LANG['hide_details'] = "Göm detaljer";//1
 $LANG['home'] = "Hem";//1
 $LANG['id'] = "ID";//1
@@ -266,6 +276,8 @@ $LANG['insert_customer'] = "Spara Kund";//1
 $LANG['insert_payment_type'] = "Spara Betalningsform";//1
 $LANG['insert_preference'] = "Spara Inställning";//1
 $LANG['insert_product'] = "Spara Produkt";//1
+$LANG['insert_product_attribute'] = "Insert Product Attribute";//0
+$LANG['insert_product_value'] = "Insert Product Value";//0
 $LANG['insert_tax_rate'] = "Spara Skattesats";//1
 $LANG['installation'] = "Installation";//1
 $LANG['inv'] = "Faktura";//1
@@ -321,6 +333,8 @@ $LANG['manage_invoices'] = "Hantera Fakturor";//1
 $LANG['manage_payment_types'] = "Hantera Betalningsformer";//1
 $LANG['manage_payments'] = "Hantera Betalningar";//1
 $LANG['manage_preferences'] = "Hantera Inställningar";//1
+$LANG['manage_product_attributes'] = "Manage Product Attributes";//0
+$LANG['manage_product_values'] = "Manage Product Value";//0
 $LANG['manage_products'] = "Hantera Produkter";//1
 $LANG['manage_tax_rates'] = "Hantera Skattesatser";//1
 $LANG['mandatory_fields'] = "Alla fält är obligatoriska";//1
@@ -405,10 +419,11 @@ $LANG['plugin_not_registered'] = "Ej registrerad";//1
 $LANG['plugin_register'] = "Registrera tillägget 'plugin'";//1
 $LANG['plugin_registered'] = "Tillägget 'plugin' registrerat";//1
 $LANG['plugin_unregister'] = "Avregistrera tillägg 'plugin'";//1
+$LANG['powered_by'] = "Powered by";//0
 $LANG['preference'] = "inställning";//1
 $LANG['preference_id'] = "Inställnings ID";//1
 $LANG['preferences'] = "Inställningar";//1
-$LANG['prepare_simple_invoices'] = "Förbered Simple Invoices för användning";//1
+$LANG['prepare_simple_invoices'] = "Förbered SimpleInvoices för användning";//1
 $LANG['price'] = "Pris";//1
 $LANG['print_preview'] = "Förhandsgranska";//1
 $LANG['print_preview_tooltip'] = "Förhandsgranska";//1
@@ -421,6 +436,7 @@ $LANG['process_payment_inv_id'] = "Behandla Betalning Faktura ID";//1
 $LANG['process_payment_via_eway'] = "Behandla Betalning via Eway";//1
 $LANG['processing'] = "Behandling pågår, vänligen vänta...";//1
 $LANG['product'] = "Produkt";//1
+$LANG['product_attribute'] = "Product Attribute";//0
 $LANG['product_attributes'] = "Produktattribut";//1
 $LANG['product_description'] = "Produkt Beskrivning";//1
 $LANG['product_description_prompt'] = "Man måste fylla i en beskrivning av produkten";//1
@@ -430,6 +446,7 @@ $LANG['product_id'] = "Produkt ID";//1
 $LANG['product_sales'] = "Produkt Försäljning";//1
 $LANG['product_to_add'] = "Produkt som skall läggas till";//1
 $LANG['product_unit_price'] = "Produkt Enhetspris";//1
+$LANG['product_value'] = "Product Value";//0
 $LANG['product_values'] = "Produktvärde";//1
 $LANG['products'] = "Produkter";//1
 $LANG['products_by_customer'] = "Produkter efter Kund";//1
@@ -510,8 +527,7 @@ $LANG['setup_customisation'] = "Om du behöver skräddarsy inställningarna (ex.
 $LANG['shortcut'] = "Genvägs meny";//1
 $LANG['show_details'] = "Visa detaljer";//1
 $LANG['show_only_unpaid_invoices'] = "Visa endast obetalda fakturor";//1
-$LANG['simple_invoices'] = "Simple Invoices";//1
-$LANG['simple_invoices_powered_by'] = "Powered by Simple Invoices";//0
+$LANG['simple_invoices'] = "SimpleInvoices";//0
 $LANG['start_date'] = "Startdatum (ÅÅÅÅ-MM-DD)";//1
 $LANG['start_date_short'] = "Startdatum";//1
 $LANG['start_working'] = "Börja jobba";//1
@@ -547,8 +563,26 @@ $LANG['tax_rate_to_add'] = "Skattesats som läggs till";//1
 $LANG['tax_rates'] = "Skattesatser";//1
 $LANG['tax_total'] = "Skatte Summa";//1
 $LANG['telephone_short'] = "Tel";//1
-$LANG['thank_you'] = "Tack för att du valt Simple Invoices!";//1
+$LANG['thank_you'] = "Tack för att du valt SimpleInvoices!";//1
 $LANG['thank_you_inv'] = "Tack för att du fakturerar med ";//1
+$LANG['title_module_billers'] = "Användare / Fordringsägare";//1
+$LANG['title_module_cron'] = "Money / Recurrence";//0
+$LANG['title_module_custom_fields'] = "Inställningar / Egendefinerade fält";//1
+$LANG['title_module_customers'] = "Personer / Kunder";//1
+$LANG['title_module_index'] = "Hem";//1
+$LANG['title_module_invoices'] = "Pengar / Fakturor";//1
+$LANG['title_module_options'] = "Inställningar";//1
+$LANG['title_module_payment_types'] = "Inställningar / Betalningstyper";//1
+$LANG['title_module_payments'] = "Pengar / Betalningar";//1
+$LANG['title_module_preferences'] = "Inställningar / Fakturor";//1
+$LANG['title_module_product_attribute'] = "Produkter / Produktattribut";//1
+$LANG['title_module_product_value'] = "Produkter / Produktvärde";//1
+$LANG['title_module_products'] = "Produkter";//1
+$LANG['title_module_reports'] = "Hem / Rapporter";//1
+$LANG['title_module_system_defaults'] = "Inställningar / System inställningar";//1
+$LANG['title_module_tax_rates'] = "Inställningar / Skattesatser";//1
+$LANG['title_module_user'] = "Personer / Användare";//1
+$LANG['title_view_index'] = "Kontrollpanel";//1
 $LANG['to'] = "Till";//1
 $LANG['to_lowercase'] = "till";//1
 $LANG['toggle_status'] = "Växla status";//1
@@ -570,10 +604,10 @@ $LANG['type'] = "Typ";//1
 $LANG['unit_cost'] = "Varans kostnad";//1
 $LANG['unit_price'] = "Enhetspris";//1
 $LANG['unpaid_invoices'] = "Obetalt Fakturer";//1
-$LANG['upgrading_simple_invoices'] = "Uppgradera Simple Invoices";//1
+$LANG['upgrading_simple_invoices'] = "Uppgradera SimpleInvoices";//1
 $LANG['user_add'] = "Lägg till Användare";//1
 $LANG['users'] = "Användare";//1
-$LANG['using_simple_invoices'] = "använder Simple Invoices";//1
+$LANG['using_simple_invoices'] = "använder SimpleInvoices";//1
 $LANG['value'] = "Värde";//1
 $LANG['view'] = "Visa";//1
 $LANG['visible'] = "Synlig";//1
@@ -589,32 +623,3 @@ $LANG['years'] = "år";//1
 $LANG['yes'] = "Ja";//1
 $LANG['your_reports'] = "Dina rapporter";//1
 $LANG['zip'] = "Postnummer";//1
-$LANG['manage_product_attributes'] = "Manage Product Attributes";//0
-$LANG['add_product_attribute'] = "Add Product Attribute";//0
-$LANG['insert_product_attribute'] = "Insert Product Attribute";//0
-$LANG['product_attribute'] = "Product Attribute";//0
-$LANG['add_product_value'] = "Add Product Value";//0
-$LANG['insert_product_value'] = "Insert Product Value";//0
-$LANG['product_value'] = "Product Value";//0
-$LANG['manage_product_values'] = "Manage Product Value";//0
-
-$LANG['title_module_index']				= "Hem";//1
-$LANG['title_module_reports']			= "Hem / Rapporter";//1
-$LANG['title_module_invoices']			= "Pengar / Fakturor";//1
-$LANG['title_module_cron']				= "Money / Recurrence";//0
-$LANG['title_module_payments']			= "Pengar / Betalningar";//1
-$LANG['title_module_billers']			= "Användare / Fordringsägare";//1
-$LANG['title_module_customers']			= "Personer / Kunder";//1
-$LANG['title_module_user']				= "Personer / Användare";//1
-$LANG['title_module_products']			= "Produkter";//1
-$LANG['title_module_product_attribute']	= "Produkter / Produktattribut";//1
-$LANG['title_module_product_value']		= "Produkter / Produktvärde";//1
-$LANG['title_module_options']			= "Inställningar";//1
-$LANG['title_module_system_defaults']	= "Inställningar / System inställningar";//1
-$LANG['title_module_custom_fields']		= "Inställningar / Egendefinerade fält";//1
-$LANG['title_module_tax_rates']			= "Inställningar / Skattesatser";//1
-$LANG['title_module_preferences']		= "Inställningar / Fakturor";//1
-$LANG['title_module_payment_types']		= "Inställningar / Betalningstyper";//1
-$LANG['title_view_index']				= "Kontrollpanel";//1
-
-?>

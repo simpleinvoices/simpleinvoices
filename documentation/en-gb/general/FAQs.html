@@ -1,31 +1,38 @@
+<!DOCTYPE html>
 <html>
 <head>
-<title>
-Simple Invoices - Frequently Asked Questions
-</title>
+  <title>SimpleInvoices - Frequently Asked Questions</title>
 </head>
-
+<body>
 <ul>
-	<li>The FAQs page is still a work in progress
-	<ul>
-		<li>SI Cron
-			<ul>
-				<li>To use cron to generate recurrent invoices, prepare a file <b>si_cron</b> and place it in the <b>/etc/cron.d</b> folder in linux with the following contents:
-<pre>#Simple Invoices recurrence - run each day at 1AM
-0 1 * * * /usr/bin/wget -q -O - http://localhost/api-cron  >/dev/null 2>&1</pre>
-				<li>Now run the command: <tt>crontab /etc/cron.d/si_cron</tt>
-			</ul>
-		<li>Sample Apache configuration file in debian (/etc/apache2/sites-available/simpleinvoices)
-<pre>
+  <li>The FAQs page is still a work in progress
+    <ul>
+      <li>SI Cron
+        <ul>
+          <li>
+            To use cron to generate recurrent invoices, prepare a file <b>si_cron</b> and place it in the <b>/etc/cron.d</b>
+            folder in linux with the following contents:
+            <br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;<b>#SimpleInvoices recurrence - run each day at 1 AM</b>
+            <br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;<b>0 1 * * * &#47;usr&#47;bin&#47;wget -q -O - http:&#47;&#47;localhost&#47;api-cron &gt;/dev/null 2&gt;&#38;1</b>
+          </li>
+          <li>
+            Now run the command: <b>crontab&nbsp;/etc/cron.d/si_cron</b>
+          </li>
+        </ul>
+        <ul>
+          <li>Sample Apache configuration file in debian (/etc/apache2/sites-available/simpleinvoices)
+<pre style="font-family:'Lucidia Console', 'Courier New';">
 ServerAdmin webmaster@localhost
 ServerSignature Off
 ServerTokens Prod
 
 &lt;IfModule mpm_prefork_module&gt;
-    StartServers 2
-    MinSpareServers 1 
-    MaxSpareServers 2
-    MaxClients          50
+    StartServers          2
+    MinSpareServers       1 
+    MaxSpareServers       2
+    MaxClients           50
     MaxRequestsPerChild 100
 &lt;/IfModule&gt;
 
@@ -34,49 +41,48 @@ ServerTokens Prod
 DocumentRoot /var/www/simpleinvoices
 
 &lt;Directory /&gt;
-	Options FollowSymLinks
-	AllowOverride None
+    Options FollowSymLinks
+    AllowOverride None
 &lt;/Directory&gt;
 
 &lt;Directory /var/www/simpleinvoices&gt;
-	Options FollowSymLinks MultiViews
-	AllowOverride None
-	Order allow,deny
-	allow from all
-	DirectoryIndex index.php index.html
+    Options FollowSymLinks MultiViews
+    AllowOverride None
+    Order allow,deny
+    allow from all
+    DirectoryIndex index.php index.html
 
-	RewriteBase /
-	RewriteEngine on
-	RewriteCond %{REQUEST_FILENAME} !-f
-	RewriteRule ^/?([a-zA-Z0-9_]+)-([a-zA-Z0-9_]+)-([a-zA-Z0-9_]+)?$ index.php?module=$1&view=$2&id=$3
-	RewriteCond %{REQUEST_FILENAME} !-f
-	RewriteRule ^/?([a-zA-Z0-9_]+)-([a-zA-Z0-9_]+)$ index.php?module=$1&view=$2 [L]
+    RewriteBase /
+    RewriteEngine on
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^/?([a-zA-Z0-9_]+)-([a-zA-Z0-9_]+)-([a-zA-Z0-9_]+)?$ index.php?module=$1&amp;view=$2&amp;id=$3
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^/?([a-zA-Z0-9_]+)-([a-zA-Z0-9_]+)$ index.php?module=$1&amp;view=$2 [L]
 &lt;/Directory&gt;
 
 &lt;Directory /var/www/simpleinvoices/tmp&gt;
-	Order Deny,Allow
-	Deny from All
+    Order Deny,Allow
+    Deny from All
 &lt;/Directory&gt;
 
 &lt;Directory /var/www/simpleinvoices/config&gt;
-	Order Deny,Allow
-	Deny from All
+    Order Deny,Allow
+    Deny from All
 &lt;/Directory&gt;
 
 # Protect sensitive files.
 &lt;FilesMatch "\.(htaccess|htpasswd|ini|phps|fla|psd|inc|po|sh|.*sql|log|tpl)$"&gt;
-	Order allow,deny
-	Deny from All
-	Satisfy All
+    Order allow,deny
+    Deny from All
+    Satisfy All
 &lt;/FilesMatch&gt;
 
 &lt;FilesMatch "\.(htm|html|css|js|php)$"&gt;
-	AddDefaultCharset UTF-8
+    AddDefaultCharset UTF-8
 &lt;/FilesMatch&gt;
 
 # Disable directory listings.
 Options -Indexes
-
 
 ErrorLog /var/log/apache2/error.log
 
@@ -88,9 +94,11 @@ CustomLog /var/log/apache2/access.log combined
 
 &lt;/VirtualHost&gt;
 </pre>
-		<li>  
-		<li>  
+          </li>
+        </ul>
+      </li>
     </ul>
+  </li>
 </ul>
+</body>
 </html>
-

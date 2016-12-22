@@ -1,37 +1,27 @@
 <?php
 /*
-* Script: manage.php
-* 	Manage Invoices page
-*
-* License:
-*	 GPL v2 or above
-*
-* Website:
-* 	http://www.simpleinvoices.org
+ * Script: manage.php
+ * Manage Invoices page
+ *
+ * License:
+ * GPL v2 or above
+ *
+ * Website:
+ * http://www.simpleinvoices.org
  */
+global $smarty;
 
-//stop the direct browsing to this file - let index.php handle which files get displayed
+// stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-	$sql = "SELECT count(*) AS count FROM ".TB_PREFIX."invoices WHERE domain_id = :domain_id";
-	$sth = dbQuery($sql, ':domain_id',domain_id::get());
-	$number_of_invoices  = $sth->fetch(PDO::FETCH_ASSOC);
+$smarty->assign("number_of_invoices", Invoice::count());
 
-//all funky xml - sql stuff done in xml.php
-
-$pageActive = "invoice";
-
-//$smarty -> assign("invoices",$invoices);
-$smarty -> assign("number_of_invoices",$number_of_invoices);
-
-$smarty -> assign('pageActive', $pageActive);
-$smarty -> assign('active_tab', '#money');
-
-$having="";
-if(isset($_GET['having']))
-{
-    $having = "&having=".$_GET['having'];
+$having = "";
+if (isset($_GET['having'])) {
+    $having = "&having=" . $_GET['having'];
 }
-$url =  'index.php?module=invoices&view=xml'.$having;
+$url = 'index.php?module=invoices&view=xml' . $having;
+$smarty->assign('url', $url);
 
-$smarty -> assign('url', $url);
+$smarty->assign('pageActive', "invoice");
+$smarty->assign('active_tab', '#money');

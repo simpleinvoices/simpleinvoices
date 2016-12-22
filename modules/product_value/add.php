@@ -1,11 +1,11 @@
 <?php
-
+global $smarty;
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
 //if valid then do save
-if ($_POST['value'] !== '' ) {
+if (!empty($_POST['value'])) {
 	include("./modules/product_value/save.php");
 }
 
@@ -15,9 +15,6 @@ $product_attributes = $sth->fetchAll();
 
 $pageActive = "product_value_add";
 $smarty->assign('pageActive', $pageActive);
-$smarty -> assign('active_tab', '#product');
+$smarty->assign('active_tab', '#product');
 
-$smarty -> assign("product_attributes", $product_attributes);
-$smarty -> assign('save',$save);
-
-?>
+$smarty->assign("product_attributes", $product_attributes);

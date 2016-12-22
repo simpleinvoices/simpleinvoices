@@ -14,7 +14,7 @@ class encode
             $key = strtolower($key);
             if (is_array($value)) {
                 $multi_tags = false;
-                foreach($value as $key2=>$value2) {
+                foreach($value as $value2) {
                     if (is_array($value2)) {
                         $xml .= str_repeat("\t",$level)."<$key>\n";
                         $xml .= array_to_xml($value2, $level+1);
@@ -34,7 +34,7 @@ class encode
                         $multi_tags = true;
                     }
                 }
-                if (!$multi_tags and count($value)>0) {
+                if (!$multi_tags && count($value)>0) {
                     $xml .= str_repeat("\t",$level)."<$key>\n";
                     $xml .= array_to_xml($value, $level+1);
                     $xml .= str_repeat("\t",$level)."</$key>\n";

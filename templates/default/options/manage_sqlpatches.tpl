@@ -17,11 +17,11 @@
 */
 *}
 
-<h3>Database patches applied to Simple Invoices</h3>
+<h3>Database patches applied to SimpleInvoices</h3>
 <hr />
 
 
-	<table class="manage" id="live-grid" align="center">
+	<table class="manage" id="live-grid" class="center">
 	<colgroup>
 		<col style='width:20%;' />
 		<col style='width:60%;' />

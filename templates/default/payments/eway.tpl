@@ -32,7 +32,7 @@
 <form name="frmFpost" action="index.php?module=payments&view=eway" method="POST" id="frmpost">
 <br />
 
-<table align="center">
+<table class="center">
 <tr>
 <td class="details_screen">{$LANG.invoice}</td>
 <td>
@@ -53,7 +53,7 @@
 </tr>
 </table>
 <br />
-<table class="buttons" align="center">
+<table class="center" >
 <tr>
 <td>
 <button type="submit" class="positive" name="id" value="{$LANG.save}">

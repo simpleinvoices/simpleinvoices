@@ -29,7 +29,7 @@
 					rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field"
 					title="{$LANG.required_field}"
 				>
-				<img src="./images/common/required-small.png" alt="" /></a>			
+				<img src="{$help_image_path}required-small.png" alt="" /></a>			
 			</th>
 			<td><input class="validate[required]" type="text" name="pt_description" size="30" /></td>
 		</tr>

@@ -12,34 +12,34 @@ class ListStyleValue extends CSSValue {
     if ($this->image === CSS_PROPERTY_INHERIT) {
       $value = $state->getInheritedProperty(CSS_LIST_STYLE_IMAGE);
       $this->image = $value->copy();
-    };
+    }
 
     if ($this->position === CSS_PROPERTY_INHERIT) {
       $value = $state->getInheritedProperty(CSS_LIST_STYLE_POSITION);
       $this->position = $value;
-    };
+    }
 
     if ($this->type === CSS_PROPERTY_INHERIT) {
       $value = $state->getInheritedProperty(CSS_LIST_STYLE_TYPE);
       $this->type = $value;
-    };
+    }
   }
 
   function is_default() {
-    return 
+    return
       $this->image->is_default() &&
       $this->position == CSSListStylePosition::default_value() &&
       $this->type     == CSSListStyleType::default_value();
   }
 
   function &copy() {
-    $object =& new ListStyleValue;
+    $object =  new ListStyleValue;
 
     if ($this->image === CSS_PROPERTY_INHERIT) {
       $object->image = CSS_PROPERTY_INHERIT;
     } else {
       $object->image = $this->image->copy();
-    };
+    }
 
     $object->position = $this->position;
     $object->type     = $this->type;
@@ -47,5 +47,3 @@ class ListStyleValue extends CSSValue {
     return $object;
   }
 }
-
-?>

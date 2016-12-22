@@ -4,7 +4,7 @@
 class TableSectionBox extends GenericContainerBox {
   function &create(&$root, &$pipeline) {
     $state =& $pipeline->getCurrentCSSState();
-    $box =& new TableSectionBox();
+    $box =  new TableSectionBox();
     $box->readCSS($state);
 
     // Automatically create at least one table row
@@ -24,7 +24,7 @@ class TableSectionBox extends GenericContainerBox {
   }
   
   function TableSectionBox() {
-    $this->GenericContainerBox();
+    $this->__construct();
   }
 
   // Overrides default 'add_child' in GenericFormattedBox

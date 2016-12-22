@@ -1,10 +1,10 @@
 
 <form name="frmpost" action="index.php?module=reports&amp;view=report_invoice_profit" method="post">
-<table align="center">
+<table class="center">
     <tr>
-        <td wrap="nowrap">Start date (YYYY-MM-DD)
-                <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="start_date" id="date1" value='{$start_date|htmlsafe}' />   
-         </td>
+        <td>Start date (YYYY-MM-DD)
+          <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="start_date" id="date1" value='{$start_date|htmlsafe}' />   
+        </td>
         <td>
             &nbsp;
             &nbsp;
@@ -12,13 +12,13 @@
             &nbsp;
             &nbsp;
         </td>
-        <td wrap="nowrap" >End date (YYYY-MM-DD)
-                <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="end_date" id="date1" value='{$end_date|htmlsafe}' />   
-            </td>
+        <td>End date (YYYY-MM-DD)
+          <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="end_date" id="date1" value='{$end_date|htmlsafe}' />   
+        </td>
     </tr>
 </table>
 <br />
-<table class="buttons" align="center">
+<table class="center" >
     <tr>
         <td>
             <button type="submit" class="positive" name="submit" value="{$LANG.insert_biller}">
@@ -33,7 +33,7 @@
 
 <div id="top"><h3>Profit per Invoice based on average product cost summary for the period {$start_date|htmlsafe} to {$end_date|htmlsafe}</h3></div>
 
-<table align="center">
+<table class="center">
     <tr>
         <td  class="details_screen">
             <b>ID</b>

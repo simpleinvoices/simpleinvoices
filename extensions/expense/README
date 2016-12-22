@@ -1,4 +1,2 @@
-A simple expenses extension for Simple Invoices
+A simple expenses extension for SimpleInvoices
 Multi domain ready
-Will have to manually execute the sql statements in
-extensions/expense/install/*.sql

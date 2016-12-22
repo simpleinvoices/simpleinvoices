@@ -1,8 +1,9 @@
 <?php
 // $Header: /cvsroot/html2ps/demo/html2ps.php,v 1.10 2007/05/17 13:55:13 Konstantin Exp $
 
-error_reporting(E_ALL);
-ini_set("display_errors","1");
+// RCR 209160708 to let configured setting to control this.
+//error_reporting(E_ALL);
+//ini_set("display_errors", "stderr");
 if (ini_get("pcre.backtrack_limit") < 1000000) { ini_set("pcre.backtrack_limit",1000000); };
 @set_time_limit(10000);
 
@@ -23,17 +24,15 @@ if (!preg_match("/^https?:/",$g_baseurl)) {
   $g_baseurl = 'http://'.$g_baseurl;
 }
 
-$g_css_index = 0;
+// RCR - 20160708 - Doesn't appear to be used anywhere.
+//$g_css_index = 0;
+//$g_stylesheet_title = "";  // Title of styleshee to use (empty if no preferences are set)
 
-// Title of styleshee to use (empty if no preferences are set)
-$g_stylesheet_title = "";
-
-$GLOBALS['g_config'] = array(
-                             'compress'      => isset($_REQUEST['compress']),
+$GLOBALS['g_config'] = array('compress'      => isset($_REQUEST['compress']),
                              'cssmedia'      => get_var('cssmedia', $_REQUEST, 255, "screen"),
                              'debugbox'      => isset($_REQUEST['debugbox']),
                              'debugnoclip'   => isset($_REQUEST['debugnoclip']),
-                             'draw_page_border'        => isset($_REQUEST['pageborder']),
+                             'draw_page_border' => isset($_REQUEST['pageborder']),
                              'encoding'      => get_var('encoding', $_REQUEST, 255, ""),
                              'html2xhtml'    => !isset($_REQUEST['html2xhtml']),
                              'imagequality_workaround' => isset($_REQUEST['imagequality_workaround']),
@@ -118,7 +117,7 @@ if ($GLOBALS['g_config']['renderfields']) {
   $pipeline->pre_tree_filters[] = new PreTreeFilterHTML2PSFields();
 };
 
-// 
+//
 
 if ($GLOBALS['g_config']['method'] === 'ps') {
   $pipeline->layout_engine = new LayoutEnginePS();

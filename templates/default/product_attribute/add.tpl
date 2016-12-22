@@ -24,7 +24,7 @@
 <hr />
 
 
-<table align="center">
+<table class="center">
 <tr>
 	<td class="details_screen">{$LANG.name}</td>
 	<td><input type="text" name="name" value="{$smarty.post.name}" size="25" /></td>

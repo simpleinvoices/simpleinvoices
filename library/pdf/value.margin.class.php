@@ -13,19 +13,19 @@ class MarginSideValue {
       return $base * $this->percentage / 100;
     } else {
       return $this->_units->toPt($base_font_size);
-    };
+    }
   }
 
   function calcPercentage($base) {
-    if (is_null($this->percentage)) { 
-      return; 
-    };
+    if (is_null($this->percentage)) {
+      return;
+    }
 
     $this->value = $base * $this->percentage / 100;
   }
 
   function &copy() {
-    $value =& new MarginSideValue;
+    $value =  new MarginSideValue;
     $value->value      = $this->value;
     $value->auto       = $this->auto;
     $value->percentage = $this->percentage;
@@ -34,7 +34,7 @@ class MarginSideValue {
   }
 
   function is_default() {
-    return 
+    return
       $this->value == 0 &&
       !$this->auto &&
       !$this->percentage;
@@ -45,7 +45,7 @@ class MarginSideValue {
     $is_percentage = false;
     if ($len > 0) {
       $is_percentage = ($data{$len-1} === '%');
-    };
+    }
 
     $value = new MarginSideValue;
     $value->_units     = Value::fromString($data);
@@ -59,7 +59,7 @@ class MarginSideValue {
   function units2pt($base) {
     if (is_null($this->percentage)) {
       $this->value = $this->_units->toPt($base);
-    };
+    }
   }
 }
 
@@ -73,26 +73,26 @@ class MarginValue extends CSSValue {
     if ($this->top === CSS_PROPERTY_INHERIT) {
       $value = $state->getInheritedProperty(CSS_MARGIN_TOP);
       $this->top = $value->copy();
-    };
+    }
 
     if ($this->bottom === CSS_PROPERTY_INHERIT) {
       $value = $state->getInheritedProperty(CSS_MARGIN_BOTTOM);
       $this->bottom = $value->copy();
-    };
+    }
 
     if ($this->right === CSS_PROPERTY_INHERIT) {
       $value = $state->getInheritedProperty(CSS_MARGIN_RIGHT);
       $this->right = $value->copy();
-    };
+    }
 
     if ($this->left === CSS_PROPERTY_INHERIT) {
       $value = $state->getInheritedProperty(CSS_MARGIN_LEFT);
       $this->left = $value->copy();
-    };
+    }
   }
 
   function &copy() {
-    $value =& new MarginValue;
+    $value =  new MarginValue;
     $value->top    = ($this->top    === CSS_PROPERTY_INHERIT) ? CSS_PROPERTY_INHERIT : $this->top->copy();
     $value->bottom = ($this->bottom === CSS_PROPERTY_INHERIT) ? CSS_PROPERTY_INHERIT : $this->bottom->copy();
     $value->left   = ($this->left   === CSS_PROPERTY_INHERIT) ? CSS_PROPERTY_INHERIT : $this->left->copy();
@@ -110,7 +110,7 @@ class MarginValue extends CSSValue {
   }
 
   function is_default() {
-    return 
+    return
       $this->left->is_default() &&
       $this->right->is_default() &&
       $this->top->is_default() &&
@@ -131,5 +131,3 @@ class MarginValue extends CSSValue {
     $this->right->calcPercentage($base);
   }
 }
-
-?>
