@@ -214,10 +214,7 @@ class export {
 
                 $templatePath  = "./templates/invoices/${template}/template.tpl";
                 $template_path = "../templates/invoices/${template}";
-                $pluginsdir    = "./templates/invoices/${template}/plugins/";
                 $css           = $siUrl . "/templates/invoices/${template}/style.css";
-
-                $smarty->plugins_dir = $pluginsdir;
 
                 $pageActive = "invoices";
                 $smarty->assign('pageActive', $pageActive);
@@ -236,6 +233,12 @@ class export {
                     $smarty->assign('template_path'          , $template_path);
                     $smarty->assign('css'                    , $css);
                     $smarty->assign('customFieldLabels'      , $customFieldLabels);
+
+                    // Plugins specifically associated with your invoice template.
+                    $plugin_dirs = $smarty->plugins_dir;
+                    if (!is_array($plugin_dirs)) $plugin_dirs = array($plugin_dirs);
+                    $plugin_dirs[] = "./templates/invoices/${template}/plugins/";
+                    $smarty->plugins_dir = $plugin_dirs;
 
                     $data = $smarty->fetch("." . $templatePath);
                 }
