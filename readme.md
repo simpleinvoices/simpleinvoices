@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 # SimpleInvoices
-=======
-# Simple Invoices
->>>>>>> refs/remotes/simpleinvoices/master
 
 [![Join the chat at https://gitter.im/simpleinvoices/simpleinvoices](https://badges.gitter.im/simpleinvoices/simpleinvoices.svg)](https://gitter.im/simpleinvoices/simpleinvoices?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 Making invoicing rock since '05.

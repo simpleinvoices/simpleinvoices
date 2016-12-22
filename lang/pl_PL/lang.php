@@ -2,11 +2,7 @@
 
 /*
 * Script: lang.php
-<<<<<<< HEAD
 *    English translation file
-=======
-* 	Polish translation file
->>>>>>> refs/remotes/simpleinvoices/master
 *
 * Last edited:
 *    2016-10-04
@@ -265,11 +261,7 @@ $LANG['help_tax_rate_sign'] = "A tax can be either a percentage based (ie. Sales
 $LANG['help_text'] = "<b>Warning</b><br /><br />Please backup your SimpleInvoices database before running the database update, just incase anything bad happens.<br /><br />To backup the database, select 'Backup Database' from the Options menu, or use phpMyAdmin(if you have this installed) to back up the database.";//1
 $LANG['help_user_role'] = "There are 3 roles available <br /><br />Administrator:<br />which has access to all of SimpleInvoices<br /><br />User:<br />which has read/write acess to all of SimpleInvoices but with no access to the Settings menu <br /><br />Viewer:<br />which has read-only version of User.";//1
 $LANG['help_what_are_custom_fields'] = "Custom Fields are special fields in billers, products, customers, and invoices that you can label as whatever you want.<br /><br />Whish there was a Tax ID field in biller, just go to the Custom Fields page and define one of the blank Płatnik Custom Fields as Tax ID.<br /><br />Now when you go to edit a Płatnik there'll be a new field there called Tax ID or whatever you specified it as.";//1
-<<<<<<< HEAD
 $LANG['help_wheres_the_edit_button'] = "In the Manage Payment screen there is no 'Edit' button. This is to provide a proper 'audit trail' of payments recorded in SimpleInvoices.<br /><br />If you've made a mistake with a payment entry the best option is to reverse the entry and entery it again correctly<br /><br />Reverse the entry - what the?<br /> This basically mean just doing a negative entry for the same amount as the original entry.<br /><br />ie.<br />If your entered $110<br />but you should of entered $1100<br />to reverse this entry enter -$110 against the same invoice and then enter the correct amount of $1100";//1
-=======
-$LANG['help_wheres_the_edit_button'] = "In the Manage Payment screen there is no 'Edit' button. This is to provide a proper 'audit trail' of payments recorded in Simple Invoices.<br /><br />If you've made a mistake with a payment entry the best option is to reverse the entry and entery it again correctly<br /><br />Reverse the entry - what the?<br /> This basically mean just doing a negative entry for the same amount as the original entry.<br /><br />ie.<br />If your entered \$110<br />but you should of entered \$1100<br />to reverse this entry enter -$110 against the same invoice and then enter the correct amount of \$1100";//1
->>>>>>> refs/remotes/simpleinvoices/master
 $LANG['hide_details'] = "Ukryj szczegóły";//1
 $LANG['home'] = "Strona główna";//1
 $LANG['id'] = "ID";//1

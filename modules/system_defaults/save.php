@@ -4,7 +4,6 @@ global $smarty;
 checkLogin();
 
 // Deal with op and add some basic sanity checking
-<<<<<<< HEAD
 $saved = false;
 
 if (isset($_POST['op']) && $_POST['op'] == 'update_system_defaults' ) {
@@ -14,16 +13,3 @@ if (isset($_POST['op']) && $_POST['op'] == 'update_system_defaults' ) {
 $smarty->assign('saved'     , $saved);
 $smarty->assign('pageActive', 'system_default');
 $smarty->assign('active_tab', '#setting');
-=======
-
-$saved = false;
-
-if (isset($_POST['op']) && $_POST['op'] == 'update_system_defaults' ) {
-	$saved = updateDefault($_POST['name'],$_POST['value']);
-}
-
-$smarty->assign('saved',      $saved);
-$smarty->assign('pageActive', 'system_default');
-$smarty->assign('active_tab', '#setting');
-?>
->>>>>>> refs/remotes/simpleinvoices/master

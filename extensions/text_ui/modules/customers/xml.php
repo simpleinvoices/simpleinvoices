@@ -42,16 +42,11 @@ if ( ! (empty($qtype) || empty($query)) ) {
 /*Check that the sort field is OK*/
 $validFields = array('CID', 'name', 'customer_total','owing','enabled');
 
-<<<<<<< HEAD
 if (in_array($sort, $validFields)) {
     $sort = $sort;
 } else {
     $sort = "CID";
 }
-=======
-if (!in_array($sort, $validFields))
-	$sort = "CID";
->>>>>>> refs/remotes/simpleinvoices/master
 
 $sql = "SELECT 
             c.id as CID, 
