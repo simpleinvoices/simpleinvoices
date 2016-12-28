@@ -70,7 +70,7 @@
       </table>
       <div class="si_toolbar si_toolbar_form">
         <button type="submit" class="positive" name="submit" value="statement_report">
-          <img class="button_img" src="./images/common/tick.png" alt="" />
+          <img class="button_img" src="images/common/tick.png" alt="" />
           {$LANG.run_report}
         </button>
       </div>
@@ -157,10 +157,15 @@
         </tr>
       </thead>
       <tbody>
+      {assign var=i value=-1}
       {section name=invoice loop=$invoices}
+{* Don't know why this doesn't work.
         {if $invoices[invoice].preference != $invoices[invoice.index_prev].preference && $smarty.section.invoice.index != 0}
+ *}
+        {if $invoices[invoice].preference != $invoices[$i].preference && $smarty.section.invoice.index != 0}
         <tr><td><br /></td></tr>
         {/if}
+        {assign var=i value=$i+1}
         <tr>
           <td class="si_right">
             {$index|htmlsafe}

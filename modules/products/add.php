@@ -9,7 +9,7 @@ $customFieldLabel = getCustomFieldLabels('',true);
 $taxes = Taxes::getActiveTaxes();
 
 if (!empty($_POST['description'])) {
-    include("./modules/products/save.php");
+    include("modules/products/save.php");
 }
 
 $pdoDb->addSimpleWhere("enabled", ENABLED);

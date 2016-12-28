@@ -11,11 +11,11 @@
  *}
 <br />
 <span class="welcome">
-    <a href="index.php?module=invoices&amp;view=itemised"><img class="action" src="./images/common/edit.png"/>
+    <a href="index.php?module=invoices&amp;view=itemised"><img class="action" src="images/common/edit.png"/>
         &nbsp;{$LANG.itemised_style}
     </a>
     &nbsp;&nbsp; 
-    <a href="index.php?module=invoices&amp;view=total"><img class="action" src="./images/common/page_white_edit.png"/>
+    <a href="index.php?module=invoices&amp;view=total"><img class="action" src="images/common/page_white_edit.png"/>
         &nbsp;{$LANG.total_style}
     </a>
     &nbsp;&nbsp; 

@@ -16,11 +16,11 @@
 *}
 
 	<div class="si_toolbar si_toolbar_top">
-		<a href="./index.php?module=payments&amp;view=process&amp;op=pay_invoice" class=""><img src="./images/famfam/add.png" alt=""/>{$LANG.process_payment}</a>
+		<a href="index.php?module=payments&amp;view=process&amp;op=pay_invoice" class=""><img src="images/famfam/add.png" alt=""/>{$LANG.process_payment}</a>
 
  
 	{if $smarty.get.id }
-        <a href="./index.php?module=payments&amp;view=process&amp;id={$smarty.get.id|urlencode}&amp;op=pay_selected_invoice" class=""><img src="./images/famfam/money.png" alt=""/>{$LANG.payments_filtered_invoice}</a>
+        <a href="index.php?module=payments&amp;view=process&amp;id={$smarty.get.id|urlencode}&amp;op=pay_selected_invoice" class=""><img src="images/famfam/money.png" alt=""/>{$LANG.payments_filtered_invoice}</a>
 	</div>
         
         {if $payments == null}
@@ -29,7 +29,7 @@
 			</div>        		
         {else}
         	<table id="manageGrid" style="display:none"></table>
-        	{include file='../modules/payments/manage.js.php' get=$smarty.get}
+        	{include file='modules/payments/manage.js.php' get=$smarty.get}
         {/if}
 
 	{elseif $smarty.get.c_id }
@@ -41,7 +41,7 @@
 			</div>        		
         {else}
     	    <table id="manageGrid" style="display:none"></table>
-        	{include file='../modules/payments/manage.js.php' get=$smarty.get}
+        	{include file='modules/payments/manage.js.php' get=$smarty.get}
         {/if}
 
 	{else}
@@ -53,7 +53,7 @@
 			</div>        		
         {else}
         	<table id="manageGrid" style="display:none"></table>
-        	{include file='../modules/payments/manage.js.php' get=$smarty.get}
+        	{include file='modules/payments/manage.js.php' get=$smarty.get}
         {/if}
 
 	{/if}

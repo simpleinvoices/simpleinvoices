@@ -15,7 +15,7 @@ $valid_search_fields = array('id','name','description');
 
 $xml = "";
 
-$extension_dir = './extensions';
+$extension_dir = 'extensions';
 $extension_entries = array_diff(scandir($extension_dir), Array(".","..")); // Skip entries starting with a dot from dir list
 $available_extensions = Array();
 

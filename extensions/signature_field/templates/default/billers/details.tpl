@@ -139,7 +139,7 @@
 </div>
 
 <div class="si_toolbar si_toolbar_form">
-  <a href="./index.php?module=billers&amp;view=details&amp;action=edit&amp;id={$biller.id}" class="positive"><img src="./images/famfam/report_edit.png" alt=""/>{$LANG.edit}</a>
+  <a href="index.php?module=billers&amp;view=details&amp;action=edit&amp;id={$biller.id}" class="positive"><img src="images/famfam/report_edit.png" alt=""/>{$LANG.edit}</a>
 </div>
 
 {/if}
@@ -323,11 +323,11 @@
 
   <div class="si_toolbar si_toolbar_form">
             <button type="submit" class="positive" name="save_biller" value="{$LANG.save_biller}">
-                <img class="button_img" src="./images/common/tick.png" alt="" /> 
+                <img class="button_img" src="images/common/tick.png" alt="" /> 
                 {$LANG.save}
             </button>
-            <a href="./index.php?module=billers&amp;view=manage" class="negative">
-                <img src="./images/common/cross.png" alt="" />
+            <a href="index.php?module=billers&amp;view=manage" class="negative">
+                <img src="images/common/cross.png" alt="" />
                 {$LANG.cancel}
             </a>
   </div>

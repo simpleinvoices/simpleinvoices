@@ -7,7 +7,7 @@
     <div class="si_message_error">{$LANG.save_inventory_failure}</div>
     {if $smarty.post.op == 'add' && $smarty.post.product_id == ''}
       <div class="validation_alert">
-        <img src="./images/common/important.png" alt="" /> You must select a  product
+        <img src="images/common/important.png" alt="" /> You must select a  product
       </div>
       <hr />
     {/if}
@@ -60,11 +60,11 @@
       </table>
       <div class="si_toolbar si_toolbar_form">
         <button type="submit" class="positive" name="id" value="{$LANG.save}">
-          <img class="button_img" src="./images/common/tick.png" alt="" />
+          <img class="button_img" src="images/common/tick.png" alt="" />
           {$LANG.save}
         </button>
-        <a href="./index.php?module=cron&view=manage" class="negative">
-          <img src="./images/common/cross.png" alt="" />
+        <a href="index.php?module=cron&view=manage" class="negative">
+          <img src="images/common/cross.png" alt="" />
           {$LANG.cancel}
         </a>
       </div>

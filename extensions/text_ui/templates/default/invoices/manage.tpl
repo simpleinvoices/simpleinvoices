@@ -34,5 +34,5 @@
     ::
     <a href='index.php?module=invoices&view=manage&page={$page_next}'> &gt;&gt; </a>
   {/if}
-  {* {include file='../extensions/text_ui/modules/invoices/manage.js.php'} *}
+  {* {include file='extensions/text_ui/modules/invoices/manage.js.php'} *}
 {/if}

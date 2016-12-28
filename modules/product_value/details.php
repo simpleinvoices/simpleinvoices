@@ -6,7 +6,7 @@ checkLogin();
 
 //if valid then do save
 if (!empty($_POST['value'])) {
-	include("./modules/product_value/save.php");
+	include("modules/product_value/save.php");
 }
 
 #get the invoice id

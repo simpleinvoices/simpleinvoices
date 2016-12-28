@@ -154,7 +154,7 @@
                title="{$LANG.delete_line_item}" href="#" style="display:inline;"
                rel="{$line|htmlsafe}">
               <img id="delete_image{$line|htmlsafe}"
-                   src="./images/common/{if $line == "0"}blank.gif{else}delete_item.png{/if}" alt="" />
+                   src="images/common/{if $line == "0"}blank.gif{else}delete_item.png{/if}" alt="" />
             </a>
           </td>
           <td>
@@ -210,12 +210,12 @@
     <div class="si_toolbar si_toolbar_inform">
       {* onclick="add_line_item();" *}
       <a href="#" class="add_line_item">
-        <img src="./images/common/add.png" alt=""/>{$LANG.add_new_row}</a>
+        <img src="images/common/add.png" alt=""/>{$LANG.add_new_row}</a>
       <a href='#' class="show-details" onclick="javascript: $('.details').show();$('.show-details').hide();">
-        <img src="./images/common/page_white_add.png"
+        <img src="images/common/page_white_add.png"
              title="{$LANG.show_details}" alt="" />{$LANG.show_details}</a>
       <a href='#' class="details" onclick="javascript: $('.details').hide();$('.show-details').show();" style="display:none">
-        <img src="./images/common/page_white_delete.png"
+        <img src="images/common/page_white_delete.png"
              title="{$LANG.hide_details}" alt="" />{$LANG.hide_details}</a>
     </div>
     <table class="si_invoice_bot">
@@ -249,10 +249,10 @@
     </table>
     <div class="si_toolbar si_toolbar_form">
       <button type="submit" class="invoice_save positive" name="submit" value="{$LANG.save}">
-        <img class="button_img" src="./images/common/tick.png" alt="" />{$LANG.save}
+        <img class="button_img" src="images/common/tick.png" alt="" />{$LANG.save}
       </button>
-      <a href="./index.php?module=invoices&amp;view=manage" class="negative">
-        <img src="./images/common/cross.png" alt="" />
+      <a href="index.php?module=invoices&amp;view=manage" class="negative">
+        <img src="images/common/cross.png" alt="" />
         {$LANG.cancel}
       </a>
     </div>

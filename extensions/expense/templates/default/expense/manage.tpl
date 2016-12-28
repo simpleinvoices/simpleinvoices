@@ -9,8 +9,8 @@
  *	    http://www.simpleinvoices.org
  *}
 <div class="si_toolbar si_toolbar_form">
-  <a href="./index.php?module=expense&view=add" class="positive">
-    <img src="./images/famfam/add.png" alt=""/>
+  <a href="index.php?module=expense&view=add" class="positive">
+    <img src="images/famfam/add.png" alt=""/>
     {$LANG.add_new_expense}
   </a>
 </div>
@@ -25,5 +25,5 @@
 {else}
 <br />
 <table id="manageGrid" style="display:none"></table>
-{include file='../extensions/expense/modules/expense/manage.js.php'}
+{include file='extensions/expense/modules/expense/manage.js.php'}
 {/if}

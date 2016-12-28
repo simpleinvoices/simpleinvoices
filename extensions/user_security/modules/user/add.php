@@ -24,7 +24,7 @@ checkLogin();
 $roles = user::getUserRoles();
 
 if (!empty($_POST['username'])) {
-    include ("./extensions/user_security/modules/user/save.php");
+    include ("extensions/user_security/modules/user/save.php");
 }
 
 $smarty->assign("pwd_pattern", UserSecurity::buildPwdPattern());

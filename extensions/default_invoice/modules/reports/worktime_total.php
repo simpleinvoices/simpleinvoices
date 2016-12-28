@@ -3,7 +3,7 @@
 // Ref: https://github.com/OTRS/otrs/blob/rel-3_3/scripts/database/otrs-schema.mysql.sql
 
 //   include phpreports library
-require_once("./include/reportlib.php");
+require_once("include/reportlib.php");
 
 global $oRpt, $smarty;
 
@@ -27,7 +27,7 @@ $sSQL .= $order;
 
 $myParms["SQL"] = $sSQL;
 
-$oRpt->setXML("./extensions/default_invoice/modules/reports/worktime_total.xml");
+$oRpt->setXML("extensions/default_invoice/modules/reports/worktime_total.xml");
 $oRpt->setUser("otrs");
 $oRpt->setPassword("test12");
 $oRpt->setDatabase("otrs2");
@@ -36,7 +36,7 @@ $oRpt->setBody(false);
 $oRpt->setParameters($myParms);
 
 //   include phpreports run code
-include("./include/reportrunlib.php");
+include("include/reportrunlib.php");
 
 $smarty -> assign('pageActive', 'report');
 $smarty -> assign('active_tab', '#home');

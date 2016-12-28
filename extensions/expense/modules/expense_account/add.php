@@ -6,7 +6,7 @@ checkLogin();
 
 //if valid then do save
 if (!empty($_POST['name'])) {
-	include("./extensions/expense/modules/expense_account/save.php");
+	include("extensions/expense/modules/expense_account/save.php");
 }
 
 $smarty->assign('domain_id'    , domain_id::get());

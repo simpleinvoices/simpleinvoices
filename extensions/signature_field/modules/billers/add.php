@@ -31,7 +31,7 @@ $smarty->assign("domain_id", $domain_id);
 $customFieldLabel = getCustomFieldLabels("", true);
 
 if (!empty($_POST['name'])) {
-    include ("./extensions/signature_field/modules/billers/save.php");
+    include ("extensions/signature_field/modules/billers/save.php");
 }
 // @formatter:off
 $smarty->assign('customFieldLabel', $customFieldLabel);

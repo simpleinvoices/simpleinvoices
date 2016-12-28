@@ -52,8 +52,8 @@ class Preferences {
 
         $pdoDb->setSelectAll(true);
 
-        $preferences = $pdoDb->request("SELECT", "preferences");
-        return $preferences;
+        $rows = $pdoDb->request("SELECT", "preferences");
+        return $rows;
     }
 
     /**

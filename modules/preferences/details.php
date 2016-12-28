@@ -5,7 +5,7 @@ checkLogin();
 
 //if valid then do save
 if (isset($_POST['p_description']) && $_POST['p_description'] != "" ) {
-	include("./modules/preferences/save.php");
+	include("modules/preferences/save.php");
 }
 
 $preference_id = $_GET['id'];

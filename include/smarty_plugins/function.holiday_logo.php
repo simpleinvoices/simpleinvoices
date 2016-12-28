@@ -1,5 +1,5 @@
 <?php
-function smarty_function_holiday_logo($params, &$smarty) {
+function smarty_function_holiday_logo($params) {
     // @formatter:off
     $holidays = array("_newyears."     => "1",
                       "_valentines."   => "2",

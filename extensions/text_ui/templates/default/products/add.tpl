@@ -1,10 +1,10 @@
 {* if bill is updated or saved.*}
 {if $smarty.post.description != "" && $smarty.post.id != null } 
-  {include file="../templates/default/products/save.tpl"}
+  {include file="templates/default/products/save.tpl"}
 {else}
   {* if  name was inserted *} 
   {if $smarty.post.id !=null} 
-  <div class="validation_alert"><img src="./images/common/important.png" alt="" />
+  <div class="validation_alert"><img src="images/common/important.png" alt="" />
     You must enter a description for the product
   </div>
   <hr />

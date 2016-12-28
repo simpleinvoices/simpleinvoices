@@ -7,7 +7,7 @@ $smarty->assign('active_tab', '#setting');
 if (isset($_GET['op']) && $_GET['op'] == "backup_db") {
     $today = date("YmdGisa");
     $oBack = new BackupDb();
-    $filename = "./tmp/database_backups/simple_invoices_backup_$today.sql"; // output file name
+    $filename = "tmp/database_backups/simple_invoices_backup_$today.sql"; // output file name
     $oBack->start_backup($filename);
 
     $txt=sprintf($LANG['backup_done'],$filename);

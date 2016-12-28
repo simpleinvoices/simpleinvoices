@@ -40,7 +40,7 @@ switch ($get_val) {
      * Make drop down list invoice template - start
      * Note: Only show the folder names in src/invoices/templates
      ****************************************************************/
-    $handle = opendir("./templates/invoices/");
+    $handle = opendir("templates/invoices/");
     $files = array();
     while ($template = readdir($handle)) {
       if ($template != ".."           &&

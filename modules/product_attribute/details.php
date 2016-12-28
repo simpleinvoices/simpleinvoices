@@ -6,7 +6,7 @@ checkLogin();
 
 //if valid then do save
 if (!empty($_POST['name'])) {
-    include("./modules/product_attribute/save.php");
+    include("modules/product_attribute/save.php");
 }
 
 $id = $_GET['id'];

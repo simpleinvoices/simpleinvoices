@@ -24,7 +24,9 @@ export.pdf.rightmargin              = 15
 export.pdf.topmargin                = 15
 export.pdf.bottommargin             = 15
 
-local.locale                        = en_GB
+version.name                        = 2016.1.001
+
+local.locale                        = en_US
 local.precision                     = 2
 
 email.host                          = localhost
@@ -39,8 +41,6 @@ email.use_local_sendmail            = false
 encryption.default.key              = this_is_the_encryption_key_change_it
 nonce.key                           = this_should_be_random_and_secret_so_change_it
 nonce.timelimit                     = 3600
-
-version.name                        = 2016.0.beta.4
 
 debug.level                         = All
 debug.error_reporting               = E_ERROR

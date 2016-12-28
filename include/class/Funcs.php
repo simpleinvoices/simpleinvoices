@@ -13,7 +13,7 @@ class Funcs {
      *            offset in the <b>$lines</b> array for the <b>tax_rates</b> section.
      */
     public static function menuSections($menutpl, &$lines, &$sections) {
-        $divs = preg_split ('/(< *div *id=)/', $menutpl, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+        $divs = preg_split ('/(< *div *id=|< *div *class=)/', $menutpl, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
         $i = 0;
         $sections = array ();
         $lines = array ();
@@ -49,8 +49,8 @@ class Funcs {
     public static function mergeMenuSections($ext_names, $lines, $sections) {
         global $smarty;
         foreach ($ext_names as $ext_name) {
-            if (file_exists ("./extensions/$ext_name/templates/default/menu.tpl")) {
-                $menu_extension = $smarty->fetch ("../extensions/$ext_name/templates/default/menu.tpl");
+            if (file_exists ("extensions/$ext_name/templates/default/menu.tpl")) {
+                $menu_extension = $smarty->fetch ("extensions/$ext_name/templates/default/menu.tpl");
                 $ext_sects = preg_split ('/<!\-\- BEFORE:/', $menu_extension, -1, PREG_SPLIT_NO_EMPTY);
                 foreach ($ext_sects as $sect) {
                     $parts = preg_split ('/ *-->/', $sect);

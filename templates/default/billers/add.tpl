@@ -11,7 +11,7 @@
 
 {* if bill is updated or saved.*}
 {if $smarty.post.name != "" && $smarty.post.submit != null } 
-  {include file="../templates/default/billers/save.tpl"}
+  {include file="templates/default/billers/save.tpl"}
 {else}
 {* if no biller name was inserted *}
 <form name="frmpost" action="index.php?module=billers&amp;view=add"
@@ -195,11 +195,11 @@
     </table>
     <div class="si_toolbar si_toolbar_form">
       <button type="submit" class="positive" name="submit" value="{$LANG.insert_biller}">
-        <img class="button_img" src="./images/common/tick.png" alt="" />
+        <img class="button_img" src="images/common/tick.png" alt="" />
         {$LANG.save}
       </button>
-      <a href="./index.php?module=billers&amp;view=manage" class="negative">
-        <img src="./images/common/cross.png" alt="" />
+      <a href="index.php?module=billers&amp;view=manage" class="negative">
+        <img src="images/common/cross.png" alt="" />
         {$LANG.cancel}
       </a>
     </div>

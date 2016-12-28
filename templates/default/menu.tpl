@@ -5,7 +5,11 @@
   {$smarty.capture.hook_topmenu_section01_replace}
 {else}
   <div class="si_wrap">
-    {$LANG.hello} {$smarty.session.Zend_Auth.email|htmlsafe} | <a href="http://www.simpleinvoices.org/help" target="blank">{$LANG.help}</a>
+    <!-- SECTION:help -->
+    {$LANG.hello} {$smarty.session.Zend_Auth.email|htmlsafe} |
+    <a href="http://www.simpleinvoices.org/help" target="blank">{$LANG.help}</a> |
+    <a href="index.php?module=si_info&amp;view=index" style="color:white;">{$LANG.information}</a>
+    <!-- SECTION:auth -->
     {if $config->authentication->enabled == 1} |
       {if $smarty.session.Zend_Auth.id == null}
         <a href="index.php?module=auth&amp;view=login">{$LANG.login}</a>
@@ -30,12 +34,14 @@
     {$smarty.capture.hook_tabmenu_main_end}
     <li id="si_tab_settings"><a href="#setting"><span>{$LANG.settings}</span></a></li>
   </ul>
+  <!-- SECTION:home -->
   <div id="home">
     <ul class="subnav">
       <li><a {if $pageActive== "dashboard"} class="active"{/if} href="index.php?module=index&amp;view=index">{$LANG.dashboard} </a></li>
       <li><a {if $pageActive== "report"} class="active"{/if} href="index.php?module=reports&amp;view=index">{$LANG.all_reports} </a></li>
     </ul>
   </div>
+  <!-- SECTION:money -->
   <div id="money">
     <ul class="subnav">
       <!-- SECTION:invoices -->
@@ -61,6 +67,7 @@
       <li><a {if $pageActive== "report_sale"}class="active" {/if}href="index.php?module=reports&amp;view=report_sales_total">{$LANG.sales_report}</a></li>
     </ul>
   </div>
+  <!-- SECTION:people -->
   <div id="people">
     <ul class="subnav">
       <!-- SECTION:customers -->
@@ -80,6 +87,7 @@
       {if $subPageActive == "user_edit"}<li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}
     </ul>
   </div>
+  <!-- SECTION:product -->
   <div id="product">
     <ul class="subnav">
       <!-- SECTION:manage_products -->
@@ -107,6 +115,7 @@
       {/if}
     </ul>
   </div>
+  <!-- SECTION:setting -->
   <div id="setting" style="float:right;" >
     <ul class="subnav">
       <!-- SECTION:settings -->
@@ -136,5 +145,6 @@
       <li><a {if $pageActive== "backup"}class="active" {/if}href="index.php?module=options&amp;view=backup_database">{$LANG.backup_database}</a></li>
     </ul>
   </div>
+  <!-- SECTION:tabmenu_end -->
   {$smarty.capture.hook_tabmenu_end}
 </div>

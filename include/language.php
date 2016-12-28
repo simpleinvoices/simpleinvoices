@@ -16,10 +16,10 @@ if ($databaseBuilt) {
     if (in_array(TB_PREFIX . 'system_defaults', $tables)) {
         $language = getDefaultLanguage();
     } else {
-        $language = "en_GB";
+        $language = "en_US";
     }
 } else {
-    $language = "en_GB";
+    $language = "en_US";
 }
 
 function getLanguageArray($lang = '') {
@@ -31,16 +31,16 @@ function getLanguageArray($lang = '') {
         global $language;
     }
 
-    $langPath = "./lang/";
+    $langPath = "lang/";
     $langFile = "/lang.php";
-    include ($langPath . "en_GB" . $langFile);
+    include ($langPath . "en_US" . $langFile);
     if (file_exists($langPath . $language . $langFile)) {
         include ($langPath . $language . $langFile);
     }
 
     foreach ($ext_names as $ext_name) {
-        if (file_exists("./extensions/$ext_name/lang/$language/lang.php")) {
-            include_once ("./extensions/$ext_name/lang/$language/lang.php");
+        if (file_exists("extensions/$ext_name/lang/$language/lang.php")) {
+            include_once ("extensions/$ext_name/lang/$language/lang.php");
         }
     }
 

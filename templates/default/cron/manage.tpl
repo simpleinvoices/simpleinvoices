@@ -10,7 +10,7 @@
  *}
 
 <div class="si_toolbar si_toolbar_top">
-  <a href="index.php?module=cron&amp;view=add" class=""><img src="./images/common/add.png" alt="" />{$LANG.new_recurrence}</a>
+  <a href="index.php?module=cron&amp;view=add" class=""><img src="images/common/add.png" alt="" />{$LANG.new_recurrence}</a>
 </div>
 
 
@@ -18,5 +18,5 @@
   <div class="si_message">{$LANG.no_crons} </div>
 {else}
   <table id="manageGrid" style="display:none"></table>
-  {include file='../modules/cron/manage.js.php'}
+  {include file='modules/cron/manage.js.php'}
 {/if}

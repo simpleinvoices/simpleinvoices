@@ -12,7 +12,7 @@
 * License:
 *     GPL v2 or above
 */
-include("./include/CustomField.php");
+include("include/CustomField.php");
 
 
 function saveCustomField($id, $category, $name, $description) {
@@ -179,13 +179,13 @@ function printCategories() {
  * Returns an array with all names of the plugins. 
  */
 function getPlugins() {
-    $files = scandir("./modules/customFields/plugins/");    //CustomFields directory plugins
+    $files = scandir("modules/customFields/plugins/");    //CustomFields directory plugins
     $plugins = null;
     
     for($i=0;$i<count($files);$i++) {
         $file = $files[$i];
         if(preg_match("/\.php$/",$file)) {
-            $plugins[$i] = "./modules/customFields/plugins/$file";
+            $plugins[$i] = "modules/customFields/plugins/$file";
         }
     }
     

@@ -122,7 +122,7 @@ class export {
                     }
                 }
 
-                $templatePath     = "./templates/default/statement/index.tpl";
+                $templatePath     = "templates/default/statement/index.tpl";
                 $biller_details   = Biller::select($this->biller_id);
                 $billers          = $biller_details;
                 $customer_details = Customer::get($this->customer_id);
@@ -151,7 +151,7 @@ class export {
                 $smarty->assign('end_date'             , $this->end_date);
                 $smarty->assign('statement'            , $statement);
                 $smarty->assign('menu'                 , false);
-                $data = $smarty->fetch("." . $templatePath);
+                $data = $smarty->fetch($templatePath);
                 break;
 
             case "payment":
@@ -185,12 +185,13 @@ class export {
                 $css = $siUrl . "/templates/invoices/default/style.css";
                 $smarty->assign('css', $css);
 
-                $templatePath = "./templates/default/payments/print.tpl";
-                $data = $smarty->fetch("." . $templatePath);
+                $templatePath = "templates/default/payments/print.tpl";
+                $data = $smarty->fetch($templatePath);
                 break;
 
             case "invoice":
                 if (!isset($this->invoice)) $this->invoice = Invoice::select($this->id, $this->domain_id);
+
                 $this->file_name = str_replace(" ", "_", $this->invoice['index_name']);
 
                 $invoice_number_of_taxes = Invoice::numberOfTaxesForInvoice($this->id, $this->domain_id);
@@ -213,8 +214,8 @@ class export {
                 // Set the template to the default
                 $template = $defaults['template'];
 
-                $templatePath  = "./templates/invoices/${template}/template.tpl";
-                $template_path = "../templates/invoices/${template}";
+                $templatePath  = "templates/invoices/${template}/template.tpl";
+                $template_path = "templates/invoices/${template}";
                 $css           = $siUrl . "/templates/invoices/${template}/style.css";
 
                 $pageActive = "invoices";
@@ -236,12 +237,15 @@ class export {
                     $smarty->assign('past_due_amt'           , $past_due_amt);
 
                     // Plugins specifically associated with your invoice template.
-                    $plugin_dirs = $smarty->plugins_dir;
-                    if (!is_array($plugin_dirs)) $plugin_dirs = array($plugin_dirs);
-                    $plugin_dirs[] = "./templates/invoices/${template}/plugins/";
-                    $smarty->plugins_dir = $plugin_dirs;
+                    $template_plugins_dir = "templates/invoices/${template}/plugins/";
+                    if (is_dir($template_plugins_dir)) {
+                        $plugins_dirs = $smarty->getPluginsDir();
+                        if (!is_array($plugins_dirs)) $plugins_dirs = array($plugins_dirs);
+                        $plugins_dirs[] = $template_plugins_dir;
+                        $smarty->setPluginsDir($plugins_dirs);
+                    }
 
-                    $data = $smarty->fetch("." . $templatePath);
+                    $data = $smarty->fetch($templatePath);
                 }
 
                 break;

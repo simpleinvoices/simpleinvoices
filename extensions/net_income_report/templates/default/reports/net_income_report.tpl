@@ -6,8 +6,8 @@
   <table class="center" >
     <tr>
       <td colspan="2"
-        style="font-weight: bold; font-size: 1.5em; text-align: center; text-decoration: underline;">
-        Report Period</td>
+          style="font-weight: bold; font-size: 1.5em; text-align: center; text-decoration: underline;">
+          Report Period</td>
     </tr>
     <tr>
       <td colspan="2">&nbsp;</td>
@@ -58,7 +58,7 @@
           <tr>
             <td>
               <button type="submit" class="positive" name="submit" value="statement_report">
-                <img class="button_img" src="./images/common/tick.png" alt="" />
+                <img class="button_img" src="images/common/tick.png" alt="" />
                 Run Report
               </button>
             </td>

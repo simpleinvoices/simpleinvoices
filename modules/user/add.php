@@ -23,7 +23,7 @@ $roles = user::getUserRoles();
 
 $saved = false;
 if (!empty($_POST['email'])) {
-	include ("./modules/user/save.php");
+	include ("modules/user/save.php");
 }
 
 $smarty->assign('save', $saved);

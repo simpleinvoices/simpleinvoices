@@ -6,7 +6,7 @@ checkLogin();
 
 //if valid then do save
 if (!empty($_POST['p_description'])) {
-	include("./modules/preferences/save.php");
+	include("modules/preferences/save.php");
 }
 $defaults = getSystemDefaults();
 $preferences = Preferences::getActivePreferences();

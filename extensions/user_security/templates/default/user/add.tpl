@@ -12,7 +12,7 @@
  *  GPL v3 or above
  *}
 {if $smarty.post.username != null && $smarty.post.submit != null }
-  {include file="../extensions/user_security/templates/default/user/save.tpl"}
+  {include file="extensions/user_security/templates/default/user/save.tpl"}
 {else}
 <form name="frmpost" action="index.php?module=user&amp;view=add" method="post" id="frmpost">
   <div class="si_form">
@@ -109,11 +109,11 @@
     </table>
     <div class="si_toolbar si_toolbar_form">
       <button type="submit" class="positive" name="submit" value="Insert User">
-        <img class="button_img" src="./images/common/tick.png" alt="" tabindex="100" />
+        <img class="button_img" src="images/common/tick.png" alt="" tabindex="100" />
         {$LANG.save}
       </button>
-      <a href="./index.php?module=user&view=manage" class="negative" tabindex="110">
-        <img src="./images/common/cross.png" alt="" />
+      <a href="index.php?module=user&view=manage" class="negative" tabindex="110">
+        <img src="images/common/cross.png" alt="" />
         {$LANG.cancel}
       </a>
     </div>

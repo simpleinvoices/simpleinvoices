@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Function: merge_address
  *
@@ -15,43 +14,35 @@
  *  class2  - the css class for the second td
  *  colspan - the td colspan of the last td
  */
-
-function smarty_function_merge_address($params, &$smarty) {
+function smarty_function_merge_address($params) {
     global $LANG;
     $skip_section = false;
     $ma = '';
     // If any among city, state or zip is present with no street at all
-    if (($params ['field1'] != null || $params ['field2'] != null || $params ['field3'] != null) && ($params ['street1'] == null && $params ['street2'] == null)) {
+    if (!isset($params['street1']) && !isset($params['street2']) &&
+        (isset($params['field1']) || isset($params['field2']) || isset($params['field3']))) {
         $ma .= "<tr>
-                <td class='" . htmlsafe ( $params [class1] ) . "'>$LANG[address]:</td>
-                <td class='" . htmlsafe ( $params [class2] ) . "' colspan='" . htmlsafe ( $params [colspan] ) . "'>";
+                <td class='" . htmlsafe($params[class1]) . "'>$LANG[address]:</td>
+                <td class='" . htmlsafe($params[class2]) . "' colspan='" . htmlsafe($params[colspan]) . "'>";
         $skip_section = true;
     }
+
     // If any among city, state or zip is present with atleast one street value
-    if (($params ['field1'] != null || $params ['field2'] != null || $params ['field3'] != null) && (! $skip_section)) {
+    if (!$skip_section && (isset($params['field1']) || isset($params['field2']) || isset($params['field3']))) {
         $ma .= "<tr>
-                <td class='" . htmlsafe ( $params [class1] ) . "'></td>
-                <td class='" . htmlsafe ( $params [class2] ) . "' colspan='" . htmlsafe ( $params [colspan] ) . "'>";
-    }
-    if ($params ['field1'] != null) {
-        $ma .= htmlsafe ( $params [field1] );
+                <td class='" . htmlsafe($params[class1]) . "'></td>
+                <td class='" . htmlsafe($params[class2]) . "' colspan='" . htmlsafe($params[colspan]) . "'>";
     }
 
-    if ($params ['field1'] != null && $params ['field2'] != null) {
-        $ma .= ", ";
-    }
+    if (isset($params['field1'])) $ma .= htmlsafe($params[field1]);
 
-    if ($params ['field2'] != null) {
-        $ma .= htmlsafe ( $params [field2] );
-    }
+    if (isset($params['field1']) && isset($params['field2'])) $ma .= ", ";
 
-    if (($params ['field1'] != null || $params ['field2'] != null) && ($params ['field3'] != null)) {
-        $ma .= ", ";
-    }
+    if (isset($params['field2'])) $ma .= htmlsafe($params[field2]);
 
-    if ($params ['field3'] != null) {
-        $ma .= htmlsafe ( $params [field3] );
-    }
+    if (isset($params['field3']) && (isset($params['field1']) || isset($params['field2']))) $ma .= ", ";
+
+    if (isset($params['field3'])) $ma .= htmlsafe($params[field3]);
 
     $ma .= "</td></tr>";
     echo $ma;

@@ -2,11 +2,7 @@
 
 /*
 * Script: lang.php
-<<<<<<< HEAD
 *    English translation file
-=======
-* 	Portuguese Brazilian translation file
->>>>>>> refs/remotes/simpleinvoices/master
 *
 * Last edited:
 *    2016-10-04

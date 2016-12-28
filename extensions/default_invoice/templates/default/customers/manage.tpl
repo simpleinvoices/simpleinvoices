@@ -9,8 +9,8 @@
  *   http://www.simpleinvoices.org
  *}
 <div class="si_toolbar si_toolbar_top">
-    <a href="./index.php?module=customers&amp;view=add" class="">
-        <img src="./images/famfam/add.png" alt="" />
+    <a href="index.php?module=customers&amp;view=add" class="">
+        <img src="images/famfam/add.png" alt="" />
         {$LANG.customer_add}
     </a>
 </div>
@@ -20,5 +20,5 @@
 {else}
     <br />
     <table id="manageGrid" style="display:none"></table>
-    {include file='../extensions/default_invoice/modules/customers/manage.js.php'}
+    {include file='extensions/default_invoice/modules/customers/manage.js.php'}
 {/if}

@@ -18,5 +18,5 @@
   <p><em>No extensions registered</em></p>
 {else}
   <table id="manageGrid" style="display:none"></table>
-  {include file='../modules/extensions/manage.js.php'}
+  {include file='modules/extensions/manage.js.php'}
 {/if}

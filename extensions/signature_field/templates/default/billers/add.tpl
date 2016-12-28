@@ -12,7 +12,7 @@
 
 {if !empty($smarty.post.name) && isset($smarty.post.submit) } 
   {* The new biller was just added *}
-  {include file="../extensions/signature_field/templates/default/billers/save.tpl"}
+  {include file="extensions/signature_field/templates/default/billers/save.tpl"}
 {else}
   {* Adding a new biller *}
   <form name="frmpost" action="index.php?module=billers&amp;view=add" method="post" id="frmpost">
@@ -198,12 +198,12 @@
     
       <div class="si_toolbar si_toolbar_form">
         <button type="submit" class="positive" name="submit" value="{$LANG.insert_biller}">
-          <img class="button_img" src="./images/common/tick.png" alt="" /> 
+          <img class="button_img" src="images/common/tick.png" alt="" /> 
           {$LANG.save}
         </button>
             
-        <a href="./index.php?module=billers&amp;view=manage" class="negative">
-          <img src="./images/common/cross.png" alt="" />
+        <a href="index.php?module=billers&amp;view=manage" class="negative">
+          <img src="images/common/cross.png" alt="" />
           {$LANG.cancel}
         </a>
       </div>
