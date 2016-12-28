@@ -21,6 +21,6 @@ if ($patchCount >= "293") {
     $authNamespace = new Zend_Session_Namespace('Zend_Auth');
     $authNamespace->setExpirationSeconds($timeout * 60);
 
-    $help_image_path = "./extensions/user_security/images/common/";
+    $help_image_path = "extensions/user_security/images/common/";
     if ($help_image_path) {} // Remove unused variable warning.
 }

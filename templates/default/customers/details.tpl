@@ -237,9 +237,9 @@
     </div>
   </div>
   <div class="si_toolbar si_toolbar_form">
-    <a href="./index.php?module=customers&amp;view=details&amp;id={$customer.id|urlencode}&amp;action=edit"
+    <a href="index.php?module=customers&amp;view=details&amp;id={$customer.id|urlencode}&amp;action=edit"
        class="positive">
-      <img src="./images/common/tick.png" alt="" />{$LANG.edit}
+      <img src="images/common/tick.png" alt="" />{$LANG.edit}
     </a>
   </div>
 </div>
@@ -446,10 +446,10 @@
     <div class="si_toolbar si_toolbar_form">
       <button type="submit" class="positive" name="save_customer"
               value="{$LANG.save_customer}" tabindex="230" >
-        <img class="button_img" src="./images/common/tick.png" alt="" />{$LANG.save}
+        <img class="button_img" src="images/common/tick.png" alt="" />{$LANG.save}
       </button>
-      <a href="./index.php?module=customers&amp;view=manage"
-         class="negative"><img src="./images/common/cross.png" alt="" />{$LANG.cancel}</a>
+      <a href="index.php?module=customers&amp;view=manage"
+         class="negative"><img src="images/common/cross.png" alt="" />{$LANG.cancel}</a>
     </div>
   </div>
 </form>

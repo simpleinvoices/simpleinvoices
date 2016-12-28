@@ -1,5 +1,5 @@
 {* preload the headers (for faster browsing) *}
-{include file='../templates/default/header.tpl'}
+{include file='templates/default/header.tpl'}
 
   <div class="si_wrap">
     <form action="" method="post" id="frmLogin" name="frmLogin">

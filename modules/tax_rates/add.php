@@ -6,7 +6,7 @@ checkLogin();
 
 //if valid then do save
 if (!empty($_POST['tax_description'])) { 
-	include("./modules/tax_rates/save.php");
+	include("modules/tax_rates/save.php");
 }
 
 $types = Taxes::getTaxTypes();

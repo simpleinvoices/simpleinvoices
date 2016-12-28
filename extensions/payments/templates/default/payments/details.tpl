@@ -38,7 +38,7 @@
   </table>
 
   <div class="si_toolbar si_toolbar_form">
-    <a href="./index.php?module=payments&view=manage" class="negative"><img src="./images/common/cross.png" alt="" />{$LANG.cancel}</a>
+    <a href="index.php?module=payments&view=manage" class="negative"><img src="images/common/cross.png" alt="" />{$LANG.cancel}</a>
   </div>
 </div>
 

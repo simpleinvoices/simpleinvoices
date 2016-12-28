@@ -57,14 +57,14 @@
     {* Insert code here *}
   {/capture}
 {/if}
-  
+
 {* In menu.tpl - Immediately after the previous topmenu_start hook ******* *}
 {if $smarty.capture.hook_topmenu_section01_replace eq ""}
   {capture name=hook_topmenu_section01_replace}
     {* Insert code here *}
   {/capture}
 {/if}
-
+ 
 {* In menu.tpl - Immediately before the </div> for this section ********** *}
 {if $smarty.capture.hook_topmenu_end eq ""}
   {capture name=hook_topmenu_end}

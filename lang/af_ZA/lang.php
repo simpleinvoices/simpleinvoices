@@ -2,7 +2,7 @@
 
 /*
 * Script: lang.php
-* 	Afrikaans South Africa translation file
+* 	Afghan translation file
 *
 * Last edited:
 *    2014-05-25
@@ -19,6 +19,7 @@
  */
 
 #all
+
 global $LANG;
 if ($LANG) {} // eliminates unused warning
 

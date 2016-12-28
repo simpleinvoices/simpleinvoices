@@ -41,7 +41,7 @@ else {
     $invoice_age ="";
 }
 
-$url_for_pdf = "./pdfmaker.php?id=" . $invoice['id'];
+$url_for_pdf = "pdfmaker.php?id=" . $invoice['id'];
         
 $invoice['url_for_pdf'] = $url_for_pdf;
 

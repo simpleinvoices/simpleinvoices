@@ -106,12 +106,12 @@ class eway {
 
             // @formatter:off
             Payment::insert(array("ac_inv_id"         => $this->invoice['id'],
-                                   "ac_amount"         => $this->invoice['total'],
-                                   "ac_notes"          => $message,
-                                   "ac_date"           => date('Y-m-d'),
-                                   "online_payment_id" => $ewayResponseFields['EWAYTRXNNUMBER'],
-                                   "domain_id"         => $this->domain_id,
-                                   "ac_payment_type"   => PaymentType::specialSelect("Eway")));
+                                  "ac_amount"         => $this->invoice['total'],
+                                  "ac_notes"          => $message,
+                                  "ac_date"           => date('Y-m-d'),
+                                  "online_payment_id" => $ewayResponseFields['EWAYTRXNNUMBER'],
+                                  "domain_id"         => $this->domain_id,
+                                  "ac_payment_type"   => PaymentType::specialSelect("Eway")));
             // @formatter:on
             return 'true';
         }

@@ -267,6 +267,7 @@ $LANG['id'] = "ID";//1
 $LANG['ie_10_for_10'] = "* ie. 10 for 10%";//1
 $LANG['include_online_payment'] = "Include online payment";//1
 $LANG['included'] = "included";//1
+$LANG['information'] = "Information";
 $LANG['insert_biller'] = "Insert Biller";//1
 $LANG['insert_customer'] = "Insert Customer";//1
 $LANG['insert_payment_type'] = "Insert Payment Type";//1

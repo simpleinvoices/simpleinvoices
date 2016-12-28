@@ -225,8 +225,8 @@
 <table class="center" >
   <tr>
     <td>
-      <a href="./index.php?module=customers&amp;view=details&amp;id={$customer.id|urlencode}&amp;action=edit" class="positive">
-        <img src="./images/common/tick.png" alt="" />
+      <a href="index.php?module=customers&amp;view=details&amp;id={$customer.id|urlencode}&amp;action=edit" class="positive">
+        <img src="images/common/tick.png" alt="" />
         {$LANG.edit}
       </a>
     </td>
@@ -449,11 +449,11 @@
     <tr>
       <td>
         <button type="submit" class="positive" name="save_customer" value="{$LANG.save_customer}" tabindex="230" >
-          <img class="button_img" src="./images/common/tick.png" alt="" /> 
+          <img class="button_img" src="images/common/tick.png" alt="" /> 
           {$LANG.save}
         </button>
-        <a href="./index.php?module=customers&amp;view=manage" class="negative">
-          <img src="./images/common/cross.png" alt="" />
+        <a href="index.php?module=customers&amp;view=manage" class="negative">
+          <img src="images/common/cross.png" alt="" />
           {$LANG.cancel}
         </a>
       </td>

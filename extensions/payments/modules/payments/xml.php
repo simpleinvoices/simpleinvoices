@@ -83,7 +83,6 @@ function sql($type = '', $dir, $sort, $rp, $page) {
     $se = new Select($fn, null, null, "date");
     $pdoDb->addToSelectStmts($se);
 
-
     $list = array("ap.*", "c.name AS cname", "b.name AS bname", "pt.pt_description AS description",
                   "ap.ac_notes AS notes");
     $pdoDb->setSelectList($list);

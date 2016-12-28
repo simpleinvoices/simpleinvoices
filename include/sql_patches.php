@@ -1577,8 +1577,8 @@ $patchlines['patch'] = "ALTER TABLE `".TB_PREFIX."payment` ADD INDEX(`domain_id`
 $patchlines['date' ] = "20100419";
 patchmaker('251', $patchlines, $si_patches);
 
-$patchlines['name' ] = "Language - reset to en_GB - due to folder renaming";
-$patchlines['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value ='en_GB' where name='language';";
+$patchlines['name' ] = "Language - reset to en_US - due to folder renaming";
+$patchlines['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value ='en_US' where name='language';";
 $patchlines['date' ] = "20100419";
 patchmaker('252', $patchlines, $si_patches);
 
@@ -1830,6 +1830,3 @@ $patchlines['patch'] = "ALTER TABLE `".TB_PREFIX."user` ADD COLUMN `user_id` INT
 $patchlines['date' ] = "20140103";
 patchmaker('292', $patchlines, $si_patches);
 
-    $patch['293']['name']  = "Add department to the customers";
-    $patch['293']['patch'] = "ALTER TABLE `".TB_PREFIX."customers` ADD COLUMN `department` VARCHAR(255) NULL AFTER `name`";
-    $patch['293']['date']  = "20161004";

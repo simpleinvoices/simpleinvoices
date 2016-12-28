@@ -14,7 +14,7 @@ if (!defined("BROWSE")) define("BROWSE", "browse");
 // **********************************************************
 
 // Load stuff required before init.php
-require_once "./include/init_pre.php";
+require_once "include/init_pre.php";
 
 // @formatter:off
 $module = isset($_GET['module']) ? filenameEscape($_GET['module']) : null;
@@ -28,10 +28,10 @@ $databasePopulated = false;
 
 // Will be set in the following init.php call to extensions that are enabled.
 $ext_names = array();
-$help_image_path = "./images/common/";
+$help_image_path = "images/common/";
 
 // Note: include/functions.php and include/sql_queries.php loaded by this include.
-require_once "./include/init.php";
+require_once "include/init.php";
 global $smarty,
        $smarty_output,
        $menu,
@@ -42,8 +42,8 @@ global $smarty,
        $early_exit;
 
 foreach ($ext_names as $ext_name) {
-    if (file_exists("./extensions/$ext_name/include/init.php")) {
-        require_once ("./extensions/$ext_name/include/init.php");
+    if (file_exists("extensions/$ext_name/include/init.php")) {
+        require_once ("extensions/$ext_name/include/init.php");
     }
 }
 
@@ -68,7 +68,7 @@ $menu = (isset($menu) ? $menu : true);
 // Check for any unapplied SQL patches when going home
 // TODO - redo this code
 if (($module == "options") && ($view == "database_sqlpatches")) {
-    include_once ('./include/sql_patches.php');
+    include_once ('include/sql_patches.php');
     donePatches();
 } else {
     // Check that database structure has been built and populated.
@@ -119,8 +119,8 @@ error_log("index.php module["   . (empty($module) ? "" : $module) .
           "] view[" . (empty($view) ? "" : $view) .
           "] action[" . (empty($action) ? "" : $action) .
           "] id[" . (empty($_GET['id']) ? "" : $_GET['id']) .
-          "]");
-*/
+          "] menu[$menu]");
+ */
 
 // Don't include the header if requested file is an invoice template.
 // For print preview etc.. header is not needed
@@ -129,8 +129,8 @@ if (($module == "invoices") && (strstr($view, "template"))) {
     // TODO: Make this more efficient.
     $extensionInvoiceTemplateFile = 0;
     foreach ($ext_names as $ext_name) {
-        if (file_exists("./extensions/$ext_name/modules/invoices/template.php")) {
-            include_once ("./extensions/$ext_name/modules/invoices/template.php");
+        if (file_exists("extensions/$ext_name/modules/invoices/template.php")) {
+            include_once ("extensions/$ext_name/modules/invoices/template.php");
             $extensionInvoiceTemplateFile++;
         }
     }
@@ -146,11 +146,12 @@ if (($module == "invoices") && (strstr($view, "template"))) {
 if (strstr($module, "api") || (strstr($view, "xml") || (strstr($view, "ajax")))) {
     $extensionXml = 0;
     foreach ($ext_names as $ext_name) {
-        if (file_exists("./extensions/$ext_name/modules/$module/$view.php")) {
-            include ("./extensions/$ext_name/modules/$module/$view.php");
+        if (file_exists("extensions/$ext_name/modules/$module/$view.php")) {
+            include ("extensions/$ext_name/modules/$module/$view.php");
             $extensionXml++;
         }
     }
+
     // Load default if none found for enabled extensions.
     if ($extensionXml == 0 && $my_path = getCustomPath("$module/$view", 'module')) {
         include ($my_path);
@@ -168,10 +169,10 @@ if (strstr($module, "api") || (strstr($view, "xml") || (strstr($view, "ajax"))))
 // TODO: fix the javascript or move datapicker to extjs to fix this hack - not nice
 $extension_jquery_files = "";
 foreach ($ext_names as $ext_name) {
-    if (file_exists("./extensions/$ext_name/include/jquery/$ext_name.jquery.ext.js")) {
+    if (file_exists("extensions/$ext_name/include/jquery/$ext_name.jquery.ext.js")) {
         // @formatter:off
         $extension_jquery_files .=
-            '<script type="text/javascript" src="./extensions/' .
+            '<script type="text/javascript" src="extensions/' .
                      $ext_name . '/include/jquery/' .
                      $ext_name . '.jquery.ext.js">' .
             '</script>';
@@ -183,19 +184,19 @@ $smarty->assign("extension_jquery_files", $extension_jquery_files);
 
 // Load any hooks that are defined for extensions
 foreach ($ext_names as $ext_name) {
-    if (file_exists("./extensions/$ext_name/templates/default/hooks.tpl")) {
-        $smarty->$smarty_output("../extensions/$ext_name/templates/default/hooks.tpl");
+    if (file_exists("extensions/$ext_name/templates/default/hooks.tpl")) {
+        $smarty->$smarty_output("extensions/$ext_name/templates/default/hooks.tpl");
     }
 }
 // Load standard hooks file. Note that any module hooks loaded will not be
 // impacted by loading this file.
-$smarty->$smarty_output("../custom/hooks.tpl");
+$smarty->$smarty_output("custom/hooks.tpl");
 
 if (!in_array($module . "_" . $view, $early_exit)) {
     $extensionHeader = 0;
     foreach ($ext_names as $ext_name) {
-        if (file_exists("./extensions/$ext_name/templates/default/header.tpl")) {
-            $smarty->$smarty_output("../extensions/$ext_name/templates/default/header.tpl");
+        if (file_exists("extensions/$ext_name/templates/default/header.tpl")) {
+            $smarty->$smarty_output("extensions/$ext_name/templates/default/header.tpl");
             $extensionHeader++;
         }
     }
@@ -227,7 +228,7 @@ if ($extension_php_insert_files) {} // Show variable as used.
 $perform_extension_php_insertions = (($module == 'system_defaults' && $view == 'edit'));
 $extensionPhpFile = 0;
 foreach ($ext_names as $ext_name) {
-    $phpfile = "./extensions/$ext_name/modules/$module/$view.php";
+    $phpfile = "extensions/$ext_name/modules/$module/$view.php";
     if (file_exists($phpfile)) {
         // If $perform_extension_php_insertions is true, then the extension php
         // file content is to be included in the standard php file. Otherwise,
@@ -249,7 +250,6 @@ foreach ($ext_names as $ext_name) {
 if ($extensionPhpFile == 0 && ($my_path = getCustomPath("$module/$view", 'module'))) {
     include $my_path;
 }
-
 // **********************************************************
 // Include php file for the requested page section - END
 // **********************************************************
@@ -263,15 +263,15 @@ if ($module == "export" || $view == "export" || $module == "api") {
 // use script load for the .php file.
 // **********************************************************
 foreach ($ext_names as $ext_name) {
-    if (file_exists("./extensions/$ext_name/include/jquery/$ext_name.post_load.jquery.ext.js.tpl")) {
-        $smarty->$smarty_output("../extensions/$ext_name/include/jquery/$ext_name.post_load.jquery.ext.js.tpl");
+    if (file_exists("extensions/$ext_name/include/jquery/$ext_name.post_load.jquery.ext.js.tpl")) {
+        $smarty->$smarty_output("extensions/$ext_name/include/jquery/$ext_name.post_load.jquery.ext.js.tpl");
     }
 }
 
 // NOTE: Don't load the default file if we are processing an authentication "auth" request.
 // if ($extensionPostLoadJquery == 0 && $module != 'auth') {
 if ($module != 'auth') {
-    $smarty->$smarty_output("../include/jquery/post_load.jquery.ext.js.tpl");
+    $smarty->$smarty_output("include/jquery/post_load.jquery.ext.js.tpl");
 }
 // **********************************************************
 // Post load javascript files - END
@@ -328,8 +328,8 @@ if ($menu) {
 if (!in_array($module . "_" . $view, $early_exit)) {
     $extensionMain = 0;
     foreach ($ext_names as $ext_name) {
-        if (file_exists("./extensions/$ext_name/templates/default/main.tpl")) {
-            $smarty->$smarty_output("../extensions/$ext_name/templates/default/main.tpl");
+        if (file_exists("extensions/$ext_name/templates/default/main.tpl")) {
+            $smarty->$smarty_output("extensions/$ext_name/templates/default/main.tpl");
             $extensionMain++;
         }
     }
@@ -368,7 +368,7 @@ $perform_extension_insertions = (($module == 'reports'         && $view == 'inde
 // @formatter:on
 
 foreach ($ext_names as $ext_name) {
-    $tpl_file = "./extensions/$ext_name/templates/default/$module/$view.tpl";
+    $tpl_file = "extensions/$ext_name/templates/default/$module/$view.tpl";
     if (file_exists($tpl_file)) {
         // If $perform_extension_insertions is true, the $path and
         // $extensionTemplates are not set/incremented intentionally.
@@ -379,7 +379,7 @@ foreach ($ext_names as $ext_name) {
             $content = file_get_contents($tpl_file);
             $type = "";
             if (($pos = strpos($content, 'data-section="')) === false) {
-                $section = $smarty->_tpl_vars['LANG']['other'];
+                $section = $smarty->tpl_vars['LANG']->value['other'];
             } else {
                 $pos += 14;
                 $str = substr($content, $pos);
@@ -393,17 +393,17 @@ foreach ($ext_names as $ext_name) {
                 $end = strpos($content, '}', $pos);
                 $len = $end - $pos;
                 $lang_element = substr($content, $pos, $len);
-                $section = $smarty->_tpl_vars['LANG'][$lang_element];
+                $section = $smarty->tpl_vars['LANG']->value[$lang_element];
             }
             // @formatter:off
-            $vals = array("file"    => "." . $tpl_file,
+            $vals = array("file"    => $tpl_file,
                           "module"  => $module,
                           "section" => $type . $section);
             $extension_insertion_files[] = $vals;
             // @formatter:on
         } else {
-            $path = "../extensions/$ext_name/templates/default/$module/";
-            $my_tpl_path = "." . $tpl_file;
+            $path = "extensions/$ext_name/templates/default/$module/";
+            $my_tpl_path = $tpl_file;
             $extensionTemplates++;
         }
     }
@@ -442,8 +442,8 @@ if ($extensionTemplates == 0) {
 if (!in_array($module . "_" . $view, $early_exit)) {
     $extensionFooter = 0;
     foreach ($ext_names as $ext_name) {
-        if (file_exists("./extensions/$ext_name/templates/default/footer.tpl")) {
-            $smarty->$smarty_output("../extensions/$ext_name/templates/default/footer.tpl");
+        if (file_exists("extensions/$ext_name/templates/default/footer.tpl")) {
+            $smarty->$smarty_output("extensions/$ext_name/templates/default/footer.tpl");
             $extensionFooter++;
         }
     }

@@ -15,8 +15,8 @@
  *      http://www.simpleinvoices.org
  *}
 <div class="si_toolbar si_toolbar_top">
-  <a href="./index.php?module=payment_types&amp;view=add" class="">
-    <img src="./images/famfam/add.png" alt="" />
+  <a href="index.php?module=payment_types&amp;view=add" class="">
+    <img src="images/famfam/add.png" alt="" />
     {$LANG.add_new_payment_type}
   </a>
 </div>
@@ -24,5 +24,5 @@
 <div class="si_message">{$LANG.no_payment_types}</div>
 {else}
 <table id="manageGrid" style="display:none"></table>
-{include file='../modules/payment_types/manage.js.php'}
+{include file='modules/payment_types/manage.js.php'}
 {/if}

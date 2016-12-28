@@ -7,7 +7,7 @@
  *}
   <div class="si_toolbar si_toolbar_top">
     <a href="index.php?module=user&view=add" class="">
-      <img src="./images/common/add.png" alt="" />
+      <img src="images/common/add.png" alt="" />
       {$LANG.user_add}
     </a>
   </div>
@@ -16,5 +16,5 @@
   <div class="si_message">{$LANG.no_users}</div>
 {else}
   <table id="manageGrid" style="display:none"></table>
-  {include file='../extensions/user_security/modules/user/manage.js.php' LANG=$LANG}
+  {include file='extensions/user_security/modules/user/manage.js.php' LANG=$LANG}
 {/if}

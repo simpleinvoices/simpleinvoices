@@ -66,10 +66,10 @@
     <td colspan="4">{$invoice.index_id|htmlsafe}</td>
     <td class="si_switch">
       <a href='#' class="show-summary" onclick="$('.summary').show();$('.show-summary').hide();">
-        <img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" />
+        <img src="images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" />
       </a>
       <a href='#' class="summary" onclick="$('.summary').hide();$('.show-summary').show();">
-        <img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" />
+        <img src="images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" />
       </a>
     </td>
   </tr>
@@ -84,10 +84,10 @@
     <td colspan="4">{$biller.name|htmlsafe}</td>
     <td class="si_switch">
       <a href='#' class="show-biller" onclick="$('.biller').show();$('.show-biller').hide();">
-        <img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" />
+        <img src="images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" />
       </a>
       <a href='#' class="biller" onclick="$('.biller').hide();$('.show-biller').show();">
-        <img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" />
+        <img src="images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" />
       </a>
     </td>
   </tr>
@@ -153,11 +153,11 @@
     <td class="si_switch">
       <a href='#' class="show-customer"
          {literal}onclick="$('.customer').show(); $('.show-customer').hide(); {/literal}">
-        <img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" />
+        <img src="images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" />
       </a>
       <a href='#' class="customer"
          {literal}onclick="$('.customer').hide(); $('.show-customer').show(); {/literal}">
-        <img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" />
+        <img src="images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" />
       </a>
     </td>
   </tr>
@@ -234,18 +234,18 @@
       <td class="si_switch">
       {if $invoice.type_id == 2 }
         <a href='#' class="show-itemised" onclick="$('.itemised').show();$('.show-itemised').hide();">
-          <img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" />
+          <img src="images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" />
         </a>
         <a href='#' class="itemised" onclick="$('.itemised').hide();$('.show-itemised').show();">
-          <img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" />
+          <img src="images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" />
         </a>
       {/if}
       {if $invoice.type_id == 3 }
         <a href='#' class="show-consulting" onclick="$('.consulting').show();$('.show-consulting').hide();">
-          <img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" />
+          <img src="images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" />
         </a>
         <a href='#' class="consulting" onclick="$('.consulting').hide();$('.show-consulting').show();">
-          <img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" />
+          <img src="images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" />
         </a>
       {/if}
       </td>
@@ -394,11 +394,11 @@
         {if ($invoice.note|count_characters:true > 25)}
           <a href='#' class="show-notes"
              onclick="$('.notes').show();$('.si_notes_hide').show();$('.show-notes').hide();">
-            <img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" />
+            <img src="images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" />
           </a>
           <a href='#' class="notes si_hide"
              onclick="$('.notes').hide();$('.si_notes_hide').hide();$('.show-notes').show();">
-            <img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" />
+            <img src="images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" />
           </a>
         {/if}
         </td>

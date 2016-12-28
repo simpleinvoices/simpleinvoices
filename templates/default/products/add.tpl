@@ -1,11 +1,11 @@
 {* if bill is updated or saved.*}
 {if $smarty.post.description != "" && $smarty.post.id != null }
-  {include file="../templates/default/products/save.tpl"}
+  {include file="templates/default/products/save.tpl"}
 {else}
   {* if name was inserted *}
   {if $smarty.post.id !=null}
   <div class="validation_alert">
-    <img src="./images/common/important.png" alt="" />
+    <img src="images/common/important.png" alt="" />
     {$LANG.product_description_prompt}
   </div>
   <hr />
@@ -179,11 +179,11 @@
     </div>
     <div class="si_toolbar si_toolbar_form">
       <button type="submit" class="positive" name="id" value="{$LANG.save}">
-        <img class="button_img" src="./images/common/tick.png" alt="" />
+        <img class="button_img" src="images/common/tick.png" alt="" />
         {$LANG.save}
       </button>
-      <a href="./index.php?module=products&view=manage" class="negative">
-        <img src="./images/common/cross.png" alt="" />
+      <a href="index.php?module=products&view=manage" class="negative">
+        <img src="images/common/cross.png" alt="" />
         {$LANG.cancel}
       </a>
     </div>

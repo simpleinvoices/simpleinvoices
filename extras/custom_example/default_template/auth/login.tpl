@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <title>SimpleInvoices - Login</title>
-<link rel="stylesheet" type="text/css" href="./templates/default/css/login.css" />
+<link rel="stylesheet" type="text/css" href="templates/default/css/login.css" />
 
-<link rel="stylesheet" type="text/css" href="./custom/my_medias/my.css" />
+<link rel="stylesheet" type="text/css" href="custom/my_medias/my.css" />
 
 
 </head>

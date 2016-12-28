@@ -9,8 +9,8 @@
 </table>
 <br />
 <div class="si_toolbar si_toolbar_form">
-  <a href="./index.php?module=expense_account&view=details&id={$expense_account.id}&action=edit" class="positive">
-    <img src="./images/famfam/add.png" alt=""/>
+  <a href="index.php?module=expense_account&view=details&id={$expense_account.id}&action=edit" class="positive">
+    <img src="images/famfam/add.png" alt=""/>
     {$LANG.edit}
   </a>
 </div>
@@ -29,10 +29,10 @@
 <br />
 <div class="si_toolbar si_toolbar_form">
   <button type="submit" class="positive" name="submit" value="{$LANG.save}">
-    <img class="button_img" src="./images/common/tick.png" alt="" />{$LANG.save}
+    <img class="button_img" src="images/common/tick.png" alt="" />{$LANG.save}
   </button>
-  <a href="./index.php?module=expense_account&amp;view=manage" class="negative">
-    <img src="./images/common/cross.png" alt="" />
+  <a href="index.php?module=expense_account&amp;view=manage" class="negative">
+    <img src="images/common/cross.png" alt="" />
     {$LANG.cancel}
   </a>
 </div>

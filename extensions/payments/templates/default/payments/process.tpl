@@ -46,8 +46,9 @@
             <option value=''></option>
             {foreach from=$invoice_all item=invoice}
               <option value="{$invoice.id|htmlsafe}">
-                {$invoice.index_name|htmlsafe} ({$invoice.biller|htmlsafe},
-                {$invoice.customer  |htmlsafe},
+                {$invoice.index_name|htmlsafe}
+               ({$invoice.biller|htmlsafe},
+                {$invoice.customer|htmlsafe},
                 {$LANG.total} {$invoice.invoice_total|siLocal_number} :
                 {$LANG.owing} {$invoice.owing|siLocal_number})
               </option>
@@ -93,11 +94,11 @@
 
     <div class="si_toolbar si_toolbar_form">
       <button type="submit" class="positive" name="process_payment" value="{$LANG.save}">
-        <img class="button_img" src="./images/common/tick.png" alt="" />
+        <img class="button_img" src="images/common/tick.png" alt="" />
         {$LANG.save}
       </button>
-      <a href="./index.php?module=payments&amp;view=manage" class="negative">
-        <img src="./images/common/cross.png" alt="" />
+      <a href="index.php?module=payments&amp;view=manage" class="negative">
+        <img src="images/common/cross.png" alt="" />
         {$LANG.cancel}
       </a>
     </div>

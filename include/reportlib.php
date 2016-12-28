@@ -2,7 +2,7 @@
 // Eliminate code on 20161014 as uses PHPReportMaker class that doesn't exist.
 // So likely that the code isn't used.
 /*
-require_once("./include/init.php");
+require_once("include/init.php");
 global $db_server, $config;
 
 // needed for /library/phpreports to function

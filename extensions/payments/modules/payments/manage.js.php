@@ -21,11 +21,12 @@
             {display: '{/literal}{$LANG.date_upper}{literal}', name : 'date'       , width : 10 * percentage_width, sortable : true , align: 'center'}
         ],
         searchitems : [
-           {display: '{/literal}{$LANG.payment}{literal}'   , name : 'ap.id'},
-           {display: '{/literal}{$LANG.invoice}{literal}'   , name : 'ac_inv_id'},
-           {display: '{/literal}{$LANG.biller}{literal}'    , name : 'b.name'},
-           {display: '{/literal}{$LANG.customer}{literal}'  , name : 'c.name', isdefault: true},
-           {display: '{/literal}{$LANG.date_upper}{literal}', name : 'ac_date'}
+           {display: '{/literal}{$LANG.payment}{literal}'     , name : 'ap.id'},
+           {display: '{/literal}{$LANG.invoice}{literal}'     , name : 'ac_inv_id'},
+           {display: '{/literal}{$LANG.check_number}{literal}', name : 'ac_check_number'},
+           {display: '{/literal}{$LANG.biller}{literal}'      , name : 'b.name'},
+           {display: '{/literal}{$LANG.customer}{literal}'    , name : 'c.name', isdefault: true},
+           {display: '{/literal}{$LANG.date_upper}{literal}'  , name : 'ac_date'}
         ],
         sortname:  "{/literal}{$smarty.get.sortname|default:'ac_inv_id'}{literal}",
         sortorder: "{/literal}{$smarty.get.sortorder|default:'desc'}{literal}",

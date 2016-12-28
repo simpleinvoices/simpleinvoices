@@ -19,8 +19,8 @@
 checkLogin();
 echo "this file was flagged as not needed anymore! path: modules/invoices/search.php";
 /*
-$smarty -> display("../templates/default/menu.tpl");
-$smarty -> display("../templates/default/main.tpl");
+$smarty -> display("templates/default/menu.tpl");
+$smarty -> display("templates/default/main.tpl");
 
 $startdate = (isset($_POST['startdate'])) ? $_POST['startdate'] : date("Y-m-d",strtotime("last Year"));
 $startdate = htmlsafe($startdate);

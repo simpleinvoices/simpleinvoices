@@ -1,4 +1,18 @@
 <?php
+function is_custom_flag_field($field) {
+    global $smarty;
+    $useit  = false;
+    $result = false;
+    if (!empty($field)) {
+        if (preg_match('/[Ff]lag:/',$field) == 1) {
+            $useit = true;
+        } else {
+            $result = true;
+        }
+    }
+    $smarty->assign('useit', $useit);
+    return $result;
+}
 
 /**
  * Get the custom flag labels

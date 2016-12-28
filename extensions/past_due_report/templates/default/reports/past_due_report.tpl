@@ -1,14 +1,13 @@
 <h1 style="position: relative; margin: 0 auto; text-align: center;">Past Due Report</h1>
 <hr />
 <form name="frmpost"
-  action="index.php?module=reports&amp;view=past_due_report" 
-  method="post" >
+      action="index.php?module=reports&amp;view=past_due_report" 
+      method="post" >
   <table class="center" >
     <tr>
       <td class="details_screen">Display Detail</td>
       <td><input type="checkbox" name="display_detail"
-                 {if $smarty.post.display_detail == "yes"} checked {/if}
-                 value="yes" />
+                 {if $smarty.post.display_detail == "yes"} checked {/if} value="yes" />
       </td>
     </tr>
     <tr>
@@ -17,7 +16,7 @@
           <tr>
             <td>
               <button type="submit" class="positive" name="submit" value="past_due_report">
-                <img class="button_img" src="./images/common/tick.png" alt="" />
+                <img class="button_img" src="images/common/tick.png" alt="" />
                 Run Report
               </button>
             </td>

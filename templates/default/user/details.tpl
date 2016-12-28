@@ -37,13 +37,13 @@
   </table>
 </div>
 <div class="si_toolbar si_toolbar_form">
-            <a href="./index.php?module=user&view=details&id={$user.id|urlencode}&action=edit" class="positive">
-                <img src="./images/famfam/report_edit.png" alt="" />
+            <a href="index.php?module=user&view=details&id={$user.id|urlencode}&action=edit" class="positive">
+                <img src="images/famfam/report_edit.png" alt="" />
                 {$LANG.edit}
             </a>
 
-            <a href="./index.php?module=user&view=manage" class="negative">
-                <img src="./images/common/cross.png" alt="" />
+            <a href="index.php?module=user&view=manage" class="negative">
+                <img src="images/common/cross.png" alt="" />
                 {$LANG.cancel}
             </a>
 </div>
@@ -110,11 +110,11 @@
 
   <div class="si_toolbar si_toolbar_form">
       <button type="submit" class="positive" name="save_user">
-      <img class="button_img" src="./images/common/tick.png" alt="" /> 
+      <img class="button_img" src="images/common/tick.png" alt="" /> 
       {$LANG.save}
       </button>
-      <a href="./index.php?module=user&view=manage" class="negative">
-      <img src="./images/common/cross.png" alt="" />
+      <a href="index.php?module=user&view=manage" class="negative">
+      <img src="images/common/cross.png" alt="" />
       {$LANG.cancel}
       </a>
   </div>

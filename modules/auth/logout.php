@@ -1,12 +1,12 @@
 <?php
 /*
-* Script: logout.php
-* 	Logout page
+* Script: login.php
+* 	Login page
 *
 * License:
 *	 GPL v3 or above
 */
-$menu = false;
+$menu = true;
 if ($menu) {} // eliminates unused warning
 // we must never forget to start the session
 //so config.php works ok without using index.php define browse

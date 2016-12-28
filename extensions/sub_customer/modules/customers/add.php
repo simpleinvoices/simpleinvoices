@@ -24,7 +24,7 @@ $customFieldLabel = getCustomFieldLabels('',true);
 
 //if valid then do save
 if (!empty($_POST['name'])) {
-	include("./extensions/sub_customer/modules/customers/save.php");
+	include("extensions/sub_customer/modules/customers/save.php");
 }
 $smarty->assign('customFieldLabel',$customFieldLabel);
 

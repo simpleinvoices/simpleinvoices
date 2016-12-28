@@ -11,12 +11,12 @@
 {* if customer is updated or saved.*} 
 
 {if $smarty.post.name != null && $smarty.post.name != ""} 
-  {include file="../templates/default/customers/save.tpl"}
+  {include file="templates/default/customers/save.tpl"}
 {else}
   {* if  name was inserted *} 
   {if $smarty.post.id !=null} 
   {*
-    <div class="validation_alert"><img src="./images/common/important.png" alt="" />
+    <div class="validation_alert"><img src="images/common/important.png" alt="" />
     You must enter a description for the Customer</div>
     <hr />
   *}
@@ -233,14 +233,14 @@
   <tr>
     <td>
       <button type="submit" class="positive" name="id" value="{$LANG.save}" tabindex="240" >
-        <img class="button_img" src="./images/common/tick.png" alt="" /> 
+        <img class="button_img" src="images/common/tick.png" alt="" /> 
         {$LANG.save}
       </button>
     </td>
     <td>
       <input type="hidden" name="op" value="insert_customer" />
-      <a href="./index.php?module=customers&amp;view=manage" class="negative" tabindex="250" >
-        <img src="./images/common/cross.png" alt="" />
+      <a href="index.php?module=customers&amp;view=manage" class="negative" tabindex="250" >
+        <img src="images/common/cross.png" alt="" />
         {$LANG.cancel}
       </a>
     </td>

@@ -11,7 +11,7 @@
 
 
 {if $smarty.post.email != null && $smarty.post.submit != null } 
-	{include file="../templates/default/user/save.tpl"}
+	{include file="templates/default/user/save.tpl"}
 {else}
 
 <form name="frmpost" action="index.php?module=user&amp;view=add" method="post" id="frmpost">
@@ -67,12 +67,12 @@
 
 	<div class="si_toolbar si_toolbar_form">
             <button type="submit" class="positive" name="submit" value="Insert User">
-                <img class="button_img" src="./images/common/tick.png" alt="" /> 
+                <img class="button_img" src="images/common/tick.png" alt="" /> 
                 {$LANG.save}
             </button>
 
-            <a href="./index.php?module=user&view=manage" class="negative">
-                <img src="./images/common/cross.png" alt="" />
+            <a href="index.php?module=user&view=manage" class="negative">
+                <img src="images/common/cross.png" alt="" />
                 {$LANG.cancel}
             </a>
 	</div>

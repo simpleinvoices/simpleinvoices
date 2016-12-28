@@ -17,7 +17,7 @@
 <div class="si_message">{$LANG.no_custom_flags}</div>
 {else}
 <table id="manageGrid" style="display: none"></table>
-{include file='../extensions/custom_flags/modules/custom_flags/manage.js.php'}
+{include file='extensions/custom_flags/modules/custom_flags/manage.js.php'}
 <div class="si_help_div">
   <a class="cluetip" href="#"
     rel="index.php?module=documentation&amp;view=view&amp;page=help_what_are_custom_flags"

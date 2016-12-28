@@ -4,7 +4,7 @@ global $smarty, $LANG, $pdoDb;
 checkLogin();
 
 // Add check_number field to the database if not present.
-require_once "./extensions/payments/include/class/CheckNumber.php";
+require_once "extensions/payments/include/class/CheckNumber.php";
 CheckNumber::addNewFields();
 
 $paymentTypes = PaymentType::select_all(true);

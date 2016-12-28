@@ -14,8 +14,8 @@
 */
 *}
 	<div class="si_toolbar si_toolbar_top">
-            <a href="./index.php?module=preferences&amp;view=add" class="">
-                <img src="./images/famfam/add.png" alt="" />
+            <a href="index.php?module=preferences&amp;view=add" class="">
+                <img src="images/famfam/add.png" alt="" />
                 {$LANG.add_new_preference}
             </a>
 	</div>
@@ -27,7 +27,7 @@
 {else}
 
 	<table id="manageGrid" style="display:none"></table>
-	{include file='../modules/preferences/manage.js.php'}
+	{include file='modules/preferences/manage.js.php'}
 
 {/if}
 

@@ -66,8 +66,8 @@
   <tr class='details_screen'>
     <td class='details_screen'><b>{$preference.pref_inv_wording} {$LANG.summary}:</b></td>
     <td colspan="5" align="right" class='details_screen align_right'>
-      <a href='#' class="show-summary" onclick="$('.summary').show();$('.show-summary').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" alt="" /></a>
-      <a href='#' class="summary" onclick="$('.summary').hide();$('.show-summary').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" alt="" /></a>
+      <a href='#' class="show-summary" onclick="$('.summary').show();$('.show-summary').hide();"><img src="images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" alt="" /></a>
+      <a href='#' class="summary" onclick="$('.summary').hide();$('.show-summary').show();"><img src="images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" alt="" /></a>
     </td>
   </tr>
   <tr class='details_screen summary'>
@@ -90,8 +90,8 @@
     <td class='details_screen'><b>{$LANG.biller}:</b></td>
     <td class='details_screen' colspan="3">{$biller.name}</td>
     <td colspan="2" class='details_screen align_right'>
-      <a href='#' class="show-biller" onclick="$('.biller').show();$('.show-biller').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" alt="" /></a>
-      <a href='#' class="biller" onclick="$('.biller').hide();$('.show-biller').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" alt="" /></a>
+      <a href='#' class="show-biller" onclick="$('.biller').show();$('.show-biller').hide();"><img src="images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" alt="" /></a>
+      <a href='#' class="biller" onclick="$('.biller').hide();$('.show-biller').show();"><img src="images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" alt="" /></a>
     </td>
   </tr>
   <tr class='details_screen biller'>
@@ -159,8 +159,8 @@
     <td class='details_screen'><b>{$LANG.customer}:</b></td>
     <td class='details_screen' colspan="3">{$customer.name}</td>
     <td colspan="2" class='details_screen align_right'>
-      <a href='#' class="show-customer" {literal} onclick="$('.customer').show(); $('.show-customer').hide(); {/literal}"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" alt=""/></a>
-      <a href='#' class="customer" {literal} onclick="$('.customer').hide(); $('.show-customer').show(); {/literal}"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" alt="" /></a>
+      <a href='#' class="show-customer" {literal} onclick="$('.customer').show(); $('.show-customer').hide(); {/literal}"><img src="images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" alt=""/></a>
+      <a href='#' class="customer" {literal} onclick="$('.customer').hide(); $('.show-customer').show(); {/literal}"><img src="images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" alt="" /></a>
     </td>
   </tr>
   <tr class='details_screen customer'>
@@ -222,7 +222,7 @@
     <td colspan="5"></td>
     {/if}
     <td class='details_screen align_right'>
-      <a href="?module=invoices&view=usedefault&action=update_template&id={$invoice.id}&customer_id={$customer.id}"><img src="./images/flexigrid/load.png" title='{$LANG.invoice} {$invoice.id} {$LANG.as_template} {$LANG.for} {$customer.name}' alt="" /></a>
+      <a href="?module=invoices&view=usedefault&action=update_template&id={$invoice.id}&customer_id={$customer.id}"><img src="images/flexigrid/load.png" title='{$LANG.invoice} {$invoice.id} {$LANG.as_template} {$LANG.for} {$customer.name}' alt="" /></a>
     </td>
   </tr>
   {*
@@ -274,8 +274,8 @@
         {if $invoice.type_id == 2 }
         <tr>
           <td colspan="6" class="details_screen align_right">
-            <a href='#' class="show-itemised" onclick="$('.itemised').show();$('.show-itemised').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a>
-            <a href='#' class="itemised" onclick="$('.itemised').hide();$('.show-itemised').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a>
+            <a href='#' class="show-itemised" onclick="$('.itemised').show();$('.show-itemised').hide();"><img src="images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a>
+            <a href='#' class="itemised" onclick="$('.itemised').hide();$('.show-itemised').show();"><img src="images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a>
           </td>
         </tr>
         <tr>
@@ -288,8 +288,8 @@
         {if $invoice.type_id == 3 }
         <tr>
           <td colspan="6" class="details_screen align_right">
-            <a href='#' class="show-consulting" onclick="$('.consulting').show();$('.show-consulting').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a>
-            <a href='#' class="consulting" onclick="$('.consulting').hide();$('.show-consulting').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a>
+            <a href='#' class="show-consulting" onclick="$('.consulting').show();$('.show-consulting').hide();"><img src="images/common/magnifier_zoom_in.png" title="{$LANG.show_details}"/></a>
+            <a href='#' class="consulting" onclick="$('.consulting').hide();$('.show-consulting').show();"><img src="images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}"/></a>
           </td>
         </tr>
         <tr>
@@ -415,8 +415,8 @@
     <td colspan="5"><b>{$LANG.notes}:</b></td>
     {if ($invoice.note|count_characters:true > 25)}
     <td class="details_screen align_right">
-      <a href='#' class="show-notes" onclick="$('.notes').show();$('.show-notes').hide();"><img src="./images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" /></a>
-      <a href='#' class="notes" onclick="$('.notes').hide();$('.show-notes').show();"><img src="./images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" /></a>
+      <a href='#' class="show-notes" onclick="$('.notes').show();$('.show-notes').hide();"><img src="images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" /></a>
+      <a href='#' class="notes" onclick="$('.notes').hide();$('.show-notes').show();"><img src="images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" /></a>
     </td>
     {/if}
   </tr>

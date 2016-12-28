@@ -11,7 +11,7 @@ $taxes       = Taxes::getActiveTaxes();
 
 // if valid then do save
 if (!empty( $_POST ['expense_account_id'] )) {
-    include "./extensions/expense/modules/expense/save.php";
+    include "extensions/expense/modules/expense/save.php";
 }
 
 $defaults = getSystemDefaults();

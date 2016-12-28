@@ -23,12 +23,12 @@
   </table>
 </div>
 <div class="si_toolbar si_toolbar_form">
-  <a href="./index.php?module=inventory&amp;view=edit&amp;id={$inventory.id|urlencode}"
-     class="positive"> <img src="./images/famfam/report_edit.png" alt="" />
+  <a href="index.php?module=inventory&amp;view=edit&amp;id={$inventory.id|urlencode}"
+     class="positive"> <img src="images/famfam/report_edit.png" alt="" />
     {$LANG.edit}
   </a>
-  <a href="./index.php?module=inventory&view=manage"
-     class="negative"> <img src="./images/common/cross.png" alt="" />
+  <a href="index.php?module=inventory&view=manage"
+     class="negative"> <img src="images/common/cross.png" alt="" />
     {$LANG.cancel}
   </a>
 </div>

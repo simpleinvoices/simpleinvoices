@@ -22,7 +22,7 @@
       <tr>
         <th>{$LANG.setup_as_biller}</th>
         <td>
-          <a href="./index.php?module=billers&amp;view=add" class="positive"><img src="./images/common/user_add.png" alt="" />{$LANG.add_new_biller}</a>
+          <a href="index.php?module=billers&amp;view=add" class="positive"><img src="images/common/user_add.png" alt="" />{$LANG.add_new_biller}</a>
         </td>
       </tr>
     {/if}
@@ -30,7 +30,7 @@
       <tr>
         <th>{$LANG.setup_add_customer}</th>
         <td>
-          <a href="./index.php?module=customers&amp;view=add" class="positive"><img src="./images/common/vcard_add.png" alt="" />{$LANG.customer_add}</a>
+          <a href="index.php?module=customers&amp;view=add" class="positive"><img src="images/common/vcard_add.png" alt="" />{$LANG.customer_add}</a>
         </td>
       </tr>
     {/if}
@@ -38,7 +38,7 @@
       <tr>
         <th>{$LANG.setup_add_products}</th>
         <td>
-          <a href="./index.php?module=products&amp;view=add" class="positive"><img src="./images/common/cart_add.png" alt="" />{$LANG.add_new_product}</a>
+          <a href="index.php?module=products&amp;view=add" class="positive"><img src="images/common/cart_add.png" alt="" />{$LANG.add_new_product}</a>
         </td>
       </tr>
     {/if}
@@ -46,7 +46,7 @@
       <tr>
         <th>{$LANG.setup_add_taxrate}</th>
         <td>
-          <a href="index.php?module=tax_rates&amp;view=add" class="positive"><img src="./images/common/money_delete.png" alt="" />{$LANG.add_new_tax_rate}</a>
+          <a href="index.php?module=tax_rates&amp;view=add" class="positive"><img src="images/common/money_delete.png" alt="" />{$LANG.add_new_tax_rate}</a>
         </td>
       </tr>
     {/if}
@@ -54,7 +54,7 @@
       <tr>
         <th>{$LANG.setup_add_inv_pref}</th>
         <td>
-          <a href="./index.php?module=preferences&amp;view=add" class="positive"><img src="./images/common/page_white_edit.png" alt="" />{$LANG.add_new_preference}</a>
+          <a href="index.php?module=preferences&amp;view=add" class="positive"><img src="images/common/page_white_edit.png" alt="" />{$LANG.add_new_preference}</a>
         </td>
       </tr>
     {/if}
@@ -81,7 +81,7 @@
             <td>
             {if $smarty.section.line.index == "0"}
               <a href="#" class="trash_link" id="trash_link{$smarty.section.line.index|htmlsafe}" title="{$LANG.cannot_delete_first_row|htmlsafe}" >
-                <img id="trash_image{$smarty.section.line.index|htmlsafe}" src="./images/common/blank.gif" height="16px" width="16px" title="{$LANG.cannot_delete_first_row}" alt="" />
+                <img id="trash_image{$smarty.section.line.index|htmlsafe}" src="images/common/blank.gif" height="16px" width="16px" title="{$LANG.cannot_delete_first_row}" alt="" />
               </a>
             {else}
               {* can't delete line 0 *}
@@ -89,7 +89,7 @@
               <a id="trash_link{$smarty.section.line.index|htmlsafe}" class="trash_link"
                  title="{$LANG.delete_row}" rel="{$smarty.section.line.index|htmlsafe}"
                  href="#" style="display: inline;">
-                <img src="./images/common/delete_item.png" alt="" />
+                <img src="images/common/delete_item.png" alt="" />
               </a>
             {/if}
             </td>
@@ -156,9 +156,9 @@
       </table>
       <div class="si_toolbar si_toolbar_inform">
         {* onclick="add_line_item();" *}
-        <a href="#" class="add_line_item"><img src="./images/common/add.png" alt="" />{$LANG.add_new_row}</a>
-        <a href='#' class="show-details" onclick="javascript: $('.details').addClass('si_show').removeClass('si_hide');$('.show-details').addClass('si_hide').removeClass('si_show');"><img src="./images/common/page_white_add.png" title="{$LANG.show_details}" alt="" />{$LANG.show_details}</a>
-        <a href='#' class="details si_hide" onclick="javascript: $('.details').removeClass('si_show').addClass('si_hide');$('.show-details').addClass('si_show').removeClass('si_hide');" ><img src="./images/common/page_white_delete.png" title="{$LANG.hide_details}" alt="" />{$LANG.hide_details}</a>
+        <a href="#" class="add_line_item"><img src="images/common/add.png" alt="" />{$LANG.add_new_row}</a>
+        <a href='#' class="show-details" onclick="javascript: $('.details').addClass('si_show').removeClass('si_hide');$('.show-details').addClass('si_hide').removeClass('si_show');"><img src="images/common/page_white_add.png" title="{$LANG.show_details}" alt="" />{$LANG.show_details}</a>
+        <a href='#' class="details si_hide" onclick="javascript: $('.details').removeClass('si_show').addClass('si_hide');$('.show-details').addClass('si_show').removeClass('si_hide');" ><img src="images/common/page_white_delete.png" title="{$LANG.hide_details}" alt="" />{$LANG.hide_details}</a>
       </div>
       <table class="si_invoice_bot">
         {$show_custom_field.1} {$show_custom_field.2} {$show_custom_field.3} {$show_custom_field.4}
@@ -189,10 +189,10 @@
       <input type="hidden" name="type" value="2" />
       <div class="si_toolbar si_toolbar_form">
         <button type="submit" class="invoice_save" name="submit" value="{$LANG.save}">
-          <img class="button_img" src="./images/common/tick.png" alt="" />{$LANG.save}
+          <img class="button_img" src="images/common/tick.png" alt="" />{$LANG.save}
         </button>
-        <a href="./index.php?module=invoices&amp;view=manage" class="negative">
-          <img src="./images/common/cross.png" alt="" />
+        <a href="index.php?module=invoices&amp;view=manage" class="negative">
+          <img src="images/common/cross.png" alt="" />
           {$LANG.cancel}
         </a>
       </div>

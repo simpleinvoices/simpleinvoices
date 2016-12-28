@@ -7,7 +7,7 @@ da_DK      | Dansk (Danish)                | All Done    |             587 |    
 de_CH      | Schwizerdütsch (Swiss German) | All Done    |             587 |              255 |   43.44% | 
 de_DE      | Deutsch (German)              | All Done    |             587 |              316 |   53.83% | 
 el_GR      | Greek (Greek)                 | All Done    |             587 |              304 |   51.79% | 
-en_GB      | English (UK)                  | All Done    |             587 |              587 |  100.00% | 
+en_US      | English (USA)                 | All Done    |             587 |              587 |  100.00% | 
 es_ES      | Castellano (Spanish)          | All Done    |             587 |              358 |   60.99% | 
 fi_FI      | Suomi (Finnish)               | All Done    |             587 |              322 |   54.86% | 
 fr_FR      | Français (French)             | All Done    |             587 |              401 |   68.31% | 

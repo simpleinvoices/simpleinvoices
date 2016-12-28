@@ -9,7 +9,7 @@ $cflgs = getCustomFlagsQualified('E');
 $taxes = Taxes::getActiveTaxes();
 // if valid then do save
 if (!empty($_POST['description'])) {
-    include ("./modules/products/save.php");
+    include ("modules/products/save.php");
 }
 
 $smarty->assign("defaults", getSystemDefaults());

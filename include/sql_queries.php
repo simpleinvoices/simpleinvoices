@@ -713,7 +713,7 @@ function pdfThis($html_to_pdf, $pdfname, $download) {
 
     parse_config_file('./library/pdf/html2ps.config');
 
-    require_once ("./include/init.php"); // for getInvoice() and getPreference()
+    require_once ("include/init.php"); // for getInvoice() and getPreference()
 
     if (!function_exists('convert_to_pdf')) {
         function convert_to_pdf($html_to_pdf, $pdfname, $download) {
@@ -849,8 +849,8 @@ function listPatches() {
     </p>
     <div class="si_message_warning">Warning: Please backup your database before upgrading!</div>
     <div class="si_toolbar si_toolbar_form">
-        <a href="./index.php?case=run" class="">
-        <img src="./images/common/tick.png" alt="" />Update</a>
+        <a href="index.php?case=run" class="">
+        <img src="images/common/tick.png" alt="" />Update</a>
     </div>
 EOD;
 
@@ -988,4 +988,3 @@ function patch126() {
         // @formatter:on
     }
 }
- 

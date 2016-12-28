@@ -31,20 +31,20 @@ function checkLogin() {
  * @return file path or NULL if no file path determined.
  */
 function getCustomPath($name, $mode = 'template') {
-    $my_custom_path = "./custom/";
+    $my_custom_path = "custom/";
     $out = NULL;
     if ($mode == 'template') {
         if (file_exists("{$my_custom_path}default_template/{$name}.tpl")) {
             $out = ".{$my_custom_path}default_template/{$name}.tpl";
-        } elseif (file_exists("./templates/default/{$name}.tpl")) {
-            $out = "../templates/default/{$name}.tpl";
+        } elseif (file_exists("templates/default/{$name}.tpl")) {
+            $out = "templates/default/{$name}.tpl";
         }
     }
     if ($mode == 'module') {
         if (file_exists("{$my_custom_path}modules/{$name}.php")) {
             $out = "{$my_custom_path}modules/{$name}.php";
-        } elseif (file_exists("./modules/{$name}.php")) {
-            $out = "./modules/{$name}.php";
+        } elseif (file_exists("modules/{$name}.php")) {
+            $out = "modules/{$name}.php";
         }
     }
     return $out;
@@ -68,7 +68,7 @@ function isExtensionEnabled($ext_name) {
 }
 
 function getLogoList() {
-    $dirname = "./templates/invoices/logos";
+    $dirname = "templates/invoices/logos";
     $ext = array("jpg", "png", "jpeg", "gif");
     $files = array();
     if ($handle = opendir($dirname)) {

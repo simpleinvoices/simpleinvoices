@@ -8,8 +8,8 @@
 if (!function_exists('loginLogo')) {
     function loginLogo($smarty, $defaults) {
         // Not a post action so set up company logo and name to display on login screen.
-        //<img src="./extensions/user_security/images/{$defaults.company_logo}" alt="User Logo">
-        $image = "./extensions/user_security/images/" . $defaults['company_logo'];
+        //<img src="extensions/user_security/images/{$defaults.company_logo}" alt="User Logo">
+        $image = "extensions/user_security/images/" . $defaults['company_logo'];
         if (is_readable($image)) {
             $imgWidth = 0;
             $imgHeight = 0;

@@ -59,10 +59,10 @@ if (isset($_GET['export'])) {
 // End Export code 
 
 	
-$templatePath = "./templates/invoices/${template}/template.tpl";
-$template_path = "../templates/invoices/${template}";
+$templatePath = "templates/invoices/${template}/template.tpl";
+$template_path = "templates/invoices/${template}";
 $css = $siUrl."/templates/invoices/${template}/style.css";
-$pluginsdir = "./templates/invoices/${template}/plugins/";
+$pluginsdir = "templates/invoices/${template}/plugins/";
 
 $smarty -> plugins_dir = $pluginsdir;
 
@@ -84,7 +84,7 @@ if(file_exists($templatePath)) {
 	
 	if ($_GET['location'] =="pdf")
 	{
-		$html = $smarty -> fetch(".".$templatePath);
+		$html = $smarty -> fetch($templatePath);
 		pdfThis($html);
 		exit();
 	}

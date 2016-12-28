@@ -88,7 +88,7 @@ class Email {
         }
 
         // Remove temp invoice if present
-        if (!empty($this->attachment)) unlink("./tmp/cache/$this->attachment");
+        if (!empty($this->attachment)) unlink("tmp/cache/$this->attachment");
 
         switch ($this->format) {
             case "invoice":
