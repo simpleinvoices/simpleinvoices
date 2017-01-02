@@ -26,7 +26,7 @@ try {
 // Cannot redfine LOGGING (withour PHP PECL runkit extension) since already true in define.php
 // Ref: http://php.net/manual/en/function.runkit-method-redefine.php
 // Hence take from system_defaults into new variable
-// Initialise so that while it is being evaluated, it prevents logging
+// Initialize so that while it is being evaluated, it prevents logging
 $can_log = false;
 $can_chk_log = (LOGGING && (isset($auth_session->id) && $auth_session->id > 0) && getDefaultLoggingStatus());
 $can_log = $can_chk_log;

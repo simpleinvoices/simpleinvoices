@@ -48,7 +48,6 @@ if (!is_writable($logFile)) {
 }
 $writer = new Zend_Log_Writer_Stream($logFile);
 $logger = new Zend_Log($writer);
-if ($logger) {} // Show variable as used.
 /* *************************************************************
  * log file - end
  * *************************************************************/
@@ -62,6 +61,44 @@ global $environment;
 
 // added 'true' to allow modifications from db
 $config = new Zend_Config_Ini("./" . CONFIG_FILE_PATH, $environment, true);
+$logger_level = (isset($config->zend->logger_level) ? strtoupper($config->zend->logger_level) : 'EMERG');
+switch($logger_level) {
+    case 'DEBUG':
+        $level = Zend_Log::DEBUG;
+        break;
+    
+    case 'INFO':
+        $level = Zend_Log::INFO;
+        break;
+
+    case 'NOTICE':
+        $level = Zend_Log::NOTICE;
+        break;
+
+    case 'WARN':
+        $level = Zend_Log::WARN;
+        break;
+
+    case 'ERR':
+        $level = Zend_Log::ERR;
+        break;
+
+    case 'CRIT':
+        $level = Zend_Log::CRIT;
+        break;
+
+    case 'ALERT':
+        $level = Zend_Log::ALERT;
+        break;
+
+    case 'EMERG':
+    default:
+        $level = Zend_Log::EMERG;
+        break;
+}
+$filter = new Zend_Log_Filter_Priority($level);
+$logger->addFilter($filter);
+
 try {
     $dbInfo = new DbInfo(CONFIG_FILE_PATH, "production");
 } catch (PdoDbException $pde) {
