@@ -24,7 +24,7 @@ export.pdf.rightmargin              = 15
 export.pdf.topmargin                = 15
 export.pdf.bottommargin             = 15
 
-version.name                        = 2016.1.001
+version.name                        = 2016.1.002
 
 local.locale                        = en_US
 local.precision                     = 2
@@ -49,6 +49,11 @@ phpSettings.display_startup_errors  = 1
 phpSettings.display_errors          = 1
 phpSettings.log_errors              = 0
 phpSettings.error_log               = tmp/log/php.log
+
+; Logs in tmp/log/si.log. Set to the desired level for log detail.
+; The higher the number, the more information will be logged.
+; DEBUG(7),INFO(6),NOTICE(5),WARN(4),ERR(3),CRIT(2),ALERT(1),EMERG(0)
+zend.logger_level                   = EMERG 
 
 ; Explicity confirm delete of line items from invoices? (yes/no)
 confirm.deleteLineItem              = no
