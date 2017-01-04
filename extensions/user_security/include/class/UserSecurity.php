@@ -196,7 +196,8 @@ class UserSecurity {
      */
     public static function buildPwdPattern() {
         global $smarty;
-        $defaults = $smarty->tpl_vars['defaults'];
+        $defaults = $smarty->tpl_vars['defaults']->value;
+
         //(?=^.{8,}$)(?=^[a-zA-Z])(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*\W)(?![.\n]).*$
         $pwd_pattern = "(?=^.{" . $defaults['password_min_length'] . ",}$)(?=^[a-zA-Z])";
 
