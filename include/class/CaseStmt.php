@@ -1,4 +1,5 @@
 <?php
+require_once 'include/class/When.php';
 require_once 'include/class/PdoDbException.php';
 
 class CaseStmt {

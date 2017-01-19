@@ -61,7 +61,7 @@ if (isset($_GET['export'])) {
 	
 $templatePath = "templates/invoices/${template}/template.tpl";
 $template_path = "templates/invoices/${template}";
-$css = $siUrl."/templates/invoices/${template}/style.css";
+$css = $siUrl."templates/invoices/${template}/style.css";
 $pluginsdir = "templates/invoices/${template}/plugins/";
 
 $smarty -> plugins_dir = $pluginsdir;

@@ -182,7 +182,7 @@ class export {
                 $smarty->assign('pageActive'       , 'payment');
                 $smarty->assign('active_tab'       , '#money');
 
-                $css = $siUrl . "/templates/invoices/default/style.css";
+                $css = $siUrl . "templates/invoices/default/style.css";
                 $smarty->assign('css', $css);
 
                 $templatePath = "templates/default/payments/print.tpl";
@@ -190,7 +190,7 @@ class export {
                 break;
 
             case "invoice":
-                if (!isset($this->invoice)) $this->invoice = Invoice::select($this->id, $this->domain_id);
+                if (!isset($this->invoice)) $this->invoice = Invoice::select($this->id);
 
                 $this->file_name = str_replace(" ", "_", $this->invoice['index_name']);
 
@@ -216,38 +216,35 @@ class export {
 
                 $templatePath  = "templates/invoices/${template}/template.tpl";
                 $template_path = "templates/invoices/${template}";
-                $css           = $siUrl . "/templates/invoices/${template}/style.css";
+                $css           = $siUrl . "templates/invoices/${template}/style.css";
 
                 $pageActive = "invoices";
                 $smarty->assign('pageActive', $pageActive);
-                if (file_exists($templatePath)) {
-                    $this->assignTemplateLanguage($this->preference);
+                $this->assignTemplateLanguage($this->preference);
 
-                    $smarty->assign('biller'                 , $this->biller);
-                    $smarty->assign('customer'               , $this->customer);
-                    $smarty->assign('invoice'                , $this->invoice);
-                    $smarty->assign('invoice_number_of_taxes', $invoice_number_of_taxes);
-                    $smarty->assign('preference'             , $this->preference);
-                    $smarty->assign('logo'                   , $logo);
-                    $smarty->assign('template'               , $template);
-                    $smarty->assign('invoiceItems'           , $invoiceItems);
-                    $smarty->assign('template_path'          , $template_path);
-                    $smarty->assign('css'                    , $css);
-                    $smarty->assign('customFieldLabels'      , $customFieldLabels);
-                    $smarty->assign('past_due_amt'           , $past_due_amt);
+                $smarty->assign('biller'                 , $this->biller);
+                $smarty->assign('customer'               , $this->customer);
+                $smarty->assign('invoice'                , $this->invoice);
+                $smarty->assign('invoice_number_of_taxes', $invoice_number_of_taxes);
+                $smarty->assign('preference'             , $this->preference);
+                $smarty->assign('logo'                   , $logo);
+                $smarty->assign('template'               , $template);
+                $smarty->assign('invoiceItems'           , $invoiceItems);
+                $smarty->assign('template_path'          , $template_path);
+                $smarty->assign('css'                    , $css);
+                $smarty->assign('customFieldLabels'      , $customFieldLabels);
+                $smarty->assign('past_due_amt'           , $past_due_amt);
 
-                    // Plugins specifically associated with your invoice template.
-                    $template_plugins_dir = "templates/invoices/${template}/plugins/";
-                    if (is_dir($template_plugins_dir)) {
-                        $plugins_dirs = $smarty->getPluginsDir();
-                        if (!is_array($plugins_dirs)) $plugins_dirs = array($plugins_dirs);
-                        $plugins_dirs[] = $template_plugins_dir;
-                        $smarty->setPluginsDir($plugins_dirs);
-                    }
-
-                    $data = $smarty->fetch($templatePath);
+                // Plugins specifically associated with your invoice template.
+                $template_plugins_dir = "templates/invoices/${template}/plugins/";
+                if (is_dir($template_plugins_dir)) {
+                    $plugins_dirs = $smarty->getPluginsDir();
+                    if (!is_array($plugins_dirs)) $plugins_dirs = array($plugins_dirs);
+                    $plugins_dirs[] = $template_plugins_dir;
+                    $smarty->setPluginsDir($plugins_dirs);
                 }
 
+                $data = $smarty->fetch($templatePath);
                 break;
         }
         // @formatter:on

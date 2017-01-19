@@ -7,6 +7,7 @@ require_once 'include/class/FromStmt.php';
 require_once 'include/class/Havings.php';
 require_once 'include/class/Join.php';
 require_once 'include/class/PdoDbException.php';
+require_once 'include/class/OnClause.php';
 require_once 'include/class/OrderBy.php';
 require_once 'include/class/Select.php';
 require_once 'include/class/WhereClause.php';
@@ -21,7 +22,7 @@ require_once 'include/class/WhereItem.php';
  * @author Rich Rowley
  */
 class PdoDb {
-    const TBPREFIX_PATTERN = '/^' . TB_PREFIX . '/';
+    const TBPREFIX_PATTERN = '/^si_/'; // Chg to use TB_PREFIX when only PHP 5.6x and up supported
     
     private $caseStmts;
     private $constraints;
@@ -68,24 +69,23 @@ class PdoDb {
         $this->table_schema = $dbinfo->getDbname();
         $this->debug = $debug;
         $this->transaction = false;
+        $host = ($dbinfo->getHost() == "localhost" ? "127.0.0.1" : $this->getHost());
+        //$dsn = "mysql:host={$dbinfo->getHost()};dbname={$dbinfo->getDbname()}";
+        $dsn = "mysql:dbname={$dbinfo->getDbname()};host=$host;port={$dbinfo->getPort()}";
+        $username = $dbinfo->getUsername();
+        $password = $dbinfo->getPassword();
         try {
-            // @formatter:off
             // Used for user requests.
-            $this->pdoDb = new PDO('mysql:host=' . $dbinfo->getHost() .
-                                     '; dbname=' . $dbinfo->getDbname(),
-                                                   $dbinfo->getUsername(),
-                                                   $dbinfo->getPassword());
+            $this->pdoDb = new PDO($dsn, $username, $password);
 
             // Used internally to perform table structure lookups, etc. so these
             // queries will not impact inprocess activity for the user's requests.
-            $this->pdoDb2 = new PDO('mysql:host=' . $dbinfo->getHost() .
-                                      '; dbname=' . $dbinfo->getDbname(),
-                                                    $dbinfo->getUsername(),
-                                                    $dbinfo->getPassword());
-            // @formatter:on
+            $this->pdoDb2 = new PDO($dsn, $username, $password);
         } catch (PDOException $e) {
             $str = "PdoDb - construct error: " . $e->getMessage();
             error_log($str);
+            error_log("dbinfo - " . print_r($dbinfo));
+            error_log(print_r($e));
             throw new PdoDbException($str);
         }
     }
@@ -1099,7 +1099,7 @@ class PdoDb {
         $parts = explode(' ', $sql);
         $request = strtoupper($parts[0]);
         if ($request == "INSERT") {
-            if (empty($this->constraints) || preg_match('/:ID[:$]', $this->constraints)) {
+            if (empty($this->constraints) || preg_match('/:ID[:$]/', $this->constraints)) {
                 $result = $this->lastInsertId();
             } else {
                 $result = "";

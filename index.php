@@ -89,7 +89,7 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
     }
 
     $logger->log("index.php - skip_db_patches[$skip_db_patches]", Zend_Log::DEBUG);
-    
+
     // See if we need to verify patches have been loaded.
     if (!$skip_db_patches) {
         // If default user or an active session exists, proceed with check.

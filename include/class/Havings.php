@@ -81,7 +81,8 @@ class Havings {
         $ndx = count($this->havings) - 1;
         if ($ndx >= 0) {
             $having = $this->havings[$ndx];
-            if (empty($having->getConnector())) {
+            $result = $having->getConnector();
+            if (empty($result)) {
                 $having->setConnector("AND");
                 $this->havings[$ndx] = $having;
             }

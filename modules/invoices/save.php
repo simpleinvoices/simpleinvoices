@@ -36,7 +36,7 @@ if ($_POST['action'] == "insert" ) {
         Product::insertProduct(0,0);
         $product_id = lastInsertId();
         $tax_id = (empty($_POST["tax_id"][0] ) ? "" : $_POST["tax_id"][0]);
-        Invoice::insertInvoiceItem($id, 1, $product_id, 1, $tax_id, $_POST['description'], $_POST['unit_price']);
+        Invoice::insertInvoiceItem($id, 1, $product_id, $tax_id, $_POST['description'], $_POST['unit_price']);
     } elseif ($saved) {
         $i = 0;
         while ($i <= $_POST['max_items']) {
@@ -44,7 +44,7 @@ if ($_POST['action'] == "insert" ) {
                 // @formatter:off
                 $tax_id = (empty($_POST["tax_id"][$i] ) ? "" : $_POST["tax_id"][$i]);
                 $attr = (empty($_POST["attribute"][$i]) ? "" : $_POST["attribute"][$i]);
-                Invoice::insertInvoiceItem($id    , $_POST["quantity$i"]   , $_POST["products$i"]  , $i,
+                Invoice::insertInvoiceItem($id    , $_POST["quantity$i"]   , $_POST["products$i"]  ,
                                            $tax_id, $_POST["description$i"], $_POST["unit_price$i"], $attr);
                 // @formatter:on
             }
@@ -84,10 +84,10 @@ if ($_POST['action'] == "insert" ) {
                 $attr    = (isset($_POST["attribute$i"]  ) ? $_POST["attribute$i"]   : "");
                 $tax_id  = (isset($_POST["tax_id"][$i]   ) ? $_POST["tax_id"][$i]    : "");
 
-                if ($item == "") {
-                    Invoice::insertInvoiceItem($id  , $qty, $product, $i, $tax_id, $desc, $price, $attr);
+                if (empty($item)) {
+                    Invoice::insertInvoiceItem($id  , $qty, $product, $tax_id, $desc, $price, $attr);
                 } else {
-                    Invoice::updateInvoiceItem($item, $qty, $product, $i, $tax_id, $desc, $price, $attr);
+                    Invoice::updateInvoiceItem($item, $qty, $product, $tax_id, $desc, $price, $attr);
                 }
                 // @formatter:on
             }

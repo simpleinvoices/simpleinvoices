@@ -9,7 +9,7 @@
  *  Website:
  *      http://www.simpleinvoices.org
  */
-include 'extensions/past_due_report/include/class/export.php';
+require_once 'extensions/past_due_report/include/class/export.php';
 // @formatter:off
 $export            = new export();
 $export->id        = (isset($_GET['id']      ) ? $_GET['id']       : "");

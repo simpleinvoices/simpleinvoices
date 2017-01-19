@@ -8,6 +8,7 @@ function smarty_function_holiday_logo($params) {
                       "_thanksgiving." => "11",
                       "_christmas."    => "12");
     // @formatter:on
+
     $logo = $params['logo'];
     $parts = explode('.', $logo);
     if (count($parts) == 2) {
@@ -19,7 +20,11 @@ function smarty_function_holiday_logo($params) {
             if ($curr_month == $month) {
                 $tmp_logo = $rel_path . $holiday . $parts[1];
                 if (file_exists($tmp_logo)) {
-                    $logo = $_SERVER['FULL_URL'] . '/' . $tmp_logo;
+                    if (empty($_SERVER['FULL_URL'])) {
+                        $logo = $tmp_logo;
+                    } else {
+                        $logo = $_SERVER['FULL_URL'] . $tmp_logo;
+                    }
                 }
                 break;
             }
