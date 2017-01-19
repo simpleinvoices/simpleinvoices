@@ -77,38 +77,6 @@ class Cron {
         return $result;
     }
 
-    public static function select_crons_to_run() {
-        global $config, $pdoDb;
-
-        // Use this function to select crons that need to run each day across all domain_id values
-        $jn = new Join("INNER", "invoices", "iv");
-        $jn->addSimpleItem("cron.invoice_id", new DbField("iv.id"), "AND");
-        $jn->addSimpleItem("cron.domain_id", new DbField("iv.domain_id"));
-        $pdoDb->addToJoins($jn);
-        
-        $jn = new Join("INNER", "preferences", "pf");
-        $jn->addSimpleItem("iv.preference_id", new DbField("pf.pref_id"), "AND");
-        $jn->addSimpleItem("iv.domain_id", new DbField("pf.domain_id"));
-        $pdoDb->addToJoins($jn);
-        
-        $fn = new FunctionStmt("CONCAT", "pf.pref_description, ' ', iv.index_id");
-        $se = new Select($fn, null, null, "index_name");
-        $pdoDb->addToSelectStmts($se);
-        
-        $dtm = new DateTime(null,new DateTimeZone($config->phpSettings->date->timezone));
-        $dt = $dtm->format("Y-m-d");
-        $pdoDb->addToWhere(new WhereItem(false, "cron.start_date", ">=", $dt, false, "AND"));
-        $pdoDb->addToWhere(new WhereItem(false, "cron.end_date"  , "<=", $dt, false, "AND"));
-        
-        $pdoDb->addSimpleWhere("cron.domain_id", domain_id::get());
-        
-        $pdoDb->setSelectList("cron.*");
-        
-        $pdoDb->setGroupBy(array("cron.id", "cron.domain_id"));
-        $result = $pdoDb->request("SELECT", "cron", "cron");
-        return $result;
-    }
-
     public static function select() {
         global $pdoDb;
         // Use this function to select crons that need to run each day across all domain_id values
@@ -116,21 +84,21 @@ class Cron {
         $oc->addSimpleItem("cron.invoice_id", new DbField("iv.id"), "AND");
         $oc->addSimpleItem("cron.domain_id", new DbField("iv.domain_id"));
         $pdoDb->addToJoins(array("INNER", "invoices", "iv", $oc));
-        
+
         $oc = new OnClause();
         $oc->addSimpleItem("iv.preference_id", new DbField("pf.pref_id"), "AND");
         $oc->addSimpleItem("iv.domain_id", new DbField("pf.domain_id"));
         $pdoDb->addToJoins(array("INNER", "preferences", "pf", $oc));
-        
+
         $fn = new FunctionStmt("CONCAT", "pf.pref_description, ' ', iv.index_id");
         $se = new Select($fn, null, null, "index_name");
         $pdoDb->addToSelectStmts($se);
-        
+
         $pdoDb->addSimpleWhere("cron.id", $_GET['id'], "AND");
         $pdoDb->addSimpleWhere("cron.domain_id", domain_id::get());
 
         $pdoDb->setSelectList(array("cron.*", "cron.id", "cron.domain_id"));
-        
+
         $result = $pdoDb->request("SELECT", "cron", "cron");
         return $result[0];
     }
@@ -143,24 +111,22 @@ class Cron {
     }
 
     public static function run() {
-        global $db; // Need for retrieval of id for payment record.
-
+        global $pdoDb;
         $result = array();
 
         $today = date('Y-m-d');
-        $data  = self::select_crons_to_run();
+        $rows  = self::select_crons_to_run();
 
         $result['cron_message'] = "Cron started";
         $number_of_crons_run = "0";
+        $i = 0; // set here so accessable outside of the loop
 
-        $cron_log = new cronlog ();
-        $cron_log->run_date = $today;
-
-        foreach($data as $key => $value) {
+        foreach($rows as $value) {
             // @formatter:off
-            $cron_log->cron_id   = $value['id'];
-            $cron_log->domain_id = $domain_id = $value['domain_id'];
-            $check_cron_log      = $cron_log->check ();
+            $cron_id   = $value['id'];
+            $domain_id = $value['domain_id'];
+
+            $check_cron_log = CronLog::check($pdoDb, $domain_id, $cron_id, $today);
 
             $i = "0";
             if ($check_cron_log == 0) {
@@ -174,83 +140,85 @@ class Cron {
 
                 // only check if diff is positive
                 if (($diff >= 0) && ($end_date == "" || $end_date >= $today)) {
-                    if ($value['recurrence_type'] == 'day') {
-                        $modulus = $diff % $value['recurrence'];
-                        if ($modulus == 0) {
-                            $run_cron = true;
-                        }
-                    }
+                    $month = false;
 
-                    if ($value['recurrence_type'] == 'week') {
-                        $period  = 7 * $value['recurrence'];
-                        $modulus = $diff % $period;
-                        if ($modulus == 0) {
-                            $run_cron = true;
-                        }
-                    }
+                    switch($value['recurrence_type']) {
+                        case 'day':
+                            // Calculate number of days passed.
+                            $modulus = $diff % $value['recurrence'];
+                            $run_cron = ($modulus == 0);
+                            break;
 
-                    if ($value['recurrence_type'] == 'month') {
-                        $start_day   = date('d', strtotime($value['start_date']));
-                        $start_month = date('m', strtotime($value['start_date']));
-                        $start_year  = date('Y', strtotime($value['start_date']));
-                        $today_day   = date('d');
-                        $today_month = date('m');
-                        $today_year  = date('Y');
+                        case 'week':
+                            // Calculate number of weeks passed.
+                            $period   = $value['recurrence'] * 7;
+                            $modulus  = $diff % $period;
+                            $run_cron = ($modulus == 0);
+                            break;
 
-                        $months  = ($today_month - $start_month) + 12 * ($today_year - $start_year);
-                        $modulus = $months % $value['recurrence'];
-                        if (($modulus == 0) && ($start_day == $today_day)) {
-                            $run_cron = true;
-                        }
-                    }
+                        case 'month':
+                            $month = true;
+                        case 'year' :
+                            $start_day   = date('d', strtotime($value['start_date']));
+                            $start_month = date('m', strtotime($value['start_date']));
+                            $start_year  = date('Y', strtotime($value['start_date']));
+                            $today_day   = date('d');
+                            $today_month = date('m');
+                            $today_year  = date('Y');
 
-                    if ($value['recurrence_type'] == 'year') {
-                        $start_day   = date('d', strtotime($value['start_date']));
-                        $start_month = date('m', strtotime($value['start_date']));
-                        $start_year  = date('Y', strtotime($value['start_date']));
-                        $today_day   = date('d');
-                        $today_month = date('m');
-                        $today_year  = date('Y');
+                            if ($month) {
+                                // Calculate number of month passed.
+                                $val  = ($today_month - $start_month) + (($today_year - $start_year) * 12);
+                            } else {
+                                // Calculate number of years passed.
+                                $val = $today_year - $start_year;
+                            }
 
-                        $years   = $today_year - $start_year;
-                        $modulus = $years % $value['recurrence'];
-                        if ($modulus == 0 && $start_day == $today_day && $start_month == $today_month) {
-                            $run_cron = true;
-                        }
+                            $modulus = $val % $value['recurrence'];
+                            $run_cron = ($modulus == 0 && $start_day == $today_day);
+                            if (!$month) {
+                                $run_cron = ($run_cron && $start_month == $today_month);
+                            }
+                            break;
+
+                        default:
+                            $run_cron = false;
+                            break;
                     }
 
                     // run the recurrence for this invoice
                     if ($run_cron) {
-                        $number_of_crons_run ++;
-                        $result['cron_message_' .
-                                $value['cron_id']] = "Cron ID: " .
-                                $value['cron_id']    . " - Cron for " .
-                                $value['index_name'] . " with start date of " .
-                                $value['start_date'] . ", end date of " .
-                                $value['end_date']   . " where it runs each " .
-                                $value['recurrence'] . " " .
-                                $value['recurrence_type'] . " was run today :: Info diff=" . $diff;
+                        $number_of_crons_run++;
+                        // @formatter:off
+                        $cron_msg = "Cron ID: $value[id] - Cron for $value[index_name] with ";
+                        $cron_msg += (empty($value['start_date']) ? "no start date" : "start date of $value[start_date] ") . "and ";
+                        $cron_msg += (empty($value['end_date']  ) ? "no end date"   : "an end date of $value[end_date] ");
+                        $cron_msg += " that runs each $value[recurrence] $value[recurrence_type], was run today :: Info diff=$diff";
+                        $result["cron_message_{$value['id']}"] = $cron_msg;
+                        // @formatter:on
                         $i++;
 
                         // $domain_id gets propagated from invoice to be copied from
                         $new_invoice_id = Invoice::recur ($value['invoice_id']);
 
-                        $cron_log->insert ();
-
+                        CronLog::insert($pdoDb, $domain_id, $cron_id, $today);
+                        // @formatter:off
                         $invoice               = Invoice::select($new_invoice_id);
                         $preference            = Preferences::getPreference($invoice['preference_id'], $domain_id);
                         $biller                = Biller::select($invoice['biller_id']);
                         $customer              = Customer::get($invoice['customer_id']);
                         $spc2us_pref           = str_replace(" ", "_", $invoice['index_name']);
                         $pdf_file_name_invoice = $spc2us_pref . ".pdf";
+                        // @formatter:on
 
                         // email invoice
                         if (($value['email_biller'] == ENABLED) || ($value['email_customer'] == ENABLED)) {
                             $export = new export ();
-                            $export->domain_id     = $domain_id;
-                            $export->format        = "pdf";
-                            $export->module        = 'invoice';
-                            $export->id            = $invoice['id'];
+                            // @formatter:off
+                            $export->domain_id = $domain_id;
+                            $export->format    = "pdf";
+                            $export->module    = 'invoice';
+                            $export->id        = $invoice['id'];
                             $export->setDownload(false);
                             $export->execute ();
 
@@ -272,27 +240,32 @@ class Cron {
                             $email->invoice_name       = $invoice['index_name'];
                             $email->subject            = $email->set_subject ();
                             $email->attachment         = $pdf_file_name_invoice;
-                            $result['email_message']  = $email->send ();
+                            $result['email_message']   = $email->send ();
+                            // @formatter:on
                         }
 
                         // Check that all details are OK before doing the eway payment
                         $eway_check = new eway ();
+                        // @formatter:off
                         $eway_check->domain_id  = $domain_id;
                         $eway_check->invoice    = $invoice;
                         $eway_check->customer   = $customer;
                         $eway_check->biller     = $biller;
                         $eway_check->preference = $preference;
                         $eway_pre_check         = $eway_check->pre_check ();
+                        // @formatter:on
 
                         // do eway payment
                         if ($eway_pre_check == 'true') {
-                            $eway            = new eway ();
+                            $eway = new eway ();
+                            // @formatter:off
                             $eway->domain_id = $domain_id;
                             $eway->invoice   = $invoice;
                             $eway->biller    = $biller;
                             $eway->customer  = $customer;
-                            $payment_done    = $eway->payment ();
-                            $payment_id      = $db->lastInsertID ();
+                            $payment_id      = $eway->payment ();
+                            $payment_done    = ($payment_id !== false);
+                            // @formatter:on
 
                             $pdf_file_name_receipt = 'payment' . $payment_id . '.pdf';
                             if ($pdf_file_name_receipt) {}; // To eliminate unused variable warning.
@@ -302,10 +275,11 @@ class Cron {
                                     ($value['email_customer'] == ENABLED)) {
                                      // Code to email a new copy of the invoice to the customer
                                     $export_rec = new export ();
-                                    $export_rec->domain_id     = $domain_id;
-                                    $export_rec->format        = "pdf";
-                                    $export_rec->module        = 'invoice';
-                                    $export_rec->id            = $invoice['id'];
+                                    // @formatter:off
+                                    $export_rec->domain_id = $domain_id;
+                                    $export_rec->format    = "pdf";
+                                    $export_rec->module    = 'invoice';
+                                    $export_rec->id        = $invoice['id'];
                                     $export_rec->setDownload(false);
                                     $export_rec->execute ();
 
@@ -327,19 +301,21 @@ class Cron {
                                     $email_rec->attachment    = $pdf_file_name_invoice;
                                     $email_rec->subject       = $email_rec->set_subject('invoice_eway_receipt');
                                     $result['email_message']  = $email_rec->send ();
+                                    // @formatter:on
                                 }
                             } else {
                                 // do email to biller/admin - say error
                                 $email = new Email ();
+                                // @formatter:off
                                 $email->domain_id     = $domain_id;
                                 $email->format        = 'cron_payment';
                                 $email->from          = $biller['email'];
                                 $email->from_friendly = $biller['name'];
                                 $email->to            = $biller['email'];
-                                $email->subject       = "Payment failed for " . $invoice['index_name'];
-                                $error_message        = "Invoice:  " . $invoice['index_name'] . "<br /> Amount: " . $invoice['total'] . " <br />";
-                                foreach($eway->get_message () as $key => $value) {
-                                    $error_message .= "\n<br>\$ewayResponseFields[\"$key\"] = $value";
+                                $email->subject       = "Payment failed for $invoice[index_name]";
+                                $error_message        = "Invoice: $invoice[index_name]<br />Amount: $invoice[total]<br />";
+                                foreach($eway->get_message () as $key2 => $value2) {
+                                    $error_message .= "\n<br>\$ewayResponseFields[\"$key2\"] = $value2";
                                 }
                                 $email->notes            = $error_message;
                                 $result['email_message'] = $email->send ();
@@ -347,38 +323,74 @@ class Cron {
                         }
                     } else {
                         // Cron not run for this cron_id
-                        $result['cron_message_' . $value['cron_id']] = "Cron ID: " .
-                                                                       $value['cron_id'        ] . " NOT RUN: Cron for " .
-                                                                       $value['index_name'     ] . " with start date of " .
-                                                                       $value['start_date'     ] . ", end date of " .
-                                                                       $value['end_date'       ] . " where it runs each " .
-                                                                       $value['recurrence'     ] . " " .
-                                                                       $value['recurrence_type'] . " did not recur today :: Info diff=" . $diff;
+                        $cron_msg = "Cron ID: $value[id] - Cron for $value[index_name] with ";
+                        $cron_msg += (empty($value['start_date']) ? "no start date" : "start date of $value[start_date] ") . "and ";
+                        $cron_msg += (empty($value['end_date']  ) ? "no end date"   : "an end date of $value[end_date] ");
+                        $cron_msg += " that runs each $value[recurrence] $value[recurrence_type], did not recur today :: Info diff=$diff";
+                        $result["cron_message_$value[id]"] = $cron_msg;
                     }
                 } else {
                     // days diff is negative - whats going on
-                    $result['cron_message_' . $value['cron_id']] = "Cron ID: " .
-                                                                   $value['cron_id'        ] . " NOT RUN: - Not cheduled for today - Cron for " .
-                                                                   $value['index_name'     ] . " with start date of " .
-                                                                   $value['start_date'     ] . ", end date of " .
-                                                                   $value['end_date'       ] . " where it runs each " .
-                                                                   $value['recurrence'     ] . " " .
-                                                                   $value['recurrence_type'] . " did not recur today :: Info diff=" . $diff;
+                    $cron_msg = "Cron ID: $value[id] - NOTE RUN: Not cheduled for today. Cron for $value[index_name] with ";
+                    $cron_msg += (empty($value['start_date']) ? "no start date" : "start date of $value[start_date] ") . "and ";
+                    $cron_msg += (empty($value['end_date']  ) ? "no end date"   : "an end date of $value[end_date] ");
+                    $cron_msg += " that runs each $value[recurrence] $value[recurrence_type], did not recur today :: Info diff=$diff";
+                    $result["cron_message_$value[id]"] = $cron_msg;
                 }
             } else {
-                // Cron has already been run for that cron_id today
-                $result['cron_message_' . $value['cron_id']] = "Cron ID: " . $value['cron_id'] . " - Cron has already been run for domain: " .
-                                                               $domain_id . " for the date: " . $today . " for invoice " . $value['invoice_id'];
+                // Cron has already been run for that id today
+                $result["cron_message_$value[id]"] = "Cron ID: $value[id] - Cron has already been run for domain: $value[domain_id] " .
+                                                     "for the date: $today for invoice $value[invoice_id]";
                 $result['email_message'] = "";
             }
         }
 
         // no crons scheduled for today
         if ($number_of_crons_run == '0') {
-            $result['id']            = $i;
-            $result['cron_message']  = "No invoices recurred for this Cron run for domain: " . $domain_id . " for the date: " . $today;
+            $result['id'           ] = $i;
+            $result['cron_message' ] = "No invoices recurred for this Cron run for domain: " . domain_id::get() . " for the date: $today";
             $result['email_message'] = "";
         }
         return $result;
     }
+
+    public static function select_crons_to_run() {
+        require_once 'include/class/domain/id.php';
+        global $config, $pdoDb;
+
+        $timezone = $config->phpSettings->date->timezone;
+
+        // Use this function to select crons that need to run each day across all domain_id values
+        // @formatter:off
+        $jn = new Join("INNER", "invoices", "iv");
+        $jn->addSimpleItem("cron.invoice_id", new DbField("iv.id"), "AND");
+        $jn->addSimpleItem("cron.domain_id", new DbField("iv.domain_id"));
+        $pdoDb->addToJoins($jn);
+
+        $jn = new Join("INNER", "preferences", "pf");
+        $jn->addSimpleItem("iv.preference_id", new DbField("pf.pref_id"), "AND");
+        $jn->addSimpleItem("iv.domain_id", new DbField("pf.domain_id"));
+        $pdoDb->addToJoins($jn);
+
+        $fn = new FunctionStmt("CONCAT", "pf.pref_description, ' ', iv.index_id");
+        $se = new Select($fn, null, null, "index_name");
+        $pdoDb->addToSelectStmts($se);
+
+        $dtm = new DateTime(null,new DateTimeZone($timezone));
+        $dt = $dtm->format("Y-m-d");
+        $pdoDb->addToWhere(new WhereItem(true , "cron.start_date", "=" , "" , false, "OR"));
+        $pdoDb->addToWhere(new WhereItem(false, "cron.start_date", "<=", $dt, true , "AND"));
+        $pdoDb->addToWhere(new WhereItem(true , "cron.end_date"  , "=" , "" , false, "OR"));
+        $pdoDb->addToWhere(new WhereItem(false, "cron.end_date"  , ">=", $dt, true , "AND"));
+
+        $pdoDb->addSimpleWhere("cron.domain_id", domain_id::get());
+
+        $pdoDb->setSelectList("cron.*");
+
+        $pdoDb->setGroupBy(array("cron.id", "cron.domain_id"));
+        $result = $pdoDb->request("SELECT", "cron", "cron");
+        // @formatter:on
+        return $result;
+    }
+
 }

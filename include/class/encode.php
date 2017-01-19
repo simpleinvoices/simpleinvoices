@@ -1,8 +1,7 @@
 <?php
-
+require_once 'include/functions.php';
 class encode
 {
-
     public static function xml($array, $level=1) {
 
         $xml = '';

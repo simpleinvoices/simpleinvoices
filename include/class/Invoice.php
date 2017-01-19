@@ -1,103 +1,68 @@
 <?php
+require_once 'include/class/Index.php';
 require_once 'include/class/ProductAttributes.php';
+require_once 'include/class/Requests.php';
 
 class Invoice {
 
     /**
      * Insert a new invoice record
-     * @param unknown $index_id
-     * @param unknown $biller_id
-     * @param unknown $customer_id
-     * @param unknown $type_id
-     * @param unknown $preference_id
-     * @param unknown $date
-     * @param unknown $note
-     * @param unknown $custom_field1
-     * @param unknown $custom_field2
-     * @param unknown $custom_field3
-     * @param unknown $custom_field4
+     * @param array Associative array of items to insert into invoice record.
      * @return integer Unique ID of the new invoice record.
      */
-    public static function insert($biller_id, $customer_id  , $type_id      , $preference_id, $date,
-                                  $note     , $custom_field1, $custom_field2, $custom_field3, $custom_field4) {
+    public static function insert($list) {
         global $pdoDb;
-        $domain_id = domain_id::get();
-        // @formatter:off
-        $pref_group = Preferences::getPreference($preference_id, $domain_id);
-        $index_id   = Index::next('invoice', $pref_group['index_group'], $domain_id);
-        $clean_date = sqlDateWithTime($date);
-        $pdoDb->setFauxPost(array('index_id'      => $index_id,
-                                  'domain_id'     => $domain_id,
-                                  'biller_id'     => $biller_id,
-                                  'customer_id'   => $customer_id,
-                                  'type_id'       => $type_id,
-                                  'preference_id' => $preference_id,
-                                  'date'          => $clean_date,
-                                  'note'          => trim($note),
-                                  'custom_field1' => $custom_field1,
-                                  'custom_field2' => $custom_field2,
-                                  'custom_field3' => $custom_field3,
-                                  'custom_field4' => $custom_field4));
+        $lcl_list = $list;
+        if (empty($lcl_list['domain_id'])) $lcl_list['domain_id'] = domain_id::get();
+
+        $pref_group = Preferences::getPreference($lcl_list['preference_id'], $lcl_list['domain_id']);
+        $lcl_list['index_id'] = Index::next('invoice', $pref_group['index_group'], $lcl_list['domain_id']);
+
+        $lcl_list['date'] = sqlDateWithTime($lcl_list['date']); 
+        $pdoDb->setFauxPost($lcl_list);
+        $pdoDb->setExcludedFields("id");
         $id = $pdoDb->request("INSERT", "invoices");
         // @formatter:on
 
-        Index::increment('invoice', $pref_group['index_group'], $domain_id);
+        Index::increment('invoice', $pref_group['index_group'], $lcl_list['domain_id']);
         return $id;
     }
 
     /**
      * Insert a new invoice_item and the invoice_item_tax records.
-     * @param unknown $invoice_id
-     * @param unknown $quantity
-     * @param unknown $product_id
-     * @param unknown $unit_price
-     * @param unknown $tax_amount
-     * @param unknown $gross_total
-     * @param unknown $description
-     * @param unknown $total
-     * @param unknown $attribute
-     * @param unknown $tax
-     * @param unknown $unit_price
+     * @param array Associative array keyed by field name with its assigned value.
      * @return integer Unique ID of the new invoice_item record.
      */
-    public static function insert_item($invoice_id , $quantity, $product_id, $unit_price, $tax_amount, $gross_total,
-                                       $description, $total   , $attribute , $tax_id) {
+    private static function insert_item($list) {
         global $pdoDb;
-        $domain_id = domain_id::get();
 
-        if (!self::invoice_items_check_fk(null, $product_id, $tax_id, true)) return NULL;
+        $lcl_list = $list;
+        if (empty($lcl_list['domain_id'])) $lcl_list['domain_id'] = domain_id::get(); 
+
+        if (!self::invoice_items_check_fk(null, $list['product_id'], $list['tax_id'], true)) return null;
 
         // @formatter:off
-        $pdoDb->setFauxPost(array('invoice_id'  => $invoice_id,
-                                  'domain_id'   => $domain_id,
-                                  'quantity'    => $quantity,
-                                  'product_id'  => $product_id,
-                                  'unit_price'  => $unit_price,
-                                  'tax_amount'  => $tax_amount,
-                                  'gross_total' => $gross_total,
-                                  'description' => trim($description),
-                                  'total'       => $total,
-                                  'attribute'   => $attribute));
+        $pdoDb->setFauxPost($list);
+        $pdoDb->setExcludedFields("id");
         $id = $pdoDb->request("INSERT", "invoice_items");
         // @formatter:on
 
-        self::invoice_item_tax($id, $tax_id, $unit_price, $quantity, false);
+        self::invoice_item_tax($id, $list['tax_id'], $list['unit_price'], $list['quantity'], false);
         return $id;
     }
 
     /**
      * Insert a new <b>invoice_items</b> record.
      * @param integer $invoice_id <b>id</b>
-     * @param unknown $quantity
-     * @param unknown $product_id
-     * @param unknown $line_number
-     * @param unknown $tax_id
+     * @param integer $quantity
+     * @param integer $product_id
+     * @param integer $tax_id
      * @param string $description
      * @param string $unit_price
      * @param string $attribute
      * @return integer <b>id</b> of new <i>invoice_items</i> record.
      */
-    public static function insertInvoiceItem($invoice_id, $quantity, $product_id, $line_number   , $tax_id,
+    public static function insertInvoiceItem($invoice_id, $quantity, $product_id, $tax_id,
                                              $description = "", $unit_price = "", $attribute = "") {
         global $LANG;
 
@@ -117,10 +82,18 @@ class Invoice {
 
         // Remove jquery auto-fill description - refer jquery.conf.js.tpl autofill section
         if ($description == $LANG['description']) $description = "";
-
-        self::insert_item($invoice_id , $quantity, $product_id       , $unit_price, $tax_amount, $gross_total,
-                          $description, $total   , json_encode($attr), $tax_id);
-        return id;
+        $list = array('invoice_id' => $invoice_id,
+                      'domain_id'  => domain_id::get(),
+                      'quantity'   => $quantity,
+                      'product_id' => $product_id,
+                      'unit_price' => $unit_price,
+                      'tax_amount' => $tax_amount,
+                      'gross_total'=> $gross_total,
+                      'description'=> $description,
+                      'total'      => $total,
+                      'attribute'  => json_encode($attr));
+        $id = self::insert_item($list);
+        return $id;
     }
 
     /**
@@ -144,7 +117,7 @@ class Invoice {
 
         $type = $current_invoice['type_id'];
         // TODO: Add foriegn key logic to database definition
-        if (!self::invoice_check_fk($_POST['biller_id'], $_POST['customer_id'], $type, $_POST['preference_id'])) return NULL;
+        if (!self::invoice_check_fk($_POST['biller_id'], $_POST['customer_id'], $type, $_POST['preference_id'])) return null;
 
         $pdoDb->addSimpleWhere("id", $invoice_id);
         $pdoDb->setFauxPost(array('index_id'      => $index_id,
@@ -157,6 +130,7 @@ class Invoice {
                                   'customField2'  => (isset($_POST['customField2']) ? $_POST['customField2'] : ''),
                                   'customField3'  => (isset($_POST['customField3']) ? $_POST['customField3'] : ''),
                                   'customField4'  => (isset($_POST['customField4']) ? $_POST['customField4'] : '')));
+        $pdoDb->setExcludedFields(array("id", "domain_id"));
         $result = $pdoDb->request("UPDATE", "invoices");
         return $result;
     }
@@ -166,14 +140,13 @@ class Invoice {
      * @param int $id Unique id for the record to be updated.
      * @param int $quantity Number of items
      * @param int $product_id Unique id of the si_products record for this item.
-     * @param int $line_number Line item number for the position on the invoice.
      * @param int $tax_id Unique id for the taxes to apply to this line item.
      * @param string $description Extended description for this line item.
      * @param decimal $unit_price Price of each unit of this item.
      * @param string $attribute Attributes for invoice.
      * @return boolean true always returned.
      */
-    public static function updateInvoiceItem($id    , $quantity   , $product_id, $line_number,
+    public static function updateInvoiceItem($id    , $quantity   , $product_id,
                                              $tax_id, $description, $unit_price, $attribute) {
         global $LANG, $pdoDb;
 
@@ -190,7 +163,7 @@ class Invoice {
         $total       = $gross_total + $tax_amount;
         if ($description == $LANG['description']) $description = "";
 
-        if (!self::invoice_items_check_fk(null, $product_id, $tax_id, true)) return NULL;
+        if (!self::invoice_items_check_fk(null, $product_id, $tax_id, true)) return null;
 
         // @formatter:off
         $pdoDb->addSimpleWhere("id", $id);
@@ -202,6 +175,7 @@ class Invoice {
                                   'description' => $description,
                                   'total'       => $total,
                                   'attribute'   => json_encode($attr)));
+        $pdoDb->setExcludedFields(array("id", "domain_id"));
         $pdoDb->request("UPDATE", "invoice_items");
         // @formatter:on
 
@@ -251,7 +225,7 @@ class Invoice {
 
     /**
      *
-     * @param unknown $id
+     * @param integer $id
      * @return Result
      */
     public static function select($id) {
@@ -259,10 +233,11 @@ class Invoice {
 
         $domain_id = domain_id::get();
         // @formatter:off
-        $pdoDb->setSelectList(array("i.*",
-                                    new DbField("i.date", "date_original"),
-                                    new DbField("p.pref_inv_wording", "preference"),
-                                    new DbField("p.status")));
+        $list = array(new DbField("i.*"),
+                      new DbField("i.date", "date_original"),
+                      new DbField("p.pref_inv_wording", "preference"),
+                      new DbField("p.status"));
+        $pdoDb->setSelectList($list);
         $se = new Select(new FunctionStmt("CONCAT", "p.pref_inv_wording, ' ', i.index_id"), null, null, "index_name");
         $pdoDb->addToSelectStmts($se);
 
@@ -282,16 +257,15 @@ class Invoice {
         $rows = $pdoDb->request("SELECT", "invoices", "i");
 
         $invoice                  = $rows[0];
-        $invoice['calc_date']     = date('Y-m-d', strtotime($invoice['date']));
-        $invoice['date']          = siLocal::date($invoice['date']);
         $invoice['total']         = self::getInvoiceTotal($invoice['id']);
         $invoice['gross']         = self::getInvoiceGross($invoice['id']);
         $invoice['paid']          = Payment::calc_invoice_paid($invoice['id']);
         $invoice['owing']         = $invoice['total'] - $invoice['paid'];
         $invoice['invoice_items'] = self::getInvoiceItems($id);
-        $invoice['total_tax']     = $invoice['total_tax'];
         $invoice['tax_grouped']   = self::taxesGroupedForInvoice($id);
+        $invoice['calc_date']     = date('Y-m-d', strtotime($invoice['date']));
         // @formatter:on
+
         return $invoice;
     }
 
@@ -735,33 +709,39 @@ class Invoice {
     }
 
     public static function recur($invoice_id) {
+        global $config;
+        $timezone = $config->phpSettings->date->timezone;
+        $tz = new DateTimeZone($timezone);
+        $dtm = new DateTime('now', $tz);
+        $dt_tm = $dtm->format("Y-m-d H:i:s");
+
         $invoice = self::select($invoice_id);
         // @formatter:off
-        $id = self::insert($invoice['index_id'],
-                           $invoice['biller_id'],
-                           $invoice['customer_id'],
-                           $invoice['type_id'],
-                           $invoice['preference_id'],
-                           $invoice['date'],
-                           $invoice['note'],
-                           $invoice['custom_field1'],
-                           $invoice['custom_field2'],
-                           $invoice['custom_field3'],
-                           $invoice['custom_field4']);
+        $list = array('biller_id'     => $invoice['biller_id'],
+                      'customer_id'   => $invoice['customer_id'],
+                      'type_id'       => $invoice['type_id'],
+                      'preference_id' => $invoice['preference_id'],
+                      'date'          => $dt_tm,
+                      'note'          => $invoice['note'],
+                      'custom_field1' => $invoice['custom_field1'],
+                      'custom_field2' => $invoice['custom_field2'],
+                      'custom_field3' => $invoice['custom_field3'],
+                      'custom_field4' => $invoice['custom_field4']);
+        $id = self::insert($list);
 
         // insert each line item
         foreach ($invoice['invoice_items'] as $v) {
-            self::insert_item($id,
-                              $v['quantity'],
-                              $v['product_id'],
-                              $v['unit_price'],
-                              $v['tax_amount'],
-                              $v['gross_total'],
-                              $v['description'],
-                              $v['total'],
-                              $v['attribute'],
-                              $v['tax'],
-                              $v['unit_price']);
+            $list = array('invoice_id' => $id,
+                          'quantity'   => $v['quantity'],
+                          'product_id' => $v['product_id'],
+                          'unit_price' => $v['unit_price'],
+                          'tax_amount' => $v['tax_amount'],
+                          'gross_total'=> $v['gross_total'],
+                          'description'=> $v['description'],
+                          'total'      => $v['total'],
+                          'attribute'  => $v['attribute'],
+                          'tax_id'     => $v['tax_id']);
+            self::insert_item($list);
         }
         // @formatter:on
 

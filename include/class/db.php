@@ -7,6 +7,7 @@ class db {
     // public $connection = null;
     function __construct() {
         global $config;
+
         // check if PDO is availble
         class_exists('PDO', false) ? "" : simpleInvoicesError("PDO");
 

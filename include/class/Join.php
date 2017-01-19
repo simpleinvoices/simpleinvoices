@@ -5,7 +5,7 @@ require_once 'include/class/GroupBy.php';
 require_once 'include/class/DbField.php';
 
 class Join {
-    const PREFIX = '/^' . TB_PREFIX . '/';
+    const PREFIX = '/^si_/'; // Chg to use TB_PREFIX when only PHP 5.6x and up supported
     const TYPE = '/^(INNER|LEFT|RIGHT|FULL)$/';
 
     private $groupBy;

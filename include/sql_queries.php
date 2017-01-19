@@ -172,7 +172,7 @@ function dbLogger($sqlQuery) {
  * @return Record ID
  */
 function lastInsertId() {
-    global $config, $dbh, $dbInfo;
+    global $dbh;
     $sql = 'SELECT last_insert_id()';
     $sth = $dbh->prepare($sql);
     $sth->execute();
@@ -244,20 +244,24 @@ function getSQLPatches() {
  * @return array Rows retrieved. Test for "=== false" to check for failure.
  */
 function getCustomFieldLabels($domain_id = '', $noUndefinedLabels = FALSE) {
-    global $LANG;
+    global $LANG, $pdoDb_admin;
     $domain_id = domain_id::get($domain_id);
 
-    $sql = "SELECT * FROM " . TB_PREFIX . "custom_fields
-            WHERE domain_id = :domain_id ORDER BY cf_custom_field";
-    $sth = dbQuery($sql, ':domain_id', $domain_id);
+    $pdoDb_admin->addSimpleWhere("domain_id", $domain_id);
+    $pdoDb_admin->setOrderBy("cf_custom_field");
+    $rows = $pdoDb_admin->request("SELECT", "custom_fields");
 
     $cfl = $LANG['custom_field'] . ' ';
     $customFields = array();
-    for ($i = 0; $customField = $sth->fetch(); $i++) {
+    $i = 0;
+    foreach($rows as $row) {
         // @formatter:off
-        $customFields[$customField['cf_custom_field']] =
-                (empty($customField['cf_custom_label']) ? ($noUndefinedLabels ? "" : $cfl . (($i % 4) + 1)) :
-                                                          $customField['cf_custom_label']);
+        $customFields[$row['cf_custom_field']] =
+                (empty($row['cf_custom_label']) ?
+                            ($noUndefinedLabels ? "" :
+                                                  $cfl . (($i % 4) + 1)) :
+                                                  $row['cf_custom_label']);
+        $i++;
         // @formatter:on
     }
     return $customFields;
@@ -654,7 +658,12 @@ function getTableFields($table_in) {
 }
 
 function getURL() {
-    global $config;
+    global $api_request, $config;
+
+    if ($api_request) {
+        $_SERVER['FULL_URL'] = "";
+        return "";
+    }
 
     $dir = dirname($_SERVER['PHP_SELF']);
     // remove incorrect slashes for WinXP etc.
@@ -667,7 +676,11 @@ function getURL() {
         $_SERVER['FULL_URL'] = "http://";
     }
 
-    $_SERVER['FULL_URL'] .= $config->authentication->http . $_SERVER['HTTP_HOST'] . $dir;
+    $http_host = (empty($_SERVER['HTTP_HOST']) ? "" : $_SERVER['HTTP_HOST']);
+    $_SERVER['FULL_URL'] .= $config->authentication->http . $http_host . $dir;
+
+    if (strlen($_SERVER['FULL_URL']) > 1 &&
+	    substr($_SERVER['FULL_URL'], -1, 1) != '/') $_SERVER['FULL_URL'] .= '/';
 
     return $_SERVER['FULL_URL'];
 }

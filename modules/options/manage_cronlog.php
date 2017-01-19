@@ -1,12 +1,10 @@
 <?php
-global $smarty;
+global $pdoDb, $smarty;
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-$get_cronlog = new cronlog();
-$cronlogs = $get_cronlog->select();
-
+$cronlogs = CronLog::select($pdoDb, domain_id::get());
 $smarty -> assign("cronlogs",$cronlogs);
 
 $smarty -> assign('pageActive', 'options');

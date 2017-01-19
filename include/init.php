@@ -2,6 +2,9 @@
 /* *************************************************************
  * Zend framework init - start
  * *************************************************************/
+global $api_request;
+if (!isset($api_request)) $api_request = false;
+
 set_include_path(get_include_path() . PATH_SEPARATOR . "./library/");
 set_include_path(get_include_path() . PATH_SEPARATOR . "./library/pdf");
 set_include_path(get_include_path() . PATH_SEPARATOR . "./library/pdf/fpdf");
@@ -58,6 +61,8 @@ if (!is_writable('tmp/cache')) {
 
 include_once ('config/define.php');
 global $environment;
+require_once ("include/class/db.php");
+require_once("include/class/PdoDb.php");
 
 // added 'true' to allow modifications from db
 $config = new Zend_Config_Ini("./" . CONFIG_FILE_PATH, $environment, true);
@@ -139,20 +144,25 @@ try {
 } catch (Zend_Db_Exception $zde) {
     $databaseBuilt = false;
 }
-
-// If session_timeout is defined in the database, use it. If not
-// set it to the 60-minute default.
-$session_timeout = 60; // default
-if ($databaseBuilt) {
-    try {
-        $timeout = $zendDb->fetchRow("SELECT value FROM ". TB_PREFIX . "system_defaults
-                                      WHERE name='session_timeout'");
-        $session_timeout = intval($timeout['value']);
-    } catch (Zend_Db_Exception $zde) {
-        $session_timeout = 0;
+if ($api_request) {
+    if (!$databaseBuilt) {
+        throw new Exception("Database not built. Can't run batch job.");
+    }
+} else {
+    // If session_timeout is defined in the database, use it. If not
+    // set it to the 60-minute default.
+    $session_timeout = 60; // default
+    if ($databaseBuilt) {
+        try {
+            $timeout = $zendDb->fetchRow("SELECT value FROM ". TB_PREFIX . "system_defaults
+                                          WHERE name='session_timeout'");
+            $session_timeout = intval($timeout['value']);
+        } catch (Zend_Db_Exception $zde) {
+            $session_timeout = 0;
+        }
     }
 }
-if ($session_timeout <= 0) $session_timeout = 60;
+if ($api_request || $session_timeout <= 0) $session_timeout = 60;
 $frontendOptions = array('lifetime' => ($session_timeout * 60), 'automatic_serialization' => true);
 // @formatter:on
 
@@ -196,26 +206,28 @@ $path = pathinfo($_SERVER['REQUEST_URI']);
 $install_path = htmlsafe($path['dirname']);
 if ($install_path) {} // Show variable as used.
 
-include_once ("include/class/db.php");
 // With the database built, a connection should be able to be made
 // if the configuration user, password, etc. are set correctly.
 $db = ($databaseBuilt ? db::getInstance() : NULL);
 if ($db) {} // Show variable as used.
 
-include_once ("include/class/Index.php");
-include_once ("include/sql_queries.php");
+require_once ("include/class/Index.php");
+require_once ("include/sql_queries.php");
 
 $patchCount = 0;
 if ($databaseBuilt) {
     // Set these global variables.
     $patchCount = getNumberOfDoneSQLPatches();
     $databasePopulated = $patchCount > 0;
+    if ($api_request && !$databasePopulated) {
+        throw new Exception("Database must be populated to run a batch job.");
+    }
 }
 
-// Turn authorization off until database is built. It messes up the
-// install screens.
-if ((!$databaseBuilt || !$databasePopulated) && $config->authentication->enabled == 1) {
-    $config->authentication->enabled = 0;
+// Turn authorization off until database is built. It messes up the install screens.
+// Or if this is a batchjob
+if ($api_request ||(!$databaseBuilt || !$databasePopulated)) {
+    $config->authentication->enabled = DISABLED;
     $module="";
 }
 
@@ -234,7 +246,6 @@ $smarty->registerPlugin('modifier', 'outhtml'     , 'outhtml');
 $smarty->registerPlugin('modifier', 'urlencode'   , 'urlencode');
 $smarty->registerPlugin('modifier', 'urlescape'   , 'urlencode');
 $smarty->registerPlugin('modifier', 'urlsafe'     , 'urlsafe');
-
 // @formatter:on
 
 global $ext_names;
@@ -258,10 +269,14 @@ $smarty->assign("defaults", $defaults);
 
 include_once ('include/language.php');
 
-include ('include/include_auth.php');
+if (!$api_request) {
+    include ('include/include_auth.php');
+}
+
 include_once ('include/manageCustomFields.php');
 include_once ("include/validation.php");
-if ($databaseBuilt && $databasePopulated && $config->authentication->enabled == ENABLED) {
+
+if ($config->authentication->enabled == ENABLED) {
     include_once ("include/acl.php");
     // if authentication enabled then do acl check etc..
     foreach ($ext_names as $ext_name) {
@@ -286,7 +301,6 @@ $early_exit[] = "statement_export";
 $early_exit[] = "invoice_template";
 $early_exit[] = "payments_print";
 $early_exit[] = "documentation_view";
-if ($early_exit) {} // Show variable as used.
 
 switch ($module) {
     case "export":
@@ -296,7 +310,7 @@ switch ($module) {
         $smarty_output = "display";
         break;
 }
-if ($smarty_output) {} // Show variable as used.
+if ($early_exit || $smarty_output) {} // Show variable as used.
 
 // get the url - used for templates / pdf
 $siUrl = getURL();
