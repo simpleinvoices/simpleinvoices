@@ -44,10 +44,10 @@ nonce.timelimit                     = 3600
 
 debug.level                         = All
 debug.error_reporting               = E_ERROR
-phpSettings.date.timezone           = Europe/London
+phpSettings.date.timezone           = America/Los_Angeles
 phpSettings.display_startup_errors  = 1
 phpSettings.display_errors          = 1
-phpSettings.log_errors              = 0
+phpSettings.log_errors              = 1
 phpSettings.error_log               = tmp/log/php.log
 
 ; Logs in tmp/log/si.log. Set to the desired level for log detail.
