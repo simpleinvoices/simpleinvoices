@@ -69,7 +69,7 @@ class PdoDb {
         $this->table_schema = $dbinfo->getDbname();
         $this->debug = $debug;
         $this->transaction = false;
-        $host = ($dbinfo->getHost() == "localhost" ? "127.0.0.1" : $this->getHost());
+        $host = ($dbinfo->getHost() == "localhost" ? "127.0.0.1" : $dbinfo->getHost());
         //$dsn = "mysql:host={$dbinfo->getHost()};dbname={$dbinfo->getDbname()}";
         $dsn = "mysql:dbname={$dbinfo->getDbname()};host=$host;port={$dbinfo->getPort()}";
         $username = $dbinfo->getUsername();
