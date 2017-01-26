@@ -27,17 +27,25 @@ if(!isset( $_POST['type']) && !isset($_POST['action'])) {
 $saved = false;
 $type = $_POST['type'];
 if ($_POST['action'] == "insert" ) {
-    if($id = Invoice::insert($_POST['biller_id'], $_POST['customer_id'], $type, $_POST['preference_id'], $_POST['date'], $_POST['note'],
-                             $_POST['custom_field1'], $_POST['custom_field2'], $_POST['custom_field3'], $_POST['custom_field4'])) {
-        $saved = true;
-    }
+    $list = array('biller_id'     => $_POST['biller_id'],
+                  'customer_id'   => $_POST['customer_id'],
+                  'type_id'       => $type,
+                  'preference_id' => $_POST['preference_id'],
+                  'date'          => $_POST['date'],
+                  'note'          => trim($_POST['note']),
+                  'custom_field1' => $_POST['custom_field1'],
+                  'custom_field2' => $_POST['custom_field2'],
+                  'custom_field3' => $_POST['custom_field3'],
+                  'custom_field4' => $_POST['custom_field4']);
+    $id = Invoice::insert($list);
+    if ($id > 0) $saved = true;
 
     if($saved && $type == TOTAL_INVOICE) {
         Product::insertProduct(0,0);
         $product_id = lastInsertId();
         $tax_id = (empty($_POST["tax_id"][0] ) ? "" : $_POST["tax_id"][0]);
         Invoice::insertInvoiceItem($id, 1, $product_id, $tax_id, $_POST['description'], $_POST['unit_price']);
-    } elseif ($saved) {
+    } else if ($saved) { // itemized invoice
         $i = 0;
         while ($i <= $_POST['max_items']) {
             if (!empty($_POST["quantity$i"])) {
