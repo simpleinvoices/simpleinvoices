@@ -1,4 +1,5 @@
 <?php
+error_log("in modules/invoices/template.php which isn't supposed to be used anymore.");
 /*
 * Script: template.php
 * 	invoice template page
@@ -23,17 +24,17 @@ $invoiceID = $_GET['id'];
 //$conn = mysql_connect( $db_host, $db_user, $db_password );
 //mysql_select_db( $db_name, $conn );
 
-$invoice = getInvoice($invoiceID);
-$customer = getCustomer($invoice['customer_id']);
-$biller = getBiller($invoice['biller_id']);
-$preference = getPreference($invoice['preference_id']);
+$invoice = Invoice::getInvoice($invoiceID);
+$customer = Customer::get($invoice['customer_id']);
+$biller = Biller::select($invoice['biller_id']);
+$preference = Preferences::getPreference($invoice['preference_id']);
 $defaults = getSystemDefaults();
 $logo = getLogo($biller);
 $logo = str_replace(" ", "%20", $logo);
-$invoiceItems = invoice::getInvoiceItems($invoiceID);
+$invoiceItems = Invoice::getInvoiceItems($invoiceID);
 
 //for($i=1;$i<=4;$i++) {
-//	$show["custom_field$i"] = show_custom_field("invoice_cf$i",$invoice["invoice_custom_field$i"],"read",'','tbl1-left','tbl1-right',3,':');
+//	$show["custom_field$i"] = CustomFields::show_custom_field("invoice_cf$i",$invoice["invoice_custom_field$i"],"read",'','tbl1-left','tbl1-right',3,':');
 //
 
 $customFieldLabels = getCustomFieldLabels();
@@ -58,10 +59,10 @@ if (isset($_GET['export'])) {
 // End Export code 
 
 	
-$templatePath = "./templates/invoices/${template}/template.tpl";
-$template_path = "../templates/invoices/${template}";
-$css = $siUrl."/templates/invoices/${template}/style.css";
-$pluginsdir = "./templates/invoices/${template}/plugins/";
+$templatePath = "templates/invoices/${template}/template.tpl";
+$template_path = "templates/invoices/${template}";
+$css = $siUrl."templates/invoices/${template}/style.css";
+$pluginsdir = "templates/invoices/${template}/plugins/";
 
 $smarty -> plugins_dir = $pluginsdir;
 
@@ -83,7 +84,7 @@ if(file_exists($templatePath)) {
 	
 	if ($_GET['location'] =="pdf")
 	{
-		$html = $smarty -> fetch(".".$templatePath);
+		$html = $smarty -> fetch($templatePath);
 		pdfThis($html);
 		exit();
 	}

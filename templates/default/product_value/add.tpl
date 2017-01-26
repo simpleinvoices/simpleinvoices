@@ -10,7 +10,7 @@
 {else}
 {* if  name was inserted *} 
 	{if $smarty.post.submit !=null} 
-		<div class="validation_alert"><img src="./images/common/important.png" alt="" />
+		<div class="validation_alert"><img src="images/common/important.png" alt="" />
 		You must enter a value</div>
 		<hr />
 	{/if}
@@ -21,7 +21,7 @@
 <hr />
 
 
-<table align="center">
+<table class="center">
 <tr>
 	<td class="details_screen">{$LANG.attribute}</td>
 	<td>

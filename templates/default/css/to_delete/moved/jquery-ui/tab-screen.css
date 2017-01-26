@@ -3,390 +3,390 @@ Last Edit: $Id$ */
 html, body { padding: 0; margin: 0; font-family:arial,sans-serif;}
 
 body {
-	background:#ebebeb; }
+    background:#ebebeb; }
 
 body, .dialog {
-	font-family:arial, verdana, helvetica, sans-serif;
-	font-size:12px;
-	color:#333; }
-	
+    font-family:arial, verdana, helvetica, sans-serif;
+    font-size:12px;
+    color:#333; }
+    
 table.manage {
-	font-size:12px; }
+    font-size:12px; }
 
 td.account {
-	font-size:12px;	}
+    font-size:12px;    }
 
 /* Tablesorter table styling - end
 td for the manage screen - start */
 td.index_table {
-	background-color:#F5F5F5;
-	border:1px solid #fff;
-	font-style:normal;
-	font-weight:400;
-	text-decoration:none;
-	border-color:#FFF;
-	border-style:none; }
+    background-color:#F5F5F5;
+    border:1px solid #fff;
+    font-style:normal;
+    font-weight:400;
+    text-decoration:none;
+    border-color:#FFF;
+    border-style:none; }
 
 td, div {
-	font-family:verdana, arial, helvetica, sans-serif;
-	text-align:left; }
+    font-family:verdana, arial, helvetica, sans-serif;
+    text-align:left; }
 
 td.columnleft {
-	border-left:5px solid #EEE; }
+    border-left:5px solid #EEE; }
 
 td.details_screen{
-	border-bottom: 1px dashed #d3d3d3;	
-	line-height:24px;
-	}
+    border-bottom: 1px dashed #d3d3d3;    
+    line-height:24px;
+    }
 
 /* Credits.html
 -------------------------------------------------*/
 .credit_names li {
-	font-weight:700;
+    font-weight:700;
 }
 .credit_names li ul {
-	font-weight:normal;
-	padding:0.2em 0 1.3em 0;
+    font-weight:normal;
+    padding:0.2em 0 1.3em 0;
 }
 
 .solutionTable {
-	margin:20px 0;
+    margin:20px 0;
 }
 
 .solutionTable td, .solutionTable th  {
-	padding:3px 10px;
+    padding:3px 10px;
 }
 
 /* GLOBALS & GENERAL CASES
 -------------------------------------------------*/
 .print_only {
-	display:none; }
+    display:none; }
 /*
 a:hover {
-	color:#fff;
-	background-color:#900;
-	text-decoration:none; }
+    color:#fff;
+    background-color:#900;
+    text-decoration:none; }
 */
 a.image:link,a.image:visited,a.image:hover {
-	border:none;
-	background:none;
-	padding:0; }
+    border:none;
+    background:none;
+    padding:0; }
 
 a.toggle.active:link,a.toggle.active:visited,a.toggle.active:hover {
-	background:#999 !important;
-	color:#03c !important;
-	text-decoration:none;
-	font-weight:400 !important; }
+    background:#999 !important;
+    color:#03c !important;
+    text-decoration:none;
+    font-weight:400 !important; }
 
 p {
-	font:11px Arial, Helvetica, sans-serif;
-	margin:0 0 15px; }
+    font:11px Arial, Helvetica, sans-serif;
+    margin:0 0 15px; }
 
 hr {
-	background-color:#000;
-	height:1px;
-	border:0;
-	margin:10px 0; }
+    background-color:#000;
+    height:1px;
+    border:0;
+    margin:10px 0; }
 
 a img {
-	border:0; }
+    border:0; }
 
 a.image img {
-	border:none;
-	margin:0;
-	padding:0; }
+    border:none;
+    margin:0;
+    padding:0; }
 
 table tr.shaded td {
-	background-color:#edf3fe; }
+    background-color:#edf3fe; }
 
 a.anchor:link,a.anchor:visited,a.anchor:hover {
-	color:#fff;
-	background:#fff;
-	font-size:0;
-	text-decoration:none;
-	padding:0; }
+    color:#fff;
+    background:#fff;
+    font-size:0;
+    text-decoration:none;
+    padding:0; }
 
 div.notice {
-	background:#080; }
+    background:#080; }
 
 div.alert {
-	background:red; }
+    background:red; }
 
 /*
 h1 {
-	font:bold 32px Arial, Helvetica, sans-serif;
-	letter-spacing:normal;
-	color:#000;
-	position:relative;
-	margin:5px 0 15px;
-	padding:0 0 5px; }
+    font:bold 32px Arial, Helvetica, sans-serif;
+    letter-spacing:normal;
+    color:#000;
+    position:relative;
+    margin:5px 0 15px;
+    padding:0 0 5px; }
 */
 /* TYPOGRAPHY
 -------------------------------------------------*/
 h1.admin {
-	margin-bottom:2px; }
+    margin-bottom:2px; }
 
 h2 {
-/*	font-size:18px;
-	font-family:helvetica;
+/*    font-size:18px;
+    font-family:helvetica;
 */
-	margin:0 0 15px; }
-/*	
+    margin:0 0 15px; }
+/*    
 h3 {
-	font-size:1em;
-	text-align:center;
-	margin:4pt;
+    font-size:1em;
+    text-align:center;
+    margin:4pt;
 }
 h4 {
-	font-size:11px;
-	margin:0; }
+    font-size:11px;
+    margin:0; }
 
 h5 {
-	font-size:80%;
-	font-style:italic;
-	font-family:georgia;
-	font-weight:400;
-	text-align:left;
-	padding-top:3px;
-	color:#6FC0DE;
-	border-bottom:1px solid #C2DDE7;
-	margin:0 0 20px; }
+    font-size:80%;
+    font-style:italic;
+    font-family:georgia;
+    font-weight:400;
+    text-align:left;
+    padding-top:3px;
+    color:#6FC0DE;
+    border-bottom:1px solid #C2DDE7;
+    margin:0 0 20px; }
 
 h5 strong {
-	color:#4F9DBA; }
+    color:#4F9DBA; }
 */
 
 form {
-	margin:0;
-	padding:0; }
+    margin:0;
+    padding:0; }
 
 .red {
-	color:#c00; }
+    color:#c00; }
 
 .blue {
-	color:#06c; }
+    color:#06c; }
 
 .green {
-	color:#390; }
+    color:#390; }
 
 .highlight {
-	background-color:#ffc; }
+    background-color:#ffc; }
 
 ins {
-	background-color:#cfc;
-	text-decoration:none; }
+    background-color:#cfc;
+    text-decoration:none; }
 
 del {
-	color:#999; }
+    color:#999; }
 
 code,pre {
-	font-family:"Bitstream Vera Sans Mono", monaco, "Courier New", courier, monospace;
-	background:inherit;
-	color:#333;
-	font-size:80%; }
+    font-family:"Bitstream Vera Sans Mono", monaco, "Courier New", courier, monospace;
+    background:inherit;
+    color:#333;
+    font-size:80%; }
 
 table {
-	border-collapse:collapse; }
+    border-collapse:collapse; }
 
 /* Old PHP Reports CSS  - uses class="reportTable" */
-	
+    
 table.reportTable {
-	border:1px solid #000; }
+    border:1px solid #000; }
 
 *+html table.reportTable {
-	border-collapse:separate; }
+    border-collapse:separate; }
 
 *+html td.PAGE_LAYER {
-	border-width:thin;
-	border:1px solid #000;
-	border-collapse:separate; }
+    border-width:thin;
+    border:1px solid #000;
+    border-collapse:separate; }
 
 *+html table.reportTable tr {
-	border:1px solid #000;
-	border-collapse:separate; }
-	
+    border:1px solid #000;
+    border-collapse:separate; }
+    
 table.reportTable td.PAGE_LAYER {
-	background-color:#ccc;
-	border-color:#000; }
+    background-color:#ccc;
+    border-color:#000; }
 
 /* New PHPreports CSS - uses ID="pg2" or "pg1"  - Although HEADER and FOOTER are used now instead of PAGE_LAYER, it is left as is for compatibility */
 
 
 table#pg1 {
-	border:1px solid #000; }
+    border:1px solid #000; }
 
 *+html table#pg1 {
-	border-collapse:separate; }
+    border-collapse:separate; }
 
 *+html td.PAGE_LAYER {
-	border-width:thin;
-	border:1px solid #000;
-	border-collapse:separate; }
+    border-width:thin;
+    border:1px solid #000;
+    border-collapse:separate; }
 
 *+html table#pg1 tr {
-	border:1px solid #000;
-	border-collapse:separate; }
+    border:1px solid #000;
+    border-collapse:separate; }
 
 table#pg1 td.PAGE_LAYER {
-	background-color:#ccc;
-	border-color:#000; }
+    background-color:#ccc;
+    border-color:#000; }
 
 table#pg1 td.GROUP_LAYER {
-	background-color:#fff;
-	border-color:#000; }
+    background-color:#fff;
+    border-color:#000; }
 
 
 table#pg2 {
-	border:1px solid #000; }
+    border:1px solid #000; }
 
 *+html table#pg2 {
-	border-collapse:separate; }
+    border-collapse:separate; }
 
 *+html td.PAGE_LAYER {
-	border-width:thin;
-	border:1px solid #000;
-	border-collapse:separate; }
+    border-width:thin;
+    border:1px solid #000;
+    border-collapse:separate; }
 
 *+html table#pg2 tr {
-	border:1px solid #000;
-	border-collapse:separate; }
+    border:1px solid #000;
+    border-collapse:separate; }
 
 table#pg2 td.PAGE_LAYER {
-	background-color:#ccc;
-	border-color:#000; }
+    background-color:#ccc;
+    border-color:#000; }
 
 table#pg2 td.GROUP_LAYER {
-	background-color:#fff;
-	border-color:#000; }
+    background-color:#fff;
+    border-color:#000; }
 
 /*
 tr {
-	border:1px solid #fff; }
-	
+    border:1px solid #fff; }
+    
 td {
-	border:1px solid #fff; }
+    border:1px solid #fff; }
 
 Work around IE/Win code size bug - courtesy Jesper, waffle.wootest.net  */
 * html code {
-	font-size:105%; }
+    font-size:105%; }
 
 /* @group Si Reports
 ------------------------------------------- */
 .si_report_title1{
-	color:#4B7296;
-	font-size: 15px;
-	font-weight: bold;
-	margin: 10px 0 20px 0;	
-	padding:3px;
+    color:#4B7296;
+    font-size: 15px;
+    font-weight: bold;
+    margin: 10px 0 20px 0;    
+    padding:3px;
 }
 
 .si_report_title2{
-	font-weight: bold;
-	border-bottom: 1px solid #EEE;
-	margin: 10px 0 15px 0;	
-	padding:5px;
-	color: #888;
+    font-weight: bold;
+    border-bottom: 1px solid #EEE;
+    margin: 10px 0 15px 0;    
+    padding:5px;
+    color: #888;
 }
 
 .si_report_table{
-	border:1px solid #ddd;
-	border-width: 0 1px 0 0;
-	margin-bottom: 20px;
-	width: 100%;
+    border:1px solid #ddd;
+    border-width: 0 1px 0 0;
+    margin-bottom: 20px;
+    width: 100%;
 }
 .si_report_table TD,
 .si_report_table TH{
-	text-align:right;
-	padding: 2px 5px 2px 10px;
-	border-left:1px solid #ddd;
-	border-top:1px solid #FAFAFA;
-	border-bottom:1px solid #ddd;
-	font-size:12px;
+    text-align:right;
+    padding: 2px 5px 2px 10px;
+    border-left:1px solid #ddd;
+    border-top:1px solid #FAFAFA;
+    border-bottom:1px solid #ddd;
+    font-size:12px;
 }
 .si_report_table THEAD TH{
-	color: #666;
-	font-weight:bold;
-	background: #fafafa url(../../../../images/flexigrid/fhbg.gif) repeat-x bottom;
-	padding-top: 6px;
-	padding-bottom: 6px;
-	border-top:1px solid #DDD;
-	border-bottom: 0px;
-	text-align: center;
-	vertical-align: middle;
+    color: #666;
+    font-weight:bold;
+    background: #fafafa url(../../../../images/flexigrid/fhbg.gif) repeat-x bottom;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    border-top:1px solid #DDD;
+    border-bottom: 0px;
+    text-align: center;
+    vertical-align: middle;
 }
 .si_report_table TBODY TH{
-	color: #666;
-	font-weight:normal;
+    color: #666;
+    font-weight:normal;
 }
 
 .si_report_table .tr_A{
-	background: #F7F7F7;
+    background: #F7F7F7;
 }
 
 .si_report_table TFOOT TH,
 .si_report_table TFOOT TD{
-	color: #000;
-	font-weight:bold;
-	background: #F0F0F0 url(../../../../images/flexigrid/fhbg.gif) repeat-x bottom;
-	padding-top: 4px;
-	padding-bottom: 4px;
-	border-bottom: 0;
+    color: #000;
+    font-weight:bold;
+    background: #F0F0F0 url(../../../../images/flexigrid/fhbg.gif) repeat-x bottom;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-bottom: 0;
 }
 .si_report_table .rate{
-	font-size: 9px;
-	color: #00b900;
-	border-left-width:0;
-	padding-left: 5px;
-	display: none;
+    font-size: 9px;
+    color: #00b900;
+    border-left-width:0;
+    padding-left: 5px;
+    display: none;
 }
 .si_report_table .neg_rate{
-	color: #da100d;
+    color: #da100d;
 }
 
 .si_button_mini{
-	display: inline-block;
-	font-size: 9px;
-	margin: 1px 3px;
-	line-height: 9px;
-	color: #00703a;
-	padding: 2px 5px;
-	background: -moz-linear-gradient(
-		top,
-		#ffffff 0%,
-		#d6d6d6);
-	background: -webkit-gradient(
-		linear, left top, left bottom, 
-		from(#ffffff),
-		to(#d6d6d6));
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-	border-radius: 3px;
-	border: 1px solid #ccc;
-	-moz-box-shadow:
-		1px 1px 1px rgba(000,000,000,0.1),
-		inset 0px 0px 3px rgba(255,255,255,1);
-	-webkit-box-shadow:
-		1px 1px 1px rgba(000,000,000,0.1),
-		inset 0px 0px 3px rgba(255,255,255,1);
-	box-shadow:
-		1px 1px 1px rgba(000,000,000,0.1),
-		inset 0px 0px 3px rgba(255,255,255,1);
-	text-shadow:
-		0px -1px 0px rgba(000,000,000,0.1),
-		0px 1px 0px rgba(255,255,255,1);
+    display: inline-block;
+    font-size: 9px;
+    margin: 1px 3px;
+    line-height: 9px;
+    color: #00703a;
+    padding: 2px 5px;
+    background: -moz-linear-gradient(
+        top,
+        #ffffff 0%,
+        #d6d6d6);
+    background: -webkit-gradient(
+        linear, left top, left bottom, 
+        from(#ffffff),
+        to(#d6d6d6));
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    -moz-box-shadow:
+        1px 1px 1px rgba(000,000,000,0.1),
+        inset 0px 0px 3px rgba(255,255,255,1);
+    -webkit-box-shadow:
+        1px 1px 1px rgba(000,000,000,0.1),
+        inset 0px 0px 3px rgba(255,255,255,1);
+    box-shadow:
+        1px 1px 1px rgba(000,000,000,0.1),
+        inset 0px 0px 3px rgba(255,255,255,1);
+    text-shadow:
+        0px -1px 0px rgba(000,000,000,0.1),
+        0px 1px 0px rgba(255,255,255,1);
 }
 .si_button_mini:hover{
-	color: #000;
-	-moz-box-shadow:
-		1px 1px 1px rgba(000,000,000,0.1),
-		inset 0px 0px 3px rgba(255,255,255,1);
-	-webkit-box-shadow:
-		1px 1px 1px rgba(000,000,000,0.1),
-		inset 0px 0px 3px rgba(255,255,255,1);
-	box-shadow:
-		-1px -1px 1px rgba(000,000,000,0.1),
-		inset 0px 0px 3px rgba(255,255,255,1);
-	
+    color: #000;
+    -moz-box-shadow:
+        1px 1px 1px rgba(000,000,000,0.1),
+        inset 0px 0px 3px rgba(255,255,255,1);
+    -webkit-box-shadow:
+        1px 1px 1px rgba(000,000,000,0.1),
+        inset 0px 0px 3px rgba(255,255,255,1);
+    box-shadow:
+        -1px -1px 1px rgba(000,000,000,0.1),
+        inset 0px 0px 3px rgba(255,255,255,1);
+    
 }
 /* @end */
 
@@ -399,144 +399,144 @@ Work around IE/Win code size bug - courtesy Jesper, waffle.wootest.net  */
 -------------------------------------------------*/
 
 div#Container {
-	
-/*	background:#fff;*/
-	padding:10px;
+    
+/*    background:#fff;*/
+    padding:10px;
     background: #FFFFFF;
 /*
     background: #FFFFFF url(../../../../images/common/paper_corner.gif) no-repeat scroll right top;
 
 border-bottom:2px #DADADA solid;
-	border-right:2px #DADADA solid;
-	border-left:1px #DADADA solid;
-	border-top:2px #DDD solid;
+    border-right:2px #DADADA solid;
+    border-left:1px #DADADA solid;
+    border-top:2px #DDD solid;
    
-	border-style:solid;
+    border-style:solid;
     */
-	border: 1px solid #ddd;
+    border: 1px solid #ddd;
 
-	/*margin: 0 auto;*/
-	margin:-34px auto 0;
-	padding-top:42px;
-	width: 970px;
-	z-index:1;
+    /*margin: 0 auto;*/
+    margin:-34px auto 0;
+    padding-top:42px;
+    width: 970px;
+    z-index:1;
 
   -moz-box-shadow:0 3px 5px #CCCCCC;
   -webkit-box-shadow:0 3px 5px #CCCCCC;
   box-shadow:0 3px 5px #CCCCCC;
 
-	-webkit-border-top-left-radius:6px;
-	-webkit-border-top-right-radius:6px;
-	-moz-border-radius-topleft:6px;
-	-moz-border-radius-topright:6px;
-	
-	-webkit-border-bottom-left-radius:6px;
-	-webkit-border-bottom-right-radius:6px;
-	-moz-border-radius-bottomleft:6px;
-	-moz-border-radius-bottomright:6px;
+    -webkit-border-top-left-radius:6px;
+    -webkit-border-top-right-radius:6px;
+    -moz-border-radius-topleft:6px;
+    -moz-border-radius-topright:6px;
+    
+    -webkit-border-bottom-left-radius:6px;
+    -webkit-border-bottom-right-radius:6px;
+    -moz-border-radius-bottomleft:6px;
+    -moz-border-radius-bottomright:6px;
 
-	border-radius: 6px;
-/*	margin:13px auto 0;
-	padding:0 23px 0 30px; 
+    border-radius: 6px;
+/*    margin:13px auto 0;
+    padding:0 23px 0 30px; 
 */
-	
+    
 }
 
 .ClearAll {
-	clear:both;
-	font-size:1px;
-	margin:0;
-	padding:0; }
+    clear:both;
+    font-size:1px;
+    margin:0;
+    padding:0; }
 
 .Left {
-	text-align:left;
-	width:70%;
-	float:left;
-	margin:0;
-	padding:0; }
+    text-align:left;
+    width:70%;
+    float:left;
+    margin:0;
+    padding:0; }
 
 .Right {
-	text-align:left;
-	float:left;
-	width:30%;
-	margin:0;
-	padding:0; }
+    text-align:left;
+    float:left;
+    width:30%;
+    margin:0;
+    padding:0; }
 
 /* FOR PROPORTIONAL WIDTH 
 --------------------------*/
 .col {
-	text-align:center;
-	/*padding:0 20px;*/ 
-	/*min-height:352px;*/
-	}
+    text-align:center;
+    /*padding:0 20px;*/ 
+    /*min-height:352px;*/
+    }
 
 body.lobby .Full .bottom {
-	margin-bottom:0; }
+    margin-bottom:0; }
 
 .Right .col {
-	padding:0 0 0 9px; }
+    padding:0 0 0 9px; }
 
 
 /*
  * For manage tables and no javascript and list of invoices in view customer screen
  * */
 table.sortable {
-	border-spacing:0;
-	border:1px solid #fff;
-	border-collapse:collapse; }
+    border-spacing:0;
+    border:1px solid #fff;
+    border-collapse:collapse; }
 
 th.sortable {
-	text-align:left;
-	background-color:#e9e9da;
-	border-bottom:1px solid #CBC7B8;
-	border-right:1px solid #D6D2C2;
-	font-weight:400;
-	padding:2px; }
-	
+    text-align:left;
+    background-color:#e9e9da;
+    border-bottom:1px solid #CBC7B8;
+    border-right:1px solid #D6D2C2;
+    font-weight:400;
+    padding:2px; }
+    
 th.sortable_rt {
-	text-align:right;
-	background-color:#e9e9da;
-	border-bottom:1px solid #CBC7B8;
-	border-right:1px solid #D6D2C2;
-	font-weight:400;
-	padding:2px; }
+    text-align:right;
+    background-color:#e9e9da;
+    border-bottom:1px solid #CBC7B8;
+    border-right:1px solid #D6D2C2;
+    font-weight:400;
+    padding:2px; }
 
 /*
  * Accordian css - start
  * */
 
 #accordian {
-	width:auto;
-	min-height:22em;
+    width:auto;
+    min-height:22em;
 }
 
 * html #accordian {
-	height:22em; }
-	
+    height:22em; }
+    
 #accordian td {
-	width:10%;
-	height:3em;
+    width:10%;
+    height:3em;
 }
 #list1 {
-	width:49%;
-	float:right; }
+    width:49%;
+    float:right; }
 
 * html #list1 {
-		width:49% }
-		
+        width:49% }
+        
 *+html #list1 {
-		width:49% }
-		
+        width:49% }
+        
 #list2 {
-	width:49%;
-	float:left; }
+    width:49%;
+    float:left; }
 
 * html #list2 {
-		width:50% }
-		
+        width:50% }
+        
 *+html #list2 {
-		width:50% }
-		
+        width:50% }
+        
 /*
  * Accordian css - end
  * 
@@ -544,46 +544,46 @@ th.sortable_rt {
  * left rigth - define text align for tables here
  * */
 .align_right {
-	text-align:right !important; }
+    text-align:right !important; }
 
 .align_center {
-	text-align:center !important; }
+    text-align:center !important; }
 
 .validation_alert {
-	font-weight:700;
-	color:#FFF;
-	background-color:red;
-	padding:10px; }
+    font-weight:700;
+    color:#FFF;
+    background-color:red;
+    padding:10px; }
 
 #left,.Full,.align_left {
-	text-align:left; }
+    text-align:left; }
 
 a:link,a:visited {
-	/*color:#03c;*/
-	text-decoration:none; }
+    /*color:#03c;*/
+    text-decoration:none; }
 
 .title,.mytitle {
-	text-align:center;
-	cursor:pointer;
-	border:1px solid #CCC;
-	margin-top:0.5em;
-	padding:0.1em; }
+    text-align:center;
+    cursor:pointer;
+    border:1px solid #CCC;
+    margin-top:0.5em;
+    padding:0.1em; }
 
 .on1 .title,.on .mytitle {
-	background-color:#E4EFC7; }
+    background-color:#E4EFC7; }
 
 .off1 .title,.off .mytitle {
-	background-color:#E0E0E0; }
+    background-color:#E0E0E0; }
 
 .content,.mycontent {
-	background-color:#FFF;
-	border:1px solid silver;
-	border-top-width:0;
-	padding:0.1em; }
-	
+    background-color:#FFF;
+    border:1px solid silver;
+    border-top-width:0;
+    padding:0.1em; }
+    
 .si_grey_background 
 {
-	background:#e5e5e5; 
+    background:#e5e5e5; 
 }
 
 .gmailLoader
@@ -599,22 +599,25 @@ a:link,a:visited {
 /* extjs/doukiwki style input boes */
 input, select, textarea
 {
-	background:#FFFFFF url(../../../../images/common/text-bg.gif) repeat-x scroll center top;
-	/*border:1px solid #B5B8C8;*/
-	border:1px solid #CCCCCC;
-	/*padding:1px 3px;*/
-	margin:1px;
-	padding:0.2em 0.3em;
+    background:#FFFFFF url(../../../../images/common/text-bg.gif) repeat-x scroll center top;
+    /*border:1px solid #B5B8C8;*/
+    border:1px solid #CCCCCC;
+    /*padding:1px 3px;*/
+    margin:1px;
+    padding:0.2em 0.3em;
 }
 
+textarea {
+  resize:both;
+}
 /*
 input:focus, select:focus, iframe:focus .wysiwyg:focus,  #IFrame:focus
 {
-	border-bottom:1px solid #D54E21;
+    border-bottom:1px solid #D54E21;
 }
 */
 .xxbutton {
-		background:#FFFFFF url(../../../../images/common/text-bg-rotate.gif) repeat-x scroll center bottom;
+        background:#FFFFFF url(../../../../images/common/text-bg-rotate.gif) repeat-x scroll center bottom;
 
 }
 
@@ -623,17 +626,17 @@ input:focus, select:focus, iframe:focus .wysiwyg:focus,  #IFrame:focus
     border-top:1px solid #eee;
     border-left:1px solid #eee;
 
-	/*border:1px solid #8CACBB;*/
-	color:#000000;
-	cursor:pointer;
-	/*font-size:100%;*/
-	margin:1px;
-	/*padding:0.125em 0.4em;*/
-	text-decoration:none;
-	vertical-align:middle;
-	
-	
-	font-family:"Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
+    /*border:1px solid #8CACBB;*/
+    color:#000000;
+    cursor:pointer;
+    /*font-size:100%;*/
+    margin:1px;
+    /*padding:0.125em 0.4em;*/
+    text-decoration:none;
+    vertical-align:middle;
+    
+    
+    font-family:"Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
     font-size:100%;
     line-height:130%;
     text-decoration:none;
@@ -644,23 +647,23 @@ input:focus, select:focus, iframe:focus .wysiwyg:focus,  #IFrame:focus
 }
 
 .xxbutton_img {
-	border:medium none;
-	height:16px;
-	margin:0 3px -3px 0 !important;
-	padding:0;
-	width:16px;
+    border:medium none;
+    height:16px;
+    margin:0 3px -3px 0 !important;
+    padding:0;
+    width:16px;
 }
 
 
 /* BUTTONS */
 table.buttons{
-	border-collapse:none;
+    border-collapse:none;
 }
 .buttons a, .buttons button{
-	
-	-moz-border-radius:6px;
-	-webkit-border-radius:6px;
-	border-radius: 6px;
+    
+    -moz-border-radius:6px;
+    -webkit-border-radius:6px;
+    border-radius: 6px;
     display:block;
     float:left;
     margin:0 7px 0 0;
@@ -749,57 +752,57 @@ button.positive, .buttons a.positive{
 /*top of form*/
 #top
 {
-	text-align:center;
+    text-align:center;
 }
-	
+    
 .ui-tabs-hide { display: none; }
 
 .txt_right
 {
-	margin:0 auto;
-	width:970px;
-	text-align:right;
-	padding-top:3px;
-	/*
-	padding:0pt;
-	padding-top:4px;
-	padding-bottom:4px;
-	
-	padding-right:30px;
-	height:21px;
-	*/
-	/*background:#464646;*/
-	/*background:transparent url(../../../images/top_menu_grey.png) repeat scroll left top;*/
-	color:#EEE;
-	/*color:#999999;*/
+    margin:0 auto;
+    width:970px;
+    text-align:right;
+    padding-top:3px;
+    /*
+    padding:0pt;
+    padding-top:4px;
+    padding-bottom:4px;
+    
+    padding-right:30px;
+    height:21px;
+    */
+    /*background:#464646;*/
+    /*background:transparent url(../../../images/top_menu_grey.png) repeat scroll left top;*/
+    color:#EEE;
+    /*color:#999999;*/
 }
 .top_menu
 {
-	margin:0pt;
-	padding:0pt;
-	padding-top:4px;
-	padding-bottom:4px;
-	text-align:right;
-	padding-right:30px;
-	height:21px;
-	background:#878484;
-	/*background:#464646;*/
-	/*background:transparent url(../../../../images/common/top_menu_grey.png) repeat scroll left top;*/
-	color:#EEE;
-	/*color:#999999;*/
+    margin:0pt;
+    padding:0pt;
+    padding-top:4px;
+    padding-bottom:4px;
+    text-align:right;
+    padding-right:30px;
+    height:21px;
+    background:#878484;
+    /*background:#464646;*/
+    /*background:transparent url(../../../../images/common/top_menu_grey.png) repeat scroll left top;*/
+    color:#EEE;
+    /*color:#999999;*/
 }
 
 .settings {
-	float:right;
-	margin-top:10px;
-	padding-right:30px;
+    float:right;
+    margin-top:10px;
+    padding-right:30px;
 }
 
 .floatLeft{
-	float:left;
+    float:left;
 }
 .floatRight{
-	float:right;
+    float:right;
 }
 
 .note, .note-edit

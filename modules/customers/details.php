@@ -1,83 +1,76 @@
 <?php
 /*
-* Script: details.php
-* 	Customers details page
-*
-* Authors:
-*	 Justin Kelly, Nicolas Ruflin
-*
-* Last edited:
-* 	 2007-07-19
-*
-* License:
-*	 GPL v2 or above
-*
-* Website:
-* 	http://www.simpleinvoices.org
+ * Script: details.php
+ * 	Customers details page
+ *
+ * Authors:
+ *	 Justin Kelly, Nicolas Ruflin
+ *
+ * Last edited:
+ * 	    2016-10-21
+ *
+ * License:
+ *	    GPL v3 or above
+ *
+ * Website:
+ * 	http://www.simpleinvoices.org
  */
+global $smarty, $LANG, $pdoDb, $config;
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
+// @formatter:off
+$cid = $_GET['id'];
+$domain_id = domain_id::get();
 
-#get the invoice id
-$customer_id = $_GET['id'];
-$customer = getCustomer($customer_id);
-$customer['wording_for_enabled'] = $customer['enabled']==1?$LANG['enabled']:$LANG['disabled'];
-
-
-//TODO: Perhaps possible a bit nicer?
-$stuff = null;
-$stuff['total'] = calc_customer_total($customer['id'],domain_id::get(),true);
-
-#amount paid calc - start
-$stuff['paid'] = calc_customer_paid($customer['id'],domain_id::get(),true);;
-#amount paid calc - end
-
-#amount owing calc - start
-$stuff['owing'] = $stuff['total'] - $stuff['paid'];
-#get custom field labels
-
-
-$customFieldLabel = getCustomFieldLabels();
-$invoices = getCustomerInvoices($customer_id);
-
-//$start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
-$dir =  "DESC" ;
-$sort =  "id" ;
-$rp = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
-$having = 'money_owed' ;
-$page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
-
-//$sql = "SELECT * FROM ".TB_PREFIX."invoices LIMIT $start, $limit";
-$invoice_owing = new invoice();
-$invoice_owing->sort=$sort;
-$invoice_owing->having_and="real";
-$invoice_owing->query=$_REQUEST['query'];
-$invoice_owing->qtype=$_REQUEST['qtype'];
-
-$large_dataset = getDefaultLargeDataset();
-if($large_dataset == $LANG['enabled'])
-{
-  $sth = $invoice_owing->select_all('large_count', $dir, $rp, $page, $having);
+$pdoDb->addSimpleWhere("id", $cid, "AND");
+$pdoDb->addSimpleWhere("domain_id", $domain_id);
+$rows = $pdoDb->request("SELECT", "customers");
+$customer = $rows[0];
+$customer['wording_for_enabled'] = ($customer['enabled'] == ENABLED ? $LANG['enabled'] : $LANG['disabled']);
+if (empty($customer['credit_card_number'])) {
+    $customer['credit_card_number_masked'] = "";
 } else {
-  $sth = $invoice_owing->select_all('', $dir, $rp, $page, $having);
-
+    try {
+        $key = $config->encryption->default->key;
+        $enc = new Encryption();
+        $credit_card_number = $enc->decrypt($key, $customer['credit_card_number']);
+        $customer['credit_card_number_masked'] = maskValue($credit_card_number);
+    } catch (Exception $e) {
+        throw new Exception("details.php - Unable to decrypt credit card for Customer, " .
+                            $cid . ". " . $e->getMessage());
+    }
 }
-$invoices_owing = $sth->fetchAll(PDO::FETCH_ASSOC);
+$invoices = Customer::getCustomerInvoices($cid);
 
-//$customFieldLabel = getCustomFieldLabels("biller");
-$smarty -> assign("stuff",$stuff);
-$smarty -> assign('customer',$customer);
-$smarty -> assign('invoices',$invoices);
-$smarty -> assign('invoices_owing',$invoices_owing);
-$smarty -> assign('customFieldLabel',$customFieldLabel);
+$stuff = array();
+$stuff['total'] = Customer::calc_customer_total($customer['id'], true);
+$stuff['paid']  = Payment::calc_customer_paid( $customer['id'], true);
+$stuff['owing'] = $stuff['total'] - $stuff['paid'];
 
-$smarty -> assign('pageActive', 'customer');
-$subPageActive = $_GET['action'] =="view"  ? "customer_view" : "customer_edit" ;
-$smarty -> assign('subPageActive', $subPageActive);
-$smarty -> assign('pageActive', 'customer');
+$customFieldLabel = getCustomFieldLabels('',true);
 
+$dir    =  "DESC";
+$sort   =  "id";
+$rp     = (isset($_POST['rp'])       ? $_POST['rp']       : "25");
+$page   = (isset($_POST['page'])     ? $_POST['page']     : "1");
+$query  = (isset($_REQUEST['query']) ? $_REQUEST['query'] : "");
+$qtype  = (isset($_REQUEST['qtype']) ? $_REQUEST['qtype'] : "");
 
-$smarty -> assign('active_tab', '#people');
-?>
+$type = (getDefaultLargeDataset() == $LANG['enabled'] ? "count" : "");
+
+$pdoDb->setHavings(Invoice::buildHavings("money_owed"));
+
+$invoices_owing = Invoice::select_all($type, $sort, $dir, $rp, $page, $query, $qtype);
+$subPageActive  = ($_GET['action'] == "view"  ? "customer_view" : "customer_edit");
+
+$smarty->assign("stuff"           , $stuff);
+$smarty->assign('customer'        , $customer);
+$smarty->assign('invoices'        , $invoices);
+$smarty->assign('invoices_owing'  , $invoices_owing);
+$smarty->assign('customFieldLabel', $customFieldLabel);
+$smarty->assign('pageActive'      , 'customer');
+$smarty->assign('subPageActive'   , $subPageActive);
+$smarty->assign('active_tab'      , '#people');
+// @formatter:on

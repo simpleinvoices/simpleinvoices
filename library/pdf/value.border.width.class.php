@@ -9,16 +9,14 @@ class BorderWidth extends CSSValue {
   var $bottom;
 
   function &copy() {
-    $value =& new BorderWidth($this->top, $this->right, $this->bottom, $this->left);
+    $value =  new BorderWidth($this->top, $this->right, $this->bottom, $this->left);
     return $value;
   }
 
-  function BorderWidth($top, $right, $bottom, $left) {
+  function __construct($top, $right, $bottom, $left) {
     $this->left   = $left->copy();
     $this->right  = $right->copy();
     $this->top    = $top->copy();
     $this->bottom = $bottom->copy();
   }
 }
-
-?>

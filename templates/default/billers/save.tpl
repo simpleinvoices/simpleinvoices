@@ -14,7 +14,7 @@
 */
 *}
 
-{if $saved == true }
+{if $saved}
 	<div class="si_message_ok">{$LANG.save_biller_success}</div>
 {else}
 	<div class="si_message_error">{$LANG.save_biller_failure}</div>

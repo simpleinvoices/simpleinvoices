@@ -17,8 +17,8 @@ class TextBox extends SimpleInlineBox {
   var $_wrappable;
   var $wrapped;
 
-  function TextBox() {
-    $this->SimpleInlineBox();
+  function __construct() {
+    parent::__construct();
 
     $this->words        = array();
     $this->encodings    = array();
@@ -36,12 +36,12 @@ class TextBox extends SimpleInlineBox {
   }
 
   /**
-   * Check if given subword contains soft hyphens and calculate 
+   * Check if given subword contains soft hyphens and calculate
    */
   function _make_wrappable(&$driver, $base_width, $font_name, $font_size, $subword_index) {
     $hyphens = $this->hyphens[$subword_index];
     $wrappable = array();
-    
+
     foreach ($hyphens as $hyphen) {
       $subword_wrappable_index = $hyphen;
       $subword_wrappable_width = $base_width + $driver->stringwidth(substr($this->words[$subword_index], 0, $subword_wrappable_index),
@@ -52,7 +52,7 @@ class TextBox extends SimpleInlineBox {
                                                                             $font_name,
                                                                             "iso-8859-1",
                                                                             $font_size);
-      
+
       $wrappable[] = array($subword_index, $subword_wrappable_index, $subword_wrappable_width, $subword_full_width);
     };
     return $wrappable;
@@ -75,11 +75,11 @@ class TextBox extends SimpleInlineBox {
     $this->height = $value;
   }
 
-  // Apply 'line-height' CSS property; modifies the default_baseline value 
+  // Apply 'line-height' CSS property; modifies the default_baseline value
   // (NOT baseline, as it is calculated - and is overwritten - in the close_line
   // method of container box
   //
-  // Note that underline position (or 'descender' in terms of PDFLIB) - 
+  // Note that underline position (or 'descender' in terms of PDFLIB) -
   // so, simple that space of text box under the baseline - is scaled too
   // when 'line-height' is applied
   //
@@ -111,9 +111,9 @@ class TextBox extends SimpleInlineBox {
 
     $font = $this->getCSSProperty(CSS_FONT);
 
-    $typeface = $font_resolver->getTypefaceName($font->family, 
-                                                $font->weight, 
-                                                $font->style, 
+    $typeface = $font_resolver->getTypefaceName($font->family,
+                                                $font->weight,
+                                                $font->style,
                                                 $this->encodings[$subword_index]);
 
     $this->_cache[CACHE_TYPEFACE][$subword_index] = $typeface;
@@ -150,7 +150,7 @@ class TextBox extends SimpleInlineBox {
   }
 
   function &create_empty(&$pipeline) {
-    $box =& new TextBox();
+    $box =  new TextBox();
     $css_state = $pipeline->getCurrentCSSState();
 
     $box->readCSS($css_state);
@@ -208,12 +208,12 @@ class TextBox extends SimpleInlineBox {
       // Check  if last  box was  a note  call box.  Punctuation marks
       // after  a note-call  box should  not be  wrapped to  new line,
       // while "plain" words may be wrapped.
-      if ($last->is_note_call() && $this->is_punctuation()) { 
-        return false; 
+      if ($last->is_note_call() && $this->is_punctuation()) {
+        return false;
       };
     };
 
-    // Calculate the x-coordinate of this box right edge 
+    // Calculate the x-coordinate of this box right edge
     $right_x = $this->get_full_width() + $parent->_current_x;
 
     $need_break = false;
@@ -241,14 +241,14 @@ class TextBox extends SimpleInlineBox {
       };
     }
 
-    // As close-line will not change the current-Y parent coordinate if no 
+    // As close-line will not change the current-Y parent coordinate if no
     // items were in the line box, we need to offset this explicitly in this case
     //
     if ($parent->line_box_empty() && $need_break) {
       $parent->_current_y -= $this->get_height();
     };
 
-    if ($need_break) { 
+    if ($need_break) {
       // Check if current box contains soft hyphens and use them, breaking word into parts
       $size = count($this->_wrappable);
       if ($size > 0) {
@@ -260,7 +260,7 @@ class TextBox extends SimpleInlineBox {
         $this->_find_soft_hyphen($parent, $width_delta);
       };
 
-      $parent->close_line($context); 
+      $parent->close_line($context);
 
       // Check if parent inline boxes have left padding/margins and add them to current_x
       $element = $this->parent;
@@ -294,18 +294,18 @@ class TextBox extends SimpleInlineBox {
                            $parent->_current_y - $this->get_extra_top());
   }
 
-  function reflow(&$parent, &$context) {    
+  function reflow(&$parent, &$context) {
     // Check if we need a line break here (possilble several times in a row, if we
     // have a long word and a floating box intersecting with this word
-    // 
+    //
     // To prevent infinite loop, we'll use a limit of 100 sequental line feeds
     $i=0;
 
     do { $i++; } while ($this->maybe_line_break($parent, $context) && $i < 100);
-   
+
     // Determine the baseline position and height of the text-box using line-height CSS property
     $this->_apply_line_height();
-    
+
     // set default baseline
     $this->baseline = $this->default_baseline;
 
@@ -366,7 +366,7 @@ class TextBox extends SimpleInlineBox {
       return null;
     };
 
-    $descender = $driver->font_descender($font_name, $this->encodings[0]); 
+    $descender = $driver->font_descender($font_name, $this->encodings[0]);
     if (is_null($descender)) {
       error_log("TextBox::reflow_text: cannot get font descender");
       return null;
@@ -378,15 +378,15 @@ class TextBox extends SimpleInlineBox {
     $font = $this->getCSSProperty(CSS_FONT_SIZE);
     $font_size = $font->getPoints();
 
-    // Both ascender and descender should make $font_size 
+    // Both ascender and descender should make $font_size
     // as it is not guaranteed that $ascender + $descender == 1,
     // we should normalize the result
     $koeff = $font_size / ($ascender + $descender);
     $this->ascender         = $ascender  * $koeff;
     $this->descender        = $descender * $koeff;
 
-    $this->default_baseline = $this->ascender; 
-    $this->height           = $this->ascender + $this->descender; 
+    $this->default_baseline = $this->ascender;
+    $this->height           = $this->ascender + $this->descender;
 
     /**
      * Determine box width
@@ -397,9 +397,9 @@ class TextBox extends SimpleInlineBox {
       for ($i=0; $i<$num_words; $i++) {
         $font_name = $this->_get_font_name($driver, $i);
 
-        $current_width = $driver->stringwidth($this->words[$i], 
-                                                $font_name, 
-                                                $this->encodings[$i], 
+        $current_width = $driver->stringwidth($this->words[$i],
+                                                $font_name,
+                                                $this->encodings[$i],
                                                 $font_size);
         $this->_word_widths[] = $current_width;
 
@@ -423,9 +423,9 @@ class TextBox extends SimpleInlineBox {
         $num_chars = strlen($this->words[$i]);
 
         for ($j=0; $j<$num_chars; $j++) {
-          $this->_widths[] = $driver->stringwidth($this->words[$i]{$j}, 
-                                                    $font_name, 
-                                                    $this->encodings[$i], 
+          $this->_widths[] = $driver->stringwidth($this->words[$i]{$j},
+                                                    $font_name,
+                                                    $this->encodings[$i],
                                                     $font_size);
         };
 
@@ -441,8 +441,8 @@ class TextBox extends SimpleInlineBox {
      * Check if font-size have been set to 0; in this case we should not draw this box at all
      */
     $font_size = $this->getCSSProperty(CSS_FONT_SIZE);
-    if ($font_size->getPoints() == 0) { 
-      return true; 
+    if ($font_size->getPoints() == 0) {
+      return true;
     }
 
     // Check if current text box will be cut-off by the page edge
@@ -450,14 +450,14 @@ class TextBox extends SimpleInlineBox {
     $top    = $this->get_top_margin();
     // Get Y coordinate of the bottom edge of the box
     $bottom = $this->get_bottom_margin();
-    
+
     $top_inside    = $top    >= $driver->getPageBottom()-EPSILON;
     $bottom_inside = $bottom >= $driver->getPageBottom()-EPSILON;
-       
-    if (!$top_inside && !$bottom_inside) { 
-      return true; 
+
+    if (!$top_inside && !$bottom_inside) {
+      return true;
     }
-    
+
     return $this->_showText($driver);
   }
 
@@ -474,18 +474,18 @@ class TextBox extends SimpleInlineBox {
     parent::show($driver);
 
     $font_size = $this->getCSSProperty(CSS_FONT_SIZE);
-    
+
     $decoration = $this->getCSSProperty(CSS_TEXT_DECORATION);
-    
+
     // draw text decoration
     $driver->decoration($decoration['U'],
                         $decoration['O'],
                         $decoration['T']);
 
     $letter_spacing = $this->getCSSProperty(CSS_LETTER_SPACING);
-    
+
     // Output text with the selected font
-    // note that we're using $default_baseline; 
+    // note that we're using $default_baseline;
     // the alignment offset - the difference between baseline and default_baseline values
     // is taken into account inside the get_top/get_bottom functions
     //
@@ -500,32 +500,32 @@ class TextBox extends SimpleInlineBox {
      */
     for ($i=0; $i<$this->wrapped[0][0]; $i++) {
       // Activate font
-      $status = $driver->setfont($this->_get_font_name($driver, $i), 
-                                 $this->encodings[$i], 
+      $status = $driver->setfont($this->_get_font_name($driver, $i),
+                                 $this->encodings[$i],
                                  $font_size->getPoints());
-      if (is_null($status)) { 
+      if (is_null($status)) {
         error_log("TextBox::show: setfont call failed");
-        return null; 
+        return null;
       };
-        
-      $driver->show_xy($this->words[$i], 
-                       $left, 
+
+      $driver->show_xy($this->words[$i],
+                       $left,
                        $this->wrapped[2] - $this->default_baseline);
       $left += $this->_word_widths[$i];
     };
 
     $index = $this->wrapped[0][0];
-      
-    $status = $driver->setfont($this->_get_font_name($driver, $index), 
-                               $this->encodings[$index], 
+
+    $status = $driver->setfont($this->_get_font_name($driver, $index),
+                               $this->encodings[$index],
                                $font_size->getPoints());
-    if (is_null($status)) { 
+    if (is_null($status)) {
       error_log("TextBox::show: setfont call failed");
-      return null; 
+      return null;
     };
 
-    $driver->show_xy(substr($this->words[$index],0,$this->wrapped[0][1])."-", 
-                     $left, 
+    $driver->show_xy(substr($this->words[$index],0,$this->wrapped[0][1])."-",
+                     $left,
                      $this->wrapped[2] - $this->default_baseline);
 
     /**
@@ -534,26 +534,26 @@ class TextBox extends SimpleInlineBox {
 
     $left = $this->get_left();
     $top  = $this->get_top();
-    $driver->show_xy(substr($this->words[$index],$this->wrapped[0][1]), 
-                     $left, 
+    $driver->show_xy(substr($this->words[$index],$this->wrapped[0][1]),
+                     $left,
                      $top - $this->default_baseline);
 
     $size = count($this->words);
     for ($i = $this->wrapped[0][0]+1; $i<$size; $i++) {
       // Activate font
-      $status = $driver->setfont($this->_get_font_name($driver, $i), 
-                                 $this->encodings[$i], 
+      $status = $driver->setfont($this->_get_font_name($driver, $i),
+                                 $this->encodings[$i],
                                  $font_size->getPoints());
-      if (is_null($status)) { 
+      if (is_null($status)) {
         error_log("TextBox::show: setfont call failed");
-        return null; 
+        return null;
       };
 
-      $driver->show_xy($this->words[$i], 
-                       $left, 
+      $driver->show_xy($this->words[$i],
+                       $left,
                        $top - $this->default_baseline);
 
-      $left += $this->_word_widths[$i];      
+      $left += $this->_word_widths[$i];
     };
 
     return true;
@@ -564,19 +564,19 @@ class TextBox extends SimpleInlineBox {
     parent::show($driver);
 
     $font_size = $this->getCSSProperty(CSS_FONT_SIZE);
-    
+
     $decoration = $this->getCSSProperty(CSS_TEXT_DECORATION);
-    
+
     // draw text decoration
     $driver->decoration($decoration['U'],
                         $decoration['O'],
                         $decoration['T']);
 
     $letter_spacing = $this->getCSSProperty(CSS_LETTER_SPACING);
-    
+
     if ($letter_spacing->getPoints() == 0) {
       // Output text with the selected font
-      // note that we're using $default_baseline; 
+      // note that we're using $default_baseline;
       // the alignment offset - the difference between baseline and default_baseline values
       // is taken into account inside the get_top/get_bottom functions
       //
@@ -585,16 +585,16 @@ class TextBox extends SimpleInlineBox {
 
       for ($i=0; $i<$size; $i++) {
         // Activate font
-        $status = $driver->setfont($this->_get_font_name($driver, $i), 
-                                   $this->encodings[$i], 
+        $status = $driver->setfont($this->_get_font_name($driver, $i),
+                                   $this->encodings[$i],
                                    $font_size->getPoints());
-        if (is_null($status)) { 
+        if (is_null($status)) {
           error_log("TextBox::show: setfont call failed");
-          return null; 
+          return null;
         };
 
-        $driver->show_xy($this->words[$i], 
-                         $left, 
+        $driver->show_xy($this->words[$i],
+                         $left,
                          $this->get_top() - $this->default_baseline);
 
         $left += $this->_word_widths[$i];
@@ -610,8 +610,8 @@ class TextBox extends SimpleInlineBox {
         $num_chars = strlen($this->words[$i]);
 
         for ($j=0; $j<$num_chars; $j++) {
-          $status = $driver->setfont($this->_get_font_name($driver, $i), 
-                                     $this->encodings[$i], 
+          $status = $driver->setfont($this->_get_font_name($driver, $i),
+                                     $this->encodings[$i],
                                      $font_size->getPoints());
 
           $driver->show_xy($this->words[$i]{$j}, $left, $top);
@@ -628,8 +628,8 @@ class TextBox extends SimpleInlineBox {
     $font_size = $this->getCSSProperty(CSS_FONT_SIZE);
 
     // Check if font-size have been set to 0; in this case we should not draw this box at all
-    if ($font_size->getPoints() == 0) { 
-      return true; 
+    if ($font_size->getPoints() == 0) {
+      return true;
     }
 
     return $this->_showText($driver);
@@ -639,7 +639,7 @@ class TextBox extends SimpleInlineBox {
     parent::offset($dx, $dy);
 
     // Note that horizonal offset should be called explicitly from text-align routines
-    // otherwise wrapped part will be offset twice (as offset is called both for 
+    // otherwise wrapped part will be offset twice (as offset is called both for
     // wrapped and non-wrapped parts).
     if (!is_null($this->wrapped)) {
       $this->offset_wrapped($dx, $dy);
@@ -648,7 +648,7 @@ class TextBox extends SimpleInlineBox {
 
   function offset_wrapped($dx, $dy) {
     $this->wrapped[1] += $dx;
-    $this->wrapped[2] += $dy;    
+    $this->wrapped[2] += $dy;
   }
 
   function reflow_whitespace(&$linebox_started, &$previous_whitespace) {

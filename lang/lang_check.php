@@ -48,8 +48,8 @@ print "\n";
 
 
 // The main language. Needed to compare the % done of the other languages.
-$en_lang = process_lang_file('en_GB');
-if (SI_DEBUG) echo "debug: en_GB, $en_lang[0], $en_lang[1]\n";
+$en_lang = process_lang_file('en_US');
+if (SI_DEBUG) echo "debug: en_US, $en_lang[0], $en_lang[1]\n";
 
 // Lets process the language folders.
 foreach (get_defined_langs() as $lang_code) {

@@ -9,13 +9,12 @@ class TableCellBox extends GenericContainerBox {
   var $_suppress_first;
   var $_suppress_last;
 
-  function TableCellBox() {
-    // Call parent constructor
-    $this->GenericContainerBox();
+  public function __construct() {
+    parent::__construct();
 
     $this->_suppress_first = false;
     $this->_suppress_last  = false;
-    
+
     $this->colspan = 1;
     $this->rowspan = 1;
 
@@ -25,7 +24,7 @@ class TableCellBox extends GenericContainerBox {
     $this->row     = 0;
   }
 
-  function get_min_width(&$context) {   
+  function get_min_width(&$context) {
     if (isset($this->_cache[CACHE_MIN_WIDTH])) {
       return $this->_cache[CACHE_MIN_WIDTH];
     };
@@ -36,7 +35,7 @@ class TableCellBox extends GenericContainerBox {
      * If box does not have any context, its minimal width is determined by extra horizontal space:
      * padding, border width and margins
      */
-    if ($content_size == 0) { 
+    if ($content_size == 0) {
       $min_width = $this->_get_hor_extra();
       $this->_cache[CACHE_MIN_WIDTH] = $min_width;
       return $min_width;
@@ -47,26 +46,26 @@ class TableCellBox extends GenericContainerBox {
      */
     $white_space = $this->getCSSProperty(CSS_WHITE_SPACE);
     $pseudo_nowrap = $this->getCSSProperty(CSS_HTML2PS_NOWRAP);
-    if ($white_space   == WHITESPACE_NOWRAP || 
-        $pseudo_nowrap == NOWRAP_NOWRAP) { 
+    if ($white_space   == WHITESPACE_NOWRAP ||
+        $pseudo_nowrap == NOWRAP_NOWRAP) {
       $min_width = $this->get_min_nowrap_width($context);
       $this->_cache[CACHE_MIN_WIDTH] = $min_width;
-      return $min_width; 
+      return $min_width;
     }
 
     /**
      * We need to add text indent size to the with of the first item
      */
     $start_index = 0;
-    while ($start_index < $content_size && 
+    while ($start_index < $content_size &&
            $this->content[$start_index]->out_of_flow()) {
-      $start_index++; 
+      $start_index++;
     };
-    
+
     if ($start_index < $content_size) {
       $ti = $this->getCSSProperty(CSS_TEXT_INDENT);
-      $minw = 
-        $ti->calculate($this) + 
+      $minw =
+        $ti->calculate($this) +
         $this->content[$start_index]->get_min_width($context);
     } else {
       $minw = 0;
@@ -83,7 +82,7 @@ class TableCellBox extends GenericContainerBox {
      * Apply width constraint to min width. Return maximal value
      */
     $wc = $this->getCSSProperty(CSS_WIDTH);
-    $min_width = max($minw, 
+    $min_width = max($minw,
                      $wc->apply($minw, $this->parent->get_width())) + $this->_get_hor_extra();
     $this->_cache[CACHE_MIN_WIDTH] = $min_width;
     return $min_width;
@@ -101,7 +100,7 @@ class TableCellBox extends GenericContainerBox {
                                  CSS_HTML2PS_TABLE_BORDER));
   }
 
-  function isCell() { 
+  function isCell() {
     return true;
   }
 
@@ -112,7 +111,7 @@ class TableCellBox extends GenericContainerBox {
   function &create(&$root, &$pipeline) {
     $css_state = $pipeline->getCurrentCSSState();
 
-    $box =& new TableCellBox();
+    $box =  new TableCellBox();
     $box->readCSS($css_state);
 
     // Use cellspacing / cellpadding values from the containing table
@@ -131,7 +130,7 @@ class TableCellBox extends GenericContainerBox {
 
     $margin =& CSS::get_handler(CSS_MARGIN);
     $box->setCSSProperty(CSS_MARGIN, $margin->default_value());
-      
+
     $h_padding =& CSS::get_handler(CSS_PADDING);
     $padding = $box->getCSSProperty(CSS_PADDING);
 
@@ -154,14 +153,14 @@ class TableCellBox extends GenericContainerBox {
 
       /**
        * Note that cellpadding/cellspacing values never use font-size based units
-       * ('em' and 'ex'), so we may pass 0 as base_font_size parameter - it 
+       * ('em' and 'ex'), so we may pass 0 as base_font_size parameter - it
        * will not be used anyway
        */
       $padding->units2pt(0);
 
       $box->setCSSProperty(CSS_PADDING, $padding);
     };
-       
+
     if ($box->getCSSProperty(CSS_BORDER_COLLAPSE) != BORDER_COLLAPSE) {
       $margin_value = $box->getCSSProperty(CSS_MARGIN);
       if ($margin->is_default($margin_value)) {
@@ -186,7 +185,7 @@ class TableCellBox extends GenericContainerBox {
 
         /**
          * Note that cellpadding/cellspacing values never use font-size based units
-         * ('em' and 'ex'), so we may pass 0 as base_font_size parameter - it 
+         * ('em' and 'ex'), so we may pass 0 as base_font_size parameter - it
          * will not be used anyway
          */
         $margin_value->units2pt(0);
@@ -199,7 +198,7 @@ class TableCellBox extends GenericContainerBox {
     $box->colspan = max(1,(int)$root->get_attribute('colspan'));
     $box->rowspan = max(1,(int)$root->get_attribute('rowspan'));
 
-    // Create content 
+    // Create content
 
     // 'vertical-align' CSS value is not inherited from the table cells
     $css_state->pushState();
@@ -213,15 +212,15 @@ class TableCellBox extends GenericContainerBox {
     global $g_config;
     if ($g_config['mode'] == "quirks") {
       // QUIRKS MODE:
-      // H1-H6 and P elements should have their top/bottom margin suppressed if they occur as the first/last table cell child 
-      // correspondingly; note that we cannot do it usung CSS rules, as there's no selectors for the last child. 
+      // H1-H6 and P elements should have their top/bottom margin suppressed if they occur as the first/last table cell child
+      // correspondingly; note that we cannot do it usung CSS rules, as there's no selectors for the last child.
       //
       $child = $root->first_child();
       if ($child) {
         while ($child && $child->node_type() != XML_ELEMENT_NODE) {
           $child = $child->next_sibling();
         };
-      
+
         if ($child) {
           if (array_search(strtolower($child->tagname()), array("h1","h2","h3","h4","h5","h6","p"))) {
             $box->_suppress_first = true;
@@ -234,7 +233,7 @@ class TableCellBox extends GenericContainerBox {
         while ($child && $child->node_type() != XML_ELEMENT_NODE) {
           $child = $child->previous_sibling();
         };
-        
+
         if ($child) {
           if (array_search(strtolower($child->tagname()), array("h1","h2","h3","h4","h5","h6","p"))) {
             $box->_suppress_last = true;
@@ -253,8 +252,8 @@ class TableCellBox extends GenericContainerBox {
 
   function get_cell_baseline() {
     $content = $this->get_first_data();
-    if (is_null($content)) { 
-      return 0; 
+    if (is_null($content)) {
+      return 0;
     }
     return $content->baseline;
   }
@@ -267,10 +266,10 @@ class TableCellBox extends GenericContainerBox {
     $size = count($this->content);
     if ($g_config['mode'] == "quirks" && $size > 0) {
       // QUIRKS MODE:
-      // H1-H6 and P elements should have their top/bottom margin suppressed if they occur as the first/last table cell child 
-      // correspondingly; note that we cannot do it usung CSS rules, as there's no selectors for the last child. 
+      // H1-H6 and P elements should have their top/bottom margin suppressed if they occur as the first/last table cell child
+      // correspondingly; note that we cannot do it usung CSS rules, as there's no selectors for the last child.
       //
-      
+
       $first =& $this->get_first();
       if (!is_null($first) && $this->_suppress_first && $first->isBlockLevel()) {
         $first->margin->top->value = 0;
@@ -284,17 +283,17 @@ class TableCellBox extends GenericContainerBox {
       };
     };
 
-    // Determine upper-left _content_ corner position of current box 
+    // Determine upper-left _content_ corner position of current box
     $this->put_left($parent->_current_x + $this->get_extra_left());
 
     // NOTE: Table cell margin is used as a cell-spacing value
     $border = $this->getCSSProperty(CSS_BORDER);
     $padding = $this->getCSSProperty(CSS_PADDING);
-    $this->put_top($parent->_current_y - 
-                   $border->top->get_width() - 
+    $this->put_top($parent->_current_y -
+                   $border->top->get_width() -
                    $padding->top->value);
 
-    // CSS 2.1: 
+    // CSS 2.1:
     // Floats, absolutely positioned elements, inline-blocks, table-cells, and elements with 'overflow' other than
     // 'visible' establish new block formatting contexts.
     $context->push();
@@ -308,7 +307,7 @@ class TableCellBox extends GenericContainerBox {
     // Determine the bottom edge corrdinate of the bottommost float
     //
     $float_bottom = $context->float_bottom();
-      
+
     if (!is_null($float_bottom)) {
       $this->extend_height($float_bottom);
     };
