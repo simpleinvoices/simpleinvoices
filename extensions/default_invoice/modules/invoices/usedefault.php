@@ -1,58 +1,59 @@
 <?php
 /*
-* Script: usedefault.php
-* 	page which chooses an empty page or another invoice as templat
-*
-* Authors:
-*	 Marcel van Dorp, Justin Kelly, Nicolas Ruflin
-*
-* Last edited:
-* 	 2009-02-08
-*
-* License:
-*	 GPL v2 or above
-*
-* Website:
-* 	http://www.simpleinvoices.org
+ *  Script: usedefault.php
+ *      page which chooses an empty page or another invoice as templat
+ *
+ *  Authors:
+ *      Marcel van Dorp, Justin Kelly, Nicolas Ruflin
+ *
+ *  Last edited:
+ *      2016-08-02
+ *
+ *  License:
+ *      GPL v3 or above
+ *
+ *  Website:
+ *      http://www.simpleinvoices.org
  */
-#table
+global $defaults, $pdoDb, $smarty;
 
-//stop the direct browsing to this file - let index.php handle which files get displayed
-checkLogin();
+// stop the direct browsing to this file - let index.php handle which files get displayed
+checkLogin ();
 
-#get the invoice id
-$defaults = getSystemDefaults();
-$master_customer_id = $_GET['customer_id'];
-$customer = getCustomer($master_customer_id);
+$master_customer_id = $_GET ['customer_id'];
+$customer = Customer::get($master_customer_id);
 
-if ($_GET['action'] == 'update_template') {	/* update default template for customer */
+if ($_GET ['action'] == 'update_template') {
+    // Update the default template for this customer
+    $pdoDb->setFauxPost(array("custom_field4" => $_GET ['id']));
+    $pdoDb->addSimpleWhere("id'", $master_customer_id);
+    $pdoDb->addSimpleWhere("domain_id", domain_id::get());
+    $pdoDb->request("UPDATE", "customers");
 
- $sql = "UPDATE ".TB_PREFIX."customers SET custom_field4 = :cf4 WHERE id = :id AND domain_id = :domain_id";
- dbQuery($sql,
-	':cf4', $_GET['id'],
- 	':id', $master_customer_id,
-	':domain_id', domain_id::get()
-	);
-
- $smarty -> assign("view","quick_view");
- $smarty -> assign("spec","id");
- $smarty -> assign("id",$_GET['id']);
-# print("debug=$sql");
+    $smarty->assign("view", "quick_view");
+    $smarty->assign("spec", "id");
+    $smarty->assign("id", $_GET['id']);
 } else {
- 
-$template = $defaults['default_invoice'];					/* GET DEFAULT TEMPLATE, OR NULL */
-($customer['custom_field4'] != null) && $template = $customer['custom_field4'];	/* OVERRIDE WITH CF4 IF IT EXISTS */
-$invoice = getInvoice($template);
-$template = $invoice['id'];							/* CHECK IF TEMPLATE EXISTS, OR NULL */
+    // Set the template touse. If there is a customer specified invoice,
+    // use it. Otherwise, use the application default invoice.
+    if (empty($customer['custom_field4'])) {
+        $template = $defaults['default_invoice'];
+    } else {
+        $template = $customer['custom_field4'];
+    }
 
- if ($template == null) { 				/* No template for this customer */
-  $smarty -> assign("view","itemised");
-  $smarty -> assign("spec","customer_id");
-  $smarty -> assign("id",$master_customer_id);
- } else {						/* Use template for this customer */
-  $smarty -> assign("view","details");
-  $smarty -> assign("spec","template");
-  $smarty -> assign("id",$template);
- }
+    $invoice = Invoice::getInvoice($template);
+
+    // Set values based on presence of customer specific template.
+    if (empty($invoice ['id'])) {
+        // No template for this customer
+        $smarty->assign("view", "itemised");
+        $smarty->assign("spec", "customer_id");
+        $smarty->assign("id"  , $master_customer_id);
+    } else {
+        // Use template for this customer
+        $smarty->assign("view", "details");
+        $smarty->assign("spec", "template");
+        $smarty->assign("id"  , $invoice ['id']);
+    }
 }
-?>

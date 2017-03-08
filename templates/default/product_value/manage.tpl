@@ -14,5 +14,5 @@
 <hr />
 <table id="manageGrid" style="display:none"></table>
 
- {include file='../modules/product_value/manage.js.php'}
+ {include file='modules/product_value/manage.js.php'}
 {/if}

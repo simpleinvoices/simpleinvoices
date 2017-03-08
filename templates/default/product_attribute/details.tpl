@@ -9,7 +9,7 @@
 	<hr />
 
 	
-	<table align="center">
+	<table class="center">
 		<tr>
   			<td class="details_screen">{$LANG.id}</td><td>{$product_attribute.id}</td>
                 </tr>
@@ -40,7 +40,7 @@
 <b>{$LANG.product_attribute}</b>
 	<hr />
 
-        <table align="center">
+        <table class="center">
                 <tr>
                         <td class="details_screen">{$LANG.id}</td><td>{$product_attribute.id}</td>
                 </tr>

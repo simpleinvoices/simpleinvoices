@@ -1,40 +1,40 @@
 <?php
+class user {
+    /**
+     * Get all user role records.
+     * @return Array of <b>user_role</b> records.
+     */
+    public static function getUserRoles() {
+        global $pdoDb;
+        $pdoDb->setOrderBy(new OrderBy("id"));
+        $pdoDb->setSelectList(array("id", "name"));
+        $rows = $pdoDb->request("SELECT", "user_role");
+        return $rows;
+    }
 
-class user
-{
+    /**
+     * Get a specific <b>user</b> table record.
+     * @param integer $id <b>id</b> number of he record to retrieve.
+     * @return user record.
+     */
+    public static function getUser($id) {
+        global $auth_session, $LANG, $pdoDb, $auth_session;
+        $pdoDb->addSimpleWhere("u.id", $id, "AND");
+        $pdoDb->addSimpleWhere("domain_id", $auth_session->domain_id);
 
+        $list = array("u.*", "ur.name AS role_name");
+        $pdoDb->setSelectList($list);
 
-	function getUserRoles()
-	{
-	
-//		$sql = "select id, name from ".TB_PREFIX."user_role where name != 'biller' AND name != 'customer' order by id";
-		$sql = "SELECT id, name FROM ".TB_PREFIX."user_role ORDER BY id";
-		$result = dbQuery($sql);
+        $caseStmt = new CaseStmt("u.enabled", "enabled_txt");
+        $caseStmt->addWhen( "=", ENABLED, $LANG['enabled']);
+        $caseStmt->addWhen("!=", ENABLED, $LANG['disabled'], true);
+        $pdoDb->addToCaseStmts($caseStmt);
 
-		return $result->fetchAll();
+        $join = new Join("LEFT", "user_role", "ur");
+        $join->addSimpleItem("ur.id", new DbField("role_id"));
+        $pdoDb->addToJoins($join);
 
-	}
-
-	function getUser($id)
-	{
-	
-		global $auth_session;
-		global $LANG;
-
-		$sql = "SELECT 
-					u.*, 
-					ur.name AS role_name,
-					(SELECT (CASE WHEN u.enabled = ".ENABLED." THEN '".$LANG['enabled']."' ELSE '".$LANG['disabled']."' END )) AS lang_enabled,
-					user_id
-				FROM 
-					".TB_PREFIX."user u LEFT JOIN 
-					".TB_PREFIX."user_role ur ON (u.role_id = ur.id)
-				WHERE u.domain_id = :domain_id
-				  AND u.id = :id 
-				";
-		$result = dbQuery($sql,':id', $id, ':domain_id', $auth_session->domain_id);
-
-		return $result->fetch();
-
-	}
+        $rows = $pdoDb->request("SELECT", "user", "u");
+        return $rows[0];
+    }
 }

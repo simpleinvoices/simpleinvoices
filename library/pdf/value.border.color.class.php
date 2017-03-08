@@ -9,7 +9,7 @@ class BorderColor extends CSSValue {
   var $bottom;
 
   function &copy() {
-    $value =& new BorderColor($this->top, $this->right, $this->bottom, $this->left);
+    $value =  new BorderColor($this->top, $this->right, $this->bottom, $this->left);
     return $value;
   }
 
@@ -21,4 +21,3 @@ class BorderColor extends CSSValue {
   }
 }
 
-?>

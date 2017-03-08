@@ -107,7 +107,7 @@ class OutputDriverPNG extends OutputDriverGeneric {
     $height = imagesy($clip['image']);
     $this->_image = imagecreatetruecolor($width,
                                          $height);
-    imagecopy($this->_image, 
+    imagecopy($this->_image,
               $clip['image'],
               0,0,
               0,0,
@@ -143,12 +143,12 @@ class OutputDriverPNG extends OutputDriverGeneric {
   function _drawLine($x1, $y1, $x2, $y2) {
     imageline($this->_image, $x1, $y1, $x2, $y2, $this->_color[0]['object']);
   }
- 
+
   /**
    * Note that "paper space" have Y coordinate axis directed to the bottom,
    * while images have Y coordinate axis directory to the top
    */
-  function _fixCoords(&$x, &$y) {   
+  function _fixCoords(&$x, &$y) {
     $x = $this->_fixCoordX($x);
     $y = $this->_fixCoordY($y);
   }
@@ -210,8 +210,8 @@ class OutputDriverPNG extends OutputDriverGeneric {
      */
     $this->_heightPixels = $media->height();
     $this->_widthPixels  = $media->width();
-    
-    $this->_image = imagecreatetruecolor($this->_widthPixels, 
+
+    $this->_image = imagecreatetruecolor($this->_widthPixels,
                                          $this->_heightPixels);
     /**
      * Render white background
@@ -228,11 +228,11 @@ class OutputDriverPNG extends OutputDriverGeneric {
      */
     $this->_clipping = array();
     $this->_saveClip(new Rectangle(new Point(0,
-                                             0), 
-                                   new Point($this->_widthPixels-1, 
+                                             0),
+                                   new Point($this->_widthPixels-1,
                                              $this->_heightPixels-1)));
 
-    $this->_transform = new AffineTransform($this->_heightPixels, 
+    $this->_transform = new AffineTransform($this->_heightPixels,
                                             $this->_widthPixels / mm2pt($this->media->width()),
                                             $this->_heightPixels / mm2pt($this->media->height()));
   }
@@ -240,7 +240,7 @@ class OutputDriverPNG extends OutputDriverGeneric {
   function add_link($x, $y, $w, $h, $target) { /* N/A */ }
   function add_local_link($left, $top, $width, $height, $anchor) { /* N/A */ }
 
-  function circle($x, $y, $r) { 
+  function circle($x, $y, $r) {
     $this->_path = new PathCircle();
     $this->_path->set_r($r);
     $this->_path->set_x($x);
@@ -275,7 +275,7 @@ class OutputDriverPNG extends OutputDriverGeneric {
     $this->_path = new Path;
   }
 
-  function close() { 
+  function close() {
     /**
      * A small hack; as clipping  context is save every time 'save' is
      * called, we may deterine the number of graphic contexts saved by
@@ -293,17 +293,17 @@ class OutputDriverPNG extends OutputDriverGeneric {
     $this->_path->close();
   }
 
-  function content_type() { 
+  function content_type() {
     return ContentType::png();
   }
 
   function dash($x, $y) { }
   function decoration($underline, $overline, $strikeout) { }
 
-  function error_message() { 
+  function error_message() {
     return "OutputDriverPNG: generic error";
   }
-  
+
   function field_multiline_text($x, $y, $w, $h, $value, $field_name) { /* N/A */ }
   function field_text($x, $y, $w, $h, $value, $field_name) { /* N/A */ }
   function field_password($x, $y, $w, $h, $value, $field_name) { /* N/A */ }
@@ -311,11 +311,11 @@ class OutputDriverPNG extends OutputDriverGeneric {
   function field_pushbuttonimage($x, $y, $w, $h, $field_name, $value, $actionURL) { /* N/A */ }
   function field_pushbuttonreset($x, $y, $w, $h) { /* N/A */ }
   function field_pushbuttonsubmit($x, $y, $w, $h, $field_name, $value, $actionURL) { /* N/A */ }
-  function field_checkbox($x, $y, $w, $h, $name, $value) { /* N/A */ }
+  function field_checkbox($x, $y, $w, $h, $name, $value, $checked) { /* N/A */ }
   function field_radio($x, $y, $w, $h, $groupname, $value, $checked) { /* N/A */ }
   function field_select($x, $y, $w, $h, $name, $value, $options) { /* N/A */ }
 
-  function fill() { 
+  function fill() {
     $this->_path->fill($this->_transform, $this->_image, $this->_getCurrentColor());
     $this->_path = new Path;
   }
@@ -356,7 +356,7 @@ class OutputDriverPNG extends OutputDriverGeneric {
     $dy = $sy*$scale_y;
     $this->_fixSizes($dx, $dy);
 
-    imagecopyresampled($this->_image, $image, 
+    imagecopyresampled($this->_image, $image,
                        $x, $y-$dy,
                        0, 0,
                        $dx, $dy,
@@ -442,11 +442,11 @@ class OutputDriverPNG extends OutputDriverGeneric {
     };
   }
 
-  function lineto($x, $y) { 
+  function lineto($x, $y) {
     $this->_path->addPoint(new Point($x, $y));
   }
 
-  function moveto($x, $y) { 
+  function moveto($x, $y) {
     $this->_path->clear();
     $this->_path->addPoint(new Point($x, $y));
   }
@@ -460,7 +460,7 @@ class OutputDriverPNG extends OutputDriverGeneric {
    * release all  image-dependent objects before  call to _restoreClip
    * to ensure resources are released correctly
    */
-  function restore() { 
+  function restore() {
     $this->_restoreColor();
     $this->_restoreClip();
   }
@@ -480,13 +480,13 @@ class OutputDriverPNG extends OutputDriverGeneric {
     return true;
   }
 
-  function setlinewidth($x) { 
+  function setlinewidth($x) {
     $dummy = 0;
     $this->_fixSizes($x, $dummy);
     imagesetthickness($this->_image, $x);
   }
 
-  function setrgbcolor($r, $g, $b)  { 
+  function setrgbcolor($r, $g, $b)  {
     $color = array('rgb'    => array($r, $g, $b),
                    'object' => imagecolorallocate($this->_image, $r*255, $g*255, $b*255));
     $this->_setColor($color);
@@ -510,26 +510,26 @@ class OutputDriverPNG extends OutputDriverGeneric {
 
     $utf8_string = $converter->to_utf8($text, $font['encoding']);
 
-    imagefttext($this->_image, 
-                $fontSize * $font['ascender'], 
+    imagefttext($this->_image,
+                $fontSize * $font['ascender'],
                 0,
                 $x,
                 $y,
                 $this->_getCurrentColor(),
-                TTF_FONTS_REPOSITORY.$fontFile, 
+                TTF_FONTS_REPOSITORY.$fontFile,
                 $utf8_string);
   }
-  
+
   /**
    * Note: the koefficient is just a magic number; I'll need to examine the
    * imagefttext behavior more closely
    */
-  function stringwidth($string, $name, $encoding, $size) { 
+  function stringwidth($string, $name, $encoding, $size) {
     $font = $this->_font_factory->getTrueType($name, $encoding);
     return Font::points($size, $font->stringwidth($string))*1.25;
   }
 
-  function stroke() { 
+  function stroke() {
     $this->_path->stroke($this->_transform, $this->_image, $this->_getCurrentColor());
     $this->_path = new Path;
   }

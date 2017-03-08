@@ -1,9 +1,7 @@
 <?php
+global $smarty;
 
-
-$get_inventory = new inventory();
-$get_inventory->id = $_GET['id'];
-$inventory = $get_inventory->select();
+$inventory = Inventory::select();
 
 $smarty -> assign('inventory',$inventory);
 $smarty -> assign('pageActive', 'inventory');

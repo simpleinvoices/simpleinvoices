@@ -6,7 +6,7 @@ require_once(HTML2PS_DIR.'layout.vertical.php');
 /**
  * @package HTML2PS
  * @subpackage Document
- * 
+ *
  * Class defined in this file handles the layout of "BR" HTML elements
  */
 
@@ -16,14 +16,14 @@ require_once(HTML2PS_DIR.'layout.vertical.php');
  *
  * The BRBox class dessribed the behavior of the BR HTML elements
  *
- * @link http://www.w3.org/TR/html4/struct/text.html#edef-BR HTML 4.01 Forcing a line break: the BR element 
+ * @link http://www.w3.org/TR/html4/struct/text.html#edef-BR HTML 4.01 Forcing a line break: the BR element
  */
 class BRBox extends GenericBox {
   /**
    * Create new BR element
    */
-  function BRBox() {
-    $this->GenericBox();
+  function __construct() {
+      parent::__construct();
   }
 
   function apply_clear($y, &$context) {
@@ -38,7 +38,7 @@ class BRBox extends GenericBox {
     parent::readCSS($state);
 
     /**
-     * We treat BR as a block box; as default value of 'display' property is not 'block', we should 
+     * We treat BR as a block box; as default value of 'display' property is not 'block', we should
      * set it up manually.
      */
     $this->setCSSProperty(CSS_DISPLAY, 'block');
@@ -46,18 +46,18 @@ class BRBox extends GenericBox {
     $this->_readCSS($state,
                     array(CSS_CLEAR));
 
-    $this->_readCSSLengths($state, 
+    $this->_readCSSLengths($state,
                            array(CSS_MARGIN,
                                  CSS_LINE_HEIGHT));
   }
 
   /**
    * Create new BR element
-   * 
+   *
    * @return BRBox new BR element object
    */
   function &create(&$pipeline) {
-    $box =& new BRBox();
+    $box =  new BRBox();
     $box->readCSS($pipeline->getCurrentCSSState());
     return $box;
   }
@@ -91,11 +91,11 @@ class BRBox extends GenericBox {
    *
    * @param GenericContainerBox $parent The document element which should be treated as the parent of current element
    * @param FlowContext $context The flow context containing the additional layout data
-   * 
+   *
    * @see FlowContext
    * @see GenericContainerBox
    */
-  function reflow(&$parent, &$context) {  
+  function reflow(&$parent, &$context) {
     parent::reflow($parent, $context);
 
     /**
@@ -104,7 +104,7 @@ class BRBox extends GenericBox {
     $y = $this->apply_clear($parent->_current_y, $context);
 
     /**
-     * Move current "box" to parent current coordinates. It is REQUIRED, in spite of the generated 
+     * Move current "box" to parent current coordinates. It is REQUIRED, in spite of the generated
      * box itself have no dimensions and will never be drawn, as several other routines uses box coordinates.
      */
     $this->put_left($parent->_current_x);
@@ -122,18 +122,18 @@ class BRBox extends GenericBox {
        * a new line, we need to offset current Y coordinate by the font-size value.
        */
 
-      // Note that _current_y should be modified before 'close_line' call, as it checks for 
+      // Note that _current_y should be modified before 'close_line' call, as it checks for
       // left-floating boxes, causing an issues if line bottom will be placed below
       // float while line top is above float bottom margin
       $font = $this->getCSSProperty(CSS_FONT);
       $fs = $font->size;
-      $parent->_current_y = min($this->get_bottom(), 
+      $parent->_current_y = min($this->get_bottom(),
                                 $parent->_current_y - $font->line_height->apply($fs->getPoints()));
 
       $parent->close_line($context, true);
-    } else { 
+    } else {
      /**
-       * There's at least 1 non-whitespace element in the parent line box, we do not need to use whitespace 
+       * There's at least 1 non-whitespace element in the parent line box, we do not need to use whitespace
        * height; the bottom of the line box is defined by the non-whitespace elements. Top of the new line
        * should be equal to that value.
        */
@@ -151,7 +151,7 @@ class BRBox extends GenericBox {
 
   /**
    * Render the BR element; as BR element is non-visual, we do nothing here.
-   * 
+   *
    * @param OutputDriver $driver Current output device driver object.
    *
    * @return boolean true in case the box was successfully rendered
@@ -162,11 +162,11 @@ class BRBox extends GenericBox {
 
   /**
    * As BR element generated a line break, it means that a new line box will be started
-   * (thus, any whitespaces immediately following the BR tag should not be rendered). 
+   * (thus, any whitespaces immediately following the BR tag should not be rendered).
    * To indicate this, we reset the linebox_started flag to 'false' value.
    *
-   * @param boolean $linebox_started Flag indicating that a new line box have just started and it already contains 
-   * some inline elements 
+   * @param boolean $linebox_started Flag indicating that a new line box have just started and it already contains
+   * some inline elements
    * @param boolean $previous_whitespace Flag indicating that a previous inline element was an whitespace element.
    *
    * @see GenericFormattedBox::reflow_whitespace()

@@ -27,7 +27,7 @@ class OutputDriver {
   function field_pushbuttonreset($x, $y, $w, $h) { }
   function field_pushbuttonsubmit($x, $y, $w, $h, $field_name, $value, $actionURL) { }
 
-  function field_checkbox($x, $y, $w, $h, $name, $value) { }
+  function field_checkbox($x, $y, $w, $h, $name, $value, $checked) { }
   function field_radio($x, $y, $w, $h, $groupname, $value, $checked) { }
   function field_select($x, $y, $w, $h, $name, $value, $options) { }
 
@@ -35,7 +35,7 @@ class OutputDriver {
   function font_ascender($name, $encoding) {}
 
   /**
-   * Note that positive value returned by this function 
+   * Note that positive value returned by this function
    * means offset to the BOTTOM!
    */
   function font_descender($name, $encoding) {}
@@ -54,7 +54,7 @@ class OutputDriver {
   function save() { }
 
   // Note that there's no functions for setting bold/italic style of the fonts;
-  // you must keep in mind that roman/bold/italic font variations are, in fact, different 
+  // you must keep in mind that roman/bold/italic font variations are, in fact, different
   // fonts stored in different files and it is the business of the font resolver object to
   // find the appropriate font name. Here we just re-use it.
   //

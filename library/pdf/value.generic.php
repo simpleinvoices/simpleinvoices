@@ -13,5 +13,3 @@ class CSSValue {
     // Generic method; do nothing
   }
 }
-
-?>

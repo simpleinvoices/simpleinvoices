@@ -1,7 +1,5 @@
 <?php
+global $smarty;
 
-$cron = new cron();
-$cron->domain_id=1;
-$message = $cron->run();
-
-$smarty -> assign('message', $message);
+$message = Cron::run();
+$smarty->assign('message', $message);

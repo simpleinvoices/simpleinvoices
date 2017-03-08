@@ -24,14 +24,12 @@ class Dispatcher {
 
     foreach ($this->_callbacks[$type] as $callback) {
       call_user_func($callback, $params);
-    };
+    }
   }
 
   function _check_event_type($type) {
     if (!isset($this->_callbacks[$type])) {
       die(sprintf("Invalid event type: %s", $type));
-    };
+    }
   }
 }
-
-?>

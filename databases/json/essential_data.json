@@ -102,7 +102,7 @@
             "id": "1",
             "domain_id": "0",
             "name": "core",
-            "description": "Core part of Simple Invoices - always enabled",
+            "description": "Core part of SimpleInvoices - always enabled",
             "enabled": "1"
         }
     ],
@@ -2108,7 +2108,7 @@
         {
             "id": "8",
             "name": "language",
-            "value": "en_GB",
+            "value": "en_US",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },

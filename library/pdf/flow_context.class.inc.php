@@ -20,7 +20,7 @@ class FlowContext {
     $this->_floats[0][] =& $float;
   }
 
-  function container_uid() { 
+  function container_uid() {
     return $this->container_uid[0];
   }
 
@@ -28,12 +28,12 @@ class FlowContext {
     return $this->_floats[0];
   }
 
-  // Get the bottom edge coordinate of the bottommost float in 
+  // Get the bottom edge coordinate of the bottommost float in
   // current formatting context
   //
   // @return null in case of no floats exists in current context
   // numeric coordinate value otherwise
-  // 
+  //
   function float_bottom() {
     $floats =& $this->current_floats();
 
@@ -48,7 +48,7 @@ class FlowContext {
     return $bottom;
   }
 
-  // Calculates the leftmost x-coordinate not covered by floats in current context 
+  // Calculates the leftmost x-coordinate not covered by floats in current context
   // at the given level (y-coordinate)
   //
   // @param $x starting X coordinate (no point to the left of this allowed)
@@ -66,12 +66,12 @@ class FlowContext {
       if ($float->getCSSProperty(CSS_FLOAT) == FLOAT_LEFT) {
         // Check if this float contains given Y-coordinate
         //
-        // Note that top margin coordinate is inclusive but 
+        // Note that top margin coordinate is inclusive but
         // bottom margin coordinate is exclusive! The cause is following:
         // - if we have several floats in one line, their top margin edge Y coordinates will be equal,
         //   so we must use agreater or equal sign to avod placing all floats at one X coordinate
-        // - on the other side, if we place one float under the other, the top margin Y coordinate 
-        //   of bottom float will be equal to bottom margin Y coordinate of the top float and 
+        // - on the other side, if we place one float under the other, the top margin Y coordinate
+        //   of bottom float will be equal to bottom margin Y coordinate of the top float and
         //   we should NOT offset tho bottom float in this case
         //
 
@@ -81,11 +81,11 @@ class FlowContext {
         };
       };
     };
-    
+
     return $x;
   }
 
-  // Calculates position of left floating box (taking into account the possibility 
+  // Calculates position of left floating box (taking into account the possibility
   // of "wrapping" float to next line in case we have not enough space at current level (Y coordinate)
   //
   // @param $parent reference to a parent box
@@ -99,9 +99,9 @@ class FlowContext {
     // <div style="float: left; background-color: green; height: 40px; width: 100px;">T</div>
     // <div style="float: left; background-color: yellow; height: 20px; width: 50px;">T</div>
     // <div style="float: left; background-color: cyan; height: 20px; width: 50px;">T</div>
-    // in this case the third float will be rendered directly under the second, so only the 
+    // in this case the third float will be rendered directly under the second, so only the
     // second float should be cleared
-    
+
     $clear = 0;
 
     $floats =& $this->current_floats();
@@ -114,11 +114,11 @@ class FlowContext {
     };
 
     // Note that the sort function SHOULD NOT maintain key-value assotiations!
-    rsort($float_bottoms); 
-   
+    rsort($float_bottoms);
+
     do {
       $x  = $this->float_left_x($parent->get_left(), $y);
-      
+
       // Check if current float will fit into the parent box
       // OR if there's no parent boxes with constrained width (it will expanded in this case anyway)
 
@@ -127,7 +127,7 @@ class FlowContext {
       if ($parent->get_right() + EPSILON >= $x + $width ||
           $parent->mayBeExpanded()) {
 
-        // Will fit; 
+        // Will fit;
         // Check if current float will intersect the existing left-floating box
         //
         $x1 = $this->float_right_x($parent->get_right(), $y);
@@ -141,7 +141,7 @@ class FlowContext {
 
       // No, float does not fit at current level, let's try to 'clear' some previous floats
       $clear++;
-      
+
       // Check if we've cleared all existing floats; the loop will be terminated in this case, of course,
       // but we can get a notice/warning message if we'll try to access the non-existing array element
       if ($clear <= count($floats)) { $y = min( $y, $float_bottoms[$clear-1] ); };
@@ -152,12 +152,12 @@ class FlowContext {
     $x = $parent->get_left();
   }
 
-  // Get the right edge coordinate of the rightmost float in 
+  // Get the right edge coordinate of the rightmost float in
   // current formatting context
   //
   // @return null in case of no floats exists in current context
   // numeric coordinate value otherwise
-  // 
+  //
   function float_right() {
     $floats =& $this->current_floats();
 
@@ -172,7 +172,7 @@ class FlowContext {
     return $right;
   }
 
-  // Calculates the rightmost x-coordinate not covered by floats in current context 
+  // Calculates the rightmost x-coordinate not covered by floats in current context
   // at the given level (y-coordinate)
   //
   // @param $x starting X coordinate (no point to the right of this allowed)
@@ -190,12 +190,12 @@ class FlowContext {
       if ($float->getCSSProperty(CSS_FLOAT) == FLOAT_RIGHT) {
         // Check if this float contains given Y-coordinate
         //
-        // Note that top margin coordinate is inclusive but 
+        // Note that top margin coordinate is inclusive but
         // bottom margin coordinate is exclusive! The cause is following:
         // - if we have several floats in one line, their top margin edge Y coordinates will be equal,
         //   so we must use agreater or equal sign to avod placing all floats at one X coordinate
-        // - on the other side, if we place one float under the other, the top margin Y coordinate 
-        //   of bottom float will be equal to bottom margin Y coordinate of the top float and 
+        // - on the other side, if we place one float under the other, the top margin Y coordinate
+        //   of bottom float will be equal to bottom margin Y coordinate of the top float and
         //   we should NOT offset tho bottom float in this case
         //
 
@@ -205,11 +205,11 @@ class FlowContext {
         };
       };
     };
-    
+
     return $x;
   }
 
-  // Calculates position of right floating box (taking into account the possibility 
+  // Calculates position of right floating box (taking into account the possibility
   // of "wrapping" float to next line in case we have not enough space at current level (Y coordinate)
   //
   // @param $parent reference to a parent box
@@ -223,9 +223,9 @@ class FlowContext {
     // <div style="float: left; background-color: green; height: 40px; width: 100px;">T</div>
     // <div style="float: left; background-color: yellow; height: 20px; width: 50px;">T</div>
     // <div style="float: left; background-color: cyan; height: 20px; width: 50px;">T</div>
-    // in this case the third float will be rendered directly under the second, so only the 
+    // in this case the third float will be rendered directly under the second, so only the
     // second float should be cleared
-    
+
     $clear = 0;
 
     $floats =& $this->current_floats();
@@ -238,18 +238,18 @@ class FlowContext {
     };
 
     // Note that the sort function SHOULD NOT maintain key-value assotiations!
-    rsort($float_bottoms); 
+    rsort($float_bottoms);
 
     do {
       $x  = $this->float_right_x($parent->get_right(), $y);
-      
+
       // Check if current float will fit into the parent box
       // OR if the parent box have width: auto (it will expanded in this case anyway)
       //
       if ($parent->get_right() + EPSILON > $x ||
           $parent->width == WIDTH_AUTO) {
 
-        // Will fit; 
+        // Will fit;
         // Check if current float will intersect the existing left-floating box
         //
         $x1 = $this->float_left_x($parent->get_left(), $y);
@@ -261,7 +261,7 @@ class FlowContext {
 
       // No, float does not fit at current level, let's try to 'clear' some previous floats
       $clear++;
-      
+
       // Check if we've cleared all existing floats; the loop will be terminated in this case, of course,
       // but we can get a notice/warning message if we'll try to access the non-existing array element
       if ($clear <= count($floats)) { $y = min( $y, $float_bottoms[$clear-1] ); };
@@ -272,7 +272,7 @@ class FlowContext {
     $x = $parent->get_right();
   }
 
-  function FlowContext() {
+  function __construct() {
     $this->absolute_positioned = array();
     $this->fixed_positioned = array();
 
@@ -334,7 +334,7 @@ class FlowContext {
     $size = count($floats);
     for ($i=0; $i<$size; $i++) {
       if ($floats[$i]->contains_point_margin($x, $y)) {
-        return $floats[$i]; 
+        return $floats[$i];
       }
     }
 

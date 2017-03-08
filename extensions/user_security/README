@@ -1,0 +1,32 @@
+Adds company_name_item, session_timeout and password constraint variables
+to si_system_defaults table, adds username to the si_user table, and
+defines altername help icons for all templates.
+
+The username will be initialized to the email setting for the user
+thus preserving the existing log on identity for all users. However,
+the new logic allows a user to have a username that does not have
+to be in the form of an email address. This change also eliminates
+the unique composite index, UnqEMailPwd, which would prevent an
+email with the same password for another user. This has no value and
+could in some cases contribute to password discovery.
+
+The company_name_item allows the user to change the labeling on the
+logon screen to show a company name rather than the default
+SimpleInvoices value.
+
+The session_timeout allows a user specified value to control the
+elapsed time before an inactive user session times out. The default
+timeout period will be set to 15 minutes. As long as users make entries
+within this limit, their session timeout interval will be renewed to
+another 15 minutes. If the default is not sufficient, you can change it
+to any value from 10 to 999 minutes.
+
+The password constraint fields are set to require a password minimum
+length of 8 characters and that a password begin with an alpha character,
+contain one uppercase, one lowercase, one numeric and one special
+character. These constraints can be changed via the System Preferences
+screen with the exception that the minimum password length cannot be
+less than 6-characters and must begin with an alpha character.
+
+The images for the item level help, both regular and required are
+changed to be less prominent than the historic images.

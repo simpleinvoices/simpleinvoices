@@ -1,5 +1,4 @@
 <?php
 
-$ni = new invoice();
-$ni->id = $_GET['id'];
-$ni->recur();
+Invoice::recur($_GET['id']);
+

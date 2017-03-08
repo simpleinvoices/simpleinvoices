@@ -1,14 +1,15 @@
 <?php
 /*
-* Script: manage.php
-* 	Custom fields manage page
-*
-* License:
-*	 GPL v3 or above
-*
-* Website:
-* 	http://www.simpleinvoices.org
+ * Script: manage.php
+ *     Custom fields manage page
+ *
+ * License:
+ *     GPL v3 or above
+ *
+ * Website:
+ *     http://www.simpleinvoices.org
  */
+global $auth_session, $dbh, $smarty;
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
@@ -21,14 +22,14 @@ $sth = dbQuery($sql, ':domain_id', $auth_session->domain_id) or die(end($dbh->er
 $cfs = null;
 
 $number_of_rows = 0;
+if ($number_of_rows) {} // eliminates unused warning
 for($i=0; $cf = $sth->fetch();$i++) {
-	$cfs[$i] = $cf;
-	$cfs[$i]['filed_name'] = get_custom_field_name($cf['cf_custom_field']);
-	$number_of_rows = $i;
+    $cfs[$i] = $cf;
+    $cfs[$i]['filed_name'] = get_custom_field_name($cf['cf_custom_field']);
+    $number_of_rows = $i;
 }
 
 $smarty -> assign("cfs",$cfs);
 
 $smarty -> assign('pageActive', 'custom_field');
 $smarty -> assign('active_tab', '#setting');
-?>
