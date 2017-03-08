@@ -105,7 +105,10 @@ class NetIncomeReport {
                     $invoice->addItem($py['amount'], $py['description'],
                                       ($custom_flags_enabled ? $py['custom_flags'] : null));
                 }
-                $invoices[] = $invoice;
+
+                if ($invoice->total_amount < $invoice->total_payments) $invoice->total_payments = $invoice->total_amount;
+                if ($invoice->total_amount < $invoice->total_period_payments) $invoice->total_period_payments = $invoice->total_amount;
+                if ($invoice->total_amount != 0) $invoices[] = $invoice;
             }
         }
         return $invoices;
