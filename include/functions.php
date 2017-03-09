@@ -35,7 +35,7 @@ function getCustomPath($name, $mode = 'template') {
     $out = NULL;
     if ($mode == 'template') {
         if (file_exists("{$my_custom_path}default_template/{$name}.tpl")) {
-            $out = ".{$my_custom_path}default_template/{$name}.tpl";
+            $out = "{$my_custom_path}default_template/{$name}.tpl";
         } elseif (file_exists("templates/default/{$name}.tpl")) {
             $out = "templates/default/{$name}.tpl";
         }
