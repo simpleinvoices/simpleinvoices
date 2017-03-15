@@ -5,7 +5,7 @@
 *    Russian translation file
 *
 * Last edited:
-*    2014-06-09
+*    2016-10-04
 *
 * Author:
 *    nurkamol@gmail.com
@@ -91,7 +91,7 @@ $LANG['credit_card_number_new'] = "Новый номер кредитной ка
 $LANG['credits'] = "Кредиты";//1
 $LANG['currency_code'] = "Код валюты";//1
 $LANG['currency_sign'] = "Знак валюты";//1
-$LANG['currency_sign_non_dollar'] = "Евро, Фунты, валюта без значка $ - читайте здесь";//1
+$LANG['currency_sign_non_dollar'] = "Евро, Фунты, валюта без значка \$ - читайте здесь";//1
 $LANG['custom_field'] = "Пользовательское поле";//1
 $LANG['custom_field1'] = "Пользовательское поле 1";//1
 $LANG['custom_field2'] = "Пользовательское поле 2";//1
@@ -105,6 +105,7 @@ $LANG['customer'] = "Клиент";//1
 $LANG['customer_account'] = "Счет клиента";//1
 $LANG['customer_add'] = "Добавить нового клиента";//1
 $LANG['customer_contact'] = "Контакты клиента";//1
+$LANG['customer_department'] = "отдел";//1
 $LANG['customer_details'] = "Подробней о клиенте";//1
 $LANG['customer_edit'] = "Редактировать клиента";//1
 $LANG['customer_id'] = "ID клиента";//1

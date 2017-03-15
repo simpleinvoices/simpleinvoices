@@ -49,8 +49,6 @@ class index
        $domain_id = domain_id::get($domain_id);
         $next = index::next($node, $sub_node, $domain_id, $sub_node_2);
 
-
-        
         if ($next == 1)
         {
 
@@ -78,7 +76,6 @@ class index
         return $next;
 
     }
-
 
     public static function rewind($node, $sub_node=0, $domain_id='', $sub_node_2=0)
     {
@@ -110,7 +107,6 @@ class index
 class index
 {
 
-	
     public static function select($node, $sub_node="", $sub_node_2="")
     {
 
@@ -133,7 +129,7 @@ class index
                 and
                     node = :node
                ".$subnode.$subnode2;
-        
+
         $sth = $db->query($sql,':node',$node,':domain_id',$auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
  
         $index = $sth->fetch();
@@ -142,7 +138,7 @@ class index
 	{
         	$index['id'] = '0';
 	}
-	
+
         return $index['id'];
 
    }
@@ -166,7 +162,7 @@ class index
         {
             $subnode2 = " and sub_node_2 = ".$sub_node_2; 
         }
-    
+
         $sql = "select 
                     id 
                 from 
@@ -176,11 +172,11 @@ class index
                 and
                     node = :node
                ".$subnode.$subnode2;
-        
+
         $sth = $db->query($sql,':node',$node,':domain_id',$auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
- 
+
         $index = $sth->fetch();
-        
+
         //this handles if numbering by biller turned on after x invoices already created - 
         if($index['id'] == "" AND $defaults['invoice_numbering_by_biller'] == "1")
         {
@@ -202,7 +198,7 @@ class index
 	if($index['id'] == "")
         {
             $id = "1";
-        
+
         } else {
             
             $id = $index['id'] + 1;
@@ -214,22 +210,20 @@ class index
 
     public static function increment($node,$sub_node="",$sub_node_2="")
     {
-    
 
         $next = index::next($node,$sub_node,$sub_node_2);
         $current = index::select($node,$sub_node,$sub_node_2);
 	#echo "next:".$next."current:".$current;
 	$defaults = getSystemDefaults();
-        
+
 	global $db;
         global $auth_session;
-        
-        
+
      #   if ($sub_node !="") 
      #   {
      #       $subnode = "and sub_node = ".$sub_node; 
      #   }
-        
+
         if ($next == '1' OR ($current = '0' AND ($next != $current +1)) )
         {
 
@@ -259,7 +253,7 @@ class index
 					sub_node,
 					sub_node_2,
 					domain_id
-				) 
+				)
 				VALUES 
 				(
 					:id, 
@@ -274,7 +268,7 @@ class index
         } else {
 
 		if ($defaults['invoice_numbering_by_biller'] == '0')
-		{	
+		{
 		    $sql ="update
 				si_index 
 			    set 
@@ -302,16 +296,15 @@ class index
 		           and 	
 				sub_node_2 = :sub_node_2;";
 		}
-	
+
 	}
 
 	if ($defaults['invoice_numbering_by_biller'] == '0')
-	{	
+	{
 		$sth = $db->query($sql,':id',$next,':node',$node,':sub_node', $sub_node,':domain_id',$auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
 	} else {
 		$sth = $db->query($sql,':id',$next,':node',$node,':sub_node', $sub_node,':sub_node_2',$sub_node_2,':domain_id',$auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
 	}
-
 
         return $next;
 
@@ -323,20 +316,20 @@ class index
 
         global $db;
         global $auth_session;
-        
+
         if ($sub_node !="")
         {
-            $subnode = "and sub_node = ".$sub_node; 
+            $subnode = "and sub_node = ".$sub_node;
         }
         if ($sub_node_2 !="")
         {
-            $subnode2 = "and sub_node_2 = ".$sub_node_2; 
+            $subnode2 = "and sub_node_2 = ".$sub_node_2;
         }
 
         $sql ="update
-                    si_index 
+                    si_index
                 set 
-                    id = (id - 1) 
+                    id = (id - 1)
                 where
                     node = :node
                 and
@@ -344,7 +337,6 @@ class index
                 ".$subnode.$subnode2;
 
         $sth = $db->query($sql,':node',$node,':domain_id',$auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
-
 
         return $sth;
 

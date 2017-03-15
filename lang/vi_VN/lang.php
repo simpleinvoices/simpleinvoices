@@ -5,7 +5,7 @@
 * 	Vietnamese translation file
 *
 * Last edited:
-*    2014-06-09
+*    2016-10-04
 *
 * License:
 *	 GPL v3 or above
@@ -89,7 +89,7 @@ $LANG['credit_card_number_new'] = "Tạo Số thẻ tín dụng";//1
 $LANG['credits'] = "Thẻ tín dụng";//1
 $LANG['currency_code'] = "Mã đồng tiền";//1
 $LANG['currency_sign'] = "Ký hiệu đồng tiền";//1
-$LANG['currency_sign_non_dollar'] = "Euro, Pound, dấu non-$ vui lòng đọc";//1
+$LANG['currency_sign_non_dollar'] = "Euro, Pound, dấu non-\$ vui lòng đọc";//1
 $LANG['custom_field'] = "Trường mở rộng";//1
 $LANG['custom_field1'] = "Trường dữ liệu mỡ rộng 1";//1
 $LANG['custom_field2'] = "Trường dữ liệu mỡ rộng 2";//1
@@ -103,6 +103,7 @@ $LANG['customer'] = "Khách hàng";//1
 $LANG['customer_account'] = "Thông tin Khách hàng";//1
 $LANG['customer_add'] = "Thêm mới Khách hàng";//1
 $LANG['customer_contact'] = "Người đại diện";//1
+$LANG['customer_department'] = "ngành";//1
 $LANG['customer_details'] = "Chi tiết Khách hàng";//1
 $LANG['customer_edit'] = "Sửa Khách hàng";//1
 $LANG['customer_id'] = "Mã Khách hàng";//1
@@ -207,14 +208,14 @@ $LANG['help_currency_code'] = "Currency code is the 3 letter abbreviation for yo
 $LANG['help_custom_fields'] = "Đây là trường tự chọn 'trường mỡ rộng'. Nghĩa là bạn có thể sửa tên nhãn mà bạn thích (ie. Barcode, Tax number, MSN, etc...). <br /><br />Để sửa thông tin 'trường mỡ rộng' vui lòng chọn o menu ‘Trường dữ liệu mỡ rộng’ Cài Đặt.";//1
 $LANG['help_customer_contact'] = "Các 'Đại diện Liên hệ' hoặc 'Khách Hàng' ô này cho phép bạn chỉ định một liên hệ trong kinh doanh khách hàng của bạn. <br /> <br /> này rất hữu ích nếu bạn có nhiều nhân viên của khách hàng và bạn cần phải trực tiếp chỉ định riêng hoá đơn hoá đơn này cho 1 người đại diện. <br /> <br /> Ví dụ: Khách hàng 'Springfield Power Plant', bạn có thể muốn chỉ định ông Burns (hoặc Smithers) là người đại diện của khách hàng này vậy họ là những người sẽ nhận được hóa đơn. <br /> <br /> Vì vậy, hóa đơn này của khách hàng: Springfield Power Plant <br /> được Đại diện: <br /> Ông Burns.";//1
 $LANG['help_database_patches'] = "<b>Database patches need to be applied</b><br />There are database patches that need to be applied, please select 'Database Upgrade Manager' from the Options menu and follow the instructions.<br /><br />The 'Database Upgrade Manager' is how Simple Invocies manages modification to the structure of the Simple Invoices database. With each new release there may be 'Database patches' that need to be applied. Database Upgrade Manage looks after these database patches.<br /><br />Database patches are individual modifications to the Simple Invoices database. With a new release there may be multiple patches that need to be applied.";//0
-$LANG['help_default_invoice_template_text'] = "The value you enter into the detault invoice template MUST be the actual folder name of the template you wish to select.  The invoice templates folders are located in (./templates/invoices/)<br /><br />";//0
+$LANG['help_default_invoice_template_text'] = "The value you enter into the default invoice template MUST be the actual folder name of the template you wish to select.  The invoice templates folders are located in (./templates/invoices/)<br /><br />";//0
 $LANG['help_delete'] = "By enabling Delete, you will be able to delete any invoices you no longer want via the Quick View of that invoice.<br /><br />To delete an invoice, enable this option, then go to the Manage Invoice page and select the Quick View for the invoice you wish to delete.  In the Quick View screen there will now be a delete option in the actions menu.  Click this button and follow the prompts - Your invoice will now be deleted.<br /><br />Note: Currently only invoices can be deleted, but in the near future this will be extended to all the other sections (ie. billers, customers, etc..)";//0
 $LANG['help_email_bcc'] = "This field is not mandatory and gets the default value from the Billers email address.<br /><br />It's recommended that you BCC yourself onto this email so that you also get a copy of it.  This way you know for sure that the email has been correctly sent and you always have a backup copy of the email.<br /><br /><i>Note: You can add multiple email addresses here - just use either , or ; to split the addresses</i>";//0
 $LANG['help_email_cc'] = "This field is not mandatory.  Here you can specify any email address you want to CC but cannot add more than 1 email address in this field<br /><br /><i>Note: You can add multiple email addresses here - just use either , or ; to split the addresses</i>";//0
 $LANG['help_email_from'] = "This field is a mandatory field and gets the default value from the Billers email address.  You can change this email address as you require but cannot add more than 1 email address in this field<br /><br /><i>Note: There can be only 1 email address in this field</i>";//0
 $LANG['help_email_to'] = "This field is a mandatory field and gets the default value from the Customers email address.  You can change this email address as you require<br /><br /><i>Note: You can add multiple email addresses here - just use either , or ; to split the addresses</i>";//0
-$LANG['help_insert_biller_text'] = "To select no logo please select '_default_blank_logo.png' from the list.<br /><br />To add additional logos into Simple Invoices, copy the logo file into the logo directory in the Simple Invoices folder.";//0
-$LANG['help_inv_pref_currency_sign'] = "This is the currency symbol that will be used through-out the invoice. <br /><br /><b>Note:</b> Euro, Pound etc.. please use the html code for you currency sign in this field.  Refer to the list of html codes on the following website for your non $ currency sign <a href='http://www.ascii.cl/htmlcodes.htm'>http://www.ascii.cl/htmlcodes.htm</a>.  <br /><br />This is required so that PDF can work correctly with non $ symbols<br /><br /> &#38;#163; is the html code for the Pound,<br /> &#38;#8364; for the Euro, etc..";//0
+$LANG['help_insert_biller_text'] = "To select no logo please select '_default_blank_logo.png' from the list.<br /><br />To add additional logos into Simple Invoices, copy the logo file into the logo directory at templates/invoices/logos in the Simple Invoices folder.";//0
+$LANG['help_inv_pref_currency_sign'] = "This is the currency symbol that will be used through-out the invoice. <br /><br /><b>Note:</b> Euro, Pound etc.. please use the html code for your currency sign in this field.  Refer to the list of html codes on the following website for your non \$ currency sign <a href='http://www.ascii.cl/htmlcodes.htm'>http://www.ascii.cl/htmlcodes.htm</a>.  <br /><br />This is required so that PDF can work correctly with non \$ symbols<br /><br /> &#38;#163; is the html code for the Pound,<br /> &#38;#8364; for the Euro, etc..";//0
 $LANG['help_inv_pref_description'] = "This is the name of the set of preference - it's not used on the invoice itself, just in the creation of the invoice when you select from the drop down list which Invoice Preference you wish to use.";//0
 $LANG['help_inv_pref_invoice_detail_heading'] = "This is what will appear as the heading of the footer/details section of the invoice.";//0
 $LANG['help_inv_pref_invoice_detail_line'] = "This is the text that appear under the details/footer heading. Normally used to define payment terms etc.";//0
@@ -250,7 +251,7 @@ $LANG['help_tax_rate_sign'] = "A tax can be either a percentage based (ie. Sales
 $LANG['help_text'] = "<b>Warning</b><br /><br />Please backup your Simple Invoices database before running the database update, just incase anything bad happens.<br /><br />To backup the database, select 'Backup Database' from the Options menu, or use phpMyAdmin(if you have this installed) to back up the database.";//0
 $LANG['help_user_role'] = "There are 3 roles available <br /><br />Administrator:<br />which has access to all of Simple Invoices<br /><br />User:<br />which has read/write acess to all of Simple Invoices but with no access to the Settings menu <br /><br />Viewer:<br />which has read-only version of User.";//0
 $LANG['help_what_are_custom_fields'] = "Custom Fields are special fields in billers, products, customers, and invoices that you can label as whatever you want.<br /><br />Wish there was a Tax ID field in biller, just go to the Custom Fields page and define one of the blank Biller Custom Fields as Tax ID.<br /><br />Now when you go to edit a Biller there'll be a new field there called Tax ID or whatever you specified it as.";//0
-$LANG['help_wheres_the_edit_button'] = "Trong trang này không có nút 'sửa thông tin'. Lý do là để quản lý lưu vết việc thu tiền của hệ thống này.<br /><br />Nếu bạn đã nhập sai số tiền thu tốt nhất bạn nên nhập lại 1 phiếu khác đê điếu chỉnh<br /><br />Chỉnh như thế nào?<br /> Bạn làm phiếu mới với số âm như phiếu cũ.<br /><br />Ví dụ.<br />Nếu bạn đã nhập $110<br />nhưng số bạn muốn nhập là $1100<br />để điều chỉnh bạn nhập phiếu thu mới với số -$110 với cùng số hóa đơn và sau đó bạn nhập với phiếu khác đúng $1100";//1
+$LANG['help_wheres_the_edit_button'] = "Trong trang này không có nút 'sửa thông tin'. Lý do là để quản lý lưu vết việc thu tiền của hệ thống này.<br /><br />Nếu bạn đã nhập sai số tiền thu tốt nhất bạn nên nhập lại 1 phiếu khác đê điếu chỉnh<br /><br />Chỉnh như thế nào?<br /> Bạn làm phiếu mới với số âm như phiếu cũ.<br /><br />Ví dụ.<br />Nếu bạn đã nhập \$110<br />nhưng số bạn muốn nhập là \$1100<br />để điều chỉnh bạn nhập phiếu thu mới với số -$110 với cùng số hóa đơn và sau đó bạn nhập với phiếu khác đúng \$1100";//1
 $LANG['hide_details'] = "ẩn chi tiết";//1
 $LANG['home'] = "Trang Chính";//1
 $LANG['id'] = "Mã";//1

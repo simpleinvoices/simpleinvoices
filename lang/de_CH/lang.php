@@ -8,7 +8,7 @@
 *	 Herz Hermann (heart1010@gmail.com)
 *
 * Last edited:
-*    2014-05-25
+*    2016-10-04
 *
 * License:
 *	 GPL v3 or above
@@ -92,7 +92,7 @@ $LANG['credit_card_number_new'] = "Neue Kreditkartennummer";//1
 $LANG['credits'] = "Danksagungen";//1
 $LANG['currency_code'] = "Währungscode";//1
 $LANG['currency_sign'] = "Währungszeichen";//1
-$LANG['currency_sign_non_dollar'] = "Euro, Pfund, kein-$ Zeichen bitte, weitere Infos";//1
+$LANG['currency_sign_non_dollar'] = "Euro, Pfund, kein-\$ Zeichen bitte, weitere Infos";//1
 $LANG['custom_field'] = "Benutzerdefiniertes Feld";//1
 $LANG['custom_field1'] = "Benutzerdefiniertes Feld 1";//1
 $LANG['custom_field2'] = "Benutzerdefiniertes Feld 2";//1
@@ -106,6 +106,7 @@ $LANG['customer'] = "Kunde";//1
 $LANG['customer_account'] = "Kundenkonto";//1
 $LANG['customer_add'] = "Neuen Kunden hinzufügen";//1
 $LANG['customer_contact'] = "Kundenkontakt (z. Hdn.)";//1
+$LANG['customer_department'] = "Abteilung";//1
 $LANG['customer_details'] = "Kundendetails";//1
 $LANG['customer_edit'] = "Kunden bearbeiten";//1
 $LANG['customer_id'] = "Kunden-Nr";//1
@@ -216,8 +217,8 @@ $LANG['help_email_bcc'] = "Dieses Feld ist nicht zwingend und erhält seinen Wer
 $LANG['help_email_cc'] = "Dieses Feld ist nicht zwingend. Sie können nicht mehr als eine -1- Emailadresse im CC Feld angeben.<br /><br />Hinweis: Es ist nicht möglich mehrere Emailadressen durch , oder ; zu trennen!";//1
 $LANG['help_email_from'] = "Dieses Feld ist zwingend. Das Feld erhält standardmäßig seinen Wert über Einstellungen in der Gläubiger Emailadresse. Sie können die Adresse ändern aber nicht mehr als eine -1- Emailadresse im Feld eintragen.<br /><br />Hinweis: Es ist nicht möglich mehrere Emailadressen durch , oder ; zu trennen!";//1
 $LANG['help_email_to'] = "Dieses Feld ist zwingend. Das Feld erhält standardmäßig seinen Wert über Einstellungen in der Kunden Emailadresse. Sie können die Adresse bei Bedarf ändern.<br /><br />Hinweis: Sie können mehrere Emailadressen verwenden wenn Sie diese per , oder ; trennen.";//1
-$LANG['help_insert_biller_text'] = "To select no logo please select '_default_blank_logo.png' from the list.<br /><br />To add additional logos into Simple Invoices, copy the logo file into the logo directory in the Simple Invoices folder.";//1
-$LANG['help_inv_pref_currency_sign'] = "Dies ist das Währungssymbol das auf dem Rechnungsbeleg erscheint.<br /><br /><b>Hinweis:</b>Euro, Pfund etc. ... bitte verwenden Sie den HTML Code für diese Währungszeichen. Bitte sehen Sie auf der folgenden Liste nach dem entsprechenden Code: <a href='http://www.ascii.cl/htmlcodes.htm'>http://www.ascii.cl/htmlcodes.htm</a>.<br /><br />Der HTML Code wird benötigt damit die PDF Erstellung mit nicht $ Dollarzeichen funktioniert.<br /><br /> Beispiel:  &#38;#163; ist der HTML Code für  Pound,<br /> &#38;#8364; für Euro etc..";//1
+$LANG['help_insert_biller_text'] = "To select no logo please select '_default_blank_logo.png' from the list.<br /><br />To add additional logos into Simple Invoices, copy the logo file into the logo directory at templates/invoices/logos in the Simple Invoices folder.";//1
+$LANG['help_inv_pref_currency_sign'] = "Dies ist das Währungssymbol das auf dem Rechnungsbeleg erscheint.<br /><br /><b>Hinweis:</b>Euro, Pfund etc. ... bitte verwenden Sie den HTML Code für diese Währungszeichen. Bitte sehen Sie auf der folgenden Liste nach dem entsprechenden Code: <a href='http://www.ascii.cl/htmlcodes.htm'>http://www.ascii.cl/htmlcodes.htm</a>.<br /><br />Der HTML Code wird benötigt damit die PDF Erstellung mit nicht \$ Dollarzeichen funktioniert.<br /><br /> Beispiel:  &#38;#163; ist der HTML Code für  Pound,<br /> &#38;#8364; für Euro etc..";//1
 $LANG['help_inv_pref_description'] = "Präferenzbezeichnung - diese wird nicht auf der Rechnung verwendet sondern dient lediglich zur Auswahl bei der Rechnungserstellung. Dieser Name erscheint später in der Auswahlliste.";//1
 $LANG['help_inv_pref_invoice_detail_heading'] = "Dies wird als Überschrift des Fußbereichs des Belegs erscheinen.";//1
 $LANG['help_inv_pref_invoice_detail_line'] = "Dies ist der Text der in den Fußnoten erscheint. Gebräuchlich um die Zahlungsbedingungen etc. mitzuteilen";//1

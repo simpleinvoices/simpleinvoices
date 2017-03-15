@@ -89,7 +89,7 @@ class email
 			case "invoice":
 			{
 
-				// Create succes message
+				// Create success message
 				$message  = "<meta http-equiv=\"refresh\" content=\"2;URL=index.php?module=invoices&amp;view=manage\">";
 				$message .= "<br />$this->attachment has been emailed";
 
@@ -98,7 +98,7 @@ class email
 			case "statement":
 			{
 
-				// Create succes message
+				// Create success message
 				$message  = "<meta http-equiv=\"refresh\" content=\"2;URL=index.php?module=statement&amp;view=index\">";
 				$message .= "<br />$this->attachment has been emailed";
 
@@ -107,15 +107,16 @@ class email
 			case "cron":
 			{
 
-				// Create succes message
+				// Create success message
 				$message .= "<br />Cron email for today has been sent";
 
 				break;
 			}
 			case "cron_invoice":
+			default:
 			{
 
-				// Create succes message
+				// Create success message
 				$message .= "$this->attachment has been emailed";
 
 				break;

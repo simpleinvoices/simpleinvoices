@@ -20,34 +20,36 @@
 				<th>{$LANG.customer_name}</th>
 				<td>{$customer.name}</td>
 				<td class="td_sep"></td>
-				<th>{$LANG.phone}</th>
-				<td>{$customer.phone|htmlsafe}</td>
+				<th>{$LANG.customer_department}</th>
+				<td>{$customer.department|htmlsafe}</td>
 			</tr>
 			<tr>
 				<th>{$LANG.attention_short}</th>
 				<td>{$customer.attention|htmlsafe}</td>
 				<td class="td_sep"></td>
-				<th>{$LANG.mobile_phone}</th>
-				<td>{$customer.mobile_phone|htmlsafe}</td>
+				<th>{$LANG.phone}</th>
+				<td>{$customer.phone|htmlsafe}</td>
 			</tr>
 			<tr>
 				<th>{$LANG.street}</th>
 				<td>{$customer.street_address|htmlsafe}</td>
 				<td class="td_sep"></td>
-				<th>{$LANG.fax}</th>
-				<td>{$customer.fax|htmlsafe}</td>
+				<th>{$LANG.mobile_phone}</th>
+				<td>{$customer.mobile_phone|htmlsafe}</td>
 			</tr>
 			<tr>
 				<th>{$LANG.street2}</th>
 				<td>{$customer.street_address2|htmlsafe}</td>
 				<td class="td_sep"></td>
-				<th>{$LANG.email}</th>
-				<td><a href="mailto:{$customer.email|htmlsafe}">{$customer.email|htmlsafe}</a></td>
+				<th>{$LANG.fax}</th>
+				<td>{$customer.fax|htmlsafe}</td>
 			</tr>
 			<tr>
 				<th>{$LANG.city}</th>
 				<td>{$customer.city|htmlsafe}</td>
-				<td colspan="3"></td>
+				<td class="td_sep"></td>
+				<th>{$LANG.email}</th>
+				<td><a href="mailto:{$customer.email|htmlsafe}">{$customer.email|htmlsafe}</a></td>
 			</tr>
 			<tr>
 				<th>{$LANG.zip}</th>
@@ -130,7 +132,7 @@
 		    </table>
 		</div>
         </div>
-	
+
 	<div id="section-3" class="fragment">
 		<div class="si_cust_invoices">
 		    <table>
@@ -236,6 +238,10 @@
 			<td><input type="text" name="name" value="{$customer.name|htmlsafe}" size="50" id="name" class="validate[required]" /></td>
 		</tr>
 		<tr>
+			<th>{$LANG.customer_department}</th>
+			<td><input type="text" name="department" value="{$customer.department|htmlsafe}" size="50" id="department" /></td>
+		</tr>
+		<tr>
 			<th>{$LANG.attention_short}
 				<a rel="index.php?module=documentation&amp;view=view&amp;page=help_customer_contact" href="#" class="cluetip" title="{$LANG.customer_contact}">
 					<img src="./images/common/help-small.png" alt="" />
@@ -249,7 +255,7 @@
 		</tr>
 		<tr>
 			<th>{$LANG.street2}
-				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_street2" title="{$LANG.street2}"> 
+				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_street2" title="{$LANG.street2}">
 					<img src="./images/common/help-small.png" alt="" />
 				</a>
 			</th>
@@ -337,7 +343,7 @@
 					href="#"
 					rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 					title="{$LANG.custom_fields}"
-				> 
+				>
 			 <img src="./images/common/help-small.png" alt="" /></a>
 			</th>
 			<td>
@@ -351,7 +357,7 @@
 					href="#"
 					rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 					title="{$LANG.custom_fields}"
-				> 
+				>
 			 <img src="./images/common/help-small.png" alt="" /></a>
 			</th>
 			<td>
@@ -379,7 +385,7 @@
 					href="#"
 					rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
 					title="{$LANG.custom_fields}"
-				> 
+				>
 			 <img src="./images/common/help-small.png" alt="" /></a>
 			</th>
 			<td>
@@ -400,7 +406,7 @@
 			</td>
 		</tr>
 	</table>
-		
+
 	<div class="si_toolbar si_toolbar_form">
 		<button type="submit" class="positive" name="save_customer" value="{$LANG.save_customer}"><img class="button_img" src="./images/common/tick.png" alt="" />{$LANG.save}</button>
 		<a href="./index.php?module=customers&amp;view=manage" class="negative"><img src="./images/common/cross.png" alt="" />{$LANG.cancel}</a>
@@ -411,4 +417,3 @@
 <input type="hidden" name="op" value="edit_customer">
 </form>
 {/if}
-

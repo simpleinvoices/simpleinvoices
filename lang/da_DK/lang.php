@@ -8,7 +8,7 @@
 *	 Michael Larsen,  Claus Mølgaard Nielsen
 *
 * Last edited:
-*    2014-05-25
+*    2016-10-04
 *
 * License:
 *	 GPL v3 or above
@@ -98,7 +98,7 @@ $LANG['credit_card_number_new'] = "Nyt betalingskortnummer";//1
 $LANG['credits'] = "Kredit";//1
 $LANG['currency_code'] = "Valutakode";//1
 $LANG['currency_sign'] = "Valuta tegn";//1
-$LANG['currency_sign_non_dollar'] = "Euro, pund, ikke-$ tegn l&#230;s venligst dette";//1
+$LANG['currency_sign_non_dollar'] = "Euro, pund, ikke-\$ tegn l&#230;s venligst dette";//1
 $LANG['custom_field'] = "Brugerdefineret felt";//1
 $LANG['custom_field1'] = "Brugerdefineret felt 1";//1
 $LANG['custom_field2'] = "Brugerdefineret felt 2";//1
@@ -112,6 +112,7 @@ $LANG['customer'] = "Kunde";//1
 $LANG['customer_account'] = "Kundekonto";//1
 $LANG['customer_add'] = "Tilf&#216;j ny kunde";//1
 $LANG['customer_contact'] = "Kunde kontakt (Att)";//1
+$LANG['customer_department'] = "Afdeling";//1
 $LANG['customer_details'] = "Kunde detaljer";//1
 $LANG['customer_edit'] = "Rediger kunde";//1
 $LANG['customer_id'] = "Kunde ID";//1
@@ -223,8 +224,7 @@ $LANG['help_email_cc'] = "Dette felt er ikke obligatorisk. Her kan du indtaste e
 $LANG['help_email_from'] = "Dette felt er ikke obligatorisk og f&#229;r sin standard v&#230;rdi fra Kreditorens email adresse. Du kan &#230;ndre denne email adresse efter behov, men du kan ikke tilf&#248;je mere end 1 email adresse i dette fejt.<br /><br /><i>Bem&#230;rk:: Der kan kun v&#230;re 1 email adresse i dette felt</i>";//1
 $LANG['help_email_to'] = "Dette felt er obligatorisk og f&#229;r sin standard v&#230;rdi fra Kundens email adresse. Du kan &#230;ndre denne email adresse efter behov.<br /><br /><i>Bem&#230;rk: Du kan tilf&#248;je flere email adresser her - bare adskil adresserne med enten et , eller et ;</i>";//1
 $LANG['help_insert_biller_text'] = "For at inds&#230;tte et blankt logo v&#230;lges '_default_blank_logo.png' fra listen.<br /><br />For at tilf&#248;je nye logoer til Simple Invoices, kopieres logo filen til logo biblioteket i Simple Invoices folderen.";//1
-$LANG['help_inv_pref_currency_sign'] = "Dette er valutasymbolet som vil blive anvendt i hele fakturaen. <br /><br />
-<b>Bem&#230;rk:</b> Euro, Pund etc.. Anvend venligst html-koden for valutasymbolet i dette felt. Referer til denne liste af html-koder p&#229; f&#248;lgende hjemmeside for ikke $ valutasymbol <a href='http://www.ascii.cl/htmlcodes.htm'>http://www.ascii.cl/htmlcodes.htm</a>. <br /><br /> Dette er p&#229;kr&#230;vet, s&#229; PDF'en kan fungere korrekt ved ikke $ symboler<br /><br />&#38;#163; er html-koden for Pund.,<br /> &#38;#8364; for Euro, etc..";//1
+$LANG['help_inv_pref_currency_sign'] = "Dette er valutasymbolet som vil blive anvendt i hele fakturaen. <br /><br /><b>Bem&#230;rk:</b> Euro, Pund etc.. Anvend venligst html-koden for valutasymbolet i dette felt. Referer til denne liste af html-koder p&#229; f&#248;lgende hjemmeside for ikke \$ valutasymbol <a href='http://www.ascii.cl/htmlcodes.htm'>http://www.ascii.cl/htmlcodes.htm</a>. <br /><br /> Dette er p&#229;kr&#230;vet, s&#229; PDF'en kan fungere korrekt ved ikke $ symboler<br /><br />&#38;#163; er html-koden for Pund.,<br /> &#38;#8364; for Euro, etc..";//1
 $LANG['help_inv_pref_description'] = "Dette er navnet for den fastsatte pr&#230;ference - denne bliver ikke anvendt p&#229; selve fakturaen, kun ved oprettelsen af fakturaen n&#229;r du v&#230;lger, hvilken faktura pr&#230;ference du vil anvende, fra dropdown listen.";//1
 $LANG['help_inv_pref_invoice_detail_heading'] = "Dette vil st&#229; som overskrift i fodnote/detalje sektionen p&#229; fakturaen.";//1
 $LANG['help_inv_pref_invoice_detail_line'] = "Dette vil st&#229; under fodnote/detalje sektionen. Normalt brugt til at definere betalingsbetingelser etc.";//1
@@ -260,7 +260,7 @@ $LANG['help_tax_rate_sign'] = "Moms kan enten v&#230;re procent-baseret (fx moms
 $LANG['help_text'] = "<b>Advarsel</b><br /><br />Sikkerhedskopier venligst din Simple Invoices database inden du opdaterer databasen for en sikkerheds skyld, hvis der nu skulle g&#229; noget galt.<br /><br />For at sikkerhedskopiere databasen, v&#230;lg 'Sikkerhedskopier database' fra indstillings menuen, eller anvend phpMyAdmin (Hvis du har dette installeret) for at sikkerhedskopiere databasen.";//1
 $LANG['help_user_role'] = "Der er 3 roller tilg&#230;ngelige <br /><br />Administrator:<br />som har adgang til alt i Simple Invoices<br /><br /><br />Bruger:<br />som har l&#230;se/skrive adgang til alt i Simple Invoices men ingen adgang til indstillingsmenuen <br /><br /> L&#230;ser:<br />som har l&#230;se-versionen af Bruger.";//1
 $LANG['help_what_are_custom_fields'] = "Brugerdefinerede felter er specielle felter i kreditorer, produkter, kunder og fakturaer som du kan navngive, som du &#248;nsker det.<br /><br />Vil du gerne have, at der var et Moms ID felt under kreditor, skal du bare g&#229; til 'Brugerdefinerede felter'-siden og definere en af de tomme 'kreditor brugerdefinerede felter' som Moms ID.<br /><br />Nu n&#229;r du vil redigere en kreditor, vil der v&#230;re et felt kaldet Moms ID eller hvad du nu har specificeret det som.";//1
-$LANG['help_wheres_the_edit_button'] = "Under 'Administrer betaling' sk&#230;rmen er der ingen redigerings-knap. Dette er for at skabe et ordentlig 'revisions spor' af betalinger registreret i Simple Invoices.<br /><br />Hvis du har lavet en fejl med en betaling, er den bedste l&#248;sning at tilbagef&#248;re posten og angive den igen korrekt<br /><br />Tilbagef&#248;re posten - hvad i alverden?<br /> Dette betyder blot at lave en negativ post for det samme bel&#248;b, som den oprindelige post.<br /><br />fx<br />Hvis du angav $110<br />men skulle have angivet $1100<br />for at tilbagef&#248;re posten angives -$110 imod den samme faktura og herefter angives det korrekte bel&#248;b p&#229; $1100";//1
+$LANG['help_wheres_the_edit_button'] = "Under 'Administrer betaling' sk&#230;rmen er der ingen redigerings-knap. Dette er for at skabe et ordentlig 'revisions spor' af betalinger registreret i Simple Invoices.<br /><br />Hvis du har lavet en fejl med en betaling, er den bedste l&#248;sning at tilbagef&#248;re posten og angive den igen korrekt<br /><br />Tilbagef&#248;re posten - hvad i alverden?<br /> Dette betyder blot at lave en negativ post for det samme bel&#248;b, som den oprindelige post.<br /><br />fx<br />Hvis du angav \$110<br />men skulle have angivet \$1100<br />for at tilbagef&#248;re posten angives -$110 imod den samme faktura og herefter angives det korrekte bel&#248;b p&#229; \$1100";//1
 $LANG['hide_details'] = "Skjul detaljer";//1
 $LANG['home'] = "Hjem";//1
 $LANG['id'] = "ID";//1

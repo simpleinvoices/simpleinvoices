@@ -2,10 +2,10 @@
 
 /*
 * Script: lang.php
-* 	English translation file
+* 	Indonesian translation file
 *
 * Last edited:
-*    2013-10-16
+*    2016-10-04
 *
 * License:
 *	 GPL v3 or above
@@ -16,7 +16,7 @@ regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
  */
 
 #all
-$LANG['about'] = "About";//1
+$LANG['about'] = "Tentang";//1
 $LANG['account_info'] = "Informasi Akun";//1
 $LANG['actions'] = "Modul";//1
 $LANG['add'] = "Tambah";//1
@@ -89,7 +89,7 @@ $LANG['credit_card_number_new'] = "Nomor kartu kredit baru";//1
 $LANG['credits'] = "Kredit";//1
 $LANG['currency_code'] = "Kode mata uang";//1
 $LANG['currency_sign'] = "Simbol mata uang";//1
-$LANG['currency_sign_non_dollar'] = "Untuk mata uang Euro, Poundsterling, dan non-$, bacalah pesan berikut ";//1
+$LANG['currency_sign_non_dollar'] = "Untuk mata uang Euro, Poundsterling, dan non-\$, bacalah pesan berikut ";//1
 $LANG['custom_field'] = "Custom field";//1
 $LANG['custom_field1'] = "Custom field 1";//1
 $LANG['custom_field2'] = "Custom field 2";//1
@@ -103,6 +103,7 @@ $LANG['customer'] = "Pelanggan";//1
 $LANG['customer_account'] = "Akun Pelanggan";//1
 $LANG['customer_add'] = "Tambah Pelanggan Baru";//1
 $LANG['customer_contact'] = "Customer Contact (Attn)";//1
+$LANG['customer_department'] = "Departemen";//1
 $LANG['customer_details'] = "Informasi Pelanggan";//1
 $LANG['customer_edit'] = "Edit Informasi Pelanggan";//1
 $LANG['customer_id'] = "ID Pelanggan";//1
@@ -207,14 +208,14 @@ $LANG['help_currency_code'] = "Kode mata uang adalah singkatan dengan menggunaka
 $LANG['help_custom_fields'] = "This field is a 'Custom Field'. This means that the label can be defined as whatever you want (ie. Barcode, Tax number, MSN, etc...). <br /><br />To edit or view existing 'Custom Fields' please select the Custom Fields option from the Options menu.";//1
 $LANG['help_customer_contact'] = "The 'Attn.' or Customer Contact field allow you to specify a contact within your customers business.<br /><br />This is usefull if you customer has many employees and you need to directly specify on the invoice who within your customers business this invoice is for.<br /><br /> ie. Within the customer 'Springfield Power Plant'  you may want to specify Mr Burns (or Smithers) as the customer contact as they are the person who gets the invoice.<br /><br />So an Invoice will look like <br /><br />Customer: Springfield Power Plant<br />Attn.: Mr Burns<br />";//1
 $LANG['help_database_patches'] = "<b>Database patches need to be applied</b><br />There are database patches that need to be applied, please select 'Database Upgrade Manager' from the Options menu and follow the instructions.<br /><br />The 'Database Upgrade Manager' is how Simple Invocies manages modification to the structure of the Simple Invoices database. With each new release there may be 'Database patches' that need to be applied. Database Upgrade Manage looks after these database patches.<br /><br />Database patches are individual modifications to the Simple Invoices database. With a new release there may be multiple patches that need to be applied.";//1
-$LANG['help_default_invoice_template_text'] = "The value you enter into the detault invoice template MUST be the actual folder name of the template you wish to select.  The invoice templates folders are located in (./templates/invoices/)<br /><br />";//1
+$LANG['help_default_invoice_template_text'] = "The value you enter into the default invoice template MUST be the actual folder name of the template you wish to select.  The invoice templates folders are located in (./templates/invoices/)<br /><br />";//1
 $LANG['help_delete'] = "Dengan mengaktifkan fungsi 'Hapus', anda dapat menghapus nota-nota yang tidak diinginkan di fitur Quick View.<br /><br />Untuk menghapus nota, aktifkan fungsi ini, kemudian lanjutkan ke bagian 'Pengaturan Nota' dan pilih 'Quick View' untuk nota yang ingin dihapus. Modul 'Hapus' akan tampil pada layar Quick View. Klik tombol tersebut dan ikuti petunjuk - Nota yang terpilih akan terhapus.<br /><br />Catatan: Sekarang hanya nota yang dapat terhapus, namun fitur ini akan diupgrade di masa mendatang agar bisa menghapus bagian lain (seperti billers, pelanggan dll)";//1
 $LANG['help_email_bcc'] = "Kolom ini tidak harus diisi dan akan terisi dengan default dari alamat email biller.<br /><br />Disarankan untuk mengirim BCC ke email anda untuk menyimpan salinannya. Dengan begitu anda dapat memastikan email tersebut telah sukses terkirim dan ada salinan email sebagai cadangan.<br /><br /><i>Catatan: Anda dapat menambah beberapa alamat email di kolom ini - dengan menggunakan , atau ; untuk permisahan masing-masing alamat email </i> ";//1
 $LANG['help_email_cc'] = "Kolom ini boleh tidak diisi. Gunakan kolom ini untuk mengirim CC ke alamat email yang dituju tetapi tidak bisa menambah lebih dari 1 alamat email dalam kolom ini<br /><br /><i>Catatan: Kolom ini dapat diisi beberapa alamat email dengan menggunakan tanda , atau ; untuk pemisahan alamat email<i>";//1
 $LANG['help_email_from'] = "Kolom ini wajib diisi dan akan terisi dengan default dari alamat email biller. Anda dapat merubah alamat email ini tetapi tidak dapat menambah lebih dari 1 alamat email<br /><br /><i>Catatan: Kolom ini hanya dapat terisi dengan 1 alamat email</i>";//1
 $LANG['help_email_to'] = "This field is a mandatory field and gets the default value from the Customers email address.  You can change this email address as you require<br /><br /><i>Note: You can add multiple email addresses here - just use either , or ; to split the addresses</i>";//1
-$LANG['help_insert_biller_text'] = "To select no logo please select '_default_blank_logo.png' from the list.<br /><br />To add additional logos into Simple Invoices, copy the logo file into the logo directory in the Simple Invoices folder.";//1
-$LANG['help_inv_pref_currency_sign'] = "This is the curreny symbol that will be used through-out the invoice. <br /><br /><b>Note:</b> Euro, Pound etc.. please use the html code for you currency sign in this field.  Refer to the list of html codes on the following website for your non $ currency sign <a href='http://www.ascii.cl/htmlcodes.htm'>http://www.ascii.cl/htmlcodes.htm</a>.  <br /><br />This is required so that PDF can work correctly with non $ symbols<br /><br /> &#38;#163; is the html code for the Pound,<br /> &#38;#8364; for the Euro, etc..";//1
+$LANG['help_insert_biller_text'] = "To select no logo please select '_default_blank_logo.png' from the list.<br /><br />To add additional logos into Simple Invoices, copy the logo file into the logo directory at templates/invoices/logos in the Simple Invoices folder.";//1
+$LANG['help_inv_pref_currency_sign'] = "This is the curreny symbol that will be used through-out the invoice. <br /><br /><b>Note:</b> Euro, Pound etc.. please use the html code for your currency sign in this field.  Refer to the list of html codes on the following website for your non \$ currency sign <a href='http://www.ascii.cl/htmlcodes.htm'>http://www.ascii.cl/htmlcodes.htm</a>.  <br /><br />This is required so that PDF can work correctly with non \$ symbols<br /><br /> &#38;#163; is the html code for the Pound,<br /> &#38;#8364; for the Euro, etc..";//1
 $LANG['help_inv_pref_description'] = "This is the name of the set of preference - it's not used on the invoice itself, just in the creation of the invoice when you select from the drop down list which Invoice Preference you wish to use.";//1
 $LANG['help_inv_pref_invoice_detail_heading'] = "This is what will appear as the heading of the footer/details section of the invoice.";//1
 $LANG['help_inv_pref_invoice_detail_line'] = "This is the text that appear under the details/footer heading. Normally used to define payment terms etc.";//1
@@ -250,7 +251,7 @@ $LANG['help_tax_rate_sign'] = "A tax can be either a percentage based (ie. Sales
 $LANG['help_text'] = "<b>Perhatian</b><br /><br />Buatlah cadangan database sebelum meng-update untuk menghindari hal-hal yang tidak diinginkan<br /><br />Untuk membuat cadangan database, pilih 'Backup Database' dari menu Options, atau gunakan phpMyAdmin (Apabila tersedia) untuk membuat cadangan database";//1
 $LANG['help_user_role'] = "There are 3 roles available <br /><br />Administrator:<br />which has access to all of Simple Invoices<br /><br />User:<br />which has read/write acess to all of Simple Invoices but with no access to the Settings menu <br /><br />Viewer:<br />which has read-only version of User.";//1
 $LANG['help_what_are_custom_fields'] = "Custom Fields are special fields in billers, products, customers, and invoices that you can label as whatever you want.<br /><br />Wish there was a Tax ID field in biller, just go to the Custom Fields page and define one of the blank Biller Custom Fields as Tax ID.<br /><br />Now when you go to edit a Biller there'll be a new field there called Tax ID or whatever you specified it as.";//1
-$LANG['help_wheres_the_edit_button'] = "In the Manage Payment screen there is no 'Edit' button. This is to provide a proper 'audit trail' of payments recorded in Simple Invoices.<br /><br />If you've made a mistake with a payment entry the best option is to reverse the entry and entery it again correctly<br /><br />Reverse the entry - what the?<br /> This basically means just doing a negative entry for the same amount as the original entry.<br /><br />ie.<br />If your entered $110<br />but you should've entered $1100<br />to reverse this entry enter -$110 against the same invoice and then enter the correct amount of $1100";//1
+$LANG['help_wheres_the_edit_button'] = "In the Manage Payment screen there is no 'Edit' button. This is to provide a proper 'audit trail' of payments recorded in Simple Invoices.<br /><br />If you've made a mistake with a payment entry the best option is to reverse the entry and entery it again correctly<br /><br />Reverse the entry - what the?<br /> This basically means just doing a negative entry for the same amount as the original entry.<br /><br />ie.<br />If your entered \$110<br />but you should've entered \$1100<br />to reverse this entry enter -$110 against the same invoice and then enter the correct amount of \$1100";//1
 $LANG['hide_details'] = "Sembunyikan informasi";//1
 $LANG['home'] = "Halaman Utama";//1
 $LANG['id'] = "ID";//1
@@ -516,10 +517,10 @@ $LANG['statement'] = "Statement";//1
 $LANG['statement_for_the_period'] = "Statement for the period";//1
 $LANG['statement_of_invoices'] = "Statement of Invoices";//1
 $LANG['statement_summary'] = "Statement summary";//1
-$LANG['statements'] = "Statements";//1
-$LANG['stats'] =" Quick reports";//1
+$LANG['statements'] = "Statements";//0
+$LANG['stats'] =" Quick reports";//0
 $LANG['stats_biller'] ="Biller teratas - berdasarkan jumlah nota";//1
-$LANG['stats_customer'] ="Top Customer - by amount invoiced";//1
+$LANG['stats_customer'] ="Top Customer - by amount invoiced";//0
 $LANG['stats_debtor'] ="Largest debtor";//1
 $LANG['status'] ="Status";//1
 $LANG['street'] = "Street address";//1

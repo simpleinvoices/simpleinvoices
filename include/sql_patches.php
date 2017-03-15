@@ -1426,15 +1426,14 @@ ADD `language` VARCHAR( 255 ) NULL ;";
 
     $patch['240']['name'] = "si_system_defaults - add composite primary key";
     $patch['240']['patch'] = "
-		ALTER TABLE  `".TB_PREFIX."system_defaults` ADD `new_id` INT( 11 ) NOT NULL FIRST; 
-		UPDATE `".TB_PREFIX."system_defaults` SET new_id = id; 
-		ALTER TABLE  `".TB_PREFIX."system_defaults` DROP  `id` ; 
-		ALTER TABLE  `".TB_PREFIX."system_defaults` DROP INDEX `name` ; 
-		ALTER TABLE  `".TB_PREFIX."system_defaults` CHANGE  `new_id`  `id` INT( 11 ) NOT NULL; 
-		ALTER TABLE  `".TB_PREFIX."system_defaults` ADD PRIMARY KEY(`domain_id`,`id` );";
+		ALTER TABLE `".TB_PREFIX."system_defaults` CHANGE `id` `id` INT(11) NOT NULL;
+		ALTER TABLE `".TB_PREFIX."system_defaults` DROP PRIMARY KEY;
+		ALTER TABLE `".TB_PREFIX."system_defaults` ADD PRIMARY KEY(`domain_id`,`id` );
+		ALTER TABLE `".TB_PREFIX."system_defaults` DROP INDEX `name`;
+		ALTER TABLE `".TB_PREFIX."system_defaults` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT;";
     $patch['240']['date'] = "20100305";
 
-    $patch['241']['name'] = "si_system_defaults - add composite primary key";
+    $patch['241']['name'] = "si_system_defaults - add inventory default";
     $patch['241']['patch'] = "insert into `".TB_PREFIX."system_defaults` values ('','inventory','0','1','1');";
     $patch['241']['date'] = "20100409";
 
@@ -1500,7 +1499,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['254']['date'] = "20130313";
 
     $patch['255']['name'] = "Product Matrix - update line items table";
-    $patch['255']['patch'] = " 
+    $patch['255']['patch'] = "
         CREATE TABLE `".TB_PREFIX."products_attributes` (
             `id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
             `name` VARCHAR( 255 ) NOT NULL,
@@ -1684,8 +1683,8 @@ PRIMARY KEY ( `domain_id`, `id` )
 		ALTER TABLE `".TB_PREFIX."tax` CHANGE `type` `type` CHAR(1) DEFAULT '%' NOT NULL;
 		ALTER TABLE `".TB_PREFIX."products_attributes` CHANGE `enabled` `enabled` TINYINT(1) DEFAULT 1 NOT NULL,
 			CHANGE `visible` `visible` TINYINT(1) DEFAULT 1 NOT NULL;
-		ALTER TABLE `".TB_PREFIX."products_values` CHANGE `enabled` `enabled` TINYINT(1) DEFAULT 1 NOT NULL; 
-		ALTER TABLE `".TB_PREFIX."user` CHANGE `enabled` `enabled` TINYINT(1) DEFAULT 1 NOT NULL; 
+		ALTER TABLE `".TB_PREFIX."products_values` CHANGE `enabled` `enabled` TINYINT(1) DEFAULT 1 NOT NULL;
+		ALTER TABLE `".TB_PREFIX."user` CHANGE `enabled` `enabled` TINYINT(1) DEFAULT 1 NOT NULL;
 	";
     $patch['290']['date']  = "20131109";
 
@@ -1701,3 +1700,6 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['292']['patch'] = "ALTER TABLE `".TB_PREFIX."user` ADD COLUMN `user_id` INT  DEFAULT 0 NOT NULL AFTER `enabled`;";
     $patch['292']['date']  = "20140103";
 
+    $patch['293']['name']  = "Add department to the customers";
+    $patch['293']['patch'] = "ALTER TABLE `".TB_PREFIX."customers` ADD COLUMN `department` VARCHAR(255) NULL AFTER `name`";
+    $patch['293']['date']  = "20161004";

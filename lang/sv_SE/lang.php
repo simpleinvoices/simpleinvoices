@@ -8,7 +8,7 @@
 *    Joakim Nyman
 *
 * Last edited:
-*    2014-06-09
+*    2016-10-04
 *
 * License:
 *    GPL v3 or above
@@ -92,7 +92,7 @@ $LANG['credit_card_number_new'] = "Nytt kreditkort nummer";//1
 $LANG['credits'] = "Krediter";//1
 $LANG['currency_code'] = "Valuta tecken";//1
 $LANG['currency_sign'] = "Valuta tecken";//1
-$LANG['currency_sign_non_dollar'] = "Euro, Pund, icke-$ tecken läs detta";//1
+$LANG['currency_sign_non_dollar'] = "Euro, Pund, icke-\$ tecken läs detta";//1
 $LANG['custom_field'] = "Egendefinierat fält";//1
 $LANG['custom_field1'] = "Egendefinierat fält 1";//1
 $LANG['custom_field2'] = "Egendefinierat fält 2";//1
@@ -106,6 +106,7 @@ $LANG['customer'] = "Kund";//1
 $LANG['customer_account'] = "Kund Konto";//1
 $LANG['customer_add'] = "Lägg till Ny Kund";//1
 $LANG['customer_contact'] = "Kontaktperson";//1
+$LANG['customer_department'] = "Avdelning";//1
 $LANG['customer_details'] = "Kund detaljer";//1
 $LANG['customer_edit'] = "Redigera Kund";//1
 $LANG['customer_id'] = "Kund ID";//1
@@ -217,7 +218,7 @@ $LANG['help_email_cc'] = "Detta fält är inte obligatoriskt. Här kan du specif
 $LANG['help_email_from'] = "Detta fält är obligatoriskt och får sitt standard värde från Fordringsägarens e-post adress. Du kan ändra denna e-post adress efter behov men kan inte lägga till mer än en (1) adress i detta fält.<br /><br /><i>Obs: Det kan endast finnas en (1) e-post adress i detta fält.</i>";//1
 $LANG['help_email_to'] = "Detta fält är obligatoriskt och får sitt standard värde från Kundens e-post adress. Du kan ändra denna e-post adress efter behov.<br /><br /><i>Obs: Du kan lägga till flera e-post adresser här - bara använd antingen , eller ; för att sära på adresserna</i>";//1
 $LANG['help_insert_biller_text'] = "För att inte välja någon logo välj '_default_blank_logo.png' från listan.<br /><br />För att lägga till ytterligare logon till Simple Invoices, kopiera logo filen till logo mappen i Simple Invoices mappen.";//1
-$LANG['help_inv_pref_currency_sign'] = "Detta är valuta tecknet som kommer användas på fakturan.<br /><br /><b>Obs:</b> Euro, Pund osv.. Vänligen använd html koden för ditt valuta tecken i detta fält. Hänvisa till listan med html koder på följande webbsida för valuta tecken <a href='http://www.ascii.cl/htmlcodes.htm'>http://www.ascii.cl/htmlcodes.htm</a>.<br /><br />Detta krävs för att PDF kan fungera korrekt med andra valutor än $.<br /><br /> &#38;#163; är html koden för Pund,<br /> &#38;#8364; för Euro, osv..";//1
+$LANG['help_inv_pref_currency_sign'] = "Detta är valuta tecknet som kommer användas på fakturan.<br /><br /><b>Obs:</b> Euro, Pund osv.. Vänligen använd html koden för ditt valuta tecken i detta fält. Hänvisa till listan med html koder på följande webbsida för valuta tecken <a href='http://www.ascii.cl/htmlcodes.htm'>http://www.ascii.cl/htmlcodes.htm</a>.<br /><br />Detta krävs för att PDF kan fungera korrekt med andra valutor än \$.<br /><br /> &#38;#163; är html koden för Pund,<br /> &#38;#8364; för Euro, osv..";//1
 $LANG['help_inv_pref_description'] = "Detta är namnet för faktura mallen - det används inte på själva fakturan, bara vid skapandet av fakturor när du väljer i drop down menyn vilken Faktura Mall du vill använda.";//1
 $LANG['help_inv_pref_invoice_detail_heading'] = "Detta är vad som kommer synas som rubrik i sidfoten/detaljerna för fakturan.";//1
 $LANG['help_inv_pref_invoice_detail_line'] = "Detta är den text som kommer synas under detaljer/sidfots rubriken. Vanligen använt för att ange betalnings villkor osv.";//1
@@ -253,7 +254,7 @@ $LANG['help_tax_rate_sign'] = "En skattesats kan antingen vara procentbaserad (e
 $LANG['help_text'] = "<b>Varning</b><br /><br />Vänligen säkerhetskopiera din Simple Invoices databas innan du kör databas uppdateringen, ifall om något dåligt skulle hända.<br /><br />För att säkerhetskopiera databasen, välj 'Säkerhetskopiera Databas' i Inställningar menyn, eller använd phpMyAdmin (om du har detta installerat) för att säkerhetskopiera databasen.";//1
 $LANG['help_user_role'] = "Det finns 3 roller tillgängliga<br /><br />Administrator:<br />som har tillgång till allt i Simple Invoices<br /><br />User:<br />som har läs/skriv rättigheter till allt i Simple Invoices, men inte tillgång till Inställningar menyn<br /><br />Viewer:<br />som endast har läs rättigheter";//1
 $LANG['help_what_are_custom_fields'] = "Egendefinierade Fält är special fält i fordringsägare, produkter, kunder, och fakturor som du kan namnge hur du vill.<br /><br />Om du öskar att det fanns ett Skattesats ID fält i fordringsägare, gå till Egendefinierade Fält sidan och namnge ett av de blanka Fordringsägare Egendefinerat Fält till Skattesats ID.<br /><br />Nu när du går och redigerar en Fordringsägare kommer det finnas ett nytt fält kallat Skattesats ID eller vad annat du döpt det till.";//1
-$LANG['help_wheres_the_edit_button'] = "På Behandla Betalning sidan finns det ingen 'Redigera' knapp. Detta är för att ge ett korrekt 'revisions spår' för betalningar som registrerats i Simple Invoices.<br /><br />Om du gjort ett misstag med en betalning är det bästa alternativet att återkalla posten och lägga till en ny post korrekt.<br /><br />Återkalla posten - vad i?<br />Detta betyder helt enkelt bara att lägga till en negativ post på samma summa som original posten.<br /><br />Ex.<br />Om du angav $110<br />men borde ha angivit $1100<br />för att återkalla denna post ange -$110 emot samma faktura och sen ange den rätta summan på $1100";//1
+$LANG['help_wheres_the_edit_button'] = "På Behandla Betalning sidan finns det ingen 'Redigera' knapp. Detta är för att ge ett korrekt 'revisions spår' för betalningar som registrerats i Simple Invoices.<br /><br />Om du gjort ett misstag med en betalning är det bästa alternativet att återkalla posten och lägga till en ny post korrekt.<br /><br />Återkalla posten - vad i?<br />Detta betyder helt enkelt bara att lägga till en negativ post på samma summa som original posten.<br /><br />Ex.<br />Om du angav \$110<br />men borde ha angivit \$1100<br />för att återkalla denna post ange -$110 emot samma faktura och sen ange den rätta summan på \$1100";//1
 $LANG['hide_details'] = "Göm detaljer";//1
 $LANG['home'] = "Hem";//1
 $LANG['id'] = "ID";//1

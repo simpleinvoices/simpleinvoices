@@ -1,13 +1,13 @@
 <?php
 /* 
-* Script: italian.inc.php
+* Script: lang.php
 * 	Italian translation file
 *
 * Authors: 
 *   Fabio Utili
 *
 * Last edited: 
-*   2014-06-09
+*   2016-10-04
 *
 * License:
 *   GPL v3 or above
@@ -92,7 +92,7 @@ $LANG['credit_card_number_new'] = "Nuovo numero di carta di credito";//1
 $LANG['credits'] = "Crediti";//1
 $LANG['currency_code'] = "Codice valuta";//1
 $LANG['currency_sign'] = "Simbolo valuta";//1
-$LANG['currency_sign_non_dollar'] = "Per Euro, Sterlina e simboli diversi da $ leggere qui";//1
+$LANG['currency_sign_non_dollar'] = "Per Euro, Sterlina e simboli diversi da \$ leggere qui";//1
 $LANG['custom_field'] = "Campo libero";//1
 $LANG['custom_field1'] = "Campo libero 1";//1
 $LANG['custom_field2'] = "Campo libero 2";//1
@@ -106,6 +106,7 @@ $LANG['customer'] = "Cliente";//1
 $LANG['customer_account'] = "Conto del Cliente";//1
 $LANG['customer_add'] = "Aggiungi un Nuovo Cliente";//1
 $LANG['customer_contact'] = "Contatti del Cliente (Att)";//1
+$LANG['customer_department'] = "Dipartimento";//1
 $LANG['customer_details'] = "Dettagli del Cliente";//1
 $LANG['customer_edit'] = "Modifica Cliente";//1
 $LANG['customer_id'] = "ID Cliente";//1
@@ -216,8 +217,8 @@ $LANG['help_email_bcc'] = "This field is not mandatory and gets the default valu
 $LANG['help_email_cc'] = "This field is not mandatory.  Here you can specify any email address you want to CC but cannot add more than 1 email address in this field<br /><br /><i>Note: You can add multiple email addresses here - just use eith , or ; to split the addresses</i>";//0
 $LANG['help_email_from'] = "This field is a mandatory field and gets the default value from the Billers email address.  You can change this email address as you require but cannot add more than 1 email address in this field<br /><br /><i>Note: There can be only 1 email address in this field</i>";//0
 $LANG['help_email_to'] = "This field is a mandatory field and gets the default value from the Customers email address.  You can change this email address as you require<br /><br /><i>Note: You can add multiple email addresses here - just use either , or ; to split the addresses</i>";//0
-$LANG['help_insert_biller_text'] = "To select no logo please select '_default_blank_logo.png' from the list.<br /><br />To add additional logos into Simple Invoices, copy the logo file into the logo directory in the Simple Invoices folder.";//0
-$LANG['help_inv_pref_currency_sign'] = "This is the curreny symbol that will be used through-out the invoice. <br /><br /><b>Note:</b> Euro, Pound etc.. please use the html code for you currency sign in this field.  Refer to the list of html codes on the following website for your non $ currency sign <a href='http://www.ascii.cl/htmlcodes.htm'>http://www.ascii.cl/htmlcodes.htm</a>.  <br /><br />This is required so that PDF can work correctly with non $ symbols<br /><br /> &#38;#163; is the html code for the Pound,<br /> &#38;#8364; for the Euro, etc..";//0
+$LANG['help_insert_biller_text'] = "To select no logo please select '_default_blank_logo.png' from the list.<br /><br />To add additional logos into Simple Invoices, copy the logo file into the logo directory at templates/invoices/logos in the Simple Invoices folder.";//0
+$LANG['help_inv_pref_currency_sign'] = "This is the curreny symbol that will be used through-out the invoice. <br /><br /><b>Note:</b> Euro, Pound etc.. please use the html code for your currency sign in this field.  Refer to the list of html codes on the following website for your non \$ currency sign <a href='http://www.ascii.cl/htmlcodes.htm'>http://www.ascii.cl/htmlcodes.htm</a>.  <br /><br />This is required so that PDF can work correctly with non \$ symbols<br /><br /> &#38;#163; is the html code for the Pound,<br /> &#38;#8364; for the Euro, etc..";//0
 $LANG['help_inv_pref_description'] = "This is the name of the set of preference - it's not used on the invoice itself, just in the creation of the invoice when you select from the drop down list which Invoice Preference you wish to use.";//0
 $LANG['help_inv_pref_invoice_detail_heading'] = "This is what will appear as the heading of the footer/details section of the invoice.";//0
 $LANG['help_inv_pref_invoice_detail_line'] = "Questo è il testo che appare come dettaglio o piè di pagina. Di solito è usato per specificare le condizioni di pagamento ecc.";//1
@@ -253,7 +254,7 @@ $LANG['help_tax_rate_sign'] = "A tax can be either a percentage based (ie. Sales
 $LANG['help_text'] = "<b>Warning</b><br /><br />Please backup your Simple Invoices database before running the database update, just incase anything bad happens.<br /><br />To backup the database, select 'Backup Database' from the Options menu, or use phpMyAdmin(if you have this installed) to back up the database.";//0
 $LANG['help_user_role'] = "There are 3 roles available <br /><br />Administrator:<br />which has access to all of Simple Invoices<br /><br />User:<br />which has read/write acess to all of Simple Invoices but with no access to the Settings menu <br /><br />Viewer:<br />which has read-only version of User.";//0
 $LANG['help_what_are_custom_fields'] = "Custom Fields are special fields in billers, products, customers, and invoices that you can label as whatever you want.<br /><br />Wish there was a Tax ID field in biller, just go to the Custom Fields page and define one of the blank Biller Custom Fields as Tax ID.<br /><br />Now when you go to edit a Biller there'll be a new field there called Tax ID or whatever you specified it as.";//0
-$LANG['help_wheres_the_edit_button'] = "In the Manage Payment screen there is no 'Edit' button. This is to provide a proper 'audit trail' of payments recorded in Simple Invoices.<br /><br />If you've made a mistake with a payment entry the best option is to reverse the entry and entery it again correctly<br /><br />Reverse the entry - what the?<br /> This basically means just doing a negative entry for the same amount as the original entry.<br /><br />ie.<br />If your entered $110<br />but you should've entered $1100<br />to reverse this entry enter -$110 against the same invoice and then enter the correct amount of $1100";//0
+$LANG['help_wheres_the_edit_button'] = "In the Manage Payment screen there is no 'Edit' button. This is to provide a proper 'audit trail' of payments recorded in Simple Invoices.<br /><br />If you've made a mistake with a payment entry the best option is to reverse the entry and entery it again correctly<br /><br />Reverse the entry - what the?<br /> This basically means just doing a negative entry for the same amount as the original entry.<br /><br />ie.<br />If your entered \$110<br />but you should've entered \$1100<br />to reverse this entry enter -$110 against the same invoice and then enter the correct amount of \$1100";//0
 $LANG['hide_details'] = "Nascondi dettagli";//1
 $LANG['home'] = "Inizio";//1
 $LANG['id'] = "ID";//1

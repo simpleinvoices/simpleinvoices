@@ -70,6 +70,7 @@ CREATE TABLE IF NOT EXISTS `si_customers` (
   `domain_id` int(11) NOT NULL DEFAULT '1',
   `attention` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
+  `department` varchar(255) DEFAULT NULL,
   `street_address` varchar(255) DEFAULT NULL,
   `street_address2` varchar(255) DEFAULT NULL,
   `city` varchar(255) DEFAULT NULL,

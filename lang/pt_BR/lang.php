@@ -2,10 +2,10 @@
 
 /*
 * Script: lang.php
-* 	English translation file
+* 	Portuguese Brazilian translation file
 *
 * Last edited:
-*    2013-10-16
+*    2016-10-04
 *
 * License:
 *	 GPL v3 or above
@@ -103,6 +103,7 @@ $LANG['customer'] = "Cliente";//1
 $LANG['customer_account'] = "Conta do Cliente";//1
 $LANG['customer_add'] = "Inserir novo Cliente";//1
 $LANG['customer_contact'] = "Contato do Cliente (Att.)";//1
+$LANG['customer_department'] = "Departamento";//1
 $LANG['customer_details'] = "Detalhes do Cliente";//1
 $LANG['customer_edit'] = "Editar Cliente";//1
 $LANG['customer_id'] = "C&oacute;digo do cliente";//1
@@ -214,7 +215,7 @@ $LANG['help_email_cc'] = "Este campo n&atilde;o &eacute; obrigat&oacute;rio.<br 
 $LANG['help_email_from'] = "Este campo n&atilde;o &eacute; obrigat&oacute;rio.<br /><br />O endere&ccedil;o utilizado ser&aacute; o endere&ccedil;o de e-mail da sua empresa, mas voc&ecirc; pode alter&aacute;-lo &agrave; vontade.<br /><br /><i>Observa&ccedil;&atilde;o: Voc&ecirc; s&oacute; pode usar um endere&ccedil;o de e-mail aqui.</i>";//1
 $LANG['help_email_to'] = "Este campo n&atilde;o &eacute; obrigat&oacute;rio.<br /><br />O endere&ccedil;o utilizado ser&aacute; o endere&ccedil;o de e-mail do seu cliente, mas voc&ecirc; pode alter&aacute;-lo &agrave; vontade.<br /><br /><i>Observa&ccedil;&atilde;o: Voc&ecirc; pode usar mais de um endere&ccedil;o de e-mail - basta separ&aacute;-los com v&iacute;rgula (,) ou ponto e v&iacute;rgula (;).</i>";//1
 $LANG['help_insert_biller_text'] = "Para n&atilde;o utilizar um logotipo, selecione a op&ccedil;&atilde;o '_default_blank_logo.png'.<br /><br />Para utilizar seu pr&oacute;prio logotipo, fa&ccedil;a upload do mesmo para a pasta /templates/invoices/logos/.";//1
-$LANG['help_inv_pref_currency_sign'] = "Este &eacute; o s&iacute;mbolo da moeda que ser&aacute; utilizado na fatura (por exemplo: R$). <br /><br /><b>Observa&ccedil;&atilde;o:</b> Para utilizar s&iacute;mbolos especiais (como €, £, etc) voc&ecirc; deve digitar o c&oacute;digo HTML correspondente. Voc&ecirc; pode consultar a lista de c&oacute;digos HTML no site <a href='http://www.ascii.cl/htmlcodes.htm'>http://www.ascii.cl/htmlcodes.htm</a>. <br /><br />A utiliza&ccedil;&atilde;o de c&oacute;digos HTML &eacute; necess&aacute;ria para que a exporta&ccedil;&atilde;o em PDF funcione corretamente.<br /><br />Alguns exemplos: &#38;#163;: libras esterlinas (£)<br /> &#38;#8364;: euro (€)";//1
+$LANG['help_inv_pref_currency_sign'] = "Este &eacute; o s&iacute;mbolo da moeda que ser&aacute; utilizado na fatura (por exemplo: R\$). <br /><br /><b>Observa&ccedil;&atilde;o:</b> Para utilizar s&iacute;mbolos especiais (como €, £, etc) voc&ecirc; deve digitar o c&oacute;digo HTML correspondente. Voc&ecirc; pode consultar a lista de c&oacute;digos HTML no site <a href='http://www.ascii.cl/htmlcodes.htm'>http://www.ascii.cl/htmlcodes.htm</a>. <br /><br />A utiliza&ccedil;&atilde;o de c&oacute;digos HTML &eacute; necess&aacute;ria para que a exporta&ccedil;&atilde;o em PDF funcione corretamente.<br /><br />Alguns exemplos: &#38;#163;: libras esterlinas (£)<br /> &#38;#8364;: euro (€)";//1
 $LANG['help_inv_pref_description'] = "Permite especificar o nome do tipo de fatura, usada somente na sele&ccedil;&atilde;o da mesma.";//1
 $LANG['help_inv_pref_invoice_detail_heading'] = "Permite especificar o cabe&ccedil;alho da &aacute;rea de detalhamento da fatura.";//1
 $LANG['help_inv_pref_invoice_detail_line'] = "This is the text that appear under the details/footer heading. Normally used to define payment terms etc.";//1
@@ -250,7 +251,7 @@ $LANG['help_tax_rate_sign'] = "O imposto pode ser calculado como porcentagem (p.
 $LANG['help_text'] = "<b>Aviso</b><br /><br />Por motivos de seguran&ccedil;a fa&ccedil;a uma c&oacute;pia de seguran&ccedil;a antes de atualizar o banco de dados.<br /><br />Para fazer uma c&oacute;pia de seguran&ccedil;a, clique em Op&ccedil;&otilde;es e em C&oacute;pia de seguran&ccedil;a, ou fa&ccedil;a uma c&oacute;pia manualmente usando o phpMyAdmin.";//1
 $LANG['help_user_role'] = "Existem tr&ecirc;s fun&ccedil;&otilde;es para o usu&aacute;rio:<br /><br />Administrador:<br />Possui acesso total ao Simple Invoices<br /><br />Usu&aacute;rio:<br />Possui acesso a todas as fun&ccedil;&otilde;es do Simple Invoices mas n&atilde;o possui acesso a nenhuma configura&ccedil;&atilde;o<br /><br />Cliente:<br />Possui acesso somente para visualiza&ccedil;&atilde;o";//1
 $LANG['help_what_are_custom_fields'] = "Os campos personalizados s&atilde;o campos especiais dispon&iacute;veis nos cadastros de empresas, de produtos, de clientes e de faturas, e eles podem receber qualquer nome.<br /><br />Quer acrescentar o campo CNPJ ou Inscri&ccedil;&atilde;o Estadual ao cadastro de clientes? Basta criar um campo personalizado para os clientes.";//1
-$LANG['help_wheres_the_edit_button'] = "Esta tela n&atilde;o oferece um bot&atilde;o Editar para dificultar a adultera&ccedil;&atilde;o dos dados no sistema ap&oacute;s os lan&ccedil;amentos.<br /><br />Se voc&ecirc; preencheu um pagamento errado, basta reverter a opera&ccedil;&atilde;o, ou seja, fazer um novo lan&ccedil;amento com valor negativo.<br /><br />Por exemplo:<br />Se voc&ecirc; registrou um pagamento de R$ 110,00 ao inv&eacute;s de R$ 1.100,00, basta registrar um novo pagamento no valor de -R$ 110,00 e em seguida registrar o pagamento correto de R$ 1.100,00";//1
+$LANG['help_wheres_the_edit_button'] = "Esta tela n&atilde;o oferece um bot&atilde;o Editar para dificultar a adultera&ccedil;&atilde;o dos dados no sistema ap&oacute;s os lan&ccedil;amentos.<br /><br />Se voc&ecirc; preencheu um pagamento errado, basta reverter a opera&ccedil;&atilde;o, ou seja, fazer um novo lan&ccedil;amento com valor negativo.<br /><br />Por exemplo:<br />Se voc&ecirc; registrou um pagamento de R\$ 110,00 ao inv&eacute;s de R\$ 1.100,00, basta registrar um novo pagamento no valor de -R\$ 110,00 e em seguida registrar o pagamento correto de R\$ 1.100,00";//1
 $LANG['hide_details'] = "Esconder detalhes";//1
 $LANG['home'] = "Principal";//1
 $LANG['id'] = "C&oacute;digo";//1

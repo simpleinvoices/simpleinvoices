@@ -8,10 +8,12 @@ SimpleInvoices using gitsubmodules to load the Zend Framework.
 When cloning the repository use the `--recursive` option to ensure that Zend is retrieved.  
 `git clone --recursive git@github.com:simpleinvoices/simpleinvoices.git`
 
+If a [non-release download](https://github.com/simpleinvoices/simpleinvoices/archive/master.zip) of the SI code is taken from GitHub (instead of a recursive repo clone), then download the [Zend v1.11 library](https://github.com/dmelo/Zend-1.11/archive/27d7f1b3f45a436a9c795881db1d41689b8f9224.zip) manually and expand it into the `library/Zend` folder.
+
 ## Downloads
 * Bleeding Edge Code: [SI Git Master](http://github.com/simpleinvoices/simpleinvoices/archive/master.zip) (.zip)
 * Latest Beta Release: [2013.1 beta 8](https://github.com/simpleinvoices/simpleinvoices/archive/2013.1.beta.8.tar.gz) (tar.gz)
-* Latest Stable Release: [2011.1](http://download.simpleinvoices.org/simpleinvoices/downloads/simpleinvoices.2011.1.zip) (.zip)
+* Latest Stable Release: [2011.1](https://bitbucket.org/simpleinvoices/simpleinvoices/downloads/simpleinvoices.2011.1.zip) (.zip)
 
 ## Documentation
 * Installation: http://simpleinvoices.org/install
@@ -33,11 +35,12 @@ When cloning the repository use the `--recursive` option to ensure that Zend is 
 
 We also have a mailing list for tracking commit activity. This is hosted on Google Groups. You can find it here: https://groups.google.com/forum/?fromgroups#!forum/simpleinvoices-trac
 
+* [SI on Docker](https://github.com/justinkelly/docker-simple-invoices)
 
 ## Translations
-We are proud that SimpleInvoices is currently available in 25 different languages but we would love for that number to be even bigger!  
+We are proud that SimpleInvoices is currently available in 41 different languages but we would love for that number to be even bigger!
 
-If you would like to help translate SimpleInvoices into your language check out our [translation project](https://www.transifex.com/projects/p/SimpleInvoices/).
+If you would like to help translate SimpleInvoices into your language check out our [translation project](https://www.transifex.com/projects/p/SimpleInvoices/). Download updated and additional languages only if logged in there.
 
 For more information refer: [simpleinvoices.org/translate](http://www.simpleinvoices.org/translate)
 

@@ -20,16 +20,16 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 	global $auth_session;
 
 	$valid_search_fields = array('c.id', 'c.name');
-		
+
 	//SC: Safety checking values that will be directly subbed in
 	if (intval($page) != $page) {
 		$start = 0;
 	}
-	
+
 	if (intval($rp) != $rp) {
 		$rp = 25;
 	}
-	
+
 	/*SQL Limit - start*/
 	$start = (($page-1) * $rp);
 	$limit = "LIMIT $start, $rp";
@@ -39,13 +39,12 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 		unset($limit);
 		$limit;
 	}
-	/*SQL Limit - end*/	
-	
-	
+	/*SQL Limit - end*/
+
 	if (!preg_match('/^(asc|desc)$/iD', $dir)) {
 		$dir = 'DESC';
 	}
-	
+
 	$where = "";
 	$query = isset($_POST['query']) ? $_POST['query'] : null;
 	$qtype = isset($_POST['qtype']) ? $_POST['qtype'] : null;
@@ -57,26 +56,27 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 			$query = null;
 		}
 	}
-	
+
 	/*Check that the sort field is OK*/
-	$validFields = array('CID', 'name', 'customer_total', 'paid', 'owing', 'enabled');
-	
+	$validFields = array('CID', 'name', 'department', 'customer_total', 'paid', 'owing', 'enabled');
+
 	if (in_array($sort, $validFields)) {
 		$sort = $sort;
 	} else {
 		$sort = "CID";
 	}
-	
-		//$sql = "SELECT * FROM ".TB_PREFIX."customers ORDER BY $sort $dir LIMIT $start, $limit";
-		$sql = "SELECT 
+
+	//$sql = "SELECT * FROM ".TB_PREFIX."customers ORDER BY $sort $dir LIMIT $start, $limit";
+	$sql = "SELECT 
 					c.id as CID 
 					, c.name as name 
+					, c.department as department
 					, (SELECT (CASE  WHEN c.enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled
 					, SUM(COALESCE(IF(pr.status = 1, ii.total, 0),  0)) AS customer_total
 					, COALESCE(ap.amount,0) AS paid
 					, (SUM(COALESCE(IF(pr.status = 1, ii.total, 0),  0)) - COALESCE(ap.amount,0)) AS owing
-				FROM 
-					".TB_PREFIX."customers c  
+			FROM
+					".TB_PREFIX."customers c
 					LEFT JOIN ".TB_PREFIX."invoices iv ON (c.id = iv.customer_id AND iv.domain_id = c.domain_id)
 					LEFT JOIN ".TB_PREFIX."preferences pr ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id)
 					LEFT JOIN ".TB_PREFIX."invoice_items ii ON (iv.id = ii.invoice_id AND iv.domain_id = ii.domain_id)
@@ -85,21 +85,21 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 						ON (iv3.id = p.ac_inv_id AND iv3.domain_id = p.domain_id)
 							GROUP BY iv3.customer_id, p.domain_id
 						) ap ON (ap.customer_id = c.id AND ap.domain_id = c.domain_id)
-				WHERE c.domain_id = :domain_id
-					  $where
-				GROUP BY CID
-				ORDER BY 
-					$sort $dir 
+			WHERE c.domain_id = :domain_id
+					$where
+			GROUP BY CID
+			ORDER BY
+					$sort $dir
 				$limit";
-	
-		if (empty($query)) {
-			$result = dbQuery($sql, ':domain_id', $auth_session->domain_id);
-		} else {
-			$result = dbQuery($sql, ':domain_id', $auth_session->domain_id, ':query', "%$query%");
-		}
 
-		return $result;
-		
+	if (empty($query)) {
+		$result = dbQuery($sql, ':domain_id', $auth_session->domain_id);
+	} else {
+		$result = dbQuery($sql, ':domain_id', $auth_session->domain_id, ':query', "%$query%");
+	}
+
+	return $result;
+
 }	
 
 $sth = sql('', $start, $dir, $sort, $rp, $page);
@@ -109,11 +109,10 @@ $customers = $sth->fetchAll(PDO::FETCH_ASSOC);
 
 $count = $sth_count_rows->rowCount();
 
-
 	$xml .= "<rows>";
 	$xml .= "<page>$page</page>";
 	$xml .= "<total>$count</total>";
-	
+
 	foreach ($customers as $row) {
 		$xml .= "<row id='".$row['CID']."'>";
 		$xml .= "<cell><![CDATA[
@@ -122,6 +121,7 @@ $count = $sth_count_rows->rowCount();
 		]]></cell>";		
 		$xml .= "<cell><![CDATA[".$row['CID']."]]></cell>";
 		$xml .= "<cell><![CDATA[".$row['name']."]]></cell>";
+		$xml .= "<cell><![CDATA[".$row['department']."]]></cell>";
 		$xml .= "<cell><![CDATA[".siLocal::number($row['customer_total'])."]]></cell>";
 		$xml .= "<cell><![CDATA[".siLocal::number($row['paid'])."]]></cell>";
 		$xml .= "<cell><![CDATA[".siLocal::number($row['owing'])."]]></cell>";
@@ -136,4 +136,4 @@ $count = $sth_count_rows->rowCount();
 	$xml .= "</rows>";
 
 echo $xml;
-?> 
+?>

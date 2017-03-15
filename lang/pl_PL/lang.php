@@ -2,10 +2,10 @@
 
 /*
 * Script: lang.php
-* 	English translation file
+* 	Polish translation file
 *
 * Last edited:
-*    2013-10-16
+*    2016-10-04
 *
 * License:
 *	 GPL v3 or above
@@ -89,7 +89,7 @@ $LANG['credit_card_number_new'] = "Nowy numer karty kredytowej";//1
 $LANG['credits'] = "Kredyty";//1
 $LANG['currency_code'] = "Kod waluty";//1
 $LANG['currency_sign'] = "Znak waluty";//1
-$LANG['currency_sign_non_dollar'] = "Euro, Funt, bez znaku $ przeczytaj to";//1
+$LANG['currency_sign_non_dollar'] = "Euro, Funt, bez znaku \$ przeczytaj to";//1
 $LANG['custom_field'] = "Własne pole";//1
 $LANG['custom_field1'] = "Własne pole 1";//1
 $LANG['custom_field2'] = "Własne pole 2";//1
@@ -103,6 +103,7 @@ $LANG['customer'] = "Klient";//1
 $LANG['customer_account'] = "Konto klienta";//1
 $LANG['customer_add'] = "Dodaj nowego Klienta";//1
 $LANG['customer_contact'] = "Osoba kontaktowa";//1
+$LANG['customer_department'] = "Departament";//1
 $LANG['customer_details'] = "Dane Klienta";//1
 $LANG['customer_edit'] = "Klient Edycja";//1
 $LANG['customer_id'] = "ID Klienta";//1
@@ -207,7 +208,7 @@ $LANG['help_currency_code'] = "Kod waluty jest 3 appreviation list do swojej wal
 $LANG['help_custom_fields'] = "To pole jest Pole niestandardowe . Oznacza to, że etykieta może być zdefiniowane jako co chcesz (np. kodów kreskowych, NIP, MSN, itd. ..). <br /> <br /> Do edycji i przeglądania istniejących Custom Fields należy wybrać opcję Custom Fields w menu Opcje. ";//1
 $LANG['help_customer_contact'] = " Do wiadomości . lub pole Kontaktów z Klientami pozwalają określić kontakt w firmie klienta. <br /> <br /> Jest to przydatne, jeśli klient ma wielu pracowników i musisz bezpośrednio określić w fakturze, który w ciągu swojej działalności klienta faktura ta jest dla . <br /> <br /> znaczy. W klienta Zakładu Springfield władzy może chcesz określić pana Burnsa (lub Smithers) jako kontakt z klientem, ponieważ są one osoba, która dostaje fakturę. <br /> <br /> Więc Faktura będzie wyglądał <br /> <br /> Klienta: Springfield Elektrownia <br /> wiadomości:. Pan Burns <br /> ";//1
 $LANG['help_database_patches'] = "<b> Łatki bazy danych należy zastosować </ b> <br /> Istnieją łatki baz danych, które muszą być stosowane, proszę Menedżer aktualizacji bazy danych 'wybierz z menu Opcje i postępuj zgodnie z instrukcjami. <br /> <Br /> Menedżer aktualizacji bazy danych 'to jak proste Invocies zarządza modyfikację struktury prostej bazy danych faktur. Z każdym nowym wydaniu nie może być łatki danych', które muszą być stosowane. uaktualniania bazy danych Zarządzanie wygląda po tych łat bazy danych. < BR /> <br /> łatki bazy danych są indywidualne modyfikacje prostej bazy danych faktur. W nowej wersji może istnieć wiele poprawek, które muszą być stosowane. ";//1
-$LANG['help_default_invoice_template_text'] = "Wartość wpisana w szablonie detault faktura musi być rzeczywista nazwa folderu szablonu, który chcesz zaznaczyć. Na fakturze szablony foldery znajdują się w (. / Templates / faktury /) <br /> <br />";//1
+$LANG['help_default_invoice_template_text'] = "Wartość wpisana w szablonie default faktura musi być rzeczywista nazwa folderu szablonu, który chcesz zaznaczyć. Na fakturze szablony foldery znajdują się w (. / Templates / faktury /) <br /> <br />";//1
 $LANG['help_delete'] = "Poprzez umożliwienie Delete, będziesz w stanie usunąć wszelkie faktury nie chcemy już dłużej za pośrednictwem szybkiego podglądu tej faktury. <br /> <br /> Aby usunąć fakturę, należy włączyć tę opcję, a następnie przejdź do Zarządzanie Faktura stronie iwybierz Quick View na fakturze, który chcesz usunąć w ekran Quick View nie będzie teraz opcję Usuń w menu Akcje kliknij ten przycisk i postępuj zgodnie z instrukcjami -... Faktura zostanie usunięte <br /> <br /> Uwaga: Obecnie tylko faktury mogą być usunięte, ale w najbliższej przyszłości zostanie to rozszerzone na wszystkich pozostałych sekcjach (np. dotykanie billers, klientów, itp.).";//1
 $LANG['help_email_bcc'] = "To pole nie jest obowiązkowe i ma wartość domyślną z adresem Billers e-mail. <br /> <br /> Jego zaleca się BCC się na ten e-mail tak, że można otrzymać jego kopię. Dzięki temu masz pewność, że wiadomość została poprawnie wysłana i zawsze masz kopię zapasową wiadomości e-mail <br /> <br /> <i> Uwaga:. Możesz dodać wiele adresów e-mail tutaj - wystarczy użyć eith lub; to split the addresses</i>";//1
 $LANG['help_email_cc'] = "To pole nie jest obowiązkowe Tutaj można podać dowolny adres e-mail, który chcesz CC, ale nie mogę dodać więcej niż 1 adres e-mail w tej dziedzinie <br /> <br /> <i> Uwaga: Można dodawać wiele adresów email tutaj -. wystarczy użyć eith lub; to split the addresses</i>";//1
@@ -250,7 +251,7 @@ $LANG['help_tax_rate_sign'] = "A tax can be either a percentage based (ie. Sales
 $LANG['help_text'] = "<b>Warning</b><br /><br />Please backup your Simple Invoices database before running the database update, just incase anything bad happens.<br /><br />To backup the database, select 'Backup Database' from the Options menu, or use phpMyAdmin(if you have this installed) to back up the database.";//1
 $LANG['help_user_role'] = "There are 3 roles available <br /><br />Administrator:<br />which has access to all of Simple Invoices<br /><br />User:<br />which has read/write acess to all of Simple Invoices but with no access to the Settings menu <br /><br />Viewer:<br />which has read-only version of User.";//1
 $LANG['help_what_are_custom_fields'] = "Custom Fields are special fields in billers, products, customers, and invoices that you can label as whatever you want.<br /><br />Whish there was a Tax ID field in biller, just go to the Custom Fields page and define one of the blank Płatnik Custom Fields as Tax ID.<br /><br />Now when you go to edit a Płatnik there'll be a new field there called Tax ID or whatever you specified it as.";//1
-$LANG['help_wheres_the_edit_button'] = "In the Manage Payment screen there is no 'Edit' button. This is to provide a proper 'audit trail' of payments recorded in Simple Invoices.<br /><br />If you've made a mistake with a payment entry the best option is to reverse the entry and entery it again correctly<br /><br />Reverse the entry - what the?<br /> This basically mean just doing a negative entry for the same amount as the original entry.<br /><br />ie.<br />If your entered $110<br />but you should of entered $1100<br />to reverse this entry enter -$110 against the same invoice and then enter the correct amount of $1100";//1
+$LANG['help_wheres_the_edit_button'] = "In the Manage Payment screen there is no 'Edit' button. This is to provide a proper 'audit trail' of payments recorded in Simple Invoices.<br /><br />If you've made a mistake with a payment entry the best option is to reverse the entry and entery it again correctly<br /><br />Reverse the entry - what the?<br /> This basically mean just doing a negative entry for the same amount as the original entry.<br /><br />ie.<br />If your entered \$110<br />but you should of entered \$1100<br />to reverse this entry enter -$110 against the same invoice and then enter the correct amount of \$1100";//1
 $LANG['hide_details'] = "Ukryj szczegóły";//1
 $LANG['home'] = "Strona główna";//1
 $LANG['id'] = "ID";//1

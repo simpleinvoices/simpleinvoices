@@ -8,7 +8,7 @@
 *  Esteban Mat&iacute;as Vergara, Anton Meixome, Agustin Henze, Facundo Ameal
 *
 * Last edited:
-*    2014-06-03
+*    2016-10-04
 *
 * License:
 *	 GPL v3 or above
@@ -92,7 +92,7 @@ $LANG['credit_card_number_new'] = "Nuevo número de tarjeta de crédito";//1
 $LANG['credits'] = "Creditos";//1
 $LANG['currency_code'] = "Código de divisa";//1
 $LANG['currency_sign'] = "Símbolo de la divisa";//1
-$LANG['currency_sign_non_dollar'] = "Euro, Libra, no signo $ por favor lea esto";//1
+$LANG['currency_sign_non_dollar'] = "Euro, Libra, no signo \$ por favor lea esto";//1
 $LANG['custom_field'] = "Campo personalizado";//1
 $LANG['custom_field1'] = "Campo personalizado 1";//1
 $LANG['custom_field2'] = "Campo personalizado 2";//1
@@ -106,6 +106,7 @@ $LANG['customer'] = "Cliente";//1
 $LANG['customer_account'] = "Cuenta del Cliente";//1
 $LANG['customer_add'] = "Añadir Nuevo Cliente";//1
 $LANG['customer_contact'] = "Contacto del cliente (a la atención de)";//1
+$LANG['customer_department'] = "Departamento";//1
 $LANG['customer_details'] = "Detalles del cliente";//1
 $LANG['customer_edit'] = "Editar Cliente";//1
 $LANG['customer_id'] = "ID Cliente";//1
@@ -217,7 +218,7 @@ $LANG['help_email_cc'] = "Este campo no es obligatorio. Aquí puedes especificar
 $LANG['help_email_from'] = "Este es un campo obligatorio y tiene el valor predeterminado de la dirección de correo electrónico del emisor de factura. Puede cambiar esta dirección de correo electrónico si quieres, pero no puedes agregar más de una dirección de correo electrónico en este campo.<br /><br /><i>Nota: Sólo puede haber una dirección de correo electrónico en este campo.</i>";//1
 $LANG['help_email_to'] = "Este es un campo obligatorio y tiene el valor predeterminado de la dirección de correo electrónico del cliente. Puede cambiar esta dirección de correo electrónico si quieres.<br /><br /><i>Nota: Puedes agregar varias direcciones de correo electrónico aquí - sólo tienes que utilizar , o ; para dividir las direcciones.</i>";//1
 $LANG['help_insert_biller_text'] = "Para seleccionar ningún logo, seleccione '_default_blank_logo.png' de la lista.<br /><br />Para añadir logos adicionales a Simple Invoices, copie el archivo del logo en el directorio logo de la carpeta de Simple Invoices.";//1
-$LANG['help_inv_pref_currency_sign'] = "This is the curreny symbol that will be used through-out the invoice. <br /><br /><b>Note:</b> Euro, Pound etc.. please use the html code for you currency sign in this field.  Refer to the list of html codes on the following website for your non $ currency sign <a href='http://www.ascii.cl/htmlcodes.htm'>http://www.ascii.cl/htmlcodes.htm</a>.  <br /><br />This is required so that PDF can work correctly with non $ symbols<br /><br /> &#38;#163; is the html code for the Pound,<br /> &#38;#8364; for the Euro, etc..";//1
+$LANG['help_inv_pref_currency_sign'] = "This is the curreny symbol that will be used through-out the invoice. <br /><br /><b>Note:</b> Euro, Pound etc.. please use the html code for your currency sign in this field.  Refer to the list of html codes on the following website for your non \$ currency sign <a href='http://www.ascii.cl/htmlcodes.htm'>http://www.ascii.cl/htmlcodes.htm</a>.  <br /><br />This is required so that PDF can work correctly with non \$ symbols<br /><br /> &#38;#163; is the html code for the Pound,<br /> &#38;#8364; for the Euro, etc..";//1
 $LANG['help_inv_pref_description'] = "Este es el nombre del conjunto de preferencia - no se utiliza en la propia factura, sólo en la creación de la factura cuando seleccionas en la lista desplegable cual preferencia de factura deseas utilizar.";//1
 $LANG['help_inv_pref_invoice_detail_heading'] = "This is what will appear as the heading of the footer/details section of the invoice.";//1
 $LANG['help_inv_pref_invoice_detail_line'] = "Este es el texto que aparece bajo el título detalles / pie de página. Normalmente se utiliza para definir las condiciones de pago, etc.";//1
@@ -253,7 +254,7 @@ $LANG['help_tax_rate_sign'] = "A tax can be either a percentage based (ie. Sales
 $LANG['help_text'] = "<b>Warning</b><br /><br />Please backup your Simple Invoices database before running the database update, just incase anything bad happens.<br /><br />To backup the database, select 'Backup Database' from the Options menu, or use phpMyAdmin(if you have this installed) to back up the database.";//1
 $LANG['help_user_role'] = "There are 3 roles available <br /><br />Administrator:<br />which has access to all of Simple Invoices<br /><br />User:<br />which has read/write acess to all of Simple Invoices but with no access to the Settings menu <br /><br />Viewer:<br />which has read-only version of User.";//1
 $LANG['help_what_are_custom_fields'] = "Los campos personalizados son campos especiales para los emisores de facturas, productos, clientes y facturas que se pueden etiquetar como lo que quieras.<br /><br />Desearías que había un campo de identificación fiscal de emisor de factura, basta con ir a la página de campos personalizados y definir uno de los campos personalizados blanco como NIF.<br /><br />Ahora, cuando vas a editar un emisor de factura habrá un nuevo campo nombrado NIF, o como sea que lo hayas nombrado.";//1
-$LANG['help_wheres_the_edit_button'] = "In the Manage Payment screen there is no 'Edit' button. This is to provide a proper 'audit trail' of payments recorded in Simple Invoices.<br /><br />If you've made a mistake with a payment entry the best option is to reverse the entry and entery it again correctly<br /><br />Reverse the entry - what the?<br /> This basically means just doing a negative entry for the same amount as the original entry.<br /><br />ie.<br />If your entered $110<br />but you should've entered $1100<br />to reverse this entry enter -$110 against the same invoice and then enter the correct amount of $1100";//1
+$LANG['help_wheres_the_edit_button'] = "In the Manage Payment screen there is no 'Edit' button. This is to provide a proper 'audit trail' of payments recorded in Simple Invoices.<br /><br />If you've made a mistake with a payment entry the best option is to reverse the entry and entery it again correctly<br /><br />Reverse the entry - what the?<br /> This basically means just doing a negative entry for the same amount as the original entry.<br /><br />ie.<br />If your entered \$110<br />but you should've entered \$1100<br />to reverse this entry enter -$110 against the same invoice and then enter the correct amount of \$1100";//1
 $LANG['hide_details'] = "Ocultar detalles";//1
 $LANG['home'] = "Inicio";//1
 $LANG['id'] = "ID";//1
