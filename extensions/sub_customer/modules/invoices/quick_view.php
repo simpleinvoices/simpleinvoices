@@ -50,12 +50,12 @@ $invoice['url_for_pdf'] = $url_for_pdf;
 
 $customFieldLabels = getCustomFieldLabels('',true);
 
-$customField = array();
+$customFields = array();
 for($i=1;$i<=4;$i++) {
-    $customField[$i] = CustomFields::show_custom_field("invoice_cf$i"  , $invoice["custom_field$i"],
-                                                       "read"          , 'details_screen summary'  ,
-                                                       'details_screen', 'details_screen'          ,
-                                                       5               , ':');
+    $customFields[$i] = CustomFields::show_custom_field("invoice_cf$i"  , $invoice["custom_field$i"],
+                                                        "read"          , 'details_screen summary'  ,
+                                                        'details_screen', 'details_screen'          ,
+                                                        5               , ':');
 }
 
 $customerAccount = null;
@@ -63,7 +63,7 @@ $customerAccount['total'] = Customer::calc_customer_total($customer['id']);
 $customerAccount['paid']  = Payment::calc_customer_paid($customer['id']);
 $customerAccount['owing'] = $customerAccount['total'] - $customerAccount['paid'];
 
-$smarty->assign("customField"            , $customField);
+$smarty->assign("customFields"           , $customFields);
 $smarty->assign("customFieldLabels"      , $customFieldLabels);
 $smarty->assign("invoice_age"            , $invoice_age);
 $smarty->assign("invoice_number_of_taxes", $invoice_number_of_taxes);

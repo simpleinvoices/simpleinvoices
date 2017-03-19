@@ -81,7 +81,7 @@ class CustomFields {
                         "    </a>\n" .
                         "  </th>\n" .
                         "  <td>\n" .
-                        "    <input type='text' name='customField$cfn' value='$custom_field_value' size='25' />\n" .
+                        "    <input type='text' name='custom_field$cfn' value='$custom_field_value' size='25' />\n" .
                         "  </td>\n" .
                         "</tr>\n";
             } else {

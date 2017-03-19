@@ -161,7 +161,10 @@
         <a href='#' class="details si_hide" onclick="javascript: $('.details').removeClass('si_show').addClass('si_hide');$('.show-details').addClass('si_show').removeClass('si_hide');" ><img src="images/common/page_white_delete.png" title="{$LANG.hide_details}" alt="" />{$LANG.hide_details}</a>
       </div>
       <table class="si_invoice_bot">
-        {$show_custom_field.1} {$show_custom_field.2} {$show_custom_field.3} {$show_custom_field.4}
+        {$customFields.1}
+        {$customFields.2}
+        {$customFields.3}
+        {$customFields.4}
         {* {showCustomFields categorieId="4" itemId=""} *}
         <tr>
           <td class='si_invoice_notes' colspan="2">

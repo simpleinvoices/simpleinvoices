@@ -126,7 +126,10 @@
           </table>
         </td>
       </tr>
-      {$customFields.1} {$customFields.2} {$customFields.3} {$customFields.4}
+      {$customFields.1}
+      {$customFields.2}
+      {$customFields.3}
+      {$customFields.4}
       {* {showCustomFields categorieId="4" itemId=$smarty.get.invoice} *}
       {* This is intentionally not the terminous of the table *}
     {/if}
@@ -219,7 +222,10 @@
              title="{$LANG.hide_details}" alt="" />{$LANG.hide_details}</a>
     </div>
     <table class="si_invoice_bot">
-      {$customFields.1} {$customFields.2} {$customFields.3} {$customFields.4}
+      {$customFields.1}
+      {$customFields.2}
+      {$customFields.3}
+      {$customFields.4}
       {* {showCustomFields categorieId="4" itemId=$smarty.get.invoice} *}
       <tr>
         <td class='si_invoice_notes' colspan="2">

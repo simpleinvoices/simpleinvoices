@@ -21,6 +21,7 @@ class Invoice {
         $lcl_list['date'] = sqlDateWithTime($lcl_list['date']); 
         $pdoDb->setFauxPost($lcl_list);
         $pdoDb->setExcludedFields("id");
+
         $id = $pdoDb->request("INSERT", "invoices");
         // @formatter:on
 
@@ -126,10 +127,10 @@ class Invoice {
                                   'preference_id' => $_POST['preference_id'],
                                   'date'          => sqlDateWithTime($_POST['date']),
                                   'note'          => trim($_POST['note']),
-                                  'customField1'  => (isset($_POST['customField1']) ? $_POST['customField1'] : ''),
-                                  'customField2'  => (isset($_POST['customField2']) ? $_POST['customField2'] : ''),
-                                  'customField3'  => (isset($_POST['customField3']) ? $_POST['customField3'] : ''),
-                                  'customField4'  => (isset($_POST['customField4']) ? $_POST['customField4'] : '')));
+                                  'custom_field1'  => (isset($_POST['custom_field1']) ? $_POST['custom_field1'] : ''),
+                                  'custom_field2'  => (isset($_POST['custom_field2']) ? $_POST['custom_field2'] : ''),
+                                  'custom_field3'  => (isset($_POST['custom_field3']) ? $_POST['custom_field3'] : ''),
+                                  'custom_field4'  => (isset($_POST['custom_field4']) ? $_POST['custom_field4'] : '')));
         $pdoDb->setExcludedFields(array("id", "domain_id"));
         $result = $pdoDb->request("UPDATE", "invoices");
         return $result;

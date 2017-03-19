@@ -47,12 +47,12 @@ $invoice['url_for_pdf'] = $url_for_pdf;
 
 $customFieldLabels = getCustomFieldLabels('',true);
 
-$customField = array();
+$customFields = array();
 for($i=1;$i<=4;$i++) {
-    $customField[$i] = CustomFields::show_custom_field("invoice_cf$i"  , $invoice["custom_field$i"],
-                                                       "read"          , 'details_screen summary'  ,
-                                                       'details_screen', 'details_screen'          ,
-                                                       5               , ':');
+    $customFields[$i] = CustomFields::show_custom_field("invoice_cf$i"  , $invoice["custom_field$i"],
+                                                        "read"          , 'details_screen summary'  ,
+                                                        'details_screen', 'details_screen'          ,
+                                                        5               , ':');
 }
 $pageActive = "invoices";
 
@@ -66,7 +66,7 @@ $word_processor = null;
 $spreadsheet = null;
 
 $smarty->assign('pageActive'       , $pageActive);
-$smarty->assign("customField"      , $customField);
+$smarty->assign("customFields"     , $customFields);
 $smarty->assign("customFieldLabels", $customFieldLabels);
 $smarty->assign("invoice_age"      , $invoice_age);
 $smarty->assign("invoiceItems"     , $invoiceItems);

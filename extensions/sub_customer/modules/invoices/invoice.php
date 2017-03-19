@@ -47,10 +47,10 @@ if (!empty( $_GET['line_items'] )) {
     $dynamic_line_items = $defaults['line_items'] ;
 }
 
-$show_custom_field = array();
+$customFields = array();
 for($i=1;$i<=4;$i++) {
     // Note that this is a 1's based array and not a 0's based array.
-    $show_custom_field[$i] = CustomFields::show_custom_field("invoice_cf$i"  , '', "write", '',
+    $customFields[$i] = CustomFields::show_custom_field("invoice_cf$i"  , '', "write", '',
                                                              "details_screen", '', ''     , '');
 }
 
@@ -64,7 +64,7 @@ $smarty->assign("products"          , $products);
 $smarty->assign("preferences"       , $preferences);
 $smarty->assign("defaultPreference" , $defaultPreference);
 $smarty->assign("dynamic_line_items", $dynamic_line_items);
-$smarty->assign("show_custom_field" , $show_custom_field);
+$smarty->assign("customFields"      , $customFields);
 $smarty->assign("defaultCustomerID" , $defaultCustomer['id']);
 $smarty->assign("defaults"          , $defaults);
 $smarty->assign('active_tab'        , '#money');

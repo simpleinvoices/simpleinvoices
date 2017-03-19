@@ -21,7 +21,7 @@ function invoice_customer_change(customer_id) {
             $('#gmail_loading').hide();
 
             // document.getElementById('product'+row_number ).innerHTML=data;
-            $("#customField1").html(data);
+            $("#custom_field1").html(data);
         },
         complete : function() {
             $('#gmail_loading').hide();

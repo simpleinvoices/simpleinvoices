@@ -57,10 +57,10 @@
 {$preference.pref_inv_wording} {$LANG.number_short}: {$invoice.id}
 ::
 {$preference.pref_inv_wording} {$LANG.date}: {$invoice.date}
-{$customField.1}
-{$customField.2}
-{$customField.3}
-{$customField.4}
+{$customFields.1}
+{$customFields.2}
+{$customFields.3}
+{$customFields.4}
 <br />
 <br />
 <!-- Biller section -->

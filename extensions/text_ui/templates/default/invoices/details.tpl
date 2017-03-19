@@ -91,7 +91,10 @@
         </textarea>
       </td>
     </tr>
-    {$customFields.1} {$customFields.2} {$customFields.3} {$customFields.4}
+    {$customFields.1}
+    {$customFields.2}
+    {$customFields.3}
+    {$customFields.4}
 
     {* ******************************************************************
     {showCustomFields categorieId="4" itemId=$smarty.get.invoice}
@@ -206,7 +209,10 @@
             </td>
             <td></td>
           </tr>
-          {$customFields.1} {$customFields.2} {$customFields.3} {$customFields.4}
+          {$customFields.1}
+          {$customFields.2}
+          {$customFields.3}
+          {$customFields.4}
         </table>
       </td>
     </tr>

@@ -77,7 +77,10 @@
     <th class="">{$LANG.date_upper}:</th>
     <td colspan="5">{$invoice.date|htmlsafe}</td>
   </tr>
-  {$customField.1} {$customField.2} {$customField.3} {$customField.4}
+  {$customFields.1}
+  {$customFields.2}
+  {$customFields.3}
+  {$customFields.4}
   <!-- Biller section -->
   <tr class="tr_head">
     <th>{$LANG.biller}:</th>
@@ -107,7 +110,7 @@
   </tr>
   <tr class="biller">
     <th>{$LANG.state}, {$LANG.zip}:</th>
-    <td colspan="3">{$biller.state|htmlsafe},&nbsp;{$biller.zip_cod|htmlsafe}</td>
+    <td colspan="3">{$biller.state|htmlsafe},&nbsp;{$biller.zip_code|htmlsafe}</td>
     <th>{$LANG.mobile_short}:</th>
     <td>{$biller.mobile_phone|htmlsafe}</td>
   </tr>
@@ -121,25 +124,25 @@
     <th>{$LANG.email}:</th>
     <td colspan="5">{$biller.email|htmlsafe}</td>
   </tr>
-  {if !empty($customFieldLabel.biller_cf1)}
+  {if !empty($customFieldLabels.biller_cf1)}
     <tr class="biller">
       <th>{$customFieldLabels.biller_cf1|htmlsafe}:</th>
       <td colspan="5">{$biller.custom_field1|htmlsafe}</td>
     </tr>
   {/if}
-  {if !empty($customFieldLabel.biller_cf2)}
+  {if !empty($customFieldLabels.biller_cf2)}
     <tr class="biller">
       <th>{$customFieldLabels.biller_cf2|htmlsafe}:</th>
       <td colspan="5">{$biller.custom_field2|htmlsafe}</td>
     </tr>
   {/if}
-  {if !empty($customFieldLabel.biller_cf3)}
+  {if !empty($customFieldLabels.biller_cf3)}
     <tr class="biller">
       <th>{$customFieldLabels.biller_cf3|htmlsafe}:</th>
       <td colspan="5">{$biller.custom_field3|htmlsafe}</td>
     </tr>
   {/if}
-  {if !empty($customFieldLabel.biller_cf4)}
+  {if !empty($customFieldLabels.biller_cf4)}
     <tr class="biller">
       <th>{$customFieldLabels.biller_cf4|htmlsafe}:</th>
       <td colspan="5">{$biller.custom_field4|htmlsafe}</td>
@@ -195,25 +198,25 @@
     <th>{$LANG.email}:</th>
     <td colspan="5">{$customer.email|htmlsafe}</td>
   </tr>
-  {if !empty($customFieldLabel.customer_cf1)}
+  {if !empty($customFieldLabels.customer_cf1)}
     <tr class="customer">
       <th>{$customFieldLabels.customer_cf1}:</th>
       <td colspan="5">{$customer.custom_field1|htmlsafe}</td>
     </tr>
   {/if}
-  {if !empty($customFieldLabel.customer_cf2)}
+  {if !empty($customFieldLabels.customer_cf2)}
     <tr class="customer">
       <th>{$customFieldLabels.customer_cf2}:</th>
       <td colspan="5">{$customer.custom_field2|htmlsafe}</td>
     </tr>
   {/if}
-  {if !empty($customFieldLabel.customer_cf3)}
+  {if !empty($customFieldLabels.customer_cf3)}
     <tr class="customer">
       <th>{$customFieldLabels.customer_cf3}:</th>
       <td colspan="5">{$customer.custom_field3|htmlsafe}</td>
     </tr>
   {/if}
-  {if !empty($customFieldLabel.customer_cf4)}
+  {if !empty($customFieldLabels.customer_cf4)}
     <tr class="customer">
       <th>{$customFieldLabels.customer_cf4}:</th>
       <td colspan="5">{$customer.custom_field4|htmlsafe}</td>
@@ -304,13 +307,13 @@
                 <td colspan="5">
                   <table class="si_invoice_view_custom_items">
                     <tr>
-                    {if !empty($customFieldLabel.product_cf1)}
+                    {if !empty($customFieldLabels.product_cf1)}
                       <th>{$customFieldLabels.product_cf1|htmlsafe}:</th>
                       <td>{$invoiceItem.product.custom_field1|htmlsafe}</td>
                     {else}
                       <td colspan="2"></td>
                     {/if}
-                    {if !empty($customFieldLabel.product_cf2)}
+                    {if !empty($customFieldLabels.product_cf2)}
                       <th>{$customFieldLabels.product_cf2|htmlsafe}:</th>
                       <td>{$invoiceItem.product.custom_field2|htmlsafe}</td>
                     {else}
@@ -318,13 +321,13 @@
                     {/if}
                     </tr>
                     <tr>
-                    {if !empty($customFieldLabel.product_cf3)}
+                    {if !empty($customFieldLabels.product_cf3)}
                       <th>{$customFieldLabels.product_cf3|htmlsafe}:</th>
                       <td>{$invoiceItem.product.custom_field3|htmlsafe}</td>
                     {else}
                       <td colspan="2"></td>
                     {/if}
-                    {if !empty($customFieldLabel.product_cf4)}
+                    {if !empty($customFieldLabels.product_cf4)}
                       <th>{$customFieldLabels.product_cf4|htmlsafe}:</th>
                       <td>{$invoiceItem.product.custom_field4|htmlsafe}</td>
                     {else}
@@ -334,7 +337,7 @@
                   </table>
                 </td>
               </tr>
-              {*TODO: CustomField is normaly stored for a product.
+              {*TODO: CustomFields are normaly stored for a product.
                       Here it needs to be added to the invoices Item -> categorie 5 *}
               {* {showCustomFields categorieId="3" itemId=$invoiceItem.productId} *}
             {/if}
@@ -350,13 +353,13 @@
                 <td colspan="5">
                   <table class="si_invoice_view_custom_items">
                     <tr>
-                    {if !empty($customFieldLabel.product_cf1)}
+                    {if !empty($customFieldLabels.product_cf1)}
                       <th>{$customFieldLabels.product_cf1|htmlsafe}:</th>
                       <td>{$invoiceItem.product.custom_field1|htmlsafe}</td>
                     {else}
                       <td colspan="2"></td>
                     {/if}
-                    {if !empty($customFieldLabel.product_cf2)}
+                    {if !empty($customFieldLabels.product_cf2)}
                       <th>{$customFieldLabels.product_cf2|htmlsafe}:</th>
                       <td>{$invoiceItem.product.custom_field2|htmlsafe}</td>
                     {else}
@@ -364,13 +367,13 @@
                     {/if}
                     </tr>
                     <tr>
-                    {if !empty($customFieldLabel.product_cf3)}
+                    {if !empty($customFieldLabels.product_cf3)}
                       <th>{$customFieldLabels.product_cf3|htmlsafe}:</th>
                       <td>{$invoiceItem.product.custom_field3|htmlsafe}</td>
                     {else}
                       <td colspan="2"></td>
                     {/if}
-                    {if !empty($customFieldLabel.product_cf4)}
+                    {if !empty($customFieldLabels.product_cf4)}
                       <th>{$customFieldLabels.product_cf4|htmlsafe}:</th>
                       <td>{$invoiceItem.product.custom_field4|htmlsafe}</td>
                     {else}

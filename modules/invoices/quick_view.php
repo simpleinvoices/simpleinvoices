@@ -50,12 +50,12 @@ $invoice['url_for_pdf'] = $url_for_pdf;
 
 $customFieldLabels = getCustomFieldLabels('',true);
 
-$customField = array();
+$customFields = array();
 for($i=1;$i<=4;$i++) {
-    $customField[$i] = CustomFields::show_custom_field("invoice_cf$i", $invoice["custom_field$i"],
-                                                       "read"        , 'summary'                 ,
-                                                       ''            , ''                        ,
-                                                       5             , ':');
+    $customFields[$i] = CustomFields::show_custom_field("invoice_cf$i", $invoice["custom_field$i"],
+                                                        "read"        , 'summary'                 ,
+                                                        ''            , ''                        ,
+                                                        5             , ':');
 }
 
 $attributes = $pdoDb->request("SELECT", "products_attributes");
@@ -70,7 +70,7 @@ $smarty->assign("attributes"             , $attributes);
 $smarty->assign('pageActive'             , 'invoice');
 $smarty->assign('subPageActive'          , 'invoice_view');
 $smarty->assign('active_tab'             , '#money');
-$smarty->assign("customField"            , $customField);
+$smarty->assign("customFields"           , $customFields);
 $smarty->assign("customFieldLabels"      , $customFieldLabels);
 $smarty->assign("invoice_age"            , $invoice_age);
 $smarty->assign("invoice_number_of_taxes", $invoice_number_of_taxes);
