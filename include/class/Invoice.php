@@ -436,15 +436,11 @@ class Invoice {
             $pdoDb->addSimpleWhere("b.id", $auth_session->user_id, "AND");
         }
 
-        // @formatter:off
         $count_type = ($type == "count");
         $noage_type = ($type == "noage" || $count_type);
 
-        $validFields = array('index_id', 'index_name', 'iv.id', 'biller', 'customer'  , 'invoice_total',
-                             'owing'   , 'date'      , 'aging', 'type'  , 'preference', 'type_id');
-        // @formatter:on
-
-        if (empty($sort) || !in_array($sort, $validFields)) $sort = "index_id";
+        if (empty($sort) ||
+            !in_array($sort, array('index_id', 'b.name', 'c.name', 'date', 'invoice_total', 'owing', 'aging'))) $sort = "index_id";
         if (empty($dir)) $dir = "DESC";
         $pdoDb->setOrderBy(array($sort, $dir));
 

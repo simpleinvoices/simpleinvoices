@@ -4,7 +4,7 @@ global $LANG;
 
 // @formatter:off
 $dir  = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "DESC" ;
-$sort = (isset($_POST['sortname']) ) ? $_POST['sortname']  : "ap.id" ;
+$sort = (isset($_POST['sortname']) ) ? $_POST['sortname']  : "ac_inv_id" ;
 $rp   = (isset($_POST['rp'])       ) ? $_POST['rp']        : "25" ;
 $page = (isset($_POST['page'])     ) ? $_POST['page']      : "1" ;
 // @formatter:on
@@ -74,11 +74,11 @@ function sql($type = '', $dir, $sort, $rp, $page) {
     $start = (($page-1) * $rp);
     $pdoDb->setLimit($rp, $start);
 
-    if (in_array($sort, array('ap.id', 'ap.ac_inv_id', 'description'))) {
+    if (in_array($sort, array('ap.id', 'ac_inv_id', 'c.name', 'b.name', 'ac_amount', 'description', 'date'))) {
         if (!preg_match('/^(asc|desc)$/iD', $dir)) $dir = 'D';
         $oc = new OrderBy($sort, $dir);
     } else {
-        $oc = new OrderBy("description");
+        $oc = new OrderBy("ac_inv_id", "DESC");
     }
 
     $fn = new FunctionStmt("DATE_FORMAT", "ac_date,'%Y-%m-%d'");

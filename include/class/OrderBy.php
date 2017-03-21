@@ -41,13 +41,13 @@ class OrderBy {
      */
     public function addField($field, $order = 'A') {
         $lcl_order = strtoupper($order);
-        if (preg_match('/^(A|D|ASC|DESC)$/', $lcl_order) != 1) {
+        if (!preg_match('/^(A|D|ASC|DESC)$/', $lcl_order)) {
             $str = "OrderBy - addField(): Invalid order, $lcl_order, specified.";
             error_log($str);
             throw new PdoDbException($str);
         }
 
-        $lcl_order = ($lcl_order == 'A' ? 'ASC' : 'DESC');
+        $lcl_order = (preg_match('/^(A|ASC)$/', $lcl_order) ? 'ASC' : 'DESC');
 
         if (is_array($field)) {
             foreach($field as $item) {

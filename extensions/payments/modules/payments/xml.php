@@ -71,9 +71,17 @@ function sql($type = '', $dir, $sort, $rp, $page) {
     $start = (($page-1) * $rp);
     $pdoDb->setLimit($rp, $start);
 
-    if (in_array($sort, array('ap.id', 'ap.ac_inv_id', 'date'))) {
-        if (!preg_match('/^(asc|desc)$/iD', $dir)) $dir = 'D';
-        $oc = new OrderBy($sort, $dir);
+    if (in_array($sort, array('ap.id', 'ac_inv_id', 'ac_amount', 'type', 'b.name', 'c.name', 'ac_date'))) {
+        if (!preg_match('/^(asc|desc)$/iD', $dir)) {
+            $dir = 'D';
+        }
+
+        if ($sort == 'xxxtype') {
+            $oc = new OrderBy('description', $dir);
+            $oc->addField('ac_check_number', $dir);
+        } else {
+            $oc = new OrderBy($sort, $dir);
+        }
     } else {
         $oc = new OrderBy("ap.ac_inv_id", "D");
     }
@@ -89,6 +97,10 @@ function sql($type = '', $dir, $sort, $rp, $page) {
     
     $fn = new FunctionStmt("CONCAT", "pr.pref_inv_wording,' ',iv.index_id");
     $se = new Select($fn, null, null, "index_name");
+    $pdoDb->addToSelectStmts($se);
+
+    $fn = new FunctionStmt("CONCAT", "description,' ',ac_check_number");
+    $se = new Select($fn, null, null, "type");
     $pdoDb->addToSelectStmts($se);
 
     $result = $pdoDb->request("SELECT", "payment", "ap");
@@ -124,7 +136,7 @@ foreach ($payments as $row) {
     $xml .= "<cell><![CDATA[".$row['bname']."]]></cell>";
     $xml .= "<cell><![CDATA[".siLocal::number($row['ac_amount'])."]]></cell>";
     $xml .= "<cell><![CDATA[".$notes."]]></cell>";
-    $xml .= "<cell><![CDATA[".$row['description']." ".$row['ac_check_number']."]]></cell>";
+    $xml .= "<cell><![CDATA[".$row['type']."]]></cell>";
     $xml .= "<cell><![CDATA[".siLocal::date($row['date'])."]]></cell>";
     $xml .= "</row>";
 }

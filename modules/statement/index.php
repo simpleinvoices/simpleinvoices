@@ -18,7 +18,7 @@
 global $menu, $pdoDb, $smarty;
 
 checkLogin ();
-
+error_log("in invoice.php");
 function firstOfMonth() {
     return date ( "Y-m-d", strtotime ( '01-01-' . date ( 'Y' ) . ' 00:00:00' ) );
 }
