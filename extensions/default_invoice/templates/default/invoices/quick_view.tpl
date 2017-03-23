@@ -400,7 +400,7 @@
                       <td></td>
                     {/if}
                     {if !empty($customFieldLabels.product_cf2)}
-                      <td width=50% class='details_screen'>
+                      <td width="50%" class='details_screen'>
                         {$customFieldLabels.product_cf2|htmlsafe}: {$invoiceItem.product.custom_field2|htmlsafe}
                       </td>
                     {/if}
@@ -519,7 +519,7 @@
   </tr>
   <tr class="account">
     <td class="account" colspan="8">{$preference.pref_inv_wording|htmlsafe} {$invoice.id}</td>
-    <td width=5%></td>
+    <td width="5%"></td>
     <td class="columnleft" width="5%"></td>
     <td class="account" colspan="6">
       <a href='index.php?module=customers&view=details&id={$customer.id}&action=view'>{$LANG.customer_account}</a>
