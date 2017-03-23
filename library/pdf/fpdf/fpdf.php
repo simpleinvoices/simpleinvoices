@@ -1781,6 +1781,8 @@ if (false) {
       $style=$this->FontStyle.($this->underline ? 'U' : '');
 
       $size=$this->FontSizePt;
+      if ($family || $style || $size) {} // eliminates unused warnings
+      
       $lw=$this->LineWidth;
       $dc=$this->DrawColor;
       $fc=$this->FillColor;
@@ -2415,8 +2417,8 @@ if (false) {
               $type=substr($file,$pos+1);
             }
           $type=strtolower($type);
-          $mqr=get_magic_quotes_runtime();
-          set_magic_quotes_runtime(0);
+          $mqr = (function_exists('get_magic_quotes_runtime') ? get_magic_quotes_runtime() : null);
+          if (function_exists('set_magic_quotes_runtime')) set_magic_quotes_runtime(0);
           if($type=='jpg' || $type=='jpeg')
             $info=$this->_parsejpg($file);
           elseif($type=='png')
@@ -2429,7 +2431,7 @@ if (false) {
                 $this->Error('Unsupported image type: '.$type);
               $info=$this->$mtd($file);
             }
-          set_magic_quotes_runtime($mqr);
+          if (isset($mgr) && function_exists('set_magic_quotes_runtime')) set_magic_quotes_runtime($mqr);
           $info['i']=count($this->images)+1;
           $this->images[$file]=$info;
 	}
@@ -2679,8 +2681,8 @@ if (false) {
         $this->_out('endobj');
       }
 
-      $mqr=get_magic_quotes_runtime();
-      set_magic_quotes_runtime(0);
+      $mqr = (function_exists('get_magic_quotes_runtime') ? get_magic_quotes_runtime() : null);
+      if (function_exists('set_magic_quotes_runtime')) set_magic_quotes_runtime(0);
       foreach ($this->FontFiles as $file=>$info) {
         //Font file embedding
         $this->_newobj();
@@ -2720,7 +2722,7 @@ if (false) {
         $this->_putstream($font);
         $this->_out('endobj');
       }
-      set_magic_quotes_runtime($mqr);
+      if (isset($mgr) && function_exists('set_magic_quotes_runtime')) set_magic_quotes_runtime($mqr);
 
       foreach ($this->fonts as $k=>$font) {
         //Font objects

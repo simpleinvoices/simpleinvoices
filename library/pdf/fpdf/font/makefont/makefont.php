@@ -299,7 +299,7 @@ function MakeFont($fontfile,$afmfile,$destdir,$destfile,$enc='cp1252',$patch=arr
 {
 error_log("In MakeFont - library/pdf/fpdf/font/makefont/makefont.php");
   //Generate a font definition file
-  set_magic_quotes_runtime(0);
+  if (function_exists('set_magic_quotes_runtime')) set_magic_quotes_runtime(0);
   ini_set('auto_detect_line_endings','1');
   if($enc)
     {

@@ -314,13 +314,13 @@ function get_var ( $name, $array, $maxlength = 255, $default = null ) {
     if ( ! isset ( $array[$name] ) ) { return $default; }
     $data = $array[$name];
     if ( is_array ( $data ) ) {
-        if ( get_magic_quotes_gpc() ) {
+        if ( function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc() ) {
             foreach ( $data as $key => $value ) {
                 $data[$key] = stripslashes ( $data[$key] );
             }
         }
     } else {
-        if ( get_magic_quotes_gpc() ) {
+        if ( function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc() ) {
             $data = stripslashes ( $data );
         }
         $data = substr ( $data, 0, $maxlength );
