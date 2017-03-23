@@ -203,7 +203,7 @@ CREATE TABLE IF NOT EXISTS `si_invoice_type` (
 
 INSERT INTO `si_invoice_type` (`inv_ty_id`, `inv_ty_description`) VALUES
  (1, 'Total')
-,(2, 'Itemised')
+,(2, 'Itemized')
 ,(3, 'Consulting');
 
 CREATE TABLE IF NOT EXISTS `si_invoices` (
@@ -580,7 +580,7 @@ INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_rele
 ,(201,200,'Update extensions table','20090529','UPDATE si_extensions SET id = 0 WHERE name = core LIMIT 1')
 ,(202,201,'Set domain_id on system defaults table to 1','20090622','UPDATE si_system_defaults SET domain_id = 1')
 ,(203,202,'Set extension_id on system defaults table to 1','20090622','UPDATE si_system_defaults SET extension_id = 1')
-,(204,203,'Move all old consulting style invoices to itemised','20090704','UPDATE si_invoices SET type_id = 2 where type_id = 3')
+,(204,203,'Move all old consulting style invoices to itemized','20090704','UPDATE si_invoices SET type_id = 2 where type_id = 3')
 ,(205,204,'','','')
 ,(206,205,'','','')
 ,(207,206,'','','')

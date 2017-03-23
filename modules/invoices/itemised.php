@@ -1,7 +1,7 @@
 <?php
 /*
  * Script: itemised.php
- *   Itemised invoice page
+ *   Itemized invoice page
  *
  * Authors:
  *   Justin Kelly, Nicolas Ruflin

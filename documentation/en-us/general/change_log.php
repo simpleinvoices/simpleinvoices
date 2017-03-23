@@ -322,7 +322,7 @@
           <li>Invoice PDF EMail (Boolean variable in config.php) now supports Confirm Reading Receipt to Sender</li>
           <li>screen.css now has th.sortable_rt class - useful for right align for numeric fields - available in the modules/module-name/manage.php files</li>
           <li>General Code cleanup</li>
-          <li>Increased limit from 100 to 1000000 billers / clients / inv_prefs - look in modules/invoices/total.php, itemised.php, consulting.php</li>
+          <li>Increased limit from 100 to 1000000 billers / clients / inv_prefs - look in modules/invoices/total.php, itemized.php, consulting.php</li>
           <li>Changes in config/config.php made backwards compatible for use with older config.php</li>
           <li>Invoice PDF EMail now supports SecureSMTP and user configurable SMTP Port</li>
           <li>Updated PHPMailer to v2.10 Beta 1 for PHP5</li>
@@ -711,7 +711,7 @@
         <ul>
           <li>Export to PDF now works!!! :)</li>
           <li>Export to Excel/Word/OPenDocument format now works!!! :)</li>
-          <li>Invoice Itemised now has an optional invoice note feature</li>
+          <li>Invoice Itemized now has an optional invoice note feature</li>
         </ul>
       </li>
     </ul>
@@ -720,7 +720,7 @@
         <ul>
           <li>Database Backup - this now works, so the user can backup the SimpleInvoices database at will
               through SimpleInvoices</li>
-          <li>Invoice - Consulting: new invoice type added, this is a cross between and total and an itemised
+          <li>Invoice - Consulting: new invoice type added, this is a cross between and total and an itemized
               invoice. It allows the user to create an invoice with multiple line items and editable item
               descriptions; similar to how a consulting firm creates invoices</li>
           <li>SQL Patches
@@ -739,7 +739,7 @@
           <li>System defaults page all option have been enabled</li>
           <li>System defaults actually work :)
             <ul>
-              <li>Choosing default biller/customer/tax/preference now make invoice total and itemised default
+              <li>Choosing default biller/customer/tax/preference now make invoice total and itemized default
                   to the selected default</li>
             </ul>
           </li>
@@ -773,7 +773,7 @@
     <ul>
       <li>2006-05-14
         <ul>
-          <li>Multiple line items now supported in the Itemised Invoice</li>
+          <li>Multiple line items now supported in the Itemized Invoice</li>
           <li>License page added to the About Menu</li>
           <li>Credits page added to the About Menu</li>
           <li>FAQs page added to the Instruction Menu</li>
@@ -845,7 +845,7 @@
     <ul>
       <li>2006-04-29
         <ul>
-          <li>Invoice Itemised - fix - the unit price was reporting the current unit price when it should of been showing the value of the unit at the time of sale</li>
+          <li>Invoice Itemized - fix - the unit price was reporting the current unit price when it should of been showing the value of the unit at the time of sale</li>
           <li>Remove unnecessary files</li>
         </ul>
       </li>

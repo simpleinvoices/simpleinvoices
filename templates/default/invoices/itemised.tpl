@@ -1,6 +1,6 @@
 {*
  * Script: itemised.tpl
- *   Itemised invoice template
+ *   Itemized invoice template
  *
  * License:
  *   GPL v3 or above

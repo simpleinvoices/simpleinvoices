@@ -425,7 +425,7 @@
             </tr>
           {/if}
         {/foreach}
-        <!-- we are still in the itemised or consulting loop -->
+        <!-- we are still in the itemized or consulting loop -->
       </table>
     </td>
   </tr>

@@ -1,7 +1,7 @@
 {*
 /*
 * Script: itemised.tpl
-* 	 Itemised invoice template
+* 	 Itemized invoice template
 *
 * License:
 *	 GPL v3 or above
@@ -36,7 +36,7 @@ for (var x = 0; x <= {/literal}{$dynamic_line_items}{literal}; x++)
 
 <form name="frmpost" action="index.php?module=invoices&view=save" method="post" onsubmit="return frmpost_Validator(this)">
 
-<h3>{$LANG.inv} {$LANG.inv_itemised}</h3>
+<h3>{$LANG.inv} {$LANG.inv_itemized}</h3>
 
 {include file="$path/header.tpl" }
 

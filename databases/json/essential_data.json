@@ -113,7 +113,7 @@
         },
         {
             "inv_ty_id": "2",
-            "inv_ty_description": "Itemised"
+            "inv_ty_description": "Itemized"
         },
         {
             "inv_ty_id": "3",
@@ -1510,7 +1510,7 @@
         },
         {
             "sql_patch_ref": "203",
-            "sql_patch": "Move all old consulting style invoices to itemised",
+            "sql_patch": "Move all old consulting style invoices to itemized",
             "sql_release": "20090704",
             "sql_statement": "UPDATE si_invoices SET type_id = 2 where type_id = 3"
         },

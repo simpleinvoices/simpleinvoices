@@ -1,6 +1,6 @@
 {*
  * Script: itemised.tpl
- *   Itemised invoice template
+ *   Itemized invoice template
  *
  * Authors:
  *   Justin Kelly, Nicolas Ruflin

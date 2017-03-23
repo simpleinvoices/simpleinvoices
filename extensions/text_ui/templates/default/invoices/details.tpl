@@ -250,7 +250,7 @@
         {/if}
       </td>
     </tr>
-  </table> <!-- addition close table tag to close invoice itemised/consulting if it has a note -->
+  </table> <!-- addition close table tag to close invoice itemized/consulting if it has a note -->
   --
   <br />
   <input type="hidden" name="action" value="edit" />

@@ -27,7 +27,7 @@
 		<div class="iList">
 			<h2>Create New</h2>
 			<ul class="iArrow">
-				<li><a href="mini.php?module=invoices&view=itemised"><img src="images/mini/itemised.png" width="29" height="29" /><span>New Itemised</span><small>Create a new Itemised Invoice</small></a></li>
+				<li><a href="mini.php?module=invoices&view=itemised"><img src="images/mini/itemised.png" width="29" height="29" /><span>New Itemized</span><small>Create a new Itemized Invoice</small></a></li>
 				<li><a href="mini.php?module=invoices&view=total"><img src="images/mini/total.png" width="29" height="29" /><span>New Total</span><small>Create a new Total Invoice</small></a></li>
 				<li><a href="mini.php?module=invoices&view=consulting"><img src="images/mini/consulting.png" width="29" height="29" /><span>New Consultancy</span><small>Create a new Consultant Invoice</small></a></li>
 

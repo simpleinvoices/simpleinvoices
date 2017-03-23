@@ -42,7 +42,7 @@
       <ul>
         <li><b>Total Invoice</b>: Think an invoice from a plumber that lists the actions and then has one price, associated
           taxes and a total.</li>
-        <li><b>Itemised Invoice</b>: An invoice that list many different items. For example a grocery store invoice.</li>
+        <li><b>Itemized Invoice</b>: An invoice that list many different items. For example a grocery store invoice.</li>
         <li><b>Consulting Invoice</b>: An invoice that is similar to an <b>Intemised Invoice</b> except that with each line
           item there is a detailed description of the work performed/product sold. For example an invoice from an
           accounting or legal firm.</li>

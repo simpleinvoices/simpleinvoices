@@ -385,7 +385,7 @@
               </tr>
             {/if}
           {/foreach}
-        <!-- we are still in the itemised or consulting loop -->
+        <!-- we are still in the itemized or consulting loop -->
         </table>
       </td>
     </tr>
@@ -415,7 +415,7 @@
         <td colspan="6">{$invoice.note|outhtml}</td>
       </tr>
     {/if}
-    {* end itemised invoice *}
+    {* end itemized invoice *}
   {/if}
   {* tax section - start --------------------- *}
   {if $invoice_number_of_taxes > 0}

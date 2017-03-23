@@ -219,12 +219,12 @@
     <ul>
       <li><a id="addproduct"><b>Add Product</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
         <ul>
-          <li>A product can be any item that you wish to appear in the Itemised Invoice. It can be anything you wish to sell
+          <li>A product can be any item that you wish to appear in the Itemized Invoice. It can be anything you wish to sell
             and invoice - physical item ie. light bulbs or services such as an accounting service charge per hour/PC repairs/etc...</li>
-          <li>Note that products are only available when you create an Itemised Invoice</li>
+          <li>Note that products are only available when you create an Itemized Invoice</li>
           <li>In the main page click on the Insert Product button</li>
           <li>Once in the Insert Product screen fill in the required fileds and click the Insert Product button</li>
-          <li>Now when you create an Itemised Invoice you will be able to select this product</li>
+          <li>Now when you create an Itemized Invoice you will be able to select this product</li>
         </ul>
       </li>
     </ul>
@@ -277,11 +277,11 @@
             invoices :)</li>
           <li>Open SimpleInvoices in your browser (http://localhost/simpleinvoices)</li>
           <li>To create an invoice, in the main page, click on the style of invoice you wish to create, <b>Invoice - Total</b> or
-            <b>Invoice - Itemised</b>.
+            <b>Invoice - Itemized</b>.
             <ul>
               <li><b>Total Invoice</b>: An invoice that lists the actions and then displays a single price and any associated
                 tax. For example, an invoice from a plumber.</li>
-              <li><b>Itemised Invoice</b>: An invoice that lists many different items in the same invoice - think a grocery
+              <li><b>Itemized Invoice</b>: An invoice that lists many different items in the same invoice - think a grocery
                 store invoice</li>
               <li><b>Consulting Invoice</b>: An invoice that is similar to the <b>Intemised Invoice</b> except that each line item
                 has a detail description of the work performed, product sold, etc. For example an accounting or legal firm&#39;s invoice.</li>
@@ -290,7 +290,7 @@
           <li>Once in the create invoice screen, select a biller and a customer.</li>
           <li>If creating a <b>Total Invoice</b>, enter the description of the invoice, the total of the invoice, the tax rate, the
             invoice preference and click the <b>Submit</b> button.</li>
-          <li>If creating an <b>Itemised Invoice</b>, enter the quantity of the item, select the product, the tax rate, the
+          <li>If creating an <b>Itemized Invoice</b>, enter the quantity of the item, select the product, the tax rate, the
             invoice preference and click the <b>Submit</b> button.</li>
           <li>Your invoice will now be created and you'll be presented with a <b>Quick View</b> of the invoice.</li>
           <li><b>Quick View</b>: A view of the invoice while your still in SimpleInvoices. It allows you to see the invoice
@@ -331,7 +331,7 @@
           <li><b>Default Tax Rate</b>: Defines tax rate to use when creating a new invoice. It can be changed before saving the invoice.</li>
           <li><b>Default Invoice Preferences</b>: Defines invoice preference (type) to use when creating a new invoice. It can be
             changed before saving the invoice.</li>
-          <li><b>Default Number of Line Items</b>: Defines the number of line items displayed in an <i>Itemised</i> and <i>Consulting</i>
+          <li><b>Default Number of Line Items</b>: Defines the number of line items displayed in an <i>Itemized</i> and <i>Consulting</i>
             invoice</li>
           <li><b>Default Invoice Template</b>: Defines the invoice template used to create the output displayed in <b>Print</b>, <b>Email</b>,
             <b>PDF</b>, <b>Spreedsheet</b> and <b>Document</b> view modes.</li>
@@ -385,7 +385,7 @@
         <ul>
           <li><b>Total Invoice</b>: Think an invoice from a plumber that lists the actions and then has one price, associated
             taxes and a total.</li>
-          <li><b>Itemised Invoice</b>: An invoice that list many different items. For example a grocery store invoice.</li>
+          <li><b>Itemized Invoice</b>: An invoice that list many different items. For example a grocery store invoice.</li>
           <li><b>Consulting Invoice</b>: An invoice that is similar to an <b>Intemised Invoice</b> except that with each line
             item there is a detailed description of the work performed/product sold. For example an invoice from an
             accounting or legal firm.</li>
