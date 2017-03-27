@@ -3,6 +3,7 @@
 // Ref: https://github.com/OTRS/otrs/blob/rel-3_3/scripts/database/otrs-schema.mysql.sql
 
 //   include phpreports library
+/*  Commented out as this report relies on non-open source libraries not part of SI 20160324 RCR
 require_once("include/reportlib.php");
 
 global $oRpt, $smarty;
@@ -40,4 +41,4 @@ include("include/reportrunlib.php");
 
 $smarty -> assign('pageActive', 'report');
 $smarty -> assign('active_tab', '#home');
-
+*/

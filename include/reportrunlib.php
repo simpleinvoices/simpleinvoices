@@ -1,4 +1,5 @@
 <?php
+/*  Commented out as this report relies on non-open source libraries not part of SI 20160324 RCR
 global $oRpt, $smarty, $sSQL;
 $oRpt->setSQL($sSQL);
 
@@ -17,3 +18,4 @@ $pageActive = "reports";
 
 $smarty->assign('pageActive', $pageActive);
 $smarty->assign('showReport', $showReport);
+*/
