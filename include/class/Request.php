@@ -143,7 +143,7 @@ class Request {
      *        Ex: $fauxPost['name'] = "New name";
      */
     public function setFauxPost($fauxPost) {
-        if (empty($this->addFauxPostList())) {
+        if (empty($this->fauxPostList)) {
             $this->fauxPostList = $fauxPost;
         } else {
             $this->addFauxPostList($fauxPost);
