@@ -322,7 +322,7 @@
           {/if}
         <tr class='itemised'>
           <td colspan="6">
-            <table width=100%>
+            <table width="100%">
               <tr>
                 {if !empty($customFieldLabels.product_cf1)}
                 <td width="50%" class='details_screen'>
