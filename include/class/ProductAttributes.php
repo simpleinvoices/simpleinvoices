@@ -16,9 +16,9 @@ class ProductAttributes {
     public static function get($id) {
         global $pdoDb;
         $pdoDb->setSelectList(array("pa.*", "pat.name AS type"));
-        $pdoDb->addSimpleWhere("pd.id", $id);
+        $pdoDb->addSimpleWhere("pa.id", $id);
         $oc = new OnClause(new OnItem(false, "pa.type_id", "=", new DbField("pat.id"), false));
-        $pdoDb->addToJoins("LEFT", "products_attribute_type", "pat", $oc);
+        $pdoDb->addToJoins(array("LEFT", "products_attribute_type", "pat", $oc));
         $result = $pdoDb->request("SELECT", "products_attributes", "pa");
         return $result;
     }
