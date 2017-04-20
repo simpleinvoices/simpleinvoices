@@ -18,7 +18,7 @@ class Invoice {
         $pref_group = Preferences::getPreference($lcl_list['preference_id'], $lcl_list['domain_id']);
         $lcl_list['index_id'] = Index::next('invoice', $pref_group['index_group'], $lcl_list['domain_id']);
 
-        $lcl_list['date'] = sqlDateWithTime($lcl_list['date']); 
+        $lcl_list['date'] = sqlDateWithTime($lcl_list['date']);
         $pdoDb->setFauxPost($lcl_list);
         $pdoDb->setExcludedFields("id");
 
@@ -38,7 +38,7 @@ class Invoice {
         global $pdoDb;
 
         $lcl_list = $list;
-        if (empty($lcl_list['domain_id'])) $lcl_list['domain_id'] = domain_id::get(); 
+        if (empty($lcl_list['domain_id'])) $lcl_list['domain_id'] = domain_id::get();
 
         if (!self::invoice_items_check_fk(null, $list['product_id'], $list['tax_id'], true)) return null;
 
@@ -542,9 +542,9 @@ class Invoice {
                 $invoiceItem['attribute_decode'] = json_decode($invoiceItem['attribute'], true);
                 foreach ($invoiceItem['attribute_decode'] as $key => $value) {
                     $invoiceItem['attribute_json'][$key]['name']    = ProductAttributes::getName($key);
-                    $invoiceItem['attribute_json'][$key]['value']   = ProductAttributes::getValue($key, $value);
                     $invoiceItem['attribute_json'][$key]['type']    = ProductAttributes::getType($key);
                     $invoiceItem['attribute_json'][$key]['visible'] = ProductAttributes::getVisible($key);
+                    $invoiceItem['attribute_json'][$key]['value']   = ProductValues::getValue($key, $value);
                 }
             }
 
@@ -616,7 +616,7 @@ class Invoice {
         return $rows[0]['total_tax'];
     }
 
-    /** 
+    /**
      * Purpose: to show a nice summary of total $ for tax for an invoice
      */
     public static function numberOfTaxesForInvoice($invoice_id) {

@@ -104,11 +104,11 @@
       {/if}
       <!-- SECTION:product_attributes -->
       {if $defaults.product_attributes}
-        <li><a {if $pageActive== "product_attributes"}class="active" {/if}href="index.php?module=product_attribute&amp;view=manage">{$LANG.product_attributes}</a></li>
+        <li><a {if $pageActive== "product_attribute_manage"}class="active" {/if}href="index.php?module=product_attribute&amp;view=manage">{$LANG.product_attributes}</a></li>
         {if $subPageActive == "product_attributes_view"}<li><a class="active active_subpage" href="#">{$LANG.view}</a></li>{/if}
         {if $subPageActive == "product_attributes_edit"}<li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}
         {if $subPageActive == "product_attributes_add"}<li><a class="active active_subpage" href="#">{$LANG.add}</a></li>{/if}
-        <li><a {if $pageActive== "product_value"}class="active" {/if}href="index.php?module=product_value&amp;view=manage">{$LANG.product_values}</a></li>
+        <li><a {if $pageActive== "product_value_manage"}class="active" {/if}href="index.php?module=product_value&amp;view=manage">{$LANG.product_values}</a></li>
         {if $subPageActive == "product_value_view"}<li><a class="active active_subpage" href="#">{$LANG.view}</a></li>{/if}
         {if $subPageActive == "product_value_edit"}<li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}
         {if $subPageActive == "product_value_add"}<li><a class="active active_subpage" href="#">{$LANG.add}</a></li>{/if}
