@@ -20,8 +20,14 @@ $('#manageGrid').flexigrid ({
         {display: '{/literal}{$LANG.enabled}{literal}', name : 'enabled'       , width :  6 * percentage_width, sortable : true , align: 'center'}
         ],
     searchitems : [
-        {display: '{/literal}{$LANG.id}{literal}'  , name : 'c.id'},
-        {display: '{/literal}{$LANG.name}{literal}', name : 'c.name', isdefault: true}
+        {display: '{/literal}{$LANG.id}{literal}'          , name : 'c.id'},
+        {display: '{/literal}{$LANG.name}{literal}'        , name : 'c.name', isdefault: true},
+        {display: '{/literal}{$LANG.address}{literal}'     , name : 'c.street_address'},
+        {display: '{/literal}{$LANG.city}{literal}'        , name : 'c.city'},
+        {display: '{/literal}{$LANG.state}{literal}'       , name : 'c.state'},
+        {display: '{/literal}{$LANG.phone}{literal}'       , name : 'c.phone'},
+        {display: '{/literal}{$LANG.mobile_phone}{literal}', name : 'c.mobile_phone'},
+        {display: '{/literal}{$LANG.email}{literal}'       , name : 'c.email'}
         ],
     sortname: 'name',
     sortorder: 'asc',

@@ -31,7 +31,7 @@
       </tr>
       <tr>
         <td nowrap class="">{$preference.pref_inv_wording|htmlsafe}&nbsp;{$LANG.date}:</td>
-        <td class="" align="right" colspan="3">{$invoice.date}</td>
+        <td class="" align="right" colspan="3">{$invoice.date|siLocal_date}</td>
       </tr>
       <!-- Show the Invoice Custom Fields if valid -->
       {if !empty($customFieldLabels.invoice_cf1) && $invoice.custom_field1 != null}
@@ -397,7 +397,7 @@
       <tr>
         <td colspan="2"></td>
         <td colspan="3" align="right">
-          <b>{$preference.pref_inv_wording|htmlsafe}{$LANG.amount}&nbsp;</b>
+          <b>{$preference.pref_inv_wording|htmlsafe}&nbsp;{$LANG.amount}</b>
         </td>
         <td colspan="1" align="right">
           <span class="double_underline" style="text-decoration:underline;">

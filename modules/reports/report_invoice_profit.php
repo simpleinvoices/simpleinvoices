@@ -28,15 +28,14 @@ $values = array("start_date" => $start_date,
                 "end_date"   => $end_date,
                 "having"     => "date_between",
                 "having_and" => "real");
-$invoice_all = Invoice::select_all($values);
+$invoices = Invoice::select_all($values);
 
-$invoices = $invoice_all->fetchAll(PDO::FETCH_ASSOC);
 $invoice_totals = array();
 foreach($invoices as $k=>$v) {
     //get list of all products
     $sql = "SELECT DISTINCT(product_id) FROM ".TB_PREFIX."invoice_items WHERE invoice_id = :id AND domain_id = :domain_id";
     $sth = dbQuery($sql, ':id',$v['id'], ':domain_id', $domain_id);
-        
+
     $products = $sth->fetchAll();
     $invoice_total_cost = "0";
 
@@ -55,7 +54,7 @@ foreach($invoices as $k=>$v) {
         $cost = $sthp->fetchColumn();
 
         $product_total_cost = $quantity * $cost;
-        
+
         $invoice_total_cost += $product_total_cost;
     }
     $invoices[$k]['cost'  ] =  $invoice_total_cost;

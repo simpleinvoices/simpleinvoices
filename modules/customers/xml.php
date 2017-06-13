@@ -4,7 +4,17 @@ function sql($type = '', $start, $dir, $sort, $rp, $page) {
     global $LANG, $pdoDb;
     global $LANG, $pdoDb;
 
-    $valid_search_fields = array('c.id', 'c.name');
+    $valid_search_fields = array(
+        "c.id",
+        "c.name",
+        "c.enabled",
+        "c.street_address",
+        "c.city",
+        "c.state",
+        "c.phone",
+        "c.mobile_phone",
+        "c.email"
+    );
 
     $query = isset($_POST['query']) ? $_POST['query'] : null;
     $qtype = isset($_POST['qtype']) ? $_POST['qtype'] : null;
@@ -26,7 +36,17 @@ function sql($type = '', $start, $dir, $sort, $rp, $page) {
 
     $start = (($page - 1) * $rp);
 
-    $pdoDb->setSelectList(array("c.id as CID", "c.name", "c.enabled"));
+    $pdoDb->setSelectList(array(
+        "c.id as CID",
+        "c.name",
+        "c.enabled",
+        "c.street_address",
+        "c.city",
+        "c.state",
+        "c.phone",
+        "c.mobile_phone",
+        "c.email"
+    ));
 
     $case = new CaseStmt("c.enabled", "enabled_txt");
     $case->addWhen( "=", ENABLED, $LANG['enabled']);

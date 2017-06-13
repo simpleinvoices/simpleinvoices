@@ -3,14 +3,14 @@
 class ProductValues
 {
     /**
-     * Get count of product_values records.
+     * Get count of products_values records.
      * @return unknown
      */
     public static function count()
     {
         global $pdoDb;
         $pdoDb->addToFunctions("COUNT(*) AS count");
-        $attribute = $pdoDb->request("SELECT", "product_values");
+        $attribute = $pdoDb->request("SELECT", "products_values");
         return $rows[0]['count'];
     }
 
@@ -22,7 +22,7 @@ class ProductValues
      * @param string $value_id
      *            Product value ID.
      * @return string If <b>attribute_id</b> is for a type, <i>list</i>, product,
-     *         return the value from the <i>product_values</i> record for the
+     *         return the value from the <i>products_values</i> record for the
      *         specified <b>value_id</b>. Otherwise return the <b>value_id</b>
      *         parameter.
      */
@@ -33,7 +33,7 @@ class ProductValues
         if ($type == 'list') {
             $pdoDb->addSimpleWhere("id", $value_id);
             $pdoDb->setSelectList("value");
-            $attribute = $pdoDb->request("SELECT", "product_values");
+            $attribute = $pdoDb->request("SELECT", "products_values");
             return $attribute['value'];
         }
         return $value_id;

@@ -53,7 +53,7 @@ class Index {
                                             "sub_node_2" => $sub_node_2,
                                             "domain_id"  => $domain_id));
             $pdoDb_admin->request("INSERT", "index");
-            } else {
+        } else {
             $pdoDb_admin->addSimpleWhere("node"      , $node      , "AND");
             $pdoDb_admin->addSimpleWhere("sub_node"  , $sub_node  , "AND");
             $pdoDb_admin->addSimpleWhere("sub_node_2", $sub_node_2, "AND");

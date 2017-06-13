@@ -40,7 +40,7 @@ class TextUiInvoice {
 
                 for($i=1; $i<=3; $i++) {
                     $pdoDb->addSimpleWhere("v.id", "attributes_$i");
-                    $jn = new Join("INNER", "product_values", "v");
+                    $jn = new Join("INNER", "products_values", "v");
                     $on = new OnClause();
                     $on->addSimpleItem("v.attrbute_id", new DbField("a.id"));
                     $pdoDb->addToJoins($jn);
