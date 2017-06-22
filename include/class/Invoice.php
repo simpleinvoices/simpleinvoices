@@ -34,21 +34,19 @@ class Invoice {
      * @param array Associative array keyed by field name with its assigned value.
      * @return integer Unique ID of the new invoice_item record.
      */
-    private static function insert_item($list) {
+    private static function insert_item($list, $tax_ids) {
         global $pdoDb;
 
         $lcl_list = $list;
         if (empty($lcl_list['domain_id'])) $lcl_list['domain_id'] = domain_id::get();
 
-        if (!self::invoice_items_check_fk(null, $list['product_id'], $list['tax_id'], true)) return null;
+        if (!self::invoice_items_check_fk(null, $list['product_id'], $tax_ids, true)) return null;
 
-        // @formatter:off
         $pdoDb->setFauxPost($list);
         $pdoDb->setExcludedFields("id");
         $id = $pdoDb->request("INSERT", "invoice_items");
-        // @formatter:on
 
-        self::invoice_item_tax($id, $list['tax_id'], $list['unit_price'], $list['quantity'], false);
+        self::chgInvoiceItemTax($id, $tax_ids, $list['unit_price'], $list['quantity'], false);
         return $id;
     }
 
@@ -57,13 +55,13 @@ class Invoice {
      * @param integer $invoice_id <b>id</b>
      * @param integer $quantity
      * @param integer $product_id
-     * @param integer $tax_id
+     * @param integer $tax_ids
      * @param string $description
      * @param string $unit_price
      * @param string $attribute
      * @return integer <b>id</b> of new <i>invoice_items</i> record.
      */
-    public static function insertInvoiceItem($invoice_id, $quantity, $product_id, $tax_id,
+    public static function insertInvoiceItem($invoice_id, $quantity, $product_id, $tax_ids,
                                              $description = "", $unit_price = "", $attribute = "") {
         global $LANG;
 
@@ -77,7 +75,7 @@ class Invoice {
             }
         }
 
-        $tax_amount  = Taxes::getTaxesPerLineItem($tax_id, $quantity, $unit_price);
+        $tax_amount  = Taxes::getTaxesPerLineItem($tax_ids, $quantity, $unit_price);
         $gross_total = $unit_price * $quantity;
         $total       = $gross_total + $tax_amount;
 
@@ -93,7 +91,7 @@ class Invoice {
                       'description'=> $description,
                       'total'      => $total,
                       'attribute'  => json_encode($attr));
-        $id = self::insert_item($list);
+        $id = self::insert_item($list, $tax_ids);
         return $id;
     }
 
@@ -141,14 +139,14 @@ class Invoice {
      * @param int $id Unique id for the record to be updated.
      * @param int $quantity Number of items
      * @param int $product_id Unique id of the si_products record for this item.
-     * @param int $tax_id Unique id for the taxes to apply to this line item.
+     * @param int $tax_ids Unique id for the taxes to apply to this line item.
      * @param string $description Extended description for this line item.
      * @param decimal $unit_price Price of each unit of this item.
      * @param string $attribute Attributes for invoice.
      * @return boolean true always returned.
      */
     public static function updateInvoiceItem($id    , $quantity   , $product_id,
-                                             $tax_id, $description, $unit_price, $attribute) {
+                                             $tax_ids, $description, $unit_price, $attribute) {
         global $LANG, $pdoDb;
 
         $attr = array();
@@ -159,12 +157,12 @@ class Invoice {
                 }
             }
         }
-        $tax_amount  = Taxes::getTaxesPerLineItem($tax_id, $quantity, $unit_price);
+        $tax_amount  = Taxes::getTaxesPerLineItem($tax_ids, $quantity, $unit_price);
         $gross_total = $unit_price * $quantity;
         $total       = $gross_total + $tax_amount;
         if ($description == $LANG['description']) $description = "";
 
-        if (!self::invoice_items_check_fk(null, $product_id, $tax_id, true)) return null;
+        if (!self::invoice_items_check_fk(null, $product_id, $tax_ids, true)) return null;
 
         // @formatter:off
         $pdoDb->addSimpleWhere("id", $id);
@@ -180,14 +178,14 @@ class Invoice {
         $pdoDb->request("UPDATE", "invoice_items");
         // @formatter:on
 
-        self::invoice_item_tax($id, $tax_id, $unit_price, $quantity, true);
+        self::chgInvoiceItemTax($id, $tax_ids, $unit_price, $quantity, true);
     }
 
     /**
      * Insert/update the multiple taxes for a invoice line item.
      * @return boolean <b>true</b> if successful, <b>false</b> if not.
      */
-    public static function invoice_item_tax($invoice_item_id, $line_item_tax_id, $unit_price, $quantity, $update) {
+    public static function chgInvoiceItemTax($invoice_item_id, $line_item_tax_ids, $unit_price, $quantity, $update) {
         // if editing invoice delete all tax info then insert first then do insert again
         // probably can be done without delete - someone to look into this if required - TODO
         try {
@@ -199,8 +197,8 @@ class Invoice {
                 $requests->add($request);
             }
 
-            if (is_array($line_item_tax_id)) {
-                foreach ($line_item_tax_id as $value) {
+            if (is_array($line_item_tax_ids)) {
+                foreach ($line_item_tax_ids as $value) {
                     if (!empty($value)) {
                         // @formatter:off
                         $tax        = Taxes::getTaxRate($value, $domain_id);
@@ -558,7 +556,6 @@ class Invoice {
             }
             $invoiceItems[] = $invoiceItem;
         }
-
         return $invoiceItems;
     }
 
@@ -737,9 +734,8 @@ class Invoice {
                           'gross_total'=> $v['gross_total'],
                           'description'=> $v['description'],
                           'total'      => $v['total'],
-                          'attribute'  => $v['attribute'],
-                          'tax_id'     => $v['tax_id']);
-            self::insert_item($list);
+                          'attribute'  => $v['attribute']);
+            self::insert_item($list, $v['tax_id']);
         }
         // @formatter:on
 
@@ -807,7 +803,7 @@ class Invoice {
      * @return boolean true if keys all test true; false otherwise.
      * TODO: Add FK logic to database.
      */
-    private static function invoice_items_check_fk($invoice_id, $product_id, $tax_id, $update) {
+    private static function invoice_items_check_fk($invoice_id, $product_id, $tax_ids, $update) {
         global $pdoDb_admin;
         $domain_id = domain_id::get();
         // Check invoice
@@ -827,11 +823,9 @@ class Invoice {
         if (empty($rows)) return false;
 
         // Check tax id
-        if (!empty($tax_id)) {
-            if (is_array($tax_id)) {
-                $tax_ids = $tax_id;
-            } else {
-                $tax_ids = array($tax_id);
+        if (!empty($tax_ids)) {
+            if (!is_array($tax_ids)) {
+                $tax_ids = array($tax_ids);
             }
             foreach ($tax_ids as $tax_id) {
                 $pdoDb_admin->addSimpleWhere("tax_id", $tax_id, "AND");

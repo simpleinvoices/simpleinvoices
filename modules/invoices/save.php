@@ -90,12 +90,12 @@ if ($_POST['action'] == "insert" ) {
                 $desc    = (isset($_POST["description$i"]) ? $_POST["description$i"] : "");
                 $price   = (isset($_POST["unit_price$i"] ) ? $_POST["unit_price$i"]  : "");
                 $attr    = (isset($_POST["attribute$i"]  ) ? $_POST["attribute$i"]   : "");
-                $tax_id  = (isset($_POST["tax_id"][$i]   ) ? $_POST["tax_id"][$i]    : "");
+                $tax_ids = (isset($_POST["tax_id"][$i]   ) ? $_POST["tax_id"][$i]    : "");
 
                 if (empty($item)) {
-                    Invoice::insertInvoiceItem($id  , $qty, $product, $tax_id, $desc, $price, $attr);
+                    Invoice::insertInvoiceItem($id  , $qty, $product, $tax_ids, $desc, $price, $attr);
                 } else {
-                    Invoice::updateInvoiceItem($item, $qty, $product, $tax_id, $desc, $price, $attr);
+                    Invoice::updateInvoiceItem($item, $qty, $product, $tax_ids, $desc, $price, $attr);
                 }
                 // @formatter:on
             }
