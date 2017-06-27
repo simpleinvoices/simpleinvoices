@@ -10,7 +10,7 @@ class ProductValues
     {
         global $pdoDb;
         $pdoDb->addToFunctions("COUNT(*) AS count");
-        $attribute = $pdoDb->request("SELECT", "products_values");
+        $rows = $pdoDb->request("SELECT", "products_values");
         return $rows[0]['count'];
     }
 

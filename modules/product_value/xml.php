@@ -45,19 +45,19 @@ if (in_array($sort, $validFields)) {
     $sort = "id";
 }
 
-    $sql = "SELECT 
-                v.id as id, 
+    $sql = "SELECT
+                v.id as id,
                 a.name as name,
                 v.value as value,
                 v.enabled as enabled
-            FROM 
+            FROM
                 ".TB_PREFIX."products_attributes a LEFT JOIN
                 ".TB_PREFIX."products_values v ON (a.id = v.attribute_id)
             WHERE 1
                 $where
-            ORDER BY 
-                $sort $dir 
-            LIMIT 
+            ORDER BY
+                $sort $dir
+            LIMIT
                 $start, $limit";
 
     if (empty($query)) {
@@ -66,7 +66,7 @@ if (in_array($sort, $validFields)) {
         $sth = dbQuery($sql, ':query', "%$query%");
     }
 
-    $customers = $sth->fetchAll(PDO::FETCH_ASSOC);
+    $rows = $sth->fetchAll(PDO::FETCH_ASSOC);
 /*
     $customers = null;
 
@@ -87,20 +87,20 @@ $xml  = "<rows>";
 $xml .= "<page>$page</page>";
 $xml .= "<total>$count</total>";
 
-foreach ($customers as $row) {
+foreach ($rows as $row) {
     $xml .= "<row id='".$row['id']."'>";
     $xml .= "<cell><![CDATA[<a class='index_table' title='$LANG[view] ".$row['description']."' href='index.php?module=product_value&view=details&action=view&id=".$row['id']."&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a> <a class='index_table' title='$LANG[edit] ".$row['description']."' href='index.php?module=product_value&view=details&action=edit&id=".$row['id']."&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>]]></cell>";
-    $xml .= "<cell><![CDATA[".$row['id']."]]></cell>";        
+    $xml .= "<cell><![CDATA[".$row['id']."]]></cell>";
     $xml .= "<cell><![CDATA[".utf8_encode($row['name'])."]]></cell>";
     $xml .= "<cell><![CDATA[".utf8_encode($row['value'])."]]></cell>";
     if ($row['enabled']=='1') {
-        $xml .= "<cell><![CDATA[<img src='images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";                
-    }    
+        $xml .= "<cell><![CDATA[<img src='images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";
+    }
     else {
-        $xml .= "<cell><![CDATA[<img src='images/common/cross.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";                
+        $xml .= "<cell><![CDATA[<img src='images/common/cross.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";
     }
 
-    $xml .= "</row>";        
+    $xml .= "</row>";
 }
 
 $xml .= "</rows>";
