@@ -4,7 +4,7 @@ global $LANG;
 // @formatter:off
 $LCL_LANG = array(
     'add_new_expense'               => "Add New Expense",
-    'add_new_expense_account'       => "Add New Account",
+    'add_new_expense_account'       => "Add New Expense Account",
     'expenses'                      => "Expenses",
     'expense_accounts'              => "Expense Accounts",
     'no_expenses'                   => "No expenses have been created. Click the 'Add New Expense' button above to create one",
