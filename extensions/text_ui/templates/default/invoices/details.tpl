@@ -193,7 +193,7 @@
           </tr>
           <tr>
             <td colspan="6">
-              <textarea name="description{$line}" class="editor" rows="5" cols="70" style="overflow:scroll;">
+              <textarea name="description{$line}" class="detail" rows="5" cols="70" style="overflow:scroll;">
                 {$invoiceItem.description}
               </textarea>
             </td>

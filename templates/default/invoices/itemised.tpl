@@ -147,7 +147,7 @@
           <tr class="details si_hide">
             <td></td>
             <td colspan="4">
-              <textarea class="editor" name="description{$smarty.section.line.index|htmlsafe}"
+              <textarea class="detail" name="description{$smarty.section.line.index|htmlsafe}"
                         id="description{$smarty.section.line.index|htmlsafe}" rows="4" cols="60"></textarea>
             </td>
           </tr>

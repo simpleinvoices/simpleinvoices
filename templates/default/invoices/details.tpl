@@ -203,7 +203,7 @@
         <tr class="details si_hide">
           <td></td>
           <td colspan="4">
-            <textarea class="editor" name="description{$line|htmlsafe}" style="overflow:scroll;"
+            <textarea class="detail" name="description{$line|htmlsafe}" style="overflow:scroll;"
                       id="description{$line|htmlsafe}" rows="3" cols="70">{$invoiceItem.description|outhtml}</textarea>
           </td>
         </tr>
