@@ -160,7 +160,7 @@
         {/if}
       {/if}
       {merge_address field1=$customer.city field2=$customer.state field3=$customer.zip_code
-             street1=$customer.street_address street2=$customer.street_addtess2 class1="" class2="" colspan="3"}
+             street1=$customer.street_address street2=$customer.street_address2 class1="" class2="" colspan="3"}
       {if $customer.country != null}
       <tr>
         <td class=''></td>
