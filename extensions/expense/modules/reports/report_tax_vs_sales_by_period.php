@@ -145,15 +145,14 @@ while ( $year <= $this_year )
 
     $tax_summary[$year]['Total'] = $total_year_sales_array['year_total']-$total_year_payments_array['year_total_payments'] ;
     $tax_summary[$year]['Total'] == "0" ? $tax_summary[$year]['Total'] = "-" : $tax_summary[$year]['Total'] = $tax_summary[$year]['Total'] ;
-	$years[]=$year ;
+
+	array_unshift($years, $year);
 	$year++;
 }
 
 $smarty->assign('total_sales', $total_sales);
 $smarty->assign('total_payments', $total_payments);
 $smarty->assign('tax_summary', $tax_summary);
-//$years = array(2006,2007,2008);
-$years = array_reverse($years);
 $smarty->assign('years', $years);
 
 $smarty -> assign('pageActive', 'report');
