@@ -451,7 +451,7 @@ class Invoice {
         }
 
         if (!(empty($query) || empty($qtype))) {
-            if (in_array($qtype, array('iv.index_id', 'b.name', 'c.name'))) {
+            if (in_array($qtype, array('index_id','b.name','c.name','date','invoice_total','owing','aging'))) {
                 $pdoDb->addToWhere(new WhereItem(false, $qtype, "LIKE", "%$query%", false, "AND"));
             }
         }
@@ -522,7 +522,7 @@ class Invoice {
         $pdoDb->addToJoins($jn);
 
         $pdoDb->addSimpleWhere("iv.domain_id", domain_id::get());
-        $pdoDb->setGroupBy("iv.index_id");
+        $pdoDb->setGroupBy(array("iv.id", "iv.index_id")); // iv.index_id possibly meaningless
 
         $result = $pdoDb->request("SELECT", "invoices", "iv");
         return $result;
