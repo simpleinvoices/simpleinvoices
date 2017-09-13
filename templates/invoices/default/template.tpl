@@ -358,8 +358,7 @@
       <tr>
         <td colspan="2"></td>
         <td colspan="3" align="right">{$LANG.sub_total}&nbsp;</td>
-        <td colspan="1" align="right">
-            {if $invoice_number_of_taxes > 1}style="text-decoration:underline;"{/if}>
+        <td colspan="1" align="right" {if $invoice_number_of_taxes > 1}style="text-decoration:underline;"{/if}>
           {$preference.pref_currency_sign}{$invoice.gross|siLocal_number}
         </td>
       </tr>
