@@ -456,17 +456,6 @@ class Invoice {
             }
         }
 
-        $pdoDb->setSelectList(array("iv.id",
-                                    new DbField("iv.index_id", "index_id"),
-                                    new DbField("iv.type_id", "type_id"),
-                                    new DbField("b.name", "biller"),
-                                    new DbField("c.name", "customer"),
-                                    new DbField("pf.pref_description", "preference"),
-                                    new DbField("pf.status", "status")));
-
-        $fn = new FunctionStmt("DATE_FORMAT", "date, '%Y-%m-%d'", "date");
-        $pdoDb->addToFunctions($fn);
-
         $fn = new FunctionStmt("COALESCE", "SUM(ii.total),0");
         $fr = new FromStmt("invoice_items", "ii");
         $wh = new WhereClause();
@@ -484,6 +473,9 @@ class Invoice {
         $fn = new FunctionStmt("", "(invoice_total - INV_PAID)");
         $se = new Select($fn, null, null, "owing");
         $pdoDb->addToSelectStmts($se);
+
+        $fn = new FunctionStmt("DATE_FORMAT", "date, '%Y-%m-%d'", "date");
+        $pdoDb->addToFunctions($fn);
 
         // Only run aging for real full query
         if ($noage_type) {
@@ -522,7 +514,20 @@ class Invoice {
         $pdoDb->addToJoins($jn);
 
         $pdoDb->addSimpleWhere("iv.domain_id", domain_id::get());
-        $pdoDb->setGroupBy(array("iv.id", "iv.index_id")); // iv.index_id possibly meaningless
+
+        $expr_list = array(
+            "iv.id",
+            new DbField("iv.index_id", "index_id"),
+            new DbField("iv.type_id", "type_id"),
+            new DbField("b.name", "biller"),
+            new DbField("c.name", "customer"),
+            new DbField("pf.pref_description", "preference"),
+            new DbField("pf.status", "status"));
+        $pdoDb->setSelectList($expr_list);
+
+        $pdoDb->setGroupBy($expr_list);
+
+        $pdoDb->setGroupBy(array("date", "Age", "aging", "index_name"));
 
         $result = $pdoDb->request("SELECT", "invoices", "iv");
         return $result;
@@ -619,7 +624,7 @@ class Invoice {
     public static function numberOfTaxesForInvoice($invoice_id) {
         global $pdoDb;
         $pdoDb->addSimpleWhere("item.invoice_id", $invoice_id);
-        $pdoDb->setGroupBy("tax.tax_id");
+
         $pdoDb->addToFunctions(new FunctionStmt("DISTINCT", new DbField("tax.tax_id")));
 
         $jn = new Join("INNER", "invoice_item_tax", "item_tax");
@@ -629,6 +634,9 @@ class Invoice {
         $jn = new Join("INNER", "tax", "tax");
         $jn->addSimpleItem("tax.tax_id", new DbField("item_tax.tax_id"));
         $pdoDb->addToJoins($jn);
+
+        $pdoDb->setGroupBy("tax.tax_id");
+
         $rows = $pdoDb->request("SELECT", "invoice_items", "item");
         return count($rows);
     }
@@ -640,9 +648,6 @@ class Invoice {
      */
     private static function taxesGroupedForInvoice($invoice_id) {
         global $pdoDb;
-        $pdoDb->setSelectList(array(new DbField("tax.tax_description", "tax_name"),
-                                    new DbField("item_tax.tax_rate", "tax_rate"),
-                                    new DbField("tax.tax_id", "tax_id")));
         $pdoDb->addToFunctions(new FunctionStmt("SUM", "item_tax.tax_amount", "tax_amount"));
         $pdoDb->addToFunctions(new FunctionStmt("COUNT", "*", "count"));
 
@@ -656,7 +661,13 @@ class Invoice {
         $jn->addSimpleItem("tax.tax_id", new DbField("item_tax.tax_id"));
         $pdoDb->addToJoins($jn);
 
-        $pdoDb->setGroupBy("tax_id");
+        $expr_list = array(
+            new DbField("tax.tax_id", "tax_id"),
+            new DbField("tax.tax_description", "tax_name"),
+            new DbField("item_tax.tax_rate", "tax_rate"));
+
+        $pdoDb->setSelectList($expr_list);
+        $pdoDb->setGroupBy($expr_list);
 
         $rows = $pdoDb->request("SELECT", "invoice_items", "item");
 

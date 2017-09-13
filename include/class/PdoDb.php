@@ -23,7 +23,7 @@ require_once 'include/class/WhereItem.php';
  */
 class PdoDb {
     const TBPREFIX_PATTERN = '/^si_/'; // Chg to use TB_PREFIX when only PHP 5.6x and up supported
-    
+
     private $caseStmts;
     private $constraints;
     private $debug;
@@ -207,7 +207,7 @@ class PdoDb {
      * Add and entry for a table column to correct.
      * @param string $column Name of table field.
      * @param string $type Data type of the table column, ex: VARCHAR(255)
-     * @param string $attributes Additional column attributs, 
+     * @param string $attributes Additional column attributs,
      *        ex: NOT NULL AUTO_INCREMENT
      */
     public function addTableColumns($column, $type, $attributes) {
@@ -393,7 +393,7 @@ class PdoDb {
                 if (is_array($orderBy[0])) {
                     foreach($orderBy as $item) {
                         if (count($item) != 2) {
-                            $str = "PdoDb setOrderby - field array is invalid. Must be <b>field</b> and <b>order</b>.";
+                            $str = "PdoDb setOrderby - field array is invalid. Must be 'field' and 'order'.";
                             error_log($str);
                             throw new PdoDbException($str);
                         }
@@ -401,7 +401,7 @@ class PdoDb {
                     }
                 } else {
                     if (count($orderBy) != 2) {
-                        $str = "PdoDb setOrderby - field array is invalid. Must be <b>field</b> and <b>order</b>.";
+                        $str = "PdoDb setOrderby - field array is invalid. Must be 'field' and 'order'.";
                         error_log($str);
                         throw new PdoDbException($str);
                     }
@@ -425,7 +425,7 @@ class PdoDb {
      *          <li>A string that is the name of the field to group by. Ex: "street_address".</li>
      *          <li>An ordered array that contains a list of field names to group by. The list is
      *              high to low group by levels.</li>
-     *          <li>A <i>DbField</i> object. Ex: new DbField("tax.tax_id"). Needed to properly 
+     *          <li>A <i>DbField</i> object. Ex: new DbField("tax.tax_id"). Needed to properly
      *              encapsulate the field name as `tax`.`tax_id`.
      * @throws PdoDbException if an invalid parameter type is found.
      */
@@ -433,15 +433,18 @@ class PdoDb {
         if (!isset($this->groupBy)) $this->groupBy = array();
         if (is_array($groupBy)) {
             foreach($groupBy as $item) {
-                if (!is_string($item)) {
-                    $str = "PdoDb setGroupBy - <b>\$groupBy</b> parameter is not valid.";
+                if (is_a($item, "DbField")) {
+                    $this->groupBy[] = $item->genParm(true);
+                } else if (is_string($item)) {
+                    $this->groupBy[] = $item;
+                } else {
+                    $str = "PdoDb setGroupBy(): Invalid parameter type. " . print_r($item, true);
                     error_log($str);
                     throw new PdoDbException($str);
                 }
-                $this->groupBy[] = $item;
             }
         } else if (is_a($groupBy, "DbField")) {
-            $this->groupBy = $groupBy->genParm();
+            $this->groupBy[] = $groupBy->genParm(true);
         } else if (is_string($groupBy)) {
             $this->groupBy[] = $groupBy;
         } else {
@@ -502,7 +505,7 @@ class PdoDb {
      *          <li>An associative array with the <i>key</i> as the <i>field name</i>
      *              and the <i>value</i> as anything (typically 1).<br/>
      *              Ex: array("id" => 1, "name" => 1).</li>`
-     *        </ol> 
+     *        </ol>
      * @throws PdoDbException if the parameter is not an array.
      */
     public function setExcludedFields($excludedFields) {
@@ -548,7 +551,7 @@ class PdoDb {
      * @param array $fauxPost Array to use in place of the <b>$_POST</b> superglobal.
      *        Use the <b>table column name</b> as the index and the value to set the
      *        column to as the value of the array at the column name index.
-     *        Ex: $fauxPost['name'] = "New name"; 
+     *        Ex: $fauxPost['name'] = "New name";
      */
     public function setFauxPost($fauxPost) {
         $this->usePost = false;
@@ -656,7 +659,7 @@ class PdoDb {
         try {
             $table = $table_in;
             $columns = array();
-    
+
             // @formatter:off
             $sql = "SELECT `column_name`
                       FROM `information_schema`.`columns`
@@ -796,7 +799,7 @@ class PdoDb {
             $parts = array();
             if (preg_match('/(.*) +([aA][sS]) +(.*)/', $matches[2], $parts)) {
                 // x.y AS z
-                $field = '`' . $matches[1] . '`.' . ($parts[1] == '*' ? $parts[1] : '`' . $parts[1] . '`') . 
+                $field = '`' . $matches[1] . '`.' . ($parts[1] == '*' ? $parts[1] : '`' . $parts[1] . '`') .
                          ' AS ' . $parts[3];
             } else {
                 // x.y
@@ -903,14 +906,14 @@ class PdoDb {
                     $this->clearAll();
                     throw new PdoDbException("PdoDb - request(): Invalid table, $table, specified.");
                 }
-    
+
                 // Build WHERE clause and get value pair list for tokens in the clause.
                 $where = "";
                 if (!empty($this->whereClause)) {
                     $where = $this->whereClause->build($this->keyPairs);
                     $token_cnt += $this->whereClause->getTokenCnt();
                 }
-        
+
                 // Build ORDER BY statement
                 $order = (empty($this->orderBy) ? '' : $this->orderBy->build());
 

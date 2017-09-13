@@ -65,9 +65,20 @@ class Cron {
         $start = (($page - 1) * $rp);
         $pdoDb->setLimit($rp, $start);
 
-        $pdoDb->setGroupBy("cron.id");
+        $expr_list = array(
+            "cron.id",
+            "cron.domain_id",
+            "cron.email_biller",
+            "cron.email_customer",
+            "cron.start_date",
+            "cron.end_date",
+            "cron.invoice_id",
+            "cron.recurrence",
+            "cron.recurrence_type");
 
-        $pdoDb->setSelectList(array("cron.*", "cron.id", "cron.domain_id"));
+        $pdoDb->setSelectList($expr_list);
+
+        $pdoDb->setGroupBy($expr_list);
 
         $fn = new FunctionStmt("CONCAT", "pf.pref_description, ' ', iv.index_id");
         $se = new Select($fn, null, null, "index_name");

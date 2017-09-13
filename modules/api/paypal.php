@@ -40,13 +40,13 @@ if ($p->validate_ipn ()) {
         $xml_message .= 'Online payment ' . $p->ipn_data ['tnx_id'] . ' has already been entered - exiting for domain_id=' . $domain_id;
         $logger->log ( $xml_message, Zend_Log::INFO );
     } else {
-        $pmt_type = PaymentType::specialSelect("Paypal");
+        $pmt_type = PaymentType::select_or_insert_where("Paypal");
         Payment::insert(array("ac_inv_id"         => $p->ipn_data ['invoice'],
-                               "ac_amount"         => $p->ipn_data['mc_gross'],
-                               "ac_notes"          => $paypal_data,
-                               "ac_date"           => date('Y-m-d', strtotime($p->ipn_data['payment_date'])),
-                               "online_payment_id" => $p->ipn_data['txn_id'],
-                               "ac_payment_type"   => $pmt_type));
+                              "ac_amount"         => $p->ipn_data['mc_gross'],
+                              "ac_notes"          => $paypal_data,
+                              "ac_date"           => date('Y-m-d', strtotime($p->ipn_data['payment_date'])),
+                              "online_payment_id" => $p->ipn_data['txn_id'],
+                              "ac_payment_type"   => $pmt_type));
         $logger->log('Paypal - payment_type=' . $pmt_type, Zend_Log::INFO);
 
         $invoice = Invoice::select ( $p->ipn_data ['invoice'] );

@@ -12,11 +12,11 @@ class PaymentType {
         $pdoDb->addSimpleWhere("pt_description", $description, "AND");
         $pdoDb->addSimpleWhere("domain_id", domain_id::get());
 
-        $pdoDb->setGroupBy("pt_id");
-
         $pdoDb->addToFunctions("COUNT(DISTINCT pt_id)", "count");
 
-        $pdoDb->setSelectList("pt_id");
+        $expr_list = "pt_id";
+        $pdoDb->setSelectList($expr_list);
+        $pdoDb->setGroupBy($expr_list);
 
         $rows =$pdoDb->request("SELECT", "payment_types");
         if (empty($rows)) {

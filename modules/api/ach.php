@@ -20,13 +20,13 @@ if ($_POST['pg_response_code'] == 'A01') {
         $xml_message = 'Online payment for invoices: '.$_POST['pg_consumerorderid'].' has already been entered';
         $logger->log($xml_message, Zend_Log::INFO);
     } else {
-        $pmt_type = PaymentType::specialSelect("ACH");
+        $pmt_type = PaymentType::select_or_insert_where("ACH");
         Payment::insert(array("ac_inv_id"         => $_POST['pg_consumerorderid'],
-                               "ac_amount"         => $_POST['pg_total_amount'],
-                               "ac_notes"          => $paypal_data,
-                               "ac_date"           => date('Y-m-d'),
-                               "online_payment_id" => $_POST['pg_consumerorderid'],
-                               "ac_payment_type"   => $pmt_type));
+                              "ac_amount"         => $_POST['pg_total_amount'],
+                              "ac_notes"          => $paypal_data,
+                              "ac_date"           => date('Y-m-d'),
+                              "online_payment_id" => $_POST['pg_consumerorderid'],
+                              "ac_payment_type"   => $pmt_type));
         $logger->log('ACH - payment_type='.$pmt_type, Zend_Log::INFO);
 
         $invoice    = Invoice::select($_POST['pg_consumerorderid']);

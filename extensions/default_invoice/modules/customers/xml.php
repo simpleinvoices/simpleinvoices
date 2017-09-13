@@ -25,8 +25,6 @@ function sql($type='', $start, $dir, $sort, $rp, $page ) {
 
     $start = (($page - 1) * $rp);
 
-    $pdoDb->setSelectList(array("c.id as CID", "c.name", "c.enabled"));
-
     $ca = new CaseStmt("c.enabled", "enabled_txt");
     $ca->addWhen( "=", ENABLED, $LANG['enabled']);
     $ca->addWhen("!=", ENABLED, $LANG['disabled'], true);
@@ -73,6 +71,10 @@ function sql($type='', $start, $dir, $sort, $rp, $page ) {
     $se = new Select($fn, null, null, "owing");
     $pdoDb->addToSelectStmts($se);
 
+    $expr_list = array(new DbField("c.id", "CID"), "c.domain_id", "c.name", "c.enabled");
+    $pdoDb->setSelectList($expr_list);
+    $pdoDb->setGroupBy($expr_list);
+
     $validFields = array('CID', 'name', 'customer_total', 'paid', 'owing', 'enabled');
     if (in_array($sort, $validFields)) {
         $dir = (preg_match('/^(asc|desc)$/iD', $dir) ? 'A' : 'D');
@@ -81,8 +83,6 @@ function sql($type='', $start, $dir, $sort, $rp, $page ) {
         $sortlist = array(array("enabled", "D"), array("name", "A"));
     }
     $pdoDb->setOrderBy($sortlist);
-
-    $pdoDb->setGroupBy("CID");
 
     $pdoDb->setLimit($rp, $start);
 
@@ -134,7 +134,7 @@ foreach ($customers as $row) {
         ]]></cell>";
     $xml .= "<cell><![CDATA[$row[CID]]]></cell>";
     $xml .= "<cell><![CDATA[$row[name]]]></cell>";
-    $xml .= 
+    $xml .=
        "<cell><![CDATA[
           <a class='index_table' title='quick view' href='index.php?module=invoices&view=quick_view&id=$last_invoice'>
             $last_invoice

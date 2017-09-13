@@ -111,7 +111,7 @@ class eway {
                                   "ac_date"           => date('Y-m-d'),
                                   "online_payment_id" => $ewayResponseFields['EWAYTRXNNUMBER'],
                                   "domain_id"         => $this->domain_id,
-                                  "ac_payment_type"   => PaymentType::specialSelect("Eway")));
+                                  "ac_payment_type"   => PaymentType::select_or_insert_where("Eway")));
             // @formatter:on
             return 'true';
         }

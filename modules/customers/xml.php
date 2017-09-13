@@ -36,8 +36,9 @@ function sql($type = '', $start, $dir, $sort, $rp, $page) {
 
     $start = (($page - 1) * $rp);
 
-    $pdoDb->setSelectList(array(
-        "c.id as CID",
+    $expr_list = array(
+        new DbField("c.id", "CID"),
+        "c.domain_id",
         "c.name",
         "c.enabled",
         "c.street_address",
@@ -46,7 +47,9 @@ function sql($type = '', $start, $dir, $sort, $rp, $page) {
         "c.phone",
         "c.mobile_phone",
         "c.email"
-    ));
+    );
+    $pdoDb->setSelectList($expr_list);
+    $pdoDb->setGroupBy($expr_list);
 
     $case = new CaseStmt("c.enabled", "enabled_txt");
     $case->addWhen( "=", ENABLED, $LANG['enabled']);
@@ -94,8 +97,6 @@ function sql($type = '', $start, $dir, $sort, $rp, $page) {
         $sortlist = array(array("enabled", "D"), array("name", "A"));
     }
     $pdoDb->setOrderBy($sortlist);
-
-    $pdoDb->setGroupBy("CID");
 
     $pdoDb->setLimit($rp, $start);
 

@@ -59,11 +59,17 @@ class Inventory {
         $start = (($page - 1) * $rp);
         $pdoDb->setLimit($rp, $start);
 
-        $pdoDb->addToFunctions("coalesce(p.reorder_level,0) AS reorder_level");
-        $pdoDb->addToFunctions("coalesce(inv.quantity * inv.cost,0) AS total_cost");
-        $list = array("inv.id as id", "inv.product_id", "inv.date", "inv.quantity", "p.description", "inv.cost");
-        $pdoDb->setSelectList($list);
-        $pdoDb->setGroupBy("inv.id");
+        $pdoDb->addToFunctions("COALESCE(p.reorder_level,0) AS reorder_level");
+        $pdoDb->addToFunctions("COALESCE(inv.quantity * inv.cost,0) AS total_cost");
+        $expr_list = array(
+            new DbField("inv.id", "id"),
+            "inv.product_id",
+            "inv.date",
+            "inv.quantity",
+            "p.description",
+            "inv.cost");
+        $pdoDb->setSelectList($expr_list);
+        $pdoDb->setGroupBy($expr_list);
 
         $result = $pdoDb->request("SELECT", "products", "p");
         return $result;
