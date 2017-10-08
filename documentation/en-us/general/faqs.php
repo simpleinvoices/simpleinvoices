@@ -20,6 +20,7 @@
       <dt><a href="#faqs-what">What is SimpleInvoices?</a></dt>
       <dt><a href="#faqs-need">What do i need to start invoicings?</a></dt>
       <dt><a href="#faqs-how">How do I create invoices?</a></dt>
+      <dt><a href="#faqs-clone">How do I set up a default invoice for a customer?</a></dt>
       <dt><a href="#faqs-types">What are the different invoice types?</a></dt>
       <dt><a href="#cron">Recurrence (aka cron)</a></dt>
     </dl>
@@ -37,6 +38,24 @@
       <p>Creating invoices is easy. Once a <b>Biller</b> and <b>Customer</b>
         have been set up, select the <b>New Invoice</b> option in the <b>Money</b> tab menu. Fill in the fields in the new invoice
         form that will be displayed and click <b>Save Invoice</b>.</p>
+    <a id="faqs-clone"><b>How do I set up a default invoice for a customer?</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
+	  <p>You can set up a default invoice for each customer such that by the click of a button, a new invoice will be created from the default
+	    invoice for you to modify (if necessary) and save. Once saved, a new invoice number will be assigned to it. Here is how you do this:
+	    <ol>
+	      <li>Click <b>Settings</b></li>
+	      <li>Click <b>Extensions</b></li>
+	      <li>Enable the <b>default_invoice</b> extension</li>
+	      <li>Go to the <b>Customers</b> list</li>
+		  <li>Edit a customer you want to clone an invoice for</li>
+		  <li>Enter the invoice number you want to clone in the <b>Default Invoice</b> field and save the change</li>
+		</ol>
+		At this point, note the new, 3rd icon in the <b>Action</b> column of the Customers list. If you click this icon for a customer that has
+		a default invoice assigned to it, that invoice will be cloned and presented to you in edit mode to save or make additional changes to
+		prior to saving it. Don't be confused by the invoice number showing for the new invoice. It is the number of the invoice that was cloned.
+		This number is informational. The next, new invoice number will be assigned when you save the new invoice. This way, if you cancel
+		rather than save the invoice, the next, new invoice number will not have been used up.
+	  <p>Note: If you click the icon to create a default invoice for a customer that has not been assigned a default invoice to clone, an empty
+	    invoice will be presented for you to change and save; or to cancel if needed.</p>
     <a id="faqs-types"><b>What are the different invoice types?</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
       <p>In SimpleInvoices there are three types of invoices available:</p>
       <ul>
@@ -70,7 +89,7 @@ ServerTokens Prod
 
 &lt;IfModule mpm_prefork_module&gt;
     StartServers          2
-    MinSpareServers       1 
+    MinSpareServers       1
     MaxSpareServers       2
     MaxClients           50
     MaxRequestsPerChild 100
