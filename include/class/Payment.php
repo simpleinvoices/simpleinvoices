@@ -2,9 +2,9 @@
 class Payment {
     /**
      * Count of optionally filtered payments
-     * @param string $filter 
-     * @param unknown $ol_pmt_id
-     * @return Result
+     * @param string $filter
+     * @param string $ol_pmt_id
+     * @return string
      */
     public static function count($filter, $ol_pmt_id) {
         global $pdoDb;
@@ -138,9 +138,10 @@ class Payment {
     /**
      * Get a specific payment record.
      * @param int $id Unique ID of record to retrieve.
-     * @return array Row retrieved. Test for "=== false" to check for failure.
+     * @param boolean $is_pymt_id true (default) $id is payment ID, else is invoice ID.
+     * @return array Row retrieved. An empty array is returned if no row found.
      */
-    public static function select($id) {
+    public static function select($id, $is_pymt_id = true) {
         global $pdoDb;
 
         $oc = new OnClause();
@@ -158,15 +159,24 @@ class Payment {
         $oc->addSimpleItem("iv.domain_id", new DbField("b.domain_id"));
         $pdoDb->addToJoins(array("LEFT", "biller", "b", $oc));
 
-        $pdoDb->addSimpleWhere("ap.id", $id, "AND");
-        $pdoDb->addSimpleWhere("ap.domain_id", domain_id::get());
+        $pdoDb->addSimpleWhere("ap.domain_id", domain_id::get(), "AND");
+        if ($is_pymt_id) {
+            $pdoDb->addSimpleWhere("ap.id", $id);
+        } else {
+            $pdoDb->addSimpleWhere("ap.ac_inv_id", $id);
+        }
 
         $pdoDb->setSelectList(array("ap.*", "c.id AS customer_id", "c.name AS customer",
                                     "b.id AS biller_id", "b.name AS biller"));
 
         $rows = $pdoDb->request("SELECT", "payment", "ap");
-        $payment = $rows[0];
-        $payment['date'] = siLocal::date($payment['ac_date']);
+        if (count($rows) == 0) {
+            $payment = null;
+        } else {
+            $payment = $rows[0];
+            $payment['date'] = siLocal::date($payment['ac_date']);
+            $payment['num_payment_recs'] = count($rows);
+        }
 
         return $payment;
     }

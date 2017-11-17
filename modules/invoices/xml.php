@@ -53,7 +53,7 @@ foreach ($invoices as $row) {
                 "<img src='images/common/view.png' class='action' />
              </a>";
     if (!$read_only) {
-        $xml .= 
+        $xml .=
             "<a class='index_table' title='" .
                 $LANG['edit_view_tooltip'] . " " .
                 $row['preference'] . " " .
@@ -98,7 +98,7 @@ foreach ($invoices as $row) {
                             $LANG['process_payment_for'] . " " .
                             $row['preference'] . " " .
                             $row['index_id'] .
-                            "' class='index_table' href='index.php?module=payments&view=details&id=" .
+                            "' class='index_table' href='index.php?module=payments&view=details&ac_inv_id=" .
                             $row['id'] .
                             "&action=view'>" .
                             "<img src='images/common/money_dollar.png' class='action' />
