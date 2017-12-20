@@ -50,7 +50,7 @@
         <ul>
           <li>Apache 2.4x</li>
           <li>MySQL 5.6x or compatible DBMS (ie: MariaDB).</li>
-          <li>PHP 5.6x
+          <li>PHP 5.6x, 7.0x, 7.1x, 7.2x
             <ul>
               <li>For PDF export to work your PHP needs:
                 <ul>
@@ -191,7 +191,7 @@
         drill down to the <b>.zip</b> file to the directory that contains the <b>config</b> directory and select all the content
         to extract into your <i>simpleinvoices</i> directory.</li>
       <li>Test your setup in the web browser (usually by entering <i>http://localhost/simpleinvoices</i>). Modifications to the
-        database are automatically applied the first time you access the updated implementation.</li> 
+        database are automatically applied the first time you access the updated implementation.</li>
     </ul>
     <a id="prepare"><b>Preparing SimpleInvoices for use</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
     <p style="margin-left:0;">The first steps in using SimpleInvoices is to setup the base information, that is billers, customers, products, tax

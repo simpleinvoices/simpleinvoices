@@ -16,6 +16,11 @@
   </div>
   <div id="left">
     <ul>
+      <li>2017-12-20 - <b>2017.2.0</b>
+        <ul>
+          <li><b>Production Release</b> Verified SI working with PHP 7.2</li>
+        </ul>
+      </li>
       <li>2016-12-27 - <b>2016.1.001</b>
         <ul>
           <li><b>Production Release</b> Verified that this fork of SI will <b>NOT</b> be incorporated into
@@ -121,7 +126,7 @@
               <li>Changed all instances of the text, <b>Simple Invoices</b> to be <b>SimpleInvoices</b>
                   consistent with the logo and name of this applications.</li>
               <li>Remove the <b>class="buttons"</b> values from all <b>&lt;table&gt;</b> tags. The class
-                  is commented out in the <b>main.css</b> file.</li> 
+                  is commented out in the <b>main.css</b> file.</li>
             </ul>
           </li>
           <li>Changed to minimize maintenance of extension language files. Typically the <b>en_US</b>
@@ -167,7 +172,7 @@
                   <li><b>password_special</b>: Specifies if the password should contain at least one
                       special character. Set to <b>true</b> when extension is enabled.</li>
                 </ul>
-            </li> 
+            </li>
             <li>Enhanced the set up and maintenance of user records for customers and billers.
                 This feature already exists and is enhanced by this change to display a dropdown
                 list of available settings for the <b>user_id</b> and field help information to
@@ -232,7 +237,7 @@
             <i>sql_queries.php</i> file which complicated extension development.
           </p>
           </li>
-          <li>Fixed payments to show actual <b>Invoice #</b> rather than the <b>Invoice ID</b>. 
+          <li>Fixed payments to show actual <b>Invoice #</b> rather than the <b>Invoice ID</b>.
           <li>Remove warnings for <b>BROWSE</b> constant redefinition warnings by testing if already defined.</li>
         </ul>
       </li>
@@ -878,4 +883,3 @@
   </div>
 </body>
 </html>
-    

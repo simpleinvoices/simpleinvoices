@@ -7,7 +7,7 @@
  * Justin Kelly
  *
  * Last edited:
- *  2008-05-13
+ *  2017-12-20 Richard Rowley
  *
  * License:
  * GPL v3
@@ -18,7 +18,6 @@
 global $menu, $pdoDb, $smarty;
 
 checkLogin ();
-error_log("in invoice.php");
 function firstOfMonth() {
     return date ( "Y-m-d", strtotime ( '01-01-' . date ( 'Y' ) . ' 00:00:00' ) );
 }
