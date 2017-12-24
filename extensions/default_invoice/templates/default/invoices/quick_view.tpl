@@ -65,7 +65,7 @@
   <!-- Invoice Summary section -->
   <tr class="details_screen">
     <th class=""><b>{$preference.pref_inv_wording|htmlsafe}&nbsp;{$LANG.summary}:</b></th>
-    <td colspan="5" class='details_screen align_right'></td>
+    <td colspan="5" class='details_screen align_right'>{$invoice.index_id|htmlsafe}</td>
     <td class="si_switch">
       <a href='#' class="show-summary" onclick="$('.summary').show();$('.show-summary').hide();">
         <img src="images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" />
@@ -77,7 +77,7 @@
   </tr>
   <tr class='details_screen summary'>
     <th class='details_screen'>{$preference.pref_inv_wording} {$LANG.number_short}:</th>
-    <td colspan="5" class='details_screen'>{$invoice.index.id}</td>
+    <td colspan="5" class='details_screen'>{$smarty.get.id}</td>
   </tr>
   <tr class='details_screen summary'>
     <td class='details_screen'>{$preference.pref_inv_wording} {$LANG.date}:</td>
