@@ -4,7 +4,7 @@ global $smarty;
 if (isset($_POST['op']) && $_POST['op'] =='edit' && !empty($_POST['invoice_id'])) {
     try {
         $saved = "false";
-        if (Cron::update()) $saved = "true";
+        if (Cron::update($GET['id'])) $saved = "true";
     } catch (PDOException $pde) {
         error_log("cron edit.php - Update error: " . $pde->getMessage());
     }

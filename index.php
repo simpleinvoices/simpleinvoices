@@ -268,10 +268,10 @@ if ($extensionPhpFile == 0 && ($my_path = getCustomPath("$module/$view", 'module
 // **********************************************************
 // Include php file for the requested page section - END
 // **********************************************************
-if ($module == "export" || $view == "export" || $module == "api") {
+if ($module == "export" || $view == "export") {
     exit(0);
 }
-$logger->log("index.php - After export/export or api exit", Zend_Log::DEBUG);
+$logger->log("index.php - After export/export exit", Zend_Log::DEBUG);
 
 // **********************************************************
 // Post load javascript files - START

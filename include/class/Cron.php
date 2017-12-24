@@ -13,10 +13,12 @@ class Cron {
         return true;
     }
 
-    public static function update() {
+    public static function update($id) {
         global $pdoDb;
         try {
             $pdoDb->setExcludedFields(array("id", "domain_id"));
+            $pdoDb->addSimpleWhere("id", $id, "AND");
+            $pdoDb->addSimpleWhere("domain_id", domain_id::get());
             $result = $pdoDb->request("UPDATE", "cron");
         } catch (PDOException $pde) {
             error_log("Cron update error - " . $pde->getMessage());
@@ -34,7 +36,7 @@ class Cron {
         $query = isset ( $_POST ['query'] ) ? $_POST ['query'] : null;
         $qtype = isset ( $_POST ['qtype'] ) ? $_POST ['qtype'] : null;
         if (!empty($qtype) && !empty($query)) {
-            if (in_array($qtype, array('iv.id', 'b.name', 'cron.id'))) {
+            if (in_array($qtype, array('iv.id', 'b.name', 'cron.id', 'aging'))) {
                 $pdoDb->addToWhere(new WhereItem(false, $qtype, "LIKE", "%$query%", false, "AND"));
             }
         }
@@ -127,7 +129,7 @@ class Cron {
 
         $today = date('Y-m-d');
         $rows  = self::select_crons_to_run();
-
+error_log("Cron run - rows - " . print_r($rows,true));
         $result['cron_message'] = "Cron started";
         $number_of_crons_run = "0";
         $i = 0; // set here so accessable outside of the loop
@@ -366,7 +368,6 @@ class Cron {
     }
 
     public static function select_crons_to_run() {
-        require_once 'include/class/domain/id.php';
         global $config, $pdoDb;
 
         $timezone = $config->phpSettings->date->timezone;
@@ -399,7 +400,9 @@ class Cron {
         $pdoDb->setSelectList("cron.*");
 
         $pdoDb->setGroupBy(array("cron.id", "cron.domain_id"));
+$pdoDb->debugOn("crons to run");
         $result = $pdoDb->request("SELECT", "cron", "cron");
+$pdoDb->debugOff();
         // @formatter:on
         return $result;
     }
