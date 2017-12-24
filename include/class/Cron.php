@@ -129,7 +129,6 @@ class Cron {
 
         $today = date('Y-m-d');
         $rows  = self::select_crons_to_run();
-error_log("Cron run - rows - " . print_r($rows,true));
         $result['cron_message'] = "Cron started";
         $number_of_crons_run = "0";
         $i = 0; // set here so accessable outside of the loop
@@ -400,9 +399,7 @@ error_log("Cron run - rows - " . print_r($rows,true));
         $pdoDb->setSelectList("cron.*");
 
         $pdoDb->setGroupBy(array("cron.id", "cron.domain_id"));
-$pdoDb->debugOn("crons to run");
         $result = $pdoDb->request("SELECT", "cron", "cron");
-$pdoDb->debugOff();
         // @formatter:on
         return $result;
     }
