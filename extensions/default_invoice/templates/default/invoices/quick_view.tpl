@@ -6,9 +6,12 @@
  *     Justin Kelly, Nicolas Ruflin, Ap.Muthu
  *     Modified for 'default_invoice by Marcel van Dorp. Version 20090208
  *     'Customer' section has an extra button to set the default invoice
+ *	   Modified by Rich Rowley to remove Invoice Summary section and always show
+ *         invoice number and date. Also to eliminate notes section and always show
+ *         notes when present.
  *
  * Last edited:
- *      2016-07-31
+ *      2017-12-25
  *
  * License:
  *     GPL v3 or above
@@ -62,26 +65,11 @@
 <!--Actions heading - start-->
 <!-- #PDF end -->
 <table class='si_invoice_view'>
-  <!-- Invoice Summary section -->
-  <tr class="details_screen">
-    <th class=""><b>{$preference.pref_inv_wording|htmlsafe}&nbsp;{$LANG.summary}:</b></th>
-    <td colspan="5" class='details_screen align_right'>{$invoice.index_id|htmlsafe}</td>
-    <td class="si_switch">
-      <a href='#' class="show-summary" onclick="$('.summary').show();$('.show-summary').hide();">
-        <img src="images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" />
-      </a>
-      <a href='#' class="summary" onclick="$('.summary').hide();$('.show-summary').show();">
-        <img src="images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" />
-      </a>
-    </td>
-  </tr>
-  <tr class='details_screen summary'>
-    <th class='details_screen'>{$preference.pref_inv_wording} {$LANG.number_short}:</th>
-    <td colspan="5" class='details_screen'>{$smarty.get.id}</td>
-  </tr>
-  <tr class='details_screen summary'>
-    <td class='details_screen'>{$preference.pref_inv_wording} {$LANG.date}:</td>
-    <td class='details_screen' colspan="5">{$invoice.date|htmlsafe}</td>
+  <tr class='details_screen'>
+    <th class='details_screen'><b>{$preference.pref_inv_wording} {$LANG.number_short}:</b></th>
+    <td class='details_screen'>{$invoice.index_id|htmlsafe}</td>
+    <th class='details_screen' colspan="2"><b>{$preference.pref_inv_wording} {$LANG.date}:</b></th>
+    <td class='details_screen' colspan="2">{$invoice.date|htmlsafe}</td>
   </tr>
   {$customFields.1}
   {$customFields.2}
@@ -113,21 +101,21 @@
   </tr>
   <tr class='details_screen biller'>
     <th class='details_screen'>{$LANG.city}:</th>
-    <td class='details_screen' colspan="3">{$biller.city|htmlsafe}</td>
+    <td class='details_screen' colspan="2">{$biller.city|htmlsafe}</td>
     <th class='details_screen'>{$LANG.phone_short}:</th>
-    <td class='details_screen'>{$biller.phone|htmlsafe}</td>
+    <td class='details_screen' colspan="2">{$biller.phone|htmlsafe}</td>
   </tr>
   <tr class='details_screen biller'>
     <th class='details_screen'>{$LANG.state}, {$LANG.zip}:</th>
-    <td class='details_screen' colspan="3">{$biller.state|htmlsafe},&nbsp;{$biller.zip_code|htmlsafe}</td>
+    <td class='details_screen' colspan="2">{$biller.state|htmlsafe},&nbsp;{$biller.zip_code|htmlsafe}</td>
     <th class='details_screen'>{$LANG.mobile_short}:</th>
-    <td class='details_screen'>{$biller.mobile_phone|htmlsafe}</td>
+    <td class='details_screen' colspan="2">{$biller.mobile_phone|htmlsafe}</td>
   </tr>
   <tr class='details_screen biller'>
     <th class='details_screen'>{$LANG.country}:</th>
-    <td class='details_screen' colspan="3">{$biller.country|htmlsafe}</td>
+    <td class='details_screen' colspan="2">{$biller.country|htmlsafe}</td>
     <th class='details_screen'>{$LANG.fax}:</th>
-    <td class='details_screen'>{$biller.fax|htmlsafe}</td>
+    <td class='details_screen' colspan="2">{$biller.fax|htmlsafe}</td>
   </tr>
   <tr class='details_screen biller'>
     <th class='details_screen'>{$LANG.email}:</th>
@@ -190,21 +178,21 @@
   </tr>
   <tr class='details_screen customer'>
     <th class='details_screen'>{$LANG.city}:</th>
-    <td class='details_screen' colspan="3">{$customer.city|htmlsafe}</td>
+    <td class='details_screen' colspan="2">{$customer.city|htmlsafe}</td>
     <th class='details_screen'>{$LANG.phone_short}:</th>
-    <td class='details_screen'>{$customer.phone|htmlsafe}</td>
+    <td class='details_screen' colspan="2">{$customer.phone|htmlsafe}</td>
   </tr>
   <tr class='details_screen customer'>
     <th class='details_screen'>{$LANG.state}, {$LANG.zip}:</th>
-    <td colspan="3" class='details_screen'>{$customer.state|htmlsafe},&nbsp;{$customer.zip_code|htmlsafe}</td>
-    <th class='details_screen'>{$LANG.fax}:</th>
-    <td class='details_screen'>{$customer.fax|htmlsafe}</td>
+    <td class='details_screen' colspan="2">{$customer.state|htmlsafe},&nbsp;{$customer.zip_code|htmlsafe}</td>
+    <th class='details_screen'>Mobile:</th>
+    <td class='details_screen' colspan="2">{$customer.mobile_phone|htmlsafe}</td>
   </tr>
   <tr class='details_screen customer'>
     <th class='details_screen'>{$LANG.country}:</th>
-    <td class='details_screen' colspan="3">{$customer.country|htmlsafe}</td>
-    <th class='details_screen'>Mobile:</th>
-    <td class='details_screen'>{$customer.mobile_phone|htmlsafe}</td>
+    <td class='details_screen' colspan="2">{$customer.country|htmlsafe}</td>
+    <th class='details_screen'>{$LANG.fax}:</th>
+    <td class='details_screen' colspan="2">{$customer.fax|htmlsafe}</td>
   </tr>
   <tr class='details_screen customer'>
     <th class='details_screen'>{$LANG.email}:</th>
@@ -429,37 +417,15 @@
       </table>
     </td>
   </tr>
-  {if ($invoice.note != null) }
-    <tr>
-      <td colspan="6">&nbsp;</td>
-    </tr>
-    <tr class="details_screen">
-      <td colspan="5"><b>{$LANG.notes}:</b></td>
-      {if ($invoice.note|count_characters:true > 25)}
-        <td class="details_screen align_right">
-          <a href='#' class="show-notes"
-             onclick="$('.notes').show();$('.show-notes').hide();">
-            <img src="images/common/magnifier_zoom_in.png" title="{$LANG.show_details}" />
-          </a>
-          <a href='#' class="notes"
-             onclick="$('.notes').hide();$('.show-notes').show();">
-            <img src="images/common/magnifier_zoom_out.png" title="{$LANG.hide_details}" />
-          </a>
-        </td>
-      {/if}
-    </tr>
-    <!-- if hide detail click - the stripped note will be displayed -->
-    <tr class='show-notes details_screen'>
-      <td colspan="6">{$invoice.note|truncate:25:"...":true}</td>
-    </tr>
-    <!-- if show detail click - the full note will be displayed -->
-    <tr class='notes details_screen'>
-      <td colspan="6">{$invoice.note|unescape}</td>
-    </tr>
-  {/if}
-  <tr>
-    <td colspan="6"><br /></td>
+  <tr><td colspan="6">&nbsp;</td></tr>
+  <tr class="details_screen">
+    <th class="" style="text-align:left;"><b>{$LANG.notes}:</b></th>
+    <td colspan="5" class="details_screen align_right"></td>
   </tr>
+  <tr class='details_screen notes'>
+    <td class='details_screen' colspan="6">{if ($invoice.note != null)}{$invoice.note|unescape}{/if}</td>
+  </tr>
+  <tr><td colspan="6">&nbsp;</td></tr>
   {foreach from=$invoice.tax_grouped item=taxg}
     {if $taxg.tax_amount != 0}
       <tr class='details_screen'>
@@ -471,11 +437,8 @@
   {/foreach}
   <tr class='details_screen'>
     <td colspan="3"></td>
-    <td colspan="2" class="align_right">{$LANG.tax_total}</td>
+    <td colspan="2" class="align_right"><b>{$LANG.tax_total}</b></td>
     <td colspan="1" class="align_right"><u>{$preference.pref_currency_sign|htmlsafe}{$invoice.total_tax|siLocal_number}</u></td>
-  </tr>
-  <tr>
-    <td colspan="6"><br /></td>
   </tr>
   <tr class='details_screen'>
     <td colspan="3"></td>
@@ -518,7 +481,7 @@
     </td>
   </tr>
   <tr class="account">
-    <td class="account" colspan="8">{$preference.pref_inv_wording|htmlsafe} {$invoice.id}</td>
+    <td class="account" colspan="8">{$preference.pref_inv_wording|htmlsafe} {$invoice.index_id}</td>
     <td width="5%"></td>
     <td class="columnleft" width="5%"></td>
     <td class="account" colspan="6">
