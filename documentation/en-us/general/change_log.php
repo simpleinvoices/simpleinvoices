@@ -4,10 +4,7 @@
   <title>SimpleInvoices - Changelog</title>
   <meta charset="UTF-8" />
   <link rel="stylesheet" href="../../../templates/default/css/main.css">
-  <style>
-    li, dl {margin-top:5px;margin-bottom:5px;}
-    p {margin-top:5px;margin-bottom:5px;margin-left:25px;}
-  </style>
+  <link rel="stylesheet" href="../../../templates/default/css/info.css">
 </head>
 <body>
   <h1 class="si_center">Change Log</h1>

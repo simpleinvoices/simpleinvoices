@@ -1,0 +1,14 @@
+/*
+    SimpleInvoice Information CSS stylesheet.
+    by Rich Rowley
+*/
+li, dl, ol {margin-bottom:5px;}
+p {margin-top:5px;margin-bottom:5px;margin-left:0;}
+a.intro {font-size:1.5em;font-weight:bold;}
+a.hook {color:black;font-size:1.5em;font-weight:bold;}
+a:hover.hook {color:black;}
+a:link, a:visited {color:darkblue;}
+a:hover {color:blue}
+h1,h2,h3 {color:black;margin:0;-webkit-margin-before:0;-webkit-margin-after:0;}
+h2 {margin-left:10px;font-size:1.3em;font-style:italic}
+dt.pre, dd.pre {font-family:"Courier New",courier;font-weight:bold;font-size:1.2em;color:black;}

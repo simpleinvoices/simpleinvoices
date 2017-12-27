@@ -5,10 +5,7 @@
   <title>GNU General Public License v3.0 - GNU Project - Free Software Foundation (FSF)</title>
   <link rel="alternate" type="application/rdf+xml" href="http://www.gnu.org/licenses/gpl-3.0.rdf" />
   <link rel="stylesheet" href="../../../templates/default/css/main.css">
-  <style>
-    li, dl {margin-top:5px;margin-bottom:5px;}
-    p {margin-top:5px;margin-bottom:5px;margin-left:25px;}
-  </style>
+  <link rel="stylesheet" href="../../../templates/default/css/info.css">
 </head>
 <body>
   <a id="top"></a>

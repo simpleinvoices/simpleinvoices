@@ -4,10 +4,7 @@
   <title>SimpleInvoices - FAQs</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link rel="stylesheet" href="../../../templates/default/css/main.css">
-  <style>
-    li, dl {margin-top:5px;margin-bottom:5px;}
-    p {margin-top:5px;margin-bottom:5px;margin-left:0;}
-  </style>
+  <link rel="stylesheet" href="../../../templates/default/css/info.css">
 </head>
 <body>
   <a id="top"></a>
@@ -17,46 +14,46 @@
   </div>
   <div class="si_toolbar_top_left">
     <dl>
-      <dt><a href="#faqs-what">What is SimpleInvoices?</a></dt>
-      <dt><a href="#faqs-need">What do i need to start invoicings?</a></dt>
-      <dt><a href="#faqs-how">How do I create invoices?</a></dt>
-      <dt><a href="#faqs-clone">How do I set up a default invoice for a customer?</a></dt>
-      <dt><a href="#faqs-types">What are the different invoice types?</a></dt>
-      <dt><a href="#cron">Recurrence (aka cron)</a></dt>
+      <dt><a class="intro" href="#faqs-what">What is SimpleInvoices?</a></dt>
+      <dt><a class="intro" href="#faqs-need">What do i need to start invoicings?</a></dt>
+      <dt><a class="intro" href="#faqs-how">How do I create invoices?</a></dt>
+      <dt><a class="intro" href="#faqs-clone">How do I set up a default invoice for a customer?</a></dt>
+      <dt><a class="intro" href="#faqs-types">What are the different invoice types?</a></dt>
+      <dt><a class="intro" href="#cron">Recurrence (aka cron)</a></dt>
     </dl>
     <br />
-    <a id="faqs-what"><b>What is SimpleInvoices?</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
+    <a class="hook" id="faqs-what"><b>What is SimpleInvoices?</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
       <p>SimpleInvoices is a basic invoicing system designed with
       simplicity and functionality in mind. It caters to the needs of small organizations and home users. For more information please
       refer to the SimpleInvoices website <a href="http://www.simpleinvoices.org">http://www.simpleinvoices.org</a>.</p>
-    <a id="faqs-need"><b>What do I need to start invoicing?</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
+    <a class="hook" id="faqs-need"><b>What do I need to start invoicing?</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
       <p>Once you've installed SimpleInvoices (refer to Installation
         documentation for more info), all you need to do is enter a <b>Biller</b> (normally your organization) and a <b>Customer</b>
         (the person your are invoicing). Once this set up is complete, you can create an invoice. However, if you are invoicing products
         sold, you also need to enter a <b>Product</b> record.</p>
-    <a id="faqs-how"><b>How do I create invoices?</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
+    <a class="hook" id="faqs-how"><b>How do I create invoices?</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
       <p>Creating invoices is easy. Once a <b>Biller</b> and <b>Customer</b>
         have been set up, select the <b>New Invoice</b> option in the <b>Money</b> tab menu. Fill in the fields in the new invoice
         form that will be displayed and click <b>Save Invoice</b>.</p>
-    <a id="faqs-clone"><b>How do I set up a default invoice for a customer?</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
-	  <p>You can set up a default invoice for each customer such that by the click of a button, a new invoice will be created from the default
-	    invoice for you to modify (if necessary) and save. Once saved, a new invoice number will be assigned to it. Here is how you do this:
-	    <ol>
-	      <li>Click <b>Settings</b></li>
-	      <li>Click <b>Extensions</b></li>
-	      <li>Enable the <b>default_invoice</b> extension</li>
-	      <li>Go to the <b>Customers</b> list</li>
-		  <li>Edit a customer you want to clone an invoice for</li>
-		  <li>Enter the invoice number you want to clone in the <b>Default Invoice</b> field and save the change</li>
-		</ol>
-		At this point, note the new, 3rd icon in the <b>Action</b> column of the Customers list. If you click this icon for a customer that has
-		a default invoice assigned to it, that invoice will be cloned and presented to you in edit mode to save or make additional changes to
-		prior to saving it. Don't be confused by the invoice number showing for the new invoice. It is the number of the invoice that was cloned.
-		This number is informational. The next, new invoice number will be assigned when you save the new invoice. This way, if you cancel
-		rather than save the invoice, the next, new invoice number will not have been used up.
-	  <p>Note: If you click the icon to create a default invoice for a customer that has not been assigned a default invoice to clone, an empty
-	    invoice will be presented for you to change and save; or to cancel if needed.</p>
-    <a id="faqs-types"><b>What are the different invoice types?</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
+    <a class="hook" id="faqs-clone"><b>How do I set up a default invoice for a customer?</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
+      <p>You can set up a default invoice for each customer such that by the click of a button, a new invoice will be created from the default
+        invoice for you to modify (if necessary) and save. Once saved, a new invoice number will be assigned to it. Here is how you do this:
+        <ol>
+          <li>Click <b>Settings</b></li>
+          <li>Click <b>Extensions</b></li>
+          <li>Enable the <b>default_invoice</b> extension</li>
+          <li>Go to the <b>Customers</b> list</li>
+          <li>Edit a customer you want to clone an invoice for</li>
+          <li>Enter the invoice number you want to clone in the <b>Default Invoice</b> field and save the change</li>
+        </ol>
+        At this point, note the new, 3rd icon in the <b>Action</b> column of the Customers list. If you click this icon for a customer that has
+        a default invoice assigned to it, that invoice will be cloned and presented to you in edit mode to save or make additional changes to
+        prior to saving it. Don't be confused by the invoice number showing for the new invoice. It is the number of the invoice that was cloned.
+        This number is informational. The next, new invoice number will be assigned when you save the new invoice. This way, if you cancel
+        rather than save the invoice, the next, new invoice number will not have been used up.
+      <p>Note: If you click the icon to create a default invoice for a customer that has not been assigned a default invoice to clone, an empty
+        invoice will be presented for you to change and save; or to cancel if needed.</p>
+    <a class="hook" id="faqs-types"><b>What are the different invoice types?</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
       <p>In SimpleInvoices there are three types of invoices available:</p>
       <ul>
         <li><b>Total Invoice</b>: Think an invoice from a plumber that lists the actions and then has one price, associated
@@ -66,95 +63,121 @@
           item there is a detailed description of the work performed/product sold. For example an invoice from an
           accounting or legal firm.</li>
       </ul>
-    <a id="cron"><b>Recurrence</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
-    <ul>
-      <li>
-        To use cron to generate recurrent invoices, prepare a file <b>si_cron</b> and place it in the <b>/etc/cron.d</b>
-        folder in linux with the following contents:
-        <br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;<b>#SimpleInvoices recurrence - run each day at 1 AM</b>
-        <br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;<b>0 1 * * * &#47;usr&#47;bin&#47;wget -q -O - http:&#47;&#47;localhost&#47;api-cron &gt;/dev/null 2&gt;&#38;1</b>
-      </li>
-      <li>
-        Now run the command: <b>crontab&nbsp;/etc/cron.d/si_cron</b>
-      </li>
-    </ul>
-    <ul>
-      <li>Sample Apache configuration file in debian (/etc/apache2/sites-available/simpleinvoices)
-<pre style="font-family:courier;">
-ServerAdmin webmaster@localhost
-ServerSignature Off
-ServerTokens Prod
-
-&lt;IfModule mpm_prefork_module&gt;
-    StartServers          2
-    MinSpareServers       1
-    MaxSpareServers       2
-    MaxClients           50
-    MaxRequestsPerChild 100
-&lt;/IfModule&gt;
-
-&lt;VirtualHost *:80&gt;
-
-DocumentRoot /var/www/simpleinvoices
-
-&lt;Directory /&gt;
-    Options FollowSymLinks
-    AllowOverride None
-&lt;/Directory&gt;
-
-&lt;Directory /var/www/simpleinvoices&gt;
-    Options FollowSymLinks MultiViews
-    AllowOverride None
-    Order allow,deny
-    allow from all
-    DirectoryIndex index.php index.html
-
-    RewriteBase /
-    RewriteEngine on
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^/?([a-zA-Z0-9_]+)-([a-zA-Z0-9_]+)-([a-zA-Z0-9_]+)?$ index.php?module=$1&amp;view=$2&amp;id=$3
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^/?([a-zA-Z0-9_]+)-([a-zA-Z0-9_]+)$ index.php?module=$1&amp;view=$2 [L]
-&lt;/Directory&gt;
-
-&lt;Directory /var/www/simpleinvoices/tmp&gt;
-    Order Deny,Allow
-    Deny from All
-&lt;/Directory&gt;
-
-&lt;Directory /var/www/simpleinvoices/config&gt;
-    Order Deny,Allow
-    Deny from All
-&lt;/Directory&gt;
-
-# Protect sensitive files.
-&lt;FilesMatch "\.(htaccess|htpasswd|ini|phps|fla|psd|inc|po|sh|.*sql|log|tpl)$"&gt;
-    Order allow,deny
-    Deny from All
-    Satisfy All
-&lt;/FilesMatch&gt;
-
-&lt;FilesMatch "\.(htm|html|css|js|php)$"&gt;
-    AddDefaultCharset UTF-8
-&lt;/FilesMatch&gt;
-
-# Disable directory listings.
-Options -Indexes
-
-ErrorLog /var/log/apache2/error.log
-
-# Possible values include: debug, info, notice, warn, error, crit,
-# alert, emerg.
-LogLevel warn
-
-CustomLog /var/log/apache2/access.log combined
-
+    <a class="hook" id="cron"><b>Recurrence</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
+      <h2>Setup:</h2>
+      <ol>
+        <li>You need mod_rewrite enabled in your apache configuration to make recurring invoice work.</li>
+        <li>You also need access to a cron system - either unix cron or cpanel type cron so that you can
+          schedule the recurrence to run each day.</li>
+      </ol>
+      <h2>How to</h2>
+      <div style="margin:20px;">
+      <h3>Create the recurrence:</h3>
+      <ol>
+        <li>Get invoice number to be replicated. If necessary, create a new invoice for this purpose.</li>
+        <li>Go to the <i>recurrence</i> page and create a new recurrence.</li>
+        <li>Enter the invoice number from step 1.</li>
+        <li>Select a start date for the recurrence.</li>
+        <li>Select an end date <b>only</b> if the recurrence should stop after the end date. Otherwise leave
+          this field empty.</li>
+        <li>Specify the recurrence frequency by entering the number of periods in the text field and selecting
+          the recurrence period from the drop down list. For example: 1 month, 4 weeks, 2 days etc.</li>
+        <li>Select <b>Yes</b> if a copy of the new invoice should be sent to the Biller. Otherwise select <b>No</b>.</li>
+        <li>Select <b>Yes</b> if a copy of the new invoice should be sent to the Customer. Otherwise select <b>No</b>.</li>
+        <li>Click <b>Save</b> to save the new recurrence record.</li>
+      </ol>
+      <h3>Run the recurrence:</h3>
+      <ol>
+        <li>Schedule a recurrence action using <b>cron</b>, <b>webcron</b> (like https://www.easycron.com) or <b>cpanel cron</b>.</li>
+        <li>Add a new cron job that once a day, week, month, etc. executes a SimpleInvoices <b>api-cron</b> command.
+          The form the command will take can vary depending on your host requirements. The example below use
+          <b>curl</b> to submit the URL.
+          <dl>
+            <dt class="pre">curl "http://yourserver.com/{simple-invoices-folder}/index.php?module=api&amp;view=cron"</dt>
+            <dd>&nbsp;</dd>
+            <dd>For example, to run the command at 1AM each day, the entry would look like:</dd>
+          	<dd class="pre">0 1 * * * curl "http://invoice.mywebsite.com/index.php?module=api&amp;view=cron" >/dev/null 2>&amp;1</dd>
+          	<dd>&nbsp;</dd>
+          	<dd>Note that ">/dev/null 2>&amp;1" was appended to the command to suppress and output message sent from the host each time
+          	  the command is executed. This may not be needed on your system.</dd>
+          </dl>
+        </li>
+      </ol>
+    </div>
+    <h2>Sample Apache configuration file in debian (/etc/apache2/sites-available/simpleinvoices)</h2>
+    <dl>
+      <dd class="pre">
+ServerAdmin webmaster@localhost<br/>
+ServerSignature Off<br/>
+ServerTokens Prod<br/>
+<br/>
+&lt;IfModule mpm_prefork_module&gt;<br/>
+    StartServers          2<br/>
+    MinSpareServers       1<br/>
+    MaxSpareServers       2<br/>
+    MaxClients           50<br/>
+    MaxRequestsPerChild 100<br/>
+&lt;/IfModule&gt;<br/>
+<br/>
+&lt;VirtualHost *:80&gt;<br/>
+<br/>
+DocumentRoot /var/www/simpleinvoices<br/>
+<br/>
+&lt;Directory /&gt;<br/>
+    Options FollowSymLinks<br/>
+    AllowOverride None<br/>
+&lt;/Directory&gt;<br/>
+<br/>
+&lt;Directory /var/www/simpleinvoices&gt;<br/>
+    Options FollowSymLinks MultiViews<br/>
+    AllowOverride None<br/>
+    Order allow,deny<br/>
+    allow from all<br/>
+    DirectoryIndex index.php index.html<br/>
+<br/>
+    RewriteBase /<br/>
+    RewriteEngine on<br/>
+    RewriteCond %{REQUEST_FILENAME} !-f<br/>
+    RewriteRule ^/?([a-zA-Z0-9_]+)-([a-zA-Z0-9_]+)-([a-zA-Z0-9_]+)?$ index.php?module=$1&amp;view=$2&amp;id=$3<br/>
+    RewriteCond %{REQUEST_FILENAME} !-f<br/>
+    RewriteRule ^/?([a-zA-Z0-9_]+)-([a-zA-Z0-9_]+)$ index.php?module=$1&amp;view=$2 [L]<br/>
+&lt;/Directory&gt;<br/>
+<br/>
+&lt;Directory /var/www/simpleinvoices/tmp&gt;<br/>
+    Order Deny,Allow<br/>
+    Deny from All<br/>
+&lt;/Directory&gt;<br/>
+<br/>
+&lt;Directory /var/www/simpleinvoices/config&gt;<br/>
+    Order Deny,Allow<br/>
+    Deny from All<br/>
+&lt;/Directory&gt;<br/>
+<br/>
+# Protect sensitive files.<br/>
+&lt;FilesMatch "\.(htaccess|htpasswd|ini|phps|fla|psd|inc|po|sh|.*sql|log|tpl)$"&gt;<br/>
+    Order allow,deny<br/>
+    Deny from All<br/>
+    Satisfy All<br/>
+&lt;/FilesMatch&gt;<br/>
+<br/>
+&lt;FilesMatch "\.(htm|html|css|js|php)$"&gt;<br/>
+    AddDefaultCharset UTF-8<br/>
+&lt;/FilesMatch&gt;<br/>
+<br/>
+# Disable directory listings.<br/>
+Options -Indexes<br/>
+<br/>
+ErrorLog /var/log/apache2/error.log<br/>
+<br/>
+# Possible values include: debug, info, notice, warn, error, crit,<br/>
+# alert, emerg.<br/>
+LogLevel warn<br/>
+<br/>
+CustomLog /var/log/apache2/access.log combined<br/>
+<br/>
 &lt;/VirtualHost&gt;
-</pre>
-      </li>
-    </ul>
+      </dd>
+    </dl>
   </div>
 </body>
 </html>

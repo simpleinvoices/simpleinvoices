@@ -4,49 +4,41 @@
   <title>SimpleInvoices - Read Me</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link rel="stylesheet" href="../../../templates/default/css/main.css">
-  <style>
-    li, dl {margin-top:5px;margin-bottom:5px;}
-    p {margin-top:5px;margin-bottom:5px;margin-left:25px;}
-  </style>
+  <link rel="stylesheet" href="../../../templates/default/css/info.css">
 </head>
 <body>
   <a id="top"></a>
-  <h1 class="si_center">ReadMe</h1>
+  <h1 class="si_center">Read Me</h1>
   <div class="si_toolbar">
     <a href="<?php echo $_SERVER['HTTP_REFERER']; ?>">Return To Previous Screen</a>
   </div>
   <div class="si_toolbar_top_left">
     <dl>
-      <dt><a href="#installation">Installation</a></dt>
-      <dd><a href="#requirements">Requirements</a></dd>
-      <dd><a href="#recommended">Recommended</a></dd>
-      <dd><a href="#notinstalled">Above Not Installed</a></dd>
-      <dd><a href="#siinstallation">SimpleInvoices Installation</a></dd>
-      <dd><a href="#sowhatnow">Installation completed. So what now?</a></dd>
-      <dt><a href="#backup">Database backup</a></dt>
-      <dt><a href="#login">Enabdtng the login system</a></dt>
-      <dt><a href="#upgrading">Upgrading</a></dt>
-      <dt><a href="#prepare">Preparing SimpleInvoices for use</a></dt>
-      <dd><a href="#addbiller">Add Biller</a></dd>
-      <dd><a href="#addcustomerr">Add Customer</a></dd>
-      <dd><a href="#addproduct">Add Product</a></dd>
-      <dd><a href="#settaxrate">Set Tax Rate</a></dd>
-      <dd><a href="#setpreferences">Set Invoice Preferences</a></dd>
-      <dt><a href="#use">Using SimpleInvoices</a></dt>
-      <dd><a href="#logos">Biller Logos</a></dd>
-      <dd><a href="#templates">Invoice Templates</a></dd>
-      <dd><a href="#defaults">System Defaults</a></dd>
-      <dd><a href="#export">Export to PDF, Spreedshet or Document</a></dd>
-      <dt><a href="#faqs">Frequently Asked Questions (FAQs)</a></dt>
-      <dd><a href="#faqs-what">What is SimpleInvoices?</a></dd>
-      <dd><a href="#faqs-need">What do i need to start invoicings?</a></dd>
-      <dd><a href="#faqs-how">How do I create invoices?</a></dd>
-      <dd><a href="#faqs-types">What are the different invoice types?</a></dd>
+      <dt><a class="intro" href="#installation">Installation</a></dt>
+      <dd><a class="intro" href="#requirements">Requirements</a></dd>
+      <dd><a class="intro" href="#recommended">Recommended</a></dd>
+      <dd><a class="intro" href="#notinstalled">Above Not Installed</a></dd>
+      <dd><a class="intro" href="#siinstallation">SimpleInvoices Installation</a></dd>
+      <dd><a class="intro" href="#sowhatnow">Installation completed. So what now?</a></dd>
+      <dt><a class="intro" href="#backup">Database backup</a></dt>
+      <dt><a class="intro" href="#login">Enabdtng the login system</a></dt>
+      <dt><a class="intro" href="#upgrading">Upgrading</a></dt>
+      <dt><a class="intro" href="#prepare">Preparing SimpleInvoices for use</a></dt>
+      <dd><a class="intro" href="#addbiller">Add Biller</a></dd>
+      <dd><a class="intro" href="#addcustomerr">Add Customer</a></dd>
+      <dd><a class="intro" href="#addproduct">Add Product</a></dd>
+      <dd><a class="intro" href="#settaxrate">Set Tax Rate</a></dd>
+      <dd><a class="intro" href="#setpreferences">Set Invoice Preferences</a></dd>
+      <dt><a class="intro" href="#use">Using SimpleInvoices</a></dt>
+      <dd><a class="intro" href="#logos">Biller Logos</a></dd>
+      <dd><a class="intro" href="#templates">Invoice Templates</a></dd>
+      <dd><a class="intro" href="#defaults">System Defaults</a></dd>
+      <dd><a class="intro" href="#export">Export to PDF, Spreedshet or Document</a></dd>
     </dl>
     <br />
-    <a id="installation"><b>Installation</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
+    <a class="hook" id="installation"><b>Installation</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
     <ul>
-      <li><a id="requirements"><b>Requirements</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
+      <li><a class="hook" id="requirements"><b>Requirements</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
         <ul>
           <li>Apache 2.4x</li>
           <li>MySQL 5.6x or compatible DBMS (ie: MariaDB).</li>
@@ -64,7 +56,7 @@
             </ul>
           </li>
           <li>The following directories must be setup and writeable by the webserver user:
-<pre style="margin-left:10px;font-family:courier;font-weight:bold;font-size:1em;">
+<pre>
   tmp
   tmp/cache
   tmp/database_backups
@@ -74,22 +66,20 @@
           </li>
         </ul>
       </li>
-      <li><a id="recommended"><b>Recommended</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
+      <li><a class="hook" id="recommended"><b>Recommended</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
         <ul>
           <li>phpMyAdmin <a href="http://phpmyadmin.sf.net">http://phpmyadmin.sf.net</a></li>
         </ul>
       </li>
-      <li><a id="notinstalled"><b>Above not installed?</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
+      <li><a class="hook" id="notinstalled"><b>Above not installed?</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
         <ul>
-          <li>Windows: Install WampServer from <a
-            href="http://www.wampserver.com/en">http://www.wampserver.com/en</a></li>
-          <li>Mac: Install MAMP5 from <a
-            href="http://www.mamp.info/">http://www.mamp.info/</a>.
+          <li>Windows: Install WampServer from <a href="http://www.wampserver.com/en">http://www.wampserver.com/en</a></li>
+          <li>Mac: Install MAMP5 from <a href="http://www.mamp.info/">http://www.mamp.info/</a>.
           </li>
           <li>Linux: Use the distribution provided with your OS.</li>
         </ul>
       </li>
-      <li><a id="siinstallation"><b>SimpleInvoices Installation</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
+      <li><a class="hook" id="siinstallation"><b>SimpleInvoices Installation</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
         <ul>
           <li>Download the <b>.zip</b> file for the current version of SimpleInvoices from GitHub.</li>
           <li>In the <i>document root</i> directory of your webserver, extract the content of the <b>.zip</b> file. <b>Note</b>:
@@ -103,7 +93,7 @@
             <b>custom.config.php</b>. Use this for your configuation so that future updates will not load
             over your setup.</li>
           <li>Modify the folloing parameters in your <b>custom.config.php</b>:
-<pre style="margin-left:10px;font-family:courier;font-weight:bold;font-size:1em;">
+<pre>
   database.adapter         = pdo_mysql
   database.utf8            = true
   database.params.host     = localhost
@@ -120,7 +110,7 @@
           </li>
         </ul>
       </li>
-      <li><a id="sowhatnow"><b>Installation completed. So what now?</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
+      <li><a class="hook" id="sowhatnow"><b>Installation completed. So what now?</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
         <ul>
           <li>To generate and export PDF files, the PHP <i>gd2</i> extension must be enabled so PHP can create and
             manipulate image files in a variety of different image formats. The extension is enabled by un-commenting
@@ -152,7 +142,7 @@
             If a pdf wasn't created and an error similar to the following occurred, you will have to alter your
             <b>php.ini</b> file configuration.
             <br />
-<pre style="margin-left:10px;font-family:courier;font-weight:bold;font-size:1em;">
+<pre>
   Fatal error: Allowed memory size of 8388608 bytes exhausted (tried to allocate 4864 bytes)
   in /var/www/simpleinvoices/pdf/filter.data.html2xhtml.class.php on line 8
 </pre>
@@ -166,10 +156,10 @@
       <li>Open your Internet browser and go to http://localhost/simpleinvoices and user SimpleInvoices as you wish</li>
       <li>Installation is finished</li>
     </ul>
-    <a id="backup"><b>SimpleInvoices database backup</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
+    <a class="hook" id="backup"><b>SimpleInvoices database backup</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
     <p>SimpleInvoices provides a database backup feature to preserve current content for protection from
       corruption and to preserve data prior to update installations.</p>
-    <a id="login"><b>Enabling the login/authentication system</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
+    <a class="hook" id="login"><b>Enabling the login/authentication system</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
     <ul>
       <li>SimpleInvoices has a login system which can allow you to protect your SimpleInvoices with a username and password login
         system. By default this is turned off.</li>
@@ -181,7 +171,7 @@
         </ul>
       </li>
     </ul>
-    <a id="upgrading"><b>Upgrading SimpleInvoices from one version to another</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
+    <a class="hook" id="upgrading"><b>Upgrading SimpleInvoices from one version to another</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
     <ul>
       <li>To upgrade SimpleInvoices from one version to another, the first step is to download the updated version of
         SimpleInvoices from <i>GitHub</i></li>
@@ -193,11 +183,11 @@
       <li>Test your setup in the web browser (usually by entering <i>http://localhost/simpleinvoices</i>). Modifications to the
         database are automatically applied the first time you access the updated implementation.</li>
     </ul>
-    <a id="prepare"><b>Preparing SimpleInvoices for use</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
+    <a class="hook" id="prepare"><b>Preparing SimpleInvoices for use</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
     <p style="margin-left:0;">The first steps in using SimpleInvoices is to setup the base information, that is billers, customers, products, tax
       rates, and invoice preferences</p>
     <ul>
-      <li><a id="addbiller"><b>Add Biller</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
+      <li><a class="hook" id="addbiller"><b>Add Biller</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
         <ul>
           <li>A biller is the name and details of the person creating the invoice, ie you or your company</li>
           <li>Open up SimpleInvoices in your browser (normally http://localhost/simpleinvoice)</li>
@@ -208,7 +198,7 @@
       </li>
     </ul>
     <ul>
-      <li><a id="addcustomerr"><b>Add Customer</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
+      <li><a class="hook" id="addcustomerr"><b>Add Customer</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
         <ul>
           <li>In the main page click on the Insert Customerr button</li>
           <li>Once in the Insert Customer screen fill in the required fileds and click the Insert Customer button</li>
@@ -217,7 +207,7 @@
       </li>
     </ul>
     <ul>
-      <li><a id="addproduct"><b>Add Product</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
+      <li><a class="hook" id="addproduct"><b>Add Product</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
         <ul>
           <li>A product can be any item that you wish to appear in the Itemized Invoice. It can be anything you wish to sell
             and invoice - physical item ie. light bulbs or services such as an accounting service charge per hour/PC repairs/etc...</li>
@@ -229,7 +219,7 @@
       </li>
     </ul>
     <ul>
-      <li><a id="settaxrate"><b>Set Tax Rate</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
+      <li><a class="hook" id="settaxrate"><b>Set Tax Rate</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
         <ul>
           <li>In some countries (USA, Australia, England, New Zealand, etc.), there are taxes on sales; normally called
             Sales Tax, GST(goods and services tax), or VAT (value added tax). SimpleInvoices has the ability to setup
@@ -245,7 +235,7 @@
       </li>
     </ul>
     <ul>
-      <li><a id="setpreferences"><b>Set Invoice Preferences</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
+      <li><a class="hook" id="setpreferences"><b>Set Invoice Preferences</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
         <p style="margin-left:0;">The Invoice Preferences is where you can set the various preferences of your invoices. Available preferences are:</p>
         <ul>
           <li><b>Description</b>: This is the name of the set of preferneces</li>
@@ -269,7 +259,7 @@
         </ul>
       </li>
     </ul>
-    <a id="use"><b>Using SimpleInvoices</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
+    <a class="hook" id="use"><b>Using SimpleInvoices</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
     <ul>
       <li><b>The basics</b>&nbsp;<a href="#top"><i>(top)</i></a>
         <ul>
@@ -301,7 +291,7 @@
           <li>Enjoy :-)</li>
         </ul>
       </li>
-      <li><a id="logos"><b>Biller Logos</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
+      <li><a class="hook" id="logos"><b>Biller Logos</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
         <ul>
           <li>SimpleInvoices allows for each biller to have their own logo displayed in the print formatted invoices.</li>
           <li>To add a logo to a biller the first step is to upload your billers logo into the logo directory into SimpleInvoices
@@ -311,7 +301,7 @@
           <li>Now when you generate a print image (Print view, PDF, spreedsheet, etc.), the logo assigned to the biller will be used.</li>
         </ul>
       </li>
-      <li><a id="templates"><b>Invoice Templates</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
+      <li><a class="hook" id="templates"><b>Invoice Templates</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
         <ul>
           <li>An Invoice Template is the template that SimpleInvoices will use to create the Print Preview of the invoice</li>
           <li>To choose which Invoice Template your SimpleInvoices will use go to the Options menu and select System Defaults</li>
@@ -322,7 +312,7 @@
           <li>Now when you select <b>Print View</b> of an invoice it will use this new Invoice Template</li>
         </ul>
       </li>
-      <li><a id="defaults"><b>System Defaults</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
+      <li><a class="hook" id="defaults"><b>System Defaults</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
         <p style="margin-left:0;">In SimpleInvoices it&#39;s possible to setup defaults for various values. The following default values are maintained
            in the <i>System Defaults</i> page; accessed from the <i>System Prefernces</i> menu in the <i>Settings</i> tab:</p>
         <ul>
@@ -337,7 +327,7 @@
             <b>PDF</b>, <b>Spreedsheet</b> and <b>Document</b> view modes.</li>
         </ul>
       </li>
-      <li><a id="export"><b>Export to PDF, Spreedsheet or Document</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
+      <li><a class="hook" id="export"><b>Export to PDF, Spreedsheet or Document</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
         <ul>
           <li>SimpleInvoices allows to the export of an invoice from the Quick View to a <b>PDF</b>, <b>Spreedsheet</b>
             or <b>Document</b> format.</li>
@@ -352,7 +342,7 @@
           </li>
           <li>The default formats and dimensions can be changed in the <i>config/custom.config.php</i> file. The following lines
             specify the configuration:
-<pre style="margin-left:10px;font-family:courier;font-weight:bold;font-size:1em;">
+<pre>
   export.spreadsheet      = xls
   export.wordprocessor    = doc
   export.pdf.screensize   = 510
@@ -365,30 +355,6 @@
           </li>
           <li><b>Note</b>: The <i>config/custom.config.php</i> settings for spreadsheet and wordprocess can be set to any value provided
             their associated program can read a HTML document.</li>
-        </ul>
-      </li>
-    </ul>
-    <a id="faqs"><b>Frequently Asked Questions (FAQs)</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
-    <ul>
-      <li><a id="faqs-what"><b>What is SimpleInvoices?</b></a> SimpleInvoices is a basic invoicing system designed with
-        simplicity and functionality in mind. It caters to the needs of small organizations and home users. For more information please
-        refer to the SimpleInvoices website <a href="http://www.simpleinvoices.org">http://www.simpleinvoices.org</a>.</li>
-      <li><a id="faqs-need"><b>What do I need to start invoicing?</b></a> Once you've installed SimpleInvoices (refer to Installation
-        documentation for more info), all you need to do is enter a <b>Biller</b> (normally your organization) and a <b>Customer</b>
-        (the person your are invoicing). Once this set up is complete, you can create an invoice. However, if you are invoicing products
-        sold, you also need to enter a <b>Product</b> record.</li>
-      <li><a id="faqs-how"><b>How do I create invoices?</b></a> Creating invoices is easy. Once a <b>Biller</b> and <b>Customer</b>
-        have been set up, select the <b>New Invoice</b> option in the <b>Money</b> tab menu. Fill in the fields in the new invoice
-        form that will be displayed and click <b>Save Invoice</b>.</li>
-      <li><a id="faqs-types"><b>What are the different invoice types?</b></a> In SimpleInvoices there are three types of
-        invoices available:
-        <ul>
-          <li><b>Total Invoice</b>: Think an invoice from a plumber that lists the actions and then has one price, associated
-            taxes and a total.</li>
-          <li><b>Itemized Invoice</b>: An invoice that list many different items. For example a grocery store invoice.</li>
-          <li><b>Consulting Invoice</b>: An invoice that is similar to an <b>Intemised Invoice</b> except that with each line
-            item there is a detailed description of the work performed/product sold. For example an invoice from an
-            accounting or legal firm.</li>
         </ul>
       </li>
     </ul>
