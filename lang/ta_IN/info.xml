@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<langfile version="1.0.0" type="language">
+	<name>தமிழ்</name>
+	<shortname>ta_IN</shortname>
+	<englishname>Tamil</englishname>
+	<version>1.0.0</version>
+	<creationDate>2018-01-26</creationDate>
+	<author>Ap.Muthu</author>
+	<authorEmail>apmuthu@usa.net</authorEmail>
+</langfile>
