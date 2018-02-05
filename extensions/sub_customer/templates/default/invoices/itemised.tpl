@@ -153,7 +153,7 @@
                       <tr class="note">
                         <td></td>
                         <td colspan="4">
-                          <textarea class="editor" name="description{$smarty.section.line.index|htmlsafe}"
+                          <textarea class="detail" name="description{$smarty.section.line.index|htmlsafe}"
                                     id="description{$smarty.section.line.index|htmlsafe}" rows="3" cols="50"></textarea>
                         </td>
                       </tr>
