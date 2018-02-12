@@ -19,9 +19,10 @@ function lastOfMonth() {
 }
 
 // @formatter:off
-$start_date  = isset($_POST['start_date'])  ? $_POST['start_date']  : firstOfMonth();
-$end_date    = isset($_POST['end_date'])    ? $_POST['end_date']    : lastOfMonth();
-$custom_flag = isset($_POST['custom_flag']) ? $_POST['custom_flag'] : null;
+$start_date     = isset($_POST['start_date'])     ? $_POST['start_date']  : firstOfMonth();
+$end_date       = isset($_POST['end_date'])       ? $_POST['end_date']    : lastOfMonth();
+$custom_flag    = isset($_POST['custom_flag'])    ? $_POST['custom_flag'] : null;
+$display_detail = isset($_POST['display_detail']) ? true                  : false;
 
 $custom_flags_enabled = isExtensionEnabled('custom_flags');
 $custom_flag_labels   = getCustomFlagLabels($custom_flags_enabled);
@@ -37,14 +38,15 @@ if (isset($_POST['submit'])) {
     }
 }
 
-$smarty->assign('invoices'  , $invoices);
-$smarty->assign('tot_income', $tot_income);
-$smarty->assign('start_date', $start_date);
-$smarty->assign('end_date'  , $end_date);
+$smarty->assign('invoices'      , $invoices);
+$smarty->assign('tot_income'    , $tot_income);
+$smarty->assign('start_date'    , $start_date);
+$smarty->assign('end_date'      , $end_date);
+$smarty->assign('display_detail', $display_detail);
 
 $smarty->assign('custom_flags_enabled', ($custom_flags_enabled ? '1':'0'));
-$smarty->assign('custom_flag', $custom_flag);
-$smarty->assign('custom_flag_labels', $custom_flag_labels);
+$smarty->assign('custom_flag'         , $custom_flag);
+$smarty->assign('custom_flag_labels'  , $custom_flag_labels);
 
 $smarty->assign('pageActive', 'report');
 $smarty->assign('active_tab', '#home');

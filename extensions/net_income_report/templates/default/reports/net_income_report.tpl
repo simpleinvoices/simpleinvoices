@@ -52,6 +52,12 @@
     </tr>
     {/if}
     <tr>
+      <td class="details_screen">Display Detail</td>
+      <td><input type="checkbox" name="display_detail"
+                 {if $smarty.post.display_detail == "yes"} checked {/if} value="yes" />
+      </td>
+    </tr>
+    <tr>
       <td colspan="2">
         <br />
         <table class="center">
@@ -70,9 +76,6 @@
   <br />
   <br />
   {if $smarty.post.submit == null}
-  <br />
-  <br />
-  <br />
   <br />
   <br />
   {/if}
@@ -126,6 +129,17 @@
         {$invoices[idx]->total_period_payments|siLocal_number}
       </td>
     <tr>
+    {if $display_detail}
+      {foreach $invoices[idx]->items as $item}
+      <tr>
+      	<td>&nbsp;</td>
+        <td style="text-align:right;">Description:</td>
+        <td colspan="4">{$item->description}</td>
+        <td style="text-align:right;">Amount:</td>
+        <td style="text-align:right;">{$item->amount|siLocal_number}</td>
+      </tr>
+      {/foreach}
+    {/if}
     {/section}
 
     <tr>
