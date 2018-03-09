@@ -34,7 +34,7 @@ class eway {
     var $myCurlPreferences = array();
 
     //Class Constructor
-	function eway($customerID = EWAY_DEFAULT_CUSTOMER_ID, $method = EWAY_DEFAULT_PAYMENT_METHOD ,$liveGateway  = EWAY_DEFAULT_LIVE_GATEWAY) {
+	function __construct($customerID = EWAY_DEFAULT_CUSTOMER_ID, $method = EWAY_DEFAULT_PAYMENT_METHOD ,$liveGateway  = EWAY_DEFAULT_LIVE_GATEWAY) {
 		$this->myCustomerID = $customerID;
 	    switch($method){
 
@@ -114,13 +114,13 @@ class eway {
 		//	$value = round($value*100);
 		$this->myTransactionData["eway" . $field] = htmlsafe(trim($value));
 	}
-	
-	
+
+
 	//receive special preferences for Curl
 	function setCurlPreferences($field, $value) {
 		$this->myCurlPreferences[$field] = $value;
 	}
-	
+
 
 	//obtain visitor IP even if is under a proxy
 	function getVisitorIP(){
