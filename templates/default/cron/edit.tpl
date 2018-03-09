@@ -24,7 +24,7 @@
             <option value=''></option>
             {foreach from=$invoice_all item=invoice}
             <option value="{$invoice.id|htmlsafe}" {if $invoice.id == $cron.invoice_id}selected{/if} >
-              {$invoice.index_nam|htmlsafe} ({$invoice.biller|htmlsafe}, {$invoice.customer|htmlsafe}, {$invoice.invoice_total|siLocal_number})
+              Inv#{$invoice.index_id}: {$invoice.index_nam|htmlsafe} ({$invoice.biller|htmlsafe}, {$invoice.customer|htmlsafe}, {$invoice.invoice_total|siLocal_number})
             </option>
             {/foreach}
           </select>
