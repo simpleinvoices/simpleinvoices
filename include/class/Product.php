@@ -120,21 +120,23 @@ class Product {
 
     /**
      * Insert a new record in the products table.
-     * @param number $enabled Product enabled/disabled status used if not present in
-     *        the <b>$_POST</b> array. Set to 1 (default) for enabled; 0 for disabled.
-     * @param number $visible Flags record seen in list. Defaults to 1 (visible).
-     *        Set to 0 for not visible.
-     * @param string $domain_id Domain user is logged into.
-     * @return PDO statement object on success, false on failure.
+     * @param integer $enabled Product enabled/disabled status used if not present in
+     *        the <b>$_POST</b> array. Defaults to ENABLED (1) or set to DISABLED (0).
+     * @param integer $visible Flags record seen in list. Defaults to ENABLED (1) for
+     *        visible or DISABLED (0) for not visible.
+     * @return boolean <b>true</b> for success or <b>false</b> for failure.
      */
-    public static function insertProduct($enabled=ENABLED, $visible=1) {
+    public static function insertProduct($enabled=ENABLED, $visible=ENABLED) {
         global $pdoDb;
 
         $cflgs_enabled = isExtensionEnabled('custom_flags');
 
         if (isset($_POST['enabled'])) $enabled = $_POST['enabled'];
 
-        if (($attributes = $pdoDb->request("SELECT", "products_attributes")) === false) return false;
+        if (($attributes = $pdoDb->request("SELECT", "products_attributes")) === false) {
+            error_log("Products::insertProduct - Unable to load \"products_attricutes\"");
+            return false;
+        }
 
         $attr = array();
         foreach ($attributes as $v) {
@@ -156,8 +158,9 @@ class Product {
             }
         }
 
+        $description = (isset($_POST['description']   ) ? $_POST['description']    : "");
         $fauxPost = array('domain_id'            => domain_id::get(),
-                          'description'          => (isset($_POST['description']   ) ? $_POST['description']    : ""),
+                          'description'          => $description,
                           'unit_price'           => (isset($_POST['unit_price']    ) ? $_POST['unit_price']     : "0"),
                           'cost'                 => (isset($_POST['cost']          ) ? $_POST['cost']           : "0"),
                           'reorder_level'        => (isset($_POST['reorder_level'] ) ? $_POST['reorder_level']  : "0"),
@@ -179,7 +182,11 @@ class Product {
         $pdoDb->setExcludedFields("id");
         // @formatter:on
 
-        if ($pdoDb->request("INSERT", "products") === false) return false;
+        $result = $pdoDb->request("INSERT", "products");
+        if ($result === false) {
+            error_log("Products::insertItems - Unable to store products description, {$description}");
+            return false;
+        }
         return true;
     }
 

@@ -1,5 +1,7 @@
 <?php
-
+/* Commented out 03/09/2018 by RCR as the refernced class StackingLevel doesn't exist
+ * and the class RenderStackingContext is not referenced.
+ *
 class RenderStackingContext {
   var $_stacking_levels;
 
@@ -24,3 +26,4 @@ class RenderStackingContext {
     $this->_stacking_levels = $levels;
   }
 }
+*/

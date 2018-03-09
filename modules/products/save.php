@@ -8,7 +8,7 @@ $op = (!empty ( $_POST ['op'] ) ? addslashes($_POST['op']) : NULL);
 
 $saved = false;
 if ($op === 'insert_product') {
-    if (Product::insertProduct()) $saved = true;
+    if (Product::insertProduct() !== false) $saved = true;
 } else if ($op === 'edit_product') {
     if (isset($_POST ['save_product']) && Product::updateProduct()) $saved = true;
 }

@@ -40,7 +40,12 @@ class Invoice {
         $lcl_list = $list;
         if (empty($lcl_list['domain_id'])) $lcl_list['domain_id'] = domain_id::get();
 
-        if (!self::invoice_items_check_fk(null, $list['product_id'], $tax_ids, true)) return null;
+        if (!self::invoice_items_check_fk(null, $list['product_id'], $tax_ids, true)) {
+            error_log("Invoice::insert_item - Failed foreign key check");
+            error_log("                       list - " . print_r($list, true));
+            error_log("                       tax_ids - " .print_r($tax_ids, true));
+            return null;
+        }
 
         $pdoDb->setFauxPost($list);
         $pdoDb->setExcludedFields("id");
@@ -97,7 +102,7 @@ class Invoice {
 
     /**
      *
-     * @param unknown $invoice_id
+     * @param integer $invoice_id
      * @return boolean <b>true</b> if update successful; otherwise <b>false</b>.
      */
     public static function updateInvoice($invoice_id) {
@@ -141,7 +146,7 @@ class Invoice {
      * @param int $product_id Unique id of the si_products record for this item.
      * @param int $tax_ids Unique id for the taxes to apply to this line item.
      * @param string $description Extended description for this line item.
-     * @param decimal $unit_price Price of each unit of this item.
+     * @param float $unit_price Price of each unit of this item.
      * @param string $attribute Attributes for invoice.
      * @return boolean true always returned.
      */
@@ -225,7 +230,7 @@ class Invoice {
     /**
      *
      * @param integer $id
-     * @return Result
+     * @return array $invoice
      */
     public static function select($id) {
         global $pdoDb;
@@ -701,7 +706,7 @@ class Invoice {
     /**
      * Retrieve maximum invoice number assigned.
      * @param string $domain_id
-     * @return Maximum invoice number assigned.
+     * @return integer Maximum invoice number assigned.
      */
     public static function maxIndexId($domain_id="") {
         global $pdoDb;
