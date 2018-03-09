@@ -41,10 +41,14 @@ if ($_POST['action'] == "insert" ) {
     if ($id > 0) $saved = true;
 
     if($saved && $type == TOTAL_INVOICE) {
-        Product::insertProduct(0,0);
-        $product_id = lastInsertId();
-        $tax_id = (empty($_POST["tax_id"][0] ) ? "" : $_POST["tax_id"][0]);
-        Invoice::insertInvoiceItem($id, 1, $product_id, $tax_id, $_POST['description'], $_POST['unit_price']);
+        $product_id = Product::insertProduct(DISABLED,DISABLED);
+        if ($product_id === false) {
+            error_log("modules/invoices/save.php TOTAL_INVOICE: Unable to save description in si_products table");
+            $saved = false;
+        } else {
+            $tax_id = (empty($_POST["tax_id"][0] ) ? "" : $_POST["tax_id"][0]);
+            Invoice::insertInvoiceItem($id, 1, $product_id, $tax_id, $_POST['description'], $_POST['unit_price']);
+        }
     } else if ($saved) { // itemized invoice
         $i = 0;
         while ($i <= $_POST['max_items']) {
