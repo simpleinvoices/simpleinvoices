@@ -1,0 +1,6 @@
+grep '"' lang/en_GB/lang.php | cut -d\" -f1 > en_prefix.txt
+grep '"' lang/en_GB/lang.php | cut -d\" -f2 > en_strings.txt
+grep '"' lang/en_GB/lang.php | cut -d\" -f3 > en_suffix.txt
+
+paste -d"\"" en_prefix.txt ta_strings.txt > ta_lang.php
+## replace all LF with ";//1 in translated strings
