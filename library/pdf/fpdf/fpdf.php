@@ -10,7 +10,7 @@
  *******************************************************************************/
 
 /**
- * Heavily patched to adapt to the HTML2PS/HTML2PDF script requirements by 
+ * Heavily patched to adapt to the HTML2PS/HTML2PDF script requirements by
  * Konstantin Bournayev (bkon@bkon.ru)
  */
 
@@ -31,8 +31,8 @@ if (!class_exists('FPDF')) {
   /**
    * See PDF Reference 1.6 p.653 for explanation of flags specific to text fields
    */
-  define('PDF_FIELD_TEXT_MULTILINE',1 << 12); 
-  define('PDF_FIELD_TEXT_PASSWORD', 1 << 13); 
+  define('PDF_FIELD_TEXT_MULTILINE',1 << 12);
+  define('PDF_FIELD_TEXT_PASSWORD', 1 << 13);
   define('PDF_FIELD_TEXT_FILE',     1 << 20);
 
   /**
@@ -42,12 +42,12 @@ if (!class_exists('FPDF')) {
   define("PDF_FORM_SUBMIT_NOVALUE", 1 << 1);
   define("PDF_FORM_SUBMIT_EFORMAT", 1 << 2);
   define("PDF_FORM_SUBMIT_GET",     1 << 3);
-  
+
   class PDFIndirectObject {
     var $object_id;
     var $generation_id;
-    
-    function get_object_id() { 
+
+    function get_object_id() {
       return $this->object_id;
     }
 
@@ -57,8 +57,8 @@ if (!class_exists('FPDF')) {
 
     /**
      * Outputs the PDF indirect object to PDF file.
-     * 
-     * To pervent infinite loop on circular references, this method checks 
+     *
+     * To pervent infinite loop on circular references, this method checks
      * if current object have been already written to the file.
      *
      * Note that, in general, nested objects should be written to PDF file
@@ -66,7 +66,7 @@ if (!class_exists('FPDF')) {
      * which should be overridden by children classes.
      *
      * @param FPDF $handler PDF file wrapper (FPDF object)
-     * 
+     *
      * @final
      *
      * @see FPDF::is_object_written
@@ -82,7 +82,7 @@ if (!class_exists('FPDF')) {
     }
 
     /**
-     * Writes all nested objects to the PDF file. Should be overridden by 
+     * Writes all nested objects to the PDF file. Should be overridden by
      * PDFIndirectObject descendants.
      *
      * @param FPDF $handler PDF file wrapper (FPDF object)
@@ -94,7 +94,7 @@ if (!class_exists('FPDF')) {
     }
 
     function PDFIndirectObject(&$handler,
-                               $object_id, 
+                               $object_id,
                                $generation_id) {
       $this->object_id = $object_id;
       $this->generation_id = $generation_id;
@@ -112,11 +112,11 @@ if (!class_exists('FPDF')) {
   class PDFPage extends PDFIndirectObject {
     var $annotations;
 
-    function PDFPage(&$handler, 
-                     $object_id, 
+    function PDFPage(&$handler,
+                     $object_id,
                      $generation_id) {
-      $this->PDFIndirectObject($handler, 
-                               $object_id, 
+      $this->PDFIndirectObject($handler,
+                               $object_id,
                                $generation_id);
     }
 
@@ -132,12 +132,12 @@ if (!class_exists('FPDF')) {
   class PDFAppearanceStream extends PDFIndirectObject {
     var $_content;
 
-    function PDFAppearanceStream(&$handler, 
-                                 $object_id, 
+    function PDFAppearanceStream(&$handler,
+                                 $object_id,
                                  $generation_id,
                                  $content) {
-      $this->PDFIndirectObject($handler, 
-                               $object_id, 
+      $this->PDFIndirectObject($handler,
+                               $object_id,
                                $generation_id);
 
       $this->_content = $content;
@@ -164,15 +164,15 @@ if (!class_exists('FPDF')) {
 
   class PDFAnnotation extends PDFIndirectObject {
     function PDFAnnotation(&$handler,
-                           $object_id, 
+                           $object_id,
                            $generation_id) {
       $this->PDFIndirectObject($handler,
-                               $object_id, 
+                               $object_id,
                                $generation_id);
     }
 
     function _dict(&$handler) {
-      return array_merge(parent::_dict($handler), 
+      return array_merge(parent::_dict($handler),
                          array("Type" => $handler->_name("Annot")));
     }
   }
@@ -220,11 +220,11 @@ if (!class_exists('FPDF')) {
     var $link;
 
     function PDFAnnotationExternalLink(&$handler,
-                                       $object_id, 
+                                       $object_id,
                                        $generation_id,
                                        $rect,
                                        $link) {
-      $this->PDFAnnotation($handler, 
+      $this->PDFAnnotation($handler,
                            $object_id,
                            $generation_id);
 
@@ -248,12 +248,12 @@ if (!class_exists('FPDF')) {
     var $link;
 
     function PDFAnnotationInternalLink(&$handler,
-                                       $object_id, 
+                                       $object_id,
                                        $generation_id,
                                        $rect,
                                        $link) {
-      $this->PDFAnnotation($handler, 
-                           $object_id, 
+      $this->PDFAnnotation($handler,
+                           $object_id,
                            $generation_id);
 
       $this->rect = $rect;
@@ -273,10 +273,10 @@ if (!class_exists('FPDF')) {
 
       /**
        * Sometimes hyperlinks may refer to pages NOT present in PDF document
-       * Example: a very long frame content; it it trimmed to one page, as 
+       * Example: a very long frame content; it it trimmed to one page, as
        * framesets newer take more than one frame. A link targe which should be rendered
-       * on third page without frames will be never rendered at all. 
-       * 
+       * on third page without frames will be never rendered at all.
+       *
        * In this case we should disable link at all to prevent error from appearing
        */
 
@@ -301,11 +301,11 @@ if (!class_exists('FPDF')) {
     var $_rect;
 
     function PDFAnnotationWidget(&$handler,
-                                 $object_id, 
+                                 $object_id,
                                  $generation_id,
                                  $rect) {
-      $this->PDFAnnotation($handler, 
-                           $object_id, 
+      $this->PDFAnnotation($handler,
+                           $object_id,
                            $generation_id);
 
       $this->_rect = $rect;
@@ -325,16 +325,16 @@ if (!class_exists('FPDF')) {
     var $_kids;
     var $_group_name;
 
-    function PDFFieldGroup(&$handler, 
-                           $object_id, 
+    function PDFFieldGroup(&$handler,
+                           $object_id,
                            $generation_id,
                            $group_name) {
-      $this->PDFIndirectObject($handler, 
-                               $object_id, 
+      $this->PDFIndirectObject($handler,
+                               $object_id,
                                $generation_id);
 
-      /** 
-       * Generate default group name, if needed 
+      /**
+       * Generate default group name, if needed
        */
       if (is_null($group_name) || $group_name == "") {
         $group_name = sprintf("FieldGroup%d", $this->get_object_id());
@@ -354,7 +354,7 @@ if (!class_exists('FPDF')) {
       };
 
       /**
-       * Check if field name is unique inside this form! If we will not do it, 
+       * Check if field name is unique inside this form! If we will not do it,
        * some widgets may become inactive (ignored by PDF Reader)
        */
       foreach ($this->_kids as $kid) {
@@ -370,7 +370,7 @@ if (!class_exists('FPDF')) {
     }
 
     function add_field(&$field) {
-      if (!$this->_check_field_name($field)) { 
+      if (!$this->_check_field_name($field)) {
         /**
          * Field name is not unique; replace it with automatically-generated one
          */
@@ -404,7 +404,7 @@ if (!class_exists('FPDF')) {
    */
   class PDFField extends PDFAnnotationWidget {
     /**
-     * @var string Partial field name (see PDF Specification 1.6 p.638 for explanation on "partial" and 
+     * @var string Partial field name (see PDF Specification 1.6 p.638 for explanation on "partial" and
      * "fully qualified" field names
      * @access private
      */
@@ -417,17 +417,17 @@ if (!class_exists('FPDF')) {
     var $_parent;
 
     function PDFField(&$handler,
-                      $object_id, 
-                      $generation_id, 
-                      $rect, 
+                      $object_id,
+                      $generation_id,
+                      $rect,
                       $field_name) {
-      $this->PDFAnnotationWidget($handler, 
-                                 $object_id, 
-                                 $generation_id, 
+      $this->PDFAnnotationWidget($handler,
+                                 $object_id,
+                                 $generation_id,
                                  $rect);
 
       /**
-       * Generate default field name, if needed 
+       * Generate default field name, if needed
        * @TODO: validate field_name contents
        */
       if (is_null($field_name) || $field_name == "") {
@@ -478,29 +478,29 @@ if (!class_exists('FPDF')) {
     var $_checked;
 
     function PDFFieldCheckBox(&$handler,
-                              $object_id, 
+                              $object_id,
                               $generation_id,
-                              $rect, 
-                              $field_name, 
+                              $rect,
+                              $field_name,
                               $value,
                               $checked) {
       $this->PDFField($handler,
-                      $object_id, 
+                      $object_id,
                       $generation_id,
-                      $rect, 
+                      $rect,
                       $field_name);
 
       $this->_value = $value;
       $this->_checked = $checked;
 
       $this->_appearance_on = new PDFAppearanceStream($handler,
-                                                      $handler->_generate_new_object_number(), 
+                                                      $handler->_generate_new_object_number(),
                                                       $generation_id,
                                                       "Q 0 0 1 rg BT /F1 10 Tf 0 0 Td (8) Tj ET q");
-      
+
       $this->_appearance_off = new PDFAppearanceStream($handler,
-                                                       $handler->_generate_new_object_number(), 
-                                                       $generation_id, 
+                                                       $handler->_generate_new_object_number(),
+                                                       $generation_id,
                                                        "Q 0 0 1 rg BT /F1 10 Tf 0 0 Td (8) Tj ET q");
     }
 
@@ -541,13 +541,13 @@ if (!class_exists('FPDF')) {
     }
 
     function PDFFieldPushButton(&$handler,
-                                $object_id, 
+                                $object_id,
                                 $generation_id,
-                                $rect, 
-                                $fontindex, 
+                                $rect,
+                                $fontindex,
                                 $fontsize) {
       $this->PDFField($handler,
-                      $object_id, 
+                      $object_id,
                       $generation_id,
                       $rect,
                       null);
@@ -555,15 +555,15 @@ if (!class_exists('FPDF')) {
       $this->fontsize  = $fontsize;
 
       $this->_appearance = new PDFAppearanceStream($handler,
-                                                   $handler->_generate_new_object_number(), 
-                                                   $generation_id, 
+                                                   $handler->_generate_new_object_number(),
+                                                   $generation_id,
                                                    "Q 0 0 1 rg BT /F1 10 Tf 0 0 Td (8) Tj ET q");
     }
 
     function _action(&$handler) {
       return "<< >>";
     }
-    
+
     function _dict(&$handler) {
       return array_merge(parent::_dict($handler),
                          array(
@@ -571,7 +571,7 @@ if (!class_exists('FPDF')) {
                                'Ff'      => sprintf("%d", 1 << 16),
                                'TU'      => "<FEFF>",
                                'DR'      => "2 0 R",
-                               'DA'      => sprintf("(0 0 0 rg /F%d %.2f Tf)", 
+                               'DA'      => sprintf("(0 0 0 rg /F%d %.2f Tf)",
                                                     $this->fontindex,
                                                     $this->fontsize),
                                'AP'      => "<< /N ".$handler->_reference($this->_appearance)." >>",
@@ -584,21 +584,21 @@ if (!class_exists('FPDF')) {
     var $_link;
 
     function PDFFieldPushButtonImage(&$handler,
-                                      $object_id, 
+                                      $object_id,
                                       $generation_id,
-                                      $rect, 
-                                      $fontindex, 
-                                      $fontsize, 
+                                      $rect,
+                                      $fontindex,
+                                      $fontsize,
                                       $field_name,
-                                      $value, 
+                                      $value,
                                       $link) {
       $this->PDFFieldPushButton($handler,
-                                $object_id, 
-                                $generation_id, 
-                                $rect, 
-                                $fontindex, 
+                                $object_id,
+                                $generation_id,
+                                $rect,
+                                $fontindex,
                                 $fontsize);
-      
+
       $this->_link  = $link;
       $this->set_field_name($field_name);
     }
@@ -620,21 +620,21 @@ if (!class_exists('FPDF')) {
     var $_caption;
 
     function PDFFieldPushButtonSubmit(&$handler,
-                                      $object_id, 
+                                      $object_id,
                                       $generation_id,
-                                      $rect, 
-                                      $fontindex, 
-                                      $fontsize, 
+                                      $rect,
+                                      $fontindex,
+                                      $fontsize,
                                       $field_name,
-                                      $value, 
+                                      $value,
                                       $link) {
       $this->PDFFieldPushButton($handler,
-                                $object_id, 
-                                $generation_id, 
-                                $rect, 
-                                $fontindex, 
+                                $object_id,
+                                $generation_id,
+                                $rect,
+                                $fontindex,
                                 $fontsize);
-      
+
       $this->_link    = $link;
       $this->_caption = $value;
       $this->set_field_name($field_name);
@@ -645,7 +645,7 @@ if (!class_exists('FPDF')) {
                                             'S'     => "/SubmitForm",
                                             'F'     => $handler->_textstring($this->_link),
                                             'Fields'=> $handler->_reference_array(array($this->get_parent())),
-                                            'Flags' => 
+                                            'Flags' =>
                                             (1 << 2) // ExportFormat (HTML)
                                             )
                                       );
@@ -655,16 +655,16 @@ if (!class_exists('FPDF')) {
 
   class PDFFieldPushButtonReset extends PDFFieldPushButton {
     function PDFFieldPushButtonReset(&$handler,
-                                     $object_id, 
+                                     $object_id,
                                      $generation_id,
-                                     $rect, 
-                                     $fontindex, 
+                                     $rect,
+                                     $fontindex,
                                      $fontsize) {
       $this->PDFFieldPushButton($handler,
-                                $object_id, 
+                                $object_id,
                                 $generation_id,
-                                $rect, 
-                                $fontindex, 
+                                $rect,
+                                $fontindex,
                                 $fontsize);
     }
 
@@ -676,7 +676,7 @@ if (!class_exists('FPDF')) {
 
   /**
    * Radio button inside the group.
-   * 
+   *
    * Note that radio button is not a field itself; only a group of radio buttons
    * should have name.
    */
@@ -697,25 +697,25 @@ if (!class_exists('FPDF')) {
     var $_appearance_off;
 
     function PDFFieldRadio(&$handler,
-                           $object_id, 
+                           $object_id,
                            $generation_id,
-                           $rect, 
+                           $rect,
                            $value) {
       $this->PDFAnnotationWidget($handler,
-                                 $object_id, 
+                                 $object_id,
                                  $generation_id,
                                  $rect);
-      
+
       $this->_value = $value;
 
       $this->_appearance_on = new PDFAppearanceStream($handler,
-                                                      $handler->_generate_new_object_number(), 
-                                                      $generation_id, 
+                                                      $handler->_generate_new_object_number(),
+                                                      $generation_id,
                                                       "Q 0 0 1 rg BT /F1 10 Tf 0 0 Td (8) Tj ET q");
 
       $this->_appearance_off = new PDFAppearanceStream($handler,
-                                                       $handler->_generate_new_object_number(), 
-                                                       $generation_id, 
+                                                       $handler->_generate_new_object_number(),
+                                                       $generation_id,
                                                        "Q 0 0 1 rg BT /F1 10 Tf 0 0 Td (8) Tj ET q");
     }
 
@@ -773,13 +773,13 @@ if (!class_exists('FPDF')) {
 
       return true;
     }
-    
+
     function PDFFieldRadioGroup(&$handler,
                                 $object_id,
-                                $generation_id, 
+                                $generation_id,
                                 $group_name) {
       $this->PDFFieldGroup($handler,
-                           $object_id, 
+                           $object_id,
                            $generation_id,
                            $group_name);
 
@@ -808,8 +808,8 @@ if (!class_exists('FPDF')) {
 
     function _dict(&$handler) {
       $options = array();
-      foreach ($this->_options as $arr) {       
-        $options[] = $handler->_array(sprintf("%s %s", 
+      foreach ($this->_options as $arr) {
+        $options[] = $handler->_array(sprintf("%s %s",
                                               $handler->_textstring($arr[0]),
                                               $handler->_textstring($arr[1])));
       };
@@ -826,16 +826,16 @@ if (!class_exists('FPDF')) {
     }
 
     function PDFFieldSelect(&$handler,
-                            $object_id, 
+                            $object_id,
                             $generation_id,
-                            $rect, 
+                            $rect,
                             $field_name,
                             $value,
                             $options) {
       $this->PDFField($handler,
-                      $object_id, 
+                      $object_id,
                       $generation_id,
-                      $rect, 
+                      $rect,
                       $field_name);
 
       $this->_options = $options;
@@ -866,7 +866,7 @@ if (!class_exists('FPDF')) {
                                'DV'      => $handler->_textstring($this->_value), // Default value
                                'DR'      => "2 0 R",
                                // @TODO fix font references
-                               'DA'      => sprintf("(0 0 0 rg /FF%d %.2f Tf)", 
+                               'DA'      => sprintf("(0 0 0 rg /FF%d %.2f Tf)",
                                                     $this->fontindex,
                                                     $this->fontsize),
 //                                'AP'      => $handler->_dictionary(array("N" => $handler->_reference($this->_appearance))),
@@ -878,17 +878,17 @@ if (!class_exists('FPDF')) {
     }
 
     function PDFFieldText(&$handler,
-                          $object_id, 
+                          $object_id,
                           $generation_id,
-                          $rect, 
+                          $rect,
                           $field_name,
                           $value,
-                          $fontindex, 
+                          $fontindex,
                           $fontsize) {
       $this->PDFField($handler,
-                      $object_id, 
+                      $object_id,
                       $generation_id,
-                      $rect, 
+                      $rect,
                       $field_name);
 
       $this->fontindex = $fontindex;
@@ -896,7 +896,7 @@ if (!class_exists('FPDF')) {
       $this->_value = $value;
 
 //       $this->_appearance = new PDFAppearanceStream($handler,
-//                                                    $handler->_generate_new_object_number(), 
+//                                                    $handler->_generate_new_object_number(),
 //                                                    $generation_id,
 //                                                    "/Tx BMC EMC");
     }
@@ -913,7 +913,7 @@ if (!class_exists('FPDF')) {
    * "Password" text input field
    */
   class PDFFieldPassword extends PDFFieldText {
-    function PDFFieldPassword(&$handler, 
+    function PDFFieldPassword(&$handler,
                               $object_id,
                               $generation_id,
                               $rect,
@@ -939,7 +939,7 @@ if (!class_exists('FPDF')) {
 
   class FPDF {
     //Private properties
-    
+
     var $page;               //current page number
     var $n;                  //current object number
     var $offsets;            //array of object offsets
@@ -1002,14 +1002,14 @@ if (!class_exists('FPDF')) {
     var $_pages;
 
     function moveto($x, $y) {
-      $this->_out(sprintf("%.2f %.2f m", 
-                          $this->x_coord($x), 
+      $this->_out(sprintf("%.2f %.2f m",
+                          $this->x_coord($x),
                           $this->y_coord($y)));
     }
 
     function lineto($x, $y) {
-      $this->_out(sprintf("%.2f %.2f l", 
-                          $this->x_coord($x), 
+      $this->_out(sprintf("%.2f %.2f l",
+                          $this->x_coord($x),
                           $this->y_coord($y)));
     }
 
@@ -1070,7 +1070,7 @@ if (!class_exists('FPDF')) {
     function _name($name) {
       return sprintf("/%s", $name);
     }
-    
+
     function _dictionary($dict) {
       $content = "";
       foreach ($dict as $key => $value) {
@@ -1122,7 +1122,7 @@ if (!class_exists('FPDF')) {
       $current_form =& $this->current_form();
       $current_form->add_field($field);
 
-      $this->_pages[count($this->_pages)-1]->add_annotation($field); 
+      $this->_pages[count($this->_pages)-1]->add_annotation($field);
     }
 
     /**
@@ -1148,20 +1148,20 @@ if (!class_exists('FPDF')) {
       $current_form =& $this->current_form();
       $current_form->add_field($field);
 
-      $this->_pages[count($this->_pages)-1]->add_annotation($field); 
+      $this->_pages[count($this->_pages)-1]->add_annotation($field);
     }
 
     function &current_form() {
       if (count($this->_forms) == 0) {
         /**
-         * Handle invalid HTML; if we've met an input control outside the form, 
+         * Handle invalid HTML; if we've met an input control outside the form,
          * generate a new form with random name
          */
 
         $id   = $this->_generate_new_object_number();
         $name = sprintf("AnonymousFormObject_%u", $id);
 
-        error_log(sprintf("Anonymous form generated with name %s; check your HTML for validity", 
+        error_log(sprintf("Anonymous form generated with name %s; check your HTML for validity",
                           $name));
 
         $form = new PDFFieldGroup($this,
@@ -1178,18 +1178,18 @@ if (!class_exists('FPDF')) {
       if (isset($this->_form_radios[$group_name])) {
         $field =& $this->_form_radios[$group_name];
       } else {
-        $field = new PDFFieldRadioGroup($this, 
+        $field = new PDFFieldRadioGroup($this,
                                          $this->_generate_new_object_number(),
                                          0,
                                          $group_name);
-        
+
         $current_form =& $this->current_form();
         $current_form->add_field($field);
 
         $this->_form_radios[$group_name] =& $field;
       };
 
-      $radio = new PDFFieldRadio($this, 
+      $radio = new PDFFieldRadio($this,
                                   $this->_generate_new_object_number(),
                                   0,
                                   new PDFRect($x, $y, $w, $h),
@@ -1213,35 +1213,35 @@ if (!class_exists('FPDF')) {
      * @return Field number
      */
     function add_field_text($x, $y, $w, $h, $value, $field_name) {
-      $field = new PDFFieldText($this, 
+      $field = new PDFFieldText($this,
                                  $this->_generate_new_object_number(),
                                  0,
-                                 new PDFRect($x, $y, $w, $h), 
+                                 new PDFRect($x, $y, $w, $h),
                                  $field_name,
                                  $value,
-                                 $this->CurrentFont['i'], 
+                                 $this->CurrentFont['i'],
                                  $this->FontSizePt);
 
       $current_form =& $this->current_form();
       $current_form->add_field($field);
 
-      $this->_pages[count($this->_pages)-1]->add_annotation($field);    
+      $this->_pages[count($this->_pages)-1]->add_annotation($field);
     }
 
     function add_field_multiline_text($x, $y, $w, $h, $value, $field_name) {
-      $field = new PDFFieldMultilineText($this, 
+      $field = new PDFFieldMultilineText($this,
                                           $this->_generate_new_object_number(),
                                           0,
-                                          new PDFRect($x, $y, $w, $h), 
+                                          new PDFRect($x, $y, $w, $h),
                                           $field_name,
                                           $value,
-                                          $this->CurrentFont['i'], 
+                                          $this->CurrentFont['i'],
                                           $this->FontSizePt);
-      
+
       $current_form =& $this->current_form();
       $current_form->add_field($field);
 
-      $this->_pages[count($this->_pages)-1]->add_annotation($field);    
+      $this->_pages[count($this->_pages)-1]->add_annotation($field);
     }
 
     /**
@@ -1263,7 +1263,7 @@ if (!class_exists('FPDF')) {
                                      new PDFRect($x, $y, $w, $h),
                                      $field_name,
                                      $value,
-                                     $this->CurrentFont['i'], 
+                                     $this->CurrentFont['i'],
                                      $this->FontSizePt);
 
       $current_form =& $this->current_form();
@@ -1277,16 +1277,16 @@ if (!class_exists('FPDF')) {
                                             $this->_generate_new_object_number(),
                                             0,
                                             new PDFRect($x, $y, $w, $h),
-                                            $this->CurrentFont['i'], 
+                                            $this->CurrentFont['i'],
                                             $this->FontSizePt,
                                             $field_name,
                                             $value,
                                             $actionURL);
-      
+
       $current_form =& $this->current_form();
       $current_form->add_field($field);
 
-      $this->_pages[count($this->_pages)-1]->add_annotation($field);    
+      $this->_pages[count($this->_pages)-1]->add_annotation($field);
     }
 
     function add_field_pushbuttonsubmit($x, $y, $w, $h, $field_name, $value, $actionURL) {
@@ -1294,7 +1294,7 @@ if (!class_exists('FPDF')) {
                                              $this->_generate_new_object_number(),
                                              0,
                                              new PDFRect($x, $y, $w, $h),
-                                             $this->CurrentFont['i'], 
+                                             $this->CurrentFont['i'],
                                              $this->FontSizePt,
                                              $field_name,
                                              $value,
@@ -1303,7 +1303,7 @@ if (!class_exists('FPDF')) {
       $current_form =& $this->current_form();
       $current_form->add_field($field);
 
-      $this->_pages[count($this->_pages)-1]->add_annotation($field);    
+      $this->_pages[count($this->_pages)-1]->add_annotation($field);
     }
 
     function add_field_pushbuttonreset($x, $y, $w, $h) {
@@ -1312,13 +1312,13 @@ if (!class_exists('FPDF')) {
                                             0,
                                             new PDFRect($x, $y, $w, $h),
                                             null,
-                                            $this->CurrentFont['i'], 
+                                            $this->CurrentFont['i'],
                                             $this->FontSizePt);
 
       $current_form =& $this->current_form();
       $current_form->add_field($field);
 
-      $this->_pages[count($this->_pages)-1]->add_annotation($field);    
+      $this->_pages[count($this->_pages)-1]->add_annotation($field);
     }
 
     function add_field_pushbutton($x, $y, $w, $h) {
@@ -1327,20 +1327,20 @@ if (!class_exists('FPDF')) {
                                        0,
                                        new PDFRect($x, $y, $w, $h),
                                        null,
-                                       $this->CurrentFont['i'], 
+                                       $this->CurrentFont['i'],
                                        $this->FontSizePt);
 
       $current_form =& $this->current_form();
       $current_form->add_field($field);
 
-      $this->_pages[count($this->_pages)-1]->add_annotation($field);    
+      $this->_pages[count($this->_pages)-1]->add_annotation($field);
     }
 
 
     function SetDash($x, $y) {
       $x = (int)$x;
       $y = (int)$y;
-      $this->_out(sprintf("[%d %d] 0 d", $x*2, $y*2));      
+      $this->_out(sprintf("[%d %d] 0 d", $x*2, $y*2));
     }
 
     function _GetFontBBox() {
@@ -1362,7 +1362,7 @@ if (!class_exists('FPDF')) {
     function _dooverline($x,$y,$txt) {
       $bbox = $this->_GetFontBBox();
       $up = round($bbox[3] * 0.8);
-     
+
       $ut=$this->CurrentFont['ut'];
 
       $w=$this->GetStringWidth($txt)+$this->ws*substr_count($txt,' ');
@@ -1393,8 +1393,8 @@ if (!class_exists('FPDF')) {
     }
 
     function ClipPath($path) {
-      if (count($path) < 3) { 
-        die("Attempt to clip on the path containing less than three points"); 
+      if (count($path) < 3) {
+        die("Attempt to clip on the path containing less than three points");
       };
 
       $this->MakePath($path);
@@ -1413,10 +1413,10 @@ if (!class_exists('FPDF')) {
         $file = $g_font_resolver_pdf->ttf_mappings[$family];
 
         $embed = $g_font_resolver_pdf->embed[$family];
-        
+
         // Remove the '.ttf' suffix
         $file = substr($file, 0, strlen($file) - 4);
-          
+
         // Generate (if required) PHP font description files
         if (!file_exists($this->_getfontpath().$fontkey.'.php')) {
           // As MakeFont squeaks a lot, we'll need to capture and discard its output
@@ -1429,7 +1429,7 @@ if (!class_exists('FPDF')) {
           ob_end_clean();
         };
 
-        $this->AddFont($fontkey, $family, "", $encoding, $fontkey.'.php', $embed); 
+        $this->AddFont($fontkey, $family, "", $encoding, $fontkey.'.php', $embed);
       };
     }
 
@@ -1458,7 +1458,7 @@ if (!class_exists('FPDF')) {
     }
 
     function Rotate($alpha) {
-      $this->_out(sprintf("%.2f %.2f %.2f %.2f 0 0 cm", 
+      $this->_out(sprintf("%.2f %.2f %.2f %.2f 0 0 cm",
                           cos($alpha/180*pi()),
                           sin($alpha/180*pi()),
                           -sin($alpha/180*pi()),
@@ -1479,8 +1479,8 @@ if (!class_exists('FPDF')) {
     }
 
     function FillPath($path) {
-      if (count($path) < 3) { 
-        die("Attempt to fill path containing less than three points"); 
+      if (count($path) < 3) {
+        die("Attempt to fill path containing less than three points");
       };
 
       $this->_out($this->FillColor);
@@ -1500,22 +1500,22 @@ if (!class_exists('FPDF')) {
       $l = $kappa * $r;
 
       $this->_out(sprintf("%.2f %.f2 m", $x + $r, $y));
-      $this->_out(sprintf("%.2f %.f2 %.2f %.2f %.2f %.2f c", 
-                          $x + $r, $y + $l, 
+      $this->_out(sprintf("%.2f %.f2 %.2f %.2f %.2f %.2f c",
+                          $x + $r, $y + $l,
                           $x + $l, $y + $r,
-                          $x, $y + $r));      
-      $this->_out(sprintf("%.2f %.f2 %.2f %.2f %.2f %.2f c", 
+                          $x, $y + $r));
+      $this->_out(sprintf("%.2f %.f2 %.2f %.2f %.2f %.2f c",
                           $x - $l, $y + $r,
-                          $x - $r, $y + $l, 
-                          $x - $r, $y));      
-      $this->_out(sprintf("%.2f %.f2 %.2f %.2f %.2f %.2f c", 
-                          $x - $r, $y - $l, 
+                          $x - $r, $y + $l,
+                          $x - $r, $y));
+      $this->_out(sprintf("%.2f %.f2 %.2f %.2f %.2f %.2f c",
+                          $x - $r, $y - $l,
                           $x - $l, $y - $r,
-                          $x, $y - $r));      
-      $this->_out(sprintf("%.2f %.f2 %.2f %.2f %.2f %.2f c", 
+                          $x, $y - $r));
+      $this->_out(sprintf("%.2f %.f2 %.2f %.2f %.2f %.2f c",
                           $x + $l, $y - $r,
-                          $x + $r, $y - $l, 
-                          $x + $r, $y));      
+                          $x + $r, $y - $l,
+                          $x + $r, $y));
     }
 
     /*******************************************************************************
@@ -1793,7 +1793,7 @@ if (!class_exists('FPDF')) {
         //Close page
         $this->_endpage();
       }
-      
+
       //Start new page
       $this->_beginpage($orientation);
       //Set line cap style to square
@@ -1875,7 +1875,7 @@ if (!class_exists('FPDF')) {
       // Set color for all filling operations
       if (($r==0 && $g==0 && $b==0) || $g==-1) {
         $new_color = sprintf('%.3f g',$r/255);
-      } else { 
+      } else {
         $new_color = sprintf('%.3f %.3f %.3f rg',$r/255,$g/255,$b/255);
       };
 
@@ -1893,7 +1893,7 @@ if (!class_exists('FPDF')) {
       } else {
         $this->TextColor=sprintf('%.3f %.3f %.3f rg',$r/255,$g/255,$b/255);
       };
-      
+
       $this->ColorFlag=($this->FillColor!=$this->TextColor);
     }
 
@@ -1952,7 +1952,7 @@ if (!class_exists('FPDF')) {
       include($filepath);
 
       // After we've executed 'include' the $file variable
-      // have been overwritten by $file declared in font definition file; if we do not want 
+      // have been overwritten by $file declared in font definition file; if we do not want
       // to embed the font in the PDF file, we should set to empty string
       if (!$bEmbed) { $file = ''; };
 
@@ -2014,11 +2014,11 @@ if (!class_exists('FPDF')) {
       if ($size==0) {
         $size = $this->FontSizePt;
       };
-      
+
       $fontkey = $this->_MakeFontKey($family, $encoding);
       $this->_LoadFont($fontkey, $family, $encoding, $style);
 
-      if ($this->page > 0 /* && 
+      if ($this->page > 0 /* &&
           ($this->CurrentFont['i'] != $this->fonts[$fontkey]['i'] ||
            $this->FontSizePt != $size) */) {
         //Select it
@@ -2066,11 +2066,11 @@ if (!class_exists('FPDF')) {
     /**
      * Add an external hyperlink on the page (an rectangular area). It is not bound to any other PDF element,
      * like text. It is the task of layout engine to draw the appropriate text inside this area.
-     * 
+     *
      * @param Float $x X-coordinate of the upper-left corner of the link area
      * @param Float $y Y-coordinate of the upper-left corner of the link area
-     * @param Float $w link area width 
-     * @param Float $h link area height 
+     * @param Float $w link area width
+     * @param Float $h link area height
      * @param String $link Link URL
      */
     function add_link_external($x, $y, $w, $h, $link) {
@@ -2085,11 +2085,11 @@ if (!class_exists('FPDF')) {
     /**
      * Add an internal hyperlink on the page (an rectangular area). It is not bound to any other PDF element,
      * like text. It is the task of layout engine to draw the appropriate text inside this area.
-     * 
+     *
      * @param Float $x X-coordinate of the upper-left corner of the link area
      * @param Float $y Y-coordinate of the upper-left corner of the link area
-     * @param Float $w link area width 
-     * @param Float $h link area height 
+     * @param Float $w link area width
+     * @param Float $h link area height
      * @param Integer $link Internal Link identifier
      */
     function add_link_internal($x, $y, $w, $h, $link) {
@@ -2098,8 +2098,8 @@ if (!class_exists('FPDF')) {
                                             0,
                                             new PDFRect($x, $y, $w, $h),
                                             $link);
-      $this->_pages[count($this->_pages)-1]->add_annotation($link);      
-    }    
+      $this->_pages[count($this->_pages)-1]->add_annotation($link);
+    }
 
     function Text($x,$y,$txt) {
       //Output a string
@@ -2348,7 +2348,7 @@ if (!class_exists('FPDF')) {
           $i++;
           $sep=-1;
           $j=$i;
-          $l=0; 
+          $l=0;
           if ($nl==1) {
             $this->x=$this->lMargin;
             $w=$this->w-$this->rMargin-$this->x;
@@ -2415,7 +2415,7 @@ if (!class_exists('FPDF')) {
             }
           $type=strtolower($type);
           $mqr=get_magic_quotes_runtime();
-          set_magic_quotes_runtime(0);
+          //set_magic_quotes_runtime(0);
           if($type=='jpg' || $type=='jpeg')
             $info=$this->_parsejpg($file);
           elseif($type=='png')
@@ -2428,7 +2428,7 @@ if (!class_exists('FPDF')) {
                 $this->Error('Unsupported image type: '.$type);
               $info=$this->$mtd($file);
             }
-          set_magic_quotes_runtime($mqr);
+         // set_magic_quotes_runtime($mqr);
           $info['i']=count($this->images)+1;
           $this->images[$file]=$info;
 	}
@@ -2442,7 +2442,7 @@ if (!class_exists('FPDF')) {
         $w=$info['w']/$this->k;
         $h=$info['h']/$this->k;
       }
-      
+
       if ($w==0) {
         $w=$h*$info['w']/$info['h'];
       };
@@ -2623,7 +2623,7 @@ if (!class_exists('FPDF')) {
         $page = $this->_pages[$n-1];
         $this->offsets[$page->get_object_id()] = strlen($this->buffer);
         $this->_out(sprintf("%u %u obj",$page->object_id, $page->generation_id));
-        
+
         $this->_out('<</Type /Page');
         $this->_out('/Parent 1 0 R');
         $this->_out("/Annots ".$this->_pages[$n-1]->_annotations($this));
@@ -2679,7 +2679,7 @@ if (!class_exists('FPDF')) {
       }
 
       $mqr=get_magic_quotes_runtime();
-      set_magic_quotes_runtime(0);
+      //set_magic_quotes_runtime(0);
       foreach ($this->FontFiles as $file=>$info) {
         //Font file embedding
         $this->_newobj();
@@ -2719,7 +2719,7 @@ if (!class_exists('FPDF')) {
         $this->_putstream($font);
         $this->_out('endobj');
       }
-      set_magic_quotes_runtime($mqr);
+      //set_magic_quotes_runtime($mqr);
 
       foreach ($this->fonts as $k=>$font) {
         //Font objects
@@ -2744,7 +2744,7 @@ if (!class_exists('FPDF')) {
           }
           $this->_out('>>');
           $this->_out('endobj');
-            
+
           //Widths
           $this->_newobj();
           $cw=&$font['cw'];
@@ -2904,7 +2904,7 @@ if (!class_exists('FPDF')) {
         $this->_out('>>');
       };
     }
-    
+
     function _putheader() {
       $this->_out('%PDF-'.$this->PDFVersion);
     }
@@ -2941,15 +2941,15 @@ if (!class_exists('FPDF')) {
 //         };
 
 //         if (isset($form->_radios)) {
-         
+
 //            for ($i=0; $i<count($form->_radios); $i++) {
-             
+
 // //             $radio = $form->_radios[$i];
 // //             $this->offsets[$radio->get_object_id()] = strlen($this->buffer);
 // //             $this->_out($this->_indirect_object($radio));
 //            };
 //         }
-       
+
         // Not required, as forms fields are annotations which are output at the end of the page
 //         $this->offsets[$form->get_object_id()] = strlen($this->buffer);
 //         $this->_out($this->_indirect_object($form));
