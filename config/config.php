@@ -43,11 +43,11 @@ nonce.timelimit                     = 3600
 version.name				    	= 2013.1.beta.8
  
 debug.level 				    	= All 
-debug.error_reporting				= E_ERROR
-phpSettings.date.timezone 			= Europe/London
+debug.error_reporting				= E_ALL
+phpSettings.date.timezone 			= America/Toronto
 phpSettings.display_startup_errors  = 1
 phpSettings.display_errors 			= 1
-phpSettings.log_errors   			= 0
+phpSettings.log_errors   			= 1
 phpSettings.error_log   			= tmp/log/php.log
 
 ; Explicity confirm delete of line items from invoices? (yes/no)
