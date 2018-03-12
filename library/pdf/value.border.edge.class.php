@@ -20,7 +20,7 @@ class EdgePDF {
 
     static $default_color = null;
     if (is_null($default_color)) {
-      $default_color =& new Color(array(0,0,0), true);
+      $default_color = new Color(array(0,0,0), true);
     };
 
     $this->width =& $default_width;
@@ -62,16 +62,16 @@ class EdgePDF {
   }
 
   function &create($data) {
-    $edge =& new EdgePDF();
+    $edge = new EdgePDF();
     $edge->width = $data['width'];
-    $edge->color =& new Color($data['color'], is_transparent($data['color']));
+    $edge->color = new Color($data['color'], is_transparent($data['color']));
     $edge->style = $data['style'];
     $edge->_isDefaultColor = true;
     return $edge;
   }
 
   function &copy() {
-    $edge =& new EdgePDF();
+    $edge = new EdgePDF();
 
     if ($this->width != CSS_PROPERTY_INHERIT) {
       $edge->width = $this->width->copy();

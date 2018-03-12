@@ -240,7 +240,7 @@ class OutputDriverFastPS extends OutputDriverGenericPS {
     $this->linethrough = false;
 
     // A font class factory
-    $this->font_factory =& new FontFactory;
+    $this->font_factory = new FontFactory;
 
     $this->_document_body = '';
     $this->_document_prolog = '';

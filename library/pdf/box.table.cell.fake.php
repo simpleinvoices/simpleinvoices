@@ -5,14 +5,14 @@ class FakeTableCellBox extends TableCellBox {
   var $rowspan;
 
   function create(&$pipeline) {
-    $box =& new FakeTableCellBox;
+    $box = new FakeTableCellBox;
     
     $css_state =& $pipeline->getCurrentCSSState();
     $css_state->pushDefaultState();
 
     $box->readCSS($css_state);
 
-    $nullbox =& new NullBox;
+    $nullbox = new NullBox;
     $nullbox->readCSS($css_state);
     $box->add_child($nullbox);
 
