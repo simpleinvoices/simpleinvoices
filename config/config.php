@@ -13,7 +13,7 @@ database.params.dbname   			= simpleinvoices
 database.params.port       			= 3306
 
 authentication.enabled	 			= true
-authentication.http 				= 
+authentication.http 				=
 
 export.spreadsheet	     			= xls
 export.wordprocessor	 			= doc
@@ -29,10 +29,10 @@ local.precision		    			= 2
 
 email.host 				            = localhost
 email.smtp_auth			    		= false
-email.username			    		=  
-email.password 			    		= 
+email.username			    		=
+email.password 			    		=
 email.smtpport			    		= 25
-email.secure      		    		= 
+email.secure      		    		=
 email.ack 				            = false
 email.use_local_sendmail            = false
 
@@ -41,12 +41,12 @@ nonce.key                           = jkhsdfjkshkjfhjk_ljksdfhkjsdfhkjsdhf_ebere
 nonce.timelimit                     = 3600
 
 version.name				    	= 2013.1.beta.8
- 
-debug.level 				    	= All 
+
+debug.level 				    	= All
 debug.error_reporting				= E_ALL
 phpSettings.date.timezone 			= America/Toronto
 phpSettings.display_startup_errors  = 1
-phpSettings.display_errors 			= 1
+phpSettings.display_errors 			= 0
 phpSettings.log_errors   			= 1
 phpSettings.error_log   			= tmp/log/php.log
 
@@ -61,7 +61,7 @@ database.params.username			= devuser
 database.params.password 			= devsecret
 
 [dev : production]
-database.params.dbname   			= simple_invoices_dev 
+database.params.dbname   			= simple_invoices_dev
 debug.error_reporting				= E_ALL
 phpSettings.display_startup_errors 	= 1
 phpSettings.display_errors 			= 1
