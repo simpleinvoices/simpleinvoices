@@ -699,82 +699,82 @@ class Pipeline {
     };
 
     if (!isset($applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_TOP_LEFT])) {
-      $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_TOP_LEFT] =&
+      $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_TOP_LEFT] =
         new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_TOP_LEFT,$this);
     };
 
     if (!isset($applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_TOP_CENTER])) {
-      $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_TOP_CENTER] =&
+      $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_TOP_CENTER] =
         new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_TOP_CENTER,$this);
     };
 
     if (!isset($applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_TOP_RIGHT])) {
-      $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_TOP_RIGHT] =&
+      $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_TOP_RIGHT] =
         new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_TOP_RIGHT,$this);
     };
 
     if (!isset($applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_TOP_RIGHT_CORNER])) {
-      $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_TOP_RIGHT_CORNER] =&
+      $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_TOP_RIGHT_CORNER] =
         new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_TOP_RIGHT_CORNER,$this);
     };
 
     if (!isset($applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_BOTTOM])) {
-      $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_BOTTOM] =&
-        new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_BOTTOM,$this);
+      $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_BOTTOM] =
+		new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_BOTTOM,$this);
     };
 
     if (!isset($applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_BOTTOM_LEFT_CORNER])) {
-      $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_BOTTOM_LEFT_CORNER] =&
+      $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_BOTTOM_LEFT_CORNER] =
         new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_BOTTOM_LEFT_CORNER,$this);
     };
 
     if (!isset($applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_BOTTOM_LEFT])) {
-      $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_BOTTOM_LEFT] =&
+      $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_BOTTOM_LEFT] =
         new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_BOTTOM_LEFT,$this);
     };
 
     if (!isset($applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_BOTTOM_CENTER])) {
-      $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_BOTTOM_CENTER] =&
+      $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_BOTTOM_CENTER] =
         new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_BOTTOM_CENTER,$this);
     };
 
     if (!isset($applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_BOTTOM_RIGHT])) {
-      $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_BOTTOM_RIGHT] =&
+      $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_BOTTOM_RIGHT] =
         new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_BOTTOM_RIGHT,$this);
     };
 
     if (!isset($applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_BOTTOM_RIGHT_CORNER])) {
-      $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_BOTTOM_RIGHT_CORNER] =&
+      $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_BOTTOM_RIGHT_CORNER] =
         new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_BOTTOM_RIGHT_CORNER,$this);
     };
 
     if (!isset($applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_LEFT_TOP])) {
-      $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_LEFT_TOP] =&
+      $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_LEFT_TOP] =
         new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_LEFT_TOP,$this);
     };
 
     if (!isset($applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_LEFT_MIDDLE])) {
-      $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_LEFT_MIDDLE] =&
+      $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_LEFT_MIDDLE] =
         new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_LEFT_MIDDLE,$this);
     };
 
     if (!isset($applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_LEFT_BOTTOM])) {
-      $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_LEFT_BOTTOM] =&
+      $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_LEFT_BOTTOM] =
         new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_LEFT_BOTTOM,$this);
     };
 
     if (!isset($applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_RIGHT_TOP])) {
-      $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_RIGHT_TOP] =&
+      $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_RIGHT_TOP] =
         new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_RIGHT_TOP,$this);
     };
 
     if (!isset($applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_RIGHT_MIDDLE])) {
-      $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_RIGHT_MIDDLE] =&
+      $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_RIGHT_MIDDLE] =
         new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_RIGHT_MIDDLE,$this);
     };
 
     if (!isset($applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_RIGHT_BOTTOM])) {
-      $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_RIGHT_BOTTOM] =&
+      $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_RIGHT_BOTTOM] =
         new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_RIGHT_BOTTOM,$this);
     };
 
