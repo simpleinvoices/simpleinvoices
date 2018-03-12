@@ -43,7 +43,7 @@ nonce.timelimit                     = 3600
 version.name				    	= 2013.1.beta.8
 
 debug.level 				    	= All
-debug.error_reporting				= E_ALL
+debug.error_reporting				= E_ERROR
 phpSettings.date.timezone 			= America/Toronto
 phpSettings.display_startup_errors  = 1
 phpSettings.display_errors 			= 0
