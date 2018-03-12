@@ -7,13 +7,13 @@
 database.adapter        			= pdo_mysql
 database.utf8            			= true
 database.params.host     			= localhost
-database.params.username 			= root
-database.params.password 			= ''
-database.params.dbname   			= simple_invoices
+database.params.username 			= simpleinvoicesus
+database.params.password 			= '8tQVdtqCfBmPUdr3'
+database.params.dbname   			= simpleinvoices
 database.params.port       			= 3306
 
-authentication.enabled	 			= false
-authentication.http 				= 
+authentication.enabled	 			= true
+authentication.http 				=
 
 export.spreadsheet	     			= xls
 export.wordprocessor	 			= doc
@@ -24,30 +24,30 @@ export.pdf.rightmargin	 			= 15
 export.pdf.topmargin	 			= 15
 export.pdf.bottommargin 			= 15
 
-local.locale	    				= en_GB
+local.locale	    				= en_CA
 local.precision		    			= 2
 
 email.host 				            = localhost
 email.smtp_auth			    		= false
-email.username			    		=  
-email.password 			    		= 
+email.username			    		=
+email.password 			    		=
 email.smtpport			    		= 25
-email.secure      		    		= 
+email.secure      		    		=
 email.ack 				            = false
 email.use_local_sendmail            = false
 
-encryption.default.key 				= this_is_the_encryption_key_change_it
-nonce.key                           = this_should_be_random_and_secret_so_change_it
+encryption.default.key 				= kjsdhfklsjdhflksdjh_shgdjkgfsdjkgfsdjkgfkjasyasdanbsadsd
+nonce.key                           = jkhsdfjkshkjfhjk_ljksdfhkjsdfhkjsdhf_ebererberhjsdhusdfy7766yhkshdf663246124
 nonce.timelimit                     = 3600
 
 version.name				    	= 2013.1.beta.8
- 
-debug.level 				    	= All 
+
+debug.level 				    	= All
 debug.error_reporting				= E_ERROR
-phpSettings.date.timezone 			= Europe/London
+phpSettings.date.timezone 			= America/Toronto
 phpSettings.display_startup_errors  = 1
-phpSettings.display_errors 			= 1
-phpSettings.log_errors   			= 0
+phpSettings.display_errors 			= 0
+phpSettings.log_errors   			= 1
 phpSettings.error_log   			= tmp/log/php.log
 
 ; Explicity confirm delete of line items from invoices? (yes/no)
@@ -61,7 +61,7 @@ database.params.username			= devuser
 database.params.password 			= devsecret
 
 [dev : production]
-database.params.dbname   			= simple_invoices_dev 
+database.params.dbname   			= simple_invoices_dev
 debug.error_reporting				= E_ALL
 phpSettings.display_startup_errors 	= 1
 phpSettings.display_errors 			= 1

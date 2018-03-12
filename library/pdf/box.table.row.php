@@ -7,7 +7,7 @@ class TableRowBox extends GenericContainerBox {
   var $rowspans;
 
   function &create(&$root, &$pipeline) {
-    $box =& new TableRowBox();
+    $box = new TableRowBox();
     $box->readCSS($pipeline->getCurrentCSSState());
 
     $child = $root->first_child();

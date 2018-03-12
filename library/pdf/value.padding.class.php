@@ -17,7 +17,7 @@ class PaddingSideValue {
   }
 
   function &copy() {
-    $value =& new PaddingSideValue;
+    $value = new PaddingSideValue;
     $value->value      = $this->value;
     $value->auto       = $this->auto;
     $value->percentage = $this->percentage;
@@ -87,7 +87,7 @@ class PaddingValue extends CSSValue {
   }
 
   function &copy() {
-    $value =& new PaddingValue;
+    $value = new PaddingValue;
     $value->top    = ($this->top    === CSS_PROPERTY_INHERIT) ? CSS_PROPERTY_INHERIT : $this->top->copy();
     $value->bottom = ($this->bottom === CSS_PROPERTY_INHERIT) ? CSS_PROPERTY_INHERIT : $this->bottom->copy();
     $value->left   = ($this->left   === CSS_PROPERTY_INHERIT) ? CSS_PROPERTY_INHERIT : $this->left->copy();

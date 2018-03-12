@@ -64,7 +64,7 @@ class CSSContent extends CSSPropertyHandler {
   }
 
   function &default_value() { 
-    $data =& new ValueContent();
+    $data = new ValueContent();
     return $data;
   }
 

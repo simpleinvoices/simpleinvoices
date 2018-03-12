@@ -6,7 +6,7 @@ class BoxPage extends GenericContainerBox {
   }
 
   function &create(&$pipeline, $rules) {
-    $box =& new BoxPage();
+    $box = new BoxPage();
 
     $state =& $pipeline->getCurrentCSSState();
     $state->pushDefaultState();

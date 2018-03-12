@@ -33,7 +33,7 @@ class ListStyleValue extends CSSValue {
   }
 
   function &copy() {
-    $object =& new ListStyleValue;
+    $object = new ListStyleValue;
 
     if ($this->image === CSS_PROPERTY_INHERIT) {
       $object->image = CSS_PROPERTY_INHERIT;

@@ -5,8 +5,8 @@ require_once(HTML2PS_DIR.'font.resolver.class.php');
 require_once(HTML2PS_DIR.'treebuilder.class.php');
 require_once(HTML2PS_DIR.'media.layout.inc.php');
 
-// Get list of media types being used by script; 
-// It should be a list of two types: 
+// Get list of media types being used by script;
+// It should be a list of two types:
 // 1. Current CSS media type chose by user (defaults to 'screen')
 // 2. 'all' media type
 //
@@ -23,7 +23,7 @@ function parse_encoding_override_node_config_file($root, &$resolver) {
         $names = explode(',',$root->get_attribute('name'));
         foreach ($names as $name) {
           $resolver->add_normal_encoding_override($name,
-                                                  $child->get_attribute('normal'), 
+                                                  $child->get_attribute('normal'),
                                                   $child->get_attribute('italic'),
                                                   $child->get_attribute('oblique'));
         };
@@ -32,12 +32,12 @@ function parse_encoding_override_node_config_file($root, &$resolver) {
         $names = explode(',',$root->get_attribute('name'));
         foreach ($names as $name) {
           $resolver->add_bold_encoding_override($name,
-                                                $child->get_attribute('normal'), 
+                                                $child->get_attribute('normal'),
                                                 $child->get_attribute('italic'),
                                                 $child->get_attribute('oblique'));
         };
         break;
-      };      
+      };
     };
   } while ($child = $child->next_sibling());
 }
@@ -73,9 +73,9 @@ function parse_family_encoding_override_node_config_file($family, $root, &$resol
       case "normal":
         $names = explode(",",$root->get_attribute('name'));
         foreach ($names as $name) {
-          $resolver->add_family_normal_encoding_override($family, 
+          $resolver->add_family_normal_encoding_override($family,
                                                          $name,
-                                                         $child->get_attribute('normal'), 
+                                                         $child->get_attribute('normal'),
                                                          $child->get_attribute('italic'),
                                                          $child->get_attribute('oblique'));
         };
@@ -83,14 +83,14 @@ function parse_family_encoding_override_node_config_file($family, $root, &$resol
       case "bold":
         $names = explode(",",$root->get_attribute('name'));
         foreach ($names as $name) {
-          $resolver->add_family_bold_encoding_override($family, 
+          $resolver->add_family_bold_encoding_override($family,
                                                        $name,
-                                                       $child->get_attribute('normal'), 
+                                                       $child->get_attribute('normal'),
                                                        $child->get_attribute('italic'),
                                                        $child->get_attribute('oblique'));
         };
         break;
-      };      
+      };
     };
   } while ($child = $child->next_sibling());
 }
@@ -104,20 +104,20 @@ function parse_fonts_family_node_config_file($root, &$resolver) {
       switch ($child->tagname()) {
       case "normal":
         $resolver->add_normal_family($font_family_name,
-                                     $child->get_attribute('normal'), 
+                                     $child->get_attribute('normal'),
                                      $child->get_attribute('italic'),
                                      $child->get_attribute('oblique'));
         break;
       case "bold":
         $resolver->add_bold_family($font_family_name,
-                                   $child->get_attribute('normal'), 
+                                   $child->get_attribute('normal'),
                                    $child->get_attribute('italic'),
-                                   $child->get_attribute('oblique'));        
+                                   $child->get_attribute('oblique'));
         break;
       case "encoding-override":
         parse_family_encoding_override_node_config_file($font_family_name, $child, $resolver);
         break;
-      };      
+      };
     };
   } while ($child = $child->next_sibling());
 }
@@ -142,15 +142,12 @@ function parse_fonts_node_config_file($root, &$resolver) {
       case "metrics":
         parse_metrics_node_config_file($child, $resolver);
         break;
-      };      
+      };
     };
   } while ($child = $child->next_sibling());
 }
 
 function parse_config_file($filename) {
-  // Save old magic_quotes_runtime value and disable it
-  $mq_runtime = get_magic_quotes_runtime();
-  set_magic_quotes_runtime(0);
 
   $doc = TreeBuilder::build(file_get_contents($filename));
   $root=$doc->document_element();
@@ -168,15 +165,12 @@ function parse_config_file($filename) {
         parse_fonts_node_config_file($child, $g_font_resolver_pdf);
         break;
       case "media":
-        add_predefined_media($child->get_attribute('name'), 
+        add_predefined_media($child->get_attribute('name'),
                              (float)$child->get_attribute('height'),
                              (float)$child->get_attribute('width'));
         break;
-      };      
+      };
     };
   } while ($child = $child->next_sibling());
-
-  // Restore old magic_quotes_runtime values
-  set_magic_quotes_runtime($mq_runtime);
 }
 ?>

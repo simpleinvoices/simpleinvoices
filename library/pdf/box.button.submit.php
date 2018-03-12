@@ -63,7 +63,7 @@ class ButtonSubmitBox extends ButtonBox {
     $value = $root->get_attribute('value');
     
     $css_state =& $pipeline->getCurrentCSSState();
-    $box =& new ButtonSubmitBox($field, $value, $css_state->getProperty(CSS_HTML2PS_FORM_ACTION));
+    $box = new ButtonSubmitBox($field, $value, $css_state->getProperty(CSS_HTML2PS_FORM_ACTION));
     $box->readCSS($css_state);
     $box->_setup($text, $pipeline);
 

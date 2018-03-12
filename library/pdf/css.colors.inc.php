@@ -149,7 +149,7 @@ $GLOBALS['g_colors'] = array(
 
 function &parse_color_declaration($decl) {
   $color = _parse_color_declaration($decl, $success);
-  $color_obj =& new Color($color, is_transparent($color));
+  $color_obj = new Color($color, is_transparent($color));
   return $color_obj;
 };
 

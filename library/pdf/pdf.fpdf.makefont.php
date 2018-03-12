@@ -13,7 +13,7 @@ function ReadTTF($fontfile, $map) {
    */
   $font = new OpenTypeFile();
   $font->open($fontfile);
-  
+
   $head =& $font->getTable('head');
   $name =& $font->getTable('name');
   $cmap =& $font->getTable('cmap');
@@ -21,8 +21,8 @@ function ReadTTF($fontfile, $map) {
   $hhea =& $font->getTable('hhea');
   $post =& $font->getTable('post');
   $subtable =& $cmap->findSubtable(OT_CMAP_PLATFORM_WINDOWS,
-                                   OT_CMAP_PLATFORM_WINDOWS_UNICODE);  
-  
+                                   OT_CMAP_PLATFORM_WINDOWS_UNICODE);
+
   /**
    * Prepare initial data
    */
@@ -61,12 +61,12 @@ function ReadTTF($fontfile, $map) {
    * printable ASCII subset,  codes 33 through 126, except  for the 10
    * characters: '[', ']', '(', ')', '{', '}', '<', '>', '/', '%'.
    *
-   * we can assume that UCS-2 encoded string we receive can be easily 
-   * translated to ASCII by removing the high-byte of all two-byte characters 
+   * we can assume that UCS-2 encoded string we receive can be easily
+   * translated to ASCII by removing the high-byte of all two-byte characters
    */
-  $ps_name_ucs2 = $name->lookup(OT_CMAP_PLATFORM_WINDOWS, 
-                                OT_CMAP_PLATFORM_WINDOWS_UNICODE, 
-                                OT_CMAP_LANGUAGE_WINDOWS_ENGLISH_AMERICAN, 
+  $ps_name_ucs2 = $name->lookup(OT_CMAP_PLATFORM_WINDOWS,
+                                OT_CMAP_PLATFORM_WINDOWS_UNICODE,
+                                OT_CMAP_LANGUAGE_WINDOWS_ENGLISH_AMERICAN,
                                 OT_NAME_ID_POSTSCRIPT_NAME);
   $ps_name_ascii = "";
   for ($i=0; $i<strlen($ps_name_ucs2); $i+=2) {
@@ -78,8 +78,8 @@ function ReadTTF($fontfile, $map) {
   $font_info['Weight']             = $name->lookup(null, null, null, OT_NAME_ID_SUBFAMILY_NAME);
   $font_info['ItalicAngle']        = $post->_italicAngle;
   $font_info['IsFixedPitch']       = (bool)$post->_isFixedPitch;
-  // $font_info['CapHeight']         
-  // $font_info['StdVW']            
+  // $font_info['CapHeight']
+  // $font_info['StdVW']
   $font_info['Ascender']           = floor($hhea->_ascender*1000/$head->_unitsPerEm);
   $font_info['Descender']          = floor($hhea->_descender*1000/$head->_unitsPerEm);
   $font_info['UnderlineThickness'] = floor($post->_underlineThickness*1000/$head->_unitsPerEm);
@@ -92,7 +92,7 @@ function ReadTTF($fontfile, $map) {
 
   $font->_delete();
   unset($font);
-  
+
   return $font_info;
 }
 
@@ -124,7 +124,7 @@ function ReadAFM($file, $map) {
       if (substr($gn,-4)=='20AC') {
         $gn='Euro';
       };
-      
+
       $widths[$gn]=$w;
 
       if ($gn=='.notdef') {
@@ -154,7 +154,7 @@ function ReadAFM($file, $map) {
     elseif($code=='StdVW')
       $fm['StdVW']=(int)$param;
   }
-  
+
   if(!isset($fm['FontName'])) {
     die('FontName not found');
   };
@@ -166,7 +166,7 @@ function ReadAFM($file, $map) {
   if (!isset($widths['Delta']) and isset($widths['increment'])) {
     $widths['Delta']=$widths['increment'];
   };
-      
+
   // Order widths according to map
   for ($i=0; $i<=255; $i++) {
     if(!isset($widths[$map[chr($i)]])) {
@@ -377,15 +377,15 @@ function CheckTTF($file)
 }
 
 /*******************************************************************************
- * $fontfile : chemin du fichier TTF (ou chaîne vide si pas d'incorporation)    *
+ * $fontfile : chemin du fichier TTF (ou chaï¿½ne vide si pas d'incorporation)    *
  * $afmfile :  chemin du fichier AFM                                            *
- * $enc :      encodage (ou chaîne vide si la police est symbolique)            *
+ * $enc :      encodage (ou chaï¿½ne vide si la police est symbolique)            *
  * $patch :    patch optionnel pour l'encodage                                  *
  * $type :     type de la police si $fontfile est vide                          *
  *******************************************************************************/
 function MakeFont($fontfile, $afmfile, $destdir, $destfile, $enc) {
   // Generate a font definition file
-  set_magic_quotes_runtime(0);
+  //set_magic_quotes_runtime(0);
   ini_set('auto_detect_line_endings','1');
 
   $manager = ManagerEncoding::get();
@@ -397,7 +397,7 @@ function MakeFont($fontfile, $afmfile, $destdir, $destfile, $enc) {
     error_log(sprintf("Notice: Missing AFM file '%s'; attempting to parse font file '%s' directly",
                       $afmfile,
                       $fontfile));
-    
+
     $fm = ReadTTF($fontfile, $manager->getEncodingVector($enc));
 
     if (is_null($fm)) {
@@ -412,7 +412,7 @@ function MakeFont($fontfile, $afmfile, $destdir, $destfile, $enc) {
   //Find font type
   if ($fontfile) {
     $ext=strtolower(substr($fontfile,-3));
-    if ($ext=='ttf') { 
+    if ($ext=='ttf') {
       $type='TrueType';
     }  elseif($ext=='pfb') {
       $type='Type1';
@@ -483,7 +483,7 @@ function MakeFont($fontfile, $afmfile, $destdir, $destfile, $enc) {
       if (!$pos) {
         die('<B>Error:</B> font file does not seem to be valid Type1');
       };
-      
+
       $size2=$pos-$size1;
       $file=substr($file,0,$size1+$size2);
     }
@@ -501,7 +501,7 @@ function MakeFont($fontfile, $afmfile, $destdir, $destfile, $enc) {
       $s.='$file=\''.basename($fontfile)."';\n";
       error_log('Notice: font file could not be compressed (zlib extension not available)');
     }
-    
+
     if ($type=='Type1') {
       $s.='$size1='.$size1.";\n";
       $s.='$size2='.$size2.";\n";
