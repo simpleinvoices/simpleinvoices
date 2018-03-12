@@ -689,12 +689,12 @@ class Pipeline {
     };
 
     if (!isset($applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_TOP])) {
-      $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_TOP] =&
+      $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_TOP] =
         new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_TOP,$this);
     };
 
     if (!isset($applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_TOP_LEFT_CORNER])) {
-      $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_TOP_LEFT_CORNER] =&
+      $applicable_margin_boxes[CSS_MARGIN_BOX_SELECTOR_TOP_LEFT_CORNER] =
         new CSSAtRuleMarginBox(CSS_MARGIN_BOX_SELECTOR_TOP_LEFT_CORNER,$this);
     };
 
