@@ -24,7 +24,7 @@ class PHP4DOMTree {
       return $null;
     };
 
-    $tree =& new PHP4DOMTree($domdocument); 
+    $tree = new PHP4DOMTree($domdocument); 
     return $tree;
   }
 

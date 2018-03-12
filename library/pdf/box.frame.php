@@ -3,7 +3,7 @@
 
 class FrameBox extends GenericContainerBox {
   function &create(&$root, &$pipeline) {
-    $box =& new FrameBox($root, $pipeline);
+    $box = new FrameBox($root, $pipeline);
     $box->readCSS($pipeline->getCurrentCSSState());
     return $box;
   }
@@ -42,7 +42,7 @@ class FrameBox extends GenericContainerBox {
   function reflow_absolute(&$context) {
     GenericFormattedBox::reflow($this->parent, $context);
 
-    $position_strategy =& new StrategyPositionAbsolute();
+    $position_strategy = new StrategyPositionAbsolute();
     $position_strategy->apply($this);
     
     /**
@@ -222,7 +222,7 @@ class FramesetBox extends GenericContainerBox {
   var $cols;
 
   function &create(&$root, &$pipeline) {
-    $box =& new FramesetBox($root, $pipeline);
+    $box = new FramesetBox($root, $pipeline);
     $box->readCSS($pipeline->getCurrentCSSState());
     return $box;
   }

@@ -22,7 +22,7 @@ class ActiveLinkDOMTree {
   }
 
   function &from_XML($xml) { 
-    $tree =& new ActiveLinkDomTree($xml,0, array(), array());
+    $tree = new ActiveLinkDomTree($xml,0, array(), array());
     return $tree;
   }
 
@@ -88,7 +88,7 @@ class ActiveLinkDOMTree {
     array_push($parents, $this);
 
     if ($children) {
-      $node =& new ActiveLinkDOMTree($children[0], 0, $indices, $parents);       
+      $node = new ActiveLinkDOMTree($children[0], 0, $indices, $parents);       
       return $node;
     } else {
       $null = false;
@@ -118,7 +118,7 @@ class ActiveLinkDOMTree {
       return $null; 
     };
 
-    $node =& new ActiveLinkDOMTree($nodes[$this->index+1], $this->index+1, $this->parent_indices, $this->parents);
+    $node = new ActiveLinkDOMTree($nodes[$this->index+1], $this->index+1, $this->parent_indices, $this->parents);
     return $node;
   }
 }

@@ -68,7 +68,7 @@ class CSSAtRulePage {
     $this->selector = $selector;
     $this->margin_boxes = array();
 
-    $this->css =& new CSSPropertyCollection();
+    $this->css = new CSSPropertyCollection();
   }
 
   function &getSelector() {
@@ -201,7 +201,7 @@ function parse_css_atpage_rule($css, &$css_ruleset) {
   $css          = trim($matches[2]);
 
   $selector =& parse_css_atpage_selector($raw_selector);
-  $at_rule =& new CSSAtRulePage($selector, $css_ruleset);
+  $at_rule = new CSSAtRulePage($selector, $css_ruleset);
 
   /**
    * The body of @page rule may contain declaraction (detected by ';'), 
@@ -255,24 +255,24 @@ function parse_css_atpage_rule($css, &$css_ruleset) {
 function &parse_css_atpage_selector($selector) {
   switch ($selector) {
   case '':
-    $selector =& new CSSPageSelectorAll();
+    $selector = new CSSPageSelectorAll();
     return $selector;
   case ':first':
-    $selector =& new CSSPageSelectorFirst();
+    $selector = new CSSPageSelectorFirst();
     return $selector;
   case ':left':
-    $selector =& new CSSPageSelectorLeft();
+    $selector = new CSSPageSelectorLeft();
     return $selector;
   case ':right':
-    $selector =& new CSSPageSelectorRight();
+    $selector = new CSSPageSelectorRight();
     return $selector;
   default:
     if (CSS::is_identifier($selector)) {
-      $selector =& new CSSPageSelectorNamed($selector);
+      $selector = new CSSPageSelectorNamed($selector);
       return $selector;
     } else {
       error_log(sprintf('Unknown page selector in @page rule: \'%s\'', $selector));
-      $selector =& new CSSPageSelectorAll();
+      $selector = new CSSPageSelectorAll();
       return $selector;
     };
   };

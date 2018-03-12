@@ -11,58 +11,58 @@ class BoxPageMargin extends GenericContainerBox {
   function &create(&$pipeline, $at_rule) {
     switch ($at_rule->getSelector()) {
     case CSS_MARGIN_BOX_SELECTOR_TOP:
-      $box =& new BoxPageMarginTop($pipeline, $at_rule);
+      $box = new BoxPageMarginTop($pipeline, $at_rule);
       break;
     case CSS_MARGIN_BOX_SELECTOR_TOP_LEFT_CORNER:
-      $box =& new BoxPageMarginTopLeftCorner($pipeline, $at_rule);
+      $box = new BoxPageMarginTopLeftCorner($pipeline, $at_rule);
       break;
     case CSS_MARGIN_BOX_SELECTOR_TOP_LEFT:
-      $box =& new BoxPageMarginTopLeft($pipeline, $at_rule);
+      $box = new BoxPageMarginTopLeft($pipeline, $at_rule);
       break;
     case CSS_MARGIN_BOX_SELECTOR_TOP_CENTER:
-      $box =& new BoxPageMarginTopCenter($pipeline, $at_rule);
+      $box = new BoxPageMarginTopCenter($pipeline, $at_rule);
       break;
     case CSS_MARGIN_BOX_SELECTOR_TOP_RIGHT:
-      $box =& new BoxPageMarginTopRight($pipeline, $at_rule);
+      $box = new BoxPageMarginTopRight($pipeline, $at_rule);
       break;
     case CSS_MARGIN_BOX_SELECTOR_TOP_RIGHT_CORNER:
-      $box =& new BoxPageMarginTopRightCorner($pipeline, $at_rule);
+      $box = new BoxPageMarginTopRightCorner($pipeline, $at_rule);
       break;
     case CSS_MARGIN_BOX_SELECTOR_BOTTOM:
-      $box =& new BoxPageMarginBottom($pipeline, $at_rule);
+      $box = new BoxPageMarginBottom($pipeline, $at_rule);
       break;
     case CSS_MARGIN_BOX_SELECTOR_BOTTOM_LEFT_CORNER:
-      $box =& new BoxPageMarginBottomLeftCorner($pipeline, $at_rule);
+      $box = new BoxPageMarginBottomLeftCorner($pipeline, $at_rule);
       break;
     case CSS_MARGIN_BOX_SELECTOR_BOTTOM_LEFT:
-      $box =& new BoxPageMarginBottomLeft($pipeline, $at_rule);
+      $box = new BoxPageMarginBottomLeft($pipeline, $at_rule);
       break;
     case CSS_MARGIN_BOX_SELECTOR_BOTTOM_CENTER:
-      $box =& new BoxPageMarginBottomCenter($pipeline, $at_rule);
+      $box = new BoxPageMarginBottomCenter($pipeline, $at_rule);
       break;
     case CSS_MARGIN_BOX_SELECTOR_BOTTOM_RIGHT:
-      $box =& new BoxPageMarginBottomRight($pipeline, $at_rule);
+      $box = new BoxPageMarginBottomRight($pipeline, $at_rule);
       break;
     case CSS_MARGIN_BOX_SELECTOR_BOTTOM_RIGHT_CORNER:
-      $box =& new BoxPageMarginBottomRightCorner($pipeline, $at_rule);
+      $box = new BoxPageMarginBottomRightCorner($pipeline, $at_rule);
       break;
     case CSS_MARGIN_BOX_SELECTOR_LEFT_TOP:
-      $box =& new BoxPageMarginLeftTop($pipeline, $at_rule);
+      $box = new BoxPageMarginLeftTop($pipeline, $at_rule);
       break;
     case CSS_MARGIN_BOX_SELECTOR_LEFT_MIDDLE:
-      $box =& new BoxPageMarginLeftMiddle($pipeline, $at_rule);
+      $box = new BoxPageMarginLeftMiddle($pipeline, $at_rule);
       break;
     case CSS_MARGIN_BOX_SELECTOR_LEFT_BOTTOM:
-      $box =& new BoxPageMarginLeftBottom($pipeline, $at_rule);
+      $box = new BoxPageMarginLeftBottom($pipeline, $at_rule);
       break;
     case CSS_MARGIN_BOX_SELECTOR_RIGHT_TOP:
-      $box =& new BoxPageMarginRightTop($pipeline, $at_rule);
+      $box = new BoxPageMarginRightTop($pipeline, $at_rule);
       break;
     case CSS_MARGIN_BOX_SELECTOR_RIGHT_MIDDLE:
-      $box =& new BoxPageMarginRightMiddle($pipeline, $at_rule);
+      $box = new BoxPageMarginRightMiddle($pipeline, $at_rule);
       break;
     case CSS_MARGIN_BOX_SELECTOR_RIGHT_BOTTOM:
-      $box =& new BoxPageMarginRightBottom($pipeline, $at_rule);
+      $box = new BoxPageMarginRightBottom($pipeline, $at_rule);
       break;
     default:
       trigger_error("Unknown selector type", E_USER_ERROR);

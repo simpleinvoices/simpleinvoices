@@ -150,7 +150,7 @@ class TextBox extends SimpleInlineBox {
   }
 
   function &create_empty(&$pipeline) {
-    $box =& new TextBox();
+    $box = new TextBox();
     $css_state = $pipeline->getCurrentCSSState();
 
     $box->readCSS($css_state);

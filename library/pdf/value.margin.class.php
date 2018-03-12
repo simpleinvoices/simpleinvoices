@@ -25,7 +25,7 @@ class MarginSideValue {
   }
 
   function &copy() {
-    $value =& new MarginSideValue;
+    $value = new MarginSideValue;
     $value->value      = $this->value;
     $value->auto       = $this->auto;
     $value->percentage = $this->percentage;
@@ -92,7 +92,7 @@ class MarginValue extends CSSValue {
   }
 
   function &copy() {
-    $value =& new MarginValue;
+    $value = new MarginValue;
     $value->top    = ($this->top    === CSS_PROPERTY_INHERIT) ? CSS_PROPERTY_INHERIT : $this->top->copy();
     $value->bottom = ($this->bottom === CSS_PROPERTY_INHERIT) ? CSS_PROPERTY_INHERIT : $this->bottom->copy();
     $value->left   = ($this->left   === CSS_PROPERTY_INHERIT) ? CSS_PROPERTY_INHERIT : $this->left->copy();

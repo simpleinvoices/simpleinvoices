@@ -165,7 +165,7 @@ class HCConstraint {
       $max = array($value->getPoints(), false);
     };
 
-    $constraint =& new HCConstraint($constant, $min, $max);
+    $constraint = new HCConstraint($constant, $min, $max);
     return $constraint;
   }
 

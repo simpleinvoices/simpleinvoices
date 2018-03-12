@@ -134,10 +134,10 @@ class BlockBox extends GenericContainerBox {
     $parent_node =& $this->get_parent_node();
     parent::reflow($parent_node, $context);
   
-    $width_strategy =& new StrategyWidthAbsolutePositioned();
+    $width_strategy = new StrategyWidthAbsolutePositioned();
     $width_strategy->apply($this, $context);
 
-    $position_strategy =& new StrategyPositionAbsolute();
+    $position_strategy = new StrategyPositionAbsolute();
     $position_strategy->apply($this);
     
     $this->reflow_content($context);
