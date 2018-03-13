@@ -1,4 +1,4 @@
-custom.config.ini
+custom.config.php
 %%*
 *.tpl.php
 zend_cache---*
