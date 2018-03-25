@@ -33,7 +33,7 @@ function lastOfMonth() {
 $start_date = isset($_POST['start_date']) ? $_POST['start_date'] : firstOfMonth() ;
 $end_date   = isset($_POST['end_date'])   ? $_POST['end_date']   : lastOfMonth()  ;
 
-$pdoDb->setSelectList(array("e.amount AS expense", "e.status AS status", "eq.name AS account"));
+$pdoDb->setSelectList(array("e.amount AS expense", "e.status AS status", "ea.name AS account"));
 
 $fn = new FunctionStmt("SUM", "tax_amount");
 $fr = new FromStmt("expense_item_tax");
@@ -52,11 +52,11 @@ $pdoDb->addToCaseStmts($ca);
 
 $jn = new Join("LEFT", "expense_account", "ea");
 $jn->addSimpleItem("e.expense_account_id", new DbField("ea.id"), "AND");
-$jn->addSimpleItem("e.domain_id", new DbField("eq.domain_id"));
+$jn->addSimpleItem("e.domain_id", new DbField("ea.domain_id"));
 $pdoDb->addToJoins($jn);
 
 $pdoDb->addSimpleWhere("e.domain_id", $domain_id, "AND");
-$pdoDb->addToWhere(new WhereItem(false, "e.date", "BETWEEN", array($start_date, $end_date)));
+$pdoDb->addToWhere(new WhereItem(false, "e.date", "BETWEEN", array($start_date, $end_date), false));
 
 $accounts = $pdoDb->request("SELECT", "expense", "e");
 /*
@@ -64,7 +64,7 @@ $sql="SELECT e.amount AS expense, e.status AS status, ea.name AS account,
              (SELECT sum(tax_amount) FROM ".TB_PREFIX."expense_item_tax WHERE expense_id = e.id) AS tax,
              (SELECT tax + e.amount) AS total,
              (CASE WHEN status = 1 THEN '".$LANG['paid']."' WHEN status = 0 THEN '".$LANG['not_paid']."' END) AS status_wording
-      FROM ".TB_PREFIX."expense e 
+      FROM ".TB_PREFIX."expense e
       LEFT JOIN ".TB_PREFIX."expense_account ea ON (e.expense_account_id = ea.id AND e.domain_id = ea.domain_id)
       WHERE e.domain_id = :domain_id AND e.date BETWEEN '$start_date' AND '$end_date'";
 $sth = $db->query($sql, ':domain_id', $domain_id);

@@ -16,9 +16,9 @@ class Select {
      *          <li><b>CaseStmt</b> object</li>
      *        </ol>
      * @param FromStmt $fromStmt (Optional) Table being selected from.
-     * @param WhereClause $whereClause (Optional) Constraints for the selection.
+     * @param WhereClause $whereClause (Optional - can be a WhereItem object). Constraints for the selection.
      * @param string $alias (Optional) Alias to assign to the select statement.
-     * @throws PdoDbException if invalid parameter types are submitted. 
+     * @throws PdoDbException if invalid parameter types are submitted.
      */
     public function __construct($list, $fromStmt = null, $whereClause = null, $alias = null) {
         if (empty($list) || (!is_array($list) && !is_a($list, "FunctionStmt") && !is_a($list, "CaseStmt"))) {
@@ -34,9 +34,12 @@ class Select {
         }
 
         if (isset($whereClause) && !is_a($whereClause, "WhereClause")) {
-            $str = "Select - __construct(): \$whereClause parameter is not a \"WhereClause\" object. ";
-            error_log($str . print_r($whereClause, true));
-            throw new PdoDbException($str);
+            if (!is_a($whereClause, "WhereItem")) {
+                $str = "Select - __construct(): \$whereClause parameter is not a \"WhereClause\" object. ";
+                error_log($str . print_r($whereClause, true));
+                throw new PdoDbException($str);
+            }
+            $whereClause = new WhereClause($whereClause);
         }
 
         $this->list = $list;
@@ -56,7 +59,7 @@ class Select {
     public function getTokenCnt() {
         return $this->token_cnt;
     }
-    
+
     /**
      * Add a <b>JOIN</b> to this <b>SELECT</b> statement.
      * @param Join $join <b>JOIN</b> statement to include.
@@ -85,7 +88,7 @@ class Select {
                 if (is_object($item)) {
                     if (get_class($item) == "WhereClause") {
                         $select .= $item->build($keyPairs);
-                        
+
                     } else {
                         $select .= $item->build();
                      }
@@ -108,7 +111,7 @@ class Select {
         if (!empty($this->whereClause)) {
             $select .= " " . $this->whereClause->build($keyPairs);
             $this->token_cnt += $this->whereClause->getTokenCnt();
-            
+
         }
 
         $select .= ")";
