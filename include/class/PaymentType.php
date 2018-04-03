@@ -107,7 +107,7 @@ class PaymentType {
      * Insert a new record using the values in the class properties.
      * @param string $pt_description Payment type description.
      * @param string $pt_enabled Set to constant, <b><i>ENABLED</i></b> or <b><i>DISABLED</i></b>.
-     * @return Unique <b>pt_id</b> value assigned to the new record.
+     * @return integer Unique <b>pt_id</b> value assigned to the new record.
      */
     public static function insert($pt_description, $pt_enabled) {
         global $pdoDb;

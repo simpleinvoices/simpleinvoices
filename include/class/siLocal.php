@@ -1,6 +1,6 @@
 <?php
 /**
- * siLocal class for value formatting. 
+ * siLocal class for value formatting.
  */
 class siLocal {
     const DATE_FORMAT_PARAMETER = "/(full|long|date_short|short|month|month_short|medium)/";
@@ -10,7 +10,7 @@ class siLocal {
      * Note: This is a wrapper for the <b>Zend_Locale_Format::toNumber</b> function.
      * @param string $number Number to be formatted
      * @param string $precision Decimal precision.
-     * @param string $locale Locale the number is to be formatted for. 
+     * @param string $locale Locale the number is to be formatted for.
      * @param string $symbol Currency symbol. Defaults to no symbol used.
      * @return string Formatted number.
      */
@@ -72,7 +72,7 @@ class siLocal {
     /**
      * Format a date value.
      * Note: This is a wrapper for the <b>Zend_Date</b> function.
-     * @param strin $date Date value to be forematted.
+     * @param string $date Date value to be forematted.
      * @param string $date_format (Optional) Date format. Values are:
      *        <ul>
      *          <li><b>day</b>        : Zend_Date constant DAY              - Ex: 06</li>
@@ -80,7 +80,7 @@ class siLocal {
      *          <li><b>date_short</b> : Zend_Date constant DATE_SHORT       - Ex: 5/6/2017</li>
      *          <li><b>full</b>       : Zend_Date constant DATE_FULL        - Ex: Friday, May 6, 2017</li>
      *          <li><b>long</b>       : Zend_Date constant DATE_LONG        - Ex: May 6, 2017</li>
-     *          <li><b>medium</b>     : Zend_Date constant DATE_MEDIUM      - Ex: 05/06/2017</li> 
+     *          <li><b>medium</b>     : Zend_Date constant DATE_MEDIUM      - Ex: 05/06/2017</li>
      *          <li><b>month</b>      : Zend_Date constant MONTH_NAME       - Ex: 05</li>
      *          <li><b>month_short</b>: Zend_Date constant MONTH_NAME_SHORT - Ex: 5</li>
      *          <li><b>short</b>      : Zend_Date constant DATE_SHORT       - Ex: 5/6/2017</li>
@@ -127,7 +127,7 @@ class siLocal {
      * $param string $number Number to be formatted.
      * @return string Formatted number.
      */
-    
+
     public static function number_formatted($number) {
         global $config;
 

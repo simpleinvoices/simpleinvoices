@@ -220,7 +220,7 @@ class PdoDb {
 
     /**
      * Specify the table engine
-     * @param unknown $engine
+     * @param string $engine "InnoDb" or "MYISAM"
      */
     public function addTableEngine($engine) {
         $this->table_engine = $engine;
@@ -632,7 +632,7 @@ class PdoDb {
 
     /**
      * Retrieves the record ID of the row just inserted.
-     * @return Record ID
+     * @return integer Record ID
      * @throws PdoDbException if database error occurs.
      */
     private function lastInsertId() {
@@ -843,7 +843,7 @@ class PdoDb {
      * @param string $table Database table name.
      * @param string $alias (Optional) Alias for table name. Note that the alias need
      *         be in the select list. If not present, it will be added to selected fields.
-     * @return Result varies with the request type. <b>INSERT</b> returns the
+     * @return mixed Result varies with the request type. <b>INSERT</b> returns the
      *         auto increment unique ID (or blank if no such field), <b>SELECT</b>
      *         returns the associative array for selected rows or an empty array if
      *         no rows are found, <b>SHOW</b> returns the numberic array of
@@ -1057,7 +1057,7 @@ class PdoDb {
      * @param array $valuePairs Array of value pairs. This parameter is optional
      *        and only needs to be specified if bind values are needed.
      *        Example: array(':id' => '7', ':domain_id' => '1');
-     * @return Result varies with the request type. <b>INSERT</b> returns the
+     * @return mixed Result varies with the request type. <b>INSERT</b> returns the
      *         auto increment unique ID (or blank if no such field), <b>SELECT</b>
      *         returns the associative array for selected rows or an empty array if
      *         no rows are found, <b>SHOW</b> returns the numberic array of

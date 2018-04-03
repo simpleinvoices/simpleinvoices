@@ -4,7 +4,7 @@ class ProductValues
 {
     /**
      * Get count of products_values records.
-     * @return unknown
+     * @return integer
      */
     public static function count()
     {
