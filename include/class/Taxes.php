@@ -87,6 +87,7 @@ class Taxes {
     public static function getDefaultTax() {
         global $pdoDb;
 
+        $pdoDb->addSimpleWhere("s.name", "tax", "AND");
         $pdoDb->addSimpleWhere("s.domain_id", domain_id::get());
 
         $jn = new Join("LEFT", "tax", "t");
@@ -94,7 +95,6 @@ class Taxes {
         $pdoDb->addToJoins($jn);
 
         $pdoDb->setSelectAll(true);
-
         $rows = $pdoDb->request("SELECT", "system_defaults", "s");
         return $rows[0];
     }
@@ -108,7 +108,7 @@ class Taxes {
         // @formatter:off
         $pdoDb->setFauxPost(array('domain_id'       => domain_id::get(),
                                   'tax_description' => $_POST['tax_description'],
-                                  'tax_percent'     => $_POST['tax_percentage'],
+                                  'tax_percentage'  => $_POST['tax_percentage'],
                                   'type'            => $_POST['type'],
                                   'tax_enabled'     => $_POST['tax_enabled']));
         // @formatter:on
@@ -127,7 +127,7 @@ class Taxes {
         // @formatter:off
         $pdoDb->addSimpleWhere("tax_id", $_GET['id']);
         $pdoDb->setFauxPost(array('tax_description' => $_POST['tax_description'],
-                                  'tax_percent'     => $_POST['tax_percentage'],
+                                  'tax_percentage'  => $_POST['tax_percentage'],
                                   'type'            => $_POST['type'],
                                   'tax_enabled'     => $_POST['tax_enabled']));
         // @formatter:on
@@ -161,7 +161,7 @@ class Taxes {
      * @param array $tax Taxes for the line item.
      * @param int $unit_price Price for each unit.
      * @param int $quantity Number of units to tax.
-     * @return Total tax for the line item.
+     * @return float Total tax for the line item.
      */
     public static function lineItemTaxCalc($tax, $unit_price, $quantity) {
         // Calculate tax as a percentage of unit price or dollars per unit.
