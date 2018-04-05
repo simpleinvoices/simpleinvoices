@@ -8,7 +8,7 @@ class Expense {
         $rows = $pdoDb->request("SELECT", "expense");
         return $rows[0]['count'];
     }
-    
+
     public static function get_all() {
         global $pdoDb;
         $pdoDb->setOrderBy("id");
@@ -86,13 +86,13 @@ class Expense {
                 $request = new Request("DELETE", expense_item_tax);
                 $request->addSimpleWhere("expense_id", $expense_id);
             }
-    
+
             foreach($line_item_tax_id as $value) {
                 if($value !== "") {
                     $tax = Taxes::getTaxRate($value);
 
-                    $tax_amount = self::lineItemTaxCalc($tax,$unit_price,$quantity);
-    
+                    $tax_amount = Taxes::lineItemTaxCalc($tax, $unit_price,$quantity);
+
                     $request = new Request("INSERT", "expense_item_tax");
                     $request->setExcludedFields("id");
                     $request->setFauxPost(array("expense_id" => $expense_id,

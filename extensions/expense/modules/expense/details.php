@@ -21,7 +21,7 @@ $detail['expense_tax_total']   = $expense['amount'] + ExpenseTax::get_sum($expen
 $detail['expense_tax_grouped'] = ExpenseTax::grouped($expense_id);
 $detail['status_wording']      = ($expense['status'] == 1 ? $LANG['paid'] : $LANG['not_paid']);
 
-$taxes = getActiveTaxes();
+$taxes = Taxes::getActiveTaxes();
 $defaults = getSystemDefaults();
 
 $smarty->assign('expense' ,$expense);

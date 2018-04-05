@@ -46,20 +46,20 @@ class Payment {
         $oc = new OnClause();
         $oc->addSimpleItem("ap.ac_inv_id", new DbField("iv.id"), "AND");
         $oc->addSimpleItem("ap.domain_id", new DbField("iv.domain_id"));
-        $pdoDb->addToJoins(array("LEFT", "invoices", "iv"));
+        $pdoDb->addToJoins(array("LEFT", "invoices", "iv", $oc));
 
         $oc = new OnClause();
-        $oc->addSimpleItem("iv.customer_id", new DbField("c.id"));
-        $oc->addSimpleItem("iv.domain_id", new DbField("c.comain_id"));
-        $pdoDb->addToJoins(array("LEFT", "customers", "c"));
+        $oc->addSimpleItem("iv.customer_id", new DbField("c.id"), "AND");
+        $oc->addSimpleItem("iv.domain_id", new DbField("c.domain_id"));
+        $pdoDb->addToJoins(array("LEFT", "customers", "c", $oc));
 
         $oc = new OnClause();
-        $oc->addSimpleItem("iv.biller_id", new DbField("b.id"));
+        $oc->addSimpleItem("iv.biller_id", new DbField("b.id"), "AND");
         $oc->addSimpleItem("iv.domain_id", new DbField("b.domain_id"));
         $pdoDb->addToJoins(array("LEFT", "biller", "b", $oc));
 
         $oc = new OnClause();
-        $oc->addSimpleItem("iv.preference_id", new DbField("pref.pref_id"));
+        $oc->addSimpleItem("iv.preference_id", new DbField("pref.pref_id"), "AND");
         $oc->addSimpleItem("iv.domain_id", new DbField("pref.domain_id"));
         $pdoDb->addToJoins(array("LEFT", "preferences", "pref", $oc));
 

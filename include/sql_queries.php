@@ -102,8 +102,8 @@ function interpolateQuery($query, $params) {
  * $tth = dbQuery('SELECT c.name FROM si_customers c WHERE c.id = :id',
  * ':id', $id);
  *
- * @param $sqlQuery Query to be performed.
- * @return Result of query.
+ * @param string $sqlQuery Query to be performed.
+ * @return PDOStatement Result of query.
  */
 function dbQuery($sqlQuery) {
     global $dbh;
@@ -169,7 +169,7 @@ function dbLogger($sqlQuery) {
  * Note: That the session is for the $dbh whose id was created by AUTO_INCREMENT
  * (MySQL) or a sequence (PostgreSQL). This is a convenience function to handle
  * the backend-specific details so you don't have to.
- * @return Record ID
+ * @return integer Record ID
  */
 function lastInsertId() {
     global $dbh;
@@ -508,8 +508,8 @@ function sqlDateWithTime($in_date) {
  * can only be "id". Invalid $module or $idField values return false, as do
  * calls that would fail foreign key checks.
  * @param string $module Table a row
- * @param unknown $idField
- * @param unknown $id
+ * @param string  $idField
+ * @param integer $id
  * @param string $domain_id
  * @return false if failure otherwise result of dbQuery().
  */

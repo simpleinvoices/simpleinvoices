@@ -28,7 +28,7 @@ class ExpenseAccount {
     /**
      * Retrieve <i>expense_account</i> record for the current domain and the specified <b>$id</b>
      * @param number $id ID of expense record to retrieve.
-     * @return mixed|Result
+     * @return mixed Result
      */
     public static function select($id) {
         global $pdoDb;

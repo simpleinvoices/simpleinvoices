@@ -235,7 +235,7 @@ class Request {
 
     /**
      * describe
-     * @return_string Description of the request
+     * @return string Description of the request
      */
     public function describe() {
         return "$this->request for $this->table";

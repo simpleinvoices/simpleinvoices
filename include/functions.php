@@ -26,8 +26,8 @@ function checkLogin() {
  * The first attempt is to make a custom path, if that file doesn't
  * exist, the regular path is checked. The first path that is for an
  * existing file is the path returned.
- * @param $name Name or dir/name of file without an extension.
- * @param $mode Set to "template" or "module".
+ * @param string $name Name or dir/name of file without an extension.
+ * @param string $mode Set to "template" or "module".
  * @return file path or NULL if no file path determined.
  */
 function getCustomPath($name, $mode = 'template') {
@@ -52,7 +52,7 @@ function getCustomPath($name, $mode = 'template') {
 
 /**
  * Global function to see if an extension is enabled.
- * @param $ext_name Name of the extension to check for.
+ * @param string $ext_name Name of the extension to check for.
  * @return true if enabled, false if not.
  */
 function isExtensionEnabled($ext_name) {
