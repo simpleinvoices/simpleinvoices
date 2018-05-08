@@ -1048,7 +1048,7 @@ function numberOfTaxesForInvoice($invoice_id, $domain_id='')
 			AND tax.domain_id = :domain_id
 			GROUP BY
 				tax.tax_id;";
-	$sth = dbQuery($sql, ':invoice_id', $invoice_id, ':domain_id', $auth_session->domain_id);
+	$sth = dbQuery($sql, ':invoice_id', $invoice_id, ':domain_id', $domain_id);
 	$result = $sth->rowCount();
 
 	return $result;
