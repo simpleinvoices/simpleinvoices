@@ -486,7 +486,7 @@ class Invoice {
         if ($noage_type) {
             $pdoDb->setSelectList("'' AS Age, '' AS aging");
         } else {
-            $fn = new FunctionStmt("IF", "(owing = 0 OR owing < 0), 0, DateDiff(now(), date)");
+            $fn = new FunctionStmt("IF", "(owing = 0 OR owing < 0 OR DateDiff(now(), date) < 0), 0, DateDiff(now(), date)");
             $se = new Select($fn, null, null, "Age");
             $pdoDb->addToSelectStmts($se);
 
