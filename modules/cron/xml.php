@@ -20,7 +20,7 @@ foreach ( $crons as $row ) {
     $row['email_biller_nice']   = ($row['email_biller']   == ENABLED ? $LANG['yes'] : $LANG['no']);
     $row['email_customer_nice'] = ($row['email_customer'] == ENABLED ? $LANG['yes'] : $LANG['no']);
     $xml .= "<row id='" . $row['id'] . "'>";
-    $xml .= 
+    $xml .=
         "<cell><![CDATA[
            <a class='index_table' title='$LANG[view] $row[index_name]'
               href='index.php?module=cron&view=view&id=$row[id]'>
@@ -41,6 +41,7 @@ foreach ( $crons as $row ) {
     $xml .= "<cell><![CDATA[" . $row ['recurrence'] . " " . $row ['recurrence_type'] . "]]></cell>";
     $xml .= "<cell><![CDATA[" . $row ['email_biller_nice']   . "]]></cell>";
     $xml .= "<cell><![CDATA[" . $row ['email_customer_nice'] . "]]></cell>";
+    $xml .= "<cell><![CDATA[" . $row ['name'] . "]]></cell>";
     $xml .= "</row>";
 }
 $xml .= "</rows>";

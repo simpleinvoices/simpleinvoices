@@ -48,6 +48,11 @@ class Cron {
         $pdoDb->addToJoins(array("INNER", "invoices", "iv", $oc));
 
         $oc = new OnClause();
+        $oc->addSimpleItem("iv.customer_id", new DbField("cust.id"), "AND");
+        $oc->addSimpleItem("iv.domain_id", new DbField("cust.domain_id"));
+        $pdoDb->addToJoins(array("INNER", "customers", "cust", $oc));
+
+        $oc = new OnClause();
         $oc->addSimpleItem("iv.preference_id", new DbField("pf.pref_id"), "AND");
         $oc->addSimpleItem("iv.domain_id", new DbField("pf.domain_id"));
         $pdoDb->addToJoins(array("INNER", "preferences", "pf", $oc));
@@ -76,7 +81,9 @@ class Cron {
             "cron.end_date",
             "cron.invoice_id",
             "cron.recurrence",
-            "cron.recurrence_type");
+            "cron.recurrence_type",
+            "cust.name"
+        );
 
         $pdoDb->setSelectList($expr_list);
 
