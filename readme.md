@@ -16,8 +16,6 @@ For Smarty 3 Release, Zend Framework is incorporated in the download.
 * Latest Beta Release: [2013.1 beta 8](https://github.com/simpleinvoices/simpleinvoices/archive/2013.1.beta.8.tar.gz) (tar.gz)
 * Latest Stable Release: [2011.1](http://download.simpleinvoices.org/simpleinvoices/downloads/simpleinvoices.2011.1.zip) (.zip)
 
-**Note**: It is advised to use the Bleeding Edge Code as that has been stable for quite some time now.
-
 ## Documentation
 * Installation: http://simpleinvoices.org/install
 * Frequently Asked Questions: http://simpleinvoices.org/wiki/faqs

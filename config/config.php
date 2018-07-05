@@ -35,16 +35,6 @@ email.username                      =
 email.password                      =
 email.smtpport                      = 25
 email.secure                        =
-=======
-local.locale                        = en_GB
-local.precision                     = 2
-
-email.host                          = localhost
-email.smtp_auth                     = false
-email.username                      = 
-email.password                      = 
-email.smtpport                      = 25
-email.secure                        = 
 email.ack                           = false
 email.use_local_sendmail            = false
 
