@@ -8,7 +8,7 @@ Ext.onReady(function(){
     // Group box containing actions
     var invoicePanel = new Ext.Panel({
     	frame:true,
-    	title: 'Simple Invoices : Menu',
+    	title: 'SimpleInvoices : Menu',
     	collapsible:false,
     	collapsed:false,
     	contentEl:'invoices',
@@ -206,7 +206,7 @@ var accordion = new Ext.Panel({
     		updateTab('tab-inv-total',"New Invoice: Total","index.php?module=invoices&view=total");
     	},
     	'new-invoice-itemised' : function(){
-    		updateTab('tab-inv-itemised',"New Invoice: Itemised","index.php?module=invoices&view=itemised");
+    		updateTab('tab-inv-itemised',"New Invoice: Itemized","index.php?module=invoices&view=itemised");
     	},
     	'new-invoice-consulting' : function(){
     		updateTab('tab-inv-consulting',"New Invoice: Consulting","index.php?module=invoices&view=consulting");

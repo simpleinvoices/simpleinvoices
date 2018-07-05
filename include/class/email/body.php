@@ -1,68 +1,46 @@
 <?php
-class email_body {
 
-	public $email_type;
-	
-	public function create()
-	{
+class email_body
+{
+    public $email_type;
 
-            switch ($this->email_type)
-            {
-                case "cron_payment":
-                {
-        
-	            	$email_body = <<<EOT
-Hi $this->customer_name,
+    public function create() {
+        switch ($this->email_type) {
+            case "cron_payment":
+                $email_body = <<<EOT
+$this->customer_name, A PDF copy of your payment receipt is attached.
 <br />
 <br />
-Attached is your PDF copy of $this->invoice_name
-<br />
-<br />
-Cheers
-<br />
+Thank you for using our service,
 <br />
 $this->biller_name
 EOT;
-                    break;
-                }
+                break;
 
-                case "cron_invoice_reprint":
-                {
-        
-	            	$email_body = <<<EOT
-Hi $this->customer_name,
+            case "cron_invoice_reprint":
+                $email_body = <<<EOT
+$this->customer_name, A PDF copy of your invoice is attached.
 <br />
 <br />
-Attached is your PDF copy of $this->invoice_name
-<br />
-<br />
-Cheers
-<br />
+Thank you for using our service,
 <br />
 $this->biller_name
 EOT;
-                    break;
-                }
-                case "cron_invoice":
-                default:
-                {
-        
-		            $email_body = <<<EOT
-Hi $this->customer_name,
+                break;
+
+            case "cron_invoice":
+            default:
+                $email_body = <<<EOT
+$this->customer_name, A PDF copy of your invoice is attached.
 <br />
 <br />
-Attached is your PDF copy of $this->invoice_name
-<br />
-<br />
-Cheers
-<br />
+Thank you for using our service,
 <br />
 $this->biller_name
 EOT;
-                }
-            }
+                break;
+        }
 
-		return $email_body;
-	}
-
+        return $email_body;
+    }
 }

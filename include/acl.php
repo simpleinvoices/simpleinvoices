@@ -41,6 +41,7 @@ $acl->addResource('product_value');
 $acl->addResource('products');
 // actions: product_view, product_edit
 $acl->addResource('reports');
+$acl->addResource('si_info');
 $acl->addResource('statement');
 $acl->addResource('system_defaults');
 $acl->addResource('tax_rates');

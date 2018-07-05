@@ -1,41 +1,51 @@
 <?php
 /*
-* Script: manage.php
-* 	Manage Invoices page
-*
-* License:
-*	 GPL v3 or above
-*
-* Website:
-* 	http://www.simpleinvoices.org
+ *  Script: manage.php
+ *      Manage Invoices page
+ *
+ *  License:
+ *      GPL v3 or above
+ *
+ *  Website:
+ *      http://www.simpleinvoices.org
  */
+global $smarty;
 
-//stop the direct browsing to this file - let index.php handle which files get displayed
+// stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-	$sql = "SELECT count(*) AS count FROM ".TB_PREFIX."invoices WHERE domain_id = :domain_id";
-	$sth = dbQuery($sql, ':domain_id',domain_id::get());
-	$number_of_invoices  = $sth->fetch(PDO::FETCH_ASSOC);
-//all funky xml - sql stuff done in xml.php
+// @formatter:off
+$path1 = './extensions/text_ui/include';
+$curr_path = get_include_path();
+if (!strstr($curr_path, $path1)) {
+    $path2 = $path1 . '/class';
+    set_include_path(get_include_path() . PATH_SEPARATOR . $path1 . PATH_SEPARATOR . $path2);
+}
 
-$pageActive = "invoices";
+// Create & initialize DB table if it doesn't exist.
+$invoices = TextUiInvoice::getInvoiceItems();
+$number_of_invoices = array_shift($invoices);
 
-$smarty -> assign("invoices",$invoices);
-$smarty -> assign("number_of_invoices",$number_of_invoices);
-$smarty -> assign("spreadsheet",$spreadsheet);
-$smarty -> assign("word_processor",$word_processor);
-$smarty -> assign('pageActive', $pageActive);
+$pageActive = "invoice";
 
-$page = empty($_GET['page'])? "1" :$_GET['page'] ;
-$page_prev = ($page =="1") ? "1" : $page-1 ;
-$page_next =  $page+1 ;
-//$xml_file = './extensions/text_ui/modules/invoices/xml.php';
-$url=getURL();
-$xml_file = $url.'/index.php?module=invoices&view=xml&page='.$page;
-$xml = simplexml_load_file($xml_file);
+$word_processor = null;
+$spreadsheet = null;
 
-$smarty -> assign('xml', $xml);
-$smarty -> assign('page', $page);
-$smarty -> assign('page_prev', $page_prev);
-$smarty -> assign('page_next', $page_next);
-?>
+$smarty->assign("invoices"          , $invoices);
+$smarty->assign("number_of_invoices", $number_of_invoices);
+$smarty->assign("spreadsheet"       , $spreadsheet);
+$smarty->assign("word_processor"    , $word_processor);
+$smarty->assign('pageActive'        , $pageActive);
+
+$page      = empty($_GET['page']) ? "1" : $_GET['page'];
+$page_prev = ($page == "1") ? "1" : $page - 1;
+$page_next = $page + 1;
+
+$url = getURL();
+$xml_file = $url . '/index.php?module=invoices&view=xml&page=' . $page;
+$smarty->assign('xml', $xml_file);
+
+$smarty->assign('page', $page);
+$smarty->assign('page_prev', $page_prev);
+$smarty->assign('page_next', $page_next);
+// @formatter:on

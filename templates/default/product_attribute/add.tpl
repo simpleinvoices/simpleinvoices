@@ -13,7 +13,7 @@
 {else}
 {* if  name was inserted *} 
 	{if $smarty.post.submit !=null} 
-		<div class="validation_alert"><img src="./images/common/important.png" alt="" />
+		<div class="validation_alert"><img src="images/common/important.png" alt="" />
 		You must enter a name for the product attribute</div>
 		<hr />
 	{/if}
@@ -24,7 +24,7 @@
 <hr />
 
 
-<table align="center">
+<table class="center">
 <tr>
 	<td class="details_screen">{$LANG.name}</td>
 	<td><input type="text" name="name" value="{$smarty.post.name}" size="25" /></td>

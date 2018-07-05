@@ -277,7 +277,7 @@ COMMENT ON TABLE si_invoice_type IS $$Type of invoice is used to determine inter
 INSERT INTO si_invoice_type (inv_ty_id, inv_ty_description) VALUES 
 (1, 'Total');
 INSERT INTO si_invoice_type (inv_ty_id, inv_ty_description) VALUES 
-(2, 'Itemised');
+(2, 'Itemized');
 INSERT INTO si_invoice_type (inv_ty_id, inv_ty_description) VALUES 
 (3, 'Consulting');
 SELECT setval('si_invoice_type_inv_ty_id_seq', 3);

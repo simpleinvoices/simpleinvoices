@@ -1,7 +1,7 @@
 {*
 /*
 * Script: itemised.tpl
-* 	 Itemised invoice template
+* 	 Itemized invoice template
 *
 * License:
 *	 GPL v3 or above
@@ -36,7 +36,7 @@ for (var x = 0; x <= {/literal}{$dynamic_line_items}{literal}; x++)
 
 <form name="frmpost" action="index.php?module=invoices&view=save" method="post" onsubmit="return frmpost_Validator(this)">
 
-<h3>{$LANG.inv} {$LANG.inv_itemised}</h3>
+<h3>{$LANG.inv} {$LANG.inv_itemized}</h3>
 
 {include file="$path/header.tpl" }
 
@@ -117,10 +117,10 @@ for (var x = 0; x <= {/literal}{$dynamic_line_items}{literal}; x++)
 		</tr>
 
         {/section}
-	{$show_custom_field.1}
-	{$show_custom_field.2}
-	{$show_custom_field.3}
-	{$show_custom_field.4}
+	{$customFields.1}
+	{$customFields.2}
+	{$customFields.3}
+	{$customFields.4}
 	{showCustomFields categorieId="4" itemId=""}
 
 
@@ -157,7 +157,7 @@ for (var x = 0; x <= {/literal}{$dynamic_line_items}{literal}; x++)
 </tr>	
 <tr>
 	<td align="left">
-		<a href="index.php?module=documentation&amp;view=view&amp;page=help_invoice_custom_fields" rel="gb_page_center[450, 450]">{$LANG.want_more_fields}<img src="./images/common/help-small.png" alt="" /></a>
+		<a href="index.php?module=documentation&amp;view=view&amp;page=help_invoice_custom_fields" rel="gb_page_center[450, 450]">{$LANG.want_more_fields}<img src="{$help_image_path}help-small.png" alt="" /></a>
 
 	</td>
 </tr>

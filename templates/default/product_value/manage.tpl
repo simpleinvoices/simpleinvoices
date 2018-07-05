@@ -1,18 +1,21 @@
 {*
 /*
 * Script: manage.tpl
-* 	 Invoice Preferences manage template
+* 	 Invoice Product Values manage template
 *
 * License:
-*	 GPL v2 or above
+*	 GPL v3 or above
 */
 *}
-{if preferences == null}
-<P><em>{$LANG.no_preferences}.</em></p>
+<div class="si_toolbar si_toolbar_top">
+  <a href="index.php?module=product_value&view=add" class="">
+    <img src="images/common/add.png" alt="" />
+    {$LANG.add_product_value}
+  </a>
+</div>
+{if $number_of_rows == 0}
+  <div class="si_message">There are no product value records.  Click the 'Add Product Value' button above to create one</div>
 {else}
-<h3>{$LANG.manage_product_values} :: <a href="index.php?module=product_value&view=add">{$LANG.add_product_value}</a></h3>
-<hr />
-<table id="manageGrid" style="display:none"></table>
-
- {include file='../modules/product_value/manage.js.php'}
+  <table id="manageGrid" style="display:none"></table>
+  {include file='modules/product_value/manage.js.php'}
 {/if}

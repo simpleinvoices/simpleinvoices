@@ -62,7 +62,9 @@ class ListItemBox extends BlockBox {
 
   function ListItemBox(&$root, &$pipeline) {
     // Call parent constructor
-    $this->BlockBox($root);
+    // Modified from commented out code by RCR 20160810
+    //$this->BlockBox($root);
+    parent::__construct();
   }
 
   function reflow(&$parent, &$context) {

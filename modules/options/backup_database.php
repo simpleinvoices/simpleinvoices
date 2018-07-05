@@ -1,59 +1,50 @@
 <?php
+global $help_image_path, $smarty, $LANG;
 
-//stop the direct browsing to this file - let index.php handle which files get displayed
+$smarty->assign('pageActive', 'backup');
+$smarty->assign('active_tab', '#setting');
 
-//checkLogin();
+if (isset($_GET['op']) && $_GET['op'] == "backup_db") {
+    $today = date("YmdGisa");
+    $oBack = new BackupDb();
+    $filename = "tmp/database_backups/simple_invoices_backup_$today.sql"; // output file name
+    $oBack->start_backup($filename);
 
-$smarty -> assign('pageActive', 'backup');
-$smarty -> assign('active_tab', '#setting');
+    $txt=sprintf($LANG['backup_done'],$filename);
 
-if ($_GET['op'] == "backup_db") {
-
-
-	$today = date("YmdGisa");
-	$oBack    = new backup_db;
-	$oBack->filename = "./tmp/database_backups/simple_invoices_backup_$today.sql"; // output file name
-	$oBack->start_backup();
-
-
-	$txt=sprintf($LANG['backup_done'],$oBack->filename);
-
-	$display_block =<<<EOF
-<div class="si_center">
-<pre>
-<table>
-	{$oBack->output}
-</table>
-</pre>
-</div>
-$txt
-	<div class="si_help_div">
-			<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_backup_database_fwrite" title="{$LANG['fwrite_error']}"><img src="./images/common/help-small.png" alt="" />{$LANG['fwrite_error']}</a>
-	</div>
-
-EOF;
-
+    $display_block = "<div class='si_center'>\n" .
+                     "  <pre>\n" .
+                     "    <table>{" . $oBack->getOutput() . "}</table>\n" .
+                     "  </pre>\n" .
+                     "</div>\n" .
+                      $txt .
+                     "<div class='si_help_div'>\n" .
+                     "  <a class='cluetip' href='#'\n" .
+                     "     rel='index.php?module=documentation&amp;view=view&amp;page=help_backup_database_fwrite' title='{$LANG['fwrite_error']}'>" .
+                     "     <img src='{$help_image_path}help-small.png' alt=''/>\n" .
+                     "    {$LANG['fwrite_error']}" .
+                     "  </a>\n" .
+                     "</div>\n\n";
+} else {
+    $display_block = "<div class='si_center'>\n" .
+                     "  {$LANG['backup_howto']}\n" .
+                     "  <div class='si_toolbar si_toolbar_top'>\n" .
+                     "    <a href='index.php?module=options&amp;view=backup_database&amp;op=backup_db'>" .
+                     "      <img src='./images/common/database_save.png' alt=''/>\n" .
+                     "      {$LANG['backup_database_now']}\n" .
+                     "    </a>\n" .
+                     "  </div>\n" .
+                     "  {$LANG['note']}: {$LANG['backup_note_to_file']}\n" .
+                     "</div>\n" .
+                     "<div class='si_help_div'>\n" .
+                     "  <a class='cluetip' href='#'\n" .
+                     "     rel='index.php?module=documentation&amp;view=view&amp;page=help_backup_database'\n" .
+                     "     title='{$LANG['database_backup']}'>\n" .
+                     "    <img src='./images/common/important.png' alt='' />\n" .
+                     "    {$LANG['more_info']}\n" .
+                     "  </a>\n" .
+                     "</div>\n\n";
 }
 
-else {
-
-$display_block = <<<EOF
-<div class="si_center">
-{$LANG['backup_howto']}
-
-		<div class='si_toolbar si_toolbar_top'>
-			
-			<a href='index.php?module=options&amp;view=backup_database&amp;op=backup_db'><img src="./images/common/database_save.png" alt=""/>{$LANG['backup_database_now']}</a>
-		</div>
-
-{$LANG['note']}: {$LANG['backup_note_to_file']}
-</div>
-
-	<div class="si_help_div">
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_backup_database" title="{$LANG['database_backup']}"><img src="./images/common/important.png" alt="" />{$LANG['more_info']}</a>
-	</div>
-EOF;
-}
-
+$oBack = null;
 $smarty->assign('display_block', $display_block);
-?>

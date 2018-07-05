@@ -246,7 +246,7 @@ CREATE TABLE IF NOT EXISTS "si_invoice_type" (
 INSERT INTO "si_invoice_type" ("inv_ty_id", "inv_ty_description") VALUES
 (1, 'Total');
 INSERT INTO "si_invoice_type" ("inv_ty_id", "inv_ty_description") VALUES
-(2, 'Itemised');
+(2, 'Itemized');
 INSERT INTO "si_invoice_type" ("inv_ty_id", "inv_ty_description") VALUES
 (3, 'Consulting');
 

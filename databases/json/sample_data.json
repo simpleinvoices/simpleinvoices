@@ -193,6 +193,17 @@
 			}
         ]
     ,
+    "si_index":
+        [
+            {
+                "id":"1",
+                "node":"invoice",
+                "sub_node":"1",
+                "sub_node_2":"0",
+                "domain_id":"1"
+            }
+        ]
+    ,
 	"si_invoice_items":
         [
             {

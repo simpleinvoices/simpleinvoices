@@ -25,7 +25,7 @@
 		<tr>
 			<td class="si_invoice_notes" colspan="5">
 				<h5>{$LANG.description}</h5>
-				<textarea input type="text" class="editor" name="description" rows="10" cols="100" wrap="nowrap"></textarea>
+				<textarea class="editor" name="description" rows="10" cols="50"></textarea>
 			</td>
 		</tr>
 	</table>
@@ -70,10 +70,10 @@
 			</td>		
 		</tr>
 
-	{$show_custom_field.1}
-	{$show_custom_field.2}
-	{$show_custom_field.3}
-	{$show_custom_field.4}
+	{$customFields.1}
+	{$customFields.2}
+	{$customFields.3}
+	{$customFields.4}
 
 
 	</table>
@@ -81,12 +81,12 @@
 
 
 	<div class="si_toolbar si_toolbar_form">
-			<button type="submit" class="positive" name="submit" value="{$LANG.save}"><img class="button_img" src="./images/common/tick.png" alt="" />{$LANG.save}</button>
-			<a href="./index.php?module=invoices&amp;view=manage" class="negative"><img src="./images/common/cross.png" alt="" />{$LANG.cancel}</a>
+			<button type="submit" class="positive" name="submit" value="{$LANG.save}"><img class="button_img" src="images/common/tick.png" alt="" />{$LANG.save}</button>
+			<a href="index.php?module=invoices&amp;view=manage" class="negative"><img src="images/common/cross.png" alt="" />{$LANG.cancel}</a>
 	</div>
 
 	<div class="si_help_div">
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_invoice_custom_fields" title="{$LANG.want_more_fields}"><img src="./images/common/help-small.png" alt="" /> {$LANG.want_more_fields}</a>
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_invoice_custom_fields" title="{$LANG.want_more_fields}"><img src="{$help_image_path}help-small.png" alt="" /> {$LANG.want_more_fields}</a>
 	</div>
 
 </div>

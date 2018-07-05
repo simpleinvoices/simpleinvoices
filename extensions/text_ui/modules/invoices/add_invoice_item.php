@@ -16,7 +16,7 @@ if(isset($_POST['submit'])) {
 }
 else {
 
-$products = getActiveProducts();
+$products = Product::select_all();
 
 
 $smarty -> assign("products",$products);
@@ -36,4 +36,3 @@ $smarty -> assign("number_of_attributes", $number_of_products['0']['count']);
 
 */
 
-?>

@@ -55,14 +55,14 @@
              </tr>
                 
                 <tr class="text{$smarty.section.line.index|htmlsafe} hide">
-      				<td colspan="3"><textarea input type="text" class="editor" name='description{$smarty.section.line.index|htmlsafe}' rows="3" cols="80" wrap="nowrap"></textarea></td>
+      				<td colspan="3"><textarea class="detail" name='description{$smarty.section.line.index|htmlsafe}' rows="3" cols="80"></textarea></td>
 </tr>
 
         {/section}
-	{$show_custom_field.1}
-	{$show_custom_field.2}
-	{$show_custom_field.3}
-	{$show_custom_field.4}
+	{$customFields.1}
+	{$customFields.2}
+	{$customFields.3}
+	{$customFields.4}
 	{* 
 		{showCustomFields categorieId="4"}
 	*}
@@ -74,7 +74,7 @@
 </tr>
 
 <tr>
-        <td colspan="3"><textarea input type="text" class="editor" height="60px" name="note" rows="5" cols="70" wrap="nowrap"></textarea></td>
+        <td colspan="3"><textarea class="editor" height="60px" name="note" rows="5" cols="70"></textarea></td>
 </tr>
 
 <tr><td class="details_screen">{$LANG.tax}</td><td><input type="text" name="tax" size="15" />
@@ -109,7 +109,7 @@
 </tr>	
 <tr>
 	<td align="left">
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_invoice_custom_fields" title="{$LANG.want_more_fields}"><img src="./images/common/help-small.png" alt="" /> {$LANG.want_more_fields}</a>
+		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_invoice_custom_fields" title="{$LANG.want_more_fields}"><img src="{$help_image_path}help-small.png" alt="" /> {$LANG.want_more_fields}</a>
 	</td>
 </tr>
 <!--Add more line items while in an itemeised invoice - Get style - has problems- wipes the current values of the existing rows - not good
@@ -121,17 +121,17 @@
 </table>
 <!-- </div> -->
 <hr />
-<table class="buttons" align="center">
+<table class="center" >
 	<tr>
 	        <td>
 			<button type="submit" class="positive" name="submit" value="{$LANG.save}">
-			<img class="button_img" src="./images/common/tick.png" alt="" /> 
+			<img class="button_img" src="images/common/tick.png" alt="" /> 
 			{$LANG.save}
 			</button>
 			<input type="hidden" name="max_items" value="{$smarty.section.line.index|htmlsafe}" />
 			<input type="hidden" name="type" value="3" />
-			<a href="./index.php?module=invoices&amp;view=manage" class="negative">
-				<img src="./images/common/cross.png" alt="" />
+			<a href="index.php?module=invoices&amp;view=manage" class="negative">
+				<img src="images/common/cross.png" alt="" />
 				{$LANG.cancel}
 			</a>
 		</td>

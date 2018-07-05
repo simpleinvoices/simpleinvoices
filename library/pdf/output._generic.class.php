@@ -11,7 +11,7 @@ class OutputDriverGeneric extends OutputDriver {
   var $_watermark;
 
   // Offset (in device points) of the current page from the first page.
-  // Can be treated as coordinate of the bottom page edge (as first page 
+  // Can be treated as coordinate of the bottom page edge (as first page
   // will have zero Y value at its bottom).
   // Note that ir is PAGE edge coordinate, NOT PRINTABLE AREA! If you want to get
   // the position of the lowest pixel on the page which won't be cut-off, use
@@ -49,7 +49,7 @@ class OutputDriverGeneric extends OutputDriver {
     $this->setFootnoteCount(0);
 
     $this->_postponed = array();
-    
+
     $this->anchors = array();
   }
 
@@ -136,7 +136,7 @@ class OutputDriverGeneric extends OutputDriver {
   }
 
   function getFootnoteTop() {
-    return round($this->offset + 
+    return round($this->offset +
                  mm2pt($this->media->margins['bottom']) +
                  $this->getFootnoteAreaHeight(),
                  2);
@@ -158,14 +158,14 @@ class OutputDriverGeneric extends OutputDriver {
     return $this->_footnote_count;
   }
 
-  function error_message() { 
+  function error_message() {
     return $this->error_message;
   }
 
   /**
    * Checks if a given box should be drawn on the current page.
    * Basically, box should be drawn if its top or bottom edge is "inside" the page "viewport"
-   * 
+   *
    * @param GenericBox $box Box we're using for check
    * @return boolean flag indicating of any part of this box should be placed on the current page
    */
@@ -175,7 +175,7 @@ class OutputDriverGeneric extends OutputDriver {
 
   function willContain(&$box, $footnote_height) {
     /**
-     * These two types of boxes are not visual and 
+     * These two types of boxes are not visual and
      * may have incorrect position
      */
     if (is_a($box, 'TableSectionBox')) { return true; };
@@ -185,11 +185,11 @@ class OutputDriverGeneric extends OutputDriver {
     $bottom = round($box->get_bottom(),2);
 
     $vp_top    = $this->getPageTop();
-    $vp_bottom = max($this->getFootnoteTop() + $footnote_height, 
+    $vp_bottom = max($this->getFootnoteTop() + $footnote_height,
                      $this->getPageTop() - $this->getPageHeight());
 
-    return ($top > $vp_bottom && 
-            $bottom <= $vp_top); 
+    return ($top > $vp_bottom &&
+            $bottom <= $vp_top);
   }
 
   function draw_page_border() {
@@ -212,15 +212,15 @@ class OutputDriverGeneric extends OutputDriver {
     // Check if we can use tempnam to create files (so, we have PHP version
     // with fixed bug it this function behaviour and open_basedir/environment
     // variables are not maliciously set to move temporary files out of open_basedir
-    // In general, we'll try to create these files in ./temp subdir of current 
+    // In general, we'll try to create these files in ./temp subdir of current
     // directory, but it can be overridden by environment vars both on Windows and
     // Linux
     $filename = tempnam(WRITER_TEMPDIR,WRITER_FILE_PREFIX);
     $filehandle = @fopen($filename, "wb");
 
-    // Now, if we have had any troubles, $filehandle will be 
+    // Now, if we have had any troubles, $filehandle will be
     if ($filehandle === false) {
-      // Note: that we definitely need to unlink($filename); - tempnam just created it for us! 
+      // Note: that we definitely need to unlink($filename); - tempnam just created it for us!
       // but we can't ;) because of open_basedir (or whatelse prevents us from opening it)
 
       // Fallback to some stupid algorithm of filename generation
@@ -238,7 +238,7 @@ class OutputDriverGeneric extends OutputDriver {
       die(WRITER_CANNOT_CREATE_FILE);
     };
 
-    // Release this filehandle - we'll reopen it using some gzip wrappers 
+    // Release this filehandle - we'll reopen it using some gzip wrappers
     // (if they are available)
     fclose($filehandle);
 
@@ -248,8 +248,8 @@ class OutputDriverGeneric extends OutputDriver {
     return $filename;
   }
 
-  function get_filename() { 
-    return $this->filename; 
+  function get_filename() {
+    return $this->filename;
   }
 
   function &get_font_resolver() {
@@ -257,7 +257,7 @@ class OutputDriverGeneric extends OutputDriver {
     return $g_font_resolver_pdf;
   }
 
-  function is_debug_boxes() { 
+  function is_debug_boxes() {
     return $this->debug_boxes;
   }
 
@@ -281,8 +281,8 @@ class OutputDriverGeneric extends OutputDriver {
     $this->expected_pages = $num;
   }
 
-  function set_filename($filename) { 
-    $this->filename = $filename; 
+  function set_filename($filename) {
+    $this->filename = $filename;
   }
 
   function set_show_page_border($show) {
@@ -326,4 +326,3 @@ class OutputDriverGeneric extends OutputDriver {
     $this->setPageHeight(mm2pt($media->real_height()));
   }
 }
-?>

@@ -22,16 +22,17 @@ function get_var($name, $array, $maxlength=255, $default=null) {
     /**
      * Arrays should be processed element-by-element
      */
-    if (get_magic_quotes_gpc()) { 
+    if (function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc()) { 
       foreach ($data as $key => $value) {
         $data[$key] = stripslashes($data[$key]); 
+        if ($value) {} // eliminates unused warning
       };
     };
   } else {
     /**
      * Remove slashes added by magic quotes option
      */
-    if (get_magic_quotes_gpc()) { 
+    if (function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc()) { 
       $data = stripslashes($data); 
     };
 
@@ -43,4 +44,3 @@ function get_var($name, $array, $maxlength=255, $default=null) {
 
   return $data;
 }
-?>

@@ -14,13 +14,13 @@ if($secure)
 {
     die("
         =============================<br/>
-        Simple Invoices security warning<br/>
+        SimpleInvoices security warning<br/>
         =============================<br/>
         <br/>
-        PHPINFO is disabled by default for security reasons. 
+        PHPINFO is disabled by default for security reasons.
         <br/>
         To view your phpinfo contents, edit the file phpinfo.php
-        in your Simple Invoices directory and change line 11 from: <br />
+        in your SimpleInvoices directory and change line 11 from: <br />
         <br />
         \$secure = true;<br /><br />
         to<br /><br />

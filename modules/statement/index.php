@@ -1,107 +1,96 @@
 <?php
-
 /*
-* Script: report_sales_by_period.php
-* 	Sales reports by period add page
-*
-* Authors:
-*	 Justin Kelly
-*
-* Last edited:
-* 	 2008-05-13
-*
-* License:
-*	 GPL v3
-*
-* Website:
-* 	http://www.simpleinvoices.org
-*/
+ * Script: report_sales_by_period.php
+ * Sales reports by period add page
+ *
+ * Authors:
+ * Justin Kelly
+ *
+ * Last edited:
+ *  2017-12-20 Richard Rowley
+ *
+ * License:
+ * GPL v3
+ *
+ * Website:
+ * http://www.simpleinvoices.org
+ */
+global $menu, $pdoDb, $smarty;
 
-checkLogin();
-
-#$menu =false;
-
+checkLogin ();
 function firstOfMonth() {
-	return date("Y-m-d", strtotime('01-01-'.date('Y').' 00:00:00'));
+    return date ( "Y-m-d", strtotime ( '01-01-' . date ( 'Y' ) . ' 00:00:00' ) );
 }
 
 function lastOfMonth() {
-	return date("Y-m-d", strtotime('31-12-'.date('Y').' 00:00:00'));
-
+    return date ( "Y-m-d", strtotime ( '31-12-' . date ( 'Y' ) . ' 00:00:00' ) );
 }
 
+$start_date  = (isset($_POST['start_date'] ) ? $_POST['start_date']  : firstOfMonth());
+$end_date    = (isset($_POST['end_date']   ) ? $_POST['end_date']    : lastOfMonth ());
+$biller_id   = (isset($_POST['biller_id']  ) ? $_POST['biller_id']   : "");
+$customer_id = (isset($_POST['customer_id']) ? $_POST['customer_id'] : "");
 
+$show_only_unpaid      = "no";
+$do_not_filter_by_date = "no";
+$invoices              = array();
+$statement             = array ("total" => 0, "owing" => 0, "paid" => 0);
 
-isset($_POST['start_date']) ? $start_date = $_POST['start_date'] : $start_date = firstOfMonth() ;
-isset($_POST['end_date']) ? $end_date = $_POST['end_date'] : $end_date = lastOfMonth() ;
+if (isset($_POST['submit'])) {
+    if (isset($_POST['do_not_filter_by_date'])) {
+        $do_not_filter_by_date = "yes";
+    } else {
+        $do_not_filter_by_date = "no";
+        $pdoDb->setHavings(Invoice::buildHavings("date_between", array($start_date, $end_date)));
+    }
 
-isset($_POST['biller_id']) ? $biller_id = $_POST['biller_id'] : $biller_id = "" ;
-isset($_POST['customer_id']) ? $customer_id = $_POST['customer_id'] : $customer_id = "" ;
+    if (isset($_POST['show_only_unpaid'])) {
+        $show_only_unpaid = "yes";
+        $pdoDb->setHavings(Invoice::buildHavings("money_owed"));
+    } else {
+        $show_only_unpaid = "no";
+    }
 
+    if (!empty($biller_id)  ) $pdoDb->addSimpleWhere("biller_id"  , $biller_id  , "AND");
+    if (!empty($customer_id)) $pdoDb->addSimpleWhere("customer_id", $customer_id, "AND");
 
-if (isset($_POST['submit']))
-{
-	$invoice = new invoice();
-	$invoice->start_date = $start_date;
-	$invoice->end_date = $end_date;
-	$invoice->biller = $biller_id;
-	$invoice->customer = $customer_id;
-	$invoice->having = "open";
-
-	if ( isset($_POST['filter_by_date']) )
-	{
-		$invoice->having = "date_between";
-		$filter_by_date = "yes";
-		$having_and_count = 1;
-	}
-
-	if ( isset($_POST['show_only_unpaid']) )
-	{
-		if ($having_and_count == 1) 
-		{
-			$invoice->having_and = "money_owed";
-		} else {
-			$invoice->having = "money_owed";
-		}
-		$show_only_unpaid = "yes";
-	}
-
-	$invoice->sort = "date";
-	$invoice_all = $invoice->select_all();
-
-	$invoices = $invoice_all->fetchAll();
-
-	foreach ($invoices as $i => $row) {
-		if ($row['status'] > 0) {
-			$statement['total'] = $statement['total'] + $row['invoice_total'];
-			$statement['owing'] = $statement['owing'] + $row['owing'] ;
-			$statement['paid']  = $statement['paid']  + $row['INV_PAID'];
-		}
-	}
+    $invoices = Invoice::select_all("", "date", "D");
+    foreach ( $invoices as $row ) {
+        if ($row ['status'] > 0) {
+            $statement ['total'] += $row ['invoice_total'];
+            $statement ['owing'] += $row ['owing'];
+            $statement ['paid']  += $row ['INV_PAID'];
+        }
+    }
 }
 
-$billers = getActiveBillers();
-$customers = getActiveCustomers();
+// @formatter:off
+$billers          = Biller::get_all(true);
+$biller_count     = count($billers);
+$customers        = Customer::get_all(true);
+$customer_count   = count($customers);
+$biller_details   = Biller::select($biller_id);
+$customer_details = Customer::get($customer_id);
 
-$biller_details = getBiller($biller_id);
-$customer_details = getCustomer($customer_id);
-$smarty -> assign('biller_id', $biller_id);
-$smarty -> assign('biller_details', $biller_details);
-$smarty -> assign('customer_id', $customer_id);
-$smarty -> assign('customer_details', $customer_details);
+$smarty->assign('biller_id'       , $biller_id);
+$smarty->assign('billers'         , $billers);
+$smarty->assign('biller_count'    , $biller_count);
+$smarty->assign('biller_details'  , $biller_details);
+$smarty->assign('customer_id'     , $customer_id);
+$smarty->assign('customers'       , $customers);
+$smarty->assign('customer_count'  , $customer_count);
+$smarty->assign('customer_details', $customer_details);
 
-$smarty -> assign('show_only_unpaid', $show_only_unpaid);
-$smarty -> assign('filter_by_date', $filter_by_date);
+$smarty->assign('show_only_unpaid'     , $show_only_unpaid);
+$smarty->assign('do_not_filter_by_date', $do_not_filter_by_date);
 
-$smarty -> assign('billers', $billers);
-$smarty -> assign('customers', $customers);
+$smarty->assign('invoices'  , $invoices);
+$smarty->assign('statement' , $statement);
+$smarty->assign('start_date', $start_date);
+$smarty->assign('end_date'  , $end_date);
 
-$smarty -> assign('invoices', $invoices);
-$smarty -> assign('statement', $statement);
-$smarty -> assign('start_date', $start_date);
-$smarty -> assign('end_date', $end_date);
+$smarty->assign('pageActive', 'report');
+$smarty->assign('active_tab', '#home');
 
-$smarty -> assign('pageActive', 'report');
-$smarty -> assign('active_tab', '#home');
-$smarty -> assign('menu', $menu);
-?>
+if (!isset($menu)) $menu = true; // Causes menu section of report gen page to display.
+$smarty->assign('menu', $menu);

@@ -1,21 +1,28 @@
 <?php
 
 /*
-* Script: lang.php
-* 	Norwegian translation file
+* Script: NO_lang.php
+*    Norwegian translation file
 *
 * Last edited:
 * 	 2016-10-04
 *
 * License:
-*	 GPL v3 or above
+*    GPL v3 or above
 */
 
-/*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
-regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
+/*
+ *    "//1" means that the variable has been translated
+ *    "//0" means that the variable has not been translated
+ *    These values are used by a script to calculate how much of each file has been translated.
+ *    Use the regex pattern :%s/;/ /1/;// 1\/\/1/g - remove the spaces
  */
 
 #all
+
+global $LANG;
+if ($LANG) {} // eliminates unused warning
+
 $LANG['about'] = "Om";//1
 $LANG['account_info'] = "Kontoinformasjon";//1
 $LANG['actions'] = "Valg";//1
@@ -34,6 +41,8 @@ $LANG['add_new_row'] = "Legg til ny rad";//1
 $LANG['add_new_tax_rate'] = "Legg til ny avgiftsklasse";//1
 $LANG['add_payment_type'] = "Legg til betalingstype";//1
 $LANG['add_product'] = "Legg til produkt";//1
+$LANG['add_product_attribute'] = "Add Product Attribute";//0
+$LANG['add_product_value'] = "Add Product Value";//0
 $LANG['add_tax_rate'] = "Legg til avgiftsklasse";//1
 $LANG['address'] = "Adresse";//1
 $LANG['address_city'] = "Adresse: By";//1
@@ -53,7 +62,7 @@ $LANG['attribute_short'] = "Kjennetegn";//1
 $LANG['back'] = "Tilbake";//1
 $LANG['backup_database'] = "Ta sikkerhetskopi av database";//1
 $LANG['backup_database_now'] = "TA SIKKERHETSKOPI AV DATABASE NÅ";//1
-$LANG['backup_done'] = "Din database er sikkerhetskopiert til %s, du kan fortsette å bruke Simple Invoices som normalt.";//1
+$LANG['backup_done'] = "Din database er sikkerhetskopiert til %s, du kan fortsette å bruke SimpleInvoices som normalt.";//1
 $LANG['backup_howto'] = "For å lage en sikkerhetskopi av din database, trykk på lenken nedenfor.";//1
 $LANG['backup_note_to_file'] = "Dette vil utføre en sikkerhetskopi av din database og legge den i database_backups mappen.";//1
 $LANG['backup_your_database'] = "Ta sikkerhetskopi av din database";//1
@@ -73,6 +82,7 @@ $LANG['cancel'] = "Avbryt";//1
 $LANG['cannot_delete_first_row'] = "Den første raden kan ikke slettes";//1
 $LANG['change_log'] = "Endringslogg";//1
 $LANG['city'] = "By";//1
+$LANG['company_name'] = "SimpleInvoices";//0
 $LANG['confirm_delete'] = "Er du sikker på at du vil slette";//1
 $LANG['consulting'] = "Konsultasjon";//1
 $LANG['consulting_style'] = "Konsultasjonsstil";//1
@@ -84,7 +94,7 @@ $LANG['credit_card_expiry_month'] = "Credit card expiry month";//0
 $LANG['credit_card_expiry_year'] = "Credit card expiry year";//0
 $LANG['credit_card_holder_name'] = "Credit card holder name";//0
 $LANG['credit_card_number'] = "Credit card number";//0
-$LANG['credit_card_number_encrypted'] = "The credit card number has been encrypted and is not displayed in Simple Invoices";//0
+$LANG['credit_card_number_encrypted'] = "The credit card number has been encrypted and is not displayed in SimpleInvoices";//0
 $LANG['credit_card_number_new'] = "New credit card number";//0
 $LANG['credits'] = "Kreditt";//1
 $LANG['currency_code'] = "Currency code";//0
@@ -182,7 +192,7 @@ $LANG['faqs'] = "Frequently Asked Questions";//1
 $LANG['faqs_how'] = "Hvordan oppretter jeg fakturaer?";//1
 $LANG['faqs_need'] = "Hva trenger jeg for å starte faktureringen?";//1
 $LANG['faqs_type'] = "Hvilke typer fakturaer finnes det?";//1
-$LANG['faqs_what'] = "Hva er Simple Invoices?";//1
+$LANG['faqs_what'] = "Hva er SimpleInvoices?";//1
 $LANG['fax'] = "Faks";//1
 $LANG['filter_by_dates'] = "Filter by dates";//0
 $LANG['filters'] = "Filters";//0
@@ -199,9 +209,9 @@ $LANG['gross_total'] = "Brutto";//1
 $LANG['hello'] = "Hallo";//1
 $LANG['help'] = "Hjelp";//1
 $LANG['help_age'] = "The 'Age' field indicates how long the invoice has been unpaid for. If the invoice was created on the 1st of the month, at the 21st of that month if the invoice still had not been made in full the invoice 'Age' would be 21 days.<br /><br />If the invoice has been paid in full then the 'Age' field will be blank.";//0
-$LANG['help_backup_database'] = "For the backup to work the webserver user(hopefully you're running Apache) must have read/write permissions to the database_backups directory in the Simple Invoices folder<br /><br />Also if you are extra paranoid (like me :) ) about your data I recommend using phpMyAdmin.  This backup script should work fine but if require 'enterprise grade' backup reliability phpMyAdmin rocks.<br /><br />Note: If you are using Simple Invoices in the demo environment on SourceForge, backups won't work due to setup of their servers.";//0
-$LANG['help_backup_database_fwrite'] = "<b>Got fwrite() errors?</b><br />If you received fwrite() errors when atempting to backup your Simple Invoices database this means that the webserver user(hopefully you're running Apache) doesn't have read/write permissions to the tmp/database_backups directory in the Simple Invoices folder<br /><br />Please change the permissions on this directory and attempt the backup again.  To change the permissions of the tmp/database_backups directory in Unix/Linix/OSX cd to the Simple Invoice directory (<i>cd /var/www/html/simpleinvoices</i>) and then issue the chmod command to give the webserver user read/write permissions (<i>chmod -Rv 777 tmp/database_backups</i>)";//0
-$LANG['help_blog'] = "Simple Invoices Blogg";//1
+$LANG['help_backup_database'] = "For the backup to work the webserver user(hopefully you're running Apache) must have read/write permissions to the database_backups directory in the SimpleInvoices folder<br /><br />Also if you are extra paranoid (like me :) ) about your data I recommend using phpMyAdmin.  This backup script should work fine but if require 'enterprise grade' backup reliability phpMyAdmin rocks.<br /><br />Note: If you are using SimpleInvoices in the demo environment on SourceForge, backups won't work due to setup of their servers.";//0
+$LANG['help_backup_database_fwrite'] = "<b>Got fwrite() errors?</b><br />If you received fwrite() errors when atempting to backup your SimpleInvoices database this means that the webserver user(hopefully you're running Apache) doesn't have read/write permissions to the tmp/database_backups directory in the SimpleInvoices folder<br /><br />Please change the permissions on this directory and attempt the backup again.  To change the permissions of the tmp/database_backups directory in Unix/Linix/OSX cd to the Simple Invoice directory (<i>cd /var/www/html/simpleinvoices</i>) and then issue the chmod command to give the webserver user read/write permissions (<i>chmod -Rv 777 tmp/database_backups</i>)";//0
+$LANG['help_blog'] = "SimpleInvoices Blogg";//1
 $LANG['help_community_forums'] = "Community Forums";//0
 $LANG['help_cost'] = "'Cost' refers to the the cost that this product costs you - this is used for inventory and profit calculation purposes";//0
 $LANG['help_currency_code'] = "Currency code is the 3 letter abbreviation for your currency of choice. ie. for US Dollars is 'USD' etc.. Note: this field is used for online payment methods like Paypal to define to currency";//0
@@ -214,7 +224,7 @@ $LANG['help_email_bcc'] = "Dette feltet er ikke påkrevd, det henter standardver
 $LANG['help_email_cc'] = "Dette feltet er ikke påkrevd. Her kan du spesifisere hvilken som helst e-post adresse du ønsker å CC.br /><br /><i>Obs: Du kan legge til flere e-post adresser her, separert med komma eller semikolon.</i>";//1
 $LANG['help_email_from'] = "Dette feltet er påkrevd og det henter standardverdien ifra operatørens e-post adresse. Du kan forandre denne e-post adressen som du selv ønsker men du kan kun ha én adresse i dette feltet.<br /><br /><i>Obs: Dette feltet kan kun inneholde én e-post adresse.</i>";//1
 $LANG['help_email_to'] = "Dette feltet er påkrevd og det henter standardverdien ifra kundens e-post adresse. Du kan forandre denne e-post adressen som du selv ønsker.<br /><br /><i>Obs: Du kan legge til flere e-post adresser her, separert med komma eller semikolon.</i>";//1
-$LANG['help_insert_biller_text'] = "Hvis du ikke ønsker logo så kan du velge '_default_blank_logo.png' ifra listen.<br /><br />Hvis du ønsker å bruke en egen logo i Simple Invoices, kopier logofilen inn til logomappen i Simple Invoices mappen.";//1
+$LANG['help_insert_biller_text'] = "Hvis du ikke ønsker logo så kan du velge '_default_blank_logo.png' ifra listen.<br /><br />Hvis du ønsker å bruke en egen logo i SimpleInvoices, kopier logofilen inn til logomappen i SimpleInvoices mappen.";//1
 $LANG['help_inv_pref_currency_sign'] = "Dette er valutategnet som vil bli brukt i fakturaen. <br /><br /><b>Obs:</b> Euro, Pund etc.. vennligst benytt deg av html-koden for ditt valutategn i dette feltet. Her er en referanseliste over valutategn <a href='http://www.ascii.cl/htmlcodes.htm'>http://www.ascii.cl/htmlcodes.htm</a>.  <br /><br />Dette er viktig slik at PDF skal fungere korrekt.<br /><br /> &#38;#163; er html-koden for pund,<br /> &#38;#8364; for euro, etc..";//1
 $LANG['help_inv_pref_description'] = "Dette er navnet på preferansen - det benyttes ikke i selve fakturaen, kun i listen over hvilken fakturapreferanser du ønsker å bruke under opprettelse av ny faktura.";//1
 $LANG['help_inv_pref_invoice_detail_heading'] = "Dette er hva som vil bli stående som tittel i bunnteksten samt seksjonen detaljer i fakturaen.";//1
@@ -230,28 +240,28 @@ $LANG['help_inv_pref_payment_line1_value'] = "Her kan du spesifisere betalingsli
 $LANG['help_inv_pref_payment_line2_name'] = "Her kan du spesifisere betalingslinje 2 navn f.eks. 'kontonummer'.";//1
 $LANG['help_inv_pref_payment_line2_value'] = "Her kan du spesifisere betalingslinje 2 navn f.eks. kontonummer '0123-4567-89'.";//1
 $LANG['help_inv_pref_status'] = "En preferanse kan ha status som enten 'Kladd' eller 'Åpen'. Kladd indikerer at det er et estimat og blir ikke inkludert i salgsrapporter. Åpen betyr at det er en reel faktura og den vil bli inkludert i salgsrapporter.";//1
-$LANG['help_inv_pref_what_the'] = "Invoice Preferences allows you to define the wording of the invoice.  You can have as many different 'Invoice Preferences' defined in Simple Invoices as you want, but you can only select 1 'Invoice Preference' per invoice.<br /><br />ie. If you wanted the heading of the invoice to say 'Moes Tavern - Invoice' instead of the default 'Invoice', you can edit the 'Invoice heading' field in the relevant Invoice Preference to achieve this result";//0
-$LANG['help_invoice_create'] = "Creating invoices is easy.  Once a biller and customer have been entered into Simple Invoices all you need to do is select an invoice type from the 'Invoice +' menu, fill in the details and click 'Save Invoice'.";//0
-$LANG['help_invoice_custom_fields'] = "Need more fields in the invoice screen? Want your own fields like 'Purchase Order', 'Project name' etc..<br /><br />Simple Invoices allows you to add whatever fields you want into the invoices.  These are called 'custom fields', to edit or setup your own fields select Custom Fields from the Options menu.";//0
-$LANG['help_invoice_types'] = "Det finnes to forskjellige typer fakturaer i Simple Invoices<br /><br />En <b>Artikkelbasert faktura</b> er en faktura som lister ut flere typer produkter med valgfrie notatområder for hver produktlinje - tenk på regnskapsføring for advokatfirma eller en matvarebutikk.<br/ ><br />En <b>Total faktura</b> er en faktura som lister ut hva som er gjort med totalsum og avgiftsklasse for hele jobben.";//1
-$LANG['help_logging'] = "For å logge handlinger utført i Simple Invoices kan du aktivere dette valget. Dette vil opprette en log i databasen over hvilke handlinger som blir utført.<br /><br />Obs: For øyeblikket kan du kun lese loggene direkte ifra databasen, vi vil etterhvert programmere en stilig loggleser i Simple Invoices.";//1
+$LANG['help_inv_pref_what_the'] = "Invoice Preferences allows you to define the wording of the invoice.  You can have as many different 'Invoice Preferences' defined in SimpleInvoices as you want, but you can only select 1 'Invoice Preference' per invoice.<br /><br />ie. If you wanted the heading of the invoice to say 'Moes Tavern - Invoice' instead of the default 'Invoice', you can edit the 'Invoice heading' field in the relevant Invoice Preference to achieve this result";//0
+$LANG['help_invoice_create'] = "Creating invoices is easy.  Once a biller and customer have been entered into SimpleInvoices all you need to do is select an invoice type from the 'Invoice +' menu, fill in the details and click 'Save Invoice'.";//0
+$LANG['help_invoice_custom_fields'] = "Need more fields in the invoice screen? Want your own fields like 'Purchase Order', 'Project name' etc..<br /><br />SimpleInvoices allows you to add whatever fields you want into the invoices.  These are called 'custom fields', to edit or setup your own fields select Custom Fields from the Options menu.";//0
+$LANG['help_invoice_types'] = "Det finnes to forskjellige typer fakturaer i SimpleInvoices<br /><br />En <b>Artikkelbasert faktura</b> er en faktura som lister ut flere typer produkter med valgfrie notatområder for hver produktlinje - tenk på regnskapsføring for advokatfirma eller en matvarebutikk.<br/ ><br />En <b>Total faktura</b> er en faktura som lister ut hva som er gjort med totalsum og avgiftsklasse for hele jobben.";//1
+$LANG['help_logging'] = "For å logge handlinger utført i SimpleInvoices kan du aktivere dette valget. Dette vil opprette en log i databasen over hvilke handlinger som blir utført.<br /><br />Obs: For øyeblikket kan du kun lese loggene direkte ifra databasen, vi vil etterhvert programmere en stilig loggleser i SimpleInvoices.";//1
 $LANG['help_mailing_list'] = "Mailing List";//0
 $LANG['help_manage_custom_fields'] = "Tilpassede felter er spesielle felter du kan fylle inn ekstra verdier i.<br /><br />Denne siden tillater deg å definere intil 4 egendefinerte felter for følgende: produkter, kunder, operatører og fakturaer.<br /><br />Straks du har definert ett av feltene vil de være tilgjengelig for bruk. F.eks. hvis du redigerer 'Faktura :: Tilpasset felt 1' og definerer dette som 'Prosjektnavn', vil du neste gang du oppretter en faktura se at det er et nytt felt i fakturavisningen med ditt definerte navn 'Prosjektnavn'";//1
-$LANG['help_mysql4'] = "Siden du benytter deg av MySQL 4 eller lavere er det en del valg under Simple Invoices som vil bli deaktivert. Noen sql spørringer i Simple Invoices benytter seg av nye funksjoner som kun er tilgjengelig i MySQL 5, slik at muligheter som hurtigrapporter her på siden, noen debitor rapporter samt noen andre funksjoner vil være deaktivert i Simple Invoices.";//1
+$LANG['help_mysql4'] = "Siden du benytter deg av MySQL 4 eller lavere er det en del valg under SimpleInvoices som vil bli deaktivert. Noen sql spørringer i SimpleInvoices benytter seg av nye funksjoner som kun er tilgjengelig i MySQL 5, slik at muligheter som hurtigrapporter her på siden, noen debitor rapporter samt noen andre funksjoner vil være deaktivert i SimpleInvoices.";//1
 $LANG['help_new_password'] = "Hvis du vil endre passord for brukeren kan du fylle ut dette feltet.<br /><br />OBS: La feltet være blankt hvis ikke.";//1
 $LANG['help_process_payment_auto_amount'] = "Verdien i <b>Verdi</b> feltet vil bli automatisk satt til verdien som er skyldig for den valgte fakturaen. Dette feltet kan redigeres og du kan endre verdien til det faktiske mottatte beløp.<br /><br />Dette feltet er automatisk satt til skyldig beløp fordi dette er det mest naturlige betalingsbeløpet.";//1
 $LANG['help_process_payment_details'] = "Once an invoice has been selected in the 'Invoice ID' field, the biller name, customer name. total of the invoice, amount already paid and the amount outstanding will be displayed in the 'Details' section of the Process Payment screen.<br /><br />If you don't see any information in the 'Details' section either you haven't selected a valid invoice in the 'Invoice ID' or you have not entered the invoice ID correctly. Please refer to Invoice ID on this page on how to enter the invoice ID correctly.";//0
 $LANG['help_process_payment_inv_id'] = "To select an invoice to process a payment against please enter the invoice number in the 'Invoice ID' field. This field is an 'auto-complete' field which means that say if you have 12 invoices in your database, when you enter '1' into this field it will return a drop down list of all the invoices with '1' in its <b>Invoice ID</b>.<br /><br />So invoices 1,10,11, and 12 will be returned if you enter '1'. To select the required invoice either use the navigations keys on your keyboard and click enter on the invoice of use your mouse and click on the invoice.<br /><br />Once an invoice has been selected using the above process all the details for this invoice will be displayed in the 'Details' section of the Process Payment screen.";//0
-$LANG['help_reports_xsl'] = "<b>Report errors</b><br />If you received a 'OOOOPS, THERE'S AN ERROR HERE.' error when you attempted to run a report in Simple Invoices this means that your version of PHP doesn't have the correct extentions installed(or enabled).<br /><br />If your running a Windows server and using WAMP5 please refer to the page on the Simple Invoices wiki for information on how to fix this http://simpleinvoices.org/wiki/doku.php?id=how_to_i_get_reports_working_in_windows_wamp5<br /><br />If your running Unix/Linux and PHP5 please make sure you have the xsl extension installed and enabled in your php.ini. On Ubuntu GNU/Linux please install the php-xsl package for PHP5 <br /><br />If your using PHP4 please make sure that your PHP has Sablotron support '--enable-xslt'<br /><br />Note: If you are using Simple Invoices in the demo environment on SourceForge reports won't work due to setup of their servers.";//0
+$LANG['help_reports_xsl'] = "<b>Report errors</b><br />If you received a 'OOOOPS, THERE'S AN ERROR HERE.' error when you attempted to run a report in SimpleInvoices this means that your version of PHP doesn't have the correct extentions installed(or enabled).<br /><br />If your running a Windows server and using WAMP5 please refer to the page on the SimpleInvoices wiki for information on how to fix this http://simpleinvoices.org/wiki/doku.php?id=how_to_i_get_reports_working_in_windows_wamp5<br /><br />If your running Unix/Linux and PHP5 please make sure you have the xsl extension installed and enabled in your php.ini. On Ubuntu GNU/Linux please install the php-xsl package for PHP5 <br /><br />If your using PHP4 please make sure that your PHP has Sablotron support '--enable-xslt'<br /><br />Note: If you are using SimpleInvoices in the demo environment on SourceForge reports won't work due to setup of their servers.";//0
 $LANG['help_required_field'] = "This is a mandatory field.  You have to enter a value in this field before you can save the form<br /><br />";//0
-$LANG['help_si_help'] = "Simple Invoices hjelp";//1
-$LANG['help_simple_invoices'] = "Simple Invoices is a basic invoicing system designed with simplicity and functionality in mind. Catering for the neds of small organisations and home users.<br /><br />For more information please refer to the Simple Invoices website:<a href='http://www.simpleinvoices.org' target='_blank'> <b>http://www.simpleinvoices.org</b></a>";//0
+$LANG['help_si_help'] = "SimpleInvoices hjelp";//1
+$LANG['help_simple_invoices'] = "SimpleInvoices is a basic invoicing system designed with simplicity and functionality in mind. Catering for the neds of small organisations and home users.<br /><br />For more information please refer to the SimpleInvoices website:<a href='http://www.simpleinvoices.org' target='_blank'> <b>http://www.simpleinvoices.org</b></a>";//0
 $LANG['help_street2'] = "The field 'Street Address 2' is used when the street address for the biller or customer is either too long to fit one one line or contains multiple parts.<br /><br />ie. the street address 'Level 234, 325 South Malvern Road' can be seperated into <br /><br />Street: Level 234<br />Street Address 2: 325 South Malvern Road";//0
 $LANG['help_tax_rate_sign'] = "A tax can be either a percentage based (ie. Sales Tax 10%) or a flat money values (ie. $10 or £20).<br /><br />The $ in the drop down only indicates that this will be a flat money rate and it doesnt indicate the currency symbol. The 'invoice preference' that you use dictates what the currency symbol will be in your invoices.";//0
-$LANG['help_text'] = "<b>Warning</b><br /><br />Please backup your Simple Invoices database before running the database update, just incase anything bad happens.<br /><br />To backup the database, select 'Backup Database' from the Options menu, or use phpMyAdmin(if you have this installed) to back up the database.";//0
-$LANG['help_user_role'] = "There are 3 roles available <br /><br />Administrator:<br />which has access to all of Simple Invoices<br /><br />User:<br />which has read/write acess to all of Simple Invoices but with no access to the Settings menu <br /><br />Viewer:<br />which has read-only version of User.";//0
+$LANG['help_text'] = "<b>Warning</b><br /><br />Please backup your SimpleInvoices database before running the database update, just incase anything bad happens.<br /><br />To backup the database, select 'Backup Database' from the Options menu, or use phpMyAdmin(if you have this installed) to back up the database.";//0
+$LANG['help_user_role'] = "There are 3 roles available <br /><br />Administrator:<br />which has access to all of SimpleInvoices<br /><br />User:<br />which has read/write acess to all of SimpleInvoices but with no access to the Settings menu <br /><br />Viewer:<br />which has read-only version of User.";//0
 $LANG['help_what_are_custom_fields'] = "Custom Fields are special fields in billers, products, customers, and invoices that you can label as whatever you want.<br /><br />Wish there was a Tax ID field in biller, just go to the Custom Fields page and define one of the blank Biller Custom Fields as Tax ID.<br /><br />Now when you go to edit a Biller there'll be a new field there called Tax ID or whatever you specified it as.";//0
-$LANG['help_wheres_the_edit_button'] = "In the Manage Payment screen there is no 'Edit' button. This is to provide a proper 'audit trail' of payments recorded in Simple Invoices.<br /><br />If you've made a mistake with a payment entry the best option is to reverse the entry and entery it again correctly<br /><br />Reverse the entry - what the?<br /> This basically means just doing a negative entry for the same amount as the original entry.<br /><br />ie.<br />If your entered \$110<br />but you should've entered \$1100<br />to reverse this entry enter -$110 against the same invoice and then enter the correct amount of \$1100";//0
+$LANG['help_wheres_the_edit_button'] = "In the Manage Payment screen there is no 'Edit' button. This is to provide a proper 'audit trail' of payments recorded in SimpleInvoices.<br /><br />If you've made a mistake with a payment entry the best option is to reverse the entry and entery it again correctly<br /><br />Reverse the entry - what the?<br /> This basically means just doing a negative entry for the same amount as the original entry.<br /><br />ie.<br />If your entered $110<br />but you should've entered $1100<br />to reverse this entry enter -$110 against the same invoice and then enter the correct amount of $1100";//0
 $LANG['hide_details'] = "Skjul detaljer";//1
 $LANG['home'] = "Hjem";//1
 $LANG['id'] = "ID";//1
@@ -263,11 +273,13 @@ $LANG['insert_customer'] = "Sett inn kunde";//1
 $LANG['insert_payment_type'] = "Sett inn betalingstype";//1
 $LANG['insert_preference'] = "Sett inn preferanse";//1
 $LANG['insert_product'] = "Sett inn produkt";//1
+$LANG['insert_product_attribute'] = "Insert Product Attribute";//0
+$LANG['insert_product_value'] = "Insert Product Value";//0
 $LANG['insert_tax_rate'] = "Sett inn avgiftsklasse";//1
 $LANG['installation'] = "Installasjon";//1
 $LANG['inv'] = "Faktura";//1
 $LANG['inv_consulting'] = " - Konsultasjon";//1
-$LANG['inv_itemised'] = " - Artikkel";//1
+$LANG['inv_itemized'] = " - Artikkel";//1
 $LANG['inv_pref'] = "Fakturapreferanse";//1
 $LANG['inv_pref_short'] = "Pref";//1
 $LANG['inv_total'] = " - Total";//1
@@ -318,6 +330,8 @@ $LANG['manage_invoices'] = "Håndter fakturaer";//1
 $LANG['manage_payment_types'] = "Håndter betalingstyper";//1
 $LANG['manage_payments'] = "Håndter betalinger";//1
 $LANG['manage_preferences'] = "Håndter preferanser";//1
+$LANG['manage_product_attributes'] = "Manage Product Attributes";//0
+$LANG['manage_product_values'] = "Manage Product Value";//0
 $LANG['manage_products'] = "Håndter produkter";//1
 $LANG['manage_tax_rates'] = "Håndter avgiftsklasser";//1
 $LANG['mandatory_fields'] = "Alle felter er obligatoriske";//1
@@ -402,10 +416,11 @@ $LANG['plugin_not_registered'] = "Ikke registrert";//1
 $LANG['plugin_register'] = "Registrer";//1
 $LANG['plugin_registered'] = "Registrert";//1
 $LANG['plugin_unregister'] = "Uregistrert";//1
+$LANG['powered_by'] = "Powered by";//0
 $LANG['preference'] = "preferanse";//1
 $LANG['preference_id'] = "Preferanse ID";//1
 $LANG['preferences'] = "Preferanser";//1
-$LANG['prepare_simple_invoices'] = "Klargjør Simple Invoices for bruk";//1
+$LANG['prepare_simple_invoices'] = "Klargjør SimpleInvoices for bruk";//1
 $LANG['price'] = "Pris";//1
 $LANG['print_preview'] = "Forhåndsvis";//1
 $LANG['print_preview_tooltip'] = "Forhåndsvisning av";//1
@@ -418,6 +433,7 @@ $LANG['process_payment_inv_id'] = "Kjør betaling faktura ID";//1
 $LANG['process_payment_via_eway'] = "Process Payment via Eway";//0
 $LANG['processing'] = "Behandler, vennligst vent ...";//1
 $LANG['product'] = "Produkt";//1
+$LANG['product_attribute'] = "Product Attribute";//0
 $LANG['product_attributes'] = "Product Attributes";//0
 $LANG['product_description'] = "Produktbeskrivelse";//1
 $LANG['product_description_prompt'] = "You must enter a description for the product";//0
@@ -427,6 +443,7 @@ $LANG['product_id'] = "Produkt ID";//1
 $LANG['product_sales'] = "Produktsalg";//1
 $LANG['product_to_add'] = "Produkt å legge til";//1
 $LANG['product_unit_price'] = "Produkt enhetspris";//1
+$LANG['product_value'] = "Product Value";//0
 $LANG['product_values'] = "Product Values";//0
 $LANG['products'] = "Produkter";//1
 $LANG['products_by_customer'] = "Produkter etter kunde";//1
@@ -507,8 +524,7 @@ $LANG['setup_customisation'] = "Hvis du har bruk for å tilpasse noen av instill
 $LANG['shortcut'] = " Snarvei meny";//1
 $LANG['show_details'] = "Vis detaljer";//1
 $LANG['show_only_unpaid_invoices'] = "Show only unpaid invoices";//0
-$LANG['simple_invoices'] = "Simple Invoices";//1
-$LANG['simple_invoices_powered_by'] = "Powered by Simple Invoices";//0
+$LANG['simple_invoices'] = "SimpleInvoices";//1
 $LANG['start_date'] = "Start date (YYYY-MM-DD)";//0
 $LANG['start_date_short'] = "Start date";//0
 $LANG['start_working'] = "Start å jobb";//1
@@ -544,8 +560,26 @@ $LANG['tax_rate_to_add'] = "Avgiftsklasse å legge til";//1
 $LANG['tax_rates'] = "Avgiftsklasser";//1
 $LANG['tax_total'] = "Total inkludert avgift";//1
 $LANG['telephone_short'] = "Tlf";//1
-$LANG['thank_you'] = "Takk for at du valgte Simple Invoices!";//1
+$LANG['thank_you'] = "Takk for at du valgte SimpleInvoices!";//1
 $LANG['thank_you_inv'] = "Takk for at du fakturerer med ";//1
+$LANG['title_module_billers'] = "People / Billers";//0
+$LANG['title_module_cron'] = "Money / Recurrence";//0
+$LANG['title_module_custom_fields'] = "Settings / Custom Fields";//0
+$LANG['title_module_customers'] = "People / Customers";//0
+$LANG['title_module_index'] = "Hjem";//1
+$LANG['title_module_invoices'] = "Money / Invoices";//0
+$LANG['title_module_options'] = "Settings";//0
+$LANG['title_module_payment_types'] = "Settings / Payment Types";//0
+$LANG['title_module_payments'] = "Money / Payments";//0
+$LANG['title_module_preferences'] = "Settings / Invoice Preferences";//0
+$LANG['title_module_product_attribute'] = "Products / Product Attributes";//0
+$LANG['title_module_product_value'] = "Products / Product Values";//0
+$LANG['title_module_products'] = "Products";//0
+$LANG['title_module_reports'] = "Home / Reports";//0
+$LANG['title_module_system_defaults'] = "Settings / System Preferences";//0
+$LANG['title_module_tax_rates'] = "Settings / Tax Rates";//0
+$LANG['title_module_user'] = "People / Users";//0
+$LANG['title_view_index'] = "Dashboard";//0
 $LANG['to'] = "Til";//1
 $LANG['to_lowercase'] = "to";//0
 $LANG['toggle_status'] = "Skifte status";//1
@@ -567,10 +601,10 @@ $LANG['type'] = "Type";//1
 $LANG['unit_cost'] = "Enhetskostnad";//1
 $LANG['unit_price'] = "Enhetspris";//1
 $LANG['unpaid_invoices'] = "Unpaid Invoices";//0
-$LANG['upgrading_simple_invoices'] = "Oppgraderer Simple Invoices";//1
+$LANG['upgrading_simple_invoices'] = "Oppgraderer SimpleInvoices";//1
 $LANG['user_add'] = "Legg til bruker";//1
 $LANG['users'] = "Brukere";//1
-$LANG['using_simple_invoices'] = "Bruk Simple Invoices";//1
+$LANG['using_simple_invoices'] = "Bruk SimpleInvoices";//1
 $LANG['value'] = "Verdi";//1
 $LANG['view'] = "Vis";//1
 $LANG['visible'] = "Visible";//0
@@ -586,32 +620,3 @@ $LANG['years'] = "years";//0
 $LANG['yes'] = "Ja";//1
 $LANG['your_reports'] = "Dine rapporter";//1
 $LANG['zip'] = "Postnummer";//1
-$LANG['manage_product_attributes'] = "Manage Product Attributes";//0
-$LANG['add_product_attribute'] = "Add Product Attribute";//0
-$LANG['insert_product_attribute'] = "Insert Product Attribute";//0
-$LANG['product_attribute'] = "Product Attribute";//0
-$LANG['add_product_value'] = "Add Product Value";//0
-$LANG['insert_product_value'] = "Insert Product Value";//0
-$LANG['product_value'] = "Product Value";//0
-$LANG['manage_product_values'] = "Manage Product Value";//0
-
-$LANG['title_module_index']				= "Hjem";//1
-$LANG['title_module_reports']			= "Home / Reports";//0
-$LANG['title_module_invoices']			= "Money / Invoices";//0
-$LANG['title_module_cron']				= "Money / Recurrence";//0
-$LANG['title_module_payments']			= "Money / Payments";//0
-$LANG['title_module_billers']			= "People / Billers";//0
-$LANG['title_module_customers']			= "People / Customers";//0
-$LANG['title_module_user']				= "People / Users";//0
-$LANG['title_module_products']			= "Products";//0
-$LANG['title_module_product_attribute']	= "Products / Product Attributes";//0
-$LANG['title_module_product_value']		= "Products / Product Values";//0
-$LANG['title_module_options']			= "Settings";//0
-$LANG['title_module_system_defaults']	= "Settings / System Preferences";//0
-$LANG['title_module_custom_fields']		= "Settings / Custom Fields";//0
-$LANG['title_module_tax_rates']			= "Settings / Tax Rates";//0
-$LANG['title_module_preferences']		= "Settings / Invoice Preferences";//0
-$LANG['title_module_payment_types']		= "Settings / Payment Types";//0
-$LANG['title_view_index']				= "Dashboard";//0
-
-?>

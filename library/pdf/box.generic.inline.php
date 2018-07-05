@@ -1,7 +1,7 @@
 <?php
 class GenericInlineBox extends GenericContainerBox {
-  function GenericInlineBox() {
-    $this->GenericContainerBox();
+  function __construct() {
+    parent::__construct();
   }
 
   // @todo this code is duplicated in box.block.php
@@ -14,13 +14,13 @@ class GenericInlineBox extends GenericContainerBox {
     case POSITION_RELATIVE:
       /**
        * CSS 2.1:
-       * Once a box has been laid out according to the normal flow or floated, it may be shifted relative 
+       * Once a box has been laid out according to the normal flow or floated, it may be shifted relative
        * to this position. This is called relative positioning. Offsetting a box (B1) in this way has no
-       * effect on the box (B2) that follows: B2 is given a position as if B1 were not offset and B2 is 
+       * effect on the box (B2) that follows: B2 is given a position as if B1 were not offset and B2 is
        * not re-positioned after B1's offset is applied. This implies that relative positioning may cause boxes
        * to overlap. However, if relative positioning causes an 'overflow:auto' box to have overflow, the UA must
        * allow the user to access this content, which, through the creation of scrollbars, may affect layout.
-       * 
+       *
        * @link http://www.w3.org/TR/CSS21/visuren.html#x28 CSS 2.1 Relative positioning
        */
 
@@ -37,11 +37,11 @@ class GenericInlineBox extends GenericContainerBox {
   // @return true if line break occurred; false otherwise
   //
   function maybe_line_break(&$parent, &$context) {
-    if (!$parent->line_break_allowed()) { 
-      return false; 
+    if (!$parent->line_break_allowed()) {
+      return false;
     };
 
-    // Calculate the x-coordinate of this box right edge 
+    // Calculate the x-coordinate of this box right edge
     $right_x = $this->get_full_width() + $parent->_current_x;
 
     $need_break = false;
@@ -70,15 +70,15 @@ class GenericInlineBox extends GenericContainerBox {
       };
     }
 
-    // As close-line will not change the current-Y parent coordinate if no 
+    // As close-line will not change the current-Y parent coordinate if no
     // items were in the line box, we need to offset this explicitly in this case
     //
     if ($parent->line_box_empty() && $need_break) {
       $parent->_current_y -= $this->get_height();
     };
 
-    if ($need_break) { 
-      $parent->close_line($context); 
+    if ($need_break) {
+      $parent->close_line($context);
 
       // Check if parent inline boxes have left padding/margins and add them to current_x
       $element = $this->parent;

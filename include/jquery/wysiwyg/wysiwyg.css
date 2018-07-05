@@ -54,13 +54,12 @@ div.wysiwyg ul.panel li a.removeFormat { background-position: -80px -64px; }
 
 div.wysiwyg ul.panel li a.empty { background-position: -64px -80px; }
 
-
-
-
-div.wysiwyg iframe { border: 0; padding-right: 8px; clear: left; 
-background-color:#FFFFFF;
-background-image:url(../../../images/common/text-bg.gif);
-background-repeat:repeat-x;
-
-
+div.wysiwyg iframe {
+    border: 0;
+    padding-right: 8px;
+    clear: left; 
+    background-color:#FFFFFF;
+    background-image:url(../../../images/common/text-bg.gif);
+    background-repeat:repeat-x;
+    resize: both;
 }

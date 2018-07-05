@@ -14,7 +14,7 @@
 
 {capture name=hook_head_end}
 
-	<link rel="stylesheet" type="text/css" href="./custom/my_medias/my.css" />
+	<link rel="stylesheet" type="text/css" href="custom/my_medias/my.css" />
 
 {/capture}
 

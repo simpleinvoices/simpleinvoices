@@ -9,15 +9,15 @@ class PaddingSideValue {
   var $_units;
 
   function calcPercentage($base) {
-    if (is_null($this->percentage)) { 
-      return; 
-    };
+    if (is_null($this->percentage)) {
+      return;
+    }
 
     $this->value = $base * $this->percentage / 100;
   }
 
   function &copy() {
-    $value =& new PaddingSideValue;
+    $value =  new PaddingSideValue;
     $value->value      = $this->value;
     $value->auto       = $this->auto;
     $value->percentage = $this->percentage;
@@ -30,7 +30,7 @@ class PaddingSideValue {
   }
 
   function is_default() {
-    return 
+    return
       $this->value == 0 &&
       !$this->auto &&
       !$this->percentage;
@@ -41,7 +41,7 @@ class PaddingSideValue {
     $is_percentage = false;
     if ($len > 0) {
       $is_percentage = ($data{$len-1} === '%');
-    };
+    }
 
     $value = new PaddingSideValue;
     $value->_units     = Value::fromString($data);
@@ -54,7 +54,7 @@ class PaddingSideValue {
   function units2pt($base) {
     if (is_null($this->percentage)) {
       $this->value = $this->_units->toPt($base);
-    };
+    }
   }
 }
 
@@ -68,26 +68,26 @@ class PaddingValue extends CSSValue {
     if ($this->top === CSS_PROPERTY_INHERIT) {
       $value = $state->getInheritedProperty(CSS_PADDING_TOP);
       $this->top = $value->copy();
-    };
+    }
 
     if ($this->bottom === CSS_PROPERTY_INHERIT) {
       $value = $state->getInheritedProperty(CSS_PADDING_BOTTOM);
       $this->bottom = $value->copy();
-    };
+    }
 
     if ($this->right === CSS_PROPERTY_INHERIT) {
       $value = $state->getInheritedProperty(CSS_PADDING_RIGHT);
       $this->right = $value->copy();
-    };
+    }
 
     if ($this->left === CSS_PROPERTY_INHERIT) {
       $value = $state->getInheritedProperty(CSS_PADDING_LEFT);
       $this->left = $value->copy();
-    };
+    }
   }
 
   function &copy() {
-    $value =& new PaddingValue;
+    $value =  new PaddingValue;
     $value->top    = ($this->top    === CSS_PROPERTY_INHERIT) ? CSS_PROPERTY_INHERIT : $this->top->copy();
     $value->bottom = ($this->bottom === CSS_PROPERTY_INHERIT) ? CSS_PROPERTY_INHERIT : $this->bottom->copy();
     $value->left   = ($this->left   === CSS_PROPERTY_INHERIT) ? CSS_PROPERTY_INHERIT : $this->left->copy();
@@ -96,7 +96,7 @@ class PaddingValue extends CSSValue {
   }
 
   function is_default() {
-    return 
+    return
       $this->left->is_default() &&
       $this->right->is_default() &&
       $this->top->is_default() &&
@@ -126,5 +126,3 @@ class PaddingValue extends CSSValue {
     $this->right->calcPercentage($base);
   }
 }
-
-?>
