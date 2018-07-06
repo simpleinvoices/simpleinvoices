@@ -351,7 +351,7 @@ class invoice {
                       ELSE '90+'
                      END) AS Aging,
                      iv.type_id As type_id,
-                     p.pref_description AS type,
+                     p.pref_description AS `type`,
                      p.pref_inv_wording AS invoice_wording
                 FROM
                      " . TB_PREFIX . "invoices iv
@@ -363,15 +363,15 @@ class invoice {
 				WHERE iv.domain_id = :domain_id 
 					$where
                 GROUP BY
-                    iv.id, b.name, c.name, date, age, aging, type
+                    iv.id, b.name, c.name, Date, Age, Aging, `type`
                 ORDER BY
                     $sort $dir
                 LIMIT $limit OFFSET $start";
                 break;
             case "pdo_mysql":
             default:
-               $sql ="
-                SELECT  
+                $sql ="
+                    SELECT  
                        iv.id,
                        iv.index_id as index_id,
                        b.name AS biller,
@@ -386,23 +386,23 @@ class invoice {
                        ";
 
               //only run aging for real full query ($type is empty for full query or count for count query)
-               if($type == '')
-               {
+                if($type == '')
+                {
                     $sql .="
-                       (SELECT IF((owing = 0 OR owing < 0), 0, DateDiff(now(), date))) AS Age,
-                       (SELECT (CASE   WHEN Age = 0 THEN ''
-                                                       WHEN Age <= 14 THEN '0-14'
-                                                       WHEN Age <= 30 THEN '15-30'
-                                                       WHEN Age <= 60 THEN '31-60'
-                                                      WHEN Age <= 90 THEN '61-90'
-                                                      ELSE '90+'  END)) AS aging,";
-               } else {
-                   $sql .="
-                            '' as Age,
-                            '' as aging,
-                            ";
-               }
-               $sql .="iv.type_id As type_id,
+                       (SELECT IF((owing <= 0 OR DateDiff(now(), date) < 0), 0, DateDiff(now(), date))) AS Age,
+                       (SELECT (CASE WHEN Age >= 0 THEN ''
+                                     WHEN Age <= 14 THEN '0-14'
+                                     WHEN Age <= 30 THEN '15-30'
+                                     WHEN Age <= 60 THEN '31-60'
+                                     WHEN Age <= 90 THEN '61-90'
+                                     ELSE '90+'  END)) AS aging,";
+                } else {
+                    $sql .="
+                        '' as Age,
+                        '' as aging,
+                        ";
+                }
+                $sql .="iv.type_id As type_id,
                        pf.pref_description AS preference,
                        pf.status AS status,
                        (SELECT CONCAT(pf.pref_inv_wording,' ',iv.index_id)) as index_name
