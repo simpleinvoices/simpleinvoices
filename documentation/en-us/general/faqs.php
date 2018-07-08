@@ -19,6 +19,7 @@
       <dt><a class="intro" href="#faqs-how">How do I create invoices?</a></dt>
       <dt><a class="intro" href="#faqs-clone">How do I set up a default invoice for a customer?</a></dt>
       <dt><a class="intro" href="#faqs-types">What are the different invoice types?</a></dt>
+      <dt><a class="intro" href="#faqs-largeds">What does the <em>&quot;Large Dataset&quot;</em> System Preference setting do?</a></dt>
       <dt><a class="intro" href="#cron">Recurrence (aka cron)</a></dt>
     </dl>
     <br />
@@ -63,6 +64,17 @@
           item there is a detailed description of the work performed/product sold. For example an invoice from an
           accounting or legal firm.</li>
       </ul>
+    <a class="hook" id="faqs-largeds"><b>What does the <em>&quot;Large Dataset&quot;</em> System Preference setting do?</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
+      <p>There is a <em>Large Dataset</em> option in the System Preferences that if enabled causes two things to happen when the primary screen
+        (list of invoices) data is selected.</p>
+      <ol>
+        <li>First, it does not do an age calculation. So the Aging field is always blank.</li>
+        <li>Second, it gets the count of all invoices rather than those that meet the same selection criteria as the invoices being displayed. This "count"
+          (aka total) is displayed at the bottom of the list as <b>&quot;Displaying 1 to 15 of XXX items&quot;</b>. So if you have say 10000 invoices and
+          use the selection tool (the magnifying glass in the lower left corner) to select by Customers (for example), the <b>&quot;XXX&quot;</b> normally
+          is the total number of invoices for that customer. If <em>Large Dataset</em> is enabled, this will remain the total of all invoices in the database.</li>
+      </ol>
+      <p>The theory is that the selection criteria overhead is significant enough that not doing it will speed things up noticeably.</p>
     <a class="hook" id="cron"><b>Recurrence</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
       <h2>Setup:</h2>
       <ol>
