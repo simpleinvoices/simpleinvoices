@@ -84,8 +84,8 @@ class PdoDb {
         } catch (PDOException $e) {
             $str = "PdoDb - construct error: " . $e->getMessage();
             error_log($str);
-            error_log("dbinfo - " . print_r($dbinfo));
-            error_log(print_r($e));
+            error_log("dbinfo - " . print_r($dbinfo,true));
+            error_log(print_r($e,true));
             throw new PdoDbException($str);
         }
     }

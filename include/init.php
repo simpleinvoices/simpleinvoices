@@ -71,7 +71,7 @@ switch($logger_level) {
     case 'DEBUG':
         $level = Zend_Log::DEBUG;
         break;
-    
+
     case 'INFO':
         $level = Zend_Log::INFO;
         break;
@@ -108,9 +108,19 @@ try {
     $dbInfo = new DbInfo(CONFIG_FILE_PATH, "production");
 } catch (PdoDbException $pde) {
     if (preg_match('/.*{dbname|password|username}/', $pde->getMessage())) {
-        echo "<h1 style='font-weigth:bold;color:red;'>";
-        echo "  Update database information in config/config.php";
-        echo "</h1>";
+        echo "<h1 style='font-weigth:bold;color:red;'>Initial setup. Follow the following instructions:</h1>";
+        echo "<ol>";
+        echo "  <li>Make a mySQL compatible database with a user that has full access to it.</li>";
+        echo "  <li>In the \"config\" directory, copy the <b>config.php</b> file to <b>custom.config.php</b></li>";
+        echo "  <li>Modify the database settings in the <b>custom.config.php</b> file for the database made in step 1.";
+        echo "    <ul>";
+        echo "      <li>Set <b>database.params.dbname</b> to the name of the database.";
+        echo "      <li>Set <b>database.params.username</b> to the username of the database administrator.</li>";
+        echo "      <li>Set <b>database.params.password</b> to the database administrator password. Note you might need to include this in single quotes.</li>";
+        echo "    </ul>";
+        echo "  </li>";
+        echo "  <li>In your browser, execute the command to access SI again and follow the instructions.</li>";
+        echo "</ol>";
     } else {
         echo "<h1 style='font-weigth:bold;color:red;'>";
         echo "  " . $pde->getMessage() . " (Error code: {$pde->getCode})";
