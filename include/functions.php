@@ -197,14 +197,17 @@ function simpleInvoicesError($type, $info1 = "", $info2 = "") {
             <br />
             <br />
             If this is an &quot;Access denied&quot; error please enter the correct database
-            connection details config/config.php
+            connection details config/custom.config.php. If you don't have a custom.config.php
+            file in the config directory, copy the config.php file and name the copy
+            custom.config.php.
             <br />
             <br />
             <b>Note:</b> If you are installing Simple Invoices please follow the below steps:
             <br />
-            1. Create a blank MySQL database
+            1. Create a blank MySQL database (cPanel or myPHPAdmin). Defined a DB Admin user
+            name with full access to this database. Assign a password to this DB Admin user.
             <br />
-            2. Enter the correct database connection details in the config/config.php file
+            2. Enter the correct database connection details in the config/custom.config.php file.
             <br />
             3. Refresh this page
             <br />
