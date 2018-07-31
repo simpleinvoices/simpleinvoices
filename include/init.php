@@ -5,11 +5,15 @@
 global $api_request;
 if (!isset($api_request)) $api_request = false;
 
-set_include_path(get_include_path() . PATH_SEPARATOR . "./library/");
-set_include_path(get_include_path() . PATH_SEPARATOR . "./library/pdf");
-set_include_path(get_include_path() . PATH_SEPARATOR . "./library/pdf/fpdf");
-set_include_path(get_include_path() . PATH_SEPARATOR . "./include/");
-set_include_path(get_include_path() . PATH_SEPARATOR . "./include/class");
+$lcl_path = get_include_path() .
+    PATH_SEPARATOR . "./library/" .
+    PATH_SEPARATOR . "./library/pdf" .
+    PATH_SEPARATOR . "./library/pdf/fpdf" .
+    PATH_SEPARATOR . "./include/" .
+    PATH_SEPARATOR . "./include/class";
+if (set_include_path($lcl_path) === false) {
+    error_log("Error reported by set_include_path() for path: {$lcl_path}");
+}
 
 require_once ("smarty/libs/Smarty.class.php");
 require_once 'Zend/Loader/Autoloader.php';
