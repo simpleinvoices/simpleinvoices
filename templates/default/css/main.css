@@ -1453,7 +1453,7 @@ a.si_hide,
 .si_invoice_form {
     display: block;
     margin: 0 auto;
-    width: 650px;
+    width: 90%;
 }
 
 .si_invoice_top,
