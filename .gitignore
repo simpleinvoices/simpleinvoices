@@ -16,3 +16,6 @@ templates/invoices/**
 !templates/invoices/logos/_default_blank_logo.png
 !templates/invoices/logos/simple_invoices_logo.png
 !templates/invoices/logos/ubuntulogo.png
+
+### PhpStorm intelliJ folder ###
+.idea/**
