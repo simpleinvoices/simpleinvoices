@@ -9,6 +9,7 @@ class Invoice {
      * Insert a new invoice record
      * @param array Associative array of items to insert into invoice record.
      * @return integer Unique ID of the new invoice record.
+     * @throws PdoDbException
      */
     public static function insert($list) {
         global $pdoDb;
@@ -33,6 +34,7 @@ class Invoice {
      * Insert a new invoice_item and the invoice_item_tax records.
      * @param array Associative array keyed by field name with its assigned value.
      * @return integer Unique ID of the new invoice_item record.
+     * @throws PdoDbException
      */
     private static function insert_item($list, $tax_ids) {
         global $pdoDb;
@@ -65,6 +67,7 @@ class Invoice {
      * @param string $unit_price
      * @param string $attribute
      * @return integer <b>id</b> of new <i>invoice_items</i> record.
+     * @throws PdoDbException
      */
     public static function insertInvoiceItem($invoice_id, $quantity, $product_id, $tax_ids,
                                              $description = "", $unit_price = "", $attribute = "") {
@@ -104,6 +107,7 @@ class Invoice {
      *
      * @param integer $invoice_id
      * @return boolean <b>true</b> if update successful; otherwise <b>false</b>.
+     * @throws PdoDbException
      */
     public static function updateInvoice($invoice_id) {
         global $pdoDb;
@@ -149,6 +153,7 @@ class Invoice {
      * @param float $unit_price Price of each unit of this item.
      * @param string $attribute Attributes for invoice.
      * @return boolean true always returned.
+     * @throws PdoDbException
      */
     public static function updateInvoiceItem($id    , $quantity   , $product_id,
                                              $tax_ids, $description, $unit_price, $attribute) {
@@ -231,6 +236,7 @@ class Invoice {
      *
      * @param integer $id
      * @return array $invoice
+     * @throws PdoDbException
      */
     public static function select($id) {
         global $pdoDb;
@@ -276,6 +282,7 @@ class Invoice {
     /**
      * Get all the inovice records with associated information.
      * @return array invoice records.
+     * @throws PdoDbException
      */
     public static function get_all() {
         global $pdoDb;
@@ -298,6 +305,11 @@ class Invoice {
         return $rows;
     }
 
+    /**
+     * Calculate the number of invoices in the database
+     * @return integer Count of invoices in the database
+     * @throws PdoDbException
+     */
     public static function count() {
         global $pdoDb;
 
@@ -309,6 +321,12 @@ class Invoice {
         return $rows[0]['count'];
     }
 
+    /**
+     * Get a specific invoice from the database.
+     * @param $id
+     * @return array
+     * @throws PdoDbException
+     */
     public static function getInvoice($id) {
         global $pdoDb;
 
@@ -384,6 +402,7 @@ class Invoice {
      * </table>
      * @param string $option A valid option from the list above.
      * @param mixed $parms Parameter values required by the specified option.
+     * @return mixed havings SQL statement
      */
     public static function buildHavings($option, $parms=null) {
         $havings = new Havings();
@@ -428,6 +447,7 @@ class Invoice {
      * @param string $qtype Special query field name.
      * @param string $query Value to look for. Will be enclosed in wildcards and searched using <i>LIKE</i>.
      * @return array Selected rows.
+     * @throws PdoDbException
      */
     public static function select_all($type="", $sort="", $dir="", $rp=null, $page="", $qtype="", $query="") {
         global $auth_session, $pdoDb;
@@ -573,6 +593,7 @@ class Invoice {
      * Get Invoice type.
      * @param string $id Invoice type ID.
      * @return array Associative array for <i>invoice_type</i> record accessed.
+     * @throws PdoDbException
      */
     public static function getInvoiceType($id) {
         global $pdoDb;
@@ -586,6 +607,8 @@ class Invoice {
      * Used to get the gross total for a given Invoice number
      * @param integer $invoice_id Unique ID (si_invoices id value) of invoice for which
      *        gross totals from si_invoice_items will be summed.
+     * @return float Gross total amount for the invoice.
+     * @throws PdoDbException
      */
     private static function getInvoiceGross($invoice_id) {
         global $pdoDb;
@@ -600,6 +623,7 @@ class Invoice {
      * @param integer $invoice_id Unique ID (si_invoices id value) of invoice for which
      *        totals from si_invoice_items will be summed.
      * @return float
+     * @throws PdoDbException
      */
     private static function getInvoiceTotal($invoice_id) {
         global $pdoDb;
@@ -614,6 +638,7 @@ class Invoice {
      * Calculates the total tax for a given invoices
      * @params integer invoice_id The name of the field, ie. Custom Field 1, etc..
      * @return float Total tax amount.
+     * @throws PdoDbException
      */
     private static function calc_invoice_tax($invoice_id) {
         global $pdoDb;
@@ -650,6 +675,7 @@ class Invoice {
      * Generates a nice summary of total $ for tax for an invoice
      * @param integer $invoice_id The <b>id</b> column for the invoice to get info for.
      * @return array Rows retrieve.
+     * @throws PdoDbException
      */
     private static function taxesGroupedForInvoice($invoice_id) {
         global $pdoDb;
@@ -679,10 +705,13 @@ class Invoice {
         return $rows;
     }
 
-    /*
+    /**
      * Function: taxesGroupedForInvoiceItem
      * Purpose: to show a nice summary of total $ for tax for an invoice item.
      * Used for invoice editing
+     * @param integer Invoice item ID
+     * @return array Items found
+     * @throws PdoDbException
      */
     private static function taxesGroupedForInvoiceItem($invoice_item_id) {
         global $pdoDb;
@@ -707,6 +736,7 @@ class Invoice {
      * Retrieve maximum invoice number assigned.
      * @param string $domain_id
      * @return integer Maximum invoice number assigned.
+     * @throws PdoDbException
      */
     public static function maxIndexId($domain_id="") {
         global $pdoDb;
@@ -719,6 +749,12 @@ class Invoice {
         return $rows[0]['maxIndexId'];
     }
 
+    /**
+     * Process a recurring item
+     * @param $invoice_id
+     * @return int
+     * @throws PdoDbException
+     */
     public static function recur($invoice_id) {
         global $config;
         $timezone = $config->phpSettings->date->timezone;
@@ -769,6 +805,7 @@ class Invoice {
      * @param int $inv_ty_id Unique ID for <b>si_invoice_type</b> table.
      * @param int $pref_id Unique ID for <b>si_preferences</b> table.
      * @return boolean true if keys all test true; false otherwise.
+     * @throws PdoDbException
      * TODO: Add FK logic to database.
      */
     private static function invoice_check_fk($biller_id, $customer_id, $inv_ty_id, $pref_id) {
@@ -814,9 +851,10 @@ class Invoice {
      * written to the database.
      * @param int $invoice_id Unique ID for <b>si_invoices</b> table.
      * @param int $product_id Unique ID for <b>si_products</b> table.
-     * @param int $tax_id Unique ID for <b>si_tax</b> table.
+     * @param int $tax_ids Unique ID for <b>si_tax</b> table.
      * @param boolean $update <b>true</b> if check update constraints; <b>false</b> otherwise.
      * @return boolean true if keys all test true; false otherwise.
+     * @throws PdoDbException
      * TODO: Add FK logic to database.
      */
     private static function invoice_items_check_fk($invoice_id, $product_id, $tax_ids, $update) {
