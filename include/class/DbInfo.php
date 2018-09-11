@@ -9,6 +9,7 @@ require_once 'include/class/MyCrypt.php';
 class DbInfo {
     private $dbname;
     private $adapter;
+    private $filepath;
     private $host;
     private $password;
     private $port;
@@ -24,6 +25,7 @@ class DbInfo {
      * @param string (Optional) $prefix Value that is at the first part of the field separated from the
      *        rest of the parameter name by a period. Ex: <i>database.adapter</i> is the <i>adapter</i>
      *        field with a prefix of <i>database</i>.
+     * @throws PdoDbException
      */
     public function __construct($filepath, $sectionname, $prefix=null) {
         $this->adapter  = "mysql";
@@ -43,7 +45,7 @@ class DbInfo {
      * @param string $prefix Value that is at the first part of the field separated from the
      *        rest of the parameter name by a period. Ex: <i>database.adapter</i> is the <i>adapter</i>
      *        field with a prefix of <i>database</i>.
-     * @throws PdoException If unable to open the file and file the section name and data to decrypt.
+     * @throws PdoDbException If unable to open the file and file the section name and data to decrypt.
      */
     public function loadSectionInfo($filepath, $sectionname, $prefix) {
         global $site_id;
