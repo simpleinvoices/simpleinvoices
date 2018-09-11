@@ -6,6 +6,7 @@ class Taxes {
      * @param string $id Unique ID record to retrieve.
      * @param string $domain_id Domain ID logged into.
      * @return array Row retrieved. Test for "=== false" to check for failure.
+     * @throws PdoDbException
      */
     public static function getTaxRate($tax_id, $domain_id="") {
         global $LANG, $pdoDb;
@@ -28,6 +29,7 @@ class Taxes {
      * Get all active taxes records.
      * @param string $domain_id Domain ID logged into.
      * @return array Rows retrieved.
+     * @throws PdoDbException
      */
     public static function getActiveTaxes() {
         global $LANG, $pdoDb;
@@ -55,11 +57,11 @@ class Taxes {
 
     /**
      * Get tax table rows.
-     * @param string $domain_id Domain user is logged into.
      * @return array Rows retrieved.
      *         Note that a field named, "wording_for_enabled", was added to store the $LANG
      *         enable or disabled word depending on the "pref_enabled" setting
      *         of the record.
+     * @throws PdoDbException
      */
     public static function getTaxes() {
         global $LANG, $pdoDb;
@@ -81,8 +83,8 @@ class Taxes {
 
     /**
      * Get a default tax record.
-     * @param string $domain_id Domain user is logged into.
      * @return array Default tax record.
+     * @throws PdoDbException
      */
     public static function getDefaultTax() {
         global $pdoDb;
@@ -102,6 +104,7 @@ class Taxes {
     /**
      * Insert a new tax rate.
      * @return string Standard "Save tab rate success/failure" message.
+     * @throws PdoDbException
      */
     public static function insertTaxRate() {
         global $LANG, $pdoDb;
@@ -121,6 +124,7 @@ class Taxes {
     /**
      * Update tax rate.
      * @return string Standard "Save tab rate success/failure" message.
+     * @throws PdoDbException
      */
     public static function updateTaxRate() {
         global $LANG, $pdoDb;
@@ -143,6 +147,8 @@ class Taxes {
      * @param int $quantity Number of units.
      * @param int $unit_price Price of each unit.
      * @param string $domain_id SI domain being processed.
+     * @return float Total tax
+     * @throws PdoDbException
      */
     public static function getTaxesPerLineItem($line_item_tax_id, $quantity, $unit_price, $domain_id = '') {
         $domain_id = domain_id::get($domain_id);
