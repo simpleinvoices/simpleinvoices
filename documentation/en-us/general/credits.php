@@ -13,13 +13,13 @@
   <br/>
   <br/>
   <div id="left" style="margin-left:30px;">
-    SimpleInvoices is <a href="https://simpleinvoices.group/philosophy#free_software">free, open source software</a>
-    <a href="https://simpleinvoices.group/philosophy#community_developed">developed by the SimpleInvoices community</a>.
+    SimpleInvoices is <a href="https://simpleinvoices.group/philosophy#free_software" target="_blank">free, open source software</a>
+    <a href="https://simpleinvoices.group/philosophy#community_developed" target="_blank">developed by the SimpleInvoices community</a>.
     <br/>
     <br/>
     For a full list of contributers (developers, translators, financial supporters, etc.) and
     software libraries, please refer to our website credits page,
-    <a href="https://simpleinvoices.group/credits">https://simpleinvoices.group/credits</a>
+    <a href="https://simpleinvoices.group/credits" target="_blank">https://simpleinvoices.group/credits</a>
   </div>
 </body>
 </html>
