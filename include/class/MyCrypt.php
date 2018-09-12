@@ -9,13 +9,14 @@ class MyCrypt {
      * @return string Encrypted string.
      */
     public static function encrypt($encrypt, $key) {
-        $encrypt = serialize($encrypt);
-        $iv = mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC), MCRYPT_DEV_URANDOM);
-        $key = pack('H*', $key);
-        $mac = hash_hmac('sha256', $encrypt, substr(bin2hex($key), -32));
-        $passcrypt = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $key, $encrypt . $mac, MCRYPT_MODE_CBC, $iv);
-        $encoded = base64_encode($passcrypt) . '|' . base64_encode($iv);
-        return $encoded;
+        throw new PdoDbException("Mcrypt::encrypt - method deprecated");
+//        $encrypt = serialize($encrypt);
+//        $iv = mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC), MCRYPT_DEV_URANDOM);
+//        $key = pack('H*', $key);
+//        $mac = hash_hmac('sha256', $encrypt, substr(bin2hex($key), -32));
+//        $passcrypt = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $key, $encrypt . $mac, MCRYPT_MODE_CBC, $iv);
+//        $encoded = base64_encode($passcrypt) . '|' . base64_encode($iv);
+//        return $encoded;
     }
 
     /**
@@ -23,25 +24,26 @@ class MyCrypt {
      * @param string $decrypt String to decrypt.
      * @param string $key String to use as the encryption key.
      * @return string Decrypted string.
-     * @throws Exception if the string cannot be decrypted.
+     * @throws PdoDbException if the string cannot be decrypted.
      */
     public static function decrypt($decrypt, $key) {
-        $decrypt = explode('|', $decrypt . '|');
-        $decoded = base64_decode($decrypt[0]);
-        $iv = base64_decode($decrypt[1]);
-        if (strlen($iv) !== mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC)) {
-            throw new PdoDbException("MyCrypt decrypt(): Invalid size of decode string.");
-        }
-        $key = pack('H*', $key);
-        $decrypted = trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $key, $decoded, MCRYPT_MODE_CBC, $iv));
-        $mac = substr($decrypted, -64);
-        $decrypted = substr($decrypted, 0, -64);
-        $calcmac = hash_hmac('sha256', $decrypted, substr(bin2hex($key), -32));
-        if ($calcmac !== $mac) {
-            throw new PdoDbException("MyCrypt decrypt(): Calculated mac is not equal to store mac.");
-        }
-        $decrypted = unserialize($decrypted);
-        return $decrypted;
+        throw new PdoDbException("Mcrypt::decrypt - method deprecated");
+//        $decrypt = explode('|', $decrypt . '|');
+//        $decoded = base64_decode($decrypt[0]);
+//        $iv = base64_decode($decrypt[1]);
+//        if (strlen($iv) !== mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC)) {
+//            throw new PdoDbException("MyCrypt decrypt(): Invalid size of decode string.");
+//        }
+//        $key = pack('H*', $key);
+//        $decrypted = trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $key, $decoded, MCRYPT_MODE_CBC, $iv));
+//        $mac = substr($decrypted, -64);
+//        $decrypted = substr($decrypted, 0, -64);
+//        $calcmac = hash_hmac('sha256', $decrypted, substr(bin2hex($key), -32));
+//        if ($calcmac !== $mac) {
+//            throw new PdoDbException("MyCrypt decrypt(): Calculated mac is not equal to store mac.");
+//        }
+//        $decrypted = unserialize($decrypted);
+//        return $decrypted;
     }
 
     /**
@@ -51,8 +53,9 @@ class MyCrypt {
      * @return string Line formed by joining <b>$itemname = $encrypt</b>.
      */
     public static function join($itemname, $encrypt) {
-        $line = $itemname . " = " . $encrypt;
-        return $line;
+        throw new PdoDbException("Mcrypt::join - method deprecated");
+//        $line = $itemname . " = " . $encrypt;
+//        return $line;
     }
 
     /**
@@ -81,7 +84,7 @@ class MyCrypt {
      * Static function to generate a 64 character key based on a specified value.
      * @param String $id Character string to base key on.
      * @return String Generated hex key.
-     * @throws Exception if no <b>$id</b> is specified.
+     * @throws PdoDbException if no <b>$id</b> is specified.
      */
     public static function keygen($id=null) {
         if (!isset($id)) {

@@ -89,7 +89,8 @@ class DbInfo {
                 if (strlen($pieces[1]) < 60) {
                     $decrypt = preg_replace('/\'/', '', $pieces[1]);
                 } else {
-                    $decrypt = MyCrypt::decrypt($pieces[1], $key);
+//                    $decrypt = MyCrypt::decrypt($pieces[1], $key);
+                    throw new PdoDbException("DbInfo::loadSectionInfo - Attempt to use deprecated MyCrypt class");
                 }
 
                 switch ($pieces[0]) {
