@@ -12,7 +12,7 @@
  *   GPL v2 or above
  *
  * Website:
- *  http://www.simpleinvoices.org
+ *  https://simpleinvoices.group
  *}
 <input type="hidden" name="action" value="insert" />
 <table class="center">

@@ -6,7 +6,7 @@
  *      GPL v3 or above
  *
  * Website:
- *      http://www.simpleinvoices.org
+ *      https://simpleinvoices.group
  *}
 
 {if $smarty.get.action == 'view' }

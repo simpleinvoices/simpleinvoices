@@ -8,7 +8,7 @@
  *   GPL v3 or above
  *
  * Website:
- *   http://www.simpleinvoices.or
+ *   https://simpleinvoices.group
  */
 
 //stop the direct browsing to this file - let index.php handle which files get displayed

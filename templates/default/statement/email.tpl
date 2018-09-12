@@ -13,7 +13,7 @@
  *   GPL v2 or above
  *
  * Website:
- *  http://www.simpleinvoices.org
+ *  https://simpleinvoices.group
  *}
 {if $smarty.get.stage == 1 }
 {if $error == 1}<div class="si_message_error"><h2>{$message}</h2></div>{/if}

@@ -7,7 +7,7 @@
  *   GPL v3 or above
  *
  * Website:
- *   http://www.simpleinvoices.org
+ *   https://simpleinvoices.group
  */
 global $dbh, $smarty;
 $sql = "SELECT count(*) as count FROM ".TB_PREFIX."user";

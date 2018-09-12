@@ -12,7 +12,7 @@
 *      GPL v3 or above
 *
 *  Website:
-*      http://www.simpleinvoices.org
+*      https://simpleinvoices.group
 *}
 {if $smarty.get.stage == 1 }
   {if $error == 1 }

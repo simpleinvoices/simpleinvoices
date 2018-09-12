@@ -9,7 +9,7 @@
  *      2016-07-27
  *
  *  Website:
- *      http://www.simpleinvoices.org
+ *      https://simpleinvoices.group
  *}
 
 <div class="si_toolbar si_toolbar_top">

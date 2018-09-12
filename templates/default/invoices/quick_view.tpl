@@ -12,7 +12,7 @@
  *   GPL v2 or above
  *
  * Website:
- *   http://www.simpleinvoices.org
+ *   https://simpleinvoices.group
  *}
 <div class="si_toolbar si_toolbar_top">
   <a title="{$LANG.print_preview_tooltip} {$preference.pref_inv_wording|htmlsafe} {$invoice.index_id|htmlsafe}"

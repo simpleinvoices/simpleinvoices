@@ -14,7 +14,7 @@
 *	 GPL v3
 *
 * Website:
-* 	http://www.simpleinvoices.org
+* 	https://simpleinvoices.group
 */
 global $LANG, $smarty, $pdoDb;
 

@@ -9,7 +9,7 @@
  *  Last Modifield:
  *      2016-08-07
  *  Website:
- *      http://www.simpleinvoices.org
+ *      https://simpleinvoices.group
  */
 global $pdoDb, $smarty;
 

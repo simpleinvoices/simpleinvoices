@@ -7,7 +7,7 @@
 *	 GPL v3 or above
 *
 * Website:
-*	http://www.simpleinvoices.org
+*	https://simpleinvoices.group
 */
 *}
 <form name="frmpost" action="index.php?module=invoices&amp;view=save" method="post" onsubmit="return frmpost_Validator(this);">

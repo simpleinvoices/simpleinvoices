@@ -6,7 +6,7 @@
  *   GPL v3 or above
  *
  * Website:
- *   http://www.simpleinvoices.org
+ *   https://simpleinvoices.group
  #$Id: header.tpl 3627 2011-05-09 01:00:32Z justin@kelly.org.au $
  *}
   <input type="hidden" name="action" value="insert" />

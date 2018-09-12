@@ -7,7 +7,7 @@
  *      GPL v3 or above
  *
  *  Website:
- *      http://www.simpleinvoices.org
+ *      https://simpleinvoices.group
  */
 require_once 'extensions/past_due_report/include/class/export.php';
 // @formatter:off

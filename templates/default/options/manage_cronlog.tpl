@@ -12,7 +12,7 @@
  *      GPL v3 or above
  *
  *  Website:
- *      http://www.simpleinvoices.org
+ *      https://simpleinvoices.group
  *}
 
 <h3>Cron Log - Recurrent Invoices Inserted</h3>

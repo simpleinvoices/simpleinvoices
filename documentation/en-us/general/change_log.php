@@ -13,11 +13,19 @@
   </div>
   <div id="left">
     <ul>
-      <li>2017-12-20 - <b>2017.2.0</b>
+      <li>2018-09-12 - <b>2017.3.0</b>
         <ul>
-          <li><b>Production Release</b> Verified SI working with PHP 7.2</li>
+          <li><b>Production Release</b> Updated to support local.locale setting in the custom.config.php
+              (aka config.php) files that use non-english number formats in templates. Also changed <b>Help</b>
+              link in the header to reference the new <i>SimpleInvoices.group</i> site which will be updated
+              to replace the <i>SimpleInvoices.org</i> site that is no longer available.</li>
         </ul>
       </li>
+        <li>2017-12-20 - <b>2017.2.0</b>
+            <ul>
+                <li><b>Production Release</b> Verified SI working with PHP 7.2</li>
+            </ul>
+        </li>
       <li>2016-12-27 - <b>2016.1.001</b>
         <ul>
           <li><b>Production Release</b> Verified that this fork of SI will <b>NOT</b> be incorporated into
@@ -282,11 +290,11 @@
       <li>NR +1 2008-02
         <ul>
           <li>Favicon.ico added</li>
-          <li>Port removed from the PDF url code as HTTP_HOST was already returning the port - Refer: http://simpleinvoices.org/forum/topic-post2339.html#post2339</li>
+          <li>Port removed from the PDF url code as HTTP_HOST was already returning the port - Refer: https://simpleinvoices.group/forum/topic-post2339.html#post2339</li>
           <li>Quick view page - Customer accounts section now calculting corrently</li>
           <li>Slovak translation added</li>
           <li>Latvian translation added</li>
-          <li>Reports on WAMP problem fixed - http://simpleinvoices.org/forum/topic-449.html</li>
+          <li>Reports on WAMP problem fixed - https://simpleinvoices.group/forum/topic-449.html</li>
           <li>DB Upgrade SQL Patcher extra text output error and html syntax errors fixed</li>
           <li>Enabled Gross Total in Export formats too.</li>
           <li>Norwegian, Slovenian, Danish lang.php corrected by removing leading hex EF BB BF in file - now authentication works for them too.</li>
@@ -330,7 +338,7 @@
           <li>Updated PHPMailer to v2.10 Beta 1 for PHP5</li>
           <li>lang/en-gb/lang.php capitalised correctly</li>
           <li>Default Customer now shows up correctly on all add new invoice pages</li>
-          <li>Editing invoice with custom date format issue fixed : http://simpleinvoices.org/forum/topic-424.html</li>
+          <li>Editing invoice with custom date format issue fixed : https://simpleinvoices.group/forum/topic-424.html</li>
         </ul>
       </li>
     </ul>
@@ -339,7 +347,7 @@
         <ul>
           <li>Security patch to fix issue with the login system - could be bypassed by disabling javascript support</li>
           <li>Documentation and docs.php udpates</li>
-          <li>Default language on upgrade from older version, refer: http://simpleinvoices.org/forum/topic-359.html</li>
+          <li>Default language on upgrade from older version, refer: https://simpleinvoices.group/forum/topic-359.html</li>
         </ul>
       </li>
     </ul>
@@ -443,7 +451,7 @@
           <li><a href="http://code.google.com/p/simpleinvoices/issues/detail?id=58">Issue 58</a>Date format woes fixed</li>
           <li><a href="http://code.google.com/p/simpleinvoices/issues/detail?id=65">Issue 65</a>Invoice date: make editable</li>
           <li><a href="http://code.google.com/p/simpleinvoices/issues/detail?id=72">Issue 72</a>Sort not working correctly - fixed</li>
-          <li>Note: If your using authentification please read: <a href="http://simpleinvoices.org/wiki/doku.php?id=how_do_i_enable_authentification_ie_a_login_system_in_simple_invoices">http://simpleinvoices.org/wiki/doku.php?id=how_do_i_enable_authentification_ie_a_login_system_in_simple_invoices</a> as there have been changes</li>
+          <li>Note: If your using authentification please read: <a href="https://simpleinvoices.group/wiki/doku.php?id=how_do_i_enable_authentification_ie_a_login_system_in_simple_invoices">https://simpleinvoices.group/wiki/doku.php?id=how_do_i_enable_authentification_ie_a_login_system_in_simple_invoices</a> as there have been changes</li>
           <li>SQL Patches
             <ul>
               <li>Adding data to the custom fields table for invoice</li>

@@ -3,7 +3,7 @@
 * 	Custom fields details template
 *
 * Website:
-* 	 http://www.simpleinvoices.org
+* 	 https://simpleinvoices.group
 *
 * License:
 *	 GPL v3 or above

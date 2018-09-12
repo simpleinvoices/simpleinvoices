@@ -13,7 +13,7 @@
  *      GPL v3 or above
  *
  *  Website:
- *      http://www.simpleinvoices.org
+ *      https://simpleinvoices.group
  *}
 {if $smarty.get.stage == 1 }
 <div class="si_center">

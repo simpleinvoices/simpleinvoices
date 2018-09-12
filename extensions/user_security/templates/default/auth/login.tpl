@@ -37,7 +37,7 @@
   </div>
   <div id="si_footer">
     <div class="si_wrap">
-      <a href="http://www.simpleinvoices.org">{$LANG.powered_by}&nbsp;{$LANG.simple_invoices}</a>
+      <a href="https://simpleinvoices.group">{$LANG.powered_by}&nbsp;{$LANG.simple_invoices}</a>
     </div>
   </div>
   {literal}

@@ -13,7 +13,7 @@
 *	 GPL v2 or above
 *
 * Website:
-*	http://www.simpleinvoices.org
+*	https://simpleinvoices.group
 */
 *}
 <form name="frmpost" action="index.php?module=payment_types&amp;view=save" method="post">

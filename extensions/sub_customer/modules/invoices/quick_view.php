@@ -14,7 +14,7 @@
  *     GPL v3 or above
  *
  * Website:
- *     http://www.simpleinvoices.or
+ *     https://simpleinvoices.group
  */
 global $config, $LANG, $smarty;
 

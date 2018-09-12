@@ -13,7 +13,7 @@
 *	 GPL v2 or above
 *
 * Website:
-* 	http://www.simpleinvoices.org
+* 	https://simpleinvoices.group
  */
 
 echo "should dele all files in the cache folder...";

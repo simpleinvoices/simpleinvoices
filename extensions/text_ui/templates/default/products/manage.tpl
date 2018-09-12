@@ -6,7 +6,7 @@
  *   GPL v3 or above
  *
  * Website:
- *   http://www.simpleinvoices.org
+ *   https://simpleinvoices.group
  *}
 {if $number_of_rows == null}
   <p><em>{$LANG.no_products}</em></p>

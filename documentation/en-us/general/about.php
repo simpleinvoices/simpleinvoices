@@ -44,7 +44,7 @@
   <br/>
   <div class="si_center">
     <p>Version: <?php printVersionInfo(); ?></p>
-    <p>Homepage: <a href='http://www.simpleinvoices.org'>http://www.simpleinvoices.org</a></p>
+    <p>Homepage: <a href='https://simpleinvoices.group'>https://simpleinvoices.group</a></p>
   </div>
 </body>
 </html>

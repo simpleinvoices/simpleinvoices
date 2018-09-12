@@ -7,7 +7,7 @@
  *     GPL v2 or above
  *
  * Website:
- *     http://www.simpleinvoices.org
+ *     https://simpleinvoices.group
  */
 global $dbh, $smarty;
 //stop the direct browsing to this file - let index.php handle which files get displayed

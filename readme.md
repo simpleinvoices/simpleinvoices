@@ -54,7 +54,7 @@ We are proud that SimpleInvoices is currently available in 41 different language
 
 If you would like to help translate SimpleInvoices into your language check out our [translation project](https://www.transifex.com/projects/p/SimpleInvoices/). Download updated and additional languages only if logged in there.
 
-For more information refer: [simpleinvoices.org/translate](http://www.simpleinvoices.org/translate)
+For more information refer: [simpleinvoices.org/translate](https://simpleinvoices.group/translate)
 
 ## Reporting Bugs
 Please use the issue tracker on GitHub when reporting bugs.

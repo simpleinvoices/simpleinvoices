@@ -13,7 +13,7 @@
 *	 GPL v2 or above
 *
 * Website:
-*	http://www.simpleinvoices.org
+*	https://simpleinvoices.group
 */
 *}
 
@@ -21,4 +21,4 @@
 <hr />
        <div id="left">
 <br />
-This feature is still a work-in-progress, please refer to our homepage: <a href='http://www.simpleinvoices.org'>http://www.simpleinvoices.org</a> for update.
+This feature is still a work-in-progress, please refer to our homepage: <a href='https://simpleinvoices.group'>https://simpleinvoices.group</a> for update.

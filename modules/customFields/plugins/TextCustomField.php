@@ -14,7 +14,7 @@
  *     GPL v2 or above
  *
  * Website:
- *     http://www.simpleinvoices.org
+ *     https://simpleinvoices.group
  */
 
 class TextCustomField extends CustomField {

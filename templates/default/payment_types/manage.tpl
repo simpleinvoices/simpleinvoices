@@ -12,7 +12,7 @@
  *      GPL v3 or above
  *
  *  Website:
- *      http://www.simpleinvoices.org
+ *      https://simpleinvoices.group
  *}
 <div class="si_toolbar si_toolbar_top">
   <a href="index.php?module=payment_types&amp;view=add" class="">

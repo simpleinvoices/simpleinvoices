@@ -14,7 +14,7 @@
  *      GPL v3 or later
  *
  *  Website:
- *      http://www.simpleinvoices.org
+ *      https://simpleinvoices.group
  */
 global $menu, $pdoDb, $smarty;
 

@@ -13,7 +13,7 @@
  *   GPL v2 or above
  *     
  * Website:
- *   http://www.simpleinvoices.or
+ *   https://simpleinvoices.group
  */
 global $config, $LANG, $pdoDb, $smarty;
 

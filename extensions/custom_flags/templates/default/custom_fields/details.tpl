@@ -6,7 +6,7 @@
  * 20160123 by Rich Rowley to add option to clean up when field cleared.
  *
  * Website:
- * http://www.simpleinvoices.org
+ * https://simpleinvoices.group
  *
  * License:
  * GPL v3 or above

@@ -9,7 +9,7 @@
  *      GPL v3 or above
  *
  *  Website:
- *      http://www.simpleinvoices.org
+ *      https://simpleinvoices.group
  *}
 <div class="si_toolbar si_toolbar_form">
   <a href="index.php?module=expense_account&view=add" class="positive">

@@ -11,7 +11,7 @@
 *	 GPL v2 or above
 *
 * Website:
-*	http://www.simpleinvoices.org
+*	https://simpleinvoices.group
 */
 *}
 {$display_block}

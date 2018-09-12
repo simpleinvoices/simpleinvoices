@@ -55,7 +55,7 @@
         <br/>
 	</div>
     <br/>
-        <a href="http://www.simpleinvoices.org">{$LANG.powered_by}&nbsp;{$LANG.simple_invoices}</a>
+        <a href="https://simpleinvoices.group">{$LANG.powered_by}&nbsp;{$LANG.simple_invoices}</a>
 </div>
 
 <script language="JavaScript">
