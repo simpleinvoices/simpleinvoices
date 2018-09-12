@@ -740,7 +740,7 @@ CREATE TABLE IF NOT EXISTS `si_user` (
 ) ENGINE=MyISAM;
 
 INSERT INTO `si_user` (`id`, `email`, `role_id`, `domain_id`, `password`, `enabled`, `user_id`) VALUES
- (1, 'demo@simpleinvoices.org', 1, 1, 'fe01ce2a7fbac8fafaed7c982a04e229', 1, 0);
+ (1, 'demo@simpleinvoices.group', 1, 1, 'fe01ce2a7fbac8fafaed7c982a04e229', 1, 0);
 
 CREATE TABLE IF NOT EXISTS `si_user_domain` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

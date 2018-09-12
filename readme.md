@@ -25,9 +25,6 @@ These instructions should work for all version updates. They protect your curren
 
 ## Downloads
 * Fearless359 Release - *Version 2017.2.0*: [fearless359/simpleinvoices](https://github.com/fearless359/simpleinvoices.zip) (.zip)
-* Bleeding Edge Code: [SI Git Master](http://github.com/simpleinvoices/simpleinvoices/archive/master.zip) (.zip)
-* Latest Beta Release: [2013.1 beta 8](https://github.com/simpleinvoices/simpleinvoices/archive/2013.1.beta.8.tar.gz) (tar.gz)
-* Latest Stable Release: [2011.1](http://download.simpleinvoices.org/simpleinvoices/downloads/simpleinvoices.2011.1.zip) (.zip)
 
 ## Documentation
 * [All discussions & help have moved to Google+](https://plus.google.com/u/0/communities/102476804981627142204)
@@ -54,12 +51,11 @@ We are proud that SimpleInvoices is currently available in 41 different language
 
 If you would like to help translate SimpleInvoices into your language check out our [translation project](https://www.transifex.com/projects/p/SimpleInvoices/). Download updated and additional languages only if logged in there.
 
-For more information refer: [simpleinvoices.org/translate](https://simpleinvoices.group/translate)
+For more information refer: [simpleinvoices.group/translate](https://simpleinvoices.group/translate)
 
 ## Reporting Bugs
 Please use the issue tracker on GitHub when reporting bugs.
 * [Report Fearless359 version issues here](https://github.com/fearless359/simpleinvoices/issues)
-* [Report previous version issues here](https://github.com/simpleinvoices/simpleinvoices/issues)
 
 **Developers**: There are still a number of open issues on the old Google Code issue tracker if you are looking for something to fix. http://code.google.com/p/simpleinvoices/issues/list
 

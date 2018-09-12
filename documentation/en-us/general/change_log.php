@@ -18,7 +18,7 @@
           <li><b>Production Release</b> Updated to support local.locale setting in the custom.config.php
               (aka config.php) files that use non-english number formats in templates. Also changed <b>Help</b>
               link in the header to reference the new <i>SimpleInvoices.group</i> site which will be updated
-              to replace the <i>SimpleInvoices.org</i> site that is no longer available.</li>
+              to replace the <i>SimpleInvoices.group</i> site that is no longer available.</li>
         </ul>
       </li>
         <li>2017-12-20 - <b>2017.2.0</b>

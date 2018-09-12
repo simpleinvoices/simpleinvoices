@@ -605,7 +605,7 @@ INSERT INTO "si_sql_patchmanager" ("sql_id", "sql_patch_ref", "sql_patch", "sql_
 INSERT INTO "si_sql_patchmanager" ("sql_id", "sql_patch_ref", "sql_patch", "sql_release", "sql_statement") VALUES
 (129, 128, 'Add user table', '200709', 'CREATE TABLE IF NOT EXISTS "si_users" (\n			"user_id" int(11) NOT NULL auto_increment,\n			"user_email" varchar(255) NOT NULL,\n			"user_name" varchar(255) NOT NULL,\n			"user_group" varchar(255) NOT NULL,\n			"user_domain" varchar(255) NOT NULL,\n			"user_password" varchar(255) NOT NULL,\n			PRIMARY KEY  ("user_id")\n			) ;');
 INSERT INTO "si_sql_patchmanager" ("sql_id", "sql_patch_ref", "sql_patch", "sql_release", "sql_statement") VALUES
-(130, 129, 'Fill user table with default values', '200709', 'INSERT INTO "si_users" ("user_id", "user_email", "user_name", "user_group", "user_domain", "user_password") VALUES \n('''', ''demo@simpleinvoices.org'', ''demo'', ''1'', ''1'', MD5(''demo''))');
+(130, 129, 'Fill user table with default values', '200709', 'INSERT INTO "si_users" ("user_id", "user_email", "user_name", "user_group", "user_domain", "user_password") VALUES \n('''', ''demo@simpleinvoices.group'', ''demo'', ''1'', ''1'', MD5(''demo''))');
 INSERT INTO "si_sql_patchmanager" ("sql_id", "sql_patch_ref", "sql_patch", "sql_release", "sql_statement") VALUES
 (131, 130, 'Create auth_challenges table', '200709', 'CREATE TABLE IF NOT EXISTS "si_auth_challenges" (\n				"challenges_key" int(11) NOT NULL,\n				"challenges_timestamp" timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP);');
 INSERT INTO "si_sql_patchmanager" ("sql_id", "sql_patch_ref", "sql_patch", "sql_release", "sql_statement") VALUES
@@ -753,7 +753,7 @@ CREATE TABLE IF NOT EXISTS "si_users" (
 
 
 INSERT INTO "si_users" ("user_id", "user_email", "user_name", "user_role_id", "user_domain_id", "user_password") VALUES
-(1, 'demo@simpleinvoices.org', 'demo', 1, 1, 'fe01ce2a7fbac8fafaed7c982a04e229');
+(1, 'demo@simpleinvoices.group', 'demo', 1, 1, 'fe01ce2a7fbac8fafaed7c982a04e229');
 
 -- --------------------------------------------------------
 

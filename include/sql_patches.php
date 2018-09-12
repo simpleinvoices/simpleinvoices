@@ -760,7 +760,7 @@ patchmaker('128', $patchlines, $si_patches);
 
 $patchlines['name' ] = "Fill user table with default values";
 $patchlines['patch'] = "INSERT INTO `".TB_PREFIX."users` (`user_id`, `user_email`, `user_name`, `user_group`, `user_domain`, `user_password`)
-                                                  VALUES (NULL, 'demo@simpleinvoices.org', 'demo', '1', '1', MD5('demo'))";
+                                                  VALUES (NULL, 'demo@simpleinvoices.group', 'demo', '1', '1', MD5('demo'))";
 $patchlines['date' ] = "200709";
 patchmaker('129', $patchlines, $si_patches);
 

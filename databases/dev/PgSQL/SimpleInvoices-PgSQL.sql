@@ -20,7 +20,7 @@ COMMENT ON COLUMN si_users.user_email IS $$Email address functions as the user n
 COMMENT ON COLUMN si_users.user_password IS $$md5 of the actual password$$;
 
 INSERT INTO si_users (user_id, user_email, user_name, user_group, user_domain, user_password) VALUES 
-(1, 'demo@simpleinvoices.org', 'demo', '1', '1', 'fe01ce2a7fbac8fafaed7c982a04e229');
+(1, 'demo@simpleinvoices.group', 'demo', '1', '1', 'fe01ce2a7fbac8fafaed7c982a04e229');
 SELECT setval('si_users_user_id_seq', 1);
 
 CREATE TABLE si_customfieldcategories (
@@ -391,9 +391,9 @@ INSERT INTO si_log (id, timestamp, userid, sqlquerie, last_id) VALUES
 INSERT INTO si_log (id, timestamp, userid, sqlquerie, last_id) VALUES 
 (4, '2007-09-28 15:41:20', '1', 'INSERT INTO si_sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (128,''Add si_user table'',200709,''CREATE TABLE IF NOT EXISTS si_users ( user_id int(11) NOT NULL auto_increment, user_email varchar(255) NOT NULL, user_name varchar(255) NOT NULL, user_group varchar(255) NOT NULL, user_domain varchar(255) NOT NULL, user_password varchar(255) NOT NULL, PRIMARY KEY (user_id) ) ;'')', 129);
 INSERT INTO si_log (id, timestamp, userid, sqlquerie, last_id) VALUES 
-(5, '2007-09-28 15:41:20', '1', 'INSERT INTO si_users (user_id, user_email, user_name, user_group, user_domain, user_password) VALUES ('''', ''demo@simpleinvoices.org'', ''guest'', ''1'', ''1'', MD5(''demo''))', 1);
+(5, '2007-09-28 15:41:20', '1', 'INSERT INTO si_users (user_id, user_email, user_name, user_group, user_domain, user_password) VALUES ('''', ''demo@simpleinvoices.group'', ''guest'', ''1'', ''1'', MD5(''demo''))', 1);
 INSERT INTO si_log (id, timestamp, userid, sqlquerie, last_id) VALUES 
-(6, '2007-09-28 15:41:20', '1', 'INSERT INTO si_sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (129,''Fill si_user table with default values'',200709,''INSERT INTO si_users (user_id, user_email, user_name, user_group, user_domain, user_password) VALUES (\\''\\'', \\''demo@simpleinvoices.org\\'', \\''guest\\'', \\''1\\'', \\''1\\'', MD5(\\''demo\\''))'')', 130);
+(6, '2007-09-28 15:41:20', '1', 'INSERT INTO si_sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (129,''Fill si_user table with default values'',200709,''INSERT INTO si_users (user_id, user_email, user_name, user_group, user_domain, user_password) VALUES (\\''\\'', \\''demo@simpleinvoices.group\\'', \\''guest\\'', \\''1\\'', \\''1\\'', MD5(\\''demo\\''))'')', 130);
 INSERT INTO si_log (id, timestamp, userid, sqlquerie, last_id) VALUES 
 (7, '2007-09-28 15:41:20', '1', 'CREATE TABLE IF NOT EXISTS si_auth_challenges ( challenges_key int(11) NOT NULL, challenges_timestamp timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP);', 0);
 INSERT INTO si_log (id, timestamp, userid, sqlquerie, last_id) VALUES 
@@ -689,7 +689,7 @@ INSERT INTO si_sql_patchmanager (sql_id, sql_patch_ref, sql_patch, sql_release, 
 INSERT INTO si_sql_patchmanager (sql_id, sql_patch_ref, sql_patch, sql_release, sql_statement) VALUES 
 (129, '128', 'Add si_user table', '200709', 'CREATE TABLE IF NOT EXISTS si_users (\n			user_id int(11) NOT NULL auto_increment,\n			user_email varchar(255) NOT NULL,\n			user_name varchar(255) NOT NULL,\n			user_group varchar(255) NOT NULL,\n			user_domain varchar(255) NOT NULL,\n			user_password varchar(255) NOT NULL,\n			PRIMARY KEY  (user_id)\n			) ;');
 INSERT INTO si_sql_patchmanager (sql_id, sql_patch_ref, sql_patch, sql_release, sql_statement) VALUES 
-(130, '129', 'Fill si_user table with default values', '200709', 'INSERT INTO si_users (user_id, user_email, user_name, user_group, user_domain, user_password) VALUES \n('''', ''demo@simpleinvoices.org'', ''guest'', ''1'', ''1'', MD5(''demo''))');
+(130, '129', 'Fill si_user table with default values', '200709', 'INSERT INTO si_users (user_id, user_email, user_name, user_group, user_domain, user_password) VALUES \n('''', ''demo@simpleinvoices.group'', ''guest'', ''1'', ''1'', MD5(''demo''))');
 INSERT INTO si_sql_patchmanager (sql_id, sql_patch_ref, sql_patch, sql_release, sql_statement) VALUES 
 (131, '130', 'Create si_auth_challenges table', '200709', 'CREATE TABLE IF NOT EXISTS si_auth_challenges (\n				challenges_key int(11) NOT NULL,\n				challenges_timestamp timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP);');
 INSERT INTO si_sql_patchmanager (sql_id, sql_patch_ref, sql_patch, sql_release, sql_statement) VALUES 

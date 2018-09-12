@@ -2284,7 +2284,7 @@
     "si_user": [
         {
             "id": "1",
-            "email": "demo@simpleinvoices.org",
+            "email": "demo@simpleinvoices.group",
             "role_id": "1",
             "domain_id": "DOMAIN-ID",
             "password": "fe01ce2a7fbac8fafaed7c982a04e229",

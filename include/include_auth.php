@@ -21,7 +21,7 @@ if ($config->authentication->enabled == 1) {
     // Chuck the user details sans password into the Zend_auth session
     $auth_session->id = "1";
     $auth_session->domain_id = "1";
-    $auth_session->email = "demo@simpleinvoices.org";
+    $auth_session->email = "demo@simpleinvoices.group";
     // fake_auth is identifier to say that user logged in with auth off
     $auth_session->fake_auth = "1";
     // No Customer login as logins disabled
