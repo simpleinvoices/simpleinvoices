@@ -2,7 +2,7 @@
 /* *************************************************************
  * Zend framework init - start
  * *************************************************************/
-global $api_request;
+global $api_request, $config;
 if (!isset($api_request)) $api_request = false;
 
 $lcl_path = get_include_path() .
@@ -70,6 +70,7 @@ require_once("include/class/PdoDb.php");
 
 // added 'true' to allow modifications from db
 $config = new Zend_Config_Ini("./" . CONFIG_FILE_PATH, $environment, true);
+
 $logger_level = (isset($config->zend->logger_level) ? strtoupper($config->zend->logger_level) : 'EMERG');
 switch($logger_level) {
     case 'DEBUG':
@@ -112,7 +113,7 @@ try {
     $dbInfo = new DbInfo(CONFIG_FILE_PATH, "production");
 } catch (PdoDbException $pde) {
     if (preg_match('/.*{dbname|password|username}/', $pde->getMessage())) {
-        echo "<h1 style='font-weigth:bold;color:red;'>Initial setup. Follow the following instructions:</h1>";
+        echo "<h1 style='font-weight:bold;color:red;'>Initial setup. Follow the following instructions:</h1>";
         echo "<ol>";
         echo "  <li>Make a mySQL compatible database with a user that has full access to it.</li>";
         echo "  <li>In the \"config\" directory, copy the <b>config.php</b> file to <b>custom.config.php</b></li>";
@@ -126,7 +127,7 @@ try {
         echo "  <li>In your browser, execute the command to access SI again and follow the instructions.</li>";
         echo "</ol>";
     } else {
-        echo "<h1 style='font-weigth:bold;color:red;'>";
+        echo "<h1 style='font-weight:bold;color:red;'>";
         echo "  " . $pde->getMessage() . " (Error code: {$pde->getCode})";
         echo "</h1>";
     }
@@ -160,7 +161,7 @@ try {
 }
 if ($api_request) {
     if (!$databaseBuilt) {
-        throw new Exception("Database not built. Can't run batch job.");
+        exit("Database not built. Can't run batch job.");
     }
 } else {
     // If session_timeout is defined in the database, use it. If not
@@ -209,7 +210,7 @@ if (!is_writable($smarty->compile_dir)) {
     simpleInvoicesError("notWriteable", 'folder', $smarty->compile_dir);
 }
 
-// add stripslash smarty function
+// add stripslashes smarty function
 $smarty->registerPlugin('modifier', "unescape", "stripslashes");
 //$smarty->testInstall();
 /* *************************************************************
@@ -234,7 +235,7 @@ if ($databaseBuilt) {
     $patchCount = getNumberOfDoneSQLPatches();
     $databasePopulated = $patchCount > 0;
     if ($api_request && !$databasePopulated) {
-        throw new Exception("Database must be populated to run a batch job.");
+        exit("Database must be populated to run a batch job.");
     }
 }
 
@@ -248,18 +249,16 @@ if ($api_request ||(!$databaseBuilt || !$databasePopulated)) {
 $smarty->assign('patchCount', $patchCount);
 
 // @formatter:off
-$smarty->registerPlugin('modifier', "siLocal_number"          , array("siLocal", "number"));
-$smarty->registerPlugin('modifier', "siLocal_number_clean"    , array("siLocal", "number_clean"));
-$smarty->registerPlugin('modifier', "siLocal_number_trim"     , array("siLocal", "number_trim"));
-$smarty->registerPlugin('modifier', "siLocal_number_formatted", array("siLocal", "number_formatted"));
-$smarty->registerPlugin('modifier', "siLocal_date"            , array("siLocal", "date"));
+$smarty->registerPlugin('modifier', "siLocal_number"     , array("siLocal", "number"));
+$smarty->registerPlugin('modifier', "siLocal_number_trim", array("siLocal", "number_trim"));
+$smarty->registerPlugin('modifier', "siLocal_date"       , array("siLocal", "date"));
 
-$smarty->registerPlugin('modifier', 'htmlout'     , 'outhtml');
-$smarty->registerPlugin('modifier', 'htmlsafe'    , 'htmlsafe');
-$smarty->registerPlugin('modifier', 'outhtml'     , 'outhtml');
-$smarty->registerPlugin('modifier', 'urlencode'   , 'urlencode');
-$smarty->registerPlugin('modifier', 'urlescape'   , 'urlencode');
-$smarty->registerPlugin('modifier', 'urlsafe'     , 'urlsafe');
+$smarty->registerPlugin('modifier', 'htmlout'  , 'outhtml');
+$smarty->registerPlugin('modifier', 'htmlsafe' , 'htmlsafe');
+$smarty->registerPlugin('modifier', 'outhtml'  , 'outhtml');
+$smarty->registerPlugin('modifier', 'urlencode', 'urlencode');
+$smarty->registerPlugin('modifier', 'urlescape', 'urlencode');
+$smarty->registerPlugin('modifier', 'urlsafe'  , 'urlsafe');
 // @formatter:on
 
 global $ext_names;

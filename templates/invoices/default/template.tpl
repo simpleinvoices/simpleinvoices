@@ -279,7 +279,7 @@
         </tr>
         {foreach from=$invoiceItems item=invoiceItem}
           <tr class=" ">
-            <td class="">{$invoiceItem.quantity|siLocal_number}</td>
+            <td class="">{$invoiceItem.quantity|siLocal_number_trim}</td>
             <td>{$invoiceItem.product.description|htmlsafe}</td>
             <td class="" colspan="4"></td>
           </tr>

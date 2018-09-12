@@ -30,6 +30,7 @@ $databasePopulated = false;
 $ext_names = array();
 $help_image_path = "images/common/";
 
+$config = null;
 // Note: include/functions.php and include/sql_queries.php loaded by this include.
 require_once "include/init.php";
 global $smarty,

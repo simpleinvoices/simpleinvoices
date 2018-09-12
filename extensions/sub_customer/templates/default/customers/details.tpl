@@ -25,7 +25,7 @@
     <td colspan="2">{$customer.name}</td>
     <td colspan="2"></td>
     <td class="details_screen">{$LANG.total_invoices}</td>
-    <td style="text-align:right">{$stuff.total|number_format:2}</td>
+    <td style="text-align:right">{$stuff.total|siLocal_number}</td>
   </tr>
   <tr>
     <td class="details_screen">{$LANG.attention_short}
@@ -37,14 +37,14 @@
     <td colspan="2">{$customer.attention|htmlsafe}</td>
     <td colspan="2"></td>
     <td class="details_screen"><a href="index.php?module=payments&view=manage&c_id={$customer.id|urlencode}">{$LANG.total_paid}</a></td>
-    <td style="text-align:right">{$stuff.paid|number_format:2}</td>
+    <td style="text-align:right">{$stuff.paid|siLocal_number}</td>
   </tr>
   <tr>
     <td class="details_screen">{$LANG.street}</td>
     <td colspan="2">{$customer.street_address|htmlsafe}</td>
     <td colspan="2"></td>
     <td class="details_screen">{$LANG.total_owing}</td>
-    <td style="text-align:right"><u>{$stuff.owing|number_format:2}</u></td>
+    <td style="text-align:right"><u>{$stuff.owing|siLocal_number}</u></td>
   </tr>
   <tr>
     <td class="details_screen"	>{$LANG.street2}
@@ -189,9 +189,9 @@
         <td class="details_screen">
           <a href="index.php?module=invoices&amp;view=quick_view&id={$invoice.id|urlencode}">{$invoice.id|htmlsafe}</a>
         </td>
-        <td style="text-align:right" class="details_screen">{$invoice.total|number_format:2}</td>
-        <td style="text-align:right" class="details_screen">{$invoice.paid|number_format:2}</td>
-        <td style="text-align:right" class="details_screen">{$invoice.owing|number_format:2}</td>
+        <td style="text-align:right" class="details_screen">{$invoice.total|siLocal_number}</td>
+        <td style="text-align:right" class="details_screen">{$invoice.paid|siLocal_number}</td>
+        <td style="text-align:right" class="details_screen">{$invoice.owing|siLocal_number}</td>
         <td style="text-align:right" class="details_screen">{$invoice.date|htmlsafe}</td>
       </tr>
       {/foreach}

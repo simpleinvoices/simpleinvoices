@@ -69,7 +69,7 @@ if (!empty($id)) {
 
         // Format with decimal places with precision as defined in config.php
         // @formatter:off
-        $output['unit_price']           = siLocal::number_clean($row['unit_price']);
+        $output['unit_price']           = siLocal::number_trim($row['unit_price']);
         $output['default_tax_id']       = (isset($row['default_tax_id']) ? $row['default_tax_id'] : "");
         $output['default_tax_id_2']     = (isset($row['default_tax_id_2']) ? $row['default_tax_id_2'] : "");
         $output['attribute']            = (isset($row['attribute']) ? $row['default_tax_id_2'] : "");

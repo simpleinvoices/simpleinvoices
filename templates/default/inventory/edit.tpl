@@ -48,14 +48,14 @@
           <td class="details_screen">{$LANG.quantity}</td>
           <td>
             <input name="quantity" size="10" class="validate[required]"
-                   value='{$inventory.quantity|siLocal_number_formatted}'>
+                   value='{$inventory.quantity|siLocal_number_trim}'>
           </td>
         </tr>
         <tr>
           <td class="details_screen">{$LANG.cost}</td>
           <td>
             <input id="cost" name="cost" size="10" class="validate[required]"
-                   value='{$inventory.cost|siLocal_number_formatted}'>
+                   value='{$inventory.cost|siLocal_number}'>
           </td>
         </tr>
         <tr>

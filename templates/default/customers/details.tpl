@@ -108,7 +108,7 @@
         <table>
           <tr>
             <th>{$LANG.total_invoices}</th>
-            <td class="si_right">{$stuff.total|number_format:2}</td>
+            <td class="si_right">{$stuff.total|siLocal_number}</td>
           </tr>
           <tr>
             <th>
@@ -116,11 +116,11 @@
                 {$LANG.total_paid}
               </a>
             </th>
-            <td class="si_right">{$stuff.paid|number_format:2}</td>
+            <td class="si_right">{$stuff.paid|siLocal_number}</td>
           </tr>
           <tr>
             <th>{$LANG.total_owing}</th>
-            <td class="si_right" style="text_decoration:underline;">{$stuff.owing|number_format:2}</td>
+            <td class="si_right" style="text_decoration:underline;">{$stuff.owing|siLocal_number}</td>
           </tr>
         </table>
       </div>
@@ -183,9 +183,9 @@
                   </a>
                 </td>
                 <td>{$invoice.date|htmlsafe}</td>
-                <td>{$invoice.total|number_format:2}</td>
-                <td>{$invoice.paid|number_format:2}</td>
-                <td>{$invoice.owing|number_format:2}</td>
+                <td>{$invoice.total|siLocal_number}</td>
+                <td>{$invoice.paid|siLocal_number}</td>
+                <td>{$invoice.owing|siLocal_number}</td>
               </tr>
               {/if}
             {/if}
@@ -215,11 +215,11 @@
                 </a>
               </td>
               <td>{$invoice.date|htmlsafe}</td>
-              <td class="right">{$invoice.total|number_format:2}</td>
+              <td class="right">{$invoice.total|siLocal_number}</td>
               {if $invoice.status > 0}
-                <td class="right"">{$invoice.paid|number_format:2}</td>
+                <td class="right"">{$invoice.paid|siLocal_number}</td>
                 {if $invoice.owing != 0}
-                  <td class="right">{$invoice.owing|number_format:2}</td>
+                  <td class="right">{$invoice.owing|siLocal_number}</td>
                 {else}
                   <td>&nbsp;</td>
                 {/if}

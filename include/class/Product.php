@@ -120,11 +120,13 @@ class Product {
 
     /**
      * Insert a new record in the products table.
-     * @param integer $enabled Product enabled/disabled status used if not present in
+     * @param string $enabled Product enabled/disabled status used if not present in
      *        the <b>$_POST</b> array. Defaults to ENABLED (1) or set to DISABLED (0).
-     * @param integer $visible Flags record seen in list. Defaults to ENABLED (1) for
+     * @param string $visible Flags record seen in list. Defaults to ENABLED (1) for
      *        visible or DISABLED (0) for not visible.
      * @return boolean <b>true</b> for success or <b>false</b> for failure.
+     * @throws PdoDbException
+     * @throws Zend_Locale_Exception
      */
     public static function insertProduct($enabled=ENABLED, $visible=ENABLED) {
         global $pdoDb;
@@ -158,11 +160,13 @@ class Product {
             }
         }
 
-        $description = (isset($_POST['description']   ) ? $_POST['description']    : "");
+        $description = (isset($_POST['description']) ? $_POST['description'] : "");
+        $unit_price  = (isset($_POST['unit_price'])  ? siLocal::dbStd($_POST['unit_price']) : "0");
+        $cost        = (isset($_POST['cost'])        ? siLocal::dbStd($_POST['cost'])       : "0");
         $fauxPost = array('domain_id'            => domain_id::get(),
                           'description'          => $description,
-                          'unit_price'           => (isset($_POST['unit_price']    ) ? $_POST['unit_price']     : "0"),
-                          'cost'                 => (isset($_POST['cost']          ) ? $_POST['cost']           : "0"),
+                          'unit_price'           => $unit_price,
+                          'cost'                 => $cost,
                           'reorder_level'        => (isset($_POST['reorder_level'] ) ? $_POST['reorder_level']  : "0"),
                           'custom_field1'        => (isset($_POST['custom_field1'] ) ? $_POST['custom_field1']  : ""),
                           'custom_field2'        => (isset($_POST['custom_field2'] ) ? $_POST['custom_field2']  : ""),
@@ -192,8 +196,9 @@ class Product {
 
     /**
      * Update a product record.
-     * @param string $domain_id Domain user is logged into.
      * @return PDO statement object on success, false on failure.
+     * @throws PdoDbException,
+     * @throws Zend_Locale_Exception
      */
     public static function updateProduct() {
         global $pdoDb;
@@ -223,6 +228,8 @@ class Product {
             }
         }
 
+        $unit_price = (isset($_POST['unit_price']) ? siLocal::dbStd($_POST['unit_price']) : "0");
+        $cost       = (isset($_POST['cost'])       ? siLocal::dbStd($_POST['cost'])       : "0");
         $fauxPost = array('description'          => (isset($_POST['description'])    ? $_POST['description']    : ""),
                           'enabled'              => (isset($_POST['enabled'])        ? $_POST['enabled']        : ""),
                           'notes'                => (isset($_POST['notes'])          ? $_POST['notes']          : ""),
@@ -231,8 +238,8 @@ class Product {
                           'custom_field2'        => (isset($_POST['custom_field2'])  ? $_POST['custom_field2']  : ""),
                           'custom_field3'        => (isset($_POST['custom_field3'])  ? $_POST['custom_field3']  : ""),
                           'custom_field4'        => (isset($_POST['custom_field4'])  ? $_POST['custom_field4']  : ""),
-                          'unit_price'           => (isset($_POST['unit_price'])     ? $_POST['unit_price']     : "0"),
-                          'cost'                 => (isset($_POST['cost'])           ? $_POST['cost']           : "0"),
+                          'unit_price'           => $unit_price,
+                          'cost'                 => $cost,
                           'reorder_level'        => (isset($_POST['reorder_level'])  ? $_POST['reorder_level']  : "0"),
                           'attribute'            => json_encode($attr),
                           'notes_as_description' => $notes_as_description,

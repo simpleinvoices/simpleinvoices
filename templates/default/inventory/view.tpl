@@ -10,7 +10,7 @@
     </tr>
     <tr>
       <th>{$LANG.quantity}</th>
-      <td>{$inventory.quantity|siLocal_number}</td>
+      <td>{$inventory.quantity|siLocal_number_trim}</td>
     </tr>
     <tr>
       <th>{$LANG.cost}</th>

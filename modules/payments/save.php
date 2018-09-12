@@ -6,13 +6,20 @@ checkLogin();
 
 if (isset($_POST['process_payment'])) {
     // @formatter:off
-    $result = Payment::insert(array("ac_inv_id"       => $_POST['invoice_id'],
-                                    "ac_amount"       => $_POST['ac_amount'],
-                                    "ac_notes"        => $_POST['ac_notes'],
-                                    "ac_date"         => sqlDateWithTime($_POST['ac_date']),
-                                    "ac_payment_type" => $_POST['ac_payment_type'],
-                                    "domain_id"       => domain_id::get()));
-    $saved = !empty($result) ? "true" : "false";
+    try {
+        $pymt_amt = siLocal::dbStd($_POST['ac_amount']);
+        $result = Payment::insert(array(
+            "ac_inv_id"       => $_POST['invoice_id'],
+            "ac_amount"       => $pymt_amt,
+            "ac_notes"        => $_POST['ac_notes'],
+            "ac_date"         => sqlDateWithTime($_POST['ac_date']),
+            "ac_payment_type" => $_POST['ac_payment_type'],
+            "domain_id"       => domain_id::get()));
+        $saved  = !empty($result) ? "true" : "false";
+    } catch (Exception $e) {
+        $saved = "false";
+    }
+
     // @formatter:on
     if ($saved == 'true') {
         $display_block = "<div class='si_message_ok'>$LANG[save_payment_success]</div>";

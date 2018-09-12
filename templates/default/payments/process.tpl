@@ -7,24 +7,24 @@
       <th>{$invoice.preference|htmlsafe}</th>
       <td>{$invoice.index_id|htmlsafe}</td>
       <th class="details_screen">{$LANG.total}</th>
-      <td>{$invoice.total|number_format:2}</td>
+      <td>{$invoice.total|siLocal_number}</td>
     </tr>
     <tr>
       <th>{$LANG.biller}</th>
       <td>{$biller.name|htmlsafe}</td>
       <th>{$LANG.paid}</th>
-      <td>{$invoice.paid|number_format:2}</td>
+      <td>{$invoice.paid|siLocal_number}</td>
     </tr>
     <tr>
       <th>{$LANG.customer}</th>
       <td>{$customer.name|htmlsafe}</td>
       <th>{$LANG.owing}</th>
-      <td style="text-decoration:underline;">{$invoice.owing|number_format:2}</td>
+      <td style="text-decoration:underline;">{$invoice.owing|siLocal_number}</td>
     </tr>
     <tr>
       <th>{$LANG.amount}</th>
       <td colspan="5">
-        <input type="text" name="ac_amount" size="25" value="{$invoice.owing|siLocal_number}" />
+        <input type="text" name="ac_amount" size="25" value="{$invoice.owing|siLocal_number_trim}" />
         <a class="cluetip" href="#"
            rel="index.php?module=documentation&amp;view=view&amp;page=help_process_payment_auto_amount" title="{$LANG.process_payment_auto_amount}">
           <img src="{$help_image_path}help-small.png" alt="" />

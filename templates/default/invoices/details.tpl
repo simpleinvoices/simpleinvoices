@@ -98,7 +98,7 @@
         <th>{$LANG.gross_total}</th>
         <td>
           <input type="text" name="unit_price0"
-                 value="{$invoiceItems.0.unit_price|siLocal_number_formatted}" size="10" />
+                 value="{$invoiceItems.0.unit_price|siLocal_number_trim}" size="10" />
           <input type="hidden" name="quantity0" value="1" />
           <input type="hidden" name="id0" value="{$invoiceItems.0.id|htmlsafe}" />
           <input type="hidden" name="products0" value="{$invoiceItems.0.product_id|htmlsafe}" />
@@ -163,7 +163,7 @@
           <td>
             <input class="si_right" type="text" name='quantity{$line|htmlsafe}'
                    id='quantity{$line|htmlsafe}'
-                   value='{$invoiceItem.quantity|siLocal_number_formatted}' size="10" />
+                   value='{$invoiceItem.quantity|siLocal_number_trim}' size="10" />
           </td>
           <td>
           {if $products == null }
@@ -196,7 +196,7 @@
           <td>
             <input class="si_right" id="unit_price{$line|htmlsafe}"
                    name="unit_price{$line|htmlsafe}" size="7"
-                   value="{$invoiceItem.unit_price|siLocal_number_clean}" />
+                   value="{$invoiceItem.unit_price|siLocal_number_trim}" />
           </td>
         </tr>
         {$invoiceItem.html}

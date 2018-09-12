@@ -38,8 +38,9 @@
 		</select>
 		</td>
 	</tr>
+	{if !empty($customFieldLabel.product_cf1)}
 	<tr>
-		<td class="details_screen">{$customFieldLabel.product_cf1} 
+		<td class="details_screen">{$customFieldLabel.product_cf1}
 			<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}">
 			<img src="{$help_image_path}help-small.png" /></a>
 		</td>
@@ -52,6 +53,8 @@
 		</select>
 		</td>
 	</tr>
+	{/if}
+	{if !empty($customFieldLabel.product_cf2)}
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf2} 
 			<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}">
@@ -59,6 +62,8 @@
 		</td>
 		<td><input type="text" class="edit" name="custom_field2" value="{$smarty.post.custom_field2}" size="50" /></td>
 	</tr>
+	{/if}
+	{if !empty($customFieldLabel.product_cf3)}
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf3} 
 			<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}">
@@ -66,6 +71,8 @@
 		</td>
 		<td><input type="text" class="edit" name="custom_field3" value="{$smarty.post.custom_field3}" size="50" /></td>
 	</tr>
+	{/if}
+	{if !empty($customFieldLabel.product_cf4)}
 	<tr>
 		<td class="details_screen">{$customFieldLabel.product_cf4} 
 			<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{$LANG.custom_fields}">
@@ -73,6 +80,7 @@
 		</td>
 		<td><input type="text" class="edit" name="custom_field4" value="{$smarty.post.custom_field4}" size="50" /></td>
 	</tr>
+	{/if}
 	<tr>
 		<td class="details_screen">{$LANG.notes}</td>
 		<td><textarea class="editor" name="notes" rows="8" cols="50" />{$smarty.post.notes|unescape}</textarea></td>

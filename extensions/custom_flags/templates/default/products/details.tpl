@@ -9,7 +9,7 @@
     </tr>
     <tr>
       <th>{$LANG.product_unit_price}</th>
-      <td>{$product.unit_price|siLocal_number_clean}</td>
+      <td>{$product.unit_price|siLocal_number_trim}</td>
     </tr>
     {if $defaults.inventory == '1'}
     <tr>
@@ -127,7 +127,7 @@
       </tr>
       <tr>
         <th>{$LANG.product_unit_price}</th>
-        <td><input type="text" name="unit_price" size="25" value="{$product.unit_price|siLocal_number_clean}" /></td>
+        <td><input type="text" name="unit_price" size="25" value="{$product.unit_price|siLocal_number_trim}" /></td>
       </tr>
       {if $defaults.inventory == '1'}
         <tr>
@@ -137,7 +137,7 @@
                <img src="{$help_image_path}help-small.png" alt="" />
             </a>
           </th>
-          <td><input type="text" class="edit" name="cost" value="{$product.cost|siLocal_number_formatted}"  size="25" /></td>
+          <td><input type="text" class="edit" name="cost" value="{$product.cost|siLocal_number}"  size="25" /></td>
         </tr>
         <tr>
           <th>{$LANG.reorder_level}</th>

@@ -13,6 +13,7 @@ class siLocal {
      * @param string $locale Locale the number is to be formatted for.
      * @param string $symbol Currency symbol. Defaults to no symbol used.
      * @return string Formatted number.
+     * @throws Zend_Locale_Exception
      */
     public static function number($number, $precision = "", $locale = "", $symbol = "") {
         global $config;
@@ -29,44 +30,48 @@ class siLocal {
     }
 
     /**
-     * Clean specified numeric value.
-     * Note: Cleaned value will have leading and trailing zeros removed and if there
-     *       are not non-zero decial digits, the decimal point will be remoted.
-     * @param string $number Value to clean.
-     * @return string Cleaned value.
-     */
-    public static function number_clean($number) {
-        $clean = rtrim ( $number, '0'); // remove zeros from end of number ie. 140.00000 becomes 140.
-        $clean = ltrim ( $clean, '0' ); // remove zeros from front of number ie. 0.33 becomes .33
-        $clean = rtrim ( $clean, '.' ); // remove decimal point if an integer ie. 140. becomes 140
-        return $clean;
-    }
-
-    /**
      * Format number in default form.
-     * Note: Default form is without trailing zeros, decimal point and comma.
+     * Note: Default form is without leading & trailing zeros, and locale decimal point (period or comma).
      * @param string $number Numeric value to be formatted.
      * @return string Formatted string.
+     * @throws Zend_Locale_Exception
      */
-    public static function number_trim($number) {
+    public static function number_trim($number, $precision = "", $locale = "", $symbol = "") {
         global $config;
 
-        $formatted_number = self::number( $number );
+        if (empty($locale)) $locale = new Zend_Locale($config->local->locale);
+
+        if (empty($precision)) $precision = $config->local->precision;
+
+        $formatted_number = self::number( $number, $precision, $locale, $symbol );
 
         // Calculate the decimal point right offset.
-        $position = ($config->local->precision + 1) * - 1;
+        $position = ($precision + 1) * (-1);
 
-        // Trim any zeros trailing the decimal point.
-        if (substr($formatted_number, $position, 1) == ".") {
-            $formatted_number = rtrim (trim($formatted_number, '0'), '.');
-        }
-
-        // Trim any trailing zeros and the comma.
-        if (substr($formatted_number, $position, 1) == ",") {
-            $formatted_number = rtrim(trim($formatted_number, '0'), ',');
+        // Get character in the decimal point position. Check if it is a
+        // decimal point. If so, remove it if it is followed only by zeros.
+        // Note this differs in that it won't trim trailing zeroes if there
+        // are non-zero characters following the decimal point. (ex: 1.10 won't trim).
+        $chr = substr($formatted_number, $position, 1);
+        if ($chr == '.' || $chr == ',') {
+            $formatted_number = rtrim (trim($formatted_number, '0'), '.,');
         }
 
         return $formatted_number;
+    }
+
+    /**
+     * Convert a localized number back to the format stored in the database.
+     * @param string $number
+     * @return string Number formatted for database storage (ex: 12.345,67 converts to 12345.67)
+     * @throws Zend_Locale_Exception
+     */
+    public static function dbStd($number) {
+        global $config;
+
+        $locale = new Zend_Locale($config->local->locale);
+        $new_number = Zend_Locale_Format::getNumber($number, ['locale' => $locale, 'precision' => $config->local->precision]);
+        return $new_number;
     }
 
     /**
@@ -118,20 +123,5 @@ class siLocal {
         }
         // @formatter:on
         return $temp_date->get(Zend_Date::DATE_MEDIUM, $locale);
-    }
-
-    /**
-     * Format a numbers for data entry fields.
-     * Note: Example invoice edit/ajax where data is in 6 decimial places
-     *       but only need 2 places in edit view.
-     * $param string $number Number to be formatted.
-     * @return string Formatted number.
-     */
-
-    public static function number_formatted($number) {
-        global $config;
-
-        $number_formatted = number_format($number, $config->local->precision, '.', '');
-        return $number_formatted;
     }
 }

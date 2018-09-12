@@ -255,9 +255,9 @@
       <td></td>
       <td></td>
       <td></td>
-      <td style="text-align:right">{$preference.pref_currency_sign|htmlsafe}{$invoiceItems.0.gross_total|number_format:2}</td>
-      <td style="text-align:right">{$preference.pref_currency_sign|htmlsafe}{$invoiceItems.0.tax_amount|number_format:2}</td>
-      <td style="text-align:right"><u>{$preference.pref_currency_sign|htmlsafe}{$invoiceItems.0.total|number_format:2}</u></td>
+      <td style="text-align:right">{$preference.pref_currency_sign|htmlsafe}{$invoiceItems.0.gross_total|siLocal_number}</td>
+      <td style="text-align:right">{$preference.pref_currency_sign|htmlsafe}{$invoiceItems.0.tax_amount|siLocal_number}</td>
+      <td style="text-align:right"><u>{$preference.pref_currency_sign|htmlsafe}{$invoiceItems.0.total|siLocal_number}</u></td>
     </tr>
     <tr>
       <td colspan="6"><br /><br /></td>
@@ -371,7 +371,7 @@
           {/if}
           {if $invoice.type_id == 3 }
             <tr>
-              <td>{$invoiceItem.quantity|number_format:2}</td>
+              <td>{$invoiceItem.quantity|siLocal_number}</td>
               <td colspan="2">{$invoiceItem.product.description|htmlsafe}</td>
               <td style="text-align:right">{$preference.pref_currency_sign|htmlsafe}{$invoiceItem.unit_price|siLocal_number}</td>
               <td style="text-align:right">{$preference.pref_currency_sign|htmlsafe}{$invoiceItem.gross_total|siLocal_number}</td>
@@ -490,13 +490,13 @@
   </tr>
   <tr>
     <td class="account">{$LANG.total}:</td>
-    <td class="account">{$preference.pref_currency_sign|htmlsafe}{$invoice.total|number_format:2}</td>
+    <td class="account">{$preference.pref_currency_sign|htmlsafe}{$invoice.total|siLocal_number}</td>
     <td class="account">
       <a href='index.php?module=payments&view=manage&id={$invoice.id}'>{$LANG.paid}:</a>
     </td>
-    <td class="account">{$preference.pref_currency_sign|htmlsafe}{$invoice.paid|number_format:2}</td>
+    <td class="account">{$preference.pref_currency_sign|htmlsafe}{$invoice.paid|siLocal_number}</td>
     <td class="account">{$LANG.owing}:</td>
-    <td class="account"><u>{$preference.pref_currency_sign|htmlsafe}{$invoice.owing|number_format:2}</u></td>
+    <td class="account"><u>{$preference.pref_currency_sign|htmlsafe}{$invoice.owing|siLocal_number}</u></td>
     <td class="account">{$LANG.age}:</td>
     <td class="account" nowrap>{$invoice_age}
       <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_age" title="{$LANG.age}">
@@ -506,13 +506,13 @@
     <td></td>
     <td class="columnleft"></td>
     <td class="account">{$LANG.total}:</td>
-    <td class="account">{$preference.pref_currency_sign|htmlsafe}{$customerAccount.total|number_format:2}</td>
+    <td class="account">{$preference.pref_currency_sign|htmlsafe}{$customerAccount.total|siLocal_number}</td>
     <td class="account">
       <a href='index.php?module=payments&view=manage&c_id={$customer.id}'>{$LANG.paid}:</a>
     </td>
-    <td class="account">{$preference.pref_currency_sign|htmlsafe}{$customerAccount.paid|number_format:2} </td>
+    <td class="account">{$preference.pref_currency_sign|htmlsafe}{$customerAccount.paid|siLocal_number} </td>
     <td class="account">{$LANG.owing}:</td>
-    <td class="account"><u>{$preference.pref_currency_sign|htmlsafe}{$customerAccount.owing|number_format:2}</u></td>
+    <td class="account"><u>{$preference.pref_currency_sign|htmlsafe}{$customerAccount.owing|siLocal_number}</u></td>
   </tr>
 </table>
 <br />

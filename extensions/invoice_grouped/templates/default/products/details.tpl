@@ -10,7 +10,7 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.product_unit_price}</td>
-		<td>{$product.unit_price|number_format:2}</td>
+		<td>{$product.unit_price|siLocal_number}</td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.default_tax}</td>
@@ -87,7 +87,7 @@
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.product_unit_price}</td>
-		<td><input type="text" name="unit_price" size="25" value="{$product.unit_price}" /></td>
+		<td><input type="text" name="unit_price" size="25" value="{$product.unit_price|siLocal_number}" /></td>
 	</tr>
 	<tr>
 		<td class="details_screen">{$LANG.default_tax}</td>

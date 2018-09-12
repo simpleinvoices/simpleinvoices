@@ -10,8 +10,8 @@ if($_GET['id']) {
     $rows = $pdoDb->request("SELECT", "products");
     if (!empty($rows)) {
         $row = $rows;
-        // Format with decimal places with precision as defined in config.php
-        $output['cost'] = siLocal::number_formatted($row['cost']);
+        // Format with decimal places with precision for user's locale
+        $output['cost'] = siLocal::number($row['cost']);
     } else {
         $output .= '';
     }

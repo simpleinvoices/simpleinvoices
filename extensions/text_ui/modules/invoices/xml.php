@@ -24,7 +24,7 @@ foreach ($invoices as $row) {
                  </action>";
     $xml .= "    <customer><![CDATA[" . utf8_encode($row['customer']) . "]]></customer>";
     $xml .= "    <date><![CDATA[" . utf8_encode($row['date']) . "]]></date>";
-    $xml .= "    <invoice_total><![CDATA[" . utf8_encode(siLocal::number($row['invoice_total'])) . "]]></invoice_total>";
+    $xml .= "    <invoice_total><![CDATA[" . utf8_encode(siLocal::number_trim($row['invoice_total'])) . "]]></invoice_total>";
     $xml .= "  </row>";
 }
 $xml .= "</rows>";

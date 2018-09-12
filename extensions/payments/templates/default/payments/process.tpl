@@ -13,13 +13,13 @@
         <th>{$LANG.biller}</th>
         <td>{$biller.name|htmlsafe}</td>
         <th>{$LANG.paid}</th>
-        <td>{$invoice.paid|number_format:2}</td>
+        <td>{$invoice.paid|siLocal_number}</td>
       </tr>
       <tr>
         <th>{$LANG.customer}</th>
         <td>{$customer.name|htmlsafe}</td>
         <th>{$LANG.owing}</th>
-        <td style="text-decoration: underline;">{$invoice.owing|number_format:2}</td>
+        <td style="text-decoration: underline;">{$invoice.owing|siLocal_number}</td>
       </tr>
       <tr>
         <th>{$LANG.amount}</th>

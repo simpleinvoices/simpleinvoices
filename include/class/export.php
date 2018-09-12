@@ -96,7 +96,7 @@ class export {
     }
 
     public function getData() {
-        global $api_request, $smarty, $pdoDb, $siUrl;
+        global $config, $smarty, $pdoDb, $siUrl;
 
         // @formatter:off
         //$data = null;
@@ -219,7 +219,7 @@ class export {
                 $pageActive = "invoices";
                 $smarty->assign('pageActive', $pageActive);
 
-                $this->assignTemplateLanguage($this->preference);
+                $orig_locale = $this->assignTemplateLanguage($this->preference);
 
                 $smarty->assign('biller'                 , $this->biller);
                 $smarty->assign('customer'               , $this->customer);
@@ -243,6 +243,11 @@ class export {
                 }
 
                 $data = $smarty->fetch($templatePath);
+
+                // Restore configured locale
+                if (!empty($orig_locale)) {
+                    $config->local->locale = $orig_locale;
+                }
                 break;
         }
         // @formatter:on
@@ -256,9 +261,11 @@ class export {
 
     // assign the language and set the locale from the preference
     public function assignTemplateLanguage($preference) {
+        global $config;
+
         // get and assign the language file from the preference table
         $pref_language = $preference['language'];
-        if (isset($pref_language)) {
+        if (!empty($pref_language)) {
             $LANG = getLanguageArray($pref_language);
             if (isset($LANG) && is_array($LANG) && count($LANG) > 0) {
                 global $smarty;
@@ -266,11 +273,12 @@ class export {
             }
         }
 
-        // Overide config's locale with the one assigned from the preference table
+        // Override config's locale with the one assigned from the preference table
+        $orig_locale = $config->local->locale;
         $pref_locale = $preference['locale'];
         if (isset($pref_language) && strlen($pref_locale) > 4) {
-            global $config;
             $config->local->locale = $pref_locale;
         }
+        return $orig_locale;
     }
 }
