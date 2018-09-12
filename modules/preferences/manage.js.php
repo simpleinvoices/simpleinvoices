@@ -25,8 +25,10 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 			dataType: 'xml',
 			colModel : [
 				{display: '{/literal}{$LANG.actions}{literal}', name : 'actions', width : 10 * percentage_width, sortable : false, align: 'center'},
-				{display: '{/literal}{$LANG.description}{literal}', name : 'pref_description', width : 70 * percentage_width, sortable : true, align: 'left'},
-				{display: '{/literal}{$LANG.enabled}{literal}', name : 'enabled', width : 20 * percentage_width, sortable : true, align: 'center'}
+                {display: '{/literal}{$LANG.description}{literal}', name : 'pref_description', width : 60 * percentage_width, sortable : true, align: 'left'},
+                {display: '{/literal}{$LANG.language}{literal}', name : 'language', width : 10 * percentage_width, sortable : true, align: 'center'},
+                {display: '{/literal}{$LANG.locale}{literal}', name : 'locale', width : 10 * percentage_width, sortable : true, align: 'center'},
+				{display: '{/literal}{$LANG.enabled}{literal}', name : 'enabled', width : 10 * percentage_width, sortable : true, align: 'center'}
 				
 				],
 				
@@ -51,8 +53,6 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 			height: 'auto'
 			}
 			);
-
-
 {/literal}
 
 </script>
