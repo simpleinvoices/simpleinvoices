@@ -7,15 +7,15 @@ define('TA_CENTER',2);
 define('TA_JUSTIFY',3);
 
 class CSSTextAlign extends CSSPropertyStringSet {
-  function CSSTextAlign() { 
-    $this->CSSPropertyStringSet(true, 
-                                true,
-                                array('inherit' => CSS_PROPERTY_INHERIT,
-                                      'left'    => TA_LEFT,
-                                      'right'   => TA_RIGHT,
-                                      'center'  => TA_CENTER,
-                                      'middle'  => TA_CENTER,
-                                      'justify' => TA_JUSTIFY)); 
+  function __construct() {
+      parent::__construct(true,
+                          true,
+                          array('inherit' => CSS_PROPERTY_INHERIT,
+                                'left'    => TA_LEFT,
+                                'right'   => TA_RIGHT,
+                                'center'  => TA_CENTER,
+                                'middle'  => TA_CENTER,
+                                'justify' => TA_JUSTIFY));
   }
   
   function default_value() { return TA_LEFT; }
@@ -45,5 +45,3 @@ class CSSTextAlign extends CSSPropertyStringSet {
 }
 
 CSS::register_css_property(new CSSTextAlign);
-
-?>

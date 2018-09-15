@@ -1,7 +1,6 @@
 <?php
-
-function _($text) {
-  return $text;
+if (!function_exists('_')) {
+    function _($text) {
+        return $text;
+    }
 }
-
-?>

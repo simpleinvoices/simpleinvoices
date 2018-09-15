@@ -6,7 +6,7 @@ require_once(HTML2PS_DIR.'error.php');
  * See CSS 2.1 16.6.1 The 'white-space' processing model
  */
 class InlineContentBuilder {
-  function InlineContentBuilder() {
+  function __construct() {
   }
 
   function add_line_break(&$box, &$pipeline) {
@@ -39,5 +39,3 @@ class InlineContentBuilder {
     return preg_replace('/[\r\n]+$/u', '', $content);
   }
 }
-
-?>

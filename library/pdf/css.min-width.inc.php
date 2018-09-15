@@ -2,8 +2,8 @@
 // $Header: /cvsroot/html2ps/css.min-width.inc.php,v 1.1 2006/09/07 18:38:14 Konstantin Exp $
 
 class CSSMinWidth extends CSSSubFieldProperty {
-  function CSSMinWidth(&$owner, $field) {
-    $this->CSSSubFieldProperty($owner, $field);
+  function __construct(&$owner, $field) {
+    parent::__construct($owner, $field);
   }
 
   function getPropertyCode() {
@@ -22,5 +22,3 @@ class CSSMinWidth extends CSSSubFieldProperty {
     return Value::fromString($value);
   }
 }
-
-?>

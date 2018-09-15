@@ -4,8 +4,8 @@
 require_once(HTML2PS_DIR.'value.text-indent.class.php');
 
 class CSSTextIndent extends CSSPropertyHandler {
-  function CSSTextIndent() { 
-    $this->CSSPropertyHandler(true, true); 
+  function __construct() {
+      parent::__construct(true, true);
   }
 
   function default_value() { 
@@ -34,5 +34,3 @@ class CSSTextIndent extends CSSPropertyHandler {
 }
 
 CSS::register_css_property(new CSSTextIndent());
-
-?>

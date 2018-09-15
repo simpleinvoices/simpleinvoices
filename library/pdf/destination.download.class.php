@@ -1,7 +1,7 @@
 <?php
 class DestinationDownload extends DestinationHTTP {
-  function DestinationDownload($filename) {
-    $this->DestinationHTTP($filename);
+  function __construct($filename) {
+      parent::__construct($filename);
   }
 
   function headers($content_type) {
@@ -13,4 +13,3 @@ class DestinationDownload extends DestinationHTTP {
                  );
   }
 }
-?>

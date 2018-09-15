@@ -12,7 +12,7 @@ class EdgePDF {
    * never modified partially, so we could use one shared object 
    * as a default value
    */
-  function EdgePDF() {
+  function __construct() {
     static $default_width = null;
     if (is_null($default_width)) {
       $default_width =& Value::fromData(0, UNIT_PT);

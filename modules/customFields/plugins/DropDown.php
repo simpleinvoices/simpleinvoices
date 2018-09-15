@@ -19,7 +19,7 @@
 
 class DropDown extends CustomField {
         
-    function DropDown() {
+    function __construct() {
         parent::CustomField(5,"DropDown");
     }
     

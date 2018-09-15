@@ -22,7 +22,7 @@ class Font {
     return $this->error_message; 
   }
 
-  function Font() {}
+  function __construct() {}
 
   function linethrough_position() {
     return $this->bbox[3]*0.25;
@@ -216,4 +216,3 @@ class FontType1 extends Font {
     return true;
   }
 }
-?>

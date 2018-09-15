@@ -33,8 +33,8 @@ class ButtonSubmitBox extends ButtonBox {
    * @param String $field field name (interactive forms)
    * @param String $value field value (interactive forms)
    */
-  function ButtonSubmitBox($field, $value, $action) {
-    $this->ButtonBox();
+  function __construct($field, $value, $action) {
+    parent::__construct();
     $this->_action_url = $action;
     $this->_field_name = $field;
     $this->_value = $value;
@@ -87,5 +87,3 @@ class ButtonSubmitBox extends ButtonBox {
                                     $this->_action_url);
   }
 }
-
-?>

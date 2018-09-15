@@ -17,8 +17,8 @@ class OutputDriverGenericPS extends OutputDriverGeneric {
     return $this->language_level; 
   }
 
-  function OutputDriverGenericPS($image_encoder) {
-    $this->OutputDriverGeneric();
+  function __construct($image_encoder) {
+    parent::__construct();
         
     $this->set_language_level(2);
     $this->set_image_encoder($image_encoder);
@@ -36,4 +36,3 @@ class OutputDriverGenericPS extends OutputDriverGeneric {
     $this->language_level = $version;
   }
 }
-?>

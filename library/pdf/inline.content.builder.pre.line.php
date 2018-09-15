@@ -3,8 +3,8 @@
 require_once(HTML2PS_DIR.'inline.content.builder.php');
 
 class InlineContentBuilderPreLine extends InlineContentBuilder {
-  function InlineContentBuilderPreLine() {
-    $this->InlineContentBuilder();
+  function __construct() {
+      parent::__construct();
   }
 
   /**
@@ -35,5 +35,3 @@ class InlineContentBuilderPreLine extends InlineContentBuilder {
     };
   }
 }
-
-?>

@@ -4,8 +4,8 @@
 class CSSWordSpacing extends CSSPropertyHandler {
   var $_default_value;
 
-  function CSSWordSpacing() { 
-    $this->CSSPropertyHandler(false, true); 
+  function __construct() {
+    parent::__construct(false, true);
 
     $this->_default_value = Value::fromString("0");
   }
@@ -38,5 +38,3 @@ class CSSWordSpacing extends CSSPropertyHandler {
 }
 
 CSS::register_css_property(new CSSWordSpacing);
-
-?>

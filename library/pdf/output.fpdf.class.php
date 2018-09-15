@@ -11,8 +11,8 @@ class OutputDriverFPDF extends OutputDriverGenericPDF {
   var $cx;
   var $cy;
 
-  function OutputDriverFPDF() {
-    $this->OutputDriverGenericPDF();   
+  function __construct() {
+      parent::__construct();
   }
 
   function add_link($x, $y, $w, $h, $target) {
@@ -412,4 +412,3 @@ class OutputDriverFPDF extends OutputDriverGenericPDF {
     return $filename;
   }
 }
-?>

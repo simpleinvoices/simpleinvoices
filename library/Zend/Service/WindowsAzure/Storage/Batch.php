@@ -105,7 +105,12 @@ class Zend_Service_WindowsAzure_Storage_Batch
         unset($this->_operations);
         $this->_storageClient->setCurrentBatch(null);
         $this->_storageClient = null;
-        unset($this);
+        /*
+         * unset($this) changed to the following by RCR 20180914
+         */
+        unset($this->_forTableStorage);
+        unset($this->_baseUrl);
+        unset($this->_isSingleSelect);
     }
 
 	/**

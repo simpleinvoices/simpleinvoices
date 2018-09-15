@@ -44,7 +44,7 @@ class Socket {
 	  *	@param		host
 	  *	@param		port
 	  */
-	function Socket($host, $port) {
+	function __construct($host, $port) {
 		$this->host = $host;
 		$this->port = $port;
 		$this->connected = false;

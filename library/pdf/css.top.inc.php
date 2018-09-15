@@ -4,8 +4,8 @@
 require_once(HTML2PS_DIR.'value.top.php');
 
 class CSSTop extends CSSPropertyHandler {
-  function CSSTop() { 
-    $this->CSSPropertyHandler(false, false); 
+  function __construct() {
+    parent::__construct(false, false);
     $this->_autoValue = ValueTop::fromString('auto');
   }
 
@@ -31,5 +31,3 @@ class CSSTop extends CSSPropertyHandler {
 }
 
 CSS::register_css_property(new CSSTop);
-
-?>

@@ -5,7 +5,7 @@ class StrategyWidthMaxNatural {
   var $_maxw;
   var $_cmaxw;
 
-  function StrategyWidthMaxNatural($limit = 10E6) {
+  function __construct($limit = 10E6) {
     $this->_limit = $limit;
   }
 
@@ -83,5 +83,3 @@ class StrategyWidthMaxNatural {
     return $this->_maxw + $box->_get_hor_extra();
   }
 }
-
-?>

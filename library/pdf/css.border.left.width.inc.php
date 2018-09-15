@@ -2,8 +2,8 @@
 // $Header: /cvsroot/html2ps/css.border.left.width.inc.php,v 1.2 2007/02/04 17:08:18 Konstantin Exp $
 
 class CSSBorderLeftWidth extends CSSSubProperty {
-  function CSSBorderLeftWidth(&$owner) {
-    $this->CSSSubProperty($owner);
+  function __construct(&$owner) {
+      parent::__construct($owner);
   }
 
   function setValue(&$owner_value, &$value) {
@@ -36,5 +36,3 @@ class CSSBorderLeftWidth extends CSSSubProperty {
     return $width;
   }
 }
-
-?>

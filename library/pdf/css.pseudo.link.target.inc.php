@@ -1,7 +1,9 @@
 <?php
 
 class CSSPseudoLinkTarget extends CSSPropertyHandler {
-  function CSSPseudoLinkTarget() { $this->CSSPropertyHandler(true, true); }
+  function __construct() {
+      parent::__construct(true, true);
+  }
 
   function default_value() { return ""; }
 
@@ -22,7 +24,7 @@ class CSSPseudoLinkTarget extends CSSPropertyHandler {
       return $pipeline->guess_url($value);
     } else {
       return $value;
-    };
+    }
   }
 
   function getPropertyCode() {
@@ -35,5 +37,3 @@ class CSSPseudoLinkTarget extends CSSPropertyHandler {
 }
 
 CSS::register_css_property(new CSSPseudoLinkTarget);
-
-?>

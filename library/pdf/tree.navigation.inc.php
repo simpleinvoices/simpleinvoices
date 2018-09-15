@@ -4,7 +4,7 @@
 class TreeWalkerDepthFirst {
   var $_callback;
 
-  function TreeWalkerDepthFirst($callback) {
+  function __construct($callback) {
     $this->_callback = $callback;
   }
 

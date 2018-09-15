@@ -43,7 +43,7 @@ class HTTPServer extends Socket {
 	// protected properties
     var $defaultServer;
 
-	function HTTPServer () {
+	function __construct () {
 		$this->defaultServer = "ActiveLink NET Object/0.1";
 	}
 

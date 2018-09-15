@@ -25,7 +25,7 @@ function convert_to_pdf($path_to_html, $path_to_pdf) {
      */
     var $_dest_filename;
 
-    function MyDestinationFile($dest_filename) {
+    function __construct($dest_filename) {
       $this->_dest_filename = $dest_filename;
     }
 
@@ -37,7 +37,7 @@ function convert_to_pdf($path_to_html, $path_to_pdf) {
   class MyFetcherLocalFile extends Fetcher {
     var $_content;
 
-    function MyFetcherLocalFile($file) {
+    function __construct($file) {
       $this->_content = file_get_contents($file);
     }
 

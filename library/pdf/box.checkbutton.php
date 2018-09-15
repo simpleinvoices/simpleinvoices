@@ -79,8 +79,8 @@ class CheckBox extends GenericFormattedBox {
    * 
    * @see CheckBox::create()
    */
-  function CheckBox($checked, $name, $value) {
-    $this->GenericFormattedBox();
+  function __construct($checked, $name, $value) {
+    parent::__construct();
 
     $this->_checked = $checked;
     $this->_name    = trim($name);

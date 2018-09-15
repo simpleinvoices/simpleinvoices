@@ -5,8 +5,8 @@ class ButtonBrokenImageBox extends BrokenImgBox {
   var $_field_value;
   var $_action_url;
 
-  function ButtonBrokenImageBox($width, $height, $alt, $field, $value, $action_url) {
-    $this->BrokenImgBox($width, $height, $alt);
+  function __construct($width, $height, $alt, $field, $value, $action_url) {
+      parent::__construct($width, $height, $alt);
 
     $this->_field_name  = $field;
     $this->_field_value = $value;
@@ -47,8 +47,8 @@ class ButtonImageBox extends ImgBox {
   var $_field_value;
   var $_action_url;
 
-  function ButtonImageBox($img, $field, $value, $action_url) {
-    $this->ImgBox($img);
+  function __construct($img, $field, $value, $action_url) {
+    parent::__construct($img);
 
     $this->_field_name  = $field;
     $this->_field_value = $value;
@@ -124,5 +124,3 @@ class ButtonImageBox extends ImgBox {
     return $box;
   }    
 }
-
-?>

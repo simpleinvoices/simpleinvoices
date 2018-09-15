@@ -4,7 +4,7 @@ class StrategyWidthMinNowrap {
   var $_maxw;
   var $_cmaxw;
 
-  function StrategyWidthMinNowrap() {
+  function __construct() {
   }
 
   function add_width($delta) {
@@ -48,5 +48,3 @@ class StrategyWidthMinNowrap {
     return max($this->_maxw, $wc->apply($this->_maxw, $box->parent->get_width())) + $box->_get_hor_extra();
   }
 }
-
-?>

@@ -4,8 +4,8 @@
 class CSSLetterSpacing extends CSSPropertyHandler {
   var $_default_value;
 
-  function CSSLetterSpacing() { 
-    $this->CSSPropertyHandler(false, true); 
+  function __construct() {
+    parent::__construct(false, true);
 
     $this->_default_value = Value::fromString("0");
   }
@@ -38,5 +38,3 @@ class CSSLetterSpacing extends CSSPropertyHandler {
 }
 
 CSS::register_css_property(new CSSLetterSpacing);
-
-?>

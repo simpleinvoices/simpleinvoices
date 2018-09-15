@@ -8,14 +8,14 @@ define('WHITESPACE_PRE_WRAP', 3);
 define('WHITESPACE_PRE_LINE', 4);
 
 class CSSWhiteSpace extends CSSPropertyStringSet {
-  function CSSWhiteSpace() { 
-    $this->CSSPropertyStringSet(true, 
-                                true,
-                                array('normal'   => WHITESPACE_NORMAL,
-                                      'pre'      => WHITESPACE_PRE,
-                                      'pre-wrap' => WHITESPACE_PRE_WRAP,
-                                      'nowrap'   => WHITESPACE_NOWRAP,
-                                      'pre-line' => WHITESPACE_PRE_LINE)); 
+  function __construct() {
+      parent::__construct(true,
+                          true,
+                          array('normal'   => WHITESPACE_NORMAL,
+                                'pre'      => WHITESPACE_PRE,
+                                'pre-wrap' => WHITESPACE_PRE_WRAP,
+                                'nowrap'   => WHITESPACE_NOWRAP,
+                                'pre-line' => WHITESPACE_PRE_LINE));
   }
 
   function default_value() { 
@@ -32,5 +32,3 @@ class CSSWhiteSpace extends CSSPropertyStringSet {
 }
 
 CSS::register_css_property(new CSSWhiteSpace);
-  
-?>

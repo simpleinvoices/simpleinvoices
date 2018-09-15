@@ -13,7 +13,7 @@ class BorderColor extends CSSValue {
     return $value;
   }
 
-  function BorderColor($top, $right, $bottom, $left) {
+  function __construct($top, $right, $bottom, $left) {
     $this->left   = $left->copy();
     $this->right  = $right->copy();
     $this->top    = $top->copy();

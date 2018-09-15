@@ -1,7 +1,7 @@
 <?php
 
 class StrategyTableLayoutAuto {
-  function StrategyTableLayoutAuto() {
+  function __construct() {
   }
 
   function apply($table, &$context) {
@@ -248,5 +248,3 @@ class StrategyTableLayoutAuto {
     return $widths;
   }
 }
-
-?>

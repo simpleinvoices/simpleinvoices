@@ -2,7 +2,7 @@
 class Destination {
   var $filename;
 
-  function Destination($filename) {
+  function __construct($filename) {
     $this->set_filename($filename);
   }
 
@@ -16,4 +16,3 @@ class Destination {
 
   function set_filename($filename) { $this->filename = $filename; }
 }
-?>

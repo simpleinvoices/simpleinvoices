@@ -1,7 +1,7 @@
 <?php
 
 class StrategyPositionAbsolute {
-  function StrategyPositionAbsolute() {
+  function __construct() {
   }
 
   function apply(&$box) {
@@ -80,5 +80,3 @@ class StrategyPositionAbsolute {
 //     };
   }
 }
-
-?>

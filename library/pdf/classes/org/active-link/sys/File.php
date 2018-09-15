@@ -51,7 +51,7 @@ class File {
 	  *	@param		optional string filename
 	  *	@param		optional string fileOpenMode
 	  */
-	function File($filename = "", $fileOpenMode = "r") {
+	function __construct($filename = "", $fileOpenMode = "r") {
 		$success = true;
 		$this->filename = $filename;
 		$this->fileOpenMode = $fileOpenMode;
@@ -149,5 +149,3 @@ class File {
 	}
 
 }
-
-?>

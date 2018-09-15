@@ -6,7 +6,7 @@ require_once(HTML2PS_DIR.'output.pdflib.class.php');
 class PDFLIBForm {
   var $_name;
 
-  function PDFLIBForm($name /*, $submit_action, $reset_action */) {
+  function __construct($name /*, $submit_action, $reset_action */) {
     $this->_name          = $name;
   }
 

@@ -6,7 +6,7 @@ class SelectBox extends InlineControlBox {
   var $_value;
   var $_options;
 
-  function SelectBox($name, $value, $options) {
+  function __construct($name, $value, $options) {
     // Call parent constructor
     $this->InlineBox();
 
@@ -125,4 +125,3 @@ class SelectBox extends InlineControlBox {
     return true;
   }
 }
-?>

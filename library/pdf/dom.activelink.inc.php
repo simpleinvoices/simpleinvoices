@@ -8,7 +8,7 @@ class ActiveLinkDOMTree {
   var $parents;
   var $content;
 
-  function ActiveLinkDOMTree($xml, $index, $indices, $parents) {
+  function __construct($xml, $index, $indices, $parents) {
     $this->xml            = $xml;
     $this->index          = $index;
     $this->parent_indices = $indices;
@@ -18,7 +18,7 @@ class ActiveLinkDOMTree {
       $this->content = $xml->value;
     } else {
       $this->content = $xml->getXMLContent();
-    };
+    }
   }
 
   function &from_XML($xml) { 
@@ -122,5 +122,3 @@ class ActiveLinkDOMTree {
     return $node;
   }
 }
-
-?>

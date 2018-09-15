@@ -6,7 +6,7 @@ require_once(HTML2PS_DIR.'path.rectangle.php');
 class Path {
   var $_points;
 
-  function Path() {
+  function __construct() {
     $this->clear();
   }
 
@@ -106,8 +106,8 @@ class PathCircle extends Path {
   var $_y;
   var $_r;
 
-  function PathCircle() {
-    $this->Path();
+  function __construct() {
+    parent::__construct();
 
     $this->set_x(0);
     $this->set_y(0);
@@ -172,5 +172,3 @@ class PathCircle extends Path {
                  $color);
   }
 }
-
-?>

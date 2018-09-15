@@ -14,7 +14,7 @@ class AffineTransform {
   var $_x_scale;
   var $_y_scale;
 
-  function AffineTransform($y_offset, $x_scale, $y_scale) {
+  function __construct($y_offset, $x_scale, $y_scale) {
     $this->_y_offset = $y_offset;
     $this->_x_scale = $x_scale;
     $this->_y_scale = $y_scale;
@@ -184,8 +184,8 @@ class OutputDriverPNG extends OutputDriverGeneric {
     return ceil($y * $scale);
   }
 
-  function OutputDriverPNG() {
-    $this->OutputDriverGeneric();
+  function __construct() {
+    parent::__construct();
 
     $this->_color    = array();
     $this->_font     = array();
@@ -534,4 +534,3 @@ class OutputDriverPNG extends OutputDriverGeneric {
     $this->_path = new Path;
   }
 }
-?>

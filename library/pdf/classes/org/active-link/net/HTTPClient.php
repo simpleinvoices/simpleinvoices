@@ -58,8 +58,8 @@ class HTTPClient extends Socket {
 	  *	@param		string host
 	  *	@param		optional int port
 	  */
-	function HTTPClient($host, $port = 80) {
-		$this->Socket($host, $port);
+	function __construct($host, $port = 80) {
+        parent::__construct($host, $port);
 		$this->defaultRequestMethod = "GET";
 		$this->defaultRequestURI = "/";
 		$this->defaultRequestVersion = "HTTP/1.0";

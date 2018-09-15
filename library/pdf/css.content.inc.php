@@ -59,8 +59,8 @@ require_once(HTML2PS_DIR.'value.content.php');
  *    other elements than the subject of the selector.
  */
 class CSSContent extends CSSPropertyHandler {
-  function CSSContent() { 
-    $this->CSSPropertyHandler(false, false); 
+  function __construct() {
+      parent::__construct(false, false);
   }
 
   function &default_value() { 
@@ -92,5 +92,3 @@ class CSSContent extends CSSPropertyHandler {
 }
 
 CSS::register_css_property(new CSSContent);
-
-?>

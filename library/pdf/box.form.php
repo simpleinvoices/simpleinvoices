@@ -30,11 +30,9 @@ class FormBox extends BlockBox {
     return $box;
   }
 
-  function FormBox($name) {
-    $this->BlockBox();
+  function __construct($name) {
+      parent::__construct();
 
-    $this->_name = $name;
+      $this->_name = $name;
   }
 }
-
-?>

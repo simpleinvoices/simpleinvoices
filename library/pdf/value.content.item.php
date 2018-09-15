@@ -1,7 +1,7 @@
 <?php
 
 class ValueContentItem {
-  function ValueContentItem() {
+  function __construct() {
   }
 
   function parse($string) {
@@ -38,8 +38,8 @@ class ValueContentItem {
 class ValueContentItemString extends ValueContentItem {
   var $_value;
 
-  function ValueContentItemString() {
-    $this->ValueContentItem();
+  function __construct() {
+      parent::__construct();
   }
 
   function &copy() {
@@ -77,8 +77,8 @@ class ValueContentItemString extends ValueContentItem {
 class ValueContentItemUri extends ValueContentItem {
   var $_value;
 
-  function ValueContentItemUri() {
-    $this->ValueContentItem();
+  function __construct() {
+      parent::__construct();
   }
 
   function &copy() {
@@ -99,8 +99,8 @@ class ValueContentItemUri extends ValueContentItem {
 class ValueContentItemCounter extends ValueContentItem {
   var $_name;
 
-  function ValueContentItemCounter() {
-    $this->ValueContentItem();
+  function __construct() {
+      parent::__construct();
   }
 
   function &copy() {
@@ -143,8 +143,8 @@ class ValueContentItemCounter extends ValueContentItem {
 }
 
 class ValueContentItemAttr extends ValueContentItem {
-  function ValueContentItemAttr() {
-    $this->ValueContentItem();
+  function __construct() {
+      parent::__construct();
   }
 
   function &copy() {
@@ -163,8 +163,8 @@ class ValueContentItemAttr extends ValueContentItem {
 }
 
 class ValueContentItemOpenQuote extends ValueContentItem {
-  function ValueContentItemOpenQuote() {
-    $this->ValueContentItem();
+  function __construct() {
+      parent::__construct();
   }
 
   function &copy() {
@@ -183,8 +183,8 @@ class ValueContentItemOpenQuote extends ValueContentItem {
 }
 
 class ValueContentItemCloseQuote extends ValueContentItem {
-  function ValueContentItemCloseQuote() {
-    $this->ValueContentItem();
+  function __construct() {
+      parent::__construct();
   }
 
   function &copy() {
@@ -203,8 +203,8 @@ class ValueContentItemCloseQuote extends ValueContentItem {
 }
 
 class ValueContentItemNoOpenQuote extends ValueContentItem {
-  function ValueContentItemNoOpenQuote() {
-    $this->ValueContentItem();
+  function __construct() {
+      parent::__construct();
   }
 
   function &copy() {
@@ -223,8 +223,8 @@ class ValueContentItemNoOpenQuote extends ValueContentItem {
 }
 
 class ValueContentItemNoCloseQuote extends ValueContentItem {
-  function ValueContentItemNoCloseQuote() {
-    $this->ValueContentItem();
+  function __construct() {
+    parent::__construct();
   }
 
   function &copy() {
@@ -241,5 +241,3 @@ class ValueContentItemNoCloseQuote extends ValueContentItem {
     return '';
   }
 }
-
-?>

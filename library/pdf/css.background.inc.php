@@ -14,14 +14,14 @@ class CSSBackground extends CSSPropertyHandler {
     return 'background';
   }
 
-  function CSSBackground() {
+  function __construct() {
     $this->default_value = new Background(CSSBackgroundColor::default_value(),
                                           CSSBackgroundImage::default_value(),
                                           CSSBackgroundRepeat::default_value(),
                                           CSSBackgroundPosition::default_value(),
                                           CSSBackgroundAttachment::default_value());
 
-    $this->CSSPropertyHandler(true, false);
+      parent::__construct(true, false);
   }
 
   function inherit($state, &$new_state) { 
@@ -60,5 +60,3 @@ CSS::register_css_property(new CSSBackgroundImage($bg, '_image'));
 CSS::register_css_property(new CSSBackgroundRepeat($bg, '_repeat'));
 CSS::register_css_property(new CSSBackgroundPosition($bg, '_position'));
 CSS::register_css_property(new CSSBackgroundAttachment($bg, '_attachment'));
-
-?>

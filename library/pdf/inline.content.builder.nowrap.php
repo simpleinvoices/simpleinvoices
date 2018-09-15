@@ -3,8 +3,8 @@
 require_once(HTML2PS_DIR.'inline.content.builder.php');
 
 class InlineContentBuilderNowrap extends InlineContentBuilder {
-  function InlineContentBuilderNowrap() {
-    $this->InlineContentBuilder();
+  function __construct() {
+      parent::__construct();
   }
 
   /**
@@ -18,5 +18,3 @@ class InlineContentBuilderNowrap extends InlineContentBuilder {
     $box->process_word($this->collapse_whitespace($raw_content), $pipeline);
   }
 }
-
-?>

@@ -175,7 +175,7 @@ class HCConstraint {
   // @param $min value of minimal box height or null if none
   // @param $max value of maximal box height or null if none
   //
-  function HCConstraint($constant, $min, $max) {
+  function __construct($constant, $min, $max) {
     $this->constant = $constant;
     $this->min = $min;
     $this->max = $max;
@@ -227,4 +227,3 @@ class HCConstraint {
       is_null($this->constant);
   }
 }
-?>

@@ -5,7 +5,7 @@ class StrategyWidthMax {
   var $_maxw;
   var $_cmaxw;
 
-  function StrategyWidthMax($limit = 10E6) {
+  function __construct($limit = 10E6) {
     $this->_limit = $limit;
   }
 
@@ -75,5 +75,3 @@ class StrategyWidthMax {
     return $this->_maxw + $box->_get_hor_extra();
   }
 }
-
-?>

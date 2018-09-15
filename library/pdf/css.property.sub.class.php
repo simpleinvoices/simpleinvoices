@@ -3,7 +3,7 @@
 class CSSSubProperty extends CSSPropertyHandler {
   var $_owner;
 
-  function CSSSubProperty(&$owner) {
+  function __construct(&$owner) {
     $this->_owner =& $owner;
   }
 
@@ -76,5 +76,3 @@ class CSSSubProperty extends CSSPropertyHandler {
     error_no_method('getValue', get_class($this));
   }
 }
-
-?>

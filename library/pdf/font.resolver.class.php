@@ -50,7 +50,7 @@ class FontResolver {
     return $this->ps_fonts[$family][$weight][$style][$encoding];
   }
   
-  function FontResolver() {
+  function __construct() {
     $this->families  = array();
     $this->aliases   = array();
     $this->overrides = array();
@@ -148,5 +148,3 @@ class FontResolver {
 global $g_font_resolver, $g_font_resolver_pdf;
 $g_font_resolver = new FontResolver();
 $g_font_resolver_pdf = new FontResolver();
-
-?>

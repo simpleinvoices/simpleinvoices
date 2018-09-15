@@ -3,7 +3,7 @@ class ContentType {
   var $default_extension;
   var $mime_type;
 
-  function ContentType($extension, $mime) {
+  function __construct($extension, $mime) {
     $this->default_extension = $extension;
     $this->mime_type = $mime;
   }
@@ -24,4 +24,3 @@ class ContentType {
     return new ContentType('ps', 'application/postscript');
   }
 }
-?>

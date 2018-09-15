@@ -73,7 +73,7 @@ class CSS {
     return $__g_css_handler_set;
   }
 
-  function CSS() {
+  function __construct() {
     $this->_handlers = array();
     $this->_mapping  = array();
   }
@@ -173,5 +173,3 @@ class CSS {
     return preg_replace("/\\\\\n/", '', $value);
   }
 }
-
-?>

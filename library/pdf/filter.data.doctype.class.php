@@ -1,6 +1,6 @@
 <?php
 class DataFilterDoctype extends DataFilter {
-  function DataFilterDoctype() { }
+  function __construct() { }
 
   function process(&$data) {
     $html = $data->get_content();
@@ -52,4 +52,3 @@ class DataFilterDoctype extends DataFilter {
     return $data;
   }
 }
-?>

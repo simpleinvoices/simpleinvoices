@@ -5,7 +5,7 @@ class FlowViewport {
   var $width;
   var $height;
 
-  function FlowViewport() {
+  function __construct() {
     $this->left = 0;
     $this->top = 0;
     $this->width = 0;
@@ -30,4 +30,3 @@ class FlowViewport {
   function get_height() { return $this->height; }
   function get_width() { return $this->width; }
 }
-?>

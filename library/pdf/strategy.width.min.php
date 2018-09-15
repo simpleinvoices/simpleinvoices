@@ -4,7 +4,7 @@ class StrategyWidthMin {
   var $_maxw;
   var $_cmaxw;
 
-  function StrategyWidthMin() {
+  function __construct() {
   }
 
   function add_width($delta) {
@@ -75,5 +75,3 @@ class StrategyWidthMin {
     return $min_width;
   }
 }
-
-?>

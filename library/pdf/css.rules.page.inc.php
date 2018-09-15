@@ -5,7 +5,7 @@ require_once(HTML2PS_DIR.'css.constants.inc.php');
 class CSSPageSelector {
   var $_type;
 
-  function CSSPageSelector($type) {
+  function __construct($type) {
     $this->set_type($type);
   }
 
@@ -19,16 +19,16 @@ class CSSPageSelector {
 }
 
 class CSSPageSelectorAll extends CSSPageSelector {
-  function CSSPageSelectorAll() {
-    $this->CSSPageSelector(CSS_PAGE_SELECTOR_ALL);
+  function __construct() {
+      parent::__construct(CSS_PAGE_SELECTOR_ALL);
   }
 }
 
 class CSSPageSelectorNamed extends CSSPageSelector  {
   var $_name;
 
-  function CSSPageSelectorNamed($name) {
-    $this->CSSPageSelector(CSS_PAGE_SELECTOR_NAMED);
+  function __construct($name) {
+    parent::__construct(CSS_PAGE_SELECTOR_NAMED);
     $this->set_name($name);
   }
 
@@ -42,20 +42,20 @@ class CSSPageSelectorNamed extends CSSPageSelector  {
 }
 
 class CSSPageSelectorFirst extends CSSPageSelector {
-  function CSSPageSelectorFirst() {
-    $this->CSSPageSelector(CSS_PAGE_SELECTOR_FIRST);
+  function __construct() {
+      parent::__construct(CSS_PAGE_SELECTOR_FIRST);
   }
 }
 
 class CSSPageSelectorLeft extends CSSPageSelector {
-  function CSSPageSelectorLeft() {
-    $this->CSSPageSelector(CSS_PAGE_SELECTOR_LEFT);
+  function __construct() {
+      parent::__construct(CSS_PAGE_SELECTOR_LEFT);
   }
 }
 
 class CSSPageSelectorRight extends CSSPageSelector {
-  function CSSPageSelectorRight() {
-    $this->CSSPageSelector(CSS_PAGE_SELECTOR_RIGHT);
+  function __construct() {
+      parent::__construct(CSS_PAGE_SELECTOR_RIGHT);
   }
 }
 
@@ -64,7 +64,7 @@ class CSSAtRulePage {
   var $margin_boxes;
   var $css;
 
-  function CSSAtRulePage($selector, &$pipeline) {
+  function __construct($selector, &$pipeline) {
     $this->selector = $selector;
     $this->margin_boxes = array();
 
@@ -100,7 +100,7 @@ class CSSAtRuleMarginBox {
    * TODO: CSS_TEXT_ALIGN should get  top/bottom values by default for
    * left-top, left-bottom, right-top and right-bottom boxes
    */
-  function CSSAtRuleMarginBox($selector, &$pipeline) {
+  function __construct($selector, &$pipeline) {
     $this->selector = $selector;
 
     $css = "-html2ps-html-content: ''; content: ''; width: auto; height: auto; margin: 0; border: none; padding: 0; font: auto;";
@@ -390,5 +390,3 @@ function parse_css_atpage_margin_box_declaration($css, &$at_rule, &$pipeline) {
     };
   };
 }
-
-?>

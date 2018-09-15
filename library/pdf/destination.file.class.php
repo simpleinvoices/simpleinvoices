@@ -2,8 +2,8 @@
 class DestinationFile extends Destination {
     var $_link_text;
 
-    function DestinationFile($filename, $link_text = null) {
-        $this->Destination($filename);
+    function __construct($filename, $link_text = null) {
+        parent::__construct($filename);
         $this->_link_text = $link_text;
     }
 

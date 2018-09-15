@@ -102,7 +102,7 @@ class FrameBox extends GenericContainerBox {
     };
   }
 
-  function FrameBox(&$root, &$pipeline) {
+  function __construct(&$root, &$pipeline) {
     $css_state =& $pipeline->getCurrentCSSState();
 
     // Inherit 'border' CSS value from parent (FRAMESET tag), if current FRAME 
@@ -114,7 +114,7 @@ class FrameBox extends GenericContainerBox {
       $css_state->setProperty(CSS_BORDER, $parent_border->copy());
     }
 
-    $this->GenericContainerBox($root);
+      parent::__construct($root);
 
     // If NO src attribute specified, just return.
     if (!$root->has_attribute('src')) { return; };
@@ -227,8 +227,8 @@ class FramesetBox extends GenericContainerBox {
     return $box;
   }
 
-  function FramesetBox(&$root, $pipeline) {
-    $this->GenericContainerBox($root);
+  function __construct(&$root, $pipeline) {
+    parent::__construct($root);
     $this->create_content($root, $pipeline);
     
     // Now determine the frame layout inside the frameset
@@ -301,4 +301,3 @@ class FramesetBox extends GenericContainerBox {
     }
   }
 }
-?>

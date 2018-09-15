@@ -1,7 +1,7 @@
 <?php
 
 class StrategyTableLayoutFixed {
-  function StrategyTableLayoutFixed() {
+  function __construct() {
   }
 
   function apply($table, &$context) {
@@ -14,5 +14,3 @@ class StrategyTableLayoutFixed {
     return $widths;
   }
 }
-
-?>

@@ -22,7 +22,7 @@ class MyDestinationFile extends Destination {
    */
   var $_dest_filename;
 
-  function MyDestinationFile($dest_filename) {
+  function __construct($dest_filename) {
     $this->_dest_filename = $dest_filename;
   }
 
@@ -35,7 +35,7 @@ class MyFetcherMemory extends Fetcher {
   var $base_path;
   var $content;
 
-  function MyFetcherMemory($content, $base_path) {
+  function __construct($content, $base_path) {
     $this->content   = $content;
     $this->base_path = $base_path;
   }
@@ -110,5 +110,3 @@ function convert_to_pdf($html, $path_to_pdf, $base_path='') {
 }
 
 convert_to_pdf(file_get_contents('../temp/long.html'), '../out/test.pdf');
-
-?>

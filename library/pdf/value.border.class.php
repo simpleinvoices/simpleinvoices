@@ -8,7 +8,7 @@ class BorderPDF extends CSSValue {
   var $top;
   var $bottom;
 
-  function BorderPDF() {
+  function __construct() {
     $this->left   =  new EdgePDF();
     $this->right  =  new EdgePDF();
     $this->top    =  new EdgePDF();

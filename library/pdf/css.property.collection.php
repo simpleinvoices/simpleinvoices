@@ -6,7 +6,7 @@ class CSSPropertyCollection {
   var $_priorities;
   var $_max_priority;
 
-  function CSSPropertyCollection() {
+  function __construct() {
     $this->_properties = array();
     $this->_positions  = array();
     $this->_priorities = array();
@@ -120,5 +120,3 @@ class CSSPropertyCollection {
     };
   }
 }
-
-?>

@@ -1,8 +1,8 @@
 <?php
 
 class CSSPseudoLinkDestination extends CSSPropertyHandler {
-  function CSSPseudoLinkDestination() { 
-    $this->CSSPropertyHandler(false, false); 
+  function __construct() {
+      parent::__construct(false, false);
   }
 
   function default_value() { 
@@ -23,5 +23,3 @@ class CSSPseudoLinkDestination extends CSSPropertyHandler {
 }
 
 CSS::register_css_property(new CSSPseudoLinkDestination);
-
-?>

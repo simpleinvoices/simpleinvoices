@@ -2,8 +2,8 @@
 // $Header: /cvsroot/html2ps/css.pseudo.cellpadding.inc.php,v 1.6 2006/09/07 18:38:14 Konstantin Exp $
 
 class CSSCellPadding extends CSSPropertyHandler {
-  function CSSCellPadding() { 
-    $this->CSSPropertyHandler(true, false); 
+  function __construct() {
+      parent::__construct(true, false);
   }
 
   function default_value() { 
@@ -24,5 +24,3 @@ class CSSCellPadding extends CSSPropertyHandler {
 }
 
 CSS::register_css_property(new CSSCellPadding);
-
-?>

@@ -19,7 +19,7 @@
 
 class TextCustomField extends CustomField {
 
-    function TextCustomField() {
+    function __construct() {
         parent::CustomField(3,"TextCustomField");
     }
 

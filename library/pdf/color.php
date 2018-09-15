@@ -1,6 +1,6 @@
 <?php 
 class Color {
-  function Color($rgb = array(0,0,0), $transparent = true) {
+  function __construct($rgb = array(0,0,0), $transparent = true) {
     // We need this 'max' hack, as somethimes we can get values below zero due 
     // the rounding errors... it will cause PDFLIB to die with error message
     // that is not what we want
@@ -38,4 +38,3 @@ class Color {
       $this->b == $rgb->b;
   }
 }
-?>

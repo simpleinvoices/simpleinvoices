@@ -48,7 +48,7 @@ class DocHTML {
 	  *	Constructor, runs when new object instance is created, sets default values
 	  *	@method		DocHTML
 	  */
-	function DocHTML() {
+	function __construct() {
 		$this->CSSStringDefault = "
 		body {background-color: white;}
 		a {font-family: monospace;}

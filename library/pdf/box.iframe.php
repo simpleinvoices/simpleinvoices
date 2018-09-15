@@ -18,10 +18,10 @@ class IFrameBox extends InlineBlockBox {
     return $this->get_width();
   }
 
-  function IFrameBox(&$root, $pipeline) {
-    $this->InlineBlockBox();
+  function __construct(&$root, $pipeline) {
+      parent::__construct();
 
-    // If NO src attribute specified, just return.
+      // If NO src attribute specified, just return.
     if (!$root->has_attribute('src') || 
         trim($root->get_attribute('src')) == '') { 
       return; 
@@ -72,5 +72,3 @@ class IFrameBox extends InlineBlockBox {
     $pipeline->pop_base_url();
   }
 }
-
-?>

@@ -50,9 +50,9 @@ class XML extends Tree {
 	  *	@param		optional string argument
 	  *	@returns	none
 	  */
-	function XML($argument = "") {
+	function __construct($argument = "") {
 		$success = false;
-		$this->Tree();
+        parent::__construct();
 		$this->pathSeparator = "/";
 		$this->tag = new Tag();
 		if(is_string($argument)) {
@@ -577,4 +577,3 @@ class XML extends Tree {
 import("org.active-link.xml.XMLBranch");
 import("org.active-link.xml.XMLLeaf");
 
-?>

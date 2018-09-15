@@ -6,8 +6,8 @@ define('CSS_HTML2PS_PSEUDOELEMENTS_BEFORE',1);
 define('CSS_HTML2PS_PSEUDOELEMENTS_AFTER' ,2);
 
 class CSSHTML2PSPseudoelements extends CSSPropertyHandler {
-  function CSSHTML2PSPseudoelements() { 
-    $this->CSSPropertyHandler(false, false); 
+  function __construct() {
+      parent::__construct(false, false);
   }
 
   function default_value() { 
@@ -28,5 +28,3 @@ class CSSHTML2PSPseudoelements extends CSSPropertyHandler {
 }
 
 CSS::register_css_property(new CSSHTML2PSPseudoelements);
-
-?>

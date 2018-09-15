@@ -6,8 +6,8 @@ require_once(HTML2PS_DIR.'value.min-height.php');
 class CSSMinHeight extends CSSPropertyHandler {
   var $_defaultValue;
 
-  function CSSMinHeight() { 
-    $this->CSSPropertyHandler(true, false); 
+  function __construct() {
+    parent::__construct(true, false);
     $this->_defaultValue = ValueMinHeight::fromString("0px");
   }
 
@@ -50,5 +50,3 @@ class CSSMinHeight extends CSSPropertyHandler {
 }
  
 CSS::register_css_property(new CSSMinHeight);
-
-?>

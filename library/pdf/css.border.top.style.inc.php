@@ -2,8 +2,8 @@
 // $Header: /cvsroot/html2ps/css.border.top.style.inc.php,v 1.1 2006/09/07 18:38:13 Konstantin Exp $
 
 class CSSBorderTopStyle extends CSSSubProperty {
-  function CSSBorderTopStyle(&$owner) {
-    $this->CSSSubProperty($owner);
+  function __construct(&$owner) {
+      parent::__construct($owner);
   }
 
   function setValue(&$owner_value, &$value) {

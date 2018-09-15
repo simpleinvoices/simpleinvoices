@@ -4,7 +4,7 @@ class Rectangle {
   var $ur;
   var $ll;
   
-  function Rectangle($ll, $ur) {
+  function __construct($ll, $ur) {
     $this->ll = $ll;
     $this->ur = $ur;
   }
@@ -31,5 +31,3 @@ class Rectangle {
     };
   }
 }
-
-?>

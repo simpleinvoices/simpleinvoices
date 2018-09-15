@@ -4,8 +4,8 @@ class CSSPropertyStringSet extends CSSPropertyHandler {
   var $_mapping;
   var $_keys;
 
-  function CSSPropertyStringSet($inherit, $inherit_text, $mapping) {
-    $this->CSSPropertyHandler($inherit, $inherit_text);
+  function __construct($inherit, $inherit_text, $mapping) {
+    parent::__construct($inherit, $inherit_text);
 
     $this->_mapping = $mapping;
 
@@ -30,5 +30,3 @@ class CSSPropertyStringSet extends CSSPropertyHandler {
     return $this->default_value();
   }
 }
-
-?>

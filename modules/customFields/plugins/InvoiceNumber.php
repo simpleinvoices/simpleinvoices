@@ -18,7 +18,7 @@
 
 class InvoiceNumber extends CustomField {
 
-    function InvoiceNumber() {
+    function __construct() {
         parent::CustomField(4,"InvoiceNumber");
     }
 

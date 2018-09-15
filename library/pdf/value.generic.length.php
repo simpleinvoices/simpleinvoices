@@ -27,7 +27,7 @@ class Value extends CSSValue {
     return $this->_points;
   }
 
-  function Value() {
+  function __construct() {
     $this->_unit   = UNIT_PT;
     $this->_number = 0;
     $this->_points = 0;

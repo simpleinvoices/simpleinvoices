@@ -6,7 +6,9 @@ define('LA_CENTER',1);
 define('LA_RIGHT',2);
 
 class CSSLocalAlign extends CSSPropertyHandler {
-  function CSSLocalAlign() { $this->CSSPropertyHandler(false, false); }
+  function __construct() {
+      parent::__construct(false, false);
+  }
 
   function default_value() { return LA_LEFT; }
 
@@ -22,5 +24,3 @@ class CSSLocalAlign extends CSSPropertyHandler {
 }
 
 CSS::register_css_property(new CSSLocalAlign);
-
-?>

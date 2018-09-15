@@ -36,8 +36,8 @@ function detect_font_value_type($value) {
 class CSSFont extends CSSPropertyHandler {
   var $_defaultValue;
 
-  function CSSFont() {
-    $this->CSSPropertyHandler(true, true);
+  function __construct() {
+    parent::__construct(true, true);
 
     $this->_defaultValue = null;
   }
@@ -182,5 +182,3 @@ CSS::register_css_property(new CSSFontStyle($font,  'style'));
 CSS::register_css_property(new CSSFontWeight($font, 'weight'));
 CSS::register_css_property(new CSSFontFamily($font, 'family'));
 CSS::register_css_property(new CSSLineHeight($font, 'line_height'));
-
-?>

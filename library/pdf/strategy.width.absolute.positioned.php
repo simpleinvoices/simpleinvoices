@@ -1,7 +1,7 @@
 <?php
 
 class StrategyWidthAbsolutePositioned {
-  function StrategyWidthAbsolutePositioned() {
+  function __construct() {
   }
 
   /**
@@ -162,5 +162,3 @@ class StrategyWidthAbsolutePositioned {
     $box->setCSSProperty(CSS_WIDTH, new WCConstant($box->get_width()));
   }
 }
-
-?>

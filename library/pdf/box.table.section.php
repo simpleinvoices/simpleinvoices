@@ -23,7 +23,7 @@ class TableSectionBox extends GenericContainerBox {
     return $box;
   }
   
-  function TableSectionBox() {
+  function __construct() {
     $this->__construct();
   }
 
@@ -52,4 +52,3 @@ class TableSectionBox extends GenericContainerBox {
     return true;
   }
 }
-?>

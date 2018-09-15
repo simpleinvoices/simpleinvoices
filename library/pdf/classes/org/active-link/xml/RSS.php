@@ -46,7 +46,7 @@ class RSS {
 	  *	@param		string parseString
 	  *	@returns	none
 	  */
-	function RSS($parseString) {
+	function __construct($parseString) {
 		$this->xml = new XML($parseString);
 		$this->rootTags = array("rss", "rdf:RDF");
 		$this->itemBranches = array();

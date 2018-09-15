@@ -20,7 +20,7 @@ class CSSRule {
     $this->body->addProperty($property);
   }
 
-  function CSSRule($rule, &$pipeline) {
+  function __construct($rule, &$pipeline) {
     $this->selector = $rule[0];
     $this->body     = $rule[1]->copy();
     $this->baseurl  = $rule[2];
@@ -75,5 +75,3 @@ function cmp_rule_objs($r1, $r2) {
 
   return $r1->get_order() < $r2->get_order() ? -1 : 1;
 }
-
-?>

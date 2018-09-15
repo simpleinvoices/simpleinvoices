@@ -7,14 +7,14 @@ define('CSS_TEXT_TRANSFORM_UPPERCASE' ,2);
 define('CSS_TEXT_TRANSFORM_LOWERCASE' ,3);
 
 class CSSTextTransform extends CSSPropertyStringSet {
-  function CSSTextTransform() { 
-    $this->CSSPropertyStringSet(false, 
-                                true,
-                                array('inherit'    => CSS_PROPERTY_INHERIT,
-                                      'none'       => CSS_TEXT_TRANSFORM_NONE,
-                                      'capitalize' => CSS_TEXT_TRANSFORM_CAPITALIZE,
-                                      'uppercase'  => CSS_TEXT_TRANSFORM_UPPERCASE,
-                                      'lowercase'  => CSS_TEXT_TRANSFORM_LOWERCASE)); 
+  function __construct() {
+      parent::__construct(false,
+                          true,
+                          array('inherit'    => CSS_PROPERTY_INHERIT,
+                                'none'       => CSS_TEXT_TRANSFORM_NONE,
+                                'capitalize' => CSS_TEXT_TRANSFORM_CAPITALIZE,
+                                'uppercase'  => CSS_TEXT_TRANSFORM_UPPERCASE,
+                                'lowercase'  => CSS_TEXT_TRANSFORM_LOWERCASE));
   }
 
   function default_value() { 
@@ -31,5 +31,3 @@ class CSSTextTransform extends CSSPropertyStringSet {
 }
 
 CSS::register_css_property(new CSSTextTransform);
-
-?>

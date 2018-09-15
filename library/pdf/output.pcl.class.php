@@ -6,7 +6,7 @@ define("ASCII_ESCAPE", chr(27));
 class StreamString {
   var $_content;
 
-  function StreamString() {
+  function __construct() {
     $this->_content = "";
   }
 
@@ -68,7 +68,7 @@ class PCLEscapeGroup {
   var $_value;
   var $_character;
 
-  function PCLEscapeGroup($char, $value) {
+  function __construct($char, $value) {
     $this->_character = $char;
     $this->_value     = $value;
   }
@@ -141,7 +141,7 @@ class PCLEscapeUEL extends PCLEscapeGenericParametric {
 class PCLEscapeNumberOfCopies extends PCLEscapeGenericParametric {
   var $_number;
 
-  function PCLEscapeNumberOfCopies($number) {
+  function __construct($number) {
     $this->_number = $number;
   }
 
@@ -176,7 +176,7 @@ define('PCL_DUPLEX');
 class PCLEscapeSimplexDuplex extends PCLEscapeGenericParametric {
   var $_duplex;
 
-  function PCLEscapeSimplexDuplex($duplex) {
+  function __construct($duplex) {
     $this->_duplex = $duplex;
   }
 
@@ -288,4 +288,3 @@ class OutputDriverPCL extends OutputDriverGeneric {
   function stringwidth($string, $name, $encoding, $size) { }
   function stroke() { }
 }
-?>

@@ -13,7 +13,7 @@ class FetcherUrlCurl extends Fetcher {
   var $url;
   var $_proxy;
 
-  function FetcherUrlCurl() {
+  function __construct() {
     $this->url = "";
     $this->set_proxy(null);
   }
@@ -102,4 +102,3 @@ class FetcherUrlCurl extends Fetcher {
     $this->_proxy = $proxy;
   }
 }
-?>

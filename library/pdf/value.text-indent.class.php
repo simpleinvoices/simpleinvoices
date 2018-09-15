@@ -27,7 +27,7 @@ class TextIndentValuePDF extends CSSValue {
     return $this->raw_value[0] == 0;
   }
 
-  function TextIndentValuePDF($value) {
+  function __construct($value) {
     $this->raw_value = $value;
   }
 

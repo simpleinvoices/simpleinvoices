@@ -7,14 +7,14 @@ define('CLEAR_RIGHT',2);
 define('CLEAR_BOTH',3);
 
 class CSSClear extends CSSPropertyStringSet {
-  function CSSClear() { 
-    $this->CSSPropertyStringSet(false, 
-                                false,
-                                array('inherit' => CSS_PROPERTY_INHERIT,
-                                      'left'    => CLEAR_LEFT,
-                                      'right'   => CLEAR_RIGHT,
-                                      'both'    => CLEAR_BOTH,
-                                      'none'    => CLEAR_NONE)); 
+  function __construct() {
+    parent::__construct(false,
+                        false,
+                        array('inherit' => CSS_PROPERTY_INHERIT,
+                              'left'    => CLEAR_LEFT,
+                              'right'   => CLEAR_RIGHT,
+                              'both'    => CLEAR_BOTH,
+                              'none'    => CLEAR_NONE));
   }
 
   function default_value() { 
@@ -31,5 +31,3 @@ class CSSClear extends CSSPropertyStringSet {
 }
 
 CSS::register_css_property(new CSSClear);
-
-?>

@@ -1,7 +1,7 @@
 <?php
 // $Header: /cvsroot/html2ps/stubs.common.inc.php,v 1.5 2006/11/11 13:43:53 Konstantin Exp $
 
-if (!function_exists('file_get_contents')) {
+if (``) {
   require_once(HTML2PS_DIR.'stubs.file_get_contents.inc.php');
 }
 

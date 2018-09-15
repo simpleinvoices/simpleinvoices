@@ -37,7 +37,7 @@ class OutputFilterPS2PDF extends OutputFilter {
     return GS_PATH." -dNOPAUSE -dBATCH -dEmbedAllFonts=true -dCompatibilityLevel=".$this->pdf_version." -sDEVICE=pdfwrite -sOutputFile=".$filename.".pdf ".$filename;
   }
 
-  function OutputFilterPS2PDF($pdf_version) {
+  function __construct($pdf_version) {
     $this->pdf_version = $pdf_version;
   }
 
@@ -48,4 +48,3 @@ class OutputFilterPS2PDF extends OutputFilter {
     return $pdf_file;
   }
 }
-?>

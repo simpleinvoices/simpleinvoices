@@ -20,7 +20,7 @@ class Media {
    * @param Array $size associative array with 'height' and 'width' keys (mm)
    * @param Array $margins associative array with 'top', 'bottom', 'left' and 'right' keys (mm)
    */
-  function Media($size, $margins) {
+  function __construct($size, $margins) {
     $this->size    = $size;
     $this->margins = $margins;
     $this->pixels  = 800;
@@ -128,5 +128,3 @@ class Media {
       $this->to_ps_landscape();
   }
 }
-
-?>

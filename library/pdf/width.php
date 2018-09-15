@@ -22,8 +22,8 @@ function merge_width_constraint($wc1, $wc2) {
 // parent have 'fit' width and depends on the current constraint itself
 
 class WCNone extends WidthConstraint {
-  function WCNone() {
-    $this->WidthConstraint();
+  function __construct() {
+    parent::__construct();
   }
 
   function applicable(&$box) { return false; }
@@ -45,8 +45,8 @@ class WCNone extends WidthConstraint {
 class WCConstant extends WidthConstraint {
   var $width;
 
-  function WCConstant($width) {
-    $this->WidthConstraint();
+  function __construct($width) {
+    parent::__construct();
     $this->width = $width;
   }
 
@@ -85,8 +85,8 @@ class WCFraction extends WidthConstraint {
     return $box->isCell() || $parent_wc->applicable($box->parent);
   }
 
-  function WCFraction($fraction) {
-    $this->WidthConstraint();
+  function __construct($fraction) {
+    parent::__construct();
     $this->fraction = $fraction;
   }
 

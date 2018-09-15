@@ -39,7 +39,7 @@ class OutputDriverGeneric extends OutputDriver {
 
   var $anchors;
 
-  function OutputDriverGeneric() {
+  function __construct() {
     // Properties setup
     $this->set_debug_boxes(false);
     $this->set_filename($this->mk_filename());

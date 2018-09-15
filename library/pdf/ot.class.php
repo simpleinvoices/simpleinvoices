@@ -19,7 +19,7 @@ class OpenTypeFile {
   var $_filehandle;
   var $_sfnt;
 
-  function OpenTypeFile() {
+  function __construct() {
     $this->_filehandle = null;
     $this->_sfnt = new OpenTypeFileSFNT();
   }
@@ -76,7 +76,7 @@ class OpenTypeFileSFNT {
     $this->_tables = array();
   }
 
-  function OpenTypeFileSFNT() {
+  function __construct() {
     $this->_offsetTable = new OpenTypeFileOffsetTable();
     $this->_tableDirectory = array();
   }
@@ -199,7 +199,7 @@ class OpenTypeFileOffsetTable {
   var $_entrySelector;
   var $_rangeShift;
 
-  function OpenTypeFileOffsetTable() {
+  function __construct() {
     $this->_numTables     = 0;
     $this->_searchRange   = 0;
     $this->_entrySelector = 0;
@@ -248,7 +248,7 @@ class OpenTypeFileTableDirectory {
   var $_offset;
   var $_length;
 
-  function OpenTypeFileTableDirectory() {
+  function __construct() {
     $this->_tag      = null;
     $this->_checkSum = 0;
     $this->_offset   = 0;
@@ -275,7 +275,7 @@ class OpenTypeFileTable {
   function _delete() {
   }
 
-  function OpenTypeFileTable() {
+  function __construct() {
     $this->_fontFile = null;
   }
 
@@ -315,8 +315,8 @@ class OpenTypeFilePOST extends OpenTypeFileTable {
   var $_minMemType1;
   var $_maxMemType1;
 
-  function OpenTypeFilePOST() {
-    $this->OpenTypeFileTable();
+  function __construct() {
+      parent::__construct();
   }
 
   function _read($filehandle) {
@@ -340,8 +340,8 @@ class OpenTypeFileNAME extends OpenTypeFileTable {
   var $_stringOffset;
   var $_nameRecord;
 
-  function OpenTypeFileNAME() {
-    $this->OpenTypeFileTable();
+  function __construct() {
+    parent::__construct();
     $this->_nameRecord = array();
   }
 
@@ -396,8 +396,8 @@ class OpenTypeFileNAMERecord extends OpenTypeFileTable {
   var $_content;
   var $_baseOffset;
 
-  function OpenTypeFileNAMERecord() {
-    $this->OpenTypeFileTable();
+  function __construct() {
+    parent::__construct();
     $this->_content = null;
   }
 
@@ -515,8 +515,8 @@ class OpenTypeFileHEAD extends OpenTypeFileTable {
   var $_indexToLocFormat;
   var $_glyphDataFormat;
 
-  function OpenTypeFileHEAD() {
-    $this->OpenTypeFileTable();
+  function __construct() {
+      parent::__construct();
   }
 
   function _read($filehandle) {
@@ -548,8 +548,8 @@ class OpenTypeFileCMAP extends OpenTypeFileTable {
   var $_encodings;
   var $_subtables;
 
-  function OpenTypeFileCMAP() {
-    $this->OpenTypeFileTable();
+  function __construct() {
+    parent::__construct();
     $this->_header = new OpenTypeFileCMAPHeader();
     $this->_encodings = array();
     $this->_subtables = array();
@@ -611,7 +611,7 @@ class OpenTypeFileCMAPSubtable {
   var $_format;
   var $_content;
 
-  function OpenTypeFileCMAPSubtable() {
+  function __construct() {
     $this->_content = null;
   }
 
@@ -650,7 +650,7 @@ class OpenTypeFileCMAPSubtable4 extends OpenTypeFileTable {
   var $_idRangeOffset;
   var $_glyphIdArray;
 
-  function OpenTypeFileCMAPSubtable4() {
+  function __construct() {
     $this->_endCount      = array();
     $this->_startCount    = array();
     $this->_idDelta       = array();
@@ -797,8 +797,8 @@ class OpenTypeFileCMAPHeader {
 class OpenTypeFileMAXP extends OpenTypeFileTable {
   var $_numGlyphs;
 
-  function OpenTypeFileMAXP() {
-    $this->OpenTypeFileTable();
+  function __construct() {
+      parent::__construct();
   }
 
   function _read($filehandle) {
@@ -825,8 +825,8 @@ class OpenTypeFileHHEA extends OpenTypeFileTable {
   var $_metricDataFormat;
   var $_numberOfHMetrics;
 
-  function OpenTypeFileHHEA() {
-    $this->OpenTypeFileTable();
+  function __construct() {
+      parent::__construct();
   }
 
   function _read($filehandle) {
@@ -861,8 +861,8 @@ class OpenTypeFileHMTX extends OpenTypeFileTable {
     unset($this->_leftSideBearing);
   }
 
-  function OpenTypeFileHMTX() {
-    $this->OpenTypeFileTable();
+  function __construct() {
+    parent::__construct();
 
     $this->_hMetrics        = array();
     $this->_leftSideBearing = array();
@@ -887,6 +887,3 @@ class OpenTypeFileHMTX extends OpenTypeFileTable {
     };
   }
 }
-
-
-?>

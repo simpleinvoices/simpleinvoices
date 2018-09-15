@@ -10,11 +10,11 @@ class LegendBox extends GenericContainerBox {
     return $box;
   }
 
-  function LegendBox(&$root) {
+  function __construct(&$root) {
     // Call parent constructor
-    $this->GenericContainerBox();
+      parent::__construct();
 
-    $this->_current_x = 0;
+      $this->_current_x = 0;
     $this->_current_y = 0;
   }
 
@@ -54,4 +54,3 @@ class LegendBox extends GenericContainerBox {
     return GenericContainerBox::show($driver);
   }
 }
-?>

@@ -4,8 +4,8 @@ class CSSSubFieldProperty extends CSSSubProperty {
   var $_owner;
   var $_owner_field;
 
-  function CSSSubFieldProperty(&$owner, $field) {
-    $this->CSSSubProperty($owner);
+  function __construct(&$owner, $field) {
+    parent::__construct($owner);
     $this->_owner_field = $field;
   }
 
@@ -19,5 +19,3 @@ class CSSSubFieldProperty extends CSSSubProperty {
     return $owner_value->$field;
   }
 }
-
-?>

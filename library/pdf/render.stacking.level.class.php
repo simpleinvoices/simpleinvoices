@@ -3,7 +3,7 @@
 class RenderStackingLevel {
   var $_boxes;
 
-  function RenderStackingLevel() {
+  function __construct() {
     $this->set_boxes(array());
   }
 
@@ -15,5 +15,3 @@ class RenderStackingLevel {
     $this->_boxes = $boxes;
   }
 }
-
-?>

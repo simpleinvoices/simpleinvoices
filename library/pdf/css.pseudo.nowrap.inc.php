@@ -5,7 +5,10 @@ define('NOWRAP_NORMAL',0);
 define('NOWRAP_NOWRAP',1);
 
 class CSSPseudoNoWrap extends CSSPropertyHandler {
-  function CSSPseudoNoWrap() { $this->CSSPropertyHandler(false, false); }
+  function __construct() {
+      parent::__construct(false, false);
+  }
+
   function default_value() { return NOWRAP_NORMAL; }
 
   function getPropertyCode() {
@@ -18,5 +21,3 @@ class CSSPseudoNoWrap extends CSSPropertyHandler {
 }
 
 CSS::register_css_property(new CSSPseudoNoWrap);
-  
-?>

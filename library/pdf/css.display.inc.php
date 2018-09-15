@@ -2,7 +2,9 @@
 // $Header: /cvsroot/html2ps/css.display.inc.php,v 1.21 2006/09/07 18:38:13 Konstantin Exp $
 
 class CSSDisplay extends CSSPropertyHandler {
-  function CSSDisplay() { $this->CSSPropertyHandler(false, false); }
+  function __construct() {
+      parent::__construct(false, false);
+  }
 
   function get_parent() { 
     if (isset($this->_stack[1])) {
@@ -43,4 +45,3 @@ function is_inline_element($display) {
     $display == "-radio" ||
     $display == "-select";
 }
-?>

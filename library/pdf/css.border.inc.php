@@ -36,8 +36,8 @@ define('BORDER_VALUE_STYLE',3);
 class CSSBorder extends CSSPropertyHandler {
   var $_defaultValue;
 
-  function CSSBorder() {
-    $this->CSSPropertyHandler(false, false);
+  function __construct() {
+      parent::__construct(false, false);
 
     $this->_defaultValue = BorderPDF::create(array('top'    => array('width' => Value::fromString('2px'), 
                                                                      'color' => array(0,0,0), 
@@ -147,5 +147,3 @@ CSS::register_css_property(new CSSBorderLeftWidth($border));
 CSS::register_css_property(new CSSBorderTopWidth($border));
 CSS::register_css_property(new CSSBorderRightWidth($border));
 CSS::register_css_property(new CSSBorderBottomWidth($border));
-
-?>

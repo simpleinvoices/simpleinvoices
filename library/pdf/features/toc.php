@@ -4,7 +4,7 @@ class FeatureToc {
   var $_anchor_locator;
   var $_document_updater;
 
-  function FeatureToc() {
+  function __construct() {
     $this->set_anchor_locator(new FeatureTocAnchorLocatorHeaders());
     $this->set_document_updater(new FeatureTocDocumentUpdaterPrependPage());
   }
@@ -134,7 +134,7 @@ class FeatureTocAnchorLocatorHeaders {
   var $_locations;
   var $_last_generated_anchor_id;
 
-  function FeatureTocAnchorLocatorHeaders() {
+  function __construct() {
     $this->set_locations(array());
     $this->_last_generated_anchor_id = 0;
   }
@@ -187,7 +187,7 @@ class FeatureTocAnchorLocatorHeaders {
 }
 
 class FeatureTocDocumentUpdaterAppendPage {
-  function FeatureTocDocumentUpdaterAppendPage() {
+  function __construct() {
   }
 
   function run(&$toc_box, &$media, &$document) {
@@ -197,7 +197,7 @@ class FeatureTocDocumentUpdaterAppendPage {
 }
 
 class FeatureTocDocumentUpdaterPrependPage {
-  function FeatureTocDocumentUpdaterPrependPage() {
+  function __construct() {
   }
 
   function run(&$toc_box, &$media, &$document) {
@@ -207,7 +207,7 @@ class FeatureTocDocumentUpdaterPrependPage {
 }
 
 class FeatureTocDocumentUpdaterPlaceholder {
-  function FeatureTocDocumentUpdaterPlaceholder() {
+  function __construct() {
   }
 
   function run(&$toc_box, &$media, &$document) {
@@ -215,5 +215,3 @@ class FeatureTocDocumentUpdaterPlaceholder {
     $placeholder->append_child($toc_box);
   }
 }
-
-?>

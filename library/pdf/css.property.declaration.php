@@ -5,7 +5,7 @@ class CSSPropertyDeclaration {
   var $_value;
   var $_important;
 
-  function CSSPropertyDeclaration() {
+  function __construct() {
     $this->_code      = 0;
     $this->_value     = null;
     $this->_important = false;
@@ -63,5 +63,3 @@ class CSSPropertyDeclaration {
     return $this->_important;
   }
 }
-
-?>

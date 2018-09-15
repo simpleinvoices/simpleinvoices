@@ -4,8 +4,8 @@
 class OutputDriverGenericPDF extends OutputDriverGeneric {
   var $pdf_version;
 
-  function OutputDriverGenericPDF() {
-    $this->OutputDriverGeneric();
+  function __construct() {
+    parent::__constructOutputDriverGeneric();
     $this->set_pdf_version("1.3");
   }
 

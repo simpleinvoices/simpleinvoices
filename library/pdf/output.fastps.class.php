@@ -15,8 +15,8 @@ class OutputDriverFastPS extends OutputDriverGenericPS {
   var $underline;
   var $linethrough;
 
-  function OutputDriverFastPS(&$image_encoder) { 
-    $this->OutputDriverGenericPS($image_encoder);
+  function __construct(&$image_encoder) {
+      parent::__construct($image_encoder);
   }
 
   function add_link($x, $y, $w, $h, $target) { 
@@ -402,5 +402,3 @@ class OutputDriverFastPS extends OutputDriverGenericPS {
     return $str;
   }
 }
-
-?>

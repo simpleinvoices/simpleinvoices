@@ -2,8 +2,8 @@
 // $Header: /cvsroot/html2ps/box.inline.control.php,v 1.7 2006/09/07 18:38:12 Konstantin Exp $
 
 class InlineControlBox extends InlineBox {
-  function InlineControlBox() {
-    $this->InlineBox();
+  function __construct() {
+      parent::__construct();
   }
 
   function get_min_width(&$context, $limit = 10E6) { 
@@ -90,4 +90,3 @@ class InlineControlBox extends InlineBox {
     return GenericContainerBox::show($viewport);
   }
 }
-?>

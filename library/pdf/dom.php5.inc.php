@@ -3,7 +3,7 @@ class DOMTree {
   var $domelement;
   var $content;
   
-  function DOMTree($domelement) {
+  function __construct($domelement) {
     $this->domelement = $domelement;
     $this->content = $domelement->textContent;
   }
@@ -91,4 +91,3 @@ class DOMTree {
     return $this->domelement->localName; 
   }
 }
-?>

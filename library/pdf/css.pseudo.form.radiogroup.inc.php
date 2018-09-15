@@ -1,8 +1,8 @@
 <?php
 
 class CSSPseudoFormRadioGroup extends CSSPropertyHandler {
-  function CSSPseudoFormRadioGroup() { 
-    $this->CSSPropertyHandler(true, true); 
+  function __construct() {
+      parent::__construct(true, true);
   }
 
   function default_value() { 
@@ -23,5 +23,3 @@ class CSSPseudoFormRadioGroup extends CSSPropertyHandler {
 }
 
 CSS::register_css_property(new CSSPseudoFormRadioGroup);
-
-?>

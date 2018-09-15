@@ -6,7 +6,7 @@ class CSSState {
   var $_handlerSet;
   var $_baseFontSize;
 
-  function CSSState(&$handlerSet) {
+  function __construct(&$handlerSet) {
     $this->_handlerSet        =& $handlerSet;
     $this->_state             =  array($this->_getDefaultState());
     $this->_stateDefaultFlags =  array($this->_getDefaultStateFlags());
@@ -180,5 +180,3 @@ class CSSState {
     return $this->_baseFontSize[0];
   }
 }
-
-?>

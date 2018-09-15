@@ -4,7 +4,7 @@ class PreTreeFilterHTML2PSFields extends PreTreeFilter {
   var $filesize;
   var $_timestamp;
 
-  function PreTreeFilterHTML2PSFields($filename=null, $filesize=null, $timestamp=null) {
+  function __construct($filename=null, $filesize=null, $timestamp=null) {
     $this->filename  = $filename;
     $this->filesize  = $filesize;
 
@@ -60,4 +60,3 @@ class PreTreeFilterHTML2PSFields extends PreTreeFilter {
     };
   }
 }
-?>

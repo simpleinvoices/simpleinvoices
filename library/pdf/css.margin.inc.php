@@ -5,9 +5,9 @@ require_once(HTML2PS_DIR.'value.margin.class.php');
 class CSSMargin extends CSSPropertyHandler {
   var $default_value;
 
-  function CSSMargin() { 
+  function __construct() {
     $this->default_value = $this->parse("0");
-    $this->CSSPropertyHandler(false, false); 
+    parent::__construct(false, false);
   }
 
   function default_value() { 
@@ -126,5 +126,3 @@ CSS::register_css_property(new CSSMarginLeft($mh, 'left'));
 CSS::register_css_property(new CSSMarginRight($mh, 'right'));
 CSS::register_css_property(new CSSMarginTop($mh, 'top'));
 CSS::register_css_property(new CSSMarginBottom($mh, 'bottom'));
-
-?>

@@ -1,7 +1,7 @@
 <?php
 
 class StrategyLinkRenderingNormal {
-  function StrategyLinkRenderingNormal() {
+  function __construct() {
   }
 
   function apply(&$box, &$driver) {

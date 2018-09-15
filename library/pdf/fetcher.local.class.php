@@ -3,7 +3,7 @@
 class FetcherLocalFile extends Fetcher {
   var $_content;
   
-  function FetcherLocalFile($file) {
+  function __construct($file) {
     $this->_content = file_get_contents($file);
   }
 
@@ -19,4 +19,3 @@ class FetcherLocalFile extends Fetcher {
     return "";
   }
 }
-?>

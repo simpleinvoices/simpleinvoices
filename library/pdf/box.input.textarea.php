@@ -5,10 +5,10 @@ class TextAreaInputBox extends InlineBlockBox {
   var $_field_name;
   var $_value;
 
-  function TextAreaInputBox($value, $name) {
-    $this->InlineBlockBox();
+  function __construct($value, $name) {
+      parent::__construct();
 
-    $this->set_value($value);
+      $this->set_value($value);
     $this->_field_name  = $name;
   }
 
@@ -70,5 +70,3 @@ class TextAreaInputBox extends InlineBlockBox {
     return $status;
   }
 }
-
-?>

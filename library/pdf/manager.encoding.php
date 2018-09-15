@@ -78,7 +78,7 @@ class ManagerEncoding {
     fclose($file);
   }
 
-  function ManagerEncoding() {
+  function __construct() {
     $this->_encodings = array();
 
     $this->registerCustomEncoding("custom", array(0,1,2,3,4,5,6,7,8,9,10,
@@ -254,4 +254,3 @@ class ManagerEncoding {
 
 global $g_manager_encodings;
 $g_manager_encodings = new ManagerEncoding;
-?>

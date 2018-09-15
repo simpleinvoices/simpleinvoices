@@ -19,7 +19,7 @@
  * @link http://www.w3.org/TR/html4/interact/forms.html#h-17.4 HTML 4.01 The INPUT element
  */
 class ButtonBox extends InlineControlBox {
-  function ButtonBox() {
+  function __construct() {
     $this->InlineControlBox();
   }
 
@@ -128,4 +128,3 @@ class ButtonBox extends InlineControlBox {
     return $status;
   }
 }
-?>

@@ -3,7 +3,7 @@
 class PostTreeFilterPositioned extends PreTreeFilter {
   var $_context;
 
-  function PostTreeFilterPositioned(&$context) {
+  function __construct(&$context) {
     $this->_context =& $context;
   }
 
@@ -26,4 +26,3 @@ class PostTreeFilterPositioned extends PreTreeFilter {
     return true;
   }
 }
-?>

@@ -35,7 +35,7 @@ class RadioBox extends SimpleInlineBox {
     return $box;
   }
 
-  function RadioBox($checked, $value, $group_name) {
+  function __construct($checked, $value, $group_name) {
     // Call parent constructor
     $this->GenericBox();
 
@@ -136,4 +136,3 @@ class RadioBox extends SimpleInlineBox {
     return 0;
   }
 }
-?>

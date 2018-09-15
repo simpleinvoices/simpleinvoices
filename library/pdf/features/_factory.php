@@ -3,7 +3,7 @@
 class FeatureFactory {
   var $_features;
 
-  function FeatureFactory() {
+  function __construct() {
     $this->_features = array();
   }
 
@@ -43,5 +43,3 @@ class FeatureFactory {
     return $instance;
   }
 }
-
-?>

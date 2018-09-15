@@ -3,7 +3,7 @@
 class Dispatcher {
   var $_callbacks;
 
-  function Dispatcher() {
+  function __construct() {
     $this->_callbacks = array();
   }
 

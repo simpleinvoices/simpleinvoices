@@ -44,7 +44,7 @@ class Background extends CSSValue {
    * @param int $repeat 'background-repeat' value
    * @param BackgroundPosition $position 'background-position' value
    */
-  function Background($color, $image, $repeat, $position, $attachment) {
+  function __construct($color, $image, $repeat, $position, $attachment) {
     $this->_color      = $color;
     $this->_image      = $image;
     $this->_repeat     = $repeat;

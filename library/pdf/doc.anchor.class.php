@@ -48,12 +48,10 @@ class Anchor {
    * @param int $x X-coordinate of the anchor on the selected page
    * @param int $y Y-coordinate of the anchor on the selected page
    */
-  function Anchor($name, $page, $x, $y) {
+  function __construct($name, $page, $x, $y) {
     $this->name = $name;
     $this->page = $page;
     $this->x    = $x;
     $this->y    = $y;
   }
 }
-
-?>

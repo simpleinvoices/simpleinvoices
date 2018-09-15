@@ -11,10 +11,10 @@ class TextBoxString extends TextBox {
     return $box;
   }
 
-  function TextBoxString($word, $encoding) {
+  function __construct($word, $encoding) {
     // Call parent constructor
-    $this->TextBox();
-    $this->add_subword($word, $encoding, array());
+      parent::__construct();
+      $this->add_subword($word, $encoding, array());
   }
 
   function get_extra_bottom() {
@@ -57,4 +57,3 @@ class TextBoxString extends TextBox {
     return $this->width;
   }
 }
-?>

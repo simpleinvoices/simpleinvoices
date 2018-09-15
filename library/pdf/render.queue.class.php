@@ -3,7 +3,7 @@
 class RenderQueue {
   var $_root_context;
 
-  function RenderQueue() {
+  function __construct() {
     $this->set_root_context(null);
   }
 
@@ -15,5 +15,3 @@ class RenderQueue {
     $this->_root_context =& $context;
   }
 }
-
-?>

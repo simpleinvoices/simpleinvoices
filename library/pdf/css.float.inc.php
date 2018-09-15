@@ -6,12 +6,12 @@ define('FLOAT_LEFT',1);
 define('FLOAT_RIGHT',2);
 
 class CSSFloat extends CSSPropertyStringSet {
-  function CSSFloat() { 
-    $this->CSSPropertyStringSet(false, 
-                                false,
-                                array('left'  => FLOAT_LEFT,
-                                      'right' => FLOAT_RIGHT,
-                                      'none'  => FLOAT_NONE)); 
+  function __construct() {
+      parent::__construct(false,
+                          false,
+                          array('left'  => FLOAT_LEFT,
+                                'right' => FLOAT_RIGHT,
+                                'none'  => FLOAT_NONE));
   }
 
   function default_value() { 
@@ -28,5 +28,3 @@ class CSSFloat extends CSSPropertyStringSet {
 }
 
 CSS::register_css_property(new CSSFloat);
-
-?>

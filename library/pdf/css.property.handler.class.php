@@ -20,7 +20,7 @@ class CSSPropertyHandler {
     $state->setPropertyDefaultFlag($this->getPropertyCode(), false);
   }
 
-  function CSSPropertyHandler($inheritable, $inheritable_text) { 
+  function __construct($inheritable, $inheritable_text) {
     $this->_inheritable = $inheritable;
     $this->_inheritable_text = $inheritable_text;
   }
@@ -97,5 +97,3 @@ class CSSPropertyHandler {
     $state[$property_code] = $value;
   }
 }
-
-?>

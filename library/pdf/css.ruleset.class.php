@@ -5,7 +5,7 @@ class CSSRuleset {
   var $tag_filtered;
   var $_lastId;
 
-  function CSSRuleset() {
+  function __construct() {
     $this->rules        = array();
     $this->tag_filtered = array();
     $this->_lastId      = 0;
@@ -324,5 +324,3 @@ class CSSRuleset {
     }
   }
 }
-
-?>

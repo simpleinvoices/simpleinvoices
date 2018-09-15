@@ -1,6 +1,6 @@
 <?php
 class DataFilterEncoding extends DataFilter {
-  function DataFilterEncoding($encoding) {
+  function __construct($encoding) {
     $this->encoding = $encoding;
   }
 
@@ -32,4 +32,3 @@ class DataFilterEncoding extends DataFilter {
     error_no_method('_convert', get_class($this));
   }
 }
-?>

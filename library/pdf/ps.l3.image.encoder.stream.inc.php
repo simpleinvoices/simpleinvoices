@@ -3,7 +3,7 @@
 require_once(HTML2PS_DIR.'ps.image.encoder.stream.inc.php');
 
 class PSL3ImageEncoderStream extends PSImageEncoderStream {
-  function PSL3ImageEncoderStream() {
+  function __construct() {
     $this->last_image_id = 0;
   }
 

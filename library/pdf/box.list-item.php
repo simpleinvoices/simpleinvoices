@@ -60,7 +60,7 @@ class ListItemBox extends BlockBox {
     };
   }
 
-  function ListItemBox(&$root, &$pipeline) {
+  function __construct(&$root, &$pipeline) {
     // Call parent constructor
     // Modified from commented out code by RCR 20160810
     //$this->BlockBox($root);

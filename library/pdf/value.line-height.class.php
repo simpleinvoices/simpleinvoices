@@ -13,7 +13,7 @@ class LineHeight_Absolute extends CSSValue {
     return false;
   }
 
-  function LineHeight_Absolute($value) {
+  function __construct($value) {
     $this->length = $value;
   }
 
@@ -38,7 +38,7 @@ class LineHeight_Relative extends CSSValue {
     return $this->fraction == 1.1;
   }
 
-  function LineHeight_Relative($value) {
+  function __construct($value) {
     $this->fraction = $value;
   }
 

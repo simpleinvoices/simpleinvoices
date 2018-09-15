@@ -5,7 +5,7 @@ require_once(HTML2PS_DIR.'value.content.item.php');
 class ValueContent {
   var $_items;
 
-  function ValueContent() {
+  function __construct() {
     $this->set_items(array());
   }
 

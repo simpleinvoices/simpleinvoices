@@ -11,7 +11,7 @@ class FootnoteLocation {
   var $_location;
   var $_content_height;
 
-  function FootnoteLocation($location, $content_height) {
+  function __construct($location, $content_height) {
     $this->_location       = $location;
     $this->_content_height = $content_height;
   }
@@ -34,7 +34,7 @@ class PageBreakLocation {
   var $location;
   var $penalty;
 
-  function PageBreakLocation($location, $penalty) {
+  function __construct($location, $penalty) {
     $this->location = round($location,2);
     $this->penalty  = $penalty;
   }
@@ -600,4 +600,3 @@ class PageBreakLocator {
     return $locations;
   }
 }
-?>

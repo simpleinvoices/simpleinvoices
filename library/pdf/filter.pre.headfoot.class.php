@@ -3,7 +3,7 @@ class PreTreeFilterHeaderFooter extends PreTreeFilter {
   var $header_html;
   var $footer_html;
 
-  function PreTreeFilterHeaderFooter($header_html, $footer_html) {
+  function __construct($header_html, $footer_html) {
     $this->header_html = null;
     $this->footer_html = null;
 
@@ -32,4 +32,3 @@ class PreTreeFilterHeaderFooter extends PreTreeFilter {
     };
   }
 }
-?>

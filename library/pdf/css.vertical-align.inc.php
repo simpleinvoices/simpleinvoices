@@ -75,10 +75,10 @@ class VerticalAlignTextBottom {
 }
 
 class CSSVerticalAlign extends CSSPropertyHandler {
-  function CSSVerticalAlign() { 
+  function __construct() {
     // Note that in general, parameters 'true' and 'false' are non meaningful in out case,
     // as we anyway override 'inherit' and 'inherit_text' in this class.
-    $this->CSSPropertyHandler(true, true); 
+    parent::__construct(true, true);
   }
 
   function inherit($old_state, &$new_state) { 
@@ -167,5 +167,3 @@ class CSSVerticalAlign extends CSSPropertyHandler {
 }
 
 CSS::register_css_property(new CSSVerticalAlign);
-
-?>

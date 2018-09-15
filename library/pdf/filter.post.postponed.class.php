@@ -3,7 +3,7 @@
 class PostTreeFilterPostponed extends PreTreeFilter {
   var $_driver;
 
-  function PostTreeFilterPostponed(&$driver) {
+  function __construct(&$driver) {
     $this->_driver  =& $driver;
   }
 
@@ -26,4 +26,3 @@ class PostTreeFilterPostponed extends PreTreeFilter {
     return true;
   }
 }
-?>

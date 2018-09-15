@@ -4,7 +4,7 @@ class ListStyleImage {
   var $_url;
   var $_image;
 
-  function ListStyleImage($url, $image) {
+  function __construct($url, $image) {
     $this->_url = $url;
     $this->_image = $image;
   }

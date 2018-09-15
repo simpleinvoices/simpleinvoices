@@ -9,7 +9,7 @@ class FontFactory {
     return $this->error_message;
   }
 
-  function FontFactory() {
+  function __construct() {
     $this->fonts = array();
   }
 
@@ -58,5 +58,3 @@ class FontFactory {
     return $this->fonts[$name][$encoding];
   }
 }
-
-?>

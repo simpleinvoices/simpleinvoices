@@ -33,7 +33,7 @@ class ewaylib {
     var $myCurlPreferences = array();
 
     //Class Constructor
-    function ewaylib($customerID = EWAY_DEFAULT_CUSTOMER_ID, $method = EWAY_DEFAULT_PAYMENT_METHOD ,$liveGateway  = EWAY_DEFAULT_LIVE_GATEWAY) {
+    function __construct($customerID = EWAY_DEFAULT_CUSTOMER_ID, $method = EWAY_DEFAULT_PAYMENT_METHOD ,$liveGateway  = EWAY_DEFAULT_LIVE_GATEWAY) {
         $this->myCustomerID = $customerID;
         switch($method){
             case "REAL_TIME";

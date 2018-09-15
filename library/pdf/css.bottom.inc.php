@@ -25,8 +25,8 @@ require_once(HTML2PS_DIR.'value.bottom.php');
  */
 
 class CSSBottom extends CSSPropertyHandler {
-  function CSSBottom() { 
-    $this->CSSPropertyHandler(false, false); 
+  function __construct() {
+    parent::__construct(false, false);
     $this->_autoValue = ValueBottom::fromString('auto');
   }
 
@@ -52,5 +52,3 @@ class CSSBottom extends CSSPropertyHandler {
 }
 
 CSS::register_css_property(new CSSBottom);
-
-?>

@@ -26,7 +26,7 @@
     <a class="hook" id="faqs-what"><b>What is SimpleInvoices?</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
       <p>SimpleInvoices is a basic invoicing system designed with
       simplicity and functionality in mind. It caters to the needs of small organizations and home users. For more information please
-      refer to the SimpleInvoices website <a href="https://simpleinvoices.group">https://simpleinvoices.group</a>.</p>
+      refer to the SimpleInvoices website <a href="https://simpleinvoices.group/doku.php?id=si_wiki:requirements">SimpleInvoices Group Wiki</a>.</p>
     <a class="hook" id="faqs-need"><b>What do I need to start invoicing?</b></a>&nbsp;<a href="#top"><i>(top)</i></a>
       <p>Once you've installed SimpleInvoices (refer to Installation
         documentation for more info), all you need to do is enter a <b>Biller</b> (normally your organization) and a <b>Customer</b>

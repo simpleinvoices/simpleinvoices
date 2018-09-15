@@ -18,7 +18,7 @@
 
 class CustomNumber extends CustomField {
 	
-	function CustomNumber() {
+	function __consturct() {
 		parent::CustomField(2,"CustomNumber");
 	}
 	

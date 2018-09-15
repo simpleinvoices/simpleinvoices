@@ -5,8 +5,8 @@ require_once(HTML2PS_DIR.'css.min-width.inc.php');
 require_once(HTML2PS_DIR.'css.property.sub.class.php');
 
 class CSSCompositeWidth extends CSSPropertyHandler {
-  function CSSCompositeWidth() {
-    $this->CSSPropertyHandler(false, false); 
+  function __construct() {
+      parent::__construct(false, false);
   }
 
   function getPropertyCode() {
@@ -23,8 +23,8 @@ class CSSCompositeWidth extends CSSPropertyHandler {
 }
 
 class CSSWidth extends CSSSubProperty {
-  function CSSWidth($owner) { 
-    $this->CSSSubProperty($owner);
+  function __construct($owner) {
+      parent::__construct($owner);
   }
 
   function setValue(&$owner_value, &$value) {
@@ -76,5 +76,3 @@ $width = new CSSCompositeWidth;
 CSS::register_css_property($width);
 CSS::register_css_property(new CSSWidth($width));
 CSS::register_css_property(new CSSMinWidth($width, '_min_width'));
-
-?>

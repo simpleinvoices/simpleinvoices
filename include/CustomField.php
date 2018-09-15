@@ -28,7 +28,7 @@ abstract class CustomField {
     var $fieldId;    //to differentiate between the instances of a plug-in
 
     /* Constructor: name and id for each CustomField needed. */
-    public function CustomField($id,$name) {
+    public function __construct($id,$name) {
         $this->id = $id;
         $this->name = $name;
     }

@@ -41,7 +41,7 @@ class Method {
 	  *	@method		Method
 	  *	@param		string name
 	  */
-	function Method($name) {
+	function __construct($name) {
 		$this->info = array();
 		$this->params = array();
 		$this->setInfo("name", $name);

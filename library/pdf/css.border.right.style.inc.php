@@ -2,8 +2,8 @@
 // $Header: /cvsroot/html2ps/css.border.right.style.inc.php,v 1.1 2006/09/07 18:38:13 Konstantin Exp $
 
 class CSSBorderRightStyle extends CSSSubProperty {
-  function CSSBorderRightStyle(&$owner) {
-    $this->CSSSubProperty($owner);
+  function __construct(&$owner) {
+      parent::__construct($owner);
   }
 
   function setValue(&$owner_value, &$value) {
@@ -30,5 +30,3 @@ class CSSBorderRightStyle extends CSSSubProperty {
     return CSSBorderStyle::parse_style($value);
   }
 }
-
-?>

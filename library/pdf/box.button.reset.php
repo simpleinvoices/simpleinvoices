@@ -1,7 +1,7 @@
 <?php
 
 class ButtonResetBox extends ButtonBox {
-  function ButtonResetBox($text) {
+  function __construct($text) {
     $this->ButtonBox($text);
   }
 
@@ -32,5 +32,3 @@ class ButtonResetBox extends ButtonBox {
                                    $this->get_height() + $this->get_padding_top() + $this->get_padding_bottom());
   }
 }
-
-?>

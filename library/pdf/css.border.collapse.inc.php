@@ -5,12 +5,12 @@ define('BORDER_COLLAPSE', 1);
 define('BORDER_SEPARATE', 2);
 
 class CSSBorderCollapse extends CSSPropertyStringSet {
-  function CSSBorderCollapse() { 
-    $this->CSSPropertyStringSet(true, 
-                                true,
-                                array('inherit'  => CSS_PROPERTY_INHERIT,
-                                      'collapse' => BORDER_COLLAPSE,
-                                      'separate' => BORDER_SEPARATE)); 
+  function __construct() {
+      parent::__construct(true,
+                         true,
+                         array('inherit'  => CSS_PROPERTY_INHERIT,
+                               'collapse' => BORDER_COLLAPSE,
+                               'separate' => BORDER_SEPARATE));
   }
 
   function default_value() { 
@@ -27,5 +27,3 @@ class CSSBorderCollapse extends CSSPropertyStringSet {
 }
 
 CSS::register_css_property(new CSSBorderCollapse);
-
-?>

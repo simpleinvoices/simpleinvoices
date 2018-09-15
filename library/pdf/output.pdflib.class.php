@@ -279,8 +279,8 @@ class OutputDriverPdflib extends OutputDriverGenericPDF {
     $this->_status = PDFLIB_STATUS_PAGE_STARTED;
   }
 
-  function OutputDriverPdflib($version) {
-    $this->OutputDriverGenericPDF();
+  function __construct($version) {
+    parent::__construct();
     $this->set_pdf_version($version);
 
     $this->_currentfont = null;

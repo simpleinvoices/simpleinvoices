@@ -10,10 +10,10 @@ class TextInputBox extends InlineControlBox {
    */
   var $_value;
 
-  function TextInputBox($value, $name) {
-    $this->InlineControlBox();
+  function __construct($value, $name) {
+      parent::__construct();
 
-    $this->_value = $value;
+      $this->_value = $value;
     $this->_field_name = $name;
   }
 
@@ -86,4 +86,3 @@ class TextInputBox extends InlineControlBox {
     return $status;
   }
 }
-?>

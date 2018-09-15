@@ -2,8 +2,8 @@
 // $Header: /cvsroot/html2ps/css.color.inc.php,v 1.13 2007/01/24 18:55:51 Konstantin Exp $
 
 class CSSPage extends CSSPropertyHandler {
-  function CSSPage() { 
-    $this->CSSPropertyHandler(true, true); 
+  function __construct() {
+      parent::__construct(true, true);
   }
 
   function default_value() { 
@@ -24,5 +24,3 @@ class CSSPage extends CSSPropertyHandler {
 }
 
 CSS::register_css_property(new CSSPage());
-
-?>

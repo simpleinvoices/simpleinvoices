@@ -118,9 +118,9 @@ if (!class_exists('FPDF')) {
       return true;
     }
 
-    function PDFIndirectObject(&$handler,
-                               $object_id,
-                               $generation_id) {
+    function __construct(&$handler,
+                         $object_id,
+                         $generation_id) {
       $this->object_id = $object_id;
       $this->generation_id = $generation_id;
     }
@@ -137,10 +137,10 @@ if (!class_exists('FPDF')) {
   class PDFCMap extends PDFIndirectObject {
     var $_content;
 
-    function PDFCMap($mapping, &$handler, $object_id, $generation_id) {
-      $this->PDFIndirectObject($handler,
-                               $object_id,
-                               $generation_id);
+    function __construct($mapping, &$handler, $object_id, $generation_id) {
+        parent::__construct($handler,
+                            $object_id,
+                            $generation_id);
 
       $num_chars = count($mapping);
 
@@ -187,14 +187,14 @@ EOF
     var $_width;
     var $_height;
 
-    function PDFPage(&$handler,
-                     $width,
-                     $height,
-                     $object_id,
-                     $generation_id) {
-      $this->PDFIndirectObject($handler,
-                               $object_id,
-                               $generation_id);
+    function __construct(&$handler,
+                         $width,
+                         $height,
+                         $object_id,
+                         $generation_id) {
+        parent::__construct($handler,
+                            $object_id,
+                            $generation_id);
 
       $this->set_width($width);
       $this->set_height($height);
@@ -228,13 +228,13 @@ EOF
   class PDFAppearanceStream extends PDFIndirectObject {
     var $_content;
 
-    function PDFAppearanceStream(&$handler,
-                                 $object_id,
-                                 $generation_id,
-                                 $content) {
-      $this->PDFIndirectObject($handler,
-                               $object_id,
-                               $generation_id);
+    function __construct(&$handler,
+                         $object_id,
+                         $generation_id,
+                         $content) {
+      parent::__construct($handler,
+                          $object_id,
+                          $generation_id);
 
       $this->_content = $content;
     }
@@ -259,12 +259,12 @@ EOF
   }
 
   class PDFAnnotation extends PDFIndirectObject {
-    function PDFAnnotation(&$handler,
-                           $object_id,
-                           $generation_id) {
-      $this->PDFIndirectObject($handler,
-                               $object_id,
-                               $generation_id);
+    function __construct(&$handler,
+                         $object_id,
+                         $generation_id) {
+        parent::__construct($handler,
+                            $object_id,
+                            $generation_id);
     }
 
     function _dict(&$handler) {
@@ -279,7 +279,7 @@ EOF
     var $w;
     var $h;
 
-    function PDFRect($x,$y,$w,$h) {
+    function __construct($x,$y,$w,$h) {
       $this->x = $x;
       $this->y = $y;
       $this->w = $w;
@@ -315,14 +315,14 @@ EOF
     var $rect;
     var $link;
 
-    function PDFAnnotationExternalLink(&$handler,
-                                       $object_id,
-                                       $generation_id,
-                                       $rect,
-                                       $link) {
-      $this->PDFAnnotation($handler,
-                           $object_id,
-                           $generation_id);
+    function __construct(&$handler,
+                         $object_id,
+                         $generation_id,
+                         $rect,
+                         $link) {
+        parent::__construct($handler,
+                            $object_id,
+                            $generation_id);
 
       $this->rect = $rect;
       $this->link = $link;
@@ -343,14 +343,14 @@ EOF
     var $rect;
     var $link;
 
-    function PDFAnnotationInternalLink(&$handler,
-                                       $object_id,
-                                       $generation_id,
-                                       $rect,
-                                       $link) {
-      $this->PDFAnnotation($handler,
-                           $object_id,
-                           $generation_id);
+    function __construct(&$handler,
+                         $object_id,
+                         $generation_id,
+                         $rect,
+                         $link) {
+        parent::__construct($handler,
+                            $object_id,
+                            $generation_id);
 
       $this->rect = $rect;
       $this->link = $link;
@@ -396,13 +396,13 @@ EOF
   class PDFAnnotationWidget extends PDFAnnotation {
     var $_rect;
 
-    function PDFAnnotationWidget(&$handler,
-                                 $object_id,
-                                 $generation_id,
-                                 $rect) {
-      $this->PDFAnnotation($handler,
-                           $object_id,
-                           $generation_id);
+    function __construct(&$handler,
+                         $object_id,
+                         $generation_id,
+                         $rect) {
+        parent::__construct($handler,
+                            $object_id,
+                            $generation_id);
 
       $this->_rect = $rect;
     }
@@ -421,13 +421,13 @@ EOF
     var $_kids;
     var $_group_name;
 
-    function PDFFieldGroup(&$handler,
-                           $object_id,
-                           $generation_id,
-                           $group_name) {
-      $this->PDFIndirectObject($handler,
-                               $object_id,
-                               $generation_id);
+    function __construct(&$handler,
+                         $object_id,
+                         $generation_id,
+                         $group_name) {
+        parent::__construct($handler,
+                            $object_id,
+                            $generation_id);
 
       /**
        * Generate default group name, if needed
@@ -512,15 +512,15 @@ EOF
      */
     var $_parent;
 
-    function PDFField(&$handler,
-                      $object_id,
-                      $generation_id,
-                      $rect,
-                      $field_name) {
-      $this->PDFAnnotationWidget($handler,
-                                 $object_id,
-                                 $generation_id,
-                                 $rect);
+    function __construct(&$handler,
+                         $object_id,
+                         $generation_id,
+                         $rect,
+                         $field_name) {
+        parent::__construct($handler,
+                            $object_id,
+                            $generation_id,
+                            $rect);
 
       /**
        * Generate default field name, if needed
@@ -574,18 +574,18 @@ EOF
     var $_appearance_off;
     var $_checked;
 
-    function PDFFieldCheckBox(&$handler,
-                              $object_id,
-                              $generation_id,
-                              $rect,
-                              $field_name,
-                              $value,
-                              $checked) {
-      $this->PDFField($handler,
-                      $object_id,
-                      $generation_id,
-                      $rect,
-                      $field_name);
+    function __construct(&$handler,
+                         $object_id,
+                         $generation_id,
+                         $rect,
+                         $field_name,
+                         $value,
+                         $checked) {
+        parent::__construct($handler,
+                            $object_id,
+                            $generation_id,
+                            $rect,
+                            $field_name);
 
       $this->_value = $value;
       $this->_checked = $checked;
@@ -637,17 +637,17 @@ EOF
       $this->_appearance->out($handler);
     }
 
-    function PDFFieldPushButton(&$handler,
-                                $object_id,
-                                $generation_id,
-                                $rect,
-                                $fontindex,
-                                $fontsize) {
-      $this->PDFField($handler,
-                      $object_id,
-                      $generation_id,
-                      $rect,
-                      null);
+    function __construct(&$handler,
+                         $object_id,
+                         $generation_id,
+                         $rect,
+                         $fontindex,
+                         $fontsize) {
+        parent::__construct($handler,
+                            $object_id,
+                            $generation_id,
+                            $rect,
+                            null);
       $this->fontindex = $fontindex;
       $this->fontsize  = $fontsize;
 
@@ -680,21 +680,21 @@ EOF
   class PDFFieldPushButtonImage extends PDFFieldPushButton {
     var $_link;
 
-    function PDFFieldPushButtonImage(&$handler,
-                                      $object_id,
-                                      $generation_id,
-                                      $rect,
-                                      $fontindex,
-                                      $fontsize,
-                                      $field_name,
-                                      $value,
-                                      $link) {
-      $this->PDFFieldPushButton($handler,
-                                $object_id,
-                                $generation_id,
-                                $rect,
-                                $fontindex,
-                                $fontsize);
+    function __construct(&$handler,
+                         $object_id,
+                         $generation_id,
+                         $rect,
+                         $fontindex,
+                         $fontsize,
+                         $field_name,
+                         $value,
+                         $link) {
+        parent::__construct($handler,
+                            $object_id,
+                            $generation_id,
+                            $rect,
+                            $fontindex,
+                            $fontsize);
 
       $this->_link  = $link;
       $this->set_field_name($field_name);
@@ -716,21 +716,21 @@ EOF
     var $_link;
     var $_caption;
 
-    function PDFFieldPushButtonSubmit(&$handler,
-                                      $object_id,
-                                      $generation_id,
-                                      $rect,
-                                      $fontindex,
-                                      $fontsize,
-                                      $field_name,
-                                      $value,
-                                      $link) {
-      $this->PDFFieldPushButton($handler,
-                                $object_id,
-                                $generation_id,
-                                $rect,
-                                $fontindex,
-                                $fontsize);
+    function __construct(&$handler,
+                         $object_id,
+                         $generation_id,
+                         $rect,
+                         $fontindex,
+                         $fontsize,
+                         $field_name,
+                         $value,
+                         $link) {
+        parent::__construct($handler,
+                            $object_id,
+                            $generation_id,
+                            $rect,
+                            $fontindex,
+                            $fontsize);
 
       $this->_link    = $link;
       $this->_caption = $value;
@@ -750,18 +750,18 @@ EOF
   }
 
   class PDFFieldPushButtonReset extends PDFFieldPushButton {
-    function PDFFieldPushButtonReset(&$handler,
-                                     $object_id,
-                                     $generation_id,
-                                     $rect,
-                                     $fontindex,
-                                     $fontsize) {
-      $this->PDFFieldPushButton($handler,
-                                $object_id,
-                                $generation_id,
-                                $rect,
-                                $fontindex,
-                                $fontsize);
+    function __construct(&$handler,
+                         $object_id,
+                         $generation_id,
+                         $rect,
+                         $fontindex,
+                         $fontsize) {
+        parent::__construct($handler,
+                            $object_id,
+                            $generation_id,
+                            $rect,
+                            $fontindex,
+                            $fontsize);
     }
 
     function _action(&$handler) {
@@ -792,15 +792,15 @@ EOF
     var $_appearance_on;
     var $_appearance_off;
 
-    function PDFFieldRadio(&$handler,
-                           $object_id,
-                           $generation_id,
-                           $rect,
-                           $value) {
-      $this->PDFAnnotationWidget($handler,
-                                 $object_id,
-                                 $generation_id,
-                                 $rect);
+    function __construct(&$handler,
+                         $object_id,
+                         $generation_id,
+                         $rect,
+                         $value) {
+        parent::__construct($handler,
+                            $object_id,
+                            $generation_id,
+                            $rect);
 
       $this->_value = $value;
 
@@ -870,14 +870,14 @@ EOF
       return true;
     }
 
-    function PDFFieldRadioGroup(&$handler,
-                                $object_id,
-                                $generation_id,
-                                $group_name) {
-      $this->PDFFieldGroup($handler,
-                           $object_id,
-                           $generation_id,
-                           $group_name);
+    function __construct(&$handler,
+                         $object_id,
+                         $generation_id,
+                         $group_name) {
+        parent::__construct($handler,
+                            $object_id,
+                            $generation_id,
+                            $group_name);
 
       $this->_checked = null;
     }
@@ -921,18 +921,18 @@ EOF
                                'Opt'     => $options_str));
     }
 
-    function PDFFieldSelect(&$handler,
+    function __construct(&$handler,
+                         $object_id,
+                         $generation_id,
+                         $rect,
+                         $field_name,
+                         $value,
+                         $options) {
+        parent::__construct($handler,
                             $object_id,
                             $generation_id,
                             $rect,
-                            $field_name,
-                            $value,
-                            $options) {
-      $this->PDFField($handler,
-                      $object_id,
-                      $generation_id,
-                      $rect,
-                      $field_name);
+                            $field_name);
 
       $this->_options = $options;
       $this->_value   = $value;
@@ -973,19 +973,19 @@ EOF
       //      $this->_appearance->out($handler);
     }
 
-    function PDFFieldText(&$handler,
-                          $object_id,
-                          $generation_id,
-                          $rect,
-                          $field_name,
-                          $value,
-                          $fontindex,
-                          $fontsize) {
-      $this->PDFField($handler,
-                      $object_id,
-                      $generation_id,
-                      $rect,
-                      $field_name);
+    function __construct(&$handler,
+                         $object_id,
+                         $generation_id,
+                         $rect,
+                         $field_name,
+                         $value,
+                         $fontindex,
+                         $fontsize) {
+        parent::__construct($handler,
+                            $object_id,
+                            $generation_id,
+                            $rect,
+                            $field_name);
 
       $this->fontindex = $fontindex;
       $this->fontsize  = $fontsize;
@@ -1009,22 +1009,22 @@ EOF
    * "Password" text input field
    */
   class PDFFieldPassword extends PDFFieldText {
-    function PDFFieldPassword(&$handler,
-                              $object_id,
-                              $generation_id,
-                              $rect,
-                              $field_name,
-                              $value,
-                              $fontindex,
-                              $fontsize) {
-      $this->PDFFieldText($handler,
-                          $object_id,
-                          $generation_id,
-                          $rect,
-                          $field_name,
-                          $value,
-                          $fontindex,
-                          $fontsize);
+    function __construct(&$handler,
+                         $object_id,
+                         $generation_id,
+                         $rect,
+                         $field_name,
+                         $value,
+                         $fontindex,
+                         $fontsize) {
+        parent::__construct($handler,
+                            $object_id,
+                            $generation_id,
+                            $rect,
+                            $field_name,
+                            $value,
+                            $fontindex,
+                            $fontsize);
     }
 
     function _dict(&$handler) {
@@ -1618,7 +1618,7 @@ EOF
      *                               Public methods                                 *
      *                                                                              *
      *******************************************************************************/
-    function FPDF($orientation='P', $unit='mm', $format='A4') {
+    function __construct($orientation='P', $unit='mm', $format='A4') {
       $this->_forms = array();
       $this->_form_radios = array();
       $this->_pages = array();
