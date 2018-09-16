@@ -254,7 +254,7 @@ $LANG['help_process_payment_inv_id'] = "要選擇一個發票處理針對付款�
 $LANG['help_reports_xsl'] = "<b>報告錯誤</b><br />如果您收到一個“OOOOPS，這裡有個錯誤。”當你試圖在系統運行報告，這意味著你的PHP版本沒有安裝正確的擴展名(或啟用)錯誤。<br /><br />如果您運行的Windows服務器和使用WAMP5請參閱網頁上的簡單維基發票有關如何解決這個信息https://simpleinvoices.group/wiki/doku.php?id=how_to_i_get_reports_working_in_windows_wamp5<br /><br />如果您運行的Unix / Linux和PHP5，請確保您有XSL擴展，並安裝在你的php.ini文件中激活。在Ubuntu的GNU / Linux，請安裝用於PHP5的PHP的XSL包<br /><br />如果您使用PHP4，請確保您的PHP有Sablotron的支持 '--enable-xslt'<br /><br />注：因為他們的服務器的設置如果你在SourceForge上報告的演示環境中使用這個系統將無法正常工作。";//1
 $LANG['help_required_field'] = "這是必填字段。您必須在此字段中輸入一個值，然後才能保存表單<br /><br />";//1
 $LANG['help_si_help'] = "幫助";//1
-$LANG['help_simple_invoices'] = "本系統是一個基本的進銷存系統的設計與簡單性和功能的初衷。照顧小企業和家庭用戶的需求。<br /><br />欲了解更多信息，請參閱<a href='https://simpleinvoices.group' target='_blank'> <b>https://simpleinvoices.group</b></a>";//1
+$LANG['help_simple_invoices'] = "本系統是一個基本的進銷存系統的設計與簡單性和功能的初衷。照顧小企業和家庭用戶的需求。<br /><br />欲了解更多信息，請參閱<a href='https://simpleinvoices.group/doku.php?id=si_wiki:menu' target='_blank'> <b>Simple Invoices Wiki - Menu</b></a>";//1
 $LANG['help_street2'] = "該字段“街道地址2'時使用的街道地址付款人或客戶是不是太長，以適應每一個線條或包含多個部分。<br /><br />即街道地址'級234，325南馬爾文道'可分為 <br /><br />街道：234級<br />街道地址2：南325號馬爾文";//1
 $LANG['help_tax_rate_sign'] = "稅可以是基於一個百分比(即銷售稅10％)或平面貨幣價值(即10美元或20英鎊)。<br /><br />在下拉美元只表示這將是一個扁平貨幣的利率，這並不表示貨幣符號。在“發票偏好'您使用決定了貨幣符號將在您的發票是什麼。";//1
 $LANG['help_text'] = "<b>警告</b><br /><br />請備份你的系統的數據庫運行數據庫更新之前，以防萬一什麼不好的事情發生。<br /><br />要備份的數據庫，然後從選項菜單中選擇“備份數據庫”，或使用phpMyAdmin(如果您已安裝)來備份數據庫。";//1
