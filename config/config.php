@@ -24,8 +24,8 @@ export.pdf.rightmargin              = 15
 export.pdf.topmargin                = 15
 export.pdf.bottommargin             = 15
 
-version.name                        = 2017.3.0
-version.update_date                 = 20180918
+version.name                        = 2017.3.1
+version.update_date                 = 20180915
 
 local.locale                        = en_US
 local.precision                     = 2
@@ -45,6 +45,7 @@ nonce.timelimit                     = 3600
 
 debug.level                         = All
 debug.error_reporting               = E_ERROR
+
 phpSettings.date.timezone           = America/Los_Angeles
 phpSettings.display_startup_errors  = 1
 phpSettings.display_errors          = 1
