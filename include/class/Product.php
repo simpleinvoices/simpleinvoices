@@ -161,8 +161,8 @@ class Product {
         }
 
         $description = (isset($_POST['description']) ? $_POST['description'] : "");
-        $unit_price  = (!empty($_POST['unit_price'])  ? siLocal::dbStd($_POST['unit_price']) : "0");
-        $cost        = (!empty($_POST['cost'])        ? siLocal::dbStd($_POST['cost'])       : "0");
+        $unit_price  = (isset($_POST['unit_price'])  ? siLocal::dbStd($_POST['unit_price']) : "0");
+        $cost        = (isset($_POST['cost'])        ? siLocal::dbStd($_POST['cost'])       : "0");
         $fauxPost = array('domain_id'            => domain_id::get(),
                           'description'          => $description,
                           'unit_price'           => $unit_price,
