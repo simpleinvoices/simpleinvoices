@@ -70,7 +70,8 @@ class siLocal {
         global $config;
 
         $locale = new Zend_Locale($config->local->locale);
-        $new_number = Zend_Locale_Format::getNumber($number, ['locale' => $locale, 'precision' => $config->local->precision]);
+        $new_number = (empty($number) ? "0" : $number);
+        $new_number = Zend_Locale_Format::getNumber($new_number, ['locale' => $locale, 'precision' => $config->local->precision]);
         return $new_number;
     }
 

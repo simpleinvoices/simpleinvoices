@@ -5,6 +5,7 @@ class Payment {
      * @param string $filter
      * @param string $ol_pmt_id
      * @return string
+     * @throws PdoDbException
      */
     public static function count($filter, $ol_pmt_id) {
         global $pdoDb;
@@ -73,6 +74,7 @@ class Payment {
      * Get a specific payment type record.
      * @param int $id Unique ID of invoice to retrieve payments for.
      * @return array Rows retrieved. Test for "=== false" to check for failure.
+     * @throws PdoDbException
      */
     public static function getInvoicePayments($id) {
         global $pdoDb;
@@ -106,6 +108,7 @@ class Payment {
      * Get a specific payment type record.
      * @param int $id Unique ID of customer to retrieve payments for.
      * @return array Rows retrieved. Test for "=== false" to check for failure.
+     * @throws PdoDbException
      */
     public static function getCustomerPayments($id) {
         global $pdoDb;
@@ -140,6 +143,7 @@ class Payment {
      * @param int $id Unique ID of record to retrieve.
      * @param boolean $is_pymt_id true (default) $id is payment ID, else is invoice ID.
      * @return array Row retrieved. An empty array is returned if no row found.
+     * @throws PdoDbException
      */
     public static function select($id, $is_pymt_id = true) {
         global $pdoDb;
@@ -185,6 +189,7 @@ class Payment {
      * Get a all payment records.
      * @param string $domain_id Domain ID logged into.
      * @return array Rows retrieved. Test for "=== false" to check for failure.
+     * @throws PdoDbException
      */
     public static function select_all($only_enabled=false) {
         global $pdoDb;
@@ -217,6 +222,7 @@ class Payment {
      * Add payment type description to retrieved payment records.
      * @param array $payments Array of <i>Payment</i> object to update.
      * @return array <i>Payment</i> records with payment type description added.
+     * @throws PdoDbException
      */
     public static function progressPayments($payments) {
         global $pdoDb;
@@ -241,6 +247,7 @@ class Payment {
      * Insert a new payment record
      * @param array $list <i>Faux Post</i> list of record's values.
      * @return integer <b>ID</b> of record inserted. Test for <i>=== false</i> for failure.
+     * @throws PdoDbException
      */
     public static function insert($list) {
         global $pdoDb;
@@ -255,6 +262,7 @@ class Payment {
      * Calculate amount paid on the specified invoice
      * @param integer $ac_inv_id Invoice ID to sum payments for.
      * @return float Total paid on the invoice.
+     * @throws PdoDbException
      */
     public static function calc_invoice_paid($ac_inv_id) {
         global $pdoDb;
