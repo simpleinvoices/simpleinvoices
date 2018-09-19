@@ -6,6 +6,7 @@ custom.config.php
 zend_cache---*
 *.log
 tmp
+tmp/database_backups/*
 .buildpath
 .project
 .settings/**
