@@ -26,7 +26,7 @@ class InlineBlockBox extends GenericContainerBox {
     }
 
     public function __construct() {
-        $this->GenericContainerBox();
+        parent::__construct();
     }
 
     /**
@@ -48,7 +48,7 @@ class InlineBlockBox extends GenericContainerBox {
      *
      * @todo check whether percentage values should be really ignored during relative positioning
      */
-    public function reflow(&$parent, &$context) {
+    public function reflow(&$parent, &$context, $boxes=null) {
         /**
          * Note that we may not worry about 'position: absolute' and 'position: fixed',
          * as, according to CSS 2.1 paragraph 9.7, these values of 'position'

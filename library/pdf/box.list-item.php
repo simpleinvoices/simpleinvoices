@@ -67,7 +67,7 @@ class ListItemBox extends BlockBox {
     parent::__construct();
   }
 
-  function reflow(&$parent, &$context) {
+  function reflow(&$parent, &$context, $boxes=null) {
     $list_style = $this->getCSSProperty(CSS_LIST_STYLE);
 
     // If list-style-position is inside, we'll need to move marker box inside the 

@@ -158,5 +158,3 @@ class Background extends CSSValue {
     };
   }
 }
-
-?>

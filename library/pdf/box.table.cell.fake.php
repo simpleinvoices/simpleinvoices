@@ -15,7 +15,8 @@ class FakeTableCellBox extends TableCellBox {
       $this->setCSSProperty(CSS_VERTICAL_ALIGN, VA_MIDDLE);
   }
 
-  function create(&$pipeline) {
+  // &$root parameter Added by RCR 20180918
+  function &create(&$root, &$pipeline) {
     $box =  new FakeTableCellBox;
 
     $css_state =& $pipeline->getCurrentCSSState();
@@ -62,13 +63,11 @@ class FakeTableCellBox extends TableCellBox {
     return 0;
   }
 
-  function get_max_width() {
+  function get_max_width(&$content = null, $limit = 10E6) {
     return 0;
   }
 
-  function get_min_width() {
+  function get_min_width(&$content = null, $limit = 10E6) {
     return 0;
   }
 }
-
-?>

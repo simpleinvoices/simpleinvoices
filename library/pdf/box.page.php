@@ -33,7 +33,7 @@ class BoxPage extends GenericContainerBox {
     return $this->get_top_margin();    
   }
 
-  function reflow(&$media) {
+  function reflow(&$media, &$content = null, $boxes=null) {
     $this->put_left(mm2pt($media->margins['left']));
     $this->put_top(mm2pt($media->height() - $media->margins['top']));
     $this->put_width(mm2pt($media->real_width()));

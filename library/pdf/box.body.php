@@ -28,7 +28,7 @@ class BodyBox extends BlockBox {
         return $this->get_top_margin();
     }
 
-    public function reflow(&$parent, &$context) {
+    public function reflow(&$parent, &$context, $boxes=null) {
         parent::reflow($parent, $context);
 
         // Extend the body height to fit all contained floats

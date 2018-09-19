@@ -27,4 +27,5 @@ class CSSColor extends CSSPropertyHandler {
   }
 }
 
-CSS::register_css_property(new CSSColor);
+$css_color_inc_reg1 = new CSSColor();
+CSS::register_css_property($css_color_inc_reg1);

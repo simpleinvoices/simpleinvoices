@@ -6,7 +6,7 @@ class WhitespaceBox extends TextBox {
         parent::__construct();
     }
 
-    function &create(&$pipeline) {
+    function &create($text, $encoding, &$pipeline) {
     $box =  new WhitespaceBox();
     $box->readCSS($pipeline->getCurrentCSSState());
     $box->add_subword(" ", 'iso-8859-1', array());
@@ -46,11 +46,11 @@ class WhitespaceBox extends TextBox {
     return 0;
   }
 
-  function get_min_width(&$context) {
+  function get_min_width(&$context, $limit = 10E6) {
     return $this->width;
   }
 
-  function get_max_width(&$context) {
+  function get_max_width(&$context, $limit = 10E6) {
     return $this->width;
   }
 
@@ -58,7 +58,7 @@ class WhitespaceBox extends TextBox {
   // callers of reflow should take this into account and possilby check for this
   // after reflow returns. This can be detected by UID change.
   //
-  function reflow(&$parent, &$context) {
+  function reflow(&$parent, &$context, $boxes=null) {
     // Check if there are any boxes in parent's line box
     if ($parent->line_box_empty()) {
       // The very first whitespace in the line box should not affect neither height nor baseline of the line box;
@@ -118,4 +118,3 @@ class WhitespaceBox extends TextBox {
     // we could not modify a flag until we met a real text box
   }
 }
-?>

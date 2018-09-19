@@ -23,4 +23,5 @@ class CSSCellPadding extends CSSPropertyHandler {
   }
 }
 
-CSS::register_css_property(new CSSCellPadding);
+$css_pseudo_cellpadding_inc_reg1 = new CSSCellPadding();
+CSS::register_css_property($css_pseudo_cellpadding_inc_reg1);

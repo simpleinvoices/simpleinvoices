@@ -28,4 +28,5 @@ class CSSVisibility extends CSSPropertyStringSet {
   }
 }
 
-CSS::register_css_property(new CSSVisibility);
+$css_visibility_inc_reg1 = new CSSVisibility();
+CSS::register_css_property($css_visibility_inc_reg1);

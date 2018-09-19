@@ -40,5 +40,6 @@ class CSSHeight extends CSSPropertyHandler {
     return 'height';
   }
 }
- 
-CSS::register_css_property(new CSSHeight);
+
+$css_height_inc_reg1 = new CSSHeight();
+CSS::register_css_property($css_height_inc_reg1);

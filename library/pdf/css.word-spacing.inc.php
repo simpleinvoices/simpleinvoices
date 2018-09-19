@@ -37,4 +37,5 @@ class CSSWordSpacing extends CSSPropertyHandler {
   }
 }
 
-CSS::register_css_property(new CSSWordSpacing);
+$css_word_spacing_inc_reg1 = new CSSWordSpacing();
+CSS::register_css_property($css_word_spacing_inc_reg1);

@@ -24,4 +24,5 @@ class CSSZIndex extends CSSPropertyHandler {
   }
 }
 
-CSS::register_css_property(new CSSZIndex);
+$css_z_index_inc_reg1 = new CSSZIndex();
+CSS::register_css_property($css_z_index_inc_reg1);

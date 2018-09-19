@@ -67,4 +67,5 @@ class CSSPseudoAlign extends CSSPropertyHandler {
   }
 }
 
-CSS::register_css_property(new CSSPseudoAlign);
+$css_pseudo_align_inc_reg1 = new CSSPseudoAlign();
+CSS::register_css_property($css_pseudo_align_inc_reg1);

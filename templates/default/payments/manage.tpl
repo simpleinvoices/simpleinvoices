@@ -11,7 +11,7 @@
 *	 GPL v3 or above
 *
 * Website:
-*	https://simpleinvoices.group
+*	https://simpleinvoices.group/doku.php?id=si_wiki:menu
 */
 *}
 

@@ -10,7 +10,7 @@ class CSSBorderTopStyle extends CSSSubProperty {
     $owner_value->top->style = $value;
   }
 
-  function getValue(&$owner_value) {
+  function &getValue(&$owner_value) {
     return $owner_value->top->style;
   }
 
@@ -30,5 +30,3 @@ class CSSBorderTopStyle extends CSSSubProperty {
     return CSSBorderStyle::parse_style($value);
   }
 }
-
-?>

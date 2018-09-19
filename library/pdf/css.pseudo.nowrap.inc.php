@@ -20,4 +20,5 @@ class CSSPseudoNoWrap extends CSSPropertyHandler {
   }
 }
 
-CSS::register_css_property(new CSSPseudoNoWrap);
+$css_pseudo_nowrap_inc_reg1 = new CSSPseudoNoWrap();
+CSS::register_css_property($css_pseudo_nowrap_inc_reg1);

@@ -27,4 +27,5 @@ class CSSFloat extends CSSPropertyStringSet {
   }
 }
 
-CSS::register_css_property(new CSSFloat);
+$css_float_inc_reg1 = new CSSFloat();
+CSS::register_css_property($css_float_inc_reg1);

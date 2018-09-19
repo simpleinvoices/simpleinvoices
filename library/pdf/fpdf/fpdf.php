@@ -105,7 +105,7 @@ if (false) {
       return $handler->_dictionary($this->_dict($handler));
     }
 
-    function _dict() {
+    function _dict(&$handler) {
       return array();
     }
   }
@@ -756,7 +756,7 @@ if (false) {
     var $_parent;
     var $_checked;
 
-    function _dict($handler) {
+    function _dict(&$handler) {
       return array_merge(parent::_dict($handler),
                          array(
                                'DV'      => $this->_checked ? $handler->_name($this->_checked) : "/Off",

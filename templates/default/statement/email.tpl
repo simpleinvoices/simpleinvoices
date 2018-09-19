@@ -13,8 +13,7 @@
  *   GPL v2 or above
  *
  * Website:
- *  https://simpleinvoices.group
- *}
+ *  https://simpleinvoices.group/doku.php?id=si_wiki:menu *}
 {if $smarty.get.stage == 1 }
 {if $error == 1}<div class="si_message_error"><h2>{$message}</h2></div>{/if}
 <form name="frmpost"

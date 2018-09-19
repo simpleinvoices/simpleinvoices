@@ -37,4 +37,5 @@ class CSSLetterSpacing extends CSSPropertyHandler {
   }
 }
 
-CSS::register_css_property(new CSSLetterSpacing);
+$css_letter_spacing_inc_reg1 = new CSSLetterSpacing();
+CSS::register_css_property($css_letter_spacing_inc_reg1);

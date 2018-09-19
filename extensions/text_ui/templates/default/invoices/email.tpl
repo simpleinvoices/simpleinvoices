@@ -12,8 +12,7 @@
  *   GPL v2 or above
  *
  * Website:
- *   https://simpleinvoices.group
- *}
+ *   https://simpleinvoices.group/doku.php?id=si_wiki:menu *}
 {if $smarty.get.stage == 1 }
 <form name="frmpost" method="post"
       action="index.php?module=invoices&amp;view=email&amp;stage=2&amp;invoice={$smarty.get.invoice}" >

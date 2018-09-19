@@ -55,8 +55,13 @@ class CSSBackground extends CSSPropertyHandler {
 $bg = new CSSBackground;
 
 CSS::register_css_property($bg);
-CSS::register_css_property(new CSSBackgroundColor($bg, '_color'));
-CSS::register_css_property(new CSSBackgroundImage($bg, '_image'));
-CSS::register_css_property(new CSSBackgroundRepeat($bg, '_repeat'));
-CSS::register_css_property(new CSSBackgroundPosition($bg, '_position'));
-CSS::register_css_property(new CSSBackgroundAttachment($bg, '_attachment'));
+$css_background_inc_reg1 = new CSSBackgroundColor($bg, '_color');
+CSS::register_css_property($css_background_inc_reg1);
+$css_background_inc_reg2 = new CSSBackgroundImage($bg, '_image');
+CSS::register_css_property($css_background_inc_reg2);
+$css_background_inc_reg3 = new CSSBackgroundRepeat($bg, '_repeat');
+CSS::register_css_property($css_background_inc_reg3);
+$css_background_inc_reg4 = new CSSBackgroundPosition($bg, '_position');
+CSS::register_css_property($css_background_inc_reg4);
+$css_background_inc_reg5 = new CSSBackgroundAttachment($bg, '_attachment');
+CSS::register_css_property($css_background_inc_reg5);

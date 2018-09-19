@@ -6,7 +6,7 @@ class GenericInlineBox extends GenericContainerBox {
 
   // @todo this code is duplicated in box.block.php
   //
-  function reflow(&$parent, &$context) {
+  function reflow(&$parent, &$context, $boxes=null) {
     switch ($this->getCSSProperty(CSS_POSITION)) {
     case POSITION_STATIC:
       return $this->reflow_static($parent, $context);

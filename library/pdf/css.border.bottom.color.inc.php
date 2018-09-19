@@ -10,7 +10,7 @@ class CSSBorderBottomColor extends CSSSubProperty {
     $owner_value->bottom->setColor($value);
   }
 
-  function getValue(&$owner_value) {
+  function &getValue(&$owner_value) {
     $value = $owner_value->bottom->color->copy();
     return $value;
   }

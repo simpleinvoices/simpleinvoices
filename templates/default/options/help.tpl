@@ -13,7 +13,7 @@
 *	 GPL v2 or above
 *
 * Website:
-*	https://simpleinvoices.group
+*	https://simpleinvoices.group/doku.php?id=si_wiki:menu
 */
 *}
 
@@ -22,6 +22,7 @@
        <div id="left">
 <br />
 For information regarding the setup,installation, and use of SimpleInvoices please refer to the Instructions sub-menu in the Option menu. <br />
-<br />For other queries please refer to the SimpleInvoices website <a href='https://simpleinvoices.group'>https://simpleinvoices.group</a> and the SimpleInvoices forum at <a href="https://simpleinvoices.group/forum">https://simpleinvoices.group/forum</a>
+<br />For other queries please refer to the SimpleInvoices website <a href='https://simpleinvoices.group/doku.php?id=si_wiki:menu' target="_blank">Simple Invoices Wiki
+              </a> and the SimpleInvoices forum at <a href="https://simpleinvoices.group/forum">https://simpleinvoices.group/forum</a>
 
 </div>

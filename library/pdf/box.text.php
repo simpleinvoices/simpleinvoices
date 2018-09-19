@@ -151,11 +151,13 @@ class TextBox extends SimpleInlineBox {
 
   function &create_empty(&$pipeline) {
     $box =  new TextBox();
-    $css_state = $pipeline->getCurrentCSSState();
+    // If test added by RCR 20180918
+    if (isset($pipeline)) {
+        $css_state = $pipeline->getCurrentCSSState();
 
-    $box->readCSS($css_state);
-    $css_state = $pipeline->getCurrentCSSState();
-
+        $box->readCSS($css_state);
+        $css_state = $pipeline->getCurrentCSSState();
+    }
     return $box;
   }
 
@@ -184,11 +186,11 @@ class TextBox extends SimpleInlineBox {
     return $this->get_full_width();
   }
 
-  function get_min_width(&$context) {
+  function get_min_width(&$context, $limit = 10E6) {
     return $this->get_full_width();
   }
 
-  function get_max_width(&$context) {
+  function get_max_width(&$context, $limit = 10E6) {
     return $this->get_full_width();
   }
 
@@ -294,7 +296,7 @@ class TextBox extends SimpleInlineBox {
                            $parent->_current_y - $this->get_extra_top());
   }
 
-  function reflow(&$parent, &$context) {
+  function reflow(&$parent, &$context, $boxes=null) {
     // Check if we need a line break here (possilble several times in a row, if we
     // have a long word and a floating box intersecting with this word
     //

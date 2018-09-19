@@ -39,5 +39,3 @@ class CSSBackgroundRepeat extends CSSSubFieldProperty {
     return CSSBackgroundRepeat::default_value();
   }
 }
-
-?>

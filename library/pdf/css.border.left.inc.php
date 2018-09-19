@@ -19,5 +19,3 @@ class CSSBorderLeft extends CSSSubFieldProperty {
     return $border->left;
   }
 }
-
-?>

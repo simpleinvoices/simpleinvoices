@@ -30,4 +30,5 @@ class CSSClear extends CSSPropertyStringSet {
   }
 }
 
-CSS::register_css_property(new CSSClear);
+$css_clear_inc_reg1 = new CSSClear();
+CSS::register_css_property($css_clear_inc_reg1);

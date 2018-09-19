@@ -30,7 +30,7 @@ class InlineContentBuilderPreWrap extends InlineContentBuilder {
         $word .= ' ';
         $box->process_word($word, $pipeline);
 
-        $whitespace =& WhitespaceBox::create($pipeline);
+        $whitespace =& WhitespaceBox::create($text, null, $pipeline);
         $box->add_child($whitespace);
       };
 

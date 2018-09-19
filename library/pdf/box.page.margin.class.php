@@ -117,14 +117,13 @@ class BoxPageMargin extends GenericContainerBox {
     return 0;
   }
 
-  function reflow(&$driver, &$media, $boxes) {
+  function reflow(&$driver, &$media, $boxes = null) {
     $context = new FlowContext();
     $this->_position($media, $boxes, $context);
 
     $this->setCSSProperty(CSS_WIDTH, new WCConstant($this->get_width()));
-    $this->put_height_constraint(new HCConstraint(array($this->height, false),
-                                                  null,
-                                                  null));
+    $lclVar = new HCConstraint(array($this->height, false), null, null);
+    $this->put_height_constraint($lclVar);
 
     $this->reflow_content($context);
 
@@ -472,5 +471,3 @@ class BoxPageMarginRightBottom extends BoxPageMargin {
     $this->_current_y = $this->get_top();
   }
 }
-
-?>

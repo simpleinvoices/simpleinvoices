@@ -111,7 +111,7 @@ class InlineBox extends GenericInlineBox {
                 $css_state->pushState();
                 $css_state->setProperty(CSS_FONT_SIZE, Value::fromData(0.01, UNIT_PT));
 
-                $whitespace = WhitespaceBox::create($pipeline);
+                $whitespace = WhitespaceBox::create(null, null, $pipeline);
                 $whitespace->readCSS($css_state);
 
                 $box->add_child($whitespace);
@@ -435,7 +435,7 @@ class InlineBox extends GenericInlineBox {
      * As "nowrap" properties applied to block-level boxes only, we may use simplified version of
      * 'get_min_width' here
      */
-    public function get_min_width(&$context) {
+    public function get_min_width(&$context, $limit = 10E6) {
         if (isset($this->_cache[CACHE_MIN_WIDTH])) {
             return $this->_cache[CACHE_MIN_WIDTH];
         }

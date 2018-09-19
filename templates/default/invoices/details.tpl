@@ -11,8 +11,7 @@
  *    GPL v3 or above
  *
  *  Website:
- *    https://simpleinvoices.group
- *}
+ *    https://simpleinvoices.group/doku.php?id=si_wiki:menu *}
 
 {* Still needed ?*}
 <div id="gmail_loading" class="gmailLoader" style="float:right; display: none;">

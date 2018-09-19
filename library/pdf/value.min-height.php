@@ -4,13 +4,13 @@ require_once(HTML2PS_DIR.'value.generic.percentage.php');
 
 class ValueMinHeight extends CSSValuePercentage {
   function fromString($value) {
-    return CSSValuePercentage::_fromString($value, new ValueMinHeight);
+    $valueMinHeight = new ValueMinHeight();
+    return CSSValuePercentage::_fromString($value, $valueMinHeight);
   }
 
   function &copy() {
-    $value =& parent::_copy(new ValueMinHeight);
+    $valueMinHeight = new ValueMinHeight();
+    $value =& parent::_copy($valueMinHeight);
     return $value;
   }
 }
-
-?>

@@ -6,8 +6,7 @@
  *   GPL v3 or above
  *
  * Website:
- *   https://simpleinvoices.group
- *}
+ *   https://simpleinvoices.group/doku.php?id=si_wiki:menu *}
 
 {if $number_of_invoices.count == 0}
   <p><em>{$LANG.no_invoices}</em></p>

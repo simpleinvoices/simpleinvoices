@@ -276,7 +276,7 @@ class OutputDriverPCL extends OutputDriverGeneric {
   function lineto($x, $y) { }
   function moveto($x, $y) { }
   function new_form($name) { /* N/A */ }
-  function next_page() { /* N/A */ }
+  function next_page($height) { /* N/A */ }
   function release() { }
   function restore() { }
   function save() { }

@@ -9,7 +9,7 @@ class CSSCache {
 
     if (!isset($__g_css_manager)) {
       $__g_css_manager = new CSSCache();
-    };
+    }
 
     return $__g_css_manager;
   }
@@ -37,11 +37,10 @@ class CSSCache {
       return $this->_readCached($url);
     } else {
       $cssruleset = new CSSRuleset();
-      $cssruleset->parse_css($css, new Pipeline());
+      $pipeline = new Pipeline();
+      $cssruleset->parse_css($css, $pipeline);
       $this->_putCached($url, $cssruleset);
       return $cssruleset;
-    };
+    }
   }
 }
-
-?>

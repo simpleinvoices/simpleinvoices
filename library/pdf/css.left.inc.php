@@ -30,4 +30,5 @@ class CSSLeft extends CSSPropertyHandler {
   }
 }
 
-CSS::register_css_property(new CSSLeft);
+$css_left_inc_reg1 = new CSSLeft();
+CSS::register_css_property($css_left_inc_reg1);

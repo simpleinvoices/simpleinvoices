@@ -11,6 +11,5 @@ class CSSPageBreakBefore extends CSSPageBreak {
   }
 }
 
-CSS::register_css_property(new CSSPageBreakBefore);
-
-?>
+$css_page_break_before_inc_reg1 = new CSSPageBreakBefore();
+CSS::register_css_property($css_page_break_before_inc_reg1);

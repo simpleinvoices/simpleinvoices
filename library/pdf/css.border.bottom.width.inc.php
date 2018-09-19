@@ -14,7 +14,7 @@ class CSSBorderBottomWidth extends CSSSubProperty {
     };
   }
 
-  function getValue(&$owner_value) {
+  function &getValue(&$owner_value) {
     return $owner_value->bottom->width;
   }
 

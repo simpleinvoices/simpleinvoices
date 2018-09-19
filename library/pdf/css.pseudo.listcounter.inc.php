@@ -23,4 +23,5 @@ class CSSPseudoListCounter extends CSSPropertyHandler {
   }
 }
 
-CSS::register_css_property(new CSSPseudoListCounter);
+$css_pseudo_listcounter_inc_reg1 = new CSSPseudoListCounter();
+CSS::register_css_property($css_pseudo_listcounter_inc_reg1);

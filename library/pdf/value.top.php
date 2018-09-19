@@ -4,13 +4,13 @@ require_once(HTML2PS_DIR.'value.generic.percentage.php');
 
 class ValueTop extends CSSValuePercentage {
   function fromString($value) {
-    return CSSValuePercentage::_fromString($value, new ValueTop);
+    $valueTop = new ValueTop();
+    return CSSValuePercentage::_fromString($value, $valueTop);
   }
 
   function &copy() {
-    $value =& parent::_copy(new ValueTop);
+    $valueTop = new ValueTop();
+    $value =& parent::_copy($valueTop);
     return $value;
   }
 }
-
-?>

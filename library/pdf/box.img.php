@@ -10,15 +10,15 @@ class GenericImgBox extends GenericInlineBox {
         parent::__construct();
     }
 
-  function get_max_width_natural(&$context) {
+  function get_max_width_natural(&$context, $limit = 10E6) {
     return $this->get_full_width($context);
   }
 
-  function get_min_width(&$context) {
+  function get_min_width(&$context, $limit = 10E6) {
     return $this->get_full_width();
   }
 
-  function get_max_width(&$context) {
+  function get_max_width(&$context, $limit = 10E6) {
     return $this->get_full_width();
   }
 

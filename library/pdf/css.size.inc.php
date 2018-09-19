@@ -59,4 +59,5 @@ class CSSSize extends CSSPropertyHandler {
   }
 }
 
-CSS::register_css_property(new CSSSize());
+$css_size_inc_reg1 = new CSSSize();
+CSS::register_css_property($css_size_inc_reg1);

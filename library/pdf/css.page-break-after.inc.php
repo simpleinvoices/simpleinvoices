@@ -11,6 +11,5 @@ class CSSPageBreakAfter extends CSSPageBreak {
   }
 }
 
-CSS::register_css_property(new CSSPageBreakAfter);
-
-?>
+$css_page_break_after_inc_reg1 = new CSSPageBreakAfter();
+CSS::register_css_property($css_page_break_after_inc_reg1);

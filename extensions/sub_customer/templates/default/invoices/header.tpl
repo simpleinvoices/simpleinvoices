@@ -6,8 +6,7 @@
  *   GPL v3 or above
  *
  * Website:
- *   https://simpleinvoices.group
- #$Id: header.tpl 3627 2011-05-09 01:00:32Z justin@kelly.org.au $
+ *   https://simpleinvoices.group/doku.php?id=si_wiki:menu
  *}
   <input type="hidden" name="action" value="insert" />
   <div class="si_filters si_buttons_invoice_header">

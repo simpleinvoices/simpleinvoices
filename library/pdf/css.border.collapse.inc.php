@@ -26,4 +26,5 @@ class CSSBorderCollapse extends CSSPropertyStringSet {
   }
 }
 
-CSS::register_css_property(new CSSBorderCollapse);
+$css_border_collapse_req1 = new CSSBorderCollapse;
+CSS::register_css_property($css_border_collapse_req1);

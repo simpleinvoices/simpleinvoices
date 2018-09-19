@@ -30,4 +30,5 @@ class CSSRight extends CSSPropertyHandler {
   }
 }
 
-CSS::register_css_property(new CSSRight);
+$css_right_inc_reg1 = new CSSRight();
+CSS::register_css_property($css_right_inc_reg1);

@@ -97,7 +97,7 @@ class CheckBox extends GenericFormattedBox {
    *
    * @see CheckBox::get_max_width
    */
-  function get_min_width(&$context) { 
+  function get_min_width(&$context, $limit = 10E6) {
     return $this->width; 
   }
   
@@ -111,7 +111,7 @@ class CheckBox extends GenericFormattedBox {
    *
    * @see CheckBox::get_min_width
    */
-  function get_max_width(&$context) { 
+  function get_max_width(&$context, $limit = 10E6) {
     return $this->width; 
   }
 
@@ -125,7 +125,7 @@ class CheckBox extends GenericFormattedBox {
    * 
    * @return Boolean flag indicating the error/success state; 'null' value in case of critical error 
    */
-  function reflow(&$parent, &$context) {  
+  function reflow(&$parent, &$context, $boxes=null) {
     GenericFormattedBox::reflow($parent, $context);
     
     /**

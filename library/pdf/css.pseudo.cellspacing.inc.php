@@ -23,4 +23,5 @@ class CSSCellSpacing extends CSSPropertyHandler {
   }
 }
 
-CSS::register_css_property(new CSSCellSpacing);
+$css_pseudo_cellspacing_inc_reg1 = new CSSCellSpacing();
+CSS::register_css_property($css_pseudo_cellspacing_inc_reg1);

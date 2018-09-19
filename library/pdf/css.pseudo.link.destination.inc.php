@@ -22,4 +22,5 @@ class CSSPseudoLinkDestination extends CSSPropertyHandler {
   }
 }
 
-CSS::register_css_property(new CSSPseudoLinkDestination);
+$css_pseudo_link_destination_inc_reg1 = new CSSPseudoLinkDestination();
+CSS::register_css_property($css_pseudo_link_destination_inc_reg1);

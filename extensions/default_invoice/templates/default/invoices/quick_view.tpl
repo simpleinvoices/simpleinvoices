@@ -17,8 +17,7 @@
  *     GPL v3 or above
  *
  * Website:
- *    https://simpleinvoices.group
- *}
+ *    https://simpleinvoices.group/doku.php?id=si_wiki:menu *}
 <div class="si_toolbar si_toolbar_top">
   <a title="{$LANG.print_preview_tooltip} {$preference.pref_inv_wording|htmlsafe} {$invoice.index_id|htmlsafe}"
      href="index.php?module=export&amp;view=invoice&amp;id={$invoice.id|urlencode}&amp;format=print">

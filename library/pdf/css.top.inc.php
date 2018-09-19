@@ -30,4 +30,5 @@ class CSSTop extends CSSPropertyHandler {
   }
 }
 
-CSS::register_css_property(new CSSTop);
+$css_top_inc_reg1 = new CSSTop();
+CSS::register_css_property($css_top_inc_reg1);

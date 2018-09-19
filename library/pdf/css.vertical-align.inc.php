@@ -166,4 +166,5 @@ class CSSVerticalAlign extends CSSPropertyHandler {
   }
 }
 
-CSS::register_css_property(new CSSVerticalAlign);
+$css_vertical_align_inc_reg1 = new CSSVerticalAlign();
+CSS::register_css_property($css_vertical_align_inc_reg1);

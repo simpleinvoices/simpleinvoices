@@ -432,7 +432,7 @@ class GenericFormattedBox extends GenericBox {
 
     // Width:
     // 'get-min-width' stub
-    function get_min_width(&$context) {
+    function get_min_width(&$context, $limit = 10E6) {
         die("OOPS! Unoverridden get_min_width called in class " . get_class($this) . " inside " .
                          get_class($this->parent));
     }
@@ -446,12 +446,12 @@ class GenericFormattedBox extends GenericBox {
     }
 
     // 'get-max-width' stub
-    function get_max_width(&$context) {
+    function get_max_width(&$context, $limit = 10E6) {
         die("OOPS! Unoverridden get_max_width called in class " . get_class($this) . " inside " .
                          get_class($this->parent));
     }
 
-    function get_max_width_natural(&$context) {
+    function get_max_width_natural(&$context, $limit = 10E6) {
         return $this->get_max_width($context);
     }
 

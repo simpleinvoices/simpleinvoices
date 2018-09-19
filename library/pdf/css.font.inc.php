@@ -177,8 +177,13 @@ class CSSFont extends CSSPropertyHandler {
 
 $font = new CSSFont;
 CSS::register_css_property($font);
-CSS::register_css_property(new CSSFontSize($font,   'size'));
-CSS::register_css_property(new CSSFontStyle($font,  'style'));
-CSS::register_css_property(new CSSFontWeight($font, 'weight'));
-CSS::register_css_property(new CSSFontFamily($font, 'family'));
-CSS::register_css_property(new CSSLineHeight($font, 'line_height'));
+$css_font_inc_reg1 = new CSSFontSize($font,   'size');
+CSS::register_css_property($css_font_inc_reg1);
+$css_font_inc_reg2 = new CSSFontStyle($font,  'style');
+CSS::register_css_property($css_font_inc_reg2);
+$css_font_inc_reg3 = new CSSFontWeight($font, 'weight');
+CSS::register_css_property($css_font_inc_reg3);
+$css_font_inc_reg4 = new CSSFontFamily($font, 'family');
+CSS::register_css_property($css_font_inc_reg4);
+$css_font_inc_reg5 = new CSSLineHeight($font, 'line_height');
+CSS::register_css_property($css_font_inc_reg5);

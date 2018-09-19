@@ -5,7 +5,8 @@
 // instead of using globally visible functions in 'show'.
 
 class TextBoxString extends TextBox {
-  function &create($text, $encoding) {
+  // &$pipeline parameter Added by RCR 20180918
+  function &create($text, $encoding, &$pipeline) {
     $box =  new TextBoxString($text, $encoding);
     $box->readCSS($pipeline->getCurrentCSSState());
     return $box;
@@ -43,11 +44,11 @@ class TextBoxString extends TextBox {
     return 0;
   }
 
-  function get_min_width(&$context) {
+  function get_min_width(&$context, $limit = 10E6) {
     return $this->width;
   }
 
-  function get_max_width(&$context) {
+  function get_max_width(&$context, $limit = 10E6) {
     return $this->width;
   }
 

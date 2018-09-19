@@ -13,6 +13,12 @@
   </div>
   <div id="left">
     <ul>
+        <li>2018-09-12 - <b>2017.4.0</b>
+            <ul>
+                <li><b>Production Release</b> Removed all deprecated uses of class name for the constructor
+                    and updated links for SI documentation to reference the new wiki site.</li>
+            </ul>
+        </li>
       <li>2018-09-12 - <b>2017.3.0</b>
         <ul>
           <li><b>Production Release</b> Updated to support local.locale setting in the custom.config.php

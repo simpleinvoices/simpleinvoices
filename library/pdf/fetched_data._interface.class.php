@@ -1,6 +1,6 @@
 <?php
 class FetchedData {
-  function get_additional_data() {
+  function get_additional_data($key) {
     die("Unoverridden 'get_additional_data' called in ".get_class($this));
   }
 
@@ -12,4 +12,3 @@ class FetchedData {
     return "";
   }
 }
-?>

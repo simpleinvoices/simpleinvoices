@@ -10,7 +10,7 @@ class CSSBorderLeftColor extends CSSSubProperty {
     $owner_value->left->setColor($value);
   }
 
-  function getValue(&$owner_value) {
+  function &getValue(&$owner_value) {
     return $owner_value->left->color->copy();
   }
 

@@ -52,4 +52,5 @@ class CSSPseudoTableBorder extends CSSPropertyHandler {
   }
 }
 
-CSS::register_css_property(new CSSPseudoTableBorder());
+$css_pseudo_table_border_inc_reg1 = new CSSPseudoTableBorder();
+CSS::register_css_property($css_pseudo_table_border_inc_reg1);

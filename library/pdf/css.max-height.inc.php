@@ -51,5 +51,6 @@ class CSSMaxHeight extends CSSPropertyHandler {
     return 'max-height';
   }
 }
- 
-CSS::register_css_property(new CSSMaxHeight);
+
+$css_max_height_inc_reg1 = new CSSMaxHeight();
+CSS::register_css_property($css_max_height_inc_reg1);

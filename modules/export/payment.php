@@ -7,8 +7,7 @@
  *	    GPL v3 or above
  *
  *  Website:
- * 	    https://simpleinvoices.group
- */
+ * 	    https://simpleinvoices.group/doku.php?id=si_wiki:menu */
 // @formatter:off
 $id        = $_GET['id'];
 $format    = $_GET['format'];

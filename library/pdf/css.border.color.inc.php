@@ -29,7 +29,7 @@ class CSSBorderColor extends CSSSubProperty {
     };
   }
 
-  function getValue(&$owner_value) {
+  function &getValue(&$owner_value) {
     return new BorderColor($owner_value->top->color, 
                            $owner_value->right->color, 
                            $owner_value->bottom->color, 

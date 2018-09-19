@@ -69,7 +69,7 @@ class BRBox extends GenericBox {
    *
    * @return int should always return constant zero.
    */
-  function get_min_width(&$context) {
+  function get_min_width(&$context, $limit = 10E6) {
     return 0;
   }
 
@@ -80,7 +80,7 @@ class BRBox extends GenericBox {
    *
    * @return int should always return constant zero.
    */
-  function get_max_width(&$context) {
+  function get_max_width(&$context, $limit = 10E6) {
     return 0;
   }
 
@@ -95,7 +95,7 @@ class BRBox extends GenericBox {
    * @see FlowContext
    * @see GenericContainerBox
    */
-  function reflow(&$parent, &$context) {
+  function reflow(&$parent, &$context, $boxes=null) {
     parent::reflow($parent, $context);
 
     /**

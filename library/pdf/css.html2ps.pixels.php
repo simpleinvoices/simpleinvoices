@@ -24,4 +24,5 @@ class CSSHTML2PSPixels extends CSSPropertyHandler {
   }
 }
 
-CSS::register_css_property(new CSSHTML2PSPixels);
+$css_html2ps_pixels_reg1 = new CSSHTML2PSPixels();
+CSS::register_css_property($css_html2ps_pixels_reg1);

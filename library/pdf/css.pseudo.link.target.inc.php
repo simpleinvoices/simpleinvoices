@@ -36,4 +36,5 @@ class CSSPseudoLinkTarget extends CSSPropertyHandler {
   }
 }
 
-CSS::register_css_property(new CSSPseudoLinkTarget);
+$css_pseudo_link_target_inc_reg1 = new CSSPseudoLinkTarget();
+CSS::register_css_property($css_pseudo_link_target_inc_reg1);

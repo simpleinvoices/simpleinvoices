@@ -609,7 +609,7 @@ class GenericContainerBox extends GenericFormattedBox {
         return $min_width;
     }
 
-    public function get_min_width(&$context) {
+    public function get_min_width(&$context, $limit = 10E6) {
         $strategy = new StrategyWidthMin();
         return $strategy->apply($this, $context);
     }

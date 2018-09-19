@@ -13,12 +13,11 @@
 *	 GPL v2 or above
 *
 * Website:
-*	https://simpleinvoices.group
-*/
+*	https://simpleinvoices.group/doku.php?id=si_wiki:menu*/
 *}
 
 <b>Sanity check of the invoices</b>
 <hr />
        <div id="left">
 <br />
-This feature is still a work-in-progress, please refer to our homepage: <a href='https://simpleinvoices.group'>https://simpleinvoices.group</a> for update.
+This feature is still a work-in-progress, please refer to our homepage: <a href='https://simpleinvoices.group/doku.php?id=si_wiki:menu'>Simple Invoices Group</a> for update.

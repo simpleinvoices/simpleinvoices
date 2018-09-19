@@ -75,7 +75,7 @@ class BlockBox extends GenericContainerBox {
      *
      * @todo check whether percentage values should be really ignored during relative positioning
      */
-    public function reflow(&$parent, &$context) {
+    public function reflow(&$parent, &$context, $boxes=null) {
         switch ($this->getCSSProperty(CSS_POSITION)) {
             case POSITION_STATIC:
                 $this->reflow_static($parent, $context);

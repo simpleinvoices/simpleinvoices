@@ -12,8 +12,7 @@
  *   GPL v2 or above
  *
  * Website:
- *  https://simpleinvoices.group
- *}
+ *  https://simpleinvoices.group/doku.php?id=si_wiki:menu *}
 <input type="hidden" name="action" value="insert" />
 <table class="center">
   <tr>

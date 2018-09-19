@@ -22,4 +22,5 @@ class CSSOrphans extends CSSPropertyHandler {
   }
 }
 
-CSS::register_css_property(new CSSOrphans);
+$css_orphans_inc_reg1 = new CSSOrphans();
+CSS::register_css_property($css_orphans_inc_reg1);

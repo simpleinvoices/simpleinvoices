@@ -20,4 +20,5 @@ class CSSWidows extends CSSPropertyHandler {
   }
 }
 
-CSS::register_css_property(new CSSWidows);
+$css_widows_inc_reg1 = new CSSWidows();
+CSS::register_css_property($css_widows_inc_reg1);

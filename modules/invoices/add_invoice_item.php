@@ -7,8 +7,7 @@
  *     GPL v3 or above
  *
  * Website:
- *     https://simpleinvoices.group
- */
+ *     https://simpleinvoices.group/doku.php?id=si_wiki:menu */
 global $smarty;
 if(isset($_POST['submit'])) {
     Invoice::insertInvoiceItem($_POST['id'], $_POST['quantity1'], $_POST['product1'],

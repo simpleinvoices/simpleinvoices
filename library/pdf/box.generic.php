@@ -314,7 +314,7 @@ class GenericBox {
         }
     }
 
-    public function reflow(&$parent, &$context) {
+    public function reflow(&$parent, &$context, $boxes=null) {
     }
 
     public function reflow_inline() {
@@ -360,7 +360,7 @@ class GenericBox {
         return true;
     }
 
-    public function reflow_text() {
+    public function reflow_text(&$viewport) {
         return true;
     }
 
@@ -449,7 +449,7 @@ class GenericBox {
         return false;
     }
 
-    public function get_min_width_natural($context) {
+    public function get_min_width_natural(&$context) {
         return $this->get_min_width($context);
     }
 

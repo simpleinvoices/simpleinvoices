@@ -11,6 +11,5 @@ class CSSPageBreakInside extends CSSPageBreak {
   }
 }
 
-CSS::register_css_property(new CSSPageBreakInside);
-
-?>
+$css_page_break_inside_inc_reg1 = new CSSPageBreakInside();
+CSS::register_css_property($css_page_break_inside_inc_reg1);

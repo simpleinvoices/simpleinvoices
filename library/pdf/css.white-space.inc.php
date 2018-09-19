@@ -31,4 +31,5 @@ class CSSWhiteSpace extends CSSPropertyStringSet {
   }
 }
 
-CSS::register_css_property(new CSSWhiteSpace);
+$css_white_space_inc_reg1 = new CSSWhiteSpace();
+CSS::register_css_property($css_white_space_inc_reg1);

@@ -47,5 +47,6 @@ class CSSTextDecoration extends CSSPropertyHandler {
   }
 }
 
-CSS::register_css_property(new CSSTextDecoration);
+$css_text_decoration_inc_reg1 = new CSSTextDecoration();
+CSS::register_css_property($css_text_decoration_inc_reg1);
 

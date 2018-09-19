@@ -10,11 +10,11 @@ class IFrameBox extends InlineBlockBox {
 
   // Note that IFRAME width is NOT determined by its content, thus we need to override 'get_min_width' and
   // 'get_max_width'; they should return the constrained frame width.
-  function get_min_width(&$context) { 
+  function get_min_width(&$context, $limit = 10E6) {
     return $this->get_max_width($context);
   } 
 
-  function get_max_width(&$context) {
+  function get_max_width(&$context, $limit = 10E6) {
     return $this->get_width();
   }
 

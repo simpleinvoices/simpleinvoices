@@ -25,4 +25,5 @@ class CSSDirection extends CSSPropertyStringSet {
   }
 }
 
-CSS::register_css_property(new CSSDirection);
+$css_direction_inc_reg1 = new CSSDirection();
+CSS::register_css_property($css_direction_inc_reg1);

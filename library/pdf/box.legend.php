@@ -19,7 +19,7 @@ class LegendBox extends GenericContainerBox {
   }
 
   // Flow-control
-  function reflow(&$parent, &$context) {
+  function reflow(&$parent, &$context, $boxes=null) {
     GenericFormattedBox::reflow($parent, $context);
 
     // Determine upper-left _content_ corner position of current box 

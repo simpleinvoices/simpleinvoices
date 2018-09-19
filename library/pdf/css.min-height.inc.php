@@ -48,5 +48,6 @@ class CSSMinHeight extends CSSPropertyHandler {
     return 'min-height';
   }
 }
- 
-CSS::register_css_property(new CSSMinHeight);
+
+$css_min_height_inc_reg1 = new CSSMinHeight();
+CSS::register_css_property($css_min_height_inc_reg1);

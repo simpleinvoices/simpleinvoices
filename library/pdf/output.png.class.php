@@ -201,7 +201,7 @@ class OutputDriverPNG extends OutputDriverGeneric {
     $this->update_media($media);
   }
 
-  function update_media($media) {
+  function update_media(&$media) {
     parent::update_media($media);
 
     /**
@@ -452,7 +452,7 @@ class OutputDriverPNG extends OutputDriverGeneric {
   }
 
   function new_form($name) { /* N/A */ }
-  function next_page() { /* N/A */ }
+  function next_page($height) { /* N/A */ }
   function release() { }
 
   /**

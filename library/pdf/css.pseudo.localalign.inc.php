@@ -23,4 +23,5 @@ class CSSLocalAlign extends CSSPropertyHandler {
   }
 }
 
-CSS::register_css_property(new CSSLocalAlign);
+$css_pseudo_localalign_inc_reg1 = new CSSLocalAlign();
+CSS::register_css_property($css_pseudo_localalign_inc_reg1);

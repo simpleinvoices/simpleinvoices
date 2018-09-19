@@ -44,4 +44,5 @@ class CSSTextAlign extends CSSPropertyStringSet {
   }
 }
 
-CSS::register_css_property(new CSSTextAlign);
+$css_text_align_inc_reg1 = new CSSTextAlign();
+CSS::register_css_property($css_text_align_inc_reg1);

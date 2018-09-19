@@ -10,7 +10,7 @@ class CSSBorderTopColor extends CSSSubProperty {
     $owner_value->top->setColor($value);
   }
 
-  function getValue(&$owner_value) {
+  function &getValue(&$owner_value) {
     return $owner_value->top->color->copy();
   }
 

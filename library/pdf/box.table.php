@@ -644,7 +644,7 @@ class TableBox extends GenericContainerBox {
   // @param $context referene to a flow context object
   // @return minimal box width (including the padding/margin/border width! NOT content width)
   //
-  function get_min_width(&$context) {
+  function get_min_width(&$context, $limit = 10E6) {
     $widths = $this->get_table_columns_min_widths($context);
     $maxw = $this->get_table_columns_max_widths($context);
 
@@ -680,7 +680,7 @@ class TableBox extends GenericContainerBox {
     return $this->get_min_width($context);
   }
 
-  function get_max_width(&$context) {
+  function get_max_width(&$context, $limit = 10E6) {
     $wc = $this->getCSSProperty(CSS_WIDTH);
 
     if ($wc->isConstant()) {
@@ -710,7 +710,7 @@ class TableBox extends GenericContainerBox {
     }
   }
 
-  function get_max_width_natural(&$context) {
+  function get_max_width_natural(&$context, $limit = 10E6) {
     return $this->get_max_width($context);
   }
 
@@ -960,7 +960,7 @@ class TableBox extends GenericContainerBox {
   }
 
   // Flow-control
-  function reflow(&$parent, &$context) {
+  function reflow(&$parent, &$context, $boxes=null) {
     if ($this->getCSSProperty(CSS_FLOAT) === FLOAT_NONE) {
       $status = $this->reflow_static_normal($parent, $context);
     } else {

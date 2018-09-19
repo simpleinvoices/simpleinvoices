@@ -36,6 +36,9 @@ class CSSListStyle extends CSSPropertyHandler {
 
 $ls = new CSSListStyle;
 CSS::register_css_property($ls);
-CSS::register_css_property(new CSSListStyleImage($ls,    'image'));
-CSS::register_css_property(new CSSListStylePosition($ls, 'position'));
-CSS::register_css_property(new CSSListStyleType($ls,     'type'));
+$css_list_style_inc_reg1 = new CSSListStyleImage($ls,    'image');
+CSS::register_css_property($css_list_style_inc_reg1);
+$css_list_style_inc_reg2 = new CSSListStylePosition($ls, 'position');
+CSS::register_css_property($css_list_style_inc_reg2);
+$css_list_style_inc_reg3 = new CSSListStyleType($ls,     'type');
+CSS::register_css_property($css_list_style_inc_reg3);

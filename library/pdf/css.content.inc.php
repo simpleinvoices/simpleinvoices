@@ -91,4 +91,5 @@ class CSSContent extends CSSPropertyHandler {
   }
 }
 
-CSS::register_css_property(new CSSContent);
+$css_content_inc_reg1 = new CSSContent();
+CSS::register_css_property($css_content_inc_reg1);

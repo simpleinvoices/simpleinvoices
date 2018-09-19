@@ -305,6 +305,9 @@ class Pipeline {
     public $_page_break_strategy;
 
     public function __construct() {
+        // Added by RCR 20180919
+        $this->output_filters = array();
+
         $this->_counters = array();
         $this->_footnotes = array();
 

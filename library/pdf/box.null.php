@@ -2,8 +2,8 @@
 // $Header: /cvsroot/html2ps/box.null.php,v 1.18 2006/07/09 09:07:44 Konstantin Exp $
 
 class NullBox extends GenericInlineBox {
-  function get_min_width(&$context) { return 0; }
-  function get_max_width(&$context) { return 0; }
+  function get_min_width(&$context, $limit = 10E6) { return 0; }
+  function get_max_width(&$context, $limit = 10E6) { return 0; }
   function get_height() { return 0; }
 
   function __construct() {

@@ -24,7 +24,7 @@ class TableCellBox extends GenericContainerBox {
     $this->row     = 0;
   }
 
-  function get_min_width(&$context) {
+  function get_min_width(&$context, $limit = 10E6) {
     if (isset($this->_cache[CACHE_MIN_WIDTH])) {
       return $this->_cache[CACHE_MIN_WIDTH];
     };
@@ -259,7 +259,7 @@ class TableCellBox extends GenericContainerBox {
   }
 
   // Flow-control
-  function reflow(&$parent, &$context) {
+  function reflow(&$parent, &$context, $boxes=null) {
     GenericFormattedBox::reflow($parent, $context);
 
     global $g_config;
@@ -317,5 +317,3 @@ class TableCellBox extends GenericContainerBox {
     $context->pop();
   }
 }
-
-?>

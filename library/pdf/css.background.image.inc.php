@@ -37,5 +37,3 @@ class CSSBackgroundImage extends CSSSubFieldProperty {
     return CSSBackgroundImage::default_value();
   }
 }
-
-?>

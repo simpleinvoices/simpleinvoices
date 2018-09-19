@@ -13,8 +13,7 @@
 *	 GPL v2 or above
 *
 * Website:
-* 	https://simpleinvoices.group
- */
+* 	https://simpleinvoices.group/doku.php?id=si_wiki:menu */
 
 if(isset($_POST['save'])) {
 	saveCustomField($_POST[plugin],$_POST[categorie],$_POST[name],$_POST[description]);

@@ -73,8 +73,10 @@ class Image {
     // We cannot use the $url as an cache image name as it could be longer than 
     // allowed file name length (especially after escaping specialy symbols)
     // thus, we generate long almost random 32-character name using the md5 hash function
-    //
-    return CACHE_DIR.md5(time() + $url + rand());
+
+    // Modified to use string concatenation rather than numeric addition. Added by RCR 20180919
+    $lclValue = time() . $url . rand();
+    return CACHE_DIR.md5($lclValue);
   }
 
   // Checks if cache directory is available
@@ -126,4 +128,3 @@ class Image {
     $g_image_cache = array();
   }
 }
-?>

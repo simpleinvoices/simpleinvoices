@@ -29,7 +29,7 @@ class CSSBorderWidth extends CSSSubProperty {
     };
   }
 
-  function getValue(&$owner_value) {
+  function &getValue(&$owner_value) {
     return new BorderWidth($owner_value->top->width, 
                            $owner_value->right->width, 
                            $owner_value->bottom->width, 

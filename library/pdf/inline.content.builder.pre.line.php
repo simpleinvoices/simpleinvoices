@@ -25,7 +25,7 @@ class InlineContentBuilderPreLine extends InlineContentBuilder {
       foreach ($words as $word) {
         $box->process_word($word, $pipeline);
 
-        $whitespace =& WhitespaceBox::create($pipeline);
+        $whitespace =& WhitespaceBox::create($text, null, $pipeline);
         $box->add_child($whitespace);
       };
 

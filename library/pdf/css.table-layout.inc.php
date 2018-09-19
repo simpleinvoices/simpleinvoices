@@ -25,4 +25,5 @@ class CSSTableLayout extends CSSPropertyStringSet {
   }
 }
 
-CSS::register_css_property(new CSSTableLayout());
+$css_table_layout_inc_reg1 = new CSSTableLayout();
+CSS::register_css_property($css_table_layout_inc_reg1);

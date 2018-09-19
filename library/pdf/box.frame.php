@@ -8,7 +8,7 @@ class FrameBox extends GenericContainerBox {
     return $box;
   }
 
-  function reflow(&$parent, &$context) {
+  function reflow(&$parent, &$context, $boxes=null) {
     // If frame contains no boxes (for example, the src link is broken)
     // we just return - no further processing will be done
     if (count($this->content) == 0) { return; };
@@ -236,7 +236,7 @@ class FramesetBox extends GenericContainerBox {
     $this->cols = $root->has_attribute('cols') ? $root->get_attribute('cols') : "100%";
   }
 
-  function reflow(&$parent, &$context) {
+  function reflow(&$parent, &$context, $boxes=null) {
     $viewport =& $context->get_viewport();
 
     // Frameset always fill all available space in viewport

@@ -36,4 +36,5 @@ class CSSHTML2PSHTMLContent extends CSSPropertyHandler {
   }
 }
 
-CSS::register_css_property(new CSSHTML2PSHTMLContent);
+$css_html2ps_html_content_inc_reg1 = new CSSHTML2PSHTMLContent();
+CSS::register_css_property($css_html2ps_html_content_inc_reg1);

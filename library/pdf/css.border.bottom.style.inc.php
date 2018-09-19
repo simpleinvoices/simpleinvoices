@@ -10,7 +10,7 @@ class CSSBorderBottomStyle extends CSSSubProperty {
     $owner_value->bottom->style = $value;
   }
 
-  function getValue(&$owner_value) {
+  function &getValue(&$owner_value) {
     return $owner_value->bottom->style;
   }
 

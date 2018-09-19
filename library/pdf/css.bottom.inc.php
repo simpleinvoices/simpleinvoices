@@ -51,4 +51,5 @@ class CSSBottom extends CSSPropertyHandler {
   }
 }
 
-CSS::register_css_property(new CSSBottom);
+$css_bottom_inc_reg1 = new CSSBottom();
+CSS::register_css_property($css_bottom_inc_reg1);

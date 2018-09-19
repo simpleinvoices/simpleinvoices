@@ -27,4 +27,5 @@ class CSSHTML2PSPseudoelements extends CSSPropertyHandler {
   }
 }
 
-CSS::register_css_property(new CSSHTML2PSPseudoelements);
+$css_html2ps_pseudoelements_inc_reg1 = new CSSHTML2PSPseudoelements();
+CSS::register_css_property($css_html2ps_pseudoelements_inc_reg1);

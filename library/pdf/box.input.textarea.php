@@ -28,11 +28,11 @@ class TextAreaInputBox extends InlineBlockBox {
     return $normal_height - $this->_get_vert_extra();
   }
 
-  function get_min_width(&$context) { 
+  function get_min_width(&$context, $limit = 10E6) {
     return $this->get_max_width($context);
   } 
 
-  function get_max_width(&$context) {
+  function get_max_width(&$context, $limit = 10E6) {
     return $this->get_width();
   }
 

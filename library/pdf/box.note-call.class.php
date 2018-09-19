@@ -78,7 +78,7 @@ class BoxNoteCall extends GenericInlineBox {
     return $box;
   }
 
-  function reflow(&$parent, &$context) {
+  function reflow(&$parent, &$context, $boxes=null) {
     $parent->append_line($this->_note_call_box);
 
     $body = $parent;

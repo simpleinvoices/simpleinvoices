@@ -30,4 +30,5 @@ class CSSTextTransform extends CSSPropertyStringSet {
   }
 }
 
-CSS::register_css_property(new CSSTextTransform);
+$css_text_transform_inc_reg1 = new CSSTextTransform();
+CSS::register_css_property($css_text_transform_inc_reg1);

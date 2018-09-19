@@ -13,8 +13,7 @@
  *   GPL v2 or above
  *
  * Website:
- *   https://simpleinvoices.group
- */
+ *   https://simpleinvoices.group/doku.php?id=si_wiki:menu */
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 echo "this file was flagged as not needed anymore! path: modules/invoices/search.php";

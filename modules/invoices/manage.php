@@ -7,8 +7,7 @@
  * GPL v2 or above
  *
  * Website:
- * https://simpleinvoices.group
- */
+ * https://simpleinvoices.group/doku.php?id=si_wiki:menu */
 global $smarty;
 
 // stop the direct browsing to this file - let index.php handle which files get displayed

@@ -20,7 +20,7 @@
  */
 class ButtonBox extends InlineControlBox {
   function __construct() {
-    $this->InlineControlBox();
+    parent::__construct();
   }
 
   function get_max_width(&$context, $limit = 10E6) { 

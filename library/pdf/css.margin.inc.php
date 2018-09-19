@@ -122,7 +122,11 @@ class CSSMarginBottom extends CSSSubFieldProperty {
 
 $mh = new CSSMargin;
 CSS::register_css_property($mh);
-CSS::register_css_property(new CSSMarginLeft($mh, 'left'));
-CSS::register_css_property(new CSSMarginRight($mh, 'right'));
-CSS::register_css_property(new CSSMarginTop($mh, 'top'));
-CSS::register_css_property(new CSSMarginBottom($mh, 'bottom'));
+$css_margin_inc_reg1 = new CSSMarginLeft($mh, 'left');
+CSS::register_css_property($css_margin_inc_reg1);
+$css_margin_inc_reg2 = new CSSMarginRight($mh, 'right');
+CSS::register_css_property($css_margin_inc_reg2);
+$css_margin_inc_reg3 = new CSSMarginTop($mh, 'top');
+CSS::register_css_property($css_margin_inc_reg3);
+$css_margin_inc_reg4 = new CSSMarginBottom($mh, 'bottom');
+CSS::register_css_property($css_margin_inc_reg4);

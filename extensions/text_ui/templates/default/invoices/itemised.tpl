@@ -12,8 +12,7 @@
  *   GPL v2 or above
  *
  * Website:
- *   https://simpleinvoices.group
- *}
+ *   https://simpleinvoices.group/doku.php?id=si_wiki:menu *}
 <div id="gmail_loading" class="gmailLoader" style="float: right; display: none;">
   <img src="images/common/gmail-loader.gif" alt="Loading ..." />
   Loading ...

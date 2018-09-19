@@ -10,7 +10,7 @@ class CSSBorderLeftStyle extends CSSSubProperty {
     $owner_value->left->style = $value;
   }
 
-  function getValue(&$owner_value) {
+  function &getValue(&$owner_value) {
     return $owner_value->left->style;
   }
 

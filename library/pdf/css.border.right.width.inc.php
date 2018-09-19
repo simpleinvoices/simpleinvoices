@@ -14,7 +14,7 @@ class CSSBorderRightWidth extends CSSSubProperty {
     };
   }
 
-  function getValue(&$owner_value) {
+  function &getValue(&$owner_value) {
     return $owner_value->right->width;
   }
 

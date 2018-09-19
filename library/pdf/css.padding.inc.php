@@ -124,7 +124,11 @@ class CSSPaddingBottom extends CSSSubFieldProperty {
 
 $ph = new CSSPadding;
 CSS::register_css_property($ph);
-CSS::register_css_property(new CSSPaddingLeft($ph,   'left'));
-CSS::register_css_property(new CSSPaddingRight($ph,  'right'));
-CSS::register_css_property(new CSSPaddingTop($ph,    'top'));
-CSS::register_css_property(new CSSPaddingBottom($ph, 'bottom'));
+$css_padding_inc_reg1 = new CSSPaddingLeft($ph,   'left');
+CSS::register_css_property($css_padding_inc_reg1);
+$css_padding_inc_reg2 = new CSSPaddingRight($ph,  'right');
+CSS::register_css_property($css_padding_inc_reg2);
+$css_padding_inc_reg3 = new CSSPaddingTop($ph,    'top');
+CSS::register_css_property($css_padding_inc_reg3);
+$css_padding_inc_reg4 = new CSSPaddingBottom($ph, 'bottom');
+CSS::register_css_property($css_padding_inc_reg4);

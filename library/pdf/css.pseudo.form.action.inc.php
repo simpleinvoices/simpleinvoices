@@ -20,4 +20,5 @@ class CSSPseudoFormAction extends CSSPropertyHandler {
   }
 }
 
-CSS::register_css_property(new CSSPseudoFormAction);
+$css_pseudo_form_action_inc_reg1 = new CSSPseudoFormAction();
+CSS::register_css_property($css_pseudo_form_action_inc_reg1);

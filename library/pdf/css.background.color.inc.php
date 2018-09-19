@@ -58,5 +58,3 @@ class CSSBackgroundColor extends CSSSubFieldProperty {
     return array(255,255,255);
   }
 }
-
-?>

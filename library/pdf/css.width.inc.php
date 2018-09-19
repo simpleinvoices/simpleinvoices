@@ -74,5 +74,7 @@ class CSSWidth extends CSSSubProperty {
 
 $width = new CSSCompositeWidth;
 CSS::register_css_property($width);
-CSS::register_css_property(new CSSWidth($width));
-CSS::register_css_property(new CSSMinWidth($width, '_min_width'));
+$css_width_inc_reg1 = new CSSWidth($width);
+CSS::register_css_property($css_width_inc_reg1);
+$css_width_inc_reg2 = new CSSMinWidth($width, '_min_width');
+CSS::register_css_property($css_width_inc_reg2);

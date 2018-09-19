@@ -22,4 +22,5 @@ class CSSPseudoFormRadioGroup extends CSSPropertyHandler {
   }
 }
 
-CSS::register_css_property(new CSSPseudoFormRadioGroup);
+$css_pseudo_form_rediogroup_inc_reg1 = new CSSPseudoFormRadioGroup();
+CSS::register_css_property($css_pseudo_form_rediogroup_inc_reg1);

@@ -28,4 +28,5 @@ class CSSOverflow extends CSSPropertyStringSet {
   }
 }
 
-CSS::register_css_property(new CSSOverflow);
+$css_overflow_inc_reg1 = new CSSOverflow();
+CSS::register_css_property($css_overflow_inc_reg1);

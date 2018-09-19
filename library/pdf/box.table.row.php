@@ -50,15 +50,18 @@ class TableRowBox extends GenericContainerBox {
   }
 
   function add_fake_cell_after($index, &$pipeline) {
-    array_splice($this->content, $index+1, 0, array(FakeTableCellBox::create($pipeline)));
+    $root = null; // Added by RCR 20180918
+    array_splice($this->content, $index+1, 0, array(FakeTableCellBox::create($root, $pipeline)));
   }
 
   function add_fake_cell_before($index, &$pipeline) {
-    array_splice($this->content, $index, 0, array(FakeTableCellBox::create($pipeline)));
+    $root = null; // Added by RCR 20180918
+    array_splice($this->content, $index, 0, array(FakeTableCellBox::create($root, $pipeline)));
   }
 
   function append_fake_cell(&$pipeline) {
-    $this->content[] = FakeTableCellBox::create($pipeline);
+    $root = null; // Added by RCR 20180918
+    $this->content[] = FakeTableCellBox::create($root, $pipeline);
   }
 
   // Table specific

@@ -33,4 +33,5 @@ class CSSTextIndent extends CSSPropertyHandler {
   }
 }
 
-CSS::register_css_property(new CSSTextIndent());
+$css_text_indent_inc_reg1 = new CSSTextIndent();
+CSS::register_css_property($css_text_indent_inc_reg1);

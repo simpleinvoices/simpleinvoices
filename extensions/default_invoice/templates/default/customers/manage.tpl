@@ -6,8 +6,7 @@
  *   GPL v3 or above
  *
  * Website:
- *   https://simpleinvoices.group
- *}
+ *   https://simpleinvoices.group/doku.php?id=si_wiki:menu *}
 <div class="si_toolbar si_toolbar_top">
     <a href="index.php?module=customers&amp;view=add" class="">
         <img src="images/famfam/add.png" alt="" />

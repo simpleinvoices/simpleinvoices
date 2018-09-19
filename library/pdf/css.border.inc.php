@@ -124,26 +124,45 @@ class CSSBorder extends CSSPropertyHandler {
 $border = new CSSBorder();
 CSS::register_css_property($border);
 
-CSS::register_css_property(new CSSBorderColor($border));
-CSS::register_css_property(new CSSBorderWidth($border));
-CSS::register_css_property(new CSSBorderStyle($border));
+$css_border_inc_reg1 = new CSSBorderColor($border);
+CSS::register_css_property($css_border_inc_reg1);
+$css_border_inc_reg2 = new CSSBorderWidth($border);
+CSS::register_css_property($css_border_inc_reg2);
+$css_border_inc_reg3 = new CSSBorderStyle($border);
+CSS::register_css_property($css_border_inc_reg3);
 
-CSS::register_css_property(new CSSBorderTop($border, 'top'));
-CSS::register_css_property(new CSSBorderRight($border, 'right'));
-CSS::register_css_property(new CSSBorderBottom($border, 'bottom'));
-CSS::register_css_property(new CSSBorderLeft($border, 'left'));
+$css_border_inc_reg4 = new CSSBorderTop($border, 'top');
+CSS::register_css_property($css_border_inc_reg4);
+$css_border_inc_reg5 = new CSSBorderRight($border, 'right');
+CSS::register_css_property($css_border_inc_reg5);
+$css_border_inc_reg6 = new CSSBorderBottom($border, 'bottom');
+CSS::register_css_property($css_border_inc_reg6);
+$css_border_inc_reg7 = new CSSBorderLeft($border, 'left');
+CSS::register_css_property($css_border_inc_reg7);
 
-CSS::register_css_property(new CSSBorderLeftColor($border));
-CSS::register_css_property(new CSSBorderTopColor($border));
-CSS::register_css_property(new CSSBorderRightColor($border));
-CSS::register_css_property(new CSSBorderBottomColor($border));
+$css_border_inc_reg8 = new CSSBorderLeftColor($border);
+CSS::register_css_property($css_border_inc_reg8);
+$css_border_inc_reg9 = new CSSBorderTopColor($border);
+CSS::register_css_property($css_border_inc_reg9);
+$css_border_inc_reg10 = new CSSBorderRightColor($border);
+CSS::register_css_property($css_border_inc_reg10);
+$css_border_inc_reg11 = new CSSBorderBottomColor($border);
+CSS::register_css_property($css_border_inc_reg11);
 
-CSS::register_css_property(new CSSBorderLeftStyle($border));
-CSS::register_css_property(new CSSBorderTopStyle($border));
-CSS::register_css_property(new CSSBorderRightStyle($border));
-CSS::register_css_property(new CSSBorderBottomStyle($border));
+$css_border_inc_reg12 = new CSSBorderLeftStyle($border);
+CSS::register_css_property($css_border_inc_reg12);
+$css_border_inc_reg13 = new CSSBorderTopStyle($border);
+CSS::register_css_property($css_border_inc_reg13);
+$css_border_inc_reg14 = new CSSBorderRightStyle($border);
+CSS::register_css_property($css_border_inc_reg14);
+$css_border_inc_reg15 = new CSSBorderBottomStyle($border);
+CSS::register_css_property($css_border_inc_reg15);
 
-CSS::register_css_property(new CSSBorderLeftWidth($border));
-CSS::register_css_property(new CSSBorderTopWidth($border));
-CSS::register_css_property(new CSSBorderRightWidth($border));
-CSS::register_css_property(new CSSBorderBottomWidth($border));
+$css_border_inc_reg16 = new CSSBorderLeftWidth($border);
+CSS::register_css_property($css_border_inc_reg16);
+$css_border_inc_reg17 = new CSSBorderTopWidth($border);
+CSS::register_css_property($css_border_inc_reg17);
+$css_border_inc_reg18 = new CSSBorderRightWidth($border);
+CSS::register_css_property($css_border_inc_reg18);
+$css_border_inc_reg19 = new CSSBorderBottomWidth($border);
+CSS::register_css_property($css_border_inc_reg19);

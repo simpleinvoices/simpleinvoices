@@ -35,4 +35,5 @@ class CSSPosition extends CSSPropertyStringSet {
   }
 }
 
-CSS::register_css_property(new CSSPosition);
+$css_position_inc_reg1 = new CSSPosition();
+CSS::register_css_property($css_position_inc_reg1);

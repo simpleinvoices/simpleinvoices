@@ -23,4 +23,5 @@ class CSSPage extends CSSPropertyHandler {
   }
 }
 
-CSS::register_css_property(new CSSPage());
+$css_page_inc_reg1 = new CSSPage();
+CSS::register_css_property($css_page_inc_reg1);

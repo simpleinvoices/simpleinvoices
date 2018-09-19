@@ -29,7 +29,8 @@ class CSSDisplay extends CSSPropertyHandler {
   }
 }
 
-CSS::register_css_property(new CSSDisplay);
+$css_display_inc_reg1 = new CSSDisplay();
+CSS::register_css_property($css_display_inc_reg1);
 
 function is_inline_element($display) {
   return 

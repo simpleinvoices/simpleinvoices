@@ -13,8 +13,7 @@
  *      GPL v3 or above
  *
  *  Website:
- *      https://simpleinvoices.group
- *}
+ *      https://simpleinvoices.group/doku.php?id=si_wiki:menu *}
 {if $smarty.get.stage == 1 }
 <div class="si_center">
   <h3>Email {$invoice.index_name|htmlsafe} to Customer as PDF</h3>

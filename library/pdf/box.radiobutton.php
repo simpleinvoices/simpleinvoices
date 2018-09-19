@@ -58,19 +58,19 @@ class RadioBox extends SimpleInlineBox {
   }
 
   // Inherited from GenericFormattedBox
-  function get_min_width(&$context) { 
+  function get_min_width(&$context, $limit = 10E6) {
     return $this->get_full_width($context); 
   }
   
-  function get_max_width(&$context) { 
+  function get_max_width(&$context, $limit = 10E6) {
     return $this->get_full_width($context); 
   }
   
-  function get_max_width_natural(&$context) { 
+  function get_max_width_natural(&$context, $limit = 10E6) {
     return $this->get_full_width($context); 
   }
 
-  function reflow(&$parent, &$context) {  
+  function reflow(&$parent, &$context, $boxes=null) {
     GenericFormattedBox::reflow($parent, $context);   
 
     // set default baseline

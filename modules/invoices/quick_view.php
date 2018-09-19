@@ -13,8 +13,7 @@
  *   GPL v2 or above
  *     
  * Website:
- *   https://simpleinvoices.group
- */
+ *   https://simpleinvoices.group/doku.php?id=si_wiki:menu */
 global $config, $LANG, $pdoDb, $smarty;
 
 // @formatter:off
