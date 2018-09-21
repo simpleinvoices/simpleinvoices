@@ -228,7 +228,7 @@ $logger->log("index.php - after header.tpl", Zend_Log::DEBUG);
 // Include php file for the requested page section - START
 // **********************************************************
 // This change allows template files modified with necessary logic, to
-// include sections defined in extentions. The benefit is that multiple
+// include sections defined in extensions. The benefit is that multiple
 // extensions that affect the same tpl file can be written without being
 // concerned that the tpl file for one extension will overwrite the tpl
 // for another extension. For an example, look at the file,

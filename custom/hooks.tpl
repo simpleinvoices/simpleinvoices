@@ -1,6 +1,6 @@
 {strip}
 {* ************************************************************************
-  SI "hooks" allow content to be inserted into or to replace pre-defined
+  SI "hooks" allow content to be inserted into or to replace predefined
   locations in the default header.tpl, menu.tpl and footer.tpl files.
   
   Before you consider using hooks, make sure other options such as tpl file
@@ -19,7 +19,7 @@
   in. All other hooks are insertion points and have names that indicate
   "start" or "end" of the named location.
   
-  All hooks should be defined in this file to document their existance. They
+  All hooks should be defined in this file to document their existence. They
   should be surrounded by a test to see if they have previously been set;
   preventing them from being inadvertantly redefined in this file.
   
