@@ -29,3 +29,4 @@ $smarty->assign('customFieldLabel',$customFieldLabel);
 $smarty->assign('pageActive', 'customer');
 $smarty->assign('subPageActive', 'customer_add');
 $smarty->assign('active_tab', '#people');
+$smarty->assign('domain_id', domain_id::get());

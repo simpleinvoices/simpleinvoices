@@ -24,12 +24,13 @@ class SubCustomers {
     /**
      * Add a new <b>si_customers</b> record.
      * @return boolean <b>true</b> if record successfully added; otherwise <b>false</b>.
+     * @throws PdoDbException
      */
     public static function insertCustomer() {
         global $config, $pdoDb;
 
         $pdoDb->addSimpleWhere("name", $_POST['name'], "AND");
-        $pdoDb->addSimpleWhere("domain_id", domain_id::get());
+        $pdoDb->addSimpleWhere("domain_id", $_POST['domain_id']);
         $rows = $pdoDb->request("SELECT", "customers");
         if (!empty($rows)) {
             echo '<h1>The name you specified already exists.</h1>';
@@ -90,7 +91,7 @@ class SubCustomers {
      * Get a <b>sub-customer</b> records associated with a specific <b>parent_customer_id</b>.
      * @param number $parent_id ID of parent to which sub-customers are associated. 
      * @throws Exception If database access error occurs.
-     * @return <b>si_customer</b> records retrieved.
+     * @return array <b>si_customer</b> records retrieved.
      */
     public static function getSubCustomers($parent_id) {
         global $pdoDb;

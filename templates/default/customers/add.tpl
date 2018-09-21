@@ -193,5 +193,6 @@
       </div>
     </div>
     <input type="hidden" name="op" value="insert_customer" />
+    <input type="hidden" name="domain_id" value="{$domain_id}"/>
   </form>
 {/if}

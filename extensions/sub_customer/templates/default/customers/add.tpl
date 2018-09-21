@@ -239,6 +239,7 @@
     </td>
     <td>
       <input type="hidden" name="op" value="insert_customer" />
+      <input type="hidden" name="domain_id" value="{$domain_id}"/>
       <a href="index.php?module=customers&amp;view=manage" class="negative" tabindex="250" >
         <img src="images/common/cross.png" alt="" />
         {$LANG.cancel}

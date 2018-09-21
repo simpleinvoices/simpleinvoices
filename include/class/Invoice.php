@@ -193,6 +193,11 @@ class Invoice {
 
     /**
      * Insert/update the multiple taxes for a invoice line item.
+     * @param int $invoice_item_id
+     * @param int $line_item_tax_ids
+     * @param string $unit_price
+     * @param int $quantity
+     * @param boolean $update
      * @return boolean <b>true</b> if successful, <b>false</b> if not.
      */
     public static function chgInvoiceItemTax($invoice_item_id, $line_item_tax_ids, $unit_price, $quantity, $update) {
@@ -233,7 +238,7 @@ class Invoice {
     }
 
     /**
-     *
+     * Select an invoice.
      * @param integer $id
      * @return array $invoice
      * @throws PdoDbException
@@ -254,11 +259,13 @@ class Invoice {
         $pdoDb->addToFunctions(new FunctionStmt("SUM", "ii.tax_amount", "total_tax"));
 
         $jn = new Join("LEFT", "preferences", "p");
-        $jn->addSimpleItem("i.preference_id", new DbField("p.pref_id"));
+        $jn->addSimpleItem("i.preference_id", new DbField("p.pref_id"), 'AND');
+        $jn->addSimpleItem('i.domain_id', new DbField('p.domain_id'));
         $pdoDb->addToJoins($jn);
 
         $jn = new Join("LEFT", "invoice_items", "ii");
-        $jn->addSimpleItem("ii.invoice_id", new DbField("i.id"));
+        $jn->addSimpleItem("ii.invoice_id", new DbField("i.id"), 'AND');
+        $jn->addSimpleItem('ii.domain_id', new DbField('i.domain_id'));
         $pdoDb->addToJoins($jn);
 
         $pdoDb->addSimpleWhere("i.id", $id, "AND");
@@ -362,6 +369,11 @@ class Invoice {
         return $invoice;
     }
 
+    /**
+     * @param $q
+     * @return array|void
+     * @throws PdoDbException
+     */
     public static function getInvoices($q) {
         $q = strtolower($_GET["q"]);
         if (!$q) return;
@@ -385,7 +397,7 @@ class Invoice {
             }
         }
 
-        return $invoice;
+        return $invoices;
     }
 
     /**
@@ -484,14 +496,16 @@ class Invoice {
         $fn = new FunctionStmt("COALESCE", "SUM(ii.total),0");
         $fr = new FromStmt("invoice_items", "ii");
         $wh = new WhereClause();
-        $wh->addSimpleItem("ii.invoice_id", new DbField("iv.id"));
+        $wh->addSimpleItem("ii.invoice_id", new DbField("iv.id"), 'AND');
+        $wh->addSimpleItem('ii.domain_id', new DbField('iv.domain_id'));
         $se = new Select($fn, $fr, $wh, "invoice_total");
         $pdoDb->addToSelectStmts($se);
 
         $fn = new FunctionStmt("COALESCE", "SUM(ac_amount),0");
         $fr = new FromStmt("payment", "ap");
         $wh = new WhereClause();
-        $wh->addSimpleItem("ap.ac_inv_id", new DbField("iv.id"));
+        $wh->addSimpleItem("ap.ac_inv_id", new DbField("iv.id"), 'AND');
+        $wh->addSimpleItem('ap.domain_id', new DbField('iv.domain_id'));
         $se = new Select($fn, $fr, $wh, "INV_PAID");
         $pdoDb->addToSelectStmts($se);
 
@@ -527,21 +541,25 @@ class Invoice {
         $pdoDb->addToSelectStmts($se);
 
         $jn = new Join("LEFT", "biller", "b");
-        $jn->addSimpleItem("b.id", new DbField("iv.biller_id"));
+        $jn->addSimpleItem("b.id", new DbField("iv.biller_id"), 'AND');
+        $jn->addSimpleItem('b.domain_id', new DbField('iv.domain_id'));
         $pdoDb->addToJoins($jn);
 
         $jn = new Join("LEFT", "customers", "c");
-        $jn->addSimpleItem("c.id", new DbField("iv.customer_id"));
+        $jn->addSimpleItem("c.id", new DbField("iv.customer_id"), 'AND');
+        $jn->addSimpleItem('c.domain_id', new DbField('iv.domain_id'));
         $pdoDb->addToJoins($jn);
 
         $jn = new Join("LEFT", "preferences", "pf");
-        $jn->addSimpleItem("pf.pref_id", new DbField("iv.preference_id"));
+        $jn->addSimpleItem("pf.pref_id", new DbField("iv.preference_id"), 'AND');
+        $jn->addSimpleItem('pf.domain_id', new DbField("iv.domain_id"));
         $pdoDb->addToJoins($jn);
 
         $pdoDb->addSimpleWhere("iv.domain_id", domain_id::get());
 
         $expr_list = array(
             "iv.id",
+            "iv.domain_id",
             new DbField("iv.index_id", "index_id"),
             new DbField("iv.type_id", "type_id"),
             new DbField("b.name", "biller"),
@@ -558,9 +576,16 @@ class Invoice {
         return $result;
     }
 
+    /**
+     * Get the invoice-items associated with a specific invoice.
+     * @param $id
+     * @return array
+     * @throws PdoDbException
+     */
     public static function getInvoiceItems($id) {
         global $pdoDb;
-        $pdoDb->addSimpleWhere("invoice_id", $id);
+        $pdoDb->addSimpleWhere("invoice_id", $id, 'AND');
+        $pdoDb->addSimpleWhere('domain_id', domain_id::get());
         $pdoDb->setOrderBy("id");
         $rows = $pdoDb->request("SELECT", "invoice_items");
 
@@ -576,7 +601,8 @@ class Invoice {
                 }
             }
 
-            $pdoDb->addSimpleWhere("id", $invoiceItem['product_id']);
+            $pdoDb->addSimpleWhere("id", $invoiceItem['product_id'], 'AND');
+            $pdoDb->addSimpleWhere('domain_id', domain_id::get());
             $rows = $pdoDb->request("SELECT", "products");
             $invoiceItem['product'] = $rows[0];
 
@@ -634,26 +660,15 @@ class Invoice {
     }
 
     /**
-     * Function: calc_invoice_tax
-     * Calculates the total tax for a given invoices
-     * @params integer invoice_id The name of the field, ie. Custom Field 1, etc..
-     * @return float Total tax amount.
-     * @throws PdoDbException
-     */
-    private static function calc_invoice_tax($invoice_id) {
-        global $pdoDb;
-        $pdoDb->addToFunctions(new FunctionStmt("SUM", "tax_amount", "total_tax"));
-        $pdoDb->addSimpleWhere("invoice_id", $invoice_id);
-        $rows = $pdoDb->request("SELECT", "invoice_items");
-        return $rows[0]['total_tax'];
-    }
-
-    /**
      * Purpose: to show a nice summary of total $ for tax for an invoice
+     * @param integer $invoice_id
+     * @return integer Count of records found.
+     * @throws PdoDbException
      */
     public static function numberOfTaxesForInvoice($invoice_id) {
         global $pdoDb;
-        $pdoDb->addSimpleWhere("item.invoice_id", $invoice_id);
+        $pdoDb->addSimpleWhere("item.invoice_id", $invoice_id, 'AND');
+        $pdoDb->addSimpleWhere('item.domain_id', domain_id::get());
 
         $pdoDb->addToFunctions(new FunctionStmt("DISTINCT", new DbField("tax.tax_id")));
 
@@ -682,7 +697,8 @@ class Invoice {
         $pdoDb->addToFunctions(new FunctionStmt("SUM", "item_tax.tax_amount", "tax_amount"));
         $pdoDb->addToFunctions(new FunctionStmt("COUNT", "*", "count"));
 
-        $pdoDb->addSimpleWhere("item.invoice_id", $invoice_id);
+        $pdoDb->addSimpleWhere("item.invoice_id", $invoice_id, 'AND');
+        $pdoDb->addSimpleWhere('item.domain_id', domain_id::get());
 
         $jn = new Join("INNER", "invoice_item_tax", "item_tax");
         $jn->addSimpleItem("item_tax.invoice_item_id", new DbField("item.id"));
@@ -738,12 +754,12 @@ class Invoice {
      * @return integer Maximum invoice number assigned.
      * @throws PdoDbException
      */
-    public static function maxIndexId($domain_id="") {
+    public static function maxIndexId() {
         global $pdoDb;
 
         $pdoDb->addToFunctions(new FunctionStmt("MAX", "index_id", "maxIndexId"));
 
-        $pdoDb->addSimpleWhere("domain_id", domain_id::get($domain_id));
+        $pdoDb->addSimpleWhere("domain_id", domain_id::get());
 
         $rows = $pdoDb->request("SELECT", "invoices");
         return $rows[0]['maxIndexId'];
