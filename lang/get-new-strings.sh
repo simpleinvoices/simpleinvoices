@@ -1,10 +1,13 @@
 #!/bin/bash
 
+# This script compares the en_US/LANG file with the LANG file for the
+# locale specified in the parameter and generates a diff list.
+
 if [ "$1" = "" ]; then
     echo -n 'usage: '
     echo -n `/bin/basename $0`
     echo ' <your language code>'
-    exit
+    return 1
 fi
 
 

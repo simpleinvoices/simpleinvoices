@@ -22,7 +22,7 @@ $invoice     = Invoice::select($invoice_id);
 $preference  = Preferences::getPreference($invoice['preference_id']);
 $biller      = Biller::select($invoice['biller_id']);
 $customer    = Customer::get($invoice['customer_id']);
-
+error_log("biller - " . print_r($biller,true));
 $error = false;
 $message = "Unable to process email request.";
 if ($_GET['stage'] == 2 ) {

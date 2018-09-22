@@ -3,6 +3,7 @@
  *   Biller details template
  *
  * Last edited:
+ *   2018-09-21 by Rich Rowley to add signature field.
  *   2008-08-25
  *
  * License:
@@ -10,7 +11,10 @@
  *}
 <form name="frmpost"
       action="index.php?module=billers&amp;view=save&amp;id={$smarty.get.id}"
-      method="post" id="frmpost" onsubmit="return checkForm(this);">
+      method="post"
+      id="frmpost"
+      onsubmit="return checkForm(this);">
+
   {if $smarty.get.action== 'view' }
   <input type="hidden" name="op" value="view_biller">
   <div class="si_form si_form_view">
@@ -60,6 +64,10 @@
         <td>{$biller.email}</td>
       </tr>
       <tr>
+      <th>{$LANG.signature}</th>
+      <td>{$biller.signature}</td>
+    </tr>
+    <tr>
         <th>{$LANG.paypal_business_name}</th>
         <td>{$biller.paypal_business_name}</td>
       </tr>
@@ -139,6 +147,7 @@
   {* ######################################################################################### *}
   {if $smarty.get.action== 'edit' }
   <div class="si_form">
+  <input type="hidden" name="domain_id" value="{$biller.domain_id}" />
     <table>
       <tr>
         <th>{$LANG.biller_name}
@@ -207,6 +216,16 @@
         <th>{$LANG.email}</th>
         <td><input type="text" name="email"
                    value="{$biller.email|htmlsafe}" size="50" /></td>
+      </tr>
+      <tr>
+        <th>{$LANG.signature}
+          <a class="cluetip" href="#"
+             rel="index.php?module=documentation&amp;view=view&amp;page=help_signature"
+             title="{$LANG.signature}">
+            <img src="{$help_image_path}help-small.png" alt="" />
+          </a>
+        </th>
+        <td><textarea  name="signature" class="editor" rows="8" cols="30">{$biller.signature|htmlsafe}</textarea></td>
       </tr>
       <tr>
         <th>{$LANG.paypal_business_name}</th>

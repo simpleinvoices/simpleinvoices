@@ -1,3 +1,0 @@
-This extension adds a new field, signature, to the si_billers table. This new
-field is maintained via the billers maintenance screen and can contain text to
-appear in every email generated for the biller.

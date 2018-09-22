@@ -514,6 +514,7 @@ class PdoDb {
             foreach ($excludedFields as $key => $val) {
                 if (is_numeric($key) && intval(($key)) == $i) {
                     $this->excludedFields[$val] = 1;
+                    $i++;
                 } else {
                     $this->excludedFields[$key] = $val;
                 }

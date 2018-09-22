@@ -21,7 +21,12 @@ checkLogin();
 $files = getLogoList();
 $smarty->assign("files", $files);
 
-$customFieldLabel = getCustomFieldLabels('',true);
+$domain_id = domain_id::get();
+$smarty->assign("domain_id", $domain_id);
+
+// Only load labels if they are defined. Screen will only
+// show what is loaded.
+$customFieldLabel = getCustomFieldLabels("", true);
 
 if (!empty($_POST['name'])) {
     include ("modules/billers/save.php");

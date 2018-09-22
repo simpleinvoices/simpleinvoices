@@ -3,19 +3,19 @@
  *  Biller add template
  *
  * Last edited:
+*    2016-01-16 by Rich Rowley to add signature field.
  *   2008-08-25
  *
  * License:
  *   GPL v3 or above
  *}
 
-{* if bill is updated or saved.*}
-{if $smarty.post.name != "" && $smarty.post.submit != null } 
+{if !empty($smarty.post.name) && isset($smarty.post.submit) } 
+  {* The new biller was just added *}
   {include file="templates/default/billers/save.tpl"}
 {else}
-{* if no biller name was inserted *}
-<form name="frmpost" action="index.php?module=billers&amp;view=add"
-      method="post" id="frmpost">
+  {* Adding a new biller *}
+  <form name="frmpost" action="index.php?module=billers&amp;view=add" method="post" id="frmpost">
   <div class="si_form">
     <table>
       <tr>
@@ -28,7 +28,7 @@
         </th>
         <td><input type="text" name="name"
                    value="{$smarty.post.name|htmlsafe}" size="25" id="name"
-                   class="validate[required]"></td>
+                   class="validate[required]" /></td>
       </tr>
       <tr>
         <th>{$LANG.street}</th>
@@ -87,6 +87,10 @@
                    value="{$smarty.post.email|htmlsafe}" size="25" /></td>
       </tr>
       <tr>
+        <th>{$LANG.signature}</th>
+        <td><textarea  name="signature" class="editor" rows="3" cols="30">{$smarty.post.signature|htmlsafe}</textarea></td>
+      </tr>
+      <tr>
         <th>{$LANG.paypal_business_name}</th>
         <td><input type="text" name="paypal_business_name"
                    value="{$smarty.post.paypal_business_name|htmlsafe}" size="25" /></td>
@@ -124,7 +128,8 @@
         <td><input type="text" name="custom_field1"
                    value="{$smarty.post.custom_field1}" size="25" /></td>
       </tr>
-      {/if} {if !empty($customFieldLabel.biller_cf2)}
+      {/if}
+      {if !empty($customFieldLabel.biller_cf2)}
       <tr>
         <th>{$customFieldLabel.biller_cf2}
           <a class="cluetip" href="#"
@@ -136,7 +141,8 @@
         <td><input type="text" name="custom_field2"
                    value="{$smarty.post.custom_field2|htmlsafe}" size="25" /></td>
       </tr>
-      {/if} {if !empty($customFieldLabel.biller_cf3)}
+      {/if}
+      {if !empty($customFieldLabel.biller_cf3)}
       <tr>
         <th>{$customFieldLabel.biller_cf3|htmlsafe}
           <a class="cluetip" href="#"
@@ -148,7 +154,8 @@
         <td><input type="text" name="custom_field3"
                    value="{$smarty.post.custom_field3|htmlsafe}" size="25" /></td>
       </tr>
-      {/if} {if !empty($customFieldLabel.biller_cf4)}
+      {/if}
+      {if !empty($customFieldLabel.biller_cf4)}
       <tr>
         <th>{$customFieldLabel.biller_cf4|htmlsafe}
           <a class="cluetip" href="#"
@@ -205,5 +212,6 @@
     </div>
   </div>
   <input type="hidden" name="op" value="insert_biller" />
+    <input type="hidden" name="domain_id" value="{$domain_id}" />
 </form>
 {/if}

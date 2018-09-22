@@ -48,6 +48,7 @@ class CaseStmt {
      * @param $keypairs (Optional) Parameter exists for function call compatibility
      *        with other <i>PdoDb</i> class SQL build objects. 
      * @return string Formatted <b>CASE</b> statement this criterion.
+     * @throws PdoDbException
      */
     public function build($keypairs=null) {
         if (!$this->end) {
@@ -59,7 +60,11 @@ class CaseStmt {
             $case .= $when->build($keypairs);
         }
         $case .= "END)";
-        if (!empty($this->alias)) $case .= " AS " . $this->alias;
+        if (empty($this->alias)) {
+            $case .= " as " . $this->field;
+        } else {
+            $case .= " AS " . $this->alias;
+        }
 
         return $case;
     }

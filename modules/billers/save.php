@@ -7,7 +7,7 @@
  *      Justin Kelly, Nicolas Ruflin
  *
  *  Last edited:
- *      2016-08-10
+ *      2016-01-16 by Rich Rowley to add signature field
  *
  *  License:
  *      GPL v3 or above

@@ -2239,3 +2239,11 @@ $patchlines = array(
 );
 patchmaker('292', $patchlines, $si_patches);
 
+$patchlines = array(
+    'name' => 'Add Signature field to the billers table.',
+    'patch' => "ALTER TABLE " . TB_PREFIX . "biller ADD `signature` varchar(255) DEFAULT NULL",
+    'date' => "20180921"
+);
+patchmaker('293', $patchlines, $si_patches);
+
+

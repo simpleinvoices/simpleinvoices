@@ -49,7 +49,9 @@
     <tr>
       <td class="details_screen">{$LANG.message}</td>
       <td>
-        <textarea name="email_notes" class="editor" rows="3" cols="20"></textarea>
+        <textarea name="email_notes" class="editor" rows="3" cols="20">
+          {if !empty($biller.signature)}{$biller.signature|htmlsafe}{/if}
+        </textarea>
       </td>
     </tr>
   </table>

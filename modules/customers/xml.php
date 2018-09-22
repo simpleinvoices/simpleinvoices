@@ -2,7 +2,6 @@
 
 function sql($type = '', $start, $dir, $sort, $rp, $page) {
     global $LANG, $pdoDb;
-    global $LANG, $pdoDb;
 
     $valid_search_fields = array(
         "c.id",

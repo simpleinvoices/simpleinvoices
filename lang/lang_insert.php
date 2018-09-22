@@ -15,11 +15,20 @@ include_once("lang_functions.php");
 $langs_defined = get_defined_langs();
 
 // Ensure that the lang folder name is of correct format and get it
-$lang_cmp = ((isset($_REQUEST['l']) && (preg_match('/^[a-z]{2}_[a-z]{2}$/i', $_REQUEST['l']))) ? $_REQUEST['l'] : (isset($argv[1]) ? trim($argv[1]) : false));
+$lang_cmp = '';
+if (!empty($_REQUEST['1'])) {
+    $lang_cmp = $_REQUEST['1'];
+} else if (!empty($argv[1])) {
+    $lang_cmp = trim($argv[1]);
+}
+if (!preg_match('/^[a-z]{2}_[a-z]{2}$/i', $lang_cmp)) {
+    die("Language file to compare to not defined.");
+}
 
 // Ensure that the requested lang folder exists
-if (!in_array($lang_cmp, $langs_defined, true)) die ("Invalid Language.");
-// $lang_cmp = "nb_NO";
+if (!in_array($lang_cmp, $langs_defined, true)) {
+    die ("Invalid Language. - lang_cmp[$lang_cmp] langs_defined");
+}
 
 include "en_US/lang.php";
 $LANG_en = $LANG;
@@ -29,7 +38,8 @@ unset($LANG);
 $preamble = '';
 $nl = chr(10);
 
-include "$lang_cmp/lang.php";
+$lang_file = $lang_cmp . "/lang.php";
+include $lang_file;
 
 $h = fopen("$lang_cmp/lang.php", "r");
 while ($line = fgets($h)) {
@@ -37,7 +47,7 @@ while ($line = fgets($h)) {
         $preamble .= $line;
 //    } elseif ((substr($line, 0, 6) == '$LANG[') && (substr($line, -5) == '";//0')) {
     } elseif ( (!(preg_match('/^\$LANG\[.*;\s*\/\/\s*1/', $line)))
-        && (preg_match('/^\$LANG\[.*;\s*\/\/\s*0/', $line)) ) {
+              && (preg_match('/^\$LANG\[.*;\s*\/\/\s*0/', $line)) ) {
 // Untranslated strings in lang file
         $ukeyarr = explode("'", $line, 3);
         $ukey = $ukeyarr[1];
