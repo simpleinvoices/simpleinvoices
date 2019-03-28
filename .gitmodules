@@ -1,3 +1,3 @@
-[submodule "library/Zend"]
-	path = library/Zend
-	url = git://github.com/dmelo/Zend-1.11.git
+[submodule "library/zf1"]
+	path = library/zf1
+	url = ../../zendframework/zf1.git

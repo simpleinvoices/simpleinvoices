@@ -17,6 +17,8 @@ If a [non-release download](https://github.com/simpleinvoices/simpleinvoices/arc
 
 **Note**: It is advised to use the Bleeding Edge Code as that has been stable for quite some time now.
 
+**WARNING:** If you download the `Bleeding Edge Code` you will also need to download the [Zend Framework 1 library](https://github.com/zendframework/zf1/archive/master.zip) and uncompress it in your `library\Zend`folder.
+
 ## Documentation
 * Installation: http://simpleinvoices.org/install
 * Frequently Asked Questions: http://simpleinvoices.org/wiki/faqs
