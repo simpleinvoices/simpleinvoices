@@ -15,7 +15,7 @@ var inventory = "{/literal}{$defaults.inventory}{literal}";
 			percentage_width = grid_width / 100; 
 
 			/*
-            * If Inventory in SImple Invoices is enabled than show quantity etc..
+            * If Inventory in Simple Invoices is enabled than show quantity etc..
             */
     
             if(inventory == '1')

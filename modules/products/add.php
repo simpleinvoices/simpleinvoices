@@ -11,6 +11,12 @@ $taxes = getActiveTaxes();
 if ($_POST['description'] != "" ) {
 	include("./modules/products/save.php");
 }
+/**
+ * Categorias a las que puede pertener un producto
+ */
+$categories = categories::get_cats();
+
+$smarty -> assign('categories', $categories);
 $smarty -> assign("defaults",getSystemDefaults());
 $smarty -> assign('customFieldLabel',$customFieldLabel);
 $smarty -> assign('save',$save);
