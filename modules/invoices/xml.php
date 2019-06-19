@@ -51,7 +51,7 @@ $xml ="";
 				<img src='images/common/printer.png' class='action' /><!-- print -->
 			</a>
 		<!--3 EXPORT DIALOG -->
-			<a title='".$LANG['export_tooltip']." ".$row['preference']." ".$row['index_id']."' class='invoice_export_dialog' href='#' rel='".$row['id']."'>
+            <a title='".$LANG['export_tooltip']." ".$row['preference']." ".$row['id']."' href='index.php?module=export&view=invoice&id=".$row['id']."&format=pdf' >
 				<img src='images/common/page_white_acrobat.png' class='action' />
 			</a>
 
