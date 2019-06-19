@@ -207,24 +207,38 @@ class export
 				$invoiceobj = new invoice();
 				$invoiceobj->domain_id = $this->domain_id;
 				$invoice = $invoiceobj->select($this->id, $this->domain_id);
- 			    $invoice_number_of_taxes = numberOfTaxesForInvoice($this->id, $this->domain_id);
-				$customer = getCustomer($invoice['customer_id'], $this->domain_id);
+ 			    $invoice_number_of_taxes = numberOfTaxesForInvoice($this->id, $this->domain_id);				
+				$invoice_date = $invoice['date'];					
+				$correct_date = str_replace("/","-",$invoice_date);
+				$fecha_esp = strtotime($correct_date);
+				$customer = getCustomer($invoice['customer_id'], $this->domain_id);				 			    
 				$billerobj = new biller();
 				$billerobj->domain_id = $this->domain_id;
 				$biller = $billerobj->select($invoice['biller_id']);
+				$category = getCategory($invoice['category_id']);
+				$refparent = getCategoryParent($invoice['category_id']);
 				$preference = getPreference($invoice['preference_id'], $this->domain_id);
 				$defaults = getSystemDefaults($this->domain_id);
-				$logo = getLogo($biller);
+				$logo = getLogo($preference);
 				$logo = str_replace(" ", "%20", $logo);
 				$invoiceItems = $invoiceobj->getInvoiceItems($this->id, $this->domain_id);
+				setlocale(LC_TIME, 'es_ES.ISO-8859-1');
+				$dateutf = iconv("ISO-8859-1","UTF-8",strftime('%a%d%b%Y',$fecha_esp));
+				$minusc = array ("á","é");
+				$mayusc = array("a", "e");
+				$date = str_replace($minusc,$mayusc,$dateutf);
+				$search = array (",","."," ","`","&","'","á", "é", "í", "ó", "ú", "ñ", "ç");
+				$replace = array ("","","-","","","","a", "e", "i", "o", "u", "n", "c");
+				$sanitize2 = str_replace($search, $replace, $customer['name']);
+				$sanitize = str_replace("--", "-", $sanitize2);
 				
-				$spc2us_pref = str_replace(" ", "_", $invoice['index_name']);
+				$spc2us_pref = mb_strtoupper(str_replace(" ", "-", $sanitize."-".$date."-REF".$refparent."-".$invoice['index_id'])."-".$category['slug']);
 				$this->file_name = $spc2us_pref;
 				
 				$customFieldLabels = getCustomFieldLabels($this->domain_id);
 	
 				/*Set the template to the default*/
-				$template = $defaults['template'];
+				$template = $preference['template'];
 			
 				$templatePath = "./templates/invoices/${template}/template.tpl";
 				$template_path = "../templates/invoices/${template}";
