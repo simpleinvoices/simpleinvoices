@@ -1,0 +1,40 @@
+body { margin: 25px 35px 0 35px; background-image: url("http://www.simpleinvoices.org/templates/invoices/empretelquote/background-quote.png"); background-repeat: no-repeat; background-position: 0mm 0mm; background-height: 100%; background-width: 100%; color: #444444; font-style: normal; font-size: 12pt; font-family: Arial , Veranda, San-Serif;}
+
+hr {color: #444444;}
+table {
+        border-spacing: 0;
+        border-collapse: collapse;
+}
+
+td {margin: 15px;      padding: 0px;}
+tr {margin: 15px;      padding: 0px;}
+
+#general {width: 100%;margin: 0 auto; }
+.customer {width: 50%; float: left; }
+.billing {width: 50%; float: right; }
+
+.col1 { background-color: #EFEFEF; }
+
+.font1 { font-family: Arial; font-size: 22pt; color:#03F; }
+.font2 { color: #990000; font-size: 12pt; font-weight: bold; }
+.font3 { font-family: Arial; font-size: 10pt; }
+.blue {text-decoration:underline;color:#03C;}
+.tbl1st { border-top: #A0A0A0 1px solid; margin-top: 5px; border-collapse:collapse; }
+.tbl1 { border: #A0A0A0 1px solid; border-collapse:collapse; }
+.tbl1-left { border-left: #A0A0A0 1px solid; border-collapse:collapse; }
+.tbl1-right { border-right: #A0A0A0 1px solid; border-collapse:collapse; }
+.tbl1-bottom { border-bottom: #A0A0A0 1px solid; border-collapse:collapse; }
+.tbl1-top { border-top: #A0A0A0 1px solid; border-collapse:collapse; }
+.separay {border-bottom: #A0A0A0 1px solid; border-collapse:collapse;}
+.left {
+ clear: left;
+}
+
+.right {
+ float: right;
+}
+
+.double_underline
+{
+	border-bottom: 3px double #555;
+}
