@@ -32,6 +32,21 @@
 			</th>
 			<td><input type="text" name="description" value="{$smarty.post.description|htmlsafe}" size="50" id="description"  class="validate[required]" /></td>
 		</tr>
+	<tr>
+		<td class="">Categor&iacute;a</td>
+		<td>
+		<select name="category">
+		    <option value=''></option>
+			{foreach from=$categories item=category}
+				{if $category.parent == 0}
+					<option value="{$category.category_id|htmlsafe}">{$category.name|htmlsafe}</option>
+				{else}
+					<option value="{$category.category_id|htmlsafe}">&nbsp;&nbsp;&nbsp;{$category.name|htmlsafe}</option>
+				{/if}
+			{/foreach}
+		</select>
+		</td>
+	</tr>
 		<tr>
 			<th>{$LANG.unit_price}</th>
 			<td><input type="text" class="edit" name="unit_price" value="{$smarty.post.unit_price|htmlsafe}"  size="25" /></td>
@@ -125,7 +140,7 @@
                 <tr>
                     <td></td>
                     <th class="details_screen product_attribute">
-                    <input type="checkbox" name="notes_as_description" value='true'/>
+                    <input type="checkbox" name="notes_as_description" value='true' checked="checked" />
                     {$LANG.note_as_description}
                     </th>
                 </tr>
