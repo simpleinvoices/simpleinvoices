@@ -91,6 +91,7 @@
 				<td class="">{$LANG.tax} {if $defaults.tax_per_line_item > 1}{$smarty.section.tax_header.index+1|htmlsafe}{/if} </td>
 			{/section}
 				<td class="">{$LANG.unit_price}</td>
+				<td class="">Subtotal</td>
 			</tr>
 		</thead>
 
@@ -104,7 +105,6 @@
 						<img id="trash_image{$smarty.section.line.index|htmlsafe}" src="./images/common/blank.gif" height="16px" width="16px" title="{$LANG.cannot_delete_first_row}" alt="" />
 					</a>
 					{/if}
-
 					{if $smarty.section.line.index != 0}
 					{* can't delete line 0 *}
 					<!-- onclick="delete_row({$smarty.section.line.index|htmlsafe});" --> 
@@ -127,37 +127,31 @@
 							class="validate[required]" 
 						{/if} 
 						name="quantity{$smarty.section.line.index|htmlsafe}" 
-						id="quantity{$smarty.section.line.index|htmlsafe}" size="5" 
+						id="quantity{$smarty.section.line.index|htmlsafe}" size="5"
+						onblur="multiplicar(this)" 
 						{if $smarty.get.quantity.$lineNumber}
 							value="{$smarty.get.quantity.$lineNumber}"
 						{/if}
 						/>
 				</td>
-				<td>
-								
+				<td>								
 			{if $products == null }
 				<p><em>{$LANG.no_products}</em></p>
 			{else}
-				<select 
-					id="products{$smarty.section.line.index|htmlsafe}"
-					name="products{$smarty.section.line.index|htmlsafe}"
-					rel="{$smarty.section.line.index|htmlsafe}"
-					class="{if $smarty.section.line.index == "0"}validate[required]{/if} product_change"						
-				>
-					<option value=""></option>
-				{foreach from=$products item=product}
-					<option 
-						{if $product.id == $smarty.get.product.$lineNumber}
-							value="{$smarty.get.product.$lineNumber}"
-							selected
-						{else}
-							value="{$product.id|htmlsafe}"
-						{/if}
-					>
-						{$product.description|htmlsafe}
-					</option>
-				{/foreach}
-				</select>
+<select 
+	id="products{$smarty.section.line.index|htmlsafe}"
+	name="products{$smarty.section.line.index|htmlsafe}"
+	rel="{$smarty.section.line.index|htmlsafe}"
+	class="{if $smarty.section.line.index == "0"}validate[required]{/if} product_change"
+	onblur="multiplicar(this)"						
+>
+	<option value=""></option>
+		{foreach from=$products item=product}
+		<option 
+		{if $product.id == $defaults.product} selected {/if} 
+		value="{$product.id|htmlsafe}">{$product.description|htmlsafe}</option>
+		{/foreach}
+</select>
 			{/if}
 				</td>
 				{section name=tax start=0 loop=$defaults.tax_per_line_item step=1}
@@ -193,10 +187,20 @@
 							value="{$smarty.get.unit_price.$lineNumber}"
 						{else}
 						   value=""
+						   onblur="multiplicar(this)"
 						{/if}
 						{if $smarty.section.line.index == "0"} class="validate[required]" {/if}
 					/>
-				</td>	
+				</td>
+                <td>
+					<input 
+						id="calc{$smarty.section.line.index|htmlsafe}" 
+						name="calcsub" 
+						size="7"
+						value=""
+                                
+						/>
+				</td>					
 
 			</tr>
 					
@@ -209,6 +213,47 @@
 		</tbody>
 		{/section}
 	</table>
+	<table>
+	<tr>
+                    	
+						<td>SUBTOTAL</td>
+                        <td>
+							<input 
+								id="total" 
+								name="total" 
+								size="7"
+								value=""
+                                
+							/>
+						</td>	
+					</tr>  
+                     <tr>
+						
+						<td>IVA (13%)</td>
+                        <td>
+							<input 
+								id="impuestos" 
+								name="impuestos" 
+								size="7"
+								value=""
+                                
+							/>
+						</td>	
+					</tr>
+                     <tr>
+						
+						<td><strong>TOTAL</strong></td>
+                        <td>
+							<input 
+								id="gran_total" 
+								name="gran_total" 
+								size="7"
+								value=""
+                                
+							/>
+						</td>	
+					</tr>
+					</table>
 
 	<div class="si_toolbar si_toolbar_inform">
 		{* onclick="add_line_item();" *}
