@@ -29,13 +29,13 @@
 			dataType: 'xml',
 			colModel : [
 				{display: '{/literal}{$LANG.actions}{literal}', name : 'actions', width : action_menu, sortable : false, align: 'center'},
-				{display: '{/literal}{$LANG.id}{literal}', name : 'index_id', width :15 * percentage_width, sortable : true, align: 'right'},
+				{display: '{/literal}{$LANG.id}{literal}', name : 'index_name', width :15 * percentage_width, sortable : true, align: 'left'},
 				{display: '{/literal}{$LANG.biller}{literal}', name : 'biller', width :20 * percentage_width, sortable : true, align: 'left'},
 				{display: '{/literal}{$LANG.customer}{literal}', name : 'customer', width :20 * percentage_width, sortable : true, align: 'left'},
-				{display: '{/literal}{$LANG.date_upper}{literal}', name : 'date', width : 15 * percentage_width, sortable : true, align: 'right'},
-				{display: '{/literal}{$LANG.total}{literal}', name : 'invoice_total', width : 10 * percentage_width, sortable : true, align: 'right'},
-				{display: '{/literal}{$LANG.owing}{literal}', name : 'owing', width : 10 * percentage_width, sortable : true, align: 'right'},
-				{display: '{/literal}{$LANG.aging}{literal}', name : 'aging', width : 10 * percentage_width, sortable : true, align: 'right'}
+				{display: '{/literal}{$LANG.date_upper}{literal}', name : 'date', width : 15 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.total}{literal}', name : 'invoice_total', width : 10 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.owing}{literal}', name : 'owing', width : 10 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.aging}{literal}', name : 'aging', width : 10 * percentage_width, sortable : true, align: 'left'}
 				
 				],
 				/*

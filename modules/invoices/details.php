@@ -129,6 +129,7 @@ $smarty -> assign("invoiceItems",$invoiceItems);
 $smarty -> assign("customers",$customers);
 $smarty -> assign("preference",$preference);
 $smarty -> assign("billers",$billers);
+$smarty -> assign("category",$category);
 $smarty -> assign("taxes",$taxes);
 $smarty -> assign("preferences",$preferences);
 $smarty -> assign("products",$products);

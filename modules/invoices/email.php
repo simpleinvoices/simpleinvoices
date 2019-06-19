@@ -23,9 +23,27 @@ $preference = getPreference($invoice['preference_id']);
 $biller = getBiller($invoice['biller_id']);
 $customer = getCustomer($invoice['customer_id']);
 $invoiceType = getInvoiceType($invoice['type_id']);
+$category = getCategory($invoice['category_id']);
+$invoice_date = $invoice['date'];					
+$correct_date = str_replace("/","-",$invoice_date);
+$fecha_esp = strtotime($correct_date);
+$refparent = getCategoryParent($invoice['category_id']);
+setlocale(LC_TIME, 'es_ES.ISO-8859-1');
+$dateutf = iconv("ISO-8859-1","UTF-8",strftime('%a%d%b%Y',$fecha_esp));
+$minusc = array ("á","é");
+$mayusc = array("a", "e");
+$date = str_replace($minusc,$mayusc,$dateutf);
+$search = array (",","."," ","`","&","'","á", "é", "í", "ó", "ú", "ñ", "ç");
+$replace = array ("","","-","","","","a", "e", "i", "o", "u", "n", "c");
+$sanitize2 = str_replace($search, $replace, $customer['name']);
+$sanitize = str_replace("--", "-", $sanitize2);
+
+$sql = "SELECT inv_ty_description AS type FROM ".TB_PREFIX."invoice_type WHERE inv_ty_id = :type";
+$sth = dbQuery($sql, ':type', $invoice['type_id']);
+$invoiceType = $sth->fetch();
 
 #create PDF name
-$spc2us_pref = str_replace(" ", "_", $invoice['index_name']);
+$spc2us_pref = mb_strtoupper(str_replace(" ", "-", $sanitize."-".$date."-REF".$refparent."-".$invoice['index_id'])."-".$category['slug']);
 $pdf_file_name = $spc2us_pref  . '.pdf';
       
 if ($_GET['stage'] == 2 ) {
@@ -48,7 +66,12 @@ if ($_GET['stage'] == 2 ) {
 	$email -> from = $_POST['email_from'];
 	$email -> from_friendly = $biller['name'];
 	$email -> to = $_POST['email_to'];
-	$email -> bcc = $_POST['email_bcc'];
+	$bcc1 = 'cotizaciones@empretel.net';
+	$bcc2 = $_POST['email_bcc'];
+	$bcc3 = array();
+	$bcc3[]= $bcc1;
+	if ( ! empty($bcc2)) $bcc3[]= $bcc2;
+	$email -> bcc = join(';', $bcc3);
 	$email -> subject = $_POST['email_subject'];
 	$email -> attachment = $pdf_file_name;
 	$message = $email -> send ();
@@ -65,6 +88,8 @@ $smarty -> assign('biller',$biller);
 $smarty -> assign('customer',$customer);
 $smarty -> assign('invoice',$invoice);
 $smarty -> assign('preferences',$preference);
+$smarty -> assign('refparent',$refparent);
+$smarty -> assign('category',$category);
 
 $smarty -> assign('pageActive', 'invoice');
 $smarty -> assign('active_tab', '#money');
