@@ -27,6 +27,36 @@
 			</th>
 			<td>{$preference.currency_code|htmlsafe}</td>
 		</tr>
+        
+        <tr>
+			<th>{$LANG.default_invoice_preference} 
+				<a
+					class="cluetip"
+					href="#"
+					rel="index.php?module=documentation&amp;view=view&amp;page=default_invoice_preference_text"
+					title="{$LANG.invoice_preference}"
+				> 
+				<img src="./images/common/help-small.png" alt="" /> </a>
+				</th>
+			<td>
+				{$preference.template|htmlsafe}
+			</td>
+		</tr>
+		<tr>
+			<th>{$LANG.logo_file} 
+				<a
+					class="cluetip"
+					href="#"
+					rel="index.php?module=documentation&amp;view=view&amp;page=logo_text"
+					title="{$LANG.logo_file}"
+				> 
+				<img src="./images/common/help-small.png" alt="" /> </a>
+				</th>
+			<td>
+				{$preference.logo|htmlsafe}
+			</td>
+		</tr>        
+        
 		<tr>
 			<th>Invoice heading 
 				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_heading" title="{$LANG.invoice_heading}">
@@ -194,6 +224,34 @@
                 <input type="text" name='currency_code' value="{$preference.currency_code}" size="15" />
             </td>
 		</tr>
+        <tr>
+			<th>{$LANG.default_invoice_preference} 
+				<a
+					class="cluetip"
+					href="#"
+					rel="index.php?module=documentation&amp;view=view&amp;page=default_invoice_preference_text"
+					title="{$LANG.invoice_preference}"
+				> 
+				<img src="./images/common/help-small.png" alt="" /> </a>
+				</th>
+			<td>
+				{$valuetemp}
+			</td>
+		</tr>
+		<tr>
+			<th>{$LANG.logo_file} 
+				<a
+					class="cluetip"
+					href="#"
+					rel="index.php?module=documentation&amp;view=view&amp;page=logo_text"
+					title="{$LANG.logo_file}"
+				> 
+				<img src="./images/common/help-small.png" alt="" /> </a>
+				</th>
+			<td>
+				{html_options name=logo output=$files values=$files selected=$preference.logo }
+			</td>
+		</tr>        
 		<tr>
 			<th>Invoice heading 
 				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_heading" title="{$LANG.invoice_heading}">
