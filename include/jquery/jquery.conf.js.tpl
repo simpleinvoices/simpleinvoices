@@ -141,6 +141,15 @@ $(document).ready(function(){
  		invoice_product_change($product, $row_number, $quantity);
 		siLog('debug','{/literal}{$LANG.description}{literal}');
      });
+     
+     /*
+     * Category Change - updates product item with products in selected category
+     */
+     $(".category_change").livequery('change', function () 
+     {
+     	var $category = $(this).val();
+     	category_change($category);
+     });
  
 
 	/*
