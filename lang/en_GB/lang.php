@@ -309,6 +309,7 @@ $LANG['logo_file'] = "Logo file";//1
 $LANG['logout'] = "Log out";//1
 $LANG['manage'] = "Manage";//1
 $LANG['manage_billers'] = "Manage Billers";//1
+$LANG['manage_categories'] = "Manage Categories";//1
 $LANG['manage_custom_fields'] = "Manage Custom Fields";//1
 $LANG['manage_customers'] = "Manage Customers";//1
 $LANG['manage_data'] ="Manage your data";//1
@@ -613,5 +614,15 @@ $LANG['title_module_tax_rates']			= "Settings / Tax Rates";//1
 $LANG['title_module_preferences']		= "Settings / Invoice Preferences";//1
 $LANG['title_module_payment_types']		= "Settings / Payment Types";//1
 $LANG['title_view_index']				= "Dashboard";//1
+
+$LANG['add_category'] = "Add Category";//1
+$LANG['add_new_category'] = "Add New Category";//1
+$LANG['no_categories'] = "There have been no categories created. Click the 'Add New Category' button above to create one";//1
+$LANG['category'] = "Category";//1
+$LANG['category_code'] = "Code";//1
+$LANG['category_parent'] = "Level";//1
+$LANG['slug']				= "Slug";//1
+$LANG['reference']			= "Reference";//1
+$LANG['category_enabled']   = "Category Enabled";//1
 
 ?>
