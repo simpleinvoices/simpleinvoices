@@ -62,6 +62,7 @@
 				{
 					$("#tax_id\\["+row_number+"\\]\\[1\\]").val(data['default_tax_id_2']);
 				}
+				$("#calc"+row_number).val(parseFloat($('#quantity'+row_number).val())*parseFloat($('#unit_price'+row_number).val()));
                 //do the product matric code
 				if (data['show_description'] =="Y") 
 				{	
@@ -89,6 +90,61 @@
 	
    		 });
      };
+	 
+	 function multiplicar(input)
+	 {
+			if(input.id.indexOf("quantity") >= 0)
+ 			{var row_number = input.id.substring("quantity".length);
+			}
+			else {
+ 			var row_number = input.id.substring("unit_price".length);
+			}
+			var cantidad = $('#quantity'+row_number).val();
+            var precio = $('#unit_price'+row_number).val();
+            var subtotal = Math.round(precio*cantidad*100)/100;
+			$('#calc'+row_number).val(subtotal);
+			var totalInp = $('[name="calcsub"]'); 
+			var total = 0;
+			
+			totalInp.each(function(){
+			var valor = $(this).val();
+			if(valor ==""){ valor = 0;};
+			total +=  parseFloat(valor);
+			});
+			total = total.toFixed(2);
+			$('#total').val(total);
+			var impuestos = total*0.13;
+			impuestos = impuestos.toFixed(2);
+ 			$('#impuestos').val(impuestos);
+			var grantotal =  parseFloat(total)+parseFloat(impuestos);
+			grantotal = grantotal.toFixed(2); 
+ 			$('#gran_total').val(grantotal);	
+        }; 
+    
+  
+     function category_change(id)
+     {
+     	$('#gmail_loading').show();
+     	$.ajax({
+     		type: 'GET',
+     		url: './index.php?module=invoices&view=product_filter_ajax&id='+id,
+     		data: "id: "+id,
+     		dataType: "json",
+     		success: function(data){
+     			$('#gmail_loading').hide();
+     			var opciones = "<option value=\"\"></option>";
+     			$(data).each(function(index, value)
+     			{
+     				opciones += "<option value=\""+value.id+"\">"+value.description+"</option>";
+     			});
+     			// Asignamos los productos a cada select
+     			$(".product_change").each(function(index, value)
+     			{
+     				$(value).html(opciones);
+     			});
+     		}
+     	});
+     }
     
 	/*
 	* Product Change -Inventory  - updates cost from  product info
