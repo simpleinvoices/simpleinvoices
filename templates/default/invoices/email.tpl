@@ -19,7 +19,7 @@
 {if $smarty.get.stage == 1 }
 
 <div class="si_center">
-<h3>Email {$invoice.index_name|htmlsafe} to Customer as PDF</h3>
+<h3>Enviar Cotización#{$refparent|htmlsafe}-{$invoice.index_id|htmlsafe} como PDF</h3>
 </div>
 
 <form name="frmpost" action="index.php?module=invoices&amp;view=email&amp;stage=2&amp;id={$smarty.get.id|urlencode}" method="post">
@@ -42,15 +42,16 @@
 			<th>{$LANG.email_bcc}
 				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_email_bcc" title="{$LANG.email_bcc}"><img src="./images/common/help-small.png" alt="" /></a>
 			</th>
-			<td><input type="text" name="email_bcc" size="50" value="{$biller.email|htmlsafe}" /></td>
+			<td><input type="text" name="email_bcc" size="50" value="" /></td>
 		</tr>
 		<tr>
 			<th>{$LANG.subject}</th>
-			<td><input type="text" name="email_subject" size="70" value="{$invoice.index_name|htmlsafe} from {$biller.name|htmlsafe} is attached" /></td>
+			<td><input type="text" name="email_subject" size="70" value="Cotización#{$refparent|htmlsafe}-{$invoice.index_id|htmlsafe}; {$category.name|htmlsafe}" /></td>
 		</tr>
 		<tr>
 			<th>{$LANG.message}</th>
-			<td><textarea name="email_notes" class="editor" rows="16" cols="70"></textarea></td>
+			<td><textarea name="email_notes" class="editor" rows="16" cols="70">Estimados amigos de {$customer.name|htmlsafe}, 
+        <br/><br/>Adjunto les env&iacute;o el detalle de la cotizaci&oacute;n de {$category.name|htmlsafe}.<br/><br/>Atentamente,<br/><br/>{$biller.name|htmlsafe}<br/>Empretel | El Salvador<br/>M&oacute;vil:  {$biller.mobile_phone}<br/>Oficina: {$biller.phone}<br/>Skype: {$biller.custom_field2}</textarea></td>
 		</tr>
 	</table>
 </div>

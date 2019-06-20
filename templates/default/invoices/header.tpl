@@ -66,5 +66,28 @@
 				{/if}
 			</td>
 		</tr>
+				<tr wrap="nowrap">
+			<th >{$LANG.category}</th>
+			<td>
+				<select name="category_id" id="category_id" class="category_change">
+		    			<option value=''></option>
+						{foreach from=$categories item=category}
+							{if $category.parent == 0}
+								{if $product.category_id == $category.category_id}
+									<option value="{$category.category_id|htmlsafe}" selected="selected">{$category.name|htmlsafe}</option>
+								{else}
+									<option value="{$category.category_id|htmlsafe}">{$category.name|htmlsafe}</option>
+								{/if}
+							{else}
+								{if $product.category_id == $category.category_id}
+									<option value="{$category.category_id|htmlsafe}" selected="selected">&nbsp;&nbsp;&nbsp;{$category.name|htmlsafe}</option>
+								{else}
+									<option value="{$category.category_id|htmlsafe}">&nbsp;&nbsp;&nbsp;{$category.name|htmlsafe}</option>
+								{/if}
+							{/if}
+						{/foreach}
+					</select>
+			</td>
+		</tr>
 	</table>
 

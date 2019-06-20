@@ -9,6 +9,10 @@
 			<td>{$product.description|htmlsafe}</td>
 		</tr>
 		<tr>
+			<th>{$LANG.category}</th>
+			<td>{$cat_selected.name|htmlsafe}</td>
+		</tr>        
+		<tr>
 			<th>{$LANG.product_unit_price}</th>
 			<td>{$product.unit_price|siLocal_number_clean}</td>
 		</tr>
@@ -115,6 +119,29 @@
 		<th>{$LANG.product_description}</th>
 		<td><input type="text" name="description" size="50" value="{$product.description|htmlsafe}" id="description"  class="validate[required]" /></td>
 	</tr>
+	<tr>
+		<th>{$LANG.category}</th>
+		<td><select name="category_id">
+		    <option value=''></option>
+			{foreach from=$categories item=category}
+				{if $category.parent == 0}
+					{if $product.category_id == $category.category_id}
+						<option value="{$category.category_id|htmlsafe}" selected="selected">{$category.name|htmlsafe}</option>
+					{else}
+						<option value="{$category.category_id|htmlsafe}">{$category.name|htmlsafe}</option>
+					{/if}
+				{else}
+					{if $product.category_id == $category.category_id}
+						<option value="{$category.category_id|htmlsafe}" selected="selected">&nbsp;&nbsp;&nbsp;{$category.name|htmlsafe}</option>
+					{else}
+						<option value="{$category.category_id|htmlsafe}">&nbsp;&nbsp;&nbsp;{$category.name|htmlsafe}</option>
+					{/if}
+				{/if}
+			{/foreach}
+		</select>
+        </td>
+	</tr>
+    
 	<tr>
 		<th>{$LANG.product_unit_price}</th>
 		<td><input type="text" name="unit_price" size="25" value="{$product.unit_price|siLocal_number_clean}" /></td>

@@ -30,8 +30,41 @@ CREATE TABLE IF NOT EXISTS `si_biller` (
   `custom_field2` varchar(255) DEFAULT NULL,
   `custom_field3` varchar(255) DEFAULT NULL,
   `custom_field4` varchar(255) DEFAULT NULL,
-  `enabled` TINYINT(1) DEFAULT 1 NOT NULL,
+  `enabled` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`domain_id`,`id`)
+) ENGINE=MyISAM;
+
+CREATE TABLE IF NOT EXISTS `si_categories` (
+  `category_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `domain_id` int(11) NOT NULL DEFAULT '1',
+  `name` varchar(200) NOT NULL DEFAULT '',
+  `slug` varchar(200) NOT NULL DEFAULT '',
+  `referencia` varchar(10) NOT NULL DEFAULT '',
+  `enabled` int(11) NOT NULL,
+  `visible` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`category_id`,`domain_id`),
+  UNIQUE KEY `slug` (`slug`),
+  KEY `name` (`name`)
+) ENGINE=MyISAM;
+
+CREATE TABLE IF NOT EXISTS `si_categories_relationships` (
+  `object_id` bigint(20) UNSIGNED NOT NULL DEFAULT '0',
+  `category_taxonomy_id` bigint(20) UNSIGNED NOT NULL DEFAULT '0',
+  `category_order` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`object_id`,`category_taxonomy_id`),
+  KEY `category_taxonomy_id` (`category_taxonomy_id`)
+) ENGINE=MyISAM;
+
+CREATE TABLE IF NOT EXISTS `si_categories_taxonomy` (
+  `category_taxonomy_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `category_id` bigint(20) UNSIGNED NOT NULL DEFAULT '0',
+  `taxonomy` varchar(32) NOT NULL DEFAULT '',
+  `description` longtext,
+  `parent` bigint(20) UNSIGNED NOT NULL DEFAULT '0',
+  `count` bigint(20) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`category_taxonomy_id`),
+  UNIQUE KEY `category_id_taxonomy` (`category_id`,`taxonomy`),
+  KEY `taxonomy` (`taxonomy`)
 ) ENGINE=MyISAM;
 
 CREATE TABLE IF NOT EXISTS `si_cron` (
@@ -42,27 +75,17 @@ CREATE TABLE IF NOT EXISTS `si_cron` (
   `end_date` varchar(10) DEFAULT NULL,
   `recurrence` int(11) NOT NULL,
   `recurrence_type` varchar(11) NOT NULL,
-  `email_biller` TINYINT(1) DEFAULT 0 NOT NULL,
-  `email_customer` TINYINT(1) DEFAULT 0 NOT NULL,
+  `email_biller` TINYINT(1) NOT NULL DEFAULT '0',
+  `email_customer` TINYINT(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`domain_id`,`id`)
 ) ENGINE=MyISAM;
 
 CREATE TABLE IF NOT EXISTS `si_cron_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `domain_id` int(11) NOT NULL,
-  `cron_id` varchar(25) DEFAULT NULL,
+  `cron_id` varchar(25) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   `run_date` date NOT NULL,
-  PRIMARY KEY (`domain_id`,`id`),
-  UNIQUE KEY `CronIdUnq` (`domain_id`, `cron_id`, `run_date`)
-) ENGINE=MyISAM;
-
-CREATE TABLE IF NOT EXISTS `si_custom_fields` (
-  `cf_id` int(11) NOT NULL AUTO_INCREMENT,
-  `cf_custom_field` varchar(255) DEFAULT NULL,
-  `cf_custom_label` varchar(255) DEFAULT NULL,
-  `cf_display` TINYINT(1) DEFAULT 1 NOT NULL,
-  `domain_id` int(11) NOT NULL,
-  PRIMARY KEY (`cf_id`, `domain_id`)
+  PRIMARY KEY (`domain_id`,`id`)
 ) ENGINE=MyISAM;
 
 CREATE TABLE IF NOT EXISTS `si_customers` (
@@ -90,8 +113,18 @@ CREATE TABLE IF NOT EXISTS `si_customers` (
   `custom_field2` varchar(255) DEFAULT NULL,
   `custom_field3` varchar(255) DEFAULT NULL,
   `custom_field4` varchar(255) DEFAULT NULL,
-  `enabled` TINYINT(1) DEFAULT 1 NOT NULL,
+  `custom_field5` varchar(255) DEFAULT NULL,
+  `enabled` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`domain_id`,`id`)
+) ENGINE=MyISAM;
+
+CREATE TABLE IF NOT EXISTS `si_custom_fields` (
+  `cf_id` int(11) NOT NULL AUTO_INCREMENT,
+  `cf_custom_field` varchar(255) DEFAULT NULL,
+  `cf_custom_label` varchar(255) DEFAULT NULL,
+  `cf_display` varchar(1) NOT NULL DEFAULT '1',
+  `domain_id` int(11) NOT NULL,
+  PRIMARY KEY (`cf_id`)
 ) ENGINE=MyISAM;
 
 CREATE TABLE IF NOT EXISTS `si_extensions` (
@@ -99,8 +132,8 @@ CREATE TABLE IF NOT EXISTS `si_extensions` (
   `domain_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
-  `enabled` TINYINT(1) DEFAULT 0 NOT NULL,
-  PRIMARY KEY (`id`, `domain_id`)
+  `enabled` varchar(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM;
 
 CREATE TABLE IF NOT EXISTS `si_index` (
@@ -122,15 +155,27 @@ CREATE TABLE IF NOT EXISTS `si_inventory` (
   PRIMARY KEY (`domain_id`,`id`)
 ) ENGINE=MyISAM;
 
-CREATE TABLE IF NOT EXISTS `si_invoice_item_tax` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `invoice_item_id` int(11) NOT NULL,
-  `tax_id` int(11) NOT NULL,
-  `tax_type` CHAR(1) DEFAULT '%' NOT NULL,
-  `tax_rate` decimal(25,6) NOT NULL,
-  `tax_amount` decimal(25,6) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UnqInvTax` (`invoice_item_id`, `tax_id`)
+CREATE TABLE IF NOT EXISTS `si_invoices` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `index_id` int(3) UNSIGNED ZEROFILL NOT NULL,
+  `domain_id` int(11) NOT NULL DEFAULT '1',
+  `biller_id` int(10) NOT NULL DEFAULT '0',
+  `customer_id` int(10) NOT NULL DEFAULT '0',
+  `category_id` int(10) NOT NULL DEFAULT '0',
+  `type_id` int(10) NOT NULL DEFAULT '0',
+  `preference_id` int(10) NOT NULL DEFAULT '0',
+  `date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `custom_field1` varchar(50) DEFAULT NULL,
+  `custom_field2` varchar(50) DEFAULT NULL,
+  `custom_field3` varchar(50) DEFAULT NULL,
+  `custom_field4` varchar(50) DEFAULT NULL,
+  `note` text,
+  PRIMARY KEY (`domain_id`,`id`),
+  KEY `domain_id` (`domain_id`),
+  KEY `biller_id` (`biller_id`),
+  KEY `customer_id` (`customer_id`),
+  KEY `UniqDIB` (`index_id`,`preference_id`,`biller_id`,`domain_id`),
+  KEY `IdxDI` (`index_id`,`preference_id`,`domain_id`)
 ) ENGINE=MyISAM;
 
 CREATE TABLE IF NOT EXISTS `si_invoice_items` (
@@ -147,35 +192,24 @@ CREATE TABLE IF NOT EXISTS `si_invoice_items` (
   `attribute` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `invoice_id` (`invoice_id`),
-  KEY `DomainInv` (`invoice_id`, `domain_id`)
+  KEY `DomainInv` (`invoice_id`,`domain_id`)
+) ENGINE=MyISAM;
+
+CREATE TABLE IF NOT EXISTS `si_invoice_item_tax` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `invoice_item_id` int(11) NOT NULL,
+  `tax_id` int(11) NOT NULL,
+  `tax_type` char(1) NOT NULL DEFAULT '%',
+  `tax_rate` decimal(25,6) NOT NULL,
+  `tax_amount` decimal(25,6) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UnqInvTax` (`invoice_item_id`,`tax_id`)
 ) ENGINE=MyISAM;
 
 CREATE TABLE IF NOT EXISTS `si_invoice_type` (
   `inv_ty_id` int(11) NOT NULL AUTO_INCREMENT,
   `inv_ty_description` varchar(25) NOT NULL DEFAULT '',
   PRIMARY KEY (`inv_ty_id`)
-) ENGINE=MyISAM;
-
-CREATE TABLE IF NOT EXISTS `si_invoices` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `index_id` int(11) NOT NULL,
-  `domain_id` int(11) NOT NULL DEFAULT '1',
-  `biller_id` int(10) NOT NULL DEFAULT '0',
-  `customer_id` int(10) NOT NULL DEFAULT '0',
-  `type_id` int(10) NOT NULL DEFAULT '0',
-  `preference_id` int(10) NOT NULL DEFAULT '0',
-  `date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `custom_field1` varchar(50) DEFAULT NULL,
-  `custom_field2` varchar(50) DEFAULT NULL,
-  `custom_field3` varchar(50) DEFAULT NULL,
-  `custom_field4` varchar(50) DEFAULT NULL,
-  `note` text,
-  PRIMARY KEY (`domain_id`,`id`),
-  KEY `domain_id` (`domain_id`),
-  KEY `biller_id` (`biller_id`),
-  KEY `customer_id` (`customer_id`),
-  KEY `UniqDIB` (`index_id`, `preference_id`, `biller_id`, `domain_id`), 
-  KEY `IdxDI` (`index_id`, `preference_id`, `domain_id`)
 ) ENGINE=MyISAM;
 
 CREATE TABLE IF NOT EXISTS `si_log` (
@@ -185,7 +219,7 @@ CREATE TABLE IF NOT EXISTS `si_log` (
   `userid` int(11) NOT NULL DEFAULT '1',
   `sqlquerie` text NOT NULL,
   `last_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`, `domain_id`)
+  PRIMARY KEY (`id`,`domain_id`)
 ) ENGINE=MyISAM;
 
 CREATE TABLE IF NOT EXISTS `si_payment` (
@@ -207,7 +241,7 @@ CREATE TABLE IF NOT EXISTS `si_payment_types` (
   `pt_id` int(10) NOT NULL AUTO_INCREMENT,
   `domain_id` int(11) NOT NULL DEFAULT '1',
   `pt_description` varchar(250) NOT NULL,
-  `pt_enabled` TINYINT(1) DEFAULT 1 NOT NULL,
+  `pt_enabled` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`domain_id`,`pt_id`)
 ) ENGINE=MyISAM;
 
@@ -216,6 +250,8 @@ CREATE TABLE IF NOT EXISTS `si_preferences` (
   `domain_id` int(11) NOT NULL DEFAULT '1',
   `pref_description` varchar(50) DEFAULT NULL,
   `pref_currency_sign` varchar(50) DEFAULT NULL,
+  `template` varchar(30) CHARACTER SET utf8 DEFAULT NULL,
+  `logo` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `pref_inv_heading` varchar(50) DEFAULT NULL,
   `pref_inv_wording` varchar(50) DEFAULT NULL,
   `pref_inv_detail_heading` varchar(50) DEFAULT NULL,
@@ -225,8 +261,8 @@ CREATE TABLE IF NOT EXISTS `si_preferences` (
   `pref_inv_payment_line1_value` varchar(50) DEFAULT NULL,
   `pref_inv_payment_line2_name` varchar(50) DEFAULT NULL,
   `pref_inv_payment_line2_value` varchar(50) DEFAULT NULL,
-  `pref_enabled` TINYINT(1) DEFAULT 1 NOT NULL,
-  `status` TINYINT(1) NOT NULL,
+  `pref_enabled` tinyint(1) NOT NULL DEFAULT '1',
+  `status` tinyint(1) NOT NULL,
   `locale` varchar(255) DEFAULT NULL,
   `language` varchar(255) DEFAULT NULL,
   `index_group` int(11) NOT NULL,
@@ -250,12 +286,22 @@ CREATE TABLE IF NOT EXISTS `si_products` (
   `custom_field3` varchar(255) DEFAULT NULL,
   `custom_field4` varchar(255) DEFAULT NULL,
   `notes` text NOT NULL,
-  `enabled` TINYINT(1) DEFAULT 1 NOT NULL,
-  `visible` TINYINT(1) DEFAULT 1 NOT NULL,
+  `enabled` tinyint(1) NOT NULL DEFAULT '1',
+  `visible` tinyint(1) NOT NULL DEFAULT '1',
+  `category_id` int(11) NOT NULL,
   `attribute` varchar(255) DEFAULT NULL,
-  `notes_as_description` CHAR(1) DEFAULT NULL,
-  `show_description` CHAR(1) DEFAULT NULL,
+  `notes_as_description` char(1) DEFAULT NULL,
+  `show_description` char(1) DEFAULT NULL,
   PRIMARY KEY (`domain_id`,`id`)
+) ENGINE=MyISAM;
+
+CREATE TABLE IF NOT EXISTS `si_products_attributes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `type_id` varchar(255) NOT NULL,
+  `enabled` tinyint(1) NOT NULL DEFAULT '1',
+  `visible` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM;
 
 CREATE TABLE IF NOT EXISTS `si_products_attribute_type` (
@@ -264,20 +310,11 @@ CREATE TABLE IF NOT EXISTS `si_products_attribute_type` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM;
 
-CREATE TABLE IF NOT EXISTS `si_products_attributes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `type_id` varchar(255) NOT NULL,
-  `enabled` TINYINT(1) DEFAULT 1 NOT NULL,
-  `visible` TINYINT(1) DEFAULT 1 NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM;
-
 CREATE TABLE IF NOT EXISTS `si_products_values` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `attribute_id` int(11) NOT NULL,
   `value` varchar(255) NOT NULL,
-  `enabled` TINYINT(1) DEFAULT 1 NOT NULL,
+  `enabled` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM;
 
@@ -296,16 +333,16 @@ CREATE TABLE IF NOT EXISTS `si_system_defaults` (
   `value` varchar(30) NOT NULL,
   `domain_id` int(5) NOT NULL DEFAULT '0',
   `extension_id` int(5) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`domain_id`,`id`),
-  UNIQUE KEY `UnqNameInDomain` (`domain_id`, `name`)
+  PRIMARY KEY (`id`,`domain_id`),
+  UNIQUE KEY `UnqNameInDomain` (`domain_id`,`name`)
 ) ENGINE=MyISAM;
 
 CREATE TABLE IF NOT EXISTS `si_tax` (
   `tax_id` int(11) NOT NULL AUTO_INCREMENT,
   `tax_description` varchar(50) DEFAULT NULL,
   `tax_percentage` decimal(25,6) DEFAULT '0.000000',
-  `type` CHAR(1) DEFAULT '%' NOT NULL,
-  `tax_enabled` TINYINT(1) DEFAULT 1 NOT NULL,
+  `type` char(1) NOT NULL DEFAULT '%',
+  `tax_enabled` tinyint(1) NOT NULL DEFAULT '1',
   `domain_id` int(11) NOT NULL,
   PRIMARY KEY (`domain_id`,`tax_id`)
 ) ENGINE=MyISAM;
@@ -316,10 +353,10 @@ CREATE TABLE IF NOT EXISTS `si_user` (
   `role_id` int(11) DEFAULT NULL,
   `domain_id` int(11) NOT NULL DEFAULT '0',
   `password` varchar(64) DEFAULT NULL,
-  `enabled` TINYINT(1) DEFAULT 1 NOT NULL,
+  `enabled` tinyint(1) NOT NULL DEFAULT '1',
   `user_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`domain_id`,`id`),
-  UNIQUE KEY `UnqEMailPwd` (`email`, `password`)
+  UNIQUE KEY `UnqEMailPwd` (`email`,`password`)
 ) ENGINE=MyISAM;
 
 CREATE TABLE IF NOT EXISTS `si_user_domain` (

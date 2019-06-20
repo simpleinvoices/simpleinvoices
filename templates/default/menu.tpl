@@ -57,7 +57,8 @@
 				{ if $subPageActive == "cron_add"} <li><a class="active active_subpage" href="#">{$LANG.add}</a></li>{/if}				
 				{ if $subPageActive == "cron_edit"} <li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}
 				{ if $subPageActive == "cron_view"} <li><a class="active active_subpage" href="#">{$LANG.view}</a></li>{/if}
-				
+               			
+            <li><a { if $pageActive == "search"} class="active" {/if} href="index.php?module=invoices&amp;view=search">Buscar</a></li>				
 			<li><a { if $pageActive == "payment"} class="active" {/if} href="index.php?module=payments&amp;view=manage">{$LANG.payments}</a></li>
 				{ if $subPageActive == "payment_process"} <li><a class="active active_subpage" href="#">{$LANG.process}</a></li>{/if}
 				{ if $subPageActive == "payment_eway"} <li><a class="active active_subpage" href="#">{$LANG.eway}</a></li>{/if}
@@ -90,6 +91,13 @@
 				{ if $subPageActive == "product_view"} <li><a class="active active_subpage" href="#">{$LANG.view}</a></li>{/if}
 				{ if $subPageActive == "product_edit"} <li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}
 			<li><a { if $pageActive == "product_add"} class="active"{/if} href="index.php?module=products&amp;view=add">{$LANG.add_product}</a></li>
+
+
+			<li><a { if $pageActive == "categories_manage"} class="active"{/if} href="index.php?module=categories&amp;view=manage">{$LANG.manage_categories}</a></li>
+				{ if $subPageActive == "categories_view"} <li><a class="active active_subpage" href="#">{$LANG.view}</a></li>{/if}
+				{ if $subPageActive == "categories_edit"} <li><a class="active active_subpage" href="#">{$LANG.edit}</a></li>{/if}
+			<li><a { if $pageActive == "categories_add"} class="active"{/if} href="index.php?module=categories&amp;view=add">{$LANG.add_category}</a></li>
+
             {if $defaults.inventory == "1"}
     			<li><a { if $pageActive == "inventory"} class="active"{/if} href="index.php?module=inventory&amp;view=manage">{$LANG.inventory}</a></li>
 	    			{ if $subPageActive == "inventory_view"} <li><a class="active active_subpage" href="#">{$LANG.view}</a></li>{/if}

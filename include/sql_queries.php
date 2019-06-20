@@ -300,6 +300,13 @@ function getTaxRate($id, $domain_id='') {
 	return $record;
 }
 
+function getCatAll($id, $domain_id='') {
+	global $LANG;
+	$record = getGenericRecord('categories', $id, $domain_id, 'category_id');
+	$record['enabled'] = $record['enabled'] == 1 ? $LANG['enabled']:$LANG['disabled'];
+	return $record;
+}
+
 function getSQLPatches() {
 
 	$sql  = "SELECT * FROM ".TB_PREFIX."sql_patchmanager
@@ -429,6 +436,73 @@ function getTaxTypes() {
                     '$' => '$'
 	);
 	return $types;
+}
+
+function getCategory($id)
+{
+	global $LANG;
+	global $dbh;
+	global $auth_session;
+	
+	$sql = "SELECT * FROM ".TB_PREFIX."categories WHERE category_id = :id";
+	$sth = dbQuery($sql, ':id', $id) or die(htmlsafe(end($dbh->errorInfo())));
+	
+	$category = $sth->fetch();
+	$category['enabled'] = $category['enabled'] == 1 ? $LANG['enabled']:$LANG['disabled'];
+	
+	return $category;
+}
+
+function getCatys($category_id)
+{
+ global $LANG;
+ global $dbh;
+ global $auth_session;
+ 
+ 
+ $sql = "SELECT
+    *
+FROM
+    ".TB_PREFIX."categories_taxonomy WHERE category_id = $category_id";
+ $sth = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
+ 
+ 
+ $referral = $sth->fetchObject();
+ $referral = $referral->parent;
+ 
+ 
+ return $referral;
+ 
+ 
+}
+
+function getCategoryParent($category_id)
+{
+ global $LANG;
+ global $dbh;
+ global $auth_session;
+ 
+ 
+ $sql = "SELECT
+    a.category_id,
+    a.name,
+    (SELECT (CASE  WHEN a.enabled = 0 THEN 'disabled' ELSE 'enabled' END )) AS enabled,
+    b.parent,
+    (SELECT referencia from ".TB_PREFIX."categories where category_id = b.parent) as referencia_parent,
+    (SELECT (CASE WHEN b.parent != 0 THEN CONCAT(referencia_parent, a.referencia) ELSE CONCAT(a.referencia, '00') END )) as referencia
+FROM
+    ".TB_PREFIX."categories as a INNER JOIN ".TB_PREFIX."categories_taxonomy as b
+ON a.category_id = b.category_id where a.category_id = $category_id";
+ $sth = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
+ 
+ 
+ $referral = $sth->fetchObject();
+ $referral = $referral->referencia;
+ 
+ 
+ return $referral;
+ 
+ 
 }
 
 function getPaymentType($id, $domain_id='') {
@@ -653,7 +727,8 @@ function insertProductComplete($enabled=1,$visible=1,$description, $unit_price, 
             custom_field4,
             notes,
             enabled,
-            visible
+            visible,
+			category_id
     ) VALUES (
             :domain_id,
             :description,
@@ -664,7 +739,8 @@ function insertProductComplete($enabled=1,$visible=1,$description, $unit_price, 
             :custom_field4,
             :notes,
             :enabled,
-            :visible
+            :visible,
+			:category_id
     )";
 
 	return dbQuery($sql,
@@ -677,7 +753,8 @@ function insertProductComplete($enabled=1,$visible=1,$description, $unit_price, 
 		':custom_field4', $custom_field4,
 		':notes', "".$notes,
 		':enabled', $enabled,
-		':visible', $visible
+		':visible', $visible,
+		':category_id', $_POST['category']
 		);
 }
 
@@ -726,6 +803,7 @@ function insertProduct($enabled=1,$visible=1, $domain_id='') {
             default_tax_id,
             enabled,
             visible,
+			category_id,
             attribute,
             notes_as_description,
             show_description
@@ -745,6 +823,7 @@ function insertProduct($enabled=1,$visible=1, $domain_id='') {
 			:default_tax_id,
 			:enabled,
 			:visible,
+			:category_id,
             :attribute,
             :notes_as_description,
             :show_description
@@ -764,6 +843,7 @@ function insertProduct($enabled=1,$visible=1, $domain_id='') {
 		':default_tax_id', $_POST['default_tax_id'],
 		':enabled', $enabled,
 		':visible', $visible,
+		':category_id', $_POST['category'],
 		':attribute', json_encode($attr),
 		':notes_as_description', $notes_as_description,
 		':show_description', $show_description
@@ -805,6 +885,7 @@ function updateProduct($domain_id='') {
 				unit_price = :unit_price,
 				cost = :cost,
 				reorder_level = :reorder_level,
+				category_id = :category_id,
                 attribute = :attribute,
                 notes_as_description = :notes_as_description,
                 show_description = :show_description
@@ -828,8 +909,111 @@ function updateProduct($domain_id='') {
 		':attribute', json_encode($attr),
 		':notes_as_description', $notes_as_description,
 		':show_description', $show_description,
-		':id', $_GET[id]
+		':id', $_GET[id],
+		':category_id', $_POST['category_id']
 		);
+}
+
+function insertCategories($enabled=1,$visible=1, $domain_id='') {
+	global $logger;
+	$domain_id = domain_id::get($domain_id);
+	$buscados = array("á", "é", "í", "ó", "ú","ñ");
+	$reemplazos = array ("a", "e", "i", "o", "u","n");
+	$cadena = strtolower(utf8_decode($_POST['name']));
+	$slug = str_replace($buscados, $reemplazos, $cadena);
+	$slug = str_replace(" ", "-", $slug);
+	$slug = str_replace("?", "", $slug);
+	(isset($_POST['enabled'])) ? $enabled = $_POST['enabled']  : $enabled = $enabled ;	
+	
+	$sql = "INSERT into
+		".TB_PREFIX."categories
+		(
+			name, 
+            slug,
+            referencia,
+            enabled			
+		)
+	VALUES
+		(	
+			:name, 
+            :slug, 
+            :referencia,
+            :enabled			
+		)";
+
+	return dbQuery($sql,
+		':name', $_POST['name'],
+		':slug', $slug,
+		':referencia', $_POST['referencia'],
+		':enabled', $enabled
+		);
+}
+
+function maxCategory() {
+
+	global $LANG;	
+	
+	$sql = "SELECT max(category_id) as maxId FROM ".TB_PREFIX."categories";
+
+	$sth = dbQuery($sql);
+	return $sth->fetch();
+}
+
+function insert_categories_parent($category_id)
+{
+	$parent = $_POST['parent'];
+	$id = maxCategory();
+	$category_id  = $id[0];
+	if ($parent == -1)
+	{
+		$parent = 0;
+	}
+	
+	$sql = "INSERT INTO ".TB_PREFIX."categories_taxonomy (category_id, taxonomy, parent, count) VALUES (:category_id, :taxonomy, :parent, :count)";
+	
+	return dbQuery($sql,
+		':category_id', $category_id,
+		':taxonomy', 'category',
+		':parent', $parent,
+		':count', 0
+	);
+}
+
+function updateCategories() {
+	
+	$buscados = array("á", "é", "í", "ó", "ú");
+	$reemplazos = array ("a", "e", "i", "o", "u");
+	$cadena = strtolower($_POST['name']);
+	$slug = str_replace($buscados, $reemplazos, $cadena);
+	$slug = str_replace(" ", "-", $slug);
+	
+	$sql = "UPDATE ".TB_PREFIX."categories
+			SET
+				name = :name,
+				referencia = :referencia,
+				slug = :slug,
+				enabled = :enabled
+			WHERE
+				category_id = :category_id";
+
+	return dbQuery($sql,
+		':name', $_POST['name'],
+		':slug', $slug,
+		':referencia', $_POST['referencia'],
+		':enabled', $_POST['category_enabled'],
+		':category_id', $_GET['id']
+		);
+}
+
+function update_categories_parent($parent,$category_id)
+{
+	global $dbh;	
+	$parent  = $_POST['parent'];
+	$category_id  = $_GET['id'];
+
+	$sql = "UPDATE ".TB_PREFIX."categories_taxonomy SET parent = :parent WHERE category_id = :category_id";
+	
+	$sth  = dbQuery($sql,':category_id', $category_id,':parent', $parent) or die(htmlsafe(end($dbh->errorInfo())));
 }
 
 function getProducts($domain_id='') {
@@ -866,6 +1050,18 @@ function getActiveProducts($domain_id='') {
 	$sql = "SELECT * FROM ".TB_PREFIX."products WHERE enabled AND domain_id = :domain_id ORDER BY description";
 	$sth = dbQuery($sql, ':domain_id',$domain_id);
 
+	return $sth->fetchAll();
+}
+
+function getActiveProductsByCategory($id)
+{
+	global $dbh;
+	global $db_server;
+	global $auth_session;
+	
+	$sql = "SELECT * FROM ".TB_PREFIX."products WHERE enabled and domain_id = :domain_id ORDER BY description";
+	$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id)or die(htmlsafe(end($dbh->errorInfo())));
+	
 	return $sth->fetchAll();
 }
 

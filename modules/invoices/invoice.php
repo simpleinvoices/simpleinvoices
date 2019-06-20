@@ -49,6 +49,7 @@ for($i=1;$i<=4;$i++) {
 	$show_custom_field[$i] = show_custom_field("invoice_cf$i",'',"write",'',"details_screen",'','','');
 }
 
+$categories = categories::get_cats();
 $sql = "SELECT CONCAT(a.id, '-', v.id) as id
 			 , CONCAT(a.name, '-',v.value) AS display 
 		FROM ".TB_PREFIX."products_attributes a 
@@ -57,7 +58,7 @@ $sql = "SELECT CONCAT(a.id, '-', v.id) as id
 $sth =  dbQuery($sql);
 $matrix = $sth->fetchAll();
 $smarty -> assign("matrix", $matrix);
-
+$smarty -> assign('categories',$categories);
 $smarty -> assign("billers",$billers);
 $smarty -> assign("customers",$customers);
 $smarty -> assign("taxes",$taxes);

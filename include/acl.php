@@ -17,6 +17,7 @@ $acl->addResource('api');
 $acl->addResource('auth');
 $acl->addResource('billers');
 // actions: biller_view, biller_edit
+$acl->addResource('categories');
 $acl->addResource('cron');
 $acl->addResource('custom_fields');
 // actions: custom_fields_view, custom_fields_edit

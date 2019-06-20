@@ -38,6 +38,19 @@ class product
          return $sth->fetch();
 
     }
+	
+	    public static function get_cats()
+    {
+
+         global $auth_session;
+         global $db;
+ 
+         $sql = "SELECT * FROM ".TB_PREFIX."categories ORDER BY category_id ASC";
+         $sth  = $db->query($sql, ':domain_id',$auth_session->domain_id) or die(htmlsafe(end($dbh->errorInfo())));
+ 
+         return $sth->fetchAll();
+
+    }
 
     public function select_all($type='', $dir, $sort, $rp, $page )
     {

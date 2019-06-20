@@ -29,11 +29,11 @@
 			dataType: 'xml',
 			colModel : [
 				{display: '{/literal}{$LANG.actions}{literal}', name : 'actions', width : action_menu - 50, sortable : false, align: 'center'},
-				{display: '{/literal}{$LANG.date_upper}{literal}', name : 'date', width :15 * percentage_width, sortable : true, align: 'center'},
+				{display: '{/literal}{$LANG.date_upper}{literal}', name : 'date', width :15 * percentage_width, sortable : true, align: 'left'},
 				{display: '{/literal}{$LANG.product}{literal}', name : 'description', width :35 * percentage_width, sortable : true, align: 'left'},
-				{display: '{/literal}{$LANG.quantity}{literal}', name : 'quantity', width :15 * percentage_width, sortable : true, align: 'right'},
-				{display: '{/literal}{$LANG.cost_price}{literal}', name : 'cost', width :15 * percentage_width, sortable : true, align: 'right'},
-				{display: '{/literal}{$LANG.total_cost}{literal}', name : 'total_cost', width :20 * percentage_width, sortable : true, align: 'right'}
+				{display: '{/literal}{$LANG.quantity}{literal}', name : 'quantity', width :15 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.cost_price}{literal}', name : 'cost', width :15 * percentage_width, sortable : true, align: 'left'},
+				{display: '{/literal}{$LANG.total_cost}{literal}', name : 'total_cost', width :20 * percentage_width, sortable : true, align: 'left'}
 				
 				],
 				/*

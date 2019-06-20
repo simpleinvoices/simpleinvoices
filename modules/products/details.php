@@ -11,12 +11,17 @@ $product = getProduct($product_id);
 $customFieldLabel = getCustomFieldLabels();
 $taxes = getActiveTaxes();
 $tax_selected = getTaxRate($product['default_tax_id']);
+$cat_selected = getCategory($product['category_id']);
 
+$categories = categories::get_cats();
+
+$smarty -> assign('categories', $categories);
 $smarty -> assign("defaults",getSystemDefaults());
 $product['attribute_decode'] = json_decode($product['attribute'],true);
 $smarty -> assign('product',$product);
 $smarty -> assign('taxes',$taxes);
 $smarty -> assign('tax_selected',$tax_selected);
+$smarty -> assign('cat_selected',$cat_selected);
 $smarty -> assign('customFieldLabel',$customFieldLabel);
 
 $sql = "select * from ".TB_PREFIX."products_attributes";
