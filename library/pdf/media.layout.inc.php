@@ -27,7 +27,7 @@ class Media {
   }
 
   function &copy() {
-    $new_item =& new Media($this->size, $this->margins);
+    $new_item = new Media($this->size, $this->margins);
     $new_item->pixels = $this->pixels;
     return $new_item;
   }
@@ -86,7 +86,7 @@ class Media {
 
     // Let's check if the chosen media defined
     if (isset($g_predefined_media[$name])) {
-      $media =& new Media($g_predefined_media[$name], array('top'=>0, 'bottom'=>0, 'left'=>0, 'right'=>0));
+      $media = new Media($g_predefined_media[$name], array('top'=>0, 'bottom'=>0, 'left'=>0, 'right'=>0));
     } else {
       $media = null;
     };

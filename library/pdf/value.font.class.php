@@ -11,7 +11,7 @@ class ValueFont {
   }
 
   function &copy() {
-    $font =& new ValueFont;
+    $font = new ValueFont;
     $font->style  = $this->style;
     $font->weight = $this->weight;
 

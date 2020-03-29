@@ -43,7 +43,7 @@ class BackgroundImage {
    * @return BackgroundImage A copy of current object
    */
   function &copy() {
-    $value =& new BackgroundImage($this->_url, $this->_image);
+    $value = new BackgroundImage($this->_url, $this->_image);
     return $value;
   }
 

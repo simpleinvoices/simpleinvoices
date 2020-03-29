@@ -3,7 +3,7 @@
 
 class IFrameBox extends InlineBlockBox {
   function &create(&$root, &$pipeline) {
-    $box =& new IFrameBox($root, $pipeline);
+    $box = new IFrameBox($root, $pipeline);
     $box->readCSS($pipeline->getCurrentCSSState());
     return $box;
   }

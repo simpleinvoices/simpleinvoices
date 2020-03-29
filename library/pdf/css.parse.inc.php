@@ -212,7 +212,7 @@ function parse_css_selectors($raw_selectors) {
 //       return $null;
 //     };
 
-//     $collection =& new CSSPropertyCollection();
+//     $collection = new CSSPropertyCollection();
 //     $collection->addProperty(CSSPropertyDeclaration::create($code, trim($matches[2]), $pipeline));
 //     return $collection;
 //   } elseif (preg_match("/@import\s+\"(.*)\";/",$property, $matches)) {
@@ -228,7 +228,7 @@ function parse_css_selectors($raw_selectors) {
 //     $collection =& css_import(trim($matches[1]), $pipeline);
 //     return $collection;
 //   } else {
-//     $collection =& new CSSPropertyCollection();
+//     $collection = new CSSPropertyCollection();
 //     return $collection;
 //   };
 // }

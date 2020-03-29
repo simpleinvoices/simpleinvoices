@@ -30,14 +30,14 @@ class FeatureFactory {
     };
 
     require_once($file_name);
-    $feature_object =& new $class_name;
+    $feature_object = new $class_name;
     return $feature_object;
   }
 
   function &get_instance() {
     static $instance = null;
     if (is_null($instance)) {
-      $instance =& new FeatureFactory();
+      $instance = new FeatureFactory();
     };
 
     return $instance;

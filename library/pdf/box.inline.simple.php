@@ -41,7 +41,7 @@ class SimpleInlineBox extends GenericBox {
   function show(&$driver) {
     parent::show($driver);
 
-    $strategy =& new StrategyLinkRenderingNormal();
+    $strategy = new StrategyLinkRenderingNormal();
     $strategy->apply($this, $driver);
   }
 }
