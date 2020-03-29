@@ -7,7 +7,7 @@
 database.adapter                    = pdo_mysql
 database.utf8                       = true
 database.params.host                = localhost
-database.params.username            = 
+database.params.username            = root
 database.params.password            = ''
 database.params.dbname              = simple_invoices
 database.params.port                = 3306
@@ -65,4 +65,3 @@ database.params.dbname              = simple_invoices_dev
 debug.error_reporting               = E_ALL
 phpSettings.display_startup_errors  = 1
 phpSettings.display_errors          = 1
-

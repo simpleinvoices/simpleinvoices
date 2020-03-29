@@ -36,7 +36,7 @@ $frontendOptions = array(
  * Smarty inint - start
  */
 
-ini_set('display_errors',true);
+#ini_set('display_errors',true);
 
 require_once("smarty/Smarty.class.php");
 require_once("library/paypal/paypal.class.php");

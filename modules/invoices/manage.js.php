@@ -6,7 +6,7 @@
 			var grid_width = $('.col').width();
 			//var url = 'index.php?module=invoices&view=xml';
 			
-			grid_width = grid_width - (columns * padding) - action_menu;
+			grid_width = grid_width - ((columns -0.5) * padding) - action_menu;
 			percentage_width = grid_width / 100; 
 			
 			function test(com,grid)

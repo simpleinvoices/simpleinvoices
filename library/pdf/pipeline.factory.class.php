@@ -4,8 +4,7 @@ require_once(HTML2PS_DIR.'pipeline.class.php');
 
 class PipelineFactory {
   function &create_default_pipeline($encoding, $filename) {
-    //$pipeline = new Pipeline(); //Fixed Roland
-    $pipeline = new Pipeline(); 
+    $pipeline =& new Pipeline(); 
 
     if (isset($GLOBALS['g_config'])) {
       $pipeline->configure($GLOBALS['g_config']);

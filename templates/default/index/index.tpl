@@ -101,9 +101,11 @@
 
         <div class="si_index_help">
             <h2>{$LANG.need_help}</h2>
-            <a href="">{$LANG.help_si_help} &gt;</a><br />
+            <a href="./documentation/{$language}/general/FAQs.html">{$LANG.help_si_help} &gt;</a><br />
+            <a href="./documentation/{$language}/general/gpl.html">GPL {$LANG.license} &gt;</a><br />
             <a href="http://www.simpleinvoices.org/forum">{$LANG.help_community_forums} &gt;</a><br />
-            <a href="http://www.simpleinvoices.org/blog">{$LANG.help_blog} &gt;</a><br />
+            <a href="https://plus.google.com/communities/102476804981627142204">Google Groups Forum &gt;</a><br />
+            <del><a href="http://www.simpleinvoices.org/blog">{$LANG.help_blog} &gt;</a></del><br />
             <a href="https://groups.google.com/forum/#!forum/simpleinvoices">{$LANG.help_mailing_list} &gt;</a>
         </div>
 
