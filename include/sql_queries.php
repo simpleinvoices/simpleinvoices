@@ -1427,10 +1427,6 @@ function updateBiller() {
 function updateCustomer() {
 	global $config;
 	$domain_id = domain_id::get();
-
-//	$encrypted_credit_card_number = '';
-	$is_new_cc_num = ($_POST['credit_card_number_new'] !='');
-
 	$sql = "UPDATE
 				".TB_PREFIX."customers
 			SET
@@ -1448,10 +1444,6 @@ function updateCustomer() {
 				mobile_phone = :mobile_phone,
 				fax = :fax,
 				email = :email,
-				credit_card_holder_name = :credit_card_holder_name,
-                " . (($is_new_cc_num) ? 'credit_card_number = :credit_card_number,' : '') . "
-				credit_card_expiry_month = :credit_card_expiry_month,
-				credit_card_expiry_year = :credit_card_expiry_year,
 				notes = :notes,
 				custom_field1 = :custom_field1,
 				custom_field2 = :custom_field2,
@@ -1461,15 +1453,6 @@ function updateCustomer() {
 			WHERE
 				id = :id";
 
-	if($is_new_cc_num)
-	{
-		$credit_card_number = $_POST['credit_card_number_new'];
-        
-        //cc
-        $enc = new encryption();
-        $key = $config->encryption->default->key;
-        $encrypted_credit_card_number = $enc->encrypt($key, $credit_card_number);
-
 		return dbQuery($sql,
 			':domain_id', $domain_id,
 			':attention', $_POST['attention'],
@@ -1486,10 +1469,6 @@ function updateCustomer() {
 			':fax', $_POST['fax'],
 			':email', $_POST['email'],
 			':notes', $_POST['notes'],
-			':credit_card_holder_name', $_POST['credit_card_holder_name'],
-			':credit_card_number', $encrypted_credit_card_number,
-			':credit_card_expiry_month', $_POST['credit_card_expiry_month'],
-			':credit_card_expiry_year', $_POST['credit_card_expiry_year'],
 			':custom_field1', $_POST['custom_field1'],
 			':custom_field2', $_POST['custom_field2'],
 			':custom_field3', $_POST['custom_field3'],
@@ -1497,34 +1476,6 @@ function updateCustomer() {
 			':enabled', $_POST['enabled'],
 			':id', $_GET['id']
 		);
-	} else {
-		return dbQuery($sql,
-			':domain_id', $domain_id,
-			':attention', $_POST['attention'],
-			':name', $_POST['name'],
-			':department', $_POST['department'],
-			':street_address', $_POST['street_address'],
-			':street_address2', $_POST['street_address2'],
-			':city', $_POST['city'],
-			':state', $_POST['state'],
-			':zip_code', $_POST['zip_code'],
-			':country', $_POST['country'],
-			':phone', $_POST['phone'],
-			':mobile_phone', $_POST['mobile_phone'],
-			':fax', $_POST['fax'],
-			':email', $_POST['email'],
-			':notes', $_POST['notes'],
-			':credit_card_holder_name', $_POST['credit_card_holder_name'],
-			':credit_card_expiry_month', $_POST['credit_card_expiry_month'],
-			':credit_card_expiry_year', $_POST['credit_card_expiry_year'],
-			':custom_field1', $_POST['custom_field1'],
-			':custom_field2', $_POST['custom_field2'],
-			':custom_field3', $_POST['custom_field3'],
-			':custom_field4', $_POST['custom_field4'],
-			':enabled', $_POST['enabled'],
-			':id', $_GET['id']
-		);
-	}
 }
 
 function insertCustomer() {
@@ -1538,8 +1489,6 @@ function insertCustomer() {
 				domain_id, attention, name, department, street_address, street_address2,
 				city, state, zip_code, country, phone, mobile_phone,
 				fax, email, notes,
-				credit_card_holder_name, credit_card_number,
-				credit_card_expiry_month, credit_card_expiry_year, 
 				custom_field1, custom_field2,
 				custom_field3, custom_field4, enabled
 			)
@@ -1548,15 +1497,9 @@ function insertCustomer() {
 				:domain_id ,:attention, :name, :department, :street_address, :street_address2,
 				:city, :state, :zip_code, :country, :phone, :mobile_phone,
 				:fax, :email, :notes, 
-				:credit_card_holder_name, :credit_card_number,
-				:credit_card_expiry_month, :credit_card_expiry_year, 
 				:custom_field1, :custom_field2,
 				:custom_field3, :custom_field4, :enabled
 			)";
-	//cc
-	$enc = new encryption();
-    $key = $config->encryption->default->key;
-	$encrypted_credit_card_number = $enc->encrypt($key, $credit_card_number);
 
 	return dbQuery($sql,
 		':attention', $attention,
@@ -1573,10 +1516,6 @@ function insertCustomer() {
 		':fax', $fax,
 		':email', $email,
 		':notes', $notes,
-		':credit_card_holder_name', $credit_card_holder_name,
-		':credit_card_number', $encrypted_credit_card_number,
-		':credit_card_expiry_month', $credit_card_expiry_month,
-		':credit_card_expiry_year', $credit_card_expiry_year,
 		':custom_field1', $custom_field1,
 		':custom_field2', $custom_field2,
 		':custom_field3', $custom_field3,
