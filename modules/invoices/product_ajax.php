@@ -1,11 +1,11 @@
 <?php
 
 $row_id = htmlsafe($_GET['row']);
-if($_GET['id'])
+if(isset($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] > 0)
 {
 	//sleep(2);
-	$sql = sprintf("SELECT unit_price, default_tax_id, default_tax_id_2,attribute,notes,notes_as_description,show_description FROM ".TB_PREFIX."products WHERE id = %d AND domain_id = %d LIMIT 1", $_GET['id'], $auth_session->domain_id);
-	$states = dbQuery($sql);
+	$sql = "SELECT unit_price, default_tax_id, default_tax_id_2,attribute,notes,notes_as_description,show_description FROM ".TB_PREFIX."products WHERE id = :id AND domain_id = :domain_id LIMIT 1";
+	$states = dbQuery($sql, ':id', (int)$_GET['id'], ':domain_id', $auth_session->domain_id);
     //	$output = '';
 
 

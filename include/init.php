@@ -44,7 +44,7 @@ require_once('./library/phpmailer/src/Exception.php');
 require_once('./library/phpmailer/src/PHPMailer.php');
 require_once('./library/phpmailer/src/SMTP.php');
 
-require_once('./library/HTMLPurifier/HTMLPurifier.standalone.php');
+require_once('./library/HTMLPurifier.auto.php');
 include_once('./include/functions.php');
 
 //ob_start('addCSRFProtection');
@@ -102,25 +102,26 @@ $smarty = new Smarty();
 $smarty->debugging = false;
 
 //cache directory. Have to be writeable (chmod 777)
-$smarty -> compile_dir = "tmp/cache";
-if(!is_writable($smarty -> compile_dir)) {
-	simpleInvoicesError("notWriteable", 'folder', $smarty -> compile_dir);
+$smarty->setCompileDir("tmp/cache");
+if(!is_writable($smarty->getCompileDir())) {
+	simpleInvoicesError("notWriteable", 'folder', $smarty->getCompileDir());
 	//exit("Simple Invoices Error : The folder <i>".$smarty -> compile_dir."</i> has to be writeable");
 }
 
 //adds own smarty plugins
-$smarty->plugins_dir = array("plugins","include/smarty_plugins");
+$smarty->addPluginsDir("plugins");
+$smarty->addPluginsDir("include/smarty_plugins");
 
-//add stripslash smarty function
-$smarty->register_modifier("unescape","stripslashes");
+//add stripslash smarty function - updated for Smarty v4 API
+$smarty->registerPlugin('modifier', 'unescape', 'stripslashes');
 /* 
  * Smarty inint - end
  */
 
 
-$path = pathinfo($_SERVER['REQUEST_URI']);
-//SC: Install path handling will need changes if used in non-HTML contexts
-$install_path = htmlsafe($path['dirname']);
+$path = pathinfo($_SERVER['REQUEST_URI'] ?? '');
+//SC: Install path handling will need changes if used in non-HTML contexts  
+$install_path = htmlsafe($path['dirname'] ?? '');
 
 
 include_once('./config/define.php');
