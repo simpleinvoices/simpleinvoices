@@ -1,5 +1,9 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
 class email
 {
 	public $format;
@@ -23,14 +27,34 @@ class email
 		$mail = new PHPMailer(true);
 
 		try {
-			$mail->Host = $config->email->host;
-
-			if($config->email->smtp_auth == true) {
-				$mail->SMTPAuth = true;
-				$mail->Username = $config->email->username;
-				$mail->Password = $config->email->password;
-				$mail->SMTPSecure = $config->email->secure;
-				$mail->Port = $config->email->smtpport;
+			// Server settings
+			if($config->email->use_local_sendmail == false) {
+				$mail->isSMTP();
+				$mail->Host = $config->email->host;
+				
+				if($config->email->smtp_auth == true) {
+					$mail->SMTPAuth = true;
+					$mail->Username = $config->email->username;
+					$mail->Password = $config->email->password;
+					
+					// Handle SSL/TLS encryption
+					if ($config->email->secure == 'ssl') {
+						$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+					} elseif ($config->email->secure == 'tls') {
+						$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+					}
+					
+					$mail->Port = $config->email->smtpport;
+				}
+				
+				//Custom connection options for self-signed certificates
+				$mail->SMTPOptions = array(
+					'ssl' => array(
+						'verify_peer' => false,
+						'verify_peer_name' => false,
+						'allow_self_signed' => true
+					)
+				);
 			}
 
 			$mail->isHTML(true);
@@ -51,33 +75,15 @@ class email
 				}
 			}
 
-			//Custom connection options
-			$mail->SMTPOptions = array(
-				//allow self signed certs
-				'ssl' => array(
-					'verify_peer' => false,
-					'verify_peer_name' => false,
-					'allow_self_signed' => true
-				)
-				/* More secure SMTP settings - certs required */
-				/*
-				   'ssl' => array(
-				   'verify_peer'  => true,
-				   'verify_depth' => 3,
-				   'allow_self_signed' => true,
-				   'peer_name' => 'smtp.example.com',
-				   'cafile' => '/etc/ssl/ca_cert.pem',
-				   )
-				 */
-			);
-
+			// Add attachments
 			if($this->attachment)
 			{
 				$mail->addAttachment('./tmp/cache/'.$this->attachment);
 			}
-			$mail->Send();
+			
+			$mail->send();
 
-		} catch  (phpmailerException $e) {
+		} catch (Exception $e) {
 			echo '<strong>Mail Protocol Exception:</strong> ' .  $e->getMessage();
 			exit;
 		}

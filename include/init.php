@@ -40,7 +40,9 @@ $frontendOptions = array(
 
 require_once("smarty/Smarty.class.php");
 require_once("library/paypal/paypal.class.php");
-require_once('./library/phpmailer/PHPMailerAutoload.php');
+require_once('./library/phpmailer/src/Exception.php');
+require_once('./library/phpmailer/src/PHPMailer.php');
+require_once('./library/phpmailer/src/SMTP.php');
 
 require_once('./library/HTMLPurifier/HTMLPurifier.standalone.php');
 include_once('./include/functions.php');
