@@ -134,8 +134,9 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
 	//echo $skip_db_patches; 
 	//if auth on must login before upgrade
     if ($skip_db_patches == false)
-    {
-		if ( ($config->authentication->enabled == 1 AND isset($auth_session->id)) OR ($config->authentication->enabled == 0) )	
+	{
+		//var_dump($config->authentication->enable);
+		if ( ($config->authentication->enabled == 1 AND isset($auth_session->id)) OR ($config->authentication->enabled == false) )	
 		{
 			include_once('./include/sql_patches.php');
 			if (getNumberOfPatches() > 0 ) {

@@ -563,31 +563,31 @@ INSERT INTO `".TB_PREFIX."system_defaults` (`id`, `name`, `value`) VALUES
 	}
 
 	$patch['116']['name'] = "System defaults conversion patch - set default biller";
-	$patch['116']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value = $defaults['def_biller'] where name = 'biller'";
+	$patch['116']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value = ".$defaults['def_biller']." where name = 'biller'";
 	$patch['116']['date'] = "20070523";
 
 	$patch['117']['name'] = "System defaults conversion patch - set default customer";
-	$patch['117']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value = $defaults['def_customer'] where name = 'customer'";
+	$patch['117']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value = ".$defaults['def_customer']." where name = 'customer'";
 	$patch['117']['date'] = "20070523";
 
 	$patch['118']['name'] = "System defaults conversion patch - set default tax";
-	$patch['118']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value = $defaults['def_tax'] where name = 'tax'";
+	$patch['118']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value = ".$defaults['def_tax']." where name = 'tax'";
 	$patch['118']['date'] = "20070523";
 
 	$patch['119']['name'] = "System defaults conversion patch - set default invoice reference";
-	$patch['119']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value = $defaults['def_inv_preference'] where name = 'preference'";
+	$patch['119']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value = ".$defaults['def_inv_preference']." where name = 'preference'";
 	$patch['119']['date'] = "20070523";
 
 	$patch['120']['name'] = "System defaults conversion patch - set default number of line items";
-	$patch['120']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value = $defaults['def_number_line_items'] where name = 'line_items'";
+	$patch['120']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value = ".$defaults['def_number_line_items']." where name = 'line_items'";
 	$patch['120']['date'] = "20070523";
 
 	$patch['121']['name'] = "System defaults conversion patch - set default invoice template";
-	$patch['121']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value = '$defaults['def_inv_template']' where name = 'template'";
+	$patch['121']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value = '".$defaults['def_inv_template']."' where name = 'template'";
 	$patch['121']['date'] = "20070523";
 
 	$patch['122']['name'] = "System defaults conversion patch - set default paymemt type";
-	$patch['122']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value = $defaults['def_payment_type'] where name = 'payment_type'";
+	$patch['122']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value = ".$defaults['def_payment_type']." where name = 'payment_type'";
 	$patch['122']['date'] = "20070523";
 
 	//sept release
@@ -630,7 +630,7 @@ INSERT INTO `".TB_PREFIX."system_defaults` (`id`, `name`, `value`) VALUES
 		{
 			$patch['128']['patch'] = "CREATE TABLE IF NOT EXISTS `".TB_PREFIX."users` (
 `user_id` int(11) NOT NULL auto_increment,
-`user_email` varchar(255) NOT NULL,
+`user_email` varchar(191) NOT NULL,
 `user_name` varchar(255) NOT NULL,
 `user_group` varchar(255) NOT NULL,
 `user_domain` varchar(255) NOT NULL,
@@ -712,7 +712,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 		default :
         	$patch['136']['patch'] = "CREATE TABLE ".TB_PREFIX."user_domain (
 	    		`id` int(11) NOT NULL auto_increment  PRIMARY KEY,
-            	`name` varchar(255) UNIQUE NOT NULL
+            	`name` varchar(191) UNIQUE NOT NULL
             	) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
     }
     $patch['136']['date'] = "200712";
@@ -806,7 +806,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
     $patch['147']['name'] = "Create user_role table";
     $patch['147']['patch'] = "CREATE TABLE ".TB_PREFIX."user_role (
 	    `id` int(11) NOT NULL auto_increment  PRIMARY KEY,
-            `name` varchar(255) UNIQUE NOT NULL
+            `name` varchar(191) UNIQUE NOT NULL
             ) ENGINE=MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
     if ($config->database->adapter == "pdo_pgsql") {
         $patch['147']['patch'] = "CREATE TABLE ".TB_PREFIX."user_role (
@@ -1068,9 +1068,9 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
      //TODO: postgres and sqlite patch
 
     $patch['179']['name'] = "Rename si_user.user_email to si_user.email";
-    $patch['179']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_email` `email` VARCHAR( 255 );";
+    $patch['179']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_email` `email` VARCHAR( 191 );";
     if ($config->database->adapter == "pdo_pgsql") {
-	    $patch['179']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_email` `email` VARCHAR( 255 );";
+	    $patch['179']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_email` `email` VARCHAR( 191 );";
     }
     $patch['179']['date'] = "20081229";
      //TODO: postgres and sqlite patch
@@ -1601,7 +1601,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['274']['date'] = "20131007";
 
     $patch['275']['name'] = "Make EMail / Password pair unique per domain - add unique index";
-    $patch['275']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `password` `password` VARCHAR(64) NULL, ADD UNIQUE INDEX `UnqEMailPwd` (`email`, `password`);";
+    $patch['275']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `password` `password` VARCHAR(64) NULL, ADD UNIQUE INDEX `UnqEMail` (`email`);";
     $patch['275']['date'] = "20131007";
 
     $patch['276']['name'] = "Each invoice Item must belong to a specific Invoice with a specific domain_id";

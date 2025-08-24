@@ -280,16 +280,16 @@ CREATE TABLE IF NOT EXISTS `si_products_values` (
 CREATE TABLE IF NOT EXISTS `si_sql_patchmanager` (
   `sql_id` int(11) NOT NULL AUTO_INCREMENT,
   `sql_patch_ref` int(11) NOT NULL,
-  `sql_patch` varchar(255) NOT NULL,
-  `sql_release` varchar(25) NOT NULL DEFAULT '',
-  `sql_statement` text NOT NULL,
+  `sql_patch` varchar(255) DEFAULT NULL,
+  `sql_release` varchar(25) DEFAULT NULL ,
+  `sql_statement` text DEFAULT NULL,
   PRIMARY KEY (`sql_id`)
 ) ENGINE=MyISAM;
 
 CREATE TABLE IF NOT EXISTS `si_system_defaults` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
-  `value` varchar(30) NOT NULL,
+  `value` varchar(30) DEFAULT NULL,
   `domain_id` int(5) NOT NULL DEFAULT '0',
   `extension_id` int(5) NOT NULL DEFAULT '0',
   PRIMARY KEY (`domain_id`,`id`),
@@ -308,26 +308,26 @@ CREATE TABLE IF NOT EXISTS `si_tax` (
 
 CREATE TABLE IF NOT EXISTS `si_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(255) DEFAULT NULL,
+  `email` varchar(191) DEFAULT NULL,
   `role_id` int(11) DEFAULT NULL,
   `domain_id` int(11) NOT NULL DEFAULT '0',
   `password` varchar(64) DEFAULT NULL,
   `enabled` TINYINT(1) DEFAULT 1 NOT NULL,
   `user_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`domain_id`,`id`),
-  UNIQUE KEY `UnqEMailPwd` (`email`, `password`)
+  UNIQUE KEY `UnqEMail` (`email`)
 ) ENGINE=MyISAM;
 
 CREATE TABLE IF NOT EXISTS `si_user_domain` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
+  `name` varchar(191) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=MyISAM;
 
 CREATE TABLE IF NOT EXISTS `si_user_role` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
+  `name` varchar(191) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=MyISAM;
