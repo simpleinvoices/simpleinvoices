@@ -158,7 +158,10 @@ include_once("./include/class/db.php");
 include_once("./include/class/index.php");
 include_once("./include/class/domain/id.php");
 include_once("./include/class/siLocal.php");
-include_once("./include/class/invoice.php");
+spl_autoload_register(function ($class_name) {
+    include "./include/class/".$class_name . '.php';
+});
+
 $db = db::getInstance();
 
 include_once("./include/sql_queries.php");

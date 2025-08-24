@@ -63,7 +63,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 		$sql = "SELECT 
 					pref_id, 
 					pref_description,
-					(SELECT (CASE  WHEN pref_enabled = 0 THEN '".{$LANG['disabled']}."' ELSE '".{$LANG['enabled']}."' END )) AS enabled
+					(SELECT (CASE  WHEN pref_enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled
 				FROM 
 					".TB_PREFIX."preferences 
 				WHERE domain_id = :domain_id 
@@ -95,11 +95,11 @@ $xml .= "<total>$count</total>";
 foreach ($preferences as $row) {
 	$xml .= "<row id='".$row['pref_id']."'>";
 	$xml .= "<cell><![CDATA[
-		<a class='index_table' title='{$LANG['view']} {$LANG['preference']} ".$row['pref_description']."' href='index.php?module=preferences&view=details&id=$row['pref_id']&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-		<a class='index_table' title='{$LANG['edit']} {$LANG['preference']} ".$row['pref_description']."' href='index.php?module=preferences&view=details&id=$row['pref_id']&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+		<a class='index_table' title='".$LANG['view']." ".$LANG['preference']." ".$row['pref_description']."' href='index.php?module=preferences&view=details&id=".$row['pref_id']."&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+		<a class='index_table' title='".$LANG['edit']." ".$LANG['preference']." ".$row['pref_description']."' href='index.php?module=preferences&view=details&id=".$row['pref_id']."&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 	]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['pref_description']."]]></cell>";
-	if ($row['enabled']=={$LANG['enabled']}) {
+	if ($row['enabled']==$LANG['enabled']) {
 		$xml .= "<cell><![CDATA[<img src='images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
 	}	
 	else {
