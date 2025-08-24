@@ -9,7 +9,8 @@ include("../config/config.php");
 
 /* check if renamed */
 /*$sql = "SELECT * FROM si_custom_fields";
-$query = mysql_query($sql);
+// Deprecated mysql_query usage - security risk
+// $query = mysql_query($sql);
 
 while($custom = mysql_fetch_array($query)) {
 	//echo $res['cf_custom_field']."<br />";
@@ -27,7 +28,8 @@ while($custom = mysql_fetch_array($query)) {
 			}
 
 			//error_log($sql);
-			$query2 = mysql_query($sql);
+			// Deprecated mysql_query usage - security risk
+			// $query2 = mysql_query($sql);
 
 			while($res = mysql_fetch_array($query2)) {
 				echo($res[0]."<br />");
@@ -57,16 +59,27 @@ function convertCustomFields() {
 				default: $case = 0;
 			}
 
-			$cf_field = "custom_field".$match[2];
+			// Validate and sanitize table components
+			$allowed_tables = array('biller', 'customer', 'product', 'invoice');
+			if (!in_array($match[1], $allowed_tables)) {
+				continue; // Skip invalid table names
+			}
+			
+			$cf_field_num = (int)$match[2]; // Ensure numeric field number
+			if ($cf_field_num < 1 || $cf_field_num > 4) {
+				continue; // Skip invalid field numbers
+			}
+			
+			$cf_field = "custom_field".$cf_field_num;
 			if($match[1] != "biller") {
-				$sql = "SELECT id, :field FROM :table";
 				$tablename = TB_PREFIX.$match[1]."s";
 			}
 			else {
-				$sql = "SELECT id, :field FROM :table";
 				$tablename = TB_PREFIX.$match[1];
 			}
-
+			
+			// Build SQL with validated table and field names (not bindable in PDO)
+			$sql = "SELECT id, `".$cf_field."` FROM `".$tablename."`";
 
 			/*
 			 * If custom field name is set
@@ -79,8 +92,6 @@ function convertCustomFields() {
 
 			//error_log($sql);
 			$tth = $dbh->prepare($sql);
-			$tth->bindValue(':table', $tablename);
-			$tth->bindValue(':field', $cf_field);
 			$tth->execute();
 			$store = false;
 
@@ -107,8 +118,6 @@ function convertCustomFields() {
 
 				//insert all data
 				$uth = $dbh->prepare($sql);
-				$uth->bindValue(':table', $tablename);
-				$uth->bindValue(':field', $cf_field);
 				$uth->execute();
 				while($res2 = $uth->fetch()) {
 					$plugin->saveInput($res2[$cf_field], $res2['id']);

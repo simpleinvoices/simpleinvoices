@@ -14,7 +14,7 @@ class ValueContent {
   }
 
   function &copy() {
-    $copy =& new ValueContent();
+    $copy = new ValueContent();
 
     foreach ($this->_items as $item) {
       $copy->add_item($item->copy());
@@ -28,7 +28,7 @@ class ValueContent {
   }
 
   function &parse($string) {
-    $value =& new ValueContent();
+    $value = new ValueContent();
 
     while ($string !== '') {
       $result = ValueContentItem::parse($string);

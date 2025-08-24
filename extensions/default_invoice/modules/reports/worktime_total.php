@@ -12,13 +12,13 @@ $myParms=Array();
     if (isset($_GET["tn"]) or isset($_GET["customer_id"])) {
         $sSQL .= "WHERE ";
         if (isset($_GET["tn"])) {
-            $sSQL .= "tn LIKE '$_GET[tn]' ";
+            $sSQL .= "tn LIKE '$_GET['tn']' ";
             $order = " ORDER BY customer_id";
         }
         if (isset($_GET["customer_id"])) {
             if (isset($_GET["tn"])) $sSQL .= "AND ";
 	        else $order = " ORDER BY tn";
-            $sSQL .= "customer_id LIKE '$_GET[customer_id]' ";
+            $sSQL .= "customer_id LIKE '$_GET['customer_id']' ";
         }
     }
     $sSQL .= $order;

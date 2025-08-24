@@ -30,8 +30,8 @@ function quote_ps($psdata) {
 
   // Replace characters having 8-bit set with their octal representation
   for ($i=0; $i<strlen($str); $i++) {
-    if (ord($str{$i}) > 127) {
-      $str = substr_replace($str, sprintf("\\%o", ord($str{$i})), $i, 1);
+    if (ord($str[$i]) > 127) {
+      $str = substr_replace($str, sprintf("\\%o", ord($str[$i])), $i, 1);
       $i += 3;
     };
   };

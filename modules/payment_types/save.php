@@ -14,7 +14,7 @@ $op = !empty( $_POST['op'] ) ? addslashes( $_POST['op'] ) : NULL;
 if (  $op === 'insert_payment_type' ) {
 
 /*Raymond - what about the '', bit doesnt seem to do an insert in me environment when i exclude it
-$sql = "INSERT INTO ".TB_PREFIX."tax VALUES ('$_POST[tax_description]','$_POST[tax_percentage]')";
+$sql = "INSERT INTO ".TB_PREFIX."tax VALUES ('$_POST['tax_description']','$_POST['tax_percentage']')";
 */
 
 	if ($db_server == 'pgsql') {

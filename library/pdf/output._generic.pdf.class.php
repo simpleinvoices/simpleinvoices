@@ -15,7 +15,7 @@ class OutputDriverGenericPDF extends OutputDriverGeneric {
     return $this->pdf_version; 
   }
 
-  function reset($media) {
+  function reset(&$media) {
     OutputDriverGeneric::reset($media);
   }
 

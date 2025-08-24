@@ -31,6 +31,6 @@
 {else}
 
 	<table id="manageGrid" style="display:none"></table>
-	{include file='../modules/payment_types/manage.js.php'}
+	{include file='payment_types/manage.js.php'}
 
 {/if}

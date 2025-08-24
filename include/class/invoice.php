@@ -421,20 +421,10 @@ class invoice {
                 break;
         }
         
-<<<<<<< HEAD
-        if (empty($query)) {
-||||||| d94f2775
         if ($query) {
-			$result =  dbQuery($sql,':domain_id', $domain_id, ':query', $query, ':qtype', $qtype);
-		} else {
-=======
-        if ($query) {
-			$result =  dbQuery($sql,':domain_id', $domain_id, ':query',"%$query%");
-		} else {
->>>>>>> origin/2013.1.beta.8
-			$result =  dbQuery($sql,':domain_id', $domain_id);
-		} else {
 			$result =  dbQuery($sql,':domain_id', $domain_id, ':query', "%$query%");
+		} else {
+			$result =  dbQuery($sql,':domain_id', $domain_id);
 		}
         return $result;
     }

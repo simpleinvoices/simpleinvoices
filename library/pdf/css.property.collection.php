@@ -25,7 +25,7 @@ class CSSPropertyCollection {
   }
 
   function &copy() {
-    $collection =& new CSSPropertyCollection();
+    $collection = new CSSPropertyCollection();
     
     for ($i = 0, $size = count($this->_properties); $i < $size; $i++) {
       $property =& $this->_properties[$i];

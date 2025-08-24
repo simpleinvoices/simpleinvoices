@@ -112,7 +112,7 @@ class FeatureToc {
     };
 
     $toc_box_document =& $pipeline->parser->process('<body><div>'.$code.'</div></body>', $pipeline, $media);
-    $context =& new FlowContext();
+    $context = new FlowContext();
     $pipeline->layout_engine->process($toc_box_document, $media, $pipeline->get_output_driver(), $context);
     $toc_box =& $toc_box_document->content[0];
 
@@ -167,7 +167,7 @@ class FeatureTocAnchorLocatorHeaders {
 
   function &run(&$pipeline, &$media, &$document) {
     $this->set_locations(array());
-    $walker =& new TreeWalkerDepthFirst(array(&$this, 'process_node'));
+    $walker = new TreeWalkerDepthFirst(array(&$this, 'process_node'));
     $walker->run($document);
     $locations = $this->get_locations();
 

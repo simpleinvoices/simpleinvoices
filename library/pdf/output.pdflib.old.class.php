@@ -25,7 +25,7 @@ class OutputDriverPdflibOld extends OutputDriverPdflib {
   function field_pushbuttonsubmit($x, $y, $w, $h, $field_name, $value, $actionURL) {
   }
 
-  function field_checkbox($x, $y, $w, $h, $name, $value, $checked) {
+  function field_checkbox($x, $y, $w, $h, $name, $value) {
   }
 
   function field_radio($x, $y, $w, $h, $groupname, $value, $checked) {

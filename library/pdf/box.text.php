@@ -150,7 +150,7 @@ class TextBox extends SimpleInlineBox {
   }
 
   function &create_empty(&$pipeline) {
-    $box =& new TextBox();
+    $box = new TextBox();
     $css_state = $pipeline->getCurrentCSSState();
 
     $box->readCSS($css_state);
@@ -423,7 +423,7 @@ class TextBox extends SimpleInlineBox {
         $num_chars = strlen($this->words[$i]);
 
         for ($j=0; $j<$num_chars; $j++) {
-          $this->_widths[] = $driver->stringwidth($this->words[$i]{$j}, 
+          $this->_widths[] = $driver->stringwidth($this->words[$i][$j], 
                                                     $font_name, 
                                                     $this->encodings[$i], 
                                                     $font_size);
@@ -614,7 +614,7 @@ class TextBox extends SimpleInlineBox {
                                      $this->encodings[$i], 
                                      $font_size->getPoints());
 
-          $driver->show_xy($this->words[$i]{$j}, $left, $top);
+          $driver->show_xy($this->words[$i][$j], $left, $top);
           $left += $this->_widths[$current_char] + $letter_spacing->getPoints();
           $current_char++;
         };

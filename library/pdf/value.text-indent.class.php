@@ -19,7 +19,7 @@ class TextIndentValuePDF extends CSSValue {
   }
 
   function &copy() {
-    $value =& new TextIndentValuePDF($this->raw_value);
+    $value = new TextIndentValuePDF($this->raw_value);
     return $value;
   }
 

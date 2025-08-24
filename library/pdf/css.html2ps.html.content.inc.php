@@ -9,7 +9,7 @@ class CSSHTML2PSHTMLContent extends CSSPropertyHandler {
   }
 
   function &default_value() { 
-    $data =& new ValueContent();
+    $data = new ValueContent();
     return $data;
   }
 

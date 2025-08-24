@@ -12,7 +12,7 @@ class ButtonResetBox extends ButtonBox {
       $text = DEFAULT_RESET_TEXT;
     };
 
-    $box =& new ButtonResetBox($text);
+    $box = new ButtonResetBox($text);
     $box->readCSS($pipeline->getCurrentCSSState());
 
     return $box;

@@ -31,8 +31,8 @@ $smarty->assign('user', $user);
 $smarty->assign('roles', $roles);
 /*
 $smarty -> assign('enabled', array(
-                                0 => $LANG[disabled],
-				1 => $LANG[enabled]
+                                0 => $LANG['disabled'],
+				1 => $LANG['enabled']
 			)
 		);
  */

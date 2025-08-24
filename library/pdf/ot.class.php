@@ -356,7 +356,7 @@ class OpenTypeFileNAME extends OpenTypeFileTable {
     $baseOffset = ftell($filehandle) + OpenTypeFileNAMERecord::sizeof()*$this->_count;
 
     for ($i=0; $i<$this->_count; $i++) {
-      $record =& new OpenTypeFileNAMERecord();
+      $record = new OpenTypeFileNAMERecord();
       $record->setBaseOffset($baseOffset);
       $record->setFontFile($this->getFontFile());
       $record->_read($filehandle);

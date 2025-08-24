@@ -70,7 +70,7 @@ function ReadTTF($fontfile, $map) {
                                 OT_NAME_ID_POSTSCRIPT_NAME);
   $ps_name_ascii = "";
   for ($i=0; $i<strlen($ps_name_ucs2); $i+=2) {
-    $ps_name_ascii .= $ps_name_ucs2{$i+1};
+    $ps_name_ascii .= $ps_name_ucs2[$i+1];
   };
 
   $font_info['FontName']           = $ps_name_ascii;
@@ -465,7 +465,7 @@ function MakeFont($fontfile, $afmfile, $destdir, $destfile, $enc) {
     fclose($f);
     if ($type=='Type1') {
       //Find first two sections and discard third one
-      $header=(ord($file{0})==128);
+      $header=(ord($file[0])==128);
       if ($header) {
         //Strip first binary header
         $file=substr($file,6);
@@ -475,7 +475,7 @@ function MakeFont($fontfile, $afmfile, $destdir, $destfile, $enc) {
         die('<B>Error:</B> font file does not seem to be valid Type1');
       };
       $size1=$pos+6;
-      if($header and ord($file{$size1})==128) {
+      if($header and ord($file[$size1])==128) {
         //Strip second binary header
         $file=substr($file,0,$size1).substr($file,$size1+6);
       }

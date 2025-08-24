@@ -11,7 +11,7 @@ class NullBox extends GenericInlineBox {
   }
   
   function &create() { 
-    $box =& new NullBox;
+    $box = new NullBox;
 
     $css_state = new CSSState(CSS::get());
     $css_state->pushState();

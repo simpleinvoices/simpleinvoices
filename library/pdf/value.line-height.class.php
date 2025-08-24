@@ -22,7 +22,7 @@ class LineHeight_Absolute extends CSSValue {
   }
 
   function &copy() {
-    $value =& new LineHeight_Absolute($this->length);
+    $value = new LineHeight_Absolute($this->length);
     return $value;
   }
 }
@@ -45,7 +45,7 @@ class LineHeight_Relative extends CSSValue {
   function units2pt($base) { }
 
   function &copy() {
-    $value =& new LineHeight_Relative($this->fraction);
+    $value = new LineHeight_Relative($this->fraction);
     return $value;
   }
 }

@@ -25,6 +25,6 @@
 
 	<table id="manageGrid" style="display:none"></table>
 
-	{include file='../modules/extensions/manage.js.php'}
+	{include file='extensions/manage.js.php'}
  
 {/if}

@@ -45,7 +45,7 @@ class SelectBox extends InlineControlBox {
     };
     $content = str_pad($content, $size*SIZE_SPACE_KOEFF + SELECT_SPACE_PADDING, ' ');
 
-    $box =& new SelectBox($name, $value, $options);
+    $box = new SelectBox($name, $value, $options);
     $box->readCSS($pipeline->getCurrentCSSState());
     $box->setup_content($content, $pipeline);
 

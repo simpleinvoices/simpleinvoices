@@ -304,7 +304,7 @@ class GenericBox {
      */     
     $y = ($this->get_top() - $bottom) + (mm2pt($media->real_height()) - $page_heights[$page_index-1]) + mm2pt($media->margins['bottom']);
 
-    $anchor =& new Anchor($link_destination, 
+    $anchor = new Anchor($link_destination, 
                           $page_index, 
                           $x, 
                           $y);

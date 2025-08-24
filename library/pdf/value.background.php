@@ -58,7 +58,7 @@ class Background extends CSSValue {
    * @return Background A copy of current object
    */
   function &copy() {
-    $value =& new Background(is_null($this->_color) ? null : $this->_color->copy(), 
+    $value = new Background(is_null($this->_color) ? null : $this->_color->copy(), 
                              is_null($this->_image) ? null : $this->_image->copy(),
                              $this->_repeat,
                              is_null($this->_position) ? null : $this->_position->copy(),

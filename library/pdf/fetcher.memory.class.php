@@ -21,7 +21,7 @@ class FetcherMemory extends Fetcher {
       return $null;
     };
 
-    $data =& new FetchedDataFile($this->content, $this->base_path);
+    $data = new FetchedDataFile($this->content, $this->base_path);
     return $data;
   }
 

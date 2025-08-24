@@ -57,7 +57,7 @@ class BRBox extends GenericBox {
    * @return BRBox new BR element object
    */
   function &create(&$pipeline) {
-    $box =& new BRBox();
+    $box = new BRBox();
     $box->readCSS($pipeline->getCurrentCSSState());
     return $box;
   }

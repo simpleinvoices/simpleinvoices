@@ -4,8 +4,9 @@
 if($_GET['id'])
 {
 	//sleep(2);
-	$sql = sprintf("SELECT cost FROM ".TB_PREFIX."products WHERE id = %d AND domain_id = %d LIMIT 1", $_GET['id'], $auth_session->domain_id);
-	$states = dbQuery($sql);
+	$product_id = (int)$_GET['id']; // Cast to integer to prevent SQL injection
+	$sql = "SELECT cost FROM ".TB_PREFIX."products WHERE id = :id AND domain_id = :domain_id LIMIT 1";
+	$states = dbQuery($sql, ':id', $product_id, ':domain_id', $auth_session->domain_id);
 //	$output = '';
 	if($states->rowCount() > 0)
 	{	

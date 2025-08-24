@@ -23,7 +23,7 @@ class siLocal
     * Function: number_clean
     * Purpose: Remove trailing and leading zeros - just to return cleaner number in invoice creation from ajax product change
     */
-    public function number_clean($num){
+    public static function number_clean($num){
 
         //remove zeros from end of number ie. 140.00000 becomes 140.
         $clean = rtrim($num, '0');

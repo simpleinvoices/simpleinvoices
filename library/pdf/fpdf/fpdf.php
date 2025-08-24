@@ -1111,7 +1111,7 @@ if (!class_exists('FPDF')) {
     }
 
     function add_field_select($x, $y, $w, $h, $name, $value, $options) {
-      $field =& new PDFFieldSelect($this,
+      $field = new PDFFieldSelect($this,
                                    $this->_generate_new_object_number(),    // Object identifier
                                    0,                                       // Generation
                                    new PDFRect($x, $y, $w, $h),             // Annotation rectangle
@@ -1138,7 +1138,7 @@ if (!class_exists('FPDF')) {
      * @TODO check if fully qualified field name will be unique in PDF file
      */
     function add_field_checkbox($x, $y, $w, $h, $name, $value, $checked) {
-      $field =& new PDFFieldCheckBox($this,
+      $field = new PDFFieldCheckBox($this,
                                      $this->_generate_new_object_number(),    // Object identifier
                                      0,                                       // Generation
                                      new PDFRect($x, $y, $w, $h),             // Annotation rectangle
@@ -1178,7 +1178,7 @@ if (!class_exists('FPDF')) {
       if (isset($this->_form_radios[$group_name])) {
         $field =& $this->_form_radios[$group_name];
       } else {
-        $field =& new PDFFieldRadioGroup($this, 
+        $field = new PDFFieldRadioGroup($this, 
                                          $this->_generate_new_object_number(),
                                          0,
                                          $group_name);
@@ -1189,7 +1189,7 @@ if (!class_exists('FPDF')) {
         $this->_form_radios[$group_name] =& $field;
       };
 
-      $radio =& new PDFFieldRadio($this, 
+      $radio = new PDFFieldRadio($this, 
                                   $this->_generate_new_object_number(),
                                   0,
                                   new PDFRect($x, $y, $w, $h),
@@ -1213,7 +1213,7 @@ if (!class_exists('FPDF')) {
      * @return Field number
      */
     function add_field_text($x, $y, $w, $h, $value, $field_name) {
-      $field =& new PDFFieldText($this, 
+      $field = new PDFFieldText($this, 
                                  $this->_generate_new_object_number(),
                                  0,
                                  new PDFRect($x, $y, $w, $h), 
@@ -1229,7 +1229,7 @@ if (!class_exists('FPDF')) {
     }
 
     function add_field_multiline_text($x, $y, $w, $h, $value, $field_name) {
-      $field =& new PDFFieldMultilineText($this, 
+      $field = new PDFFieldMultilineText($this, 
                                           $this->_generate_new_object_number(),
                                           0,
                                           new PDFRect($x, $y, $w, $h), 
@@ -1257,7 +1257,7 @@ if (!class_exists('FPDF')) {
      * @return Field number
      */
     function add_field_password($x, $y, $w, $h, $value, $field_name) {
-      $field =& new PDFFieldPassword($this,
+      $field = new PDFFieldPassword($this,
                                      $this->_generate_new_object_number(),
                                      0,
                                      new PDFRect($x, $y, $w, $h),
@@ -1273,7 +1273,7 @@ if (!class_exists('FPDF')) {
     }
 
     function add_field_pushbuttonimage($x, $y, $w, $h, $field_name, $value, $actionURL) {
-      $field =& new PDFFieldPushButtonImage($this,
+      $field = new PDFFieldPushButtonImage($this,
                                             $this->_generate_new_object_number(),
                                             0,
                                             new PDFRect($x, $y, $w, $h),
@@ -1290,7 +1290,7 @@ if (!class_exists('FPDF')) {
     }
 
     function add_field_pushbuttonsubmit($x, $y, $w, $h, $field_name, $value, $actionURL) {
-      $field =& new PDFFieldPushButtonSubmit($this,
+      $field = new PDFFieldPushButtonSubmit($this,
                                              $this->_generate_new_object_number(),
                                              0,
                                              new PDFRect($x, $y, $w, $h),
@@ -1307,7 +1307,7 @@ if (!class_exists('FPDF')) {
     }
 
     function add_field_pushbuttonreset($x, $y, $w, $h) {
-      $field =& new PDFFieldPushButtonReset($this,
+      $field = new PDFFieldPushButtonReset($this,
                                             $this->_generate_new_object_number(),
                                             0,
                                             new PDFRect($x, $y, $w, $h),
@@ -1322,7 +1322,7 @@ if (!class_exists('FPDF')) {
     }
 
     function add_field_pushbutton($x, $y, $w, $h) {
-      $field =& new PDFFieldPushButton($this,
+      $field = new PDFFieldPushButton($this,
                                        $this->_generate_new_object_number(),
                                        0,
                                        new PDFRect($x, $y, $w, $h),
@@ -1768,7 +1768,7 @@ if (!class_exists('FPDF')) {
     }
 
     function AddPage($orientation='') {
-      $this->_pages[] =& new PDFPage($this, $this->_generate_new_object_number(), 0);
+      $this->_pages[] = new PDFPage($this, $this->_generate_new_object_number(), 0);
 
       //Start a new page
       if ($this->state==0) {
@@ -1905,7 +1905,7 @@ if (!class_exists('FPDF')) {
 
       $l=strlen($s);
       for($i=0; $i<$l; $i++) {
-        $w+=$cw[$s{$i}];
+        $w+=$cw[$s[$i]];
       };
 
       return $w*$this->FontSize/1000;
@@ -2253,7 +2253,7 @@ if (!class_exists('FPDF')) {
       while($i<$nb)
 	{
           //Get next character
-          $c=$s{$i};
+          $c=$s[$i];
           if($c=="\n")
             {
               //Explicit line break
@@ -2341,7 +2341,7 @@ if (!class_exists('FPDF')) {
       $nl=1;
       while ($i<$nb) {
         //Get next character
-        $c=$s{$i};
+        $c=$s[$i];
         if ($c=="\n") {
           //Explicit line break
           $this->Cell($w,$h,substr($s,$j,$i-$j),0,2,'',0,$link);
@@ -2695,12 +2695,12 @@ if (!class_exists('FPDF')) {
         fclose($f);
         $compressed=(substr($file,-2)=='.z');
         if(!$compressed && isset($info['length2'])) {
-          $header=(ord($font{0})==128);
+          $header=(ord($font[0])==128);
           if($header) {
             //Strip first binary header
             $font=substr($font,6);
           }
-          if($header && ord($font{$info['length1']})==128) {
+          if($header && ord($font[$info['length1']])==128) {
             //Strip second binary header
             $font=substr($font,0,$info['length1']).substr($font,$info['length1']+6);
           }
@@ -2995,7 +2995,7 @@ if (!class_exists('FPDF')) {
       if(!$orientation) {
         $orientation=$this->DefOrientation;
       } else {
-        $orientation=strtoupper($orientation{0});
+        $orientation=strtoupper($orientation[0]);
         if($orientation!=$this->DefOrientation) {
           $this->OrientationChanges[$this->page]=true;
         };

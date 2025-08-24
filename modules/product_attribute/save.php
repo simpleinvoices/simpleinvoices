@@ -69,7 +69,7 @@ else if (  $op === 'edit_product_attribute' ) {
 
 		}
 
-	else if ($_POST[action] == "Cancel") {
+	else if ($_POST['action'] == "Cancel") {
 
 		//header( 'refresh: 0; url=manage_preferences.php' );
 		$refresh_total = "<meta http-equiv='refresh' content='0;url=index.php?module=product_attribute&amp;view=manage' />";

@@ -3,7 +3,7 @@
 
 class WhitespaceBox extends TextBox {
   function &create(&$pipeline) {
-    $box =& new WhitespaceBox();
+    $box = new WhitespaceBox();
     $box->readCSS($pipeline->getCurrentCSSState());
     $box->add_subword(" ", 'iso-8859-1', array());
     return $box;

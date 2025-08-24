@@ -6,11 +6,11 @@ class CSSPseudoLinkTarget extends CSSPropertyHandler {
   function default_value() { return ""; }
 
   function is_external_link($value) {
-    return (strlen($value) > 0 && $value{0} != "#");
+    return (strlen($value) > 0 && $value[0] != "#");
   }
 
   function is_local_link($value) {
-    return (strlen($value) > 0 && $value{0} == "#");
+    return (strlen($value) > 0 && $value[0] == "#");
   }
 
   function parse($value, &$pipeline) { 

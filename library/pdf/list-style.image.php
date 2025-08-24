@@ -10,7 +10,7 @@ class ListStyleImage {
   }
 
   function &copy() {
-    $value =& new ListStyleImage($this->_url, $this->_image);
+    $value = new ListStyleImage($this->_url, $this->_image);
     return $value;
   }
 

@@ -15,7 +15,7 @@ function ReadMap($enc)
   $cc2gn=array();
   foreach($a as $l)
     {
-      if($l{0}=='!')
+      if($l[0]=='!')
         {
           $e=preg_split('/[ \\t]+/',rtrim($l));
           $cc=hexdec(substr($e[0],1));
@@ -363,7 +363,7 @@ function MakeFont($fontfile,$afmfile,$destdir,$destfile,$enc='cp1252',$patch=arr
       if($type=='Type1')
         {
           //Find first two sections and discard third one
-          $header=(ord($file{0})==128);
+          $header=(ord($file[0])==128);
           if($header)
             {
               //Strip first binary header
@@ -373,7 +373,7 @@ function MakeFont($fontfile,$afmfile,$destdir,$destfile,$enc='cp1252',$patch=arr
           if(!$pos)
             die('<B>Error:</B> font file does not seem to be valid Type1');
           $size1=$pos+6;
-          if($header and ord($file{$size1})==128)
+          if($header and ord($file[$size1])==128)
             {
               //Strip second binary header
               $file=substr($file,0,$size1).substr($file,$size1+6);

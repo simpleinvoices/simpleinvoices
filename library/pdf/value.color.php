@@ -25,7 +25,7 @@ class Color extends CSSValue {
   }
 
   function &copy() {
-    $color =& new Color();
+    $color = new Color();
 
     $color->r = $this->r;
     $color->g = $this->g;

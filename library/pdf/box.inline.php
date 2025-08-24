@@ -15,7 +15,7 @@ class LineBox {
   function LineBox() { }
 
   function &copy() {
-    $box =& new LineBox;
+    $box = new LineBox;
     $box->top    = $this->top;
     $box->right  = $this->right;
     $box->bottom = $this->bottom;
@@ -99,7 +99,7 @@ class InlineBox extends GenericInlineBox {
                                          $pipeline);
 
     } else {
-      $box =& new InlineBox();
+      $box = new InlineBox();
 
       $css_state =& $pipeline->getCurrentCSSState();
 
@@ -134,7 +134,7 @@ class InlineBox extends GenericInlineBox {
   }
 
   function &create_from_text($text, $white_space, &$pipeline) {
-    $box =& new InlineBox();
+    $box = new InlineBox();
     $box->readCSS($pipeline->getCurrentCSSState());
 
     // Apply/inherit text-related CSS properties 

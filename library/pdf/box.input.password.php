@@ -15,7 +15,7 @@ class PasswordInputBox extends TextInputBox {
      */
     $name = $root->get_attribute('name');
 
-    $box =& new PasswordInputBox($text, $root->get_attribute("value"), $name);
+    $box = new PasswordInputBox($text, $root->get_attribute("value"), $name);
     $box->readCSS($pipeline->getCurrentCSSState());
 
     $ibox = InlineBox::create_from_text(" ", WHITESPACE_PRE, $pipeline);

@@ -17,7 +17,7 @@
  */
 
 if(isset($_POST['save'])) {
-	saveCustomField($_POST[plugin],$_POST[categorie],$_POST[name],$_POST[description]);
+	saveCustomField($_POST['plugin'],$_POST['categorie'],$_POST['name'],$_POST['description']);
 }
 
 ini_set("display_errors","On");

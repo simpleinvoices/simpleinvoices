@@ -45,7 +45,7 @@ class Font {
 
     $length = strlen($string);
     for ($i=0; $i<$length; $i++) {
-      $width += $this->char_widths[$string{$i}];
+      $width += $this->char_widths[$string[$i]];
     };
 
     return $width;

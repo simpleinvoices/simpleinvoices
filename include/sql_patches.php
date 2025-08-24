@@ -563,31 +563,31 @@ INSERT INTO `".TB_PREFIX."system_defaults` (`id`, `name`, `value`) VALUES
 	}
 
 	$patch['116']['name'] = "System defaults conversion patch - set default biller";
-	$patch['116']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value = $defaults[def_biller] where name = 'biller'";
+	$patch['116']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value = $defaults['def_biller'] where name = 'biller'";
 	$patch['116']['date'] = "20070523";
 
 	$patch['117']['name'] = "System defaults conversion patch - set default customer";
-	$patch['117']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value = $defaults[def_customer] where name = 'customer'";
+	$patch['117']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value = $defaults['def_customer'] where name = 'customer'";
 	$patch['117']['date'] = "20070523";
 
 	$patch['118']['name'] = "System defaults conversion patch - set default tax";
-	$patch['118']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value = $defaults[def_tax] where name = 'tax'";
+	$patch['118']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value = $defaults['def_tax'] where name = 'tax'";
 	$patch['118']['date'] = "20070523";
 
 	$patch['119']['name'] = "System defaults conversion patch - set default invoice reference";
-	$patch['119']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value = $defaults[def_inv_preference] where name = 'preference'";
+	$patch['119']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value = $defaults['def_inv_preference'] where name = 'preference'";
 	$patch['119']['date'] = "20070523";
 
 	$patch['120']['name'] = "System defaults conversion patch - set default number of line items";
-	$patch['120']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value = $defaults[def_number_line_items] where name = 'line_items'";
+	$patch['120']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value = $defaults['def_number_line_items'] where name = 'line_items'";
 	$patch['120']['date'] = "20070523";
 
 	$patch['121']['name'] = "System defaults conversion patch - set default invoice template";
-	$patch['121']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value = '$defaults[def_inv_template]' where name = 'template'";
+	$patch['121']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value = '$defaults['def_inv_template']' where name = 'template'";
 	$patch['121']['date'] = "20070523";
 
 	$patch['122']['name'] = "System defaults conversion patch - set default paymemt type";
-	$patch['122']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value = $defaults[def_payment_type] where name = 'payment_type'";
+	$patch['122']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET value = $defaults['def_payment_type'] where name = 'payment_type'";
 	$patch['122']['date'] = "20070523";
 
 	//sept release

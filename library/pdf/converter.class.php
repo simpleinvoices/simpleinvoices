@@ -46,8 +46,8 @@ class PurePHPConverter {
 
   function something_to_utf8($html, &$mapping) {
     for ($i=0; $i < strlen($html); $i++) {
-      $replacement = code_to_utf8($mapping[$html{$i}]);
-      if ($replacement != $html{$i}) {
+      $replacement = code_to_utf8($mapping[$html[$i]]);
+      if ($replacement != $html[$i]) {
         $html = substr_replace($html, $replacement, $i, 1);
         $i += strlen($replacement) - 1;
       };

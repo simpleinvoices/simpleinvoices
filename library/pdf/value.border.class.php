@@ -9,14 +9,14 @@ class BorderPDF extends CSSValue {
   var $bottom;
 
   function BorderPDF() {
-    $this->left   =& new EdgePDF();
-    $this->right  =& new EdgePDF();
-    $this->top    =& new EdgePDF();
-    $this->bottom =& new EdgePDF();
+    $this->left   = new EdgePDF();
+    $this->right  = new EdgePDF();
+    $this->top    = new EdgePDF();
+    $this->bottom = new EdgePDF();
   }
 
   function create($data) {
-    $border         =& new BorderPDF();
+    $border         = new BorderPDF();
     $border->left   =& EdgePDF::create($data['left']);
     $border->right  =& EdgePDF::create($data['right']);
     $border->top    =& EdgePDF::create($data['top']);
@@ -29,7 +29,7 @@ class BorderPDF extends CSSValue {
    * case (PHP 5.1.1, Win)
    */
   function &copy() {
-    $border =& new BorderPDF();
+    $border = new BorderPDF();
 
     if ($this->left !== CSS_PROPERTY_INHERIT) {
       $border->left = $this->left->copy();

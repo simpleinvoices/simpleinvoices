@@ -38,7 +38,7 @@
 
 
 	<table id="manageGrid" style="display:none"></table>
-	{include file='../modules/invoices/manage.js.php'}
+	{include file='invoices/manage.js.php'}
 
 
 	<div id="export_dialog" class="flora" title="Export">

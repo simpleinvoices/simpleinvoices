@@ -214,7 +214,7 @@ class BrokenImgBox extends GenericImgBox {
 
     $driver->restore();
 
-    $strategy =& new StrategyLinkRenderingNormal();
+    $strategy = new StrategyLinkRenderingNormal();
     $strategy->apply($this, $driver);
 
     return true;
@@ -263,7 +263,7 @@ class ImgBox extends GenericImgBox {
 
       $alt = $root->get_attribute('alt');
 
-      $box =& new BrokenImgBox($width, $height, $alt);
+      $box = new BrokenImgBox($width, $height, $alt);
 
       $box->readCSS($pipeline->getCurrentCSSState());
 
@@ -277,7 +277,7 @@ class ImgBox extends GenericImgBox {
       
       return $box;
     } else {
-      $box =& new ImgBox($src_img);
+      $box = new ImgBox($src_img);
       $box->readCSS($pipeline->getCurrentCSSState());
       $box->_setupSize();
      
@@ -341,7 +341,7 @@ class ImgBox extends GenericImgBox {
                           $this->get_left(), $this->get_bottom(),
                           $this->get_width() / imagesx($this->image), $this->get_height() / imagesy($this->image));
 
-    $strategy =& new StrategyLinkRenderingNormal();
+    $strategy = new StrategyLinkRenderingNormal();
     $strategy->apply($this, $driver);
 
     return true;

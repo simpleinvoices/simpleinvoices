@@ -32,7 +32,7 @@ class WCNone extends WidthConstraint {
   function apply_inverse($w, $pw) { return $pw; }
 
   function &_copy() { 
-    $copy =& new WCNone();
+    $copy = new WCNone();
     return $copy;
   }
 
@@ -63,7 +63,7 @@ class WCConstant extends WidthConstraint {
   }
 
   function &_copy() { 
-    $copy =& new WCConstant($this->width); 
+    $copy = new WCConstant($this->width); 
     return $copy;
   }
 
@@ -103,7 +103,7 @@ class WCFraction extends WidthConstraint {
   }
 
   function &_copy() { 
-    $copy =& new WCFraction($this->fraction); 
+    $copy = new WCFraction($this->fraction); 
     return $copy;
   }
 

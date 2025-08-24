@@ -42,7 +42,7 @@ function getLogo($biller) {
 	$url = getURL();
 
 	if(!empty($biller['logo'])) {
-		return $url."/templates/invoices/logos/$biller[logo]";
+		return $url."/templates/invoices/logos/".$biller['logo'];
 	}
 	else {
 		return $url."/templates/invoices/logos/_default_blank_logo.png";

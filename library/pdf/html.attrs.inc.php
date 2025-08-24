@@ -650,14 +650,14 @@ function attr_font_size_before(&$root, &$pipeline) {
    */
   if ($size == '') { return; };
 
-  if ($size{0} == '-') {
+  if ($size[0] == '-') {
     $koeff = 1;
     $repeats = (int)substr($size,1);
     for ($i=0; $i<$repeats; $i++) {
       $koeff *= 1/1.2;
     };
     $newsize = sprintf('%.2fem', round($koeff, 2));
-  } else if ($size{0} == '+') {
+  } else if ($size[0] == '+') {
     $koeff = 1;
     $repeats = (int)substr($size,1);
     for ($i=0; $i<$repeats; $i++) {

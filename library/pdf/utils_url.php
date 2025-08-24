@@ -35,7 +35,7 @@ function guess_url($path, $baseurl) {
    */
   if ($base_scheme == "file" && PHP_OS == "WINNT") {
     if (strlen($base_path) > 0) {
-      if ($base_path{0} != "/") {
+      if ($base_path[0] != "/") {
         $base_path = "/".$base_path;
       };
     };

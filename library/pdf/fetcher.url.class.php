@@ -197,7 +197,7 @@ class FetcherUrl extends Fetcher {
     if (substr($location, 0, 7) == "http://") { return $location; };
     if (substr($location, 0, 8) == "https://") { return $location; };
 
-    if ($location{0} == "/") {
+    if ($location[0] == "/") {
       return $this->protocol."://".$this->host.$location;
     };
 
@@ -295,7 +295,7 @@ class FetcherUrl extends Fetcher {
   function fetch_file() {
     if (PHP_OS == "WINNT") {
       $path = substr($this->url, 7);
-      if ($path{0} == "/") { $path = substr($path, 1); };
+      if ($path[0] == "/") { $path = substr($path, 1); };
     } else {
       $path = substr($this->url, 7);
     };

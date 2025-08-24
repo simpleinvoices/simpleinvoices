@@ -109,14 +109,14 @@ class ButtonImageBox extends ImgBox {
       $alt = $root->get_attribute('alt');
       
       $css_state =& $pipeline->getCurrentCSSState();
-      $box =& new ButtonBrokenImagebox($width, $height, $alt, $name, $value, 
+      $box = new ButtonBrokenImagebox($width, $height, $alt, $name, $value, 
                                        $css_state->getProperty(CSS_HTML2PS_FORM_ACTION));
       $box->readCSS($css_state);
       return $box;
     };
 
     $css_state =& $pipeline->getCurrentCSSState();
-    $box =& new ButtonImageBox($src_img, $name, $value, 
+    $box = new ButtonImageBox($src_img, $name, $value, 
                                $css_state->getProperty(CSS_HTML2PS_FORM_ACTION));
     $box->readCSS($css_state);
     $box->_setupSize();

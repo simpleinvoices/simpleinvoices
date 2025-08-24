@@ -26,7 +26,7 @@ class CSSPropertyDeclaration {
       return $null;
     };
 
-    $declaration =& new CSSPropertyDeclaration();
+    $declaration = new CSSPropertyDeclaration();
     $declaration->_code = $code;
 
     if (preg_match("/^(.*)!\s*important\s*$/", $value, $matches)) {
@@ -45,7 +45,7 @@ class CSSPropertyDeclaration {
   }
 
   function &copy() {
-    $declaration =& new CSSPropertyDeclaration();
+    $declaration = new CSSPropertyDeclaration();
     $declaration->_code = $this->_code;
 
     if (is_object($this->_value)) {

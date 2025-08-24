@@ -6,7 +6,7 @@ function &parse_css_property($string, &$pipeline) {
 }
 
 function &parse_css_properties($string, &$pipeline) {
-  $property_collection =& new CSSPropertyCollection();
+  $property_collection = new CSSPropertyCollection();
 
   while ($string != '') {
     $string = parse_css_properties_property($string, $code);

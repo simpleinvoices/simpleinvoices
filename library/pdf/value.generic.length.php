@@ -16,7 +16,7 @@ class Value extends CSSValue {
   }
 
   function &copy() {
-    $value =& new Value;
+    $value = new Value;
     $value->_unit   = $this->_unit;
     $value->_number = $this->_number;
     $value->_points = $this->_points;
@@ -34,7 +34,7 @@ class Value extends CSSValue {
   }
 
   function &fromData($number, $unit) {
-    $value =& new Value;
+    $value = new Value;
     $value->_unit   = $unit;
     $value->_number = $number;
     $value->_points = 0;
@@ -46,7 +46,7 @@ class Value extends CSSValue {
    * representation
    */
   function &fromString($string_value) {
-    $value =& new Value;
+    $value = new Value;
     $value->_unit   = $value->unit_from_string($string_value);
     $value->_number = (double)$string_value;
     $value->_points = 0;

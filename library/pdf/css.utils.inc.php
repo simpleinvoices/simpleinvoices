@@ -56,7 +56,7 @@ function _fix_tag_display($default_display, &$state, &$pipeline) {
 }
 
 function is_percentage($value) { 
-  return $value{strlen($value)-1} == "%"; 
+  return $value[strlen($value)-1] == "%"; 
 }
 
 /**
@@ -133,7 +133,7 @@ function css_process_escapes_callback($matches) {
 function css_remove_value_quotes($value) {
   if (strlen($value) == 0) { return $value; };
 
-  if ($value{0} === "'" || $value{0} === "\"") {
+  if ($value[0] === "'" || $value[0] === "\"") {
     $value = substr($value, 1, strlen($value)-2);
   };
   return $value;

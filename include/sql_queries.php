@@ -698,11 +698,11 @@ function insertProduct($enabled=1,$visible=1, $domain_id='') {
     	$logger->log('Attr key: '.$k, Zend_Log::INFO);
     	$logger->log('Attr value: '.var_export($v,true), Zend_Log::INFO);
     	$logger->log('Attr set value: '.$k, Zend_Log::INFO);
-        if($_POST['attribute'.$v[id]] == 'true')
+        if($_POST['attribute'.$v['id']] == 'true')
         {
             //$attr[$k]['attr_id'] = $v['id'];
-            $attr[$v['id']] = $_POST['attribute'.$v[id]];
-//            $attr[$k]['a$v['id']] = $_POST['attribute'.$v[id]];
+            $attr[$v['id']] = $_POST['attribute'.$v['id']];
+//            $attr[$k]['a$v['id']] = $_POST['attribute'.$v['id']];
         }
 
     }
@@ -783,9 +783,9 @@ function updateProduct($domain_id='') {
     $attr = array();
     foreach($attributes as $k=>$v)
     {
-        if($_POST['attribute'.$v[id]] == 'true')
+        if($_POST['attribute'.$v['id']] == 'true')
         {
-            $attr[$v['id']] = $_POST['attribute'.$v[id]];
+            $attr[$v['id']] = $_POST['attribute'.$v['id']];
         }
 
     }
@@ -814,21 +814,21 @@ function updateProduct($domain_id='') {
 
 	return dbQuery($sql,
 		':domain_id',$domain_id,
-		':description', $_POST[description],
+		':description', $_POST['description'],
 		':enabled', $_POST['enabled'],
-		':notes', $_POST[notes],
+		':notes', $_POST['notes'],
 		':default_tax_id', $_POST['default_tax_id'],
-		':custom_field1', $_POST[custom_field1],
-		':custom_field2', $_POST[custom_field2],
-		':custom_field3', $_POST[custom_field3],
-		':custom_field4', $_POST[custom_field4],
-		':unit_price', $_POST[unit_price],
-		':cost', $_POST[cost],
-		':reorder_level', $_POST[reorder_level],
+		':custom_field1', $_POST['custom_field1'],
+		':custom_field2', $_POST['custom_field2'],
+		':custom_field3', $_POST['custom_field3'],
+		':custom_field4', $_POST['custom_field4'],
+		':unit_price', $_POST['unit_price'],
+		':cost', $_POST['cost'],
+		':reorder_level', $_POST['reorder_level'],
 		':attribute', json_encode($attr),
 		':notes_as_description', $notes_as_description,
 		':show_description', $show_description,
-		':id', $_GET[id]
+		':id', $_GET['id']
 		);
 }
 
@@ -1066,7 +1066,7 @@ function taxesGroupedForInvoice($invoice_id, $domain_id='')
 	$sql = "SELECT
 				tax.tax_description as tax_name,
 				SUM(item_tax.tax_amount) as tax_amount,
-				item_tax.tax_rate as tax_rate,
+				MAX(item_tax.tax_rate) as tax_rate,
 				count(*) as count
 			FROM
 				".TB_PREFIX."invoice_item_tax item_tax,
@@ -1193,7 +1193,7 @@ function getSystemDefaults($domain_id='') {
 	$default = null;
 
 	while($default = $sth->fetch()) {
-		$defaults["$default[name]"] = $default['value'];
+		$defaults[$default['name']] = $default['value'];
 	}
 
     if (getNumberOfDoneSQLPatches() > "198")
@@ -1210,7 +1210,7 @@ function getSystemDefaults($domain_id='') {
         $default = null;
 
         while($default = $sth->fetch()) {
-            $defaults["$default[name]"] = $default['value'];	// if setting is redefined, overwrite the previous value
+            $defaults[$default['name']] = $default['value'];	// if setting is redefined, overwrite the previous value
         }
     }
 
@@ -1420,7 +1420,7 @@ function updateBiller() {
 		':custom_field3', $_POST['custom_field3'],
 		':custom_field4', $_POST['custom_field4'],
 		':enabled', $_POST['enabled'],
-		':id', $_GET[id]
+		':id', $_GET['id']
 		);
 }
 
@@ -1899,13 +1899,13 @@ function insertInvoice($type, $domain_id='') {
 				)";
 	}
 
-    $pref_group=getPreference($_POST[preference_id]);
+    $pref_group=getPreference($_POST['preference_id']);
 
 	//also set the current time (if null or =00:00:00)
 	$clean_date=SqlDateWithTime($_POST['date']);
 
 	$sth= dbQuery($sql,
-		#':index_id', index::next('invoice',$pref_group[index_group], $domain_id,$_POST[biller_id]),
+		#':index_id', index::next('invoice',$pref_group['index_group'], $domain_id,$_POST['biller_id']),
 		':index_id',		index::next('invoice',$pref_group['index_group'], $domain_id),
 		':domain_id',		$domain_id,
 		':biller_id',		$_POST['biller_id'],
@@ -1920,9 +1920,9 @@ function insertInvoice($type, $domain_id='') {
 		':customField4',	$_POST['customField4']
 		);
 
-    #index::increment('invoice',$pref_group[index_group], $domain_id,$_POST[biller_id]);
+    #index::increment('invoice',$pref_group['index_group'], $domain_id,$_POST['biller_id']);
 	// Needed only if si_index table exists
-    index::increment('invoice',$pref_group[index_group], $domain_id);
+    index::increment('invoice',$pref_group['index_group'], $domain_id);
 
     return $sth;
 }
@@ -2065,8 +2065,8 @@ function insertInvoiceItem($invoice_id,$quantity,$product_id,$line_number,$line_
 		':quantity', $quantity,
 		':product_id', $product_id,
 		':unit_price', $unit_price,
-	//	':tax_id', $tax[tax_id],
-	//	':tax_percentage', $tax[tax_percentage],
+	//	':tax_id', $tax['tax_id'],
+	//	':tax_percentage', $tax['tax_percentage'],
 		':tax_amount', $tax_total,
 		':gross_total', $gross_total,
 		':description', trim($description),
@@ -2101,7 +2101,7 @@ function getTaxesPerLineItem($line_item_tax_id, $quantity, $unit_price, $domain_
 		$tax_total = $tax_total + $tax_amount;
 
 		//$logger->log('Qty: '.$quantity.' Unit price: '.$unit_price, Zend_Log::INFO);
-		//$logger->log('Tax rate: '.$tax[tax_percentage].' Tax type: '.$tax['tax_type'].' Tax $: '.$tax_amount, Zend_Log::INFO);
+		//$logger->log('Tax rate: '.$tax['tax_percentage'].' Tax type: '.$tax['tax_type'].' Tax $: '.$tax_amount, Zend_Log::INFO);
 
 	}
 	return $tax_total;
@@ -2163,7 +2163,7 @@ function invoice_item_tax($invoice_item_id, $line_item_tax_id, $unit_price, $qua
 			// $tax_total = $tax_total + $tax_amount;
 
 			$logger->log('ITEM :: Qty: '.$quantity.' Unit price: '.$unit_price, Zend_Log::INFO);
-			$logger->log('ITEM :: Tax rate: '.$tax[tax_percentage].' Tax type: '.$tax['type'].' Tax $: '.$tax_amount, Zend_Log::INFO);
+			$logger->log('ITEM :: Tax rate: '.$tax['tax_percentage'].' Tax type: '.$tax['type'].' Tax $: '.$tax_amount, Zend_Log::INFO);
 
 			$sql = "INSERT 
 						INTO 
@@ -2312,7 +2312,7 @@ function printEntries($menu,$id,$depth) {
 			//echo "&nbsp;&nbsp;&nbsp;";
 		}
 		echo "
-		<li><a href='".$tempentry[link]."'>".htmlsafe($tempentry[name])."</a>
+		<li><a href='".$tempentry['link']."'>".htmlsafe($tempentry['name'])."</a>
 		";
 		
 		if(isset($menu[$tempentry["id"]])) {
@@ -2979,15 +2979,15 @@ function patch126() {
 	while($res = $sth->fetch()) {
 		$sql = "INSERT INTO ".TB_PREFIX."products (id, description, unit_price, enabled, visible) 
 			VALUES (NULL, :description, :gross_total, '0',  '0')";
-		dbQuery($sql, ':description', $res[description], ':total', $res[gross_total]);
+		dbQuery($sql, ':description', $res['description'], ':total', $res['gross_total']);
 		$id = lastInsertId();
 
 		$sql = "UPDATE  ".TB_PREFIX."invoice_items SET product_id = :id, unit_price = :price WHERE ".TB_PREFIX."invoice_items.id = :item";
 
 		dbQuery($sql,
 			':id', $id[0],
-			':price', $res[gross_total],
-			':item', $res[id]
+			':price', $res['gross_total'],
+			':item', $res['id']
 			);
 	}
 }

@@ -28,7 +28,7 @@ class CSSValuePercentage extends CSSValue {
     };
 
     $strlen = strlen($value);
-    if ($value{$strlen-1} == '%') {
+    if ($value[$strlen-1] == '%') {
       $class_object->init((float)$value, VALUE_PERCENTAGE);
       return $class_object;
     };

@@ -3,7 +3,7 @@
 
 {if $smarty.post.description != "" && $smarty.post.id != null } 
 
-	{include file="../templates/default/products/save.tpl"}
+	{include file="products/save.tpl"}
 
 {else}
 {* if  name was inserted *} 

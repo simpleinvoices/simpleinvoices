@@ -105,7 +105,7 @@ class CSSRuleset {
     // remove the UTF8 byte-order mark from the beginning of the file (several high-order symbols at the beginning)
     $pos = 0;
     $len = strlen($css);
-    while (ord($css{$pos}) > 127 && $pos < $len) { $pos ++; };
+    while (ord($css[$pos]) > 127 && $pos < $len) { $pos ++; };
     $css = substr($css, $pos);
 
     // Process @media rules; 

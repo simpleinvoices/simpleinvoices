@@ -160,7 +160,7 @@ function parse_css_selector($raw_selector) {
     return array(SELECTOR_SEQUENCE, array(parse_css_selector($matches[1]), parse_css_selector($matches[2])));
   };
 
-  switch ($raw_selector{0}) {
+  switch ($raw_selector[0]) {
   case '#':
     return array(SELECTOR_ID,    substr($raw_selector,1));
   case '.':
@@ -212,7 +212,7 @@ function parse_css_selectors($raw_selectors) {
 //       return $null;
 //     };
 
-//     $collection =& new CSSPropertyCollection();
+//     $collection = new CSSPropertyCollection();
 //     $collection->addProperty(CSSPropertyDeclaration::create($code, trim($matches[2]), $pipeline));
 //     return $collection;
 //   } elseif (preg_match("/@import\s+\"(.*)\";/",$property, $matches)) {
@@ -228,7 +228,7 @@ function parse_css_selectors($raw_selectors) {
 //     $collection =& css_import(trim($matches[1]), $pipeline);
 //     return $collection;
 //   } else {
-//     $collection =& new CSSPropertyCollection();
+//     $collection = new CSSPropertyCollection();
 //     return $collection;
 //   };
 // }
