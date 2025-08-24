@@ -305,7 +305,10 @@
 				"custom_field3":"",
 				"custom_field4":"",
 				"enabled":"1",
-				"visible":"1"
+				"visible":"1",
+				"attribute":"",
+				"notes_as_description":"",
+				"show_description":""
 			},
 			{
 				"id":"2",
@@ -321,7 +324,10 @@
 				"custom_field3":"",
 				"custom_field4":"",
 				"enabled":"1",
-				"visible":"1"
+				"visible":"1",
+				"attribute":"",
+				"notes_as_description":"",
+				"show_description":""
 			},
 			{
 				"id":"3",
@@ -337,7 +343,10 @@
 				"custom_field3":"",
 				"custom_field4":"",
 				"enabled":"1",
-				"visible":"1"
+				"visible":"1",
+				"attribute":"",
+				"notes_as_description":"",
+				"show_description":""
 			},
 			{
 				"id":"4",
@@ -353,7 +362,10 @@
 				"custom_field3":"",
 				"custom_field4":"",
 				"enabled":"1",
-				"visible":"1"
+				"visible":"1",
+				"attribute":"",
+				"notes_as_description":"",
+				"show_description":""
 			},
 			{
 				"id":"5",
@@ -369,7 +381,10 @@
 				"custom_field3":"",
 				"custom_field4":"",
 				"enabled":"1",
-				"visible":"1"
+				"visible":"1",
+				"attribute":"",
+				"notes_as_description":"",
+				"show_description":""
 			}
         ]
     ,
@@ -378,12 +393,16 @@
             {
                 "id": "1",
                 "name": "Size",
-                "type_id": "1"
+                "type_id": "1",
+		"enabled":"1",
+		"visible":"1"
             },
             {
                 "id": "2",
                 "name": "Colour",
-                "type_id": "1"
+                "type_id": "1",
+		"enabled":"1",
+		"visible":"1"
             }
         ]
     ,
