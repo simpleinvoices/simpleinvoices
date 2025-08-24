@@ -1,2 +1,0 @@
-[24-Aug-2025 07:35:57 Europe/London] PHP Fatal error:  Uncaught  --> Smarty: Plugin 'siLocal_number' not callable <-- 
-  thrown in /var/www/html/si8/si/simpleinvoices/vendor/smarty/smarty/libs/sysplugins/smarty_internal_method_registerplugin.php on line 50

@@ -70,8 +70,8 @@ function sql($type='', $dir, $sort, $rp, $page )
                 p.description as product,
                 (select sum(tax_amount) from ".TB_PREFIX."expense_item_tax where expense_id = EID) as tax,
                 (select tax + e.amount) as total,
-                (CASE WHEN status = 1 THEN '".$LANG['paid']."'
-                      WHEN status = 0 THEN '".$LANG['not_paid']."'
+                (CASE WHEN status = 1 THEN '".{$LANG['paid']}."'
+                      WHEN status = 0 THEN '".{$LANG['not_paid']}."'
                       END) AS status_wording
 			FROM 
 				".TB_PREFIX."expense e
@@ -121,12 +121,12 @@ $xml .= "<total>$count</total>";
 
 foreach ($customers as $row) {
     
-    $status_wording = $row['status']==1?$LANG['paid']:$LANG['not_paid'];
+    $status_wording = $row['status']==1?{$LANG['paid']}:{$LANG['not_paid']};
 
 	$xml .= "<row id='".$row['iso']."'>";
 	$xml .= "<cell><![CDATA[
-			<a class='index_table' title='$LANG[view] ".$row['description']."' href='index.php?module=expense&view=details&id=".$row['id']."&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-			<a class='index_table' title='$LANG[edit] ".$row['description']."' href='index.php?module=expense&view=details&id=".$row['id']."&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+			<a class='index_table' title='{$LANG[view]} ".$row['description']."' href='index.php?module=expense&view=details&id=".$row['id']."&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+			<a class='index_table' title='{$LANG[edit]} ".$row['description']."' href='index.php?module=expense&view=details&id=".$row['id']."&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 		]]></cell>";		
 	
 	$xml .= "<cell><![CDATA[".siLocal::date($row['date'])."]]></cell>";		

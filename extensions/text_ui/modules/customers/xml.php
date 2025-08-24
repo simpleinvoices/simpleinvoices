@@ -95,7 +95,7 @@ $count = $resultCount[0];
 	
 	foreach ($customers as $row) {
 		$xml .= "<row id='".$row['CID']."'>";
-		$xml .= "<action><![CDATA[<a title='".$LANG['quick_view_tooltip']." ".$row['CID']."' href='index.php?module=customers&view=details&action=view&id=".$row['CID']."'>".$row['CID']."</a>]]></action>";
+		$xml .= "<action><![CDATA[<a title='".{$LANG['quick_view_tooltip']}." ".$row['CID']."' href='index.php?module=customers&view=details&action=view&id=".$row['CID']."'>".$row['CID']."</a>]]></action>";
 		$xml .= "<name><![CDATA[".utf8_encode($row['name'])."]]></name>";
 		$xml .= "<total><![CDATA[".utf8_encode(siLocal::number($row['customer_total']))."]]></total>";
 		$xml .= "<owing><![CDATA[".utf8_encode(siLocal::number($row['owing']))."]]></owing>";

@@ -39,7 +39,7 @@ if (in_array($sort, $validFields)) {
 	$sql = "SELECT 
 				pt_id,
 				pt_description, 
-				(SELECT (CASE  WHEN pt_enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled
+				(SELECT (CASE  WHEN pt_enabled = 0 THEN '".{$LANG['disabled']}."' ELSE '".{$LANG['enabled']}."' END )) AS enabled
 		FROM 
 				".TB_PREFIX."payment_types
 		$where
@@ -85,8 +85,8 @@ if (in_array($sort, $validFields)) {
 	foreach ($cfs as $row) {
 		$xml .= "<row id='".htmlsafe($row['cf_id'])."'>";
 		$xml .= "<cell><![CDATA[
-			<a class='index_table' title='$LANG['view'] $LANG['custom_field'] ".htmlsafe($row['field_name_nice'])."' href='index.php?module=custom_fields&view=details&id=$row['cf_id']&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-			<a class='index_table' title='$LANG['edit'] $LANG['custom_field'] ".htmlsafe($row['field_name_nice'])."' href='index.php?module=custom_fields&view=details&id=$row['cf_id']&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+			<a class='index_table' title='{$LANG['view']} {$LANG['custom_field']} ".htmlsafe($row['field_name_nice'])."' href='index.php?module=custom_fields&view=details&id=$row['cf_id']&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
+			<a class='index_table' title='{$LANG['edit']} {$LANG['custom_field']} ".htmlsafe($row['field_name_nice'])."' href='index.php?module=custom_fields&view=details&id=$row['cf_id']&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
 		]]></cell>";
 		$xml .= "<cell><![CDATA[".htmlsafe($row['cf_id'])."]]></cell>";		
 		$xml .= "<cell><![CDATA[".htmlsafe($row['field_name_nice'])."]]></cell>";

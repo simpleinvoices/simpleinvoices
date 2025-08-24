@@ -70,9 +70,9 @@ if (in_array($sort, $validFields)) {
 
 	for($i=0; $customer = $sth->fetch(PDO::FETCH_ASSOC); $i++) {
 		if ($customer['enabled'] == 1) {
-			$customer['enabled'] = $LANG['enabled'];
+			$customer['enabled'] = {$LANG['enabled']};
 		} else {
-			$customer['enabled'] = $LANG['disabled'];
+			$customer['enabled'] = {$LANG['disabled']};
 		}
 */
 global $dbh;
@@ -91,7 +91,7 @@ $xml .= "<total>$count</total>";
 foreach ($customers as $row) {
 
 	$xml .= "<row id='".$row['id']."'>";
-	$xml .= "<cell><![CDATA[<a class='index_table' title='$LANG['view'] ".$row['description']."' href='index.php?module=product_attribute&view=details&action=view&id=".$row['id']."&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a> <a class='index_table' title='$LANG['edit'] ".$row['description']."' href='index.php?module=product_attribute&view=details&action=edit&id=".$row['id']."&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>]]></cell>";
+	$xml .= "<cell><![CDATA[<a class='index_table' title='{$LANG['view']} ".$row['description']."' href='index.php?module=product_attribute&view=details&action=view&id=".$row['id']."&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a> <a class='index_table' title='{$LANG['edit']} ".$row['description']."' href='index.php?module=product_attribute&view=details&action=edit&id=".$row['id']."&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['id']."]]></cell>";		
 	$xml .= "<cell><![CDATA[".utf8_encode($row['name'])."]]></cell>";
 	if ($row['enabled']=='1') {

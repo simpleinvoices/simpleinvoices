@@ -55,13 +55,13 @@ $limit = " LIMIT $start, $rp";
 		}
 	}
 
-$plugin[0] = " <img src='images/famfam/plugin_disabled.png' alt='".$LANG['plugin_not_registered']."' />";
-$plugin[1] = " <img src='images/famfam/plugin.png' alt='".$LANG['plugin_registered']."' />";
-$plugin[2] = " <img src='images/famfam/plugin_delete.png' alt='".$LANG['plugin_unregister']."' />";
-$plugin[3] = " <img src='images/famfam/plugin_add.png' alt='".$LANG['plugin_register']."' />";
-$light[0]  = " <img src='images/famfam/lightbulb_off.png' alt='".$LANG['disabled']."' />";
-$light[1]  = " <img src='images/famfam/lightbulb.png' alt='".$LANG['enabled']."' />";
-$light[2]  = " <img src='images/common/lightswitch16x16.png' alt='".$LANG['toggle_status']."' />";
+$plugin[0] = " <img src='images/famfam/plugin_disabled.png' alt='".{$LANG['plugin_not_registered']}."' />";
+$plugin[1] = " <img src='images/famfam/plugin.png' alt='".{$LANG['plugin_registered']}."' />";
+$plugin[2] = " <img src='images/famfam/plugin_delete.png' alt='".{$LANG['plugin_unregister']}."' />";
+$plugin[3] = " <img src='images/famfam/plugin_add.png' alt='".{$LANG['plugin_register']}."' />";
+$light[0]  = " <img src='images/famfam/lightbulb_off.png' alt='".{$LANG['disabled']}."' />";
+$light[1]  = " <img src='images/famfam/lightbulb.png' alt='".{$LANG['enabled']}."' />";
+$light[2]  = " <img src='images/common/lightswitch16x16.png' alt='".{$LANG['toggle_status']}."' />";
 
 /*Check that the sort field is OK*/
 $validFields = array('id', 'name','description','enabled');
@@ -111,14 +111,14 @@ $validFields = array('id', 'name','description','enabled');
 	if ($row['id'] == 0 && $row['registered'] ==1) { $xml .= "Always enabled "; }
 	else {
 		if ($row['registered'] == 1) {
-			$xml .="<a class='index_table' title='$LANG[plugin_unregister] $LANG[extensions] ".$row['name']."' href='index.php?module=extensions&view=register&id=$row[id]&action=unregister'> ".$plugin[3-$row['registered']]."</a>";
+			$xml .="<a class='index_table' title='{$LANG[plugin_unregister]} {$LANG[extensions]} ".$row['name']."' href='index.php?module=extensions&view=register&id=$row[id]&action=unregister'> ".$plugin[3-$row['registered']]."</a>";
 			if ($row['enabled'] == 1) {
-				$xml .= " <a class='index_table' title='$LANG[disable] $LANG[extensions] ".$row['name']."' href='index.php?module=extensions&view=manage&id=$row[id]&action=toggle'>".$light[2]."</a>";
+				$xml .= " <a class='index_table' title='{$LANG[disable]} {$LANG[extensions]} ".$row['name']."' href='index.php?module=extensions&view=manage&id=$row[id]&action=toggle'>".$light[2]."</a>";
 			} else {
-				$xml .= " <a class='index_table' title='$LANG[enable] $LANG[extensions] ".$row['name']."' href='index.php?module=extensions&view=manage&id=$row[id]&action=toggle'>".$light[2]."</a>";
+				$xml .= " <a class='index_table' title='{$LANG[enable]} {$LANG[extensions]} ".$row['name']."' href='index.php?module=extensions&view=manage&id=$row[id]&action=toggle'>".$light[2]."</a>";
 			}
 		} else {
-			$xml .="<a class='index_table' title='$LANG[plugin_register] $LANG[extensions] ".$row['name']."' href='index.php?module=extensions&view=register&name=$row[name]&action=register&description=$row[description]'> ".$plugin[3-$row['registered']]."</a>";
+			$xml .="<a class='index_table' title='{$LANG[plugin_register]} {$LANG[extensions]} ".$row['name']."' href='index.php?module=extensions&view=register&name=$row[name]&action=register&description=$row[description]'> ".$plugin[3-$row['registered']]."</a>";
 		}
 	}
 	$xml .= "]]></cell>";
