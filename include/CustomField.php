@@ -117,7 +117,7 @@ abstract class CustomField {
 	 * Reads the description for a customField out of the database.
 	 * If it's a language string it's translated to the choosen language.
 	 * The language string have to be in the following format:
-	 * $LANG[name] or {$LANG['name']}
+	 * $LANG['name'] or {$LANG['name']}
 	 */
 	function getDescription($id) {
 		global $LANG;

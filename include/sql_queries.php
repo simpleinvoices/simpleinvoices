@@ -698,11 +698,11 @@ function insertProduct($enabled=1,$visible=1, $domain_id='') {
     	$logger->log('Attr key: '.$k, Zend_Log::INFO);
     	$logger->log('Attr value: '.var_export($v,true), Zend_Log::INFO);
     	$logger->log('Attr set value: '.$k, Zend_Log::INFO);
-        if($_POST['attribute'.$v[id]] == 'true')
+        if($_POST['attribute'.$v['id']] == 'true')
         {
             //$attr[$k]['attr_id'] = $v['id'];
-            $attr[$v['id']] = $_POST['attribute'.$v[id]];
-//            $attr[$k]['a$v['id']] = $_POST['attribute'.$v[id]];
+            $attr[$v['id']] = $_POST['attribute'.$v['id']];
+//            $attr[$k]['a$v['id']] = $_POST['attribute'.$v['id']];
         }
 
     }
@@ -783,9 +783,9 @@ function updateProduct($domain_id='') {
     $attr = array();
     foreach($attributes as $k=>$v)
     {
-        if($_POST['attribute'.$v[id]] == 'true')
+        if($_POST['attribute'.$v['id']] == 'true')
         {
-            $attr[$v['id']] = $_POST['attribute'.$v[id]];
+            $attr[$v['id']] = $_POST['attribute'.$v['id']];
         }
 
     }
@@ -814,21 +814,21 @@ function updateProduct($domain_id='') {
 
 	return dbQuery($sql,
 		':domain_id',$domain_id,
-		':description', $_POST[description],
+		':description', $_POST['description'],
 		':enabled', $_POST['enabled'],
-		':notes', $_POST[notes],
+		':notes', $_POST['notes'],
 		':default_tax_id', $_POST['default_tax_id'],
-		':custom_field1', $_POST[custom_field1],
-		':custom_field2', $_POST[custom_field2],
-		':custom_field3', $_POST[custom_field3],
-		':custom_field4', $_POST[custom_field4],
-		':unit_price', $_POST[unit_price],
-		':cost', $_POST[cost],
-		':reorder_level', $_POST[reorder_level],
+		':custom_field1', $_POST['custom_field1'],
+		':custom_field2', $_POST['custom_field2'],
+		':custom_field3', $_POST['custom_field3'],
+		':custom_field4', $_POST['custom_field4'],
+		':unit_price', $_POST['unit_price'],
+		':cost', $_POST['cost'],
+		':reorder_level', $_POST['reorder_level'],
 		':attribute', json_encode($attr),
 		':notes_as_description', $notes_as_description,
 		':show_description', $show_description,
-		':id', $_GET[id]
+		':id', $_GET['id']
 		);
 }
 
@@ -1066,7 +1066,7 @@ function taxesGroupedForInvoice($invoice_id, $domain_id='')
 	$sql = "SELECT
 				tax.tax_description as tax_name,
 				SUM(item_tax.tax_amount) as tax_amount,
-				item_tax.tax_rate as tax_rate,
+				MAX(item_tax.tax_rate) as tax_rate,
 				count(*) as count
 			FROM
 				".TB_PREFIX."invoice_item_tax item_tax,
@@ -1193,7 +1193,7 @@ function getSystemDefaults($domain_id='') {
 	$default = null;
 
 	while($default = $sth->fetch()) {
-		$defaults["$default[name]"] = $default['value'];
+		$defaults[$default['name']] = $default['value'];
 	}
 
     if (getNumberOfDoneSQLPatches() > "198")
@@ -1210,7 +1210,7 @@ function getSystemDefaults($domain_id='') {
         $default = null;
 
         while($default = $sth->fetch()) {
-            $defaults["$default[name]"] = $default['value'];	// if setting is redefined, overwrite the previous value
+            $defaults[$default['name']] = $default['value'];	// if setting is redefined, overwrite the previous value
         }
     }
 
@@ -1420,17 +1420,13 @@ function updateBiller() {
 		':custom_field3', $_POST['custom_field3'],
 		':custom_field4', $_POST['custom_field4'],
 		':enabled', $_POST['enabled'],
-		':id', $_GET[id]
+		':id', $_GET['id']
 		);
 }
 
 function updateCustomer() {
 	global $config;
 	$domain_id = domain_id::get();
-
-//	$encrypted_credit_card_number = '';
-	$is_new_cc_num = ($_POST['credit_card_number_new'] !='');
-
 	$sql = "UPDATE
 				".TB_PREFIX."customers
 			SET
@@ -1448,10 +1444,6 @@ function updateCustomer() {
 				mobile_phone = :mobile_phone,
 				fax = :fax,
 				email = :email,
-				credit_card_holder_name = :credit_card_holder_name,
-                " . (($is_new_cc_num) ? 'credit_card_number = :credit_card_number,' : '') . "
-				credit_card_expiry_month = :credit_card_expiry_month,
-				credit_card_expiry_year = :credit_card_expiry_year,
 				notes = :notes,
 				custom_field1 = :custom_field1,
 				custom_field2 = :custom_field2,
@@ -1461,15 +1453,6 @@ function updateCustomer() {
 			WHERE
 				id = :id";
 
-	if($is_new_cc_num)
-	{
-		$credit_card_number = $_POST['credit_card_number_new'];
-        
-        //cc
-        $enc = new encryption();
-        $key = $config->encryption->default->key;
-        $encrypted_credit_card_number = $enc->encrypt($key, $credit_card_number);
-
 		return dbQuery($sql,
 			':domain_id', $domain_id,
 			':attention', $_POST['attention'],
@@ -1486,10 +1469,6 @@ function updateCustomer() {
 			':fax', $_POST['fax'],
 			':email', $_POST['email'],
 			':notes', $_POST['notes'],
-			':credit_card_holder_name', $_POST['credit_card_holder_name'],
-			':credit_card_number', $encrypted_credit_card_number,
-			':credit_card_expiry_month', $_POST['credit_card_expiry_month'],
-			':credit_card_expiry_year', $_POST['credit_card_expiry_year'],
 			':custom_field1', $_POST['custom_field1'],
 			':custom_field2', $_POST['custom_field2'],
 			':custom_field3', $_POST['custom_field3'],
@@ -1497,34 +1476,6 @@ function updateCustomer() {
 			':enabled', $_POST['enabled'],
 			':id', $_GET['id']
 		);
-	} else {
-		return dbQuery($sql,
-			':domain_id', $domain_id,
-			':attention', $_POST['attention'],
-			':name', $_POST['name'],
-			':department', $_POST['department'],
-			':street_address', $_POST['street_address'],
-			':street_address2', $_POST['street_address2'],
-			':city', $_POST['city'],
-			':state', $_POST['state'],
-			':zip_code', $_POST['zip_code'],
-			':country', $_POST['country'],
-			':phone', $_POST['phone'],
-			':mobile_phone', $_POST['mobile_phone'],
-			':fax', $_POST['fax'],
-			':email', $_POST['email'],
-			':notes', $_POST['notes'],
-			':credit_card_holder_name', $_POST['credit_card_holder_name'],
-			':credit_card_expiry_month', $_POST['credit_card_expiry_month'],
-			':credit_card_expiry_year', $_POST['credit_card_expiry_year'],
-			':custom_field1', $_POST['custom_field1'],
-			':custom_field2', $_POST['custom_field2'],
-			':custom_field3', $_POST['custom_field3'],
-			':custom_field4', $_POST['custom_field4'],
-			':enabled', $_POST['enabled'],
-			':id', $_GET['id']
-		);
-	}
 }
 
 function insertCustomer() {
@@ -1538,8 +1489,6 @@ function insertCustomer() {
 				domain_id, attention, name, department, street_address, street_address2,
 				city, state, zip_code, country, phone, mobile_phone,
 				fax, email, notes,
-				credit_card_holder_name, credit_card_number,
-				credit_card_expiry_month, credit_card_expiry_year, 
 				custom_field1, custom_field2,
 				custom_field3, custom_field4, enabled
 			)
@@ -1548,15 +1497,9 @@ function insertCustomer() {
 				:domain_id ,:attention, :name, :department, :street_address, :street_address2,
 				:city, :state, :zip_code, :country, :phone, :mobile_phone,
 				:fax, :email, :notes, 
-				:credit_card_holder_name, :credit_card_number,
-				:credit_card_expiry_month, :credit_card_expiry_year, 
 				:custom_field1, :custom_field2,
 				:custom_field3, :custom_field4, :enabled
 			)";
-	//cc
-	$enc = new encryption();
-    $key = $config->encryption->default->key;
-	$encrypted_credit_card_number = $enc->encrypt($key, $credit_card_number);
 
 	return dbQuery($sql,
 		':attention', $attention,
@@ -1573,10 +1516,6 @@ function insertCustomer() {
 		':fax', $fax,
 		':email', $email,
 		':notes', $notes,
-		':credit_card_holder_name', $credit_card_holder_name,
-		':credit_card_number', $encrypted_credit_card_number,
-		':credit_card_expiry_month', $credit_card_expiry_month,
-		':credit_card_expiry_year', $credit_card_expiry_year,
 		':custom_field1', $custom_field1,
 		':custom_field2', $custom_field2,
 		':custom_field3', $custom_field3,
@@ -1960,13 +1899,13 @@ function insertInvoice($type, $domain_id='') {
 				)";
 	}
 
-    $pref_group=getPreference($_POST[preference_id]);
+    $pref_group=getPreference($_POST['preference_id']);
 
 	//also set the current time (if null or =00:00:00)
 	$clean_date=SqlDateWithTime($_POST['date']);
 
 	$sth= dbQuery($sql,
-		#':index_id', index::next('invoice',$pref_group[index_group], $domain_id,$_POST[biller_id]),
+		#':index_id', index::next('invoice',$pref_group['index_group'], $domain_id,$_POST['biller_id']),
 		':index_id',		index::next('invoice',$pref_group['index_group'], $domain_id),
 		':domain_id',		$domain_id,
 		':biller_id',		$_POST['biller_id'],
@@ -1981,9 +1920,9 @@ function insertInvoice($type, $domain_id='') {
 		':customField4',	$_POST['customField4']
 		);
 
-    #index::increment('invoice',$pref_group[index_group], $domain_id,$_POST[biller_id]);
+    #index::increment('invoice',$pref_group['index_group'], $domain_id,$_POST['biller_id']);
 	// Needed only if si_index table exists
-    index::increment('invoice',$pref_group[index_group], $domain_id);
+    index::increment('invoice',$pref_group['index_group'], $domain_id);
 
     return $sth;
 }
@@ -2126,8 +2065,8 @@ function insertInvoiceItem($invoice_id,$quantity,$product_id,$line_number,$line_
 		':quantity', $quantity,
 		':product_id', $product_id,
 		':unit_price', $unit_price,
-	//	':tax_id', $tax[tax_id],
-	//	':tax_percentage', $tax[tax_percentage],
+	//	':tax_id', $tax['tax_id'],
+	//	':tax_percentage', $tax['tax_percentage'],
 		':tax_amount', $tax_total,
 		':gross_total', $gross_total,
 		':description', trim($description),
@@ -2162,7 +2101,7 @@ function getTaxesPerLineItem($line_item_tax_id, $quantity, $unit_price, $domain_
 		$tax_total = $tax_total + $tax_amount;
 
 		//$logger->log('Qty: '.$quantity.' Unit price: '.$unit_price, Zend_Log::INFO);
-		//$logger->log('Tax rate: '.$tax[tax_percentage].' Tax type: '.$tax['tax_type'].' Tax $: '.$tax_amount, Zend_Log::INFO);
+		//$logger->log('Tax rate: '.$tax['tax_percentage'].' Tax type: '.$tax['tax_type'].' Tax $: '.$tax_amount, Zend_Log::INFO);
 
 	}
 	return $tax_total;
@@ -2224,7 +2163,7 @@ function invoice_item_tax($invoice_item_id, $line_item_tax_id, $unit_price, $qua
 			// $tax_total = $tax_total + $tax_amount;
 
 			$logger->log('ITEM :: Qty: '.$quantity.' Unit price: '.$unit_price, Zend_Log::INFO);
-			$logger->log('ITEM :: Tax rate: '.$tax[tax_percentage].' Tax type: '.$tax['type'].' Tax $: '.$tax_amount, Zend_Log::INFO);
+			$logger->log('ITEM :: Tax rate: '.$tax['tax_percentage'].' Tax type: '.$tax['type'].' Tax $: '.$tax_amount, Zend_Log::INFO);
 
 			$sql = "INSERT 
 						INTO 
@@ -2373,7 +2312,7 @@ function printEntries($menu,$id,$depth) {
 			//echo "&nbsp;&nbsp;&nbsp;";
 		}
 		echo "
-		<li><a href='".$tempentry[link]."'>".htmlsafe($tempentry[name])."</a>
+		<li><a href='".$tempentry['link']."'>".htmlsafe($tempentry['name'])."</a>
 		";
 		
 		if(isset($menu[$tempentry["id"]])) {
@@ -2704,11 +2643,8 @@ function pdfThis($html,$file_location="",$pdfname)
 
 	global $config;
 
-//	set_include_path("../../../../library/pdf/");
-	require_once('./library/pdf/config.inc.php');
-	require_once('./library/pdf/pipeline.factory.class.php');
-	require_once('./library/pdf/pipeline.class.php');
-	parse_config_file('./library/pdf/html2ps.config');
+	// Load the new HTML2PDF library
+	require_once('./vendor/autoload.php');
 
 	require_once("./include/init.php");	// for getInvoice() and getPreference()
 	#$invoice_id = $_GET['id'];
@@ -2730,93 +2666,53 @@ function pdfThis($html,$file_location="",$pdfname)
 	 * @param $path_to_html String path to source html file.
 	 * @param $path_to_pdf  String path to file to save generated PDF to.
 	 */
-	if(!function_exists(convert_to_pdf))
+	if(!function_exists('convert_to_pdf'))
 	{
 		function convert_to_pdf($html_to_pdf, $pdfname, $file_location="") {
 
 			global $config;
 
-			$destination = $file_location=="download" ? "DestinationDownload" : "DestinationFile";
-		  /**
-		   * Handles the saving generated PDF to user-defined output file on server
-		   */
-
-		 if(!class_exists(MyFetcherLocalFile))
-		 {
-		  class MyFetcherLocalFile extends Fetcher {
-			var $_content;
-
-			function MyFetcherLocalFile($html_to_pdf) {
-			  //$this->_content = file_get_contents($file);
-			  $this->_content = $html_to_pdf;
+			try {
+				// Create HTML2PDF instance
+				$html2pdf = new \Spipu\Html2Pdf\Html2Pdf(
+					$config->export->pdf->papersize == 'A4' ? 'P' : 'P',  // orientation
+					$config->export->pdf->papersize,  // paper size
+					'en'  // language
+				);
+				
+				// Configure security to allow localhost URLs and local files
+				$security = $html2pdf->getSecurityService();
+				$security->addAllowedHost('localhost');
+				$security->addAllowedHost('127.0.0.1');
+				if (isset($_SERVER['HTTP_HOST'])) {
+					$security->addAllowedHost($_SERVER['HTTP_HOST']);
+				}
+				// Disable host checking for local development to avoid CSS/image loading issues
+				$security->disableCheckAllowedHosts();
+				
+				// Set margins from config
+				$html2pdf->pdf->SetMargins(
+					$config->export->pdf->leftmargin,
+					$config->export->pdf->topmargin, 
+					$config->export->pdf->rightmargin
+				);
+				$html2pdf->pdf->SetAutoPageBreak(true, $config->export->pdf->bottommargin);
+				
+				// Process the HTML
+				$html2pdf->writeHTML($html_to_pdf);
+				
+				if($file_location == "download") {
+					// Output to browser for download
+					$html2pdf->output($pdfname . '.pdf', 'D');
+				} else {
+					// Save to file on server
+					$html2pdf->output($pdfname . '.pdf', 'F');
+				}
+				
+			} catch(\Spipu\Html2Pdf\Exception\Html2PdfException $e) {
+				error_log('HTML2PDF Error: ' . $e->getMessage());
+				throw new Exception('PDF generation failed: ' . $e->getMessage());
 			}
-
-			function get_data($dummy1) {
-			  return new FetchedDataURL($this->_content, array(), "");
-			}
-
-			function get_base_url() {
-			  return "";
-			}
-		  }
-		 }
-
-		  $pipeline = PipelineFactory::create_default_pipeline("", ""); // Attempt to auto-detect encoding
-
-		  // Override HTML source 
-		  $pipeline->fetchers[] = new MyFetcherLocalFile($html_to_pdf);
-
-		  $baseurl = "";
-		  $media = Media::predefined($config->export->pdf->papersize);
-		  $media->set_landscape(false);
-
-		  global $g_config;
-		  $g_config = array(
-							'cssmedia'     => 'screen',
-							'renderimages' => true,
-							'renderlinks'  => true,
-							'renderfields' => true,
-							'renderforms'  => false,
-							'mode'         => 'html',
-							'encoding'     => '',
-							'debugbox'     => false,
-							'pdfversion'    => '1.4',
-
-							'process_mode'     => 'single',
-							//'output'     => 1,
-							//'location'     => 'pdf',
-							'pixels'     => $config->export->pdf->screensize,
-							'media'     => $config->export->pdf->papersize,
-				'margins'       => array(
-							      'left'    => $config->export->pdf->leftmargin,
-							      'right'   => $config->export->pdf->rightmargin,
-							      'top'     => $config->export->pdf->topmargin,
-							      'bottom'  => $config->export->pdf->bottommargin,
-							      ),
-							'transparency_workaround'     => 1,
-							'imagequality_workaround'     => 1,
-
-							'draw_page_border' => false
-							);
-
-			$media->set_margins($g_config['margins']);
-			$media->set_pixels($config->export->pdf->screensize);
-
-	/*
-	header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
-	header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); 	// Date in the past
-
-	header("Location: $myloc");
-	*/
-		  global $g_px_scale;
-		  $g_px_scale = mm2pt($media->width() - $media->margins['left'] - $media->margins['right']) / $media->pixels; 
-		  global $g_pt_scale;
-		  $g_pt_scale = $g_px_scale * 1.43; 
-
-		  $pipeline->configure($g_config);
-		  $pipeline->data_filters[] = new DataFilterUTF8("");
-		  $pipeline->destination = new $destination($pdfname);
-		  $pipeline->process($baseurl, $media);
 		}
 	}
 
@@ -3040,15 +2936,15 @@ function patch126() {
 	while($res = $sth->fetch()) {
 		$sql = "INSERT INTO ".TB_PREFIX."products (id, description, unit_price, enabled, visible) 
 			VALUES (NULL, :description, :gross_total, '0',  '0')";
-		dbQuery($sql, ':description', $res[description], ':total', $res[gross_total]);
+		dbQuery($sql, ':description', $res['description'], ':total', $res['gross_total']);
 		$id = lastInsertId();
 
 		$sql = "UPDATE  ".TB_PREFIX."invoice_items SET product_id = :id, unit_price = :price WHERE ".TB_PREFIX."invoice_items.id = :item";
 
 		dbQuery($sql,
 			':id', $id[0],
-			':price', $res[gross_total],
-			':item', $res[id]
+			':price', $res['gross_total'],
+			':item', $res['id']
 			);
 	}
 }

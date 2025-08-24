@@ -17,7 +17,7 @@ if ($_GET["submit"] == "line_items") {
 
 	$default = "line_items";
 
-	$escaped = htmlsafe($defaults[line_items]);
+	$escaped = htmlsafe($defaults['line_items']);
 	$value = <<<EOD
 <input type="text" size="25" name="value" value="$escaped">
 EOD;
@@ -38,7 +38,7 @@ else if ($_GET["submit"] == "def_inv_template") {
 	closedir($handle);
 	sort($files);
 
-	$escaped = htmlsafe($defaults[template]);
+	$escaped = htmlsafe($defaults['template']);
 	$display_block_templates_list = <<<EOD
 	<select name="value">
 EOD;
@@ -97,7 +97,7 @@ else if ($_GET["submit"] == "biller") {
 			
 			$escaped = htmlsafe($biller['name']);
 			$display_block_biller .= <<<EOD
-			<option $selected value="$biller[id]">$escaped</option>
+			<option $selected value="{$biller['id']}">$escaped</option>
 EOD;
 		}
 		$display_block_biller .= "</select>";
@@ -130,7 +130,7 @@ else if ($_GET["submit"] == "customer") {
 
 			$escaped = htmlsafe($customer['name']);
 			$display_block_customer .= <<<EOD
-			<option $selected value="$customer[id]">$escaped</option>
+			<option $selected value="{$customer['id']}">$escaped</option>
 EOD;
 		}
 		$display_block_customer .= "</select>";
@@ -165,7 +165,7 @@ EOD;
 
 			$escaped = htmlsafe($tax['tax_description']);
 			$display_block_tax .= <<<EOD
-			<option $selected value="$tax[tax_id]">$escaped</option>
+			<option $selected value="{$tax['tax_id']}">$escaped</option>
 EOD;
 		}
 	}
@@ -262,7 +262,7 @@ else if($_GET['submit'] == "language") {
 	
 	usort($languages,"compareNameIndex");
 	
-	$description = $LANG[language];
+	$description = $LANG['language'];
 	//print_r($languages);
 	$value = "<select name='value'>";
 	foreach($languages as $language) {
@@ -279,7 +279,7 @@ elseif ($_GET["submit"] == "tax_per_line_item") {
 
 	$default = "tax_per_line_item";
 
-	$escaped = htmlsafe($defaults[tax_per_line_item]);
+	$escaped = htmlsafe($defaults['tax_per_line_item']);
 	$value = <<<EOD
 <input type="text" size="25" name="value" value="$escaped">
 EOD;

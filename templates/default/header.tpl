@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 {strip}
-	{include file='../custom/hooks.tpl'}
+	{include file='hooks.tpl'}
 	{assign var='tmp_lang_module' value="title_module_`$module`"}{assign var='tmp_lang_module' value=$LANG.$tmp_lang_module|default:$LANG.$module|default:$module}
 	{assign var='tmp_lang_view' value="title_view_`$view`"}{assign var='tmp_lang_view' value=$LANG.$tmp_lang_view|default:$LANG.$view|default:$view}
 	{$smarty.capture.hook_head_start}
@@ -41,17 +41,14 @@
 	<script type="text/javascript" src="./include/jquery/jquery.livequery.pack.js"></script>
 {/literal}
     {$extension_jquery_files }
-	{include file='../include/jquery/jquery.functions.js.tpl'}
-	{include file='../include/jquery/jquery.conf.js.tpl'}
+	{include file='jquery.functions.js.tpl'}
+	{include file='jquery.conf.js.tpl'}
 {literal}
 
 	<!--<script type="text/javascript" src="./include/jquery/jquery.conf.js.tpl"></script>-->
 
 {/literal}
-	{if $config->debug->level == "All"}
-	<link rel="stylesheet" type="text/css" href="./library/blackbirdjs/blackbird.css" />	
-	<script type="text/javascript" src="./library/blackbirdjs/blackbird.js"></script>
-	{/if}
+	{* blackbirdjs JavaScript debugging library removed *}
 {literal}
 	<script type="text/javascript" src="./include/jquery/jquery.validationEngine.js"></script>
 {/literal}

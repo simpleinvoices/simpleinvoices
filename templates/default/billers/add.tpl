@@ -13,7 +13,7 @@
 
 {if $smarty.post.name != "" && $smarty.post.submit != null } 
 
-	{include file="../templates/default/billers/save.tpl"}
+	{include file="billers/save.tpl"}
 
 {else}
 

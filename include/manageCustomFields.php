@@ -119,12 +119,12 @@ EOD;
 	while($customField = $sth->fetch()) {
 		echo '
 		<tr>
-			<td>'.htmlsafe($customField[id]).'</td>
-			<td>'.htmlsafe($customField[name]).'</td>
-			<td>'.htmlsafe($customField[description]).'</td>
-			<td>'.htmlsafe($customField[categorieId]).'</td>
-			<td>'.htmlsafe($customField[pluginId]).'</td>
-			<td>'.htmlsafe($customField[active]).'</td>
+			<td>'.htmlsafe($customField['id']).'</td>
+			<td>'.htmlsafe($customField['name']).'</td>
+			<td>'.htmlsafe($customField['description']).'</td>
+			<td>'.htmlsafe($customField['categorieId']).'</td>
+			<td>'.htmlsafe($customField['pluginId']).'</td>
+			<td>'.htmlsafe($customField['active']).'</td>
 		</tr>
 ';
 	}
@@ -168,7 +168,7 @@ function printCategories() {
 	$out = '<select name="categorie">';
 	
 	foreach($cats as $cat) {
-		$out .= "<option value='".htmlsafe($cat[id])."' >".htmlsafe($cat[name])."</option>";
+		$out .= "<option value='".htmlsafe($cat['id'])."' >".htmlsafe($cat['name'])."</option>";
 	}
 	
 	$out .= "</select>";

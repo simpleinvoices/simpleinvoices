@@ -41,12 +41,14 @@ require_once("./include/init.php");
 function GetCustomPath($name,$mode='template'){
 	$my_custom_path="./custom/";
 	$use_custom=1;
+	$out = null; // Initialize return variable
+	
 	if($mode=='template'){
 		if($use_custom and file_exists("{$my_custom_path}default_template/{$name}.tpl")){
-			$out=".{$my_custom_path}default_template/{$name}.tpl";
+			$out="custom/default_template/{$name}.tpl";
 		}
 		elseif(file_exists("./templates/default/{$name}.tpl")){
-			$out="../templates/default/{$name}.tpl";
+			$out="templates/default/{$name}.tpl";
 		}
 	}
 	if($mode=='module'){
@@ -132,8 +134,9 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
 	//echo $skip_db_patches; 
 	//if auth on must login before upgrade
     if ($skip_db_patches == false)
-    {
-		if ( ($config->authentication->enabled == 1 AND isset($auth_session->id)) OR ($config->authentication->enabled == 0) )	
+	{
+		//var_dump($config->authentication->enable);
+		if ( ($config->authentication->enabled == 1 AND isset($auth_session->id)) OR ($config->authentication->enabled == false) )	
 		{
 			include_once('./include/sql_patches.php');
 			if (getNumberOfPatches() > 0 ) {
@@ -295,7 +298,7 @@ if( !in_array($module."_".$view, $early_exit) )
 			{
 				if(file_exists("./extensions/$extension->name/templates/default/header.tpl")) 
 				{
-					$smarty -> $smarty_output("../extensions/$extension->name/templates/default/header.tpl");
+					$smarty -> display("extensions/$extension->name/templates/default/header.tpl");
 
 					$extensionHeader++;
 				}
@@ -307,7 +310,7 @@ if( !in_array($module."_".$view, $early_exit) )
 		
 		if($extensionHeader == 0) 
 		{
-			$smarty -> $smarty_output(GetCustomPath('header'));
+			$smarty -> display(GetCustomPath('header'));
 		}
 		
 }
@@ -374,7 +377,7 @@ if($module == "export" OR $view == "export" OR $module == "api")
 		if($extension->enabled == "1")
 		{
 			if(file_exists("./extensions/$extension->name/include/jquery/$extension->name.post_load.jquery.ext.js.tpl")) {
-					$smarty -> $smarty_output("../extensions/$extension->name/include/jquery/$extension->name.post_load.jquery.ext.js.tpl");
+					$smarty -> display("extensions/$extension->name/include/jquery/$extension->name.post_load.jquery.ext.js.tpl");
 			}
 		}
 		
@@ -385,7 +388,7 @@ if($module == "export" OR $view == "export" OR $module == "api")
 	*/
 	if($extensionPostLoadJquery == 0 AND $module !='auth') 
 	{
-		$smarty -> $smarty_output("../include/jquery/post_load.jquery.ext.js.tpl");
+		$smarty -> display("include/jquery/post_load.jquery.ext.js.tpl");
 	}
 
 /*
@@ -411,7 +414,7 @@ if($module == "export" OR $view == "export" OR $module == "api")
 			{
 				if(file_exists("./extensions/$extension->name/templates/default/menu.tpl")) 
 				{
-					$smarty -> $smarty_output("../extensions/$extension->name/templates/default/menu.tpl");
+					$smarty -> display("extensions/$extension->name/templates/default/menu.tpl");
 					$extensionMenu++;
 				}
 			}
@@ -421,7 +424,7 @@ if($module == "export" OR $view == "export" OR $module == "api")
 		*/
 		if($extensionMenu == "0") 
 		{
-			$smarty -> $smarty_output(GetCustomPath('menu'));
+			$smarty -> display(GetCustomPath('menu'));
 		}
 	}
 /*
@@ -445,7 +448,7 @@ if($module == "export" OR $view == "export" OR $module == "api")
 			{
 				if(file_exists("./extensions/$extension->name/templates/default/main.tpl")) 
 				{
-					$smarty -> $smarty_output("../extensions/$extension->name/templates/default/main.tpl");
+					$smarty -> display("extensions/$extension->name/templates/default/main.tpl");
 					$extensionMain++;
 				}
 			}
@@ -455,7 +458,7 @@ if($module == "export" OR $view == "export" OR $module == "api")
 		*/
 		if($extensionMain == "0") 
 		{
-			$smarty -> $smarty_output(GetCustomPath('main'));
+			$smarty -> display(GetCustomPath('main'));
 		}
     }
     
@@ -484,8 +487,8 @@ if($module == "export" OR $view == "export" OR $module == "api")
 		{
 			if(file_exists("./extensions/$extension->name/templates/default/$module/$view.tpl")) 
 			{
-				$path 		= "../extensions/$extension->name/templates/default/$module/";
-				$my_tpl_path="../extensions/{$extension->name}/templates/default/$module/$view.tpl";
+				$path 		= "extensions/$extension->name/templates/default/$module/";
+				$my_tpl_path="extensions/{$extension->name}/templates/default/$module/$view.tpl";
 				$extensionTemplates++;
 			}	
 		}
@@ -505,7 +508,30 @@ if($module == "export" OR $view == "export" OR $module == "api")
 	}
 	
 	$smarty->assign("path",$path);
-	$smarty -> $smarty_output($my_tpl_path);
+	
+	// Debug and error handling for empty template path
+	if (empty($my_tpl_path)) {
+		error_log("ERROR: Empty template path for module='$module', view='$view'");
+		error_log("GetCustomPath result: " . var_export(GetCustomPath("$module/$view"), true));
+		error_log("Extension templates checked: $extensionTemplates");
+		
+		echo "<h2>Template Error</h2>";
+		echo "<p>Unable to find template for module '<strong>$module</strong>' and view '<strong>$view</strong>'</p>";
+		echo "<p>Checked paths:</p>";
+		echo "<ul>";
+		echo "<li>Custom: ./custom/default_template/$module/$view.tpl</li>";
+		echo "<li>Default: ./templates/default/$module/$view.tpl</li>";
+		echo "</ul>";
+		
+		// Try to provide helpful suggestion
+		if (file_exists("./templates/default/$module/$view.tpl")) {
+			echo "<p><strong>Note:</strong> Default template exists but GetCustomPath didn't find it!</p>";
+		}
+		
+		exit(1);
+	}
+	
+	$smarty -> display($my_tpl_path);
 	
 	// If no smarty template - add message - onyl uncomment for dev - commented out for release
 	if ($extensionTemplates == 0 )
@@ -532,7 +558,7 @@ if($module == "export" OR $view == "export" OR $module == "api")
 			{
 				if(file_exists("./extensions/$extension->name/templates/default/footer.tpl")) 
 				{
-					$smarty -> $smarty_output("../extensions/$extension->name/templates/default/footer.tpl");
+					$smarty -> display("extensions/$extension->name/templates/default/footer.tpl");
 					$extensionFooter++;
 				}
 			}
@@ -542,7 +568,7 @@ if($module == "export" OR $view == "export" OR $module == "api")
 		*/
 		if($extensionFooter == 0) 
 		{
-			$smarty -> $smarty_output(GetCustomPath('footer'));
+			$smarty -> display(GetCustomPath('footer'));
 		}
 	
 	}

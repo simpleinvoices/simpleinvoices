@@ -1,0 +1,9 @@
+{
+    "require": {
+        "spipu/html2pdf": "^5.3",
+        "ezyang/htmlpurifier": "^4.18",
+        "smarty/smarty": "^4.0",
+        "phpmailer/phpmailer": "^6.10",
+        "shardj/zf1-future": "^1.24"
+    }
+}

@@ -27,7 +27,7 @@
 {else}
 
 	<table id="manageGrid" style="display:none"></table>
-	{include file='../modules/preferences/manage.js.php'}
+	{include file='preferences/manage.js.php'}
 
 {/if}
 

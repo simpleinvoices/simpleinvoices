@@ -1,5 +1,9 @@
 <?php
 
+// Include necessary classes for standalone XML endpoint
+$root_path = dirname(dirname(__DIR__));
+require_once($root_path . '/include/init.php');
+
 header("Content-type: text/xml");
 
 //$start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;

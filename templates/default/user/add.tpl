@@ -11,7 +11,7 @@
 
 
 {if $smarty.post.email != null && $smarty.post.submit != null } 
-	{include file="../templates/default/user/save.tpl"}
+	{include file="user/save.tpl"}
 {else}
 
 <form name="frmpost" action="index.php?module=user&amp;view=add" method="post" id="frmpost">

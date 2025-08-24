@@ -20,8 +20,8 @@
 checkLogin();
 
 
-#get the invoice id
-$customer_id = $_GET['id'];
+#get the customer id
+$customer_id = (int)$_GET['id']; // Cast to integer to prevent SQL injection
 $customer = getCustomer($customer_id);
 $customer['wording_for_enabled'] = $customer['enabled']==1?$LANG['enabled']:$LANG['disabled'];
 

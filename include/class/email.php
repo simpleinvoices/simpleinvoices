@@ -1,5 +1,9 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
 class email
 {
 	public $format;
@@ -19,65 +23,68 @@ class email
 	function send()
 	{
 		global $config;
-		//echo "export show data";
 		
-		// Create authentication with SMTP server
-		$authentication = array();
-		if($config->email->smtp_auth == true) {
-			$authentication = array(
-				'auth' => 'login',
-				'username' => $config->email->username,
-				'password' => $config->email->password,
-				'ssl' => $config->email->secure,
-				'port' => $config->email->smtpport
-				);
-        }
-        if($config->email->use_local_sendmail == false)
-        {
-    		$transport = new Zend_Mail_Transport_Smtp($config->email->host, $authentication);
-        }
+		$mail = new PHPMailer\PHPMailer\PHPMailer(true);
 
-		// Create e-mail message
-		$mail = new Zend_Mail('utf-8');
-		$mail->setType(Zend_Mime::MULTIPART_MIXED);
-		$mail->setBodyText($this->notes);
-		$mail->setBodyHTML($this->notes);
-		$mail->setFrom($this->from, $this->from_friendly);
-
-		$to_addresses = preg_split('/\s*[,;]\s*/', $this->to);
-		if (!empty($to_addresses)) {
-			foreach ($to_addresses as $to) {
-			    $mail->addTo($to);
-		   }
-		}
-		if (!empty($this->bcc)) {
-		    $bcc_addresses = preg_split('/\s*[,;]\s*/', $this->bcc);
-		foreach ($bcc_addresses as $bcc) {
-				$mail->addBcc($bcc);
-			}
-		}
-		$mail->setSubject($this->subject);
-
-        if($this->attachment)
-        {
-            // Create attachment
-            #$spc2us_pref = str_replace(" ", "_", $preference[pref_inv_wording]);
-            $content = file_get_contents('./tmp/cache/'.$this->attachment);
-            $at = $mail->createAttachment($content);
-            $at->type = 'application/pdf';
-            $at->disposition = Zend_Mime::DISPOSITION_ATTACHMENT;
-            $at->filename = $this->attachment;
-        }
-		// Send e-mail through SMTP
 		try {
-            if($config->email->use_local_sendmail == false)
-            {
-                $mail->send($transport);
-            } else{
-                $mail->send();
-            }
-		} catch(Zend_Mail_Protocol_Exception $e) {
-			echo '<strong>Zend Mail Protocol Exception:</strong> ' .  $e->getMessage();
+			// Server settings
+			if($config->email->use_local_sendmail == false) {
+				$mail->isSMTP();
+				$mail->Host = $config->email->host;
+				
+				if($config->email->smtp_auth == true) {
+					$mail->SMTPAuth = true;
+					$mail->Username = $config->email->username;
+					$mail->Password = $config->email->password;
+					
+					// Handle SSL/TLS encryption
+					if ($config->email->secure == 'ssl') {
+						$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+					} elseif ($config->email->secure == 'tls') {
+						$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+					}
+					
+					$mail->Port = $config->email->smtpport;
+				}
+				
+				//Custom connection options for self-signed certificates
+				$mail->SMTPOptions = array(
+					'ssl' => array(
+						'verify_peer' => false,
+						'verify_peer_name' => false,
+						'allow_self_signed' => true
+					)
+				);
+			}
+
+			$mail->isHTML(true);
+			$mail->Subject = $this->subject;
+			$mail->msgHTML($this->notes);
+			$mail->setFrom($this->from, $this->from_friendly);
+
+			$to_addresses = preg_split('/\s*[,;]\s*/', $this->to);
+			if (!empty($to_addresses)) {
+				foreach ($to_addresses as $to) {
+					$mail->addAddress($to);
+				}
+			}
+			if (!empty($this->bcc)) {
+				$bcc_addresses = preg_split('/\s*[,;]\s*/', $this->bcc);
+				foreach ($bcc_addresses as $bcc) {
+					$mail->addBCC($bcc);
+				}
+			}
+
+			// Add attachments
+			if($this->attachment)
+			{
+				$mail->addAttachment('./tmp/cache/'.$this->attachment);
+			}
+			
+			$mail->send();
+
+		} catch (Exception $e) {
+			echo '<strong>Mail Protocol Exception:</strong> ' .  $e->getMessage();
 			exit;
 		}
 
@@ -87,41 +94,41 @@ class email
 		switch ($this->format)
 		{
 			case "invoice":
-			{
+				{
 
-				// Create success message
-				$message  = "<meta http-equiv=\"refresh\" content=\"2;URL=index.php?module=invoices&amp;view=manage\">";
-				$message .= "<br />$this->attachment has been emailed";
+					// Create success message
+					$message  = "<meta http-equiv=\"refresh\" content=\"2;URL=index.php?module=invoices&amp;view=manage\">";
+					$message .= "<br />$this->attachment has been emailed";
 
-				break;
-			}	
+					break;
+				}	
 			case "statement":
-			{
+				{
 
-				// Create success message
-				$message  = "<meta http-equiv=\"refresh\" content=\"2;URL=index.php?module=statement&amp;view=index\">";
-				$message .= "<br />$this->attachment has been emailed";
+					// Create success message
+					$message  = "<meta http-equiv=\"refresh\" content=\"2;URL=index.php?module=statement&amp;view=index\">";
+					$message .= "<br />$this->attachment has been emailed";
 
-				break;
-			}	
+					break;
+				}	
 			case "cron":
-			{
+				{
 
-				// Create success message
-				$message .= "<br />Cron email for today has been sent";
+					// Create success message
+					$message .= "<br />Cron email for today has been sent";
 
-				break;
-			}
+					break;
+				}
 			case "cron_invoice":
 			default:
-			{
+				{
 
-				// Create success message
-				$message .= "$this->attachment has been emailed";
+					// Create success message
+					$message .= "$this->attachment has been emailed";
 
-				break;
-			
-			}	
+					break;
+
+				}	
 		}	
 
 
@@ -129,48 +136,49 @@ class email
 		return $message;
 	}
 
-    public function set_subject($type='')
-    {
+	public function set_subject($type='')
+	{
 
 		switch ($type)
 		{
 			case "invoice_eway":
-			{
+				{
 
-				$message = "$this->invoice_name ready for automatic credit card payment";
+					$message = "$this->invoice_name ready for automatic credit card payment";
 
-				break;
-			}	
+					break;
+				}	
 			case "invoice_eway_receipt":
-			{
+				{
 
-				$message = "$this->invoice_name secure credit card payment successful";
+					$message = "$this->invoice_name secure credit card payment successful";
 
-				break;
-			}	
+					break;
+				}	
 			case "invoice_receipt":
-			{
+				{
 
-				$message = "$this->attachment has been emailed";
+					$message = "$this->attachment has been emailed";
 
-				break;
-			}	
+					break;
+				}	
 			case "invoice":
-            default:
-			{
+			default:
+				{
 
-				$message = "$this->attachment from $this->from_friendly";
+					$message = "$this->attachment from $this->from_friendly";
 
-				break;
-			}	
-        }    
-    
-        return $message;
-    }
+					break;
+				}	
+		}    
 
-    public function get_admin_email()
-    {
-    
+		return $message;
+	}
+
+	public function get_admin_email()
+	{
+
+		global $db;
 		$domain_id = domain_id::get($this->domain_id);
 
 		$sql = "SELECT u.email 
@@ -185,6 +193,6 @@ class email
  
         return $sth->fetchColumn();
 
-    }
+	}
 
 }

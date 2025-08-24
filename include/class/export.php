@@ -68,7 +68,7 @@ class export
 					}
 					default:
 					{
-						header('Content-Disposition: attachment; filename="'.addslashes($preference[pref_inv_heading].$this->id.'.'.$this->file_type).'"');
+						header('Content-Disposition: attachment; filename="'.addslashes($preference['pref_inv_heading'].$this->id.'.'.$this->file_type).'"');
 						break;
 					}
 				}

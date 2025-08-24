@@ -4,19 +4,23 @@ class database{
 	
 	var $db_link;
 
-	function sqlQuery($sqlQuery,$conn) {
+	function sqlQuery($sqlQuery,$conn = null) {
 
 	//error_log($sqlQuery);
-	$this->database();	
-	if($query = mysql_query($sqlQuery)) {
+	if (!$this->db_link) {
+		$this->database();	
+	}
+	try {
+		$query = $this->db_link->query($sqlQuery);
 		
-		//error_log("Insert_id: ".mysql_insert_id($conn));
+		//error_log("Insert_id: ".$this->db_link->lastInsertId());
 
 		return $query;
 	}
-		else {
-			echo "Dude, what happened to your query?:<br><br> ".$sqlQuery."<br />".mysql_error();
-		}
+	catch(PDOException $e) {
+		echo "Dude, what happened to your query?:<br><br> ".$sqlQuery."<br />".$e->getMessage();
+		return false;
+	}
 	}
 
     #-- Class Constructor ------------------------------------------------
@@ -26,16 +30,48 @@ class database{
     
     #--------------------------------------------------------------------
     # @name: database::open_database
-    # creates a connection to the mysql database
+    # creates a connection to the mysql database using PDO
     #-------------------------------------------------------------------
     function open_database(){
     	
 		global $config;
     	
-        $db = mysql_connect($config->database->params->host.':'.$config->database->params->port,$config->database->params->username,$config->database->params->password)
-            or die("<font color=\"#ff0000\">There was an error connecting to the database server</font>");
-        mysql_select_db($config->database->params->dbname)
-            or die("<font color=\"#ff0000\">There was an error selecting the database</font>");
+		try {
+			$pdoAdapter = substr($config->database->adapter, 4);
+			
+			switch ($pdoAdapter) {
+				case "mysql":
+					if ($config->database->utf8 == true) {
+						$db = new PDO(
+							'mysql:host='.$config->database->params->host.'; port='.$config->database->params->port.'; dbname='.$config->database->params->dbname, 
+							$config->database->params->username, 
+							$config->database->params->password,  
+							array( PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8;")
+						);
+					} else {
+						$db = new PDO(
+							'mysql:host='.$config->database->params->host.'; port='.$config->database->params->port.'; dbname='.$config->database->params->dbname, 
+							$config->database->params->username, 
+							$config->database->params->password
+						);
+					}
+					break;
+				case "pgsql":
+					$db = new PDO(
+						$pdoAdapter.':host='.$config->database->params->host.'; dbname='.$config->database->params->dbname,	
+						$config->database->params->username, 
+						$config->database->params->password
+					);
+					break;
+				default:
+					die("<font color=\"#ff0000\">Unsupported database adapter: ".$pdoAdapter."</font>");
+			}
+			
+			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		}
+		catch(PDOException $e) {
+			die("<font color=\"#ff0000\">There was an error connecting to the database server: ".$e->getMessage()."</font>");
+		}
         
         return $db;
     }
@@ -44,8 +80,7 @@ class database{
     # closes a connection to the mysql database
     #-------------------------------------------------------------------
     function close_database(){
-        mysql_close($this->db_link)
-            or die("<font color=\"#ff0000\">There was an error terminating the database link</font>");
+        $this->db_link = null;
     }
 } 
 
@@ -71,7 +106,7 @@ class backup_db{
         $file_handle    = fopen($this->filename,"w"); 
         $query            = "SHOW TABLES"; 
         $result            = $oDB->sqlQuery($query,$oDB->db_link); 
-        while($row = mysql_fetch_array($result)){ 
+        while($row = $result->fetch(PDO::FETCH_NUM)){ 
             $tablename    = $row[0]; 
             $this->_show_create($tablename,$oDB->db_link,$file_handle); 
         } // while 
@@ -90,7 +125,7 @@ class backup_db{
         $oDB         = new database(); 
         $query = "SHOW CREATE TABLE `".$tablename."`"; 
         $result = $oDB->sqlQuery($query,$db_link); 
-        if ($row = mysql_fetch_array($result)) { 
+        if ($row = $result->fetch(PDO::FETCH_NUM)) { 
             fwrite($fh,$row[1] . ";\n"); 
             $insert           = $this->_retrieve_data($tablename, $db_link); 
             fwrite($fh,$insert); 
@@ -108,7 +143,7 @@ class backup_db{
         $query         = "SHOW COLUMNS FROM `" . $tablename . "`"; 
         $result        = $oDB->sqlQuery($query,$db_link); 
         $i            = 0; 
-        while($row = mysql_fetch_array($result)){ 
+        while($row = $result->fetch(PDO::FETCH_NUM)){ 
             $columns[$i][0] = $row[0]; 
             $i++; 
         } // while 
@@ -116,7 +151,7 @@ class backup_db{
         $query     = "SELECT * FROM `" . $tablename . "`"; 
         $result = $oDB->sqlQuery($query,$db_link) ; 
         $tmp_query = ""; 
-        while($row = mysql_fetch_array($result)){ 
+        while($row = $result->fetch(PDO::FETCH_ASSOC)){ 
             $tmp_query     .= "INSERT INTO `" . $tablename . "` VALUES("; // create a temporary holder; 
             for ($i = 0; $i < count($columns); $i++){ 
                 if ($i == count($columns) - 1) { 

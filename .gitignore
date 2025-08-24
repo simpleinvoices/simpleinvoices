@@ -6,3 +6,5 @@ custom.config.php
 zend_cache---*
 *.log
 tmp/cache/*
+composer.phar
+vendor/

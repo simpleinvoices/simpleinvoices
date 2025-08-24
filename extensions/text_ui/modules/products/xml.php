@@ -51,7 +51,7 @@ if (in_array($sort, $validFields)) {
 				id, 
 				description,
 				unit_price,
-				(SELECT (CASE  WHEN enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled
+				(SELECT (CASE  WHEN enabled = 0 THEN '".{$LANG['disabled']}."' ELSE '".{$LANG['enabled']}."' END )) AS enabled
 			FROM 
 				".TB_PREFIX."products  
 			WHERE 

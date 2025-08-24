@@ -85,11 +85,11 @@ if($sth != null) {
 	echo "<tr><td>&nbsp;Invoice Number&nbsp;</td><td>&nbsp;Date</td><td>&nbsp;Biller</td><td>&nbsp;Customer</td><td>&nbsp;Type</td></tr>";
 	while($res = $sth->fetch()) {
 		echo "<tr>";
-		echo "<td>&nbsp;<a href='index.php?module=invoices&view=quick_view&invoice=$res[invoice]'>$res[invoice]</a></td>
-		<td>&nbsp; $res[date] &nbsp;</td>
-		<td>&nbsp; $res[biller] &nbsp;</td>
-		<td>&nbsp; $res[customer] &nbsp;</td>
-		<td>&nbsp; $res[type] &nbsp;</td>";
+		echo "<td>&nbsp;<a href='index.php?module=invoices&view=quick_view&invoice=$res['invoice']'>$res['invoice']</a></td>
+		<td>&nbsp; $res['date'] &nbsp;</td>
+		<td>&nbsp; $res['biller'] &nbsp;</td>
+		<td>&nbsp; $res['customer'] &nbsp;</td>
+		<td>&nbsp; $res['type'] &nbsp;</td>";
 		echo "</tr>";
 	}
 	echo "</table>";

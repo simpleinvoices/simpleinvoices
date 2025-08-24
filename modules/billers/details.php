@@ -37,8 +37,8 @@ $customFieldLabel = getCustomFieldLabels();
 $smarty->assign('biller', $biller);
 /*
 $smarty -> assign('enabled', array(
-                                0 => $LANG[disabled],
-				1 => $LANG[enabled]
+                                0 => $LANG['disabled'],
+				1 => $LANG['enabled']
 			)
 		);
  */

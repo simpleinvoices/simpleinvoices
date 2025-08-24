@@ -41,7 +41,7 @@ EOD;
 		
 		if(preg_match($pattern,$sql['sqlquerie'])) {
 			$user = htmlsafe($sql['email']).' (id '.htmlsafe($sql['userid']).')';
-			echo "User $user created invoice $sql[last_id] on $sql[timestamp].<br />";
+			echo "User $user created invoice $sql['last_id'] on $sql['timestamp'].<br />";
 		}
 	}
 
@@ -50,7 +50,7 @@ EOD;
 		$pattern = "/.*UPDATE\s+".TB_PREFIX."invoices\s+SET/im";
 		if(preg_match($pattern,$sql['sqlquerie'],$match)) {
 			$user = htmlsafe($sql['email']).' (id '.htmlsafe($sql['userid']).')';
-			echo "User $user modified invoice $match[1] on $sql[timestamp].<br />";
+			echo "User $user modified invoice $match[1] on $sql['timestamp'].<br />";
 		}
 	}
 	
@@ -62,7 +62,7 @@ EOD;
 		
 		if(preg_match($pattern,$sql['sqlquerie'],$match)) {
 			$user = htmlsafe($sql['email']).' (id '.htmlsafe($sql['userid']).')';
-			echo "User $user processed invoice $match[1] on $sql[timestamp] with amount $match[2].<br />";
+			echo "User $user processed invoice $match[1] on $sql['timestamp'] with amount $match[2].<br />";
 		}
 	}
 	

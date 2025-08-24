@@ -129,17 +129,19 @@
 
 	/*
 	* function: siLog
-	* purpose: wrapper function for blackbirdjs logging
-	* if debugging is OFF in config.php - then blackbirdjs.js wont be loaded in header.tpl and normal call to log.debug would fail and cause problems
+	* purpose: logging wrapper function (blackbirdjs support removed)
+	* now uses console.log for debugging output
 	*/
 	function siLog(level,message)
 	{
-		log_level = "log." + level + "('" + message + "')";
-		
-		//if blackbirdjs is loaded (ie. debug in config.php is on) run - else do nothing
-		if(window.log)
+		// Use browser console for logging instead of blackbirdjs
+		if(window.console && console[level])
 		{
-			eval(log_level);
+			console[level](message);
+		}
+		else if(window.console && console.log)
+		{
+			console.log("[" + level + "] " + message);
 		}
 	}
 	
