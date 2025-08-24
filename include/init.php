@@ -7,8 +7,8 @@ set_include_path(get_include_path() . PATH_SEPARATOR . "./library/"); // Still n
 // PDF library path no longer needed - using Composer autoloader
 set_include_path(get_include_path() . PATH_SEPARATOR . "./include/");
 
-// Zend Framework is now autoloaded via Composer
-
+// Load Composer autoloader for all managed libraries
+require_once('./vendor/autoload.php');
 
 //session_start();
 Zend_Session::start();
@@ -27,11 +27,6 @@ $frontendOptions = array(
  */
 
 
-
-/* 
- * Composer libraries - start
- */
-require_once('./vendor/autoload.php');
 
 #ini_set('display_errors',true);
 
@@ -161,6 +156,8 @@ $zendDb = Zend_Db::factory($config->database->adapter, array(
 
 include_once("./include/class/db.php");
 include_once("./include/class/index.php");
+include_once("./include/class/domain/id.php");
+include_once("./include/class/siLocal.php");
 $db = db::getInstance();
 
 include_once("./include/sql_queries.php");
