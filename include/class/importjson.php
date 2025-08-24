@@ -32,10 +32,14 @@ class importjson extends import
 						$i = "1";
 						foreach ($v2 as $k3 => $v3) 
 						{
-						
+							if($v3 ===null) echo $columns."value null";
 							//TODO: IF NULL don't ''
 							$i == "1" ? $columns .= $k3 : $columns .= ", ".$k3;
-							$i == "1" ? $values .= "'".$v3."'" : $values .= ", '".$v3."'";
+							if($v3 ==''){
+								$i == "1" ? $values .= "null" : $values .= ", null";
+							} else {
+								$i == "1" ? $values .= "'".$v3."'" : $values .= ", '".$v3."'";
+							}
 
 							$i++;
 						}
