@@ -48,10 +48,7 @@
 	<!--<script type="text/javascript" src="./include/jquery/jquery.conf.js.tpl"></script>-->
 
 {/literal}
-	{if $config->debug->level == "All"}
-	<link rel="stylesheet" type="text/css" href="./library/blackbirdjs/blackbird.css" />	
-	<script type="text/javascript" src="./library/blackbirdjs/blackbird.js"></script>
-	{/if}
+	{* blackbirdjs JavaScript debugging library removed *}
 {literal}
 	<script type="text/javascript" src="./include/jquery/jquery.validationEngine.js"></script>
 {/literal}

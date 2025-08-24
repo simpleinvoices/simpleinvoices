@@ -3,15 +3,11 @@
  * Zend framework init - start
  */
 set_include_path(get_include_path() . PATH_SEPARATOR . "./include/class");
-set_include_path(get_include_path() . PATH_SEPARATOR . "./library/");
+set_include_path(get_include_path() . PATH_SEPARATOR . "./library/"); // Still needed for custom libraries (paypal, WebApp, etc.)
 // PDF library path no longer needed - using Composer autoloader
 set_include_path(get_include_path() . PATH_SEPARATOR . "./include/");
 
-require_once 'Zend/Loader/Autoloader.php';
-
-$autoloader = Zend_Loader_Autoloader::getInstance();
-$autoloader->setFallbackAutoloader(true);
-#Zend_Loader::registerAutoload();
+// Zend Framework is now autoloaded via Composer
 
 
 //session_start();
@@ -33,18 +29,14 @@ $frontendOptions = array(
 
 
 /* 
- * Smarty inint - start
+ * Composer libraries - start
  */
+require_once('./vendor/autoload.php');
 
 #ini_set('display_errors',true);
 
-require_once("smarty/Smarty.class.php");
+// Legacy library that's not available via Composer
 require_once("library/paypal/paypal.class.php");
-require_once('./library/phpmailer/src/Exception.php');
-require_once('./library/phpmailer/src/PHPMailer.php');
-require_once('./library/phpmailer/src/SMTP.php');
-
-require_once('./library/HTMLPurifier.auto.php');
 include_once('./include/functions.php');
 
 //ob_start('addCSRFProtection');
