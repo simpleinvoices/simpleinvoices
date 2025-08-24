@@ -103,7 +103,7 @@
 	$patch['23']['date'] = "20061026";
 
 	$patch['24']['name'] = "Add note field to Products";
-	$patch['24']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `prod_notes` TEXT NOT NULL AFTER `prod_unit_price`";
+	$patch['24']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `prod_notes` TEXT NULL AFTER `prod_unit_price`";
 	$patch['24']['date'] = "20061026";
 
 /*Custom fields patches - start */
@@ -363,7 +363,7 @@ INSERT INTO `".TB_PREFIX."system_defaults` (`id`, `name`, `value`) VALUES
 	$patch['70']['date'] = "20070523";
 
 	$patch['71']['name'] = "Alter field name prod_notes to notes";
-	$patch['71']['patch'] = "ALTER TABLE `".TB_PREFIX."products` CHANGE `prod_notes` `notes` TEXT NOT NULL";
+	$patch['71']['patch'] = "ALTER TABLE `".TB_PREFIX."products` CHANGE `prod_notes` `notes` TEXT NULL";
 	$patch['71']['date'] = "20070523";
 
 	$patch['72']['name'] = "Alter field name prod_enabled to enabled";

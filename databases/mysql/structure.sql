@@ -245,7 +245,7 @@ CREATE TABLE IF NOT EXISTS `si_products` (
   `custom_field2` varchar(255) DEFAULT NULL,
   `custom_field3` varchar(255) DEFAULT NULL,
   `custom_field4` varchar(255) DEFAULT NULL,
-  `notes` text NOT NULL,
+  `notes` text DEFAULT NULL,
   `enabled` TINYINT(1) DEFAULT 1 NOT NULL,
   `visible` TINYINT(1) DEFAULT 1 NOT NULL,
   `attribute` varchar(255) DEFAULT NULL,
