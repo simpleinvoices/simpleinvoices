@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  simpleinvoices:
+    build: .
+    ports:
+      - "8888:80"
+    depends_on:
+      - mysql
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html
+    volumes:
+      - .:/var/www/html:z
+    networks:
+      - simpleinvoices-net
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: simple_invoices
+      MYSQL_USER: simpleuser
+      MYSQL_PASSWORD: simplepass
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./databases/mysql/Full_Simple_Invoices.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - simpleinvoices-net
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: rootpassword
+    ports:
+      - "8081:80"
+    depends_on:
+      - mysql
+    networks:
+      - simpleinvoices-net
+
+volumes:
+  mysql_data:
+
+networks:
+  simpleinvoices-net:
