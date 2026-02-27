@@ -11,7 +11,7 @@
 				<th>{{ $LANG['invoice_id'] ?? '' }}</th><td><a href='index.php?module=invoices&amp;view=quick_view&amp;id={{ $payment['ac_inv_id'] ?? '' }}&amp;action=view'>{{ $payment['ac_inv_id'] ?? '' }}</a></td>
 			</tr>
 			<tr>
-				<th>{{ siLocal::number($LANG['amount'] ?? '' }}</th><td>{{ $payment['ac_amount'] ?? '') }}</td>
+				<th>{{ siLocal::number($LANG['amount']) }}</th><td>{{ $payment['ac_amount'] ?? '' }}</td>
 			</tr>
 			<tr>
 				<th>{{ $LANG['date_upper'] ?? '' }}</th><td>{{ $payment['date'] ?? '' }}</td>
@@ -29,8 +29,7 @@
 				<th>{{ $LANG['online_payment_id'] ?? '' }}</th><td>{{ $payment['online_payment_id'] ?? '' }}</td>
 			</tr>
 			<tr>
-				<th>{!! outhtml($LANG['notes'] ?? '' }}</th><td>{{ $payment['ac_notes'] ?? '') !!}
-			</td>
+				<th>{{ $LANG['notes'] }}</th><td>{{ $payment['ac_notes'] ?? '' }}</td>
 			</tr>
 		</table>
 	</div>

@@ -152,7 +152,7 @@
 
 		@foreach(($invoiceItems ?? []) as $line => $invoiceItem)
 			<tbody class="line_item" id="row{{ $line ?? '' }}">
-				<tr class="tr_{cycle name="rows" values="A,B"}">
+				<tr class="tr_cycle" name="rows" values="A,B">
 					<td>
 					@if($line != "0")
 						<a 
@@ -223,7 +223,7 @@
 						</td>
 					@endfor
 					<td>
-						<input class="si_right" id="unit_price{{ siLocal::number_clean($line ?? '' }}" name="unit_price{{$line}}" size="7" value="{{ $invoiceItem['unit_price'] }}" />
+						<input class="si_right" id="unit_price{{ siLocal::number_clean($line)}}" name="unit_price{{$line}}" size="7" value="{{ $invoiceItem['unit_price'] }}" />
 					</td>
 				</tr>
 					{{ $invoiceItem['html'] }}
@@ -231,7 +231,7 @@
 					<td>
 					</td>
 					<td colspan="4">
-						<textarea input type="text" class="detail" name="description{{$line}}" id="description{{$line}}" rows="3" cols="3" wrap="nowrap">{{ $invoiceItem['description'] ?? '') !!}</textarea>
+						<textarea input type="text" class="detail" name="description{{ $line }}" id="description{{ $line }}" rows="3" cols="3" wrap="nowrap">{{ $invoiceItem['description'] }}</textarea>
 					</td>
 				</tr>
 				</tbody>
@@ -257,7 +257,7 @@
 		<tr>
 			<td class='si_invoice_notes' colspan="2">
 				<H5>{{ $LANG['notes'] ?? '' }}</H5>
-				<textarea input type="text" class="editor" name="note" rows="10" cols="70" wrap="nowrap">{!! outhtml($invoice['note'] ?? '') !!}</textarea>
+				<textarea input type="text" class="editor" name="note" rows="10" cols="70" wrap="nowrap">{{  $invoice['note'] }}</textarea>
 			</td>
 		</tr>		
 @endif
@@ -272,7 +272,7 @@
 		@else
 				<select name="preference_id">
 				@foreach(($preferences ?? []) as $preference)
-					<option @if($biller['id'] == $invoice['biller_id']) selected @endif value="{{ $preference['pref_id'] ?? '' }}">{{ $preference['pref_description'] ?? '' }}</option>
+					<option @if($biller['id'] == $invoice['biller_id']) selected @endif value="{{ $preference['pref_id']  }}">{{ $preference['pref_description']  }}</option>
 				@endforeach
 				</select>
 		@endif								 
@@ -282,17 +282,13 @@
 
 
 	<div class="card-footer text-end">
-			<button type="submit" class="btn btn-primary invoice_save" name="submit" value="{{ $LANG['save'] ?? '' }}">
-				<i class="ti ti-check me-1"></i>{{ $LANG['save'] ?? '' }}
+			<button type="submit" class="btn btn-primary invoice_save" name="submit" value="{{ $LANG['save']  }}">
+				<i class="ti ti-check me-1"></i>{{ $LANG['save'] }}
 			</button>
 			<a href="./index.php?module=invoices&amp;view=manage" class="btn btn-secondary">
-				<i class="ti ti-x me-1"></i>{{ $LANG['cancel'] ?? '' }}
+				<i class="ti ti-x me-1"></i>{{ $LANG['cancel'] }}
 			</a>
 	</div>
-
-</div>
-	</div>
-</div>
 
 
 
@@ -304,9 +300,10 @@
 @endif
 @if($invoice['type_id'] == 1 )
 	<input id="quantity0" type="hidden" size="10" value="1.00" name="quantity0"/>
-	<input id="line_item0" type="hidden" value="{{ $ ?? '' }}" name="line_item0"/>
+	<input id="line_item0" type="hidden" value="{{ $invoiceItems[0]['id'] }}" name="line_item0"/>
 @endif
-<input type="hidden" name="type" value="{{ $invoice['type_id'] ?? '' }}" />
+<input type="hidden" name="type" value="{{ $invoice['type_id'] }}" />
 <input type="hidden" name="op" value="insert_preference" />
-<input type="hidden" id="max_items" name="max_items" value="{{ $lines ?? '' }}" />
+<input type="hidden" id="max_items" name="max_items" value="{{ $lines }}" />
+
 </form>

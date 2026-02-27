@@ -1,7 +1,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="{{ $css | urlsafe }}" media="all">
+<link rel="stylesheet" type="text/css" href="{{ $css }}" media="all">
 <title>{{ $preference['pref_inv_wording'] ?? '' }} {{ $LANG['number_short'] ?? '' }}: {{ $invoice['id'] ?? '' }}</title>
 </head>
 <body>
@@ -16,7 +16,7 @@
 
 	<table class="table table-vcenter" width="100%" align="center">
 		<tr>
-			<td colspan="5"><img src="{{ $logo | urlsafe }}" border="0" hspace="0" align="left"></td>
+			<td colspan="5"><img src="{{ $logo }}" border="0" hspace="0" align="left"></td>
 			<th align="right"><span class="font1">Receipt for {{ $LANG['payment_id'] ?? '' }} {{ $payment['id'] ?? '' }}</span></th>
 		</tr>
 		<tr>
@@ -155,7 +155,7 @@
 		<tr class="" >
 			<td class="">{{ $payment['id'] ?? '' }}</td>
 			<td class="" colspan="3">{{ $payment['ac_inv_id'] ?? '' }}</td>
-			<td class="" align="right">{{ siLocal::number($preference['pref_currency_sign'] }} {{ $payment['ac_amount'] ?? '') }}</td>
+			<td class="" align="right">{{ $preference['pref_currency_sign'] }} {{ siLocal::number($payment['ac_amount']) }}</td>
 			<td class="" align="right">{{ $payment['date'] ?? '' }}</td>
 			<td class="" align="right">{{ $paymentType['pt_description'] ?? '' }}</td>
 		</tr>
