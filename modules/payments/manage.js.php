@@ -4,15 +4,12 @@
 
 			var columns = 9;
 			var padding = 12;
-			var grid_width = $('.col').width();
-			
+			var colEl = document.querySelector('.col');
+			var grid_width = colEl ? colEl.getBoundingClientRect().width : 800;
 			grid_width = grid_width - (columns * padding);
-			percentage_width = grid_width / 100; 
+			var percentage_width = grid_width / 100; 
 
-		//	console.log("URL: %s",url_extension);
-			$("#manageGrid").flexigrid
-			(
-			{
+			siTablerGrid("#manageGrid", {
 
 			url: 'index.php?module=payments&view=xml&id={/literal}{$inv_id}{literal}&c_id={/literal}{$c_id}{literal}',
 			dataType: 'xml',

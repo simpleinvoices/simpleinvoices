@@ -122,7 +122,7 @@ abstract class CustomField {
 	function getDescription($id) {
 		global $LANG;
 
-		$sql = "SELECT description FROM ".TB_PREFIX."customFields WHERE id = :id";
+		$sql = "SELECT description FROM ".TB_PREFIX."custom_fields WHERE id = :id";
 		$sth = dbQuery($sql, ':id', $id);
 		$field = $sth->fetch();
 		

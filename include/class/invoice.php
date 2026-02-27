@@ -390,9 +390,8 @@ class invoice {
                 {
                     $sql .="
                        (SELECT IF((owing <= 0 OR DateDiff(now(), date) < 0), 0, DateDiff(now(), date))) AS Age,
-                       (SELECT (CASE WHEN Age >= 0 THEN ''
-                                     WHEN Age <= 14 THEN '0-14'
-                                     WHEN Age <= 30 THEN '15-30'
+                       (SELECT (CASE WHEN Age <= 0 THEN ''
+                                     WHEN Age <= 30 THEN '0-30'
                                      WHEN Age <= 60 THEN '31-60'
                                      WHEN Age <= 90 THEN '61-90'
                                      ELSE '90+'  END)) AS aging,";

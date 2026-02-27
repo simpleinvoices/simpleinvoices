@@ -30,7 +30,7 @@
 
 {else}
 
-	<table id="manageGrid" style="display:none"></table>
+	<div id="manageGrid"></div>
 	{include file='payment_types/manage.js.php'}
 
 {/if}

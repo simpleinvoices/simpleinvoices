@@ -1,78 +1,25 @@
+<script type="text/javascript">
+var si_conf_delete_line_item = {if $config->confirm->deleteLineItem}true{else}false{/if};
+var si_conf_spreadsheet = '{$config->export->spreadsheet|escape:'javascript'}';
+var si_conf_wordprocessor = '{$config->export->wordprocessor|escape:'javascript'}';
+var si_lang_description_conf = '{$LANG.description|escape:'javascript'}';
+</script>
 {literal}
 <script type="text/javascript">
 $(document).ready(function(){
 
-	$("#Container").after(
-	'<div id="confirm_delete_line_item" style="display: hidden;" title="Delete this line item?">' +
-		'<div style="padding-right: 2em;">If you choose "Delete" the line item will be removed on Save.</div>' +
-	'</div>'
-	);
-	
-      	$("#confirm_delete_line_item").dialog({
-			autoOpen: false,
-			bgiframe: true,
-			resizable: false,
-			modal: true,
-			width:300,
-			height:170,
-			overlay: {
-				backgroundColor: '#000',
-				opacity: 0.5
-			},
-			buttons: {
-				Delete: function() {
-					var delete_function = $("#confirm_delete_line_item").data('delete_function');
-					(delete_function)();
-					$(this).dialog('close');
-				},
-				Cancel: function() {
-					$(this).dialog('close');
-				}
-			}
-		});
-	/*
-	Load the jquery datePicker with out config
-	*/
-	if($.datePicker){
-		$.datePicker.setDateFormat('ymd','-');
-		$('input.date-picker').datePicker({startDate:'01/01/1970'});
-		$('input#date2').datePicker({endDate:'01/01/1970'});
-	}
-	if($(".showdownloads")){
-		$(".showdownloads").click(function(){
-				var offset = $(this).offset();
-				$(this)
-					.next(".downloads")
-						.css("top", offset.top + "px")
-						.css("left", offset.left + "px")
-						.css("position", "absolute")
-						.css("background-color", "#F1F1F1")
-						.css("padding", "5px")
-						.css("border", "solid 1px #CCC")
-						.hover(function(){}, function(){$(this).hide()})
-						.show();
-				return false;
-			})
-	}
-	if($("#ac_me")){
-		$("#ac_me").autocomplete("index.php?module=payments&view=process_ajax", { minChars:1, matchSubset:1, matchContains:1, cacheLength:10, onItemSelect:selectItem, formatItem:formatItem, selectOnly:1 });
-	}
-	
-	if ($('#tabs_customer'))
-		$('#tabs_customer').tabs();
-			
-	if($('#trigger-tab'))
-		$('#trigger-tab').after('<p><a href="#" onclick="$(\'#container-1\').triggerTab(3); return false;">Activate third tab</a></p>');
-				
-	if($('#custom-tab-by-hash')){
-		$('#custom-tab-by-hash').click(function() {
-		    var win = window.open(this.href, '', 'directories,location,menubar,resizable,scrollbars,status,toolbar');
-		    win.focus();
+	// Confirm modal, tabs, datePicker, autocomplete: handled by si-bootstrap.js, si-litepicker.js, si-autocomplete.js
+	if (document.querySelector('.showdownloads')) {
+		document.querySelectorAll('.showdownloads').forEach(function(el){
+			el.setAttribute('data-bs-toggle', 'dropdown');
+			el.setAttribute('aria-expanded', 'false');
+			if (el.nextElementSibling && !el.nextElementSibling.classList.contains('dropdown-menu')) el.nextElementSibling.classList.add('dropdown-menu');
+			if (el.parentNode && !el.parentNode.classList.contains('dropdown')) el.parentNode.classList.add('dropdown');
 		});
 	}
-	
-	
-	/*Load the cluetip - only if cluetip plugin has been loaded*/
+	if (document.querySelector('#custom-tab-by-hash')) {
+		document.querySelector('#custom-tab-by-hash').addEventListener('click', function(e) { var w = window.open(this.href, '', 'directories,location,menubar,resizable,scrollbars,status,toolbar'); if (w) w.focus(); e.preventDefault(); });
+	}
 	if(jQuery.cluetip)
 	{
 		$('a.cluetip').cluetip(
@@ -91,40 +38,31 @@ $(document).ready(function(){
 		);
 	}
 
-	//load the configs for the html editor
-	//$('.editor').livequery(function(){ $(this).wysiwyg({
-	if($('.editor') && $('.editor')[0] && typeof($('.editor')[0].contentEditable) != 'undefined'
-	&& !(
-	(navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/iPad/i))
-	&& navigator.userAgent.match(/CPU\sOS\s[0123]_\d/i))) //only if it is supported | iPhone OS <= 3.2 incorrectly report it
+	// Tabler WYSIWYG (HugeRTE) - init on textarea.editor
+	if (document.querySelector('textarea.editor') && !(
+		(navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/iPad/i))
+		&& navigator.userAgent.match(/CPU\sOS\s[0123]_\d/i)))
 	{
-	$('.editor').wysiwyg({
-    controls : {
-	    html : { visible : true },
-	    createLink : { visible : false },
-	    insertImage : { visible : false },
-		separator00 : { visible : false, separator : false },
-		separator01 : { visible : false, separator : false },
-		separator02 : { visible : false, separator : false },
-		separator03 : { visible : false, separator : false },
-		separator04 : { visible : false, separator : false },
-		separator05 : { visible : false, separator : false },
-		separator06 : { visible : false, separator : false },
-		separator07 : { visible : false, separator : false },
-		separator08 : { visible : false, separator : false },
-		separator09 : { visible : false, separator : false },
-		h1mozilla : { visible : false},
-		h2mozilla : { visible : false},
-		h3mozilla : { visible : false},
-		h1 : { visible : false},
-		h2 : { visible : false},
-		h3 : { visible : false},
-		increaseFontSize : { visible : false },
-		decreaseFontSize : { visible : false },
-        insertOrderedList : { visible : true },
-        insertUnorderedList : { visible : true }
-    }
-	});
+		if (window.hugeRTE) {
+			var editorOpts = {
+				selector: 'textarea.editor',
+				base_url: 'https://cdn.jsdelivr.net/npm/hugerte@1.0.10',
+				suffix: '.min',
+				plugins: 'lists code',
+				toolbar: 'undo redo | bold italic | bullist numlist | removeformat | code',
+				menubar: false,
+				statusbar: false,
+				height: 220,
+				promotion: false,
+				branding: false,
+				content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, sans-serif; font-size: 14px; }'
+			};
+			if (document.documentElement.getAttribute('data-bs-theme') === 'dark') {
+				editorOpts.skin = 'oxide-dark';
+				editorOpts.content_css = 'dark';
+			}
+			window.hugeRTE.init(editorOpts);
+		}
 	}
 
 	//hide the description field for each line item on invoice creation
@@ -134,124 +72,37 @@ $(document).ready(function(){
 	/*
 	* Product Change - updates line item with product price info
 	*/
-	$(".product_change").livequery('change',function () { 
-      	var $row_number = $(this).attr("rel");
-      	var $product = $(this).val();
-      	var $quantity = $("#quantity"+$row_number).attr("value");
- 		invoice_product_change($product, $row_number, $quantity);
-		siLog('debug','{/literal}{$LANG.description}{literal}');
-     });
- 
-
-	/*
-	* Product Inventory Change - updates line item with product price info
-	*/
-	$(".product_inventory_change").livequery('change',function () { 
-      	var $product = $(this).val();
-      	var $existing_cost = $("#cost").val();
- 		product_inventory_change($product,$existing_cost);
-     });
- 
-    
-	//delete line in invoice
-	$(".trash_link").livequery('click',function (e) { 
-		e.preventDefault();
-      id = $(this).attr("rel");
-	{/literal}
-	{if $config->confirm->deleteLineItem}
-	{literal}
-		var delete_function = function() { 
-			delete_row(id); 
+	document.addEventListener('change', function(e) {
+		if (e.target.matches('.product_change')) {
+			var row_number = e.target.getAttribute('rel');
+			var product = e.target.value;
+			var qel = document.getElementById('quantity'+row_number);
+			invoice_product_change(product, row_number, qel ? qel.value : '');
+			siLog('debug', si_lang_description_conf);
 		}
-	{/literal}
-		$("#confirm_delete_line_item").data('delete_function', delete_function);
-		$("#confirm_delete_line_item").dialog('open');
-	{else}
-		delete_row(id);
-	{/if}
-	{literal}
-    });
-	
-	//delete line in invoice
-	$(".trash_link_edit").livequery('click',function (e) { 
-		e.preventDefault();
-      id = $(this).attr("rel");
-
-	{/literal}
-	{if $config->confirm->deleteLineItem}
-	{literal}
-		var delete_function = function() {
-			delete_line_item(id); 
+		if (e.target.matches('.product_inventory_change')) {
+			var costEl = document.getElementById('cost');
+			product_inventory_change(e.target.value, costEl ? costEl.value : null);
 		}
-	{/literal}
-		$("#confirm_delete_line_item").data('delete_function', delete_function);
-		$("#confirm_delete_line_item").dialog('open');
-	{else}
-		delete_line_item(id);
-	{/if}
-	{literal}
-    });
-
-	//add new line item in invoices
-	$("a.add_line_item").click(function (e) { 
-		e.preventDefault();
-		add_line_item();
-		//(unused) already done in the add_line_item fn
-		//autoFill($(".details"), "Description");
-    });
-
-
-	//calc number of line items 
-	$(".invoice_save").click(function () {
-		$('#gmail_loading').show();
-		siLog('debug','invoice save');
-		count_invoice_line_items();
-		siLog('debug','invoice save- post count');
-		//invoice_save_remove_autofill();
-		$('#gmail_loading').hide();
 	});
-
-	
-	//Autofill "Description" into the invoice items description/notes textarea
-	$(".detail").livequery(function(){
-			
-			var description = $(".detail").val();
-		
-			if ( description == "")
-			{
-				$(".detail").val('{/literal}{$LANG.description}{literal}');
-				$(".detail").css({ color: '#b2adad'});
-			}
-	
-			$(".detail").focus(function(){
-	            if($(this).val()=="{/literal}{$LANG.description}{literal}"){
-	               $(this).val("").css({ color: '#333' });
-            	}
-			});
+	document.addEventListener('click', function(e) {
+		var t = e.target.closest('.trash_link');
+		if (t) { e.preventDefault(); var id = t.getAttribute('rel'); if (si_conf_delete_line_item && window.siConfirmDeleteModal) siConfirmDeleteModal.open(function(){ delete_row(id); }); else delete_row(id); return; }
+		t = e.target.closest('.trash_link_edit');
+		if (t) { e.preventDefault(); var id = t.getAttribute('rel'); if (si_conf_delete_line_item && window.siConfirmDeleteModal) siConfirmDeleteModal.open(function(){ delete_line_item(id); }); else delete_line_item(id); return; }
+		if (e.target.closest('a.add_line_item')) { e.preventDefault(); add_line_item(); return; }
+		if (e.target.closest('.invoice_save')) { var g = document.getElementById('gmail_loading'); if (g) g.style.display = ''; siLog('debug','invoice save'); count_invoice_line_items(); if (g) g.style.display = 'none'; return; }
+		if (e.target.closest('.export_window')) { var ed = document.getElementById('export_dialog'); if (ed && window.bootstrap && window.bootstrap.Modal) { var m = bootstrap.Modal.getInstance(ed); if (m) m.hide(); } return; }
+		t = e.target.closest('.invoice_export_dialog');
+		if (t) { e.preventDefault(); export_invoice(t.getAttribute('rel'), si_conf_spreadsheet, si_conf_wordprocessor); }
 	});
-	//(unused) the color is now correctly handled
-    //$(".detail").css({ color: "#b2adad" });
-
-
-	//Export dialog window - onclick export button close window
-
-	$(".export_window").livequery('click',function () { 
-		$('.ui-dialog-titlebar-close').trigger('click');
-    });
-
-/*
-	$(".export_window").click(function () { 
-		$('.ui-dialog-titlebar-close').trigger('click');
-    });
-*/
-	/*
-	* Product Change - updates line item with product price info
-	*/
-	$(".invoice_export_dialog").livequery('click',function () { 
-      	var $row_number = $(this).attr("rel");
-		siLog('debug',"{/literal}$config->export->spreadsheet{literal}");
-		export_invoice($row_number, '{/literal}{$config->export->spreadsheet}{literal}','{/literal}{$config->export->wordprocessor}{literal}');
-     });
+	document.querySelectorAll('.detail').forEach(function(el) {
+		if (!el.value || el.value === '') { el.value = si_lang_description_conf; el.style.color = '#b2adad'; }
+		el.addEventListener('focus', function() { if (this.value === si_lang_description_conf) { this.value = ''; this.style.color = '#333'; } });
+		el.addEventListener('blur', function() { if (this.value === '') { this.value = si_lang_description_conf; this.style.color = '#b2adad'; } });
+	});
+	document.addEventListener('focus', function(e) { if (e.target.matches('.detail') && e.target.value === si_lang_description_conf) { e.target.value = ''; e.target.style.color = '#333'; } }, true);
+	document.addEventListener('blur', function(e) { if (e.target.matches('.detail') && e.target.value === '') { e.target.value = si_lang_description_conf; e.target.style.color = '#b2adad'; } }, true);
 
 });
 

@@ -21,7 +21,7 @@
 
 {else}
 	
-	<table id="manageGrid" style="display:none"></table>
+	<div id="manageGrid"></div>
 	{include file='user/manage.js.php' LANG=$LANG}
 	
 {/if}

@@ -44,11 +44,11 @@ function GetCustomPath($name,$mode='template'){
 	$out = null; // Initialize return variable
 	
 	if($mode=='template'){
-		if($use_custom and file_exists("{$my_custom_path}default_template/{$name}.tpl")){
-			$out="custom/default_template/{$name}.tpl";
+		if($use_custom and file_exists("{$my_custom_path}default_template/{$name}.blade.php")){
+			$out="custom/default_template/{$name}.blade.php";
 		}
-		elseif(file_exists("./templates/default/{$name}.tpl")){
-			$out="templates/default/{$name}.tpl";
+		elseif(file_exists("./templates/default/{$name}.blade.php")){
+			$out="templates/default/{$name}.blade.php";
 		}
 	}
 	if($mode=='module'){
@@ -296,9 +296,9 @@ if( !in_array($module."_".$view, $early_exit) )
 			*/	
 			if($extension->enabled == "1")
 			{
-				if(file_exists("./extensions/$extension->name/templates/default/header.tpl")) 
+				if(file_exists("./extensions/$extension->name/templates/default/header.blade.php")) 
 				{
-					$smarty -> display("extensions/$extension->name/templates/default/header.tpl");
+					$smarty -> display("extensions/$extension->name/templates/default/header.blade.php");
 
 					$extensionHeader++;
 				}
@@ -376,8 +376,8 @@ if($module == "export" OR $view == "export" OR $module == "api")
 		*/	
 		if($extension->enabled == "1")
 		{
-			if(file_exists("./extensions/$extension->name/include/jquery/$extension->name.post_load.jquery.ext.js.tpl")) {
-					$smarty -> display("extensions/$extension->name/include/jquery/$extension->name.post_load.jquery.ext.js.tpl");
+			if(file_exists("./extensions/$extension->name/include/jquery/$extension->name.post_load.jquery.ext.js.blade.php")) {
+					$smarty -> display("extensions/$extension->name/include/jquery/$extension->name.post_load.jquery.ext.js.blade.php");
 			}
 		}
 		
@@ -388,7 +388,7 @@ if($module == "export" OR $view == "export" OR $module == "api")
 	*/
 	if($extensionPostLoadJquery == 0 AND $module !='auth') 
 	{
-		$smarty -> display("include/jquery/post_load.jquery.ext.js.tpl");
+		$smarty -> display("include/jquery/post_load_jquery_ext_js.blade.php");
 	}
 
 /*
@@ -412,9 +412,9 @@ if($module == "export" OR $view == "export" OR $module == "api")
 			*/	
 			if($extension->enabled == "1")
 			{
-				if(file_exists("./extensions/$extension->name/templates/default/menu.tpl")) 
+				if(file_exists("./extensions/$extension->name/templates/default/menu.blade.php")) 
 				{
-					$smarty -> display("extensions/$extension->name/templates/default/menu.tpl");
+					$smarty -> display("extensions/$extension->name/templates/default/menu.blade.php");
 					$extensionMenu++;
 				}
 			}
@@ -446,9 +446,9 @@ if($module == "export" OR $view == "export" OR $module == "api")
 			*/	
 			if($extension->enabled == "1")
 			{
-				if(file_exists("./extensions/$extension->name/templates/default/main.tpl")) 
+				if(file_exists("./extensions/$extension->name/templates/default/main.blade.php")) 
 				{
-					$smarty -> display("extensions/$extension->name/templates/default/main.tpl");
+					$smarty -> display("extensions/$extension->name/templates/default/main.blade.php");
 					$extensionMain++;
 				}
 			}
@@ -485,10 +485,10 @@ if($module == "export" OR $view == "export" OR $module == "api")
 		*/	
 		if($extension->enabled == "1")
 		{
-			if(file_exists("./extensions/$extension->name/templates/default/$module/$view.tpl")) 
+			if(file_exists("./extensions/$extension->name/templates/default/$module/$view.blade.php")) 
 			{
 				$path 		= "extensions/$extension->name/templates/default/$module/";
-				$my_tpl_path="extensions/{$extension->name}/templates/default/$module/$view.tpl";
+				$my_tpl_path="extensions/{$extension->name}/templates/default/$module/$view.blade.php";
 				$extensionTemplates++;
 			}	
 		}
@@ -519,12 +519,12 @@ if($module == "export" OR $view == "export" OR $module == "api")
 		echo "<p>Unable to find template for module '<strong>$module</strong>' and view '<strong>$view</strong>'</p>";
 		echo "<p>Checked paths:</p>";
 		echo "<ul>";
-		echo "<li>Custom: ./custom/default_template/$module/$view.tpl</li>";
-		echo "<li>Default: ./templates/default/$module/$view.tpl</li>";
+		echo "<li>Custom: ./custom/default_template/$module/$view.blade.php</li>";
+		echo "<li>Default: ./templates/default/$module/$view.blade.php</li>";
 		echo "</ul>";
 		
 		// Try to provide helpful suggestion
-		if (file_exists("./templates/default/$module/$view.tpl")) {
+		if (file_exists("./templates/default/$module/$view.blade.php")) {
 			echo "<p><strong>Note:</strong> Default template exists but GetCustomPath didn't find it!</p>";
 		}
 		
@@ -556,9 +556,9 @@ if($module == "export" OR $view == "export" OR $module == "api")
 			*/	
 			if($extension->enabled == "1")
 			{
-				if(file_exists("./extensions/$extension->name/templates/default/footer.tpl")) 
+				if(file_exists("./extensions/$extension->name/templates/default/footer.blade.php")) 
 				{
-					$smarty -> display("extensions/$extension->name/templates/default/footer.tpl");
+					$smarty -> display("extensions/$extension->name/templates/default/footer.blade.php");
 					$extensionFooter++;
 				}
 			}

@@ -1,41 +1,24 @@
 <script type="text/javascript">
 {literal}
-			var columns = 8;
+			var columns = 7;
 			var padding = 12;
-			var action_menu = 140;
-			var grid_width = $('.col').width();
-			//var url = 'index.php?module=invoices&view=xml';
-			
+			var action_menu = 100;
+			var colEl = document.querySelector('.col');
+			var grid_width = colEl ? colEl.getBoundingClientRect().width : 800;
 			grid_width = grid_width - ((columns -0.5) * padding) - action_menu;
-			percentage_width = grid_width / 100; 
-			
-			function test(com,grid)
-			{
-				if (com=='Delete')
-					{
-						confirm('Delete ' + $('.trSelected',grid).length + ' items?')
-					}
-				else if (com=='Add')
-					{
-						alert('Add New Item');
-					}			
-			}
+			var percentage_width = grid_width / 100;
 
-
-			$("#manageGrid").flexigrid
-			(
-			{
+			siTablerGrid("#manageGrid", {
 			url: "{/literal}{$url}{literal}",
 			dataType: 'xml',
 			colModel : [
-				{display: '{/literal}{$LANG.actions}{literal}', name : 'actions', width : action_menu, sortable : false, align: 'center'},
+				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'center'},
 				{display: '{/literal}{$LANG.id}{literal}', name : 'index_id', width :15 * percentage_width, sortable : true, align: 'right'},
 				{display: '{/literal}{$LANG.biller}{literal}', name : 'biller', width :20 * percentage_width, sortable : true, align: 'left'},
 				{display: '{/literal}{$LANG.customer}{literal}', name : 'customer', width :20 * percentage_width, sortable : true, align: 'left'},
 				{display: '{/literal}{$LANG.date_upper}{literal}', name : 'date', width : 15 * percentage_width, sortable : true, align: 'right'},
-				{display: '{/literal}{$LANG.total}{literal}', name : 'invoice_total', width : 10 * percentage_width, sortable : true, align: 'right'},
-				{display: '{/literal}{$LANG.owing}{literal}', name : 'owing', width : 10 * percentage_width, sortable : true, align: 'right'},
-				{display: '{/literal}{$LANG.aging}{literal}', name : 'aging', width : 10 * percentage_width, sortable : true, align: 'right'}
+				{display: '{/literal}{$LANG.total}{literal}', name : 'invoice_total', width : 15 * percentage_width, sortable : true, align: 'right'},
+				{display: '{/literal}{$LANG.status}{literal}', name : 'status', width : 15 * percentage_width, sortable : false, align: 'center'}
 				
 				],
 				/*

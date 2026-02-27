@@ -84,37 +84,43 @@ Zend_Date::setOptions(array('cache' => $cache)); // Active aussi pour Zend_Local
  * Zend Framework cache section - end
  */
 
-$smarty = new Smarty();
-
-$smarty->debugging = false;
-
-// Set template directory for proper path resolution
-$smarty->setTemplateDir(array(
+$smartyViewPaths = array(
+    '.',
     './templates/default/',
-    './',
     './templates/',
     './custom/',
     './custom/default_template/',
     './include/jquery/',
     './modules/',
     './extensions/'
-));
-
-//cache directory. Have to be writeable (chmod 777)
-$smarty->setCompileDir("tmp/cache");
-if(!is_writable($smarty->getCompileDir())) {
-	simpleInvoicesError("notWriteable", 'folder', $smarty->getCompileDir());
-	//exit("Simple Invoices Error : The folder <i>".$smarty -> compile_dir."</i> has to be writeable");
+);
+$smartyCachePath = './tmp/cache';
+if (!is_writable($smartyCachePath)) {
+	simpleInvoicesError("notWriteable", 'folder', $smartyCachePath);
 }
 
-//adds own smarty plugins
-$smarty->addPluginsDir("plugins");
-$smarty->addPluginsDir("include/smarty_plugins");
-
-//add stripslash smarty function - updated for Smarty v4 API
-$smarty->registerPlugin('modifier', 'unescape', 'stripslashes');
+if (class_exists('Jenssegers\Blade\Blade')) {
+	require_once(__DIR__ . '/blade_view.php');
+	$smarty = new BladeView($smartyViewPaths, $smartyCachePath);
+} else {
+	$smarty = new Smarty();
+	$smarty->setTemplateDir($smartyViewPaths);
+	$smarty->setCompileDir($smartyCachePath . '/smarty_compile');
+	$smarty->setCacheDir($smartyCachePath . '/smarty_cache');
+	$pluginDirs = array('./include/smarty_plugins');
+	if (is_dir('./vendor/smarty/smarty/libs/plugins')) {
+		$pluginDirs[] = './vendor/smarty/smarty/libs/plugins';
+	}
+	$smarty->setPluginsDir($pluginDirs);
+	if (!is_dir($smarty->getCompileDir())) {
+		mkdir($smarty->getCompileDir(), 0777, true);
+	}
+	if (!is_dir($smarty->getCacheDir())) {
+		mkdir($smarty->getCacheDir(), 0777, true);
+	}
+}
 /* 
- * Smarty inint - end
+ * Blade or Smarty init - end
  */
 
 
@@ -166,18 +172,7 @@ $db = db::getInstance();
 
 include_once("./include/sql_queries.php");
 
-// Smarty 4.x compatible modifier registration
-$smarty->registerPlugin('modifier', 'siLocal_number', array("siLocal", "number"));
-$smarty->registerPlugin('modifier', 'siLocal_number_clean', array("siLocal", "number_clean"));
-$smarty->registerPlugin('modifier', 'siLocal_number_trim', array("siLocal", "number_trim"));
-$smarty->registerPlugin('modifier', 'siLocal_number_formatted', array("siLocal", "number_formatted"));
-$smarty->registerPlugin('modifier', 'siLocal_date', array("siLocal", "date"));
-$smarty->registerPlugin('modifier', 'htmlsafe', 'htmlsafe');
-$smarty->registerPlugin('modifier', 'urlsafe', 'urlsafe');
-$smarty->registerPlugin('modifier', 'urlencode', 'urlencode');
-$smarty->registerPlugin('modifier', 'outhtml', 'outhtml');
-$smarty->registerPlugin('modifier', 'htmlout', 'outhtml'); //common typo
-$smarty->registerPlugin('modifier', 'urlescape', 'urlencode'); //common typo 
+// Blade modifiers are registered in BladeView::registerDirectives(); use {{ htmlsafe($var) }} etc. in templates
 $install_tables_exists = checkTableExists(TB_PREFIX."biller");
 if ($install_tables_exists == true)
 {

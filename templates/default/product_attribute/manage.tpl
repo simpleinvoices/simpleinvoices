@@ -18,7 +18,7 @@
 {else}
 <h3>{$LANG.manage_product_attributes} :: <a href="index.php?module=product_attribute&view=add">{$LANG.add_product_attribute}</a></h3>
 <hr />
-<table id="manageGrid" style="display:none"></table>
+<div id="manageGrid"></div>
 
  {include file='product_attribute/manage.js.php'}
 {/if}

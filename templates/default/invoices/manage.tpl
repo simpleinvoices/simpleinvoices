@@ -37,23 +37,26 @@
 	</div>
 
 
-	<table id="manageGrid" style="display:none"></table>
+	<div id="manageGrid"></div>
 	{include file='invoices/manage.js.php'}
 
 
-	<div id="export_dialog" class="flora" title="Export">
-		<div class="si_toolbar si_toolbar_dialog">
-					<a title='{$LANG.export_tooltip} {$LANG.export_pdf_tooltip}' class='export_pdf export_window'><img src="./images/common/page_white_acrobat.png" alt="" />
-						{$LANG.export_pdf}
-					</a>
-
-					<a title='{$LANG.export_tooltip} {$LANG.export_xls_tooltip} .{$config->export->spreadsheet}' class='export_xls export_window'><img src="./images/common/page_white_excel.png" alt="" />
-						{$LANG.export_xls}
-					</a>
-
-				   <a title='{$LANG.export_tooltip} {$LANG.export_doc_tooltip} .{$config->export->wordprocessor}' class='export_doc export_window' ><img src="./images/common/page_white_word.png" alt="" />
-						{$LANG.export_doc}
-					</a>
+	<div class="modal fade" id="export_dialog" tabindex="-1" aria-labelledby="export_dialog_title" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="export_dialog_title">{$LANG.export}</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body d-flex gap-2 flex-wrap">
+					<a title='{$LANG.export_tooltip} {$LANG.export_pdf_tooltip}' class='btn btn-outline-danger export_pdf export_window'><i class="ti ti-file-certificate me-1"></i>{$LANG.export_pdf}</a>
+					<a title='{$LANG.export_tooltip} {$LANG.export_xls_tooltip} .{$config->export->spreadsheet}' class='btn btn-outline-success export_xls export_window'><i class="ti ti-file-spreadsheet me-1"></i>{$LANG.export_xls}</a>
+					<a title='{$LANG.export_tooltip} {$LANG.export_doc_tooltip} .{$config->export->wordprocessor}' class='btn btn-outline-primary export_doc export_window'><i class="ti ti-file-text me-1"></i>{$LANG.export_doc}</a>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{$LANG.cancel}</button>
+				</div>
+			</div>
 		</div>
 	</div>
 {/if}

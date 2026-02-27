@@ -62,8 +62,8 @@ if ($db_server == 'pgsql') {
 			 (SUM(ii.total) - coalesce(sum(ap.ac_amount), 0)) AS INV_OWING ,
 			 to_char(date,'YYYY-MM-DD') AS Date ,
 			 (SELECT now()::date - iv.date) AS Age,
-			 (CASE WHEN now()::date - iv.date <= '14 days'::interval THEN '0-14'
-			  WHEN now()::date - iv.date <= '30 days'::interval THEN '15-30'
+			 (CASE WHEN now()::date - iv.date <= '0 days'::interval THEN ''
+			  WHEN now()::date - iv.date <= '30 days'::interval THEN '0-30'
 			  WHEN now()::date - iv.date <= '60 days'::interval THEN '31-60'
 			  WHEN now()::date - iv.date <= '90 days'::interval THEN '61-90'
 			  ELSE '90+'
@@ -97,9 +97,8 @@ if ($db_server == 'pgsql') {
 		       (SELECT (coalesce(invoice_total,0) - coalesce(INV_PAID,0))) As owing,
 		       DATE_FORMAT(date,'%Y-%m-%d') AS date,
 		       (SELECT IF((owing = 0), 0, DateDiff(now(), date))) AS Age,
-		       (SELECT (CASE WHEN Age = 0 THEN ''
-		                     WHEN Age <= 14 THEN '0-14'
-		                     WHEN Age <= 30 THEN '15-30'
+		       (SELECT (CASE WHEN Age <= 0 THEN ''
+		                     WHEN Age <= 30 THEN '0-30'
 		                     WHEN Age <= 60 THEN '31-60'
 		                     WHEN Age <= 90 THEN '61-90'
 		                     ELSE '90+'  END)) AS aging,

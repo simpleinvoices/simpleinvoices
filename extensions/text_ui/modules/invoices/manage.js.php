@@ -24,15 +24,13 @@ var email_tooltip = "{/literal}{$LANG.email}  {$invoice.preference.pref_inv_word
 
 			var columns = 7;
 			var padding = 12;
-			var grid_width = $('.col').width();
-			
+			var colEl = document.querySelector('.col');
+			var grid_width = colEl ? colEl.getBoundingClientRect().width : 800;
 			grid_width = grid_width - (columns * padding);
-			percentage_width = grid_width / 100; 
+			var percentage_width = grid_width / 100; 
 			
 
-			$("#manageGrid").flexigrid
-			(
-			{
+			siTablerGrid("#manageGrid", {
 			url: 'index.php?module=invoices&view=xml',
 			dataType: 'xml',
 			colModel : [

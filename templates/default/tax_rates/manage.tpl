@@ -27,7 +27,7 @@
 
 {else}
 
-	<table id="manageGrid" style="display:none"></table>
+	<div id="manageGrid"></div>
 	{include file='tax_rates/manage.js.php'}
  
 {/if}

@@ -28,7 +28,7 @@
         		{$LANG.no_payments_invoice}
 			</div>        		
         {else}
-        	<table id="manageGrid" style="display:none"></table>
+        	<div id="manageGrid"></div>
         	{include file='payments/manage.js.php' get=$smarty.get}
         {/if}
 
@@ -40,7 +40,7 @@
 				{$LANG.no_payments_customer}
 			</div>        		
         {else}
-    	    <table id="manageGrid" style="display:none"></table>
+    	    <div id="manageGrid"></div>
         	{include file='payments/manage.js.php' get=$smarty.get}
         {/if}
 
@@ -52,7 +52,7 @@
         		{$LANG.no_payments}
 			</div>        		
         {else}
-        	<table id="manageGrid" style="display:none"></table>
+        	<div id="manageGrid"></div>
         	{include file='payments/manage.js.php' get=$smarty.get}
         {/if}
 

@@ -33,7 +33,7 @@ INSERT INTO si_customFieldCategories (id, name) VALUES (3, 'product');
 INSERT INTO si_customFieldCategories (id, name) VALUES (4, 'invoice');
 SELECT setval('si_customfieldcategories_id_seq', 4);
 
-CREATE TABLE si_customFields (
+CREATE TABLE si_custom_fields (
 	id serial PRIMARY KEY,
 	pluginId int NOT NULL,
 	categorieId int NOT NULL REFERENCES si_customfieldcategories(id),
@@ -715,7 +715,7 @@ COMMENT ON COLUMN si_customfieldvalues.itemid IS 'could be invocie-id,customer-i
 d etc.';
 $$);
 INSERT INTO si_sql_patchmanager (sql_id, sql_patch_ref, sql_patch, sql_release, sql_statement) VALUES 
-(136, '135', 'Create si_customFields table', '20070629', $$CREATE TABLE si_customFields (
+(136, '135', 'Create si_custom_fields table', '20070629', $$CREATE TABLE si_custom_fields (
 id serial PRIMARY KEY,
 pluginId int NOT NULL,
 categorieId int NOT NULL,
@@ -728,7 +728,7 @@ INSERT INTO si_sql_patchmanager (sql_id, sql_patch_ref, sql_patch, sql_release, 
 INSERT INTO si_sql_patchmanager (sql_id, sql_patch_ref, sql_patch, sql_release, sql_statement) VALUES 
 (138, '137', 'Custom field conversion', '20071006', $$SELECT 1+1$$);
 INSERT INTO si_sql_patchmanager (sql_id, sql_patch_ref, sql_patch, sql_release, sql_statement) VALUES 
-(139, '138', 'Add custom field order', '20071006', $$ALTER TABLE si_customFields ADD "order" INT;$$);
+(139, '138', 'Add custom field order', '20071006', $$ALTER TABLE si_custom_fields ADD "order" INT;$$);
 INSERT INTO si_sql_patchmanager (sql_id, sql_patch_ref, sql_patch, sql_release, sql_statement) VALUES 
 (140, '139', 'Correct Foreign Key Tax ID Field Type in Invoice Items Table', '20071126', $$SELECT 1+1$$);
 INSERT INTO si_sql_patchmanager (sql_id, sql_patch_ref, sql_patch, sql_release, sql_statement) VALUES 

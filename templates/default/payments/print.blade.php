@@ -1,0 +1,182 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="{{ $css | urlsafe }}" media="all">
+<title>{{ $preference['pref_inv_wording'] ?? '' }} {{ $LANG['number_short'] ?? '' }}: {{ $invoice['id'] ?? '' }}</title>
+</head>
+<body>
+<br />
+<div id="container">
+	<div id="header">
+	</div>
+
+<div id="container">
+	<div id="header">
+	</div>
+
+	<table class="table table-vcenter" width="100%" align="center">
+		<tr>
+			<td colspan="5"><img src="{{ $logo | urlsafe }}" border="0" hspace="0" align="left"></td>
+			<th align="right"><span class="font1">Receipt for {{ $LANG['payment_id'] ?? '' }} {{ $payment['id'] ?? '' }}</span></th>
+		</tr>
+		<tr>
+			<td colspan="6" class="tbl1-top">&nbsp;</td>
+		</tr>
+	</table>
+	
+	<table class="table table-vcenter">
+	<!-- Customer section - start -->
+		<tr>
+			<td class="tbl1-bottom col1" ><b>{{ $LANG['customer'] ?? '' }}:</b></td>
+			<td class="tbl1-bottom col1" colspan="3">{{ $customer['name'] ?? '' }}</td>
+		</tr>
+
+	@if($customer['attention'] != null )
+		<tr>
+			<td class=''>{{ $LANG['attention_short'] ?? '' }}:</td>
+			<td align=left class='' colspan="3" >{{ $customer['attention'] ?? '' }}</td>
+		</tr>
+	@endif
+	@if($customer['street_address'] != null )
+		<tr>
+			<td class=''>{{ $LANG['address'] ?? '' }}:</td>
+			<td class='' align=left colspan="3">{{ $customer['street_address'] ?? '' }}</td>
+		</tr>   
+	@endif
+	@if($customer['street_address2'] != null)
+		@if($customer['street_address'] == null)
+		<tr>
+			<td class=''>{{ $LANG['address'] ?? '' }}:</td>
+			<td class='' align=left colspan="3">{{ $customer['street_address2'] ?? '' }}</td>
+		</tr>   
+		@endif
+		@if($customer['street_address'] != null)
+		<tr>
+			<td class=''></td>
+			<td class='' align=left colspan="3">{{ $customer['street_address2'] ?? '' }}</td>
+		</tr>   
+		@endif
+	@endif
+		
+		{merge_address field1=$customer['city'] field2=$customer['state'] field3=$customer['zip_code'] street1=$customer['street_address'] street2=$customer['street_addtess2'] class1="" class2="" colspan="3"}
+
+	@if($customer['country'] != null)
+		<tr>
+			<td class=''></td>
+			<td class='' colspan="3">{{ $customer['country'] ?? '' }}</td>
+		</tr>
+	@endif
+
+	{print_if_not_null label=$LANG['phone_short'] field=$customer['phone'] class1='' class2='t' colspan="3"}
+	{print_if_not_null label=$LANG['fax'] field=$customer['fax'] class1='' class2='' colspan="3"}
+	{print_if_not_null label=$LANG['fax'] field=$customer['fax'] class1='' class2='' colspan="3"}
+	{print_if_not_null label=$LANG['fax'] field=$customer['fax'] class1='' class2='' colspan="3"}
+	
+	{print_if_not_null label=$LANG['fax'] field=$customer['fax'] class1='' class2='' colspan="3"}
+	{print_if_not_null label=$LANG['fax'] field=$customer['fax'] class1='' class2='' colspan="3"}
+	{print_if_not_null label=$LANG['fax'] field=$customer['fax'] class1='' class2='' colspan="3"}
+	{print_if_not_null label=$LANG['fax'] field=$customer['fax'] class1='' class2='' colspan="3"}
+
+		<tr>
+			<td class="" colspan="4"></td>
+		</tr>
+	</table>
+
+	<!-- Customer section - end -->
+	<table class="table table-vcenter">
+
+	<!-- Biller section - start -->
+		<tr>
+			<td class="tbl1-bottom col1" border=1 cellpadding=2 cellspacing=1><b>{{ $LANG['biller'] ?? '' }}:</b></td>
+			<td class="col1 tbl1-bottom" border=1 cellpadding=2 cellspacing=1 colspan="3">{{ $biller['name'] ?? '' }}</td>
+		</tr> 
+
+	@if($biller['street_address'] != null)
+		<tr>
+			<td class=''>{{ $LANG['address'] ?? '' }}:</td>
+			<td class='' align=left colspan="3">{{ $biller['street_address'] ?? '' }}</td>
+		</tr>
+	@endif
+	@if($biller['street_address2'] != null )
+		@if($biller['street_address'] == null )
+		<tr>
+			<td class=''>{{ $LANG['address'] ?? '' }}:</td>
+			<td class='' align=left colspan="3">{{ $biller['street_address2'] ?? '' }}</td>
+		</tr>   
+		@endif
+		@if($biller['street_address'] != null )
+		<tr>
+			<td class=''></td>
+			<td class='' align=left colspan="3">{{ $biller['street_address2'] ?? '' }}</td>
+		</tr>   
+		@endif
+	@endif
+
+		{merge_address field1=$biller['city'] field2=$biller['state'] field3=$biller['zip_code'] street1=$biller['street_address'] street2=$biller['street_address2'] class1="" class2="" colspan="3"}
+
+	@if($biller['country'] != null )
+		<tr>
+			<td class=''></td>
+			<td class='' colspan="3">{{ $biller['country'] ?? '' }}</td>
+		</tr>
+	@endif
+
+	{print_if_not_null label=$LANG['fax'] field=$customer['fax'] class1='' class2='' colspan="3"}
+	{print_if_not_null label=$LANG['fax'] field=$customer['fax'] class1='' class2='' colspan="3"}
+	{print_if_not_null label=$LANG['fax'] field=$customer['fax'] class1='' class2='' colspan="3"}
+	{print_if_not_null label=$LANG['fax'] field=$customer['fax'] class1='' class2='' colspan="3"}
+	
+	{print_if_not_null label=$LANG['fax'] field=$customer['fax'] class1='' class2='' colspan="3"}
+	{print_if_not_null label=$LANG['fax'] field=$customer['fax'] class1='' class2='' colspan="3"}
+	{print_if_not_null label=$LANG['fax'] field=$customer['fax'] class1='' class2='' colspan="3"}
+	{print_if_not_null label=$LANG['fax'] field=$customer['fax'] class1='' class2='' colspan="3"}
+
+		<tr>
+			<td class="" colspan="4"> </td>
+		</tr>
+
+	<!-- Biller section - end -->
+	</table>
+
+	<table class="table table-vcenter" width="100%">
+		<tr>
+			<td colspan="6"><br /></td>
+		</tr>
+
+		<tr>
+			<td class="tbl1-bottom col1"><b>{{ $LANG['payment_id'] ?? '' }}</b></td>
+			<td class="tbl1-bottom col1" colspan="3"><b>{{ $preference['pref_description'] ?? '' }} {{ $LANG['id'] ?? '' }}</b></td>
+			<td class="tbl1-bottom col1" align="right"><b>{{ $LANG['amount'] ?? '' }}</b></td>
+			<td class="tbl1-bottom col1" align="right"><b>{{ $LANG['date_upper'] ?? '' }}</b></td>
+			<td class="tbl1-bottom col1" align="right"><b>{{ $LANG['payment_type'] ?? '' }}</b></td>
+		</tr>
+			
+
+		<tr class="" >
+			<td class="">{{ $payment['id'] ?? '' }}</td>
+			<td class="" colspan="3">{{ $payment['ac_inv_id'] ?? '' }}</td>
+			<td class="" align="right">{{ siLocal::number($preference['pref_currency_sign'] }} {{ $payment['ac_amount'] ?? '') }}</td>
+			<td class="" align="right">{{ $payment['date'] ?? '' }}</td>
+			<td class="" align="right">{{ $paymentType['pt_description'] ?? '' }}</td>
+		</tr>
+		<tr>
+			<td colspan="6"><br /></td>
+		</tr>
+		<tr>
+			<td colspan="6"><br /></td>
+		</tr>
+        {{-- hide notes if from an online payment --}}
+        @if($preference['pref_currency_sign'] != "" AND $payment['ac_amount'] =="")
+		<tr>
+			<td class='tbl1-bottom col1'>{{ $LANG['notes'] ?? '' }}:</td><td></td>
+		</tr>
+        @endif
+
+	</table>
+        @if($preference['pref_currency_sign'] != "" AND $payment['ac_amount'] =="")
+	<table>
+		<tr>
+			<td colspan="2">{!! outhtml($payment['ac_notes'] ?? '') !!}</td>
+		</tr>
+	</table>
+        @endif

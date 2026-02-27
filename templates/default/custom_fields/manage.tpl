@@ -14,7 +14,7 @@
 {else}
 
 
-<table id="manageGrid" style="display:none"></table>
+<div id="manageGrid"></div>
  {include file='custom_fields/manage.js.php'}
 
 

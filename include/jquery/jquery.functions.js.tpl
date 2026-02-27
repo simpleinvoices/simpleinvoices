@@ -240,42 +240,23 @@
 		$("#json_html"+rowID_old, clonedRow).remove();
 
 		$('#itemtable').append(clonedRow);
-		
+		if (window.hugeRTE) {
+			var o = { selector: 'textarea.editor', base_url: 'https://cdn.jsdelivr.net/npm/hugerte@1.0.10', suffix: '.min', plugins: 'lists code', toolbar: 'undo redo | bold italic | bullist numlist | removeformat | code', menubar: false, statusbar: false, height: 220, promotion: false, branding: false, content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, sans-serif; font-size: 14px; }' };
+			if (document.documentElement.getAttribute('data-bs-theme') === 'dark') { o.skin = 'oxide-dark'; o.content_css = 'dark'; }
+			window.hugeRTE.init(o);
+		}
 		$('#gmail_loading').hide();
 	
 	}
 	
 	//the export dialog in the manage invoices page
 	function export_invoice(row_number,spreadsheet,wordprocessor){
-	
-	
-		 $("#export_dialog").show();
-			siLog('debug','export_dialog_show');
-		 $(".export_pdf").attr({ 
-	          //href: "index.php?module=export&view=pdf&id="+row_number
-			  href: "index.php?module=export&view=invoice&id="+row_number+"&format=pdf"
-	        });
-		 $(".export_doc").attr({ 
-			  href: "index.php?module=export&view=invoice&id="+row_number+"&format=file&filetype="+wordprocessor
-	        });	 
-	      $(".export_xls").attr({ 
-	          href: "index.php?module=export&view=invoice&id="+row_number+"&format=file&filetype="+spreadsheet
-	        });							
-		 $("#export_dialog").dialog({ 
-		   modal: true, 
-		   height: 230,
-		   buttons: { 
-	        "Cancel": function() { 
-	            $(this).dialog("destroy"); 
-	        }
-	        },
-		    overlay: { 
-		        opacity: 0.5, 
-		        background: "black" 
-		    },
-			close: function() { $(this).dialog("destroy")}
-		});
-	
+		siLog('debug','export_dialog_show');
+		var pdf = document.querySelector('.export_pdf'); if (pdf) pdf.setAttribute('href', 'index.php?module=export&view=invoice&id='+row_number+'&format=pdf');
+		var doc = document.querySelector('.export_doc'); if (doc) doc.setAttribute('href', 'index.php?module=export&view=invoice&id='+row_number+'&format=file&filetype='+wordprocessor);
+		var xls = document.querySelector('.export_xls'); if (xls) xls.setAttribute('href', 'index.php?module=export&view=invoice&id='+row_number+'&format=file&filetype='+spreadsheet);
+		var el = document.getElementById('export_dialog');
+		if (el && window.bootstrap && window.bootstrap.Modal) { var m = window.bootstrap.Modal.getOrCreateInstance(el); m.show(); }
 	}
 
 	

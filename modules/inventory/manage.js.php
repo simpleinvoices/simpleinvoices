@@ -3,28 +3,12 @@
 			var columns = 4;
 			var padding = 12;
 			var action_menu = 140;
-			var grid_width = $('.col').width();
-			//var url = 'index.php?module=invoices&view=xml';
-			
+			var colEl = document.querySelector('.col');
+			var grid_width = colEl ? colEl.getBoundingClientRect().width : 800;
 			grid_width = grid_width - (columns * padding) - action_menu;
-			percentage_width = grid_width / 100; 
-			
-			function test(com,grid)
-			{
-				if (com=='Delete')
-					{
-						confirm('Delete ' + $('.trSelected',grid).length + ' items?')
-					}
-				else if (com=='Add')
-					{
-						alert('Add New Item');
-					}			
-			}
+			var percentage_width = grid_width / 100; 
 
-
-			$("#manageGrid").flexigrid
-			(
-			{
+			siTablerGrid("#manageGrid", {
 			url: "{/literal}{$url}{literal}",
 			dataType: 'xml',
 			colModel : [

@@ -1,67 +1,51 @@
-{* preload the headers (for faster browsing) *}
-
+{* Auth login - uses header.tpl (Tabler layout) and has its own footer *}
 {include file=$path|cat:'../header.tpl'}
 
-<div class="si_wrap">
-
-<form action="" method="post" id="frmLogin" name="frmLogin">
-	<input type="hidden" name="action" value="login" />	
-	
-	<div class="si_box">
-		<h1>{$LANG.simple_invoices}</h1>
-	
-		<div class="si_box_auth_pad">
-			<table>
-				<tr>
-					<th>{$LANG.email}</th>
-					<td>
-						<input name="user" size="25" type="text" title="user" value="" />
-					</td>
-				</tr>       
-				<tr>
-					<th>{$LANG.password}</th>
-					<td>
-						<input name="pass" size="25" type="password" title="password" value="" />
-					</td>
-				</tr>
-				<tr>
-					<th></th>
-					<td class='td_error'>
-
-
-{if $errorMessage }
-
-		<div class="si_error_line">{$errorMessage|outhtml}</div>
-	
-{/if}
-
-					</td>
-				</tr>       
-			</table>
-		
-			<div class="si_toolbar">
-					<button type="submit" value="login">Login</button>
+<div class="page-wrapper">
+	<div class="page-body">
+		<div class="container-xl">
+			<div class="row justify-content-center">
+				<div class="col-md-6 col-lg-4">
+<form action="" method="post" id="frmLogin" name="frmLogin" class="card card-md">
+	<input type="hidden" name="action" value="login" />
+	<div class="card-body">
+		<h1 class="card-title text-center mb-4">{$LANG.simple_invoices}</h1>
+		<div class="mb-3">
+			<label class="form-label">{$LANG.email}</label>
+			<input name="user" type="text" class="form-control" title="user" value="" autocomplete="username" />
+		</div>
+		<div class="mb-3">
+			<label class="form-label">{$LANG.password}</label>
+			<input name="pass" type="password" class="form-control" title="password" autocomplete="current-password" />
+		</div>
+		{if $errorMessage}
+		<div class="alert alert-danger">{$errorMessage|outhtml}</div>
+		{/if}
+		<div class="form-footer">
+			<button type="submit" class="btn btn-primary w-100">{$LANG.login}</button>
+		</div>
+	</div>
+</form>
+				</div>
 			</div>
 		</div>
 	</div>
-
-</form>
-
+	<footer class="footer footer-transparent d-print-none">
+		<div class="container-xl text-center text-muted">
+			<a href="http://www.simpleinvoices.org">{$LANG.simple_invoices_powered_by}</a>
+		</div>
+	</footer>
+</div>
 </div>
 
-<div id="si_footer">
-	<div class="si_wrap">
-	    <a href="http://www.simpleinvoices.org">{$LANG.simple_invoices_powered_by}</a>
-	</div>
-</div>
-
+<script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.4.0/dist/js/tabler.min.js"></script>
 {literal}
-<script language="JavaScript">
-	$(document).ready(function(){
-		$('.si_box').hide();
-		$('.si_box').slideDown(500);
-	});
-	document.frmLogin.user.focus();
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	var box = document.querySelector('.card-md');
+	if (box) { box.style.opacity = '0'; requestAnimationFrame(function() { box.style.transition = 'opacity 0.3s'; box.style.opacity = '1'; }); }
+	document.frmLogin && document.frmLogin.user && document.frmLogin.user.focus();
+});
 </script>
 {/literal}
 

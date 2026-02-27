@@ -9,11 +9,16 @@
 
 {if $first_run_wizard == true}
 
-    <div class="si_message">
+    <div class="page-header d-print-none mb-4">
+        <h1 class="page-title">{$LANG.simple_invoices}</h1>
+        <p class="text-muted">{$LANG.thank_you} {$LANG.before_starting}</p>
+    </div>
+    <div class="si_message alert mb-4">
        {$LANG.thank_you} {$LANG.before_starting}
     </div>
-    
-        <table class="si_table_toolbar">
+    <div class="card">
+        <div class="card-body">
+        <table class="si_table_toolbar table table-transparent">
     {if $billers == null}
         <tr>
                 <th>{$LANG.setup_as_biller}</th>
@@ -95,25 +100,34 @@
 				</td>
 			</tr>
         </table>
+        </div>
+    </div>
 
 {else}
     <div class="si_index si_index_home">
-
-        <div class="si_index_help">
-            <h2>{$LANG.need_help}</h2>
-             <a href="">{$LANG.help_si_help} </a><br />
-            <a href="http://www.simpleinvoices.org/forum">{$LANG.help_community_forums} </a><br />
-            <a href="http://www.simpleinvoices.org/blog">{$LANG.help_blog} </a><br />
+        <div class="page-header d-print-none mb-4">
+            <h1 class="page-title">{$LANG.dashboard}</h1>
         </div>
-
-        <h2>{$LANG.start_working}</h2>
-		<div class="si_toolbar">
+        <div class="row row-deck row-cards mb-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="card card-link card-link-pop">
+                    <div class="card-body">
+                        <h2 class="h4">{$LANG.need_help}</h2>
+                        <a href="http://www.simpleinvoices.org/help" target="_blank" rel="noopener">{$LANG.help_si_help}</a><br />
+                        <a href="http://www.simpleinvoices.org/forum" target="_blank" rel="noopener">{$LANG.help_community_forums}</a><br />
+                        <a href="http://www.simpleinvoices.org/blog" target="_blank" rel="noopener">{$LANG.help_blog}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h2 class="mt-4">{$LANG.start_working}</h2>
+		<div class="si_toolbar mb-4">
 			<a href="index.php?module=invoices&amp;view=itemised" class="positive"><img src="./images/common/add.png" alt=""/>{$LANG.add_new_invoice}</a>
 			<a href="index.php?module=customers&amp;view=add" class=""><img src="./images/common/vcard_add.png" alt=""/>{$LANG.add_customer}</a>
 			<a href="index.php?module=products&amp;view=add" class=""><img src="./images/common/cart_add.png" alt=""/>{$LANG.add_new_product}</a>
 		</div>
 
-        <h2 class="align_left">{$LANG.dont_forget_to}</h2>
+        <h2 class="align_left mt-4">{$LANG.dont_forget_to}</h2>
 		<div class="si_toolbar">
 			<a href="index.php?module=options&amp;view=index" class=""><img src="./images/common/cog_edit.png" alt=""/>{$LANG.customise_settings}</a>
 			<a href="./index.php?module=options&amp;view=backup_database" class=""><img src="./images/common/database_save.png" alt=""/>{$LANG.backup_your_database}</a>

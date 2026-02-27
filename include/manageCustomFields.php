@@ -16,7 +16,7 @@ include("./include/CustomField.php");
 
 
 function saveCustomField($id, $category, $name, $description) {
-	$sql = "INSERT INTO ".TB_PREFIX."customFields  (pluginId, categorieId, name, description) 
+	$sql = "INSERT INTO ".TB_PREFIX."custom_fields  (pluginId, categorieId, name, description) 
 		VALUES (:id, :category, :name, :description)";
 	dbQuery($sql, ':id', $id, ':category', $category, ':name', $name, ':description', $description);
 	echo "SAVED<br />";
@@ -53,7 +53,7 @@ function updateCustomFieldValues($categorieId,$itemId) {
 }
 
 function getPluginsByCategorie($categoryId) {
-	$sql = "SELECT * FROM ".TB_PREFIX."customFields WHERE categorieID = :category";
+	$sql = "SELECT * FROM ".TB_PREFIX."custom_fields WHERE cf_id = :category";
 	$sth = dbQuery($sql, ':category', $categoryId);
 	
 	$plugins = null;
@@ -67,7 +67,7 @@ function getPluginsByCategorie($categoryId) {
 }
 
 function showCustomFields($categoryId) {
-	$sql = "SELECT * FROM ".TB_PREFIX."customFields WHERE categorieID = :category";
+	$sql = "SELECT * FROM ".TB_PREFIX."custom_fields WHERE cf_id = :category";
 	$sth = dbQuery($sql, ':category', $categoryId);
 	
 	while($field = $sth->fetch()) {
@@ -100,7 +100,7 @@ function getPluginArray() {
  ******/
 function printCustomFieldsList() {
 	global $dbh;
-	$sql = "SELECT * FROM ".TB_PREFIX."customFields;";
+	$sql = "SELECT * FROM ".TB_PREFIX."custom_fields;";
 	$sth = $dbh->prepare($sql);
 	$sth->execute();
 	
@@ -216,6 +216,29 @@ function getPluginById($id) {
 	}
 	
 	return null;
+}
+
+/**
+ * Render custom fields for a category/item (Blade-compatible).
+ * Use in Blade templates as: @showCustomFields(4, $itemId ?? '')
+ * Replaces the Smarty {showCustomFields categorieId="4" itemId="..."} plugin.
+ */
+function showCustomFieldsForBlade($categorieId, $itemId = '') {
+	$out = "<input type='hidden' name='categorie' value='" . htmlsafe((string)$categorieId) . "'>";
+	$sql = "SELECT * FROM " . TB_PREFIX . "custom_fields WHERE cf_id = :id";
+	$sth = dbQuery($sql, ':id', $categorieId);
+	if (!$sth) {
+		return $out;
+	}
+	while ($field = $sth->fetch()) {
+		$plugin = getPluginById($field['pluginId']);
+		if ($plugin !== null) {
+			ob_start();
+			$plugin->printInputField($field['id'], $itemId);
+			$out .= ob_get_clean();
+		}
+	}
+	return $out;
 }
 
 function printPlugins() {

@@ -1,10 +1,6 @@
-	/*
-	* Product Change - updates line item with product price info
-	*/
-	$("#customer_id").livequery('change',function () { 
-      		var $customer_id = $(this).val();
-            invoice_customer_change($customer_id);
-    	});
+	document.addEventListener('change', function (e) {
+		if (e.target.id === 'customer_id') invoice_customer_change(e.target.value);
+	});
 
 	/*
 	* Product Change - updates line item with product price info

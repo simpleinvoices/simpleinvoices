@@ -2,15 +2,13 @@
 {literal}
 			var columns = 5;
 			var padding = 12;
-			var grid_width = $('.col').width();
-			
+			var colEl = document.querySelector('.col');
+			var grid_width = colEl ? colEl.getBoundingClientRect().width : 800;
 			grid_width = grid_width - (columns * padding);
-			percentage_width = grid_width / 100; 
+			var percentage_width = grid_width / 100; 
 		
 			
-			$('#manageGrid').flexigrid
-			(
-			{
+			siTablerGrid('#manageGrid', {
 			url: 'index.php?module=product_attribute&view=xml',
 			dataType: 'xml',
 			colModel : [

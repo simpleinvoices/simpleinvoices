@@ -12,7 +12,7 @@
 {else}
 <h3>{$LANG.manage_product_values} :: <a href="index.php?module=product_value&view=add">{$LANG.add_product_value}</a></h3>
 <hr />
-<table id="manageGrid" style="display:none"></table>
+<div id="manageGrid"></div>
 
  {include file='product_value/manage.js.php'}
 {/if}

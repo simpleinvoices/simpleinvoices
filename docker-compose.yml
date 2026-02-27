@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   simpleinvoices:
     build: .
@@ -9,8 +7,13 @@ services:
       - mysql
     environment:
       - APACHE_DOCUMENT_ROOT=/var/www/html
-    volumes:
-      - .:/var/www/html:z
+      - SI_DB_HOST=mysql
+      - SI_DB_PORT=3306
+      - SI_DB_USER=root
+      - SI_DB_PASSWORD=rootpassword
+      - SI_DB_NAME=simple_invoices
+    # No volume: app files are copied into the image at build time.
+    # Rebuild image to pick up code changes: docker-compose build --no-cache simpleinvoices
     networks:
       - simpleinvoices-net
 

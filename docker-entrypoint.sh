@@ -1,24 +1,28 @@
 #!/bin/bash
 set -e
 
-echo "Current user: $(id)"
-echo "Current directory: $(pwd)"
-echo "Directory contents: $(ls -la /var/www/html | head -n 10)"
+# Ensure tmp and subdirs exist and are writable by Apache (files are copied into image, no host mount)
+mkdir -p /var/www/html/tmp/cache /var/www/html/tmp/log /var/www/html/tmp/database_backups
+chown -R www-data:www-data /var/www/html/tmp
+chmod -R 775 /var/www/html/tmp
 
-# Check if composer.json exists
-if [ -f "/var/www/html/composer.json" ]; then
-    echo "composer.json found. Running composer install..."
-    # Run composer as root but it will warn, it's ok for this setup
-    composer install --no-interaction --no-dev --optimize-autoloader || echo "Composer install failed. Continuing..."
-else
-    echo "Warning: composer.json not found in $(pwd). Skipping composer install."
+# Optional: run composer install at startup if vendor is missing (e.g. custom image without build-step install)
+if [ -f "/var/www/html/composer.json" ] && [ ! -d "/var/www/html/vendor/autoload.php" ]; then
+    echo "Running composer install in container..."
+    (cd /var/www/html && composer install --no-interaction --no-dev --optimize-autoloader) || true
+    chown -R www-data:www-data /var/www/html/vendor 2>/dev/null || true
 fi
 
-# Only chown the tmp directory which MUST be writable
-# We don't chown the whole /var/www/html to avoid issues with host mounts
-mkdir -p /var/www/html/tmp
-chown -R www-data:www-data /var/www/html/tmp
-chmod -R 777 /var/www/html/tmp
+# When running in Docker Compose, override DB config so the app connects to the mysql service
+# (config uses custom.config.php if present; host must be service name "mysql", not localhost)
+if [ -n "${SI_DB_HOST}" ]; then
+  cp -f /var/www/html/config/config.php /var/www/html/config/custom.config.php
+  sed -i "s/^database.params.host[[:space:]]*=.*/database.params.host                = ${SI_DB_HOST}/" /var/www/html/config/custom.config.php
+  sed -i "s/^database.params.port[[:space:]]*=.*/database.params.port                = ${SI_DB_PORT:-3306}/" /var/www/html/config/custom.config.php
+  sed -i "s/^database.params.username[[:space:]]*=.*/database.params.username            = ${SI_DB_USER}/" /var/www/html/config/custom.config.php
+  sed -i "s|^database.params.password[[:space:]]*=.*|database.params.password            = ${SI_DB_PASSWORD}|" /var/www/html/config/custom.config.php
+  sed -i "s/^database.params.dbname[[:space:]]*=.*/database.params.dbname              = ${SI_DB_NAME}/" /var/www/html/config/custom.config.php
+fi
 
 # Execute CMD
 exec "$@"

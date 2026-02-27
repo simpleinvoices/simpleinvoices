@@ -9,10 +9,10 @@ var inventory = "{/literal}{$defaults.inventory}{literal}";
 
 			var columns = 6;
 			var padding = 12;
-			var grid_width = $('.col').width();
-		
+			var colEl = document.querySelector('.col');
+			var grid_width = colEl ? colEl.getBoundingClientRect().width : 800;
 			grid_width = grid_width - (columns * padding);
-			percentage_width = grid_width / 100; 
+			var percentage_width = grid_width / 100; 
 
 			/*
             * If Inventory in SImple Invoices is enabled than show quantity etc..
@@ -41,9 +41,7 @@ var inventory = "{/literal}{$defaults.inventory}{literal}";
 
 
 			
-			$('#manageGrid').flexigrid
-			(
-			{
+			siTablerGrid('#manageGrid', {
 			url: 'index.php?module=products&view=xml',
 			dataType: 'xml',
 			colModel : col_model,

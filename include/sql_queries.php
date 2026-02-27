@@ -3032,7 +3032,7 @@ function convertInitCustomFields() {
 // ------------------------------------------------------------------------------
 function saveInitCustomField($id, $category, $name, $description) {
 // This function is exactly same as saveCustomField() in ./include/manageCustomFields.php but without the final echo output
-	$sql = "INSERT INTO ".TB_PREFIX."customFields  (pluginId, categorieId, name, description) 
+	$sql = "INSERT INTO ".TB_PREFIX."custom_fields  (pluginId, categorieId, name, description) 
 		VALUES (:id, :category, :name, :description)";
 	dbQuery($sql, ':id', $id, ':category', $category, ':name', $name, ':description', $description);
 //	echo "SAVED<br />";

@@ -15,7 +15,7 @@ function smarty_function_showCustomFields($params, &$smarty)
 {
 	echo "<input type='hidden' name='categorie' value='$params['categorieId']'>";
 	
-	$sql = "SELECT * FROM ".TB_PREFIX."customFields WHERE categorieID = :id";
+	$sql = "SELECT * FROM ".TB_PREFIX."custom_fields WHERE cf_id = :id";
 	$sth = dbQuery($sql, ':id', $params['categorieId']);
 	
 	while($field = $sth->fetch()) {
