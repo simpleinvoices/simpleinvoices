@@ -1,12 +1,4 @@
 {{-- System defaults – Tabler-inspired settings layout --}}
-<div class="page-header mb-4">
-	<div class="row align-items-center">
-		<div class="col">
-			<h1 class="page-title">{{ $LANG['system_preferences'] ?? 'System preferences' }}</h1>
-			<p class="text-secondary mb-0">Default biller, customer, tax, invoice preference and other options used when creating invoices.</p>
-		</div>
-	</div>
-</div>
 
 <div class="row">
 	<div class="col-12">
