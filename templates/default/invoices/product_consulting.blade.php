@@ -18,7 +18,7 @@
 
 <h3>{{ $LANG['inv'] ?? '' }} {{ $LANG['inv_consulting'] ?? '' }}</h3>
 
-@include('$path/header.tpl')
+@include(str_replace('/', '.', rtrim($path ?? '', '/')) . '.header')
 
 <tr>
 <td class="details_screen">{{ $LANG['quantity'] ?? '' }}</td>

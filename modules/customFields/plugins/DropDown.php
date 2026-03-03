@@ -19,8 +19,8 @@
 
 class DropDown extends CustomField {
 		
-	function DropDown() {
-		parent::CustomField(5,"DropDown");
+	function __construct() {
+		parent::__construct(5, "DropDown");
 	}
 	
 	function printOutput($id) {
@@ -28,7 +28,7 @@ class DropDown extends CustomField {
 		echo $name.": ".$this->getList();
 	}
 	
-	function getList($value = "",$name) {
+	function getList($value = "", $name = "") {
 
 		$array = array("hans","john","getrud","jonathan","fabian");
 
@@ -46,7 +46,7 @@ class DropDown extends CustomField {
 		return $t;
 	}
 	
-	function printInputField($id,$itemId) {
+	function printInputField($id = null, $itemId = null) {
 		$name = $this->getFormName($id);
 
 		if($itemId != "") {

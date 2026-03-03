@@ -1,4 +1,4 @@
-@if($smarty->post->value != "" && $smarty->post->submit != null ) 
+@if(post('value') != "" && form_submitted() ) 
 {{ $refresh_total }}
 
 <br />
@@ -9,7 +9,7 @@
 
 @else
 {{-- if  name was inserted --}} 
-	@if($smarty->post->submit !=null) 
+	@if(form_submitted()) 
 		<div class="validation_alert"><img src="./images/common/important.png" alt="" />
 		You must enter a value</div>
 		<hr />
@@ -34,7 +34,7 @@
 </tr>
 <tr>
 	<td class="details_screen">{{ $LANG['value'] ?? '' }}</td>
-	<td><input type="text" name="value" value="{{ $smarty->post->value }}" size="25" /></td>
+	<td><input type="text" name="value" value="{{ post('value') }}" size="25" /></td>
 </tr>
 		<tr>
 			<th>{{ $LANG['enabled'] ?? '' }}</th>

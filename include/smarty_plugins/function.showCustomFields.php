@@ -1,31 +1,18 @@
 <?php
 /**
- * Smarty plugin
- * @package Smarty
- * @subpackage plugins
+ * Smarty plugin: showCustomFields
+ * Blade-compatible: delegates to showCustomFieldsForBlade() and echoes result.
+ * Use in Blade: @showCustomFields(categorieId, itemId) directive.
  */
 
-/**
- * Smarty {config_load} function plugin
- *
- * </pre>
- * @param Smarty
- */
-function smarty_function_showCustomFields($params, &$smarty)
-{
-	echo "<input type='hidden' name='categorie' value='$params['categorieId']'>";
-	
-	$sql = "SELECT * FROM ".TB_PREFIX."custom_fields WHERE cf_id = :id";
-	$sth = dbQuery($sql, ':id', $params['categorieId']);
-	
-	while($field = $sth->fetch()) {
-		$plugin = getPluginById($field['pluginId']);
-		error_log($field['id']."  ".$params['itemId']."sss");
-		$plugin->printInputField($field['id'],$params['itemId']);
-	}
-
+if (!function_exists('smarty_function_showCustomFields')) {
+function smarty_function_showCustomFields($params, $smarty = null) {
+    $categorieId = $params['categorieId'] ?? '';
+    $itemId = $params['itemId'] ?? '';
+    if (!function_exists('showCustomFieldsForBlade')) {
+        require_once __DIR__ . '/../manageCustomFields.php';
+    }
+    echo showCustomFieldsForBlade($categorieId, $itemId);
 }
-
-/* vim: set expandtab: */
-
+}
 ?>

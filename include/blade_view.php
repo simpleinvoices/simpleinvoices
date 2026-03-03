@@ -69,7 +69,7 @@ class BladeView
     }
 
     /**
-     * Resolve path to actual .blade.php file (check custom, then default, then extensions).
+     * Resolve path to actual .blade.php file (check custom, then default).
      */
     protected function resolveBladePath($path)
     {
@@ -153,12 +153,173 @@ class BladeView
     }
 
     /**
-     * Register Blade directives and precompilers for Smarty-to-Blade compatibility.
+     * Register Blade directives and precompilers.
+     *
+     * Legacy: Precompilers convert Smarty-style tags ({merge_address ...}, {print_if_not_null ...},
+     * {section}, {$var|modifier}) so existing templates work during migration. New templates
+     * should use native Blade ({{ }}, @if, @foreach) and the pipe modifier only where needed.
      * Precompiler order matters: each transforms the template text before Blade compilation.
      */
     protected function registerDirectives()
     {
         $compiler = $this->blade->compiler();
+
+        // Load Blade helpers (pure PHP, return strings) then Smarty-style plugin wrappers.
+        $helpersPath = __DIR__ . '/blade_helpers.php';
+        if (file_exists($helpersPath)) {
+            require_once $helpersPath;
+        }
+        $pluginsDir = __DIR__ . '/smarty_plugins';
+        $defaultInvoicePlugins = __DIR__ . '/../templates/invoices/default/plugins';
+        foreach (['function.merge_address.php', 'function.inv_itemised_cf.php', 'function.print_if_not_null.php', 'function.do_tr.php', 'function.showCustomFields.php'] as $file) {
+            $path = $pluginsDir . '/' . $file;
+            if (file_exists($path)) {
+                require_once $path;
+            }
+        }
+        if (!function_exists('smarty_function_online_payment_link')) {
+            $path = $defaultInvoicePlugins . '/function.online_payment_link.php';
+            if (file_exists($path)) {
+                require_once $path;
+            }
+        }
+
+        // Helper: parse Smarty tag params (name=value) and return PHP array string for smarty_function_*(params, null).
+        $parseSmartyTagParams = function ($inner) {
+            $params = [];
+            $pattern = '/(\w+)\s*=\s*("(?:[^"\\\\]|\\\\.)*"|\'(?:[^\'\\\\]|\\\\.)*\'|\$[^}\s]+|true|false)/';
+            if (preg_match_all($pattern, $inner, $paramMatches, PREG_SET_ORDER)) {
+                foreach ($paramMatches as $pm) {
+                    $key = $pm[1];
+                    $val = trim($pm[2]);
+                    if ($val === '""' || $val === "''") {
+                        $params[$key] = "''";
+                    } else {
+                        $params[$key] = $val;
+                    }
+                }
+            }
+            $arr = [];
+            foreach ($params as $k => $v) {
+                $arr[] = "'" . $k . "' => " . $v;
+            }
+            return '[' . implode(', ', $arr) . ']';
+        };
+
+        // --- PRECOMPILER 0: Smarty {merge_address ...} → PHP call ---
+        $compiler->precompiler(function ($template) use ($parseSmartyTagParams) {
+            if (!function_exists('smarty_function_merge_address')) {
+                return $template;
+            }
+            return preg_replace_callback(
+                '/\{merge_address\s+([^}]+)\}/',
+                function ($m) use ($parseSmartyTagParams) {
+                    $paramsPhp = $parseSmartyTagParams($m[1]);
+                    return "<?php smarty_function_merge_address({$paramsPhp}, null); ?>";
+                },
+                $template
+            );
+        });
+
+        // --- PRECOMPILER 0b: Smarty {inv_itemised_cf ...} → PHP call ---
+        $compiler->precompiler(function ($template) use ($parseSmartyTagParams) {
+            if (!function_exists('smarty_function_inv_itemised_cf')) {
+                return $template;
+            }
+            return preg_replace_callback(
+                '/\{inv_itemised_cf\s+([^}]+)\}/',
+                function ($m) use ($parseSmartyTagParams) {
+                    $paramsPhp = $parseSmartyTagParams($m[1]);
+                    return "<?php smarty_function_inv_itemised_cf({$paramsPhp}, null); ?>";
+                },
+                $template
+            );
+        });
+
+        // --- PRECOMPILER 0b2: Smarty {print_if_not_null ...} → PHP call ---
+        $compiler->precompiler(function ($template) use ($parseSmartyTagParams) {
+            if (!function_exists('smarty_function_print_if_not_null')) {
+                return $template;
+            }
+            return preg_replace_callback(
+                '/\{print_if_not_null\s+([^}]+)\}/',
+                function ($m) use ($parseSmartyTagParams) {
+                    $paramsPhp = $parseSmartyTagParams($m[1]);
+                    return "<?php smarty_function_print_if_not_null({$paramsPhp}, null); ?>";
+                },
+                $template
+            );
+        });
+
+        // --- PRECOMPILER 0b3: Smarty {do_tr ...} → PHP call ---
+        $compiler->precompiler(function ($template) use ($parseSmartyTagParams) {
+            if (!function_exists('smarty_function_do_tr')) {
+                return $template;
+            }
+            return preg_replace_callback(
+                '/\{do_tr\s+([^}]+)\}/',
+                function ($m) use ($parseSmartyTagParams) {
+                    $paramsPhp = $parseSmartyTagParams($m[1]);
+                    return "<?php smarty_function_do_tr({$paramsPhp}, null); ?>";
+                },
+                $template
+            );
+        });
+
+        // --- PRECOMPILER 0c: Smarty {online_payment_link ...} → PHP call (multiline tag) ---
+        $compiler->precompiler(function ($template) use ($parseSmartyTagParams) {
+            if (!function_exists('smarty_function_online_payment_link')) {
+                return $template;
+            }
+            return preg_replace_callback(
+                '/\{online_payment_link\s+([^}]+)\}/s',
+                function ($m) use ($parseSmartyTagParams) {
+                    $paramsPhp = $parseSmartyTagParams($m[1]);
+                    return "<?php smarty_function_online_payment_link({$paramsPhp}, null); ?>";
+                },
+                $template
+            );
+        });
+
+        // --- PRECOMPILER 0d: Smarty {html_options ...} → PHP call ---
+        // Params: name, options (assoc), or values+output, selected; optional class, id, etc. Value can be $var, "s", 's', digit, or word.
+        $compiler->precompiler(function ($template) {
+            if (!function_exists('blade_html_options')) {
+                return $template;
+            }
+            return preg_replace_callback(
+                '/\{html_options\s+([^}]+)\}/',
+                function ($m) {
+                    $inner = $m[1];
+                    $params = [];
+                    $pattern = '/(\w+)\s*=\s*("(?:[^"\\\\]|\\\\.)*"|\'(?:[^\'\\\\]|\\\\.)*\'|\$[^}\s]+|\d+|\w+)/';
+                    if (preg_match_all($pattern, $inner, $paramMatches, PREG_SET_ORDER)) {
+                        foreach ($paramMatches as $pm) {
+                            $key = $pm[1];
+                            $val = trim($pm[2]);
+                            if ($val === '""' || $val === "''") {
+                                $params[$key] = "''";
+                            } elseif ($val[0] === '"' || $val[0] === "'" || $val[0] === '$') {
+                                $params[$key] = $val;
+                            } elseif (preg_match('/^\d+$/', $val)) {
+                                $params[$key] = $val;
+                            } elseif (preg_match('/^\w+$/', $val)) {
+                                $params[$key] = "'" . $val . "'";
+                            } else {
+                                $params[$key] = $val;
+                            }
+                        }
+                    }
+                    $arr = [];
+                    foreach ($params as $k => $v) {
+                        $arr[] = "'" . $k . "' => " . $v;
+                    }
+                    $paramsPhp = '[' . implode(', ', $arr) . ']';
+                    return "<?php echo blade_html_options({$paramsPhp}); ?>";
+                },
+                $template
+            );
+        });
 
         // Helper: convert Smarty dot-notation in a string to PHP bracket access.
         $dotToBracket = function ($template) {
@@ -250,9 +411,11 @@ class BladeView
                         return '{{ ' . $expr . ' }}';
                     }
                     $modifier = $m[2];
+                    if ($modifier === 'htmlsafe') {
+                        return '{{ ' . $expr . ' }}';
+                    }
                     $fnMap = [
                         'urlsafe'                  => 'urlsafe(%s)',
-                        'htmlsafe'                 => 'htmlsafe(%s)',
                         'outhtml'                  => 'outhtml(%s)',
                         'siLocal_number'           => 'siLocal::number(%s)',
                         'siLocal_number_clean'     => 'siLocal::number_clean(%s)',
@@ -273,7 +436,7 @@ class BladeView
                         $args = array_map('trim', explode(':', $m[3]));
                         $len = $args[0] ?? 80;
                         $etc = $args[1] ?? '"..."';
-                        return '{!! htmlsafe(mb_strimwidth(' . $expr . ', 0, ' . $len . ', ' . $etc . ')) !!}';
+                        return '{{ mb_strimwidth(' . $expr . ', 0, ' . $len . ', ' . $etc . ') }}';
                     }
                     return '{{ ' . $expr . ' }}';
                 },
@@ -297,7 +460,6 @@ class BladeView
         // Runs before Blade {{ }} pipe handling to catch modifiers in @if, @foreach, etc.
         $knownMods = [
             'urlsafe'          => 'urlsafe(%s)',
-            'htmlsafe'         => 'htmlsafe(%s)',
             'outhtml'          => 'outhtml(%s)',
             'siLocal_number'   => 'siLocal::number(%s)',
             'siLocal_number_clean' => 'siLocal::number_clean(%s)',
@@ -318,6 +480,9 @@ class BladeView
                     $expr = $m[1];
                     $mod = $m[2];
                     $args = isset($m[3]) ? trim($m[3]) : '';
+                    if ($mod === 'htmlsafe') {
+                        return $expr;
+                    }
                     if (isset($knownMods[$mod])) {
                         return sprintf($knownMods[$mod], $expr);
                     }
@@ -359,7 +524,6 @@ class BladeView
         // Handles both simple modifiers {{ $var | htmlsafe }} and parameterized {{ $var | truncate:80:"..." }}.
         $simpleMods = [
             'urlsafe'                  => 'urlsafe(%s)',
-            'htmlsafe'                 => 'htmlsafe(%s)',
             'outhtml'                  => 'outhtml(%s)',
             'siLocal_number'           => 'siLocal::number(%s)',
             'siLocal_number_clean'     => 'siLocal::number_clean(%s)',
@@ -379,6 +543,9 @@ class BladeView
                     $expr = trim($m[1]);
                     $modifier = $m[2];
                     $args = isset($m[3]) ? trim($m[3], ':') : '';
+                    if ($modifier === 'htmlsafe' && $args === '') {
+                        return '{{ ' . $expr . ' }}';
+                    }
                     if (isset($simpleMods[$modifier]) && $args === '') {
                         return '{!! ' . sprintf($simpleMods[$modifier], $expr) . ' !!}';
                     }
@@ -390,7 +557,7 @@ class BladeView
                         $parts = $args !== '' ? array_map('trim', explode(':', $args)) : ['80'];
                         $len = $parts[0] ?? 80;
                         $etc = $parts[1] ?? '"..."';
-                        return '{!! htmlsafe(mb_strimwidth(' . $expr . ', 0, ' . $len . ', ' . $etc . ')) !!}';
+                        return '{{ mb_strimwidth(' . $expr . ', 0, ' . $len . ', ' . $etc . ') }}';
                     }
                     if ($modifier === 'count_characters') {
                         return '{!! strlen(' . $expr . ') !!}';
@@ -404,9 +571,6 @@ class BladeView
             );
         });
 
-        $compiler->directive('htmlsafe', function ($expression) {
-            return "<?php echo htmlsafe({$expression}); ?>";
-        });
         $compiler->directive('urlsafe', function ($expression) {
             return "<?php echo urlsafe({$expression}); ?>";
         });

@@ -1,13 +1,13 @@
 {{-- if bill is updated or saved. --}}
 
-@if($smarty->post->description != "" && $smarty->post->id != null ) 
+@if(post('description') != "" && post('id') != null ) 
 
-	@include('products/save.tpl')
+	@include('products.save')
 
 @else
 {{-- if  name was inserted --}} 
 
-	@if($smarty->post->id !=null) 
+	@if(post('id') !=null) 
 		<div class="alert alert-warning"><i class="ti ti-alert-circle"></i>
 		{{ $LANG['product_description_prompt'] ?? '' }}</div>
 	@endif
@@ -34,22 +34,22 @@
 					<label class="form-label">{{ $LANG['description'] ?? '' }}
 					<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field" title="{{ $LANG['required_field'] ?? '' }}"><i class="ti ti-asterisk text-danger"></i></a>
 					</label>
-					<input type="text" name="description" value="{{ $smarty->post->description ?? '' }}" id="description" class="form-control validate[required]" />
+					<input type="text" name="description" value="{{ post('description') }}" id="description" class="form-control validate[required]" />
 				</div>
 				<div class="mb-3">
 					<label class="form-label">{{ $LANG['unit_price'] ?? '' }}</label>
-					<input type="text" class="form-control" name="unit_price" value="{{ $smarty->post->unit_price ?? '' }}" />
+					<input type="text" class="form-control" name="unit_price" value="{{ post('unit_price') }}" />
 				</div>
 				@if($defaults->inventory == '1')
 					<div class="mb-3">
 						<label class="form-label">
 							{{ $LANG['cost'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_cost" title="{{ $LANG['cost'] ?? '' }}"><i class="ti ti-help"></i></a>
 						</label>
-						<input type="text" class="form-control" name="cost" value="{{ $smarty->post->cost ?? '' }}" />
+						<input type="text" class="form-control" name="cost" value="{{ post('cost') }}" />
 					</div>
 					<div class="mb-3">
 						<label class="form-label">{{ $LANG['reorder_level'] ?? '' }}</label>
-						<input type="text" class="form-control" name="reorder_level" value="{{ $smarty->post->reorder_level ?? '' }}" />
+						<input type="text" class="form-control" name="reorder_level" value="{{ post('reorder_level') }}" />
 					</div>
 				@endif
 				<div class="mb-3">
@@ -71,25 +71,25 @@
 					<label class="form-label">{{ $customFieldLabel['product_cf1'] ?? '' }}
 					<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{{ $LANG['custom_fields'] ?? '' }}"><i class="ti ti-help"></i></a>
 					</label>
-					<input type="text" class="form-control" name="custom_field1" value="{{ $smarty->post->custom_field1 ?? '' }}" />
+					<input type="text" class="form-control" name="custom_field1" value="{{ post('custom_field1') }}" />
 				</div>
 				<div class="mb-3">
 					<label class="form-label">{{ $customFieldLabel['product_cf2'] ?? '' }}
 					<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{{ $LANG['custom_fields'] ?? '' }}"><i class="ti ti-help"></i></a>
 					</label>
-					<input type="text" class="form-control" name="custom_field2" value="{{ $smarty->post->custom_field2 ?? '' }}" />
+					<input type="text" class="form-control" name="custom_field2" value="{{ post('custom_field2') }}" />
 				</div>
 				<div class="mb-3">
 					<label class="form-label">{{ $customFieldLabel['product_cf3'] ?? '' }}
 					<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{{ $LANG['custom_fields'] ?? '' }}"><i class="ti ti-help"></i></a>
 					</label>
-					<input type="text" class="form-control" name="custom_field3" value="{{ $smarty->post->custom_field3 ?? '' }}" />
+					<input type="text" class="form-control" name="custom_field3" value="{{ post('custom_field3') }}" />
 				</div>
 				<div class="mb-3">
 					<label class="form-label">{{ $customFieldLabel['product_cf4'] ?? '' }}
 					<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{{ $LANG['custom_fields'] ?? '' }}"><i class="ti ti-help"></i></a>
 					</label>
-					<input type="text" class="form-control" name="custom_field4" value="{{ $smarty->post->custom_field4 ?? '' }}" />
+					<input type="text" class="form-control" name="custom_field4" value="{{ post('custom_field4') }}" />
 				</div>
 				@if($defaults->product_attributes)
 					<div class="mb-3">
@@ -108,7 +108,7 @@
 			<div id="section-3" class="tab-pane" role="tabpanel">
 				<div class="mb-3">
 					<label class="form-label">{{ $LANG['notes'] ?? '' }}</label>
-					<textarea class="form-control editor" name='notes' rows="8">{{ $smarty->post->notes ?? '' | unescape }}</textarea>
+					<textarea class="form-control editor" name='notes' rows="8">{{ post('notes') | unescape }}</textarea>
 				</div>
 				<div class="mb-3">
 					<label class="form-label">{{ $LANG['note_attributes'] ?? '' }}</label>

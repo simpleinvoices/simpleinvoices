@@ -13,11 +13,15 @@
 
 
 @verbatim
-<script language="javascript">
-$(document).ready(function() {
-	$('.but_show_rates').click(function(e){
-		e.preventDefault();
-		$('.rate').toggle();
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	document.querySelectorAll('.but_show_rates').forEach(function(btn) {
+		btn.addEventListener('click', function(e) {
+			e.preventDefault();
+			document.querySelectorAll('.rate').forEach(function(el) {
+				el.style.display = el.style.display === 'none' ? '' : 'none';
+			});
+		});
 	});
 });
 </script>
@@ -30,16 +34,11 @@ $(document).ready(function() {
 	</div>
 	<div class="card-body">
 		<h4>{{ $LANG['sales'] ?? '' }}</h4>
-{php}
-	/* moving to smarty 3 would allow us to use a nice smarty function tag instead of this dirty workaround */
-	$this->assign('this_data',$this->_tpl_vars['data']['sales']);
-{/php}
-{include file=$path|cat:'report_sales_by_periods_include.tpl'}
+@php $this_data = $data['sales'] ?? []; @endphp
+		@include(str_replace('/', '.', rtrim($path ?? '', '/')) . '.report_sales_by_periods_include', ['this_data' => $this_data])
 
 		<h4 class="mt-4">{{ $LANG['payments'] ?? '' }}</h4>
-{php}
-	$this->assign('this_data',$this->_tpl_vars['data']['payments']);
-{/php}
-{include file=$path|cat:'report_sales_by_periods_include.tpl'}
+@php $this_data = $data['payments'] ?? []; @endphp
+		@include(str_replace('/', '.', rtrim($path ?? '', '/')) . '.report_sales_by_periods_include', ['this_data' => $this_data])
 	</div>
 </div>

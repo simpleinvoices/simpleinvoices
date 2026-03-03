@@ -9,9 +9,9 @@
 
 {{-- if bill is updated or saved. --}}
 
-@if($smarty->post->name != "" && $smarty->post->submit != null ) 
+@if(post('name') != "" && form_submitted())
 
-	@include('billers/save.tpl')
+	@include('billers.save')
 
 @else
 
@@ -29,11 +29,11 @@
 				<i class="ti ti-asterisk text-danger"></i>
 			</a>
 			</label>
-			<input type="text" name="name" value="{{ $smarty->post->name ?? '' }}" id="name" class="form-control validate[required]" />
+			<input type="text" name="name" value="{{ post('name') }}" id="name" class="form-control validate[required]" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['street'] ?? '' }}</label>
-			<input type="text" name="street_address" value="{{ $smarty->post->street_address ?? '' }}" class="form-control" />
+			<input type="text" name="street_address" value="{{ post('street_address') }}" class="form-control" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['street2'] ?? '' }}
@@ -41,59 +41,59 @@
 				<i class="ti ti-help"></i>
 			</a>
 			</label>
-			<input type="text" name="street_address2" value="{{ $smarty->post->street_address2 ?? '' }}" class="form-control" />
+			<input type="text" name="street_address2" value="{{ post('street_address2') }}" class="form-control" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['city'] ?? '' }}</label>
-			<input type="text" name="city" value="{{ $smarty->post->city ?? '' }}" class="form-control" />
+			<input type="text" name="city" value="{{ post('city') }}" class="form-control" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['state'] ?? '' }}</label>
-			<input type="text" name="state" value="{{ $smarty->post->state ?? '' }}" class="form-control" />
+			<input type="text" name="state" value="{{ post('state') }}" class="form-control" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['zip'] ?? '' }}</label>
-			<input type="text" name="zip_code" value="{{ $smarty->post->zip_code ?? '' }}" class="form-control" />
+			<input type="text" name="zip_code" value="{{ post('zip_code') }}" class="form-control" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['country'] ?? '' }}</label>
-			<input type="text" name="country" value="{{ $smarty->post->country ?? '' }}" class="form-control" />
+			<input type="text" name="country" value="{{ post('country') }}" class="form-control" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['phone'] ?? '' }}</label>
-			<input type="text" name="phone" value="{{ $smarty->post->phone ?? '' }}" class="form-control" />
+			<input type="text" name="phone" value="{{ post('phone') }}" class="form-control" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['mobile_phone'] ?? '' }}</label>
-			<input type="text" name="mobile_phone" value="{{ $smarty->post->mobile_phone ?? '' }}" class="form-control" />
+			<input type="text" name="mobile_phone" value="{{ post('mobile_phone') }}" class="form-control" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['fax'] ?? '' }}</label>
-			<input type="text" name="fax" value="{{ $smarty->post->fax ?? '' }}" class="form-control" />
+			<input type="text" name="fax" value="{{ post('fax') }}" class="form-control" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['email'] ?? '' }}</label>
-			<input type="text" name="email" value="{{ $smarty->post->email ?? '' }}" class="form-control" />
+			<input type="text" name="email" value="{{ post('email') }}" class="form-control" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['paypal_business_name'] ?? '' }}</label>
-			<input type="text" name="paypal_business_name" value="{{ $smarty->post->paypal_business_name ?? '' }}" class="form-control" />
+			<input type="text" name="paypal_business_name" value="{{ post('paypal_business_name') }}" class="form-control" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['paypal_notify_url'] ?? '' }}</label>
-			<input type="text" name="paypal_notify_url" value="{{ $smarty->post->paypal_notify_url ?? '' }}" class="form-control" />
+			<input type="text" name="paypal_notify_url" value="{{ post('paypal_notify_url') }}" class="form-control" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['paypal_return_url'] ?? '' }}</label>
-			<input type="text" name="paypal_return_url" value="{{ $smarty->post->paypal_return_url ?? '' }}" class="form-control" />
+			<input type="text" name="paypal_return_url" value="{{ post('paypal_return_url') }}" class="form-control" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['eway_customer_id'] ?? '' }}</label>
-			<input type="text" name="eway_customer_id" value="{{ $smarty->post->eway_customer_id ?? '' }}" class="form-control" />
+			<input type="text" name="eway_customer_id" value="{{ post('eway_customer_id') }}" class="form-control" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['paymentsgateway_api_id'] ?? '' }}</label>
-			<input type="text" name="paymentsgateway_api_id" value="{{ $smarty->post->paymentsgateway_api_id ?? '' }}" class="form-control" />
+			<input type="text" name="paymentsgateway_api_id" value="{{ post('paymentsgateway_api_id') }}" class="form-control" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $customFieldLabel['biller_cf1'] ?? '' }}
@@ -101,7 +101,7 @@
 				<i class="ti ti-help"></i>
 			</a>
 			</label>
-			<input type="text" name="custom_field1" value="{{ $smarty->post->custom_field1 }}" class="form-control" />
+			<input type="text" name="custom_field1" value="{{ post('custom_field1') }}" class="form-control" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $customFieldLabel['biller_cf2'] }}
@@ -109,7 +109,7 @@
 				<i class="ti ti-help"></i>
 			</a>
 			</label>
-			<input type="text" name="custom_field2" value="{{ $smarty->post->custom_field2 ?? '' }}" class="form-control" />
+			<input type="text" name="custom_field2" value="{{ post('custom_field2') }}" class="form-control" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $customFieldLabel['biller_cf3'] ?? '' }}
@@ -117,7 +117,7 @@
 				<i class="ti ti-help"></i>
 			</a>
 			</label>
-			<input type="text" name="custom_field3" value="{{ $smarty->post->custom_field3 ?? '' }}" class="form-control" />
+			<input type="text" name="custom_field3" value="{{ post('custom_field3') }}" class="form-control" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $customFieldLabel['biller_cf4'] ?? '' }}
@@ -125,7 +125,7 @@
 				<i class="ti ti-help"></i>
 			</a>
 			</label>
-			<input type="text" name="custom_field4" value="{{ $smarty->post->custom_field4 ?? '' }}" class="form-control" />
+			<input type="text" name="custom_field4" value="{{ post('custom_field4') }}" class="form-control" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['logo_file'] ?? '' }}
@@ -137,11 +137,11 @@
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['invoice_footer'] ?? '' }}</label>
-			<textarea class="form-control editor" name="footer" rows="4">{{ $smarty->post->footer ?? '' }}</textarea>
+			<textarea class="form-control editor" name="footer" rows="4">{{ post('footer') }}</textarea>
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['notes'] ?? '' }}</label>
-			<textarea class="form-control editor" name="notes" rows="8">{{ $smarty->post->notes ?? '' }}</textarea>
+			<textarea class="form-control editor" name="notes" rows="8">{{ post('notes') }}</textarea>
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['enabled'] ?? '' }}</label>

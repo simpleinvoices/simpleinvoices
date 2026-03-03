@@ -56,12 +56,13 @@
 		<tr wrap="nowrap">
 			<th >{{ $LANG['date_formatted'] ?? '' }}</th>
 			<td wrap="nowrap">
-				<input type="text" class="form-control validate[required,custom[date],length[0,10]] date-picker" size="10" name="date" id="date1" 
-				@if($smarty->get->date)
-					value="{{ $smarty->get->date }}" />
+				<input type="text" class="form-control validate[required,custom[date],length[0,10]] date-picker" size="10" name="date" id="date1"
+				@if(get('date'))
+					value="{{ get('date') }}"
 				@else
-					value='{{ date('Y-m-d') }}' />
+					value="{{ date('Y-m-d') }}"
 				@endif
+				/>
 			</td>
 		</tr>
 	</table>

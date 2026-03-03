@@ -6,40 +6,20 @@ var si_lang_description_conf = @json($LANG['description'] ?? 'Description');
 </script>
 @verbatim
 <script type="text/javascript">
-$(document).ready(function(){
-	// Confirm modal and tabs: handled by si-bootstrap.js (Bootstrap 5)
-	// Date inputs: Litepicker in si-litepicker.js
-	// #ac_me: vanilla autocomplete in si-autocomplete.js
-	if (document.querySelector('.showdownloads')) {
-		document.querySelectorAll('.showdownloads').forEach(function(el){
-			el.setAttribute('data-bs-toggle', 'dropdown');
-			el.setAttribute('aria-expanded', 'false');
-			if (el.nextElementSibling && !el.nextElementSibling.classList.contains('dropdown-menu')) el.nextElementSibling.classList.add('dropdown-menu');
-			if (el.parentNode && !el.parentNode.classList.contains('dropdown')) el.parentNode.classList.add('dropdown');
-		});
-	}
-	if (document.querySelector('#custom-tab-by-hash')) {
-		document.querySelector('#custom-tab-by-hash').addEventListener('click', function(e) { var w = window.open(this.href, '', 'directories,location,menubar,resizable,scrollbars,status,toolbar'); if (w) w.focus(); e.preventDefault(); });
-	}
-	if(jQuery.cluetip)
-	{
-		$('a.cluetip').cluetip(
-			{
-				activation: 'click',
-				sticky: true,
-				cluetipClass: 'notice',
-				fx: {             
-                      open:       'fadeIn',
-                      openSpeed:  '70'
-    			},
-  				arrows: true,
-  				closePosition: 'title',			
-  				closeText: '<img src="./images/common/cross.png" alt="" />'
-			}
-		);
-	} else {
+(function() {
+	function init() {
+		if (document.querySelector('.showdownloads')) {
+			document.querySelectorAll('.showdownloads').forEach(function(el){
+				el.setAttribute('data-bs-toggle', 'dropdown');
+				el.setAttribute('aria-expanded', 'false');
+				if (el.nextElementSibling && !el.nextElementSibling.classList.contains('dropdown-menu')) el.nextElementSibling.classList.add('dropdown-menu');
+				if (el.parentNode && !el.parentNode.classList.contains('dropdown')) el.parentNode.classList.add('dropdown');
+			});
+		}
+		if (document.querySelector('#custom-tab-by-hash')) {
+			document.querySelector('#custom-tab-by-hash').addEventListener('click', function(e) { var w = window.open(this.href, '', 'directories,location,menubar,resizable,scrollbars,status,toolbar'); if (w) w.focus(); e.preventDefault(); });
+		}
 		document.querySelectorAll('a.cluetip').forEach(function(a){ a.addEventListener('click', function(e){ e.preventDefault(); if(this.getAttribute('rel')) window.open(this.getAttribute('rel'), '_blank'); }); });
-	}
 
 	if (document.querySelector('textarea.editor') && !(
 		(navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/iPad/i))
@@ -98,8 +78,9 @@ $(document).ready(function(){
 	});
 	document.addEventListener('focus', function(e) { if (e.target && e.target.matches && e.target.matches('.detail') && e.target.value === si_lang_description_conf) { e.target.value = ''; e.target.style.color = '#333'; } }, true);
 	document.addEventListener('blur', function(e) { if (e.target && e.target.matches && e.target.matches('.detail') && e.target.value === '') { e.target.value = si_lang_description_conf; e.target.style.color = '#b2adad'; } }, true);
-
-});
-
+	}
+	if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+	else init();
+})();
 </script>
 @endverbatim

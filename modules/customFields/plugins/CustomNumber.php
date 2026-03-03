@@ -18,15 +18,15 @@
 
 class CustomNumber extends CustomField {
 	
-	function CustomNumber() {
-		parent::CustomField(2,"CustomNumber");
+	function __construct() {
+		parent::__construct(2, "CustomNumber");
 	}
 	
 	function printOutput($id) {
 		echo rand(0,100);
 	}
 	
-	function printInputField($id,$itemId) {
+	function printInputField($id = null, $itemId = null) {
 		$description = $this->getDescription($id);
 		$value = rand();
 		$name = $this->getFormName($id);

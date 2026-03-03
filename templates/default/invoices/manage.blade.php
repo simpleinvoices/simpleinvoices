@@ -29,19 +29,19 @@
 		<div class="card-body">
 			<ul class="nav nav-pills mb-3" role="tablist">
 				<li class="nav-item">
-					<a href="index.php?module=invoices&amp;view=manage" class="nav-link @if(($smarty->get->having ?? '') == '') active @endif">{{ $LANG['all'] ?? 'All' }}</a>
+					<a href="index.php?module=invoices&amp;view=manage" class="nav-link @if((get('having')) == '') active @endif">{{ $LANG['all'] ?? 'All' }}</a>
 				</li>
 				<li class="nav-item">
-					<a href="index.php?module=invoices&amp;view=manage&amp;having=money_owed" class="nav-link @if(($smarty->get->having ?? '') == 'money_owed') active @endif">{{ $LANG['due'] ?? 'Due' }}</a>
+					<a href="index.php?module=invoices&amp;view=manage&amp;having=money_owed" class="nav-link @if((get('having')) == 'money_owed') active @endif">{{ $LANG['due'] ?? 'Due' }}</a>
 				</li>
 				<li class="nav-item">
-					<a href="index.php?module=invoices&amp;view=manage&amp;having=paid" class="nav-link @if(($smarty->get->having ?? '') == 'paid') active @endif">{{ $LANG['paid'] ?? 'Paid' }}</a>
+					<a href="index.php?module=invoices&amp;view=manage&amp;having=paid" class="nav-link @if((get('having')) == 'paid') active @endif">{{ $LANG['paid'] ?? 'Paid' }}</a>
 				</li>
 				<li class="nav-item">
-					<a href="index.php?module=invoices&amp;view=manage&amp;having=draft" class="nav-link @if(($smarty->get->having ?? '') == 'draft') active @endif">{{ $LANG['draft'] ?? 'Draft' }}</a>
+					<a href="index.php?module=invoices&amp;view=manage&amp;having=draft" class="nav-link @if((get('having')) == 'draft') active @endif">{{ $LANG['draft'] ?? 'Draft' }}</a>
 				</li>
 				<li class="nav-item">
-					<a href="index.php?module=invoices&amp;view=manage&amp;having=real" class="nav-link @if(($smarty->get->having ?? '') == 'real') active @endif">{{ $LANG['real'] ?? 'Real' }}</a>
+					<a href="index.php?module=invoices&amp;view=manage&amp;having=real" class="nav-link @if((get('having')) == 'real') active @endif">{{ $LANG['real'] ?? 'Real' }}</a>
 				</li>
 			</ul>
 			<div id="manageGrid"></div>

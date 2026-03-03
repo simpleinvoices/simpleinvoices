@@ -80,22 +80,22 @@
     @endif
     <tr>
         <td class="details_screen">{{ $index ?? '' }}
-            {$invoices[invoice].preference|htmlsafe}
-            {$invoices[invoice].index_id|htmlsafe}
+            {$invoices[invoice].preference}
+            {$invoices[invoice].index_id}
         </td>
         <td>
             &nbsp;
             &nbsp;
         </td>
         <td class="details_screen">
-            {$invoices[invoice].biller|htmlsafe}
+            {$invoices[invoice].biller}
         </td>
         <td>
             &nbsp;
             &nbsp;
         </td>
         <td class="details_screen">
-            {$invoices[invoice].customer|htmlsafe}
+            {$invoices[invoice].customer}
         </td>
         <td>
             &nbsp;

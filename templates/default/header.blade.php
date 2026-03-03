@@ -20,8 +20,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
     <link rel="stylesheet" href="./templates/default/css/si-tabler.css" />
     <link rel="stylesheet" href="./templates/default/css/print.css" media="print" />
-    <link rel="stylesheet" href="./include/jquery/jquery.plugins.css" />
-    <script src="./include/jquery/jquery-1.2.6.min.js"></script>
     <script src="./include/jquery/jquery.init.js"></script>
     <script src="./include/jquery/si-tabler-grid.js"></script>
     <script src="./include/jquery/si-bootstrap.js"></script>
@@ -29,7 +27,6 @@
     <script src="https://cdn.jsdelivr.net/npm/litepicker@2.0.12/dist/litepicker.js"></script>
     <script src="./include/jquery/si-litepicker.js"></script>
     <script src="./include/jquery/si-autocomplete.js"></script>
-    {!! $extension_jquery_files ?? '' !!}
     @include('include.jquery.jquery_functions_js')
     @include('include.jquery.jquery_conf_js')
     <script src="./include/jquery/si-validate.js"></script>

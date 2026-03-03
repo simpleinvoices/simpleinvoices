@@ -21,7 +21,7 @@
 	<div class="card-body">
 <div class="si_invoice_form">
 
-@include('$path/header.tpl')
+@include(str_replace('/', '.', rtrim($path ?? '', '/')) . '.header')
 
 	<table id="itemtable" class="table table-vcenter si_invoice_items">
 		<tr>

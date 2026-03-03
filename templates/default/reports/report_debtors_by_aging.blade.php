@@ -29,7 +29,7 @@
 				<th>{{ $LANG['total'] ?? '' }}</th>
 				<th>{{ $LANG['paid'] ?? '' }}</th>
 				<th>{{ $LANG['owing'] ?? '' }}</th>
-				<th>{{ ($LANG['date'] ?? '') | htmlsafe|ucfirst }}</th>
+				<th>{{ ($LANG['date'] ?? '') | ucfirst }}</th>
 				<th>{{ $LANG['age'] ?? '' }}</th>
 				<th>{{ $LANG['aging'] ?? '' }}</th>
 			</tr>

@@ -1,6 +1,6 @@
 <?php
 
-function smarty_function_markup($params, &$smarty)
+function smarty_function_markup($params, $smarty = null)
 {
 
 	

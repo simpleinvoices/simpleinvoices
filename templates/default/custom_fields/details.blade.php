@@ -7,10 +7,10 @@
 * License:
 *	 GPL v3 or above --}}
 
-<form name="frmpost" action="index.php?module=custom_fields&amp;view=save&amp;id={{ urlencode($smarty->get->id ?? '') }}" method="POST" onsubmit="return frmpost_Validator(this);">
+<form name="frmpost" action="index.php?module=custom_fields&amp;view=save&amp;id={{ urlencode(get('id')) }}" method="POST" onsubmit="return frmpost_Validator(this);">
 
 
-@if($smarty->get->action == "view" )
+@if(get('action') == "view" )
 
 <div class="si_form si_form_view">	
 	<table>
@@ -45,7 +45,7 @@
 
 
 
-@if($smarty->get->action == "edit" )
+@if(get('action') == "edit" )
 
 <div class="si_form">	
 

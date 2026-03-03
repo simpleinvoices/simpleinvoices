@@ -1,6 +1,6 @@
-<form name="frmpost" action="index.php?module=tax_rates&amp;view=save&amp;id={{ urlencode($smarty->get->id ?? '') }}" method="post" onsubmit="return frmpost_Validator(this)">
+<form name="frmpost" action="index.php?module=tax_rates&amp;view=save&amp;id={{ urlencode(get('id')) }}" method="post" onsubmit="return frmpost_Validator(this)">
 
-@if($smarty->get->action === 'view' )
+@if(get('action') === 'view' )
 
 <div class="card">
 	<div class="card-header">
@@ -42,7 +42,7 @@
 
 
 
-@if($smarty->get->action === 'edit')
+@if(get('action') === 'edit')
 
 <div class="card">
 	<div class="card-header">

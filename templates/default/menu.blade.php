@@ -150,7 +150,7 @@
                     </li>
 
                     {{-- Settings --}}
-                    <li class="nav-item dropdown @if(in_array($module ?? '', ['options','system_defaults','custom_fields','tax_rates','preferences','payment_types','extensions'])) active @endif">
+                    <li class="nav-item dropdown @if(in_array($module ?? '', ['options','system_defaults','custom_fields','tax_rates','preferences','payment_types'])) active @endif">
                         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
                             <span class="nav-link-icon d-md-none d-lg-inline-block"><i class="ti ti-settings"></i></span>
                             <span class="nav-link-title">{{ $LANG['settings'] ?? 'Settings' }}</span>
@@ -161,8 +161,6 @@
                             <a class="dropdown-item" href="index.php?module=tax_rates&amp;view=manage">{{ $LANG['tax_rates'] ?? 'Tax Rates' }}</a>
                             <a class="dropdown-item" href="index.php?module=preferences&amp;view=manage">{{ $LANG['invoice_preferences'] ?? 'Invoice Preferences' }}</a>
                             <a class="dropdown-item" href="index.php?module=payment_types&amp;view=manage">{{ $LANG['payment_types'] ?? 'Payment Types' }}</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="index.php?module=extensions&amp;view=manage">{{ $LANG['extensions'] ?? 'Extensions' }}</a>
                         </div>
                     </li>
                 </ul>

@@ -1,9 +1,9 @@
 <form name="frmpost"
-	action="index.php?module=product_value&amp;view=save&amp;id={{ $smarty->get->id }}"
+	action="index.php?module=product_value&amp;view=save&amp;id={{ get('id') }}"
 	method="post">
 
 
-@if($smarty->get->action== 'view' )
+@if(get('action')== 'view' )
 <div class="card">
 	<div class="card-header">
 		<h3 class="card-title">{{ $LANG['product_value'] ?? '' }}</h3>
@@ -32,7 +32,7 @@
 
 @endif
 
-@if($smarty->get->action== 'edit' )
+@if(get('action')== 'edit' )
 
 <div class="card">
 	<div class="card-header">

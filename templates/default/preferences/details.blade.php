@@ -1,8 +1,8 @@
 <!--Modified code to display apostrophes in text box output 05/02/2008-Gates-->
-<form name="frmpost" action="index.php?module=preferences&amp;view=save&amp;id={{ $smarty->get->id }}" method="post">
+<form name="frmpost" action="index.php?module=preferences&amp;view=save&amp;id={{ get('id') }}" method="post">
 
 
-@if($smarty->get->action== 'view' )
+@if(get('action')== 'view' )
 
 <div class="card">
 	<div class="card-header">
@@ -152,7 +152,7 @@
 
 
 
-@if($smarty->get->action== 'edit' )
+@if(get('action')== 'edit' )
 
 <div class="card">
 	<div class="card-header">

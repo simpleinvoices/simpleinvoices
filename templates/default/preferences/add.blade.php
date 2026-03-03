@@ -1,4 +1,4 @@
-@if($smarty->post->p_description == "" AND $smarty->post->submit != null ) 
+@if(post('p_description') == "" AND form_submitted() ) 
 		<div class="alert alert-warning"><i class="ti ti-alert-circle"></i>
 		You must enter a description for the preference</div>
 @endif
@@ -16,13 +16,13 @@
 			</a>
 			<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_description" title="{{ $LANG['description'] ?? '' }}"><i class="ti ti-help"></i></a>
 			</label>
-			<input type="text" class="form-control validate[required]" name="p_description" value="{{ $smarty->post->p_description ?? '' }}" />
+			<input type="text" class="form-control validate[required]" name="p_description" value="{{ post('p_description') }}" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['currency_sign'] ?? '' }}
 			<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_currency_sign" title="{{ $LANG['currency_sign'] ?? '' }}"><i class="ti ti-help"></i></a>
 			</label>
-			<input type="text" name="p_currency_sign" value="{{ $smarty->post->p_currency_sign ?? '' }}" class="form-control" />
+			<input type="text" name="p_currency_sign" value="{{ post('p_currency_sign') }}" class="form-control" />
 			<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_currency_sign" title="{{ $LANG['currency_sign'] ?? '' }}">
 				{{ $LANG['currency_sign_non_dollar'] ?? '' }}
 				<i class="ti ti-help"></i>
@@ -32,31 +32,31 @@
 			<label class="form-label">{{ $LANG['currency_code'] ?? '' }}
 			<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_currency_code" title="{{ $LANG['currency_code'] ?? '' }}"><i class="ti ti-help"></i></a>
 			</label>
-			<input type="text" name="currency_code" value="{{ $smarty->post->currency_code ?? '' }}" class="form-control" />
+			<input type="text" name="currency_code" value="{{ post('currency_code') }}" class="form-control" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['invoice_heading'] ?? '' }}
 			<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_heading" title="{{ $LANG['invoice_heading'] ?? '' }}"><i class="ti ti-help"></i></a>
 			</label>
-			<input type="text" name="p_inv_heading" value="{{ $smarty->post->p_inv_heading ?? '' }}" class="form-control" />
+			<input type="text" name="p_inv_heading" value="{{ post('p_inv_heading') }}" class="form-control" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['invoice_wording'] ?? '' }}
 			<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_wording" title="{{ $LANG['invoice_wording'] ?? '' }}"><i class="ti ti-help"></i></a>
 			</label>
-			<input type="text" name="p_inv_wording" value="{{ $smarty->post->p_inv_wording ?? '' }}" class="form-control" />
+			<input type="text" name="p_inv_wording" value="{{ post('p_inv_wording') }}" class="form-control" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['invoice_detail_heading'] ?? '' }}
 			<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_detail_heading" title="{{ $LANG['invoice_detail_heading'] ?? '' }}"><i class="ti ti-help"></i></a>
 			</label>
-			<input type="text" name="p_inv_detail_heading" value="{{ $smarty->post->p_inv_detail_heading ?? '' }}" class="form-control" />
+			<input type="text" name="p_inv_detail_heading" value="{{ post('p_inv_detail_heading') }}" class="form-control" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['invoice_detail_line'] ?? '' }}
 			<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_detail_line" title="{{ $LANG['invoice_detail_line'] ?? '' }}"><i class="ti ti-help"></i></a>
 			</label>
-			<input type="text" name="p_inv_detail_line" value="{{ $smarty->post->p_inv_detail_line ?? '' }}" class="form-control" />
+			<input type="text" name="p_inv_detail_line" value="{{ post('p_inv_detail_line') }}" class="form-control" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['include_online_payment'] ?? '' }}
@@ -82,31 +82,31 @@
 			<label class="form-label">{{ $LANG['invoice_payment_method'] ?? '' }}
 			<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_payment_method" title="{{ $LANG['invoice_payment_method'] ?? '' }}"><i class="ti ti-help"></i></a>
 			</label>
-			<input type="text" name="p_inv_payment_method" value="{{ $smarty->post->p_inv_payment_method ?? '' }}" class="form-control" />
+			<input type="text" name="p_inv_payment_method" value="{{ post('p_inv_payment_method') }}" class="form-control" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['invoice_payment_line_1_name'] ?? '' }}
 			<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_payment_line1_name" title="{{ $LANG['invoice_payment_line_1_name'] ?? '' }}"><i class="ti ti-help"></i></a>
 			</label>
-			<input type="text" name="p_inv_payment_line1_name" value="{{ $smarty->post->p_inv_payment_line1_name ?? '' }}" class="form-control" />
+			<input type="text" name="p_inv_payment_line1_name" value="{{ post('p_inv_payment_line1_name') }}" class="form-control" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['invoice_payment_line_1_value'] ?? '' }}
 			<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_payment_line1_value" title="{{ $LANG['invoice_payment_line_1_value'] ?? '' }}"><i class="ti ti-help"></i></a>
 			</label>
-			<input type="text" name="p_inv_payment_line1_value" value="{{ $smarty->post->p_inv_payment_line1_value ?? '' }}" class="form-control" />
+			<input type="text" name="p_inv_payment_line1_value" value="{{ post('p_inv_payment_line1_value') }}" class="form-control" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['invoice_payment_line_2_name'] ?? '' }}
 			<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_payment_line2_name" title="{{ $LANG['invoice_payment_line_2_name'] ?? '' }}"><i class="ti ti-help"></i></a>
 			</label>
-			<input type="text" name="p_inv_payment_line2_name" value="{{ $smarty->post->p_inv_payment_line2_name ?? '' }}" class="form-control" />
+			<input type="text" name="p_inv_payment_line2_name" value="{{ post('p_inv_payment_line2_name') }}" class="form-control" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['invoice_payment_line_2_value'] ?? '' }}
 			<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_payment_line2_value" title="{{ $LANG['invoice_payment_line_2_value'] ?? '' }}"><i class="ti ti-help"></i></a>
 			</label>
-			<input type="text" name="p_inv_payment_line2_value" value="{{ $smarty->post->p_inv_payment_line2_value ?? '' }}" class="form-control" />
+			<input type="text" name="p_inv_payment_line2_value" value="{{ post('p_inv_payment_line2_value') }}" class="form-control" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['status'] ?? '' }}

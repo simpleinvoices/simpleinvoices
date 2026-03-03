@@ -9,7 +9,7 @@
 *	http://www.simpleinvoices.org
 */ --}}
 
-@if($smarty->get->action == 'view' )
+@if(get('action') == 'view' )
 <div class="card" id="si_form_cust">
 	<div class="card-header">
 		<h3 class="card-title">{{ $LANG['customer'] ?? '' }} {{ $LANG['details'] ?? 'Details' }}</h3>
@@ -198,7 +198,7 @@
 
 
 
-@if($smarty->get->action == 'edit' )
+@if(get('action') == 'edit' )
 
 <form name="frmpost" action="index.php?module=customers&amp;view=save&amp;id={{ urlencode($customer['id'] ?? '') }}" method="post" id="frmpost" onsubmit="return checkForm(this);">
 <div class="card" id="si_form_cust_edit">
@@ -332,7 +332,7 @@
 			<th>{{ $LANG['notes'] ?? '' }}</th>
 			<td><textarea name="notes" class="form-control editor" rows="8" cols="50">{!! outhtml($customer['notes'] ?? '') !!}</textarea></td>
 		</tr>
-		@showCustomFields(2, $smarty->get->customer ?? '')
+		@showCustomFields(2, get('customer'))
 		<tr>
 			<th>{{ $LANG['enabled'] ?? '' }}</th>
 			<td>

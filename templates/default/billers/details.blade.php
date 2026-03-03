@@ -6,9 +6,9 @@
 *
 * License:
 *	 GPL v3 or above --}}
-<form name="frmpost" action="index.php?module=billers&amp;view=save&amp;id={{ $smarty->get->id }}" method="post" id="frmpost" onsubmit="return checkForm(this);">
+<form name="frmpost" action="index.php?module=billers&amp;view=save&amp;id={{ get('id') }}" method="post" id="frmpost" onsubmit="return checkForm(this);">
 
-@if($smarty->get->action== 'view' )
+@if(get('action')== 'view' )
 
 <div class="card">
 	<div class="card-header">
@@ -115,7 +115,7 @@
 				<th>{{ $LANG['notes'] ?? '' }}</th>
 				<td>{{ $biller['notes'] }}</td>
 			</tr>
-			@showCustomFields(1, $smarty->get->id ?? '')
+			@showCustomFields(1, get('id'))
 			<tr>
 				<th>{{ $LANG['enabled'] ?? '' }}</th>
 				<td>{{ $biller['wording_for_enabled'] }}</td>
@@ -130,7 +130,7 @@
 {{-- ######################################################################################### --}}
 
 
-@if($smarty->get->action== 'edit' )
+@if(get('action')== 'edit' )
 <div class="card">
 	<div class="card-header">
 		<h3 class="card-title">{{ $LANG['edit'] ?? '' }} {{ $LANG['biller'] ?? '' }}</h3>
@@ -301,7 +301,7 @@
 				{html_options name=enabled options=$enabled selected=$biller['enabled']}
 				</td>
 			</tr>
-			@showCustomFields(1, $smarty->get->id ?? '')
+			@showCustomFields(1, get('id'))
 	
 		</table>
 

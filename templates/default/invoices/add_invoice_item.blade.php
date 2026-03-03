@@ -8,8 +8,8 @@
 * Website:
 *	http://www.simpleinvoices.org
 */ --}}
-@if($smarty->post->submit != null)
-	<meta http-equiv="refresh" content="1;URL=index.php?module=invoices&amp;view=details&amp;id={{ urlencode($smarty->post->id ?? '') }}&amp;type={{ urlencode($smarty->post->type ?? '') }}" />
+@if(form_submitted())
+	<meta http-equiv="refresh" content="1;URL=index.php?module=invoices&amp;view=details&amp;id={{ urlencode(post('id')) }}&amp;type={{ urlencode(post('type')) }}" />
 	<br /><br />
 	<div class="alert alert-success">{{ $LANG['save_invoice_items_success'] ?? '' }};</div>
 @else
@@ -35,9 +35,7 @@
 					@if($products == null )
 						<p class="text-muted"><em>{{ $LANG['no_products'] ?? '' }}</em></p>
 					@else
-						<select name="product1" class="form-select mt-2"
-							onchange="invoice_product_change_price($(this).val(), 1, jQuery('#quantity1').val() );" 				
-						>
+						<select name="product1" class="form-select mt-2 product_change" rel="1">
 							<option value=""></option>
 							@foreach(($products ?? []) as $product)
 								<option @if($product['id'] == $defaults->product) selected @endif value="{{ $product['id'] ?? '' }}">{{ $product['description'] ?? '' }}</option>
@@ -65,9 +63,9 @@
 	</div>
 		<div class="card-footer text-end">
 			<button type="submit" class="btn btn-primary" name="submit" value="{{ $LANG['add_item'] ?? '' }}"><i class="ti ti-plus me-1"></i>{{ $LANG['add_item'] ?? '' }}</button>
-			<input type="hidden" name="id" value="{{ $smarty->get->id ?? '' }}" />
-			<input type="hidden" name="type" value="{{ $smarty->get->type ?? '' }}" />
-			<input type="hidden" name="tax_id" value="{{ $smarty->get->tax_id ?? '' }}" />
+			<input type="hidden" name="id" value="{{ get('id') }}" />
+			<input type="hidden" name="type" value="{{ get('type') }}" />
+			<input type="hidden" name="tax_id" value="{{ get('tax_id') }}" />
 		</div>
 	</form>
 </div>

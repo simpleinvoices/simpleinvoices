@@ -9,12 +9,12 @@
 	
 	@foreach(($invoiceItems ?? []) as $invoiceItem)
 			<tr>
-				<td>{{ $invoiceItem['quantity'] ?? '' | siLocal_number_trim }}</td>
-				<td colspan="3">{{ $ ?? '' }}</td>
-				<td>{{ $preference['pref_currency_sign'] }} {{ $invoiceItem['unit_price'] ?? '' | siLocal_number }}</td>
-				<td align="right">{{ $preference['pref_currency_sign'] }} {{ $invoiceItem['gross_total'] ?? '' | siLocal_number }}</td>
+				<td>{{ ($invoiceItem['quantity'] ?? '')|siLocal_number_trim }}</td>
+				<td colspan="3">{{ $invoiceItem['product']['description'] ?? '' }}</td>
+				<td>{{ $preference['pref_currency_sign'] }} {{ ($invoiceItem['unit_price'] ?? '')|siLocal_number }}</td>
+				<td align="right">{{ $preference['pref_currency_sign'] }} {{ ($invoiceItem['gross_total'] ?? '')|siLocal_number }}</td>
 			</tr>
-			@if($ != null)
+			@if(($invoiceItem['description'] ?? null) != null)
 				<tr >
 					<td ></td>
 					<td colspan="5">{{ $LANG['description'] ?? '' }}: {{ $invoiceItem['description'] ?? '' }}</td>
@@ -27,13 +27,13 @@
                     <table width="100%">
                         <tr>
 
-					{inv_itemised_cf label=$customFieldLabels['product_cf1'] field=$}
+					{inv_itemised_cf label=$customFieldLabels['product_cf1'] field=$invoiceItem['product']['custom_field1']}
 					{do_tr number=1 class="blank-class"}
-					{inv_itemised_cf label=$customFieldLabels['product_cf1'] field=$}
+					{inv_itemised_cf label=$customFieldLabels['product_cf2'] field=$invoiceItem['product']['custom_field2']}
 					{do_tr number=2 class="blank-class"}
-					{inv_itemised_cf label=$customFieldLabels['product_cf1'] field=$}
+					{inv_itemised_cf label=$customFieldLabels['product_cf3'] field=$invoiceItem['product']['custom_field3']}
 					{do_tr number=3 class="blank-class"}
-					{inv_itemised_cf label=$customFieldLabels['product_cf1'] field=$}
+					{inv_itemised_cf label=$customFieldLabels['product_cf4'] field=$invoiceItem['product']['custom_field4']}
 					{do_tr number=4 class="blank-class"}
 
                         </tr>

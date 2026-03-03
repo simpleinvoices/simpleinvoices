@@ -24,16 +24,6 @@
 					</div>
 				</a>
 			</div>
-			<div class="col-md-4">
-				<a href="index.php?module=extensions&view=manage" class="card card-link card-link-pop">
-					<div class="card-body">
-						<div class="d-flex align-items-center">
-							<i class="ti ti-puzzle me-2" style="font-size: 2rem;"></i>
-							<div>{{ $LANG['extensions'] ?? '' }}</div>
-						</div>
-					</div>
-				</a>
-			</div>
 		</div>
 
 		<h4 class="mb-3">Invoice settings</h4>

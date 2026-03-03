@@ -1,4 +1,4 @@
-{{-- Hooks for custom code - use @push('hook_name', '...') in extensions or override this file in custom/ --}}
+{{-- Hooks for custom code - override this file in custom/ to add CSS/JS --}}
 @push('hook_head_start')
 <!-- HOOK_head_start -->
 @endpush

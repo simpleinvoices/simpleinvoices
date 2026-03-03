@@ -13,7 +13,7 @@
 @endif
 
 @if($saved ==false)
-	@if($smarty->post->op == 'add' AND $smarty->post->product_id == '') 
+	@if(post('op') == 'add' AND post('product_id') == '') 
 		<div class="validation_alert"><img src="./images/common/important.png" alt="" />
 		You must select a product</div>
 		<hr />

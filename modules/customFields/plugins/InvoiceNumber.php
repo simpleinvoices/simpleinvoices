@@ -18,8 +18,8 @@
 
 class InvoiceNumber extends CustomField {
 	
-	function InvoiceNumber() {
-		parent::CustomField(4,"InvoiceNumber");
+	function __construct() {
+		parent::__construct(4, "InvoiceNumber");
 	}
 	
 	function printOutput($id) {
@@ -27,7 +27,7 @@ class InvoiceNumber extends CustomField {
 		echo $name.": ".$values['description'];
 	}
 	
-	function printInputField($id,$itemId) {		
+	function printInputField($id = null, $itemId = null) {		
 		$description = $this->getDescription($id);
 		$name = $this->getFormName($id);
 		

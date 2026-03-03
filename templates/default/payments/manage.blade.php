@@ -17,14 +17,14 @@
 			</div>
 			<div class="col-auto">
 				<a href="./index.php?module=payments&amp;view=process&amp;op=pay_invoice" class="btn btn-primary"><i class="ti ti-plus me-1"></i>{{ $LANG['process_payment'] ?? '' }}</a>
-				@if($smarty->get->id ?? null)
-				<a href="./index.php?module=payments&amp;view=process&amp;id={{ urlencode($smarty->get->id ?? '') }}&amp;op=pay_selected_invoice" class="btn btn-outline-success ms-1"><i class="ti ti-cash me-1"></i>{{ $LANG['payments_filtered_invoice'] ?? '' }}</a>
+				@if(get('id'))
+				<a href="./index.php?module=payments&amp;view=process&amp;id={{ urlencode(get('id')) }}&amp;op=pay_selected_invoice" class="btn btn-outline-success ms-1"><i class="ti ti-cash me-1"></i>{{ $LANG['payments_filtered_invoice'] ?? '' }}</a>
 				@endif
 			</div>
 		</div>
 	</div>
 	<div class="card-body">
-		@if($smarty->get->id ?? null)
+		@if(get('id'))
 			@if($payments == null)
 				<div class="alert alert-info mb-0">
 					{{ $LANG['no_payments_invoice'] ?? '' }}
@@ -34,7 +34,7 @@
 				@include('templates.default.payments.manage_js')
 			@endif
 
-		@elseif($smarty->get->c_id ?? null)
+		@elseif(get('c_id'))
 			@if($payments == null)
 				<div class="alert alert-info mb-0">
 					{{ $LANG['no_payments_customer'] ?? '' }}

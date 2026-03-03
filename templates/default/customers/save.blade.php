@@ -19,7 +19,7 @@
 @endif
 
 
-@if($smarty->post->cancel == null )
+@if(post('cancel') == null )
 	<meta http-equiv="refresh" content="2;url=index.php?module=customers&amp;view=manage" />
 @else
 	<meta http-equiv="refresh" content="0;url=index.php?module=customers&amp;view=manage" />

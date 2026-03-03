@@ -9,8 +9,8 @@
 	@foreach(($invoiceItems ?? []) as $invoiceItem)
 
 			<tr class="tbl1-left tbl1-right">
-				<td class="tbl1-left">{{ $invoiceItem['quantity'] ?? '' | siLocal_number_trim }}</td>
-				<td>{{ $ ?? '' }}</td>
+				<td class="tbl1-left">{{ ($invoiceItem['quantity'] ?? '')|siLocal_number_trim }}</td>
+				<td>{{ $invoiceItem['product']['description'] ?? '' }}</td>
 				<td class="tbl1-right" colspan="4"></td>
 			</tr>
 			
@@ -36,13 +36,13 @@
                     <table width="100%">
                         <tr>
 
-					{inv_itemised_cf label=$customFieldLabels['product_cf1'] field=$}
+					{inv_itemised_cf label=$customFieldLabels['product_cf1'] field=$invoiceItem['product']['custom_field1']}
 					{do_tr number=1 class="blank-class"}
-					{inv_itemised_cf label=$customFieldLabels['product_cf1'] field=$}
+					{inv_itemised_cf label=$customFieldLabels['product_cf2'] field=$invoiceItem['product']['custom_field2']}
 					{do_tr number=2 class="blank-class"}
-					{inv_itemised_cf label=$customFieldLabels['product_cf1'] field=$}
+					{inv_itemised_cf label=$customFieldLabels['product_cf3'] field=$invoiceItem['product']['custom_field3']}
 					{do_tr number=3 class="blank-class"}
-					{inv_itemised_cf label=$customFieldLabels['product_cf1'] field=$}
+					{inv_itemised_cf label=$customFieldLabels['product_cf4'] field=$invoiceItem['product']['custom_field4']}
 					{do_tr number=4 class="blank-class"}
 
                         </tr>
@@ -76,7 +76,7 @@
 		<tr class="tbl1-left tbl1-right">
 			<td class="tbl1-left tbl1-right" colspan="6" ><br /></td>
 		</tr>
-{php}   global $invoice; $this->assign('invoice_gross_total', $invoice[total] - $invoice[total_tax]); {/php}
+@php $invoice_gross_total = ($invoice['total'] ?? 0) - ($invoice['total_tax'] ?? 0); @endphp
 		<tr>
 			<td colspan="3"></td>
 			<td align="right" colspan="2">{{ $LANG['gross_total'] ?? '' }}</td>

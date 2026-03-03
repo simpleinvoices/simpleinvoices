@@ -1,7 +1,7 @@
 /**
  * Simple Invoices - Tabler.io data grid (vanilla JS, no jQuery)
  * Drop-in replacement for flexigrid using existing XML endpoints.
- * Uses same POST params (page, rp, sortname, sortorder, query, qtype) and XML format:
+ * Uses GET params (page, rp, sortname, sortorder, query, qtype) and XML format:
  * <rows><page>1</page><total>N</total><row id=""><cell><![CDATA[...]]></cell>...</row></rows>
  *
  * Usage: siTablerGrid('#manageGrid', { url: '...', colModel: [...], ... });
@@ -12,7 +12,7 @@
 
 	var defaults = {
 		url: '',
-		method: 'POST',
+		method: 'GET',
 		dataType: 'xml',
 		colModel: [],
 		searchitems: [],
@@ -259,17 +259,32 @@
 		if (o.params && Array.isArray(o.params)) {
 			o.params.forEach(function (p) { param[p.name] = p.value; });
 		}
-		var body = new URLSearchParams(param).toString();
+		var queryString = new URLSearchParams(param).toString();
+		var isGet = (o.method || 'GET').toUpperCase() === 'GET';
+		var requestUrl = isGet ? (o.url + (o.url.indexOf('?') >= 0 ? '&' : '?') + queryString) : o.url;
+		var fetchOpts = {
+			method: o.method || 'GET',
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+		};
+		if (!isGet) fetchOpts.body = queryString;
 
-		fetch(o.url, {
-			method: o.method,
-			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-			body: body
-		})
-			.then(function (res) { return res.text(); })
+		fetch(requestUrl, { credentials: 'same-origin', ...fetchOpts })
+			.then(function (res) {
+				if (!res.ok) {
+					throw new Error('HTTP ' + res.status);
+				}
+				return res.text();
+			})
 			.then(function (text) {
 				self.loading = false;
 				var doc = parseXml(text);
+				// Detect XML parse error (e.g. HTML error page)
+				var parseErr = doc.querySelector('parsererror');
+				if (parseErr) {
+					self.tbody.innerHTML = '<tr><td colspan="' + o.colModel.length + '" class="text-center text-danger">Invalid XML response</td></tr>';
+					if (self.pagerStat) self.pagerStat.textContent = '';
+					return;
+				}
 				var rowsEl = doc.querySelector('rows');
 				var total = 0;
 				var page = 1;

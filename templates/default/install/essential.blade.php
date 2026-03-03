@@ -1,4 +1,4 @@
-{include file=$path|cat:'inc_head.tpl'}
+@include(str_replace('/', '.', rtrim($path ?? '', '/')) . '.inc_head')
 
 
 <div class="si_form si_message_install">
@@ -21,4 +21,4 @@ You can select to just start using Simple Invoices now or install sample data.
             </a>
 </div>
 
-{include file=$path|cat:'inc_foot.tpl'}
+@include(str_replace('/', '.', rtrim($path ?? '', '/')) . '.inc_foot')

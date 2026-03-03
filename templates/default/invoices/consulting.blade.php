@@ -17,7 +17,7 @@
 	</div>
 	<div class="card-body">
 
-@include('$path/header.tpl')
+@include(str_replace('/', '.', rtrim($path ?? '', '/')) . '.header')
 
 <tr>
 <td class="details_screen">{{ $LANG['quantity'] ?? '' }}</td>
@@ -35,10 +35,7 @@
 			@if($products == null )
 				<p><em>{{ $LANG['no_products'] ?? '' }}</em></p>
 			@else
-				<select 
-					name="products{{ $line }}"
-					onchange="invoice_product_change_price($(this).val(), {{ $line }}, jQuery('#quantity{{ $line }}').val() );"
-				>
+				<select name="products{{ $line }}" class="product_change" rel="{{ $line }}">
 				
 					<option value=""></option>
 				@foreach(($products ?? []) as $product)

@@ -19,8 +19,8 @@
 
 class TextCustomField extends CustomField {
 	
-	function TextCustomField() {
-		parent::CustomField(3,"TextCustomField");
+	function __construct() {
+		parent::__construct(3, "TextCustomField");
 	}
 	
 	function printOutput($id) {
@@ -28,7 +28,7 @@ class TextCustomField extends CustomField {
 		echo $name.": ".$values['description'];
 	}
 	
-	function printInputField($id,$itemId) {		
+	function printInputField($id = null, $itemId = null) {		
 		$description = $this->getDescription($id);
 		$name = $this->getFormName($id);
 		

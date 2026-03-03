@@ -1,6 +1,6 @@
-<form name="frmpost" action="index.php?module=products&view=save&id={{ urlencode($smarty->get->id ?? '') }}" method="post" id="frmpost" onsubmit="return checkForm(this);">
+<form name="frmpost" action="index.php?module=products&view=save&id={{ urlencode(get('id')) }}" method="post" id="frmpost" onsubmit="return checkForm(this);">
 
-@if($smarty->get->action== 'view' )
+@if(get('action')== 'view' )
 <div class="card">
 	<div class="card-header">
 		<h3 class="card-title">{{ $LANG['product'] ?? '' }} {{ $LANG['details'] ?? 'Details' }}</h3>
@@ -52,7 +52,7 @@
 				<th>{{ $customFieldLabel['product_cf4'] ?? '' }}</th>
 				<td>{{ $product['custom_field4'] ?? '' }}</td>
 			</tr>
-				@showCustomFields(3, $smarty->get->id ?? '')
+				@showCustomFields(3, get('id'))
 			@if($defaults->product_attributes)
 				<tr>
 					<th class="details_screen">{{ $LANG['product_attributes'] ?? '' }}</th>
@@ -106,7 +106,7 @@
 @endif
 
 
-@if($smarty->get->action== 'edit' )
+@if(get('action')== 'edit' )
 <div class="card">
 	<div class="card-header">
 		<h3 class="card-title">{{ $LANG['edit'] ?? '' }} {{ $LANG['product'] ?? '' }}</h3>

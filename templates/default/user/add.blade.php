@@ -8,8 +8,8 @@
 *	 GPL v3 or above --}}
 
 
-@if($smarty->post->email != null && $smarty->post->submit != null ) 
-	@include('user/save.tpl')
+@if(post('email') != null && form_submitted() )
+	@include('templates.default.user.save')
 @else
 
 <form name="frmpost" action="index.php?module=user&amp;view=add" method="post" id="frmpost">
@@ -24,7 +24,7 @@
 				<i class="ti ti-asterisk text-danger"></i>
 			</a>
 			</label>
-			<input type="text" name="email" value="{{ $smarty->post->email ?? '' }}" id="email" autocomplete="off" class="form-control validate[required]" />
+			<input type="text" name="email" value="{{ post('email') }}" id="email" autocomplete="off" class="form-control validate[required]" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['role'] ?? '' }}
@@ -40,7 +40,7 @@
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['password'] ?? '' }}</label>
-			<input type="password" name="password_field" value="{{ $smarty->post->password_field ?? '' }}" class="form-control" />
+			<input type="password" name="password_field" value="{{ post('password_field') }}" class="form-control" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['enabled'] ?? '' }}</label>
@@ -48,7 +48,7 @@
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['users'] ?? '' }}</label>
-			<input type="text" name="user_id" value="{{ $smarty->post->user_id ?? '' }}" size="12" id="user_id" autocomplete="off" class="form-control validate[required]" />
+			<input type="text" name="user_id" value="{{ post('user_id') }}" size="12" id="user_id" autocomplete="off" class="form-control validate[required]" />
 		</div>
 	</div>
 	<div class="card-footer text-end">

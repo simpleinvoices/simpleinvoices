@@ -4,18 +4,23 @@
 $root_path = dirname(dirname(__DIR__));
 require_once($root_path . '/include/init.php');
 
-header("Content-type: text/xml");
+// Ensure clean XML output (no warnings or stray output)
+while (ob_get_level()) ob_end_clean();
+header("Content-type: text/xml; charset=utf-8");
 
-//$start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
-$dir = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "DESC" ;
-$sort = (isset($_POST['sortname'])) ? $_POST['sortname'] : "id" ;
-$rp = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
-$having = (isset($_GET['having'])) ? $_GET['having'] : "" ;
-$page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
+// Grid params: support GET (default) and POST for compatibility
+$dir = $_REQUEST['sortorder'] ?? "DESC";
+$sort = $_REQUEST['sortname'] ?? "id";
+$rp = (int)($_REQUEST['rp'] ?? 25);
+$having = $_REQUEST['having'] ?? "";
+$page = (int)($_REQUEST['page'] ?? 1);
+if ($page < 1) $page = 1;
+if ($rp < 1) $rp = 25;
 
 //$sql = "SELECT * FROM ".TB_PREFIX."invoices LIMIT $start, $limit";
 $invoice = new invoice();
-$invoice->sort=$sort;
+$invoice->domain_id = $auth_session->domain_id ?? domain_id::get();
+$invoice->sort = $sort;
 
 if($auth_session->role_name =='customer') {
 	$invoice->customer = $auth_session->user_id;

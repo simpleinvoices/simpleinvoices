@@ -1,6 +1,6 @@
 <?php
 
-function smarty_function_online_payment_link($params, &$smarty) {
+function smarty_function_online_payment_link($params, $smarty = null) {
     global $LANG;
     global $siUrl;
     global $config;
@@ -18,7 +18,7 @@ function smarty_function_online_payment_link($params, &$smarty) {
         {
             $link .= "<img border='0' src='".urlsafe($url)."/images/common/pay_with_paypal.gif'/>";
         } else {
-            $link .= htmlsafe($params['link_wording']);
+            $link .= htmlspecialchars((string)($params['link_wording'] ?? ''), ENT_QUOTES, 'UTF-8');
         } 
 
         $link .= "</a>";
@@ -39,7 +39,7 @@ function smarty_function_online_payment_link($params, &$smarty) {
         {
             $link .= "<img border='0' src='".urlsafe($url)."/images/common/pay_with_eway.gif'/>";
         } else {
-            $link .= htmlsafe($params['link_wording']);
+            $link .= htmlspecialchars((string)($params['link_wording'] ?? ''), ENT_QUOTES, 'UTF-8');
         } 
 
         $link .= "</a>";
@@ -88,7 +88,7 @@ function smarty_function_online_payment_link($params, &$smarty) {
         {
             $link .= "<img border='0' src='".urlsafe($url)."/images/common/pay_with_ach.gif'/>";
         } else {
-            $link .= htmlsafe($params['link_wording']);
+            $link .= htmlspecialchars((string)($params['link_wording'] ?? ''), ENT_QUOTES, 'UTF-8');
         } 
 
         $link .= "</a>";

@@ -6,8 +6,8 @@
 *
 * License:
 *	 GPL v3 or above --}}
-<form name="frmpost" action="index.php?module=user&view=save&id={{ urlencode($smarty->get->id ?? '') }}" method="post" id="frmpost" onsubmit="return checkForm(this);">
-@if($smarty->get->action== 'view' )
+<form name="frmpost" action="index.php?module=user&view=save&id={{ urlencode(get('id')) }}" method="post" id="frmpost" onsubmit="return checkForm(this);">
+@if(get('action')== 'view' )
 
 <div class="card">
 	<div class="card-header">
@@ -46,7 +46,7 @@
 
 
 
-@if($smarty->get->action== 'edit' )
+@if(get('action')== 'edit' )
 <div class="card">
 	<div class="card-header">
 		<h3 class="card-title">{{ $LANG['edit'] ?? '' }} {{ $LANG['user'] ?? 'User' }}</h3>

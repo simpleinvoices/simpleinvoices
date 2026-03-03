@@ -13,7 +13,7 @@
 @endif
 
 @if($saved ==false)
-	@if($smarty->post->op == 'add' AND $smarty->post->product_id == '') 
+	@if(post('op') == 'add' AND post('product_id') == '') 
 		<div class="alert alert-warning"><i class="ti ti-alert-circle"></i>
 		You must select an product</div>
 	@endif

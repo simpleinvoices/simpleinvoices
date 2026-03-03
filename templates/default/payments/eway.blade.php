@@ -22,7 +22,7 @@
 
 @if($saved == false)
 
-    @if($smarty->post->op == 'add' AND $smarty->post->invoice_id == '')
+    @if(post('op') == 'add' AND post('invoice_id') == '')
         <div class="alert alert-warning"><i class="ti ti-alert-triangle me-1"></i>You must select an invoice</div>
     @endif
 
@@ -40,7 +40,7 @@
 <select name="invoice_id" class="form-select validate[required]">
 <option value=''></option>
 @foreach(($invoice_all ?? []) as $invoice)
-<option value="{{ $invoice['id'] ?? '' }}" @if($smarty->get->id == $invoice['id']) selected @endif >{{ $invoice['index_name'] ?? '' }}</option>
+<option value="{{ $invoice['id'] ?? '' }}" @if(get('id') == $invoice['id']) selected @endif >{{ $invoice['index_name'] ?? '' }}</option>
 @endforeach
 </select>
 </td>

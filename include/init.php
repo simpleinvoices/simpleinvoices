@@ -91,8 +91,7 @@ $smartyViewPaths = array(
     './custom/',
     './custom/default_template/',
     './include/jquery/',
-    './modules/',
-    './extensions/'
+    './modules/'
 );
 $smartyCachePath = './tmp/cache';
 if (!is_writable($smartyCachePath)) {
@@ -185,33 +184,28 @@ if ( $install_tables_exists != false )
 {
 	if (getNumberOfDoneSQLPatches() > "196")
 	{
-	    $sql="SELECT * from ".TB_PREFIX."extensions WHERE (domain_id = :domain_id OR domain_id =  0 ) ORDER BY domain_id ASC";
-	    $sth = dbQuery($sql,':domain_id', $auth_session->domain_id ) or die(htmlsafe(end($dbh->errorInfo())));
-
-	    while ( $this_extension = $sth->fetch() ) 
-	    { 
-	    	$DB_extensions[$this_extension['name']] = $this_extension; 
-	    }
-	    $config->extension = $DB_extensions;
+		// Only load core - extensions have been removed
+		$sql = "SELECT * FROM ".TB_PREFIX."extensions WHERE name = 'core' AND (domain_id = :domain_id OR domain_id = 0) ORDER BY domain_id DESC LIMIT 1";
+		$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id);
+		$core = $sth ? $sth->fetch() : null;
+		if ($core) {
+			$config->extension = new Zend_Config(array('core' => $core));
+		}
 	}
 }
 
-// If no extension loaded, load Core
-if (! $config->extension)
+if (!isset($config->extension) || !$config->extension)
 {
-	$extension_core = new Zend_Config(array('core'=>array(
-		'id'=>1,
-		'domain_id'=>1,
-		'name'=>'core',
-		'description'=>'Core part of Simple Invoices - always enabled',
-		'enabled'=>1
-		)));
-	$config->extension = $extension_core;
+	$config->extension = new Zend_Config(array('core' => array(
+		'id' => 0,
+		'domain_id' => 0,
+		'name' => 'core',
+		'description' => 'Core part of Simple Invoices - always enabled',
+		'enabled' => '1'
+	)));
 }
 
 include_once('./include/language.php');
-
-//add class files for extensions
 
 checkConnection();
 

@@ -281,15 +281,15 @@
 	</tr>
 		
 	@if($invoice['type_id'] == 2 )
-		@include('$template_path/itemised.tpl')
+		@include($template_path . '.itemised')
 	@endif
 
 	@if($invoice['type_id'] == 3 )
-		@include('$template_path/consulting.tpl')
+		@include($template_path . '.consulting')
 	@endif
-	
+
 	@if($invoice['type_id'] == 1 )
-		@include('$template_path/total.tpl')
+		@include($template_path . '.total')
 	@endif
 	
 
@@ -298,7 +298,7 @@
 	<tr>
         <td colspan="2"></td>
 		<td colspan="3" align="right">{{ $LANG['sub_total'] ?? '' }}&nbsp;</td>
-		<td colspan="1" align="right">@if($invoice_number_of_taxes > 1)<u>@endif{{ $preference['pref_currency_sign'] }} {{ $invoice['gross'] ?? '' | siLocal_number|htmlsafe }}@if($invoice_number_of_taxes > 1)</u>@endif</td>
+		<td colspan="1" align="right">@if($invoice_number_of_taxes > 1)<u>@endif{{ $preference['pref_currency_sign'] }} {{ $invoice['gross'] ?? '' | siLocal_number }}@if($invoice_number_of_taxes > 1)</u>@endif</td>
     </tr>
     @endif
 	@if($invoice_number_of_taxes > 1 )

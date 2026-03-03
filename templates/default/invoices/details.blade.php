@@ -132,7 +132,7 @@
 		 {{ $customFields['2'] }}
 		 {{ $customFields['3'] }}
 		 {{ $customFields['4'] }}
-		 @showCustomFields(4, $smarty->get->invoice ?? '')
+		 @showCustomFields(4, get('invoice'))
 
 @endif
 
@@ -243,8 +243,8 @@
 		<a href="#" class="add_line_item btn btn-outline-primary btn-sm">
 			<i class="ti ti-plus me-1"></i>{{ $LANG['add_new_row'] ?? '' }}
 		</a>
-		<a href='#' class="show-details btn btn-outline-secondary btn-sm" onclick="javascript: $('.details').show();$('.show-details').hide();"><i class="ti ti-plus me-1"></i>{{ $LANG['show_details'] ?? '' }}</a>
-		<a href='#' class="details btn btn-outline-secondary btn-sm" onclick="javascript: $('.details').hide();$('.show-details').show();" style="display:none"><i class="ti ti-minus me-1"></i>{{ $LANG['hide_details'] ?? '' }}</a>
+		<a href='#' class="show-details btn btn-outline-secondary btn-sm" onclick="document.querySelectorAll('.details').forEach(function(e){e.style.display='';}); document.querySelectorAll('.show-details').forEach(function(e){e.style.display='none'}); return false;"><i class="ti ti-plus me-1"></i>{{ $LANG['show_details'] ?? '' }}</a>
+		<a href='#' class="details btn btn-outline-secondary btn-sm" onclick="document.querySelectorAll('.details').forEach(function(e){e.style.display='none'}); document.querySelectorAll('.show-details').forEach(function(e){e.style.display=''}); return false;" style="display:none"><i class="ti ti-minus me-1"></i>{{ $LANG['hide_details'] ?? '' }}</a>
 	</div>
 
 
@@ -253,7 +253,7 @@
 	 {{ $customFields['2'] }}
 	 {{ $customFields['3'] }}
 	 {{ $customFields['4'] }}
-	 @showCustomFields(4, $smarty->get->invoice ?? '')
+	 @showCustomFields(4, get('invoice'))
 		<tr>
 			<td class='si_invoice_notes' colspan="2">
 				<H5>{{ $LANG['notes'] ?? '' }}</H5>

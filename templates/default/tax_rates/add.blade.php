@@ -1,6 +1,6 @@
 {{-- if tax rate is updated or saved. --}} 
 
-@if($smarty->post->tax_description != "" && $smarty->post->submit != null ) 
+@if(post('tax_description') != "" && form_submitted() ) 
 {{ $refresh_total }}
 
 <br />
@@ -11,7 +11,7 @@
 
 @else
 {{-- if  name was inserted --}} 
-	@if($smarty->post->submit !=null) 
+	@if(form_submitted()) 
 		<div class="alert alert-warning"><i class="ti ti-alert-circle"></i>
 		You must enter a Tax description</div>
 	@endif
@@ -26,7 +26,7 @@
 	<div class="card-body">
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['description'] ?? '' }}</label>
-			<input type="text" class="form-control validate[required]" name="tax_description" value="{{ $smarty->post->tax_description ?? '' }}" />
+			<input type="text" class="form-control validate[required]" name="tax_description" value="{{ post('tax_description') }}" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['rate'] ?? '' }}
@@ -36,7 +36,7 @@
 			</label>
 			<div class="row g-2">
 				<div class="col-auto">
-					<input type="text" name="tax_percentage" value="{{ $smarty->post->tax_percentage ?? '' }}" class="form-control" />
+					<input type="text" name="tax_percentage" value="{{ post('tax_percentage') }}" class="form-control" />
 				</div>
 				<div class="col-auto">
 					{html_options name=type options=$types selected=$tax['type']}
@@ -46,7 +46,7 @@
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['enabled'] ?? '' }}</label>
-			<select name="tax_enabled" class="form-select" value="{{ $smarty->post->tax_enabled ?? '' }}">
+			<select name="tax_enabled" class="form-select" value="{{ post('tax_enabled') }}">
 				<option value="1" selected>{{ $LANG['enabled'] ?? '' }}</option>
 				<option value="0">{{ $LANG['disabled'] ?? '' }}</option>
 			</select>

@@ -1135,15 +1135,21 @@ function setStatusExtension($extension_id, $status=2, $domain_id='') {
 }
 
 function getExtensionID($extension_name = "none", $domain_id='') {
-
+	// Core is always id 0 when used for system_defaults (extensions table may only have core row)
+	if ($extension_name === 'core') {
+		$domain_id = domain_id::get($domain_id);
+		$sql = "SELECT id FROM ".TB_PREFIX."extensions WHERE name = 'core' AND (domain_id = 0 OR domain_id = :domain_id) ORDER BY domain_id DESC LIMIT 1";
+		$sth = dbQuery($sql, ':domain_id', $domain_id);
+		$row = $sth ? $sth->fetch() : null;
+		return $row ? (int)$row['id'] : 0;
+	}
 	$domain_id = domain_id::get($domain_id);
-
-	$sql = "SELECT * FROM ".TB_PREFIX."extensions WHERE name = :extension_name AND (domain_id =  0 OR domain_id = :domain_id ) ORDER BY domain_id DESC LIMIT 1";
-	$sth = dbQuery($sql,':extension_name', $extension_name, ':domain_id', $domain_id);
-	$extension_info = $sth->fetch();
-	if (! $extension_info) { return -2; }			// -2 = no result set = extension not found
-	if ($extension_info['enabled'] == 0) { return -1; }	// -1 = extension not enabled
-	return $extension_info['id'];				//  0 = core, >0 is extension id
+	$sql = "SELECT * FROM ".TB_PREFIX."extensions WHERE name = :extension_name AND (domain_id = 0 OR domain_id = :domain_id) ORDER BY domain_id DESC LIMIT 1";
+	$sth = dbQuery($sql, ':extension_name', $extension_name, ':domain_id', $domain_id);
+	$extension_info = $sth ? $sth->fetch() : null;
+	if (!$extension_info) { return -2; }
+	if ($extension_info['enabled'] == 0) { return -1; }
+	return (int)$extension_info['id'];
 }
 
 function getSystemDefaults($domain_id='') {
@@ -1225,7 +1231,7 @@ function updateDefault($name,$value,$extension_name="core") {
 	$extension_id = getExtensionID($extension_name);
 	if (!($extension_id >= 0))
 	{
-		die(htmlsafe("Invalid extension name: ".$extension)); 
+		die(htmlsafe("Invalid extension name: ".$extension_name)); 
 	}
 
 	$sql = "INSERT INTO 

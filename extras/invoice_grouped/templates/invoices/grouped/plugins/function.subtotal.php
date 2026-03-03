@@ -1,6 +1,6 @@
 <?php
 
-function smarty_function_subtotal($params, &$smarty)
+function smarty_function_subtotal($params, $smarty = null)
 {
 	$subtotal = 0;
 	foreach ($params['cost'] as $key=>$value)

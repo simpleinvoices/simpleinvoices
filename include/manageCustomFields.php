@@ -211,7 +211,7 @@ function getPluginById($id) {
 	$plugins = getPluginArray();
 	
 	
-	if($plugins[$id] != null) {
+	if(isset($plugins[$id])) {
 		return $plugins[$id];
 	}
 	

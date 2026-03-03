@@ -6,7 +6,7 @@
 @if($menu != false)
 
 <form name="frmpost" action="index.php?module=statement&amp;view=index" method="post">
-<div class="si_form si_form_search@if($smarty->post->submit == null) si_form_search_null@endif">
+<div class="si_form si_form_search@if(!form_submitted()) si_form_search_null@endif">
    <table class="table table-vcenter">
 	   <tr>
 			  <th>
@@ -81,7 +81,7 @@
 </form>
 
 
-	@if($smarty->post->submit != null)
+	@if(form_submitted())
 	<div class="btn-list mb-3">
 			<a title="{{ urlencode($LANG['print_preview_tooltip'] ?? '' }}" href="index.php?module=statement&amp;view=export&amp;biller_id={{ $biller_id) }}&amp;customer_id={{ urlencode($customer_id }}&amp;start_date={{ $start_date) }}&amp;end_date={{ urlencode($end_date) }}&amp;show_only_unpaid={{ urlencode($show_only_unpaid) }}&amp;filter_by_date={{ urlencode($filter_by_date) }}&amp;format=print" class="btn btn-outline-primary btn-sm"><i class="ti ti-printer me-1"></i>{{ $LANG['print_preview'] ?? '' }}</a>
 			<a title="{{ urlencode($LANG['export_pdf_tooltip'] ?? '' }}" href="index.php?module=statement&amp;view=export&amp;biller_id={{ $biller_id) }}&amp;customer_id={{ urlencode($customer_id) }}&amp;start_date={{ urlencode($start_date) }}&amp;end_date={{ urlencode($end_date) }}&amp;show_only_unpaid={{ urlencode($show_only_unpaid) }}&amp;filter_by_date={{ urlencode($filter_by_date) }}&amp;format=pdf" class="btn btn-outline-secondary btn-sm"><i class="ti ti-file-type-pdf me-1"></i>{{ $LANG['export_pdf'] ?? '' }}</a>
@@ -94,7 +94,7 @@
 @endif
 
 
-@if($smarty->post->submit != null OR $view == export)
+@if(form_submitted() OR $view == export)
 
 @if($menu == false)
 <hr />
@@ -153,17 +153,17 @@
 			@endif
 			<tr>
 				<td class="si_right">{{ $index ?? '' }}
-					{$invoices[invoice].preference|htmlsafe}
-					{$invoices[invoice].index_id|htmlsafe}
+					{$invoices[invoice].preference}
+					{$invoices[invoice].index_id}
 				</td>
 				<td class="si_right">
 					{$invoices[invoice].date|siLocal_date}
 				</td>
 				<td>
-					{$invoices[invoice].biller|htmlsafe}
+					{$invoices[invoice].biller}
 				</td>
 				<td>
-					{$invoices[invoice].customer|htmlsafe}
+					{$invoices[invoice].customer}
 				</td>
 @if($invoices[invoice].status > 0)
 				<td class="si_right">

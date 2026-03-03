@@ -9,9 +9,9 @@
 *	http://www.simpleinvoices.org
 */ --}}
 
-<form name="frmpost" action="index.php?module=payment_types&amp;view=save&amp;id={{ $smarty->get->id ?? '' }}" method="post" onsubmit="return frmpost_Validator(this)">
+<form name="frmpost" action="index.php?module=payment_types&amp;view=save&amp;id={{ get('id') }}" method="post" onsubmit="return frmpost_Validator(this)">
 
-@if($smarty->get->action == "view" )
+@if(get('action') == "view" )
 	
 <div class="card">
 	<div class="card-header">
@@ -39,7 +39,7 @@
 
 
 
-@if($smarty->get->action == "edit")
+@if(get('action') == "edit")
 
 <div class="card">
 	<div class="card-header">
@@ -50,7 +50,7 @@
 		<tr>
 			<td class="details_screen">{{ $LANG['description'] ?? '' }} <a href="index.php?module=documentation&amp;view=view&amp;page=help_required_field" rel="gb_page_center[350, 150]"><i class="ti ti-alert-circle text-danger"></i></a></td>
 			<td>
-				<input type="text"  class="validate[required]"  name="pt_description" value="{{ $paymentType['pt_description'] ?? '' | htmlsafe }}" size="30" />
+				<input type="text"  class="validate[required]"  name="pt_description" value="{{ $paymentType['pt_description'] ?? '' }}" size="30" />
 			</td>
 		</tr>
 		<tr>

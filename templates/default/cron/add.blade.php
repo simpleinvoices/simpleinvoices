@@ -15,7 +15,7 @@
 
 @if($saved ==false)
 
-	@if($smarty->post->op == 'add' AND $smarty->post->invoice_id == '') 
+	@if(post('op') == 'add' AND post('invoice_id') == '') 
 		<div class="alert alert-warning"><i class="ti ti-alert-circle"></i>
 		You must select an invoice</div>
 	@endif

@@ -1,4 +1,4 @@
-{include file=$path|cat:'inc_head.tpl'}
+@include(str_replace('/', '.', rtrim($path ?? '', '/')) . '.inc_head')
 
 
 @if($saved == true )
@@ -8,4 +8,4 @@
 	<div class="si_message_error">Something bad happened. Sample data has NOT been imported into Simple Invoices</div>
 @endif
 
-{include file=$path|cat:'inc_foot.tpl'}
+@include(str_replace('/', '.', rtrim($path ?? '', '/')) . '.inc_foot')

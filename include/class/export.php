@@ -227,37 +227,32 @@ class export
 				$template = $defaults['template'];
 			
 				$templatePath = "./templates/invoices/${template}/template.tpl";
-				$template_path = "../templates/invoices/${template}";
+				// Blade view prefix for @include($template_path . '.itemised') etc.
+				$template_path = $smarty instanceof \BladeView
+					? "templates.invoices.{$template}"
+					: "../templates/invoices/${template}";
 				$css = $siUrl."/templates/invoices/${template}/style.css";
-				$pluginsdir = "./templates/invoices/${template}/plugins/";
 
-				//$smarty = new Smarty();
-				
-				$smarty -> plugins_dir = $pluginsdir;
-				 
 				$pageActive = "invoices";
 				$smarty->assign('pageActive', $pageActive);
 				
-				if(file_exists($templatePath)) {
-					//echo "test";
+				if (file_exists($templatePath) || file_exists("./templates/invoices/${template}/template.blade.php")) {
 					$this->assignTemplateLanguage($preference);
 
-					$smarty -> assign('biller',$biller);
-					$smarty -> assign('customer',$customer);
-					$smarty -> assign('invoice',$invoice);
-					$smarty -> assign('invoice_number_of_taxes',$invoice_number_of_taxes);
-					$smarty -> assign('preference',$preference);
-					$smarty -> assign('logo',$logo);
-					$smarty -> assign('template',$template);
-					$smarty -> assign('invoiceItems',$invoiceItems);
-					$smarty -> assign('template_path',$template_path);
-					$smarty -> assign('css',$css);
-					$smarty -> assign('customFieldLabels',$customFieldLabels);					
+					$smarty->assign('biller', $biller);
+					$smarty->assign('customer', $customer);
+					$smarty->assign('invoice', $invoice);
+					$smarty->assign('invoice_number_of_taxes', $invoice_number_of_taxes);
+					$smarty->assign('preference', $preference);
+					$smarty->assign('logo', $logo);
+					$smarty->assign('template', $template);
+					$smarty->assign('invoiceItems', $invoiceItems);
+					$smarty->assign('template_path', $template_path);
+					$smarty->assign('css', $css);
+					$smarty->assign('customFieldLabels', $customFieldLabels);
 
-					$data = $smarty -> fetch(".".$templatePath);
-				
+					$data = $smarty->fetch("." . $templatePath);
 				}
-				
 				break;			
 			}
 			

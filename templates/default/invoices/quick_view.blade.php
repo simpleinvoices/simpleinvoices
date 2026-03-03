@@ -45,8 +45,8 @@
                 <th>{{ $preference['pref_inv_wording'] ?? '' }} {{ $LANG['number_short'] ?? '' }}:</th>
                 <td colspan="4">{{ $invoice['index_id'] ?? '' }}</td>
                 <td class="si_switch">
-                    <a href="#" class="show-summary btn btn-icon btn-sm" onclick="$('.summary').show();$('.show-summary').hide();"><i class="ti ti-zoom-in" title="{{ $LANG['show_details'] ?? '' }}"></i></a>
-                    <a href="#" class="summary btn btn-icon btn-sm" onclick="$('.summary').hide();$('.show-summary').show();"><i class="ti ti-zoom-out" title="{{ $LANG['hide_details'] ?? '' }}"></i></a>
+                    <a href="#" class="show-summary btn btn-icon btn-sm" onclick="document.querySelectorAll('.summary').forEach(function(e){e.style.display='';}); document.querySelectorAll('.show-summary').forEach(function(e){e.style.display='none'}); return false;"><i class="ti ti-zoom-in" title="{{ $LANG['show_details'] ?? '' }}"></i></a>
+                    <a href="#" class="summary btn btn-icon btn-sm" onclick="document.querySelectorAll('.summary').forEach(function(e){e.style.display='none'}); document.querySelectorAll('.show-summary').forEach(function(e){e.style.display=''}); return false;"><i class="ti ti-zoom-out" title="{{ $LANG['hide_details'] ?? '' }}"></i></a>
                 </td>
             </tr>
             <tr class="summary">
@@ -64,8 +64,8 @@
                 <th>{{ $LANG['biller'] ?? '' }}:</th>
                 <td colspan="4">{{ $biller['name'] ?? '' }}</td>
                 <td class="si_switch">
-                    <a href="#" class="show-biller btn btn-icon btn-sm" onclick="$('.biller').show();$('.show-biller').hide();"><i class="ti ti-zoom-in" title="{{ $LANG['show_details'] ?? '' }}"></i></a>
-                    <a href="#" class="biller btn btn-icon btn-sm" onclick="$('.biller').hide();$('.show-biller').show();"><i class="ti ti-zoom-out" title="{{ $LANG['hide_details'] ?? '' }}"></i></a>
+                    <a href="#" class="show-biller btn btn-icon btn-sm" onclick="document.querySelectorAll('.biller').forEach(function(e){e.style.display='';}); document.querySelectorAll('.show-biller').forEach(function(e){e.style.display='none'}); return false;"><i class="ti ti-zoom-in" title="{{ $LANG['show_details'] ?? '' }}"></i></a>
+                    <a href="#" class="biller btn btn-icon btn-sm" onclick="document.querySelectorAll('.biller').forEach(function(e){e.style.display='none'}); document.querySelectorAll('.show-biller').forEach(function(e){e.style.display=''}); return false;"><i class="ti ti-zoom-out" title="{{ $LANG['hide_details'] ?? '' }}"></i></a>
                 </td>
             </tr>
             <tr class="biller">
@@ -121,8 +121,8 @@
                 <th>{{ $LANG['customer'] ?? '' }}:</th>
                 <td colspan="4">{{ $customer['name'] ?? '' }}</td>
                 <td class="si_switch">
-                    <a href="#" class="show-customer btn btn-icon btn-sm" onclick="$('.customer').show();$('.show-customer').hide();"><i class="ti ti-zoom-in" title="{{ $LANG['show_details'] ?? '' }}"></i></a>
-                    <a href="#" class="customer btn btn-icon btn-sm" onclick="$('.customer').hide();$('.show-customer').show();"><i class="ti ti-zoom-out" title="{{ $LANG['hide_details'] ?? '' }}"></i></a>
+                    <a href="#" class="show-customer btn btn-icon btn-sm" onclick="document.querySelectorAll('.customer').forEach(function(e){e.style.display='';}); document.querySelectorAll('.show-customer').forEach(function(e){e.style.display='none'}); return false;"><i class="ti ti-zoom-in" title="{{ $LANG['show_details'] ?? '' }}"></i></a>
+                    <a href="#" class="customer btn btn-icon btn-sm" onclick="document.querySelectorAll('.customer').forEach(function(e){e.style.display='none'}); document.querySelectorAll('.show-customer').forEach(function(e){e.style.display=''}); return false;"><i class="ti ti-zoom-out" title="{{ $LANG['hide_details'] ?? '' }}"></i></a>
                 </td>
             </tr>
             <tr class="customer">
@@ -197,12 +197,12 @@
                 <th colspan="5"></th>
                 <td class="si_switch">
                     @if(($invoice['type_id'] ?? 0) == 2)
-                    <a href="#" class="show-itemised btn btn-icon btn-sm" onclick="$('.itemised').show();$('.show-itemised').hide();"><i class="ti ti-zoom-in" title="{{ $LANG['show_details'] ?? '' }}"></i></a>
-                    <a href="#" class="itemised btn btn-icon btn-sm" onclick="$('.itemised').hide();$('.show-itemised').show();"><i class="ti ti-zoom-out" title="{{ $LANG['hide_details'] ?? '' }}"></i></a>
+                    <a href="#" class="show-itemised btn btn-icon btn-sm" onclick="document.querySelectorAll('.itemised').forEach(function(e){e.style.display='';}); document.querySelectorAll('.show-itemised').forEach(function(e){e.style.display='none'}); return false;"><i class="ti ti-zoom-in" title="{{ $LANG['show_details'] ?? '' }}"></i></a>
+                    <a href="#" class="itemised btn btn-icon btn-sm" onclick="document.querySelectorAll('.itemised').forEach(function(e){e.style.display='none'}); document.querySelectorAll('.show-itemised').forEach(function(e){e.style.display=''}); return false;"><i class="ti ti-zoom-out" title="{{ $LANG['hide_details'] ?? '' }}"></i></a>
                     @endif
                     @if(($invoice['type_id'] ?? 0) == 3)
-                    <a href="#" class="show-consulting btn btn-icon btn-sm" onclick="$('.consulting').show();$('.show-consulting').hide();"><i class="ti ti-zoom-in" title="{{ $LANG['show_details'] ?? '' }}"></i></a>
-                    <a href="#" class="consulting btn btn-icon btn-sm" onclick="$('.consulting').hide();$('.show-consulting').show();"><i class="ti ti-zoom-out" title="{{ $LANG['hide_details'] ?? '' }}"></i></a>
+                    <a href="#" class="show-consulting btn btn-icon btn-sm" onclick="document.querySelectorAll('.consulting').forEach(function(e){e.style.display='';}); document.querySelectorAll('.show-consulting').forEach(function(e){e.style.display='none'}); return false;"><i class="ti ti-zoom-in" title="{{ $LANG['show_details'] ?? '' }}"></i></a>
+                    <a href="#" class="consulting btn btn-icon btn-sm" onclick="document.querySelectorAll('.consulting').forEach(function(e){e.style.display='none'}); document.querySelectorAll('.show-consulting').forEach(function(e){e.style.display=''}); return false;"><i class="ti ti-zoom-out" title="{{ $LANG['hide_details'] ?? '' }}"></i></a>
                     @endif
                 </td>
             </tr>
@@ -320,8 +320,8 @@
                 <td colspan="4"></td>
                 <td class="si_switch">
                     @if(strlen($invoice['note'] ?? '') > 25)
-                    <a href="#" class="show-notes btn btn-icon btn-sm" onclick="$('.notes').show();$('.show-notes').hide();"><i class="ti ti-zoom-in" title="{{ $LANG['show_details'] ?? '' }}"></i></a>
-                    <a href="#" class="notes si_hide btn btn-icon btn-sm" onclick="$('.notes').hide();$('.show-notes').show();"><i class="ti ti-zoom-out" title="{{ $LANG['hide_details'] ?? '' }}"></i></a>
+                    <a href="#" class="show-notes btn btn-icon btn-sm" onclick="document.querySelectorAll('.notes').forEach(function(e){e.style.display='';}); document.querySelectorAll('.show-notes').forEach(function(e){e.style.display='none'}); return false;"><i class="ti ti-zoom-in" title="{{ $LANG['show_details'] ?? '' }}"></i></a>
+                    <a href="#" class="notes si_hide btn btn-icon btn-sm" onclick="document.querySelectorAll('.notes').forEach(function(e){e.style.display='none'}); document.querySelectorAll('.show-notes').forEach(function(e){e.style.display=''}); return false;"><i class="ti ti-zoom-out" title="{{ $LANG['hide_details'] ?? '' }}"></i></a>
                     @endif
                 </td>
             </tr>

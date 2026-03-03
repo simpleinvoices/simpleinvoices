@@ -58,7 +58,7 @@
 		@endif
 	@endif
 		
-		{merge_address field1=$customer['city'] field2=$customer['state'] field3=$customer['zip_code'] street1=$customer['street_address'] street2=$customer['street_addtess2'] class1="" class2="" colspan="3"}
+		{merge_address field1=$customer['city'] field2=$customer['state'] field3=$customer['zip_code'] street1=$customer['street_address'] street2=$customer['street_address2'] class1="" class2="" colspan="3"}
 
 	@if($customer['country'] != null)
 		<tr>
@@ -69,13 +69,8 @@
 
 	{print_if_not_null label=$LANG['phone_short'] field=$customer['phone'] class1='' class2='t' colspan="3"}
 	{print_if_not_null label=$LANG['fax'] field=$customer['fax'] class1='' class2='' colspan="3"}
-	{print_if_not_null label=$LANG['fax'] field=$customer['fax'] class1='' class2='' colspan="3"}
-	{print_if_not_null label=$LANG['fax'] field=$customer['fax'] class1='' class2='' colspan="3"}
-	
-	{print_if_not_null label=$LANG['fax'] field=$customer['fax'] class1='' class2='' colspan="3"}
-	{print_if_not_null label=$LANG['fax'] field=$customer['fax'] class1='' class2='' colspan="3"}
-	{print_if_not_null label=$LANG['fax'] field=$customer['fax'] class1='' class2='' colspan="3"}
-	{print_if_not_null label=$LANG['fax'] field=$customer['fax'] class1='' class2='' colspan="3"}
+	{print_if_not_null label=$LANG['mobile_short'] field=$customer['mobile_phone'] class1='' class2='' colspan="3"}
+	{print_if_not_null label=$LANG['email'] field=$customer['email'] class1='' class2='' colspan="3"}
 
 		<tr>
 			<td class="" colspan="4"></td>
@@ -87,8 +82,8 @@
 
 	<!-- Biller section - start -->
 		<tr>
-			<td class="tbl1-bottom col1" border=1 cellpadding=2 cellspacing=1><b>{{ $LANG['biller'] ?? '' }}:</b></td>
-			<td class="col1 tbl1-bottom" border=1 cellpadding=2 cellspacing=1 colspan="3">{{ $biller['name'] ?? '' }}</td>
+			<td class="tbl1-bottom col1"><b>{{ $LANG['biller'] ?? '' }}:</b></td>
+			<td class="col1 tbl1-bottom" colspan="3">{{ $biller['name'] ?? '' }}</td>
 		</tr> 
 
 	@if($biller['street_address'] != null)
@@ -121,15 +116,10 @@
 		</tr>
 	@endif
 
-	{print_if_not_null label=$LANG['fax'] field=$customer['fax'] class1='' class2='' colspan="3"}
-	{print_if_not_null label=$LANG['fax'] field=$customer['fax'] class1='' class2='' colspan="3"}
-	{print_if_not_null label=$LANG['fax'] field=$customer['fax'] class1='' class2='' colspan="3"}
-	{print_if_not_null label=$LANG['fax'] field=$customer['fax'] class1='' class2='' colspan="3"}
-	
-	{print_if_not_null label=$LANG['fax'] field=$customer['fax'] class1='' class2='' colspan="3"}
-	{print_if_not_null label=$LANG['fax'] field=$customer['fax'] class1='' class2='' colspan="3"}
-	{print_if_not_null label=$LANG['fax'] field=$customer['fax'] class1='' class2='' colspan="3"}
-	{print_if_not_null label=$LANG['fax'] field=$customer['fax'] class1='' class2='' colspan="3"}
+	{print_if_not_null label=$LANG['phone_short'] field=$biller['phone'] class1='' class2='' colspan="3"}
+	{print_if_not_null label=$LANG['fax'] field=$biller['fax'] class1='' class2='' colspan="3"}
+	{print_if_not_null label=$LANG['mobile_short'] field=$biller['mobile_phone'] class1='' class2='' colspan="3"}
+	{print_if_not_null label=$LANG['email'] field=$biller['email'] class1='' class2='' colspan="3"}
 
 		<tr>
 			<td class="" colspan="4"> </td>

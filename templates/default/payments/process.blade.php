@@ -7,7 +7,7 @@
 	<div class="card-body">
 	<table class="table table-vcenter">	
 	
-	@if($smarty->get->op === "pay_selected_invoice")
+	@if(get('op') === "pay_selected_invoice")
 	
 		<tr>
 			<th>{{ $invoice['preference'] ?? '' }}</th>
@@ -41,7 +41,7 @@
 		
 	@endif
 		
-	@if($smarty->get->op === "pay_invoice")
+	@if(get('op') === "pay_invoice")
 
 		<tr>
 			<th>{{ $LANG['invoice'] ?? '' }}</th>
@@ -98,7 +98,7 @@
 			<a href="./index.php?module=payments&amp;view=manage" class="btn btn-secondary"><i class="ti ti-x me-1"></i>{{ $LANG['cancel'] ?? '' }}</a>
 		</div>
 
-		@if($smarty->get->op == 'pay_selected_invoice')
+		@if(get('op') == 'pay_selected_invoice')
 			<input type="hidden" name="invoice_id" value="{{ $invoice['id'] ?? '' }}" />
 		@endif
 	</div>

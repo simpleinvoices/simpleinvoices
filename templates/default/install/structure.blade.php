@@ -1,4 +1,4 @@
-{include file=$path|cat:'inc_head.tpl'}
+@include(str_replace('/', '.', rtrim($path ?? '', '/')) . '.inc_head')
 
 
 <div class="si_form si_message_install">
@@ -23,4 +23,4 @@
             </a>
 </div>
 
-{include file=$path|cat:'inc_foot.tpl'}
+@include(str_replace('/', '.', rtrim($path ?? '', '/')) . '.inc_foot')

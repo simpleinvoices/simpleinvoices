@@ -1,6 +1,6 @@
 <?php
 
-function smarty_function_markup_percentage($params, &$smarty)
+function smarty_function_markup_percentage($params, $smarty = null)
 {
 
 	
@@ -17,7 +17,7 @@ function smarty_function_markup_percentage($params, &$smarty)
 	}
 	$subtotal = round(($subtotal_tax/$subtotal_total)*100,0);	
 	//$subtotal = siLocal::number($subtotal);	
-	return htmlsafe($subtotal);	
+	return htmlspecialchars((string)$subtotal, ENT_QUOTES, 'UTF-8');	
 
 }
 

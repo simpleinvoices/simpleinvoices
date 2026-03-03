@@ -1,7 +1,7 @@
 
 {{-- if customer is updated or saved. --}} 
 
-@if($smarty->post->name != "" && $smarty->post->submit != null ) 
+@if(post('name') != "" && form_submitted() ) 
 {{ $refresh_total }}
 
 <br />
@@ -12,7 +12,7 @@
 
 @else
 {{-- if  name was inserted --}} 
-	@if($smarty->post->submit !=null) 
+	@if(form_submitted()) 
 		<div class="validation_alert"><img src="./images/common/important.png" alt="" />
 		You must enter a name for the product attribute</div>
 		<hr />
@@ -27,7 +27,7 @@
 <table align="center">
 <tr>
 	<td class="details_screen">{{ $LANG['name'] ?? '' }}</td>
-	<td><input type="text" name="name" value="{{ $smarty->post->name }}" size="25" /></td>
+	<td><input type="text" name="name" value="{{ post('name') }}" size="25" /></td>
 </tr>
 		<tr>
 			<th>{{ $LANG['type'] ?? '' }}</th>

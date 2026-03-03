@@ -102,9 +102,8 @@
 			</tr>
 		</thead>
 
-		(($dynamic_line_items ?? []) as $line)
-		<tbody class="line_item" id="row{{ $line }}">
-			{ assign var="lineNumber" value=$line } 
+		@foreach(($dynamic_line_items ?? []) as $line)
+		<tbody class="line_item" id="row{{ $line }}"> 
 			<tr>
 				<td>
 					@if($line == "0")
@@ -136,8 +135,8 @@
 						@endif 
 						name="quantity{{ $line }}" 
 						id="quantity{{ $line }}" size="5" 
-						@if($smarty->get->quantity.$lineNumber)
-							value="{$smarty->get->quantity.$lineNumber}"
+						@if(get('quantity' . $line))
+							value="{{ get('quantity' . $line) }}"
 						@endif
 						/>
 				</td>
@@ -155,8 +154,8 @@
 					<option value=""></option>
 				@foreach(($products ?? []) as $product)
 					<option 
-						@if($product['id'] == (($smarty->get ?? [])['product'][$line] ?? null))
-							value="{{ ($smarty->get ?? [])['product'][$line] ?? '' }}"
+						@if($product['id'] == ((get())['product'][$line] ?? null))
+							value="{{ (get())['product'][$line] ?? '' }}"
 							selected
 						@else
 							value="{{ $product['id'] ?? '' }}"
@@ -178,8 +177,8 @@
 					<option value=""></option>
 					@foreach(($taxes ?? []) as $tax)
 						<option 
-							@if($tax['tax_id'] == (($smarty->get ?? [])['tax'][$line][$tax] ?? null))
-							value="{{ (($smarty->get ?? [])['tax'][$line][$tax] ?? '') }}"
+							@if($tax['tax_id'] == ((get())['tax'][$line][$tax] ?? null))
+							value="{{ ((get())['tax'][$line][$tax] ?? '') }}"
 							selected
 							@else
 							   value="{{ $tax['tax_id'] ?? '' }}"
@@ -197,8 +196,8 @@
 						id="unit_price{{ $line }}" 
 						name="unit_price{{ $line }}" 
 						size="7"
-						@if($smarty->get->unit_price.$lineNumber)
-							value="{$smarty->get->unit_price.$lineNumber}"
+						@if(get('unit_price' . $line))
+							value="{{ get('unit_price' . $line) }}"
 						@else
 						   value=""
 						@endif
@@ -215,6 +214,7 @@
 				</td>
 			</tr>
 		</tbody>
+		@endforeach
 		
 	</table>
 
@@ -237,7 +237,7 @@
 			<td class='si_invoice_notes' colspan="2">
 				<H5>{{ $LANG['notes'] ?? '' }}</H5>
 				<textarea input type="text" class="editor" name="note" rows="5" cols="50" wrap="nowrap">
-						{{ $smarty->get->note }}
+						{{ get('note') }}
 				</textarea>
 			</td>
 		</tr>
