@@ -98,28 +98,13 @@ if (!is_writable($smartyCachePath)) {
 	simpleInvoicesError("notWriteable", 'folder', $smartyCachePath);
 }
 
-if (class_exists('Jenssegers\Blade\Blade')) {
-	require_once(__DIR__ . '/blade_view.php');
-	$smarty = new BladeView($smartyViewPaths, $smartyCachePath);
-} else {
-	$smarty = new Smarty();
-	$smarty->setTemplateDir($smartyViewPaths);
-	$smarty->setCompileDir($smartyCachePath . '/smarty_compile');
-	$smarty->setCacheDir($smartyCachePath . '/smarty_cache');
-	$pluginDirs = array('./include/smarty_plugins');
-	if (is_dir('./vendor/smarty/smarty/libs/plugins')) {
-		$pluginDirs[] = './vendor/smarty/smarty/libs/plugins';
-	}
-	$smarty->setPluginsDir($pluginDirs);
-	if (!is_dir($smarty->getCompileDir())) {
-		mkdir($smarty->getCompileDir(), 0777, true);
-	}
-	if (!is_dir($smarty->getCacheDir())) {
-		mkdir($smarty->getCacheDir(), 0777, true);
-	}
+if (!class_exists('Jenssegers\Blade\Blade')) {
+	simpleInvoicesError('notWriteable', 'library', 'jenssegers/blade (run: composer update)');
 }
-/* 
- * Blade or Smarty init - end
+require_once(__DIR__ . '/blade_view.php');
+$smarty = new BladeView($smartyViewPaths, $smartyCachePath);
+/*
+ * Blade template engine init - end
  */
 
 

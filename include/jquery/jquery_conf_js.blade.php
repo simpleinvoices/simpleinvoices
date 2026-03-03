@@ -19,7 +19,7 @@ var si_lang_description_conf = @json($LANG['description'] ?? 'Description');
 		if (document.querySelector('#custom-tab-by-hash')) {
 			document.querySelector('#custom-tab-by-hash').addEventListener('click', function(e) { var w = window.open(this.href, '', 'directories,location,menubar,resizable,scrollbars,status,toolbar'); if (w) w.focus(); e.preventDefault(); });
 		}
-		document.querySelectorAll('a.cluetip').forEach(function(a){ a.addEventListener('click', function(e){ e.preventDefault(); if(this.getAttribute('rel')) window.open(this.getAttribute('rel'), '_blank'); }); });
+		// Help links: Bootstrap/Tabler popovers with content from rel URL (si-help-popover.js)
 
 	if (document.querySelector('textarea.editor') && !(
 		(navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/iPad/i))

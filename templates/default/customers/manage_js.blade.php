@@ -1,7 +1,7 @@
 <script type="text/javascript">
-		var columns = 8;
+		var columns = 7;
 		var padding = 12;
-		var action_menu = 140;
+		var action_menu = 100;
 		var colEl = document.querySelector('.col');
 		var grid_width = colEl ? colEl.getBoundingClientRect().width : 800;
 		grid_width = grid_width - ((columns - 0.5) * padding) - action_menu;
@@ -11,10 +11,9 @@
 			url: @json($url ?? 'index.php?module=customers&view=xml'),
 			dataType: 'xml',
 			colModel : [
-				{display: @json($LANG['actions'] ?? 'Actions'), name : 'actions', width : action_menu, sortable : false, align: 'center'},
+				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'center'},
 				{display: @json($LANG['id'] ?? 'ID'), name : 'CID', width : 7 * percentage_width, sortable : true, align: 'right'},
 				{display: @json($LANG['name'] ?? 'Name'), name : 'name', width : 28 * percentage_width, sortable : true, align: 'left'},
-				{display: @json($LANG['customer_department'] ?? 'Department'), name : 'department', width : 18 * percentage_width, sortable : true, align: 'left'},
 				{display: @json($LANG['total'] ?? 'Total'), name : 'customer_total', width : 12 * percentage_width, sortable : true, align: 'right'},
 				{display: @json($LANG['paid'] ?? 'Paid'), name : 'paid', width : 12 * percentage_width, sortable : true, align: 'right'},
 				{display: @json($LANG['owing'] ?? 'Owing'), name : 'owing', width : 12 * percentage_width, sortable : true, align: 'right'},

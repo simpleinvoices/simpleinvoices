@@ -1,9 +1,8 @@
 <?php
 /**
- * Smarty-compatible wrapper for Laravel Blade.
- * Provides assign(), display(), fetch() so existing $smarty->assign/display/fetch code keeps working.
- * Template paths like "templates/default/header.tpl" are resolved to Blade views
- * "templates.default.header" (file: templates/default/header.blade.php).
+ * Blade view wrapper with assign(), display(), fetch() for compatibility with existing module code.
+ * Template paths like "templates/default/header.tpl" or "header.blade.php" are resolved to Blade
+ * view "templates.default.header" (file: templates/default/header.blade.php).
  */
 
 use Illuminate\Container\Container;
@@ -25,7 +24,7 @@ class BladeView
     /** @var array */
     protected $assigns = [];
 
-    /** @var array View path roots (same order as Smarty template_dir) */
+    /** @var array View path roots for resolving template names */
     protected $viewPaths = [];
 
     public function __construct(array $viewPaths, $cachePath)
@@ -155,7 +154,7 @@ class BladeView
     /**
      * Register Blade directives and precompilers.
      *
-     * Legacy: Precompilers convert Smarty-style tags ({merge_address ...}, {print_if_not_null ...},
+     * Legacy tag precompilers convert {merge_address ...}, {print_if_not_null ...},
      * {section}, {$var|modifier}) so existing templates work during migration. New templates
      * should use native Blade ({{ }}, @if, @foreach) and the pipe modifier only where needed.
      * Precompiler order matters: each transforms the template text before Blade compilation.
@@ -164,19 +163,13 @@ class BladeView
     {
         $compiler = $this->blade->compiler();
 
-        // Load Blade helpers (pure PHP, return strings) then Smarty-style plugin wrappers.
+        // Load Blade helpers (template helpers that return strings).
         $helpersPath = __DIR__ . '/blade_helpers.php';
         if (file_exists($helpersPath)) {
             require_once $helpersPath;
         }
-        $pluginsDir = __DIR__ . '/smarty_plugins';
+        // Invoice template plugin (online payment link) – still uses legacy name for compatibility.
         $defaultInvoicePlugins = __DIR__ . '/../templates/invoices/default/plugins';
-        foreach (['function.merge_address.php', 'function.inv_itemised_cf.php', 'function.print_if_not_null.php', 'function.do_tr.php', 'function.showCustomFields.php'] as $file) {
-            $path = $pluginsDir . '/' . $file;
-            if (file_exists($path)) {
-                require_once $path;
-            }
-        }
         if (!function_exists('smarty_function_online_payment_link')) {
             $path = $defaultInvoicePlugins . '/function.online_payment_link.php';
             if (file_exists($path)) {
@@ -184,7 +177,7 @@ class BladeView
             }
         }
 
-        // Helper: parse Smarty tag params (name=value) and return PHP array string for smarty_function_*(params, null).
+        // Parse legacy tag params (name=value) into a PHP array string for blade_*(params).
         $parseSmartyTagParams = function ($inner) {
             $params = [];
             $pattern = '/(\w+)\s*=\s*("(?:[^"\\\\]|\\\\.)*"|\'(?:[^\'\\\\]|\\\\.)*\'|\$[^}\s]+|true|false)/';
@@ -206,67 +199,82 @@ class BladeView
             return '[' . implode(', ', $arr) . ']';
         };
 
-        // --- PRECOMPILER 0: Smarty {merge_address ...} → PHP call ---
+        // --- PRECOMPILER: legacy {merge_address ...} → echo blade_merge_address() ---
         $compiler->precompiler(function ($template) use ($parseSmartyTagParams) {
-            if (!function_exists('smarty_function_merge_address')) {
+            if (!function_exists('blade_merge_address')) {
                 return $template;
             }
             return preg_replace_callback(
                 '/\{merge_address\s+([^}]+)\}/',
                 function ($m) use ($parseSmartyTagParams) {
                     $paramsPhp = $parseSmartyTagParams($m[1]);
-                    return "<?php smarty_function_merge_address({$paramsPhp}, null); ?>";
+                    return "<?php echo blade_merge_address({$paramsPhp}); ?>";
                 },
                 $template
             );
         });
 
-        // --- PRECOMPILER 0b: Smarty {inv_itemised_cf ...} → PHP call ---
+        // --- PRECOMPILER: legacy {inv_itemised_cf ...} → echo blade_inv_itemised_cf() ---
         $compiler->precompiler(function ($template) use ($parseSmartyTagParams) {
-            if (!function_exists('smarty_function_inv_itemised_cf')) {
+            if (!function_exists('blade_inv_itemised_cf')) {
                 return $template;
             }
             return preg_replace_callback(
                 '/\{inv_itemised_cf\s+([^}]+)\}/',
                 function ($m) use ($parseSmartyTagParams) {
                     $paramsPhp = $parseSmartyTagParams($m[1]);
-                    return "<?php smarty_function_inv_itemised_cf({$paramsPhp}, null); ?>";
+                    return "<?php echo blade_inv_itemised_cf({$paramsPhp}); ?>";
                 },
                 $template
             );
         });
 
-        // --- PRECOMPILER 0b2: Smarty {print_if_not_null ...} → PHP call ---
+        // --- PRECOMPILER: legacy {print_if_not_null ...} → echo blade_print_if_not_null() ---
         $compiler->precompiler(function ($template) use ($parseSmartyTagParams) {
-            if (!function_exists('smarty_function_print_if_not_null')) {
+            if (!function_exists('blade_print_if_not_null')) {
                 return $template;
             }
             return preg_replace_callback(
                 '/\{print_if_not_null\s+([^}]+)\}/',
                 function ($m) use ($parseSmartyTagParams) {
                     $paramsPhp = $parseSmartyTagParams($m[1]);
-                    return "<?php smarty_function_print_if_not_null({$paramsPhp}, null); ?>";
+                    return "<?php echo blade_print_if_not_null({$paramsPhp}); ?>";
                 },
                 $template
             );
         });
 
-        // --- PRECOMPILER 0b3: Smarty {do_tr ...} → PHP call ---
+        // --- PRECOMPILER: legacy {do_tr ...} → echo blade_do_tr() ---
         $compiler->precompiler(function ($template) use ($parseSmartyTagParams) {
-            if (!function_exists('smarty_function_do_tr')) {
+            if (!function_exists('blade_do_tr')) {
                 return $template;
             }
             return preg_replace_callback(
                 '/\{do_tr\s+([^}]+)\}/',
                 function ($m) use ($parseSmartyTagParams) {
                     $paramsPhp = $parseSmartyTagParams($m[1]);
-                    return "<?php smarty_function_do_tr({$paramsPhp}, null); ?>";
+                    return "<?php echo blade_do_tr({$paramsPhp}); ?>";
                 },
                 $template
             );
         });
 
-        // --- PRECOMPILER 0c: Smarty {online_payment_link ...} → PHP call (multiline tag) ---
+        // --- PRECOMPILER: legacy {showCustomFields ...} → echo blade_show_custom_fields() ---
+        $compiler->precompiler(function ($template) use ($parseSmartyTagParams) {
+            if (!function_exists('blade_show_custom_fields')) {
+                return $template;
+            }
+            return preg_replace_callback(
+                '/\{showCustomFields\s+([^}]+)\}/',
+                function ($m) use ($parseSmartyTagParams) {
+                    $paramsPhp = $parseSmartyTagParams($m[1]);
+                    return "<?php echo blade_show_custom_fields({$paramsPhp}); ?>";
+                },
+                $template
+            );
+        });
+
+        // --- PRECOMPILER: legacy {online_payment_link ...} (invoice plugin) ---
         $compiler->precompiler(function ($template) use ($parseSmartyTagParams) {
             if (!function_exists('smarty_function_online_payment_link')) {
                 return $template;
@@ -281,7 +289,7 @@ class BladeView
             );
         });
 
-        // --- PRECOMPILER 0d: Smarty {html_options ...} → PHP call ---
+        // --- PRECOMPILER: legacy {html_options ...} → echo blade_html_options() ---
         // Params: name, options (assoc), or values+output, selected; optional class, id, etc. Value can be $var, "s", 's', digit, or word.
         $compiler->precompiler(function ($template) {
             if (!function_exists('blade_html_options')) {
@@ -597,6 +605,6 @@ class BladeView
         });
     }
 
-    /** Smarty compatibility: expose plugins_dir for code that sets it (e.g. export.php) */
+    /** Legacy: plugins_dir for code that sets it (e.g. invoice template plugins path). */
     public $plugins_dir;
 }

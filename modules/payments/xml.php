@@ -146,20 +146,20 @@ $count = $resultCount[0];
 	$xml .= "<total>$count</total>";
 	
 	foreach ($payments as $row) {
-		
-		$notes = si_truncate($row['ac_notes'],'13','...');
+		$label_esc = htmlspecialchars($row['index_name'] ?? (string)$row['id']);
+		$action  = '<div class="dropdown">';
+		$action .= '<a class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">'.$LANG['actions'].'</a>';
+		$action .= '<div class="dropdown-menu dropdown-menu-end">';
+		$action .= '<a class="dropdown-item" href="index.php?module=payments&amp;view=details&amp;id='.$row['id'].'&amp;action=view"><i class="ti ti-eye me-2"></i>'.$LANG['view'].' '.$label_esc.'</a>';
+		$action .= '<a class="dropdown-item" href="index.php?module=payments&amp;view=print&amp;id='.$row['id'].'"><i class="ti ti-printer me-2"></i>'.$LANG['print_preview_tooltip'].' '.$label_esc.'</a>';
+		$action .= '</div></div>';
 		$xml .= "<row id='".$row['id']."'>";
-	$xml .= "<cell><![CDATA[
-	<a class='index_table' title='".$LANG['view']." ".$row['name']."' href='index.php?module=payments&view=details&id=".$row['id']."&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-	<a class='index_table' title='".$LANG['print_preview_tooltip']." ".$row['id']."' href='index.php?module=payments&view=print&id=".$row['id']."'><img src='images/common/printer.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-	]]></cell>";
+		$xml .= "<cell><![CDATA[".$action."]]></cell>";
 		$xml .= "<cell><![CDATA[".$row['id']."]]></cell>";
-		$xml .= "<cell><![CDATA[".$row['index_name']."]]></cell>";		
+		$xml .= "<cell><![CDATA[".$row['index_name']."]]></cell>";
 		$xml .= "<cell><![CDATA[".$row['cname']."]]></cell>";
 		$xml .= "<cell><![CDATA[".$row['bname']."]]></cell>";
 		$xml .= "<cell><![CDATA[".siLocal::number($row['ac_amount'])."]]></cell>";
-		$xml .= "<cell><![CDATA[".$notes."]]></cell>";
-		$xml .= "<cell><![CDATA[".$row['description']."]]></cell>";
 		$xml .= "<cell><![CDATA[".siLocal::date($row['date'])."]]></cell>";
 	
 		$xml .= "</row>";		

@@ -12,115 +12,89 @@
 
 <div class="card">
 	<div class="card-header">
-		<h3 class="card-title">{{ $LANG['biller'] ?? '' }} {{ $LANG['details'] ?? 'Details' }}</h3>
+		<ul class="nav nav-tabs card-header-tabs" role="tablist">
+			<li class="nav-item" role="presentation">
+				<a class="nav-link active" href="#bill-view-details" data-bs-toggle="tab" role="tab">{{ $LANG['details'] ?? '' }}</a>
+			</li>
+			<li class="nav-item" role="presentation">
+				<a class="nav-link" href="#bill-view-address" data-bs-toggle="tab" role="tab">{{ $LANG['street'] ?? 'Address' }}</a>
+			</li>
+			<li class="nav-item" role="presentation">
+				<a class="nav-link" href="#bill-view-contact" data-bs-toggle="tab" role="tab">{{ $LANG['phone'] ?? 'Contact' }}</a>
+			</li>
+			<li class="nav-item" role="presentation">
+				<a class="nav-link" href="#bill-view-payment" data-bs-toggle="tab" role="tab">{{ $LANG['payment'] ?? 'Payment' }}</a>
+			</li>
+			<li class="nav-item" role="presentation">
+				<a class="nav-link" href="#bill-view-custom" data-bs-toggle="tab" role="tab">{{ $LANG['custom_fields'] ?? '' }}</a>
+			</li>
+			<li class="nav-item" role="presentation">
+				<a class="nav-link" href="#bill-view-invoice" data-bs-toggle="tab" role="tab">{{ $LANG['invoice'] ?? 'Invoice' }}</a>
+			</li>
+		</ul>
 		<div class="card-actions">
 			<a href="./index.php?module=billers&amp;view=details&amp;action=edit&amp;id={{ $biller['id'] }}" class="btn btn-primary"><i class="ti ti-edit me-1"></i>{{ $LANG['edit'] ?? '' }}</a>
 		</div>
 	</div>
 	<div class="card-body">
-		<table class="table table-vcenter table-wrap">
-			<tr>
-				<th>{{ $LANG['biller_name'] ?? '' }}</th>
-				<td>{{ $biller['name'] }}</td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['street'] ?? '' }}</th>
-				<td>{{ $biller['street_address'] }}</td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['street2'] ?? '' }}</th>
-				<td>{{ $biller['street_address2'] }}</td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['city'] ?? '' }}</th>
-				<td>{{ $biller['city'] }}</td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['zip'] ?? '' }}</th>
-				<td>{{ $biller['zip_code'] }}</td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['state'] ?? '' }}</th>
-				<td>{{ $biller['state'] }}</td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['country'] ?? '' }}</th>
-				<td>{{ $biller['country'] }}</td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['mobile_phone'] ?? '' }}</th>
-				<td>{{ $biller['mobile_phone'] }}</td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['phone'] ?? '' }}</th>
-				<td>{{ $biller['phone'] }}</td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['fax'] ?? '' }}</th>
-				<td>{{ $biller['fax'] }}</td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['email'] ?? '' }}</th>
-				<td>{{ $biller['email'] }}</td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['paypal_business_name'] ?? '' }}</th>
-				<td>{{ $biller['paypal_business_name'] }}</td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['paypal_notify_url'] ?? '' }}</th>
-				<td>{{ $biller['paypal_notify_url'] }}</td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['paypal_return_url'] ?? '' }}</th>
-				<td>{{ $biller['paypal_return_url'] }}</td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['eway_customer_id'] ?? '' }}</th>
-				<td>{{ $biller['eway_customer_id'] }}</td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['paymentsgateway_api_id'] ?? '' }}</th>
-				<td>{{ $biller['paymentsgateway_api_id'] }}</td>
-			</tr>
-			<tr>
-				<th>{{ $customFieldLabel['biller_cf1'] }}</th>
-				<td>{{ $biller['custom_field1'] }}</td>
-			</tr>
-			<tr>
-				<th>{{ $customFieldLabel['biller_cf2'] }}</th>
-				<td>{{ $biller['custom_field2'] }}</td>
-			</tr>
-			<tr>
-				<th>{{ $customFieldLabel['biller_cf3'] }}</th>
-				<td>{{ $biller['custom_field3'] }}</td>
-			</tr>
-			<tr>
-				<th class="details_screen">{{ $customFieldLabel['biller_cf4'] }}</th>
-				<td>{{ $biller['custom_field4'] }}</td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['logo_file'] ?? '' }}</th>
-				<td>
-					@if(!empty($biller['logo']))
-						<img src="templates/invoices/logos/{{ $biller['logo'] }}" alt="{{ $biller['logo'] }}" class="img-fluid"><br>{{ $biller['logo'] }}
-					@endif
-				</td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['invoice_footer'] ?? '' }}</th>
-				<td>{{ $biller['footer'] }}</td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['notes'] ?? '' }}</th>
-				<td>{{ $biller['notes'] }}</td>
-			</tr>
-			@showCustomFields(1, get('id'))
-			<tr>
-				<th>{{ $LANG['enabled'] ?? '' }}</th>
-				<td>{{ $biller['wording_for_enabled'] }}</td>
-			</tr>
-		</table>
+		<div class="tab-content">
+			<div id="bill-view-details" class="tab-pane active" role="tabpanel">
+				<table class="table table-vcenter table-wrap">
+					<tr><th>{{ $LANG['biller_name'] ?? '' }}</th><td>{{ $biller['name'] }}</td></tr>
+					<tr><th>{{ $LANG['enabled'] ?? '' }}</th><td>{{ $biller['wording_for_enabled'] }}</td></tr>
+				</table>
+			</div>
+			<div id="bill-view-address" class="tab-pane" role="tabpanel">
+				<table class="table table-vcenter table-wrap">
+					<tr><th>{{ $LANG['street'] ?? '' }}</th><td>{{ $biller['street_address'] }}</td></tr>
+					<tr><th>{{ $LANG['street2'] ?? '' }}</th><td>{{ $biller['street_address2'] }}</td></tr>
+					<tr><th>{{ $LANG['city'] ?? '' }}</th><td>{{ $biller['city'] }}</td></tr>
+					<tr><th>{{ $LANG['state'] ?? '' }}</th><td>{{ $biller['state'] }}</td></tr>
+					<tr><th>{{ $LANG['zip'] ?? '' }}</th><td>{{ $biller['zip_code'] }}</td></tr>
+					<tr><th>{{ $LANG['country'] ?? '' }}</th><td>{{ $biller['country'] }}</td></tr>
+				</table>
+			</div>
+			<div id="bill-view-contact" class="tab-pane" role="tabpanel">
+				<table class="table table-vcenter table-wrap">
+					<tr><th>{{ $LANG['phone'] ?? '' }}</th><td>{{ $biller['phone'] }}</td></tr>
+					<tr><th>{{ $LANG['mobile_phone'] ?? '' }}</th><td>{{ $biller['mobile_phone'] }}</td></tr>
+					<tr><th>{{ $LANG['fax'] ?? '' }}</th><td>{{ $biller['fax'] }}</td></tr>
+					<tr><th>{{ $LANG['email'] ?? '' }}</th><td>{{ $biller['email'] }}</td></tr>
+				</table>
+			</div>
+			<div id="bill-view-payment" class="tab-pane" role="tabpanel">
+				<table class="table table-vcenter table-wrap">
+					<tr><th>{{ $LANG['paypal_business_name'] ?? '' }}</th><td>{{ $biller['paypal_business_name'] }}</td></tr>
+					<tr><th>{{ $LANG['paypal_notify_url'] ?? '' }}</th><td>{{ $biller['paypal_notify_url'] }}</td></tr>
+					<tr><th>{{ $LANG['paypal_return_url'] ?? '' }}</th><td>{{ $biller['paypal_return_url'] }}</td></tr>
+					<tr><th>{{ $LANG['eway_customer_id'] ?? '' }}</th><td>{{ $biller['eway_customer_id'] }}</td></tr>
+					<tr><th>{{ $LANG['paymentsgateway_api_id'] ?? '' }}</th><td>{{ $biller['paymentsgateway_api_id'] }}</td></tr>
+				</table>
+			</div>
+			<div id="bill-view-custom" class="tab-pane" role="tabpanel">
+				<table class="table table-vcenter table-wrap">
+					<tr><th>{{ $customFieldLabel['biller_cf1'] ?? '' }}</th><td>{{ $biller['custom_field1'] }}</td></tr>
+					<tr><th>{{ $customFieldLabel['biller_cf2'] ?? '' }}</th><td>{{ $biller['custom_field2'] }}</td></tr>
+					<tr><th>{{ $customFieldLabel['biller_cf3'] ?? '' }}</th><td>{{ $biller['custom_field3'] }}</td></tr>
+					<tr><th>{{ $customFieldLabel['biller_cf4'] ?? '' }}</th><td>{{ $biller['custom_field4'] }}</td></tr>
+				</table>
+				@showCustomFields(1, get('id'))
+			</div>
+			<div id="bill-view-invoice" class="tab-pane" role="tabpanel">
+				<table class="table table-vcenter table-wrap">
+					<tr>
+						<th>{{ $LANG['logo_file'] ?? '' }}</th>
+						<td>
+							@if(!empty($biller['logo']))
+								<img src="templates/invoices/logos/{{ $biller['logo'] }}" alt="{{ $biller['logo'] }}" class="img-fluid"><br>{{ $biller['logo'] }}
+							@endif
+						</td>
+					</tr>
+					<tr><th>{{ $LANG['invoice_footer'] ?? '' }}</th><td>{{ $biller['footer'] }}</td></tr>
+					<tr><th>{{ $LANG['notes'] ?? '' }}</th><td>{{ $biller['notes'] }}</td></tr>
+				</table>
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -133,188 +107,163 @@
 @if(get('action')== 'edit' )
 <div class="card">
 	<div class="card-header">
-		<h3 class="card-title">{{ $LANG['edit'] ?? '' }} {{ $LANG['biller'] ?? '' }}</h3>
+		<ul class="nav nav-tabs card-header-tabs" role="tablist">
+			<li class="nav-item" role="presentation">
+				<a class="nav-link active" href="#bill-edit-details" data-bs-toggle="tab" role="tab">{{ $LANG['details'] ?? '' }}</a>
+			</li>
+			<li class="nav-item" role="presentation">
+				<a class="nav-link" href="#bill-edit-address" data-bs-toggle="tab" role="tab">{{ $LANG['street'] ?? 'Address' }}</a>
+			</li>
+			<li class="nav-item" role="presentation">
+				<a class="nav-link" href="#bill-edit-contact" data-bs-toggle="tab" role="tab">{{ $LANG['phone'] ?? 'Contact' }}</a>
+			</li>
+			<li class="nav-item" role="presentation">
+				<a class="nav-link" href="#bill-edit-payment" data-bs-toggle="tab" role="tab">{{ $LANG['payment'] ?? 'Payment' }}</a>
+			</li>
+			<li class="nav-item" role="presentation">
+				<a class="nav-link" href="#bill-edit-custom" data-bs-toggle="tab" role="tab">{{ $LANG['custom_fields'] ?? '' }}</a>
+			</li>
+			<li class="nav-item" role="presentation">
+				<a class="nav-link" href="#bill-edit-invoice" data-bs-toggle="tab" role="tab">{{ $LANG['invoice'] ?? 'Invoice' }}</a>
+			</li>
+		</ul>
 	</div>
 	<div class="card-body">
-		<table class="table table-vcenter table-wrap">
-			<tr>
-				<th>{{ $LANG['biller_name'] ?? '' }} 
-				<a 
-					class="cluetip"
-					href="#"
-					rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field"
-					title="{{ $LANG['required_field'] ?? '' }}"
-				>
-				<i class="ti ti-alert-circle text-danger"></i>
-				</a>
-				</th>
-				<td><input type="text" name="name" value="{{ $biller['name'] ?? '' }}" size="50" id="name" class="form-control validate[required]" /></td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['street'] ?? '' }}</th>
-				<td><input type="text" name="street_address" value="{{ $biller['street_address'] ?? '' }}" size="50" class="form-control" /></td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['street2'] ?? '' }}
-				<a
-					class="cluetip"
-					href="#"
-					rel="index.php?module=documentation&amp;view=view&amp;page=help_street2"
-					title="{{ $LANG['street2'] ?? '' }}"
-				> 
-				<i class="ti ti-help"></i>
-				</a>
-				</th>
-				<td><input type="text" name="street_address2" value="{{ $biller['street_address2'] ?? '' }}" size="50" class="form-control" /></td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['city'] ?? '' }}</th>
-				<td><input type="text" name="city" value="{{ $biller['city'] ?? '' }}" size="50" class="form-control" /></td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['zip'] ?? '' }}</th>
-				<td><input type="text" name="zip_code" value="{{ $biller['zip_code'] ?? '' }}" size="50" class="form-control" /></td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['state'] ?? '' }}</th>
-				<td><input type="text" name="state" value="{{ $biller['state'] ?? '' }}" size="50" class="form-control" /></td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['country'] ?? '' }}</th>
-				<td><input type="text" name="country" value="{{ $biller['country'] ?? '' }}" size="50" class="form-control" /></td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['mobile_phone'] ?? '' }}</th>
-				<td><input type="text" name="mobile_phone" value="{{ $biller['mobile_phone'] ?? '' }}" size="50" class="form-control" /></td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['phone'] ?? '' }}</th>
-				<td><input type="text" name="phone" value="{{ $biller['phone'] ?? '' }}" size="50" class="form-control" /></td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['fax'] ?? '' }}</th>
-				<td><input type="text" name="fax" value="{{ $biller['fax'] ?? '' }}" size="50" class="form-control" /></td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['email'] ?? '' }}</th>
-				<td><input type="text" name="email" value="{{ $biller['email'] ?? '' }}" size="50" class="form-control" /></td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['paypal_business_name'] ?? '' }}</th>
-				<td><input type="text" name="paypal_business_name" value="{{ $biller['paypal_business_name'] ?? '' }}" size="25" class="form-control" /></td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['paypal_notify_url'] ?? '' }}</th>
-				<td><input type="text" name="paypal_notify_url" value="{{ $biller['paypal_notify_url'] ?? '' }}" size="50" class="form-control" /></td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['paypal_return_url'] ?? '' }}</th>
-				<td><input type="text" name="paypal_return_url" value="{{ $biller['paypal_return_url'] ?? '' }}" size="50" class="form-control" /></td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['eway_customer_id'] ?? '' }}</th>
-				<td><input type="text" name="eway_customer_id" value="{{ $biller['eway_customer_id'] ?? '' }}" size="50" class="form-control" /></td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['paymentsgateway_api_id'] ?? '' }}</th>
-				<td><input type="text" name="paymentsgateway_api_id" value="{{ $biller['paymentsgateway_api_id'] ?? '' }}" size="50" class="form-control" /></td>
-			</tr>
-			<tr>
-				<th>{{ $customFieldLabel['biller_cf1'] ?? '' }}
-				<a
-					class="cluetip"
-					href="#"
-					rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
-					title="{{ $LANG['custom_fields'] ?? '' }}"
-				> 
-				<i class="ti ti-help"></i>
-				</a>
-				</th>
-				<td><input type="text" name="custom_field1" value="{{ $biller['custom_field1'] ?? '' }}" size="50" class="form-control" /></td>
-			</tr>
-			<tr>
-				<th>{{ $customFieldLabel['biller_cf2'] }}
-				<a
-					class="cluetip"
-					href="#"
-					rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
-					title="{{ $LANG['custom_fields'] ?? '' }}"
-				> 
-				<i class="ti ti-help"></i>
-				</a>
-				</th>
-				<td><input type="text" name="custom_field2" value="{{ $biller['custom_field2'] }}" size="50" class="form-control" /></td>
-			</tr>
-			<tr>
-				<th>{{ $customFieldLabel['biller_cf3'] ?? '' }}
-				<a
-					class="cluetip"
-					href="#"
-					rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
-					title="{{ $LANG['custom_fields'] ?? '' }}"
-				> 
-				<i class="ti ti-help"></i>
-				</a>
-				</th>
-				<td><input type="text" name="custom_field3" value="{{ $biller['custom_field3'] ?? '' }}" size="50" class="form-control" /></td>
-			</tr>
-			<tr>
-				<th>{{ $customFieldLabel['biller_cf4'] ?? '' }}
-				<a
-					class="cluetip"
-					href="#"
-					rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
-					title="{{ $LANG['custom_fields'] ?? '' }}"
-				> 
-				<i class="ti ti-help"></i>
-				</a>
-				</th>
-				<td><input type="text" name="custom_field4" value="{{ $biller['custom_field4'] ?? '' }}" size="50" class="form-control" /></td>
-			</tr>
-			<tr>
-				<th>
-				{{ $LANG['logo_file'] ?? '' }}
-				<a
-					class="cluetip"
-					href="#"
-					rel="index.php?module=documentation&amp;view=view&amp;page=help_insert_biller_text"
-					title="{{ $LANG['logo_file'] ?? '' }}"
-				>
-				<i class="ti ti-help"></i>
-				</a>
-				</th>
-				<td>
-					{html_options name=logo output=$files values=$files selected=$biller['logo'] }
-				</td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['invoice_footer'] ?? '' }}</th>
-				<td><textarea name="footer" class="form-control editor" rows="4" cols="50">{{ $biller['footer'] ?? '' }}</textarea></td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['notes'] ?? '' }}</th>
-				<td><textarea name="notes" class="form-control editor" rows="8" cols="50">{{ $biller['notes'] ?? '' }}</textarea></td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['enabled'] ?? '' }}</th>
-				<td>
-				{html_options name=enabled options=$enabled selected=$biller['enabled']}
-				</td>
-			</tr>
-			@showCustomFields(1, get('id'))
-	
-		</table>
-
-		<div class="card-footer text-end">
-			<button type="submit" class="btn btn-primary" name="save_biller" value="{{ $LANG['save_biller'] ?? '' }}">
-				<i class="ti ti-check me-1"></i> 
-				{{ $LANG['save'] ?? '' }}
-			</button>
-			<a href="./index.php?module=billers&amp;view=manage" class="btn btn-secondary">
-				<i class="ti ti-x me-1"></i>
-				{{ $LANG['cancel'] ?? '' }}
-			</a>
+		<div class="tab-content">
+			<div id="bill-edit-details" class="tab-pane active" role="tabpanel">
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['biller_name'] ?? '' }}
+						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field" title="{{ $LANG['required_field'] ?? '' }}"><i class="ti ti-asterisk text-danger"></i></a>
+					</label>
+					<input type="text" name="name" value="{{ $biller['name'] ?? '' }}" id="name" class="form-control validate[required]" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['enabled'] ?? '' }}</label>
+					{html_options name=enabled options=$enabled selected=$biller['enabled'] class="form-select"}
+				</div>
+			</div>
+			<div id="bill-edit-address" class="tab-pane" role="tabpanel">
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['street'] ?? '' }}</label>
+					<input type="text" name="street_address" value="{{ $biller['street_address'] ?? '' }}" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['street2'] ?? '' }}
+						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_street2" title="{{ $LANG['street2'] ?? '' }}"><i class="ti ti-help"></i></a>
+					</label>
+					<input type="text" name="street_address2" value="{{ $biller['street_address2'] ?? '' }}" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['city'] ?? '' }}</label>
+					<input type="text" name="city" value="{{ $biller['city'] ?? '' }}" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['state'] ?? '' }}</label>
+					<input type="text" name="state" value="{{ $biller['state'] ?? '' }}" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['zip'] ?? '' }}</label>
+					<input type="text" name="zip_code" value="{{ $biller['zip_code'] ?? '' }}" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['country'] ?? '' }}</label>
+					<input type="text" name="country" value="{{ $biller['country'] ?? '' }}" class="form-control" />
+				</div>
+			</div>
+			<div id="bill-edit-contact" class="tab-pane" role="tabpanel">
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['phone'] ?? '' }}</label>
+					<input type="text" name="phone" value="{{ $biller['phone'] ?? '' }}" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['mobile_phone'] ?? '' }}</label>
+					<input type="text" name="mobile_phone" value="{{ $biller['mobile_phone'] ?? '' }}" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['fax'] ?? '' }}</label>
+					<input type="text" name="fax" value="{{ $biller['fax'] ?? '' }}" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['email'] ?? '' }}</label>
+					<input type="text" name="email" value="{{ $biller['email'] ?? '' }}" class="form-control" />
+				</div>
+			</div>
+			<div id="bill-edit-payment" class="tab-pane" role="tabpanel">
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['paypal_business_name'] ?? '' }}</label>
+					<input type="text" name="paypal_business_name" value="{{ $biller['paypal_business_name'] ?? '' }}" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['paypal_notify_url'] ?? '' }}</label>
+					<input type="text" name="paypal_notify_url" value="{{ $biller['paypal_notify_url'] ?? '' }}" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['paypal_return_url'] ?? '' }}</label>
+					<input type="text" name="paypal_return_url" value="{{ $biller['paypal_return_url'] ?? '' }}" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['eway_customer_id'] ?? '' }}</label>
+					<input type="text" name="eway_customer_id" value="{{ $biller['eway_customer_id'] ?? '' }}" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['paymentsgateway_api_id'] ?? '' }}</label>
+					<input type="text" name="paymentsgateway_api_id" value="{{ $biller['paymentsgateway_api_id'] ?? '' }}" class="form-control" />
+				</div>
+			</div>
+			<div id="bill-edit-custom" class="tab-pane" role="tabpanel">
+				<div class="mb-3">
+					<label class="form-label">{{ $customFieldLabel['biller_cf1'] ?? '' }}
+						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{{ $LANG['custom_fields'] ?? '' }}"><i class="ti ti-help"></i></a>
+					</label>
+					<input type="text" name="custom_field1" value="{{ $biller['custom_field1'] ?? '' }}" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $customFieldLabel['biller_cf2'] ?? '' }}
+						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{{ $LANG['custom_fields'] ?? '' }}"><i class="ti ti-help"></i></a>
+					</label>
+					<input type="text" name="custom_field2" value="{{ $biller['custom_field2'] ?? '' }}" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $customFieldLabel['biller_cf3'] ?? '' }}
+						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{{ $LANG['custom_fields'] ?? '' }}"><i class="ti ti-help"></i></a>
+					</label>
+					<input type="text" name="custom_field3" value="{{ $biller['custom_field3'] ?? '' }}" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $customFieldLabel['biller_cf4'] ?? '' }}
+						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{{ $LANG['custom_fields'] ?? '' }}"><i class="ti ti-help"></i></a>
+					</label>
+					<input type="text" name="custom_field4" value="{{ $biller['custom_field4'] ?? '' }}" class="form-control" />
+				</div>
+				@showCustomFields(1, get('id'))
+			</div>
+			<div id="bill-edit-invoice" class="tab-pane" role="tabpanel">
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['logo_file'] ?? '' }}
+						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_insert_biller_text" title="{{ $LANG['logo_file'] ?? '' }}"><i class="ti ti-help"></i></a>
+					</label>
+					{html_options name=logo output=$files values=$files selected=$biller['logo'] class="form-select"}
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['invoice_footer'] ?? '' }}</label>
+					<textarea name="footer" class="form-control editor" rows="4">{{ $biller['footer'] ?? '' }}</textarea>
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['notes'] ?? '' }}</label>
+					<textarea name="notes" class="form-control editor" rows="8">{{ $biller['notes'] ?? '' }}</textarea>
+				</div>
+			</div>
 		</div>
+	</div>
+	<div class="card-footer text-end">
+		<button type="submit" class="btn btn-primary" name="save_biller" value="{{ $LANG['save_biller'] ?? '' }}">
+			<i class="ti ti-check me-1"></i>
+			{{ $LANG['save'] ?? '' }}
+		</button>
+		<a href="./index.php?module=billers&amp;view=details&amp;id={{ $biller['id'] ?? '' }}&amp;action=view" class="btn btn-outline-secondary">
+			<i class="ti ti-x me-1"></i>
+			{{ $LANG['cancel'] ?? '' }}
+		</a>
 	</div>
 </div>
 

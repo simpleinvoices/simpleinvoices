@@ -33,7 +33,7 @@
 			<select name="invoice_id" class="form-select validate[required]">
 				<option value=''></option>
 				@foreach(($invoice_all ?? []) as $invoice)
-					<option value="{{ siLocal::number($invoice['id'] ?? '' }}">{{ $invoice['index_name'] ?? '' }} ({{ $invoice['biller'] ?? '' }}, {{ $invoice['customer'] ?? '' }}, {{ $invoice['invoice_total'] ?? '') }})</option>
+					<option value="{{ siLocal::number($invoice['id'] ?? '') }}">{{ $invoice['index_name'] ?? '' }} ({{ $invoice['biller'] ?? '' }}, {{ $invoice['customer'] ?? '' }}, {{ $invoice['invoice_total'] ?? '' }})</option>
 				@endforeach
 			</select>
 		</div>

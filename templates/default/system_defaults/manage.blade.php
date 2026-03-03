@@ -1,96 +1,147 @@
-<div class="card">
-	<div class="card-header">
-		<h3 class="card-title">{{ $LANG['system_preferences'] ?? '' }}</h3>
+{{-- System defaults – Tabler-inspired settings layout --}}
+<div class="page-header mb-4">
+	<div class="row align-items-center">
+		<div class="col">
+			<h1 class="page-title">{{ $LANG['system_preferences'] ?? 'System preferences' }}</h1>
+			<p class="text-secondary mb-0">Default biller, customer, tax, invoice preference and other options used when creating invoices.</p>
+		</div>
 	</div>
-	<div class="card-body">
-		<div class="table-responsive">
-			<table class="table table-vcenter card-table">
-				<thead>
-					<tr>
-						<th>{{ $LANG['setting'] ?? 'Setting' }}</th>
-						<th class="w-1"></th>
-						<th>{{ $LANG['value'] ?? 'Value' }}</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>{{ $LANG['default_biller'] ?? '' }}</td>
-						<td><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=biller' class="btn btn-sm btn-icon" title="{{ $LANG['edit'] ?? '' }}"><i class="ti ti-edit"></i></a></td>
-						<td>{{ $defaultBiller['name'] ?? '' }}</td>
-					</tr>
-					<tr>
-						<td>{{ $LANG['default_customer'] ?? '' }}</td>
-						<td><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=customer' class="btn btn-sm btn-icon" title="{{ $LANG['edit'] ?? '' }}"><i class="ti ti-edit"></i></a></td>
-						<td>{{ $defaultCustomer['name'] ?? '' }}</td>
-					</tr>
-					<tr>
-						<td>{{ $LANG['default_tax'] ?? '' }}</td>
-						<td><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=tax' class="btn btn-sm btn-icon" title="{{ $LANG['edit'] ?? '' }}"><i class="ti ti-edit"></i></a></td>
-						<td>{{ $defaultTax['tax_description'] ?? '' }}</td>
-					</tr>
-					<tr>
-						<td>{{ $LANG['default_invoice_preference'] ?? '' }}</td>
-						<td><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=preference_id' class="btn btn-sm btn-icon" title="{{ $LANG['edit'] ?? '' }}"><i class="ti ti-edit"></i></a></td>
-						<td>{{ $defaultPreference['pref_description'] ?? '' }}</td>
-					</tr>
-					<tr>
-						<td>{{ $LANG['default_number_items'] ?? '' }}</td>
-						<td><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=line_items' class="btn btn-sm btn-icon" title="{{ $LANG['edit'] ?? '' }}"><i class="ti ti-edit"></i></a></td>
-						<td>{{ $defaults['line_items'] ?? '' }}</td>
-					</tr>
-					<tr>
-						<td>{{ $LANG['default_inv_template'] ?? '' }}
-							<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_default_invoice_template_text" title="{{ $LANG['default_inv_template'] ?? '' }}"><i class="ti ti-help ms-1"></i></a>
-						</td>
-						<td><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=def_inv_template' class="btn btn-sm btn-icon" title="{{ $LANG['edit'] ?? '' }}"><i class="ti ti-edit"></i></a></td>
-						<td>{{ $defaults['template'] ?? '' }}</td>
-					</tr>
-					<tr>
-						<td>{{ $LANG['default_payment_type'] ?? '' }}</td>
-						<td><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=def_payment_type' class="btn btn-sm btn-icon" title="{{ $LANG['edit'] ?? '' }}"><i class="ti ti-edit"></i></a></td>
-						<td>{{ $defaultPaymentType['pt_description'] ?? '' }}</td>
-					</tr>
-					<tr>
-						<td>{{ $LANG['delete'] ?? '' }}
-							<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_delete" title="{{ $LANG['delete'] ?? '' }}"><i class="ti ti-help ms-1"></i></a>
-						</td>
-						<td><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=delete' class="btn btn-sm btn-icon" title="{{ $LANG['edit'] ?? '' }}"><i class="ti ti-edit"></i></a></td>
-						<td>{{ $defaultDelete ?? '' }}</td>
-					</tr>
-					<tr>
-						<td>{{ $LANG['logging'] ?? '' }}
-							<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_logging" title="{{ $LANG['logging'] ?? '' }}"><i class="ti ti-help ms-1"></i></a>
-						</td>
-						<td><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=logging' class="btn btn-sm btn-icon" title="{{ $LANG['edit'] ?? '' }}"><i class="ti ti-edit"></i></a></td>
-						<td>{{ $defaultLogging ?? '' }}</td>
-					</tr>
-					<tr>
-						<td>{{ $LANG['language'] ?? '' }}</td>
-						<td><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=language' class="btn btn-sm btn-icon" title="{{ $LANG['edit'] ?? '' }}"><i class="ti ti-edit"></i></a></td>
-						<td>{{ $defaultLanguage ?? '' }}</td>
-					</tr>
-					<tr>
-						<td>{{ $LANG['number_of_taxes_per_line_item'] ?? '' }}</td>
-						<td><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=tax_per_line_item' class="btn btn-sm btn-icon" title="{{ $LANG['edit'] ?? '' }}"><i class="ti ti-edit"></i></a></td>
-						<td>{{ $defaults['tax_per_line_item'] ?? '' }}</td>
-					</tr>
-					<tr>
-						<td>{{ $LANG['inventory'] ?? '' }}</td>
-						<td><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=inventory' class="btn btn-sm btn-icon" title="{{ $LANG['edit'] ?? '' }}"><i class="ti ti-edit"></i></a></td>
-						<td>{{ $defaultInventory ?? '' }}</td>
-					</tr>
-					<tr>
-						<td>{{ $LANG['product_attributes'] ?? '' }}</td>
-						<td><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=product_attributes' class="btn btn-sm btn-icon" title="{{ $LANG['edit'] ?? '' }}"><i class="ti ti-edit"></i></a></td>
-						<td>{{ $defaultProductAttributes ?? '' }}</td>
-					</tr>
-					<tr>
-						<td>{{ $LANG['large_dataset'] ?? '' }}</td>
-						<td><a href='index.php?module=system_defaults&amp;view=edit&amp;submit=large_dataset' class="btn btn-sm btn-icon" title="{{ $LANG['edit'] ?? '' }}"><i class="ti ti-edit"></i></a></td>
-						<td>{{ $defaultLargeDataset ?? '' }}</td>
-					</tr>
-				</tbody>
-			</table>
+</div>
+
+<div class="row">
+	<div class="col-12">
+		{{-- Invoice defaults --}}
+		<div class="card mb-4">
+			<div class="card-header">
+				<h3 class="card-title">
+					<i class="ti ti-file-invoice me-2"></i>{{ $LANG['invoice'] ?? 'Invoice' }} defaults
+				</h3>
+			</div>
+			<div class="list-group list-group-flush">
+				@include('system_defaults.manage_row', [
+					'label' => $LANG['default_biller'] ?? 'Default biller',
+					'value' => $defaultBiller['name'] ?? '',
+					'edit_param' => 'biller',
+					'icon' => 'ti-building-store',
+				])
+				@include('system_defaults.manage_row', [
+					'label' => $LANG['default_customer'] ?? 'Default customer',
+					'value' => $defaultCustomer['name'] ?? '',
+					'edit_param' => 'customer',
+					'icon' => 'ti-users',
+				])
+				@include('system_defaults.manage_row', [
+					'label' => $LANG['default_tax'] ?? 'Default tax',
+					'value' => $defaultTax['tax_description'] ?? '',
+					'edit_param' => 'tax',
+					'icon' => 'ti-receipt-tax',
+				])
+				@include('system_defaults.manage_row', [
+					'label' => $LANG['default_invoice_preference'] ?? 'Default invoice preference',
+					'value' => $defaultPreference['pref_description'] ?? '',
+					'edit_param' => 'preference_id',
+					'icon' => 'ti-file-text',
+				])
+				@include('system_defaults.manage_row', [
+					'label' => $LANG['default_number_items'] ?? 'Default number of line items',
+					'value' => $defaults['line_items'] ?? '',
+					'edit_param' => 'line_items',
+					'icon' => 'ti-list-numbers',
+				])
+				@include('system_defaults.manage_row', [
+					'label' => $LANG['default_inv_template'] ?? 'Default invoice template',
+					'value' => $defaults['template'] ?? '',
+					'edit_param' => 'def_inv_template',
+					'icon' => 'ti-template',
+					'help_url' => 'index.php?module=documentation&view=view&page=help_default_invoice_template_text',
+					'help_title' => $LANG['default_inv_template'] ?? '',
+				])
+				@include('system_defaults.manage_row', [
+					'label' => $LANG['default_payment_type'] ?? 'Default payment type',
+					'value' => $defaultPaymentType['pt_description'] ?? '',
+					'edit_param' => 'def_payment_type',
+					'icon' => 'ti-credit-card',
+				])
+			</div>
+		</div>
+
+		{{-- Behaviour --}}
+		<div class="card mb-4">
+			<div class="card-header">
+				<h3 class="card-title">
+					<i class="ti ti-adjustments me-2"></i>Behaviour
+				</h3>
+			</div>
+			<div class="list-group list-group-flush">
+				@include('system_defaults.manage_row', [
+					'label' => $LANG['delete'] ?? 'Delete',
+					'value' => $defaultDelete ?? '',
+					'edit_param' => 'delete',
+					'icon' => 'ti-trash',
+					'help_url' => 'index.php?module=documentation&view=view&page=help_delete',
+					'help_title' => $LANG['delete'] ?? '',
+				])
+				@include('system_defaults.manage_row', [
+					'label' => $LANG['logging'] ?? 'Logging',
+					'value' => $defaultLogging ?? '',
+					'edit_param' => 'logging',
+					'icon' => 'ti-file-description',
+					'help_url' => 'index.php?module=documentation&view=view&page=help_logging',
+					'help_title' => $LANG['logging'] ?? '',
+				])
+			</div>
+		</div>
+
+		{{-- Localisation & form --}}
+		<div class="card mb-4">
+			<div class="card-header">
+				<h3 class="card-title">
+					<i class="ti ti-language me-2"></i>Localisation &amp; form
+				</h3>
+			</div>
+			<div class="list-group list-group-flush">
+				@include('system_defaults.manage_row', [
+					'label' => $LANG['language'] ?? 'Language',
+					'value' => $defaultLanguage ?? '',
+					'edit_param' => 'language',
+					'icon' => 'ti-language',
+				])
+				@include('system_defaults.manage_row', [
+					'label' => $LANG['number_of_taxes_per_line_item'] ?? 'Taxes per line item',
+					'value' => $defaults['tax_per_line_item'] ?? '',
+					'edit_param' => 'tax_per_line_item',
+					'icon' => 'ti-receipt-tax',
+				])
+			</div>
+		</div>
+
+		{{-- Features --}}
+		<div class="card mb-4">
+			<div class="card-header">
+				<h3 class="card-title">
+					<i class="ti ti-toggle-right me-2"></i>Features
+				</h3>
+			</div>
+			<div class="list-group list-group-flush">
+				@include('system_defaults.manage_row', [
+					'label' => $LANG['inventory'] ?? 'Inventory',
+					'value' => $defaultInventory ?? '',
+					'edit_param' => 'inventory',
+					'icon' => 'ti-package',
+				])
+				@include('system_defaults.manage_row', [
+					'label' => $LANG['product_attributes'] ?? 'Product attributes',
+					'value' => $defaultProductAttributes ?? '',
+					'edit_param' => 'product_attributes',
+					'icon' => 'ti-tags',
+				])
+				@include('system_defaults.manage_row', [
+					'label' => $LANG['large_dataset'] ?? 'Large dataset',
+					'value' => $defaultLargeDataset ?? '',
+					'edit_param' => 'large_dataset',
+					'icon' => 'ti-database',
+				])
+			</div>
 		</div>
 	</div>
 </div>

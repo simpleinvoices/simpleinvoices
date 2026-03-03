@@ -18,8 +18,8 @@
 
 checkLogin();
 
-$smarty -> display("../templates/default/menu.tpl");
-$smarty -> display("../templates/default/main.tpl");
+$smarty->display("templates/default/menu.blade.php");
+$smarty->display("templates/default/main.blade.php");
 
 echo <<<EOD
 	<div>

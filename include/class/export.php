@@ -138,7 +138,7 @@ class export
 					
 				}
 
-				$templatePath = "./templates/default/statement/index.tpl";
+				$templatePath = "./templates/default/statement/index.blade.php";
 			
 				$biller_details = getBiller($this->biller_id, $this->domain_id);
 				$billers = $biller_details;
@@ -197,7 +197,7 @@ class export
 				$css = $siUrl."/templates/invoices/default/style.css";
 				$smarty -> assign('css',$css);
 				
-                $templatePath = "./templates/default/payments/print.tpl";
+                $templatePath = "./templates/default/payments/print.blade.php";
 				$data = $smarty -> fetch(".".$templatePath);
                 break;
             }
@@ -226,17 +226,15 @@ class export
 				/*Set the template to the default*/
 				$template = $defaults['template'];
 			
-				$templatePath = "./templates/invoices/${template}/template.tpl";
+				$templatePath = "./templates/invoices/${template}/template.blade.php";
 				// Blade view prefix for @include($template_path . '.itemised') etc.
-				$template_path = $smarty instanceof \BladeView
-					? "templates.invoices.{$template}"
-					: "../templates/invoices/${template}";
+				$template_path = "templates.invoices.{$template}";
 				$css = $siUrl."/templates/invoices/${template}/style.css";
 
 				$pageActive = "invoices";
 				$smarty->assign('pageActive', $pageActive);
 				
-				if (file_exists($templatePath) || file_exists("./templates/invoices/${template}/template.blade.php")) {
+				if (file_exists($templatePath)) {
 					$this->assignTemplateLanguage($preference);
 
 					$smarty->assign('biller', $biller);

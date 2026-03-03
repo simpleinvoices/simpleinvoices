@@ -1,7 +1,7 @@
 <script type="text/javascript">
 		var columns = 4;
 		var padding = 12;
-		var action_menu = 140;
+		var action_menu = 100;
 		var colEl = document.querySelector('.col');
 		var grid_width = colEl ? colEl.getBoundingClientRect().width : 800;
 		grid_width = grid_width - ((columns - 0.5) * padding) - action_menu;
@@ -11,7 +11,7 @@
 			url: @json($url ?? 'index.php?module=custom_fields&view=xml'),
 			dataType: 'xml',
 			colModel : [
-				{display: @json($LANG['actions'] ?? 'Actions'), name : 'actions', width : action_menu, sortable : false, align: 'center'},
+				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'center'},
 				{display: @json($LANG['id'] ?? 'ID'), name : 'cf_id', width : 10 * percentage_width, sortable : false, align: 'left'},
 				{display: @json($LANG['custom_field'] ?? 'Custom Field'), name : 'cf_custom_field', width : 40 * percentage_width, sortable : false, align: 'left'},
 				{display: @json($LANG['custom_label'] ?? 'Custom Label'), name : 'cf_custom_label', width : 45 * percentage_width, sortable : false, align: 'left'}

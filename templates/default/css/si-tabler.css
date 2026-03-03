@@ -368,14 +368,6 @@ body {
     margin-left: 2px;
 }
 
-/* cluetip compatibility */
-a.cluetip img {
-    width: 14px;
-    height: 14px;
-    vertical-align: middle;
-    margin-left: 4px;
-}
-
 /* Legacy tables (manage tables, etc.) */
 table.manage,
 table#live-grid {
@@ -489,4 +481,13 @@ td.index_table {
 
 .si-tabler-grid-container .dropdown-menu {
     z-index: 1050;
+}
+
+/* Help popovers (content loaded from documentation page) */
+.si-help-popover.popover {
+    max-width: 360px;
+}
+.si-help-popover .popover-body {
+    max-height: 20rem;
+    overflow-y: auto;
 }

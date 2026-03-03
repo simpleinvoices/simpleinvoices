@@ -8,7 +8,7 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 '<!--1 Edit View --><a class="index_table" href="index.php?module=customers&view=details&id={1}&action=edit"><img src="images/common/edit.png" height="16" border="-5px" padding="-4px" valign="bottom" /><!-- print --></a>',
 */
 
-			var columns = 8;
+			var columns = 7;
 			var padding = 12;
 			var colEl = document.querySelector('.col');
 			var grid_width = colEl ? colEl.getBoundingClientRect().width : 800;
@@ -22,7 +22,6 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 				{display: '{/literal}{$LANG.actions}{literal}', name : 'actions', width : 7 * percentage_width, sortable : false, align: 'center'},
 				{display: '{/literal}{$LANG.id}{literal}', name : 'CID', width : 7 * percentage_width, sortable : true, align: 'right'},
 				{display: '{/literal}{$LANG.name}{literal}', name : 'name', width : 38 * percentage_width, sortable : true, align: 'left'},
-				{display: '{/literal}{$LANG.customer_department}{literal}', name : 'department', width : 18 * percentage_width, sortable : true, align: 'left'},
 				{display: '{/literal}{$LANG.total}{literal}', name : 'customer_total', width : 8 * percentage_width, sortable : true, align: 'right'},
 				{display: '{/literal}{$LANG.paid}{literal}', name : 'paid', width : 8 * percentage_width, sortable : true, align: 'right'},
 				{display: '{/literal}{$LANG.owing}{literal}', name : 'owing', width : 8 * percentage_width, sortable : true, align: 'right'},

@@ -21,6 +21,7 @@
 </div>{{-- /page-wrapper --}}
 </div>{{-- /page --}}
 <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta20/dist/js/tabler.min.js" defer></script>
+<script src="./include/jquery/si-help-popover.js" defer></script>
 @stack('hook_body_end')
 </body>
 </html>

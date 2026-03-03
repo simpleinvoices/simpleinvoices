@@ -83,11 +83,15 @@ if (in_array($sort, $validFields)) {
 	$xml .= "<total>$count</total>";
 	
 	foreach ($cfs as $row) {
+		$label_esc = htmlspecialchars($row['field_name_nice'] ?? $row['cf_custom_label'] ?? (string)$row['cf_id']);
+		$action  = '<div class="dropdown">';
+		$action .= '<a class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">'.$LANG['actions'].'</a>';
+		$action .= '<div class="dropdown-menu dropdown-menu-end">';
+		$action .= '<a class="dropdown-item" href="index.php?module=custom_fields&amp;view=details&amp;id='.$row['cf_id'].'&amp;action=view"><i class="ti ti-eye me-2"></i>'.$LANG['view'].' '.$label_esc.'</a>';
+		$action .= '<a class="dropdown-item" href="index.php?module=custom_fields&amp;view=details&amp;id='.$row['cf_id'].'&amp;action=edit"><i class="ti ti-edit me-2"></i>'.$LANG['edit'].' '.$label_esc.'</a>';
+		$action .= '</div></div>';
 		$xml .= "<row id='".htmlsafe($row['cf_id'])."'>";
-		$xml .= "<cell><![CDATA[
-			<a class='index_table' title='{$LANG['view']} {$LANG['custom_field']} ".htmlsafe($row['field_name_nice'])."' href='index.php?module=custom_fields&view=details&id=".$row['cf_id']."&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-			<a class='index_table' title='{$LANG['edit']} {$LANG['custom_field']} ".htmlsafe($row['field_name_nice'])."' href='index.php?module=custom_fields&view=details&id=".$row['cf_id']."&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-		]]></cell>";
+		$xml .= "<cell><![CDATA[".$action."]]></cell>";
 		$xml .= "<cell><![CDATA[".htmlsafe($row['cf_id'])."]]></cell>";		
 		$xml .= "<cell><![CDATA[".htmlsafe($row['field_name_nice'])."]]></cell>";
 		$xml .= "<cell><![CDATA[".htmlsafe($row['cf_custom_label'])."]]></cell>";				

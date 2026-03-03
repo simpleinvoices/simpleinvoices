@@ -5,8 +5,8 @@
 $smarty -> assign('pageActive', 'report');
 $smarty -> assign('active_tab', '#home');
 	
-	$smarty -> display("../templates/default/menu.tpl");
-	$smarty -> display("../templates/default/main.tpl");
+	$smarty->display("templates/default/menu.blade.php");
+	$smarty->display("templates/default/main.blade.php");
 	
 	$startdate	= (isset($_POST['startdate'])) ? $_POST['startdate'] : date("Y-m-d",strtotime("last Year"));
 	$startdate = htmlsafe($startdate);

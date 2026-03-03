@@ -2,7 +2,7 @@
 
 {literal}
 
-			var columns = 9;
+			var columns = 7;
 			var padding = 12;
 			var colEl = document.querySelector('.col');
 			var grid_width = colEl ? colEl.getBoundingClientRect().width : 800;
@@ -20,8 +20,6 @@
 				{display: '{/literal}{$LANG.customer}{literal}', name : 'customer', width : 15 * percentage_width, sortable : true, align: 'left'},
 				{display: '{/literal}{$LANG.biller}{literal}', name : 'biller', width : 15 * percentage_width, sortable : true, align: 'left'},
 				{display: '{/literal}{$LANG.amount}{literal}', name : 'ac_amount', width : 10 * percentage_width, sortable : true, align: 'right'},
-				{display: '{/literal}{$LANG.notes}{literal}', name : 'ac_notes', width : 15 * percentage_width, sortable : true, align: 'left'},
-				{display: '{/literal}{$LANG.type}{literal}', name : 'description', width : 10 * percentage_width, sortable : true, align: 'left'},
 				{display: '{/literal}{$LANG.date_upper}{literal}', name : 'date', width : 10 * percentage_width, sortable : true, align: 'center'}
 		
 				],

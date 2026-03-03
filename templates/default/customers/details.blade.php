@@ -12,89 +12,76 @@
 @if(get('action') == 'view' )
 <div class="card" id="si_form_cust">
 	<div class="card-header">
-		<h3 class="card-title">{{ $LANG['customer'] ?? '' }} {{ $LANG['details'] ?? 'Details' }}</h3>
+		<ul class="nav nav-tabs card-header-tabs" role="tablist">
+			<li class="nav-item" role="presentation">
+				<a class="nav-link active" href="#cust-view-details" data-bs-toggle="tab" role="tab">{{ $LANG['details'] ?? '' }}</a>
+			</li>
+			<li class="nav-item" role="presentation">
+				<a class="nav-link" href="#cust-view-address" data-bs-toggle="tab" role="tab">{{ $LANG['street'] ?? 'Address' }}</a>
+			</li>
+			<li class="nav-item" role="presentation">
+				<a class="nav-link" href="#cust-view-contact" data-bs-toggle="tab" role="tab">{{ $LANG['phone'] ?? 'Contact' }}</a>
+			</li>
+			<li class="nav-item" role="presentation">
+				<a class="nav-link" href="#cust-view-custom" data-bs-toggle="tab" role="tab">{{ $LANG['custom_fields'] ?? '' }}</a>
+			</li>
+			<li class="nav-item" role="presentation">
+				<a class="nav-link" href="#cust-view-notes" data-bs-toggle="tab" role="tab">{{ $LANG['notes'] ?? '' }}</a>
+			</li>
+			<li class="nav-item" role="presentation">
+				<a class="nav-link" href="#cust-view-summary" data-bs-toggle="tab" role="tab">{{ $LANG['summary_of_accounts'] ?? '' }}</a>
+			</li>
+			<li class="nav-item" role="presentation">
+				<a class="nav-link" href="#cust-view-unpaid" data-bs-toggle="tab" role="tab">{{ $LANG['unpaid_invoices'] ?? '' }}</a>
+			</li>
+			<li class="nav-item" role="presentation">
+				<a class="nav-link" href="#cust-view-invoices" data-bs-toggle="tab" role="tab">{{ $LANG['customer'] ?? '' }} {{ $LANG['invoice_listings'] ?? '' }}</a>
+			</li>
+		</ul>
 		<div class="card-actions">
 			<a href="./index.php?module=customers&amp;view=details&amp;id={{ urlencode($customer['id'] ?? '') }}&amp;action=edit" class="btn btn-primary"><i class="ti ti-edit me-1"></i>{{ $LANG['edit'] ?? '' }}</a>
 		</div>
 	</div>
 	<div class="card-body">
-		<div class="si_cust_info">
-			<table class="table table-vcenter table-wrap">
-				<tr>
-					<th>{{ $LANG['customer_name'] ?? '' }}</th>
-					<td>{{ $customer['name'] }}</td>
-					<td class="td_sep"></td>
-					<th>{{ $LANG['customer_department'] ?? '' }}</th>
-					<td>{{ $customer['department'] ?? '' }}</td>
-				</tr>
-				<tr>
-					<th>{{ $LANG['attention_short'] ?? '' }}</th>
-					<td>{{ $customer['attention'] ?? '' }}</td>
-					<td class="td_sep"></td>
-					<th>{{ $LANG['phone'] ?? '' }}</th>
-					<td>{{ $customer['phone'] ?? '' }}</td>
-				</tr>
-				<tr>
-					<th>{{ $LANG['street'] ?? '' }}</th>
-					<td>{{ $customer['street_address'] ?? '' }}</td>
-					<td class="td_sep"></td>
-					<th>{{ $LANG['mobile_phone'] ?? '' }}</th>
-					<td>{{ $customer['mobile_phone'] ?? '' }}</td>
-				</tr>
-				<tr>
-					<th>{{ $LANG['street2'] ?? '' }}</th>
-					<td>{{ $customer['street_address2'] ?? '' }}</td>
-					<td class="td_sep"></td>
-					<th>{{ $LANG['fax'] ?? '' }}</th>
-					<td>{{ $customer['fax'] ?? '' }}</td>
-				</tr>
-				<tr>
-					<th>{{ $LANG['city'] ?? '' }}</th>
-					<td>{{ $customer['city'] ?? '' }}</td>
-					<td class="td_sep"></td>
-					<th>{{ $LANG['email'] ?? '' }}</th>
-					<td><a href="mailto:{{ $customer['email'] ?? '' }}">{{ $customer['email'] ?? '' }}</a></td>
-				</tr>
-				<tr>
-					<th>{{ $LANG['zip'] ?? '' }}</th>
-					<td>{{ $customer['zip_code'] ?? '' }}</td>
-					<td class="td_sep"></td>
-					<th>{{ $customFieldLabel['customer_cf1'] }}</th>
-					<td>{{ $customer['custom_field1'] ?? '' }}</td>
-				</tr>
-				<tr>
-					<th>{{ $LANG['state'] ?? '' }}</th>
-					<td>{{ $customer['state'] ?? '' }}</td>
-					<td class="td_sep"></td>
-					<th>{{ $customFieldLabel['customer_cf2'] }}</th>
-					<td>{{ $customer['custom_field2'] ?? '' }}</td>
-				</tr>
-				<tr>
-					<th>{{ $LANG['country'] ?? '' }}</th>
-					<td>{{ $customer['country'] ?? '' }}</td>
-					<td class="td_sep"></td>
-					<th>{{ $customFieldLabel['customer_cf3'] }}</th>
-					<td>{{ $customer['custom_field3'] ?? '' }}</td>
-				</tr>
-				<tr>
-					<th>{{ $LANG['enabled'] ?? '' }}</th>
-					<td>{{ $customer['wording_for_enabled'] ?? '' }}</td>
-					<td class="td_sep"></td>
-					<th>{{ $customFieldLabel['customer_cf4'] }}</th>
-					<td>{{ $customer['custom_field4'] ?? '' }}</td>
-				</tr>
-			</table>
-		</div>
-
-		<div id="tabs_customer">
-			<ul class="nav nav-tabs nav-fill mb-3" role="tablist">
-				<li class="nav-item"><a class="nav-link active" href="#section-1" data-bs-toggle="tab" role="tab">{{ $LANG['summary_of_accounts'] ?? '' }}</a></li>
-				<li class="nav-item"><a class="nav-link" href="#section-2" data-bs-toggle="tab" role="tab">{{ $LANG['unpaid_invoices'] ?? '' }}</a></li>
-				<li class="nav-item"><a class="nav-link" href="#section-3" data-bs-toggle="tab" role="tab">{{ $LANG['customer'] ?? '' }} {{ $LANG['invoice_listings'] ?? '' }}</a></li>
-				<li class="nav-item"><a class="nav-link" href="#section-4" data-bs-toggle="tab" role="tab">{{ $LANG['notes'] ?? '' }}</a></li>
-			</ul>
-			<div class="tab-content">
-				<div id="section-1" class="tab-pane active" role="tabpanel">
+		<div class="tab-content">
+			<div id="cust-view-details" class="tab-pane active" role="tabpanel">
+				<table class="table table-vcenter table-wrap">
+					<tr><th>{{ $LANG['customer_name'] ?? '' }}</th><td>{{ $customer['name'] }}</td></tr>
+					<tr><th>{{ $LANG['customer_department'] ?? '' }}</th><td>{{ $customer['department'] ?? '' }}</td></tr>
+					<tr><th>{{ $LANG['attention_short'] ?? '' }}</th><td>{{ $customer['attention'] ?? '' }}</td></tr>
+					<tr><th>{{ $LANG['enabled'] ?? '' }}</th><td>{{ $customer['wording_for_enabled'] ?? '' }}</td></tr>
+				</table>
+			</div>
+			<div id="cust-view-address" class="tab-pane" role="tabpanel">
+				<table class="table table-vcenter table-wrap">
+					<tr><th>{{ $LANG['street'] ?? '' }}</th><td>{{ $customer['street_address'] ?? '' }}</td></tr>
+					<tr><th>{{ $LANG['street2'] ?? '' }}</th><td>{{ $customer['street_address2'] ?? '' }}</td></tr>
+					<tr><th>{{ $LANG['city'] ?? '' }}</th><td>{{ $customer['city'] ?? '' }}</td></tr>
+					<tr><th>{{ $LANG['state'] ?? '' }}</th><td>{{ $customer['state'] ?? '' }}</td></tr>
+					<tr><th>{{ $LANG['zip'] ?? '' }}</th><td>{{ $customer['zip_code'] ?? '' }}</td></tr>
+					<tr><th>{{ $LANG['country'] ?? '' }}</th><td>{{ $customer['country'] ?? '' }}</td></tr>
+				</table>
+			</div>
+			<div id="cust-view-contact" class="tab-pane" role="tabpanel">
+				<table class="table table-vcenter table-wrap">
+					<tr><th>{{ $LANG['phone'] ?? '' }}</th><td>{{ $customer['phone'] ?? '' }}</td></tr>
+					<tr><th>{{ $LANG['mobile_phone'] ?? '' }}</th><td>{{ $customer['mobile_phone'] ?? '' }}</td></tr>
+					<tr><th>{{ $LANG['fax'] ?? '' }}</th><td>{{ $customer['fax'] ?? '' }}</td></tr>
+					<tr><th>{{ $LANG['email'] ?? '' }}</th><td><a href="mailto:{{ $customer['email'] ?? '' }}">{{ $customer['email'] ?? '' }}</a></td></tr>
+				</table>
+			</div>
+			<div id="cust-view-custom" class="tab-pane" role="tabpanel">
+				<table class="table table-vcenter table-wrap">
+					<tr><th>{{ $customFieldLabel['customer_cf1'] ?? '' }}</th><td>{{ $customer['custom_field1'] ?? '' }}</td></tr>
+					<tr><th>{{ $customFieldLabel['customer_cf2'] ?? '' }}</th><td>{{ $customer['custom_field2'] ?? '' }}</td></tr>
+					<tr><th>{{ $customFieldLabel['customer_cf3'] ?? '' }}</th><td>{{ $customer['custom_field3'] ?? '' }}</td></tr>
+					<tr><th>{{ $customFieldLabel['customer_cf4'] ?? '' }}</th><td>{{ $customer['custom_field4'] ?? '' }}</td></tr>
+				</table>
+			</div>
+			<div id="cust-view-notes" class="tab-pane" role="tabpanel">
+				<div class="si_cust_notes">{!! outhtml($customer['notes'] ?? '') !!}</div>
+			</div>
+			<div id="cust-view-summary" class="tab-pane" role="tabpanel">
 					<div class="si_cust_account">
 						<table class="table table-vcenter">
 							<tr>
@@ -111,9 +98,9 @@
 							</tr>
 						</table>
 					</div>
-				</div>
+			</div>
 
-				<div id="section-2" class="tab-pane" role="tabpanel">
+			<div id="cust-view-unpaid" class="tab-pane" role="tabpanel">
 					<div class="si_cust_invoices">
 						<table class="table table-vcenter table-striped">
 							<thead>
@@ -147,8 +134,8 @@
 							</tbody>
 						</table>
 					</div>
-				</div>
-				<div id="section-3" class="tab-pane" role="tabpanel">
+			</div>
+			<div id="cust-view-invoices" class="tab-pane" role="tabpanel">
 					<div class="si_cust_invoices">
 						<table class="table table-vcenter table-striped">
 							<thead>
@@ -181,12 +168,6 @@
 							</tbody>
 						</table>
 					</div>
-				</div>
-				<div id="section-4" class="tab-pane" role="tabpanel">
-					<div class="si_cust_notes">
-						{!! outhtml($customer['notes'] ?? '') !!}
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -203,147 +184,132 @@
 <form name="frmpost" action="index.php?module=customers&amp;view=save&amp;id={{ urlencode($customer['id'] ?? '') }}" method="post" id="frmpost" onsubmit="return checkForm(this);">
 <div class="card" id="si_form_cust_edit">
 	<div class="card-header">
-		<h3 class="card-title">{{ $LANG['edit'] ?? '' }} {{ $LANG['customer'] ?? '' }}</h3>
+		<ul class="nav nav-tabs card-header-tabs" role="tablist">
+			<li class="nav-item" role="presentation">
+				<a class="nav-link active" href="#cust-edit-details" data-bs-toggle="tab" role="tab">{{ $LANG['details'] ?? '' }}</a>
+			</li>
+			<li class="nav-item" role="presentation">
+				<a class="nav-link" href="#cust-edit-address" data-bs-toggle="tab" role="tab">{{ $LANG['street'] ?? 'Address' }}</a>
+			</li>
+			<li class="nav-item" role="presentation">
+				<a class="nav-link" href="#cust-edit-contact" data-bs-toggle="tab" role="tab">{{ $LANG['phone'] ?? 'Contact' }}</a>
+			</li>
+			<li class="nav-item" role="presentation">
+				<a class="nav-link" href="#cust-edit-custom" data-bs-toggle="tab" role="tab">{{ $LANG['custom_fields'] ?? '' }}</a>
+			</li>
+			<li class="nav-item" role="presentation">
+				<a class="nav-link" href="#cust-edit-notes" data-bs-toggle="tab" role="tab">{{ $LANG['notes'] ?? '' }}</a>
+			</li>
+		</ul>
 	</div>
 	<div class="card-body">
-		<table class="table table-vcenter table-wrap">
-			<tr>
-				<th>{{ $LANG['customer_name'] ?? '' }}
-					<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field" title="{{ $LANG['required_field'] ?? '' }}">
-						<i class="ti ti-alert-circle text-danger"></i>
-					</a>
-				</th>
-				<td><input type="text" name="name" value="{{ $customer['name'] ?? '' }}" size="50" id="name" class="form-control validate[required]" /></td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['customer_department'] ?? '' }}</th>
-				<td><input type="text" name="department" value="{{ $customer['department'] ?? '' }}" size="50" id="department" class="form-control" /></td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['attention_short'] ?? '' }}
-					<a rel="index.php?module=documentation&amp;view=view&amp;page=help_customer_contact" href="#" class="cluetip" title="{{ $LANG['customer_contact'] ?? '' }}">
-						<i class="ti ti-help"></i>
-					</a>
-				</th>
-				<td><input type="text" name="attention" value="{{ $customer['attention'] ?? '' }}" size="50" class="form-control" /></td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['street'] ?? '' }}</th>
-				<td><input type="text" name="street_address" value="{{ $customer['street_address'] ?? '' }}" size="50" class="form-control" /></td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['street2'] ?? '' }}
-					<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_street2" title="{{ $LANG['street2'] ?? '' }}">
-						<i class="ti ti-help"></i>
-					</a>
-				</th>
-				<td><input type="text" name="street_address2" value="{{ $customer['street_address2'] ?? '' }}" size="50" class="form-control" /></td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['city'] ?? '' }}</th>
-				<td><input type="text" name="city" value="{{ $customer['city'] ?? '' }}" size="50" class="form-control" /></td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['zip'] ?? '' }}</th>
-				<td><input type="text" name="zip_code" value="{{ $customer['zip_code'] ?? '' }}" size="50" class="form-control" /></td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['state'] ?? '' }}</th>
-				<td><input type="text" name="state" value="{{ $customer['state'] ?? '' }}" size="50" class="form-control" /></td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['country'] ?? '' }}</th>
-				<td><input type="text" name="country" value="{{ $customer['country'] ?? '' }}" size="50" class="form-control" /></td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['phone'] ?? '' }}</th>
-				<td><input type="text" name="phone" value="{{ $customer['phone'] ?? '' }}" size="50" class="form-control" /></td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['mobile_phone'] ?? '' }}</th>
-				<td><input type="text" name="mobile_phone" value="{{ $customer['mobile_phone'] ?? '' }}" size="50" class="form-control" /></td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['fax'] ?? '' }}</th>
-				<td><input type="text" name="fax" value="{{ $customer['fax'] ?? '' }}" size="50" class="form-control" /></td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['email'] ?? '' }}</th>
-				<td>
-					<input type="text" name="email" value="{{ $customer['email'] ?? '' }}" size="50" class="form-control" /></td
-			></tr>
-			<tr>
-				<th>{{ $customFieldLabel['customer_cf1'] ?? '' }}
-					<a
-						class="cluetip"
-						href="#"
-						rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
-						title="{{ $LANG['custom_fields'] ?? '' }}"
-					>
-			 <i class="ti ti-help"></i></a>
-			</th>
-			<td>
-				<input type="text" name="custom_field1" value="{{ $customer['custom_field1'] ?? '' }}" size="50" class="form-control" />
-			</td>
-		</tr>
-		<tr>
-			<th>{{ $customFieldLabel['customer_cf2'] ?? '' }}
-				<a
-					class="cluetip"
-					href="#"
-					rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
-					title="{{ $LANG['custom_fields'] ?? '' }}"
-				>
-			 <i class="ti ti-help"></i></a>
-			</th>
-			<td>
-				<input type="text" name="custom_field2" value="{{ $customer['custom_field2'] ?? '' }}" size="50" class="form-control" />
-			</td>
-		</tr>
-		<tr>
-			<th>{{ $customFieldLabel['customer_cf3'] ?? '' }} 
-				<a
-					class="cluetip"
-					href="#"
-					rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
-					title="{{ $LANG['custom_fields'] ?? '' }}"
-				> 
-			<i class="ti ti-help"></i></a>
-			</th>
-			<td>
-				<input type="text" name="custom_field3" value="{{ $customer['custom_field3'] ?? '' }}" size="50" class="form-control" />
-			</td>
-		</tr>
-		<tr>
-			<th>{{ $customFieldLabel['customer_cf4'] ?? '' }}
-				<a
-					class="cluetip"
-					href="#"
-					rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields"
-					title="{{ $LANG['custom_fields'] ?? '' }}"
-				>
-			 <i class="ti ti-help"></i></a>
-			</th>
-			<td>
-				<input type="text" name="custom_field4" value="{{ $customer['custom_field4'] ?? '' }}" size="50" class="form-control" />
-			</td>
-		</tr>
-		<tr>
-			<th>{{ $LANG['notes'] ?? '' }}</th>
-			<td><textarea name="notes" class="form-control editor" rows="8" cols="50">{!! outhtml($customer['notes'] ?? '') !!}</textarea></td>
-		</tr>
-		@showCustomFields(2, get('customer'))
-		<tr>
-			<th>{{ $LANG['enabled'] ?? '' }}</th>
-			<td>
-				{html_options name=enabled options=$enabled selected=$customer['enabled']}
-			</td>
-		</tr>
-	</table>
-
+		<div class="tab-content">
+			<div id="cust-edit-details" class="tab-pane active" role="tabpanel">
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['customer_name'] ?? '' }}
+						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field" title="{{ $LANG['required_field'] ?? '' }}"><i class="ti ti-asterisk text-danger"></i></a>
+					</label>
+					<input type="text" name="name" value="{{ $customer['name'] ?? '' }}" id="name" class="form-control validate[required]" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['customer_department'] ?? '' }}</label>
+					<input type="text" name="department" value="{{ $customer['department'] ?? '' }}" id="department" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['attention_short'] ?? '' }}
+						<a rel="index.php?module=documentation&amp;view=view&amp;page=help_customer_contact" href="#" class="cluetip" title="{{ $LANG['customer_contact'] ?? '' }}"><i class="ti ti-help"></i></a>
+					</label>
+					<input type="text" name="attention" value="{{ $customer['attention'] ?? '' }}" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['enabled'] ?? '' }}</label>
+					{html_options name=enabled options=$enabled selected=$customer['enabled'] class="form-select"}
+				</div>
+			</div>
+			<div id="cust-edit-address" class="tab-pane" role="tabpanel">
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['street'] ?? '' }}</label>
+					<input type="text" name="street_address" value="{{ $customer['street_address'] ?? '' }}" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['street2'] ?? '' }}
+						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_street2" title="{{ $LANG['street2'] ?? '' }}"><i class="ti ti-help"></i></a>
+					</label>
+					<input type="text" name="street_address2" value="{{ $customer['street_address2'] ?? '' }}" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['city'] ?? '' }}</label>
+					<input type="text" name="city" value="{{ $customer['city'] ?? '' }}" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['state'] ?? '' }}</label>
+					<input type="text" name="state" value="{{ $customer['state'] ?? '' }}" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['zip'] ?? '' }}</label>
+					<input type="text" name="zip_code" value="{{ $customer['zip_code'] ?? '' }}" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['country'] ?? '' }}</label>
+					<input type="text" name="country" value="{{ $customer['country'] ?? '' }}" class="form-control" />
+				</div>
+			</div>
+			<div id="cust-edit-contact" class="tab-pane" role="tabpanel">
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['phone'] ?? '' }}</label>
+					<input type="text" name="phone" value="{{ $customer['phone'] ?? '' }}" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['mobile_phone'] ?? '' }}</label>
+					<input type="text" name="mobile_phone" value="{{ $customer['mobile_phone'] ?? '' }}" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['fax'] ?? '' }}</label>
+					<input type="text" name="fax" value="{{ $customer['fax'] ?? '' }}" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['email'] ?? '' }}</label>
+					<input type="text" name="email" value="{{ $customer['email'] ?? '' }}" class="form-control" />
+				</div>
+			</div>
+			<div id="cust-edit-custom" class="tab-pane" role="tabpanel">
+				<div class="mb-3">
+					<label class="form-label">{{ $customFieldLabel['customer_cf1'] ?? '' }}
+						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{{ $LANG['custom_fields'] ?? '' }}"><i class="ti ti-help"></i></a>
+					</label>
+					<input type="text" name="custom_field1" value="{{ $customer['custom_field1'] ?? '' }}" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $customFieldLabel['customer_cf2'] ?? '' }}
+						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{{ $LANG['custom_fields'] ?? '' }}"><i class="ti ti-help"></i></a>
+					</label>
+					<input type="text" name="custom_field2" value="{{ $customer['custom_field2'] ?? '' }}" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $customFieldLabel['customer_cf3'] ?? '' }}
+						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{{ $LANG['custom_fields'] ?? '' }}"><i class="ti ti-help"></i></a>
+					</label>
+					<input type="text" name="custom_field3" value="{{ $customer['custom_field3'] ?? '' }}" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $customFieldLabel['customer_cf4'] ?? '' }}
+						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{{ $LANG['custom_fields'] ?? '' }}"><i class="ti ti-help"></i></a>
+					</label>
+					<input type="text" name="custom_field4" value="{{ $customer['custom_field4'] ?? '' }}" class="form-control" />
+				</div>
+				@showCustomFields(2, get('customer'))
+			</div>
+			<div id="cust-edit-notes" class="tab-pane" role="tabpanel">
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['notes'] ?? '' }}</label>
+					<textarea name="notes" class="form-control editor" rows="8">{!! outhtml($customer['notes'] ?? '') !!}</textarea>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="card-footer text-end">
 		<button type="submit" class="btn btn-primary" name="save_customer" value="{{ $LANG['save_customer'] ?? '' }}"><i class="ti ti-check me-1"></i>{{ $LANG['save'] ?? '' }}</button>
-		<a href="./index.php?module=customers&amp;view=manage" class="btn btn-secondary"><i class="ti ti-x me-1"></i>{{ $LANG['cancel'] ?? '' }}</a>
+		<a href="./index.php?module=customers&amp;view=details&amp;id={{ urlencode($customer['id'] ?? '') }}&amp;action=view" class="btn btn-outline-secondary"><i class="ti ti-x me-1"></i>{{ $LANG['cancel'] ?? '' }}</a>
 	</div>
 </div>
 

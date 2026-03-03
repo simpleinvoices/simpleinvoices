@@ -42,7 +42,7 @@
 	
 	        @if($invoicePaid != 0)
 				<div class="alert alert-warning">
-					{{ siLocal::number($preference['pref_inv_wording'] ?? '' }} {{ $invoice['index_id'] ?? '' }} {{ $LANG['delete_has_payments1'] ?? '' }} {{ $preference['pref_currency_sign'] }} {{ $invoicePaid) }} {{ $LANG['delete_has_payments2'] ?? '' }}
+					{{ $preference['pref_inv_wording'] ?? '' }} {{ $invoice['index_id'] ?? '' }} {{ $LANG['delete_has_payments1'] ?? '' }} {{ $preference['pref_currency_sign'] }} {{ siLocal::number($invoicePaid ?? 0) }} {{ $LANG['delete_has_payments2'] ?? '' }}
 				</div>
     	    @endif
 

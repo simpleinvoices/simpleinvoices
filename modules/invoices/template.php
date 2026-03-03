@@ -58,12 +58,12 @@ if (isset($_GET['export'])) {
 // End Export code 
 
 	
-$templatePath = "./templates/invoices/${template}/template.tpl";
-$template_path = "../templates/invoices/${template}";
+$templatePath = "./templates/invoices/${template}/template.blade.php";
+$template_path = "templates.invoices.{$template}";
 $css = $siUrl."/templates/invoices/${template}/style.css";
 $pluginsdir = "./templates/invoices/${template}/plugins/";
 
-$smarty -> plugins_dir = $pluginsdir;
+$smarty->plugins_dir = $pluginsdir;
 
 $pageActive = "invoices";
 $smarty->assign('pageActive', $pageActive);

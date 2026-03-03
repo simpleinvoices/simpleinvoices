@@ -16,14 +16,19 @@ $payment = getPayment($_GET['id']);
 
 /*Code to get the Invoice preference - so can link from this screen back to the invoice - START */
 $invoice = getInvoice($payment['ac_inv_id']);
+$biller = getBiller($payment['biller_id']);
+$customer = getCustomer($payment['customer_id']);
+$preference = getPreference($invoice['preference_id']);
 $invoiceType = getInvoiceType($invoice['type_id']);
 $paymentType = getPaymentType($payment['ac_payment_type']);
 
-
-$smarty -> assign("payment",$payment);
-$smarty -> assign("invoice",$invoice);
-$smarty -> assign("invoiceType",$invoiceType);
-$smarty -> assign("paymentType",$paymentType);
+$smarty -> assign("payment", $payment);
+$smarty -> assign("invoice", $invoice);
+$smarty -> assign("biller", $biller);
+$smarty -> assign("customer", $customer);
+$smarty -> assign("preference", $preference);
+$smarty -> assign("invoiceType", $invoiceType);
+$smarty -> assign("paymentType", $paymentType);
 
 $smarty -> assign('pageActive', 'payment');
 $smarty -> assign('active_tab', '#money');

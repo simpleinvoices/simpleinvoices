@@ -93,11 +93,15 @@ $xml .= "<page>$page</page>";
 $xml .= "<total>$count</total>";
 
 foreach ($preferences as $row) {
+	$desc_esc = htmlspecialchars($row['pref_description']);
+	$action  = '<div class="dropdown">';
+	$action .= '<a class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">'.$LANG['actions'].'</a>';
+	$action .= '<div class="dropdown-menu dropdown-menu-end">';
+	$action .= '<a class="dropdown-item" href="index.php?module=preferences&amp;view=details&amp;id='.$row['pref_id'].'&amp;action=view"><i class="ti ti-eye me-2"></i>'.$LANG['view'].' '.$desc_esc.'</a>';
+	$action .= '<a class="dropdown-item" href="index.php?module=preferences&amp;view=details&amp;id='.$row['pref_id'].'&amp;action=edit"><i class="ti ti-edit me-2"></i>'.$LANG['edit'].' '.$desc_esc.'</a>';
+	$action .= '</div></div>';
 	$xml .= "<row id='".$row['pref_id']."'>";
-	$xml .= "<cell><![CDATA[
-		<a class='index_table' title='".$LANG['view']." ".$LANG['preference']." ".$row['pref_description']."' href='index.php?module=preferences&view=details&id=".$row['pref_id']."&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-		<a class='index_table' title='".$LANG['edit']." ".$LANG['preference']." ".$row['pref_description']."' href='index.php?module=preferences&view=details&id=".$row['pref_id']."&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-	]]></cell>";
+	$xml .= "<cell><![CDATA[".$action."]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['pref_description']."]]></cell>";
 	if ($row['enabled']==$LANG['enabled']) {
 		$xml .= "<cell><![CDATA[<img src='images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				

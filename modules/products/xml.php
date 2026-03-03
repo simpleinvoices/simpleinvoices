@@ -27,13 +27,15 @@ $xml .= "<page>$page</page>";
 $xml .= "<total>$count</total>";
 
 foreach ($products_all as $row) {
-
+	$desc_esc = htmlspecialchars($row['description']);
+	$action  = '<div class="dropdown">';
+	$action .= '<a class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">'.$LANG['actions'].'</a>';
+	$action .= '<div class="dropdown-menu dropdown-menu-end">';
+	$action .= '<a class="dropdown-item" href="index.php?module=products&amp;view=details&amp;id='.$row['id'].'&amp;action=view"><i class="ti ti-eye me-2"></i>'.$LANG['view'].' '.$desc_esc.'</a>';
+	$action .= '<a class="dropdown-item" href="index.php?module=products&amp;view=details&amp;id='.$row['id'].'&amp;action=edit"><i class="ti ti-edit me-2"></i>'.$LANG['edit'].' '.$desc_esc.'</a>';
+	$action .= '</div></div>';
 	$xml .= "<row id='".$row['iso']."'>";
-	$xml .= "<cell><![CDATA[
-			<a class='index_table' title='". $LANG['view']." ".$row['description']."' href='index.php?module=products&view=details&id=".$row['id']."&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-			<a class='index_table' title='". $LANG['edit']." ".$row['description']."' href='index.php?module=products&view=details&id=".$row['id']."&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-		]]></cell>";		
-	
+	$xml .= "<cell><![CDATA[".$action."]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['id']."]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['description']."]]></cell>";
 	$xml .= "<cell><![CDATA[".siLocal::number($row['unit_price'])."]]></cell>";

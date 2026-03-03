@@ -1,7 +1,7 @@
 <script type="text/javascript">
-		var columns = 9;
+		var columns = 7;
 		var padding = 12;
-		var action_menu = 140;
+		var action_menu = 100;
 		var colEl = document.querySelector('.col');
 		var grid_width = colEl ? colEl.getBoundingClientRect().width : 800;
 		grid_width = grid_width - ((columns - 0.5) * padding) - action_menu;
@@ -11,14 +11,12 @@
 			url: @json('index.php?module=payments&view=xml&id=' . ($inv_id ?? '') . '&c_id=' . ($c_id ?? '')),
 			dataType: 'xml',
 			colModel : [
-				{display: @json($LANG['actions'] ?? 'Actions'), name : 'actions', width : action_menu, sortable : false, align: 'center'},
+				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'center'},
 				{display: @json($LANG['payment'] ?? 'Payment'), name : 'id', width : 7 * percentage_width, sortable : true, align: 'right'},
 				{display: @json($LANG['invoice'] ?? 'Invoice'), name : 'ac_inv_id', width : 10 * percentage_width, sortable : true, align: 'left'},
 				{display: @json($LANG['customer'] ?? 'Customer'), name : 'customer', width : 15 * percentage_width, sortable : true, align: 'left'},
 				{display: @json($LANG['biller'] ?? 'Biller'), name : 'biller', width : 15 * percentage_width, sortable : true, align: 'left'},
 				{display: @json($LANG['amount'] ?? 'Amount'), name : 'ac_amount', width : 10 * percentage_width, sortable : true, align: 'right'},
-				{display: @json($LANG['notes'] ?? 'Notes'), name : 'ac_notes', width : 15 * percentage_width, sortable : true, align: 'left'},
-				{display: @json($LANG['type'] ?? 'Type'), name : 'description', width : 10 * percentage_width, sortable : true, align: 'left'},
 				{display: @json($LANG['date_upper'] ?? 'Date'), name : 'date', width : 10 * percentage_width, sortable : true, align: 'center'}
 			],
 			searchitems : [

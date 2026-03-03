@@ -87,7 +87,7 @@
 		<tr>
 			<td class='si_invoice_notes' colspan="2">
 				<H5>{{ $LANG['description'] ?? '' }}</H5>
-				<textarea input type="text" class="editor" name="description0" rows="10" cols="70" wrap="nowrap">{{$invoiceItems[0]['description']}}</textarea>
+				<textarea input type="text" class="editor" name="description0" rows="10" cols="70" wrap="nowrap">{{ $invoiceItems[0]['description'] ?? '' }}</textarea>
 			</td>
 		</tr>		
 	</table>
@@ -223,7 +223,7 @@
 						</td>
 					@endfor
 					<td>
-						<input class="si_right" id="unit_price{{ siLocal::number_clean($line)}}" name="unit_price{{$line}}" size="7" value="{{ $invoiceItem['unit_price'] }}" />
+						<input class="si_right" id="unit_price{{ siLocal::number_clean($line) }}" name="unit_price{{ $line }}" size="7" value="{{ $invoiceItem['unit_price'] ?? '' }}" />
 					</td>
 				</tr>
 					{{ $invoiceItem['html'] }}

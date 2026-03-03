@@ -167,24 +167,23 @@
 				</select>
 			@endif
 				</td>
-				@for($tax = 0; $tax < ($defaults->tax_per_line_item ?? 0); $tax++)
-							{ assign var="taxNumber" value=$tax } 
-				<td>				                				                
+				@for($taxIdx = 0; $taxIdx < ($defaults->tax_per_line_item ?? 0); $taxIdx++)
+				<td>
 					<select 
-						id="tax_id[{{ $line }}][{{ $tax }}]"
-						name="tax_id[{{ $line }}][{{ $tax }}]"
+						id="tax_id[{{ $line }}][{{ $taxIdx }}]"
+						name="tax_id[{{ $line }}][{{ $taxIdx }}]"
 					>
 					<option value=""></option>
-					@foreach(($taxes ?? []) as $tax)
+					@foreach(($taxes ?? []) as $taxOption)
 						<option 
-							@if($tax['tax_id'] == ((get())['tax'][$line][$tax] ?? null))
-							value="{{ ((get())['tax'][$line][$tax] ?? '') }}"
+							@if(($taxOption['tax_id'] ?? '') == ((get())['tax'][$line][$taxIdx] ?? null))
+							value="{{ $taxOption['tax_id'] ?? '' }}"
 							selected
 							@else
-							   value="{{ $tax['tax_id'] ?? '' }}"
+								value="{{ $taxOption['tax_id'] ?? '' }}"
 							@endif
 						>
-							{{ $tax['tax_description'] ?? '' }}
+							{{ $taxOption['tax_description'] ?? '' }}
 						</option>
 					@endforeach
 				</select>

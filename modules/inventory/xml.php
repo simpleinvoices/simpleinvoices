@@ -23,11 +23,15 @@ $count = $sth_count_rows;
 	$xml .= "<total>$count</total>";
 	
 	foreach ($inventory_all as $row) {
+		$name_esc = htmlspecialchars($row['description'] ?? $row['name'] ?? (string)$row['id']);
+		$action  = '<div class="dropdown">';
+		$action .= '<a class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">'.$LANG['actions'].'</a>';
+		$action .= '<div class="dropdown-menu dropdown-menu-end">';
+		$action .= '<a class="dropdown-item" href="index.php?module=inventory&amp;view=view&amp;id='.$row['id'].'"><i class="ti ti-eye me-2"></i>'.$LANG['view'].' '.$name_esc.'</a>';
+		$action .= '<a class="dropdown-item" href="index.php?module=inventory&amp;view=edit&amp;id='.$row['id'].'"><i class="ti ti-edit me-2"></i>'.$LANG['edit'].' '.$name_esc.'</a>';
+		$action .= '</div></div>';
 		$xml .= "<row id='".$row['id']."'>";
-		$xml .= "<cell><![CDATA[
-		<a class='index_table' title='{$LANG['view']} ".$row['name']."' href='index.php?module=inventory&view=view&id=$row['id']'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-		<a class='index_table' title='{$LANG['edit']} ".$row['name']."' href='index.php?module=inventory&view=edit&id=$row['id']'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-		]]></cell>";
+		$xml .= "<cell><![CDATA[".$action."]]></cell>";
 		$xml .= "<cell><![CDATA[".$row['date']."]]></cell>";		
 		$xml .= "<cell><![CDATA[".$row['description']."]]></cell>";
 		$xml .= "<cell><![CDATA[".siLocal::number($row['quantity'])."]]></cell>";

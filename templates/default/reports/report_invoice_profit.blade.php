@@ -74,42 +74,39 @@
             <b>Profit</b>
         </td>
 	</tr>
- (($invoices ?? []) as $invoice)
-    @if($invoices[invoice].preference != $invoices[invoice.index_prev].preference AND $invoice != 0)   
-        <tr><td><br /></td></tr>
+@foreach(($invoices ?? []) as $invoice)
+    @if($loop->index > 0 && (($invoices[$loop->index - 1]['preference'] ?? '') != ($invoice['preference'] ?? '')))
+        <tr><td colspan="11"><br /></td></tr>
     @endif
     <tr>
-        <td class="details_screen">{{ $index ?? '' }}
-            {$invoices[invoice].preference}
-            {$invoices[invoice].index_id}
+        <td class="details_screen">{{ $invoice['preference'] ?? '' }} {{ $invoice['index_id'] ?? '' }}</td>
+        <td>
+            &nbsp;
+            &nbsp;
+        </td>
+        <td class="details_screen">
+            {{ $invoice['biller'] ?? '' }}
         </td>
         <td>
             &nbsp;
             &nbsp;
         </td>
         <td class="details_screen">
-            {$invoices[invoice].biller}
-        </td>
-        <td>
-            &nbsp;
-            &nbsp;
-        </td>
-        <td class="details_screen">
-            {$invoices[invoice].customer}
+            {{ $invoice['customer'] ?? '' }}
         </td>
         <td>
             &nbsp;
             &nbsp;
         </td>
         <td  class="details_screen">
-            {$invoices[invoice].invoice_total|siLocal_number}
+            {{ siLocal::number($invoice['invoice_total'] ?? 0) }}
         </td>
         <td>
             &nbsp;
             &nbsp;
         </td>
         <td  class="details_screen">
-            {$invoices[invoice].cost|siLocal_number}
+            {{ siLocal::number($invoice['cost'] ?? 0) }}
         </td>
         <td>
             &nbsp;
@@ -119,9 +116,10 @@
             &nbsp;
         </td>
         <td  class="details_screen">
-            {$invoices[invoice].profit|siLocal_number}
+            {{ siLocal::number($invoice['profit'] ?? 0) }}
         </td>
 	</tr>
+	@endforeach
  
     <tr>
         <td class="details_screen">

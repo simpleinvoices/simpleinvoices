@@ -32,8 +32,8 @@
 			<select name="invoice_id" class="form-select validate[required]">
 				<option value=''></option>
 				@foreach(($invoice_all ?? []) as $invoice)
-					<option value="{{ $invoice['id'] ?? '' }}" @if($invoice['id'] == $invoice['id'])selected@endif>
-						{{ siLocal::number($invoice['index_nam'] ?? '' }} ({{ $invoice['biller'] ?? '' }}, {{ $invoice['customer'] ?? '' }}, {{ $invoice['invoice_total'] ?? '') }})
+					<option value="{{ $invoice['id'] ?? '' }}" @if(($invoice['id'] ?? '') == ($cron['invoice_id'] ?? ''))selected@endif>
+						{{ $invoice['index_name'] ?? '' }} ({{ $invoice['biller'] ?? '' }}, {{ $invoice['customer'] ?? '' }}, {{ $invoice['invoice_total'] ?? '' }})
 					</option>
 				@endforeach
 			</select>
@@ -51,25 +51,25 @@
 			<div class="input-group">
 				<input name="recurrence" size="10" class="form-control validate[required]" value='{{ $cron['recurrence'] ?? '' }}' />
 				<select name="recurrence_type" class="form-select validate[required]">
-					<option value="day" @if($invoice['id'] == 'day')selected@endif>{{ $LANG['days'] ?? '' }}</option>
-					<option value="week" @if($invoice['id'] == 'week')selected@endif>{{ $LANG['weeks'] ?? '' }}</option>
-					<option value="month" @if($cron['recurrence_type'] == 'month')selected@endif>{{ $LANG['months'] ?? '' }}</option>
-					<option value="year" @if($invoice['id'] == 'year')selected@endif>{{ $LANG['years'] ?? '' }}</option>
+					<option value="day" @if(($cron['recurrence_type'] ?? '') == 'day')selected@endif>{{ $LANG['days'] ?? '' }}</option>
+					<option value="week" @if(($cron['recurrence_type'] ?? '') == 'week')selected@endif>{{ $LANG['weeks'] ?? '' }}</option>
+					<option value="month" @if(($cron['recurrence_type'] ?? '') == 'month')selected@endif>{{ $LANG['months'] ?? '' }}</option>
+					<option value="year" @if(($cron['recurrence_type'] ?? '') == 'year')selected@endif>{{ $LANG['years'] ?? '' }}</option>
 				</select>
 			</div>
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['email_biller_after_cron'] ?? '' }}</label>
 			<select name="email_biller" class="form-select validate[required]">
-				<option value="1" @if($invoice['id'] == '1')selected@endif>{{ $LANG['yes'] ?? '' }}</option>
-				<option value="0" @if($invoice['id'] == '0')selected@endif>{{ $LANG['no'] ?? '' }}</option>
+				<option value="1" @if(($cron['email_biller'] ?? '') == '1')selected@endif>{{ $LANG['yes'] ?? '' }}</option>
+				<option value="0" @if(($cron['email_biller'] ?? '') == '0')selected@endif>{{ $LANG['no'] ?? '' }}</option>
 			</select>
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['email_customer_after_cron'] ?? '' }}</label>
 			<select name="email_customer" class="form-select validate[required]">
-				<option value="1" @if($invoice['id'] == '1')selected@endif>{{ $LANG['yes'] ?? '' }}</option>
-				<option value="0" @if($invoice['id'] == '0')selected@endif>{{ $LANG['no'] ?? '' }}</option>
+				<option value="1" @if(($cron['email_customer'] ?? '') == '1')selected@endif>{{ $LANG['yes'] ?? '' }}</option>
+				<option value="0" @if(($cron['email_customer'] ?? '') == '0')selected@endif>{{ $LANG['no'] ?? '' }}</option>
 			</select>
 		</div>
 	</div>

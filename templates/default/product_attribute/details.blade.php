@@ -57,7 +57,7 @@
 			<td>
                 <select name="type_id" class="form-select">
                     @foreach(($types ?? []) as $k => $v)
-        				<option value="{{ $v['id'] }}" @if($v['id'] == $product_attribute['type_id']) selected @endif>{$LANG[$v['id']]}</option>
+        				<option value="{{ $v['id'] }}" @if($v['id'] == $product_attribute['type_id']) selected @endif>{{ $LANG[$v['id']] ?? '' }}</option>
                     @endforeach
                 </select>
 			</td>

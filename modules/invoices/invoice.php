@@ -38,12 +38,13 @@ $defaults['preference'] = (isset($_GET['preference'])) ? $_GET['preference'] : $
 $defaultTax = getDefaultTax();
 $defaultPreference = getDefaultPreference();
 
-if (!empty( $_GET['line_items'] )) {
-	$dynamic_line_items = $_GET['line_items'];
-} 
-else {
-	$dynamic_line_items = $defaults['line_items'] ;
+// Template expects an array of row indices (0, 1, 2, ...); DB stores the count (e.g. 5)
+if (!empty($_GET['line_items'])) {
+	$num_line_items = max(1, (int) $_GET['line_items']);
+} else {
+	$num_line_items = max(1, (int) ($defaults['line_items'] ?? 5));
 }
+$dynamic_line_items = range(0, $num_line_items - 1);
 
 for($i=1;$i<=4;$i++) {
 	$show_custom_field[$i] = show_custom_field("invoice_cf$i",'',"write",'',"details_screen",'','','');

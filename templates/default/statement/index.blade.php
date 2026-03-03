@@ -34,7 +34,7 @@
 				@else
 					<select name="customer_id">
 					@foreach(($customers ?? []) as $list_customer)
-						<option @if($list_biller['id'] == $customer_id) selected @endif value="{{ $list_customer['id'] ?? '' }}">{{ $list_customer['name'] ?? '' }}</option>
+						<option @if($list_customer['id'] == $customer_id) selected @endif value="{{ $list_customer['id'] ?? '' }}">{{ $list_customer['name'] ?? '' }}</option>
 					@endforeach
 					</select>
 				@endif
@@ -83,11 +83,11 @@
 
 	@if(form_submitted())
 	<div class="btn-list mb-3">
-			<a title="{{ urlencode($LANG['print_preview_tooltip'] ?? '' }}" href="index.php?module=statement&amp;view=export&amp;biller_id={{ $biller_id) }}&amp;customer_id={{ urlencode($customer_id }}&amp;start_date={{ $start_date) }}&amp;end_date={{ urlencode($end_date) }}&amp;show_only_unpaid={{ urlencode($show_only_unpaid) }}&amp;filter_by_date={{ urlencode($filter_by_date) }}&amp;format=print" class="btn btn-outline-primary btn-sm"><i class="ti ti-printer me-1"></i>{{ $LANG['print_preview'] ?? '' }}</a>
-			<a title="{{ urlencode($LANG['export_pdf_tooltip'] ?? '' }}" href="index.php?module=statement&amp;view=export&amp;biller_id={{ $biller_id) }}&amp;customer_id={{ urlencode($customer_id) }}&amp;start_date={{ urlencode($start_date) }}&amp;end_date={{ urlencode($end_date) }}&amp;show_only_unpaid={{ urlencode($show_only_unpaid) }}&amp;filter_by_date={{ urlencode($filter_by_date) }}&amp;format=pdf" class="btn btn-outline-secondary btn-sm"><i class="ti ti-file-type-pdf me-1"></i>{{ $LANG['export_pdf'] ?? '' }}</a>
-			<a title="{{ urlencode($LANG['export_xls_tooltip'] ?? '' }}" href="index.php?module=statement&amp;view=export&amp;biller_id={{ $biller_id) }}&amp;customer_id={{ urlencode($customer_id) }}&amp;start_date={{ urlencode($start_date) }}&amp;end_date={{ urlencode($end_date) }}&amp;show_only_unpaid={{ urlencode($show_only_unpaid) }}&amp;filter_by_date={{ urlencode($filter_by_date) }}&amp;format=file&amp;filetype={$config->export->spreadsheet}" class="btn btn-outline-secondary btn-sm"><i class="ti ti-file-spreadsheet me-1"></i>{{ $LANG['export_as'] ?? '' }} .{$config->export->spreadsheet}</a>
-			<a title="{{ urlencode($LANG['export_doc_tooltip'] ?? '' }}" href="index.php?module=statement&amp;view=export&amp;biller_id={{ $biller_id) }}&amp;customer_id={{ urlencode($customer_id) }}&amp;start_date={{ urlencode($start_date) }}&amp;end_date={{ urlencode($end_date) }}&amp;show_only_unpaid={{ urlencode($show_only_unpaid) }}&amp;filter_by_date={{ urlencode($filter_by_date) }}&amp;format=file&amp;filetype={$config->export->wordprocessor}" class="btn btn-outline-secondary btn-sm"><i class="ti ti-file-text me-1"></i>{{ $LANG['export_as'] ?? '' }} .{$config->export->wordprocessor}</a>
-			<a title="{{ urlencode($LANG['email'] ?? '' }}" href="index.php?module=statement&amp;view=email&amp;stage=1&amp;biller_id={{ $biller_id) }}&amp;customer_id={{ urlencode($customer_id) }}&amp;start_date={{ urlencode($start_date) }}&amp;end_date={{ urlencode($end_date) }}&amp;show_only_unpaid={{ urlencode($show_only_unpaid) }}&amp;filter_by_date={{ urlencode($filter_by_date) }}&amp;format=file" class="btn btn-outline-secondary btn-sm"><i class="ti ti-mail me-1"></i>{{ $LANG['email'] ?? '' }}</a>
+			<a title="{{ urlencode($LANG['print_preview_tooltip'] ?? '' }}" href="index.php?module=statement&amp;view=export&amp;biller_id={{ $biller_id ?? '' }}&amp;customer_id={{ urlencode($customer_id ?? '') }}&amp;start_date={{ $start_date ?? '' }}&amp;end_date={{ urlencode($end_date ?? '') }}&amp;show_only_unpaid={{ urlencode($show_only_unpaid ?? '') }}&amp;filter_by_date={{ urlencode($filter_by_date ?? '') }}&amp;format=print" class="btn btn-outline-primary btn-sm"><i class="ti ti-printer me-1"></i>{{ $LANG['print_preview'] ?? '' }}</a>
+			<a title="{{ urlencode($LANG['export_pdf_tooltip'] ?? '' }}" href="index.php?module=statement&amp;view=export&amp;biller_id={{ $biller_id ?? '' }}&amp;customer_id={{ urlencode($customer_id ?? '') }}&amp;start_date={{ urlencode($start_date ?? '') }}&amp;end_date={{ urlencode($end_date ?? '') }}&amp;show_only_unpaid={{ urlencode($show_only_unpaid ?? '') }}&amp;filter_by_date={{ urlencode($filter_by_date ?? '') }}&amp;format=pdf" class="btn btn-outline-secondary btn-sm"><i class="ti ti-file-type-pdf me-1"></i>{{ $LANG['export_pdf'] ?? '' }}</a>
+			<a title="{{ urlencode($LANG['export_xls_tooltip'] ?? '' }}" href="index.php?module=statement&amp;view=export&amp;biller_id={{ $biller_id ?? '' }}&amp;customer_id={{ urlencode($customer_id ?? '') }}&amp;start_date={{ urlencode($start_date ?? '') }}&amp;end_date={{ urlencode($end_date ?? '') }}&amp;show_only_unpaid={{ urlencode($show_only_unpaid ?? '') }}&amp;filter_by_date={{ urlencode($filter_by_date ?? '') }}&amp;format=file&amp;filetype=xls" class="btn btn-outline-secondary btn-sm"><i class="ti ti-file-spreadsheet me-1"></i>{{ $LANG['export_as'] ?? '' }} .xls</a>
+			<a title="{{ urlencode($LANG['export_doc_tooltip'] ?? '' }}" href="index.php?module=statement&amp;view=export&amp;biller_id={{ $biller_id ?? '' }}&amp;customer_id={{ urlencode($customer_id ?? '') }}&amp;start_date={{ urlencode($start_date ?? '') }}&amp;end_date={{ urlencode($end_date ?? '') }}&amp;show_only_unpaid={{ urlencode($show_only_unpaid ?? '') }}&amp;filter_by_date={{ urlencode($filter_by_date ?? '') }}&amp;format=file&amp;filetype=doc" class="btn btn-outline-secondary btn-sm"><i class="ti ti-file-text me-1"></i>{{ $LANG['export_as'] ?? '' }} .doc</a>
+			<a title="{{ urlencode($LANG['email'] ?? '' }}" href="index.php?module=statement&amp;view=email&amp;stage=1&amp;biller_id={{ $biller_id ?? '' }}&amp;customer_id={{ urlencode($customer_id ?? '') }}&amp;start_date={{ urlencode($start_date ?? '') }}&amp;end_date={{ urlencode($end_date ?? '') }}&amp;show_only_unpaid={{ urlencode($show_only_unpaid ?? '') }}&amp;filter_by_date={{ urlencode($filter_by_date ?? '') }}&amp;format=file" class="btn btn-outline-secondary btn-sm"><i class="ti ti-mail me-1"></i>{{ $LANG['email'] ?? '' }}</a>
 	</div>
 	@endif
 
@@ -115,13 +115,13 @@
 	<div class="si_statement_info2">
 		<table>
 			<tr>
-				<th>{{ siLocal::number($LANG['total'] ?? '' }}:</th>	<td>{{ $statement['total'] ?? '') }}</td>
+				<th>{{ $LANG['total'] ?? '' }}:</th>	<td>{{ siLocal::number($statement['total'] ?? 0) }}</td>
 			</tr>
 			<tr>
-				<th>{{ siLocal::number($LANG['paid'] ?? '' }}:</th>	<td>{{ $statement['paid'] ?? '') }}</td>
+				<th>{{ $LANG['paid'] ?? '' }}:</th>	<td>{{ siLocal::number($statement['paid'] ?? 0) }}</td>
 			</tr>
 			<tr>
-				<th>{{ siLocal::number($LANG['owing'] ?? '' }}:</th>	<td>{{ $statement['owing'] ?? '') }}</td>
+				<th>{{ $LANG['owing'] ?? '' }}:</th>	<td>{{ siLocal::number($statement['owing'] ?? 0) }}</td>
 			</tr>
 		</table>
 	</div>
@@ -147,55 +147,38 @@
 			</tr>
 		</thead>
 		<tbody>
-		 (($invoices ?? []) as $invoice)
-			@if($invoices[invoice].preference != $invoices[invoice.index_prev].preference AND $invoice != 0)   
-				<tr><td><br /></td></tr>
+		@foreach(($invoices ?? []) as $invoice)
+			@if($loop->index > 0 && (($invoices[$loop->index - 1]['preference'] ?? '') != ($invoice['preference'] ?? '')))
+				<tr><td colspan="7"><br /></td></tr>
 			@endif
 			<tr>
-				<td class="si_right">{{ $index ?? '' }}
-					{$invoices[invoice].preference}
-					{$invoices[invoice].index_id}
-				</td>
-				<td class="si_right">
-					{$invoices[invoice].date|siLocal_date}
-				</td>
-				<td>
-					{$invoices[invoice].biller}
-				</td>
-				<td>
-					{$invoices[invoice].customer}
-				</td>
-@if($invoices[invoice].status > 0)
-				<td class="si_right">
-					{$invoices[invoice].invoice_total|siLocal_number}
-				</td>
-				<td class="si_right">
-					{$invoices[invoice].INV_PAID|siLocal_number} 
-				</td>
-				<td class="si_right">
-					{$invoices[invoice].owing|siLocal_number}
-				</td>
-@else
-				<td class="si_right">
-					<i>{$invoices[invoice].invoice_total|siLocal_number}</i>
-				</td>
+				<td class="si_right">{{ $invoice['preference'] ?? '' }} {{ $invoice['index_id'] ?? '' }}</td>
+				<td class="si_right">{{ siLocal::date($invoice['date'] ?? '') }}</td>
+				<td>{{ $invoice['biller'] ?? '' }}</td>
+				<td>{{ $invoice['customer'] ?? '' }}</td>
+			@if(($invoice['status'] ?? 0) > 0)
+				<td class="si_right">{{ siLocal::number($invoice['invoice_total'] ?? 0) }}</td>
+				<td class="si_right">{{ siLocal::number($invoice['inv_paid'] ?? $invoice['INV_PAID'] ?? 0) }}</td>
+				<td class="si_right">{{ siLocal::number($invoice['owing'] ?? 0) }}</td>
+			@else
+				<td class="si_right"><i>{{ siLocal::number($invoice['invoice_total'] ?? 0) }}</i></td>
 				<td colspan="2">&nbsp;</td>
-@endif
+			@endif
 			</tr>
-		 
+		@endforeach
 			</tbody>
 			<tfoot>		
 				<tr>
 					<td colspan=3></td>
 					<th></th>
 					<td class="si_right">
-						{{ siLocal::number($statement['total'] ?? '') }}
+						{{ siLocal::number($statement['total'] ?? 0) }}
 					</td>
 					<td class="si_right">
-						{{ siLocal::number($statement['paid'] ?? '') }}
+						{{ siLocal::number($statement['paid'] ?? 0) }}
 					</td>
 					<td class="si_right">
-						{{ siLocal::number($statement['owing'] ?? '') }}
+						{{ siLocal::number($statement['owing'] ?? 0) }}
 					</td>
 				</tr>
 			</tfoot>

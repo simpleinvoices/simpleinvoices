@@ -34,7 +34,7 @@
 			<td>
                 <select name="type_id">
                     @foreach(($types ?? []) as $k => $v)
-        				<option value="{{ $v['id'] }}">{$LANG[$v['id']]}</option>
+        				<option value="{{ $v['id'] }}">{{ $LANG[$v['id']] ?? '' }}</option>
                     @endforeach
                 </select>
 			</td>
