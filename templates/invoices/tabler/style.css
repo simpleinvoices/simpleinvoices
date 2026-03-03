@@ -1,0 +1,96 @@
+/**
+ * Tabler-style invoice template (print & screen).
+ * Inspired by https://preview.tabler.io/invoice.html
+ */
+body {
+	background: #fff;
+	color: #1e293b;
+	font-size: 14px;
+	font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+	line-height: 1.5;
+	margin: 0;
+	padding: 1.5rem;
+}
+table { border-collapse: collapse; width: 100%; }
+td, th { padding: 0.5rem 0.75rem; vertical-align: top; }
+
+/* Header */
+.si-tabler-inv-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem; }
+.si-tabler-inv-logo { max-height: 48px; }
+.si-tabler-inv-title { font-size: 1.25rem; font-weight: 700; color: #1e293b; }
+
+/* Two columns: Company | Client */
+.si-tabler-inv-two-col { display: flex; gap: 2rem; margin-bottom: 1.5rem; }
+.si-tabler-inv-two-col > div { flex: 1; }
+.si-tabler-inv-label { font-size: 0.6875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: #64748b; margin-bottom: 0.25rem; }
+.si-tabler-inv-name { font-weight: 600; margin-bottom: 0.15rem; }
+.si-tabler-inv-address { color: #475569; font-size: 0.875rem; }
+
+/* Summary block (invoice #, date, total/paid/owing) */
+.si-tabler-inv-summary { margin-bottom: 1.5rem; }
+.si-tabler-inv-summary table { width: auto; min-width: 200px; }
+.si-tabler-inv-summary td { padding: 0.25rem 0.5rem; border: none; }
+.si-tabler-inv-summary td:first-child { color: #64748b; }
+.si-tabler-inv-summary .col1 { background: #f8fafc; }
+
+/* Invoice number heading */
+.si-tabler-inv-h1 { font-size: 1.5rem; font-weight: 700; margin: 0 0 1rem 0; color: #1e293b; }
+
+/* Line items table – Tabler card-table style (https://tabler.io) */
+.si-tabler-inv-table {
+	width: 100%;
+	margin-bottom: 1.5rem;
+	border: 1px solid #e2e8f0;
+	border-radius: 4px;
+	overflow: hidden;
+}
+.si-tabler-inv-table thead th {
+	text-align: left;
+	padding: 0.5rem 0.75rem;
+	font-size: 0.6875rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	color: #64748b;
+	background: #f8fafc;
+	border-bottom: 1px solid #e2e8f0;
+}
+.si-tabler-inv-table thead th.text-end { text-align: right; }
+.si-tabler-inv-table tbody td {
+	padding: 0.65rem 0.75rem;
+	border-bottom: 1px solid #f1f5f9;
+	vertical-align: middle;
+}
+.si-tabler-inv-table tbody tr:last-child td { border-bottom: none; }
+.si-tabler-inv-table tbody td.text-end { text-align: right; font-variant-numeric: tabular-nums; }
+.si-tabler-inv-table .si_product_attribute td { padding-top: 0.25rem; font-size: 0.8125rem; color: #64748b; }
+.si-tabler-inv-table .si-tabler-inv-line-desc td,
+.si-tabler-inv-table .si-tabler-inv-line-cf td {
+	padding-top: 0.25rem;
+	padding-bottom: 0.5rem;
+	font-size: 0.8125rem;
+	color: #64748b;
+	border-bottom: none;
+}
+.si-tabler-inv-table .si-tabler-inv-line-cf span + span::before { content: " · "; color: #94a3b8; }
+
+/* Totals */
+.si-tabler-inv-totals { margin-top: 0.5rem; }
+.si-tabler-inv-totals table { width: 100%; max-width: 320px; margin-left: auto; }
+.si-tabler-inv-totals td { padding: 0.35rem 0.5rem; border: none; }
+.si-tabler-inv-totals td:first-child { color: #64748b; }
+.si-tabler-inv-totals td:last-child { text-align: right; }
+.si-tabler-inv-totals .total-row td:last-child { font-weight: 700; font-size: 1.1rem; border-top: 2px solid #e2e8f0; padding-top: 0.5rem; }
+
+/* Notes & details */
+.si-tabler-inv-notes { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e2e8f0; font-size: 0.875rem; }
+.si-tabler-inv-detail-heading { font-weight: 600; margin-top: 1rem; margin-bottom: 0.25rem; }
+.si-tabler-inv-detail-line { font-size: 0.875rem; color: #475569; margin-bottom: 0.5rem; }
+.si-tabler-inv-footer { margin-top: 1.5rem; padding-top: 1rem; font-size: 0.75rem; color: #64748b; text-align: center; }
+.double_underline { border-bottom: 2px solid #1e293b; }
+
+@media print {
+	body { padding: 0; }
+	.si-tabler-inv-two-col { break-inside: avoid; }
+	.si-tabler-inv-table { break-inside: avoid; }
+}
