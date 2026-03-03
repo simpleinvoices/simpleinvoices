@@ -4,11 +4,6 @@
 	<div class="col-12">
 		{{-- Invoice defaults --}}
 		<div class="card mb-4">
-			<div class="card-header">
-				<h3 class="card-title">
-					<i class="ti ti-file-invoice me-2"></i>{{ $LANG['invoice'] ?? 'Invoice' }} defaults
-				</h3>
-			</div>
 			<div class="list-group list-group-flush">
 				@include('system_defaults.manage_row', [
 					'label' => $LANG['default_biller'] ?? 'Default biller',
@@ -59,11 +54,6 @@
 
 		{{-- Behaviour --}}
 		<div class="card mb-4">
-			<div class="card-header">
-				<h3 class="card-title">
-					<i class="ti ti-adjustments me-2"></i>Behaviour
-				</h3>
-			</div>
 			<div class="list-group list-group-flush">
 				@include('system_defaults.manage_row', [
 					'label' => $LANG['delete'] ?? 'Delete',
@@ -86,11 +76,6 @@
 
 		{{-- Localisation & form --}}
 		<div class="card mb-4">
-			<div class="card-header">
-				<h3 class="card-title">
-					<i class="ti ti-language me-2"></i>Localisation &amp; form
-				</h3>
-			</div>
 			<div class="list-group list-group-flush">
 				@include('system_defaults.manage_row', [
 					'label' => $LANG['language'] ?? 'Language',
@@ -109,11 +94,6 @@
 
 		{{-- Features --}}
 		<div class="card mb-4">
-			<div class="card-header">
-				<h3 class="card-title">
-					<i class="ti ti-toggle-right me-2"></i>Features
-				</h3>
-			</div>
 			<div class="list-group list-group-flush">
 				@include('system_defaults.manage_row', [
 					'label' => $LANG['inventory'] ?? 'Inventory',

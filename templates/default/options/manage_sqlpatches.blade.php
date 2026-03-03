@@ -16,9 +16,6 @@
 */ --}}
 
 <div class="card">
-	<div class="card-header">
-		<h3 class="card-title">Database patches applied to Simple Invoices</h3>
-	</div>
 	<div class="table-responsive">
 		<table class="table table-vcenter card-table" id="live-grid">
 			<thead>

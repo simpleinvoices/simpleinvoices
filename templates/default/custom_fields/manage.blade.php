@@ -6,13 +6,6 @@
 *	 GPL v2 or above
 */ --}}
 <div class="card">
-	<div class="card-header">
-		<div class="row align-items-center">
-			<div class="col">
-				<h3 class="card-title mb-0">{{ $LANG['custom_fields'] ?? 'Custom Fields' }}</h3>
-			</div>
-		</div>
-	</div>
 	<div class="card-body">
 @if($cfs == null)
 		<div class="alert alert-info mb-0">{{ $LANG['no_invoices'] ?? '' }}.</div>

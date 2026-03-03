@@ -7,7 +7,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-            <a href="index.php?module=index&amp;view=index" class="text-decoration-none">
+            <a href="index.php?module=index&view=index" class="text-decoration-none">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler me-1" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"/><line x1="9" y1="7" x2="10" y2="7"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="13" y1="17" x2="15" y2="17"/></svg>
                 <span>Simple Invoices</span>
             </a>
@@ -19,7 +19,7 @@
                 </a>
             </div>
             <div class="nav-item d-none d-md-flex me-3">
-                <a href="index.php?module=options&amp;view=backup_database" class="btn btn-ghost-secondary btn-icon" title="{{ $LANG['backup_database'] ?? 'Backup Database' }}">
+                <a href="index.php?module=options&view=backup_database" class="btn btn-ghost-secondary btn-icon" title="{{ $LANG['backup_database'] ?? 'Backup Database' }}">
                     <i class="ti ti-database-export"></i>
                 </a>
             </div>
@@ -34,17 +34,17 @@
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <a href="index.php?module=user&amp;view=manage" class="dropdown-item">
+                    <a href="index.php?module=user&view=manage" class="dropdown-item">
                         <i class="ti ti-users me-2"></i>{{ $LANG['manage_accounts'] ?? 'Manage Users' }}
                     </a>
-                    <a href="index.php?module=options&amp;view=index" class="dropdown-item">
+                    <a href="index.php?module=options&view=index" class="dropdown-item">
                         <i class="ti ti-settings me-2"></i>{{ $LANG['settings'] ?? 'Settings' }}
                     </a>
-                    <a href="index.php?module=system_defaults&amp;view=manage" class="dropdown-item">
+                    <a href="index.php?module=system_defaults&view=manage" class="dropdown-item">
                         <i class="ti ti-adjustments me-2"></i>{{ $LANG['system_preferences'] ?? 'System Preferences' }}
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a href="index.php?module=options&amp;view=backup_database" class="dropdown-item">
+                    <a href="index.php?module=options&view=backup_database" class="dropdown-item">
                         <i class="ti ti-database-export me-2"></i>{{ $LANG['backup_database'] ?? 'Backup Database' }}
                     </a>
                 </div>
@@ -61,7 +61,7 @@
                 <ul class="navbar-nav">
                     {{-- Home --}}
                     <li class="nav-item @if(($module ?? '') == 'index') active @endif">
-                        <a class="nav-link" href="index.php?module=index&amp;view=index">
+                        <a class="nav-link" href="index.php?module=index&view=index">
                             <span class="nav-link-icon d-md-none d-lg-inline-block"><i class="ti ti-home"></i></span>
                             <span class="nav-link-title">{{ $LANG['home'] ?? 'Home' }}</span>
                         </a>
@@ -74,13 +74,13 @@
                             <span class="nav-link-title">{{ $LANG['invoices'] ?? 'Invoices' }}</span>
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item @if(($module ?? '') == 'invoices' && ($view ?? '') == 'manage') active @endif" href="index.php?module=invoices&amp;view=manage">
+                            <a class="dropdown-item @if(($module ?? '') == 'invoices' && ($view ?? '') == 'manage') active @endif" href="index.php?module=invoices&view=manage">
                                 {{ $LANG['manage_invoices'] ?? 'All Invoices' }}
                             </a>
-                            <a class="dropdown-item @if(($module ?? '') == 'invoices' && ($view ?? '') == 'itemised') active @endif" href="index.php?module=invoices&amp;view=itemised">
+                            <a class="dropdown-item @if(($module ?? '') == 'invoices' && ($view ?? '') == 'itemised') active @endif" href="index.php?module=invoices&view=itemised">
                                 {{ $LANG['new_invoice'] ?? 'New Invoice' }}
                             </a>
-                            <a class="dropdown-item @if(($module ?? '') == 'cron') active @endif" href="index.php?module=cron&amp;view=manage">
+                            <a class="dropdown-item @if(($module ?? '') == 'cron') active @endif" href="index.php?module=cron&view=manage">
                                 {{ $LANG['recurrence'] ?? 'Recurrence' }}
                             </a>
                         </div>
@@ -88,7 +88,7 @@
 
                     {{-- Payments --}}
                     <li class="nav-item @if(($module ?? '') == 'payments') active @endif">
-                        <a class="nav-link" href="index.php?module=payments&amp;view=manage">
+                        <a class="nav-link" href="index.php?module=payments&view=manage">
                             <span class="nav-link-icon d-md-none d-lg-inline-block"><i class="ti ti-cash"></i></span>
                             <span class="nav-link-title">{{ $LANG['payments'] ?? 'Payments' }}</span>
                         </a>
@@ -101,10 +101,10 @@
                             <span class="nav-link-title">{{ $LANG['people'] ?? 'People' }}</span>
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item @if(($module ?? '') == 'customers') active @endif" href="index.php?module=customers&amp;view=manage">
+                            <a class="dropdown-item @if(($module ?? '') == 'customers') active @endif" href="index.php?module=customers&view=manage">
                                 {{ $LANG['customers'] ?? 'Customers' }}
                             </a>
-                            <a class="dropdown-item @if(($module ?? '') == 'billers') active @endif" href="index.php?module=billers&amp;view=manage">
+                            <a class="dropdown-item @if(($module ?? '') == 'billers') active @endif" href="index.php?module=billers&view=manage">
                                 {{ $LANG['billers'] ?? 'Billers' }}
                             </a>
                         </div>
@@ -117,24 +117,24 @@
                             <span class="nav-link-title">{{ $LANG['products'] ?? 'Products' }}</span>
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item @if(($module ?? '') == 'products' && ($view ?? '') == 'manage') active @endif" href="index.php?module=products&amp;view=manage">
+                            <a class="dropdown-item @if(($module ?? '') == 'products' && ($view ?? '') == 'manage') active @endif" href="index.php?module=products&view=manage">
                                 {{ $LANG['manage_products'] ?? 'Manage Products' }}
                             </a>
-                            <a class="dropdown-item @if(($module ?? '') == 'products' && ($view ?? '') == 'add') active @endif" href="index.php?module=products&amp;view=add">
+                            <a class="dropdown-item @if(($module ?? '') == 'products' && ($view ?? '') == 'add') active @endif" href="index.php?module=products&view=add">
                                 {{ $LANG['add_product'] ?? 'Add Product' }}
                             </a>
                             @if(isset($defaults->inventory) && $defaults->inventory == "1")
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item @if(($module ?? '') == 'inventory') active @endif" href="index.php?module=inventory&amp;view=manage">
+                            <a class="dropdown-item @if(($module ?? '') == 'inventory') active @endif" href="index.php?module=inventory&view=manage">
                                 {{ $LANG['inventory'] ?? 'Inventory' }}
                             </a>
                             @endif
                             @if(isset($defaults->product_attributes) && $defaults->product_attributes)
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item @if(($module ?? '') == 'product_attribute') active @endif" href="index.php?module=product_attribute&amp;view=manage">
+                            <a class="dropdown-item @if(($module ?? '') == 'product_attribute') active @endif" href="index.php?module=product_attribute&view=manage">
                                 {{ $LANG['product_attributes'] ?? 'Product Attributes' }}
                             </a>
-                            <a class="dropdown-item @if(($module ?? '') == 'product_value') active @endif" href="index.php?module=product_value&amp;view=manage">
+                            <a class="dropdown-item @if(($module ?? '') == 'product_value') active @endif" href="index.php?module=product_value&view=manage">
                                 {{ $LANG['product_values'] ?? 'Product Values' }}
                             </a>
                             @endif
@@ -143,7 +143,7 @@
 
                     {{-- Reports --}}
                     <li class="nav-item @if(($module ?? '') == 'reports') active @endif">
-                        <a class="nav-link" href="index.php?module=reports&amp;view=index">
+                        <a class="nav-link" href="index.php?module=reports&view=index">
                             <span class="nav-link-icon d-md-none d-lg-inline-block"><i class="ti ti-chart-bar"></i></span>
                             <span class="nav-link-title">{{ $LANG['all_reports'] ?? 'Reports' }}</span>
                         </a>
@@ -156,11 +156,11 @@
                             <span class="nav-link-title">{{ $LANG['settings'] ?? 'Settings' }}</span>
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="index.php?module=system_defaults&amp;view=manage">{{ $LANG['system_preferences'] ?? 'System Preferences' }}</a>
-                            <a class="dropdown-item" href="index.php?module=custom_fields&amp;view=manage">{{ $LANG['custom_fields_upper'] ?? 'Custom Fields' }}</a>
-                            <a class="dropdown-item" href="index.php?module=tax_rates&amp;view=manage">{{ $LANG['tax_rates'] ?? 'Tax Rates' }}</a>
-                            <a class="dropdown-item" href="index.php?module=preferences&amp;view=manage">{{ $LANG['invoice_preferences'] ?? 'Invoice Preferences' }}</a>
-                            <a class="dropdown-item" href="index.php?module=payment_types&amp;view=manage">{{ $LANG['payment_types'] ?? 'Payment Types' }}</a>
+                            <a class="dropdown-item" href="index.php?module=system_defaults&view=manage">{{ $LANG['system_preferences'] ?? 'System Preferences' }}</a>
+                            <a class="dropdown-item" href="index.php?module=custom_fields&view=manage">{{ $LANG['custom_fields_upper'] ?? 'Custom Fields' }}</a>
+                            <a class="dropdown-item" href="index.php?module=tax_rates&view=manage">{{ $LANG['tax_rates'] ?? 'Tax Rates' }}</a>
+                            <a class="dropdown-item" href="index.php?module=preferences&view=manage">{{ $LANG['invoice_preferences'] ?? 'Invoice Preferences' }}</a>
+                            <a class="dropdown-item" href="index.php?module=payment_types&view=manage">{{ $LANG['payment_types'] ?? 'Payment Types' }}</a>
                         </div>
                     </li>
                 </ul>
@@ -187,44 +187,135 @@
                 <div class="col-auto ms-auto d-print-none">
                     <div class="btn-list">
                     @if(($module ?? '') == 'invoices' && ($view ?? '') == 'manage')
-                        <a href="index.php?module=invoices&amp;view=manage" class="btn btn-outline-secondary">
+                        <a href="index.php?module=invoices&view=manage" class="btn btn-outline-secondary">
                             {{ $LANG['manage_invoices'] ?? 'All Invoices' }}
                         </a>
-                        <a href="index.php?module=invoices&amp;view=itemised" class="btn btn-primary">
+                        <a href="index.php?module=invoices&view=itemised" class="btn btn-primary">
                             <i class="ti ti-plus me-1"></i>{{ $LANG['new_invoice'] ?? 'New Invoice' }}
                         </a>
                     @elseif(($module ?? '') == 'customers' && ($view ?? '') == 'manage')
-                        <a href="index.php?module=customers&amp;view=manage" class="btn btn-outline-secondary">
+                        <a href="index.php?module=customers&view=manage" class="btn btn-outline-secondary">
                             {{ $LANG['manage_customers'] ?? 'All Customers' }}
                         </a>
-                        <a href="index.php?module=customers&amp;view=add" class="btn btn-primary">
+                        <a href="index.php?module=customers&view=add" class="btn btn-primary">
                             <i class="ti ti-plus me-1"></i>{{ $LANG['customer_add'] ?? 'Add Customer' }}
                         </a>
                     @elseif(($module ?? '') == 'billers' && ($view ?? '') == 'manage')
-                        <a href="index.php?module=billers&amp;view=manage" class="btn btn-outline-secondary">
+                        <a href="index.php?module=billers&view=manage" class="btn btn-outline-secondary">
                             {{ $LANG['manage_billers'] ?? 'All Billers' }}
                         </a>
-                        <a href="index.php?module=billers&amp;view=add" class="btn btn-primary">
+                        <a href="index.php?module=billers&view=add" class="btn btn-primary">
                             <i class="ti ti-plus me-1"></i>{{ $LANG['add_new_biller'] ?? 'Add Biller' }}
                         </a>
                     @elseif(($module ?? '') == 'products' && ($view ?? '') == 'manage')
-                        <a href="index.php?module=products&amp;view=manage" class="btn btn-outline-secondary">
+                        <a href="index.php?module=products&view=manage" class="btn btn-outline-secondary">
                             {{ $LANG['manage_products'] ?? 'All Products' }}
                         </a>
-                        <a href="index.php?module=products&amp;view=add" class="btn btn-primary">
+                        <a href="index.php?module=products&view=add" class="btn btn-primary">
                             <i class="ti ti-plus me-1"></i>{{ $LANG['add_new_product'] ?? 'Add Product' }}
                         </a>
                     @elseif(($module ?? '') == 'payments' && ($view ?? '') == 'manage')
-                        <a href="index.php?module=payments&amp;view=manage" class="btn btn-outline-secondary">
+                        <a href="index.php?module=payments&view=manage" class="btn btn-outline-secondary">
                             {{ $LANG['manage_payments'] ?? 'All Payments' }}
                         </a>
-                        <a href="index.php?module=payments&amp;view=process&amp;op=pay_invoice" class="btn btn-primary">
+                        @if(get('id'))
+                        <a href="index.php?module=payments&view=process&id={{ urlencode(get('id')) }}&op=pay_selected_invoice" class="btn btn-outline-success">
+                            <i class="ti ti-cash me-1"></i>{{ $LANG['payments_filtered_invoice'] ?? 'Pay this invoice' }}
+                        </a>
+                        @endif
+                        <a href="index.php?module=payments&view=process&op=pay_invoice" class="btn btn-primary">
                             <i class="ti ti-plus me-1"></i>{{ $LANG['process_payment'] ?? 'Process Payment' }}
                         </a>
+                    @elseif(($module ?? '') == 'cron' && ($view ?? '') == 'manage')
+                        <a href="index.php?module=cron&view=manage" class="btn btn-outline-secondary">
+                            {{ $LANG['recurrence'] ?? 'Recurrence' }}
+                        </a>
+                        <a href="index.php?module=cron&view=add" class="btn btn-primary">
+                            <i class="ti ti-plus me-1"></i>{{ $LANG['new_recurrence'] ?? 'New Recurrence' }}
+                        </a>
+                    @elseif(($module ?? '') == 'inventory' && ($view ?? '') == 'manage')
+                        <a href="index.php?module=inventory&view=manage" class="btn btn-outline-secondary">
+                            {{ $LANG['inventory'] ?? 'Inventory' }}
+                        </a>
+                        <a href="index.php?module=inventory&view=add" class="btn btn-primary">
+                            <i class="ti ti-plus me-1"></i>{{ $LANG['new_inventory_movement'] ?? 'New Movement' }}
+                        </a>
+                    @elseif(($module ?? '') == 'product_attribute' && ($view ?? '') == 'manage')
+                        <a href="index.php?module=product_attribute&view=manage" class="btn btn-outline-secondary">
+                            {{ $LANG['product_attributes'] ?? 'Product Attributes' }}
+                        </a>
+                        <a href="index.php?module=product_attribute&view=add" class="btn btn-primary">
+                            <i class="ti ti-plus me-1"></i>{{ $LANG['add_product_attribute'] ?? 'Add Attribute' }}
+                        </a>
+                    @elseif(($module ?? '') == 'product_value' && ($view ?? '') == 'manage')
+                        <a href="index.php?module=product_value&view=manage" class="btn btn-outline-secondary">
+                            {{ $LANG['product_values'] ?? 'Product Values' }}
+                        </a>
+                        <a href="index.php?module=product_value&view=add" class="btn btn-primary">
+                            <i class="ti ti-plus me-1"></i>{{ $LANG['add_product_value'] ?? 'Add Value' }}
+                        </a>
+                    @elseif(($module ?? '') == 'tax_rates' && ($view ?? '') == 'manage')
+                        <a href="index.php?module=tax_rates&view=manage" class="btn btn-outline-secondary">
+                            {{ $LANG['tax_rates'] ?? 'Tax Rates' }}
+                        </a>
+                        <a href="index.php?module=tax_rates&view=add" class="btn btn-primary">
+                            <i class="ti ti-plus me-1"></i>{{ $LANG['add_new_tax_rate'] ?? 'Add Tax Rate' }}
+                        </a>
+                    @elseif(($module ?? '') == 'payment_types' && ($view ?? '') == 'manage')
+                        <a href="index.php?module=payment_types&view=manage" class="btn btn-outline-secondary">
+                            {{ $LANG['payment_types'] ?? 'Payment Types' }}
+                        </a>
+                        <a href="index.php?module=payment_types&view=add" class="btn btn-primary">
+                            <i class="ti ti-plus me-1"></i>{{ $LANG['add_new_payment_type'] ?? 'Add Payment Type' }}
+                        </a>
+                    @elseif(($module ?? '') == 'preferences' && ($view ?? '') == 'manage')
+                        <a href="index.php?module=preferences&view=manage" class="btn btn-outline-secondary">
+                            {{ $LANG['invoice_preferences'] ?? 'Invoice Preferences' }}
+                        </a>
+                        <a href="index.php?module=preferences&view=add" class="btn btn-primary">
+                            <i class="ti ti-plus me-1"></i>{{ $LANG['add_new_preference'] ?? 'Add Preference' }}
+                        </a>
+                    @elseif(($module ?? '') == 'user' && ($view ?? '') == 'manage')
+                        <a href="index.php?module=user&view=manage" class="btn btn-outline-secondary">
+                            {{ $LANG['manage_accounts'] ?? 'Manage Users' }}
+                        </a>
+                        <a href="index.php?module=user&view=add" class="btn btn-primary">
+                            <i class="ti ti-plus me-1"></i>{{ $LANG['user_add'] ?? 'Add User' }}
+                        </a>
                     @elseif(($module ?? '') == 'reports')
-                        <a href="index.php?module=reports&amp;view=index" class="btn btn-outline-secondary">
+                        <a href="index.php?module=reports&view=index" class="btn btn-outline-secondary">
                             {{ $LANG['all_reports'] ?? 'All Reports' }}
                         </a>
+                    @else
+                        @php
+                            $back_views = ['add', 'edit', 'details', 'view', 'itemised', 'process', 'save'];
+                            $show_back = in_array($view ?? '', $back_views);
+                            if ($show_back) {
+                                $back_config = [
+                                    'invoices' => ['url' => 'index.php?module=invoices&view=manage', 'label' => $LANG['manage_invoices'] ?? 'Manage Invoices'],
+                                    'customers' => ['url' => 'index.php?module=customers&view=manage', 'label' => $LANG['manage_customers'] ?? 'Manage Customers'],
+                                    'billers' => ['url' => 'index.php?module=billers&view=manage', 'label' => $LANG['manage_billers'] ?? 'Manage Billers'],
+                                    'products' => ['url' => 'index.php?module=products&view=manage', 'label' => $LANG['manage_products'] ?? 'Manage Products'],
+                                    'payments' => ['url' => 'index.php?module=payments&view=manage', 'label' => $LANG['manage_payments'] ?? 'Manage Payments'],
+                                    'cron' => ['url' => 'index.php?module=cron&view=manage', 'label' => $LANG['recurrence'] ?? 'Recurrence'],
+                                    'inventory' => ['url' => 'index.php?module=inventory&view=manage', 'label' => $LANG['inventory'] ?? 'Inventory'],
+                                    'product_attribute' => ['url' => 'index.php?module=product_attribute&view=manage', 'label' => $LANG['product_attributes'] ?? 'Product Attributes'],
+                                    'product_value' => ['url' => 'index.php?module=product_value&view=manage', 'label' => $LANG['product_values'] ?? 'Product Values'],
+                                    'tax_rates' => ['url' => 'index.php?module=tax_rates&view=manage', 'label' => $LANG['tax_rates'] ?? 'Tax Rates'],
+                                    'payment_types' => ['url' => 'index.php?module=payment_types&view=manage', 'label' => $LANG['payment_types'] ?? 'Payment Types'],
+                                    'custom_fields' => ['url' => 'index.php?module=custom_fields&view=manage', 'label' => $LANG['custom_fields_upper'] ?? 'Custom Fields'],
+                                    'system_defaults' => ['url' => 'index.php?module=system_defaults&view=manage', 'label' => $LANG['system_preferences'] ?? 'System Preferences'],
+                                    'preferences' => ['url' => 'index.php?module=preferences&view=manage', 'label' => $LANG['invoice_preferences'] ?? 'Invoice Preferences'],
+                                    'user' => ['url' => 'index.php?module=user&view=manage', 'label' => $LANG['manage_accounts'] ?? 'Manage Users'],
+                                ];
+                                $back = $back_config[$module ?? ''] ?? null;
+                            }
+                        @endphp
+                        @if(!empty($back))
+                            <a href="{{ $back['url'] }}" class="btn btn-outline-secondary">
+                                <i class="ti ti-arrow-left me-1"></i>{{ $back['label'] }}
+                            </a>
+                        @endif
                     @endif
                     </div>
                 </div>

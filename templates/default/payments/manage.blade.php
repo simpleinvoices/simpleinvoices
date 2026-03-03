@@ -10,19 +10,6 @@
 */ --}}
 
 <div class="card">
-	<div class="card-header">
-		<div class="row align-items-center">
-			<div class="col">
-				<h3 class="card-title mb-0">{{ $LANG['payments'] ?? 'Payments' }}</h3>
-			</div>
-			<div class="col-auto">
-				<a href="./index.php?module=payments&amp;view=process&amp;op=pay_invoice" class="btn btn-primary"><i class="ti ti-plus me-1"></i>{{ $LANG['process_payment'] ?? '' }}</a>
-				@if(get('id'))
-				<a href="./index.php?module=payments&amp;view=process&amp;id={{ urlencode(get('id')) }}&amp;op=pay_selected_invoice" class="btn btn-outline-success ms-1"><i class="ti ti-cash me-1"></i>{{ $LANG['payments_filtered_invoice'] ?? '' }}</a>
-				@endif
-			</div>
-		</div>
-	</div>
 	<div class="card-body">
 		@if(get('id'))
 			@if($payments == null)

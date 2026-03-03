@@ -14,18 +14,6 @@
 	</div>
 @else
 	<div class="card">
-		<div class="card-header">
-			<div class="row align-items-center">
-				<div class="col">
-					<h3 class="card-title mb-0">{{ $LANG['filters'] ?? 'Filters' }}:</h3>
-				</div>
-				<div class="col-auto">
-					<a href="index.php?module=invoices&amp;view=itemised" class="btn btn-primary">
-						<i class="ti ti-plus me-1"></i>{{ $LANG['new_invoice'] ?? 'New Invoice' }}
-					</a>
-				</div>
-			</div>
-		</div>
 		<div class="card-body">
 			<ul class="nav nav-pills mb-3" role="tablist">
 				<li class="nav-item">
