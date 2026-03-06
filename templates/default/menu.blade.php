@@ -176,13 +176,71 @@
     @php
         $tmp_lang_module = $LANG['title_module_'.$module] ?? $LANG[$module] ?? ucfirst($module ?? '');
         $tmp_lang_view = $LANG['title_view_'.$view] ?? $LANG[$view] ?? ucfirst($view ?? '');
+        $page_title_lang_keys = [
+            'index_index' => 'title_view_index',
+            'reports_index' => 'all_reports',
+            'reports_report_invoice_profit' => 'profit_per_invoice',
+            'invoices_manage' => 'manage_invoices',
+            'invoices_itemised' => 'new_invoice_itemised',
+            'invoices_total' => 'new_invoice_total',
+            'invoices_consulting' => 'new_invoice_consulting',
+            'invoices_details' => 'invoice',
+            'invoices_add_invoice_item' => 'add_invoice_item',
+            'invoices_manage_js' => 'manage_invoices',
+            'cron_manage' => 'recurrence',
+            'cron_add' => 'new_recurrence',
+            'cron_edit' => 'recurrence',
+            'payments_manage' => 'manage_payments',
+            'payments_process' => 'process_payment',
+            'payments_eway' => 'process_payment_via_eway',
+            'customers_manage' => 'manage_customers',
+            'customers_add' => 'customer_add',
+            'customers_details' => 'customer_details',
+            'billers_manage' => 'manage_billers',
+            'billers_add' => 'add_new_biller',
+            'billers_details' => 'biller_details',
+            'products_manage' => 'manage_products',
+            'products_add' => 'add_new_product',
+            'products_details' => 'product_edit',
+            'user_manage' => 'users',
+            'user_details' => 'details',
+            'inventory_manage' => 'inventory',
+            'inventory_add' => 'new_inventory_movement',
+            'inventory_edit' => 'inventory',
+            'product_attribute_manage' => 'manage_product_attributes',
+            'product_attribute_add' => 'add_product_attribute',
+            'product_attribute_details' => 'product_attribute',
+            'product_value_manage' => 'manage_product_values',
+            'product_value_add' => 'add_product_value',
+            'product_value_details' => 'product_value',
+            'system_defaults_manage' => 'system_preferences',
+            'system_defaults_edit' => 'system_preferences',
+            'custom_fields_manage' => 'manage_custom_fields',
+            'custom_fields_details' => 'custom_field',
+            'tax_rates_manage' => 'manage_tax_rates',
+            'tax_rates_add' => 'add_tax_rate',
+            'tax_rates_details' => 'tax_rate_details',
+            'preferences_manage' => 'manage_invoice_preferences',
+            'preferences_add' => 'add_new_preference',
+            'preferences_details' => 'invoice_preferences',
+            'payment_types_manage' => 'manage_payment_types',
+            'payment_types_add' => 'add_payment_type',
+            'payment_types_details' => 'payment_type_details',
+            'options_index' => 'options',
+            'options_backup_database' => 'backup_database',
+            'statement_index' => 'statement_of_invoices',
+            'statement_email' => 'email_statement_as_pdf',
+        ];
+        $page_title_key = ($module ?? '') . '_' . ($view ?? '');
+        $page_title = isset($page_title_lang_keys[$page_title_key]) && isset($LANG[$page_title_lang_keys[$page_title_key]])
+            ? $LANG[$page_title_lang_keys[$page_title_key]]
+            : ($tmp_lang_view . ' ' . $tmp_lang_module);
     @endphp
     <div class="page-header d-print-none">
         <div class="container-xl">
             <div class="row g-2 align-items-center">
                 <div class="col">
-                    <div class="page-pretitle">{{ $tmp_lang_module }}</div>
-                    <h2 class="page-title">{{ $tmp_lang_view }}</h2>
+                    <h2 class="page-title">{{ $page_title }}</h2>
                 </div>
                 <div class="col-auto ms-auto d-print-none">
                     <div class="btn-list">

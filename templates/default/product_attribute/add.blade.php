@@ -19,44 +19,37 @@
 	@endif
 <form name="frmpost" action="index.php?module=product_attribute&amp;view=add" method="post">
 
-<h3>{{ $LANG['add_product_attribute'] ?? '' }}</h3>
-
-<hr />
-
-
-<table align="center">
-<tr>
-	<td class="details_screen">{{ $LANG['name'] ?? '' }}</td>
-	<td><input type="text" name="name" value="{{ post('name') }}" size="25" /></td>
-</tr>
-		<tr>
-			<th>{{ $LANG['type'] ?? '' }}</th>
-			<td>
-                <select name="type_id">
-                    @foreach(($types ?? []) as $k => $v)
-        				<option value="{{ $v['id'] }}">{{ $LANG[$v['id']] ?? '' }}</option>
-                    @endforeach
-                </select>
-			</td>
-		</tr>
-		<tr>
-			<th>{{ $LANG['enabled'] ?? '' }}</th>
-			<td>
-				{html_options class=edit name=enabled options=$enabled selected=1}
-			</td>
-		</tr>
-		<tr>
-			<th>{{ $LANG['visible'] ?? '' }}</th>
-			<td>
-				{html_options class=edit name=visible options=$enabled selected=1}
-			</td>
-		</tr>
-</table>
-
-<hr />
-<div style="text-align:center;">
-	<input type="submit" name="submit" value="{{ $LANG['insert_product_attribute'] ?? '' }}" />
-	<input type="hidden" name="op" value="insert_product_attribute" />
+<div class="card">
+	<div class="card-header">
+		<h3 class="card-title">{{ $LANG['add_product_attribute'] ?? '' }}</h3>
+	</div>
+	<div class="card-body">
+		<div class="mb-3">
+			<label class="form-label">{{ $LANG['name'] ?? '' }}</label>
+			<input type="text" name="name" value="{{ post('name') }}" size="25" class="form-control" />
+		</div>
+		<div class="mb-3">
+			<label class="form-label">{{ $LANG['type'] ?? '' }}</label>
+			<select name="type_id" class="form-select">
+				@foreach(($types ?? []) as $k => $v)
+					<option value="{{ $v['id'] }}">{{ $LANG[$v['id']] ?? '' }}</option>
+				@endforeach
+			</select>
+		</div>
+		<div class="mb-3">
+			<label class="form-label">{{ $LANG['enabled'] ?? '' }}</label>
+			{html_options name=enabled options=$enabled selected=1 class="form-select"}
+		</div>
+		<div class="mb-3">
+			<label class="form-label">{{ $LANG['visible'] ?? '' }}</label>
+			{html_options name=visible options=$enabled selected=1 class="form-select"}
+		</div>
+	</div>
+	<div class="card-footer text-end">
+		<button type="submit" class="btn btn-primary" name="submit" value="{{ $LANG['insert_product_attribute'] ?? '' }}"><i class="ti ti-check me-1"></i>{{ $LANG['save'] ?? '' }}</button>
+		<a href="./index.php?module=product_attribute&amp;view=manage" class="btn btn-outline-secondary"><i class="ti ti-x me-1"></i>{{ $LANG['cancel'] ?? '' }}</a>
+		<input type="hidden" name="op" value="insert_product_attribute" />
+	</div>
 </div>
 </form>
 	

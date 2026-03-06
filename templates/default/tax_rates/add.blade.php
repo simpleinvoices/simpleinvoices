@@ -39,7 +39,7 @@
 					<input type="text" name="tax_percentage" value="{{ post('tax_percentage') }}" class="form-control" />
 				</div>
 				<div class="col-auto">
-					{html_options name=type options=$types selected=$tax['type']}
+					{html_options name=type options=$types selected=$tax['type'] class="form-select"}
 				</div>
 			</div>
 			<div class="form-text">{{ $LANG['ie_10_for_10'] ?? '' }}</div>

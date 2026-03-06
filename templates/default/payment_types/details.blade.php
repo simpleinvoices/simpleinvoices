@@ -50,14 +50,14 @@
 		<tr>
 			<td class="details_screen">{{ $LANG['description'] ?? '' }} <a href="index.php?module=documentation&amp;view=view&amp;page=help_required_field" rel="gb_page_center[350, 150]"><i class="ti ti-alert-circle text-danger"></i></a></td>
 			<td>
-				<input type="text"  class="validate[required]"  name="pt_description" value="{{ $paymentType['pt_description'] ?? '' }}" size="30" />
+				<input type="text" name="pt_description" value="{{ $paymentType['pt_description'] ?? '' }}" size="30" class="form-control validate[required]" />
 			</td>
 		</tr>
 		<tr>
 			<th>{{ $LANG['enabled'] ?? '' }} </th>
 			<td>
 			{{-- displayblock enabled --}}
-			<select name="pt_enabled">
+			<select name="pt_enabled" class="form-select">
 				<option value="{{ $paymentType['pt_enabled'] ?? '' }}" selected style="font-weight: bold">{{ $paymentType['enabled'] ?? '' }}</option>
 				<option value="1">{{ $LANG['enabled'] ?? '' }}</option>
 				<option value="0">{{ $LANG['disabled'] ?? '' }}</option>

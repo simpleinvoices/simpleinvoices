@@ -16,7 +16,7 @@
 				   @if($billers == null )
 					  <p><em>{{ $LANG['no_billers'] ?? '' }}</em></p>
 				   @else
-						<select name="biller_id">
+						<select name="biller_id" class="form-select">
 						@foreach(($billers ?? []) as $list_biller)
 							<option @if($list_biller['id'] == $biller_id) selected @endif value="{{ $list_biller['id'] ?? '' }}">{{ $list_biller['name'] ?? '' }}</option>
 						@endforeach
@@ -31,8 +31,8 @@
 			<td>
 				@if($customers == null )
 				<em>{{ $LANG['no_customers'] ?? '' }}</em>
-				@else
-					<select name="customer_id">
+		@else
+					<select name="customer_id" class="form-select">
 					@foreach(($customers ?? []) as $list_customer)
 						<option @if($list_customer['id'] == $customer_id) selected @endif value="{{ $list_customer['id'] ?? '' }}">{{ $list_customer['name'] ?? '' }}</option>
 					@endforeach
@@ -45,7 +45,7 @@
 				{{ $LANG['filter_by_dates'] ?? '' }}
 			</th>
 			<td class="">
-				<input type="checkbox" name="filter_by_date"  @if($filter_by_date == "yes") checked @endif value="yes">
+				<input type="checkbox" name="filter_by_date" class="form-check-input" @if($filter_by_date == "yes") checked @endif value="yes">
 			</td>
 		</tr>
 		<tr>
@@ -53,7 +53,7 @@
 				{{ $LANG['start_date'] ?? '' }}
 			</td>
 			<td>
-				<input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="start_date" id="date1" value='{{ $start_date ?? '' }}' />   
+				<input type="text" class="form-control validate[required,custom[date],length[0,10]] date-picker" size="10" name="start_date" id="date1" value="{{ $start_date ?? '' }}" />
 			 </td>
 		</tr>
 		<tr>
@@ -61,7 +61,7 @@
 				{{ $LANG['end_date'] ?? '' }}
 			</td>
 			<td>
-				<input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="end_date" id="date1" value='{{ $end_date ?? '' }}' />   
+				<input type="text" class="form-control validate[required,custom[date],length[0,10]] date-picker" size="10" name="end_date" id="date1" value="{{ $end_date ?? '' }}" />
 			</td>
 		</tr>
 		<tr>
@@ -69,7 +69,7 @@
 				{{ $LANG['show_only_unpaid_invoices'] ?? '' }}
 			</th>
 			<td class="">
-				<input type="checkbox" name="show_only_unpaid"  @if($show_only_unpaid == "yes") checked @endif value="yes">
+				<input type="checkbox" name="show_only_unpaid" class="form-check-input" @if($show_only_unpaid == "yes") checked @endif value="yes">
 			</td>
 		</tr>
 	</table>

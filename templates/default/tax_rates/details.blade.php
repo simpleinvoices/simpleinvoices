@@ -52,7 +52,7 @@
 	<table class="table table-vcenter">
 		<tr>
 			<th>{{ $LANG['description'] ?? '' }}</th>
-			<td><input type="text" name="tax_description" value="{{ $tax['tax_description'] ?? '' }}"  class="validate[required]" size="25" /></td>
+			<td><input type="text" name="tax_description" value="{{ $tax['tax_description'] ?? '' }}" class="form-control validate[required]" size="25" /></td>
 		</tr>
 		<tr>
 			<th>{{ $LANG['rate'] ?? '' }}
@@ -66,14 +66,14 @@
 			</a>
 			</th>
 			<td>
-				<input type="text" name="tax_percentage" value="{{ siLocal::number($tax['tax_percentage'] ?? '') }}" size="10" />
-				{html_options name=type options=$types selected=$tax['type']}
+				<input type="text" name="tax_percentage" value="{{ siLocal::number($tax['tax_percentage'] ?? '') }}" size="10" class="form-control" />
+				{html_options name=type options=$types selected=$tax['type'] class="form-select"}
 			</td>
 		</tr>
 		<tr>
 			<th>{{ $LANG['enabled'] ?? '' }} </th>
 			<td>
-				<select name="tax_enabled">
+				<select name="tax_enabled" class="form-select">
 					<option value="{{ $tax['tax_enabled'] ?? '' }}" selected style="font-weight: bold">{{ $tax['enabled'] ?? '' }}</option>
 					<option value="1">{{ $LANG['enabled'] ?? '' }}</option>
 					<option value="0">{{ $LANG['disabled'] ?? '' }}</option>

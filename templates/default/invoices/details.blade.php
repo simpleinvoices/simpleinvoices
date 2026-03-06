@@ -31,9 +31,9 @@
 		<tr>
 				<th>{{ $LANG['date_formatted'] ?? '' }}</th>
 		@if($invoice['id'] == null) 
-				<td><input type="text" size="10" class="date-picker" name="date" id="date1" value="{{ date('Y-m-d') }}" /></td>
+				<td><input type="text" size="10" class="form-control date-picker" name="date" id="date1" value="{{ date('Y-m-d') }}" /></td>
 		@else
-				<td><input type="text" size="10" class="date-picker" name="date" id="date1" value="{{ $invoice['calc_date'] ?? '' }}" /></td>
+				<td><input type="text" size="10" class="form-control date-picker" name="date" id="date1" value="{{ $invoice['calc_date'] ?? '' }}" /></td>
 		@endif
 		</tr>
 		<tr>
@@ -43,7 +43,7 @@
 			@if($billers == null )
 				<p><em>{{ $LANG['no_billers'] ?? '' }}</em></p>
 			@else
-				<select name="biller_id">
+				<select name="biller_id" class="form-select">
 				@foreach(($billers ?? []) as $biller)
 					<option @if($biller['id'] == $invoice['biller_id']) selected @endif value="{{ $biller['id'] ?? '' }}">{{ $biller['name'] ?? '' }}</option>
 				@endforeach
@@ -58,7 +58,7 @@
 		@if($customers == null)
 				<em>{{ $LANG['no_customers'] ?? '' }}</em>
 		@else	
-				<select name="customer_id">
+				<select name="customer_id" class="form-select">
 					@foreach(($customers ?? []) as $customer)
 					<option @if($biller['id'] == $invoice['biller_id']) selected @endif value="{{ $customer['id'] ?? '' }}">{{ $customer['name'] ?? '' }}</option>
 					@endforeach
@@ -87,7 +87,7 @@
 		<tr>
 			<td class='si_invoice_notes' colspan="2">
 				<H5>{{ $LANG['description'] ?? '' }}</H5>
-				<textarea input type="text" class="editor" name="description0" rows="10" cols="70" wrap="nowrap">{{ $invoiceItems[0]['description'] ?? '' }}</textarea>
+				<textarea class="form-control editor" name="description0" rows="10" cols="70" wrap="nowrap">{{ $invoiceItems[0]['description'] ?? '' }}</textarea>
 			</td>
 		</tr>		
 	</table>
@@ -97,7 +97,7 @@
 		<tr>       	         
 			<th>{{ $LANG['gross_total'] ?? '' }}</th>
 			<td>
-				<input type="text" name="unit_price0" value="{{ siLocal::number_formatted($invoiceItems[0]['unit_price'] ?? 0) }}" size="10" />
+				<input type="text" name="unit_price0" value="{{ siLocal::number_formatted($invoiceItems[0]['unit_price'] ?? 0) }}" size="10" class="form-control text-end" />
 				<input type="hidden" name="quantity0" value="1" />
 				<input type="hidden" name="id0" value="{{ $invoiceItems[0]['id']?? '' }}" />
 				<input type="hidden" name="products0" value="{{ $invoiceItems[0]['product_id']?? '' }}" />
@@ -113,6 +113,7 @@
 							<select 
 								id="tax_id[0][{{ $tax }}]"
 								name="tax_id[0][{{ $tax }}]"
+								class="form-select form-select-sm"
 							>
 							<option value=""></option>
 							{assign var="index" value=$tax}
@@ -181,12 +182,13 @@
 					</td>
 					<td>
 						<input type="hidden" id="delete{{ $line ?? '' }}" name="delete{{ $line ?? '' }}" size="3" />
-						<input class="si_right" 
-							type="text" 
-							name='quantity{{ $line ?? '' }}' 
-							id='quantity{{ $line ?? '' }}' 
-							value='{{ siLocal::number($invoiceItem['quantity'] ?? '') }}' 
+						<input
+							type="text"
+							name="quantity{{ $line ?? '' }}"
+							id="quantity{{ $line ?? '' }}"
+							value="{{ siLocal::number($invoiceItem['quantity'] ?? '') }}"
 							size="10"
+							class="form-control form-control-sm text-end si_right"
 						/>
 						<input type="hidden" name='line_item{{ $line ?? '' }}' id='line_item{{ $line ?? '' }}' value='{{ $invoiceItem['id'] ?? '' }}' /> 
 					</td>
@@ -200,7 +202,7 @@
 								name="products{{ $line ?? '' }}"
 								id="products{{ $line ?? '' }}"
 								rel="{{ $line ?? '' }}"
-								class="product_change"
+								class="form-select form-select-sm product_change"
 							>
 							@foreach(($products ?? []) as $product)
 								<option @if($biller['id'] == $invoice['biller_id']) selected @endif value="{{ $product['id'] ?? '' }}">{{ $product['description'] ?? '' }}</option>
@@ -213,6 +215,7 @@
 							<select 
 								id="tax_id[{{ $line ?? '' }}][{{ $tax }}]"
 								name="tax_id[{{ $line ?? '' }}][{{ $tax }}]"
+								class="form-select form-select-sm"
 							>
 							<option value=""></option>
 							{assign var="index" value=$tax}
@@ -223,7 +226,7 @@
 						</td>
 					@endfor
 					<td>
-						<input class="si_right" id="unit_price{{ siLocal::number_clean($line) }}" name="unit_price{{ $line }}" size="7" value="{{ $invoiceItem['unit_price'] ?? '' }}" />
+						<input id="unit_price{{ siLocal::number_clean($line) }}" name="unit_price{{ $line }}" size="7" value="{{ $invoiceItem['unit_price'] ?? '' }}" class="form-control form-control-sm text-end si_right" />
 					</td>
 				</tr>
 					{{ $invoiceItem['html'] }}
@@ -231,7 +234,7 @@
 					<td>
 					</td>
 					<td colspan="4">
-						<textarea input type="text" class="detail" name="description{{ $line }}" id="description{{ $line }}" rows="3" cols="3" wrap="nowrap">{{ $invoiceItem['description'] }}</textarea>
+						<textarea class="form-control form-control-sm detail" name="description{{ $line }}" id="description{{ $line }}" rows="3" cols="3" wrap="nowrap">{{ $invoiceItem['description'] }}</textarea>
 					</td>
 				</tr>
 				</tbody>
@@ -257,7 +260,7 @@
 		<tr>
 			<td class='si_invoice_notes' colspan="2">
 				<H5>{{ $LANG['notes'] ?? '' }}</H5>
-				<textarea input type="text" class="editor" name="note" rows="10" cols="70" wrap="nowrap">{{  $invoice['note'] }}</textarea>
+				<textarea class="form-control editor" name="note" rows="10" cols="70" wrap="nowrap">{{  $invoice['note'] }}</textarea>
 			</td>
 		</tr>		
 @endif
@@ -270,7 +273,7 @@
 		@if($preferences == null )
 				<em>{{ $LANG['no_preferences'] ?? '' }}</em>
 		@else
-				<select name="preference_id">
+				<select name="preference_id" class="form-select">
 				@foreach(($preferences ?? []) as $preference)
 					<option @if($biller['id'] == $invoice['biller_id']) selected @endif value="{{ $preference['pref_id']  }}">{{ $preference['pref_description']  }}</option>
 				@endforeach

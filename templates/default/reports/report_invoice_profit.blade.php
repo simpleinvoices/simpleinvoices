@@ -7,7 +7,7 @@
 <table class="table table-vcenter" align="center">
     <tr>
         <td wrap="nowrap">Start date (YYYY-MM-DD)
-                <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="start_date" id="date1" value='{{ $start_date ?? '' }}' />   
+                <input type="text" class="form-control validate[required,custom[date],length[0,10]] date-picker" size="10" name="start_date" id="date1" value="{{ $start_date ?? '' }}" />
          </td>
         <td>
             &nbsp;
@@ -16,8 +16,8 @@
             &nbsp;
             &nbsp;
         </td>
-        <td wrap="nowrap" >End date (YYYY-MM-DD)
-                <input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="end_date" id="date1" value='{{ $end_date ?? '' }}' />   
+        <td wrap="nowrap">End date (YYYY-MM-DD)
+                <input type="text" class="form-control validate[required,custom[date],length[0,10]] date-picker" size="10" name="end_date" id="date1" value="{{ $end_date ?? '' }}" />
             </td>
     </tr>
 </table>

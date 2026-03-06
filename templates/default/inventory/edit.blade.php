@@ -26,56 +26,50 @@
 
 <form name="frmpost" action="index.php?module=inventory&view=edit&id={{ urlencode($inventory['id'] ?? '') }}" method="POST" id="frmpost">
 
-
-<div class="si_form">
-	<table>
-    <tr>
-		 <td class="details_screen">{{ $LANG['date_upper'] ?? '' }}</td>
-		<td>
-			<input type="text" class="validate[required,custom[date],length[0,10]] date-picker" size="10" name="date" id="date" value='{{ $inventory['date'] ?? '' }}' />	
-		</td>
-    </tr>
-	<tr>
-		<td class="details_screen">{{ $LANG['product'] ?? '' }}</td>
-		<td>
-			<select name="product_id" class="validate[required] product_inventory_change">
-			    <option value=''></option>
-				@foreach(($product_all ?? []) as $product)
-					<option value="{{ $product['id'] ?? '' }}" @if($product['id'] == $product['id'])selected@endif >
-	                    {{ $product['description'] ?? '' }}
-	                </option>
-				@endforeach
-			</select>
-		</td>
-	</tr>
-	<tr>
-		<td class="details_screen">{{ $LANG['quantity'] ?? '' }}</td>
-		<td>
-		    <input name="quantity" size="10" class="validate[required]" value='{{ siLocal::number($inventory['quantity'] ?? '') }}'>
-        </td>
-     </tr>
-	<tr>
-		<td class="details_screen">{{ $LANG['cost'] ?? '' }}</td>
-		<td>
-		    <input id="cost" name="cost" size="10" class="validate[required]" value='{{ siLocal::number($inventory['cost'] ?? '') }}'>
-        </td>
-     </tr>
-	<tr>
-		<td class="details_screen">{{ $LANG['notes'] ?? '' }}</td>
-		<td><textarea  name="note"  class="editor" rows="8" cols="50">{!! outhtml($inventory['note'] ?? '') !!}</textarea></td>
-	</tr>
-	</table>
-
-	<div class="si_toolbar si_toolbar_form">
-			<button type="submit" class="positive" name="id" value="{{ $LANG['save'] ?? '' }}">
-			    <img class="button_img" src="./images/common/tick.png" alt="" /> 
-				{{ $LANG['save'] ?? '' }}
-			</button>
-		
-			<a href="./index.php?module=inventory&view=manage" class="negative">
-		        <img src="./images/common/cross.png" alt="" />
-	        	{{ $LANG['cancel'] ?? '' }}
-    		</a>
+<div class="card">
+	<div class="card-header">
+		<h3 class="card-title">{{ $LANG['edit'] ?? '' }} {{ $LANG['inventory'] ?? $LANG['product'] ?? '' }}</h3>
+	</div>
+	<div class="card-body">
+		<table class="table table-vcenter">
+			<tr>
+				<th>{{ $LANG['date_upper'] ?? '' }}</th>
+				<td>
+					<input type="text" name="date" id="date" size="10" value="{{ $inventory['date'] ?? '' }}" class="form-control validate[required,custom[date],length[0,10]] date-picker" />
+				</td>
+			</tr>
+			<tr>
+				<th>{{ $LANG['product'] ?? '' }}</th>
+				<td>
+					<select name="product_id" class="form-select validate[required] product_inventory_change">
+						<option value=""></option>
+						@foreach(($product_all ?? []) as $product)
+							<option value="{{ $product['id'] ?? '' }}" @if(($product['id'] ?? '') == ($inventory['product_id'] ?? '')) selected @endif>{{ $product['description'] ?? '' }}</option>
+						@endforeach
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th>{{ $LANG['quantity'] ?? '' }}</th>
+				<td>
+					<input name="quantity" size="10" value="{{ siLocal::number($inventory['quantity'] ?? '') }}" class="form-control validate[required]" />
+				</td>
+			</tr>
+			<tr>
+				<th>{{ $LANG['cost'] ?? '' }}</th>
+				<td>
+					<input id="cost" name="cost" size="10" value="{{ siLocal::number($inventory['cost'] ?? '') }}" class="form-control validate[required]" />
+				</td>
+			</tr>
+			<tr>
+				<th>{{ $LANG['notes'] ?? '' }}</th>
+				<td><textarea name="note" class="form-control editor" rows="8" cols="50">{!! outhtml($inventory['note'] ?? '') !!}</textarea></td>
+			</tr>
+		</table>
+	</div>
+	<div class="card-footer text-end">
+		<button type="submit" class="btn btn-primary" name="id" value="{{ $LANG['save'] ?? '' }}"><i class="ti ti-check me-1"></i>{{ $LANG['save'] ?? '' }}</button>
+		<a href="./index.php?module=inventory&view=manage" class="btn btn-outline-secondary"><i class="ti ti-x me-1"></i>{{ $LANG['cancel'] ?? '' }}</a>
 	</div>
 </div>
 

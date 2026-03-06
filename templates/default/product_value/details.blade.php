@@ -59,7 +59,7 @@
 		<tr>
 			<th>{{ $LANG['enabled'] ?? '' }}</th>
 			<td>
-				{html_options name=enabled options=$enabled selected=$product_attribute['enabled']}
+				{html_options name=enabled options=$enabled selected=$product_attribute['enabled'] class="form-select"}
 			</td>
 		</tr>
 	</table>

@@ -64,7 +64,7 @@
 			<i class="ti ti-alert-circle text-danger"></i>
 			</a>	
 			</th>
-			<td><input type="text" name="email" autocomplete="off" value="{{ $user['email'] ?? '' }}" size="35" id="email"  class="validate[required]"  /></td>
+			<td><input type="text" name="email" autocomplete="off" value="{{ $user['email'] ?? '' }}" size="35" id="email" class="form-control validate[required]" /></td>
 		</tr>
 		<tr>
 			<th>{{ $LANG['role'] ?? '' }} 
@@ -78,7 +78,7 @@
 				</a>
 			</th>
 			<td>
-					<select name="role">
+					<select name="role" class="form-select">
 						@foreach(($roles ?? []) as $role)
 							<option @if($role['id'] == $user['role_id']) selected @endif value="{{ $role['id'] ?? '' }}">{{ $role['name'] ?? '' }}</option>
 						@endforeach
@@ -98,16 +98,16 @@
 				</a>
 			</th>
 			<td>
-			<input type="password" name="password_field" value="" size="25" />
+			<input type="password" name="password_field" value="" size="25" class="form-control" />
 		</td>
 		</tr>
 		<tr>
 			<th>{{ $LANG['enabled'] ?? '' }}</th>
-			<td>{html_options name=enabled options=$enabled selected=$user['enabled']}</td>
+			<td>{html_options name=enabled options=$enabled selected=$user['enabled'] class="form-select"}</td>
 		</tr>
 		<tr>
 			<th>{{ $LANG['users'] ?? '' }}</th>
-			<td><input type="text" name="user_id" autocomplete="off" value="{{ $user['user_id'] ?? '' }}" size="12" id="user_id"  class="validate[required]"  /></td>
+			<td><input type="text" name="user_id" autocomplete="off" value="{{ $user['user_id'] ?? '' }}" size="12" id="user_id" class="form-control validate[required]" /></td>
 		</tr>
 	</table>
 

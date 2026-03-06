@@ -16,38 +16,33 @@
 	@endif
 <form name="frmpost" action="index.php?module=product_value&amp;view=add" method="post">
 
-<h3>{{ $LANG['add_product_value'] ?? '' }}</h3>
-
-<hr />
-
-
-<table align="center">
-<tr>
-	<td class="details_screen">{{ $LANG['attribute'] ?? '' }}</td>
-	<td>
-            <select name="attribute_id">
-            @foreach(($product_attributes ?? []) as $product_attribute)
-                <option value="{{ $product_attribute['id'] }}">{{ $product_attribute['name'] }}</option>
-            @endforeach
-            </select>
-	</td>
-</tr>
-<tr>
-	<td class="details_screen">{{ $LANG['value'] ?? '' }}</td>
-	<td><input type="text" name="value" value="{{ post('value') }}" size="25" /></td>
-</tr>
-		<tr>
-			<th>{{ $LANG['enabled'] ?? '' }}</th>
-			<td>
-				{html_options class=edit name=enabled options=$enabled selected=1}
-			</td>
-		</tr>
-</table>
-<!-- </div> -->
-<hr />
-<div style="text-align:center;">
-	<input type="submit" name="submit" value="{{ $LANG['insert_product_value'] ?? '' }}" />
-	<input type="hidden" name="op" value="insert_product_value" />
+<div class="card">
+	<div class="card-header">
+		<h3 class="card-title">{{ $LANG['add_product_value'] ?? '' }}</h3>
+	</div>
+	<div class="card-body">
+		<div class="mb-3">
+			<label class="form-label">{{ $LANG['attribute'] ?? '' }}</label>
+			<select name="attribute_id" class="form-select">
+				@foreach(($product_attributes ?? []) as $product_attribute)
+					<option value="{{ $product_attribute['id'] }}">{{ $product_attribute['name'] }}</option>
+				@endforeach
+			</select>
+		</div>
+		<div class="mb-3">
+			<label class="form-label">{{ $LANG['value'] ?? '' }}</label>
+			<input type="text" name="value" value="{{ post('value') }}" size="25" class="form-control" />
+		</div>
+		<div class="mb-3">
+			<label class="form-label">{{ $LANG['enabled'] ?? '' }}</label>
+			{html_options name=enabled options=$enabled selected=1 class="form-select"}
+		</div>
+	</div>
+	<div class="card-footer text-end">
+		<button type="submit" class="btn btn-primary" name="submit" value="{{ $LANG['insert_product_value'] ?? '' }}"><i class="ti ti-check me-1"></i>{{ $LANG['save'] ?? '' }}</button>
+		<a href="./index.php?module=product_value&amp;view=manage" class="btn btn-outline-secondary"><i class="ti ti-x me-1"></i>{{ $LANG['cancel'] ?? '' }}</a>
+		<input type="hidden" name="op" value="insert_product_value" />
+	</div>
 </div>
 </form>
 

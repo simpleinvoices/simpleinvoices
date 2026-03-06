@@ -65,13 +65,13 @@
                 <tr>
 		<th>{{ $LANG['enabled'] ?? '' }}</th>
 		<td>
-			{html_options name=enabled options=$enabled selected=$product_attribute['enabled']}
+			{html_options name=enabled options=$enabled selected=$product_attribute['enabled'] class="form-select"}
 		</td>
                 </tr>
                 <tr>
 		<th>{{ $LANG['visible'] ?? '' }}</th>
 		<td>
-			{html_options name=visible options=$enabled selected=$product_attribute['visible']}
+			{html_options name=visible options=$enabled selected=$product_attribute['visible'] class="form-select"}
 		</td>
                 </tr>
                 </table>

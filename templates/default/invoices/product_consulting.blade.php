@@ -31,13 +31,12 @@
         (($dynamic_line_items ?? []) as $line)
 
 			<tr>
-				<td><input type="text" name="quantity{{ $line }}" size="5" /></td>
-				<td><input type="text" name="description{{ $line }}" size="50" /></td>
-				<td><input type="text" name="price{{ $line }}" size="50" /></td>
+				<td><input type="text" name="quantity{{ $line }}" size="5" class="form-control form-control-sm" /></td>
+				<td><input type="text" name="description{{ $line }}" size="50" class="form-control form-control-sm" /></td>
+				<td><input type="text" name="price{{ $line }}" size="50" class="form-control form-control-sm" /></td>
             </tr>
-                
 			<tr class="text{{ $line }} hide">
-        		<td colspan="3" ><textarea input type="text" class="editor"  name='notes{{ $line }}' rows="3" cols="80" wrap="nowrap"></textarea></td>
+        		<td colspan="3"><textarea class="form-control form-control-sm editor" name="notes{{ $line }}" rows="3" cols="80" wrap="nowrap"></textarea></td>
 			</tr>
 
         
@@ -54,33 +53,30 @@
 </tr>
 
 <tr>
-        <td colspan="2"><textarea input type="text" class="editor" name="note" rows="5" cols="70" wrap="nowrap"></textarea></td>
+        <td colspan="2"><textarea class="form-control editor" name="note" rows="5" cols="70" wrap="nowrap"></textarea></td>
 </tr>
 
-<tr><td class="details_screen">{{ $LANG['tax'] ?? '' }}</td><td><input type="text" name="tax" size="15" />
-
+<tr><td class="details_screen">{{ $LANG['tax'] ?? '' }}</td><td>
 @if($taxes == null )
 	<p><em>{{ $LANG['no_taxes'] ?? '' }}</em></p>
 @else
-	<select name="tax_id">
+	<select name="tax_id" class="form-select">
 	@foreach(($taxes ?? []) as $tax)
 		<option @if($tax['tax_id'] == $defaults->tax) selected @endif value="{{ $tax['tax_id'] ?? '' }}">{{ $tax['tax_description'] ?? '' }}</option>
 	@endforeach
 	</select>
 @endif
-
 </td>
 </tr>
 
 <tr>
-<td class="details_screen">{{ $LANG['inv_pref'] ?? '' }}</td><td><input type="text" name="preference_id" />
-
+<td class="details_screen">{{ $LANG['inv_pref'] ?? '' }}</td><td>
 @if($preferences == null )
 	<p><em>{{ $LANG['no_preferences'] ?? '' }}</em></p>
 @else
-	<select name="preference_id">
+	<select name="preference_id" class="form-select">
 	@foreach(($preferences ?? []) as $preference)
-		<option @if($tax['tax_id'] == $defaults->preference) selected @endif value="{{ $preference['pref_id'] ?? '' }}">{{ $preference['pref_description'] ?? '' }}</option>
+		<option @if(($preference['pref_id'] ?? '') == $defaults->preference) selected @endif value="{{ $preference['pref_id'] ?? '' }}">{{ $preference['pref_description'] ?? '' }}</option>
 	@endforeach
 	</select>
 @endif

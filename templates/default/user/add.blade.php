@@ -44,7 +44,7 @@
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['enabled'] ?? '' }}</label>
-			{html_options name=enabled options=$enabled selected=1}
+			{html_options name=enabled options=$enabled selected=1 class="form-select"}
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['users'] ?? '' }}</label>

@@ -24,7 +24,7 @@
 		<tr>
 			<td class="si_invoice_notes" colspan="5">
 				<h5>{{ $LANG['description'] ?? '' }}</h5>
-				<textarea input type="text" class="editor" name="description" rows="10" cols="100" wrap="nowrap"></textarea>
+				<textarea class="form-control editor" name="description" rows="10" cols="100" wrap="nowrap"></textarea>
 			</td>
 		</tr>
 	</table>
@@ -40,13 +40,13 @@
 		</tr>
 
 		<tr class="si_invoice_total">
-			<td><input type="text" class="validate[required]" name="unit_price" size="15" /></td>
+			<td><input type="text" name="unit_price" size="15" class="form-control validate[required]" /></td>
 		@if($taxes == null )
 			<td><p><em>{{ $LANG['no_taxes'] ?? '' }}</em></p></td>
 		@else
 			@for($tax = 0; $tax < ($defaults->tax_per_line_item ?? 0); $tax++)
-			<td>				                				                
-				<select id="tax_id[0][{{ $tax }}]" name="tax_id[0][{{ $tax }}]">
+			<td>
+				<select id="tax_id[0][{{ $tax }}]" name="tax_id[0][{{ $tax }}]" class="form-select">
 					<option value=""></option>
 				@foreach(($taxes ?? []) as $tax)
 					<option @if($tax['tax_id'] == $defaults->tax AND $tax == 0) selected @endif   value="{{ $tax['tax_id'] ?? '' }}">{{ $tax['tax_description'] ?? '' }}</option>
@@ -60,12 +60,12 @@
 		@if($preferences == null )
 				<p><em>{{ $LANG['no_preferences'] ?? '' }}</em></p>
 		@else
-				<select name="preference_id">
+				<select name="preference_id" class="form-select">
 			@foreach(($preferences ?? []) as $preference)
 					<option @if($tax['tax_id'] == $defaults->preference) selected @endif value="{{ $preference['pref_id'] ?? '' }}">{{ $preference['pref_description'] ?? '' }}</option>
 			@endforeach
 				</select>
-		@endif		
+		@endif
 			</td>		
 		</tr>
 

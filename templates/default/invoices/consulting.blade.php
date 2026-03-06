@@ -29,30 +29,26 @@
         (($dynamic_line_items ?? []) as $line)
 
 			<tr>
-				<td><input type="text" id="quantity{{ $line }}" name="quantity{{ $line }}" size="5" /></td>
-				</td><td><input type="text" name="description{{ $line }}" size="50" />
-				                
+				<td><input type="text" id="quantity{{ $line }}" name="quantity{{ $line }}" size="5" class="form-control form-control-sm" /></td>
+				<td><input type="text" name="description{{ $line }}" size="50" class="form-control form-control-sm" />
 			@if($products == null )
 				<p><em>{{ $LANG['no_products'] ?? '' }}</em></p>
 			@else
-				<select name="products{{ $line }}" class="product_change" rel="{{ $line }}">
-				
+				<select name="products{{ $line }}" class="form-select form-select-sm product_change" rel="{{ $line }}">
 					<option value=""></option>
 				@foreach(($products ?? []) as $product)
 					<option @if($product['id'] == $defaults->product) selected @endif value="{{ $product['id'] ?? '' }}">{{ $product['description'] ?? '' }}</option>
 				@endforeach
 				</select>
 			@endif
-				                				                
                 </td>
                 <td>
-					<input id="unit_price{{ $line }}" name="unit_price{{ $line }}" size="7" value="" />
-				</td>	
+					<input id="unit_price{{ $line }}" name="unit_price{{ $line }}" size="7" value="" class="form-control form-control-sm" />
+				</td>
              </tr>
-                
                 <tr class="text{{ $line }} hide">
-      				<td colspan="3"><textarea input type="text" class="editor" name='description{{ $line }}' rows="3" cols="80" wrap="nowrap"></textarea></td>
-</tr>
+      				<td colspan="3"><textarea class="form-control form-control-sm editor" name="description{{ $line }}" rows="3" cols="80" wrap="nowrap"></textarea></td>
+				</tr>
 
         
 	{{ $show_custom_field['1'] }}
@@ -68,37 +64,33 @@
 </tr>
 
 <tr>
-        <td colspan="3"><textarea input type="text" class="editor" height="60px" name="note" rows="5" cols="70" wrap="nowrap"></textarea></td>
+        <td colspan="3"><textarea class="form-control editor" name="note" rows="5" cols="70" wrap="nowrap"></textarea></td>
 </tr>
 
-<tr><td class="details_screen">{{ $LANG['tax'] ?? '' }}</td><td><input type="text" name="tax" size="15" />
-
+<tr><td class="details_screen">{{ $LANG['tax'] ?? '' }}</td><td>
 @if($taxes == null )
 	<p><em>{{ $LANG['no_taxes'] ?? '' }}</em></p>
 @else
-	<select name="tax_id">
+	<select name="tax_id" class="form-select">
 	@foreach(($taxes ?? []) as $tax)
-		<option @if($product['id'] == $defaults->tax) selected @endif value="{{ $tax['tax_id'] ?? '' }}">{{ $tax['tax_description'] ?? '' }}</option>
+		<option @if($tax['tax_id'] == $defaults->tax) selected @endif value="{{ $tax['tax_id'] ?? '' }}">{{ $tax['tax_description'] ?? '' }}</option>
 	@endforeach
 	</select>
 @endif
-
 </td>
 </tr>
 
 <tr>
-<td class="details_screen">{{ $LANG['inv_pref'] ?? '' }}</td><td><input type="text" name="preference_id" />
-
+<td class="details_screen">{{ $LANG['inv_pref'] ?? '' }}</td><td>
 @if($preferences == null )
 	<p><em>{{ $LANG['no_preferences'] ?? '' }}</em></p>
 @else
-	<select name="preference_id">
+	<select name="preference_id" class="form-select">
 	@foreach(($preferences ?? []) as $preference)
-		<option @if($product['id'] == $defaults->preference) selected @endif value="{{ $preference['pref_id'] ?? '' }}">{{ $preference['pref_description'] ?? '' }}</option>
+		<option @if($preference['pref_id'] == $defaults->preference) selected @endif value="{{ $preference['pref_id'] ?? '' }}">{{ $preference['pref_description'] ?? '' }}</option>
 	@endforeach
 	</select>
 @endif
-
 </td>
 </tr>	
 <tr>

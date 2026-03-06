@@ -125,17 +125,16 @@
 					@endif
 				</td>
 				<td>
-					<input class="si_right" 
-						type="text" 
-						@if($line == "0") 
-							class="validate[required]" 
-						@endif 
-						name="quantity{{ $line }}" 
-						id="quantity{{ $line }}" size="5" 
+					<input
+						type="text"
+						name="quantity{{ $line }}"
+						id="quantity{{ $line }}"
+						size="5"
+						class="form-control form-control-sm text-end si_right @if($line == '0')validate[required]@endif"
 						@if(get('quantity' . $line))
 							value="{{ get('quantity' . $line) }}"
 						@endif
-						/>
+					/>
 				</td>
 				<td>
 								
@@ -146,7 +145,7 @@
 					id="products{{ $line }}"
 					name="products{{ $line }}"
 					rel="{{ $line }}"
-					class="@if($line == "0")validate[required]@endif product_change"						
+					class="form-select form-select-sm @if($line == '0')validate[required]@endif product_change"
 				>
 					<option value=""></option>
 				@foreach(($products ?? []) as $product)
@@ -169,6 +168,7 @@
 					<select 
 						id="tax_id[{{ $line }}][{{ $taxIdx }}]"
 						name="tax_id[{{ $line }}][{{ $taxIdx }}]"
+						class="form-select form-select-sm"
 					>
 					<option value=""></option>
 					@foreach(($taxes ?? []) as $taxOption)
@@ -188,16 +188,16 @@
 				@endfor
 
 				<td>
-					<input class="si_right" 
-						id="unit_price{{ $line }}" 
-						name="unit_price{{ $line }}" 
+					<input
+						id="unit_price{{ $line }}"
+						name="unit_price{{ $line }}"
 						size="7"
+						class="form-control form-control-sm text-end si_right @if($line == '0')validate[required]@endif"
 						@if(get('unit_price' . $line))
 							value="{{ get('unit_price' . $line) }}"
 						@else
 						   value=""
 						@endif
-						@if($line == "0") class="validate[required]" @endif
 					/>
 				</td>	
 
@@ -206,7 +206,7 @@
 			<tr class="details si_hide">
 				<td></td>
 				<td colspan="4">
-					<textarea input type="text" class="detail" name="description{{ $line }}" id="description{{ $line }}" rows="3" cols=3 WRAP=nowrap></textarea>
+					<textarea class="form-control form-control-sm detail" name="description{{ $line }}" id="description{{ $line }}" rows="3" cols="3" wrap="nowrap"></textarea>
 				</td>
 			</tr>
 		</tbody>
@@ -232,7 +232,7 @@
 		<tr>
 			<td class='si_invoice_notes' colspan="2">
 				<H5>{{ $LANG['notes'] ?? '' }}</H5>
-				<textarea input type="text" class="editor" name="note" rows="5" cols="50" wrap="nowrap">
+				<textarea class="form-control editor" name="note" rows="5" cols="50" wrap="nowrap">
 						{{ get('note') }}
 				</textarea>
 			</td>
@@ -246,7 +246,7 @@
 			@if($preferences == null )
 				<em>{{ $LANG['no_preferences'] ?? '' }}</em>
 			@else
-				<select name="preference_id">
+				<select name="preference_id" class="form-select">
 				@foreach(($preferences ?? []) as $preference)
 					<option @if($preference['pref_id'] == $defaults->preference) selected @endif value="{{ $preference['pref_id'] ?? '' }}">{{ $preference['pref_description'] ?? '' }}</option>
 				@endforeach
