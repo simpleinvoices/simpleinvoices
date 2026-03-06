@@ -12,14 +12,16 @@
 
 	<input type="hidden" name="action" value="insert" />
 
-    <div class="si_filters si_buttons_invoice_header">
-    	<span class="si_filters_links">
-	    	<a href="index.php?module=invoices&amp;view=itemised" class="first@if($view=='itemised') selected@endif"><img class="action" src="./images/common/edit.png"/>{{ $LANG['itemised_style'] ?? '' }}</a>
-	    	<a href="index.php?module=invoices&amp;view=total" class="@if($view=='total')selected@endif"><img class="action" src="./images/common/page_white_edit.png"/>{{ $LANG['total_style'] ?? '' }}</a>
-		</span>
-    	<span class="si_filters_title">
-			<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_invoice_types" title="{{ $LANG['invoice_type'] ?? '' }}"><img class="" src="./images/common/help-small.png" alt="" /></a>
-		</span>
+	<div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
+		<ul class="nav nav-tabs" role="tablist">
+			<li class="nav-item" role="presentation">
+				<a class="nav-link @if(($view ?? '') == 'itemised') active @endif" href="index.php?module=invoices&amp;view=itemised" role="tab"><i class="ti ti-list-details me-1"></i>{{ $LANG['itemised_style'] ?? '' }}</a>
+			</li>
+			<li class="nav-item" role="presentation">
+				<a class="nav-link @if(($view ?? '') == 'total') active @endif" href="index.php?module=invoices&amp;view=total" role="tab"><i class="ti ti-receipt me-1"></i>{{ $LANG['total_style'] ?? '' }}</a>
+			</li>
+		</ul>
+		<a class="cluetip nav-link nav-link-icon" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_invoice_types" title="{{ $LANG['invoice_type'] ?? '' }}"><i class="ti ti-help"></i></a>
 	</div>
 
 
