@@ -23,9 +23,6 @@
 <form name="frmpost" action="index.php?module=invoices&amp;view=email&amp;stage=2&amp;id={{ urlencode(get('id')) }}" method="post">
 
 <div class="card">
-	<div class="card-header">
-		<h3 class="card-title">{{ $LANG['email'] ?? '' }} {{ $invoice['index_name'] ?? '' }}</h3>
-	</div>
 	<div class="card-body">
 		<table class="table table-vcenter">
 			<tr>

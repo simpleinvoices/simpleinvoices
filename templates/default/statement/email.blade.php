@@ -18,9 +18,6 @@
 
 <form name="frmpost" action="index.php?module=statement&amp;view=email&amp;stage=2&amp;biller_id={{ urlencode(get('biller_id')) }}&amp;customer_id={{ urlencode(get('customer_id')) }}&amp;start_date={{ urlencode(get('start_date')) }}&amp;end_date={{ urlencode(get('end_date')) }}&amp;show_only_unpaid={{ urlencode(get('show_only_unpaid')) }}&amp;format=file" method="post">
 <div class="card">
-	<div class="card-header">
-		<h3 class="card-title">{{ $LANG['email_statement_as_pdf'] ?? '' }}</h3>
-	</div>
 	<div class="card-body">
 	<table class="table table-vcenter">
 		<tr>

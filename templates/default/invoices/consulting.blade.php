@@ -12,8 +12,7 @@
 
 <div class="card">
 	<div class="card-header">
-		<h3 class="card-title mb-0">{{ $LANG['inv'] ?? '' }} {{ $LANG['inv_consulting'] ?? '' }}</h3>
-		<div id="gmail_loading" class="gmailLoader" style="display: none;"><i class="ti ti-loader spinner me-1"></i> {{ $LANG['loading'] ?? '' }} ...</div>
+		<div id="gmail_loading" class="gmailLoader ms-auto" style="display: none;"><i class="ti ti-loader spinner me-1"></i> {{ $LANG['loading'] ?? '' }} ...</div>
 	</div>
 	<div class="card-body">
 

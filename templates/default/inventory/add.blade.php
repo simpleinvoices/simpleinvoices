@@ -26,9 +26,6 @@
 
 <form name="frmpost" action="index.php?module=inventory&view=add" method="POST" id="frmpost">
 <div class="card">
-	<div class="card-header">
-		<h3 class="card-title">{{ $LANG['add_inventory'] ?? $LANG['product'] ?? '' }}</h3>
-	</div>
 	<div class="card-body">
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['product'] ?? '' }}</label>

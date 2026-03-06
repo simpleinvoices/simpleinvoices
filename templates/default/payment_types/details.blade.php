@@ -15,7 +15,6 @@
 	
 <div class="card">
 	<div class="card-header">
-		<h3 class="card-title">{{ $LANG['payment_type'] ?? '' }} {{ $LANG['details'] ?? 'Details' }}</h3>
 		<div class="card-actions">
 			<a href="./index.php?module=payment_types&amp;view=details&amp;id={{ $paymentType['pt_id'] }}&amp;action=edit" class="btn btn-primary"><i class="ti ti-edit me-1"></i>{{ $LANG['edit'] ?? '' }}</a>
 			<a href="./index.php?module=payment_types&amp;view=manage" class="btn btn-secondary"><i class="ti ti-x me-1"></i>{{ $LANG['cancel'] ?? '' }}</a>
@@ -42,9 +41,6 @@
 @if(get('action') == "edit")
 
 <div class="card">
-	<div class="card-header">
-		<h3 class="card-title">{{ $LANG['edit'] ?? '' }} {{ $LANG['payment_type'] ?? '' }}</h3>
-	</div>
 	<div class="card-body">
 	<table class="table table-vcenter">
 		<tr>

@@ -245,37 +245,22 @@
                 <div class="col-auto ms-auto d-print-none">
                     <div class="btn-list">
                     @if(($module ?? '') == 'invoices' && ($view ?? '') == 'manage')
-                        <a href="index.php?module=invoices&view=manage" class="btn btn-outline-secondary">
-                            {{ $LANG['manage_invoices'] ?? 'All Invoices' }}
-                        </a>
                         <a href="index.php?module=invoices&view=itemised" class="btn btn-primary">
                             <i class="ti ti-plus me-1"></i>{{ $LANG['new_invoice'] ?? 'New Invoice' }}
                         </a>
                     @elseif(($module ?? '') == 'customers' && ($view ?? '') == 'manage')
-                        <a href="index.php?module=customers&view=manage" class="btn btn-outline-secondary">
-                            {{ $LANG['manage_customers'] ?? 'All Customers' }}
-                        </a>
                         <a href="index.php?module=customers&view=add" class="btn btn-primary">
                             <i class="ti ti-plus me-1"></i>{{ $LANG['customer_add'] ?? 'Add Customer' }}
                         </a>
                     @elseif(($module ?? '') == 'billers' && ($view ?? '') == 'manage')
-                        <a href="index.php?module=billers&view=manage" class="btn btn-outline-secondary">
-                            {{ $LANG['manage_billers'] ?? 'All Billers' }}
-                        </a>
                         <a href="index.php?module=billers&view=add" class="btn btn-primary">
                             <i class="ti ti-plus me-1"></i>{{ $LANG['add_new_biller'] ?? 'Add Biller' }}
                         </a>
                     @elseif(($module ?? '') == 'products' && ($view ?? '') == 'manage')
-                        <a href="index.php?module=products&view=manage" class="btn btn-outline-secondary">
-                            {{ $LANG['manage_products'] ?? 'All Products' }}
-                        </a>
                         <a href="index.php?module=products&view=add" class="btn btn-primary">
                             <i class="ti ti-plus me-1"></i>{{ $LANG['add_new_product'] ?? 'Add Product' }}
                         </a>
                     @elseif(($module ?? '') == 'payments' && ($view ?? '') == 'manage')
-                        <a href="index.php?module=payments&view=manage" class="btn btn-outline-secondary">
-                            {{ $LANG['manage_payments'] ?? 'All Payments' }}
-                        </a>
                         @if(get('id'))
                         <a href="index.php?module=payments&view=process&id={{ urlencode(get('id')) }}&op=pay_selected_invoice" class="btn btn-outline-success">
                             <i class="ti ti-cash me-1"></i>{{ $LANG['payments_filtered_invoice'] ?? 'Pay this invoice' }}
@@ -285,58 +270,34 @@
                             <i class="ti ti-plus me-1"></i>{{ $LANG['process_payment'] ?? 'Process Payment' }}
                         </a>
                     @elseif(($module ?? '') == 'cron' && ($view ?? '') == 'manage')
-                        <a href="index.php?module=cron&view=manage" class="btn btn-outline-secondary">
-                            {{ $LANG['recurrence'] ?? 'Recurrence' }}
-                        </a>
                         <a href="index.php?module=cron&view=add" class="btn btn-primary">
                             <i class="ti ti-plus me-1"></i>{{ $LANG['new_recurrence'] ?? 'New Recurrence' }}
                         </a>
                     @elseif(($module ?? '') == 'inventory' && ($view ?? '') == 'manage')
-                        <a href="index.php?module=inventory&view=manage" class="btn btn-outline-secondary">
-                            {{ $LANG['inventory'] ?? 'Inventory' }}
-                        </a>
                         <a href="index.php?module=inventory&view=add" class="btn btn-primary">
                             <i class="ti ti-plus me-1"></i>{{ $LANG['new_inventory_movement'] ?? 'New Movement' }}
                         </a>
                     @elseif(($module ?? '') == 'product_attribute' && ($view ?? '') == 'manage')
-                        <a href="index.php?module=product_attribute&view=manage" class="btn btn-outline-secondary">
-                            {{ $LANG['product_attributes'] ?? 'Product Attributes' }}
-                        </a>
                         <a href="index.php?module=product_attribute&view=add" class="btn btn-primary">
                             <i class="ti ti-plus me-1"></i>{{ $LANG['add_product_attribute'] ?? 'Add Attribute' }}
                         </a>
                     @elseif(($module ?? '') == 'product_value' && ($view ?? '') == 'manage')
-                        <a href="index.php?module=product_value&view=manage" class="btn btn-outline-secondary">
-                            {{ $LANG['product_values'] ?? 'Product Values' }}
-                        </a>
                         <a href="index.php?module=product_value&view=add" class="btn btn-primary">
                             <i class="ti ti-plus me-1"></i>{{ $LANG['add_product_value'] ?? 'Add Value' }}
                         </a>
                     @elseif(($module ?? '') == 'tax_rates' && ($view ?? '') == 'manage')
-                        <a href="index.php?module=tax_rates&view=manage" class="btn btn-outline-secondary">
-                            {{ $LANG['tax_rates'] ?? 'Tax Rates' }}
-                        </a>
                         <a href="index.php?module=tax_rates&view=add" class="btn btn-primary">
                             <i class="ti ti-plus me-1"></i>{{ $LANG['add_new_tax_rate'] ?? 'Add Tax Rate' }}
                         </a>
                     @elseif(($module ?? '') == 'payment_types' && ($view ?? '') == 'manage')
-                        <a href="index.php?module=payment_types&view=manage" class="btn btn-outline-secondary">
-                            {{ $LANG['payment_types'] ?? 'Payment Types' }}
-                        </a>
                         <a href="index.php?module=payment_types&view=add" class="btn btn-primary">
                             <i class="ti ti-plus me-1"></i>{{ $LANG['add_new_payment_type'] ?? 'Add Payment Type' }}
                         </a>
                     @elseif(($module ?? '') == 'preferences' && ($view ?? '') == 'manage')
-                        <a href="index.php?module=preferences&view=manage" class="btn btn-outline-secondary">
-                            {{ $LANG['invoice_preferences'] ?? 'Invoice Preferences' }}
-                        </a>
                         <a href="index.php?module=preferences&view=add" class="btn btn-primary">
                             <i class="ti ti-plus me-1"></i>{{ $LANG['add_new_preference'] ?? 'Add Preference' }}
                         </a>
                     @elseif(($module ?? '') == 'user' && ($view ?? '') == 'manage')
-                        <a href="index.php?module=user&view=manage" class="btn btn-outline-secondary">
-                            {{ $LANG['manage_accounts'] ?? 'Manage Users' }}
-                        </a>
                         <a href="index.php?module=user&view=add" class="btn btn-primary">
                             <i class="ti ti-plus me-1"></i>{{ $LANG['user_add'] ?? 'Add User' }}
                         </a>

@@ -29,9 +29,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 <div class="card">
-	<div class="card-header">
-		<h3 class="card-title">{{ $LANG['monthly_sales_per_year'] ?? '' }}</h3>
-	</div>
 	<div class="card-body">
 		<h4>{{ $LANG['sales'] ?? '' }}</h4>
 @php $this_data = $data['sales'] ?? []; @endphp

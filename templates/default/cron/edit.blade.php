@@ -23,9 +23,6 @@
 <form name="frmpost" action="index.php?module=cron&view=edit&id={{ urlencode($cron['id'] ?? '') }}" method="POST" id="frmpost">
 
 <div class="card">
-	<div class="card-header">
-		<h3 class="card-title">{{ $LANG['edit_cron'] ?? $LANG['invoice'] ?? '' }}</h3>
-	</div>
 	<div class="card-body">
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['invoice'] ?? '' }}</label>

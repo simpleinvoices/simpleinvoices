@@ -223,16 +223,11 @@ Ext.onReady(function(){
 
 <div class="card">
 	<div class="card-header">
-		<div class="row align-items-center">
-			<div class="col">
-				<h3 class="card-title mb-0">{{ $LANG['manage_invoices'] ?? '' }}</h3>
-			</div>
-			<div class="col-auto btn-list">
-				{{ $LANG['add_new_invoice'] ?? '' }}:
-				<a href="index.php?module=invoices&amp;view=total" class="btn btn-outline-primary btn-sm">{{ $LANG['total_style'] ?? '' }}</a>
-				<a href="index.php?module=invoices&amp;view=itemised" class="btn btn-outline-primary btn-sm">{{ $LANG['itemised_style'] ?? '' }}</a>
-				<a href="index.php?module=invoices&amp;view=consulting" class="btn btn-outline-primary btn-sm">{{ $LANG['consulting_style'] ?? '' }}</a>
-			</div>
+		<div class="card-actions btn-list">
+			{{ $LANG['add_new_invoice'] ?? '' }}:
+			<a href="index.php?module=invoices&amp;view=total" class="btn btn-outline-primary btn-sm">{{ $LANG['total_style'] ?? '' }}</a>
+			<a href="index.php?module=invoices&amp;view=itemised" class="btn btn-outline-primary btn-sm">{{ $LANG['itemised_style'] ?? '' }}</a>
+			<a href="index.php?module=invoices&amp;view=consulting" class="btn btn-outline-primary btn-sm">{{ $LANG['consulting_style'] ?? '' }}</a>
 		</div>
 	</div>
 	<div class="card-body">

@@ -29,9 +29,6 @@
 
 <form name="frmFpost" action="index.php?module=payments&view=eway" method="POST" id="frmpost">
 <div class="card">
-	<div class="card-header">
-		<h3 class="card-title">{{ $LANG['process_payment_via_eway'] ?? 'Eway Payment' }}</h3>
-	</div>
 	<div class="card-body">
 	<table class="table table-vcenter">
 <tr>

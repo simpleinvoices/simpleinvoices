@@ -11,7 +11,6 @@
 
 <div class="card">
 	<div class="card-header">
-		<h3 class="card-title">{{ $LANG['user'] ?? 'User' }} {{ $LANG['details'] ?? 'Details' }}</h3>
 		<div class="card-actions">
 			<a href="./index.php?module=user&view=details&id={{ urlencode($user['id'] ?? '') }}&action=edit" class="btn btn-primary"><i class="ti ti-edit me-1"></i>{{ $LANG['edit'] ?? '' }}</a>
 			<a href="./index.php?module=user&view=manage" class="btn btn-secondary"><i class="ti ti-x me-1"></i>{{ $LANG['cancel'] ?? '' }}</a>
@@ -48,9 +47,6 @@
 
 @if(get('action')== 'edit' )
 <div class="card">
-	<div class="card-header">
-		<h3 class="card-title">{{ $LANG['edit'] ?? '' }} {{ $LANG['user'] ?? 'User' }}</h3>
-	</div>
 	<div class="card-body">
 	<table class="table table-vcenter">
 		<tr>

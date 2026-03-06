@@ -1,9 +1,6 @@
 <form name="frmpost" action="index.php?module=payments&amp;view=save" method="post" onsubmit="return frmpost_Validator(this)">
 
 <div class="card">
-	<div class="card-header">
-		<h3 class="card-title">{{ $LANG['process_payment'] ?? '' }}</h3>
-	</div>
 	<div class="card-body">
 	<table class="table table-vcenter">	
 	

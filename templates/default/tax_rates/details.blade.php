@@ -4,7 +4,6 @@
 
 <div class="card">
 	<div class="card-header">
-		<h3 class="card-title">{{ $LANG['tax_rate'] ?? '' }} {{ $LANG['details'] ?? 'Details' }}</h3>
 		<div class="card-actions">
 			<a href="./index.php?module=tax_rates&amp;view=details&amp;id={{ urlencode($tax['tax_id'] ?? '') }}&amp;action=edit" class="btn btn-primary"><i class="ti ti-edit me-1"></i>{{ $LANG['edit'] ?? '' }}</a>
 		</div>
@@ -45,9 +44,6 @@
 @if(get('action') === 'edit')
 
 <div class="card">
-	<div class="card-header">
-		<h3 class="card-title">{{ $LANG['edit'] ?? '' }} {{ $LANG['tax_rate'] ?? '' }}</h3>
-	</div>
 	<div class="card-body">
 	<table class="table table-vcenter">
 		<tr>

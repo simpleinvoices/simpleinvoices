@@ -20,9 +20,6 @@
 	<br />
     	    @if($invoicePaid == 0)
 				<div class="card">
-					<div class="card-header">
-						<h3 class="card-title">{{ $LANG['delete'] ?? '' }} {{ $preference['pref_inv_wording'] ?? '' }} {{ $invoice['index_id'] ?? '' }}</h3>
-					</div>
 					<div class="card-body">
 						<p>{{ $LANG['confirm_delete'] ?? '' }} {{ $preference['pref_inv_wording'] ?? '' }} {{ $invoice['index_id'] ?? '' }}</p>
 						<form name="frmpost" action="index.php?module=invoices&amp;view=delete&amp;stage=2&amp;id={{ urlencode(get('id')) }}" method="post">

@@ -13,9 +13,6 @@
 */ --}}
 
 <div class="card" id="si_page_updates">
-	<div class="card-header">
-		<h2 class="card-title">Database Upgrade Manager</h2>
-	</div>
 	<div class="card-body">
 		<div class="alert alert-info mb-3">{{ $page['message'] }}</div>
 

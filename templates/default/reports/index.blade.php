@@ -1,7 +1,4 @@
 <div class="card">
-	<div class="card-header">
-		<h3 class="card-title">{{ $LANG['reports'] ?? 'Reports' }}</h3>
-	</div>
 	<div class="card-body">
 		<h4 class="mb-3">{{ $LANG['statements'] ?? '' }}<a name="statement" href=""></a></h4>
 		<ul class="list-group list-group-flush mb-4">

@@ -20,9 +20,6 @@
 <form name="frmpost" action="index.php?module=tax_rates&amp;view=add" method="POST">
 
 <div class="card">
-	<div class="card-header">
-		<h3 class="card-title">{{ $LANG['add_tax_rate'] ?? $LANG['description'] ?? '' }}</h3>
-	</div>
 	<div class="card-body">
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['description'] ?? '' }}</label>

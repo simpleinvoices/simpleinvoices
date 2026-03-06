@@ -1,18 +1,13 @@
 {{-- Payment details – Tabler invoice-style layout (see https://preview.tabler.io/invoice.html) --}}
 <div class="card">
 	<div class="card-header">
-		<div class="row align-items-center">
-			<div class="col">
-				<h3 class="card-title mb-0">{{ $LANG['payment'] ?? 'Payment' }} {{ $LANG['details'] ?? 'Details' }}</h3>
-			</div>
-			<div class="col-auto">
-				<a href="index.php?module=payments&amp;view=print&amp;id={{ urlencode($payment['id'] ?? '') }}" target="_blank" class="btn btn-outline-primary">
-					<i class="ti ti-printer me-1"></i>{{ $LANG['print_preview'] ?? 'Print' }}
-				</a>
-				<a href="./index.php?module=payments&view=manage" class="btn btn-secondary">
-					<i class="ti ti-arrow-left me-1"></i>{{ $LANG['cancel'] ?? 'Cancel' }}
-				</a>
-			</div>
+		<div class="card-actions">
+			<a href="index.php?module=payments&amp;view=print&amp;id={{ urlencode($payment['id'] ?? '') }}" target="_blank" class="btn btn-outline-primary">
+				<i class="ti ti-printer me-1"></i>{{ $LANG['print_preview'] ?? 'Print' }}
+			</a>
+			<a href="./index.php?module=payments&view=manage" class="btn btn-secondary">
+				<i class="ti ti-arrow-left me-1"></i>{{ $LANG['cancel'] ?? 'Cancel' }}
+			</a>
 		</div>
 	</div>
 	<div class="card-body">

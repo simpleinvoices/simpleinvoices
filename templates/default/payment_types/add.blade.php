@@ -17,9 +17,6 @@
 <form name="frmpost" action="index.php?module=payment_types&amp;view=save" method="post">
 
 <div class="card">
-	<div class="card-header">
-		<h3 class="card-title">{{ $LANG['add_payment_type'] ?? 'Payment type description' }}</h3>
-	</div>
 	<div class="card-body">
 		<div class="mb-3">
 			<label class="form-label">Payment type description

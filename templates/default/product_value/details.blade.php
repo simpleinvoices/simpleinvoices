@@ -6,7 +6,6 @@
 @if(get('action')== 'view' )
 <div class="card">
 	<div class="card-header">
-		<h3 class="card-title">{{ $LANG['product_value'] ?? '' }}</h3>
 		<div class="card-actions">
 			<a href="index.php?module=product_value&amp;view=details&amp;id={{ $product_value['id'] }}&amp;action=edit" class="btn btn-primary"><i class="ti ti-edit me-1"></i>{{ $LANG['edit'] ?? '' }}</a>
 		</div>
@@ -35,9 +34,6 @@
 @if(get('action')== 'edit' )
 
 <div class="card">
-	<div class="card-header">
-		<h3 class="card-title">{{ $LANG['product_value'] ?? '' }}</h3>
-	</div>
 	<div class="card-body">
 	<table class="table table-vcenter">
 		<tr>

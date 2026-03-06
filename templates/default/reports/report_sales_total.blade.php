@@ -1,7 +1,4 @@
 <div class="card">
-	<div class="card-header">
-		<h3 class="card-title">{{ $LANG['total_sales'] ?? '' }}</h3>
-	</div>
 	<div class="card-body">
 		<div class="table-responsive">
 <table class="table table-vcenter table-striped si_report_table">

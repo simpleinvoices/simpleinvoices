@@ -48,9 +48,6 @@
 @if(get('action') == "edit" )
 
 <div class="card">
-	<div class="card-header">
-		<h3 class="card-title">{{ $LANG['edit'] ?? '' }} {{ $LANG['custom_field'] ?? '' }}</h3>
-	</div>
 	<div class="card-body">
 	<table class="table table-vcenter">
         <tr>

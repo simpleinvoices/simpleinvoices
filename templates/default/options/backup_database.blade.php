@@ -14,9 +14,6 @@
 */ --}}
 
 <div class="card">
-	<div class="card-header">
-		<h3 class="card-title">{{ $LANG['backup_database'] ?? 'Backup Database' }}</h3>
-	</div>
 	<div class="card-body">
 		{{ $display_block }}
 	</div>

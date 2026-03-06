@@ -24,9 +24,6 @@
 <form name="frmpost" action="index.php?module=cron&view=add" method="POST" id="frmpost">
 
 <div class="card" id="si_form_cron">
-	<div class="card-header">
-		<h3 class="card-title">{{ $LANG['add_cron'] ?? $LANG['invoice'] ?? '' }}</h3>
-	</div>
 	<div class="card-body">
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['invoice'] ?? '' }}</label>

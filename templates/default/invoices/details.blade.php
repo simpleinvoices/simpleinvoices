@@ -18,9 +18,6 @@
 <form name="frmpost" action="index.php?module=invoices&amp;view=save" method="post">
 
 <div class="card">
-	<div class="card-header">
-		<h3 class="card-title">{{ $LANG['invoice'] ?? '' }} {{ $LANG['details'] ?? 'Details' }}</h3>
-	</div>
 	<div class="card-body">
 <div class="si_invoice_form">
 	<table class="table table-vcenter si_invoice_top">

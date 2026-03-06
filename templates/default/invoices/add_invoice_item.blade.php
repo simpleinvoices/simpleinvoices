@@ -14,9 +14,6 @@
 	<div class="alert alert-success">{{ $LANG['save_invoice_items_success'] ?? '' }};</div>
 @else
 <div class="card">
-	<div class="card-header">
-		<h3 class="card-title">{{ $LANG['add_invoice_item'] ?? '' }}</h3>
-	</div>
 	<div id="gmail_loading" class="gmailLoader position-absolute top-0 end-0 m-3" style="display: none;">
 		<i class="ti ti-loader spinner me-1"></i> {{ $LANG['loading'] ?? '' }} ...
 	</div>

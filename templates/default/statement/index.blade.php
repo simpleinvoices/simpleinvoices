@@ -1,7 +1,4 @@
 <div class="card">
-	<div class="card-header">
-		<h3 class="card-title">{{ $LANG['statement_of_invoices'] ?? 'Statement of Invoices' }}</h3>
-	</div>
 	<div class="card-body">
 @if($menu != false)
 

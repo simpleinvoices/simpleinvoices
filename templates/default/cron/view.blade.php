@@ -2,7 +2,6 @@
 
 <div class="card">
 	<div class="card-header">
-		<h3 class="card-title">{{ $LANG['recurrence'] ?? 'Cron' }} {{ $LANG['details'] ?? 'Details' }}</h3>
 		<div class="card-actions">
 			<a href="./index.php?module=cron&amp;view=edit&amp;id={{ urlencode($cron['id'] ?? '') }}" class="btn btn-primary"><i class="ti ti-edit me-1"></i>{{ $LANG['edit'] ?? '' }}</a>
 			<a href="./index.php?module=cron&view=manage" class="btn btn-secondary"><i class="ti ti-x me-1"></i>{{ $LANG['cancel'] ?? '' }}</a>

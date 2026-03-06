@@ -1,7 +1,4 @@
 <div class="card">
-	<div class="card-header">
-		<h3 class="card-title">{{ $LANG['profit_per_invoice'] ?? 'Profit per Invoice' }}</h3>
-	</div>
 	<div class="card-body">
 <form name="frmpost" action="index.php?module=reports&amp;view=report_invoice_profit" method="post">
 <table class="table table-vcenter" align="center">

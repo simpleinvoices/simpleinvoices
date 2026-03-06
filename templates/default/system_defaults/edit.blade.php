@@ -1,7 +1,4 @@
 <div class="card">
-	<div class="card-header">
-		<h3 class="card-title">{{ $LANG['edit'] ?? '' }} {{ $description ?? '' }}</h3>
-	</div>
 	<form name="frmpost" action="index.php?module=system_defaults&amp;view=save" method="post" onsubmit="return frmpost_Validator(this)">
 		<div class="card-body">
 			<div class="mb-3">

@@ -27,9 +27,6 @@
 <form name="frmpost" action="index.php?module=inventory&view=edit&id={{ urlencode($inventory['id'] ?? '') }}" method="POST" id="frmpost">
 
 <div class="card">
-	<div class="card-header">
-		<h3 class="card-title">{{ $LANG['edit'] ?? '' }} {{ $LANG['inventory'] ?? $LANG['product'] ?? '' }}</h3>
-	</div>
 	<div class="card-body">
 		<table class="table table-vcenter">
 			<tr>
