@@ -15,8 +15,9 @@
 				{display: @json($LANG['id'] ?? 'ID'), name : 'id', width : 10 * percentage_width, sortable : true, align: 'left'},
 				{display: @json($LANG['attribute'] ?? 'Attribute'), name : 'name', width : 30 * percentage_width, sortable : true, align: 'left'},
 				{display: @json($LANG['value'] ?? 'Value'), name : 'value', width : 30 * percentage_width, sortable : true, align: 'left'},
-				{display: @json($LANG['enabled'] ?? 'Enabled'), name : 'enabled', width : 25 * percentage_width, sortable : true, align: 'center'}
+				{display: @json($LANG['status'] ?? 'Status'), name : 'enabled', width : 25 * percentage_width, sortable : true, align: 'center'}
 			],
+			statusLabels: { enabled: @json($LANG['enabled'] ?? 'Enabled'), disabled: @json($LANG['disabled'] ?? 'Disabled') },
 			searchitems : [
 				{display: @json($LANG['attribute'] ?? 'Attribute'), name : 'name'},
 				{display: @json($LANG['value'] ?? 'Value'), name : 'value', isdefault: true}

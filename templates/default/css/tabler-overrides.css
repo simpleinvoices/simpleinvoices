@@ -251,6 +251,12 @@ html, body {
 	color: #fff;
 }
 
+/* Data grids/tables: all rows white (no alternating stripe) */
+.table tbody tr,
+.table-striped tbody tr {
+	background-color: #fff !important;
+}
+
 /* Tabler grid container (replaces flexigrid) */
 #manageGrid.si-tabler-grid-container {
 	width: 100%;

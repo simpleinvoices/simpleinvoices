@@ -17,8 +17,9 @@
 				{display: @json($LANG['total'] ?? 'Total'), name : 'customer_total', width : 12 * percentage_width, sortable : true, align: 'right'},
 				{display: @json($LANG['paid'] ?? 'Paid'), name : 'paid', width : 12 * percentage_width, sortable : true, align: 'right'},
 				{display: @json($LANG['owing'] ?? 'Owing'), name : 'owing', width : 12 * percentage_width, sortable : true, align: 'right'},
-				{display: @json($LANG['enabled'] ?? 'Enabled'), name : 'enabled', width : 8 * percentage_width, sortable : true, align: 'center'}
+				{display: @json($LANG['status'] ?? 'Status'), name : 'enabled', width : 8 * percentage_width, sortable : true, align: 'center'}
 			],
+			statusLabels: { enabled: @json($LANG['enabled'] ?? 'Enabled'), disabled: @json($LANG['disabled'] ?? 'Disabled') },
 			searchitems : [
 				{display: @json($LANG['id'] ?? 'ID'), name : 'c.id'},
 				{display: @json($LANG['name'] ?? 'Name'), name : 'c.name', isdefault: true}

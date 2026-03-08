@@ -14,8 +14,8 @@
 	</div>
 @else
 	<div class="card">
-		<div class="card-body">
-			<ul class="nav nav-pills mb-3" role="tablist">
+		<div class="card-header d-flex flex-wrap align-items-center gap-2">
+			<ul class="nav nav-pills card-header-pills mb-0" role="tablist">
 				<li class="nav-item">
 					<a href="index.php?module=invoices&amp;view=manage" class="nav-link @if((get('having')) == '') active @endif">{{ $LANG['all'] ?? 'All' }}</a>
 				</li>
@@ -32,8 +32,9 @@
 					<a href="index.php?module=invoices&amp;view=manage&amp;having=real" class="nav-link @if((get('having')) == 'real') active @endif">{{ $LANG['real'] ?? 'Real' }}</a>
 				</li>
 			</ul>
-			<div id="manageGrid"></div>
+			<div id="manageGridToolbar" class="d-flex flex-wrap gap-2 align-items-center ms-auto"></div>
 		</div>
+		<div id="manageGrid"></div>
 	</div>
 	@include('templates.default.invoices.manage_js')
 

@@ -32,9 +32,6 @@
 				<a class="nav-link" href="#bill-view-invoice" data-bs-toggle="tab" role="tab">{{ $LANG['invoice'] ?? 'Invoice' }}</a>
 			</li>
 		</ul>
-		<div class="card-actions">
-			<a href="./index.php?module=billers&amp;view=details&amp;action=edit&amp;id={{ $biller['id'] }}" class="btn btn-primary"><i class="ti ti-edit me-1"></i>{{ $LANG['edit'] ?? '' }}</a>
-		</div>
 	</div>
 	<div class="card-body">
 		<div class="tab-content">
@@ -94,6 +91,12 @@
 					<tr><th>{{ $LANG['notes'] ?? '' }}</th><td>{{ $biller['notes'] }}</td></tr>
 				</table>
 			</div>
+		</div>
+	</div>
+	<div class="card-footer">
+		<div class="d-flex">
+			<a href="./index.php?module=billers&amp;view=manage" class="btn btn-link">{{ $LANG['cancel'] ?? '' }}</a>
+			<a href="./index.php?module=billers&amp;view=details&amp;action=edit&amp;id={{ $biller['id'] ?? '' }}" class="btn btn-primary ms-auto"><i class="ti ti-edit me-1"></i>{{ $LANG['edit'] ?? 'Edit' }}</a>
 		</div>
 	</div>
 </div>
@@ -255,15 +258,11 @@
 			</div>
 		</div>
 	</div>
-	<div class="card-footer text-end">
-		<button type="submit" class="btn btn-primary" name="save_biller" value="{{ $LANG['save_biller'] ?? '' }}">
-			<i class="ti ti-check me-1"></i>
-			{{ $LANG['save'] ?? '' }}
-		</button>
-		<a href="./index.php?module=billers&amp;view=details&amp;id={{ $biller['id'] ?? '' }}&amp;action=view" class="btn btn-outline-secondary">
-			<i class="ti ti-x me-1"></i>
-			{{ $LANG['cancel'] ?? '' }}
-		</a>
+	<div class="card-footer">
+		<div class="d-flex">
+			<a href="./index.php?module=billers&amp;view=manage" class="btn btn-link">{{ $LANG['cancel'] ?? '' }}</a>
+			<button type="submit" class="btn btn-primary ms-auto" name="save_biller" value="{{ $LANG['save_biller'] ?? '' }}"><i class="ti ti-check me-1"></i>{{ $LANG['save'] ?? '' }}</button>
+		</div>
 	</div>
 </div>
 

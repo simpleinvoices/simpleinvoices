@@ -10,12 +10,6 @@
 @if(get('action')== 'view' )
 
 <div class="card">
-	<div class="card-header">
-		<div class="card-actions">
-			<a href="./index.php?module=user&view=details&id={{ urlencode($user['id'] ?? '') }}&action=edit" class="btn btn-primary"><i class="ti ti-edit me-1"></i>{{ $LANG['edit'] ?? '' }}</a>
-			<a href="./index.php?module=user&view=manage" class="btn btn-secondary"><i class="ti ti-x me-1"></i>{{ $LANG['cancel'] ?? '' }}</a>
-		</div>
-	</div>
 	<div class="card-body">
 	<table class="table table-vcenter">
 		<tr>
@@ -39,6 +33,12 @@
 			<td>{{ $user['user_id'] ?? '' }}</td>
 		</tr>
 	</table>
+	</div>
+	<div class="card-footer">
+		<div class="d-flex">
+			<a href="./index.php?module=user&amp;view=manage" class="btn btn-link">{{ $LANG['cancel'] ?? '' }}</a>
+			<a href="./index.php?module=user&amp;view=details&amp;id={{ urlencode($user['id'] ?? '') }}&amp;action=edit" class="btn btn-primary ms-auto"><i class="ti ti-edit me-1"></i>{{ $LANG['edit'] ?? 'Edit' }}</a>
+		</div>
 	</div>
 </div>
 @endif
@@ -107,9 +107,11 @@
 		</tr>
 	</table>
 
-	<div class="card-footer text-end">
-			<button type="submit" class="btn btn-primary" name="save_user"><i class="ti ti-check me-1"></i>{{ $LANG['save'] ?? '' }}</button>
-			<a href="./index.php?module=user&view=manage" class="btn btn-secondary"><i class="ti ti-x me-1"></i>{{ $LANG['cancel'] ?? '' }}</a>
+	<div class="card-footer">
+		<div class="d-flex">
+			<a href="./index.php?module=user&view=manage" class="btn btn-link">{{ $LANG['cancel'] ?? '' }}</a>
+			<button type="submit" class="btn btn-primary ms-auto" name="save_user"><i class="ti ti-check me-1"></i>{{ $LANG['save'] ?? '' }}</button>
+		</div>
 	</div>
 	</div>
 </div>

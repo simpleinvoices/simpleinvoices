@@ -58,11 +58,13 @@
 			@endif
 		</table>
 	</div>
-		<div class="card-footer text-end">
-			<button type="submit" class="btn btn-primary" name="submit" value="{{ $LANG['add_item'] ?? '' }}"><i class="ti ti-plus me-1"></i>{{ $LANG['add_item'] ?? '' }}</button>
-			<input type="hidden" name="id" value="{{ get('id') }}" />
-			<input type="hidden" name="type" value="{{ get('type') }}" />
-			<input type="hidden" name="tax_id" value="{{ get('tax_id') }}" />
+		<div class="card-footer">
+			<div class="d-flex">
+				<input type="hidden" name="id" value="{{ get('id') }}" />
+				<input type="hidden" name="type" value="{{ get('type') }}" />
+				<input type="hidden" name="tax_id" value="{{ get('tax_id') }}" />
+				<button type="submit" class="btn btn-primary ms-auto" name="submit" value="{{ $LANG['add_item'] ?? '' }}"><i class="ti ti-plus me-1"></i>{{ $LANG['add_item'] ?? '' }}</button>
+			</div>
 		</div>
 	</form>
 </div>

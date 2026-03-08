@@ -124,15 +124,12 @@
 			</div>
 		</div>
 	</div>
-	<div class="card-footer text-end">
-		<button type="submit" class="btn btn-primary" name="id" value="{{ $LANG['save'] ?? '' }}">
-			<i class="ti ti-check"></i>
-			{{ $LANG['save'] ?? '' }}
-		</button>
-		<a href="./index.php?module=products&view=manage" class="btn btn-outline-secondary">
-			<i class="ti ti-x"></i>
-			{{ $LANG['cancel'] ?? '' }}
-		</a>
+	<div class="card-footer">
+		<div class="d-flex">
+			<a href="./index.php?module=products&view=manage" class="btn btn-link">{{ $LANG['cancel'] ?? '' }}</a>
+			<button type="submit" class="btn btn-primary ms-auto" name="id" value="{{ $LANG['save'] ?? '' }}"><i class="ti ti-check me-1"></i>{{ $LANG['save'] ?? '' }}
+			</button>
+		</div>
 	</div>
 </div>
 

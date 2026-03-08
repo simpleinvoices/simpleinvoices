@@ -15,8 +15,9 @@
 				{display: @json($LANG['id'] ?? 'ID'), name : 'tax_id', width : 10 * percentage_width, sortable : true, align: 'right'},
 				{display: @json($LANG['description'] ?? 'Description'), name : 'tax_description', width : 50 * percentage_width, sortable : true, align: 'left'},
 				{display: @json($LANG['rate'] ?? 'Rate'), name : 'tax_percentage', width : 20 * percentage_width, sortable : true, align: 'right'},
-				{display: @json($LANG['enabled'] ?? 'Enabled'), name : 'enabled', width : 15 * percentage_width, sortable : true, align: 'center'}
+				{display: @json($LANG['status'] ?? 'Status'), name : 'enabled', width : 15 * percentage_width, sortable : true, align: 'center'}
 			],
+			statusLabels: { enabled: @json($LANG['enabled'] ?? 'Enabled'), disabled: @json($LANG['disabled'] ?? 'Disabled') },
 			searchitems : [
 				{display: @json($LANG['id'] ?? 'ID'), name : 'tax_id'},
 				{display: @json($LANG['description'] ?? 'Description'), name : 'tax_description', isdefault: true},

@@ -58,7 +58,7 @@
 
 		{{-- Payment details table – Tabler invoice table style --}}
 		<div class="table-responsive">
-			<table class="table table-vcenter card-table table-striped">
+			<table class="table table-vcenter card-table">
 				<thead>
 					<tr>
 						<th>{{ $LANG['payment_id'] ?? 'ID' }}</th>
@@ -107,8 +107,10 @@
 			</div>
 		@endif
 	</div>
-	<div class="card-footer text-end bg-transparent">
-		<a href="./index.php?module=payments&view=manage" class="btn btn-secondary"><i class="ti ti-arrow-left me-1"></i>{{ $LANG['cancel'] ?? 'Cancel' }}</a>
-		<a href="index.php?module=payments&amp;view=print&amp;id={{ urlencode($payment['id'] ?? '') }}" target="_blank" class="btn btn-primary"><i class="ti ti-printer me-1"></i>{{ $LANG['print_preview'] ?? 'Print' }}</a>
+	<div class="card-footer bg-transparent">
+		<div class="d-flex">
+			<a href="./index.php?module=payments&view=manage" class="btn btn-link">{{ $LANG['cancel'] ?? 'Cancel' }}</a>
+			<a href="index.php?module=payments&amp;view=print&amp;id={{ urlencode($payment['id'] ?? '') }}" target="_blank" class="btn btn-primary ms-auto"><i class="ti ti-printer me-1"></i>{{ $LANG['print_preview'] ?? 'Print' }}</a>
+		</div>
 	</div>
 </div>

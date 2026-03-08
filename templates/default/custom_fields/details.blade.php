@@ -12,8 +12,9 @@
 
 @if(get('action') == "view" )
 
-<div class="si_form si_form_view">	
-	<table>
+<div class="card">
+	<div class="card-body">
+	<table class="table table-vcenter">
 		<tr>
 			<th>{{ $LANG['id'] ?? '' }}</th>
 			<td>{{ $cf['cf_id'] ?? '' }}</td>
@@ -31,14 +32,14 @@
 			<td>{{ $cf['cf_custom_label'] ?? '' }}</td>
 		</tr>
 	</table>
-</div>
-
-	<div class="si_toolbar si_toolbar_form">
-		<a href="./index.php?module=custom_fields&amp;view=details&amp;id={{ urlencode($cf['cf_id'] ?? '') }}&amp;action=edit" class="positive">
-			<img src="./images/common/tick.png" alt="" />
-			{{ $LANG['edit'] ?? '' }}
-		</a>
 	</div>
+	<div class="card-footer">
+		<div class="d-flex">
+			<a href="./index.php?module=custom_fields&amp;view=manage" class="btn btn-link">{{ $LANG['cancel'] ?? '' }}</a>
+			<a href="./index.php?module=custom_fields&amp;view=details&amp;id={{ urlencode($cf['cf_id'] ?? '') }}&amp;action=edit" class="btn btn-primary ms-auto"><i class="ti ti-edit me-1"></i>{{ $LANG['edit'] ?? 'Edit' }}</a>
+		</div>
+	</div>
+</div>
 
 @endif
 
@@ -68,9 +69,11 @@
 		</tr>
 	</table>
 	</div>
-	<div class="card-footer text-end">
-		<button type="submit" class="btn btn-primary" name="save_custom_field" value="{{ $LANG['save'] ?? '' }}"><i class="ti ti-check me-1"></i>{{ $LANG['save'] ?? '' }}</button>
-		<a href="./index.php?module=custom_fields&amp;view=manage" class="btn btn-outline-secondary"><i class="ti ti-x me-1"></i>{{ $LANG['cancel'] ?? '' }}</a>
+	<div class="card-footer">
+		<div class="d-flex">
+			<a href="./index.php?module=custom_fields&amp;view=manage" class="btn btn-link">{{ $LANG['cancel'] ?? '' }}</a>
+			<button type="submit" class="btn btn-primary ms-auto" name="save_custom_field" value="{{ $LANG['save'] ?? '' }}"><i class="ti ti-check me-1"></i>{{ $LANG['save'] ?? '' }}</button>
+		</div>
 	</div>
 </div>
 

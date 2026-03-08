@@ -27,7 +27,7 @@
 <div class="mt-4"><h4>Profit per Invoice based on average product cost summary for the period {{ $start_date ?? '' }} to {{ $end_date ?? '' }}</h4></div>
 
 <div class="table-responsive mt-3">
-<table class="table table-vcenter table-striped" align="center">
+<table class="table table-vcenter" align="center">
     <tr>
         <td  class="details_screen">
             <b>ID</b>

@@ -53,8 +53,10 @@
 			</tr>
 		</table>
 	</div>
-	<div class="card-footer text-end">
-		<button type="submit" class="btn btn-primary" name="submit" value="{{ $LANG['email'] ?? '' }}"><i class="ti ti-mail me-1"></i>{{ $LANG['email'] ?? '' }}</button>
+	<div class="card-footer">
+		<div class="d-flex">
+			<button type="submit" class="btn btn-primary ms-auto" name="submit" value="{{ $LANG['email'] ?? '' }}"><i class="ti ti-mail me-1"></i>{{ $LANG['email'] ?? '' }}</button>
+		</div>
 	</div>
 </div>
 

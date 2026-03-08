@@ -104,11 +104,13 @@
 </tr>
 -->
 </table>
-	<div class="card-footer text-end">
-		<button type="submit" class="btn btn-primary" name="submit" value="{{ $LANG['save'] ?? '' }}"><i class="ti ti-check me-1"></i>{{ $LANG['save'] ?? '' }}</button>
-		<input type="hidden" name="max_items" value="{{ $line }}" />
-		<input type="hidden" name="type" value="3" />
-		<a href="./index.php?module=invoices&amp;view=manage" class="btn btn-secondary"><i class="ti ti-x me-1"></i>{{ $LANG['cancel'] ?? '' }}</a>
+	<div class="card-footer">
+		<div class="d-flex">
+			<a href="./index.php?module=invoices&amp;view=manage" class="btn btn-link">{{ $LANG['cancel'] ?? '' }}</a>
+			<input type="hidden" name="max_items" value="{{ $line }}" />
+			<input type="hidden" name="type" value="3" />
+			<button type="submit" class="btn btn-primary ms-auto" name="submit" value="{{ $LANG['save'] ?? '' }}"><i class="ti ti-check me-1"></i>{{ $LANG['save'] ?? '' }}</button>
+		</div>
 	</div>
 	</div>
 </div>

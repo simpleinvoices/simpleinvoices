@@ -29,7 +29,11 @@
 		ofmsg: 'of',
 		useRp: false,
 		params: null,
-		onSuccess: null
+		onSuccess: null,
+		statusLabels: { enabled: 'Enabled', disabled: 'Disabled' },
+		useCard: true,
+		toolbarSelector: null,
+		showReloadButton: true
 	};
 
 	function parseXml(xml) {
@@ -86,14 +90,17 @@
 		var self = this;
 		var o = this.opts;
 		this.container.classList.add('si-tabler-grid-container');
+		var toolbarTarget = o.toolbarSelector ? (typeof o.toolbarSelector === 'string' ? document.querySelector(o.toolbarSelector) : o.toolbarSelector) : null;
+		if (o.useCard === false) this.container.classList.add('card-body');
 		this.container.style.display = '';
 		this.container.innerHTML = '';
 
-		this.wrap = document.createElement('div');
-		this.wrap.className = 'card';
+		var useCard = o.useCard !== false;
+		this.wrap = useCard ? document.createElement('div') : null;
+		if (this.wrap) this.wrap.className = 'card';
 
 		this.toolbar = document.createElement('div');
-		this.toolbar.className = 'card-header d-flex flex-wrap gap-2 align-items-center';
+		this.toolbar.className = useCard ? 'card-header d-flex flex-wrap gap-2 align-items-center' : (toolbarTarget ? 'd-flex flex-wrap gap-2 align-items-center' : 'd-flex flex-wrap gap-2 align-items-center py-2 border-bottom');
 		if (o.searchitems && o.searchitems.length > 0) {
 			var sel = document.createElement('select');
 			sel.name = 'qtype';
@@ -126,19 +133,27 @@
 			this.toolbar.appendChild(input);
 			this.toolbar.appendChild(btn);
 		}
-		var reload = document.createElement('button');
-		reload.type = 'button';
-		reload.className = 'btn btn-sm btn-outline-secondary ms-auto';
-		reload.title = 'Reload';
-		reload.innerHTML = '<i class="ti ti-refresh"></i>';
-		reload.addEventListener('click', function () { self.load(); });
-		this.toolbar.appendChild(reload);
-		this.wrap.appendChild(this.toolbar);
+		if (o.showReloadButton !== false) {
+			var reload = document.createElement('button');
+			reload.type = 'button';
+			reload.className = 'btn btn-sm btn-outline-secondary ms-auto';
+			reload.title = 'Reload';
+			reload.innerHTML = '<i class="ti ti-refresh"></i>';
+			reload.addEventListener('click', function () { self.load(); });
+			this.toolbar.appendChild(reload);
+		}
+		if (this.wrap) {
+			this.wrap.appendChild(this.toolbar);
+		} else if (toolbarTarget) {
+			toolbarTarget.appendChild(this.toolbar);
+		} else {
+			this.container.appendChild(this.toolbar);
+		}
 
 		var resp = document.createElement('div');
 		resp.className = 'table-responsive';
 		this.table = document.createElement('table');
-		this.table.className = 'table table-vcenter table-hover card-table table-striped';
+		this.table.className = 'table table-vcenter table-hover card-table';
 		this.thead = document.createElement('thead');
 		var tr = document.createElement('tr');
 		o.colModel.forEach(function (col, idx) {
@@ -171,7 +186,7 @@
 		this.tbody = document.createElement('tbody');
 		this.table.appendChild(this.tbody);
 		resp.appendChild(this.table);
-		this.wrap.appendChild(resp);
+		if (this.wrap) this.wrap.appendChild(resp); else this.container.appendChild(resp);
 
 		if (o.usepager) {
 			this.pagerStat = document.createElement('div');
@@ -216,10 +231,10 @@
 			pager.appendChild(this.pagerInput);
 			pager.appendChild(next);
 			pager.appendChild(last);
-			this.wrap.appendChild(pager);
+			if (this.wrap) this.wrap.appendChild(pager); else this.container.appendChild(pager);
 		}
 
-		this.container.appendChild(this.wrap);
+		if (this.wrap) this.container.appendChild(this.wrap);
 		this.updateHeaderSort();
 		this.load();
 	};
@@ -327,6 +342,14 @@
 				var align = o.colModel[c].align || 'left';
 				td.classList.add('text-' + (align === 'center' ? 'center' : align === 'right' ? 'end' : 'start'));
 				var content = getTextContent(cells[c]) || '\u00A0';
+				if (o.colModel[c].name === 'enabled') {
+					var raw = (content + '').toLowerCase();
+					var isEnabled = raw.indexOf('disabled') < 0 && (raw.indexOf('enabled') >= 0 || raw.indexOf('tick') >= 0 || raw.indexOf('1') >= 0 || raw.indexOf('yes') >= 0);
+					var labels = o.statusLabels || { enabled: 'Enabled', disabled: 'Disabled' };
+					content = isEnabled
+						? '<span class="status status-green">' + (labels.enabled || 'Enabled') + '</span>'
+						: '<span class="status status-red">' + (labels.disabled || 'Disabled') + '</span>';
+				}
 				td.innerHTML = content;
 				tr.appendChild(td);
 			}

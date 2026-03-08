@@ -72,7 +72,9 @@
 	</table>
 
 	<div class="card-footer">
-		<button type="submit" class="btn btn-primary" name="submit" value="statement_report"><i class="ti ti-chart-bar me-1"></i>{{ $LANG['run_report'] ?? '' }}</button>
+		<div class="d-flex">
+			<button type="submit" class="btn btn-primary ms-auto" name="submit" value="statement_report"><i class="ti ti-chart-bar me-1"></i>{{ $LANG['run_report'] ?? '' }}</button>
+		</div>
 	</div>
 </div>
 </form>
@@ -131,7 +133,7 @@
 @endif
 
 <div class="table-responsive">
-	<table class="table table-vcenter table-striped" align="center" width="100%">
+	<table class="table table-vcenter" align="center" width="100%">
 		<thead>
 			<tr>
 				<th class="si_right">{{ $LANG['id'] ?? '' }}</th>

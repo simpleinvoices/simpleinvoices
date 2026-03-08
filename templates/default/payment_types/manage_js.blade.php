@@ -13,8 +13,9 @@
 			colModel : [
 				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'center'},
 				{display: @json($LANG['description'] ?? 'Description'), name : 'pt_description', width : 70 * percentage_width, sortable : true, align: 'left'},
-				{display: @json($LANG['enabled'] ?? 'Enabled'), name : 'enabled', width : 25 * percentage_width, sortable : true, align: 'center'}
+				{display: @json($LANG['status'] ?? 'Status'), name : 'enabled', width : 25 * percentage_width, sortable : true, align: 'center'}
 			],
+			statusLabels: { enabled: @json($LANG['enabled'] ?? 'Enabled'), disabled: @json($LANG['disabled'] ?? 'Disabled') },
 			searchitems : [
 				{display: @json($LANG['id'] ?? 'ID'), name : 'pt_id'},
 				{display: @json($LANG['description'] ?? 'Description'), name : 'pt_description', isdefault: true}

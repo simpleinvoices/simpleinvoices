@@ -14,9 +14,10 @@
 				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'center'},
 				{display: @json($LANG['email'] ?? 'Email'), name : 'email', width : 40 * percentage_width, sortable : true, align: 'left'},
 				{display: @json($LANG['role'] ?? 'Role'), name : 'role', width : 25 * percentage_width, sortable : true, align: 'left'},
-				{display: @json($LANG['enabled'] ?? 'Enabled'), name : 'enabled', width : 15 * percentage_width, sortable : true, align: 'center'},
+				{display: @json($LANG['status'] ?? 'Status'), name : 'enabled', width : 15 * percentage_width, sortable : true, align: 'center'},
 				{display: @json($LANG['users'] ?? 'User ID'), name : 'user_id', width : 15 * percentage_width, sortable : true, align: 'left'}
 			],
+			statusLabels: { enabled: @json($LANG['enabled'] ?? 'Enabled'), disabled: @json($LANG['disabled'] ?? 'Disabled') },
 			searchitems : [
 				{display: @json($LANG['email'] ?? 'Email'), name : 'email', isdefault: true},
 				{display: @json($LANG['role'] ?? 'Role'), name : 'ur.name'}

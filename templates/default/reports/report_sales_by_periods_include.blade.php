@@ -1,5 +1,5 @@
 
-<table class="table table-vcenter table-striped si_report_table mb-0">
+<table class="table table-vcenter si_report_table mb-0">
 	<thead>
 		<tr>
 			<th>

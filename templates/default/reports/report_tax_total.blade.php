@@ -1,7 +1,7 @@
 <div class="card">
 	<div class="card-body">
 		<div class="table-responsive">
-<table class="table table-vcenter table-striped si_report_table">
+<table class="table table-vcenter si_report_table">
 	<thead>
 		<tr>
 			<th>{{ $LANG['total_taxes'] ?? '' }}</th>

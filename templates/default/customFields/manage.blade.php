@@ -22,7 +22,7 @@ Categorie:
 
 	Name: <input type="text" name="name" /><br />
 	Description: <input type="text" name="description" /><br />
-	<input type="submit" name="save" />
+	<button type="submit" class="btn btn-primary" name="save"><i class="ti ti-check me-1"></i>{{ $LANG['save'] ?? '' }}</button>
 	</form>
 
 

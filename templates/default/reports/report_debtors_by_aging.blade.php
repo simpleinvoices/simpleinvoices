@@ -1,7 +1,7 @@
 <div class="card">
 	<div class="card-body">
 		<div class="table-responsive">
-<table class="table table-vcenter table-striped si_report_table">
+<table class="table table-vcenter si_report_table">
 	<thead>
 		<th colspan="10">{{ $LANG['debtors_by_aging_periods'] ?? '' }}</th>
 	</thead>

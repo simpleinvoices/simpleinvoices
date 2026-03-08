@@ -48,9 +48,11 @@
 		</tr>
 	</table>
 	</div>
-	<div class="card-footer text-end">
-		<button type="submit" class="btn btn-primary invoice_save" name="submit" value="{{ $LANG['email'] ?? '' }}"><i class="ti ti-mail me-1"></i>{{ $LANG['email'] ?? '' }}</button>
-		<input type="hidden" name="op" value="insert_customer" />
+	<div class="card-footer">
+		<div class="d-flex">
+			<input type="hidden" name="op" value="insert_customer" />
+			<button type="submit" class="btn btn-primary ms-auto invoice_save" name="submit" value="{{ $LANG['email'] ?? '' }}"><i class="ti ti-mail me-1"></i>{{ $LANG['email'] ?? '' }}</button>
+		</div>
 	</div>
 </div>
 </form>

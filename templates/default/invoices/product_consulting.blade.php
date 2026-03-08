@@ -99,7 +99,7 @@
 <hr />
 <div style="text-align:center;">
 	<input type="hidden" name="max_items" value="{{ $line }}" />
-	<input type="submit" name="submit" value="{{ $LANG['save_invoice'] ?? '' }}" />
+	<button type="submit" class="btn btn-primary" name="submit" value="{{ $LANG['save_invoice'] ?? '' }}"><i class="ti ti-check me-1"></i>{{ $LANG['save'] ?? '' }}</button>
 	<input type="hidden" name="type" value="4" />
 </div>
 </form>

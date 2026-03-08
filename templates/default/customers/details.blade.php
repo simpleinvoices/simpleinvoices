@@ -38,9 +38,6 @@
 				<a class="nav-link" href="#cust-view-invoices" data-bs-toggle="tab" role="tab">{{ $LANG['customer'] ?? '' }} {{ $LANG['invoice_listings'] ?? '' }}</a>
 			</li>
 		</ul>
-		<div class="card-actions">
-			<a href="./index.php?module=customers&amp;view=details&amp;id={{ urlencode($customer['id'] ?? '') }}&amp;action=edit" class="btn btn-primary"><i class="ti ti-edit me-1"></i>{{ $LANG['edit'] ?? '' }}</a>
-		</div>
 	</div>
 	<div class="card-body">
 		<div class="tab-content">
@@ -102,7 +99,7 @@
 
 			<div id="cust-view-unpaid" class="tab-pane" role="tabpanel">
 					<div class="si_cust_invoices">
-						<table class="table table-vcenter table-striped">
+						<table class="table table-vcenter">
 							<thead>
 								<tr class="tr_head">
 									<th class="first">{{ $LANG['actions'] ?? '' }}</th>
@@ -137,7 +134,7 @@
 			</div>
 			<div id="cust-view-invoices" class="tab-pane" role="tabpanel">
 					<div class="si_cust_invoices">
-						<table class="table table-vcenter table-striped">
+						<table class="table table-vcenter">
 							<thead>
 								<tr class="tr_head">
 									<th class="first">{{ $LANG['id'] ?? '' }}</th>
@@ -169,6 +166,12 @@
 						</table>
 					</div>
 			</div>
+		</div>
+	</div>
+	<div class="card-footer">
+		<div class="d-flex">
+			<a href="./index.php?module=customers&amp;view=manage" class="btn btn-link">{{ $LANG['cancel'] ?? '' }}</a>
+			<a href="./index.php?module=customers&amp;view=details&amp;id={{ urlencode($customer['id'] ?? '') }}&amp;action=edit" class="btn btn-primary ms-auto"><i class="ti ti-edit me-1"></i>{{ $LANG['edit'] ?? 'Edit' }}</a>
 		</div>
 	</div>
 </div>
@@ -307,9 +310,11 @@
 			</div>
 		</div>
 	</div>
-	<div class="card-footer text-end">
-		<button type="submit" class="btn btn-primary" name="save_customer" value="{{ $LANG['save_customer'] ?? '' }}"><i class="ti ti-check me-1"></i>{{ $LANG['save'] ?? '' }}</button>
-		<a href="./index.php?module=customers&amp;view=details&amp;id={{ urlencode($customer['id'] ?? '') }}&amp;action=view" class="btn btn-outline-secondary"><i class="ti ti-x me-1"></i>{{ $LANG['cancel'] ?? '' }}</a>
+	<div class="card-footer">
+		<div class="d-flex">
+			<a href="./index.php?module=customers&amp;view=manage" class="btn btn-link">{{ $LANG['cancel'] ?? '' }}</a>
+			<button type="submit" class="btn btn-primary ms-auto" name="save_customer" value="{{ $LANG['save_customer'] ?? '' }}"><i class="ti ti-check me-1"></i>{{ $LANG['save'] ?? '' }}</button>
+		</div>
 	</div>
 </div>
 

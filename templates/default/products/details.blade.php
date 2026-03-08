@@ -14,9 +14,6 @@
 				<a class="nav-link" href="#view-section-3" data-bs-toggle="tab" role="tab">{{ $LANG['notes'] ?? '' }}</a>
 			</li>
 		</ul>
-		<div class="card-actions">
-			<a href="./index.php?module=products&view=details&id={{ $product['id'] ?? '' }}&action=edit" class="btn btn-primary"><i class="ti ti-edit me-1"></i>{{ $LANG['edit'] ?? '' }}</a>
-		</div>
 	</div>
 	<div class="card-body">
 		<div class="tab-content">
@@ -115,6 +112,12 @@
 					</tr>
 				</table>
 			</div>
+		</div>
+	</div>
+	<div class="card-footer">
+		<div class="d-flex">
+			<a href="./index.php?module=products&amp;view=manage" class="btn btn-link">{{ $LANG['cancel'] ?? '' }}</a>
+			<a href="./index.php?module=products&amp;view=details&amp;id={{ $product['id'] ?? '' }}&amp;action=edit" class="btn btn-primary ms-auto"><i class="ti ti-edit me-1"></i>{{ $LANG['edit'] ?? 'Edit' }}</a>
 		</div>
 	</div>
 </div>
@@ -234,15 +237,11 @@
 			</div>
 		</div>
 	</div>
-	<div class="card-footer text-end">
-		<button type="submit" class="btn btn-primary" name="save_product" value="{{ $LANG['save'] ?? '' }}">
-			<i class="ti ti-check me-1"></i>
-			{{ $LANG['save'] ?? '' }}
-		</button>
-		<a href="./index.php?module=products&view=details&id={{ $product['id'] ?? '' }}&action=view" class="btn btn-outline-secondary">
-			<i class="ti ti-x me-1"></i>
-			{{ $LANG['cancel'] ?? '' }}
-		</a>
+	<div class="card-footer">
+		<div class="d-flex">
+			<a href="./index.php?module=products&amp;view=manage" class="btn btn-link">{{ $LANG['cancel'] ?? '' }}</a>
+			<button type="submit" class="btn btn-primary ms-auto" name="save_product" value="{{ $LANG['save'] ?? '' }}"><i class="ti ti-check me-1"></i>{{ $LANG['save'] ?? '' }}</button>
+		</div>
 	</div>
 </div>
 <input type="hidden" name="op" value="edit_product">

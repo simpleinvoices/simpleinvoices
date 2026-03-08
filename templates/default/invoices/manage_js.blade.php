@@ -10,6 +10,9 @@
 		siTablerGrid("#manageGrid", {
 			url: @json($url ?? 'index.php?module=invoices&view=xml'),
 			dataType: 'xml',
+			useCard: false,
+			toolbarSelector: '#manageGridToolbar',
+			showReloadButton: false,
 			colModel : [
 				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'center'},
 				{display: @json($LANG['id'] ?? 'ID'), name : 'index_id', width :15 * percentage_width, sortable : true, align: 'right'},

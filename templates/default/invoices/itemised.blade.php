@@ -260,7 +260,7 @@
 	<input type="hidden" name="type" value="2" />
 
 	<div class="si_toolbar si_toolbar_form">
-		<button type="submit" class="invoice_save" name="submit" value="{{ $LANG['save'] ?? '' }}"><img class="button_img" src="./images/common/tick.png" alt="" />{{ $LANG['save'] ?? '' }}</button>
+		<button type="submit" class="invoice_save btn btn-primary" name="submit" value="{{ $LANG['save'] ?? '' }}"><i class="ti ti-check me-1"></i>{{ $LANG['save'] ?? '' }}</button>
     	<a href="./index.php?module=invoices&amp;view=manage" class="negative"><img src="./images/common/cross.png" alt="" />{{ $LANG['cancel'] ?? '' }}</a>
 	</div>
 

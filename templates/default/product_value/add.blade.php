@@ -35,10 +35,12 @@
 			{html_options name=enabled options=$enabled selected=1 class="form-select"}
 		</div>
 	</div>
-	<div class="card-footer text-end">
-		<button type="submit" class="btn btn-primary" name="submit" value="{{ $LANG['insert_product_value'] ?? '' }}"><i class="ti ti-check me-1"></i>{{ $LANG['save'] ?? '' }}</button>
-		<a href="./index.php?module=product_value&amp;view=manage" class="btn btn-outline-secondary"><i class="ti ti-x me-1"></i>{{ $LANG['cancel'] ?? '' }}</a>
-		<input type="hidden" name="op" value="insert_product_value" />
+	<div class="card-footer">
+		<div class="d-flex">
+			<a href="./index.php?module=product_value&amp;view=manage" class="btn btn-link">{{ $LANG['cancel'] ?? '' }}</a>
+			<input type="hidden" name="op" value="insert_product_value" />
+			<button type="submit" class="btn btn-primary ms-auto" name="submit" value="{{ $LANG['insert_product_value'] ?? '' }}"><i class="ti ti-check me-1"></i>{{ $LANG['save'] ?? '' }}</button>
+		</div>
 	</div>
 </div>
 </form>

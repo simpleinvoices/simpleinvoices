@@ -52,10 +52,12 @@
 </table>
 	</table>
 	</div>
-	<div class="card-footer text-end">
-		<button type="submit" class="btn btn-primary" name="id" value="{{ $LANG['save'] ?? '' }}"><i class="ti ti-check me-1"></i>{{ $LANG['save'] ?? '' }}</button>
-		<input type="hidden" name="op" value="add" />
-		<a href="./index.php?module=payments&view=manage" class="btn btn-secondary"><i class="ti ti-x me-1"></i>{{ $LANG['cancel'] ?? '' }}</a>
+	<div class="card-footer">
+		<div class="d-flex">
+			<a href="./index.php?module=payments&view=manage" class="btn btn-link">{{ $LANG['cancel'] ?? '' }}</a>
+			<input type="hidden" name="op" value="add" />
+			<button type="submit" class="btn btn-primary ms-auto" name="id" value="{{ $LANG['save'] ?? '' }}"><i class="ti ti-check me-1"></i>{{ $LANG['save'] ?? '' }}</button>
+		</div>
 	</div>
 </div>
 </form>

@@ -77,7 +77,7 @@ $xml ="";
 		$xml .= "<cell><![CDATA[".siLocal::number($row['invoice_total'])."]]></cell>";
 		if ($row['status']) {
 			if ($row['owing'] <= 0) {
-				$status_html = '<span class="status status-green"><span class="status-dot"></span>Paid</span>';
+				$status_html = '<span class="status status-green">Paid</span>';
 			} else {
 				$aging = $row['aging'];
 				$dot_color = 'secondary';
@@ -90,7 +90,7 @@ $xml ="";
 				} elseif ($aging === '90+') {
 					$dot_color = 'red';
 				}
-				$status_html = '<span class="status status-'.$dot_color.'"><span class="status-dot"></span>Unpaid</span>';
+				$status_html = '<span class="status status-'.$dot_color.'">Unpaid</span>';
 			}
 			$xml .= "<cell><![CDATA[".$status_html."]]></cell>";
 		} else {
