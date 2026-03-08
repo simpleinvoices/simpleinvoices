@@ -413,12 +413,12 @@
 				li.appendChild(el);
 				ul.appendChild(li);
 			};
-			addPageItem('Prev', false, this.page <= 1);
+			//addPageItem('Prev', false, this.page <= 1);
 			if (this.pages === 0) {
 				addPageItem('1', false, true);
 			} else {
-				var maxVisible = 7;
-				var start = Math.max(1, Math.min(this.page - 3, this.pages - maxVisible + 1));
+				var maxVisible = 3;
+				var start = Math.max(1, Math.min(this.page - 1, this.pages - maxVisible + 1));
 				start = Math.max(1, start);
 				var end = Math.min(this.pages, start + maxVisible - 1);
 				if (start > 1) {
@@ -433,7 +433,7 @@
 					addPageItem(String(this.pages), this.page === this.pages, false, this.pages);
 				}
 			}
-			addPageItem('Next', false, this.page >= this.pages || this.pages === 0);
+			//addPageItem('Next', false, this.page >= this.pages || this.pages === 0);
 			nav.appendChild(ul);
 			this.pagerPagesContainer.appendChild(nav);
 		}
