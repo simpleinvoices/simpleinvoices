@@ -20,7 +20,7 @@
 				{display: @json($LANG['customer'] ?? 'Customer'), name : 'customer', width :20 * percentage_width, sortable : true, align: 'left'},
 				{display: @json($LANG['date_upper'] ?? 'Date'), name : 'date', width : 15 * percentage_width, sortable : true, align: 'right'},
 				{display: @json($LANG['total'] ?? 'Total'), name : 'invoice_total', width : 15 * percentage_width, sortable : true, align: 'right'},
-				{display: @json($LANG['status'] ?? 'Status'), name : 'status', width : 15 * percentage_width, sortable : false, align: 'center'}
+				{display: @json($LANG['status'] ?? 'Status'), name : 'status', width : 15 * percentage_width, sortable : true, align: 'center'}
 			],
 			searchitems : [
 				{display: @json($LANG['invoice_number'] ?? 'Invoice #'), name : 'iv.index_id'},
