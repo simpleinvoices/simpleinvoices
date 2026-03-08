@@ -9,13 +9,13 @@ while (ob_get_level()) ob_end_clean();
 header("Content-type: text/xml; charset=utf-8");
 
 // Grid params: support GET (default) and POST for compatibility
-$dir = $_REQUEST['sortorder'] ?? "DESC";
-$sort = $_REQUEST['sortname'] ?? "id";
-$rp = (int)($_REQUEST['rp'] ?? 25);
+$dir = strtoupper($_REQUEST['sortorder'] ?? "DESC");
+$sort = $_REQUEST['sortname'] ?? "index_id";
+$rp = (int)($_REQUEST['rp'] ?? 10);
 $having = $_REQUEST['having'] ?? "";
 $page = (int)($_REQUEST['page'] ?? 1);
 if ($page < 1) $page = 1;
-if ($rp < 1) $rp = 25;
+if ($rp < 10) $rp = 10;
 
 //$sql = "SELECT * FROM ".TB_PREFIX."invoices LIMIT $start, $limit";
 $invoice = new invoice();

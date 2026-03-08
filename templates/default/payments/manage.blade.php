@@ -10,40 +10,38 @@
 */ --}}
 
 <div class="card">
-	<div class="card-body">
-		@if(get('id'))
-			@if($payments == null)
-				<div class="alert alert-info mb-0">
-					{{ $LANG['no_payments_invoice'] ?? '' }}
-				</div>
-			@else
-				<div id="manageGrid"></div>
-				@include('templates.default.payments.manage_js')
-			@endif
-
-		@elseif(get('c_id'))
-			@if($payments == null)
-				<div class="alert alert-info mb-0">
-					{{ $LANG['no_payments_customer'] ?? '' }}
-				</div>
-			@else
-				<div id="manageGrid"></div>
-				@include('templates.default.payments.manage_js')
-			@endif
-
+	@if(get('id'))
+		@if($payments == null)
+			<div class="alert alert-info mb-0">
+				{{ $LANG['no_payments_invoice'] ?? '' }}
+			</div>
 		@else
-			@if($payments == null)
-				<div class="alert alert-info mb-0">
-					{{ $LANG['no_payments'] ?? '' }}
-				</div>
-			@else
-				<div id="manageGrid"></div>
-				@include('templates.default.payments.manage_js')
-			@endif
+			<div id="manageGrid"></div>
+			@include('templates.default.payments.manage_js')
 		@endif
 
-		<div class="mt-3">
-			<a class="cluetip btn btn-outline-secondary btn-sm" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_wheres_the_edit_button" title="{{ $LANG['wheres_the_edit_button'] ?? '' }}"><i class="ti ti-help me-1"></i>{{ $LANG['wheres_the_edit_button'] ?? "Where's the Edit button?" }}</a>
-		</div>
+	@elseif(get('c_id'))
+		@if($payments == null)
+			<div class="alert alert-info mb-0">
+				{{ $LANG['no_payments_customer'] ?? '' }}
+			</div>
+		@else
+			<div id="manageGrid"></div>
+			@include('templates.default.payments.manage_js')
+		@endif
+
+	@else
+		@if($payments == null)
+			<div class="alert alert-info mb-0">
+				{{ $LANG['no_payments'] ?? '' }}
+			</div>
+		@else
+			<div id="manageGrid"></div>
+			@include('templates.default.payments.manage_js')
+		@endif
+	@endif
+
+	<div class="mt-3">
+		<a class="cluetip btn btn-outline-secondary btn-sm" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_wheres_the_edit_button" title="{{ $LANG['wheres_the_edit_button'] ?? '' }}"><i class="ti ti-help me-1"></i>{{ $LANG['wheres_the_edit_button'] ?? "Where's the Edit button?" }}</a>
 	</div>
 </div>

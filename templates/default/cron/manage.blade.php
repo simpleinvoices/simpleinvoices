@@ -10,14 +10,12 @@
 */ --}}
 
 <div class="card">
-	<div class="card-body">
 @if(($number_of_crons['count'] ?? 0) == 0)
-		<div class="alert alert-info mb-0">
-			{{ $LANG['no_crons'] ?? '' }}
-		</div>
-@else
-		<div id="manageGrid"></div>
-		@include('templates.default.cron.manage_js')
-@endif
+	<div class="alert alert-info mb-0">
+		{{ $LANG['no_crons'] ?? '' }}
 	</div>
+@else
+	<div id="manageGrid"></div>
+	@include('templates.default.cron.manage_js')
+@endif
 </div>

@@ -16,12 +16,10 @@
 */ --}}
 
 <div class="card">
-	<div class="card-body">
 @if($paymentTypes==null )
-		<div class="alert alert-info mb-0">{{ $LANG['no_payment_types'] ?? '' }}</div>
+	<div class="alert alert-info mb-0">{{ $LANG['no_payment_types'] ?? '' }}</div>
 @else
-		<div id="manageGrid"></div>
-		@include('templates.default.payment_types.manage_js')
+	<div id="manageGrid"></div>
+	@include('templates.default.payment_types.manage_js')
 @endif
-	</div>
 </div>

@@ -6,19 +6,17 @@
 *	 GPL v2 or above
 */ --}}
 <div class="card">
-	<div class="card-body">
 @if($cfs == null)
-		<div class="alert alert-info mb-0">{{ $LANG['no_invoices'] ?? '' }}.</div>
+	<div class="alert alert-info mb-0">{{ $LANG['no_invoices'] ?? '' }}.</div>
 @else
-		<div id="manageGrid"></div>
-		@include('templates.default.custom_fields.manage_js')
+	<div id="manageGrid"></div>
+	@include('templates.default.custom_fields.manage_js')
 
-		<div class="mt-3">
-			<a class="cluetip btn btn-outline-secondary btn-sm" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_what_are_custom_fields" title="{{ $LANG['what_are_custom_fields'] ?? '' }}"><i class="ti ti-help me-1"></i>{{ $LANG['what_are_custom_fields'] ?? '' }}</a>
-			<a class="cluetip btn btn-outline-secondary btn-sm ms-1" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_manage_custom_fields" title="{{ $LANG['whats_this_page_about'] ?? '' }}"><i class="ti ti-help me-1"></i>{{ $LANG['whats_this_page_about'] ?? '' }}</a>
-		</div>
-@endif
+	<div class="mt-3">
+		<a class="cluetip btn btn-outline-secondary btn-sm" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_what_are_custom_fields" title="{{ $LANG['what_are_custom_fields'] ?? '' }}"><i class="ti ti-help me-1"></i>{{ $LANG['what_are_custom_fields'] ?? '' }}</a>
+		<a class="cluetip btn btn-outline-secondary btn-sm ms-1" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_manage_custom_fields" title="{{ $LANG['whats_this_page_about'] ?? '' }}"><i class="ti ti-help me-1"></i>{{ $LANG['whats_this_page_about'] ?? '' }}</a>
 	</div>
+@endif
 </div>
 
 

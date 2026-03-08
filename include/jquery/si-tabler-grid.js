@@ -19,7 +19,7 @@
 		sortname: '',
 		sortorder: 'asc',
 		usepager: true,
-		rp: 25,
+		rp: 10,
 		page: 1,
 		total: 0,
 		pagestat: 'Displaying {from} to {to} of {total} items',
@@ -27,7 +27,8 @@
 		nomsg: 'No items',
 		pagemsg: 'Page',
 		ofmsg: 'of',
-		useRp: false,
+		useRp: true,
+		rpOptions: [10, 20, 50, 100],
 		params: null,
 		onSuccess: null,
 		statusLabels: { enabled: 'Enabled', disabled: 'Disabled' },
@@ -83,6 +84,8 @@
 		this.toolbar = null;
 		this.pagerStat = null;
 		this.pagerInput = null;
+		this.pagerRpSelect = null;
+		this.pagerPagesContainer = null;
 		this.init();
 	}
 
@@ -91,7 +94,6 @@
 		var o = this.opts;
 		this.container.classList.add('si-tabler-grid-container');
 		var toolbarTarget = o.toolbarSelector ? (typeof o.toolbarSelector === 'string' ? document.querySelector(o.toolbarSelector) : o.toolbarSelector) : null;
-		if (o.useCard === false) this.container.classList.add('card-body');
 		this.container.style.display = '';
 		this.container.innerHTML = '';
 
@@ -189,53 +191,64 @@
 		if (this.wrap) this.wrap.appendChild(resp); else this.container.appendChild(resp);
 
 		if (o.usepager) {
+			var pager = document.createElement('div');
+			pager.className = 'card-footer d-flex flex-wrap align-items-center gap-3';
+			var left = document.createElement('div');
+			left.className = 'd-flex align-items-center gap-2';
+			if (o.useRp && o.rpOptions && o.rpOptions.length > 0) {
+				this.pagerRpSelect = document.createElement('select');
+				this.pagerRpSelect.className = 'form-select form-select-sm';
+				this.pagerRpSelect.style.width = 'auto';
+				var minRp = Math.min.apply(null, o.rpOptions);
+				var rpVal = Math.max(minRp, parseInt(o.rp, 10) || minRp);
+				if (rpVal !== o.rp) o.rp = rpVal;
+				var opts = o.rpOptions.slice();
+				if (opts.indexOf(rpVal) < 0 && rpVal >= minRp) opts.push(rpVal);
+				opts.sort(function (a, b) { return a - b; });
+				opts.forEach(function (n) {
+					var opt = document.createElement('option');
+					opt.value = String(n);
+					opt.textContent = String(n);
+					if (n === rpVal) opt.selected = true;
+					self.pagerRpSelect.appendChild(opt);
+				});
+				this.pagerRpSelect.addEventListener('change', function () {
+					self.opts.rp = parseInt(self.pagerRpSelect.value, 10);
+					self.page = 1;
+					self.load();
+				});
+				left.appendChild(this.pagerRpSelect);
+				var recordsLbl = document.createElement('span');
+				recordsLbl.className = 'text-secondary';
+				recordsLbl.textContent = 'records';
+				left.appendChild(recordsLbl);
+			}
+			pager.appendChild(left);
+			var right = document.createElement('div');
+			right.className = 'd-flex align-items-center gap-3 ms-auto';
 			this.pagerStat = document.createElement('div');
 			this.pagerStat.className = 'text-secondary small';
-			var pager = document.createElement('div');
-			pager.className = 'card-footer d-flex flex-wrap gap-2 align-items-center';
-			pager.appendChild(this.pagerStat);
-			var first = document.createElement('button');
-			first.type = 'button';
-			first.className = 'btn btn-sm btn-outline-primary';
-			first.textContent = 'First';
-			var prev = document.createElement('button');
-			prev.type = 'button';
-			prev.className = 'btn btn-sm btn-outline-primary';
-			prev.textContent = 'Prev';
-			var next = document.createElement('button');
-			next.type = 'button';
-			next.className = 'btn btn-sm btn-outline-primary';
-			next.textContent = 'Next';
-			var last = document.createElement('button');
-			last.type = 'button';
-			last.className = 'btn btn-sm btn-outline-primary';
-			last.textContent = 'Last';
-			this.pagerInput = document.createElement('input');
-			this.pagerInput.type = 'number';
-			this.pagerInput.min = '1';
-			this.pagerInput.className = 'form-control form-control-sm';
-			this.pagerInput.style.width = '4em';
-			var go = document.createElement('span');
-			go.className = 'small text-secondary';
-			first.addEventListener('click', function () { if (self.page !== 1) { self.page = 1; self.load(); } });
-			prev.addEventListener('click', function () { if (self.page > 1) { self.page--; self.load(); } });
-			next.addEventListener('click', function () { if (self.page < self.pages) { self.page++; self.load(); } });
-			last.addEventListener('click', function () { if (self.page !== self.pages) { self.page = self.pages; self.load(); } });
-			this.pagerInput.addEventListener('change', function () {
-				var n = parseInt(self.pagerInput.value, 10);
-				if (!isNaN(n) && n >= 1 && n <= self.pages) { self.page = n; self.load(); }
-			});
-			pager.appendChild(first);
-			pager.appendChild(prev);
-			pager.appendChild(go);
-			pager.appendChild(this.pagerInput);
-			pager.appendChild(next);
-			pager.appendChild(last);
-			if (this.wrap) this.wrap.appendChild(pager); else this.container.appendChild(pager);
+			right.appendChild(this.pagerStat);
+			this.pagerPagesContainer = document.createElement('div');
+			this.pagerPagesContainer.className = 'd-flex align-items-center gap-1';
+			right.appendChild(this.pagerPagesContainer);
+			pager.appendChild(right);
+			if (this.wrap) {
+				this.wrap.appendChild(pager);
+			} else {
+				// When useCard is false (e.g. invoices manage), append pager to card (grandparent)
+				// so footer sits below card-table and is visible. Append synchronously so load() and
+				// updatePager() run in the same flow and pagination shows correctly on first view.
+				var pagerParent = this.container.parentNode && this.container.parentNode.parentNode
+					? this.container.parentNode.parentNode
+					: this.container.parentNode;
+				if (pagerParent) pagerParent.appendChild(pager); else this.container.appendChild(pager);
+			}
 		}
 
 		if (this.wrap) this.container.appendChild(this.wrap);
 		this.updateHeaderSort();
+		this.updatePager();
 		this.load();
 	};
 
@@ -259,12 +272,14 @@
 		var self = this;
 		var o = this.opts;
 		if (this.loading || !o.url) return;
+		var rp = Math.max(1, parseInt(o.rp, 10) || 10);
+		if (rp !== o.rp) o.rp = rp;
 		this.loading = true;
 		if (this.pagerStat) this.pagerStat.textContent = o.procmsg;
 		this.tbody.innerHTML = '<tr><td colspan="' + o.colModel.length + '" class="text-center text-secondary">' + o.procmsg + '</td></tr>';
 
 		var param = {
-			page: this.page,
+			page: Math.max(1, this.page),
 			rp: o.rp,
 			sortname: o.sortname,
 			sortorder: o.sortorder,
@@ -310,8 +325,10 @@
 					if (pageEl) page = parseInt(getTextContent(pageEl), 10) || 1;
 				}
 				self.total = total;
-				self.page = page;
-				self.pages = o.rp > 0 ? Math.max(1, Math.ceil(total / o.rp)) : 1;
+				self.page = Math.max(1, parseInt(page, 10) || 1);
+				var rp = Math.max(1, parseInt(o.rp, 10) || 10);
+				if (rp !== o.rp) o.rp = rp;
+				self.pages = Math.max(1, Math.ceil(total / rp));
 				self.renderRows(doc);
 				self.updatePager();
 				if (o.onSuccess) o.onSuccess();
@@ -358,16 +375,67 @@
 	};
 
 	SiTablerGrid.prototype.updatePager = function () {
+		var self = this;
 		var o = this.opts;
 		if (!this.pagerStat) return;
-		var from = this.total === 0 ? 0 : (this.page - 1) * o.rp + 1;
-		var to = Math.min(this.page * o.rp, this.total);
-		var msg = (o.pagestat || 'Displaying {from} to {to} of {total} items')
+		var rp = Math.max(1, parseInt(o.rp, 10) || 10);
+		var page = Math.max(1, this.page);
+		var from = this.total === 0 ? 0 : (page - 1) * rp + 1;
+		var to = this.total === 0 ? 0 : Math.min(page * rp, this.total);
+		var msg = (o.pagestat || 'Showing {from} to {to} of {total} entries')
 			.replace('{from}', from).replace('{to}', to).replace('{total}', this.total);
 		this.pagerStat.textContent = msg;
-		if (this.pagerInput) {
-			this.pagerInput.value = String(this.page);
-			this.pagerInput.setAttribute('max', String(this.pages));
+		if (this.pagerRpSelect && this.pagerRpSelect.querySelector('option[value="' + o.rp + '"]')) {
+			this.pagerRpSelect.value = String(o.rp);
+		}
+		if (this.pagerPagesContainer) {
+			this.pagerPagesContainer.innerHTML = '';
+			var nav = document.createElement('nav');
+			var ul = document.createElement('ul');
+			ul.className = 'pagination mb-0';
+			var addPageItem = function (label, active, disabled, clickPage) {
+				var li = document.createElement('li');
+				li.className = 'page-item' + (active ? ' active' : '') + (disabled ? ' disabled' : '');
+				var isEllipsis = label === '...';
+				var el = document.createElement(isEllipsis ? 'span' : 'a');
+				el.className = 'page-link';
+				if (!isEllipsis) el.href = '#';
+				el.textContent = label;
+				if (!isEllipsis) {
+					el.addEventListener('click', function (e) {
+						e.preventDefault();
+						if (disabled) return;
+						if (label === 'Prev') { if (self.page > 1) { self.page--; self.load(); } }
+						else if (label === 'Next') { if (self.page < self.pages) { self.page++; self.load(); } }
+						else if (clickPage !== undefined) { self.page = clickPage; self.load(); }
+					});
+				}
+				li.appendChild(el);
+				ul.appendChild(li);
+			};
+			addPageItem('Prev', false, this.page <= 1);
+			if (this.pages === 0) {
+				addPageItem('1', false, true);
+			} else {
+				var maxVisible = 7;
+				var start = Math.max(1, Math.min(this.page - 3, this.pages - maxVisible + 1));
+				start = Math.max(1, start);
+				var end = Math.min(this.pages, start + maxVisible - 1);
+				if (start > 1) {
+					addPageItem('1', this.page === 1, false, 1);
+					if (start > 2) addPageItem('...', false, true);
+				}
+				for (var p = start; p <= end; p++) {
+					addPageItem(String(p), p === this.page, false, p);
+				}
+				if (end < this.pages) {
+					if (end < this.pages - 1) addPageItem('...', false, true);
+					addPageItem(String(this.pages), this.page === this.pages, false, this.pages);
+				}
+			}
+			addPageItem('Next', false, this.page >= this.pages || this.pages === 0);
+			nav.appendChild(ul);
+			this.pagerPagesContainer.appendChild(nav);
 		}
 	};
 

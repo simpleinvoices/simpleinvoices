@@ -3,10 +3,10 @@
 header("Content-type: text/xml");
 
 //$start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
-$dir = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "DESC" ;
-$sort = (isset($_POST['sortname'])) ? $_POST['sortname'] : "id" ;
-$rp = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
-$page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
+$dir = (isset($_REQUEST['sortorder'])) ? $_REQUEST['sortorder'] : "DESC" ;
+$sort = (isset($_REQUEST['sortname'])) ? $_REQUEST['sortname'] : "id" ;
+$rp = (isset($_REQUEST['rp'])) ? $_REQUEST['rp'] : "25" ;
+$page = (isset($_REQUEST['page'])) ? $_REQUEST['page'] : "1" ;
 
 //$sql = "SELECT * FROM ".TB_PREFIX."invoices LIMIT $start, $limit";
 $inventory = new inventory();

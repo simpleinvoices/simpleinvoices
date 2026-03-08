@@ -1,7 +1,7 @@
 <script type="text/javascript">
 		var columns = 5;
 		var padding = 12;
-		var action_menu = 100;
+		var action_menu = 50;
 		var colEl = document.querySelector('.col');
 		var grid_width = colEl ? colEl.getBoundingClientRect().width : 800;
 		grid_width = grid_width - ((columns - 0.5) * padding) - action_menu;
@@ -31,8 +31,7 @@
 			nomsg: @json($LANG['no_items'] ?? 'No items'),
 			pagemsg: @json($LANG['page'] ?? 'Page'),
 			ofmsg: @json($LANG['of'] ?? 'of'),
-			useRp: false,
-			rp: 25,
+			rp: 10,
 			showToggleBtn: false,
 			showTableToggleBtn: false,
 			width: 'auto',

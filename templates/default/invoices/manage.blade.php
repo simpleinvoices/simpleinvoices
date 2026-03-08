@@ -6,14 +6,13 @@
 
 @if(($number_of_invoices['count'] ?? 0) == 0)
 	<div class="card">
-		<div class="card-body">
-			<div class="alert alert-info mb-0">
-				{{ $LANG['no_invoices'] ?? 'No invoices' }}
-			</div>
+		<div class="alert alert-info mb-0">
+			{{ $LANG['no_invoices'] ?? 'No invoices' }}
 		</div>
 	</div>
 @else
 	<div class="card">
+	<div class="card-table">
 		<div class="card-header d-flex flex-wrap align-items-center gap-2">
 			<ul class="nav nav-pills card-header-pills mb-0" role="tablist">
 				<li class="nav-item">
@@ -35,6 +34,7 @@
 			<div id="manageGridToolbar" class="d-flex flex-wrap gap-2 align-items-center ms-auto"></div>
 		</div>
 		<div id="manageGrid"></div>
+	</div>
 	</div>
 	@include('templates.default.invoices.manage_js')
 

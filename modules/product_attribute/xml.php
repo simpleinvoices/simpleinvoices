@@ -1,11 +1,11 @@
 <?php
 header("Content-type: text/xml");
 
-$start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
-$dir = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "ASC" ;
-$sort = (isset($_POST['sortname'])) ? $_POST['sortname'] : "id" ;
-$limit = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
-$page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
+$start = (isset($_REQUEST['start'])) ? $_REQUEST['start'] : "0" ;
+$dir = (isset($_REQUEST['sortorder'])) ? $_REQUEST['sortorder'] : "ASC" ;
+$sort = (isset($_REQUEST['sortname'])) ? $_REQUEST['sortname'] : "id" ;
+$limit = (isset($_REQUEST['rp'])) ? $_REQUEST['rp'] : "25" ;
+$page = (isset($_REQUEST['page'])) ? $_REQUEST['page'] : "1" ;
 
 $valid_search_fields = array('id', 'name');
 
@@ -23,8 +23,8 @@ if (!preg_match('/^(asc|desc)$/iD', $dir)) {
 }
 
 	$where = "";
-	$query = isset($_POST['query']) ? $_POST['query'] : null;
-	$qtype = isset($_POST['qtype']) ? $_POST['qtype'] : null;
+	$query = isset($_REQUEST['query']) ? $_REQUEST['query'] : null;
+	$qtype = isset($_REQUEST['qtype']) ? $_REQUEST['qtype'] : null;
 	if ( ! (empty($qtype) || empty($query)) ) {
 		if ( in_array($qtype, $valid_search_fields) ) {
 			$where = " AND $qtype LIKE :query ";

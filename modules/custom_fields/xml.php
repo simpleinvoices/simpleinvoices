@@ -2,11 +2,11 @@
 
 header("Content-type: text/xml");
 
-$start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
-$dir = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "ASC" ;
-$sort = (isset($_POST['sortname'])) ? $_POST['sortname'] : "cf_id" ;
-$limit = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
-$page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
+$start = (isset($_REQUEST['start'])) ? $_REQUEST['start'] : "0" ;
+$dir = (isset($_REQUEST['sortorder'])) ? $_REQUEST['sortorder'] : "ASC" ;
+$sort = (isset($_REQUEST['sortname'])) ? $_REQUEST['sortname'] : "cf_id" ;
+$limit = (isset($_REQUEST['rp'])) ? $_REQUEST['rp'] : "25" ;
+$page = (isset($_REQUEST['page'])) ? $_REQUEST['page'] : "1" ;
 
 $xml = "";
 
