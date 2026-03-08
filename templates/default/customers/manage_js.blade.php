@@ -12,7 +12,7 @@
 			dataType: 'xml',
 			colModel : [
 				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'center'},
-				{display: @json($LANG['id'] ?? 'ID'), name : 'CID', width : 7 * percentage_width, sortable : true, align: 'right'},
+				{display: @json($LANG['id'] ?? 'ID'), name : 'CID', width : 7 * percentage_width, sortable : true, align: 'left'},
 				{display: @json($LANG['name'] ?? 'Name'), name : 'name', width : 28 * percentage_width, sortable : true, align: 'left'},
 				{display: @json($LANG['total'] ?? 'Total'), name : 'customer_total', width : 12 * percentage_width, sortable : true, align: 'right'},
 				{display: @json($LANG['paid'] ?? 'Paid'), name : 'paid', width : 12 * percentage_width, sortable : true, align: 'right'},

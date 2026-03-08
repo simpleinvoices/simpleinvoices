@@ -1,7 +1,7 @@
 <script type="text/javascript">
 		var columns = 7;
 		var padding = 12;
-		var action_menu = 50;
+		var action_menu = 20;
 		var colEl = document.querySelector('.col');
 		var grid_width = colEl ? colEl.getBoundingClientRect().width : 800;
 		grid_width = grid_width - ((columns -0.5) * padding) - action_menu;
