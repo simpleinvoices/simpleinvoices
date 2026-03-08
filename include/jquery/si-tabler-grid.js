@@ -34,7 +34,7 @@
 		statusLabels: { enabled: 'Enabled', disabled: 'Disabled' },
 		useCard: true,
 		toolbarSelector: null,
-		showReloadButton: true
+		showReloadButton: false
 	};
 
 	function parseXml(xml) {
@@ -104,6 +104,8 @@
 		this.toolbar = document.createElement('div');
 		this.toolbar.className = useCard ? 'card-header d-flex flex-wrap gap-2 align-items-center' : (toolbarTarget ? 'd-flex flex-wrap gap-2 align-items-center' : 'd-flex flex-wrap gap-2 align-items-center py-2 border-bottom');
 		if (o.searchitems && o.searchitems.length > 0) {
+			var searchWrap = document.createElement('div');
+			searchWrap.className = 'd-flex flex-wrap gap-2 align-items-center ms-auto';
 			var sel = document.createElement('select');
 			sel.name = 'qtype';
 			sel.className = 'form-select form-select-sm';
@@ -131,14 +133,15 @@
 				self.page = 1;
 				self.load();
 			});
-			this.toolbar.appendChild(sel);
-			this.toolbar.appendChild(input);
-			this.toolbar.appendChild(btn);
+			searchWrap.appendChild(sel);
+			searchWrap.appendChild(input);
+			searchWrap.appendChild(btn);
+			this.toolbar.appendChild(searchWrap);
 		}
-		if (o.showReloadButton !== false) {
+		if (o.showReloadButton === true) {
 			var reload = document.createElement('button');
 			reload.type = 'button';
-			reload.className = 'btn btn-sm btn-outline-secondary ms-auto';
+			reload.className = 'btn btn-sm btn-outline-secondary';
 			reload.title = 'Reload';
 			reload.innerHTML = '<i class="ti ti-refresh"></i>';
 			reload.addEventListener('click', function () { self.load(); });
