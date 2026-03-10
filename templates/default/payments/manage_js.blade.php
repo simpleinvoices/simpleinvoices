@@ -13,11 +13,11 @@
 			colModel : [
 				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'center'},
 				{display: @json($LANG['payment'] ?? 'Payment'), name : 'id', width : 7 * percentage_width, sortable : true, align: 'left'},
-				{display: @json($LANG['invoice'] ?? 'Invoice'), name : 'ac_inv_id', width : 10 * percentage_width, sortable : true, align: 'left'},
+				{display: @json($LANG['invoice'] ?? 'Invoice'), name : 'ac_inv_id', width : 10 * percentage_width, sortable : true, align: 'left', className: 'd-none d-sm-table-cell'},
 				{display: @json($LANG['customer'] ?? 'Customer'), name : 'customer', width : 15 * percentage_width, sortable : true, align: 'left'},
-				{display: @json($LANG['biller'] ?? 'Biller'), name : 'biller', width : 15 * percentage_width, sortable : true, align: 'left'},
+				{display: @json($LANG['biller'] ?? 'Biller'), name : 'biller', width : 15 * percentage_width, sortable : true, align: 'left', className: 'd-none d-sm-table-cell'},
 				{display: @json($LANG['amount'] ?? 'Amount'), name : 'ac_amount', width : 10 * percentage_width, sortable : true, align: 'right'},
-				{display: @json($LANG['date_upper'] ?? 'Date'), name : 'date', width : 10 * percentage_width, sortable : true, align: 'center'}
+				{display: @json($LANG['date_upper'] ?? 'Date'), name : 'date', width : 10 * percentage_width, sortable : true, align: 'center', className: 'd-none d-sm-table-cell'}
 			],
 			searchitems : [
 				{display: @json($LANG['id'] ?? 'ID'), name : 'ap.id'},

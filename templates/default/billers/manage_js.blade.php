@@ -12,9 +12,9 @@
 			dataType: 'xml',
 			colModel : [
 				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'center'},
-				{display: @json($LANG['id'] ?? 'ID'), name : 'id', width : 10 * percentage_width, sortable : true, align: 'left'},
+				{display: @json($LANG['id'] ?? 'ID'), name : 'id', width : 10 * percentage_width, sortable : true, align: 'left', className: 'd-none d-sm-table-cell'},
 				{display: @json($LANG['name'] ?? 'Name'), name : 'name', width : 40 * percentage_width, sortable : true, align: 'left'},
-				{display: @json($LANG['email'] ?? 'Email'), name : 'email', width : 35 * percentage_width, sortable : true, align: 'left'},
+				{display: @json($LANG['email'] ?? 'Email'), name : 'email', width : 35 * percentage_width, sortable : true, align: 'left', className: 'd-none d-sm-table-cell'},
 				{display: @json($LANG['status'] ?? 'Status'), name : 'enabled', width : 15 * percentage_width, sortable : true, align: 'center'}
 			],
 			statusLabels: { enabled: @json($LANG['enabled'] ?? 'Enabled'), disabled: @json($LANG['disabled'] ?? 'Disabled') },

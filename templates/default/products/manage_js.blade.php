@@ -12,7 +12,7 @@
 		if (inventory == '1') {
 			col_model = [
 				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'center'},
-				{display: @json($LANG['id'] ?? 'ID'), name : 'id', width : 10 * percentage_width, sortable : true, align: 'left'},
+				{display: @json($LANG['id'] ?? 'ID'), name : 'id', width : 10 * percentage_width, sortable : true, align: 'left', className: 'd-none d-sm-table-cell'},
 				{display: @json($LANG['name'] ?? 'Name'), name : 'description', width : 40 * percentage_width, sortable : true, align: 'left'},
 				{display: @json($LANG['unit_price'] ?? 'Unit Price'), name : 'unit_price', width : 15 * percentage_width, sortable : true, align: 'right'},
 				{display: @json($LANG['quantity'] ?? 'Quantity'), name : 'quantity', width : 15 * percentage_width, sortable : true, align: 'right'},
@@ -21,7 +21,7 @@
 		} else {
 			col_model = [
 				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'center'},
-				{display: @json($LANG['id'] ?? 'ID'), name : 'id', width : 10 * percentage_width, sortable : true, align: 'right'},
+				{display: @json($LANG['id'] ?? 'ID'), name : 'id', width : 10 * percentage_width, sortable : true, align: 'right', className: 'd-none d-sm-table-cell'},
 				{display: @json($LANG['name'] ?? 'Name'), name : 'description', width : 50 * percentage_width, sortable : true, align: 'left'},
 				{display: @json($LANG['unit_price'] ?? 'Unit Price'), name : 'unit_price', width : 20 * percentage_width, sortable : true, align: 'right'},
 				{display: @json($LANG['status'] ?? 'Status'), name : 'enabled', width : 15 * percentage_width, sortable : true, align: 'center'}

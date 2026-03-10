@@ -15,11 +15,11 @@
 			colModel : [
 				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'center'},
 				{display: @json($LANG['id'] ?? 'ID'), name : 'index_id', width :15 * percentage_width, sortable : true, align: 'left'},
-				{display: @json($LANG['biller'] ?? 'Biller'), name : 'biller', width :20 * percentage_width, sortable : true, align: 'left'},
+				{display: @json($LANG['biller'] ?? 'Biller'), name : 'biller', width :20 * percentage_width, sortable : true, align: 'left', className: 'd-none d-sm-table-cell'},
 				{display: @json($LANG['customer'] ?? 'Customer'), name : 'customer', width :20 * percentage_width, sortable : true, align: 'left'},
-				{display: @json($LANG['date_upper'] ?? 'Date'), name : 'date', width : 15 * percentage_width, sortable : true, align: 'right'},
+				{display: @json($LANG['date_upper'] ?? 'Date'), name : 'date', width : 15 * percentage_width, sortable : true, align: 'right', className: 'd-none d-sm-table-cell'},
 				{display: @json($LANG['total'] ?? 'Total'), name : 'invoice_total', width : 15 * percentage_width, sortable : true, align: 'right'},
-				{display: @json($LANG['status'] ?? 'Status'), name : 'status', width : 15 * percentage_width, sortable : true, align: 'center'}
+				{display: @json($LANG['status'] ?? 'Status'), name : 'status', width : 15 * percentage_width, sortable : true, align: 'center', displayMobile: ''}
 			],
 			searchitems : [
 				{display: @json($LANG['invoice_number'] ?? 'Invoice #'), name : 'iv.index_id'},

@@ -54,7 +54,7 @@ $xml ="";
 		$xml .= "<row id='".$row['id']."'>";
 		$inv_label = htmlspecialchars($row['preference'] . ' ' . $row['index_id']);
 		$action  = '<div class="dropdown">';
-		$action .= '<a class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">'.$LANG['actions'].'</a>';
+		$action .= '<a class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><span class="d-none d-sm-inline">'.$LANG['actions'].'</span><span class="d-sm-none"><i class="ti ti-dots-vertical" aria-hidden="true"></i></span></a>';
 		$action .= '<div class="dropdown-menu dropdown-menu-end">';
 		$action .= '<a class="dropdown-item" href="index.php?module=invoices&amp;view=quick_view&amp;id='.$row['id'].'"><i class="ti ti-eye me-2"></i>'.$LANG['quick_view_tooltip'].' '.$inv_label.'</a>';
 		$action .= '<a class="dropdown-item" href="index.php?module=invoices&amp;view=details&amp;id='.$row['id'].'&amp;action=view"><i class="ti ti-edit me-2"></i>'.$LANG['edit_view_tooltip'].' '.$inv_label.'</a>';
@@ -77,7 +77,7 @@ $xml ="";
 		$xml .= "<cell><![CDATA[".siLocal::number($row['invoice_total'])."]]></cell>";
 		if ($row['status']) {
 			if ($row['owing'] <= 0) {
-				$status_html = '<span class="status status-green">Paid</span>';
+				$status_html = '<span class="d-none d-sm-inline"><span class="status status-green">Paid</span></span><span class="d-sm-none"><span class="status status-green"><span class="status-dot"></span></span></span>';
 			} else {
 				$aging = $row['aging'];
 				$dot_color = 'secondary';
@@ -90,11 +90,11 @@ $xml ="";
 				} elseif ($aging === '90+') {
 					$dot_color = 'red';
 				}
-				$status_html = '<span class="status status-'.$dot_color.'">Unpaid</span>';
+				$status_html = '<span class="d-none d-sm-inline"><span class="status status-'.$dot_color.'">Unpaid</span></span><span class="d-sm-none"><span class="status status-'.$dot_color.'"><span class="status-dot"></span></span></span>';
 			}
 			$xml .= "<cell><![CDATA[".$status_html."]]></cell>";
 		} else {
-			$xml .= "<cell><![CDATA[<span class=\"status status-secondary\"><span class=\"status-dot\"></span>Draft</span>]]></cell>";
+			$xml .= "<cell><![CDATA[<span class=\"d-none d-sm-inline\"><span class=\"status status-secondary\"><span class=\"status-dot\"></span>Draft</span></span><span class=\"d-sm-none\"><span class=\"status status-secondary\"><span class=\"status-dot\"></span></span></span>]]></cell>";
 		}
 		$xml .= "<cell><![CDATA[".$row['preference']."]]></cell>";				
 		$xml .= "</row>";		

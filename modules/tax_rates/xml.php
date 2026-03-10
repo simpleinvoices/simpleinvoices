@@ -98,7 +98,7 @@ $xml .= "<total>$count</total>";
 foreach ($tax as $row) {
 	$desc_esc = htmlspecialchars($row['tax_description']);
 	$action  = '<div class="dropdown">';
-	$action .= '<a class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">'.$LANG['actions'].'</a>';
+	$action .= '<a class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><span class="d-none d-sm-inline">'.$LANG['actions'].'</span><span class="d-sm-none"><i class="ti ti-dots-vertical" aria-hidden="true"></i></span></a>';
 	$action .= '<div class="dropdown-menu dropdown-menu-end">';
 	$action .= '<a class="dropdown-item" href="index.php?module=tax_rates&amp;view=details&amp;id='.$row['tax_id'].'&amp;action=view"><i class="ti ti-eye me-2"></i>'.$LANG['view'].' '.$desc_esc.'</a>';
 	$action .= '<a class="dropdown-item" href="index.php?module=tax_rates&amp;view=details&amp;id='.$row['tax_id'].'&amp;action=edit"><i class="ti ti-edit me-2"></i>'.$LANG['edit'].' '.$desc_esc.'</a>';
