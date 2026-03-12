@@ -1,21 +1,27 @@
-FROM php:8.2-apache
+# Alpine-based image: PHP-FPM + Nginx (no official php-apache-alpine)
+FROM php:8.2-fpm-alpine
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    libonig-dev \
-    libzip-dev \
+# Build deps for PHP extensions (removed after install)
+RUN apk add --no-cache --virtual .build-deps \
     libpng-dev \
-    libjpeg-dev \
-    libfreetype6-dev \
-    libxml2-dev \
-    curl \
-    unzip \
-    git \
-    && rm -rf /var/lib/apt/lists/*
+    libjpeg-turbo-dev \
+    freetype-dev \
+    libzip-dev \
+    oniguruma-dev \
+    libxml2-dev
 
-# Install PHP extensions (dom/xml needed by htmlpurifier and others)
+# Runtime deps (kept); nginx for serving
+RUN apk add --no-cache \
+    libpng \
+    libjpeg-turbo \
+    freetype \
+    libzip \
+    libxml2 \
+    nginx
+
+# PHP extensions (dom/xml for htmlpurifier etc.)
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install \
+    && docker-php-ext-install -j$(nproc) \
     mysqli \
     pdo \
     pdo_mysql \
@@ -23,31 +29,31 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     zip \
     gd \
     dom \
-    xml
+    xml \
+    && apk del .build-deps
 
-# Install Composer
+# Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Enable Apache mod_rewrite
-RUN a2enmod rewrite
-
-# Set working directory
 WORKDIR /var/www/html
 
-# Copy application files into the container (no host volume)
 COPY . /var/www/html/
 
-# Install PHP dependencies with Composer (vendor created in image)
 ENV COMPOSER_ALLOW_SUPERUSER=1 COMPOSER_MEMORY_LIMIT=-1
 RUN composer install --no-interaction --no-dev --optimize-autoloader --no-scripts --prefer-dist
 
-# Copy entrypoint script
+# Nginx config: root /var/www/html, PHP via FastCGI to 127.0.0.1:9000
+# Alpine nginx includes conf.d in root context (server not allowed); use http.d
+COPY nginx-default.conf /etc/nginx/http.d/default.conf
+
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
-# Writable dirs for app (tmp/cache, logs)
 RUN mkdir -p /var/www/html/tmp/cache /var/www/html/tmp/log /var/www/html/tmp/database_backups \
     && chown -R www-data:www-data /var/www/html
 
+# PHP-FPM listens on 9000 by default
+EXPOSE 80
+
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["apache2-foreground"]
+CMD ["nginx", "-g", "daemon off;"]

@@ -4,21 +4,20 @@ services:
     ports:
       - "8888:80"
     depends_on:
-      - mysql
+      db:
+        condition: service_healthy
     environment:
-      - APACHE_DOCUMENT_ROOT=/var/www/html
-      - SI_DB_HOST=mysql
+      - SI_DB_HOST=db
       - SI_DB_PORT=3306
       - SI_DB_USER=root
       - SI_DB_PASSWORD=rootpassword
       - SI_DB_NAME=simple_invoices
-    # No volume: app files are copied into the image at build time.
-    # Rebuild image to pick up code changes: docker-compose build --no-cache simpleinvoices
     networks:
       - simpleinvoices-net
 
-  mysql:
-    image: mysql:8.0
+  # MariaDB on Alpine (yobasystems image; multi-arch, well maintained)
+  db:
+    image: yobasystems/alpine-mariadb:11.4.9
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: simple_invoices
@@ -28,21 +27,28 @@ services:
       - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
-      - ./databases/mysql/Full_Simple_Invoices.sql:/docker-entrypoint-initdb.d/init.sql
+    #  - ./databases/mysql/Full_Simple_Invoices.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - simpleinvoices-net
+    healthcheck:
+      test: ["CMD-SHELL", "mariadb -u root -p\"$$MYSQL_ROOT_PASSWORD\" -e 'SELECT 1' || exit 1"]
+      start_period: 30s
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
+  # Adminer: minimal DB UI (replaces phpMyAdmin; official image is small)
+  adminer:
+    image: adminer:latest
     environment:
-      PMA_HOST: mysql
-      PMA_PORT: 3306
-      PMA_USER: root
-      PMA_PASSWORD: rootpassword
+      ADMINER_DEFAULT_SERVER: db
+      ADMINER_DEFAULT_USERNAME: root
+      ADMINER_DEFAULT_PASSWORD: rootpassword
     ports:
-      - "8081:80"
+      - "8081:8080"
     depends_on:
-      - mysql
+      db:
+        condition: service_healthy
     networks:
       - simpleinvoices-net
 
