@@ -43,8 +43,26 @@ ENV COMPOSER_ALLOW_SUPERUSER=1 COMPOSER_MEMORY_LIMIT=-1
 RUN composer install --no-interaction --no-dev --optimize-autoloader --no-scripts --prefer-dist
 
 # Nginx config: root /var/www/html, PHP via FastCGI to 127.0.0.1:9000
-# Alpine nginx includes conf.d in root context (server not allowed); use http.d
-COPY nginx-default.conf /etc/nginx/http.d/default.conf
+RUN <<'NGINX'
+cat > /etc/nginx/http.d/default.conf << 'EOF'
+server {
+    listen 80 default_server;
+    root /var/www/html;
+    index index.php index.html;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ \.php$ {
+        fastcgi_pass 127.0.0.1:9000;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+        fastcgi_param PATH_INFO $fastcgi_path_info;
+    }
+}
+EOF
+NGINX
 
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh

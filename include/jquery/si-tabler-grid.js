@@ -193,8 +193,8 @@
 					self.updateHeaderSort();
 				});
 			}
-			if (col.displayMobile) {
-				th.innerHTML = '<span class="d-none d-sm-inline">' + escapeHtml(col.display) + '</span><span class="d-sm-none">' + col.displayMobile + '</span>';
+			if ('displayMobile' in col) {
+				th.innerHTML = '<span class="d-none d-sm-inline">' + escapeHtml(col.display) + '</span><span class="d-sm-none">' + (col.displayMobile || '') + '</span>';
 			} else {
 				th.appendChild(document.createTextNode(col.display));
 			}
