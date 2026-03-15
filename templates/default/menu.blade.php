@@ -307,7 +307,7 @@
                         </a>
                     @else
                         @php
-                            $back_views = ['add', 'edit', 'details', 'view', 'itemised', 'total', 'process', 'save'];
+                            $back_views = ['add', 'edit', 'details', 'view', 'quick_view', 'itemised', 'total', 'process', 'save'];
                             $show_back = in_array($view ?? '', $back_views);
                             if ($show_back) {
                                 $back_config = [

@@ -105,17 +105,16 @@
 			<td>
 				<table class="si_invoice_taxes">
 					<tr>
-					@for($tax = 0; $tax < ($defaults->tax_per_line_item ?? 0); $tax++)
+					@for($taxIdx = 0; $taxIdx < (int)($defaults['tax_per_line_item'] ?? 0); $taxIdx++)
 						<td>				                				                
 							<select 
-								id="tax_id[0][{{ $tax }}]"
-								name="tax_id[0][{{ $tax }}]"
+								id="tax_id[0][{{ $taxIdx }}]"
+								name="tax_id[0][{{ $taxIdx }}]"
 								class="form-select form-select-sm"
 							>
 							<option value=""></option>
-							{assign var="index" value=$tax}
-							@foreach(($taxes ?? []) as $tax)
-								<option @if(($invoiceItems[0]['tax'][$index] ?? '') === ($tax['tax_id'] ?? '')) selected @endif value="{{ $tax['tax_id'] ?? '' }}">{{ $tax['tax_description'] ?? '' }}</option>
+							@foreach(($taxes ?? []) as $taxOption)
+								<option @if(($invoiceItems[0]['tax'][$taxIdx] ?? '') === ($taxOption['tax_id'] ?? '')) selected @endif value="{{ $taxOption['tax_id'] ?? '' }}">{{ $taxOption['tax_description'] ?? '' }}</option>
 							@endforeach
 						</select>
 						</td>
@@ -141,8 +140,8 @@
 			<td></td>
 			<td>{{ $LANG['quantity_short'] ?? '' }}</td>
 			<td>{{ $LANG['description'] ?? '' }}</td>
-		@for($tax_header = 0; $tax_header < ($defaults->tax_per_line_item ?? 0); $tax_header++)
-			<td>{{ $LANG['tax'] ?? '' }} @if($defaults->tax_per_line_item > 1){{ ($tax_header + 1) }}@endif </td>
+		@for($tax_header = 0; $tax_header < (int)($defaults['tax_per_line_item'] ?? 0); $tax_header++)
+			<td>{{ $LANG['tax'] ?? '' }} @if(($defaults['tax_per_line_item'] ?? 0) > 1){{ ($tax_header + 1) }}@endif </td>
 		@endfor
 			<td>{{ $LANG['unit_price'] ?? '' }}</td>
 		</tr>
@@ -207,17 +206,16 @@
 							</select>
 						@endif
 					</td>
-					@for($tax = 0; $tax < ($defaults->tax_per_line_item ?? 0); $tax++)
+					@for($taxIdx = 0; $taxIdx < (int)($defaults['tax_per_line_item'] ?? 0); $taxIdx++)
 						<td>				                				                
 							<select 
-								id="tax_id[{{ $line ?? '' }}][{{ $tax }}]"
-								name="tax_id[{{ $line ?? '' }}][{{ $tax }}]"
+								id="tax_id[{{ $line ?? '' }}][{{ $taxIdx }}]"
+								name="tax_id[{{ $line ?? '' }}][{{ $taxIdx }}]"
 								class="form-select form-select-sm"
 							>
 							<option value=""></option>
-							{assign var="index" value=$tax}
-							@foreach(($taxes ?? []) as $tax)
-								<option @if(($invoiceItem['tax'][$index] ?? '') === ($tax['tax_id'] ?? '')) selected @endif value="{{ $tax['tax_id'] ?? '' }}">{{ $tax['tax_description'] ?? '' }}</option>
+							@foreach(($taxes ?? []) as $taxOption)
+								<option @if(($invoiceItem['tax'][$taxIdx] ?? '') === ($taxOption['tax_id'] ?? '')) selected @endif value="{{ $taxOption['tax_id'] ?? '' }}">{{ $taxOption['tax_description'] ?? '' }}</option>
 							@endforeach
 						</select>
 						</td>

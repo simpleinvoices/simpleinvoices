@@ -33,8 +33,8 @@
 
 		<tr class="si_invoice_total">
 			<th class="">{{ $LANG['gross_total'] ?? '' }}</th>
-			@for($tax_header = 0; $tax_header < ($defaults->tax_per_line_item ?? 0); $tax_header++)
-				<th class="">{{ $LANG['tax'] ?? '' }} @if($defaults->tax_per_line_item > 1){{ ($tax_header + 1) }}@endif </th>
+			@for($tax_header = 0; $tax_header < (int)($defaults['tax_per_line_item'] ?? 0); $tax_header++)
+				<th class="">{{ $LANG['tax'] ?? '' }} @if(($defaults['tax_per_line_item'] ?? 0) > 1){{ ($tax_header + 1) }}@endif </th>
 			@endfor
 			<th class="">{{ $LANG['inv_pref'] ?? '' }}</th>
 		</tr>
@@ -44,12 +44,12 @@
 		@if($taxes == null )
 			<td><p><em>{{ $LANG['no_taxes'] ?? '' }}</em></p></td>
 		@else
-			@for($tax = 0; $tax < ($defaults->tax_per_line_item ?? 0); $tax++)
+			@for($taxIdx = 0; $taxIdx < (int)($defaults['tax_per_line_item'] ?? 0); $taxIdx++)
 			<td>
-				<select id="tax_id[0][{{ $tax }}]" name="tax_id[0][{{ $tax }}]" class="form-select">
+				<select id="tax_id[0][{{ $taxIdx }}]" name="tax_id[0][{{ $taxIdx }}]" class="form-select">
 					<option value=""></option>
-				@foreach(($taxes ?? []) as $tax)
-					<option @if($tax['tax_id'] == $defaults->tax AND $tax == 0) selected @endif   value="{{ $tax['tax_id'] ?? '' }}">{{ $tax['tax_description'] ?? '' }}</option>
+				@foreach(($taxes ?? []) as $taxOption)
+					<option @if(($taxOption['tax_id'] ?? '') == ($defaults['tax'] ?? '') && $taxIdx == 0) selected @endif value="{{ $taxOption['tax_id'] ?? '' }}">{{ $taxOption['tax_description'] ?? '' }}</option>
 				@endforeach
 				</select>
 			</td>
@@ -62,7 +62,7 @@
 		@else
 				<select name="preference_id" class="form-select">
 			@foreach(($preferences ?? []) as $preference)
-					<option @if($tax['tax_id'] == $defaults->preference) selected @endif value="{{ $preference['pref_id'] ?? '' }}">{{ $preference['pref_description'] ?? '' }}</option>
+					<option @if(($preference['pref_id'] ?? '') == ($defaults['preference'] ?? '')) selected @endif value="{{ $preference['pref_id'] ?? '' }}">{{ $preference['pref_description'] ?? '' }}</option>
 			@endforeach
 				</select>
 		@endif

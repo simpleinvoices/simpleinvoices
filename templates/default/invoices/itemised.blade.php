@@ -92,8 +92,8 @@
 				<td class=""></td>
 				<td class="">{{ $LANG['quantity'] ?? '' }}</td>
 				<td class="">{{ $LANG['item'] ?? '' }}</td>
-			@for($tax_header = 0; $tax_header < ($defaults->tax_per_line_item ?? 0); $tax_header++)
-				<td class="">{{ $LANG['tax'] ?? '' }} @if($defaults->tax_per_line_item > 1){{ ($tax_header + 1) }}@endif </td>
+			@for($tax_header = 0; $tax_header < (int)($defaults['tax_per_line_item'] ?? 0); $tax_header++)
+				<td class="">{{ $LANG['tax'] ?? '' }} @if(($defaults['tax_per_line_item'] ?? 0) > 1){{ ($tax_header + 1) }}@endif </td>
 			@endfor
 				<td class="">{{ $LANG['unit_price'] ?? '' }}</td>
 			</tr>
@@ -163,7 +163,7 @@
 				</select>
 			@endif
 				</td>
-				@for($taxIdx = 0; $taxIdx < ($defaults->tax_per_line_item ?? 0); $taxIdx++)
+				@for($taxIdx = 0; $taxIdx < (int)($defaults['tax_per_line_item'] ?? 0); $taxIdx++)
 				<td>
 					<select 
 						id="tax_id[{{ $line }}][{{ $taxIdx }}]"
