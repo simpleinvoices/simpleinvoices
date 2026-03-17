@@ -57,7 +57,7 @@
 		@else	
 				<select name="customer_id" class="form-select">
 					@foreach(($customers ?? []) as $customer)
-					<option @if($biller['id'] == $invoice['biller_id']) selected @endif value="{{ $customer['id'] ?? '' }}">{{ $customer['name'] ?? '' }}</option>
+					<option @if($customer['id'] == $invoice['customer_id']) selected @endif value="{{ $customer['id'] ?? '' }}">{{ $customer['name'] ?? '' }}</option>
 					@endforeach
 				</select>
 		@endif
@@ -270,7 +270,7 @@
 		@else
 				<select name="preference_id" class="form-select">
 				@foreach(($preferences ?? []) as $preference)
-					<option @if($biller['id'] == $invoice['biller_id']) selected @endif value="{{ $preference['pref_id']  }}">{{ $preference['pref_description']  }}</option>
+					<option @if(($preference['pref_id'] ?? '') == ($invoice['preference_id'] ?? $defaults['preference'] ?? '')) selected @endif value="{{ $preference['pref_id']  }}">{{ $preference['pref_description']  }}</option>
 				@endforeach
 				</select>
 		@endif								 

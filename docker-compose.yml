@@ -2,32 +2,30 @@ services:
   simpleinvoices:
     build: .
     ports:
-      - "8888:80"
+      - "${SI_APP_PORT:-8888}:80"
     depends_on:
       db:
         condition: service_healthy
     environment:
-      - SI_DB_HOST=db
-      - SI_DB_PORT=3306
-      - SI_DB_USER=root
-      - SI_DB_PASSWORD=rootpassword
-      - SI_DB_NAME=simple_invoices
+      - SI_DB_HOST=${SI_DB_HOST}
+      - SI_DB_PORT=${SI_DB_PORT}
+      - SI_DB_USER=${SI_DB_USER}
+      - SI_DB_PASSWORD=${SI_DB_PASSWORD}
+      - SI_DB_NAME=${SI_DB_NAME}
     networks:
       - simpleinvoices-net
 
-  # MariaDB on Alpine (yobasystems image; multi-arch, well maintained)
   db:
     image: yobasystems/alpine-mariadb:11.4.9
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: simple_invoices
-      MYSQL_USER: simpleuser
-      MYSQL_PASSWORD: simplepass
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
-      - "3307:3306"
+      - "${DB_PORT:-3307}:3306"
     volumes:
       - mysql_data:/var/lib/mysql
-    #  - ./databases/mysql/Full_Simple_Invoices.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - simpleinvoices-net
     healthcheck:
@@ -41,11 +39,11 @@ services:
   adminer:
     image: adminer:latest
     environment:
-      ADMINER_DEFAULT_SERVER: db
-      ADMINER_DEFAULT_USERNAME: root
-      ADMINER_DEFAULT_PASSWORD: rootpassword
+      ADMINER_DEFAULT_SERVER: ${ADMINER_DEFAULT_SERVER}
+      ADMINER_DEFAULT_USERNAME: ${ADMINER_DEFAULT_USERNAME}
+      ADMINER_DEFAULT_PASSWORD: ${ADMINER_DEFAULT_PASSWORD}
     ports:
-      - "8081:8080"
+      - "${ADMINER_PORT:-8081}:8080"
     depends_on:
       db:
         condition: service_healthy

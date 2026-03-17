@@ -76,7 +76,7 @@
 @else
 	<select name="preference_id" class="form-select">
 	@foreach(($preferences ?? []) as $preference)
-		<option @if(($preference['pref_id'] ?? '') == $defaults->preference) selected @endif value="{{ $preference['pref_id'] ?? '' }}">{{ $preference['pref_description'] ?? '' }}</option>
+		<option @if(($preference['pref_id'] ?? '') == ($defaults['preference'] ?? '')) selected @endif value="{{ $preference['pref_id'] ?? '' }}">{{ $preference['pref_description'] ?? '' }}</option>
 	@endforeach
 	</select>
 @endif

@@ -1,32 +1,32 @@
 #!/bin/sh
 set -e
 
+# Start PHP-FPM early so it's ready while we do config/DB wait
+php-fpm &
+
 # Ensure tmp and subdirs exist and are writable (Alpine: www-data from php-fpm image)
 mkdir -p /var/www/html/tmp/cache /var/www/html/tmp/log /var/www/html/tmp/database_backups
 chown -R www-data:www-data /var/www/html/tmp
 chmod -R 775 /var/www/html/tmp
 
-# Optional: run composer install at startup if vendor is missing
-if [ -f "/var/www/html/composer.json" ] && [ ! -d "/var/www/html/vendor/autoload.php" ]; then
-    echo "Running composer install in container..."
-    (cd /var/www/html && composer install --no-interaction --no-dev --optimize-autoloader) || true
-    chown -R www-data:www-data /var/www/html/vendor 2>/dev/null || true
-fi
-
-# When running in Docker Compose, override DB config so the app connects to the db service
+# When running in Docker Compose (or --env-file), override DB config so the app connects to the db
 if [ -n "${SI_DB_HOST}" ]; then
-  # Wait until DB host resolves (Docker DNS) – same resolver PHP will use
+  # Single PHP process that waits for host resolution (avoids 30x php invocations)
   _port="${SI_DB_PORT:-3306}"
-  _max=30
-  _n=0
-  while [ $_n -lt $_max ]; do
-    if php -r "exit((gethostbyname('${SI_DB_HOST}') !== '${SI_DB_HOST}') ? 0 : 1);" 2>/dev/null; then
-      break
-    fi
-    _n=$((_n + 1))
-    [ $_n -lt $_max ] && sleep 1
-  done
-  if [ $_n -eq $_max ]; then
+  _max="${SI_DB_WAIT_MAX:-30}"
+  export SI_DB_WAIT_MAX="$_max"
+  if ! php -r "
+    \$h = getenv('SI_DB_HOST');
+    if (!\$h) exit(1);
+    \$max = (int) (getenv('SI_DB_WAIT_MAX') ?: 30);
+    \$is_ip = filter_var(\$h, FILTER_VALIDATE_IP) !== false;
+    for (\$n = 0; \$n < \$max; \$n++) {
+      if (\$is_ip) exit(0);
+      if (gethostbyname(\$h) !== \$h) exit(0);
+      if (\$n < \$max - 1) sleep(1);
+    }
+    exit(1);
+  " 2>/dev/null; then
     echo "Entrypoint: could not resolve host '${SI_DB_HOST}' after ${_max}s. Ensure the app container is on the same Docker network as the db service (e.g. docker compose up)." >&2
     exit 1
   fi
@@ -41,8 +41,12 @@ if [ -n "${SI_DB_HOST}" ]; then
   rm -f /var/www/html/config/custom.config.php.bak
 fi
 
-# Start PHP-FPM in background (listens on 127.0.0.1:9000 for nginx)
-php-fpm &
-
-# Run CMD (nginx -g "daemon off;")
-exec "$@"
+# Run CMD (nginx -g "daemon off;"). Use full path so exec doesn't misinterpret args; skip leading "--".
+case "${1:-nginx}" in
+  --)
+    shift; exec "$@" ;;
+  nginx)
+    exec /usr/sbin/nginx -g "daemon off;" ;;
+  *)
+    exec "$@" ;;
+esac
