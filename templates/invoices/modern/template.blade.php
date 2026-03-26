@@ -2,7 +2,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+@if(!empty($css_inline))
+<style type="text/css">{{ $css_inline }}</style>
+@else
 <link rel="stylesheet" type="text/css" href="{{ $css|urlsafe }}" media="all">
+@endif
 <title>{{ $preference['pref_inv_wording'] ?? '' }} {{ $LANG['number_short'] ?? '' }}: {{ $invoice['index_id'] ?? '' }}</title>
 </head>
 <body class="si-modern-inv">
@@ -209,6 +213,14 @@
 	</table>
 
 	<table class="left invoice-items-table si-modern-items-table" width="100%">
+		<colgroup>
+			<col class="si-modern-col-qty" />
+			<col class="si-modern-col-item" />
+			<col class="si-modern-col-item" />
+			<col class="si-modern-col-item" />
+			<col class="si-modern-col-unit" />
+			<col class="si-modern-col-amount" />
+		</colgroup>
 		<tr>
 			<td colspan="6"><br /></td>
 		</tr>

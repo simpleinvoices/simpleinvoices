@@ -20,7 +20,9 @@
 }
 
 body.si-modern-inv {
+	background: #f8fafc;
 	background: var(--si-modern-bg);
+	color: #1e293b;
 	color: var(--si-modern-text);
 	font-size: 13pt;
 	font-family: var(--si-modern-font);
@@ -30,13 +32,20 @@ body.si-modern-inv {
 }
 
 .si-modern-inv-card {
+	background: #ffffff;
 	background: var(--si-modern-card-bg);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 	box-shadow: var(--si-modern-shadow);
+	border-radius: 6px;
 	border-radius: var(--si-modern-radius);
+	border: 1px solid #e2e8f0;
 	border: 1px solid var(--si-modern-border);
 	padding: 2rem;
 	max-width: 900px;
 	margin: 0 auto;
+}
+.si-modern-inv #container {
+	max-width: 100%;
 }
 
 table {
@@ -46,9 +55,20 @@ table {
 td, th { margin: 0; padding: 0; vertical-align: top; }
 
 /* Header: logo + heading */
-.si-modern-header-table { margin-bottom: 0.5rem; }
+.si-modern-header-table {
+	margin-bottom: 0.75rem;
+	table-layout: fixed;
+}
+.si-modern-header-table td,
+.si-modern-header-table th {
+	padding: 0;
+	vertical-align: middle;
+}
 .si-modern-logo {
+	max-width: 220px;
 	max-height: 52px;
+	width: auto;
+	height: auto;
 	vertical-align: middle;
 	display: inline-block;
 }
@@ -56,11 +76,14 @@ td, th { margin: 0; padding: 0; vertical-align: top; }
 	font-family: var(--si-modern-font);
 	font-size: 1.25rem;
 	font-weight: 700;
+	color: #1e293b;
 	color: var(--si-modern-text);
 	letter-spacing: -0.02em;
+	text-align: right;
 }
 .si-modern-header-bar {
 	height: 3px;
+	background: #206bc4;
 	background: linear-gradient(90deg, var(--si-modern-accent) 0%, var(--si-modern-accent-soft) 100%);
 	border: none;
 	padding: 0;
@@ -70,15 +93,15 @@ td, th { margin: 0; padding: 0; vertical-align: top; }
 /* Two-column layout: biller/customer left, summary right */
 .summary-biller-layout.si-modern-summary-layout {
 	border: none;
-	margin-bottom: 0;
+	margin-bottom: 0.75rem;
 	table-layout: fixed;
 }
 .summary-biller-layout .column-left {
-	padding-right: 1.5em;
+	padding-right: 1.25em;
 	vertical-align: top;
 }
 .summary-biller-layout .column-right {
-	padding-left: 1.5em;
+	padding-left: 1.25em;
 	vertical-align: top;
 	text-align: right;
 }
@@ -86,19 +109,21 @@ td, th { margin: 0; padding: 0; vertical-align: top; }
 
 /* Biller / Customer blocks */
 .si-modern-block-table td {
-	padding: 0.2em 0.4em 0.2em 0;
+	padding: 0.24em 0.45em 0.24em 0;
 	font-size: 0.9em;
 }
 .si-modern-label,
 .si-modern-label-row {
+	border-bottom: 1px solid #f1f5f9;
 	border-bottom: 1px solid var(--si-modern-border-light);
-	padding-bottom: 0.25em;
+	padding-bottom: 0.35em;
 	margin-bottom: 0;
 }
-.si-modern-label { color: var(--si-modern-text-muted); font-weight: 600; }
-.si-modern-label-row { font-weight: 600; color: var(--si-modern-text); }
+.si-modern-label { color: #64748b; color: var(--si-modern-text-muted); font-weight: 600; }
+.si-modern-label-row { font-weight: 600; color: #1e293b; color: var(--si-modern-text); }
 .si-modern-block-table .col1 { background: transparent; }
 .si-modern-muted {
+	color: #64748b;
 	color: var(--si-modern-text-muted);
 	font-size: 0.875em;
 }
@@ -110,22 +135,30 @@ td, th { margin: 0; padding: 0; vertical-align: top; }
 	table-layout: auto;
 	margin-left: auto;
 	margin-right: 0;
+	border: 1px solid #e2e8f0;
 	border: 1px solid var(--si-modern-border);
+	border-radius: 6px;
 	border-radius: var(--si-modern-radius);
 	overflow: hidden;
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+	background: #fff;
 }
-.si-modern-summary-table .col1 { background: var(--si-modern-head-bg); }
+.si-modern-summary-table .col1 { background: #f1f5f9; background: var(--si-modern-head-bg); }
 .si-modern-summary-head {
 	padding: 0.6em 0.75em;
 	font-size: 0.8em;
 	text-transform: uppercase;
 	letter-spacing: 0.04em;
+	color: #1e293b;
 	color: var(--si-modern-text);
+	border-bottom: 1px solid #e2e8f0;
 	border-bottom: 1px solid var(--si-modern-border);
+	background: #f1f5f9;
+	background: var(--si-modern-head-bg);
 }
 .si-modern-summary-table td {
 	padding: 0.4em 0.75em;
+	border-bottom: 1px solid #f1f5f9;
 	border-bottom: 1px solid var(--si-modern-border-light);
 	font-size: 0.9em;
 }
@@ -133,15 +166,18 @@ td, th { margin: 0; padding: 0; vertical-align: top; }
 .si-modern-summary-val {
 	font-variant-numeric: tabular-nums;
 	font-weight: 500;
+	color: #1e293b;
 	color: var(--si-modern-text);
 }
 .si-modern-owing-label {
 	font-weight: 600;
+	color: #1e293b;
 	color: var(--si-modern-text);
 }
 .si-modern-owing-val {
 	font-weight: 700;
 	font-variant-numeric: tabular-nums;
+	color: #2fb344;
 	color: var(--si-modern-owing);
 }
 
@@ -149,59 +185,84 @@ td, th { margin: 0; padding: 0; vertical-align: top; }
 .left { clear: left; }
 .right { float: right; }
 
-.invoice-items-table.si-modern-items-table { margin-top: 1rem; }
-.si-modern-items-table .col-qty {
-	width: 3em;
-	min-width: 3em;
+.invoice-items-table.si-modern-items-table {
+	margin-top: 1rem;
+	table-layout: fixed;
+	border: 1px solid #e2e8f0;
+	border: 1px solid var(--si-modern-border);
+	border-radius: 6px;
+	border-radius: var(--si-modern-radius);
+	overflow: hidden;
+	background: #fff;
+}
+.si-modern-col-qty {
+	width: 4.5rem;
+}
+.si-modern-col-unit,
+.si-modern-col-amount {
+	width: 8.5rem;
+}
+.si-modern-items-table .col-qty,
+.si-modern-items-table .si-modern-col-qty {
 	white-space: nowrap;
 }
 
 .si-modern-th {
+	background: #f1f5f9;
 	background: var(--si-modern-head-bg);
+	color: #64748b;
 	color: var(--si-modern-text-muted);
 	font-size: 0.75em;
 	text-transform: uppercase;
 	letter-spacing: 0.04em;
 	padding: 0.6em 0.75em;
+	border-bottom: 1px solid #e2e8f0;
 	border-bottom: 1px solid var(--si-modern-border);
-	border-top: 1px solid var(--si-modern-border);
 }
-.si-modern-items-table .si-modern-th:first-child { border-left: 1px solid var(--si-modern-border); }
-.si-modern-items-table .si-modern-th:last-child { border-right: 1px solid var(--si-modern-border); }
 
 .si-modern-item-row td {
 	padding: 0.5em 0.75em;
+	border-bottom: 1px solid #f1f5f9;
 	border-bottom: 1px solid var(--si-modern-border-light);
 	font-size: 0.9em;
+	word-wrap: break-word;
 }
 .si-modern-num {
 	font-variant-numeric: tabular-nums;
 	text-align: right;
+	white-space: nowrap;
 }
 .si_product_attribute.si-modern-attr td,
 .si-modern-line-desc td {
 	padding-top: 0.15em;
 	padding-bottom: 0.35em;
 	font-size: 0.85em;
+	color: #64748b;
 	color: var(--si-modern-text-muted);
 	border-bottom: none;
 }
 .si-modern-item-sep td {
+	border-bottom: 1px solid #f1f5f9;
 	border-bottom: 1px solid var(--si-modern-border-light);
 	padding-bottom: 0.5em;
 }
+.si-modern-items-table > tbody > tr:last-child td {
+	border-bottom: none;
+}
 
 /* Notes */
-.si-modern-notes-head { padding-top: 0.5em; color: var(--si-modern-text); }
+.si-modern-notes-head { padding-top: 0.5em; color: #1e293b; color: var(--si-modern-text); }
 .si-modern-notes-body {
 	padding: 0.25em 0;
 	font-size: 0.9em;
+	color: #64748b;
 	color: var(--si-modern-text-muted);
 }
 
 /* Totals row */
 .si-modern-total-row td {
 	padding-top: 0.6em;
+	border-top: 2px solid #e2e8f0;
 	border-top: 2px solid var(--si-modern-border);
 	font-weight: 600;
 }
@@ -209,6 +270,7 @@ td, th { margin: 0; padding: 0; vertical-align: top; }
 	font-weight: 700;
 	font-size: 1.05em;
 	font-variant-numeric: tabular-nums;
+	color: #1e293b;
 	color: var(--si-modern-text);
 }
 
@@ -216,23 +278,27 @@ td, th { margin: 0; padding: 0; vertical-align: top; }
 .si-modern-detail-head {
 	padding-top: 0.5em;
 	font-size: 0.95em;
+	color: #1e293b;
 	color: var(--si-modern-text);
+	border-bottom: 1px solid #f1f5f9;
 	border-bottom: 1px solid var(--si-modern-border-light);
 	padding-bottom: 0.25em;
 }
 .si-modern-detail-line {
 	font-size: 0.875em;
+	color: #64748b;
 	color: var(--si-modern-text-muted);
 	padding: 0.15em 0;
 }
 .si-modern-footer {
 	font-size: 0.75em;
+	color: #64748b;
 	color: var(--si-modern-text-muted);
 	line-height: 1.4;
 }
 
 /* Legacy class compatibility (default template uses .col1, .tbl1-bottom) */
-.si-modern-inv .col1 { background-color: var(--si-modern-head-bg); }
+.si-modern-inv .col1 { background-color: #f1f5f9; background-color: var(--si-modern-head-bg); }
 
 @media print {
 	body.si-modern-inv {
@@ -244,6 +310,10 @@ td, th { margin: 0; padding: 0; vertical-align: top; }
 		border: none;
 		padding: 0;
 		max-width: none;
+	}
+	.invoice-summary-table.si-modern-summary-table,
+	.invoice-items-table.si-modern-items-table {
+		box-shadow: none;
 	}
 	.si-modern-header-bar {
 		-webkit-print-color-adjust: exact;

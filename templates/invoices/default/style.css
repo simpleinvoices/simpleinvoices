@@ -18,6 +18,15 @@ tr {margin: 0px;      padding: 0px;}
 
 .font3 { font-family: Arial; font-size: 8pt; }
 
+.si-invoice-logo {
+	display: block;
+	max-width: 220px;
+	max-height: 52px;
+	width: auto;
+	height: auto;
+	vertical-align: middle;
+}
+
 .tbl1 { border: #A0A0A0 1px solid; border-collapse:collapse; }
 .tbl1-left { border-left: #A0A0A0 1px solid; border-collapse:collapse; }
 .tbl1-right { border-right: #A0A0A0 1px solid; border-collapse:collapse; }

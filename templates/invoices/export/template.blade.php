@@ -13,7 +13,7 @@
 
 <table width="100%" align="center">
 		<tr>
-	   		<td colspan="5"><img src="{{ $logo | urlsafe }}" border="0" hspace="0" align="left"></td>
+	   		<td colspan="5"><img src="{{ $logo | urlsafe }}" alt="" style="display:block; max-width:220px; max-height:52px; width:auto; height:auto; vertical-align:middle;" border="0" hspace="0" align="left"></td>
 			<th align="right"><span>{{ $preference['pref_inv_heading'] ?? '' }}</span></th>
 		</tr>
 		<tr>

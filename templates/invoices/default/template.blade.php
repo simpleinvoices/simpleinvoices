@@ -16,7 +16,7 @@
 
 	<table width="100%" align="center">
 		<tr>
-			<td colspan="5"><img src="{{ $logo|urlsafe }}" alt="" style="vertical-align:left"></td>
+			<td colspan="5"><img src="{{ $logo|urlsafe }}" alt="" class="si-invoice-logo"></td>
 			<th align="right"><span class="font1">{{ $preference['pref_inv_heading'] ?? '' }}</span></th>
 		</tr>
 		<tr>
