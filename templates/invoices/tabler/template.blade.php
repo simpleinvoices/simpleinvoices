@@ -4,46 +4,27 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>{{ $preference['pref_inv_wording'] ?? 'Invoice' }} {{ $LANG['number_short'] ?? '' }}: {{ $invoice['index_id'] ?? '' }}</title>
+	@if(!empty($css_inline))
+	<style type="text/css">{{ $css_inline }}</style>
+	@else
 	<link rel="stylesheet" type="text/css" href="{{ $css|urlsafe }}" media="all" />
+	@endif
 </head>
-<body>
-	<div class="si-tabler-inv-header">
-		<div>
-			@if(!empty($logo))
-			<img src="{{ $logo|urlsafe }}" alt="" class="si-tabler-inv-logo" />
-			@endif
-		</div>
-		<div style="text-align: right;">
-			<div class="si-tabler-inv-title">{{ $preference['pref_inv_heading'] ?? '' }}</div>
-			{{-- Summary: Invoice #, Date, Custom fields, Total/Paid/Owing --}}
-			<div class="si-tabler-inv-summary">
-				<table>
-					<tr><td class="col1" colspan="2"><b>{{ $preference['pref_inv_wording'] ?? '' }} {{ $LANG['summary'] ?? 'Summary' }}</b></td></tr>
-					<tr><td>{{ $preference['pref_inv_wording'] ?? '' }} {{ $LANG['number_short'] ?? '' }}:</td><td>{{ $invoice['index_id'] ?? '' }}</td></tr>
-					<tr><td>{{ $preference['pref_inv_wording'] ?? '' }} {{ $LANG['date'] ?? 'Date' }}:</td><td>{{ $invoice['date'] ?? '' }}</td></tr>
-					@if(($invoice['custom_field1'] ?? null) != null)
-					<tr><td>{{ $customFieldLabels['invoice_cf1'] ?? '' }}:</td><td>{{ $invoice['custom_field1'] ?? '' }}</td></tr>
-					@endif
-					@if(($invoice['custom_field2'] ?? null) != null)
-					<tr><td>{{ $customFieldLabels['invoice_cf2'] ?? '' }}:</td><td>{{ $invoice['custom_field2'] ?? '' }}</td></tr>
-					@endif
-					@if(($invoice['custom_field3'] ?? null) != null)
-					<tr><td>{{ $customFieldLabels['invoice_cf3'] ?? '' }}:</td><td>{{ $invoice['custom_field3'] ?? '' }}</td></tr>
-					@endif
-					@if(($invoice['custom_field4'] ?? null) != null)
-					<tr><td>{{ $customFieldLabels['invoice_cf4'] ?? '' }}:</td><td>{{ $invoice['custom_field4'] ?? '' }}</td></tr>
-					@endif
-					<tr><td>{{ $LANG['total'] ?? 'Total' }}:</td><td>{{ $preference['pref_currency_sign'] ?? '' }} {{ ($invoice['total'] ?? '')|siLocal_number }}</td></tr>
-					<tr><td>{{ $LANG['paid'] ?? 'Paid' }}:</td><td>{{ $preference['pref_currency_sign'] ?? '' }} {{ ($invoice['paid'] ?? '')|siLocal_number }}</td></tr>
-					<tr><td>{{ $LANG['owing'] ?? 'Owing' }}:</td><td>{{ $preference['pref_currency_sign'] ?? '' }} {{ ($invoice['owing'] ?? '')|siLocal_number }}</td></tr>
-				</table>
+<body class="si-tabler-inv">
+	<div class="si-tabler-inv-card">
+		<div class="si-tabler-inv-header">
+			<div class="si-tabler-inv-header-left">
+				@if(!empty($logo))
+				<img src="{{ $logo|urlsafe }}" alt="" class="si-tabler-inv-logo" />
+				@else
+				<span class="si-tabler-inv-title">{{ $preference['pref_inv_heading'] ?? '' }}</span>
+				@endif
 			</div>
 		</div>
-	</div>
 
-	{{-- Company (biller) and Client (customer) – two columns --}}
-	<div class="si-tabler-inv-two-col">
-		<div>
+		{{-- Company (biller) and Client (customer) – two columns, Tabler style --}}
+		<div class="si-tabler-inv-two-col">
+			<div class="si-tabler-inv-from">
 			<div class="si-tabler-inv-label">{{ $LANG['biller'] ?? 'Company' }}</div>
 			<div class="si-tabler-inv-name">{{ $biller['name'] ?? '' }}</div>
 			<div class="si-tabler-inv-address">
@@ -62,8 +43,8 @@
 				@if(!empty($biller['custom_field3'])){{ $customFieldLabels['biller_cf3'] ?? '' }}: {{ $biller['custom_field3'] ?? '' }}<br />@endif
 				@if(!empty($biller['custom_field4'])){{ $customFieldLabels['biller_cf4'] ?? '' }}: {{ $biller['custom_field4'] ?? '' }}<br />@endif
 			</div>
-		</div>
-		<div>
+			</div>
+			<div class="si-tabler-inv-to">
 			<div class="si-tabler-inv-label">{{ $LANG['customer'] ?? 'Client' }}</div>
 			<div class="si-tabler-inv-name">{{ $customer['name'] ?? '' }}</div>
 			<div class="si-tabler-inv-address">
@@ -84,22 +65,22 @@
 				@if(!empty($customer['custom_field3'])){{ $customFieldLabels['customer_cf3'] ?? '' }}: {{ $customer['custom_field3'] ?? '' }}<br />@endif
 				@if(!empty($customer['custom_field4'])){{ $customFieldLabels['customer_cf4'] ?? '' }}: {{ $customer['custom_field4'] ?? '' }}<br />@endif
 			</div>
+			</div>
 		</div>
-	</div>
 
-	<h1 class="si-tabler-inv-h1">{{ $preference['pref_inv_wording'] ?? 'Invoice' }} {{ $invoice['index_id'] ?? '' }}</h1>
+		<h1 class="si-tabler-inv-h1"># {{ $preference['pref_inv_wording'] ?? 'Invoice' }} {{ $invoice['index_id'] ?? '' }}</h1>
 
-	{{-- Line items: Type 2 itemised --}}
-	@if(($invoice['type_id'] ?? null) == 2)
-	<table class="si-tabler-inv-table">
-		<thead>
-			<tr>
-				<th>{{ $LANG['quantity_short'] ?? 'Qty' }}</th>
-				<th>{{ $LANG['item'] ?? 'Item' }}</th>
-				<th class="text-end">{{ $LANG['unit_cost'] ?? 'Unit' }}</th>
-				<th class="text-end">{{ $LANG['price'] ?? 'Amount' }}</th>
-			</tr>
-		</thead>
+		{{-- Line items: Type 2 itemised – Tabler table: Product, Qnt, Unit, Amount --}}
+		@if(($invoice['type_id'] ?? null) == 2)
+		<table class="si-tabler-inv-table table-card">
+			<thead>
+				<tr>
+					<th class="w-1">{{ $LANG['quantity_short'] ?? 'Qnt' }}</th>
+					<th>{{ $LANG['item'] ?? 'Product' }}</th>
+					<th class="text-end w-1">{{ $LANG['unit_cost'] ?? 'Unit' }}</th>
+					<th class="text-end w-1">{{ $LANG['price'] ?? 'Amount' }}</th>
+				</tr>
+			</thead>
 		<tbody>
 			@foreach(($invoiceItems ?? []) as $invoiceItem)
 			<tr>
@@ -143,20 +124,20 @@
 			@endif
 			@endforeach
 		</tbody>
-	</table>
-	@endif
+		</table>
+		@endif
 
-	{{-- Line items: Type 3 consulting --}}
-	@if(($invoice['type_id'] ?? null) == 3)
-	<table class="si-tabler-inv-table">
-		<thead>
-			<tr>
-				<th>{{ $LANG['quantity_short'] ?? 'Qty' }}</th>
-				<th>{{ $LANG['item'] ?? 'Item' }}</th>
-				<th class="text-end">{{ $LANG['unit_cost'] ?? 'Unit' }}</th>
-				<th class="text-end">{{ $LANG['price'] ?? 'Amount' }}</th>
-			</tr>
-		</thead>
+		{{-- Line items: Type 3 consulting --}}
+		@if(($invoice['type_id'] ?? null) == 3)
+		<table class="si-tabler-inv-table table-card">
+			<thead>
+				<tr>
+					<th class="w-1">{{ $LANG['quantity_short'] ?? 'Qnt' }}</th>
+					<th>{{ $LANG['item'] ?? 'Product' }}</th>
+					<th class="text-end w-1">{{ $LANG['unit_cost'] ?? 'Unit' }}</th>
+					<th class="text-end w-1">{{ $LANG['price'] ?? 'Amount' }}</th>
+				</tr>
+			</thead>
 		<tbody>
 			@foreach(($invoiceItems ?? []) as $invoiceItem)
 			<tr>
@@ -190,68 +171,77 @@
 			</tr>
 			@endforeach
 		</tbody>
-	</table>
-	@endif
-
-	{{-- Line items: Type 1 total (description only) --}}
-	@if(($invoice['type_id'] ?? null) == 1)
-	<table class="si-tabler-inv-table">
-		<thead>
-			<tr><th>{{ $LANG['description'] ?? 'Description' }}</th></tr>
-		</thead>
-		<tbody>
-			@foreach(($invoiceItems ?? []) as $invoiceItem)
-			<tr><td>{{ ($invoiceItem['description'] ?? '') | outhtml }}</td></tr>
-			@endforeach
-		</tbody>
-	</table>
-	@endif
-
-	@if((($invoice['type_id'] ?? null) == 2 && !empty($invoice['note'])) || (($invoice['type_id'] ?? null) == 3 && !empty($invoice['note'])))
-	<div class="si-tabler-inv-notes">
-		<b>{{ $LANG['notes'] ?? 'Notes' }}:</b><br />
-		{{ ($invoice['note'] ?? '') | outhtml }}
-		</div>
-	@endif
-
-	{{-- Totals: Subtotal, Tax, Total --}}
-	<div class="si-tabler-inv-totals">
-		<table>
-			@if(($invoice_number_of_taxes ?? 0) > 0)
-			<tr><td>{{ $LANG['sub_total'] ?? 'Subtotal' }}</td><td>@if(($invoice_number_of_taxes ?? 0) > 1)<u>@endif{{ $preference['pref_currency_sign'] ?? '' }} {{ ($invoice['gross'] ?? '')|siLocal_number }}@if(($invoice_number_of_taxes ?? 0) > 1)</u>@endif</td></tr>
-			@endif
-			@foreach(($invoice['tax_grouped'] ?? []) as $line)
-				@if(($line['tax_amount'] ?? 0) != "0")
-				<tr><td>{{ $line['tax_name'] ?? '' }}</td><td>{{ $preference['pref_currency_sign'] ?? '' }} {{ siLocal::number($line['tax_amount'] ?? 0) }}</td></tr>
-				@endif
-			@endforeach
-			@if(($invoice_number_of_taxes ?? 0) > 1)
-			<tr><td>{{ $LANG['tax_total'] ?? 'Tax total' }}</td><td><u>{{ $preference['pref_currency_sign'] ?? '' }} {{ ($invoice['total_tax'] ?? '')|siLocal_number }}</u></td></tr>
-			@endif
-			<tr class="total-row"><td><b>{{ $preference['pref_inv_wording'] ?? 'Invoice' }} {{ $LANG['amount'] ?? 'Amount' }}</b></td><td><span class="double_underline">{{ $preference['pref_currency_sign'] ?? '' }} {{ ($invoice['total'] ?? '')|siLocal_number }}</span></td></tr>
 		</table>
-	</div>
+		@endif
 
-	{{-- Invoice details section --}}
-	<div class="si-tabler-inv-detail-heading">{{ $preference['pref_inv_detail_heading'] ?? '' }}</div>
-	<div class="si-tabler-inv-detail-line"><i>{{ ($preference['pref_inv_detail_line'] ?? '') | outhtml }}</i></div>
-	<div class="si-tabler-inv-detail-line">{{ $preference['pref_inv_payment_method'] ?? '' }}</div>
-	<div class="si-tabler-inv-detail-line">{{ $preference['pref_inv_payment_line1_name'] ?? '' }} {{ $preference['pref_inv_payment_line1_value'] ?? '' }}</div>
-	<div class="si-tabler-inv-detail-line">{{ $preference['pref_inv_payment_line2_name'] ?? '' }} {{ $preference['pref_inv_payment_line2_value'] ?? '' }}</div>
+		{{-- Line items: Type 1 total (description only) --}}
+		@if(($invoice['type_id'] ?? null) == 1)
+		<table class="si-tabler-inv-table table-card">
+			<thead>
+				<tr><th>{{ $LANG['description'] ?? 'Description' }}</th></tr>
+			</thead>
+			<tbody>
+				@foreach(($invoiceItems ?? []) as $invoiceItem)
+				<tr><td>{{ ($invoiceItem['description'] ?? '') | outhtml }}</td></tr>
+				@endforeach
+			</tbody>
+		</table>
+		@endif
 
-	<div class="si-tabler-inv-footer">{{ ($biller['footer'] ?? '') | outhtml }}</div>
+		@if((($invoice['type_id'] ?? null) == 2 && !empty($invoice['note'])) || (($invoice['type_id'] ?? null) == 3 && !empty($invoice['note'])))
+		<div class="si-tabler-inv-notes">
+			<b>{{ $LANG['notes'] ?? 'Notes' }}:</b><br />
+			{{ ($invoice['note'] ?? '') | outhtml }}
+		</div>
+		@endif
 
-	<div>
-		{online_payment_link
-			type=$preference['include_online_payment'] business=$biller['paypal_business_name']
-			item_name=$invoice['index_name'] invoice=$invoice['id']
-			amount=$invoice['owing'] currency_code=$preference['currency_code']
-			link_wording=$LANG['paypal_link']
-			notify_url=$biller['paypal_notify_url'] return_url=$biller['paypal_return_url']
-			domain_id = $invoice['domain_id'] include_image=true
-			api_id = $biller['paymentsgateway_api_id']
-			customer = $customer
-		}
+		{{-- Totals: Subtotal, Tax, Total Due – Tabler style table --}}
+		<div class="si-tabler-inv-totals-wrap">
+			<table class="si-tabler-inv-totals">
+				@if(($invoice_number_of_taxes ?? 0) > 0)
+				<tr><td>{{ $LANG['sub_total'] ?? 'Subtotal' }}</td><td class="text-end">@if(($invoice_number_of_taxes ?? 0) > 1)<u>@endif{{ $preference['pref_currency_sign'] ?? '' }} {{ ($invoice['gross'] ?? '')|siLocal_number }}@if(($invoice_number_of_taxes ?? 0) > 1)</u>@endif</td></tr>
+				@endif
+				@foreach(($invoice['tax_grouped'] ?? []) as $line)
+					@if(($line['tax_amount'] ?? 0) != "0")
+					<tr><td>{{ $line['tax_name'] ?? '' }}</td><td class="text-end">{{ $preference['pref_currency_sign'] ?? '' }} {{ siLocal::number($line['tax_amount'] ?? 0) }}</td></tr>
+					@endif
+				@endforeach
+				@if(($invoice_number_of_taxes ?? 0) > 1)
+				<tr><td>{{ $LANG['tax_total'] ?? 'Tax total' }}</td><td class="text-end"><u>{{ $preference['pref_currency_sign'] ?? '' }} {{ ($invoice['total_tax'] ?? '')|siLocal_number }}</u></td></tr>
+				@endif
+				<tr class="si-tabler-inv-total-due">
+					<td>{{ $LANG['total'] ?? 'Total Due' }}</td>
+					<td class="text-end">{{ $preference['pref_currency_sign'] ?? '' }} {{ ($invoice['total'] ?? '')|siLocal_number }}</td>
+				</tr>
+			</table>
+		</div>
+
+		{{-- Thank you message (Tabler style) --}}
+		<div class="si-tabler-inv-thanks">
+			Thank you very much for doing business with us. We look forward to working with you again!
+		</div>
+
+		{{-- Invoice details / payment --}}
+		<div class="si-tabler-inv-detail-heading">{{ $preference['pref_inv_detail_heading'] ?? '' }}</div>
+		<div class="si-tabler-inv-detail-line"><i>{{ ($preference['pref_inv_detail_line'] ?? '') | outhtml }}</i></div>
+		<div class="si-tabler-inv-detail-line">{{ $preference['pref_inv_payment_method'] ?? '' }}</div>
+		<div class="si-tabler-inv-detail-line">{{ $preference['pref_inv_payment_line1_name'] ?? '' }} {{ $preference['pref_inv_payment_line1_value'] ?? '' }}</div>
+		<div class="si-tabler-inv-detail-line">{{ $preference['pref_inv_payment_line2_name'] ?? '' }} {{ $preference['pref_inv_payment_line2_value'] ?? '' }}</div>
+
+		<div class="si-tabler-inv-footer">{{ ($biller['footer'] ?? '') | outhtml }}</div>
+
+		<div class="si-tabler-inv-payment-link">
+			{online_payment_link
+				type=$preference['include_online_payment'] business=$biller['paypal_business_name']
+				item_name=$invoice['index_name'] invoice=$invoice['id']
+				amount=$invoice['owing'] currency_code=$preference['currency_code']
+				link_wording=$LANG['paypal_link']
+				notify_url=$biller['paypal_notify_url'] return_url=$biller['paypal_return_url']
+				domain_id = $invoice['domain_id'] include_image=true
+				api_id = $biller['paymentsgateway_api_id']
+				customer = $customer
+			}
+		</div>
 	</div>
 </body>
 </html>

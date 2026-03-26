@@ -32,7 +32,7 @@ class DropDown extends CustomField {
 
 		$array = array("hans","john","getrud","jonathan","fabian");
 
-		$t = "<select name='$name'>";
+		$t = "<select name='$name' class='form-select'>";
 		foreach($array as $item) {
 			if($item == $value) {
 				$t .= "<option selected >$item</option>";

@@ -2578,12 +2578,25 @@ function checkFieldExists($table,$field) {
 
 function checkDataExists()
 {
+	// Patches applied means we're past initial install
 	$test = getNumberOfDoneSQLPatches();
-	if ($test > 0 ){
+	if ($test > 0) {
 		return true;
-	} else {
-		return false;
 	}
+	// No patches yet: treat as "data exists" if essential data is present.
+	// The install wizard imports essential_data.json; only the first SQL statement
+	// runs (PDO single-statement), so the first table populated is si_custom_fields.
+	if (checkTableExists(TB_PREFIX . 'custom_fields')) {
+		try {
+			$sth = dbQuery("SELECT 1 FROM " . TB_PREFIX . "custom_fields LIMIT 1");
+			if ($sth && $sth->fetch()) {
+				return true;
+			}
+		} catch (Exception $e) {
+			// ignore
+		}
+	}
+	return false;
 }
 
 function getURL()
@@ -2649,7 +2662,7 @@ function pdfThis($html,$file_location="",$pdfname)
 
 	global $config;
 
-	// Load the new HTML2PDF library
+	// Load Composer autoloader (mPDF)
 	require_once('./vendor/autoload.php');
 
 	require_once("./include/init.php");	// for getInvoice() and getPreference()
@@ -2679,44 +2692,87 @@ function pdfThis($html,$file_location="",$pdfname)
 			global $config;
 
 			try {
-				// Create HTML2PDF instance
-				$html2pdf = new \Spipu\Html2Pdf\Html2Pdf(
-					$config->export->pdf->papersize == 'A4' ? 'P' : 'P',  // orientation
-					$config->export->pdf->papersize,  // paper size
-					'en'  // language
-				);
-				
-				// Configure security to allow localhost URLs and local files
-				$security = $html2pdf->getSecurityService();
-				$security->addAllowedHost('localhost');
-				$security->addAllowedHost('127.0.0.1');
-				if (isset($_SERVER['HTTP_HOST'])) {
-					$security->addAllowedHost($_SERVER['HTTP_HOST']);
+				// Convert app URLs to local filesystem paths so mPDF can load CSS/images
+				// without fetching from localhost (which often fails in CLI/Docker/local dev)
+				$base_url = rtrim(getURL(), '/');
+				$app_root = str_replace('\\', '/', realpath(dirname(__DIR__)));
+				if ($base_url !== '' && $app_root !== false) {
+					$html_to_pdf = str_replace($base_url . '/', $app_root . '/', $html_to_pdf);
+					$html_to_pdf = str_replace($base_url, $app_root, $html_to_pdf);
+					// Decode URL-encoded path segments (e.g. %20) in local paths so fopen() can open them
+					$html_to_pdf = preg_replace_callback(
+						'/\b(href|src)=(["\'])([^\2]*?)\2/',
+						function ($m) use ($app_root) {
+							$val = $m[3];
+							if (strpos($val, $app_root) === 0) {
+								$val = rawurldecode($val);
+							}
+							return $m[1] . '=' . $m[2] . $val . $m[2];
+						},
+						$html_to_pdf
+					);
 				}
-				// Disable host checking for local development to avoid CSS/image loading issues
-				$security->disableCheckAllowedHosts();
-				
-				// Set margins from config
-				$html2pdf->pdf->SetMargins(
-					$config->export->pdf->leftmargin,
-					$config->export->pdf->topmargin, 
-					$config->export->pdf->rightmargin
-				);
-				$html2pdf->pdf->SetAutoPageBreak(true, $config->export->pdf->bottommargin);
-				
-				// Process the HTML
-				$html2pdf->writeHTML($html_to_pdf);
-				
-				if($file_location == "download") {
-					// Output to browser for download
-					$html2pdf->output($pdfname . '.pdf', 'D');
+
+				// Inline stylesheets so PDF is always styled (mPDF often doesn't load linked CSS
+				// when base_url is wrong or in Docker/CLI). Only inline local paths under app root.
+				if ($app_root !== false) {
+					$html_to_pdf = preg_replace_callback(
+						'/<link\s+[^>]*rel\s*=\s*["\']stylesheet["\'][^>]*href\s*=\s*["\']([^"\']+)["\'][^>]*\s*\/?>/i',
+						function ($m) use ($app_root) {
+							$path = rawurldecode($m[1]);
+							$path = str_replace('\\', '/', $path);
+							// Already a local absolute path under app root (after URL replacement above)
+							if (strpos($path, $app_root) === 0) {
+								// use as-is
+							} else {
+								// URL or relative path: take path segment (e.g. /templates/invoices/tabler/style.css)
+								$pathSegment = $path;
+								if (preg_match('#^https?://[^/]+(/.+)$#', $path, $urlParts)) {
+									$pathSegment = $urlParts[1];
+								} elseif ($path !== '' && $path[0] !== '/') {
+									$pathSegment = '/' . $path;
+								}
+								$path = $app_root . $pathSegment;
+							}
+							if (!is_file($path) || !is_readable($path)) {
+								return $m[0];
+							}
+							$real = str_replace('\\', '/', realpath($path));
+							if ($real === false || strpos($real, $app_root) !== 0) {
+								return $m[0];
+							}
+							$css = file_get_contents($path);
+							if ($css === false) {
+								return $m[0];
+							}
+							return '<style type="text/css">' . $css . '</style>';
+						},
+						$html_to_pdf
+					);
+				}
+
+				$format = $config->export->pdf->papersize ?? 'A4';
+				$mpdf = new \Mpdf\Mpdf([
+					'mode' => 'utf-8',
+					'format' => $format,
+					'orientation' => 'P',
+					'margin_left'   => (float) ($config->export->pdf->leftmargin ?? 15),
+					'margin_right'  => (float) ($config->export->pdf->rightmargin ?? 15),
+					'margin_top'    => (float) ($config->export->pdf->topmargin ?? 15),
+					'margin_bottom' => (float) ($config->export->pdf->bottommargin ?? 15),
+				]);
+
+				$mpdf->WriteHTML($html_to_pdf);
+
+				$filename = $pdfname . '.pdf';
+				if ($file_location === "download") {
+					$mpdf->Output($filename, \Mpdf\Output\Destination::DOWNLOAD);
 				} else {
-					// Save to file on server
-					$html2pdf->output($pdfname . '.pdf', 'F');
+					$mpdf->Output($filename, \Mpdf\Output\Destination::FILE);
 				}
-				
-			} catch(\Spipu\Html2Pdf\Exception\Html2PdfException $e) {
-				error_log('HTML2PDF Error: ' . $e->getMessage());
+
+			} catch (\Mpdf\MpdfException $e) {
+				error_log('mPDF Error: ' . $e->getMessage());
 				throw new Exception('PDF generation failed: ' . $e->getMessage());
 			}
 		}

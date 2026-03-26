@@ -32,6 +32,33 @@ tr {margin: 0px;      padding: 0px;}
  float: right;
 }
 
+/* Two-column layout: biller/customer left, summary right. Table-based so it works in PDF (mPDF) and web. */
+.summary-biller-layout {
+ border: none;
+ margin-bottom: 0;
+ table-layout: fixed;
+}
+.summary-biller-layout .column-left {
+ padding-right: 1em;
+ vertical-align: top;
+}
+.summary-biller-layout .column-right {
+ padding-left: 1em;
+ vertical-align: top;
+ text-align: right;
+}
+.summary-biller-layout .column-right .right {
+ float: none;
+}
+/* Keep summary table compact: use column width, don't stretch to full page. */
+.invoice-summary-table {
+ width: 100%;
+ max-width: 18em;
+ table-layout: auto;
+ margin-left: auto;
+ margin-right: 0;
+}
+
 .double_underline
 {
 	border-bottom: 3px double #555;
@@ -39,4 +66,11 @@ tr {margin: 0px;      padding: 0px;}
 .si_product_attribute
 {
     padding-right:20px;
+}
+
+/* Keep qty column narrow in PDF (mPDF expands columns without explicit width). */
+.invoice-items-table .col-qty {
+ width: 3em;
+ min-width: 3em;
+ white-space: nowrap;
 }

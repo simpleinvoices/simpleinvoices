@@ -1,12 +1,25 @@
 /**
  * Tabler-style invoice template (print & screen).
- * Inspired by https://preview.tabler.io/invoice.html
+ * Matches https://preview.tabler.io/invoice.html
  */
-body {
-	background: #fff;
-	color: #1e293b;
+:root {
+	--si-inv-bg: #fff;
+	--si-inv-text: #1e293b;
+	--si-inv-text-muted: #64748b;
+	--si-inv-border: #e2e8f0;
+	--si-inv-border-light: #f1f5f9;
+	--si-inv-head-bg: #f8fafc;
+	--si-inv-card-bg: #fff;
+	--si-inv-card-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.05);
+	--si-inv-radius: 0.5rem;
+	--si-inv-font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body.si-tabler-inv {
+	background: var(--si-inv-bg);
+	color: var(--si-inv-text);
 	font-size: 14px;
-	font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+	font-family: var(--si-inv-font);
 	line-height: 1.5;
 	margin: 0;
 	padding: 1.5rem;
@@ -14,83 +27,202 @@ body {
 table { border-collapse: collapse; width: 100%; }
 td, th { padding: 0.5rem 0.75rem; vertical-align: top; }
 
-/* Header */
-.si-tabler-inv-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem; }
-.si-tabler-inv-logo { max-height: 48px; }
-.si-tabler-inv-title { font-size: 1.25rem; font-weight: 700; color: #1e293b; }
-
-/* Two columns: Company | Client */
-.si-tabler-inv-two-col { display: flex; gap: 2rem; margin-bottom: 1.5rem; }
-.si-tabler-inv-two-col > div { flex: 1; }
-.si-tabler-inv-label { font-size: 0.6875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: #64748b; margin-bottom: 0.25rem; }
-.si-tabler-inv-name { font-weight: 600; margin-bottom: 0.15rem; }
-.si-tabler-inv-address { color: #475569; font-size: 0.875rem; }
-
-/* Summary block (invoice #, date, total/paid/owing) */
-.si-tabler-inv-summary { margin-bottom: 1.5rem; }
-.si-tabler-inv-summary table { width: auto; min-width: 200px; }
-.si-tabler-inv-summary td { padding: 0.25rem 0.5rem; border: none; }
-.si-tabler-inv-summary td:first-child { color: #64748b; }
-.si-tabler-inv-summary .col1 { background: #f8fafc; }
-
-/* Invoice number heading */
-.si-tabler-inv-h1 { font-size: 1.5rem; font-weight: 700; margin: 0 0 1rem 0; color: #1e293b; }
-
-/* Line items table – Tabler card-table style (https://tabler.io) */
-.si-tabler-inv-table {
-	width: 100%;
-	margin-bottom: 1.5rem;
-	border: 1px solid #e2e8f0;
-	border-radius: 4px;
-	overflow: hidden;
+/* Card container (Tabler page-in-card look) */
+.si-tabler-inv-card {
+	background: var(--si-inv-card-bg);
+	box-shadow: var(--si-inv-card-shadow);
+	border-radius: var(--si-inv-radius);
+	padding: 2rem;
+	max-width: 900px;
+	margin: 0 auto;
 }
-.si-tabler-inv-table thead th {
-	text-align: left;
-	padding: 0.5rem 0.75rem;
+
+/* Header: logo or title only */
+.si-tabler-inv-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	margin-bottom: 2rem;
+}
+.si-tabler-inv-header-left {
+	flex: 1;
+}
+.si-tabler-inv-logo {
+	max-height: 48px;
+	display: block;
+}
+.si-tabler-inv-title {
+	font-size: 1.25rem;
+	font-weight: 700;
+	color: var(--si-inv-text);
+}
+
+/* Two columns: Company | Client (Tabler layout) */
+.si-tabler-inv-two-col {
+	display: flex;
+	gap: 3rem;
+	margin-bottom: 2rem;
+}
+.si-tabler-inv-from,
+.si-tabler-inv-to {
+	flex: 1;
+	min-width: 0;
+}
+.si-tabler-inv-label {
 	font-size: 0.6875rem;
 	font-weight: 600;
 	text-transform: uppercase;
 	letter-spacing: 0.04em;
-	color: #64748b;
-	background: #f8fafc;
-	border-bottom: 1px solid #e2e8f0;
+	color: var(--si-inv-text-muted);
+	margin-bottom: 0.35rem;
+}
+.si-tabler-inv-name {
+	font-weight: 600;
+	font-size: 1rem;
+	margin-bottom: 0.25rem;
+	color: var(--si-inv-text);
+}
+.si-tabler-inv-address {
+	color: var(--si-inv-text-muted);
+	font-size: 0.875rem;
+	line-height: 1.5;
+}
+
+/* Invoice number – prominent # Invoice INV/001 style */
+.si-tabler-inv-h1 {
+	font-size: 1.75rem;
+	font-weight: 700;
+	margin: 0 0 1.25rem 0;
+	color: var(--si-inv-text);
+	letter-spacing: -0.02em;
+}
+
+/* Line items table – Tabler card-table (bordered, rounded) */
+.si-tabler-inv-table.table-card {
+	width: 100%;
+	margin-bottom: 1.5rem;
+	border: 1px solid var(--si-inv-border);
+	border-radius: var(--si-inv-radius);
+	overflow: hidden;
+}
+.si-tabler-inv-table thead th {
+	text-align: left;
+	padding: 0.6rem 1rem;
+	font-size: 0.6875rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	color: var(--si-inv-text-muted);
+	background: var(--si-inv-head-bg);
+	border-bottom: 1px solid var(--si-inv-border);
 }
 .si-tabler-inv-table thead th.text-end { text-align: right; }
+.si-tabler-inv-table thead th.w-1 { width: 1%; white-space: nowrap; }
 .si-tabler-inv-table tbody td {
-	padding: 0.65rem 0.75rem;
-	border-bottom: 1px solid #f1f5f9;
+	padding: 0.75rem 1rem;
+	border-bottom: 1px solid var(--si-inv-border-light);
 	vertical-align: middle;
 }
 .si-tabler-inv-table tbody tr:last-child td { border-bottom: none; }
 .si-tabler-inv-table tbody td.text-end { text-align: right; font-variant-numeric: tabular-nums; }
-.si-tabler-inv-table .si_product_attribute td { padding-top: 0.25rem; font-size: 0.8125rem; color: #64748b; }
-.si-tabler-inv-table .si-tabler-inv-line-desc td,
-.si-tabler-inv-table .si-tabler-inv-line-cf td {
-	padding-top: 0.25rem;
+.si-tabler-inv-table tbody td.w-1 { width: 1%; white-space: nowrap; }
+.si-tabler-inv-table .si_product_attribute td {
+	padding-top: 0.2rem;
 	padding-bottom: 0.5rem;
 	font-size: 0.8125rem;
-	color: #64748b;
+	color: var(--si-inv-text-muted);
+	border-bottom: none;
+}
+.si-tabler-inv-table .si-tabler-inv-line-desc td,
+.si-tabler-inv-table .si-tabler-inv-line-cf td {
+	padding-top: 0.2rem;
+	padding-bottom: 0.5rem;
+	font-size: 0.8125rem;
+	color: var(--si-inv-text-muted);
 	border-bottom: none;
 }
 .si-tabler-inv-table .si-tabler-inv-line-cf span + span::before { content: " · "; color: #94a3b8; }
 
-/* Totals */
-.si-tabler-inv-totals { margin-top: 0.5rem; }
-.si-tabler-inv-totals table { width: 100%; max-width: 320px; margin-left: auto; }
-.si-tabler-inv-totals td { padding: 0.35rem 0.5rem; border: none; }
-.si-tabler-inv-totals td:first-child { color: #64748b; }
-.si-tabler-inv-totals td:last-child { text-align: right; }
-.si-tabler-inv-totals .total-row td:last-child { font-weight: 700; font-size: 1.1rem; border-top: 2px solid #e2e8f0; padding-top: 0.5rem; }
+/* Totals block – right-aligned, Tabler style (Subtotal, Vat Rate, Vat Due, Total Due) */
+.si-tabler-inv-totals-wrap {
+	margin-top: 0.5rem;
+	margin-bottom: 1.5rem;
+}
+.si-tabler-inv-totals {
+	width: 100%;
+	max-width: 320px;
+	margin-left: auto;
+	border: none;
+}
+.si-tabler-inv-totals td {
+	padding: 0.4rem 0;
+	border: none;
+	font-size: 0.9375rem;
+}
+.si-tabler-inv-totals td:first-child {
+	color: var(--si-inv-text-muted);
+}
+.si-tabler-inv-totals td.text-end {
+	text-align: right;
+	font-variant-numeric: tabular-nums;
+}
+.si-tabler-inv-totals .si-tabler-inv-total-due td {
+	padding-top: 0.6rem;
+	margin-top: 0.25rem;
+	border-top: 2px solid var(--si-inv-border);
+	font-weight: 700;
+	font-size: 1.125rem;
+	color: var(--si-inv-text);
+}
 
-/* Notes & details */
-.si-tabler-inv-notes { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e2e8f0; font-size: 0.875rem; }
-.si-tabler-inv-detail-heading { font-weight: 600; margin-top: 1rem; margin-bottom: 0.25rem; }
-.si-tabler-inv-detail-line { font-size: 0.875rem; color: #475569; margin-bottom: 0.5rem; }
-.si-tabler-inv-footer { margin-top: 1.5rem; padding-top: 1rem; font-size: 0.75rem; color: #64748b; text-align: center; }
-.double_underline { border-bottom: 2px solid #1e293b; }
+/* Thank you message (Tabler invoice footer) */
+.si-tabler-inv-thanks {
+	margin-bottom: 1.5rem;
+	padding: 1rem 0;
+	font-size: 0.9375rem;
+	color: var(--si-inv-text-muted);
+	line-height: 1.5;
+}
+
+/* Notes & payment details */
+.si-tabler-inv-notes {
+	margin-top: 1rem;
+	padding-top: 1rem;
+	border-top: 1px solid var(--si-inv-border);
+	font-size: 0.875rem;
+}
+.si-tabler-inv-detail-heading {
+	font-weight: 600;
+	font-size: 0.9375rem;
+	margin-top: 0.5rem;
+	margin-bottom: 0.35rem;
+	color: var(--si-inv-text);
+}
+.si-tabler-inv-detail-line {
+	font-size: 0.875rem;
+	color: var(--si-inv-text-muted);
+	margin-bottom: 0.35rem;
+}
+.si-tabler-inv-footer {
+	margin-top: 1.5rem;
+	padding-top: 1rem;
+	font-size: 0.75rem;
+	color: var(--si-inv-text-muted);
+	text-align: center;
+}
+.si-tabler-inv-payment-link {
+	margin-top: 1rem;
+}
 
 @media print {
-	body { padding: 0; }
+	body.si-tabler-inv { padding: 0; background: #fff; }
+	.si-tabler-inv-card {
+		box-shadow: none;
+		border: none;
+		padding: 0;
+		max-width: none;
+	}
 	.si-tabler-inv-two-col { break-inside: avoid; }
-	.si-tabler-inv-table { break-inside: avoid; }
+	.si-tabler-inv-table.table-card { break-inside: avoid; }
+	.si-tabler-inv-totals-wrap { break-inside: avoid; }
 }

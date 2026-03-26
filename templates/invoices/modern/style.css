@@ -1,0 +1,252 @@
+/**
+ * Modern invoice template – Tabler-inspired colours and typography.
+ * Same layout as default; styled for a cleaner, contemporary look (screen + PDF).
+ * Uses system font stack for PDF compatibility; add Inter via your app if desired.
+ */
+:root {
+	--si-modern-bg: #f8fafc;
+	--si-modern-card-bg: #ffffff;
+	--si-modern-text: #1e293b;
+	--si-modern-text-muted: #64748b;
+	--si-modern-border: #e2e8f0;
+	--si-modern-border-light: #f1f5f9;
+	--si-modern-head-bg: #f1f5f9;
+	--si-modern-accent: #206bc4;
+	--si-modern-accent-soft: #4299e1;
+	--si-modern-owing: #2fb344;
+	--si-modern-radius: 6px;
+	--si-modern-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+	--si-modern-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+body.si-modern-inv {
+	background: var(--si-modern-bg);
+	color: var(--si-modern-text);
+	font-size: 13pt;
+	font-family: var(--si-modern-font);
+	line-height: 1.5;
+	margin: 0;
+	padding: 1.5rem;
+}
+
+.si-modern-inv-card {
+	background: var(--si-modern-card-bg);
+	box-shadow: var(--si-modern-shadow);
+	border-radius: var(--si-modern-radius);
+	border: 1px solid var(--si-modern-border);
+	padding: 2rem;
+	max-width: 900px;
+	margin: 0 auto;
+}
+
+table {
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+td, th { margin: 0; padding: 0; vertical-align: top; }
+
+/* Header: logo + heading */
+.si-modern-header-table { margin-bottom: 0.5rem; }
+.si-modern-logo {
+	max-height: 52px;
+	vertical-align: middle;
+	display: inline-block;
+}
+.si-modern-heading {
+	font-family: var(--si-modern-font);
+	font-size: 1.25rem;
+	font-weight: 700;
+	color: var(--si-modern-text);
+	letter-spacing: -0.02em;
+}
+.si-modern-header-bar {
+	height: 3px;
+	background: linear-gradient(90deg, var(--si-modern-accent) 0%, var(--si-modern-accent-soft) 100%);
+	border: none;
+	padding: 0;
+	margin-top: 0.25rem;
+}
+
+/* Two-column layout: biller/customer left, summary right */
+.summary-biller-layout.si-modern-summary-layout {
+	border: none;
+	margin-bottom: 0;
+	table-layout: fixed;
+}
+.summary-biller-layout .column-left {
+	padding-right: 1.5em;
+	vertical-align: top;
+}
+.summary-biller-layout .column-right {
+	padding-left: 1.5em;
+	vertical-align: top;
+	text-align: right;
+}
+.summary-biller-layout .column-right .right { float: none; }
+
+/* Biller / Customer blocks */
+.si-modern-block-table td {
+	padding: 0.2em 0.4em 0.2em 0;
+	font-size: 0.9em;
+}
+.si-modern-label,
+.si-modern-label-row {
+	border-bottom: 1px solid var(--si-modern-border-light);
+	padding-bottom: 0.25em;
+	margin-bottom: 0;
+}
+.si-modern-label { color: var(--si-modern-text-muted); font-weight: 600; }
+.si-modern-label-row { font-weight: 600; color: var(--si-modern-text); }
+.si-modern-block-table .col1 { background: transparent; }
+.si-modern-muted {
+	color: var(--si-modern-text-muted);
+	font-size: 0.875em;
+}
+
+/* Summary box (right column) */
+.invoice-summary-table.si-modern-summary-table {
+	width: 100%;
+	max-width: 20em;
+	table-layout: auto;
+	margin-left: auto;
+	margin-right: 0;
+	border: 1px solid var(--si-modern-border);
+	border-radius: var(--si-modern-radius);
+	overflow: hidden;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+.si-modern-summary-table .col1 { background: var(--si-modern-head-bg); }
+.si-modern-summary-head {
+	padding: 0.6em 0.75em;
+	font-size: 0.8em;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	color: var(--si-modern-text);
+	border-bottom: 1px solid var(--si-modern-border);
+}
+.si-modern-summary-table td {
+	padding: 0.4em 0.75em;
+	border-bottom: 1px solid var(--si-modern-border-light);
+	font-size: 0.9em;
+}
+.si-modern-summary-table tr:last-child td { border-bottom: none; }
+.si-modern-summary-val {
+	font-variant-numeric: tabular-nums;
+	font-weight: 500;
+	color: var(--si-modern-text);
+}
+.si-modern-owing-label {
+	font-weight: 600;
+	color: var(--si-modern-text);
+}
+.si-modern-owing-val {
+	font-weight: 700;
+	font-variant-numeric: tabular-nums;
+	color: var(--si-modern-owing);
+}
+
+/* Items table */
+.left { clear: left; }
+.right { float: right; }
+
+.invoice-items-table.si-modern-items-table { margin-top: 1rem; }
+.si-modern-items-table .col-qty {
+	width: 3em;
+	min-width: 3em;
+	white-space: nowrap;
+}
+
+.si-modern-th {
+	background: var(--si-modern-head-bg);
+	color: var(--si-modern-text-muted);
+	font-size: 0.75em;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	padding: 0.6em 0.75em;
+	border-bottom: 1px solid var(--si-modern-border);
+	border-top: 1px solid var(--si-modern-border);
+}
+.si-modern-items-table .si-modern-th:first-child { border-left: 1px solid var(--si-modern-border); }
+.si-modern-items-table .si-modern-th:last-child { border-right: 1px solid var(--si-modern-border); }
+
+.si-modern-item-row td {
+	padding: 0.5em 0.75em;
+	border-bottom: 1px solid var(--si-modern-border-light);
+	font-size: 0.9em;
+}
+.si-modern-num {
+	font-variant-numeric: tabular-nums;
+	text-align: right;
+}
+.si_product_attribute.si-modern-attr td,
+.si-modern-line-desc td {
+	padding-top: 0.15em;
+	padding-bottom: 0.35em;
+	font-size: 0.85em;
+	color: var(--si-modern-text-muted);
+	border-bottom: none;
+}
+.si-modern-item-sep td {
+	border-bottom: 1px solid var(--si-modern-border-light);
+	padding-bottom: 0.5em;
+}
+
+/* Notes */
+.si-modern-notes-head { padding-top: 0.5em; color: var(--si-modern-text); }
+.si-modern-notes-body {
+	padding: 0.25em 0;
+	font-size: 0.9em;
+	color: var(--si-modern-text-muted);
+}
+
+/* Totals row */
+.si-modern-total-row td {
+	padding-top: 0.6em;
+	border-top: 2px solid var(--si-modern-border);
+	font-weight: 600;
+}
+.si-modern-total-amount {
+	font-weight: 700;
+	font-size: 1.05em;
+	font-variant-numeric: tabular-nums;
+	color: var(--si-modern-text);
+}
+
+/* Invoice details / payment / footer */
+.si-modern-detail-head {
+	padding-top: 0.5em;
+	font-size: 0.95em;
+	color: var(--si-modern-text);
+	border-bottom: 1px solid var(--si-modern-border-light);
+	padding-bottom: 0.25em;
+}
+.si-modern-detail-line {
+	font-size: 0.875em;
+	color: var(--si-modern-text-muted);
+	padding: 0.15em 0;
+}
+.si-modern-footer {
+	font-size: 0.75em;
+	color: var(--si-modern-text-muted);
+	line-height: 1.4;
+}
+
+/* Legacy class compatibility (default template uses .col1, .tbl1-bottom) */
+.si-modern-inv .col1 { background-color: var(--si-modern-head-bg); }
+
+@media print {
+	body.si-modern-inv {
+		background: #fff;
+		padding: 0;
+	}
+	.si-modern-inv-card {
+		box-shadow: none;
+		border: none;
+		padding: 0;
+		max-width: none;
+	}
+	.si-modern-header-bar {
+		-webkit-print-color-adjust: exact;
+		print-color-adjust: exact;
+	}
+}

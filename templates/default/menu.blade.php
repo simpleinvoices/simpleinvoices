@@ -7,9 +7,13 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-            <a href="index.php?module=index&view=index" class="text-decoration-none">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler me-1" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"/><line x1="9" y1="7" x2="10" y2="7"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="13" y1="17" x2="15" y2="17"/></svg>
-                <span>Simple Invoices</span>
+            <a href="index.php?module=index&view=index" class="text-decoration-none d-flex align-items-center">
+                @if(!empty($config->app?->logo))
+                    <img src="{{ $config->app->logo }}" alt="{{ $config->app?->name ?? 'Simple Invoices' }}" class="me-2" style="max-height: 28px;" />
+                @else
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler me-1" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"/><line x1="9" y1="7" x2="10" y2="7"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="13" y1="17" x2="15" y2="17"/></svg>
+                @endif
+                <span>{{ $config->app?->name ?? $LANG['simple_invoices'] ?? 'Simple Invoices' }}</span>
             </a>
         </h1>
         <div class="navbar-nav flex-row order-md-last">
@@ -30,7 +34,7 @@
                     </span>
                     <div class="d-none d-xl-block ps-2">
                         <div class="fw-medium">{{ $LANG['users'] ?? 'Admin' }}</div>
-                        <div class="mt-1 small text-secondary">{{ $LANG['simple_invoices'] ?? 'Simple Invoices' }}</div>
+                        <div class="mt-1 small text-secondary">{{ $config->app?->name ?? $LANG['simple_invoices'] ?? 'Simple Invoices' }}</div>
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">

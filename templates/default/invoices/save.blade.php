@@ -12,11 +12,20 @@
 *	 GPL v2 or above
 */ --}}
 
-@if($saved == true )
-	<div class="alert alert-success">{{ $LANG['save_invoice_success'] ?? '' }}</div>
-@else
-	<div class="alert alert-danger">{{ $LANG['save_invoice_failure'] ?? '' }}</div>
-@endif
-
-
+<div class="card">
+	<div class="card-body">
+		@if($saved == true)
+			<div class="alert alert-success d-flex align-items-center mb-0" role="alert">
+				<i class="ti ti-circle-check me-2" style="font-size: 1.5rem;"></i>
+				<div>{{ $LANG['save_invoice_success'] ?? '' }}</div>
+			</div>
+		@else
+			<div class="alert alert-danger d-flex align-items-center mb-0" role="alert">
+				<i class="ti ti-circle-x me-2" style="font-size: 1.5rem;"></i>
+				<div>{{ $LANG['save_invoice_failure'] ?? '' }}</div>
+			</div>
+		@endif
+		<p class="text-secondary mt-3 mb-0 small">{{ $LANG['redirecting'] ?? 'Redirecting...' }}</p>
+	</div>
+</div>
 <meta http-equiv="refresh" content="2;URL=index.php?module=invoices&amp;view=quick_view&amp;id={{ urlencode($id) }}" />

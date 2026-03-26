@@ -6,13 +6,17 @@
 		<div class="container container-tight py-4">
 			<div class="text-center mb-4">
 				<a href="." class="navbar-brand navbar-brand-autodark">
-					<h1 class="h2 mb-0">{{ $LANG['simple_invoices'] ?? '' }}</h1>
+					@if(!empty($config->app?->logo))
+						<img src="{{ $config->app->logo }}" alt="{{ $config->app?->name ?? 'Simple Invoices' }}" class="mb-2" style="max-height: 48px;" />
+					@endif
+					<h1 class="h2 mb-0">{{ $config->app?->name ?? $LANG['simple_invoices'] ?? 'Simple Invoices' }}</h1>
 				</a>
 			</div>
 			<form action="" method="post" id="frmLogin" name="frmLogin" class="card card-md">
 				<input type="hidden" name="action" value="login" />
+				<input type="hidden" name="csrfprotectionbysr" value="{{ $loginCsrfToken ?? '' }}" />
 				<div class="card-body">
-					<h2 class="card-title text-center mb-4">{{ $LANG['simple_invoices'] ?? 'Simple Invoices' }}</h2>
+					<h2 class="card-title text-center mb-4">{{ $config->app?->name ?? $LANG['simple_invoices'] ?? 'Simple Invoices' }}</h2>
 					<div class="mb-3">
 						<label class="form-label">{{ $LANG['email'] ?? '' }}</label>
 						<input name="user" type="text" class="form-control" title="user" value="" placeholder="{{ $LANG['email'] ?? 'Email' }}" autocomplete="username" autofocus />

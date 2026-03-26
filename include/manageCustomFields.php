@@ -165,7 +165,7 @@ function getCategories() {
 function printCategories() {
 	$cats = getCategories();
 	
-	$out = '<select name="categorie">';
+	$out = '<select name="categorie" class="form-select">';
 	
 	foreach($cats as $cat) {
 		$out .= "<option value='".htmlsafe($cat['id'])."' >".htmlsafe($cat['name'])."</option>";
@@ -247,7 +247,7 @@ function printPlugins() {
 	//$plugins = getPlugins();
 
 	//print_r($plugins);
-	$out = '<select name="plugin">';
+	$out = '<select name="plugin" class="form-select">';
 	
 	foreach($plugins as $plugin) {		
 		$out .= "<option value='".htmlsafe($plugin->id)."'>".htmlsafe($plugin->name)."</option>";

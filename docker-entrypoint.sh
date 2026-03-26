@@ -38,8 +38,21 @@ if [ -n "${SI_DB_HOST}" ]; then
   sed -i.bak "s/^database\.params\.username[[:space:]]*=.*/database.params.username            = ${SI_DB_USER}/" /var/www/html/config/custom.config.php
   sed -i.bak "s|^database\.params\.password[[:space:]]*=.*|database.params.password            = ${SI_DB_PASSWORD}|" /var/www/html/config/custom.config.php
   sed -i.bak "s/^database\.params\.dbname[[:space:]]*=.*/database.params.dbname              = ${SI_DB_NAME}/" /var/www/html/config/custom.config.php
+  [ -n "${SI_APP_NAME}" ] && sed -i.bak "s|^app\.name[[:space:]]*=.*|app.name                            = ${SI_APP_NAME}|" /var/www/html/config/custom.config.php
+  [ -n "${SI_APP_LOGO}" ] && sed -i.bak "s|^app\.logo[[:space:]]*=.*|app.logo                            = ${SI_APP_LOGO}|" /var/www/html/config/custom.config.php
   rm -f /var/www/html/config/custom.config.php.bak
 fi
+
+# Wait for PHP-FPM to be listening before starting nginx (avoids 502 on first request after cold start)
+php -r "
+  \$max = 30;
+  for (\$n = 0; \$n < \$max; \$n++) {
+    \$fp = @fsockopen('127.0.0.1', 9000, \$errno, \$errstr, 1);
+    if (\$fp) { fclose(\$fp); exit(0); }
+    if (\$n < \$max - 1) usleep(200000);
+  }
+  exit(1);
+" || { echo "Entrypoint: PHP-FPM did not become ready on 127.0.0.1:9000." >&2; exit 1; }
 
 # Run CMD (nginx -g "daemon off;"). Use full path so exec doesn't misinterpret args; skip leading "--".
 case "${1:-nginx}" in

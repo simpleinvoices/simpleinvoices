@@ -37,7 +37,7 @@ curl_close($curl_handle);
 header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); 	// Date in the past
 
-// Old HTML2PS library no longer used - now using spipu/html2pdf via Composer
+// Old HTML2PS library no longer used - now using mpdf/mpdf via Composer
 $myloc .= "?";
 $myloc .= "&process_mode=single";
 $myloc .= "&renderfields=1";

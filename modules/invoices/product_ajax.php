@@ -37,7 +37,7 @@ if(isset($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] > 0)
 
                 if($attr_name['enabled'] =='1' AND $attr_name['type'] == 'list')
                 {
-                    $html .= "<td>".$attr_name['name']."<select name='attribute[".$row_id."][".$k."]'>";
+                    $html .= "<td>".$attr_name['name']."<select name='attribute[".$row_id."][".$k."]' class='form-select form-select-sm'>";
                     foreach($states2 as $att_key=>$att_val)
                     {
                         if($att_val['enabled'] == '1')

@@ -1,24 +1,18 @@
 @include(str_replace('/', '.', rtrim($path ?? '', '/')) . '.inc_head')
 
-
-<div class="si_form si_message_install">
-The Simple Invoices essential data has been imported.
-<br />
-<br />
-You can select to just start using Simple Invoices now or install sample data.
-</div>
-
-
-<div class="si_toolbar si_toolbar_form">
-            <a href="./index.php" class="positive">
-                <img src="./images/common/tick.png" alt="" />
-                Start using Simple Invoices
-            </a>
-    
-            <a href="./index.php?module=install&amp;view=sample_data" class="positive">
-                <img src="./images/common/tick.png" alt="" />
-                Install Sample Data
-            </a>
+<div class="card">
+	<div class="card-status-top bg-success"></div>
+	<div class="card-header">
+		<h3 class="card-title"><i class="ti ti-circle-check me-2"></i>{{ $LANG['essential_data_installed'] ?? 'Essential data installed' }}</h3>
+	</div>
+	<div class="card-body">
+		<p class="text-secondary mb-4">{{ $LANG['install_essential_done'] ?? 'The Simple Invoices essential data has been imported. You can now start using Simple Invoices.' }}</p>
+		<div class="btn-list mt-3">
+			<a href="./index.php" class="btn btn-primary">
+				<i class="ti ti-rocket me-1"></i>{{ $LANG['start_using_simple_invoices'] ?? 'Start using Simple Invoices' }}
+			</a>
+		</div>
+	</div>
 </div>
 
 @include(str_replace('/', '.', rtrim($path ?? '', '/')) . '.inc_foot')

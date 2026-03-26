@@ -231,6 +231,18 @@ class export
 				$template_path = "templates.invoices.{$template}";
 				$css = $siUrl."/templates/invoices/${template}/style.css";
 
+				// For PDF, inline the CSS so the generated PDF is always styled (no dependency on URL or mPDF loading external CSS)
+				$css_inline = '';
+				if ($this->format === 'pdf') {
+					$cssPath = "./templates/invoices/{$template}/style.css";
+					if (is_file($cssPath) && is_readable($cssPath)) {
+						$css_inline = file_get_contents($cssPath);
+						if ($css_inline === false) {
+							$css_inline = '';
+						}
+					}
+				}
+
 				$pageActive = "invoices";
 				$smarty->assign('pageActive', $pageActive);
 				
@@ -247,6 +259,7 @@ class export
 					$smarty->assign('invoiceItems', $invoiceItems);
 					$smarty->assign('template_path', $template_path);
 					$smarty->assign('css', $css);
+					$smarty->assign('css_inline', $css_inline);
 					$smarty->assign('customFieldLabels', $customFieldLabels);
 
 					$data = $smarty->fetch("." . $templatePath);

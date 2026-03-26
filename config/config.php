@@ -41,6 +41,10 @@ nonce.key                           = this_should_be_random_and_secret_so_change
 nonce.timelimit                     = 3600
 
 version.name                        = 2013.1.beta.8
+
+; Header branding (top-left logo and name). Override in custom.config.php or via Docker env SI_APP_NAME / SI_APP_LOGO
+app.name                            = Simple Invoices
+app.logo                            = 
  
 debug.level                         = All
 debug.error_reporting               = E_ERROR

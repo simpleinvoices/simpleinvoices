@@ -40,7 +40,7 @@ else if ($_GET["submit"] == "def_inv_template") {
 
 	$escaped = htmlsafe($defaults['template']);
 	$display_block_templates_list = <<<EOD
-	<select name="value">
+	<select name="value" class="form-select">
 EOD;
 
 	$display_block_templates_list .= <<<EOD
@@ -88,7 +88,7 @@ else if ($_GET["submit"] == "biller") {
 	}
 	else {
 
-		$display_block_biller = '<select name="value">
+		$display_block_biller = '<select name="value" class="form-select">
 			<option value="0"> </option>';
 
 		foreach($billers as $biller) {
@@ -119,7 +119,7 @@ else if ($_GET["submit"] == "customer") {
 
 	} else {
 		//has records, so display them
-		$display_block_customer = '<select name="value">
+		$display_block_customer = '<select name="value" class="form-select">
                 <option value="0"> </option>';
 
 
@@ -153,7 +153,7 @@ else if ($_GET['submit'] == "tax") {
 		//has records, so display them
 
 		$display_block_tax = <<<EOD
-	        <select name="value">
+	        <select name="value" class="form-select">
 
                 <option value='0'> </option>
 EOD;
@@ -186,7 +186,7 @@ else if ($_GET["submit"] == "preference_id") {
 		$default = "preference";
 		//has records, so display them
 		$display_block_preferences = <<<EOD
-	        <select name="value">
+	        <select name="value" class="form-select">
 
                 <option value='0'> </option>
 EOD;
@@ -220,7 +220,7 @@ else if ($_GET["submit"] == "def_payment_type") {
 		$default = "payment_type";
 		//has records, so display them
 		$display_block_payment_type = <<<EOD
-                <select name="value">
+                <select name="value" class="form-select">
 
                 <option value='0'> </option>
 EOD;
@@ -264,7 +264,7 @@ else if($_GET['submit'] == "language") {
 	
 	$description = $LANG['language'];
 	//print_r($languages);
-	$value = "<select name='value'>";
+	$value = "<select name='value' class='form-select'>";
 	foreach($languages as $language) {
 		$selected = "";
 		if($language->shortname == $lang) {

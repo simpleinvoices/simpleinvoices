@@ -1,9 +1,16 @@
+@php
+	// Ensure selects use Tabler form-select styling (in case PHP output omits the class)
+	$editValue = $value ?? '';
+	if (str_contains($editValue, '<select') && !str_contains($editValue, 'form-select')) {
+		$editValue = preg_replace('/<select\s+/i', '<select class="form-select" ', $editValue, 1);
+	}
+@endphp
 <div class="card">
 	<form name="frmpost" action="index.php?module=system_defaults&amp;view=save" method="post" onsubmit="return frmpost_Validator(this)">
 		<div class="card-body">
 			<div class="mb-3">
 				<label class="form-label">{{ $description ?? '' }}</label>
-				<div>{!! $value !!}</div>
+				{!! $editValue !!}
 			</div>
 		</div>
 		<div class="card-footer">

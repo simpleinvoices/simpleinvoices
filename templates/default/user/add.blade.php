@@ -57,5 +57,6 @@
 	</div>
 </div>
 <input type="hidden" name="op" value="insert_user" />
+<input type="hidden" name="csrfprotectionbysr" value="{{ $userSaveCsrfToken ?? '' }}" />
 </form>
 @endif

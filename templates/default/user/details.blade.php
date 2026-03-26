@@ -118,5 +118,6 @@
 
 <input type="hidden" name="op" value="edit_user" />
 <input type="hidden" name="id" value="{{ $user['id'] ?? '' }}" />
+<input type="hidden" name="csrfprotectionbysr" value="{{ $userSaveCsrfToken ?? '' }}" />
 @endif
 </form>

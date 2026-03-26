@@ -29,6 +29,7 @@ $roles = user::getUserRoles();
 
 $smarty->assign('user', $user);
 $smarty->assign('roles', $roles);
+$smarty->assign('userSaveCsrfToken', siNonce('user_save'));
 /*
 $smarty -> assign('enabled', array(
                                 0 => $LANG['disabled'],

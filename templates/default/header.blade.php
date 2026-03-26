@@ -7,7 +7,7 @@
         $tmp_lang_view = $LANG['title_view_'.$view] ?? $LANG[$view] ?? $view;
     @endphp
     @stack('hook_head_start')
-    <title>{{ $tmp_lang_module }} : {{ $tmp_lang_view }} - {{ $LANG['simple_invoices'] ?? 'Simple Invoices' }}</title>
+    <title>{{ $tmp_lang_module }} : {{ $tmp_lang_view }} - {{ $config->app?->name ?? $LANG['simple_invoices'] ?? 'Simple Invoices' }}</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />

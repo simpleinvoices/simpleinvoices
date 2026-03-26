@@ -28,6 +28,7 @@ if ($_POST['email'] != "") {
 
 $smarty->assign('save', $save);
 $smarty->assign('roles', $roles);
+$smarty->assign('userSaveCsrfToken', siNonce('user_save'));
 
 $smarty -> assign('pageActive', 'user');
 $smarty -> assign('subPageActive', 'user_add');

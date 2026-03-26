@@ -68,7 +68,7 @@
 		<tr>
 			<th>Invoice Status</th>
 			<td>
-				<select name="status_id">
+				<select name="status_id" class="form-select">
 					<option value="0">New</option>
 					<option @if($invoice['status_id'] == 1) selected@endif value="1">Sent</option>
 					<option @if($invoice['status_id'] == 2) selected@endif value="1">Paid</option>

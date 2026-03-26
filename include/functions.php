@@ -99,7 +99,7 @@ function get_custom_field_name($field) {
 
 function dropDown($choiceArray, $defVal) {
 
-	$dropDown = '<select name="value">' . "\n";
+	$dropDown = '<select name="value" class="form-select">' . "\n";
 
 	foreach ($choiceArray as $key => $value)
 	{
@@ -361,7 +361,7 @@ function verifySiNonce($hash, $action, $userid = false)
     global $config;
     
     $tickTock = floor(time()/$config->nonce->timelimit);
-    if(!isempty($hash) AND ($hash === siNonce($action, $userid) OR $hash === siNonce($action, $userid, $tickTock-1)))
+    if(!empty($hash) AND ($hash === siNonce($action, $userid) OR $hash === siNonce($action, $userid, $tickTock-1)))
     {
         return true;
     }

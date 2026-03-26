@@ -76,7 +76,7 @@ foreach($invoiceItems as $key=>$value)
 
                 if($attr_name['enabled'] =='1' AND $attr_name['type'] == 'list')
                 {
-                    $html .= "<td>".$attr_name['name']."<select name='attribute[".$key."][".$k."]'>";
+                    $html .= "<td>".$attr_name['name']."<select name='attribute[".$key."][".$k."]' class='form-select form-select-sm'>";
                     $html .= "<option value=''></option>";
                     foreach($states2 as $att_key=>$att_val)
                     {
