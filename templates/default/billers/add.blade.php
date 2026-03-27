@@ -25,7 +25,7 @@
 				<a class="nav-link active" href="#bill-add-details" data-bs-toggle="tab" role="tab">{{ $LANG['details'] ?? '' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#bill-add-address" data-bs-toggle="tab" role="tab">{{ $LANG['street'] ?? 'Address' }}</a>
+				<a class="nav-link" href="#bill-add-address" data-bs-toggle="tab" role="tab">{{ $LANG['address'] ?? 'Address' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
 				<a class="nav-link" href="#bill-add-contact" data-bs-toggle="tab" role="tab">{{ $LANG['phone'] ?? 'Contact' }}</a>

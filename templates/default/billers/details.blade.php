@@ -17,7 +17,7 @@
 				<a class="nav-link active" href="#bill-view-details" data-bs-toggle="tab" role="tab">{{ $LANG['details'] ?? '' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#bill-view-address" data-bs-toggle="tab" role="tab">{{ $LANG['street'] ?? 'Address' }}</a>
+				<a class="nav-link" href="#bill-view-address" data-bs-toggle="tab" role="tab">{{ $LANG['address'] ?? 'Address' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
 				<a class="nav-link" href="#bill-view-contact" data-bs-toggle="tab" role="tab">{{ $LANG['phone'] ?? 'Contact' }}</a>
@@ -115,7 +115,7 @@
 				<a class="nav-link active" href="#bill-edit-details" data-bs-toggle="tab" role="tab">{{ $LANG['details'] ?? '' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#bill-edit-address" data-bs-toggle="tab" role="tab">{{ $LANG['street'] ?? 'Address' }}</a>
+				<a class="nav-link" href="#bill-edit-address" data-bs-toggle="tab" role="tab">{{ $LANG['address'] ?? 'Address' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
 				<a class="nav-link" href="#bill-edit-contact" data-bs-toggle="tab" role="tab">{{ $LANG['phone'] ?? 'Contact' }}</a>
