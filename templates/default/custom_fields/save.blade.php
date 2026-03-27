@@ -18,9 +18,6 @@
 			<i class="ti ti-info-circle me-2" style="font-size: 1.5rem;"></i>
 			<div>{!! outhtml($display_block ?? '') !!}</div>
 		</div>
-		@if(!empty($refresh_total))
-			<p class="text-secondary mt-3 mb-0 small">{!! outhtml($LANG['redirecting'] ?? 'Redirecting...') !!}</p>
-		@endif
 	</div>
 </div>
 {!! $refresh_total ?? '' !!}

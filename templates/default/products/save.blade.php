@@ -25,9 +25,6 @@
 				<div>{!! outhtml($LANG['save_product_failure'] ?? '') !!}</div>
 			</div>
 		@endif
-		@if(post('cancel') == null)
-			<p class="text-secondary mt-3 mb-0 small">{!! outhtml($LANG['redirecting'] ?? 'Redirecting...') !!}</p>
-		@endif
 	</div>
 </div>
 @if(post('cancel') == null)

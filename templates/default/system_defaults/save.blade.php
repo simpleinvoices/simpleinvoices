@@ -11,7 +11,6 @@
 				<div>{!! outhtml($LANG['save_defaults_failure'] ?? '') !!}</div>
 			</div>
 		@endif
-		<p class="text-secondary mt-3 mb-0 small">{!! outhtml($LANG['redirecting'] ?? 'Redirecting...') !!}</p>
 	</div>
 </div>
 <meta http-equiv="refresh" content="2;URL=index.php?module=system_defaults&amp;view=manage" />

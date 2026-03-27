@@ -5,7 +5,6 @@
 				<i class="ti ti-circle-check me-2" style="font-size: 1.5rem;"></i>
 				<div>{!! outhtml($LANG['save_preference_success'] ?? '') !!}</div>
 			</div>
-			<p class="text-secondary mt-3 mb-0 small">{!! outhtml($LANG['redirecting'] ?? 'Redirecting...') !!}</p>
 		@else
 			<div class="alert alert-danger d-flex align-items-center mb-0" role="alert">
 				<i class="ti ti-circle-x me-2" style="font-size: 1.5rem;"></i>
