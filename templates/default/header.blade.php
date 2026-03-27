@@ -21,17 +21,20 @@
     <link rel="stylesheet" href="./templates/default/css/si-tabler.css" />
     <link rel="stylesheet" href="./templates/default/css/print.css" media="print" />
     <script src="./include/jquery/jquery.init.js"></script>
-    <script>
-        window.SI_GRID_LANG = @json([
+    @php
+        $si_grid_lang = [
             'search' => $LANG['grid_search'] ?? 'Search',
-            'search_placeholder' => $LANG['grid_search_placeholder'] ?? ($LANG['grid_search'] ?? 'Search'),
+            'search_placeholder' => $LANG['grid_search_placeholder'] ?? $LANG['grid_search'] ?? 'Search',
             'reload' => $LANG['grid_reload'] ?? 'Reload',
             'sort_by' => $LANG['grid_sort_by'] ?? 'Sort by {column}',
             'records' => $LANG['grid_records'] ?? 'records',
             'invalid_xml' => $LANG['grid_invalid_xml'] ?? 'Invalid XML response',
             'connection_error' => $LANG['grid_connection_error'] ?? 'Connection error',
             'pagestat_fallback' => $LANG['displaying_items'] ?? 'Displaying {from} to {to} of {total} items',
-        ]);
+        ];
+    @endphp
+    <script>
+        window.SI_GRID_LANG = @json($si_grid_lang);
     </script>
     <script src="./include/jquery/si-tabler-grid.js"></script>
     <script src="./include/jquery/si-bootstrap.js"></script>
