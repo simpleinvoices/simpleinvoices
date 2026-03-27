@@ -72,7 +72,6 @@ php -r '
       "SI_ENCRYPTION_DEFAULT_KEY" => "encryption.default.key",
       "SI_NONCE_KEY" => "nonce.key",
       "SI_NONCE_TIMELIMIT" => "nonce.timelimit",
-      "SI_VERSION_NAME" => "version.name",
       "SI_APP_NAME" => "app.name",
       "SI_APP_LOGO" => "app.logo",
       "SI_DEBUG_LEVEL" => "debug.level",
