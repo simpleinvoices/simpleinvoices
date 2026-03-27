@@ -107,7 +107,6 @@ foreach ($billers as $row) {
 	$action .= '</div></div>';
 	$xml .= "<row id='".$row['id']."'>";
 	$xml .= "<cell><![CDATA[".$action."]]></cell>";
-	$xml .= "<cell><![CDATA[".$row['id']."]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['name']."]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['email']."]]></cell>";
 	if ($row['enabled']==$LANG['enabled']) {

@@ -10,6 +10,13 @@
 (function (global) {
 	'use strict';
 
+	/** Labels from window.SI_GRID_LANG (set in header.blade.php); English fallbacks if unset. */
+	function siGridStr(key, fallback) {
+		var g = (typeof window !== 'undefined' && window.SI_GRID_LANG) ? window.SI_GRID_LANG : {};
+		var v = g[key];
+		return (v !== undefined && v !== null && String(v) !== '') ? v : fallback;
+	}
+
 	var defaults = {
 		url: '',
 		method: 'GET',
@@ -128,12 +135,12 @@
 			input.type = 'text';
 			input.name = 'q';
 			input.className = 'form-control form-control-sm';
-			input.placeholder = 'Search';
+			input.placeholder = siGridStr('search_placeholder', 'Search');
 			input.style.width = '10em';
 			var btn = document.createElement('button');
 			btn.type = 'button';
 			btn.className = 'btn btn-sm btn-primary';
-			btn.textContent = 'Search';
+			btn.textContent = siGridStr('search', 'Search');
 			btn.addEventListener('click', function () {
 				self.query = input.value;
 				self.qtype = sel.value;
@@ -149,7 +156,7 @@
 			var reload = document.createElement('button');
 			reload.type = 'button';
 			reload.className = 'btn btn-sm btn-outline-secondary';
-			reload.title = 'Reload';
+			reload.title = siGridStr('reload', 'Reload');
 			reload.innerHTML = '<i class="ti ti-refresh"></i>';
 			reload.addEventListener('click', function () { self.load(); });
 			this.toolbar.appendChild(reload);
@@ -179,7 +186,7 @@
 			th.classList.add('text-' + (align === 'center' ? 'center' : align === 'right' ? 'end' : 'start'));
 			if (col.sortable !== false) {
 				th.style.cursor = 'pointer';
-				th.title = 'Sort by ' + col.display;
+				th.title = siGridStr('sort_by', 'Sort by {column}').replace(/\{column\}/g, col.display);
 				th.addEventListener('click', function () {
 					if (self.loading) return;
 					if (o.sortname === col.name) {
@@ -237,7 +244,7 @@
 				left.appendChild(this.pagerRpSelect);
 				var recordsLbl = document.createElement('span');
 				recordsLbl.className = 'text-secondary';
-				recordsLbl.textContent = 'records';
+				recordsLbl.textContent = siGridStr('records', 'records');
 				left.appendChild(recordsLbl);
 			}
 			pager.appendChild(left);
@@ -328,7 +335,7 @@
 				// Detect XML parse error (e.g. HTML error page)
 				var parseErr = doc.querySelector('parsererror');
 				if (parseErr) {
-					self.tbody.innerHTML = '<tr><td colspan="' + o.colModel.length + '" class="text-center text-danger">Invalid XML response</td></tr>';
+					self.tbody.innerHTML = '<tr><td colspan="' + o.colModel.length + '" class="text-center text-danger">' + escapeHtml(siGridStr('invalid_xml', 'Invalid XML response')) + '</td></tr>';
 					if (self.pagerStat) self.pagerStat.textContent = '';
 					return;
 				}
@@ -352,7 +359,7 @@
 			})
 			.catch(function () {
 				self.loading = false;
-				self.tbody.innerHTML = '<tr><td colspan="' + o.colModel.length + '" class="text-center text-danger">Connection error</td></tr>';
+				self.tbody.innerHTML = '<tr><td colspan="' + o.colModel.length + '" class="text-center text-danger">' + escapeHtml(siGridStr('connection_error', 'Connection error')) + '</td></tr>';
 				if (self.pagerStat) self.pagerStat.textContent = '';
 			});
 	};
@@ -402,7 +409,7 @@
 		var page = Math.max(1, this.page);
 		var from = this.total === 0 ? 0 : (page - 1) * rp + 1;
 		var to = this.total === 0 ? 0 : Math.min(page * rp, this.total);
-		var msg = (o.pagestat || 'Showing {from} to {to} of {total} entries')
+		var msg = (o.pagestat || siGridStr('pagestat_fallback', 'Displaying {from} to {to} of {total} items'))
 			.replace('{from}', from).replace('{to}', to).replace('{total}', this.total);
 		this.pagerStat.textContent = msg;
 		if (this.pagerRpSelect && this.pagerRpSelect.querySelector('option[value="' + o.rp + '"]')) {

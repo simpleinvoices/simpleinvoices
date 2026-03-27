@@ -1,6 +1,6 @@
 <script type="text/javascript">
 		var inventory = @json($defaults['inventory'] ?? '0');
-		var columns = (inventory == '1') ? 6 : 5;
+		var columns = (inventory == '1') ? 5 : 4;
 		var padding = 12;
 		var action_menu = 50;
 		var colEl = document.querySelector('.col');
@@ -12,8 +12,7 @@
 		if (inventory == '1') {
 			col_model = [
 				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'center'},
-				{display: @json($LANG['id'] ?? 'ID'), name : 'id', width : 10 * percentage_width, sortable : true, align: 'left', className: 'd-none d-sm-table-cell'},
-				{display: @json($LANG['name'] ?? 'Name'), name : 'description', width : 40 * percentage_width, sortable : true, align: 'left'},
+				{display: @json($LANG['name'] ?? 'Name'), name : 'description', width : 50 * percentage_width, sortable : true, align: 'left'},
 				{display: @json($LANG['unit_price'] ?? 'Unit Price'), name : 'unit_price', width : 15 * percentage_width, sortable : true, align: 'right'},
 				{display: @json($LANG['quantity'] ?? 'Quantity'), name : 'quantity', width : 15 * percentage_width, sortable : true, align: 'right'},
 				{display: @json($LANG['status'] ?? 'Status'), name : 'enabled', width : 15 * percentage_width, sortable : true, align: 'center'}
@@ -21,8 +20,7 @@
 		} else {
 			col_model = [
 				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'center'},
-				{display: @json($LANG['id'] ?? 'ID'), name : 'id', width : 10 * percentage_width, sortable : true, align: 'right', className: 'd-none d-sm-table-cell'},
-				{display: @json($LANG['name'] ?? 'Name'), name : 'description', width : 50 * percentage_width, sortable : true, align: 'left'},
+				{display: @json($LANG['name'] ?? 'Name'), name : 'description', width : 60 * percentage_width, sortable : true, align: 'left'},
 				{display: @json($LANG['unit_price'] ?? 'Unit Price'), name : 'unit_price', width : 20 * percentage_width, sortable : true, align: 'right'},
 				{display: @json($LANG['status'] ?? 'Status'), name : 'enabled', width : 15 * percentage_width, sortable : true, align: 'center'}
 			];
@@ -34,7 +32,6 @@
 			colModel : col_model,
 			statusLabels: { enabled: @json($LANG['enabled'] ?? 'Enabled'), disabled: @json($LANG['disabled'] ?? 'Disabled') },
 			searchitems : [
-				{display: @json($LANG['id'] ?? 'ID'), name : 'id'},
 				{display: @json($LANG['name'] ?? 'Name'), name : 'description', isdefault: true},
 				{display: @json($LANG['unit_price'] ?? 'Unit Price'), name : 'unit_price'}
 			],

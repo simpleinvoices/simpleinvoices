@@ -105,7 +105,6 @@ foreach ($tax as $row) {
 	$action .= '</div></div>';
 	$xml .= "<row id='".$row['tax_id']."'>";
 	$xml .= "<cell><![CDATA[".$action."]]></cell>";
-	$xml .= "<cell><![CDATA[".$row['tax_id']."]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['tax_description']."]]></cell>";
 	$xml .= "<cell><![CDATA[".siLocal::number($row['tax_percentage'])." ".$row['type']."]]></cell>";
 	if ($row['enabled']==$LANG['enabled']) {

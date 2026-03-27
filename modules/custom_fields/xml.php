@@ -4,7 +4,7 @@ header("Content-type: text/xml");
 
 $start = (isset($_REQUEST['start'])) ? $_REQUEST['start'] : "0" ;
 $dir = (isset($_REQUEST['sortorder'])) ? $_REQUEST['sortorder'] : "ASC" ;
-$sort = (isset($_REQUEST['sortname'])) ? $_REQUEST['sortname'] : "cf_id" ;
+$sort = (isset($_REQUEST['sortname'])) ? $_REQUEST['sortname'] : "cf_custom_label" ;
 $limit = (isset($_REQUEST['rp'])) ? $_REQUEST['rp'] : "25" ;
 $page = (isset($_REQUEST['page'])) ? $_REQUEST['page'] : "1" ;
 
@@ -32,7 +32,7 @@ $validFields = array('cf_id', 'cf_custom_label','enabled');
 if (in_array($sort, $validFields)) {
 	$sort = $sort;
 } else {
-	$sort = "cf_id";
+	$sort = "cf_custom_label";
 }
 
 /*
@@ -92,7 +92,6 @@ if (in_array($sort, $validFields)) {
 		$action .= '</div></div>';
 		$xml .= "<row id='".htmlsafe($row['cf_id'])."'>";
 		$xml .= "<cell><![CDATA[".$action."]]></cell>";
-		$xml .= "<cell><![CDATA[".htmlsafe($row['cf_id'])."]]></cell>";		
 		$xml .= "<cell><![CDATA[".htmlsafe($row['field_name_nice'])."]]></cell>";
 		$xml .= "<cell><![CDATA[".htmlsafe($row['cf_custom_label'])."]]></cell>";				
 		$xml .= "</row>";		

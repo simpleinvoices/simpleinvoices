@@ -1,5 +1,5 @@
 <script type="text/javascript">
-		var columns = 4;
+		var columns = 3;
 		var padding = 12;
 		var action_menu = 50;
 		var colEl = document.querySelector('.col');
@@ -12,11 +12,10 @@
 			dataType: 'xml',
 			colModel : [
 				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'center'},
-				{display: @json($LANG['id'] ?? 'ID'), name : 'cf_id', width : 10 * percentage_width, sortable : false, align: 'left'},
-				{display: @json($LANG['custom_field'] ?? 'Custom Field'), name : 'cf_custom_field', width : 40 * percentage_width, sortable : false, align: 'left'},
-				{display: @json($LANG['custom_label'] ?? 'Custom Label'), name : 'cf_custom_label', width : 45 * percentage_width, sortable : false, align: 'left'}
+				{display: @json($LANG['custom_field'] ?? 'Custom Field'), name : 'cf_custom_field', width : 45 * percentage_width, sortable : false, align: 'left'},
+				{display: @json($LANG['custom_label'] ?? 'Custom Label'), name : 'cf_custom_label', width : 50 * percentage_width, sortable : false, align: 'left'}
 			],
-			sortname: 'cf_id',
+			sortname: 'cf_custom_label',
 			sortorder: 'asc',
 			usepager: false,
 			pagestat: @json($LANG['displaying_items'] ?? 'Displaying items'),

@@ -3,7 +3,7 @@ header("Content-type: text/xml");
 
 $start = (isset($_REQUEST['start'])) ? $_REQUEST['start'] : "0" ;
 $dir = (isset($_REQUEST['sortorder'])) ? $_REQUEST['sortorder'] : "ASC" ;
-$sort = (isset($_REQUEST['sortname'])) ? $_REQUEST['sortname'] : "id" ;
+$sort = (isset($_REQUEST['sortname'])) ? $_REQUEST['sortname'] : "name" ;
 $limit = (isset($_REQUEST['rp'])) ? $_REQUEST['rp'] : "25" ;
 $page = (isset($_REQUEST['page'])) ? $_REQUEST['page'] : "1" ;
 
@@ -40,7 +40,7 @@ $validFields = array('id', 'name','enabled','visible');
 if (in_array($sort, $validFields)) {
 	$sort = $sort;
 } else {
-	$sort = "id";
+	$sort = "name";
 }
 
 	//$sql = "SELECT * FROM ".TB_PREFIX."customers ORDER BY $sort $dir LIMIT $start, $limit";
@@ -99,7 +99,6 @@ foreach ($customers as $row) {
 	$action .= '</div></div>';
 	$xml .= "<row id='".$row['id']."'>";
 	$xml .= "<cell><![CDATA[".$action."]]></cell>";
-	$xml .= "<cell><![CDATA[".$row['id']."]]></cell>";		
 	$xml .= "<cell><![CDATA[".utf8_encode($row['name'])."]]></cell>";
 	if ($row['enabled']=='1') {
 		$xml .= "<cell><![CDATA[<img src='images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				

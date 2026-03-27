@@ -123,7 +123,6 @@ $count = $sth_count_rows->rowCount();
 		$action .= '</div></div>';
 		$xml .= "<row id='".$row['CID']."'>";
 		$xml .= "<cell><![CDATA[".$action."]]></cell>";
-		$xml .= "<cell><![CDATA[".$row['CID']."]]></cell>";
 		$xml .= "<cell><![CDATA[".$row['name']."]]></cell>";
 		$xml .= "<cell><![CDATA[".siLocal::number($row['customer_total'])."]]></cell>";
 		$xml .= "<cell><![CDATA[".siLocal::number($row['paid'])."]]></cell>";

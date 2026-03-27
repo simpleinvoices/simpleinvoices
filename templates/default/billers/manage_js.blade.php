@@ -1,5 +1,5 @@
 <script type="text/javascript">
-		var columns = 5;
+		var columns = 4;
 		var padding = 12;
 		var action_menu = 50;
 		var colEl = document.querySelector('.col');
@@ -12,14 +12,12 @@
 			dataType: 'xml',
 			colModel : [
 				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'center'},
-				{display: @json($LANG['id'] ?? 'ID'), name : 'id', width : 10 * percentage_width, sortable : true, align: 'left', className: 'd-none d-sm-table-cell'},
-				{display: @json($LANG['name'] ?? 'Name'), name : 'name', width : 40 * percentage_width, sortable : true, align: 'left'},
+				{display: @json($LANG['name'] ?? 'Name'), name : 'name', width : 50 * percentage_width, sortable : true, align: 'left'},
 				{display: @json($LANG['email'] ?? 'Email'), name : 'email', width : 35 * percentage_width, sortable : true, align: 'left', className: 'd-none d-sm-table-cell'},
 				{display: @json($LANG['status'] ?? 'Status'), name : 'enabled', width : 15 * percentage_width, sortable : true, align: 'center'}
 			],
 			statusLabels: { enabled: @json($LANG['enabled'] ?? 'Enabled'), disabled: @json($LANG['disabled'] ?? 'Disabled') },
 			searchitems : [
-				{display: @json($LANG['id'] ?? 'ID'), name : 'id'},
 				{display: @json($LANG['name'] ?? 'Name'), name : 'name', isdefault: true},
 				{display: @json($LANG['email'] ?? 'Email'), name : 'email'}
 			],

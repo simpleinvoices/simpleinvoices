@@ -115,7 +115,6 @@ foreach ($user as $row) {
 	else {
 		$xml .= "<cell><![CDATA[<img src='images/common/cross.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
 	}
-	$xml .= "<cell><![CDATA[".$row['user_id']."]]></cell>";
 	$xml .= "</row>";		
 }
 

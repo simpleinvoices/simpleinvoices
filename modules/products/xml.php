@@ -36,7 +36,6 @@ foreach ($products_all as $row) {
 	$action .= '</div></div>';
 	$xml .= "<row id='".$row['iso']."'>";
 	$xml .= "<cell><![CDATA[".$action."]]></cell>";
-	$xml .= "<cell><![CDATA[".$row['id']."]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['description']."]]></cell>";
 	$xml .= "<cell><![CDATA[".siLocal::number($row['unit_price'])."]]></cell>";
     if($defaults['inventory'] == '1')

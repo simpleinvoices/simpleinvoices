@@ -38,7 +38,6 @@ $xml ="";
 		$action .= '</div></div>';
 		$xml .= "<row id='".$row['id']."'>";
 		$xml .= "<cell><![CDATA[".$action."]]></cell>";
-		$xml .= "<cell><![CDATA[".$row['index_name']."]]></cell>";		
 		#$xml .= "<cell><![CDATA[".siLocal::date($row['start_date'])."]]></cell>";
 		#$xml .= "<cell><![CDATA[".siLocal::date($row['end_date'])."]]></cell>";
 		$xml .= "<cell><![CDATA[".$row['start_date']."]]></cell>";

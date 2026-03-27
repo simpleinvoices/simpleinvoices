@@ -18,6 +18,9 @@
 		@else
 			<div id="manageGrid"></div>
 			@include('templates.default.payments.manage_js')
+			<div class="mt-2 text-start">
+				<a class="cluetip btn btn-outline-secondary btn-sm" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_wheres_the_edit_button" title="{{ $LANG['wheres_the_edit_button'] ?? '' }}"><i class="ti ti-help me-1"></i>{{ $LANG['wheres_the_edit_button'] ?? "Where's the Edit button?" }}</a>
+			</div>
 		@endif
 
 	@elseif(get('c_id'))
@@ -28,6 +31,9 @@
 		@else
 			<div id="manageGrid"></div>
 			@include('templates.default.payments.manage_js')
+			<div class="mt-2 text-start">
+				<a class="cluetip btn btn-outline-secondary btn-sm" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_wheres_the_edit_button" title="{{ $LANG['wheres_the_edit_button'] ?? '' }}"><i class="ti ti-help me-1"></i>{{ $LANG['wheres_the_edit_button'] ?? "Where's the Edit button?" }}</a>
+			</div>
 		@endif
 
 	@else
@@ -38,10 +44,9 @@
 		@else
 			<div id="manageGrid"></div>
 			@include('templates.default.payments.manage_js')
+			<div class="mt-2 text-start">
+				<a class="cluetip btn btn-outline-secondary btn-sm" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_wheres_the_edit_button" title="{{ $LANG['wheres_the_edit_button'] ?? '' }}"><i class="ti ti-help me-1"></i>{{ $LANG['wheres_the_edit_button'] ?? "Where's the Edit button?" }}</a>
+			</div>
 		@endif
 	@endif
-
-	<div class="mt-3">
-		<a class="cluetip btn btn-outline-secondary btn-sm" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_wheres_the_edit_button" title="{{ $LANG['wheres_the_edit_button'] ?? '' }}"><i class="ti ti-help me-1"></i>{{ $LANG['wheres_the_edit_button'] ?? "Where's the Edit button?" }}</a>
-	</div>
 </div>

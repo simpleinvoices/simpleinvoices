@@ -5,19 +5,19 @@
 * 	Danish translation file
 *
 * Authors:
-*	 Michael Larsen,  Claus Mùlgaard Nielsen
+*	 Michael Larsen,  Claus M?lgaard Nielsen
 *
 * Last edited:
 *    2016-10-04
 *
 * License:
 *	 GPL v3 or above
-*ù;=&#230;
-*ù=&#198;
-*ù=&#248;
-*ù=&#216;
-*ù=&#229;
-*ù=&#197;
+*?;=&#230;
+*?=&#198;
+*?=&#248;
+*?=&#216;
+*?=&#229;
+*?=&#197;
 */
 
 /*// 1 means that the variable has been translated and // zero means it hasnt been translated - this is used by a script to calculate how much of each file has been done
@@ -82,10 +82,12 @@ $LANG['cancel'] = "Annuller";//1
 $LANG['cannot_delete_first_row'] = "Den f&#248;rste r&#230;kke kan ikke slettes";//1
 $LANG['change_log'] = "&#198;ndrings oversigt";//1
 $LANG['city'] = "By";//1
+$LANG['close'] = "Close";//0
 $LANG['confirm_delete'] = "Er du sikker p&#229; at slette";//1
 $LANG['consulting'] = "R&#229;dgivning";//1
 $LANG['consulting_style'] = "R&#229;dgivnings type";//1
 $LANG['cost'] = "Omkostning";//1
+$LANG['cost_price'] = "Cost Price";//0
 $LANG['country'] = "Land";//1
 $LANG['create_invoice'] ="Opret en faktura";//1
 $LANG['credit_card_details'] = "Betalingskort detaljer";//1
@@ -156,6 +158,13 @@ $LANG['disable'] = "Deaktiver";//1
 $LANG['disabled'] = "Deaktiveret";//1
 $LANG['displaying_inv'] = "Viser fakturaer";//1
 $LANG['displaying_items'] = "Viser {from} til {to} af {total} poster";//1
+$LANG['grid_search'] = "Search";//0
+$LANG['grid_search_placeholder'] = "Search";//0
+$LANG['grid_reload'] = "Reload";//0
+$LANG['grid_sort_by'] = "Sort by {column}";//0
+$LANG['grid_records'] = "records";//0
+$LANG['grid_invalid_xml'] = "Invalid XML response";//0
+$LANG['grid_connection_error'] = "Connection error";//0
 $LANG['domain'] = "Dom&#230;ne";//1
 $LANG['dont_forget_to'] = "Glem ikke at";//1
 $LANG['draft'] = "Udkast";//1
@@ -243,21 +252,21 @@ $LANG['help_inv_pref_status'] = "En faktura kan have status som 'Udkast' eller '
 $LANG['help_inv_pref_what_the'] = "Faktura pr&#230;ferencer giver dig mulighed for at definere formuleringen i fakturaen. Du kan have s&#229; mange forskellige 'Faktura pr&#230;ferencer' defineret i Simple Invoices, som du &#248;nsker, men du kan kun v&#230;lge 1 'Faktura pr&#230;ference' pr. faktura.<br /><br />fx hvis du vil have overskriften i fakturaen til at v&#230;re 'Moes Tavern - faktura' - istedet for standarden 'Faktura', kan du redigere 'Faktura overskrift'-feltet i den p&#229;g&#230;ldende faktura pr&#230;ference for at opn&#229; dette resultat.";//1
 $LANG['help_invoice_create'] = "At oprette fakturaer er nemt. S&#229; snart en kreditor og en kunde er blevet indtastet i Simple Invoices, er alt du skal g&#248;re, at v&#230;lge en faktura type fra 'Faktura +' menuen, udfylde detaljerne og klik p&#229; 'Gem faktura'.";//1
 $LANG['help_invoice_custom_fields'] = "Mangler du flere felter p&#229; faktura sk&#230;rmen? Vil du have dine egne felter som 'Ordreseddel', 'Projekt navn' etc.<br /><br />Simple Invoices lader dig tilf&#248;je hvilke felter du end m&#229;tte &#248;nske i fakturaen. Disse er kaldet 'Brugerdefinerede felter', for at redigere eller konfigurere dine egne felter, v&#230;lg da 'Brugerdefinerede felter' fra indstillings menuen.";//1
-$LANG['help_invoice_types'] = "I Simple Invoices findes der 2 typer af fakturaer.<br /><br /> En <b>Udspecificeret faktura</b> er en faktura der indeholder mange forskellige poster i samme faktura, med mulighed for at tilf&#248;je en bem&#230;rkning til hver post - t&#230;nk regnskab/advokatfirmaer eller en k&#248;bmands faktura. <br /><br /> En <b>Total faktura</b> er en faktura som en faktura fra en blikkenslager, der indeholder de udf&#248;rte handlinger og har ùn pris og moms associeret.";//1
+$LANG['help_invoice_types'] = "I Simple Invoices findes der 2 typer af fakturaer.<br /><br /> En <b>Udspecificeret faktura</b> er en faktura der indeholder mange forskellige poster i samme faktura, med mulighed for at tilf&#248;je en bem&#230;rkning til hver post - t&#230;nk regnskab/advokatfirmaer eller en k&#248;bmands faktura. <br /><br /> En <b>Total faktura</b> er en faktura som en faktura fra en blikkenslager, der indeholder de udf&#248;rte handlinger og har ?n pris og moms associeret.";//1
 $LANG['help_logging'] = "For at logge udf&#248;rte handlinger i Simple Invoices aktiver denne indstilling. Dette opretter en log i databasen over hvilke handlinger der er udf&#248;rt.<br /><br />Bem&#230;rk: I &#248;jeblikket er det kun muligt at f&#229; pr&#230;senteret loggen i databasen. Vi vil snarest integrere en smart lille log-fremviser i Simple Invoices.";//1
 $LANG['help_mailing_list'] = "Postliste";//1
-$LANG['help_manage_custom_fields'] = "Brugerdefinerede felter er specielle felter, som du kan navngive som du &#248;nsker det.<br /><br />Denne side lader dig definere op til 4 brugerdefinerede felter for hver af f&#248;lgende: Produkter, kunder, kreditorer og fakturaer.<br /><br />S&#229; snart du har defineret et navn til ùt af felterne, vil feltet blive tilg&#230;ngeligt til brug. fx hvis du &#230;ndrer 'Faktura :: brugerdefineret felt 1' og angiver navnet som 'Projekt navn', vil der n&#230;ste gang du opretter en faktura v&#230;re et nyt felt under faktura sk&#230;rmen kaldet 'Projekt navn'.";//1
+$LANG['help_manage_custom_fields'] = "Brugerdefinerede felter er specielle felter, som du kan navngive som du &#248;nsker det.<br /><br />Denne side lader dig definere op til 4 brugerdefinerede felter for hver af f&#248;lgende: Produkter, kunder, kreditorer og fakturaer.<br /><br />S&#229; snart du har defineret et navn til ?t af felterne, vil feltet blive tilg&#230;ngeligt til brug. fx hvis du &#230;ndrer 'Faktura :: brugerdefineret felt 1' og angiver navnet som 'Projekt navn', vil der n&#230;ste gang du opretter en faktura v&#230;re et nyt felt under faktura sk&#230;rmen kaldet 'Projekt navn'.";//1
 $LANG['help_mysql4'] = "Da du anvender MySQL 4 eller lavere som din database, vil nogle funktioner i Simple Invoices v&#230;re deaktiveret. Nogle sql foresp&#248;rgsler i Simple Invoices benytter sig af nye funktioner i MySQL 5, s&#229; elementer som hurtig rapporter her p&#229; startsiden, nogle debitor rapporter og nogle f&#229; andre funktioner i Simple Invoices er blevet deaktiveret.";//1
 $LANG['help_new_password'] = "Hvis du &#248;nsker at &#230;ndre bruger-kodeordet, udfyld da dette felt.<br /><br />Bem&#230;rk: hvis du ikke &#248;nsker at &#230;ndre kodeordet, skal du blot lade dette felt v&#230;re tomt.";//1
 $LANG['help_process_payment_auto_amount'] = "V&#230;rdien i <b>Bel&#248;b</b> feltet bliver automatisk det skyldige bel&#248;b for den valgte faktura. Dette felt kan redigeres, og du kan &#230;ndre bel&#248;bet til det faktisk modtagne bel&#248;b.<br /><br />Dette felt er som standard det skyldige bel&#248;b, da det best almindelige betalings bel&#248;b der skal behandles, er det skyldige bel&#248;b.";//1
 $LANG['help_process_payment_details'] = "N&#229;r en faktura bliver valgt i 'Faktura ID' feltet vil kreditor navn, kunde navn, total af fakturaen, bel&#248;b der allerede er betalt og det udest&#229;ende bel&#248;b blive vist under detalje sektionen af 'Behandl betaling' sk&#230;rmen.<br /><br />Hvis du ikke ser nogen information under 'Detalje' sektionen har du enten ikke valgt et gyldigt faktura ID under 'Faktura ID' eller du har ikke angivet faktura ID'et korrekt. Der henvises til faktura ID p&#229; denne side, om hvordan  man angivet faktura ID korrekt.";//1
 $LANG['help_process_payment_inv_id'] = "For at v&#230;lge en faktura og behandle forelagte betaling, angiv venligst fakturanummeret i feltet 'Faktura ID'. Dette felt er et 'auto-udfyldnings'-felt, som betyder at: lad os sige at du har 12 fakturaer i din database, n&#229;r du angiver '1' i dette felt vil den returnere alle de fakturaer der indeholder '1' i <b>Faktura ID</b><br />S&#229; faktura 1, 10, 11 og 12 vil blive returneret hvis du angiver '1'. For at v&#230;lge den &#248;nskede faktura kan du bruge piletasterne p&#229; dit tastatur og klikke 'Enter' p&#229; fakturaen, eller du kan anvende din mus til at klikke p&#229; fakturaen-<br /><br />N&#229;r en faktura v&#230;lges p&#229; ovenst&#229;ende m&#229;de, vil alle detaljer for denne faktura blive vist under 'Detalje' sektionen af 'Behandl betaling' sk&#230;rmen.";//1
-$LANG['help_reports_xsl'] = "<b>Rapportùr fejl</b><br />Hvis du f&#229;r en 'Ups, der er sket en fejl her.' fejl n&#229;r du du fors&#248;ger at k&#248;re en rapport i Simple Invoices betyder det, at din version af PHP ikke har de n&#248;dvendige tilf&#248;jelser installeret (eller aktiveret).<br /><br />Hvis du anvender en Windows server og bruger WAMP5 henvises der til Simple Invoices Wiki for information om at rette dette http://simpleinvoices.org/wiki/doku.php?id=how_to_i_get_reports_working_in_windows_wamp5<br /><br /> Hvis du anvender Unix/Linux og PHP5 skal du venligst sikre dig, at du har php-xsl tilf&#248;jelsen installeret og aktiveret i din php.ini. I Ubuntu GNU/Linux skal du venligst installere  php-xsl pakken for PHP5 <br /><br /> Hvis du anvender PHP4 skal du venligst sikre dig, at dit PHP har Sablotron support '--enable-xslt'<br /><br />Bem&#230;rk: Hvis du anvender Simple Invoices i demo-milj&#248;et p&#229; SourceForge vil rapporter ikke fungere grundet ops&#230;tningen af deres servere.";//1
+$LANG['help_reports_xsl'] = "<b>Rapport?r fejl</b><br />Hvis du f&#229;r en 'Ups, der er sket en fejl her.' fejl n&#229;r du du fors&#248;ger at k&#248;re en rapport i Simple Invoices betyder det, at din version af PHP ikke har de n&#248;dvendige tilf&#248;jelser installeret (eller aktiveret).<br /><br />Hvis du anvender en Windows server og bruger WAMP5 henvises der til Simple Invoices Wiki for information om at rette dette http://simpleinvoices.org/wiki/doku.php?id=how_to_i_get_reports_working_in_windows_wamp5<br /><br /> Hvis du anvender Unix/Linux og PHP5 skal du venligst sikre dig, at du har php-xsl tilf&#248;jelsen installeret og aktiveret i din php.ini. I Ubuntu GNU/Linux skal du venligst installere  php-xsl pakken for PHP5 <br /><br /> Hvis du anvender PHP4 skal du venligst sikre dig, at dit PHP har Sablotron support '--enable-xslt'<br /><br />Bem&#230;rk: Hvis du anvender Simple Invoices i demo-milj&#248;et p&#229; SourceForge vil rapporter ikke fungere grundet ops&#230;tningen af deres servere.";//1
 $LANG['help_required_field'] = "Dette felt er obligatorisk. Du skal indtaste en v&#230;rdi i dette felt f&#248;r du kan gemme denne formular<br /><br />";//1
 $LANG['help_si_help'] = "Simple Invoices Hj&#230;lp";//1
 $LANG['help_simple_invoices'] = "Simple Invoices er et grundl&#230;ggende faktureringssystem designet med enkelthed og funktionalitet for &#248;je. Catering for behovene i sm&#229; organisationer eller private brugere. <br /><br />For mere information henvises til Simple Invoices hjemmeside:<a href='http://www.simpleinvoices.org' target='_blank'> <b>http://www.simpleinvoices.org</b></a>";//1
-$LANG['help_street2'] = "Feltet 'Adresse 2' anvendes hvis adressen for kreditoren eller kunden er enten for lang til at v&#230;re p&#229; ùn linje eller indeholder flere elementer.<br /><br />fx adressen 'Level 234, 325 South Malvern Road' kan blive separeret i f&#248;lgende:<br /><br />Gade: Level 234<br />Adresse 2: 325 South Malvern Road";//1
-$LANG['help_tax_rate_sign'] = "Moms kan enten v&#230;re procent-baseret (fx moms 10%) eller bel&#248;bs-baseret (fx $10 eller ù20).<br /><br />$-tegnet i drop-down feltet indikerer, at dette vil v&#230;re bel&#248;bs-baseret, og det indikerer ikke valutasymbolet. 'Faktura pr&#230;ferencen' dikterer hvilket valutasymbol der anvendes i dine fakturaer.";//1
+$LANG['help_street2'] = "Feltet 'Adresse 2' anvendes hvis adressen for kreditoren eller kunden er enten for lang til at v&#230;re p&#229; ?n linje eller indeholder flere elementer.<br /><br />fx adressen 'Level 234, 325 South Malvern Road' kan blive separeret i f&#248;lgende:<br /><br />Gade: Level 234<br />Adresse 2: 325 South Malvern Road";//1
+$LANG['help_tax_rate_sign'] = "Moms kan enten v&#230;re procent-baseret (fx moms 10%) eller bel&#248;bs-baseret (fx $10 eller ?20).<br /><br />$-tegnet i drop-down feltet indikerer, at dette vil v&#230;re bel&#248;bs-baseret, og det indikerer ikke valutasymbolet. 'Faktura pr&#230;ferencen' dikterer hvilket valutasymbol der anvendes i dine fakturaer.";//1
 $LANG['help_text'] = "<b>Advarsel</b><br /><br />Sikkerhedskopier venligst din Simple Invoices database inden du opdaterer databasen for en sikkerheds skyld, hvis der nu skulle g&#229; noget galt.<br /><br />For at sikkerhedskopiere databasen, v&#230;lg 'Sikkerhedskopier database' fra indstillings menuen, eller anvend phpMyAdmin (Hvis du har dette installeret) for at sikkerhedskopiere databasen.";//1
 $LANG['help_user_role'] = "Der er 3 roller tilg&#230;ngelige <br /><br />Administrator:<br />som har adgang til alt i Simple Invoices<br /><br /><br />Bruger:<br />som har l&#230;se/skrive adgang til alt i Simple Invoices men ingen adgang til indstillingsmenuen <br /><br /> L&#230;ser:<br />som har l&#230;se-versionen af Bruger.";//1
 $LANG['help_what_are_custom_fields'] = "Brugerdefinerede felter er specielle felter i kreditorer, produkter, kunder og fakturaer som du kan navngive, som du &#248;nsker det.<br /><br />Vil du gerne have, at der var et Moms ID felt under kreditor, skal du bare g&#229; til 'Brugerdefinerede felter'-siden og definere en af de tomme 'kreditor brugerdefinerede felter' som Moms ID.<br /><br />Nu n&#229;r du vil redigere en kreditor, vil der v&#230;re et felt kaldet Moms ID eller hvad du nu har specificeret det som.";//1
@@ -308,7 +317,7 @@ $LANG['item'] = "Post";//1
 $LANG['itemised'] = "Post";//1
 $LANG['itemised_style'] = "Post stil";//1
 $LANG['language'] = "Sprog";//1
-$LANG['large_dataset'] = "Stort datasùt";//1
+$LANG['large_dataset'] = "Stort datas?t";//1
 $LANG['license'] = "Licens";//1
 $LANG['list'] = "Liste";//1
 $LANG['loading'] = "Indl&#230;ser";//1
@@ -358,7 +367,7 @@ $LANG['no_inventory_movements'] = "Der er ikke registreret nogen beholdnings bev
 $LANG['no_invoices'] = "Der er ikke oprettet nogen fakturaer. Klik p&#229; 'Opret ny faktura'-knappen ovenover for at oprette en faktura";//1
 $LANG['no_items'] = "Ingen post fundet";//1
 $LANG['no_payment_types'] = "Der er ikke oprettet nogen betalingsmetoder. Klik p&#229; 'Tilf&#248;j ny betalingsmetode'-knappen ovenover for at oprette en";//1
-$LANG['no_payments'] = "Der er ikke registret nogen betaling. Klik p&#229; 'Behandl betaling'-knappen ùvenover for at angive modtaget betaling";//1
+$LANG['no_payments'] = "Der er ikke registret nogen betaling. Klik p&#229; 'Behandl betaling'-knappen ?venover for at angive modtaget betaling";//1
 $LANG['no_payments_customer'] = "Der er ikke registreret nogen betalinger for denne kunde. Klik p&#229; 'Behandl betaling'-knappen ovenover for at angive modtaget betaling";//1
 $LANG['no_payments_invoice'] = "Der er ikke registreret nogen betalinger for denne faktura. Klik p&#229; 'Behandl betaling for denne faktura'-knappen ovenover for at angive modtaget betaling";//1
 $LANG['no_preferences'] = "Der er ikke oprettet nogen faktura pr&#230;ferencer. Klik p&#229; 'Tilf&#248;j faktura pr&#230;ference'-knappen ovenover for at oprette en";//1
@@ -367,8 +376,8 @@ $LANG['no_tax_rates'] = "Der er ikke oprettet nogen momssatser. Klik p&#229; 'Ti
 $LANG['no_users'] = "Der er endnu ikke tilf&#248;jet en bruger. Klik p&#229; knappen 'Tilf&#248;j Bruger' herover, for at tilf&#248;je en bruger.";//1
 $LANG['none'] = "ingen";//1
 $LANG['note'] = "Bem&#230;rk";//1
-$LANG['note_as_description'] = "Anvend bemùrkning som linje varebetegnelse";//1
-$LANG['note_attributes'] = "Bemùrknings egenskaber";//1
+$LANG['note_as_description'] = "Anvend bem?rkning som linje varebetegnelse";//1
+$LANG['note_attributes'] = "Bem?rknings egenskaber";//1
 $LANG['note_expand'] = "Vis linje varebetegnelse som standard";//1
 $LANG['notes'] = "Bem&#230;rkninger";//1
 $LANG['notes_opt'] = "Bem&#230;rkninger (valgfri)";//1
@@ -437,7 +446,7 @@ $LANG['product_id'] = "Produkt ID";//1
 $LANG['product_sales'] = "Produkt salg";//1
 $LANG['product_to_add'] = "Produkt at tilf&#248;je";//1
 $LANG['product_unit_price'] = "Produkt enheds pris";//1
-$LANG['product_values'] = "Produkt vùrdier";//1
+$LANG['product_values'] = "Produkt v?rdier";//1
 $LANG['products'] = "Produkter";//1
 $LANG['products_by_customer'] = "Produkter efter kunde";//1
 $LANG['products_sold_customer_total'] = "Produkter solgt - kunde - Total";//1
@@ -572,6 +581,7 @@ $LANG['total_sales_by_customer'] = "Totalt Salg sorteret efter Kunde";//1
 $LANG['total_style'] = "Total stil";//1
 $LANG['total_taxes'] = "Total moms";//1
 $LANG['total_uppercase'] = "TOTAL";//1
+$LANG['total_cost'] = "Total Cost";//0
 $LANG['totals'] = "Total";//1
 $LANG['type'] = "Type";//1
 $LANG['unit_cost'] = "Enhedspris";//1
@@ -597,13 +607,13 @@ $LANG['yes'] = "Ja";//1
 $LANG['your_reports'] = "Dine rapporter";//1
 $LANG['zip'] = "Postnummer";//1
 $LANG['manage_product_attributes'] = "Administrer produktattributter";//1
-$LANG['add_product_attribute'] = "Tilf√∏j produktattribut";//1
-$LANG['insert_product_attribute'] = "Inds√¶t produktattribut";//1
+$LANG['add_product_attribute'] = "Tilf?j produktattribut";//1
+$LANG['insert_product_attribute'] = "Inds?t produktattribut";//1
 $LANG['product_attribute'] = "Produktattribut";//1
-$LANG['add_product_value'] = "Tilf√∏j produktv√¶rdi";//1
-$LANG['insert_product_value'] = "Inds√¶t produktv√¶rdi";//1
-$LANG['product_value'] = "Produktv√¶rdi";//1
-$LANG['manage_product_values'] = "Administrer produktv√¶rdier";//1
+$LANG['add_product_value'] = "Tilf?j produktv?rdi";//1
+$LANG['insert_product_value'] = "Inds?t produktv?rdi";//1
+$LANG['product_value'] = "Produktv?rdi";//1
+$LANG['manage_product_values'] = "Administrer produktv?rdier";//1
 
 $LANG['title_module_index']				= "Hjem";//1
 $LANG['title_module_reports']			= "Hjem / Rapporter";//1
@@ -615,7 +625,7 @@ $LANG['title_module_customers']			= "Mennesker / Kunder";//1
 $LANG['title_module_user']				= "Mennesker / Brugere";//1
 $LANG['title_module_products']			= "Produkter";//1
 $LANG['title_module_product_attribute']	= "Produkter / Produkt egenskaber";//1
-$LANG['title_module_product_value']		= "Produkter / Produkt vùrdier";//1
+$LANG['title_module_product_value']		= "Produkter / Produkt v?rdier";//1
 $LANG['title_module_options']			= "Indstillinger";//1
 $LANG['title_module_system_defaults']	= "Indstillinger / System Indstillinger";//1
 $LANG['title_module_custom_fields']		= "Indstillinger / Brugerdefinerede felter";//1

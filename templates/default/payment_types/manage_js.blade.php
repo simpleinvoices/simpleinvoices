@@ -17,7 +17,6 @@
 			],
 			statusLabels: { enabled: @json($LANG['enabled'] ?? 'Enabled'), disabled: @json($LANG['disabled'] ?? 'Disabled') },
 			searchitems : [
-				{display: @json($LANG['id'] ?? 'ID'), name : 'pt_id'},
 				{display: @json($LANG['description'] ?? 'Description'), name : 'pt_description', isdefault: true}
 			],
 			sortname: 'pt_description',
