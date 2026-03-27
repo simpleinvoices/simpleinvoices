@@ -19,6 +19,8 @@
 			searchitems : [
 				{display: @json($LANG['description'] ?? 'Description'), name : 'pt_description', isdefault: true}
 			],
+			searchLabel: @json($LANG['grid_search'] ?? 'Search'),
+			searchPlaceholder: @json($LANG['grid_search_placeholder'] ?? ($LANG['grid_search'] ?? 'Search')),
 			sortname: 'pt_description',
 			sortorder: 'asc',
 			usepager: true,

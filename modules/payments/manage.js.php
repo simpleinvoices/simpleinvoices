@@ -35,6 +35,8 @@
 				{display: '{/literal}{$LANG.biller}{literal}', name : 'b.name', isdefault: true},
 				{display: '{/literal}{$LANG.customer}{literal}', name : 'c.name'}
 				],
+			searchLabel: '{/literal}{$LANG.grid_search}{literal}',
+			searchPlaceholder: '{/literal}{$LANG.grid_search_placeholder}{literal}',
 			sortname: "{/literal}{$smarty.get.sortname|default:'id'}{literal}",
 			sortorder: "{/literal}{$smarty.get.sortorder|default:'desc'}{literal}",
 			usepager: true,

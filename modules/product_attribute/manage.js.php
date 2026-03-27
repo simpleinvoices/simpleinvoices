@@ -23,6 +23,8 @@
 				{display: '{/literal}{$LANG.id}{literal}', name : 'id'},
 				{display: '{/literal}{$LANG.name}{literal}', name : 'name', isdefault: true}
 				],
+			searchLabel: '{/literal}{$LANG.grid_search}{literal}',
+			searchPlaceholder: '{/literal}{$LANG.grid_search_placeholder}{literal}',
 			sortname: 'id',
 			sortorder: 'asc',
 			usepager: true,

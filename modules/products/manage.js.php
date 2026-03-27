@@ -50,6 +50,8 @@ var inventory = "{/literal}{$defaults.inventory}{literal}";
 				{display: '{/literal}{$LANG.name}{literal}', name : 'description', isdefault: true},
 				{display: '{/literal}{$LANG.unit_price}{literal}', name : 'unit_price'}
 				],
+			searchLabel: '{/literal}{$LANG.grid_search}{literal}',
+			searchPlaceholder: '{/literal}{$LANG.grid_search_placeholder}{literal}',
 			sortname: 'description',
 			sortorder: 'asc',
 			usepager: true,

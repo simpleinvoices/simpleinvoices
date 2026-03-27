@@ -25,6 +25,8 @@
 				{display: @json($LANG['cost_price'] ?? 'Cost Price'), name : 'iv.cost'},
 				{display: @json($LANG['total_cost'] ?? 'Total Cost'), name : 'iv.quantity * iv.cost'}
 			],
+			searchLabel: @json($LANG['grid_search'] ?? 'Search'),
+			searchPlaceholder: @json($LANG['grid_search_placeholder'] ?? ($LANG['grid_search'] ?? 'Search')),
 			sortname: 'id',
 			sortorder: 'desc',
 			usepager: true,

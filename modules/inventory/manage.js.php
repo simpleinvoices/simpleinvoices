@@ -34,6 +34,8 @@
 				{display: '{/literal}{$LANG.cost_price}{literal}', name : 'iv.cost'},
 				{display: '{/literal}{$LANG.total_cost}{literal}', name : 'iv.quantity * iv.cost'}
 				],
+			searchLabel: '{/literal}{$LANG.grid_search}{literal}',
+			searchPlaceholder: '{/literal}{$LANG.grid_search_placeholder}{literal}',
 			sortname: "id",
 			sortorder: "desc",
 			usepager: true,

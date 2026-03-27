@@ -21,6 +21,8 @@
 				{display: @json($LANG['attribute'] ?? 'Attribute'), name : 'name'},
 				{display: @json($LANG['value'] ?? 'Value'), name : 'value', isdefault: true}
 			],
+			searchLabel: @json($LANG['grid_search'] ?? 'Search'),
+			searchPlaceholder: @json($LANG['grid_search_placeholder'] ?? ($LANG['grid_search'] ?? 'Search')),
 			sortname: 'name',
 			sortorder: 'asc',
 			usepager: true,

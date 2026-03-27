@@ -26,6 +26,8 @@
 				{display: @json($LANG['biller'] ?? 'Biller'), name : 'b.name'},
 				{display: @json($LANG['customer'] ?? 'Customer'), name : 'c.name', isdefault: true}
 			],
+			searchLabel: @json($LANG['grid_search'] ?? 'Search'),
+			searchPlaceholder: @json($LANG['grid_search_placeholder'] ?? ($LANG['grid_search'] ?? 'Search')),
 			sortname: @json(get('sortname', 'index_id')),
 			sortorder: @json(get('sortorder', 'desc')),
 			usepager: true,

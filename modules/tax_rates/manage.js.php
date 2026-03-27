@@ -36,6 +36,8 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 				{display: '{/literal}{$LANG.description}{literal}', name : 'tax_description', isdefault: true},
 				{display: '{/literal}{$LANG.tax_percentage}{literal}', name : 'tax_percentage'}
 				],
+			searchLabel: '{/literal}{$LANG.grid_search}{literal}',
+			searchPlaceholder: '{/literal}{$LANG.grid_search_placeholder}{literal}',
 			sortname: 'tax_description',
 			sortorder: 'asc',
 			usepager: true,

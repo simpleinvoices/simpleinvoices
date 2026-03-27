@@ -21,6 +21,8 @@
 				{display: @json($LANG['email'] ?? 'Email'), name : 'email', isdefault: true},
 				{display: @json($LANG['role'] ?? 'Role'), name : 'ur.name'}
 			],
+			searchLabel: @json($LANG['grid_search'] ?? 'Search'),
+			searchPlaceholder: @json($LANG['grid_search_placeholder'] ?? ($LANG['grid_search'] ?? 'Search')),
 			sortname: 'email',
 			sortorder: 'asc',
 			usepager: true,

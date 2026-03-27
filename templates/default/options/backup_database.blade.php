@@ -52,21 +52,21 @@
 				<div class="card-body">
 					<h5 class="mb-3">{{ $LANG['database_backup'] ?? 'Database backup' }}</h5>
 					@if(!empty($backupFile))
-						<p><strong>File:</strong> {{ $backupFile }}</p>
+						<p><strong>{{ $LANG['file'] ?? 'File' }}:</strong> {{ $backupFile }}</p>
 					@endif
 					<div class="table-responsive">
 						<table class="table table-sm">
 							<thead>
 								<tr>
-									<th>Table</th>
-									<th>Status</th>
+									<th>{{ $LANG['table'] ?? 'Table' }}</th>
+									<th>{{ $LANG['status'] ?? 'Status' }}</th>
 								</tr>
 							</thead>
 							<tbody>
 								@foreach($backupResults as $tableName)
 									<tr>
 										<td>{{ $tableName }}</td>
-										<td>Backed up successfully</td>
+										<td>{{ $LANG['backed_up_successfully'] ?? 'Backed up successfully' }}</td>
 									</tr>
 								@endforeach
 							</tbody>
@@ -77,7 +77,7 @@
 		@endif
 
 		<div class="mb-3">
-			<a class="cluetip btn btn-outline-secondary btn-sm me-2" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_backup_database" title="{{ $LANG['database_backup'] ?? '' }}"><i class="ti ti-info-circle me-1"></i>{{ $LANG['more_info'] ?? '' }}</a>
+			<a class="cluetip btn btn-outline-secondary btn-sm me-2" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_backup_database" title="{{ $LANG['database_backup'] ?? 'Database backup' }}"><i class="ti ti-info-circle me-1"></i>{{ $LANG['more_info'] ?? '' }}</a>
 			<a class="cluetip btn btn-outline-secondary btn-sm" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_backup_database_fwrite" title="{{ $LANG['fwrite_error'] ?? '' }}"><i class="ti ti-help me-1"></i>{{ $LANG['fwrite_error'] ?? '' }}</a>
 		</div>
 	</div>

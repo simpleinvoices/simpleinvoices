@@ -33,6 +33,8 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 				{display: '{/literal}{$LANG.id}{literal}', name : 'pt_id'},
 				{display: '{/literal}{$LANG.description}{literal}', name : 'pt_description', isdefault: true}
 				],
+			searchLabel: '{/literal}{$LANG.grid_search}{literal}',
+			searchPlaceholder: '{/literal}{$LANG.grid_search_placeholder}{literal}',
 			sortname: 'pt_description',
 			sortorder: 'asc',
 			usepager: true,

@@ -21,6 +21,8 @@
 				{display: @json($LANG['description'] ?? 'Description'), name : 'tax_description', isdefault: true},
 				{display: @json($LANG['tax_percentage'] ?? 'Tax %'), name : 'tax_percentage'}
 			],
+			searchLabel: @json($LANG['grid_search'] ?? 'Search'),
+			searchPlaceholder: @json($LANG['grid_search_placeholder'] ?? ($LANG['grid_search'] ?? 'Search')),
 			sortname: 'tax_description',
 			sortorder: 'asc',
 			usepager: true,

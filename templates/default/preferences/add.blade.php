@@ -1,6 +1,6 @@
 @if(post('p_description') == "" AND form_submitted() )
 	<div class="alert alert-warning"><i class="ti ti-alert-circle"></i>
-		You must enter a description for the preference</div>
+		{{ $LANG['preference_description_required'] ?? 'You must enter a description for the preference' }}</div>
 @endif
 <form name="frmpost" action="index.php?module=preferences&amp;view=save" method="post">
 
@@ -48,7 +48,7 @@
 						<p class="text-muted"><em>{{ $LANG['no_preferences'] ?? '' }}</em></p>
 					@else
 						<select name="index_group" class="form-select">
-							<option value="">-user this preference-</option>
+							<option value="">{{ $LANG['invoice_preference_to_add'] ?? 'Invoice preference to add' }}</option>
 							@foreach(($preferences ?? []) as $preference)
 								<option @if($LANG['real'] == $defaults->preference) selected @endif value="{{ $preference['pref_id'] ?? '' }}">{{ $preference['pref_description'] ?? '' }}</option>
 							@endforeach

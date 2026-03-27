@@ -36,6 +36,8 @@
 		ofmsg: 'of',
 		useRp: true,
 		rpOptions: [10, 20, 50, 100],
+		searchLabel: '',
+		searchPlaceholder: '',
 		params: null,
 		onSuccess: null,
 		statusLabels: { enabled: 'Enabled', disabled: 'Disabled' },
@@ -135,12 +137,12 @@
 			input.type = 'text';
 			input.name = 'q';
 			input.className = 'form-control form-control-sm';
-			input.placeholder = siGridStr('search_placeholder', 'Search');
+			input.placeholder = o.searchPlaceholder || siGridStr('search_placeholder', 'Search');
 			input.style.width = '10em';
 			var btn = document.createElement('button');
 			btn.type = 'button';
 			btn.className = 'btn btn-sm btn-primary';
-			btn.textContent = siGridStr('search', 'Search');
+			btn.textContent = o.searchLabel || siGridStr('search', 'Search');
 			btn.addEventListener('click', function () {
 				self.query = input.value;
 				self.qtype = sel.value;

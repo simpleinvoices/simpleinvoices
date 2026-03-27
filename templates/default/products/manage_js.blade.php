@@ -35,6 +35,8 @@
 				{display: @json($LANG['name'] ?? 'Name'), name : 'description', isdefault: true},
 				{display: @json($LANG['unit_price'] ?? 'Unit Price'), name : 'unit_price'}
 			],
+			searchLabel: @json($LANG['grid_search'] ?? 'Search'),
+			searchPlaceholder: @json($LANG['grid_search_placeholder'] ?? ($LANG['grid_search'] ?? 'Search')),
 			sortname: 'description',
 			sortorder: 'asc',
 			usepager: true,

@@ -34,6 +34,8 @@
 				{display: '{/literal}{$LANG.customer}{literal}', name : 'cron.id', isdefault: true},
 				{display: '{/literal}{$LANG.aging}{literal}', name : 'aging'}
 				],
+			searchLabel: '{/literal}{$LANG.grid_search}{literal}',
+			searchPlaceholder: '{/literal}{$LANG.grid_search_placeholder}{literal}',
 			sortname: "id",
 			sortorder: "desc",
 			usepager: true,

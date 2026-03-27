@@ -16,7 +16,7 @@
 @if($saved ==false)
 	@if(post('op') == 'add' AND post('invoice_id') == '') 
 		<div class="alert alert-warning"><i class="ti ti-alert-circle"></i>
-		You must select an invoice</div>
+		{{ $LANG['select_invoice'] ?? 'Please select an invoice' }}</div>
 	@endif
 
 

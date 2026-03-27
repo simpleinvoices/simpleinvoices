@@ -30,6 +30,8 @@
 				{display: '{/literal}{$LANG.email}{literal}', name : 'email', isdefault: true},
 				{display: '{/literal}{$LANG.role}{literal}', name : 'ur.name'}
 			],
+			searchLabel: '{/literal}{$LANG.grid_search}{literal}',
+			searchPlaceholder: '{/literal}{$LANG.grid_search_placeholder}{literal}',
 			sortname: 'name',
 			sortorder: 'asc',
 			usepager: true,

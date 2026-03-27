@@ -24,6 +24,8 @@
 				{display: @json($LANG['customer'] ?? 'Customer'), name : 'cron.id', isdefault: true},
 				{display: @json($LANG['aging'] ?? 'Aging'), name : 'aging'}
 			],
+			searchLabel: @json($LANG['grid_search'] ?? 'Search'),
+			searchPlaceholder: @json($LANG['grid_search_placeholder'] ?? ($LANG['grid_search'] ?? 'Search')),
 			sortname: 'id',
 			sortorder: 'desc',
 			usepager: true,
