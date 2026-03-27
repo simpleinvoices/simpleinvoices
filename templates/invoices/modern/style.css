@@ -22,6 +22,7 @@
 body.si-modern-inv {
 	background: #f8fafc;
 	background: var(--si-modern-bg);
+	background-color: #f8fafc;
 	color: #1e293b;
 	color: var(--si-modern-text);
 	font-size: 13pt;
@@ -29,17 +30,21 @@ body.si-modern-inv {
 	line-height: 1.5;
 	margin: 0;
 	padding: 1.5rem;
+	-webkit-print-color-adjust: exact;
+	print-color-adjust: exact;
 }
 
 .si-modern-inv-card {
 	background: #ffffff;
 	background: var(--si-modern-card-bg);
+	background-color: #ffffff;
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 	box-shadow: var(--si-modern-shadow);
 	border-radius: 6px;
 	border-radius: var(--si-modern-radius);
 	border: 1px solid #e2e8f0;
 	border: 1px solid var(--si-modern-border);
+	border-color: #e2e8f0;
 	padding: 2rem;
 	max-width: 900px;
 	margin: 0 auto;
@@ -84,7 +89,7 @@ td, th { margin: 0; padding: 0; vertical-align: top; }
 .si-modern-header-bar {
 	height: 3px;
 	background: #206bc4;
-	background: linear-gradient(90deg, var(--si-modern-accent) 0%, var(--si-modern-accent-soft) 100%);
+	background-color: #206bc4;
 	border: none;
 	padding: 0;
 	margin-top: 0.25rem;
@@ -116,6 +121,7 @@ td, th { margin: 0; padding: 0; vertical-align: top; }
 .si-modern-label-row {
 	border-bottom: 1px solid #f1f5f9;
 	border-bottom: 1px solid var(--si-modern-border-light);
+	border-bottom-color: #f1f5f9;
 	padding-bottom: 0.35em;
 	margin-bottom: 0;
 }
@@ -137,13 +143,19 @@ td, th { margin: 0; padding: 0; vertical-align: top; }
 	margin-right: 0;
 	border: 1px solid #e2e8f0;
 	border: 1px solid var(--si-modern-border);
+	border-color: #e2e8f0;
 	border-radius: 6px;
 	border-radius: var(--si-modern-radius);
 	overflow: hidden;
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 	background: #fff;
+	background-color: #fff;
 }
-.si-modern-summary-table .col1 { background: #f1f5f9; background: var(--si-modern-head-bg); }
+.si-modern-summary-table .col1 {
+	background: #f1f5f9;
+	background: var(--si-modern-head-bg);
+	background-color: #f1f5f9;
+}
 .si-modern-summary-head {
 	padding: 0.6em 0.75em;
 	font-size: 0.8em;
@@ -153,13 +165,16 @@ td, th { margin: 0; padding: 0; vertical-align: top; }
 	color: var(--si-modern-text);
 	border-bottom: 1px solid #e2e8f0;
 	border-bottom: 1px solid var(--si-modern-border);
+	border-bottom-color: #e2e8f0;
 	background: #f1f5f9;
 	background: var(--si-modern-head-bg);
+	background-color: #f1f5f9;
 }
 .si-modern-summary-table td {
 	padding: 0.4em 0.75em;
 	border-bottom: 1px solid #f1f5f9;
 	border-bottom: 1px solid var(--si-modern-border-light);
+	border-bottom-color: #f1f5f9;
 	font-size: 0.9em;
 }
 .si-modern-summary-table tr:last-child td { border-bottom: none; }
@@ -190,10 +205,12 @@ td, th { margin: 0; padding: 0; vertical-align: top; }
 	table-layout: fixed;
 	border: 1px solid #e2e8f0;
 	border: 1px solid var(--si-modern-border);
+	border-color: #e2e8f0;
 	border-radius: 6px;
 	border-radius: var(--si-modern-radius);
 	overflow: hidden;
 	background: #fff;
+	background-color: #fff;
 }
 .si-modern-col-qty {
 	width: 4.5rem;
@@ -210,6 +227,7 @@ td, th { margin: 0; padding: 0; vertical-align: top; }
 .si-modern-th {
 	background: #f1f5f9;
 	background: var(--si-modern-head-bg);
+	background-color: #f1f5f9;
 	color: #64748b;
 	color: var(--si-modern-text-muted);
 	font-size: 0.75em;
@@ -218,12 +236,14 @@ td, th { margin: 0; padding: 0; vertical-align: top; }
 	padding: 0.6em 0.75em;
 	border-bottom: 1px solid #e2e8f0;
 	border-bottom: 1px solid var(--si-modern-border);
+	border-bottom-color: #e2e8f0;
 }
 
 .si-modern-item-row td {
 	padding: 0.5em 0.75em;
 	border-bottom: 1px solid #f1f5f9;
 	border-bottom: 1px solid var(--si-modern-border-light);
+	border-bottom-color: #f1f5f9;
 	font-size: 0.9em;
 	word-wrap: break-word;
 }
@@ -244,6 +264,7 @@ td, th { margin: 0; padding: 0; vertical-align: top; }
 .si-modern-item-sep td {
 	border-bottom: 1px solid #f1f5f9;
 	border-bottom: 1px solid var(--si-modern-border-light);
+	border-bottom-color: #f1f5f9;
 	padding-bottom: 0.5em;
 }
 .si-modern-items-table > tbody > tr:last-child td {
@@ -264,6 +285,7 @@ td, th { margin: 0; padding: 0; vertical-align: top; }
 	padding-top: 0.6em;
 	border-top: 2px solid #e2e8f0;
 	border-top: 2px solid var(--si-modern-border);
+	border-top-color: #e2e8f0;
 	font-weight: 600;
 }
 .si-modern-total-amount {
@@ -282,7 +304,9 @@ td, th { margin: 0; padding: 0; vertical-align: top; }
 	color: var(--si-modern-text);
 	border-bottom: 1px solid #f1f5f9;
 	border-bottom: 1px solid var(--si-modern-border-light);
+	border-bottom-color: #f1f5f9;
 	padding-bottom: 0.25em;
+	background-color: #f1f5f9;
 }
 .si-modern-detail-line {
 	font-size: 0.875em;
@@ -298,7 +322,10 @@ td, th { margin: 0; padding: 0; vertical-align: top; }
 }
 
 /* Legacy class compatibility (default template uses .col1, .tbl1-bottom) */
-.si-modern-inv .col1 { background-color: #f1f5f9; background-color: var(--si-modern-head-bg); }
+.si-modern-inv .col1 {
+	background-color: #f1f5f9;
+	background-color: var(--si-modern-head-bg);
+}
 
 @media print {
 	body.si-modern-inv {

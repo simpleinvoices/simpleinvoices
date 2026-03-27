@@ -64,7 +64,7 @@
 
 		<table class="si-tabler-inv-party-table">
 			<tr>
-				<td class="si-tabler-inv-party-cell si-tabler-inv-party-left">
+				<td class="si-tabler-inv-party-cell si-tabler-inv-party-left" bgcolor="#f8fafc">
 					<div class="si-tabler-inv-label">{{ $LANG['biller'] ?? 'Company' }}</div>
 					<div class="si-tabler-inv-name">{{ $biller['name'] ?? '' }}</div>
 					<div class="si-tabler-inv-address">
@@ -85,7 +85,7 @@
 					</div>
 				</td>
 				<td class="si-tabler-inv-party-spacer"></td>
-				<td class="si-tabler-inv-party-cell">
+				<td class="si-tabler-inv-party-cell" bgcolor="#f8fafc">
 					<div class="si-tabler-inv-label">{{ $LANG['customer'] ?? 'Client' }}</div>
 					<div class="si-tabler-inv-name">{{ $customer['name'] ?? '' }}</div>
 					<div class="si-tabler-inv-address">
@@ -121,10 +121,10 @@
 			</colgroup>
 			<thead>
 				<tr>
-					<th class="si-tabler-col-qty">{{ $LANG['quantity_short'] ?? 'Qnt' }}</th>
-					<th>{{ $LANG['item'] ?? 'Product' }}</th>
-					<th class="text-end si-tabler-col-unit">{{ $LANG['unit_cost'] ?? 'Unit' }}</th>
-					<th class="text-end si-tabler-col-amount">{{ $LANG['price'] ?? 'Amount' }}</th>
+					<th class="si-tabler-col-qty" bgcolor="#f8fafc">{{ $LANG['quantity_short'] ?? 'Qnt' }}</th>
+					<th bgcolor="#f8fafc">{{ $LANG['item'] ?? 'Product' }}</th>
+					<th class="text-end si-tabler-col-unit" bgcolor="#f8fafc">{{ $LANG['unit_cost'] ?? 'Unit' }}</th>
+					<th class="text-end si-tabler-col-amount" bgcolor="#f8fafc">{{ $LANG['price'] ?? 'Amount' }}</th>
 				</tr>
 			</thead>
 		<tbody>
@@ -184,10 +184,10 @@
 			</colgroup>
 			<thead>
 				<tr>
-					<th class="si-tabler-col-qty">{{ $LANG['quantity_short'] ?? 'Qnt' }}</th>
-					<th>{{ $LANG['item'] ?? 'Product' }}</th>
-					<th class="text-end si-tabler-col-unit">{{ $LANG['unit_cost'] ?? 'Unit' }}</th>
-					<th class="text-end si-tabler-col-amount">{{ $LANG['price'] ?? 'Amount' }}</th>
+					<th class="si-tabler-col-qty" bgcolor="#f8fafc">{{ $LANG['quantity_short'] ?? 'Qnt' }}</th>
+					<th bgcolor="#f8fafc">{{ $LANG['item'] ?? 'Product' }}</th>
+					<th class="text-end si-tabler-col-unit" bgcolor="#f8fafc">{{ $LANG['unit_cost'] ?? 'Unit' }}</th>
+					<th class="text-end si-tabler-col-amount" bgcolor="#f8fafc">{{ $LANG['price'] ?? 'Amount' }}</th>
 				</tr>
 			</thead>
 		<tbody>
@@ -230,7 +230,7 @@
 		@if(($invoice['type_id'] ?? null) == 1)
 		<table class="si-tabler-inv-table table-card">
 			<thead>
-				<tr><th>{{ $LANG['description'] ?? 'Description' }}</th></tr>
+				<tr><th bgcolor="#f8fafc">{{ $LANG['description'] ?? 'Description' }}</th></tr>
 			</thead>
 			<tbody>
 				@foreach(($invoiceItems ?? []) as $invoiceItem)
@@ -279,7 +279,7 @@
 		</div>
 
 		{{-- Invoice details / payment --}}
-		<div class="si-tabler-inv-detail-card">
+		<div class="si-tabler-inv-detail-card" style="background-color:#f8fafc;border:1px solid #e2e8f0;">
 			<div class="si-tabler-inv-detail-heading">{{ $preference['pref_inv_detail_heading'] ?? '' }}</div>
 			<div class="si-tabler-inv-detail-line"><i>{{ ($preference['pref_inv_detail_line'] ?? '') | outhtml }}</i></div>
 			<div class="si-tabler-inv-detail-line">{{ $preference['pref_inv_payment_method'] ?? '' }}</div>

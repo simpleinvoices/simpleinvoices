@@ -22,7 +22,7 @@
 			<th align="right"><span class="si-modern-heading">{{ $preference['pref_inv_heading'] ?? '' }}</span></th>
 		</tr>
 		<tr>
-			<td colspan="6" class="si-modern-header-bar">&nbsp;</td>
+			<td colspan="6" class="si-modern-header-bar" bgcolor="#206bc4">&nbsp;</td>
 		</tr>
 	</table>
 
@@ -157,7 +157,7 @@
 	<!-- Summary - start -->
 	<table class="right invoice-summary-table si-modern-summary-table">
 		<tr>
-				<td class="col1 si-modern-summary-head" colspan="4" ><b>{{ $preference['pref_inv_wording'] ?? '' }} {{ $LANG['summary'] ?? '' }}</b></td>
+				<td class="col1 si-modern-summary-head" colspan="4" bgcolor="#f1f5f9"><b>{{ $preference['pref_inv_wording'] ?? '' }} {{ $LANG['summary'] ?? '' }}</b></td>
 		</tr>
 		<tr>
 				<td class="si-modern-muted">{{ $preference['pref_inv_wording'] ?? '' }} {{ $LANG['number_short'] ?? '' }}:</td>
@@ -227,10 +227,10 @@
 
 	@if(($invoice['type_id'] ?? null) == 2 )
 					<tr>
-				<td class="si-modern-th col-qty"><b>{{ $LANG['quantity_short'] ?? '' }}</b></td>
-				<td class="si-modern-th" colspan="3"><b>{{ $LANG['item'] ?? '' }}</b></td>
-				<td class="si-modern-th" align="right"><b>{{ $LANG['unit_cost'] ?? '' }}</b></td>
-				<td class="si-modern-th" align="right"><b>{{ $LANG['price'] ?? '' }}</b></td>
+				<td class="si-modern-th col-qty" bgcolor="#f1f5f9"><b>{{ $LANG['quantity_short'] ?? '' }}</b></td>
+				<td class="si-modern-th" colspan="3" bgcolor="#f1f5f9"><b>{{ $LANG['item'] ?? '' }}</b></td>
+				<td class="si-modern-th" align="right" bgcolor="#f1f5f9"><b>{{ $LANG['unit_cost'] ?? '' }}</b></td>
+				<td class="si-modern-th" align="right" bgcolor="#f1f5f9"><b>{{ $LANG['price'] ?? '' }}</b></td>
 			</tr>
 
 				@foreach(($invoiceItems ?? []) as $invoiceItem)
@@ -294,10 +294,10 @@
 
 	@if(($invoice['type_id'] ?? null) == 3 )
 			<tr class="si-modern-th">
-				<td class="si-modern-th col-qty"><b>{{ $LANG['quantity_short'] ?? '' }}</b></td>
-				<td colspan="3" class="si-modern-th"><b>{{ $LANG['item'] ?? '' }}</b></td>
-				<td align="right" class="si-modern-th"><b>{{ $LANG['unit_cost'] ?? '' }}</b></td>
-				<td align="right" class="si-modern-th"><b>{{ $LANG['price'] ?? '' }}</b></td>
+				<td class="si-modern-th col-qty" bgcolor="#f1f5f9"><b>{{ $LANG['quantity_short'] ?? '' }}</b></td>
+				<td colspan="3" class="si-modern-th" bgcolor="#f1f5f9"><b>{{ $LANG['item'] ?? '' }}</b></td>
+				<td align="right" class="si-modern-th" bgcolor="#f1f5f9"><b>{{ $LANG['unit_cost'] ?? '' }}</b></td>
+				<td align="right" class="si-modern-th" bgcolor="#f1f5f9"><b>{{ $LANG['price'] ?? '' }}</b></td>
 			</tr>
 
 			@foreach(($invoiceItems ?? []) as $invoiceItem)
@@ -346,7 +346,7 @@
 		    <table class="left si-modern-block-table" width="100%">
 
                 <tr class="col1" >
-                    <td class="si-modern-th col1" colspan="6"><b>{{ $LANG['description'] ?? '' }}</b></td>
+                    <td class="si-modern-th col1" colspan="6" bgcolor="#f1f5f9"><b>{{ $LANG['description'] ?? '' }}</b></td>
                 </tr>
 
           @foreach(($invoiceItems ?? []) as $invoiceItem)
@@ -425,7 +425,7 @@
 	<!-- invoice details section - start -->
 
 	<tr>
-		<td class="si-modern-detail-head" colspan="6"><b>{{ $preference['pref_inv_detail_heading'] ?? '' }}</b></td>
+		<td class="si-modern-detail-head" colspan="6" bgcolor="#f1f5f9"><b>{{ $preference['pref_inv_detail_heading'] ?? '' }}</b></td>
 	</tr>
 	<tr>
 		<td class="si-modern-detail-line" colspan="6"><i>{{ $preference['pref_inv_detail_line'] ?? '' | outhtml }}</i></td>

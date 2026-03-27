@@ -18,6 +18,7 @@
 body.si-tabler-inv {
 	background: #fff;
 	background: var(--si-inv-bg);
+	background-color: #fff;
 	color: #1e293b;
 	color: var(--si-inv-text);
 	font-size: 14px;
@@ -25,6 +26,8 @@ body.si-tabler-inv {
 	line-height: 1.5;
 	margin: 0;
 	padding: 1.5rem;
+	-webkit-print-color-adjust: exact;
+	print-color-adjust: exact;
 }
 table { border-collapse: collapse; width: 100%; }
 td, th { padding: 0.5rem 0.75rem; vertical-align: top; }
@@ -34,10 +37,14 @@ td, th { padding: 0.5rem 0.75rem; vertical-align: top; }
 .si-tabler-inv-card {
 	background: #fff;
 	background: var(--si-inv-card-bg);
+	background-color: #fff;
 	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.05);
 	box-shadow: var(--si-inv-card-shadow);
 	border-radius: 0.5rem;
 	border-radius: var(--si-inv-radius);
+	border: 1px solid #e2e8f0;
+	border: 1px solid var(--si-inv-border);
+	border-color: #e2e8f0;
 	padding: 2rem;
 	max-width: 900px;
 	margin: 0 auto;
@@ -88,12 +95,14 @@ td, th { padding: 0.5rem 0.75rem; vertical-align: top; }
 	margin-left: auto;
 	border-top: 1px solid #e2e8f0;
 	border-top: 1px solid var(--si-inv-border);
+	border-top-color: #e2e8f0;
 }
 .si-tabler-inv-summary-table td {
 	padding: 0.4rem 0;
 	font-size: 0.875rem;
 	border-bottom: 1px solid #f1f5f9;
 	border-bottom: 1px solid var(--si-inv-border-light);
+	border-bottom-color: #f1f5f9;
 }
 .si-tabler-inv-summary-table td:first-child {
 	color: #64748b;
@@ -118,10 +127,12 @@ td, th { padding: 0.5rem 0.75rem; vertical-align: top; }
 	padding: 1.1rem 1.25rem;
 	border: 1px solid #e2e8f0;
 	border: 1px solid var(--si-inv-border);
+	border-color: #e2e8f0;
 	border-radius: 0.5rem;
 	border-radius: var(--si-inv-radius);
 	background: #f8fafc;
-	background: linear-gradient(180deg, var(--si-inv-head-bg) 0%, #fff 100%);
+	background: var(--si-inv-head-bg);
+	background-color: #f8fafc;
 }
 .si-tabler-inv-party-left {
 	padding-right: 1.25rem;
@@ -171,6 +182,7 @@ td, th { padding: 0.5rem 0.75rem; vertical-align: top; }
 	margin-bottom: 1.5rem;
 	border: 1px solid #e2e8f0;
 	border: 1px solid var(--si-inv-border);
+	border-color: #e2e8f0;
 	border-radius: 0.5rem;
 	border-radius: var(--si-inv-radius);
 	overflow: hidden;
@@ -189,8 +201,10 @@ td, th { padding: 0.5rem 0.75rem; vertical-align: top; }
 	color: var(--si-inv-text-muted);
 	background: #f8fafc;
 	background: var(--si-inv-head-bg);
+	background-color: #f8fafc;
 	border-bottom: 1px solid #e2e8f0;
 	border-bottom: 1px solid var(--si-inv-border);
+	border-bottom-color: #e2e8f0;
 }
 .si-tabler-inv-table thead th:first-child,
 .si-tabler-inv-table tbody td:first-child {
@@ -200,6 +214,7 @@ td, th { padding: 0.5rem 0.75rem; vertical-align: top; }
 	padding: 0.75rem 1rem;
 	border-bottom: 1px solid #f1f5f9;
 	border-bottom: 1px solid var(--si-inv-border-light);
+	border-bottom-color: #f1f5f9;
 	vertical-align: middle;
 	word-wrap: break-word;
 }
@@ -254,6 +269,7 @@ td, th { padding: 0.5rem 0.75rem; vertical-align: top; }
 	width: 100%;
 	border-top: 1px solid #e2e8f0;
 	border-top: 1px solid var(--si-inv-border);
+	border-top-color: #e2e8f0;
 }
 .si-tabler-inv-totals td {
 	padding: 0.4rem 0;
@@ -268,6 +284,7 @@ td, th { padding: 0.5rem 0.75rem; vertical-align: top; }
 	padding-top: 0.6rem;
 	border-top: 2px solid #e2e8f0;
 	border-top: 2px solid var(--si-inv-border);
+	border-top-color: #e2e8f0;
 	font-weight: 700;
 	font-size: 1.125rem;
 	color: #1e293b;
@@ -284,8 +301,10 @@ td, th { padding: 0.5rem 0.75rem; vertical-align: top; }
 	line-height: 1.5;
 	border-top: 1px solid #f1f5f9;
 	border-top: 1px solid var(--si-inv-border-light);
+	border-top-color: #f1f5f9;
 	border-bottom: 1px solid #f1f5f9;
 	border-bottom: 1px solid var(--si-inv-border-light);
+	border-bottom-color: #f1f5f9;
 }
 
 /* Notes & payment details */
@@ -294,16 +313,19 @@ td, th { padding: 0.5rem 0.75rem; vertical-align: top; }
 	padding-top: 1rem;
 	border-top: 1px solid #e2e8f0;
 	border-top: 1px solid var(--si-inv-border);
+	border-top-color: #e2e8f0;
 	font-size: 0.875rem;
 }
 .si-tabler-inv-detail-card {
 	padding: 1rem 1.1rem;
 	border: 1px solid #e2e8f0;
 	border: 1px solid var(--si-inv-border);
+	border-color: #e2e8f0;
 	border-radius: 0.5rem;
 	border-radius: var(--si-inv-radius);
 	background: #f8fafc;
 	background: var(--si-inv-head-bg);
+	background-color: #f8fafc;
 }
 .si-tabler-inv-detail-heading {
 	font-weight: 600;
