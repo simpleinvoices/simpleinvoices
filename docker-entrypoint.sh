@@ -30,18 +30,88 @@ if [ -n "${SI_DB_HOST}" ]; then
     echo "Entrypoint: could not resolve host '${SI_DB_HOST}' after ${_max}s. Ensure the app container is on the same Docker network as the db service (e.g. docker compose up)." >&2
     exit 1
   fi
-
-  cp -f /var/www/html/config/config.php /var/www/html/config/custom.config.php
-  # Alpine/BusyBox sed -i requires backup extension; remove after
-  sed -i.bak "s/^database\.params\.host[[:space:]]*=.*/database.params.host                = ${SI_DB_HOST}/" /var/www/html/config/custom.config.php
-  sed -i.bak "s/^database\.params\.port[[:space:]]*=.*/database.params.port                = ${_port}/" /var/www/html/config/custom.config.php
-  sed -i.bak "s/^database\.params\.username[[:space:]]*=.*/database.params.username            = ${SI_DB_USER}/" /var/www/html/config/custom.config.php
-  sed -i.bak "s|^database\.params\.password[[:space:]]*=.*|database.params.password            = ${SI_DB_PASSWORD}|" /var/www/html/config/custom.config.php
-  sed -i.bak "s/^database\.params\.dbname[[:space:]]*=.*/database.params.dbname              = ${SI_DB_NAME}/" /var/www/html/config/custom.config.php
-  [ -n "${SI_APP_NAME}" ] && sed -i.bak "s|^app\.name[[:space:]]*=.*|app.name                            = ${SI_APP_NAME}|" /var/www/html/config/custom.config.php
-  [ -n "${SI_APP_LOGO}" ] && sed -i.bak "s|^app\.logo[[:space:]]*=.*|app.logo                            = ${SI_APP_LOGO}|" /var/www/html/config/custom.config.php
-  rm -f /var/www/html/config/custom.config.php.bak
 fi
+
+cp -f /var/www/html/config/config.php /var/www/html/config/custom.config.php
+php -r '
+  $path = "/var/www/html/config/custom.config.php";
+  $content = file_get_contents($path);
+  if ($content === false) {
+      fwrite(STDERR, "Entrypoint: unable to read custom.config.php template.\n");
+      exit(1);
+  }
+
+  $map = [
+      "SI_DATABASE_ADAPTER" => "database.adapter",
+      "SI_DATABASE_UTF8" => "database.utf8",
+      "SI_DB_HOST" => "database.params.host",
+      "SI_DB_USER" => "database.params.username",
+      "SI_DB_PASSWORD" => "database.params.password",
+      "SI_DB_NAME" => "database.params.dbname",
+      "SI_DB_PORT" => "database.params.port",
+      "SI_AUTHENTICATION_ENABLED" => "authentication.enabled",
+      "SI_AUTHENTICATION_HTTP" => "authentication.http",
+      "SI_EXPORT_SPREADSHEET" => "export.spreadsheet",
+      "SI_EXPORT_WORDPROCESSOR" => "export.wordprocessor",
+      "SI_EXPORT_PDF_SCREENSIZE" => "export.pdf.screensize",
+      "SI_EXPORT_PDF_PAPERSIZE" => "export.pdf.papersize",
+      "SI_EXPORT_PDF_LEFTMARGIN" => "export.pdf.leftmargin",
+      "SI_EXPORT_PDF_RIGHTMARGIN" => "export.pdf.rightmargin",
+      "SI_EXPORT_PDF_TOPMARGIN" => "export.pdf.topmargin",
+      "SI_EXPORT_PDF_BOTTOMMARGIN" => "export.pdf.bottommargin",
+      "SI_LOCAL_LOCALE" => "local.locale",
+      "SI_LOCAL_PRECISION" => "local.precision",
+      "SI_EMAIL_HOST" => "email.host",
+      "SI_EMAIL_SMTP_AUTH" => "email.smtp_auth",
+      "SI_EMAIL_USERNAME" => "email.username",
+      "SI_EMAIL_PASSWORD" => "email.password",
+      "SI_EMAIL_SMTPPORT" => "email.smtpport",
+      "SI_EMAIL_SECURE" => "email.secure",
+      "SI_EMAIL_ACK" => "email.ack",
+      "SI_EMAIL_USE_LOCAL_SENDMAIL" => "email.use_local_sendmail",
+      "SI_ENCRYPTION_DEFAULT_KEY" => "encryption.default.key",
+      "SI_NONCE_KEY" => "nonce.key",
+      "SI_NONCE_TIMELIMIT" => "nonce.timelimit",
+      "SI_VERSION_NAME" => "version.name",
+      "SI_APP_NAME" => "app.name",
+      "SI_APP_LOGO" => "app.logo",
+      "SI_DEBUG_LEVEL" => "debug.level",
+      "SI_DEBUG_ERROR_REPORTING" => "debug.error_reporting",
+      "SI_PHP_DATE_TIMEZONE" => "phpSettings.date.timezone",
+      "SI_PHP_DISPLAY_STARTUP_ERRORS" => "phpSettings.display_startup_errors",
+      "SI_PHP_DISPLAY_ERRORS" => "phpSettings.display_errors",
+      "SI_PHP_LOG_ERRORS" => "phpSettings.log_errors",
+      "SI_PHP_ERROR_LOG" => "phpSettings.error_log",
+      "SI_CONFIRM_DELETE_LINE_ITEM" => "confirm.deleteLineItem",
+  ];
+
+  $formatValue = static function (string $value): string {
+      $trimmed = trim($value);
+      if ($trimmed === "") {
+          return "\"\"";
+      }
+      if (preg_match("/^(true|false|yes|no|null)$/i", $trimmed) || preg_match("/^-?[0-9]+(?:\\.[0-9]+)?$/", $trimmed)) {
+          return $trimmed;
+      }
+      return "\"" . addcslashes($value, "\\\"") . "\"";
+  };
+
+  foreach ($map as $env => $key) {
+      $value = getenv($env);
+      if ($value === false) {
+          continue;
+      }
+
+      $replacement = sprintf("%-35s = %s", $key, $formatValue($value));
+      $pattern = "/^" . preg_quote($key, "/") . "[[:space:]]*=.*$/m";
+      $content = preg_replace($pattern, $replacement, $content, 1);
+  }
+
+  if (file_put_contents($path, $content) === false) {
+      fwrite(STDERR, "Entrypoint: unable to write custom.config.php.\n");
+      exit(1);
+  }
+'
 
 # Wait for PHP-FPM to be listening before starting nginx (avoids 502 on first request after cold start)
 php -r "

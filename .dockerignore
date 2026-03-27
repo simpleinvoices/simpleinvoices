@@ -1,0 +1,18 @@
+# Don't copy host vendor – we run composer install in the image
+vendor/
+# Git and IDE
+.git
+.gitignore
+.cursor*
+*.md
+!CLAUDE.md
+# Local/cache
+tmp/
+*.log
+*.bak
+*.swp
+custom.config.php
+# Optional: keep image smaller
+node_modules/
+.env
+.env.*
