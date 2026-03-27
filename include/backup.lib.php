@@ -4,6 +4,10 @@ class database{
 	
 	var $db_link;
 
+	function __construct(){
+		$this->database();
+	}
+
 	function sqlQuery($sqlQuery,$conn = null) {
 
 	//error_log($sqlQuery);
@@ -18,8 +22,7 @@ class database{
 		return $query;
 	}
 	catch(PDOException $e) {
-		echo "Dude, what happened to your query?:<br><br> ".$sqlQuery."<br />".$e->getMessage();
-		return false;
+		throw new RuntimeException("Database backup query failed.", 0, $e);
 	}
 	}
 
@@ -64,13 +67,13 @@ class database{
 					);
 					break;
 				default:
-					die("<font color=\"#ff0000\">Unsupported database adapter: ".$pdoAdapter."</font>");
+					throw new RuntimeException("Unsupported database adapter for backups: " . $pdoAdapter);
 			}
 			
 			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		}
 		catch(PDOException $e) {
-			die("<font color=\"#ff0000\">There was an error connecting to the database server: ".$e->getMessage()."</font>");
+			throw new RuntimeException("There was an error connecting to the database server.", 0, $e);
 		}
         
         return $db;
@@ -90,8 +93,8 @@ class backup_db{
     var $output; 
     var $filename; 
     #-- Class Constructor ------------------------------------------------ 
-    function backup_db(){ 
-        $this->output = ""; 
+    function __construct(){ 
+        $this->output = array(); 
         if (!isset($this->filename)) { 
             $this->filename = "db_backup.sql"; 
         } 
@@ -103,9 +106,25 @@ class backup_db{
     #------------------------------------------------------------------- 
     function start_backup(){ 
         $oDB         = new database(); 
-        $file_handle    = fopen($this->filename,"w"); 
+        $directory = dirname($this->filename);
+        if (!is_dir($directory) && !mkdir($directory, 0775, true)) {
+            throw new RuntimeException("Backup directory could not be created: " . $directory);
+        }
+        if (!is_writable($directory)) {
+            throw new RuntimeException("Backup directory is not writable: " . $directory);
+        }
+
+        $file_handle = fopen($this->filename, "wb");
+        if ($file_handle === false) {
+            throw new RuntimeException("Backup file could not be opened for writing: " . $this->filename);
+        }
+
         $query            = "SHOW TABLES"; 
         $result            = $oDB->sqlQuery($query,$oDB->db_link); 
+        if ($result === false) {
+            fclose($file_handle);
+            throw new RuntimeException("Unable to list database tables for backup.");
+        }
         while($row = $result->fetch(PDO::FETCH_NUM)){ 
             $tablename    = $row[0]; 
             $this->_show_create($tablename,$oDB->db_link,$file_handle); 
@@ -122,14 +141,15 @@ class backup_db{
     # calls $this->_retrieve_data($tablename, $db_link) 
     #------------------------------------------------------------------- 
     function _show_create($tablename,$db_link,$fh){ 
-        $oDB         = new database(); 
         $query = "SHOW CREATE TABLE `".$tablename."`"; 
+        $oDB = new database();
         $result = $oDB->sqlQuery($query,$db_link); 
         if ($row = $result->fetch(PDO::FETCH_NUM)) { 
+            fwrite($fh, "DROP TABLE IF EXISTS `".$tablename."`;\n");
             fwrite($fh,$row[1] . ";\n"); 
             $insert           = $this->_retrieve_data($tablename, $db_link); 
             fwrite($fh,$insert); 
-            $this->output .= "<tr><td>Table: $tablename backed up successfully</td></tr>" ; 
+            $this->output[] = $tablename;
         } 
     } 
     #-------------------------------------------------------------------- 
@@ -142,6 +162,7 @@ class backup_db{
         $oDB         = new database(); 
         $query         = "SHOW COLUMNS FROM `" . $tablename . "`"; 
         $result        = $oDB->sqlQuery($query,$db_link); 
+        $columns = array();
         $i            = 0; 
         while($row = $result->fetch(PDO::FETCH_NUM)){ 
             $columns[$i][0] = $row[0]; 
@@ -152,12 +173,22 @@ class backup_db{
         $result = $oDB->sqlQuery($query,$db_link) ; 
         $tmp_query = ""; 
         while($row = $result->fetch(PDO::FETCH_ASSOC)){ 
-            $tmp_query     .= "INSERT INTO `" . $tablename . "` VALUES("; // create a temporary holder; 
+            $columnNames = array();
+            foreach ($columns as $column) {
+                $columnNames[] = "`" . $column[0] . "`";
+            }
+            $tmp_query .= "INSERT INTO `" . $tablename . "` (" . implode(", ", $columnNames) . ") VALUES("; 
             for ($i = 0; $i < count($columns); $i++){ 
+                $value = $row[$columns[$i][0]];
+                if ($value === null) {
+                    $escaped = "NULL";
+                } else {
+                    $escaped = $db_link->quote($value);
+                }
                 if ($i == count($columns) - 1) { 
-                    $tmp_query .= "'".addslashes($row[$columns[$i][0]])."');\n"; 
+                    $tmp_query .= $escaped.");\n"; 
                 }else{ 
-                    $tmp_query .= "'".addslashes($row[$columns[$i][0]])."',"; 
+                    $tmp_query .= $escaped.","; 
                 } 
             } 
         } // while     

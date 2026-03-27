@@ -126,7 +126,18 @@ if( is_file('./config/custom.config.php') ){
 
 //set up app with relevant php setting
 date_default_timezone_set($config->phpSettings->date->timezone);
-error_reporting($config->debug->error_reporting);
+$errorReporting = $config->debug->error_reporting;
+if (!is_int($errorReporting)) {
+	$errorReporting = trim((string) $errorReporting);
+	if (defined($errorReporting)) {
+		$errorReporting = constant($errorReporting);
+	} elseif (is_numeric($errorReporting)) {
+		$errorReporting = (int) $errorReporting;
+	} else {
+		$errorReporting = E_ERROR;
+	}
+}
+error_reporting($errorReporting);
 ini_set('display_startup_errors', $config->phpSettings->display_startup_errors);  
 ini_set('display_errors', $config->phpSettings->display_errors); 
 ini_set('log_errors', $config->phpSettings->log_errors); 

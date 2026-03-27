@@ -2,58 +2,37 @@
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 
-//checkLogin();
+checkLogin();
 
 $smarty -> assign('pageActive', 'backup');
 $smarty -> assign('active_tab', '#setting');
+$backup_action = 'backup_database';
+$messages = array();
+$errors = array();
+$backup_results = array();
+$backup_file = '';
+$can_backup = is_dir('./tmp/database_backups') ? is_writable('./tmp/database_backups') : is_writable('./tmp');
 
-if ($_GET['op'] == "backup_db") {
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && ($_POST['op'] ?? '') === 'backup_db') {
+	requireCSRFProtection($backup_action);
 
+	try {
+		$today = date("Ymd_His");
+		$oBack = new backup_db();
+		$oBack->filename = "./tmp/database_backups/simple_invoices_backup_$today.sql";
+		$oBack->start_backup();
 
-	$today = date("YmdGisa");
-	$oBack    = new backup_db;
-	$oBack->filename = "./tmp/database_backups/simple_invoices_backup_$today.sql"; // output file name
-	$oBack->start_backup();
-
-
-	$txt=sprintf($LANG['backup_done'],$oBack->filename);
-
-	$display_block =<<<EOF
-<div class="si_center">
-<pre>
-<table>
-	{$oBack->output}
-</table>
-</pre>
-</div>
-$txt
-	<div class="si_help_div">
-			<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_backup_database_fwrite" title="{$LANG['fwrite_error']}"><img src="./images/common/help-small.png" alt="" />{$LANG['fwrite_error']}</a>
-	</div>
-
-EOF;
-
+		$backup_results = is_array($oBack->output) ? $oBack->output : array();
+		$backup_file = $oBack->filename;
+		$messages[] = sprintf($LANG['backup_done'], $oBack->filename);
+	} catch (Throwable $e) {
+		$errors[] = $e->getMessage();
+	}
 }
-
-else {
-
-$display_block = <<<EOF
-<div class="si_center">
-{$LANG['backup_howto']}
-
-		<div class='si_toolbar si_toolbar_top'>
-			
-			<a href='index.php?module=options&amp;view=backup_database&amp;op=backup_db'><img src="./images/common/database_save.png" alt=""/>{$LANG['backup_database_now']}</a>
-		</div>
-
-{$LANG['note']}: {$LANG['backup_note_to_file']}
-</div>
-
-	<div class="si_help_div">
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_backup_database" title="{$LANG['database_backup']}"><img src="./images/common/important.png" alt="" />{$LANG['more_info']}</a>
-	</div>
-EOF;
-}
-
-$smarty->assign('display_block', $display_block);
+$smarty->assign('backupActionToken', siNonce($backup_action));
+$smarty->assign('backupMessages', $messages);
+$smarty->assign('backupErrors', $errors);
+$smarty->assign('backupResults', $backup_results);
+$smarty->assign('backupFile', $backup_file);
+$smarty->assign('backupDirectoryWritable', $can_backup);
 ?>
