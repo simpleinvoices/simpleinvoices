@@ -1,46 +1,47 @@
 ==========================================================================================================
 Lang. Code | Lang. name                    | New strings | Strings in file | Total translated |   % Done | 
 ==========================================================================================================
-af_ZA      | Afrikaans (South Africa)      | All Done    |             596 |                3 |    0.50% | 
-ar_AR      | Arabic (Arabic)               | All Done    |             596 |              139 |   23.32% | 
-bg_BG      | български (Bulgarian)         | All Done    |             596 |              596 |  100.00% | 
-ca_ES      | Catala (Catalan)              | All Done    |             596 |              303 |   50.84% | 
-cs_CZ      | Cestina (Czech)               | All Done    |             596 |              510 |   85.57% | 
-da_DK      | Dansk (Danish)                | All Done    |             596 |              588 |   98.66% | 
-de_CH      | Schwizerdütsch (Swiss German) | All Done    |             596 |              588 |   98.66% | 
-de_DE      | Deutsch (German)              | All Done    |             596 |              596 |  100.00% | 
-el_GR      | Greek (Greek)                 | All Done    |             596 |              429 |   71.98% | 
-en_GB      | English (UK)                  | All Done    |             596 |              596 |  100.00% | 
-en_US      | English (US)                  | All Done    |             596 |              596 |  100.00% | 
-es_ES      | Español (Spanish)             | All Done    |             596 |              588 |   98.66% | 
-es_MX      | Español (Spanish Mexico)      | All Done    |             596 |              387 |   64.93% | 
-et_EE      | Estonian (Estonian)           | All Done    |             596 |                1 |    0.17% | 
-fi_FI      | Suomi (Finnish)               | All Done    |             596 |              324 |   54.36% | 
-fr_FR      | Français (French)             | All Done    |             596 |              512 |   85.91% | 
-gl_ES      | Galego (Galician)             | All Done    |             596 |              203 |   34.06% | 
-gl_GL      | Galician (Galician)           | All Done    |             596 |              596 |  100.00% | 
-hr_HR      | Hrvatski (Croatian)           | All Done    |             596 |              596 |  100.00% | 
-hu_HU      | Magyarország (Hungarian)      | All Done    |             596 |              596 |  100.00% | 
-id_ID      | Indonesian (Indonesian)       | All Done    |             596 |              593 |   99.50% | 
-it_IT      | Italian (IT)                  | All Done    |             596 |              527 |   88.42% | 
-lv_LV      | Latviesu (Latvian)            | All Done    |             596 |              177 |   29.70% | 
-mt_MT      | Maltese (MT)                  | All Done    |             596 |              305 |   51.17% | 
-nb_NO      | Norsk (Norwegian)             | All Done    |             596 |              460 |   77.18% | 
-nl_NL      | Nederlands (Dutch)            | All Done    |             596 |              453 |   76.01% | 
-pl_PL      | Polski (Polish)               | All Done    |             596 |              596 |  100.00% | 
-pt_BR      | Portugues (Portuguese Brazil) | All Done    |             596 |              596 |  100.00% | 
-pt_PT      | Portugues (Portuguese)        | All Done    |             596 |              313 |   52.52% | 
-ro_RO      | Romana (Romanian)             | All Done    |             596 |              353 |   59.23% | 
-ru_RU      | русский (Russian)             | All Done    |             596 |              583 |   97.82% | 
-sk_SK      | Slovensky (Slovak)            | All Done    |             596 |              478 |   80.20% | 
-sl_SI      | Slovenščina (Slovenian)       | All Done    |             596 |              316 |   53.02% | 
-sq_AL      | Shqip (Albanian)              | All Done    |             596 |              303 |   50.84% | 
-sr_SR      | Serbian (Serbian)             | All Done    |             596 |               49 |    8.22% | 
-sv_SE      | Svenska (Swedish)             | All Done    |             596 |              579 |   97.15% | 
-ta_IN      | தமிழ் (Tamil)                   | All Done    |             596 |              205 |   34.40% | 
-tr_TR      | Türkçe (Turkish)              | All Done    |             596 |              306 |   51.34% | 
-vi_VN      | Vietnam (Vietnam)             | All Done    |             596 |              541 |   90.77% | 
-zh_CN      | Chinese (China)               | All Done    |             596 |              202 |   33.89% | 
-zh_HK      | Chinese (Hong Kong)           | All Done    |             596 |              420 |   70.47% | 
-zh_TW      | Chinese (Taiwan)              | All Done    |             596 |                0 |    0.00% | 
+af_ZA      | Afrikaans (South Africa) (African) | 1           |             597 |                3 |    0.50% | 
+ar_SA      | Arabic (Saudi Arabia)         | 1           |             597 |              139 |   23.24% | 
+bg_BG      | ????????? (Bulgarian)         | 1           |             597 |              597 |   99.83% | 
+ca_ES      | Catala (Catalan)              | 1           |             597 |              597 |   99.83% | 
+cs_CZ      | Cestina (Czech)               | 1           |             597 |              597 |   99.83% | 
+da_DK      | Dansk (Danish)                | 1           |             597 |              597 |   99.83% | 
+de_CH      | Schwizerd�tsch (Swiss German) | 1           |             597 |              597 |   99.83% | 
+de_DE      | Deutsch (German)              | 1           |             597 |              597 |   99.83% | 
+el_GR      | Greek (Greek)                 | 1           |             597 |              592 |   99.00% | 
+en_GB      | English (UK)                  | All Done    |             598 |              597 |   99.83% | 
+en_US      | English (US)                  | 1           |             597 |              597 |   99.83% | 
+es_ES      | Espa�ol (Spanish)             | 1           |             597 |              597 |   99.83% | 
+es_MX      | Espa�ol (Mexico) (Spanish)    | 1           |             597 |              387 |   64.72% | 
+et_EE      | Estonian (Estonian)           | 1           |             597 |                1 |    0.17% | 
+eu_ES      | Euskara (Basque)              | 1           |             597 |              597 |   99.83% | 
+fi_FI      | Suomi (Finnish)               | 1           |             597 |              597 |   99.83% | 
+fr_FR      | Fran�ais (French)             | 1           |             597 |              597 |   99.83% | 
+gl_ES      | Galego (Galician)             | 1           |             597 |              597 |   99.83% | 
+hr_HR      | Hrvatski (Croatian)           | 1           |             597 |              597 |   99.83% | 
+hu_HU      | Magyarorsz�g (Hungarian)      | 1           |             597 |              597 |   99.83% | 
+id_ID      | Indonesian (Indonesian)       | 1           |             597 |              597 |   99.83% | 
+it_IT      | Italian (IT)                  | 1           |             597 |              597 |   99.83% | 
+lv_LV      | Latviesu (Latvian)            | 1           |             597 |              177 |   29.60% | 
+mt_MT      | Maltese (MT)                  | 1           |             597 |              305 |   51.00% | 
+nb_NO      | Norsk (Norwegian)             | 1           |             597 |              597 |   99.83% | 
+nl_NL      | Nederlands (Dutch)            | 1           |             597 |              597 |   99.83% | 
+oc_ES      | Aran�s (Aranese)              | 1           |             597 |              597 |   99.83% | 
+pl_PL      | Polski (Polish)               | 1           |             597 |              597 |   99.83% | 
+pt_BR      | Portugues (Portuguese (Brazil)) | 1           |             597 |              597 |   99.83% | 
+pt_PT      | Portugues (Portuguese)        | 1           |             597 |              597 |   99.83% | 
+ro_RO      | Romana (Romanian)             | 1           |             597 |              597 |   99.83% | 
+ru_RU      | ??????? (Russian)             | 1           |             597 |              597 |   99.83% | 
+sk_SK      | Slovensky (Slovak)            | 1           |             597 |              597 |   99.83% | 
+sl_SI      | Sloven??ina (Slovenian)       | 1           |             597 |              544 |   90.97% | 
+sq_AL      | Shqip (Albanian)              | 1           |             597 |              303 |   50.67% | 
+sr_RS      | Serbian (Serbia)              | 1           |             597 |               49 |    8.19% | 
+sv_SE      | Svenska (Swedish)             | 1           |             597 |              596 |   99.67% | 
+ta_IN      | ????? (Tamil)                 | 1           |             597 |              205 |   34.28% | 
+tr_TR      | T�rk�e (Turkish)              | 1           |             597 |              306 |   51.17% | 
+vi_VN      | Vietnam (Vietnam)             | 1           |             597 |              597 |   99.83% | 
+zh_CN      | Chinese (China)               | 1           |             597 |              202 |   33.78% | 
+zh_HK      | Chinese (Hong Kong)           | 1           |             597 |              597 |   99.83% | 
+zh_TW      | Chinese (Taiwan)              | 1           |             597 |                0 |    0.00% | 
 ----------------------------------------------------------------------------------------------------------

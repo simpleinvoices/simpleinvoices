@@ -58,7 +58,7 @@ foreach (get_defined_langs() as $lang_code) {
   // Nicolas, thanks for the PHP lesson.
   $xml = simplexml_load_file("$lang_code/info.xml");
 
-  $tmp = split(',', $xml->author);
+  $tmp = explode(',', (string) $xml->author);
   $xml->author = join(', ', $tmp);
   if (SI_DEBUG) echo "debug: $xml->name, $xml->author\n";
   
