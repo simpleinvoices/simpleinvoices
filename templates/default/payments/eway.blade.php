@@ -50,7 +50,6 @@
     </td>
 </tr>
 </table>
-	</table>
 	</div>
 	<div class="card-footer">
 		<div class="d-flex">

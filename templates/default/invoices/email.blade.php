@@ -55,6 +55,7 @@
 	</div>
 	<div class="card-footer">
 		<div class="d-flex">
+			<a href="./index.php?module=invoices&amp;view=quick_view&amp;id={{ urlencode(get('id')) }}" class="btn btn-link">{{ $LANG['cancel'] ?? '' }}</a>
 			<button type="submit" class="btn btn-primary ms-auto" name="submit" value="{{ $LANG['email'] ?? '' }}"><i class="ti ti-mail me-1"></i>{{ $LANG['email'] ?? '' }}</button>
 		</div>
 	</div>

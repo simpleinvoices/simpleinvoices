@@ -231,14 +231,14 @@
 			</div>
 		</div>
 	</div>
+	<div class="px-3 pb-3 border-top pt-3">
+		<a class="cluetip btn btn-outline-secondary btn-sm" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_what_the" title="{{ $LANG['whats_all_this_inv_pref'] ?? '' }}"><i class="ti ti-help me-1"></i>{{ $LANG['whats_all_this_inv_pref'] ?? '' }}</a>
+	</div>
 	<div class="card-footer">
 		<div class="d-flex">
 			<a href="./index.php?module=preferences&amp;view=manage" class="btn btn-link">{{ $LANG['cancel'] ?? '' }}</a>
 			<button type="submit" class="btn btn-primary ms-auto" name="save_preference" value="{{ $LANG['save'] ?? '' }}"><i class="ti ti-check me-1"></i>{{ $LANG['save'] ?? '' }}</button>
 		</div>
-	</div>
-	<div class="card-footer">
-		<a class="cluetip btn btn-outline-secondary btn-sm" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_what_the" title="{{ $LANG['whats_all_this_inv_pref'] ?? '' }}"><i class="ti ti-help me-1"></i>{{ $LANG['whats_all_this_inv_pref'] ?? '' }}</a>
 	</div>
 </div>
 

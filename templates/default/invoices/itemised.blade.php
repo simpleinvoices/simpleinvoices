@@ -259,15 +259,18 @@
 	<input type="hidden" id="max_items" name="max_items" value="{{ $line }}" />
 	<input type="hidden" name="type" value="2" />
 
-	<div class="si_toolbar si_toolbar_form">
-		<button type="submit" class="invoice_save btn btn-primary" name="submit" value="{{ $LANG['save'] ?? '' }}"><i class="ti ti-check me-1"></i>{{ $LANG['save'] ?? '' }}</button>
-    	<a href="./index.php?module=invoices&amp;view=manage" class="negative"><img src="./images/common/cross.png" alt="" />{{ $LANG['cancel'] ?? '' }}</a>
+	<div class="mt-2 mb-0">
+		<a class="cluetip btn btn-outline-secondary btn-sm" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_invoice_custom_fields" title="{{ $LANG['want_more_fields'] ?? '' }}"><i class="ti ti-help me-1"></i>{{ $LANG['want_more_fields'] ?? '' }}</a>
 	</div>
 
-	<div class="si_help_div">
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_invoice_custom_fields" title="{{ $LANG['want_more_fields'] ?? '' }}"><img src="./images/common/help-small.png" alt="" /> {{ $LANG['want_more_fields'] ?? '' }}</a>
 	</div>
-
+	</div>
+	<div class="card-footer">
+		<div class="d-flex">
+			<a href="./index.php?module=invoices&amp;view=manage" class="btn btn-link">{{ $LANG['cancel'] ?? '' }}</a>
+			<button type="submit" class="btn btn-primary ms-auto invoice_save" name="submit" value="{{ $LANG['save'] ?? '' }}"><i class="ti ti-check me-1"></i>{{ $LANG['save'] ?? '' }}</button>
+		</div>
+	</div>
 </div>
 
 </form>

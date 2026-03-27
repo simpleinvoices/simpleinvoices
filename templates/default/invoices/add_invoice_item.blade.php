@@ -60,6 +60,7 @@
 	</div>
 		<div class="card-footer">
 			<div class="d-flex">
+				<a href="./index.php?module=invoices&amp;view=details&amp;id={{ urlencode(get('id')) }}&amp;type={{ urlencode(get('type')) }}" class="btn btn-link">{{ $LANG['cancel'] ?? '' }}</a>
 				<input type="hidden" name="id" value="{{ get('id') }}" />
 				<input type="hidden" name="type" value="{{ get('type') }}" />
 				<input type="hidden" name="tax_id" value="{{ get('tax_id') }}" />

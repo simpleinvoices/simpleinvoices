@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <langfile version="1.0.0" type="language">
-	<name>Schwizerdütsch</name>
+	<name>Schweizerdeutsch</name>
 	<shortname>de_CH</shortname>
-	<englishname>Swiss German</englishname>
+	<englishname>German (Switzerland)</englishname>
 	<version>1.0.0</version>
 	<creationDate>2004-09-20</creationDate>
 	<author>Nicolas Ruflin</author>

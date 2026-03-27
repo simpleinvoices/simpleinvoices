@@ -1,25 +1,21 @@
 {{-- /*
 * Script: consulting.tpl
-* 	 Consulting invoice type template
-*
-* Authors:
-*	 Justin Kelly, Nicolas Ruflin
-*
-* Last edited:
-* 	 2007-07-18
+* 	 Consulting invoice type template (product-based line items)
 *
 * License:
 *	 GPL v2 or above
-*
-* Website:
-*	http://www.simpleinvoices.org
 */ --}}
 <form name="frmpost" action="index.php?module=invoices&amp;view=save" method="post" onsubmit="return frmpost_Validator(this);">
 
-<h3>{{ $LANG['inv'] ?? '' }} {{ $LANG['inv_consulting'] ?? '' }}</h3>
+<div class="card">
+	<div class="card-header">
+		<h3 class="card-title mb-0">{{ $LANG['inv'] ?? '' }} {{ $LANG['inv_consulting'] ?? '' }}</h3>
+	</div>
+	<div class="card-body">
 
 @include(str_replace('/', '.', rtrim($path ?? '', '/')) . '.header')
 
+<table class="table table-vcenter">
 <tr>
 <td class="details_screen">{{ $LANG['quantity'] ?? '' }}</td>
 <td class="details_screen">{{ $LANG['description'] ?? '' }}</td>
@@ -27,9 +23,7 @@
 
 </tr>
 
-
-        (($dynamic_line_items ?? []) as $line)
-
+		@foreach(($dynamic_line_items ?? []) as $line)
 			<tr>
 				<td><input type="text" name="quantity{{ $line }}" size="5" class="form-control form-control-sm" /></td>
 				<td><input type="text" name="description{{ $line }}" size="50" class="form-control form-control-sm" /></td>
@@ -39,6 +33,7 @@
         		<td colspan="3"><textarea class="form-control form-control-sm editor" name="notes{{ $line }}" rows="3" cols="80" wrap="nowrap"></textarea></td>
 			</tr>
 
+		@endforeach
         
 	{{ $show_custom_field['1'] }}
 	{{ $show_custom_field['2'] }}
@@ -84,22 +79,19 @@
 </td>
 </tr>	
 <tr>
-	<td align=left>
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{{ $LANG['custom_fields'] ?? '' }}"><img src="./images/common/help-small.png" alt="" /> {{ $LANG['want_more_fields'] ?? '' }}</a>
+	<td align="left">
+		<a class="cluetip btn btn-outline-secondary btn-sm" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_custom_fields" title="{{ $LANG['custom_fields'] ?? '' }}"><i class="ti ti-help me-1"></i>{{ $LANG['want_more_fields'] ?? '' }}</a>
 	</td>
 </tr>
-<!--Add more line items while in an itemeised invoice - Get style - has problems- wipes the current values of the existing rows - not good
-<tr>
-<td>
-<a href="?get_num_line_items=10">Add 5 more line items<a>
-</tr>
--->
 </table>
-<!-- </div> -->
-<hr />
-<div style="text-align:center;">
 	<input type="hidden" name="max_items" value="{{ $line }}" />
-	<button type="submit" class="btn btn-primary" name="submit" value="{{ $LANG['save_invoice'] ?? '' }}"><i class="ti ti-check me-1"></i>{{ $LANG['save'] ?? '' }}</button>
 	<input type="hidden" name="type" value="4" />
+	</div>
+	<div class="card-footer">
+		<div class="d-flex">
+			<a href="./index.php?module=invoices&amp;view=manage" class="btn btn-link">{{ $LANG['cancel'] ?? '' }}</a>
+			<button type="submit" class="btn btn-primary ms-auto" name="submit" value="{{ $LANG['save_invoice'] ?? '' }}"><i class="ti ti-check me-1"></i>{{ $LANG['save'] ?? '' }}</button>
+		</div>
+	</div>
 </div>
 </form>

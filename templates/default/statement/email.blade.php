@@ -50,6 +50,7 @@
 	</div>
 	<div class="card-footer">
 		<div class="d-flex">
+			<a href="./index.php?module=statement&amp;view=index" class="btn btn-link">{{ $LANG['cancel'] ?? '' }}</a>
 			<input type="hidden" name="op" value="insert_customer" />
 			<button type="submit" class="btn btn-primary ms-auto invoice_save" name="submit" value="{{ $LANG['email'] ?? '' }}"><i class="ti ti-mail me-1"></i>{{ $LANG['email'] ?? '' }}</button>
 		</div>

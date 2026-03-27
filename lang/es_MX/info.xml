@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <langfile version="1.0.0" type="language">
-	<name>Español (Mexico)</name>
+	<name>Espa&#241;ol (M&#233;xico)</name>
 	<shortname>es_MX</shortname>
-	<englishname>Spanish</englishname>
+	<englishname>Spanish (Mexico)</englishname>
 	<version>1.0.0</version>
 	<creationDate>2013-10-16</creationDate>
 	<author></author>

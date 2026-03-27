@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <langfile version="1.0.0" type="language">
-	<name>Vietnam</name>
+	<name>Tiếng Việt</name>
 	<shortname>vi_VN</shortname>
-	<englishname>Vietnam</englishname>
+	<englishname>Vietnamese</englishname>
 	<version>1.0.0</version>
 	<creationDate>2011-02-24</creationDate>
 	<author>Phuong Nguyen</author>

@@ -1,6 +1,6 @@
 <div class="card">
+<form name="frmpost" id="form_report_invoice_profit" action="index.php?module=reports&amp;view=report_invoice_profit" method="post">
 	<div class="card-body">
-<form name="frmpost" action="index.php?module=reports&amp;view=report_invoice_profit" method="post">
 <table class="table table-vcenter" align="center">
     <tr>
         <td wrap="nowrap">Start date (YYYY-MM-DD)
@@ -18,11 +18,16 @@
             </td>
     </tr>
 </table>
-<br />
-<div class="mb-3">
-            <button type="submit" class="btn btn-primary" name="submit" value="{{ $LANG['insert_biller'] ?? '' }}"><i class="ti ti-chart-bar me-1"></i>Run report</button>
-</div>
+	</div>
+	<div class="card-footer">
+		<div class="d-flex">
+			<a href="./index.php?module=reports&amp;view=index" class="btn btn-link">{{ $LANG['cancel'] ?? '' }}</a>
+			<button type="submit" class="btn btn-primary ms-auto" name="submit" value="{{ $LANG['insert_biller'] ?? '' }}"><i class="ti ti-chart-bar me-1"></i>Run report</button>
+		</div>
+	</div>
 </form>
+
+<div class="card-body border-top">
 
 <div class="mt-4"><h4>Profit per Invoice based on average product cost summary for the period {{ $start_date ?? '' }} to {{ $end_date ?? '' }}</h4></div>
 
@@ -202,5 +207,5 @@
 
  </table>
 </div>
-	</div>
+</div>
 </div>

@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <langfile version="1.0.0" type="language">
-	<name>Afrikaans (South Africa)</name>
+	<name>Afrikaans</name>
 	<shortname>af_ZA</shortname>
-	<englishname>African</englishname>
+	<englishname>Afrikaans</englishname>
 	<version>1.0.0</version>
 	<creationDate>2013-10-16</creationDate>
 	<author></author>

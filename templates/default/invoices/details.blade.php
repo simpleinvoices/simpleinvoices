@@ -277,16 +277,15 @@
 			</td>
 		</tr>
     </table>
-
-
+	</div>
+	</div>
 	<div class="card-footer">
-			<div class="d-flex">
-				<a href="./index.php?module=invoices&amp;view=manage" class="btn btn-link">{{ $LANG['cancel'] ?? '' }}</a>
-				<button type="submit" class="btn btn-primary ms-auto invoice_save" name="submit" value="{{ $LANG['save'] ?? '' }}"><i class="ti ti-check me-1"></i>{{ $LANG['save'] ?? '' }}</button>
-			</div>
+		<div class="d-flex">
+			<a href="./index.php?module=invoices&amp;view=manage" class="btn btn-link">{{ $LANG['cancel'] ?? '' }}</a>
+			<button type="submit" class="btn btn-primary ms-auto invoice_save" name="submit" value="{{ $LANG['save'] ?? '' }}"><i class="ti ti-check me-1"></i>{{ $LANG['save'] ?? '' }}</button>
 		</div>
-
-
+	</div>
+</div>
 
 @if($invoice['id'] == null) 
 	<input type="hidden" name="action" value="insert" />

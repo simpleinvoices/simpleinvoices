@@ -18,6 +18,7 @@
 
 @include(str_replace('/', '.', rtrim($path ?? '', '/')) . '.header')
 
+<table class="table table-vcenter">
 <tr>
 <td class="details_screen">{{ $LANG['quantity'] ?? '' }}</td>
 <td class="details_screen">{{ $LANG['description'] ?? '' }}</td>
@@ -25,8 +26,7 @@
 </tr>
 
 
-        (($dynamic_line_items ?? []) as $line)
-
+		@foreach(($dynamic_line_items ?? []) as $line)
 			<tr>
 				<td><input type="text" id="quantity{{ $line }}" name="quantity{{ $line }}" size="5" class="form-control form-control-sm" /></td>
 				<td><input type="text" name="description{{ $line }}" size="50" class="form-control form-control-sm" />
@@ -49,6 +49,7 @@
       				<td colspan="3"><textarea class="form-control form-control-sm editor" name="description{{ $line }}" rows="3" cols="80" wrap="nowrap"></textarea></td>
 				</tr>
 
+		@endforeach
         
 	{{ $show_custom_field['1'] }}
 	{{ $show_custom_field['2'] }}
@@ -104,14 +105,14 @@
 </tr>
 -->
 </table>
+	<input type="hidden" name="max_items" value="{{ $line }}" />
+	<input type="hidden" name="type" value="3" />
+	</div>
 	<div class="card-footer">
 		<div class="d-flex">
 			<a href="./index.php?module=invoices&amp;view=manage" class="btn btn-link">{{ $LANG['cancel'] ?? '' }}</a>
-			<input type="hidden" name="max_items" value="{{ $line }}" />
-			<input type="hidden" name="type" value="3" />
 			<button type="submit" class="btn btn-primary ms-auto" name="submit" value="{{ $LANG['save'] ?? '' }}"><i class="ti ti-check me-1"></i>{{ $LANG['save'] ?? '' }}</button>
 		</div>
-	</div>
 	</div>
 </div>
 </form>
