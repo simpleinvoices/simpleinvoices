@@ -629,7 +629,7 @@ $LANG['title_module_payment_types']		= "Ρυθμίσεις τύπων πληρω
 $LANG['title_view_index']				= "Πίνακας ελέγχου";//1
 
 $LANG['extensions_removed'] = "Extensions have been removed from this installation. Only the core application is supported.";//0
-$LANG['first_run_intro'] = "Welcome! Complete these steps to start invoicing:";//0
+$LANG['first_run_intro'] = "Καλώς ήρθατε! Ολοκληρώστε αυτά τα βήματα για να ξεκινήσετε την τιμολόγηση:";//1
 $LANG['file'] = "File";//0
 $LANG['help_options_menu'] = "For information regarding the setup, installation, and use of %s please refer to the Instructions sub-menu in the Option menu.";//0
 $LANG['help_other_queries'] = "For other queries please refer to the %s website %s and the %s forum at %s";//0

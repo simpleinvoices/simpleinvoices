@@ -626,7 +626,7 @@ $LANG['title_module_payment_types']		= "Innstillinger / Betalingstyper";//1
 $LANG['title_view_index']				= "Kontrollpanel";//1
 
 $LANG['extensions_removed'] = "Extensions have been removed from this installation. Only the core application is supported.";//0
-$LANG['first_run_intro'] = "Welcome! Complete these steps to start invoicing:";//0
+$LANG['first_run_intro'] = "Velkommen! Fullfør disse trinnene for å begynne å fakturere:";//1
 $LANG['file'] = "File";//0
 $LANG['help_options_menu'] = "For information regarding the setup, installation, and use of %s please refer to the Instructions sub-menu in the Option menu.";//0
 $LANG['help_other_queries'] = "For other queries please refer to the %s website %s and the %s forum at %s";//0
