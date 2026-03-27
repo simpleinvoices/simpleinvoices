@@ -107,6 +107,7 @@ $LANG['customer'] = "Stranka";//1
 $LANG['customer_account'] = "Račun stranke";//1
 $LANG['customer_add'] = "Dodaj stranko";//1
 $LANG['customer_contact'] = "Kontaktna oseba stranke";//1
+$LANG['contacts'] = "Contacts";//0
 $LANG['customer_department'] = "Oddelek";//1
 $LANG['customer_details'] = "Podrobno o stranki";//1
 $LANG['customer_edit'] = "Uredi stranko";//1

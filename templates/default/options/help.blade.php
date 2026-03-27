@@ -17,7 +17,12 @@
 
 <div class="card">
 	<div class="card-body">
-		<p>For information regarding the setup, installation, and use of Simple Invoices please refer to the Instructions sub-menu in the Option menu.</p>
-		<p>For other queries please refer to the Simple Invoices website <a href='http://www.simpleinvoices.org'>http://www.simpleinvoices.org</a> and the Simple Invoices forum at <a href="http://www.simpleinvoices.org/forum">http://www.simpleinvoices.org/forum</a></p>
+		@php
+			$appName = $config->app?->name ?? 'Simple Invoices';
+			$appWebsite = $config->app?->website ?? 'http://www.simpleinvoices.org';
+			$appForum = $config->app?->footer_link2_url ?? 'http://www.simpleinvoices.org/forum';
+		@endphp
+		<p>For information regarding the setup, installation, and use of {{ $appName }} please refer to the Instructions sub-menu in the Option menu.</p>
+		<p>For other queries please refer to the {{ $appName }} website <a href="{{ $appWebsite }}" target="_blank" rel="noopener">{{ $appWebsite }}</a> and the {{ $appName }} forum at <a href="{{ $appForum }}" target="_blank" rel="noopener">{{ $appForum }}</a></p>
 	</div>
 </div>

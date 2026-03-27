@@ -103,6 +103,7 @@ $LANG['customer'] = "Pelanggan";//1
 $LANG['customer_account'] = "Akun Pelanggan";//1
 $LANG['customer_add'] = "Tambah Pelanggan";//1
 $LANG['customer_contact'] = "Customer Contact (Attn)";//1
+$LANG['contacts'] = "Contacts";//0
 $LANG['customer_department'] = "Departemen";//1
 $LANG['customer_details'] = "Informasi Pelanggan";//1
 $LANG['customer_edit'] = "Edit Informasi Pelanggan";//1

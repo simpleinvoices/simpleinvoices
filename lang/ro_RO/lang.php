@@ -107,6 +107,7 @@ $LANG['customer'] = "Client";//1
 $LANG['customer_account'] = "Cont Client";//1
 $LANG['customer_add'] = "Adauga Client";//1
 $LANG['customer_contact'] = "Contact client (In atentia)";//1
+$LANG['contacts'] = "Contacts";//0
 $LANG['customer_department'] = "Departament";//1
 $LANG['customer_details'] = "Detalii Client";//1
 $LANG['customer_edit'] = "Modifica Client";//1

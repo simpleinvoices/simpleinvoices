@@ -103,6 +103,7 @@ $LANG['customer'] = "Odběratel";//1
 $LANG['customer_account'] = "Účet odběratele";//1
 $LANG['customer_add'] = "Přidat odběratele";//1
 $LANG['customer_contact'] = "Kontakt odběratele (k rukám)";//1
+$LANG['contacts'] = "Contacts";//0
 $LANG['customer_department'] = "Oddělení";//1
 $LANG['customer_details'] = "Údaje odběratele";//1
 $LANG['customer_edit'] = "Editovat odběratele";//1

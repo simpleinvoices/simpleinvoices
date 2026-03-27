@@ -106,6 +106,7 @@ $LANG['customer'] = "Asiakas";//1
 $LANG['customer_account'] = "Asiakastili";//1
 $LANG['customer_add'] = "Lisää asiakas";//1
 $LANG['customer_contact'] = "Yhteyshenkil&ouml (viite)";//1
+$LANG['contacts'] = "Contacts";//0
 $LANG['customer_department'] = "Osasto";//1
 $LANG['customer_details'] = "Asiakkaan tiedot";//1
 $LANG['customer_edit'] = "Muokkaa asiakasta";//1

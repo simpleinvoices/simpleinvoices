@@ -106,6 +106,7 @@ $LANG['customer'] = "Müþteri";//1
 $LANG['customer_account'] = "Müþteri Hesabý";//1
 $LANG['customer_add'] = "Müþteri Ekle";//1
 $LANG['customer_contact'] = "Customer Contact (Attn)";//1
+$LANG['contacts'] = "Contacts";//0
 $LANG['customer_department'] = "Bölüm";//1
 $LANG['customer_details'] = "Müþteri Detaylarý";//1
 $LANG['customer_edit'] = "Müþteri Düzenle";//1

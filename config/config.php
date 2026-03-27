@@ -45,6 +45,17 @@ version.name                        = 2013.1.beta.8
 ; Header branding (top-left logo and name). Override in custom.config.php or via Docker env SI_APP_NAME / SI_APP_LOGO
 app.name                            = Simple Invoices
 app.logo                            = 
+app.website                         = http://www.simpleinvoices.org
+app.website_label                   = Website
+app.footer_link1_label              = Simple Invoices
+app.footer_link1_url                = http://www.simpleinvoices.org
+app.footer_link2_label              = Forum
+app.footer_link2_url                = http://www.simpleinvoices.org/+
+app.footer_link3_label              = Blog
+app.footer_link3_url                = http://www.simpleinvoices.org/blog
+app.footer_link4_label              = Support
+app.footer_link4_url                = http://www.simpleinvoices.org/forum
+app.footer_text                     = Thank you for using
  
 debug.level                         = All
 debug.error_reporting               = E_ERROR

@@ -30,7 +30,7 @@
 				<a class="nav-link" href="#cust-add-address" data-bs-toggle="tab" role="tab">{{ $LANG['address'] ?? 'Address' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#cust-add-contact" data-bs-toggle="tab" role="tab">{{ $LANG['phone'] ?? 'Contact' }}</a>
+				<a class="nav-link" href="#cust-add-contact" data-bs-toggle="tab" role="tab">{{ $LANG['contacts'] ?? 'Contacts' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
 				<a class="nav-link" href="#cust-add-custom" data-bs-toggle="tab" role="tab">{{ $LANG['custom_fields'] ?? '' }}</a>

@@ -103,6 +103,7 @@ $LANG['customer'] = "Клиент";//1
 $LANG['customer_account'] = "Клиентска сметка";//1
 $LANG['customer_add'] = "Добавяне на клиент";//1
 $LANG['customer_contact'] = "Лице за контакт (До)";//1
+$LANG['contacts'] = "Contacts";//0
 $LANG['customer_department'] = "отдел";//1
 $LANG['customer_details'] = "Детайли за клиент";//1
 $LANG['customer_edit'] = "Редакция на клиент";//1

@@ -103,6 +103,7 @@ $LANG['customer'] = "Khách hàng";//1
 $LANG['customer_account'] = "Thông tin Khách hàng";//1
 $LANG['customer_add'] = "Thêm Khách hàng";//1
 $LANG['customer_contact'] = "Người đại diện";//1
+$LANG['contacts'] = "Contacts";//0
 $LANG['customer_department'] = "ngành";//1
 $LANG['customer_details'] = "Chi tiết Khách hàng";//1
 $LANG['customer_edit'] = "Sửa Khách hàng";//1

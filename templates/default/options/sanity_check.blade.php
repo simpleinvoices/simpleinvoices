@@ -17,6 +17,9 @@
 
 <div class="card">
 	<div class="card-body">
-		<p>This feature is still a work-in-progress, please refer to our homepage: <a href='http://www.simpleinvoices.org'>http://www.simpleinvoices.org</a> for update.</p>
+		@php
+			$appWebsite = $config->app?->website ?? 'http://www.simpleinvoices.org';
+		@endphp
+		<p>This feature is still a work-in-progress, please refer to our homepage: <a href="{{ $appWebsite }}" target="_blank" rel="noopener">{{ $appWebsite }}</a> for update.</p>
 	</div>
 </div>

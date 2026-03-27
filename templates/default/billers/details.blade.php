@@ -20,7 +20,7 @@
 				<a class="nav-link" href="#bill-view-address" data-bs-toggle="tab" role="tab">{{ $LANG['address'] ?? 'Address' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#bill-view-contact" data-bs-toggle="tab" role="tab">{{ $LANG['phone'] ?? 'Contact' }}</a>
+				<a class="nav-link" href="#bill-view-contact" data-bs-toggle="tab" role="tab">{{ $LANG['contacts'] ?? 'Contacts' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
 				<a class="nav-link" href="#bill-view-payment" data-bs-toggle="tab" role="tab">{{ $LANG['payment'] ?? 'Payment' }}</a>
@@ -118,7 +118,7 @@
 				<a class="nav-link" href="#bill-edit-address" data-bs-toggle="tab" role="tab">{{ $LANG['address'] ?? 'Address' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#bill-edit-contact" data-bs-toggle="tab" role="tab">{{ $LANG['phone'] ?? 'Contact' }}</a>
+				<a class="nav-link" href="#bill-edit-contact" data-bs-toggle="tab" role="tab">{{ $LANG['contacts'] ?? 'Contacts' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
 				<a class="nav-link" href="#bill-edit-payment" data-bs-toggle="tab" role="tab">{{ $LANG['payment'] ?? 'Payment' }}</a>

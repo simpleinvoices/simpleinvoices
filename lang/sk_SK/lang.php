@@ -106,6 +106,7 @@ $LANG['customer'] = "Odberateľ";//1
 $LANG['customer_account'] = "Účet odberateľa";//1
 $LANG['customer_add'] = "Pridať odberateľa";//1
 $LANG['customer_contact'] = "Kontakt odberateľa (do rúk)";//1
+$LANG['contacts'] = "Contacts";//0
 $LANG['customer_department'] = "Oddelenie";//1
 $LANG['customer_details'] = "Údaje odberateľa";//1
 $LANG['customer_edit'] = "Upraviť odberateľa";//1

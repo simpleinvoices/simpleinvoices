@@ -1,5 +1,9 @@
 {{-- Auth login - uses header (Tabler layout) and has its own footer - full page-center layout --}}
 @include('templates.default.header')
+@php
+	$appName = $config->app?->name ?? $LANG['simple_invoices'] ?? 'Simple Invoices';
+	$appWebsite = $config->app?->website ?? 'http://www.simpleinvoices.org';
+@endphp
 
 <div class="page-wrapper">
 	<div class="page-body d-flex flex-column align-items-center justify-content-center min-vh-100">
@@ -7,16 +11,16 @@
 			<div class="text-center mb-4">
 				<a href="." class="navbar-brand navbar-brand-autodark">
 					@if(!empty($config->app?->logo))
-						<img src="{{ $config->app->logo }}" alt="{{ $config->app?->name ?? 'Simple Invoices' }}" class="mb-2" style="max-height: 48px;" />
+						<img src="{{ $config->app->logo }}" alt="{{ $appName }}" class="mb-2" style="max-height: 48px;" />
 					@endif
-					<h1 class="h2 mb-0">{{ $config->app?->name ?? $LANG['simple_invoices'] ?? 'Simple Invoices' }}</h1>
+					<h1 class="h2 mb-0">{{ $appName }}</h1>
 				</a>
 			</div>
 			<form action="" method="post" id="frmLogin" name="frmLogin" class="card card-md">
 				<input type="hidden" name="action" value="login" />
 				<input type="hidden" name="csrfprotectionbysr" value="{{ $loginCsrfToken ?? '' }}" />
 				<div class="card-body">
-					<h2 class="card-title text-center mb-4">{{ $config->app?->name ?? $LANG['simple_invoices'] ?? 'Simple Invoices' }}</h2>
+					<h2 class="card-title text-center mb-4">{{ $appName }}</h2>
 					<div class="mb-3">
 						<label class="form-label">{{ $LANG['email'] ?? '' }}</label>
 						<input name="user" type="text" class="form-control" title="user" value="" placeholder="{{ $LANG['email'] ?? 'Email' }}" autocomplete="username" autofocus />
@@ -37,7 +41,7 @@
 	</div>
 	<footer class="footer footer-transparent d-print-none">
 		<div class="container-xl text-center text-muted">
-			<a href="http://www.simpleinvoices.org">{{ $LANG['simple_invoices_powered_by'] ?? '' }}</a>
+			<a href="{{ $appWebsite }}" target="_blank" rel="noopener">{{ $LANG['simple_invoices_powered_by'] ?? '' }}</a>
 		</div>
 	</footer>
 </div>

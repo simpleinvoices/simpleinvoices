@@ -106,6 +106,7 @@ $LANG['customer'] = "Kund";//1
 $LANG['customer_account'] = "Kund Konto";//1
 $LANG['customer_add'] = "Lägg till Kund";//1
 $LANG['customer_contact'] = "Kontaktperson";//1
+$LANG['contacts'] = "Contacts";//0
 $LANG['customer_department'] = "Avdelning";//1
 $LANG['customer_details'] = "Kund detaljer";//1
 $LANG['customer_edit'] = "Redigera Kund";//1

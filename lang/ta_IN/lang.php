@@ -106,6 +106,7 @@ $LANG['customer'] = "வாடிக்கையாளர்";//1
 $LANG['customer_account'] = "வாடிக்கையாளர் கணக்கு";//1
 $LANG['customer_add'] = "வாடிக்கையாளரைச் சேர்";//1
 $LANG['customer_contact'] = "வாடிக்கையாளர் தொடர்பு (Attn)";//1
+$LANG['contacts'] = "Contacts";//0
 $LANG['customer_department'] = "துறை";//1
 $LANG['customer_details'] = "வாடிக்கையாளர் விவரங்கள்";//1
 $LANG['customer_edit'] = "வாடிக்கையாளரை மாற்றுக";//1

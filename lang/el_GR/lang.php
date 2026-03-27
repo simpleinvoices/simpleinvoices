@@ -106,6 +106,7 @@ $LANG['customer'] = "Πελάτης";//1
 $LANG['customer_account'] = "Λογαριασμός Πελάτη";//1
 $LANG['customer_add'] = "Προσθήκη Πελάτη";//1
 $LANG['customer_contact'] = "Υπεύθυνος που ερχόμαστε σε επαφή";//1
+$LANG['contacts'] = "Contacts";//0
 $LANG['customer_department'] = "Τμήμα";//1
 $LANG['customer_details'] = "Πληροφορίες Πελάτη";//1
 $LANG['customer_edit'] = "Εισαγωγή Στοιχείων Πελάτη";//1

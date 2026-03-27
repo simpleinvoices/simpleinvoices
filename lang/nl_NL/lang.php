@@ -106,6 +106,7 @@ $LANG['customer'] = "Klant";//1
 $LANG['customer_account'] = "Account klant";//1
 $LANG['customer_add'] = "Klant toevoegen";//1
 $LANG['customer_contact'] = "Contactpersoon";//1
+$LANG['contacts'] = "Contacts";//0
 $LANG['customer_department'] = "Afdeling";//1
 $LANG['customer_details'] = "Klant details";//1
 $LANG['customer_edit'] = "Klant wijzigen";//1

@@ -112,6 +112,7 @@ $LANG['customer'] = "Kunde";//1
 $LANG['customer_account'] = "Kundekonto";//1
 $LANG['customer_add'] = "Tilf&#216;j kunde";//1
 $LANG['customer_contact'] = "Kunde kontakt (Att)";//1
+$LANG['contacts'] = "Contacts";//0
 $LANG['customer_department'] = "Afdeling";//1
 $LANG['customer_details'] = "Kunde detaljer";//1
 $LANG['customer_edit'] = "Rediger kunde";//1
