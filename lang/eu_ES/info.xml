@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<langfile version="1.0.0" type="language">
+    <name>Euskara</name>
+    <shortname>eu_ES</shortname>
+    <englishname>Basque</englishname>
+    <version>1.0.0</version>
+    <creationDate>2026-03-27</creationDate>
+    <author>OpenAI Codex</author>
+    <authorEmail>justin@kelly.org.au</authorEmail>
+</langfile>
