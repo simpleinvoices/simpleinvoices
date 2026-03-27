@@ -5,7 +5,7 @@
 * 	Danish translation file
 *
 * Authors:
-*	 Michael Larsen,  Claus M?lgaard Nielsen
+*	 Michael Larsen,  Claus Mølgaard Nielsen
 *
 * Last edited:
 *    2016-10-04
