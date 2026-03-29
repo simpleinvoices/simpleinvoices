@@ -709,6 +709,7 @@ function insertProduct($enabled=1,$visible=1, $domain_id='') {
 	$logger->log('Attr array: '.var_export($attr,true), LegacyLogger::INFO);
 	$notes_as_description = ($_POST['notes_as_description'] == 'true' ? 'Y' : NULL) ;
     $show_description =  ($_POST['show_description'] == 'true' ? 'Y' : NULL) ;
+    $insert_default_tax_id = ($_POST['default_tax_id'] !== '' ? $_POST['default_tax_id'] : NULL);
 
 	$sql = "INSERT into
 		".TB_PREFIX."products
@@ -761,7 +762,7 @@ function insertProduct($enabled=1,$visible=1, $domain_id='') {
 		':custom_field3', $_POST['custom_field3'],
 		':custom_field4', $_POST['custom_field4'],
 		':notes', "".$_POST['notes'],
-		':default_tax_id', $_POST['default_tax_id'],
+		':default_tax_id', $insert_default_tax_id,
 		':enabled', $enabled,
 		':visible', $visible,
 		':attribute', json_encode($attr),
@@ -791,6 +792,7 @@ function updateProduct($domain_id='') {
     }
 	$notes_as_description = ($_POST['notes_as_description'] == 'true' ? 'Y' : NULL) ;
     $show_description =  ($_POST['show_description'] == 'true' ? 'Y' : NULL) ;
+    $update_default_tax_id = ($_POST['default_tax_id'] !== '' ? $_POST['default_tax_id'] : NULL);
 
 	$sql = "UPDATE ".TB_PREFIX."products
 			SET
@@ -817,7 +819,7 @@ function updateProduct($domain_id='') {
 		':description', $_POST['description'],
 		':enabled', $_POST['enabled'],
 		':notes', $_POST['notes'],
-		':default_tax_id', $_POST['default_tax_id'],
+		':default_tax_id', $update_default_tax_id,
 		':custom_field1', $_POST['custom_field1'],
 		':custom_field2', $_POST['custom_field2'],
 		':custom_field3', $_POST['custom_field3'],
