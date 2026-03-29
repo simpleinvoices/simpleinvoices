@@ -8,16 +8,25 @@ class LegacyAuthSessionBridge
 {
     public function login(User $user): void
     {
-        $this->startNativeSession();
+        // Close Laravel's session first (it uses a custom FileSessionHandler that
+        // writes to laravel-auth/storage/framework/sessions/, not PHP's native
+        // session path). We must reset to the native handler so Simple Invoices
+        // can read the session from the same location it writes to.
+        if (session_status() === PHP_SESSION_ACTIVE) {
+            session_write_close();
+        }
 
+        session_set_save_handler(new \SessionHandler());
+        session_name('PHPSESSID');
+        session_start();
         session_regenerate_id(true);
 
         $_SESSION['SI_Auth'] = [
-            'id' => (string) $user->getAuthIdentifier(),
-            'email' => (string) $user->email,
+            'id'        => (string) $user->getAuthIdentifier(),
+            'email'     => (string) $user->email,
             'role_name' => (string) ($user->role_name ?? ''),
             'domain_id' => (string) $user->domain_id,
-            'user_id' => (string) $user->user_id,
+            'user_id'   => (string) $user->user_id,
         ];
 
         unset($_SESSION['SI_Auth']['fake_auth']);
@@ -27,7 +36,13 @@ class LegacyAuthSessionBridge
 
     public function logout(): void
     {
-        $this->startNativeSession();
+        if (session_status() === PHP_SESSION_ACTIVE) {
+            session_write_close();
+        }
+
+        session_set_save_handler(new \SessionHandler());
+        session_name('PHPSESSID');
+        session_start();
 
         $_SESSION = [];
 
@@ -48,13 +63,4 @@ class LegacyAuthSessionBridge
         return '/';
     }
 
-    protected function startNativeSession(): void
-    {
-        if (session_status() === PHP_SESSION_ACTIVE) {
-            return;
-        }
-
-        session_name('PHPSESSID');
-        session_start();
-    }
 }
