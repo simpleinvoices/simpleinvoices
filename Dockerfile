@@ -42,8 +42,7 @@ WORKDIR /var/www/html
 COPY . /var/www/html/
 
 ENV COMPOSER_ALLOW_SUPERUSER=1 COMPOSER_MEMORY_LIMIT=-1
-RUN composer install --no-interaction --no-dev --optimize-autoloader --prefer-dist \
-    && (cd laravel-auth && composer install --no-interaction --optimize-autoloader --prefer-dist)
+RUN composer install --no-interaction --no-dev --optimize-autoloader --prefer-dist
 
 # Nginx config: root /var/www/html, PHP via FastCGI to 127.0.0.1:9000
 RUN <<'NGINX'
