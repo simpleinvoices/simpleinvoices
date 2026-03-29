@@ -2,21 +2,24 @@
 /* Class: wrapper class for zend locale*/
 class siLocal 
 {
-	/*Function: wrapper function for zend_locale_format::toNumber*/
-	public static function number($number,$precision="",$locale="")
+	private static function localeString($locale): string
 	{
 		global $config;
-		
-		$locale = ($locale == "") ? new Zend_Locale($config->local->locale) : $locale;
-		$load_precision = $config->local->precision; 
-		
-		$precision = ($precision == "") ? $load_precision : $precision;
-		$formatted_number = Zend_Locale_Format::toNumber($number, array('precision' => $precision, 'locale' => $locale));
-		
-		//trim zeros from decimal point if enabled
-		//if ($config->local->trim_zeros == "y") { $formatted_number = rtrim(trim($formatted_number, '0'), '.'); }
-		
-		return $formatted_number;
+		return $locale ?: (string) ($config->local->locale ?? 'en_US');
+	}
+
+	/*Function: wrapper function using IntlNumberFormatter*/
+	public static function number($number, $precision = "", $locale = "")
+	{
+		global $config;
+
+		$locale = self::localeString($locale);
+		$precision = $precision === "" ? (int) $config->local->precision : (int) $precision;
+
+		$formatter = new \NumberFormatter($locale, \NumberFormatter::DECIMAL);
+		$formatter->setAttribute(\NumberFormatter::FRACTION_DIGITS, $precision);
+
+		return $formatter->format($number);
 	}
 	
     /*
@@ -37,61 +40,56 @@ class siLocal
 
 	public static function number_trim($number)
 	{
-        
-        global $config;        
+        global $config;
 
 		$formatted_number = siLocal::number($number);
-    
-        //get the precision and add 1 - for the decimal place and reverse the sign
-        $position = ($config->local->precision + 1 ) * -1;
+        $precision = (int) $config->local->precision;
+        $position = ($precision + 1) * -1;
 
-        if(substr($formatted_number,$position,'1') == ".")
-        {
+        if (substr($formatted_number, $position, 1) === ".") {
 		    $formatted_number = rtrim(trim($formatted_number, '0'), '.');
         }
-        if(substr($formatted_number,$position,'1') == ",")
-        {
-            $formatted_number = rtrim(trim($formatted_number, '0'), ','); /* Added to deal with "," */
+        if (substr($formatted_number, $position, 1) === ",") {
+            $formatted_number = rtrim(trim($formatted_number, '0'), ',');
         }	
         return $formatted_number;
 	}
 	
-	/*Function: wrapper function for zend_date*/
-	public static function date($date,$length="",$locale="")
+	/*Function: wrapper function for IntlDateFormatter*/
+	public static function date($date, $length = "", $locale = "")
 	{
-		global $config;
-		
-		$locale = ($locale == "") ? new Zend_Locale($config->local->locale) : $locale;
-		$length == "" ? $length = "medium" : $length = $length;
-		/*
-		 * Length can be any of the Zend_Date lengths - FULL, LONG, MEDIUM, SHORT
-		 */
+		$locale = self::localeString($locale);
 
-		$formatted_date = new Zend_Date($date,'yyyy-MM-dd');
-		
-		switch ($length) {
-			case "full":
-			    return $formatted_date->get(Zend_Date::DATE_FULL,$locale);
-			    break;
-			case "long":
-			    return $formatted_date->get(Zend_Date::DATE_LONG,$locale);
-			    break;
-			case "medium":
-			    return $formatted_date->get(Zend_Date::DATE_MEDIUM,$locale);
-			    break;
-			case "short":
-			    return $formatted_date->get(Zend_Date::DATE_SHORT,$locale);
-			    break;
-			case "month":
-			    return $formatted_date->get(Zend_Date::MONTH_NAME,$locale);
-			    break;
-			case "month_short":
-			    return $formatted_date->get(Zend_Date::MONTH_NAME_SHORT,$locale);
-			    break;
-			default:
-				return $formatted_date->get(Zend_Date::DATE_SHORT,$locale);
+		try {
+			$dateTime = $date instanceof \DateTimeInterface ? $date : new \DateTime($date);
+		} catch (\Throwable $e) {
+			return (string) $date;
 		}
-		
+
+		$length = $length ?: 'medium';
+
+		$style = match ($length) {
+			'full' => \IntlDateFormatter::FULL,
+			'long' => \IntlDateFormatter::LONG,
+			'medium' => \IntlDateFormatter::MEDIUM,
+			'short' => \IntlDateFormatter::SHORT,
+			default => \IntlDateFormatter::SHORT,
+		};
+
+		$pattern = null;
+		if ($length === 'month') {
+			$pattern = 'LLLL';
+		} elseif ($length === 'month_short') {
+			$pattern = 'LLL';
+		}
+
+		if ($pattern !== null) {
+			$formatter = new \IntlDateFormatter($locale, \IntlDateFormatter::FULL, \IntlDateFormatter::FULL, $dateTime->getTimezone()->getName(), \IntlDateFormatter::GREGORIAN, $pattern);
+		} else {
+			$formatter = new \IntlDateFormatter($locale, $style, $style, $dateTime->getTimezone()->getName());
+		}
+
+		return $formatter->format($dateTime);
 	}
 
 

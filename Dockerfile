@@ -20,7 +20,8 @@ RUN apk add --no-cache \
     nginx
 
 # PHP extensions (dom/xml for htmlpurifier etc.)
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+RUN apk add --no-cache icu-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) \
     mysqli \
     pdo \
@@ -30,6 +31,7 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     gd \
     dom \
     xml \
+    intl \
     && apk del .build-deps
 
 # Composer
@@ -40,7 +42,8 @@ WORKDIR /var/www/html
 COPY . /var/www/html/
 
 ENV COMPOSER_ALLOW_SUPERUSER=1 COMPOSER_MEMORY_LIMIT=-1
-RUN composer install --no-interaction --no-dev --optimize-autoloader --no-scripts --prefer-dist
+RUN composer install --no-interaction --no-dev --optimize-autoloader --prefer-dist \
+    && (cd laravel-auth && composer install --no-interaction --optimize-autoloader --prefer-dist)
 
 # Nginx config: root /var/www/html, PHP via FastCGI to 127.0.0.1:9000
 RUN <<'NGINX'

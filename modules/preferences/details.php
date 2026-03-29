@@ -16,7 +16,8 @@ $index_group = getPreference($preference['index_group']);
 $preferences = getActivePreferences();
 $defaults = getSystemDefaults();
 $status = array(array('id'=>'0','status'=>$LANG['draft']), array('id'=>'1','status'=>$LANG['real']));
-$localelist = Zend_Locale::getLocaleList();
+require_once __DIR__ . '/../../include/class/LocaleHelper.php';
+$localelist = LocaleHelper::getLocaleList();
 
 $smarty->assign('preference',$preference);
 $smarty->assign('defaults',$defaults);

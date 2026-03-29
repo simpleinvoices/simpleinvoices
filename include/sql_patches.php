@@ -1703,3 +1703,17 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['293']['name']  = "Add department to the customers";
     $patch['293']['patch'] = "ALTER TABLE `".TB_PREFIX."customers` ADD COLUMN `department` VARCHAR(255) NULL AFTER `name`";
     $patch['293']['date']  = "20161004";
+
+    $patch['294']['name']  = "Prepare user table for Laravel Fortify";
+    if ($config->database->adapter === "pdo_pgsql") {
+        $patch['294']['patch'] = "
+            ALTER TABLE ".TB_PREFIX."user ALTER COLUMN password TYPE VARCHAR(255);
+            ALTER TABLE ".TB_PREFIX."user ADD COLUMN remember_token VARCHAR(100);
+        ";
+    } else {
+        $patch['294']['patch'] = "
+            ALTER TABLE `".TB_PREFIX."user` CHANGE `password` `password` VARCHAR(255) NULL;
+            ALTER TABLE `".TB_PREFIX."user` ADD COLUMN `remember_token` VARCHAR(100) NULL AFTER `password`;
+        ";
+    }
+    $patch['294']['date']  = "20260329";

@@ -13,12 +13,8 @@
 //print_r($result);
 unset($LANG);
 
-
-$tables = $zendDb->listTables(); //TEST: print db tables 
-
-
 /*if upgrading from old version then getDefaultLang wont work during install*/
-if(in_array(TB_PREFIX.'system_defaults',$tables))
+if (checkTableExists(TB_PREFIX.'system_defaults'))
 {
 	$language = getDefaultLanguage();
 } else {

@@ -95,11 +95,12 @@ class BladeView
         if (isset($auth_session) && is_object($auth_session)) {
             $sessionCopy = method_exists($auth_session, 'getArrayCopy') ? $auth_session->getArrayCopy() : get_object_vars($auth_session);
         }
-        $zendAuth = isset($_SESSION['Zend_Auth']) ? (array)$_SESSION['Zend_Auth'] : $sessionCopy;
+        $legacySessionKey = 'SI_Auth';
+        $zendAuth = isset($_SESSION[$legacySessionKey]) ? (array)$_SESSION[$legacySessionKey] : $sessionCopy;
         // ArrayObject with ARRAY_AS_PROPS supports both $smarty->get->key and $smarty['get']['key']
         $f = ArrayObject::ARRAY_AS_PROPS;
         $smartyCompat = new \ArrayObject([
-            'session' => new \ArrayObject(['Zend_Auth' => new \ArrayObject($zendAuth, $f)], $f),
+            'session' => new \ArrayObject([$legacySessionKey => new \ArrayObject($zendAuth, $f)], $f),
             'get'     => new \ArrayObject($_GET, $f),
             'post'    => new \ArrayObject($_POST ?? [], $f),
             'capture' => new \ArrayObject([], $f),

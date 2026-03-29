@@ -308,10 +308,11 @@ CREATE TABLE IF NOT EXISTS `si_tax` (
 
 CREATE TABLE IF NOT EXISTS `si_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(191) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
   `role_id` int(11) DEFAULT NULL,
   `domain_id` int(11) NOT NULL DEFAULT '0',
-  `password` varchar(64) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
   `enabled` TINYINT(1) DEFAULT 1 NOT NULL,
   `user_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`domain_id`,`id`),

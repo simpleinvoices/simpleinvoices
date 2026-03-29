@@ -59,13 +59,18 @@ class encode
 
 	public static function json($data, $format='plain')
 	{
-		if( $format=='pretty' ) {
-            $message = Zend_Json::encode($data);
-            return Zend_Json::prettyPrint($message, array("format" => "html"));
-        } else {
-            return Zend_Json::encode($data);
-        }
+		$json = json_encode($data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+		if ($json === false) {
+			return '';
+		}
+
+		if ($format === 'pretty') {
+			$pretty = json_encode($data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+			$safe = htmlspecialchars($pretty, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+			return "<pre class=\"json-output\">{$safe}</pre>";
+		}
+
+		return $json;
 	}
 
 } // end of class
-

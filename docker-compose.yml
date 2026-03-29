@@ -91,9 +91,9 @@ services:
       ADMINER_DEFAULT_PASSWORD: ${ADMINER_DEFAULT_PASSWORD}
     ports:
       - "${ADMINER_PORT:-8081}:8080"
-    depends_on:
-      db:
-        condition: service_healthy
+    #depends_on:
+    #  db:
+    #    condition: service_healthy
     networks:
       - simpleinvoices-net
 

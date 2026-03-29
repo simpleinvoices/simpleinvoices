@@ -9,7 +9,7 @@ if ($module != 'api'){
 	    $_GET['module'] = '';
 	  }
 		if  ($_GET['module'] !== "auth") {
-			header('Location: index.php?module=auth&view=login');       
+			header('Location: ./auth/login');
 			exit;
 		}
 

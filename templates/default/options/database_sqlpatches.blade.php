@@ -16,7 +16,7 @@
 	<div class="card-body">
 		<div class="alert alert-info mb-3">{{ $page['message'] }}</div>
 
-		{{ $page['html'] }}
+		{!! $page['html'] !!}
 
 {{-- makes rows ######################## --}}
 @if(isset($page['rows']) && count($page['rows']) > 0)

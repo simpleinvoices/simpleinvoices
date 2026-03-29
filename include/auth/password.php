@@ -52,13 +52,16 @@ function auth_hash_password($password)
  */
 function auth_authenticate_user($email, $password)
 {
-    global $zendDb;
+    $fetchRow = static function (string $sql, array $params) {
+        $args = array_merge([$sql], $params);
+        $sth = dbQuery(...$args);
+        return $sth ? $sth->fetch(PDO::FETCH_ASSOC) : false;
+    };
 
     $patchesDone = getNumberOfDoneSQLPatches();
 
-    // Patch 292+: current schema (email, password, role_id, domain_id, user_id, enabled)
     if ($patchesDone >= '292') {
-        $row = $zendDb->fetchRow(
+        $row = $fetchRow(
             "SELECT u.id, u.email, u.password, r.name AS role_name, u.domain_id, u.user_id
              FROM " . TB_PREFIX . "user u
              LEFT JOIN " . TB_PREFIX . "user_role r ON (u.role_id = r.id)
@@ -73,7 +76,7 @@ function auth_authenticate_user($email, $password)
     }
 
     if ($patchesDone >= '184') {
-        $row = $zendDb->fetchRow(
+        $row = $fetchRow(
             "SELECT u.id, u.email, u.password, r.name AS role_name, u.domain_id
              FROM " . TB_PREFIX . "user u
              LEFT JOIN " . TB_PREFIX . "user_role r ON (u.role_id = r.id)
@@ -89,7 +92,7 @@ function auth_authenticate_user($email, $password)
     }
 
     if ($patchesDone >= '147') {
-        $row = $zendDb->fetchRow(
+        $row = $fetchRow(
             "SELECT u.user_id AS id, u.user_email AS email, u.user_password AS password,
                     r.name AS role_name, u.user_domain_id AS domain_id
              FROM " . TB_PREFIX . "user u
@@ -105,8 +108,7 @@ function auth_authenticate_user($email, $password)
         return false;
     }
 
-    // Pre patch 147
-    $row = $zendDb->fetchRow(
+    $row = $fetchRow(
         "SELECT user_id AS id, user_email AS email, user_password AS password FROM "
         . TB_PREFIX . "users WHERE user_email = ?",
         [$email]

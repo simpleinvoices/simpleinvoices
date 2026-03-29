@@ -2053,6 +2053,12 @@
             "sql_patch": "Add department to the customers",
             "sql_release": "20161004",
             "sql_statement": "ALTER TABLE si_customers ADD COLUMN department VARCHAR(255) NULL AFTER name"
+        },
+        {
+            "sql_patch_ref": "294",
+            "sql_patch": "Prepare user table for Laravel Fortify",
+            "sql_release": "20260329",
+            "sql_statement": ""
         }
     ],
     "si_system_defaults": [

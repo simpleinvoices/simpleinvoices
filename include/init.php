@@ -10,17 +10,18 @@ set_include_path(get_include_path() . PATH_SEPARATOR . "./include/");
 // Load Composer autoloader for all managed libraries
 require_once('./vendor/autoload.php');
 
-//session_start();
-Zend_Session::start();
-$auth_session = new Zend_Session_Namespace('Zend_Auth');
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_name('PHPSESSID');
+    session_start([
+        'cookie_secure' => false,
+        'cookie_httponly' => true,
+        'cookie_samesite' => 'Lax',
+    ]);
+}
 
+include_once('./include/class/LegacyAuthSession.php');
+$auth_session = new LegacyAuthSession('SI_Auth');
 
-//start use of zend_cache   
-$frontendOptions = array(
-    'lifetime' => 7200, // cache lifetime of 2 hours
-    'automatic_serialization' => true
-);
-                   
 
 /* 
  * Zend framework init - end
@@ -44,18 +45,18 @@ if (!is_writable('./tmp')) {
 /*
  * log file - start
  */
-$logFile = "./tmp/log/si.log";
-if (!is_file($logFile))
-{
-	$createLogFile = fopen($logFile, 'w') or die(simpleInvoicesError('notWriteable','folder','tmp/log'));
-	fclose($createLogFile);
-}
-if (!is_writable($logFile)) {
-	
-   simpleInvoicesError('notWriteable','file',$logFile);
-}
-$writer = new Zend_Log_Writer_Stream($logFile);
-$logger = new Zend_Log($writer);
+	$logFile = "./tmp/log/si.log";
+	if (!is_file($logFile))
+	{
+		$createLogFile = fopen($logFile, 'w') or die(simpleInvoicesError('notWriteable','folder','tmp/log'));
+		fclose($createLogFile);
+	}
+	if (!is_writable($logFile)) {
+		
+	   simpleInvoicesError('notWriteable','file',$logFile);
+	}
+	include_once('./include/class/LegacyLogger.php');
+	$logger = new LegacyLogger($logFile);
 /*
  * log file - end
  */
@@ -64,25 +65,6 @@ if (!is_writable('./tmp/cache')) {
     
    simpleInvoicesError('notWriteable','file','./tmp/cache');
 }
-/*
- * Zend Framework cache section - start
- * -- must come after the tmp dir writeable check
- */
-$backendOptions = array(
-    'cache_dir' => './tmp/' // Directory where to put the cache files
-);
-                                   
-// getting a Zend_Cache_Core object
-$cache = Zend_Cache::factory('Core',
-                             'File',
-                             $frontendOptions,
-                             $backendOptions);
-
-//required for some servers
-Zend_Date::setOptions(array('cache' => $cache)); // Active aussi pour Zend_Locale
-/*
- * Zend Framework cache section - end
- */
 
 $smartyViewPaths = array(
     '.',
@@ -114,15 +96,16 @@ $install_path = htmlsafe($path['dirname'] ?? '');
 
 
 include_once('./config/define.php');
+include_once('./include/class/ConfigLoader.php');
 
 /*
  * Include another config file if required
  */
-if( is_file('./config/custom.config.php') ){
-     $config = new Zend_Config_Ini('./config/custom.config.php', $environment,true);
-} else {
-    $config = new Zend_Config_Ini('./config/config.php', $environment,true);	//added 'true' to allow modifications from db
-}
+	if( is_file('./config/custom.config.php') ){
+	     $config = ConfigLoader::load('./config/custom.config.php', $environment);
+	} else {
+	    $config = ConfigLoader::load('./config/config.php', $environment);
+	}	//added 'true' to allow modifications from db
 
 //set up app with relevant php setting
 date_default_timezone_set($config->phpSettings->date->timezone);
@@ -144,14 +127,6 @@ ini_set('log_errors', $config->phpSettings->log_errors);
 ini_set('error_log', $config->phpSettings->error_log); 
 
 
-
-$zendDb = Zend_Db::factory($config->database->adapter, array(
-    'host'     => $config->database->params->host,
-    'username' => $config->database->params->username,
-    'password' => $config->database->params->password,
-    'dbname'   => $config->database->params->dbname,
-    'port'     => $config->database->params->port)
-);
 
 //include_once("./include/sql_patches.php");
 
@@ -185,20 +160,20 @@ if ( $install_tables_exists != false )
 		$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id);
 		$core = $sth ? $sth->fetch() : null;
 		if ($core) {
-			$config->extension = new Zend_Config(array('core' => $core));
+			$config->extension = ConfigData::fromArray(['core' => $core]);
 		}
 	}
 }
 
 if (!isset($config->extension) || !$config->extension)
 {
-	$config->extension = new Zend_Config(array('core' => array(
-		'id' => 0,
-		'domain_id' => 0,
-		'name' => 'core',
-		'description' => 'Core part of Simple Invoices - always enabled',
-		'enabled' => '1'
-	)));
+		$config->extension = ConfigData::fromArray(['core' => array(
+			'id' => 0,
+			'domain_id' => 0,
+			'name' => 'core',
+			'description' => 'Core part of Simple Invoices - always enabled',
+			'enabled' => '1'
+		)]);
 }
 
 include_once('./include/language.php');

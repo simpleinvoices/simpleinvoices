@@ -1,27 +1,27 @@
 <?php
 
-$logger->log('ACH API page called', Zend_Log::INFO);
+$logger->log('ACH API page called', LegacyLogger::INFO);
 if ($_POST['pg_response_code']=='A01') {
 
-	$logger->log('ACH validate success', Zend_Log::INFO);
+	$logger->log('ACH validate success', LegacyLogger::INFO);
 
 	//insert into payments
 	$paypal_data ="";
 	foreach ($_POST as $key => $value) { $paypal_data .= "\n$key: $value"; }
-	$logger->log('ACH Data:', Zend_Log::INFO);
-	$logger->log($paypal_data, Zend_Log::INFO);
+	$logger->log('ACH Data:', LegacyLogger::INFO);
+	$logger->log($paypal_data, LegacyLogger::INFO);
 
 	$check_payment = new payment();
 	$check_payment->filter='online_payment_id';
 	$check_payment->online_payment_id = $_POST['pg_consumerorderid'];
 	$check_payment->domain_id = '1';
     $number_of_payments = $check_payment->count();
-	$logger->log('ACH - number of times this payment is in the db: '.$number_of_payments, Zend_Log::INFO);
+	$logger->log('ACH - number of times this payment is in the db: '.$number_of_payments, LegacyLogger::INFO);
 	
 	if($number_of_payments > 0)
 	{
 		$xml_message = 'Online payment for invoices: '.$_POST['pg_consumerorderid'].' has already been entered into Simple Invoices';
-		$logger->log($xml_message, Zend_Log::INFO);
+		$logger->log($xml_message, LegacyLogger::INFO);
 	}
 
 	if($number_of_payments == '0')
@@ -40,7 +40,7 @@ if ($_POST['pg_response_code']=='A01') {
 			$payment_type->domain_id = '1';
 
 		$payment->ac_payment_type = $payment_type->select_or_insert_where();
-		$logger->log('ACH - payment_type='.$payment->ac_payment_type, Zend_Log::INFO);
+		$logger->log('ACH - payment_type='.$payment->ac_payment_type, LegacyLogger::INFO);
 		$payment->insert();
 
 		$invoiceobj = new invoice();
@@ -67,7 +67,7 @@ if ($_POST['pg_response_code']=='A01') {
 } else {
 
 	$xml_message = "PaymentsGateway.com payment validate failed - please contact ". $biller['name'] ;
-	$logger->log('ACH validate failed', Zend_Log::INFO);
+	$logger->log('ACH validate failed', LegacyLogger::INFO);
 }
 
     echo $xml_message;

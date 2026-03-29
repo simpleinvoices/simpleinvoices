@@ -482,7 +482,7 @@ class invoice {
 			foreach ($tax as $key => $value)
 			{
 				$invoiceItem['tax'][$key] = $value['tax_id'];
-				$logger->log('Invoice: '.$invoiceItem['invoice_id'].' Item id: '.$invoiceItem['id'].' Tax '.$key.' Tax ID: '.$value['tax_id'], Zend_Log::INFO);
+				$logger->log('Invoice: '.$invoiceItem['invoice_id'].' Item id: '.$invoiceItem['id'].' Tax '.$key.' Tax ID: '.$value['tax_id'], LegacyLogger::INFO);
 			}
 			$invoiceItems[$i] = $invoiceItem;
 		}
@@ -547,7 +547,7 @@ class invoice {
         }
 
         $count = $sth->fetch();
-		$logger->log('Max Invoice: '.$count['max'], Zend_Log::INFO);
+		$logger->log('Max Invoice: '.$count['max'], LegacyLogger::INFO);
         return $count['max'];
     }
 
