@@ -113,10 +113,10 @@
 			{{-- Desktop column header --}}
 			<div class="row g-2 d-none d-lg-flex mb-1 px-1">
 				<div class="col-auto si-del-col-hdr"></div>
-				<div class="col-4 col-lg-1 small fw-medium text-secondary">{{ $LANG['quantity_short'] ?? '' }}</div>
-				<div class="col-12 col-lg small fw-medium text-secondary">{{ $LANG['description'] ?? '' }}</div>
+				<div class="col-3 col-lg-1 small fw-medium text-secondary">{{ $LANG['quantity_short'] ?? '' }}</div>
+				<div class="col col-lg small fw-medium text-secondary">{{ $LANG['description'] ?? '' }}</div>
 				@for($tax_header = 0; $tax_header < (int)($defaults['tax_per_line_item'] ?? 0); $tax_header++)
-					<div class="col-12 col-sm-6 col-lg-2 small fw-medium text-secondary">{{ $LANG['tax'] ?? '' }}@if(($defaults['tax_per_line_item'] ?? 0) > 1) {{ ($tax_header + 1) }}@endif</div>
+					<div class="col col-lg-2 small fw-medium text-secondary">{{ $LANG['tax'] ?? '' }}@if(($defaults['tax_per_line_item'] ?? 0) > 1) {{ ($tax_header + 1) }}@endif</div>
 				@endfor
 				<div class="col col-lg-2 small fw-medium text-secondary text-end">{{ $LANG['unit_price'] ?? '' }}</div>
 			</div>
@@ -138,7 +138,7 @@
 								><i id="delete_image{{ $line }}" class="ti ti-trash"></i></a>
 							@endif
 						</div>
-						<div class="col-4 col-lg-1">
+						<div class="col-3 col-lg-1">
 							<label class="form-label d-lg-none small text-secondary mb-1">{{ $LANG['quantity_short'] ?? '' }}</label>
 							<input type="hidden" id="delete{{ $line }}" name="delete{{ $line }}" />
 							<input
@@ -150,7 +150,7 @@
 							/>
 							<input type="hidden" name="line_item{{ $line }}" id="line_item{{ $line }}" value="{{ $invoiceItem['id'] ?? '' }}" />
 						</div>
-						<div class="col-12 col-lg">
+						<div class="col col-lg">
 							<label class="form-label d-lg-none small text-secondary mb-1">{{ $LANG['description'] ?? '' }}</label>
 							@if($products == null)
 								<p class="text-muted mb-0"><em>{{ $LANG['no_products'] ?? '' }}</em></p>
@@ -168,7 +168,7 @@
 							@endif
 						</div>
 						@for($taxIdx = 0; $taxIdx < (int)($defaults['tax_per_line_item'] ?? 0); $taxIdx++)
-						<div class="col-12 col-sm-6 col-lg-2">
+						<div class="col col-lg-2">
 							<label class="form-label d-lg-none small text-secondary mb-1">{{ $LANG['tax'] ?? '' }}@if(($defaults['tax_per_line_item'] ?? 0) > 1) {{ ($taxIdx + 1) }}@endif</label>
 							<select
 								id="tax_id[{{ $line }}][{{ $taxIdx }}]"
