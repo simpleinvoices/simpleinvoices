@@ -67,102 +67,101 @@
 		@include(str_replace('/', '.', rtrim($path ?? '', '/')) . '.header')
 
 		{{-- Line items --}}
-		<div class="table-responsive mb-2">
-			<table id="itemtable" class="table table-vcenter table-sm si_invoice_items">
-				<thead>
-					<tr class="table-light">
-						<th style="width:2rem"></th>
-						<th style="width:6rem">{{ $LANG['quantity'] ?? '' }}</th>
-						<th>{{ $LANG['item'] ?? '' }}</th>
-						@for($tax_header = 0; $tax_header < (int)($defaults['tax_per_line_item'] ?? 0); $tax_header++)
-							<th style="width:10rem">{{ $LANG['tax'] ?? '' }} @if(($defaults['tax_per_line_item'] ?? 0) > 1){{ ($tax_header + 1) }}@endif</th>
-						@endfor
-						<th style="width:9rem" class="text-end">{{ $LANG['unit_price'] ?? '' }}</th>
-					</tr>
-				</thead>
+		{{-- Desktop column header --}}
+		<div class="row g-2 d-none d-lg-flex mb-1 px-1">
+			<div class="col-auto si-del-col-hdr"></div>
+			<div class="col-3 col-lg-1 small fw-medium text-secondary">{{ $LANG['quantity'] ?? '' }}</div>
+			<div class="col col-lg small fw-medium text-secondary">{{ $LANG['item'] ?? '' }}</div>
+			@for($tax_header = 0; $tax_header < (int)($defaults['tax_per_line_item'] ?? 0); $tax_header++)
+				<div class="col col-lg-2 small fw-medium text-secondary">{{ $LANG['tax'] ?? '' }}@if(($defaults['tax_per_line_item'] ?? 0) > 1) {{ ($tax_header + 1) }}@endif</div>
+			@endfor
+			<div class="col col-lg-2 small fw-medium text-secondary text-end">{{ $LANG['unit_price'] ?? '' }}</div>
+		</div>
 
-				@foreach(($dynamic_line_items ?? []) as $line)
-				<tbody class="line_item" id="row{{ $line }}">
-					<tr>
-						<td>
-							@if($line == 0)
-								<span class="text-muted" style="display:inline-block;width:1.75rem;"></span>
-							@else
-								<a
-									id="trash_link{{ $line }}"
-									class="trash_link btn btn-icon btn-sm btn-outline-danger"
-									title="{{ $LANG['delete_row'] ?? '' }}"
-									rel="{{ $line }}"
-									href="#"
-								><i class="ti ti-trash"></i></a>
-							@endif
-						</td>
-						<td>
-							<input
-								type="text"
-								name="quantity{{ $line }}"
-								id="quantity{{ $line }}"
-								class="form-control form-control-sm text-end @if($line == '0')validate[required]@endif"
-								@if(get('quantity' . $line)) value="{{ get('quantity' . $line) }}" @endif
-							/>
-						</td>
-						<td>
-							@if($products == null)
-								<p class="text-muted mb-0"><em>{{ $LANG['no_products'] ?? '' }}</em></p>
-							@else
-								<select
-									id="products{{ $line }}"
-									name="products{{ $line }}"
-									rel="{{ $line }}"
-									class="form-select form-select-sm @if($line == '0')validate[required]@endif product_change"
-								>
-									<option value=""></option>
-									@foreach(($products ?? []) as $product)
-										<option
-											@if($product['id'] == ((get())['product'][$line] ?? null)) selected @endif
-											value="{{ $product['id'] ?? '' }}"
-										>{{ $product['description'] ?? '' }}</option>
-									@endforeach
-								</select>
-							@endif
-						</td>
-						@for($taxIdx = 0; $taxIdx < (int)($defaults['tax_per_line_item'] ?? 0); $taxIdx++)
-						<td>
+		<div id="itemtable" class="mb-2">
+			@foreach(($dynamic_line_items ?? []) as $line)
+			<div class="line_item si-line-item" id="row{{ $line }}">
+				<div class="row g-2 align-items-end">
+					<div class="col-auto si-del-col">
+						@if($line == 0)
+							<span class="text-muted" style="display:inline-block;width:1.75rem;"></span>
+						@else
+							<a
+								id="trash_link{{ $line }}"
+								class="trash_link btn btn-icon btn-sm btn-outline-danger"
+								title="{{ $LANG['delete_row'] ?? '' }}"
+								rel="{{ $line }}"
+								href="#"
+							><i class="ti ti-trash"></i></a>
+						@endif
+					</div>
+					<div class="col-3 col-lg-1">
+						<label class="form-label d-lg-none small text-secondary mb-1">{{ $LANG['quantity'] ?? '' }}</label>
+						<input
+							type="text"
+							name="quantity{{ $line }}"
+							id="quantity{{ $line }}"
+							class="form-control form-control-sm text-end @if($line == '0')validate[required]@endif"
+							@if(get('quantity' . $line)) value="{{ get('quantity' . $line) }}" @endif
+						/>
+					</div>
+					<div class="col col-lg">
+						<label class="form-label d-lg-none small text-secondary mb-1">{{ $LANG['item'] ?? '' }}</label>
+						@if($products == null)
+							<p class="text-muted mb-0"><em>{{ $LANG['no_products'] ?? '' }}</em></p>
+						@else
 							<select
-								id="tax_id[{{ $line }}][{{ $taxIdx }}]"
-								name="tax_id[{{ $line }}][{{ $taxIdx }}]"
-								class="form-select form-select-sm"
+								id="products{{ $line }}"
+								name="products{{ $line }}"
+								rel="{{ $line }}"
+								class="form-select form-select-sm @if($line == '0')validate[required]@endif product_change"
 							>
 								<option value=""></option>
-								@foreach(($taxes ?? []) as $taxOption)
+								@foreach(($products ?? []) as $product)
 									<option
-										value="{{ $taxOption['tax_id'] ?? '' }}"
-										@if(($taxOption['tax_id'] ?? '') == ((get())['tax'][$line][$taxIdx] ?? null)) selected @endif
-									>{{ $taxOption['tax_description'] ?? '' }}</option>
+										@if($product['id'] == ((get())['product'][$line] ?? null)) selected @endif
+										value="{{ $product['id'] ?? '' }}"
+									>{{ $product['description'] ?? '' }}</option>
 								@endforeach
 							</select>
-						</td>
-						@endfor
-						<td>
-							<input
-								id="unit_price{{ $line }}"
-								name="unit_price{{ $line }}"
-								class="form-control form-control-sm text-end @if($line == '0')validate[required]@endif"
-								@if(get('unit_price' . $line)) value="{{ get('unit_price' . $line) }}" @else value="" @endif
-							/>
-						</td>
-					</tr>
-
-					<tr class="details si_hide">
-						<td></td>
-						<td colspan="{{ 3 + (int)($defaults['tax_per_line_item'] ?? 0) }}">
-							<textarea class="form-control form-control-sm detail" name="description{{ $line }}" id="description{{ $line }}" rows="2"></textarea>
-						</td>
-					</tr>
-				</tbody>
-				@endforeach
-
-			</table>
+						@endif
+					</div>
+					@for($taxIdx = 0; $taxIdx < (int)($defaults['tax_per_line_item'] ?? 0); $taxIdx++)
+					<div class="col col-lg-2">
+						<label class="form-label d-lg-none small text-secondary mb-1">{{ $LANG['tax'] ?? '' }}@if(($defaults['tax_per_line_item'] ?? 0) > 1) {{ ($taxIdx + 1) }}@endif</label>
+						<select
+							id="tax_id[{{ $line }}][{{ $taxIdx }}]"
+							name="tax_id[{{ $line }}][{{ $taxIdx }}]"
+							class="form-select form-select-sm"
+						>
+							<option value=""></option>
+							@foreach(($taxes ?? []) as $taxOption)
+								<option
+									value="{{ $taxOption['tax_id'] ?? '' }}"
+									@if(($taxOption['tax_id'] ?? '') == ((get())['tax'][$line][$taxIdx] ?? null)) selected @endif
+								>{{ $taxOption['tax_description'] ?? '' }}</option>
+							@endforeach
+						</select>
+					</div>
+					@endfor
+					<div class="col col-lg-2">
+						<label class="form-label d-lg-none small text-secondary mb-1">{{ $LANG['unit_price'] ?? '' }}</label>
+						<input
+							id="unit_price{{ $line }}"
+							name="unit_price{{ $line }}"
+							class="form-control form-control-sm text-end @if($line == '0')validate[required]@endif"
+							@if(get('unit_price' . $line)) value="{{ get('unit_price' . $line) }}" @else value="" @endif
+						/>
+					</div>
+				</div>
+				<div class="row g-2 details si_hide mt-1">
+					<div class="col-auto si-del-col d-none d-lg-block"></div>
+					<div class="col-12 col-lg">
+						<textarea class="form-control form-control-sm detail" name="description{{ $line }}" id="description{{ $line }}" rows="2"></textarea>
+					</div>
+				</div>
+			</div>
+			@endforeach
 		</div>
 
 		<div class="btn-list mb-4">

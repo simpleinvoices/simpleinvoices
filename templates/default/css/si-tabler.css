@@ -107,6 +107,35 @@ body {
     overflow: auto;
 }
 
+/* Legacy hide/show utility */
+.si_hide { display: none !important; }
+
+/* Invoice line items — responsive grid layout */
+.si-del-col-hdr,
+.si-del-col { width: 2.75rem; flex-shrink: 0; }
+
+/* Mobile: each line item renders as a card */
+@media (max-width: 991.98px) {
+    .si-line-item {
+        border: 1px solid var(--tblr-border-color);
+        border-radius: var(--tblr-border-radius);
+        padding: 0.625rem;
+        margin-bottom: 0.5rem;
+        background: var(--tblr-bg-surface);
+    }
+}
+
+/* Desktop: subtle separator between items */
+@media (min-width: 992px) {
+    .si-line-item {
+        padding: 0.25rem 0.25rem;
+        margin-bottom: 0.25rem;
+    }
+    .si-line-item + .si-line-item {
+        border-top: 1px solid var(--tblr-border-color-light, #e6e7e9);
+    }
+}
+
 /* Legacy SI class compatibility */
 .si_message {
     padding: 1rem;

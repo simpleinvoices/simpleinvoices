@@ -56,6 +56,10 @@
                     <a href="index.php?module=options&view=backup_database" class="dropdown-item">
                         <i class="ti ti-database-export me-2"></i>{{ $LANG['backup_database'] ?? 'Backup Database' }}
                     </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="index.php?module=auth&view=logout" class="dropdown-item text-danger">
+                        <i class="ti ti-logout me-2"></i>{{ $LANG['logout'] ?? 'Logout' }}
+                    </a>
                 </div>
             </div>
         </div>

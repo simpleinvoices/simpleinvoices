@@ -44,7 +44,7 @@ foreach($invoiceItems as $key=>$value)
     $json_att = json_decode($prod['attribute']);
     if($json_att !== null)
     {
-        $html ="<tr id='json_html". $key."'><td></td><td colspan='5'><table><tr>";
+        $html = "<div id='json_html". $key."' class='si-attr-row d-flex flex-wrap gap-2 align-items-end mt-1 mb-1'>";
         foreach($json_att as $k=>$v)
         {
             if($v == 'true')
@@ -76,7 +76,7 @@ foreach($invoiceItems as $key=>$value)
 
                 if($attr_name['enabled'] =='1' AND $attr_name['type'] == 'list')
                 {
-                    $html .= "<td>".$attr_name['name']."<select name='attribute[".$key."][".$k."]' class='form-select form-select-sm'>";
+                    $html .= "<div><label class='form-label small mb-1'>".htmlspecialchars($attr_name['name'])."</label><select name='attribute[".$key."][".$k."]' class='form-select form-select-sm'>";
                     $html .= "<option value=''></option>";
                     foreach($states2 as $att_key=>$att_val)
                     {
@@ -93,10 +93,10 @@ foreach($invoiceItems as $key=>$value)
                                 }
                             }
 
-                            $html .= "<option ". $selected ." value='". $att_val['id']. "'>".$att_val['value']."</option>";
+                            $html .= "<option ". $selected ." value='". $att_val['id']. "'>".htmlspecialchars($att_val['value'])."</option>";
                         }
                     }
-                    $html .= "</select></td>";
+                    $html .= "</select></div>";
                 }
                 if($attr_name['enabled'] =='1' AND $attr_name['type'] == 'free'  )
                 {
@@ -105,7 +105,7 @@ foreach($invoiceItems as $key=>$value)
                             {
                                 if($k == $a_key){ $attribute_value = $a_value;}
                             }
-                    $html .= "<td>".$attr_name['name']."<input name='attribute[".$key."][".$k."]'  value='". $attribute_value ."' /></td>";
+                    $html .= "<div><label class='form-label small mb-1'>".htmlspecialchars($attr_name['name'])."</label><input class='form-control form-control-sm' name='attribute[".$key."][".$k."]' value='". htmlspecialchars($attribute_value) ."' /></div>";
                 }
                 if($attr_name['enabled'] =='1' AND $attr_name['type'] == 'decimal' )
                 {
@@ -114,11 +114,11 @@ foreach($invoiceItems as $key=>$value)
                             {
                                 if($k == $a_key){ $attribute_value = $a_value;}
                             }
-                    $html .= "<td>".$attr_name['name']."<input name='attribute[".$key."][".$k."]' size='5' value='". $attribute_value ."' /></td>";
+                    $html .= "<div><label class='form-label small mb-1'>".htmlspecialchars($attr_name['name'])."</label><input class='form-control form-control-sm' style='width:6rem' name='attribute[".$key."][".$k."]' value='". htmlspecialchars($attribute_value) ."' /></div>";
                 }
             }
         }
-        $html .= "</tr></table></td></tr>";
+        $html .= "</div>";
         $invoiceItems[$key]['html'] = $html;
     }
 }

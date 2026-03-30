@@ -16,17 +16,17 @@ if(isset($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] > 0)
         $json_att = json_decode($row['attribute']);
         if($json_att !== null AND $row['attribute'] !== '[]')
         {
-        $html ="<tr id='json_html". $row_id ."'><td></td><td colspan='5'><table><tr>";
+        $html = "<div id='json_html". $row_id ."' class='si-attr-row d-flex flex-wrap gap-2 align-items-end mt-1 mb-1'>";
         foreach($json_att as $k=>$v)
         {
             if($v == 'true')
             {
-                $attr_name_sql = sprintf('select 
-                    a.name as name, a.enabled as enabled,  t.name type 
-                    from 
-                        si_products_attributes as a, 
-                        si_products_attribute_type as t 
-                   where 
+                $attr_name_sql = sprintf('select
+                    a.name as name, a.enabled as enabled,  t.name type
+                    from
+                        si_products_attributes as a,
+                        si_products_attribute_type as t
+                   where
                         a.type_id = t.id
                         AND a.id = %d', $k);
                 $attr_name = dbQuery($attr_name_sql);
@@ -37,27 +37,27 @@ if(isset($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] > 0)
 
                 if($attr_name['enabled'] =='1' AND $attr_name['type'] == 'list')
                 {
-                    $html .= "<td>".$attr_name['name']."<select name='attribute[".$row_id."][".$k."]' class='form-select form-select-sm'>";
+                    $html .= "<div><label class='form-label small mb-1'>".htmlspecialchars($attr_name['name'])."</label><select name='attribute[".$row_id."][".$k."]' class='form-select form-select-sm'>";
                     foreach($states2 as $att_key=>$att_val)
                     {
                         if($att_val['enabled'] == '1')
                         {
-                            $html .= "<option value='". $att_val['id']. "'>".$att_val['value']."</option>";
+                            $html .= "<option value='". $att_val['id']. "'>".htmlspecialchars($att_val['value'])."</option>";
                         }
                     }
-                    $html .= "</select></td>";
+                    $html .= "</select></div>";
                 }
                 if($attr_name['enabled'] =='1' AND $attr_name['type'] == 'free'  )
                 {
-                    $html .= "<td>".$attr_name['name']."<input name='attribute[".$row_id."][".$k."]' /></td>";
+                    $html .= "<div><label class='form-label small mb-1'>".htmlspecialchars($attr_name['name'])."</label><input class='form-control form-control-sm' name='attribute[".$row_id."][".$k."]' /></div>";
                 }
                 if($attr_name['enabled'] =='1' AND $attr_name['type'] == 'decimal' )
                 {
-                    $html .= "<td>".$attr_name['name']."<input name='attribute[".$row_id."][".$k."]' size='5'/></td>";
+                    $html .= "<div><label class='form-label small mb-1'>".htmlspecialchars($attr_name['name'])."</label><input class='form-control form-control-sm' style='width:6rem' name='attribute[".$row_id."][".$k."]' /></div>";
                 }
             }
         }
-                    $html .= "</tr></table></td></tr>";
+        $html .= "</div>";
         }
 	//	print_r($row);
 	//		$output .= '<input id="state" class="field select two-third addr" value="'.$row['unit_price'].'"/>';

@@ -38,16 +38,18 @@
 				var jsonHtml = document.getElementById('json_html' + row_number);
 				if (jsonHtml) jsonHtml.remove();
 				var qEl = document.getElementById('quantity' + row_number);
-				if (qEl && quantity === '') qEl.setAttribute('value', '1');
+				if (qEl && quantity === '') { qEl.value = '1'; qEl.setAttribute('value', '1'); }
 				var up = document.getElementById('unit_price' + row_number);
-				if (up) up.setAttribute('value', data.unit_price || '');
+				if (up) { up.value = data.unit_price || ''; up.setAttribute('value', data.unit_price || ''); }
 				var t0 = document.querySelector('#row' + row_number + ' [name="tax_id[' + row_number + '][0]"]');
 				if (t0) t0.value = data.default_tax_id != null ? data.default_tax_id : '';
 				var t1 = document.querySelector('#row' + row_number + ' [name="tax_id[' + row_number + '][1]"]');
 				if (t1) t1.value = (data.default_tax_id_2 != null) ? data.default_tax_id_2 : '';
-				var detailsTr = document.querySelectorAll('tbody#row' + row_number + ' tr.details');
+				var detailsTr = document.querySelectorAll('#row' + row_number + ' .details');
+				var showDetailsBtn = document.querySelector('a.show-details');
+				var globalShowActive = showDetailsBtn && showDetailsBtn.classList.contains('si_hide');
 				detailsTr.forEach(function (tr) {
-					if (data.show_description === 'Y') tr.classList.remove('si_hide');
+					if (data.show_description === 'Y' || globalShowActive) tr.classList.remove('si_hide');
 					else tr.classList.add('si_hide');
 				});
 				var descEl = document.getElementById('description' + row_number);
@@ -64,12 +66,12 @@
 					}
 				}
 				if (data.json_html && data.json_html !== '') {
-					var tbody = document.getElementById('row' + row_number);
-					var details = tbody ? tbody.querySelector('tr.details') : null;
-					if (tbody && details) {
-						var wrap = document.createElement('tbody');
+					var rowEl = document.getElementById('row' + row_number);
+					var details = rowEl ? rowEl.querySelector('.details') : null;
+					if (rowEl && details) {
+						var wrap = document.createElement('div');
 						wrap.innerHTML = data.json_html;
-						while (wrap.firstChild) tbody.insertBefore(wrap.firstChild, details);
+						while (wrap.firstChild) rowEl.insertBefore(wrap.firstChild, details);
 					}
 				}
 			})
@@ -94,7 +96,7 @@
 	function count_invoice_line_items() {
 		var itemtable = document.getElementById('itemtable');
 		if (!itemtable) return;
-		var rows = itemtable.querySelectorAll('tbody.line_item');
+		var rows = itemtable.querySelectorAll('.line_item');
 		if (!rows.length) return;
 		var lastRow = rows[rows.length - 1];
 		var qInput = lastRow.querySelector('input[id^="quantity"]');
@@ -116,7 +118,7 @@
 		if (loading) loading.style.display = '';
 		var itemtable = document.getElementById('itemtable');
 		if (!itemtable) { if (loading) loading.style.display = 'none'; return; }
-		var lineItems = itemtable.querySelectorAll('tbody.line_item');
+		var lineItems = itemtable.querySelectorAll('.line_item');
 		if (!lineItems.length) { if (loading) loading.style.display = 'none'; return; }
 		var firstRow = lineItems[0];
 		var lastRow = lineItems[lineItems.length - 1];
@@ -133,28 +135,54 @@
 		function byId(r, id) { return clonedRow.querySelector('#' + id) || clonedRow.querySelector('[id="' + id + '"]'); }
 		var trashLink = byId(clonedRow, 'trash_link' + rowID_old); if (trashLink) { trashLink.id = 'trash_link' + rowID_new; trashLink.name = 'trash_link' + rowID_new; trashLink.href = '#'; trashLink.setAttribute('rel', String(rowID_new)); }
 		var trashLinkEdit = byId(clonedRow, 'trash_link_edit' + rowID_old); if (trashLinkEdit) { trashLinkEdit.id = 'trash_link_edit' + rowID_new; trashLinkEdit.name = 'trash_link_edit' + rowID_new; trashLinkEdit.href = '#'; trashLinkEdit.setAttribute('rel', String(rowID_new)); }
+		// Row 0 has a placeholder span instead of a delete button — replace it with a real one
+		var tdFirst = clonedRow.querySelector('.si-del-col');
+		var placeholderSpan = tdFirst ? tdFirst.querySelector('span.text-muted') : null;
+		if (placeholderSpan) {
+			var isEdit = !!document.getElementById('delete0');
+			var linkClass = isEdit ? 'trash_link_edit' : 'trash_link';
+			var linkId = isEdit ? 'trash_link_edit' + rowID_new : 'trash_link' + rowID_new;
+			var existingBtn = itemtable.querySelector('.' + linkClass);
+			var linkTitle = existingBtn ? (existingBtn.getAttribute('title') || '') : '';
+			var newBtn = document.createElement('a');
+			newBtn.id = linkId;
+			newBtn.className = linkClass + ' btn btn-icon btn-sm btn-outline-danger';
+			newBtn.href = '#';
+			newBtn.setAttribute('rel', String(rowID_new));
+			if (linkTitle) newBtn.setAttribute('title', linkTitle);
+			var icon = document.createElement('i');
+			icon.className = 'ti ti-trash';
+			if (isEdit) icon.id = 'delete_image' + rowID_new;
+			newBtn.appendChild(icon);
+			placeholderSpan.parentNode.replaceChild(newBtn, placeholderSpan);
+		}
 		var del = byId(clonedRow, 'delete' + rowID_old); if (del) { del.id = 'delete' + rowID_new; del.name = 'delete' + rowID_new; }
 		var delImg = byId(clonedRow, 'delete_image' + rowID_old); if (delImg) { delImg.id = 'delete_image' + rowID_new; delImg.name = 'delete_image' + rowID_new; delImg.src = './images/common/delete_item.png'; }
 		var trashImg = clonedRow.querySelector('#trash_image' + rowID_old); if (trashImg) trashImg.src = './images/common/delete_item.png';
 		var lineItem = byId(clonedRow, 'line_item' + rowID_old); if (lineItem) { lineItem.id = 'line_item' + rowID_new; lineItem.name = 'line_item' + rowID_new; lineItem.value = ''; }
-		var qNew = byId(clonedRow, 'quantity' + rowID_old); if (qNew) { qNew.id = 'quantity' + rowID_new; qNew.name = 'quantity' + rowID_new; qNew.removeAttribute('value'); qNew.classList.remove('validate[required]'); }
+		var qNew = byId(clonedRow, 'quantity' + rowID_old); if (qNew) { qNew.id = 'quantity' + rowID_new; qNew.name = 'quantity' + rowID_new; qNew.removeAttribute('value'); qNew.value = ''; qNew.classList.remove('validate[required]'); }
 		var products = byId(clonedRow, 'products' + rowID_old); if (products) {
 			products.setAttribute('rel', String(rowID_new)); products.id = 'products' + rowID_new; products.name = 'products' + rowID_new;
 			products.querySelectorAll('option').forEach(function (o) { o.removeAttribute('selected'); });
-			var emptyOpt = document.createElement('option'); emptyOpt.value = ''; emptyOpt.textContent = '';
-			products.insertBefore(emptyOpt, products.firstChild);
+			if (!products.querySelector('option[value=""]')) {
+				var emptyOpt = document.createElement('option'); emptyOpt.value = ''; emptyOpt.textContent = '';
+				products.insertBefore(emptyOpt, products.firstChild);
+			}
 			products.selectedIndex = 0;
 			products.classList.remove('validate[required]');
 		}
-		var upOld = clonedRow.querySelector('#unit_price' + rowID_old); if (upOld) { upOld.id = 'unit_price' + rowID_new; upOld.name = 'unit_price' + rowID_new; upOld.value = ''; upOld.classList.remove('validate[required]'); }
+		var upOld = clonedRow.querySelector('#unit_price' + rowID_old); if (upOld) { upOld.id = 'unit_price' + rowID_new; upOld.name = 'unit_price' + rowID_new; upOld.value = ''; upOld.removeAttribute('value'); upOld.classList.remove('validate[required]'); }
 		var descOld = clonedRow.querySelector('#description' + rowID_old); if (descOld) { descOld.id = 'description' + rowID_new; descOld.name = 'description' + rowID_new; descOld.value = si_lang_description; descOld.style.color = '#b2adad'; descOld.classList.remove('validate[required]'); }
+		var showDetailsBtnAdd = document.querySelector('a.show-details');
+		var globalShowActiveAdd = showDetailsBtnAdd && showDetailsBtnAdd.classList.contains('si_hide');
 		clonedRow.querySelectorAll('.details').forEach(function (el) {
-			el.classList.add('si_hide');
+			if (globalShowActiveAdd) el.classList.remove('si_hide');
+			else el.classList.add('si_hide');
 			el.classList.remove('si_show');
 			el.style.display = '';
 		});
-		var tax0 = clonedRow.querySelector('[id="tax_id[' + rowID_old + '][0]"]'); if (tax0) { tax0.id = 'tax_id[' + rowID_new + '][0]'; tax0.name = 'tax_id[' + rowID_new + '][0]'; }
-		var tax1 = clonedRow.querySelector('[id="tax_id[' + rowID_old + '][1]"]'); if (tax1) { tax1.id = 'tax_id[' + rowID_new + '][1]'; tax1.name = 'tax_id[' + rowID_new + '][1]'; }
+		var tax0 = clonedRow.querySelector('[id="tax_id[' + rowID_old + '][0]"]'); if (tax0) { tax0.id = 'tax_id[' + rowID_new + '][0]'; tax0.name = 'tax_id[' + rowID_new + '][0]'; tax0.value = ''; }
+		var tax1 = clonedRow.querySelector('[id="tax_id[' + rowID_old + '][1]"]'); if (tax1) { tax1.id = 'tax_id[' + rowID_new + '][1]'; tax1.name = 'tax_id[' + rowID_new + '][1]'; tax1.value = ''; }
 		var jsonHtmlOld = clonedRow.querySelector('#json_html' + rowID_old); if (jsonHtmlOld) jsonHtmlOld.remove();
 		itemtable.appendChild(clonedRow);
 		if (window.hugeRTE) {

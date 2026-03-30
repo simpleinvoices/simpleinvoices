@@ -110,96 +110,97 @@
 			@endphp
 
 			{{-- Line items --}}
-			<div class="table-responsive mb-2">
-				<table id="itemtable" class="table table-vcenter table-sm si_invoice_items">
-					<thead>
-						<tr class="table-light">
-							<th style="width:2rem"></th>
-							<th style="width:6rem">{{ $LANG['quantity_short'] ?? '' }}</th>
-							<th>{{ $LANG['description'] ?? '' }}</th>
-							@for($tax_header = 0; $tax_header < (int)($defaults['tax_per_line_item'] ?? 0); $tax_header++)
-								<th style="width:10rem">{{ $LANG['tax'] ?? '' }} @if(($defaults['tax_per_line_item'] ?? 0) > 1){{ ($tax_header + 1) }}@endif</th>
-							@endfor
-							<th style="width:9rem" class="text-end">{{ $LANG['unit_price'] ?? '' }}</th>
-						</tr>
-					</thead>
+			{{-- Desktop column header --}}
+			<div class="row g-2 d-none d-lg-flex mb-1 px-1">
+				<div class="col-auto si-del-col-hdr"></div>
+				<div class="col-4 col-lg-1 small fw-medium text-secondary">{{ $LANG['quantity_short'] ?? '' }}</div>
+				<div class="col-12 col-lg small fw-medium text-secondary">{{ $LANG['description'] ?? '' }}</div>
+				@for($tax_header = 0; $tax_header < (int)($defaults['tax_per_line_item'] ?? 0); $tax_header++)
+					<div class="col-12 col-sm-6 col-lg-2 small fw-medium text-secondary">{{ $LANG['tax'] ?? '' }}@if(($defaults['tax_per_line_item'] ?? 0) > 1) {{ ($tax_header + 1) }}@endif</div>
+				@endfor
+				<div class="col col-lg-2 small fw-medium text-secondary text-end">{{ $LANG['unit_price'] ?? '' }}</div>
+			</div>
 
-					@foreach(($invoiceItems ?? []) as $line => $invoiceItem)
-					<tbody class="line_item" id="row{{ $line }}">
-						<tr>
-							<td>
-								@if($line == 0)
-									<span class="text-muted" style="display:inline-block;width:1.75rem;"></span>
-								@else
-									<a
-										id="trash_link_edit{{ $line }}"
-										class="trash_link_edit btn btn-icon btn-sm btn-outline-danger"
-										title="{{ $LANG['delete_line_item'] ?? '' }}"
-										href="#"
-										rel="{{ $line }}"
-									><i id="delete_image{{ $line }}" class="ti ti-trash"></i></a>
-								@endif
-							</td>
-							<td>
-								<input type="hidden" id="delete{{ $line }}" name="delete{{ $line }}" />
-								<input
-									type="text"
-									name="quantity{{ $line }}"
-									id="quantity{{ $line }}"
-									value="{{ siLocal::number($invoiceItem['quantity'] ?? '') }}"
-									class="form-control form-control-sm text-end"
-								/>
-								<input type="hidden" name="line_item{{ $line }}" id="line_item{{ $line }}" value="{{ $invoiceItem['id'] ?? '' }}" />
-							</td>
-							<td>
-								@if($products == null)
-									<p class="text-muted mb-0"><em>{{ $LANG['no_products'] ?? '' }}</em></p>
-								@else
-									<select
-										name="products{{ $line }}"
-										id="products{{ $line }}"
-										rel="{{ $line }}"
-										class="form-select form-select-sm product_change"
-									>
-										@foreach(($products ?? []) as $product)
-											<option @if($product['id'] == $invoiceItem['product_id']) selected @endif value="{{ $product['id'] ?? '' }}">{{ $product['description'] ?? '' }}</option>
-										@endforeach
-									</select>
-								@endif
-							</td>
-							@for($taxIdx = 0; $taxIdx < (int)($defaults['tax_per_line_item'] ?? 0); $taxIdx++)
-							<td>
+			<div id="itemtable" class="mb-2">
+				@foreach(($invoiceItems ?? []) as $line => $invoiceItem)
+				<div class="line_item si-line-item" id="row{{ $line }}">
+					<div class="row g-2 align-items-end">
+						<div class="col-auto si-del-col">
+							@if($line == 0)
+								<span class="text-muted" style="display:inline-block;width:1.75rem;"></span>
+							@else
+								<a
+									id="trash_link_edit{{ $line }}"
+									class="trash_link_edit btn btn-icon btn-sm btn-outline-danger"
+									title="{{ $LANG['delete_line_item'] ?? '' }}"
+									href="#"
+									rel="{{ $line }}"
+								><i id="delete_image{{ $line }}" class="ti ti-trash"></i></a>
+							@endif
+						</div>
+						<div class="col-4 col-lg-1">
+							<label class="form-label d-lg-none small text-secondary mb-1">{{ $LANG['quantity_short'] ?? '' }}</label>
+							<input type="hidden" id="delete{{ $line }}" name="delete{{ $line }}" />
+							<input
+								type="text"
+								name="quantity{{ $line }}"
+								id="quantity{{ $line }}"
+								value="{{ siLocal::number($invoiceItem['quantity'] ?? '') }}"
+								class="form-control form-control-sm text-end"
+							/>
+							<input type="hidden" name="line_item{{ $line }}" id="line_item{{ $line }}" value="{{ $invoiceItem['id'] ?? '' }}" />
+						</div>
+						<div class="col-12 col-lg">
+							<label class="form-label d-lg-none small text-secondary mb-1">{{ $LANG['description'] ?? '' }}</label>
+							@if($products == null)
+								<p class="text-muted mb-0"><em>{{ $LANG['no_products'] ?? '' }}</em></p>
+							@else
 								<select
-									id="tax_id[{{ $line }}][{{ $taxIdx }}]"
-									name="tax_id[{{ $line }}][{{ $taxIdx }}]"
-									class="form-select form-select-sm"
+									name="products{{ $line }}"
+									id="products{{ $line }}"
+									rel="{{ $line }}"
+									class="form-select form-select-sm product_change"
 								>
-									<option value=""></option>
-									@foreach(($taxes ?? []) as $taxOption)
-										<option @if(($invoiceItem['tax'][$taxIdx] ?? '') === ($taxOption['tax_id'] ?? '')) selected @endif value="{{ $taxOption['tax_id'] ?? '' }}">{{ $taxOption['tax_description'] ?? '' }}</option>
+									@foreach(($products ?? []) as $product)
+										<option @if($product['id'] == $invoiceItem['product_id']) selected @endif value="{{ $product['id'] ?? '' }}">{{ $product['description'] ?? '' }}</option>
 									@endforeach
 								</select>
-							</td>
-							@endfor
-							<td>
-								<input
-									id="unit_price{{ siLocal::number_clean($line) }}"
-									name="unit_price{{ $line }}"
-									value="{{ $invoiceItem['unit_price'] ?? '' }}"
-									class="form-control form-control-sm text-end"
-								/>
-							</td>
-						</tr>
-						{!! $invoiceItem['html'] !!}
-						<tr class="details {{ $showDetailsInitially ? '' : 'si_hide' }}">
-							<td></td>
-							<td colspan="{{ 3 + (int)($defaults['tax_per_line_item'] ?? 0) }}">
-								<textarea class="form-control form-control-sm detail" name="description{{ $line }}" id="description{{ $line }}" rows="2">{{ $invoiceItem['description'] }}</textarea>
-							</td>
-						</tr>
-					</tbody>
-					@endforeach
-				</table>
+							@endif
+						</div>
+						@for($taxIdx = 0; $taxIdx < (int)($defaults['tax_per_line_item'] ?? 0); $taxIdx++)
+						<div class="col-12 col-sm-6 col-lg-2">
+							<label class="form-label d-lg-none small text-secondary mb-1">{{ $LANG['tax'] ?? '' }}@if(($defaults['tax_per_line_item'] ?? 0) > 1) {{ ($taxIdx + 1) }}@endif</label>
+							<select
+								id="tax_id[{{ $line }}][{{ $taxIdx }}]"
+								name="tax_id[{{ $line }}][{{ $taxIdx }}]"
+								class="form-select form-select-sm"
+							>
+								<option value=""></option>
+								@foreach(($taxes ?? []) as $taxOption)
+									<option @if(($invoiceItem['tax'][$taxIdx] ?? '') === ($taxOption['tax_id'] ?? '')) selected @endif value="{{ $taxOption['tax_id'] ?? '' }}">{{ $taxOption['tax_description'] ?? '' }}</option>
+								@endforeach
+							</select>
+						</div>
+						@endfor
+						<div class="col col-lg-2">
+							<label class="form-label d-lg-none small text-secondary mb-1">{{ $LANG['unit_price'] ?? '' }}</label>
+							<input
+								id="unit_price{{ siLocal::number_clean($line) }}"
+								name="unit_price{{ $line }}"
+								value="{{ $invoiceItem['unit_price'] ?? '' }}"
+								class="form-control form-control-sm text-end"
+							/>
+						</div>
+					</div>
+					{!! $invoiceItem['html'] !!}
+					<div class="row g-2 details {{ $showDetailsInitially ? '' : 'si_hide' }} mt-1">
+						<div class="col-auto si-del-col d-none d-lg-block"></div>
+						<div class="col-12 col-lg">
+							<textarea class="form-control form-control-sm detail" name="description{{ $line }}" id="description{{ $line }}" rows="2">{{ $invoiceItem['description'] }}</textarea>
+						</div>
+					</div>
+				</div>
+				@endforeach
 			</div>
 
 			<div class="btn-list mb-4">
