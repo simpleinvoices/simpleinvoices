@@ -119,6 +119,9 @@
 					<div class="col col-lg-2 small fw-medium text-secondary">{{ $LANG['tax'] ?? '' }}@if(($defaults['tax_per_line_item'] ?? 0) > 1) {{ ($tax_header + 1) }}@endif</div>
 				@endfor
 				<div class="col col-lg-2 small fw-medium text-secondary text-end">{{ $LANG['unit_price'] ?? '' }}</div>
+				<div class="col-auto si-expand-col-hdr d-flex align-items-end">
+					<a href="#" class="si-toggle-all-desc btn btn-icon btn-sm btn-outline-secondary" title="{{ $LANG['description'] ?? 'Description' }}"><i class="ti {{ $showDetailsInitially ? 'ti-chevrons-up' : 'ti-chevrons-down' }}"></i></a>
+				</div>
 			</div>
 
 			<div id="itemtable" class="mb-2">
@@ -193,6 +196,9 @@
 								class="form-control form-control-sm text-end"
 							/>
 						</div>
+						<div class="col-auto d-flex align-items-end">
+							<a href="#" class="si-expand-desc btn btn-icon btn-sm btn-outline-secondary" title="{{ $LANG['description'] ?? 'Description' }}"><i class="ti {{ $showDetailsInitially ? 'ti-chevron-up' : 'ti-chevron-down' }}"></i></a>
+						</div>
 					</div>
 					{!! $invoiceItem['html'] !!}
 					<div class="row g-2 details {{ $showDetailsInitially ? '' : 'si_hide' }} mt-1">
@@ -207,8 +213,6 @@
 
 			<div class="btn-list mb-4">
 				<a href="#" class="add_line_item btn btn-outline-primary btn-sm"><i class="ti ti-plus me-1"></i>{{ $LANG['add_new_row'] ?? '' }}</a>
-				<a href="#" class="show-details {{ $showDetailsInitially ? 'si_hide' : '' }} btn btn-outline-secondary btn-sm" onclick="document.querySelectorAll('.details').forEach(function(e){e.classList.remove('si_hide');});document.querySelectorAll('.show-details').forEach(function(e){e.classList.add('si_hide');});return false;"><i class="ti ti-eye me-1"></i>{{ $LANG['show_details'] ?? '' }}</a>
-				<a href="#" class="details {{ $showDetailsInitially ? '' : 'si_hide' }} btn btn-outline-secondary btn-sm" onclick="document.querySelectorAll('.details').forEach(function(e){e.classList.add('si_hide');});document.querySelectorAll('.show-details').forEach(function(e){e.classList.remove('si_hide');});return false;"><i class="ti ti-eye-off me-1"></i>{{ $LANG['hide_details'] ?? '' }}</a>
 			</div>
 
 			{{-- Custom fields --}}

@@ -1,5 +1,5 @@
 {{-- User details / edit template --}}
-<form name="frmpost" action="index.php?module=user&view=save&id={{ urlencode(get('id')) }}" method="post" id="frmpost" onsubmit="return checkForm(this);">
+<form name="frmpost" action="index.php?module=user&view=save&id={{ urlencode(get('id')) }}" method="post" id="frmpost" onsubmit="return checkForm(this);" autocomplete="off">
 
 @if(get('action') == 'view')
 
@@ -25,10 +25,6 @@
 			<tr>
 				<th>{{ $LANG['enabled'] ?? '' }}</th>
 				<td>{{ $user['lang_enabled'] ?? '' }}</td>
-			</tr>
-			<tr>
-				<th>{{ $LANG['users'] ?? '' }}</th>
-				<td>{{ $user['user_id'] ?? '' }}</td>
 			</tr>
 		</table>
 	</div>
@@ -76,15 +72,11 @@
 					<i class="ti ti-help"></i>
 				</a>
 			</label>
-			<input type="password" name="password_field" value="" class="form-control" />
+			<input type="password" name="password_field" value="" autocomplete="new-password" class="form-control" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['enabled'] ?? '' }}</label>
 			{html_options name=enabled options=$enabled selected=$user['enabled'] class="form-select"}
-		</div>
-		<div class="mb-3">
-			<label class="form-label">{{ $LANG['users'] ?? '' }}</label>
-			<input type="text" name="user_id" autocomplete="off" value="{{ $user['user_id'] ?? '' }}" id="user_id" class="form-control validate[required]" />
 		</div>
 	</div>
 	<div class="card-footer">

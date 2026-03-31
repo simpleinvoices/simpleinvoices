@@ -46,8 +46,8 @@
 				var t1 = document.querySelector('#row' + row_number + ' [name="tax_id[' + row_number + '][1]"]');
 				if (t1) t1.value = (data.default_tax_id_2 != null) ? data.default_tax_id_2 : '';
 				var detailsTr = document.querySelectorAll('#row' + row_number + ' .details');
-				var showDetailsBtn = document.querySelector('a.show-details');
-				var globalShowActive = showDetailsBtn && showDetailsBtn.classList.contains('si_hide');
+				var toggleAllBtn = document.querySelector('.si-toggle-all-desc i');
+				var globalShowActive = toggleAllBtn && toggleAllBtn.classList.contains('ti-chevrons-up');
 				detailsTr.forEach(function (tr) {
 					if (data.show_description === 'Y' || globalShowActive) tr.classList.remove('si_hide');
 					else tr.classList.add('si_hide');
@@ -173,14 +173,23 @@
 		}
 		var upOld = clonedRow.querySelector('#unit_price' + rowID_old); if (upOld) { upOld.id = 'unit_price' + rowID_new; upOld.name = 'unit_price' + rowID_new; upOld.value = ''; upOld.removeAttribute('value'); upOld.classList.remove('validate[required]'); }
 		var descOld = clonedRow.querySelector('#description' + rowID_old); if (descOld) { descOld.id = 'description' + rowID_new; descOld.name = 'description' + rowID_new; descOld.value = si_lang_description; descOld.style.color = '#b2adad'; descOld.classList.remove('validate[required]'); }
-		var showDetailsBtnAdd = document.querySelector('a.show-details');
-		var globalShowActiveAdd = showDetailsBtnAdd && showDetailsBtnAdd.classList.contains('si_hide');
+		var toggleAllBtnAdd = document.querySelector('.si-toggle-all-desc i');
+		var globalShowActiveAdd = toggleAllBtnAdd && toggleAllBtnAdd.classList.contains('ti-chevrons-up');
 		clonedRow.querySelectorAll('.details').forEach(function (el) {
 			if (globalShowActiveAdd) el.classList.remove('si_hide');
 			else el.classList.add('si_hide');
 			el.classList.remove('si_show');
 			el.style.display = '';
 		});
+		var expandBtn = clonedRow.querySelector('.si-expand-desc');
+		if (expandBtn) {
+			var expandIcon = expandBtn.querySelector('i');
+			if (globalShowActiveAdd) {
+				if (expandIcon) { expandIcon.classList.remove('ti-chevron-down'); expandIcon.classList.add('ti-chevron-up'); }
+			} else {
+				if (expandIcon) { expandIcon.classList.remove('ti-chevron-up'); expandIcon.classList.add('ti-chevron-down'); }
+			}
+		}
 		var tax0 = clonedRow.querySelector('[id="tax_id[' + rowID_old + '][0]"]'); if (tax0) { tax0.id = 'tax_id[' + rowID_new + '][0]'; tax0.name = 'tax_id[' + rowID_new + '][0]'; tax0.value = ''; }
 		var tax1 = clonedRow.querySelector('[id="tax_id[' + rowID_old + '][1]"]'); if (tax1) { tax1.id = 'tax_id[' + rowID_new + '][1]'; tax1.name = 'tax_id[' + rowID_new + '][1]'; tax1.value = ''; }
 		var jsonHtmlOld = clonedRow.querySelector('#json_html' + rowID_old); if (jsonHtmlOld) jsonHtmlOld.remove();
@@ -201,6 +210,45 @@
 		var el = document.getElementById('export_dialog');
 		if (el && window.bootstrap && window.bootstrap.Modal) { var m = window.bootstrap.Modal.getOrCreateInstance(el); m.show(); }
 	}
+
+	function siToggleAllDesc(show) {
+		document.querySelectorAll('.details').forEach(function (e) {
+			if (show) e.classList.remove('si_hide'); else e.classList.add('si_hide');
+		});
+		document.querySelectorAll('.si-expand-desc').forEach(function (b) {
+			var i = b.querySelector('i');
+			if (i) { i.classList.toggle('ti-chevron-down', !show); i.classList.toggle('ti-chevron-up', show); }
+		});
+		document.querySelectorAll('.si-toggle-all-desc').forEach(function (b) {
+			var i = b.querySelector('i');
+			if (i) { i.classList.toggle('ti-chevrons-down', !show); i.classList.toggle('ti-chevrons-up', show); }
+		});
+	}
+
+	document.addEventListener('click', function (e) {
+		var allBtn = e.target.closest('.si-toggle-all-desc');
+		if (allBtn) {
+			e.preventDefault();
+			var icon = allBtn.querySelector('i');
+			siToggleAllDesc(icon && icon.classList.contains('ti-chevrons-down'));
+			return;
+		}
+		var btn = e.target.closest('.si-expand-desc');
+		if (!btn) return;
+		e.preventDefault();
+		var lineItem = btn.closest('.si-line-item');
+		if (!lineItem) return;
+		var detailsRow = lineItem.querySelector('.details');
+		if (!detailsRow) return;
+		var icon = btn.querySelector('i');
+		if (detailsRow.classList.contains('si_hide')) {
+			detailsRow.classList.remove('si_hide');
+			if (icon) { icon.classList.remove('ti-chevron-down'); icon.classList.add('ti-chevron-up'); }
+		} else {
+			detailsRow.classList.add('si_hide');
+			if (icon) { icon.classList.remove('ti-chevron-up'); icon.classList.add('ti-chevron-down'); }
+		}
+	});
 
 	function invoice_save_remove_autofill() {
 		siLog('debug', 'executed invoice save remove');

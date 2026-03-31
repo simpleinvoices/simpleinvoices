@@ -49,6 +49,14 @@ if ($op === 'insert_user') {
 
 if ($op === 'edit_user') {
 	requireCSRFProtection('user_save');
+
+	// Prevent the currently logged-in user from disabling themselves
+	$editingId = (int) ($_POST['id'] ?? 0);
+	$enabledValue = (int) ($_POST['enabled'] ?? 1);
+	if ($editingId === (int) $auth_session->id && $enabledValue === 0) {
+		$enabledValue = 1;
+	}
+
 	$passwordField = trim((string) ($_POST['password_field'] ?? ''));
 	if ($passwordField !== '') {
 		$passwordHash = auth_hash_password($passwordField);
@@ -58,9 +66,9 @@ if ($op === 'edit_user') {
 			':name', $_POST['name'] ?? '',
 			':password', $passwordHash,
 			':role', (int) ($_POST['role'] ?? 0),
-			':enabled', (int) ($_POST['enabled'] ?? 1),
+			':enabled', $enabledValue,
 			':user_id', (int) ($_POST['user_id'] ?? 0),
-			':id', (int) ($_POST['id'] ?? 0)
+			':id', $editingId
 		);
 	} else {
 		$sql = "UPDATE " . TB_PREFIX . "user SET email = :email, name = :name, role_id = :role, enabled = :enabled, user_id = :user_id WHERE id = :id";
@@ -68,9 +76,9 @@ if ($op === 'edit_user') {
 			':email', $_POST['email'] ?? '',
 			':name', $_POST['name'] ?? '',
 			':role', (int) ($_POST['role'] ?? 0),
-			':enabled', (int) ($_POST['enabled'] ?? 1),
+			':enabled', $enabledValue,
 			':user_id', (int) ($_POST['user_id'] ?? 0),
-			':id', (int) ($_POST['id'] ?? 0)
+			':id', $editingId
 		);
 	}
 	if ($sth) {

@@ -12,7 +12,7 @@
 	@include('templates.default.user.save')
 @else
 
-<form name="frmpost" action="index.php?module=user&amp;view=add" method="post" id="frmpost">
+<form name="frmpost" action="index.php?module=user&amp;view=add" method="post" id="frmpost" autocomplete="off">
 <div class="card">
 	<div class="card-body">
 		<div class="mb-3">
@@ -41,15 +41,11 @@
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['password'] ?? '' }}</label>
-			<input type="password" name="password_field" value="{{ post('password_field') }}" class="form-control" />
+			<input type="password" name="password_field" value="{{ post('password_field') }}" autocomplete="new-password" class="form-control" />
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['enabled'] ?? '' }}</label>
 			{html_options name=enabled options=$enabled selected=1 class="form-select"}
-		</div>
-		<div class="mb-3">
-			<label class="form-label">{{ $LANG['users'] ?? '' }}</label>
-			<input type="text" name="user_id" value="{{ post('user_id') }}" size="12" id="user_id" autocomplete="off" class="form-control validate[required]" />
 		</div>
 	</div>
 	<div class="card-footer">
