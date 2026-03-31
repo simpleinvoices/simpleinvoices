@@ -178,7 +178,7 @@
                             <span class="nav-link-icon d-md-none d-lg-inline-block"><i class="ti ti-settings"></i></span>
                             <span class="nav-link-title">{{ $LANG['settings'] ?? 'Settings' }}</span>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-end">
+                        <div class="dropdown-menu dropdown-menu-lg-end">
                             <a class="dropdown-item @if(($module ?? '') == 'system_defaults') active @endif" href="index.php?module=system_defaults&view=manage">
                                 <i class="ti ti-adjustments me-2 text-secondary"></i>{{ $LANG['system_preferences'] ?? 'System Preferences' }}
                             </a>
