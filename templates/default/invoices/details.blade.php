@@ -92,10 +92,10 @@
 				@endif
 			</div>
 
-			{{ $customFields['1'] }}
-			{{ $customFields['2'] }}
-			{{ $customFields['3'] }}
-			{{ $customFields['4'] }}
+			{!! $customFields['1'] !!}
+			{!! $customFields['2'] !!}
+			{!! $customFields['3'] !!}
+			{!! $customFields['4'] !!}
 			@showCustomFields(4, get('invoice'))
 
 		@endif
@@ -212,10 +212,10 @@
 			</div>
 
 			{{-- Custom fields --}}
-			{{ $customFields['1'] }}
-			{{ $customFields['2'] }}
-			{{ $customFields['3'] }}
-			{{ $customFields['4'] }}
+			{!! $customFields['1'] !!}
+			{!! $customFields['2'] !!}
+			{!! $customFields['3'] !!}
+			{!! $customFields['4'] !!}
 			@showCustomFields(4, get('invoice'))
 
 			{{-- Notes --}}

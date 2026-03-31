@@ -113,7 +113,7 @@ function auth_authenticate_user($email, $password)
 
     if ($schema === 'modern') {
         $sth = dbQuery(
-            "SELECT u.id, u.email, u.password, r.name AS role_name, u.domain_id, u.user_id
+            "SELECT u.id, u.email, u.name, u.password, r.name AS role_name, u.domain_id, u.user_id
              FROM " . TB_PREFIX . "user u
              LEFT JOIN " . TB_PREFIX . "user_role r ON (u.role_id = r.id)
              WHERE u.email = :email AND u.enabled = :enabled",

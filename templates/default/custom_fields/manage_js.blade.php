@@ -23,7 +23,7 @@
 			nomsg: @json($LANG['no_items'] ?? 'No items'),
 			pagemsg: @json($LANG['page'] ?? 'Page'),
 			ofmsg: @json($LANG['of'] ?? 'of'),
-			rp: 10,
+			rp: 1000,
 			showToggleBtn: false,
 			showTableToggleBtn: false,
 			width: 'auto',

@@ -69,10 +69,10 @@
 			</td>		
 		</tr>
 
-	{{ $show_custom_field['1'] }}
-	{{ $show_custom_field['2'] }}
-	{{ $show_custom_field['3'] }}
-	{{ $show_custom_field['4'] }}
+	{!! $show_custom_field['1'] !!}
+	{!! $show_custom_field['2'] !!}
+	{!! $show_custom_field['3'] !!}
+	{!! $show_custom_field['4'] !!}
 
 
 	</table>
