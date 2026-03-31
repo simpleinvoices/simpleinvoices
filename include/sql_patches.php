@@ -1717,3 +1717,12 @@ PRIMARY KEY ( `domain_id`, `id` )
         ";
     }
     $patch['294']['date']  = "20260329";
+
+    $patch['295']['name']  = "Add name field to user table for display name";
+    if ($config->database->adapter === "pdo_pgsql") {
+        $patch['295']['patch'] = "ALTER TABLE ".TB_PREFIX."user ADD COLUMN name VARCHAR(255) NULL;";
+    } else {
+        $patch['295']['patch'] = "ALTER TABLE `".TB_PREFIX."user` ADD COLUMN `name` VARCHAR(255) NULL AFTER `email`;";
+    }
+    $patch['295']['date']  = "20260331";
+

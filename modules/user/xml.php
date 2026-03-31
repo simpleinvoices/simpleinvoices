@@ -61,19 +61,20 @@ function sql($type='', $dir, $sort, $rp, $page )
 	}
 	
 	//$sql = "SELECT * FROM ".TB_PREFIX."customers ORDER BY $sort $dir LIMIT $start, $limit";
-	$sql = "SELECT 
-				u.id, 
-				u.email, 
+	$sql = "SELECT
+				u.id,
+				u.name,
+				u.email,
 				ur.name as role,
 				(SELECT (CASE WHEN u.enabled = ".ENABLED." THEN '".$LANG['enabled']."' ELSE '".$LANG['disabled']."' END )) AS enabled,
 				user_id
-			FROM 
+			FROM
 				".TB_PREFIX."user u LEFT JOIN
 				".TB_PREFIX."user_role ur ON (u.role_id = ur.id)
-			WHERE u.domain_id = :domain_id 
+			WHERE u.domain_id = :domain_id
 				$where
-			ORDER BY 
-				$sort $dir 
+			ORDER BY
+				$sort $dir
 			$limit";
 
 	if (empty($query)) {
@@ -98,16 +99,17 @@ $xml .= "<page>$page</page>";
 $xml .= "<total>$count</total>";
 
 foreach ($user as $row) {
-	$email_esc = htmlspecialchars($row['email']);
+	$display_esc = htmlspecialchars(!empty($row['name']) ? $row['name'] : $row['email']);
 	$action  = '<div class="dropdown">';
 	$action .= '<a class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><span class="d-none d-sm-inline">'.$LANG['actions'].'</span><span class="d-sm-none"><i class="ti ti-dots-vertical" aria-hidden="true"></i></span></a>';
 	$action .= '<div class="dropdown-menu dropdown-menu-end">';
-	$action .= '<a class="dropdown-item" href="index.php?module=user&amp;view=details&amp;id='.$row['id'].'&amp;action=view"><i class="ti ti-eye me-2"></i>'.$LANG['view'].' '.$email_esc.'</a>';
-	$action .= '<a class="dropdown-item" href="index.php?module=user&amp;view=details&amp;id='.$row['id'].'&amp;action=edit"><i class="ti ti-edit me-2"></i>'.$LANG['edit'].' '.$email_esc.'</a>';
+	$action .= '<a class="dropdown-item" href="index.php?module=user&amp;view=details&amp;id='.$row['id'].'&amp;action=view"><i class="ti ti-eye me-2"></i>'.$LANG['view'].' '.$display_esc.'</a>';
+	$action .= '<a class="dropdown-item" href="index.php?module=user&amp;view=details&amp;id='.$row['id'].'&amp;action=edit"><i class="ti ti-edit me-2"></i>'.$LANG['edit'].' '.$display_esc.'</a>';
 	$action .= '</div></div>';
 	$xml .= "<row id='".$row['id']."'>";
 	$xml .= "<cell><![CDATA[".$action."]]></cell>";
-	$xml .= "<cell><![CDATA[".$row['email']."]]></cell>";
+	$xml .= "<cell><![CDATA[".htmlspecialchars($row['name'] ?? '')."]]></cell>";
+	$xml .= "<cell><![CDATA[".htmlspecialchars($row['email'])."]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['role']."]]></cell>";
 	if ($row['enabled']==$LANG['enabled']) {
 		$xml .= "<cell><![CDATA[<img src='images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				

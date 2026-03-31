@@ -145,7 +145,7 @@
 								type="text"
 								name="quantity{{ $line }}"
 								id="quantity{{ $line }}"
-								value="{{ siLocal::number($invoiceItem['quantity'] ?? '') }}"
+								value="{{ siLocal::number_trim($invoiceItem['quantity'] ?? 0) }}"
 								class="form-control form-control-sm text-end"
 							/>
 							<input type="hidden" name="line_item{{ $line }}" id="line_item{{ $line }}" value="{{ $invoiceItem['id'] ?? '' }}" />

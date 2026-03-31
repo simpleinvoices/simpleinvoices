@@ -31,10 +31,11 @@ $saved = false;
 if ($op === 'insert_user') {
 	requireCSRFProtection('user_save');
 	$passwordHash = auth_hash_password((string) ($_POST['password_field'] ?? ''));
-	$sql = "INSERT INTO " . TB_PREFIX . "user (email, password, role_id, domain_id, enabled, user_id)
-	        VALUES (:email, :password, :role, :domain_id, :enabled, :user_id)";
+	$sql = "INSERT INTO " . TB_PREFIX . "user (email, name, password, role_id, domain_id, enabled, user_id)
+	        VALUES (:email, :name, :password, :role, :domain_id, :enabled, :user_id)";
 	$sth = dbQuery($sql,
 		':email', $_POST['email'] ?? '',
+		':name', $_POST['name'] ?? '',
 		':password', $passwordHash,
 		':role', (int) ($_POST['role'] ?? 0),
 		':domain_id', $auth_session->domain_id,
@@ -51,9 +52,10 @@ if ($op === 'edit_user') {
 	$passwordField = trim((string) ($_POST['password_field'] ?? ''));
 	if ($passwordField !== '') {
 		$passwordHash = auth_hash_password($passwordField);
-		$sql = "UPDATE " . TB_PREFIX . "user SET email = :email, password = :password, role_id = :role, enabled = :enabled, user_id = :user_id WHERE id = :id";
+		$sql = "UPDATE " . TB_PREFIX . "user SET email = :email, name = :name, password = :password, role_id = :role, enabled = :enabled, user_id = :user_id WHERE id = :id";
 		$sth = dbQuery($sql,
 			':email', $_POST['email'] ?? '',
+			':name', $_POST['name'] ?? '',
 			':password', $passwordHash,
 			':role', (int) ($_POST['role'] ?? 0),
 			':enabled', (int) ($_POST['enabled'] ?? 1),
@@ -61,9 +63,10 @@ if ($op === 'edit_user') {
 			':id', (int) ($_POST['id'] ?? 0)
 		);
 	} else {
-		$sql = "UPDATE " . TB_PREFIX . "user SET email = :email, role_id = :role, enabled = :enabled, user_id = :user_id WHERE id = :id";
+		$sql = "UPDATE " . TB_PREFIX . "user SET email = :email, name = :name, role_id = :role, enabled = :enabled, user_id = :user_id WHERE id = :id";
 		$sth = dbQuery($sql,
 			':email', $_POST['email'] ?? '',
+			':name', $_POST['name'] ?? '',
 			':role', (int) ($_POST['role'] ?? 0),
 			':enabled', (int) ($_POST['enabled'] ?? 1),
 			':user_id', (int) ($_POST['user_id'] ?? 0),

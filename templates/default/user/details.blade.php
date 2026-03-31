@@ -1,38 +1,36 @@
-{{-- * Script: details.tpl
-* 	Biller details template
-*
-* Last edited:
-* 	 2008-08-25
-*
-* License:
-*	 GPL v3 or above --}}
+{{-- User details / edit template --}}
 <form name="frmpost" action="index.php?module=user&view=save&id={{ urlencode(get('id')) }}" method="post" id="frmpost" onsubmit="return checkForm(this);">
-@if(get('action')== 'view' )
+
+@if(get('action') == 'view')
 
 <div class="card">
 	<div class="card-body">
-	<table class="table table-vcenter">
-		<tr>
-			<th>{{ $LANG['email'] ?? '' }}</th>
-			<td>{{ $user['email'] ?? '' }}</td>
-		</tr>
-		<tr>
-			<th>{{ $LANG['role'] ?? '' }}</th>
-			<td>{{ $user['role_name'] ?? '' }}</td>
-		</tr>
-		<tr>
-			<th>{{ $LANG['password'] ?? '' }}</th>
-			<td>*********</td>
-		</tr>
-		<tr>
-			<th>{{ $LANG['enabled'] ?? '' }}</th>
-			<td>{{ $user['lang_enabled'] ?? '' }}</td>
-		</tr>
-		<tr>
-			<th>{{ $LANG['users'] ?? '' }}</th>
-			<td>{{ $user['user_id'] ?? '' }}</td>
-		</tr>
-	</table>
+		<table class="table table-vcenter">
+			<tr>
+				<th>{{ $LANG['name'] ?? 'Name' }}</th>
+				<td>{{ $user['name'] ?? '' }}</td>
+			</tr>
+			<tr>
+				<th>{{ $LANG['email'] ?? '' }}</th>
+				<td>{{ $user['email'] ?? '' }}</td>
+			</tr>
+			<tr>
+				<th>{{ $LANG['role'] ?? '' }}</th>
+				<td>{{ $user['role_name'] ?? '' }}</td>
+			</tr>
+			<tr>
+				<th>{{ $LANG['password'] ?? '' }}</th>
+				<td>*********</td>
+			</tr>
+			<tr>
+				<th>{{ $LANG['enabled'] ?? '' }}</th>
+				<td>{{ $user['lang_enabled'] ?? '' }}</td>
+			</tr>
+			<tr>
+				<th>{{ $LANG['users'] ?? '' }}</th>
+				<td>{{ $user['user_id'] ?? '' }}</td>
+			</tr>
+		</table>
 	</div>
 	<div class="card-footer">
 		<div class="d-flex">
@@ -41,83 +39,65 @@
 		</div>
 	</div>
 </div>
+
 @endif
 
+@if(get('action') == 'edit')
 
-
-@if(get('action')== 'edit' )
 <div class="card">
 	<div class="card-body">
-	<table class="table table-vcenter">
-		<tr>
-			<th>{{ $LANG['email'] ?? '' }} 
-			<a 
-					class="cluetip"
-					href="#"
-					rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field"
-					title="{{ $LANG['required_field'] ?? '' }}"
-			>
-			<i class="ti ti-alert-circle text-danger"></i>
-			</a>	
-			</th>
-			<td><input type="text" name="email" autocomplete="off" value="{{ $user['email'] ?? '' }}" size="35" id="email" class="form-control validate[required]" /></td>
-		</tr>
-		<tr>
-			<th>{{ $LANG['role'] ?? '' }} 
-				<a
-					class="cluetip"
-					href="#"
-					rel="index.php?module=documentation&amp;view=view&amp;page=help_user_role"
-					title="{{ $LANG['role'] ?? '' }}"
-				> 
-				<i class="ti ti-help"></i>
+		<div class="mb-3">
+			<label class="form-label">{{ $LANG['name'] ?? 'Name' }}</label>
+			<input type="text" name="name" autocomplete="off" value="{{ $user['name'] ?? '' }}" id="name" class="form-control" />
+		</div>
+		<div class="mb-3">
+			<label class="form-label">{{ $LANG['email'] ?? '' }}
+				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field" title="{{ $LANG['required_field'] ?? '' }}">
+					<i class="ti ti-asterisk text-danger"></i>
 				</a>
-			</th>
-			<td>
-					<select name="role" class="form-select">
-						@foreach(($roles ?? []) as $role)
-							<option @if($role['id'] == $user['role_id']) selected @endif value="{{ $role['id'] ?? '' }}">{{ $role['name'] ?? '' }}</option>
-						@endforeach
-					</select>
-			</td>
-		</tr>
-		<tr>
-			<th>
-				{{ $LANG['new_password'] ?? '' }}
-				<a
-					class="cluetip"
-					href="#"
-					rel="index.php?module=documentation&amp;view=view&amp;page=help_new_password"
-					title="{{ $LANG['new_password'] ?? '' }}"
-				> 
-				<i class="ti ti-help"></i>
+			</label>
+			<input type="text" name="email" autocomplete="off" value="{{ $user['email'] ?? '' }}" id="email" class="form-control validate[required]" />
+		</div>
+		<div class="mb-3">
+			<label class="form-label">{{ $LANG['role'] ?? '' }}
+				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_user_role" title="{{ $LANG['role'] ?? '' }}">
+					<i class="ti ti-help"></i>
 				</a>
-			</th>
-			<td>
-			<input type="password" name="password_field" value="" size="25" class="form-control" />
-		</td>
-		</tr>
-		<tr>
-			<th>{{ $LANG['enabled'] ?? '' }}</th>
-			<td>{html_options name=enabled options=$enabled selected=$user['enabled'] class="form-select"}</td>
-		</tr>
-		<tr>
-			<th>{{ $LANG['users'] ?? '' }}</th>
-			<td><input type="text" name="user_id" autocomplete="off" value="{{ $user['user_id'] ?? '' }}" size="12" id="user_id" class="form-control validate[required]" /></td>
-		</tr>
-	</table>
-
+			</label>
+			<select name="role" class="form-select">
+				@foreach(($roles ?? []) as $role)
+					<option @if($role['id'] == $user['role_id']) selected @endif value="{{ $role['id'] ?? '' }}">{{ $role['name'] ?? '' }}</option>
+				@endforeach
+			</select>
+		</div>
+		<div class="mb-3">
+			<label class="form-label">{{ $LANG['new_password'] ?? '' }}
+				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_new_password" title="{{ $LANG['new_password'] ?? '' }}">
+					<i class="ti ti-help"></i>
+				</a>
+			</label>
+			<input type="password" name="password_field" value="" class="form-control" />
+		</div>
+		<div class="mb-3">
+			<label class="form-label">{{ $LANG['enabled'] ?? '' }}</label>
+			{html_options name=enabled options=$enabled selected=$user['enabled'] class="form-select"}
+		</div>
+		<div class="mb-3">
+			<label class="form-label">{{ $LANG['users'] ?? '' }}</label>
+			<input type="text" name="user_id" autocomplete="off" value="{{ $user['user_id'] ?? '' }}" id="user_id" class="form-control validate[required]" />
+		</div>
+	</div>
 	<div class="card-footer">
 		<div class="d-flex">
 			<a href="./index.php?module=user&view=manage" class="btn btn-link">{{ $LANG['cancel'] ?? '' }}</a>
 			<button type="submit" class="btn btn-primary ms-auto" name="save_user"><i class="ti ti-check me-1"></i>{{ $LANG['save'] ?? '' }}</button>
 		</div>
 	</div>
-	</div>
 </div>
 
 <input type="hidden" name="op" value="edit_user" />
 <input type="hidden" name="id" value="{{ $user['id'] ?? '' }}" />
 <input type="hidden" name="csrfprotectionbysr" value="{{ $userSaveCsrfToken ?? '' }}" />
+
 @endif
 </form>

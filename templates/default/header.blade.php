@@ -2,6 +2,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>
+        (function () {
+            var t = localStorage.getItem('siTheme') || 'light';
+            document.documentElement.setAttribute('data-bs-theme', t);
+        }());
+    </script>
     @php
         $tmp_lang_module = $LANG['title_module_'.$module] ?? $LANG[$module] ?? $module;
         $tmp_lang_view = $LANG['title_view_'.$view] ?? $LANG[$view] ?? $view;
@@ -45,6 +51,14 @@
     @include('include.jquery.jquery_functions_js')
     @include('include.jquery.jquery_conf_js')
     <script src="./include/jquery/si-validate.js"></script>
+    <script>
+        function siToggleTheme(e) {
+            if (e) e.preventDefault();
+            var next = document.documentElement.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-bs-theme', next);
+            localStorage.setItem('siTheme', next);
+        }
+    </script>
     @stack('hook_head_end')
 </head>
 <body data-bs-no-jquery="true">

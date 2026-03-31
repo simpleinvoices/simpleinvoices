@@ -12,9 +12,8 @@
     vertical-align: middle;
 }
 
-/* Page background — match Tabler default (#f9fafb) */
+/* Font stack — background left to Tabler's CSS variables so dark mode works */
 body {
-    background: #f9fafb;
     font-family: "Inter Var", Inter, -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
 }
 

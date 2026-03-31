@@ -3,6 +3,10 @@
     $appName = $config->app?->name ?? $LANG['simple_invoices'] ?? 'Simple Invoices';
     $appWebsite = $config->app?->website ?? 'http://www.simpleinvoices.org';
     $appWebsiteLabel = $config->app?->website_label ?? 'Website';
+    $authEnabled = ((int) ($config->authentication->enabled ?? 0)) === 1;
+    $currentUserEmail = $authEnabled ? ($_SESSION['SI_Auth']['email'] ?? '') : '';
+    $currentUserName  = $authEnabled ? (($_SESSION['SI_Auth']['name'] ?? '') ?: $currentUserEmail) : '';
+    $currentUserId    = $authEnabled ? ($_SESSION['SI_Auth']['id']    ?? '') : '';
 @endphp
 
 {{-- Row 1: Top bar — logo + user controls --}}
@@ -27,9 +31,12 @@
                     <i class="ti ti-external-link me-1"></i>{{ $appWebsiteLabel }}
                 </a>
             </div>
-            <div class="nav-item d-none d-md-flex me-3">
-                <a href="index.php?module=options&view=backup_database" class="btn btn-ghost-secondary btn-icon" title="{{ $LANG['backup_database'] ?? 'Backup Database' }}">
-                    <i class="ti ti-database-export"></i>
+            <div class="nav-item me-2">
+                <a href="#" class="nav-link px-0 hide-theme-dark" title="Switch to dark mode" onclick="siToggleTheme(event)">
+                    <i class="ti ti-moon fs-4"></i>
+                </a>
+                <a href="#" class="nav-link px-0 hide-theme-light" title="Switch to light mode" onclick="siToggleTheme(event)">
+                    <i class="ti ti-sun fs-4"></i>
                 </a>
             </div>
             <div class="nav-item dropdown">
@@ -38,25 +45,22 @@
                         <i class="ti ti-user" style="font-size: 1.2rem;"></i>
                     </span>
                     <div class="d-none d-xl-block ps-2">
-                        <div class="fw-medium">{{ $LANG['users'] ?? 'Admin' }}</div>
-                        <div class="mt-1 small text-secondary">{{ $appName }}</div>
+                        @if($authEnabled && $currentUserName)
+                            <div class="fw-medium">{{ $currentUserName }}</div>
+                            <div class="mt-1 small text-secondary">{{ $currentUserEmail }}</div>
+                        @else
+                            <div class="fw-medium">{{ $LANG['users'] ?? 'Admin' }}</div>
+                            <div class="mt-1 small text-secondary">{{ $appName }}</div>
+                        @endif
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <a href="index.php?module=user&view=manage" class="dropdown-item">
-                        <i class="ti ti-users me-2"></i>{{ $LANG['manage_accounts'] ?? 'Manage Users' }}
-                    </a>
-                    <a href="index.php?module=options&view=index" class="dropdown-item">
-                        <i class="ti ti-settings me-2"></i>{{ $LANG['settings'] ?? 'Settings' }}
-                    </a>
-                    <a href="index.php?module=system_defaults&view=manage" class="dropdown-item">
-                        <i class="ti ti-adjustments me-2"></i>{{ $LANG['system_preferences'] ?? 'System Preferences' }}
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="index.php?module=options&view=backup_database" class="dropdown-item">
-                        <i class="ti ti-database-export me-2"></i>{{ $LANG['backup_database'] ?? 'Backup Database' }}
-                    </a>
-                    <div class="dropdown-divider"></div>
+                    @if($authEnabled && $currentUserId)
+                        <a href="index.php?module=user&view=details&action=edit&id={{ urlencode($currentUserId) }}" class="dropdown-item">
+                            <i class="ti ti-user-edit me-2"></i>{{ $LANG['edit_profile'] ?? 'Edit Profile' }}
+                        </a>
+                        <div class="dropdown-divider"></div>
+                    @endif
                     <a href="index.php?module=auth&view=logout" class="dropdown-item text-danger">
                         <i class="ti ti-logout me-2"></i>{{ $LANG['logout'] ?? 'Logout' }}
                     </a>
@@ -88,13 +92,13 @@
                         </a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item @if(($module ?? '') == 'invoices' && ($view ?? '') == 'manage') active @endif" href="index.php?module=invoices&view=manage">
-                                {{ $LANG['manage_invoices'] ?? 'All Invoices' }}
+                                <i class="ti ti-list me-2 text-secondary"></i>{{ $LANG['manage_invoices'] ?? 'All Invoices' }}
                             </a>
                             <a class="dropdown-item @if(($module ?? '') == 'invoices' && ($view ?? '') == 'itemised') active @endif" href="index.php?module=invoices&view=itemised">
-                                {{ $LANG['new_invoice'] ?? 'New Invoice' }}
+                                <i class="ti ti-file-plus me-2 text-secondary"></i>{{ $LANG['new_invoice'] ?? 'New Invoice' }}
                             </a>
                             <a class="dropdown-item @if(($module ?? '') == 'cron') active @endif" href="index.php?module=cron&view=manage">
-                                {{ $LANG['recurrence'] ?? 'Recurrence' }}
+                                <i class="ti ti-repeat me-2 text-secondary"></i>{{ $LANG['recurrence'] ?? 'Recurrence' }}
                             </a>
                         </div>
                     </li>
@@ -108,17 +112,21 @@
                     </li>
 
                     {{-- People --}}
-                    <li class="nav-item dropdown @if(in_array($module ?? '', ['customers','billers'])) active @endif">
+                    <li class="nav-item dropdown @if(in_array($module ?? '', ['customers','billers','user'])) active @endif">
                         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
                             <span class="nav-link-icon d-md-none d-lg-inline-block"><i class="ti ti-users"></i></span>
                             <span class="nav-link-title">{{ $LANG['people'] ?? 'People' }}</span>
                         </a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item @if(($module ?? '') == 'customers') active @endif" href="index.php?module=customers&view=manage">
-                                {{ $LANG['customers'] ?? 'Customers' }}
+                                <i class="ti ti-address-book me-2 text-secondary"></i>{{ $LANG['customers'] ?? 'Customers' }}
                             </a>
                             <a class="dropdown-item @if(($module ?? '') == 'billers') active @endif" href="index.php?module=billers&view=manage">
-                                {{ $LANG['billers'] ?? 'Billers' }}
+                                <i class="ti ti-building-store me-2 text-secondary"></i>{{ $LANG['billers'] ?? 'Billers' }}
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item @if(($module ?? '') == 'user') active @endif" href="index.php?module=user&view=manage">
+                                <i class="ti ti-users me-2 text-secondary"></i>{{ $LANG['manage_accounts'] ?? 'Manage Users' }}
                             </a>
                         </div>
                     </li>
@@ -131,24 +139,24 @@
                         </a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item @if(($module ?? '') == 'products' && ($view ?? '') == 'manage') active @endif" href="index.php?module=products&view=manage">
-                                {{ $LANG['manage_products'] ?? 'Manage Products' }}
+                                <i class="ti ti-packages me-2 text-secondary"></i>{{ $LANG['manage_products'] ?? 'Manage Products' }}
                             </a>
                             <a class="dropdown-item @if(($module ?? '') == 'products' && ($view ?? '') == 'add') active @endif" href="index.php?module=products&view=add">
-                                {{ $LANG['add_product'] ?? 'Add Product' }}
+                                <i class="ti ti-package-export me-2 text-secondary"></i>{{ $LANG['add_product'] ?? 'Add Product' }}
                             </a>
                             @if(isset($defaults->inventory) && $defaults->inventory == "1")
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item @if(($module ?? '') == 'inventory') active @endif" href="index.php?module=inventory&view=manage">
-                                {{ $LANG['inventory'] ?? 'Inventory' }}
+                                <i class="ti ti-stack-2 me-2 text-secondary"></i>{{ $LANG['inventory'] ?? 'Inventory' }}
                             </a>
                             @endif
                             @if(isset($defaults->product_attributes) && $defaults->product_attributes)
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item @if(($module ?? '') == 'product_attribute') active @endif" href="index.php?module=product_attribute&view=manage">
-                                {{ $LANG['product_attributes'] ?? 'Product Attributes' }}
+                                <i class="ti ti-tag me-2 text-secondary"></i>{{ $LANG['product_attributes'] ?? 'Product Attributes' }}
                             </a>
                             <a class="dropdown-item @if(($module ?? '') == 'product_value') active @endif" href="index.php?module=product_value&view=manage">
-                                {{ $LANG['product_values'] ?? 'Product Values' }}
+                                <i class="ti ti-tags me-2 text-secondary"></i>{{ $LANG['product_values'] ?? 'Product Values' }}
                             </a>
                             @endif
                         </div>
@@ -162,18 +170,37 @@
                         </a>
                     </li>
 
+                </ul>
+                <ul class="navbar-nav ms-auto">
                     {{-- Settings --}}
                     <li class="nav-item dropdown @if(in_array($module ?? '', ['options','system_defaults','custom_fields','tax_rates','preferences','payment_types'])) active @endif">
                         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
                             <span class="nav-link-icon d-md-none d-lg-inline-block"><i class="ti ti-settings"></i></span>
                             <span class="nav-link-title">{{ $LANG['settings'] ?? 'Settings' }}</span>
                         </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="index.php?module=system_defaults&view=manage">{{ $LANG['system_preferences'] ?? 'System Preferences' }}</a>
-                            <a class="dropdown-item" href="index.php?module=custom_fields&view=manage">{{ $LANG['custom_fields_upper'] ?? 'Custom Fields' }}</a>
-                            <a class="dropdown-item" href="index.php?module=tax_rates&view=manage">{{ $LANG['tax_rates'] ?? 'Tax Rates' }}</a>
-                            <a class="dropdown-item" href="index.php?module=preferences&view=manage">{{ $LANG['invoice_preferences'] ?? 'Invoice Preferences' }}</a>
-                            <a class="dropdown-item" href="index.php?module=payment_types&view=manage">{{ $LANG['payment_types'] ?? 'Payment Types' }}</a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <a class="dropdown-item @if(($module ?? '') == 'system_defaults') active @endif" href="index.php?module=system_defaults&view=manage">
+                                <i class="ti ti-adjustments me-2 text-secondary"></i>{{ $LANG['system_preferences'] ?? 'System Preferences' }}
+                            </a>
+                            <a class="dropdown-item @if(($module ?? '') == 'custom_fields') active @endif" href="index.php?module=custom_fields&view=manage">
+                                <i class="ti ti-forms me-2 text-secondary"></i>{{ $LANG['custom_fields_upper'] ?? 'Custom Fields' }}
+                            </a>
+                            <a class="dropdown-item @if(($module ?? '') == 'tax_rates') active @endif" href="index.php?module=tax_rates&view=manage">
+                                <i class="ti ti-receipt-tax me-2 text-secondary"></i>{{ $LANG['tax_rates'] ?? 'Tax Rates' }}
+                            </a>
+                            <a class="dropdown-item @if(($module ?? '') == 'preferences') active @endif" href="index.php?module=preferences&view=manage">
+                                <i class="ti ti-file-settings me-2 text-secondary"></i>{{ $LANG['invoice_preferences'] ?? 'Invoice Preferences' }}
+                            </a>
+                            <a class="dropdown-item @if(($module ?? '') == 'payment_types') active @endif" href="index.php?module=payment_types&view=manage">
+                                <i class="ti ti-credit-card me-2 text-secondary"></i>{{ $LANG['payment_types'] ?? 'Payment Types' }}
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item @if(($module ?? '') == 'options' && ($view ?? '') == 'index') active @endif" href="index.php?module=options&view=index">
+                                <i class="ti ti-adjustments-horizontal me-2 text-secondary"></i>{{ $LANG['settings'] ?? 'Settings' }}
+                            </a>
+                            <a class="dropdown-item @if(($module ?? '') == 'options' && ($view ?? '') == 'backup_database') active @endif" href="index.php?module=options&view=backup_database">
+                                <i class="ti ti-database-export me-2 text-secondary"></i>{{ $LANG['backup_database'] ?? 'Backup Database' }}
+                            </a>
                         </div>
                     </li>
                 </ul>

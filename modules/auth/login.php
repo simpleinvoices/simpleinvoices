@@ -23,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'login
 
             $auth_session->id        = (string) $user['id'];
             $auth_session->email     = (string) $user['email'];
+            $auth_session->name      = (string) ($user['name'] ?? '');
             $auth_session->role_name = (string) ($user['role_name'] ?? '');
             $auth_session->domain_id = (string) ($user['domain_id'] ?? '1');
             $auth_session->user_id   = (string) ($user['user_id'] ?? '0');
