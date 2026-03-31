@@ -1,11 +1,16 @@
 {{-- Invoice Quick View --}}
+@php
+    $currency = $preference['pref_currency_sign'] ?? '';
+@endphp
 
 <div class="card mb-3">
     <div class="card-header">
         <div class="card-title mb-0">{{ $preference['pref_inv_wording'] ?? 'Invoice' }} {{ $invoice['index_id'] ?? '' }}</div>
     </div>
-    <div class="card-body">
-        <div class="btn-list mb-3">
+
+    {{-- Action buttons --}}
+    <div class="card-body border-bottom">
+        <div class="btn-list">
             <a title="{{ $LANG['print_preview_tooltip'] ?? '' }}" href="index.php?module=export&amp;view=invoice&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;format=print" class="btn btn-outline-secondary btn-sm">
                 <i class="ti ti-printer me-1"></i>{{ $LANG['print_preview'] ?? 'Print' }}
             </a>
@@ -38,381 +43,243 @@
             </a>
             @endif
         </div>
+    </div>
 
-        <table class="table table-vcenter si_invoice_view">
-            {{-- Invoice Summary --}}
-            <tr class="tr_head">
-                <th>{{ $preference['pref_inv_wording'] ?? '' }} {{ $LANG['number_short'] ?? '' }}:</th>
-                <td colspan="4">{{ $invoice['index_id'] ?? '' }}</td>
-                <td class="si_switch">
-                    <a href="#" class="show-summary btn btn-icon btn-sm" onclick="document.querySelectorAll('.summary').forEach(function(e){e.style.display='';}); document.querySelectorAll('.show-summary').forEach(function(e){e.style.display='none'}); return false;"><i class="ti ti-zoom-in" title="{{ $LANG['show_details'] ?? '' }}"></i></a>
-                    <a href="#" class="summary btn btn-icon btn-sm" onclick="document.querySelectorAll('.summary').forEach(function(e){e.style.display='none'}); document.querySelectorAll('.show-summary').forEach(function(e){e.style.display=''}); return false;"><i class="ti ti-zoom-out" title="{{ $LANG['hide_details'] ?? '' }}"></i></a>
-                </td>
-            </tr>
-            <tr class="summary">
-                <th>{{ $LANG['date_upper'] ?? '' }}:</th>
-                <td colspan="5">{{ $invoice['date'] ?? '' }}</td>
-            </tr>
+    <div class="card-body">
 
-            {!! $customField['1'] ?? '' !!}
-            {!! $customField['2'] ?? '' !!}
-            {!! $customField['3'] ?? '' !!}
-            {!! $customField['4'] ?? '' !!}
+        {{-- Invoice summary: date + custom fields --}}
+        <div class="mb-4 pb-3 border-bottom">
+            <div class="row g-3">
+                <div class="col-auto">
+                    <div class="text-secondary small mb-1">{{ $LANG['date_formatted'] ?? 'Date' }}</div>
+                    <div>{{ $invoice['date'] ?? '' }}</div>
+                </div>
+                @if(!empty($customField['1']))
+                <div class="col-auto">{!! $customField['1'] !!}</div>
+                @endif
+                @if(!empty($customField['2']))
+                <div class="col-auto">{!! $customField['2'] !!}</div>
+                @endif
+                @if(!empty($customField['3']))
+                <div class="col-auto">{!! $customField['3'] !!}</div>
+                @endif
+                @if(!empty($customField['4']))
+                <div class="col-auto">{!! $customField['4'] !!}</div>
+                @endif
+            </div>
+        </div>
 
-            {{-- Biller section --}}
-            <tr class="tr_head">
-                <th>{{ $LANG['biller'] ?? '' }}:</th>
-                <td colspan="4">{{ $biller['name'] ?? '' }}</td>
-                <td class="si_switch">
-                    <a href="#" class="show-biller btn btn-icon btn-sm" onclick="document.querySelectorAll('.biller').forEach(function(e){e.style.display='';}); document.querySelectorAll('.show-biller').forEach(function(e){e.style.display='none'}); return false;"><i class="ti ti-zoom-in" title="{{ $LANG['show_details'] ?? '' }}"></i></a>
-                    <a href="#" class="biller btn btn-icon btn-sm" onclick="document.querySelectorAll('.biller').forEach(function(e){e.style.display='none'}); document.querySelectorAll('.show-biller').forEach(function(e){e.style.display=''}); return false;"><i class="ti ti-zoom-out" title="{{ $LANG['hide_details'] ?? '' }}"></i></a>
-                </td>
-            </tr>
-            <tr class="biller">
-                <th>{{ $LANG['street'] ?? '' }}:</th>
-                <td colspan="5">{{ $biller['street_address'] ?? '' }}</td>
-            </tr>
-            <tr class="biller">
-                <th>{{ $LANG['street2'] ?? '' }}:</th>
-                <td colspan="5">{{ $biller['street_address2'] ?? '' }}</td>
-            </tr>
-            <tr class="biller">
-                <th>{{ $LANG['city'] ?? '' }}:</th>
-                <td colspan="3">{{ $biller['city'] ?? '' }}</td>
-                <th>{{ $LANG['phone_short'] ?? '' }}:</th>
-                <td>{{ $biller['phone'] ?? '' }}</td>
-            </tr>
-            <tr class="biller">
-                <th>{{ $LANG['state'] ?? '' }}, {{ $LANG['zip'] ?? '' }}:</th>
-                <td colspan="3">{{ $biller['state'] ?? '' }}, {{ $biller['zip_code'] ?? '' }}</td>
-                <th>{{ $LANG['mobile_short'] ?? '' }}:</th>
-                <td>{{ $biller['mobile_phone'] ?? '' }}</td>
-            </tr>
-            <tr class="biller">
-                <th>{{ $LANG['country'] ?? '' }}:</th>
-                <td colspan="3">{{ $biller['country'] ?? '' }}</td>
-                <th>{{ $LANG['fax'] ?? '' }}:</th>
-                <td>{{ $biller['fax'] ?? '' }}</td>
-            </tr>
-            <tr class="biller">
-                <th>{{ $LANG['email'] ?? '' }}:</th>
-                <td colspan="5">{{ $biller['email'] ?? '' }}</td>
-            </tr>
-            <tr class="biller">
-                <th>{{ $customFieldLabels['biller_cf1'] ?? '' }}:</th>
-                <td colspan="5">{{ $biller['custom_field1'] ?? '' }}</td>
-            </tr>
-            <tr class="biller">
-                <th>{{ $customFieldLabels['biller_cf2'] ?? '' }}:</th>
-                <td colspan="5">{{ $biller['custom_field2'] ?? '' }}</td>
-            </tr>
-            <tr class="biller">
-                <th>{{ $customFieldLabels['biller_cf3'] ?? '' }}:</th>
-                <td colspan="5">{{ $biller['custom_field3'] ?? '' }}</td>
-            </tr>
-            <tr class="biller">
-                <th>{{ $customFieldLabels['biller_cf4'] ?? '' }}:</th>
-                <td colspan="5">{{ $biller['custom_field4'] ?? '' }}</td>
-            </tr>
-            @showCustomFields(1, $biller['id'] ?? '')
+        {{-- Biller + Customer --}}
+        <div class="row g-4 mb-4">
+            <div class="col-md-6">
+                <div class="text-uppercase text-secondary small fw-medium mb-2">{{ $LANG['biller'] ?? 'Biller' }}</div>
+                <div class="fw-bold mb-1">{{ $biller['name'] ?? '' }}</div>
+                <div class="text-secondary lh-lg">
+                    @if(!empty($biller['street_address'])){{ $biller['street_address'] }}<br />@endif
+                    @if(!empty($biller['street_address2'])){{ $biller['street_address2'] }}<br />@endif
+                    @php
+                        $billerCity = trim(($biller['city'] ?? '') . (!empty($biller['city']) && (!empty($biller['state']) || !empty($biller['zip_code'])) ? ', ' : '') . ($biller['state'] ?? '') . (!empty($biller['state']) && !empty($biller['zip_code']) ? ' ' : '') . ($biller['zip_code'] ?? ''));
+                    @endphp
+                    @if(!empty($billerCity)){{ $billerCity }}<br />@endif
+                    @if(!empty($biller['country'])){{ $biller['country'] }}<br />@endif
+                    @if(!empty($biller['phone'])){{ $LANG['phone_short'] ?? 'Phone' }}: {{ $biller['phone'] }}<br />@endif
+                    @if(!empty($biller['mobile_phone'])){{ $LANG['mobile_short'] ?? 'Mobile' }}: {{ $biller['mobile_phone'] }}<br />@endif
+                    @if(!empty($biller['fax'])){{ $LANG['fax'] ?? 'Fax' }}: {{ $biller['fax'] }}<br />@endif
+                    @if(!empty($biller['email']))<a href="mailto:{{ $biller['email'] }}">{{ $biller['email'] }}</a><br />@endif
+                    @if(!empty($biller['custom_field1']) && !empty($customFieldLabels['biller_cf1'])){{ $customFieldLabels['biller_cf1'] }}: {{ $biller['custom_field1'] }}<br />@endif
+                    @if(!empty($biller['custom_field2']) && !empty($customFieldLabels['biller_cf2'])){{ $customFieldLabels['biller_cf2'] }}: {{ $biller['custom_field2'] }}<br />@endif
+                    @if(!empty($biller['custom_field3']) && !empty($customFieldLabels['biller_cf3'])){{ $customFieldLabels['biller_cf3'] }}: {{ $biller['custom_field3'] }}<br />@endif
+                    @if(!empty($biller['custom_field4']) && !empty($customFieldLabels['biller_cf4'])){{ $customFieldLabels['biller_cf4'] }}: {{ $biller['custom_field4'] }}<br />@endif
+                    @showCustomFields(1, $biller['id'] ?? '')
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="text-uppercase text-secondary small fw-medium mb-2">{{ $LANG['customer'] ?? 'Customer' }}</div>
+                <div class="fw-bold mb-1">
+                    <a href="index.php?module=customers&amp;view=details&amp;id={{ urlencode($customer['id'] ?? '') }}&amp;action=view">{{ $customer['name'] ?? '' }}</a>
+                </div>
+                <div class="text-secondary lh-lg">
+                    @if(!empty($customer['department'])){{ $LANG['customer_department'] ?? 'Dept' }}: {{ $customer['department'] }}<br />@endif
+                    @if(!empty($customer['attention'])){{ $LANG['attention_short'] ?? 'Attn' }}: {{ $customer['attention'] }}<br />@endif
+                    @if(!empty($customer['street_address'])){{ $customer['street_address'] }}<br />@endif
+                    @if(!empty($customer['street_address2'])){{ $customer['street_address2'] }}<br />@endif
+                    @php
+                        $customerCity = trim(($customer['city'] ?? '') . (!empty($customer['city']) && (!empty($customer['state']) || !empty($customer['zip_code'])) ? ', ' : '') . ($customer['state'] ?? '') . (!empty($customer['state']) && !empty($customer['zip_code']) ? ' ' : '') . ($customer['zip_code'] ?? ''));
+                    @endphp
+                    @if(!empty($customerCity)){{ $customerCity }}<br />@endif
+                    @if(!empty($customer['country'])){{ $customer['country'] }}<br />@endif
+                    @if(!empty($customer['phone'])){{ $LANG['phone_short'] ?? 'Phone' }}: {{ $customer['phone'] }}<br />@endif
+                    @if(!empty($customer['mobile_phone'])){{ $LANG['mobile_short'] ?? 'Mobile' }}: {{ $customer['mobile_phone'] }}<br />@endif
+                    @if(!empty($customer['fax'])){{ $LANG['fax'] ?? 'Fax' }}: {{ $customer['fax'] }}<br />@endif
+                    @if(!empty($customer['email']))<a href="mailto:{{ $customer['email'] }}">{{ $customer['email'] }}</a><br />@endif
+                    @if(!empty($customer['custom_field1']) && !empty($customFieldLabels['customer_cf1'])){{ $customFieldLabels['customer_cf1'] }}: {{ $customer['custom_field1'] }}<br />@endif
+                    @if(!empty($customer['custom_field2']) && !empty($customFieldLabels['customer_cf2'])){{ $customFieldLabels['customer_cf2'] }}: {{ $customer['custom_field2'] }}<br />@endif
+                    @if(!empty($customer['custom_field3']) && !empty($customFieldLabels['customer_cf3'])){{ $customFieldLabels['customer_cf3'] }}: {{ $customer['custom_field3'] }}<br />@endif
+                    @if(!empty($customer['custom_field4']) && !empty($customFieldLabels['customer_cf4'])){{ $customFieldLabels['customer_cf4'] }}: {{ $customer['custom_field4'] }}<br />@endif
+                    @showCustomFields(2, $customer['id'] ?? '')
+                </div>
+            </div>
+        </div>
 
-            {{-- Customer section --}}
-            <tr class="tr_head">
-                <th>{{ $LANG['customer'] ?? '' }}:</th>
-                <td colspan="4">{{ $customer['name'] ?? '' }}</td>
-                <td class="si_switch">
-                    <a href="#" class="show-customer btn btn-icon btn-sm" onclick="document.querySelectorAll('.customer').forEach(function(e){e.style.display='';}); document.querySelectorAll('.show-customer').forEach(function(e){e.style.display='none'}); return false;"><i class="ti ti-zoom-in" title="{{ $LANG['show_details'] ?? '' }}"></i></a>
-                    <a href="#" class="customer btn btn-icon btn-sm" onclick="document.querySelectorAll('.customer').forEach(function(e){e.style.display='none'}); document.querySelectorAll('.show-customer').forEach(function(e){e.style.display=''}); return false;"><i class="ti ti-zoom-out" title="{{ $LANG['hide_details'] ?? '' }}"></i></a>
-                </td>
-            </tr>
-            <tr class="customer">
-                <th>{{ $LANG['customer_department'] ?? '' }}:</th>
-                <td colspan="5">{{ $customer['department'] ?? '' }}</td>
-            </tr>
-            <tr class="customer">
-                <th>{{ $LANG['attention_short'] ?? '' }}:</th>
-                <td colspan="5">{{ $customer['attention'] ?? '' }}</td>
-            </tr>
-            <tr class="customer">
-                <th>{{ $LANG['street'] ?? '' }}:</th>
-                <td colspan="5">{{ $customer['street_address'] ?? '' }}</td>
-            </tr>
-            <tr class="customer">
-                <th>{{ $LANG['street2'] ?? '' }}:</th>
-                <td colspan="5">{{ $customer['street_address2'] ?? '' }}</td>
-            </tr>
-            <tr class="customer">
-                <th>{{ $LANG['city'] ?? '' }}:</th>
-                <td colspan="3">{{ $customer['city'] ?? '' }}</td>
-                <th>{{ $LANG['phone_short'] ?? '' }}:</th>
-                <td>{{ $customer['phone'] ?? '' }}</td>
-            </tr>
-            <tr class="customer">
-                <th>{{ $LANG['state'] ?? '' }}, {{ $LANG['zip'] ?? '' }}:</th>
-                <td colspan="3">{{ $customer['state'] ?? '' }}, {{ $customer['zip_code'] ?? '' }}</td>
-                <th>{{ $LANG['mobile_short'] ?? '' }}:</th>
-                <td>{{ $customer['mobile_phone'] ?? '' }}</td>
-            </tr>
-            <tr class="customer">
-                <th>{{ $LANG['country'] ?? '' }}:</th>
-                <td colspan="3">{{ $customer['country'] ?? '' }}</td>
-                <th>{{ $LANG['fax'] ?? '' }}:</th>
-                <td>{{ $customer['fax'] ?? '' }}</td>
-            </tr>
-            <tr class="customer">
-                <th>{{ $LANG['email'] ?? '' }}:</th>
-                <td colspan="5">{{ $customer['email'] ?? '' }}</td>
-            </tr>
-            <tr class="customer">
-                <th>{{ $customFieldLabels['customer_cf1'] ?? '' }}:</th>
-                <td colspan="5">{{ $customer['custom_field1'] ?? '' }}</td>
-            </tr>
-            <tr class="customer">
-                <th>{{ $customFieldLabels['customer_cf2'] ?? '' }}:</th>
-                <td colspan="5">{{ $customer['custom_field2'] ?? '' }}</td>
-            </tr>
-            <tr class="customer">
-                <th>{{ $customFieldLabels['customer_cf3'] ?? '' }}:</th>
-                <td colspan="5">{{ $customer['custom_field3'] ?? '' }}</td>
-            </tr>
-            <tr class="customer">
-                <th>{{ $customFieldLabels['customer_cf4'] ?? '' }}:</th>
-                <td colspan="5">{{ $customer['custom_field4'] ?? '' }}</td>
-            </tr>
-            @showCustomFields(2, $customer['id'] ?? '')
+        {{-- Total-only invoice (type 1): description --}}
+        @if(($invoice['type_id'] ?? 0) == 1)
+        <div class="mb-4">
+            <div class="text-uppercase text-secondary small fw-medium mb-2">{{ $LANG['description'] ?? 'Description' }}</div>
+            <div>{{ $invoiceItems[0]['description'] ?? '' }}</div>
+        </div>
+        @endif
 
-            {{-- Total-only invoice (type 1) --}}
-            @if(($invoice['type_id'] ?? 0) == 1)
-            <tr class="tr_head">
-                <th colspan="6">{{ $LANG['description'] ?? '' }}</th>
-            </tr>
-            <tr>
-                <td colspan="6">{{ $invoiceItems[0]['description'] ?? '' }}</td>
-            </tr>
-            @endif
-
-            {{-- Itemised (type 2) or Consulting (type 3) --}}
-            @if(($invoice['type_id'] ?? 0) == 2 || ($invoice['type_id'] ?? 0) == 3)
-            <tr class="tr_head">
-                <th colspan="5"></th>
-                <td class="si_switch">
-                    @if(($invoice['type_id'] ?? 0) == 2)
-                    <a href="#" class="show-itemised btn btn-icon btn-sm" onclick="document.querySelectorAll('.itemised').forEach(function(e){e.style.display='';}); document.querySelectorAll('.show-itemised').forEach(function(e){e.style.display='none'}); return false;"><i class="ti ti-zoom-in" title="{{ $LANG['show_details'] ?? '' }}"></i></a>
-                    <a href="#" class="itemised btn btn-icon btn-sm" onclick="document.querySelectorAll('.itemised').forEach(function(e){e.style.display='none'}); document.querySelectorAll('.show-itemised').forEach(function(e){e.style.display=''}); return false;"><i class="ti ti-zoom-out" title="{{ $LANG['hide_details'] ?? '' }}"></i></a>
+        {{-- Itemised (type 2) or Consulting (type 3): line items table --}}
+        @if(($invoice['type_id'] ?? 0) == 2 || ($invoice['type_id'] ?? 0) == 3)
+        <div class="table-responsive mb-2">
+            <table class="table table-vcenter table-sm">
+                <thead>
+                    <tr>
+                        <th class="w-1">{{ $LANG['quantity_short'] ?? 'Qty' }}</th>
+                        <th>{{ $LANG['item'] ?? 'Item' }}</th>
+                        <th class="text-end">{{ $LANG['unit_cost'] ?? 'Unit' }}</th>
+                        <th class="text-end">{{ $LANG['price'] ?? 'Amount' }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(($invoiceItems ?? []) as $invoiceItem)
+                    <tr>
+                        <td class="text-end">{{ siLocal::number_trim($invoiceItem['quantity'] ?? 0) }}</td>
+                        <td>{{ $invoiceItem['product']['description'] ?? '' }}</td>
+                        <td class="text-end text-nowrap">{{ $currency }}{{ siLocal::number($invoiceItem['unit_price'] ?? 0) }}</td>
+                        <td class="text-end text-nowrap">{{ $currency }}{{ siLocal::number($invoiceItem['gross_total'] ?? 0) }}</td>
+                    </tr>
+                    @if(!empty($invoiceItem['attribute']))
+                    <tr class="table-light">
+                        <td></td>
+                        <td colspan="3" class="text-secondary small">
+                            @foreach(($invoiceItem['attribute_json'] ?? []) as $k => $v)
+                                @if(($v['type'] ?? '') == 'decimal')
+                                    {{ $v['name'] ?? '' }}: {{ $currency }}{{ siLocal::number($v['value'] ?? 0) }};
+                                @elseif(!empty($v['value']))
+                                    {{ $v['name'] ?? '' }}: {{ $v['value'] }};
+                                @endif
+                            @endforeach
+                        </td>
+                    </tr>
                     @endif
-                    @if(($invoice['type_id'] ?? 0) == 3)
-                    <a href="#" class="show-consulting btn btn-icon btn-sm" onclick="document.querySelectorAll('.consulting').forEach(function(e){e.style.display='';}); document.querySelectorAll('.show-consulting').forEach(function(e){e.style.display='none'}); return false;"><i class="ti ti-zoom-in" title="{{ $LANG['show_details'] ?? '' }}"></i></a>
-                    <a href="#" class="consulting btn btn-icon btn-sm" onclick="document.querySelectorAll('.consulting').forEach(function(e){e.style.display='none'}); document.querySelectorAll('.show-consulting').forEach(function(e){e.style.display=''}); return false;"><i class="ti ti-zoom-out" title="{{ $LANG['hide_details'] ?? '' }}"></i></a>
+                    @if(!empty($invoiceItem['description']))
+                    <tr class="table-light">
+                        <td></td>
+                        <td colspan="3" class="text-secondary small fst-italic">{{ $invoiceItem['description'] }}</td>
+                    </tr>
                     @endif
-                </td>
-            </tr>
-            <tr>
-                <td colspan="6">
-                    <table class="si_invoice_view_items">
-                        <tr class="tr_head_items">
-                            <th class="si_quantity">{{ $LANG['quantity_short'] ?? '' }}</th>
-                            <th colspan="2">{{ $LANG['item'] ?? '' }}</th>
-                            <th class="si_right">{{ $LANG['unit_cost'] ?? '' }}</th>
-                            <th class="si_right">{{ $LANG['price'] ?? '' }}</th>
-                        </tr>
-
-                        @foreach(($invoiceItems ?? []) as $invoiceItem)
-
-                        @if(($invoice['type_id'] ?? 0) == 2)
-                        <tr>
-                            <td class="si_quantity">{{ siLocal::number_trim($invoiceItem['quantity'] ?? '') }}</td>
-                            <td class="td_product" colspan="2">{{ $invoiceItem['product']['description'] ?? '' }}</td>
-                            <td class="si_right">{{ $preference['pref_currency_sign'] ?? '' }}{{ siLocal::number($invoiceItem['unit_price'] ?? 0) }}</td>
-                            <td class="si_right">{{ $preference['pref_currency_sign'] ?? '' }}{{ siLocal::number($invoiceItem['gross_total'] ?? 0) }}</td>
-                        </tr>
-                        @if(!empty($invoiceItem['attribute']))
-                        <tr class="si_product_attribute">
-                            <td></td>
-                            <td colspan="4">
-                                <table>
-                                    <tr class="si_product_attribute">
-                                    @foreach(($invoiceItem['attribute_json'] ?? []) as $k => $v)
-                                        <td class="si_product_attribute">
-                                            @if(($v['type'] ?? '') == 'decimal')
-                                            {{ $v['name'] ?? '' }}: {{ $preference['pref_currency_sign'] ?? '' }}{{ siLocal::number($v['value'] ?? 0) }} ;
-                                            @else
-                                            {{ $v['name'] ?? '' }}: {{ $v['value'] ?? '' }} ;
-                                            @endif
-                                        </td>
-                                    @endforeach
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                        @endif
-
-                        @if(!empty($invoiceItem['description']))
-                        <tr class="show-itemised tr_desc">
-                            <td></td>
-                            <td colspan="5">
-                                {{ mb_strimwidth($invoiceItem['description'] ?? '', 0, 80, '...') }}
-                            </td>
-                        </tr>
-                        <tr class="itemised tr_desc">
-                            <td></td>
-                            <td colspan="5">{{ $invoiceItem['description'] ?? '' }}</td>
-                        </tr>
-                        @endif
-
-                        <tr class="itemised tr_custom">
-                            <td></td>
-                            <td colspan="5">
-                                <table class="si_invoice_view_custom_items">
-                                    <tr>
-                                        <th>{{ $customFieldLabels['product_cf1'] ?? '' }}:</th>
-                                        <td>{{ $invoiceItem['product']['custom_field1'] ?? '' }}</td>
-                                        <th>{{ $customFieldLabels['product_cf2'] ?? '' }}:</th>
-                                        <td>{{ $invoiceItem['product']['custom_field2'] ?? '' }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>{{ $customFieldLabels['product_cf3'] ?? '' }}:</th>
-                                        <td>{{ $invoiceItem['product']['custom_field3'] ?? '' }}</td>
-                                        <th>{{ $customFieldLabels['product_cf4'] ?? '' }}:</th>
-                                        <td>{{ $invoiceItem['product']['custom_field4'] ?? '' }}</td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                        @showCustomFields(3, $invoiceItem['productId'] ?? '')
-                        @endif
-
-                        @if(($invoice['type_id'] ?? 0) == 3)
-                        <tr>
-                            <td class="si_quantity">{{ siLocal::number($invoiceItem['quantity'] ?? 0) }}</td>
-                            <td class="td_product" colspan="2">{{ $invoiceItem['product']['description'] ?? '' }}</td>
-                            <td class="si_right">{{ $preference['pref_currency_sign'] ?? '' }}{{ siLocal::number($invoiceItem['unit_price'] ?? 0) }}</td>
-                            <td class="si_right">{{ $preference['pref_currency_sign'] ?? '' }}{{ siLocal::number($invoiceItem['gross_total'] ?? 0) }}</td>
-                        </tr>
-                        <tr class="consulting tr_custom">
-                            <td></td>
-                            <td colspan="5">
-                                <table class="si_invoice_view_custom_items">
-                                    <tr>
-                                        <th>{{ $customFieldLabels['product_cf1'] ?? '' }}:</th>
-                                        <td>{{ $invoiceItem['product']['custom_field1'] ?? '' }}</td>
-                                        <th>{{ $customFieldLabels['product_cf2'] ?? '' }}:</th>
-                                        <td>{{ $invoiceItem['product']['custom_field2'] ?? '' }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>{{ $customFieldLabels['product_cf3'] ?? '' }}:</th>
-                                        <td>{{ $invoiceItem['product']['custom_field3'] ?? '' }}</td>
-                                        <th>{{ $customFieldLabels['product_cf4'] ?? '' }}:</th>
-                                        <td>{{ $invoiceItem['product']['custom_field4'] ?? '' }}</td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                        @endif
-
-                        @endforeach
-                    </table>
-                </td>
-            </tr>
-
-            @if(!empty($invoice['note']))
-            <tr class="tr_head">
-                <th>{{ $LANG['notes'] ?? '' }}:</th>
-                <td colspan="4"></td>
-                <td class="si_switch">
-                    @if(strlen($invoice['note'] ?? '') > 25)
-                    <a href="#" class="show-notes btn btn-icon btn-sm" onclick="document.querySelectorAll('.notes').forEach(function(e){e.style.display='';}); document.querySelectorAll('.show-notes').forEach(function(e){e.style.display='none'}); return false;"><i class="ti ti-zoom-in" title="{{ $LANG['show_details'] ?? '' }}"></i></a>
-                    <a href="#" class="notes si_hide btn btn-icon btn-sm" onclick="document.querySelectorAll('.notes').forEach(function(e){e.style.display='none'}); document.querySelectorAll('.show-notes').forEach(function(e){e.style.display=''}); return false;"><i class="ti ti-zoom-out" title="{{ $LANG['hide_details'] ?? '' }}"></i></a>
+                    @php
+                        $hasProdCf = !empty($invoiceItem['product']['custom_field1']) || !empty($invoiceItem['product']['custom_field2']) || !empty($invoiceItem['product']['custom_field3']) || !empty($invoiceItem['product']['custom_field4']);
+                    @endphp
+                    @if($hasProdCf)
+                    <tr class="table-light">
+                        <td></td>
+                        <td colspan="3" class="text-secondary small">
+                            @if(!empty($invoiceItem['product']['custom_field1']))<span class="me-2">{{ $customFieldLabels['product_cf1'] ?? '' }}: {{ $invoiceItem['product']['custom_field1'] }}</span>@endif
+                            @if(!empty($invoiceItem['product']['custom_field2']))<span class="me-2">{{ $customFieldLabels['product_cf2'] ?? '' }}: {{ $invoiceItem['product']['custom_field2'] }}</span>@endif
+                            @if(!empty($invoiceItem['product']['custom_field3']))<span class="me-2">{{ $customFieldLabels['product_cf3'] ?? '' }}: {{ $invoiceItem['product']['custom_field3'] }}</span>@endif
+                            @if(!empty($invoiceItem['product']['custom_field4']))<span class="me-2">{{ $customFieldLabels['product_cf4'] ?? '' }}: {{ $invoiceItem['product']['custom_field4'] }}</span>@endif
+                        </td>
+                    </tr>
                     @endif
-                </td>
-            </tr>
-            <tr class="show-notes tr_notes">
-                <td colspan="6">{!! outhtml(mb_strimwidth($invoice['note'] ?? '', 0, 25, '...')) !!}</td>
-            </tr>
-            <tr class="notes tr_notes">
-                <td colspan="6">{!! outhtml($invoice['note'] ?? '') !!}</td>
-            </tr>
-            @endif
-            @endif
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 
-            {{-- Tax section --}}
-            @if(($invoice_number_of_taxes ?? 0) > 0)
-            <tr class="tr_tax">
-                <td colspan="4"></td>
-                <th>{{ $LANG['sub_total'] ?? '' }}</th>
-                <td class="si_right">
-                    @if(($invoice_number_of_taxes ?? 0) > 1)<u>@endif
-                    {{ $preference['pref_currency_sign'] ?? '' }}{{ siLocal::number($invoice['gross'] ?? 0) }}
-                    @if(($invoice_number_of_taxes ?? 0) > 1)</u>@endif
-                </td>
-            </tr>
-            @endif
+        @if(!empty($invoice['note']))
+        <div class="mb-4">
+            <div class="text-uppercase text-secondary small fw-medium mb-1">{{ $LANG['notes'] ?? 'Notes' }}</div>
+            <div class="text-secondary">{!! outhtml($invoice['note']) !!}</div>
+        </div>
+        @endif
+        @endif
 
-            @foreach(($invoice['tax_grouped'] ?? []) as $taxLine)
-            @if(($taxLine['tax_amount'] ?? '0') != '0')
-            <tr class="tr_tax">
-                <td colspan="4"></td>
-                <th>{{ $taxLine['tax_name'] ?? '' }}</th>
-                <td class="si_right">{{ $preference['pref_currency_sign'] ?? '' }}{{ siLocal::number($taxLine['tax_amount'] ?? 0) }}</td>
-            </tr>
-            @endif
-            @endforeach
+        {{-- Totals --}}
+        <div class="row justify-content-end">
+            <div class="col-auto">
+                @if(($invoice_number_of_taxes ?? 0) > 0)
+                <div class="d-flex gap-4 justify-content-between mb-1">
+                    <span class="text-secondary">{{ $LANG['sub_total'] ?? 'Subtotal' }}</span>
+                    <span>{{ $currency }}{{ siLocal::number($invoice['gross'] ?? 0) }}</span>
+                </div>
+                @endif
+                @foreach(($invoice['tax_grouped'] ?? []) as $taxLine)
+                @if(($taxLine['tax_amount'] ?? '0') != '0')
+                <div class="d-flex gap-4 justify-content-between mb-1">
+                    <span class="text-secondary">{{ $taxLine['tax_name'] ?? '' }}</span>
+                    <span>{{ $currency }}{{ siLocal::number($taxLine['tax_amount'] ?? 0) }}</span>
+                </div>
+                @endif
+                @endforeach
+                @if(($invoice_number_of_taxes ?? 0) > 1)
+                <div class="d-flex gap-4 justify-content-between mb-1">
+                    <span class="text-secondary">{{ $LANG['tax_total'] ?? 'Tax Total' }}</span>
+                    <span>{{ $currency }}{{ siLocal::number($invoice['total_tax'] ?? 0) }}</span>
+                </div>
+                @endif
+                <div class="d-flex gap-4 justify-content-between pt-2 border-top fw-bold fs-4">
+                    <span>{{ $preference['pref_inv_wording'] ?? '' }} {{ $LANG['amount'] ?? 'Total' }}</span>
+                    <span>{{ $currency }}{{ siLocal::number($invoice['total'] ?? 0) }}</span>
+                </div>
+            </div>
+        </div>
 
-            @if(($invoice_number_of_taxes ?? 0) > 1)
-            <tr class="tr_tax">
-                <td colspan="4"></td>
-                <th>{{ $LANG['tax_total'] ?? '' }}</th>
-                <td class="si_right"><u>{{ $preference['pref_currency_sign'] ?? '' }}{{ siLocal::number($invoice['total_tax'] ?? 0) }}</u></td>
-            </tr>
-            @endif
-
-            <tr class="tr_total">
-                <td colspan="4"></td>
-                <th>{{ $preference['pref_inv_wording'] ?? '' }} {{ $LANG['amount'] ?? '' }}</th>
-                <td class="si_right">{{ $preference['pref_currency_sign'] ?? '' }}{{ siLocal::number($invoice['total'] ?? 0) }}</td>
-            </tr>
-        </table>
     </div>
 </div>
 
-<div class="card mt-3">
-    <div class="card-header">
-        <h4 class="card-title mb-0">{{ $LANG['financial_status'] ?? 'Financial Status' }}</h4>
-    </div>
-    <div class="card-body">
-        <div class="row g-3">
-            <div class="col-md-6">
-                <h5>{{ $preference['pref_inv_wording'] ?? '' }} {{ $invoice['index_id'] ?? '' }}</h5>
-                <table class="table table-sm table-vcenter">
-                    <tr>
-                        <th>{{ $LANG['total'] ?? '' }}</th>
-                        <th><a href="index.php?module=payments&amp;view=manage&amp;id={{ urlencode($invoice['id'] ?? '') }}">{{ $LANG['paid'] ?? '' }}</a></th>
-                        <th>{{ $LANG['owing'] ?? '' }}</th>
-                        <th>{{ $LANG['age'] ?? '' }}
-                            <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_age" title="{{ $LANG['age'] ?? '' }}"><i class="ti ti-help"></i></a>
-                        </th>
-                    </tr>
-                    <tr>
-                        <td>{{ $preference['pref_currency_sign'] ?? '' }}{{ siLocal::number($invoice['total'] ?? 0) }}</td>
-                        <td>{{ $preference['pref_currency_sign'] ?? '' }}{{ siLocal::number($invoice['paid'] ?? 0) }}</td>
-                        <td>{{ $preference['pref_currency_sign'] ?? '' }}{{ siLocal::number($invoice['owing'] ?? 0) }}</td>
-                        <td>{{ $invoice_age ?? '' }}</td>
-                    </tr>
-                </table>
+{{-- Financial Status --}}
+<div class="row row-cards">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title mb-0">{{ $preference['pref_inv_wording'] ?? '' }} {{ $invoice['index_id'] ?? '' }}</div>
             </div>
-            <div class="col-md-6">
-                <h5><a href="index.php?module=customers&amp;view=details&amp;id={{ urlencode($customer['id'] ?? '') }}&amp;action=view">{{ $LANG['customer_account'] ?? 'Customer Account' }}</a></h5>
-                <table class="table table-sm table-vcenter">
-                    <tr>
-                        <th>{{ $LANG['total'] ?? '' }}</th>
-                        <th><a href="index.php?module=payments&amp;view=manage&amp;c_id={{ urlencode($customer['id'] ?? '') }}">{{ $LANG['paid'] ?? '' }}</a></th>
-                        <th>{{ $LANG['owing'] ?? '' }}</th>
-                    </tr>
-                    <tr>
-                        <td>{{ $preference['pref_currency_sign'] ?? '' }}{{ siLocal::number($customerAccount['total'] ?? 0) }}</td>
-                        <td>{{ $preference['pref_currency_sign'] ?? '' }}{{ siLocal::number($customerAccount['paid'] ?? 0) }}</td>
-                        <td>{{ $preference['pref_currency_sign'] ?? '' }}{{ siLocal::number($customerAccount['owing'] ?? 0) }}</td>
-                    </tr>
-                </table>
+            <div class="card-body">
+                <div class="row g-3 text-center">
+                    <div class="col-4">
+                        <div class="text-secondary small mb-1">{{ $LANG['total'] ?? 'Total' }}</div>
+                        <div class="fw-bold">{{ $currency }}{{ siLocal::number($invoice['total'] ?? 0) }}</div>
+                    </div>
+                    <div class="col-4">
+                        <div class="text-secondary small mb-1"><a href="index.php?module=payments&amp;view=manage&amp;id={{ urlencode($invoice['id'] ?? '') }}">{{ $LANG['paid'] ?? 'Paid' }}</a></div>
+                        <div class="fw-bold text-success">{{ $currency }}{{ siLocal::number($invoice['paid'] ?? 0) }}</div>
+                    </div>
+                    <div class="col-4">
+                        <div class="text-secondary small mb-1">{{ $LANG['owing'] ?? 'Owing' }}</div>
+                        <div class="fw-bold {{ ($invoice['owing'] ?? 0) > 0 ? 'text-danger' : 'text-success' }}">{{ $currency }}{{ siLocal::number($invoice['owing'] ?? 0) }}</div>
+                    </div>
+                </div>
+                @if(!empty($invoice_age))
+                <div class="text-center text-secondary small mt-3">
+                    {{ $LANG['age'] ?? 'Age' }}: {{ $invoice_age }}
+                    <a class="cluetip ms-1" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_age" title="{{ $LANG['age'] ?? 'Age' }}"><i class="ti ti-help"></i></a>
+                </div>
+                @endif
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title mb-0"><a href="index.php?module=customers&amp;view=details&amp;id={{ urlencode($customer['id'] ?? '') }}&amp;action=view">{{ $LANG['customer_account'] ?? 'Customer Account' }}</a></div>
+            </div>
+            <div class="card-body">
+                <div class="row g-3 text-center">
+                    <div class="col-4">
+                        <div class="text-secondary small mb-1">{{ $LANG['total'] ?? 'Total' }}</div>
+                        <div class="fw-bold">{{ $currency }}{{ siLocal::number($customerAccount['total'] ?? 0) }}</div>
+                    </div>
+                    <div class="col-4">
+                        <div class="text-secondary small mb-1"><a href="index.php?module=payments&amp;view=manage&amp;c_id={{ urlencode($customer['id'] ?? '') }}">{{ $LANG['paid'] ?? 'Paid' }}</a></div>
+                        <div class="fw-bold text-success">{{ $currency }}{{ siLocal::number($customerAccount['paid'] ?? 0) }}</div>
+                    </div>
+                    <div class="col-4">
+                        <div class="text-secondary small mb-1">{{ $LANG['owing'] ?? 'Owing' }}</div>
+                        <div class="fw-bold {{ ($customerAccount['owing'] ?? 0) > 0 ? 'text-danger' : 'text-success' }}">{{ $currency }}{{ siLocal::number($customerAccount['owing'] ?? 0) }}</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
