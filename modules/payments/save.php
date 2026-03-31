@@ -21,8 +21,8 @@ if ( isset($_POST['process_payment']) ) {
 	$payment->ac_payment_type	= $_POST['ac_payment_type'];
 	$result = $payment->insert();
 	
-	$saved = !empty($result) ? "true" : "false";
-	if($saved =='true')
+	$saved = !empty($result);
+	if($saved)
 	{
 		$display_block =  $LANG['save_payment_success'];
 	} else {
@@ -32,6 +32,7 @@ if ( isset($_POST['process_payment']) ) {
 	$refresh_total = "<meta http-equiv='refresh' content='27;url=index.php?module=payments&view=manage' />";
 }
 
+$smarty->assign('saved', isset($saved) ? $saved : null);
 $smarty->assign('display_block', $display_block);
 
 $smarty -> assign('pageActive', 'payment');

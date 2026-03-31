@@ -26,8 +26,10 @@ if (  $op === 'insert_product_value' ) {
 	  ':value', $_POST['value'],
 	  ':enabled', $_POST['enabled']
 	  )) {
+		$saved = true;
 		$display_block = "Successfully saved";
 	} else {
+		$saved = false;
 		$display_block = "Error occurred with saving";
 	}
 
@@ -50,14 +52,16 @@ if (  $op === 'edit_product_value' ) {
 			WHERE
 				id = :id";
 
-		if (dbQuery($sql, 
+		if (dbQuery($sql,
 		  ':attribute_id', $_POST['attribute_id'],
 		  ':value', $_POST['value'],
 		  ':enabled', $_POST['enabled'],
-		  ':id', $_GET['id'])) 
+		  ':id', $_GET['id']))
 	    {
+			$saved = true;
 			$display_block = "Successfully saved";
 		} else {
+			$saved = false;
 			$display_block = "Error occurred with saving";
 		}
 
@@ -74,6 +78,7 @@ $pageActive = "product_value_manage";
 $smarty->assign('pageActive', $pageActive);
 $smarty -> assign('active_tab', '#product');
 
-$smarty -> assign('display_block',$display_block); 
-$smarty -> assign('refresh_total',$refresh_total); 
+$smarty -> assign('saved', isset($saved) ? $saved : null);
+$smarty -> assign('display_block',$display_block);
+$smarty -> assign('refresh_total',$refresh_total);
 ?>

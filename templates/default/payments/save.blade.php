@@ -1,14 +1,14 @@
 <div class="card">
 	<div class="card-body">
-		@if(!empty($display_block))
-			<div class="alert alert-info d-flex align-items-center mb-0" role="alert">
-				<i class="ti ti-info-circle me-2" style="font-size: 1.5rem;"></i>
-				<div>{!! outhtml($display_block ?? '') !!}</div>
+		@if($saved === true)
+			<div class="alert alert-success" role="alert">
+				<div class="alert-icon"></div>
+				{!! outhtml($display_block ?? '') !!}
 			</div>
-		@else
-			<div class="alert alert-success d-flex align-items-center mb-0" role="alert">
-				<i class="ti ti-circle-check me-2" style="font-size: 1.5rem;"></i>
-				<div>{!! outhtml($LANG['payment_success'] ?? 'Payment processed.') !!}</div>
+		@elseif($saved === false)
+			<div class="alert alert-warning" role="alert">
+				<div class="alert-icon"></div>
+				{!! outhtml($display_block ?? '') !!}
 			</div>
 		@endif
 	</div>

@@ -15,14 +15,14 @@
 <div class="card">
 	<div class="card-body">
 		@if($saved == true)
-			<div class="alert alert-success d-flex align-items-center mb-0" role="alert">
-				<i class="ti ti-circle-check me-2" style="font-size: 1.5rem;"></i>
-				<div>{!! outhtml($LANG['save_user_success'] ?? '') !!}</div>
+			<div class="alert alert-success" role="alert">
+				<div class="alert-icon"></div>
+				{!! outhtml($LANG['save_user_success'] ?? '') !!}
 			</div>
 		@else
-			<div class="alert alert-danger d-flex align-items-center mb-0" role="alert">
-				<i class="ti ti-circle-x me-2" style="font-size: 1.5rem;"></i>
-				<div>{!! outhtml($LANG['save_user_failure'] ?? '') !!}</div>
+			<div class="alert alert-warning" role="alert">
+				<div class="alert-icon"></div>
+				{!! outhtml($LANG['save_user_failure'] ?? '') !!}
 			</div>
 		@endif
 	</div>
