@@ -19,7 +19,7 @@ class siLocal
 		$formatter = new \NumberFormatter($locale, \NumberFormatter::DECIMAL);
 		$formatter->setAttribute(\NumberFormatter::FRACTION_DIGITS, $precision);
 
-		return $formatter->format($number);
+		return $formatter->format((float) $number);
 	}
 	
     /*
@@ -84,9 +84,9 @@ class siLocal
 		}
 
 		if ($pattern !== null) {
-			$formatter = new \IntlDateFormatter($locale, \IntlDateFormatter::FULL, \IntlDateFormatter::FULL, $dateTime->getTimezone()->getName(), \IntlDateFormatter::GREGORIAN, $pattern);
+			$formatter = new \IntlDateFormatter($locale, \IntlDateFormatter::FULL, \IntlDateFormatter::NONE, $dateTime->getTimezone()->getName(), \IntlDateFormatter::GREGORIAN, $pattern);
 		} else {
-			$formatter = new \IntlDateFormatter($locale, $style, $style, $dateTime->getTimezone()->getName());
+			$formatter = new \IntlDateFormatter($locale, $style, \IntlDateFormatter::NONE, $dateTime->getTimezone()->getName());
 		}
 
 		return $formatter->format($dateTime);

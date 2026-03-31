@@ -2492,7 +2492,7 @@ function delete($module, $idField, $id, $domain_id='') {
 	// Tablename and column both pass whitelisting and FK checks
 	$sql = "DELETE FROM ".TB_PREFIX."$module WHERE $s_idField = :id";
 	if ($has_domain_id) $sql .= " AND domain_id = :domain_id";
-    $logger->log("Item deleted: ".$sql, ZEND_Log::INFO);
+    $logger->log("Item deleted: ".$sql, LegacyLogger::INFO);
 	if ($has_domain_id) 
 		return dbQuery($sql, ':id', $id, ':domain_id',$domain_id);
 	else

@@ -123,6 +123,19 @@ body {
         margin-bottom: 0.5rem;
         background: var(--tblr-bg-surface);
     }
+
+    /* Separator between qty+product row and taxes+price row */
+    .si-mobile-row-break {
+        border-top: 1px solid var(--tblr-border-color-light, #e6e7e9);
+        margin-top: 0.125rem;
+        margin-bottom: 0.125rem;
+    }
+
+    /* Unit price label right-aligned on mobile to match the right-aligned input */
+    .si-unit-price-col .form-label {
+        text-align: right;
+        display: block;
+    }
 }
 
 /* Desktop: subtle separator between items */

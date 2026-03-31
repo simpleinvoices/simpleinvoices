@@ -126,6 +126,8 @@
 							</select>
 						@endif
 					</div>
+					{{-- Mobile line break: taxes + price wrap to a second line below qty+product --}}
+					<div class="w-100 d-lg-none si-mobile-row-break"></div>
 					@for($taxIdx = 0; $taxIdx < (int)($defaults['tax_per_line_item'] ?? 0); $taxIdx++)
 					<div class="col col-lg-2">
 						<label class="form-label d-lg-none small text-secondary mb-1">{{ $LANG['tax'] ?? '' }}@if(($defaults['tax_per_line_item'] ?? 0) > 1) {{ ($taxIdx + 1) }}@endif</label>
@@ -144,7 +146,7 @@
 						</select>
 					</div>
 					@endfor
-					<div class="col col-lg-2">
+					<div class="col col-lg-2 si-unit-price-col">
 						<label class="form-label d-lg-none small text-secondary mb-1">{{ $LANG['unit_price'] ?? '' }}</label>
 						<input
 							id="unit_price{{ $line }}"
