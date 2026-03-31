@@ -23,7 +23,7 @@
 		<div class="mt-4">
 			<ul class="list-group list-group-flush">
 			@foreach(($page['rows'] ?? []) as $row)
-				<li class="list-group-item li_{{ $row['result'] }}">{{ $row['text'] }}</li>
+				<li class="list-group-item li_{{ $row['result'] }}">{!! $row['text'] !!}</li>
 			@endforeach
 			</ul>
 		</div>

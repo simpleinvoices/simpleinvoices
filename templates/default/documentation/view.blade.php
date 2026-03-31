@@ -1,6 +1,4 @@
 <div id="left">
-<p>
-    {{ $page }}
-</p>
+    {!! $page !!}
 </div>
 
