@@ -71,9 +71,9 @@
 </header>
 
 {{-- Row 2: Navigation bar --}}
-<header class="navbar-expand-md" data-bs-theme="dark">
+<header class="navbar-expand-md">
     <div class="collapse navbar-collapse" id="navbar-menu">
-        <div class="navbar navbar-dark">
+        <div class="navbar">
             <div class="container-xl">
                 <ul class="navbar-nav">
                     {{-- Home --}}

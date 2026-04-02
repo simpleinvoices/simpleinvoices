@@ -9,7 +9,7 @@
     </div>
 
     {{-- Action buttons --}}
-    <div class="card-body border-bottom">
+    <div class="card-body border-bottom d-flex justify-content-center">
         <div class="btn-group" role="group">
             <a title="{{ $LANG['print_preview_tooltip'] ?? '' }}" href="index.php?module=export&amp;view=invoice&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;format=print" class="btn btn-outline-secondary btn-sm">
                 <i class="ti ti-printer me-1 fs-2"></i>{{ $LANG['print_preview'] ?? 'Print' }}

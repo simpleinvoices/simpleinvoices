@@ -50,8 +50,8 @@
 				{{ $LANG['start_date'] ?? '' }}
 			</td>
 			<td>
-				<div class="input-group">
-					<span class="input-group-text"><i class="ti ti-calendar"></i></span>
+				<div class="input-icon">
+					<span class="input-icon-addon"><i class="ti ti-calendar"></i></span>
 					<input type="text" class="form-control validate[required,custom[date],length[0,10]] date-picker" size="10" name="start_date" id="date1" value="{{ $start_date ?? '' }}" />
 				</div>
 			 </td>
@@ -61,8 +61,8 @@
 				{{ $LANG['end_date'] ?? '' }}
 			</td>
 			<td>
-				<div class="input-group">
-					<span class="input-group-text"><i class="ti ti-calendar"></i></span>
+				<div class="input-icon">
+					<span class="input-icon-addon"><i class="ti ti-calendar"></i></span>
 					<input type="text" class="form-control validate[required,custom[date],length[0,10]] date-picker" size="10" name="end_date" id="date1" value="{{ $end_date ?? '' }}" />
 				</div>
 			</td>

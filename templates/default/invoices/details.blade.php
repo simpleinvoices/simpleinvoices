@@ -24,8 +24,8 @@
 			</div>
 			<div class="col-md-2">
 				<label class="form-label">{{ $LANG['date_formatted'] ?? '' }}</label>
-				<div class="input-group">
-					<span class="input-group-text"><i class="ti ti-calendar"></i></span>
+				<div class="input-icon">
+					<span class="input-icon-addon"><i class="ti ti-calendar"></i></span>
 					@if($invoice['id'] == null)
 						<input type="text" class="form-control validate[required,custom[date],length[0,10]] date-picker" name="date" id="date1" value="{{ date('Y-m-d') }}" />
 					@else

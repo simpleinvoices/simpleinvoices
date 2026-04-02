@@ -32,8 +32,8 @@
 			<tr>
 				<th>{{ $LANG['date_upper'] ?? '' }}</th>
 				<td>
-					<div class="input-group">
-						<span class="input-group-text"><i class="ti ti-calendar"></i></span>
+					<div class="input-icon">
+						<span class="input-icon-addon"><i class="ti ti-calendar"></i></span>
 						<input type="text" name="date" id="date" size="10" value="{{ $inventory['date'] ?? '' }}" class="form-control validate[required,custom[date],length[0,10]] date-picker" />
 					</div>
 				</td>

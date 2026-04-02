@@ -3,6 +3,15 @@
  * Layout: Horizontal top navbar (Tabler default)
  */
 
+/* Azure colour scheme */
+:root {
+    --tblr-primary: #45aaf2;
+    --tblr-primary-rgb: 69, 170, 242;
+    --tblr-azure: #45aaf2;
+    --tblr-azure-rgb: 69, 170, 242;
+    --tblr-link-color: #45aaf2;
+}
+
 /* Top navbar brand */
 .navbar-brand {
     font-size: 1.1rem;
@@ -524,13 +533,66 @@ td.index_table {
     z-index: 1050;
 }
 
-/* Bigger icons in nav menus and buttons (fs-2) */
-.btn .ti,
+/* Icon sizing — matches Tabler demo nav proportions */
 .nav-link .ti,
 .nav-link-icon .ti,
 .dropdown-item .ti {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     vertical-align: middle;
+}
+
+.btn .ti {
+    vertical-align: middle;
+}
+
+/* Segmented control (not in Tabler v1.4.0, polyfilled here) */
+.segmented-control {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px;
+    gap: 2px;
+    background: var(--tblr-bg-surface-secondary, #f1f5f9);
+    border: 1px solid var(--tblr-border-color);
+    border-radius: var(--tblr-border-radius);
+}
+
+.segmented-control-item {
+    display: flex;
+    margin: 0;
+    cursor: pointer;
+}
+
+.segmented-control-input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    width: 0;
+    height: 0;
+}
+
+.segmented-control-label {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3rem 0.75rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.4;
+    border-radius: calc(var(--tblr-border-radius) - 1px);
+    color: var(--tblr-secondary);
+    white-space: nowrap;
+    user-select: none;
+    cursor: pointer;
+    transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+}
+
+.segmented-control-item:hover .segmented-control-label {
+    color: var(--tblr-body-color);
+}
+
+.segmented-control-input:checked + .segmented-control-label {
+    background: var(--tblr-bg-surface);
+    color: var(--tblr-body-color);
+    box-shadow: var(--tblr-box-shadow-sm, 0 1px 2px rgba(0,0,0,.08));
 }
 
 /* Help popovers (content loaded from documentation page) */

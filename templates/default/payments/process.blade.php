@@ -33,8 +33,8 @@
 			</div>
 			<div class="mb-3">
 				<label class="form-label">{{ $LANG['date_formatted'] ?? '' }}</label>
-				<div class="input-group">
-					<span class="input-group-text"><i class="ti ti-calendar"></i></span>
+				<div class="input-icon">
+					<span class="input-icon-addon"><i class="ti ti-calendar"></i></span>
 					<input type="text" class="form-control date-picker" name="ac_date" id="date1" value="{{ $today ?? '' }}" />
 				</div>
 			</div>
@@ -58,8 +58,8 @@
 			</div>
 			<div class="mb-3">
 				<label class="form-label">{{ $LANG['date_formatted'] ?? '' }}</label>
-				<div class="input-group">
-					<span class="input-group-text"><i class="ti ti-calendar"></i></span>
+				<div class="input-icon">
+					<span class="input-icon-addon"><i class="ti ti-calendar"></i></span>
 					<input type="text" class="form-control date-picker" name="ac_date" id="date1" value="{{ $today ?? '' }}" />
 				</div>
 			</div>
