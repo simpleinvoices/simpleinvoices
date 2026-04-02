@@ -24,19 +24,19 @@
 	<div class="card-header">
 		<ul class="nav nav-tabs card-header-tabs" role="tablist">
 			<li class="nav-item" role="presentation">
-				<a class="nav-link active" href="#cust-add-details" data-bs-toggle="tab" role="tab">{{ $LANG['details'] ?? '' }}</a>
+				<a class="nav-link active" href="#cust-add-details" data-bs-toggle="tab" role="tab"><i class="ti ti-info-circle me-1"></i>{{ $LANG['details'] ?? '' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#cust-add-address" data-bs-toggle="tab" role="tab">{{ $LANG['address'] ?? 'Address' }}</a>
+				<a class="nav-link" href="#cust-add-address" data-bs-toggle="tab" role="tab"><i class="ti ti-map-pin me-1"></i>{{ $LANG['address'] ?? 'Address' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#cust-add-contact" data-bs-toggle="tab" role="tab">{{ $LANG['contacts'] ?? 'Contacts' }}</a>
+				<a class="nav-link" href="#cust-add-contact" data-bs-toggle="tab" role="tab"><i class="ti ti-phone me-1"></i>{{ $LANG['contacts'] ?? 'Contacts' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#cust-add-custom" data-bs-toggle="tab" role="tab">{{ $LANG['custom_fields'] ?? '' }}</a>
+				<a class="nav-link" href="#cust-add-custom" data-bs-toggle="tab" role="tab"><i class="ti ti-adjustments me-1"></i>{{ $LANG['custom_fields'] ?? '' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#cust-add-notes" data-bs-toggle="tab" role="tab">{{ $LANG['notes'] ?? '' }}</a>
+				<a class="nav-link" href="#cust-add-notes" data-bs-toggle="tab" role="tab"><i class="ti ti-notes me-1"></i>{{ $LANG['notes'] ?? '' }}</a>
 			</li>
 		</ul>
 	</div>
