@@ -3,10 +3,26 @@
  * Keeps legacy SI classes working and aligns with Tabler layout
  */
 
+/* Slate base theme — matches Tabler's ?theme-base=slate */
+[data-bs-theme-base='slate'] {
+	--tblr-gray-50: #f8fafc;
+	--tblr-gray-100: #f1f5f9;
+	--tblr-gray-200: #e2e8f0;
+	--tblr-gray-300: #cbd5e1;
+	--tblr-gray-400: #94a3b8;
+	--tblr-gray-500: #64748b;
+	--tblr-gray-600: #475569;
+	--tblr-gray-700: #334155;
+	--tblr-gray-800: #1e293b;
+	--tblr-gray-900: #0f172a;
+	--tblr-gray-950: #020617;
+	--tblr-body-bg: #f1f5f9;
+}
+
 /* Override legacy main.css font-family and background to match Tabler defaults */
 html, body {
 	font-family: "Inter Var", Inter, -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif !important;
-	background-color: #f9fafb !important;
+	background-color: var(--tblr-body-bg, #f1f5f9) !important;
 }
 
 /* Remove default Tabler page-body margins and page-header top margin */
