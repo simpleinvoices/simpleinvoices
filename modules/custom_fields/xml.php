@@ -4,7 +4,7 @@ header("Content-type: text/xml");
 
 $start = (isset($_REQUEST['start'])) ? $_REQUEST['start'] : "0" ;
 $dir = (isset($_REQUEST['sortorder'])) ? $_REQUEST['sortorder'] : "ASC" ;
-$sort = (isset($_REQUEST['sortname'])) ? $_REQUEST['sortname'] : "cf_custom_label" ;
+$sort = (isset($_REQUEST['sortname'])) ? $_REQUEST['sortname'] : "cf_custom_field" ;
 $limit = (isset($_REQUEST['rp'])) ? $_REQUEST['rp'] : "25" ;
 $page = (isset($_REQUEST['page'])) ? $_REQUEST['page'] : "1" ;
 
@@ -27,12 +27,12 @@ if (!preg_match('/^(asc|desc)$/iD', $dir)) {
 $where = " WHERE domain_id = :domain_id";
 
 /*Check that the sort field is OK*/
-$validFields = array('cf_id', 'cf_custom_label','enabled');
+$validFields = array('cf_id', 'cf_custom_field', 'cf_custom_label','enabled');
 
 if (in_array($sort, $validFields)) {
 	$sort = $sort;
 } else {
-	$sort = "cf_custom_label";
+	$sort = "cf_custom_field";
 }
 
 /*

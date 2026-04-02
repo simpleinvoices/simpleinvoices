@@ -30,7 +30,7 @@ var edit_tooltip = "{/literal}{$LANG.edit_view_tooltip} {$invoices.preference.pr
 				],
 				
 
-			sortname: 'cf_id',
+			sortname: 'cf_custom_field',
 			sortorder: 'asc',
 			usepager: false,
 			/*title: 'Manage Custom Fields',*/
