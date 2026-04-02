@@ -1,6 +1,6 @@
 @include('templates.default.hooks')
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme-base="slate">
 <head>
     <script>
         (function () {
