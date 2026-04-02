@@ -4,42 +4,38 @@
 @endphp
 
 <div class="card mb-3">
-    <div class="card-header">
-        <div class="card-title mb-0">{{ $preference['pref_inv_wording'] ?? 'Invoice' }} {{ $invoice['index_id'] ?? '' }}</div>
-    </div>
-
     {{-- Action buttons --}}
-    <div class="card-body border-bottom d-flex justify-content-center">
+    <div class="card-header d-flex justify-content-center">
         <div class="btn-group" role="group">
-            <a title="{{ $LANG['print_preview_tooltip'] ?? '' }}" href="index.php?module=export&amp;view=invoice&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;format=print" class="btn btn-outline-secondary btn-sm">
-                <i class="ti ti-printer me-1 fs-2"></i>{{ $LANG['print_preview'] ?? 'Print' }}
+            <a title="{{ $LANG['print_preview_tooltip'] ?? '' }}" href="index.php?module=export&amp;view=invoice&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;format=print" class="btn btn-outline-secondary">
+                <i class="ti ti-printer me-1"></i>{{ $LANG['print_preview'] ?? 'Print' }}
             </a>
-            <a title="{{ $LANG['edit'] ?? 'Edit' }}" href="index.php?module=invoices&amp;view=details&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;action=view" class="btn btn-outline-secondary btn-sm">
-                <i class="ti ti-edit me-1 fs-2"></i>{{ $LANG['edit'] ?? 'Edit' }}
+            <a title="{{ $LANG['edit'] ?? 'Edit' }}" href="index.php?module=invoices&amp;view=details&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;action=view" class="btn btn-outline-secondary">
+                <i class="ti ti-edit me-1"></i>{{ $LANG['edit'] ?? 'Edit' }}
             </a>
-            <a title="{{ $LANG['process_payment'] ?? '' }}" href="index.php?module=payments&amp;view=process&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;op=pay_selected_invoice" class="btn btn-outline-secondary btn-sm">
-                <i class="ti ti-cash me-1 fs-2"></i>{{ $LANG['process_payment'] ?? 'Payment' }}
+            <a title="{{ $LANG['process_payment'] ?? '' }}" href="index.php?module=payments&amp;view=process&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;op=pay_selected_invoice" class="btn btn-outline-secondary">
+                <i class="ti ti-cash me-1"></i>{{ $LANG['process_payment'] ?? 'Payment' }}
             </a>
             @if(($eway_pre_check ?? '') == 'true')
-            <a title="{{ $LANG['process_payment_via_eway'] ?? '' }}" href="index.php?module=payments&amp;view=eway&amp;id={{ urlencode($invoice['id'] ?? '') }}" class="btn btn-outline-secondary btn-sm">
-                <i class="ti ti-cash me-1 fs-2"></i>{{ $LANG['process_payment_via_eway'] ?? 'Pay via eWay' }}
+            <a title="{{ $LANG['process_payment_via_eway'] ?? '' }}" href="index.php?module=payments&amp;view=eway&amp;id={{ urlencode($invoice['id'] ?? '') }}" class="btn btn-outline-secondary">
+                <i class="ti ti-cash me-1"></i>{{ $LANG['process_payment_via_eway'] ?? 'Pay via eWay' }}
             </a>
             @endif
-            <a title="{{ $LANG['export_pdf'] ?? '' }}" href="index.php?module=export&amp;view=invoice&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;format=pdf" class="btn btn-outline-secondary btn-sm">
-                <i class="ti ti-file-type-pdf me-1 fs-2"></i>{{ $LANG['export_pdf'] ?? 'PDF' }}
+            <a title="{{ $LANG['export_pdf'] ?? '' }}" href="index.php?module=export&amp;view=invoice&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;format=pdf" class="btn btn-outline-secondary">
+                <i class="ti ti-file-type-pdf me-1"></i>{{ $LANG['export_pdf'] ?? 'PDF' }}
             </a>
-            <a title="{{ $LANG['export_as'] ?? '' }} .{{ $spreadsheet ?? 'xls' }}" href="index.php?module=export&amp;view=invoice&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;format=file&amp;filetype={{ urlencode($spreadsheet ?? 'xls') }}" class="btn btn-outline-secondary btn-sm">
-                <i class="ti ti-file-spreadsheet me-1 fs-2"></i>.{{ $spreadsheet ?? 'xls' }}
+            <a title="{{ $LANG['export_as'] ?? '' }} .{{ $spreadsheet ?? 'xls' }}" href="index.php?module=export&amp;view=invoice&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;format=file&amp;filetype={{ urlencode($spreadsheet ?? 'xls') }}" class="btn btn-outline-secondary">
+                <i class="ti ti-file-spreadsheet me-1"></i>.{{ $spreadsheet ?? 'xls' }}
             </a>
-            <a title="{{ $LANG['export_as'] ?? '' }} .{{ $wordprocessor ?? 'doc' }}" href="index.php?module=export&amp;view=invoice&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;format=file&amp;filetype={{ urlencode($wordprocessor ?? 'doc') }}" class="btn btn-outline-secondary btn-sm">
-                <i class="ti ti-file-text me-1 fs-2"></i>.{{ $wordprocessor ?? 'doc' }}
+            <a title="{{ $LANG['export_as'] ?? '' }} .{{ $wordprocessor ?? 'doc' }}" href="index.php?module=export&amp;view=invoice&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;format=file&amp;filetype={{ urlencode($wordprocessor ?? 'doc') }}" class="btn btn-outline-secondary">
+                <i class="ti ti-file-text me-1"></i>.{{ $wordprocessor ?? 'doc' }}
             </a>
-            <a title="{{ $LANG['email'] ?? '' }}" href="index.php?module=invoices&amp;view=email&amp;stage=1&amp;id={{ urlencode($invoice['id'] ?? '') }}" class="btn btn-outline-secondary btn-sm">
-                <i class="ti ti-mail me-1 fs-2"></i>{{ $LANG['email'] ?? 'Email' }}
+            <a title="{{ $LANG['email'] ?? '' }}" href="index.php?module=invoices&amp;view=email&amp;stage=1&amp;id={{ urlencode($invoice['id'] ?? '') }}" class="btn btn-outline-secondary">
+                <i class="ti ti-mail me-1"></i>{{ $LANG['email'] ?? 'Email' }}
             </a>
             @if(isset($defaults->delete) && $defaults->delete == '1')
-            <a title="{{ $LANG['delete'] ?? '' }}" href="index.php?module=invoices&amp;view=delete&amp;stage=1&amp;id={{ urlencode($invoice['id'] ?? '') }}" class="btn btn-outline-danger btn-sm">
-                <i class="ti ti-trash me-1 fs-2"></i>{{ $LANG['delete'] ?? 'Delete' }}
+            <a title="{{ $LANG['delete'] ?? '' }}" href="index.php?module=invoices&amp;view=delete&amp;stage=1&amp;id={{ urlencode($invoice['id'] ?? '') }}" class="btn btn-outline-danger">
+                <i class="ti ti-trash me-1"></i>{{ $LANG['delete'] ?? 'Delete' }}
             </a>
             @endif
         </div>
@@ -47,13 +43,20 @@
 
     <div class="card-body">
 
-        {{-- Invoice summary: date + custom fields --}}
+        {{-- Invoice number + date --}}
         <div class="mb-4 pb-3 border-bottom">
-            <div class="row g-3">
-                <div class="col-auto">
-                    <div class="text-secondary small mb-1">{{ $LANG['date_formatted'] ?? 'Date' }}</div>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="text-uppercase text-secondary small fw-medium mb-2">{{ $preference['pref_inv_wording'] ?? 'Invoice' }}</div>
+                    <div class="fw-bold">{{ $invoice['index_id'] ?? '' }}</div>
+                </div>
+                <div class="col-md-6">
+                    <div class="text-uppercase text-secondary small fw-medium mb-2">Date</div>
                     <div>{{ $invoice['date'] ?? '' }}</div>
                 </div>
+            </div>
+            @if(!empty($customField['1']) || !empty($customField['2']) || !empty($customField['3']) || !empty($customField['4']))
+            <div class="row g-3 mt-1">
                 @if(!empty($customField['1']))
                 <div class="col-auto">{!! $customField['1'] !!}</div>
                 @endif
@@ -67,6 +70,7 @@
                 <div class="col-auto">{!! $customField['4'] !!}</div>
                 @endif
             </div>
+            @endif
         </div>
 
         {{-- Biller + Customer --}}
@@ -125,7 +129,7 @@
         @if(($invoice['type_id'] ?? 0) == 1)
         <div class="mb-4">
             <div class="text-uppercase text-secondary small fw-medium mb-2">{{ $LANG['description'] ?? 'Description' }}</div>
-            <div>{{ $invoiceItems[0]['description'] ?? '' }}</div>
+            <div>{!! outhtml($invoiceItems[0]['description'] ?? '') !!}</div>
         </div>
         @endif
 
@@ -145,7 +149,7 @@
                     @foreach(($invoiceItems ?? []) as $invoiceItem)
                     <tr>
                         <td class="text-end">{{ siLocal::number_trim($invoiceItem['quantity'] ?? 0) }}</td>
-                        <td>{{ $invoiceItem['product']['description'] ?? '' }}</td>
+                        <td>{!! outhtml($invoiceItem['product']['description'] ?? '') !!}</td>
                         <td class="text-end text-nowrap">{{ $currency }}{{ siLocal::number($invoiceItem['unit_price'] ?? 0) }}</td>
                         <td class="text-end text-nowrap">{{ $currency }}{{ siLocal::number($invoiceItem['gross_total'] ?? 0) }}</td>
                     </tr>
@@ -166,7 +170,7 @@
                     @if(!empty($invoiceItem['description']))
                     <tr class="table-light">
                         <td></td>
-                        <td colspan="3" class="text-secondary small fst-italic">{{ $invoiceItem['description'] }}</td>
+                        <td colspan="3" class="text-secondary small fst-italic">{!! outhtml($invoiceItem['description']) !!}</td>
                     </tr>
                     @endif
                     @php

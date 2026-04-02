@@ -116,8 +116,8 @@
 	@if($invoice['owing'] != 0)
 								<tr class="index_table">
 									<td class="first">
-										<a title="{{ $LANG['process_payment_for'] ?? '' }} {{ $invoice['preference'] }} {{ $invoice['id'] }}" href='index.php?module=payments&view=process&id={{ $invoice['id'] }}&op=pay_selected_invoice' class="btn btn-icon btn-sm btn-outline-success"><i class="ti ti-currency-dollar"></i></a>
-										<a href="index.php?module=invoices&amp;view=quick_view&id={{ urlencode($invoice['id'] ?? '') }}" class="btn btn-icon btn-sm btn-outline-primary"><i class="ti ti-eye"></i></a>
+										<a title="{{ $LANG['process_payment_for'] ?? '' }} {{ $invoice['preference'] }} {{ $invoice['id'] }}" href='index.php?module=payments&view=process&id={{ $invoice['id'] }}&op=pay_selected_invoice' class="btn btn-icon btn-outline-success"><i class="ti ti-currency-dollar"></i></a>
+										<a href="index.php?module=invoices&amp;view=quick_view&id={{ urlencode($invoice['id'] ?? '') }}" class="btn btn-icon btn-outline-primary"><i class="ti ti-eye"></i></a>
 									</td>
 									<td><a href="index.php?module=invoices&amp;view=quick_view&id={{ urlencode($invoice['id'] ?? '') }}">{{ $invoice['pref_inv_wording'] ?? '' }} {{ $invoice['index_id'] ?? '' }}</a></td>
 									<td>{{ $invoice['date'] ?? '' }}</td>
@@ -225,6 +225,10 @@
 					<input type="text" name="attention" value="{{ $customer['attention'] ?? '' }}" class="form-control" />
 				</div>
 				<div class="mb-3">
+					<label class="form-label">{{ $LANG['email'] ?? '' }}</label>
+					<input type="text" name="email" value="{{ $customer['email'] ?? '' }}" class="form-control" />
+				</div>
+				<div class="mb-3">
 					<label class="form-label">{{ $LANG['enabled'] ?? '' }}</label>
 					{html_options name=enabled options=$enabled selected=$customer['enabled'] class="form-select"}
 				</div>
@@ -269,10 +273,6 @@
 				<div class="mb-3">
 					<label class="form-label">{{ $LANG['fax'] ?? '' }}</label>
 					<input type="text" name="fax" value="{{ $customer['fax'] ?? '' }}" class="form-control" />
-				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['email'] ?? '' }}</label>
-					<input type="text" name="email" value="{{ $customer['email'] ?? '' }}" class="form-control" />
 				</div>
 			</div>
 			<div id="cust-edit-custom" class="tab-pane" role="tabpanel">

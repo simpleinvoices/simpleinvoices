@@ -141,6 +141,10 @@
 					<input type="text" name="name" value="{{ $biller['name'] ?? '' }}" id="name" class="form-control validate[required]" />
 				</div>
 				<div class="mb-3">
+					<label class="form-label">{{ $LANG['email'] ?? '' }}</label>
+					<input type="text" name="email" value="{{ $biller['email'] ?? '' }}" class="form-control" />
+				</div>
+				<div class="mb-3">
 					<label class="form-label">{{ $LANG['enabled'] ?? '' }}</label>
 					{html_options name=enabled options=$enabled selected=$biller['enabled'] class="form-select"}
 				</div>
@@ -185,10 +189,6 @@
 				<div class="mb-3">
 					<label class="form-label">{{ $LANG['fax'] ?? '' }}</label>
 					<input type="text" name="fax" value="{{ $biller['fax'] ?? '' }}" class="form-control" />
-				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['email'] ?? '' }}</label>
-					<input type="text" name="email" value="{{ $biller['email'] ?? '' }}" class="form-control" />
 				</div>
 			</div>
 			<div id="bill-edit-payment" class="tab-pane" role="tabpanel">

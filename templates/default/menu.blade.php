@@ -27,7 +27,7 @@
         </h1>
         <div class="navbar-nav flex-row order-md-last">
             <div class="d-none d-md-flex me-3">
-                <a href="{{ $appWebsite }}" target="_blank" rel="noopener" class="btn btn-outline-secondary btn-sm border-0">
+                <a href="{{ $appWebsite }}" target="_blank" rel="noopener" class="btn btn-outline-secondary border-0">
                     <i class="ti ti-external-link me-1"></i>{{ $appWebsiteLabel }}
                 </a>
             </div>

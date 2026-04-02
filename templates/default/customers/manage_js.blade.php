@@ -11,7 +11,7 @@
 			url: @json($url ?? 'index.php?module=customers&view=xml'),
 			dataType: 'xml',
 			colModel : [
-				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'center'},
+				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'left', className: 'w-1'},
 				{display: @json($LANG['name'] ?? 'Name'), name : 'name', width : 35 * percentage_width, sortable : true, align: 'left'},
 				{display: @json($LANG['total'] ?? 'Total'), name : 'customer_total', width : 12 * percentage_width, sortable : true, align: 'right', className: 'd-none d-sm-table-cell'},
 				{display: @json($LANG['paid'] ?? 'Paid'), name : 'paid', width : 12 * percentage_width, sortable : true, align: 'right', className: 'd-none d-sm-table-cell'},

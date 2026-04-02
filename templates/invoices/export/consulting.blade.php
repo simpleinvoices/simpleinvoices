@@ -10,7 +10,7 @@
 
 			<tr class="tbl1-left tbl1-right">
 				<td class="tbl1-left">{{ ($invoiceItem['quantity'] ?? '')|siLocal_number_trim }}</td>
-				<td>{{ $invoiceItem['product']['description'] ?? '' }}</td>
+				<td>{!! outhtml($invoiceItem['product']['description'] ?? '') !!}</td>
 				<td class="tbl1-right" colspan="4"></td>
 			</tr>
 			
@@ -28,7 +28,7 @@
 	
 			<tr class="tbl1-left tbl1-right">
 				<td class="tbl1-left"></td>
-				<td class="tbl1-right" colspan="5"><i>{{ $LANG['description'] ?? '' }}: </i>{{ $invoiceItem['description'] ?? '' }}</td>
+				<td class="tbl1-right" colspan="5"><i>{{ $LANG['description'] ?? '' }}: </i>{!! outhtml($invoiceItem['description'] ?? '') !!}</td>
 			</tr>
 			<tr>
 	            <td class="tbl1-left"></td>

@@ -60,6 +60,10 @@
 					<input type="text" name="attention" value="{{ post('attention') }}" class="form-control" />
 				</div>
 				<div class="mb-3">
+					<label class="form-label">{{ $LANG['email'] ?? '' }}</label>
+					<input type="text" name="email" value="{{ post('email') }}" class="form-control" />
+				</div>
+				<div class="mb-3">
 					<label class="form-label">{{ $LANG['enabled'] ?? '' }}</label>
 					{html_options name=enabled options=$enabled selected=1 class="form-select"}
 				</div>
@@ -104,10 +108,6 @@
 				<div class="mb-3">
 					<label class="form-label">{{ $LANG['fax'] ?? '' }}</label>
 					<input type="text" name="fax" value="{{ post('fax') }}" class="form-control" />
-				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['email'] ?? '' }}</label>
-					<input type="text" name="email" value="{{ post('email') }}" class="form-control" />
 				</div>
 			</div>
 			<div id="cust-add-custom" class="tab-pane" role="tabpanel">

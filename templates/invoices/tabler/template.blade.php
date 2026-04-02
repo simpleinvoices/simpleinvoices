@@ -131,7 +131,7 @@
 			@foreach(($invoiceItems ?? []) as $invoiceItem)
 			<tr>
 				<td class="si-tabler-qty-cell">{{ ($invoiceItem['quantity'] ?? '')|siLocal_number_trim }}</td>
-				<td>{{ $invoiceItem['product']['description'] ?? '' }}</td>
+				<td>{!! outhtml($invoiceItem['product']['description'] ?? '') !!}</td>
 				<td class="text-end">{{ $preference['pref_currency_sign'] ?? '' }} {{ ($invoiceItem['unit_price'] ?? '')|siLocal_number }}</td>
 				<td class="text-end">{{ $preference['pref_currency_sign'] ?? '' }} {{ ($invoiceItem['gross_total'] ?? '')|siLocal_number }}</td>
 			</tr>
@@ -154,7 +154,7 @@
 			@if(!empty($invoiceItem['description']))
 			<tr class="si-tabler-inv-line-desc">
 				<td></td>
-				<td colspan="3">{{ $LANG['description'] ?? 'Description' }}: {{ $invoiceItem['description'] ?? '' }}</td>
+				<td colspan="3">{{ $LANG['description'] ?? 'Description' }}: {!! outhtml($invoiceItem['description'] ?? '') !!}</td>
 			</tr>
 			@endif
 			@if(!empty($invoiceItem['product']['custom_field1']) || !empty($invoiceItem['product']['custom_field2']) || !empty($invoiceItem['product']['custom_field3']) || !empty($invoiceItem['product']['custom_field4']))
@@ -194,7 +194,7 @@
 			@foreach(($invoiceItems ?? []) as $invoiceItem)
 			<tr>
 				<td class="si-tabler-qty-cell">{{ ($invoiceItem['quantity'] ?? '')|siLocal_number }}</td>
-				<td>{{ $invoiceItem['product']['description'] ?? '' }}</td>
+				<td>{!! outhtml($invoiceItem['product']['description'] ?? '') !!}</td>
 				<td></td>
 				<td></td>
 			</tr>
@@ -212,7 +212,7 @@
 			@if(!empty($invoiceItem['description']))
 			<tr class="si-tabler-inv-line-desc">
 				<td></td>
-				<td colspan="3"><i>{{ $LANG['description'] ?? 'Description' }}: </i>{{ $invoiceItem['description'] ?? '' }}</td>
+				<td colspan="3"><i>{{ $LANG['description'] ?? 'Description' }}: </i>{!! outhtml($invoiceItem['description'] ?? '') !!}</td>
 			</tr>
 			@endif
 			<tr>
@@ -234,7 +234,7 @@
 			</thead>
 			<tbody>
 				@foreach(($invoiceItems ?? []) as $invoiceItem)
-				<tr><td>{{ ($invoiceItem['description'] ?? '') | outhtml }}</td></tr>
+				<tr><td>{!! outhtml($invoiceItem['description'] ?? '') !!}</td></tr>
 				@endforeach
 			</tbody>
 		</table>

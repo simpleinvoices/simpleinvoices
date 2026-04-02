@@ -11,7 +11,7 @@
 			url: @json($url ?? 'index.php?module=payment_types&view=xml'),
 			dataType: 'xml',
 			colModel : [
-				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'center'},
+				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'left', className: 'w-1'},
 				{display: @json($LANG['description'] ?? 'Description'), name : 'pt_description', width : 70 * percentage_width, sortable : true, align: 'left'},
 				{display: @json($LANG['status'] ?? 'Status'), name : 'enabled', width : 25 * percentage_width, sortable : true, align: 'center'}
 			],

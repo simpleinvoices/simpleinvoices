@@ -25,7 +25,7 @@ $count = $sth_count_rows;
 	foreach ($inventory_all as $row) {
 		$name_esc = htmlspecialchars($row['description'] ?? $row['name'] ?? (string)$row['id']);
 		$action  = '<div class="dropdown">';
-		$action .= '<a class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><span class="d-none d-sm-inline"><i class="ti ti-settings me-1"></i>'.$LANG['actions'].'</span><span class="d-sm-none"><i class="ti ti-dots-vertical" aria-hidden="true"></i></span></a>';
+		$action .= '<a class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><span class="d-none d-sm-inline-flex align-items-center"><i class="ti ti-settings me-1"></i>'.$LANG['actions'].'</span><span class="d-sm-none"><i class="ti ti-dots-vertical" aria-hidden="true"></i></span></a>';
 		$action .= '<div class="dropdown-menu dropdown-menu-end">';
 		$action .= '<a class="dropdown-item" href="index.php?module=inventory&amp;view=view&amp;id='.$row['id'].'"><i class="ti ti-eye me-2"></i>'.$LANG['view'].' '.$name_esc.'</a>';
 		$action .= '<a class="dropdown-item" href="index.php?module=inventory&amp;view=edit&amp;id='.$row['id'].'"><i class="ti ti-edit me-2"></i>'.$LANG['edit'].' '.$name_esc.'</a>';

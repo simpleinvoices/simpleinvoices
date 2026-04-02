@@ -11,7 +11,7 @@
 			url: @json($url ?? 'index.php?module=user&view=xml'),
 			dataType: 'xml',
 			colModel : [
-				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'center'},
+				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'left', className: 'w-1'},
 				{display: @json($LANG['name'] ?? 'Name'), name : 'name', width : 25 * percentage_width, sortable : true, align: 'left'},
 				{display: @json($LANG['email'] ?? 'Email'), name : 'email', width : 35 * percentage_width, sortable : true, align: 'left'},
 				{display: @json($LANG['role'] ?? 'Role'), name : 'role', width : 25 * percentage_width, sortable : true, align: 'left'},

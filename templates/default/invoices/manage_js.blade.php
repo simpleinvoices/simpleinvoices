@@ -13,7 +13,7 @@
 			useCard: false,
 			toolbarSelector: '#manageGridToolbar',
 			colModel : [
-				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'center'},
+				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'left', className: 'w-1'},
 				{display: @json($LANG['id'] ?? 'ID'), name : 'index_id', width :15 * percentage_width, sortable : true, align: 'left'},
 				{display: @json($LANG['biller'] ?? 'Biller'), name : 'biller', width :20 * percentage_width, sortable : true, align: 'left', className: 'd-none d-sm-table-cell'},
 				{display: @json($LANG['customer'] ?? 'Customer'), name : 'customer', width :20 * percentage_width, sortable : true, align: 'left'},

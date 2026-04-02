@@ -237,7 +237,7 @@
 
 			<tr class="si-modern-item-row" >
 				<td class="col-qty">{{ ($invoiceItem['quantity'] ?? '')|siLocal_number_trim }}</td>
-				<td class="" colspan="3">{{ $invoiceItem['product']['description'] ?? '' }}</td>
+				<td class="" colspan="3">{!! outhtml($invoiceItem['product']['description'] ?? '') !!}</td>
 				<td class="si-modern-num" align="right">{{ $preference['pref_currency_sign'] }} {{ ($invoiceItem['unit_price'] ?? '')|siLocal_number }}</td>
 				<td class="si-modern-num" align="right">{{ $preference['pref_currency_sign'] }} {{ ($invoiceItem['gross_total'] ?? '')|siLocal_number }}</td>
 			</tr>
@@ -266,7 +266,7 @@
 			@if(($invoiceItem['description'] ?? null) != null)
 			<tr class="si-modern-line-desc">
 				<td class=""></td>
-				<td class="" colspan="5">{{ $LANG['description'] ?? '' }}: {{ $invoiceItem['description'] ?? '' }}</td>
+				<td class="" colspan="5">{{ $LANG['description'] ?? '' }}: {!! outhtml($invoiceItem['description'] ?? '') !!}</td>
 			</tr>
 			@endif
 
@@ -304,7 +304,7 @@
 	
 			<tr class="si-modern-item-row">
 				<td class="col-qty">{{ ($invoiceItem['quantity'] ?? '')|siLocal_number }}</td>
-				<td>{{ $invoiceItem['product']['description'] ?? '' }}</td>
+				<td>{!! outhtml($invoiceItem['product']['description'] ?? '') !!}</td>
 				<td class="" colspan="4"></td>
 			</tr>
             <tr class="si-modern-item-sep">
@@ -329,7 +329,7 @@
 
 			<tr class="si-modern-line-desc">
 				<td class=""></td>
-				<td class="" colspan="5"><i>{{ $LANG['description'] ?? '' }}: </i>{{ $invoiceItem['description'] ?? '' }}</td>
+				<td class="" colspan="5"><i>{{ $LANG['description'] ?? '' }}: </i>{!! outhtml($invoiceItem['description'] ?? '') !!}</td>
 			</tr>
 			<tr class="si-modern-item-row">
 				<td class="" ></td>
@@ -352,7 +352,7 @@
           @foreach(($invoiceItems ?? []) as $invoiceItem)
 
 			    <tr class="si-modern-item-row">
-                    <td class="t" colspan="6">{{ $invoiceItem['description'] ?? '' | outhtml }}</td>
+                    <td class="t" colspan="6">{!! outhtml($invoiceItem['description'] ?? '') !!}</td>
                 </tr>
 
 		@endforeach

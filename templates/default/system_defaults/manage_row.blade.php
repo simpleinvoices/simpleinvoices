@@ -20,7 +20,7 @@
 			{{ $value ?? '—' }}
 		</div>
 		<div class="col-auto">
-			<a href="index.php?module=system_defaults&amp;view=edit&amp;submit={{ urlencode($edit_param ?? '') }}" class="btn btn-sm btn-outline-primary" title="{{ $LANG['edit'] ?? 'Edit' }}">
+			<a href="index.php?module=system_defaults&amp;view=edit&amp;submit={{ urlencode($edit_param ?? '') }}" class="btn btn-outline-primary" title="{{ $LANG['edit'] ?? 'Edit' }}">
 				<i class="ti ti-edit me-1"></i>{{ $LANG['edit'] ?? 'Edit' }}
 			</a>
 		</div>

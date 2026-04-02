@@ -51,6 +51,10 @@
 					<input type="text" name="name" value="{{ post('name') }}" id="name" class="form-control validate[required]" />
 				</div>
 				<div class="mb-3">
+					<label class="form-label">{{ $LANG['email'] ?? '' }}</label>
+					<input type="text" name="email" value="{{ post('email') }}" class="form-control" />
+				</div>
+				<div class="mb-3">
 					<label class="form-label">{{ $LANG['enabled'] ?? '' }}</label>
 					{html_options name=enabled options=$enabled selected=1 class="form-select"}
 				</div>
@@ -95,10 +99,6 @@
 				<div class="mb-3">
 					<label class="form-label">{{ $LANG['fax'] ?? '' }}</label>
 					<input type="text" name="fax" value="{{ post('fax') }}" class="form-control" />
-				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['email'] ?? '' }}</label>
-					<input type="text" name="email" value="{{ post('email') }}" class="form-control" />
 				</div>
 			</div>
 			<div id="bill-add-payment" class="tab-pane" role="tabpanel">

@@ -10,14 +10,14 @@
 	@foreach(($invoiceItems ?? []) as $invoiceItem)
 			<tr>
 				<td>{{ ($invoiceItem['quantity'] ?? '')|siLocal_number_trim }}</td>
-				<td colspan="3">{{ $invoiceItem['product']['description'] ?? '' }}</td>
+				<td colspan="3">{!! outhtml($invoiceItem['product']['description'] ?? '') !!}</td>
 				<td>{{ $preference['pref_currency_sign'] }} {{ ($invoiceItem['unit_price'] ?? '')|siLocal_number }}</td>
 				<td align="right">{{ $preference['pref_currency_sign'] }} {{ ($invoiceItem['gross_total'] ?? '')|siLocal_number }}</td>
 			</tr>
 			@if(($invoiceItem['description'] ?? null) != null)
 				<tr >
 					<td ></td>
-					<td colspan="5">{{ $LANG['description'] ?? '' }}: {{ $invoiceItem['description'] ?? '' }}</td>
+					<td colspan="5">{{ $LANG['description'] ?? '' }}: {!! outhtml($invoiceItem['description'] ?? '') !!}</td>
 				</tr>
 			@endif
 			

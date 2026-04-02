@@ -85,7 +85,7 @@ if (in_array($sort, $validFields)) {
 	foreach ($cfs as $row) {
 		$label_esc = htmlspecialchars($row['field_name_nice'] ?? $row['cf_custom_label'] ?? (string)$row['cf_id']);
 		$action  = '<div class="dropdown">';
-		$action .= '<a class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><span class="d-none d-sm-inline"><i class="ti ti-settings me-1"></i>'.$LANG['actions'].'</span><span class="d-sm-none"><i class="ti ti-dots-vertical" aria-hidden="true"></i></span></a>';
+		$action .= '<a class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><span class="d-none d-sm-inline-flex align-items-center"><i class="ti ti-settings me-1"></i>'.$LANG['actions'].'</span><span class="d-sm-none"><i class="ti ti-dots-vertical" aria-hidden="true"></i></span></a>';
 		$action .= '<div class="dropdown-menu dropdown-menu-end">';
 		$action .= '<a class="dropdown-item" href="index.php?module=custom_fields&amp;view=details&amp;id='.$row['cf_id'].'&amp;action=view"><i class="ti ti-eye me-2"></i>'.$LANG['view'].' '.$label_esc.'</a>';
 		$action .= '<a class="dropdown-item" href="index.php?module=custom_fields&amp;view=details&amp;id='.$row['cf_id'].'&amp;action=edit"><i class="ti ti-edit me-2"></i>'.$LANG['edit'].' '.$label_esc.'</a>';

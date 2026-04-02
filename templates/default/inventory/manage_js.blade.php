@@ -11,7 +11,7 @@
 			url: @json($url ?? 'index.php?module=inventory&view=xml'),
 			dataType: 'xml',
 			colModel : [
-				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'center'},
+				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'left', className: 'w-1'},
 				{display: @json($LANG['date_upper'] ?? 'Date'), name : 'date', width : 15 * percentage_width, sortable : true, align: 'center'},
 				{display: @json($LANG['product'] ?? 'Product'), name : 'description', width : 30 * percentage_width, sortable : true, align: 'left'},
 				{display: @json($LANG['quantity'] ?? 'Quantity'), name : 'quantity', width : 15 * percentage_width, sortable : true, align: 'right'},

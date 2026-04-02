@@ -11,7 +11,7 @@
 			url: @json($url ?? 'index.php?module=custom_fields&view=xml'),
 			dataType: 'xml',
 			colModel : [
-				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'center'},
+				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'left', className: 'w-1'},
 				{display: @json($LANG['custom_field'] ?? 'Custom Field'), name : 'cf_custom_field', width : 45 * percentage_width, sortable : false, align: 'left'},
 				{display: @json($LANG['custom_label'] ?? 'Custom Label'), name : 'cf_custom_label', width : 50 * percentage_width, sortable : false, align: 'left'}
 			],

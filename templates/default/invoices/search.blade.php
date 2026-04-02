@@ -225,9 +225,9 @@ Ext.onReady(function(){
 	<div class="card-header">
 		<div class="card-actions btn-list">
 			{{ $LANG['add_new_invoice'] ?? '' }}:
-			<a href="index.php?module=invoices&amp;view=total" class="btn btn-outline-primary btn-sm">{{ $LANG['total_style'] ?? '' }}</a>
-			<a href="index.php?module=invoices&amp;view=itemised" class="btn btn-outline-primary btn-sm">{{ $LANG['itemised_style'] ?? '' }}</a>
-			<a href="index.php?module=invoices&amp;view=consulting" class="btn btn-outline-primary btn-sm">{{ $LANG['consulting_style'] ?? '' }}</a>
+			<a href="index.php?module=invoices&amp;view=total" class="btn btn-outline-primary">{{ $LANG['total_style'] ?? '' }}</a>
+			<a href="index.php?module=invoices&amp;view=itemised" class="btn btn-outline-primary">{{ $LANG['itemised_style'] ?? '' }}</a>
+			<a href="index.php?module=invoices&amp;view=consulting" class="btn btn-outline-primary">{{ $LANG['consulting_style'] ?? '' }}</a>
 		</div>
 	</div>
 	<div class="card-body">

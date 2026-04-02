@@ -11,7 +11,7 @@
 			url: @json($url ?? 'index.php?module=cron&view=xml'),
 			dataType: 'xml',
 			colModel : [
-				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'center'},
+				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'left', className: 'w-1'},
 				{display: @json($LANG['start_date_short'] ?? 'Start'), name : 'start_date', width : 22 * percentage_width, sortable : true, align: 'left'},
 				{display: @json($LANG['end_date_short'] ?? 'End'), name : 'end_date', width : 15 * percentage_width, sortable : true, align: 'left'},
 				{display: @json($LANG['recur_each'] ?? 'Recurrence'), name : 'recurrence', width : 15 * percentage_width, sortable : true, align: 'left'},

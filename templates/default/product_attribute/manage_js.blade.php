@@ -11,7 +11,7 @@
 			url: @json($url ?? 'index.php?module=product_attribute&view=xml'),
 			dataType: 'xml',
 			colModel : [
-				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'center'},
+				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'left', className: 'w-1'},
 				{display: @json($LANG['name'] ?? 'Name'), name : 'name', width : 50 * percentage_width, sortable : true, align: 'left'},
 				{display: @json($LANG['status'] ?? 'Status'), name : 'enabled', width : 20 * percentage_width, sortable : true, align: 'center'},
 				{display: @json($LANG['visible'] ?? 'Visible'), name : 'visible', width : 20 * percentage_width, sortable : true, align: 'center'}

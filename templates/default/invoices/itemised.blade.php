@@ -77,7 +77,7 @@
 			@endfor
 			<div class="col col-lg-2 small fw-medium text-secondary text-end">{{ $LANG['unit_price'] ?? '' }}</div>
 			<div class="col-auto si-expand-col-hdr d-flex align-items-end">
-				<a href="#" class="si-toggle-all-desc btn btn-icon btn-sm btn-outline-secondary" title="{{ $LANG['description'] ?? 'Description' }}"><i class="ti ti-chevrons-down"></i></a>
+				<a href="#" class="si-toggle-all-desc btn btn-icon btn-outline-secondary" title="{{ $LANG['description'] ?? 'Description' }}"><i class="ti ti-chevrons-down"></i></a>
 			</div>
 		</div>
 
@@ -91,7 +91,7 @@
 						@else
 							<a
 								id="trash_link{{ $line }}"
-								class="trash_link btn btn-icon btn-sm btn-outline-danger"
+								class="trash_link btn btn-icon btn-outline-danger"
 								title="{{ $LANG['delete_row'] ?? '' }}"
 								rel="{{ $line }}"
 								href="#"
@@ -159,7 +159,7 @@
 						/>
 					</div>
 					<div class="col-auto d-flex align-items-end">
-						<a href="#" class="si-expand-desc btn btn-icon btn-sm btn-outline-secondary" title="{{ $LANG['description'] ?? 'Description' }}"><i class="ti ti-chevron-down"></i></a>
+						<a href="#" class="si-expand-desc btn btn-icon btn-outline-secondary" title="{{ $LANG['description'] ?? 'Description' }}"><i class="ti ti-chevron-down"></i></a>
 					</div>
 				</div>
 				<div class="row g-2 details si_hide mt-1">
@@ -173,7 +173,7 @@
 		</div>
 
 		<div class="btn-list mb-4">
-			<a href="#" class="add_line_item btn btn-outline-primary btn-sm"><i class="ti ti-plus me-1"></i>{{ $LANG['add_new_row'] ?? '' }}</a>
+			<a href="#" class="add_line_item btn btn-outline-primary"><i class="ti ti-plus me-1"></i>{{ $LANG['add_new_row'] ?? '' }}</a>
 		</div>
 
 		{{-- Custom fields --}}

@@ -11,7 +11,7 @@
 		var col_model;
 		if (inventory == '1') {
 			col_model = [
-				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'center'},
+				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'left', className: 'w-1'},
 				{display: @json($LANG['name'] ?? 'Name'), name : 'description', width : 50 * percentage_width, sortable : true, align: 'left'},
 				{display: @json($LANG['unit_price'] ?? 'Unit Price'), name : 'unit_price', width : 15 * percentage_width, sortable : true, align: 'right'},
 				{display: @json($LANG['quantity'] ?? 'Quantity'), name : 'quantity', width : 15 * percentage_width, sortable : true, align: 'right'},
@@ -19,7 +19,7 @@
 			];
 		} else {
 			col_model = [
-				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'center'},
+				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'left', className: 'w-1'},
 				{display: @json($LANG['name'] ?? 'Name'), name : 'description', width : 60 * percentage_width, sortable : true, align: 'left'},
 				{display: @json($LANG['unit_price'] ?? 'Unit Price'), name : 'unit_price', width : 20 * percentage_width, sortable : true, align: 'right'},
 				{display: @json($LANG['status'] ?? 'Status'), name : 'enabled', width : 15 * percentage_width, sortable : true, align: 'center'}
