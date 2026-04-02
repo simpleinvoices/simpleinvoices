@@ -33,7 +33,7 @@
 
 	<tbody>
 	@foreach(($this_data['months'] ?? []) as $month => $amount)
-		<tr class="tr_{cycle values="A,B"}">
+		<tr class="tr_{{ $loop->index % 2 === 0 ? 'A' : 'B' }}">
 			<th>{{ ucfirst(siLocal::date('2000-' . $month . '-01', 'month')) }}</th>
 		@foreach(($years ?? []) as $year)
 			<td>{{ siLocal::number($amount[$year] ?? 0) ?: '-' }}</td>
