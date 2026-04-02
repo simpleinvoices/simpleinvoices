@@ -175,7 +175,7 @@
                     {{-- Settings --}}
                     <li class="nav-item dropdown @if(in_array($module ?? '', ['options','system_defaults','custom_fields','tax_rates','preferences','payment_types'])) active @endif">
                         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
-                            <span class="nav-link-icon d-md-none d-lg-inline-block"><i class="ti ti-settings"></i></span>
+                            <span class="nav-link-icon d-md-none d-lg-inline-block"><i class="ti ti-adjustments-horizontal"></i></span>
                             <span class="nav-link-title">{{ $LANG['settings'] ?? 'Settings' }}</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-lg-end">
