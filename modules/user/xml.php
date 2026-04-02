@@ -101,7 +101,7 @@ $xml .= "<total>$count</total>";
 foreach ($user as $row) {
 	$display_esc = htmlspecialchars(!empty($row['name']) ? $row['name'] : $row['email']);
 	$action  = '<div class="dropdown">';
-	$action .= '<a class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><span class="d-none d-sm-inline">'.$LANG['actions'].'</span><span class="d-sm-none"><i class="ti ti-dots-vertical" aria-hidden="true"></i></span></a>';
+	$action .= '<a class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><span class="d-none d-sm-inline"><i class="ti ti-settings me-1"></i>'.$LANG['actions'].'</span><span class="d-sm-none"><i class="ti ti-dots-vertical" aria-hidden="true"></i></span></a>';
 	$action .= '<div class="dropdown-menu dropdown-menu-end">';
 	$action .= '<a class="dropdown-item" href="index.php?module=user&amp;view=details&amp;id='.$row['id'].'&amp;action=view"><i class="ti ti-eye me-2"></i>'.$LANG['view'].' '.$display_esc.'</a>';
 	$action .= '<a class="dropdown-item" href="index.php?module=user&amp;view=details&amp;id='.$row['id'].'&amp;action=edit"><i class="ti ti-edit me-2"></i>'.$LANG['edit'].' '.$display_esc.'</a>';

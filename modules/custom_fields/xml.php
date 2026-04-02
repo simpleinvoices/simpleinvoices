@@ -4,7 +4,7 @@ header("Content-type: text/xml");
 
 $start = (isset($_REQUEST['start'])) ? $_REQUEST['start'] : "0" ;
 $dir = (isset($_REQUEST['sortorder'])) ? $_REQUEST['sortorder'] : "ASC" ;
-$sort = (isset($_REQUEST['sortname'])) ? $_REQUEST['sortname'] : "cf_custom_label" ;
+$sort = (isset($_REQUEST['sortname'])) ? $_REQUEST['sortname'] : "cf_custom_field" ;
 $limit = (isset($_REQUEST['rp'])) ? $_REQUEST['rp'] : "25" ;
 $page = (isset($_REQUEST['page'])) ? $_REQUEST['page'] : "1" ;
 
@@ -27,12 +27,12 @@ if (!preg_match('/^(asc|desc)$/iD', $dir)) {
 $where = " WHERE domain_id = :domain_id";
 
 /*Check that the sort field is OK*/
-$validFields = array('cf_id', 'cf_custom_label','enabled');
+$validFields = array('cf_id', 'cf_custom_field', 'cf_custom_label','enabled');
 
 if (in_array($sort, $validFields)) {
 	$sort = $sort;
 } else {
-	$sort = "cf_custom_label";
+	$sort = "cf_custom_field";
 }
 
 /*
@@ -85,7 +85,7 @@ if (in_array($sort, $validFields)) {
 	foreach ($cfs as $row) {
 		$label_esc = htmlspecialchars($row['field_name_nice'] ?? $row['cf_custom_label'] ?? (string)$row['cf_id']);
 		$action  = '<div class="dropdown">';
-		$action .= '<a class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><span class="d-none d-sm-inline">'.$LANG['actions'].'</span><span class="d-sm-none"><i class="ti ti-dots-vertical" aria-hidden="true"></i></span></a>';
+		$action .= '<a class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><span class="d-none d-sm-inline"><i class="ti ti-settings me-1"></i>'.$LANG['actions'].'</span><span class="d-sm-none"><i class="ti ti-dots-vertical" aria-hidden="true"></i></span></a>';
 		$action .= '<div class="dropdown-menu dropdown-menu-end">';
 		$action .= '<a class="dropdown-item" href="index.php?module=custom_fields&amp;view=details&amp;id='.$row['cf_id'].'&amp;action=view"><i class="ti ti-eye me-2"></i>'.$LANG['view'].' '.$label_esc.'</a>';
 		$action .= '<a class="dropdown-item" href="index.php?module=custom_fields&amp;view=details&amp;id='.$row['cf_id'].'&amp;action=edit"><i class="ti ti-edit me-2"></i>'.$LANG['edit'].' '.$label_esc.'</a>';

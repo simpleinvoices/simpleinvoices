@@ -10,7 +10,7 @@
 @endphp
 
 {{-- Row 1: Top bar — logo + user controls --}}
-<header class="navbar navbar-expand-md d-print-none">
+<header class="navbar navbar-expand-md d-print-none" data-bs-theme="dark">
     <div class="container-xl">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -71,9 +71,9 @@
 </header>
 
 {{-- Row 2: Navigation bar --}}
-<header class="navbar-expand-md">
+<header class="navbar-expand-md" data-bs-theme="dark">
     <div class="collapse navbar-collapse" id="navbar-menu">
-        <div class="navbar">
+        <div class="navbar navbar-dark">
             <div class="container-xl">
                 <ul class="navbar-nav">
                     {{-- Home --}}
@@ -175,7 +175,7 @@
                     {{-- Settings --}}
                     <li class="nav-item dropdown @if(in_array($module ?? '', ['options','system_defaults','custom_fields','tax_rates','preferences','payment_types'])) active @endif">
                         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
-                            <span class="nav-link-icon d-md-none d-lg-inline-block"><i class="ti ti-settings"></i></span>
+                            <span class="nav-link-icon d-md-none d-lg-inline-block"><i class="ti ti-adjustments-horizontal"></i></span>
                             <span class="nav-link-title">{{ $LANG['settings'] ?? 'Settings' }}</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-lg-end">
@@ -284,7 +284,11 @@
                 </div>
                 <div class="col-auto ms-auto d-print-none">
                     <div class="btn-list">
-                    @if(($module ?? '') == 'invoices' && ($view ?? '') == 'manage')
+                    @if(($module ?? '') == 'index' && ($view ?? '') == 'index')
+                        <a href="index.php?module=invoices&view=itemised" class="btn btn-primary">
+                            <i class="ti ti-plus me-1"></i>{{ $LANG['new_invoice'] ?? 'New Invoice' }}
+                        </a>
+                    @elseif(($module ?? '') == 'invoices' && ($view ?? '') == 'manage')
                         <a href="index.php?module=invoices&view=itemised" class="btn btn-primary">
                             <i class="ti ti-plus me-1"></i>{{ $LANG['new_invoice'] ?? 'New Invoice' }}
                         </a>

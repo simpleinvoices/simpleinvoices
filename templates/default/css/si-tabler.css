@@ -524,6 +524,15 @@ td.index_table {
     z-index: 1050;
 }
 
+/* Bigger icons in nav menus and buttons (fs-2) */
+.btn .ti,
+.nav-link .ti,
+.nav-link-icon .ti,
+.dropdown-item .ti {
+    font-size: 1.5rem;
+    vertical-align: middle;
+}
+
 /* Help popovers (content loaded from documentation page) */
 .si-help-popover.popover {
     max-width: 360px;
