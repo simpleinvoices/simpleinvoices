@@ -284,7 +284,11 @@
                 </div>
                 <div class="col-auto ms-auto d-print-none">
                     <div class="btn-list">
-                    @if(($module ?? '') == 'invoices' && ($view ?? '') == 'manage')
+                    @if(($module ?? '') == 'index' && ($view ?? '') == 'index')
+                        <a href="index.php?module=invoices&view=itemised" class="btn btn-primary">
+                            <i class="ti ti-plus me-1"></i>{{ $LANG['new_invoice'] ?? 'New Invoice' }}
+                        </a>
+                    @elseif(($module ?? '') == 'invoices' && ($view ?? '') == 'manage')
                         <a href="index.php?module=invoices&view=itemised" class="btn btn-primary">
                             <i class="ti ti-plus me-1"></i>{{ $LANG['new_invoice'] ?? 'New Invoice' }}
                         </a>
