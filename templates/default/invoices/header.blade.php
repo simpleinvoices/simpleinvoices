@@ -50,12 +50,15 @@
 		</div>
 		<div class="col-md-3">
 			<label class="form-label">{{ $LANG['date_formatted'] ?? '' }}</label>
-			<input type="text" class="form-control validate[required,custom[date],length[0,10]] date-picker" name="date" id="date1"
-				@if(get('date'))
-					value="{{ get('date') }}"
-				@else
-					value="{{ date('Y-m-d') }}"
-				@endif
-			/>
+			<div class="input-group">
+				<span class="input-group-text"><i class="ti ti-calendar"></i></span>
+				<input type="text" class="form-control validate[required,custom[date],length[0,10]] date-picker" name="date" id="date1"
+					@if(get('date'))
+						value="{{ get('date') }}"
+					@else
+						value="{{ date('Y-m-d') }}"
+					@endif
+				/>
+			</div>
 		</div>
 	</div>

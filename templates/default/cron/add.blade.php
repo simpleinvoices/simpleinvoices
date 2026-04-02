@@ -36,11 +36,17 @@
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['start_date'] ?? '' }}</label>
-			<input type="text" class="form-control validate[required,custom[date],length[0,10]] date-picker" size="10" name="start_date" id="date" value='{{ date('Y-m-d', strtotime('+1 day')) }}' />
+			<div class="input-group">
+				<span class="input-group-text"><i class="ti ti-calendar"></i></span>
+				<input type="text" class="form-control validate[required,custom[date],length[0,10]] date-picker" size="10" name="start_date" id="date" value='{{ date('Y-m-d', strtotime('+1 day')) }}' />
+			</div>
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['end_date'] ?? '' }}</label>
-			<input type="text" class="form-control date-picker" size="10" name="end_date" id="date" value='' />
+			<div class="input-group">
+				<span class="input-group-text"><i class="ti ti-calendar"></i></span>
+				<input type="text" class="form-control date-picker" size="10" name="end_date" id="date" value='' />
+			</div>
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['recur_each'] ?? '' }}</label>
