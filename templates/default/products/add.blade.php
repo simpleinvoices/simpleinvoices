@@ -17,13 +17,13 @@
 	<div class="card-header">
 		<ul class="nav nav-tabs card-header-tabs" role="tablist">
 			<li class="nav-item" role="presentation">
-				<a class="nav-link active" href="#section-1" data-bs-toggle="tab" role="tab">{{ $LANG['details'] ?? '' }}</a>
+				<a class="nav-link active" href="#section-1" data-bs-toggle="tab" role="tab"><i class="ti ti-info-circle me-1"></i>{{ $LANG['details'] ?? '' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#section-2" data-bs-toggle="tab" role="tab">{{ $LANG['custom_fields'] ?? '' }}</a>
+				<a class="nav-link" href="#section-2" data-bs-toggle="tab" role="tab"><i class="ti ti-adjustments me-1"></i>{{ $LANG['custom_fields'] ?? '' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#section-3" data-bs-toggle="tab" role="tab">{{ $LANG['notes'] ?? '' }}</a>
+				<a class="nav-link" href="#section-3" data-bs-toggle="tab" role="tab"><i class="ti ti-notes me-1"></i>{{ $LANG['notes'] ?? '' }}</a>
 			</li>
 		</ul>
 	</div>

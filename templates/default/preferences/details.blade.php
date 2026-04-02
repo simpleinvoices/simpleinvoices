@@ -8,16 +8,16 @@
 	<div class="card-header">
 		<ul class="nav nav-tabs card-header-tabs" role="tablist">
 			<li class="nav-item" role="presentation">
-				<a class="nav-link active" href="#pref-view-details" data-bs-toggle="tab" role="tab">{{ $LANG['details'] ?? '' }}</a>
+				<a class="nav-link active" href="#pref-view-details" data-bs-toggle="tab" role="tab"><i class="ti ti-info-circle me-1"></i>{{ $LANG['details'] ?? '' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#pref-view-currency" data-bs-toggle="tab" role="tab">{{ $LANG['currency_sign'] ?? 'Currency' }}</a>
+				<a class="nav-link" href="#pref-view-currency" data-bs-toggle="tab" role="tab"><i class="ti ti-currency-dollar me-1"></i>{{ $LANG['currency_sign'] ?? 'Currency' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#pref-view-wording" data-bs-toggle="tab" role="tab">{{ $LANG['invoice_heading'] ?? 'Invoice Wording' }}</a>
+				<a class="nav-link" href="#pref-view-wording" data-bs-toggle="tab" role="tab"><i class="ti ti-pencil me-1"></i>{{ $LANG['invoice_heading'] ?? 'Invoice Wording' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#pref-view-payment" data-bs-toggle="tab" role="tab">{{ $LANG['payment'] ?? 'Payment' }}</a>
+				<a class="nav-link" href="#pref-view-payment" data-bs-toggle="tab" role="tab"><i class="ti ti-credit-card me-1"></i>{{ $LANG['payment'] ?? 'Payment' }}</a>
 			</li>
 		</ul>
 	</div>
@@ -94,16 +94,16 @@
 	<div class="card-header">
 		<ul class="nav nav-tabs card-header-tabs" role="tablist">
 			<li class="nav-item" role="presentation">
-				<a class="nav-link active" href="#pref-edit-details" data-bs-toggle="tab" role="tab">{{ $LANG['details'] ?? '' }}</a>
+				<a class="nav-link active" href="#pref-edit-details" data-bs-toggle="tab" role="tab"><i class="ti ti-info-circle me-1"></i>{{ $LANG['details'] ?? '' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#pref-edit-currency" data-bs-toggle="tab" role="tab">{{ $LANG['currency_sign'] ?? 'Currency' }}</a>
+				<a class="nav-link" href="#pref-edit-currency" data-bs-toggle="tab" role="tab"><i class="ti ti-currency-dollar me-1"></i>{{ $LANG['currency_sign'] ?? 'Currency' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#pref-edit-wording" data-bs-toggle="tab" role="tab">{{ $LANG['invoice_heading'] ?? 'Invoice Wording' }}</a>
+				<a class="nav-link" href="#pref-edit-wording" data-bs-toggle="tab" role="tab"><i class="ti ti-pencil me-1"></i>{{ $LANG['invoice_heading'] ?? 'Invoice Wording' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#pref-edit-payment" data-bs-toggle="tab" role="tab">{{ $LANG['payment'] ?? 'Payment' }}</a>
+				<a class="nav-link" href="#pref-edit-payment" data-bs-toggle="tab" role="tab"><i class="ti ti-credit-card me-1"></i>{{ $LANG['payment'] ?? 'Payment' }}</a>
 			</li>
 		</ul>
 	</div>
