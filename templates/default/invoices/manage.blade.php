@@ -14,23 +14,28 @@
 	<div class="card">
 	<div class="card-table">
 		<div class="card-header d-flex flex-wrap align-items-center gap-2">
-			<ul class="nav nav-pills card-header-pills mb-0" role="tablist">
-				<li class="nav-item">
-					<a href="index.php?module=invoices&amp;view=manage" class="nav-link @if((get('having')) == '') active @endif">{{ $LANG['all'] ?? 'All' }}</a>
-				</li>
-				<li class="nav-item">
-					<a href="index.php?module=invoices&amp;view=manage&amp;having=money_owed" class="nav-link @if((get('having')) == 'money_owed') active @endif">{{ $LANG['due'] ?? 'Due' }}</a>
-				</li>
-				<li class="nav-item">
-					<a href="index.php?module=invoices&amp;view=manage&amp;having=paid" class="nav-link @if((get('having')) == 'paid') active @endif">{{ $LANG['paid'] ?? 'Paid' }}</a>
-				</li>
-				<li class="nav-item">
-					<a href="index.php?module=invoices&amp;view=manage&amp;having=draft" class="nav-link @if((get('having')) == 'draft') active @endif">{{ $LANG['draft'] ?? 'Draft' }}</a>
-				</li>
-				<li class="nav-item">
-					<a href="index.php?module=invoices&amp;view=manage&amp;having=real" class="nav-link @if((get('having')) == 'real') active @endif">{{ $LANG['real'] ?? 'Real' }}</a>
-				</li>
-			</ul>
+			<div class="segmented-control">
+				<label class="segmented-control-item" onclick="window.location='index.php?module=invoices&amp;view=manage'">
+					<input type="radio" class="segmented-control-input" name="invoice_filter" @if((get('having')) == '') checked @endif>
+					<span class="segmented-control-label"><i class="ti ti-list me-1"></i>{{ $LANG['all'] ?? 'All' }}</span>
+				</label>
+				<label class="segmented-control-item" onclick="window.location='index.php?module=invoices&amp;view=manage&amp;having=money_owed'">
+					<input type="radio" class="segmented-control-input" name="invoice_filter" @if((get('having')) == 'money_owed') checked @endif>
+					<span class="segmented-control-label"><i class="ti ti-clock-dollar me-1"></i>{{ $LANG['due'] ?? 'Due' }}</span>
+				</label>
+				<label class="segmented-control-item" onclick="window.location='index.php?module=invoices&amp;view=manage&amp;having=paid'">
+					<input type="radio" class="segmented-control-input" name="invoice_filter" @if((get('having')) == 'paid') checked @endif>
+					<span class="segmented-control-label"><i class="ti ti-circle-check me-1"></i>{{ $LANG['paid'] ?? 'Paid' }}</span>
+				</label>
+				<label class="segmented-control-item" onclick="window.location='index.php?module=invoices&amp;view=manage&amp;having=draft'">
+					<input type="radio" class="segmented-control-input" name="invoice_filter" @if((get('having')) == 'draft') checked @endif>
+					<span class="segmented-control-label"><i class="ti ti-file-pencil me-1"></i>{{ $LANG['draft'] ?? 'Draft' }}</span>
+				</label>
+				<label class="segmented-control-item" onclick="window.location='index.php?module=invoices&amp;view=manage&amp;having=real'">
+					<input type="radio" class="segmented-control-input" name="invoice_filter" @if((get('having')) == 'real') checked @endif>
+					<span class="segmented-control-label"><i class="ti ti-file-invoice me-1"></i>{{ $LANG['real'] ?? 'Real' }}</span>
+				</label>
+			</div>
 			<div id="manageGridToolbar" class="d-flex flex-wrap gap-2 align-items-center ms-auto"></div>
 		</div>
 		<div id="manageGrid"></div>
