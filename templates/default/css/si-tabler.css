@@ -546,6 +546,19 @@ td.index_table {
     vertical-align: middle;
 }
 
+/* Responsive small button — full size on sm+, btn-sm on xs */
+@media (max-width: 575.98px) {
+    .btn-sm-mobile {
+        --tblr-btn-padding-y: .25rem;
+        --tblr-btn-padding-x: .5rem;
+        --tblr-btn-font-size: .875rem;
+        border-radius: var(--tblr-border-radius-sm, .25rem);
+    }
+    .btn-sm-mobile .ti {
+        font-size: 1rem;
+    }
+}
+
 /* Segmented control (not in Tabler v1.4.0, polyfilled here) */
 .segmented-control {
     display: inline-flex;

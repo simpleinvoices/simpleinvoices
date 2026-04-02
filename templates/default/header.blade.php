@@ -57,6 +57,7 @@
             var next = document.documentElement.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark';
             document.documentElement.setAttribute('data-bs-theme', next);
             localStorage.setItem('siTheme', next);
+            document.documentElement.dispatchEvent(new CustomEvent('si-theme-changed'));
         }
     </script>
     @stack('hook_head_end')
