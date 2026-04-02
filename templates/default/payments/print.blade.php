@@ -7,7 +7,7 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-	<link rel="stylesheet" href="https://preview.tabler.io/dist/css/tabler.min.css" />
+	<link rel="stylesheet" href="https://preview.tabler.io/dist/css/tabler-azure.min.css" />
 	<style type="text/css" media="all">
 		body { background: #fff; color: #1e293b; font-size: 14px; padding: 2rem; }
 		@media print { body { padding: 0; } .no-print { display: none !important; } }
