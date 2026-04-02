@@ -12,34 +12,34 @@
     <div class="card-body border-bottom">
         <div class="btn-list">
             <a title="{{ $LANG['print_preview_tooltip'] ?? '' }}" href="index.php?module=export&amp;view=invoice&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;format=print" class="btn btn-outline-secondary btn-sm">
-                <i class="ti ti-printer me-1"></i>{{ $LANG['print_preview'] ?? 'Print' }}
+                <i class="ti ti-printer me-1 fs-2"></i>{{ $LANG['print_preview'] ?? 'Print' }}
             </a>
             <a title="{{ $LANG['edit'] ?? 'Edit' }}" href="index.php?module=invoices&amp;view=details&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;action=view" class="btn btn-outline-secondary btn-sm">
-                <i class="ti ti-edit me-1"></i>{{ $LANG['edit'] ?? 'Edit' }}
+                <i class="ti ti-edit me-1 fs-2"></i>{{ $LANG['edit'] ?? 'Edit' }}
             </a>
             <a title="{{ $LANG['process_payment'] ?? '' }}" href="index.php?module=payments&amp;view=process&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;op=pay_selected_invoice" class="btn btn-outline-secondary btn-sm">
-                <i class="ti ti-cash me-1"></i>{{ $LANG['process_payment'] ?? 'Payment' }}
+                <i class="ti ti-cash me-1 fs-2"></i>{{ $LANG['process_payment'] ?? 'Payment' }}
             </a>
             @if(($eway_pre_check ?? '') == 'true')
             <a title="{{ $LANG['process_payment_via_eway'] ?? '' }}" href="index.php?module=payments&amp;view=eway&amp;id={{ urlencode($invoice['id'] ?? '') }}" class="btn btn-outline-secondary btn-sm">
-                <i class="ti ti-cash me-1"></i>{{ $LANG['process_payment_via_eway'] ?? 'Pay via eWay' }}
+                <i class="ti ti-cash me-1 fs-2"></i>{{ $LANG['process_payment_via_eway'] ?? 'Pay via eWay' }}
             </a>
             @endif
             <a title="{{ $LANG['export_pdf'] ?? '' }}" href="index.php?module=export&amp;view=invoice&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;format=pdf" class="btn btn-outline-secondary btn-sm">
-                <i class="ti ti-file-type-pdf me-1"></i>{{ $LANG['export_pdf'] ?? 'PDF' }}
+                <i class="ti ti-file-type-pdf me-1 fs-2"></i>{{ $LANG['export_pdf'] ?? 'PDF' }}
             </a>
             <a title="{{ $LANG['export_as'] ?? '' }} .{{ $spreadsheet ?? 'xls' }}" href="index.php?module=export&amp;view=invoice&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;format=file&amp;filetype={{ urlencode($spreadsheet ?? 'xls') }}" class="btn btn-outline-secondary btn-sm">
-                <i class="ti ti-file-spreadsheet me-1"></i>.{{ $spreadsheet ?? 'xls' }}
+                <i class="ti ti-file-spreadsheet me-1 fs-2"></i>.{{ $spreadsheet ?? 'xls' }}
             </a>
             <a title="{{ $LANG['export_as'] ?? '' }} .{{ $wordprocessor ?? 'doc' }}" href="index.php?module=export&amp;view=invoice&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;format=file&amp;filetype={{ urlencode($wordprocessor ?? 'doc') }}" class="btn btn-outline-secondary btn-sm">
-                <i class="ti ti-file-text me-1"></i>.{{ $wordprocessor ?? 'doc' }}
+                <i class="ti ti-file-text me-1 fs-2"></i>.{{ $wordprocessor ?? 'doc' }}
             </a>
             <a title="{{ $LANG['email'] ?? '' }}" href="index.php?module=invoices&amp;view=email&amp;stage=1&amp;id={{ urlencode($invoice['id'] ?? '') }}" class="btn btn-outline-secondary btn-sm">
-                <i class="ti ti-mail me-1"></i>{{ $LANG['email'] ?? 'Email' }}
+                <i class="ti ti-mail me-1 fs-2"></i>{{ $LANG['email'] ?? 'Email' }}
             </a>
             @if(isset($defaults->delete) && $defaults->delete == '1')
             <a title="{{ $LANG['delete'] ?? '' }}" href="index.php?module=invoices&amp;view=delete&amp;stage=1&amp;id={{ urlencode($invoice['id'] ?? '') }}" class="btn btn-outline-danger btn-sm">
-                <i class="ti ti-trash me-1"></i>{{ $LANG['delete'] ?? 'Delete' }}
+                <i class="ti ti-trash me-1 fs-2"></i>{{ $LANG['delete'] ?? 'Delete' }}
             </a>
             @endif
         </div>
@@ -244,7 +244,7 @@
                     </div>
                     <div class="col-4">
                         <div class="text-secondary small mb-1"><a href="index.php?module=payments&amp;view=manage&amp;id={{ urlencode($invoice['id'] ?? '') }}">{{ $LANG['paid'] ?? 'Paid' }}</a></div>
-                        <div class="fw-bold text-success">{{ $currency }}{{ siLocal::number($invoice['paid'] ?? 0) }}</div>
+                        <div class="fw-bold">{{ $currency }}{{ siLocal::number($invoice['paid'] ?? 0) }}</div>
                     </div>
                     <div class="col-4">
                         <div class="text-secondary small mb-1">{{ $LANG['owing'] ?? 'Owing' }}</div>
@@ -273,7 +273,7 @@
                     </div>
                     <div class="col-4">
                         <div class="text-secondary small mb-1"><a href="index.php?module=payments&amp;view=manage&amp;c_id={{ urlencode($customer['id'] ?? '') }}">{{ $LANG['paid'] ?? 'Paid' }}</a></div>
-                        <div class="fw-bold text-success">{{ $currency }}{{ siLocal::number($customerAccount['paid'] ?? 0) }}</div>
+                        <div class="fw-bold">{{ $currency }}{{ siLocal::number($customerAccount['paid'] ?? 0) }}</div>
                     </div>
                     <div class="col-4">
                         <div class="text-secondary small mb-1">{{ $LANG['owing'] ?? 'Owing' }}</div>
