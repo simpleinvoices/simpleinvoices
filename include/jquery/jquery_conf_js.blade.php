@@ -52,8 +52,8 @@ var si_lang_description_conf = @json($LANG['description'] ?? 'Description');
 					selector: 'textarea.detail-editor',
 					plugins: 'lists autoresize',
 					toolbar: 'bold italic | bullist numlist',
-					min_height: 80,
-					max_height: 300
+					min_height: 50,
+					max_height: 150
 				}));
 			}
 		}

@@ -46,7 +46,8 @@
 				var t1 = document.querySelector('#row' + row_number + ' [name="tax_id[' + row_number + '][1]"]');
 				if (t1) t1.value = (data.default_tax_id_2 != null) ? data.default_tax_id_2 : '';
 				var detailsTr = document.querySelectorAll('#row' + row_number + ' .details');
-				var globalShowActive = !!document.querySelector('.si-toggle-all-desc[data-show="1"] input:checked');
+				var toggleAllBtn = document.querySelector('.si-toggle-all-desc i');
+				var globalShowActive = toggleAllBtn && toggleAllBtn.classList.contains('ti-chevrons-up');
 				detailsTr.forEach(function (tr) {
 					if (data.show_description === 'Y' || globalShowActive) tr.classList.remove('si_hide');
 					else tr.classList.add('si_hide');
@@ -135,32 +136,30 @@
 		function byId(r, id) { return clonedRow.querySelector('#' + id) || clonedRow.querySelector('[id="' + id + '"]'); }
 		var trashLink = byId(clonedRow, 'trash_link' + rowID_old); if (trashLink) { trashLink.id = 'trash_link' + rowID_new; trashLink.name = 'trash_link' + rowID_new; trashLink.href = '#'; trashLink.setAttribute('rel', String(rowID_new)); }
 		var trashLinkEdit = byId(clonedRow, 'trash_link_edit' + rowID_old); if (trashLinkEdit) { trashLinkEdit.id = 'trash_link_edit' + rowID_new; trashLinkEdit.name = 'trash_link_edit' + rowID_new; trashLinkEdit.href = '#'; trashLinkEdit.setAttribute('rel', String(rowID_new)); }
-		// Row 0 has a hidden placeholder delete segment — replace it with a real one
-		var placeholder = clonedRow.querySelector('.si-del-placeholder');
-		if (placeholder) {
-			var isEdit = !!document.getElementById('delete0');
-			var linkClass = isEdit ? 'trash_link_edit' : 'trash_link';
-			var linkId = isEdit ? 'trash_link_edit' + rowID_new : 'trash_link' + rowID_new;
-			var existingBtn = itemtable.querySelector('.' + linkClass);
-			var linkTitle = existingBtn ? (existingBtn.getAttribute('title') || '') : '';
-			var newLabel = document.createElement('label');
-			newLabel.id = linkId;
-			newLabel.className = 'segmented-control-item ' + linkClass;
-			newLabel.setAttribute('rel', String(rowID_new));
-			if (linkTitle) newLabel.setAttribute('title', linkTitle);
-			var inp = document.createElement('input');
-			inp.type = 'radio';
-			inp.className = 'segmented-control-input';
-			var spanLabel = document.createElement('span');
-			spanLabel.className = 'segmented-control-label';
-			var icon = document.createElement('i');
-			icon.className = 'ti ti-trash';
-			if (isEdit) icon.id = 'delete_image' + rowID_new;
-			spanLabel.appendChild(icon);
-			newLabel.appendChild(inp);
-			newLabel.appendChild(spanLabel);
-			placeholder.parentNode.replaceChild(newLabel, placeholder);
-		}
+		// Row 0 has no trash button — append a real one to the cloned row's segmented control
+		var isEdit = !!document.getElementById('delete0');
+		var linkClass = isEdit ? 'trash_link_edit' : 'trash_link';
+		var linkId = isEdit ? 'trash_link_edit' + rowID_new : 'trash_link' + rowID_new;
+		var existingBtn = itemtable.querySelector('.' + linkClass);
+		var linkTitle = existingBtn ? (existingBtn.getAttribute('title') || '') : '';
+		var newLabel = document.createElement('label');
+		newLabel.id = linkId;
+		newLabel.className = 'segmented-control-item ' + linkClass;
+		newLabel.setAttribute('rel', String(rowID_new));
+		if (linkTitle) newLabel.setAttribute('title', linkTitle);
+		var inp = document.createElement('input');
+		inp.type = 'radio';
+		inp.className = 'segmented-control-input';
+		var spanLabel = document.createElement('span');
+		spanLabel.className = 'segmented-control-label';
+		var icon = document.createElement('i');
+		icon.className = 'ti ti-trash';
+		if (isEdit) icon.id = 'delete_image' + rowID_new;
+		spanLabel.appendChild(icon);
+		newLabel.appendChild(inp);
+		newLabel.appendChild(spanLabel);
+		var segCtrl = clonedRow.querySelector('.segmented-control');
+		if (segCtrl) segCtrl.appendChild(newLabel);
 		var del = byId(clonedRow, 'delete' + rowID_old); if (del) { del.id = 'delete' + rowID_new; del.name = 'delete' + rowID_new; }
 		var delImg = byId(clonedRow, 'delete_image' + rowID_old); if (delImg) { delImg.id = 'delete_image' + rowID_new; delImg.name = 'delete_image' + rowID_new; delImg.src = './images/common/delete_item.png'; }
 		var trashImg = clonedRow.querySelector('#trash_image' + rowID_old); if (trashImg) trashImg.src = './images/common/delete_item.png';
@@ -187,8 +186,11 @@
 		}
 		// Strip any cloned hugeRTE wrapper and restore textarea visibility
 		clonedRow.querySelectorAll('.tox-tinymce').forEach(function(el) { el.remove(); });
+		// Remove toggle-all button — only belongs on row 0
+		clonedRow.querySelectorAll('.si-toggle-all-desc').forEach(function(el) { el.remove(); });
 		if (descOld) descOld.style.display = '';
-		var globalShowActiveAdd = !!document.querySelector('.si-toggle-all-desc[data-show="1"] input:checked');
+		var toggleAllBtnAdd = document.querySelector('.si-toggle-all-desc i');
+		var globalShowActiveAdd = toggleAllBtnAdd && toggleAllBtnAdd.classList.contains('ti-chevrons-up');
 		clonedRow.querySelectorAll('.details').forEach(function (el) {
 			if (globalShowActiveAdd) el.classList.remove('si_hide');
 			else el.classList.add('si_hide');
@@ -215,7 +217,7 @@
 			var sharedAdd = { base_url: 'https://cdn.jsdelivr.net/npm/hugerte@1.0.10', suffix: '.min', menubar: false, statusbar: false, promotion: false, branding: false, content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, sans-serif; font-size: 14px; }' };
 			if (isDarkAdd) { sharedAdd.skin = 'oxide-dark'; sharedAdd.content_css = 'dark'; }
 			window.hugeRTE.init(Object.assign({}, sharedAdd, { selector: 'textarea.editor', plugins: 'lists code', toolbar: 'undo redo | bold italic | bullist numlist | removeformat | code', height: 220 }));
-			window.hugeRTE.init(Object.assign({}, sharedAdd, { selector: '#description' + rowID_new, plugins: 'lists autoresize', toolbar: 'bold italic | bullist numlist', min_height: 80, max_height: 300 }));
+			window.hugeRTE.init(Object.assign({}, sharedAdd, { selector: '#description' + rowID_new, plugins: 'lists autoresize', toolbar: 'bold italic | bullist numlist', min_height: 50, max_height: 150 }));
 		}
 		if (loading) loading.style.display = 'none';
 	}
@@ -239,12 +241,21 @@
 			var chk = b.querySelector('input[type="checkbox"]');
 			if (chk) chk.checked = show;
 		});
+		document.querySelectorAll('.si-toggle-all-desc').forEach(function (b) {
+			var i = b.querySelector('i');
+			if (i) { i.classList.toggle('ti-chevrons-down', !show); i.classList.toggle('ti-chevrons-up', show); }
+			var inp = b.querySelector('input');
+			if (inp) inp.checked = show;
+		});
 	}
 
 	document.addEventListener('click', function (e) {
 		var allBtn = e.target.closest('.si-toggle-all-desc');
 		if (allBtn) {
-			siToggleAllDesc(allBtn.getAttribute('data-show') === '1');
+			e.preventDefault();
+			var i = allBtn.querySelector('i');
+			var show = !(i && i.classList.contains('ti-chevrons-up'));
+			siToggleAllDesc(show);
 			return;
 		}
 		var btn = e.target.closest('.si-expand-desc');

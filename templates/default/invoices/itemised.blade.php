@@ -118,18 +118,7 @@
 				<div class="col col-lg-2 small fw-medium text-secondary">{{ $LANG['tax'] ?? '' }}@if(($defaults['tax_per_line_item'] ?? 0) > 1) {{ ($tax_header + 1) }}@endif</div>
 			@endfor
 			<div class="col col-lg-2 small fw-medium text-secondary text-end">{{ $LANG['unit_price'] ?? '' }}</div>
-			<div class="col-auto si-expand-col-hdr d-flex align-items-end">
-				<div class="segmented-control segmented-control-sm">
-					<label class="segmented-control-item si-toggle-all-desc" data-show="1" title="{{ $LANG['show_all'] ?? 'Show all' }}">
-						<input type="radio" class="segmented-control-input" name="si_toggle_all">
-						<span class="segmented-control-label"><i class="ti ti-chevrons-down"></i></span>
-					</label>
-					<label class="segmented-control-item si-toggle-all-desc" data-show="0" title="{{ $LANG['hide_all'] ?? 'Hide all' }}">
-						<input type="radio" class="segmented-control-input" name="si_toggle_all">
-						<span class="segmented-control-label"><i class="ti ti-chevrons-up"></i></span>
-					</label>
-				</div>
-			</div>
+			<div class="col-auto si-expand-col-hdr"></div>
 		</div>
 
 		<div id="itemtable" class="mb-2">
@@ -198,14 +187,14 @@
 					</div>
 					<div class="col-auto d-flex align-items-end">
 						<div class="segmented-control segmented-control-sm">
-							<label class="segmented-control-item si-expand-desc" title="{{ $LANG['description'] ?? 'Description' }}">
+							<label class="segmented-control-item si-expand-desc" title="{{ $LANG['description'] ?? 'Show Description' }}">
 								<input type="checkbox" class="segmented-control-input">
 								<span class="segmented-control-label"><i class="ti ti-chevron-down"></i></span>
 							</label>
 							@if($line == 0)
-							<label class="segmented-control-item si-del-placeholder" style="visibility:hidden">
+							<label class="segmented-control-item si-toggle-all-desc" title="{{ $LANG['show_all'] ?? 'Show all line item descriptions' }}">
 								<input type="radio" class="segmented-control-input">
-								<span class="segmented-control-label"><i class="ti ti-trash"></i></span>
+								<span class="segmented-control-label"><i class="ti ti-chevrons-down"></i></span>
 							</label>
 							@else
 							<label class="segmented-control-item trash_link" id="trash_link{{ $line }}" rel="{{ $line }}" title="{{ $LANG['delete_row'] ?? '' }}">
@@ -218,7 +207,7 @@
 				</div>
 				<div class="row g-2 details si_hide mt-1">
 					<div class="col-12 col-lg">
-						<textarea class="form-control form-control-sm detail-editor" name="description{{ $line }}" id="description{{ $line }}" rows="2"></textarea>
+						<textarea class="form-control form-control-sm detail-editor" name="description{{ $line }}" id="description{{ $line }}" rows="1"></textarea>
 					</div>
 				</div>
 			</div>
