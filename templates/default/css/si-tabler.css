@@ -633,6 +633,7 @@ td.index_table {
 
 .segmented-control-item:hover .segmented-control-label {
     color: var(--tblr-body-color);
+    background: rgba(0, 0, 0, 0.06);
 }
 
 .segmented-control-input:checked + .segmented-control-label {
