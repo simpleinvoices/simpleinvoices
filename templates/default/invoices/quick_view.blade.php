@@ -4,8 +4,11 @@
 @endphp
 
 <div class="card mb-3">
+
+    <div class="card-body">
+
     {{-- Action buttons: segmented control --}}
-    <div class="card-header d-flex justify-content-center">
+    <div class="mb-4 d-flex justify-content-center">
         <div class="segmented-control segmented-control-btn">
             <label class="segmented-control-item" title="{{ $LANG['print_preview_tooltip'] ?? '' }}" onclick="window.location='index.php?module=export&amp;view=invoice&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;format=print'">
                 <input type="radio" class="segmented-control-input">
@@ -49,45 +52,6 @@
             @endif
         </div>
     </div>
-
-    {{-- Action buttons: btn-group --}}
-    <div class="card-header d-flex justify-content-center">
-        <div class="btn-group" role="group">
-            <a title="{{ $LANG['print_preview_tooltip'] ?? '' }}" href="index.php?module=export&amp;view=invoice&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;format=print" class="btn btn-outline-secondary">
-                <i class="ti ti-printer me-md-1"></i><span class="d-none d-md-inline">{{ $LANG['print_preview'] ?? 'Print' }}</span>
-            </a>
-            <a title="{{ $LANG['edit'] ?? 'Edit' }}" href="index.php?module=invoices&amp;view=details&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;action=view" class="btn btn-outline-secondary">
-                <i class="ti ti-edit me-md-1"></i><span class="d-none d-md-inline">{{ $LANG['edit'] ?? 'Edit' }}</span>
-            </a>
-            <a title="{{ $LANG['process_payment'] ?? '' }}" href="index.php?module=payments&amp;view=process&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;op=pay_selected_invoice" class="btn btn-outline-secondary">
-                <i class="ti ti-cash me-md-1"></i><span class="d-none d-md-inline">{{ $LANG['process_payment'] ?? 'Payment' }}</span>
-            </a>
-            @if(($eway_pre_check ?? '') == 'true')
-            <a title="{{ $LANG['process_payment_via_eway'] ?? '' }}" href="index.php?module=payments&amp;view=eway&amp;id={{ urlencode($invoice['id'] ?? '') }}" class="btn btn-outline-secondary">
-                <i class="ti ti-cash me-md-1"></i><span class="d-none d-md-inline">{{ $LANG['process_payment_via_eway'] ?? 'Pay via eWay' }}</span>
-            </a>
-            @endif
-            <a title="{{ $LANG['export_pdf'] ?? '' }}" href="index.php?module=export&amp;view=invoice&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;format=pdf" class="btn btn-outline-secondary">
-                <i class="ti ti-file-type-pdf me-md-1"></i><span class="d-none d-md-inline">{{ $LANG['pdf'] ?? 'PDF' }}</span>
-            </a>
-            <a title="{{ $LANG['export_as'] ?? '' }} .{{ $spreadsheet ?? 'xls' }}" href="index.php?module=export&amp;view=invoice&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;format=file&amp;filetype={{ urlencode($spreadsheet ?? 'xls') }}" class="btn btn-outline-secondary">
-                <i class="ti ti-file-spreadsheet me-md-1"></i><span class="d-none d-md-inline">.{{ strtoupper($spreadsheet ?? 'xls') }}</span>
-            </a>
-            <a title="{{ $LANG['export_as'] ?? '' }} .{{ $wordprocessor ?? 'doc' }}" href="index.php?module=export&amp;view=invoice&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;format=file&amp;filetype={{ urlencode($wordprocessor ?? 'doc') }}" class="btn btn-outline-secondary">
-                <i class="ti ti-file-text me-md-1"></i><span class="d-none d-md-inline">.{{ strtoupper($wordprocessor ?? 'doc') }}</span>
-            </a>
-            <a title="{{ $LANG['email'] ?? '' }}" href="index.php?module=invoices&amp;view=email&amp;stage=1&amp;id={{ urlencode($invoice['id'] ?? '') }}" class="btn btn-outline-secondary">
-                <i class="ti ti-mail me-md-1"></i><span class="d-none d-md-inline">{{ $LANG['email'] ?? 'Email' }}</span>
-            </a>
-            @if(isset($defaults->delete) && $defaults->delete == '1')
-            <a title="{{ $LANG['delete'] ?? '' }}" href="index.php?module=invoices&amp;view=delete&amp;stage=1&amp;id={{ urlencode($invoice['id'] ?? '') }}" class="btn btn-outline-danger">
-                <i class="ti ti-trash me-md-1"></i><span class="d-none d-md-inline">{{ $LANG['delete'] ?? 'Delete' }}</span>
-            </a>
-            @endif
-        </div>
-    </div>
-
-    <div class="card-body">
 
         {{-- Invoice number + date --}}
         <div class="mb-4 pb-3 border-bottom">
