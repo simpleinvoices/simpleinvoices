@@ -15,7 +15,7 @@
 				{display: @json($LANG['custom_field'] ?? 'Custom Field'), name : 'cf_custom_field', width : 45 * percentage_width, sortable : false, align: 'left'},
 				{display: @json($LANG['custom_label'] ?? 'Custom Label'), name : 'cf_custom_label', width : 50 * percentage_width, sortable : false, align: 'left'}
 			],
-			sortname: 'cf_custom_label',
+			sortname: 'cf_custom_field',
 			sortorder: 'asc',
 			usepager: false,
 			pagestat: @json($LANG['displaying_items'] ?? 'Displaying items'),

@@ -21,29 +21,41 @@ var si_lang_description_conf = @json($LANG['description'] ?? 'Description');
 		}
 		// Help links: Bootstrap/Tabler popovers with content from rel URL (si-help-popover.js)
 
-	if (document.querySelector('textarea.editor') && !(
+	if (!(
 		(navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/iPad/i))
 		&& navigator.userAgent.match(/CPU\sOS\s[0123]_\d/i)))
 	{
 		if (window.hugeRTE) {
-			var editorOpts = {
-				selector: 'textarea.editor',
+			var isDark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+			var sharedOpts = {
 				base_url: 'https://cdn.jsdelivr.net/npm/hugerte@1.0.10',
 				suffix: '.min',
-				plugins: 'lists code',
-				toolbar: 'undo redo | bold italic | bullist numlist | removeformat | code',
 				menubar: false,
 				statusbar: false,
-				height: 220,
 				promotion: false,
 				branding: false,
 				content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, sans-serif; font-size: 14px; }'
 			};
-			if (document.documentElement.getAttribute('data-bs-theme') === 'dark') {
-				editorOpts.skin = 'oxide-dark';
-				editorOpts.content_css = 'dark';
+			if (isDark) { sharedOpts.skin = 'oxide-dark'; sharedOpts.content_css = 'dark'; }
+
+			if (document.querySelector('textarea.editor')) {
+				window.hugeRTE.init(Object.assign({}, sharedOpts, {
+					selector: 'textarea.editor',
+					plugins: 'lists code',
+					toolbar: 'undo redo | bold italic | bullist numlist | removeformat | code',
+					height: 220
+				}));
 			}
-			window.hugeRTE.init(editorOpts);
+
+			if (document.querySelector('textarea.detail-editor')) {
+				window.hugeRTE.init(Object.assign({}, sharedOpts, {
+					selector: 'textarea.detail-editor',
+					plugins: 'lists autoresize',
+					toolbar: 'bold italic | bullist numlist',
+					min_height: 80,
+					max_height: 300
+				}));
+			}
 		}
 	}
 
@@ -65,7 +77,7 @@ var si_lang_description_conf = @json($LANG['description'] ?? 'Description');
 		if (t) { e.preventDefault(); var id = t.getAttribute('rel'); if (si_conf_delete_line_item && window.siConfirmDeleteModal) siConfirmDeleteModal.open(function(){ delete_row(id); }); else delete_row(id); return; }
 		t = e.target.closest ? e.target.closest('.trash_link_edit') : null;
 		if (t) { e.preventDefault(); var id = t.getAttribute('rel'); if (si_conf_delete_line_item && window.siConfirmDeleteModal) siConfirmDeleteModal.open(function(){ delete_line_item(id); }); else delete_line_item(id); return; }
-		if (e.target.closest && e.target.closest('a.add_line_item')) { e.preventDefault(); add_line_item(); return; }
+		if (e.target.closest && e.target.closest('.add_line_item')) { e.preventDefault(); add_line_item(); return; }
 		if (e.target.closest && e.target.closest('.invoice_save')) { var g = document.getElementById('gmail_loading'); if (g) g.style.display = ''; siLog('debug','invoice save'); count_invoice_line_items(); if (g) g.style.display = 'none'; return; }
 		if (e.target.closest && e.target.closest('.export_window')) { var ed = document.getElementById('export_dialog'); if (ed && window.bootstrap && window.bootstrap.Modal) { var m = bootstrap.Modal.getInstance(ed); if (m) m.hide(); } return; }
 		t = e.target.closest ? e.target.closest('.invoice_export_dialog') : null;

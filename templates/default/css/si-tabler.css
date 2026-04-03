@@ -119,8 +119,17 @@ body {
 .si_hide { display: none !important; }
 
 /* Invoice line items — responsive grid layout */
-.si-del-col-hdr,
-.si-del-col { width: 2.75rem; flex-shrink: 0; }
+
+/* Compact segmented control for line item actions (expand/delete) */
+.segmented-control-sm .segmented-control-label {
+    padding: 0.2rem 0.45rem;
+    font-size: 0.875rem;
+    line-height: 1.4;
+}
+
+/* Line item action icons (expand, toggle-all) */
+.si-expand-desc .ti,
+.si-toggle-all-desc .ti { font-size: 1rem; }
 
 /* Mobile: each line item renders as a card */
 @media (max-width: 991.98px) {

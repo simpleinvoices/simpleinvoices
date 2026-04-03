@@ -14,50 +14,93 @@
 	<div id="gmail_loading" class="gmailLoader" style="float:right; display: none;"><i class="ti ti-loader spinner me-1"></i> {{ $LANG['loading'] ?? '' }} ...</div>
 
 
+@php
+    $inv_hasBillers   = !empty($billers);
+    $inv_hasCustomers = !empty($customers);
+    $inv_hasProducts  = !empty($products);
+@endphp
+
 @if($first_run_wizard == true)
 
-	<div class="si_message">
-		{{ $LANG['before_starting'] ?? '' }}
-	</div>
-
-	<div class="card">
-		<div class="card-body">
-			<div class="table-responsive">
-				<table class="table table-vcenter">
-					@if($billers == null)
-						<tr>
-							<th>{{ $LANG['setup_as_biller'] ?? '' }}</th>
-							<td><a href="./index.php?module=billers&amp;view=add" class="btn btn-primary"><i class="ti ti-building-store me-1"></i>{{ $LANG['add_new_biller'] ?? '' }}</a></td>
-						</tr>
-					@endif
-					@if($customers == null)
-						<tr>
-							<th>{{ $LANG['setup_add_customer'] ?? '' }}</th>
-							<td><a href="./index.php?module=customers&amp;view=add" class="btn btn-primary"><i class="ti ti-users me-1"></i>{{ $LANG['customer_add'] ?? '' }}</a></td>
-						</tr>
-					@endif
-					@if($products == null)
-						<tr>
-							<th>{{ $LANG['setup_add_products'] ?? '' }}</th>
-							<td><a href="./index.php?module=products&amp;view=add" class="btn btn-primary"><i class="ti ti-package me-1"></i>{{ $LANG['add_new_product'] ?? '' }}</a></td>
-						</tr>
-					@endif
-					@if($taxes == null)
-						<tr>
-							<th>{{ $LANG['setup_add_taxrate'] ?? '' }}</th>
-							<td><a href="index.php?module=tax_rates&amp;view=add" class="btn btn-primary"><i class="ti ti-receipt-tax me-1"></i>{{ $LANG['add_new_tax_rate'] ?? '' }}</a></td>
-						</tr>
-					@endif
-					@if($preferences == null)
-						<tr>
-							<th>{{ $LANG['setup_add_inv_pref'] ?? '' }}</th>
-							<td><a href="./index.php?module=preferences&amp;view=add" class="btn btn-primary"><i class="ti ti-file-text me-1"></i>{{ $LANG['add_new_preference'] ?? '' }}</a></td>
-						</tr>
-					@endif
-				</table>
-			</div>
-		</div>
-	</div>
+<div class="card mb-3">
+    <div class="card-status-top bg-primary"></div>
+    <div class="card-header">
+        <h3 class="card-title"><i class="ti ti-rocket me-2"></i>{{ $LANG['getting_started'] ?? 'Getting Started' }}</h3>
+    </div>
+    <div class="card-body">
+        <p class="text-secondary">{{ $LANG['first_run_intro'] ?? 'Welcome! Complete these steps to start invoicing:' }}</p>
+        <div class="row g-3">
+            <div class="col-sm-6 col-lg-3">
+                <div class="card @if($inv_hasBillers) border-success @endif">
+                    <div class="card-body d-flex align-items-center gap-3">
+                        <span class="avatar @if($inv_hasBillers) bg-success-lt @else bg-primary-lt @endif rounded">
+                            <i class="ti ti-building-store"></i>
+                        </span>
+                        <div>
+                            <div class="fw-bold">{{ $LANG['biller'] ?? 'Biller' }}</div>
+                            @if($inv_hasBillers)
+                                <span class="text-success"><i class="ti ti-check"></i> {{ $LANG['done'] ?? 'Done' }}</span>
+                            @else
+                                <a href="index.php?module=billers&amp;view=add" class="text-primary">{{ $LANG['add_new_biller'] ?? 'Add Biller' }}</a>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="card @if($inv_hasCustomers) border-success @endif">
+                    <div class="card-body d-flex align-items-center gap-3">
+                        <span class="avatar @if($inv_hasCustomers) bg-success-lt @else bg-primary-lt @endif rounded">
+                            <i class="ti ti-users"></i>
+                        </span>
+                        <div>
+                            <div class="fw-bold">{{ $LANG['customer'] ?? 'Customer' }}</div>
+                            @if($inv_hasCustomers)
+                                <span class="text-success"><i class="ti ti-check"></i> {{ $LANG['done'] ?? 'Done' }}</span>
+                            @else
+                                <a href="index.php?module=customers&amp;view=add" class="text-primary">{{ $LANG['customer_add'] ?? 'Add Customer' }}</a>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="card @if($inv_hasProducts) border-success @endif">
+                    <div class="card-body d-flex align-items-center gap-3">
+                        <span class="avatar @if($inv_hasProducts) bg-success-lt @else bg-primary-lt @endif rounded">
+                            <i class="ti ti-package"></i>
+                        </span>
+                        <div>
+                            <div class="fw-bold">{{ $LANG['product'] ?? 'Product' }}</div>
+                            @if($inv_hasProducts)
+                                <span class="text-success"><i class="ti ti-check"></i> {{ $LANG['done'] ?? 'Done' }}</span>
+                            @else
+                                <a href="index.php?module=products&amp;view=add" class="text-primary">{{ $LANG['add_new_product'] ?? 'Add Product' }}</a>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="card @if(!empty($inv_hasInvoices)) border-success @endif">
+                    <div class="card-body d-flex align-items-center gap-3">
+                        <span class="avatar @if(!empty($inv_hasInvoices)) bg-success-lt @else bg-primary-lt @endif rounded">
+                            <i class="ti ti-file-invoice"></i>
+                        </span>
+                        <div>
+                            <div class="fw-bold">{{ $LANG['invoice'] ?? 'Invoice' }}</div>
+                            @if(!empty($inv_hasInvoices))
+                                <span class="text-success"><i class="ti ti-check"></i> {{ $LANG['done'] ?? 'Done' }}</span>
+                            @else
+                                <a href="index.php?module=invoices&amp;view=itemised" class="text-primary">{{ $LANG['create_invoice'] ?? 'Create Invoice' }}</a>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @else
 
@@ -69,7 +112,6 @@
 		{{-- Line items --}}
 		{{-- Desktop column header --}}
 		<div class="row g-2 d-none d-lg-flex mb-1 px-1">
-			<div class="col-auto si-del-col-hdr"></div>
 			<div class="col-3 col-lg-1 small fw-medium text-secondary">{{ $LANG['quantity'] ?? '' }}</div>
 			<div class="col col-lg small fw-medium text-secondary">{{ $LANG['item'] ?? '' }}</div>
 			@for($tax_header = 0; $tax_header < (int)($defaults['tax_per_line_item'] ?? 0); $tax_header++)
@@ -77,7 +119,16 @@
 			@endfor
 			<div class="col col-lg-2 small fw-medium text-secondary text-end">{{ $LANG['unit_price'] ?? '' }}</div>
 			<div class="col-auto si-expand-col-hdr d-flex align-items-end">
-				<a href="#" class="si-toggle-all-desc btn btn-icon btn-outline-secondary" title="{{ $LANG['description'] ?? 'Description' }}"><i class="ti ti-chevrons-down"></i></a>
+				<div class="segmented-control segmented-control-sm">
+					<label class="segmented-control-item si-toggle-all-desc" data-show="1" title="{{ $LANG['show_all'] ?? 'Show all' }}">
+						<input type="radio" class="segmented-control-input" name="si_toggle_all">
+						<span class="segmented-control-label"><i class="ti ti-chevrons-down"></i></span>
+					</label>
+					<label class="segmented-control-item si-toggle-all-desc" data-show="0" title="{{ $LANG['hide_all'] ?? 'Hide all' }}">
+						<input type="radio" class="segmented-control-input" name="si_toggle_all">
+						<span class="segmented-control-label"><i class="ti ti-chevrons-up"></i></span>
+					</label>
+				</div>
 			</div>
 		</div>
 
@@ -85,19 +136,6 @@
 			@foreach(($dynamic_line_items ?? []) as $line)
 			<div class="line_item si-line-item" id="row{{ $line }}">
 				<div class="row g-2 align-items-end">
-					<div class="col-auto si-del-col">
-						@if($line == 0)
-							<span class="text-muted" style="display:inline-block;width:1.75rem;"></span>
-						@else
-							<a
-								id="trash_link{{ $line }}"
-								class="trash_link btn btn-icon btn-outline-danger"
-								title="{{ $LANG['delete_row'] ?? '' }}"
-								rel="{{ $line }}"
-								href="#"
-							><i class="ti ti-trash"></i></a>
-						@endif
-					</div>
 					<div class="col-3 col-lg-1">
 						<label class="form-label d-lg-none small text-secondary mb-1">{{ $LANG['quantity'] ?? '' }}</label>
 						<input
@@ -159,21 +197,41 @@
 						/>
 					</div>
 					<div class="col-auto d-flex align-items-end">
-						<a href="#" class="si-expand-desc btn btn-icon btn-outline-secondary" title="{{ $LANG['description'] ?? 'Description' }}"><i class="ti ti-chevron-down"></i></a>
+						<div class="segmented-control segmented-control-sm">
+							<label class="segmented-control-item si-expand-desc" title="{{ $LANG['description'] ?? 'Description' }}">
+								<input type="checkbox" class="segmented-control-input">
+								<span class="segmented-control-label"><i class="ti ti-chevron-down"></i></span>
+							</label>
+							@if($line == 0)
+							<label class="segmented-control-item si-del-placeholder" style="visibility:hidden">
+								<input type="radio" class="segmented-control-input">
+								<span class="segmented-control-label"><i class="ti ti-trash"></i></span>
+							</label>
+							@else
+							<label class="segmented-control-item trash_link" id="trash_link{{ $line }}" rel="{{ $line }}" title="{{ $LANG['delete_row'] ?? '' }}">
+								<input type="radio" class="segmented-control-input">
+								<span class="segmented-control-label"><i class="ti ti-trash"></i></span>
+							</label>
+							@endif
+						</div>
 					</div>
 				</div>
 				<div class="row g-2 details si_hide mt-1">
-					<div class="col-auto si-del-col d-none d-lg-block"></div>
 					<div class="col-12 col-lg">
-						<textarea class="form-control form-control-sm detail" name="description{{ $line }}" id="description{{ $line }}" rows="2"></textarea>
+						<textarea class="form-control form-control-sm detail-editor" name="description{{ $line }}" id="description{{ $line }}" rows="2"></textarea>
 					</div>
 				</div>
 			</div>
 			@endforeach
 		</div>
 
-		<div class="btn-list mb-4">
-			<a href="#" class="add_line_item btn btn-outline-primary"><i class="ti ti-plus me-1"></i>{{ $LANG['add_new_row'] ?? '' }}</a>
+		<div class="mb-4">
+			<div class="segmented-control">
+				<label class="segmented-control-item add_line_item">
+					<input type="radio" class="segmented-control-input">
+					<span class="segmented-control-label"><i class="ti ti-plus me-1"></i>{{ $LANG['add_new_row'] ?? '' }}</span>
+				</label>
+			</div>
 		</div>
 
 		{{-- Custom fields --}}

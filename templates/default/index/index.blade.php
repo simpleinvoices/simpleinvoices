@@ -99,14 +99,12 @@
         </div>
         <div class="card-options ms-auto">
             <div class="segmented-control" id="chart-year-selector">
+                @foreach(($chart_years ?? []) as $y)
                 <label class="segmented-control-item">
-                    <input type="radio" class="segmented-control-input" name="chart_year" value="prev">
-                    <span class="segmented-control-label">{{ $chart_prev_year ?? '' }}</span>
+                    <input type="radio" class="segmented-control-input" name="chart_year" value="{{ $y }}"{{ $y === ($chart_current_year ?? 0) ? ' checked' : '' }}>
+                    <span class="segmented-control-label">{{ $y }}</span>
                 </label>
-                <label class="segmented-control-item">
-                    <input type="radio" class="segmented-control-input" name="chart_year" value="cur" checked>
-                    <span class="segmented-control-label">{{ $chart_current_year ?? '' }}</span>
-                </label>
+                @endforeach
             </div>
         </div>
     </div>
@@ -253,16 +251,7 @@
 <script>
 (function () {
     var labels   = @json($chart_labels ?? []);
-    var datasets = {
-        cur: {
-            invoices: @json($chart_invoices_cur ?? []),
-            payments: @json($chart_payments_cur ?? [])
-        },
-        prev: {
-            invoices: @json($chart_invoices_prv ?? []),
-            payments: @json($chart_payments_prv ?? [])
-        }
-    };
+    var datasets = @json($chart_data ?? []);
     var invoiceLabel = @json($LANG['invoices'] ?? 'Invoices');
     var paymentLabel = @json($LANG['payments'] ?? 'Payments');
 
@@ -286,8 +275,8 @@
                 background: 'transparent'
             },
             series: [
-                { name: invoiceLabel, data: datasets[year].invoices },
-                { name: paymentLabel, data: datasets[year].payments }
+                { name: invoiceLabel, data: (datasets[year] || {invoices: [], payments: []}).invoices },
+                { name: paymentLabel, data: (datasets[year] || {invoices: [], payments: []}).payments }
             ],
             xaxis: {
                 categories: labels,
@@ -318,7 +307,7 @@
         };
     }
 
-    var chart = new ApexCharts(document.getElementById('chart-dashboard'), buildOptions('cur'));
+    var chart = new ApexCharts(document.getElementById('chart-dashboard'), buildOptions({{ $chart_current_year ?? 'null' }}));
     chart.render();
 
     document.querySelectorAll('#chart-year-selector input[name="chart_year"]').forEach(function (radio) {
@@ -329,7 +318,7 @@
 
     document.documentElement.addEventListener('si-theme-changed', function () {
         var active = document.querySelector('#chart-year-selector input[name="chart_year"]:checked');
-        chart.updateOptions(buildOptions(active ? active.value : 'cur'), true, true);
+        chart.updateOptions(buildOptions(active ? active.value : {{ $chart_current_year ?? 'null' }}), true, true);
     });
 })();
 </script>

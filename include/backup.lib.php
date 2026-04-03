@@ -104,34 +104,38 @@ class backup_db{
     # @required: database.class 
     # like the name says, begins the backup 
     #------------------------------------------------------------------- 
-    function start_backup(){ 
-        $oDB         = new database(); 
-        $directory = dirname($this->filename);
-        if (!is_dir($directory) && !mkdir($directory, 0775, true)) {
-            throw new RuntimeException("Backup directory could not be created: " . $directory);
-        }
-        if (!is_writable($directory)) {
-            throw new RuntimeException("Backup directory is not writable: " . $directory);
+    function start_backup($output_handle = null){
+        $oDB         = new database();
+        $close_handle = false;
+
+        if ($output_handle === null) {
+            $directory = dirname($this->filename);
+            if (!is_dir($directory) && !mkdir($directory, 0775, true)) {
+                throw new RuntimeException("Backup directory could not be created: " . $directory);
+            }
+            if (!is_writable($directory)) {
+                throw new RuntimeException("Backup directory is not writable: " . $directory);
+            }
+            $output_handle = fopen($this->filename, "wb");
+            if ($output_handle === false) {
+                throw new RuntimeException("Backup file could not be opened for writing: " . $this->filename);
+            }
+            $close_handle = true;
         }
 
-        $file_handle = fopen($this->filename, "wb");
-        if ($file_handle === false) {
-            throw new RuntimeException("Backup file could not be opened for writing: " . $this->filename);
-        }
-
-        $query            = "SHOW TABLES"; 
-        $result            = $oDB->sqlQuery($query,$oDB->db_link); 
+        $query  = "SHOW TABLES";
+        $result = $oDB->sqlQuery($query, $oDB->db_link);
         if ($result === false) {
-            fclose($file_handle);
+            if ($close_handle) fclose($output_handle);
             throw new RuntimeException("Unable to list database tables for backup.");
         }
-        while($row = $result->fetch(PDO::FETCH_NUM)){ 
-            $tablename    = $row[0]; 
-            $this->_show_create($tablename,$oDB->db_link,$file_handle); 
-        } // while 
-        fclose($file_handle); 
-        $oDB->close_database(); 
-    } 
+        while ($row = $result->fetch(PDO::FETCH_NUM)) {
+            $tablename = $row[0];
+            $this->_show_create($tablename, $oDB->db_link, $output_handle);
+        }
+        if ($close_handle) fclose($output_handle);
+        $oDB->close_database();
+    }
     #-------------------------------------------------------------------- 
     # @name: backup_db::_show_create($tablename,$db_link,$fh) 
     # @param: $tablename - name of the table 

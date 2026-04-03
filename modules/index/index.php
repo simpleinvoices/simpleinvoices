@@ -37,55 +37,55 @@ $smarty -> assign("debtor", $debtor);
 $smarty -> assign("language", $language);
 //$smarty -> assign("title", $title);
 
-// Dashboard chart: monthly invoices & payments for current and previous year
+// Dashboard chart: monthly invoices & payments for all years since first invoice (max 10)
+$max_chart_years    = 10;
 $chart_current_year = (int)date('Y');
-$chart_prev_year    = $chart_current_year - 1;
-$chart_labels       = [];
-$chart_invoices_cur = [];
-$chart_payments_cur = [];
-$chart_invoices_prv = [];
-$chart_payments_prv = [];
 
+$r = dbQuery(
+    "SELECT MIN(iv.date) AS min_date FROM " . TB_PREFIX . "invoices iv
+     INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id=iv.preference_id AND pr.domain_id=iv.domain_id)
+     WHERE pr.status='1' AND iv.domain_id=:domain_id",
+    ':domain_id', $auth_session->domain_id
+)->fetch();
+
+$first_invoice_year = !empty($r['min_date']) ? (int)date('Y', strtotime($r['min_date'])) : $chart_current_year;
+$chart_start_year   = ($chart_current_year - $first_invoice_year + 1 > $max_chart_years)
+                        ? $chart_current_year - $max_chart_years + 1
+                        : $first_invoice_year;
+
+$chart_labels = [];
 for ($m = 1; $m <= 12; $m++) {
-    $mp = str_pad($m, 2, '0', STR_PAD_LEFT);
     $chart_labels[] = date('M', mktime(0, 0, 0, $m, 1));
+}
 
-    // Current year sales
-    $r = dbQuery("SELECT SUM(ii.total) AS t FROM " . TB_PREFIX . "invoice_items ii
-        INNER JOIN " . TB_PREFIX . "invoices iv ON (ii.invoice_id=iv.id AND iv.domain_id=ii.domain_id)
-        INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id=iv.preference_id AND pr.domain_id=iv.domain_id)
-        WHERE pr.status='1' AND ii.domain_id=:domain_id AND iv.date LIKE '{$chart_current_year}-{$mp}%'",
-        ':domain_id', $auth_session->domain_id)->fetch();
-    $chart_invoices_cur[] = round((float)($r['t'] ?? 0), 2);
+$chart_years = [];
+$chart_data  = [];
+for ($y = $chart_start_year; $y <= $chart_current_year; $y++) {
+    $chart_years[] = $y;
+    $invoices = [];
+    $payments = [];
+    for ($m = 1; $m <= 12; $m++) {
+        $mp = str_pad($m, 2, '0', STR_PAD_LEFT);
 
-    // Current year payments
-    $r = dbQuery("SELECT SUM(ac_amount) AS t FROM " . TB_PREFIX . "payment
-        WHERE domain_id=:domain_id AND ac_date LIKE '{$chart_current_year}-{$mp}%'",
-        ':domain_id', $auth_session->domain_id)->fetch();
-    $chart_payments_cur[] = round((float)($r['t'] ?? 0), 2);
+        $r = dbQuery("SELECT SUM(ii.total) AS t FROM " . TB_PREFIX . "invoice_items ii
+            INNER JOIN " . TB_PREFIX . "invoices iv ON (ii.invoice_id=iv.id AND iv.domain_id=ii.domain_id)
+            INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id=iv.preference_id AND pr.domain_id=iv.domain_id)
+            WHERE pr.status='1' AND ii.domain_id=:domain_id AND iv.date LIKE '{$y}-{$mp}%'",
+            ':domain_id', $auth_session->domain_id)->fetch();
+        $invoices[] = round((float)($r['t'] ?? 0), 2);
 
-    // Previous year sales
-    $r = dbQuery("SELECT SUM(ii.total) AS t FROM " . TB_PREFIX . "invoice_items ii
-        INNER JOIN " . TB_PREFIX . "invoices iv ON (ii.invoice_id=iv.id AND iv.domain_id=ii.domain_id)
-        INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id=iv.preference_id AND pr.domain_id=iv.domain_id)
-        WHERE pr.status='1' AND ii.domain_id=:domain_id AND iv.date LIKE '{$chart_prev_year}-{$mp}%'",
-        ':domain_id', $auth_session->domain_id)->fetch();
-    $chart_invoices_prv[] = round((float)($r['t'] ?? 0), 2);
-
-    // Previous year payments
-    $r = dbQuery("SELECT SUM(ac_amount) AS t FROM " . TB_PREFIX . "payment
-        WHERE domain_id=:domain_id AND ac_date LIKE '{$chart_prev_year}-{$mp}%'",
-        ':domain_id', $auth_session->domain_id)->fetch();
-    $chart_payments_prv[] = round((float)($r['t'] ?? 0), 2);
+        $r = dbQuery("SELECT SUM(ac_amount) AS t FROM " . TB_PREFIX . "payment
+            WHERE domain_id=:domain_id AND ac_date LIKE '{$y}-{$mp}%'",
+            ':domain_id', $auth_session->domain_id)->fetch();
+        $payments[] = round((float)($r['t'] ?? 0), 2);
+    }
+    $chart_data[$y] = ['invoices' => $invoices, 'payments' => $payments];
 }
 
 $smarty->assign('chart_current_year', $chart_current_year);
-$smarty->assign('chart_prev_year',    $chart_prev_year);
+$smarty->assign('chart_years',        $chart_years);
 $smarty->assign('chart_labels',       $chart_labels);
-$smarty->assign('chart_invoices_cur', $chart_invoices_cur);
-$smarty->assign('chart_payments_cur', $chart_payments_cur);
-$smarty->assign('chart_invoices_prv', $chart_invoices_prv);
-$smarty->assign('chart_payments_prv', $chart_payments_prv);
+$smarty->assign('chart_data',         $chart_data);
 
 // Latest 5 invoices
 $latest_invoices_sth = dbQuery(

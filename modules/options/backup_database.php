@@ -7,32 +7,27 @@ checkLogin();
 $smarty -> assign('pageActive', 'backup');
 $smarty -> assign('active_tab', '#setting');
 $backup_action = 'backup_database';
-$messages = array();
 $errors = array();
-$backup_results = array();
-$backup_file = '';
-$can_backup = is_dir('./tmp/database_backups') ? is_writable('./tmp/database_backups') : is_writable('./tmp');
 
 if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && ($_POST['op'] ?? '') === 'backup_db') {
 	requireCSRFProtection($backup_action);
 
-	try {
-		$today = date("Ymd_His");
-		$oBack = new backup_db();
-		$oBack->filename = "./tmp/database_backups/simple_invoices_backup_$today.sql";
-		$oBack->start_backup();
+	$today    = date("Ymd_His");
+	$filename = "simple_invoices_backup_{$today}.sql";
 
-		$backup_results = is_array($oBack->output) ? $oBack->output : array();
-		$backup_file = $oBack->filename;
-		$messages[] = sprintf($LANG['backup_done'], $oBack->filename);
-	} catch (Throwable $e) {
-		$errors[] = $e->getMessage();
-	}
+	header('Content-Type: application/octet-stream');
+	header('Content-Disposition: attachment; filename="' . $filename . '"');
+	header('Cache-Control: no-cache, no-store, must-revalidate');
+	header('Pragma: no-cache');
+	header('Expires: 0');
+
+	$oBack  = new backup_db();
+	$handle = fopen('php://output', 'wb');
+	$oBack->start_backup($handle);
+	fclose($handle);
+	exit();
 }
+
 $smarty->assign('backupActionToken', siNonce($backup_action));
-$smarty->assign('backupMessages', $messages);
 $smarty->assign('backupErrors', $errors);
-$smarty->assign('backupResults', $backup_results);
-$smarty->assign('backupFile', $backup_file);
-$smarty->assign('backupDirectoryWritable', $can_backup);
 ?>

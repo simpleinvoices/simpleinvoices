@@ -115,7 +115,6 @@
 			{{-- Line items --}}
 			{{-- Desktop column header --}}
 			<div class="row g-2 d-none d-lg-flex mb-1 px-1">
-				<div class="col-auto si-del-col-hdr"></div>
 				<div class="col-3 col-lg-1 small fw-medium text-secondary">{{ $LANG['quantity_short'] ?? '' }}</div>
 				<div class="col col-lg small fw-medium text-secondary">{{ $LANG['description'] ?? '' }}</div>
 				@for($tax_header = 0; $tax_header < (int)($defaults['tax_per_line_item'] ?? 0); $tax_header++)
@@ -123,7 +122,16 @@
 				@endfor
 				<div class="col col-lg-2 small fw-medium text-secondary text-end">{{ $LANG['unit_price'] ?? '' }}</div>
 				<div class="col-auto si-expand-col-hdr d-flex align-items-end">
-					<a href="#" class="si-toggle-all-desc btn btn-icon btn-outline-secondary btn-sm-mobile" title="{{ $LANG['description'] ?? 'Description' }}"><i class="ti {{ $showDetailsInitially ? 'ti-chevrons-up' : 'ti-chevrons-down' }}"></i></a>
+					<div class="segmented-control segmented-control-sm">
+						<label class="segmented-control-item si-toggle-all-desc" data-show="1" title="{{ $LANG['show_all'] ?? 'Show all' }}">
+							<input type="radio" class="segmented-control-input" name="si_toggle_all" {{ $showDetailsInitially ? 'checked' : '' }}>
+							<span class="segmented-control-label"><i class="ti ti-chevrons-down"></i></span>
+						</label>
+						<label class="segmented-control-item si-toggle-all-desc" data-show="0" title="{{ $LANG['hide_all'] ?? 'Hide all' }}">
+							<input type="radio" class="segmented-control-input" name="si_toggle_all" {{ $showDetailsInitially ? '' : 'checked' }}>
+							<span class="segmented-control-label"><i class="ti ti-chevrons-up"></i></span>
+						</label>
+					</div>
 				</div>
 			</div>
 
@@ -131,19 +139,6 @@
 				@foreach(($invoiceItems ?? []) as $line => $invoiceItem)
 				<div class="line_item si-line-item" id="row{{ $line }}">
 					<div class="row g-2 align-items-end">
-						<div class="col-auto si-del-col">
-							@if($line == 0)
-								<span class="text-muted" style="display:inline-block;width:1.75rem;"></span>
-							@else
-								<a
-									id="trash_link_edit{{ $line }}"
-									class="trash_link_edit btn btn-icon btn-outline-danger btn-sm-mobile"
-									title="{{ $LANG['delete_line_item'] ?? '' }}"
-									href="#"
-									rel="{{ $line }}"
-								><i id="delete_image{{ $line }}" class="ti ti-trash"></i></a>
-							@endif
-						</div>
 						<div class="col-3 col-lg-1">
 							<label class="form-label d-lg-none small text-secondary mb-1">{{ $LANG['quantity_short'] ?? '' }}</label>
 							<input type="hidden" id="delete{{ $line }}" name="delete{{ $line }}" />
@@ -200,22 +195,42 @@
 							/>
 						</div>
 						<div class="col-auto d-flex align-items-end">
-							<a href="#" class="si-expand-desc btn btn-icon btn-outline-secondary btn-sm-mobile" title="{{ $LANG['description'] ?? 'Description' }}"><i class="ti {{ $showDetailsInitially ? 'ti-chevron-up' : 'ti-chevron-down' }}"></i></a>
+							<div class="segmented-control segmented-control-sm">
+								<label class="segmented-control-item si-expand-desc" title="{{ $LANG['description'] ?? 'Description' }}">
+									<input type="checkbox" class="segmented-control-input" {{ $showDetailsInitially ? 'checked' : '' }}>
+									<span class="segmented-control-label"><i class="ti {{ $showDetailsInitially ? 'ti-chevron-up' : 'ti-chevron-down' }}"></i></span>
+								</label>
+								@if($line == 0)
+								<label class="segmented-control-item si-del-placeholder" style="visibility:hidden">
+									<input type="radio" class="segmented-control-input">
+									<span class="segmented-control-label"><i class="ti ti-trash"></i></span>
+								</label>
+								@else
+								<label class="segmented-control-item trash_link_edit" id="trash_link_edit{{ $line }}" rel="{{ $line }}" title="{{ $LANG['delete_line_item'] ?? '' }}">
+									<input type="radio" class="segmented-control-input">
+									<span class="segmented-control-label"><i id="delete_image{{ $line }}" class="ti ti-trash"></i></span>
+								</label>
+								@endif
+							</div>
 						</div>
 					</div>
 					{!! $invoiceItem['html'] !!}
 					<div class="row g-2 details {{ $showDetailsInitially ? '' : 'si_hide' }} mt-1">
-						<div class="col-auto si-del-col d-none d-lg-block"></div>
 						<div class="col-12 col-lg">
-							<textarea class="form-control form-control-sm detail" name="description{{ $line }}" id="description{{ $line }}" rows="2">{{ $invoiceItem['description'] }}</textarea>
+							<textarea class="form-control form-control-sm detail-editor" name="description{{ $line }}" id="description{{ $line }}" rows="2">{!! $invoiceItem['description'] !!}</textarea>
 						</div>
 					</div>
 				</div>
 				@endforeach
 			</div>
 
-			<div class="btn-list mb-4">
-				<a href="#" class="add_line_item btn btn-outline-primary"><i class="ti ti-plus me-1"></i>{{ $LANG['add_new_row'] ?? '' }}</a>
+			<div class="mb-4">
+				<div class="segmented-control">
+					<label class="segmented-control-item add_line_item">
+						<input type="radio" class="segmented-control-input">
+						<span class="segmented-control-label"><i class="ti ti-plus me-1"></i>{{ $LANG['add_new_row'] ?? '' }}</span>
+					</label>
+				</div>
 			</div>
 
 			{{-- Custom fields --}}

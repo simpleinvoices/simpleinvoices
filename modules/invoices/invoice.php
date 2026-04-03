@@ -26,7 +26,13 @@ $products = getActiveProducts();
 $preferences = getActivePreferences();
 $defaults = getSystemDefaults();
 
-if ($billers == null OR $customers == null OR $taxes == null OR $products == null OR $preferences == null)
+$inv_hasInvoices = (bool) dbQuery(
+    "SELECT COUNT(*) FROM " . TB_PREFIX . "invoices WHERE domain_id = :domain_id",
+    ':domain_id', $auth_session->domain_id
+)->fetchColumn();
+$smarty->assign('inv_hasInvoices', $inv_hasInvoices);
+
+if ($billers == null OR $customers == null OR $products == null)
 {
     $first_run_wizard =true;
     $smarty -> assign("first_run_wizard",$first_run_wizard);

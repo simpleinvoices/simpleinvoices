@@ -14,6 +14,96 @@
 <h3>{{ $LANG['inv'] ?? '' }} {{ $LANG['inv_total'] ?? '' }}</h3>
 -->
 
+@php
+    $inv_hasBillers   = !empty($billers);
+    $inv_hasCustomers = !empty($customers);
+    $inv_hasProducts  = !empty($products);
+@endphp
+
+@if(isset($first_run_wizard) && $first_run_wizard == true)
+
+<div class="card mb-3">
+    <div class="card-status-top bg-primary"></div>
+    <div class="card-header">
+        <h3 class="card-title"><i class="ti ti-rocket me-2"></i>{{ $LANG['getting_started'] ?? 'Getting Started' }}</h3>
+    </div>
+    <div class="card-body">
+        <p class="text-secondary">{{ $LANG['first_run_intro'] ?? 'Welcome! Complete these steps to start invoicing:' }}</p>
+        <div class="row g-3">
+            <div class="col-sm-6 col-lg-3">
+                <div class="card @if($inv_hasBillers) border-success @endif">
+                    <div class="card-body d-flex align-items-center gap-3">
+                        <span class="avatar @if($inv_hasBillers) bg-success-lt @else bg-primary-lt @endif rounded">
+                            <i class="ti ti-building-store"></i>
+                        </span>
+                        <div>
+                            <div class="fw-bold">{{ $LANG['biller'] ?? 'Biller' }}</div>
+                            @if($inv_hasBillers)
+                                <span class="text-success"><i class="ti ti-check"></i> {{ $LANG['done'] ?? 'Done' }}</span>
+                            @else
+                                <a href="index.php?module=billers&amp;view=add" class="text-primary">{{ $LANG['add_new_biller'] ?? 'Add Biller' }}</a>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="card @if($inv_hasCustomers) border-success @endif">
+                    <div class="card-body d-flex align-items-center gap-3">
+                        <span class="avatar @if($inv_hasCustomers) bg-success-lt @else bg-primary-lt @endif rounded">
+                            <i class="ti ti-users"></i>
+                        </span>
+                        <div>
+                            <div class="fw-bold">{{ $LANG['customer'] ?? 'Customer' }}</div>
+                            @if($inv_hasCustomers)
+                                <span class="text-success"><i class="ti ti-check"></i> {{ $LANG['done'] ?? 'Done' }}</span>
+                            @else
+                                <a href="index.php?module=customers&amp;view=add" class="text-primary">{{ $LANG['customer_add'] ?? 'Add Customer' }}</a>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="card @if($inv_hasProducts) border-success @endif">
+                    <div class="card-body d-flex align-items-center gap-3">
+                        <span class="avatar @if($inv_hasProducts) bg-success-lt @else bg-primary-lt @endif rounded">
+                            <i class="ti ti-package"></i>
+                        </span>
+                        <div>
+                            <div class="fw-bold">{{ $LANG['product'] ?? 'Product' }}</div>
+                            @if($inv_hasProducts)
+                                <span class="text-success"><i class="ti ti-check"></i> {{ $LANG['done'] ?? 'Done' }}</span>
+                            @else
+                                <a href="index.php?module=products&amp;view=add" class="text-primary">{{ $LANG['add_new_product'] ?? 'Add Product' }}</a>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="card @if(!empty($inv_hasInvoices)) border-success @endif">
+                    <div class="card-body d-flex align-items-center gap-3">
+                        <span class="avatar @if(!empty($inv_hasInvoices)) bg-success-lt @else bg-primary-lt @endif rounded">
+                            <i class="ti ti-file-invoice"></i>
+                        </span>
+                        <div>
+                            <div class="fw-bold">{{ $LANG['invoice'] ?? 'Invoice' }}</div>
+                            @if(!empty($inv_hasInvoices))
+                                <span class="text-success"><i class="ti ti-check"></i> {{ $LANG['done'] ?? 'Done' }}</span>
+                            @else
+                                <a href="index.php?module=invoices&amp;view=itemised" class="text-primary">{{ $LANG['create_invoice'] ?? 'Create Invoice' }}</a>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@else
+
 <div class="card">
 	<div class="card-body">
 <div class="si_invoice_form">
@@ -90,6 +180,9 @@
 		</div>
 	</div>
 </div>
+
+@endif
+
 <input type="hidden" name="max_items" value="{{ $line }}" />
 <input type="hidden" name="type" value="1" />
 
