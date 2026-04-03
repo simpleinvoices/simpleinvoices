@@ -111,14 +111,19 @@
 
 		{{-- Line items --}}
 		{{-- Desktop column header --}}
-		<div class="row g-2 d-none d-lg-flex mb-1 px-1">
+		<div class="row g-2 d-none d-lg-flex mb-1">
 			<div class="col-3 col-lg-1 small fw-medium text-secondary">{{ $LANG['quantity'] ?? '' }}</div>
 			<div class="col col-lg small fw-medium text-secondary">{{ $LANG['item'] ?? '' }}</div>
 			@for($tax_header = 0; $tax_header < (int)($defaults['tax_per_line_item'] ?? 0); $tax_header++)
 				<div class="col col-lg-2 small fw-medium text-secondary">{{ $LANG['tax'] ?? '' }}@if(($defaults['tax_per_line_item'] ?? 0) > 1) {{ ($tax_header + 1) }}@endif</div>
 			@endfor
-			<div class="col col-lg-2 small fw-medium text-secondary text-end">{{ $LANG['unit_price'] ?? '' }}</div>
-			<div class="col-auto si-expand-col-hdr"></div>
+			<div class="col col-lg-2 small fw-medium text-secondary">{{ $LANG['unit_price'] ?? '' }}</div>
+			<div class="col-auto d-flex align-items-end">
+				<div class="segmented-control segmented-control-sm invisible" aria-hidden="true">
+					<span class="segmented-control-item"><span class="segmented-control-label"><i class="ti ti-chevron-down"></i></span></span>
+					<span class="segmented-control-item"><span class="segmented-control-label"><i class="ti ti-chevrons-down"></i></span></span>
+				</div>
+			</div>
 		</div>
 
 		<div id="itemtable" class="mb-2">

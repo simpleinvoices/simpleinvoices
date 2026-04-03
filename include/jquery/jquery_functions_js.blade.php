@@ -176,19 +176,19 @@
 			products.classList.remove('validate[required]');
 		}
 		var upOld = clonedRow.querySelector('#unit_price' + rowID_old); if (upOld) { upOld.id = 'unit_price' + rowID_new; upOld.name = 'unit_price' + rowID_new; upOld.value = ''; upOld.removeAttribute('value'); upOld.classList.remove('validate[required]'); }
-		var descOld = clonedRow.querySelector('#description' + rowID_old);
-		if (descOld) {
-			descOld.id   = 'description' + rowID_new;
-			descOld.name = 'description' + rowID_new;
-			descOld.value = '';
-			descOld.removeAttribute('style');
-			descOld.classList.remove('validate[required]');
+		// Rebuild description textarea fresh to avoid cloning hugeRTE editor state
+		var detailsCol = clonedRow.querySelector('.details .col-12');
+		if (detailsCol) {
+			detailsCol.innerHTML = '';
+			var newDesc = document.createElement('textarea');
+			newDesc.className = 'form-control form-control-sm detail-editor';
+			newDesc.name = 'description' + rowID_new;
+			newDesc.id = 'description' + rowID_new;
+			newDesc.rows = 1;
+			detailsCol.appendChild(newDesc);
 		}
-		// Strip any cloned hugeRTE wrapper and restore textarea visibility
-		clonedRow.querySelectorAll('.tox-tinymce').forEach(function(el) { el.remove(); });
 		// Remove toggle-all button — only belongs on row 0
 		clonedRow.querySelectorAll('.si-toggle-all-desc').forEach(function(el) { el.remove(); });
-		if (descOld) descOld.style.display = '';
 		var toggleAllBtnAdd = document.querySelector('.si-toggle-all-desc i');
 		var globalShowActiveAdd = toggleAllBtnAdd && toggleAllBtnAdd.classList.contains('ti-chevrons-up');
 		clonedRow.querySelectorAll('.details').forEach(function (el) {
@@ -212,11 +212,10 @@
 		var tax1 = clonedRow.querySelector('[id="tax_id[' + rowID_old + '][1]"]'); if (tax1) { tax1.id = 'tax_id[' + rowID_new + '][1]'; tax1.name = 'tax_id[' + rowID_new + '][1]'; tax1.value = ''; }
 		var jsonHtmlOld = clonedRow.querySelector('#json_html' + rowID_old); if (jsonHtmlOld) jsonHtmlOld.remove();
 		itemtable.appendChild(clonedRow);
-		if (window.hugeRTE) {
+		if (window.hugeRTE && detailsCol) {
 			var isDarkAdd = document.documentElement.getAttribute('data-bs-theme') === 'dark';
 			var sharedAdd = { base_url: 'https://cdn.jsdelivr.net/npm/hugerte@1.0.10', suffix: '.min', menubar: false, statusbar: false, promotion: false, branding: false, content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, sans-serif; font-size: 14px; }' };
 			if (isDarkAdd) { sharedAdd.skin = 'oxide-dark'; sharedAdd.content_css = 'dark'; }
-			window.hugeRTE.init(Object.assign({}, sharedAdd, { selector: 'textarea.editor', plugins: 'lists code', toolbar: 'undo redo | bold italic | bullist numlist | removeformat | code', height: 220 }));
 			window.hugeRTE.init(Object.assign({}, sharedAdd, { selector: '#description' + rowID_new, plugins: 'lists autoresize', toolbar: 'bold italic | bullist numlist', min_height: 50, max_height: 150 }));
 		}
 		if (loading) loading.style.display = 'none';

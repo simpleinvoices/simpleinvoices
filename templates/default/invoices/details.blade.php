@@ -114,18 +114,24 @@
 
 			{{-- Line items --}}
 			{{-- Desktop column header --}}
-			<div class="row g-2 d-none d-lg-flex mb-1 px-1">
+			<div class="row g-2 d-none d-lg-flex mb-1">
 				<div class="col-3 col-lg-1 small fw-medium text-secondary">{{ $LANG['quantity_short'] ?? '' }}</div>
 				<div class="col col-lg small fw-medium text-secondary">{{ $LANG['description'] ?? '' }}</div>
 				@for($tax_header = 0; $tax_header < (int)($defaults['tax_per_line_item'] ?? 0); $tax_header++)
 					<div class="col col-lg-2 small fw-medium text-secondary">{{ $LANG['tax'] ?? '' }}@if(($defaults['tax_per_line_item'] ?? 0) > 1) {{ ($tax_header + 1) }}@endif</div>
 				@endfor
-				<div class="col col-lg-2 small fw-medium text-secondary text-end">{{ $LANG['unit_price'] ?? '' }}</div>
-				<div class="col-auto si-expand-col-hdr"></div>
+				<div class="col col-lg-2 small fw-medium text-secondary">{{ $LANG['unit_price'] ?? '' }}</div>
+				<div class="col-auto d-flex align-items-end">
+					<div class="segmented-control segmented-control-sm invisible" aria-hidden="true">
+						<span class="segmented-control-item"><span class="segmented-control-label"><i class="ti ti-chevron-down"></i></span></span>
+						<span class="segmented-control-item"><span class="segmented-control-label"><i class="ti ti-chevrons-down"></i></span></span>
+					</div>
+				</div>
 			</div>
 
 			<div id="itemtable" class="mb-2">
 				@foreach(($invoiceItems ?? []) as $line => $invoiceItem)
+				@php $itemHasDesc = !empty($invoiceItem['description']); @endphp
 				<div class="line_item si-line-item" id="row{{ $line }}">
 					<div class="row g-2 align-items-end">
 						<div class="col-3 col-lg-1">
@@ -186,8 +192,8 @@
 						<div class="col-auto d-flex align-items-end">
 							<div class="segmented-control segmented-control-sm">
 								<label class="segmented-control-item si-expand-desc" title="{{ $LANG['description'] ?? 'Description' }}">
-									<input type="checkbox" class="segmented-control-input" {{ $showDetailsInitially ? 'checked' : '' }}>
-									<span class="segmented-control-label"><i class="ti {{ $showDetailsInitially ? 'ti-chevron-up' : 'ti-chevron-down' }}"></i></span>
+									<input type="checkbox" class="segmented-control-input" {{ $itemHasDesc ? 'checked' : '' }}>
+									<span class="segmented-control-label"><i class="ti {{ $itemHasDesc ? 'ti-chevron-up' : 'ti-chevron-down' }}"></i></span>
 								</label>
 								@if($line == 0)
 								<label class="segmented-control-item si-toggle-all-desc" title="{{ $LANG['show_all'] ?? 'Show all' }}">
@@ -204,7 +210,7 @@
 						</div>
 					</div>
 					{!! $invoiceItem['html'] !!}
-					<div class="row g-2 details {{ $showDetailsInitially ? '' : 'si_hide' }} mt-1">
+					<div class="row g-2 details {{ $itemHasDesc ? '' : 'si_hide' }} mt-1">
 						<div class="col-12 col-lg">
 							<textarea class="form-control form-control-sm detail-editor" name="description{{ $line }}" id="description{{ $line }}" rows="2">{!! $invoiceItem['description'] !!}</textarea>
 						</div>

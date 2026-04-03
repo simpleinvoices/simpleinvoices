@@ -12,6 +12,18 @@
     --tblr-link-color: #45aaf2;
 }
 
+/* Light grey outline buttons — match Tabler preview slate style */
+.btn-outline-secondary {
+    --tblr-btn-color: var(--tblr-body-color);
+    --tblr-btn-border-color: var(--tblr-border-color);
+    --tblr-btn-hover-color: var(--tblr-body-color);
+    --tblr-btn-hover-bg: var(--tblr-bg-surface-secondary);
+    --tblr-btn-hover-border-color: var(--tblr-border-color);
+    --tblr-btn-active-color: var(--tblr-body-color);
+    --tblr-btn-active-bg: var(--tblr-bg-surface-secondary);
+    --tblr-btn-active-border-color: var(--tblr-border-color);
+}
+
 /* Top navbar brand */
 .navbar-brand {
     font-size: 1.1rem;
@@ -119,6 +131,17 @@ body {
 .si_hide { display: none !important; }
 
 /* Invoice line items — responsive grid layout */
+
+/* Button-sized segmented control — matches .btn default sizing */
+.segmented-control-btn .segmented-control-label {
+    padding: 0.4375rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+}
+.segmented-control-btn .ti {
+    font-size: 1.25rem;
+    vertical-align: middle;
+}
 
 /* Compact segmented control for line item actions (expand/delete) */
 .segmented-control-sm .segmented-control-label {
