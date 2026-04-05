@@ -30,33 +30,31 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && $op === 'backup_db') {
 	exit();
 }
 
-if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && $op === 'view_backup') {
-	requireCSRFProtection($backup_action);
+// Always generate SQL for page display
+try {
+	$oBack  = new backup_db();
+	$handle = fopen('php://memory', 'r+');
+	$oBack->start_backup($handle);
+	rewind($handle);
+	$rawSQL = stream_get_contents($handle);
+	fclose($handle);
 
-	try {
-		$oBack  = new backup_db();
-		$handle = fopen('php://memory', 'r+');
-		$oBack->start_backup($handle);
-		rewind($handle);
-		$sql = stream_get_contents($handle);
-		fclose($handle);
-
-		$formatter  = new \Doctrine\SqlFormatter\SqlFormatter();
-		$statements = preg_split('/;\n/', $sql, -1, PREG_SPLIT_NO_EMPTY);
-		$parts      = [];
-		foreach ($statements as $stmt) {
-			$stmt = trim($stmt);
-			if ($stmt !== '') {
-				$parts[] = $formatter->format($stmt . ';');
-			}
+	$formatter  = new \Doctrine\SqlFormatter\SqlFormatter();
+	$statements = preg_split('/;\n/', $rawSQL, -1, PREG_SPLIT_NO_EMPTY);
+	$parts      = [];
+	foreach ($statements as $stmt) {
+		$stmt = trim($stmt);
+		if ($stmt !== '') {
+			$parts[] = $formatter->format($stmt . ';');
 		}
-		$formattedSQL = implode("\n", $parts);
-
-		$smarty->assign('formattedSQL', $formattedSQL);
-	} catch (\Throwable $e) {
-		$errors[] = 'SQL format error: ' . $e->getMessage();
-		error_log('backup view_backup error: ' . $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine());
 	}
+	$formattedSQL = implode("\n", $parts);
+
+	$smarty->assign('formattedSQL', $formattedSQL);
+	$smarty->assign('rawSQL', $rawSQL);
+} catch (\Throwable $e) {
+	$errors[] = 'SQL format error: ' . $e->getMessage();
+	error_log('backup view_backup error: ' . $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine());
 }
 
 $smarty->assign('backupActionToken', siNonce($backup_action));
