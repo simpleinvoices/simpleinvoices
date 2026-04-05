@@ -27,7 +27,9 @@
 		@endif
 	</div>
 </div>
-@if(post('cancel') == null)
+@if(post('from_wizard') == '1' && $saved)
+	<meta http-equiv="refresh" content="1;URL=index.php?wizard_step=2" />
+@elseif(post('cancel') == null)
 	<meta http-equiv="refresh" content="2;URL=index.php?module=billers&amp;view=manage" />
 @else
 	<meta http-equiv="refresh" content="0;URL=index.php?module=billers&amp;view=manage" />

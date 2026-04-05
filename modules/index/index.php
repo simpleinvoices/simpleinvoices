@@ -18,6 +18,15 @@ if ($billers == null OR $customers == null OR $taxes == null OR $products == nul
 {
     $first_run_wizard =true;
     $smarty -> assign("first_run_wizard",$first_run_wizard);
+
+    // Load sample data for the wizard "Use sample data" prefill buttons
+    $sample_json = realpath(__DIR__ . '/../../databases/json/sample_data.json');
+    $sample_data = ($sample_json && file_exists($sample_json))
+        ? json_decode(file_get_contents($sample_json), true)
+        : [];
+    $smarty->assign('wizard_sample_biller',   $sample_data['si_biller'][0]    ?? []);
+    $smarty->assign('wizard_sample_customer',  $sample_data['si_customers'][0] ?? []);
+    $smarty->assign('wizard_sample_product',   $sample_data['si_products'][0]  ?? []);
 }
 
 $smarty -> assign("mysql",$mysql);
