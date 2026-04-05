@@ -667,7 +667,7 @@ INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_rele
 ,(292,291,'','','')
 ,(293,292,'','','')
 ,(294,293,'Add department to the customers','20161004','ALTER TABLE `si_customers` ADD COLUMN `department` VARCHAR(255) NULL AFTER `name`')
-,(294,294,'Prepare user table for Laravel Fortify','20260329','ALTER TABLE `si_user` CHANGE `password` `password` VARCHAR(255) NULL; ALTER TABLE `si_user` ADD COLUMN `remember_token` VARCHAR(100) NULL AFTER `password`; ALTER TABLE `si_customers` ADD COLUMN `department` VARCHAR(255) NULL AFTER `name`');
+,(294,294,'Add name field to user table for display name','20260331','ALTER TABLE `si_user` ADD COLUMN `name` VARCHAR(255) NULL AFTER `email`');
 
 CREATE TABLE IF NOT EXISTS `si_system_defaults` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -727,18 +727,18 @@ INSERT INTO `si_tax` (`tax_id`, `tax_description`, `tax_percentage`, `type`, `ta
 CREATE TABLE IF NOT EXISTS `si_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
   `role_id` int(11) DEFAULT NULL,
   `domain_id` int(11) NOT NULL DEFAULT '0',
-  `password` varchar(255) DEFAULT NULL,
-  `remember_token` varchar(100) DEFAULT NULL,
+  `password` varchar(64) DEFAULT NULL,
   `enabled` TINYINT(1) DEFAULT 1 NOT NULL,
   `user_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`domain_id`,`id`),
   UNIQUE KEY `UnqEMail` (`email`)
 ) ENGINE=MyISAM;
 
-INSERT INTO `si_user` (`id`, `email`, `role_id`, `domain_id`, `password`, `remember_token`, `enabled`, `user_id`) VALUES
- (1, 'demo@simpleinvoices.org', 1, 1, 'fe01ce2a7fbac8fafaed7c982a04e229', NULL, 1, 0);
+INSERT INTO `si_user` (`id`, `email`, `role_id`, `domain_id`, `password`, `enabled`, `user_id`) VALUES
+ (1, 'demo@simpleinvoices.org', 1, 1, 'fe01ce2a7fbac8fafaed7c982a04e229', 1, 0);
 
 CREATE TABLE IF NOT EXISTS `si_user_domain` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

@@ -45,13 +45,23 @@
 				if (t0) t0.value = data.default_tax_id != null ? data.default_tax_id : '';
 				var t1 = document.querySelector('#row' + row_number + ' [name="tax_id[' + row_number + '][1]"]');
 				if (t1) t1.value = (data.default_tax_id_2 != null) ? data.default_tax_id_2 : '';
+				var showDesc = data.show_description === 'Y';
 				var detailsTr = document.querySelectorAll('#row' + row_number + ' .details');
-				var toggleAllBtn = document.querySelector('.si-toggle-all-desc i');
-				var globalShowActive = toggleAllBtn && toggleAllBtn.classList.contains('ti-chevrons-up');
 				detailsTr.forEach(function (tr) {
-					if (data.show_description === 'Y' || globalShowActive) tr.classList.remove('si_hide');
+					if (showDesc) tr.classList.remove('si_hide');
 					else tr.classList.add('si_hide');
 				});
+				var rowElDesc = document.getElementById('row' + row_number);
+				var expandBtn = rowElDesc ? rowElDesc.querySelector('.si-expand-desc') : null;
+				if (expandBtn) {
+					var expandIcon = expandBtn.querySelector('i');
+					if (expandIcon) {
+						expandIcon.classList.toggle('ti-chevron-down', !showDesc);
+						expandIcon.classList.toggle('ti-chevron-up', showDesc);
+					}
+					var expandChk = expandBtn.querySelector('input[type="checkbox"]');
+					if (expandChk) expandChk.checked = showDesc;
+				}
 				var descEl = document.getElementById('description' + row_number);
 				if (descEl) {
 					var ed = window.hugeRTE ? window.hugeRTE.get('description' + row_number) : null;
@@ -189,24 +199,18 @@
 		}
 		// Remove toggle-all button — only belongs on row 0
 		clonedRow.querySelectorAll('.si-toggle-all-desc').forEach(function(el) { el.remove(); });
-		var toggleAllBtnAdd = document.querySelector('.si-toggle-all-desc i');
-		var globalShowActiveAdd = toggleAllBtnAdd && toggleAllBtnAdd.classList.contains('ti-chevrons-up');
+		// New rows always start with description hidden (no content yet)
 		clonedRow.querySelectorAll('.details').forEach(function (el) {
-			if (globalShowActiveAdd) el.classList.remove('si_hide');
-			else el.classList.add('si_hide');
+			el.classList.add('si_hide');
 			el.classList.remove('si_show');
 			el.style.display = '';
 		});
 		var expandBtn = clonedRow.querySelector('.si-expand-desc');
 		if (expandBtn) {
 			var expandIcon = expandBtn.querySelector('i');
-			if (globalShowActiveAdd) {
-				if (expandIcon) { expandIcon.classList.remove('ti-chevron-down'); expandIcon.classList.add('ti-chevron-up'); }
-			} else {
-				if (expandIcon) { expandIcon.classList.remove('ti-chevron-up'); expandIcon.classList.add('ti-chevron-down'); }
-			}
+			if (expandIcon) { expandIcon.classList.remove('ti-chevron-up'); expandIcon.classList.add('ti-chevron-down'); }
 			var expandChk = expandBtn.querySelector('input[type="checkbox"]');
-			if (expandChk) expandChk.checked = globalShowActiveAdd;
+			if (expandChk) expandChk.checked = false;
 		}
 		var tax0 = clonedRow.querySelector('[id="tax_id[' + rowID_old + '][0]"]'); if (tax0) { tax0.id = 'tax_id[' + rowID_new + '][0]'; tax0.name = 'tax_id[' + rowID_new + '][0]'; tax0.value = ''; }
 		var tax1 = clonedRow.querySelector('[id="tax_id[' + rowID_old + '][1]"]'); if (tax1) { tax1.id = 'tax_id[' + rowID_new + '][1]'; tax1.name = 'tax_id[' + rowID_new + '][1]'; tax1.value = ''; }

@@ -207,6 +207,10 @@ $early_exit[] = "payments_print";
 #$early_exit[] = "reports_report_statement";
 $early_exit[] = "documentation_view";
 //$early_exit[] = "install_index";
+// Backup download must run before any HTML is output so it can send file headers
+if ($module === 'options' && $view === 'backup_database' && ($_POST['op'] ?? '') === 'backup_db') {
+	$early_exit[] = 'options_backup_database';
+}
 
 
 switch ($module)

@@ -1704,25 +1704,11 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['293']['patch'] = "ALTER TABLE `".TB_PREFIX."customers` ADD COLUMN `department` VARCHAR(255) NULL AFTER `name`";
     $patch['293']['date']  = "20161004";
 
-    $patch['294']['name']  = "Prepare user table for Laravel Fortify";
+    $patch['294']['name']  = "Add name field to user table for display name";
     if ($config->database->adapter === "pdo_pgsql") {
-        $patch['294']['patch'] = "
-            ALTER TABLE ".TB_PREFIX."user ALTER COLUMN password TYPE VARCHAR(255);
-            ALTER TABLE ".TB_PREFIX."user ADD COLUMN remember_token VARCHAR(100);
-        ";
+        $patch['294']['patch'] = "ALTER TABLE ".TB_PREFIX."user ADD COLUMN name VARCHAR(255) NULL;";
     } else {
-        $patch['294']['patch'] = "
-            ALTER TABLE `".TB_PREFIX."user` CHANGE `password` `password` VARCHAR(255) NULL;
-            ALTER TABLE `".TB_PREFIX."user` ADD COLUMN `remember_token` VARCHAR(100) NULL AFTER `password`;
-        ";
+        $patch['294']['patch'] = "ALTER TABLE `".TB_PREFIX."user` ADD COLUMN `name` VARCHAR(255) NULL AFTER `email`;";
     }
-    $patch['294']['date']  = "20260329";
-
-    $patch['295']['name']  = "Add name field to user table for display name";
-    if ($config->database->adapter === "pdo_pgsql") {
-        $patch['295']['patch'] = "ALTER TABLE ".TB_PREFIX."user ADD COLUMN name VARCHAR(255) NULL;";
-    } else {
-        $patch['295']['patch'] = "ALTER TABLE `".TB_PREFIX."user` ADD COLUMN `name` VARCHAR(255) NULL AFTER `email`;";
-    }
-    $patch['295']['date']  = "20260331";
+    $patch['294']['date']  = "20260331";
 

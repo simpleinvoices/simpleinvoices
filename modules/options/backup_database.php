@@ -9,7 +9,9 @@ $smarty -> assign('active_tab', '#setting');
 $backup_action = 'backup_database';
 $errors = array();
 
-if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && ($_POST['op'] ?? '') === 'backup_db') {
+$op = ($_POST['op'] ?? '');
+
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && $op === 'backup_db') {
 	requireCSRFProtection($backup_action);
 
 	$today    = date("Ymd_His");
@@ -26,6 +28,35 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && ($_POST['op'] ?? '') === 'b
 	$oBack->start_backup($handle);
 	fclose($handle);
 	exit();
+}
+
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && $op === 'view_backup') {
+	requireCSRFProtection($backup_action);
+
+	try {
+		$oBack  = new backup_db();
+		$handle = fopen('php://memory', 'r+');
+		$oBack->start_backup($handle);
+		rewind($handle);
+		$sql = stream_get_contents($handle);
+		fclose($handle);
+
+		$formatter  = new \Doctrine\SqlFormatter\SqlFormatter();
+		$statements = preg_split('/;\n/', $sql, -1, PREG_SPLIT_NO_EMPTY);
+		$parts      = [];
+		foreach ($statements as $stmt) {
+			$stmt = trim($stmt);
+			if ($stmt !== '') {
+				$parts[] = $formatter->format($stmt . ';');
+			}
+		}
+		$formattedSQL = implode("\n", $parts);
+
+		$smarty->assign('formattedSQL', $formattedSQL);
+	} catch (\Throwable $e) {
+		$errors[] = 'SQL format error: ' . $e->getMessage();
+		error_log('backup view_backup error: ' . $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine());
+	}
 }
 
 $smarty->assign('backupActionToken', siNonce($backup_action));
