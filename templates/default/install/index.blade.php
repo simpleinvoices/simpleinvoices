@@ -40,11 +40,12 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="btn-list mt-3">
-			<a href="./index.php?module=install&amp;view=structure" class="btn btn-primary">
+		<form method="post" action="./index.php?module=install&amp;view=index" class="mt-3">
+			<input type="hidden" name="op" value="install_database" />
+			<button type="submit" class="btn btn-primary">
 				<i class="ti ti-check me-1"></i>{{ $LANG['install_database_and_essential'] ?? 'Install database & essential data' }}
-			</a>
-		</div>
+			</button>
+		</form>
 	</div>
 </div>
 

@@ -897,9 +897,19 @@ function getDefaultGeneric($param, $bool=true, $domain_id='') {
 	global $LANG;
 	$domain_id = domain_id::get($domain_id);
 
+	if (checkTableExists(TB_PREFIX."system_defaults") == false) {
+		return $bool ? ($LANG['disabled'] ?? 'disabled') : null;
+	}
+
 	$sql = "SELECT value FROM ".TB_PREFIX."system_defaults s WHERE ( s.name = :param AND s.domain_id = :domain_id)";
 	$sth = dbQuery($sql, ':param', $param, ':domain_id', $domain_id);
+	if (!$sth) {
+		return $bool ? ($LANG['disabled'] ?? 'disabled') : null;
+	}
 	$array = $sth->fetch();
+	if (!$array || !array_key_exists('value', $array)) {
+		return $bool ? ($LANG['disabled'] ?? 'disabled') : null;
+	}
 	$paramval = (($bool) ? ($array['value']==1?$LANG['enabled']:$LANG['disabled']) : $array['value']);
 	return $paramval;
 }
@@ -3294,4 +3304,3 @@ EOD;
 }
 
 // end of db query functions moved from functions.php on 2013-10-28
-
