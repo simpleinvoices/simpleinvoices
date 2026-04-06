@@ -28,7 +28,6 @@
                         <div class="si-save-alert-note">{{ $redirectNote }}</div>
                     @endif
                 </div>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{{ $LANG['close'] ?? 'Close' }}"></button>
             </div>
         </div>
     </div>

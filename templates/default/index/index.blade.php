@@ -561,174 +561,160 @@
 </script>
 @endif
 
-<div class="accordion mb-3" id="dashboard-accordion">
-    <div class="accordion-item">
-        <h2 class="accordion-header" id="dashboard-heading-activity">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse-activity" aria-expanded="true" aria-controls="dashboard-collapse-activity">
-                <span>
-                    <span class="fw-semibold">{{ $LANG['invoices'] ?? 'Invoices' }} &amp; {{ $LANG['payments'] ?? 'Payments' }}</span>
-                    <span class="text-secondary d-block small">{{ $LANG['monthly_activity'] ?? 'Monthly activity' }}</span>
-                </span>
-            </button>
-        </h2>
-        <div id="dashboard-collapse-activity" class="accordion-collapse collapse show" aria-labelledby="dashboard-heading-activity" data-bs-parent="#dashboard-accordion">
-            <div class="accordion-body">
-                <div class="d-flex justify-content-end mb-3">
-                    <div class="segmented-control" id="chart-year-selector">
-                        @foreach(($chart_years ?? []) as $y)
-                        <label class="segmented-control-item">
-                            <input type="radio" class="segmented-control-input" name="chart_year" value="{{ $y }}"{{ $y === ($chart_current_year ?? 0) ? ' checked' : '' }}>
-                            <span class="segmented-control-label">{{ $y }}</span>
-                        </label>
-                        @endforeach
-                    </div>
-                </div>
-                <div id="chart-dashboard" style="min-height:288px"></div>
+{{-- Activity chart --}}
+<div class="card mb-3">
+    <div class="card-header">
+        <div>
+            <h3 class="card-title">{{ $LANG['invoices'] ?? 'Invoices' }} &amp; {{ $LANG['payments'] ?? 'Payments' }}</h3>
+            <div class="card-subtitle">{{ $LANG['monthly_activity'] ?? 'Monthly activity' }}</div>
+        </div>
+        <div class="card-options ms-auto">
+            <div class="segmented-control" id="chart-year-selector">
+                @foreach(($chart_years ?? []) as $y)
+                <label class="segmented-control-item">
+                    <input type="radio" class="segmented-control-input" name="chart_year" value="{{ $y }}"{{ $y === ($chart_current_year ?? 0) ? ' checked' : '' }}>
+                    <span class="segmented-control-label">{{ $y }}</span>
+                </label>
+                @endforeach
             </div>
         </div>
     </div>
+    <div class="card-body">
+        <div id="chart-dashboard" style="min-height:288px"></div>
+    </div>
+</div>
 
-    <div class="accordion-item">
-        <h2 class="accordion-header" id="dashboard-heading-invoices">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse-invoices" aria-expanded="false" aria-controls="dashboard-collapse-invoices">
-                <span class="fw-semibold">{{ $LANG['recent_invoices'] ?? 'Recent Invoices' }}</span>
-            </button>
-        </h2>
-        <div id="dashboard-collapse-invoices" class="accordion-collapse collapse" aria-labelledby="dashboard-heading-invoices" data-bs-parent="#dashboard-accordion">
-            <div class="accordion-body p-0">
-                <div class="d-flex flex-wrap gap-2 justify-content-end p-3 border-bottom">
-                    <a href="index.php?module=invoices&amp;view=manage" class="btn btn-outline-secondary btn-sm">
-                        {{ $LANG['manage_invoices'] ?? 'View all' }}
-                    </a>
-                    <a href="index.php?module=invoices&amp;view=itemised" class="btn btn-primary btn-sm">
-                        <i class="ti ti-plus me-1"></i>{{ $LANG['add_new_invoice'] ?? 'Add Invoice' }}
-                    </a>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-vcenter table-hover card-table mb-0">
-                        <thead>
-                            <tr>
-                                <th>{{ $LANG['id'] ?? '#' }}</th>
-                                <th>{{ $LANG['customer'] ?? 'Customer' }}</th>
-                                <th>{{ $LANG['biller'] ?? 'Biller' }}</th>
-                                <th>{{ $LANG['date_upper'] ?? 'Date' }}</th>
-                                <th class="text-end">{{ $LANG['total'] ?? 'Total' }}</th>
-                                <th>{{ $LANG['status'] ?? 'Status' }}</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse(($latest_invoices ?? []) as $inv)
-                            @php
-                                $isPaid  = ($inv['status'] ?? 0) && ($inv['owing'] ?? 0) <= 0;
-                                $isDraft = !($inv['status'] ?? 0);
-                            @endphp
-                            <tr>
-                                <td>
-                                    <a href="index.php?module=invoices&amp;view=quick_view&amp;id={{ urlencode($inv['id']) }}">
-                                        {{ ($inv['preference'] ?? $inv['pref_description'] ?? '') }} {{ $inv['index_id'] ?? '' }}
-                                    </a>
-                                </td>
-                                <td>{{ $inv['customer'] ?? '' }}</td>
-                                <td class="text-secondary">{{ $inv['biller'] ?? '' }}</td>
-                                <td class="text-secondary">{{ $inv['date'] ?? '' }}</td>
-                                <td class="text-end">{{ siLocal::number($inv['invoice_total'] ?? 0) }}</td>
-                                <td>
-                                    @if($isDraft)
-                                        <span class="status status-secondary"><span class="status-dot"></span>{{ $LANG['draft'] ?? 'Draft' }}</span>
-                                    @elseif($isPaid)
-                                        <span class="status status-green">{{ $LANG['paid'] ?? 'Paid' }}</span>
-                                    @else
-                                        <span class="status status-orange">{{ $LANG['due'] ?? 'Due' }}</span>
-                                    @endif
-                                </td>
-                                <td class="w-1">
-                                    <div class="btn-group">
-                                        <a href="index.php?module=invoices&amp;view=quick_view&amp;id={{ urlencode($inv['id']) }}" class="btn btn-outline-secondary btn-sm" title="{{ $LANG['quick_view'] ?? 'Quick View' }}">
-                                            <i class="ti ti-eye"></i>
-                                        </a>
-                                        <a href="index.php?module=export&amp;view=invoice&amp;id={{ urlencode($inv['id']) }}&amp;format=pdf" class="btn btn-outline-secondary btn-sm" title="{{ $LANG['export_pdf'] ?? 'PDF' }}">
-                                            <i class="ti ti-file-type-pdf"></i>
-                                        </a>
-                                        <a href="index.php?module=invoices&amp;view=manage" class="btn btn-outline-secondary btn-sm" title="{{ $LANG['manage_invoices'] ?? 'Manage' }}">
-                                            <i class="ti ti-list"></i>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                            @empty
-                            <tr>
-                                <td colspan="7" class="text-center text-secondary">{{ $LANG['no_invoices'] ?? 'No invoices yet' }}</td>
-                            </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+{{-- Recent invoices --}}
+<div class="card mb-3">
+    <div class="card-header">
+        <h3 class="card-title">{{ $LANG['recent_invoices'] ?? 'Recent Invoices' }}</h3>
+        <div class="card-options ms-auto d-flex gap-2">
+            <a href="index.php?module=invoices&amp;view=manage" class="btn btn-outline-secondary btn-sm">
+                {{ $LANG['manage_invoices'] ?? 'View all' }}
+            </a>
+            <a href="index.php?module=invoices&amp;view=itemised" class="btn btn-primary btn-sm">
+                <i class="ti ti-plus me-1"></i>{{ $LANG['add_new_invoice'] ?? 'Add Invoice' }}
+            </a>
         </div>
     </div>
+    <div class="table-responsive">
+        <table class="table table-vcenter table-hover card-table">
+            <thead>
+                <tr>
+                    <th>{{ $LANG['id'] ?? '#' }}</th>
+                    <th>{{ $LANG['customer'] ?? 'Customer' }}</th>
+                    <th>{{ $LANG['biller'] ?? 'Biller' }}</th>
+                    <th>{{ $LANG['date_upper'] ?? 'Date' }}</th>
+                    <th class="text-end">{{ $LANG['total'] ?? 'Total' }}</th>
+                    <th>{{ $LANG['status'] ?? 'Status' }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse(($latest_invoices ?? []) as $inv)
+                @php
+                    $isPaid  = ($inv['status'] ?? 0) && ($inv['owing'] ?? 0) <= 0;
+                    $isDraft = !($inv['status'] ?? 0);
+                    $currency = $preference['pref_currency_sign'] ?? '';
+                @endphp
+                <tr>
+                    <td>
+                        <a href="index.php?module=invoices&amp;view=quick_view&amp;id={{ urlencode($inv['id']) }}">
+                            {{ ($inv['preference'] ?? $inv['pref_description'] ?? '') }} {{ $inv['index_id'] ?? '' }}
+                        </a>
+                    </td>
+                    <td>{{ $inv['customer'] ?? '' }}</td>
+                    <td class="text-secondary">{{ $inv['biller'] ?? '' }}</td>
+                    <td class="text-secondary">{{ $inv['date'] ?? '' }}</td>
+                    <td class="text-end">{{ siLocal::number($inv['invoice_total'] ?? 0) }}</td>
+                    <td>
+                        @if($isDraft)
+                            <span class="status status-secondary"><span class="status-dot"></span>{{ $LANG['draft'] ?? 'Draft' }}</span>
+                        @elseif($isPaid)
+                            <span class="status status-green">{{ $LANG['paid'] ?? 'Paid' }}</span>
+                        @else
+                            <span class="status status-orange">{{ $LANG['due'] ?? 'Due' }}</span>
+                        @endif
+                    </td>
+                    <td class="w-1">
+                        <div class="btn-group">
+                            <a href="index.php?module=invoices&amp;view=quick_view&amp;id={{ urlencode($inv['id']) }}" class="btn btn-outline-secondary btn-sm" title="{{ $LANG['quick_view'] ?? 'Quick View' }}">
+                                <i class="ti ti-eye"></i>
+                            </a>
+                            <a href="index.php?module=export&amp;view=invoice&amp;id={{ urlencode($inv['id']) }}&amp;format=pdf" class="btn btn-outline-secondary btn-sm" title="{{ $LANG['export_pdf'] ?? 'PDF' }}">
+                                <i class="ti ti-file-type-pdf"></i>
+                            </a>
+                            <a href="index.php?module=invoices&amp;view=manage" class="btn btn-outline-secondary btn-sm" title="{{ $LANG['manage_invoices'] ?? 'Manage' }}">
+                                <i class="ti ti-list"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="7" class="text-center text-secondary">{{ $LANG['no_invoices'] ?? 'No invoices yet' }}</td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+</div>
 
-    <div class="accordion-item">
-        <h2 class="accordion-header" id="dashboard-heading-payments">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse-payments" aria-expanded="false" aria-controls="dashboard-collapse-payments">
-                <span class="fw-semibold">{{ $LANG['recent_payments'] ?? 'Recent Payments' }}</span>
-            </button>
-        </h2>
-        <div id="dashboard-collapse-payments" class="accordion-collapse collapse" aria-labelledby="dashboard-heading-payments" data-bs-parent="#dashboard-accordion">
-            <div class="accordion-body p-0">
-                <div class="d-flex flex-wrap gap-2 justify-content-end p-3 border-bottom">
-                    <a href="index.php?module=payments&amp;view=manage" class="btn btn-outline-secondary btn-sm">
-                        {{ $LANG['manage_payments'] ?? 'View all' }}
-                    </a>
-                    <a href="index.php?module=payments&amp;view=process&amp;op=pay_invoice" class="btn btn-primary btn-sm">
-                        <i class="ti ti-plus me-1"></i>{{ $LANG['add_new_payment'] ?? 'Add Payment' }}
-                    </a>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-vcenter table-hover card-table mb-0">
-                        <thead>
-                            <tr>
-                                <th>{{ $LANG['invoice'] ?? 'Invoice' }}</th>
-                                <th>{{ $LANG['customer'] ?? 'Customer' }}</th>
-                                <th>{{ $LANG['biller'] ?? 'Biller' }}</th>
-                                <th>{{ $LANG['date_upper'] ?? 'Date' }}</th>
-                                <th class="text-end">{{ $LANG['amount'] ?? 'Amount' }}</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse(($latest_payments ?? []) as $pmt)
-                            <tr>
-                                <td>
-                                    <a href="index.php?module=invoices&amp;view=quick_view&amp;id={{ urlencode($pmt['ac_inv_id']) }}">
-                                        {{ ($pmt['preference'] ?? $pmt['pref_description'] ?? '') }} {{ $pmt['index_id'] ?? '' }}
-                                    </a>
-                                </td>
-                                <td>{{ $pmt['customer'] ?? '' }}</td>
-                                <td class="text-secondary">{{ $pmt['biller'] ?? '' }}</td>
-                                <td class="text-secondary">{{ $pmt['ac_date'] ?? '' }}</td>
-                                <td class="text-end">{{ siLocal::number($pmt['ac_amount'] ?? 0) }}</td>
-                                <td class="w-1">
-                                    <div class="btn-group">
-                                        <a href="index.php?module=invoices&amp;view=quick_view&amp;id={{ urlencode($pmt['ac_inv_id']) }}" class="btn btn-outline-secondary btn-sm" title="{{ $LANG['quick_view'] ?? 'Quick View' }}">
-                                            <i class="ti ti-eye"></i>
-                                        </a>
-                                        <a href="index.php?module=payments&amp;view=manage" class="btn btn-outline-secondary btn-sm" title="{{ $LANG['manage_payments'] ?? 'Manage' }}">
-                                            <i class="ti ti-list"></i>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                            @empty
-                            <tr>
-                                <td colspan="6" class="text-center text-secondary">{{ $LANG['no_payments'] ?? 'No payments yet' }}</td>
-                            </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+{{-- Recent payments --}}
+<div class="card mb-3">
+    <div class="card-header">
+        <h3 class="card-title">{{ $LANG['recent_payments'] ?? 'Recent Payments' }}</h3>
+        <div class="card-options ms-auto d-flex gap-2">
+            <a href="index.php?module=payments&amp;view=manage" class="btn btn-outline-secondary btn-sm">
+                {{ $LANG['manage_payments'] ?? 'View all' }}
+            </a>
+            <a href="index.php?module=payments&amp;view=process&amp;op=pay_invoice" class="btn btn-primary btn-sm">
+                <i class="ti ti-plus me-1"></i>{{ $LANG['add_new_payment'] ?? 'Add Payment' }}
+            </a>
         </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-vcenter table-hover card-table">
+            <thead>
+                <tr>
+                    <th>{{ $LANG['invoice'] ?? 'Invoice' }}</th>
+                    <th>{{ $LANG['customer'] ?? 'Customer' }}</th>
+                    <th>{{ $LANG['biller'] ?? 'Biller' }}</th>
+                    <th>{{ $LANG['date_upper'] ?? 'Date' }}</th>
+                    <th class="text-end">{{ $LANG['amount'] ?? 'Amount' }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse(($latest_payments ?? []) as $pmt)
+                <tr>
+                    <td>
+                        <a href="index.php?module=invoices&amp;view=quick_view&amp;id={{ urlencode($pmt['ac_inv_id']) }}">
+                            {{ ($pmt['preference'] ?? $pmt['pref_description'] ?? '') }} {{ $pmt['index_id'] ?? '' }}
+                        </a>
+                    </td>
+                    <td>{{ $pmt['customer'] ?? '' }}</td>
+                    <td class="text-secondary">{{ $pmt['biller'] ?? '' }}</td>
+                    <td class="text-secondary">{{ $pmt['ac_date'] ?? '' }}</td>
+                    <td class="text-end">{{ siLocal::number($pmt['ac_amount'] ?? 0) }}</td>
+                    <td class="w-1">
+                        <div class="btn-group">
+                            <a href="index.php?module=invoices&amp;view=quick_view&amp;id={{ urlencode($pmt['ac_inv_id']) }}" class="btn btn-outline-secondary btn-sm" title="{{ $LANG['quick_view'] ?? 'Quick View' }}">
+                                <i class="ti ti-eye"></i>
+                            </a>
+                            <a href="index.php?module=payments&amp;view=manage" class="btn btn-outline-secondary btn-sm" title="{{ $LANG['manage_payments'] ?? 'Manage' }}">
+                                <i class="ti ti-list"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="6" class="text-center text-secondary">{{ $LANG['no_payments'] ?? 'No payments yet' }}</td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
     </div>
 </div>
 
@@ -806,15 +792,5 @@
         chart.updateOptions(buildOptions(active ? active.value : {{ $chart_current_year ?? 'null' }}), true, true);
     });
 
-    document.querySelectorAll('#dashboard-accordion .accordion-collapse').forEach(function (el) {
-        el.addEventListener('shown.bs.collapse', function () {
-            if (this.id === 'dashboard-collapse-activity') {
-                var active = document.querySelector('#chart-year-selector input[name="chart_year"]:checked');
-                setTimeout(function () {
-                    chart.updateOptions(buildOptions(active ? active.value : {{ $chart_current_year ?? 'null' }}), true, true);
-                }, 50);
-            }
-        });
-    });
 })();
 </script>

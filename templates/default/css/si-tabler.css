@@ -217,10 +217,12 @@ body {
 
 /* Save result screens */
 .si-save-card {
-    max-width: 760px;
+    width: 100%;
+    max-width: none;
 }
 
 .si-save-alert {
+    width: 100%;
     padding: 1rem 1.125rem;
     border-radius: calc(var(--tblr-border-radius) + 2px);
     margin-bottom: 0;
