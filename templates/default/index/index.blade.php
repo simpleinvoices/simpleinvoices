@@ -589,11 +589,11 @@
     <div class="card-header">
         <h3 class="card-title">{{ $LANG['recent_invoices'] ?? 'Recent Invoices' }}</h3>
         <div class="card-options ms-auto d-flex gap-2">
-            <a href="index.php?module=invoices&amp;view=itemised" class="btn btn-primary btn-sm">
-                <i class="ti ti-plus me-1"></i>{{ $LANG['add_new_invoice'] ?? 'Add Invoice' }}
-            </a>
             <a href="index.php?module=invoices&amp;view=manage" class="btn btn-outline-secondary btn-sm">
                 {{ $LANG['manage_invoices'] ?? 'View all' }}
+            </a>
+            <a href="index.php?module=invoices&amp;view=itemised" class="btn btn-primary btn-sm">
+                <i class="ti ti-plus me-1"></i>{{ $LANG['add_new_invoice'] ?? 'Add Invoice' }}
             </a>
         </div>
     </div>
@@ -665,11 +665,11 @@
     <div class="card-header">
         <h3 class="card-title">{{ $LANG['recent_payments'] ?? 'Recent Payments' }}</h3>
         <div class="card-options ms-auto d-flex gap-2">
-            <a href="index.php?module=payments&amp;view=process&amp;op=pay_invoice" class="btn btn-primary btn-sm">
-                <i class="ti ti-plus me-1"></i>{{ $LANG['add_new_payment'] ?? 'Add Payment' }}
-            </a>
             <a href="index.php?module=payments&amp;view=manage" class="btn btn-outline-secondary btn-sm">
                 {{ $LANG['manage_payments'] ?? 'View all' }}
+            </a>
+            <a href="index.php?module=payments&amp;view=process&amp;op=pay_invoice" class="btn btn-primary btn-sm">
+                <i class="ti ti-plus me-1"></i>{{ $LANG['add_new_payment'] ?? 'Add Payment' }}
             </a>
         </div>
     </div>
