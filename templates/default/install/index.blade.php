@@ -1,17 +1,35 @@
 @include(str_replace('/', '.', rtrim($path ?? '', '/')) . '.inc_head')
 
+@if(!empty($redirect_after_install))
+	<meta http-equiv="refresh" content="0;URL={{ $redirect_after_install }}" />
+	<script>
+		window.location.replace(@json($redirect_after_install));
+	</script>
+@endif
+
 <div class="card">
-	<div class="card-status-top bg-primary"></div>
+	<div class="card-status-top {{ !empty($redirect_after_install) ? 'bg-success' : 'bg-primary' }}"></div>
 	<div class="card-header">
-		<h3 class="card-title"><i class="ti ti-database me-2"></i>{{ $LANG['setup_database'] ?? 'Set up database' }}</h3>
+		<h3 class="card-title">
+			<i class="ti {{ !empty($redirect_after_install) ? 'ti-circle-check' : 'ti-database' }} me-2"></i>
+			{{ !empty($redirect_after_install) ? ($LANG['setup_complete'] ?? 'Setup complete') : ($LANG['setup_database'] ?? 'Set up database') }}
+		</h3>
 	</div>
 	<div class="card-body">
+		@if(!empty($redirect_after_install))
+			<p class="text-secondary mb-0">{{ $LANG['install_setup_done'] ?? 'The database and essential data have been installed. You can now start using Simple Invoices.' }}</p>
+		@else
 		<p class="text-secondary mb-4">{{ $LANG['install_intro'] ?? 'To install Simple Invoices please:' }}</p>
 		<ol class="list list-unstyled mb-0">
 			<li class="mb-2">1. {{ $LANG['install_step_db'] ?? 'Create a blank MySQL database preferably with UTF-8 collation' }}</li>
 			<li class="mb-2">2. {{ $LANG['install_step_config'] ?? "Enter the correct database connection details in the config/config.php file" }}</li>
 			<li class="mb-4">3. {{ $LANG['install_step_review'] ?? "Review the connection details below and if correct click the button to install the database and essential data." }}</li>
 		</ol>
+		@if(!empty($install_error))
+			<div class="alert alert-danger mt-3 mb-0">
+				{{ $LANG['sample_data_error_msg'] ?? 'Something went wrong. Sample data has NOT been imported into Simple Invoices.' }}
+			</div>
+		@endif
 		<div class="table-responsive">
 			<table class="table table-vcenter card-table table-bordered">
 				<thead>
@@ -46,6 +64,7 @@
 				<i class="ti ti-check me-1"></i>{{ $LANG['install_database_and_essential'] ?? 'Install database & essential data' }}
 			</button>
 		</form>
+		@endif
 	</div>
 </div>
 

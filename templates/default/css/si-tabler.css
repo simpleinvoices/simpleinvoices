@@ -215,6 +215,53 @@ body {
     color: var(--tblr-danger);
 }
 
+/* Save result screens */
+.si-save-card {
+    max-width: 760px;
+}
+
+.si-save-alert {
+    padding: 1rem 1.125rem;
+    border-radius: calc(var(--tblr-border-radius) + 2px);
+    margin-bottom: 0;
+}
+
+.si-save-alert .alert-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--tblr-body-color);
+}
+
+.si-save-alert .text-secondary {
+    line-height: 1.55;
+}
+
+.si-save-alert-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: 1.5rem;
+    min-width: 1.5rem;
+    font-size: 1.25rem;
+    line-height: 1;
+    margin-top: 0.125rem;
+}
+
+.si-save-alert.alert-success .si-save-alert-icon {
+    color: var(--tblr-success);
+}
+
+.si-save-alert.alert-warning .si-save-alert-icon {
+    color: var(--tblr-warning);
+}
+
+.si-save-alert-note {
+    margin-top: 0.75rem;
+    font-size: 0.8125rem;
+    color: var(--tblr-secondary);
+}
+
 /* Legacy toolbar (manage pages) */
 .si_toolbar {
     display: flex;

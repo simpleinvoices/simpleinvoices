@@ -16,6 +16,31 @@
         !$hasBillers ? 1 : (!$hasCustomers ? 2 : (!$hasProducts ? 3 : 4))
     );
 @endphp
+<style>
+    @media (max-width: 575.98px) {
+        .wizard-tabs {
+            flex-wrap: nowrap;
+        }
+
+        .wizard-tabs .nav-item {
+            flex: 1 1 0;
+            min-width: 0;
+        }
+
+        .wizard-tabs .nav-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
+            padding: .65rem .35rem;
+            white-space: nowrap;
+        }
+
+        .wizard-tabs .nav-link .ti {
+            margin-right: 0 !important;
+        }
+    }
+</style>
 <div class="card mb-3">
     <div class="card-status-top bg-primary"></div>
 
@@ -63,7 +88,7 @@
 
     {{-- Wizard tab navigation --}}
     <div class="card-header" style="border-top:1px solid var(--tblr-border-color);">
-        <ul class="nav nav-tabs card-header-tabs" role="tablist">
+        <ul class="nav nav-tabs card-header-tabs wizard-tabs" role="tablist">
             @foreach([
                 1 => ['icon' => 'ti-building-store', 'label' => $LANG['wizard_your_details'] ?? 'Your Details',      'done' => $hasBillers],
                 2 => ['icon' => 'ti-users',           'label' => $LANG['customer'] ?? 'Customer',                    'done' => $hasCustomers],
@@ -78,9 +103,9 @@
                     @else
                         <i class="ti {{ $cfg['icon'] }} me-1"></i>
                     @endif
-                    {{ $cfg['label'] }}
+                    <span class="d-none d-sm-inline">{{ $cfg['label'] }}</span>
                     @if($cfg['done'])
-                        <span class="badge bg-success-lt text-success ms-1" style="font-size:.7rem">{{ $LANG['wizard_done_badge'] ?? 'Done' }}</span>
+                        <span class="badge bg-success-lt text-success ms-1 d-none d-sm-inline" style="font-size:.7rem">{{ $LANG['wizard_done_badge'] ?? 'Done' }}</span>
                     @endif
                 </a>
             </li>

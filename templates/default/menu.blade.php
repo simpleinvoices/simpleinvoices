@@ -171,7 +171,7 @@
                     </li>
 
                 </ul>
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-md-auto">
                     {{-- Settings --}}
                     <li class="nav-item dropdown @if(in_array($module ?? '', ['options','system_defaults','custom_fields','tax_rates','preferences','payment_types'])) active @endif">
                         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">

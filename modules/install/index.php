@@ -1,6 +1,8 @@
 <?php
 
 $menu = false;
+$redirect_after_install = null;
+$install_error = false;
 
 if (isset($_POST['op']) && $_POST['op'] === 'install_database') {
 	$install_successful = true;
@@ -25,8 +27,12 @@ if (isset($_POST['op']) && $_POST['op'] === 'install_database') {
 	}
 
 	if ($install_successful && checkTableExists(TB_PREFIX."biller") == true && checkDataExists() == true) {
-		header('Location: index.php?module=index&view=index');
-		exit;
+		$redirect_after_install = 'index.php?module=index&view=index';
+	} elseif (isset($_POST['op'])) {
+		$install_error = true;
 	}
 }
+
+$smarty->assign('redirect_after_install', $redirect_after_install);
+$smarty->assign('install_error', $install_error);
 ?>
