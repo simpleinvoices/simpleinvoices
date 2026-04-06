@@ -17,6 +17,10 @@
     );
 @endphp
 <style>
+    .page-header .container-xl {
+        display: none;
+    }
+
     @media (max-width: 575.98px) {
         .wizard-tabs {
             flex-wrap: nowrap;
@@ -137,24 +141,31 @@
                     <div class="row g-4">
                         {{-- Description --}}
                         <div class="col-md-4">
-                            <div class="d-flex align-items-start gap-3 mb-3">
-                                <span class="avatar avatar-md bg-primary-lt rounded-3 flex-shrink-0">
-                                    <i class="ti ti-building-store text-primary"></i>
-                                </span>
-                                <div>
-                                    <h4 class="mb-1">{{ $LANG['wizard_add_your_details'] ?? 'Add Your Details' }}</h4>
-                                    <p class="text-secondary mb-0" style="font-size:.875rem">
-                                        {{ $LANG['wizard_biller_description'] ?? 'A Biller represents you or your business — the entity that creates and sends invoices. Your name, address, and contact info will appear on every invoice you generate.' }}
-                                    </p>
+                            <div class="card h-100">
+                                <div class="ribbon ribbon-top bg-yellow">
+                                    <i class="ti ti-star"></i>
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex align-items-start gap-3 mb-3">
+                                        <span class="avatar avatar-md bg-primary-lt rounded-3 flex-shrink-0">
+                                            <i class="ti ti-building-store text-primary"></i>
+                                        </span>
+                                        <div>
+                                            <h4 class="mb-1">{{ $LANG['wizard_add_your_details'] ?? 'Add Your Details' }}</h4>
+                                            <p class="text-secondary mb-0" style="font-size:.875rem">
+                                                {{ $LANG['wizard_biller_description'] ?? 'A Biller represents you or your business - the entity that creates and sends invoices. Your name, address, and contact info will appear on every invoice you generate.' }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <hr class="my-3">
+                                    <p class="text-secondary small mb-2">{{ $LANG['wizard_try_sample'] ?? 'Just want to try it out first?' }}</p>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary w-100"
+                                            onclick="wizardFill('biller')">
+                                        <i class="ti ti-wand me-1"></i>{{ $LANG['wizard_use_sample_biller'] ?? 'Use sample biller data' }}
+                                    </button>
+                                    <p class="text-muted small mt-2 mb-0">{{ $LANG['wizard_prefills_form'] ?? 'Pre-fills the form - edit before saving.' }}</p>
                                 </div>
                             </div>
-                            <hr class="my-3">
-                            <p class="text-secondary small mb-2">{{ $LANG['wizard_try_sample'] ?? 'Just want to try it out first?' }}</p>
-                            <button type="button" class="btn btn-sm btn-outline-secondary w-100"
-                                    onclick="wizardFill('biller')">
-                                <i class="ti ti-wand me-1"></i>{{ $LANG['wizard_use_sample_biller'] ?? 'Use sample biller data' }}
-                            </button>
-                            <p class="text-muted small mt-2 mb-0">{{ $LANG['wizard_prefills_form'] ?? 'Pre-fills the form — edit before saving.' }}</p>
                         </div>
                         {{-- Form --}}
                         <div class="col-md-8">
@@ -247,24 +258,31 @@
                     <div class="row g-4">
                         {{-- Description --}}
                         <div class="col-md-4">
-                            <div class="d-flex align-items-start gap-3 mb-3">
-                                <span class="avatar avatar-md bg-blue-lt rounded-3 flex-shrink-0">
-                                    <i class="ti ti-users text-blue"></i>
-                                </span>
-                                <div>
-                                    <h4 class="mb-1">{{ $LANG['wizard_add_a_customer'] ?? 'Add a Customer' }}</h4>
-                                    <p class="text-secondary mb-0" style="font-size:.875rem">
-                                        {{ $LANG['wizard_customer_description'] ?? 'Customers are the people or businesses you invoice. Add at least one so you can assign them to invoices. You can add as many as you need.' }}
-                                    </p>
+                            <div class="card h-100">
+                                <div class="ribbon ribbon-top bg-yellow">
+                                    <i class="ti ti-star"></i>
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex align-items-start gap-3 mb-3">
+                                        <span class="avatar avatar-md bg-blue-lt rounded-3 flex-shrink-0">
+                                            <i class="ti ti-users text-blue"></i>
+                                        </span>
+                                        <div>
+                                            <h4 class="mb-1">{{ $LANG['wizard_add_a_customer'] ?? 'Add a Customer' }}</h4>
+                                            <p class="text-secondary mb-0" style="font-size:.875rem">
+                                                {{ $LANG['wizard_customer_description'] ?? 'Customers are the people or businesses you invoice. Add at least one so you can assign them to invoices. You can add as many as you need.' }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <hr class="my-3">
+                                    <p class="text-secondary small mb-2">{{ $LANG['wizard_try_sample'] ?? 'Just want to try it out first?' }}</p>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary w-100"
+                                            onclick="wizardFill('customer')">
+                                        <i class="ti ti-wand me-1"></i>{{ $LANG['wizard_use_sample_customer'] ?? 'Use sample customer data' }}
+                                    </button>
+                                    <p class="text-muted small mt-2 mb-0">{{ $LANG['wizard_sample_replace_later'] ?? 'You can edit or replace sample data later.' }}</p>
                                 </div>
                             </div>
-                            <hr class="my-3">
-                            <p class="text-secondary small mb-2">{{ $LANG['wizard_try_sample'] ?? 'Just want to try it out first?' }}</p>
-                            <button type="button" class="btn btn-sm btn-outline-secondary w-100"
-                                    onclick="wizardFill('customer')">
-                                <i class="ti ti-wand me-1"></i>{{ $LANG['wizard_use_sample_customer'] ?? 'Use sample customer data' }}
-                            </button>
-                            <p class="text-muted small mt-2 mb-0">{{ $LANG['wizard_sample_replace_later'] ?? 'You can edit or replace sample data later.' }}</p>
                         </div>
                         {{-- Form --}}
                         <div class="col-md-8">
@@ -350,24 +368,31 @@
                     <div class="row g-4">
                         {{-- Description --}}
                         <div class="col-md-4">
-                            <div class="d-flex align-items-start gap-3 mb-3">
-                                <span class="avatar avatar-md bg-orange-lt rounded-3 flex-shrink-0">
-                                    <i class="ti ti-package text-orange"></i>
-                                </span>
-                                <div>
-                                    <h4 class="mb-1">{{ $LANG['wizard_add_a_product'] ?? 'Add a Product or Service' }}</h4>
-                                    <p class="text-secondary mb-0" style="font-size:.875rem">
-                                        {{ $LANG['wizard_product_description'] ?? 'Products (or services) are what you invoice for — an hourly rate, a fixed fee, or a physical item. Add at least one so it can appear on your invoices.' }}
-                                    </p>
+                            <div class="card h-100">
+                                <div class="ribbon ribbon-top bg-yellow">
+                                    <i class="ti ti-star"></i>
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex align-items-start gap-3 mb-3">
+                                        <span class="avatar avatar-md bg-orange-lt rounded-3 flex-shrink-0">
+                                            <i class="ti ti-package text-orange"></i>
+                                        </span>
+                                        <div>
+                                            <h4 class="mb-1">{{ $LANG['wizard_add_a_product'] ?? 'Add a Product or Service' }}</h4>
+                                            <p class="text-secondary mb-0" style="font-size:.875rem">
+                                                {{ $LANG['wizard_product_description'] ?? 'Products (or services) are what you invoice for - an hourly rate, a fixed fee, or a physical item. Add at least one so it can appear on your invoices.' }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <hr class="my-3">
+                                    <p class="text-secondary small mb-2">{{ $LANG['wizard_try_sample'] ?? 'Just want to try it out first?' }}</p>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary w-100"
+                                            onclick="wizardFill('product')">
+                                        <i class="ti ti-wand me-1"></i>{{ $LANG['wizard_use_sample_product'] ?? 'Use sample product data' }}
+                                    </button>
+                                    <p class="text-muted small mt-2 mb-0">{{ $LANG['wizard_sample_replace_later'] ?? 'You can edit or replace sample data later.' }}</p>
                                 </div>
                             </div>
-                            <hr class="my-3">
-                            <p class="text-secondary small mb-2">{{ $LANG['wizard_try_sample'] ?? 'Just want to try it out first?' }}</p>
-                            <button type="button" class="btn btn-sm btn-outline-secondary w-100"
-                                    onclick="wizardFill('product')">
-                                <i class="ti ti-wand me-1"></i>{{ $LANG['wizard_use_sample_product'] ?? 'Use sample product data' }}
-                            </button>
-                            <p class="text-muted small mt-2 mb-0">{{ $LANG['wizard_sample_replace_later'] ?? 'You can edit or replace sample data later.' }}</p>
                         </div>
                         {{-- Form --}}
                         <div class="col-md-8">
@@ -447,15 +472,22 @@
                 @else
                     <div class="row g-4 align-items-center">
                         <div class="col-md-4">
-                            <div class="d-flex align-items-start gap-3">
-                                <span class="avatar avatar-md bg-green-lt rounded-3 flex-shrink-0">
-                                    <i class="ti ti-file-invoice text-green"></i>
-                                </span>
-                                <div>
-                                    <h4 class="mb-1">{{ $LANG['wizard_create_first_invoice'] ?? 'Create Your First Invoice' }}</h4>
-                                    <p class="text-secondary mb-0" style="font-size:.875rem">
-                                        {{ $LANG['wizard_invoice_description'] ?? 'You have your billing details, a customer, and a product ready. Pick a biller, a customer, add your line items, and send it off.' }}
-                                    </p>
+                            <div class="card h-100">
+                                <div class="ribbon ribbon-top bg-yellow">
+                                    <i class="ti ti-star"></i>
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex align-items-start gap-3">
+                                        <span class="avatar avatar-md bg-green-lt rounded-3 flex-shrink-0">
+                                            <i class="ti ti-file-invoice text-green"></i>
+                                        </span>
+                                        <div>
+                                            <h4 class="mb-1">{{ $LANG['wizard_create_first_invoice'] ?? 'Create Your First Invoice' }}</h4>
+                                            <p class="text-secondary mb-0" style="font-size:.875rem">
+                                                {{ $LANG['wizard_invoice_description'] ?? 'You have your billing details, a customer, and a product ready. Pick a biller, a customer, add your line items, and send it off.' }}
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -561,6 +593,7 @@
 </script>
 @endif
 
+@if(!$firstRun)
 {{-- Activity chart --}}
 <div class="card mb-3">
     <div class="card-header">
@@ -794,3 +827,4 @@
 
 })();
 </script>
+@endif
