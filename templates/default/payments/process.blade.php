@@ -45,16 +45,16 @@
 				<label class="form-label">{{ $LANG['invoice'] ?? '' }}
 					<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_process_payment_inv_id" title="{{ $LANG['process_payment_inv_id'] ?? '' }}"><i class="ti ti-asterisk text-danger"></i></a>
 				</label>
-				<select name="invoice_id" class="form-select validate[required]">
+				<select name="invoice_id" id="payment-invoice-id" class="form-select validate[required]">
 					<option value=''></option>
 					@foreach(($invoice_all ?? []) as $invoice)
-						<option value="{{ siLocal::number($invoice['id'] ?? '') }}">{{ $invoice['index_name'] ?? '' }} ({{ $invoice['biller'] ?? '' }}, {{ $invoice['customer'] ?? '' }}, {{ $LANG['total'] ?? '' }} {{ $invoice['invoice_total'] ?? '' }} : {{ $LANG['owing'] ?? '' }} {{ siLocal::number($invoice['owing'] ?? 0) }})</option>
+						<option value="{{ siLocal::number($invoice['id'] ?? '') }}" data-owing="{{ siLocal::number($invoice['owing'] ?? 0) }}">{{ $invoice['index_name'] ?? '' }} ({{ $invoice['biller'] ?? '' }}, {{ $invoice['customer'] ?? '' }}, {{ $LANG['total'] ?? '' }} {{ $invoice['invoice_total'] ?? '' }} : {{ $LANG['owing'] ?? '' }} {{ siLocal::number($invoice['owing'] ?? 0) }})</option>
 					@endforeach
 				</select>
 			</div>
 			<div class="mb-3">
 				<label class="form-label">{{ $LANG['amount'] ?? '' }}</label>
-				<input type="text" name="ac_amount" class="form-control" />
+				<input type="text" name="ac_amount" id="payment-amount" class="form-control" />
 			</div>
 			<div class="mb-3">
 				<label class="form-label">{{ $LANG['date_formatted'] ?? '' }}</label>
@@ -97,3 +97,24 @@
 	<input type="hidden" name="invoice_id" value="{{ $invoice['id'] ?? '' }}" />
 @endif
 </form>
+
+@if(get('op') === 'pay_invoice')
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		var invoiceSelect = document.getElementById('payment-invoice-id');
+		var amountInput = document.getElementById('payment-amount');
+
+		if (!invoiceSelect || !amountInput) {
+			return;
+		}
+
+		function syncAmountFromInvoice() {
+			var selectedOption = invoiceSelect.options[invoiceSelect.selectedIndex];
+			amountInput.value = selectedOption ? (selectedOption.getAttribute('data-owing') || '') : '';
+		}
+
+		invoiceSelect.addEventListener('change', syncAmountFromInvoice);
+		syncAmountFromInvoice();
+	});
+</script>
+@endif
