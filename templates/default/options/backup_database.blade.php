@@ -12,7 +12,7 @@
 
 <div class="card">
 	<div class="card-header">
-		<h3 class="card-title"><i class="ti ti-database me-2"></i>Database Backup</h3>
+		<h3 class="card-title"><i class="ti ti-database me-2"></i>{{ $LANG['backup_database'] ?? 'Database Backup' }}</h3>
 	</div>
 
 	<div class="card-body">
@@ -37,9 +37,9 @@
 						<i class="ti ti-database-export text-primary"></i>
 					</span>
 					<div>
-						<div class="fw-semibold">Download SQL backup</div>
+						<div class="fw-semibold">{{ $LANG['download_sql_backup'] ?? 'Download SQL backup' }}</div>
 						<div class="text-secondary small">
-							Exports your full database as a <code>.sql</code> file you can use to restore or migrate.
+							{{ $LANG['download_sql_backup_desc'] ?? 'Exports your full database as a .sql file you can use to restore or migrate.' }}
 						</div>
 					</div>
 				</div>
@@ -48,11 +48,11 @@
 				@if(!empty($formattedSQL))
 				<button type="button" class="btn btn-outline-secondary" id="btn-copy-sql"
 						onclick="copySQLToClipboard(this)" title="Copy SQL to clipboard">
-					<i class="ti ti-copy me-1"></i>Copy SQL
+					<i class="ti ti-copy me-1"></i>{{ $LANG['copy_sql'] ?? 'Copy SQL' }}
 				</button>
 				@endif
 				<button type="submit" form="form_backup_db" class="btn btn-primary">
-					<i class="ti ti-download me-1"></i>Download Backup
+					<i class="ti ti-download me-1"></i>{{ $LANG['download_backup'] ?? 'Download Backup' }}
 				</button>
 			</div>
 		</div>
@@ -67,7 +67,7 @@
 						data-bs-toggle="collapse" data-bs-target="#sql-backup-collapse"
 						aria-expanded="false" aria-controls="sql-backup-collapse">
 					<i class="ti ti-code me-2 text-secondary"></i>
-					View SQL
+					{{ $LANG['view_sql'] ?? 'View SQL' }}
 				</button>
 			</h2>
 			<div id="sql-backup-collapse" class="accordion-collapse collapse"
@@ -97,7 +97,7 @@ function copySQLToClipboard(btn) {
 	var originalHTML = btn.innerHTML;
 
 	navigator.clipboard.writeText(textarea.value).then(function () {
-		btn.innerHTML = '<i class="ti ti-check me-1"></i>Copied!';
+		btn.innerHTML = '<i class="ti ti-check me-1"></i>' + @json($LANG['copied'] ?? 'Copied!');
 		btn.classList.replace('btn-outline-secondary', 'btn-success');
 		setTimeout(function () {
 			btn.innerHTML = originalHTML;

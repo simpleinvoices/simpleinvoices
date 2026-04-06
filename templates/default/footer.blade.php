@@ -8,7 +8,7 @@
             ['label' => $config->app?->footer_link1_label ?? $appName, 'url' => $config->app?->footer_link1_url ?? $appWebsite],
             ['label' => $config->app?->footer_link2_label ?? ($LANG['forum'] ?? 'Forum'), 'url' => $config->app?->footer_link2_url ?? 'http://www.simpleinvoices.org/+'],
             ['label' => $config->app?->footer_link3_label ?? ($LANG['blog'] ?? 'Blog'), 'url' => $config->app?->footer_link3_url ?? 'http://www.simpleinvoices.org/blog'],
-            ['label' => $config->app?->footer_link4_label ?? 'Support', 'url' => $config->app?->footer_link4_url ?? 'http://www.simpleinvoices.org/forum'],
+            ['label' => $config->app?->footer_link4_label ?? ($LANG['support'] ?? 'Support'), 'url' => $config->app?->footer_link4_url ?? 'http://www.simpleinvoices.org/forum'],
         ];
     @endphp
     <footer class="footer footer-transparent d-print-none">

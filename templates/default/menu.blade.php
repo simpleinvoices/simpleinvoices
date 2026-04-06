@@ -12,7 +12,7 @@
 {{-- Row 1: Top bar — logo + user controls --}}
 <header class="navbar navbar-expand-md d-print-none" data-bs-theme="dark">
     <div class="container-xl">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="{{ $LANG['toggle_navigation'] ?? 'Toggle navigation' }}">
             <span class="navbar-toggler-icon"></span>
         </button>
         <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
@@ -32,15 +32,15 @@
                 </a>
             </div>
             <div class="nav-item me-2">
-                <a href="#" class="nav-link px-0 hide-theme-dark" title="Switch to dark mode" onclick="siToggleTheme(event)">
+                <a href="#" class="nav-link px-0 hide-theme-dark" title="{{ $LANG['switch_to_dark_mode'] ?? 'Switch to dark mode' }}" onclick="siToggleTheme(event)">
                     <i class="ti ti-moon fs-4"></i>
                 </a>
-                <a href="#" class="nav-link px-0 hide-theme-light" title="Switch to light mode" onclick="siToggleTheme(event)">
+                <a href="#" class="nav-link px-0 hide-theme-light" title="{{ $LANG['switch_to_light_mode'] ?? 'Switch to light mode' }}" onclick="siToggleTheme(event)">
                     <i class="ti ti-sun fs-4"></i>
                 </a>
             </div>
             <div class="nav-item dropdown">
-                <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="User menu" aria-expanded="false">
+                <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="{{ $LANG['user_menu'] ?? 'User menu' }}" aria-expanded="false">
                     <span class="avatar avatar-sm rounded-circle bg-primary-lt">
                         <i class="ti ti-user" style="font-size: 1.2rem;"></i>
                     </span>

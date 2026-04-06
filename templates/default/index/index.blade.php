@@ -30,10 +30,10 @@
         {{-- Step progress indicator --}}
         <div class="d-flex align-items-center gap-2 mb-3 flex-wrap">
             @foreach([
-                1 => ['label' => 'Your Details', 'done' => $hasBillers],
-                2 => ['label' => 'Customer',      'done' => $hasCustomers],
-                3 => ['label' => 'Product',       'done' => $hasProducts],
-                4 => ['label' => 'Invoice',       'done' => $hasInvoices],
+                1 => ['label' => $LANG['wizard_your_details'] ?? 'Your Details', 'done' => $hasBillers],
+                2 => ['label' => $LANG['customer'] ?? 'Customer',                'done' => $hasCustomers],
+                3 => ['label' => $LANG['product'] ?? 'Product',                  'done' => $hasProducts],
+                4 => ['label' => $LANG['invoice'] ?? 'Invoice',                  'done' => $hasInvoices],
             ] as $s => $sc)
             @php
                 $sDone   = $sc['done'];
@@ -65,10 +65,10 @@
     <div class="card-header" style="border-top:1px solid var(--tblr-border-color);">
         <ul class="nav nav-tabs card-header-tabs" role="tablist">
             @foreach([
-                1 => ['icon' => 'ti-building-store', 'label' => 'Your Details',  'done' => $hasBillers],
-                2 => ['icon' => 'ti-users',           'label' => 'Customer',      'done' => $hasCustomers],
-                3 => ['icon' => 'ti-package',         'label' => 'Product',       'done' => $hasProducts],
-                4 => ['icon' => 'ti-file-invoice',    'label' => 'Create Invoice','done' => $hasInvoices],
+                1 => ['icon' => 'ti-building-store', 'label' => $LANG['wizard_your_details'] ?? 'Your Details',      'done' => $hasBillers],
+                2 => ['icon' => 'ti-users',           'label' => $LANG['customer'] ?? 'Customer',                    'done' => $hasCustomers],
+                3 => ['icon' => 'ti-package',         'label' => $LANG['product'] ?? 'Product',                      'done' => $hasProducts],
+                4 => ['icon' => 'ti-file-invoice',    'label' => $LANG['wizard_create_invoice'] ?? 'Create Invoice',  'done' => $hasInvoices],
             ] as $step => $cfg)
             <li class="nav-item" role="presentation">
                 <a class="nav-link @if($wizardStep == $step) active @endif"
@@ -80,7 +80,7 @@
                     @endif
                     {{ $cfg['label'] }}
                     @if($cfg['done'])
-                        <span class="badge bg-success-lt text-success ms-1" style="font-size:.7rem">Done</span>
+                        <span class="badge bg-success-lt text-success ms-1" style="font-size:.7rem">{{ $LANG['wizard_done_badge'] ?? 'Done' }}</span>
                     @endif
                 </a>
             </li>
@@ -101,10 +101,10 @@
                     <div class="d-flex align-items-center gap-3 py-2">
                         <span class="avatar avatar-lg bg-success-lt rounded"><i class="ti ti-check fs-2 text-success"></i></span>
                         <div>
-                            <div class="fw-bold text-success fs-4">Your billing details are set up!</div>
-                            <p class="text-secondary mb-2">Your biller is ready. You can update your details any time.</p>
+                            <div class="fw-bold text-success fs-4">{{ $LANG['wizard_biller_ready'] ?? 'Your billing details are set up!' }}</div>
+                            <p class="text-secondary mb-2">{{ $LANG['wizard_biller_ready_tagline'] ?? 'Your biller is ready. You can update your details any time.' }}</p>
                             <a href="index.php?module=billers&amp;view=manage" class="btn btn-sm btn-outline-success">
-                                <i class="ti ti-settings me-1"></i>Manage Billers
+                                <i class="ti ti-settings me-1"></i>{{ $LANG['manage_billers'] ?? 'Manage Billers' }}
                             </a>
                         </div>
                     </div>
@@ -117,20 +117,19 @@
                                     <i class="ti ti-building-store text-primary"></i>
                                 </span>
                                 <div>
-                                    <h4 class="mb-1">Add Your Details</h4>
+                                    <h4 class="mb-1">{{ $LANG['wizard_add_your_details'] ?? 'Add Your Details' }}</h4>
                                     <p class="text-secondary mb-0" style="font-size:.875rem">
-                                        A <strong>Biller</strong> represents <em>you</em> or your business — the entity that creates and sends invoices.
-                                        Your name, address, and contact info will appear on every invoice you generate.
+                                        {{ $LANG['wizard_biller_description'] ?? 'A Biller represents you or your business — the entity that creates and sends invoices. Your name, address, and contact info will appear on every invoice you generate.' }}
                                     </p>
                                 </div>
                             </div>
                             <hr class="my-3">
-                            <p class="text-secondary small mb-2">Just want to try it out first?</p>
+                            <p class="text-secondary small mb-2">{{ $LANG['wizard_try_sample'] ?? 'Just want to try it out first?' }}</p>
                             <button type="button" class="btn btn-sm btn-outline-secondary w-100"
                                     onclick="wizardFill('biller')">
-                                <i class="ti ti-wand me-1"></i>Use sample biller data
+                                <i class="ti ti-wand me-1"></i>{{ $LANG['wizard_use_sample_biller'] ?? 'Use sample biller data' }}
                             </button>
-                            <p class="text-muted small mt-2 mb-0">Pre-fills the form — edit before saving.</p>
+                            <p class="text-muted small mt-2 mb-0">{{ $LANG['wizard_prefills_form'] ?? 'Pre-fills the form — edit before saving.' }}</p>
                         </div>
                         {{-- Form --}}
                         <div class="col-md-8">
@@ -157,45 +156,45 @@
                                 <div class="row g-3">
                                     <div class="col-12">
                                         <label class="form-label fw-bold">
-                                            Business / Your Name <i class="ti ti-asterisk text-danger" style="font-size:.7rem"></i>
+                                            {{ $LANG['wizard_business_name'] ?? 'Business / Your Name' }} <i class="ti ti-asterisk text-danger" style="font-size:.7rem"></i>
                                         </label>
                                         <input type="text" name="name" class="form-control" placeholder="e.g. Acme Consulting" required>
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">Email</label>
+                                        <label class="form-label">{{ $LANG['email'] ?? 'Email' }}</label>
                                         <input type="email" name="email" class="form-control" placeholder="you@example.com">
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">Phone</label>
+                                        <label class="form-label">{{ $LANG['phone'] ?? 'Phone' }}</label>
                                         <input type="text" name="phone" class="form-control" placeholder="+1 555 000 0000">
                                     </div>
                                     <div class="col-12">
-                                        <label class="form-label">Street Address</label>
+                                        <label class="form-label">{{ $LANG['street'] ?? 'Street Address' }}</label>
                                         <input type="text" name="street_address" class="form-control" placeholder="123 Main Street">
                                     </div>
                                     <div class="col-md-5">
-                                        <label class="form-label">City</label>
+                                        <label class="form-label">{{ $LANG['city'] ?? 'City' }}</label>
                                         <input type="text" name="city" class="form-control" placeholder="City">
                                     </div>
                                     <div class="col-md-3">
-                                        <label class="form-label">State / Region</label>
+                                        <label class="form-label">{{ $LANG['wizard_state_region'] ?? 'State / Region' }}</label>
                                         <input type="text" name="state" class="form-control" placeholder="State">
                                     </div>
                                     <div class="col-md-4">
-                                        <label class="form-label">Postcode</label>
+                                        <label class="form-label">{{ $LANG['postcode'] ?? 'Postcode' }}</label>
                                         <input type="text" name="zip_code" class="form-control" placeholder="ZIP / Postcode">
                                     </div>
                                     <div class="col-12">
-                                        <label class="form-label">Country</label>
+                                        <label class="form-label">{{ $LANG['country'] ?? 'Country' }}</label>
                                         <input type="text" name="country" class="form-control" placeholder="Country">
                                     </div>
                                 </div>
                                 <div class="mt-4 d-flex justify-content-between align-items-center">
                                     <a href="index.php?module=billers&amp;view=add" class="text-secondary small">
-                                        <i class="ti ti-external-link me-1"></i>Full biller form (more options)
+                                        <i class="ti ti-external-link me-1"></i>{{ $LANG['wizard_full_biller_form'] ?? 'Full biller form (more options)' }}
                                     </a>
                                     <button type="submit" name="submit" value="save" class="btn btn-primary">
-                                        Save Your Details <i class="ti ti-arrow-right ms-1"></i>
+                                        {{ $LANG['wizard_save_details'] ?? 'Save Your Details' }} <i class="ti ti-arrow-right ms-1"></i>
                                     </button>
                                 </div>
                             </form>
@@ -212,10 +211,10 @@
                     <div class="d-flex align-items-center gap-3 py-2">
                         <span class="avatar avatar-lg bg-success-lt rounded"><i class="ti ti-check fs-2 text-success"></i></span>
                         <div>
-                            <div class="fw-bold text-success fs-4">At least one customer is set up!</div>
-                            <p class="text-secondary mb-2">You can add more customers any time.</p>
+                            <div class="fw-bold text-success fs-4">{{ $LANG['wizard_customer_ready'] ?? 'At least one customer is set up!' }}</div>
+                            <p class="text-secondary mb-2">{{ $LANG['wizard_customer_ready_tagline'] ?? 'You can add more customers any time.' }}</p>
                             <a href="index.php?module=customers&amp;view=manage" class="btn btn-sm btn-outline-success">
-                                <i class="ti ti-settings me-1"></i>Manage Customers
+                                <i class="ti ti-settings me-1"></i>{{ $LANG['manage_customers'] ?? 'Manage Customers' }}
                             </a>
                         </div>
                     </div>
@@ -228,20 +227,19 @@
                                     <i class="ti ti-users text-blue"></i>
                                 </span>
                                 <div>
-                                    <h4 class="mb-1">Add a Customer</h4>
+                                    <h4 class="mb-1">{{ $LANG['wizard_add_a_customer'] ?? 'Add a Customer' }}</h4>
                                     <p class="text-secondary mb-0" style="font-size:.875rem">
-                                        <strong>Customers</strong> are the people or businesses you invoice. Add at least one
-                                        so you can assign them to invoices. You can add as many as you need.
+                                        {{ $LANG['wizard_customer_description'] ?? 'Customers are the people or businesses you invoice. Add at least one so you can assign them to invoices. You can add as many as you need.' }}
                                     </p>
                                 </div>
                             </div>
                             <hr class="my-3">
-                            <p class="text-secondary small mb-2">Just want to try it out first?</p>
+                            <p class="text-secondary small mb-2">{{ $LANG['wizard_try_sample'] ?? 'Just want to try it out first?' }}</p>
                             <button type="button" class="btn btn-sm btn-outline-secondary w-100"
                                     onclick="wizardFill('customer')">
-                                <i class="ti ti-wand me-1"></i>Use sample customer data
+                                <i class="ti ti-wand me-1"></i>{{ $LANG['wizard_use_sample_customer'] ?? 'Use sample customer data' }}
                             </button>
-                            <p class="text-muted small mt-2 mb-0">You can edit or replace sample data later.</p>
+                            <p class="text-muted small mt-2 mb-0">{{ $LANG['wizard_sample_replace_later'] ?? 'You can edit or replace sample data later.' }}</p>
                         </div>
                         {{-- Form --}}
                         <div class="col-md-8">
@@ -265,41 +263,41 @@
                                 <div class="row g-3">
                                     <div class="col-12">
                                         <label class="form-label fw-bold">
-                                            Customer Name <i class="ti ti-asterisk text-danger" style="font-size:.7rem"></i>
+                                            {{ $LANG['customer_name'] ?? 'Customer Name' }} <i class="ti ti-asterisk text-danger" style="font-size:.7rem"></i>
                                         </label>
                                         <input type="text" name="name" class="form-control" placeholder="e.g. Acme Corp" required>
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">Contact Person</label>
+                                        <label class="form-label">{{ $LANG['contact_person'] ?? 'Contact Person' }}</label>
                                         <input type="text" name="attention" class="form-control" placeholder="e.g. Jane Smith">
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">Department</label>
+                                        <label class="form-label">{{ $LANG['customer_department'] ?? 'Department' }}</label>
                                         <input type="text" name="department" class="form-control" placeholder="e.g. Accounts">
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">Email</label>
+                                        <label class="form-label">{{ $LANG['email'] ?? 'Email' }}</label>
                                         <input type="email" name="email" class="form-control" placeholder="accounts@example.com">
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">Phone</label>
+                                        <label class="form-label">{{ $LANG['phone'] ?? 'Phone' }}</label>
                                         <input type="text" name="phone" class="form-control" placeholder="+1 555 000 0000">
                                     </div>
                                     <div class="col-12">
-                                        <label class="form-label">Street Address</label>
+                                        <label class="form-label">{{ $LANG['street'] ?? 'Street Address' }}</label>
                                         <input type="text" name="street_address" class="form-control" placeholder="123 Business Rd">
                                     </div>
                                     <div class="col-md-8">
-                                        <label class="form-label">City</label>
+                                        <label class="form-label">{{ $LANG['city'] ?? 'City' }}</label>
                                         <input type="text" name="city" class="form-control" placeholder="City">
                                     </div>
                                 </div>
                                 <div class="mt-4 d-flex justify-content-between align-items-center">
                                     <a href="index.php?module=customers&amp;view=add" class="text-secondary small">
-                                        <i class="ti ti-external-link me-1"></i>Full customer form (more options)
+                                        <i class="ti ti-external-link me-1"></i>{{ $LANG['wizard_full_customer_form'] ?? 'Full customer form (more options)' }}
                                     </a>
                                     <button type="submit" name="submit" value="save" class="btn btn-primary">
-                                        Save Customer <i class="ti ti-arrow-right ms-1"></i>
+                                        {{ $LANG['save_customer'] ?? 'Save Customer' }} <i class="ti ti-arrow-right ms-1"></i>
                                     </button>
                                 </div>
                             </form>
@@ -316,10 +314,10 @@
                     <div class="d-flex align-items-center gap-3 py-2">
                         <span class="avatar avatar-lg bg-success-lt rounded"><i class="ti ti-check fs-2 text-success"></i></span>
                         <div>
-                            <div class="fw-bold text-success fs-4">At least one product / service is set up!</div>
-                            <p class="text-secondary mb-2">You can add more products or services any time.</p>
+                            <div class="fw-bold text-success fs-4">{{ $LANG['wizard_product_ready'] ?? 'At least one product / service is set up!' }}</div>
+                            <p class="text-secondary mb-2">{{ $LANG['wizard_product_ready_tagline'] ?? 'You can add more products or services any time.' }}</p>
                             <a href="index.php?module=products&amp;view=manage" class="btn btn-sm btn-outline-success">
-                                <i class="ti ti-settings me-1"></i>Manage Products
+                                <i class="ti ti-settings me-1"></i>{{ $LANG['manage_products'] ?? 'Manage Products' }}
                             </a>
                         </div>
                     </div>
@@ -332,21 +330,19 @@
                                     <i class="ti ti-package text-orange"></i>
                                 </span>
                                 <div>
-                                    <h4 class="mb-1">Add a Product or Service</h4>
+                                    <h4 class="mb-1">{{ $LANG['wizard_add_a_product'] ?? 'Add a Product or Service' }}</h4>
                                     <p class="text-secondary mb-0" style="font-size:.875rem">
-                                        <strong>Products</strong> (or services) are what you invoice for —
-                                        an hourly rate, a fixed fee, or a physical item.
-                                        Add at least one so it can appear on your invoices.
+                                        {{ $LANG['wizard_product_description'] ?? 'Products (or services) are what you invoice for — an hourly rate, a fixed fee, or a physical item. Add at least one so it can appear on your invoices.' }}
                                     </p>
                                 </div>
                             </div>
                             <hr class="my-3">
-                            <p class="text-secondary small mb-2">Just want to try it out first?</p>
+                            <p class="text-secondary small mb-2">{{ $LANG['wizard_try_sample'] ?? 'Just want to try it out first?' }}</p>
                             <button type="button" class="btn btn-sm btn-outline-secondary w-100"
                                     onclick="wizardFill('product')">
-                                <i class="ti ti-wand me-1"></i>Use sample product data
+                                <i class="ti ti-wand me-1"></i>{{ $LANG['wizard_use_sample_product'] ?? 'Use sample product data' }}
                             </button>
-                            <p class="text-muted small mt-2 mb-0">You can edit or replace sample data later.</p>
+                            <p class="text-muted small mt-2 mb-0">{{ $LANG['wizard_sample_replace_later'] ?? 'You can edit or replace sample data later.' }}</p>
                         </div>
                         {{-- Form --}}
                         <div class="col-md-8">
@@ -367,20 +363,20 @@
                                 <div class="row g-3">
                                     <div class="col-12">
                                         <label class="form-label fw-bold">
-                                            Description <i class="ti ti-asterisk text-danger" style="font-size:.7rem"></i>
+                                            {{ $LANG['description'] ?? 'Description' }} <i class="ti ti-asterisk text-danger" style="font-size:.7rem"></i>
                                         </label>
                                         <input type="text" name="description" class="form-control"
                                                placeholder="e.g. Hourly consulting rate" required>
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">Unit Price</label>
+                                        <label class="form-label">{{ $LANG['unit_price'] ?? 'Unit Price' }}</label>
                                         <div class="input-group">
                                             <span class="input-group-text">{{ $preference['pref_currency_sign'] ?? '$' }}</span>
                                             <input type="text" name="unit_price" class="form-control" placeholder="0.00">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">Default Tax</label>
+                                        <label class="form-label">{{ $LANG['default_tax'] ?? 'Default Tax' }}</label>
                                         <select name="default_tax_id" class="form-select">
                                             <option value="">— none —</option>
                                             @foreach(($taxes ?? []) as $tax)
@@ -393,10 +389,10 @@
                                 </div>
                                 <div class="mt-4 d-flex justify-content-between align-items-center">
                                     <a href="index.php?module=products&amp;view=add" class="text-secondary small">
-                                        <i class="ti ti-external-link me-1"></i>Full product form (more options)
+                                        <i class="ti ti-external-link me-1"></i>{{ $LANG['wizard_full_product_form'] ?? 'Full product form (more options)' }}
                                     </a>
                                     <button type="submit" name="id" value="save" class="btn btn-primary">
-                                        Save Product <i class="ti ti-arrow-right ms-1"></i>
+                                        {{ $LANG['save_product'] ?? 'Save Product' }} <i class="ti ti-arrow-right ms-1"></i>
                                     </button>
                                 </div>
                             </form>
@@ -413,13 +409,13 @@
                     <div class="d-flex align-items-center gap-3 py-2">
                         <span class="avatar avatar-lg bg-success-lt rounded"><i class="ti ti-check fs-2 text-success"></i></span>
                         <div>
-                            <div class="fw-bold text-success fs-4">You&rsquo;re all set up and invoicing!</div>
-                            <p class="text-secondary mb-2">Head to the invoice list to see your invoices, or create another one.</p>
+                            <div class="fw-bold text-success fs-4">{{ $LANG['wizard_all_set'] ?? "You're all set up and invoicing!" }}</div>
+                            <p class="text-secondary mb-2">{{ $LANG['wizard_all_set_tagline'] ?? 'Head to the invoice list to see your invoices, or create another one.' }}</p>
                             <a href="index.php?module=invoices&amp;view=manage" class="btn btn-sm btn-outline-success me-2">
-                                <i class="ti ti-list me-1"></i>All Invoices
+                                <i class="ti ti-list me-1"></i>{{ $LANG['wizard_all_invoices'] ?? 'All Invoices' }}
                             </a>
                             <a href="index.php?module=invoices&amp;view=itemised" class="btn btn-sm btn-primary">
-                                <i class="ti ti-plus me-1"></i>New Invoice
+                                <i class="ti ti-plus me-1"></i>{{ $LANG['new_invoice'] ?? 'New Invoice' }}
                             </a>
                         </div>
                     </div>
@@ -431,10 +427,9 @@
                                     <i class="ti ti-file-invoice text-green"></i>
                                 </span>
                                 <div>
-                                    <h4 class="mb-1">Create Your First Invoice</h4>
+                                    <h4 class="mb-1">{{ $LANG['wizard_create_first_invoice'] ?? 'Create Your First Invoice' }}</h4>
                                     <p class="text-secondary mb-0" style="font-size:.875rem">
-                                        You have your billing details, a customer, and a product ready.
-                                        Pick a biller, a customer, add your line items, and send it off.
+                                        {{ $LANG['wizard_invoice_description'] ?? 'You have your billing details, a customer, and a product ready. Pick a biller, a customer, add your line items, and send it off.' }}
                                     </p>
                                 </div>
                             </div>
@@ -443,11 +438,11 @@
                             @if(!$hasBillers || !$hasCustomers || !$hasProducts)
                                 <div class="alert alert-warning">
                                     <i class="ti ti-alert-circle me-2"></i>
-                                    Before creating an invoice you need to complete the earlier steps:
+                                    {{ $LANG['wizard_prereqs_intro'] ?? 'Before creating an invoice you need to complete the earlier steps:' }}
                                     <ul class="mb-0 mt-1">
-                                        @if(!$hasBillers)<li>Add your billing details (Step 1)</li>@endif
-                                        @if(!$hasCustomers)<li>Add a customer (Step 2)</li>@endif
-                                        @if(!$hasProducts)<li>Add a product or service (Step 3)</li>@endif
+                                        @if(!$hasBillers)<li>{{ $LANG['wizard_prereqs_biller'] ?? 'Add your billing details (Step 1)' }}</li>@endif
+                                        @if(!$hasCustomers)<li>{{ $LANG['wizard_prereqs_customer'] ?? 'Add a customer (Step 2)' }}</li>@endif
+                                        @if(!$hasProducts)<li>{{ $LANG['wizard_prereqs_product'] ?? 'Add a product or service (Step 3)' }}</li>@endif
                                     </ul>
                                 </div>
                             @else
@@ -458,13 +453,13 @@
                                                 <i class="ti ti-file-invoice fs-1 text-primary"></i>
                                             </span>
                                         </div>
-                                        <h3 class="mb-2">Ready to go!</h3>
+                                        <h3 class="mb-2">{{ $LANG['wizard_ready_to_go'] ?? 'Ready to go!' }}</h3>
                                         <p class="text-secondary mb-4">
-                                            Click the button below to open the new invoice form.<br>
-                                            Your biller, customer, and products are all set.
+                                            {{ $LANG['wizard_ready_click_below'] ?? 'Click the button below to open the new invoice form.' }}<br>
+                                            {{ $LANG['wizard_ready_tagline'] ?? 'Your biller, customer, and products are all set.' }}
                                         </p>
 					<a href="index.php?module=invoices&amp;view=itemised" class="btn btn-primary btn-lg">
-                                            <i class="ti ti-plus me-2"></i>Create Your First Invoice
+                                            <i class="ti ti-plus me-2"></i>{{ $LANG['wizard_create_first_invoice'] ?? 'Create Your First Invoice' }}
                                         </a>
                                     </div>
                                 </div>

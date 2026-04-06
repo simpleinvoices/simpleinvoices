@@ -61,7 +61,7 @@
                     <div class="fw-bold">{{ $invoice['index_id'] ?? '' }}</div>
                 </div>
                 <div class="col-md-6">
-                    <div class="text-uppercase text-secondary small fw-medium mb-2">Date</div>
+                    <div class="text-uppercase text-secondary small fw-medium mb-2">{{ $LANG['date_upper'] ?? 'Date' }}</div>
                     <div>{{ $invoice['date'] ?? '' }}</div>
                 </div>
             </div>

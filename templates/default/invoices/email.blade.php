@@ -17,7 +17,7 @@
 @if(get('stage') == 1 )
 
 <div class="si_center">
-<h3>Email {{ $invoice['index_name'] ?? '' }} to Customer as PDF</h3>
+<h3>{{ sprintf($LANG['email_invoice_as_pdf'] ?? 'Email %s to Customer as PDF', $invoice['index_name'] ?? '') }}</h3>
 </div>
 
 <form name="frmpost" action="index.php?module=invoices&amp;view=email&amp;stage=2&amp;id={{ urlencode(get('id')) }}" method="post">
