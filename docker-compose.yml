@@ -6,6 +6,9 @@ services:
     depends_on:
       db:
         condition: service_healthy
+        required: false   # set to false for SQLite or external PostgreSQL
+    volumes:
+      - sqlite_data:/var/www/html/databases/sqlite
     environment:
       - SI_DB_HOST=${SI_DB_HOST}
       - SI_DB_PORT=${SI_DB_PORT}
@@ -99,6 +102,7 @@ services:
 
 volumes:
   mysql_data:
+  sqlite_data:
 
 networks:
   simpleinvoices-net:

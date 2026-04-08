@@ -9,8 +9,16 @@ mkdir -p /var/www/html/tmp/cache /var/www/html/tmp/log /var/www/html/tmp/databas
 chown -R www-data:www-data /var/www/html/tmp
 chmod -R 775 /var/www/html/tmp
 
-# When running in Docker Compose (or --env-file), override DB config so the app connects to the db
-if [ -n "${SI_DB_HOST}" ]; then
+# For SQLite: ensure the database directory exists and is writable by the web server
+if [ "${SI_DATABASE_ADAPTER:-pdo_mysql}" = "pdo_sqlite" ]; then
+  mkdir -p /var/www/html/databases/sqlite
+  chown -R www-data:www-data /var/www/html/databases/sqlite
+  chmod 775 /var/www/html/databases/sqlite
+fi
+
+# When running in Docker Compose (or --env-file), override DB config so the app connects to the db.
+# SQLite has no network host; skip the host-resolution wait for it.
+if [ -n "${SI_DB_HOST}" ] && [ "${SI_DATABASE_ADAPTER:-pdo_mysql}" != "pdo_sqlite" ]; then
   # Single PHP process that waits for host resolution (avoids 30x php invocations)
   _port="${SI_DB_PORT:-3306}"
   _max="${SI_DB_WAIT_MAX:-30}"

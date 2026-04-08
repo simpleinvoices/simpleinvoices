@@ -20,19 +20,25 @@ RUN apk add --no-cache \
     nginx
 
 # PHP extensions (dom/xml for htmlpurifier etc.)
-RUN apk add --no-cache icu-dev \
+# pdo_sqlite: built into PHP but needs sqlite-dev at build time
+# pdo_pgsql:  needs libpq-dev at build and libpq at runtime
+RUN apk add --no-cache icu-dev sqlite-dev libpq-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) \
     mysqli \
     pdo \
     pdo_mysql \
+    pdo_sqlite \
+    pdo_pgsql \
+    pgsql \
     mbstring \
     zip \
     gd \
     dom \
     xml \
     intl \
-    && apk del .build-deps
+    && apk del .build-deps \
+    && apk add --no-cache libpq sqlite-libs
 
 # Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer

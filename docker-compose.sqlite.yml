@@ -1,0 +1,36 @@
+# SQLite override for Simple Invoices
+#
+# Usage:
+#   docker compose -f docker-compose.yml -f docker-compose.sqlite.yml up
+#
+# Or set in your shell:
+#   export COMPOSE_FILE=docker-compose.yml:docker-compose.sqlite.yml
+#   docker compose up
+#
+# The SQLite database file is stored in the named volume 'sqlite_data'
+# which is mounted at /var/www/html/databases/sqlite inside the container.
+# The filename is controlled by SI_DB_NAME (default: simple_invoices).
+
+services:
+  simpleinvoices:
+    environment:
+      - SI_DATABASE_ADAPTER=pdo_sqlite
+      - SI_DB_NAME=${SI_DB_NAME:-simple_invoices}
+      # Clear host/port/credentials — not used by SQLite
+      - SI_DB_HOST=
+      - SI_DB_PORT=
+      - SI_DB_USER=
+      - SI_DB_PASSWORD=
+    volumes:
+      - sqlite_data:/var/www/html/databases/sqlite
+
+  # Disable the MariaDB service
+  db:
+    profiles: ["_disabled_"]
+
+  # Disable Adminer (no SQL server to connect to for SQLite)
+  adminer:
+    profiles: ["_disabled_"]
+
+volumes:
+  sqlite_data:
