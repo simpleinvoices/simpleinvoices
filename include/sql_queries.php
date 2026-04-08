@@ -2963,7 +2963,7 @@ function initialise_sql_patch() {
 			sql_patch VARCHAR(255) NOT NULL,
 			sql_release VARCHAR(25) NOT NULL,
 			sql_statement TEXT NOT NULL
-		) ENGINE=MyISAM DEFAULT CHARSET=utf8";
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
 	}
 	dbQuery($sql_patch_init);
 

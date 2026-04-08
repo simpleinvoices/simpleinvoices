@@ -1,8 +1,17 @@
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET @saved_cs_client     = @@character_set_client;
 SET @saved_col_client    = @@collation_database;
-SET character_set_client = utf8;
-SET collation_database   = utf8_unicode_ci;
+SET character_set_client = utf8mb4;
+SET collation_database   = utf8mb4_unicode_ci;
+
+-- Note on AUTO_INCREMENT with composite primary keys:
+-- InnoDB requires the AUTO_INCREMENT column to be leftmost in at least one index.
+-- Where the composite PK is (domain_id, id), id is not leftmost, so a plain
+-- KEY (id) is added to each affected table.  This satisfies InnoDB without
+-- changing the PK column order or the application's query patterns.
+-- The per-domain-group auto-increment behaviour of MyISAM is not used by the
+-- application (all queries scope by both domain_id and id), so the switch to a
+-- globally-incrementing sequence under InnoDB is safe.
 
 CREATE TABLE IF NOT EXISTS `si_biller` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
@@ -31,8 +40,9 @@ CREATE TABLE IF NOT EXISTS `si_biller` (
   `custom_field3` varchar(255) DEFAULT NULL,
   `custom_field4` varchar(255) DEFAULT NULL,
   `enabled` TINYINT(1) DEFAULT 1 NOT NULL,
-  PRIMARY KEY (`domain_id`,`id`)
-) ENGINE=MyISAM;
+  PRIMARY KEY (`domain_id`,`id`),
+  KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `si_cron` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -44,8 +54,9 @@ CREATE TABLE IF NOT EXISTS `si_cron` (
   `recurrence_type` varchar(11) NOT NULL,
   `email_biller` TINYINT(1) DEFAULT 0 NOT NULL,
   `email_customer` TINYINT(1) DEFAULT 0 NOT NULL,
-  PRIMARY KEY (`domain_id`,`id`)
-) ENGINE=MyISAM;
+  PRIMARY KEY (`domain_id`,`id`),
+  KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `si_cron_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -53,8 +64,9 @@ CREATE TABLE IF NOT EXISTS `si_cron_log` (
   `cron_id` varchar(25) DEFAULT NULL,
   `run_date` date NOT NULL,
   PRIMARY KEY (`domain_id`,`id`),
+  KEY `id` (`id`),
   UNIQUE KEY `CronIdUnq` (`domain_id`, `cron_id`, `run_date`)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `si_custom_fields` (
   `cf_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -63,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `si_custom_fields` (
   `cf_display` TINYINT(1) DEFAULT 1 NOT NULL,
   `domain_id` int(11) NOT NULL,
   PRIMARY KEY (`cf_id`, `domain_id`)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `si_customers` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
@@ -87,8 +99,9 @@ CREATE TABLE IF NOT EXISTS `si_customers` (
   `custom_field3` varchar(255) DEFAULT NULL,
   `custom_field4` varchar(255) DEFAULT NULL,
   `enabled` TINYINT(1) DEFAULT 1 NOT NULL,
-  PRIMARY KEY (`domain_id`,`id`)
-) ENGINE=MyISAM;
+  PRIMARY KEY (`domain_id`,`id`),
+  KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `si_extensions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -97,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `si_extensions` (
   `description` varchar(255) NOT NULL,
   `enabled` TINYINT(1) DEFAULT 0 NOT NULL,
   PRIMARY KEY (`id`, `domain_id`)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `si_index` (
   `id` int(11) NOT NULL,
@@ -105,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `si_index` (
   `sub_node` varchar(255) DEFAULT NULL,
   `sub_node_2` varchar(255) DEFAULT NULL,
   `domain_id` int(11) NOT NULL
-) ENGINE=MyISAM;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `si_inventory` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -115,8 +128,9 @@ CREATE TABLE IF NOT EXISTS `si_inventory` (
   `cost` decimal(25,6) DEFAULT NULL,
   `date` date NOT NULL,
   `note` text,
-  PRIMARY KEY (`domain_id`,`id`)
-) ENGINE=MyISAM;
+  PRIMARY KEY (`domain_id`,`id`),
+  KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `si_invoice_item_tax` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -127,7 +141,7 @@ CREATE TABLE IF NOT EXISTS `si_invoice_item_tax` (
   `tax_amount` decimal(25,6) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UnqInvTax` (`invoice_item_id`, `tax_id`)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `si_invoice_items` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
@@ -144,13 +158,13 @@ CREATE TABLE IF NOT EXISTS `si_invoice_items` (
   PRIMARY KEY (`id`),
   KEY `invoice_id` (`invoice_id`),
   KEY `DomainInv` (`invoice_id`, `domain_id`)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `si_invoice_type` (
   `inv_ty_id` int(11) NOT NULL AUTO_INCREMENT,
   `inv_ty_description` varchar(25) NOT NULL DEFAULT '',
   PRIMARY KEY (`inv_ty_id`)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `si_invoices` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
@@ -167,12 +181,13 @@ CREATE TABLE IF NOT EXISTS `si_invoices` (
   `custom_field4` varchar(50) DEFAULT NULL,
   `note` text,
   PRIMARY KEY (`domain_id`,`id`),
+  KEY `id` (`id`),
   KEY `domain_id` (`domain_id`),
   KEY `biller_id` (`biller_id`),
   KEY `customer_id` (`customer_id`),
-  KEY `UniqDIB` (`index_id`, `preference_id`, `biller_id`, `domain_id`), 
+  UNIQUE KEY `UniqDIB` (`index_id`, `preference_id`, `biller_id`, `domain_id`),
   KEY `IdxDI` (`index_id`, `preference_id`, `domain_id`)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `si_log` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -182,7 +197,7 @@ CREATE TABLE IF NOT EXISTS `si_log` (
   `sqlquerie` text NOT NULL,
   `last_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`, `domain_id`)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `si_payment` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
@@ -194,18 +209,20 @@ CREATE TABLE IF NOT EXISTS `si_payment` (
   `domain_id` int(11) NOT NULL,
   `online_payment_id` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`domain_id`,`id`),
+  KEY `id` (`id`),
   KEY `domain_id` (`domain_id`),
   KEY `ac_inv_id` (`ac_inv_id`),
   KEY `ac_amount` (`ac_amount`)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `si_payment_types` (
   `pt_id` int(10) NOT NULL AUTO_INCREMENT,
   `domain_id` int(11) NOT NULL DEFAULT '1',
   `pt_description` varchar(250) NOT NULL,
   `pt_enabled` TINYINT(1) DEFAULT 1 NOT NULL,
-  PRIMARY KEY (`domain_id`,`pt_id`)
-) ENGINE=MyISAM;
+  PRIMARY KEY (`domain_id`,`pt_id`),
+  KEY `pt_id` (`pt_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `si_preferences` (
   `pref_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -229,8 +246,9 @@ CREATE TABLE IF NOT EXISTS `si_preferences` (
   `currency_code` varchar(25) DEFAULT NULL,
   `include_online_payment` varchar(255) DEFAULT NULL,
   `currency_position` varchar(25) DEFAULT NULL,
-  PRIMARY KEY (`domain_id`,`pref_id`)
-) ENGINE=MyISAM;
+  PRIMARY KEY (`domain_id`,`pref_id`),
+  KEY `pref_id` (`pref_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `si_products` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -251,14 +269,15 @@ CREATE TABLE IF NOT EXISTS `si_products` (
   `attribute` varchar(255) DEFAULT NULL,
   `notes_as_description` CHAR(1) DEFAULT NULL,
   `show_description` CHAR(1) DEFAULT NULL,
-  PRIMARY KEY (`domain_id`,`id`)
-) ENGINE=MyISAM;
+  PRIMARY KEY (`domain_id`,`id`),
+  KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `si_products_attribute_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `si_products_attributes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -267,7 +286,7 @@ CREATE TABLE IF NOT EXISTS `si_products_attributes` (
   `enabled` TINYINT(1) DEFAULT 1 NOT NULL,
   `visible` TINYINT(1) DEFAULT 1 NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `si_products_values` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -275,7 +294,7 @@ CREATE TABLE IF NOT EXISTS `si_products_values` (
   `value` varchar(255) NOT NULL,
   `enabled` TINYINT(1) DEFAULT 1 NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `si_sql_patchmanager` (
   `sql_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -284,7 +303,7 @@ CREATE TABLE IF NOT EXISTS `si_sql_patchmanager` (
   `sql_release` varchar(25) DEFAULT NULL ,
   `sql_statement` text DEFAULT NULL,
   PRIMARY KEY (`sql_id`)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `si_system_defaults` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -293,8 +312,9 @@ CREATE TABLE IF NOT EXISTS `si_system_defaults` (
   `domain_id` int(5) NOT NULL DEFAULT '0',
   `extension_id` int(5) NOT NULL DEFAULT '0',
   PRIMARY KEY (`domain_id`,`id`),
+  KEY `id` (`id`),
   UNIQUE KEY `UnqNameInDomain` (`domain_id`, `name`)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `si_tax` (
   `tax_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -303,8 +323,9 @@ CREATE TABLE IF NOT EXISTS `si_tax` (
   `type` CHAR(1) DEFAULT '%' NOT NULL,
   `tax_enabled` TINYINT(1) DEFAULT 1 NOT NULL,
   `domain_id` int(11) NOT NULL,
-  PRIMARY KEY (`domain_id`,`tax_id`)
-) ENGINE=MyISAM;
+  PRIMARY KEY (`domain_id`,`tax_id`),
+  KEY `tax_id` (`tax_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `si_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -316,22 +337,23 @@ CREATE TABLE IF NOT EXISTS `si_user` (
   `enabled` TINYINT(1) DEFAULT 1 NOT NULL,
   `user_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`domain_id`,`id`),
+  KEY `id` (`id`),
   UNIQUE KEY `UnqEMail` (`email`)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `si_user_domain` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(191) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `si_user_role` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(191) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 SET character_set_client = @saved_cs_client;
 SET collation_database   = @saved_col_client;
