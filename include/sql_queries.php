@@ -2997,12 +2997,13 @@ function patch126() {
 		dbQuery($sql, ':description', $res['description'], ':total', $res['gross_total']);
 		$id = lastInsertId();
 
-		$sql = "UPDATE  ".TB_PREFIX."invoice_items SET product_id = :id, unit_price = :price WHERE ".TB_PREFIX."invoice_items.id = :item";
+		$sql = "UPDATE ".TB_PREFIX."invoice_items SET product_id = :id, unit_price = :price WHERE id = :item AND domain_id = :domain_id";
 
 		dbQuery($sql,
 			':id', $id[0],
 			':price', $res['gross_total'],
-			':item', $res['id']
+			':item', $res['id'],
+			':domain_id', $res['domain_id']
 			);
 	}
 }
