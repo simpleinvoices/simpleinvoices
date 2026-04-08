@@ -99,6 +99,7 @@ class cron {
     public function select_all($type='', $dir='DESC', $rp='25', $page='1')
 	{
 		global $LANG;
+		global $db_server;
 		$valid_search_fields = array('iv.id', 'b.name', 'cron.id', 'aging');
 
 		/*SQL Limit - start*/
@@ -173,8 +174,9 @@ class cron {
 
     public function select_crons_to_run()
     {
-        global \$db_server;
+        global $db_server;
         // Use this function to select crons that need to run each day across all domain_id values
+        $cron_index_expr = ($db_server === 'mysql') ? "(SELECT CONCAT(pf.pref_description,' ',iv.index_id))" : "(pf.pref_description || ' ' || CAST(iv.index_id AS TEXT))";
 
         $sql = "SELECT
                   cron.*
@@ -198,8 +200,9 @@ class cron {
 
 	public function select()
 	{
-		global \$db_server;
+		global $db_server;
 		global $LANG;
+		$cron_index_expr = ($db_server === 'mysql') ? "(SELECT CONCAT(pf.pref_description,' ',iv.index_id))" : "(pf.pref_description || ' ' || CAST(iv.index_id AS TEXT))";
 
 		$sql = "SELECT
 				cron.*
