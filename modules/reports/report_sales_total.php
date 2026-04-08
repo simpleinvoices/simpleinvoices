@@ -1,19 +1,55 @@
-<?php 
-    $sql = "SELECT 
-			  pr.index_group AS `group` 
-			, GROUP_CONCAT(DISTINCT pr.pref_description SEPARATOR ',') AS template 
-			, COUNT(DISTINCT ii.invoice_id) AS `count`
-			, SUM(ii.total) AS sum_total
-    FROM 
-        ".TB_PREFIX."invoice_items ii
-		INNER JOIN ".TB_PREFIX."invoices iv ON (iv.id = ii.invoice_id AND iv.domain_id = ii.domain_id) 
-        INNER JOIN ".TB_PREFIX."preferences pr ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id) 
-    WHERE
-           pr.status = '1'
-       AND ii.domain_id = :domain_id
-	GROUP BY
-		pr.index_group
-    ";
+<?php
+    global $db_server;
+
+    if ($db_server == 'pgsql') {
+        $sql = "SELECT
+                  pr.index_group AS grp
+                , STRING_AGG(DISTINCT pr.pref_description, ',') AS template
+                , COUNT(DISTINCT ii.invoice_id) AS count
+                , SUM(ii.total) AS sum_total
+        FROM
+            ".TB_PREFIX."invoice_items ii
+            INNER JOIN ".TB_PREFIX."invoices iv ON (iv.id = ii.invoice_id AND iv.domain_id = ii.domain_id)
+            INNER JOIN ".TB_PREFIX."preferences pr ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id)
+        WHERE
+               pr.status = '1'
+           AND ii.domain_id = :domain_id
+        GROUP BY
+            pr.index_group
+        ";
+    } elseif ($db_server == 'sqlite') {
+        $sql = "SELECT
+                  pr.index_group AS grp
+                , GROUP_CONCAT(DISTINCT pr.pref_description) AS template
+                , COUNT(DISTINCT ii.invoice_id) AS count
+                , SUM(ii.total) AS sum_total
+        FROM
+            ".TB_PREFIX."invoice_items ii
+            INNER JOIN ".TB_PREFIX."invoices iv ON (iv.id = ii.invoice_id AND iv.domain_id = ii.domain_id)
+            INNER JOIN ".TB_PREFIX."preferences pr ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id)
+        WHERE
+               pr.status = '1'
+           AND ii.domain_id = :domain_id
+        GROUP BY
+            pr.index_group
+        ";
+    } else {
+        $sql = "SELECT
+                  pr.index_group AS grp
+                , GROUP_CONCAT(DISTINCT pr.pref_description SEPARATOR ',') AS template
+                , COUNT(DISTINCT ii.invoice_id) AS count
+                , SUM(ii.total) AS sum_total
+        FROM
+            ".TB_PREFIX."invoice_items ii
+            INNER JOIN ".TB_PREFIX."invoices iv ON (iv.id = ii.invoice_id AND iv.domain_id = ii.domain_id)
+            INNER JOIN ".TB_PREFIX."preferences pr ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id)
+        WHERE
+               pr.status = '1'
+           AND ii.domain_id = :domain_id
+        GROUP BY
+            pr.index_group
+        ";
+    }
 
     $sth = dbQuery($sql, ':domain_id', $auth_session->domain_id);
 

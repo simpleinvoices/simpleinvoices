@@ -103,7 +103,7 @@ class cron {
 
 		/*SQL Limit - start*/
 		$start = (($page-1) * $rp);
-		$limit = "LIMIT ".$start.", ".$rp;
+		$limit = "LIMIT ".$rp." OFFSET ".$start;
 		/*SQL Limit - end*/
 
 		/*SQL where - start*/
@@ -137,10 +137,11 @@ class cron {
 		}
 
 
+		$cron_index_expr = ($db_server === 'mysql') ? "(SELECT CONCAT(pf.pref_description,' ',iv.index_id))" : "(pf.pref_description || ' ' || CAST(iv.index_id AS TEXT))";
 		$sql = "SELECT
 				cron.*
                 , cron.id as cron_id
-                , (SELECT CONCAT(pf.pref_description,' ',iv.index_id)) as index_name
+                , $cron_index_expr as index_name
 			FROM 
 				".TB_PREFIX."cron cron 
 				INNER JOIN ".TB_PREFIX."invoices iv 
@@ -172,12 +173,13 @@ class cron {
 
     public function select_crons_to_run()
     {
+        global \$db_server;
         // Use this function to select crons that need to run each day across all domain_id values
 
         $sql = "SELECT
                   cron.*
                 , cron.id as cron_id
-                , (SELECT CONCAT(pf.pref_description,' ',iv.index_id)) as index_name
+                , $cron_index_expr as index_name
             FROM 
                 ".TB_PREFIX."cron cron 
                 INNER JOIN ".TB_PREFIX."invoices iv 
@@ -196,11 +198,12 @@ class cron {
 
 	public function select()
 	{
+		global \$db_server;
 		global $LANG;
 
 		$sql = "SELECT
 				cron.*
-                , (SELECT CONCAT(pf.pref_description,' ',iv.index_id)) as index_name
+                , $cron_index_expr as index_name
 			FROM 
 				".TB_PREFIX."cron cron 
 				INNER JOIN ".TB_PREFIX."invoices iv 

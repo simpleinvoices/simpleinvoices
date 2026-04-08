@@ -32,18 +32,57 @@
 	ORDER BY
         age DESC;
     ";
-       } else {
-	
-          $sql = "SELECT
-			iv.id, 
+   } elseif ($db_server == 'sqlite') {
+      $sql = "SELECT
+			iv.id,
 			iv.index_id,
 			pr.pref_inv_wording,
-			b.name AS biller, 
-			c.name AS customer, 
---			COUNT(ii.invoice_id) AS items,
+			b.name AS biller,
+			c.name AS customer,
 			SUM(COALESCE(ii.total, 0)) AS inv_total,
 			COALESCE(ap.inv_paid, 0) AS inv_paid,
---    inv_total - inv_paid AS inv_owing,
+			SUM(COALESCE(ii.total, 0)) - COALESCE(ap.inv_paid, 0) AS inv_owing,
+
+			strftime('%Y-%m-%d', iv.date) AS date,
+			CAST(julianday('now') - julianday(iv.date) AS INTEGER) AS age,
+			(CASE WHEN CAST(julianday('now') - julianday(iv.date) AS INTEGER) <= 14 THEN '0-14'
+				  WHEN CAST(julianday('now') - julianday(iv.date) AS INTEGER) <= 30 THEN '15-30'
+				  WHEN CAST(julianday('now') - julianday(iv.date) AS INTEGER) <= 60 THEN '31-60'
+				  WHEN CAST(julianday('now') - julianday(iv.date) AS INTEGER) <= 90 THEN '61-90'
+				  ELSE '90+'
+			END) AS Aging
+
+		FROM
+            ".TB_PREFIX."invoices iv
+            LEFT JOIN ".TB_PREFIX."invoice_items ii ON (ii.invoice_id = iv.id AND ii.domain_id = iv.domain_id)
+            LEFT JOIN ".TB_PREFIX."biller b         ON (iv.biller_id = b.id AND b.domain_id = iv.domain_id)
+            LEFT JOIN ".TB_PREFIX."customers c      ON (iv.customer_id = c.id AND c.domain_id = iv.domain_id)
+            LEFT JOIN ".TB_PREFIX."preferences pr   ON (iv.preference_id = pr.pref_id AND pr.domain_id = iv.domain_id)
+            LEFT JOIN (
+				SELECT ac_inv_id, domain_id, SUM(COALESCE(ac_amount, 0)) AS inv_paid
+					FROM ".TB_PREFIX."payment
+					GROUP BY ac_inv_id, domain_id
+			) ap ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
+		WHERE
+				pr.status    = 1
+			AND iv.domain_id = :domain_id
+		GROUP BY
+			iv.id
+		HAVING
+			inv_owing > 0
+		ORDER BY
+			age DESC;
+		";
+   } else {
+      // MySQL
+      $sql = "SELECT
+			iv.id,
+			iv.index_id,
+			pr.pref_inv_wording,
+			b.name AS biller,
+			c.name AS customer,
+			SUM(COALESCE(ii.total, 0)) AS inv_total,
+			COALESCE(ap.inv_paid, 0) AS inv_paid,
 			SUM(COALESCE(ii.total, 0)) - COALESCE(ap.inv_paid, 0) AS inv_owing,
 
 			DATE_FORMAT(`date`,'%Y-%m-%e') AS `date`,
@@ -56,27 +95,27 @@
 			END ) AS Aging
 
 		FROM
-            ".TB_PREFIX."invoices iv  
-            LEFT JOIN ".TB_PREFIX."invoice_items ii ON (ii.invoice_id    = iv.id      AND ii.domain_id = iv.domain_id)  
+            ".TB_PREFIX."invoices iv
+            LEFT JOIN ".TB_PREFIX."invoice_items ii ON (ii.invoice_id    = iv.id      AND ii.domain_id = iv.domain_id)
             LEFT JOIN ".TB_PREFIX."biller b         ON (iv.biller_id     = b.id       AND  b.domain_id = iv.domain_id)
             LEFT JOIN ".TB_PREFIX."customers c      ON (iv.customer_id   = c.id       AND  c.domain_id = iv.domain_id)
             LEFT JOIN ".TB_PREFIX."preferences pr   ON (iv.preference_id = pr.pref_id AND pr.domain_id = iv.domain_id)
             LEFT JOIN (
-				SELECT ac_inv_id, domain_id, SUM(COALESCE(ac_amount, 0)) AS inv_paid 
-					FROM ".TB_PREFIX."payment 
+				SELECT ac_inv_id, domain_id, SUM(COALESCE(ac_amount, 0)) AS inv_paid
+					FROM ".TB_PREFIX."payment
 					GROUP BY ac_inv_id, domain_id
 			) ap ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
-		WHERE   
+		WHERE
 				pr.status    = 1
 			AND iv.domain_id = :domain_id
-		GROUP BY 
+		GROUP BY
 			iv.id
-		HAVING 
+		HAVING
 			inv_owing > 0
-		ORDER BY 
+		ORDER BY
 			age DESC;
 		";
-    }
+   }
 
     $invoice_results = dbQuery($sql, ':domain_id', $auth_session->domain_id);
 

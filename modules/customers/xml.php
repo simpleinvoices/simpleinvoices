@@ -32,7 +32,7 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 
 	/*SQL Limit - start*/
 	$start = (($page-1) * $rp);
-	$limit = "LIMIT $start, $rp";
+	$limit = "LIMIT $rp OFFSET $start";
 
 	if($type =="count")
 	{
@@ -72,9 +72,9 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 					, c.name as name 
 					, c.department as department
 					, (SELECT (CASE  WHEN c.enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled
-					, SUM(COALESCE(IF(pr.status = 1, ii.total, 0),  0)) AS customer_total
+					, SUM(COALESCE(CASE WHEN pr.status = 1 THEN ii.total ELSE 0 END, 0)) AS customer_total
 					, COALESCE(ap.amount,0) AS paid
-					, (SUM(COALESCE(IF(pr.status = 1, ii.total, 0),  0)) - COALESCE(ap.amount,0)) AS owing
+					, (SUM(COALESCE(CASE WHEN pr.status = 1 THEN ii.total ELSE 0 END, 0)) - COALESCE(ap.amount,0)) AS owing
 			FROM
 					".TB_PREFIX."customers c
 					LEFT JOIN ".TB_PREFIX."invoices iv ON (c.id = iv.customer_id AND iv.domain_id = c.domain_id)
@@ -87,7 +87,7 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 						) ap ON (ap.customer_id = c.id AND ap.domain_id = c.domain_id)
 			WHERE c.domain_id = :domain_id
 					$where
-			GROUP BY CID
+			GROUP BY c.id, c.name, c.department
 			ORDER BY
 					$sort $dir
 				$limit";

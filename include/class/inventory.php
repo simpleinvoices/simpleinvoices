@@ -78,7 +78,7 @@ class inventory {
 
 		/*SQL Limit - start*/
 		$start = (($page-1) * $rp);
-		$limit = " LIMIT $start, $rp";
+		$limit = " LIMIT $rp OFFSET $start";
 		/*SQL Limit - end*/
 
 		/*SQL where - start*/

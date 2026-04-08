@@ -7,11 +7,12 @@ class system_default {
 		$this->extension_name = "core";
 
 	}
-	
+
 	public function update()
 	{
 
 		global $db;
+		global $db_server;
 		global $auth_session;
 		$domain_id = $auth_session->domain_id;
 
@@ -28,17 +29,18 @@ class system_default {
 			die(htmlsafe("Invalid extension name: ".$extension));
 		}
 
-		$sql = "INSERT INTO 
-			`".TB_PREFIX."system_defaults`
-			(
-				`name`, `value`, domain_id, extension_id
-			)
-			VALUES
-			(
-				:name, :value, :domain_id, :extension_id
-			)
-			ON DUPLICATE KEY UPDATE
-				`value` =  :value";
+		if ($db_server == 'mysql') {
+			$sql = "INSERT INTO `".TB_PREFIX."system_defaults`
+				(`name`, `value`, domain_id, extension_id)
+				VALUES (:name, :value, :domain_id, :extension_id)
+				ON DUPLICATE KEY UPDATE `value` = :value";
+		} else {
+			// PostgreSQL 9.5+ / SQLite 3.24+ upsert syntax
+			$sql = "INSERT INTO ".TB_PREFIX."system_defaults
+				(name, value, domain_id, extension_id)
+				VALUES (:name, :value, :domain_id, :extension_id)
+				ON CONFLICT (domain_id, name) DO UPDATE SET value = EXCLUDED.value";
+		}
 
 		if ($db->query($sql,
 			':value', $value,

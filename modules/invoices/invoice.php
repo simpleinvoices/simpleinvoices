@@ -56,11 +56,20 @@ for($i=1;$i<=4;$i++) {
 	$show_custom_field[$i] = show_custom_field("invoice_cf$i",'',"write",'',"details_screen",'','','');
 }
 
-$sql = "SELECT CONCAT(a.id, '-', v.id) as id
-			 , CONCAT(a.name, '-',v.value) AS display 
-		FROM ".TB_PREFIX."products_attributes a 
-			LEFT JOIN ".TB_PREFIX."products_values v 
-				ON (a.id = v.attribute_id);";
+global $db_server;
+if ($db_server === 'mysql') {
+    $sql = "SELECT CONCAT(a.id, '-', v.id) AS id
+                 , CONCAT(a.name, '-', v.value) AS display
+            FROM ".TB_PREFIX."products_attributes a
+                LEFT JOIN ".TB_PREFIX."products_values v
+                    ON (a.id = v.attribute_id)";
+} else {
+    $sql = "SELECT (CAST(a.id AS TEXT) || '-' || CAST(v.id AS TEXT)) AS id
+                 , (a.name || '-' || v.value) AS display
+            FROM ".TB_PREFIX."products_attributes a
+                LEFT JOIN ".TB_PREFIX."products_values v
+                    ON (a.id = v.attribute_id)";
+}
 $sth =  dbQuery($sql);
 $matrix = $sth->fetchAll();
 $smarty -> assign("matrix", $matrix);
