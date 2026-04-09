@@ -41,7 +41,7 @@ class export
 			case "pdf":
 			{
 				pdfThis($data, $this->file_location, $this->file_name);
-				$this->file_location == "download" ? exit():"" ;	
+				if ($this->file_location === "download" || $this->file_location === "inline") exit();
 				break;
 			}		
 			case "file":

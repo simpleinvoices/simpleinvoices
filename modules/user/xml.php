@@ -91,7 +91,7 @@ $sth_count_rows = sql('count',$dir, $sort, $rp, $page);
 
 $user = $sth->fetchAll(PDO::FETCH_ASSOC);
 
-$count = $sth_count_rows->rowCount();
+$count = count($sth_count_rows->fetchAll());
 
 //echo sql2xml($customers, $count);
 $xml .= "<rows>";

@@ -290,7 +290,7 @@ class invoice {
         $validFields = array('index_id','index_name','iv.id', 'biller', 'customer', 'invoice_total','owing','date','aging','type','preference','type_id');
 
         if (!in_array($sort, $validFields))
-            $sort = "id";
+            $sort = "iv.id";
 
         if(strstr($type,"count"))
         {
@@ -420,43 +420,49 @@ class invoice {
 
             case "pdo_mysql":
             default:
-                $sql = "
-                    SELECT
-                       iv.id,
-                       iv.index_id AS index_id,
-                       b.name AS biller,
-                       c.name AS customer,
-                       DATE_FORMAT(iv.date,'%Y-%m-%d') AS date,
-                       (SELECT COALESCE(SUM(ii.total), 0) FROM " . TB_PREFIX . "invoice_items ii WHERE ii.invoice_id = iv.id AND ii.domain_id = :domain_id) AS invoice_total,
-                       (SELECT COALESCE(SUM(ac_amount), 0) FROM " . TB_PREFIX . "payment ap WHERE ap.ac_inv_id = iv.id AND ap.domain_id = :domain_id) AS INV_PAID,
-                       (SELECT invoice_total - INV_PAID) AS owing,";
-
+                // Use LEFT JOINs + GROUP BY (same structure as pgsql/sqlite) so that:
+                //  - :domain_id only appears once (PDO named params must be unique)
+                //  - owing/Age/aging are computed from real expressions, not aliases
                 if ($type == '') {
-                    $sql .= "
-                       (SELECT CASE WHEN (owing <= 0 OR DATEDIFF(NOW(), iv.date) < 0) THEN 0 ELSE DATEDIFF(NOW(), iv.date) END) AS Age,
-                       (SELECT CASE WHEN Age <= 0 THEN ''
-                                    WHEN Age <= 30 THEN '0-30'
-                                    WHEN Age <= 60 THEN '31-60'
-                                    WHEN Age <= 90 THEN '61-90'
-                                    ELSE '90+' END) AS aging,";
+                    $age_expr    = "DATEDIFF(NOW(), iv.date)";
+                    $age_columns = "
+                       $age_expr AS Age,
+                       CASE WHEN $age_expr <= 0 THEN ''
+                            WHEN $age_expr <= 30 THEN '0-30'
+                            WHEN $age_expr <= 60 THEN '31-60'
+                            WHEN $age_expr <= 90 THEN '61-90'
+                            ELSE '90+'
+                       END AS aging,";
                 } else {
-                    $sql .= "
-                        '' AS Age,
-                        '' AS aging,";
+                    $age_columns = "
+                       '' AS Age,
+                       '' AS aging,";
                 }
-                $sql .= "
-                       iv.type_id AS type_id,
-                       pf.pref_description AS preference,
-                       pf.status AS status,
-                       (SELECT CONCAT(pf.pref_inv_wording,' ',iv.index_id)) AS index_name
+                $sql = "
+                SELECT
+                     iv.id,
+                     iv.index_id AS index_id,
+                     b.name AS biller,
+                     c.name AS customer,
+                     COALESCE(SUM(ii.total), 0) AS invoice_total,
+                     COALESCE(SUM(ap.ac_amount), 0) AS INV_PAID,
+                     (COALESCE(SUM(ii.total), 0) - COALESCE(SUM(ap.ac_amount), 0)) AS owing,
+                     DATE_FORMAT(iv.date,'%Y-%m-%d') AS date,
+                     $age_columns
+                     iv.type_id AS type_id,
+                     pf.pref_description AS preference,
+                     pf.status AS status,
+                     CONCAT(pf.pref_inv_wording, ' ', iv.index_id) AS index_name
                 FROM " . TB_PREFIX . "invoices iv
-                    LEFT JOIN " . TB_PREFIX . "biller b       ON (b.id = iv.biller_id           AND b.domain_id  = iv.domain_id)
-                    LEFT JOIN " . TB_PREFIX . "customers c    ON (c.id = iv.customer_id         AND c.domain_id  = iv.domain_id)
-                    LEFT JOIN " . TB_PREFIX . "preferences pf ON (pf.pref_id = iv.preference_id AND pf.domain_id = iv.domain_id)
+                     LEFT JOIN " . TB_PREFIX . "payment ap       ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
+                     LEFT JOIN " . TB_PREFIX . "invoice_items ii ON (ii.invoice_id = iv.id AND ii.domain_id = iv.domain_id)
+                     LEFT JOIN " . TB_PREFIX . "biller b         ON (b.id = iv.biller_id AND b.domain_id = iv.domain_id)
+                     LEFT JOIN " . TB_PREFIX . "customers c      ON (c.id = iv.customer_id AND c.domain_id = iv.domain_id)
+                     LEFT JOIN " . TB_PREFIX . "preferences pf   ON (pf.pref_id = iv.preference_id AND pf.domain_id = iv.domain_id)
                 WHERE iv.domain_id = :domain_id
                     $where
                 GROUP BY
-                    iv.id
+                    iv.id, iv.index_id, b.name, c.name, iv.date, iv.type_id, pf.pref_description, pf.status, pf.pref_inv_wording
                 $sql_having
                 ORDER BY $sort $dir
                 $limit";

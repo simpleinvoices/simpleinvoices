@@ -4,11 +4,11 @@ class product_attributes
 {
     public function get($id)
     {
-        $sql = "SELECT pa.*, pat.name AS `type` 
-                FROM ".TB_PREFIX."products_attributes pa 
-	                LEFT JOIN ".TB_PREFIX."products_attribute_type pat 
+        $sql = "SELECT pa.*, pat.name AS type
+                FROM ".TB_PREFIX."products_attributes pa
+                    LEFT JOIN ".TB_PREFIX."products_attribute_type pat
                         ON (pa.type_id = pat.id)
-				WHERE pa.id = :id";
+                WHERE pa.id = :id";
 
 		$sth =  dbQuery($sql,':id',$id);
         $attribute = $sth->fetch();

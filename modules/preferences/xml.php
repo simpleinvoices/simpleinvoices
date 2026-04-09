@@ -85,7 +85,7 @@ $sth = sql('', $dir, $sort, $rp, $page);
 $sth_count_rows = sql('count',$dir, $sort, $rp, $page);
 
 $preferences = $sth->fetchAll(PDO::FETCH_ASSOC);
-$count = $sth_count_rows->rowCount();
+$count = count($sth_count_rows->fetchAll());
  
 
 $xml .= "<rows>";

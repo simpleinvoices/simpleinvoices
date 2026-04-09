@@ -100,7 +100,7 @@ class inventory {
 		if (!empty($this->sort)) {
 		    $sort = $this->sort;
 		} else {
-		    $sort = "id";
+		    $sort = "inv.id";
 		}
 
 		if($type =="count")
@@ -110,25 +110,23 @@ class inventory {
 
 
 		$sql = "SELECT
-				inv.id as id,
-				inv.product_id ,
-				inv.date ,
-				inv.quantity ,
-                p.description,
-                (select coalesce(p.reorder_level,0) as reorder_level),
+				inv.id AS id,
+				inv.product_id,
+				inv.date,
+				inv.quantity,
+				p.description,
+				COALESCE(p.reorder_level, 0) AS reorder_level,
 				inv.cost,
-				inv.quantity * inv.cost as total_cost
-			FROM 
+				inv.quantity * inv.cost AS total_cost
+			FROM
 				".TB_PREFIX."products p
 				LEFT JOIN ".TB_PREFIX."inventory inv
 					ON (p.id = inv.product_id AND p.domain_id = inv.domain_id)
-			 WHERE 
+			WHERE
 				inv.domain_id = :domain_id
 				$where
-			GROUP BY
-			    inv.id
 			ORDER BY
-			$sort $dir
+				$sort $dir
 			$limit";
 
 		if (empty($query)) {
@@ -139,7 +137,7 @@ class inventory {
 
 		if($type =="count")
 		{
-			return $sth->rowCount();
+			return count($sth->fetchAll());
 		} else {
 			return $sth->fetchAll();
 		}

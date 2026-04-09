@@ -1079,7 +1079,7 @@ function numberOfTaxesForInvoice($invoice_id, $domain_id='')
 			GROUP BY
 				tax.tax_id;";
 	$sth = dbQuery($sql, ':invoice_id', $invoice_id, ':domain_id', $domain_id);
-	$result = $sth->rowCount();
+	$result = count($sth->fetchAll());
 
 	return $result;
 
@@ -1591,11 +1591,10 @@ function getCustomerInvoices($id, $domain_id='') {
 		iv.index_id, 
 		iv.date, 
 		iv.type_id, 
-		(SELECT SUM( COALESCE(ii.total, 0))     FROM " . TB_PREFIX . "invoice_items ii WHERE ii.invoice_id = iv.id AND ii.domain_id = iv.domain_id) AS invd,
-		(SELECT SUM( COALESCE(ap.ac_amount, 0)) FROM " . TB_PREFIX . "payment ap       WHERE ap.ac_inv_id = iv.id  AND ap.domain_id = iv.domain_id) AS pmt,
-		(SELECT COALESCE(invd, 0)) As total, 
-		(SELECT COALESCE(pmt, 0)) As paid, 
-		(select (total - paid)) as owing,
+		COALESCE((SELECT SUM(ii.total) FROM " . TB_PREFIX . "invoice_items ii WHERE ii.invoice_id = iv.id AND ii.domain_id = iv.domain_id), 0) AS total,
+		COALESCE((SELECT SUM(ap.ac_amount) FROM " . TB_PREFIX . "payment ap WHERE ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id), 0) AS paid,
+		COALESCE((SELECT SUM(ii.total) FROM " . TB_PREFIX . "invoice_items ii WHERE ii.invoice_id = iv.id AND ii.domain_id = iv.domain_id), 0) -
+		COALESCE((SELECT SUM(ap.ac_amount) FROM " . TB_PREFIX . "payment ap WHERE ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id), 0) AS owing,
 		pr.status,
 		pr.pref_inv_wording
 	FROM 
@@ -2295,56 +2294,6 @@ function printEntries($menu,$id,$depth) {
 }
 */
 
-function searchBillerAndCustomerInvoice($biller, $customer, $domain_id='') {
-//TODO remove this function - not used
-	global $db_server;
-    $domain_id = domain_id::get($domain_id);
-
-	$sql = "SELECT  b.name AS biller, 
-	c.name AS customer, 
-	i.id AS invoice, 
-	i.date AS `date`, 
-	i.type_id AS type_id,
-	t.inv_ty_description AS `type` 
-FROM ".TB_PREFIX."invoices i 
-    LEFT JOIN ".TB_PREFIX."invoice_type t ON (i.type_id = t.inv_ty_id)
-    LEFT JOIN ".TB_PREFIX."customers c    ON (i.customer_id = c.id AND i.domain_id = c.domain_id)
-    LEFT JOIN ".TB_PREFIX."biller b       ON (i.biller_id   = b.id AND i.domain_id = b.domain_id)
-WHERE b.name LIKE :biller 
-  AND c.name LIKE :customer
-  AND i.domain_id = :domain_id";
-	if ($db_server == 'pgsql') {
-		$sql = str_replace("name LIKE :", "name ILIKE :", $sql);
-	}
-	return dbQuery($sql,
-		':biller',   "%$biller%",
-		':customer', "%$customer%",
-		':domain_id', $domain_id
-		);
-}
-
-function searchInvoiceByDate($startdate, $enddate, $domain_id='') {
-//TODO remove this function - not used
-    $domain_id = domain_id::get($domain_id);
-
-	$sql = "SELECT  b.name AS biller, 
-	c.name AS customer, 
-	i.id AS invoice, 
-	i.date AS `date`, 
-	i.type_id AS type_id,
-	t.inv_ty_description AS `type` 
-FROM ".TB_PREFIX."invoices i 
-    LEFT JOIN ".TB_PREFIX."invoice_type t ON (i.type_id = t.inv_ty_id)
-    LEFT JOIN ".TB_PREFIX."customers c    ON (i.customer_id = c.id AND i.domain_id = c.domain_id)
-    LEFT JOIN ".TB_PREFIX."biller b       ON (i.biller_id   = b.id AND i.domain_id = b.domain_id)
-WHERE i.domain_id = :domain_id 
-  AND i.date BETWEEN :startdate AND :enddate";
-	return dbQuery($sql,
-		':startdate', $startdate,
-		':enddate',   $enddate,
-		':domain_id', $domain_id
-		);
-}
 
 /*
  * delete attempts to delete rows from the database.  This function currently
@@ -2728,7 +2677,9 @@ function pdfThis($html,$file_location="",$pdfname)
 				$mpdf->WriteHTML($html_to_pdf);
 
 				$filename = $pdfname . '.pdf';
-				if ($file_location === "download") {
+				if ($file_location === "inline") {
+					$mpdf->Output($filename, \Mpdf\Output\Destination::INLINE);
+				} elseif ($file_location === "download") {
 					$mpdf->Output($filename, \Mpdf\Output\Destination::DOWNLOAD);
 				} else {
 					$mpdf->Output($filename, \Mpdf\Output\Destination::FILE);

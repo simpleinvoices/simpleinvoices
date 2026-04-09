@@ -76,16 +76,19 @@ for ($y = $chart_start_year; $y <= $chart_current_year; $y++) {
     for ($m = 1; $m <= 12; $m++) {
         $mp = str_pad($m, 2, '0', STR_PAD_LEFT);
 
+        $month_start = "{$y}-{$mp}-01";
+        $month_end   = date('Y-m-d', strtotime("$month_start +1 month"));
+
         $r = dbQuery("SELECT SUM(ii.total) AS t FROM " . TB_PREFIX . "invoice_items ii
             INNER JOIN " . TB_PREFIX . "invoices iv ON (ii.invoice_id=iv.id AND iv.domain_id=ii.domain_id)
             INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id=iv.preference_id AND pr.domain_id=iv.domain_id)
-            WHERE pr.status='1' AND ii.domain_id=:domain_id AND iv.date LIKE '{$y}-{$mp}%'",
-            ':domain_id', $auth_session->domain_id)->fetch();
+            WHERE pr.status='1' AND ii.domain_id=:domain_id AND iv.date >= :month_start AND iv.date < :month_end",
+            ':domain_id', $auth_session->domain_id, ':month_start', $month_start, ':month_end', $month_end)->fetch();
         $invoices[] = round((float)($r['t'] ?? 0), 2);
 
         $r = dbQuery("SELECT SUM(ac_amount) AS t FROM " . TB_PREFIX . "payment
-            WHERE domain_id=:domain_id AND ac_date LIKE '{$y}-{$mp}%'",
-            ':domain_id', $auth_session->domain_id)->fetch();
+            WHERE domain_id=:domain_id AND ac_date >= :month_start AND ac_date < :month_end",
+            ':domain_id', $auth_session->domain_id, ':month_start', $month_start, ':month_end', $month_end)->fetch();
         $payments[] = round((float)($r['t'] ?? 0), 2);
     }
     $chart_data[$y] = ['invoices' => $invoices, 'payments' => $payments];

@@ -10,19 +10,12 @@ $page = (isset($_REQUEST['page'])) ? $_REQUEST['page'] : "1" ;
 
 function sql($type='', $dir, $sort, $rp, $page )
 {
-	global \$db_server;
+	global $db_server;
 	global $config;
 	global $auth_session;
 
 	$valid_search_fields = array('ap.id','b.name', 'c.name');
 
-	//SC: Safety checking values that will be directly subbed in
-	if (intval($start) != $start) {
-		$start = 0;
-	}
-	if (intval($limit) != $limit) {
-		$limit = 25;
-	}
 	if (!preg_match('/^(asc|desc)$/iD', $dir)) {
 		$dir = 'DESC';
 	}
@@ -141,7 +134,7 @@ $sth = sql('', $dir, $sort, $rp, $page);
 $sth_count_rows = sql('count',$dir, $sort, $rp, $page);
 
 $payments = $sth->fetchAll(PDO::FETCH_ASSOC);
-$count = $sth_count_rows->rowCount();
+$count = count($sth_count_rows->fetchAll());
 /*
 $sqlTotal = "SELECT count(id) AS count FROM ".TB_PREFIX."payment";
 $tth = dbQuery($sqlTotal) or die(end($dbh->errorInfo()));

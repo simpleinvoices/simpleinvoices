@@ -9,10 +9,10 @@ if(isset($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] > 0)
     //	$output = '';
 
 
-	if($states->rowCount() > 0)
-	{	
-		$row = $states->fetch();
-
+	$row = $states->fetch();
+	if($row !== false)
+	{
+        $html = '';
         $json_att = json_decode($row['attribute']);
         if($json_att !== null AND $row['attribute'] !== '[]')
         {

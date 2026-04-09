@@ -87,7 +87,7 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 						) ap ON (ap.customer_id = c.id AND ap.domain_id = c.domain_id)
 			WHERE c.domain_id = :domain_id
 					$where
-			GROUP BY c.id, c.name, c.department
+			GROUP BY c.id, c.name, c.department, ap.amount
 			ORDER BY
 					$sort $dir
 				$limit";
@@ -107,7 +107,7 @@ $sth_count_rows = sql('count', $start, $dir, $sort, $rp, $page);
 
 $customers = $sth->fetchAll(PDO::FETCH_ASSOC);
 
-$count = $sth_count_rows->rowCount();
+$count = count($sth_count_rows->fetchAll());
 
 	$xml .= "<rows>";
 	$xml .= "<page>$page</page>";

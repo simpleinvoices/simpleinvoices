@@ -67,15 +67,13 @@ if (in_array($sort, $validFields)) {
 				$start, $limit";
 			
 	$sth = dbQuery($sql,':domain_id', $auth_session->domain_id);
-	$count = $sth->rowCount();
-	
-	$cfs = null;
+	$cfs_raw = $sth->fetchAll(PDO::FETCH_ASSOC);
+	$count = count($cfs_raw);
 
-	$number_of_rows = 0;
-	for($i=0; $cf = $sth->fetch();$i++) {
+	$cfs = null;
+	foreach ($cfs_raw as $i => $cf) {
 		$cfs[$i] = $cf;
 		$cfs[$i]['field_name_nice'] = get_custom_field_name($cf['cf_custom_field']);
-		$number_of_rows = $i;
 	}
 	
 	$xml .= "<rows>";

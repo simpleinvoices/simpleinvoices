@@ -90,7 +90,7 @@ $sth_count_rows = sql('count',$start, $dir, $sort, $rp, $page);
 
 $billers = $sth->fetchAll(PDO::FETCH_ASSOC);
 
-$count = $sth_count_rows->rowCount();
+$count = count($sth_count_rows->fetchAll());
 
 //echo sql2xml($customers, $count);
 $xml .= "<rows>";

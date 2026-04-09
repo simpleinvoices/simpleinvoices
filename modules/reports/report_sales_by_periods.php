@@ -64,26 +64,29 @@ while ( $year <= $this_year ){
 		};
 		
 		// Monthly Sales ----------------------------
+		$month_start = "$year-$month-01";
+		$month_end   = date('Y-m-d', strtotime("$month_start +1 month"));
+
 		$total_month_sales_sql = "
-			SELECT SUM(ii.total) AS month_total 
+			SELECT SUM(ii.total) AS month_total
 				FROM ".TB_PREFIX."invoice_items ii
-					INNER JOIN ".TB_PREFIX."invoices iv ON (ii.invoice_id = iv.id AND iv.domain_id = ii.domain_id) 
-					INNER JOIN ".TB_PREFIX."preferences pr ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id) 
-				WHERE 
-					pr.status = '1' 
+					INNER JOIN ".TB_PREFIX."invoices iv ON (ii.invoice_id = iv.id AND iv.domain_id = ii.domain_id)
+					INNER JOIN ".TB_PREFIX."preferences pr ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id)
+				WHERE
+					pr.status = '1'
 					AND ii.domain_id = :domain_id
-					AND iv.date LIKE '$year-$month%'
+					AND iv.date >= :month_start AND iv.date < :month_end
 			";
-		$total_month_sales = dbQuery($total_month_sales_sql, ':domain_id', $auth_session->domain_id);
+		$total_month_sales = dbQuery($total_month_sales_sql, ':domain_id', $auth_session->domain_id, ':month_start', $month_start, ':month_end', $month_end);
 		$total_month_sales_array = $total_month_sales -> fetch();
 
 		$data['sales']['months'][$month][$year] = $total_month_sales_array['month_total'];
 		$data['sales']['months_rate'][$month][$year] = _myRate($data['sales']['months'][$month][$year],	$data['sales']['months'][$month][$year -1]);
-		
+
 
 		// Monthly Payment ----------------------------
-		$total_month_payments_sql = "SELECT SUM(ac_amount) AS month_total_payments FROM ".TB_PREFIX."payment WHERE domain_id = :domain_id AND ac_date LIKE '$year-$month%'";
-		$total_month_payments = dbQuery($total_month_payments_sql, ':domain_id', $auth_session->domain_id);
+		$total_month_payments_sql = "SELECT SUM(ac_amount) AS month_total_payments FROM ".TB_PREFIX."payment WHERE domain_id = :domain_id AND ac_date >= :month_start AND ac_date < :month_end";
+		$total_month_payments = dbQuery($total_month_payments_sql, ':domain_id', $auth_session->domain_id, ':month_start', $month_start, ':month_end', $month_end);
 		$total_month_payments_array = $total_month_payments -> fetch();
 
 		$data['payments']['months'][$month][$year] 		= $total_month_payments_array['month_total_payments'];
@@ -93,25 +96,28 @@ while ( $year <= $this_year ){
 	}
 
 	// Total Annual Sales ----------------------------
+	$year_start = "$year-01-01";
+	$year_end   = ($year + 1) . "-01-01";
+
 	$total_year_sales_sql = "
-		SELECT SUM(ii.total) AS year_total 
+		SELECT SUM(ii.total) AS year_total
 			FROM ".TB_PREFIX."invoice_items ii
-				INNER JOIN ".TB_PREFIX."invoices iv ON (ii.invoice_id = iv.id AND iv.domain_id = ii.domain_id) 
-				INNER JOIN ".TB_PREFIX."preferences pr ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id) 
-			WHERE 
-				pr.status = '1' 
+				INNER JOIN ".TB_PREFIX."invoices iv ON (ii.invoice_id = iv.id AND iv.domain_id = ii.domain_id)
+				INNER JOIN ".TB_PREFIX."preferences pr ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id)
+			WHERE
+				pr.status = '1'
 			AND ii.domain_id = :domain_id
-			AND iv.date LIKE '$year%'
+			AND iv.date >= :year_start AND iv.date < :year_end
 		";
-	$total_year_sales = dbQuery($total_year_sales_sql, ':domain_id', $auth_session->domain_id);
+	$total_year_sales = dbQuery($total_year_sales_sql, ':domain_id', $auth_session->domain_id, ':year_start', $year_start, ':year_end', $year_end);
 	$total_year_sales_array = $total_year_sales -> fetch();
 
 	$data['sales']['total'][$year] = $total_year_sales_array['year_total'];
 	$data['sales']['total_rate'][$year] = _myRate($data['sales']['total'][$year],	$data['sales']['total'][$year -1]);
 
 	// Total Annual Payment ----------------------------
-	$total_year_payments_sql = "SELECT SUM(ac_amount) AS year_total_payments FROM ".TB_PREFIX."payment WHERE domain_id = :domain_id AND ac_date LIKE '$year%'";
-	$total_year_payments = dbQuery($total_year_payments_sql, ':domain_id', $auth_session->domain_id);
+	$total_year_payments_sql = "SELECT SUM(ac_amount) AS year_total_payments FROM ".TB_PREFIX."payment WHERE domain_id = :domain_id AND ac_date >= :year_start AND ac_date < :year_end";
+	$total_year_payments = dbQuery($total_year_payments_sql, ':domain_id', $auth_session->domain_id, ':year_start', $year_start, ':year_end', $year_end);
 	$total_year_payments_array = $total_year_payments -> fetch();
 
 	$data['payments']['total'][$year] 			= $total_year_payments_array['year_total_payments'];

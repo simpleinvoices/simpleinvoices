@@ -44,12 +44,7 @@ class product
         global $config;
         global $LANG;
 
-		$valid_search_fields = array('id', 'description', 'unit_price');
-
-        //SC: Safety checking values that will be directly subbed in
-        if (intval($start) != $start) {
-            $start = 0;
-        }
+        $valid_search_fields = array('id', 'description', 'unit_price');
 
         if (intval($rp) != $rp) {
             $rp = 25;
@@ -58,61 +53,77 @@ class product
         $start = (($page-1) * $rp);
         $limit = "LIMIT $rp OFFSET $start";
 
-        if($type =="count")
-        {
+        if ($type == "count") {
             unset($limit);
         }
-        /*SQL Limit - end*/	
+        /*SQL Limit - end*/
 
         if (!preg_match('/^(asc|desc)$/iD', $dir)) {
             $dir = 'DESC';
         }
 
-		$where = "";
-		$query = $_POST['query'] ?? null;
-		$qtype = $_POST['qtype'] ?? null;
-		if ( ! (empty($qtype) || empty($query)) ) {
-			if ( in_array($qtype, $valid_search_fields) ) {
-				$where = " AND $qtype LIKE :query ";
-			} else {
-				$qtype = null;
-				$query = null;
-			}
-		}
+        $where = "";
+        $query = $_POST['query'] ?? null;
+        $qtype = $_POST['qtype'] ?? null;
+        if ( ! (empty($qtype) || empty($query)) ) {
+            if ( in_array($qtype, $valid_search_fields) ) {
+                $where = " AND p.$qtype LIKE :query ";
+            } else {
+                $qtype = null;
+                $query = null;
+            }
+        }
 
         /*Check that the sort field is OK*/
-        $validFields = array('id','description','unit_price', 'enabled');
+        $validFields = array('id', 'description', 'unit_price', 'enabled');
 
-        if (in_array($sort, $validFields)) {
-            $sort = $sort;
-        } else {
-            $sort = "id";
+        if (!in_array($sort, $validFields)) {
+            $sort = "p.id";
         }
-            $sql = "SELECT 
-                        id, 
-                        description,
-                        unit_price, 
-                        (SELECT COALESCE(SUM(quantity),0) FROM ".TB_PREFIX."invoice_items, ".TB_PREFIX."invoices, ".TB_PREFIX."preferences WHERE product_id = ".TB_PREFIX."products.id AND ".TB_PREFIX."invoice_items.domain_id = :domain_id AND ".TB_PREFIX."invoice_items.invoice_id = ".TB_PREFIX."invoices.id AND ".TB_PREFIX."invoices.preference_id = ".TB_PREFIX."preferences.pref_id AND ".TB_PREFIX."preferences.status = 1 ) AS qty_out ,
-                        (SELECT COALESCE(SUM(quantity),0) FROM ".TB_PREFIX."inventory WHERE product_id = ".TB_PREFIX."products.id AND domain_id = :domain_id) AS qty_in ,
-                        (SELECT COALESCE(reorder_level,0)) AS reorder_level ,
-                        (SELECT qty_in - qty_out ) AS quantity,
-                        (SELECT (CASE  WHEN enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled
-                    FROM 
-                        ".TB_PREFIX."products  
-                    WHERE 
-                        visible = 1
-                    AND domain_id = :domain_id
-                        $where
-                    ORDER BY 
-                        $sort $dir 
-                    $limit";
-        
-        
+
+        // Use LEFT JOINs with pre-aggregated subqueries so that:
+        //  - each named param (:domain_id, :domain_id2, :domain_id3) is unique (required by
+        //    PostgreSQL and SQLite PDO drivers which do not support duplicate named params)
+        //  - qty_in/qty_out are real column references, not aliases (alias references in the
+        //    same SELECT list are not portable across MySQL, PostgreSQL, or SQLite)
+        $sql = "SELECT
+                    p.id,
+                    p.description,
+                    p.unit_price,
+                    COALESCE(sold.qty_out, 0) AS qty_out,
+                    COALESCE(stk.qty_in, 0) AS qty_in,
+                    COALESCE(p.reorder_level, 0) AS reorder_level,
+                    (COALESCE(stk.qty_in, 0) - COALESCE(sold.qty_out, 0)) AS quantity,
+                    CASE WHEN p.enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END AS enabled
+                FROM
+                    ".TB_PREFIX."products p
+                LEFT JOIN (
+                    SELECT ii.product_id, SUM(ii.quantity) AS qty_out
+                    FROM ".TB_PREFIX."invoice_items ii
+                    JOIN ".TB_PREFIX."invoices inv ON ii.invoice_id = inv.id
+                    JOIN ".TB_PREFIX."preferences pref ON inv.preference_id = pref.pref_id
+                    WHERE ii.domain_id = :domain_id AND pref.status = 1
+                    GROUP BY ii.product_id
+                ) sold ON sold.product_id = p.id
+                LEFT JOIN (
+                    SELECT product_id, SUM(quantity) AS qty_in
+                    FROM ".TB_PREFIX."inventory
+                    WHERE domain_id = :domain_id2
+                    GROUP BY product_id
+                ) stk ON stk.product_id = p.id
+                WHERE
+                    p.visible = 1
+                    AND p.domain_id = :domain_id3
+                    $where
+                ORDER BY
+                    $sort $dir
+                $limit";
+
         if (empty($query)) {
-			$result = dbQuery($sql, ':domain_id', $this->domain_id);
-		} else {
-			$result = dbQuery($sql, ':domain_id', $this->domain_id, ':query', "%$query%");
-		}
+            $result = dbQuery($sql, ':domain_id', $this->domain_id, ':domain_id2', $this->domain_id, ':domain_id3', $this->domain_id);
+        } else {
+            $result = dbQuery($sql, ':domain_id', $this->domain_id, ':domain_id2', $this->domain_id, ':domain_id3', $this->domain_id, ':query', "%$query%");
+        }
 
         return $result;
     }

@@ -128,7 +128,7 @@ class cron {
 		if (!empty($this->sort)) {
 		    $sort = $this->sort;
 		} else {
-		    $sort = "id";
+		    $sort = "cron.id";
 		}
 
 		if($type =="count" OR $type =="no_limit")
@@ -166,7 +166,7 @@ class cron {
 
 		if($type =="count")
 		{
-			return $sth->rowCount();
+			return count($sth->fetchAll());
 		} else {
 			return $sth->fetchAll();
 		}
