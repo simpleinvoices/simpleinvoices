@@ -10,6 +10,7 @@ $page = (isset($_REQUEST['page'])) ? $_REQUEST['page'] : "1" ;
 
 function sql($type='', $dir, $sort, $rp, $page )
 {
+	global \$db_server;
 	global $config;
 	global $auth_session;
 
@@ -28,7 +29,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 
 	/*SQL Limit - start*/
 	$start = (($page-1) * $rp);
-	$limit = "LIMIT $start, $rp";
+	$limit = "LIMIT $rp OFFSET $start";
 
 	if($type =="count")
 	{
@@ -37,8 +38,8 @@ function sql($type='', $dir, $sort, $rp, $page )
 	/*SQL Limit - end*/
 
 	$where = "";
-	$query = isset($_REQUEST['query']) ? $_REQUEST['query'] : null;
-	$qtype = isset($_REQUEST['qtype']) ? $_REQUEST['qtype'] : null;
+	$query = $_REQUEST['query'] ?? null;
+	$qtype = $_REQUEST['qtype'] ?? null;
 	if ( ! (empty($qtype) || empty($query)) ) {
 		if ( in_array($qtype, $valid_search_fields) ) {
 			$where = " AND $qtype LIKE :query ";
@@ -58,14 +59,22 @@ function sql($type='', $dir, $sort, $rp, $page )
 		$sort = "ap.id";
 	}
 
-	$sql = "SELECT 
+	$index_name_expr = ($db_server === 'mysql')
+		? "(SELECT CONCAT(pr.pref_inv_wording,' ',iv.index_id))"
+		: "(pr.pref_inv_wording || ' ' || CAST(iv.index_id AS TEXT))";
+	$date_expr = ($db_server === 'sqlite')
+		? "strftime('%Y-%m-%d', ac_date)"
+		: ($db_server === 'pgsql'
+			? "TO_CHAR(ac_date, 'YYYY-MM-DD')"
+			: "DATE_FORMAT(ac_date,'%Y-%m-%d')");
+	$sql = "SELECT
 				ap.*
 				, c.name as cname
-				, (SELECT CONCAT(pr.pref_inv_wording,' ',iv.index_id)) as index_name
+				, $index_name_expr as index_name
 				, b.name as bname
 				, pt.pt_description AS description
 				, ac_notes AS notes
-				, DATE_FORMAT(ac_date,'%Y-%m-%d') AS date
+				, $date_expr AS date
 			FROM 
 				".TB_PREFIX."payment ap
 				INNER JOIN ".TB_PREFIX."invoices iv      ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)

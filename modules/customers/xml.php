@@ -32,7 +32,7 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 
 	/*SQL Limit - start*/
 	$start = (($page-1) * $rp);
-	$limit = "LIMIT $start, $rp";
+	$limit = "LIMIT $rp OFFSET $start";
 
 	if($type =="count")
 	{
@@ -46,8 +46,8 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 	}
 
 	$where = "";
-	$query = isset($_REQUEST['query']) ? $_REQUEST['query'] : null;
-	$qtype = isset($_REQUEST['qtype']) ? $_REQUEST['qtype'] : null;
+	$query = $_REQUEST['query'] ?? null;
+	$qtype = $_REQUEST['qtype'] ?? null;
 	if ( ! (empty($qtype) || empty($query)) ) {
 		if ( in_array($qtype, $valid_search_fields) ) {
 			$where = " AND $qtype LIKE :query ";
@@ -72,22 +72,22 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 					, c.name as name 
 					, c.department as department
 					, (SELECT (CASE  WHEN c.enabled = 0 THEN '".$LANG['disabled']."' ELSE '".$LANG['enabled']."' END )) AS enabled
-					, SUM(COALESCE(IF(pr.status = 1, ii.total, 0),  0)) AS customer_total
+					, SUM(COALESCE(CASE WHEN pr.status = 1 THEN ii.total ELSE 0 END, 0)) AS customer_total
 					, COALESCE(ap.amount,0) AS paid
-					, (SUM(COALESCE(IF(pr.status = 1, ii.total, 0),  0)) - COALESCE(ap.amount,0)) AS owing
+					, (SUM(COALESCE(CASE WHEN pr.status = 1 THEN ii.total ELSE 0 END, 0)) - COALESCE(ap.amount,0)) AS owing
 			FROM
 					".TB_PREFIX."customers c
 					LEFT JOIN ".TB_PREFIX."invoices iv ON (c.id = iv.customer_id AND iv.domain_id = c.domain_id)
 					LEFT JOIN ".TB_PREFIX."preferences pr ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id)
 					LEFT JOIN ".TB_PREFIX."invoice_items ii ON (iv.id = ii.invoice_id AND iv.domain_id = ii.domain_id)
 					LEFT JOIN (SELECT iv3.customer_id, p.domain_id, SUM(COALESCE(p.ac_amount, 0)) AS amount 
-							FROM ".TB_PREFIX."payment p INNER JOIN si_invoices iv3 
+							FROM ".TB_PREFIX."payment p INNER JOIN ".TB_PREFIX."invoices iv3
 						ON (iv3.id = p.ac_inv_id AND iv3.domain_id = p.domain_id)
 							GROUP BY iv3.customer_id, p.domain_id
 						) ap ON (ap.customer_id = c.id AND ap.domain_id = c.domain_id)
 			WHERE c.domain_id = :domain_id
 					$where
-			GROUP BY CID
+			GROUP BY c.id, c.name, c.department
 			ORDER BY
 					$sort $dir
 				$limit";

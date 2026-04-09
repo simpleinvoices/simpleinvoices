@@ -1712,3 +1712,229 @@ PRIMARY KEY ( `domain_id`, `id` )
     }
     $patch['294']['date']  = "20260331";
 
+    // -------------------------------------------------------------------------
+    // Patches 295-320: Migrate all tables from MyISAM to InnoDB.
+    //
+    // InnoDB requires an AUTO_INCREMENT column to be the leftmost column of at
+    // least one key/index.  For tables with a composite PRIMARY KEY (domain_id, id)
+    // the auto-increment column (id) is NOT leftmost.  Adding KEY (id) satisfies
+    // the InnoDB requirement without altering the composite PK or any query.
+    //
+    // pgsql / sqlite installs record each patch as applied via SELECT 1 (no-op).
+    // -------------------------------------------------------------------------
+
+    // --- Category A: composite PK where auto-increment column is not leftmost --
+
+    $patch['295']['name']  = "Migrate si_biller to InnoDB: add KEY id for AUTO_INCREMENT";
+    if ($config->database->adapter === "pdo_mysql") {
+        $patch['295']['patch'] = "ALTER TABLE `".TB_PREFIX."biller` ADD KEY `id` (`id`), ENGINE=InnoDB";
+    } else {
+        $patch['295']['patch'] = "SELECT 1";
+    }
+    $patch['295']['date']  = "20260408";
+
+    $patch['296']['name']  = "Migrate si_cron to InnoDB: add KEY id for AUTO_INCREMENT";
+    if ($config->database->adapter === "pdo_mysql") {
+        $patch['296']['patch'] = "ALTER TABLE `".TB_PREFIX."cron` ADD KEY `id` (`id`), ENGINE=InnoDB";
+    } else {
+        $patch['296']['patch'] = "SELECT 1";
+    }
+    $patch['296']['date']  = "20260408";
+
+    $patch['297']['name']  = "Migrate si_cron_log to InnoDB: add KEY id for AUTO_INCREMENT";
+    if ($config->database->adapter === "pdo_mysql") {
+        $patch['297']['patch'] = "ALTER TABLE `".TB_PREFIX."cron_log` ADD KEY `id` (`id`), ENGINE=InnoDB";
+    } else {
+        $patch['297']['patch'] = "SELECT 1";
+    }
+    $patch['297']['date']  = "20260408";
+
+    $patch['298']['name']  = "Migrate si_customers to InnoDB: add KEY id for AUTO_INCREMENT";
+    if ($config->database->adapter === "pdo_mysql") {
+        $patch['298']['patch'] = "ALTER TABLE `".TB_PREFIX."customers` ADD KEY `id` (`id`), ENGINE=InnoDB";
+    } else {
+        $patch['298']['patch'] = "SELECT 1";
+    }
+    $patch['298']['date']  = "20260408";
+
+    $patch['299']['name']  = "Migrate si_inventory to InnoDB: add KEY id for AUTO_INCREMENT";
+    if ($config->database->adapter === "pdo_mysql") {
+        $patch['299']['patch'] = "ALTER TABLE `".TB_PREFIX."inventory` ADD KEY `id` (`id`), ENGINE=InnoDB";
+    } else {
+        $patch['299']['patch'] = "SELECT 1";
+    }
+    $patch['299']['date']  = "20260408";
+
+    $patch['300']['name']  = "Migrate si_invoices to InnoDB: add KEY id for AUTO_INCREMENT";
+    if ($config->database->adapter === "pdo_mysql") {
+        $patch['300']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices` ADD KEY `id` (`id`), ENGINE=InnoDB";
+    } else {
+        $patch['300']['patch'] = "SELECT 1";
+    }
+    $patch['300']['date']  = "20260408";
+
+    $patch['301']['name']  = "Migrate si_payment to InnoDB: add KEY id for AUTO_INCREMENT";
+    if ($config->database->adapter === "pdo_mysql") {
+        $patch['301']['patch'] = "ALTER TABLE `".TB_PREFIX."payment` ADD KEY `id` (`id`), ENGINE=InnoDB";
+    } else {
+        $patch['301']['patch'] = "SELECT 1";
+    }
+    $patch['301']['date']  = "20260408";
+
+    $patch['302']['name']  = "Migrate si_payment_types to InnoDB: add KEY pt_id for AUTO_INCREMENT";
+    if ($config->database->adapter === "pdo_mysql") {
+        $patch['302']['patch'] = "ALTER TABLE `".TB_PREFIX."payment_types` ADD KEY `pt_id` (`pt_id`), ENGINE=InnoDB";
+    } else {
+        $patch['302']['patch'] = "SELECT 1";
+    }
+    $patch['302']['date']  = "20260408";
+
+    $patch['303']['name']  = "Migrate si_preferences to InnoDB: add KEY pref_id for AUTO_INCREMENT";
+    if ($config->database->adapter === "pdo_mysql") {
+        $patch['303']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD KEY `pref_id` (`pref_id`), ENGINE=InnoDB";
+    } else {
+        $patch['303']['patch'] = "SELECT 1";
+    }
+    $patch['303']['date']  = "20260408";
+
+    $patch['304']['name']  = "Migrate si_products to InnoDB: add KEY id for AUTO_INCREMENT";
+    if ($config->database->adapter === "pdo_mysql") {
+        $patch['304']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD KEY `id` (`id`), ENGINE=InnoDB";
+    } else {
+        $patch['304']['patch'] = "SELECT 1";
+    }
+    $patch['304']['date']  = "20260408";
+
+    $patch['305']['name']  = "Migrate si_system_defaults to InnoDB: add KEY id for AUTO_INCREMENT";
+    if ($config->database->adapter === "pdo_mysql") {
+        $patch['305']['patch'] = "ALTER TABLE `".TB_PREFIX."system_defaults` ADD KEY `id` (`id`), ENGINE=InnoDB";
+    } else {
+        $patch['305']['patch'] = "SELECT 1";
+    }
+    $patch['305']['date']  = "20260408";
+
+    $patch['306']['name']  = "Migrate si_tax to InnoDB: add KEY tax_id for AUTO_INCREMENT";
+    if ($config->database->adapter === "pdo_mysql") {
+        $patch['306']['patch'] = "ALTER TABLE `".TB_PREFIX."tax` ADD KEY `tax_id` (`tax_id`), ENGINE=InnoDB";
+    } else {
+        $patch['306']['patch'] = "SELECT 1";
+    }
+    $patch['306']['date']  = "20260408";
+
+    $patch['307']['name']  = "Migrate si_user to InnoDB: add KEY id for AUTO_INCREMENT";
+    if ($config->database->adapter === "pdo_mysql") {
+        $patch['307']['patch'] = "ALTER TABLE `".TB_PREFIX."user` ADD KEY `id` (`id`), ENGINE=InnoDB";
+    } else {
+        $patch['307']['patch'] = "SELECT 1";
+    }
+    $patch['307']['date']  = "20260408";
+
+    // --- Category B: composite PK where auto-increment column is already leftmost --
+    // No KEY needed; ENGINE change only.
+
+    $patch['308']['name']  = "Migrate si_custom_fields to InnoDB";
+    if ($config->database->adapter === "pdo_mysql") {
+        $patch['308']['patch'] = "ALTER TABLE `".TB_PREFIX."custom_fields` ENGINE=InnoDB";
+    } else {
+        $patch['308']['patch'] = "SELECT 1";
+    }
+    $patch['308']['date']  = "20260408";
+
+    $patch['309']['name']  = "Migrate si_extensions to InnoDB";
+    if ($config->database->adapter === "pdo_mysql") {
+        $patch['309']['patch'] = "ALTER TABLE `".TB_PREFIX."extensions` ENGINE=InnoDB";
+    } else {
+        $patch['309']['patch'] = "SELECT 1";
+    }
+    $patch['309']['date']  = "20260408";
+
+    $patch['310']['name']  = "Migrate si_log to InnoDB";
+    if ($config->database->adapter === "pdo_mysql") {
+        $patch['310']['patch'] = "ALTER TABLE `".TB_PREFIX."log` ENGINE=InnoDB";
+    } else {
+        $patch['310']['patch'] = "SELECT 1";
+    }
+    $patch['310']['date']  = "20260408";
+
+    // --- Category C: single-column PK — InnoDB already compatible, ENGINE change only --
+
+    $patch['311']['name']  = "Migrate si_invoice_item_tax to InnoDB";
+    if ($config->database->adapter === "pdo_mysql") {
+        $patch['311']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_item_tax` ENGINE=InnoDB";
+    } else {
+        $patch['311']['patch'] = "SELECT 1";
+    }
+    $patch['311']['date']  = "20260408";
+
+    $patch['312']['name']  = "Migrate si_invoice_items to InnoDB";
+    if ($config->database->adapter === "pdo_mysql") {
+        $patch['312']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` ENGINE=InnoDB";
+    } else {
+        $patch['312']['patch'] = "SELECT 1";
+    }
+    $patch['312']['date']  = "20260408";
+
+    $patch['313']['name']  = "Migrate si_invoice_type to InnoDB";
+    if ($config->database->adapter === "pdo_mysql") {
+        $patch['313']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_type` ENGINE=InnoDB";
+    } else {
+        $patch['313']['patch'] = "SELECT 1";
+    }
+    $patch['313']['date']  = "20260408";
+
+    $patch['314']['name']  = "Migrate si_index to InnoDB";
+    if ($config->database->adapter === "pdo_mysql") {
+        $patch['314']['patch'] = "ALTER TABLE `".TB_PREFIX."index` ENGINE=InnoDB";
+    } else {
+        $patch['314']['patch'] = "SELECT 1";
+    }
+    $patch['314']['date']  = "20260408";
+
+    $patch['315']['name']  = "Migrate si_products_attribute_type to InnoDB";
+    if ($config->database->adapter === "pdo_mysql") {
+        $patch['315']['patch'] = "ALTER TABLE `".TB_PREFIX."products_attribute_type` ENGINE=InnoDB";
+    } else {
+        $patch['315']['patch'] = "SELECT 1";
+    }
+    $patch['315']['date']  = "20260408";
+
+    $patch['316']['name']  = "Migrate si_products_attributes to InnoDB";
+    if ($config->database->adapter === "pdo_mysql") {
+        $patch['316']['patch'] = "ALTER TABLE `".TB_PREFIX."products_attributes` ENGINE=InnoDB";
+    } else {
+        $patch['316']['patch'] = "SELECT 1";
+    }
+    $patch['316']['date']  = "20260408";
+
+    $patch['317']['name']  = "Migrate si_products_values to InnoDB";
+    if ($config->database->adapter === "pdo_mysql") {
+        $patch['317']['patch'] = "ALTER TABLE `".TB_PREFIX."products_values` ENGINE=InnoDB";
+    } else {
+        $patch['317']['patch'] = "SELECT 1";
+    }
+    $patch['317']['date']  = "20260408";
+
+    $patch['318']['name']  = "Migrate si_sql_patchmanager to InnoDB";
+    if ($config->database->adapter === "pdo_mysql") {
+        $patch['318']['patch'] = "ALTER TABLE `".TB_PREFIX."sql_patchmanager` ENGINE=InnoDB";
+    } else {
+        $patch['318']['patch'] = "SELECT 1";
+    }
+    $patch['318']['date']  = "20260408";
+
+    $patch['319']['name']  = "Migrate si_user_domain to InnoDB";
+    if ($config->database->adapter === "pdo_mysql") {
+        $patch['319']['patch'] = "ALTER TABLE `".TB_PREFIX."user_domain` ENGINE=InnoDB";
+    } else {
+        $patch['319']['patch'] = "SELECT 1";
+    }
+    $patch['319']['date']  = "20260408";
+
+    $patch['320']['name']  = "Migrate si_user_role to InnoDB";
+    if ($config->database->adapter === "pdo_mysql") {
+        $patch['320']['patch'] = "ALTER TABLE `".TB_PREFIX."user_role` ENGINE=InnoDB";
+    } else {
+        $patch['320']['patch'] = "SELECT 1";
+    }
+    $patch['320']['date']  = "20260408";
+

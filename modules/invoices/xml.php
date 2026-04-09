@@ -28,8 +28,8 @@ if($auth_session->role_name =='customer') {
 	$invoice->biller = $auth_session->user_id;
 }
 
-$invoice->query=isset($_REQUEST['query']) ? $_REQUEST['query'] : null;
-$invoice->qtype=isset($_REQUEST['qtype']) ? $_REQUEST['qtype'] : null;
+$invoice->query=$_REQUEST['query'] ?? null;
+$invoice->qtype=$_REQUEST['qtype'] ?? null;
 
 $large_dataset = getDefaultLargeDataset();
 if($large_dataset == $LANG['enabled'])

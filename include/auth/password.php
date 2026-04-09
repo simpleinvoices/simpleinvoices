@@ -69,27 +69,23 @@ function auth_needs_rehash($storedHash)
  */
 /**
  * Detect which user table schema variant is present.
- * Returns 'modern' (email + user_id cols), 'legacy' (user_email cols), or 'oldest' (si_users table).
+ * Returns 'modern' (email + user_id cols), 'mid' (email only), 'legacy' (user_email cols), or 'oldest'.
+ * Uses checkFieldExists() so it works with MySQL, PostgreSQL, and SQLite.
  */
 function auth_detect_schema()
 {
-    global $dbh;
-
     // Modern schema: si_user with 'email' and 'user_id' columns (post-patch 292)
-    $sth = $dbh->query("SHOW COLUMNS FROM " . TB_PREFIX . "user LIKE 'user_id'");
-    if ($sth && $sth->fetch()) {
+    if (checkFieldExists(TB_PREFIX . 'user', 'user_id')) {
         return 'modern';
     }
 
     // Mid schema: si_user with 'email' column but no 'user_id' (post-patch 184)
-    $sth = $dbh->query("SHOW COLUMNS FROM " . TB_PREFIX . "user LIKE 'email'");
-    if ($sth && $sth->fetch()) {
+    if (checkFieldExists(TB_PREFIX . 'user', 'email')) {
         return 'mid';
     }
 
     // Legacy schema: si_user with 'user_email' column (post-patch 147)
-    $sth = $dbh->query("SHOW COLUMNS FROM " . TB_PREFIX . "user LIKE 'user_email'");
-    if ($sth && $sth->fetch()) {
+    if (checkFieldExists(TB_PREFIX . 'user', 'user_email')) {
         return 'legacy';
     }
 
@@ -100,12 +96,14 @@ function auth_detect_schema()
 function auth_authenticate_user($email, $password)
 {
     // Upgrade a stored hash to bcrypt if it is MD5 or if bcrypt cost has changed.
-    $upgradeHash = static function (string $id, string $plainPassword): void {
+    // domain_id is included in the WHERE to scope the update to the correct tenant row.
+    $upgradeHash = static function (string $id, string $domain_id, string $plainPassword): void {
         $newHash = auth_hash_password($plainPassword);
         dbQuery(
-            "UPDATE " . TB_PREFIX . "user SET password = :password WHERE id = :id",
+            "UPDATE " . TB_PREFIX . "user SET password = :password WHERE id = :id AND domain_id = :domain_id",
             ':password', $newHash,
-            ':id', $id
+            ':id', $id,
+            ':domain_id', $domain_id
         );
     };
 
@@ -123,7 +121,7 @@ function auth_authenticate_user($email, $password)
         $row = $sth ? $sth->fetch(PDO::FETCH_ASSOC) : false;
         if ($row && auth_verify_password($password, $row['password'])) {
             if (auth_needs_rehash($row['password'])) {
-                $upgradeHash($row['id'], $password);
+                $upgradeHash($row['id'], $row['domain_id'], $password);
             }
             unset($row['password']);
             return $row;
@@ -143,7 +141,7 @@ function auth_authenticate_user($email, $password)
         $row = $sth ? $sth->fetch(PDO::FETCH_ASSOC) : false;
         if ($row && auth_verify_password($password, $row['password'])) {
             if (auth_needs_rehash($row['password'])) {
-                $upgradeHash($row['id'], $password);
+                $upgradeHash($row['id'], $row['domain_id'], $password);
             }
             unset($row['password']);
             $row['user_id'] = 0;

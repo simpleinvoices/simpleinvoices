@@ -32,7 +32,7 @@ function db_connector() {
 	*/
 	$pdoAdapter = substr($config->database->adapter, 4);
 
-	if(!defined('PDO::MYSQL_ATTR_INIT_COMMAND') AND $pdoAdapter == "mysql" AND $config->database->adapter->utf8 == true)
+	if(!defined('PDO::MYSQL_ATTR_INIT_COMMAND') AND $pdoAdapter == "mysql" AND $config->database->utf8 == true)
 	{
         simpleInvoicesError("PDO::mysql_attr");
 	}
@@ -44,15 +44,29 @@ function db_connector() {
 		{
 
 		    case "pgsql":
+		    	$port = !empty($config->database->params->port) ? ';port='.$config->database->params->port : '';
 		    	$connlink = new PDO(
-					$pdoAdapter.':host='.$config->database->params->host.';	dbname='.$config->database->params->dbname,	$config->database->params->username, $config->database->params->password
+					'pgsql:host='.$config->database->params->host.$port.';dbname='.$config->database->params->dbname,
+					$config->database->params->username,
+					$config->database->params->password
 				);
+				$connlink->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		    	break;
 
 		    case "sqlite":
-		    	$connlink = new PDO(
-					$pdoAdapter.':host='.$config->database->params->host.';	dbname='.$config->database->params->dbname,	$config->database->params->username, $config->database->params->password
-				);
+		    	$dsn = $config->database->params->dbname;
+		    	if ($dsn !== ':memory:' && (strlen($dsn) === 0 || $dsn[0] !== '/')) {
+		    		$base = preg_replace('/\.sqlite$/', '', $dsn);
+		    		$dir  = realpath('.') . '/databases/sqlite';
+		    		if (!is_dir($dir)) {
+		    			mkdir($dir, 0755, true);
+		    		}
+		    		$dsn = $dir . '/' . $base . '.sqlite';
+		    	}
+		    	$connlink = new PDO('sqlite:' . $dsn);
+				$connlink->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				$connlink->exec('PRAGMA journal_mode=WAL');
+				$connlink->exec('PRAGMA foreign_keys=ON');
 				break;
 
 		    case "mysql":
@@ -61,14 +75,15 @@ function db_connector() {
                     case true:
 
         			   	$connlink = new PDO(
-        					'mysql:host='.$config->database->params->host.'; port='.$config->database->params->port.'; dbname='.$config->database->params->dbname, $config->database->params->username, $config->database->params->password,  array( PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8;")
+        					'mysql:host='.$config->database->params->host.';port='.$config->database->params->port.';dbname='.$config->database->params->dbname, $config->database->params->username, $config->database->params->password,  array( PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8;")
         				);
+        				$connlink->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		        		break;
 
         		    case false:
 		            default:
         		    	$connlink = new PDO(
-        					$pdoAdapter.':host='.$config->database->params->host.'; port='.$config->database->params->port.'; dbname='.$config->database->params->dbname,	$config->database->params->username, $config->database->params->password
+        					'mysql:host='.$config->database->params->host.';port='.$config->database->params->port.';dbname='.$config->database->params->dbname,	$config->database->params->username, $config->database->params->password
 		        		);
     				break;
                 }
@@ -191,14 +206,17 @@ function lastInsertId() {
 	$pdoAdapter = substr($config->database->adapter, 4);
 
 	if ($pdoAdapter == 'pgsql') {
-		$sql = 'SELECT lastval()';
-	} elseif ($pdoAdapter == 'mysql') {
-		$sql = 'SELECT last_insert_id()';
+		$sth = $dbh->prepare('SELECT lastval()');
+		$sth->execute();
+		return $sth->fetchColumn();
+	} elseif ($pdoAdapter == 'sqlite') {
+		return $dbh->lastInsertId();
+	} else {
+		// MySQL
+		$sth = $dbh->prepare('SELECT last_insert_id()');
+		$sth->execute();
+		return $sth->fetchColumn();
 	}
-	//echo $sql;
-	$sth = $dbh->prepare($sql);
-	$sth->execute();
-	return $sth->fetchColumn();
 }
 
 /*
@@ -269,7 +287,7 @@ function getGenericRecord($table, $id, $domain_id='', $id_field='id') {
 
 	$domain_id = domain_id::get($domain_id);
 
-	$record_sql = "SELECT * FROM `".TB_PREFIX."$table` WHERE `$id_field` = :id and `domain_id` = :domain_id";
+	$record_sql = "SELECT * FROM ".TB_PREFIX."$table WHERE $id_field = :id AND domain_id = :domain_id";
 	$sth = dbQuery($record_sql, ':id', $id, ':domain_id',$domain_id);
 	return $sth->fetch();
 }
@@ -1238,33 +1256,35 @@ function getSystemDefaults($domain_id='') {
 
 function updateDefault($name,$value,$extension_name="core") {
 
+	global $db_server;
 	$domain_id = domain_id::get();
 
 	$extension_id = getExtensionID($extension_name);
 	if (!($extension_id >= 0))
 	{
-		die(htmlsafe("Invalid extension name: ".$extension_name)); 
+		die(htmlsafe("Invalid extension name: ".$extension_name));
 	}
 
-	$sql = "INSERT INTO 
-		`".TB_PREFIX."system_defaults`
-		(
-			`name`, `value`, domain_id, extension_id
-		)
-		VALUES 
-		(
-			:name, :value, :domain_id, :extension_id
-		) 
-		ON DUPLICATE KEY UPDATE
-			`value` =  :value";
+	if ($db_server == 'mysql') {
+		$sql = "INSERT INTO `".TB_PREFIX."system_defaults`
+			(`name`, `value`, domain_id, extension_id)
+			VALUES (:name, :value, :domain_id, :extension_id)
+			ON DUPLICATE KEY UPDATE `value` = :value";
+	} else {
+		// PostgreSQL 9.5+ / SQLite 3.24+ upsert syntax
+		$sql = "INSERT INTO ".TB_PREFIX."system_defaults
+			(name, value, domain_id, extension_id)
+			VALUES (:name, :value, :domain_id, :extension_id)
+			ON CONFLICT (domain_id, name) DO UPDATE SET value = EXCLUDED.value";
+	}
 
-	if (dbQuery($sql, 
-		':value', $value, 
-		':domain_id', $domain_id, 
-		':name', $name, 
+	if (dbQuery($sql,
+		':value', $value,
+		':domain_id', $domain_id,
+		':name', $name,
 		':extension_id', $extension_id
 		)
-	) return true; 
+	) return true;
 	return false;
 }
 
@@ -1279,65 +1299,39 @@ function insertBiller() {
 	global $db_server;
 	$domain_id = domain_id::get();
 
-	if ($db_server == 'pgsql') {
-		$sql = "INSERT into
-			".TB_PREFIX."biller (
+	// pgsql/sqlite: omit id column (auto-generated); mysql: explicit NULL triggers AUTO_INCREMENT
+	if ($db_server == 'pgsql' || $db_server == 'sqlite') {
+		$sql = "INSERT INTO ".TB_PREFIX."biller (
 				domain_id, name, street_address, street_address2, city,
 				state, zip_code, country, phone, mobile_phone,
-				fax, email, logo, footer, notes, custom_field1,
-				custom_field2, custom_field3, custom_field4,
-				enabled
-			)
-		VALUES
-			(
+				fax, email, logo, footer, paypal_business_name,
+				paypal_notify_url, paypal_return_url, eway_customer_id,
+				paymentsgateway_api_id, notes, custom_field1,
+				custom_field2, custom_field3, custom_field4, enabled
+			) VALUES (
 				:domain_id, :name, :street_address, :street_address2, :city,
-				:state, :zip_code, :country, :phone,
-				:mobile_phone, :fax, :email, :logo, :footer,
-				:notes, :custom_field1, :custom_field2,
-				:custom_field3, :custom_field4, :enabled
-			 )";
+				:state, :zip_code, :country, :phone, :mobile_phone,
+				:fax, :email, :logo, :footer, :paypal_business_name,
+				:paypal_notify_url, :paypal_return_url, :eway_customer_id,
+				:paymentsgateway_api_id, :notes, :custom_field1,
+				:custom_field2, :custom_field3, :custom_field4, :enabled
+			)";
 	} else {
-		$sql = "INSERT into
-			".TB_PREFIX."biller
-			(
+		$sql = "INSERT INTO ".TB_PREFIX."biller (
 				id, domain_id, name, street_address, street_address2, city,
 				state, zip_code, country, phone, mobile_phone,
-				fax, email, logo, footer, paypal_business_name, 
-				paypal_notify_url, paypal_return_url, eway_customer_id, 
-                paymentsgateway_api_id, notes, custom_field1,
-				custom_field2, custom_field3, custom_field4,
-				enabled
-
-			)
-		VALUES
-			(
-				NULL,
-				:domain_id,
-				:name,
-				:street_address,
-				:street_address2,
-				:city,
-				:state,
-				:zip_code,
-				:country,
-				:phone,
-				:mobile_phone,
-				:fax,
-				:email,
-				:logo,
-				:footer,
-				:paypal_business_name,
-				:paypal_notify_url,
-				:paypal_return_url,
-				:eway_customer_id,
-				:paymentsgateway_api_id,
-				:notes,
-				:custom_field1,
-				:custom_field2,
-				:custom_field3,
-				:custom_field4,
-				:enabled
-			 )";
+				fax, email, logo, footer, paypal_business_name,
+				paypal_notify_url, paypal_return_url, eway_customer_id,
+				paymentsgateway_api_id, notes, custom_field1,
+				custom_field2, custom_field3, custom_field4, enabled
+			) VALUES (
+				NULL, :domain_id, :name, :street_address, :street_address2, :city,
+				:state, :zip_code, :country, :phone, :mobile_phone,
+				:fax, :email, :logo, :footer, :paypal_business_name,
+				:paypal_notify_url, :paypal_return_url, :eway_customer_id,
+				:paymentsgateway_api_id, :notes, :custom_field1,
+				:custom_field2, :custom_field3, :custom_field4, :enabled
+			)";
 	}
 
 	return dbQuery($sql,
@@ -1500,8 +1494,7 @@ function insertCustomer() {
     global $config;
 	$domain_id = domain_id::get();
 
-	extract( $_POST );
-	$sql = "INSERT INTO 
+	$sql = "INSERT INTO
 			".TB_PREFIX."customers
 			(
 				domain_id, attention, name, department, street_address, street_address2,
@@ -1510,36 +1503,36 @@ function insertCustomer() {
 				custom_field1, custom_field2,
 				custom_field3, custom_field4, enabled
 			)
-			VALUES 
+			VALUES
 			(
 				:domain_id ,:attention, :name, :department, :street_address, :street_address2,
 				:city, :state, :zip_code, :country, :phone, :mobile_phone,
-				:fax, :email, :notes, 
+				:fax, :email, :notes,
 				:custom_field1, :custom_field2,
 				:custom_field3, :custom_field4, :enabled
 			)";
 
 	return dbQuery($sql,
-		':attention', $attention,
-		':name', $name,
-		':department', $department,
-		':street_address', $street_address,
-		':street_address2', $street_address2,
-		':city', $city,
-		':state', $state,
-		':zip_code', $zip_code,
-		':country', $country,
-		':phone', $phone,
-		':mobile_phone', $mobile_phone,
-		':fax', $fax,
-		':email', $email,
-		':notes', $notes,
-		':custom_field1', $custom_field1,
-		':custom_field2', $custom_field2,
-		':custom_field3', $custom_field3,
-		':custom_field4', $custom_field4,
-		':enabled', $enabled,
-		':domain_id',$domain_id
+		':attention',     $_POST['attention']      ?? '',
+		':name',          $_POST['name']           ?? '',
+		':department',    $_POST['department']     ?? '',
+		':street_address',  $_POST['street_address']  ?? '',
+		':street_address2', $_POST['street_address2'] ?? '',
+		':city',          $_POST['city']           ?? '',
+		':state',         $_POST['state']          ?? '',
+		':zip_code',      $_POST['zip_code']       ?? '',
+		':country',       $_POST['country']        ?? '',
+		':phone',         $_POST['phone']          ?? '',
+		':mobile_phone',  $_POST['mobile_phone']   ?? '',
+		':fax',           $_POST['fax']            ?? '',
+		':email',         $_POST['email']          ?? '',
+		':notes',         $_POST['notes']          ?? '',
+		':custom_field1', $_POST['custom_field1']  ?? '',
+		':custom_field2', $_POST['custom_field2']  ?? '',
+		':custom_field3', $_POST['custom_field3']  ?? '',
+		':custom_field4', $_POST['custom_field4']  ?? '',
+		':enabled',       $_POST['enabled']        ?? '',
+		':domain_id',     $domain_id
 		);
 
 }
@@ -1851,70 +1844,29 @@ function insertInvoice($type, $domain_id='') {
 		$type, $_POST['preference_id'])) {
 		return null;
 	}
-	$sql = "INSERT INTO
-		".TB_PREFIX."invoices (
-			id, 
-            index_id,
-			domain_id,
-			biller_id, 
-			customer_id, 
-			type_id,
-			preference_id, 
-			date, 
-			note,
-			custom_field1,
-			custom_field2,
-			custom_field3,
-			custom_field4
-		)
-		VALUES
-		(
-			NULL,
-			:index_id,
-			:domain_id,
-			:biller_id,
-			:customer_id,
-			:type,
-			:preference_id,
-			:date,
-			:note,
-			:customField1,
-			:customField2,
-			:customField3,
-			:customField4
-			)";
 
-	if ($db_server == 'pgsql') {
-		$sql = "INSERT INTO
-			".TB_PREFIX."invoices (
-				index_id,
-				domain_id,
-				biller_id, 
-				customer_id, 
-				type_id,
-				preference_id, 
-				date, 
-				note,
-				custom_field1,
-				custom_field2,
-				custom_field3,
-				custom_field4
-			)
-			VALUES
-			(
-				:index_id,
-				:domain_id,
-				:biller_id,
-				:customer_id,
-				:type,
-				:preference_id,
-				:date,
-				:note,
-				:customField1,
-				:customField2,
-				:customField3,
-				:customField4
-				)";
+	if ($db_server == 'pgsql' || $db_server == 'sqlite') {
+		// pgsql/sqlite: omit id column so the sequence/AUTOINCREMENT generates it
+		$sql = "INSERT INTO ".TB_PREFIX."invoices (
+				index_id, domain_id, biller_id, customer_id,
+				type_id, preference_id, date, note,
+				custom_field1, custom_field2, custom_field3, custom_field4
+			) VALUES (
+				:index_id, :domain_id, :biller_id, :customer_id,
+				:type, :preference_id, :date, :note,
+				:customField1, :customField2, :customField3, :customField4
+			)";
+	} else {
+		// MySQL: explicit NULL triggers AUTO_INCREMENT
+		$sql = "INSERT INTO ".TB_PREFIX."invoices (
+				id, index_id, domain_id, biller_id, customer_id,
+				type_id, preference_id, date, note,
+				custom_field1, custom_field2, custom_field3, custom_field4
+			) VALUES (
+				NULL, :index_id, :domain_id, :biller_id, :customer_id,
+				:type, :preference_id, :date, :note,
+				:customField1, :customField2, :customField3, :customField4
+			)";
 	}
 
     $pref_group=getPreference($_POST['preference_id']);
@@ -2526,35 +2478,31 @@ function maxInvoice($domain_id='') {
 //in this file are functions for all sql queries
 function checkTableExists($table = "" ) {
 
-	//$db = db::getInstance();
-	//var_dump($db);
-	$table == "" ? TB_PREFIX."biller" : $table;
+	if ($table == "") $table = TB_PREFIX."biller";
 
-  //  echo $table;
 	global $LANG;
 	global $dbh;
 	global $config;
-	switch ($config->database->adapter) 
+	switch ($config->database->adapter)
 	{
-
 		case "pdo_pgsql":
-			$sql = 'SELECT 1 FROM pg_tables WHERE tablename = '.$table.' LIMIT 1';
+			$sth = $dbh->prepare('SELECT 1 FROM pg_tables WHERE schemaname = current_schema() AND tablename = :table LIMIT 1');
+			$sth->execute(array(':table' => $table));
 			break;
 
 		case "pdo_sqlite":
-			$sql = 'SELECT * FROM '.$table.'LIMIT 1';
+			$sth = $dbh->prepare("SELECT 1 FROM sqlite_master WHERE type='table' AND name = :table LIMIT 1");
+			$sth->execute(array(':table' => $table));
 			break;
+
 		case "pdo_mysql":
 		default:
-		//mysql
-			//$sql = "SELECT 1 FROM INFORMATION_SCHEMA.TABLES where table_name = :table LIMIT 1";
-			$sql = "SHOW TABLES LIKE '".$table."'";
+			$sth = $dbh->prepare("SHOW TABLES LIKE :table");
+			$sth->execute(array(':table' => $table));
 			break;
 	}
 
-	//$sth = $dbh->prepare($sql);
-	$sth = dbQuery($sql);
-	if ($sth->fetchAll())
+	if ($sth && $sth->fetch())
 	{
 		return true;
 	} else {
@@ -2569,10 +2517,13 @@ function checkFieldExists($table,$field) {
 	global $dbh;
 	global $db_server;
 
-	$sql = "SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS WHERE column_name = :field AND table_name = :table LIMIT 1";
 	if ($db_server == 'pgsql') {
-		// Use a nicer syntax
-		$sql = "SELECT 1 FROM pg_attribute a INNER JOIN pg_class c ON (a.attrelid = c.oid)  WHERE c.relkind = 'r' AND c.relname = :table AND a.attname = :field AND NOT a.attisdropped AND a.attnum > 0 LIMIT 1";
+		$sql = "SELECT 1 FROM pg_attribute a INNER JOIN pg_class c ON (a.attrelid = c.oid) WHERE c.relkind = 'r' AND c.relname = :table AND a.attname = :field AND NOT a.attisdropped AND a.attnum > 0 LIMIT 1";
+	} elseif ($db_server == 'sqlite') {
+		// Use pragma_table_info() table-valued function (SQLite 3.16.0+)
+		$sql = "SELECT 1 FROM pragma_table_info(:table) WHERE name = :field LIMIT 1";
+	} else {
+		$sql = "SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS WHERE column_name = :field AND table_name = :table LIMIT 1";
 	}
 
 	$sth = $dbh->prepare($sql);
@@ -2828,9 +2779,12 @@ function runPatches() {
 
 	$display_block = "";
 
-	$sql = "SHOW TABLES LIKE '".TB_PREFIX."sql_patchmanager'";
 	if ($db_server == 'pgsql') {
-		$sql = "SELECT 1 FROM pg_tables WHERE tablename ='".TB_PREFIX."sql_patchmanager'";
+		$sql = "SELECT 1 FROM pg_tables WHERE schemaname = current_schema() AND tablename ='".TB_PREFIX."sql_patchmanager'";
+	} elseif ($db_server == 'sqlite') {
+		$sql = "SELECT 1 FROM sqlite_master WHERE type='table' AND name='".TB_PREFIX."sql_patchmanager'";
+	} else {
+		$sql = "SHOW TABLES LIKE '".TB_PREFIX."sql_patchmanager'";
 	}
 	$sth = dbQuery($sql);
 	$rows = $sth->fetchAll();
@@ -2981,19 +2935,48 @@ function run_sql_patch($id, $patch) {
 
 // ------------------------------------------------------------------------------
 function initialise_sql_patch() {
-	//SC: MySQL-only function, not porting to PostgreSQL
+	global $db_server;
 
-	#check sql patch 1
-	$sql_patch_init = "CREATE TABLE ".TB_PREFIX."sql_patchmanager (sql_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,sql_patch_ref VARCHAR( 50 ) NOT NULL ,sql_patch VARCHAR( 255 ) NOT NULL ,sql_release VARCHAR( 25 ) NOT NULL ,sql_statement TEXT NOT NULL) TYPE = MYISAM ";
+	// Build a portable CREATE TABLE for the patch manager
+	if ($db_server == 'pgsql') {
+		$sql_patch_init = "CREATE TABLE IF NOT EXISTS ".TB_PREFIX."sql_patchmanager (
+			sql_id SERIAL PRIMARY KEY,
+			sql_patch_ref VARCHAR(50) NOT NULL,
+			sql_patch VARCHAR(255) NOT NULL,
+			sql_release VARCHAR(25) NOT NULL,
+			sql_statement TEXT NOT NULL
+		)";
+	} elseif ($db_server == 'sqlite') {
+		$sql_patch_init = "CREATE TABLE IF NOT EXISTS ".TB_PREFIX."sql_patchmanager (
+			sql_id INTEGER PRIMARY KEY AUTOINCREMENT,
+			sql_patch_ref VARCHAR(50) NOT NULL,
+			sql_patch VARCHAR(255) NOT NULL,
+			sql_release VARCHAR(25) NOT NULL,
+			sql_statement TEXT NOT NULL
+		)";
+	} else {
+		// MySQL
+		$sql_patch_init = "CREATE TABLE IF NOT EXISTS ".TB_PREFIX."sql_patchmanager (
+			sql_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+			sql_patch_ref VARCHAR(50) NOT NULL,
+			sql_patch VARCHAR(255) NOT NULL,
+			sql_release VARCHAR(25) NOT NULL,
+			sql_statement TEXT NOT NULL
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
+	}
 	dbQuery($sql_patch_init);
 
 	$log = "Step 2 - The SQL patch table has been created<br />";
 
-	echo $display_block;
-
-	$sql_insert = "INSERT INTO ".TB_PREFIX."sql_patchmanager
- ( sql_id  ,sql_patch_ref , sql_patch , sql_release , sql_statement )
-VALUES ('','1','Create ".TB_PREFIX."sql_patchmanger table','20060514', :patch)";
+	if ($db_server == 'mysql') {
+		$sql_insert = "INSERT INTO ".TB_PREFIX."sql_patchmanager
+			(sql_id, sql_patch_ref, sql_patch, sql_release, sql_statement)
+			VALUES (NULL, '1', 'Create ".TB_PREFIX."sql_patchmanager table', '20060514', :patch)";
+	} else {
+		$sql_insert = "INSERT INTO ".TB_PREFIX."sql_patchmanager
+			(sql_patch_ref, sql_patch, sql_release, sql_statement)
+			VALUES ('1', 'Create ".TB_PREFIX."sql_patchmanager table', '20060514', :patch)";
+	}
 	dbQuery($sql_insert, ':patch', $sql_patch_init);
 
 	$log .= "Step 3 - The SQL patch has been inserted into the SQL patch table<br />";
@@ -3013,12 +2996,13 @@ function patch126() {
 		dbQuery($sql, ':description', $res['description'], ':total', $res['gross_total']);
 		$id = lastInsertId();
 
-		$sql = "UPDATE  ".TB_PREFIX."invoice_items SET product_id = :id, unit_price = :price WHERE ".TB_PREFIX."invoice_items.id = :item";
+		$sql = "UPDATE ".TB_PREFIX."invoice_items SET product_id = :id, unit_price = :price WHERE id = :item AND domain_id = :domain_id";
 
 		dbQuery($sql,
 			':id', $id[0],
 			':price', $res['gross_total'],
-			':item', $res['id']
+			':item', $res['id'],
+			':domain_id', $res['domain_id']
 			);
 	}
 }

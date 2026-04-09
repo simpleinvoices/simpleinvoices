@@ -99,18 +99,19 @@ class cron {
     public function select_all($type='', $dir='DESC', $rp='25', $page='1')
 	{
 		global $LANG;
+		global $db_server;
 		$valid_search_fields = array('iv.id', 'b.name', 'cron.id', 'aging');
 
 		/*SQL Limit - start*/
 		$start = (($page-1) * $rp);
-		$limit = "LIMIT ".$start.", ".$rp;
+		$limit = "LIMIT ".$rp." OFFSET ".$start;
 		/*SQL Limit - end*/
 
 		/*SQL where - start*/
 
 		$where = "";
-		$query = isset($_POST['query']) ? $_POST['query'] : null;
-		$qtype = isset($_POST['qtype']) ? $_POST['qtype'] : null;
+		$query = $_POST['query'] ?? null;
+		$qtype = $_POST['qtype'] ?? null;
 		if ( ! (empty($qtype) || empty($query)) ) {
 			if ( in_array($qtype, $valid_search_fields) ) {
 				$where = " AND $qtype LIKE :query ";
@@ -137,10 +138,11 @@ class cron {
 		}
 
 
+		$cron_index_expr = ($db_server === 'mysql') ? "(SELECT CONCAT(pf.pref_description,' ',iv.index_id))" : "(pf.pref_description || ' ' || CAST(iv.index_id AS TEXT))";
 		$sql = "SELECT
 				cron.*
                 , cron.id as cron_id
-                , (SELECT CONCAT(pf.pref_description,' ',iv.index_id)) as index_name
+                , $cron_index_expr as index_name
 			FROM 
 				".TB_PREFIX."cron cron 
 				INNER JOIN ".TB_PREFIX."invoices iv 
@@ -172,12 +174,14 @@ class cron {
 
     public function select_crons_to_run()
     {
+        global $db_server;
         // Use this function to select crons that need to run each day across all domain_id values
+        $cron_index_expr = ($db_server === 'mysql') ? "(SELECT CONCAT(pf.pref_description,' ',iv.index_id))" : "(pf.pref_description || ' ' || CAST(iv.index_id AS TEXT))";
 
         $sql = "SELECT
                   cron.*
                 , cron.id as cron_id
-                , (SELECT CONCAT(pf.pref_description,' ',iv.index_id)) as index_name
+                , $cron_index_expr as index_name
             FROM 
                 ".TB_PREFIX."cron cron 
                 INNER JOIN ".TB_PREFIX."invoices iv 
@@ -196,11 +200,13 @@ class cron {
 
 	public function select()
 	{
+		global $db_server;
 		global $LANG;
+		$cron_index_expr = ($db_server === 'mysql') ? "(SELECT CONCAT(pf.pref_description,' ',iv.index_id))" : "(pf.pref_description || ' ' || CAST(iv.index_id AS TEXT))";
 
 		$sql = "SELECT
 				cron.*
-                , (SELECT CONCAT(pf.pref_description,' ',iv.index_id)) as index_name
+                , $cron_index_expr as index_name
 			FROM 
 				".TB_PREFIX."cron cron 
 				INNER JOIN ".TB_PREFIX."invoices iv 

@@ -107,6 +107,9 @@ include_once('./include/class/ConfigLoader.php');
 	    $config = ConfigLoader::load('./config/config.php', $environment);
 	}	//added 'true' to allow modifications from db
 
+// Global database adapter type: 'mysql', 'pgsql', or 'sqlite'
+$db_server = substr($config->database->adapter, 4);
+
 //set up app with relevant php setting
 date_default_timezone_set($config->phpSettings->date->timezone);
 $errorReporting = $config->debug->error_reporting;

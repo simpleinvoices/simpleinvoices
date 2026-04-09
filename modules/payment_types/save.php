@@ -7,7 +7,7 @@ checkLogin();
 
 # Deal with op and add some basic sanity checking
 
-$op = !empty( $_POST['op'] ) ? addslashes( $_POST['op'] ) : NULL;
+$op = $_POST['op'] ?? null;
 
 #insert payment type
 
@@ -18,13 +18,13 @@ $sql = "INSERT INTO ".TB_PREFIX."tax VALUES ('$_POST['tax_description']','$_POST
 */
 
 	if ($db_server == 'pgsql') {
-		$sql = "INSERT into ".TB_PREFIX."payment_types
+		$sql = "INSERT INTO ".TB_PREFIX."payment_types
 				(domain_id, pt_description, pt_enabled)
 			VALUES
-				(:domain_id', :description, :enabled)";
+				(:domain_id, :description, :enabled)";
 	} else {
-		$sql = "INSERT into
-				".TB_PREFIX."payment_types
+		// MySQL and SQLite: NULL auto-fills the auto-increment id column
+		$sql = "INSERT INTO ".TB_PREFIX."payment_types
 			VALUES
 				(NULL, :domain_id, :description, :enabled)";
 	}

@@ -56,7 +56,7 @@ class product
         }
         /*SQL Limit - start*/
         $start = (($page-1) * $rp);
-        $limit = "LIMIT $start, $rp";
+        $limit = "LIMIT $rp OFFSET $start";
 
         if($type =="count")
         {
@@ -69,8 +69,8 @@ class product
         }
 
 		$where = "";
-		$query = isset($_POST['query']) ? $_POST['query'] : null;
-		$qtype = isset($_POST['qtype']) ? $_POST['qtype'] : null;
+		$query = $_POST['query'] ?? null;
+		$qtype = $_POST['qtype'] ?? null;
 		if ( ! (empty($qtype) || empty($query)) ) {
 			if ( in_array($qtype, $valid_search_fields) ) {
 				$where = " AND $qtype LIKE :query ";
