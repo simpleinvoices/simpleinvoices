@@ -8,7 +8,7 @@ $refresh_total = "<meta http-equiv='refresh' content='2;url=index.php?module=tax
 
 # Deal with op and add some basic sanity checking
 
-$op = !empty( $_POST['op'] ) ? addslashes( $_POST['op'] ) : NULL;
+$op = $_POST['op'] ?? null;
 $op = isset($_POST['cancel']) ? "cancel" : $op;
 
 switch ($op) {

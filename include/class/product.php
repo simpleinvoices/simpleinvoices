@@ -69,8 +69,8 @@ class product
         }
 
 		$where = "";
-		$query = isset($_POST['query']) ? $_POST['query'] : null;
-		$qtype = isset($_POST['qtype']) ? $_POST['qtype'] : null;
+		$query = $_POST['query'] ?? null;
+		$qtype = $_POST['qtype'] ?? null;
 		if ( ! (empty($qtype) || empty($query)) ) {
 			if ( in_array($qtype, $valid_search_fields) ) {
 				$where = " AND $qtype LIKE :query ";

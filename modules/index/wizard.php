@@ -5,7 +5,7 @@
 
 checkLogin();
 
-$op          = !empty($_POST['op']) ? addslashes($_POST['op']) : null;
+$op          = $_POST['op'] ?? null;
 $json_path   = realpath(__DIR__ . '/../../databases/json/sample_data.json');
 $sample      = ($json_path && file_exists($json_path)) ? json_decode(file_get_contents($json_path), true) : [];
 

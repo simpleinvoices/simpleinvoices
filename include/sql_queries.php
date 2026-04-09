@@ -1500,8 +1500,7 @@ function insertCustomer() {
     global $config;
 	$domain_id = domain_id::get();
 
-	extract( $_POST );
-	$sql = "INSERT INTO 
+	$sql = "INSERT INTO
 			".TB_PREFIX."customers
 			(
 				domain_id, attention, name, department, street_address, street_address2,
@@ -1510,36 +1509,36 @@ function insertCustomer() {
 				custom_field1, custom_field2,
 				custom_field3, custom_field4, enabled
 			)
-			VALUES 
+			VALUES
 			(
 				:domain_id ,:attention, :name, :department, :street_address, :street_address2,
 				:city, :state, :zip_code, :country, :phone, :mobile_phone,
-				:fax, :email, :notes, 
+				:fax, :email, :notes,
 				:custom_field1, :custom_field2,
 				:custom_field3, :custom_field4, :enabled
 			)";
 
 	return dbQuery($sql,
-		':attention', $attention,
-		':name', $name,
-		':department', $department,
-		':street_address', $street_address,
-		':street_address2', $street_address2,
-		':city', $city,
-		':state', $state,
-		':zip_code', $zip_code,
-		':country', $country,
-		':phone', $phone,
-		':mobile_phone', $mobile_phone,
-		':fax', $fax,
-		':email', $email,
-		':notes', $notes,
-		':custom_field1', $custom_field1,
-		':custom_field2', $custom_field2,
-		':custom_field3', $custom_field3,
-		':custom_field4', $custom_field4,
-		':enabled', $enabled,
-		':domain_id',$domain_id
+		':attention',     $_POST['attention']      ?? '',
+		':name',          $_POST['name']           ?? '',
+		':department',    $_POST['department']     ?? '',
+		':street_address',  $_POST['street_address']  ?? '',
+		':street_address2', $_POST['street_address2'] ?? '',
+		':city',          $_POST['city']           ?? '',
+		':state',         $_POST['state']          ?? '',
+		':zip_code',      $_POST['zip_code']       ?? '',
+		':country',       $_POST['country']        ?? '',
+		':phone',         $_POST['phone']          ?? '',
+		':mobile_phone',  $_POST['mobile_phone']   ?? '',
+		':fax',           $_POST['fax']            ?? '',
+		':email',         $_POST['email']          ?? '',
+		':notes',         $_POST['notes']          ?? '',
+		':custom_field1', $_POST['custom_field1']  ?? '',
+		':custom_field2', $_POST['custom_field2']  ?? '',
+		':custom_field3', $_POST['custom_field3']  ?? '',
+		':custom_field4', $_POST['custom_field4']  ?? '',
+		':enabled',       $_POST['enabled']        ?? '',
+		':domain_id',     $domain_id
 		);
 
 }
