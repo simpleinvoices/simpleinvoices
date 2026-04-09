@@ -2985,6 +2985,43 @@ function initialise_sql_patch() {
 }
 
 // ------------------------------------------------------------------------------
+/**
+ * Mark every patch in the $patch array as applied in sql_patchmanager.
+ *
+ * Called after a fresh install from structure.sql so the patch-runner page
+ * never appears on first login. The schema created by structure.sql already
+ * reflects the latest state, so historical migration patches must not re-run.
+ */
+function install_mark_all_patches_done() {
+	global $patch, $db_server;
+
+	if (empty($patch)) {
+		return;
+	}
+
+	foreach ($patch as $id => $p) {
+		if (check_sql_patch($id, $p['name'])) {
+			continue; // already recorded
+		}
+		if ($db_server == 'mysql') {
+			$sql = "INSERT INTO ".TB_PREFIX."sql_patchmanager
+				(sql_id, sql_patch_ref, sql_patch, sql_release, sql_statement)
+				VALUES (NULL, :ref, :name, :date, :sql)";
+		} else {
+			$sql = "INSERT INTO ".TB_PREFIX."sql_patchmanager
+				(sql_patch_ref, sql_patch, sql_release, sql_statement)
+				VALUES (:ref, :name, :date, :sql)";
+		}
+		dbQuery($sql,
+			':ref',  $id,
+			':name', $p['name'],
+			':date', $p['date'],
+			':sql',  $p['patch']
+		);
+	}
+}
+
+// ------------------------------------------------------------------------------
 function patch126() {
 	//SC: MySQL-only function, not porting to PostgreSQL
 	$sql = "SELECT * FROM ".TB_PREFIX."invoice_items WHERE product_id = 0";
