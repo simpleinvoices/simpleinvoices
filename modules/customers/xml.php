@@ -46,8 +46,8 @@ function sql($type='', $start, $dir, $sort, $rp, $page )
 	}
 
 	$where = "";
-	$query = isset($_REQUEST['query']) ? $_REQUEST['query'] : null;
-	$qtype = isset($_REQUEST['qtype']) ? $_REQUEST['qtype'] : null;
+	$query = $_REQUEST['query'] ?? null;
+	$qtype = $_REQUEST['qtype'] ?? null;
 	if ( ! (empty($qtype) || empty($query)) ) {
 		if ( in_array($qtype, $valid_search_fields) ) {
 			$where = " AND $qtype LIKE :query ";

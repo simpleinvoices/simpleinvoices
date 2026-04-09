@@ -21,19 +21,17 @@ function checkLogin() {
 }
 
 function getLogoList() {
-	$dirname="./templates/invoices/logos";
-	$ext = array("jpg", "png", "jpeg", "gif");
-	$files = array();
-	if($handle = opendir($dirname)) {
-		while(false !== ($file = readdir($handle)))
-		for($i=0;$i<sizeof($ext);$i++)
-		if(stristr($file, ".".$ext[$i])) //NOT case sensitive: OK with JpeG, JPG, ecc.
-		$files[] = $file;
-		closedir($handle);
+	$dirname = "./templates/invoices/logos";
+	$allowed = ['jpg', 'png', 'jpeg', 'gif'];
+	$files   = [];
+	if (is_dir($dirname)) {
+		foreach (new DirectoryIterator($dirname) as $fileInfo) {
+			if ($fileInfo->isFile() && in_array(strtolower($fileInfo->getExtension()), $allowed, true)) {
+				$files[] = $fileInfo->getFilename();
+			}
+		}
 	}
-
 	sort($files);
-	
 	return $files;
 }
 
@@ -104,9 +102,9 @@ function dropDown($choiceArray, $defVal) {
 	foreach ($choiceArray as $key => $value)
 	{
 		if ($key == $defVal) {
-			$dropDown .= "\n" . '<OPTION SELECTED style="font-weight: bold" value='.$key.'>'.$value.'</OPTION>';
+			$dropDown .= "\n" . '<option selected style="font-weight: bold" value="'.htmlspecialchars($key, ENT_QUOTES).'">'.$value.'</option>';
 		} else {
-			$dropDown .= "\n" . '<OPTION '.$selected.' value='.$key.'>'.$value.'</OPTION>';
+			$dropDown .= "\n" . '<option value="'.htmlspecialchars($key, ENT_QUOTES).'">'.$value.'</option>';
 		}
 	}
 	$dropDown .= "\n</select>";
