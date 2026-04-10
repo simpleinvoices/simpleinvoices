@@ -22,5 +22,3 @@ $export -> file_location = 'inline';
 $export -> module = 'payment';
 $export -> id = $invoiceID;
 $export -> execute();
-
-?>
