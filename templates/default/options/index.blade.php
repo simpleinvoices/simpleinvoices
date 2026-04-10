@@ -23,7 +23,7 @@
 			</div>
 		</div>
 
-		<h4 class="mb-3">{{ $LANG['invoice_settings'] ?? 'Invoice settings' }}</h4>
+		<h4 class="mb-3">{{ $LANG['invoice_settings'] ?? '' }}</h4>
 		<div class="row row-cards mb-4">
 			<div class="col-md-4">
 				<a href="index.php?module=tax_rates&amp;view=manage" class="card card-link card-link-pop">
@@ -57,7 +57,7 @@
 			</div>
 		</div>
 
-		<h4 class="mb-3">{{ $LANG['database_tools'] ?? 'Database tools' }}</h4>
+		<h4 class="mb-3">{{ $LANG['database_tools'] ?? '' }}</h4>
 		<div class="row row-cards">
 			<div class="col-md-4">
 				<a href="index.php?module=options&amp;view=backup_database" class="card card-link card-link-pop">
@@ -84,7 +84,7 @@
 					<div class="card-body">
 						<div class="d-flex align-items-center">
 							<i class="ti ti-file-description me-2" style="font-size: 2rem;"></i>
-							<div>{{ $LANG['cron_log'] ?? 'Cron log' }}</div>
+							<div>{{ $LANG['cron_log'] ?? '' }}</div>
 						</div>
 					</div>
 				</a>

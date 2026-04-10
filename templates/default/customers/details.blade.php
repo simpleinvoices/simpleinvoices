@@ -17,10 +17,10 @@
 				<a class="nav-link active" href="#cust-view-details" data-bs-toggle="tab" role="tab"><i class="ti ti-info-circle me-1"></i>{{ $LANG['details'] ?? '' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#cust-view-address" data-bs-toggle="tab" role="tab"><i class="ti ti-map-pin me-1"></i>{{ $LANG['address'] ?? 'Address' }}</a>
+				<a class="nav-link" href="#cust-view-address" data-bs-toggle="tab" role="tab"><i class="ti ti-map-pin me-1"></i>{{ $LANG['address'] ?? '' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#cust-view-contact" data-bs-toggle="tab" role="tab"><i class="ti ti-phone me-1"></i>{{ $LANG['contacts'] ?? 'Contacts' }}</a>
+				<a class="nav-link" href="#cust-view-contact" data-bs-toggle="tab" role="tab"><i class="ti ti-phone me-1"></i>{{ $LANG['contacts'] ?? '' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
 				<a class="nav-link" href="#cust-view-custom" data-bs-toggle="tab" role="tab"><i class="ti ti-adjustments me-1"></i>{{ $LANG['custom_fields'] ?? '' }}</a>
@@ -119,7 +119,7 @@
 										<a title="{{ $LANG['process_payment_for'] ?? '' }} {{ $invoice['preference'] }} {{ $invoice['id'] }}" href='index.php?module=payments&view=process&id={{ $invoice['id'] }}&op=pay_selected_invoice' class="btn btn-icon btn-outline-success"><i class="ti ti-currency-dollar"></i></a>
 										<a href="index.php?module=invoices&amp;view=quick_view&id={{ urlencode($invoice['id'] ?? '') }}" class="btn btn-icon btn-outline-primary"><i class="ti ti-eye"></i></a>
 									</td>
-									<td><a href="index.php?module=invoices&amp;view=quick_view&id={{ urlencode($invoice['id'] ?? '') }}">{{ $invoice['pref_inv_wording'] ?? '' }} {{ $invoice['index_id'] ?? '' }}</a></td>
+									<td><a href="index.php?module=invoices&amp;view=quick_view&id={{ urlencode($invoice['id'] ?? '') }}">{{ $invoice['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $invoice['index_id'] ?? '' }}</a></td>
 									<td>{{ $invoice['date'] ?? '' }}</td>
 									<td>{{ number_format($invoice['total'] ?? '', 2) }}</td>
 									<td>{{ number_format($invoice['paid'] ?? '', 2) }}</td>
@@ -147,7 +147,7 @@
 							<tbody>
 							@foreach(($invoices ?? []) as $invoice)
 								<tr class="index_table">
-									<td class="first"><a href="index.php?module=invoices&amp;view=quick_view&id={{ urlencode($invoice['id'] ?? '') }}">{{ $invoice['pref_inv_wording'] ?? '' }} {{ $invoice['index_id'] ?? '' }}</a></td>
+									<td class="first"><a href="index.php?module=invoices&amp;view=quick_view&id={{ urlencode($invoice['id'] ?? '') }}">{{ $invoice['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $invoice['index_id'] ?? '' }}</a></td>
 									<td>{{ $invoice['date'] ?? '' }}</td>
 									<td>{{ number_format($invoice['total'] ?? '', 2) }}</td>
 @if($invoice['status'] > 0)
@@ -171,7 +171,7 @@
 	<div class="card-footer">
 		<div class="d-flex">
 			<a href="./index.php?module=customers&amp;view=manage" class="btn btn-link">{{ $LANG['cancel'] ?? '' }}</a>
-			<a href="./index.php?module=customers&amp;view=details&amp;id={{ urlencode($customer['id'] ?? '') }}&amp;action=edit" class="btn btn-primary ms-auto"><i class="ti ti-edit me-1"></i>{{ $LANG['edit'] ?? 'Edit' }}</a>
+			<a href="./index.php?module=customers&amp;view=details&amp;id={{ urlencode($customer['id'] ?? '') }}&amp;action=edit" class="btn btn-primary ms-auto"><i class="ti ti-edit me-1"></i>{{ $LANG['edit'] ?? '' }}</a>
 		</div>
 	</div>
 </div>
@@ -192,10 +192,10 @@
 				<a class="nav-link active" href="#cust-edit-details" data-bs-toggle="tab" role="tab"><i class="ti ti-info-circle me-1"></i>{{ $LANG['details'] ?? '' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#cust-edit-address" data-bs-toggle="tab" role="tab"><i class="ti ti-map-pin me-1"></i>{{ $LANG['address'] ?? 'Address' }}</a>
+				<a class="nav-link" href="#cust-edit-address" data-bs-toggle="tab" role="tab"><i class="ti ti-map-pin me-1"></i>{{ $LANG['address'] ?? '' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#cust-edit-contact" data-bs-toggle="tab" role="tab"><i class="ti ti-phone me-1"></i>{{ $LANG['contacts'] ?? 'Contacts' }}</a>
+				<a class="nav-link" href="#cust-edit-contact" data-bs-toggle="tab" role="tab"><i class="ti ti-phone me-1"></i>{{ $LANG['contacts'] ?? '' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
 				<a class="nav-link" href="#cust-edit-custom" data-bs-toggle="tab" role="tab"><i class="ti ti-adjustments me-1"></i>{{ $LANG['custom_fields'] ?? '' }}</a>

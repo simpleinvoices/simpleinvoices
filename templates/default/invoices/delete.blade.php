@@ -21,7 +21,7 @@
     	    @if($invoicePaid == 0)
 				<div class="card">
 					<div class="card-body">
-						<p>{{ $LANG['confirm_delete'] ?? '' }} {{ $preference['pref_inv_wording'] ?? '' }} {{ $invoice['index_id'] ?? '' }}</p>
+						<p>{{ $LANG['confirm_delete'] ?? '' }} {{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $invoice['index_id'] ?? '' }}</p>
 						<form name="frmpost" action="index.php?module=invoices&amp;view=delete&amp;stage=2&amp;id={{ urlencode(get('id')) }}" method="post">
 							<div class="btn-list">
 								<button type="submit" class="btn btn-danger" name="submit">
@@ -39,7 +39,7 @@
 	
 	        @if($invoicePaid != 0)
 				<div class="alert alert-warning">
-					{{ $preference['pref_inv_wording'] ?? '' }} {{ $invoice['index_id'] ?? '' }} {{ $LANG['delete_has_payments1'] ?? '' }} {{ $preference['pref_currency_sign'] }} {{ siLocal::number($invoicePaid ?? 0) }} {{ $LANG['delete_has_payments2'] ?? '' }}
+					{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $invoice['index_id'] ?? '' }} {{ $LANG['delete_has_payments1'] ?? '' }} {{ $preference['pref_currency_sign'] }} {{ siLocal::number($invoicePaid ?? 0) }} {{ $LANG['delete_has_payments2'] ?? '' }}
 				</div>
     	    @endif
 
@@ -48,7 +48,7 @@
 @if(get('stage') == 2 )
 
 	<div class="alert alert-success">
-		{{ $preference['pref_inv_wording'] ?? '' }} {{ $id ?? '' }} {{ $LANG['deleted'] ?? '' }}
+		{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $id ?? '' }} {{ $LANG['deleted'] ?? '' }}
 	</div>
 
 @endif

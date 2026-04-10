@@ -11,16 +11,20 @@
 
 	<input type="hidden" name="action" value="insert" />
 
-	<div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
-		<ul class="nav nav-tabs" role="tablist">
-			<li class="nav-item" role="presentation">
-				<a class="nav-link @if(($view ?? '') == 'itemised') active @endif" href="index.php?module=invoices&amp;view=itemised" role="tab"><i class="ti ti-list-details me-1"></i>{{ $LANG['itemised_style'] ?? '' }}</a>
-			</li>
-			<li class="nav-item" role="presentation">
-				<a class="nav-link @if(($view ?? '') == 'total') active @endif" href="index.php?module=invoices&amp;view=total" role="tab"><i class="ti ti-receipt me-1"></i>{{ $LANG['total_style'] ?? '' }}</a>
-			</li>
-		</ul>
-		<a class="cluetip nav-link nav-link-icon" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_invoice_types" title="{{ $LANG['invoice_type'] ?? '' }}"><i class="ti ti-help"></i></a>
+	@php
+		$siInvoiceSegItemised = (($subPageActive ?? '') === 'invoice_new_itemised') || (($view ?? '') === 'itemised');
+		$siInvoiceSegTotal = (($subPageActive ?? '') === 'invoice_new_total') || (($view ?? '') === 'total');
+	@endphp
+	<div class="d-flex align-items-center flex-wrap gap-2 mb-3" role="group" @if(!empty($LANG['invoice_type'])) aria-label="{{ $LANG['invoice_type'] }}" @endif>
+		<div class="segmented-control segmented-control-btn">
+			<a class="segmented-control-item @if($siInvoiceSegItemised) active @endif" href="index.php?module=invoices&amp;view=itemised" @if($siInvoiceSegItemised) aria-current="page" @endif>
+				<span class="segmented-control-label"><i class="ti ti-list-details me-1"></i>{{ $LANG['itemised_style'] ?? '' }}</span>
+			</a>
+			<a class="segmented-control-item @if($siInvoiceSegTotal) active @endif" href="index.php?module=invoices&amp;view=total" @if($siInvoiceSegTotal) aria-current="page" @endif>
+				<span class="segmented-control-label"><i class="ti ti-receipt me-1"></i>{{ $LANG['total_style'] ?? '' }}</span>
+			</a>
+		</div>
+		<a class="cluetip text-secondary" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_invoice_types" title="{{ $LANG['invoice_type'] ?? '' }}" aria-label="{{ $LANG['invoice_type'] ?? '' }}"><i class="ti ti-help"></i></a>
 	</div>
 
 	<div class="row g-3 mb-3">

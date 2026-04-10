@@ -19,7 +19,7 @@
 		{{-- Invoice header: number, date, biller, customer --}}
 		<div class="row g-3 mb-3">
 			<div class="col-md-2">
-				<label class="form-label">{{ $preference['pref_inv_wording'] ?? '' }} {{ $LANG['number_short'] ?? '' }}</label>
+				<label class="form-label">{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['number_short'] ?? '' }}</label>
 				<div class="form-control-plaintext fw-bold">{{ $invoice['index_id'] ?? '' }}</div>
 			</div>
 			<div class="col-md-2">
@@ -191,12 +191,12 @@
 						</div>
 						<div class="col-auto d-flex align-items-end">
 							<div class="segmented-control segmented-control-sm">
-								<label class="segmented-control-item si-expand-desc" title="{{ $LANG['description'] ?? 'Description' }}">
+								<label class="segmented-control-item si-expand-desc" title="{{ $LANG['description'] ?? '' }}">
 									<input type="checkbox" class="segmented-control-input" {{ $itemHasDesc ? 'checked' : '' }}>
 									<span class="segmented-control-label"><i class="ti {{ $itemHasDesc ? 'ti-chevron-up' : 'ti-chevron-down' }}"></i></span>
 								</label>
 								@if($line == 0)
-								<label class="segmented-control-item si-toggle-all-desc" title="{{ $LANG['show_all'] ?? 'Show all' }}">
+								<label class="segmented-control-item si-toggle-all-desc" title="{{ $LANG['show_all'] ?? '' }}">
 									<input type="radio" class="segmented-control-input" {{ $showDetailsInitially ? 'checked' : '' }}>
 									<span class="segmented-control-label"><i class="ti {{ $showDetailsInitially ? 'ti-chevrons-up' : 'ti-chevrons-down' }}"></i></span>
 								</label>

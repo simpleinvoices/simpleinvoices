@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>{{ $LANG['payment'] ?? 'Payment' }} {{ $LANG['receipt'] ?? 'Receipt' }} – #{{ $payment['id'] ?? '' }}</title>
+	<title>{{ $LANG['payment'] ?? '' }} {{ $LANG['receipt'] ?? '' }} – #{{ $payment['id'] ?? '' }}</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -45,14 +45,14 @@
 				@endif
 			</div>
 			<div class="si-print-title">
-				{{ $LANG['payment'] ?? 'Payment' }} {{ $LANG['receipt'] ?? 'Receipt' }} #{{ $payment['id'] ?? '' }}
+				{{ $LANG['payment'] ?? '' }} {{ $LANG['receipt'] ?? '' }} #{{ $payment['id'] ?? '' }}
 			</div>
 		</div>
 
 		{{-- Company (biller) and Client (customer) – two columns --}}
 		<div class="si-print-two-col">
 			<div>
-				<div class="si-print-label">{{ $LANG['biller'] ?? 'Company' }}</div>
+				<div class="si-print-label">{{ $LANG['biller'] ?? '' }}</div>
 				<div class="si-print-name">{{ $biller['name'] ?? '' }}</div>
 				<div class="si-print-address">
 					@if(!empty($biller['street_address'])){{ $biller['street_address'] ?? '' }}<br />@endif
@@ -65,40 +65,40 @@
 				</div>
 			</div>
 			<div>
-				<div class="si-print-label">{{ $LANG['customer'] ?? 'Client' }}</div>
+				<div class="si-print-label">{{ $LANG['customer'] ?? '' }}</div>
 				<div class="si-print-name">{{ $customer['name'] ?? '' }}</div>
 				<div class="si-print-address">
-					@if(!empty($customer['attention'])){{ $LANG['attention_short'] ?? 'Attn' }}: {{ $customer['attention'] ?? '' }}<br />@endif
+					@if(!empty($customer['attention'])){{ $LANG['attention_short'] ?? '' }}: {{ $customer['attention'] ?? '' }}<br />@endif
 					@if(!empty($customer['street_address'])){{ $customer['street_address'] ?? '' }}<br />@endif
 					@if(!empty($customer['street_address2'])){{ $customer['street_address2'] ?? '' }}<br />@endif
 					@if(!empty($customer['city']) || !empty($customer['state']) || !empty($customer['zip_code']))
 						{{ $customer['city'] ?? '' }}{{ !empty($customer['city']) && (!empty($customer['state']) || !empty($customer['zip_code'])) ? ', ' : '' }}{{ $customer['state'] ?? '' }}{{ !empty($customer['state']) && !empty($customer['zip_code']) ? ' ' : '' }}{{ $customer['zip_code'] ?? '' }}<br />
 					@endif
 					@if(!empty($customer['country'])){{ $customer['country'] ?? '' }}<br />@endif
-					@if(!empty($customer['phone'])){{ $LANG['phone_short'] ?? 'Phone' }}: {{ $customer['phone'] ?? '' }}<br />@endif
+					@if(!empty($customer['phone'])){{ $LANG['phone_short'] ?? '' }}: {{ $customer['phone'] ?? '' }}<br />@endif
 					@if(!empty($customer['email'])){{ $customer['email'] ?? '' }}@endif
 				</div>
 			</div>
 		</div>
 
 		{{-- Payment reference --}}
-		<h2 class="si-print-h2">{{ $LANG['payment'] ?? 'Payment' }} #{{ $payment['id'] ?? '' }}</h2>
+		<h2 class="si-print-h2">{{ $LANG['payment'] ?? '' }} #{{ $payment['id'] ?? '' }}</h2>
 
 		{{-- Payment details table --}}
 		<table class="si-print-table">
 			<thead>
 				<tr>
-					<th>{{ $LANG['payment_id'] ?? 'ID' }}</th>
-					<th>{{ $preference['pref_inv_wording'] ?? 'Invoice' }} {{ $LANG['id'] ?? '' }}</th>
-					<th>{{ $LANG['date_upper'] ?? 'Date' }}</th>
-					<th>{{ $LANG['payment_type'] ?? 'Type' }}</th>
-					<th class="text-end">{{ $LANG['amount'] ?? 'Amount' }}</th>
+					<th>{{ $LANG['payment_id'] ?? '' }}</th>
+					<th>{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['id'] ?? '' }}</th>
+					<th>{{ $LANG['date_upper'] ?? '' }}</th>
+					<th>{{ $LANG['payment_type'] ?? '' }}</th>
+					<th class="text-end">{{ $LANG['amount'] ?? '' }}</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
 					<td>{{ $payment['id'] ?? '' }}</td>
-					<td>{{ $preference['pref_inv_wording'] ?? 'Invoice' }} {{ $invoice['index_id'] ?? $payment['ac_inv_id'] ?? '' }}</td>
+					<td>{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $invoice['index_id'] ?? $payment['ac_inv_id'] ?? '' }}</td>
 					<td>{{ $payment['date'] ?? '' }}</td>
 					<td>{{ $paymentType['pt_description'] ?? '' }}</td>
 					<td class="text-end">{{ $preference['pref_currency_sign'] ?? '' }}{{ siLocal::number($payment['ac_amount'] ?? 0) }}</td>
@@ -108,19 +108,19 @@
 
 		{{-- Total --}}
 		<div class="si-print-total">
-			<span class="text-secondary">{{ $LANG['amount'] ?? 'Amount' }}</span>
+			<span class="text-secondary">{{ $LANG['amount'] ?? '' }}</span>
 			<span class="amount">{{ $preference['pref_currency_sign'] ?? '' }}{{ siLocal::number($payment['ac_amount'] ?? 0) }}</span>
 		</div>
 
 		@if(!empty($payment['online_payment_id']))
 			<div class="si-print-address mt-2" style="font-size: 0.8125rem;">
-				{{ $LANG['online_payment_id'] ?? 'Online Payment ID' }}: {{ $payment['online_payment_id'] ?? '' }}
+				{{ $LANG['online_payment_id'] ?? '' }}: {{ $payment['online_payment_id'] ?? '' }}
 			</div>
 		@endif
 
 		@if(!empty($payment['ac_notes']))
 			<div class="si-print-notes">
-				<div class="si-print-notes-title">{{ $LANG['notes'] ?? 'Notes' }}</div>
+				<div class="si-print-notes-title">{{ $LANG['notes'] ?? '' }}</div>
 				<div>{!! outhtml($payment['ac_notes'] ?? '') !!}</div>
 			</div>
 		@endif

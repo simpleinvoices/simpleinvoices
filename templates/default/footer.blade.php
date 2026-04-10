@@ -1,14 +1,14 @@
         </div>{{-- /container-xl --}}
     </div>{{-- /page-body --}}
     @php
-        $appName = $config->app?->name ?? $LANG['simple_invoices'] ?? 'Simple Invoices';
+        $appName = $config->app?->name ?? ($LANG['simple_invoices'] ?? '');
         $appWebsite = $config->app?->website ?? 'http://www.simpleinvoices.org';
-        $footerText = $config->app?->footer_text ?? ($LANG['thank_you_inv'] ?? 'Thank you for using');
+        $footerText = $config->app?->footer_text ?? ($LANG['thank_you_for_using'] ?? '');
         $footerLinks = [
             ['label' => $config->app?->footer_link1_label ?? $appName, 'url' => $config->app?->footer_link1_url ?? $appWebsite],
-            ['label' => $config->app?->footer_link2_label ?? ($LANG['forum'] ?? 'Forum'), 'url' => $config->app?->footer_link2_url ?? 'http://www.simpleinvoices.org/+'],
-            ['label' => $config->app?->footer_link3_label ?? ($LANG['blog'] ?? 'Blog'), 'url' => $config->app?->footer_link3_url ?? 'http://www.simpleinvoices.org/blog'],
-            ['label' => $config->app?->footer_link4_label ?? ($LANG['support'] ?? 'Support'), 'url' => $config->app?->footer_link4_url ?? 'http://www.simpleinvoices.org/forum'],
+            ['label' => $config->app?->footer_link2_label ?? ($LANG['forum'] ?? ''), 'url' => $config->app?->footer_link2_url ?? 'http://www.simpleinvoices.org/+'],
+            ['label' => $config->app?->footer_link3_label ?? ($LANG['blog'] ?? ''), 'url' => $config->app?->footer_link3_url ?? 'http://www.simpleinvoices.org/blog'],
+            ['label' => $config->app?->footer_link4_label ?? ($LANG['support'] ?? ''), 'url' => $config->app?->footer_link4_url ?? 'http://www.simpleinvoices.org/forum'],
         ];
     @endphp
     <footer class="footer footer-transparent d-print-none">
@@ -40,23 +40,23 @@
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="si_preview_modal_label">Preview</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="si_preview_modal_label">{{ $LANG['preview'] ?? '' }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ $LANG['close'] ?? '' }}"></button>
             </div>
             <div class="modal-body p-0">
                 <iframe id="si_preview_iframe" src="about:blank" style="width:100%;height:72vh;border:0;display:block;"></iframe>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn" data-bs-dismiss="modal">{{ $LANG['close'] ?? '' }}</button>
                 <div class="ms-auto d-flex gap-2">
                     <a href="#" id="si_preview_newtab_link" target="_blank" rel="noopener" class="btn btn-outline-secondary">
-                        <i class="ti ti-external-link me-1"></i>Open in new tab
+                        <i class="ti ti-external-link me-1"></i>{{ $LANG['open_in_new_tab'] ?? '' }}
                     </a>
                     <a href="#" id="si_preview_pdf_link" target="_blank" rel="noopener" class="btn btn-outline-danger d-none">
-                        <i class="ti ti-file-type-pdf me-1"></i>PDF
+                        <i class="ti ti-file-type-pdf me-1"></i>{{ $LANG['pdf'] ?? '' }}
                     </a>
                     <button type="button" class="btn btn-outline-primary" onclick="var f=document.getElementById('si_preview_iframe');if(f&&f.contentWindow)f.contentWindow.print();">
-                        <i class="ti ti-printer me-1"></i>Print
+                        <i class="ti ti-printer me-1"></i>{{ $LANG['print_action'] ?? '' }}
                     </button>
                 </div>
             </div>
@@ -70,7 +70,7 @@ function siPreviewModal(url, title, pdfUrl) {
     var newTab  = document.getElementById('si_preview_newtab_link');
     var pdfLink = document.getElementById('si_preview_pdf_link');
     var titleEl = document.getElementById('si_preview_modal_label');
-    if (titleEl) titleEl.textContent = title || 'Preview';
+    if (titleEl) titleEl.textContent = title || @json($LANG['preview'] ?? '');
     if (newTab)  newTab.href = url;
     if (iframe)  iframe.src  = url;
     if (pdfLink) {

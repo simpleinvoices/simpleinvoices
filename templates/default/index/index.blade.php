@@ -50,19 +50,19 @@
 
     {{-- Header --}}
     <div class="card-header">
-        <h3 class="card-title"><i class="ti ti-rocket me-2"></i>{{ $LANG['getting_started'] ?? 'Getting Started' }}</h3>
+        <h3 class="card-title"><i class="ti ti-rocket me-2"></i>{{ $LANG['getting_started'] ?? '' }}</h3>
     </div>
 
     {{-- Step progress indicator --}}
     <div class="card-body pb-0">
-        <p class="text-secondary mb-3">{{ $LANG['first_run_intro'] ?? 'Welcome! Complete these steps to start invoicing:' }}</p>
+        <p class="text-secondary mb-3">{{ $LANG['first_run_intro'] ?? '' }}</p>
         {{-- Step progress indicator --}}
         <div class="d-flex align-items-center gap-2 mb-3 flex-wrap">
             @foreach([
-                1 => ['label' => $LANG['wizard_your_details'] ?? 'Your Details', 'done' => $hasBillers],
-                2 => ['label' => $LANG['customer'] ?? 'Customer',                'done' => $hasCustomers],
-                3 => ['label' => $LANG['product'] ?? 'Product',                  'done' => $hasProducts],
-                4 => ['label' => $LANG['invoice'] ?? 'Invoice',                  'done' => $hasInvoices],
+                1 => ['label' => $LANG['wizard_your_details'] ?? '', 'done' => $hasBillers],
+                2 => ['label' => $LANG['customer'] ?? '',                'done' => $hasCustomers],
+                3 => ['label' => $LANG['product'] ?? '',                  'done' => $hasProducts],
+                4 => ['label' => $LANG['invoice'] ?? '',                  'done' => $hasInvoices],
             ] as $s => $sc)
             @php
                 $sDone   = $sc['done'];
@@ -94,10 +94,10 @@
     <div class="card-header" style="border-top:1px solid var(--tblr-border-color);">
         <ul class="nav nav-tabs card-header-tabs wizard-tabs" role="tablist">
             @foreach([
-                1 => ['icon' => 'ti-building-store', 'label' => $LANG['wizard_your_details'] ?? 'Your Details',      'done' => $hasBillers],
-                2 => ['icon' => 'ti-users',           'label' => $LANG['customer'] ?? 'Customer',                    'done' => $hasCustomers],
-                3 => ['icon' => 'ti-package',         'label' => $LANG['product'] ?? 'Product',                      'done' => $hasProducts],
-                4 => ['icon' => 'ti-file-invoice',    'label' => $LANG['wizard_create_invoice'] ?? 'Create Invoice',  'done' => $hasInvoices],
+                1 => ['icon' => 'ti-building-store', 'label' => $LANG['wizard_your_details'] ?? '',      'done' => $hasBillers],
+                2 => ['icon' => 'ti-users',           'label' => $LANG['customer'] ?? '',                    'done' => $hasCustomers],
+                3 => ['icon' => 'ti-package',         'label' => $LANG['product'] ?? '',                      'done' => $hasProducts],
+                4 => ['icon' => 'ti-file-invoice',    'label' => $LANG['wizard_create_invoice'] ?? '',  'done' => $hasInvoices],
             ] as $step => $cfg)
             <li class="nav-item" role="presentation">
                 <a class="nav-link @if($wizardStep == $step) active @endif"
@@ -109,7 +109,7 @@
                     @endif
                     <span class="d-none d-sm-inline">{{ $cfg['label'] }}</span>
                     @if($cfg['done'])
-                        <span class="badge bg-success-lt text-success ms-1 d-none d-sm-inline" style="font-size:.7rem">{{ $LANG['wizard_done_badge'] ?? 'Done' }}</span>
+                        <span class="badge bg-success-lt text-success ms-1 d-none d-sm-inline" style="font-size:.7rem">{{ $LANG['wizard_done_badge'] ?? '' }}</span>
                     @endif
                 </a>
             </li>
@@ -130,10 +130,10 @@
                     <div class="d-flex align-items-center gap-3 py-2">
                         <span class="avatar avatar-lg bg-success-lt rounded"><i class="ti ti-check fs-2 text-success"></i></span>
                         <div>
-                            <div class="fw-bold text-success fs-4">{{ $LANG['wizard_biller_ready'] ?? 'Your billing details are set up!' }}</div>
-                            <p class="text-secondary mb-2">{{ $LANG['wizard_biller_ready_tagline'] ?? 'Your biller is ready. You can update your details any time.' }}</p>
+                            <div class="fw-bold text-success fs-4">{{ $LANG['wizard_biller_ready'] ?? '' }}</div>
+                            <p class="text-secondary mb-2">{{ $LANG['wizard_biller_ready_tagline'] ?? '' }}</p>
                             <a href="index.php?module=billers&amp;view=manage" class="btn btn-sm btn-outline-success">
-                                <i class="ti ti-settings me-1"></i>{{ $LANG['manage_billers'] ?? 'Manage Billers' }}
+                                <i class="ti ti-settings me-1"></i>{{ $LANG['manage_billers'] ?? '' }}
                             </a>
                         </div>
                     </div>
@@ -151,19 +151,19 @@
                                             <i class="ti ti-building-store text-primary"></i>
                                         </span>
                                         <div>
-                                            <h4 class="mb-1">{{ $LANG['wizard_add_your_details'] ?? 'Add Your Details' }}</h4>
+                                            <h4 class="mb-1">{{ $LANG['wizard_add_your_details'] ?? '' }}</h4>
                                             <p class="text-secondary mb-0" style="font-size:.875rem">
-                                                {{ $LANG['wizard_biller_description'] ?? 'A Biller represents you or your business - the entity that creates and sends invoices. Your name, address, and contact info will appear on every invoice you generate.' }}
+                                                {{ $LANG['wizard_biller_description'] ?? '' }}
                                             </p>
                                         </div>
                                     </div>
                                     <hr class="my-3">
-                                    <p class="text-secondary small mb-2">{{ $LANG['wizard_try_sample'] ?? 'Just want to try it out first?' }}</p>
+                                    <p class="text-secondary small mb-2">{{ $LANG['wizard_try_sample'] ?? '' }}</p>
                                     <button type="button" class="btn btn-sm btn-outline-secondary w-100"
                                             onclick="wizardFill('biller')">
-                                        <i class="ti ti-wand me-1"></i>{{ $LANG['wizard_use_sample_biller'] ?? 'Use sample biller data' }}
+                                        <i class="ti ti-wand me-1"></i>{{ $LANG['wizard_use_sample_biller'] ?? '' }}
                                     </button>
-                                    <p class="text-muted small mt-2 mb-0">{{ $LANG['wizard_prefills_form'] ?? 'Pre-fills the form - edit before saving.' }}</p>
+                                    <p class="text-muted small mt-2 mb-0">{{ $LANG['wizard_prefills_form'] ?? '' }}</p>
                                 </div>
                             </div>
                         </div>
@@ -192,45 +192,45 @@
                                 <div class="row g-3">
                                     <div class="col-12">
                                         <label class="form-label fw-bold">
-                                            {{ $LANG['wizard_business_name'] ?? 'Business / Your Name' }} <i class="ti ti-asterisk text-danger" style="font-size:.7rem"></i>
+                                            {{ $LANG['wizard_business_name'] ?? '' }} <i class="ti ti-asterisk text-danger" style="font-size:.7rem"></i>
                                         </label>
-                                        <input type="text" name="name" class="form-control" placeholder="e.g. Acme Consulting" required>
+                                        <input type="text" name="name" class="form-control" placeholder="{{ $LANG['placeholder_biller_name_example'] ?? '' }}" required>
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">{{ $LANG['email'] ?? 'Email' }}</label>
-                                        <input type="email" name="email" class="form-control" placeholder="you@example.com">
+                                        <label class="form-label">{{ $LANG['email'] ?? '' }}</label>
+                                        <input type="email" name="email" class="form-control" placeholder="{{ $LANG['placeholder_email_example'] ?? '' }}">
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">{{ $LANG['phone'] ?? 'Phone' }}</label>
-                                        <input type="text" name="phone" class="form-control" placeholder="+1 555 000 0000">
+                                        <label class="form-label">{{ $LANG['phone'] ?? '' }}</label>
+                                        <input type="text" name="phone" class="form-control" placeholder="{{ $LANG['placeholder_phone_example'] ?? '' }}">
                                     </div>
                                     <div class="col-12">
-                                        <label class="form-label">{{ $LANG['street'] ?? 'Street Address' }}</label>
-                                        <input type="text" name="street_address" class="form-control" placeholder="123 Main Street">
+                                        <label class="form-label">{{ $LANG['street'] ?? '' }}</label>
+                                        <input type="text" name="street_address" class="form-control" placeholder="{{ $LANG['placeholder_street_example'] ?? '' }}">
                                     </div>
                                     <div class="col-md-5">
-                                        <label class="form-label">{{ $LANG['city'] ?? 'City' }}</label>
-                                        <input type="text" name="city" class="form-control" placeholder="City">
+                                        <label class="form-label">{{ $LANG['city'] ?? '' }}</label>
+                                        <input type="text" name="city" class="form-control" placeholder="{{ $LANG['placeholder_city_example'] ?? '' }}">
                                     </div>
                                     <div class="col-md-3">
-                                        <label class="form-label">{{ $LANG['wizard_state_region'] ?? 'State / Region' }}</label>
-                                        <input type="text" name="state" class="form-control" placeholder="State">
+                                        <label class="form-label">{{ $LANG['wizard_state_region'] ?? '' }}</label>
+                                        <input type="text" name="state" class="form-control" placeholder="{{ $LANG['placeholder_state_example'] ?? '' }}">
                                     </div>
                                     <div class="col-md-4">
-                                        <label class="form-label">{{ $LANG['postcode'] ?? 'Postcode' }}</label>
-                                        <input type="text" name="zip_code" class="form-control" placeholder="ZIP / Postcode">
+                                        <label class="form-label">{{ $LANG['postcode'] ?? '' }}</label>
+                                        <input type="text" name="zip_code" class="form-control" placeholder="{{ $LANG['placeholder_zip_example'] ?? '' }}">
                                     </div>
                                     <div class="col-12">
-                                        <label class="form-label">{{ $LANG['country'] ?? 'Country' }}</label>
-                                        <input type="text" name="country" class="form-control" placeholder="Country">
+                                        <label class="form-label">{{ $LANG['country'] ?? '' }}</label>
+                                        <input type="text" name="country" class="form-control" placeholder="{{ $LANG['placeholder_country_example'] ?? '' }}">
                                     </div>
                                 </div>
                                 <div class="mt-4 d-flex justify-content-between align-items-center">
                                     <a href="index.php?module=billers&amp;view=add" class="text-secondary small">
-                                        <i class="ti ti-external-link me-1"></i>{{ $LANG['wizard_full_biller_form'] ?? 'Full biller form (more options)' }}
+                                        <i class="ti ti-external-link me-1"></i>{{ $LANG['wizard_full_biller_form'] ?? '' }}
                                     </a>
                                     <button type="submit" name="submit" value="save" class="btn btn-primary">
-                                        {{ $LANG['wizard_save_details'] ?? 'Save Your Details' }} <i class="ti ti-arrow-right ms-1"></i>
+                                        {{ $LANG['wizard_save_details'] ?? '' }} <i class="ti ti-arrow-right ms-1"></i>
                                     </button>
                                 </div>
                             </form>
@@ -247,10 +247,10 @@
                     <div class="d-flex align-items-center gap-3 py-2">
                         <span class="avatar avatar-lg bg-success-lt rounded"><i class="ti ti-check fs-2 text-success"></i></span>
                         <div>
-                            <div class="fw-bold text-success fs-4">{{ $LANG['wizard_customer_ready'] ?? 'At least one customer is set up!' }}</div>
-                            <p class="text-secondary mb-2">{{ $LANG['wizard_customer_ready_tagline'] ?? 'You can add more customers any time.' }}</p>
+                            <div class="fw-bold text-success fs-4">{{ $LANG['wizard_customer_ready'] ?? '' }}</div>
+                            <p class="text-secondary mb-2">{{ $LANG['wizard_customer_ready_tagline'] ?? '' }}</p>
                             <a href="index.php?module=customers&amp;view=manage" class="btn btn-sm btn-outline-success">
-                                <i class="ti ti-settings me-1"></i>{{ $LANG['manage_customers'] ?? 'Manage Customers' }}
+                                <i class="ti ti-settings me-1"></i>{{ $LANG['manage_customers'] ?? '' }}
                             </a>
                         </div>
                     </div>
@@ -268,19 +268,19 @@
                                             <i class="ti ti-users text-blue"></i>
                                         </span>
                                         <div>
-                                            <h4 class="mb-1">{{ $LANG['wizard_add_a_customer'] ?? 'Add a Customer' }}</h4>
+                                            <h4 class="mb-1">{{ $LANG['wizard_add_a_customer'] ?? '' }}</h4>
                                             <p class="text-secondary mb-0" style="font-size:.875rem">
-                                                {{ $LANG['wizard_customer_description'] ?? 'Customers are the people or businesses you invoice. Add at least one so you can assign them to invoices. You can add as many as you need.' }}
+                                                {{ $LANG['wizard_customer_description'] ?? '' }}
                                             </p>
                                         </div>
                                     </div>
                                     <hr class="my-3">
-                                    <p class="text-secondary small mb-2">{{ $LANG['wizard_try_sample'] ?? 'Just want to try it out first?' }}</p>
+                                    <p class="text-secondary small mb-2">{{ $LANG['wizard_try_sample'] ?? '' }}</p>
                                     <button type="button" class="btn btn-sm btn-outline-secondary w-100"
                                             onclick="wizardFill('customer')">
-                                        <i class="ti ti-wand me-1"></i>{{ $LANG['wizard_use_sample_customer'] ?? 'Use sample customer data' }}
+                                        <i class="ti ti-wand me-1"></i>{{ $LANG['wizard_use_sample_customer'] ?? '' }}
                                     </button>
-                                    <p class="text-muted small mt-2 mb-0">{{ $LANG['wizard_sample_replace_later'] ?? 'You can edit or replace sample data later.' }}</p>
+                                    <p class="text-muted small mt-2 mb-0">{{ $LANG['wizard_sample_replace_later'] ?? '' }}</p>
                                 </div>
                             </div>
                         </div>
@@ -306,41 +306,41 @@
                                 <div class="row g-3">
                                     <div class="col-12">
                                         <label class="form-label fw-bold">
-                                            {{ $LANG['customer_name'] ?? 'Customer Name' }} <i class="ti ti-asterisk text-danger" style="font-size:.7rem"></i>
+                                            {{ $LANG['customer_name'] ?? '' }} <i class="ti ti-asterisk text-danger" style="font-size:.7rem"></i>
                                         </label>
-                                        <input type="text" name="name" class="form-control" placeholder="e.g. Acme Corp" required>
+                                        <input type="text" name="name" class="form-control" placeholder="{{ $LANG['placeholder_customer_name_example'] ?? '' }}" required>
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">{{ $LANG['contact_person'] ?? 'Contact Person' }}</label>
-                                        <input type="text" name="attention" class="form-control" placeholder="e.g. Jane Smith">
+                                        <label class="form-label">{{ $LANG['contact_person'] ?? '' }}</label>
+                                        <input type="text" name="attention" class="form-control" placeholder="{{ $LANG['placeholder_contact_person_example'] ?? '' }}">
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">{{ $LANG['customer_department'] ?? 'Department' }}</label>
-                                        <input type="text" name="department" class="form-control" placeholder="e.g. Accounts">
+                                        <label class="form-label">{{ $LANG['customer_department'] ?? '' }}</label>
+                                        <input type="text" name="department" class="form-control" placeholder="{{ $LANG['placeholder_department_example'] ?? '' }}">
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">{{ $LANG['email'] ?? 'Email' }}</label>
-                                        <input type="email" name="email" class="form-control" placeholder="accounts@example.com">
+                                        <label class="form-label">{{ $LANG['email'] ?? '' }}</label>
+                                        <input type="email" name="email" class="form-control" placeholder="{{ $LANG['placeholder_customer_email_example'] ?? '' }}">
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">{{ $LANG['phone'] ?? 'Phone' }}</label>
-                                        <input type="text" name="phone" class="form-control" placeholder="+1 555 000 0000">
+                                        <label class="form-label">{{ $LANG['phone'] ?? '' }}</label>
+                                        <input type="text" name="phone" class="form-control" placeholder="{{ $LANG['placeholder_phone_example'] ?? '' }}">
                                     </div>
                                     <div class="col-12">
-                                        <label class="form-label">{{ $LANG['street'] ?? 'Street Address' }}</label>
-                                        <input type="text" name="street_address" class="form-control" placeholder="123 Business Rd">
+                                        <label class="form-label">{{ $LANG['street'] ?? '' }}</label>
+                                        <input type="text" name="street_address" class="form-control" placeholder="{{ $LANG['placeholder_street_business_example'] ?? '' }}">
                                     </div>
                                     <div class="col-md-8">
-                                        <label class="form-label">{{ $LANG['city'] ?? 'City' }}</label>
-                                        <input type="text" name="city" class="form-control" placeholder="City">
+                                        <label class="form-label">{{ $LANG['city'] ?? '' }}</label>
+                                        <input type="text" name="city" class="form-control" placeholder="{{ $LANG['placeholder_city_example'] ?? '' }}">
                                     </div>
                                 </div>
                                 <div class="mt-4 d-flex justify-content-between align-items-center">
                                     <a href="index.php?module=customers&amp;view=add" class="text-secondary small">
-                                        <i class="ti ti-external-link me-1"></i>{{ $LANG['wizard_full_customer_form'] ?? 'Full customer form (more options)' }}
+                                        <i class="ti ti-external-link me-1"></i>{{ $LANG['wizard_full_customer_form'] ?? '' }}
                                     </a>
                                     <button type="submit" name="submit" value="save" class="btn btn-primary">
-                                        {{ $LANG['save_customer'] ?? 'Save Customer' }} <i class="ti ti-arrow-right ms-1"></i>
+                                        {{ $LANG['save_customer'] ?? '' }} <i class="ti ti-arrow-right ms-1"></i>
                                     </button>
                                 </div>
                             </form>
@@ -357,10 +357,10 @@
                     <div class="d-flex align-items-center gap-3 py-2">
                         <span class="avatar avatar-lg bg-success-lt rounded"><i class="ti ti-check fs-2 text-success"></i></span>
                         <div>
-                            <div class="fw-bold text-success fs-4">{{ $LANG['wizard_product_ready'] ?? 'At least one product / service is set up!' }}</div>
-                            <p class="text-secondary mb-2">{{ $LANG['wizard_product_ready_tagline'] ?? 'You can add more products or services any time.' }}</p>
+                            <div class="fw-bold text-success fs-4">{{ $LANG['wizard_product_ready'] ?? '' }}</div>
+                            <p class="text-secondary mb-2">{{ $LANG['wizard_product_ready_tagline'] ?? '' }}</p>
                             <a href="index.php?module=products&amp;view=manage" class="btn btn-sm btn-outline-success">
-                                <i class="ti ti-settings me-1"></i>{{ $LANG['manage_products'] ?? 'Manage Products' }}
+                                <i class="ti ti-settings me-1"></i>{{ $LANG['manage_products'] ?? '' }}
                             </a>
                         </div>
                     </div>
@@ -378,19 +378,19 @@
                                             <i class="ti ti-package text-orange"></i>
                                         </span>
                                         <div>
-                                            <h4 class="mb-1">{{ $LANG['wizard_add_a_product'] ?? 'Add a Product or Service' }}</h4>
+                                            <h4 class="mb-1">{{ $LANG['wizard_add_a_product'] ?? '' }}</h4>
                                             <p class="text-secondary mb-0" style="font-size:.875rem">
-                                                {{ $LANG['wizard_product_description'] ?? 'Products (or services) are what you invoice for - an hourly rate, a fixed fee, or a physical item. Add at least one so it can appear on your invoices.' }}
+                                                {{ $LANG['wizard_product_description'] ?? '' }}
                                             </p>
                                         </div>
                                     </div>
                                     <hr class="my-3">
-                                    <p class="text-secondary small mb-2">{{ $LANG['wizard_try_sample'] ?? 'Just want to try it out first?' }}</p>
+                                    <p class="text-secondary small mb-2">{{ $LANG['wizard_try_sample'] ?? '' }}</p>
                                     <button type="button" class="btn btn-sm btn-outline-secondary w-100"
                                             onclick="wizardFill('product')">
-                                        <i class="ti ti-wand me-1"></i>{{ $LANG['wizard_use_sample_product'] ?? 'Use sample product data' }}
+                                        <i class="ti ti-wand me-1"></i>{{ $LANG['wizard_use_sample_product'] ?? '' }}
                                     </button>
-                                    <p class="text-muted small mt-2 mb-0">{{ $LANG['wizard_sample_replace_later'] ?? 'You can edit or replace sample data later.' }}</p>
+                                    <p class="text-muted small mt-2 mb-0">{{ $LANG['wizard_sample_replace_later'] ?? '' }}</p>
                                 </div>
                             </div>
                         </div>
@@ -413,22 +413,22 @@
                                 <div class="row g-3">
                                     <div class="col-12">
                                         <label class="form-label fw-bold">
-                                            {{ $LANG['description'] ?? 'Description' }} <i class="ti ti-asterisk text-danger" style="font-size:.7rem"></i>
+                                            {{ $LANG['description'] ?? '' }} <i class="ti ti-asterisk text-danger" style="font-size:.7rem"></i>
                                         </label>
                                         <input type="text" name="description" class="form-control"
-                                               placeholder="e.g. Hourly consulting rate" required>
+                                               placeholder="{{ $LANG['placeholder_product_description_example'] ?? '' }}" required>
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">{{ $LANG['unit_price'] ?? 'Unit Price' }}</label>
+                                        <label class="form-label">{{ $LANG['unit_price'] ?? '' }}</label>
                                         <div class="input-group">
                                             <span class="input-group-text">{{ $preference['pref_currency_sign'] ?? '$' }}</span>
-                                            <input type="text" name="unit_price" class="form-control" placeholder="0.00">
+                                            <input type="text" name="unit_price" class="form-control" placeholder="{{ $LANG['placeholder_unit_price_example'] ?? '' }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">{{ $LANG['default_tax'] ?? 'Default Tax' }}</label>
+                                        <label class="form-label">{{ $LANG['default_tax'] ?? '' }}</label>
                                         <select name="default_tax_id" class="form-select">
-                                            <option value="">— none —</option>
+                                            <option value="">{{ $LANG['tax_rate_none'] ?? '' }}</option>
                                             @foreach(($taxes ?? []) as $tax)
                                                 <option value="{{ $tax['tax_id'] ?? '' }}">
                                                     {{ $tax['tax_description'] ?? '' }}
@@ -439,10 +439,10 @@
                                 </div>
                                 <div class="mt-4 d-flex justify-content-between align-items-center">
                                     <a href="index.php?module=products&amp;view=add" class="text-secondary small">
-                                        <i class="ti ti-external-link me-1"></i>{{ $LANG['wizard_full_product_form'] ?? 'Full product form (more options)' }}
+                                        <i class="ti ti-external-link me-1"></i>{{ $LANG['wizard_full_product_form'] ?? '' }}
                                     </a>
                                     <button type="submit" name="id" value="save" class="btn btn-primary">
-                                        {{ $LANG['save_product'] ?? 'Save Product' }} <i class="ti ti-arrow-right ms-1"></i>
+                                        {{ $LANG['save_product'] ?? '' }} <i class="ti ti-arrow-right ms-1"></i>
                                     </button>
                                 </div>
                             </form>
@@ -460,12 +460,12 @@
                         <span class="avatar avatar-lg bg-success-lt rounded"><i class="ti ti-check fs-2 text-success"></i></span>
                         <div>
                             <div class="fw-bold text-success fs-4">{{ $LANG['wizard_all_set'] ?? "You're all set up and invoicing!" }}</div>
-                            <p class="text-secondary mb-2">{{ $LANG['wizard_all_set_tagline'] ?? 'Head to the invoice list to see your invoices, or create another one.' }}</p>
+                            <p class="text-secondary mb-2">{{ $LANG['wizard_all_set_tagline'] ?? '' }}</p>
                             <a href="index.php?module=invoices&amp;view=manage" class="btn btn-sm btn-outline-success me-2">
-                                <i class="ti ti-list me-1"></i>{{ $LANG['wizard_all_invoices'] ?? 'All Invoices' }}
+                                <i class="ti ti-list me-1"></i>{{ $LANG['wizard_all_invoices'] ?? '' }}
                             </a>
                             <a href="index.php?module=invoices&amp;view=itemised" class="btn btn-sm btn-primary">
-                                <i class="ti ti-plus me-1"></i>{{ $LANG['new_invoice'] ?? 'New Invoice' }}
+                                <i class="ti ti-plus me-1"></i>{{ $LANG['new_invoice'] ?? '' }}
                             </a>
                         </div>
                     </div>
@@ -482,9 +482,9 @@
                                             <i class="ti ti-file-invoice text-green"></i>
                                         </span>
                                         <div>
-                                            <h4 class="mb-1">{{ $LANG['wizard_create_first_invoice'] ?? 'Create Your First Invoice' }}</h4>
+                                            <h4 class="mb-1">{{ $LANG['wizard_create_first_invoice'] ?? '' }}</h4>
                                             <p class="text-secondary mb-0" style="font-size:.875rem">
-                                                {{ $LANG['wizard_invoice_description'] ?? 'You have your billing details, a customer, and a product ready. Pick a biller, a customer, add your line items, and send it off.' }}
+                                                {{ $LANG['wizard_invoice_description'] ?? '' }}
                                             </p>
                                         </div>
                                     </div>
@@ -495,11 +495,11 @@
                             @if(!$hasBillers || !$hasCustomers || !$hasProducts)
                                 <div class="alert alert-warning">
                                     <i class="ti ti-alert-circle me-2"></i>
-                                    {{ $LANG['wizard_prereqs_intro'] ?? 'Before creating an invoice you need to complete the earlier steps:' }}
+                                    {{ $LANG['wizard_prereqs_intro'] ?? '' }}
                                     <ul class="mb-0 mt-1">
-                                        @if(!$hasBillers)<li>{{ $LANG['wizard_prereqs_biller'] ?? 'Add your billing details (Step 1)' }}</li>@endif
-                                        @if(!$hasCustomers)<li>{{ $LANG['wizard_prereqs_customer'] ?? 'Add a customer (Step 2)' }}</li>@endif
-                                        @if(!$hasProducts)<li>{{ $LANG['wizard_prereqs_product'] ?? 'Add a product or service (Step 3)' }}</li>@endif
+                                        @if(!$hasBillers)<li>{{ $LANG['wizard_prereqs_biller'] ?? '' }}</li>@endif
+                                        @if(!$hasCustomers)<li>{{ $LANG['wizard_prereqs_customer'] ?? '' }}</li>@endif
+                                        @if(!$hasProducts)<li>{{ $LANG['wizard_prereqs_product'] ?? '' }}</li>@endif
                                     </ul>
                                 </div>
                             @else
@@ -510,13 +510,13 @@
                                                 <i class="ti ti-file-invoice fs-1 text-primary"></i>
                                             </span>
                                         </div>
-                                        <h3 class="mb-2">{{ $LANG['wizard_ready_to_go'] ?? 'Ready to go!' }}</h3>
+                                        <h3 class="mb-2">{{ $LANG['wizard_ready_to_go'] ?? '' }}</h3>
                                         <p class="text-secondary mb-4">
-                                            {{ $LANG['wizard_ready_click_below'] ?? 'Click the button below to open the new invoice form.' }}<br>
-                                            {{ $LANG['wizard_ready_tagline'] ?? 'Your biller, customer, and products are all set.' }}
+                                            {{ $LANG['wizard_ready_click_below'] ?? '' }}<br>
+                                            {{ $LANG['wizard_ready_tagline'] ?? '' }}
                                         </p>
 					<a href="index.php?module=invoices&amp;view=itemised" class="btn btn-primary btn-lg">
-                                            <i class="ti ti-plus me-2"></i>{{ $LANG['wizard_create_first_invoice'] ?? 'Create Your First Invoice' }}
+                                            <i class="ti ti-plus me-2"></i>{{ $LANG['wizard_create_first_invoice'] ?? '' }}
                                         </a>
                                     </div>
                                 </div>
@@ -598,8 +598,8 @@
 <div class="card mb-3">
     <div class="card-header">
         <div>
-            <h3 class="card-title">{{ $LANG['invoices'] ?? 'Invoices' }} &amp; {{ $LANG['payments'] ?? 'Payments' }}</h3>
-            <div class="card-subtitle">{{ $LANG['monthly_activity'] ?? 'Monthly activity' }}</div>
+            <h3 class="card-title">{{ $LANG['invoices'] ?? '' }} &amp; {{ $LANG['payments'] ?? '' }}</h3>
+            <div class="card-subtitle">{{ $LANG['monthly_activity'] ?? '' }}</div>
         </div>
         <div class="card-options ms-auto">
             <div class="segmented-control" id="chart-year-selector">
@@ -620,13 +620,13 @@
 {{-- Recent invoices --}}
 <div class="card mb-3">
     <div class="card-header">
-        <h3 class="card-title">{{ $LANG['recent_invoices'] ?? 'Recent Invoices' }}</h3>
+        <h3 class="card-title">{{ $LANG['recent_invoices'] ?? '' }}</h3>
         <div class="card-options ms-auto d-flex gap-2">
             <a href="index.php?module=invoices&amp;view=manage" class="btn btn-outline-secondary btn-sm">
-                {{ $LANG['manage_invoices'] ?? 'View all' }}
+                {{ $LANG['view_all'] ?? '' }}
             </a>
             <a href="index.php?module=invoices&amp;view=itemised" class="btn btn-primary btn-sm">
-                <i class="ti ti-plus me-1"></i>{{ $LANG['add_new_invoice'] ?? 'Add Invoice' }}
+                <i class="ti ti-plus me-1"></i>{{ $LANG['add_new_invoice'] ?? '' }}
             </a>
         </div>
     </div>
@@ -634,12 +634,12 @@
         <table class="table table-vcenter table-hover card-table">
             <thead>
                 <tr>
-                    <th>{{ $LANG['id'] ?? '#' }}</th>
-                    <th>{{ $LANG['customer'] ?? 'Customer' }}</th>
-                    <th>{{ $LANG['biller'] ?? 'Biller' }}</th>
-                    <th>{{ $LANG['date_upper'] ?? 'Date' }}</th>
-                    <th class="text-end">{{ $LANG['total'] ?? 'Total' }}</th>
-                    <th>{{ $LANG['status'] ?? 'Status' }}</th>
+                    <th>{{ $LANG['id'] ?? '' }}</th>
+                    <th>{{ $LANG['customer'] ?? '' }}</th>
+                    <th>{{ $LANG['biller'] ?? '' }}</th>
+                    <th>{{ $LANG['date_upper'] ?? '' }}</th>
+                    <th class="text-end">{{ $LANG['total'] ?? '' }}</th>
+                    <th>{{ $LANG['status'] ?? '' }}</th>
                     <th></th>
                 </tr>
             </thead>
@@ -662,22 +662,22 @@
                     <td class="text-end">{{ siLocal::number($inv['invoice_total'] ?? 0) }}</td>
                     <td>
                         @if($isDraft)
-                            <span class="status status-secondary"><span class="status-dot"></span>{{ $LANG['draft'] ?? 'Draft' }}</span>
+                            <span class="status status-secondary"><span class="status-dot"></span>{{ $LANG['draft'] ?? '' }}</span>
                         @elseif($isPaid)
-                            <span class="status status-green">{{ $LANG['paid'] ?? 'Paid' }}</span>
+                            <span class="status status-green">{{ $LANG['paid'] ?? '' }}</span>
                         @else
-                            <span class="status status-orange">{{ $LANG['due'] ?? 'Due' }}</span>
+                            <span class="status status-orange">{{ $LANG['due'] ?? '' }}</span>
                         @endif
                     </td>
                     <td class="w-1">
                         <div class="btn-group">
-                            <a href="index.php?module=invoices&amp;view=quick_view&amp;id={{ urlencode($inv['id']) }}" class="btn btn-outline-secondary btn-sm" title="{{ $LANG['quick_view'] ?? 'Quick View' }}">
+                            <a href="index.php?module=invoices&amp;view=quick_view&amp;id={{ urlencode($inv['id']) }}" class="btn btn-outline-secondary btn-sm" title="{{ $LANG['quick_view'] ?? '' }}">
                                 <i class="ti ti-eye"></i>
                             </a>
-                            <a href="index.php?module=export&amp;view=invoice&amp;id={{ urlencode($inv['id']) }}&amp;format=pdf" class="btn btn-outline-secondary btn-sm" title="{{ $LANG['export_pdf'] ?? 'PDF' }}" target="_blank" rel="noopener">
+                            <a href="index.php?module=export&amp;view=invoice&amp;id={{ urlencode($inv['id']) }}&amp;format=pdf" class="btn btn-outline-secondary btn-sm" title="{{ $LANG['export_pdf'] ?? '' }}" target="_blank" rel="noopener">
                                 <i class="ti ti-file-type-pdf"></i>
                             </a>
-                            <a href="index.php?module=invoices&amp;view=manage" class="btn btn-outline-secondary btn-sm" title="{{ $LANG['manage_invoices'] ?? 'Manage' }}">
+                            <a href="index.php?module=invoices&amp;view=manage" class="btn btn-outline-secondary btn-sm" title="{{ $LANG['manage_invoices'] ?? '' }}">
                                 <i class="ti ti-list"></i>
                             </a>
                         </div>
@@ -685,7 +685,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="7" class="text-center text-secondary">{{ $LANG['no_invoices'] ?? 'No invoices yet' }}</td>
+                    <td colspan="7" class="text-center text-secondary">{{ $LANG['no_invoices_yet'] ?? '' }}</td>
                 </tr>
                 @endforelse
             </tbody>
@@ -696,13 +696,13 @@
 {{-- Recent payments --}}
 <div class="card mb-3">
     <div class="card-header">
-        <h3 class="card-title">{{ $LANG['recent_payments'] ?? 'Recent Payments' }}</h3>
+        <h3 class="card-title">{{ $LANG['recent_payments'] ?? '' }}</h3>
         <div class="card-options ms-auto d-flex gap-2">
             <a href="index.php?module=payments&amp;view=manage" class="btn btn-outline-secondary btn-sm">
-                {{ $LANG['manage_payments'] ?? 'View all' }}
+                {{ $LANG['view_all'] ?? '' }}
             </a>
             <a href="index.php?module=payments&amp;view=process&amp;op=pay_invoice" class="btn btn-primary btn-sm">
-                <i class="ti ti-plus me-1"></i>{{ $LANG['add_new_payment'] ?? 'Add Payment' }}
+                <i class="ti ti-plus me-1"></i>{{ $LANG['add_new_payment'] ?? '' }}
             </a>
         </div>
     </div>
@@ -710,11 +710,11 @@
         <table class="table table-vcenter table-hover card-table">
             <thead>
                 <tr>
-                    <th>{{ $LANG['invoice'] ?? 'Invoice' }}</th>
-                    <th>{{ $LANG['customer'] ?? 'Customer' }}</th>
-                    <th>{{ $LANG['biller'] ?? 'Biller' }}</th>
-                    <th>{{ $LANG['date_upper'] ?? 'Date' }}</th>
-                    <th class="text-end">{{ $LANG['amount'] ?? 'Amount' }}</th>
+                    <th>{{ $LANG['invoice'] ?? '' }}</th>
+                    <th>{{ $LANG['customer'] ?? '' }}</th>
+                    <th>{{ $LANG['biller'] ?? '' }}</th>
+                    <th>{{ $LANG['date_upper'] ?? '' }}</th>
+                    <th class="text-end">{{ $LANG['amount'] ?? '' }}</th>
                     <th></th>
                 </tr>
             </thead>
@@ -732,10 +732,10 @@
                     <td class="text-end">{{ siLocal::number($pmt['ac_amount'] ?? 0) }}</td>
                     <td class="w-1">
                         <div class="btn-group">
-                            <a href="index.php?module=invoices&amp;view=quick_view&amp;id={{ urlencode($pmt['ac_inv_id']) }}" class="btn btn-outline-secondary btn-sm" title="{{ $LANG['quick_view'] ?? 'Quick View' }}">
+                            <a href="index.php?module=invoices&amp;view=quick_view&amp;id={{ urlencode($pmt['ac_inv_id']) }}" class="btn btn-outline-secondary btn-sm" title="{{ $LANG['quick_view'] ?? '' }}">
                                 <i class="ti ti-eye"></i>
                             </a>
-                            <a href="index.php?module=payments&amp;view=manage" class="btn btn-outline-secondary btn-sm" title="{{ $LANG['manage_payments'] ?? 'Manage' }}">
+                            <a href="index.php?module=payments&amp;view=manage" class="btn btn-outline-secondary btn-sm" title="{{ $LANG['manage_payments'] ?? '' }}">
                                 <i class="ti ti-list"></i>
                             </a>
                         </div>
@@ -743,7 +743,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="6" class="text-center text-secondary">{{ $LANG['no_payments'] ?? 'No payments yet' }}</td>
+                    <td colspan="6" class="text-center text-secondary">{{ $LANG['no_payments_yet'] ?? '' }}</td>
                 </tr>
                 @endforelse
             </tbody>
@@ -756,8 +756,8 @@
 (function () {
     var labels   = @json($chart_labels ?? []);
     var datasets = @json($chart_data ?? []);
-    var invoiceLabel = @json($LANG['invoices'] ?? 'Invoices');
-    var paymentLabel = @json($LANG['payments'] ?? 'Payments');
+    var invoiceLabel = @json($LANG['invoices'] ?? '');
+    var paymentLabel = @json($LANG['payments'] ?? '');
 
     function cssVar(name) {
         return getComputedStyle(document.documentElement).getPropertyValue(name).trim();

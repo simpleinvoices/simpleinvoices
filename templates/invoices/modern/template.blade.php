@@ -7,7 +7,7 @@
 @else
 <link rel="stylesheet" type="text/css" href="{{ $css|urlsafe }}" media="all">
 @endif
-<title>{{ $preference['pref_inv_wording'] ?? '' }} {{ $LANG['number_short'] ?? '' }}: {{ $invoice['index_id'] ?? '' }}</title>
+<title>{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['number_short'] ?? '' }}: {{ $invoice['index_id'] ?? '' }}</title>
 </head>
 <body class="si-modern-inv">
 <div class="si-modern-inv-card">
@@ -157,14 +157,14 @@
 	<!-- Summary - start -->
 	<table class="right invoice-summary-table si-modern-summary-table">
 		<tr>
-				<td class="col1 si-modern-summary-head" colspan="4" bgcolor="#f1f5f9"><b>{{ $preference['pref_inv_wording'] ?? '' }} {{ $LANG['summary'] ?? '' }}</b></td>
+				<td class="col1 si-modern-summary-head" colspan="4" bgcolor="#f1f5f9"><b>{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['summary'] ?? '' }}</b></td>
 		</tr>
 		<tr>
-				<td class="si-modern-muted">{{ $preference['pref_inv_wording'] ?? '' }} {{ $LANG['number_short'] ?? '' }}:</td>
+				<td class="si-modern-muted">{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['number_short'] ?? '' }}:</td>
 				<td class="si-modern-summary-val" align="right" colspan="3">{{ $invoice['index_id'] }}</td>
 		</tr>
 		<tr>
-				<td nowrap class="si-modern-muted">{{ $preference['pref_inv_wording'] ?? '' }} {{ $LANG['date'] ?? '' }}:</td>
+				<td nowrap class="si-modern-muted">{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['date'] ?? '' }}:</td>
 				<td class="si-modern-summary-val" align="right" colspan="3">{{ $invoice['date'] }}</td>
 		</tr>
 	<!-- Show the Invoice Custom Fields if valid -->
@@ -414,7 +414,7 @@
     @endif
     <tr class="si-modern-total-row">
         <td colspan="2"></td>
-		<td colspan="3" align="right"><b>{{ $preference['pref_inv_wording'] ?? '' }} {{ $LANG['amount'] ?? '' }}&nbsp;</b></td>
+		<td colspan="3" align="right"><b>{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['amount'] ?? '' }}&nbsp;</b></td>
 		<td colspan="1" align="right"><span class="si-modern-total-amount">{{ $preference['pref_currency_sign'] }} {{ ($invoice['total'] ?? '')|siLocal_number }}</span></td>
     </tr>
     {{-- tax section - end --}}

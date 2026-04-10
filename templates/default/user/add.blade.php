@@ -16,7 +16,7 @@
 <div class="card">
 	<div class="card-body">
 		<div class="mb-3">
-			<label class="form-label">{{ $LANG['name'] ?? 'Name' }}</label>
+			<label class="form-label">{{ $LANG['name'] ?? '' }}</label>
 			<input type="text" name="name" value="{{ post('name') }}" id="name" autocomplete="off" class="form-control" />
 		</div>
 		<div class="mb-3">

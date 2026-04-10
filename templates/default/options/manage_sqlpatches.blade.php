@@ -20,9 +20,9 @@
 		<table class="table table-vcenter card-table" id="live-grid">
 			<thead>
 				<tr>
-					<th>{{ $LANG['patch_id'] ?? 'Patch ID' }}</th>
-					<th>{{ $LANG['description'] ?? 'Description' }}</th>
-					<th>{{ $LANG['release'] ?? 'Release' }}</th>
+					<th>{{ $LANG['patch_id'] ?? '' }}</th>
+					<th>{{ $LANG['description'] ?? '' }}</th>
+					<th>{{ $LANG['release'] ?? '' }}</th>
 				</tr>
 			</thead>
 			<tbody>

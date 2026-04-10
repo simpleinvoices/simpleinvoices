@@ -1,6 +1,6 @@
 @if(post('p_description') == "" AND form_submitted() )
 	<div class="alert alert-warning"><i class="ti ti-alert-circle"></i>
-		{{ $LANG['preference_description_required'] ?? 'You must enter a description for the preference' }}</div>
+		{{ $LANG['preference_description_required'] ?? '' }}</div>
 @endif
 <form name="frmpost" action="index.php?module=preferences&amp;view=save" method="post">
 
@@ -11,13 +11,13 @@
 				<a class="nav-link active" href="#pref-add-details" data-bs-toggle="tab" role="tab"><i class="ti ti-info-circle me-1"></i>{{ $LANG['details'] ?? '' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#pref-add-currency" data-bs-toggle="tab" role="tab"><i class="ti ti-currency-dollar me-1"></i>{{ $LANG['currency_sign'] ?? 'Currency' }}</a>
+				<a class="nav-link" href="#pref-add-currency" data-bs-toggle="tab" role="tab"><i class="ti ti-currency-dollar me-1"></i>{{ $LANG['currency_sign'] ?? '' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#pref-add-wording" data-bs-toggle="tab" role="tab"><i class="ti ti-pencil me-1"></i>{{ $LANG['invoice_heading'] ?? 'Invoice Wording' }}</a>
+				<a class="nav-link" href="#pref-add-wording" data-bs-toggle="tab" role="tab"><i class="ti ti-pencil me-1"></i>{{ $LANG['invoice_heading'] ?? '' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#pref-add-payment" data-bs-toggle="tab" role="tab"><i class="ti ti-credit-card me-1"></i>{{ $LANG['payment'] ?? 'Payment' }}</a>
+				<a class="nav-link" href="#pref-add-payment" data-bs-toggle="tab" role="tab"><i class="ti ti-credit-card me-1"></i>{{ $LANG['payment'] ?? '' }}</a>
 			</li>
 		</ul>
 	</div>
@@ -48,7 +48,7 @@
 						<p class="text-muted"><em>{{ $LANG['no_preferences'] ?? '' }}</em></p>
 					@else
 						<select name="index_group" class="form-select">
-							<option value="">{{ $LANG['invoice_preference_to_add'] ?? 'Invoice preference to add' }}</option>
+							<option value="">{{ $LANG['invoice_preference_to_add'] ?? '' }}</option>
 							@foreach(($preferences ?? []) as $preference)
 								<option @if($LANG['real'] == $defaults->preference) selected @endif value="{{ $preference['pref_id'] ?? '' }}">{{ $preference['pref_description'] ?? '' }}</option>
 							@endforeach

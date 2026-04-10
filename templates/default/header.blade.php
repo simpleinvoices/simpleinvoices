@@ -13,7 +13,7 @@
         $tmp_lang_view = $LANG['title_view_'.$view] ?? $LANG[$view] ?? $view;
     @endphp
     @stack('hook_head_start')
-    <title>{{ $tmp_lang_module }} : {{ $tmp_lang_view }} - {{ $config->app?->name ?? $LANG['simple_invoices'] ?? 'Simple Invoices' }}</title>
+    <title>{{ $tmp_lang_module }} : {{ $tmp_lang_view }} - {{ $config->app?->name ?? ($LANG['simple_invoices'] ?? '') }}</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -29,14 +29,14 @@
     <script src="./include/jquery/jquery.init.js"></script>
     @php
         $si_grid_lang = [
-            'search' => $LANG['grid_search'] ?? 'Search',
-            'search_placeholder' => $LANG['grid_search_placeholder'] ?? $LANG['grid_search'] ?? 'Search',
-            'reload' => $LANG['grid_reload'] ?? 'Reload',
-            'sort_by' => $LANG['grid_sort_by'] ?? 'Sort by {column}',
-            'records' => $LANG['grid_records'] ?? 'records',
-            'invalid_xml' => $LANG['grid_invalid_xml'] ?? 'Invalid XML response',
-            'connection_error' => $LANG['grid_connection_error'] ?? 'Connection error',
-            'pagestat_fallback' => $LANG['displaying_items'] ?? 'Displaying {from} to {to} of {total} items',
+            'search' => $LANG['grid_search'] ?? '',
+            'search_placeholder' => $LANG['grid_search_placeholder'] ?? $LANG['grid_search'] ?? '',
+            'reload' => $LANG['grid_reload'] ?? '',
+            'sort_by' => $LANG['grid_sort_by'] ?? '',
+            'records' => $LANG['grid_records'] ?? '',
+            'invalid_xml' => $LANG['grid_invalid_xml'] ?? '',
+            'connection_error' => $LANG['grid_connection_error'] ?? '',
+            'pagestat_fallback' => $LANG['displaying_items'] ?? '',
         ];
     @endphp
     <script>

@@ -25,10 +25,10 @@
 <div class="card mb-3">
     <div class="card-status-top bg-primary"></div>
     <div class="card-header">
-        <h3 class="card-title"><i class="ti ti-rocket me-2"></i>{{ $LANG['getting_started'] ?? 'Getting Started' }}</h3>
+        <h3 class="card-title"><i class="ti ti-rocket me-2"></i>{{ $LANG['getting_started'] ?? '' }}</h3>
     </div>
     <div class="card-body">
-        <p class="text-secondary">{{ $LANG['first_run_intro'] ?? 'Welcome! Complete these steps to start invoicing:' }}</p>
+        <p class="text-secondary">{{ $LANG['first_run_intro'] ?? '' }}</p>
         <div class="row g-3">
             <div class="col-sm-6 col-lg-3">
                 <div class="card @if($inv_hasBillers) border-success @endif">
@@ -37,11 +37,11 @@
                             <i class="ti ti-building-store"></i>
                         </span>
                         <div>
-                            <div class="fw-bold">{{ $LANG['biller'] ?? 'Biller' }}</div>
+                            <div class="fw-bold">{{ $LANG['biller'] ?? '' }}</div>
                             @if($inv_hasBillers)
-                                <span class="text-success"><i class="ti ti-check"></i> {{ $LANG['done'] ?? 'Done' }}</span>
+                                <span class="text-success"><i class="ti ti-check"></i> {{ $LANG['done'] ?? '' }}</span>
                             @else
-                                <a href="index.php?module=billers&amp;view=add" class="text-primary">{{ $LANG['add_new_biller'] ?? 'Add Biller' }}</a>
+                                <a href="index.php?module=billers&amp;view=add" class="text-primary">{{ $LANG['add_new_biller'] ?? '' }}</a>
                             @endif
                         </div>
                     </div>
@@ -54,11 +54,11 @@
                             <i class="ti ti-users"></i>
                         </span>
                         <div>
-                            <div class="fw-bold">{{ $LANG['customer'] ?? 'Customer' }}</div>
+                            <div class="fw-bold">{{ $LANG['customer'] ?? '' }}</div>
                             @if($inv_hasCustomers)
-                                <span class="text-success"><i class="ti ti-check"></i> {{ $LANG['done'] ?? 'Done' }}</span>
+                                <span class="text-success"><i class="ti ti-check"></i> {{ $LANG['done'] ?? '' }}</span>
                             @else
-                                <a href="index.php?module=customers&amp;view=add" class="text-primary">{{ $LANG['customer_add'] ?? 'Add Customer' }}</a>
+                                <a href="index.php?module=customers&amp;view=add" class="text-primary">{{ $LANG['customer_add'] ?? '' }}</a>
                             @endif
                         </div>
                     </div>
@@ -71,11 +71,11 @@
                             <i class="ti ti-package"></i>
                         </span>
                         <div>
-                            <div class="fw-bold">{{ $LANG['product'] ?? 'Product' }}</div>
+                            <div class="fw-bold">{{ $LANG['product'] ?? '' }}</div>
                             @if($inv_hasProducts)
-                                <span class="text-success"><i class="ti ti-check"></i> {{ $LANG['done'] ?? 'Done' }}</span>
+                                <span class="text-success"><i class="ti ti-check"></i> {{ $LANG['done'] ?? '' }}</span>
                             @else
-                                <a href="index.php?module=products&amp;view=add" class="text-primary">{{ $LANG['add_new_product'] ?? 'Add Product' }}</a>
+                                <a href="index.php?module=products&amp;view=add" class="text-primary">{{ $LANG['add_new_product'] ?? '' }}</a>
                             @endif
                         </div>
                     </div>
@@ -88,11 +88,11 @@
                             <i class="ti ti-file-invoice"></i>
                         </span>
                         <div>
-                            <div class="fw-bold">{{ $LANG['invoice'] ?? 'Invoice' }}</div>
+                            <div class="fw-bold">{{ $LANG['invoice'] ?? '' }}</div>
                             @if(!empty($inv_hasInvoices))
-                                <span class="text-success"><i class="ti ti-check"></i> {{ $LANG['done'] ?? 'Done' }}</span>
+                                <span class="text-success"><i class="ti ti-check"></i> {{ $LANG['done'] ?? '' }}</span>
                             @else
-                                <a href="index.php?module=invoices&amp;view=itemised" class="text-primary">{{ $LANG['create_invoice'] ?? 'Create Invoice' }}</a>
+                                <a href="index.php?module=invoices&amp;view=itemised" class="text-primary">{{ $LANG['create_invoice'] ?? '' }}</a>
                             @endif
                         </div>
                     </div>
@@ -119,53 +119,58 @@
 		</tr>
 	</table>
 
-	<table class="si_invoice_bot">
-
-		<tr class="si_invoice_total">
-			<th class="">{{ $LANG['gross_total'] ?? '' }}</th>
-			@for($tax_header = 0; $tax_header < (int)($defaults['tax_per_line_item'] ?? 0); $tax_header++)
-				<th class="">{{ $LANG['tax'] ?? '' }} @if(($defaults['tax_per_line_item'] ?? 0) > 1){{ ($tax_header + 1) }}@endif </th>
-			@endfor
-			<th class="">{{ $LANG['inv_pref'] ?? '' }}</th>
-		</tr>
-
-		<tr class="si_invoice_total">
-			<td><input type="text" name="unit_price" size="15" class="form-control validate[required]" /></td>
-		@if($taxes == null )
-			<td><p><em>{{ $LANG['no_taxes'] ?? '' }}</em></p></td>
-		@else
-			@for($taxIdx = 0; $taxIdx < (int)($defaults['tax_per_line_item'] ?? 0); $taxIdx++)
-			<td>
-				<select id="tax_id[0][{{ $taxIdx }}]" name="tax_id[0][{{ $taxIdx }}]" class="form-select">
-					<option value=""></option>
-				@foreach(($taxes ?? []) as $taxOption)
-					<option @if(($taxOption['tax_id'] ?? '') == ($defaults['tax'] ?? '') && $taxIdx == 0) selected @endif value="{{ $taxOption['tax_id'] ?? '' }}">{{ $taxOption['tax_description'] ?? '' }}</option>
+@php
+	$inv_tax_per_line = (int)($defaults['tax_per_line_item'] ?? 0);
+	$inv_tax_field_count = ($inv_tax_per_line > 0) ? 1 : 0;
+	if ($inv_tax_per_line > 0 && $taxes != null) {
+		$inv_tax_field_count = $inv_tax_per_line;
+	}
+	$inv_totals_match_header = ($inv_tax_field_count === 1);
+	$inv_totals_lg_cols = min(4, max(2, 2 + $inv_tax_field_count));
+@endphp
+	<div class="row g-3 mb-3 @if(!$inv_totals_match_header && $inv_tax_field_count !== 0) row-cols-1 row-cols-md-2 row-cols-lg-{{ $inv_totals_lg_cols }} @endif">
+		<div class="col-12 @if($inv_totals_match_header) col-md-4 @elseif($inv_tax_field_count === 0) col-md-6 @else col @endif">
+			<label class="form-label">{{ $LANG['gross_total'] ?? '' }}</label>
+			<input type="text" name="unit_price" class="form-control validate[required]" />
+		</div>
+		@if($inv_tax_per_line > 0)
+			@if($taxes == null)
+				<div class="col-12 @if($inv_totals_match_header) col-md-5 @else col @endif">
+					<label class="form-label">{{ $LANG['tax'] ?? '' }}</label>
+					<p class="text-muted mb-0"><em>{{ $LANG['no_taxes'] ?? '' }}</em></p>
+				</div>
+			@else
+				@for($taxIdx = 0; $taxIdx < $inv_tax_per_line; $taxIdx++)
+				<div class="col-12 @if($inv_totals_match_header) col-md-5 @else col @endif">
+					<label class="form-label">{{ $LANG['tax'] ?? '' }}@if($inv_tax_per_line > 1) {{ $taxIdx + 1 }}@endif</label>
+					<select id="tax_id[0][{{ $taxIdx }}]" name="tax_id[0][{{ $taxIdx }}]" class="form-select">
+						<option value=""></option>
+					@foreach(($taxes ?? []) as $taxOption)
+						<option @if(($taxOption['tax_id'] ?? '') == ($defaults['tax'] ?? '') && $taxIdx == 0) selected @endif value="{{ $taxOption['tax_id'] ?? '' }}">{{ $taxOption['tax_description'] ?? '' }}</option>
+					@endforeach
+					</select>
+				</div>
+				@endfor
+			@endif
+		@endif
+		<div class="col-12 @if($inv_totals_match_header) col-md-3 @elseif($inv_tax_field_count === 0) col-md-6 @else col @endif">
+			<label class="form-label">{{ $LANG['inv_pref'] ?? '' }}</label>
+			@if($preferences == null)
+				<p class="text-muted mb-0"><em>{{ $LANG['no_preferences'] ?? '' }}</em></p>
+			@else
+				<select name="preference_id" class="form-select">
+				@foreach(($preferences ?? []) as $preference)
+					<option @if(($preference['pref_id'] ?? '') == ($defaults['preference'] ?? '')) selected @endif value="{{ $preference['pref_id'] ?? '' }}">{{ $preference['pref_description'] ?? '' }}</option>
 				@endforeach
 				</select>
-			</td>
-			@endfor
-		@endif
-		
-			<td>
-		@if($preferences == null )
-				<p><em>{{ $LANG['no_preferences'] ?? '' }}</em></p>
-		@else
-				<select name="preference_id" class="form-select">
-			@foreach(($preferences ?? []) as $preference)
-					<option @if(($preference['pref_id'] ?? '') == ($defaults['preference'] ?? '')) selected @endif value="{{ $preference['pref_id'] ?? '' }}">{{ $preference['pref_description'] ?? '' }}</option>
-			@endforeach
-				</select>
-		@endif
-			</td>		
-		</tr>
+			@endif
+		</div>
+	</div>
 
 	{!! $show_custom_field['1'] !!}
 	{!! $show_custom_field['2'] !!}
 	{!! $show_custom_field['3'] !!}
 	{!! $show_custom_field['4'] !!}
-
-
-	</table>
 
 	<div class="mt-2">
 		<a class="cluetip btn btn-outline-secondary" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_invoice_custom_fields" title="{{ $LANG['want_more_fields'] ?? '' }}"><i class="ti ti-help me-1"></i>{{ $LANG['want_more_fields'] ?? '' }}</a>

@@ -7,7 +7,7 @@
 	<div class="card-body">
 		<table class="table table-vcenter">
 			<tr>
-				<th>{{ $LANG['name'] ?? 'Name' }}</th>
+				<th>{{ $LANG['name'] ?? '' }}</th>
 				<td>{{ $user['name'] ?? '' }}</td>
 			</tr>
 			<tr>
@@ -31,7 +31,7 @@
 	<div class="card-footer">
 		<div class="d-flex">
 			<a href="./index.php?module=user&amp;view=manage" class="btn btn-link">{{ $LANG['cancel'] ?? '' }}</a>
-			<a href="./index.php?module=user&amp;view=details&amp;id={{ urlencode($user['id'] ?? '') }}&amp;action=edit" class="btn btn-primary ms-auto"><i class="ti ti-edit me-1"></i>{{ $LANG['edit'] ?? 'Edit' }}</a>
+			<a href="./index.php?module=user&amp;view=details&amp;id={{ urlencode($user['id'] ?? '') }}&amp;action=edit" class="btn btn-primary ms-auto"><i class="ti ti-edit me-1"></i>{{ $LANG['edit'] ?? '' }}</a>
 		</div>
 	</div>
 </div>
@@ -43,7 +43,7 @@
 <div class="card">
 	<div class="card-body">
 		<div class="mb-3">
-			<label class="form-label">{{ $LANG['name'] ?? 'Name' }}</label>
+			<label class="form-label">{{ $LANG['name'] ?? '' }}</label>
 			<input type="text" name="name" autocomplete="off" value="{{ $user['name'] ?? '' }}" id="name" class="form-control" />
 		</div>
 		<div class="mb-3">

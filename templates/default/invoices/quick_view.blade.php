@@ -10,27 +10,27 @@
     {{-- Action buttons: segmented control --}}
     <div class="mb-4 d-flex justify-content-center">
         <div class="segmented-control segmented-control-btn">
-            <label class="segmented-control-item" title="{{ $LANG['print_preview_tooltip'] ?? '' }}" onclick="siPreviewModal('index.php?module=export&amp;view=invoice&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;format=print','{{ addslashes($LANG['print_preview'] ?? 'Print Preview') }}','index.php?module=export&amp;view=invoice&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;format=pdf')">
+            <label class="segmented-control-item" title="{{ $LANG['print_preview_tooltip'] ?? '' }}" onclick="siPreviewModal('index.php?module=export&amp;view=invoice&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;format=print','{{ addslashes($LANG['print_preview'] ?? '') }}','index.php?module=export&amp;view=invoice&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;format=pdf')">
                 <input type="radio" class="segmented-control-input">
-                <span class="segmented-control-label"><i class="ti ti-printer me-md-1"></i><span class="d-none d-md-inline">{{ $LANG['print_preview'] ?? 'Print' }}</span></span>
+                <span class="segmented-control-label"><i class="ti ti-printer me-md-1"></i><span class="d-none d-md-inline">{{ $LANG['print_preview'] ?? '' }}</span></span>
             </label>
-            <label class="segmented-control-item" title="{{ $LANG['edit'] ?? 'Edit' }}" onclick="window.location='index.php?module=invoices&amp;view=details&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;action=view'">
+            <label class="segmented-control-item" title="{{ $LANG['edit'] ?? '' }}" onclick="window.location='index.php?module=invoices&amp;view=details&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;action=view'">
                 <input type="radio" class="segmented-control-input">
-                <span class="segmented-control-label"><i class="ti ti-edit me-md-1"></i><span class="d-none d-md-inline">{{ $LANG['edit'] ?? 'Edit' }}</span></span>
+                <span class="segmented-control-label"><i class="ti ti-edit me-md-1"></i><span class="d-none d-md-inline">{{ $LANG['edit'] ?? '' }}</span></span>
             </label>
             <label class="segmented-control-item" title="{{ $LANG['process_payment'] ?? '' }}" onclick="window.location='index.php?module=payments&amp;view=process&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;op=pay_selected_invoice'">
                 <input type="radio" class="segmented-control-input">
-                <span class="segmented-control-label"><i class="ti ti-cash me-md-1"></i><span class="d-none d-md-inline">{{ $LANG['process_payment'] ?? 'Payment' }}</span></span>
+                <span class="segmented-control-label"><i class="ti ti-cash me-md-1"></i><span class="d-none d-md-inline">{{ $LANG['process_payment'] ?? '' }}</span></span>
             </label>
             @if(($eway_pre_check ?? '') == 'true')
             <label class="segmented-control-item" title="{{ $LANG['process_payment_via_eway'] ?? '' }}" onclick="window.location='index.php?module=payments&amp;view=eway&amp;id={{ urlencode($invoice['id'] ?? '') }}'">
                 <input type="radio" class="segmented-control-input">
-                <span class="segmented-control-label"><i class="ti ti-cash me-md-1"></i><span class="d-none d-md-inline">{{ $LANG['process_payment_via_eway'] ?? 'Pay via eWay' }}</span></span>
+                <span class="segmented-control-label"><i class="ti ti-cash me-md-1"></i><span class="d-none d-md-inline">{{ $LANG['process_payment_via_eway'] ?? '' }}</span></span>
             </label>
             @endif
             <label class="segmented-control-item" title="{{ $LANG['export_pdf'] ?? '' }}" onclick="window.open('index.php?module=export&amp;view=invoice&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;format=pdf','_blank')">
                 <input type="radio" class="segmented-control-input">
-                <span class="segmented-control-label"><i class="ti ti-file-type-pdf me-md-1"></i><span class="d-none d-md-inline">{{ $LANG['pdf'] ?? 'PDF' }}</span></span>
+                <span class="segmented-control-label"><i class="ti ti-file-type-pdf me-md-1"></i><span class="d-none d-md-inline">{{ $LANG['pdf'] ?? '' }}</span></span>
             </label>
             <label class="segmented-control-item" title="{{ $LANG['export_as'] ?? '' }} .{{ $spreadsheet ?? 'xls' }}" onclick="window.location='index.php?module=export&amp;view=invoice&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;format=file&amp;filetype={{ urlencode($spreadsheet ?? 'xls') }}'">
                 <input type="radio" class="segmented-control-input">
@@ -42,12 +42,12 @@
             </label>
             <label class="segmented-control-item" title="{{ $LANG['email'] ?? '' }}" onclick="window.location='index.php?module=invoices&amp;view=email&amp;stage=1&amp;id={{ urlencode($invoice['id'] ?? '') }}'">
                 <input type="radio" class="segmented-control-input">
-                <span class="segmented-control-label"><i class="ti ti-mail me-md-1"></i><span class="d-none d-md-inline">{{ $LANG['email'] ?? 'Email' }}</span></span>
+                <span class="segmented-control-label"><i class="ti ti-mail me-md-1"></i><span class="d-none d-md-inline">{{ $LANG['email'] ?? '' }}</span></span>
             </label>
             @if(isset($defaults->delete) && $defaults->delete == '1')
             <label class="segmented-control-item text-danger" title="{{ $LANG['delete'] ?? '' }}" onclick="window.location='index.php?module=invoices&amp;view=delete&amp;stage=1&amp;id={{ urlencode($invoice['id'] ?? '') }}'">
                 <input type="radio" class="segmented-control-input">
-                <span class="segmented-control-label"><i class="ti ti-trash me-md-1"></i><span class="d-none d-md-inline">{{ $LANG['delete'] ?? 'Delete' }}</span></span>
+                <span class="segmented-control-label"><i class="ti ti-trash me-md-1"></i><span class="d-none d-md-inline">{{ $LANG['delete'] ?? '' }}</span></span>
             </label>
             @endif
         </div>
@@ -57,11 +57,11 @@
         <div class="mb-4 pb-3 border-bottom">
             <div class="row g-4">
                 <div class="col-md-6">
-                    <div class="text-uppercase text-secondary small fw-medium mb-2">{{ $preference['pref_inv_wording'] ?? 'Invoice' }}</div>
+                    <div class="text-uppercase text-secondary small fw-medium mb-2">{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }}</div>
                     <div class="fw-bold">{{ $invoice['index_id'] ?? '' }}</div>
                 </div>
                 <div class="col-md-6">
-                    <div class="text-uppercase text-secondary small fw-medium mb-2">{{ $LANG['date_upper'] ?? 'Date' }}</div>
+                    <div class="text-uppercase text-secondary small fw-medium mb-2">{{ $LANG['date_upper'] ?? '' }}</div>
                     <div>{{ $invoice['date'] ?? '' }}</div>
                 </div>
             </div>
@@ -86,7 +86,7 @@
         {{-- Biller + Customer --}}
         <div class="row g-4 mb-4">
             <div class="col-md-6">
-                <div class="text-uppercase text-secondary small fw-medium mb-2">{{ $LANG['biller'] ?? 'Biller' }}</div>
+                <div class="text-uppercase text-secondary small fw-medium mb-2">{{ $LANG['biller'] ?? '' }}</div>
                 <div class="fw-bold mb-1">{{ $biller['name'] ?? '' }}</div>
                 <div class="text-secondary lh-lg">
                     @if(!empty($biller['street_address'])){{ $biller['street_address'] }}<br />@endif
@@ -96,9 +96,9 @@
                     @endphp
                     @if(!empty($billerCity)){{ $billerCity }}<br />@endif
                     @if(!empty($biller['country'])){{ $biller['country'] }}<br />@endif
-                    @if(!empty($biller['phone'])){{ $LANG['phone_short'] ?? 'Phone' }}: {{ $biller['phone'] }}<br />@endif
-                    @if(!empty($biller['mobile_phone'])){{ $LANG['mobile_short'] ?? 'Mobile' }}: {{ $biller['mobile_phone'] }}<br />@endif
-                    @if(!empty($biller['fax'])){{ $LANG['fax'] ?? 'Fax' }}: {{ $biller['fax'] }}<br />@endif
+                    @if(!empty($biller['phone'])){{ $LANG['phone_short'] ?? '' }}: {{ $biller['phone'] }}<br />@endif
+                    @if(!empty($biller['mobile_phone'])){{ $LANG['mobile_short'] ?? '' }}: {{ $biller['mobile_phone'] }}<br />@endif
+                    @if(!empty($biller['fax'])){{ $LANG['fax'] ?? '' }}: {{ $biller['fax'] }}<br />@endif
                     @if(!empty($biller['email']))<a href="mailto:{{ $biller['email'] }}">{{ $biller['email'] }}</a><br />@endif
                     @if(!empty($biller['custom_field1']) && !empty($customFieldLabels['biller_cf1'])){{ $customFieldLabels['biller_cf1'] }}: {{ $biller['custom_field1'] }}<br />@endif
                     @if(!empty($biller['custom_field2']) && !empty($customFieldLabels['biller_cf2'])){{ $customFieldLabels['biller_cf2'] }}: {{ $biller['custom_field2'] }}<br />@endif
@@ -108,13 +108,13 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="text-uppercase text-secondary small fw-medium mb-2">{{ $LANG['customer'] ?? 'Customer' }}</div>
+                <div class="text-uppercase text-secondary small fw-medium mb-2">{{ $LANG['customer'] ?? '' }}</div>
                 <div class="fw-bold mb-1">
                     <a href="index.php?module=customers&amp;view=details&amp;id={{ urlencode($customer['id'] ?? '') }}&amp;action=view">{{ $customer['name'] ?? '' }}</a>
                 </div>
                 <div class="text-secondary lh-lg">
-                    @if(!empty($customer['department'])){{ $LANG['customer_department'] ?? 'Dept' }}: {{ $customer['department'] }}<br />@endif
-                    @if(!empty($customer['attention'])){{ $LANG['attention_short'] ?? 'Attn' }}: {{ $customer['attention'] }}<br />@endif
+                    @if(!empty($customer['department'])){{ $LANG['customer_department'] ?? '' }}: {{ $customer['department'] }}<br />@endif
+                    @if(!empty($customer['attention'])){{ $LANG['attention_short'] ?? '' }}: {{ $customer['attention'] }}<br />@endif
                     @if(!empty($customer['street_address'])){{ $customer['street_address'] }}<br />@endif
                     @if(!empty($customer['street_address2'])){{ $customer['street_address2'] }}<br />@endif
                     @php
@@ -122,9 +122,9 @@
                     @endphp
                     @if(!empty($customerCity)){{ $customerCity }}<br />@endif
                     @if(!empty($customer['country'])){{ $customer['country'] }}<br />@endif
-                    @if(!empty($customer['phone'])){{ $LANG['phone_short'] ?? 'Phone' }}: {{ $customer['phone'] }}<br />@endif
-                    @if(!empty($customer['mobile_phone'])){{ $LANG['mobile_short'] ?? 'Mobile' }}: {{ $customer['mobile_phone'] }}<br />@endif
-                    @if(!empty($customer['fax'])){{ $LANG['fax'] ?? 'Fax' }}: {{ $customer['fax'] }}<br />@endif
+                    @if(!empty($customer['phone'])){{ $LANG['phone_short'] ?? '' }}: {{ $customer['phone'] }}<br />@endif
+                    @if(!empty($customer['mobile_phone'])){{ $LANG['mobile_short'] ?? '' }}: {{ $customer['mobile_phone'] }}<br />@endif
+                    @if(!empty($customer['fax'])){{ $LANG['fax'] ?? '' }}: {{ $customer['fax'] }}<br />@endif
                     @if(!empty($customer['email']))<a href="mailto:{{ $customer['email'] }}">{{ $customer['email'] }}</a><br />@endif
                     @if(!empty($customer['custom_field1']) && !empty($customFieldLabels['customer_cf1'])){{ $customFieldLabels['customer_cf1'] }}: {{ $customer['custom_field1'] }}<br />@endif
                     @if(!empty($customer['custom_field2']) && !empty($customFieldLabels['customer_cf2'])){{ $customFieldLabels['customer_cf2'] }}: {{ $customer['custom_field2'] }}<br />@endif
@@ -138,7 +138,7 @@
         {{-- Total-only invoice (type 1): description --}}
         @if(($invoice['type_id'] ?? 0) == 1)
         <div class="mb-4">
-            <div class="text-uppercase text-secondary small fw-medium mb-2">{{ $LANG['description'] ?? 'Description' }}</div>
+            <div class="text-uppercase text-secondary small fw-medium mb-2">{{ $LANG['description'] ?? '' }}</div>
             <div>{!! outhtml($invoiceItems[0]['description'] ?? '') !!}</div>
         </div>
         @endif
@@ -149,10 +149,10 @@
             <table class="table table-vcenter table-sm">
                 <thead>
                     <tr>
-                        <th class="w-1">{{ $LANG['quantity_short'] ?? 'Qty' }}</th>
-                        <th>{{ $LANG['item'] ?? 'Item' }}</th>
-                        <th class="text-end">{{ $LANG['unit_cost'] ?? 'Unit' }}</th>
-                        <th class="text-end">{{ $LANG['price'] ?? 'Amount' }}</th>
+                        <th class="w-1">{{ $LANG['quantity_short'] ?? '' }}</th>
+                        <th>{{ $LANG['item'] ?? '' }}</th>
+                        <th class="text-end">{{ $LANG['unit_cost'] ?? '' }}</th>
+                        <th class="text-end">{{ $LANG['price'] ?? '' }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -204,7 +204,7 @@
 
         @if(!empty($invoice['note']))
         <div class="mb-4">
-            <div class="text-uppercase text-secondary small fw-medium mb-1">{{ $LANG['notes'] ?? 'Notes' }}</div>
+            <div class="text-uppercase text-secondary small fw-medium mb-1">{{ $LANG['notes'] ?? '' }}</div>
             <div class="text-secondary">{!! outhtml($invoice['note']) !!}</div>
         </div>
         @endif
@@ -215,7 +215,7 @@
             <div class="col-auto">
                 @if(($invoice_number_of_taxes ?? 0) > 0)
                 <div class="d-flex gap-4 justify-content-between mb-1">
-                    <span class="text-secondary">{{ $LANG['sub_total'] ?? 'Subtotal' }}</span>
+                    <span class="text-secondary">{{ $LANG['sub_total'] ?? '' }}</span>
                     <span>{{ $currency }}{{ siLocal::number($invoice['gross'] ?? 0) }}</span>
                 </div>
                 @endif
@@ -229,12 +229,12 @@
                 @endforeach
                 @if(($invoice_number_of_taxes ?? 0) > 1)
                 <div class="d-flex gap-4 justify-content-between mb-1">
-                    <span class="text-secondary">{{ $LANG['tax_total'] ?? 'Tax Total' }}</span>
+                    <span class="text-secondary">{{ $LANG['tax_total'] ?? '' }}</span>
                     <span>{{ $currency }}{{ siLocal::number($invoice['total_tax'] ?? 0) }}</span>
                 </div>
                 @endif
                 <div class="d-flex gap-4 justify-content-between pt-2 border-top fw-bold fs-4">
-                    <span>{{ $preference['pref_inv_wording'] ?? '' }} {{ $LANG['amount'] ?? 'Total' }}</span>
+                    <span>{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['amount'] ?? '' }}</span>
                     <span>{{ $currency }}{{ siLocal::number($invoice['total'] ?? 0) }}</span>
                 </div>
             </div>
@@ -248,27 +248,27 @@
     <div class="col-md-6">
         <div class="card">
             <div class="card-header">
-                <div class="card-title mb-0">{{ $preference['pref_inv_wording'] ?? '' }} {{ $invoice['index_id'] ?? '' }}</div>
+                <div class="card-title mb-0">{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $invoice['index_id'] ?? '' }}</div>
             </div>
             <div class="card-body">
                 <div class="row g-3 text-center">
                     <div class="col-4">
-                        <div class="text-secondary small mb-1">{{ $LANG['total'] ?? 'Total' }}</div>
+                        <div class="text-secondary small mb-1">{{ $LANG['total'] ?? '' }}</div>
                         <div class="fw-bold">{{ $currency }}{{ siLocal::number($invoice['total'] ?? 0) }}</div>
                     </div>
                     <div class="col-4">
-                        <div class="text-secondary small mb-1"><a href="index.php?module=payments&amp;view=manage&amp;id={{ urlencode($invoice['id'] ?? '') }}">{{ $LANG['paid'] ?? 'Paid' }}</a></div>
+                        <div class="text-secondary small mb-1"><a href="index.php?module=payments&amp;view=manage&amp;id={{ urlencode($invoice['id'] ?? '') }}">{{ $LANG['paid'] ?? '' }}</a></div>
                         <div class="fw-bold">{{ $currency }}{{ siLocal::number($invoice['paid'] ?? 0) }}</div>
                     </div>
                     <div class="col-4">
-                        <div class="text-secondary small mb-1">{{ $LANG['owing'] ?? 'Owing' }}</div>
+                        <div class="text-secondary small mb-1">{{ $LANG['owing'] ?? '' }}</div>
                         <div class="fw-bold {{ ($invoice['owing'] ?? 0) > 0 ? 'text-danger' : 'text-success' }}">{{ $currency }}{{ siLocal::number($invoice['owing'] ?? 0) }}</div>
                     </div>
                 </div>
                 @if(!empty($invoice_age))
                 <div class="text-center text-secondary small mt-3">
-                    {{ $LANG['age'] ?? 'Age' }}: {{ $invoice_age }}
-                    <a class="cluetip ms-1" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_age" title="{{ $LANG['age'] ?? 'Age' }}"><i class="ti ti-help"></i></a>
+                    {{ $LANG['age'] ?? '' }}: {{ $invoice_age }}
+                    <a class="cluetip ms-1" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_age" title="{{ $LANG['age'] ?? '' }}"><i class="ti ti-help"></i></a>
                 </div>
                 @endif
             </div>
@@ -277,20 +277,20 @@
     <div class="col-md-6">
         <div class="card">
             <div class="card-header">
-                <div class="card-title mb-0"><a href="index.php?module=customers&amp;view=details&amp;id={{ urlencode($customer['id'] ?? '') }}&amp;action=view">{{ $LANG['customer_account'] ?? 'Customer Account' }}</a></div>
+                <div class="card-title mb-0"><a href="index.php?module=customers&amp;view=details&amp;id={{ urlencode($customer['id'] ?? '') }}&amp;action=view">{{ $LANG['customer_account'] ?? '' }}</a></div>
             </div>
             <div class="card-body">
                 <div class="row g-3 text-center">
                     <div class="col-4">
-                        <div class="text-secondary small mb-1">{{ $LANG['total'] ?? 'Total' }}</div>
+                        <div class="text-secondary small mb-1">{{ $LANG['total'] ?? '' }}</div>
                         <div class="fw-bold">{{ $currency }}{{ siLocal::number($customerAccount['total'] ?? 0) }}</div>
                     </div>
                     <div class="col-4">
-                        <div class="text-secondary small mb-1"><a href="index.php?module=payments&amp;view=manage&amp;c_id={{ urlencode($customer['id'] ?? '') }}">{{ $LANG['paid'] ?? 'Paid' }}</a></div>
+                        <div class="text-secondary small mb-1"><a href="index.php?module=payments&amp;view=manage&amp;c_id={{ urlencode($customer['id'] ?? '') }}">{{ $LANG['paid'] ?? '' }}</a></div>
                         <div class="fw-bold">{{ $currency }}{{ siLocal::number($customerAccount['paid'] ?? 0) }}</div>
                     </div>
                     <div class="col-4">
-                        <div class="text-secondary small mb-1">{{ $LANG['owing'] ?? 'Owing' }}</div>
+                        <div class="text-secondary small mb-1">{{ $LANG['owing'] ?? '' }}</div>
                         <div class="fw-bold {{ ($customerAccount['owing'] ?? 0) > 0 ? 'text-danger' : 'text-success' }}">{{ $currency }}{{ siLocal::number($customerAccount['owing'] ?? 0) }}</div>
                     </div>
                 </div>

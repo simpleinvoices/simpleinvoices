@@ -1,7 +1,7 @@
 @php
     $isSuccess = (bool) ($success ?? false);
     $alertClass = $isSuccess ? 'alert-success' : 'alert-warning';
-    $title = $title ?? ($isSuccess ? ($LANG['save'] ?? 'Saved') : ($LANG['error'] ?? 'Something went wrong'));
+    $title = $title ?? ($isSuccess ? ($LANG['saved'] ?? '') : ($LANG['generic_error'] ?? ''));
     $message = $message ?? '';
     $redirectNote = $redirectNote ?? null;
 @endphp

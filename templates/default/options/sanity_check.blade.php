@@ -20,6 +20,6 @@
 		@php
 			$appWebsite = $config->app?->website ?? 'http://www.simpleinvoices.org';
 		@endphp
-		<p>{{ sprintf($LANG['sanity_check_wip'] ?? 'This feature is still a work-in-progress, please refer to our homepage: %s for updates.', '<a href="' . e($appWebsite) . '" target="_blank" rel="noopener">' . e($appWebsite) . '</a>') }}</p>
+		<p>{{ sprintf($LANG['sanity_check_wip'] ?? '', '<a href="' . e($appWebsite) . '" target="_blank" rel="noopener">' . e($appWebsite) . '</a>') }}</p>
 	</div>
 </div>

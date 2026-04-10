@@ -165,7 +165,7 @@ $LANG['done'] = "Done";//1
 $LANG['dont_forget_to'] = "Don't forget to";//1
 $LANG['download_backup'] = "Download Backup";//1
 $LANG['download_sql_backup'] = "Download SQL backup";//1
-$LANG['download_sql_backup_desc'] = "Exports your full database as a .sql file you can use to restore or migrate.";//1
+$LANG['download_sql_backup_desc'] = "Exports your full database as a .sql file for the current database type (MySQL, PostgreSQL, or SQLite).";//1
 $LANG['draft'] = "Draft";//1
 $LANG['due'] = "Due";//1
 $LANG['edit'] = "Edit";//1
@@ -734,6 +734,71 @@ $LANG['your_reports'] = "Your reports";//1
 $LANG['zip'] = "Zip code";//1
 
 // --- New keys added for UI translation completeness ---
+
+// Preview modal (footer), actions
+$LANG['preview'] = "Preview";//1
+$LANG['open_in_new_tab'] = "Open in new tab";//1
+$LANG['print_action'] = "Print";//1
+
+// Save result card (shared/save_alert)
+$LANG['saved'] = "Saved";//1
+$LANG['generic_error'] = "Something went wrong.";//1
+
+// Chrome / footer defaults
+$LANG['thank_you_for_using'] = "Thank you for using";//1
+$LANG['website'] = "Website";//1
+$LANG['admin_menu_fallback'] = "Admin";//1
+
+// Cross-database JSON backup/import (options/backup_database)
+$LANG['import_success'] = "Data imported successfully. All tables have been restored from the uploaded JSON file.";//1
+$LANG['json_export'] = "Cross-Database Export (JSON)";//1
+$LANG['json_import'] = "Cross-Database Import (JSON)";//1
+$LANG['download_json_export'] = "Download JSON data export";//1
+$LANG['download_json_export_desc'] = "Exports all data as a database-independent JSON file. Use this to migrate data between MySQL, PostgreSQL, and SQLite.";//1
+$LANG['download_json'] = "Download JSON";//1
+$LANG['how_to_migrate'] = "How to migrate to a different database:";//1
+$LANG['migrate_step1'] = "Export this JSON file from your current database.";//1
+$LANG['migrate_step2'] = "Configure the new database connection in config/config.php.";//1
+$LANG['migrate_step3'] = "Run the installer to create the schema on the new database.";//1
+$LANG['migrate_step4'] = "Use the Import section below to load your data into the new database.";//1
+$LANG['warning'] = "Warning";//1
+$LANG['import_warning'] = "Importing will permanently replace ALL existing data in this database with the contents of the uploaded file. This cannot be undone. Take a backup first.";//1
+$LANG['select_json_file'] = "Select JSON export file";//1
+$LANG['json_file_hint'] = "Select a .json file previously exported from Simple Invoices using the export above.";//1
+$LANG['import_data'] = "Import Data";//1
+$LANG['confirm_import'] = "This will permanently replace ALL data in the current database with the uploaded file.\n\nAre you sure you want to continue?";//1
+$LANG['copy_json'] = "Copy JSON";//1
+$LANG['view_json'] = "View JSON";//1
+$LANG['backup_copy_sql_title'] = "Copy SQL to clipboard";//1
+$LANG['backup_copy_json_title'] = "Copy JSON to clipboard";//1
+$LANG['backup_back_to_options'] = "Back to options";//1
+
+// First-run wizard: example placeholders
+$LANG['placeholder_biller_name_example'] = "e.g. Acme Consulting";//1
+$LANG['placeholder_email_example'] = "you@example.com";//1
+$LANG['placeholder_phone_example'] = "+1 555 000 0000";//1
+$LANG['placeholder_street_example'] = "123 Main Street";//1
+$LANG['placeholder_city_example'] = "City";//1
+$LANG['placeholder_state_example'] = "State";//1
+$LANG['placeholder_zip_example'] = "ZIP / Postcode";//1
+$LANG['placeholder_country_example'] = "Country";//1
+$LANG['placeholder_customer_name_example'] = "e.g. Acme Corp";//1
+$LANG['placeholder_contact_person_example'] = "e.g. Jane Smith";//1
+$LANG['placeholder_department_example'] = "e.g. Accounts";//1
+$LANG['placeholder_customer_email_example'] = "accounts@example.com";//1
+$LANG['placeholder_street_business_example'] = "123 Business Rd";//1
+$LANG['placeholder_product_description_example'] = "e.g. Hourly consulting rate";//1
+$LANG['placeholder_unit_price_example'] = "0.00";//1
+$LANG['tax_rate_none'] = "— none —";//1
+
+// Itemised invoice (extra line items link)
+$LANG['add_more_line_items'] = "Add 5 more line items";//1
+
+// Dashboard
+$LANG['view_all'] = "View all";//1
+$LANG['no_invoices_yet'] = "No invoices yet";//1
+$LANG['no_payments_yet'] = "No payments yet";//1
+$LANG['default_export_template'] = "Default export template (XLSX/DOCX)";//1
 
 // --- First-run wizard strings ---
 

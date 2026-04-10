@@ -691,6 +691,22 @@ td.index_table {
     box-shadow: var(--tblr-box-shadow-sm, 0 1px 2px rgba(0,0,0,.08));
 }
 
+/* Segmented control as navigation links (e.g. new invoice type) */
+a.segmented-control-item {
+    text-decoration: none;
+    color: inherit;
+}
+.segmented-control-item.active .segmented-control-label,
+.segmented-control-item[aria-current="page"] .segmented-control-label {
+    background: var(--tblr-bg-surface);
+    color: var(--tblr-body-color);
+    box-shadow: var(--tblr-box-shadow-sm, 0 1px 2px rgba(0,0,0,.08));
+}
+.segmented-control-item.active:hover .segmented-control-label,
+.segmented-control-item[aria-current="page"]:hover .segmented-control-label {
+    color: var(--tblr-body-color);
+}
+
 /* Help popovers (content loaded from documentation page) */
 .si-help-popover.popover {
     max-width: 360px;

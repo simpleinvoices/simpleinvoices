@@ -23,7 +23,7 @@
 @if($saved == false)
 
     @if(post('op') == 'add' AND post('invoice_id') == '')
-        <div class="alert alert-warning"><i class="ti ti-alert-triangle me-1"></i>{{ $LANG['select_invoice'] ?? 'Please select an invoice' }}</div>
+        <div class="alert alert-warning"><i class="ti ti-alert-triangle me-1"></i>{{ $LANG['select_invoice'] ?? '' }}</div>
     @endif
 
 

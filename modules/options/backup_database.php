@@ -39,7 +39,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && $op === 'export_json') {
 	$today    = date("Ymd_His");
 	$filename = "simple_invoices_data_{$today}.json";
 
-	header('Content-Type: application/json');
+	header('Content-Type: application/octet-stream');
 	header('Content-Disposition: attachment; filename="' . $filename . '"');
 	header('Cache-Control: no-cache, no-store, must-revalidate');
 	header('Pragma: no-cache');
@@ -90,33 +90,6 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && $op === 'import_json') {
 			}
 		}
 	}
-}
-
-// ── Page display: generate SQL preview ────────────────────────────────────
-try {
-	$oBack  = new backup_db();
-	$handle = fopen('php://memory', 'r+');
-	$oBack->start_backup($handle);
-	rewind($handle);
-	$rawSQL = stream_get_contents($handle);
-	fclose($handle);
-
-	$formatter  = new \Doctrine\SqlFormatter\SqlFormatter();
-	$statements = preg_split('/;\n/', $rawSQL, -1, PREG_SPLIT_NO_EMPTY);
-	$parts      = [];
-	foreach ($statements as $stmt) {
-		$stmt = trim($stmt);
-		if ($stmt !== '') {
-			$parts[] = $formatter->format($stmt . ';');
-		}
-	}
-	$formattedSQL = implode("\n", $parts);
-
-	$bladeView->assign('formattedSQL', $formattedSQL);
-	$bladeView->assign('rawSQL', $rawSQL);
-} catch (\Throwable $e) {
-	$errors[] = 'SQL format error: ' . $e->getMessage();
-	error_log('backup view_backup error: ' . $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine());
 }
 
 $bladeView->assign('backupActionToken', siNonce($backup_action));

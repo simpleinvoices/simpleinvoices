@@ -6,7 +6,7 @@
 @else
 <link rel="stylesheet" type="text/css" href="{{ $css|urlsafe }}" media="all">
 @endif
-<title>{{ $preference['pref_inv_wording'] ?? '' }} {{ $LANG['number_short'] ?? '' }}: {{ $invoice['index_id'] ?? '' }}</title>
+<title>{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['number_short'] ?? '' }}: {{ $invoice['index_id'] ?? '' }}</title>
 </head>
 <body>
 <br />
@@ -155,14 +155,14 @@
 	<!-- Summary - start -->
 	<table class="right invoice-summary-table">
 		<tr>
-				<td class="col1 tbl1-bottom" colspan="4" ><b>{{ $preference['pref_inv_wording'] ?? '' }} {{ $LANG['summary'] ?? '' }}</b></td>
+				<td class="col1 tbl1-bottom" colspan="4" ><b>{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['summary'] ?? '' }}</b></td>
 		</tr>
 		<tr>
-				<td class="">{{ $preference['pref_inv_wording'] ?? '' }} {{ $LANG['number_short'] ?? '' }}:</td>
+				<td class="">{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['number_short'] ?? '' }}:</td>
 				<td class="" align="right" colspan="3">{{ $invoice['index_id'] }}</td>
 		</tr>
 		<tr>
-				<td nowrap class="">{{ $preference['pref_inv_wording'] ?? '' }} {{ $LANG['date'] ?? '' }}:</td>
+				<td nowrap class="">{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['date'] ?? '' }}:</td>
 				<td class="" align="right" colspan="3">{{ $invoice['date'] }}</td>
 		</tr>
 	<!-- Show the Invoice Custom Fields if valid -->
@@ -404,7 +404,7 @@
     @endif
     <tr>
         <td colspan="2"></td>
-		<td colspan="3" align="right"><b>{{ $preference['pref_inv_wording'] ?? '' }} {{ $LANG['amount'] ?? '' }}&nbsp;</b></td>
+		<td colspan="3" align="right"><b>{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['amount'] ?? '' }}&nbsp;</b></td>
 		<td colspan="1" align="right"><span class="double_underline"><u>{{ $preference['pref_currency_sign'] }} {{ ($invoice['total'] ?? '')|siLocal_number }}</u></span></td>
     </tr>
     {{-- tax section - end --}}
@@ -439,7 +439,7 @@
 	</tr>
 	<tr class="">
 		<td class="" colspan="2"></td>
-		<td class="" align="right" colspan="3"><b>{{ $preference['pref_inv_wording'] ?? '' }} {{ $LANG['amount'] ?? '' }}</b></td>
+		<td class="" align="right" colspan="3"><b>{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['amount'] ?? '' }}</b></td>
 		<td  class="" align="right"><span class="double_underline" >{{ $preference['pref_currency_sign'] }} {{ ($invoice['total'] ?? '')|siLocal_number }}</span></td>
 	</tr> --}}
 	<tr>

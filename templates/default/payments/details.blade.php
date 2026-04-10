@@ -2,11 +2,11 @@
 <div class="card">
 	<div class="card-header">
 		<div class="card-actions">
-			<a href="index.php?module=payments&amp;view=print&amp;id={{ urlencode($payment['id'] ?? '') }}" class="btn btn-outline-primary si-preview-link" data-preview-title="{{ $LANG['print_preview'] ?? 'Print Preview' }}" data-preview-pdf="index.php?module=export&amp;view=payment&amp;id={{ urlencode($payment['id'] ?? '') }}&amp;format=pdf">
-				<i class="ti ti-printer me-1"></i>{{ $LANG['print_preview'] ?? 'Print' }}
+			<a href="index.php?module=payments&amp;view=print&amp;id={{ urlencode($payment['id'] ?? '') }}" class="btn btn-outline-primary si-preview-link" data-preview-title="{{ $LANG['print_preview'] ?? '' }}" data-preview-pdf="index.php?module=export&amp;view=payment&amp;id={{ urlencode($payment['id'] ?? '') }}&amp;format=pdf">
+				<i class="ti ti-printer me-1"></i>{{ $LANG['print_preview'] ?? '' }}
 			</a>
 			<a href="./index.php?module=payments&view=manage" class="btn btn-secondary">
-				<i class="ti ti-arrow-left me-1"></i>{{ $LANG['cancel'] ?? 'Cancel' }}
+				<i class="ti ti-arrow-left me-1"></i>{{ $LANG['cancel'] ?? '' }}
 			</a>
 		</div>
 	</div>
@@ -14,7 +14,7 @@
 		{{-- Company (biller) and Client (customer) – two columns like Tabler invoice --}}
 		<div class="row mb-4">
 			<div class="col-md-6">
-				<div class="text-secondary text-uppercase fs-6 fw-semibold mb-2">{{ $LANG['biller'] ?? 'Company' }}</div>
+				<div class="text-secondary text-uppercase fs-6 fw-semibold mb-2">{{ $LANG['biller'] ?? '' }}</div>
 				<div class="fw-semibold">{{ $biller['name'] ?? '' }}</div>
 				@if(!empty($biller['street_address']))
 					<div>{{ $biller['street_address'] ?? '' }}</div>
@@ -33,7 +33,7 @@
 				@endif
 			</div>
 			<div class="col-md-6">
-				<div class="text-secondary text-uppercase fs-6 fw-semibold mb-2">{{ $LANG['customer'] ?? 'Client' }}</div>
+				<div class="text-secondary text-uppercase fs-6 fw-semibold mb-2">{{ $LANG['customer'] ?? '' }}</div>
 				<div class="fw-semibold">{{ $customer['name'] ?? '' }}</div>
 				@if(!empty($customer['street_address']))
 					<div>{{ $customer['street_address'] ?? '' }}</div>
@@ -54,25 +54,25 @@
 		</div>
 
 		{{-- Payment reference (like Invoice # on Tabler) --}}
-		<h2 class="mb-4">{{ $LANG['payment'] ?? 'Payment' }} #{{ $payment['id'] ?? '' }}</h2>
+		<h2 class="mb-4">{{ $LANG['payment'] ?? '' }} #{{ $payment['id'] ?? '' }}</h2>
 
 		{{-- Payment details table – Tabler invoice table style --}}
 		<div class="table-responsive">
 			<table class="table table-vcenter card-table">
 				<thead>
 					<tr>
-						<th>{{ $LANG['payment_id'] ?? 'ID' }}</th>
-						<th>{{ $LANG['invoice_id'] ?? 'Invoice' }}</th>
-						<th>{{ $LANG['date_upper'] ?? 'Date' }}</th>
-						<th>{{ $LANG['payment_type'] ?? 'Type' }}</th>
-						<th class="text-end">{{ $LANG['amount'] ?? 'Amount' }}</th>
+						<th>{{ $LANG['payment_id'] ?? '' }}</th>
+						<th>{{ $LANG['invoice_id'] ?? '' }}</th>
+						<th>{{ $LANG['date_upper'] ?? '' }}</th>
+						<th>{{ $LANG['payment_type'] ?? '' }}</th>
+						<th class="text-end">{{ $LANG['amount'] ?? '' }}</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<td>{{ $payment['id'] ?? '' }}</td>
 						<td>
-							<a href="index.php?module=invoices&amp;view=quick_view&amp;id={{ urlencode($payment['ac_inv_id'] ?? '') }}&amp;action=view">{{ $preference['pref_inv_wording'] ?? 'Invoice' }} {{ $invoice['index_id'] ?? $payment['ac_inv_id'] ?? '' }}</a>
+							<a href="index.php?module=invoices&amp;view=quick_view&amp;id={{ urlencode($payment['ac_inv_id'] ?? '') }}&amp;action=view">{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $invoice['index_id'] ?? $payment['ac_inv_id'] ?? '' }}</a>
 						</td>
 						<td>{{ $payment['date'] ?? '' }}</td>
 						<td>{{ $paymentType['pt_description'] ?? '' }}</td>
@@ -87,7 +87,7 @@
 			<div class="col-12 col-sm-6 col-md-4">
 				<table class="table table-sm table-borderless mb-0">
 					<tr>
-						<td class="text-secondary">{{ $LANG['amount'] ?? 'Amount' }}</td>
+						<td class="text-secondary">{{ $LANG['amount'] ?? '' }}</td>
 						<td class="text-end fw-bold fs-4">{{ $preference['pref_currency_sign'] ?? '' }}{{ siLocal::number($payment['ac_amount'] ?? 0) }}</td>
 					</tr>
 				</table>
@@ -96,21 +96,21 @@
 
 		@if(!empty($payment['online_payment_id']))
 			<div class="mt-3 text-secondary small">
-				{{ $LANG['online_payment_id'] ?? 'Online Payment ID' }}: {{ $payment['online_payment_id'] ?? '' }}
+				{{ $LANG['online_payment_id'] ?? '' }}: {{ $payment['online_payment_id'] ?? '' }}
 			</div>
 		@endif
 
 		@if(!empty($payment['ac_notes']))
 			<div class="mt-4 pt-3 border-top">
-				<div class="text-secondary text-uppercase fs-6 fw-semibold mb-2">{{ $LANG['notes'] ?? 'Notes' }}</div>
+				<div class="text-secondary text-uppercase fs-6 fw-semibold mb-2">{{ $LANG['notes'] ?? '' }}</div>
 				<div class="text-body">{!! outhtml($payment['ac_notes'] ?? '') !!}</div>
 			</div>
 		@endif
 	</div>
 	<div class="card-footer bg-transparent">
 		<div class="d-flex">
-			<a href="./index.php?module=payments&view=manage" class="btn btn-link">{{ $LANG['cancel'] ?? 'Cancel' }}</a>
-			<a href="index.php?module=payments&amp;view=print&amp;id={{ urlencode($payment['id'] ?? '') }}" class="btn btn-primary ms-auto si-preview-link" data-preview-title="{{ $LANG['print_preview'] ?? 'Print Preview' }}" data-preview-pdf="index.php?module=export&amp;view=payment&amp;id={{ urlencode($payment['id'] ?? '') }}&amp;format=pdf"><i class="ti ti-printer me-1"></i>{{ $LANG['print_preview'] ?? 'Print' }}</a>
+			<a href="./index.php?module=payments&view=manage" class="btn btn-link">{{ $LANG['cancel'] ?? '' }}</a>
+			<a href="index.php?module=payments&amp;view=print&amp;id={{ urlencode($payment['id'] ?? '') }}" class="btn btn-primary ms-auto si-preview-link" data-preview-title="{{ $LANG['print_preview'] ?? '' }}" data-preview-pdf="index.php?module=export&amp;view=payment&amp;id={{ urlencode($payment['id'] ?? '') }}&amp;format=pdf"><i class="ti ti-printer me-1"></i>{{ $LANG['print_preview'] ?? '' }}</a>
 		</div>
 	</div>
 </div>

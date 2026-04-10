@@ -1,7 +1,7 @@
 {{-- Auth login - uses header (Tabler layout) and has its own footer - full page-center layout --}}
 @include('templates.default.header')
 @php
-	$appName = $config->app?->name ?? $LANG['simple_invoices'] ?? 'Simple Invoices';
+	$appName = $config->app?->name ?? ($LANG['simple_invoices'] ?? '');
 	$appWebsite = $config->app?->website ?? 'http://www.simpleinvoices.org';
 @endphp
 
@@ -23,11 +23,11 @@
 					<h2 class="card-title text-center mb-4">{{ $appName }}</h2>
 					<div class="mb-3">
 						<label class="form-label">{{ $LANG['email'] ?? '' }}</label>
-						<input name="user" type="text" class="form-control" title="user" value="" placeholder="{{ $LANG['email'] ?? 'Email' }}" autocomplete="username" autofocus />
+						<input name="user" type="text" class="form-control" title="user" value="" placeholder="{{ $LANG['email'] ?? '' }}" autocomplete="username" autofocus />
 					</div>
 					<div class="mb-3">
 						<label class="form-label">{{ $LANG['password'] ?? '' }}</label>
-						<input name="pass" type="password" class="form-control" title="password" placeholder="{{ $LANG['password'] ?? 'Password' }}" autocomplete="current-password" />
+						<input name="pass" type="password" class="form-control" title="password" placeholder="{{ $LANG['password'] ?? '' }}" autocomplete="current-password" />
 					</div>
 					@if($errorMessage)
 					<div class="alert alert-danger">{{ outhtml($errorMessage ?? '') }}</div>

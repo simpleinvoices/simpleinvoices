@@ -20,9 +20,9 @@
 		<table class="table table-vcenter card-table" id="live-grid">
 			<thead>
 				<tr>
-					<th>{{ $LANG['id'] ?? 'ID' }}</th>
-					<th>{{ $LANG['date_upper'] ?? 'Date' }}</th>
-					<th>{{ $LANG['cron_id'] ?? 'Cron ID' }}</th>
+					<th>{{ $LANG['id'] ?? '' }}</th>
+					<th>{{ $LANG['date_upper'] ?? '' }}</th>
+					<th>{{ $LANG['cron_id'] ?? '' }}</th>
 				</tr>
 			</thead>
 			<tbody>

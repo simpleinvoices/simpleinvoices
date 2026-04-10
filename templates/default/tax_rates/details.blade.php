@@ -33,7 +33,7 @@
 	<div class="card-footer">
 		<div class="d-flex">
 			<a href="./index.php?module=tax_rates&amp;view=manage" class="btn btn-link">{{ $LANG['cancel'] ?? '' }}</a>
-			<a href="./index.php?module=tax_rates&amp;view=details&amp;id={{ urlencode($tax['tax_id'] ?? '') }}&amp;action=edit" class="btn btn-primary ms-auto"><i class="ti ti-edit me-1"></i>{{ $LANG['edit'] ?? 'Edit' }}</a>
+			<a href="./index.php?module=tax_rates&amp;view=details&amp;id={{ urlencode($tax['tax_id'] ?? '') }}&amp;action=edit" class="btn btn-primary ms-auto"><i class="ti ti-edit me-1"></i>{{ $LANG['edit'] ?? '' }}</a>
 		</div>
 	</div>
 </div>

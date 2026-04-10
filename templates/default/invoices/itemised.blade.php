@@ -25,10 +25,10 @@
 <div class="card mb-3">
     <div class="card-status-top bg-primary"></div>
     <div class="card-header">
-        <h3 class="card-title"><i class="ti ti-rocket me-2"></i>{{ $LANG['getting_started'] ?? 'Getting Started' }}</h3>
+        <h3 class="card-title"><i class="ti ti-rocket me-2"></i>{{ $LANG['getting_started'] ?? '' }}</h3>
     </div>
     <div class="card-body">
-        <p class="text-secondary">{{ $LANG['first_run_intro'] ?? 'Welcome! Complete these steps to start invoicing:' }}</p>
+        <p class="text-secondary">{{ $LANG['first_run_intro'] ?? '' }}</p>
         <div class="row g-3">
             <div class="col-sm-6 col-lg-3">
                 <div class="card @if($inv_hasBillers) border-success @endif">
@@ -37,11 +37,11 @@
                             <i class="ti ti-building-store"></i>
                         </span>
                         <div>
-                            <div class="fw-bold">{{ $LANG['biller'] ?? 'Biller' }}</div>
+                            <div class="fw-bold">{{ $LANG['biller'] ?? '' }}</div>
                             @if($inv_hasBillers)
-                                <span class="text-success"><i class="ti ti-check"></i> {{ $LANG['done'] ?? 'Done' }}</span>
+                                <span class="text-success"><i class="ti ti-check"></i> {{ $LANG['done'] ?? '' }}</span>
                             @else
-                                <a href="index.php?module=billers&amp;view=add" class="text-primary">{{ $LANG['add_new_biller'] ?? 'Add Biller' }}</a>
+                                <a href="index.php?module=billers&amp;view=add" class="text-primary">{{ $LANG['add_new_biller'] ?? '' }}</a>
                             @endif
                         </div>
                     </div>
@@ -54,11 +54,11 @@
                             <i class="ti ti-users"></i>
                         </span>
                         <div>
-                            <div class="fw-bold">{{ $LANG['customer'] ?? 'Customer' }}</div>
+                            <div class="fw-bold">{{ $LANG['customer'] ?? '' }}</div>
                             @if($inv_hasCustomers)
-                                <span class="text-success"><i class="ti ti-check"></i> {{ $LANG['done'] ?? 'Done' }}</span>
+                                <span class="text-success"><i class="ti ti-check"></i> {{ $LANG['done'] ?? '' }}</span>
                             @else
-                                <a href="index.php?module=customers&amp;view=add" class="text-primary">{{ $LANG['customer_add'] ?? 'Add Customer' }}</a>
+                                <a href="index.php?module=customers&amp;view=add" class="text-primary">{{ $LANG['customer_add'] ?? '' }}</a>
                             @endif
                         </div>
                     </div>
@@ -71,11 +71,11 @@
                             <i class="ti ti-package"></i>
                         </span>
                         <div>
-                            <div class="fw-bold">{{ $LANG['product'] ?? 'Product' }}</div>
+                            <div class="fw-bold">{{ $LANG['product'] ?? '' }}</div>
                             @if($inv_hasProducts)
-                                <span class="text-success"><i class="ti ti-check"></i> {{ $LANG['done'] ?? 'Done' }}</span>
+                                <span class="text-success"><i class="ti ti-check"></i> {{ $LANG['done'] ?? '' }}</span>
                             @else
-                                <a href="index.php?module=products&amp;view=add" class="text-primary">{{ $LANG['add_new_product'] ?? 'Add Product' }}</a>
+                                <a href="index.php?module=products&amp;view=add" class="text-primary">{{ $LANG['add_new_product'] ?? '' }}</a>
                             @endif
                         </div>
                     </div>
@@ -88,11 +88,11 @@
                             <i class="ti ti-file-invoice"></i>
                         </span>
                         <div>
-                            <div class="fw-bold">{{ $LANG['invoice'] ?? 'Invoice' }}</div>
+                            <div class="fw-bold">{{ $LANG['invoice'] ?? '' }}</div>
                             @if(!empty($inv_hasInvoices))
-                                <span class="text-success"><i class="ti ti-check"></i> {{ $LANG['done'] ?? 'Done' }}</span>
+                                <span class="text-success"><i class="ti ti-check"></i> {{ $LANG['done'] ?? '' }}</span>
                             @else
-                                <a href="index.php?module=invoices&amp;view=itemised" class="text-primary">{{ $LANG['create_invoice'] ?? 'Create Invoice' }}</a>
+                                <a href="index.php?module=invoices&amp;view=itemised" class="text-primary">{{ $LANG['create_invoice'] ?? '' }}</a>
                             @endif
                         </div>
                     </div>
@@ -192,12 +192,12 @@
 					</div>
 					<div class="col-auto d-flex align-items-end">
 						<div class="segmented-control segmented-control-sm">
-							<label class="segmented-control-item si-expand-desc" title="{{ $LANG['description'] ?? 'Show Description' }}">
+							<label class="segmented-control-item si-expand-desc" title="{{ $LANG['description'] ?? '' }}">
 								<input type="checkbox" class="segmented-control-input">
 								<span class="segmented-control-label"><i class="ti ti-chevron-down"></i></span>
 							</label>
 							@if($line == 0)
-							<label class="segmented-control-item si-toggle-all-desc" title="{{ $LANG['show_all'] ?? 'Show all line item descriptions' }}">
+							<label class="segmented-control-item si-toggle-all-desc" title="{{ $LANG['show_all'] ?? '' }}">
 								<input type="radio" class="segmented-control-input">
 								<span class="segmented-control-label"><i class="ti ti-chevrons-down"></i></span>
 							</label>

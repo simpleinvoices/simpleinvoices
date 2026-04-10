@@ -36,7 +36,7 @@
 	<div class="card-footer">
 		<div class="d-flex">
 			<a href="./index.php?module=custom_fields&amp;view=manage" class="btn btn-link">{{ $LANG['cancel'] ?? '' }}</a>
-			<a href="./index.php?module=custom_fields&amp;view=details&amp;id={{ urlencode($cf['cf_id'] ?? '') }}&amp;action=edit" class="btn btn-primary ms-auto"><i class="ti ti-edit me-1"></i>{{ $LANG['edit'] ?? 'Edit' }}</a>
+			<a href="./index.php?module=custom_fields&amp;view=details&amp;id={{ urlencode($cf['cf_id'] ?? '') }}&amp;action=edit" class="btn btn-primary ms-auto"><i class="ti ti-edit me-1"></i>{{ $LANG['edit'] ?? '' }}</a>
 		</div>
 	</div>
 </div>

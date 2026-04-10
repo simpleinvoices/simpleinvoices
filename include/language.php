@@ -1,11 +1,9 @@
 <?php
 /*
- * Read language informations
- * 1. reads default-language file
- * 2. reads requested language file
- * 3. make some editing (Upper-Case etc.)
- * 
- * Not in each translated file need to be each all translations, only in the default-lang-file (english)
+ * Read language information
+ * 1. Load base catalogue (en_US if present, else en_GB) so missing keys in a locale still resolve.
+ * 2. Overlay the selected language file when it exists and is not already the base file.
+ * 3. Extension lang files use the same base-then-overlay order.
  */
 
 
@@ -33,29 +31,41 @@ function getLanguageArray($lang='') {
 
 	$langPath = "./lang/";
 	$langFile = "/lang.php";
-	//$getLanguage = getenv("HTTP_ACCEPT_LANGUAGE");
-	//$language = getDefaultLanguage();
 
-	//include english as default - so if the selected lang doesnt have the required lang then it still loads
-	include($langPath."en_GB".$langFile);
-
-	if(	file_exists($langPath.$language.$langFile) ){
-		include($langPath.$language.$langFile);
+	$fallbackUs = $langPath . 'en_US' . $langFile;
+	$fallbackGb = $langPath . 'en_GB' . $langFile;
+	$baseLoaded = null;
+	if (file_exists($fallbackUs)) {
+		include $fallbackUs;
+		$baseLoaded = 'en_US';
+	} elseif (file_exists($fallbackGb)) {
+		include $fallbackGb;
+		$baseLoaded = 'en_GB';
+	} else {
+		$LANG = [];
 	}
 
+	$selectedFile = $langPath . $language . $langFile;
+	if (file_exists($selectedFile) && ($baseLoaded === null || $language !== $baseLoaded)) {
+		include $selectedFile;
+	}
 
-	foreach($config->extension as $extension)
-	{
-		/*
-		* If extension is enabled then continue and include the requested file for that extension if it exists
-		*/	
-		if($extension->enabled == "1")
-		{
-			//echo "Enabled:".$value['name']."<br><br>";
-			if(file_exists("./extensions/$extension->name/lang/$language/lang.php"))
-			{
-				include_once("./extensions/$extension->name/lang/$language/lang.php");
-			}
+	foreach ($config->extension as $extension) {
+		if ($extension->enabled != "1") {
+			continue;
+		}
+		$extLangDir = "./extensions/{$extension->name}/lang";
+		$extBaseLoaded = null;
+		if (file_exists("{$extLangDir}/en_US/lang.php")) {
+			include_once "{$extLangDir}/en_US/lang.php";
+			$extBaseLoaded = 'en_US';
+		} elseif (file_exists("{$extLangDir}/en_GB/lang.php")) {
+			include_once "{$extLangDir}/en_GB/lang.php";
+			$extBaseLoaded = 'en_GB';
+		}
+		$extSelected = "{$extLangDir}/{$language}/lang.php";
+		if (file_exists($extSelected) && ($extBaseLoaded === null || $language !== $extBaseLoaded)) {
+			include_once $extSelected;
 		}
 	}
 	

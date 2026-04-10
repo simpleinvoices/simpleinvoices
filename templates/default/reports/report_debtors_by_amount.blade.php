@@ -26,7 +26,7 @@
 	@foreach(item=invoice from=$data)
 		<tr>
 			<td>{{ $invoice['id'] ?? '' }}</td>
-			<td>{{ $invoice['pref_inv_wording'] ?? '' }} {{ $invoice['index_id'] ?? '' }}</td>
+			<td>{{ $invoice['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $invoice['index_id'] ?? '' }}</td>
 			<td>{{ $invoice['biller'] ?? '' }}</td>
 			<td>{{ $invoice['customer'] ?? '' }}</td>
 			<td>{{ siLocal::number($invoice['inv_total'] ?? 0) }}</td>

@@ -2,7 +2,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<title>{{ $preference['pref_inv_wording'] ?? '' }} {{ $LANG['number_short'] ?? '' }}: {{ $invoice['index_id'] ?? '' }}</title>
+<title>{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['number_short'] ?? '' }}: {{ $invoice['index_id'] ?? '' }}</title>
 </head>
 <body>
 <br />
@@ -24,14 +24,14 @@
 
 <table >
 		<tr>
-				<td colspan="4"><b>{{ $preference['pref_inv_wording'] ?? '' }} {{ $LANG['summary'] ?? '' }}</b></td>
+				<td colspan="4"><b>{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['summary'] ?? '' }}</b></td>
 		</tr>
 		<tr>
-				<td >{{ $preference['pref_inv_wording'] ?? '' }} {{ $LANG['number_short'] ?? '' }}:</td>
+				<td >{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['number_short'] ?? '' }}:</td>
 				<td colspan="3">{{ $invoice['index_id'] ?? '' }}</td>
 		</tr>
 		<tr>
-				<td nowrap >{{ $preference['pref_inv_wording'] ?? '' }} {{ $LANG['date'] ?? '' }}:</td>
+				<td nowrap >{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['date'] ?? '' }}:</td>
 				<td colspan="3">{{ $invoice['date'] ?? '' }}</td>
 		</tr>
 	<!-- Show the Invoice Custom Fields if valid -->
@@ -331,7 +331,7 @@
     @endif
     <tr>
         <td colspan="2"></td>
-		<td colspan="3" align="right"><b>{{ $preference['pref_inv_wording'] ?? '' }} {{ $LANG['amount'] ?? '' }}&nbsp;</b></td>
+		<td colspan="3" align="right"><b>{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['amount'] ?? '' }}&nbsp;</b></td>
 		<td colspan="1" align="right"><span class="double_underline">{{ $preference['pref_currency_sign'] }} {{ $invoice['total'] ?? '' | siLocal_number }}</span></td>
     </tr>
     {{-- tax section - end --}}
@@ -361,7 +361,7 @@
 	</tr>
 	<tr >
 		<td colspan="3"></td>
-		<td align="right" colspan="2"><b>{{ $preference['pref_inv_wording'] ?? '' }} {{ $LANG['amount'] ?? '' }}</b></td>
+		<td align="right" colspan="2"><b>{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['amount'] ?? '' }}</b></td>
 		<td  align="right"><u>{{ $preference['pref_currency_sign'] }} {{ number_format($invoice['total'] ?? 0, 2) }}</u></td>
 	</tr> --}}
 	<tr>
