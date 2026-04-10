@@ -802,5 +802,3 @@ $LANG['default_export_template'] = "Default export template (XLSX/DOCX)";//1
 
 // --- First-run wizard strings ---
 
-?>
-

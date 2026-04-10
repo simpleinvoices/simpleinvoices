@@ -788,4 +788,3 @@ $LANG['backup_copy_json_title'] = "Copy JSON to clipboard";//1
 $LANG['backup_back_to_options'] = "Back to options";//1
 
 // New i18n keys added 2026-04-06
-?>

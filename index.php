@@ -192,7 +192,7 @@ if (($module == "invoices" ) && (strstr($view,"template"))) {
 * xml or ajax page requeset - start
 */
 
-	if( strstr($module,"api") OR (strstr($view,"xml") OR (strstr($view,"ajax")) ) )
+	if( strstr($module,"api") OR $module === "export" OR (strstr($view,"xml") OR (strstr($view,"ajax")) ) )
 	{
 		if ($my_path = GetCustomPath("$module/$view", 'module')) {
 			include($my_path);
