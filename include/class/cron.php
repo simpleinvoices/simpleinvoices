@@ -152,8 +152,6 @@ class cron {
 			 WHERE 
 				cron.domain_id = :domain_id
 				$where
-			GROUP BY
-			    cron.id
 			ORDER BY
 				$sort $dir
 			$limit";
@@ -177,6 +175,14 @@ class cron {
         global $db_server;
         // Use this function to select crons that need to run each day across all domain_id values
         $cron_index_expr = ($db_server === 'mysql') ? "(SELECT CONCAT(pf.pref_description,' ',iv.index_id))" : "(pf.pref_description || ' ' || CAST(iv.index_id AS TEXT))";
+        // SQLite has no NOW(); keep semantics aligned with MySQL (BETWEEN + NULL end_date => unknown, row excluded).
+        if ($db_server === 'mysql') {
+            $cron_active_dates = 'NOW() BETWEEN cron.start_date AND cron.end_date';
+        } elseif ($db_server === 'pgsql') {
+            $cron_active_dates = 'CURRENT_DATE BETWEEN cron.start_date AND cron.end_date::date';
+        } else {
+            $cron_active_dates = "date('now') BETWEEN date(cron.start_date) AND date(cron.end_date)";
+        }
 
         $sql = "SELECT
                   cron.*
@@ -188,8 +194,7 @@ class cron {
                     ON (cron.invoice_id = iv.id AND cron.domain_id = iv.domain_id)
                 INNER JOIN ".TB_PREFIX."preferences pf 
                     ON (iv.preference_id = pf.pref_id AND iv.domain_id = pf.domain_id)
-            WHERE NOW() BETWEEN cron.start_date AND cron.end_date
-            GROUP BY cron.id, cron.domain_id
+            WHERE $cron_active_dates
         ";
 
         $sth = dbQuery($sql);

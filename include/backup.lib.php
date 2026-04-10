@@ -93,6 +93,17 @@ class backup_db {
     var $output;
     var $filename;
 
+    // Base table names (without TB_PREFIX), in parent-before-child order.
+    // Used by restore_from_json() to insert rows without FK violations.
+    static $IMPORT_TABLE_ORDER = [
+        'index', 'user_role', 'user', 'preferences', 'invoice_type', 'tax',
+        'payment_types', 'system_defaults', 'extensions', 'custom_fields',
+        'sql_patchmanager', 'products_attribute_type', 'products_values',
+        'products', 'biller', 'customers', 'user_domain', 'inventory',
+        'invoices', 'cron', 'invoice_items', 'invoice_item_tax', 'payment',
+        'cron_log', 'log',
+    ];
+
     function __construct() {
         $this->output   = array();
         $this->filename = $this->filename ?? "db_backup.sql";
@@ -121,23 +132,8 @@ class backup_db {
         fwrite($output_handle, "-- Database type: " . $oDB->db_type . "\n");
         fwrite($output_handle, "-- Generated: " . date('Y-m-d H:i:s') . "\n\n");
 
-        switch ($oDB->db_type) {
-            case 'mysql':
-                $tableQuery = "SHOW TABLES";
-                break;
-            case 'sqlite':
-                $tableQuery = "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name";
-                break;
-            case 'pgsql':
-                $tableQuery = "SELECT tablename FROM pg_tables WHERE schemaname='public' ORDER BY tablename";
-                break;
-            default:
-                throw new RuntimeException("Unsupported database type for backup: " . $oDB->db_type);
-        }
-
-        $result = $oDB->sqlQuery($tableQuery);
-        while ($row = $result->fetch(PDO::FETCH_NUM)) {
-            $this->_backup_table($row[0], $oDB, $output_handle);
+        foreach ($this->_get_tables($oDB) as $table) {
+            $this->_backup_table($table, $oDB, $output_handle);
         }
 
         if ($close_handle) fclose($output_handle);
@@ -266,6 +262,172 @@ class backup_db {
             default:
                 // Fall back to the information_schema data_type name
                 return strtoupper($col['data_type']);
+        }
+    }
+
+    // Return all table names from the current database
+    function _get_tables($oDB) {
+        switch ($oDB->db_type) {
+            case 'mysql':
+                $result = $oDB->sqlQuery("SHOW TABLES");
+                break;
+            case 'sqlite':
+                $result = $oDB->sqlQuery("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name");
+                break;
+            case 'pgsql':
+                $result = $oDB->sqlQuery("SELECT tablename FROM pg_tables WHERE schemaname='public' ORDER BY tablename");
+                break;
+            default:
+                throw new RuntimeException("Unsupported database type: " . $oDB->db_type);
+        }
+        $tables = [];
+        while ($row = $result->fetch(PDO::FETCH_NUM)) {
+            $tables[] = $row[0];
+        }
+        return $tables;
+    }
+
+    // Export all table data as a JSON file (database-independent format).
+    // The JSON structure mirrors databases/json/sample_data.json so it can
+    // be imported into any supported database type via restore_from_json().
+    function export_json($output_handle) {
+        $oDB   = new database();
+        $data  = [];
+
+        foreach ($this->_get_tables($oDB) as $table) {
+            $qi   = $oDB->quoteIdent($table);
+            $rows = $oDB->db_link->query("SELECT * FROM $qi")->fetchAll(PDO::FETCH_ASSOC);
+            $data[$table] = $rows; // include empty tables so restore clears them
+        }
+
+        $oDB->close_database();
+
+        fwrite($output_handle, json_encode(
+            $data,
+            JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
+        ));
+    }
+
+    // Restore all data from a JSON string produced by export_json().
+    // Clears existing rows in all tables present in the JSON, then re-inserts
+    // them in dependency order.  Schema must already exist (run the installer
+    // or SQL backup first when migrating to a new database type).
+    function restore_from_json($json_string) {
+        $data = json_decode($json_string, true);
+        if (!is_array($data)) {
+            throw new RuntimeException("Invalid JSON: " . json_last_error_msg());
+        }
+
+        $oDB     = new database();
+        $dbh     = $oDB->db_link;
+        $db_type = $oDB->db_type;
+
+        // Build ordered list of tables to restore: known dependency order first,
+        // then any extra tables present in the JSON (future-proofing).
+        $ordered = array_map(fn($base) => TB_PREFIX . $base, self::$IMPORT_TABLE_ORDER);
+        foreach (array_keys($data) as $t) {
+            if (!in_array($t, $ordered)) {
+                $ordered[] = $t;
+            }
+        }
+        // Keep only tables that appear in the JSON
+        $to_restore = array_values(array_filter($ordered, fn($t) => array_key_exists($t, $data)));
+
+        $dbh->beginTransaction();
+        try {
+            // Disable FK constraint checking for the session
+            if ($db_type === 'mysql') {
+                $dbh->exec("SET FOREIGN_KEY_CHECKS=0");
+            } elseif ($db_type === 'sqlite') {
+                $dbh->exec("PRAGMA foreign_keys=OFF");
+            }
+
+            // Clear existing rows — children before parents (reverse import order).
+            // PostgreSQL uses TRUNCATE CASCADE so order does not matter there.
+            foreach (array_reverse($to_restore) as $table) {
+                $qi = $oDB->quoteIdent($table);
+                try {
+                    if ($db_type === 'pgsql') {
+                        $dbh->exec("TRUNCATE $qi RESTART IDENTITY CASCADE");
+                    } else {
+                        $dbh->exec("DELETE FROM $qi");
+                    }
+                } catch (\Exception $e) {
+                    // Table may not exist in the target schema — skip it
+                }
+            }
+
+            // Insert rows — parents before children
+            foreach ($to_restore as $table) {
+                if (empty($data[$table])) {
+                    continue;
+                }
+                $qi = $oDB->quoteIdent($table);
+                foreach ($data[$table] as $row) {
+                    $cols     = array_keys($row);
+                    $col_list = implode(', ', array_map([$oDB, 'quoteIdent'], $cols));
+                    $vals     = [];
+                    foreach ($row as $v) {
+                        $vals[] = ($v === null) ? 'NULL' : $dbh->quote((string)$v);
+                    }
+                    $dbh->exec("INSERT INTO $qi ($col_list) VALUES (" . implode(', ', $vals) . ")");
+                }
+            }
+
+            // Re-enable FK constraints
+            if ($db_type === 'mysql') {
+                $dbh->exec("SET FOREIGN_KEY_CHECKS=1");
+            } elseif ($db_type === 'sqlite') {
+                $dbh->exec("PRAGMA foreign_keys=ON");
+            }
+
+            // PostgreSQL: advance sequences past the highest restored ID so that
+            // new auto-insert rows do not collide with the imported data.
+            if ($db_type === 'pgsql') {
+                foreach (array_keys($data) as $table) {
+                    $this->_reset_pgsql_sequences($table, $oDB);
+                }
+            }
+
+            $dbh->commit();
+        } catch (\Exception $e) {
+            $dbh->rollBack();
+            $oDB->close_database();
+            throw $e;
+        }
+
+        $oDB->close_database();
+    }
+
+    // After a PostgreSQL restore, advance each SERIAL/BIGSERIAL sequence so
+    // its next value is MAX(id)+1, preventing duplicate-key errors on insert.
+    function _reset_pgsql_sequences($table, $oDB) {
+        $stmt = $oDB->db_link->prepare(
+            "SELECT column_name
+             FROM information_schema.columns
+             WHERE table_schema = 'public'
+               AND table_name   = :name
+               AND column_default LIKE 'nextval(%'"
+        );
+        $stmt->execute([':name' => $table]);
+        $serial_cols = $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
+
+        foreach ($serial_cols as $col) {
+            $qi_table = '"' . str_replace('"', '""', $table) . '"';
+            $qi_col   = '"' . str_replace('"', '""', $col)   . '"';
+            $esc_t    = str_replace("'", "''", $table);
+            $esc_c    = str_replace("'", "''", $col);
+            try {
+                // setval(seq, val) with is_called=true → next nextval() returns val+1
+                $oDB->db_link->exec(
+                    "SELECT setval(
+                         pg_get_serial_sequence('$esc_t', '$esc_c'),
+                         COALESCE((SELECT MAX($qi_col) FROM $qi_table), 1)
+                     )"
+                );
+            } catch (\Exception $e) {
+                // Sequence may not exist — ignore
+            }
         }
     }
 

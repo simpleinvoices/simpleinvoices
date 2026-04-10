@@ -15,8 +15,8 @@ database.params.port                = 3306
 authentication.enabled              = false
 authentication.http                 = 
 
-export.spreadsheet                  = xls
-export.wordprocessor                = doc
+export.spreadsheet                  = xlsx
+export.wordprocessor                = docx
 export.pdf.screensize               = 800
 export.pdf.papersize                = A4
 export.pdf.leftmargin               = 15

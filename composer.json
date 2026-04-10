@@ -5,6 +5,8 @@
         "jenssegers/blade": "^2.0",
         "phpmailer/phpmailer": "^6.10",
         "monolog/monolog": "^3.0",
-        "doctrine/sql-formatter": "^1.5"
+        "doctrine/sql-formatter": "^1.5",
+        "phpoffice/phpspreadsheet": "^3.0",
+        "phpoffice/phpword": "^1.3"
     }
 }
