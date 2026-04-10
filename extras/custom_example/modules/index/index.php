@@ -9,4 +9,4 @@ include('../modules/index/index.php');
 $my_content	="<h3>My Own Tag is Here</H3>";
 
 // We add it to the template
-$smarty -> assign("my_tag", $my_content);
+$bladeView -> assign("my_tag", $my_content);

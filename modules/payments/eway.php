@@ -26,10 +26,10 @@ if ( ($_POST['op'] =='add') AND (!empty($_POST['invoice_id'])) )
     
 }      
 
-$smarty -> assign('invoice_all',$invoice_all);
-$smarty -> assign('saved',$saved);
+$bladeView -> assign('invoice_all',$invoice_all);
+$bladeView -> assign('saved',$saved);
 
-$smarty -> assign('pageActive', 'payment');
-$smarty -> assign('subPageActive', 'payment_eway');
-$smarty -> assign('active_tab', '#money');
+$bladeView -> assign('pageActive', 'payment');
+$bladeView -> assign('subPageActive', 'payment_eway');
+$bladeView -> assign('active_tab', '#money');
 

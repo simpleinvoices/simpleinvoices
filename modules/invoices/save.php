@@ -14,8 +14,8 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-$smarty -> assign('pageActive', 'invoice_new');
-$smarty -> assign('active_tab', '#money');
+$bladeView -> assign('pageActive', 'invoice_new');
+$bladeView -> assign('active_tab', '#money');
 
 # Deal with op and add some basic sanity checking
 
@@ -129,7 +129,7 @@ if ($_POST['action'] == "insert" ) {
 }
 
 //Get type id - so do add into redirector header
-$smarty->assign('saved', $saved);
-$smarty->assign('id', $id);
+$bladeView->assign('saved', $saved);
+$bladeView->assign('id', $id);
 
 ?>

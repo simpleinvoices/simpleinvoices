@@ -5,11 +5,11 @@
  * All functions return HTML strings (no echo) for use in Blade {{ }} or @directives.
  */
 
-// --- Request / form helpers (Blade alternative to $smarty->post / $smarty->get) ---
+// --- Request / form helpers (direct $_GET / $_POST access for Blade templates) ---
 
 if (!function_exists('post')) {
 /**
- * Get POST value(s). Use instead of $smarty->post->key in Blade.
+ * Get POST value(s).
  *
  * @param string|null $key    Key (e.g. 'name', 'submit'); null = entire $_POST
  * @param mixed       $default Default when key missing
@@ -25,7 +25,7 @@ function post($key = null, $default = '') {
 
 if (!function_exists('get')) {
 /**
- * Get GET value(s). Use instead of $smarty->get->key in Blade.
+ * Get GET value(s).
  *
  * @param string|null $key    Key; null = entire $_GET
  * @param mixed       $default Default when key missing
@@ -42,7 +42,6 @@ function get($key = null, $default = '') {
 if (!function_exists('form_submitted')) {
 /**
  * Whether the request is a POST and (optionally) a submit key is present.
- * Use instead of $smarty->post->submit != null in Blade.
  *
  * @param string|null $submitKey Name of submit button (default 'submit'); null = any POST
  * @return bool

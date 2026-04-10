@@ -67,14 +67,14 @@ function GetCustomPath($name,$mode='template'){
 * The include configs and requirements stuff section - end
 */
 
-$smarty -> assign("config",$config); // to toggle the login / logout button visibility in the menu
-$smarty -> assign("module",$module);
-$smarty -> assign("view",$view);
-$smarty -> assign("siUrl",$siUrl);//used for template css
+$bladeView -> assign("config",$config); // to toggle the login / logout button visibility in the menu
+$bladeView -> assign("module",$module);
+$bladeView -> assign("view",$view);
+$bladeView -> assign("siUrl",$siUrl);//used for template css
 
-$smarty -> assign("LANG",$LANG);
+$bladeView -> assign("LANG",$LANG);
 //For Making easy enabled pop-menus (see biller)
-$smarty -> assign("enabled",array($LANG['disabled'],$LANG['enabled']));
+$bladeView -> assign("enabled",array($LANG['disabled'],$LANG['enabled']));
 
 /*
 * Menu - hide or show menu
@@ -221,7 +221,7 @@ $file= "$module/$view";
 */
 if( !in_array($module."_".$view, $early_exit) )
 {
-		$smarty->display(GetCustomPath('header'));
+		$bladeView->display(GetCustomPath('header'));
 }
 /*
 * Prep the page - load the header stuff - end
@@ -248,7 +248,7 @@ if($module == "export" OR $view == "export" OR $module == "api")
 }	
 
 	if ($module != 'auth') {
-		$smarty->display("include/jquery/post_load_jquery_ext_js.blade.php");
+		$bladeView->display("include/jquery/post_load_jquery_ext_js.blade.php");
 	}
 		
 		
@@ -259,7 +259,7 @@ if($module == "export" OR $view == "export" OR $module == "api")
 */
 
 	if ($menu == "true") {
-		$smarty->display(GetCustomPath('menu'));
+		$bladeView->display(GetCustomPath('menu'));
 	}
 /*
 * Menu : If extension has custom menu use it else use default - end
@@ -267,7 +267,7 @@ if($module == "export" OR $view == "export" OR $module == "api")
 
 
 	if ( !in_array($module."_".$view, $early_exit) ) {
-		$smarty->display(GetCustomPath('main'));
+		$bladeView->display(GetCustomPath('main'));
 	}
 
 
@@ -277,7 +277,7 @@ if($module == "export" OR $view == "export" OR $module == "api")
 
 	$my_tpl_path = GetCustomPath("$module/$view");
 	$path = $my_tpl_path ? dirname($my_tpl_path).'/' : '';
-	$smarty->assign("path", $path);
+	$bladeView->assign("path", $path);
 	
 	// Debug and error handling for empty template path
 	if (empty($my_tpl_path)) {
@@ -301,7 +301,7 @@ if($module == "export" OR $view == "export" OR $module == "api")
 		exit(1);
 	}
 	
-	$smarty -> display($my_tpl_path);
+	$bladeView -> display($my_tpl_path);
 	
 	// If no template path was found, error already logged above
 
@@ -313,7 +313,7 @@ if($module == "export" OR $view == "export" OR $module == "api")
 * Footer - start 
 */
 	if ( !in_array($module."_".$view, $early_exit) ) {
-		$smarty->display(GetCustomPath('footer'));
+		$bladeView->display(GetCustomPath('footer'));
 	}
 
 	

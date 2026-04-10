@@ -18,9 +18,9 @@ if ($_POST['op'] =='add' AND !empty($_POST['product_id']))
 $productobj = new product();
 $product_all = $productobj->get_all();
 
-$smarty -> assign('product_all',$product_all);
-$smarty -> assign('saved',$saved);
+$bladeView -> assign('product_all',$product_all);
+$bladeView -> assign('saved',$saved);
 
-$smarty -> assign('pageActive', 'inventory');
-$smarty -> assign('subPageActive', 'inventory_add');
-$smarty -> assign('active_tab', '#product');
+$bladeView -> assign('pageActive', 'inventory');
+$bladeView -> assign('subPageActive', 'inventory_add');
+$bladeView -> assign('active_tab', '#product');

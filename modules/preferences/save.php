@@ -172,8 +172,8 @@ else if (  $op === 'edit_preference' ) {
 
 }
 
-$smarty -> assign('saved',$saved); 
+$bladeView -> assign('saved',$saved); 
 
-$smarty -> assign('pageActive', 'preference');
-$smarty -> assign('active_tab', '#setting');
+$bladeView -> assign('pageActive', 'preference');
+$bladeView -> assign('active_tab', '#setting');
 ?>

@@ -326,7 +326,7 @@ class export
 
     function getData()
     {
-        global $smarty;
+        global $bladeView;
         global $siUrl;
 
         switch ($this->module) {
@@ -376,18 +376,18 @@ class export
 
                 $this->file_name = "statement_{$this->biller_id}_{$this->customer_id}_{$invoice->start_date}_{$invoice->end_date}";
 
-                $smarty->assign('biller_id',       $this->biller_id);
-                $smarty->assign('biller_details',  $biller_details);
-                $smarty->assign('billers',         $billers);
-                $smarty->assign('customer_id',     $this->customer_id);
-                $smarty->assign('customer_details', $customer_details);
-                $smarty->assign('show_only_unpaid', $this->show_only_unpaid);
-                $smarty->assign('filter_by_date',  $this->filter_by_date);
-                $smarty->assign('invoices',        $invoices);
-                $smarty->assign('start_date',      $this->start_date);
-                $smarty->assign('end_date',        $this->end_date);
-                $smarty->assign('statement',       $statement);
-                $data = $smarty->fetch("." . $templatePath);
+                $bladeView->assign('biller_id',       $this->biller_id);
+                $bladeView->assign('biller_details',  $biller_details);
+                $bladeView->assign('billers',         $billers);
+                $bladeView->assign('customer_id',     $this->customer_id);
+                $bladeView->assign('customer_details', $customer_details);
+                $bladeView->assign('show_only_unpaid', $this->show_only_unpaid);
+                $bladeView->assign('filter_by_date',  $this->filter_by_date);
+                $bladeView->assign('invoices',        $invoices);
+                $bladeView->assign('start_date',      $this->start_date);
+                $bladeView->assign('end_date',        $this->end_date);
+                $bladeView->assign('statement',       $statement);
+                $data = $bladeView->fetch("." . $templatePath);
                 break;
             }
 
@@ -404,23 +404,23 @@ class export
                 $paymentType = getPaymentType($payment['ac_payment_type'], $this->domain_id);
                 $preference  = getPreference($invoice['preference_id'], $this->domain_id);
 
-                $smarty->assign("payment",          $payment);
-                $smarty->assign("invoice",          $invoice);
-                $smarty->assign("biller",           $biller);
-                $smarty->assign("logo",             $logo);
-                $smarty->assign("customer",         $customer);
-                $smarty->assign("invoiceType",      $invoiceType);
-                $smarty->assign("paymentType",      $paymentType);
-                $smarty->assign("preference",       $preference);
-                $smarty->assign("customFieldLabels", $customFieldLabels);
-                $smarty->assign('pageActive',       'payment');
-                $smarty->assign('active_tab',       '#money');
+                $bladeView->assign("payment",          $payment);
+                $bladeView->assign("invoice",          $invoice);
+                $bladeView->assign("biller",           $biller);
+                $bladeView->assign("logo",             $logo);
+                $bladeView->assign("customer",         $customer);
+                $bladeView->assign("invoiceType",      $invoiceType);
+                $bladeView->assign("paymentType",      $paymentType);
+                $bladeView->assign("preference",       $preference);
+                $bladeView->assign("customFieldLabels", $customFieldLabels);
+                $bladeView->assign('pageActive',       'payment');
+                $bladeView->assign('active_tab',       '#money');
 
                 $css = $siUrl . "/templates/invoices/default/style.css";
-                $smarty->assign('css', $css);
+                $bladeView->assign('css', $css);
 
                 $templatePath = "./templates/default/payments/print.blade.php";
-                $data = $smarty->fetch("." . $templatePath);
+                $data = $bladeView->fetch("." . $templatePath);
                 break;
             }
 
@@ -472,23 +472,23 @@ class export
                 }
 
                 $pageActive = "invoices";
-                $smarty->assign('pageActive', $pageActive);
+                $bladeView->assign('pageActive', $pageActive);
 
                 if (file_exists($templatePath)) {
                     $this->assignTemplateLanguage($preference);
-                    $smarty->assign('biller',                 $biller);
-                    $smarty->assign('customer',               $customer);
-                    $smarty->assign('invoice',                $invoice);
-                    $smarty->assign('invoice_number_of_taxes', $invoice_number_of_taxes);
-                    $smarty->assign('preference',             $preference);
-                    $smarty->assign('logo',                   $logo);
-                    $smarty->assign('template',               $template);
-                    $smarty->assign('invoiceItems',           $invoiceItems);
-                    $smarty->assign('template_path',          $template_path);
-                    $smarty->assign('css',                    $css);
-                    $smarty->assign('css_inline',             $css_inline);
-                    $smarty->assign('customFieldLabels',      $customFieldLabels);
-                    $data = $smarty->fetch("." . $templatePath);
+                    $bladeView->assign('biller',                 $biller);
+                    $bladeView->assign('customer',               $customer);
+                    $bladeView->assign('invoice',                $invoice);
+                    $bladeView->assign('invoice_number_of_taxes', $invoice_number_of_taxes);
+                    $bladeView->assign('preference',             $preference);
+                    $bladeView->assign('logo',                   $logo);
+                    $bladeView->assign('template',               $template);
+                    $bladeView->assign('invoiceItems',           $invoiceItems);
+                    $bladeView->assign('template_path',          $template_path);
+                    $bladeView->assign('css',                    $css);
+                    $bladeView->assign('css_inline',             $css_inline);
+                    $bladeView->assign('customFieldLabels',      $customFieldLabels);
+                    $data = $bladeView->fetch("." . $templatePath);
                 }
                 break;
             }
@@ -505,8 +505,8 @@ class export
     function assignTemplateLanguage($preference)
     {
         if ($pref_language = $preference['language'] and $LANG = getLanguageArray($pref_language) and is_array($LANG) and count($LANG)) {
-            global $smarty;
-            $smarty->assign('LANG', $LANG);
+            global $bladeView;
+            $bladeView->assign('LANG', $LANG);
         }
         if ($pref_locale = $preference['locale'] and strlen($pref_locale) > 4) {
             global $config;

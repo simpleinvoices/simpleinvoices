@@ -25,9 +25,9 @@ GROUP BY
     array_push($products, $product);
   }
 
-  $smarty -> assign('data', $products);
-  $smarty -> assign('total_quantity', $total_quantity);
+  $bladeView -> assign('data', $products);
+  $bladeView -> assign('total_quantity', $total_quantity);
 
-	$smarty -> assign('pageActive', 'report');
-	$smarty -> assign('active_tab', '#home');
+	$bladeView -> assign('pageActive', 'report');
+	$bladeView -> assign('active_tab', '#home');
 ?>

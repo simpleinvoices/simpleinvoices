@@ -32,9 +32,9 @@ if ( isset($_POST['process_payment']) ) {
 	$refresh_total = "<meta http-equiv='refresh' content='27;url=index.php?module=payments&view=manage' />";
 }
 
-$smarty->assign('saved', isset($saved) ? $saved : null);
-$smarty->assign('display_block', $display_block);
+$bladeView->assign('saved', isset($saved) ? $saved : null);
+$bladeView->assign('display_block', $display_block);
 
-$smarty -> assign('pageActive', 'payment');
-$smarty -> assign('active_tab', '#money');
+$bladeView -> assign('pageActive', 'payment');
+$bladeView -> assign('active_tab', '#money');
 ?>

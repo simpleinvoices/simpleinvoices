@@ -1,6 +1,6 @@
 <?php
 
-function smarty_function_total($params, $smarty = null)
+function smarty_function_total($params, $_unused = null)
 {
 
 	

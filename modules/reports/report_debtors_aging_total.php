@@ -63,11 +63,11 @@ HAVING
       return $bucket_order[$a] - $bucket_order[$b];
   });
 
-  $smarty -> assign('data', array_values($periods));
-  $smarty -> assign('sum_total', $sum_total);
-  $smarty -> assign('sum_paid', $sum_paid);
-  $smarty -> assign('sum_owing', $sum_owing);
+  $bladeView -> assign('data', array_values($periods));
+  $bladeView -> assign('sum_total', $sum_total);
+  $bladeView -> assign('sum_paid', $sum_paid);
+  $bladeView -> assign('sum_owing', $sum_owing);
 
-  $smarty -> assign('pageActive', 'report');
-  $smarty -> assign('active_tab', '#home');
+  $bladeView -> assign('pageActive', 'report');
+  $bladeView -> assign('active_tab', '#home');
 ?>

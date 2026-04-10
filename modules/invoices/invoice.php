@@ -30,12 +30,12 @@ $inv_hasInvoices = (bool) dbQuery(
     "SELECT COUNT(*) FROM " . TB_PREFIX . "invoices WHERE domain_id = :domain_id",
     ':domain_id', $auth_session->domain_id
 )->fetchColumn();
-$smarty->assign('inv_hasInvoices', $inv_hasInvoices);
+$bladeView->assign('inv_hasInvoices', $inv_hasInvoices);
 
 if ($billers == null OR $customers == null OR $products == null)
 {
     $first_run_wizard =true;
-    $smarty -> assign("first_run_wizard",$first_run_wizard);
+    $bladeView -> assign("first_run_wizard",$first_run_wizard);
 }
 
 $defaults['biller'] = (isset($_GET['biller'])) ? $_GET['biller'] : $defaults['biller'];
@@ -72,19 +72,19 @@ if ($db_server === 'mysql') {
 }
 $sth =  dbQuery($sql);
 $matrix = $sth->fetchAll();
-$smarty -> assign("matrix", $matrix);
+$bladeView -> assign("matrix", $matrix);
 
-$smarty -> assign("billers",$billers);
-$smarty -> assign("customers",$customers);
-$smarty -> assign("taxes",$taxes);
-$smarty -> assign("products",$products);
-$smarty -> assign("preferences",$preferences);
-$smarty -> assign("dynamic_line_items",$dynamic_line_items);
-$smarty -> assign("show_custom_field",$show_custom_field);
+$bladeView -> assign("billers",$billers);
+$bladeView -> assign("customers",$customers);
+$bladeView -> assign("taxes",$taxes);
+$bladeView -> assign("products",$products);
+$bladeView -> assign("preferences",$preferences);
+$bladeView -> assign("dynamic_line_items",$dynamic_line_items);
+$bladeView -> assign("show_custom_field",$show_custom_field);
 
-$smarty -> assign("defaultCustomerID",$defaultCustomerID['id']);
-$smarty -> assign("defaults",$defaults);
+$bladeView -> assign("defaultCustomerID",$defaultCustomerID['id']);
+$bladeView -> assign("defaults",$defaults);
 
-$smarty -> assign('active_tab', '#money');
+$bladeView -> assign('active_tab', '#money');
 
 ?>

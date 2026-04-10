@@ -60,12 +60,12 @@ else if ($_GET['stage'] == 3 ) {
 	$message = "How did you get here :)";
 }
 
-$smarty -> assign('message', $message);
-$smarty -> assign('biller',$biller);
-$smarty -> assign('customer',$customer);
-$smarty -> assign('invoice',$invoice);
-$smarty -> assign('preferences',$preference);
+$bladeView -> assign('message', $message);
+$bladeView -> assign('biller',$biller);
+$bladeView -> assign('customer',$customer);
+$bladeView -> assign('invoice',$invoice);
+$bladeView -> assign('preferences',$preference);
 
-$smarty -> assign('pageActive', 'invoice');
-$smarty -> assign('active_tab', '#money');
+$bladeView -> assign('pageActive', 'invoice');
+$bladeView -> assign('active_tab', '#money');
 ?>

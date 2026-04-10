@@ -26,12 +26,12 @@ if ($_POST['email'] != "") {
 	include ("./modules/user/save.php");
 }
 
-$smarty->assign('save', $save);
-$smarty->assign('roles', $roles);
-$smarty->assign('userSaveCsrfToken', siNonce('user_save'));
+$bladeView->assign('save', $save);
+$bladeView->assign('roles', $roles);
+$bladeView->assign('userSaveCsrfToken', siNonce('user_save'));
 
-$smarty -> assign('pageActive', 'user');
-$smarty -> assign('subPageActive', 'user_add');
-$smarty -> assign('active_tab', '#people');
+$bladeView -> assign('pageActive', 'user');
+$bladeView -> assign('subPageActive', 'user_add');
+$bladeView -> assign('active_tab', '#people');
 
 ?>

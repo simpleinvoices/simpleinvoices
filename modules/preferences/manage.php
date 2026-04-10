@@ -5,8 +5,8 @@ checkLogin();
 
 $preferences = getPreferences();
 
-$smarty -> assign("preferences",$preferences);
+$bladeView -> assign("preferences",$preferences);
 
-$smarty -> assign('pageActive', 'preference');
-$smarty -> assign('active_tab', '#setting');
+$bladeView -> assign('pageActive', 'preference');
+$bladeView -> assign('active_tab', '#setting');
 ?>

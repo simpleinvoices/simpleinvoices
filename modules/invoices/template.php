@@ -63,31 +63,31 @@ $template_path = "templates.invoices.{$template}";
 $css = $siUrl."/templates/invoices/${template}/style.css";
 $pluginsdir = "./templates/invoices/${template}/plugins/";
 
-$smarty->plugins_dir = $pluginsdir;
+$bladeView->plugins_dir = $pluginsdir;
 
 $pageActive = "invoices";
-$smarty->assign('pageActive', $pageActive);
+$bladeView->assign('pageActive', $pageActive);
 
 if(file_exists($templatePath)) {
-	$smarty -> assign('biller',$biller);
-	$smarty -> assign('customer',$customer);
-	$smarty -> assign('invoice',$invoice);
-	$smarty -> assign('preference',$preference);
-	$smarty -> assign('logo',$logo);
-	$smarty -> assign('template',$template);
-	$smarty -> assign('invoiceItems',$invoiceItems);
-	$smarty -> assign('template_path',$template_path);
-	$smarty -> assign('css',$css);
-	$smarty -> assign('customFieldLabels',$customFieldLabels);
+	$bladeView -> assign('biller',$biller);
+	$bladeView -> assign('customer',$customer);
+	$bladeView -> assign('invoice',$invoice);
+	$bladeView -> assign('preference',$preference);
+	$bladeView -> assign('logo',$logo);
+	$bladeView -> assign('template',$template);
+	$bladeView -> assign('invoiceItems',$invoiceItems);
+	$bladeView -> assign('template_path',$template_path);
+	$bladeView -> assign('css',$css);
+	$bladeView -> assign('customFieldLabels',$customFieldLabels);
 	
 	
 	if ($_GET['location'] =="pdf")
 	{
-		$html = $smarty -> fetch(".".$templatePath);
+		$html = $bladeView -> fetch(".".$templatePath);
 		pdfThis($html);
 		exit();
 	}
-	$smarty -> $blade_output(".".$templatePath);
+	$bladeView -> $blade_output(".".$templatePath);
 
 }
 */

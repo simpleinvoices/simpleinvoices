@@ -45,9 +45,9 @@ ORDER BY
     array_push($customers, $customer);
   }
 
-  $smarty -> assign('data', $customers);
-  $smarty -> assign('total_owed', $total_owed);
+  $bladeView -> assign('data', $customers);
+  $bladeView -> assign('total_owed', $total_owed);
 
-  $smarty -> assign('pageActive', 'report');
-  $smarty -> assign('active_tab', '#home');
+  $bladeView -> assign('pageActive', 'report');
+  $bladeView -> assign('active_tab', '#home');
 ?>

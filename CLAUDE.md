@@ -19,7 +19,7 @@ Simple Invoices is a PHP-based web application for invoice management that has b
 ### Key Dependencies
 - **Zend Framework 1.24.4 (ZF1-Future)**: Located in `library/Zend/` - PHP 8.1+ compatible community fork
 - **PHPMailer 6.10.0**: Modern email library in `library/phpmailer/` - Full PHP 8.1+ compatibility with namespaces
-- **Blade (Jenssegers)**: Template engine loaded via Composer; global view instance is `$smarty` in PHP (historical name) — a `BladeView` wrapper with `assign()`, `display()`, `fetch()`
+- **Blade (Jenssegers)**: Template engine loaded via Composer; global view instance is `$bladeView` (`BladeView` in `include/blade_view.php`) with `assign()`, `display()`, `fetch()`
 - **HTML2PDF**: PDF generation library in `library/pdf/`
 - **jQuery**: Frontend JavaScript framework with plugins in `include/jquery/`
 - **Composer**: `vendor/autoload.php` loads modern packages (Blade, PhpSpreadsheet, PhpWord, etc.)

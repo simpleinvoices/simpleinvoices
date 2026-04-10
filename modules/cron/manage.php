@@ -20,12 +20,12 @@ checkLogin();
 //all funky xml - sql stuff done in xml.php
 
 
-//$smarty -> assign("invoices",$invoices);
-$smarty -> assign("number_of_crons", $number_of_crons);
+//$bladeView -> assign("invoices",$invoices);
+$bladeView -> assign("number_of_crons", $number_of_crons);
 
-$smarty -> assign('pageActive', 'cron');
-$smarty -> assign('active_tab', '#money');
+$bladeView -> assign('pageActive', 'cron');
+$bladeView -> assign('active_tab', '#money');
 
 $url =  'index.php?module=cron&view=xml';
 
-$smarty -> assign('url', $url);
+$bladeView -> assign('url', $url);

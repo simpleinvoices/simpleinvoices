@@ -14,10 +14,10 @@ $sth =  dbQuery($sql);
 $product_attributes = $sth->fetchAll();
 
 $pageActive = "product_value_add";
-$smarty->assign('pageActive', $pageActive);
-$smarty -> assign('active_tab', '#product');
+$bladeView->assign('pageActive', $pageActive);
+$bladeView -> assign('active_tab', '#product');
 
-$smarty -> assign("product_attributes", $product_attributes);
-$smarty -> assign('save',$save);
+$bladeView -> assign("product_attributes", $product_attributes);
+$bladeView -> assign('save',$save);
 
 ?>

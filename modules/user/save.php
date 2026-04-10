@@ -87,8 +87,8 @@ if ($op === 'edit_user') {
 }
 
 
-$smarty -> assign('saved',$saved);
+$bladeView -> assign('saved',$saved);
 
-$smarty -> assign('pageActive', 'user');
-$smarty -> assign('active_tab', '#people');
+$bladeView -> assign('pageActive', 'user');
+$bladeView -> assign('active_tab', '#people');
 ?>

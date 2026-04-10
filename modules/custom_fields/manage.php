@@ -27,8 +27,8 @@ for($i=0; $cf = $sth->fetch();$i++) {
 	$number_of_rows = $i;
 }
 
-$smarty -> assign("cfs",$cfs);
+$bladeView -> assign("cfs",$cfs);
 
-$smarty -> assign('pageActive', 'custom_field');
-$smarty -> assign('active_tab', '#setting');
+$bladeView -> assign('pageActive', 'custom_field');
+$bladeView -> assign('active_tab', '#setting');
 ?>

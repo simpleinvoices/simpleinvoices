@@ -79,10 +79,10 @@ else if (  $op === 'edit_payment_type' ) {
 $refresh_total = isset($refresh_total) ? $refresh_total : '&nbsp';
 
 
-$smarty -> assign('display_block',$display_block); 
-$smarty -> assign('refresh_total',$refresh_total); 
-$smarty -> assign('saved',$saved); 
+$bladeView -> assign('display_block',$display_block); 
+$bladeView -> assign('refresh_total',$refresh_total); 
+$bladeView -> assign('saved',$saved); 
 
-$smarty -> assign('pageActive', 'payment_type');
-$smarty -> assign('active_tab', '#setting');
+$bladeView -> assign('pageActive', 'payment_type');
+$bladeView -> assign('active_tab', '#setting');
 ?>

@@ -10,11 +10,11 @@ if ($_POST['tax_description'] != "" ) {
 
 $types = getTaxTypes();
 
-$smarty -> assign("types",$types);
+$bladeView -> assign("types",$types);
 
-$smarty -> assign('save',$save);
+$bladeView -> assign('save',$save);
 
-$smarty -> assign('pageActive', 'tax_rate');
-$smarty -> assign('subPageActive', 'tax_rate_add');
-$smarty -> assign('active_tab', '#setting');
+$bladeView -> assign('pageActive', 'tax_rate');
+$bladeView -> assign('subPageActive', 'tax_rate_add');
+$bladeView -> assign('active_tab', '#setting');
 ?>

@@ -20,15 +20,15 @@ $sql2= "SELECT id, name FROM ".TB_PREFIX."products_attribute_type";
 $sth2 =  dbQuery($sql2);
 $types = $sth2->fetchAll(PDO::FETCH_ASSOC);
 
-$smarty -> assign("types", $types);
+$bladeView -> assign("types", $types);
 
 
 $product_attribute['wording_for_enabled'] = $product_attribute['enabled']==1?$LANG['enabled']:$LANG['disabled'];
 $product_attribute['wording_for_visible'] = $product_attribute['visible']==1?$LANG['enabled']:$LANG['disabled'];
 $pageActive = "product_attribute_manage";
-$smarty->assign('pageActive', $pageActive);
-$smarty -> assign('active_tab', '#product');
+$bladeView->assign('pageActive', $pageActive);
+$bladeView -> assign('active_tab', '#product');
 
-$smarty->assign('product_attribute',$product_attribute);
+$bladeView->assign('product_attribute',$product_attribute);
 
 ?>

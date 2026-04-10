@@ -33,9 +33,9 @@
 		array_push($total_sales, $sales);
   }
 
-//    $smarty->assign('total_sales', $sth->fetchColumn());
-    $smarty ->assign('data', $total_sales);
-    $smarty ->assign('grand_total_sales', $grand_total_sales);
-    $smarty -> assign('pageActive', 'report_sale');
-    $smarty -> assign('active_tab', '#money');
+//    $bladeView->assign('total_sales', $sth->fetchColumn());
+    $bladeView ->assign('data', $total_sales);
+    $bladeView ->assign('grand_total_sales', $grand_total_sales);
+    $bladeView -> assign('pageActive', 'report_sale');
+    $bladeView -> assign('active_tab', '#money');
 ?>

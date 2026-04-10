@@ -54,10 +54,10 @@ if (  $op === 'edit_custom_field' ) {
 
 $refresh_total = isset($refresh_total) ? $refresh_total : '&nbsp';
 
-$smarty -> assign('saved', isset($saved) ? $saved : null);
-$smarty -> assign('display_block',$display_block);
-$smarty -> assign('refresh_total',$refresh_total);
+$bladeView -> assign('saved', isset($saved) ? $saved : null);
+$bladeView -> assign('display_block',$display_block);
+$bladeView -> assign('refresh_total',$refresh_total);
 
-$smarty -> assign('pageActive', 'custom_field');
-$smarty -> assign('active_tab', '#setting');
+$bladeView -> assign('pageActive', 'custom_field');
+$bladeView -> assign('active_tab', '#setting');
 ?>

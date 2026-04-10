@@ -85,23 +85,23 @@ $customers = getActiveCustomers();
 
 $biller_details = getBiller($biller_id);
 $customer_details = getCustomer($customer_id);
-$smarty -> assign('biller_id', $biller_id);
-$smarty -> assign('biller_details', $biller_details);
-$smarty -> assign('customer_id', $customer_id);
-$smarty -> assign('customer_details', $customer_details);
+$bladeView -> assign('biller_id', $biller_id);
+$bladeView -> assign('biller_details', $biller_details);
+$bladeView -> assign('customer_id', $customer_id);
+$bladeView -> assign('customer_details', $customer_details);
 
-$smarty -> assign('show_only_unpaid', $show_only_unpaid);
-$smarty -> assign('filter_by_date', $filter_by_date);
+$bladeView -> assign('show_only_unpaid', $show_only_unpaid);
+$bladeView -> assign('filter_by_date', $filter_by_date);
 
-$smarty -> assign('billers', $billers);
-$smarty -> assign('customers', $customers);
+$bladeView -> assign('billers', $billers);
+$bladeView -> assign('customers', $customers);
 
-$smarty -> assign('invoices', $invoices);
-$smarty -> assign('statement', $statement);
-$smarty -> assign('start_date', $start_date);
-$smarty -> assign('end_date', $end_date);
+$bladeView -> assign('invoices', $invoices);
+$bladeView -> assign('statement', $statement);
+$bladeView -> assign('start_date', $start_date);
+$bladeView -> assign('end_date', $end_date);
 
-$smarty -> assign('pageActive', 'report');
-$smarty -> assign('active_tab', '#home');
-$smarty -> assign('menu', $menu);
+$bladeView -> assign('pageActive', 'report');
+$bladeView -> assign('active_tab', '#home');
+$bladeView -> assign('menu', $menu);
 ?>

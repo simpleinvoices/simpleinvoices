@@ -29,10 +29,10 @@ $inventory = $get_inventory->select();
 
 $productobj = new product();
 $product_all = $productobj->get_all();
-$smarty -> assign('product_all',$product_all);
-$smarty -> assign('saved',$saved);
-$smarty -> assign('inventory',$inventory);
+$bladeView -> assign('product_all',$product_all);
+$bladeView -> assign('saved',$saved);
+$bladeView -> assign('inventory',$inventory);
 
-$smarty -> assign('pageActive', 'inventory');
-$smarty -> assign('subPageActive', 'inventory_edit');
-$smarty -> assign('active_tab', '#product');
+$bladeView -> assign('pageActive', 'inventory');
+$bladeView -> assign('subPageActive', 'inventory_edit');
+$bladeView -> assign('active_tab', '#product');

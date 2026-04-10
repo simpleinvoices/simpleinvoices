@@ -28,11 +28,11 @@ $cf['name'] = get_custom_field_name($cf['cf_custom_field']);
 
 $pageActive = "options";
 
-$smarty -> assign('pageActive', $pageActive);
-$smarty -> assign("cf",$cf);
+$bladeView -> assign('pageActive', $pageActive);
+$bladeView -> assign("cf",$cf);
 
-$smarty -> assign('pageActive', 'custom_field');
+$bladeView -> assign('pageActive', 'custom_field');
 $subPageActive = $_GET['action'] =="view"  ? "custom_fields_view" : "custom_fields_edit" ;
-$smarty -> assign('subPageActive', $subPageActive);
-$smarty -> assign('active_tab', '#setting');
+$bladeView -> assign('subPageActive', $subPageActive);
+$bladeView -> assign('active_tab', '#setting');
 ?>

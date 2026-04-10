@@ -19,15 +19,15 @@ $status = array(array('id'=>'0','status'=>$LANG['draft']), array('id'=>'1','stat
 require_once __DIR__ . '/../../include/class/LocaleHelper.php';
 $localelist = LocaleHelper::getLocaleList();
 
-$smarty->assign('preference',$preference);
-$smarty->assign('defaults',$defaults);
-$smarty->assign('index_group',$index_group);
-$smarty->assign('preferences',$preferences);
-$smarty->assign('status',$status);
-$smarty->assign('localelist',$localelist);
+$bladeView->assign('preference',$preference);
+$bladeView->assign('defaults',$defaults);
+$bladeView->assign('index_group',$index_group);
+$bladeView->assign('preferences',$preferences);
+$bladeView->assign('status',$status);
+$bladeView->assign('localelist',$localelist);
 
-$smarty -> assign('pageActive', 'preference');
+$bladeView -> assign('pageActive', 'preference');
 $subPageActive = $_GET['action'] =="view"  ? "preferences_view" : "preferences_edit" ;
-$smarty -> assign('subPageActive', $subPageActive);
-$smarty -> assign('active_tab', '#setting');
+$bladeView -> assign('subPageActive', $subPageActive);
+$bladeView -> assign('active_tab', '#setting');
 ?>

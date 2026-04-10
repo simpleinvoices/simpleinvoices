@@ -9,7 +9,7 @@ WHERE pr.status = 1 AND ii.domain_id = :domain_id
 
   $sth = dbQuery($sql, ':domain_id', $auth_session->domain_id);
 
-  $smarty->assign('total_taxes', $sth->fetchColumn());
-	$smarty -> assign('pageActive', 'report');
-	$smarty -> assign('active_tab', '#home');
+  $bladeView->assign('total_taxes', $sth->fetchColumn());
+	$bladeView -> assign('pageActive', 'report');
+	$bladeView -> assign('active_tab', '#home');
 ?>

@@ -34,8 +34,8 @@
       $customers[$product['name']]['total_quantity'] += $product['sum_quantity'];
    }
 
-   $smarty -> assign('data', $customers);
+   $bladeView -> assign('data', $customers);
 
-   $smarty -> assign('pageActive', 'report');
-   $smarty -> assign('active_tab', '#home');
+   $bladeView -> assign('pageActive', 'report');
+   $bladeView -> assign('active_tab', '#home');
 ?>

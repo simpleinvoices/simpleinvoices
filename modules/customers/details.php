@@ -67,17 +67,17 @@ if($large_dataset == $LANG['enabled'])
 $invoices_owing = $sth->fetchAll(PDO::FETCH_ASSOC);
 
 //$customFieldLabel = getCustomFieldLabels("biller");
-$smarty -> assign("stuff",$stuff);
-$smarty -> assign('customer',$customer);
-$smarty -> assign('invoices',$invoices);
-$smarty -> assign('invoices_owing',$invoices_owing);
-$smarty -> assign('customFieldLabel',$customFieldLabel);
+$bladeView -> assign("stuff",$stuff);
+$bladeView -> assign('customer',$customer);
+$bladeView -> assign('invoices',$invoices);
+$bladeView -> assign('invoices_owing',$invoices_owing);
+$bladeView -> assign('customFieldLabel',$customFieldLabel);
 
-$smarty -> assign('pageActive', 'customer');
+$bladeView -> assign('pageActive', 'customer');
 $subPageActive = $_GET['action'] =="view"  ? "customer_view" : "customer_edit" ;
-$smarty -> assign('subPageActive', $subPageActive);
-$smarty -> assign('pageActive', 'customer');
+$bladeView -> assign('subPageActive', $subPageActive);
+$bladeView -> assign('pageActive', 'customer');
 
 
-$smarty -> assign('active_tab', '#people');
+$bladeView -> assign('active_tab', '#people');
 ?>

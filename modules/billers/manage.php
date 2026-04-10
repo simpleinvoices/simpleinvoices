@@ -22,7 +22,7 @@ checkLogin();
 	$sth = dbQuery($sql, ':domain_id',domain_id::get()) or die(htmlsafe(end($dbh->errorInfo())));
 	$number_of_rows  = $sth->fetch(PDO::FETCH_ASSOC);
 
-$smarty -> assign("number_of_rows",$number_of_rows);
-$smarty -> assign('pageActive', 'biller');
-$smarty -> assign('active_tab', '#people');
+$bladeView -> assign("number_of_rows",$number_of_rows);
+$bladeView -> assign('pageActive', 'biller');
+$bladeView -> assign('active_tab', '#people');
 ?>

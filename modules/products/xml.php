@@ -9,7 +9,7 @@ $rp = (isset($_REQUEST['rp'])) ? $_REQUEST['rp'] : "25" ;
 $page = (isset($_REQUEST['page'])) ? $_REQUEST['page'] : "1" ;
 
 $defaults = getSystemDefaults();
-$smarty -> assign("defaults",$defaults);
+$bladeView -> assign("defaults",$defaults);
 
 $products = new product();
 $sth = $products->select_all('', $dir, $sort, $rp, $page);

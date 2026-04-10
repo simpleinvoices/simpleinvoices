@@ -1,4 +1,4 @@
 <?php
-$smarty -> assign('pageActive', 'report');
-$smarty -> assign('active_tab', '#home');
+$bladeView -> assign('pageActive', 'report');
+$bladeView -> assign('active_tab', '#home');
 ?>

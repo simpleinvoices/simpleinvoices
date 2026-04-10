@@ -9,9 +9,9 @@ $sth = dbQuery($sql, ':domain_id',domain_id::get()) or die(htmlsafe(end($dbh->er
 $number_of_rows  = $sth->fetch(PDO::FETCH_ASSOC);
 
 $defaults = getSystemDefaults();
-$smarty -> assign("defaults",$defaults);
-$smarty -> assign("number_of_rows",$number_of_rows);
+$bladeView -> assign("defaults",$defaults);
+$bladeView -> assign("number_of_rows",$number_of_rows);
 
-$smarty -> assign('pageActive', 'product_manage');
-$smarty -> assign('active_tab', '#product');
+$bladeView -> assign('pageActive', 'product_manage');
+$bladeView -> assign('active_tab', '#product');
 ?>

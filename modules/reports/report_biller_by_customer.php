@@ -40,9 +40,9 @@ GROUP BY
 	  $total_sales += $customer['SUM_TOTAL'];
 	}
 
-	$smarty -> assign('data', $billers);
-	$smarty -> assign('total_sales', $total_sales);
+	$bladeView -> assign('data', $billers);
+	$bladeView -> assign('total_sales', $total_sales);
 
-	$smarty -> assign('pageActive', 'report');
-	$smarty -> assign('active_tab', '#home');
+	$bladeView -> assign('pageActive', 'report');
+	$bladeView -> assign('active_tab', '#home');
 ?>

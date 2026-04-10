@@ -5,8 +5,8 @@ checkLogin();
 
 $paymentTypes = getPaymentTypes();
 
-$smarty -> assign('paymentTypes',$paymentTypes);
+$bladeView -> assign('paymentTypes',$paymentTypes);
 
-$smarty -> assign('pageActive', 'payment_type');
-$smarty -> assign('active_tab', '#setting');
+$bladeView -> assign('pageActive', 'payment_type');
+$bladeView -> assign('active_tab', '#setting');
 ?>

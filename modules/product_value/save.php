@@ -75,10 +75,10 @@ if (  $op === 'edit_product_value' ) {
 $refresh_total = isset($refresh_total) ? $refresh_total : '&nbsp';
 
 $pageActive = "product_value_manage";
-$smarty->assign('pageActive', $pageActive);
-$smarty -> assign('active_tab', '#product');
+$bladeView->assign('pageActive', $pageActive);
+$bladeView -> assign('active_tab', '#product');
 
-$smarty -> assign('saved', isset($saved) ? $saved : null);
-$smarty -> assign('display_block',$display_block);
-$smarty -> assign('refresh_total',$refresh_total);
+$bladeView -> assign('saved', isset($saved) ? $saved : null);
+$bladeView -> assign('display_block',$display_block);
+$bladeView -> assign('refresh_total',$refresh_total);
 ?>

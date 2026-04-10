@@ -94,6 +94,6 @@ if (isset($_POST['op']) && $_POST['op'] === 'install_database') {
     }
 }
 
-$smarty->assign('redirect_after_install', $redirect_after_install);
-$smarty->assign('install_error', $install_error);
+$bladeView->assign('redirect_after_install', $redirect_after_install);
+$bladeView->assign('install_error', $install_error);
 ?>

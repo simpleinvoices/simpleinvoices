@@ -2773,8 +2773,8 @@ function runPatches() {
 
 	}
 
-	global $smarty;
-	$smarty-> assign("page",$patch_page);
+	global $bladeView;
+	$bladeView-> assign("page",$patch_page);
 
 }
 
@@ -2783,8 +2783,8 @@ function donePatches() {
 	$patch_page['message']="The database patches are uptodate. You can continue working with Simple Invoices";
 	$patch_page['html']	= "<div class='si_toolbar si_toolbar_form'><a href='index.php'>HOME</a></div>";
 	$patch_page['refresh']=3;
-	global $smarty;
-	$smarty-> assign("page",$patch_page);
+	global $bladeView;
+	$bladeView-> assign("page",$patch_page);
 }
 
 // ------------------------------------------------------------------------------
@@ -2819,8 +2819,8 @@ EOD;
 			}	
 		}
 
-	global $smarty;
-	$smarty-> assign("page",$patch_page);
+	global $bladeView;
+	$bladeView-> assign("page",$patch_page);
 }
 
 // ------------------------------------------------------------------------------

@@ -26,12 +26,12 @@ else {
 $products = getActiveProducts();
 
 
-$smarty -> assign("products",$products);
+$bladeView -> assign("products",$products);
 }
 
 $type = $_GET['type'];
-$smarty -> assign("type",$type);
+$bladeView -> assign("type",$type);
 
-$smarty -> assign('pageActive', 'invoice');
-$smarty -> assign('active_tab', '#money');
+$bladeView -> assign('pageActive', 'invoice');
+$bladeView -> assign('active_tab', '#money');
 ?>

@@ -1,6 +1,6 @@
 <?php
 
-function smarty_function_markup_percentage($params, $smarty = null)
+function smarty_function_markup_percentage($params, $_unused = null)
 {
 
 	

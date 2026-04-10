@@ -34,6 +34,6 @@ jsEnd();
 
 include('./modules/invoices/invoice.php');
 
-$smarty -> assign('pageActive', 'invoice_new');
-$smarty -> assign('active_tab', '#money');
+$bladeView -> assign('pageActive', 'invoice_new');
+$bladeView -> assign('active_tab', '#money');
 ?>

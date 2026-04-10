@@ -124,19 +124,19 @@ foreach($invoiceItems as $key=>$value)
 }
 
 //var_dump($invoiceItems);
-$smarty -> assign("invoice",$invoice);
-$smarty -> assign("defaults",$defaults);
-$smarty -> assign("invoiceItems",$invoiceItems);
-$smarty -> assign("customers",$customers);
-$smarty -> assign("preference",$preference);
-$smarty -> assign("billers",$billers);
-$smarty -> assign("taxes",$taxes);
-$smarty -> assign("preferences",$preferences);
-$smarty -> assign("products",$products);
-$smarty -> assign("customFields",$customFields);
-$smarty -> assign("lines",count($invoiceItems));
+$bladeView -> assign("invoice",$invoice);
+$bladeView -> assign("defaults",$defaults);
+$bladeView -> assign("invoiceItems",$invoiceItems);
+$bladeView -> assign("customers",$customers);
+$bladeView -> assign("preference",$preference);
+$bladeView -> assign("billers",$billers);
+$bladeView -> assign("taxes",$taxes);
+$bladeView -> assign("preferences",$preferences);
+$bladeView -> assign("products",$products);
+$bladeView -> assign("customFields",$customFields);
+$bladeView -> assign("lines",count($invoiceItems));
 
-$smarty -> assign('pageActive', 'invoice');
-$smarty -> assign('subPageActive', 'invoice_edit');
-$smarty -> assign('active_tab', '#money');
+$bladeView -> assign('pageActive', 'invoice');
+$bladeView -> assign('subPageActive', 'invoice_edit');
+$bladeView -> assign('active_tab', '#money');
 ?>

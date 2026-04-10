@@ -127,9 +127,9 @@ while ( $year <= $this_year ){
 	$year++;
 }
 
-$smarty->assign('data',		$data);
-$smarty->assign('all_years',$years);
+$bladeView->assign('data',		$data);
+$bladeView->assign('all_years',$years);
 
-$smarty -> assign('pageActive', 'report');
-$smarty -> assign('active_tab', '#home');
+$bladeView -> assign('pageActive', 'report');
+$bladeView -> assign('active_tab', '#home');
 ?>

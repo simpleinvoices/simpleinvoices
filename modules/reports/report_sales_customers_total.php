@@ -21,9 +21,9 @@
     array_push($customers, $customer);
   }
 
-  $smarty -> assign('data', $customers);
-  $smarty -> assign('total_sales', $total_sales);
+  $bladeView -> assign('data', $customers);
+  $bladeView -> assign('total_sales', $total_sales);
 
-  $smarty -> assign('pageActive', 'report');
-  $smarty -> assign('active_tab', '#home');
+  $bladeView -> assign('pageActive', 'report');
+  $bladeView -> assign('active_tab', '#home');
 ?>

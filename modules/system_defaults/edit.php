@@ -354,10 +354,10 @@ else {
 	$description = "{$LANG['no_defaults']}";
 }
 
-$smarty->assign('defaults', $defaults);
-$smarty->assign('value',$value);
-$smarty->assign('description',$description);
-$smarty->assign('default',$default);
+$bladeView->assign('defaults', $defaults);
+$bladeView->assign('value',$value);
+$bladeView->assign('description',$description);
+$bladeView->assign('default',$default);
 
 
 
@@ -374,6 +374,6 @@ function compareNameIndex($a,$b) {
 	return -1;
 }
 
-$smarty -> assign('pageActive', 'system_default');
-$smarty -> assign('active_tab', '#setting');
+$bladeView -> assign('pageActive', 'system_default');
+$bladeView -> assign('active_tab', '#setting');
 ?>

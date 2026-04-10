@@ -20,12 +20,12 @@ checkLogin();
 //all funky xml - sql stuff done in xml.php
 
 
-//$smarty -> assign("invoices",$invoices);
-$smarty -> assign("number_of_rows",$number_of_rows);
+//$bladeView -> assign("invoices",$invoices);
+$bladeView -> assign("number_of_rows",$number_of_rows);
 
-$smarty -> assign('pageActive', 'inventory');
-$smarty -> assign('active_tab', '#product');
+$bladeView -> assign('pageActive', 'inventory');
+$bladeView -> assign('active_tab', '#product');
 
 $url =  'index.php?module=inventory&view=xml';
 
-$smarty -> assign('url', $url);
+$bladeView -> assign('url', $url);

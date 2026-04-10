@@ -4,8 +4,8 @@
 
 checkLogin();
 
-$smarty -> assign('pageActive', 'backup');
-$smarty -> assign('active_tab', '#setting');
+$bladeView -> assign('pageActive', 'backup');
+$bladeView -> assign('active_tab', '#setting');
 $backup_action = 'backup_database';
 $errors        = [];
 $import_success = false;
@@ -112,14 +112,14 @@ try {
 	}
 	$formattedSQL = implode("\n", $parts);
 
-	$smarty->assign('formattedSQL', $formattedSQL);
-	$smarty->assign('rawSQL', $rawSQL);
+	$bladeView->assign('formattedSQL', $formattedSQL);
+	$bladeView->assign('rawSQL', $rawSQL);
 } catch (\Throwable $e) {
 	$errors[] = 'SQL format error: ' . $e->getMessage();
 	error_log('backup view_backup error: ' . $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine());
 }
 
-$smarty->assign('backupActionToken', siNonce($backup_action));
-$smarty->assign('backupErrors',      $errors);
-$smarty->assign('importSuccess',     $import_success);
+$bladeView->assign('backupActionToken', siNonce($backup_action));
+$bladeView->assign('backupErrors',      $errors);
+$bladeView->assign('importSuccess',     $import_success);
 ?>

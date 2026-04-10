@@ -28,11 +28,11 @@ $invoicePaid = calc_invoice_paid($invoice_id);
 $invoiceobj = new invoice();
 $invoiceItems = $invoiceobj->getInvoiceItems($invoice_id);
 
-$smarty -> assign("invoice",$invoice);
-$smarty -> assign("preference",$preference);
-$smarty -> assign("defaults",$defaults);
-$smarty -> assign("invoicePaid",$invoicePaid);
-$smarty -> assign("invoiceItems",$invoiceItems);
+$bladeView -> assign("invoice",$invoice);
+$bladeView -> assign("preference",$preference);
+$bladeView -> assign("defaults",$defaults);
+$bladeView -> assign("invoicePaid",$invoicePaid);
+$bladeView -> assign("invoiceItems",$invoiceItems);
 
 /*If delete is disabled - dont allow people to view this page*/
 if ( $defaults['delete'] == 'N' ) {
@@ -83,6 +83,6 @@ if ( ($_GET['stage'] == 2 ) AND ($_POST['doDelete'] == 'y') ) {
 
 }
 
-$smarty -> assign('pageActive', 'invoice');
-$smarty -> assign('active_tab', '#money');
+$bladeView -> assign('pageActive', 'invoice');
+$bladeView -> assign('active_tab', '#money');
 ?>

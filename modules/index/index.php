@@ -17,34 +17,34 @@ $defaults = getSystemDefaults();
 if ($billers == null OR $customers == null OR $taxes == null OR $products == null OR $preferences == null)
 {
     $first_run_wizard =true;
-    $smarty -> assign("first_run_wizard",$first_run_wizard);
+    $bladeView -> assign("first_run_wizard",$first_run_wizard);
 
     // Load sample data for the wizard "Use sample data" prefill buttons
     $sample_json = realpath(__DIR__ . '/../../databases/json/sample_data.json');
     $sample_data = ($sample_json && file_exists($sample_json))
         ? json_decode(file_get_contents($sample_json), true)
         : [];
-    $smarty->assign('wizard_sample_biller',   $sample_data['si_biller'][0]    ?? []);
-    $smarty->assign('wizard_sample_customer',  $sample_data['si_customers'][0] ?? []);
-    $smarty->assign('wizard_sample_product',   $sample_data['si_products'][0]  ?? []);
+    $bladeView->assign('wizard_sample_biller',   $sample_data['si_biller'][0]    ?? []);
+    $bladeView->assign('wizard_sample_customer',  $sample_data['si_customers'][0] ?? []);
+    $bladeView->assign('wizard_sample_product',   $sample_data['si_products'][0]  ?? []);
 }
 
-$smarty -> assign("mysql",$mysql);
-$smarty -> assign("db_server",$db_server);
+$bladeView -> assign("mysql",$mysql);
+$bladeView -> assign("db_server",$db_server);
 /*
-$smarty -> assign("patch",count($patch));
-$smarty -> assign("max_patches_applied", $max_patches_applied);
+$bladeView -> assign("patch",count($patch));
+$bladeView -> assign("max_patches_applied", $max_patches_applied);
 */
-$smarty -> assign("biller", $biller);
-$smarty -> assign("billers", $billers);
-$smarty -> assign("customer", $customer);
-$smarty -> assign("customers", $customers);
-$smarty -> assign("taxes", $taxes);
-$smarty -> assign("products", $products);
-$smarty -> assign("preferences", $preferences);
-$smarty -> assign("debtor", $debtor);
-$smarty -> assign("language", $language);
-//$smarty -> assign("title", $title);
+$bladeView -> assign("biller", $biller);
+$bladeView -> assign("billers", $billers);
+$bladeView -> assign("customer", $customer);
+$bladeView -> assign("customers", $customers);
+$bladeView -> assign("taxes", $taxes);
+$bladeView -> assign("products", $products);
+$bladeView -> assign("preferences", $preferences);
+$bladeView -> assign("debtor", $debtor);
+$bladeView -> assign("language", $language);
+//$bladeView -> assign("title", $title);
 
 // Dashboard chart: monthly invoices & payments for all years since first invoice (max 10)
 $max_chart_years    = 10;
@@ -94,10 +94,10 @@ for ($y = $chart_start_year; $y <= $chart_current_year; $y++) {
     $chart_data[$y] = ['invoices' => $invoices, 'payments' => $payments];
 }
 
-$smarty->assign('chart_current_year', $chart_current_year);
-$smarty->assign('chart_years',        $chart_years);
-$smarty->assign('chart_labels',       $chart_labels);
-$smarty->assign('chart_data',         $chart_data);
+$bladeView->assign('chart_current_year', $chart_current_year);
+$bladeView->assign('chart_years',        $chart_years);
+$bladeView->assign('chart_labels',       $chart_labels);
+$bladeView->assign('chart_data',         $chart_data);
 
 // Latest 5 invoices
 $latest_invoices_sth = dbQuery(
@@ -138,8 +138,8 @@ $latest_payments_sth = dbQuery(
 );
 $latest_payments = $latest_payments_sth->fetchAll(PDO::FETCH_ASSOC);
 
-$smarty->assign('latest_invoices', $latest_invoices);
-$smarty->assign('latest_payments', $latest_payments);
+$bladeView->assign('latest_invoices', $latest_invoices);
+$bladeView->assign('latest_payments', $latest_payments);
 
-$smarty -> assign('pageActive', 'dashboard');
-$smarty -> assign('active_tab', '#home');
+$bladeView -> assign('pageActive', 'dashboard');
+$bladeView -> assign('active_tab', '#home');

@@ -25,9 +25,9 @@ $customFieldLabel = getCustomFieldLabels();
 if ($_POST['name'] != "" ) {
 	include("./modules/customers/save.php");
 }
-$smarty -> assign('customFieldLabel',$customFieldLabel);
+$bladeView -> assign('customFieldLabel',$customFieldLabel);
 
-$smarty -> assign('pageActive', 'customer');
-$smarty -> assign('subPageActive', 'customer_add');
-$smarty -> assign('active_tab', '#people');
+$bladeView -> assign('pageActive', 'customer');
+$bladeView -> assign('subPageActive', 'customer_add');
+$bladeView -> assign('active_tab', '#people');
 ?>

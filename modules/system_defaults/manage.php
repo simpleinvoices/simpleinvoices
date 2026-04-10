@@ -14,19 +14,19 @@ foreach($languages as $language) {
 }
 
 
-$smarty -> assign("defaults", getSystemDefaults());
-$smarty -> assign("defaultBiller", getDefaultBiller());
-$smarty -> assign("defaultCustomer", getDefaultCustomer());
-$smarty -> assign("defaultTax", getDefaultTax());
-$smarty -> assign("defaultPreference", getDefaultPreference());
-$smarty -> assign("defaultPaymentType", getDefaultPaymentType());
-$smarty -> assign("defaultDelete", getDefaultDelete());
-$smarty -> assign("defaultLogging", getDefaultLogging());
-$smarty -> assign("defaultInventory", getDefaultInventory());
-$smarty -> assign("defaultProductAttributes", getDefaultProductAttributes());
-$smarty -> assign("defaultLargeDataset", getDefaultLargeDataset());
-$smarty -> assign("defaultLanguage", $lang);
+$bladeView -> assign("defaults", getSystemDefaults());
+$bladeView -> assign("defaultBiller", getDefaultBiller());
+$bladeView -> assign("defaultCustomer", getDefaultCustomer());
+$bladeView -> assign("defaultTax", getDefaultTax());
+$bladeView -> assign("defaultPreference", getDefaultPreference());
+$bladeView -> assign("defaultPaymentType", getDefaultPaymentType());
+$bladeView -> assign("defaultDelete", getDefaultDelete());
+$bladeView -> assign("defaultLogging", getDefaultLogging());
+$bladeView -> assign("defaultInventory", getDefaultInventory());
+$bladeView -> assign("defaultProductAttributes", getDefaultProductAttributes());
+$bladeView -> assign("defaultLargeDataset", getDefaultLargeDataset());
+$bladeView -> assign("defaultLanguage", $lang);
 
-$smarty -> assign('pageActive', 'system_default');
-$smarty -> assign('active_tab', '#setting');
+$bladeView -> assign('pageActive', 'system_default');
+$bladeView -> assign('active_tab', '#setting');
 ?>

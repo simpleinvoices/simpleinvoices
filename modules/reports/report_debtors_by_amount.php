@@ -41,9 +41,9 @@
     array_push($invoices, $invoice);
   }
 
-  $smarty -> assign('data', $invoices);
-  $smarty -> assign('total_owed', $total_owed);
+  $bladeView -> assign('data', $invoices);
+  $bladeView -> assign('total_owed', $total_owed);
 
-  $smarty -> assign('pageActive', 'report');
-  $smarty -> assign('active_tab', '#home');
+  $bladeView -> assign('pageActive', 'report');
+  $bladeView -> assign('active_tab', '#home');
 ?>

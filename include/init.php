@@ -84,7 +84,11 @@ if (!class_exists('Jenssegers\Blade\Blade')) {
 	simpleInvoicesError('notWriteable', 'library', 'jenssegers/blade (run: composer update)');
 }
 require_once(__DIR__ . '/blade_view.php');
-$smarty = new BladeView($bladeViewPaths, $bladeCachePath);
+/**
+ * Global Blade view for the request (assign / display / fetch). Used by index.php and modules.
+ * @var BladeView
+ */
+$bladeView = new BladeView($bladeViewPaths, $bladeCachePath);
 /*
  * Blade template engine init - end
  */
@@ -241,6 +245,6 @@ $siUrl = getURL();
 include_once("./include/backup.lib.php");
 
 $defaults = getSystemDefaults();
-$smarty -> assign("defaults",$defaults);
+$bladeView -> assign("defaults",$defaults);
 
 ?>

@@ -45,5 +45,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'login
 $loginCsrfToken = bin2hex(random_bytes(16));
 $_SESSION['login_csrf_token'] = $loginCsrfToken;
 
-$smarty->assign('loginCsrfToken', $loginCsrfToken);
-$smarty->assign('errorMessage', $errorMessage);
+$bladeView->assign('loginCsrfToken', $loginCsrfToken);
+$bladeView->assign('errorMessage', $errorMessage);

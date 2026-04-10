@@ -98,7 +98,7 @@ if ($op === 'insert_sample_product') {
     }
 }
 
-$smarty->assign('wizard_success',   $wizard_success);
-$smarty->assign('wizard_next_step', $wizard_next_step);
-$smarty->assign('pageActive', 'dashboard');
-$smarty->assign('active_tab', '#home');
+$bladeView->assign('wizard_success',   $wizard_success);
+$bladeView->assign('wizard_next_step', $wizard_next_step);
+$bladeView->assign('pageActive', 'dashboard');
+$bladeView->assign('active_tab', '#home');

@@ -22,14 +22,14 @@ $preference = getPreference($invoice['preference_id']);
 $invoiceType = getInvoiceType($invoice['type_id']);
 $paymentType = getPaymentType($payment['ac_payment_type']);
 
-$smarty -> assign("payment", $payment);
-$smarty -> assign("invoice", $invoice);
-$smarty -> assign("biller", $biller);
-$smarty -> assign("customer", $customer);
-$smarty -> assign("preference", $preference);
-$smarty -> assign("invoiceType", $invoiceType);
-$smarty -> assign("paymentType", $paymentType);
+$bladeView -> assign("payment", $payment);
+$bladeView -> assign("invoice", $invoice);
+$bladeView -> assign("biller", $biller);
+$bladeView -> assign("customer", $customer);
+$bladeView -> assign("preference", $preference);
+$bladeView -> assign("invoiceType", $invoiceType);
+$bladeView -> assign("paymentType", $paymentType);
 
-$smarty -> assign('pageActive', 'payment');
-$smarty -> assign('active_tab', '#money');
+$bladeView -> assign('pageActive', 'payment');
+$bladeView -> assign('active_tab', '#money');
 ?>

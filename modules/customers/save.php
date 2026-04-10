@@ -47,8 +47,8 @@ if ( $op === 'edit_customer' ) {
 	}
 }
 
-$smarty -> assign('saved',$saved); 
+$bladeView -> assign('saved',$saved); 
 
-$smarty -> assign('pageActive', 'customer');
-$smarty -> assign('active_tab', '#people');
+$bladeView -> assign('pageActive', 'customer');
+$bladeView -> assign('active_tab', '#people');
 ?>

@@ -26,10 +26,10 @@ $get_cron = new cron();
 $get_cron->id = $_GET['id'];
 $cron = $get_cron->select();
 
-$smarty -> assign('invoice_all',$invoice_all);
-$smarty -> assign('saved',$saved);
-$smarty -> assign('cron',$cron);
+$bladeView -> assign('invoice_all',$invoice_all);
+$bladeView -> assign('saved',$saved);
+$bladeView -> assign('cron',$cron);
 
-$smarty -> assign('pageActive', 'cron');
-$smarty -> assign('subPageActive', 'cron_edit');
-$smarty -> assign('active_tab', '#money');
+$bladeView -> assign('pageActive', 'cron');
+$bladeView -> assign('subPageActive', 'cron_edit');
+$bladeView -> assign('active_tab', '#money');

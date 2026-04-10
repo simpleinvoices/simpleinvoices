@@ -27,14 +27,14 @@ else {
 
 $payments = progressPayments($query);
 
-$smarty -> assign("payments",$payments);
-$smarty -> assign("preference",$preference);
-$smarty -> assign("customer",$customer);
+$bladeView -> assign("payments",$payments);
+$bladeView -> assign("preference",$preference);
+$bladeView -> assign("customer",$customer);
 
-$smarty -> assign("c_id",$c_id);
-$smarty -> assign("inv_id",$inv_id);
+$bladeView -> assign("c_id",$c_id);
+$bladeView -> assign("inv_id",$inv_id);
 
-$smarty -> assign('subPageActive', $subPageActive);
-$smarty -> assign('pageActive', 'payment');
-$smarty -> assign('active_tab', '#money');
+$bladeView -> assign('subPageActive', $subPageActive);
+$bladeView -> assign('pageActive', 'payment');
+$bladeView -> assign('active_tab', '#money');
 ?>

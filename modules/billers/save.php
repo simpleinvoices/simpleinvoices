@@ -43,7 +43,7 @@ if ($op === 'edit_biller' ) {
 }
 
 
-$smarty -> assign('saved',$saved);
+$bladeView -> assign('saved',$saved);
 
-$smarty -> assign('pageActive', 'biller');
-$smarty -> assign('active_tab', '#people');
+$bladeView -> assign('pageActive', 'biller');
+$bladeView -> assign('active_tab', '#people');

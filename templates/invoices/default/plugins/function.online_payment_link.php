@@ -1,6 +1,6 @@
 <?php
 
-function smarty_function_online_payment_link($params, $smarty = null) {
+function smarty_function_online_payment_link($params, $_unused = null) {
     global $LANG;
     global $siUrl;
     global $config;

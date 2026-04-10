@@ -27,11 +27,11 @@ $user = user::getUser($id);
 $roles = user::getUserRoles();
 
 
-$smarty->assign('user', $user);
-$smarty->assign('roles', $roles);
-$smarty->assign('userSaveCsrfToken', siNonce('user_save'));
+$bladeView->assign('user', $user);
+$bladeView->assign('roles', $roles);
+$bladeView->assign('userSaveCsrfToken', siNonce('user_save'));
 /*
-$smarty -> assign('enabled', array(
+$bladeView -> assign('enabled', array(
                                 0 => $LANG['disabled'],
 				1 => $LANG['enabled']
 			)
@@ -39,8 +39,8 @@ $smarty -> assign('enabled', array(
  */
  
 
-$smarty -> assign('pageActive', 'user');
+$bladeView -> assign('pageActive', 'user');
 $subPageActive = $_GET['action'] =="view"  ? "user_view" : "user_edit" ;
-$smarty -> assign('subPageActive', $subPageActive);
-$smarty -> assign('active_tab', '#people');
+$bladeView -> assign('subPageActive', $subPageActive);
+$bladeView -> assign('active_tab', '#people');
 ?>

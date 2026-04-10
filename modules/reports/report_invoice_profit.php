@@ -73,11 +73,11 @@ foreach($invoices as $k=>$v)
     $invoice_totals['sum_profit'] = $invoice_totals['sum_profit'] + $invoices[$k]['profit']  ;
 }
 
-$smarty -> assign('invoices', $invoices);
-$smarty -> assign('invoice_totals', $invoice_totals);
-$smarty -> assign('start_date', $start_date);
-$smarty -> assign('end_date', $end_date);
+$bladeView -> assign('invoices', $invoices);
+$bladeView -> assign('invoice_totals', $invoice_totals);
+$bladeView -> assign('start_date', $start_date);
+$bladeView -> assign('end_date', $end_date);
 
-$smarty -> assign('pageActive', 'report');
-$smarty -> assign('active_tab', '#home');
+$bladeView -> assign('pageActive', 'report');
+$bladeView -> assign('active_tab', '#home');
 ?>
