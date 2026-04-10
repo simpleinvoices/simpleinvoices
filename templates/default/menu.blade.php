@@ -285,6 +285,9 @@
                 <div class="col-auto ms-auto d-print-none">
                     <div class="btn-list">
                     @if(($module ?? '') == 'index' && ($view ?? '') == 'index')
+                        <a href="index.php?module=invoices&view=manage" class="btn btn-outline-secondary">
+                            <i class="ti ti-list me-1"></i>{{ $LANG['manage_invoices'] ?? 'Manage Invoices' }}
+                        </a>
                         <a href="index.php?module=invoices&view=itemised" class="btn btn-primary">
                             <i class="ti ti-plus me-1"></i>{{ $LANG['new_invoice'] ?? '' }}
                         </a>

@@ -594,27 +594,160 @@
 @endif
 
 @if(!$firstRun)
-{{-- Activity chart --}}
-<div class="card mb-3">
-    <div class="card-header">
-        <div>
-            <h3 class="card-title">{{ $LANG['invoices'] ?? '' }} &amp; {{ $LANG['payments'] ?? '' }}</h3>
-            <div class="card-subtitle">{{ $LANG['monthly_activity'] ?? '' }}</div>
-        </div>
-        <div class="card-options ms-auto">
-            <div class="segmented-control" id="chart-year-selector">
-                @foreach(($chart_years ?? []) as $y)
-                <label class="segmented-control-item">
-                    <input type="radio" class="segmented-control-input" name="chart_year" value="{{ $y }}"{{ $y === ($chart_current_year ?? 0) ? ' checked' : '' }}>
-                    <span class="segmented-control-label">{{ $y }}</span>
-                </label>
-                @endforeach
+{{-- Charts row: monthly activity + annual totals + aging radial --}}
+<div class="row g-3 mb-3">
+    {{-- Monthly activity chart --}}
+    <div class="col-lg-6">
+        <div class="card h-100">
+            <div class="card-header">
+                <div>
+                    <h3 class="card-title">{{ $LANG['invoices'] ?? '' }} &amp; {{ $LANG['payments'] ?? '' }}</h3>
+                    <div class="card-subtitle">{{ $LANG['monthly_activity'] ?? '' }}</div>
+                </div>
+                <div class="card-options ms-auto">
+                    @if(count($chart_years ?? []) > 5)
+                    <div id="chart-year-selector">
+                        <div class="dropdown">
+                            <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="chart-year-btn">
+                                {{ $chart_current_year ?? '' }}
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                @foreach(array_reverse($chart_years ?? []) as $y)
+                                <a class="dropdown-item{{ $y === ($chart_current_year ?? 0) ? ' active' : '' }}"
+                                   href="#" data-year="{{ $y }}">{{ $y }}</a>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                    @else
+                    <div class="segmented-control" id="chart-year-selector">
+                        @foreach(($chart_years ?? []) as $y)
+                        <label class="segmented-control-item">
+                            <input type="radio" class="segmented-control-input" name="chart_year" value="{{ $y }}"{{ $y === ($chart_current_year ?? 0) ? ' checked' : '' }}>
+                            <span class="segmented-control-label">{{ $y }}</span>
+                        </label>
+                        @endforeach
+                    </div>
+                    @endif
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="chart-dashboard" style="min-height:288px"></div>
             </div>
         </div>
     </div>
-    <div class="card-body">
-        <div id="chart-dashboard" style="min-height:288px"></div>
+    {{-- Annual totals bar chart --}}
+    <div class="col-lg-3">
+        <div class="card h-100">
+            <div class="card-header">
+                <div>
+                    <h3 class="card-title">{{ $LANG['invoices'] ?? '' }} &amp; {{ $LANG['payments'] ?? '' }}</h3>
+                    <div class="card-subtitle">Annual totals</div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="chart-annual" style="min-height:288px"></div>
+            </div>
+        </div>
     </div>
+    {{-- Debtor aging radial chart --}}
+    <div class="col-lg-3">
+        <div class="card h-100">
+            <div class="card-header">
+                <div>
+                    <h3 class="card-title">Debtor Aging</h3>
+                    <div class="card-subtitle">Outstanding by age &mdash; total {{ siLocal::number($aging_total ?? 0) }}</div>
+                </div>
+            </div>
+            <div class="card-body d-flex align-items-center justify-content-center">
+                <div id="chart-aging" style="min-height:288px;width:100%"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- Dashboard stat cards --}}
+<div class="row g-3 mb-3">
+
+    {{-- Card 1: % Invoices Paid --}}
+    <div class="col-6 col-lg-3">
+        <div class="card h-100">
+            <div class="card-body">
+                <div class="d-flex align-items-center mb-2">
+                    <span class="text-uppercase text-secondary fw-semibold" style="font-size:.65rem;letter-spacing:.08em">Invoices Paid</span>
+                    <a href="index.php?module=reports&amp;view=report_debtors_by_aging" target="_blank" rel="noopener" class="ms-auto text-secondary lh-1" title="Open report">
+                        <i class="ti ti-external-link" style="font-size:.9rem"></i>
+                    </a>
+                </div>
+                <div class="h1 mb-1">{{ $dash_paid_pct ?? 0 }}%</div>
+                <div class="text-secondary small mb-3">
+                    {{ $dash_paid_inv_count ?? 0 }} of {{ $dash_total_inv_count ?? 0 }} invoices fully paid
+                </div>
+                <div class="progress" style="height:6px">
+                    <div class="progress-bar bg-primary" role="progressbar"
+                         style="width:{{ $dash_paid_pct ?? 0 }}%"
+                         aria-valuenow="{{ $dash_paid_pct ?? 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Card 2: Invoice Revenue sparkline --}}
+    <div class="col-6 col-lg-3">
+        <div class="card h-100 overflow-hidden">
+            <div class="card-body pb-1">
+                <div class="d-flex align-items-center mb-2">
+                    <span class="text-uppercase text-secondary fw-semibold" style="font-size:.65rem;letter-spacing:.08em">Invoice Revenue</span>
+                    <a href="index.php?module=reports&amp;view=report_sales_by_periods" target="_blank" rel="noopener" class="ms-auto text-secondary lh-1" title="Open report">
+                        <i class="ti ti-external-link" style="font-size:.9rem"></i>
+                    </a>
+                </div>
+                <div class="h1 mb-1">{{ siLocal::number($dash_alltime_inv_total ?? 0) }}</div>
+                <div class="text-secondary small mb-2">All time</div>
+            </div>
+            <div id="sparkline-invoices" style="height:70px"></div>
+        </div>
+    </div>
+
+    {{-- Card 3: Payment Revenue sparkline --}}
+    <div class="col-6 col-lg-3">
+        <div class="card h-100 overflow-hidden">
+            <div class="card-body pb-1">
+                <div class="d-flex align-items-center mb-2">
+                    <span class="text-uppercase text-secondary fw-semibold" style="font-size:.65rem;letter-spacing:.08em">Payment Revenue</span>
+                    <a href="index.php?module=reports&amp;view=report_sales_by_periods" target="_blank" rel="noopener" class="ms-auto text-secondary lh-1" title="Open report">
+                        <i class="ti ti-external-link" style="font-size:.9rem"></i>
+                    </a>
+                </div>
+                <div class="h1 mb-1">{{ siLocal::number($dash_alltime_pmt_total ?? 0) }}</div>
+                <div class="text-secondary small mb-2">All time</div>
+            </div>
+            <div id="sparkline-payments" style="height:70px"></div>
+        </div>
+    </div>
+
+    {{-- Card 4: Invoice & Payment Volume (count) --}}
+    <div class="col-6 col-lg-3">
+        <div class="card h-100 overflow-hidden">
+            <div class="card-body pb-1">
+                <div class="d-flex align-items-center mb-2">
+                    <span class="text-uppercase text-secondary fw-semibold" style="font-size:.65rem;letter-spacing:.08em">Invoice &amp; Payment Volume</span>
+                    <a href="index.php?module=reports&amp;view=report_sales_by_periods" target="_blank" rel="noopener" class="ms-auto text-secondary lh-1" title="Open report">
+                        <i class="ti ti-external-link" style="font-size:.9rem"></i>
+                    </a>
+                </div>
+                <div class="h1 mb-0">
+                    {{ number_format($dash_total_inv_volume ?? 0) }}
+                    <span class="fs-4 fw-normal text-secondary ms-1">inv</span>
+                </div>
+                <div class="text-secondary small mb-2">
+                    {{ number_format($dash_total_pmt_volume ?? 0) }} payments &nbsp;&middot;&nbsp; All time
+                </div>
+            </div>
+            <div id="sparkline-volume" style="height:70px"></div>
+        </div>
+    </div>
+
 </div>
 
 {{-- Recent invoices --}}
@@ -754,10 +887,12 @@
 <script src="https://cdn.jsdelivr.net/npm/apexcharts@latest/dist/apexcharts.min.js"></script>
 <script>
 (function () {
-    var labels   = @json($chart_labels ?? []);
-    var datasets = @json($chart_data ?? []);
+    var labels       = @json($chart_labels ?? []);
+    var datasets     = @json($chart_data ?? []);
     var invoiceLabel = @json($LANG['invoices'] ?? '');
     var paymentLabel = @json($LANG['payments'] ?? '');
+    var annualTotals = @json($annual_totals ?? []);
+    var annualYears  = @json($chart_years ?? []);
 
     function cssVar(name) {
         return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
@@ -814,15 +949,218 @@
     var chart = new ApexCharts(document.getElementById('chart-dashboard'), buildOptions({{ $chart_current_year ?? 'null' }}));
     chart.render();
 
+    // Year selector — works for both segmented control and dropdown
+    var currentYear = {{ $chart_current_year ?? 'null' }};
+
     document.querySelectorAll('#chart-year-selector input[name="chart_year"]').forEach(function (radio) {
         radio.addEventListener('change', function () {
-            chart.updateOptions(buildOptions(this.value), true, true);
+            currentYear = this.value;
+            chart.updateOptions(buildOptions(currentYear), true, true);
+        });
+    });
+
+    document.querySelectorAll('#chart-year-selector .dropdown-item').forEach(function (item) {
+        item.addEventListener('click', function (e) {
+            e.preventDefault();
+            currentYear = this.dataset.year;
+            chart.updateOptions(buildOptions(currentYear), true, true);
+            // Update button label and active state
+            var btn = document.getElementById('chart-year-btn');
+            if (btn) btn.textContent = currentYear;
+            document.querySelectorAll('#chart-year-selector .dropdown-item').forEach(function (el) {
+                el.classList.toggle('active', el === item);
+            });
         });
     });
 
     document.documentElement.addEventListener('si-theme-changed', function () {
-        var active = document.querySelector('#chart-year-selector input[name="chart_year"]:checked');
-        chart.updateOptions(buildOptions(active ? active.value : {{ $chart_current_year ?? 'null' }}), true, true);
+        chart.updateOptions(buildOptions(currentYear), true, true);
+        annualChart.updateOptions(buildAnnualOptions(), true, true);
+        agingChart.updateOptions(buildAgingOptions(), true, true);
+    });
+
+    // Annual bar chart
+    function buildAnnualOptions() {
+        var isDark    = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+        var primary   = cssVar('--tblr-primary')      || '#45aaf2';
+        var success   = cssVar('--tblr-success')      || '#2fb344';
+        var bodyColor = cssVar('--tblr-body-color')   || '#1d273b';
+        var borderCol = cssVar('--tblr-border-color') || '#e6e7e9';
+
+        var invData = annualYears.map(function (y) { return (annualTotals[y] || {}).invoices || 0; });
+        var pmtData = annualYears.map(function (y) { return (annualTotals[y] || {}).payments || 0; });
+
+        return {
+            chart: {
+                type: 'bar',
+                fontFamily: 'inherit',
+                height: 288,
+                toolbar: { show: false },
+                animations: { enabled: false },
+                background: 'transparent'
+            },
+            series: [
+                { name: invoiceLabel, data: invData },
+                { name: paymentLabel, data: pmtData }
+            ],
+            xaxis: {
+                categories: annualYears,
+                labels: { style: { colors: bodyColor } },
+                axisBorder: { color: borderCol },
+                axisTicks: { color: borderCol }
+            },
+            yaxis: {
+                labels: {
+                    style: { colors: bodyColor },
+                    formatter: function (v) { return v.toLocaleString(); }
+                }
+            },
+            colors: [primary, success],
+            plotOptions: {
+                bar: { columnWidth: '60%', borderRadius: 3 }
+            },
+            legend: {
+                show: true,
+                position: 'bottom',
+                labels: { colors: bodyColor }
+            },
+            dataLabels: { enabled: false },
+            grid: { borderColor: borderCol, strokeDashArray: 4 },
+            tooltip: { theme: isDark ? 'dark' : 'light' }
+        };
+    }
+
+    var annualChart = new ApexCharts(document.getElementById('chart-annual'), buildAnnualOptions());
+    annualChart.render();
+
+    // Debtor aging radial chart
+    var agingData = @json($aging_chart ?? []);
+
+    function buildAgingOptions() {
+        var isDark    = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+        var bodyColor = cssVar('--tblr-body-color')   || '#1d273b';
+        var borderCol = cssVar('--tblr-border-color') || '#e6e7e9';
+
+        var series  = agingData.map(function (b) { return b.percent; });
+        var labels  = agingData.map(function (b) { return b.label; });
+        var amounts = agingData.map(function (b) { return b.amount; });
+
+        return {
+            chart: {
+                type: 'radialBar',
+                fontFamily: 'inherit',
+                height: 288,
+                toolbar: { show: false },
+                animations: { enabled: false },
+                background: 'transparent'
+            },
+            series: series,
+            labels: labels,
+            colors: ['#2fb344', '#f59f00', '#f76707', '#e67700', '#e03131'],
+            plotOptions: {
+                radialBar: {
+                    offsetY: 0,
+                    startAngle: 0,
+                    endAngle: 270,
+                    hollow: { margin: 5, size: '30%' },
+                    track: { background: isDark ? '#2d3748' : '#f0f0f0' },
+                    dataLabels: {
+                        name: { fontSize: '11px', color: bodyColor },
+                        value: {
+                            fontSize: '12px',
+                            color: bodyColor,
+                            formatter: function (val, opts) {
+                                var idx = opts && opts.seriesIndex != null ? opts.seriesIndex : 0;
+                                return amounts[idx] !== undefined ? amounts[idx].toLocaleString() : val + '%';
+                            }
+                        },
+                        total: {
+                            show: true,
+                            label: 'Total',
+                            color: bodyColor,
+                            formatter: function () {
+                                var t = agingData.reduce(function (s, b) { return s + b.amount; }, 0);
+                                return t.toLocaleString();
+                            }
+                        }
+                    }
+                }
+            },
+            legend: {
+                show: true,
+                position: 'bottom',
+                labels: { colors: bodyColor },
+                fontSize: '11px'
+            },
+            tooltip: {
+                theme: isDark ? 'dark' : 'light',
+                y: {
+                    formatter: function (val, opts) {
+                        var idx = opts && opts.seriesIndex != null ? opts.seriesIndex : 0;
+                        return amounts[idx] !== undefined ? amounts[idx].toLocaleString() : val + '%';
+                    }
+                }
+            }
+        };
+    }
+
+    var agingChart = new ApexCharts(document.getElementById('chart-aging'), buildAgingOptions());
+    agingChart.render();
+
+    // ── Stat card sparklines ─────────────────────────────────────────────────
+    var sparkInvAmounts  = @json($alltime_inv_monthly ?? []);
+    var sparkPmtAmounts  = @json($alltime_pmt_monthly ?? []);
+    var sparkInvCounts   = @json($alltime_inv_counts  ?? []);
+    var sparkPmtCounts   = @json($alltime_pmt_counts  ?? []);
+
+    function buildSparkOptions(type, colors) {
+        var isDark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+        var base = {
+            chart: {
+                type: type,
+                sparkline: { enabled: true },
+                height: 70,
+                animations: { enabled: false },
+                background: 'transparent'
+            },
+            colors: colors,
+            tooltip: { theme: isDark ? 'dark' : 'light', x: { show: false } }
+        };
+        if (type === 'area') {
+            base.stroke = { width: 2, curve: 'smooth' };
+            base.fill   = { type: 'gradient', gradient: { opacityFrom: 0.3, opacityTo: 0.0 } };
+        } else {
+            base.stroke      = { width: 0 };
+            base.fill        = { type: 'solid' };
+            base.plotOptions = { bar: { columnWidth: '85%', borderRadius: 1 } };
+            base.dataLabels  = { enabled: false };
+        }
+        return base;
+    }
+
+    var spInv = new ApexCharts(document.getElementById('sparkline-invoices'),
+        Object.assign(buildSparkOptions('area', ['#45aaf2']), {
+            series: [{ name: invoiceLabel, data: sparkInvAmounts }]
+        }));
+    spInv.render();
+
+    var spPmt = new ApexCharts(document.getElementById('sparkline-payments'),
+        Object.assign(buildSparkOptions('area', ['#2fb344']), {
+            series: [{ name: paymentLabel, data: sparkPmtAmounts }]
+        }));
+    spPmt.render();
+
+    var spVol = new ApexCharts(document.getElementById('sparkline-volume'),
+        Object.assign(buildSparkOptions('bar', ['#45aaf2', '#2fb344']), {
+            series: [
+                { name: invoiceLabel, data: sparkInvCounts },
+                { name: paymentLabel, data: sparkPmtCounts }
+            ]
+        }));
+    spVol.render();
+
+    document.documentElement.addEventListener('si-theme-changed', function () {
+        [spInv, spPmt, spVol].forEach(function (c) { c.updateOptions({ tooltip: { theme: document.documentElement.getAttribute('data-bs-theme') === 'dark' ? 'dark' : 'light' } }); });
     });
 
 })();
