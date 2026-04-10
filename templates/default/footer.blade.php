@@ -40,25 +40,22 @@
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="si_preview_modal_label">Preview</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body p-0">
-                <iframe id="si_preview_iframe" src="about:blank" style="width:100%;height:72vh;border:0;display:block;"></iframe>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <div class="ms-auto d-flex gap-2">
-                    <a href="#" id="si_preview_newtab_link" target="_blank" rel="noopener" class="btn btn-outline-secondary">
-                        <i class="ti ti-external-link me-1"></i>Open in new tab
-                    </a>
-                    <a href="#" id="si_preview_pdf_link" target="_blank" rel="noopener" class="btn btn-outline-danger d-none">
-                        <i class="ti ti-file-type-pdf me-1"></i>PDF
-                    </a>
-                    <button type="button" class="btn btn-outline-primary" onclick="var f=document.getElementById('si_preview_iframe');if(f&&f.contentWindow)f.contentWindow.print();">
+                <h5 class="modal-title me-3" id="si_preview_modal_label">Preview</h5>
+                <div class="d-flex gap-2 align-items-center ms-auto">
+                    <button type="button" class="btn btn-sm btn-outline-primary" onclick="var f=document.getElementById('si_preview_iframe');if(f&&f.contentWindow)f.contentWindow.print();">
                         <i class="ti ti-printer me-1"></i>Print
                     </button>
+                    <a href="#" id="si_preview_pdf_link" target="_blank" rel="noopener" class="btn btn-sm btn-outline-danger d-none">
+                        <i class="ti ti-file-type-pdf me-1"></i>PDF
+                    </a>
+                    <a href="#" id="si_preview_newtab_link" target="_blank" rel="noopener" class="btn btn-sm btn-outline-secondary">
+                        <i class="ti ti-external-link me-1"></i>Open in new tab
+                    </a>
+                    <button type="button" class="btn-close ms-1" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+            </div>
+            <div class="modal-body p-0">
+                <iframe id="si_preview_iframe" src="about:blank" style="width:100%;height:78vh;border:0;display:block;"></iframe>
             </div>
         </div>
     </div>
