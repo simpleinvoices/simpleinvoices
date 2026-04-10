@@ -155,20 +155,11 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
 				}
 				$menu = false;
 			} else {
-				//If no invoices in db then show home page as default - else show Manage Invoices page
+				//If no module specified, show the home/index page
 				if ($module==null)
 				{
-					$invoiceobj = new invoice();
-					if ( $invoiceobj->are_there_any() > "0" )  
-					{
-					    $module = "invoices" ;
-						$view = "manage";
-					
-					} else { 
-					    $module = "index" ;
-						$view = "index";
-					}
-					unset($invoiceobj);
+				    $module = "index" ;
+					$view = "index";
 				}
 			}
 		}

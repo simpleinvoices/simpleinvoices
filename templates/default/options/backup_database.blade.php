@@ -181,7 +181,7 @@
 				</div>
 				<div id="si_sql_error" class="alert alert-danger m-3 d-none"></div>
 				<div id="si_sql_content" class="overflow-auto p-3 d-none" style="max-height:68vh;">
-					<div id="si_sql_html" class="si-code-viewer"></div>
+					<pre id="si_sql_html" class="si-code-viewer mb-0"></pre>
 				</div>
 			</div>
 			<div class="modal-footer">
