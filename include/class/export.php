@@ -437,7 +437,21 @@ class export
                 $this->file_name = $spc2us_pref;
 
                 $customFieldLabels = getCustomFieldLabels($this->domain_id);
-                $template          = $defaults['template'];
+
+                // Use the dedicated export template for xlsx/docx non-ODF exports
+                $file_type_norm = strtolower($this->file_type ?? '');
+                if ($file_type_norm === 'xls') $file_type_norm = 'xlsx';
+                if ($file_type_norm === 'doc') $file_type_norm = 'docx';
+                $isOfficeExport = ($this->format === 'file' && in_array($file_type_norm, ['xlsx', 'docx']));
+                $template = $isOfficeExport
+                    ? ($defaults['export_template'] ?: 'export')
+                    : $defaults['template'];
+
+                // Fall back to 'export' template if configured template folder is missing
+                if ($isOfficeExport && !is_dir("./templates/invoices/{$template}")) {
+                    $template = 'export';
+                }
+
                 $templatePath      = "./templates/invoices/${template}/template.blade.php";
                 $template_path     = "templates.invoices.{$template}";
                 $css               = $siUrl . "/templates/invoices/${template}/style.css";

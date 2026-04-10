@@ -1939,6 +1939,17 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['320']['date']  = "20260408";
 
     $patch['321']['name']  = "Add default export template system default";
-    $patch['321']['patch'] = "INSERT INTO ".TB_PREFIX."system_defaults (id, name, value, domain_id, extension_id) VALUES (NULL, 'export_template', 'export', '1', '0') ON DUPLICATE KEY UPDATE value = value";
+    switch ($config->database->adapter) {
+        case "pdo_pgsql":
+            $patch['321']['patch'] = "INSERT INTO ".TB_PREFIX."system_defaults (name, value, domain_id, extension_id) VALUES ('export_template', 'export', 1, 0) ON CONFLICT (domain_id, name) DO NOTHING";
+            break;
+        case "pdo_sqlite":
+            $patch['321']['patch'] = "INSERT OR IGNORE INTO ".TB_PREFIX."system_defaults (name, value, domain_id, extension_id) VALUES ('export_template', 'export', 1, 0)";
+            break;
+        case "pdo_mysql":
+        default:
+            $patch['321']['patch'] = "INSERT INTO ".TB_PREFIX."system_defaults (id, name, value, domain_id, extension_id) VALUES (NULL, 'export_template', 'export', 1, 0) ON DUPLICATE KEY UPDATE value = value";
+            break;
+    }
     $patch['321']['date']  = "20260410";
 
