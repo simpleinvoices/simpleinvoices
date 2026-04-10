@@ -44,6 +44,12 @@
 					'help_title' => $LANG['default_inv_template'] ?? '',
 				])
 				@include('system_defaults.manage_row', [
+					'label' => $LANG['default_export_template'] ?? 'Default export template (xlsx/docx)',
+					'value' => $defaults['export_template'] ?? '',
+					'edit_param' => 'def_export_template',
+					'icon' => 'ti-file-export',
+				])
+				@include('system_defaults.manage_row', [
 					'label' => $LANG['default_payment_type'] ?? 'Default payment type',
 					'value' => $defaultPaymentType['pt_description'] ?? '',
 					'edit_param' => 'def_payment_type',

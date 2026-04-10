@@ -76,6 +76,49 @@ EOD;
 
 }
 
+else if ($_GET["submit"] == "def_export_template") {
+
+	$default = "export_template";
+	/*drop down list code for export template - only show the folder names in templates/invoices/*/
+
+	$handle = opendir("./templates/invoices/");
+	while ($template = readdir($handle)) {
+		if ($template != ".." && $template != "." && $template != "logos" && $template != ".svn" && $template != "template.php" && $template != "template.php~") {
+			$export_files[] = $template;
+		}
+	}
+	closedir($handle);
+	sort($export_files);
+
+	$escaped = htmlsafe($defaults['export_template']);
+	$display_block_export_templates = <<<EOD
+	<select name="value" class="form-select">
+EOD;
+
+	$display_block_export_templates .= <<<EOD
+	<option selected value='$escaped' style="font-weight: bold" >$escaped</option>
+EOD;
+
+	foreach ($export_files as $var) {
+		$var = htmlsafe($var);
+		$display_block_export_templates .= "<option value='$var' >";
+		$display_block_export_templates .= $var;
+		$display_block_export_templates .= "</option>";
+	}
+
+	$display_block_export_templates .= "</select>";
+
+	jsBegin();
+	jsFormValidationBegin("frmpost");
+	jsValidateRequired("def_export_template", "{$LANG['default_export_template']}");
+	jsFormValidationEnd();
+	jsEnd();
+
+	$description = $LANG['default_export_template'] ?? 'Default export template (xlsx/docx)';
+	$value = $display_block_export_templates;
+
+}
+
 else if ($_GET["submit"] == "biller") {
 
 	$default = "biller";

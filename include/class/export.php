@@ -14,9 +14,6 @@ class export
     public $customer_id;
     public $domain_id;
 
-    // Raw structured data stored by getData() for use by xlsx exporter
-    protected $raw_data = [];
-
     public function __construct()
     {
         $this->domain_id = domain_id::get($this->domain_id);
@@ -45,7 +42,7 @@ class export
                 if ($file_type === 'doc')  $file_type = 'docx';
 
                 if ($file_type === 'xlsx') {
-                    $this->exportXlsx();
+                    $this->exportXlsx($data);
                 } elseif ($file_type === 'docx') {
                     $this->exportDocx($data);
                 } else {
@@ -119,25 +116,26 @@ class export
         exit(0);
     }
 
-    // Export invoice/payment as a real XLSX spreadsheet via PhpSpreadsheet
-    private function exportXlsx()
+    /** XLSX from the same rendered HTML as print/PDF/DOCX (PhpSpreadsheet Reader\Html). */
+    private function exportXlsx($html = null): void
     {
         require_once('./vendor/autoload.php');
 
-        $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
-        $sheet       = $spreadsheet->getActiveSheet();
+        $htmlStr = is_string($html) ? trim($html) : '';
+        if ($htmlStr === '') {
+            throw new \RuntimeException('XLSX export requires rendered HTML.');
+        }
 
-        switch ($this->module) {
-            case 'invoice':
-                $this->buildInvoiceSheet($sheet);
-                $sheet->setTitle('Invoice');
-                break;
-            case 'payment':
-                $this->buildPaymentSheet($sheet);
-                $sheet->setTitle('Payment');
-                break;
-            default:
-                $sheet->setCellValue('A1', 'Export not supported for module: ' . $this->module);
+        $reader = new \PhpOffice\PhpSpreadsheet\Reader\Html();
+        $reader->setAllowExternalImages(true);
+        $spreadsheet = $reader->loadFromString($htmlStr);
+
+        try {
+            $spreadsheet->getActiveSheet()->setTitle(
+                $this->module === 'payment' ? 'Payment' : ($this->module === 'statement' ? 'Statement' : 'Invoice')
+            );
+        } catch (\Throwable $e) {
+            // Keep the title from the HTML if rename fails (length / invalid characters).
         }
 
         $filename = basename(($this->file_name ?: $this->module . $this->id) . '.xlsx');
@@ -167,288 +165,6 @@ class export
             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
             $filename
         );
-    }
-
-    // Build a structured invoice sheet
-    private function buildInvoiceSheet(\PhpOffice\PhpSpreadsheet\Worksheet\Worksheet $sheet)
-    {
-        $d          = $this->raw_data;
-        $invoice    = $d['invoice'];
-        $biller     = $d['biller'];
-        $customer   = $d['customer'];
-        $preference = $d['preference'];
-        $items      = $d['invoiceItems'] ?? [];
-
-        $moneyFmt  = '#,##0.00';
-        $boldStyle = ['font' => ['bold' => true]];
-        $row       = 1;
-
-        // ---- Title row ----
-        $sheet->setCellValue('A' . $row, $invoice['index_name'] ?? ('Invoice #' . $invoice['id']));
-        $sheet->getStyle('A' . $row)->applyFromArray(['font' => ['bold' => true, 'size' => 14]]);
-        $sheet->mergeCells('A' . $row . ':C' . $row);
-        $sheet->setCellValue('D' . $row, 'Date:');
-        $sheet->getStyle('D' . $row)->applyFromArray($boldStyle);
-        $sheet->setCellValue('E' . $row, $invoice['calc_date'] ?? $invoice['date']);
-        $row++;
-
-        $sheet->setCellValue('D' . $row, 'Status:');
-        $sheet->getStyle('D' . $row)->applyFromArray($boldStyle);
-        $sheet->setCellValue('E' . $row, $preference['status_wording'] ?? '');
-        $row += 2;
-
-        // ---- From / To headers ----
-        $sheet->setCellValue('A' . $row, 'From');
-        $sheet->getStyle('A' . $row)->applyFromArray($boldStyle);
-        $sheet->setCellValue('D' . $row, 'To');
-        $sheet->getStyle('D' . $row)->applyFromArray($boldStyle);
-        $row++;
-
-        // Biller + customer address blocks side by side
-        $addrFields = [
-            ['name'],
-            ['street_address'],
-            ['street_address2'],
-            ['city', 'state', 'zip_code'],
-            ['country'],
-            ['phone'],
-            ['email'],
-        ];
-        foreach ($addrFields as $fields) {
-            $billerVal   = implode(', ', array_filter(array_map(fn($f) => $biller[$f]   ?? '', $fields)));
-            $customerVal = implode(', ', array_filter(array_map(fn($f) => $customer[$f] ?? '', $fields)));
-            if ($billerVal !== '' || $customerVal !== '') {
-                $sheet->setCellValue('A' . $row, $billerVal);
-                $sheet->setCellValue('D' . $row, $customerVal);
-                $row++;
-            }
-        }
-        $row++;
-
-        // ---- Items table header ----
-        $itemHeaders = ['Qty', 'Description', 'Unit Price', 'Tax', 'Total'];
-        $itemCols    = ['A', 'B', 'C', 'D', 'E'];
-        foreach ($itemHeaders as $i => $hdr) {
-            $sheet->setCellValue($itemCols[$i] . $row, $hdr);
-            $sheet->getStyle($itemCols[$i] . $row)->applyFromArray($boldStyle);
-        }
-        $sheet->getStyle('A' . $row . ':E' . $row)
-              ->getBorders()->getBottom()
-              ->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-        $row++;
-
-        // ---- Line items ----
-        foreach ($items as $item) {
-            $sheet->setCellValue('A' . $row, $item['quantity']);
-            $sheet->setCellValue('B' . $row, $this->invoiceItemXlsxDescription($item));
-            $sheet->getStyle('B' . $row)->getAlignment()->setWrapText(true);
-            $sheet->setCellValue('C' . $row, (float)$item['unit_price']);
-            $sheet->setCellValue('D' . $row, (float)$item['tax_amount']);
-            $sheet->setCellValue('E' . $row, (float)$item['total']);
-            $sheet->getStyle('C' . $row . ':E' . $row)->getNumberFormat()->setFormatCode($moneyFmt);
-            $row++;
-        }
-        $row++;
-
-        // ---- Totals ----
-        $totals = [
-            'Total'  => (float)$invoice['total'],
-            'Paid'   => (float)$invoice['paid'],
-            'Owing'  => (float)$invoice['owing'],
-        ];
-        foreach ($totals as $label => $amount) {
-            $sheet->setCellValue('D' . $row, $label . ':');
-            $sheet->getStyle('D' . $row)->applyFromArray($boldStyle);
-            $sheet->setCellValue('E' . $row, $amount);
-            $sheet->getStyle('E' . $row)->getNumberFormat()->setFormatCode($moneyFmt);
-            $row++;
-        }
-
-        // ---- Notes ----
-        if (!empty($invoice['note'])) {
-            $row++;
-            $sheet->setCellValue('A' . $row, 'Notes:');
-            $sheet->getStyle('A' . $row)->applyFromArray($boldStyle);
-            $row++;
-            $sheet->setCellValue('A' . $row, $this->xlsxHtmlToPlainText((string)$invoice['note'], false));
-            $sheet->mergeCells('A' . $row . ':E' . $row);
-            $sheet->getStyle('A' . $row)->getAlignment()->setWrapText(true);
-        }
-
-        // ---- Invoice detail / payment footer (same fields as PDF & invoice templates) ----
-        $detailHeading = trim((string)($preference['pref_inv_detail_heading'] ?? ''));
-        $detailLine    = $this->xlsxHtmlToPlainText((string)($preference['pref_inv_detail_line'] ?? ''), false);
-        $payMethod     = trim((string)($preference['pref_inv_payment_method'] ?? ''));
-        $payLine1      = $this->xlsxPrefPaymentLine(
-            $preference['pref_inv_payment_line1_name'] ?? '',
-            $preference['pref_inv_payment_line1_value'] ?? ''
-        );
-        $payLine2      = $this->xlsxPrefPaymentLine(
-            $preference['pref_inv_payment_line2_name'] ?? '',
-            $preference['pref_inv_payment_line2_value'] ?? ''
-        );
-        $billerFooter  = $this->xlsxHtmlToPlainText((string)($biller['footer'] ?? ''), false);
-
-        if ($detailHeading !== '' || $detailLine !== '' || $payMethod !== '' || $payLine1 !== '' || $payLine2 !== '' || $billerFooter !== '') {
-            $row += 2;
-            if ($detailHeading !== '') {
-                $sheet->setCellValue('A' . $row, $detailHeading);
-                $sheet->getStyle('A' . $row)->applyFromArray($boldStyle);
-                $sheet->mergeCells('A' . $row . ':E' . $row);
-                $row++;
-            }
-            if ($detailLine !== '') {
-                $sheet->setCellValue('A' . $row, $detailLine);
-                $sheet->mergeCells('A' . $row . ':E' . $row);
-                $sheet->getStyle('A' . $row)->getFont()->setItalic(true);
-                $sheet->getStyle('A' . $row)->getAlignment()->setWrapText(true);
-                $row++;
-            }
-            if ($payMethod !== '') {
-                $sheet->setCellValue('A' . $row, $payMethod);
-                $sheet->mergeCells('A' . $row . ':E' . $row);
-                $sheet->getStyle('A' . $row)->getAlignment()->setWrapText(true);
-                $row++;
-            }
-            if ($payLine1 !== '') {
-                $sheet->setCellValue('A' . $row, $payLine1);
-                $sheet->mergeCells('A' . $row . ':E' . $row);
-                $sheet->getStyle('A' . $row)->getAlignment()->setWrapText(true);
-                $row++;
-            }
-            if ($payLine2 !== '') {
-                $sheet->setCellValue('A' . $row, $payLine2);
-                $sheet->mergeCells('A' . $row . ':E' . $row);
-                $sheet->getStyle('A' . $row)->getAlignment()->setWrapText(true);
-                $row++;
-            }
-            if ($billerFooter !== '') {
-                $row++;
-                $sheet->setCellValue('A' . $row, $billerFooter);
-                $sheet->mergeCells('A' . $row . ':E' . $row);
-                $sheet->getStyle('A' . $row)->getAlignment()
-                    ->setWrapText(true)
-                    ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-            }
-        }
-
-        // ---- Column widths ----
-        $sheet->getColumnDimension('A')->setWidth(10);
-        $sheet->getColumnDimension('B')->setWidth(40);
-        $sheet->getColumnDimension('C')->setWidth(14);
-        $sheet->getColumnDimension('D')->setWidth(14);
-        $sheet->getColumnDimension('E')->setWidth(14);
-    }
-
-    /**
-     * Convert stored HTML to plain text for spreadsheet cells.
-     *
-     * @param bool $singleLine If true, collapse all whitespace (footer snippets). If false, keep line breaks from
-     *                         tags like <p>, <br> so wrap-text cells read like formatted notes.
-     */
-    private function xlsxHtmlToPlainText(string $html, bool $singleLine): string
-    {
-        $html = trim($html);
-        if ($html === '') {
-            return '';
-        }
-
-        $normalized = preg_replace('/<\s*br\s*\/?>/i', "\n", $html);
-        $normalized = preg_replace(
-            '/<\/\s*(p|div|h[1-6]|tr|li|blockquote|pre|section|article)\s*>/i',
-            "\n",
-            $normalized
-        );
-        $normalized = preg_replace('/<\s*\/\s*table\s*>/i', "\n", $normalized);
-
-        $text = strip_tags($normalized);
-        $text = html_entity_decode($text, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
-
-        if ($singleLine) {
-            return trim(preg_replace('/\s+/u', ' ', $text));
-        }
-
-        $lines = preg_split('/\r\n|\r|\n/', $text);
-        $lines = array_map(static function ($line) {
-            return trim(preg_replace('/[ \t]+/u', ' ', $line));
-        }, $lines);
-        $text = implode("\n", $lines);
-        $text = preg_replace("/\n{3,}/", "\n\n", $text);
-
-        return trim($text);
-    }
-
-    private function xlsxPrefPaymentLine($name, $value): string
-    {
-        $parts = array_filter(array_map(static fn ($s) => trim((string)$s), [$name ?? '', $value ?? '']));
-
-        return implode(' ', $parts);
-    }
-
-    /**
-     * Line description for XLSX: match invoice templates (product name + optional item notes).
-     * Itemised/consulting rows store the product label in product.description; invoice_items.description is often empty.
-     */
-    private function invoiceItemXlsxDescription(array $item): string
-    {
-        $product = $item['product'] ?? null;
-        $productName = (is_array($product) && isset($product['description']))
-            ? $this->xlsxHtmlToPlainText((string)$product['description'], false)
-            : '';
-        $lineNote = $this->xlsxHtmlToPlainText((string)($item['description'] ?? ''), false);
-
-        if ($productName !== '' && $lineNote !== '' && strcasecmp($productName, $lineNote) !== 0) {
-            return $productName . "\n" . $lineNote;
-        }
-        if ($productName !== '') {
-            return $productName;
-        }
-        return $lineNote;
-    }
-
-    // Build a payment sheet
-    private function buildPaymentSheet(\PhpOffice\PhpSpreadsheet\Worksheet\Worksheet $sheet)
-    {
-        $d           = $this->raw_data;
-        $payment     = $d['payment']     ?? [];
-        $invoice     = $d['invoice']     ?? [];
-        $biller      = $d['biller']      ?? [];
-        $customer    = $d['customer']    ?? [];
-        $paymentType = $d['paymentType'] ?? [];
-
-        $boldStyle = ['font' => ['bold' => true]];
-        $moneyFmt  = '#,##0.00';
-        $row       = 1;
-
-        $sheet->setCellValue('A' . $row, 'Payment Receipt');
-        $sheet->getStyle('A' . $row)->applyFromArray(['font' => ['bold' => true, 'size' => 14]]);
-        $sheet->mergeCells('A' . $row . ':B' . $row);
-        $row += 2;
-
-        $fields = [
-            'Payment #'      => $payment['id'] ?? '',
-            'Date'           => $payment['ac_date'] ?? '',
-            'Amount'         => null, // handled separately for formatting
-            'Payment Type'   => $paymentType['pt_description'] ?? '',
-            'Invoice'        => $invoice['index_name'] ?? '',
-            'Biller'         => $biller['name'] ?? '',
-            'Customer'       => $customer['name'] ?? '',
-            'Notes'          => $payment['ac_notes'] ?? '',
-        ];
-        foreach ($fields as $label => $value) {
-            $sheet->setCellValue('A' . $row, $label . ':');
-            $sheet->getStyle('A' . $row)->applyFromArray($boldStyle);
-            if ($label === 'Amount') {
-                $sheet->setCellValue('B' . $row, (float)($payment['ac_amount'] ?? 0));
-                $sheet->getStyle('B' . $row)->getNumberFormat()->setFormatCode($moneyFmt);
-            } else {
-                $sheet->setCellValue('B' . $row, $value);
-            }
-            $row++;
-        }
-
-        $sheet->getColumnDimension('A')->setWidth(18);
-        $sheet->getColumnDimension('B')->setWidth(40);
     }
 
     /**
@@ -500,6 +216,48 @@ class export
         return preg_replace('/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/', '', $s);
     }
 
+    /**
+     * PhpWord Html::addHtml calls addTextBreak() on the current container; Table is not a container,
+     * so br nodes that sit inside table but outside td/th (invalid HTML) cause a fatal error.
+     */
+    private function htmlFragmentSanitizeForPhpWord(string $fragment): string
+    {
+        $fragment = trim($fragment);
+        if ($fragment === '') {
+            return $fragment;
+        }
+
+        libxml_use_internal_errors(true);
+        $dom = new \DOMDocument();
+        $dom->loadHTML(
+            '<?xml encoding="utf-8"><html><body><div id="si_phproot">' . $fragment . '</div></body></html>',
+            LIBXML_HTML_NODEFDTD | LIBXML_NOERROR | LIBXML_NOWARNING
+        );
+        libxml_clear_errors();
+
+        $xp    = new \DOMXPath($dom);
+        $nodes = $xp->query('//br[ancestor::table and not(ancestor::td) and not(ancestor::th)]');
+        if ($nodes !== false) {
+            foreach (iterator_to_array($nodes, false) as $br) {
+                if ($br->parentNode !== null) {
+                    $br->parentNode->removeChild($br);
+                }
+            }
+        }
+
+        $root = $dom->getElementById('si_phproot');
+        if ($root === null) {
+            return $fragment;
+        }
+
+        $inner = '';
+        foreach ($root->childNodes as $child) {
+            $inner .= $dom->saveXML($child);
+        }
+
+        return $inner !== '' ? $inner : $fragment;
+    }
+
     // Export invoice/payment as a real DOCX via PhpWord HTML import
     private function exportDocx($html)
     {
@@ -511,7 +269,9 @@ class export
             \PhpOffice\PhpWord\Settings::setZipClass(\PhpOffice\PhpWord\Settings::ZIPARCHIVE);
         }
 
-        $fragment = $this->stripIllegalXmlControlChars($this->htmlFragmentForPhpWord($html));
+        $fragment = $this->htmlFragmentSanitizeForPhpWord(
+            $this->stripIllegalXmlControlChars($this->htmlFragmentForPhpWord($html))
+        );
 
         $buildDoc = static function (string $frag) {
             $phpWord = new \PhpOffice\PhpWord\PhpWord();
@@ -532,6 +292,7 @@ class export
         } catch (\Throwable $e) {
             // Logos often use URLs; if the image cannot be fetched, PhpWord throws — retry without <img>.
             $stripped = preg_replace('/<img\b[^>]*\/?>/i', '', $fragment);
+            $stripped = $this->htmlFragmentSanitizeForPhpWord($stripped);
             $phpWord  = $buildDoc($stripped !== '' ? $stripped : '<p></p>');
         }
 
@@ -636,9 +397,6 @@ class export
                 $paymentType = getPaymentType($payment['ac_payment_type'], $this->domain_id);
                 $preference  = getPreference($invoice['preference_id'], $this->domain_id);
 
-                // Store raw data for XLSX export
-                $this->raw_data = compact('payment', 'invoice', 'biller', 'customer', 'paymentType', 'preference');
-
                 $smarty->assign("payment",          $payment);
                 $smarty->assign("invoice",          $invoice);
                 $smarty->assign("biller",           $biller);
@@ -677,9 +435,6 @@ class export
 
                 $spc2us_pref    = str_replace(" ", "_", $invoice['index_name']);
                 $this->file_name = $spc2us_pref;
-
-                // Store raw data for XLSX export
-                $this->raw_data = compact('invoice', 'biller', 'customer', 'preference', 'invoiceItems');
 
                 $customFieldLabels = getCustomFieldLabels($this->domain_id);
                 $template          = $defaults['template'];
