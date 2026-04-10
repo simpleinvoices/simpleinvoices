@@ -66,7 +66,7 @@ if (!is_writable('./tmp/cache')) {
    simpleInvoicesError('notWriteable','file','./tmp/cache');
 }
 
-$smartyViewPaths = array(
+$bladeViewPaths = array(
     '.',
     './templates/default/',
     './templates/',
@@ -75,16 +75,16 @@ $smartyViewPaths = array(
     './include/jquery/',
     './modules/'
 );
-$smartyCachePath = './tmp/cache';
-if (!is_writable($smartyCachePath)) {
-	simpleInvoicesError("notWriteable", 'folder', $smartyCachePath);
+$bladeCachePath = './tmp/cache';
+if (!is_writable($bladeCachePath)) {
+	simpleInvoicesError("notWriteable", 'folder', $bladeCachePath);
 }
 
 if (!class_exists('Jenssegers\Blade\Blade')) {
 	simpleInvoicesError('notWriteable', 'library', 'jenssegers/blade (run: composer update)');
 }
 require_once(__DIR__ . '/blade_view.php');
-$smarty = new BladeView($smartyViewPaths, $smartyCachePath);
+$smarty = new BladeView($bladeViewPaths, $bladeCachePath);
 /*
  * Blade template engine init - end
  */
@@ -219,11 +219,11 @@ if ($module === 'options' && $view === 'backup_database' && ($_POST['op'] ?? '')
 
 switch ($module)
 {
-	case "export" :	
-		$smarty_output = "fetch";
+	case "export" :
+		$blade_output = "fetch";
 		break;
 	default :
-		$smarty_output = "display";
+		$blade_output = "display";
 		break;
 }
 

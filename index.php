@@ -272,7 +272,7 @@ if($module == "export" OR $view == "export" OR $module == "api")
 
 
 /*
-* Include the smarty template for the requested page section - start
+* Include the Blade view for the requested page section - start
 */
 
 	$my_tpl_path = GetCustomPath("$module/$view");

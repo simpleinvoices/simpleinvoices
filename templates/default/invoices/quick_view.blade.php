@@ -10,7 +10,7 @@
     {{-- Action buttons: segmented control --}}
     <div class="mb-4 d-flex justify-content-center">
         <div class="segmented-control segmented-control-btn">
-            <label class="segmented-control-item" title="{{ $LANG['print_preview_tooltip'] ?? '' }}" onclick="window.location='index.php?module=export&amp;view=invoice&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;format=print'">
+            <label class="segmented-control-item" title="{{ $LANG['print_preview_tooltip'] ?? '' }}" onclick="siPreviewModal('index.php?module=export&amp;view=invoice&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;format=print','{{ addslashes($LANG['print_preview'] ?? 'Print Preview') }}','index.php?module=export&amp;view=invoice&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;format=pdf')">
                 <input type="radio" class="segmented-control-input">
                 <span class="segmented-control-label"><i class="ti ti-printer me-md-1"></i><span class="d-none d-md-inline">{{ $LANG['print_preview'] ?? 'Print' }}</span></span>
             </label>
@@ -28,7 +28,7 @@
                 <span class="segmented-control-label"><i class="ti ti-cash me-md-1"></i><span class="d-none d-md-inline">{{ $LANG['process_payment_via_eway'] ?? 'Pay via eWay' }}</span></span>
             </label>
             @endif
-            <label class="segmented-control-item" title="{{ $LANG['export_pdf'] ?? '' }}" onclick="window.location='index.php?module=export&amp;view=invoice&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;format=pdf'">
+            <label class="segmented-control-item" title="{{ $LANG['export_pdf'] ?? '' }}" onclick="window.open('index.php?module=export&amp;view=invoice&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;format=pdf','_blank')">
                 <input type="radio" class="segmented-control-input">
                 <span class="segmented-control-label"><i class="ti ti-file-type-pdf me-md-1"></i><span class="d-none d-md-inline">{{ $LANG['pdf'] ?? 'PDF' }}</span></span>
             </label>

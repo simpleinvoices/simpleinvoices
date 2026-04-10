@@ -1,5 +1,5 @@
 {{-- /*
-* Script: total.tpl
+* View: total (Blade)
 * 	 Total style invoice template
 *
 * License:

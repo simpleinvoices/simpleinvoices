@@ -1,4 +1,4 @@
-{{-- n Script: details.tpl
+{{-- * View: details (Blade)
 * 	Biller details template
 *
 * Last edited:

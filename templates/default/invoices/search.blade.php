@@ -1,6 +1,6 @@
 {{-- /*
-* Script: manage.tpl
-* 	 Manage invoices template
+* View: search (Blade)
+* 	 Search / list invoices (legacy Ext JS grid)
 *
 * Authors:
 *	 Justin Kelly, Nicolas Ruflin, Ben Brown, Ap.Muthu
@@ -16,20 +16,16 @@
 */ --}}
 <script type="text/javascript">
 
-{{-- This Script has to be inlined so that smarty renders it.
+{{-- Tooltips and grid labels: built in PHP so String.format placeholders {0}, {1}, … survive Blade. --}}
 
-Assign Smarty vars to JS vars before we switch to literal/JS mode.  We'll be passing
-these strings to String.format on each row, which also delimits with curly braces, so we need to use
-{ldelim} and {rdelim}. --}}
-
-var quick_view_tooltip = "{{ $LANG['quick_view_tooltip'] ?? '' }} {{ $ ?? '' }} {ldelim}1{rdelim}";
-var edit_view_tooltip = "{{ $LANG['edit_view_tooltip'] ?? '' }} {{ $ ?? '' }} {ldelim}1{rdelim}";
-var print_preview_tooltip = "{{ $LANG['print_preview_tooltip'] ?? '' }} {{ $ ?? '' }} {ldelim}1{rdelim}";
-var export_tooltip = "{{ $LANG['export_tooltip'] ?? '' }} {{ $ ?? '' }} {ldelim}1{rdelim} {{ $LANG['export_pdf_tooltip'] ?? '' }}";
-var export_xls_tooltip = "{{ $LANG['export_tooltip'] ?? '' }} {{ $ ?? '' }} {ldelim}1{rdelim} {{ $LANG['export_xls_tooltip'] ?? '' }} {{ $spreadsheet ?? '' }} {{ $LANG['format_tooltip'] ?? '' }}"
-var export_word_tooltip = "{{ $LANG['export_tooltip'] ?? '' }} {{ $ ?? '' }} {ldelim}1{rdelim} {{ $LANG['export_doc_tooltip'] ?? '' }} {{ $word_processor ?? '' }} {{ $LANG['format_tooltip'] ?? '' }}";
-var process_payment_tooltip = "{{ $LANG['process_payment'] ?? '' }} {{ $ ?? '' }} {ldelim}1{rdelim}";
-var email_tooltip = "{{ $LANG['email'] ?? '' }}  {{ $ ?? '' }} {ldelim}1{rdelim}";
+var quick_view_tooltip = @json(($LANG['quick_view_tooltip'] ?? '') . ' {1}');
+var edit_view_tooltip = @json(($LANG['edit_view_tooltip'] ?? '') . ' {1}');
+var print_preview_tooltip = @json(($LANG['print_preview_tooltip'] ?? '') . ' {1}');
+var export_tooltip = @json(($LANG['export_tooltip'] ?? '') . ' {1} ' . ($LANG['export_pdf_tooltip'] ?? ''));
+var export_xls_tooltip = @json(($LANG['export_tooltip'] ?? '') . ' {1} ' . ($LANG['export_xls_tooltip'] ?? '') . ' ' . ($spreadsheet ?? '') . ' ' . ($LANG['format_tooltip'] ?? ''));
+var export_word_tooltip = @json(($LANG['export_tooltip'] ?? '') . ' {1} ' . ($LANG['export_doc_tooltip'] ?? '') . ' ' . ($word_processor ?? '') . ' ' . ($LANG['format_tooltip'] ?? ''));
+var process_payment_tooltip = @json(($LANG['process_payment'] ?? '') . ' {1}');
+var email_tooltip = @json(($LANG['email'] ?? '') . ' {1}');
 
 var table_head_actions = "{{ $LANG['actions'] ?? '' }}";
 var table_head_id = "{{ $LANG['id'] ?? '' }}";
@@ -43,7 +39,7 @@ var table_head_type = "{{ $LANG['type'] ?? '' }}";
 
 var table_grid_manage_inv = "{{ $LANG['manage_invoices'] ?? '' }}";
 
-var table_foot_displaying_inv = "{{ $LANG['displaying_inv'] ?? '' }} {ldelim}0{rdelim} - {ldelim}1{rdelim} {{ $LANG['of'] ?? '' }} {ldelim}2{rdelim}";
+var table_foot_displaying_inv = @json(($LANG['displaying_inv'] ?? '') . ' {0} - {1} ' . ($LANG['of'] ?? '') . ' {2}');
 
 @verbatim
 Ext.onReady(function(){

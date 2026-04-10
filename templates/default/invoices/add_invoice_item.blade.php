@@ -1,5 +1,5 @@
 {{-- /*
-* Script: add_invoice_item.tpl
+* View: add_invoice_item (Blade)
 * 	 Add new item to an existing invoice 
 *
 * License:

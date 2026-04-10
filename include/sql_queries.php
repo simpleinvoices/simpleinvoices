@@ -2740,7 +2740,7 @@ function runPatches() {
 	$sth = dbQuery($sql);
 	$rows = $sth->fetchAll();
 
-	$smarty_datas=array();	
+	$patch_page=array();	
 
 	if(count($rows) == 1) {
 
@@ -2750,22 +2750,22 @@ function runPatches() {
 		}
 		for($i=0;$i < count($patch);$i++) {
 //			run_sql_patch($i,$patch[$i]); // use instead of following line if patch application status display is to be suppressed
-			$smarty_datas['rows'][$i] = run_sql_patch($i,$patch[$i]);
+			$patch_page['rows'][$i] = run_sql_patch($i,$patch[$i]);
 		}
 		if ($db_server == 'pgsql') {
 			// Yay!  Transactional DDL
 			$dbh->commit();
 		}
 
-		$smarty_datas['message']= "The database patches have now been applied. You can now start working with Simple Invoices";
-		$smarty_datas['html']	= "<div class='si_toolbar si_toolbar_form'><a href='index.php'>HOME</a></div>";
-		$smarty_datas['refresh']=5;
+		$patch_page['message']= "The database patches have now been applied. You can now start working with Simple Invoices";
+		$patch_page['html']	= "<div class='si_toolbar si_toolbar_form'><a href='index.php'>HOME</a></div>";
+		$patch_page['refresh']=5;
 	}
 	else {
 
-		$smarty_datas['html']= "Step 1 - This is the first time Database Updates has been run";
-		$smarty_datas['html']  =initialise_sql_patch();
-		$smarty_datas['html'] .= "<br />
+		$patch_page['html']= "Step 1 - This is the first time Database Updates has been run";
+		$patch_page['html']  =initialise_sql_patch();
+		$patch_page['html'] .= "<br />
 		Now that the Database upgrade table has been initialised, please go back to the Database Upgrade Manger page by clicking 
 		the following button to run the remaining patches.
 		<div class='si_toolbar si_toolbar_form'><a href='index.php?module=options&amp;view=database_sqlpatches'>Continue</a></div>
@@ -2774,17 +2774,17 @@ function runPatches() {
 	}
 
 	global $smarty;
-	$smarty-> assign("page",$smarty_datas);
+	$smarty-> assign("page",$patch_page);
 
 }
 
 // ------------------------------------------------------------------------------
 function donePatches() {
-	$smarty_datas['message']="The database patches are uptodate. You can continue working with Simple Invoices";
-	$smarty_datas['html']	= "<div class='si_toolbar si_toolbar_form'><a href='index.php'>HOME</a></div>";
-	$smarty_datas['refresh']=3;
+	$patch_page['message']="The database patches are uptodate. You can continue working with Simple Invoices";
+	$patch_page['html']	= "<div class='si_toolbar si_toolbar_form'><a href='index.php'>HOME</a></div>";
+	$patch_page['refresh']=3;
 	global $smarty;
-	$smarty-> assign("page",$smarty_datas);
+	$smarty-> assign("page",$patch_page);
 }
 
 // ------------------------------------------------------------------------------
@@ -2793,9 +2793,9 @@ function listPatches() {
 
 	//if(mysql_num_rows(mysqlQuery("SHOW TABLES LIKE '".TB_PREFIX."sql_patchmanager'")) == 1) {
 		
-		$smarty_datas=array();		
-		$smarty_datas['message']= "Your version of Simple Invoices can now be upgraded.	With this new release there are database patches that need to be applied";
-		$smarty_datas['html']	= <<<EOD
+		$patch_page=array();		
+		$patch_page['message']= "Your version of Simple Invoices can now be upgraded.	With this new release there are database patches that need to be applied";
+		$patch_page['html']	= <<<EOD
 	<p>
 			The list below describes which patches have and have not been applied to the database, the aim is to have them all applied.<br />  
 			If there are patches that have not been applied to the Simple Invoices database, please run the Update database by clicking update 
@@ -2810,17 +2810,17 @@ EOD;
 			$patch_name = htmlsafe($patch[$p]['name']);
 			$patch_date = htmlsafe($patch[$p]['date']);
 			if(check_sql_patch($p,$patch[$p]['name'])) {
-				$smarty_datas['rows'][$p]['text']	= "SQL patch $p, $patch_name <i>has</i> already been applied in release $patch_date";
-				$smarty_datas['rows'][$p]['result']	='skip';
+				$patch_page['rows'][$p]['text']	= "SQL patch $p, $patch_name <i>has</i> already been applied in release $patch_date";
+				$patch_page['rows'][$p]['result']	='skip';
 			}
 			else {
-				$smarty_datas['rows'][$p]['text']	= "SQL patch $p, $patch_name <b>has not</b> been applied to the database";
-				$smarty_datas['rows'][$p]['result']	='todo';
+				$patch_page['rows'][$p]['text']	= "SQL patch $p, $patch_name <b>has not</b> been applied to the database";
+				$patch_page['rows'][$p]['result']	='todo';
 			}	
 		}
 
 	global $smarty;
-	$smarty-> assign("page",$smarty_datas);
+	$smarty-> assign("page",$patch_page);
 }
 
 // ------------------------------------------------------------------------------
@@ -2847,12 +2847,12 @@ function run_sql_patch($id, $patch) {
 	$patch_name = htmlsafe($patch['name']);
 	#forget about the patch as it has already been run!!
 
-	$smarty_row=array();
+	$patch_row=array();
 
 	if (count($sth->fetchAll()) != 0)  {
 
-		$smarty_row['text']		= "Skipping SQL patch $escaped_id, $patch_name as it <i>has</i> already been applied";
-		$smarty_row['result']	="skip";
+		$patch_row['text']		= "Skipping SQL patch $escaped_id, $patch_name as it <i>has</i> already been applied";
+		$patch_row['result']	="skip";
 	}
 	else {
 
@@ -2860,8 +2860,8 @@ function run_sql_patch($id, $patch) {
 		#so run the patch
 		dbQuery($patch['patch']);
 
-		$smarty_row['text']	= "SQL patch $escaped_id, $patch_name <i>has</i> been applied to the database";
-		$smarty_row['result']	="done";
+		$patch_row['text']	= "SQL patch $escaped_id, $patch_name <i>has</i> been applied to the database";
+		$patch_row['result']	="done";
 
 		# now update the ".TB_PREFIX."sql_patchmanager table		
 		$sql_update = "INSERT INTO ".TB_PREFIX."sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (:id, :name, :date, :patch)";		
@@ -2881,7 +2881,7 @@ function run_sql_patch($id, $patch) {
 			*/
 		
 	}
-	return $smarty_row;
+	return $patch_row;
 }
 
 // ------------------------------------------------------------------------------

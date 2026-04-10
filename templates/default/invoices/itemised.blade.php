@@ -1,5 +1,5 @@
 {{-- /*
-* Script: itemised.tpl
+* View: itemised (Blade)
 * 	 Itemised invoice template
 *
 * License:

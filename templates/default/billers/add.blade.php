@@ -1,4 +1,4 @@
-{{-- * Script: add.tpl
+{{-- * View: add (Blade)
 * 	Biller add template
 *
 * Last edited:

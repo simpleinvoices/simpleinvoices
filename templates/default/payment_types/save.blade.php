@@ -1,5 +1,5 @@
 {{-- /*
-* Script: save.tpl
+* View: save (Blade)
 * 	 Payment type save template
 *
 * Authors:

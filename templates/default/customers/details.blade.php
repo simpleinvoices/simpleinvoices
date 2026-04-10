@@ -1,5 +1,5 @@
 {{-- /*
-* Script: details.tpl
+* View: details (Blade)
 * 	 Customer details template
 *
 * License:

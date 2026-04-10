@@ -1,5 +1,5 @@
 {{-- /*
-* Script: quick_view.tpl
+* View: quick_view (Blade)
 * 	 Quick view of invoice template
 *
 * Authors:

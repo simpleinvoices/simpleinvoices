@@ -44,7 +44,7 @@ else {
     $invoice_age ="";
 }
 
-	$url_for_pdf = "./index.php?module=export&view=pdf&id=" . $invoice['id'];
+	$url_for_pdf = './index.php?module=export&view=invoice&id=' . rawurlencode((string) $invoice['id']) . '&format=pdf';
         
 	$invoice['url_for_pdf'] = $url_for_pdf;
 

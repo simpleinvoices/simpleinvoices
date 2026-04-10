@@ -1,5 +1,5 @@
 {{-- /*
-* Script: sanity_check.tpl
+* View: sanity_check (Blade)
 * 	 Sanity check template
 *
 * Authors:

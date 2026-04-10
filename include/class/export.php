@@ -292,7 +292,6 @@ class export
         } catch (\Throwable $e) {
             // Logos often use URLs; if the image cannot be fetched, PhpWord throws — retry without <img>.
             $stripped = preg_replace('/<img\b[^>]*\/?>/i', '', $fragment);
-            $stripped = $this->htmlFragmentSanitizeForPhpWord($stripped);
             $phpWord  = $buildDoc($stripped !== '' ? $stripped : '<p></p>');
         }
 
@@ -338,10 +337,17 @@ class export
                 $invoice->biller    = $this->biller_id;
                 $invoice->customer  = $this->customer_id;
 
+                $having_count = 0;
                 if ($this->filter_by_date == "yes") {
-                    if (isset($this->start_date)) $invoice->start_date = $this->start_date;
-                    if (isset($this->end_date))   $invoice->end_date   = $this->end_date;
-                    if (isset($this->start_date) && isset($this->end_date)) $invoice->having = "date_between";
+                    if (isset($this->start_date)) {
+                        $invoice->start_date = $this->start_date;
+                    }
+                    if (isset($this->end_date)) {
+                        $invoice->end_date = $this->end_date;
+                    }
+                    if (isset($this->start_date) && isset($this->end_date)) {
+                        $invoice->having = "date_between";
+                    }
                     $having_count = 1;
                 }
 
@@ -356,10 +362,11 @@ class export
                 $invoice_all = $invoice->select_all('count');
                 $invoices    = $invoice_all->fetchAll();
 
+                $statement = ['total' => 0, 'owing' => 0, 'paid' => 0];
                 foreach ($invoices as $i => $row) {
-                    $statement['total'] = $statement['total'] + $row['invoice_total'];
-                    $statement['owing'] = $statement['owing'] + $row['owing'];
-                    $statement['paid']  = $statement['paid']  + $row['INV_PAID'];
+                    $statement['total'] += $row['invoice_total'];
+                    $statement['owing'] += $row['owing'];
+                    $statement['paid']  += $row['INV_PAID'];
                 }
 
                 $templatePath   = "./templates/default/statement/index.blade.php";
@@ -369,12 +376,12 @@ class export
 
                 $this->file_name = "statement_{$this->biller_id}_{$this->customer_id}_{$invoice->start_date}_{$invoice->end_date}";
 
-                $smarty->assign('biller_id',       $biller_id);
+                $smarty->assign('biller_id',       $this->biller_id);
                 $smarty->assign('biller_details',  $biller_details);
                 $smarty->assign('billers',         $billers);
-                $smarty->assign('customer_id',     $customer_id);
+                $smarty->assign('customer_id',     $this->customer_id);
                 $smarty->assign('customer_details', $customer_details);
-                $smarty->assign('show_only_unpaid', $show_only_unpaid);
+                $smarty->assign('show_only_unpaid', $this->show_only_unpaid);
                 $smarty->assign('filter_by_date',  $this->filter_by_date);
                 $smarty->assign('invoices',        $invoices);
                 $smarty->assign('start_date',      $this->start_date);

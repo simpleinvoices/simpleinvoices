@@ -1,4 +1,4 @@
-{{-- * Script: add.tpl
+{{-- * View: add (Blade)
 * 	User add template
 *
 * Last edited:

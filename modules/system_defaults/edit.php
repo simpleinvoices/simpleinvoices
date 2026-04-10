@@ -354,13 +354,6 @@ else {
 	$description = "{$LANG['no_defaults']}";
 }
 
-
-/*$smarty->assign('pageActive', $pageActive);
-$smarty->assign('files', $files);
-$smarty->assign('customFieldLabel', $customFieldLabel);
-$smarty->assign('save', $save);
-$smarty->assign('lang', $lang);
-$smarty->assign('billers',$billers);*/
 $smarty->assign('defaults', $defaults);
 $smarty->assign('value',$value);
 $smarty->assign('description',$description);

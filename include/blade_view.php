@@ -1,8 +1,8 @@
 <?php
 /**
  * Blade view wrapper with assign(), display(), fetch() for compatibility with existing module code.
- * Template paths like "templates/default/header.tpl" or "header.blade.php" are resolved to Blade
- * view "templates.default.header" (file: templates/default/header.blade.php).
+ * Template paths like "templates/default/header.blade.php" are resolved to the Blade
+ * view name "templates.default.header".
  */
 
 use Illuminate\Container\Container;
@@ -57,8 +57,8 @@ class BladeView
     }
 
     /**
-     * Convert a .tpl or .blade.php path to Blade view name.
-     * e.g. "templates/default/header.tpl" -> "templates.default.header"
+     * Strip .blade.php (or legacy .tpl) suffix and convert path to Blade view name.
+     * e.g. "templates/default/header.blade.php" -> "templates.default.header"
      */
     protected function pathToViewName($path)
     {
@@ -86,26 +86,12 @@ class BladeView
     }
 
     /**
-     * Get data array for Blade (assigns + smarty compat).
+     * Get data array for Blade (module assigns only). Use helpers in blade_helpers.php
+     * for request data, e.g. get('id'), post('name'), form_submitted().
      */
     protected function getData()
     {
-        global $auth_session;
-        $sessionCopy = [];
-        if (isset($auth_session) && is_object($auth_session)) {
-            $sessionCopy = method_exists($auth_session, 'getArrayCopy') ? $auth_session->getArrayCopy() : get_object_vars($auth_session);
-        }
-        $legacySessionKey = 'SI_Auth';
-        $zendAuth = isset($_SESSION[$legacySessionKey]) ? (array)$_SESSION[$legacySessionKey] : $sessionCopy;
-        // ArrayObject with ARRAY_AS_PROPS supports both $smarty->get->key and $smarty['get']['key']
-        $f = ArrayObject::ARRAY_AS_PROPS;
-        $smartyCompat = new \ArrayObject([
-            'session' => new \ArrayObject([$legacySessionKey => new \ArrayObject($zendAuth, $f)], $f),
-            'get'     => new \ArrayObject($_GET, $f),
-            'post'    => new \ArrayObject($_POST ?? [], $f),
-            'capture' => new \ArrayObject([], $f),
-        ], $f);
-        return array_merge($this->assigns, ['smarty' => $smartyCompat]);
+        return $this->assigns;
     }
 
     /**

@@ -87,7 +87,7 @@ if(file_exists($templatePath)) {
 		pdfThis($html);
 		exit();
 	}
-	$smarty -> $smarty_output(".".$templatePath);
+	$smarty -> $blade_output(".".$templatePath);
 
 }
 */

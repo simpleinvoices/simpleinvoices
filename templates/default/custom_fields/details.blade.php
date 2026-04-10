@@ -1,4 +1,4 @@
-{{-- * Script: details.tpl
+{{-- * View: details (Blade)
 * 	Custom fields details template
 *
 * Website:

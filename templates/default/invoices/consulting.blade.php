@@ -1,5 +1,5 @@
 {{-- /*
-* Script: consulting.tpl
+* View: consulting (Blade)
 * 	 Consulting invoice type template
 *
 * License:

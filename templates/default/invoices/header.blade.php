@@ -1,5 +1,5 @@
 {{-- /*
-	* Script: header.tpl
+	* View: header (Blade)
 	* 	 Header file for invoice template
 	*
 	* License:

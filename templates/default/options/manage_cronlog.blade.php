@@ -1,5 +1,5 @@
 {{-- /*
-* Script: manage_cronlogs.tpl
+* View: manage_cronlogs (Blade)
 * 	 Manage Cron Logs template
 *
 * Authors:

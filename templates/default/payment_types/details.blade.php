@@ -1,5 +1,5 @@
 {{-- /*
-* Script: details.tpl
+* View: details (Blade)
 * 	 Payment type details template
 *
 * License:

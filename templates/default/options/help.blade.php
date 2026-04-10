@@ -1,5 +1,5 @@
 {{-- /*
-* Script: help.tpl
+* View: help (Blade)
 * 	 Help page template
 *
 * Authors:

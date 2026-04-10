@@ -1,5 +1,5 @@
 {{-- /*
-* Script: manage_sqlpatches.tpl
+* View: manage_sqlpatches (Blade)
 * 	 Manage sql patches template
 *
 * Authors:

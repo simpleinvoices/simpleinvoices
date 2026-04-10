@@ -1,5 +1,5 @@
 {{-- /*
-* Script: manage.tpl
+* View: manage (Blade)
 * 	Biller manage template
 *
 *

@@ -1,5 +1,5 @@
 {{-- /*
-* Script: email.tpl
+* View: email (Blade)
 * 	 Send invoice via email page template
 *
 * Authors:

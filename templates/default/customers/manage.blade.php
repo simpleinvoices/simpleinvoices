@@ -1,5 +1,5 @@
 {{-- /*
-* Script: manage.tpl
+* View: manage (Blade)
 * 	 Customer manage template
 *
 * License:

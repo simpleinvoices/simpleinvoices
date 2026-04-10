@@ -1,5 +1,5 @@
 {{-- /*
-* Script: add.tpl
+* View: add (Blade)
 * 	 Payment type add template
 *
 * Authors:

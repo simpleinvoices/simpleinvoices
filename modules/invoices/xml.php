@@ -59,7 +59,8 @@ $xml ="";
 		$action .= '<a class="dropdown-item" href="index.php?module=invoices&amp;view=quick_view&amp;id='.$row['id'].'"><i class="ti ti-eye me-2"></i>'.$LANG['quick_view_tooltip'].' '.$inv_label.'</a>';
 		$action .= '<a class="dropdown-item" href="index.php?module=invoices&amp;view=details&amp;id='.$row['id'].'&amp;action=view"><i class="ti ti-edit me-2"></i>'.$LANG['edit_view_tooltip'].' '.$inv_label.'</a>';
 		$action .= '<div class="dropdown-divider"></div>';
-		$action .= '<a class="dropdown-item" href="index.php?module=export&amp;view=invoice&amp;id='.$row['id'].'&amp;format=print"><i class="ti ti-printer me-2"></i>'.$LANG['print_preview_tooltip'].' '.$inv_label.'</a>';
+		$pdf_url = htmlspecialchars('index.php?module=export&view=invoice&id='.$row['id'].'&format=pdf', ENT_QUOTES);
+		$action .= '<a class="dropdown-item si-preview-link" href="index.php?module=export&amp;view=invoice&amp;id='.$row['id'].'&amp;format=print" data-preview-title="'.htmlspecialchars($LANG['print_preview_tooltip'].' '.$inv_label, ENT_QUOTES).'" data-preview-pdf="'.$pdf_url.'"><i class="ti ti-printer me-2"></i>'.$LANG['print_preview_tooltip'].' '.$inv_label.'</a>';
 		$action .= '<a class="dropdown-item invoice_export_dialog" href="#" rel="'.$row['id'].'"><i class="ti ti-file-export me-2"></i>'.$LANG['export_tooltip'].' '.$inv_label.'</a>';
 		$action .= '<div class="dropdown-divider"></div>';
 		if ($row['status'] && $row['owing'] > 0) {

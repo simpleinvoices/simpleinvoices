@@ -2,7 +2,7 @@
 <div class="card">
 	<div class="card-header">
 		<div class="card-actions">
-			<a href="index.php?module=payments&amp;view=print&amp;id={{ urlencode($payment['id'] ?? '') }}" target="_blank" class="btn btn-outline-primary">
+			<a href="index.php?module=payments&amp;view=print&amp;id={{ urlencode($payment['id'] ?? '') }}" class="btn btn-outline-primary si-preview-link" data-preview-title="{{ $LANG['print_preview'] ?? 'Print Preview' }}" data-preview-pdf="index.php?module=export&amp;view=payment&amp;id={{ urlencode($payment['id'] ?? '') }}&amp;format=pdf">
 				<i class="ti ti-printer me-1"></i>{{ $LANG['print_preview'] ?? 'Print' }}
 			</a>
 			<a href="./index.php?module=payments&view=manage" class="btn btn-secondary">
@@ -110,7 +110,7 @@
 	<div class="card-footer bg-transparent">
 		<div class="d-flex">
 			<a href="./index.php?module=payments&view=manage" class="btn btn-link">{{ $LANG['cancel'] ?? 'Cancel' }}</a>
-			<a href="index.php?module=payments&amp;view=print&amp;id={{ urlencode($payment['id'] ?? '') }}" target="_blank" class="btn btn-primary ms-auto"><i class="ti ti-printer me-1"></i>{{ $LANG['print_preview'] ?? 'Print' }}</a>
+			<a href="index.php?module=payments&amp;view=print&amp;id={{ urlencode($payment['id'] ?? '') }}" class="btn btn-primary ms-auto si-preview-link" data-preview-title="{{ $LANG['print_preview'] ?? 'Print Preview' }}" data-preview-pdf="index.php?module=export&amp;view=payment&amp;id={{ urlencode($payment['id'] ?? '') }}&amp;format=pdf"><i class="ti ti-printer me-1"></i>{{ $LANG['print_preview'] ?? 'Print' }}</a>
 		</div>
 	</div>
 </div>
