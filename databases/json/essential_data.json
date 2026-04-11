@@ -2128,118 +2128,125 @@
         {
             "id": "10",
             "name": "spreadsheet",
-            "value": "xls",
+            "value": "xlsx",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },
         {
             "id": "11",
             "name": "wordprocessor",
-            "value": "doc",
+            "value": "docx",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },
         {
             "id": "12",
-            "name": "pdfscreensize",
-            "value": "800",
-            "domain_id": "DOMAIN-ID",
-            "extension_id": "1"
-        },
-        {
-            "id": "13",
             "name": "pdfpapersize",
             "value": "A4",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },
         {
-            "id": "14",
+            "id": "13",
             "name": "pdfleftmargin",
             "value": "15",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },
         {
-            "id": "15",
+            "id": "14",
             "name": "pdfrightmargin",
             "value": "15",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },
         {
-            "id": "16",
+            "id": "15",
             "name": "pdftopmargin",
             "value": "15",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },
         {
-            "id": "17",
+            "id": "16",
             "name": "pdfbottommargin",
             "value": "15",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },
         {
-            "id": "18",
+            "id": "17",
             "name": "emailhost",
             "value": "localhost",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },
         {
-            "id": "19",
+            "id": "18",
             "name": "emailusername",
             "value": "",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },
         {
-            "id": "20",
+            "id": "19",
             "name": "emailpassword",
             "value": "",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },
         {
-            "id": "21",
+            "id": "20",
             "name": "logging",
             "value": "0",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },
         {
-            "id": "22",
+            "id": "21",
             "name": "delete",
             "value": "N",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },
         {
-            "id": "23",
+            "id": "22",
             "name": "tax_per_line_item",
             "value": "1",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },
         {
-            "id": "24",
+            "id": "23",
             "name": "inventory",
             "value": "0",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },
         {
-            "id": "25",
+            "id": "24",
             "name": "product_attributes",
             "value": "0",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },
         {
-            "id": "26",
+            "id": "25",
             "name": "large_dataset",
+            "value": "0",
+            "domain_id": "DOMAIN-ID",
+            "extension_id": "1"
+        },
+        {
+            "id": "26",
+            "name": "precision",
+            "value": "2",
+            "domain_id": "DOMAIN-ID",
+            "extension_id": "1"
+        },
+        {
+            "id": "27",
+            "name": "confirm_delete_line_item",
             "value": "0",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"

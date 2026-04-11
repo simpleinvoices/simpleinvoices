@@ -79,7 +79,7 @@ $bladeView -> assign("biller",$biller);
 $bladeView -> assign("customer",$customer);
 $bladeView -> assign("invoice_type",$invoice_type);
 $bladeView -> assign("invoice",$invoice);
-$bladeView -> assign("wordprocessor",$config->export->wordprocessor);
-$bladeView -> assign("spreadsheet",$config->export->spreadsheet);
+$bladeView -> assign("wordprocessor", $defaults['wordprocessor'] ?? 'docx');
+$bladeView -> assign("spreadsheet", $defaults['spreadsheet'] ?? 'xlsx');
 $bladeView -> assign("customerAccount",$customerAccount);
 ?>

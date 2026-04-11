@@ -1953,3 +1953,76 @@ PRIMARY KEY ( `domain_id`, `id` )
     }
     $patch['321']['date']  = "20260410";
 
+    $patch['322']['name']  = "Add precision to system_defaults";
+    switch ($config->database->adapter) {
+        case "pdo_pgsql":
+            $patch['322']['patch'] = "INSERT INTO ".TB_PREFIX."system_defaults (name, value, domain_id, extension_id) VALUES ('precision', '2', 1, 0) ON CONFLICT (domain_id, name) DO NOTHING";
+            break;
+        case "pdo_sqlite":
+            $patch['322']['patch'] = "INSERT OR IGNORE INTO ".TB_PREFIX."system_defaults (name, value, domain_id, extension_id) VALUES ('precision', '2', 1, 0)";
+            break;
+        case "pdo_mysql":
+        default:
+            $patch['322']['patch'] = "INSERT INTO ".TB_PREFIX."system_defaults (id, name, value, domain_id, extension_id) VALUES (NULL, 'precision', '2', 1, 0) ON DUPLICATE KEY UPDATE value = value";
+            break;
+    }
+    $patch['322']['date']  = "20260411";
+
+    $patch['323']['name']  = "Add confirm_delete_line_item to system_defaults";
+    switch ($config->database->adapter) {
+        case "pdo_pgsql":
+            $patch['323']['patch'] = "INSERT INTO ".TB_PREFIX."system_defaults (name, value, domain_id, extension_id) VALUES ('confirm_delete_line_item', '0', 1, 0) ON CONFLICT (domain_id, name) DO NOTHING";
+            break;
+        case "pdo_sqlite":
+            $patch['323']['patch'] = "INSERT OR IGNORE INTO ".TB_PREFIX."system_defaults (name, value, domain_id, extension_id) VALUES ('confirm_delete_line_item', '0', 1, 0)";
+            break;
+        case "pdo_mysql":
+        default:
+            $patch['323']['patch'] = "INSERT INTO ".TB_PREFIX."system_defaults (id, name, value, domain_id, extension_id) VALUES (NULL, 'confirm_delete_line_item', '0', 1, 0) ON DUPLICATE KEY UPDATE value = value";
+            break;
+    }
+    $patch['323']['date']  = "20260411";
+
+    $patch['324']['name']  = "Remove unused pdfscreensize from system_defaults";
+    $patch['324']['patch'] = "DELETE FROM ".TB_PREFIX."system_defaults WHERE name = 'pdfscreensize'";
+    $patch['324']['date']  = "20260411";
+
+    $patch['325']['name']  = "Ensure PDF margin/papersize settings exist in system_defaults";
+    switch ($config->database->adapter) {
+        case "pdo_pgsql":
+            $patch['325']['patch'] = "
+                INSERT INTO ".TB_PREFIX."system_defaults (name, value, domain_id, extension_id) VALUES ('pdfpapersize', 'A4', 1, 0) ON CONFLICT (domain_id, name) DO NOTHING;
+                INSERT INTO ".TB_PREFIX."system_defaults (name, value, domain_id, extension_id) VALUES ('pdfleftmargin', '15', 1, 0) ON CONFLICT (domain_id, name) DO NOTHING;
+                INSERT INTO ".TB_PREFIX."system_defaults (name, value, domain_id, extension_id) VALUES ('pdfrightmargin', '15', 1, 0) ON CONFLICT (domain_id, name) DO NOTHING;
+                INSERT INTO ".TB_PREFIX."system_defaults (name, value, domain_id, extension_id) VALUES ('pdftopmargin', '15', 1, 0) ON CONFLICT (domain_id, name) DO NOTHING;
+                INSERT INTO ".TB_PREFIX."system_defaults (name, value, domain_id, extension_id) VALUES ('pdfbottommargin', '15', 1, 0) ON CONFLICT (domain_id, name) DO NOTHING;
+                INSERT INTO ".TB_PREFIX."system_defaults (name, value, domain_id, extension_id) VALUES ('spreadsheet', 'xlsx', 1, 0) ON CONFLICT (domain_id, name) DO NOTHING;
+                INSERT INTO ".TB_PREFIX."system_defaults (name, value, domain_id, extension_id) VALUES ('wordprocessor', 'docx', 1, 0) ON CONFLICT (domain_id, name) DO NOTHING;
+            ";
+            break;
+        case "pdo_sqlite":
+            $patch['325']['patch'] = "
+                INSERT OR IGNORE INTO ".TB_PREFIX."system_defaults (name, value, domain_id, extension_id) VALUES ('pdfpapersize', 'A4', 1, 0);
+                INSERT OR IGNORE INTO ".TB_PREFIX."system_defaults (name, value, domain_id, extension_id) VALUES ('pdfleftmargin', '15', 1, 0);
+                INSERT OR IGNORE INTO ".TB_PREFIX."system_defaults (name, value, domain_id, extension_id) VALUES ('pdfrightmargin', '15', 1, 0);
+                INSERT OR IGNORE INTO ".TB_PREFIX."system_defaults (name, value, domain_id, extension_id) VALUES ('pdftopmargin', '15', 1, 0);
+                INSERT OR IGNORE INTO ".TB_PREFIX."system_defaults (name, value, domain_id, extension_id) VALUES ('pdfbottommargin', '15', 1, 0);
+                INSERT OR IGNORE INTO ".TB_PREFIX."system_defaults (name, value, domain_id, extension_id) VALUES ('spreadsheet', 'xlsx', 1, 0);
+                INSERT OR IGNORE INTO ".TB_PREFIX."system_defaults (name, value, domain_id, extension_id) VALUES ('wordprocessor', 'docx', 1, 0);
+            ";
+            break;
+        case "pdo_mysql":
+        default:
+            $patch['325']['patch'] = "
+                INSERT INTO ".TB_PREFIX."system_defaults (id, name, value, domain_id, extension_id) VALUES (NULL, 'pdfpapersize', 'A4', 1, 0) ON DUPLICATE KEY UPDATE value = value;
+                INSERT INTO ".TB_PREFIX."system_defaults (id, name, value, domain_id, extension_id) VALUES (NULL, 'pdfleftmargin', '15', 1, 0) ON DUPLICATE KEY UPDATE value = value;
+                INSERT INTO ".TB_PREFIX."system_defaults (id, name, value, domain_id, extension_id) VALUES (NULL, 'pdfrightmargin', '15', 1, 0) ON DUPLICATE KEY UPDATE value = value;
+                INSERT INTO ".TB_PREFIX."system_defaults (id, name, value, domain_id, extension_id) VALUES (NULL, 'pdftopmargin', '15', 1, 0) ON DUPLICATE KEY UPDATE value = value;
+                INSERT INTO ".TB_PREFIX."system_defaults (id, name, value, domain_id, extension_id) VALUES (NULL, 'pdfbottommargin', '15', 1, 0) ON DUPLICATE KEY UPDATE value = value;
+                INSERT INTO ".TB_PREFIX."system_defaults (id, name, value, domain_id, extension_id) VALUES (NULL, 'spreadsheet', 'xlsx', 1, 0) ON DUPLICATE KEY UPDATE value = value;
+                INSERT INTO ".TB_PREFIX."system_defaults (id, name, value, domain_id, extension_id) VALUES (NULL, 'wordprocessor', 'docx', 1, 0) ON DUPLICATE KEY UPDATE value = value;
+            ";
+            break;
+    }
+    $patch['325']['date']  = "20260411";
+

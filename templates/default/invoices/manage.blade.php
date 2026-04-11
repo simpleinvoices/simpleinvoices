@@ -54,10 +54,10 @@
 					<a href="#" title='{{ $LANG['export_tooltip'] ?? '' }} {{ $LANG['export_pdf_tooltip'] ?? '' }}' class='btn btn-outline-danger export_pdf export_window'>
 						<i class="ti ti-file-certificate me-1"></i>{{ $LANG['export_pdf'] ?? '' }}
 					</a>
-					<a href="#" title='{{ $LANG['export_tooltip'] ?? '' }} {{ $LANG['export_xls_tooltip'] ?? '' }} .{{ $config->export->spreadsheet ?? 'xls' }}' class='btn btn-outline-success export_xls export_window'>
+					<a href="#" title='{{ $LANG['export_tooltip'] ?? '' }} {{ $LANG['export_xls_tooltip'] ?? '' }} .{{ $defaults['spreadsheet'] ?? 'xlsx' }}' class='btn btn-outline-success export_xls export_window'>
 						<i class="ti ti-file-spreadsheet me-1"></i>{{ $LANG['export_xls'] ?? '' }}
 					</a>
-					<a href="#" title='{{ $LANG['export_tooltip'] ?? '' }} {{ $LANG['export_doc_tooltip'] ?? '' }} .{{ $config->export->wordprocessor ?? 'doc' }}' class='btn btn-outline-primary export_doc export_window'>
+					<a href="#" title='{{ $LANG['export_tooltip'] ?? '' }} {{ $LANG['export_doc_tooltip'] ?? '' }} .{{ $defaults['wordprocessor'] ?? 'docx' }}' class='btn btn-outline-primary export_doc export_window'>
 						<i class="ti ti-file-text me-1"></i>{{ $LANG['export_doc'] ?? '' }}
 					</a>
 				</div>

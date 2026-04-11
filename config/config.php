@@ -15,17 +15,7 @@ database.params.port                = 3306
 authentication.enabled              = false
 authentication.http                 = 
 
-export.spreadsheet                  = xlsx
-export.wordprocessor                = docx
-export.pdf.screensize               = 800
-export.pdf.papersize                = A4
-export.pdf.leftmargin               = 15
-export.pdf.rightmargin              = 15
-export.pdf.topmargin                = 15
-export.pdf.bottommargin             = 15
-
 local.locale                        = en_GB
-local.precision                     = 2
 
 email.host                          = localhost
 email.smtp_auth                     = false
@@ -64,9 +54,6 @@ phpSettings.display_startup_errors  = 1
 phpSettings.display_errors          = 1
 phpSettings.log_errors              = 0
 phpSettings.error_log               = tmp/log/php.log
-
-; Explicity confirm delete of line items from invoices? (yes/no)
-confirm.deleteLineItem              = no
 
 ; Staging site configuration data inherits from production and
 ; overrides values as necessary

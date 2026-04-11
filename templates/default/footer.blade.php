@@ -41,6 +41,22 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="si_preview_modal_label">{{ $LANG['preview'] ?? '' }}</h5>
+                {{-- Icon-only action buttons shown only on mobile (footer is off-screen on small viewports) --}}
+                <div class="d-flex d-md-none gap-1 ms-auto me-2">
+                    <a href="#" id="si_preview_newtab_icon" target="_blank" rel="noopener"
+                       class="btn btn-sm btn-ghost-secondary" title="{{ $LANG['open_in_new_tab'] ?? '' }}">
+                        <i class="ti ti-external-link"></i>
+                    </a>
+                    <a href="#" id="si_preview_pdf_icon" target="_blank" rel="noopener"
+                       class="btn btn-sm btn-ghost-danger d-none" title="{{ $LANG['pdf'] ?? '' }}">
+                        <i class="ti ti-file-type-pdf"></i>
+                    </a>
+                    <button type="button" class="btn btn-sm btn-ghost-primary"
+                            title="{{ $LANG['print_action'] ?? '' }}"
+                            onclick="var f=document.getElementById('si_preview_iframe');if(f&&f.contentWindow)f.contentWindow.print();">
+                        <i class="ti ti-printer"></i>
+                    </button>
+                </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ $LANG['close'] ?? '' }}"></button>
             </div>
             <div class="modal-body p-0">
@@ -48,7 +64,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn" data-bs-dismiss="modal">{{ $LANG['close'] ?? '' }}</button>
-                <div class="ms-auto d-flex gap-2">
+                <div class="ms-auto d-none d-md-flex gap-2">
                     <a href="#" id="si_preview_newtab_link" target="_blank" rel="noopener" class="btn btn-outline-secondary">
                         <i class="ti ti-external-link me-1"></i>{{ $LANG['open_in_new_tab'] ?? '' }}
                     </a>
@@ -65,20 +81,31 @@
 </div>
 <script>
 function siPreviewModal(url, title, pdfUrl) {
-    var modal   = document.getElementById('si_preview_modal');
-    var iframe  = document.getElementById('si_preview_iframe');
-    var newTab  = document.getElementById('si_preview_newtab_link');
-    var pdfLink = document.getElementById('si_preview_pdf_link');
-    var titleEl = document.getElementById('si_preview_modal_label');
+    var modal    = document.getElementById('si_preview_modal');
+    var iframe   = document.getElementById('si_preview_iframe');
+    var newTab   = document.getElementById('si_preview_newtab_link');
+    var newTabIcon = document.getElementById('si_preview_newtab_icon');
+    var pdfLink  = document.getElementById('si_preview_pdf_link');
+    var pdfIcon  = document.getElementById('si_preview_pdf_icon');
+    var titleEl  = document.getElementById('si_preview_modal_label');
     if (titleEl) titleEl.textContent = title || @json($LANG['preview'] ?? '');
-    if (newTab)  newTab.href = url;
-    if (iframe)  iframe.src  = url;
+    if (newTab)     newTab.href = url;
+    if (newTabIcon) newTabIcon.href = url;
+    if (iframe)     iframe.src  = url;
     if (pdfLink) {
         if (pdfUrl) {
             pdfLink.href = pdfUrl;
             pdfLink.classList.remove('d-none');
         } else {
             pdfLink.classList.add('d-none');
+        }
+    }
+    if (pdfIcon) {
+        if (pdfUrl) {
+            pdfIcon.href = pdfUrl;
+            pdfIcon.classList.remove('d-none');
+        } else {
+            pdfIcon.classList.add('d-none');
         }
     }
     var bsModal = window.bootstrap && window.bootstrap.Modal

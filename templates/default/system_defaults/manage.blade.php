@@ -77,6 +77,66 @@
 					'help_url' => 'index.php?module=documentation&view=view&page=help_logging',
 					'help_title' => $LANG['logging'] ?? '',
 				])
+				@include('system_defaults.manage_row', [
+					'label' => $LANG['confirm_delete_line_item'] ?? 'Confirm Delete Line Item',
+					'value' => $defaultConfirmDeleteLineItem ?? '',
+					'edit_param' => 'confirm_delete_line_item',
+					'icon' => 'ti-alert-triangle',
+				])
+			</div>
+		</div>
+
+		{{-- Export formats --}}
+		<div class="card mb-4">
+			<div class="list-group list-group-flush">
+				@include('system_defaults.manage_row', [
+					'label' => $LANG['spreadsheet_format'] ?? 'Spreadsheet Export Format',
+					'value' => $defaults['spreadsheet'] ?? 'xlsx',
+					'edit_param' => 'spreadsheet',
+					'icon' => 'ti-file-spreadsheet',
+				])
+				@include('system_defaults.manage_row', [
+					'label' => $LANG['wordprocessor_format'] ?? 'Word Processor Export Format',
+					'value' => $defaults['wordprocessor'] ?? 'docx',
+					'edit_param' => 'wordprocessor',
+					'icon' => 'ti-file-text',
+				])
+			</div>
+		</div>
+
+		{{-- PDF settings --}}
+		<div class="card mb-4">
+			<div class="list-group list-group-flush">
+				@include('system_defaults.manage_row', [
+					'label' => $LANG['pdf_paper_size'] ?? 'PDF Paper Size',
+					'value' => $defaults['pdfpapersize'] ?? 'A4',
+					'edit_param' => 'pdfpapersize',
+					'icon' => 'ti-file-certificate',
+				])
+				@include('system_defaults.manage_row', [
+					'label' => $LANG['pdf_left_margin'] ?? 'PDF Left Margin (mm)',
+					'value' => $defaults['pdfleftmargin'] ?? '15',
+					'edit_param' => 'pdfleftmargin',
+					'icon' => 'ti-layout-sidebar',
+				])
+				@include('system_defaults.manage_row', [
+					'label' => $LANG['pdf_right_margin'] ?? 'PDF Right Margin (mm)',
+					'value' => $defaults['pdfrightmargin'] ?? '15',
+					'edit_param' => 'pdfrightmargin',
+					'icon' => 'ti-layout-sidebar-right',
+				])
+				@include('system_defaults.manage_row', [
+					'label' => $LANG['pdf_top_margin'] ?? 'PDF Top Margin (mm)',
+					'value' => $defaults['pdftopmargin'] ?? '15',
+					'edit_param' => 'pdftopmargin',
+					'icon' => 'ti-layout-navbar',
+				])
+				@include('system_defaults.manage_row', [
+					'label' => $LANG['pdf_bottom_margin'] ?? 'PDF Bottom Margin (mm)',
+					'value' => $defaults['pdfbottommargin'] ?? '15',
+					'edit_param' => 'pdfbottommargin',
+					'icon' => 'ti-layout-bottombar',
+				])
 			</div>
 		</div>
 
@@ -94,6 +154,12 @@
 					'value' => $defaults['tax_per_line_item'] ?? '',
 					'edit_param' => 'tax_per_line_item',
 					'icon' => 'ti-receipt-tax',
+				])
+				@include('system_defaults.manage_row', [
+					'label' => $LANG['decimal_precision'] ?? 'Decimal Precision',
+					'value' => $defaults['precision'] ?? '2',
+					'edit_param' => 'precision',
+					'icon' => 'ti-decimal',
 				])
 			</div>
 		</div>

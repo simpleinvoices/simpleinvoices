@@ -350,6 +350,69 @@ else if ($_GET['submit'] == "large_dataset") {
 	$description = $LANG['large_dataset'];
 	$value = dropDown($array, $defaults[$default]);
 }
+elseif ($_GET['submit'] == 'pdfpapersize') {
+	$default = 'pdfpapersize';
+	$current = $defaults['pdfpapersize'] ?? 'A4';
+	$papersizes = ['A4', 'A3', 'A5', 'Letter', 'Legal', 'Tabloid', 'B4', 'B5'];
+	$select = '<select name="value" class="form-select">';
+	foreach ($papersizes as $size) {
+		$selected = ($size === $current) ? "selected style='font-weight: bold'" : '';
+		$select .= "<option $selected value='".htmlsafe($size)."'>".htmlsafe($size)."</option>";
+	}
+	$select .= '</select>';
+	$value = $select;
+	$description = $LANG['pdf_paper_size'] ?? 'PDF Paper Size';
+}
+elseif (in_array($_GET['submit'], ['pdfleftmargin', 'pdfrightmargin', 'pdftopmargin', 'pdfbottommargin'])) {
+	$marginLabels = [
+		'pdfleftmargin'   => $LANG['pdf_left_margin']   ?? 'PDF Left Margin (mm)',
+		'pdfrightmargin'  => $LANG['pdf_right_margin']  ?? 'PDF Right Margin (mm)',
+		'pdftopmargin'    => $LANG['pdf_top_margin']    ?? 'PDF Top Margin (mm)',
+		'pdfbottommargin' => $LANG['pdf_bottom_margin'] ?? 'PDF Bottom Margin (mm)',
+	];
+	$default = htmlsafe($_GET['submit']);
+	$escaped = htmlsafe($defaults[$default] ?? '15');
+	$value = "<input type='number' min='0' max='100' name='value' value='$escaped' class='form-control'>";
+	$description = $marginLabels[$default];
+}
+elseif ($_GET['submit'] == 'spreadsheet') {
+	$default = 'spreadsheet';
+	$current = $defaults['spreadsheet'] ?? 'xlsx';
+	$formats = ['xlsx', 'xls'];
+	$select = '<select name="value" class="form-select">';
+	foreach ($formats as $fmt) {
+		$selected = ($fmt === $current) ? "selected style='font-weight: bold'" : '';
+		$select .= "<option $selected value='".htmlsafe($fmt)."'>.".htmlsafe($fmt)."</option>";
+	}
+	$select .= '</select>';
+	$value = $select;
+	$description = $LANG['spreadsheet_format'] ?? 'Spreadsheet Export Format';
+}
+elseif ($_GET['submit'] == 'wordprocessor') {
+	$default = 'wordprocessor';
+	$current = $defaults['wordprocessor'] ?? 'docx';
+	$formats = ['docx', 'doc'];
+	$select = '<select name="value" class="form-select">';
+	foreach ($formats as $fmt) {
+		$selected = ($fmt === $current) ? "selected style='font-weight: bold'" : '';
+		$select .= "<option $selected value='".htmlsafe($fmt)."'>.".htmlsafe($fmt)."</option>";
+	}
+	$select .= '</select>';
+	$value = $select;
+	$description = $LANG['wordprocessor_format'] ?? 'Word Processor Export Format';
+}
+elseif ($_GET['submit'] == 'precision') {
+	$default = 'precision';
+	$escaped = htmlsafe($defaults['precision'] ?? '2');
+	$value = "<input type='number' min='0' max='10' name='value' value='$escaped' class='form-control'>";
+	$description = $LANG['decimal_precision'] ?? 'Decimal Precision (number of decimal places)';
+}
+elseif ($_GET['submit'] == 'confirm_delete_line_item') {
+	$array = [0 => $LANG['disabled'] ?? 'Disabled', 1 => $LANG['enabled'] ?? 'Enabled'];
+	$default = 'confirm_delete_line_item';
+	$description = $LANG['confirm_delete_line_item'] ?? 'Confirm Before Deleting Line Items';
+	$value = dropDown($array, $defaults[$default] ?? '0');
+}
 else {
 	$description = "{$LANG['no_defaults']}";
 }

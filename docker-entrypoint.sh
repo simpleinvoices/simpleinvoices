@@ -59,16 +59,10 @@ php -r '
       "SI_DB_PORT" => "database.params.port",
       "SI_AUTHENTICATION_ENABLED" => "authentication.enabled",
       "SI_AUTHENTICATION_HTTP" => "authentication.http",
-      "SI_EXPORT_SPREADSHEET" => "export.spreadsheet",
-      "SI_EXPORT_WORDPROCESSOR" => "export.wordprocessor",
-      "SI_EXPORT_PDF_SCREENSIZE" => "export.pdf.screensize",
-      "SI_EXPORT_PDF_PAPERSIZE" => "export.pdf.papersize",
-      "SI_EXPORT_PDF_LEFTMARGIN" => "export.pdf.leftmargin",
-      "SI_EXPORT_PDF_RIGHTMARGIN" => "export.pdf.rightmargin",
-      "SI_EXPORT_PDF_TOPMARGIN" => "export.pdf.topmargin",
-      "SI_EXPORT_PDF_BOTTOMMARGIN" => "export.pdf.bottommargin",
+      // Note: SI_EXPORT_SPREADSHEET, SI_EXPORT_WORDPROCESSOR, SI_EXPORT_PDF_*, SI_LOCAL_PRECISION,
+      // and SI_CONFIRM_DELETE_LINE_ITEM are now managed via System Defaults (database).
+      // Use the system_defaults UI (module=system_defaults&view=manage) to configure them.
       "SI_LOCAL_LOCALE" => "local.locale",
-      "SI_LOCAL_PRECISION" => "local.precision",
       "SI_EMAIL_HOST" => "email.host",
       "SI_EMAIL_SMTP_AUTH" => "email.smtp_auth",
       "SI_EMAIL_USERNAME" => "email.username",
@@ -100,7 +94,6 @@ php -r '
       "SI_PHP_DISPLAY_ERRORS" => "phpSettings.display_errors",
       "SI_PHP_LOG_ERRORS" => "phpSettings.log_errors",
       "SI_PHP_ERROR_LOG" => "phpSettings.error_log",
-      "SI_CONFIRM_DELETE_LINE_ITEM" => "confirm.deleteLineItem",
   ];
 
   $formatValue = static function (string $value): string {

@@ -278,7 +278,16 @@ function pageDownload(type, btn) {
 			btn.disabled = false;
 			btn.innerHTML = originalHTML;
 			if (!data.ok) { alert(data.error || 'An error occurred.'); return; }
-			_siBackup[type] = type === 'sql' ? data.raw : data.raw;
+			// view_sql returns { raw }; view_json returns { data } (see backup_database_ajax.php)
+			if (type === 'sql') {
+				_siBackup.sql = data.raw;
+			} else {
+				if (data.data === undefined) {
+					alert('An error occurred: JSON data missing from response.');
+					return;
+				}
+				_siBackup.json = JSON.stringify(data.data, null, 2);
+			}
 			modalDownload(type);
 		})
 		.catch(function(e) {
@@ -332,7 +341,7 @@ function openJSONModal() {
 	var modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('si_json_modal'));
 	modal.show();
 
-	if (_siBackup.json !== null) { _renderJSONModal(); return; }
+	if (typeof _siBackup.json === 'string') { _renderJSONModal(); return; }
 
 	fetch(_siAjaxBase + 'view_json')
 		.then(function(r) { return r.json(); })
@@ -341,6 +350,13 @@ function openJSONModal() {
 				document.getElementById('si_json_loading').classList.add('d-none');
 				var err = document.getElementById('si_json_error');
 				err.textContent = data.error || 'An error occurred.';
+				err.classList.remove('d-none');
+				return;
+			}
+			if (data.data === undefined) {
+				document.getElementById('si_json_loading').classList.add('d-none');
+				var err = document.getElementById('si_json_error');
+				err.textContent = 'An error occurred: JSON data missing from response.';
 				err.classList.remove('d-none');
 				return;
 			}

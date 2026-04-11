@@ -632,7 +632,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <div id="chart-dashboard" style="min-height:288px"></div>
+                <div id="chart-dashboard" style="min-height:200px"></div>
             </div>
         </div>
     </div>
@@ -646,7 +646,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <div id="chart-annual" style="min-height:288px"></div>
+                <div id="chart-annual" style="min-height:200px"></div>
             </div>
         </div>
     </div>
@@ -660,7 +660,7 @@
                 </div>
             </div>
             <div class="card-body d-flex align-items-center justify-content-center">
-                <div id="chart-aging" style="min-height:288px;width:100%"></div>
+                <div id="chart-aging" style="min-height:200px;width:100%"></div>
             </div>
         </div>
     </div>
@@ -671,19 +671,26 @@
 
     {{-- Card 1: % Invoices Paid --}}
     <div class="col-6 col-lg-3">
-        <div class="card h-100">
-            <div class="card-body">
-                <div class="d-flex align-items-center mb-2">
+        <div class="card">
+            <div class="card-body py-2 px-3">
+                <div class="d-flex align-items-center mb-1">
                     <span class="text-uppercase text-secondary fw-semibold" style="font-size:.65rem;letter-spacing:.08em">Invoices Paid</span>
                     <a href="index.php?module=reports&amp;view=report_debtors_by_aging" target="_blank" rel="noopener" class="ms-auto text-secondary lh-1" title="Open report">
                         <i class="ti ti-external-link" style="font-size:.9rem"></i>
                     </a>
                 </div>
-                <div class="h1 mb-1">{{ $dash_paid_pct ?? 0 }}%</div>
-                <div class="text-secondary small mb-3">
-                    {{ $dash_paid_inv_count ?? 0 }} of {{ $dash_total_inv_count ?? 0 }} invoices fully paid
-                </div>
-                <div class="progress" style="height:6px">
+		{{--           
+		<div class="h2 mb-2">{{ $dash_paid_pct ?? 0 }}% <span class="fs-6 fw-normal text-secondary">({{ $dash_paid_inv_count ?? 0 }}/{{ $dash_total_inv_count ?? 0 }})</span></div>
+		<div class="progress" style="height:5px">
+		--}}
+
+                    <div class="h1 mb-1">{{ $dash_paid_pct ?? 0 }}%</div>
+                    <div class="text-secondary small mb-3">
+                        {{ $dash_paid_inv_count ?? 0 }} of {{ $dash_total_inv_count ?? 0 }} invoices fully paid
+                    </div>
+                    <div class="progress" style="height:6px">
+
+
                     <div class="progress-bar bg-primary" role="progressbar"
                          style="width:{{ $dash_paid_pct ?? 0 }}%"
                          aria-valuenow="{{ $dash_paid_pct ?? 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
@@ -694,57 +701,49 @@
 
     {{-- Card 2: Invoice Revenue sparkline --}}
     <div class="col-6 col-lg-3">
-        <div class="card h-100 overflow-hidden">
-            <div class="card-body pb-1">
-                <div class="d-flex align-items-center mb-2">
+        <div class="card overflow-hidden">
+            <div class="card-body py-2 px-3 pb-1">
+                <div class="d-flex align-items-center mb-1">
                     <span class="text-uppercase text-secondary fw-semibold" style="font-size:.65rem;letter-spacing:.08em">Invoice Revenue</span>
-                    <a href="index.php?module=reports&amp;view=report_sales_by_periods" target="_blank" rel="noopener" class="ms-auto text-secondary lh-1" title="Open report">
+                    <a href="index.php?module=reports&amp;view=report_sales_total" target="_blank" rel="noopener" class="ms-auto text-secondary lh-1" title="Open report">
                         <i class="ti ti-external-link" style="font-size:.9rem"></i>
                     </a>
                 </div>
-                <div class="h1 mb-1">{{ siLocal::number($dash_alltime_inv_total ?? 0) }}</div>
-                <div class="text-secondary small mb-2">All time</div>
+                <div class="h2 mb-0">{{ siLocal::number($dash_alltime_inv_total ?? 0) }}</div>
             </div>
-            <div id="sparkline-invoices" style="height:70px"></div>
+            <div id="sparkline-invoices" style="height:40px"></div>
         </div>
     </div>
 
     {{-- Card 3: Payment Revenue sparkline --}}
     <div class="col-6 col-lg-3">
-        <div class="card h-100 overflow-hidden">
-            <div class="card-body pb-1">
-                <div class="d-flex align-items-center mb-2">
-                    <span class="text-uppercase text-secondary fw-semibold" style="font-size:.65rem;letter-spacing:.08em">Payment Revenue</span>
+        <div class="card overflow-hidden">
+            <div class="card-body py-2 px-3 pb-1">
+                <div class="d-flex align-items-center mb-1">
+                    <span class="text-uppercase text-secondary fw-semibold" style="font-size:.65rem;letter-spacing:.08em">Payments</span>
                     <a href="index.php?module=reports&amp;view=report_sales_by_periods" target="_blank" rel="noopener" class="ms-auto text-secondary lh-1" title="Open report">
                         <i class="ti ti-external-link" style="font-size:.9rem"></i>
                     </a>
                 </div>
-                <div class="h1 mb-1">{{ siLocal::number($dash_alltime_pmt_total ?? 0) }}</div>
-                <div class="text-secondary small mb-2">All time</div>
+                <div class="h2 mb-0">{{ siLocal::number($dash_alltime_pmt_total ?? 0) }}</div>
             </div>
-            <div id="sparkline-payments" style="height:70px"></div>
+            <div id="sparkline-payments" style="height:40px"></div>
         </div>
     </div>
 
     {{-- Card 4: Invoice & Payment Volume (count) --}}
     <div class="col-6 col-lg-3">
-        <div class="card h-100 overflow-hidden">
-            <div class="card-body pb-1">
-                <div class="d-flex align-items-center mb-2">
+        <div class="card overflow-hidden">
+            <div class="card-body py-2 px-3 pb-1">
+                <div class="d-flex align-items-center mb-1">
                     <span class="text-uppercase text-secondary fw-semibold" style="font-size:.65rem;letter-spacing:.08em">Invoice &amp; Payment Volume</span>
                     <a href="index.php?module=reports&amp;view=report_sales_by_periods" target="_blank" rel="noopener" class="ms-auto text-secondary lh-1" title="Open report">
                         <i class="ti ti-external-link" style="font-size:.9rem"></i>
                     </a>
                 </div>
-                <div class="h1 mb-0">
-                    {{ number_format($dash_total_inv_volume ?? 0) }}
-                    <span class="fs-4 fw-normal text-secondary ms-1">inv</span>
-                </div>
-                <div class="text-secondary small mb-2">
-                    {{ number_format($dash_total_pmt_volume ?? 0) }} payments &nbsp;&middot;&nbsp; All time
-                </div>
+                <div class="h2 mb-0">{{ number_format($dash_total_inv_volume ?? 0) }} <span class="fs-6 fw-normal text-secondary">inv &middot; {{ number_format($dash_total_pmt_volume ?? 0) }} pmt</span></div>
             </div>
-            <div id="sparkline-volume" style="height:70px"></div>
+            <div id="sparkline-volume" style="height:40px"></div>
         </div>
     </div>
 
@@ -908,7 +907,7 @@
             chart: {
                 type: 'area',
                 fontFamily: 'inherit',
-                height: 288,
+                height: 200,
                 toolbar: { show: false },
                 animations: { enabled: false },
                 background: 'transparent'
@@ -994,7 +993,7 @@
             chart: {
                 type: 'bar',
                 fontFamily: 'inherit',
-                height: 288,
+                height: 200,
                 toolbar: { show: false },
                 animations: { enabled: false },
                 background: 'transparent'
@@ -1049,7 +1048,7 @@
             chart: {
                 type: 'radialBar',
                 fontFamily: 'inherit',
-                height: 288,
+                height: 200,
                 toolbar: { show: false },
                 animations: { enabled: false },
                 background: 'transparent'
@@ -1086,12 +1085,7 @@
                     }
                 }
             },
-            legend: {
-                show: true,
-                position: 'bottom',
-                labels: { colors: bodyColor },
-                fontSize: '11px'
-            },
+            legend: { show: false },
             tooltip: {
                 theme: isDark ? 'dark' : 'light',
                 y: {
@@ -1113,45 +1107,58 @@
     var sparkInvCounts   = @json($alltime_inv_counts  ?? []);
     var sparkPmtCounts   = @json($alltime_pmt_counts  ?? []);
 
-    function buildSparkOptions(type, colors) {
+    function buildAreaSparkOptions(color) {
         var isDark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
-        var base = {
+        return {
             chart: {
-                type: type,
+                type: 'area',
+                height: 60,
+                toolbar: { show: false },
+                animations: { enabled: false },
+                background: 'transparent',
+                sparkline: { enabled: true }
+            },
+            stroke: { width: 2, curve: 'smooth' },
+            fill: { type: 'solid', opacity: 0.2 },
+            colors: [color],
+            dataLabels: { enabled: false },
+            tooltip: { theme: isDark ? 'dark' : 'light', x: { show: false } }
+        };
+    }
+
+    function buildBarSparkOptions() {
+        var isDark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+        return {
+            chart: {
+                type: 'bar',
                 sparkline: { enabled: true },
-                height: 70,
+                height: 50,
                 animations: { enabled: false },
                 background: 'transparent'
             },
-            colors: colors,
+            colors: ['#45aaf2', '#2fb344'],
+            stroke:      { width: 0 },
+            fill:        { type: 'solid' },
+            plotOptions: { bar: { columnWidth: '85%', borderRadius: 1 } },
+            dataLabels:  { enabled: false },
             tooltip: { theme: isDark ? 'dark' : 'light', x: { show: false } }
         };
-        if (type === 'area') {
-            base.stroke = { width: 2, curve: 'smooth' };
-            base.fill   = { type: 'gradient', gradient: { opacityFrom: 0.3, opacityTo: 0.0 } };
-        } else {
-            base.stroke      = { width: 0 };
-            base.fill        = { type: 'solid' };
-            base.plotOptions = { bar: { columnWidth: '85%', borderRadius: 1 } };
-            base.dataLabels  = { enabled: false };
-        }
-        return base;
     }
 
     var spInv = new ApexCharts(document.getElementById('sparkline-invoices'),
-        Object.assign(buildSparkOptions('area', ['#45aaf2']), {
+        Object.assign(buildAreaSparkOptions('#45aaf2'), {
             series: [{ name: invoiceLabel, data: sparkInvAmounts }]
         }));
     spInv.render();
 
     var spPmt = new ApexCharts(document.getElementById('sparkline-payments'),
-        Object.assign(buildSparkOptions('area', ['#2fb344']), {
+        Object.assign(buildAreaSparkOptions('#2fb344'), {
             series: [{ name: paymentLabel, data: sparkPmtAmounts }]
         }));
     spPmt.render();
 
     var spVol = new ApexCharts(document.getElementById('sparkline-volume'),
-        Object.assign(buildSparkOptions('bar', ['#45aaf2', '#2fb344']), {
+        Object.assign(buildBarSparkOptions(), {
             series: [
                 { name: invoiceLabel, data: sparkInvCounts },
                 { name: paymentLabel, data: sparkPmtCounts }
@@ -1160,7 +1167,10 @@
     spVol.render();
 
     document.documentElement.addEventListener('si-theme-changed', function () {
-        [spInv, spPmt, spVol].forEach(function (c) { c.updateOptions({ tooltip: { theme: document.documentElement.getAttribute('data-bs-theme') === 'dark' ? 'dark' : 'light' } }); });
+        var t = { tooltip: { theme: document.documentElement.getAttribute('data-bs-theme') === 'dark' ? 'dark' : 'light' } };
+        spInv.updateOptions(t);
+        spPmt.updateOptions(t);
+        spVol.updateOptions(t);
     });
 
 })();

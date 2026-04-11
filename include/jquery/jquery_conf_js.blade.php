@@ -1,7 +1,7 @@
 <script type="text/javascript">
-var si_conf_delete_line_item = @json($config->confirm->deleteLineItem ?? false);
-var si_conf_spreadsheet = @json($config->export->spreadsheet ?? 'xls');
-var si_conf_wordprocessor = @json($config->export->wordprocessor ?? 'doc');
+var si_conf_delete_line_item = @json((bool)(($defaults['confirm_delete_line_item'] ?? '0') == '1'));
+var si_conf_spreadsheet = @json($defaults['spreadsheet'] ?? 'xlsx');
+var si_conf_wordprocessor = @json($defaults['wordprocessor'] ?? 'docx');
 var si_lang_description_conf = @json($LANG['description'] ?? 'Description');
 </script>
 @verbatim

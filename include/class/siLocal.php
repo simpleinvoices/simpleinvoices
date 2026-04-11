@@ -1,6 +1,6 @@
 <?php
 /* Class: wrapper class for zend locale*/
-class siLocal 
+class siLocal
 {
 	private static function localeString($locale): string
 	{
@@ -8,13 +8,26 @@ class siLocal
 		return $locale ?: (string) ($config->local->locale ?? 'en_US');
 	}
 
+	private static function getPrecision(): int
+	{
+		static $precision = null;
+		if ($precision === null) {
+			global $config;
+			if (function_exists('getSystemDefaults')) {
+				$defaults = getSystemDefaults();
+				$precision = isset($defaults['precision']) ? (int) $defaults['precision'] : (int) ($config->local->precision ?? 2);
+			} else {
+				$precision = (int) ($config->local->precision ?? 2);
+			}
+		}
+		return $precision;
+	}
+
 	/*Function: wrapper function using IntlNumberFormatter*/
 	public static function number($number, $precision = "", $locale = "")
 	{
-		global $config;
-
 		$locale = self::localeString($locale);
-		$precision = $precision === "" ? (int) $config->local->precision : (int) $precision;
+		$precision = $precision === "" ? self::getPrecision() : (int) $precision;
 
 		$formatter = new \NumberFormatter($locale, \NumberFormatter::DECIMAL);
 		$formatter->setAttribute(\NumberFormatter::FRACTION_DIGITS, $precision);
@@ -40,10 +53,8 @@ class siLocal
 
 	public static function number_trim($number)
 	{
-        global $config;
-
 		$formatted_number = siLocal::number($number);
-        $precision = (int) $config->local->precision;
+        $precision = self::getPrecision();
         $position = ($precision + 1) * -1;
 
         if (substr($formatted_number, $position, 1) === ".") {
@@ -100,9 +111,7 @@ class siLocal
 	 */
 	public static function number_formatted($number)
 	{
-		global $config;
-	
-		$number_formatted = number_format($number, $config->local->precision, '.', '');
+		$number_formatted = number_format($number, self::getPrecision(), '.', '');
 		return $number_formatted;
 	}
 }

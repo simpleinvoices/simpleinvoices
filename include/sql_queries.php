@@ -322,7 +322,7 @@ function getSQLPatches() {
 
 	$sql  = "SELECT * FROM ".TB_PREFIX."sql_patchmanager
 	            WHERE NOT (sql_patch = '' AND sql_release='' AND sql_statement = '')
-	            ORDER BY sql_release, sql_patch_ref";
+	            ORDER BY CAST(sql_patch_ref AS UNSIGNED) DESC";
 	$sth = dbQuery($sql);
 	return $sth->fetchAll();
 }
@@ -2602,6 +2602,7 @@ function pdfThis($html,$file_location="",$pdfname)
 		function convert_to_pdf($html_to_pdf, $pdfname, $file_location="") {
 
 			global $config;
+			$sysDefaults = getSystemDefaults();
 
 			try {
 				// Convert app URLs to local filesystem paths so mPDF can load CSS/images
@@ -2663,15 +2664,15 @@ function pdfThis($html,$file_location="",$pdfname)
 					);
 				}
 
-				$format = $config->export->pdf->papersize ?? 'A4';
+				$format = $sysDefaults['pdfpapersize'] ?? 'A4';
 				$mpdf = new \Mpdf\Mpdf([
 					'mode' => 'utf-8',
 					'format' => $format,
 					'orientation' => 'P',
-					'margin_left'   => (float) ($config->export->pdf->leftmargin ?? 15),
-					'margin_right'  => (float) ($config->export->pdf->rightmargin ?? 15),
-					'margin_top'    => (float) ($config->export->pdf->topmargin ?? 15),
-					'margin_bottom' => (float) ($config->export->pdf->bottommargin ?? 15),
+					'margin_left'   => (float) ($sysDefaults['pdfleftmargin'] ?? 15),
+					'margin_right'  => (float) ($sysDefaults['pdfrightmargin'] ?? 15),
+					'margin_top'    => (float) ($sysDefaults['pdftopmargin'] ?? 15),
+					'margin_bottom' => (float) ($sysDefaults['pdfbottommargin'] ?? 15),
 				]);
 
 				$mpdf->WriteHTML($html_to_pdf);
@@ -2757,19 +2758,19 @@ function runPatches() {
 			$dbh->commit();
 		}
 
-		$patch_page['message']= "The database patches have now been applied. You can now start working with Simple Invoices";
-		$patch_page['html']	= "<div class='si_toolbar si_toolbar_form'><a href='index.php'>HOME</a></div>";
-		$patch_page['refresh']=5;
+		// Keep only the rows that were actually applied (not already-skipped ones)
+		$applied = array_values(array_filter($patch_page['rows'], function($r) {
+			return isset($r['result']) && $r['result'] === 'done';
+		}));
+		$patch_page['rows']    = array_reverse($applied);
+		$patch_page['applied_count'] = count($applied);
+		$patch_page['mode']    = 'run';
+		$patch_page['refresh'] = 5;
 	}
 	else {
 
-		$patch_page['html']= "Step 1 - This is the first time Database Updates has been run";
-		$patch_page['html']  =initialise_sql_patch();
-		$patch_page['html'] .= "<br />
-		Now that the Database upgrade table has been initialised, please go back to the Database Upgrade Manger page by clicking 
-		the following button to run the remaining patches.
-		<div class='si_toolbar si_toolbar_form'><a href='index.php?module=options&amp;view=database_sqlpatches'>Continue</a></div>
-		.";
+		$patch_page['mode'] = 'init';
+		$patch_page['init_log'] = initialise_sql_patch();
 
 	}
 
@@ -2780,47 +2781,38 @@ function runPatches() {
 
 // ------------------------------------------------------------------------------
 function donePatches() {
-	$patch_page['message']="The database patches are uptodate. You can continue working with Simple Invoices";
-	$patch_page['html']	= "<div class='si_toolbar si_toolbar_form'><a href='index.php'>HOME</a></div>";
-	$patch_page['refresh']=3;
+	$patch_page['mode']    = 'done';
+	$patch_page['refresh'] = 3;
 	global $bladeView;
-	$bladeView-> assign("page",$patch_page);
+	$bladeView->assign("page", $patch_page);
 }
 
 // ------------------------------------------------------------------------------
 function listPatches() {
-		global $patch;
+	global $patch;
 
-	//if(mysql_num_rows(mysqlQuery("SHOW TABLES LIKE '".TB_PREFIX."sql_patchmanager'")) == 1) {
-		
-		$patch_page=array();		
-		$patch_page['message']= "Your version of Simple Invoices can now be upgraded.	With this new release there are database patches that need to be applied";
-		$patch_page['html']	= <<<EOD
-	<p>
-			The list below describes which patches have and have not been applied to the database, the aim is to have them all applied.<br />  
-			If there are patches that have not been applied to the Simple Invoices database, please run the Update database by clicking update 
-	</p>
-
-	<div class="si_message_warning">Warning: Please backup your database before upgrading!</div>
-
-	<div class="si_toolbar si_toolbar_form"><a href="./index.php?case=run" class=""><img src="./images/common/tick.png" alt="" />Update</a></div>
-EOD;
-
-		for($p = 0; $p < count($patch);$p++) {
-			$patch_name = htmlsafe($patch[$p]['name']);
-			$patch_date = htmlsafe($patch[$p]['date']);
-			if(check_sql_patch($p,$patch[$p]['name'])) {
-				$patch_page['rows'][$p]['text']	= "SQL patch $p, $patch_name <i>has</i> already been applied in release $patch_date";
-				$patch_page['rows'][$p]['result']	='skip';
-			}
-			else {
-				$patch_page['rows'][$p]['text']	= "SQL patch $p, $patch_name <b>has not</b> been applied to the database";
-				$patch_page['rows'][$p]['result']	='todo';
-			}	
+	$pending = array();
+	for ($p = 0; $p < count($patch); $p++) {
+		if (!check_sql_patch($p, $patch[$p]['name'])) {
+			$pending[] = array(
+				'id'   => $p,
+				'name' => htmlsafe($patch[$p]['name']),
+				'date' => htmlsafe($patch[$p]['date']),
+			);
 		}
+	}
+
+	// Show highest patch ID first
+	$pending = array_reverse($pending);
+
+	$patch_page = array(
+		'mode'          => 'list',
+		'pending_count' => count($pending),
+		'rows'          => $pending,
+	);
 
 	global $bladeView;
-	$bladeView-> assign("page",$patch_page);
+	$bladeView->assign("page", $patch_page);
 }
 
 // ------------------------------------------------------------------------------
@@ -2851,8 +2843,10 @@ function run_sql_patch($id, $patch) {
 
 	if (count($sth->fetchAll()) != 0)  {
 
+		$patch_row['id']		= $escaped_id;
+		$patch_row['name']		= $patch_name;
 		$patch_row['text']		= "Skipping SQL patch $escaped_id, $patch_name as it <i>has</i> already been applied";
-		$patch_row['result']	="skip";
+		$patch_row['result']	= "skip";
 	}
 	else {
 
@@ -2860,8 +2854,10 @@ function run_sql_patch($id, $patch) {
 		#so run the patch
 		dbQuery($patch['patch']);
 
-		$patch_row['text']	= "SQL patch $escaped_id, $patch_name <i>has</i> been applied to the database";
-		$patch_row['result']	="done";
+		$patch_row['id']		= $escaped_id;
+		$patch_row['name']		= $patch_name;
+		$patch_row['text']		= "SQL patch $escaped_id, $patch_name <i>has</i> been applied to the database";
+		$patch_row['result']	= "done";
 
 		# now update the ".TB_PREFIX."sql_patchmanager table		
 		$sql_update = "INSERT INTO ".TB_PREFIX."sql_patchmanager ( sql_patch_ref , sql_patch , sql_release , sql_statement ) VALUES (:id, :name, :date, :patch)";		
