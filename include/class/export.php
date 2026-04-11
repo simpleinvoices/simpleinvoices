@@ -45,6 +45,10 @@ class export
                     $this->exportXlsx($data);
                 } elseif ($file_type === 'docx') {
                     $this->exportDocx($data);
+                } elseif ($file_type === 'ods') {
+                    $this->exportOds($data);
+                } elseif ($file_type === 'odt') {
+                    $this->exportOdt($data);
                 } else {
                     // Fallback for any other file type: stream HTML as octet-stream
                     $invoice    = getInvoice($this->id, $this->domain_id);
@@ -324,6 +328,121 @@ class export
         );
     }
 
+    /** ODS from the same rendered HTML via PhpSpreadsheet Reader\Html → Writer\Ods. */
+    private function exportOds($html = null): void
+    {
+        require_once('./vendor/autoload.php');
+
+        $htmlStr = is_string($html) ? trim($html) : '';
+        if ($htmlStr === '') {
+            throw new \RuntimeException('ODS export requires rendered HTML.');
+        }
+
+        $reader = new \PhpOffice\PhpSpreadsheet\Reader\Html();
+        $reader->setAllowExternalImages(true);
+        $spreadsheet = $reader->loadFromString($htmlStr);
+
+        try {
+            $spreadsheet->getActiveSheet()->setTitle(
+                $this->module === 'payment' ? 'Payment' : ($this->module === 'statement' ? 'Statement' : 'Invoice')
+            );
+        } catch (\Throwable $e) {
+            // Keep default title if rename fails (length / invalid characters).
+        }
+
+        $filename = basename(($this->file_name ?: $this->module . $this->id) . '.ods');
+        $tmp      = @tempnam(sys_get_temp_dir(), 'siods_');
+        if ($tmp === false) {
+            while (ob_get_level() > 0) {
+                ob_end_clean();
+            }
+            @ini_set('zlib.output_compression', '0');
+            header('Content-Type: application/vnd.oasis.opendocument.spreadsheet');
+            header('Content-Disposition: attachment; filename="' . str_replace(['\\', '"'], ['\\\\', '\\"'], $filename) . '"');
+            header('Cache-Control: private, must-revalidate');
+            $writer = new \PhpOffice\PhpSpreadsheet\Writer\Ods($spreadsheet);
+            $writer->save('php://output');
+            exit(0);
+        }
+
+        $writer = new \PhpOffice\PhpSpreadsheet\Writer\Ods($spreadsheet);
+        try {
+            $writer->save($tmp);
+        } catch (\Throwable $e) {
+            @unlink($tmp);
+            throw $e;
+        }
+        $this->sendOfficeOpenXmlDownloadAndExit(
+            $tmp,
+            'application/vnd.oasis.opendocument.spreadsheet',
+            $filename
+        );
+    }
+
+    /** ODT from the same rendered HTML via PhpWord Html::addHtml → Writer\ODText. */
+    private function exportOdt($html): void
+    {
+        require_once('./vendor/autoload.php');
+
+        \PhpOffice\PhpWord\Settings::setOutputEscapingEnabled(true);
+        if (class_exists(\ZipArchive::class)) {
+            \PhpOffice\PhpWord\Settings::setZipClass(\PhpOffice\PhpWord\Settings::ZIPARCHIVE);
+        }
+
+        $fragment = $this->htmlFragmentSanitizeForPhpWord(
+            $this->stripIllegalXmlControlChars($this->htmlFragmentForPhpWord($html))
+        );
+
+        $buildDoc = static function (string $frag) {
+            $phpWord = new \PhpOffice\PhpWord\PhpWord();
+            $phpWord->getSettings()->setUpdateFields(true);
+            $section = $phpWord->addSection([
+                'marginTop'    => 720,
+                'marginBottom' => 720,
+                'marginLeft'   => 900,
+                'marginRight'  => 900,
+            ]);
+            \PhpOffice\PhpWord\Shared\Html::addHtml($section, $frag, false, false);
+
+            return $phpWord;
+        };
+
+        try {
+            $phpWord = $buildDoc($fragment);
+        } catch (\Throwable $e) {
+            $stripped = preg_replace('/<img\b[^>]*\/?>/i', '', $fragment);
+            $phpWord  = $buildDoc($stripped !== '' ? $stripped : '<p></p>');
+        }
+
+        $filename = basename(($this->file_name ?: $this->module . $this->id) . '.odt');
+        $tmp      = @tempnam(sys_get_temp_dir(), 'siodt_');
+        $writer   = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'ODText');
+
+        if ($tmp === false) {
+            while (ob_get_level() > 0) {
+                ob_end_clean();
+            }
+            @ini_set('zlib.output_compression', '0');
+            header('Content-Type: application/vnd.oasis.opendocument.text');
+            header('Content-Disposition: attachment; filename="' . str_replace(['\\', '"'], ['\\\\', '\\"'], $filename) . '"');
+            header('Cache-Control: private, must-revalidate');
+            $writer->save('php://output');
+            exit(0);
+        }
+
+        try {
+            $writer->save($tmp);
+        } catch (\Throwable $e) {
+            @unlink($tmp);
+            throw $e;
+        }
+        $this->sendOfficeOpenXmlDownloadAndExit(
+            $tmp,
+            'application/vnd.oasis.opendocument.text',
+            $filename
+        );
+    }
+
     function getData()
     {
         global $bladeView;
@@ -445,11 +564,11 @@ class export
 
                 $customFieldLabels = getCustomFieldLabels($this->domain_id);
 
-                // Use the dedicated export template for xlsx/docx non-ODF exports
+                // Use the dedicated export template for all office file exports (xlsx/docx/ods/odt)
                 $file_type_norm = strtolower($this->file_type ?? '');
                 if ($file_type_norm === 'xls') $file_type_norm = 'xlsx';
                 if ($file_type_norm === 'doc') $file_type_norm = 'docx';
-                $isOfficeExport = ($this->format === 'file' && in_array($file_type_norm, ['xlsx', 'docx']));
+                $isOfficeExport = ($this->format === 'file' && in_array($file_type_norm, ['xlsx', 'docx', 'ods', 'odt']));
                 $template = $isOfficeExport
                     ? ($defaults['export_template'] ?: 'export')
                     : $defaults['template'];

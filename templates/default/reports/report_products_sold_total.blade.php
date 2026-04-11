@@ -2,18 +2,10 @@
 	$data = $data ?? [];
 	$total_quantity = $total_quantity ?? 0;
 	$product_count = count($data);
+	$chartHeight = max(200, min(420, $product_count * 38 + 60));
 @endphp
 
 <div class="card">
-	<div class="card-header">
-		<span class="avatar avatar-sm bg-cyan-lt me-2 rounded"><i class="ti ti-shopping-cart text-cyan"></i></span>
-		<h3 class="card-title">{{ $LANG['product_sales'] ?? '' }}</h3>
-		<div class="card-options">
-			<a href="index.php?module=reports&view=index" class="btn btn-sm btn-outline-secondary">
-				<i class="ti ti-arrow-left me-1"></i>{{ $LANG['reports'] ?? 'Reports' }}
-			</a>
-		</div>
-	</div>
 
 	{{-- Summary stats --}}
 	<div class="card-body border-bottom">
@@ -32,6 +24,13 @@
 			</div>
 		</div>
 	</div>
+
+	@if(count($data) > 0)
+	{{-- Chart: horizontal bar —— product vs qty --}}
+	<div class="card-body border-bottom p-2">
+		<div id="chart-products-total" style="min-height:{{ $chartHeight }}px;"></div>
+	</div>
+	@endif
 
 	<div class="table-responsive">
 		<table class="table table-vcenter table-hover card-table">
@@ -72,3 +71,57 @@
 		</table>
 	</div>
 </div>
+
+@if(count($data) > 0)
+<script>
+(function () {
+	var labels     = @json(array_column($data, 'description'));
+	var quantities = @json(array_map(function($r){ return (float)($r['sum_quantity'] ?? 0); }, $data));
+	var qtyLbl     = @json($LANG['quantity'] ?? 'Qty');
+	var chartH     = {{ $chartHeight }};
+
+	function cssVar(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim() || ''; }
+
+	function buildOptions() {
+		var isDark    = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+		var cyan      = cssVar('--tblr-cyan')          || '#17a2b8';
+		var bodyColor = cssVar('--tblr-body-color')    || (isDark ? '#c8d3e1' : '#1d273b');
+		var borderCol = cssVar('--tblr-border-color')  || (isDark ? '#3d4555' : '#e6e7e9');
+		return {
+			chart: {
+				type: 'bar', fontFamily: 'inherit', height: chartH,
+				toolbar: { show: false }, animations: { enabled: false },
+				background: 'transparent'
+			},
+			series: [{ name: qtyLbl, data: quantities }],
+			xaxis: {
+				categories: labels,
+				labels: { style: { colors: bodyColor } },
+				axisBorder: { color: borderCol }, axisTicks: { color: borderCol }
+			},
+			yaxis: { labels: { style: { colors: bodyColor }, formatter: function(v){ return v.toLocaleString(); } } },
+			colors: [cyan],
+			plotOptions: { bar: { horizontal: true, borderRadius: 4, barHeight: '65%' } },
+			dataLabels: { enabled: false },
+			grid: { borderColor: borderCol, strokeDashArray: 4 },
+			tooltip: { theme: isDark ? 'dark' : 'light', y: { formatter: function(v){ return v.toLocaleString(); } } }
+		};
+	}
+
+	function initChart() {
+		var chart = new ApexCharts(document.getElementById('chart-products-total'), buildOptions());
+		chart.render();
+		document.documentElement.addEventListener('si-theme-changed', function () {
+			chart.updateOptions(buildOptions(), true, true);
+		});
+	}
+
+	if (typeof ApexCharts !== 'undefined') { initChart(); }
+	else {
+		var s = document.createElement('script');
+		s.src = 'https://cdn.jsdelivr.net/npm/apexcharts@latest/dist/apexcharts.min.js';
+		s.onload = initChart; document.head.appendChild(s);
+	}
+})();
+</script>
+@endif

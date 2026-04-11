@@ -1,14 +1,4 @@
 <div class="card mb-4">
-	<div class="card-header">
-		<span class="avatar avatar-sm bg-purple-lt me-2 rounded"><i class="ti ti-chart-dots text-purple"></i></span>
-		<h3 class="card-title">{{ $LANG['profit_per_invoice'] ?? '' }}</h3>
-		<div class="card-options">
-			<a href="index.php?module=reports&view=index" class="btn btn-sm btn-outline-secondary">
-				<i class="ti ti-arrow-left me-1"></i>{{ $LANG['reports'] ?? 'Reports' }}
-			</a>
-		</div>
-	</div>
-
 	<form name="frmpost" id="form_report_invoice_profit" action="index.php?module=reports&amp;view=report_invoice_profit" method="post">
 		<div class="card-body">
 			<div class="row g-3 align-items-end">
@@ -45,34 +35,32 @@
 @if(!empty($invoices))
 @php
 	$invoice_totals = $invoice_totals ?? [];
-	$sum_total  = $invoice_totals['sum_total']  ?? 0;
-	$sum_cost   = $invoice_totals['sum_cost']   ?? 0;
-	$sum_profit = $invoice_totals['sum_profit'] ?? 0;
+	$sum_total  = (float)($invoice_totals['sum_total']  ?? 0);
+	$sum_cost   = (float)($invoice_totals['sum_cost']   ?? 0);
+	$sum_profit = (float)($invoice_totals['sum_profit'] ?? 0);
+	$margin_pct = $sum_total > 0 ? round(($sum_profit / $sum_total) * 100, 1) : 0;
 @endphp
 
 <div class="card">
-	<div class="card-header">
-		<h3 class="card-title">
-			{{ strtr($LANG['profit_per_invoice_summary'] ?? '', ['{start_date}' => $start_date ?? '', '{end_date}' => $end_date ?? '']) }}
-		</h3>
-	</div>
-
-	{{-- Profit summary stats --}}
+	{{-- Summary stats --}}
 	<div class="card-body border-bottom">
+		<p class="text-secondary fw-medium mb-3">
+			{{ strtr($LANG['profit_per_invoice_summary'] ?? '', ['{start_date}' => $start_date ?? '', '{end_date}' => $end_date ?? '']) }}
+		</p>
 		<div class="row g-3">
-			<div class="col-sm-4">
+			<div class="col-sm-3">
 				<div class="p-3 bg-blue-lt rounded-2 text-center">
 					<div class="text-secondary small mb-1">{{ $LANG['total'] ?? '' }}</div>
 					<div class="h3 fw-bold text-blue mb-0">{{ siLocal::number($sum_total) ?: '-' }}</div>
 				</div>
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-3">
 				<div class="p-3 bg-orange-lt rounded-2 text-center">
 					<div class="text-secondary small mb-1">{{ $LANG['cost'] ?? '' }}</div>
 					<div class="h3 fw-bold text-orange mb-0">{{ siLocal::number($sum_cost) ?: '-' }}</div>
 				</div>
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-3">
 				<div class="p-3 {{ $sum_profit >= 0 ? 'bg-green-lt' : 'bg-red-lt' }} rounded-2 text-center">
 					<div class="text-secondary small mb-1">{{ $LANG['profit'] ?? '' }}</div>
 					<div class="h3 fw-bold {{ $sum_profit >= 0 ? 'text-green' : 'text-red' }} mb-0">
@@ -80,7 +68,18 @@
 					</div>
 				</div>
 			</div>
+			<div class="col-sm-3">
+				<div class="p-3 bg-purple-lt rounded-2 text-center">
+					<div class="text-secondary small mb-1">{{ $LANG['margin'] ?? 'Margin' }}</div>
+					<div class="h3 fw-bold text-purple mb-0">{{ $margin_pct }}%</div>
+				</div>
+			</div>
 		</div>
+	</div>
+
+	{{-- Chart: revenue vs cost vs profit (stacked or grouped bar) --}}
+	<div class="card-body border-bottom p-2">
+		<div id="chart-profit-summary"></div>
 	</div>
 
 	<div class="table-responsive">
@@ -98,12 +97,12 @@
 			<tbody>
 			@foreach(($invoices ?? []) as $invoice)
 				@php
-					$profit = $invoice['profit'] ?? 0;
+					$profit = (float)($invoice['profit'] ?? 0);
 					$profit_color = $profit >= 0 ? 'text-green' : 'text-red';
 				@endphp
 				@if($loop->index > 0 && (($invoices[$loop->index - 1]['preference'] ?? '') != ($invoice['preference'] ?? '')))
 				<tr class="table-light">
-					<td colspan="6" class="text-secondary small py-1"></td>
+					<td colspan="6" class="py-1"></td>
 				</tr>
 				@endif
 				<tr>
@@ -127,4 +126,74 @@
 		</table>
 	</div>
 </div>
+
+<script>
+(function () {
+	// Per-invoice data for bar chart (up to 30 invoices to keep chart readable)
+	var invoices = @json(array_slice($invoices ?? [], 0, 30));
+	var labels   = invoices.map(function(r){ return (r.preference || '') + ' ' + (r.index_id || ''); });
+	var totals   = invoices.map(function(r){ return parseFloat(r.invoice_total || 0); });
+	var costs    = invoices.map(function(r){ return parseFloat(r.cost || 0); });
+	var profits  = invoices.map(function(r){ return parseFloat(r.profit || 0); });
+
+	var totalLbl  = @json($LANG['total']  ?? 'Total');
+	var costLbl   = @json($LANG['cost']   ?? 'Cost');
+	var profitLbl = @json($LANG['profit'] ?? 'Profit');
+	var chartH    = Math.max(240, Math.min(400, labels.length * 28 + 80));
+
+	function cssVar(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim() || ''; }
+
+	function buildOptions() {
+		var isDark    = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+		var primary   = cssVar('--tblr-primary')       || '#45aaf2';
+		var success   = cssVar('--tblr-success')       || '#2fb344';
+		var danger    = cssVar('--tblr-danger')        || '#e03131';
+		var bodyColor = cssVar('--tblr-body-color')    || (isDark ? '#c8d3e1' : '#1d273b');
+		var borderCol = cssVar('--tblr-border-color')  || (isDark ? '#3d4555' : '#e6e7e9');
+
+		// Colour each profit bar green or red based on sign
+		var profitColours = profits.map(function(v){ return v >= 0 ? success : danger; });
+
+		return {
+			chart: {
+				type: 'bar', fontFamily: 'inherit', height: chartH,
+				toolbar: { show: false }, animations: { enabled: false },
+				background: 'transparent'
+			},
+			series: [
+				{ name: totalLbl,  data: totals  },
+				{ name: costLbl,   data: costs   },
+				{ name: profitLbl, data: profits }
+			],
+			xaxis: {
+				categories: labels,
+				labels: { style: { colors: bodyColor }, rotate: -35, hideOverlappingLabels: true },
+				axisBorder: { color: borderCol }, axisTicks: { color: borderCol }
+			},
+			yaxis: { labels: { style: { colors: bodyColor }, formatter: function(v){ return v.toLocaleString(); } } },
+			colors: [primary, '#f76707', success],
+			plotOptions: { bar: { borderRadius: 3, columnWidth: '75%', grouped: true } },
+			dataLabels: { enabled: false },
+			legend: { position: 'bottom', labels: { colors: bodyColor } },
+			grid: { borderColor: borderCol, strokeDashArray: 4 },
+			tooltip: { theme: isDark ? 'dark' : 'light', y: { formatter: function(v){ return v.toLocaleString(); } } }
+		};
+	}
+
+	function initChart() {
+		var chart = new ApexCharts(document.getElementById('chart-profit-summary'), buildOptions());
+		chart.render();
+		document.documentElement.addEventListener('si-theme-changed', function () {
+			chart.updateOptions(buildOptions(), true, true);
+		});
+	}
+
+	if (typeof ApexCharts !== 'undefined') { initChart(); }
+	else {
+		var s = document.createElement('script');
+		s.src = 'https://cdn.jsdelivr.net/npm/apexcharts@latest/dist/apexcharts.min.js';
+		s.onload = initChart; document.head.appendChild(s);
+	}
+})();
+</script>
 @endif

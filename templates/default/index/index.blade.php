@@ -652,15 +652,40 @@
     </div>
     {{-- Debtor aging radial chart --}}
     <div class="col-lg-3">
-        <div class="card h-100">
+        <div class="card h-100 @if(!empty($dash_aging_all_clear)) border border-success border-opacity-25 @endif overflow-hidden">
+            @if(!empty($dash_aging_all_clear))
+                <div class="card-status-top bg-success"></div>
+            @endif
             <div class="card-header">
                 <div>
-                    <h3 class="card-title">Debtor Aging</h3>
-                    <div class="card-subtitle">Outstanding by age &mdash; total {{ siLocal::number($aging_total ?? 0) }}</div>
+                    <h3 class="card-title d-flex align-items-center flex-wrap gap-2">
+                        <span>Debtor Aging</span>
+                        @if(!empty($dash_aging_all_clear))
+                            <span class="badge bg-success-lt text-success border border-success border-opacity-25" title="{{ $LANG['paid'] ?? 'Paid' }}">
+                                <i class="ti ti-check"></i>
+                            </span>
+                        @endif
+                    </h3>
+                    <div class="card-subtitle">
+                        @if(!empty($dash_aging_all_clear))
+                            <span class="text-success fw-medium">{{ $LANG['dash_aging_no_outstanding'] ?? 'No outstanding receivables' }}</span>
+                            <span class="text-secondary d-block small mt-1">{{ $LANG['dash_aging_all_clear_sub'] ?? 'Nothing owing by age — all invoices are fully paid.' }}</span>
+                        @else
+                            Outstanding by age &mdash; total {{ siLocal::number($aging_total ?? 0) }}
+                        @endif
+                    </div>
                 </div>
             </div>
-            <div class="card-body d-flex align-items-center justify-content-center">
-                <div id="chart-aging" style="min-height:200px;width:100%"></div>
+            <div class="card-body d-flex align-items-center justify-content-center position-relative">
+                @if(!empty($dash_aging_all_clear))
+                    <div class="text-center py-2 px-2 w-100">
+                        <span class="avatar avatar-xl bg-success-lt text-success mb-2">
+                            <i class="ti ti-circle-check fs-1"></i>
+                        </span>
+                    </div>
+                @else
+                    <div id="chart-aging" style="min-height:200px;width:100%"></div>
+                @endif
             </div>
         </div>
     </div>
@@ -669,28 +694,39 @@
 {{-- Dashboard stat cards --}}
 <div class="row g-3 mb-3">
 
-    {{-- Card 1: % Invoices Paid --}}
+    {{-- Card 1: % Invoices Paid (success chrome matches Debtor Aging card when all paid) --}}
     <div class="col-6 col-lg-3">
-        <div class="card">
-            <div class="card-body py-2 px-3">
-                <div class="d-flex align-items-center mb-1">
-                    <span class="text-uppercase text-secondary fw-semibold" style="font-size:.65rem;letter-spacing:.08em">Invoices Paid</span>
-                    <a href="index.php?module=reports&amp;view=report_debtors_by_aging" target="_blank" rel="noopener" class="ms-auto text-secondary lh-1" title="Open report">
-                        <i class="ti ti-external-link" style="font-size:.9rem"></i>
-                    </a>
-                </div>
-		{{--           
-		<div class="h2 mb-2">{{ $dash_paid_pct ?? 0 }}% <span class="fs-6 fw-normal text-secondary">({{ $dash_paid_inv_count ?? 0 }}/{{ $dash_total_inv_count ?? 0 }})</span></div>
-		<div class="progress" style="height:5px">
-		--}}
-
-                    <div class="h1 mb-1">{{ $dash_paid_pct ?? 0 }}%</div>
-                    <div class="text-secondary small mb-3">
-                        {{ $dash_paid_inv_count ?? 0 }} of {{ $dash_total_inv_count ?? 0 }} invoices fully paid
+        <div class="card h-100 @if(!empty($dash_all_invoices_paid)) border border-success border-opacity-25 @endif overflow-hidden">
+            @if(!empty($dash_all_invoices_paid))
+                <div class="card-status-top bg-success"></div>
+            @endif
+            @if(!empty($dash_all_invoices_paid))
+                <div class="card-header py-2 px-3">
+                    <div class="d-flex align-items-center flex-wrap gap-2">
+                        <span class="text-uppercase text-secondary fw-semibold" style="font-size:.65rem;letter-spacing:.08em">Invoices Paid</span>
+                        <span class="badge bg-success-lt text-success border border-success border-opacity-25" title="{{ $LANG['paid'] ?? 'Paid' }}">
+                            <i class="ti ti-check"></i>
+                        </span>
+                        <a href="index.php?module=reports&amp;view=report_debtors_by_aging" target="_blank" rel="noopener" class="ms-auto text-secondary lh-1" title="Open report">
+                            <i class="ti ti-external-link" style="font-size:.9rem"></i>
+                        </a>
                     </div>
-                    <div class="progress" style="height:6px">
-
-
+                </div>
+                <div class="card-body py-2 px-3">
+            @else
+                <div class="card-body py-2 px-3">
+                    <div class="d-flex align-items-center mb-1">
+                        <span class="text-uppercase text-secondary fw-semibold" style="font-size:.65rem;letter-spacing:.08em">Invoices Paid</span>
+                        <a href="index.php?module=reports&amp;view=report_debtors_by_aging" target="_blank" rel="noopener" class="ms-auto text-secondary lh-1" title="Open report">
+                            <i class="ti ti-external-link" style="font-size:.9rem"></i>
+                        </a>
+                    </div>
+            @endif
+                <div class="h1 mb-1">{{ $dash_paid_pct ?? 0 }}%</div>
+                <div class="text-secondary small mb-3">
+                    {{ $dash_paid_inv_count ?? 0 }} of {{ $dash_total_inv_count ?? 0 }} invoices fully paid
+                </div>
+                <div class="progress" style="height:6px">
                     <div class="progress-bar bg-primary" role="progressbar"
                          style="width:{{ $dash_paid_pct ?? 0 }}%"
                          aria-valuenow="{{ $dash_paid_pct ?? 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
@@ -975,7 +1011,9 @@
     document.documentElement.addEventListener('si-theme-changed', function () {
         chart.updateOptions(buildOptions(currentYear), true, true);
         annualChart.updateOptions(buildAnnualOptions(), true, true);
-        agingChart.updateOptions(buildAgingOptions(), true, true);
+        if (agingChart) {
+            agingChart.updateOptions(buildAgingOptions(), true, true);
+        }
     });
 
     // Annual bar chart
@@ -1032,8 +1070,9 @@
     var annualChart = new ApexCharts(document.getElementById('chart-annual'), buildAnnualOptions());
     annualChart.render();
 
-    // Debtor aging radial chart
+    // Debtor aging radial chart (skipped when all invoices paid and nothing owing — static success UI instead)
     var agingData = @json($aging_chart ?? []);
+    var dashAgingAllClear = @json(!empty($dash_aging_all_clear));
 
     function buildAgingOptions() {
         var isDark    = document.documentElement.getAttribute('data-bs-theme') === 'dark';
@@ -1098,8 +1137,14 @@
         };
     }
 
-    var agingChart = new ApexCharts(document.getElementById('chart-aging'), buildAgingOptions());
-    agingChart.render();
+    var agingChart = null;
+    if (!dashAgingAllClear) {
+        var agingEl = document.getElementById('chart-aging');
+        if (agingEl) {
+            agingChart = new ApexCharts(agingEl, buildAgingOptions());
+            agingChart.render();
+        }
+    }
 
     // ── Stat card sparklines ─────────────────────────────────────────────────
     var sparkInvAmounts  = @json($alltime_inv_monthly ?? []);

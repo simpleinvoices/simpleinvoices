@@ -378,11 +378,15 @@ elseif (in_array($_GET['submit'], ['pdfleftmargin', 'pdfrightmargin', 'pdftopmar
 elseif ($_GET['submit'] == 'spreadsheet') {
 	$default = 'spreadsheet';
 	$current = $defaults['spreadsheet'] ?? 'xlsx';
-	$formats = ['xlsx', 'xls'];
+	$formats = [
+		'xlsx' => '.xlsx — Excel (OpenXML)',
+		'ods'  => '.ods — OpenDocument Spreadsheet',
+		'xls'  => '.xls — Excel 97-2003 (legacy)',
+	];
 	$select = '<select name="value" class="form-select">';
-	foreach ($formats as $fmt) {
+	foreach ($formats as $fmt => $label) {
 		$selected = ($fmt === $current) ? "selected style='font-weight: bold'" : '';
-		$select .= "<option $selected value='".htmlsafe($fmt)."'>.".htmlsafe($fmt)."</option>";
+		$select .= "<option $selected value='".htmlsafe($fmt)."'>".htmlsafe($label)."</option>";
 	}
 	$select .= '</select>';
 	$value = $select;
@@ -391,11 +395,15 @@ elseif ($_GET['submit'] == 'spreadsheet') {
 elseif ($_GET['submit'] == 'wordprocessor') {
 	$default = 'wordprocessor';
 	$current = $defaults['wordprocessor'] ?? 'docx';
-	$formats = ['docx', 'doc'];
+	$formats = [
+		'docx' => '.docx — Word (OpenXML)',
+		'odt'  => '.odt — OpenDocument Text',
+		'doc'  => '.doc — Word 97-2003 (legacy)',
+	];
 	$select = '<select name="value" class="form-select">';
-	foreach ($formats as $fmt) {
+	foreach ($formats as $fmt => $label) {
 		$selected = ($fmt === $current) ? "selected style='font-weight: bold'" : '';
-		$select .= "<option $selected value='".htmlsafe($fmt)."'>.".htmlsafe($fmt)."</option>";
+		$select .= "<option $selected value='".htmlsafe($fmt)."'>".htmlsafe($label)."</option>";
 	}
 	$select .= '</select>';
 	$value = $select;

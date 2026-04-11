@@ -5,15 +5,6 @@
 @endphp
 
 <div class="card">
-	<div class="card-header">
-		<span class="avatar avatar-sm bg-green-lt me-2 rounded"><i class="ti ti-cash text-green"></i></span>
-		<h3 class="card-title">{{ $LANG['total_sales'] ?? '' }}</h3>
-		<div class="card-options">
-			<a href="index.php?module=reports&view=index" class="btn btn-sm btn-outline-secondary">
-				<i class="ti ti-arrow-left me-1"></i>{{ $LANG['reports'] ?? 'Reports' }}
-			</a>
-		</div>
-	</div>
 
 	{{-- Summary stats --}}
 	<div class="card-body border-bottom">

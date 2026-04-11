@@ -171,9 +171,16 @@ FROM (
 $paid_row      = dbQuery($paid_sql, ':domain_id', $auth_session->domain_id)->fetch();
 $dash_paid_pct = ($paid_row['total_count'] > 0)
     ? round(($paid_row['paid_count'] ?? 0) / $paid_row['total_count'] * 100, 1) : 0;
-$bladeView->assign('dash_paid_pct',        $dash_paid_pct);
-$bladeView->assign('dash_total_inv_count', (int)($paid_row['total_count'] ?? 0));
-$bladeView->assign('dash_paid_inv_count',  (int)($paid_row['paid_count']  ?? 0));
+$dash_total_inv_count = (int)($paid_row['total_count'] ?? 0);
+$dash_paid_inv_count  = (int)($paid_row['paid_count'] ?? 0);
+$dash_all_invoices_paid = $dash_total_inv_count > 0 && $dash_paid_inv_count >= $dash_total_inv_count;
+// Aging query only includes owing > 0; combined with all-paid this means a clean receivables picture.
+$dash_aging_all_clear   = $dash_all_invoices_paid && round($aging_total, 2) <= 0;
+$bladeView->assign('dash_paid_pct',            $dash_paid_pct);
+$bladeView->assign('dash_total_inv_count',     $dash_total_inv_count);
+$bladeView->assign('dash_paid_inv_count',      $dash_paid_inv_count);
+$bladeView->assign('dash_all_invoices_paid',   $dash_all_invoices_paid);
+$bladeView->assign('dash_aging_all_clear',     $dash_aging_all_clear);
 
 // 2. All-time monthly amounts — flatten existing chart_data (no extra queries)
 $alltime_inv_monthly = [];

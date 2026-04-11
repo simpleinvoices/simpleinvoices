@@ -2780,6 +2780,23 @@ function runPatches() {
 }
 
 // ------------------------------------------------------------------------------
+function backupStep() {
+	global $patch;
+	$pending = 0;
+	for ($p = 0; $p < count($patch); $p++) {
+		if (!check_sql_patch($p, $patch[$p]['name'])) {
+			$pending++;
+		}
+	}
+	$patch_page = array(
+		'mode'          => 'backup',
+		'pending_count' => $pending,
+	);
+	global $bladeView;
+	$bladeView->assign("page", $patch_page);
+}
+
+// ------------------------------------------------------------------------------
 function donePatches() {
 	$patch_page['mode']    = 'done';
 	$patch_page['refresh'] = 3;

@@ -87,17 +87,23 @@
 		</div>
 
 		{{-- Export formats --}}
+		@php
+			$spreadsheetLabels = ['xlsx' => '.xlsx (Excel)', 'ods' => '.ods (OpenDocument)', 'xls' => '.xls (legacy)'];
+			$wordprocessorLabels = ['docx' => '.docx (Word)', 'odt' => '.odt (OpenDocument)', 'doc' => '.doc (legacy)'];
+			$spreadsheetVal = $defaults['spreadsheet'] ?? 'xlsx';
+			$wordprocessorVal = $defaults['wordprocessor'] ?? 'docx';
+		@endphp
 		<div class="card mb-4">
 			<div class="list-group list-group-flush">
 				@include('system_defaults.manage_row', [
 					'label' => $LANG['spreadsheet_format'] ?? 'Spreadsheet Export Format',
-					'value' => $defaults['spreadsheet'] ?? 'xlsx',
+					'value' => $spreadsheetLabels[$spreadsheetVal] ?? $spreadsheetVal,
 					'edit_param' => 'spreadsheet',
 					'icon' => 'ti-file-spreadsheet',
 				])
 				@include('system_defaults.manage_row', [
 					'label' => $LANG['wordprocessor_format'] ?? 'Word Processor Export Format',
-					'value' => $defaults['wordprocessor'] ?? 'docx',
+					'value' => $wordprocessorLabels[$wordprocessorVal] ?? $wordprocessorVal,
 					'edit_param' => 'wordprocessor',
 					'icon' => 'ti-file-text',
 				])

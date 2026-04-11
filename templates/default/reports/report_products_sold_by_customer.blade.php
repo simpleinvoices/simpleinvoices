@@ -1,16 +1,80 @@
-@php $data = $data ?? []; @endphp
+@php
+	$data = $data ?? [];
+
+	// Grand totals for stats
+	$total_qty_all  = array_sum(array_column($data, 'total_quantity'));
+	$customer_count = count($data);
+
+	// ── Chart data prep ──────────────────────────────────────────────────────
+	// Collect all unique product names (preserving first-seen order)
+	$all_products = [];
+	foreach ($data as $customer) {
+		foreach (($customer['products'] ?? []) as $p) {
+			$desc = $p['description'] ?? '';
+			if ($desc !== '' && !in_array($desc, $all_products, true)) {
+				$all_products[] = $desc;
+			}
+		}
+	}
+
+	// Customer name labels for y-axis
+	$chart_labels = array_values(array_column($data, 'name'));
+
+	// One series per product: data[i] = quantity for customer i
+	$chart_series = [];
+	foreach ($all_products as $prod_name) {
+		$row = ['name' => $prod_name, 'data' => []];
+		foreach ($data as $customer) {
+			$qty = 0;
+			foreach (($customer['products'] ?? []) as $p) {
+				if (($p['description'] ?? '') === $prod_name) {
+					$qty = (float)($p['sum_quantity'] ?? 0);
+					break;
+				}
+			}
+			$row['data'][] = $qty;
+		}
+		$chart_series[] = $row;
+	}
+
+	$chartHeight = max(220, min(520, $customer_count * 46 + 80));
+	$hasChartData = $customer_count > 0 && count($all_products) > 0;
+@endphp
 
 <div class="card">
-	<div class="card-header">
-		<span class="avatar avatar-sm bg-cyan-lt me-2 rounded"><i class="ti ti-users-group text-cyan"></i></span>
-		<h3 class="card-title">{{ $LANG['products_by_customer'] ?? '' }}</h3>
-		<div class="card-options">
-			<a href="index.php?module=reports&view=index" class="btn btn-sm btn-outline-secondary">
-				<i class="ti ti-arrow-left me-1"></i>{{ $LANG['reports'] ?? 'Reports' }}
-			</a>
+
+	{{-- Summary stats --}}
+	<div class="card-body border-bottom">
+		<div class="row g-3">
+			<div class="col-sm-4">
+				<div class="p-3 bg-cyan-lt rounded-2 text-center">
+					<div class="text-secondary small mb-1">{{ $LANG['total'] ?? 'Total' }} {{ $LANG['quantity'] ?? 'Qty' }}</div>
+					<div class="h2 fw-bold text-cyan mb-0">{{ siLocal::number($total_qty_all) ?: '-' }}</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="p-3 bg-blue-lt rounded-2 text-center">
+					<div class="text-secondary small mb-1">{{ $LANG['customers'] ?? 'Customers' }}</div>
+					<div class="h2 fw-bold text-blue mb-0">{{ $customer_count }}</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="p-3 bg-indigo-lt rounded-2 text-center">
+					<div class="text-secondary small mb-1">{{ $LANG['products'] ?? 'Products' }}</div>
+					<div class="h2 fw-bold text-indigo mb-0">{{ count($all_products) }}</div>
+				</div>
+			</div>
 		</div>
 	</div>
 
+	@if($hasChartData)
+	{{-- Stacked horizontal bar: each bar = customer, segments = products --}}
+	<div class="card-body border-bottom p-2">
+		<div id="chart-products-by-customer" style="min-height:{{ $chartHeight }}px;"></div>
+	</div>
+	@endif
+
+	{{-- Detail tables grouped by customer --}}
 	@foreach($data as $customer)
 	<div class="card-body {{ !$loop->last ? 'border-bottom' : '' }} pb-2">
 		<div class="d-flex align-items-center mb-3">
@@ -57,3 +121,71 @@
 	</div>
 	@endif
 </div>
+
+@if($hasChartData)
+<script>
+(function () {
+	var series    = @json($chart_series);
+	var labels    = @json($chart_labels);
+	var qtyLbl    = @json($LANG['quantity'] ?? 'Qty');
+	var chartH    = {{ $chartHeight }};
+	var palette   = [
+		'#17a2b8','#2fb344','#f59f00','#4263eb','#f76707',
+		'#ae3ec9','#0ca678','#e03131','#fd7e14','#20c997',
+		'#45aaf2','#7048e8','#e83e8c','#6c757d','#343a40'
+	];
+
+	function cssVar(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim() || ''; }
+
+	function buildOptions() {
+		var isDark    = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+		var bodyColor = cssVar('--tblr-body-color')   || (isDark ? '#c8d3e1' : '#1d273b');
+		var borderCol = cssVar('--tblr-border-color') || (isDark ? '#3d4555' : '#e6e7e9');
+		return {
+			chart: {
+				type: 'bar', fontFamily: 'inherit', height: chartH,
+				toolbar: { show: false }, animations: { enabled: false },
+				background: 'transparent', stacked: true
+			},
+			series: series,
+			xaxis: {
+				labels: { style: { colors: bodyColor }, formatter: function(v){ return v.toLocaleString(); } },
+				axisBorder: { color: borderCol }, axisTicks: { color: borderCol }
+			},
+			yaxis: {
+				categories: labels,
+				labels: { style: { colors: bodyColor } }
+			},
+			colors: palette,
+			plotOptions: { bar: { horizontal: true, borderRadius: 3, barHeight: '65%' } },
+			dataLabels: { enabled: false },
+			legend: {
+				position: 'bottom',
+				labels: { colors: bodyColor },
+				itemMargin: { horizontal: 6, vertical: 2 }
+			},
+			grid: { borderColor: borderCol, strokeDashArray: 4 },
+			tooltip: {
+				theme: isDark ? 'dark' : 'light',
+				y: { formatter: function(v){ return v.toLocaleString(); } }
+			}
+		};
+	}
+
+	function initChart() {
+		var chart = new ApexCharts(document.getElementById('chart-products-by-customer'), buildOptions());
+		chart.render();
+		document.documentElement.addEventListener('si-theme-changed', function () {
+			chart.updateOptions(buildOptions(), true, true);
+		});
+	}
+
+	if (typeof ApexCharts !== 'undefined') { initChart(); }
+	else {
+		var s = document.createElement('script');
+		s.src = 'https://cdn.jsdelivr.net/npm/apexcharts@latest/dist/apexcharts.min.js';
+		s.onload = initChart; document.head.appendChild(s);
+	}
+})();
+</script>
+@endif

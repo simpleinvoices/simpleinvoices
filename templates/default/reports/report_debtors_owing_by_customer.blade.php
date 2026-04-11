@@ -2,18 +2,14 @@
 	$data = $data ?? [];
 	$total_owed = $total_owed ?? 0;
 	$customer_count = count($data);
+	// Sort by owing for chart (descending), top 15
+	$chart_data = $data;
+	usort($chart_data, function($a,$b){ return ($b['inv_owing'] ?? 0) <=> ($a['inv_owing'] ?? 0); });
+	$chart_data = array_slice($chart_data, 0, 15);
+	$chartHeight = max(200, min(480, count($chart_data) * 36 + 60));
 @endphp
 
 <div class="card">
-	<div class="card-header">
-		<span class="avatar avatar-sm bg-red-lt me-2 rounded"><i class="ti ti-user-dollar text-red"></i></span>
-		<h3 class="card-title">{{ $LANG['total_owed_per_customer'] ?? '' }}</h3>
-		<div class="card-options">
-			<a href="index.php?module=reports&view=index" class="btn btn-sm btn-outline-secondary">
-				<i class="ti ti-arrow-left me-1"></i>{{ $LANG['reports'] ?? 'Reports' }}
-			</a>
-		</div>
-	</div>
 
 	{{-- Summary stats --}}
 	<div class="card-body border-bottom">
@@ -32,6 +28,13 @@
 			</div>
 		</div>
 	</div>
+
+	@if(count($chart_data) > 0)
+	{{-- Chart: horizontal bar of customer debts --}}
+	<div class="card-body border-bottom p-2">
+		<div id="chart-owing-customer" style="min-height:{{ $chartHeight }}px;"></div>
+	</div>
+	@endif
 
 	<div class="table-responsive">
 		<table class="table table-vcenter table-hover card-table">
@@ -64,3 +67,57 @@
 		</table>
 	</div>
 </div>
+
+@if(count($chart_data) > 0)
+<script>
+(function () {
+	var labels  = @json(array_column($chart_data, 'customer'));
+	var amounts = @json(array_map(function($r){ return (float)($r['inv_owing'] ?? 0); }, $chart_data));
+	var owingLbl = @json($LANG['owing'] ?? 'Owing');
+	var chartH   = {{ $chartHeight }};
+
+	function cssVar(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim() || ''; }
+
+	function buildOptions() {
+		var isDark    = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+		var danger    = cssVar('--tblr-danger')        || '#e03131';
+		var bodyColor = cssVar('--tblr-body-color')    || (isDark ? '#c8d3e1' : '#1d273b');
+		var borderCol = cssVar('--tblr-border-color')  || (isDark ? '#3d4555' : '#e6e7e9');
+		return {
+			chart: {
+				type: 'bar', fontFamily: 'inherit', height: chartH,
+				toolbar: { show: false }, animations: { enabled: false },
+				background: 'transparent'
+			},
+			series: [{ name: owingLbl, data: amounts }],
+			xaxis: {
+				categories: labels,
+				labels: { style: { colors: bodyColor } },
+				axisBorder: { color: borderCol }, axisTicks: { color: borderCol }
+			},
+			yaxis: { labels: { style: { colors: bodyColor }, formatter: function(v){ return v.toLocaleString(); } } },
+			colors: [danger],
+			plotOptions: { bar: { horizontal: true, borderRadius: 4, barHeight: '65%' } },
+			dataLabels: { enabled: false },
+			grid: { borderColor: borderCol, strokeDashArray: 4 },
+			tooltip: { theme: isDark ? 'dark' : 'light', y: { formatter: function(v){ return v.toLocaleString(); } } }
+		};
+	}
+
+	function initChart() {
+		var chart = new ApexCharts(document.getElementById('chart-owing-customer'), buildOptions());
+		chart.render();
+		document.documentElement.addEventListener('si-theme-changed', function () {
+			chart.updateOptions(buildOptions(), true, true);
+		});
+	}
+
+	if (typeof ApexCharts !== 'undefined') { initChart(); }
+	else {
+		var s = document.createElement('script');
+		s.src = 'https://cdn.jsdelivr.net/npm/apexcharts@latest/dist/apexcharts.min.js';
+		s.onload = initChart; document.head.appendChild(s);
+	}
+})();
+</script>
+@endif

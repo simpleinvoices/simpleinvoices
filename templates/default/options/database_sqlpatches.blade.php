@@ -84,22 +84,6 @@
         <li class="step-item">Apply updates</li>
     </ul>
 
-    {{-- Backup warning --}}
-    <div class="alert alert-warning mb-4" role="alert">
-        <div class="d-flex gap-3">
-            <i class="ti ti-alert-triangle flex-shrink-0 fs-3"></i>
-            <div>
-                <strong>Please back up your database before proceeding.</strong><br>
-                While patches are applied safely, a backup lets you restore if anything goes wrong.
-                <div class="mt-2">
-                    <a href="index.php?module=options&view=backup_database" class="btn btn-sm btn-outline-warning">
-                        <i class="ti ti-database-export me-1"></i>Go to Database Backup
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
     {{-- Patches table --}}
     <div class="card mb-4">
         <div class="card-header">
@@ -138,15 +122,165 @@
                 </tbody>
             </table>
         </div>
-        <div class="card-footer d-flex justify-content-between align-items-center">
-            <span class="text-secondary small">Showing {{ $count }} patch(es) to apply</span>
-            <a href="index.php?case=run" class="btn btn-primary">
-                <i class="ti ti-player-play me-1"></i>Apply Database Updates
+        <div class="card-footer d-flex justify-content-end">
+            <a href="index.php?case=backup" class="btn btn-primary">
+                Next: Backup Database <i class="ti ti-arrow-right ms-1"></i>
             </a>
         </div>
     </div>
 
 </div>
+
+{{-- ═══════════════════════════════════════════════════════════════════════
+     MODE: backup — step 2, download backup then continue to apply
+     ═══════════════════════════════════════════════════════════════════════ --}}
+@elseif($mode === 'backup')
+
+@php $count = (int)($page['pending_count'] ?? 0); @endphp
+
+<div class="container-tight py-4">
+
+    <div class="text-center mb-5">
+        <span class="avatar avatar-xl bg-warning-lt mb-3" style="width:5rem;height:5rem;font-size:2.5rem;">
+            <i class="ti ti-database-export text-warning"></i>
+        </span>
+        <h1 class="mt-3 mb-1">Backup Your Database</h1>
+        <p class="text-secondary">Download a backup before applying patches so you can restore if anything goes wrong.</p>
+    </div>
+
+    {{-- Step pills --}}
+    <ul class="steps steps-counter mb-5">
+        <li class="step-item">Review patches</li>
+        <li class="step-item active">Backup database</li>
+        <li class="step-item">Apply updates</li>
+    </ul>
+
+    {{-- Format explainer --}}
+    <div class="alert alert-info mb-4">
+        <div class="d-flex gap-2">
+            <i class="ti ti-info-circle flex-shrink-0 mt-1"></i>
+            <div class="small">
+                <strong>SQL</strong> — a full dump of your database (structure + data).
+                Restore it with any MySQL client if something goes wrong. Best for disaster recovery.<br>
+                <strong>JSON</strong> — your data only, in a portable format.
+                Use it to migrate to a different database engine (MySQL → PostgreSQL, etc.) or import into a fresh install.
+                It does not contain table structure, so it cannot replace a SQL backup for recovery.
+            </div>
+        </div>
+    </div>
+
+    {{-- SQL download --}}
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="d-flex align-items-center gap-3">
+                <span class="avatar avatar-md bg-primary-lt rounded-3">
+                    <i class="ti ti-database-export text-primary"></i>
+                </span>
+                <div class="flex-fill">
+                    <div class="fw-semibold">SQL Backup <span class="badge bg-primary-lt text-primary ms-1">Recommended</span></div>
+                    <div class="text-secondary small">Full database dump — structure and data. Use this to restore if patches fail.</div>
+                </div>
+                <button type="button" class="btn btn-primary" id="si_patch_sql_btn" onclick="siPatchDownload('sql', this)">
+                    <i class="ti ti-download me-1"></i>Download SQL
+                </button>
+            </div>
+        </div>
+    </div>
+
+    {{-- JSON download --}}
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="d-flex align-items-center gap-3">
+                <span class="avatar avatar-md bg-teal-lt rounded-3">
+                    <i class="ti ti-file-type-json text-teal"></i>
+                </span>
+                <div class="flex-fill">
+                    <div class="fw-semibold">JSON Export</div>
+                    <div class="text-secondary small">Data only, no table structure. Useful for migration between database engines.</div>
+                </div>
+                <button type="button" class="btn btn-outline-teal" id="si_patch_json_btn" onclick="siPatchDownload('json', this)">
+                    <i class="ti ti-download me-1"></i>Download JSON
+                </button>
+            </div>
+        </div>
+    </div>
+
+    {{-- Download confirmation --}}
+    <div id="si_patch_backup_status" class="alert alert-success d-flex gap-2 mb-4 d-none">
+        <i class="ti ti-circle-check flex-shrink-0 mt-1"></i>
+        <div>Backup downloaded. You can now safely apply the database patches.</div>
+    </div>
+
+    {{-- Nav --}}
+    <div class="d-flex justify-content-between">
+        <a href="index.php" class="btn btn-ghost-secondary">
+            <i class="ti ti-arrow-left me-1"></i>Back
+        </a>
+        <a href="index.php?case=run" class="btn btn-primary">
+            <i class="ti ti-player-play me-1"></i>Apply {{ $count }} Patch{{ $count === 1 ? '' : 'es' }}
+        </a>
+    </div>
+
+</div>
+
+<script>
+function siPatchDownload(type, btn) {
+    var originalHTML = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner-border spinner-border-sm me-1" role="status"></span>Preparing\u2026';
+
+    var op  = type === 'sql' ? 'view_sql' : 'view_json';
+    var url = 'index.php?module=options&view=backup_database_ajax&op=' + op;
+
+    fetch(url)
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            if (!data.ok) {
+                btn.disabled = false;
+                btn.innerHTML = originalHTML;
+                alert(data.error || 'Download failed.');
+                return;
+            }
+
+            var today = new Date();
+            var stamp = today.getFullYear()
+                + ('0'+(today.getMonth()+1)).slice(-2)
+                + ('0'+today.getDate()).slice(-2);
+
+            var raw, filename, mime;
+            if (type === 'sql') {
+                raw      = data.raw;
+                filename = 'simple_invoices_backup_' + stamp + '.sql';
+                mime     = 'application/octet-stream';
+            } else {
+                raw      = JSON.stringify(data.data, null, 2);
+                filename = 'simple_invoices_data_' + stamp + '.json';
+                mime     = 'application/json';
+            }
+
+            var blob = new Blob([raw], { type: mime });
+            var a    = document.createElement('a');
+            a.href     = URL.createObjectURL(blob);
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(a.href);
+
+            btn.disabled = false;
+            btn.innerHTML = '<i class="ti ti-check me-1"></i>Downloaded';
+            btn.classList.add(type === 'sql' ? 'btn-success' : 'btn-outline-success');
+            if (type === 'sql') btn.classList.remove('btn-primary');
+
+            document.getElementById('si_patch_backup_status').classList.remove('d-none');
+        })
+        .catch(function(e) {
+            btn.disabled = false;
+            btn.innerHTML = originalHTML;
+            alert('Download failed: ' + e.message);
+        });
+}
+</script>
 
 {{-- ═══════════════════════════════════════════════════════════════════════
      MODE: run — patches applied, show results and redirect

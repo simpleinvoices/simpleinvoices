@@ -220,6 +220,19 @@
             'index_index' => 'title_view_index',
             'reports_index' => 'all_reports',
             'reports_report_invoice_profit' => 'profit_per_invoice',
+            'reports_report_sales_total' => 'total_sales',
+            'reports_report_sales_by_periods' => 'monthly_sales_per_year',
+            'reports_report_sales_customers_total' => 'sales_by_customers',
+            'reports_report_tax_total' => 'total_taxes',
+            'reports_report_biller_total' => 'biller_sales',
+            'reports_report_biller_by_customer' => 'biller_sales_by_customer_totals',
+            'reports_report_products_sold_total' => 'product_sales',
+            'reports_report_products_sold_by_customer' => 'products_by_customer',
+            'reports_report_debtors_by_amount' => 'debtors_by_amount_owed',
+            'reports_report_debtors_by_aging' => 'debtors_by_aging_periods',
+            'reports_report_debtors_owing_by_customer' => 'total_owed_per_customer',
+            'reports_report_debtors_aging_total' => 'total_by_aging_periods',
+            'reports_database_log' => 'database_log',
             'invoices_manage' => 'manage_invoices',
             'invoices_itemised' => 'new_invoice_itemised',
             'invoices_total' => 'new_invoice_total',
@@ -348,9 +361,13 @@
                         <a href="index.php?module=user&view=add" class="btn btn-primary">
                             <i class="ti ti-plus me-1"></i>{{ $LANG['user_add'] ?? '' }}
                         </a>
-                    @elseif(($module ?? '') == 'reports')
+                    @elseif(($module ?? '') == 'reports' && ($view ?? '') != 'index')
                         <a href="index.php?module=reports&view=index" class="btn btn-outline-secondary">
-                            {{ $LANG['all_reports'] ?? '' }}
+                            <i class="ti ti-arrow-left me-1"></i>{{ $LANG['all_reports'] ?? '' }}
+                        </a>
+                    @elseif(($module ?? '') == 'statement' && in_array(($view ?? ''), ['index', 'email'], true))
+                        <a href="index.php?module=reports&view=index" class="btn btn-outline-secondary">
+                            <i class="ti ti-arrow-left me-1"></i>{{ $LANG['all_reports'] ?? '' }}
                         </a>
                     @else
                         @php

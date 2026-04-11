@@ -144,12 +144,17 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
 		if ( ($config->authentication->enabled == 1 AND isset($auth_session->id)) OR ($config->authentication->enabled == false) )	
 		{
 			include_once('./include/sql_patches.php');
-			if (getNumberOfPatches() > 0 ) {
+			// Allow AJAX/API requests through even when patches are pending
+			// (e.g. the backup download endpoint used by the upgrade wizard)
+			$is_ajax_request = strstr($view, 'ajax') || strstr($view, 'xml') || strstr($module, 'api') || $module === 'export';
+			if (!$is_ajax_request && getNumberOfPatches() > 0 ) {
 				$view = "database_sqlpatches";
 				$module = "options";
-				
+
 				if($action == "run") {
 					runPatches();
+				} elseif($action == "backup") {
+					backupStep();
 				} else {
 					listPatches();
 				}

@@ -5,15 +5,6 @@
 @endphp
 
 <div class="card">
-	<div class="card-header">
-		<span class="avatar avatar-sm bg-indigo-lt me-2 rounded"><i class="ti ti-building-store text-indigo"></i></span>
-		<h3 class="card-title">{{ $LANG['biller_sales'] ?? '' }}</h3>
-		<div class="card-options">
-			<a href="index.php?module=reports&view=index" class="btn btn-sm btn-outline-secondary">
-				<i class="ti ti-arrow-left me-1"></i>{{ $LANG['reports'] ?? 'Reports' }}
-			</a>
-		</div>
-	</div>
 
 	{{-- Summary stats --}}
 	<div class="card-body border-bottom">
@@ -32,6 +23,13 @@
 			</div>
 		</div>
 	</div>
+
+	@if(count($data) > 0)
+	{{-- Chart: donut of sales by biller --}}
+	<div class="card-body border-bottom p-2">
+		<div id="chart-biller-total"></div>
+	</div>
+	@endif
 
 	<div class="table-responsive">
 		<table class="table table-vcenter table-hover card-table">
@@ -72,3 +70,66 @@
 		</table>
 	</div>
 </div>
+
+@if(count($data) > 0)
+<script>
+(function () {
+	var labels  = @json(array_column($data, 'name'));
+	var amounts = @json(array_map(function($r){ return (float)($r['sum_total'] ?? 0); }, $data));
+	var salesLbl = @json($LANG['total_sales'] ?? 'Total Sales');
+	var palette  = ['#4263eb','#45aaf2','#7048e8','#0ca678','#2fb344','#f59f00','#f76707','#ae3ec9'];
+
+	function cssVar(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim() || ''; }
+
+	function buildOptions() {
+		var isDark    = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+		var bodyColor = cssVar('--tblr-body-color')   || (isDark ? '#c8d3e1' : '#1d273b');
+		var borderCol = cssVar('--tblr-border-color') || (isDark ? '#3d4555' : '#e6e7e9');
+		return {
+			chart: {
+				type: 'donut', fontFamily: 'inherit', height: 280,
+				toolbar: { show: false }, animations: { enabled: false },
+				background: 'transparent'
+			},
+			series: amounts,
+			labels: labels,
+			colors: palette,
+			legend: { position: 'bottom', labels: { colors: bodyColor } },
+			dataLabels: {
+				enabled: true,
+				formatter: function(val) { return val.toFixed(1) + '%'; },
+				style: { fontSize: '11px' }
+			},
+			plotOptions: {
+				pie: { donut: { size: '60%', labels: {
+					show: true,
+					total: {
+						show: true, label: salesLbl, color: bodyColor,
+						formatter: function(w) {
+							return w.globals.seriesTotals.reduce(function(a,b){return a+b;},0).toLocaleString();
+						}
+					},
+					value: { color: bodyColor }
+				}}}
+			},
+			tooltip: { theme: isDark ? 'dark' : 'light', y: { formatter: function(v){ return v.toLocaleString(); } } }
+		};
+	}
+
+	function initChart() {
+		var chart = new ApexCharts(document.getElementById('chart-biller-total'), buildOptions());
+		chart.render();
+		document.documentElement.addEventListener('si-theme-changed', function () {
+			chart.updateOptions(buildOptions(), true, true);
+		});
+	}
+
+	if (typeof ApexCharts !== 'undefined') { initChart(); }
+	else {
+		var s = document.createElement('script');
+		s.src = 'https://cdn.jsdelivr.net/npm/apexcharts@latest/dist/apexcharts.min.js';
+		s.onload = initChart; document.head.appendChild(s);
+	}
+})();
+</script>
+@endif
