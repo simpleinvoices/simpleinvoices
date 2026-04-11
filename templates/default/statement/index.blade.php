@@ -3,16 +3,6 @@
 @if($menu != false)
 {{-- ── Filter card ─────────────────────────────────────────────────────────── --}}
 <div class="card mb-4">
-	<div class="card-header">
-		<span class="avatar avatar-sm bg-blue-lt me-2 rounded"><i class="ti ti-file-description text-blue"></i></span>
-		<h3 class="card-title">{{ $LANG['statement_of_invoices'] ?? '' }}</h3>
-		<div class="card-options">
-			<a href="index.php?module=reports&view=index" class="btn btn-sm btn-outline-secondary">
-				<i class="ti ti-arrow-left me-1"></i>{{ $LANG['reports'] ?? 'Reports' }}
-			</a>
-		</div>
-	</div>
-
 	<form name="frmpost" action="index.php?module=statement&amp;view=index" method="post">
 		<div class="card-body">
 
