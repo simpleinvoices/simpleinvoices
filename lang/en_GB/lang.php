@@ -172,6 +172,7 @@ $LANG['download_sql_backup'] = "Download SQL backup";//1
 $LANG['download_sql_backup_desc'] = "Exports your full database as a .sql file for the current database type (MySQL, PostgreSQL, or SQLite).";//1
 $LANG['draft'] = "Draft";//1
 $LANG['due'] = "Due";//1
+$LANG['unpaid'] = "Unpaid";//1
 $LANG['edit'] = "Edit";//1
 $LANG['edit_profile'] = "Edit Profile";//1
 $LANG['edit_view_tooltip'] = "Edit";//1

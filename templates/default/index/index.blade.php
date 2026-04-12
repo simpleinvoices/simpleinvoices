@@ -704,7 +704,7 @@
 <div class="row g-3 mb-3 align-items-lg-start">
     <div class="col-12 col-lg-9">
 {{-- Recent invoices (columns / actions match Manage Invoices grid; latest 5 by id, no pager/search) --}}
-<div class="card mb-3">
+<div class="card mb-3 si-dash-recent-table">
     <div class="card-header">
         <h3 class="card-title">{{ $LANG['recent_invoices'] ?? '' }}</h3>
         <div class="card-options ms-auto d-flex gap-2">
@@ -738,7 +738,9 @@
                     $isPaid = $hasStatus && $owing <= 0;
                     $isDraft = !$hasStatus;
                     $aging = (string)($inv['aging'] ?? '');
-                    if ($aging === '31-60') {
+                    if ($aging === '0-30') {
+                        $dotColor = 'secondary';
+                    } elseif ($aging === '31-60') {
                         $dotColor = 'yellow';
                     } elseif ($aging === '61-90') {
                         $dotColor = 'orange';
@@ -786,7 +788,7 @@
                             <span class="d-none d-sm-inline"><span class="status status-green">{{ $LANG['paid'] ?? '' }}</span></span>
                             <span class="d-sm-none"><span class="status status-green"><span class="status-dot"></span></span></span>
                         @else
-                            <span class="d-none d-sm-inline"><span class="status status-{{ $dotColor }}">{{ $LANG['due'] ?? '' }}</span></span>
+                            <span class="d-none d-sm-inline"><span class="status status-{{ $dotColor }}">{{ $LANG['unpaid'] ?? 'Unpaid' }}</span></span>
                             <span class="d-sm-none"><span class="status status-{{ $dotColor }}"><span class="status-dot"></span></span></span>
                         @endif
                     </td>
@@ -802,7 +804,7 @@
 </div>
 
 {{-- Recent payments (columns / actions match Manage Payments grid; latest 5 by id, no pager/search) --}}
-<div class="card mb-3 mb-lg-0">
+<div class="card mb-3 mb-lg-0 si-dash-recent-table">
     <div class="card-header">
         <h3 class="card-title">{{ $LANG['recent_payments'] ?? '' }}</h3>
         <div class="card-options ms-auto d-flex gap-2">

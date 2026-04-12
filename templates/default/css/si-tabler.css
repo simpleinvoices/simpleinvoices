@@ -606,11 +606,13 @@ td.index_table {
 .si_center { text-align: center; margin-bottom: 1rem; }
 
 /* Allow dropdown menus to overflow the table-responsive wrapper */
-.si-tabler-grid-container .table-responsive {
+.si-tabler-grid-container .table-responsive,
+.si-dash-recent-table .table-responsive {
     overflow: visible;
 }
 
-.si-tabler-grid-container .dropdown-menu {
+.si-tabler-grid-container .dropdown-menu,
+.si-dash-recent-table .dropdown-menu {
     z-index: 1050;
 }
 

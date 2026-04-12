@@ -91,7 +91,7 @@ $xml ="";
 				} elseif ($aging === '90+') {
 					$dot_color = 'red';
 				}
-				$status_html = '<span class="d-none d-sm-inline"><span class="status status-'.$dot_color.'">Unpaid</span></span><span class="d-sm-none"><span class="status status-'.$dot_color.'"><span class="status-dot"></span></span></span>';
+				$status_html = '<span class="d-none d-sm-inline"><span class="status status-'.$dot_color.'">'.($LANG['unpaid'] ?? 'Unpaid').'</span></span><span class="d-sm-none"><span class="status status-'.$dot_color.'"><span class="status-dot"></span></span></span>';
 			}
 			$xml .= "<cell><![CDATA[".$status_html."]]></cell>";
 		} else {

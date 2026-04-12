@@ -274,10 +274,12 @@ function _invoice_items_check_fk($invoice, $product, $tax, $update) {
 	$sth = $dbh->prepare('SELECT count(id) FROM '.TB_PREFIX.'products WHERE id = :id AND domain_id = :domain_id');
 	$sth->execute(array(':id' => $product, ':domain_id' => $domain_id));
 	if ($sth->fetchColumn() == 0) { return false; }
-	//Check tax id
-	$sth = $dbh->prepare('SELECT count(tax_id) FROM '.TB_PREFIX.'tax WHERE tax_id = :id AND domain_id = :domain_id');
-	$sth->execute(array(':id' => $tax, ':domain_id' => $domain_id));
-	if ($sth->fetchColumn() == 0) { return false; }
+	//Check tax id (line items may legally have no per-line tax)
+	if ($tax !== null && $tax !== '') {
+		$sth = $dbh->prepare('SELECT count(tax_id) FROM '.TB_PREFIX.'tax WHERE tax_id = :id AND domain_id = :domain_id');
+		$sth->execute(array(':id' => $tax, ':domain_id' => $domain_id));
+		if ($sth->fetchColumn() == 0) { return false; }
+	}
 
 	//All good
 	return true;
@@ -1996,9 +1998,21 @@ function insertInvoiceItem($invoice_id,$quantity,$product_id,$line_number,$line_
 		$description ="";
 	}
 
-	if ($db_server == 'mysql' && !_invoice_items_check_fk(
-		$invoice_id, $product_id, $tax['tax_id'])) {
-		return null;
+	if ($db_server == 'mysql') {
+		$tax_ids = is_array($line_item_tax_id) ? $line_item_tax_id : array($line_item_tax_id);
+		$checked_tax = false;
+		foreach ($tax_ids as $tid) {
+			if ($tid === '' || $tid === null) {
+				continue;
+			}
+			$checked_tax = true;
+			if (!_invoice_items_check_fk($invoice_id, $product_id, $tid, null)) {
+				return null;
+			}
+		}
+		if (!$checked_tax && !_invoice_items_check_fk($invoice_id, $product_id, null, null)) {
+			return null;
+		}
 	}
 	$sql = "INSERT INTO ".TB_PREFIX."invoice_items 
 			(
@@ -2205,9 +2219,21 @@ function updateInvoiceItem($id, $quantity, $product_id, $line_number, $line_item
 		$description ="";
 	}
 
-	if ($db_server == 'mysql' && !_invoice_items_check_fk(
-		null, $product_id, $tax_id, 'update')) {
-		return null;
+	if ($db_server == 'mysql') {
+		$tax_ids = is_array($line_item_tax_id) ? $line_item_tax_id : array($line_item_tax_id);
+		$checked_tax = false;
+		foreach ($tax_ids as $tid) {
+			if ($tid === '' || $tid === null) {
+				continue;
+			}
+			$checked_tax = true;
+			if (!_invoice_items_check_fk(null, $product_id, $tid, 'update')) {
+				return null;
+			}
+		}
+		if (!$checked_tax && !_invoice_items_check_fk(null, $product_id, null, 'update')) {
+			return null;
+		}
 	}
 
 	$sql = "UPDATE ".TB_PREFIX."invoice_items 
@@ -2511,23 +2537,68 @@ function checkDataExists()
 	return false;
 }
 
+/**
+ * Whether the original client request used HTTPS (works behind reverse proxies
+ * that terminate TLS and set X-Forwarded-Proto / Forwarded).
+ *
+ * Pangolin (Traefik-based) may send X-Forwarded-Proto: wss for WebSocket upgrades;
+ * that is treated as HTTPS here so invoice/CSS absolute URLs use https://.
+ *
+ * Configure your proxy to set these from the edge connection only; do not forward
+ * client-supplied X-Forwarded-* from untrusted peers.
+ */
+function si_request_is_https(): bool
+{
+	if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
+		return true;
+	}
+	if (isset($_SERVER['SERVER_PORT']) && (string) $_SERVER['SERVER_PORT'] === '443') {
+		return true;
+	}
+	$xfProto = $_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '';
+	if (is_string($xfProto) && $xfProto !== '') {
+		$first = strtolower(trim(explode(',', $xfProto)[0]));
+		// https: normal reverse proxies. wss: some stacks (e.g. Traefik behind Pangolin)
+		// send the WebSocket scheme; treat as TLS-terminated HTTPS for absolute URLs.
+		if ($first === 'https' || $first === 'wss') {
+			return true;
+		}
+	}
+	$forwarded = $_SERVER['HTTP_FORWARDED'] ?? '';
+	if (is_string($forwarded) && preg_match('/\bproto=(https|wss)\b/i', $forwarded)) {
+		return true;
+	}
+	return false;
+}
+
+/**
+ * Host for absolute URLs (public host when behind a reverse proxy).
+ */
+function si_request_public_http_host(): string
+{
+	$xfHost = $_SERVER['HTTP_X_FORWARDED_HOST'] ?? '';
+	if (is_string($xfHost) && $xfHost !== '') {
+		$first = trim(explode(',', $xfHost)[0]);
+		if ($first !== '') {
+			return $first;
+		}
+	}
+	return (string) ($_SERVER['HTTP_HOST'] ?? '');
+}
+
 function getURL()
 {
 	global $config;
 
 	$port = "";
-	$dir = dirname($_SERVER['PHP_SELF']);
+	$dir = dirname($_SERVER['PHP_SELF'] ?? '');
 	//remove incorrect slashes for WinXP etc.
  $dir = str_replace('\\','',$dir);
 
-	//set the port of http(s) section
-	if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']=='on') {
-		$_SERVER['FULL_URL'] = "https://";
-	} else {
-		$_SERVER['FULL_URL'] = "http://";
-	}
+	$_SERVER['FULL_URL'] = si_request_is_https() ? 'https://' : 'http://';
 
-	$_SERVER['FULL_URL'] .= $config->authentication->http.$_SERVER['HTTP_HOST'].$dir;
+	$host = si_request_public_http_host();
+	$_SERVER['FULL_URL'] .= $config->authentication->http . $host . $dir;
 
 	return $_SERVER['FULL_URL'];
 
