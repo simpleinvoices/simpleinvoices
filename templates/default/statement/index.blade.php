@@ -179,12 +179,14 @@
 	{{-- ── Export actions ───────────────────────────────────────────────────── --}}
 	<div class="card-body border-bottom py-2">
 		<div class="d-flex flex-wrap gap-2">
-			<a href="index.php?module=statement&amp;view=export&amp;biller_id={{ $biller_id ?? '' }}&amp;customer_id={{ urlencode($customer_id ?? '') }}&amp;start_date={{ $start_date ?? '' }}&amp;end_date={{ urlencode($end_date ?? '') }}&amp;show_only_unpaid={{ urlencode($show_only_unpaid ?? '') }}&amp;filter_by_date={{ urlencode($filter_by_date ?? '') }}&amp;format=print"
-			   class="btn btn-outline-primary btn-sm">
+			<a href="index.php?module=statement&amp;view=export&amp;biller_id={{ $biller_id ?? '' }}&amp;customer_id={{ urlencode($customer_id ?? '') }}&amp;start_date={{ urlencode($start_date ?? '') }}&amp;end_date={{ urlencode($end_date ?? '') }}&amp;show_only_unpaid={{ urlencode($show_only_unpaid ?? '') }}&amp;filter_by_date={{ urlencode($filter_by_date ?? '') }}&amp;format=print"
+			   class="btn btn-outline-primary btn-sm si-preview-link"
+			   data-preview-title="{{ $LANG['print_preview'] ?? '' }}"
+			   data-preview-pdf="index.php?module=statement&amp;view=export&amp;biller_id={{ $biller_id ?? '' }}&amp;customer_id={{ urlencode($customer_id ?? '') }}&amp;start_date={{ urlencode($start_date ?? '') }}&amp;end_date={{ urlencode($end_date ?? '') }}&amp;show_only_unpaid={{ urlencode($show_only_unpaid ?? '') }}&amp;filter_by_date={{ urlencode($filter_by_date ?? '') }}&amp;format=pdf">
 				<i class="ti ti-printer me-1"></i>{{ $LANG['print_preview'] ?? '' }}
 			</a>
 			<a href="index.php?module=statement&amp;view=export&amp;biller_id={{ $biller_id ?? '' }}&amp;customer_id={{ urlencode($customer_id ?? '') }}&amp;start_date={{ urlencode($start_date ?? '') }}&amp;end_date={{ urlencode($end_date ?? '') }}&amp;show_only_unpaid={{ urlencode($show_only_unpaid ?? '') }}&amp;filter_by_date={{ urlencode($filter_by_date ?? '') }}&amp;format=pdf"
-			   class="btn btn-outline-secondary btn-sm">
+			   class="btn btn-outline-secondary btn-sm" target="_blank" rel="noopener">
 				<i class="ti ti-file-type-pdf me-1"></i>{{ $LANG['export_pdf'] ?? '' }}
 			</a>
 			<a href="index.php?module=statement&amp;view=export&amp;biller_id={{ $biller_id ?? '' }}&amp;customer_id={{ urlencode($customer_id ?? '') }}&amp;start_date={{ urlencode($start_date ?? '') }}&amp;end_date={{ urlencode($end_date ?? '') }}&amp;show_only_unpaid={{ urlencode($show_only_unpaid ?? '') }}&amp;filter_by_date={{ urlencode($filter_by_date ?? '') }}&amp;format=file&amp;filetype=xls"

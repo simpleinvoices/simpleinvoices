@@ -34,6 +34,7 @@ $auth_session = new LegacyAuthSession('SI_Auth');
 // Legacy library that's not available via Composer
 require_once("library/paypal/paypal.class.php");
 include_once('./include/functions.php');
+include_once('./include/report_chart_guard.php');
 
 //ob_start('addCSRFProtection');
 

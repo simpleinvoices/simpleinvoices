@@ -1,10 +1,11 @@
 @php
-    $hasBillers = isset($billers) && is_array($billers) && count($billers) > 0;
-    $hasCustomers = isset($customers) && is_array($customers) && count($customers) > 0;
-    $hasProducts = isset($products) && is_array($products) && count($products) > 0;
+    // When the dashboard skips loading full entity lists (large DB), use flags from the controller.
+    $hasBillers = isset($dash_has_billers) ? (bool) $dash_has_billers : (isset($billers) && is_array($billers) && count($billers) > 0);
+    $hasCustomers = isset($dash_has_customers) ? (bool) $dash_has_customers : (isset($customers) && is_array($customers) && count($customers) > 0);
+    $hasProducts = isset($dash_has_products) ? (bool) $dash_has_products : (isset($products) && is_array($products) && count($products) > 0);
     $hasTaxRates = isset($tax_rates) && is_array($tax_rates) && count($tax_rates) > 0;
     $hasPreferences = isset($preferences) && is_array($preferences) && count($preferences) > 0;
-    $hasInvoices = isset($latest_invoices) && is_array($latest_invoices) && count($latest_invoices) > 0;
+    $hasInvoices = isset($dash_has_invoices) ? (bool) $dash_has_invoices : (isset($latest_invoices) && is_array($latest_invoices) && count($latest_invoices) > 0);
     $firstRun = !$hasBillers || !$hasCustomers || !$hasProducts || !$hasInvoices;
 @endphp
 
@@ -594,44 +595,33 @@
 @endif
 
 @if(!$firstRun)
-{{-- Charts row: monthly activity + annual totals + aging radial --}}
+{{-- Charts row: monthly + yearly + invoices paid & invoice revenue (top right) --}}
 <div class="row g-3 mb-3">
     {{-- Monthly activity chart --}}
     <div class="col-lg-6">
         <div class="card h-100">
-            <div class="card-header">
-                <div>
-                    <h3 class="card-title">{{ $LANG['invoices'] ?? '' }} &amp; {{ $LANG['payments'] ?? '' }}</h3>
-                    <div class="card-subtitle">{{ $LANG['monthly_activity'] ?? '' }}</div>
-                </div>
+            <div class="card-header py-2 align-items-center">
+                <h3 class="card-title mb-0">{{ $LANG['dash_chart_title_monthly'] ?? 'Monthly' }}</h3>
                 <div class="card-options ms-auto">
-                    @if(count($chart_years ?? []) > 5)
                     <div id="chart-year-selector">
                         <div class="dropdown">
                             <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="chart-year-btn">
-                                {{ $chart_current_year ?? '' }}
+                                {{ $LANG['dash_chart_last_12_months'] ?? 'Last 12 months' }}
                             </button>
                             <div class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item active" href="#" data-period="last12">{{ $LANG['dash_chart_last_12_months'] ?? 'Last 12 months' }}</a>
+                                @if(count($chart_years ?? []) > 0)
+                                <div class="dropdown-divider"></div>
                                 @foreach(array_reverse($chart_years ?? []) as $y)
-                                <a class="dropdown-item{{ $y === ($chart_current_year ?? 0) ? ' active' : '' }}"
-                                   href="#" data-year="{{ $y }}">{{ $y }}</a>
+                                <a class="dropdown-item" href="#" data-year="{{ $y }}">{{ $y }}</a>
                                 @endforeach
+                                @endif
                             </div>
                         </div>
                     </div>
-                    @else
-                    <div class="segmented-control" id="chart-year-selector">
-                        @foreach(($chart_years ?? []) as $y)
-                        <label class="segmented-control-item">
-                            <input type="radio" class="segmented-control-input" name="chart_year" value="{{ $y }}"{{ $y === ($chart_current_year ?? 0) ? ' checked' : '' }}>
-                            <span class="segmented-control-label">{{ $y }}</span>
-                        </label>
-                        @endforeach
-                    </div>
-                    @endif
                 </div>
             </div>
-            <div class="card-body">
+            <div class="card-body py-2">
                 <div id="chart-dashboard" style="min-height:200px"></div>
             </div>
         </div>
@@ -639,159 +629,87 @@
     {{-- Annual totals bar chart --}}
     <div class="col-lg-3">
         <div class="card h-100">
-            <div class="card-header">
-                <div>
-                    <h3 class="card-title">{{ $LANG['invoices'] ?? '' }} &amp; {{ $LANG['payments'] ?? '' }}</h3>
-                    <div class="card-subtitle">Annual totals</div>
-                </div>
+            <div class="card-header py-2">
+                <h3 class="card-title mb-0">{{ $LANG['dash_chart_title_yearly'] ?? 'Yearly' }}</h3>
             </div>
-            <div class="card-body">
+            <div class="card-body py-2">
                 <div id="chart-annual" style="min-height:200px"></div>
             </div>
         </div>
     </div>
-    {{-- Debtor aging radial chart --}}
-    <div class="col-lg-3">
-        <div class="card h-100 @if(!empty($dash_aging_all_clear)) border border-success border-opacity-25 @endif overflow-hidden">
-            @if(!empty($dash_aging_all_clear))
-                <div class="card-status-top bg-success"></div>
-            @endif
-            <div class="card-header">
-                <div>
-                    <h3 class="card-title d-flex align-items-center flex-wrap gap-2">
-                        <span>Debtor Aging</span>
-                        @if(!empty($dash_aging_all_clear))
-                            <span class="badge bg-success-lt text-success border border-success border-opacity-25" title="{{ $LANG['paid'] ?? 'Paid' }}">
-                                <i class="ti ti-check"></i>
-                            </span>
-                        @endif
-                    </h3>
-                    <div class="card-subtitle">
-                        @if(!empty($dash_aging_all_clear))
-                            <span class="text-success fw-medium">{{ $LANG['dash_aging_no_outstanding'] ?? 'No outstanding receivables' }}</span>
-                            <span class="text-secondary d-block small mt-1">{{ $LANG['dash_aging_all_clear_sub'] ?? 'Nothing owing by age — all invoices are fully paid.' }}</span>
-                        @else
-                            Outstanding by age &mdash; total {{ siLocal::number($aging_total ?? 0) }}
-                        @endif
+    {{-- Invoices Paid + Invoice Revenue: two equal vertical halves matching height of Monthly/Yearly cards (incl. gutter) --}}
+    <div class="col-lg-3 d-flex flex-column">
+        <div class="d-flex flex-column gap-3 flex-grow-1" style="min-height:0">
+            <div class="d-flex flex-column" style="min-height:0;flex:1 1 0">
+                {{-- % Invoices Paid (success chrome matches Debtor Aging when all paid) --}}
+                <div class="card h-100 d-flex flex-column @if(!empty($dash_all_invoices_paid)) border border-success border-opacity-25 @endif overflow-hidden">
+                    @if(!empty($dash_all_invoices_paid))
+                        <div class="card-status-top bg-success flex-shrink-0"></div>
+                    @endif
+                    @if(!empty($dash_all_invoices_paid))
+                        <div class="card-header py-2 px-3 flex-shrink-0">
+                            <div class="d-flex align-items-center flex-wrap gap-2">
+                                <span class="text-uppercase text-secondary fw-semibold" style="font-size:.65rem;letter-spacing:.08em">Invoices Paid</span>
+                                <span class="badge bg-success-lt text-success border border-success border-opacity-25" title="{{ $LANG['paid'] ?? 'Paid' }}">
+                                    <i class="ti ti-check"></i>
+                                </span>
+                                <a href="index.php?module=reports&amp;view=report_debtors_by_aging" class="ms-auto text-secondary lh-1" title="{{ $LANG['run_report'] ?? 'Run report' }}">
+                                    <i class="ti ti-window-maximize" style="font-size:.9rem"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-body py-2 px-3 d-flex flex-column flex-grow-1 justify-content-center">
+                    @else
+                        <div class="card-body py-2 px-3 d-flex flex-column flex-grow-1 justify-content-center">
+                            <div class="d-flex align-items-center mb-1 flex-shrink-0">
+                                <span class="text-uppercase text-secondary fw-semibold" style="font-size:.65rem;letter-spacing:.08em">Invoices Paid</span>
+                                <a href="index.php?module=reports&amp;view=report_debtors_by_aging" class="ms-auto text-secondary lh-1" title="{{ $LANG['run_report'] ?? 'Run report' }}">
+                                    <i class="ti ti-window-maximize" style="font-size:.9rem"></i>
+                                </a>
+                            </div>
+                    @endif
+                        <div class="h1 mb-1">{{ $dash_paid_pct ?? 0 }}%</div>
+                        <div class="text-secondary small mb-2">
+                            {{ $dash_paid_inv_count ?? 0 }} of {{ $dash_total_inv_count ?? 0 }} invoices fully paid
+                        </div>
+                        <div class="progress flex-shrink-0" style="height:6px">
+                            <div class="progress-bar bg-primary" role="progressbar"
+                                 style="width:{{ $dash_paid_pct ?? 0 }}%"
+                                 aria-valuenow="{{ $dash_paid_pct ?? 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="card-body d-flex align-items-center justify-content-center position-relative">
-                @if(!empty($dash_aging_all_clear))
-                    <div class="text-center py-2 px-2 w-100">
-                        <span class="avatar avatar-xl bg-success-lt text-success mb-2">
-                            <i class="ti ti-circle-check fs-1"></i>
-                        </span>
+            <div class="d-flex flex-column" style="min-height:0;flex:1 1 0">
+                <div class="card overflow-hidden h-100 d-flex flex-column">
+                    <div class="card-body py-2 px-3 pb-1 flex-shrink-0">
+                        <div class="d-flex align-items-center mb-1">
+                            <span class="text-uppercase text-secondary fw-semibold" style="font-size:.65rem;letter-spacing:.08em">Invoice Revenue</span>
+                            <a href="index.php?module=reports&amp;view=report_sales_total" class="ms-auto text-secondary lh-1" title="{{ $LANG['run_report'] ?? 'Run report' }}">
+                                <i class="ti ti-window-maximize" style="font-size:.9rem"></i>
+                            </a>
+                        </div>
+                        <div class="h2 mb-0">{{ siLocal::number($dash_alltime_inv_total ?? 0) }}</div>
                     </div>
-                @else
-                    <div id="chart-aging" style="min-height:200px;width:100%"></div>
-                @endif
+                    <div class="mt-auto w-100 flex-shrink-0">
+                        <div id="sparkline-invoices" style="height:40px"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-{{-- Dashboard stat cards --}}
-<div class="row g-3 mb-3">
-
-    {{-- Card 1: % Invoices Paid (success chrome matches Debtor Aging card when all paid) --}}
-    <div class="col-6 col-lg-3">
-        <div class="card h-100 @if(!empty($dash_all_invoices_paid)) border border-success border-opacity-25 @endif overflow-hidden">
-            @if(!empty($dash_all_invoices_paid))
-                <div class="card-status-top bg-success"></div>
-            @endif
-            @if(!empty($dash_all_invoices_paid))
-                <div class="card-header py-2 px-3">
-                    <div class="d-flex align-items-center flex-wrap gap-2">
-                        <span class="text-uppercase text-secondary fw-semibold" style="font-size:.65rem;letter-spacing:.08em">Invoices Paid</span>
-                        <span class="badge bg-success-lt text-success border border-success border-opacity-25" title="{{ $LANG['paid'] ?? 'Paid' }}">
-                            <i class="ti ti-check"></i>
-                        </span>
-                        <a href="index.php?module=reports&amp;view=report_debtors_by_aging" target="_blank" rel="noopener" class="ms-auto text-secondary lh-1" title="Open report">
-                            <i class="ti ti-external-link" style="font-size:.9rem"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="card-body py-2 px-3">
-            @else
-                <div class="card-body py-2 px-3">
-                    <div class="d-flex align-items-center mb-1">
-                        <span class="text-uppercase text-secondary fw-semibold" style="font-size:.65rem;letter-spacing:.08em">Invoices Paid</span>
-                        <a href="index.php?module=reports&amp;view=report_debtors_by_aging" target="_blank" rel="noopener" class="ms-auto text-secondary lh-1" title="Open report">
-                            <i class="ti ti-external-link" style="font-size:.9rem"></i>
-                        </a>
-                    </div>
-            @endif
-                <div class="h1 mb-1">{{ $dash_paid_pct ?? 0 }}%</div>
-                <div class="text-secondary small mb-3">
-                    {{ $dash_paid_inv_count ?? 0 }} of {{ $dash_total_inv_count ?? 0 }} invoices fully paid
-                </div>
-                <div class="progress" style="height:6px">
-                    <div class="progress-bar bg-primary" role="progressbar"
-                         style="width:{{ $dash_paid_pct ?? 0 }}%"
-                         aria-valuenow="{{ $dash_paid_pct ?? 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- Card 2: Invoice Revenue sparkline --}}
-    <div class="col-6 col-lg-3">
-        <div class="card overflow-hidden">
-            <div class="card-body py-2 px-3 pb-1">
-                <div class="d-flex align-items-center mb-1">
-                    <span class="text-uppercase text-secondary fw-semibold" style="font-size:.65rem;letter-spacing:.08em">Invoice Revenue</span>
-                    <a href="index.php?module=reports&amp;view=report_sales_total" target="_blank" rel="noopener" class="ms-auto text-secondary lh-1" title="Open report">
-                        <i class="ti ti-external-link" style="font-size:.9rem"></i>
-                    </a>
-                </div>
-                <div class="h2 mb-0">{{ siLocal::number($dash_alltime_inv_total ?? 0) }}</div>
-            </div>
-            <div id="sparkline-invoices" style="height:40px"></div>
-        </div>
-    </div>
-
-    {{-- Card 3: Payment Revenue sparkline --}}
-    <div class="col-6 col-lg-3">
-        <div class="card overflow-hidden">
-            <div class="card-body py-2 px-3 pb-1">
-                <div class="d-flex align-items-center mb-1">
-                    <span class="text-uppercase text-secondary fw-semibold" style="font-size:.65rem;letter-spacing:.08em">Payments</span>
-                    <a href="index.php?module=reports&amp;view=report_sales_by_periods" target="_blank" rel="noopener" class="ms-auto text-secondary lh-1" title="Open report">
-                        <i class="ti ti-external-link" style="font-size:.9rem"></i>
-                    </a>
-                </div>
-                <div class="h2 mb-0">{{ siLocal::number($dash_alltime_pmt_total ?? 0) }}</div>
-            </div>
-            <div id="sparkline-payments" style="height:40px"></div>
-        </div>
-    </div>
-
-    {{-- Card 4: Invoice & Payment Volume (count) --}}
-    <div class="col-6 col-lg-3">
-        <div class="card overflow-hidden">
-            <div class="card-body py-2 px-3 pb-1">
-                <div class="d-flex align-items-center mb-1">
-                    <span class="text-uppercase text-secondary fw-semibold" style="font-size:.65rem;letter-spacing:.08em">Invoice &amp; Payment Volume</span>
-                    <a href="index.php?module=reports&amp;view=report_sales_by_periods" target="_blank" rel="noopener" class="ms-auto text-secondary lh-1" title="Open report">
-                        <i class="ti ti-external-link" style="font-size:.9rem"></i>
-                    </a>
-                </div>
-                <div class="h2 mb-0">{{ number_format($dash_total_inv_volume ?? 0) }} <span class="fs-6 fw-normal text-secondary">inv &middot; {{ number_format($dash_total_pmt_volume ?? 0) }} pmt</span></div>
-            </div>
-            <div id="sparkline-volume" style="height:40px"></div>
-        </div>
-    </div>
-
-</div>
-
-{{-- Recent invoices --}}
+{{-- Recent lists + sidebar: Payments, Debtor Aging, Volume --}}
+<div class="row g-3 mb-3 align-items-lg-start">
+    <div class="col-12 col-lg-9">
+{{-- Recent invoices (columns / actions match Manage Invoices grid; latest 5 by id, no pager/search) --}}
 <div class="card mb-3">
     <div class="card-header">
         <h3 class="card-title">{{ $LANG['recent_invoices'] ?? '' }}</h3>
         <div class="card-options ms-auto d-flex gap-2">
             <a href="index.php?module=invoices&amp;view=manage" class="btn btn-outline-secondary btn-sm">
-                {{ $LANG['view_all'] ?? '' }}
+                <i class="ti ti-window-maximize me-1"></i>{{ $LANG['view_all'] ?? '' }}
             </a>
             <a href="index.php?module=invoices&amp;view=itemised" class="btn btn-primary btn-sm">
                 <i class="ti ti-plus me-1"></i>{{ $LANG['add_new_invoice'] ?? '' }}
@@ -802,53 +720,75 @@
         <table class="table table-vcenter table-hover card-table">
             <thead>
                 <tr>
+                    <th class="w-1"></th>
                     <th>{{ $LANG['id'] ?? '' }}</th>
+                    <th class="d-none d-sm-table-cell">{{ $LANG['biller'] ?? '' }}</th>
                     <th>{{ $LANG['customer'] ?? '' }}</th>
-                    <th>{{ $LANG['biller'] ?? '' }}</th>
-                    <th>{{ $LANG['date_upper'] ?? '' }}</th>
+                    <th class="d-none d-sm-table-cell text-end">{{ $LANG['date_upper'] ?? '' }}</th>
                     <th class="text-end">{{ $LANG['total'] ?? '' }}</th>
-                    <th>{{ $LANG['status'] ?? '' }}</th>
-                    <th></th>
+                    <th class="text-center">{{ $LANG['status'] ?? '' }}</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse(($latest_invoices ?? []) as $inv)
                 @php
-                    $isPaid  = ($inv['status'] ?? 0) && ($inv['owing'] ?? 0) <= 0;
-                    $isDraft = !($inv['status'] ?? 0);
-                    $currency = $preference['pref_currency_sign'] ?? '';
+                    $rowId = (int)($inv['id']);
+                    $owing = (float)($inv['owing'] ?? 0);
+                    $hasStatus = !empty($inv['status']);
+                    $isPaid = $hasStatus && $owing <= 0;
+                    $isDraft = !$hasStatus;
+                    $aging = (string)($inv['aging'] ?? '');
+                    if ($aging === '31-60') {
+                        $dotColor = 'yellow';
+                    } elseif ($aging === '61-90') {
+                        $dotColor = 'orange';
+                    } elseif ($aging === '90+') {
+                        $dotColor = 'red';
+                    } else {
+                        $dotColor = 'secondary';
+                    }
+                    $invPdfUrl = 'index.php?module=export&view=invoice&id=' . $rowId . '&format=pdf';
+                    $printTitle = ($LANG['print_preview_tooltip'] ?? '') . ' ' . ($inv['index_name'] ?? '');
                 @endphp
                 <tr>
-                    <td>
-                        <a href="index.php?module=invoices&amp;view=quick_view&amp;id={{ urlencode($inv['id']) }}">
-                            {{ ($inv['preference'] ?? $inv['pref_description'] ?? '') }} {{ $inv['index_id'] ?? '' }}
-                        </a>
-                    </td>
-                    <td>{{ $inv['customer'] ?? '' }}</td>
-                    <td class="text-secondary">{{ $inv['biller'] ?? '' }}</td>
-                    <td class="text-secondary">{{ $inv['date'] ?? '' }}</td>
-                    <td class="text-end">{{ siLocal::number($inv['invoice_total'] ?? 0) }}</td>
-                    <td>
-                        @if($isDraft)
-                            <span class="status status-secondary"><span class="status-dot"></span>{{ $LANG['draft'] ?? '' }}</span>
-                        @elseif($isPaid)
-                            <span class="status status-green">{{ $LANG['paid'] ?? '' }}</span>
-                        @else
-                            <span class="status status-orange">{{ $LANG['due'] ?? '' }}</span>
-                        @endif
-                    </td>
                     <td class="w-1">
-                        <div class="btn-group">
-                            <a href="index.php?module=invoices&amp;view=quick_view&amp;id={{ urlencode($inv['id']) }}" class="btn btn-outline-secondary btn-sm" title="{{ $LANG['quick_view'] ?? '' }}">
-                                <i class="ti ti-eye"></i>
+                        <div class="dropdown">
+                            <a class="btn btn-outline-secondary dropdown-toggle btn-sm-mobile" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="d-none d-sm-inline-flex align-items-center"><i class="ti ti-settings me-1"></i>{{ $LANG['actions'] ?? '' }}</span>
+                                <span class="d-sm-none"><i class="ti ti-dots-vertical" aria-hidden="true"></i></span>
                             </a>
-                            <a href="index.php?module=export&amp;view=invoice&amp;id={{ urlencode($inv['id']) }}&amp;format=pdf" class="btn btn-outline-secondary btn-sm" title="{{ $LANG['export_pdf'] ?? '' }}" target="_blank" rel="noopener">
-                                <i class="ti ti-file-type-pdf"></i>
-                            </a>
-                            <a href="index.php?module=invoices&amp;view=manage" class="btn btn-outline-secondary btn-sm" title="{{ $LANG['manage_invoices'] ?? '' }}">
-                                <i class="ti ti-list"></i>
-                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item" href="index.php?module=invoices&amp;view=quick_view&amp;id={{ $rowId }}"><i class="ti ti-eye me-2"></i>{{ $LANG['quick_view_tooltip'] ?? '' }} {{ $inv['index_name'] ?? '' }}</a>
+                                <a class="dropdown-item" href="index.php?module=invoices&amp;view=details&amp;id={{ $rowId }}&amp;action=view"><i class="ti ti-edit me-2"></i>{{ $LANG['edit_view_tooltip'] ?? '' }} {{ $inv['index_name'] ?? '' }}</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item si-preview-link" href="index.php?module=export&amp;view=invoice&amp;id={{ $rowId }}&amp;format=print" data-preview-title="{{ e($printTitle) }}" data-preview-pdf="{{ e($invPdfUrl) }}"><i class="ti ti-printer me-2"></i>{{ $LANG['print_preview_tooltip'] ?? '' }} {{ $inv['index_name'] ?? '' }}</a>
+                                <a class="dropdown-item invoice_export_dialog" href="#" rel="{{ $rowId }}"><i class="ti ti-file-export me-2"></i>{{ $LANG['export_tooltip'] ?? '' }} {{ $inv['index_name'] ?? '' }}</a>
+                                <div class="dropdown-divider"></div>
+                                @if($hasStatus && $owing > 0)
+                                <a class="dropdown-item" href="index.php?module=payments&amp;view=process&amp;id={{ $rowId }}&amp;op=pay_selected_invoice"><i class="ti ti-cash me-2"></i>{{ $LANG['process_payment_for'] ?? '' }} {{ $inv['index_name'] ?? '' }}</a>
+                                @elseif($hasStatus)
+                                <a class="dropdown-item" href="index.php?module=payments&amp;view=details&amp;id={{ $rowId }}&amp;action=view"><i class="ti ti-receipt me-2"></i>{{ $LANG['process_payment_for'] ?? '' }} {{ $inv['index_name'] ?? '' }}</a>
+                                @endif
+                                <a class="dropdown-item" href="index.php?module=invoices&amp;view=email&amp;stage=1&amp;id={{ $rowId }}"><i class="ti ti-mail-forward me-2"></i>{{ $LANG['email'] ?? '' }} {{ $inv['index_name'] ?? '' }}</a>
+                            </div>
                         </div>
+                    </td>
+                    <td>{{ $inv['index_name'] ?? '' }}</td>
+                    <td class="d-none d-sm-table-cell">{{ $inv['biller'] ?? '' }}</td>
+                    <td>{{ $inv['customer'] ?? '' }}</td>
+                    <td class="d-none d-sm-table-cell text-end text-secondary">{{ siLocal::date($inv['date'] ?? '') }}</td>
+                    <td class="text-end">{{ siLocal::number($inv['invoice_total'] ?? 0) }}</td>
+                    <td class="text-center">
+                        @if($isDraft)
+                            <span class="d-none d-sm-inline"><span class="status status-secondary"><span class="status-dot"></span>{{ $LANG['draft'] ?? '' }}</span></span>
+                            <span class="d-sm-none"><span class="status status-secondary"><span class="status-dot"></span></span></span>
+                        @elseif($isPaid)
+                            <span class="d-none d-sm-inline"><span class="status status-green">{{ $LANG['paid'] ?? '' }}</span></span>
+                            <span class="d-sm-none"><span class="status status-green"><span class="status-dot"></span></span></span>
+                        @else
+                            <span class="d-none d-sm-inline"><span class="status status-{{ $dotColor }}">{{ $LANG['due'] ?? '' }}</span></span>
+                            <span class="d-sm-none"><span class="status status-{{ $dotColor }}"><span class="status-dot"></span></span></span>
+                        @endif
                     </td>
                 </tr>
                 @empty
@@ -861,13 +801,13 @@
     </div>
 </div>
 
-{{-- Recent payments --}}
-<div class="card mb-3">
+{{-- Recent payments (columns / actions match Manage Payments grid; latest 5 by id, no pager/search) --}}
+<div class="card mb-3 mb-lg-0">
     <div class="card-header">
         <h3 class="card-title">{{ $LANG['recent_payments'] ?? '' }}</h3>
         <div class="card-options ms-auto d-flex gap-2">
             <a href="index.php?module=payments&amp;view=manage" class="btn btn-outline-secondary btn-sm">
-                {{ $LANG['view_all'] ?? '' }}
+                <i class="ti ti-window-maximize me-1"></i>{{ $LANG['view_all'] ?? '' }}
             </a>
             <a href="index.php?module=payments&amp;view=process&amp;op=pay_invoice" class="btn btn-primary btn-sm">
                 <i class="ti ti-plus me-1"></i>{{ $LANG['add_new_payment'] ?? '' }}
@@ -878,44 +818,146 @@
         <table class="table table-vcenter table-hover card-table">
             <thead>
                 <tr>
-                    <th>{{ $LANG['invoice'] ?? '' }}</th>
+                    <th class="w-1"></th>
+                    <th>{{ $LANG['payment'] ?? '' }}</th>
+                    <th class="d-none d-sm-table-cell">{{ $LANG['invoice'] ?? '' }}</th>
                     <th>{{ $LANG['customer'] ?? '' }}</th>
-                    <th>{{ $LANG['biller'] ?? '' }}</th>
-                    <th>{{ $LANG['date_upper'] ?? '' }}</th>
+                    <th class="d-none d-sm-table-cell">{{ $LANG['biller'] ?? '' }}</th>
                     <th class="text-end">{{ $LANG['amount'] ?? '' }}</th>
-                    <th></th>
+                    <th class="text-center d-none d-sm-table-cell">{{ $LANG['date_upper'] ?? '' }}</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse(($latest_payments ?? []) as $pmt)
+                @php
+                    $pmtId = (int)($pmt['id']);
+                    $payPdfUrl = 'index.php?module=export&view=payment&id=' . $pmtId . '&format=pdf';
+                    $payPrintTitle = ($LANG['print_preview_tooltip'] ?? '') . ' ' . ($pmt['index_name'] ?? '');
+                @endphp
                 <tr>
-                    <td>
-                        <a href="index.php?module=invoices&amp;view=quick_view&amp;id={{ urlencode($pmt['ac_inv_id']) }}">
-                            {{ ($pmt['preference'] ?? $pmt['pref_description'] ?? '') }} {{ $pmt['index_id'] ?? '' }}
-                        </a>
-                    </td>
-                    <td>{{ $pmt['customer'] ?? '' }}</td>
-                    <td class="text-secondary">{{ $pmt['biller'] ?? '' }}</td>
-                    <td class="text-secondary">{{ $pmt['ac_date'] ?? '' }}</td>
-                    <td class="text-end">{{ siLocal::number($pmt['ac_amount'] ?? 0) }}</td>
                     <td class="w-1">
-                        <div class="btn-group">
-                            <a href="index.php?module=invoices&amp;view=quick_view&amp;id={{ urlencode($pmt['ac_inv_id']) }}" class="btn btn-outline-secondary btn-sm" title="{{ $LANG['quick_view'] ?? '' }}">
-                                <i class="ti ti-eye"></i>
+                        <div class="dropdown">
+                            <a class="btn btn-outline-secondary dropdown-toggle btn-sm-mobile" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="d-none d-sm-inline-flex align-items-center"><i class="ti ti-settings me-1"></i>{{ $LANG['actions'] ?? '' }}</span>
+                                <span class="d-sm-none"><i class="ti ti-dots-vertical" aria-hidden="true"></i></span>
                             </a>
-                            <a href="index.php?module=payments&amp;view=manage" class="btn btn-outline-secondary btn-sm" title="{{ $LANG['manage_payments'] ?? '' }}">
-                                <i class="ti ti-list"></i>
-                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item" href="index.php?module=payments&amp;view=details&amp;id={{ $pmtId }}&amp;action=view"><i class="ti ti-eye me-2"></i>{{ $LANG['view'] ?? '' }} {{ $pmt['index_name'] ?? $pmtId }}</a>
+                                <a class="dropdown-item si-preview-link" href="index.php?module=payments&amp;view=print&amp;id={{ $pmtId }}" data-preview-title="{{ e($payPrintTitle) }}" data-preview-pdf="{{ e($payPdfUrl) }}"><i class="ti ti-printer me-2"></i>{{ $LANG['print_preview_tooltip'] ?? '' }} {{ $pmt['index_name'] ?? $pmtId }}</a>
+                            </div>
                         </div>
                     </td>
+                    <td>{{ $pmtId }}</td>
+                    <td class="d-none d-sm-table-cell">{{ $pmt['index_name'] ?? '' }}</td>
+                    <td>{{ $pmt['cname'] ?? '' }}</td>
+                    <td class="d-none d-sm-table-cell">{{ $pmt['bname'] ?? '' }}</td>
+                    <td class="text-end">{{ siLocal::number($pmt['ac_amount'] ?? 0) }}</td>
+                    <td class="text-center text-secondary d-none d-sm-table-cell">{{ siLocal::date($pmt['date'] ?? '') }}</td>
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="6" class="text-center text-secondary">{{ $LANG['no_payments_yet'] ?? '' }}</td>
+                    <td colspan="7" class="text-center text-secondary">{{ $LANG['no_payments_yet'] ?? '' }}</td>
                 </tr>
                 @endforelse
             </tbody>
         </table>
+    </div>
+</div>
+    </div>
+    <div class="col-12 col-lg-3">
+        <div class="row g-3">
+    {{-- Payment Revenue sparkline --}}
+    <div class="col-6 col-lg-12">
+        <div class="card overflow-hidden">
+            <div class="card-body py-2 px-3 pb-1">
+                <div class="d-flex align-items-center mb-1">
+                    <span class="text-uppercase text-secondary fw-semibold" style="font-size:.65rem;letter-spacing:.08em">Payments</span>
+                    <a href="index.php?module=reports&amp;view=report_sales_by_periods" class="ms-auto text-secondary lh-1" title="{{ $LANG['run_report'] ?? 'Run report' }}">
+                        <i class="ti ti-window-maximize" style="font-size:.9rem"></i>
+                    </a>
+                </div>
+                <div class="h2 mb-0">{{ siLocal::number($dash_alltime_pmt_total ?? 0) }}</div>
+            </div>
+            <div id="sparkline-payments" style="height:40px"></div>
+        </div>
+    </div>
+
+    {{-- Debtor aging radial (moved from charts row; below Payments) --}}
+    <div class="col-12 col-lg-12">
+        <div class="card h-100 @if(!empty($dash_aging_all_clear)) border border-success border-opacity-25 @endif overflow-hidden">
+            @if(!empty($dash_aging_all_clear))
+                <div class="card-status-top bg-success"></div>
+            @endif
+            <div class="card-header py-2 align-items-center">
+                <h3 class="card-title mb-0 d-flex align-items-center flex-wrap gap-2">
+                    <span>{{ $LANG['dash_chart_title_debtor_aging'] ?? 'Debtor Aging' }}</span>
+                    @if(!empty($dash_aging_all_clear))
+                        <span class="badge bg-success-lt text-success border border-success border-opacity-25" title="{{ $LANG['paid'] ?? 'Paid' }}">
+                            <i class="ti ti-check"></i>
+                        </span>
+                    @endif
+                </h3>
+                <div class="card-options ms-auto">
+                    <a href="index.php?module=reports&amp;view=report_debtors_by_aging" class="text-secondary lh-1" title="{{ $LANG['run_report'] ?? 'Run report' }}">
+                        <i class="ti ti-window-maximize" style="font-size:.9rem"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="card-body py-2 d-flex align-items-center justify-content-center position-relative">
+                @if(!empty($dash_aging_all_clear))
+                    <div class="text-center px-2 w-100">
+                        <span class="avatar avatar-xl bg-success-lt text-success mb-2">
+                            <i class="ti ti-circle-check fs-1"></i>
+                        </span>
+                    </div>
+                @else
+                    <div id="chart-aging" style="min-height:200px;width:100%"></div>
+                @endif
+            </div>
+        </div>
+    </div>
+
+    {{-- Invoice & Payment Volume (count) --}}
+    <div class="col-6 col-lg-12">
+        <div class="card overflow-hidden">
+            <div class="card-body py-2 px-3 pb-1">
+                <div class="d-flex align-items-center mb-1">
+                    <span class="text-uppercase text-secondary fw-semibold" style="font-size:.65rem;letter-spacing:.08em">Invoice &amp; Payment Volume</span>
+                    <a href="index.php?module=reports&amp;view=report_sales_by_periods" class="ms-auto text-secondary lh-1" title="{{ $LANG['run_report'] ?? 'Run report' }}">
+                        <i class="ti ti-window-maximize" style="font-size:.9rem"></i>
+                    </a>
+                </div>
+                <div class="h2 mb-0">{{ number_format($dash_total_inv_volume ?? 0) }} <span class="fs-6 fw-normal text-secondary">inv &middot; {{ number_format($dash_total_pmt_volume ?? 0) }} pmt</span></div>
+            </div>
+            <div id="sparkline-volume" style="height:40px"></div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="export_dialog" tabindex="-1" aria-labelledby="export_dialog_title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="export_dialog_title">{{ $LANG['export'] ?? '' }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ $LANG['close'] ?? '' }}"></button>
+            </div>
+            <div class="modal-body d-flex gap-2 flex-wrap">
+                <a href="#" title="{{ ($LANG['export_tooltip'] ?? '') }} {{ ($LANG['export_pdf_tooltip'] ?? '') }}" class="btn btn-outline-danger export_pdf export_window">
+                    <i class="ti ti-file-certificate me-1"></i>{{ $LANG['export_pdf'] ?? '' }}
+                </a>
+                <a href="#" title="{{ ($LANG['export_tooltip'] ?? '') }} {{ ($LANG['export_xls_tooltip'] ?? '') }} .{{ $defaults['spreadsheet'] ?? 'xlsx' }}" class="btn btn-outline-success export_xls export_window">
+                    <i class="ti ti-file-spreadsheet me-1"></i>{{ $LANG['export_xls'] ?? '' }}
+                </a>
+                <a href="#" title="{{ ($LANG['export_tooltip'] ?? '') }} {{ ($LANG['export_doc_tooltip'] ?? '') }} .{{ $defaults['wordprocessor'] ?? 'docx' }}" class="btn btn-outline-primary export_doc export_window">
+                    <i class="ti ti-file-text me-1"></i>{{ $LANG['export_doc'] ?? '' }}
+                </a>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ $LANG['cancel'] ?? '' }}</button>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -924,8 +966,10 @@
 (function () {
     var labels       = @json($chart_labels ?? []);
     var datasets     = @json($chart_data ?? []);
+    var last12       = @json($chart_last12 ?? ['labels' => [], 'invoices' => [], 'payments' => []]);
     var invoiceLabel = @json($LANG['invoices'] ?? '');
     var paymentLabel = @json($LANG['payments'] ?? '');
+    var last12Label  = @json($LANG['dash_chart_last_12_months'] ?? 'Last 12 months');
     var annualTotals = @json($annual_totals ?? []);
     var annualYears  = @json($chart_years ?? []);
 
@@ -933,12 +977,23 @@
         return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
     }
 
-    function buildOptions(year) {
+    function buildOptions(period) {
         var isDark    = document.documentElement.getAttribute('data-bs-theme') === 'dark';
         var primary   = cssVar('--tblr-primary')      || '#45aaf2';
         var success   = cssVar('--tblr-success')      || '#2fb344';
         var bodyColor = cssVar('--tblr-body-color')   || '#1d273b';
         var borderCol = cssVar('--tblr-border-color') || '#e6e7e9';
+        var catLabels, invData, payData;
+        if (period === 'last12') {
+            catLabels = last12.labels || [];
+            invData   = last12.invoices || [];
+            payData   = last12.payments || [];
+        } else {
+            catLabels = labels;
+            var pack  = datasets[period] || datasets[String(period)] || { invoices: [], payments: [] };
+            invData   = pack.invoices || [];
+            payData   = pack.payments || [];
+        }
         return {
             chart: {
                 type: 'area',
@@ -949,11 +1004,11 @@
                 background: 'transparent'
             },
             series: [
-                { name: invoiceLabel, data: (datasets[year] || {invoices: [], payments: []}).invoices },
-                { name: paymentLabel, data: (datasets[year] || {invoices: [], payments: []}).payments }
+                { name: invoiceLabel, data: invData },
+                { name: paymentLabel, data: payData }
             ],
             xaxis: {
-                categories: labels,
+                categories: catLabels,
                 labels: { style: { colors: bodyColor } },
                 axisBorder: { color: borderCol },
                 axisTicks: { color: borderCol }
@@ -981,27 +1036,22 @@
         };
     }
 
-    var chart = new ApexCharts(document.getElementById('chart-dashboard'), buildOptions({{ $chart_current_year ?? 'null' }}));
+    var currentPeriod = 'last12';
+    var chart = new ApexCharts(document.getElementById('chart-dashboard'), buildOptions(currentPeriod));
     chart.render();
-
-    // Year selector — works for both segmented control and dropdown
-    var currentYear = {{ $chart_current_year ?? 'null' }};
-
-    document.querySelectorAll('#chart-year-selector input[name="chart_year"]').forEach(function (radio) {
-        radio.addEventListener('change', function () {
-            currentYear = this.value;
-            chart.updateOptions(buildOptions(currentYear), true, true);
-        });
-    });
 
     document.querySelectorAll('#chart-year-selector .dropdown-item').forEach(function (item) {
         item.addEventListener('click', function (e) {
             e.preventDefault();
-            currentYear = this.dataset.year;
-            chart.updateOptions(buildOptions(currentYear), true, true);
-            // Update button label and active state
             var btn = document.getElementById('chart-year-btn');
-            if (btn) btn.textContent = currentYear;
+            if (this.dataset.period === 'last12') {
+                currentPeriod = 'last12';
+                if (btn) btn.textContent = last12Label;
+            } else if (this.dataset.year !== undefined && this.dataset.year !== '') {
+                currentPeriod = parseInt(this.dataset.year, 10);
+                if (btn) btn.textContent = String(this.dataset.year);
+            }
+            chart.updateOptions(buildOptions(currentPeriod), true, true);
             document.querySelectorAll('#chart-year-selector .dropdown-item').forEach(function (el) {
                 el.classList.toggle('active', el === item);
             });
@@ -1009,7 +1059,7 @@
     });
 
     document.documentElement.addEventListener('si-theme-changed', function () {
-        chart.updateOptions(buildOptions(currentYear), true, true);
+        chart.updateOptions(buildOptions(currentPeriod), true, true);
         annualChart.updateOptions(buildAnnualOptions(), true, true);
         if (agingChart) {
             agingChart.updateOptions(buildAgingOptions(), true, true);

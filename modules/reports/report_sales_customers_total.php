@@ -21,8 +21,20 @@
     array_push($customers, $customer);
   }
 
-  $bladeView -> assign('data', $customers);
-  $bladeView -> assign('total_sales', $total_sales);
+  $inv = si_report_active_invoice_count($auth_session->domain_id);
+  $omit = si_report_chart_guard_omit_over_invoice_max($inv);
+  if ($omit['omit']) {
+      $bladeView -> assign('data', $customers);
+      $bladeView -> assign('report_chart_data', []);
+      $bladeView -> assign('total_sales', $total_sales);
+      $bladeView -> assign('report_chart_guard', $omit['guard']);
+  } else {
+      $chart_pack = si_report_chart_top_rows_by_key($customers, 'sum_total', $inv, 1);
+      $bladeView -> assign('data', $customers);
+      $bladeView -> assign('report_chart_data', $chart_pack['rows']);
+      $bladeView -> assign('total_sales', $total_sales);
+      $bladeView -> assign('report_chart_guard', $chart_pack['guard']);
+  }
 
   $bladeView -> assign('pageActive', 'report');
   $bladeView -> assign('active_tab', '#home');

@@ -1,12 +1,11 @@
 @php
 	$data = $data ?? [];
+	$chart_data = $report_chart_data ?? $data;
+	$rg = $report_chart_guard ?? ['enabled' => true];
 	$total_owed = $total_owed ?? 0;
 	$customer_count = count($data);
-	// Sort by owing for chart (descending), top 15
-	$chart_data = $data;
-	usort($chart_data, function($a,$b){ return ($b['inv_owing'] ?? 0) <=> ($a['inv_owing'] ?? 0); });
-	$chart_data = array_slice($chart_data, 0, 15);
 	$chartHeight = max(200, min(480, count($chart_data) * 36 + 60));
+	$showChart = count($chart_data) > 0 && !empty($rg['enabled']);
 @endphp
 
 <div class="card">
@@ -29,7 +28,8 @@
 		</div>
 	</div>
 
-	@if(count($chart_data) > 0)
+	@if($showChart)
+	@include('templates.default.reports.chart_truncation_notice')
 	{{-- Chart: horizontal bar of customer debts --}}
 	<div class="card-body border-bottom p-2">
 		<div id="chart-owing-customer" style="min-height:{{ $chartHeight }}px;"></div>
@@ -68,7 +68,7 @@
 	</div>
 </div>
 
-@if(count($chart_data) > 0)
+@if($showChart)
 <script>
 (function () {
 	var labels  = @json(array_column($chart_data, 'customer'));

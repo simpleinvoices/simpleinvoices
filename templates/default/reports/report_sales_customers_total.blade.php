@@ -1,7 +1,11 @@
 @php
 	$data = $data ?? [];
+	$rg = $report_chart_guard ?? ['enabled' => true];
+	$omitCap = !empty($rg['chart_omitted_invoice_cap']);
+	$chartData = $omitCap ? [] : ($report_chart_data ?? $data);
 	$total_sales = $total_sales ?? 0;
 	$customer_count = count($data);
+	$showChart = !$omitCap && count($chartData) > 0 && !empty($rg['enabled']);
 @endphp
 
 <div class="card">
@@ -24,7 +28,10 @@
 		</div>
 	</div>
 
-	@if(count($data) > 0)
+	@if($omitCap && $customer_count > 0)
+	@include('templates.default.reports.chart_omitted_invoice_cap')
+	@elseif($showChart)
+	@include('templates.default.reports.chart_truncation_notice')
 	{{-- Chart: donut of sales share by customer --}}
 	<div class="card-body border-bottom p-2">
 		<div id="chart-sales-customers"></div>
@@ -71,11 +78,11 @@
 	</div>
 </div>
 
-@if(count($data) > 0)
+@if($showChart)
 <script>
 (function () {
-	var labels  = @json(array_column($data, 'name'));
-	var amounts = @json(array_map(function($r){ return (float)($r['sum_total'] ?? 0); }, $data));
+	var labels  = @json(array_column($chartData, 'name'));
+	var amounts = @json(array_map(function($r){ return (float)($r['sum_total'] ?? 0); }, $chartData));
 	var salesLbl = @json($LANG['total_sales'] ?? 'Total Sales');
 	var palette  = ['#45aaf2','#2fb344','#f59f00','#f76707','#e03131','#7048e8','#0ca678','#ae3ec9','#fd7e14','#20c997'];
 

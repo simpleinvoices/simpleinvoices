@@ -3,61 +3,85 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-$debtor = getTopDebtor();
-$customer = getTopCustomer();
-$biller = getTopBiller();
+global $db_server;
 
-$billers = getBillers();
-$customers = getCustomers();
-$taxes = getTaxes();
-$products = getProducts();
-$preferences = getPreferences();
-$defaults = getSystemDefaults();
+$domain_id = $auth_session->domain_id;
 
-if ($billers == null OR $customers == null OR $taxes == null OR $products == null OR $preferences == null)
+/**
+ * Fast check: at least one enabled row (matches getBillers/getCustomers/getProducts semantics).
+ */
+function dashboard_has_enabled_row(string $table, string $enabled_col, $domain_id): bool
 {
-    $first_run_wizard =true;
-    $bladeView -> assign("first_run_wizard",$first_run_wizard);
+    $sql = 'SELECT 1 FROM ' . TB_PREFIX . $table . ' WHERE domain_id = :domain_id AND (' . $enabled_col . " = 1 OR " . $enabled_col . " = '1') LIMIT 1";
+    $r   = dbQuery($sql, ':domain_id', $domain_id)->fetch();
+    return (bool) $r;
+}
 
-    // Load sample data for the wizard "Use sample data" prefill buttons
+/** Any row in table for domain (tax/preferences include disabled rows). */
+function dashboard_has_any_row(string $table, $domain_id): bool
+{
+    $sql = 'SELECT 1 FROM ' . TB_PREFIX . $table . ' WHERE domain_id = :domain_id LIMIT 1';
+    $r   = dbQuery($sql, ':domain_id', $domain_id)->fetch();
+    return (bool) $r;
+}
+
+$has_billers     = dashboard_has_enabled_row('biller', 'enabled', $domain_id);
+$has_customers   = dashboard_has_enabled_row('customers', 'enabled', $domain_id);
+$has_products    = dashboard_has_enabled_row('products', 'enabled', $domain_id);
+$has_taxes       = dashboard_has_any_row('tax', $domain_id);
+$has_preferences = dashboard_has_any_row('preferences', $domain_id);
+$has_invoices    = dashboard_has_any_row('invoices', $domain_id);
+
+$first_run_wizard = ! $has_billers || ! $has_customers || ! $has_taxes || ! $has_products || ! $has_preferences;
+
+if ($first_run_wizard) {
+    $billers     = getBillers();
+    $customers   = getCustomers();
+    $taxes       = getTaxes();
+    $products    = getProducts();
+    $preferences = getPreferences();
+
     $sample_json = realpath(__DIR__ . '/../../databases/json/sample_data.json');
     $sample_data = ($sample_json && file_exists($sample_json))
         ? json_decode(file_get_contents($sample_json), true)
         : [];
-    $bladeView->assign('wizard_sample_biller',   $sample_data['si_biller'][0]    ?? []);
-    $bladeView->assign('wizard_sample_customer',  $sample_data['si_customers'][0] ?? []);
-    $bladeView->assign('wizard_sample_product',   $sample_data['si_products'][0]  ?? []);
+    $bladeView->assign('wizard_sample_biller', $sample_data['si_biller'][0] ?? []);
+    $bladeView->assign('wizard_sample_customer', $sample_data['si_customers'][0] ?? []);
+    $bladeView->assign('wizard_sample_product', $sample_data['si_products'][0] ?? []);
+} else {
+    // Avoid loading thousands of rows for dashboard chrome / charts
+    $billers = $customers = $products = $taxes = $preferences = [];
 }
 
-$bladeView -> assign("mysql",$mysql);
-$bladeView -> assign("db_server",$db_server);
-/*
-$bladeView -> assign("patch",count($patch));
-$bladeView -> assign("max_patches_applied", $max_patches_applied);
-*/
-$bladeView -> assign("biller", $biller);
-$bladeView -> assign("billers", $billers);
-$bladeView -> assign("customer", $customer);
-$bladeView -> assign("customers", $customers);
-$bladeView -> assign("taxes", $taxes);
-$bladeView -> assign("products", $products);
-$bladeView -> assign("preferences", $preferences);
-$bladeView -> assign("debtor", $debtor);
-$bladeView -> assign("language", $language);
-//$bladeView -> assign("title", $title);
+$defaults = getSystemDefaults();
+
+$bladeView->assign('first_run_wizard', $first_run_wizard);
+$bladeView->assign('dash_has_billers', $has_billers);
+$bladeView->assign('dash_has_customers', $has_customers);
+$bladeView->assign('dash_has_products', $has_products);
+$bladeView->assign('dash_has_invoices', $has_invoices);
+$bladeView->assign('mysql', $mysql);
+$bladeView->assign('db_server', $db_server);
+$bladeView->assign('billers', $billers);
+$bladeView->assign('customers', $customers);
+$bladeView->assign('taxes', $taxes);
+$bladeView->assign('products', $products);
+$bladeView->assign('preferences', $preferences);
+$bladeView->assign('defaults', $defaults);
+$bladeView->assign('language', $language);
 
 // Dashboard chart: monthly invoices & payments for all years since first invoice (max 10)
 $max_chart_years    = 10;
-$chart_current_year = (int)date('Y');
+$chart_current_year = (int) date('Y');
 
 $r = dbQuery(
     "SELECT MIN(iv.date) AS min_date FROM " . TB_PREFIX . "invoices iv
      INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id=iv.preference_id AND pr.domain_id=iv.domain_id)
      WHERE pr.status='1' AND iv.domain_id=:domain_id",
-    ':domain_id', $auth_session->domain_id
+    ':domain_id', $domain_id
 )->fetch();
 
-$first_invoice_year = !empty($r['min_date']) ? (int)date('Y', strtotime($r['min_date'])) : $chart_current_year;
+$first_invoice_year = ! empty($r['min_date']) ? (int) date('Y', strtotime((string) $r['min_date'])) : $chart_current_year;
 $chart_start_year   = ($chart_current_year - $first_invoice_year + 1 > $max_chart_years)
                         ? $chart_current_year - $max_chart_years + 1
                         : $first_invoice_year;
@@ -67,6 +91,91 @@ for ($m = 1; $m <= 12; $m++) {
     $chart_labels[] = date('M', mktime(0, 0, 0, $m, 1));
 }
 
+$range_start = sprintf('%04d-01-01', $chart_start_year);
+$range_end   = sprintf('%04d-01-01', $chart_current_year + 1);
+
+// Monthly invoice totals & payment totals: two aggregate queries (replaces hundreds of per-month queries)
+$inv_month_sql = '';
+$pmt_month_sql = '';
+switch ($db_server) {
+    case 'pgsql':
+        $inv_month_sql = "SELECT to_char(iv.date::timestamp, 'YYYY-MM') AS ym, SUM(ii.total) AS t
+            FROM " . TB_PREFIX . "invoice_items ii
+            INNER JOIN " . TB_PREFIX . "invoices iv ON (ii.invoice_id=iv.id AND ii.domain_id=iv.domain_id)
+            INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id=iv.preference_id AND pr.domain_id=iv.domain_id)
+            WHERE pr.status='1' AND ii.domain_id=:domain_id
+              AND iv.date >= :d_start AND iv.date < :d_end
+            GROUP BY 1";
+        $pmt_month_sql = "SELECT to_char(ap.ac_date::timestamp, 'YYYY-MM') AS ym, SUM(ap.ac_amount) AS t
+            FROM " . TB_PREFIX . "payment ap
+            WHERE ap.domain_id=:domain_id
+              AND ap.ac_date >= :d_start AND ap.ac_date < :d_end
+            GROUP BY 1";
+        break;
+    case 'sqlite':
+        $inv_month_sql = "SELECT strftime('%Y-%m', iv.date) AS ym, SUM(ii.total) AS t
+            FROM " . TB_PREFIX . "invoice_items ii
+            INNER JOIN " . TB_PREFIX . "invoices iv ON (ii.invoice_id=iv.id AND ii.domain_id=iv.domain_id)
+            INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id=iv.preference_id AND pr.domain_id=iv.domain_id)
+            WHERE pr.status='1' AND ii.domain_id=:domain_id
+              AND date(iv.date) >= date(:d_start) AND date(iv.date) < date(:d_end)
+            GROUP BY 1";
+        $pmt_month_sql = "SELECT strftime('%Y-%m', ap.ac_date) AS ym, SUM(ap.ac_amount) AS t
+            FROM " . TB_PREFIX . "payment ap
+            WHERE ap.domain_id=:domain_id
+              AND datetime(ap.ac_date) >= datetime(:d_start) AND datetime(ap.ac_date) < datetime(:d_end)
+            GROUP BY 1";
+        break;
+    default:
+        $inv_month_sql = "SELECT DATE_FORMAT(iv.date, '%Y-%m') AS ym, SUM(ii.total) AS t
+            FROM " . TB_PREFIX . "invoice_items ii
+            INNER JOIN " . TB_PREFIX . "invoices iv ON (ii.invoice_id=iv.id AND ii.domain_id=iv.domain_id)
+            INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id=iv.preference_id AND pr.domain_id=iv.domain_id)
+            WHERE pr.status='1' AND ii.domain_id=:domain_id
+              AND iv.date >= :d_start AND iv.date < :d_end
+            GROUP BY DATE_FORMAT(iv.date, '%Y-%m')";
+        $pmt_month_sql = "SELECT DATE_FORMAT(ap.ac_date, '%Y-%m') AS ym, SUM(ap.ac_amount) AS t
+            FROM " . TB_PREFIX . "payment ap
+            WHERE ap.domain_id=:domain_id
+              AND ap.ac_date >= :d_start AND ap.ac_date < :d_end
+            GROUP BY DATE_FORMAT(ap.ac_date, '%Y-%m')";
+        break;
+}
+
+$inv_by_ym = [];
+foreach (
+    dbQuery(
+        $inv_month_sql,
+        ':domain_id',
+        $domain_id,
+        ':d_start',
+        $range_start,
+        ':d_end',
+        $range_end
+    )->fetchAll(PDO::FETCH_ASSOC) as $row
+) {
+    if (! empty($row['ym'])) {
+        $inv_by_ym[$row['ym']] = round((float) ($row['t'] ?? 0), 2);
+    }
+}
+
+$pmt_by_ym = [];
+foreach (
+    dbQuery(
+        $pmt_month_sql,
+        ':domain_id',
+        $domain_id,
+        ':d_start',
+        $range_start,
+        ':d_end',
+        $range_end
+    )->fetchAll(PDO::FETCH_ASSOC) as $row
+) {
+    if (! empty($row['ym'])) {
+        $pmt_by_ym[$row['ym']] = round((float) ($row['t'] ?? 0), 2);
+    }
+}
+
 $chart_years = [];
 $chart_data  = [];
 for ($y = $chart_start_year; $y <= $chart_current_year; $y++) {
@@ -74,32 +183,40 @@ for ($y = $chart_start_year; $y <= $chart_current_year; $y++) {
     $invoices = [];
     $payments = [];
     for ($m = 1; $m <= 12; $m++) {
-        $mp = str_pad($m, 2, '0', STR_PAD_LEFT);
-
-        $month_start = "{$y}-{$mp}-01";
-        $month_end   = date('Y-m-d', strtotime("$month_start +1 month"));
-
-        $r = dbQuery("SELECT SUM(ii.total) AS t FROM " . TB_PREFIX . "invoice_items ii
-            INNER JOIN " . TB_PREFIX . "invoices iv ON (ii.invoice_id=iv.id AND iv.domain_id=ii.domain_id)
-            INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id=iv.preference_id AND pr.domain_id=iv.domain_id)
-            WHERE pr.status='1' AND ii.domain_id=:domain_id AND iv.date >= :month_start AND iv.date < :month_end",
-            ':domain_id', $auth_session->domain_id, ':month_start', $month_start, ':month_end', $month_end)->fetch();
-        $invoices[] = round((float)($r['t'] ?? 0), 2);
-
-        $r = dbQuery("SELECT SUM(ac_amount) AS t FROM " . TB_PREFIX . "payment
-            WHERE domain_id=:domain_id AND ac_date >= :month_start AND ac_date < :month_end",
-            ':domain_id', $auth_session->domain_id, ':month_start', $month_start, ':month_end', $month_end)->fetch();
-        $payments[] = round((float)($r['t'] ?? 0), 2);
+        $ym = sprintf('%04d-%02d', $y, $m);
+        $invoices[] = $inv_by_ym[$ym] ?? 0.0;
+        $payments[] = $pmt_by_ym[$ym] ?? 0.0;
     }
     $chart_data[$y] = ['invoices' => $invoices, 'payments' => $payments];
 }
 
-$bladeView->assign('chart_current_year', $chart_current_year);
-$bladeView->assign('chart_years',        $chart_years);
-$bladeView->assign('chart_labels',       $chart_labels);
-$bladeView->assign('chart_data',         $chart_data);
+// Rolling last 12 calendar months (oldest → newest), for default dashboard chart view
+$chart_last12_labels   = [];
+$chart_last12_invoices = [];
+$chart_last12_payments = [];
+try {
+    $dash_month_anchor = new DateTime('first day of this month');
+} catch (Exception $e) {
+    $dash_month_anchor = new DateTime(date('Y-m-01'));
+}
+for ($i = 11; $i >= 0; $i--) {
+    $d                         = (clone $dash_month_anchor)->modify('-' . $i . ' months');
+    $ym                        = $d->format('Y-m');
+    $chart_last12_labels[]     = $d->format('M Y');
+    $chart_last12_invoices[]   = round((float) ($inv_by_ym[$ym] ?? 0), 2);
+    $chart_last12_payments[]   = round((float) ($pmt_by_ym[$ym] ?? 0), 2);
+}
 
-// Annual totals for the yearly bar chart (derived from monthly data above)
+$bladeView->assign('chart_last12', [
+    'labels'   => $chart_last12_labels,
+    'invoices' => $chart_last12_invoices,
+    'payments' => $chart_last12_payments,
+]);
+$bladeView->assign('chart_current_year', $chart_current_year);
+$bladeView->assign('chart_years', $chart_years);
+$bladeView->assign('chart_labels', $chart_labels);
+$bladeView->assign('chart_data', $chart_data);
+
 $annual_totals = [];
 foreach ($chart_years as $y) {
     $annual_totals[$y] = [
@@ -109,36 +226,88 @@ foreach ($chart_years as $y) {
 }
 $bladeView->assign('annual_totals', $annual_totals);
 
-// Debtor aging buckets (same logic as report_debtors_by_aging)
-$aging_sql = "SELECT
-        iv.id, iv.date,
-        SUM(COALESCE(ii.total, 0)) - COALESCE(ap.inv_paid, 0) AS inv_owing
-    FROM " . TB_PREFIX . "invoices iv
-    LEFT JOIN " . TB_PREFIX . "invoice_items ii ON (ii.invoice_id = iv.id AND ii.domain_id = iv.domain_id)
-    LEFT JOIN " . TB_PREFIX . "preferences pr   ON (iv.preference_id = pr.pref_id AND pr.domain_id = iv.domain_id)
-    LEFT JOIN (
-        SELECT ac_inv_id, domain_id, SUM(COALESCE(ac_amount, 0)) AS inv_paid
-        FROM " . TB_PREFIX . "payment GROUP BY ac_inv_id, domain_id
-    ) ap ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
-    WHERE pr.status = 1 AND iv.domain_id = :domain_id
-    GROUP BY iv.id, iv.date, ap.inv_paid
-    HAVING SUM(COALESCE(ii.total, 0)) - COALESCE(ap.inv_paid, 0) > 0";
-
-$aging_result  = dbQuery($aging_sql, ':domain_id', $auth_session->domain_id);
-$aging_buckets = ['0-14' => 0, '15-30' => 0, '31-60' => 0, '61-90' => 0, '90+' => 0];
-$aging_total   = 0;
-$today         = new DateTime();
-while ($row = $aging_result->fetch()) {
-    $age = (int)$today->diff(new DateTime($row['date']))->days;
-    if ($age <= 14)     $bucket = '0-14';
-    elseif ($age <= 30) $bucket = '15-30';
-    elseif ($age <= 60) $bucket = '31-60';
-    elseif ($age <= 90) $bucket = '61-90';
-    else                $bucket = '90+';
-    $aging_buckets[$bucket] += (float)$row['inv_owing'];
-    $aging_total             += (float)$row['inv_owing'];
+// Debtor aging buckets — aggregate in SQL (avoids fetching every owing invoice into PHP)
+$aging_bucket_sql = '';
+switch ($db_server) {
+    case 'pgsql':
+        $aging_bucket_sql = "SELECT bucket, SUM(owing) AS amt FROM (
+            SELECT CASE
+                WHEN (CURRENT_DATE - iv.date::date) <= 14 THEN '0-14'
+                WHEN (CURRENT_DATE - iv.date::date) <= 30 THEN '15-30'
+                WHEN (CURRENT_DATE - iv.date::date) <= 60 THEN '31-60'
+                WHEN (CURRENT_DATE - iv.date::date) <= 90 THEN '61-90'
+                ELSE '90+'
+            END AS bucket,
+            (SUM(COALESCE(ii.total, 0)) - COALESCE(ap.inv_paid, 0)) AS owing
+            FROM " . TB_PREFIX . "invoices iv
+            LEFT JOIN " . TB_PREFIX . "invoice_items ii ON (ii.invoice_id = iv.id AND ii.domain_id = iv.domain_id)
+            LEFT JOIN " . TB_PREFIX . "preferences pr ON (iv.preference_id = pr.pref_id AND pr.domain_id = iv.domain_id)
+            LEFT JOIN (
+                SELECT ac_inv_id, domain_id, SUM(COALESCE(ac_amount, 0)) AS inv_paid
+                FROM " . TB_PREFIX . 'payment GROUP BY ac_inv_id, domain_id
+            ) ap ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
+            WHERE pr.status = 1 AND iv.domain_id = :domain_id
+            GROUP BY iv.id, iv.date, ap.inv_paid
+            HAVING SUM(COALESCE(ii.total, 0)) - COALESCE(ap.inv_paid, 0) > 0
+        ) x GROUP BY bucket';
+        break;
+    case 'sqlite':
+        $aging_bucket_sql = "SELECT bucket, SUM(owing) AS amt FROM (
+            SELECT CASE
+                WHEN CAST((julianday('now') - julianday(date(iv.date))) AS INTEGER) <= 14 THEN '0-14'
+                WHEN CAST((julianday('now') - julianday(date(iv.date))) AS INTEGER) <= 30 THEN '15-30'
+                WHEN CAST((julianday('now') - julianday(date(iv.date))) AS INTEGER) <= 60 THEN '31-60'
+                WHEN CAST((julianday('now') - julianday(date(iv.date))) AS INTEGER) <= 90 THEN '61-90'
+                ELSE '90+'
+            END AS bucket,
+            (SUM(COALESCE(ii.total, 0)) - COALESCE(ap.inv_paid, 0)) AS owing
+            FROM " . TB_PREFIX . "invoices iv
+            LEFT JOIN " . TB_PREFIX . "invoice_items ii ON (ii.invoice_id = iv.id AND ii.domain_id = iv.domain_id)
+            LEFT JOIN " . TB_PREFIX . "preferences pr ON (iv.preference_id = pr.pref_id AND pr.domain_id = iv.domain_id)
+            LEFT JOIN (
+                SELECT ac_inv_id, domain_id, SUM(COALESCE(ac_amount, 0)) AS inv_paid
+                FROM " . TB_PREFIX . 'payment GROUP BY ac_inv_id, domain_id
+            ) ap ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
+            WHERE pr.status = 1 AND iv.domain_id = :domain_id
+            GROUP BY iv.id, iv.date, ap.inv_paid
+            HAVING SUM(COALESCE(ii.total, 0)) - COALESCE(ap.inv_paid, 0) > 0
+        ) x GROUP BY bucket';
+        break;
+    default:
+        $aging_bucket_sql = "SELECT bucket, SUM(owing) AS amt FROM (
+            SELECT CASE
+                WHEN DATEDIFF(CURDATE(), DATE(iv.date)) <= 14 THEN '0-14'
+                WHEN DATEDIFF(CURDATE(), DATE(iv.date)) <= 30 THEN '15-30'
+                WHEN DATEDIFF(CURDATE(), DATE(iv.date)) <= 60 THEN '31-60'
+                WHEN DATEDIFF(CURDATE(), DATE(iv.date)) <= 90 THEN '61-90'
+                ELSE '90+'
+            END AS bucket,
+            (SUM(COALESCE(ii.total, 0)) - COALESCE(ap.inv_paid, 0)) AS owing
+            FROM " . TB_PREFIX . "invoices iv
+            LEFT JOIN " . TB_PREFIX . "invoice_items ii ON (ii.invoice_id = iv.id AND ii.domain_id = iv.domain_id)
+            LEFT JOIN " . TB_PREFIX . "preferences pr ON (iv.preference_id = pr.pref_id AND pr.domain_id = iv.domain_id)
+            LEFT JOIN (
+                SELECT ac_inv_id, domain_id, SUM(COALESCE(ac_amount, 0)) AS inv_paid
+                FROM " . TB_PREFIX . 'payment GROUP BY ac_inv_id, domain_id
+            ) ap ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
+            WHERE pr.status = 1 AND iv.domain_id = :domain_id
+            GROUP BY iv.id, iv.date, ap.inv_paid
+            HAVING SUM(COALESCE(ii.total, 0)) - COALESCE(ap.inv_paid, 0) > 0
+        ) x GROUP BY bucket';
+        break;
 }
-// Convert to percentages for radialBar (0–100), preserve raw totals for tooltips
+
+$aging_buckets = ['0-14' => 0.0, '15-30' => 0.0, '31-60' => 0.0, '61-90' => 0.0, '90+' => 0.0];
+$aging_total   = 0.0;
+foreach (dbQuery($aging_bucket_sql, ':domain_id', $domain_id)->fetchAll(PDO::FETCH_ASSOC) as $row) {
+    $b = $row['bucket'] ?? '';
+    if (isset($aging_buckets[$b])) {
+        $amt = (float) ($row['amt'] ?? 0);
+        $aging_buckets[$b] = $amt;
+        $aging_total += $amt;
+    }
+}
+
 $aging_chart = [];
 foreach ($aging_buckets as $label => $amount) {
     $aging_chart[] = [
@@ -150,9 +319,7 @@ foreach ($aging_buckets as $label => $amount) {
 $bladeView->assign('aging_chart', $aging_chart);
 $bladeView->assign('aging_total', round($aging_total, 2));
 
-// ── Dashboard stat cards ──────────────────────────────────────────────────────
-
-// 1. Invoice paid percentage
+// Invoice paid percentage (single query — unchanged)
 $paid_sql = "SELECT COUNT(*) AS total_count,
     SUM(CASE WHEN owing <= 0 THEN 1 ELSE 0 END) AS paid_count
 FROM (
@@ -168,105 +335,172 @@ FROM (
     WHERE pr.status = 1 AND iv.domain_id = :domain_id
     GROUP BY iv.id, ap.inv_paid
 ) t";
-$paid_row      = dbQuery($paid_sql, ':domain_id', $auth_session->domain_id)->fetch();
+$paid_row      = dbQuery($paid_sql, ':domain_id', $domain_id)->fetch();
 $dash_paid_pct = ($paid_row['total_count'] > 0)
     ? round(($paid_row['paid_count'] ?? 0) / $paid_row['total_count'] * 100, 1) : 0;
-$dash_total_inv_count = (int)($paid_row['total_count'] ?? 0);
-$dash_paid_inv_count  = (int)($paid_row['paid_count'] ?? 0);
+$dash_total_inv_count = (int) ($paid_row['total_count'] ?? 0);
+$dash_paid_inv_count  = (int) ($paid_row['paid_count'] ?? 0);
 $dash_all_invoices_paid = $dash_total_inv_count > 0 && $dash_paid_inv_count >= $dash_total_inv_count;
-// Aging query only includes owing > 0; combined with all-paid this means a clean receivables picture.
 $dash_aging_all_clear   = $dash_all_invoices_paid && round($aging_total, 2) <= 0;
-$bladeView->assign('dash_paid_pct',            $dash_paid_pct);
-$bladeView->assign('dash_total_inv_count',     $dash_total_inv_count);
-$bladeView->assign('dash_paid_inv_count',      $dash_paid_inv_count);
-$bladeView->assign('dash_all_invoices_paid',   $dash_all_invoices_paid);
-$bladeView->assign('dash_aging_all_clear',     $dash_aging_all_clear);
+$bladeView->assign('dash_paid_pct', $dash_paid_pct);
+$bladeView->assign('dash_total_inv_count', $dash_total_inv_count);
+$bladeView->assign('dash_paid_inv_count', $dash_paid_inv_count);
+$bladeView->assign('dash_all_invoices_paid', $dash_all_invoices_paid);
+$bladeView->assign('dash_aging_all_clear', $dash_aging_all_clear);
 
-// 2. All-time monthly amounts — flatten existing chart_data (no extra queries)
 $alltime_inv_monthly = [];
 $alltime_pmt_monthly = [];
 foreach ($chart_years as $y) {
-    foreach ($chart_data[$y]['invoices'] as $v) $alltime_inv_monthly[] = $v;
-    foreach ($chart_data[$y]['payments'] as $v) $alltime_pmt_monthly[] = $v;
+    foreach ($chart_data[$y]['invoices'] as $v) {
+        $alltime_inv_monthly[] = $v;
+    }
+    foreach ($chart_data[$y]['payments'] as $v) {
+        $alltime_pmt_monthly[] = $v;
+    }
 }
-$bladeView->assign('alltime_inv_monthly',    $alltime_inv_monthly);
-$bladeView->assign('alltime_pmt_monthly',    $alltime_pmt_monthly);
+$bladeView->assign('alltime_inv_monthly', $alltime_inv_monthly);
+$bladeView->assign('alltime_pmt_monthly', $alltime_pmt_monthly);
 $bladeView->assign('dash_alltime_inv_total', round(array_sum($alltime_inv_monthly), 2));
 $bladeView->assign('dash_alltime_pmt_total', round(array_sum($alltime_pmt_monthly), 2));
 
-// 3. All-time monthly volume counts (number of invoices / payments per month)
+// Monthly volume counts — two aggregate queries
+$inv_count_sql = '';
+$pmt_count_sql = '';
+switch ($db_server) {
+    case 'pgsql':
+        $inv_count_sql = "SELECT to_char(iv.date::timestamp, 'YYYY-MM') AS ym, COUNT(DISTINCT iv.id) AS c
+            FROM " . TB_PREFIX . "invoices iv
+            INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id)
+            WHERE pr.status = '1' AND iv.domain_id = :domain_id
+              AND iv.date >= :d_start AND iv.date < :d_end
+            GROUP BY 1";
+        $pmt_count_sql = "SELECT to_char(ap.ac_date::timestamp, 'YYYY-MM') AS ym, COUNT(*) AS c
+            FROM " . TB_PREFIX . "payment ap
+            WHERE ap.domain_id = :domain_id
+              AND ap.ac_date >= :d_start AND ap.ac_date < :d_end
+            GROUP BY 1";
+        break;
+    case 'sqlite':
+        $inv_count_sql = "SELECT strftime('%Y-%m', iv.date) AS ym, COUNT(DISTINCT iv.id) AS c
+            FROM " . TB_PREFIX . "invoices iv
+            INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id)
+            WHERE pr.status = '1' AND iv.domain_id = :domain_id
+              AND date(iv.date) >= date(:d_start) AND date(iv.date) < date(:d_end)
+            GROUP BY 1";
+        $pmt_count_sql = "SELECT strftime('%Y-%m', ap.ac_date) AS ym, COUNT(*) AS c
+            FROM " . TB_PREFIX . "payment ap
+            WHERE ap.domain_id = :domain_id
+              AND datetime(ap.ac_date) >= datetime(:d_start) AND datetime(ap.ac_date) < datetime(:d_end)
+            GROUP BY 1";
+        break;
+    default:
+        $inv_count_sql = "SELECT DATE_FORMAT(iv.date, '%Y-%m') AS ym, COUNT(DISTINCT iv.id) AS c
+            FROM " . TB_PREFIX . "invoices iv
+            INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id)
+            WHERE pr.status = '1' AND iv.domain_id = :domain_id
+              AND iv.date >= :d_start AND iv.date < :d_end
+            GROUP BY DATE_FORMAT(iv.date, '%Y-%m')";
+        $pmt_count_sql = "SELECT DATE_FORMAT(ap.ac_date, '%Y-%m') AS ym, COUNT(*) AS c
+            FROM " . TB_PREFIX . "payment ap
+            WHERE ap.domain_id = :domain_id
+              AND ap.ac_date >= :d_start AND ap.ac_date < :d_end
+            GROUP BY DATE_FORMAT(ap.ac_date, '%Y-%m')";
+        break;
+}
+
+$inv_count_by_ym = [];
+foreach (
+    dbQuery(
+        $inv_count_sql,
+        ':domain_id',
+        $domain_id,
+        ':d_start',
+        $range_start,
+        ':d_end',
+        $range_end
+    )->fetchAll(PDO::FETCH_ASSOC) as $row
+) {
+    if (! empty($row['ym'])) {
+        $inv_count_by_ym[$row['ym']] = (int) ($row['c'] ?? 0);
+    }
+}
+$pmt_count_by_ym = [];
+foreach (
+    dbQuery(
+        $pmt_count_sql,
+        ':domain_id',
+        $domain_id,
+        ':d_start',
+        $range_start,
+        ':d_end',
+        $range_end
+    )->fetchAll(PDO::FETCH_ASSOC) as $row
+) {
+    if (! empty($row['ym'])) {
+        $pmt_count_by_ym[$row['ym']] = (int) ($row['c'] ?? 0);
+    }
+}
+
 $alltime_inv_counts = [];
 $alltime_pmt_counts = [];
 for ($y = $chart_start_year; $y <= $chart_current_year; $y++) {
     for ($m = 1; $m <= 12; $m++) {
-        $mp          = str_pad($m, 2, '0', STR_PAD_LEFT);
-        $month_start = "{$y}-{$mp}-01";
-        $month_end   = date('Y-m-d', strtotime("{$month_start} +1 month"));
-
-        $r = dbQuery(
-            "SELECT COUNT(DISTINCT iv.id) AS cnt
-             FROM " . TB_PREFIX . "invoices iv
-             INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id)
-             WHERE pr.status = '1' AND iv.domain_id = :domain_id
-               AND iv.date >= :month_start AND iv.date < :month_end",
-            ':domain_id', $auth_session->domain_id, ':month_start', $month_start, ':month_end', $month_end
-        )->fetch();
-        $alltime_inv_counts[] = (int)($r['cnt'] ?? 0);
-
-        $r = dbQuery(
-            "SELECT COUNT(*) AS cnt FROM " . TB_PREFIX . "payment
-             WHERE domain_id = :domain_id AND ac_date >= :month_start AND ac_date < :month_end",
-            ':domain_id', $auth_session->domain_id, ':month_start', $month_start, ':month_end', $month_end
-        )->fetch();
-        $alltime_pmt_counts[] = (int)($r['cnt'] ?? 0);
+        $ym                   = sprintf('%04d-%02d', $y, $m);
+        $alltime_inv_counts[] = $inv_count_by_ym[$ym] ?? 0;
+        $alltime_pmt_counts[] = $pmt_count_by_ym[$ym] ?? 0;
     }
 }
-$bladeView->assign('alltime_inv_counts',    $alltime_inv_counts);
-$bladeView->assign('alltime_pmt_counts',    $alltime_pmt_counts);
+$bladeView->assign('alltime_inv_counts', $alltime_inv_counts);
+$bladeView->assign('alltime_pmt_counts', $alltime_pmt_counts);
 $bladeView->assign('dash_total_inv_volume', array_sum($alltime_inv_counts));
 $bladeView->assign('dash_total_pmt_volume', array_sum($alltime_pmt_counts));
 
-// Latest 5 invoices
-$latest_invoices_sth = dbQuery(
-    "SELECT iv.id, iv.index_id, iv.date,
-            b.name AS biller, c.name AS customer,
-            pr.pref_description AS preference,
-            SUM(ii.total) AS invoice_total,
-            SUM(ii.total) - COALESCE((SELECT SUM(p.ac_amount) FROM " . TB_PREFIX . "payment p WHERE p.ac_inv_id = iv.id AND p.domain_id = iv.domain_id), 0) AS owing,
-            pr.status
-     FROM " . TB_PREFIX . "invoices iv
-     INNER JOIN " . TB_PREFIX . "invoice_items ii ON (ii.invoice_id = iv.id AND ii.domain_id = iv.domain_id)
-     INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id)
-     INNER JOIN " . TB_PREFIX . "biller b ON (b.id = iv.biller_id AND b.domain_id = iv.domain_id)
-     INNER JOIN " . TB_PREFIX . "customers c ON (c.id = iv.customer_id AND c.domain_id = iv.domain_id)
-     WHERE iv.domain_id = :domain_id
-     GROUP BY iv.id, iv.index_id, iv.date, b.name, c.name, pr.pref_description, pr.status
-     ORDER BY iv.id DESC
-     LIMIT 5",
-    ':domain_id', $auth_session->domain_id
-);
-$latest_invoices = $latest_invoices_sth->fetchAll(PDO::FETCH_ASSOC);
+// Latest 5 invoices / payments
+$invoice = new invoice();
+$invoice->domain_id = $auth_session->domain_id ?? domain_id::get();
+if ($auth_session->role_name === 'customer') {
+    $invoice->customer = $auth_session->user_id;
+} elseif ($auth_session->role_name === 'biller') {
+    $invoice->biller = $auth_session->user_id;
+}
+$invoice->sort = 'iv.id';
+$latest_invoices_sth = $invoice->select_all('', 'DESC', 5, 1, '');
+$latest_invoices      = $latest_invoices_sth->fetchAll(PDO::FETCH_ASSOC);
 
-// Latest 5 payments
+switch ($db_server) {
+    case 'pgsql':
+        $dash_pmt_index_name = "(pr.pref_inv_wording || ' ' || CAST(iv.index_id AS TEXT))";
+        $dash_pmt_date       = "TO_CHAR(ap.ac_date, 'YYYY-MM-DD')";
+        break;
+    case 'sqlite':
+        $dash_pmt_index_name = "(pr.pref_inv_wording || ' ' || CAST(iv.index_id AS TEXT))";
+        $dash_pmt_date       = "strftime('%Y-%m-%d', ap.ac_date)";
+        break;
+    default:
+        $dash_pmt_index_name = "CONCAT(pr.pref_inv_wording, ' ', iv.index_id)";
+        $dash_pmt_date       = "DATE_FORMAT(ap.ac_date,'%Y-%m-%d')";
+        break;
+}
 $latest_payments_sth = dbQuery(
-    "SELECT p.id, p.ac_inv_id, p.ac_date, p.ac_amount,
-            iv.index_id,
-            b.name AS biller, c.name AS customer,
-            pr.pref_description AS preference
-     FROM " . TB_PREFIX . "payment p
-     INNER JOIN " . TB_PREFIX . "invoices iv ON (iv.id = p.ac_inv_id AND iv.domain_id = p.domain_id)
-     INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id)
-     INNER JOIN " . TB_PREFIX . "biller b ON (b.id = iv.biller_id AND b.domain_id = iv.domain_id)
+    "SELECT ap.id, ap.ac_inv_id, ap.ac_amount,
+            c.name AS cname,
+            b.name AS bname,
+            $dash_pmt_index_name AS index_name,
+            $dash_pmt_date AS date
+     FROM " . TB_PREFIX . "payment ap
+     INNER JOIN " . TB_PREFIX . "invoices iv ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
      INNER JOIN " . TB_PREFIX . "customers c ON (c.id = iv.customer_id AND c.domain_id = iv.domain_id)
-     WHERE p.domain_id = :domain_id
-     ORDER BY p.id DESC
+     INNER JOIN " . TB_PREFIX . "biller b ON (b.id = iv.biller_id AND b.domain_id = iv.domain_id)
+     INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id = iv.preference_id AND pr.domain_id = ap.domain_id)
+     WHERE ap.domain_id = :domain_id
+     ORDER BY ap.id DESC
      LIMIT 5",
-    ':domain_id', $auth_session->domain_id
+    ':domain_id', $domain_id
 );
 $latest_payments = $latest_payments_sth->fetchAll(PDO::FETCH_ASSOC);
 
 $bladeView->assign('latest_invoices', $latest_invoices);
 $bladeView->assign('latest_payments', $latest_payments);
 
-$bladeView -> assign('pageActive', 'dashboard');
-$bladeView -> assign('active_tab', '#home');
+$bladeView->assign('pageActive', 'dashboard');
+$bladeView->assign('active_tab', '#home');

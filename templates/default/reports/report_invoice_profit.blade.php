@@ -34,6 +34,9 @@
 
 @if(!empty($invoices))
 @php
+	$rg = $report_chart_guard ?? ['enabled' => true];
+	$chartInvoices = $report_chart_invoices ?? ($invoices ?? []);
+	$showChart = count($chartInvoices) > 0 && !empty($rg['enabled']);
 	$invoice_totals = $invoice_totals ?? [];
 	$sum_total  = (float)($invoice_totals['sum_total']  ?? 0);
 	$sum_cost   = (float)($invoice_totals['sum_cost']   ?? 0);
@@ -77,10 +80,13 @@
 		</div>
 	</div>
 
-	{{-- Chart: revenue vs cost vs profit (stacked or grouped bar) --}}
+	@if($showChart)
+	@include('templates.default.reports.chart_truncation_notice')
+	{{-- Chart: revenue vs cost vs profit (grouped bar, top invoices when many) --}}
 	<div class="card-body border-bottom p-2">
 		<div id="chart-profit-summary"></div>
 	</div>
+	@endif
 
 	<div class="table-responsive">
 		<table class="table table-vcenter table-hover card-table">
@@ -127,10 +133,10 @@
 	</div>
 </div>
 
+@if($showChart)
 <script>
 (function () {
-	// Per-invoice data for bar chart (up to 30 invoices to keep chart readable)
-	var invoices = @json(array_slice($invoices ?? [], 0, 30));
+	var invoices = @json($chartInvoices);
 	var labels   = invoices.map(function(r){ return (r.preference || '') + ' ' + (r.index_id || ''); });
 	var totals   = invoices.map(function(r){ return parseFloat(r.invoice_total || 0); });
 	var costs    = invoices.map(function(r){ return parseFloat(r.cost || 0); });
@@ -196,4 +202,5 @@
 	}
 })();
 </script>
+@endif
 @endif

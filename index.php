@@ -68,8 +68,7 @@ function GetCustomPath($name,$mode='template'){
 */
 
 $bladeView -> assign("config",$config); // to toggle the login / logout button visibility in the menu
-$bladeView -> assign("module",$module);
-$bladeView -> assign("view",$view);
+// module/view are assigned after routing below so defaults (e.g. bare index.php → index/index) match $module/$view
 $bladeView -> assign("siUrl",$siUrl);//used for template css
 
 $bladeView -> assign("LANG",$LANG);
@@ -172,6 +171,8 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
 
 }
 
+$bladeView->assign("module", $module);
+$bladeView->assign("view", $view);
 
 /*
 * dont include the header if requested file is an invoice template - for print preview etc.. header is not needed 

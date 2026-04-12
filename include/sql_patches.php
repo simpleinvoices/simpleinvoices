@@ -2026,3 +2026,42 @@ PRIMARY KEY ( `domain_id`, `id` )
     }
     $patch['325']['date']  = "20260411";
 
+    $patch['326']['name']  = "Add composite index on invoices (domain_id, preference_id, date) for reports and dashboard";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['326']['patch'] = 'CREATE INDEX IF NOT EXISTS si_inv_dom_pref_date ON ' . TB_PREFIX . 'invoices (domain_id, preference_id, date)';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['326']['patch'] = 'ALTER TABLE `' . TB_PREFIX . 'invoices` ADD INDEX `si_inv_dom_pref_date` (`domain_id`, `preference_id`, `date`)';
+            break;
+    }
+    $patch['326']['date']  = '20260412';
+
+    $patch['327']['name']  = "Add composite index on invoice_items (domain_id, invoice_id) for domain-scoped line lookups";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['327']['patch'] = 'CREATE INDEX IF NOT EXISTS si_ii_dom_invoice ON ' . TB_PREFIX . 'invoice_items (domain_id, invoice_id)';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['327']['patch'] = 'ALTER TABLE `' . TB_PREFIX . 'invoice_items` ADD INDEX `si_ii_dom_invoice` (`domain_id`, `invoice_id`)';
+            break;
+    }
+    $patch['327']['date']  = '20260412';
+
+    $patch['328']['name']  = "Add composite index on payment (domain_id, ac_date) for payment reports";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['328']['patch'] = 'CREATE INDEX IF NOT EXISTS si_pay_dom_ac_date ON ' . TB_PREFIX . 'payment (domain_id, ac_date)';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['328']['patch'] = 'ALTER TABLE `' . TB_PREFIX . 'payment` ADD INDEX `si_pay_dom_ac_date` (`domain_id`, `ac_date`)';
+            break;
+    }
+    $patch['328']['date']  = '20260412';
+

@@ -1,7 +1,12 @@
 @php
 	$data = $data ?? [];
+	$chartData = $report_chart_data ?? $data;
+	$rg = $report_chart_guard ?? ['enabled' => true];
 	$total_sales = $total_sales ?? 0;
 	$biller_count = count($data);
+	$chart_bar_n = count($chartData);
+	$chartHeight = max(200, min(520, $chart_bar_n * 36 + 60));
+	$showChart = $chart_bar_n > 0 && !empty($rg['enabled']);
 @endphp
 
 <div class="card">
@@ -24,10 +29,11 @@
 		</div>
 	</div>
 
-	@if(count($data) > 0)
-	{{-- Chart: donut of sales by biller --}}
+	@if($showChart)
+	@include('templates.default.reports.chart_truncation_notice')
+	{{-- Chart: horizontal bar — sales by biller --}}
 	<div class="card-body border-bottom p-2">
-		<div id="chart-biller-total"></div>
+		<div id="chart-biller-total" style="min-height:{{ $chartHeight }}px;"></div>
 	</div>
 	@endif
 
@@ -71,47 +77,40 @@
 	</div>
 </div>
 
-@if(count($data) > 0)
+@if($showChart)
 <script>
 (function () {
-	var labels  = @json(array_column($data, 'name'));
-	var amounts = @json(array_map(function($r){ return (float)($r['sum_total'] ?? 0); }, $data));
+	var labels  = @json(array_column($chartData, 'name'));
+	var amounts = @json(array_map(function($r){ return (float)($r['sum_total'] ?? 0); }, $chartData));
 	var salesLbl = @json($LANG['total_sales'] ?? 'Total Sales');
-	var palette  = ['#4263eb','#45aaf2','#7048e8','#0ca678','#2fb344','#f59f00','#f76707','#ae3ec9'];
+	var chartH   = {{ $chartHeight }};
 
 	function cssVar(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim() || ''; }
 
 	function buildOptions() {
 		var isDark    = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+		var indigo    = cssVar('--tblr-indigo')       || '#4263eb';
 		var bodyColor = cssVar('--tblr-body-color')   || (isDark ? '#c8d3e1' : '#1d273b');
 		var borderCol = cssVar('--tblr-border-color') || (isDark ? '#3d4555' : '#e6e7e9');
 		return {
 			chart: {
-				type: 'donut', fontFamily: 'inherit', height: 280,
+				type: 'bar', fontFamily: 'inherit', height: chartH,
 				toolbar: { show: false }, animations: { enabled: false },
 				background: 'transparent'
 			},
-			series: amounts,
-			labels: labels,
-			colors: palette,
-			legend: { position: 'bottom', labels: { colors: bodyColor } },
-			dataLabels: {
-				enabled: true,
-				formatter: function(val) { return val.toFixed(1) + '%'; },
-				style: { fontSize: '11px' }
+			series: [{ name: salesLbl, data: amounts }],
+			xaxis: {
+				categories: labels,
+				labels: { style: { colors: bodyColor } },
+				axisBorder: { color: borderCol }, axisTicks: { color: borderCol }
 			},
-			plotOptions: {
-				pie: { donut: { size: '60%', labels: {
-					show: true,
-					total: {
-						show: true, label: salesLbl, color: bodyColor,
-						formatter: function(w) {
-							return w.globals.seriesTotals.reduce(function(a,b){return a+b;},0).toLocaleString();
-						}
-					},
-					value: { color: bodyColor }
-				}}}
+			yaxis: {
+				labels: { style: { colors: bodyColor }, formatter: function(v){ return v.toLocaleString(); } }
 			},
+			colors: [indigo],
+			plotOptions: { bar: { horizontal: true, borderRadius: 4, barHeight: '65%' } },
+			dataLabels: { enabled: false },
+			grid: { borderColor: borderCol, strokeDashArray: 4 },
 			tooltip: { theme: isDark ? 'dark' : 'light', y: { formatter: function(v){ return v.toLocaleString(); } } }
 		};
 	}

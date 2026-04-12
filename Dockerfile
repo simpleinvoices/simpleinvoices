@@ -40,6 +40,13 @@ RUN apk add --no-cache icu-dev sqlite-dev libpq-dev \
     && apk del .build-deps \
     && apk add --no-cache libpq sqlite-libs
 
+# Match nginx client_max_body_size: large JSON imports / backups (post_max_size must be >= upload_max_filesize)
+RUN printf '%s\n' \
+    'upload_max_filesize = 10000M' \
+    'post_max_size = 10000M' \
+    'memory_limit = 512M' \
+    > /usr/local/etc/php/conf.d/docker-upload-limits.ini
+
 # Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
@@ -57,6 +64,7 @@ server {
     listen 80 default_server;
     root /var/www/html;
     index index.php index.html;
+    client_max_body_size 10000M;
 
     location / {
         try_files $uri $uri/ /index.php?$query_string;

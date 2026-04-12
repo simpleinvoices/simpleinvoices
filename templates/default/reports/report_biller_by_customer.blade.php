@@ -1,32 +1,34 @@
 @php
-	$data        = $data ?? [];
+	$data = $data ?? [];
+	$rg = $report_chart_guard ?? ['enabled' => true];
+	$omitCap = !empty($rg['chart_omitted_invoice_cap']);
 	$total_sales = $total_sales ?? 0;
 	$biller_count = count($data);
 
-	// ── Chart data prep ──────────────────────────────────────────────────────
-	// Collect all unique customer names
-	$all_customers = [];
-	foreach ($data as $biller) {
-		foreach (($biller['customers'] ?? []) as $c) {
-			$name = $c['name'] ?? '';
-			if ($name !== '' && !in_array($name, $all_customers, true)) {
-				$all_customers[] = $name;
+	$chart_billers = $report_chart_billers ?? [];
+	$series_names = $report_chart_series_names ?? [];
+	if (!$omitCap && count($chart_billers) === 0) {
+		$chart_billers = array_values($data);
+		$series_names = [];
+		foreach ($data as $biller) {
+			foreach (($biller['customers'] ?? []) as $c) {
+				$name = $c['name'] ?? '';
+				if ($name !== '' && ! in_array($name, $series_names, true)) {
+					$series_names[] = $name;
+				}
 			}
 		}
 	}
 
-	// Biller name labels for y-axis
-	$chart_labels = array_values(array_column($data, 'name'));
-
-	// One series per customer: data[i] = sales amount for biller i
+	$chart_labels = array_column($chart_billers, 'name');
 	$chart_series = [];
-	foreach ($all_customers as $cust_name) {
+	foreach ($series_names as $cust_name) {
 		$row = ['name' => $cust_name, 'data' => []];
-		foreach ($data as $biller) {
+		foreach ($chart_billers as $biller) {
 			$total = 0;
 			foreach (($biller['customers'] ?? []) as $c) {
 				if (($c['name'] ?? '') === $cust_name) {
-					$total = (float)($c['sum_total'] ?? 0);
+					$total = (float) ($c['sum_total'] ?? 0);
 					break;
 				}
 			}
@@ -35,8 +37,10 @@
 		$chart_series[] = $row;
 	}
 
-	$chartHeight = max(220, min(520, $biller_count * 46 + 80));
-	$hasChartData = $biller_count > 0 && count($all_customers) > 0;
+	$chart_biller_n = count($chart_billers);
+	$chartHeight = max(220, min(520, $chart_biller_n * 46 + 80));
+	$hasChartData = $chart_biller_n > 0 && count($series_names) > 0;
+	$showChart = !$omitCap && $hasChartData && ! empty($rg['enabled']);
 @endphp
 
 <div class="card">
@@ -59,13 +63,16 @@
 			<div class="col-sm-4">
 				<div class="p-3 bg-cyan-lt rounded-2 text-center">
 					<div class="text-secondary small mb-1">{{ $LANG['customers'] ?? 'Customers' }}</div>
-					<div class="h2 fw-bold text-cyan mb-0">{{ count($all_customers) }}</div>
+					<div class="h2 fw-bold text-cyan mb-0">{{ (int)($rg['chart_series_total'] ?? count($series_names)) }}</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	@if($hasChartData)
+	@if($omitCap && $biller_count > 0)
+	@include('templates.default.reports.chart_omitted_invoice_cap')
+	@elseif($showChart)
+	@include('templates.default.reports.chart_truncation_notice')
 	{{-- Stacked horizontal bar: each bar = biller, segments = customers --}}
 	<div class="card-body border-bottom p-2">
 		<div id="chart-biller-by-customer" style="min-height:{{ $chartHeight }}px;"></div>
@@ -123,7 +130,7 @@
 	@endif
 </div>
 
-@if($hasChartData)
+@if($showChart)
 <script>
 (function () {
 	var series    = @json($chart_series);

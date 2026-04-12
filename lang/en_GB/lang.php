@@ -384,6 +384,10 @@ $LANG['mobile_phone'] = "Mobile Phone";//1
 $LANG['mobile_short'] = "Mob.";//1
 $LANG['money'] = "Money";//1
 $LANG['monthly_activity'] = "Monthly activity";//1
+$LANG['dash_chart_last_12_months'] = "Last 12 months";//1
+$LANG['dash_chart_title_monthly'] = "Monthly";//1
+$LANG['dash_chart_title_yearly'] = "Yearly";//1
+$LANG['dash_chart_title_debtor_aging'] = "Debtor Aging";//1
 $LANG['dash_aging_no_outstanding'] = "No outstanding receivables";//1
 $LANG['dash_aging_all_clear_sub'] = "Nothing owing by age — all invoices are fully paid.";//1
 $LANG['monthly_sales_per_year'] = "Monthly Sales and Payments per year";//1
@@ -788,5 +792,21 @@ $LANG['confirm_import'] = "This will permanently replace ALL data in the current
 $LANG['backup_copy_sql_title'] = "Copy SQL to clipboard";//1
 $LANG['backup_copy_json_title'] = "Copy JSON to clipboard";//1
 $LANG['backup_back_to_options'] = "Back to options";//1
+
+// Report chart guards (large datasets — chart shows top N; table is always complete)
+$LANG['report_chart_limited_title'] = "Chart shows a subset";//1
+$LANG['report_chart_truncated_summary'] = "The chart lists the top :shown of :total entries (up to :limit at a time), ranked by amount. The table below has the full list.";//1
+$LANG['report_chart_truncated_matrix'] = "The chart uses up to :limit rows and :limit series: :row_shown of :row_total rows and :series_shown of :series_total series (largest totals first). The tables below have the full breakdown.";//1
+$LANG['report_chart_truncated_years'] = "The chart shows the :shown most recent of :total years (up to :limit). All years remain in the table.";//1
+$LANG['report_chart_threshold_detail'] = "This cap was applied because the full chart would exceed size limits:";//1
+$LANG['report_chart_threshold_only'] = "Chart limits were exceeded for this dataset; the chart below reflects a reduced view. The tables list every row.";//1
+$LANG['report_chart_omitted_invoice_title'] = "Chart not shown";//1
+$LANG['report_chart_omitted_invoice_body'] = "This report has :count active invoices (limit :max for the chart). The table below has the full figures.";//1
+$LANG['report_chart_skipped_title'] = "Chart hidden for performance";//1
+$LANG['report_chart_skipped_generic'] = "The chart is omitted on very large datasets so the page stays responsive. The table below has the full figures.";//1
+$LANG['report_chart_skip_invoices'] = "Invoices";//1
+$LANG['report_chart_skip_categories'] = "Categories";//1
+$LANG['report_chart_skip_series'] = "Series";//1
+$LANG['report_chart_skip_density'] = "Chart size (categories × series)";//1
 
 // New i18n keys added 2026-04-06

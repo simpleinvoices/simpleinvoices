@@ -41,8 +41,13 @@
     array_push($invoices, $invoice);
   }
 
+  $inv = si_report_active_invoice_count($auth_session->domain_id);
+  $chart_pack = si_report_chart_top_rows_by_key($invoices, 'inv_owing', $inv, 1);
+
   $bladeView -> assign('data', $invoices);
+  $bladeView -> assign('report_chart_data', $chart_pack['rows']);
   $bladeView -> assign('total_owed', $total_owed);
+  $bladeView -> assign('report_chart_guard', $chart_pack['guard']);
 
   $bladeView -> assign('pageActive', 'report');
   $bladeView -> assign('active_tab', '#home');

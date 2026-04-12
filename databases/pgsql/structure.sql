@@ -142,6 +142,7 @@ CREATE TABLE IF NOT EXISTS si_invoice_items (
 );
 CREATE INDEX IF NOT EXISTS si_invoice_items_invoice_id ON si_invoice_items (invoice_id);
 CREATE INDEX IF NOT EXISTS si_invoice_items_domain_inv ON si_invoice_items (invoice_id, domain_id);
+CREATE INDEX IF NOT EXISTS si_ii_dom_invoice ON si_invoice_items (domain_id, invoice_id);
 
 CREATE TABLE IF NOT EXISTS si_invoice_type (
   inv_ty_id          SERIAL,
@@ -170,6 +171,7 @@ CREATE INDEX IF NOT EXISTS si_invoices_biller_id  ON si_invoices (biller_id);
 CREATE INDEX IF NOT EXISTS si_invoices_customer_id ON si_invoices (customer_id);
 CREATE UNIQUE INDEX IF NOT EXISTS si_invoices_uniq_dib ON si_invoices (index_id, preference_id, biller_id, domain_id);
 CREATE INDEX IF NOT EXISTS si_invoices_idx_di ON si_invoices (index_id, preference_id, domain_id);
+CREATE INDEX IF NOT EXISTS si_inv_dom_pref_date ON si_invoices (domain_id, preference_id, date);
 
 CREATE TABLE IF NOT EXISTS si_log (
   id         BIGSERIAL,
@@ -195,6 +197,7 @@ CREATE TABLE IF NOT EXISTS si_payment (
 CREATE INDEX IF NOT EXISTS si_payment_domain_id ON si_payment (domain_id);
 CREATE INDEX IF NOT EXISTS si_payment_ac_inv_id ON si_payment (ac_inv_id);
 CREATE INDEX IF NOT EXISTS si_payment_ac_amount ON si_payment (ac_amount);
+CREATE INDEX IF NOT EXISTS si_pay_dom_ac_date ON si_payment (domain_id, ac_date);
 
 CREATE TABLE IF NOT EXISTS si_payment_types (
   pt_id          SERIAL,

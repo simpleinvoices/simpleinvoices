@@ -1,34 +1,35 @@
 @php
 	$data = $data ?? [];
+	$rg = $report_chart_guard ?? ['enabled' => true];
+	$omitCap = !empty($rg['chart_omitted_invoice_cap']);
 
-	// Grand totals for stats
-	$total_qty_all  = array_sum(array_column($data, 'total_quantity'));
+	$total_qty_all = array_sum(array_column($data, 'total_quantity'));
 	$customer_count = count($data);
 
-	// ── Chart data prep ──────────────────────────────────────────────────────
-	// Collect all unique product names (preserving first-seen order)
-	$all_products = [];
-	foreach ($data as $customer) {
-		foreach (($customer['products'] ?? []) as $p) {
-			$desc = $p['description'] ?? '';
-			if ($desc !== '' && !in_array($desc, $all_products, true)) {
-				$all_products[] = $desc;
+	$chart_rows = $report_chart_rows ?? [];
+	$series_names = $report_chart_series_names ?? [];
+	if (!$omitCap && count($chart_rows) === 0) {
+		$chart_rows = array_values($data);
+		$series_names = [];
+		foreach ($data as $customer) {
+			foreach (($customer['products'] ?? []) as $p) {
+				$desc = $p['description'] ?? '';
+				if ($desc !== '' && ! in_array($desc, $series_names, true)) {
+					$series_names[] = $desc;
+				}
 			}
 		}
 	}
 
-	// Customer name labels for y-axis
-	$chart_labels = array_values(array_column($data, 'name'));
-
-	// One series per product: data[i] = quantity for customer i
+	$chart_labels = array_column($chart_rows, 'name');
 	$chart_series = [];
-	foreach ($all_products as $prod_name) {
+	foreach ($series_names as $prod_name) {
 		$row = ['name' => $prod_name, 'data' => []];
-		foreach ($data as $customer) {
+		foreach ($chart_rows as $customer) {
 			$qty = 0;
 			foreach (($customer['products'] ?? []) as $p) {
 				if (($p['description'] ?? '') === $prod_name) {
-					$qty = (float)($p['sum_quantity'] ?? 0);
+					$qty = (float) ($p['sum_quantity'] ?? 0);
 					break;
 				}
 			}
@@ -37,8 +38,10 @@
 		$chart_series[] = $row;
 	}
 
-	$chartHeight = max(220, min(520, $customer_count * 46 + 80));
-	$hasChartData = $customer_count > 0 && count($all_products) > 0;
+	$chart_row_n = count($chart_rows);
+	$chartHeight = max(220, min(520, $chart_row_n * 46 + 80));
+	$hasChartData = $chart_row_n > 0 && count($series_names) > 0;
+	$showChart = !$omitCap && $hasChartData && ! empty($rg['enabled']);
 @endphp
 
 <div class="card">
@@ -61,13 +64,16 @@
 			<div class="col-sm-4">
 				<div class="p-3 bg-indigo-lt rounded-2 text-center">
 					<div class="text-secondary small mb-1">{{ $LANG['products'] ?? 'Products' }}</div>
-					<div class="h2 fw-bold text-indigo mb-0">{{ count($all_products) }}</div>
+					<div class="h2 fw-bold text-indigo mb-0">{{ (int)($rg['chart_series_total'] ?? count($series_names)) }}</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	@if($hasChartData)
+	@if($omitCap && $customer_count > 0)
+	@include('templates.default.reports.chart_omitted_invoice_cap')
+	@elseif($showChart)
+	@include('templates.default.reports.chart_truncation_notice')
 	{{-- Stacked horizontal bar: each bar = customer, segments = products --}}
 	<div class="card-body border-bottom p-2">
 		<div id="chart-products-by-customer" style="min-height:{{ $chartHeight }}px;"></div>
@@ -122,7 +128,7 @@
 	@endif
 </div>
 
-@if($hasChartData)
+@if($showChart)
 <script>
 (function () {
 	var series    = @json($chart_series);

@@ -34,7 +34,11 @@
   }
 
 //    $bladeView->assign('total_sales', $sth->fetchColumn());
+    $inv = si_report_active_invoice_count($auth_session->domain_id);
+    $chart_pack = si_report_chart_top_rows_by_key($total_sales, 'sum_total', $inv, 1);
     $bladeView ->assign('data', $total_sales);
+    $bladeView ->assign('report_chart_data', $chart_pack['rows']);
+    $bladeView ->assign('report_chart_guard', $chart_pack['guard']);
     $bladeView ->assign('grand_total_sales', $grand_total_sales);
     $bladeView -> assign('pageActive', 'report_sale');
     $bladeView -> assign('active_tab', '#money');

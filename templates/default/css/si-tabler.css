@@ -715,3 +715,30 @@ a.segmented-control-item {
     max-height: 20rem;
     overflow-y: auto;
 }
+
+/* Report tables: lightweight client-side sorting */
+.si-report-sortable thead th[aria-sort] {
+    white-space: nowrap;
+}
+
+.si-report-sort-trigger {
+    cursor: pointer;
+    user-select: none;
+}
+
+.si-report-sort-trigger:focus-visible {
+    outline: 2px solid rgba(var(--tblr-primary-rgb), 0.35);
+    outline-offset: -2px;
+}
+
+.si-report-sort-icon {
+    font-size: 1rem;
+    margin-left: 0.35rem;
+    color: var(--tblr-secondary);
+    vertical-align: middle;
+}
+
+.si-report-sort-trigger[aria-sort="ascending"] .si-report-sort-icon,
+.si-report-sort-trigger[aria-sort="descending"] .si-report-sort-icon {
+    color: var(--tblr-primary);
+}

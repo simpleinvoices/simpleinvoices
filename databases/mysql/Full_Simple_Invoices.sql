@@ -181,7 +181,8 @@ CREATE TABLE IF NOT EXISTS `si_invoice_items` (
   `attribute` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `invoice_id` (`invoice_id`),
-  KEY `DomainInv` (`invoice_id`, `domain_id`)
+  KEY `DomainInv` (`invoice_id`, `domain_id`),
+  KEY `si_ii_dom_invoice` (`domain_id`, `invoice_id`)
 ) ENGINE=MyISAM;
 
 INSERT INTO `si_invoice_items` (`id`, `invoice_id`, `domain_id`, `quantity`, `product_id`, `unit_price`, `tax_amount`, `gross_total`, `description`, `total`) VALUES
@@ -221,7 +222,8 @@ CREATE TABLE IF NOT EXISTS `si_invoices` (
   KEY `biller_id` (`biller_id`),
   KEY `customer_id` (`customer_id`),
   KEY `UniqDIB` (`index_id`, `preference_id`, `biller_id`, `domain_id`), 
-  KEY `IdxDI` (`index_id`, `preference_id`, `domain_id`)
+  KEY `IdxDI` (`index_id`, `preference_id`, `domain_id`),
+  KEY `si_inv_dom_pref_date` (`domain_id`, `preference_id`, `date`)
 ) ENGINE=MyISAM;
 
 INSERT INTO `si_invoices` (`id`, `index_id`, `domain_id`, `biller_id`, `customer_id`, `type_id`, `preference_id`, `date`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `note`) VALUES
@@ -249,7 +251,8 @@ CREATE TABLE IF NOT EXISTS `si_payment` (
   PRIMARY KEY (`domain_id`,`id`),
   KEY `domain_id` (`domain_id`),
   KEY `ac_inv_id` (`ac_inv_id`),
-  KEY `ac_amount` (`ac_amount`)
+  KEY `ac_amount` (`ac_amount`),
+  KEY `si_pay_dom_ac_date` (`domain_id`, `ac_date`)
 ) ENGINE=MyISAM;
 
 CREATE TABLE IF NOT EXISTS `si_payment_types` (

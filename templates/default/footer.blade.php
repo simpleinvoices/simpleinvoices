@@ -35,6 +35,9 @@
 </div>{{-- /page --}}
 <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta20/dist/js/tabler.min.js" defer></script>
 <script src="./include/jquery/si-help-popover.js" defer></script>
+@if(($module ?? '') === 'reports')
+<script src="./include/jquery/si-report-sort.js" defer></script>
+@endif
 {{-- Global preview modal (invoice / payment print preview) --}}
 <div class="modal fade" id="si_preview_modal" tabindex="-1" aria-labelledby="si_preview_modal_label" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
@@ -42,7 +45,7 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="si_preview_modal_label">{{ $LANG['preview'] ?? '' }}</h5>
                 {{-- Icon-only action buttons shown only on mobile (footer is off-screen on small viewports) --}}
-                <div class="d-flex d-md-none gap-1 ms-auto me-2">
+                <div class="d-flex gap-1 ms-auto me-2">
                     <a href="#" id="si_preview_newtab_icon" target="_blank" rel="noopener"
                        class="btn btn-sm btn-ghost-secondary" title="{{ $LANG['open_in_new_tab'] ?? '' }}">
                         <i class="ti ti-external-link"></i>
@@ -62,19 +65,8 @@
             <div class="modal-body p-0">
                 <iframe id="si_preview_iframe" src="about:blank" style="width:100%;height:72vh;border:0;display:block;"></iframe>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer justify-content-start">
                 <button type="button" class="btn" data-bs-dismiss="modal">{{ $LANG['close'] ?? '' }}</button>
-                <div class="ms-auto d-none d-md-flex gap-2">
-                    <a href="#" id="si_preview_newtab_link" target="_blank" rel="noopener" class="btn btn-outline-secondary">
-                        <i class="ti ti-external-link me-1"></i>{{ $LANG['open_in_new_tab'] ?? '' }}
-                    </a>
-                    <a href="#" id="si_preview_pdf_link" target="_blank" rel="noopener" class="btn btn-outline-danger d-none">
-                        <i class="ti ti-file-type-pdf me-1"></i>{{ $LANG['pdf'] ?? '' }}
-                    </a>
-                    <button type="button" class="btn btn-outline-primary" onclick="var f=document.getElementById('si_preview_iframe');if(f&&f.contentWindow)f.contentWindow.print();">
-                        <i class="ti ti-printer me-1"></i>{{ $LANG['print_action'] ?? '' }}
-                    </button>
-                </div>
             </div>
         </div>
     </div>

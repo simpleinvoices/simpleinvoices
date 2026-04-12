@@ -1,8 +1,12 @@
 @php
 	$data = $data ?? [];
+	$chartData = $report_chart_data ?? $data;
+	$rg = $report_chart_guard ?? ['enabled' => true];
 	$total_quantity = $total_quantity ?? 0;
 	$product_count = count($data);
-	$chartHeight = max(200, min(420, $product_count * 38 + 60));
+	$chart_n = count($chartData);
+	$showChart = !empty($rg['enabled']) && $chart_n > 0;
+	$chartHeight = $showChart ? max(200, min(6000, $chart_n * 38 + 60)) : 0;
 @endphp
 
 <div class="card">
@@ -25,8 +29,9 @@
 		</div>
 	</div>
 
-	@if(count($data) > 0)
-	{{-- Chart: horizontal bar —— product vs qty --}}
+	@if($showChart)
+	@include('templates.default.reports.chart_truncation_notice')
+	{{-- Chart: horizontal bar — top rows when dataset is large --}}
 	<div class="card-body border-bottom p-2">
 		<div id="chart-products-total" style="min-height:{{ $chartHeight }}px;"></div>
 	</div>
@@ -72,11 +77,11 @@
 	</div>
 </div>
 
-@if(count($data) > 0)
+@if($showChart)
 <script>
 (function () {
-	var labels     = @json(array_column($data, 'description'));
-	var quantities = @json(array_map(function($r){ return (float)($r['sum_quantity'] ?? 0); }, $data));
+	var labels     = @json(array_column($chartData, 'description'));
+	var quantities = @json(array_map(function($r){ return (float)($r['sum_quantity'] ?? 0); }, $chartData));
 	var qtyLbl     = @json($LANG['quantity'] ?? 'Qty');
 	var chartH     = {{ $chartHeight }};
 

@@ -2,7 +2,10 @@
 	$chartId    = $chartId    ?? ('chart-periods-' . uniqid());
 	$chartColor = $chartColor ?? 'primary';
 	$years      = $years ?? [];
+	$chart_js_years = $chart_js_years ?? $years;
+	$rg         = $report_chart_guard ?? ['enabled' => true];
 	$hasData    = !empty($this_data['months']) && !empty($years);
+	$showChart  = $hasData && !empty($rg['enabled']) && !empty($chart_js_years);
 
 	// Build JS-ready month labels and per-year series
 	// months: [ '01' => [ year => amount ], ... ]
@@ -10,7 +13,7 @@
 	$month_keys  = array_keys($months_data);          // ['01','02',...]
 @endphp
 
-@if($hasData)
+@if($showChart)
 {{-- Line chart: months on x, one line per year --}}
 <div id="{{ $chartId }}" class="mb-3"></div>
 @endif
@@ -71,12 +74,12 @@
 </table>
 </div>
 
-@if($hasData)
+@if($showChart)
 <script>
 (function () {
 	var monthKeys   = @json($month_keys);
 	var monthsData  = @json($months_data);
-	var years       = @json($years);
+	var years       = @json($chart_js_years);
 	var chartId     = @json($chartId);
 	var chartColor  = @json($chartColor);
 	var totalData   = @json($this_data['total'] ?? []);

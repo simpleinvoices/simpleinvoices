@@ -2,6 +2,8 @@
 $show_rates = 1;
 $rate_precision = 1;
 $years = $all_years ?? [];
+$chart_js_years = $chart_years ?? $years;
+$rg = $report_chart_guard ?? ['enabled' => true];
 @endphp
 
 @verbatim
@@ -24,6 +26,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <div class="card">
 	<div class="card-body">
+		@if(!empty($rg['chart_truncated']) || !empty($rg['chart_threshold_blocked']))
+		@include('templates.default.reports.chart_truncation_notice')
+		@endif
 		<div class="d-flex justify-content-end mb-3">
 			<button type="button" class="btn btn-sm btn-outline-secondary but_show_rates" title="{{ $LANG['show_rates'] ?? 'Toggle growth rates' }}">
 				<i class="ti ti-percentage me-1"></i>{{ $LANG['show_rates'] ?? '%' }}
@@ -39,7 +44,10 @@ document.addEventListener('DOMContentLoaded', function() {
 				@include('templates.default.reports.report_sales_by_periods_include', [
 					'this_data' => $this_data,
 					'chartId'   => 'chart-periods-sales',
-					'chartColor' => 'success'
+					'chartColor' => 'success',
+					'report_chart_guard' => $rg,
+					'years' => $years,
+					'chart_js_years' => $chart_js_years,
 				])
 			</div>
 			<div class="col-md-6">
@@ -51,7 +59,10 @@ document.addEventListener('DOMContentLoaded', function() {
 				@include('templates.default.reports.report_sales_by_periods_include', [
 					'this_data' => $this_data,
 					'chartId'   => 'chart-periods-payments',
-					'chartColor' => 'primary'
+					'chartColor' => 'primary',
+					'report_chart_guard' => $rg,
+					'years' => $years,
+					'chart_js_years' => $chart_js_years,
 				])
 			</div>
 		</div>

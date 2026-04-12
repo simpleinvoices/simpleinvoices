@@ -1,7 +1,10 @@
 @php
 	$data = $data ?? [];
+	$chartData = $report_chart_data ?? $data;
+	$rg = $report_chart_guard ?? ['enabled' => true];
 	$grand_total_sales = $grand_total_sales ?? 0;
 	$invoice_count = array_sum(array_column($data, 'count'));
+	$showChart = count($chartData) > 0 && !empty($rg['enabled']);
 @endphp
 
 <div class="card">
@@ -24,7 +27,8 @@
 		</div>
 	</div>
 
-	@if(count($data) > 0)
+	@if($showChart)
+	@include('templates.default.reports.chart_truncation_notice')
 	{{-- Chart --}}
 	<div class="card-body border-bottom p-2">
 		<div id="chart-sales-total"></div>
@@ -70,12 +74,12 @@
 	</div>
 </div>
 
-@if(count($data) > 0)
+@if($showChart)
 <script>
 (function () {
-	var labels  = @json(array_column($data, 'template'));
-	var amounts = @json(array_map(function($r){ return (float)($r['sum_total'] ?? 0); }, $data));
-	var counts  = @json(array_map(function($r){ return (int)($r['count'] ?? 0); }, $data));
+	var labels  = @json(array_column($chartData, 'template'));
+	var amounts = @json(array_map(function($r){ return (float)($r['sum_total'] ?? 0); }, $chartData));
+	var counts  = @json(array_map(function($r){ return (int)($r['count'] ?? 0); }, $chartData));
 	var salesLbl = @json($LANG['total_sales'] ?? 'Total Sales');
 	var invLbl   = @json($LANG['invoices'] ?? 'Invoices');
 

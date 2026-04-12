@@ -157,7 +157,8 @@ CREATE TABLE IF NOT EXISTS `si_invoice_items` (
   `attribute` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `invoice_id` (`invoice_id`),
-  KEY `DomainInv` (`invoice_id`, `domain_id`)
+  KEY `DomainInv` (`invoice_id`, `domain_id`),
+  KEY `si_ii_dom_invoice` (`domain_id`, `invoice_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `si_invoice_type` (
@@ -186,7 +187,8 @@ CREATE TABLE IF NOT EXISTS `si_invoices` (
   KEY `biller_id` (`biller_id`),
   KEY `customer_id` (`customer_id`),
   UNIQUE KEY `UniqDIB` (`index_id`, `preference_id`, `biller_id`, `domain_id`),
-  KEY `IdxDI` (`index_id`, `preference_id`, `domain_id`)
+  KEY `IdxDI` (`index_id`, `preference_id`, `domain_id`),
+  KEY `si_inv_dom_pref_date` (`domain_id`, `preference_id`, `date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `si_log` (
@@ -212,7 +214,8 @@ CREATE TABLE IF NOT EXISTS `si_payment` (
   KEY `id` (`id`),
   KEY `domain_id` (`domain_id`),
   KEY `ac_inv_id` (`ac_inv_id`),
-  KEY `ac_amount` (`ac_amount`)
+  KEY `ac_amount` (`ac_amount`),
+  KEY `si_pay_dom_ac_date` (`domain_id`, `ac_date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `si_payment_types` (
