@@ -26,48 +26,87 @@ require_once './vendor/autoload.php';
 define('BROWSE', true);   // satisfies the checkLogin() guard in module files
 include_once './config/define.php';
 
-// Config loader
+// ---------------------------------------------------------------------------
+// Config
+// ---------------------------------------------------------------------------
 include_once './include/class/ConfigLoader.php';
 
 $config = is_file('./config/custom.config.php')
-    ? ConfigLoader::load('./config/custom.config.php')
-    : ConfigLoader::load('./config/config.php');
+    ? ConfigLoader::load('./config/custom.config.php', '')
+    : ConfigLoader::load('./config/config.php', '');
 
 // Adapter string used throughout sql_queries / sql_patches ('mysql', 'pgsql', 'sqlite')
 $db_server = substr($config->database->adapter, 4);
 
 date_default_timezone_set($config->phpSettings->date->timezone ?? 'UTC');
-error_reporting(E_ERROR);
-ini_set('display_errors', '0');
+#error_reporting(E_ALL);
+#ini_set('display_errors', '1');
 
-// Set up logger — mirrors how init.php does it; writes to the same si.log the app uses
-include_once './include/class/LegacyLogger.php';
-$logFile = './tmp/log/si.log';
-if (!is_file($logFile)) {
-    @touch($logFile);
+// $config->extension is iterated by language.php; default to empty so the foreach
+// is a no-op rather than a fatal when extensions haven't been loaded from the DB yet.
+if (!isset($config->extension) || !$config->extension) {
+    $config->extension = ConfigData::fromArray([]);
 }
-$logger = new LegacyLogger($logFile);
 
-// functions.php: htmlsafe(), simpleInvoicesError() — both called by sql_queries.php
+// ---------------------------------------------------------------------------
+// Core includes — order matters; mirrors init.php
+// ---------------------------------------------------------------------------
+
+// htmlsafe(), simpleInvoicesError(), filenameEscape() — used by sql_queries.php
+include_once './include/init_pre.php';
 include_once './include/functions.php';
 
-// sql_queries.php: opens the DB connection (sets $dbh), defines dbQuery(),
-// run_sql_patch(), initialise_sql_patch(), check_sql_patch(), checkMysqlIndexExists(), …
+// Autoloader for include/class/*.php (invoice, customer, product, biller, …).
+// Mirrors the spl_autoload_register in init.php so any class referenced inside
+// sql_patches.php at include-time is resolved automatically.
+spl_autoload_register(function (string $class_name): void {
+    $path = "./include/class/{$class_name}.php";
+    if (is_file($path)) {
+        include_once $path;
+    }
+});
+
+// db.php: db class used directly by getSystemDefaults() via `new db()`.
+// Must be explicit — the autoloader above would find it, but $config must already
+// be in scope when the constructor runs, so eager-load it here.
+include_once './include/class/db.php';
+
+// domain_id: lives in include/class/domain/id.php — autoloader maps to wrong path.
+include_once './include/class/domain/id.php';
+
+// $auth_session stub: sql_queries.php reads $auth_session->id unconditionally in
+// dbLogger() before checking $can_log, so a null value causes a warning/fatal.
+$auth_session = (object) ['id' => 0, 'domain_id' => 1];
+
+// $logger stub: invoice::max() calls $logger->log() as a global. Provide a no-op
+// so it doesn't fatal — we don't need the log output in the CLI runner.
+$logger = new class {
+    public function log(string $message, string $level = ''): void {}
+    public function info(string $message, array $context = []): void {}
+    public function error(string $message, array $context = []): void {}
+};
+
+// sql_queries.php: opens the DB connection ($dbh), defines dbQuery(), run_sql_patch(),
+// initialise_sql_patch(), check_sql_patch(), checkTableExists(), checkFieldExists(),
+// checkMysqlIndexExists(), getSystemDefaults(), getNumberOfDonePatches(), etc.
 include_once './include/sql_queries.php';
 
-// sql_patches.php: defines the $patch array.
-// Must be included AFTER sql_queries.php because newer patches call checkMysqlIndexExists()
-// at parse time (inside switch blocks that run on include).
+// language.php: sets $language (used by sql_patches.php patch 207) and $LANG.
+// Must come AFTER sql_queries.php because it calls checkTableExists() at include-time.
+include_once './include/language.php';
+
+// sql_patches.php: builds the $patch array, executing DB queries and class
+// instantiations at include-time (getNumberOfDonePatches, getSystemDefaults,
+// checkTableExists, checkFieldExists, new invoice(), $language, $config->*, …).
+// All of the above must be in scope before this line.
 include_once './include/sql_patches.php';
 
 // ---------------------------------------------------------------------------
 // CLI-friendly patch runner
 // ---------------------------------------------------------------------------
 
-// Write to both stdout (docker logs) and si.log
-$log = static function (string $message, string $level = 'info') use ($logger): void {
+$log = static function (string $message): void {
     echo $message . "\n";
-    $logger->log($message, $level);
 };
 
 $total   = max(array_keys($patch));
