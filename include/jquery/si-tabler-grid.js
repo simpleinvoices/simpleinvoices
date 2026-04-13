@@ -414,9 +414,13 @@
 		var page = Math.max(1, this.page);
 		var from = this.total === 0 ? 0 : (page - 1) * rp + 1;
 		var to = this.total === 0 ? 0 : Math.min(page * rp, this.total);
-		var msg = (o.pagestat || siGridStr('pagestat_fallback', 'Displaying {from} to {to} of {total} items'))
-			.replace('{from}', from).replace('{to}', to).replace('{total}', this.total);
-		this.pagerStat.textContent = msg;
+		if (o.largeDataset) {
+			this.pagerStat.textContent = '';
+		} else {
+			var msg = (o.pagestat || siGridStr('pagestat_fallback', 'Displaying {from} to {to} of {total} items'))
+				.replace('{from}', from).replace('{to}', to).replace('{total}', this.total);
+			this.pagerStat.textContent = msg;
+		}
 		if (this.pagerRpSelect && this.pagerRpSelect.querySelector('option[value="' + o.rp + '"]')) {
 			this.pagerRpSelect.value = String(o.rp);
 		}
