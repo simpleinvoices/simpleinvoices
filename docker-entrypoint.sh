@@ -135,6 +135,31 @@ php -r '
   }
 '
 
+# Wait for DB TCP port to be accepting connections before running patches.
+# Hostname resolution was already confirmed above; this waits for the actual port.
+if [ -n "${SI_DB_HOST}" ] && [ "${SI_DATABASE_ADAPTER:-pdo_mysql}" != "pdo_sqlite" ]; then
+  _port="${SI_DB_PORT:-3306}"
+  _max="${SI_DB_WAIT_MAX:-30}"
+  if ! php -r "
+    \$h = getenv('SI_DB_HOST');
+    \$p = (int)(getenv('SI_DB_PORT') ?: 3306);
+    \$max = (int)(getenv('SI_DB_WAIT_MAX') ?: 30);
+    for (\$n = 0; \$n < \$max; \$n++) {
+      \$fp = @fsockopen(\$h, \$p, \$errno, \$errstr, 1);
+      if (\$fp) { fclose(\$fp); exit(0); }
+      if (\$n < \$max - 1) sleep(1);
+    }
+    exit(1);
+  " 2>/dev/null; then
+    echo "Entrypoint: DB not accepting connections on ${SI_DB_HOST}:${_port} after ${_max}s." >&2
+    exit 1
+  fi
+fi
+
+# Auto-apply any pending SQL patches (idempotent — already-applied patches are skipped)
+echo "Entrypoint: running SQL patches..."
+php /var/www/html/cli/run_patches.php
+
 # Wait for PHP-FPM to be listening before starting nginx (avoids 502 on first request after cold start)
 php -r "
   \$max = 30;
