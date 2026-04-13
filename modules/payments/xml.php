@@ -36,10 +36,17 @@ function sql($type = '', $dir, $sort, $rp, $page)
 		}
 	}
 
-	$validFields = ['ap.id', 'ac_inv_id', 'description', 'unit_price', 'enabled'];
-	if (! in_array($sort, $validFields)) {
-		$sort = 'ap.id';
-	}
+	// Map grid column names to safe SQL expressions
+	$sortMap = [
+		'id'        => 'ap.id',
+		'ap.id'     => 'ap.id',
+		'ac_inv_id' => 'ap.ac_inv_id',
+		'customer'  => 'c.name',
+		'biller'    => 'b.name',
+		'ac_amount' => 'ap.ac_amount',
+		'date'      => 'ap.ac_date',
+	];
+	$sort = $sortMap[$sort] ?? 'ap.id';
 
 	$index_name_expr = ($db_server === 'mysql')
 		? "CONCAT(pr.pref_inv_wording, ' ', iv.index_id)"

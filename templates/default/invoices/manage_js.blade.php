@@ -39,6 +39,7 @@
 			useRp: true,
 			rpOptions: [10, 20, 50, 100],
 			rp: {{ max(10, (int)(get('rp') ?? 10)) }},
+			largeDataset: {{ ($large_dataset ?? '') === ($LANG['enabled'] ?? '') ? 'true' : 'false' }},
 			showToggleBtn: false,
 			showTableToggleBtn: false,
 			width: 'auto',

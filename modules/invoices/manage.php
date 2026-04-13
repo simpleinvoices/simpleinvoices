@@ -35,3 +35,6 @@ if(isset($_GET['having']))
 $url =  'index.php?module=invoices&view=xml'.$having;
 
 $bladeView -> assign('url', $url);
+
+$large_dataset = getDefaultLargeDataset();
+$bladeView -> assign('large_dataset', $large_dataset);

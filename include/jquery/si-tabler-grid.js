@@ -43,7 +43,8 @@
 		statusLabels: { enabled: 'Enabled', disabled: 'Disabled' },
 		useCard: true,
 		toolbarSelector: null,
-		showReloadButton: false
+		showReloadButton: false,
+		largeDataset: false
 	};
 
 	function parseXml(xml) {
@@ -89,6 +90,7 @@
 		this.total = this.opts.total || 0;
 		this.pages = 1;
 		this.loading = false;
+		this.rowCount = 0;
 		this.query = '';
 		this.qtype = this.opts.searchitems && this.opts.searchitems.length
 			? (this.opts.searchitems.filter(function (s) { return s.isdefault; })[0] || this.opts.searchitems[0]).name
@@ -369,6 +371,7 @@
 	SiTablerGrid.prototype.renderRows = function (doc) {
 		var o = this.opts;
 		var rowNodes = doc.querySelectorAll('rows > row');
+		this.rowCount = rowNodes.length;
 		this.tbody.innerHTML = '';
 		if (!rowNodes.length) {
 			this.tbody.innerHTML = '<tr><td colspan="' + o.colModel.length + '" class="text-center text-secondary">' + o.nomsg + '</td></tr>';
@@ -422,47 +425,80 @@
 			var nav = document.createElement('nav');
 			var ul = document.createElement('ul');
 			ul.className = 'pagination mb-0';
-			var addPageItem = function (label, active, disabled, clickPage) {
-				var li = document.createElement('li');
-				li.className = 'page-item' + (active ? ' active' : '') + (disabled ? ' disabled' : '');
-				var isEllipsis = label === '...';
-				var el = document.createElement(isEllipsis ? 'span' : 'a');
-				el.className = 'page-link';
-				if (!isEllipsis) el.href = '#';
-				el.textContent = label;
-				if (!isEllipsis) {
-					el.addEventListener('click', function (e) {
-						e.preventDefault();
-						if (disabled) return;
-						if (label === 'Prev') { if (self.page > 1) { self.page--; self.load(); } }
-						else if (label === 'Next') { if (self.page < self.pages) { self.page++; self.load(); } }
-						else if (clickPage !== undefined) { self.page = clickPage; self.load(); }
-					});
-				}
-				li.appendChild(el);
-				ul.appendChild(li);
-			};
-			//addPageItem('Prev', false, this.page <= 1);
-			if (this.pages === 0) {
-				addPageItem('1', false, true);
+
+			if (o.largeDataset) {
+				// Large dataset mode: show only Prev / Next — no numbered pages
+				// (total count reflects whole table, not the active filter, so page numbers mislead)
+				var atFirst = this.page <= 1;
+				var atLast  = this.rowCount < Math.max(1, parseInt(o.rp, 10) || 10);
+
+				var prevLi = document.createElement('li');
+				prevLi.className = 'page-item' + (atFirst ? ' disabled' : '');
+				var prevA = document.createElement('a');
+				prevA.className = 'page-link';
+				prevA.href = '#';
+				prevA.setAttribute('aria-label', siGridStr('prev', 'Previous'));
+				prevA.innerHTML = '<i class="ti ti-chevron-left"></i>';
+				prevA.addEventListener('click', function (e) {
+					e.preventDefault();
+					if (self.page > 1) { self.page--; self.load(); }
+				});
+				prevLi.appendChild(prevA);
+				ul.appendChild(prevLi);
+
+				var nextLi = document.createElement('li');
+				nextLi.className = 'page-item' + (atLast ? ' disabled' : '');
+				var nextA = document.createElement('a');
+				nextA.className = 'page-link';
+				nextA.href = '#';
+				nextA.setAttribute('aria-label', siGridStr('next', 'Next'));
+				nextA.innerHTML = '<i class="ti ti-chevron-right"></i>';
+				nextA.addEventListener('click', function (e) {
+					e.preventDefault();
+					if (!atLast) { self.page++; self.load(); }
+				});
+				nextLi.appendChild(nextA);
+				ul.appendChild(nextLi);
 			} else {
-				var maxVisible = 3;
-				var start = Math.max(1, Math.min(this.page - 1, this.pages - maxVisible + 1));
-				start = Math.max(1, start);
-				var end = Math.min(this.pages, start + maxVisible - 1);
-				if (start > 1) {
-					addPageItem('1', this.page === 1, false, 1);
-					if (start > 2) addPageItem('...', false, true);
-				}
-				for (var p = start; p <= end; p++) {
-					addPageItem(String(p), p === this.page, false, p);
-				}
-				if (end < this.pages) {
-					if (end < this.pages - 1) addPageItem('...', false, true);
-					addPageItem(String(this.pages), this.page === this.pages, false, this.pages);
+				var addPageItem = function (label, active, disabled, clickPage) {
+					var li = document.createElement('li');
+					li.className = 'page-item' + (active ? ' active' : '') + (disabled ? ' disabled' : '');
+					var isEllipsis = label === '...';
+					var el = document.createElement(isEllipsis ? 'span' : 'a');
+					el.className = 'page-link';
+					if (!isEllipsis) el.href = '#';
+					el.textContent = label;
+					if (!isEllipsis) {
+						el.addEventListener('click', function (e) {
+							e.preventDefault();
+							if (disabled) return;
+							if (clickPage !== undefined) { self.page = clickPage; self.load(); }
+						});
+					}
+					li.appendChild(el);
+					ul.appendChild(li);
+				};
+				if (this.pages === 0) {
+					addPageItem('1', false, true);
+				} else {
+					var maxVisible = 3;
+					var start = Math.max(1, Math.min(this.page - 1, this.pages - maxVisible + 1));
+					start = Math.max(1, start);
+					var end = Math.min(this.pages, start + maxVisible - 1);
+					if (start > 1) {
+						addPageItem('1', this.page === 1, false, 1);
+						if (start > 2) addPageItem('...', false, true);
+					}
+					for (var p = start; p <= end; p++) {
+						addPageItem(String(p), p === this.page, false, p);
+					}
+					if (end < this.pages) {
+						if (end < this.pages - 1) addPageItem('...', false, true);
+						addPageItem(String(this.pages), this.page === this.pages, false, this.pages);
+					}
 				}
 			}
-			//addPageItem('Next', false, this.page >= this.pages || this.pages === 0);
+
 			nav.appendChild(ul);
 			this.pagerPagesContainer.appendChild(nav);
 		}
