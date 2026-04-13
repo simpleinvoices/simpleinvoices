@@ -2,6 +2,7 @@
 
 /*
  * Debtors by aging — age in days from SQL (no per-row DateTime); bucket from integer age in PHP.
+ * One row per invoice: pre-aggregated line totals + payments.
  */
 
 global $db_server;
@@ -19,37 +20,28 @@ switch ($db_server) {
         break;
 }
 
-$sql = "SELECT
+$sql = 'SELECT
 			iv.id,
 			iv.index_id,
 			pr.pref_inv_wording,
 			b.name AS biller,
 			c.name AS customer,
-			SUM(COALESCE(ii.total, 0)) AS inv_total,
+			COALESCE(ii_sum.sum_items, 0) AS inv_total,
 			COALESCE(ap.inv_paid, 0) AS inv_paid,
-			SUM(COALESCE(ii.total, 0)) - COALESCE(ap.inv_paid, 0) AS inv_owing,
+			COALESCE(ii_sum.sum_items, 0) - COALESCE(ap.inv_paid, 0) AS inv_owing,
 			iv.date,
-			MAX($age_days_sql) AS age_days
+			' . $age_days_sql . ' AS age_days
 		FROM
-            " . TB_PREFIX . "invoices iv
-            LEFT JOIN " . TB_PREFIX . "invoice_items ii ON (ii.invoice_id = iv.id AND ii.domain_id = iv.domain_id)
-            LEFT JOIN " . TB_PREFIX . "biller b         ON (iv.biller_id = b.id AND b.domain_id = iv.domain_id)
-            LEFT JOIN " . TB_PREFIX . "customers c      ON (iv.customer_id = c.id AND c.domain_id = iv.domain_id)
-            LEFT JOIN " . TB_PREFIX . "preferences pr   ON (iv.preference_id = pr.pref_id AND pr.domain_id = iv.domain_id)
-            LEFT JOIN (
-				SELECT ac_inv_id, domain_id, SUM(COALESCE(ac_amount, 0)) AS inv_paid
-					FROM " . TB_PREFIX . "payment
-					GROUP BY ac_inv_id, domain_id
-			) ap ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
+            ' . TB_PREFIX . 'invoices iv' . si_report_sql_invoice_line_totals_join('iv') . '
+            LEFT JOIN ' . TB_PREFIX . 'biller b         ON (iv.biller_id = b.id AND b.domain_id = iv.domain_id)
+            LEFT JOIN ' . TB_PREFIX . 'customers c      ON (iv.customer_id = c.id AND c.domain_id = iv.domain_id)
+            LEFT JOIN ' . TB_PREFIX . 'preferences pr   ON (iv.preference_id = pr.pref_id AND pr.domain_id = iv.domain_id)' . si_report_sql_invoice_payments_join('iv', false) . '
 		WHERE
 				pr.status    = 1
 			AND iv.domain_id = :domain_id
-		GROUP BY
-			iv.id, iv.index_id, iv.date, b.name, c.name, pr.pref_inv_wording, ap.inv_paid
-		HAVING
-			SUM(COALESCE(ii.total, 0)) - COALESCE(ap.inv_paid, 0) > 0
+			AND (COALESCE(ii_sum.sum_items, 0) - COALESCE(ap.inv_paid, 0)) > 0
 		ORDER BY
-			iv.date ASC";
+			iv.date ASC';
 
 $invoice_results = dbQuery($sql, ':domain_id', $auth_session->domain_id);
 

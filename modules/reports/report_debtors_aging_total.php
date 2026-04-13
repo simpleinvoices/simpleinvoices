@@ -1,13 +1,15 @@
 <?php
 
 /*
- * Aging totals by bucket — one grouped query (MySQL / PostgreSQL / SQLite) instead of
- * scanning all owing invoices in PHP.
+ * Aging totals by bucket — invoices with pre-aggregated lines + payments (no items-first join fan-out).
  */
 
 global $db_server;
 
 $bucket_order = ['0-14' => 0, '15-30' => 1, '31-60' => 2, '61-90' => 3, '90+' => 4];
+
+$ii_join = si_report_sql_invoice_line_totals_join('iv');
+$ap_join = si_report_sql_invoice_payments_join('iv', true);
 
 $aging_sql = '';
 switch ($db_server) {
@@ -24,23 +26,15 @@ switch ($db_server) {
                 WHEN (CURRENT_DATE - iv.date::date) <= 90 THEN '61-90'
                 ELSE '90+'
             END AS bucket,
-            SUM(COALESCE(ii.total, 0)) AS inv_total,
+            COALESCE(ii_sum.sum_items, 0) AS inv_total,
             COALESCE(ap.inv_paid, 0) AS inv_paid,
-            SUM(COALESCE(ii.total, 0)) - COALESCE(ap.inv_paid, 0) AS owing
-            FROM " . TB_PREFIX . "invoice_items ii
-            LEFT JOIN " . TB_PREFIX . "invoices iv ON (ii.invoice_id = iv.id AND ii.domain_id = iv.domain_id)
-            LEFT JOIN " . TB_PREFIX . "preferences pr ON (iv.preference_id = pr.pref_id AND pr.domain_id = iv.domain_id)
-            LEFT JOIN (
-                SELECT ap1.ac_inv_id, ap1.domain_id, SUM(COALESCE(ap1.ac_amount, 0)) AS inv_paid
-                FROM " . TB_PREFIX . "payment ap1
-                LEFT JOIN " . TB_PREFIX . "invoices iv1 ON (ap1.ac_inv_id = iv1.id AND ap1.domain_id = iv1.domain_id)
-                LEFT JOIN " . TB_PREFIX . "preferences pr1 ON (pr1.pref_id = iv1.preference_id AND pr1.domain_id = iv1.domain_id)
-                WHERE pr1.status = 1
-                GROUP BY ap1.ac_inv_id, ap1.domain_id
-            ) ap ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
-            WHERE pr.status = 1 AND ii.domain_id = :domain_id
-            GROUP BY iv.id, iv.date, ap.inv_paid
-            HAVING SUM(COALESCE(ii.total, 0)) - COALESCE(ap.inv_paid, 0) > 0
+            COALESCE(ii_sum.sum_items, 0) - COALESCE(ap.inv_paid, 0) AS owing
+            FROM " . TB_PREFIX . "invoices iv
+            $ii_join
+            INNER JOIN " . TB_PREFIX . "preferences pr ON (iv.preference_id = pr.pref_id AND pr.domain_id = iv.domain_id)
+            $ap_join
+            WHERE pr.status = 1 AND iv.domain_id = :domain_id
+              AND (COALESCE(ii_sum.sum_items, 0) - COALESCE(ap.inv_paid, 0)) > 0
         ) x
         GROUP BY bucket";
         break;
@@ -57,23 +51,15 @@ switch ($db_server) {
                 WHEN CAST((julianday('now') - julianday(date(iv.date))) AS INTEGER) <= 90 THEN '61-90'
                 ELSE '90+'
             END AS bucket,
-            SUM(COALESCE(ii.total, 0)) AS inv_total,
+            COALESCE(ii_sum.sum_items, 0) AS inv_total,
             COALESCE(ap.inv_paid, 0) AS inv_paid,
-            SUM(COALESCE(ii.total, 0)) - COALESCE(ap.inv_paid, 0) AS owing
-            FROM " . TB_PREFIX . "invoice_items ii
-            LEFT JOIN " . TB_PREFIX . "invoices iv ON (ii.invoice_id = iv.id AND ii.domain_id = iv.domain_id)
-            LEFT JOIN " . TB_PREFIX . "preferences pr ON (iv.preference_id = pr.pref_id AND pr.domain_id = iv.domain_id)
-            LEFT JOIN (
-                SELECT ap1.ac_inv_id, ap1.domain_id, SUM(COALESCE(ap1.ac_amount, 0)) AS inv_paid
-                FROM " . TB_PREFIX . "payment ap1
-                LEFT JOIN " . TB_PREFIX . "invoices iv1 ON (ap1.ac_inv_id = iv1.id AND ap1.domain_id = iv1.domain_id)
-                LEFT JOIN " . TB_PREFIX . "preferences pr1 ON (pr1.pref_id = iv1.preference_id AND pr1.domain_id = iv1.domain_id)
-                WHERE pr1.status = 1
-                GROUP BY ap1.ac_inv_id, ap1.domain_id
-            ) ap ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
-            WHERE pr.status = 1 AND ii.domain_id = :domain_id
-            GROUP BY iv.id, iv.date, ap.inv_paid
-            HAVING SUM(COALESCE(ii.total, 0)) - COALESCE(ap.inv_paid, 0) > 0
+            COALESCE(ii_sum.sum_items, 0) - COALESCE(ap.inv_paid, 0) AS owing
+            FROM " . TB_PREFIX . "invoices iv
+            $ii_join
+            INNER JOIN " . TB_PREFIX . "preferences pr ON (iv.preference_id = pr.pref_id AND pr.domain_id = iv.domain_id)
+            $ap_join
+            WHERE pr.status = 1 AND iv.domain_id = :domain_id
+              AND (COALESCE(ii_sum.sum_items, 0) - COALESCE(ap.inv_paid, 0)) > 0
         ) x
         GROUP BY bucket";
         break;
@@ -90,23 +76,15 @@ switch ($db_server) {
                 WHEN DATEDIFF(CURDATE(), DATE(iv.date)) <= 90 THEN '61-90'
                 ELSE '90+'
             END AS bucket,
-            SUM(COALESCE(ii.total, 0)) AS inv_total,
+            COALESCE(ii_sum.sum_items, 0) AS inv_total,
             COALESCE(ap.inv_paid, 0) AS inv_paid,
-            SUM(COALESCE(ii.total, 0)) - COALESCE(ap.inv_paid, 0) AS owing
-            FROM " . TB_PREFIX . "invoice_items ii
-            LEFT JOIN " . TB_PREFIX . "invoices iv ON (ii.invoice_id = iv.id AND ii.domain_id = iv.domain_id)
-            LEFT JOIN " . TB_PREFIX . "preferences pr ON (iv.preference_id = pr.pref_id AND pr.domain_id = iv.domain_id)
-            LEFT JOIN (
-                SELECT ap1.ac_inv_id, ap1.domain_id, SUM(COALESCE(ap1.ac_amount, 0)) AS inv_paid
-                FROM " . TB_PREFIX . "payment ap1
-                LEFT JOIN " . TB_PREFIX . "invoices iv1 ON (ap1.ac_inv_id = iv1.id AND ap1.domain_id = iv1.domain_id)
-                LEFT JOIN " . TB_PREFIX . "preferences pr1 ON (pr1.pref_id = iv1.preference_id AND pr1.domain_id = iv1.domain_id)
-                WHERE pr1.status = 1
-                GROUP BY ap1.ac_inv_id, ap1.domain_id
-            ) ap ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
-            WHERE pr.status = 1 AND ii.domain_id = :domain_id
-            GROUP BY iv.id, iv.date, ap.inv_paid
-            HAVING SUM(COALESCE(ii.total, 0)) - COALESCE(ap.inv_paid, 0) > 0
+            COALESCE(ii_sum.sum_items, 0) - COALESCE(ap.inv_paid, 0) AS owing
+            FROM " . TB_PREFIX . "invoices iv
+            $ii_join
+            INNER JOIN " . TB_PREFIX . "preferences pr ON (iv.preference_id = pr.pref_id AND pr.domain_id = iv.domain_id)
+            $ap_join
+            WHERE pr.status = 1 AND iv.domain_id = :domain_id
+              AND (COALESCE(ii_sum.sum_items, 0) - COALESCE(ap.inv_paid, 0)) > 0
         ) x
         GROUP BY bucket";
         break;

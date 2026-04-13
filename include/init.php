@@ -35,6 +35,7 @@ $auth_session = new LegacyAuthSession('SI_Auth');
 require_once("library/paypal/paypal.class.php");
 include_once('./include/functions.php');
 include_once('./include/report_chart_guard.php');
+include_once('./include/report_invoice_sql.php');
 
 //ob_start('addCSRFProtection');
 

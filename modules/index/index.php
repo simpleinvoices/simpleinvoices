@@ -226,7 +226,7 @@ foreach ($chart_years as $y) {
 }
 $bladeView->assign('annual_totals', $annual_totals);
 
-// Debtor aging buckets — aggregate in SQL (avoids fetching every owing invoice into PHP)
+// Debtor aging buckets — pre-aggregated line totals + payments (one row per invoice; no line-item join fan-out)
 $aging_bucket_sql = '';
 switch ($db_server) {
     case 'pgsql':
@@ -238,18 +238,22 @@ switch ($db_server) {
                 WHEN (CURRENT_DATE - iv.date::date) <= 90 THEN '61-90'
                 ELSE '90+'
             END AS bucket,
-            (SUM(COALESCE(ii.total, 0)) - COALESCE(ap.inv_paid, 0)) AS owing
+            (COALESCE(ii_sum.sum_items, 0) - COALESCE(ap.inv_paid, 0)) AS owing
             FROM " . TB_PREFIX . "invoices iv
-            LEFT JOIN " . TB_PREFIX . "invoice_items ii ON (ii.invoice_id = iv.id AND ii.domain_id = iv.domain_id)
+            LEFT JOIN (
+                SELECT invoice_id, domain_id, SUM(COALESCE(total, 0)) AS sum_items
+                FROM " . TB_PREFIX . "invoice_items
+                GROUP BY invoice_id, domain_id
+            ) ii_sum ON (ii_sum.invoice_id = iv.id AND ii_sum.domain_id = iv.domain_id)
             LEFT JOIN " . TB_PREFIX . "preferences pr ON (iv.preference_id = pr.pref_id AND pr.domain_id = iv.domain_id)
             LEFT JOIN (
                 SELECT ac_inv_id, domain_id, SUM(COALESCE(ac_amount, 0)) AS inv_paid
-                FROM " . TB_PREFIX . 'payment GROUP BY ac_inv_id, domain_id
+                FROM " . TB_PREFIX . "payment
+                GROUP BY ac_inv_id, domain_id
             ) ap ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
             WHERE pr.status = 1 AND iv.domain_id = :domain_id
-            GROUP BY iv.id, iv.date, ap.inv_paid
-            HAVING SUM(COALESCE(ii.total, 0)) - COALESCE(ap.inv_paid, 0) > 0
-        ) x GROUP BY bucket';
+              AND (COALESCE(ii_sum.sum_items, 0) - COALESCE(ap.inv_paid, 0)) > 0
+        ) x GROUP BY bucket";
         break;
     case 'sqlite':
         $aging_bucket_sql = "SELECT bucket, SUM(owing) AS amt FROM (
@@ -260,18 +264,22 @@ switch ($db_server) {
                 WHEN CAST((julianday('now') - julianday(date(iv.date))) AS INTEGER) <= 90 THEN '61-90'
                 ELSE '90+'
             END AS bucket,
-            (SUM(COALESCE(ii.total, 0)) - COALESCE(ap.inv_paid, 0)) AS owing
+            (COALESCE(ii_sum.sum_items, 0) - COALESCE(ap.inv_paid, 0)) AS owing
             FROM " . TB_PREFIX . "invoices iv
-            LEFT JOIN " . TB_PREFIX . "invoice_items ii ON (ii.invoice_id = iv.id AND ii.domain_id = iv.domain_id)
+            LEFT JOIN (
+                SELECT invoice_id, domain_id, SUM(COALESCE(total, 0)) AS sum_items
+                FROM " . TB_PREFIX . "invoice_items
+                GROUP BY invoice_id, domain_id
+            ) ii_sum ON (ii_sum.invoice_id = iv.id AND ii_sum.domain_id = iv.domain_id)
             LEFT JOIN " . TB_PREFIX . "preferences pr ON (iv.preference_id = pr.pref_id AND pr.domain_id = iv.domain_id)
             LEFT JOIN (
                 SELECT ac_inv_id, domain_id, SUM(COALESCE(ac_amount, 0)) AS inv_paid
-                FROM " . TB_PREFIX . 'payment GROUP BY ac_inv_id, domain_id
+                FROM " . TB_PREFIX . "payment
+                GROUP BY ac_inv_id, domain_id
             ) ap ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
             WHERE pr.status = 1 AND iv.domain_id = :domain_id
-            GROUP BY iv.id, iv.date, ap.inv_paid
-            HAVING SUM(COALESCE(ii.total, 0)) - COALESCE(ap.inv_paid, 0) > 0
-        ) x GROUP BY bucket';
+              AND (COALESCE(ii_sum.sum_items, 0) - COALESCE(ap.inv_paid, 0)) > 0
+        ) x GROUP BY bucket";
         break;
     default:
         $aging_bucket_sql = "SELECT bucket, SUM(owing) AS amt FROM (
@@ -282,18 +290,22 @@ switch ($db_server) {
                 WHEN DATEDIFF(CURDATE(), DATE(iv.date)) <= 90 THEN '61-90'
                 ELSE '90+'
             END AS bucket,
-            (SUM(COALESCE(ii.total, 0)) - COALESCE(ap.inv_paid, 0)) AS owing
+            (COALESCE(ii_sum.sum_items, 0) - COALESCE(ap.inv_paid, 0)) AS owing
             FROM " . TB_PREFIX . "invoices iv
-            LEFT JOIN " . TB_PREFIX . "invoice_items ii ON (ii.invoice_id = iv.id AND ii.domain_id = iv.domain_id)
+            LEFT JOIN (
+                SELECT invoice_id, domain_id, SUM(COALESCE(total, 0)) AS sum_items
+                FROM " . TB_PREFIX . "invoice_items
+                GROUP BY invoice_id, domain_id
+            ) ii_sum ON (ii_sum.invoice_id = iv.id AND ii_sum.domain_id = iv.domain_id)
             LEFT JOIN " . TB_PREFIX . "preferences pr ON (iv.preference_id = pr.pref_id AND pr.domain_id = iv.domain_id)
             LEFT JOIN (
                 SELECT ac_inv_id, domain_id, SUM(COALESCE(ac_amount, 0)) AS inv_paid
-                FROM " . TB_PREFIX . 'payment GROUP BY ac_inv_id, domain_id
+                FROM " . TB_PREFIX . "payment
+                GROUP BY ac_inv_id, domain_id
             ) ap ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
             WHERE pr.status = 1 AND iv.domain_id = :domain_id
-            GROUP BY iv.id, iv.date, ap.inv_paid
-            HAVING SUM(COALESCE(ii.total, 0)) - COALESCE(ap.inv_paid, 0) > 0
-        ) x GROUP BY bucket';
+              AND (COALESCE(ii_sum.sum_items, 0) - COALESCE(ap.inv_paid, 0)) > 0
+        ) x GROUP BY bucket";
         break;
 }
 
@@ -319,21 +331,25 @@ foreach ($aging_buckets as $label => $amount) {
 $bladeView->assign('aging_chart', $aging_chart);
 $bladeView->assign('aging_total', round($aging_total, 2));
 
-// Invoice paid percentage (single query — unchanged)
+// Invoice paid percentage — pre-aggregated line totals (matches prior semantics: only invoices with ≥1 line row)
 $paid_sql = "SELECT COUNT(*) AS total_count,
     SUM(CASE WHEN owing <= 0 THEN 1 ELSE 0 END) AS paid_count
 FROM (
     SELECT iv.id,
-        SUM(COALESCE(ii.total, 0)) - COALESCE(ap.inv_paid, 0) AS owing
+        COALESCE(ii_sum.sum_items, 0) - COALESCE(ap.inv_paid, 0) AS owing
     FROM " . TB_PREFIX . "invoices iv
-    INNER JOIN " . TB_PREFIX . "invoice_items ii ON (ii.invoice_id = iv.id AND ii.domain_id = iv.domain_id)
-    INNER JOIN " . TB_PREFIX . "preferences pr   ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id)
+    INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id)
+    INNER JOIN (
+        SELECT invoice_id, domain_id, SUM(COALESCE(total, 0)) AS sum_items
+        FROM " . TB_PREFIX . "invoice_items
+        GROUP BY invoice_id, domain_id
+    ) ii_sum ON (ii_sum.invoice_id = iv.id AND ii_sum.domain_id = iv.domain_id)
     LEFT JOIN (
         SELECT ac_inv_id, domain_id, SUM(ac_amount) AS inv_paid
-        FROM " . TB_PREFIX . "payment GROUP BY ac_inv_id, domain_id
+        FROM " . TB_PREFIX . "payment
+        GROUP BY ac_inv_id, domain_id
     ) ap ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
     WHERE pr.status = 1 AND iv.domain_id = :domain_id
-    GROUP BY iv.id, ap.inv_paid
 ) t";
 $paid_row      = dbQuery($paid_sql, ':domain_id', $domain_id)->fetch();
 $dash_paid_pct = ($paid_row['total_count'] > 0)
@@ -481,6 +497,7 @@ switch ($db_server) {
         $dash_pmt_date       = "DATE_FORMAT(ap.ac_date,'%Y-%m-%d')";
         break;
 }
+// Recent payments: same join shape as Manage Payments grid (LEFT JOIN payment_types); order by date then id
 $latest_payments_sth = dbQuery(
     "SELECT ap.id, ap.ac_inv_id, ap.ac_amount,
             c.name AS cname,
@@ -492,8 +509,9 @@ $latest_payments_sth = dbQuery(
      INNER JOIN " . TB_PREFIX . "customers c ON (c.id = iv.customer_id AND c.domain_id = iv.domain_id)
      INNER JOIN " . TB_PREFIX . "biller b ON (b.id = iv.biller_id AND b.domain_id = iv.domain_id)
      INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id = iv.preference_id AND pr.domain_id = ap.domain_id)
+     LEFT JOIN " . TB_PREFIX . "payment_types pt ON (pt.pt_id = ap.ac_payment_type AND pt.domain_id = ap.domain_id)
      WHERE ap.domain_id = :domain_id
-     ORDER BY ap.id DESC
+     ORDER BY ap.ac_date DESC, ap.id DESC
      LIMIT 5",
     ':domain_id', $domain_id
 );
