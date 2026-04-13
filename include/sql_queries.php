@@ -2530,6 +2530,39 @@ function checkFieldExists($table,$field) {
 	}
 }
 
+/**
+ * Whether a MySQL index with the given name exists on the table (current database).
+ * Used to make SQL patches safe when older installs already match newer schema.
+ */
+function checkMysqlIndexExists($table, $indexName) {
+	global $dbh;
+	global $config;
+	if ($config->database->adapter !== 'pdo_mysql') {
+		return false;
+	}
+	$sql = "SELECT 1 FROM information_schema.statistics
+		WHERE table_schema = DATABASE()
+		AND table_name = :table
+		AND index_name = :index_name
+		LIMIT 1";
+	$sth = $dbh->prepare($sql);
+	if ($sth && $sth->execute(array(':table' => $table, ':index_name' => $indexName))) {
+		return (bool) $sth->fetch();
+	}
+	return false;
+}
+
+/**
+ * ALTER TABLE for InnoDB migration: add secondary KEY on column if missing, else engine-only.
+ */
+function mysqlPatchAlterInnoDbWithKeyIfMissing($tableSuffix, $indexName, $columnName) {
+	$table = TB_PREFIX . $tableSuffix;
+	if (checkMysqlIndexExists($table, $indexName)) {
+		return "ALTER TABLE `{$table}` ENGINE=InnoDB";
+	}
+	return "ALTER TABLE `{$table}` ADD KEY `{$indexName}` (`{$columnName}`), ENGINE=InnoDB";
+}
+
 function checkDataExists()
 {
 	// Patches applied means we're past initial install

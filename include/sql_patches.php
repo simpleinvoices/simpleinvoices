@@ -1727,7 +1727,7 @@ PRIMARY KEY ( `domain_id`, `id` )
 
     $patch['295']['name']  = "Migrate si_biller to InnoDB: add KEY id for AUTO_INCREMENT";
     if ($config->database->adapter === "pdo_mysql") {
-        $patch['295']['patch'] = "ALTER TABLE `".TB_PREFIX."biller` ADD KEY `id` (`id`), ENGINE=InnoDB";
+        $patch['295']['patch'] = mysqlPatchAlterInnoDbWithKeyIfMissing('biller', 'id', 'id');
     } else {
         $patch['295']['patch'] = "SELECT 1";
     }
@@ -1735,7 +1735,7 @@ PRIMARY KEY ( `domain_id`, `id` )
 
     $patch['296']['name']  = "Migrate si_cron to InnoDB: add KEY id for AUTO_INCREMENT";
     if ($config->database->adapter === "pdo_mysql") {
-        $patch['296']['patch'] = "ALTER TABLE `".TB_PREFIX."cron` ADD KEY `id` (`id`), ENGINE=InnoDB";
+        $patch['296']['patch'] = mysqlPatchAlterInnoDbWithKeyIfMissing('cron', 'id', 'id');
     } else {
         $patch['296']['patch'] = "SELECT 1";
     }
@@ -1743,7 +1743,7 @@ PRIMARY KEY ( `domain_id`, `id` )
 
     $patch['297']['name']  = "Migrate si_cron_log to InnoDB: add KEY id for AUTO_INCREMENT";
     if ($config->database->adapter === "pdo_mysql") {
-        $patch['297']['patch'] = "ALTER TABLE `".TB_PREFIX."cron_log` ADD KEY `id` (`id`), ENGINE=InnoDB";
+        $patch['297']['patch'] = mysqlPatchAlterInnoDbWithKeyIfMissing('cron_log', 'id', 'id');
     } else {
         $patch['297']['patch'] = "SELECT 1";
     }
@@ -1751,7 +1751,7 @@ PRIMARY KEY ( `domain_id`, `id` )
 
     $patch['298']['name']  = "Migrate si_customers to InnoDB: add KEY id for AUTO_INCREMENT";
     if ($config->database->adapter === "pdo_mysql") {
-        $patch['298']['patch'] = "ALTER TABLE `".TB_PREFIX."customers` ADD KEY `id` (`id`), ENGINE=InnoDB";
+        $patch['298']['patch'] = mysqlPatchAlterInnoDbWithKeyIfMissing('customers', 'id', 'id');
     } else {
         $patch['298']['patch'] = "SELECT 1";
     }
@@ -1759,7 +1759,7 @@ PRIMARY KEY ( `domain_id`, `id` )
 
     $patch['299']['name']  = "Migrate si_inventory to InnoDB: add KEY id for AUTO_INCREMENT";
     if ($config->database->adapter === "pdo_mysql") {
-        $patch['299']['patch'] = "ALTER TABLE `".TB_PREFIX."inventory` ADD KEY `id` (`id`), ENGINE=InnoDB";
+        $patch['299']['patch'] = mysqlPatchAlterInnoDbWithKeyIfMissing('inventory', 'id', 'id');
     } else {
         $patch['299']['patch'] = "SELECT 1";
     }
@@ -1767,7 +1767,7 @@ PRIMARY KEY ( `domain_id`, `id` )
 
     $patch['300']['name']  = "Migrate si_invoices to InnoDB: add KEY id for AUTO_INCREMENT";
     if ($config->database->adapter === "pdo_mysql") {
-        $patch['300']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices` ADD KEY `id` (`id`), ENGINE=InnoDB";
+        $patch['300']['patch'] = mysqlPatchAlterInnoDbWithKeyIfMissing('invoices', 'id', 'id');
     } else {
         $patch['300']['patch'] = "SELECT 1";
     }
@@ -1775,7 +1775,7 @@ PRIMARY KEY ( `domain_id`, `id` )
 
     $patch['301']['name']  = "Migrate si_payment to InnoDB: add KEY id for AUTO_INCREMENT";
     if ($config->database->adapter === "pdo_mysql") {
-        $patch['301']['patch'] = "ALTER TABLE `".TB_PREFIX."payment` ADD KEY `id` (`id`), ENGINE=InnoDB";
+        $patch['301']['patch'] = mysqlPatchAlterInnoDbWithKeyIfMissing('payment', 'id', 'id');
     } else {
         $patch['301']['patch'] = "SELECT 1";
     }
@@ -1783,7 +1783,7 @@ PRIMARY KEY ( `domain_id`, `id` )
 
     $patch['302']['name']  = "Migrate si_payment_types to InnoDB: add KEY pt_id for AUTO_INCREMENT";
     if ($config->database->adapter === "pdo_mysql") {
-        $patch['302']['patch'] = "ALTER TABLE `".TB_PREFIX."payment_types` ADD KEY `pt_id` (`pt_id`), ENGINE=InnoDB";
+        $patch['302']['patch'] = mysqlPatchAlterInnoDbWithKeyIfMissing('payment_types', 'pt_id', 'pt_id');
     } else {
         $patch['302']['patch'] = "SELECT 1";
     }
@@ -1791,7 +1791,7 @@ PRIMARY KEY ( `domain_id`, `id` )
 
     $patch['303']['name']  = "Migrate si_preferences to InnoDB: add KEY pref_id for AUTO_INCREMENT";
     if ($config->database->adapter === "pdo_mysql") {
-        $patch['303']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD KEY `pref_id` (`pref_id`), ENGINE=InnoDB";
+        $patch['303']['patch'] = mysqlPatchAlterInnoDbWithKeyIfMissing('preferences', 'pref_id', 'pref_id');
     } else {
         $patch['303']['patch'] = "SELECT 1";
     }
@@ -1799,7 +1799,7 @@ PRIMARY KEY ( `domain_id`, `id` )
 
     $patch['304']['name']  = "Migrate si_products to InnoDB: add KEY id for AUTO_INCREMENT";
     if ($config->database->adapter === "pdo_mysql") {
-        $patch['304']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD KEY `id` (`id`), ENGINE=InnoDB";
+        $patch['304']['patch'] = mysqlPatchAlterInnoDbWithKeyIfMissing('products', 'id', 'id');
     } else {
         $patch['304']['patch'] = "SELECT 1";
     }
@@ -1807,7 +1807,7 @@ PRIMARY KEY ( `domain_id`, `id` )
 
     $patch['305']['name']  = "Migrate si_system_defaults to InnoDB: add KEY id for AUTO_INCREMENT";
     if ($config->database->adapter === "pdo_mysql") {
-        $patch['305']['patch'] = "ALTER TABLE `".TB_PREFIX."system_defaults` ADD KEY `id` (`id`), ENGINE=InnoDB";
+        $patch['305']['patch'] = mysqlPatchAlterInnoDbWithKeyIfMissing('system_defaults', 'id', 'id');
     } else {
         $patch['305']['patch'] = "SELECT 1";
     }
@@ -1815,7 +1815,7 @@ PRIMARY KEY ( `domain_id`, `id` )
 
     $patch['306']['name']  = "Migrate si_tax to InnoDB: add KEY tax_id for AUTO_INCREMENT";
     if ($config->database->adapter === "pdo_mysql") {
-        $patch['306']['patch'] = "ALTER TABLE `".TB_PREFIX."tax` ADD KEY `tax_id` (`tax_id`), ENGINE=InnoDB";
+        $patch['306']['patch'] = mysqlPatchAlterInnoDbWithKeyIfMissing('tax', 'tax_id', 'tax_id');
     } else {
         $patch['306']['patch'] = "SELECT 1";
     }
@@ -1823,7 +1823,7 @@ PRIMARY KEY ( `domain_id`, `id` )
 
     $patch['307']['name']  = "Migrate si_user to InnoDB: add KEY id for AUTO_INCREMENT";
     if ($config->database->adapter === "pdo_mysql") {
-        $patch['307']['patch'] = "ALTER TABLE `".TB_PREFIX."user` ADD KEY `id` (`id`), ENGINE=InnoDB";
+        $patch['307']['patch'] = mysqlPatchAlterInnoDbWithKeyIfMissing('user', 'id', 'id');
     } else {
         $patch['307']['patch'] = "SELECT 1";
     }
@@ -2034,7 +2034,9 @@ PRIMARY KEY ( `domain_id`, `id` )
             break;
         case 'pdo_mysql':
         default:
-            $patch['326']['patch'] = 'ALTER TABLE `' . TB_PREFIX . 'invoices` ADD INDEX `si_inv_dom_pref_date` (`domain_id`, `preference_id`, `date`)';
+            $patch['326']['patch'] = checkMysqlIndexExists(TB_PREFIX . 'invoices', 'si_inv_dom_pref_date')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'invoices` ADD INDEX `si_inv_dom_pref_date` (`domain_id`, `preference_id`, `date`)';
             break;
     }
     $patch['326']['date']  = '20260412';
@@ -2047,7 +2049,9 @@ PRIMARY KEY ( `domain_id`, `id` )
             break;
         case 'pdo_mysql':
         default:
-            $patch['327']['patch'] = 'ALTER TABLE `' . TB_PREFIX . 'invoice_items` ADD INDEX `si_ii_dom_invoice` (`domain_id`, `invoice_id`)';
+            $patch['327']['patch'] = checkMysqlIndexExists(TB_PREFIX . 'invoice_items', 'si_ii_dom_invoice')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'invoice_items` ADD INDEX `si_ii_dom_invoice` (`domain_id`, `invoice_id`)';
             break;
     }
     $patch['327']['date']  = '20260412';
@@ -2060,8 +2064,25 @@ PRIMARY KEY ( `domain_id`, `id` )
             break;
         case 'pdo_mysql':
         default:
-            $patch['328']['patch'] = 'ALTER TABLE `' . TB_PREFIX . 'payment` ADD INDEX `si_pay_dom_ac_date` (`domain_id`, `ac_date`)';
+            $patch['328']['patch'] = checkMysqlIndexExists(TB_PREFIX . 'payment', 'si_pay_dom_ac_date')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'payment` ADD INDEX `si_pay_dom_ac_date` (`domain_id`, `ac_date`)';
             break;
     }
     $patch['328']['date']  = '20260412';
+
+    $patch['329']['name']  = 'Add composite index on payment (domain_id, ac_inv_id) for invoice list aggregates';
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['329']['patch'] = 'CREATE INDEX IF NOT EXISTS si_pay_dom_ac_inv ON ' . TB_PREFIX . 'payment (domain_id, ac_inv_id)';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['329']['patch'] = checkMysqlIndexExists(TB_PREFIX . 'payment', 'si_pay_dom_ac_inv')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'payment` ADD INDEX `si_pay_dom_ac_inv` (`domain_id`, `ac_inv_id`)';
+            break;
+    }
+    $patch['329']['date']  = '20260413';
 

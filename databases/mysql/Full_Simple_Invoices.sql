@@ -252,7 +252,8 @@ CREATE TABLE IF NOT EXISTS `si_payment` (
   KEY `domain_id` (`domain_id`),
   KEY `ac_inv_id` (`ac_inv_id`),
   KEY `ac_amount` (`ac_amount`),
-  KEY `si_pay_dom_ac_date` (`domain_id`, `ac_date`)
+  KEY `si_pay_dom_ac_date` (`domain_id`, `ac_date`),
+  KEY `si_pay_dom_ac_inv` (`domain_id`, `ac_inv_id`)
 ) ENGINE=MyISAM;
 
 CREATE TABLE IF NOT EXISTS `si_payment_types` (

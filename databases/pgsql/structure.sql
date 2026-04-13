@@ -198,6 +198,7 @@ CREATE INDEX IF NOT EXISTS si_payment_domain_id ON si_payment (domain_id);
 CREATE INDEX IF NOT EXISTS si_payment_ac_inv_id ON si_payment (ac_inv_id);
 CREATE INDEX IF NOT EXISTS si_payment_ac_amount ON si_payment (ac_amount);
 CREATE INDEX IF NOT EXISTS si_pay_dom_ac_date ON si_payment (domain_id, ac_date);
+CREATE INDEX IF NOT EXISTS si_pay_dom_ac_inv ON si_payment (domain_id, ac_inv_id);
 
 CREATE TABLE IF NOT EXISTS si_payment_types (
   pt_id          SERIAL,

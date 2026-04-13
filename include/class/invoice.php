@@ -340,20 +340,45 @@ class invoice {
                 break;
         }
 
+        // One row per invoice: aggregate line items and payments in subqueries (no line×payment fan-out).
+        // Former HAVING filters apply on the outer query as WHERE (same semantics as HAVING did per invoice).
+        $post_from_filter = '';
+        if (trim($sql_having) !== '') {
+            $post_from_filter = ' ' . str_replace('HAVING', 'WHERE', trim($sql_having));
+        }
+        $sort_outer = $sort;
+        if ($sort_outer === 'iv.id') {
+            $sort_outer = 'id';
+        } elseif ($sort_outer === 'type') {
+            $sort_outer = 'type_id';
+        }
+
+        $ii_agg_join = "
+                     LEFT JOIN (
+                         SELECT invoice_id, domain_id, SUM(total) AS sum_items
+                         FROM " . TB_PREFIX . "invoice_items
+                         GROUP BY invoice_id, domain_id
+                     ) ii_sum ON (ii_sum.invoice_id = iv.id AND ii_sum.domain_id = iv.domain_id)
+                     LEFT JOIN (
+                         SELECT ac_inv_id, domain_id, SUM(ac_amount) AS sum_paid
+                         FROM " . TB_PREFIX . "payment
+                         GROUP BY ac_inv_id, domain_id
+                     ) ap_sum ON (ap_sum.ac_inv_id = iv.id AND ap_sum.domain_id = iv.domain_id)";
+
         global $db_server;
 
         switch ($config->database->adapter)
         {
             case "pdo_pgsql":
-                $sql = "
+                $inner_sql = "
                 SELECT
                      iv.id,
                      iv.index_id AS index_id,
                      b.name AS biller,
                      c.name AS customer,
-                     COALESCE(SUM(ii.total), 0) AS invoice_total,
-                     COALESCE(SUM(ap.ac_amount), 0) AS INV_PAID,
-                     (COALESCE(SUM(ii.total), 0) - COALESCE(SUM(ap.ac_amount), 0)) AS owing,
+                     COALESCE(ii_sum.sum_items, 0) AS invoice_total,
+                     COALESCE(ap_sum.sum_paid, 0) AS INV_PAID,
+                     (COALESCE(ii_sum.sum_items, 0) - COALESCE(ap_sum.sum_paid, 0)) AS owing,
                      TO_CHAR(iv.date, 'YYYY-MM-DD') AS date,
                      EXTRACT(day FROM (now() - iv.date::timestamp))::int AS Age,
                      (CASE WHEN EXTRACT(day FROM (now() - iv.date::timestamp))::int <= 0 THEN ''
@@ -367,30 +392,31 @@ class invoice {
                      pf.status AS status,
                      (pf.pref_inv_wording || ' ' || CAST(iv.index_id AS TEXT)) AS index_name
                 FROM " . TB_PREFIX . "invoices iv
-                     LEFT JOIN " . TB_PREFIX . "payment ap       ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
-                     LEFT JOIN " . TB_PREFIX . "invoice_items ii ON (ii.invoice_id = iv.id AND ii.domain_id = iv.domain_id)
+                     $ii_agg_join
                      LEFT JOIN " . TB_PREFIX . "biller b         ON (b.id = iv.biller_id AND b.domain_id = iv.domain_id)
                      LEFT JOIN " . TB_PREFIX . "customers c      ON (c.id = iv.customer_id AND c.domain_id = iv.domain_id)
                      LEFT JOIN " . TB_PREFIX . "preferences pf   ON (pf.pref_id = iv.preference_id AND pf.domain_id = iv.domain_id)
                 WHERE iv.domain_id = :domain_id
-                    $where
-                GROUP BY
-                    iv.id, iv.index_id, b.name, c.name, iv.date, iv.type_id, pf.pref_description, pf.status, pf.pref_inv_wording
-                $sql_having
-                ORDER BY $sort $dir
+                    $where";
+                $sql = "
+                SELECT * FROM (
+                $inner_sql
+                ) AS si_invoice_grid
+                $post_from_filter
+                ORDER BY $sort_outer $dir
                 $limit";
                 break;
 
             case "pdo_sqlite":
-                $sql = "
+                $inner_sql = "
                 SELECT
                      iv.id,
                      iv.index_id AS index_id,
                      b.name AS biller,
                      c.name AS customer,
-                     COALESCE(SUM(ii.total), 0) AS invoice_total,
-                     COALESCE(SUM(ap.ac_amount), 0) AS INV_PAID,
-                     (COALESCE(SUM(ii.total), 0) - COALESCE(SUM(ap.ac_amount), 0)) AS owing,
+                     COALESCE(ii_sum.sum_items, 0) AS invoice_total,
+                     COALESCE(ap_sum.sum_paid, 0) AS INV_PAID,
+                     (COALESCE(ii_sum.sum_items, 0) - COALESCE(ap_sum.sum_paid, 0)) AS owing,
                      strftime('%Y-%m-%d', iv.date) AS date,
                      CAST(julianday('now') - julianday(iv.date) AS INTEGER) AS Age,
                      (CASE WHEN CAST(julianday('now') - julianday(iv.date) AS INTEGER) <= 0 THEN ''
@@ -404,25 +430,24 @@ class invoice {
                      pf.status AS status,
                      (pf.pref_inv_wording || ' ' || CAST(iv.index_id AS TEXT)) AS index_name
                 FROM " . TB_PREFIX . "invoices iv
-                     LEFT JOIN " . TB_PREFIX . "payment ap       ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
-                     LEFT JOIN " . TB_PREFIX . "invoice_items ii ON (ii.invoice_id = iv.id AND ii.domain_id = iv.domain_id)
+                     $ii_agg_join
                      LEFT JOIN " . TB_PREFIX . "biller b         ON (b.id = iv.biller_id AND b.domain_id = iv.domain_id)
                      LEFT JOIN " . TB_PREFIX . "customers c      ON (c.id = iv.customer_id AND c.domain_id = iv.domain_id)
                      LEFT JOIN " . TB_PREFIX . "preferences pf   ON (pf.pref_id = iv.preference_id AND pf.domain_id = iv.domain_id)
                 WHERE iv.domain_id = :domain_id
-                    $where
-                GROUP BY
-                    iv.id, iv.index_id, b.name, c.name, iv.date, iv.type_id, pf.pref_description, pf.status, pf.pref_inv_wording
-                $sql_having
-                ORDER BY $sort $dir
+                    $where";
+                $sql = "
+                SELECT * FROM (
+                $inner_sql
+                ) AS si_invoice_grid
+                $post_from_filter
+                ORDER BY $sort_outer $dir
                 $limit";
                 break;
 
             case "pdo_mysql":
             default:
-                // Use LEFT JOINs + GROUP BY (same structure as pgsql/sqlite) so that:
-                //  - :domain_id only appears once (PDO named params must be unique)
-                //  - owing/Age/aging are computed from real expressions, not aliases
+                // Pre-aggregated joins; outer WHERE replaces former HAVING (one row per invoice).
                 if ($type == '') {
                     $age_expr    = "DATEDIFF(NOW(), iv.date)";
                     $age_columns = "
@@ -438,15 +463,15 @@ class invoice {
                        '' AS Age,
                        '' AS aging,";
                 }
-                $sql = "
+                $inner_sql = "
                 SELECT
                      iv.id,
                      iv.index_id AS index_id,
                      b.name AS biller,
                      c.name AS customer,
-                     COALESCE(SUM(ii.total), 0) AS invoice_total,
-                     COALESCE(SUM(ap.ac_amount), 0) AS INV_PAID,
-                     (COALESCE(SUM(ii.total), 0) - COALESCE(SUM(ap.ac_amount), 0)) AS owing,
+                     COALESCE(ii_sum.sum_items, 0) AS invoice_total,
+                     COALESCE(ap_sum.sum_paid, 0) AS INV_PAID,
+                     (COALESCE(ii_sum.sum_items, 0) - COALESCE(ap_sum.sum_paid, 0)) AS owing,
                      DATE_FORMAT(iv.date,'%Y-%m-%d') AS date,
                      $age_columns
                      iv.type_id AS type_id,
@@ -454,17 +479,18 @@ class invoice {
                      pf.status AS status,
                      CONCAT(pf.pref_inv_wording, ' ', iv.index_id) AS index_name
                 FROM " . TB_PREFIX . "invoices iv
-                     LEFT JOIN " . TB_PREFIX . "payment ap       ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
-                     LEFT JOIN " . TB_PREFIX . "invoice_items ii ON (ii.invoice_id = iv.id AND ii.domain_id = iv.domain_id)
+                     $ii_agg_join
                      LEFT JOIN " . TB_PREFIX . "biller b         ON (b.id = iv.biller_id AND b.domain_id = iv.domain_id)
                      LEFT JOIN " . TB_PREFIX . "customers c      ON (c.id = iv.customer_id AND c.domain_id = iv.domain_id)
                      LEFT JOIN " . TB_PREFIX . "preferences pf   ON (pf.pref_id = iv.preference_id AND pf.domain_id = iv.domain_id)
                 WHERE iv.domain_id = :domain_id
-                    $where
-                GROUP BY
-                    iv.id, iv.index_id, b.name, c.name, iv.date, iv.type_id, pf.pref_description, pf.status, pf.pref_inv_wording
-                $sql_having
-                ORDER BY $sort $dir
+                    $where";
+                $sql = "
+                SELECT * FROM (
+                $inner_sql
+                ) AS si_invoice_grid
+                $post_from_filter
+                ORDER BY $sort_outer $dir
                 $limit";
                 break;
         }
