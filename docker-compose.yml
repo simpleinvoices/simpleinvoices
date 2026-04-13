@@ -62,6 +62,8 @@ services:
       - SI_PHP_ERROR_LOG=${SI_PHP_ERROR_LOG}
       - SI_CONFIRM_DELETE_LINE_ITEM=${SI_CONFIRM_DELETE_LINE_ITEM}
       - SI_DB_WAIT_MAX=${SI_DB_WAIT_MAX}
+      # Optional: PHP-FPM concurrent workers (image default 20). Raise if logs warn about pm.max_children.
+      - SI_PHP_FPM_MAX_CHILDREN=${SI_PHP_FPM_MAX_CHILDREN:-}
     networks:
       - simpleinvoices-net
 

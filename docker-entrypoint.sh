@@ -1,6 +1,17 @@
 #!/bin/sh
 set -e
 
+# Optional override (set in .env / compose): SI_PHP_FPM_MAX_CHILDREN=30
+# Applied before php-fpm starts; must be a positive integer.
+case "${SI_PHP_FPM_MAX_CHILDREN:-}" in
+  ''|*[!0-9]*) ;;
+  0) ;;
+  *)
+    sed -iE "s/^pm\\.max_children = .*/pm.max_children = ${SI_PHP_FPM_MAX_CHILDREN}/" \
+      /usr/local/etc/php-fpm.d/www.conf
+    ;;
+esac
+
 # Start PHP-FPM early so it's ready while we do config/DB wait
 php-fpm &
 

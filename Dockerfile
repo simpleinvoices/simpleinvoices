@@ -47,6 +47,14 @@ RUN printf '%s\n' \
     'memory_limit = 512M' \
     > /usr/local/etc/php/conf.d/docker-upload-limits.ini
 
+# PHP-FPM: official image defaults to pm.max_children=5, which triggers "server reached pm.max_children"
+# under light concurrent load. Tune down on small hosts (each child uses RAM while handling a request).
+RUN set -eux; \
+    fpm_conf=/usr/local/etc/php-fpm.d/www.conf; \
+    sed -iE 's/^pm\.max_children = .*/pm.max_children = 20/' "$fpm_conf"; \
+    grep -qE '^pm\.max_children = 20$' "$fpm_conf"; \
+    sed -iE 's/^pm\.max_spare_servers = .*/pm.max_spare_servers = 8/' "$fpm_conf"
+
 # Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
