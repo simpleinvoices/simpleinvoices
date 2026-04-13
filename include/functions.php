@@ -20,6 +20,31 @@ function checkLogin() {
 	}
 }
 
+/**
+ * Per-line tax values from POST. Itemised/total invoices use tax_id[line][slot];
+ * consulting / product_consulting use a single scalar tax_id for all lines.
+ *
+ * @param int|string $lineIndex
+ * @return array
+ */
+function invoice_tax_ids_for_line_from_post($lineIndex) {
+	if (!isset($_POST['tax_id'])) {
+		return array();
+	}
+	$t = $_POST['tax_id'];
+	if (is_array($t)) {
+		if (!array_key_exists($lineIndex, $t)) {
+			return array();
+		}
+		$row = $t[$lineIndex];
+		if ($row === null || $row === '') {
+			return array();
+		}
+		return is_array($row) ? $row : array($row);
+	}
+	return array($t);
+}
+
 function getLogoList() {
 	$dirname = "./templates/invoices/logos";
 	$allowed = ['jpg', 'png', 'jpeg', 'gif'];

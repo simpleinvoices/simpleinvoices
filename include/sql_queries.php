@@ -1549,10 +1549,10 @@ function searchCustomers($search) {
 		$sql = "SELECT * FROM ".TB_PREFIX."customers WHERE domain_id = :domain_id AND  name ILIKE :search";
 	}
 	$sth = dbQuery($sql, ':domain_id',$domain_id, ':search', "%$search%");
-	
-	$customers = null;
-	
-	for($i=0; $customer = $sth->fetch(); $i++) {
+
+	$customers = array();
+
+	for ($i = 0; $customer = $sth->fetch(); $i++) {
 		$customers[$i] = $customer;
 	}
 
@@ -1905,7 +1905,7 @@ function updateInvoice($invoice_id, $domain_id='') {
     $domain_id = domain_id::get($domain_id);
 
 	$invoiceobj = new invoice();
-    $current_invoice = $invoiceobj->select($_POST['id']);
+    $current_invoice = $invoiceobj->select($invoice_id);
     $current_pref_group = getPreference($current_invoice['preference_id']);
 
     $new_pref_group=getPreference($_POST['preference_id']);
@@ -1920,9 +1920,11 @@ function updateInvoice($invoice_id, $domain_id='') {
         $index_id = index::increment('invoice',$new_pref_group['index_group']);
     }
 
+	// Invoice type for FK check (insertInvoice receives $type as a parameter; here use POST or existing row)
+	$invoice_type = $_POST['type'] ?? $current_invoice['type_id'];
 	if ($db_server == 'mysql' && !_invoice_check_fk(
 		$_POST['biller_id'], $_POST['customer_id'],
-		$type, $_POST['preference_id'])) {
+		$invoice_type, $_POST['preference_id'])) {
 		return null;
 	}
 	$sql = "UPDATE
@@ -1947,7 +1949,7 @@ function updateInvoice($invoice_id, $domain_id='') {
 		':biller_id', $_POST['biller_id'],
 		':customer_id', $_POST['customer_id'],
 		':preference_id', $_POST['preference_id'],
-		':date', $_POST['date'],
+		':date', SqlDateWithTime($_POST['date']),
 		':note', trim($_POST['note']),
 		':customField1', $_POST['customField1'],
 		':customField2', $_POST['customField2'],
@@ -1964,6 +1966,13 @@ function insertInvoiceItem($invoice_id,$quantity,$product_id,$line_number,$line_
 	global $db_server;
 	global $LANG;
     $domain_id = domain_id::get($domain_id);
+
+	if (!is_array($line_item_tax_id)) {
+		$line_item_tax_id = ($line_item_tax_id === '' || $line_item_tax_id === null) ? array() : array($line_item_tax_id);
+	}
+	if (!is_array($attribute)) {
+		$attribute = array();
+	}
 
     //do taxes
 
@@ -2187,6 +2196,13 @@ function updateInvoiceItem($id, $quantity, $product_id, $line_number, $line_item
 	global $db_server;
     $domain_id = domain_id::get($domain_id);
 
+	if (!is_array($line_item_tax_id)) {
+		$line_item_tax_id = ($line_item_tax_id === '' || $line_item_tax_id === null) ? array() : array($line_item_tax_id);
+	}
+	if (!is_array($attribute)) {
+		$attribute = array();
+	}
+
 	//$product = getProduct($product_id);
 	//$tax = getTaxRate($tax_id);
 
@@ -2203,7 +2219,7 @@ function updateInvoiceItem($id, $quantity, $product_id, $line_number, $line_item
 
 	$tax_total = getTaxesPerLineItem($line_item_tax_id,$quantity, $unit_price);
 
-	$logger->log('Invoice: '.$invoice_id.' Tax '.$line_item_tax_id.' for line item '.$line_number.': '.$tax_total, LegacyLogger::INFO);
+	$logger->log('Line item id: '.$id.' Tax '.$line_item_tax_id.' for line item '.$line_number.': '.$tax_total, LegacyLogger::INFO);
 	$logger->log('Description: '.$description, LegacyLogger::INFO);
 	$logger->log(' ', LegacyLogger::INFO);
 
@@ -3288,6 +3304,9 @@ function calc_invoice_tax($invoice_id, $domain_id='') {
 	$sth = dbQuery($sql, ':invoice_id', $invoice_id, ':domain_id',$domain_id);
 
 	$tax = $sth->fetch();
+	if ($tax === false) {
+		return null;
+	}
 
 	return $tax['total_tax'];
 }

@@ -10,15 +10,21 @@
 * 	http://www.simpleinvoices.org
 */
 
+checkLogin();
 
-if(isset($_POST['submit'])) {
+if (isset($_POST['submit'])) {
+	$taxIds = (isset($_POST['tax_id']) && $_POST['tax_id'] !== '')
+		? array($_POST['tax_id'])
+		: array();
 	insertInvoiceItem(
 		$_POST['id'],
 		$_POST['quantity1'],
 		$_POST['product1'],
-		$_POST['tax_id'],
-		trim($_POST['description']),
-		$_POST['unit_price1']
+		1,
+		$taxIds,
+		trim((string) ($_POST['description'] ?? '')),
+		$_POST['unit_price1'] ?? '',
+		array()
 	);
 }
 else {

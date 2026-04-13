@@ -26,6 +26,7 @@ if(!isset( $_POST['type']) && !isset($_POST['action'])) {
 
 $saved = false;
 $type = $_POST['type'];
+$id = null;
 
 
 
@@ -48,7 +49,7 @@ if ($_POST['action'] == "insert" ) {
 		insertProduct(0,0);
 		$product_id = lastInsertId();
 
-		insertInvoiceItem($id, 1 , $product_id, 1, $_POST['tax_id'][0], $_POST['description'], $_POST['unit_price']);
+		insertInvoiceItem($id, 1 , $product_id, 1, invoice_tax_ids_for_line_from_post(0), $_POST['description'], $_POST['unit_price']);
 	}
 	elseif ($saved) {
 		
@@ -59,7 +60,7 @@ if ($_POST['action'] == "insert" ) {
 			$logger->log('qty='.$_POST["quantity$i"], LegacyLogger::INFO);
 			if($_POST["quantity$i"] != null)
 			{
-				insertInvoiceItem($id, $_POST["quantity$i"], $_POST["products$i"], $i, $_POST["tax_id"][$i], $_POST["description$i"], $_POST["unit_price$i"], $_POST["attribute"][$i]);
+				insertInvoiceItem($id, $_POST["quantity$i"], $_POST["products$i"], $i, invoice_tax_ids_for_line_from_post($i), $_POST["description$i"], $_POST["unit_price$i"], $_POST['attribute'][$i] ?? array());
 			}
 			$i++;
 		}
@@ -110,12 +111,12 @@ if ($_POST['action'] == "insert" ) {
 				//new line item added in edit page
 				if($_POST["line_item$i"] == "")
 				{
-					insertInvoiceItem($id,$_POST["quantity$i"],$_POST["products$i"],$i,$_POST["tax_id"][$i],$_POST["description$i"], $_POST["unit_price$i"],$_POST["attribute"][$i]);
+					insertInvoiceItem($id,$_POST["quantity$i"],$_POST["products$i"],$i,invoice_tax_ids_for_line_from_post($i),$_POST["description$i"], $_POST["unit_price$i"],$_POST['attribute'][$i] ?? array());
 				}
 				
 				if($_POST["line_item$i"] != "")
 				{
-					updateInvoiceItem($_POST["line_item$i"],$_POST["quantity$i"],$_POST["products$i"],$i,$_POST['tax_id'][$i],$_POST["description$i"],$_POST["unit_price$i"],$_POST["attribute"][$i]);
+					updateInvoiceItem($_POST["line_item$i"],$_POST["quantity$i"],$_POST["products$i"],$i,invoice_tax_ids_for_line_from_post($i),$_POST["description$i"],$_POST["unit_price$i"],$_POST['attribute'][$i] ?? array());
 //					$saved;
 					// $saved =  true;
 				}
