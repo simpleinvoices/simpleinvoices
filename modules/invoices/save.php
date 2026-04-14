@@ -31,11 +31,12 @@ $id = null;
 
 
 if ($_POST['action'] == "insert" ) {
-	
+
 	if(insertInvoice($type)) {
 		$id = lastInsertId();
 		//saveCustomFieldValues($_POST['categorie'],$invoice_id);
 		$saved = true;
+		dashboard_cache_clear((int) $auth_session->domain_id);
 	}
 
     /*
@@ -74,6 +75,7 @@ if ($_POST['action'] == "insert" ) {
 	if (updateInvoice($_POST['id'])) {
 		//updateCustomFieldValues($_POST['categorie'],$_POST['invoice_id']);
 		$saved = true;
+		dashboard_cache_clear((int) $auth_session->domain_id);
 	}
 
 	if($type == total_invoice && $saved) {

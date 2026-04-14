@@ -20,10 +20,11 @@ if ( isset($_POST['process_payment']) ) {
 	$payment->ac_date			= SqlDateWithTime($_POST['ac_date']);
 	$payment->ac_payment_type	= $_POST['ac_payment_type'];
 	$result = $payment->insert();
-	
+
 	$saved = !empty($result);
 	if($saved)
 	{
+		dashboard_cache_clear((int) $auth_session->domain_id);
 		$display_block =  $LANG['save_payment_success'];
 	} else {
 		$display_block =  $LANG['save_payment_failure']."<br />".$sql;

@@ -403,3 +403,19 @@ function antiCSRFHiddenInput($action = 'all', $userid = false)
 {
     return '<input type="hidden" name="csrfprotectionbysr" value="'.htmlsafe(siNonce($action, $userid)).'" />';
 }
+
+/**
+ * Invalidate the dashboard data cache for a domain.
+ * Call this after any write that changes invoice or payment data so the next
+ * dashboard load reflects the change rather than serving stale cache.
+ */
+function dashboard_cache_clear(int $domain_id): void
+{
+    $dir = './tmp/cache/dashboard';
+    if (! is_dir($dir)) {
+        return;
+    }
+    foreach (glob($dir . '/dash_' . $domain_id . '_*.json') ?: [] as $f) {
+        @unlink($f);
+    }
+}
