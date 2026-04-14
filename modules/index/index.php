@@ -70,6 +70,28 @@ $bladeView->assign('preferences', $preferences);
 $bladeView->assign('defaults', $defaults);
 $bladeView->assign('language', $language);
 
+// ── Dashboard data cache ────────────────────────────────────────────────────
+// Expensive chart/aging/payment aggregate queries are cached per domain per
+// clock-hour.  Cache expires automatically each new hour; to force a refresh
+// delete (or truncate) all files in tmp/cache/dashboard/.
+$_dash_cache_dir  = './tmp/cache/dashboard';
+$_dash_ttl_bucket = (int) floor(time() / 3600);   // increments once every 60 min
+$_dash_cache_file = sprintf('%s/dash_%d_%d.json', $_dash_cache_dir, (int) $domain_id, $_dash_ttl_bucket);
+$_dash_from_cache = false;
+
+if (! $first_run_wizard && is_readable($_dash_cache_file)) {
+    $_dash_data = json_decode(file_get_contents($_dash_cache_file), true);
+    if (is_array($_dash_data)) {
+        foreach ($_dash_data as $_k => $_v) {
+            $bladeView->assign($_k, $_v);
+        }
+        $_dash_from_cache = true;
+    }
+    unset($_dash_data, $_k, $_v);
+}
+
+if (! $_dash_from_cache) {
+
 // Dashboard chart: monthly invoices & payments for all years since first invoice (max 10)
 $max_chart_years    = 10;
 $chart_current_year = (int) date('Y');
@@ -519,6 +541,48 @@ $latest_payments = $latest_payments_sth->fetchAll(PDO::FETCH_ASSOC);
 
 $bladeView->assign('latest_invoices', $latest_invoices);
 $bladeView->assign('latest_payments', $latest_payments);
+
+    // ── Persist computed data to cache ─────────────────────────────────────
+    if (! $first_run_wizard) {
+        $_dash_payload = [
+            'chart_last12'           => $chart_last12,
+            'chart_current_year'     => $chart_current_year,
+            'chart_years'            => $chart_years,
+            'chart_labels'           => $chart_labels,
+            'chart_data'             => $chart_data,
+            'annual_totals'          => $annual_totals,
+            'aging_chart'            => $aging_chart,
+            'aging_total'            => $aging_total,
+            'dash_paid_pct'          => $dash_paid_pct,
+            'dash_total_inv_count'   => $dash_total_inv_count,
+            'dash_paid_inv_count'    => $dash_paid_inv_count,
+            'dash_all_invoices_paid' => $dash_all_invoices_paid,
+            'dash_aging_all_clear'   => $dash_aging_all_clear,
+            'alltime_inv_monthly'    => $alltime_inv_monthly,
+            'alltime_pmt_monthly'    => $alltime_pmt_monthly,
+            'dash_alltime_inv_total' => $dash_alltime_inv_total,
+            'dash_alltime_pmt_total' => $dash_alltime_pmt_total,
+            'alltime_inv_counts'     => $alltime_inv_counts,
+            'alltime_pmt_counts'     => $alltime_pmt_counts,
+            'dash_total_inv_volume'  => $dash_total_inv_volume,
+            'dash_total_pmt_volume'  => $dash_total_pmt_volume,
+            'latest_invoices'        => $latest_invoices,
+            'latest_payments'        => $latest_payments,
+        ];
+        if (! is_dir($_dash_cache_dir)) {
+            @mkdir($_dash_cache_dir, 0755, true);
+        }
+        @file_put_contents($_dash_cache_file, json_encode($_dash_payload), LOCK_EX);
+        // Remove stale cache files for this domain (previous hour buckets)
+        foreach (glob($_dash_cache_dir . '/dash_' . (int) $domain_id . '_*.json') ?: [] as $_f) {
+            if (realpath($_f) !== realpath($_dash_cache_file)) {
+                @unlink($_f);
+            }
+        }
+        unset($_dash_payload, $_f);
+    }
+
+} // end if (!$_dash_from_cache)
 
 $bladeView->assign('pageActive', 'dashboard');
 $bladeView->assign('active_tab', '#home');
