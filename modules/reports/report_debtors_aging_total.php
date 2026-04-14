@@ -1,4 +1,7 @@
 <?php
+$__rpt_name = basename(__FILE__, '.php');
+if (($__rpt = report_cache_get($__rpt_name, (int)$auth_session->domain_id)) !== null) { foreach ($__rpt as $k => $v) $bladeView->assign($k, $v); return; }
+$__rpt_snap = array_keys($bladeView->getAssigns());
 
 /*
  * Aging totals by bucket — invoices with pre-aggregated lines + payments (no items-first join fan-out).
@@ -128,3 +131,5 @@ $bladeView->assign('sum_owing', $sum_owing);
 
 $bladeView->assign('pageActive', 'report');
 $bladeView->assign('active_tab', '#home');
+report_cache_set($__rpt_name, (int)$auth_session->domain_id,
+    array_diff_key($bladeView->getAssigns(), array_flip($__rpt_snap)));

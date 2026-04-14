@@ -7,6 +7,27 @@ $sort = $_REQUEST['sortname'] ?? 'ap.id';
 $rp   = max(10, (int)($_REQUEST['rp'] ?? 10));
 $page = max(1, (int)($_REQUEST['page'] ?? 1));
 
+// ── Payment grid XML cache ───────────────────────────────────────────────────
+$_pmt_cache_dir  = dirname(dirname(__DIR__)) . '/tmp/cache/payments_xml';
+$_pmt_cache_key  = md5(serialize([
+    $auth_session->domain_id,
+    $auth_session->role_name ?? '',
+    $auth_session->user_id   ?? '',
+    $dir, $sort, $rp, $page,
+    $_REQUEST['query'] ?? '',
+    $_REQUEST['qtype'] ?? '',
+    $_GET['id']  ?? '',
+    $_GET['c_id'] ?? '',
+]));
+$_pmt_cache_file = $_pmt_cache_dir . '/pmt_' . (int) $auth_session->domain_id . '_' . $_pmt_cache_key . '.xml';
+$_pmt_cache_ttl  = 300; // 5 minutes; also cleared immediately on any invoice/payment write
+
+if (file_exists($_pmt_cache_file) && (time() - filemtime($_pmt_cache_file)) < $_pmt_cache_ttl) {
+    echo file_get_contents($_pmt_cache_file);
+    exit;
+}
+// ── end cache check ──────────────────────────────────────────────────────────
+
 /**
  * @param  string  $type  '' for grid rows, 'count' for SQL COUNT(*) (no ORDER/LIMIT)
  */
@@ -175,5 +196,12 @@ foreach ($payments as $row) {
 	$xml .= "</row>";
 }
 $xml .= "</rows>";
+
+// ── Write xml cache ───────────────────────────────────────────────────────────
+if (! is_dir($_pmt_cache_dir)) {
+    @mkdir($_pmt_cache_dir, 0755, true);
+}
+@file_put_contents($_pmt_cache_file, $xml, LOCK_EX);
+// ── end cache write ───────────────────────────────────────────────────────────
 
 echo $xml;

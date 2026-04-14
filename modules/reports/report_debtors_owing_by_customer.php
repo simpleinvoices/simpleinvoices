@@ -1,4 +1,7 @@
 <?php
+$__rpt_name = basename(__FILE__, '.php');
+if (($__rpt = report_cache_get($__rpt_name, (int)$auth_session->domain_id)) !== null) { foreach ($__rpt as $k => $v) $bladeView->assign($k, $v); return; }
+$__rpt_snap = array_keys($bladeView->getAssigns());
 
   // Per-invoice pre-aggregated lines + payments, then SUM by customer (no c×iv×line fan-out).
   // Payments subquery matches legacy: only amounts on invoices with active (status=1) preference.
@@ -41,4 +44,6 @@ ORDER BY
 
   $bladeView -> assign('pageActive', 'report');
   $bladeView -> assign('active_tab', '#home');
+report_cache_set($__rpt_name, (int)$auth_session->domain_id,
+    array_diff_key($bladeView->getAssigns(), array_flip($__rpt_snap)));
 ?>

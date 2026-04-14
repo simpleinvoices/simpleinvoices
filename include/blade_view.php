@@ -45,6 +45,14 @@ class BladeView
     }
 
     /**
+     * Return the current assigns array (used by report cache snapshot diff).
+     */
+    public function getAssigns(): array
+    {
+        return $this->assigns;
+    }
+
+    /**
      * Store a variable for the next display/fetch.
      */
     public function assign($key, $value = null)

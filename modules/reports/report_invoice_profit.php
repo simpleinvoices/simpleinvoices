@@ -20,6 +20,11 @@ function lastOfMonth()
 isset($_POST['start_date']) ? $start_date = $_POST['start_date'] : $start_date = firstOfMonth();
 isset($_POST['end_date']) ? $end_date = $_POST['end_date'] : $end_date = lastOfMonth();
 
+$__rpt_name   = basename(__FILE__, '.php');
+$__rpt_params = ['start' => $start_date, 'end' => $end_date];
+if (($__rpt = report_cache_get($__rpt_name, (int)$auth_session->domain_id, $__rpt_params)) !== null) { foreach ($__rpt as $k => $v) $bladeView->assign($k, $v); return; }
+$__rpt_snap = array_keys($bladeView->getAssigns());
+
 $invoice = new invoice();
 $invoice->start_date = $start_date;
 $invoice->end_date   = $end_date;
@@ -117,3 +122,5 @@ $bladeView->assign('report_chart_guard', $chart_pack['guard']);
 
 $bladeView->assign('pageActive', 'report');
 $bladeView->assign('active_tab', '#home');
+report_cache_set($__rpt_name, (int)$auth_session->domain_id,
+    array_diff_key($bladeView->getAssigns(), array_flip($__rpt_snap)), $__rpt_params);

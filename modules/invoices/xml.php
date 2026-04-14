@@ -17,6 +17,26 @@ $page = (int)($_REQUEST['page'] ?? 1);
 if ($page < 1) $page = 1;
 if ($rp < 10) $rp = 10;
 
+// ── Invoice grid XML cache ───────────────────────────────────────────────────
+$_inv_cache_dir  = $root_path . '/tmp/cache/invoices_xml';
+$_inv_cache_key  = md5(serialize([
+    $auth_session->domain_id,
+    $auth_session->role_name ?? '',
+    $auth_session->user_id   ?? '',
+    $dir, $sort, $rp, $page, $having,
+    $_REQUEST['query'] ?? '',
+    $_REQUEST['qtype'] ?? '',
+    getDefaultLargeDataset(),
+]));
+$_inv_cache_file = $_inv_cache_dir . '/inv_' . (int) $auth_session->domain_id . '_' . $_inv_cache_key . '.xml';
+$_inv_cache_ttl  = 300; // 5 minutes; also cleared immediately on any invoice/payment write
+
+if (file_exists($_inv_cache_file) && (time() - filemtime($_inv_cache_file)) < $_inv_cache_ttl) {
+    echo file_get_contents($_inv_cache_file);
+    exit;
+}
+// ── end cache check ──────────────────────────────────────────────────────────
+
 //$sql = "SELECT * FROM ".TB_PREFIX."invoices LIMIT $start, $limit";
 $invoice = new invoice();
 $invoice->domain_id = $auth_session->domain_id ?? domain_id::get();
@@ -102,5 +122,12 @@ $xml ="";
 	}
 	$xml .= "</rows>";
 
+// ── Write xml cache ───────────────────────────────────────────────────────────
+if (! is_dir($_inv_cache_dir)) {
+    @mkdir($_inv_cache_dir, 0755, true);
+}
+@file_put_contents($_inv_cache_file, $xml, LOCK_EX);
+// ── end cache write ───────────────────────────────────────────────────────────
+
 echo $xml;
-?> 
+?>

@@ -405,17 +405,62 @@ function antiCSRFHiddenInput($action = 'all', $userid = false)
 }
 
 /**
- * Invalidate the dashboard data cache for a domain.
- * Call this after any write that changes invoice or payment data so the next
- * dashboard load reflects the change rather than serving stale cache.
+ * Invalidate all cached data for a domain: dashboard aggregates, invoice grid
+ * pages, payment grid pages, and report pages.
+ * Call this after any write that changes invoice or payment data.
  */
 function dashboard_cache_clear(int $domain_id): void
 {
-    $dir = './tmp/cache/dashboard';
+    // Flat-dir caches keyed by domain prefix
+    $targets = [
+        './tmp/cache/dashboard'    => 'dash_' . $domain_id . '_*.json',
+        './tmp/cache/invoices_xml' => 'inv_'  . $domain_id . '_*.xml',
+        './tmp/cache/payments_xml' => 'pmt_'  . $domain_id . '_*.xml',
+    ];
+    foreach ($targets as $dir => $pattern) {
+        if (! is_dir($dir)) {
+            continue;
+        }
+        foreach (glob($dir . '/' . $pattern) ?: [] as $f) {
+            @unlink($f);
+        }
+    }
+    // Report caches live in their own per-domain subdirectory
+    $rpt_dir = './tmp/cache/reports/' . $domain_id;
+    if (is_dir($rpt_dir)) {
+        foreach (glob($rpt_dir . '/*.json') ?: [] as $f) {
+            @unlink($f);
+        }
+    }
+}
+
+/**
+ * Load a cached report payload for the given report name, domain, and optional
+ * request params.  Returns the cached assign array, or null on miss/expiry.
+ * TTL is 5 minutes; also cleared on any invoice/payment write.
+ */
+function report_cache_get(string $name, int $domain_id, array $params = []): ?array
+{
+    $dir  = './tmp/cache/reports/' . $domain_id;
+    $key  = md5(serialize($params));
+    $file = $dir . '/' . $name . '_' . $key . '.json';
+    if (file_exists($file) && (time() - filemtime($file)) < 300) {
+        $data = json_decode(file_get_contents($file), true);
+        return is_array($data) ? $data : null;
+    }
+    return null;
+}
+
+/**
+ * Persist a report's bladeView assigns to the file cache.
+ */
+function report_cache_set(string $name, int $domain_id, array $data, array $params = []): void
+{
+    $dir  = './tmp/cache/reports/' . $domain_id;
     if (! is_dir($dir)) {
-        return;
+        @mkdir($dir, 0755, true);
     }
-    foreach (glob($dir . '/dash_' . $domain_id . '_*.json') ?: [] as $f) {
-        @unlink($f);
-    }
+    $key  = md5(serialize($params));
+    $file = $dir . '/' . $name . '_' . $key . '.json';
+    @file_put_contents($file, json_encode($data), LOCK_EX);
 }

@@ -545,7 +545,7 @@ $bladeView->assign('latest_payments', $latest_payments);
     // ── Persist computed data to cache ─────────────────────────────────────
     if (! $first_run_wizard) {
         $_dash_payload = [
-            'chart_last12'           => $chart_last12,
+            'chart_last12'           => ['labels' => $chart_last12_labels, 'invoices' => $chart_last12_invoices, 'payments' => $chart_last12_payments],
             'chart_current_year'     => $chart_current_year,
             'chart_years'            => $chart_years,
             'chart_labels'           => $chart_labels,
@@ -560,12 +560,12 @@ $bladeView->assign('latest_payments', $latest_payments);
             'dash_aging_all_clear'   => $dash_aging_all_clear,
             'alltime_inv_monthly'    => $alltime_inv_monthly,
             'alltime_pmt_monthly'    => $alltime_pmt_monthly,
-            'dash_alltime_inv_total' => $dash_alltime_inv_total,
-            'dash_alltime_pmt_total' => $dash_alltime_pmt_total,
+            'dash_alltime_inv_total' => round(array_sum($alltime_inv_monthly), 2),
+            'dash_alltime_pmt_total' => round(array_sum($alltime_pmt_monthly), 2),
             'alltime_inv_counts'     => $alltime_inv_counts,
             'alltime_pmt_counts'     => $alltime_pmt_counts,
-            'dash_total_inv_volume'  => $dash_total_inv_volume,
-            'dash_total_pmt_volume'  => $dash_total_pmt_volume,
+            'dash_total_inv_volume'  => array_sum($alltime_inv_counts),
+            'dash_total_pmt_volume'  => array_sum($alltime_pmt_counts),
             'latest_invoices'        => $latest_invoices,
             'latest_payments'        => $latest_payments,
         ];
