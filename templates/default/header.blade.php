@@ -54,6 +54,7 @@
     @include('include.jquery.jquery_conf_js')
     <script src="./include/jquery/si-validate.js"></script>
     <script src="./include/jquery/si-product-select.js"></script>
+    <script src="./include/jquery/si-select.js"></script>
     <script>
         function siToggleTheme(e) {
             if (e) e.preventDefault();
