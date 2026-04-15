@@ -40,6 +40,19 @@
 			// Directly call the existing product-change handler instead of
 			// relying on a native DOM change event (Tom Select may not fire one).
 			onChange: function (value) {
+				// Keep wrapper validation classes in sync once the form has been
+				// submitted (was-validated class present).
+				var form = selectEl.closest('form');
+				if (form && form.classList.contains('was-validated') && ts.wrapper) {
+					var isEmpty = !value;
+					ts.wrapper.classList.toggle('is-invalid', isEmpty);
+					ts.wrapper.classList.toggle('is-valid', !isEmpty);
+					var feedback = ts.wrapper.nextElementSibling;
+					if (feedback && feedback.classList.contains('invalid-feedback')) {
+						feedback.style.display = isEmpty ? 'block' : 'none';
+					}
+				}
+
 				var row = selectEl.getAttribute('rel');
 				var qEl = document.getElementById('quantity' + row);
 				if (typeof invoice_product_change === 'function') {

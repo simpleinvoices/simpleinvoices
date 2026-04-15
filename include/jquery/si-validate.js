@@ -45,7 +45,40 @@
 		return true;
 	}
 
+	/**
+	 * Bootstrap 5 / Tabler validation for forms with class="needs-validation".
+	 * Relies on HTML5 `required` attributes + form.checkValidity().
+	 * Tom Select hides the native <select> so we manually reflect validity on
+	 * the .ts-wrapper and its adjacent .invalid-feedback sibling.
+	 */
+	function validateBootstrap(form) {
+		// Reflect Tom Select state before checkValidity() so wrapper classes
+		// are correct when was-validated is added.
+		form.querySelectorAll('select[required]').forEach(function (sel) {
+			var wrapper = sel.nextElementSibling;
+			if (!wrapper || !wrapper.classList.contains('ts-wrapper')) return;
+			var isEmpty = !sel.value;
+			wrapper.classList.toggle('is-invalid', isEmpty);
+			wrapper.classList.toggle('is-valid', !isEmpty);
+			// Manually show/hide the adjacent feedback div (Bootstrap's sibling
+			// CSS can't reach through the ts-wrapper that Tom Select inserts).
+			var feedback = wrapper.nextElementSibling;
+			if (feedback && feedback.classList.contains('invalid-feedback')) {
+				feedback.style.display = isEmpty ? 'block' : 'none';
+			}
+		});
+
+		form.classList.add('was-validated');
+		return form.checkValidity();
+	}
+
 	function validateForm(form) {
+		// Bootstrap 5 path for forms that opt-in with needs-validation class
+		if (form.classList && form.classList.contains('needs-validation')) {
+			return validateBootstrap(form);
+		}
+
+		// Legacy validate[required] path
 		var invalid = [];
 		var els = form.querySelectorAll('[class*="validate"]');
 		for (var i = 0; i < els.length; i++) {
