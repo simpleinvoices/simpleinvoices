@@ -35,7 +35,10 @@
 						<select name="product1" class="form-select mt-2 product_change" rel="1">
 							<option value=""></option>
 							@foreach(($products ?? []) as $product)
-								<option @if($product['id'] == $defaults->product) selected @endif value="{{ $product['id'] ?? '' }}">{{ $product['description'] ?? '' }}</option>
+								@if($product['id'] == ($defaults->product ?? null))
+									<option value="{{ $product['id'] }}" selected>{{ $product['description'] }}</option>
+									@break
+								@endif
 							@endforeach
 						</select>
 					@endif

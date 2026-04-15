@@ -67,6 +67,10 @@
 		});
 	}
 
+	// Expose as globals so legacy onsubmit attributes work.
+	window.frmpost_Validator = validateForm;
+	window.checkForm = validateForm;
+
 	if (document.readyState === 'loading') {
 		document.addEventListener('DOMContentLoaded', init);
 	} else {

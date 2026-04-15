@@ -14,4 +14,7 @@ $bladeView -> assign("number_of_rows",$number_of_rows);
 
 $bladeView -> assign('pageActive', 'product_manage');
 $bladeView -> assign('active_tab', '#product');
+
+$large_dataset = getDefaultLargeDataset();
+$bladeView -> assign('large_dataset', $large_dataset);
 ?>

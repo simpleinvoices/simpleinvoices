@@ -153,10 +153,10 @@
 							>
 								<option value=""></option>
 								@foreach(($products ?? []) as $product)
-									<option
-										@if($product['id'] == ((get())['product'][$line] ?? null)) selected @endif
-										value="{{ $product['id'] ?? '' }}"
-									>{{ $product['description'] ?? '' }}</option>
+									@if($product['id'] == ((get())['product'][$line] ?? null))
+										<option value="{{ $product['id'] }}" selected>{{ $product['description'] }}</option>
+										@break
+									@endif
 								@endforeach
 							</select>
 						@endif

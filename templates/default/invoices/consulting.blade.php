@@ -36,7 +36,10 @@
 				<select name="products{{ $line }}" class="form-select form-select-sm product_change" rel="{{ $line }}">
 					<option value=""></option>
 				@foreach(($products ?? []) as $product)
-					<option @if($product['id'] == $defaults->product) selected @endif value="{{ $product['id'] ?? '' }}">{{ $product['description'] ?? '' }}</option>
+					@if($product['id'] == ($defaults->product ?? null))
+						<option value="{{ $product['id'] }}" selected>{{ $product['description'] }}</option>
+						@break
+					@endif
 				@endforeach
 				</select>
 			@endif

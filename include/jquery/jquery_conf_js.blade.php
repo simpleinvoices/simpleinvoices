@@ -3,6 +3,7 @@ var si_conf_delete_line_item = @json((bool)(($defaults['confirm_delete_line_item
 var si_conf_spreadsheet = @json($defaults['spreadsheet'] ?? 'xlsx');
 var si_conf_wordprocessor = @json($defaults['wordprocessor'] ?? 'docx');
 var si_lang_description_conf = @json($LANG['description'] ?? 'Description');
+var si_conf_large_dataset = @json((bool)(($defaults['large_dataset'] ?? '0') == '1'));
 </script>
 @verbatim
 <script type="text/javascript">
@@ -61,6 +62,8 @@ var si_lang_description_conf = @json($LANG['description'] ?? 'Description');
 
 	document.addEventListener('change', function(e) {
 		if (e.target && e.target.matches && e.target.matches('.product_change')) {
+			// Tom Select manages its own onChange callback; skip the native event to avoid double-firing
+			if (e.target.tomselect) return;
 			var row_number = e.target.getAttribute('rel');
 			var product = e.target.value;
 			var qel = document.getElementById('quantity'+row_number);

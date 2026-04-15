@@ -54,4 +54,7 @@ $bladeView -> assign("inv_id",$inv_id);
 $bladeView -> assign('subPageActive', $subPageActive);
 $bladeView -> assign('pageActive', 'payment');
 $bladeView -> assign('active_tab', '#money');
+
+$large_dataset = getDefaultLargeDataset();
+$bladeView -> assign('large_dataset', $large_dataset);
 ?>

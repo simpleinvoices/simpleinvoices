@@ -184,6 +184,16 @@
 			}
 			products.selectedIndex = 0;
 			products.classList.remove('validate[required]');
+			// Remove the cloned Tom Select wrapper and re-initialise on the new row
+			var tsWrap = products.nextElementSibling;
+			if (tsWrap && tsWrap.classList && tsWrap.classList.contains('ts-wrapper')) {
+				tsWrap.parentNode.removeChild(tsWrap);
+			}
+			products.classList.remove('tomselected', 'ts-hidden-accessible');
+			products.style.cssText = '';
+			if (typeof window.siInitProductSelect === 'function') {
+				window.siInitProductSelect(products);
+			}
 		}
 		var upOld = clonedRow.querySelector('#unit_price' + rowID_old); if (upOld) { upOld.id = 'unit_price' + rowID_new; upOld.name = 'unit_price' + rowID_new; upOld.value = ''; upOld.removeAttribute('value'); upOld.classList.remove('validate[required]'); }
 		// Rebuild description textarea fresh to avoid cloning hugeRTE editor state

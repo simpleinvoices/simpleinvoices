@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
     <link rel="stylesheet" href="./templates/default/css/si-tabler.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tom-select@2/dist/css/tom-select.bootstrap5.min.css" />
     <link rel="stylesheet" href="./templates/default/css/print.css" media="print" />
     <script src="./include/jquery/jquery.init.js"></script>
     @php
@@ -48,9 +49,11 @@
     <script src="https://cdn.jsdelivr.net/npm/litepicker@2.0.12/dist/litepicker.js"></script>
     <script src="./include/jquery/si-litepicker.js"></script>
     <script src="./include/jquery/si-autocomplete.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tom-select@2/dist/js/tom-select.complete.min.js"></script>
     @include('include.jquery.jquery_functions_js')
     @include('include.jquery.jquery_conf_js')
     <script src="./include/jquery/si-validate.js"></script>
+    <script src="./include/jquery/si-product-select.js"></script>
     <script>
         function siToggleTheme(e) {
             if (e) e.preventDefault();

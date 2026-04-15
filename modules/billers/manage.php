@@ -25,4 +25,7 @@ checkLogin();
 $bladeView -> assign("number_of_rows",$number_of_rows);
 $bladeView -> assign('pageActive', 'biller');
 $bladeView -> assign('active_tab', '#people');
+
+$large_dataset = getDefaultLargeDataset();
+$bladeView -> assign('large_dataset', $large_dataset);
 ?>

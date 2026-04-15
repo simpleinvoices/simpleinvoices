@@ -744,3 +744,72 @@ a.segmented-control-item {
 .si-report-sort-trigger[aria-sort="descending"] .si-report-sort-icon {
     color: var(--tblr-primary);
 }
+
+/* ── Tom Select ─────────────────────────────────────────────────────────── */
+
+/*
+ * The bootstrap5 theme sets the control background to `transparent` and uses
+ * `var(--bs-body-bg)` for the dropdown — both of which can produce a see-through
+ * appearance inside Tabler's stacking contexts.  Override with Tabler's own
+ * surface token so both light and dark modes always get a solid, opaque panel.
+ */
+
+/* Control (the visible input area) */
+.ts-wrapper.form-select .ts-control,
+.ts-wrapper.form-select.single.input-active .ts-control {
+    background: #fff !important;
+    color: var(--tblr-body-color);
+}
+
+/* Dropdown panel — solid background, decent shadow, rounded corners */
+.ts-dropdown,
+.ts-dropdown.form-control,
+.ts-dropdown.form-select {
+    background: #fff !important;
+    background-color: #fff !important;
+    border: 1px solid var(--tblr-border-color);
+    border-radius: var(--tblr-border-radius);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    z-index: 1060;
+    color: var(--tblr-body-color);
+}
+
+/* Dark mode — override with a solid dark surface */
+[data-bs-theme="dark"] .ts-wrapper.form-select .ts-control,
+[data-bs-theme="dark"] .ts-wrapper.form-select.single.input-active .ts-control {
+    background: #1e293b !important;
+}
+[data-bs-theme="dark"] .ts-dropdown,
+[data-bs-theme="dark"] .ts-dropdown.form-control,
+[data-bs-theme="dark"] .ts-dropdown.form-select {
+    background: #1e293b !important;
+    background-color: #1e293b !important;
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Hover / keyboard-active row */
+.ts-dropdown .option.active,
+.ts-dropdown .option:hover {
+    background-color: var(--tblr-primary);
+    color: #fff;
+    border-radius: calc(var(--tblr-border-radius) - 1px);
+}
+
+/* Adequate touch targets for option rows */
+.ts-dropdown .option {
+    min-height: 2.25rem;
+    display: flex;
+    align-items: center;
+}
+
+/* Mobile: larger tap targets, capped height */
+@media (max-width: 991.98px) {
+    .ts-dropdown .option {
+        min-height: 2.75rem;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+    .ts-dropdown {
+        max-height: 40vh;
+    }
+}

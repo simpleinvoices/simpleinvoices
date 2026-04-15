@@ -21,4 +21,7 @@ $bladeView -> assign('number_of_customers', $number_of_customers);
 
 $bladeView -> assign('pageActive', 'customer');
 $bladeView -> assign('active_tab', '#people');
+
+$large_dataset = getDefaultLargeDataset();
+$bladeView -> assign('large_dataset', $large_dataset);
 ?>
