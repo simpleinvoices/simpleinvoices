@@ -245,7 +245,7 @@ if($module == "export" OR $view == "export" OR $module == "api")
 }	
 
 	if ($module != 'auth') {
-		$bladeView->display("include/jquery/post_load_jquery_ext_js.blade.php");
+		$bladeView->display("include/js/si-post-load.blade.php");
 	}
 		
 		

@@ -34,9 +34,9 @@
 </div>{{-- /page-wrapper --}}
 </div>{{-- /page --}}
 <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta20/dist/js/tabler.min.js" defer></script>
-<script src="./include/jquery/si-help-popover.js" defer></script>
+<script src="./include/js/si-help-popover.js" defer></script>
 @if(($module ?? '') === 'reports')
-<script src="./include/jquery/si-report-sort.js" defer></script>
+<script src="./include/js/si-report-sort.js" defer></script>
 @endif
 {{-- Global preview modal (invoice / payment print preview) --}}
 <div class="modal fade" id="si_preview_modal" tabindex="-1" aria-labelledby="si_preview_modal_label" aria-hidden="true">
