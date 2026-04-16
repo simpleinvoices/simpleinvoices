@@ -43,42 +43,35 @@ if (in_array($sort, $validFields)) {
 	$sort = "name";
 }
 
+$domain_id = domain_id::get();
+
 	//$sql = "SELECT * FROM ".TB_PREFIX."customers ORDER BY $sort $dir LIMIT $start, $limit";
-	$sql = "SELECT 
-				id, 
+	$sql = "SELECT
+				id,
 				name,
                 enabled,
                 visible
-			FROM 
+			FROM
 				".TB_PREFIX."products_attributes
-			WHERE 1
+			WHERE domain_id = :domain_id
 				$where
-			ORDER BY 
-				$sort $dir 
-			LIMIT 
+			ORDER BY
+				$sort $dir
+			LIMIT
 				$start, $limit";
 
 	if (empty($query)) {
-		$sth = dbQuery($sql);
+		$sth = dbQuery($sql, ':domain_id', $domain_id);
 	} else {
-		$sth = dbQuery($sql, ':query', "%$query%");
+		$sth = dbQuery($sql, ':domain_id', $domain_id, ':query', "%$query%");
 	}
 
 	$customers = $sth->fetchAll(PDO::FETCH_ASSOC);
-/*
-	$customers = null;
 
-	for($i=0; $customer = $sth->fetch(PDO::FETCH_ASSOC); $i++) {
-		if ($customer['enabled'] == 1) {
-			$customer['enabled'] = {$LANG['enabled']};
-		} else {
-			$customer['enabled'] = {$LANG['disabled']};
-		}
-*/
 global $dbh;
 
-$sqlTotal = "SELECT count(id) AS count FROM ".TB_PREFIX."products_attributes";
-$tth = dbQuery($sqlTotal);
+$sqlTotal = "SELECT count(id) AS count FROM ".TB_PREFIX."products_attributes WHERE domain_id = :domain_id";
+$tth = dbQuery($sqlTotal, ':domain_id', $domain_id);
 $resultCount = $tth->fetch();
 $count = $resultCount[0];
 //echo sql2xml($customers, $count);
@@ -101,20 +94,20 @@ foreach ($customers as $row) {
 	$xml .= "<cell><![CDATA[".$action."]]></cell>";
 	$xml .= "<cell><![CDATA[".utf8_encode($row['name'])."]]></cell>";
 	if ($row['enabled']=='1') {
-		$xml .= "<cell><![CDATA[<img src='images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
-	}	
+		$xml .= "<cell><![CDATA[<img src='images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";
+	}
 	else {
-		$xml .= "<cell><![CDATA[<img src='images/common/cross.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
+		$xml .= "<cell><![CDATA[<img src='images/common/cross.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";
 	}
 	if ($row['visible']=='1') {
-		$xml .= "<cell><![CDATA[<img src='images/common/tick.png' alt='".$row['visible']."' title='".$row['visible']."' />]]></cell>";				
-	}	
+		$xml .= "<cell><![CDATA[<img src='images/common/tick.png' alt='".$row['visible']."' title='".$row['visible']."' />]]></cell>";
+	}
 	else {
-		$xml .= "<cell><![CDATA[<img src='images/common/cross.png' alt='".$row['visible']."' title='".$row['visible']."' />]]></cell>";				
+		$xml .= "<cell><![CDATA[<img src='images/common/cross.png' alt='".$row['visible']."' title='".$row['visible']."' />]]></cell>";
 	}
 
 
-	$xml .= "</row>";		
+	$xml .= "</row>";
 
 }
 
@@ -124,4 +117,4 @@ $xml .= "</rows>";
 
 echo $xml;
 
-?> 
+?>

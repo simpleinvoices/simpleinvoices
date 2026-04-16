@@ -55,8 +55,8 @@ for($i=1;$i<=4;$i++) {
 }
 
 
-$sql = "SELECT * FROM ".TB_PREFIX."products_attributes";
-$sth =  dbQuery($sql);
+$sql = "SELECT * FROM ".TB_PREFIX."products_attributes WHERE domain_id = :domain_id";
+$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id);
 $attributes = $sth->fetchAll();
 $bladeView -> assign("attributes", $attributes);
 //Customer accounts sections

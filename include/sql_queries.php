@@ -706,9 +706,9 @@ function insertProduct($enabled=1,$visible=1, $domain_id='') {
 	$domain_id = domain_id::get($domain_id);
 
 	if (isset($_POST['enabled'])) $enabled = $_POST['enabled'];
-    //select all attribts
-    $sql = "SELECT * FROM ".TB_PREFIX."products_attributes";
-    $sth =  dbQuery($sql);
+    //select all attributes
+    $sql = "SELECT * FROM ".TB_PREFIX."products_attributes WHERE domain_id = :domain_id";
+    $sth = dbQuery($sql, ':domain_id', $domain_id);
     $attributes = $sth->fetchAll();
 
 	$logger->log('Attr: '.var_export($attributes,true), LegacyLogger::INFO);
@@ -797,8 +797,8 @@ function updateProduct($domain_id='') {
 	$domain_id = domain_id::get($domain_id);
 
     //select all attributes
-    $sql = "SELECT * FROM ".TB_PREFIX."products_attributes";
-    $sth =  dbQuery($sql);
+    $sql = "SELECT * FROM ".TB_PREFIX."products_attributes WHERE domain_id = :domain_id";
+    $sth = dbQuery($sql, ':domain_id', $domain_id);
     $attributes = $sth->fetchAll();
 
     $attr = array();

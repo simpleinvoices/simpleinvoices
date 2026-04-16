@@ -258,19 +258,23 @@ CREATE TABLE IF NOT EXISTS si_products_attribute_type (
 );
 
 CREATE TABLE IF NOT EXISTS si_products_attributes (
-  id      INTEGER PRIMARY KEY AUTOINCREMENT,
-  name    TEXT NOT NULL,
-  type_id TEXT NOT NULL,
-  enabled INTEGER NOT NULL DEFAULT 1,
-  visible INTEGER NOT NULL DEFAULT 1
+  id        INTEGER PRIMARY KEY AUTOINCREMENT,
+  domain_id INTEGER NOT NULL DEFAULT 1,
+  name      TEXT NOT NULL,
+  type_id   TEXT NOT NULL,
+  enabled   INTEGER NOT NULL DEFAULT 1,
+  visible   INTEGER NOT NULL DEFAULT 1
 );
+CREATE INDEX IF NOT EXISTS idx_pa_domain_id ON si_products_attributes (domain_id);
 
 CREATE TABLE IF NOT EXISTS si_products_values (
   id           INTEGER PRIMARY KEY AUTOINCREMENT,
+  domain_id    INTEGER NOT NULL DEFAULT 1,
   attribute_id INTEGER NOT NULL,
   value        TEXT NOT NULL,
   enabled      INTEGER NOT NULL DEFAULT 1
 );
+CREATE INDEX IF NOT EXISTS idx_pv_domain_id ON si_products_values (domain_id);
 
 CREATE TABLE IF NOT EXISTS si_sql_patchmanager (
   sql_id        INTEGER PRIMARY KEY AUTOINCREMENT,

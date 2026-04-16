@@ -1,5 +1,5 @@
 <?php
-// -Gates 5/5/2008 added domain_id to parameters 
+// -Gates 5/5/2008 added domain_id to parameters
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
@@ -11,11 +11,13 @@ $op = $_POST['op'] ?? null;
 #insert invoice_preference
 if (  $op === 'insert_product_attribute' ) {
 
+	$domain_id = domain_id::get();
 	$sql = "INSERT into
 		".TB_PREFIX."products_attributes
+		(domain_id, name, type_id, enabled, visible)
 	VALUES
 		(
-			NULL,
+			:domain_id,
 			:name,
 			:type_id,
 			:enabled,
@@ -23,6 +25,7 @@ if (  $op === 'insert_product_attribute' ) {
 		 )";
 
 	if (dbQuery($sql,
+	  ':domain_id', $domain_id,
 	  ':name', $_POST['name'],
 	  ':type_id', $_POST['type_id'],
 	  ':enabled', $_POST['enabled'],
@@ -45,6 +48,7 @@ if (  $op === 'insert_product_attribute' ) {
 else if (  $op === 'edit_product_attribute' ) {
 
 	if (isset($_POST['save_product_attribute'])) {
+		$domain_id = domain_id::get();
 		$sql = "UPDATE
 				".TB_PREFIX."products_attributes
 			SET
@@ -53,14 +57,16 @@ else if (  $op === 'edit_product_attribute' ) {
 				enabled = :enabled,
 				visible = :visible
 			WHERE
-				id = :id";
+				id = :id
+			AND domain_id = :domain_id";
 
 		if (dbQuery($sql,
 		  ':name', $_POST['name'],
 		  ':type_id', $_POST['type_id'],
 		  ':enabled', $_POST['enabled'],
 		  ':visible', $_POST['visible'],
-		  ':id', $_GET['id']))
+		  ':id', $_GET['id'],
+		  ':domain_id', $domain_id))
 	    {
 			$saved = true;
 			$display_block = "Successfully saved";

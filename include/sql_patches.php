@@ -2086,3 +2086,37 @@ PRIMARY KEY ( `domain_id`, `id` )
     }
     $patch['329']['date']  = '20260413';
 
+    $patch['330']['name'] = "Add domain_id to products_attributes for multi-tenancy";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['330']['patch'] = checkFieldExists(TB_PREFIX.'products_attributes', 'domain_id')
+                ? 'SELECT 1'
+                : "ALTER TABLE ".TB_PREFIX."products_attributes ADD COLUMN domain_id INT NOT NULL DEFAULT 1";
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['330']['patch'] = checkFieldExists(TB_PREFIX.'products_attributes', 'domain_id')
+                ? 'SELECT 1'
+                : "ALTER TABLE `".TB_PREFIX."products_attributes` ADD COLUMN `domain_id` INT(11) NOT NULL DEFAULT '1' AFTER `id`, ADD KEY `idx_pa_domain_id` (`domain_id`)";
+            break;
+    }
+    $patch['330']['date'] = "20260416";
+
+    $patch['331']['name'] = "Add domain_id to products_values for multi-tenancy";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['331']['patch'] = checkFieldExists(TB_PREFIX.'products_values', 'domain_id')
+                ? 'SELECT 1'
+                : "ALTER TABLE ".TB_PREFIX."products_values ADD COLUMN domain_id INT NOT NULL DEFAULT 1";
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['331']['patch'] = checkFieldExists(TB_PREFIX.'products_values', 'domain_id')
+                ? 'SELECT 1'
+                : "ALTER TABLE `".TB_PREFIX."products_values` ADD COLUMN `domain_id` INT(11) NOT NULL DEFAULT '1' AFTER `id`, ADD KEY `idx_pv_domain_id` (`domain_id`)";
+            break;
+    }
+    $patch['331']['date'] = "20260416";
+

@@ -57,20 +57,23 @@ for($i=1;$i<=4;$i++) {
 }
 
 global $db_server;
+$matrix_domain_id = domain_id::get();
 if ($db_server === 'mysql') {
     $sql = "SELECT CONCAT(a.id, '-', v.id) AS id
                  , CONCAT(a.name, '-', v.value) AS display
             FROM ".TB_PREFIX."products_attributes a
                 LEFT JOIN ".TB_PREFIX."products_values v
-                    ON (a.id = v.attribute_id)";
+                    ON (a.id = v.attribute_id AND a.domain_id = v.domain_id)
+            WHERE a.domain_id = :domain_id";
 } else {
     $sql = "SELECT (CAST(a.id AS TEXT) || '-' || CAST(v.id AS TEXT)) AS id
                  , (a.name || '-' || v.value) AS display
             FROM ".TB_PREFIX."products_attributes a
                 LEFT JOIN ".TB_PREFIX."products_values v
-                    ON (a.id = v.attribute_id)";
+                    ON (a.id = v.attribute_id AND a.domain_id = v.domain_id)
+            WHERE a.domain_id = :domain_id";
 }
-$sth =  dbQuery($sql);
+$sth = dbQuery($sql, ':domain_id', $matrix_domain_id);
 $matrix = $sth->fetchAll();
 $bladeView -> assign("matrix", $matrix);
 

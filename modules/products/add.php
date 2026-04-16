@@ -16,8 +16,9 @@ $bladeView -> assign('customFieldLabel',$customFieldLabel);
 $bladeView -> assign('save',$save);
 $bladeView -> assign('taxes',$taxes);
 
-$sql = "select * from ".TB_PREFIX."products_attributes where enabled ='1'";
-$sth =  dbQuery($sql);
+$domain_id = domain_id::get();
+$sql = "SELECT * FROM ".TB_PREFIX."products_attributes WHERE enabled = '1' AND domain_id = :domain_id";
+$sth = dbQuery($sql, ':domain_id', $domain_id);
 $attributes = $sth->fetchAll();
 
 $bladeView -> assign("attributes", $attributes);
