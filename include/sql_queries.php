@@ -2001,7 +2001,7 @@ function insertInvoiceItem($invoice_id,$quantity,$product_id,$line_number,$line_
 	//line item total
 	$total = $gross_total + $tax_total;	
 
-	//Remove jquery auto-fill description - refer include/jquery/jquery_conf_js.blade.php autofill section
+	//Remove auto-fill description - refer include/js/si-conf.blade.php autofill section
 	if ($description == $LANG['description'])
 	{	
 		$description ="";
@@ -2229,7 +2229,7 @@ function updateInvoiceItem($id, $quantity, $product_id, $line_number, $line_item
 	//line item total
 	$total = $gross_total + $tax_total;	
 
-	//Remove jquery auto-fill description - refer include/jquery/jquery_conf_js.blade.php autofill section
+	//Remove auto-fill description - refer include/js/si-conf.blade.php autofill section
 	if ($description == $LANG['description'])
 	{	
 		$description ="";

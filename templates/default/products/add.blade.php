@@ -12,7 +12,7 @@
 		{{ $LANG['product_description_prompt'] ?? '' }}</div>
 	@endif
 
-<form name="frmpost" action="index.php?module=products&view=add" method="POST" id="frmpost" onsubmit="return checkForm(this);">
+<form name="frmpost" action="index.php?module=products&view=add" method="POST" id="frmpost" class="needs-validation" novalidate>
 <div class="card">
 	<div class="card-header">
 		<ul class="nav nav-tabs card-header-tabs" role="tablist">
@@ -34,7 +34,8 @@
 					<label class="form-label">{{ $LANG['description'] ?? '' }}
 					<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field" title="{{ $LANG['required_field'] ?? '' }}"><i class="ti ti-asterisk text-danger"></i></a>
 					</label>
-					<input type="text" name="description" value="{{ post('description') }}" id="description" class="form-control validate[required]" />
+					<input type="text" name="description" value="{{ post('description') }}" id="description" class="form-control" required />
+					<div class="invalid-feedback">{{ $LANG['required_field'] ?? 'Required' }}</div>
 				</div>
 				<div class="mb-3">
 					<label class="form-label">{{ $LANG['unit_price'] ?? '' }}</label>

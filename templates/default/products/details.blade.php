@@ -1,4 +1,4 @@
-<form name="frmpost" action="index.php?module=products&view=save&id={{ urlencode(get('id')) }}" method="post" id="frmpost" onsubmit="return checkForm(this);">
+<form name="frmpost" action="index.php?module=products&view=save&id={{ urlencode(get('id')) }}" method="post" id="frmpost" class="needs-validation" novalidate>
 
 @if(get('action')== 'view' )
 <div class="card">
@@ -146,7 +146,8 @@
 					<label class="form-label">{{ $LANG['product_description'] ?? '' }}
 						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field" title="{{ $LANG['required_field'] ?? '' }}"><i class="ti ti-asterisk text-danger"></i></a>
 					</label>
-					<input type="text" name="description" value="{{ $product['description'] ?? '' }}" id="description" class="form-control validate[required]" />
+					<input type="text" name="description" value="{{ $product['description'] ?? '' }}" id="description" class="form-control" required />
+					<div class="invalid-feedback">{{ $LANG['required_field'] ?? 'Required' }}</div>
 				</div>
 				<div class="mb-3">
 					<label class="form-label">{{ $LANG['product_unit_price'] ?? '' }}</label>

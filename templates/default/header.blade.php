@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="./templates/default/css/si-tabler.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tom-select@2/dist/css/tom-select.bootstrap5.min.css" />
     <link rel="stylesheet" href="./templates/default/css/print.css" media="print" />
-    <script src="./include/jquery/jquery.init.js"></script>
+    <script src="./include/js/si-init.js"></script>
     @php
         $si_grid_lang = [
             'search' => $LANG['grid_search'] ?? '',
@@ -43,18 +43,18 @@
     <script>
         window.SI_GRID_LANG = @json($si_grid_lang);
     </script>
-    <script src="./include/jquery/si-tabler-grid.js"></script>
-    <script src="./include/jquery/si-bootstrap.js"></script>
+    <script src="./include/js/si-tabler-grid.js"></script>
+    <script src="./include/js/si-bootstrap.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/hugerte@1.0.10/hugerte.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/litepicker@2.0.12/dist/litepicker.js"></script>
-    <script src="./include/jquery/si-litepicker.js"></script>
-    <script src="./include/jquery/si-autocomplete.js"></script>
+    <script src="./include/js/si-litepicker.js"></script>
+    <script src="./include/js/si-autocomplete.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/tom-select@2/dist/js/tom-select.complete.min.js"></script>
-    @include('include.jquery.jquery_functions_js')
-    @include('include.jquery.jquery_conf_js')
-    <script src="./include/jquery/si-validate.js"></script>
-    <script src="./include/jquery/si-product-select.js"></script>
-    <script src="./include/jquery/si-select.js"></script>
+    @include('include.js.si-functions')
+    @include('include.js.si-conf')
+    <script src="./include/js/si-validate.js"></script>
+    <script src="./include/js/si-product-select.js"></script>
+    <script src="./include/js/si-select.js"></script>
     <script>
         function siToggleTheme(e) {
             if (e) e.preventDefault();

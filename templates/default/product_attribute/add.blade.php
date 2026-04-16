@@ -1,29 +1,25 @@
 
-{{-- if customer is updated or saved. --}} 
+{{-- if customer is updated or saved. --}}
 
-@if(post('name') != "" && form_submitted() ) 
+@if(post('name') != "" && form_submitted() )
 {{ $refresh_total }}
 
 <br />
 <br />
-{{ $display_block }} 
+{{ $display_block }}
 <br />
 <br />
 
 @else
-{{-- if  name was inserted --}} 
-	@if(form_submitted()) 
-		<div class="validation_alert"><img src="./images/common/important.png" alt="" />
-		You must enter a name for the product attribute</div>
-		<hr />
-	@endif
-<form name="frmpost" action="index.php?module=product_attribute&amp;view=add" method="post">
+
+<form name="frmpost" action="index.php?module=product_attribute&amp;view=add" method="post" class="needs-validation" novalidate>
 
 <div class="card">
 	<div class="card-body">
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['name'] ?? '' }}</label>
-			<input type="text" name="name" value="{{ post('name') }}" size="25" class="form-control" />
+			<input type="text" name="name" value="{{ post('name') }}" size="25" class="form-control" required />
+			<div class="invalid-feedback">{{ $LANG['required_field'] ?? 'Required' }}</div>
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['type'] ?? '' }}</label>
@@ -51,5 +47,5 @@
 	</div>
 </div>
 </form>
-	
+
 @endif

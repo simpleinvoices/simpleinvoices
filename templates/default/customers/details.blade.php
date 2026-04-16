@@ -184,7 +184,7 @@
 
 @if(get('action') == 'edit' )
 
-<form name="frmpost" action="index.php?module=customers&amp;view=save&amp;id={{ urlencode($customer['id'] ?? '') }}" method="post" id="frmpost" onsubmit="return checkForm(this);">
+<form name="frmpost" action="index.php?module=customers&amp;view=save&amp;id={{ urlencode($customer['id'] ?? '') }}" method="post" id="frmpost" class="needs-validation" novalidate>
 <div class="card" id="si_form_cust_edit">
 	<div class="card-header">
 		<ul class="nav nav-tabs card-header-tabs" role="tablist">
@@ -212,7 +212,8 @@
 					<label class="form-label">{{ $LANG['customer_name'] ?? '' }}
 						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field" title="{{ $LANG['required_field'] ?? '' }}"><i class="ti ti-asterisk text-danger"></i></a>
 					</label>
-					<input type="text" name="name" value="{{ $customer['name'] ?? '' }}" id="name" class="form-control validate[required]" />
+					<input type="text" name="name" value="{{ $customer['name'] ?? '' }}" id="name" class="form-control" required />
+					<div class="invalid-feedback">{{ $LANG['required_field'] ?? 'Required' }}</div>
 				</div>
 				<div class="mb-3">
 					<label class="form-label">{{ $LANG['customer_department'] ?? '' }}</label>

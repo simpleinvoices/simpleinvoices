@@ -14,7 +14,7 @@
 * Website:
 *	http://www.simpleinvoices.org
 */ --}}
-<form name="frmpost" action="index.php?module=payment_types&amp;view=save" method="post">
+<form name="frmpost" action="index.php?module=payment_types&amp;view=save" method="post" class="needs-validation" novalidate>
 
 <div class="card">
 	<div class="card-body">
@@ -24,7 +24,8 @@
 				<i class="ti ti-asterisk text-danger"></i>
 			</a>
 			</label>
-			<input class="form-control validate[required]" type="text" name="pt_description" size="30" />
+			<input class="form-control" type="text" name="pt_description" size="30" required />
+			<div class="invalid-feedback">{{ $LANG['required_field'] ?? 'Required' }}</div>
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['enabled'] ?? '' }}</label>

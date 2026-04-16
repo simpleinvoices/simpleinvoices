@@ -6,7 +6,7 @@
 *
 * License:
 *	 GPL v3 or above --}}
-<form name="frmpost" action="index.php?module=billers&amp;view=save&amp;id={{ get('id') }}" method="post" id="frmpost" onsubmit="return checkForm(this);">
+<form name="frmpost" action="index.php?module=billers&amp;view=save&amp;id={{ get('id') }}" method="post" id="frmpost" class="needs-validation" novalidate>
 
 @if(get('action')== 'view' )
 
@@ -138,7 +138,8 @@
 					<label class="form-label">{{ $LANG['biller_name'] ?? '' }}
 						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field" title="{{ $LANG['required_field'] ?? '' }}"><i class="ti ti-asterisk text-danger"></i></a>
 					</label>
-					<input type="text" name="name" value="{{ $biller['name'] ?? '' }}" id="name" class="form-control validate[required]" />
+					<input type="text" name="name" value="{{ $biller['name'] ?? '' }}" id="name" class="form-control" required />
+					<div class="invalid-feedback">{{ $LANG['required_field'] ?? 'Required' }}</div>
 				</div>
 				<div class="mb-3">
 					<label class="form-label">{{ $LANG['email'] ?? '' }}</label>

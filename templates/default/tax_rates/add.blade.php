@@ -17,13 +17,14 @@
 	@endif
 
 
-<form name="frmpost" action="index.php?module=tax_rates&amp;view=add" method="POST">
+<form name="frmpost" action="index.php?module=tax_rates&amp;view=add" method="POST" class="needs-validation" novalidate>
 
 <div class="card">
 	<div class="card-body">
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['description'] ?? '' }}</label>
-			<input type="text" class="form-control validate[required]" name="tax_description" value="{{ post('tax_description') }}" />
+			<input type="text" class="form-control" name="tax_description" value="{{ post('tax_description') }}" required />
+			<div class="invalid-feedback">{{ $LANG['required_field'] ?? 'Required' }}</div>
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['rate'] ?? '' }}

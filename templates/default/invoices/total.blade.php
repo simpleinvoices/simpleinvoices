@@ -9,7 +9,7 @@
 *	http://www.simpleinvoices.org
 */ --}}
 
-<form name="frmpost" action="index.php?module=invoices&amp;view=save" method="POST">
+<form name="frmpost" action="index.php?module=invoices&amp;view=save" method="POST" class="needs-validation" novalidate>
 <!--
 <h3>{{ $LANG['inv'] ?? '' }} {{ $LANG['inv_total'] ?? '' }}</h3>
 -->
@@ -131,7 +131,8 @@
 	<div class="row g-3 mb-3 @if(!$inv_totals_match_header && $inv_tax_field_count !== 0) row-cols-1 row-cols-md-2 row-cols-lg-{{ $inv_totals_lg_cols }} @endif">
 		<div class="col-12 @if($inv_totals_match_header) col-md-4 @elseif($inv_tax_field_count === 0) col-md-6 @else col @endif">
 			<label class="form-label">{{ $LANG['gross_total'] ?? '' }}</label>
-			<input type="text" name="unit_price" class="form-control validate[required]" />
+			<input type="text" name="unit_price" class="form-control" required />
+			<div class="invalid-feedback">{{ $LANG['required_field'] ?? 'Required' }}</div>
 		</div>
 		@if($inv_tax_per_line > 0)
 			@if($taxes == null)

@@ -12,7 +12,7 @@
 	@include('templates.default.user.save')
 @else
 
-<form name="frmpost" action="index.php?module=user&amp;view=add" method="post" id="frmpost" autocomplete="off">
+<form name="frmpost" action="index.php?module=user&amp;view=add" method="post" id="frmpost" autocomplete="off" class="needs-validation" novalidate>
 <div class="card">
 	<div class="card-body">
 		<div class="mb-3">
@@ -25,7 +25,8 @@
 				<i class="ti ti-asterisk text-danger"></i>
 			</a>
 			</label>
-			<input type="text" name="email" value="{{ post('email') }}" id="email" autocomplete="off" class="form-control validate[required]" />
+			<input type="text" name="email" value="{{ post('email') }}" id="email" autocomplete="off" class="form-control" required />
+			<div class="invalid-feedback">{{ $LANG['required_field'] ?? 'Required' }}</div>
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['role'] ?? '' }}

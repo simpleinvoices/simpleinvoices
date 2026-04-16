@@ -74,7 +74,7 @@ $bladeViewPaths = array(
     './templates/',
     './custom/',
     './custom/default_template/',
-    './include/jquery/',
+    './include/js/',
     './modules/'
 );
 $bladeCachePath = './tmp/cache';

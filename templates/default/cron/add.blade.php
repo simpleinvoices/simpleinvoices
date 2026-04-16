@@ -15,61 +15,60 @@
 
 @if($saved ==false)
 
-	@if(post('op') == 'add' AND post('invoice_id') == '') 
-		<div class="alert alert-warning"><i class="ti ti-alert-circle"></i>
-		{{ $LANG['select_invoice'] ?? '' }}</div>
-	@endif
-
-
-<form name="frmpost" action="index.php?module=cron&view=add" method="POST" id="frmpost">
+<form name="frmpost" action="index.php?module=cron&view=add" method="POST" id="frmpost" class="needs-validation" novalidate>
 
 <div class="card" id="si_form_cron">
 	<div class="card-body">
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['invoice'] ?? '' }}</label>
-			<select name="invoice_id" class="form-select validate[required]">
+			<select name="invoice_id" class="form-select" required>
 				<option value=''></option>
 				@foreach(($invoice_all ?? []) as $invoice)
 					<option value="{{ siLocal::number($invoice['id'] ?? '') }}">{{ $invoice['index_name'] ?? '' }} ({{ $invoice['biller'] ?? '' }}, {{ $invoice['customer'] ?? '' }}, {{ $invoice['invoice_total'] ?? '' }})</option>
 				@endforeach
 			</select>
+			<div class="invalid-feedback">{{ $LANG['required_field'] ?? 'Required' }}</div>
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['start_date'] ?? '' }}</label>
 			<div class="input-icon">
 				<span class="input-icon-addon"><i class="ti ti-calendar"></i></span>
-				<input type="text" class="form-control validate[required,custom[date],length[0,10]] date-picker" size="10" name="start_date" id="date" value='{{ date('Y-m-d', strtotime('+1 day')) }}' />
+				<input type="text" class="form-control date-picker" size="10" name="start_date" id="date"
+					value='{{ date('Y-m-d', strtotime('+1 day')) }}'
+					required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" />
+				<div class="invalid-feedback">{{ $LANG['required_field'] ?? 'Required' }}</div>
 			</div>
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['end_date'] ?? '' }}</label>
 			<div class="input-icon">
 				<span class="input-icon-addon"><i class="ti ti-calendar"></i></span>
-				<input type="text" class="form-control date-picker" size="10" name="end_date" id="date" value='' />
+				<input type="text" class="form-control date-picker" size="10" name="end_date" value='' />
 			</div>
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['recur_each'] ?? '' }}</label>
 			<div class="input-group">
-				<input name="recurrence" size="10" class="form-control validate[required]" />
-				<select name="recurrence_type" class="form-select validate[required]">
+				<input name="recurrence" size="10" class="form-control" required />
+				<select name="recurrence_type" class="form-select">
 					<option value="day">{{ $LANG['days'] ?? '' }}</option>
 					<option value="week">{{ $LANG['weeks'] ?? '' }}</option>
 					<option value="month">{{ $LANG['months'] ?? '' }}</option>
 					<option value="year">{{ $LANG['years'] ?? '' }}</option>
 				</select>
 			</div>
+			<div class="invalid-feedback">{{ $LANG['required_field'] ?? 'Required' }}</div>
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['email_biller_after_cron'] ?? '' }}</label>
-			<select name="email_biller" class="form-select validate[required]">
+			<select name="email_biller" class="form-select">
 				<option value="1">{{ $LANG['yes'] ?? '' }}</option>
 				<option value="0">{{ $LANG['no'] ?? '' }}</option>
 			</select>
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['email_customer_after_cron'] ?? '' }}</label>
-			<select name="email_customer" class="form-select validate[required]">
+			<select name="email_customer" class="form-select">
 				<option value="1">{{ $LANG['yes'] ?? '' }}</option>
 				<option value="0">{{ $LANG['no'] ?? '' }}</option>
 			</select>

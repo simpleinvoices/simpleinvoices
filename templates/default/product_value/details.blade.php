@@ -1,6 +1,6 @@
 <form name="frmpost"
 	action="index.php?module=product_value&amp;view=save&amp;id={{ get('id') }}"
-	method="post">
+	method="post" class="needs-validation" novalidate>
 
 
 @if(get('action')== 'view' )
@@ -51,7 +51,10 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="details_screen">{{ $LANG['value'] ?? '' }}</td><td><input type="text" name="value" value="{{ $product_value['value'] }}" size="50" class="form-control" /></td>
+			<td class="details_screen">{{ $LANG['value'] ?? '' }}</td><td>
+			<input type="text" name="value" value="{{ $product_value['value'] }}" size="50" class="form-control" required />
+			<div class="invalid-feedback">{{ $LANG['required_field'] ?? 'Required' }}</div>
+		</td>
 		</tr>
 		<tr>
 			<th>{{ $LANG['enabled'] ?? '' }}</th>

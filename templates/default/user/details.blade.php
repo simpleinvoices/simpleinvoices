@@ -1,5 +1,5 @@
 {{-- User details / edit template --}}
-<form name="frmpost" action="index.php?module=user&view=save&id={{ urlencode(get('id')) }}" method="post" id="frmpost" onsubmit="return checkForm(this);" autocomplete="off">
+<form name="frmpost" action="index.php?module=user&view=save&id={{ urlencode(get('id')) }}" method="post" id="frmpost" autocomplete="off" class="needs-validation" novalidate>
 
 @if(get('action') == 'view')
 
@@ -52,7 +52,8 @@
 					<i class="ti ti-asterisk text-danger"></i>
 				</a>
 			</label>
-			<input type="text" name="email" autocomplete="off" value="{{ $user['email'] ?? '' }}" id="email" class="form-control validate[required]" />
+			<input type="text" name="email" autocomplete="off" value="{{ $user['email'] ?? '' }}" id="email" class="form-control" required />
+			<div class="invalid-feedback">{{ $LANG['required_field'] ?? 'Required' }}</div>
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['role'] ?? '' }}

@@ -1,7 +1,7 @@
 <!--Modified code to display apostrophes in text box output 05/02/2008-Gates-->
 <form name="frmpost"
 	action="index.php?module=product_attribute&amp;view=save&amp;id={{ get('id') }}"
-	method="post">
+	method="post" class="needs-validation" novalidate>
 
 
 @if(get('action')== 'view' )
@@ -47,7 +47,10 @@
                         <td class="details_screen">{{ $LANG['id'] ?? '' }}</td><td>{{ $product_attribute['id'] }}</td>
                 </tr>
                 <tr>
-                        <td class="details_screen">{{ $LANG['name'] ?? '' }}</td><td><input type="text" name="name" value="{{ $product_attribute['name'] }}" size="50" class="form-control" /></td>
+                        <td class="details_screen">{{ $LANG['name'] ?? '' }}</td><td>
+				<input type="text" name="name" value="{{ $product_attribute['name'] }}" size="50" class="form-control" required />
+				<div class="invalid-feedback">{{ $LANG['required_field'] ?? 'Required' }}</div>
+			</td>
                 </tr>
 		<tr>
 			<th>{{ $LANG['type'] ?? '' }}</th>
