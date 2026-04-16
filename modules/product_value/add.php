@@ -9,8 +9,9 @@ if ($_POST['value'] !== '' ) {
 	include("./modules/product_value/save.php");
 }
 
-$sql = "SELECT * FROM ".TB_PREFIX."products_attributes";
-$sth =  dbQuery($sql);
+$domain_id = domain_id::get();
+$sql = "SELECT * FROM ".TB_PREFIX."products_attributes WHERE domain_id = :domain_id";
+$sth = dbQuery($sql, ':domain_id', $domain_id);
 $product_attributes = $sth->fetchAll();
 
 $pageActive = "product_value_add";

@@ -37,6 +37,7 @@ for($i=1;$i<=4;$i++) {
     $customFields[$i] = show_custom_field("invoice_cf$i",$invoice["custom_field$i"],"write",'',"details_screen",'','','');
 }
 
+$current_domain_id = domain_id::get();
 foreach($invoiceItems as $key=>$value)
 {
     //get list of attributes
@@ -50,29 +51,31 @@ foreach($invoiceItems as $key=>$value)
             if($v == 'true')
             {
                 $attr_id = (int)$k; // Cast to integer to prevent SQL injection
-                $attr_name_sql = 'select 
-                    a.name as name, a.enabled as enabled,  t.name type 
-                    from 
-                        si_products_attributes as a, 
-                        si_products_attribute_type as t 
-                   where 
+                $attr_name_sql = 'SELECT
+                    a.name as name, a.enabled as enabled, t.name type
+                    FROM
+                        si_products_attributes as a,
+                        si_products_attribute_type as t
+                   WHERE
                         a.type_id = t.id
-                        AND a.id = :attr_id';
-                $attr_name = dbQuery($attr_name_sql, ':attr_id', $attr_id);
+                        AND a.id = :attr_id
+                        AND a.domain_id = :domain_id';
+                $attr_name = dbQuery($attr_name_sql, ':attr_id', $attr_id, ':domain_id', $current_domain_id);
                 $attr_name = $attr_name->fetch();
 
-                $sql2 = 'select 
-                        a.name as name, 
-                        v.id as id, 
-                        v.value as value, 
-                        v.enabled as enabled 
-                   from 
-                        si_products_attributes a, 
-                        si_products_values v 
-                   where 
-                        a.id = v.attribute_id 
-                        AND a.id = :attr_id';
-                $states2 = dbQuery($sql2, ':attr_id', $attr_id);
+                $sql2 = 'SELECT
+                        a.name as name,
+                        v.id as id,
+                        v.value as value,
+                        v.enabled as enabled
+                   FROM
+                        si_products_attributes a
+                            JOIN si_products_values v
+                                ON (v.attribute_id = a.id AND v.domain_id = a.domain_id)
+                   WHERE
+                        a.id = :attr_id
+                        AND a.domain_id = :domain_id';
+                $states2 = dbQuery($sql2, ':attr_id', $attr_id, ':domain_id', $current_domain_id);
 
                 if($attr_name['enabled'] =='1' AND $attr_name['type'] == 'list')
                 {

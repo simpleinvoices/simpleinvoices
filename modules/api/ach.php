@@ -11,13 +11,21 @@ if ($_POST['pg_response_code']=='A01') {
 	$logger->log('ACH Data:', LegacyLogger::INFO);
 	$logger->log($paypal_data, LegacyLogger::INFO);
 
+	// Resolve domain_id from the invoice referenced by this payment
+	$ach_invoice_id = (int)$_POST['pg_consumerorderid'];
+	$domain_row = dbQuery(
+		"SELECT domain_id FROM ".TB_PREFIX."invoices WHERE id = :id LIMIT 1",
+		':id', $ach_invoice_id
+	)->fetch();
+	$resolved_domain_id = $domain_row ? (string)$domain_row['domain_id'] : '1';
+
 	$check_payment = new payment();
 	$check_payment->filter='online_payment_id';
 	$check_payment->online_payment_id = $_POST['pg_consumerorderid'];
-	$check_payment->domain_id = '1';
+	$check_payment->domain_id = $resolved_domain_id;
     $number_of_payments = $check_payment->count();
 	$logger->log('ACH - number of times this payment is in the db: '.$number_of_payments, LegacyLogger::INFO);
-	
+
 	if($number_of_payments > 0)
 	{
 		$xml_message = 'Online payment for invoices: '.$_POST['pg_consumerorderid'].' has already been entered into Simple Invoices';
@@ -33,11 +41,11 @@ if ($_POST['pg_response_code']=='A01') {
 		$payment->ac_notes = $paypal_data;
 		$payment->ac_date = date( 'Y-m-d');
 		$payment->online_payment_id = $_POST['pg_consumerorderid'];
-		$payment->domain_id = '1';
+		$payment->domain_id = $resolved_domain_id;
 
 			$payment_type = new payment_type();
 			$payment_type->type = "ACH";
-			$payment_type->domain_id = '1';
+			$payment_type->domain_id = $resolved_domain_id;
 
 		$payment->ac_payment_type = $payment_type->select_or_insert_where();
 		$logger->log('ACH - payment_type='.$payment->ac_payment_type, LegacyLogger::INFO);

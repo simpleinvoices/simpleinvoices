@@ -262,21 +262,25 @@ CREATE TABLE IF NOT EXISTS si_products_attribute_type (
 );
 
 CREATE TABLE IF NOT EXISTS si_products_attributes (
-  id      SERIAL,
-  name    VARCHAR(255) NOT NULL,
-  type_id VARCHAR(255) NOT NULL,
-  enabled SMALLINT NOT NULL DEFAULT 1,
-  visible SMALLINT NOT NULL DEFAULT 1,
+  id        SERIAL,
+  domain_id INTEGER NOT NULL DEFAULT 1,
+  name      VARCHAR(255) NOT NULL,
+  type_id   VARCHAR(255) NOT NULL,
+  enabled   SMALLINT NOT NULL DEFAULT 1,
+  visible   SMALLINT NOT NULL DEFAULT 1,
   PRIMARY KEY (id)
 );
+CREATE INDEX IF NOT EXISTS idx_pa_domain_id ON si_products_attributes (domain_id);
 
 CREATE TABLE IF NOT EXISTS si_products_values (
   id           SERIAL,
+  domain_id    INTEGER NOT NULL DEFAULT 1,
   attribute_id INTEGER NOT NULL,
   value        VARCHAR(255) NOT NULL,
   enabled      SMALLINT NOT NULL DEFAULT 1,
   PRIMARY KEY (id)
 );
+CREATE INDEX IF NOT EXISTS idx_pv_domain_id ON si_products_values (domain_id);
 
 CREATE TABLE IF NOT EXISTS si_sql_patchmanager (
   sql_id        SERIAL,

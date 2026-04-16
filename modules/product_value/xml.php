@@ -43,41 +43,33 @@ if (in_array($sort, $validFields)) {
 	$sort = "name";
 }
 
-	$sql = "SELECT 
-				v.id as id, 
+$domain_id = domain_id::get();
+
+	$sql = "SELECT
+				v.id as id,
 				a.name as name,
                 v.value as value,
                 v.enabled as enabled
-			FROM 
+			FROM
 				".TB_PREFIX."products_attributes a LEFT JOIN
 				".TB_PREFIX."products_values v ON (a.id = v.attribute_id)
-			WHERE 1
+			WHERE a.domain_id = :domain_id
 				$where
-			ORDER BY 
-				$sort $dir 
-			LIMIT 
+			ORDER BY
+				$sort $dir
+			LIMIT
 				$start, $limit";
 
 	if (empty($query)) {
-		$sth = dbQuery($sql);
+		$sth = dbQuery($sql, ':domain_id', $domain_id);
 	} else {
-		$sth = dbQuery($sql, ':query', "%$query%");
+		$sth = dbQuery($sql, ':domain_id', $domain_id, ':query', "%$query%");
 	}
 
 	$customers = $sth->fetchAll(PDO::FETCH_ASSOC);
-/*
-	$customers = null;
 
-	for($i=0; $customer = $sth->fetch(PDO::FETCH_ASSOC); $i++) {
-		if ($customer['enabled'] == 1) {
-			$customer['enabled'] = {$LANG['enabled']};
-		} else {
-			$customer['enabled'] = {$LANG['disabled']};
-		}
-*/
-
-$sqlTotal = "SELECT count(id) AS count FROM ".TB_PREFIX."products_values";
-$tth = dbQuery($sqlTotal);
+$sqlTotal = "SELECT count(id) AS count FROM ".TB_PREFIX."products_values WHERE domain_id = :domain_id";
+$tth = dbQuery($sqlTotal, ':domain_id', $domain_id);
 $resultCount = $tth->fetch();
 $count = $resultCount[0];
 //echo sql2xml($customers, $count);
@@ -102,14 +94,14 @@ foreach ($customers as $row) {
 	$xml .= "<cell><![CDATA[".utf8_encode($row['name'])."]]></cell>";
 	$xml .= "<cell><![CDATA[".utf8_encode($row['value'])."]]></cell>";
 	if ($row['enabled']=='1') {
-		$xml .= "<cell><![CDATA[<img src='images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
-	}	
+		$xml .= "<cell><![CDATA[<img src='images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";
+	}
 	else {
-		$xml .= "<cell><![CDATA[<img src='images/common/cross.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
+		$xml .= "<cell><![CDATA[<img src='images/common/cross.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";
 	}
 
 
-	$xml .= "</row>";		
+	$xml .= "</row>";
 
 }
 
@@ -119,4 +111,4 @@ $xml .= "</rows>";
 
 echo $xml;
 
-?> 
+?>

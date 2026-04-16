@@ -285,19 +285,23 @@ CREATE TABLE IF NOT EXISTS `si_products_attribute_type` (
 
 CREATE TABLE IF NOT EXISTS `si_products_attributes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `domain_id` int(11) NOT NULL DEFAULT '1',
   `name` varchar(255) NOT NULL,
   `type_id` varchar(255) NOT NULL,
   `enabled` TINYINT(1) DEFAULT 1 NOT NULL,
   `visible` TINYINT(1) DEFAULT 1 NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `idx_pa_domain_id` (`domain_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `si_products_values` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `domain_id` int(11) NOT NULL DEFAULT '1',
   `attribute_id` int(11) NOT NULL,
   `value` varchar(255) NOT NULL,
   `enabled` TINYINT(1) DEFAULT 1 NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `idx_pv_domain_id` (`domain_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `si_sql_patchmanager` (
