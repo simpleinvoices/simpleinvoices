@@ -79,6 +79,7 @@ $acl->addRole('biller');
 
 //create the resources
 $acl->addResource('admin');
+$acl->addResource('domain_admin');
 $acl->addResource('api');
 $acl->addResource('auth');
 $acl->addResource('billers');
@@ -123,7 +124,13 @@ $acl->allow('operator', 'billers', 'view');
 $acl->allow('operator', 'customers', 'manage');
 $acl->allow('operator', 'customers', 'view');
 
-// deny rules — admin panel is administrator-only
+// deny rules — admin panel is administrator-only; domain_admin for domain_administrator+administrator
+$acl->deny('user', 'domain_admin');
+$acl->deny('operator', 'domain_admin');
+$acl->deny('viewer', 'domain_admin');
+$acl->deny('customer', 'domain_admin');
+$acl->deny('biller', 'domain_admin');
+
 $acl->deny('domain_administrator', 'admin');
 $acl->deny('user', 'admin');
 $acl->deny('operator', 'admin');
