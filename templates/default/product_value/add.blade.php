@@ -1,20 +1,15 @@
-@if(post('value') != "" && form_submitted() ) 
+@if(post('value') != "" && form_submitted() )
 {{ $refresh_total }}
 
 <br />
 <br />
-{{ $display_block }} 
+{{ $display_block }}
 <br />
 <br />
 
 @else
-{{-- if  name was inserted --}} 
-	@if(form_submitted()) 
-		<div class="validation_alert"><img src="./images/common/important.png" alt="" />
-		You must enter a value</div>
-		<hr />
-	@endif
-<form name="frmpost" action="index.php?module=product_value&amp;view=add" method="post">
+
+<form name="frmpost" action="index.php?module=product_value&amp;view=add" method="post" class="needs-validation" novalidate>
 
 <div class="card">
 	<div class="card-body">
@@ -28,7 +23,8 @@
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['value'] ?? '' }}</label>
-			<input type="text" name="value" value="{{ post('value') }}" size="25" class="form-control" />
+			<input type="text" name="value" value="{{ post('value') }}" size="25" class="form-control" required />
+			<div class="invalid-feedback">{{ $LANG['required_field'] ?? 'Required' }}</div>
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['enabled'] ?? '' }}</label>

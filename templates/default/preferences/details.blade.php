@@ -1,5 +1,5 @@
 <!--Modified code to display apostrophes in text box output 05/02/2008-Gates-->
-<form name="frmpost" action="index.php?module=preferences&amp;view=save&amp;id={{ get('id') }}" method="post">
+<form name="frmpost" action="index.php?module=preferences&amp;view=save&amp;id={{ get('id') }}" method="post" class="needs-validation" novalidate>
 
 
 @if(get('action')== 'view' )
@@ -115,7 +115,8 @@
 						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field" title="{{ $LANG['required_field'] ?? '' }}"><i class="ti ti-asterisk text-danger"></i></a>
 						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_description" title="{{ $LANG['description'] ?? '' }}"><i class="ti ti-help"></i></a>
 					</label>
-					<input type="text" class="form-control validate[required]" name="pref_description" value="{{ $preference['pref_description'] ?? '' }}" />
+					<input type="text" class="form-control" name="pref_description" value="{{ $preference['pref_description'] ?? '' }}" required />
+					<div class="invalid-feedback">{{ $LANG['required_field'] ?? 'Required' }}</div>
 				</div>
 				<div class="mb-3">
 					<label class="form-label">{{ $LANG['status'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_status" title="{{ $LANG['status'] ?? '' }}"><i class="ti ti-help"></i></a></label>

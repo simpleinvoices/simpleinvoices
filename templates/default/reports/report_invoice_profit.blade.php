@@ -1,5 +1,5 @@
 <div class="card mb-4">
-	<form name="frmpost" id="form_report_invoice_profit" action="index.php?module=reports&amp;view=report_invoice_profit" method="post">
+	<form name="frmpost" id="form_report_invoice_profit" action="index.php?module=reports&amp;view=report_invoice_profit" method="post" class="needs-validation" novalidate>
 		<div class="card-body">
 			<div class="row g-3 align-items-end">
 				<div class="col-sm-5">
@@ -7,9 +7,11 @@
 					<div class="input-icon">
 						<span class="input-icon-addon"><i class="ti ti-calendar"></i></span>
 						<input type="text"
-							class="form-control validate[required,custom[date],length[0,10]] date-picker"
+							class="form-control date-picker"
 							name="start_date" id="date1"
+							required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
 							value="{{ $start_date ?? '' }}" />
+						<div class="invalid-feedback">{{ $LANG['required_field'] ?? 'Required' }}</div>
 					</div>
 				</div>
 				<div class="col-sm-5">
@@ -17,9 +19,11 @@
 					<div class="input-icon">
 						<span class="input-icon-addon"><i class="ti ti-calendar"></i></span>
 						<input type="text"
-							class="form-control validate[required,custom[date],length[0,10]] date-picker"
+							class="form-control date-picker"
 							name="end_date" id="date2"
+							required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
 							value="{{ $end_date ?? '' }}" />
+						<div class="invalid-feedback">{{ $LANG['required_field'] ?? 'Required' }}</div>
 					</div>
 				</div>
 				<div class="col-sm-2">

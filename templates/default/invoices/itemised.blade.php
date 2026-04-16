@@ -136,7 +136,7 @@
 							type="text"
 							name="quantity{{ $line }}"
 							id="quantity{{ $line }}"
-							class="form-control form-control-sm text-end @if($line == '0')validate[required]@endif"
+							class="form-control form-control-sm text-end"
 							@if($line == '0') required @endif
 							@if(get('quantity' . $line)) value="{{ get('quantity' . $line) }}" @endif
 						/>
@@ -151,7 +151,7 @@
 								id="products{{ $line }}"
 								name="products{{ $line }}"
 								rel="{{ $line }}"
-								class="form-select form-select-sm @if($line == '0')validate[required]@endif product_change"
+								class="form-select form-select-sm product_change"
 								@if($line == '0') required @endif
 							>
 								<option value=""></option>
@@ -190,7 +190,7 @@
 						<input
 							id="unit_price{{ $line }}"
 							name="unit_price{{ $line }}"
-							class="form-control form-control-sm text-end @if($line == '0')validate[required]@endif"
+							class="form-control form-control-sm text-end"
 							@if($line == '0') required @endif
 							@if(get('unit_price' . $line)) value="{{ get('unit_price' . $line) }}" @else value="" @endif
 						/>

@@ -11,7 +11,7 @@
 
 <div id="gmail_loading" class="gmailLoader" style="float:right; display: none;"><i class="ti ti-loader spinner me-1"></i> {{ $LANG['loading'] ?? '' }} ...</div>
 
-<form name="frmpost" action="index.php?module=invoices&amp;view=save" method="post">
+<form name="frmpost" action="index.php?module=invoices&amp;view=save" method="post" class="needs-validation" novalidate>
 
 <div class="card">
 	<div class="card-body">
@@ -27,10 +27,15 @@
 				<div class="input-icon">
 					<span class="input-icon-addon"><i class="ti ti-calendar"></i></span>
 					@if($invoice['id'] == null)
-						<input type="text" class="form-control validate[required,custom[date],length[0,10]] date-picker" name="date" id="date1" value="{{ date('Y-m-d') }}" />
+						<input type="text" class="form-control date-picker" name="date" id="date1"
+							required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
+							value="{{ date('Y-m-d') }}" />
 					@else
-						<input type="text" class="form-control validate[required,custom[date],length[0,10]] date-picker" name="date" id="date1" value="{{ $invoice['calc_date'] ?? '' }}" />
+						<input type="text" class="form-control date-picker" name="date" id="date1"
+							required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
+							value="{{ $invoice['calc_date'] ?? '' }}" />
 					@endif
+					<div class="invalid-feedback">{{ $LANG['required_field'] ?? 'Required' }}</div>
 				</div>
 			</div>
 			<div class="col-md-4">

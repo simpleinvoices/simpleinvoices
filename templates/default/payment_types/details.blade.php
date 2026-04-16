@@ -9,7 +9,7 @@
 *	http://www.simpleinvoices.org
 */ --}}
 
-<form name="frmpost" action="index.php?module=payment_types&amp;view=save&amp;id={{ get('id') }}" method="post" onsubmit="return frmpost_Validator(this)">
+<form name="frmpost" action="index.php?module=payment_types&amp;view=save&amp;id={{ get('id') }}" method="post" class="needs-validation" novalidate>
 
 @if(get('action') == "view" )
 	
@@ -46,7 +46,8 @@
 		<tr>
 			<td class="details_screen">{{ $LANG['description'] ?? '' }} <a href="index.php?module=documentation&amp;view=view&amp;page=help_required_field" rel="gb_page_center[350, 150]"><i class="ti ti-alert-circle text-danger"></i></a></td>
 			<td>
-				<input type="text" name="pt_description" value="{{ $paymentType['pt_description'] ?? '' }}" size="30" class="form-control validate[required]" />
+				<input type="text" name="pt_description" value="{{ $paymentType['pt_description'] ?? '' }}" size="30" class="form-control" required />
+				<div class="invalid-feedback">{{ $LANG['required_field'] ?? 'Required' }}</div>
 			</td>
 		</tr>
 		<tr>

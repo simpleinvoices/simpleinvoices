@@ -1,4 +1,4 @@
-<form name="frmpost" action="index.php?module=payments&amp;view=save" method="post" onsubmit="return frmpost_Validator(this)">
+<form name="frmpost" action="index.php?module=payments&amp;view=save" method="post" class="needs-validation" novalidate>
 
 <div class="card">
 	<div class="card-body">
@@ -45,12 +45,13 @@
 				<label class="form-label">{{ $LANG['invoice'] ?? '' }}
 					<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_process_payment_inv_id" title="{{ $LANG['process_payment_inv_id'] ?? '' }}"><i class="ti ti-asterisk text-danger"></i></a>
 				</label>
-				<select name="invoice_id" id="payment-invoice-id" class="form-select validate[required]">
+				<select name="invoice_id" id="payment-invoice-id" class="form-select" required>
 					<option value=''></option>
 					@foreach(($invoice_all ?? []) as $invoice)
 						<option value="{{ siLocal::number($invoice['id'] ?? '') }}" data-owing="{{ siLocal::number($invoice['owing'] ?? 0) }}">{{ $invoice['index_name'] ?? '' }} ({{ $invoice['biller'] ?? '' }}, {{ $invoice['customer'] ?? '' }}, {{ $LANG['total'] ?? '' }} {{ $invoice['invoice_total'] ?? '' }} : {{ $LANG['owing'] ?? '' }} {{ siLocal::number($invoice['owing'] ?? 0) }})</option>
 					@endforeach
 				</select>
+				<div class="invalid-feedback">{{ $LANG['required_field'] ?? 'Required' }}</div>
 			</div>
 			<div class="mb-3">
 				<label class="form-label">{{ $LANG['amount'] ?? '' }}</label>

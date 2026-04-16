@@ -13,43 +13,41 @@
 @endif
 
 @if($saved ==false)
-	@if(post('op') == 'add' AND post('product_id') == '') 
-		<div class="alert alert-warning"><i class="ti ti-alert-circle"></i>
-		You must select an product</div>
-	@endif
 
-
-{{-- is this still needed ? --}}
 <div id="gmail_loading" class="gmailLoader" style="float:right; display: none;"><i class="ti ti-loader"></i> {{ $LANG['loading'] ?? '' }} ...</div>
 
-
-
-<form name="frmpost" action="index.php?module=inventory&view=add" method="POST" id="frmpost">
+<form name="frmpost" action="index.php?module=inventory&view=add" method="POST" id="frmpost" class="needs-validation" novalidate>
 <div class="card">
 	<div class="card-body">
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['product'] ?? '' }}</label>
-			<select name="product_id" class="form-select validate[required] product_inventory_change">
+			<select name="product_id" class="form-select product_inventory_change" required>
 				<option value=''></option>
 				@foreach(($product_all ?? []) as $product)
 					<option value="{{ $product['id'] ?? '' }}">{{ $product['description'] ?? '' }}</option>
 				@endforeach
 			</select>
+			<div class="invalid-feedback">{{ $LANG['required_field'] ?? 'Required' }}</div>
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['quantity'] ?? '' }}</label>
-			<input class="form-control validate[required]" name="quantity" size="10" />
+			<input class="form-control" name="quantity" size="10" required />
+			<div class="invalid-feedback">{{ $LANG['required_field'] ?? 'Required' }}</div>
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['date_upper'] ?? '' }}</label>
 			<div class="input-icon">
 				<span class="input-icon-addon"><i class="ti ti-calendar"></i></span>
-				<input type="text" class="form-control validate[required,custom[date],length[0,10]] date-picker" size="10" name="date" id="date" value='{{ date('Y-m-d') }}' />
+				<input type="text" class="form-control date-picker" size="10" name="date" id="date"
+					value='{{ date('Y-m-d') }}'
+					required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" />
+				<div class="invalid-feedback">{{ $LANG['required_field'] ?? 'Required' }}</div>
 			</div>
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['cost'] ?? '' }}</label>
-			<input class="form-control validate[required]" name="cost" id="cost" size="10" />
+			<input class="form-control" name="cost" id="cost" size="10" required />
+			<div class="invalid-feedback">{{ $LANG['required_field'] ?? 'Required' }}</div>
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['notes'] ?? '' }}</label>

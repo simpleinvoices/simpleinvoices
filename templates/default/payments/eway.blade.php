@@ -22,34 +22,22 @@
 
 @if($saved == false)
 
-    @if(post('op') == 'add' AND post('invoice_id') == '')
-        <div class="alert alert-warning"><i class="ti ti-alert-triangle me-1"></i>{{ $LANG['select_invoice'] ?? '' }}</div>
-    @endif
-
-
-<form name="frmFpost" action="index.php?module=payments&view=eway" method="POST" id="frmpost">
+<form name="frmFpost" action="index.php?module=payments&view=eway" method="POST" id="frmpost" class="needs-validation" novalidate>
 <div class="card">
 	<div class="card-body">
-	<table class="table table-vcenter">
-<tr>
-<td class="details_screen">{{ $LANG['invoice'] ?? '' }}</td>
-<td>
-<select name="invoice_id" class="form-select validate[required]">
-<option value=''></option>
-@foreach(($invoice_all ?? []) as $invoice)
-<option value="{{ $invoice['id'] ?? '' }}" @if(get('id') == $invoice['id']) selected @endif >{{ $invoice['index_name'] ?? '' }}</option>
-@endforeach
-</select>
-</td>
-</tr>
-<tr>
-    <td colspan=2>
-        <br />
-        {{ $LANG['warning_eway'] ?? '' }}
-        <br />
-    </td>
-</tr>
-</table>
+		<div class="mb-3">
+			<label class="form-label">{{ $LANG['invoice'] ?? '' }}</label>
+			<select name="invoice_id" class="form-select" required>
+				<option value=''></option>
+				@foreach(($invoice_all ?? []) as $invoice)
+					<option value="{{ $invoice['id'] ?? '' }}" @if(get('id') == $invoice['id']) selected @endif>{{ $invoice['index_name'] ?? '' }}</option>
+				@endforeach
+			</select>
+			<div class="invalid-feedback">{{ $LANG['required_field'] ?? 'Required' }}</div>
+		</div>
+		<div class="mb-3">
+			<p class="text-secondary">{{ $LANG['warning_eway'] ?? '' }}</p>
+		</div>
 	</div>
 	<div class="card-footer">
 		<div class="d-flex">
@@ -61,4 +49,3 @@
 </div>
 </form>
 @endif
-

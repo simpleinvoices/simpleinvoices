@@ -174,7 +174,7 @@
 		var delImg = byId(clonedRow, 'delete_image' + rowID_old); if (delImg) { delImg.id = 'delete_image' + rowID_new; delImg.name = 'delete_image' + rowID_new; delImg.src = './images/common/delete_item.png'; }
 		var trashImg = clonedRow.querySelector('#trash_image' + rowID_old); if (trashImg) trashImg.src = './images/common/delete_item.png';
 		var lineItem = byId(clonedRow, 'line_item' + rowID_old); if (lineItem) { lineItem.id = 'line_item' + rowID_new; lineItem.name = 'line_item' + rowID_new; lineItem.value = ''; }
-		var qNew = byId(clonedRow, 'quantity' + rowID_old); if (qNew) { qNew.id = 'quantity' + rowID_new; qNew.name = 'quantity' + rowID_new; qNew.removeAttribute('value'); qNew.value = ''; qNew.classList.remove('validate[required]'); }
+		var qNew = byId(clonedRow, 'quantity' + rowID_old); if (qNew) { qNew.id = 'quantity' + rowID_new; qNew.name = 'quantity' + rowID_new; qNew.removeAttribute('value'); qNew.value = ''; qNew.removeAttribute('required'); qNew.classList.remove('is-invalid', 'is-valid'); }
 		var products = byId(clonedRow, 'products' + rowID_old); if (products) {
 			products.setAttribute('rel', String(rowID_new)); products.id = 'products' + rowID_new; products.name = 'products' + rowID_new;
 			products.querySelectorAll('option').forEach(function (o) { o.removeAttribute('selected'); });
@@ -183,7 +183,7 @@
 				products.insertBefore(emptyOpt, products.firstChild);
 			}
 			products.selectedIndex = 0;
-			products.classList.remove('validate[required]');
+			products.removeAttribute('required');
 			// Remove the cloned Tom Select wrapper and re-initialise on the new row
 			var tsWrap = products.nextElementSibling;
 			if (tsWrap && tsWrap.classList && tsWrap.classList.contains('ts-wrapper')) {
@@ -195,7 +195,9 @@
 				window.siInitProductSelect(products);
 			}
 		}
-		var upOld = clonedRow.querySelector('#unit_price' + rowID_old); if (upOld) { upOld.id = 'unit_price' + rowID_new; upOld.name = 'unit_price' + rowID_new; upOld.value = ''; upOld.removeAttribute('value'); upOld.classList.remove('validate[required]'); }
+		var upOld = clonedRow.querySelector('#unit_price' + rowID_old); if (upOld) { upOld.id = 'unit_price' + rowID_new; upOld.name = 'unit_price' + rowID_new; upOld.value = ''; upOld.removeAttribute('value'); upOld.removeAttribute('required'); upOld.classList.remove('is-invalid', 'is-valid'); }
+		// Reset any validation feedback visibility on the cloned row
+		clonedRow.querySelectorAll('.invalid-feedback').forEach(function(fb) { fb.style.display = ''; });
 		// Rebuild description textarea fresh to avoid cloning hugeRTE editor state
 		var detailsCol = clonedRow.querySelector('.details .col-12');
 		if (detailsCol) {

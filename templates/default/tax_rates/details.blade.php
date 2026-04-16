@@ -1,4 +1,4 @@
-<form name="frmpost" action="index.php?module=tax_rates&amp;view=save&amp;id={{ urlencode(get('id')) }}" method="post" onsubmit="return frmpost_Validator(this)">
+<form name="frmpost" action="index.php?module=tax_rates&amp;view=save&amp;id={{ urlencode(get('id')) }}" method="post" class="needs-validation" novalidate>
 
 @if(get('action') === 'view' )
 
@@ -49,7 +49,10 @@
 	<table class="table table-vcenter">
 		<tr>
 			<th>{{ $LANG['description'] ?? '' }}</th>
-			<td><input type="text" name="tax_description" value="{{ $tax['tax_description'] ?? '' }}" class="form-control validate[required]" size="25" /></td>
+			<td>
+				<input type="text" name="tax_description" value="{{ $tax['tax_description'] ?? '' }}" class="form-control" size="25" required />
+				<div class="invalid-feedback">{{ $LANG['required_field'] ?? 'Required' }}</div>
+			</td>
 		</tr>
 		<tr>
 			<th>{{ $LANG['rate'] ?? '' }}
