@@ -172,6 +172,31 @@
 
                 </ul>
                 <ul class="navbar-nav ms-md-auto">
+                    {{-- Admin (administrator role only) --}}
+                    @if(isset($_SESSION['SI_Auth']['role_name']) && $_SESSION['SI_Auth']['role_name'] === 'administrator')
+                    <li class="nav-item dropdown @if(($module ?? '') == 'admin') active @endif">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
+                            <span class="nav-link-icon d-md-none d-lg-inline-block"><i class="ti ti-shield-lock"></i></span>
+                            <span class="nav-link-title">Admin</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-lg-end">
+                            <a class="dropdown-item @if(($module ?? '') == 'admin' && ($view ?? '') == 'index') active @endif"
+                               href="index.php?module=admin&view=index">
+                                <i class="ti ti-layout-dashboard me-2 text-secondary"></i>Admin Dashboard
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item @if(($module ?? '') == 'admin' && in_array($view ?? '', ['domains','domain_add','domain_edit'])) active @endif"
+                               href="index.php?module=admin&view=domains">
+                                <i class="ti ti-building me-2 text-secondary"></i>Manage Domains
+                            </a>
+                            <a class="dropdown-item @if(($module ?? '') == 'user') active @endif"
+                               href="index.php?module=user&view=manage">
+                                <i class="ti ti-users me-2 text-secondary"></i>Manage Users
+                            </a>
+                        </div>
+                    </li>
+                    @endif
+
                     {{-- Settings --}}
                     <li class="nav-item dropdown @if(in_array($module ?? '', ['options','system_defaults','custom_fields','tax_rates','preferences','payment_types'])) active @endif">
                         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
@@ -288,6 +313,16 @@
         $page_title = isset($page_title_lang_keys[$page_title_key]) && isset($LANG[$page_title_lang_keys[$page_title_key]])
             ? $LANG[$page_title_lang_keys[$page_title_key]]
             : ($tmp_lang_view . ' ' . $tmp_lang_module);
+        // Override titles for admin module
+        $admin_titles = [
+            'admin_index'       => 'Admin Dashboard',
+            'admin_domains'     => 'Manage Domains',
+            'admin_domain_add'  => 'Add Domain',
+            'admin_domain_edit' => 'Edit Domain',
+        ];
+        if (isset($admin_titles[$page_title_key])) {
+            $page_title = $admin_titles[$page_title_key];
+        }
     @endphp
     <div class="page-header d-print-none">
         <div class="container-xl">
@@ -360,6 +395,18 @@
                     @elseif(($module ?? '') == 'user' && ($view ?? '') == 'manage')
                         <a href="index.php?module=user&view=add" class="btn btn-primary">
                             <i class="ti ti-plus me-1"></i>{{ $LANG['user_add'] ?? '' }}
+                        </a>
+                    @elseif(($module ?? '') == 'admin' && ($view ?? '') == 'index')
+                        <a href="index.php?module=admin&view=domains" class="btn btn-outline-secondary">
+                            <i class="ti ti-building me-1"></i>Manage Domains
+                        </a>
+                    @elseif(($module ?? '') == 'admin' && ($view ?? '') == 'domains')
+                        <a href="index.php?module=admin&view=domain_add" class="btn btn-primary">
+                            <i class="ti ti-plus me-1"></i>Add Domain
+                        </a>
+                    @elseif(($module ?? '') == 'admin' && in_array($view ?? '', ['domain_add', 'domain_edit']))
+                        <a href="index.php?module=admin&view=domains" class="btn btn-outline-secondary">
+                            <i class="ti ti-arrow-left me-1"></i>All Domains
                         </a>
                     @elseif(($module ?? '') == 'reports' && ($view ?? '') != 'index')
                         <a href="index.php?module=reports&view=index" class="btn btn-outline-secondary">
