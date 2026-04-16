@@ -33,10 +33,14 @@
             </div>
         </div>
 
+        {{-- Hidden field that carries the selected entity id --}}
+        <input type="hidden" name="linked_id" id="linked_id_hidden" value="" />
+
         {{-- Link to customer --}}
         <div class="mb-3" id="customerDropdown" @if($presetRole === 'biller') style="display:none" @endif>
             <label class="form-label">Link to Customer <i class="ti ti-asterisk text-danger" style="font-size:.7rem;"></i></label>
-            <select name="linked_id" id="linked_id_customer" class="form-select">
+            <select id="linked_id_customer" class="form-select"
+                    onchange="syncLinkedId()">
                 <option value="">— select customer —</option>
                 @foreach(($customers ?? []) as $c)
                     <option value="{{ $c['id'] }}">{{ $c['name'] }}</option>
@@ -50,7 +54,8 @@
         {{-- Link to biller --}}
         <div class="mb-3" id="billerDropdown" @if($presetRole !== 'biller') style="display:none" @endif>
             <label class="form-label">Link to Biller <i class="ti ti-asterisk text-danger" style="font-size:.7rem;"></i></label>
-            <select name="linked_id_biller" id="linked_id_biller" class="form-select">
+            <select id="linked_id_biller" class="form-select"
+                    onchange="syncLinkedId()">
                 <option value="">— select biller —</option>
                 @foreach(($billers ?? []) as $b)
                     <option value="{{ $b['id'] }}">{{ $b['name'] }}</option>
@@ -90,7 +95,7 @@
     <div class="card-footer">
         <div class="d-flex">
             <a href="index.php?module=domain_admin&view=users" class="btn btn-link">Cancel</a>
-            <button type="submit" class="btn btn-primary ms-auto">
+            <button type="submit" name="submit" class="btn btn-primary ms-auto">
                 <i class="ti ti-check me-1"></i>Create Account
             </button>
         </div>
@@ -101,6 +106,14 @@
 </form>
 
 <script>
+function syncLinkedId() {
+    var role = document.querySelector('input[name="role_key"]:checked').value;
+    var src  = role === 'biller'
+               ? document.getElementById('linked_id_biller')
+               : document.getElementById('linked_id_customer');
+    document.getElementById('linked_id_hidden').value = src ? src.value : '';
+}
+
 function toggleLinkedDropdown(role) {
     var customerDiv = document.getElementById('customerDropdown');
     var billerDiv   = document.getElementById('billerDropdown');
@@ -111,16 +124,11 @@ function toggleLinkedDropdown(role) {
         customerDiv.style.display = '';
         billerDiv.style.display   = 'none';
     }
+    syncLinkedId();
 }
 
-// Before submit: copy the visible linked_id into the hidden field the server reads
-document.getElementById('domainUserForm').addEventListener('submit', function() {
-    var role = document.querySelector('input[name="role_key"]:checked').value;
-    var src  = role === 'biller'
-               ? document.getElementById('linked_id_biller')
-               : document.getElementById('linked_id_customer');
-    src.name = 'linked_id';
-});
+// Sync on page load so the hidden field has a value from the start
+document.addEventListener('DOMContentLoaded', syncLinkedId);
 </script>
 
 @endif

@@ -1,9 +1,9 @@
 {{-- Domain Admin: list customer and biller login accounts --}}
 @php
     $filter = get('filter') ?? '';
-    $filtered = collect($domainUsers ?? [])->filter(function($u) use ($filter) {
+    $filtered = array_values(array_filter($domainUsers ?? [], function($u) use ($filter) {
         return !$filter || $u['role_name'] === $filter;
-    })->values()->all();
+    }));
 @endphp
 
 <div class="card">
