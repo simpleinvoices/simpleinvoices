@@ -16,6 +16,12 @@ $number_of_rows  = $sth->fetch(PDO::FETCH_ASSOC);
 
 $bladeView -> assign("number_of_rows",$number_of_rows);
 
+$userSavedOp = (string) ($_GET['user_saved'] ?? '');
+if (!in_array($userSavedOp, ['insert_user', 'edit_user'], true)) {
+    $userSavedOp = '';
+}
+$bladeView->assign('userSavedOp', $userSavedOp);
+
 $bladeView -> assign('pageActive', 'user');
 $bladeView -> assign('active_tab', '#people');
 ?>

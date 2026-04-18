@@ -21,6 +21,29 @@ function checkLogin() {
 }
 
 /**
+ * Deny access if the logged-in user is a customer or biller who does not own
+ * the given invoice.  No-op for administrators and when auth is disabled.
+ *
+ * @param array $invoice  Row returned by getInvoice() / invoice::select()
+ */
+function si_check_invoice_access(array $invoice) {
+	global $auth_session;
+	if (!isset($auth_session) || !is_object($auth_session)) return;
+	$role = $auth_session->role_name ?? '';
+	if ($role === 'customer') {
+		if ((string)($invoice['customer_id'] ?? '') !== (string)$auth_session->user_id) {
+			header('HTTP/1.1 403 Forbidden');
+			die('Access denied: you do not have permission to view this invoice.');
+		}
+	} elseif ($role === 'biller') {
+		if ((string)($invoice['biller_id'] ?? '') !== (string)$auth_session->user_id) {
+			header('HTTP/1.1 403 Forbidden');
+			die('Access denied: you do not have permission to view this invoice.');
+		}
+	}
+}
+
+/**
  * Per-line tax values from POST. Itemised/total invoices use tax_id[line][slot];
  * consulting / product_consulting use a single scalar tax_id for all lines.
  *

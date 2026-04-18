@@ -1,5 +1,5 @@
 {{-- Admin: add domain --}}
-@if(post('name') != null && form_submitted())
+@if(form_submitted(null) && !empty(post('name')))
     @include('templates.default.admin.domain_save')
 @else
 
@@ -14,6 +14,32 @@
                    placeholder="e.g. acme-corp" required autocomplete="off" />
             <div class="invalid-feedback">Domain name is required.</div>
             <div class="form-hint">Must be unique. Used to isolate tenant data.</div>
+        </div>
+        <hr class="my-4" />
+        <h6 class="text-muted mb-3">Domain administrator</h6>
+        <p class="form-hint mb-3">Creates a login with the <strong>domain administrator</strong> role for this domain
+            (Domain Admin menu: users, settings for the tenant).</p>
+        <div class="mb-3">
+            <label class="form-label">Administrator email
+                <i class="ti ti-asterisk text-danger" style="font-size:.7rem;"></i>
+            </label>
+            <input type="email" name="admin_email" value="{{ post('admin_email') }}" class="form-control"
+                   placeholder="admin@example.com" required autocomplete="off" />
+            <div class="invalid-feedback">A valid email is required.</div>
+            <div class="form-hint">Must be unique across all accounts (login identity).</div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Administrator display name</label>
+            <input type="text" name="admin_name" value="{{ post('admin_name') }}" class="form-control"
+                   placeholder="Optional" autocomplete="name" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Administrator password
+                <i class="ti ti-asterisk text-danger" style="font-size:.7rem;"></i>
+            </label>
+            <input type="password" name="admin_password" value="" class="form-control"
+                   placeholder="Choose a strong password" required autocomplete="new-password" minlength="4" />
+            <div class="invalid-feedback">Password is required (at least 4 characters).</div>
         </div>
     </div>
     <div class="card-footer">

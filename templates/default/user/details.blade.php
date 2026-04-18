@@ -73,7 +73,9 @@
 					<i class="ti ti-help"></i>
 				</a>
 			</label>
-			<input type="password" name="password_field" value="" autocomplete="new-password" class="form-control" />
+			<input type="password" name="password_field" value="" autocomplete="new-password" class="form-control"
+			       minlength="4" />
+			<div class="invalid-feedback">New password must be at least 4 characters when set.</div>
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['enabled'] ?? '' }}</label>
@@ -90,6 +92,10 @@
 
 <input type="hidden" name="op" value="edit_user" />
 <input type="hidden" name="id" value="{{ $user['id'] ?? '' }}" />
+@if(!empty($saveReturnModule ?? '') && !empty($saveReturnView ?? ''))
+<input type="hidden" name="return_module" value="{{ $saveReturnModule }}" />
+<input type="hidden" name="return_view" value="{{ $saveReturnView }}" />
+@endif
 <input type="hidden" name="csrfprotectionbysr" value="{{ $userSaveCsrfToken ?? '' }}" />
 
 @endif

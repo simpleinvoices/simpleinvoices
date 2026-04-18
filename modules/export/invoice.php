@@ -14,6 +14,8 @@ $invoiceID = $_GET['id'];
 $get_format = $_GET['format'];
 $get_file_type = $_GET['filetype'];
 
+si_check_invoice_access(getInvoice($invoiceID));
+
 // get the invoice id
 $export = new export();
 $export -> format = $get_format;

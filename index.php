@@ -175,7 +175,28 @@ $bladeView->assign("module", $module);
 $bladeView->assign("view", $view);
 
 /*
-* dont include the header if requested file is an invoice template - for print preview etc.. header is not needed 
+* Unlinked customer/biller check — show a friendly error if the logged-in
+* customer or biller account has no linked entity (user_id == 0).
+* Allow the logout route through so the user can still sign out.
+*/
+if (
+    $config->authentication->enabled == 1 &&
+    isset($auth_session->role_name) &&
+    in_array($auth_session->role_name, ['customer', 'biller'], true) &&
+    (int) ($auth_session->user_id ?? 0) === 0 &&
+    !($module === 'auth' && $view === 'logout')
+) {
+    $bladeView->assign('unlinkedRole', $auth_session->role_name);
+    $bladeView->display(GetCustomPath('header'));
+    $bladeView->display(GetCustomPath('menu'));
+    $bladeView->display(GetCustomPath('main'));
+    $bladeView->display(GetCustomPath('auth/unlinked_account'));
+    $bladeView->display(GetCustomPath('footer'));
+    exit(0);
+}
+
+/*
+* dont include the header if requested file is an invoice template - for print preview etc.. header is not needed
 */
 
 if (($module == "invoices" ) && (strstr($view,"template"))) {

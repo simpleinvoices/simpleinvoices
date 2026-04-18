@@ -24,6 +24,7 @@ $invoice_id = $_GET['id'];
 
 
 $invoice = getInvoice($invoice_id);
+si_check_invoice_access($invoice);
 $invoice_number_of_taxes = numberOfTaxesForInvoice($invoice_id);
 $invoice_type =  getInvoiceType($invoice['type_id']);
 

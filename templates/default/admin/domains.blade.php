@@ -1,4 +1,14 @@
 {{-- Admin: domain list --}}
+@if(!empty($domainSavedOp))
+    <div class="alert alert-success mb-3">
+        <i class="ti ti-check me-1"></i>
+        @if($domainSavedOp === 'insert_domain')
+            Domain and domain administrator account were created successfully.
+        @else
+            Domain saved successfully.
+        @endif
+    </div>
+@endif
 <div class="card">
     @if(empty($domains))
         <div class="alert alert-info mb-0">No domains found.</div>

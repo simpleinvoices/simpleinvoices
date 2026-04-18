@@ -6,6 +6,17 @@
     }));
 @endphp
 
+@if(!empty($domainUserSavedOp))
+    <div class="alert alert-success mb-3">
+        <i class="ti ti-check me-1"></i>
+        @if($domainUserSavedOp === 'insert_domain_user')
+            Login account was created successfully.
+        @else
+            Login account was updated successfully.
+        @endif
+    </div>
+@endif
+
 <div class="card">
     {{-- Filter tabs --}}
     <div class="card-header">

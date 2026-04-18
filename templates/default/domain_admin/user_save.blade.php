@@ -10,8 +10,11 @@
         <i class="ti ti-users me-1"></i>All Accounts
     </a>
 @elseif($saved ?? false)
+    {{-- Success redirects from user_save.php --}}
     <div class="alert alert-success">
         <i class="ti ti-check me-1"></i>Account saved successfully.
     </div>
-    <meta http-equiv="refresh" content="1;URL=index.php?module=domain_admin&view=users" />
+    <a href="index.php?module=domain_admin&view=users" class="btn btn-outline-primary">
+        <i class="ti ti-users me-1"></i>Login Accounts
+    </a>
 @endif

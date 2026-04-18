@@ -1,9 +1,11 @@
 {{-- Domain Admin: add customer or biller login account --}}
-@if(!empty($_POST['email']) && form_submitted())
-    @include('templates.default.domain_admin.user_save')
-@else
+@php $presetRole = post('role_key') ?: get('role') ?: 'customer'; @endphp
 
-@php $presetRole = get('role') ?? 'customer'; @endphp
+@if(!empty($saveError))
+<div class="alert alert-danger mb-3">
+    <i class="ti ti-alert-circle me-1"></i>{{ $saveError }}
+</div>
+@endif
 
 <form method="post" action="index.php?module=domain_admin&view=user_add"
       class="needs-validation" novalidate id="domainUserForm">
@@ -34,18 +36,24 @@
         </div>
 
         {{-- Hidden field that carries the selected entity id --}}
-        <input type="hidden" name="linked_id" id="linked_id_hidden" value="" />
+        @php $presetLinkedId = (int) post('linked_id'); @endphp
+        <input type="hidden" name="linked_id" id="linked_id_hidden" value="{{ $presetLinkedId ?: '' }}" />
 
         {{-- Link to customer --}}
         <div class="mb-3" id="customerDropdown" @if($presetRole === 'biller') style="display:none" @endif>
             <label class="form-label">Link to Customer <i class="ti ti-asterisk text-danger" style="font-size:.7rem;"></i></label>
             <select id="linked_id_customer" class="form-select"
-                    onchange="syncLinkedId()">
+                    onchange="syncLinkedId()"
+                    @if($presetRole !== 'biller') required @endif>
                 <option value="">— select customer —</option>
                 @foreach(($customers ?? []) as $c)
-                    <option value="{{ $c['id'] }}">{{ $c['name'] }}</option>
+                    <option value="{{ $c['id'] }}"
+                            @if($presetRole === 'customer' && (int)$c['id'] === $presetLinkedId) selected @endif>
+                        {{ $c['name'] }}
+                    </option>
                 @endforeach
             </select>
+            <div class="invalid-feedback">Please select a customer to link.</div>
             @if(empty($customers))
                 <div class="form-hint text-warning">No enabled customers found in this domain.</div>
             @endif
@@ -55,12 +63,17 @@
         <div class="mb-3" id="billerDropdown" @if($presetRole !== 'biller') style="display:none" @endif>
             <label class="form-label">Link to Biller <i class="ti ti-asterisk text-danger" style="font-size:.7rem;"></i></label>
             <select id="linked_id_biller" class="form-select"
-                    onchange="syncLinkedId()">
+                    onchange="syncLinkedId()"
+                    @if($presetRole === 'biller') required @endif>
                 <option value="">— select biller —</option>
                 @foreach(($billers ?? []) as $b)
-                    <option value="{{ $b['id'] }}">{{ $b['name'] }}</option>
+                    <option value="{{ $b['id'] }}"
+                            @if($presetRole === 'biller' && (int)$b['id'] === $presetLinkedId) selected @endif>
+                        {{ $b['name'] }}
+                    </option>
                 @endforeach
             </select>
+            <div class="invalid-feedback">Please select a biller to link.</div>
             @if(empty($billers))
                 <div class="form-hint text-warning">No enabled billers found in this domain.</div>
             @endif
@@ -81,14 +94,14 @@
         <div class="mb-3">
             <label class="form-label">Password <i class="ti ti-asterisk text-danger" style="font-size:.7rem;"></i></label>
             <input type="password" name="password_field" class="form-control"
-                   required autocomplete="new-password" />
-            <div class="invalid-feedback">Password is required.</div>
+                   required autocomplete="new-password" minlength="4" />
+            <div class="invalid-feedback">Password is required (at least 4 characters).</div>
         </div>
         <div class="mb-3">
             <label class="form-label">Status</label>
             <select name="enabled" class="form-select">
-                <option value="1" selected>Enabled</option>
-                <option value="0">Disabled</option>
+                <option value="1" @if(post('enabled', '1') !== '0') selected @endif>Enabled</option>
+                <option value="0" @if(post('enabled') === '0') selected @endif>Disabled</option>
             </select>
         </div>
     </div>
@@ -115,14 +128,20 @@ function syncLinkedId() {
 }
 
 function toggleLinkedDropdown(role) {
-    var customerDiv = document.getElementById('customerDropdown');
-    var billerDiv   = document.getElementById('billerDropdown');
+    var customerDiv    = document.getElementById('customerDropdown');
+    var billerDiv      = document.getElementById('billerDropdown');
+    var customerSelect = document.getElementById('linked_id_customer');
+    var billerSelect   = document.getElementById('linked_id_biller');
     if (role === 'biller') {
-        customerDiv.style.display = 'none';
-        billerDiv.style.display   = '';
+        customerDiv.style.display    = 'none';
+        billerDiv.style.display      = '';
+        customerSelect.required      = false;
+        billerSelect.required        = true;
     } else {
-        customerDiv.style.display = '';
-        billerDiv.style.display   = 'none';
+        customerDiv.style.display    = '';
+        billerDiv.style.display      = 'none';
+        customerSelect.required      = true;
+        billerSelect.required        = false;
     }
     syncLinkedId();
 }
@@ -130,5 +149,3 @@ function toggleLinkedDropdown(role) {
 // Sync on page load so the hidden field has a value from the start
 document.addEventListener('DOMContentLoaded', syncLinkedId);
 </script>
-
-@endif

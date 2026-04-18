@@ -43,7 +43,8 @@
 				@if($billers == null)
 					<p class="text-muted mb-0"><em>{{ $LANG['no_billers'] ?? '' }}</em></p>
 				@else
-					<select name="biller_id" class="form-select">
+					<select name="biller_id" class="form-select" required>
+						<option value=""></option>
 						@foreach(($billers ?? []) as $biller)
 							<option @if($biller['id'] == $invoice['biller_id']) selected @endif value="{{ $biller['id'] ?? '' }}">{{ $biller['name'] ?? '' }}</option>
 						@endforeach
@@ -55,7 +56,8 @@
 				@if($customers == null)
 					<p class="text-muted mb-0"><em>{{ $LANG['no_customers'] ?? '' }}</em></p>
 				@else
-					<select name="customer_id" class="form-select">
+					<select name="customer_id" class="form-select" required>
+						<option value=""></option>
 						@foreach(($customers ?? []) as $customer)
 							<option @if($customer['id'] == $invoice['customer_id']) selected @endif value="{{ $customer['id'] ?? '' }}">{{ $customer['name'] ?? '' }}</option>
 						@endforeach

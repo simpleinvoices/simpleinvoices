@@ -26,10 +26,23 @@ $id = $_GET['id'];
 $user = user::getUser($id);
 $roles = user::getUserRoles();
 
+$saveReturnModule = '';
+$saveReturnView   = '';
+if (!empty($_GET['return_module']) && !empty($_GET['return_view'])) {
+    $rm = filenameEscape((string) $_GET['return_module']);
+    $rv = filenameEscape((string) $_GET['return_view']);
+    if (($rm === 'admin' && $rv === 'domain_admin_users')
+        || ($rm === 'domain_admin' && $rv === 'all_users')) {
+        $saveReturnModule = $rm;
+        $saveReturnView   = $rv;
+    }
+}
 
 $bladeView->assign('user', $user);
 $bladeView->assign('roles', $roles);
 $bladeView->assign('userSaveCsrfToken', siNonce('user_save'));
+$bladeView->assign('saveReturnModule', $saveReturnModule);
+$bladeView->assign('saveReturnView', $saveReturnView);
 /*
 $bladeView -> assign('enabled', array(
                                 0 => $LANG['disabled'],

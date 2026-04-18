@@ -8,7 +8,7 @@
 *	 GPL v3 or above --}}
 
 
-@if(post('email') != null && form_submitted() )
+@if(!empty(post('email')) && form_submitted(null))
 	@include('templates.default.user.save')
 @else
 
@@ -42,7 +42,9 @@
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['password'] ?? '' }}</label>
-			<input type="password" name="password_field" value="{{ post('password_field') }}" autocomplete="new-password" class="form-control" />
+			<input type="password" name="password_field" value="{{ post('password_field') }}" autocomplete="new-password" class="form-control"
+			       minlength="4" />
+			<div class="invalid-feedback">Password must be at least 4 characters when set.</div>
 		</div>
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['enabled'] ?? '' }}</label>

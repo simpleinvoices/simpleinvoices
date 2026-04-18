@@ -18,6 +18,7 @@ $invoice_id = $_GET['id'];
 
 $invoiceobj = new invoice();
 $invoice = $invoiceobj->select($invoice_id);
+si_check_invoice_access($invoice);
 
 $preference = getPreference($invoice['preference_id']);
 $biller = getBiller($invoice['biller_id']);

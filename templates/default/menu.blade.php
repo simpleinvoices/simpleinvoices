@@ -7,6 +7,10 @@
     $currentUserEmail = $authEnabled ? ($_SESSION['SI_Auth']['email'] ?? '') : '';
     $currentUserName  = $authEnabled ? (($_SESSION['SI_Auth']['name'] ?? '') ?: $currentUserEmail) : '';
     $currentUserId    = $authEnabled ? ($_SESSION['SI_Auth']['id']    ?? '') : '';
+    $currentRoleName  = $authEnabled ? ($_SESSION['SI_Auth']['role_name'] ?? '') : '';
+    $currentUserUserId = $authEnabled ? ($_SESSION['SI_Auth']['user_id'] ?? '') : '';
+    $isCustomerRole   = ($currentRoleName === 'customer');
+    $isBillerRole     = ($currentRoleName === 'biller');
 @endphp
 
 {{-- Row 1: Top bar — logo + user controls --}}
@@ -75,6 +79,24 @@
     <div class="collapse navbar-collapse" id="navbar-menu">
         <div class="navbar">
             <div class="container-xl">
+                @if($isCustomerRole)
+                {{-- ── Customer portal nav ── --}}
+                <ul class="navbar-nav">
+                    <li class="nav-item @if(($module ?? '') == 'customers') active @endif">
+                        <a class="nav-link" href="index.php?module=customers&view=details&action=view&id={{ urlencode($currentUserUserId) }}">
+                            <span class="nav-link-icon d-md-none d-lg-inline-block"><i class="ti ti-user-circle"></i></span>
+                            <span class="nav-link-title">My Account</span>
+                        </a>
+                    </li>
+                    <li class="nav-item @if(($module ?? '') == 'invoices') active @endif">
+                        <a class="nav-link" href="index.php?module=invoices&view=manage">
+                            <span class="nav-link-icon d-md-none d-lg-inline-block"><i class="ti ti-file-invoice"></i></span>
+                            <span class="nav-link-title">My Invoices</span>
+                        </a>
+                    </li>
+                </ul>
+                @else
+                {{-- ── Full nav for all other roles ── --}}
                 <ul class="navbar-nav">
                     {{-- Home --}}
                     <li class="nav-item @if(($module ?? '') == 'index') active @endif">
@@ -171,6 +193,8 @@
                     </li>
 
                 </ul>
+                @endif
+                @if(!$isCustomerRole)
                 <ul class="navbar-nav ms-md-auto">
                     {{-- Domain Admin (domain_administrator + administrator) --}}
                     @if(isset($_SESSION['SI_Auth']['role_name']) && in_array($_SESSION['SI_Auth']['role_name'], ['domain_administrator', 'administrator'], true))
@@ -183,6 +207,11 @@
                             <a class="dropdown-item @if(($module ?? '') == 'domain_admin' && ($view ?? '') == 'index') active @endif"
                                href="index.php?module=domain_admin&view=index">
                                 <i class="ti ti-layout-dashboard me-2 text-secondary"></i>Dashboard
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item @if(($module ?? '') == 'domain_admin' && ($view ?? '') == 'all_users') active @endif"
+                               href="index.php?module=domain_admin&view=all_users">
+                                <i class="ti ti-users-group me-2 text-secondary"></i>All Users
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item @if(($module ?? '') == 'domain_admin' && ($view ?? '') == 'users') active @endif"
@@ -214,6 +243,11 @@
                                href="index.php?module=admin&view=domains">
                                 <i class="ti ti-building me-2 text-secondary"></i>Manage Domains
                             </a>
+                            <a class="dropdown-item @if(($module ?? '') == 'admin' && ($view ?? '') == 'domain_admin_users') active @endif"
+                               href="index.php?module=admin&view=domain_admin_users">
+                                <i class="ti ti-shield-lock me-2 text-secondary"></i>Domain Admin Users
+                            </a>
+                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item @if(($module ?? '') == 'user') active @endif"
                                href="index.php?module=user&view=manage">
                                 <i class="ti ti-users me-2 text-secondary"></i>Manage Users
@@ -254,6 +288,7 @@
                         </div>
                     </li>
                 </ul>
+                @endif
             </div>
         </div>
     </div>
@@ -340,14 +375,16 @@
             : ($tmp_lang_view . ' ' . $tmp_lang_module);
         // Override titles for admin and domain_admin modules
         $admin_titles = [
-            'admin_index'            => 'Admin Dashboard',
-            'admin_domains'          => 'Manage Domains',
-            'admin_domain_add'       => 'Add Domain',
-            'admin_domain_edit'      => 'Edit Domain',
-            'domain_admin_index'     => 'Domain Admin Dashboard',
-            'domain_admin_users'     => 'Login Accounts',
-            'domain_admin_user_add'  => 'Add Login Account',
-            'domain_admin_user_edit' => 'Edit Login Account',
+            'admin_index'               => 'Admin Dashboard',
+            'admin_domains'             => 'Manage Domains',
+            'admin_domain_add'          => 'Add Domain',
+            'admin_domain_edit'         => 'Edit Domain',
+            'admin_domain_admin_users'  => 'Domain Admin Users',
+            'domain_admin_index'        => 'Domain Admin Dashboard',
+            'domain_admin_all_users'    => 'All Domain Users',
+            'domain_admin_users'        => 'Login Accounts',
+            'domain_admin_user_add'     => 'Add Login Account',
+            'domain_admin_user_edit'    => 'Edit Login Account',
         ];
         if (isset($admin_titles[$page_title_key])) {
             $page_title = $admin_titles[$page_title_key];
@@ -357,7 +394,7 @@
         <div class="container-xl">
             <div class="row g-2 align-items-center">
                 <div class="col">
-                    <h2 class="page-title">{{ $page_title }}</h2>
+                    <h2 class="page-title{{ (($module ?? '') == 'index' && ($view ?? '') == 'index') ? ' d-none d-sm-block' : '' }}">{{ $page_title }}</h2>
                 </div>
                 <div class="col-auto ms-auto d-print-none">
                     <div class="btn-list">
@@ -437,9 +474,17 @@
                         <a href="index.php?module=admin&view=domains" class="btn btn-outline-secondary">
                             <i class="ti ti-arrow-left me-1"></i>All Domains
                         </a>
+                    @elseif(($module ?? '') == 'admin' && ($view ?? '') == 'domain_admin_users')
+                        <a href="index.php?module=admin&view=index" class="btn btn-outline-secondary">
+                            <i class="ti ti-arrow-left me-1"></i>Admin Dashboard
+                        </a>
                     @elseif(($module ?? '') == 'domain_admin' && ($view ?? '') == 'index')
-                        <a href="index.php?module=domain_admin&view=users" class="btn btn-outline-secondary">
-                            <i class="ti ti-users me-1"></i>Login Accounts
+                        <a href="index.php?module=domain_admin&view=all_users" class="btn btn-outline-secondary">
+                            <i class="ti ti-users-group me-1"></i>All Users
+                        </a>
+                    @elseif(($module ?? '') == 'domain_admin' && ($view ?? '') == 'all_users')
+                        <a href="index.php?module=domain_admin&view=user_add" class="btn btn-primary">
+                            <i class="ti ti-plus me-1"></i>Add Login Account
                         </a>
                     @elseif(($module ?? '') == 'domain_admin' && ($view ?? '') == 'users')
                         <a href="index.php?module=domain_admin&view=user_add" class="btn btn-primary">
@@ -448,6 +493,13 @@
                     @elseif(($module ?? '') == 'domain_admin' && in_array($view ?? '', ['user_add', 'user_edit']))
                         <a href="index.php?module=domain_admin&view=users" class="btn btn-outline-secondary">
                             <i class="ti ti-arrow-left me-1"></i>All Accounts
+                        </a>
+                    @elseif(($module ?? '') == 'invoices' && ($view ?? '') == 'quick_view')
+                        <a href="index.php?module=invoices&view=manage" class="btn btn-outline-secondary">
+                            <i class="ti ti-arrow-left me-1"></i>{{ $LANG['manage_invoices'] ?? 'Manage Invoices' }}
+                        </a>
+                        <a href="index.php?module=invoices&view=itemised" class="btn btn-primary">
+                            <i class="ti ti-plus me-1"></i>{{ $LANG['new_invoice'] ?? 'New Invoice' }}
                         </a>
                     @elseif(($module ?? '') == 'reports' && ($view ?? '') != 'index')
                         <a href="index.php?module=reports&view=index" class="btn btn-outline-secondary">

@@ -22,5 +22,11 @@ $sth = dbQuery(
 );
 $domains = $sth->fetchAll(PDO::FETCH_ASSOC);
 
+$domainSavedOp = (string) ($_GET['domain_saved'] ?? '');
+if (!in_array($domainSavedOp, ['insert_domain', 'update_domain'], true)) {
+    $domainSavedOp = '';
+}
+
 $bladeView->assign('domains', $domains);
+$bladeView->assign('domainSavedOp', $domainSavedOp);
 $bladeView->assign('pageActive', 'admin');

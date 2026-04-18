@@ -136,11 +136,10 @@
 							type="text"
 							name="quantity{{ $line }}"
 							id="quantity{{ $line }}"
-							class="form-control form-control-sm text-end"
+							class="form-control form-control-sm"
 							@if($line == '0') required @endif
 							@if(get('quantity' . $line)) value="{{ get('quantity' . $line) }}" @endif
 						/>
-						@if($line == '0')<div class="invalid-feedback">{{ $LANG['required_field'] ?? 'Required' }}</div>@endif
 					</div>
 					<div class="col col-lg">
 						<label class="form-label d-lg-none small text-secondary mb-1">{{ $LANG['item'] ?? '' }}</label>
@@ -162,7 +161,6 @@
 									@endif
 								@endforeach
 							</select>
-							@if($line == '0')<div class="invalid-feedback">{{ $LANG['required_field'] ?? 'Required' }}</div>@endif
 						@endif
 					</div>
 					{{-- Mobile line break: taxes + price wrap to a second line below qty+product --}}
@@ -190,11 +188,10 @@
 						<input
 							id="unit_price{{ $line }}"
 							name="unit_price{{ $line }}"
-							class="form-control form-control-sm text-end"
+							class="form-control form-control-sm"
 							@if($line == '0') required @endif
 							@if(get('unit_price' . $line)) value="{{ get('unit_price' . $line) }}" @else value="" @endif
 						/>
-						@if($line == '0')<div class="invalid-feedback">{{ $LANG['required_field'] ?? 'Required' }}</div>@endif
 					</div>
 					<div class="col-auto d-flex align-items-end">
 						<div class="segmented-control segmented-control-sm">

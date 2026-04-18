@@ -18,6 +18,7 @@ checkLogin();
 $master_invoice_id = (int)$_GET['id']; // Cast to integer to prevent SQL injection
 
 $invoice = getInvoice($master_invoice_id);
+si_check_invoice_access($invoice);
 
 $invoiceobj = new invoice();
 $invoiceItems = $invoiceobj->getInvoiceItems($master_invoice_id);

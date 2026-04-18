@@ -33,9 +33,10 @@
 			@if($billers == null)
 				<p class="text-muted mb-0"><em>{{ $LANG['no_billers'] ?? '' }}</em></p>
 			@else
-				<select name="biller_id" class="form-select">
+				<select name="biller_id" class="form-select" required placeholder="{{ $LANG['biller'] ?? 'Biller' }}">
+					<option value=""></option>
 					@foreach(($billers ?? []) as $biller)
-						<option @if($biller['id'] == $defaults->biller) selected @endif value="{{ $biller['id'] ?? '' }}">{{ $biller['name'] ?? '' }}</option>
+						<option @if($biller['id'] == ($defaults['biller'] ?? '')) selected @endif value="{{ $biller['id'] ?? '' }}">{{ $biller['name'] ?? '' }}</option>
 					@endforeach
 				</select>
 			@endif
@@ -45,9 +46,10 @@
 			@if($customers == null)
 				<p class="text-muted mb-0"><em>{{ $LANG['no_customers'] ?? '' }}</em></p>
 			@else
-				<select name="customer_id" class="form-select">
+				<select name="customer_id" class="form-select" required placeholder="{{ $LANG['customer'] ?? 'Customer' }}">
+					<option value=""></option>
 					@foreach(($customers ?? []) as $customer)
-						<option @if($customer['id'] == $defaults->customer) selected @endif value="{{ $customer['id'] ?? '' }}">{{ $customer['name'] ?? '' }}</option>
+						<option @if($customer['id'] == ($defaults['customer'] ?? '')) selected @endif value="{{ $customer['id'] ?? '' }}">{{ $customer['name'] ?? '' }}</option>
 					@endforeach
 				</select>
 			@endif
@@ -64,7 +66,6 @@
 						value="{{ date('Y-m-d') }}"
 					@endif
 				/>
-				<div class="invalid-feedback">{{ $LANG['required_field'] ?? 'Required' }}</div>
 			</div>
 		</div>
 	</div>

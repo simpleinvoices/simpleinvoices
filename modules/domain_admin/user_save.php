@@ -43,6 +43,8 @@ if ($op === 'insert_domain_user') {
         $saveError = 'Please select a customer or biller to link.';
     } elseif (!$password) {
         $saveError = 'Password is required for new accounts.';
+    } elseif (strlen($password) < 4) {
+        $saveError = 'Password must be at least 4 characters.';
     } else {
         // Verify the linked entity belongs to this domain
         $table  = $role_key === 'customer' ? TB_PREFIX . 'customers' : TB_PREFIX . 'biller';
@@ -111,8 +113,11 @@ if ($op === 'update_domain_user') {
                 $saveError = 'Selected ' . $role_key . ' does not exist in your domain.';
             } else {
                 $role_id = $allowed_role_map[$role_key];
+                $sth     = null;
 
-                if ($password !== '') {
+                if ($password !== '' && strlen($password) < 4) {
+                    $saveError = 'Password must be at least 4 characters.';
+                } elseif ($password !== '') {
                     $passwordHash = auth_hash_password($password);
                     $sth = dbQuery(
                         "UPDATE " . TB_PREFIX . "user
@@ -143,13 +148,20 @@ if ($op === 'update_domain_user') {
                         ':domain_id', $domain_id
                     );
                 }
-                $saved = $sth ? true : false;
-                if (!$saved) {
-                    $saveError = 'Could not update account — the email may already be in use.';
+                if ($sth !== null) {
+                    $saved = $sth ? true : false;
+                    if (!$saved) {
+                        $saveError = 'Could not update account — the email may already be in use.';
+                    }
                 }
             }
         }
     }
+}
+
+if ($saved && ($op === 'insert_domain_user' || $op === 'update_domain_user')) {
+    header('Location: index.php?module=domain_admin&view=users&domain_user_saved=' . rawurlencode((string) $op));
+    exit();
 }
 
 $bladeView->assign('saved',     $saved);

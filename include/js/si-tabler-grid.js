@@ -140,7 +140,8 @@
 			input.name = 'q';
 			input.className = 'form-control form-control-sm';
 			input.placeholder = o.searchPlaceholder || siGridStr('search_placeholder', 'Search');
-			input.style.width = '10em';
+			input.style.minWidth = '5em';
+			input.style.flex    = '1 1 auto';
 			var btn = document.createElement('button');
 			btn.type = 'button';
 			btn.className = 'btn btn-sm btn-primary';
@@ -247,7 +248,7 @@
 				});
 				left.appendChild(this.pagerRpSelect);
 				var recordsLbl = document.createElement('span');
-				recordsLbl.className = 'text-secondary';
+				recordsLbl.className = 'text-secondary d-none d-sm-inline';
 				recordsLbl.textContent = siGridStr('records', 'records');
 				left.appendChild(recordsLbl);
 			}
@@ -255,7 +256,7 @@
 			var right = document.createElement('div');
 			right.className = 'd-flex align-items-center gap-3 ms-auto';
 			this.pagerStat = document.createElement('div');
-			this.pagerStat.className = 'text-secondary small';
+			this.pagerStat.className = 'text-secondary small d-none d-sm-block';
 			right.appendChild(this.pagerStat);
 			this.pagerPagesContainer = document.createElement('div');
 			this.pagerPagesContainer.className = 'd-flex align-items-center gap-1';
@@ -398,6 +399,13 @@
 					content = isEnabled
 						? '<span class="status status-green">' + (labels.enabled || 'Enabled') + '</span>'
 						: '<span class="status status-red">' + (labels.disabled || 'Disabled') + '</span>';
+				} else if (o.colModel[c].mobileFormatter && content !== '\u00A0') {
+					// Render full text on sm+, truncated version on xs — no JS resize logic needed.
+					var mobileText = o.colModel[c].mobileFormatter(content);
+					if (mobileText !== content) {
+						content = '<span class="d-none d-sm-inline">' + escapeHtml(content) + '</span>' +
+						          '<span class="d-sm-none">'          + escapeHtml(mobileText) + '</span>';
+					}
 				}
 				td.innerHTML = content;
 				tr.appendChild(td);

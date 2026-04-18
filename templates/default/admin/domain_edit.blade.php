@@ -1,5 +1,5 @@
 {{-- Admin: edit domain --}}
-@if(post('name') != null && form_submitted())
+@if(form_submitted(null) && !empty(post('name')))
     @include('templates.default.admin.domain_save')
 @else
 

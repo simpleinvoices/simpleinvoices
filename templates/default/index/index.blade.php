@@ -637,10 +637,10 @@
             </div>
         </div>
     </div>
-    {{-- Invoices Paid + Invoice Revenue: two equal vertical halves matching height of Monthly/Yearly cards (incl. gutter) --}}
-    <div class="col-lg-3 d-flex flex-column">
-        <div class="d-flex flex-column gap-3 flex-grow-1" style="min-height:0">
-            <div class="d-flex flex-column" style="min-height:0;flex:1 1 0">
+    {{-- Invoices Paid + Invoice Revenue: half-width on mobile (matches Payments / Volume cards), full-width on lg --}}
+    <div class="col-lg-3">
+        <div class="row g-3">
+            <div class="col-6 col-lg-12">
                 {{-- % Invoices Paid (success chrome matches Debtor Aging when all paid) --}}
                 <div class="card h-100 d-flex flex-column @if(!empty($dash_all_invoices_paid)) border border-success border-opacity-25 @endif overflow-hidden">
                     @if(!empty($dash_all_invoices_paid))
@@ -680,7 +680,7 @@
                     </div>
                 </div>
             </div>
-            <div class="d-flex flex-column" style="min-height:0;flex:1 1 0">
+            <div class="col-6 col-lg-12">
                 <div class="card overflow-hidden h-100 d-flex flex-column">
                     <div class="card-body py-2 px-3 pb-1 flex-shrink-0">
                         <div class="d-flex align-items-center mb-1">
@@ -775,9 +775,27 @@
                             </div>
                         </div>
                     </td>
-                    <td>{{ $inv['index_name'] ?? '' }}</td>
+                    <td>
+                        @php
+                            $invName  = $inv['index_name'] ?? '';
+                            $invSp    = strpos($invName, ' ');
+                            $invNum   = $invSp !== false ? mb_substr($invName, $invSp + 1) : $invName;
+                            $invShort = $invSp !== false
+                                ? mb_substr($invName, 0, 3) . '.. ..' . mb_substr($invNum, -3)
+                                : $invName;
+                        @endphp
+                        <span class="d-none d-sm-inline">{{ $invName }}</span>
+                        <span class="d-sm-none">{{ $invShort }}</span>
+                    </td>
                     <td class="d-none d-sm-table-cell">{{ $inv['biller'] ?? '' }}</td>
-                    <td>{{ $inv['customer'] ?? '' }}</td>
+                    <td>
+                        @php
+                            $custName  = $inv['customer'] ?? '';
+                            $custShort = mb_strlen($custName) > 15 ? mb_substr($custName, 0, 15) . '…' : $custName;
+                        @endphp
+                        <span class="d-none d-sm-inline">{{ $custName }}</span>
+                        <span class="d-sm-none">{{ $custShort }}</span>
+                    </td>
                     <td class="d-none d-sm-table-cell text-end text-secondary">{{ siLocal::date($inv['date'] ?? '') }}</td>
                     <td class="text-end">{{ siLocal::number($inv['invoice_total'] ?? 0) }}</td>
                     <td class="text-center">
@@ -884,6 +902,21 @@
         </div>
     </div>
 
+    {{-- Invoice & Payment Volume (count) --}}
+    <div class="col-6 col-lg-12">
+        <div class="card overflow-hidden">
+            <div class="card-body py-2 px-3 pb-1">
+                <div class="d-flex align-items-center mb-1">
+                    <span class="text-uppercase text-secondary fw-semibold" style="font-size:.65rem;letter-spacing:.08em">Invoice &amp; Payment Volume</span>
+                    <a href="index.php?module=reports&amp;view=report_sales_by_periods" class="ms-auto text-secondary lh-1" title="{{ $LANG['run_report'] ?? 'Run report' }}">
+                        <i class="ti ti-window-maximize" style="font-size:.9rem"></i>
+                    </a>
+                </div>
+                <div class="h2 mb-0">{{ number_format($dash_total_inv_volume ?? 0) }} <span class="fs-6 fw-normal text-secondary">inv &middot; {{ number_format($dash_total_pmt_volume ?? 0) }} pmt</span></div>
+            </div>
+            <div id="sparkline-volume" style="height:40px"></div>
+        </div>
+    </div>
     {{-- Debtor aging radial (moved from charts row; below Payments) --}}
     <div class="col-12 col-lg-12">
         <div class="card h-100 @if(!empty($dash_aging_all_clear)) border border-success border-opacity-25 @endif overflow-hidden">
@@ -919,21 +952,6 @@
         </div>
     </div>
 
-    {{-- Invoice & Payment Volume (count) --}}
-    <div class="col-6 col-lg-12">
-        <div class="card overflow-hidden">
-            <div class="card-body py-2 px-3 pb-1">
-                <div class="d-flex align-items-center mb-1">
-                    <span class="text-uppercase text-secondary fw-semibold" style="font-size:.65rem;letter-spacing:.08em">Invoice &amp; Payment Volume</span>
-                    <a href="index.php?module=reports&amp;view=report_sales_by_periods" class="ms-auto text-secondary lh-1" title="{{ $LANG['run_report'] ?? 'Run report' }}">
-                        <i class="ti ti-window-maximize" style="font-size:.9rem"></i>
-                    </a>
-                </div>
-                <div class="h2 mb-0">{{ number_format($dash_total_inv_volume ?? 0) }} <span class="fs-6 fw-normal text-secondary">inv &middot; {{ number_format($dash_total_pmt_volume ?? 0) }} pmt</span></div>
-            </div>
-            <div id="sparkline-volume" style="height:40px"></div>
-        </div>
-    </div>
         </div>
     </div>
 </div>

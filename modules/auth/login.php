@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'login
             unset($_SESSION['login_csrf_token']);
 
             if (($user['role_name'] ?? '') === 'customer' && (int) ($user['user_id'] ?? 0) > 0) {
-                header('Location: ' . $siBase . '/index.php?module=customers&view=details&action=view&id=' . (int) $user['user_id']);
+                header('Location: ' . $siBase . '/index.php?module=invoices&view=manage');
             } else {
                 header('Location: ' . $siBase . '/');
             }

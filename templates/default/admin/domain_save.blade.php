@@ -10,8 +10,16 @@
         <i class="ti ti-building me-1"></i>All Domains
     </a>
 @elseif($saved ?? false)
+    {{-- insert/update success redirects from domain_save.php; other ops may land here --}}
     <div class="alert alert-success">
-        <i class="ti ti-check me-1"></i>Domain saved successfully.
+        <i class="ti ti-check me-1"></i>
+        @if(($savedOp ?? '') === 'insert_domain')
+            Domain and domain administrator account were created successfully.
+        @else
+            Domain saved successfully.
+        @endif
     </div>
-    <meta http-equiv="refresh" content="1;URL=index.php?module=admin&view=domains" />
+    <a href="index.php?module=admin&view=domains" class="btn btn-outline-primary">
+        <i class="ti ti-building me-1"></i>Manage Domains
+    </a>
 @endif

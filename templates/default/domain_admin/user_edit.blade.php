@@ -1,15 +1,25 @@
 {{-- Domain Admin: edit customer or biller login account --}}
-@if(!empty($_POST['email']) && form_submitted())
-    @include('templates.default.domain_admin.user_save')
-@else
-
 @php
-    $u       = $domainUser ?? [];
-    $curRole = $u['role_name'] ?? 'customer';
-    $curId   = (int) ($u['user_id'] ?? 0);
+    $isPost   = form_submitted(null);
+    $u        = $domainUser ?? [];
+    $uid      = $isPost ? (int) post('id')       : (int) ($u['id']        ?? 0);
+    $curRole  = $isPost ? (post('role_key') ?: 'customer') : ($u['role_name'] ?? 'customer');
+    $curId    = $isPost ? (int) post('linked_id') : (int) ($u['user_id']   ?? 0);
+    $curName  = $isPost ? post('name')            : ($u['name']            ?? '');
+    $curEmail = $isPost ? post('email')           : ($u['email']           ?? '');
+    $curEnabledPost = post('enabled');
+    $curEnabled = $isPost
+        ? (int) $curEnabledPost
+        : (int) ($u['enabled'] ?? 1);
 @endphp
 
-<form method="post" action="index.php?module=domain_admin&view=user_edit&id={{ urlencode($u['id'] ?? '') }}"
+@if(!empty($saveError))
+<div class="alert alert-danger mb-3">
+    <i class="ti ti-alert-circle me-1"></i>{{ $saveError }}
+</div>
+@endif
+
+<form method="post" action="index.php?module=domain_admin&view=user_edit&id={{ urlencode((string) $uid) }}"
       class="needs-validation" novalidate id="domainUserForm">
 <div class="card">
     <div class="card-body">
@@ -72,11 +82,11 @@
 
         <div class="mb-3">
             <label class="form-label">Name</label>
-            <input type="text" name="name" value="{{ $u['name'] ?? '' }}" class="form-control" autocomplete="off" />
+            <input type="text" name="name" value="{{ $curName }}" class="form-control" autocomplete="off" />
         </div>
         <div class="mb-3">
             <label class="form-label">Email <i class="ti ti-asterisk text-danger" style="font-size:.7rem;"></i></label>
-            <input type="email" name="email" value="{{ $u['email'] ?? '' }}" class="form-control"
+            <input type="email" name="email" value="{{ $curEmail }}" class="form-control"
                    required autocomplete="off" />
             <div class="invalid-feedback">A valid email is required.</div>
         </div>
@@ -84,13 +94,15 @@
             <label class="form-label">New Password
                 <span class="text-secondary small">(leave blank to keep current)</span>
             </label>
-            <input type="password" name="password_field" class="form-control" autocomplete="new-password" />
+            <input type="password" name="password_field" class="form-control" autocomplete="new-password"
+                   minlength="4" />
+            <div class="invalid-feedback">New password must be at least 4 characters.</div>
         </div>
         <div class="mb-3">
             <label class="form-label">Status</label>
             <select name="enabled" class="form-select">
-                <option value="1" @if(($u['enabled'] ?? 1)) selected @endif>Enabled</option>
-                <option value="0" @if(!($u['enabled'] ?? 1)) selected @endif>Disabled</option>
+                <option value="1" @if($curEnabled) selected @endif>Enabled</option>
+                <option value="0" @if(!$curEnabled) selected @endif>Disabled</option>
             </select>
         </div>
     </div>
@@ -104,7 +116,7 @@
     </div>
 </div>
 <input type="hidden" name="op" value="update_domain_user" />
-<input type="hidden" name="id" value="{{ $u['id'] ?? '' }}" />
+<input type="hidden" name="id" value="{{ $uid }}" />
 <input type="hidden" name="csrfprotectionbysr" value="{{ $domainUserSaveCsrfToken ?? '' }}" />
 </form>
 
@@ -132,5 +144,3 @@ function toggleLinkedDropdown(role) {
 
 document.addEventListener('DOMContentLoaded', syncLinkedId);
 </script>
-
-@endif

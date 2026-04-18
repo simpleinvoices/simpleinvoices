@@ -23,9 +23,17 @@
 		// Detect whether the first option is a blank placeholder
 		var hasBlank = el.options.length > 0 && el.options[0].value === '';
 
+		// Capture the server-rendered selected value BEFORE Tom Select initialises.
+		// With allowEmptyOption: false on required selects, Tom Select may discard
+		// a pre-selected value during setup — we restore it afterwards.
+		var initialValue = el.value;
+
 		var ts = new TomSelect(el, {
 			create:           false,
-			allowEmptyOption: hasBlank,
+			// Required fields: treat blank as placeholder (shows hint text, full height).
+			// Optional fields: allow blank as a selectable empty value.
+			allowEmptyOption: !el.hasAttribute('required') && hasBlank,
+			placeholder:      el.getAttribute('placeholder') || '',
 			maxOptions:       null,       // show all options (client-side filter)
 			sortField:        [{ field: 'text', direction: 'asc' }],
 		});
@@ -36,6 +44,23 @@
 		if (ts.wrapper) {
 			ts.wrapper.classList.remove('validate[required]');
 		}
+
+		// Restore pre-selected value if Tom Select lost it during init (see above).
+		if (initialValue && ts.getValue() !== initialValue) {
+			ts.setValue(initialValue, true); // silent — don't fire onChange
+		}
+
+		// Clear is-invalid state (set by si-validate.js) when user picks a value.
+		ts.on('change', function (value) {
+			if (!ts.wrapper) return;
+			if (value) {
+				ts.wrapper.classList.remove('is-invalid');
+				var feedback = ts.wrapper.nextElementSibling;
+				if (feedback && feedback.classList.contains('invalid-feedback')) {
+					feedback.style.display = '';
+				}
+			}
+		});
 	}
 
 	function init() {

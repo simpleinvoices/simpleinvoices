@@ -1,7 +1,7 @@
 <?php
 /*
- * Script: domain_admin/users.php
- *   List customer and biller login accounts in this domain
+ * Script: domain_admin/all_users.php
+ *   List all login accounts in this domain (all roles)
  *
  * License: GPL v3 or above
  */
@@ -27,17 +27,16 @@ $sth = dbQuery(
      LEFT JOIN " . TB_PREFIX . "biller b
           ON r.name = 'biller' AND b.domain_id = u.domain_id AND b.id = u.user_id
      WHERE u.domain_id = :domain_id
-       AND r.name IN ('customer', 'biller')
      ORDER BY r.name, u.name",
     ':domain_id', $domain_id
 );
-$domainUsers = $sth->fetchAll(PDO::FETCH_ASSOC);
+$allDomainUsers = $sth->fetchAll(PDO::FETCH_ASSOC);
 
-$domainUserSavedOp = (string) ($_GET['domain_user_saved'] ?? '');
-if (!in_array($domainUserSavedOp, ['insert_domain_user', 'update_domain_user'], true)) {
-    $domainUserSavedOp = '';
+$userSavedOp = (string) ($_GET['user_saved'] ?? '');
+if (!in_array($userSavedOp, ['insert_user', 'edit_user'], true)) {
+    $userSavedOp = '';
 }
 
-$bladeView->assign('domainUsers', $domainUsers);
-$bladeView->assign('domainUserSavedOp', $domainUserSavedOp);
+$bladeView->assign('allDomainUsers', $allDomainUsers);
+$bladeView->assign('userSavedOp', $userSavedOp);
 $bladeView->assign('pageActive', 'domain_admin');

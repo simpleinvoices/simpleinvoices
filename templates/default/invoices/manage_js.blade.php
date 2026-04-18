@@ -14,9 +14,19 @@
 			toolbarSelector: '#manageGridToolbar',
 			colModel : [
 				{display: '', name : 'actions', width : action_menu, sortable : false, align: 'left', className: 'w-1'},
-				{display: @json($LANG['id'] ?? ''), name : 'index_id', width :15 * percentage_width, sortable : true, align: 'left'},
+				{display: @json($LANG['id'] ?? ''), name : 'index_id', width :15 * percentage_width, sortable : true, align: 'left', mobileFormatter: function(val) {
+					// "Invoice 0001" → "Inv.. ..001"
+					var sp = val.indexOf(' ');
+					if (sp > 0) {
+						var num = val.substring(sp + 1);
+						return val.substring(0, 3) + '.. ..' + num.slice(-3);
+					}
+					return val;
+				}},
 				{display: @json($LANG['biller'] ?? ''), name : 'biller', width :20 * percentage_width, sortable : true, align: 'left', className: 'd-none d-sm-table-cell'},
-				{display: @json($LANG['customer'] ?? ''), name : 'customer', width :20 * percentage_width, sortable : true, align: 'left'},
+				{display: @json($LANG['customer'] ?? ''), name : 'customer', width :20 * percentage_width, sortable : true, align: 'left', mobileFormatter: function(val) {
+					return val.length > 15 ? val.substring(0, 15) + '\u2026' : val;
+				}},
 				{display: @json($LANG['date_upper'] ?? ''), name : 'date', width : 15 * percentage_width, sortable : true, align: 'right', className: 'd-none d-sm-table-cell'},
 				{display: @json($LANG['total'] ?? ''), name : 'invoice_total', width : 15 * percentage_width, sortable : true, align: 'right'},
 				{display: @json($LANG['status'] ?? ''), name : 'status', width : 15 * percentage_width, sortable : true, align: 'center', displayMobile: ''}

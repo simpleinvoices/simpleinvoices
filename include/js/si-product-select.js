@@ -28,7 +28,7 @@
 			searchField:  ['description'],
 
 			preload: isLargeDataset ? 'focus' : true,
-			maxOptions: 50,
+			maxOptions: 10000,
 
 			load: function (query, callback) {
 				fetch(SEARCH_URL + '&q=' + encodeURIComponent(query))
@@ -40,16 +40,23 @@
 			// Directly call the existing product-change handler instead of
 			// relying on a native DOM change event (Tom Select may not fire one).
 			onChange: function (value) {
-				// Keep wrapper validation classes in sync once the form has been
-				// submitted (was-validated class present).
-				var form = selectEl.closest('form');
-				if (form && form.classList.contains('was-validated') && ts.wrapper) {
+				// Keep wrapper validation classes in sync after a failed submit.
+				// Invoice forms skip was-validated and set is-invalid directly, so
+				// check the wrapper itself rather than the form flag.
+				if (ts.wrapper) {
 					var isEmpty = !value;
-					ts.wrapper.classList.toggle('is-invalid', isEmpty);
-					ts.wrapper.classList.toggle('is-valid', !isEmpty);
-					var feedback = ts.wrapper.nextElementSibling;
-					if (feedback && feedback.classList.contains('invalid-feedback')) {
-						feedback.style.display = isEmpty ? 'block' : 'none';
+					if (!isEmpty && ts.wrapper.classList.contains('is-invalid')) {
+						ts.wrapper.classList.remove('is-invalid');
+						var feedback = ts.wrapper.nextElementSibling;
+						if (feedback && feedback.classList.contains('invalid-feedback')) {
+							feedback.style.display = '';
+						}
+					}
+					// Legacy was-validated path: also sync is-valid
+					var form = selectEl.closest('form');
+					if (form && form.classList.contains('was-validated')) {
+						ts.wrapper.classList.toggle('is-invalid', isEmpty);
+						ts.wrapper.classList.toggle('is-valid', !isEmpty);
 					}
 				}
 

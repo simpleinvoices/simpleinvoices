@@ -10,12 +10,12 @@ $q = trim($_GET['q'] ?? '');
 if ($q === '') {
 	$sql = "SELECT id, description FROM " . TB_PREFIX . "products "
 	     . "WHERE enabled AND domain_id = :domain_id "
-	     . "ORDER BY description LIMIT 50";
+	     . "ORDER BY description LIMIT 10000";
 	$states = dbQuery($sql, ':domain_id', $auth_session->domain_id);
 } else {
 	$sql = "SELECT id, description FROM " . TB_PREFIX . "products "
 	     . "WHERE enabled AND domain_id = :domain_id AND description LIKE :q "
-	     . "ORDER BY description LIMIT 50";
+	     . "ORDER BY description LIMIT 10000";
 	$states = dbQuery($sql, ':domain_id', $auth_session->domain_id, ':q', '%' . $q . '%');
 }
 

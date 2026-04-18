@@ -629,16 +629,22 @@ td.index_table {
     vertical-align: middle;
 }
 
-/* Responsive small button — full size on sm+, btn-sm on xs */
+/* Responsive small button — full size on sm+, icon-only compact on xs */
 @media (max-width: 575.98px) {
     .btn-sm-mobile {
-        --tblr-btn-padding-y: .25rem;
-        --tblr-btn-padding-x: .5rem;
-        --tblr-btn-font-size: .875rem;
+        --tblr-btn-padding-y: .2rem;
+        --tblr-btn-padding-x: .35rem;
+        padding: .2rem .35rem;          /* explicit fallback if CSS vars aren't picked up */
+        font-size: .875rem;
         border-radius: var(--tblr-border-radius-sm, .25rem);
     }
     .btn-sm-mobile .ti {
         font-size: 1rem;
+    }
+    /* Hide the dropdown caret — the ⋮ icon already signals a menu, and the
+       ::after triangle pushes the button ~5px wider than the 2.5rem column. */
+    .btn-sm-mobile::after {
+        display: none !important;
     }
 }
 
@@ -761,6 +767,34 @@ a.segmented-control-item {
     color: var(--tblr-body-color);
 }
 
+/* Prevent the selected value from wrapping — matches native <select> behaviour */
+.ts-wrapper.single .ts-control {
+    flex-wrap: nowrap;
+    overflow: hidden;
+}
+.ts-wrapper.single .ts-control .item {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+}
+
+/* Strip Bootstrap's X icon from all invalid fields — red border is enough */
+.form-control.is-invalid,
+.form-select.is-invalid,
+.was-validated .form-control:invalid,
+.was-validated .form-select:invalid {
+    background-image: none;
+    padding-right: inherit;
+}
+
+/* Validation state: red border on the wrapper (TomSelect sets border: none on .ts-control) */
+.ts-wrapper.is-invalid {
+    border: 1px solid #dc3545 !important;
+    box-shadow: 0 0 0 1px #dc3545 !important;
+    background-image: none !important;
+}
+
 /* Dropdown panel — solid background, decent shadow, rounded corners */
 .ts-dropdown,
 .ts-dropdown.form-control,
@@ -800,6 +834,58 @@ a.segmented-control-item {
     min-height: 2.25rem;
     display: flex;
     align-items: center;
+}
+
+/* ── Mobile grid / table fixes ──────────────────────────────────────────────
+ * table-layout: auto lets a table exceed width:100% to fit content, even
+ * inside a table-responsive scroll wrapper.  Switch to fixed on small screens
+ * so the table cannot be wider than its container, and truncate cell text.
+ */
+@media (max-width: 575.98px) {
+    /* Grid (siTablerGrid) and dashboard recent-invoice/payment tables */
+    .si-tabler-grid-container .table,
+    .si-dash-recent-table .table {
+        table-layout: fixed;
+    }
+    /* Give the actions column (w-1) an explicit width.
+     * Tabler's .w-1 sets width:1%!important so we need !important to win. */
+    .si-tabler-grid-container .table .w-1,
+    .si-dash-recent-table .table .w-1 {
+        width: 2.5rem !important;
+    }
+    /* Data cells: clip overflowing text instead of stretching the column.
+     * overflow:visible on the w-1 (actions) cell lets the open dropdown menu
+     * escape its narrow column without being clipped. */
+    .si-tabler-grid-container .table th:not(.w-1),
+    .si-dash-recent-table .table th:not(.w-1) {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    .si-tabler-grid-container .table td:not(.w-1),
+    .si-dash-recent-table .table td:not(.w-1) {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    /* Actions column td: allow the dropdown panel to escape its narrow cell */
+    .si-tabler-grid-container .table td.w-1,
+    .si-dash-recent-table .table td.w-1 {
+        overflow: visible;
+    }
+    /* Dropdown menus inside grid tables: open to the right so they don't
+     * cover the invoice-ID column. Bootstrap's dropdown-menu-end + Popper
+     * flips to bottom-start on mobile which lands directly over that column. */
+    .si-tabler-grid-container .table .dropdown-menu,
+    .si-dash-recent-table .table .dropdown-menu {
+        right: auto !important;
+        left:  0    !important;
+    }
+    /* Grid search input: grow to fill available toolbar width */
+    .si-tabler-grid-container input[name="q"] {
+        min-width: 4em;
+        width: auto !important;
+    }
 }
 
 /* Mobile: larger tap targets, capped height */
