@@ -3,7 +3,7 @@
  * Zend framework init - start
  */
 set_include_path(get_include_path() . PATH_SEPARATOR . "./include/class");
-set_include_path(get_include_path() . PATH_SEPARATOR . "./library/"); // Still needed for custom libraries (paypal, WebApp, etc.)
+set_include_path(get_include_path() . PATH_SEPARATOR . "./library/"); // Legacy libs (e.g. paypal.class.php, encryption.php)
 // PDF library path no longer needed - using Composer autoloader
 set_include_path(get_include_path() . PATH_SEPARATOR . "./include/");
 

@@ -8,8 +8,6 @@
 *	 GPL v3 or above
 */
 
-//minor change to test github emails - test
-
 //stop browsing to files directly - all viewing to be handled by index.php
 //if browse not defined then the page will exit
 define("BROWSE","browse");

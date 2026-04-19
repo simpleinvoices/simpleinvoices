@@ -7,14 +7,6 @@ if(LOGGING) {
 
 $dbh = db_connector();
 
-/*
- * TODO - remove this code - mysql 5 only
-if ($db_server == 'mysql') {
-	//SC: May not really be 5...
-	$mysql = 5;
-}
-*/
-
 // Cannot redfine LOGGING (withour PHP PECL runkit extension) since already true in define.php
 // Ref: http://php.net/manual/en/function.runkit-method-redefine.php
 // Hence take from system_defaults into new variable
@@ -1550,7 +1542,6 @@ function insertCustomer() {
 }
 
 function searchCustomers($search) {
-//TODO remove this function - note used anymore
 	global $db_server;
 	$domain_id = domain_id::get();
 
@@ -3435,7 +3426,6 @@ function patch126() {
 
 // ------------------------------------------------------------------------------
 function convertInitCustomFields() {
-// This function is exactly the same as convertCustomFields() in ./include/customFieldConversion.php but without the print_r and echo output while storing
 	/* check if any value set -> keeps all data for sure */
 	global $dbh;
     $domain_id = domain_id::get();
