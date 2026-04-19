@@ -2,6 +2,11 @@
 
 global $auth_session;
 
+	// Install wizard: no ACL until schema and essential data exist (guest OK).
+	if ($module === 'install' && (!$install_tables_exists || !$install_data_exists)) {
+		return;
+	}
+
 	$acl_view   = $_GET['view'] ?? null;
 	$acl_action = $_GET['action'] ?? null;
 	$role_name  = $auth_session->role_name ?? '';

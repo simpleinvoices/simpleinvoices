@@ -35,7 +35,6 @@ $auth_session = new LegacyAuthSession('SI_Auth');
 require_once("library/paypal/paypal.class.php");
 include_once('./include/functions.php');
 include_once('./include/report_chart_guard.php');
-include_once('./include/report_invoice_sql.php');
 
 //ob_start('addCSRFProtection');
 
@@ -153,10 +152,7 @@ include_once("./include/sql_queries.php");
 
 // Blade modifiers are registered in BladeView::registerDirectives(); use {{ htmlsafe($var) }} etc. in templates
 $install_tables_exists = checkTableExists(TB_PREFIX."biller");
-if ($install_tables_exists == true)
-{
-	$install_data_exists = checkDataExists();
-}
+// $install_data_exists is set after include_auth.php (domain-scoped essential data check)
 
 //TODO - add this as a function in sql_queries.php or a class file
 //if ( ($install_tables_exists != false) AND ($install_data_exists != false) )
@@ -190,6 +186,12 @@ include_once('./include/language.php');
 checkConnection();
 
 include('./include/include_auth.php');
+
+$install_data_exists = false;
+if ($install_tables_exists == true) {
+	$install_data_exists = checkDataExists();
+}
+
 include_once('./include/manageCustomFields.php');
 include_once("./include/validation.php");
 
@@ -206,6 +208,7 @@ Array: Early_exit
 */
 $early_exit = array();
 $early_exit[] = "auth_login";
+$early_exit[] = "auth_customer_login";
 $early_exit[] = "api_cron";
 $early_exit[] = "auth_logout";
 $early_exit[] = "export_pdf";

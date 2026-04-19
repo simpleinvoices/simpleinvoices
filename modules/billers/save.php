@@ -29,16 +29,16 @@ $saved = false;
 
 if ( $op === 'insert_biller') {
 	
-	if($id = insertBiller()) {
+	if (insertBiller()) {
  		$saved = true;
- 		//saveCustomFieldValues($_POST['categorie'],lastInsertId());
+ 		invoice_denorm::refreshAllForBiller((int) lastInsertId());
  	}
 }
 
 if ($op === 'edit_biller' ) {
 	if (isset($_POST['save_biller']) && updateBiller()) {
 		$saved = true;
-		//updateCustomFieldValues($_POST['categorie'],$_GET['id']);
+		invoice_denorm::refreshAllForBiller((int) $_GET['id']);
 	}
 }
 

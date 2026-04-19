@@ -65,8 +65,12 @@ $sth = dbQuery(
 );
 $unlinkedBillers = (int) ($sth->fetch(PDO::FETCH_ASSOC)['cnt'] ?? 0);
 
+$siBase            = rtrim(str_replace('\\', '', dirname($_SERVER['PHP_SELF'])), '/');
+$customerPortalUrl = $siBase . '/index.php?module=auth&view=customer_login&domain_id=' . $domain_id;
+
 $bladeView->assign('customerUserCount', $customerUserCount);
 $bladeView->assign('billerUserCount', $billerUserCount);
 $bladeView->assign('unlinkedCustomers', $unlinkedCustomers);
 $bladeView->assign('unlinkedBillers', $unlinkedBillers);
+$bladeView->assign('customerPortalUrl', $customerPortalUrl);
 $bladeView->assign('pageActive', 'domain_admin');

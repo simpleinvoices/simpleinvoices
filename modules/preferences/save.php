@@ -84,6 +84,7 @@ if (  $op === 'insert_preference' ) {
 	  ':enabled', $_POST['pref_enabled']
 	  )) {
 		$saved = true;
+		$new_pref_id = (int) lastInsertId();
         
         if (empty($_POST['index_group']))
         {
@@ -93,12 +94,15 @@ if (  $op === 'insert_preference' ) {
                     index_group = :index_group
                 WHERE 
                     pref_id = :pref_id
+                AND domain_id = :domain_id
             ";
             dbQuery($sql_update, 
-                ':index_group',lastInsertId(),
-                ':pref_id',lastInsertId()
+                ':index_group', $new_pref_id,
+                ':pref_id', $new_pref_id,
+                ':domain_id', $auth_session->domain_id
             );
 		}
+		invoice_denorm::refreshAllForPreference($new_pref_id, $auth_session->domain_id);
         //$display_block = $LANG['save_preference_success'];
 	} ELSE {
 		$saved = false;
@@ -135,7 +139,8 @@ else if (  $op === 'edit_preference' ) {
  		        index_group = :index_group,
  		        include_online_payment = :include_online_payment
 			WHERE
-				pref_id = :id";
+				pref_id = :id
+			AND domain_id = :domain_id";
 
 		if (dbQuery($sql, 
 		  ':description', $_POST['pref_description'],
@@ -156,9 +161,11 @@ else if (  $op === 'edit_preference' ) {
           	  ':language', $_POST['language'],
 		  ':index_group', $_POST['index_group'],
 		  ':include_online_payment', $include_online_payment,
-		  ':id', $_GET['id']))
+		  ':id', $_GET['id'],
+		  ':domain_id', $auth_session->domain_id))
 	    {
 			$saved =true;
+			invoice_denorm::refreshAllForPreference((int) $_GET['id'], $auth_session->domain_id);
 		//	$display_block = $LANG['save_preference_success'];
 		} else {
 			$saved = false;

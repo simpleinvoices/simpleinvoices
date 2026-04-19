@@ -255,7 +255,12 @@ class invoice {
         global $config;
 
 		    $domain_id = domain_id::get($this->domain_id);
-        $valid_search_fields = array('iv.index_id', 'b.name', 'c.name');
+        // Grid search: map legacy qtypes to denormalised columns on si_invoices
+        $search_field_map = [
+            'iv.index_id' => 'iv.index_id',
+            'b.name'      => 'iv.denorm_biller_name',
+            'c.name'      => 'iv.denorm_customer_name',
+        ];
 
         if(empty($having)) $having = $this->having;
         $having_and = ($this->having_and) ? $this->having_and : false;
@@ -273,15 +278,19 @@ class invoice {
         $qtype = $this->qtype;
         $where = "";
         if (!(empty($query) || empty($qtype))) {
-          if ( in_array($qtype, $valid_search_fields) ) {
-            $where .= " AND $qtype LIKE :query ";
+          if (isset($search_field_map[$qtype])) {
+            $where .= ' AND ' . $search_field_map[$qtype] . ' LIKE :query ';
           } else {
             $this->query = $qtype = null;
             $this->qtype = $query = null;
           }
         }
-        if ($this->biller)      $where .= " AND b.id = '$this->biller' ";
-        if ($this->customer)    $where .= " AND c.id = '$this->customer' ";
+        if ($this->biller) {
+            $where .= ' AND iv.biller_id = ' . (int) $this->biller . ' ';
+        }
+        if ($this->customer) {
+            $where .= ' AND iv.customer_id = ' . (int) $this->customer . ' ';
+        }
         if ($this->where_field) $where .= " AND $this->where_field = '$this->where_value' ";
         /*SQL where - end*/
 	
@@ -292,10 +301,8 @@ class invoice {
         if (!in_array($sort, $validFields))
             $sort = "iv.id";
 
-        if(strstr($type,"count"))
-        {
-            //unset($limit);
-            $limit="";
+        if (strstr($type, "count") || $type === 'grid_total') {
+            $limit = '';
         }
 
 		$sql_having = '';
@@ -340,7 +347,7 @@ class invoice {
                 break;
         }
 
-        // One row per invoice: aggregate line items and payments in subqueries (no line×payment fan-out).
+        // List/grid uses denormalised columns on si_invoices (maintained by invoice_denorm).
         // Former HAVING filters apply on the outer query as WHERE (same semantics as HAVING did per invoice).
         $post_from_filter = '';
         if (trim($sql_having) !== '') {
@@ -353,32 +360,93 @@ class invoice {
             $sort_outer = 'type_id';
         }
 
-        $ii_agg_join = "
-                     LEFT JOIN (
-                         SELECT invoice_id, domain_id, SUM(total) AS sum_items
-                         FROM " . TB_PREFIX . "invoice_items
-                         GROUP BY invoice_id, domain_id
-                     ) ii_sum ON (ii_sum.invoice_id = iv.id AND ii_sum.domain_id = iv.domain_id)
-                     LEFT JOIN (
-                         SELECT ac_inv_id, domain_id, SUM(ac_amount) AS sum_paid
-                         FROM " . TB_PREFIX . "payment
-                         GROUP BY ac_inv_id, domain_id
-                     ) ap_sum ON (ap_sum.ac_inv_id = iv.id AND ap_sum.domain_id = iv.domain_id)";
+        // Paginate ids first (all DB backends); detail rows read denorm fields only — no line-item aggregate joins.
+        $dirSql = (strtoupper((string) $dir) === 'ASC') ? 'ASC' : 'DESC';
+        $can_fast_page = (
+            $type !== 'grid_total'
+            && !strstr($type, 'count')
+            && trim($post_from_filter) === ''
+            && empty($query)
+            && empty($this->where_field)
+            && in_array($sort, ['index_id', 'iv.id'], true)
+            && $limit !== ''
+        );
+        $orderCol = ($sort === 'iv.id') ? 'iv.id' : 'iv.index_id';
+        $fast_ids = [];
+        if ($can_fast_page) {
+            $sql_ids = "SELECT iv.id FROM " . TB_PREFIX . "invoices iv
+                        WHERE iv.domain_id = :domain_id
+                        $where
+                        ORDER BY $orderCol $dirSql
+                        $limit";
+            $ids_sth = dbQuery($sql_ids, ':domain_id', $domain_id);
+            $fast_ids = $ids_sth->fetchAll(PDO::FETCH_COLUMN, 0);
+        }
 
         global $db_server;
 
         switch ($config->database->adapter)
         {
             case "pdo_pgsql":
-                $inner_sql = "
+                $pgsql_age = "
+                     EXTRACT(day FROM (now() - iv.date::timestamp))::int AS Age,
+                     (CASE WHEN EXTRACT(day FROM (now() - iv.date::timestamp))::int <= 0 THEN ''
+                           WHEN EXTRACT(day FROM (now() - iv.date::timestamp))::int <= 30 THEN '0-30'
+                           WHEN EXTRACT(day FROM (now() - iv.date::timestamp))::int <= 60 THEN '31-60'
+                           WHEN EXTRACT(day FROM (now() - iv.date::timestamp))::int <= 90 THEN '61-90'
+                           ELSE '90+'
+                     END) AS aging,";
+                if ($can_fast_page) {
+                    if (count($fast_ids) === 0) {
+                        $sql = "
                 SELECT
                      iv.id,
                      iv.index_id AS index_id,
-                     b.name AS biller,
-                     c.name AS customer,
-                     COALESCE(ii_sum.sum_items, 0) AS invoice_total,
-                     COALESCE(ap_sum.sum_paid, 0) AS INV_PAID,
-                     (COALESCE(ii_sum.sum_items, 0) - COALESCE(ap_sum.sum_paid, 0)) AS owing,
+                     iv.denorm_biller_name AS biller,
+                     iv.denorm_customer_name AS customer,
+                     iv.denorm_invoice_total AS invoice_total,
+                     iv.denorm_amount_paid AS INV_PAID,
+                     iv.denorm_amount_owing AS owing,
+                     TO_CHAR(iv.date, 'YYYY-MM-DD') AS date,
+                     $pgsql_age
+                     iv.type_id AS type_id,
+                     iv.denorm_preference_description AS preference,
+                     iv.denorm_preference_status AS status,
+                     iv.denorm_index_name AS index_name
+                FROM " . TB_PREFIX . "invoices iv
+                WHERE FALSE";
+                    } else {
+                        $inList = implode(',', array_map('intval', $fast_ids));
+                        $sql = "
+                SELECT
+                     iv.id,
+                     iv.index_id AS index_id,
+                     iv.denorm_biller_name AS biller,
+                     iv.denorm_customer_name AS customer,
+                     iv.denorm_invoice_total AS invoice_total,
+                     iv.denorm_amount_paid AS INV_PAID,
+                     iv.denorm_amount_owing AS owing,
+                     TO_CHAR(iv.date, 'YYYY-MM-DD') AS date,
+                     $pgsql_age
+                     iv.type_id AS type_id,
+                     iv.denorm_preference_description AS preference,
+                     iv.denorm_preference_status AS status,
+                     iv.denorm_index_name AS index_name
+                FROM " . TB_PREFIX . "invoices iv
+                WHERE iv.domain_id = :domain_id
+                    AND iv.id IN ($inList)
+                ORDER BY $orderCol $dirSql";
+                    }
+                } else {
+                    $inner_sql = "
+                SELECT
+                     iv.id,
+                     iv.index_id AS index_id,
+                     iv.denorm_biller_name AS biller,
+                     iv.denorm_customer_name AS customer,
+                     iv.denorm_invoice_total AS invoice_total,
+                     iv.denorm_amount_paid AS INV_PAID,
+                     iv.denorm_amount_owing AS owing,
                      TO_CHAR(iv.date, 'YYYY-MM-DD') AS date,
                      EXTRACT(day FROM (now() - iv.date::timestamp))::int AS Age,
                      (CASE WHEN EXTRACT(day FROM (now() - iv.date::timestamp))::int <= 0 THEN ''
@@ -388,35 +456,82 @@ class invoice {
                            ELSE '90+'
                      END) AS aging,
                      iv.type_id AS type_id,
-                     pf.pref_description AS preference,
-                     pf.status AS status,
-                     (pf.pref_inv_wording || ' ' || CAST(iv.index_id AS TEXT)) AS index_name
+                     iv.denorm_preference_description AS preference,
+                     iv.denorm_preference_status AS status,
+                     iv.denorm_index_name AS index_name
                 FROM " . TB_PREFIX . "invoices iv
-                     $ii_agg_join
-                     LEFT JOIN " . TB_PREFIX . "biller b         ON (b.id = iv.biller_id AND b.domain_id = iv.domain_id)
-                     LEFT JOIN " . TB_PREFIX . "customers c      ON (c.id = iv.customer_id AND c.domain_id = iv.domain_id)
-                     LEFT JOIN " . TB_PREFIX . "preferences pf   ON (pf.pref_id = iv.preference_id AND pf.domain_id = iv.domain_id)
                 WHERE iv.domain_id = :domain_id
                     $where";
-                $sql = "
+                    $sql = "
                 SELECT * FROM (
                 $inner_sql
                 ) AS si_invoice_grid
                 $post_from_filter
                 ORDER BY $sort_outer $dir
                 $limit";
+                }
                 break;
 
             case "pdo_sqlite":
-                $inner_sql = "
+                $sqlite_age = "
+                     CAST(julianday('now') - julianday(iv.date) AS INTEGER) AS Age,
+                     (CASE WHEN CAST(julianday('now') - julianday(iv.date) AS INTEGER) <= 0 THEN ''
+                           WHEN CAST(julianday('now') - julianday(iv.date) AS INTEGER) <= 30 THEN '0-30'
+                           WHEN CAST(julianday('now') - julianday(iv.date) AS INTEGER) <= 60 THEN '31-60'
+                           WHEN CAST(julianday('now') - julianday(iv.date) AS INTEGER) <= 90 THEN '61-90'
+                           ELSE '90+'
+                     END) AS aging,";
+                if ($can_fast_page) {
+                    if (count($fast_ids) === 0) {
+                        $sql = "
                 SELECT
                      iv.id,
                      iv.index_id AS index_id,
-                     b.name AS biller,
-                     c.name AS customer,
-                     COALESCE(ii_sum.sum_items, 0) AS invoice_total,
-                     COALESCE(ap_sum.sum_paid, 0) AS INV_PAID,
-                     (COALESCE(ii_sum.sum_items, 0) - COALESCE(ap_sum.sum_paid, 0)) AS owing,
+                     iv.denorm_biller_name AS biller,
+                     iv.denorm_customer_name AS customer,
+                     iv.denorm_invoice_total AS invoice_total,
+                     iv.denorm_amount_paid AS INV_PAID,
+                     iv.denorm_amount_owing AS owing,
+                     strftime('%Y-%m-%d', iv.date) AS date,
+                     $sqlite_age
+                     iv.type_id AS type_id,
+                     iv.denorm_preference_description AS preference,
+                     iv.denorm_preference_status AS status,
+                     iv.denorm_index_name AS index_name
+                FROM " . TB_PREFIX . "invoices iv
+                WHERE 0";
+                    } else {
+                        $inList = implode(',', array_map('intval', $fast_ids));
+                        $sql = "
+                SELECT
+                     iv.id,
+                     iv.index_id AS index_id,
+                     iv.denorm_biller_name AS biller,
+                     iv.denorm_customer_name AS customer,
+                     iv.denorm_invoice_total AS invoice_total,
+                     iv.denorm_amount_paid AS INV_PAID,
+                     iv.denorm_amount_owing AS owing,
+                     strftime('%Y-%m-%d', iv.date) AS date,
+                     $sqlite_age
+                     iv.type_id AS type_id,
+                     iv.denorm_preference_description AS preference,
+                     iv.denorm_preference_status AS status,
+                     iv.denorm_index_name AS index_name
+                FROM " . TB_PREFIX . "invoices iv
+                WHERE iv.domain_id = :domain_id
+                    AND iv.id IN ($inList)
+                ORDER BY $orderCol $dirSql";
+                    }
+                } else {
+                    $inner_sql = "
+                SELECT
+                     iv.id,
+                     iv.index_id AS index_id,
+                     iv.denorm_biller_name AS biller,
+                     iv.denorm_customer_name AS customer,
+                     iv.denorm_invoice_total AS invoice_total,
+                     iv.denorm_amount_paid AS INV_PAID,
+                     iv.denorm_amount_owing AS owing,
                      strftime('%Y-%m-%d', iv.date) AS date,
                      CAST(julianday('now') - julianday(iv.date) AS INTEGER) AS Age,
                      (CASE WHEN CAST(julianday('now') - julianday(iv.date) AS INTEGER) <= 0 THEN ''
@@ -426,23 +541,20 @@ class invoice {
                            ELSE '90+'
                      END) AS aging,
                      iv.type_id AS type_id,
-                     pf.pref_description AS preference,
-                     pf.status AS status,
-                     (pf.pref_inv_wording || ' ' || CAST(iv.index_id AS TEXT)) AS index_name
+                     iv.denorm_preference_description AS preference,
+                     iv.denorm_preference_status AS status,
+                     iv.denorm_index_name AS index_name
                 FROM " . TB_PREFIX . "invoices iv
-                     $ii_agg_join
-                     LEFT JOIN " . TB_PREFIX . "biller b         ON (b.id = iv.biller_id AND b.domain_id = iv.domain_id)
-                     LEFT JOIN " . TB_PREFIX . "customers c      ON (c.id = iv.customer_id AND c.domain_id = iv.domain_id)
-                     LEFT JOIN " . TB_PREFIX . "preferences pf   ON (pf.pref_id = iv.preference_id AND pf.domain_id = iv.domain_id)
                 WHERE iv.domain_id = :domain_id
                     $where";
-                $sql = "
+                    $sql = "
                 SELECT * FROM (
                 $inner_sql
                 ) AS si_invoice_grid
                 $post_from_filter
                 ORDER BY $sort_outer $dir
                 $limit";
+                }
                 break;
 
             case "pdo_mysql":
@@ -463,36 +575,81 @@ class invoice {
                        '' AS Age,
                        '' AS aging,";
                 }
-                $inner_sql = "
+
+                if ($can_fast_page) {
+                    if (count($fast_ids) === 0) {
+                        $sql = "
                 SELECT
                      iv.id,
                      iv.index_id AS index_id,
-                     b.name AS biller,
-                     c.name AS customer,
-                     COALESCE(ii_sum.sum_items, 0) AS invoice_total,
-                     COALESCE(ap_sum.sum_paid, 0) AS INV_PAID,
-                     (COALESCE(ii_sum.sum_items, 0) - COALESCE(ap_sum.sum_paid, 0)) AS owing,
+                     iv.denorm_biller_name AS biller,
+                     iv.denorm_customer_name AS customer,
+                     iv.denorm_invoice_total AS invoice_total,
+                     iv.denorm_amount_paid AS INV_PAID,
+                     iv.denorm_amount_owing AS owing,
                      DATE_FORMAT(iv.date,'%Y-%m-%d') AS date,
                      $age_columns
                      iv.type_id AS type_id,
-                     pf.pref_description AS preference,
-                     pf.status AS status,
-                     CONCAT(pf.pref_inv_wording, ' ', iv.index_id) AS index_name
+                     iv.denorm_preference_description AS preference,
+                     iv.denorm_preference_status AS status,
+                     iv.denorm_index_name AS index_name
                 FROM " . TB_PREFIX . "invoices iv
-                     $ii_agg_join
-                     LEFT JOIN " . TB_PREFIX . "biller b         ON (b.id = iv.biller_id AND b.domain_id = iv.domain_id)
-                     LEFT JOIN " . TB_PREFIX . "customers c      ON (c.id = iv.customer_id AND c.domain_id = iv.domain_id)
-                     LEFT JOIN " . TB_PREFIX . "preferences pf   ON (pf.pref_id = iv.preference_id AND pf.domain_id = iv.domain_id)
+                WHERE iv.domain_id = :domain_id AND 1 = 0";
+                    } else {
+                        $inList = implode(',', array_map('intval', $fast_ids));
+                        $sql = "
+                SELECT
+                     iv.id,
+                     iv.index_id AS index_id,
+                     iv.denorm_biller_name AS biller,
+                     iv.denorm_customer_name AS customer,
+                     iv.denorm_invoice_total AS invoice_total,
+                     iv.denorm_amount_paid AS INV_PAID,
+                     iv.denorm_amount_owing AS owing,
+                     DATE_FORMAT(iv.date,'%Y-%m-%d') AS date,
+                     $age_columns
+                     iv.type_id AS type_id,
+                     iv.denorm_preference_description AS preference,
+                     iv.denorm_preference_status AS status,
+                     iv.denorm_index_name AS index_name
+                FROM " . TB_PREFIX . "invoices iv
+                WHERE iv.domain_id = :domain_id
+                    AND iv.id IN ($inList)
+                ORDER BY $orderCol $dirSql";
+                    }
+                } else {
+                    $inner_sql = "
+                SELECT
+                     iv.id,
+                     iv.index_id AS index_id,
+                     iv.denorm_biller_name AS biller,
+                     iv.denorm_customer_name AS customer,
+                     iv.denorm_invoice_total AS invoice_total,
+                     iv.denorm_amount_paid AS INV_PAID,
+                     iv.denorm_amount_owing AS owing,
+                     DATE_FORMAT(iv.date,'%Y-%m-%d') AS date,
+                     $age_columns
+                     iv.type_id AS type_id,
+                     iv.denorm_preference_description AS preference,
+                     iv.denorm_preference_status AS status,
+                     iv.denorm_index_name AS index_name
+                FROM " . TB_PREFIX . "invoices iv
                 WHERE iv.domain_id = :domain_id
                     $where";
-                $sql = "
+                    $sql = "
                 SELECT * FROM (
                 $inner_sql
                 ) AS si_invoice_grid
                 $post_from_filter
                 ORDER BY $sort_outer $dir
                 $limit";
+                }
                 break;
+        }
+
+        if ($type === 'grid_total') {
+            $sql = 'SELECT COUNT(*) AS cnt FROM (' . "\n" . $inner_sql . "\n"
+                . ') AS si_invoice_grid ' . trim($post_from_filter);
         }
         
         if ($query) {

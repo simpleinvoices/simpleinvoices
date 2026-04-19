@@ -132,6 +132,9 @@ if ($_POST['action'] == "insert" ) {
 }
 
 //Get type id - so do add into redirector header
+if ($saved && $id) {
+	invoice_denorm::refreshForInvoice((int) $id, $auth_session->domain_id);
+}
 $bladeView->assign('saved', $saved);
 $bladeView->assign('id', $id);
 

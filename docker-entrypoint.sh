@@ -156,8 +156,8 @@ if [ -n "${SI_DB_HOST}" ] && [ "${SI_DATABASE_ADAPTER:-pdo_mysql}" != "pdo_sqlit
   fi
 fi
 
-# Auto-apply any pending SQL patches (idempotent — already-applied patches are skipped)
-# Set SI_AUTO_MIGRATE=false in .env / environment to disable.
+# Auto-apply any pending SQL patches after the web installer has run (schema + essential data).
+# Idempotent — already-applied patches are skipped. Set SI_AUTO_MIGRATE=false to disable.
 case "${SI_AUTO_MIGRATE:-true}" in
   false|0|no|off) echo "Entrypoint: SI_AUTO_MIGRATE disabled — skipping SQL patches." ;;
   *) echo "Entrypoint: running SQL patches..."

@@ -1,3 +1,4 @@
+			@if(!($install_new_domain_bootstrap ?? false))
 			@php
 				$appWebsite = $config->app?->website ?? 'http://www.simpleinvoices.org';
 			@endphp
@@ -7,6 +8,7 @@
 				<a href="{{ $appWebsite }}" target="_blank" rel="noopener" class="alert-link">{{ $LANG['install_documentation'] ?? '' }}</a>
 				( <a href="{{ $appWebsite }}" target="_blank" rel="noopener" class="alert-link">{{ $appWebsite }}</a> )
 			</div>
+			@endif
 		</div>
 	</div>
 </div>

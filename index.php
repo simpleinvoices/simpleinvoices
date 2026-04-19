@@ -99,25 +99,17 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
     if ( $install_tables_exists == false )
     { 
 		$module="install";
-		//$view="index";
-		$view == "structure" ? $view ="structure" : $view="index";
+		// install UI and logic live in module/view install/index only
+		$view = "index";
         //do installer
         $skip_db_patches = true;
 		
     }
-	// Re-check essential data using same $db as installer (avoids connection/cache issues)
+	// Re-check essential data for this domain (same $db as installer)
 	if ( $install_tables_exists == true && ( !isset($install_data_exists) || $install_data_exists == false ) ) {
-		$has_essential = false;
 		try {
-			$tables_to_check = array('custom_fields', 'preferences', 'sql_patchmanager', 'biller');
-			foreach ($tables_to_check as $t) {
-				$sth = @$db->query("SELECT 1 FROM " . TB_PREFIX . $t . " LIMIT 1");
-				if ($sth && $sth->fetch()) {
-					$has_essential = true;
-					break;
-				}
-			}
-			if ($has_essential) {
+			$domainId = isset($auth_session->domain_id) ? (int) $auth_session->domain_id : 1;
+			if (domainHasEssentialBootstrapData($domainId)) {
 				$install_data_exists = true;
 			}
 		} catch (Exception $e) {
@@ -127,8 +119,8 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
 	if ( ($install_tables_exists == true) AND ($install_data_exists == false) )
     { 
 	    $module = "install";
-		$view == "essential" ? $view ="essential" : $view="structure";
-		//$view = "essential";
+		// Same installer as fresh DB; structure/essential views were never templated
+		$view = "index";
         //do installer
         $skip_db_patches = true;
     }

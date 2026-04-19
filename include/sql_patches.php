@@ -2120,3 +2120,137 @@ PRIMARY KEY ( `domain_id`, `id` )
     }
     $patch['331']['date'] = "20260416";
 
+    $patch['332']['name'] = "si_user: add auth_staff_email for staff/biller login identity";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['332']['patch'] = checkFieldExists(TB_PREFIX . 'user', 'auth_staff_email')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'user ADD COLUMN auth_staff_email VARCHAR(255) NULL';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['332']['patch'] = checkFieldExists(TB_PREFIX . 'user', 'auth_staff_email')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'user` ADD COLUMN `auth_staff_email` VARCHAR(255) NULL';
+            break;
+    }
+    $patch['332']['date'] = "20260418";
+
+    $patch['333']['name'] = "si_user: add auth_customer_key for per-domain customer login identity";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['333']['patch'] = checkFieldExists(TB_PREFIX . 'user', 'auth_customer_key')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'user ADD COLUMN auth_customer_key VARCHAR(384) NULL';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['333']['patch'] = checkFieldExists(TB_PREFIX . 'user', 'auth_customer_key')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'user` ADD COLUMN `auth_customer_key` VARCHAR(384) NULL';
+            break;
+    }
+    $patch['333']['date'] = "20260418";
+
+    $patch['334']['name'] = "si_user: backfill auth_staff_email and auth_customer_key";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+            $patch['334']['patch'] = "UPDATE " . TB_PREFIX . "user SET
+                auth_staff_email = CASE
+                    WHEN role_id IN (1,2,3,4,6,7) AND email IS NOT NULL AND TRIM(email) <> '' THEN LOWER(TRIM(email))
+                    ELSE NULL END,
+                auth_customer_key = CASE
+                    WHEN role_id = 5 AND email IS NOT NULL AND TRIM(email) <> '' THEN domain_id::text || ':' || LOWER(TRIM(email))
+                    ELSE NULL END";
+            break;
+        case 'pdo_sqlite':
+            $patch['334']['patch'] = "UPDATE " . TB_PREFIX . "user SET
+                auth_staff_email = CASE
+                    WHEN role_id IN (1,2,3,4,6,7) AND email IS NOT NULL AND TRIM(email) <> '' THEN LOWER(TRIM(email))
+                    ELSE NULL END,
+                auth_customer_key = CASE
+                    WHEN role_id = 5 AND email IS NOT NULL AND TRIM(email) <> '' THEN domain_id || ':' || LOWER(TRIM(email))
+                    ELSE NULL END";
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['334']['patch'] = "UPDATE " . TB_PREFIX . "user SET
+                auth_staff_email = CASE
+                    WHEN role_id IN (1,2,3,4,6,7) AND email IS NOT NULL AND TRIM(email) <> '' THEN LOWER(TRIM(email))
+                    ELSE NULL END,
+                auth_customer_key = CASE
+                    WHEN role_id = 5 AND email IS NOT NULL AND TRIM(email) <> '' THEN CONCAT(domain_id, ':', LOWER(TRIM(email)))
+                    ELSE NULL END";
+            break;
+    }
+    $patch['334']['date'] = "20260418";
+
+    $patch['335']['name'] = "si_user: drop global unique on email (replaced by auth identity columns)";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+            $patch['335']['patch'] = 'ALTER TABLE ' . TB_PREFIX . 'user DROP CONSTRAINT IF EXISTS ' . TB_PREFIX . 'user_email_key';
+            break;
+        case 'pdo_sqlite':
+            $patch['335']['patch'] = 'SELECT 1';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['335']['patch'] = checkMysqlIndexExists(TB_PREFIX . 'user', 'UnqEMail')
+                ? 'ALTER TABLE `' . TB_PREFIX . 'user` DROP INDEX `UnqEMail`'
+                : 'SELECT 1';
+            break;
+    }
+    $patch['335']['date'] = "20260418";
+
+    $patch['336']['name'] = "si_user: unique index on auth_staff_email (staff/biller global identity)";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+            $patch['336']['patch'] = 'CREATE UNIQUE INDEX IF NOT EXISTS ' . TB_PREFIX . 'user_unq_auth_staff_email ON ' . TB_PREFIX . 'user (auth_staff_email)';
+            break;
+        case 'pdo_sqlite':
+            $patch['336']['patch'] = 'CREATE UNIQUE INDEX IF NOT EXISTS ' . TB_PREFIX . 'user_unq_auth_staff_email ON ' . TB_PREFIX . 'user (auth_staff_email)';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['336']['patch'] = checkMysqlIndexExists(TB_PREFIX . 'user', 'UnqAuthStaffEmail')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'user` ADD UNIQUE INDEX `UnqAuthStaffEmail` (`auth_staff_email`)';
+            break;
+    }
+    $patch['336']['date'] = "20260418";
+
+    $patch['337']['name'] = "si_user: unique index on auth_customer_key (customer per-domain identity)";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+            $patch['337']['patch'] = 'CREATE UNIQUE INDEX IF NOT EXISTS ' . TB_PREFIX . 'user_unq_auth_customer_key ON ' . TB_PREFIX . 'user (auth_customer_key)';
+            break;
+        case 'pdo_sqlite':
+            $patch['337']['patch'] = 'CREATE UNIQUE INDEX IF NOT EXISTS ' . TB_PREFIX . 'user_unq_auth_customer_key ON ' . TB_PREFIX . 'user (auth_customer_key)';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['337']['patch'] = checkMysqlIndexExists(TB_PREFIX . 'user', 'UnqAuthCustomerKey')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'user` ADD UNIQUE INDEX `UnqAuthCustomerKey` (`auth_customer_key`)';
+            break;
+    }
+    $patch['337']['date'] = "20260418";
+
+    $patch['338']['name'] = "si_invoices: denormalised list columns (totals, names, index label; maintained by invoice_denorm)";
+    $patch['338']['patch'] = 'SELECT 1';
+    $patch['338']['date'] = "20260418";
+
+    $patch['339']['name'] = "si_payment: denormalised display columns for payments grid (copies from invoice)";
+    $patch['339']['patch'] = 'SELECT 1';
+    $patch['339']['date'] = "20260418";
+
+    $patch['340']['name'] = "Backfill invoice/payment denormalised columns for all domains";
+    $patch['340']['patch'] = 'SELECT 1';
+    $patch['340']['date'] = "20260418";
+
+    $patch['341']['name'] = "si_invoices: indexes for domain lists, charts, denorm owing filters";
+    $patch['341']['patch'] = 'SELECT 1';
+    $patch['341']['date'] = "20260418";
+

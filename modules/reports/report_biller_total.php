@@ -5,10 +5,10 @@ $__rpt_snap = array_keys($bladeView->getAssigns());
   $sql = '
 SELECT
     b.name
-  , SUM(lt.line_total) AS sum_total
+  , SUM(iv.denorm_invoice_total) AS sum_total
 FROM ' . TB_PREFIX . 'biller b 
     INNER JOIN ' . TB_PREFIX . 'invoices iv ON (b.id = iv.biller_id AND b.domain_id = iv.domain_id)
-    INNER JOIN ' . TB_PREFIX . 'preferences pr ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id)' . si_report_sql_invoice_line_totals_inner_join('iv') . '
+    INNER JOIN ' . TB_PREFIX . 'preferences pr ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id)
 WHERE
 	    pr.status =\'1\'
 	AND b.domain_id = :domain_id

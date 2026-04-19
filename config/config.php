@@ -12,7 +12,7 @@ database.params.password            = ''
 database.params.dbname              = simple_invoices
 database.params.port                = 3306
 
-authentication.enabled              = false
+authentication.enabled              = true
 authentication.http                 = 
 
 local.locale                        = en_GB

@@ -129,7 +129,7 @@
         },
         {
             "pt_id": "2",
-            "domain_id": "1",
+            "domain_id": "DOMAIN-ID",
             "pt_description": "Credit Card",
             "pt_enabled": "1"
         }
@@ -137,7 +137,7 @@
     "si_preferences": [
         {
             "pref_id": "1",
-            "domain_id": "1",
+            "domain_id": "DOMAIN-ID",
             "pref_description": "Invoice",
             "pref_currency_sign": "$",
             "pref_inv_heading": "Invoice",
@@ -159,7 +159,7 @@
         },
         {
             "pref_id": "2",
-            "domain_id": "1",
+            "domain_id": "DOMAIN-ID",
             "pref_description": "Receipt",
             "pref_currency_sign": "$",
             "pref_inv_heading": "Receipt",
@@ -181,7 +181,7 @@
         },
         {
             "pref_id": "3",
-            "domain_id": "1",
+            "domain_id": "DOMAIN-ID",
             "pref_description": "Estimate",
             "pref_currency_sign": "$",
             "pref_inv_heading": "Estimate",
@@ -203,7 +203,7 @@
         },
         {
             "pref_id": "4",
-            "domain_id": "1",
+            "domain_id": "DOMAIN-ID",
             "pref_description": "Quote",
             "pref_currency_sign": "$",
             "pref_inv_heading": "Quote",
@@ -2059,6 +2059,288 @@
             "sql_patch": "Prepare user table for Laravel Fortify",
             "sql_release": "20260329",
             "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "295",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "296",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "297",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "298",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "299",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "300",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "301",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "302",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "303",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "304",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "305",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "306",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "307",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "308",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "309",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "310",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "311",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "312",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "313",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "314",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "315",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "316",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "317",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "318",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "319",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "320",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "321",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "322",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "323",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "324",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "325",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "326",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "327",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "328",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "329",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "330",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "331",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "332",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "333",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "334",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "335",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "336",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "337",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "338",
+            "sql_patch": "si_invoices: denormalised list columns (totals, names, index label; maintained by invoice_denorm)",
+            "sql_release": "20260418",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "339",
+            "sql_patch": "si_payment: denormalised display columns for payments grid (copies from invoice)",
+            "sql_release": "20260418",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "340",
+            "sql_patch": "Backfill invoice/payment denormalised columns for all domains",
+            "sql_release": "20260418",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "341",
+            "sql_patch": "si_invoices: indexes for domain lists, charts, denorm owing filters",
+            "sql_release": "20260418",
+            "sql_statement": "SELECT 1"
         }
     ],
     "si_system_defaults": [
@@ -2300,9 +2582,10 @@
             "email": "demo@simpleinvoices.org",
             "role_id": "1",
             "domain_id": "DOMAIN-ID",
-            "password": "fe01ce2a7fbac8fafaed7c982a04e229",
+            "password": "$2y$12$prV4Dpbb4ukkI4IeCnEMAu75HdxwuRNpN/G/V2eDdrva2esCLqqCq",
             "enabled": "1",
-            "user_id": "0"
+            "user_id": "0",
+            "auth_staff_email": "demo@simpleinvoices.org"
         }
     ],
     "si_user_domain": [

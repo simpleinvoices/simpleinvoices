@@ -67,15 +67,22 @@ if ($op === 'insert_domain') {
                     throw new RuntimeException('domain_insert');
                 }
 
+                list($authStaffEmail, $authCustomerKey) = auth_identity_columns_for_role(
+                    $role_id,
+                    $new_domain_id,
+                    $admin_email
+                );
                 dbQuery(
                     "INSERT INTO " . TB_PREFIX . "user
-                     (email, name, password, role_id, domain_id, enabled, user_id)
-                     VALUES (:email, :name, :password, :role_id, :domain_id, 1, 0)",
+                     (email, name, password, role_id, domain_id, enabled, user_id, auth_staff_email, auth_customer_key)
+                     VALUES (:email, :name, :password, :role_id, :domain_id, 1, 0, :auth_staff_email, :auth_customer_key)",
                     ':email',     $admin_email,
                     ':name',      $admin_name !== '' ? $admin_name : null,
                     ':password',  $password_hash,
                     ':role_id',   $role_id,
-                    ':domain_id', $new_domain_id
+                    ':domain_id', $new_domain_id,
+                    ':auth_staff_email', $authStaffEmail,
+                    ':auth_customer_key', $authCustomerKey
                 );
 
                 $user_check = dbQuery(
@@ -157,8 +164,13 @@ if ($op === 'delete_domain') {
 }
 
 if ($saved && ($op === 'insert_domain' || $op === 'update_domain')) {
-    header('Location: index.php?module=admin&view=domains&domain_saved=' . rawurlencode((string) $op));
-    exit();
+    // index.php renders the HTML header before loading this module, so Location headers
+    // often cannot be sent; exiting here would leave a blank page. Fall through to
+    // assign Blade vars and render domain_save.blade.php when output has already started.
+    if (!headers_sent()) {
+        header('Location: index.php?module=admin&view=domains&domain_saved=' . rawurlencode((string) $op));
+        exit();
+    }
 }
 
 $bladeView->assign('saved', $saved);

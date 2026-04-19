@@ -1,4 +1,10 @@
 {{-- Domain Admin dashboard --}}
+<div class="alert alert-info mb-3" role="status">
+    <div class="fw-medium mb-1">Customer portal</div>
+    <p class="small text-secondary mb-2">Give this link to customers so they can sign in for <strong>this organisation only</strong> (not staff or billers).</p>
+    <code class="d-block small user-select-all text-break">{{ $customerPortalUrl ?? '' }}</code>
+</div>
+
 <div class="row row-cards mb-3">
     <div class="col-sm-6 col-lg-3">
         <div class="card">

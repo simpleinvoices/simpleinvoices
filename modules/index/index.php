@@ -121,11 +121,10 @@ $inv_month_sql = '';
 $pmt_month_sql = '';
 switch ($db_server) {
     case 'pgsql':
-        $inv_month_sql = "SELECT to_char(iv.date::timestamp, 'YYYY-MM') AS ym, SUM(ii.total) AS t
-            FROM " . TB_PREFIX . "invoice_items ii
-            INNER JOIN " . TB_PREFIX . "invoices iv ON (ii.invoice_id=iv.id AND ii.domain_id=iv.domain_id)
+        $inv_month_sql = "SELECT to_char(iv.date::timestamp, 'YYYY-MM') AS ym, SUM(iv.denorm_invoice_total) AS t
+            FROM " . TB_PREFIX . "invoices iv
             INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id=iv.preference_id AND pr.domain_id=iv.domain_id)
-            WHERE pr.status='1' AND ii.domain_id=:domain_id
+            WHERE pr.status='1' AND iv.domain_id=:domain_id
               AND iv.date >= :d_start AND iv.date < :d_end
             GROUP BY 1";
         $pmt_month_sql = "SELECT to_char(ap.ac_date::timestamp, 'YYYY-MM') AS ym, SUM(ap.ac_amount) AS t
@@ -135,11 +134,10 @@ switch ($db_server) {
             GROUP BY 1";
         break;
     case 'sqlite':
-        $inv_month_sql = "SELECT strftime('%Y-%m', iv.date) AS ym, SUM(ii.total) AS t
-            FROM " . TB_PREFIX . "invoice_items ii
-            INNER JOIN " . TB_PREFIX . "invoices iv ON (ii.invoice_id=iv.id AND ii.domain_id=iv.domain_id)
+        $inv_month_sql = "SELECT strftime('%Y-%m', iv.date) AS ym, SUM(iv.denorm_invoice_total) AS t
+            FROM " . TB_PREFIX . "invoices iv
             INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id=iv.preference_id AND pr.domain_id=iv.domain_id)
-            WHERE pr.status='1' AND ii.domain_id=:domain_id
+            WHERE pr.status='1' AND iv.domain_id=:domain_id
               AND date(iv.date) >= date(:d_start) AND date(iv.date) < date(:d_end)
             GROUP BY 1";
         $pmt_month_sql = "SELECT strftime('%Y-%m', ap.ac_date) AS ym, SUM(ap.ac_amount) AS t
@@ -149,11 +147,10 @@ switch ($db_server) {
             GROUP BY 1";
         break;
     default:
-        $inv_month_sql = "SELECT DATE_FORMAT(iv.date, '%Y-%m') AS ym, SUM(ii.total) AS t
-            FROM " . TB_PREFIX . "invoice_items ii
-            INNER JOIN " . TB_PREFIX . "invoices iv ON (ii.invoice_id=iv.id AND ii.domain_id=iv.domain_id)
+        $inv_month_sql = "SELECT DATE_FORMAT(iv.date, '%Y-%m') AS ym, SUM(iv.denorm_invoice_total) AS t
+            FROM " . TB_PREFIX . "invoices iv
             INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id=iv.preference_id AND pr.domain_id=iv.domain_id)
-            WHERE pr.status='1' AND ii.domain_id=:domain_id
+            WHERE pr.status='1' AND iv.domain_id=:domain_id
               AND iv.date >= :d_start AND iv.date < :d_end
             GROUP BY DATE_FORMAT(iv.date, '%Y-%m')";
         $pmt_month_sql = "SELECT DATE_FORMAT(ap.ac_date, '%Y-%m') AS ym, SUM(ap.ac_amount) AS t
@@ -260,21 +257,11 @@ switch ($db_server) {
                 WHEN (CURRENT_DATE - iv.date::date) <= 90 THEN '61-90'
                 ELSE '90+'
             END AS bucket,
-            (COALESCE(ii_sum.sum_items, 0) - COALESCE(ap.inv_paid, 0)) AS owing
+            iv.denorm_amount_owing AS owing
             FROM " . TB_PREFIX . "invoices iv
-            LEFT JOIN (
-                SELECT invoice_id, domain_id, SUM(COALESCE(total, 0)) AS sum_items
-                FROM " . TB_PREFIX . "invoice_items
-                GROUP BY invoice_id, domain_id
-            ) ii_sum ON (ii_sum.invoice_id = iv.id AND ii_sum.domain_id = iv.domain_id)
             LEFT JOIN " . TB_PREFIX . "preferences pr ON (iv.preference_id = pr.pref_id AND pr.domain_id = iv.domain_id)
-            LEFT JOIN (
-                SELECT ac_inv_id, domain_id, SUM(COALESCE(ac_amount, 0)) AS inv_paid
-                FROM " . TB_PREFIX . "payment
-                GROUP BY ac_inv_id, domain_id
-            ) ap ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
             WHERE pr.status = 1 AND iv.domain_id = :domain_id
-              AND (COALESCE(ii_sum.sum_items, 0) - COALESCE(ap.inv_paid, 0)) > 0
+              AND iv.denorm_amount_owing > 0
         ) x GROUP BY bucket";
         break;
     case 'sqlite':
@@ -286,21 +273,11 @@ switch ($db_server) {
                 WHEN CAST((julianday('now') - julianday(date(iv.date))) AS INTEGER) <= 90 THEN '61-90'
                 ELSE '90+'
             END AS bucket,
-            (COALESCE(ii_sum.sum_items, 0) - COALESCE(ap.inv_paid, 0)) AS owing
+            iv.denorm_amount_owing AS owing
             FROM " . TB_PREFIX . "invoices iv
-            LEFT JOIN (
-                SELECT invoice_id, domain_id, SUM(COALESCE(total, 0)) AS sum_items
-                FROM " . TB_PREFIX . "invoice_items
-                GROUP BY invoice_id, domain_id
-            ) ii_sum ON (ii_sum.invoice_id = iv.id AND ii_sum.domain_id = iv.domain_id)
             LEFT JOIN " . TB_PREFIX . "preferences pr ON (iv.preference_id = pr.pref_id AND pr.domain_id = iv.domain_id)
-            LEFT JOIN (
-                SELECT ac_inv_id, domain_id, SUM(COALESCE(ac_amount, 0)) AS inv_paid
-                FROM " . TB_PREFIX . "payment
-                GROUP BY ac_inv_id, domain_id
-            ) ap ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
             WHERE pr.status = 1 AND iv.domain_id = :domain_id
-              AND (COALESCE(ii_sum.sum_items, 0) - COALESCE(ap.inv_paid, 0)) > 0
+              AND iv.denorm_amount_owing > 0
         ) x GROUP BY bucket";
         break;
     default:
@@ -312,21 +289,11 @@ switch ($db_server) {
                 WHEN DATEDIFF(CURDATE(), DATE(iv.date)) <= 90 THEN '61-90'
                 ELSE '90+'
             END AS bucket,
-            (COALESCE(ii_sum.sum_items, 0) - COALESCE(ap.inv_paid, 0)) AS owing
+            iv.denorm_amount_owing AS owing
             FROM " . TB_PREFIX . "invoices iv
-            LEFT JOIN (
-                SELECT invoice_id, domain_id, SUM(COALESCE(total, 0)) AS sum_items
-                FROM " . TB_PREFIX . "invoice_items
-                GROUP BY invoice_id, domain_id
-            ) ii_sum ON (ii_sum.invoice_id = iv.id AND ii_sum.domain_id = iv.domain_id)
             LEFT JOIN " . TB_PREFIX . "preferences pr ON (iv.preference_id = pr.pref_id AND pr.domain_id = iv.domain_id)
-            LEFT JOIN (
-                SELECT ac_inv_id, domain_id, SUM(COALESCE(ac_amount, 0)) AS inv_paid
-                FROM " . TB_PREFIX . "payment
-                GROUP BY ac_inv_id, domain_id
-            ) ap ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
             WHERE pr.status = 1 AND iv.domain_id = :domain_id
-              AND (COALESCE(ii_sum.sum_items, 0) - COALESCE(ap.inv_paid, 0)) > 0
+              AND iv.denorm_amount_owing > 0
         ) x GROUP BY bucket";
         break;
 }
@@ -353,26 +320,16 @@ foreach ($aging_buckets as $label => $amount) {
 $bladeView->assign('aging_chart', $aging_chart);
 $bladeView->assign('aging_total', round($aging_total, 2));
 
-// Invoice paid percentage — pre-aggregated line totals (matches prior semantics: only invoices with ≥1 line row)
+// Invoice paid percentage — denorm_amount_owing; only invoices with ≥1 line row (prior INNER JOIN semantics)
 $paid_sql = "SELECT COUNT(*) AS total_count,
-    SUM(CASE WHEN owing <= 0 THEN 1 ELSE 0 END) AS paid_count
-FROM (
-    SELECT iv.id,
-        COALESCE(ii_sum.sum_items, 0) - COALESCE(ap.inv_paid, 0) AS owing
+    SUM(CASE WHEN iv.denorm_amount_owing <= 0 THEN 1 ELSE 0 END) AS paid_count
     FROM " . TB_PREFIX . "invoices iv
     INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id)
-    INNER JOIN (
-        SELECT invoice_id, domain_id, SUM(COALESCE(total, 0)) AS sum_items
-        FROM " . TB_PREFIX . "invoice_items
-        GROUP BY invoice_id, domain_id
-    ) ii_sum ON (ii_sum.invoice_id = iv.id AND ii_sum.domain_id = iv.domain_id)
-    LEFT JOIN (
-        SELECT ac_inv_id, domain_id, SUM(ac_amount) AS inv_paid
-        FROM " . TB_PREFIX . "payment
-        GROUP BY ac_inv_id, domain_id
-    ) ap ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
     WHERE pr.status = 1 AND iv.domain_id = :domain_id
-) t";
+      AND EXISTS (
+          SELECT 1 FROM " . TB_PREFIX . "invoice_items ii
+          WHERE ii.invoice_id = iv.id AND ii.domain_id = iv.domain_id
+      )";
 $paid_row      = dbQuery($paid_sql, ':domain_id', $domain_id)->fetch();
 $dash_paid_pct = ($paid_row['total_count'] > 0)
     ? round(($paid_row['paid_count'] ?? 0) / $paid_row['total_count'] * 100, 1) : 0;

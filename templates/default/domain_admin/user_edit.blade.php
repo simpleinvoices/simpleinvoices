@@ -89,6 +89,10 @@
             <input type="email" name="email" value="{{ $curEmail }}" class="form-control"
                    required autocomplete="off" />
             <div class="invalid-feedback">A valid email is required.</div>
+            <div class="form-hint small">
+                For <strong>customer</strong> accounts, the email must be unique among customer logins in this organisation; it may match a customer login in another organisation or a staff/biller account.
+                For <strong>biller</strong> accounts, the email must be unique on the shared staff login (system-wide).
+            </div>
         </div>
         <div class="mb-3">
             <label class="form-label">New Password

@@ -181,6 +181,14 @@ CREATE TABLE IF NOT EXISTS `si_invoices` (
   `custom_field3` varchar(50) DEFAULT NULL,
   `custom_field4` varchar(50) DEFAULT NULL,
   `note` text,
+  `denorm_invoice_total` decimal(25,6) NOT NULL DEFAULT 0,
+  `denorm_amount_paid` decimal(25,6) NOT NULL DEFAULT 0,
+  `denorm_amount_owing` decimal(25,6) NOT NULL DEFAULT 0,
+  `denorm_biller_name` varchar(255) NOT NULL DEFAULT '',
+  `denorm_customer_name` varchar(255) NOT NULL DEFAULT '',
+  `denorm_index_name` varchar(255) NOT NULL DEFAULT '',
+  `denorm_preference_description` varchar(255) NOT NULL DEFAULT '',
+  `denorm_preference_status` smallint NOT NULL DEFAULT 0,
   PRIMARY KEY (`domain_id`,`id`),
   KEY `id` (`id`),
   KEY `domain_id` (`domain_id`),
@@ -188,7 +196,11 @@ CREATE TABLE IF NOT EXISTS `si_invoices` (
   KEY `customer_id` (`customer_id`),
   UNIQUE KEY `UniqDIB` (`index_id`, `preference_id`, `biller_id`, `domain_id`),
   KEY `IdxDI` (`index_id`, `preference_id`, `domain_id`),
-  KEY `si_inv_dom_pref_date` (`domain_id`, `preference_id`, `date`)
+  KEY `si_inv_dom_pref_date` (`domain_id`, `preference_id`, `date`),
+  KEY `si_inv_dom_cust` (`domain_id`, `customer_id`),
+  KEY `si_inv_dom_biller` (`domain_id`, `biller_id`),
+  KEY `si_inv_dom_idxid` (`domain_id`, `index_id`),
+  KEY `si_inv_dom_pstat_owing` (`domain_id`, `denorm_preference_status`, `denorm_amount_owing`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `si_log` (
@@ -210,6 +222,9 @@ CREATE TABLE IF NOT EXISTS `si_payment` (
   `ac_payment_type` int(10) NOT NULL DEFAULT '1',
   `domain_id` int(11) NOT NULL,
   `online_payment_id` varchar(255) DEFAULT NULL,
+  `denorm_invoice_index_name` varchar(255) NOT NULL DEFAULT '',
+  `denorm_biller_name` varchar(255) NOT NULL DEFAULT '',
+  `denorm_customer_name` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`domain_id`,`id`),
   KEY `id` (`id`),
   KEY `domain_id` (`domain_id`),
@@ -344,9 +359,12 @@ CREATE TABLE IF NOT EXISTS `si_user` (
   `password` varchar(64) DEFAULT NULL,
   `enabled` TINYINT(1) DEFAULT 1 NOT NULL,
   `user_id` int(11) NOT NULL DEFAULT '0',
+  `auth_staff_email` varchar(255) DEFAULT NULL,
+  `auth_customer_key` varchar(384) DEFAULT NULL,
   PRIMARY KEY (`domain_id`,`id`),
   KEY `id` (`id`),
-  UNIQUE KEY `UnqEMail` (`email`)
+  UNIQUE KEY `UnqAuthStaffEmail` (`auth_staff_email`),
+  UNIQUE KEY `UnqAuthCustomerKey` (`auth_customer_key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `si_user_domain` (

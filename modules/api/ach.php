@@ -11,13 +11,26 @@ if ($_POST['pg_response_code']=='A01') {
 	$logger->log('ACH Data:', LegacyLogger::INFO);
 	$logger->log($paypal_data, LegacyLogger::INFO);
 
-	// Resolve domain_id from the invoice referenced by this payment
+	// Resolve domain_id from the invoice referenced by this payment (id is per-domain, not globally unique)
 	$ach_invoice_id = (int)$_POST['pg_consumerorderid'];
-	$domain_row = dbQuery(
-		"SELECT domain_id FROM ".TB_PREFIX."invoices WHERE id = :id LIMIT 1",
+	$domain_rows = dbQuery(
+		"SELECT DISTINCT domain_id FROM ".TB_PREFIX."invoices WHERE id = :id",
 		':id', $ach_invoice_id
-	)->fetch();
-	$resolved_domain_id = $domain_row ? (string)$domain_row['domain_id'] : '1';
+	)->fetchAll(PDO::FETCH_ASSOC);
+	$resolved_domain_id = '1';
+	if (count($domain_rows) === 1) {
+		$resolved_domain_id = (string) $domain_rows[0]['domain_id'];
+	} elseif (count($domain_rows) > 1) {
+		$logger->log(
+			'ACH: invoice id ' . $ach_invoice_id . ' exists in multiple domains; cannot resolve domain for payment',
+			LegacyLogger::ERROR
+		);
+		$xml_message = 'Payment could not be recorded: invoice id is ambiguous across domains. Contact support.';
+		echo $xml_message;
+		return;
+	} else {
+		$logger->log('ACH: no invoice row for id ' . $ach_invoice_id . '; defaulting domain to 1', LegacyLogger::WARN);
+	}
 
 	$check_payment = new payment();
 	$check_payment->filter='online_payment_id';
@@ -52,8 +65,8 @@ if ($_POST['pg_response_code']=='A01') {
 		$payment->insert();
 
 		$invoiceobj = new invoice();
-		$invoice = $invoiceobj->select($_POST['pg_consumerorderid']);
-		$biller = getBiller($invoice['biller_id']);
+		$invoice = $invoiceobj->select((int) $_POST['pg_consumerorderid'], $resolved_domain_id);
+		$biller = getBiller($invoice['biller_id'], $resolved_domain_id);
 
 		//send email
 		$body =  "A PaymentsGateway.com payment of ".$_POST['pg_total_amount']." was successfully received into Simple Invoices\n";

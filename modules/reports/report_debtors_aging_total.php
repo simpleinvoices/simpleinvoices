@@ -4,15 +4,12 @@ if (($__rpt = report_cache_get($__rpt_name, (int)$auth_session->domain_id)) !== 
 $__rpt_snap = array_keys($bladeView->getAssigns());
 
 /*
- * Aging totals by bucket — invoices with pre-aggregated lines + payments (no items-first join fan-out).
+ * Aging totals by bucket — uses si_invoices denorm_amount_* (invoice_denorm).
  */
 
 global $db_server;
 
 $bucket_order = ['0-14' => 0, '15-30' => 1, '31-60' => 2, '61-90' => 3, '90+' => 4];
-
-$ii_join = si_report_sql_invoice_line_totals_join('iv');
-$ap_join = si_report_sql_invoice_payments_join('iv', true);
 
 $aging_sql = '';
 switch ($db_server) {
@@ -29,15 +26,13 @@ switch ($db_server) {
                 WHEN (CURRENT_DATE - iv.date::date) <= 90 THEN '61-90'
                 ELSE '90+'
             END AS bucket,
-            COALESCE(ii_sum.sum_items, 0) AS inv_total,
-            COALESCE(ap.inv_paid, 0) AS inv_paid,
-            COALESCE(ii_sum.sum_items, 0) - COALESCE(ap.inv_paid, 0) AS owing
+            iv.denorm_invoice_total AS inv_total,
+            iv.denorm_amount_paid AS inv_paid,
+            iv.denorm_amount_owing AS owing
             FROM " . TB_PREFIX . "invoices iv
-            $ii_join
             INNER JOIN " . TB_PREFIX . "preferences pr ON (iv.preference_id = pr.pref_id AND pr.domain_id = iv.domain_id)
-            $ap_join
             WHERE pr.status = 1 AND iv.domain_id = :domain_id
-              AND (COALESCE(ii_sum.sum_items, 0) - COALESCE(ap.inv_paid, 0)) > 0
+              AND iv.denorm_amount_owing > 0
         ) x
         GROUP BY bucket";
         break;
@@ -54,15 +49,13 @@ switch ($db_server) {
                 WHEN CAST((julianday('now') - julianday(date(iv.date))) AS INTEGER) <= 90 THEN '61-90'
                 ELSE '90+'
             END AS bucket,
-            COALESCE(ii_sum.sum_items, 0) AS inv_total,
-            COALESCE(ap.inv_paid, 0) AS inv_paid,
-            COALESCE(ii_sum.sum_items, 0) - COALESCE(ap.inv_paid, 0) AS owing
+            iv.denorm_invoice_total AS inv_total,
+            iv.denorm_amount_paid AS inv_paid,
+            iv.denorm_amount_owing AS owing
             FROM " . TB_PREFIX . "invoices iv
-            $ii_join
             INNER JOIN " . TB_PREFIX . "preferences pr ON (iv.preference_id = pr.pref_id AND pr.domain_id = iv.domain_id)
-            $ap_join
             WHERE pr.status = 1 AND iv.domain_id = :domain_id
-              AND (COALESCE(ii_sum.sum_items, 0) - COALESCE(ap.inv_paid, 0)) > 0
+              AND iv.denorm_amount_owing > 0
         ) x
         GROUP BY bucket";
         break;
@@ -79,15 +72,13 @@ switch ($db_server) {
                 WHEN DATEDIFF(CURDATE(), DATE(iv.date)) <= 90 THEN '61-90'
                 ELSE '90+'
             END AS bucket,
-            COALESCE(ii_sum.sum_items, 0) AS inv_total,
-            COALESCE(ap.inv_paid, 0) AS inv_paid,
-            COALESCE(ii_sum.sum_items, 0) - COALESCE(ap.inv_paid, 0) AS owing
+            iv.denorm_invoice_total AS inv_total,
+            iv.denorm_amount_paid AS inv_paid,
+            iv.denorm_amount_owing AS owing
             FROM " . TB_PREFIX . "invoices iv
-            $ii_join
             INNER JOIN " . TB_PREFIX . "preferences pr ON (iv.preference_id = pr.pref_id AND pr.domain_id = iv.domain_id)
-            $ap_join
             WHERE pr.status = 1 AND iv.domain_id = :domain_id
-              AND (COALESCE(ii_sum.sum_items, 0) - COALESCE(ap.inv_paid, 0)) > 0
+              AND iv.denorm_amount_owing > 0
         ) x
         GROUP BY bucket";
         break;

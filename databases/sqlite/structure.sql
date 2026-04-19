@@ -160,7 +160,15 @@ CREATE TABLE IF NOT EXISTS si_invoices (
   custom_field2 TEXT DEFAULT NULL,
   custom_field3 TEXT DEFAULT NULL,
   custom_field4 TEXT DEFAULT NULL,
-  note          TEXT
+  note          TEXT,
+  denorm_invoice_total          REAL NOT NULL DEFAULT 0,
+  denorm_amount_paid            REAL NOT NULL DEFAULT 0,
+  denorm_amount_owing           REAL NOT NULL DEFAULT 0,
+  denorm_biller_name            TEXT NOT NULL DEFAULT '',
+  denorm_customer_name          TEXT NOT NULL DEFAULT '',
+  denorm_index_name             TEXT NOT NULL DEFAULT '',
+  denorm_preference_description TEXT NOT NULL DEFAULT '',
+  denorm_preference_status      INTEGER NOT NULL DEFAULT 0
 );
 CREATE UNIQUE INDEX IF NOT EXISTS si_invoices_pk         ON si_invoices (domain_id, id);
 CREATE INDEX IF NOT EXISTS si_invoices_domain_id          ON si_invoices (domain_id);
@@ -169,6 +177,10 @@ CREATE INDEX IF NOT EXISTS si_invoices_customer_id        ON si_invoices (custom
 CREATE UNIQUE INDEX IF NOT EXISTS si_invoices_uniq_dib    ON si_invoices (index_id, preference_id, biller_id, domain_id);
 CREATE INDEX IF NOT EXISTS si_invoices_idx_di             ON si_invoices (index_id, preference_id, domain_id);
 CREATE INDEX IF NOT EXISTS si_inv_dom_pref_date           ON si_invoices (domain_id, preference_id, date);
+CREATE INDEX IF NOT EXISTS si_inv_dom_cust               ON si_invoices (domain_id, customer_id);
+CREATE INDEX IF NOT EXISTS si_inv_dom_biller             ON si_invoices (domain_id, biller_id);
+CREATE INDEX IF NOT EXISTS si_inv_dom_idxid              ON si_invoices (domain_id, index_id);
+CREATE INDEX IF NOT EXISTS si_inv_dom_pstat_owing        ON si_invoices (domain_id, denorm_preference_status, denorm_amount_owing);
 
 CREATE TABLE IF NOT EXISTS si_log (
   id        INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -188,7 +200,10 @@ CREATE TABLE IF NOT EXISTS si_payment (
   ac_date           TEXT NOT NULL,
   ac_payment_type   INTEGER NOT NULL DEFAULT 1,
   domain_id         INTEGER NOT NULL,
-  online_payment_id TEXT DEFAULT NULL
+  online_payment_id TEXT DEFAULT NULL,
+  denorm_invoice_index_name TEXT NOT NULL DEFAULT '',
+  denorm_biller_name        TEXT NOT NULL DEFAULT '',
+  denorm_customer_name      TEXT NOT NULL DEFAULT ''
 );
 CREATE UNIQUE INDEX IF NOT EXISTS si_payment_pk         ON si_payment (domain_id, id);
 CREATE INDEX IF NOT EXISTS si_payment_domain_id          ON si_payment (domain_id);
@@ -313,9 +328,12 @@ CREATE TABLE IF NOT EXISTS si_user (
   password  TEXT DEFAULT NULL,
   enabled   INTEGER NOT NULL DEFAULT 1,
   user_id   INTEGER NOT NULL DEFAULT 0,
-  UNIQUE (email)
+  auth_staff_email   TEXT DEFAULT NULL,
+  auth_customer_key  TEXT DEFAULT NULL
 );
 CREATE UNIQUE INDEX IF NOT EXISTS si_user_pk ON si_user (domain_id, id);
+CREATE UNIQUE INDEX IF NOT EXISTS si_user_unq_auth_staff_email ON si_user (auth_staff_email);
+CREATE UNIQUE INDEX IF NOT EXISTS si_user_unq_auth_customer_key ON si_user (auth_customer_key);
 
 CREATE TABLE IF NOT EXISTS si_user_domain (
   id   INTEGER PRIMARY KEY AUTOINCREMENT,

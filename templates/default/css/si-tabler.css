@@ -881,10 +881,58 @@ a.segmented-control-item {
         right: auto !important;
         left:  0    !important;
     }
-    /* Grid search input: grow to fill available toolbar width */
-    .si-tabler-grid-container input[name="q"] {
-        min-width: 4em;
-        width: auto !important;
+}
+
+/* siTablerGrid toolbar search: single row, compact field selector */
+.si-grid-search-input-group .form-select {
+    flex: 0 1 auto;
+    max-width: 11rem;
+    width: auto;
+}
+/* Manage Invoices: narrower field selector so more room for the query input */
+#manageGrid .si-grid-search-input-group .form-select {
+    max-width: 8rem;
+}
+.si-grid-search-input-group .form-control {
+    min-width: 0;
+}
+.si-grid-search-input-group input[name="q"] {
+    min-width: 0;
+}
+/* Collapsible search: phones and tablets (below Bootstrap lg) */
+@media (max-width: 991.98px) {
+    /* Anchor the flyout so the toggle stays on the header row */
+    .si-grid-search {
+        position: relative;
+        align-self: flex-end;
+    }
+    .si-grid-search-fields:not(.si-grid-search-fields--open) {
+        display: none !important;
+    }
+    .si-grid-search-fields.si-grid-search-fields--open {
+        display: block !important;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        z-index: 1040;
+        width: min(calc(100vw - 2rem), 36rem);
+        margin-top: 0.25rem;
+        padding: 0.75rem;
+        background: var(--tblr-bg-surface, #fff);
+        border: 1px solid var(--tblr-border-color, rgba(0, 0, 0, 0.08));
+        border-radius: var(--tblr-border-radius, 0.25rem);
+        box-shadow: var(--tblr-shadow-dropdown, 0 0.5rem 1rem rgba(0, 0, 0, 0.12));
+    }
+    .si-grid-search-fields.si-grid-search-fields--open .si-grid-search-input-group {
+        width: 100%;
+    }
+}
+@media (min-width: 992px) {
+    .si-grid-search-toggle {
+        display: none !important;
+    }
+    .si-grid-search-fields {
+        display: block !important;
     }
 }
 

@@ -11,6 +11,7 @@
     </a>
 @elseif($saved ?? false)
     {{-- insert/update success redirects from domain_save.php; other ops may land here --}}
+    <meta http-equiv="refresh" content="2;URL=index.php?module=admin&amp;view=domains" />
     <div class="alert alert-success">
         <i class="ti ti-check me-1"></i>
         @if(($savedOp ?? '') === 'insert_domain')

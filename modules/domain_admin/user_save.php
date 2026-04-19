@@ -55,17 +55,20 @@ if ($op === 'insert_domain_user') {
         } else {
             $role_id      = $allowed_role_map[$role_key];
             $passwordHash = auth_hash_password($password);
+            list($authStaffEmail, $authCustomerKey) = auth_identity_columns_for_role($role_id, $domain_id, $email);
             $sth = dbQuery(
                 "INSERT INTO " . TB_PREFIX . "user
-                 (email, name, password, role_id, domain_id, enabled, user_id)
-                 VALUES (:email, :name, :password, :role_id, :domain_id, :enabled, :user_id)",
+                 (email, name, password, role_id, domain_id, enabled, user_id, auth_staff_email, auth_customer_key)
+                 VALUES (:email, :name, :password, :role_id, :domain_id, :enabled, :user_id, :auth_staff_email, :auth_customer_key)",
                 ':email',     $email,
                 ':name',      $name,
                 ':password',  $passwordHash,
                 ':role_id',   $role_id,
                 ':domain_id', $domain_id,
                 ':enabled',   $enabled,
-                ':user_id',   $linked_id
+                ':user_id',   $linked_id,
+                ':auth_staff_email', $authStaffEmail,
+                ':auth_customer_key', $authCustomerKey
             );
             if ($sth) {
                 $saved = true;
@@ -114,6 +117,7 @@ if ($op === 'update_domain_user') {
             } else {
                 $role_id = $allowed_role_map[$role_key];
                 $sth     = null;
+                list($authStaffEmail, $authCustomerKey) = auth_identity_columns_for_role($role_id, $domain_id, $email);
 
                 if ($password !== '' && strlen($password) < 4) {
                     $saveError = 'Password must be at least 4 characters.';
@@ -122,7 +126,8 @@ if ($op === 'update_domain_user') {
                     $sth = dbQuery(
                         "UPDATE " . TB_PREFIX . "user
                          SET email=:email, name=:name, password=:password,
-                             role_id=:role_id, enabled=:enabled, user_id=:user_id
+                             role_id=:role_id, enabled=:enabled, user_id=:user_id,
+                             auth_staff_email=:auth_staff_email, auth_customer_key=:auth_customer_key
                          WHERE id=:id AND domain_id=:domain_id",
                         ':email',     $email,
                         ':name',      $name,
@@ -130,6 +135,8 @@ if ($op === 'update_domain_user') {
                         ':role_id',   $role_id,
                         ':enabled',   $enabled,
                         ':user_id',   $linked_id,
+                        ':auth_staff_email', $authStaffEmail,
+                        ':auth_customer_key', $authCustomerKey,
                         ':id',        $id,
                         ':domain_id', $domain_id
                     );
@@ -137,13 +144,16 @@ if ($op === 'update_domain_user') {
                     $sth = dbQuery(
                         "UPDATE " . TB_PREFIX . "user
                          SET email=:email, name=:name,
-                             role_id=:role_id, enabled=:enabled, user_id=:user_id
+                             role_id=:role_id, enabled=:enabled, user_id=:user_id,
+                             auth_staff_email=:auth_staff_email, auth_customer_key=:auth_customer_key
                          WHERE id=:id AND domain_id=:domain_id",
                         ':email',     $email,
                         ':name',      $name,
                         ':role_id',   $role_id,
                         ':enabled',   $enabled,
                         ':user_id',   $linked_id,
+                        ':auth_staff_email', $authStaffEmail,
+                        ':auth_customer_key', $authCustomerKey,
                         ':id',        $id,
                         ':domain_id', $domain_id
                     );

@@ -53,11 +53,10 @@ $inv_month_sql = '';
 $pmt_month_sql = '';
 switch ($db_server) {
     case 'pgsql':
-        $inv_month_sql = "SELECT to_char(iv.date::timestamp, 'YYYY-MM') AS ym, SUM(ii.total) AS t
-            FROM " . TB_PREFIX . "invoice_items ii
-            INNER JOIN " . TB_PREFIX . "invoices iv ON (ii.invoice_id=iv.id AND ii.domain_id=iv.domain_id)
+        $inv_month_sql = "SELECT to_char(iv.date::timestamp, 'YYYY-MM') AS ym, SUM(iv.denorm_invoice_total) AS t
+            FROM " . TB_PREFIX . "invoices iv
             INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id=iv.preference_id AND pr.domain_id=iv.domain_id)
-            WHERE pr.status='1' AND ii.domain_id=:domain_id
+            WHERE pr.status='1' AND iv.domain_id=:domain_id
               AND iv.date >= :d_start AND iv.date < :d_end
             GROUP BY 1";
         $pmt_month_sql = "SELECT to_char(ap.ac_date::timestamp, 'YYYY-MM') AS ym, SUM(ap.ac_amount) AS t
@@ -67,11 +66,10 @@ switch ($db_server) {
             GROUP BY 1";
         break;
     case 'sqlite':
-        $inv_month_sql = "SELECT strftime('%Y-%m', iv.date) AS ym, SUM(ii.total) AS t
-            FROM " . TB_PREFIX . "invoice_items ii
-            INNER JOIN " . TB_PREFIX . "invoices iv ON (ii.invoice_id=iv.id AND ii.domain_id=iv.domain_id)
+        $inv_month_sql = "SELECT strftime('%Y-%m', iv.date) AS ym, SUM(iv.denorm_invoice_total) AS t
+            FROM " . TB_PREFIX . "invoices iv
             INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id=iv.preference_id AND pr.domain_id=iv.domain_id)
-            WHERE pr.status='1' AND ii.domain_id=:domain_id
+            WHERE pr.status='1' AND iv.domain_id=:domain_id
               AND date(iv.date) >= date(:d_start) AND date(iv.date) < date(:d_end)
             GROUP BY 1";
         $pmt_month_sql = "SELECT strftime('%Y-%m', ap.ac_date) AS ym, SUM(ap.ac_amount) AS t
@@ -81,11 +79,10 @@ switch ($db_server) {
             GROUP BY 1";
         break;
     default:
-        $inv_month_sql = "SELECT DATE_FORMAT(iv.date, '%Y-%m') AS ym, SUM(ii.total) AS t
-            FROM " . TB_PREFIX . "invoice_items ii
-            INNER JOIN " . TB_PREFIX . "invoices iv ON (ii.invoice_id=iv.id AND ii.domain_id=iv.domain_id)
+        $inv_month_sql = "SELECT DATE_FORMAT(iv.date, '%Y-%m') AS ym, SUM(iv.denorm_invoice_total) AS t
+            FROM " . TB_PREFIX . "invoices iv
             INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id=iv.preference_id AND pr.domain_id=iv.domain_id)
-            WHERE pr.status='1' AND ii.domain_id=:domain_id
+            WHERE pr.status='1' AND iv.domain_id=:domain_id
               AND iv.date >= :d_start AND iv.date < :d_end
             GROUP BY DATE_FORMAT(iv.date, '%Y-%m')";
         $pmt_month_sql = "SELECT DATE_FORMAT(ap.ac_date, '%Y-%m') AS ym, SUM(ap.ac_amount) AS t

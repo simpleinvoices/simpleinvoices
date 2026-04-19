@@ -89,6 +89,16 @@
 					</div>
 				</a>
 			</div>
+			<div class="col-md-4">
+				<a href="index.php?module=options&amp;view=invoice_denorm" class="card card-link card-link-pop">
+					<div class="card-body">
+						<div class="d-flex align-items-center">
+							<i class="ti ti-database-heart me-2" style="font-size: 2rem;"></i>
+							<div>{{ $LANG['invoice_denorm_menu'] ?? '' }}</div>
+						</div>
+					</div>
+				</a>
+			</div>
 		</div>
 	</div>
 </div>

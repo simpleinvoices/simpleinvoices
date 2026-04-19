@@ -169,9 +169,16 @@
 		</div>
 	</div>
 	<div class="card-footer">
-		<div class="d-flex">
+		<div class="d-flex align-items-center flex-wrap gap-2">
 			<a href="./index.php?module=customers&amp;view=manage" class="btn btn-link">{{ $LANG['cancel'] ?? '' }}</a>
-			<a href="./index.php?module=customers&amp;view=details&amp;id={{ urlencode($customer['id'] ?? '') }}&amp;action=edit" class="btn btn-primary ms-auto"><i class="ti ti-edit me-1"></i>{{ $LANG['edit'] ?? '' }}</a>
+			<div class="ms-auto d-flex flex-wrap gap-2">
+				@if(!empty($showCustomerPortalLink) && !empty($customerPortalUrl))
+				<a href="{{ $customerPortalUrl }}" target="_blank" rel="noopener" class="btn btn-outline-secondary">
+					<i class="ti ti-login me-1"></i>Customer portal
+				</a>
+				@endif
+				<a href="./index.php?module=customers&amp;view=details&amp;id={{ urlencode($customer['id'] ?? '') }}&amp;action=edit" class="btn btn-primary"><i class="ti ti-edit me-1"></i>{{ $LANG['edit'] ?? '' }}</a>
+			</div>
 		</div>
 	</div>
 </div>

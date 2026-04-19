@@ -217,13 +217,25 @@ CREATE TABLE IF NOT EXISTS `si_invoices` (
   `custom_field3` varchar(50) DEFAULT NULL,
   `custom_field4` varchar(50) DEFAULT NULL,
   `note` text,
+  `denorm_invoice_total` decimal(25,6) NOT NULL DEFAULT 0,
+  `denorm_amount_paid` decimal(25,6) NOT NULL DEFAULT 0,
+  `denorm_amount_owing` decimal(25,6) NOT NULL DEFAULT 0,
+  `denorm_biller_name` varchar(255) NOT NULL DEFAULT '',
+  `denorm_customer_name` varchar(255) NOT NULL DEFAULT '',
+  `denorm_index_name` varchar(255) NOT NULL DEFAULT '',
+  `denorm_preference_description` varchar(255) NOT NULL DEFAULT '',
+  `denorm_preference_status` smallint NOT NULL DEFAULT 0,
   PRIMARY KEY (`domain_id`,`id`),
   KEY `domain_id` (`domain_id`),
   KEY `biller_id` (`biller_id`),
   KEY `customer_id` (`customer_id`),
   KEY `UniqDIB` (`index_id`, `preference_id`, `biller_id`, `domain_id`), 
   KEY `IdxDI` (`index_id`, `preference_id`, `domain_id`),
-  KEY `si_inv_dom_pref_date` (`domain_id`, `preference_id`, `date`)
+  KEY `si_inv_dom_pref_date` (`domain_id`, `preference_id`, `date`),
+  KEY `si_inv_dom_cust` (`domain_id`, `customer_id`),
+  KEY `si_inv_dom_biller` (`domain_id`, `biller_id`),
+  KEY `si_inv_dom_idxid` (`domain_id`, `index_id`),
+  KEY `si_inv_dom_pstat_owing` (`domain_id`, `denorm_preference_status`, `denorm_amount_owing`)
 ) ENGINE=MyISAM;
 
 INSERT INTO `si_invoices` (`id`, `index_id`, `domain_id`, `biller_id`, `customer_id`, `type_id`, `preference_id`, `date`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `note`) VALUES
@@ -248,6 +260,9 @@ CREATE TABLE IF NOT EXISTS `si_payment` (
   `ac_payment_type` int(10) NOT NULL DEFAULT '1',
   `domain_id` int(11) NOT NULL,
   `online_payment_id` varchar(255) DEFAULT NULL,
+  `denorm_invoice_index_name` varchar(255) NOT NULL DEFAULT '',
+  `denorm_biller_name` varchar(255) NOT NULL DEFAULT '',
+  `denorm_customer_name` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`domain_id`,`id`),
   KEY `domain_id` (`domain_id`),
   KEY `ac_inv_id` (`ac_inv_id`),
@@ -738,12 +753,15 @@ CREATE TABLE IF NOT EXISTS `si_user` (
   `password` varchar(64) DEFAULT NULL,
   `enabled` TINYINT(1) DEFAULT 1 NOT NULL,
   `user_id` int(11) NOT NULL DEFAULT '0',
+  `auth_staff_email` varchar(255) DEFAULT NULL,
+  `auth_customer_key` varchar(384) DEFAULT NULL,
   PRIMARY KEY (`domain_id`,`id`),
-  UNIQUE KEY `UnqEMail` (`email`)
+  UNIQUE KEY `UnqAuthStaffEmail` (`auth_staff_email`),
+  UNIQUE KEY `UnqAuthCustomerKey` (`auth_customer_key`)
 ) ENGINE=MyISAM;
 
-INSERT INTO `si_user` (`id`, `email`, `role_id`, `domain_id`, `password`, `enabled`, `user_id`) VALUES
- (1, 'demo@simpleinvoices.org', 1, 1, 'fe01ce2a7fbac8fafaed7c982a04e229', 1, 0);
+INSERT INTO `si_user` (`id`, `email`, `role_id`, `domain_id`, `password`, `enabled`, `user_id`, `auth_staff_email`, `auth_customer_key`) VALUES
+ (1, 'demo@simpleinvoices.org', 1, 1, '$2y$12$prV4Dpbb4ukkI4IeCnEMAu75HdxwuRNpN/G/V2eDdrva2esCLqqCq', 1, 0, 'demo@simpleinvoices.org', NULL);
 
 CREATE TABLE IF NOT EXISTS `si_user_domain` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

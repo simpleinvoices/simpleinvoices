@@ -5,7 +5,7 @@ $__rpt_snap = array_keys($bladeView->getAssigns());
 
 /*
  * Debtors by aging — age in days from SQL (no per-row DateTime); bucket from integer age in PHP.
- * One row per invoice: pre-aggregated line totals + payments.
+ * One row per invoice: denormalised totals on si_invoices.
  */
 
 global $db_server;
@@ -27,22 +27,20 @@ $sql = 'SELECT
 			iv.id,
 			iv.index_id,
 			pr.pref_inv_wording,
-			b.name AS biller,
-			c.name AS customer,
-			COALESCE(ii_sum.sum_items, 0) AS inv_total,
-			COALESCE(ap.inv_paid, 0) AS inv_paid,
-			COALESCE(ii_sum.sum_items, 0) - COALESCE(ap.inv_paid, 0) AS inv_owing,
+			iv.denorm_biller_name AS biller,
+			iv.denorm_customer_name AS customer,
+			iv.denorm_invoice_total AS inv_total,
+			iv.denorm_amount_paid AS inv_paid,
+			iv.denorm_amount_owing AS inv_owing,
 			iv.date,
 			' . $age_days_sql . ' AS age_days
 		FROM
-            ' . TB_PREFIX . 'invoices iv' . si_report_sql_invoice_line_totals_join('iv') . '
-            LEFT JOIN ' . TB_PREFIX . 'biller b         ON (iv.biller_id = b.id AND b.domain_id = iv.domain_id)
-            LEFT JOIN ' . TB_PREFIX . 'customers c      ON (iv.customer_id = c.id AND c.domain_id = iv.domain_id)
-            LEFT JOIN ' . TB_PREFIX . 'preferences pr   ON (iv.preference_id = pr.pref_id AND pr.domain_id = iv.domain_id)' . si_report_sql_invoice_payments_join('iv', false) . '
+            ' . TB_PREFIX . 'invoices iv
+            LEFT JOIN ' . TB_PREFIX . 'preferences pr   ON (iv.preference_id = pr.pref_id AND pr.domain_id = iv.domain_id)
 		WHERE
 				pr.status    = 1
 			AND iv.domain_id = :domain_id
-			AND (COALESCE(ii_sum.sum_items, 0) - COALESCE(ap.inv_paid, 0)) > 0
+			AND iv.denorm_amount_owing > 0
 		ORDER BY
 			iv.date ASC';
 

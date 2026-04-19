@@ -158,3 +158,12 @@ $acl->deny('operator', 'billers', 'add');
 $acl->deny('operator', 'billers', 'edit');
 $acl->deny('operator', 'customers', 'add');
 $acl->deny('operator', 'customers', 'edit');
+
+// Web installer: broad allow('user') / allow('operator') / allow('domain_administrator')
+// would otherwise grant access after setup; only administrator may revisit it.
+$acl->deny('domain_administrator', 'install');
+$acl->deny('user', 'install');
+$acl->deny('operator', 'install');
+$acl->deny('viewer', 'install');
+$acl->deny('customer', 'install');
+$acl->deny('biller', 'install');

@@ -31,7 +31,7 @@ if ($op === "insert_customer") {
 
 	if (insertCustomer()) {
 		$saved = true;
-		// saveCustomFieldValues($_POST['categorie'],lastInsertId());
+		invoice_denorm::refreshAllForCustomer((int) lastInsertId());
 	}
 }
 
@@ -42,7 +42,7 @@ if ( $op === 'edit_customer' ) {
 		if (updateCustomer()) {
 
 			$saved = true;
-			//updateCustomFieldValues($_POST['categorie'],$_GET['customer']);
+			invoice_denorm::refreshAllForCustomer((int) $_GET['customer']);
 		}
 	}
 }

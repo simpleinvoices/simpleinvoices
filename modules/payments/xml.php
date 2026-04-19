@@ -36,7 +36,11 @@ function sql($type = '', $dir, $sort, $rp, $page)
 	global $db_server;
 	global $auth_session;
 
-	$valid_search_fields = ['ap.id', 'b.name', 'c.name'];
+	$search_map = [
+		'ap.id'   => 'ap.id',
+		'b.name'  => 'ap.denorm_biller_name',
+		'c.name'  => 'ap.denorm_customer_name',
+	];
 
 	if (! preg_match('/^(asc|desc)$/iD', $dir)) {
 		$dir = 'DESC';
@@ -49,29 +53,26 @@ function sql($type = '', $dir, $sort, $rp, $page)
 	$query = $_REQUEST['query'] ?? null;
 	$qtype = $_REQUEST['qtype'] ?? null;
 	if (! (empty($qtype) || empty($query))) {
-		if (in_array($qtype, $valid_search_fields)) {
-			$where = " AND $qtype LIKE :query ";
+		if (isset($search_map[$qtype])) {
+			$where = ' AND ' . $search_map[$qtype] . ' LIKE :query ';
 		} else {
 			$qtype = null;
 			$query = null;
 		}
 	}
 
-	// Map grid column names to safe SQL expressions
+	// Map grid column names to safe SQL expressions (denormalised list columns on si_payment)
 	$sortMap = [
 		'id'        => 'ap.id',
 		'ap.id'     => 'ap.id',
 		'ac_inv_id' => 'ap.ac_inv_id',
-		'customer'  => 'c.name',
-		'biller'    => 'b.name',
+		'customer'  => 'ap.denorm_customer_name',
+		'biller'    => 'ap.denorm_biller_name',
 		'ac_amount' => 'ap.ac_amount',
 		'date'      => 'ap.ac_date',
 	];
 	$sort = $sortMap[$sort] ?? 'ap.id';
 
-	$index_name_expr = ($db_server === 'mysql')
-		? "CONCAT(pr.pref_inv_wording, ' ', iv.index_id)"
-		: "(pr.pref_inv_wording || ' ' || CAST(iv.index_id AS TEXT))";
 	$date_expr = ($db_server === 'sqlite')
 		? "strftime('%Y-%m-%d', ap.ac_date)"
 		: ($db_server === 'pgsql'
@@ -83,10 +84,13 @@ function sql($type = '', $dir, $sort, $rp, $page)
 
 	$from_join = '
 			FROM ' . TB_PREFIX . 'payment ap
+			LEFT JOIN ' . TB_PREFIX . 'payment_types pt ON (pt.pt_id = ap.ac_payment_type AND pt.domain_id = ap.domain_id)
+			WHERE ap.domain_id = :domain_id ';
+
+	// Customer-scoped payment list needs invoice row for customer_id match
+	$from_join_iv = '
+			FROM ' . TB_PREFIX . 'payment ap
 			INNER JOIN ' . TB_PREFIX . 'invoices iv ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
-			INNER JOIN ' . TB_PREFIX . 'customers c ON (c.id = iv.customer_id AND c.domain_id = iv.domain_id)
-			INNER JOIN ' . TB_PREFIX . 'biller b ON (b.id = iv.biller_id AND b.domain_id = iv.domain_id)
-			INNER JOIN ' . TB_PREFIX . 'preferences pr ON (pr.pref_id = iv.preference_id AND pr.domain_id = ap.domain_id)
 			LEFT JOIN ' . TB_PREFIX . 'payment_types pt ON (pt.pt_id = ap.ac_payment_type AND pt.domain_id = ap.domain_id)
 			WHERE ap.domain_id = :domain_id ';
 
@@ -105,7 +109,7 @@ function sql($type = '', $dir, $sort, $rp, $page)
 		}
 		if (! empty($_GET['c_id'])) {
 			$id       = $_GET['c_id'];
-			$countSql = $count_head . $from_join . ' AND c.id = :cid ' . $where;
+			$countSql = $count_head . $from_join_iv . ' AND iv.customer_id = :cid ' . $where;
 			if (empty($query)) {
 				return dbQuery($countSql, ':domain_id', $domain_id, ':cid', $id);
 			}
@@ -121,9 +125,9 @@ function sql($type = '', $dir, $sort, $rp, $page)
 	}
 
 	$select = "SELECT ap.*
-				, c.name as cname
-				, $index_name_expr as index_name
-				, b.name as bname
+				, ap.denorm_customer_name AS cname
+				, ap.denorm_invoice_index_name AS index_name
+				, ap.denorm_biller_name AS bname
 				, $desc_expr AS description
 				, ap.ac_notes AS notes
 				, $date_expr AS date ";
@@ -143,8 +147,8 @@ function sql($type = '', $dir, $sort, $rp, $page)
 	}
 	if (! empty($_GET['c_id'])) {
 		$id  = $_GET['c_id'];
-		$sql = $select . $from_join . "
-			AND c.id = :cid
+		$sql = $select . $from_join_iv . "
+			AND iv.customer_id = :cid
 			$where
 			ORDER BY $sort $dir
 			$limit";

@@ -3,11 +3,11 @@ $__rpt_name = basename(__FILE__, '.php');
 if (($__rpt = report_cache_get($__rpt_name, (int)$auth_session->domain_id)) !== null) { foreach ($__rpt as $k => $v) $bladeView->assign($k, $v); return; }
 $__rpt_snap = array_keys($bladeView->getAssigns());
 
-  $sql = 'SELECT c.name, SUM(lt.line_total) AS sum_total
+  $sql = 'SELECT c.name, SUM(iv.denorm_invoice_total) AS sum_total
     FROM 
         ' . TB_PREFIX . 'customers c
 		INNER JOIN ' . TB_PREFIX . 'invoices iv ON (c.id = iv.customer_id AND c.domain_id = iv.domain_id) 
-        INNER JOIN ' . TB_PREFIX . 'preferences pr ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id)' . si_report_sql_invoice_line_totals_inner_join('iv') . '
+        INNER JOIN ' . TB_PREFIX . 'preferences pr ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id)
     WHERE
            pr.status = \'1\'
        AND c.domain_id = :domain_id

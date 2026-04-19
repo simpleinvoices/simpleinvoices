@@ -7,6 +7,12 @@
  * Called automatically by docker-entrypoint.sh after the config is written and
  * the database is accepting connections.  Safe to run manually too — already-applied
  * patches are skipped, so re-running is idempotent.
+ *
+ * Does nothing until the database looks install-ready: `si_biller` exists and
+ * either (a) installer essential data is present for domain 1 (preferences +
+ * custom_fields), matching index.php / init.php, or (b) `si_sql_patchmanager`
+ * already has rows (existing deployment / restored DB) so pending patches can
+ * be applied even if the bootstrap check fails.
  */
 
 // Must run from app root so all relative paths (config, includes, vendor) resolve correctly.
@@ -108,6 +114,27 @@ include_once './include/sql_patches.php';
 $log = static function (string $message): void {
     echo $message . "\n";
 };
+
+$install_tables_exists = checkTableExists(TB_PREFIX . 'biller');
+$has_patch_history     = false;
+if ($install_tables_exists && checkTableExists(TB_PREFIX . 'sql_patchmanager')) {
+    try {
+        $row = dbQuery('SELECT COUNT(*) AS c FROM ' . TB_PREFIX . 'sql_patchmanager')->fetch(PDO::FETCH_ASSOC);
+        $has_patch_history = $row && (int) ($row['c'] ?? 0) > 0;
+    } catch (Exception $e) {
+        $has_patch_history = false;
+    }
+}
+// Web installer “essential” bootstrap — OR any existing patch history (upgrades / Docker volumes with real data).
+$installer_bootstrap_ok = checkDataExists();
+$ready_for_patches      = $install_tables_exists && ($installer_bootstrap_ok || $has_patch_history);
+if (!$install_tables_exists || !$ready_for_patches) {
+    $log('[patches] Skipping — database not ready (need si_biller plus installer essential data, or at least one row in si_sql_patchmanager).');
+    exit(0);
+}
+if ($has_patch_history && !$installer_bootstrap_ok) {
+    $log('[patches] Detected existing patch history — applying pending migrations (installer bootstrap check skipped).');
+}
 
 $total   = max(array_keys($patch));
 $applied = 0;

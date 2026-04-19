@@ -107,6 +107,8 @@
 		this.init();
 	}
 
+	SiTablerGrid._searchIdSeq = 0;
+
 	SiTablerGrid.prototype.init = function () {
 		var self = this;
 		var o = this.opts;
@@ -122,12 +124,24 @@
 		this.toolbar = document.createElement('div');
 		this.toolbar.className = useCard ? 'card-header d-flex flex-wrap gap-2 align-items-center' : (toolbarTarget ? 'd-flex flex-wrap gap-2 align-items-center' : 'd-flex flex-wrap gap-2 align-items-center py-2 border-bottom');
 		if (o.searchitems && o.searchitems.length > 0) {
-			var searchWrap = document.createElement('div');
-			searchWrap.className = 'd-flex flex-wrap gap-2 align-items-center ms-auto';
+			var searchId = 'si-grid-search-' + String(++SiTablerGrid._searchIdSeq);
+			var searchOuter = document.createElement('div');
+			searchOuter.className = 'si-grid-search ms-lg-auto';
+			var toggleBtn = document.createElement('button');
+			toggleBtn.type = 'button';
+			toggleBtn.className = 'btn btn-sm btn-outline-secondary si-grid-search-toggle d-lg-none';
+			toggleBtn.setAttribute('aria-expanded', 'false');
+			toggleBtn.setAttribute('aria-controls', searchId);
+			toggleBtn.innerHTML = '<i class="ti ti-search" aria-hidden="true"></i><span class="visually-hidden">' +
+				escapeHtml(o.searchLabel || siGridStr('search', 'Search')) + '</span>';
+			var searchFields = document.createElement('div');
+			searchFields.className = 'si-grid-search-fields';
+			searchFields.id = searchId;
+			var ig = document.createElement('div');
+			ig.className = 'input-group input-group-sm si-grid-search-input-group';
 			var sel = document.createElement('select');
 			sel.name = 'qtype';
-			sel.className = 'form-select form-select-sm';
-			sel.style.width = 'auto';
+			sel.className = 'form-select';
 			o.searchitems.forEach(function (item) {
 				var opt = document.createElement('option');
 				opt.value = item.name;
@@ -138,24 +152,51 @@
 			var input = document.createElement('input');
 			input.type = 'text';
 			input.name = 'q';
-			input.className = 'form-control form-control-sm';
+			input.className = 'form-control';
 			input.placeholder = o.searchPlaceholder || siGridStr('search_placeholder', 'Search');
-			input.style.minWidth = '5em';
-			input.style.flex    = '1 1 auto';
+			input.style.minWidth = '0';
 			var btn = document.createElement('button');
 			btn.type = 'button';
-			btn.className = 'btn btn-sm btn-primary';
+			btn.className = 'btn btn-primary';
 			btn.textContent = o.searchLabel || siGridStr('search', 'Search');
-			btn.addEventListener('click', function () {
+			function runSearch() {
 				self.query = input.value;
 				self.qtype = sel.value;
 				self.page = 1;
 				self.load();
+			}
+			btn.addEventListener('click', runSearch);
+			input.addEventListener('keydown', function (e) {
+				if (e.key === 'Enter') {
+					e.preventDefault();
+					runSearch();
+				}
 			});
-			searchWrap.appendChild(sel);
-			searchWrap.appendChild(input);
-			searchWrap.appendChild(btn);
-			this.toolbar.appendChild(searchWrap);
+			ig.appendChild(sel);
+			ig.appendChild(input);
+			ig.appendChild(btn);
+			searchFields.appendChild(ig);
+			function applySearchBreakpoint() {
+				var wide = window.matchMedia('(min-width: 992px)').matches;
+				if (wide) {
+					searchFields.classList.add('si-grid-search-fields--open');
+					toggleBtn.setAttribute('aria-expanded', 'true');
+				} else {
+					searchFields.classList.remove('si-grid-search-fields--open');
+					toggleBtn.setAttribute('aria-expanded', 'false');
+				}
+			}
+			toggleBtn.addEventListener('click', function () {
+				if (window.matchMedia('(min-width: 992px)').matches) return;
+				var open = !searchFields.classList.contains('si-grid-search-fields--open');
+				searchFields.classList.toggle('si-grid-search-fields--open', open);
+				toggleBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+			});
+			window.addEventListener('resize', applySearchBreakpoint);
+			applySearchBreakpoint();
+			searchOuter.appendChild(toggleBtn);
+			searchOuter.appendChild(searchFields);
+			this.toolbar.appendChild(searchOuter);
 		}
 		if (o.showReloadButton === true) {
 			var reload = document.createElement('button');

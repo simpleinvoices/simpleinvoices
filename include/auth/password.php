@@ -60,68 +60,95 @@ function auth_needs_rehash($storedHash)
 }
 
 /**
- * Authenticate user by email and password; return session data (no password) or false.
- * Uses parameterised queries and supports both bcrypt and legacy MD5 hashes.
+ * Normalised login email (trim + lowercase), or null if empty.
+ */
+function auth_normalize_email($email)
+{
+    $e = trim((string) $email);
+    if ($e === '') {
+        return null;
+    }
+    return strtolower($e);
+}
+
+/**
+ * Whether si_user has auth_staff_email / auth_customer_key (post-patch 332+).
+ */
+function auth_user_has_identity_columns()
+{
+    return checkFieldExists(TB_PREFIX . 'user', 'auth_staff_email');
+}
+
+/**
+ * Compute auth_staff_email and auth_customer_key for INSERT/UPDATE.
+ *
+ * @param int|string|null $roleId
+ * @param int|string      $domainId
+ * @param string|null     $email
+ * @return array{0: ?string, 1: ?string} [auth_staff_email, auth_customer_key]
+ */
+function auth_identity_columns_for_role($roleId, $domainId, $email)
+{
+    $norm = auth_normalize_email($email);
+    $staff = null;
+    $cust  = null;
+    if ($norm !== null && $roleId !== null && $roleId !== '') {
+        $rid = (int) $roleId;
+        if (in_array($rid, [1, 2, 3, 4, 6, 7], true)) {
+            $staff = $norm;
+        } elseif ($rid === 5) {
+            $cust = (int) $domainId . ':' . $norm;
+        }
+    }
+    return [$staff, $cust];
+}
+
+/**
+ * Upgrade a stored hash to bcrypt if it is MD5 or if bcrypt cost has changed.
+ */
+function auth_upgrade_user_password_hash($id, $domainId, $plainPassword)
+{
+    $newHash = auth_hash_password($plainPassword);
+    dbQuery(
+        "UPDATE " . TB_PREFIX . "user SET password = :password WHERE id = :id AND domain_id = :domain_id",
+        ':password', $newHash,
+        ':id', $id,
+        ':domain_id', $domainId
+    );
+}
+
+/**
+ * Authenticate staff or biller by email and password (shared login). Never matches customer rows.
  *
  * @param string $email User email (identity)
  * @param string $password Plain password
- * @return array|false User row for session (id, email, role_name, domain_id, user_id, etc.) or false
+ * @return array|false Session row (id, email, role_name, domain_id, user_id, etc.) or false
  */
-/**
- * Detect which user table schema variant is present.
- * Returns 'modern' (email + user_id cols), 'mid' (email only), 'legacy' (user_email cols), or 'oldest'.
- * Uses checkFieldExists() so it works with MySQL, PostgreSQL, and SQLite.
- */
-function auth_detect_schema()
+function auth_authenticate_staff_user($email, $password)
 {
-    // Modern schema: si_user with 'email' and 'user_id' columns (post-patch 292)
-    if (checkFieldExists(TB_PREFIX . 'user', 'user_id')) {
-        return 'modern';
-    }
-
-    // Mid schema: si_user with 'email' column but no 'user_id' (post-patch 184)
-    if (checkFieldExists(TB_PREFIX . 'user', 'email')) {
-        return 'mid';
-    }
-
-    // Legacy schema: si_user with 'user_email' column (post-patch 147)
-    if (checkFieldExists(TB_PREFIX . 'user', 'user_email')) {
-        return 'legacy';
-    }
-
-    // Oldest schema: si_users table
-    return 'oldest';
-}
-
-function auth_authenticate_user($email, $password)
-{
-    // Upgrade a stored hash to bcrypt if it is MD5 or if bcrypt cost has changed.
-    // domain_id is included in the WHERE to scope the update to the correct tenant row.
-    $upgradeHash = static function (string $id, string $domain_id, string $plainPassword): void {
-        $newHash = auth_hash_password($plainPassword);
-        dbQuery(
-            "UPDATE " . TB_PREFIX . "user SET password = :password WHERE id = :id AND domain_id = :domain_id",
-            ':password', $newHash,
-            ':id', $id,
-            ':domain_id', $domain_id
-        );
-    };
-
     $schema = auth_detect_schema();
 
     if ($schema === 'modern') {
-        $sth = dbQuery(
+        $norm = auth_normalize_email($email);
+        if ($norm === null) {
+            return false;
+        }
+        $emailPredicate = auth_user_has_identity_columns()
+            ? 'u.auth_staff_email = :norm '
+            : 'LOWER(TRIM(u.email)) = :norm ';
+        $sth            = dbQuery(
             "SELECT u.id, u.email, u.name, u.password, r.name AS role_name, u.domain_id, u.user_id
              FROM " . TB_PREFIX . "user u
-             LEFT JOIN " . TB_PREFIX . "user_role r ON (u.role_id = r.id)
-             WHERE u.email = :email AND u.enabled = :enabled",
-            ':email', $email,
+             INNER JOIN " . TB_PREFIX . "user_role r ON (u.role_id = r.id)
+             WHERE " . $emailPredicate . "AND u.enabled = :enabled
+             AND r.name IN ('administrator','domain_administrator','user','operator','biller','viewer')",
+            ':norm', $norm,
             ':enabled', ENABLED
         );
         $row = $sth ? $sth->fetch(PDO::FETCH_ASSOC) : false;
         if ($row && auth_verify_password($password, $row['password'])) {
             if (auth_needs_rehash($row['password'])) {
-                $upgradeHash($row['id'], $row['domain_id'], $password);
+                auth_upgrade_user_password_hash($row['id'], $row['domain_id'], $password);
             }
             unset($row['password']);
             return $row;
@@ -130,18 +157,23 @@ function auth_authenticate_user($email, $password)
     }
 
     if ($schema === 'mid') {
+        $norm = auth_normalize_email($email);
+        if ($norm === null) {
+            return false;
+        }
         $sth = dbQuery(
             "SELECT u.id, u.email, u.password, r.name AS role_name, u.domain_id
              FROM " . TB_PREFIX . "user u
-             LEFT JOIN " . TB_PREFIX . "user_role r ON (u.role_id = r.id)
-             WHERE u.email = :email AND u.enabled = :enabled",
-            ':email', $email,
+             INNER JOIN " . TB_PREFIX . "user_role r ON (u.role_id = r.id)
+             WHERE LOWER(TRIM(u.email)) = :norm AND u.enabled = :enabled
+             AND r.name IN ('administrator','domain_administrator','user','operator','biller','viewer')",
+            ':norm', $norm,
             ':enabled', ENABLED
         );
         $row = $sth ? $sth->fetch(PDO::FETCH_ASSOC) : false;
         if ($row && auth_verify_password($password, $row['password'])) {
             if (auth_needs_rehash($row['password'])) {
-                $upgradeHash($row['id'], $row['domain_id'], $password);
+                auth_upgrade_user_password_hash($row['id'], $row['domain_id'], $password);
             }
             unset($row['password']);
             $row['user_id'] = 0;
@@ -168,7 +200,6 @@ function auth_authenticate_user($email, $password)
         return false;
     }
 
-    // Oldest schema: si_users table with user_email/user_password columns
     $sth = dbQuery(
         "SELECT user_id AS id, user_email AS email, user_password AS password
          FROM " . TB_PREFIX . "users WHERE user_email = :email",
@@ -179,9 +210,90 @@ function auth_authenticate_user($email, $password)
         unset($row['password']);
         $row['role_name'] = 'administrator';
         $row['domain_id'] = 1;
-        $row['user_id'] = 0;
+        $row['user_id']   = 0;
         return $row;
     }
 
     return false;
+}
+
+/**
+ * Authenticate customer login for a specific domain (customer portal only).
+ *
+ * @param string $email
+ * @param string $password
+ * @param int    $domainId
+ * @return array|false
+ */
+function auth_authenticate_customer_user($email, $password, $domainId)
+{
+    if (auth_detect_schema() !== 'modern') {
+        return false;
+    }
+    $norm = auth_normalize_email($email);
+    if ($norm === null) {
+        return false;
+    }
+    $domainId = (int) $domainId;
+    if ($domainId < 1) {
+        return false;
+    }
+
+    if (auth_user_has_identity_columns()) {
+        $key = $domainId . ':' . $norm;
+        $sth = dbQuery(
+            "SELECT u.id, u.email, u.name, u.password, r.name AS role_name, u.domain_id, u.user_id
+             FROM " . TB_PREFIX . "user u
+             INNER JOIN " . TB_PREFIX . "user_role r ON (u.role_id = r.id)
+             WHERE u.auth_customer_key = :akey AND u.enabled = :enabled AND r.name = 'customer'",
+            ':akey', $key,
+            ':enabled', ENABLED
+        );
+    } else {
+        $sth = dbQuery(
+            "SELECT u.id, u.email, u.name, u.password, r.name AS role_name, u.domain_id, u.user_id
+             FROM " . TB_PREFIX . "user u
+             INNER JOIN " . TB_PREFIX . "user_role r ON (u.role_id = r.id)
+             WHERE u.domain_id = :domain_id AND u.enabled = :enabled AND r.name = 'customer'
+             AND LOWER(TRIM(u.email)) = :norm",
+            ':domain_id', $domainId,
+            ':enabled', ENABLED,
+            ':norm', $norm
+        );
+    }
+    $row = $sth ? $sth->fetch(PDO::FETCH_ASSOC) : false;
+    if ($row && auth_verify_password($password, $row['password'])) {
+        if (auth_needs_rehash($row['password'])) {
+            auth_upgrade_user_password_hash($row['id'], $row['domain_id'], $password);
+        }
+        unset($row['password']);
+        return $row;
+    }
+    return false;
+}
+
+/**
+ * Detect which user table schema variant is present.
+ * Returns 'modern' (email + user_id cols), 'mid' (email only), 'legacy' (user_email cols), or 'oldest'.
+ */
+function auth_detect_schema()
+{
+    if (checkFieldExists(TB_PREFIX . 'user', 'user_id')) {
+        return 'modern';
+    }
+    if (checkFieldExists(TB_PREFIX . 'user', 'email')) {
+        return 'mid';
+    }
+    if (checkFieldExists(TB_PREFIX . 'user', 'user_email')) {
+        return 'legacy';
+    }
+    return 'oldest';
+}
+
+/**
+ * @deprecated Use auth_authenticate_staff_user() for the shared login page.
+ */
+function auth_authenticate_user($email, $password)
+{
+    return auth_authenticate_staff_user($email, $password);
 }

@@ -285,6 +285,9 @@
                             <a class="dropdown-item @if(($module ?? '') == 'options' && ($view ?? '') == 'backup_database') active @endif" href="index.php?module=options&view=backup_database">
                                 <i class="ti ti-database-export me-2 text-secondary"></i>{{ $LANG['backup_database'] ?? '' }}
                             </a>
+                            <a class="dropdown-item @if(($module ?? '') == 'options' && ($view ?? '') == 'invoice_denorm') active @endif" href="index.php?module=options&view=invoice_denorm">
+                                <i class="ti ti-database-heart me-2 text-secondary"></i>{{ $LANG['invoice_denorm_menu'] ?? '' }}
+                            </a>
                         </div>
                     </li>
                 </ul>
@@ -366,6 +369,7 @@
             'payment_types_details' => 'payment_type_details',
             'options_index' => 'options',
             'options_backup_database' => 'backup_database',
+            'options_invoice_denorm' => 'invoice_denorm_title',
             'statement_index' => 'statement_of_invoices',
             'statement_email' => 'email_statement_as_pdf',
         ];

@@ -36,16 +36,25 @@ if ($op === 'insert_user') {
 		$saveError = 'Password must be at least 4 characters.';
 	} else {
 		$passwordHash = auth_hash_password($plain);
-		$sql = "INSERT INTO " . TB_PREFIX . "user (email, name, password, role_id, domain_id, enabled, user_id)
-		        VALUES (:email, :name, :password, :role, :domain_id, :enabled, :user_id)";
+		$roleId       = (int) ($_POST['role'] ?? 0);
+		$domainId     = (int) $auth_session->domain_id;
+		list($authStaffEmail, $authCustomerKey) = auth_identity_columns_for_role(
+			$roleId,
+			$domainId,
+			(string) ($_POST['email'] ?? '')
+		);
+		$sql = "INSERT INTO " . TB_PREFIX . "user (email, name, password, role_id, domain_id, enabled, user_id, auth_staff_email, auth_customer_key)
+		        VALUES (:email, :name, :password, :role, :domain_id, :enabled, :user_id, :auth_staff_email, :auth_customer_key)";
 		$sth = dbQuery($sql,
 			':email', $_POST['email'] ?? '',
 			':name', $_POST['name'] ?? '',
 			':password', $passwordHash,
-			':role', (int) ($_POST['role'] ?? 0),
-			':domain_id', $auth_session->domain_id,
+			':role', $roleId,
+			':domain_id', $domainId,
 			':enabled', (int) ($_POST['enabled'] ?? 1),
-			':user_id', (int) ($_POST['user_id'] ?? 0)
+			':user_id', (int) ($_POST['user_id'] ?? 0),
+			':auth_staff_email', $authStaffEmail,
+			':auth_customer_key', $authCustomerKey
 		);
 		if ($sth) {
 			$saved = true;
@@ -69,25 +78,45 @@ if ($op === 'edit_user') {
 		$saveError = 'Password must be at least 4 characters.';
 	} elseif ($passwordField !== '') {
 		$passwordHash = auth_hash_password($passwordField);
-		$sql = "UPDATE " . TB_PREFIX . "user SET email = :email, name = :name, password = :password, role_id = :role, enabled = :enabled, user_id = :user_id WHERE id = :id";
+		$roleId       = (int) ($_POST['role'] ?? 0);
+		$domainId     = (int) $auth_session->domain_id;
+		list($authStaffEmail, $authCustomerKey) = auth_identity_columns_for_role(
+			$roleId,
+			$domainId,
+			(string) ($_POST['email'] ?? '')
+		);
+		$sql = "UPDATE " . TB_PREFIX . "user SET email = :email, name = :name, password = :password, role_id = :role, enabled = :enabled, user_id = :user_id, auth_staff_email = :auth_staff_email, auth_customer_key = :auth_customer_key WHERE id = :id AND domain_id = :domain_id";
 		$sth = dbQuery($sql,
 			':email', $_POST['email'] ?? '',
 			':name', $_POST['name'] ?? '',
 			':password', $passwordHash,
-			':role', (int) ($_POST['role'] ?? 0),
+			':role', $roleId,
 			':enabled', $enabledValue,
 			':user_id', (int) ($_POST['user_id'] ?? 0),
-			':id', $editingId
+			':auth_staff_email', $authStaffEmail,
+			':auth_customer_key', $authCustomerKey,
+			':id', $editingId,
+			':domain_id', $domainId
 		);
 	} else {
-		$sql = "UPDATE " . TB_PREFIX . "user SET email = :email, name = :name, role_id = :role, enabled = :enabled, user_id = :user_id WHERE id = :id";
+		$roleId   = (int) ($_POST['role'] ?? 0);
+		$domainId = (int) $auth_session->domain_id;
+		list($authStaffEmail, $authCustomerKey) = auth_identity_columns_for_role(
+			$roleId,
+			$domainId,
+			(string) ($_POST['email'] ?? '')
+		);
+		$sql = "UPDATE " . TB_PREFIX . "user SET email = :email, name = :name, role_id = :role, enabled = :enabled, user_id = :user_id, auth_staff_email = :auth_staff_email, auth_customer_key = :auth_customer_key WHERE id = :id AND domain_id = :domain_id";
 		$sth = dbQuery($sql,
 			':email', $_POST['email'] ?? '',
 			':name', $_POST['name'] ?? '',
-			':role', (int) ($_POST['role'] ?? 0),
+			':role', $roleId,
 			':enabled', $enabledValue,
 			':user_id', (int) ($_POST['user_id'] ?? 0),
-			':id', $editingId
+			':auth_staff_email', $authStaffEmail,
+			':auth_customer_key', $authCustomerKey,
+			':id', $editingId,
+			':domain_id', $domainId
 		);
 	}
 	if ($saveError === null && $sth) {

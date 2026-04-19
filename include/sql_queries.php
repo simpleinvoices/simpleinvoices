@@ -144,7 +144,9 @@ function dbQuery($sqlQuery) {
 		dbLogger($sqlQuery);
 	} catch(Exception $e){
 		echo $e->getMessage();
-		echo "dbQuery: Dude, what happened to your query?:<br /><br /> ".htmlsafe($sqlQuery)."<br />".htmlsafe(end($sth->errorInfo()));
+		$errInfo = ($sth instanceof PDOStatement) ? $sth->errorInfo() : [];
+		$errTail = is_array($errInfo) && $errInfo !== [] ? (string) end($errInfo) : '';
+		echo "dbQuery: Dude, what happened to your query?:<br /><br /> ".htmlsafe($sqlQuery)."<br />".htmlsafe($errTail);
 	}
 
 	return $sth;
@@ -359,7 +361,7 @@ function getActiveTaxes($domain_id='') {
 
 	$sql = "SELECT * FROM ".TB_PREFIX."tax WHERE tax_enabled != 0 and domain_id = :domain_id ORDER BY tax_description";
 	if ($db_server == 'pgsql') {
-		$sql = "SELECT * FROM ".TB_PREFIX."tax WHERE tax_enabled ORDER BY tax_description";
+		$sql = "SELECT * FROM ".TB_PREFIX."tax WHERE tax_enabled AND domain_id = :domain_id ORDER BY tax_description";
 	}
 	$sth = dbQuery($sql, ':domain_id',$domain_id);
 
@@ -1407,7 +1409,8 @@ function updateBiller() {
 				custom_field4 = :custom_field4,
 				enabled = :enabled
 			WHERE
-				id = :id";
+				id = :id
+			AND domain_id = :domain_id";
 	return dbQuery($sql,
 		':domain_id', $domain_id,
 		':name', $_POST['name'],
@@ -1465,7 +1468,8 @@ function updateCustomer() {
 				custom_field4 = :custom_field4,
 				enabled = :enabled
 			WHERE
-				id = :id";
+				id = :id
+			AND domain_id = :domain_id";
 
 		return dbQuery($sql,
 			':domain_id', $domain_id,
@@ -1593,10 +1597,9 @@ function getCustomerInvoices($id, $domain_id='') {
 		iv.index_id, 
 		iv.date, 
 		iv.type_id, 
-		COALESCE((SELECT SUM(ii.total) FROM " . TB_PREFIX . "invoice_items ii WHERE ii.invoice_id = iv.id AND ii.domain_id = iv.domain_id), 0) AS total,
-		COALESCE((SELECT SUM(ap.ac_amount) FROM " . TB_PREFIX . "payment ap WHERE ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id), 0) AS paid,
-		COALESCE((SELECT SUM(ii.total) FROM " . TB_PREFIX . "invoice_items ii WHERE ii.invoice_id = iv.id AND ii.domain_id = iv.domain_id), 0) -
-		COALESCE((SELECT SUM(ap.ac_amount) FROM " . TB_PREFIX . "payment ap WHERE ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id), 0) AS owing,
+		iv.denorm_invoice_total AS total,
+		iv.denorm_amount_paid AS paid,
+		iv.denorm_amount_owing AS owing,
 		pr.status,
 		pr.pref_inv_wording
 	FROM 
@@ -1870,7 +1873,7 @@ function insertInvoice($type, $domain_id='') {
 			)";
 	}
 
-    $pref_group=getPreference($_POST['preference_id']);
+    $pref_group=getPreference($_POST['preference_id'], $domain_id);
 
 	//also set the current time (if null or =00:00:00)
 	$clean_date=SqlDateWithTime($_POST['date']);
@@ -1905,10 +1908,10 @@ function updateInvoice($invoice_id, $domain_id='') {
     $domain_id = domain_id::get($domain_id);
 
 	$invoiceobj = new invoice();
-    $current_invoice = $invoiceobj->select($invoice_id);
-    $current_pref_group = getPreference($current_invoice['preference_id']);
+    $current_invoice = $invoiceobj->select($invoice_id, $domain_id);
+    $current_pref_group = getPreference($current_invoice['preference_id'], $domain_id);
 
-    $new_pref_group=getPreference($_POST['preference_id']);
+    $new_pref_group=getPreference($_POST['preference_id'], $domain_id);
 
     $index_id = $current_invoice['index_id'];
 
@@ -1944,7 +1947,7 @@ function updateInvoice($invoice_id, $domain_id='') {
 			id = :invoice_id
 		AND domain_id = :domain_id";
 			
-	return dbQuery($sql,
+	$ok = dbQuery($sql,
         ':index_id', $index_id,
 		':biller_id', $_POST['biller_id'],
 		':customer_id', $_POST['customer_id'],
@@ -1958,6 +1961,10 @@ function updateInvoice($invoice_id, $domain_id='') {
 		':invoice_id', $invoice_id,
 		':domain_id', $domain_id
 		);
+	if ($ok) {
+		invoice_denorm::refreshForInvoice((int) $invoice_id, $domain_id);
+	}
+	return $ok;
 }
 
 function insertInvoiceItem($invoice_id,$quantity,$product_id,$line_number,$line_item_tax_id,$description="", $unit_price="", $attribute="", $domain_id='') {
@@ -2563,27 +2570,111 @@ function mysqlPatchAlterInnoDbWithKeyIfMissing($tableSuffix, $indexName, $column
 	return "ALTER TABLE `{$table}` ADD KEY `{$indexName}` (`{$columnName}`), ENGINE=InnoDB";
 }
 
-function checkDataExists()
-{
-	// Patches applied means we're past initial install
-	$test = getNumberOfDoneSQLPatches();
-	if ($test > 0) {
-		return true;
+/**
+ * Locale / language tokens substituted into essential_data.json (LOCALE, LANGUAGE).
+ */
+function install_essential_data_locale_tokens(): array {
+	global $config;
+	$loc = 'en_GB';
+	if (isset($config->local->locale) && (string) $config->local->locale !== '') {
+		$loc = (string) $config->local->locale;
 	}
-	// No patches yet: treat as "data exists" if essential data is present.
-	// The install wizard imports essential_data.json; only the first SQL statement
-	// runs (PDO single-statement), so the first table populated is si_custom_fields.
-	if (checkTableExists(TB_PREFIX . 'custom_fields')) {
-		try {
-			$sth = dbQuery("SELECT 1 FROM " . TB_PREFIX . "custom_fields LIMIT 1");
-			if ($sth && $sth->fetch()) {
-				return true;
-			}
-		} catch (Exception $e) {
-			// ignore
+	return [$loc, $loc];
+}
+
+/**
+ * Keys in essential_data.json that are global or first-install-only. They must not
+ * be re-imported when provisioning a new domain on an existing database.
+ */
+function install_essential_data_global_table_keys(): array {
+	return [
+		'si_sql_patchmanager',
+		'si_extensions',
+		'si_invoice_type',
+		'si_products_attribute_type',
+		'si_user',
+		'si_user_domain',
+		'si_user_role',
+	];
+}
+
+/**
+ * Build concatenated INSERT SQL from essential_data.json for one domain.
+ *
+ * @param int  $targetDomainId      Substituted for DOMAIN-ID placeholders.
+ * @param bool $includeGlobalTables If false, omit patch manager, roles, demo user, etc.
+ */
+function install_build_essential_data_sql(int $targetDomainId, bool $includeGlobalTables): string {
+	$path = realpath(__DIR__ . '/../databases/json/essential_data.json');
+	if ($path === false || !is_readable($path)) {
+		throw new RuntimeException('essential_data.json not found or not readable');
+	}
+	$data = json_decode(file_get_contents($path), true);
+	if (!is_array($data)) {
+		throw new RuntimeException('essential_data.json is not valid JSON');
+	}
+	if (!$includeGlobalTables) {
+		foreach (install_essential_data_global_table_keys() as $key) {
+			unset($data[$key]);
 		}
 	}
-	return false;
+	$json = json_encode($data);
+	if ($json === false) {
+		throw new RuntimeException('Failed to encode essential data');
+	}
+	[$locale, $language] = install_essential_data_locale_tokens();
+	$pattern_find    = ['si_', 'DOMAIN-ID', 'LOCALE', 'LANGUAGE'];
+	$pattern_replace = [TB_PREFIX, (string) $targetDomainId, $locale, $language];
+	$json = str_replace($pattern_find, $pattern_replace, $json);
+	$decoded = json_decode($json, true);
+	if (!is_array($decoded)) {
+		throw new RuntimeException('essential data replace produced invalid JSON');
+	}
+	$ij = new importjson();
+	return $ij->process($decoded);
+}
+
+/**
+ * Whether essential bootstrap rows exist for a domain (custom fields + preferences).
+ */
+function domainHasEssentialBootstrapData(int $domainId): bool {
+	if (!checkTableExists(TB_PREFIX . 'custom_fields') || !checkTableExists(TB_PREFIX . 'preferences')) {
+		return false;
+	}
+	try {
+		$sth = dbQuery(
+			'SELECT 1 FROM ' . TB_PREFIX . 'custom_fields WHERE domain_id = :d LIMIT 1',
+			':d',
+			$domainId
+		);
+		if (!$sth || !$sth->fetch()) {
+			return false;
+		}
+		$sth = dbQuery(
+			'SELECT 1 FROM ' . TB_PREFIX . 'preferences WHERE domain_id = :d LIMIT 1',
+			':d',
+			$domainId
+		);
+		return (bool) ($sth && $sth->fetch());
+	} catch (Exception $e) {
+		return false;
+	}
+}
+
+/**
+ * Whether essential data exists for the current (or given) domain.
+ *
+ * When the database has no recorded patches yet, behaviour matches a fresh
+ * database: we only look for bootstrap rows for the domain (not other domains).
+ *
+ * @param int|null $domainId Defaults to the authenticated session domain, or 1.
+ */
+function checkDataExists(?int $domainId = null): bool {
+	global $auth_session;
+	if ($domainId === null) {
+		$domainId = isset($auth_session->domain_id) ? (int) $auth_session->domain_id : 1;
+	}
+	return domainHasEssentialBootstrapData($domainId);
 }
 
 /**
@@ -2964,6 +3055,202 @@ function check_sql_patch($check_sql_patch_ref, $check_sql_patch_field) {
 }
 
 // ------------------------------------------------------------------------------
+/**
+ * SQL patch 338: add denormalised list columns to si_invoices (see invoice_denorm).
+ */
+function si_patch338_invoice_denorm_columns(): void {
+	global $db_server;
+	$t = TB_PREFIX . 'invoices';
+	if ($db_server === 'mysql') {
+		$defs = [
+			'denorm_invoice_total'           => 'DECIMAL(25,6) NOT NULL DEFAULT 0',
+			'denorm_amount_paid'             => 'DECIMAL(25,6) NOT NULL DEFAULT 0',
+			'denorm_amount_owing'            => 'DECIMAL(25,6) NOT NULL DEFAULT 0',
+			'denorm_biller_name'             => 'VARCHAR(255) NOT NULL DEFAULT \'\'',
+			'denorm_customer_name'           => 'VARCHAR(255) NOT NULL DEFAULT \'\'',
+			'denorm_index_name'              => 'VARCHAR(255) NOT NULL DEFAULT \'\'',
+			'denorm_preference_description'  => 'VARCHAR(255) NOT NULL DEFAULT \'\'',
+			'denorm_preference_status'       => 'SMALLINT NOT NULL DEFAULT 0',
+		];
+		$add = [];
+		foreach ($defs as $col => $def) {
+			if (!checkFieldExists($t, $col)) {
+				$add[] = 'ADD COLUMN `' . $col . '` ' . $def;
+			}
+		}
+		if ($add !== []) {
+			dbQuery('ALTER TABLE `' . $t . '` ' . implode(', ', $add));
+		}
+		return;
+	}
+	if ($db_server === 'pgsql') {
+		$defs = [
+			'denorm_invoice_total'           => 'NUMERIC(25,6) NOT NULL DEFAULT 0',
+			'denorm_amount_paid'              => 'NUMERIC(25,6) NOT NULL DEFAULT 0',
+			'denorm_amount_owing'             => 'NUMERIC(25,6) NOT NULL DEFAULT 0',
+			'denorm_biller_name'             => 'VARCHAR(255) NOT NULL DEFAULT \'\'',
+			'denorm_customer_name'           => 'VARCHAR(255) NOT NULL DEFAULT \'\'',
+			'denorm_index_name'              => 'VARCHAR(255) NOT NULL DEFAULT \'\'',
+			'denorm_preference_description'  => 'VARCHAR(255) NOT NULL DEFAULT \'\'',
+			'denorm_preference_status'       => 'SMALLINT NOT NULL DEFAULT 0',
+		];
+		foreach ($defs as $col => $def) {
+			dbQuery("ALTER TABLE {$t} ADD COLUMN IF NOT EXISTS {$col} {$def}");
+		}
+		return;
+	}
+	$sqliteCols = [
+		'denorm_invoice_total'           => 'REAL NOT NULL DEFAULT 0',
+		'denorm_amount_paid'             => 'REAL NOT NULL DEFAULT 0',
+		'denorm_amount_owing'            => 'REAL NOT NULL DEFAULT 0',
+		'denorm_biller_name'             => 'TEXT NOT NULL DEFAULT \'\'',
+		'denorm_customer_name'           => 'TEXT NOT NULL DEFAULT \'\'',
+		'denorm_index_name'              => 'TEXT NOT NULL DEFAULT \'\'',
+		'denorm_preference_description'  => 'TEXT NOT NULL DEFAULT \'\'',
+		'denorm_preference_status'       => 'INTEGER NOT NULL DEFAULT 0',
+	];
+	foreach ($sqliteCols as $col => $def) {
+		if (!checkFieldExists($t, $col)) {
+			dbQuery("ALTER TABLE {$t} ADD COLUMN {$col} {$def}");
+		}
+	}
+}
+
+/**
+ * SQL patch 339: denormalised display strings on si_payment for the payments grid.
+ */
+function si_patch339_payment_denorm_columns(): void {
+	global $db_server;
+	$t = TB_PREFIX . 'payment';
+	if ($db_server === 'mysql') {
+		$defs = [
+			'denorm_invoice_index_name' => 'VARCHAR(255) NOT NULL DEFAULT \'\'',
+			'denorm_biller_name'         => 'VARCHAR(255) NOT NULL DEFAULT \'\'',
+			'denorm_customer_name'       => 'VARCHAR(255) NOT NULL DEFAULT \'\'',
+		];
+		$add = [];
+		foreach ($defs as $col => $def) {
+			if (!checkFieldExists($t, $col)) {
+				$add[] = 'ADD COLUMN `' . $col . '` ' . $def;
+			}
+		}
+		if ($add !== []) {
+			dbQuery('ALTER TABLE `' . $t . '` ' . implode(', ', $add));
+		}
+		return;
+	}
+	if ($db_server === 'pgsql') {
+		dbQuery("ALTER TABLE {$t} ADD COLUMN IF NOT EXISTS denorm_invoice_index_name VARCHAR(255) NOT NULL DEFAULT ''");
+		dbQuery("ALTER TABLE {$t} ADD COLUMN IF NOT EXISTS denorm_biller_name VARCHAR(255) NOT NULL DEFAULT ''");
+		dbQuery("ALTER TABLE {$t} ADD COLUMN IF NOT EXISTS denorm_customer_name VARCHAR(255) NOT NULL DEFAULT ''");
+		return;
+	}
+	$sqliteCols = [
+		'denorm_invoice_index_name' => 'TEXT NOT NULL DEFAULT \'\'',
+		'denorm_biller_name'         => 'TEXT NOT NULL DEFAULT \'\'',
+		'denorm_customer_name'       => 'TEXT NOT NULL DEFAULT \'\'',
+	];
+	foreach ($sqliteCols as $col => $def) {
+		if (!checkFieldExists($t, $col)) {
+			dbQuery("ALTER TABLE {$t} ADD COLUMN {$col} {$def}");
+		}
+	}
+}
+
+/**
+ * SQL patch 340: populate denormalised columns for all invoices (all domains).
+ */
+function si_patch340_backfill_invoice_denorm(): void {
+	$sth = dbQuery('SELECT DISTINCT domain_id FROM ' . TB_PREFIX . 'invoices');
+	$domains = $sth->fetchAll(PDO::FETCH_COLUMN, 0);
+	foreach ($domains as $did) {
+		invoice_denorm::rebuildDomain((int) $did);
+	}
+}
+
+/**
+ * SQL patch 341: secondary indexes on si_invoices for domain-scoped lists, charts,
+ * and filters that use denorm_* (manage grid sort, customer/biller scoping, owing buckets).
+ */
+function si_patch341_invoice_denorm_indexes(): void {
+	global $db_server;
+	$t = TB_PREFIX . 'invoices';
+	if ($db_server === 'mysql') {
+		$indexes = [
+			'si_inv_dom_cust'       => '(`domain_id`, `customer_id`)',
+			'si_inv_dom_biller'     => '(`domain_id`, `biller_id`)',
+			'si_inv_dom_idxid'      => '(`domain_id`, `index_id`)',
+			'si_inv_dom_pstat_owing' => '(`domain_id`, `denorm_preference_status`, `denorm_amount_owing`)',
+		];
+		foreach ($indexes as $name => $cols) {
+			if (! checkMysqlIndexExists($t, $name)) {
+				dbQuery("ALTER TABLE `{$t}` ADD KEY `{$name}` {$cols}");
+			}
+		}
+		return;
+	}
+	if ($db_server === 'pgsql') {
+		$stmts = [
+			"CREATE INDEX IF NOT EXISTS si_inv_dom_cust ON {$t} (domain_id, customer_id)",
+			"CREATE INDEX IF NOT EXISTS si_inv_dom_biller ON {$t} (domain_id, biller_id)",
+			"CREATE INDEX IF NOT EXISTS si_inv_dom_idxid ON {$t} (domain_id, index_id)",
+			"CREATE INDEX IF NOT EXISTS si_inv_dom_pstat_owing ON {$t} (domain_id, denorm_preference_status, denorm_amount_owing)",
+		];
+		foreach ($stmts as $sql) {
+			dbQuery($sql);
+		}
+		return;
+	}
+	$stmts = [
+		"CREATE INDEX IF NOT EXISTS si_inv_dom_cust ON {$t} (domain_id, customer_id)",
+		"CREATE INDEX IF NOT EXISTS si_inv_dom_biller ON {$t} (domain_id, biller_id)",
+		"CREATE INDEX IF NOT EXISTS si_inv_dom_idxid ON {$t} (domain_id, index_id)",
+		"CREATE INDEX IF NOT EXISTS si_inv_dom_pstat_owing ON {$t} (domain_id, denorm_preference_status, denorm_amount_owing)",
+	];
+	foreach ($stmts as $sql) {
+		dbQuery($sql);
+	}
+}
+
+// ------------------------------------------------------------------------------
+/**
+ * SQLite cannot DROP the table-level UNIQUE(email) via a portable one-liner.
+ * Rebuild si_user without that constraint, preserving data and auth columns.
+ */
+function si_sqlite_patch335_rebuild_si_user(): void {
+	global $dbh;
+	$t    = TB_PREFIX . 'user';
+	$tmp  = $t . '__si_auth_rebuild';
+	$sqls = array(
+		"CREATE TABLE {$tmp} (
+			id INTEGER PRIMARY KEY AUTOINCREMENT,
+			email TEXT DEFAULT NULL,
+			name TEXT DEFAULT NULL,
+			role_id INTEGER DEFAULT NULL,
+			domain_id INTEGER NOT NULL DEFAULT 0,
+			password TEXT DEFAULT NULL,
+			enabled INTEGER NOT NULL DEFAULT 1,
+			user_id INTEGER NOT NULL DEFAULT 0,
+			auth_staff_email TEXT DEFAULT NULL,
+			auth_customer_key TEXT DEFAULT NULL
+		)",
+		"INSERT INTO {$tmp} SELECT id, email, name, role_id, domain_id, password, enabled, user_id, auth_staff_email, auth_customer_key FROM {$t}",
+		"DROP TABLE {$t}",
+		"ALTER TABLE {$tmp} RENAME TO {$t}",
+		'CREATE UNIQUE INDEX IF NOT EXISTS si_user_pk ON ' . $t . ' (domain_id, id)',
+	);
+	foreach ($sqls as $sql) {
+		$dbh->exec($sql);
+	}
+	$maxStmt = $dbh->query('SELECT COALESCE(MAX(id), 0) FROM ' . $t);
+	$max     = $maxStmt ? (int) $maxStmt->fetchColumn() : 0;
+	if ($max > 0) {
+		$dbh->exec("DELETE FROM sqlite_sequence WHERE name = " . $dbh->quote($t));
+		$dbh->exec('INSERT INTO sqlite_sequence (name, seq) VALUES (' . $dbh->quote($t) . ', ' . $max . ')');
+	}
+}
+
+// ------------------------------------------------------------------------------
 function run_sql_patch($id, $patch) {
 	global $dbh;
 	global $db_server;
@@ -2989,7 +3276,19 @@ function run_sql_patch($id, $patch) {
 
 		//patch hasn't been run
 		#so run the patch
-		dbQuery($patch['patch']);
+		if ((int) $id === 335 && $db_server === 'sqlite') {
+			si_sqlite_patch335_rebuild_si_user();
+		} elseif ((int) $id === 338) {
+			si_patch338_invoice_denorm_columns();
+		} elseif ((int) $id === 339) {
+			si_patch339_payment_denorm_columns();
+		} elseif ((int) $id === 340) {
+			si_patch340_backfill_invoice_denorm();
+		} elseif ((int) $id === 341) {
+			si_patch341_invoice_denorm_indexes();
+		} else {
+			dbQuery($patch['patch']);
+		}
 
 		$patch_row['id']		= $escaped_id;
 		$patch_row['name']		= $patch_name;

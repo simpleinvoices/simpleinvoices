@@ -195,35 +195,35 @@
                                         <label class="form-label fw-bold">
                                             {{ $LANG['wizard_business_name'] ?? '' }} <i class="ti ti-asterisk text-danger" style="font-size:.7rem"></i>
                                         </label>
-                                        <input type="text" name="name" class="form-control" placeholder="{{ $LANG['placeholder_biller_name_example'] ?? '' }}" required>
+                                        <input type="text" name="name" class="form-control" placeholder="{{ $wizard_sample_biller['name'] ?? '' }}" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">{{ $LANG['email'] ?? '' }}</label>
-                                        <input type="email" name="email" class="form-control" placeholder="{{ $LANG['placeholder_email_example'] ?? '' }}">
+                                        <input type="email" name="email" class="form-control" placeholder="{{ $wizard_sample_biller['email'] ?? '' }}">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">{{ $LANG['phone'] ?? '' }}</label>
-                                        <input type="text" name="phone" class="form-control" placeholder="{{ $LANG['placeholder_phone_example'] ?? '' }}">
+                                        <input type="text" name="phone" class="form-control" placeholder="{{ $wizard_sample_biller['phone'] ?? '' }}">
                                     </div>
                                     <div class="col-12">
                                         <label class="form-label">{{ $LANG['street'] ?? '' }}</label>
-                                        <input type="text" name="street_address" class="form-control" placeholder="{{ $LANG['placeholder_street_example'] ?? '' }}">
+                                        <input type="text" name="street_address" class="form-control" placeholder="{{ $wizard_sample_biller['street_address'] ?? '' }}">
                                     </div>
                                     <div class="col-md-5">
                                         <label class="form-label">{{ $LANG['city'] ?? '' }}</label>
-                                        <input type="text" name="city" class="form-control" placeholder="{{ $LANG['placeholder_city_example'] ?? '' }}">
+                                        <input type="text" name="city" class="form-control" placeholder="{{ $wizard_sample_biller['city'] ?? '' }}">
                                     </div>
                                     <div class="col-md-3">
                                         <label class="form-label">{{ $LANG['wizard_state_region'] ?? '' }}</label>
-                                        <input type="text" name="state" class="form-control" placeholder="{{ $LANG['placeholder_state_example'] ?? '' }}">
+                                        <input type="text" name="state" class="form-control" placeholder="{{ $wizard_sample_biller['state'] ?? '' }}">
                                     </div>
                                     <div class="col-md-4">
                                         <label class="form-label">{{ $LANG['postcode'] ?? '' }}</label>
-                                        <input type="text" name="zip_code" class="form-control" placeholder="{{ $LANG['placeholder_zip_example'] ?? '' }}">
+                                        <input type="text" name="zip_code" class="form-control" placeholder="{{ $wizard_sample_biller['zip_code'] ?? '' }}">
                                     </div>
                                     <div class="col-12">
                                         <label class="form-label">{{ $LANG['country'] ?? '' }}</label>
-                                        <input type="text" name="country" class="form-control" placeholder="{{ $LANG['placeholder_country_example'] ?? '' }}">
+                                        <input type="text" name="country" class="form-control" placeholder="{{ $wizard_sample_biller['country'] ?? '' }}">
                                     </div>
                                 </div>
                                 <div class="mt-4 d-flex justify-content-between align-items-center">
@@ -309,31 +309,31 @@
                                         <label class="form-label fw-bold">
                                             {{ $LANG['customer_name'] ?? '' }} <i class="ti ti-asterisk text-danger" style="font-size:.7rem"></i>
                                         </label>
-                                        <input type="text" name="name" class="form-control" placeholder="{{ $LANG['placeholder_customer_name_example'] ?? '' }}" required>
+                                        <input type="text" name="name" class="form-control" placeholder="{{ $wizard_sample_customer['name'] ?? '' }}" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">{{ $LANG['contact_person'] ?? '' }}</label>
-                                        <input type="text" name="attention" class="form-control" placeholder="{{ $LANG['placeholder_contact_person_example'] ?? '' }}">
+                                        <input type="text" name="attention" class="form-control" placeholder="{{ $wizard_sample_customer['attention'] ?? '' }}">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">{{ $LANG['customer_department'] ?? '' }}</label>
-                                        <input type="text" name="department" class="form-control" placeholder="{{ $LANG['placeholder_department_example'] ?? '' }}">
+                                        <input type="text" name="department" class="form-control" placeholder="{{ $wizard_sample_customer['department'] ?? '' }}">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">{{ $LANG['email'] ?? '' }}</label>
-                                        <input type="email" name="email" class="form-control" placeholder="{{ $LANG['placeholder_customer_email_example'] ?? '' }}">
+                                        <input type="email" name="email" class="form-control" placeholder="{{ $wizard_sample_customer['email'] ?? '' }}">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">{{ $LANG['phone'] ?? '' }}</label>
-                                        <input type="text" name="phone" class="form-control" placeholder="{{ $LANG['placeholder_phone_example'] ?? '' }}">
+                                        <input type="text" name="phone" class="form-control" placeholder="{{ $wizard_sample_customer['phone'] ?? '' }}">
                                     </div>
                                     <div class="col-12">
                                         <label class="form-label">{{ $LANG['street'] ?? '' }}</label>
-                                        <input type="text" name="street_address" class="form-control" placeholder="{{ $LANG['placeholder_street_business_example'] ?? '' }}">
+                                        <input type="text" name="street_address" class="form-control" placeholder="{{ $wizard_sample_customer['street_address'] ?? '' }}">
                                     </div>
                                     <div class="col-md-8">
                                         <label class="form-label">{{ $LANG['city'] ?? '' }}</label>
-                                        <input type="text" name="city" class="form-control" placeholder="{{ $LANG['placeholder_city_example'] ?? '' }}">
+                                        <input type="text" name="city" class="form-control" placeholder="{{ $wizard_sample_customer['city'] ?? '' }}">
                                     </div>
                                 </div>
                                 <div class="mt-4 d-flex justify-content-between align-items-center">
@@ -417,13 +417,13 @@
                                             {{ $LANG['description'] ?? '' }} <i class="ti ti-asterisk text-danger" style="font-size:.7rem"></i>
                                         </label>
                                         <input type="text" name="description" class="form-control"
-                                               placeholder="{{ $LANG['placeholder_product_description_example'] ?? '' }}" required>
+                                               placeholder="{{ $wizard_sample_product['description'] ?? '' }}" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">{{ $LANG['unit_price'] ?? '' }}</label>
                                         <div class="input-group">
                                             <span class="input-group-text">{{ $preference['pref_currency_sign'] ?? '$' }}</span>
-                                            <input type="text" name="unit_price" class="form-control" placeholder="{{ $LANG['placeholder_unit_price_example'] ?? '' }}">
+                                            <input type="text" name="unit_price" class="form-control" placeholder="{{ $wizard_sample_product['unit_price'] ?? '' }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">

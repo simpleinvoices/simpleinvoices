@@ -60,8 +60,9 @@ if($large_dataset == $LANG['enabled'])
   $invoice_count = $invoice_count['count'];
 } else {
   $sth = $invoice->select_all('', $dir, $rp, $page, $having);
-  $sth_count_rows = $invoice->select_all('count',$dir, $rp, $page, $having);
-  $invoice_count = count($sth_count_rows->fetchAll());
+  $sth_count_rows = $invoice->select_all('grid_total', $dir, $rp, $page, $having);
+  $cnt_row = $sth_count_rows->fetch(PDO::FETCH_ASSOC);
+  $invoice_count = (int) ($cnt_row['cnt'] ?? 0);
 }
 $invoices = $sth->fetchAll(PDO::FETCH_ASSOC);
 
