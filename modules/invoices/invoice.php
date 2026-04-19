@@ -41,6 +41,14 @@ if ($billers == null OR $customers == null OR $products == null)
 $defaults['biller'] = (isset($_GET['biller'])) ? $_GET['biller'] : $defaults['biller'];
 $defaults['customer'] = (isset($_GET['customer'])) ? $_GET['customer'] : $defaults['customer'];
 $defaults['preference'] = (isset($_GET['preference'])) ? $_GET['preference'] : $defaults['preference'];
+
+// When this domain has only one biller or customer, pre-select it for new invoices (unless overridden via URL).
+if (!isset($_GET['biller']) && is_array($billers) && count($billers) === 1) {
+	$defaults['biller'] = $billers[0]['id'];
+}
+if (!isset($_GET['customer']) && is_array($customers) && count($customers) === 1) {
+	$defaults['customer'] = $customers[0]['id'];
+}
 $defaultTax = getDefaultTax();
 $defaultPreference = getDefaultPreference();
 
@@ -85,7 +93,7 @@ $bladeView -> assign("preferences",$preferences);
 $bladeView -> assign("dynamic_line_items",$dynamic_line_items);
 $bladeView -> assign("show_custom_field",$show_custom_field);
 
-$bladeView -> assign("defaultCustomerID",$defaultCustomerID['id']);
+$bladeView -> assign("defaultCustomerID", $defaults['customer'] ?? '');
 $bladeView -> assign("defaults",$defaults);
 
 $bladeView -> assign('active_tab', '#money');

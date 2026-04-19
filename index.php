@@ -167,6 +167,27 @@ $bladeView->assign("module", $module);
 $bladeView->assign("view", $view);
 
 /*
+ * New workspace (domain > 1): skip the extra welcome-only install screen and open setup directly.
+ * Must run before any HTML output (see header below).
+ */
+if (
+	$module === 'install'
+	&& $view === 'index'
+	&& $install_tables_exists === true
+	&& (!isset($install_data_exists) || $install_data_exists === false)
+) {
+	$domainIdInstall = isset($auth_session->domain_id) ? (int) $auth_session->domain_id : 1;
+	if (
+		$domainIdInstall > 1
+		&& empty($_POST['op'])
+		&& (($_GET['step'] ?? '') !== 'setup')
+	) {
+		header('Location: ' . rtrim($siUrl, '/') . '/index.php?module=install&view=index&step=setup');
+		exit;
+	}
+}
+
+/*
 * Unlinked customer/biller check — show a friendly error if the logged-in
 * customer or biller account has no linked entity (user_id == 0).
 * Allow the logout route through so the user can still sign out.

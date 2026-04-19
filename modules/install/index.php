@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/../../include/install_workspace_bootstrap.php';
+
 global $db_server, $auth_session, $install_tables_exists, $install_data_exists;
 
 $menu = false;
@@ -10,39 +12,6 @@ $domainIdForInstall = isset($auth_session->domain_id) ? (int) $auth_session->dom
 $install_new_domain_bootstrap = ($install_tables_exists === true)
 	&& ($install_data_exists === false)
 	&& ($domainIdForInstall > 1);
-
-/**
- * Execute a multi-statement SQL file by splitting on semicolons.
- *
- * PDO::prepare() only handles a single statement, so passing an entire
- * structure.sql file in one call fails on PostgreSQL and SQLite (and is
- * unreliable on MySQL).  This function strips -- comments, splits on ';',
- * and calls dbQuery() for each individual statement.
- *
- * Returns true if all statements succeed (no exception thrown).
- */
-function install_execute_sql_file($sql_content) {
-    // Strip -- line comments and blank lines so we don't submit empty statements
-    $lines = explode("\n", $sql_content);
-    $cleaned = [];
-    foreach ($lines as $line) {
-        $trimmed = trim($line);
-        if ($trimmed === '' || str_starts_with($trimmed, '--') || str_starts_with($trimmed, '#')) {
-            continue;
-        }
-        $cleaned[] = $trimmed;
-    }
-
-    $statements = array_filter(
-        array_map('trim', explode(';', implode("\n", $cleaned))),
-        'strlen'
-    );
-
-    foreach ($statements as $stmt) {
-        dbQuery($stmt);
-    }
-    return true;
-}
 
 if (isset($_POST['op']) && $_POST['op'] === 'install_database') {
     global $auth_session;
@@ -118,12 +87,7 @@ if (isset($_POST['op']) && $_POST['op'] === 'install_database') {
     }
 }
 
-$install_welcome_step = $install_new_domain_bootstrap
-	&& (($_GET['step'] ?? '') !== 'setup')
-	&& empty($_POST['op']);
-
 $bladeView->assign('redirect_after_install', $redirect_after_install);
 $bladeView->assign('install_error', $install_error);
 $bladeView->assign('install_new_domain_bootstrap', $install_new_domain_bootstrap);
-$bladeView->assign('install_welcome_step', $install_welcome_step);
 ?>

@@ -69,6 +69,7 @@ php -r '
       "SI_DB_NAME" => "database.params.dbname",
       "SI_DB_PORT" => "database.params.port",
       "SI_AUTHENTICATION_ENABLED" => "authentication.enabled",
+      "SI_AUTHENTICATION_ALLOW_PUBLIC_DOMAIN_REGISTRATION" => "authentication.allow_public_domain_registration",
       "SI_AUTHENTICATION_HTTP" => "authentication.http",
       // Note: SI_EXPORT_SPREADSHEET, SI_EXPORT_WORDPROCESSOR, SI_EXPORT_PDF_*, SI_LOCAL_PRECISION,
       // and SI_CONFIRM_DELETE_LINE_ITEM are now managed via System Defaults (database).

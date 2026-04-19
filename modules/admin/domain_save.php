@@ -19,99 +19,18 @@ $error = null;
 if ($op === 'insert_domain') {
     requireCSRFProtection('domain_save');
 
-    require_once __DIR__ . '/../../include/auth/password.php';
+    require_once __DIR__ . '/../../include/auth/create_domain_administrator.php';
 
-    $name           = trim((string) ($_POST['name'] ?? ''));
-    $admin_email    = trim((string) ($_POST['admin_email'] ?? ''));
-    $admin_name     = trim((string) ($_POST['admin_name'] ?? ''));
+    $name           = (string) ($_POST['name'] ?? '');
+    $admin_email    = (string) ($_POST['admin_email'] ?? '');
+    $admin_name     = (string) ($_POST['admin_name'] ?? '');
     $admin_password = (string) ($_POST['admin_password'] ?? '');
 
-    if ($name === '') {
-        $error = 'Domain name is required.';
-    } elseif (!preg_match('/^[a-zA-Z0-9_-]+$/', $name)) {
-        $error = 'Domain name may only contain letters, numbers, hyphens and underscores.';
-    } elseif ($admin_email === '') {
-        $error = 'Domain administrator email is required.';
-    } elseif (!filter_var($admin_email, FILTER_VALIDATE_EMAIL)) {
-        $error = 'Please enter a valid email address for the domain administrator.';
-    } elseif ($admin_password === '') {
-        $error = 'Domain administrator password is required.';
-    } elseif (strlen($admin_password) < 4) {
-        $error = 'Domain administrator password must be at least 4 characters.';
+    $result = auth_try_create_domain_with_administrator($name, $admin_email, $admin_name, $admin_password);
+    if ($result['success']) {
+        $saved = true;
     } else {
-        $role_sth = dbQuery(
-            "SELECT id FROM " . TB_PREFIX . "user_role WHERE name = 'domain_administrator' LIMIT 1"
-        );
-        $role_row = $role_sth ? $role_sth->fetch(PDO::FETCH_ASSOC) : false;
-        $role_id  = (int) ($role_row['id'] ?? 0);
-        if ($role_id < 1) {
-            $error = 'Could not create domain — the domain_administrator role is missing from the database.';
-        } else {
-            global $dbh;
-            $password_hash = auth_hash_password($admin_password);
-            $tx_ok          = false;
-            try {
-                $dbh->beginTransaction();
-
-                dbQuery(
-                    "INSERT INTO " . TB_PREFIX . "user_domain (name) VALUES (:name)",
-                    ':name', $name
-                );
-                $new_domain_id = (int) lastInsertId();
-                $domain_row     = $new_domain_id > 0
-                    ? dbQuery(
-                        "SELECT id FROM " . TB_PREFIX . "user_domain WHERE id = :id AND name = :name LIMIT 1",
-                        ':id', $new_domain_id,
-                        ':name', $name
-                    )->fetch(PDO::FETCH_ASSOC)
-                    : false;
-                if (!$domain_row) {
-                    throw new RuntimeException('domain_insert');
-                }
-
-                list($authStaffEmail, $authCustomerKey) = auth_identity_columns_for_role(
-                    $role_id,
-                    $new_domain_id,
-                    $admin_email
-                );
-                dbQuery(
-                    "INSERT INTO " . TB_PREFIX . "user
-                     (email, name, password, role_id, domain_id, enabled, user_id, auth_staff_email, auth_customer_key)
-                     VALUES (:email, :name, :password, :role_id, :domain_id, 1, 0, :auth_staff_email, :auth_customer_key)",
-                    ':email',     $admin_email,
-                    ':name',      $admin_name !== '' ? $admin_name : null,
-                    ':password',  $password_hash,
-                    ':role_id',   $role_id,
-                    ':domain_id', $new_domain_id,
-                    ':auth_staff_email', $authStaffEmail,
-                    ':auth_customer_key', $authCustomerKey
-                );
-
-                $user_check = dbQuery(
-                    "SELECT id FROM " . TB_PREFIX . "user
-                     WHERE domain_id = :domain_id AND email = :email LIMIT 1",
-                    ':domain_id', $new_domain_id,
-                    ':email',     $admin_email
-                );
-                if (!$user_check || !$user_check->fetch(PDO::FETCH_ASSOC)) {
-                    throw new RuntimeException('user_insert');
-                }
-
-                $dbh->commit();
-                $tx_ok = true;
-            } catch (Throwable $e) {
-                if ($dbh->inTransaction()) {
-                    $dbh->rollBack();
-                }
-                $tx_ok = false;
-            }
-
-            if ($tx_ok) {
-                $saved = true;
-            } elseif ($error === null) {
-                $error = 'Could not create the domain and administrator account — the domain name or email may already be in use.';
-            }
-        }
+        $error = $result['error'];
     }
 }
 

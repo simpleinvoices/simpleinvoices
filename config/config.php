@@ -13,6 +13,8 @@ database.params.dbname              = simple_invoices
 database.params.port                = 3306
 
 authentication.enabled              = true
+; When true, the staff login page shows Register and anyone can create a new organisation (domain) and domain admin. Set false in production unless you intend open signup. Overridable via SI_AUTHENTICATION_ALLOW_PUBLIC_DOMAIN_REGISTRATION in Docker.
+authentication.allow_public_domain_registration = false
 authentication.http                 = 
 
 local.locale                        = en_GB

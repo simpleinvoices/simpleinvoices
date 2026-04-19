@@ -13,10 +13,8 @@
 		<h3 class="card-title">
 			@if(!empty($redirect_after_install))
 				<i class="ti ti-circle-check me-2"></i>{{ $LANG['setup_complete'] ?? '' }}
-			@elseif(!empty($install_welcome_step))
-				<i class="ti ti-hand-friend me-2"></i>{{ $LANG['install_new_domain_welcome_title'] ?? '' }}
 			@elseif(!empty($install_new_domain_bootstrap))
-				<i class="ti ti-settings me-2"></i>{{ $LANG['install_new_domain_setup_title'] ?? '' }}
+				<i class="ti ti-hand-friend me-2"></i>{{ $LANG['install_new_domain_welcome_title'] ?? '' }}
 			@else
 				<i class="ti ti-database me-2"></i>{{ $LANG['setup_database'] ?? '' }}
 			@endif
@@ -25,13 +23,11 @@
 	<div class="card-body">
 		@if(!empty($redirect_after_install))
 			<p class="text-secondary mb-0">{{ !empty($install_new_domain_bootstrap) ? ($LANG['install_new_domain_done'] ?? '') : ($LANG['install_setup_done'] ?? '') }}</p>
-		@elseif(!empty($install_welcome_step))
-			<p class="text-secondary mb-4">{{ $LANG['install_new_domain_welcome_body'] ?? '' }}</p>
-			<a href="./index.php?module=install&amp;view=index&amp;step=setup" class="btn btn-primary">
-				<i class="ti ti-arrow-right me-1"></i>{{ $LANG['install_new_domain_continue'] ?? '' }}
-			</a>
 		@elseif(!empty($install_new_domain_bootstrap))
-			<p class="text-secondary mb-4">{{ $LANG['install_new_domain_setup_intro'] ?? '' }}</p>
+			<div class="text-center px-xl-4 pb-1">
+				<span class="avatar avatar-xl bg-primary-lt text-primary mb-3"><i class="ti ti-sparkles fs-1"></i></span>
+				<p class="text-secondary mb-4 mx-auto" style="max-width: 34rem;">{{ $LANG['install_new_domain_combined_intro'] ?? $LANG['install_new_domain_welcome_body'] ?? '' }}</p>
+			</div>
 			@if(!empty($install_error))
 				<div class="alert alert-danger mb-4">
 					{{ $LANG['sample_data_error_msg'] ?? '' }}
@@ -39,9 +35,14 @@
 			@endif
 			<form method="post" action="./index.php?module=install&amp;view=index&amp;step=setup" class="mt-0">
 				<input type="hidden" name="op" value="install_database" />
-				<button type="submit" class="btn btn-primary">
-					<i class="ti ti-check me-1"></i>{{ $LANG['install_new_domain_complete_setup'] ?? '' }}
-				</button>
+				<div class="d-grid gap-2 col-md-8 col-lg-6 mx-auto">
+					<button type="submit" class="btn btn-primary btn-lg" autofocus>
+						<i class="ti ti-check me-1"></i>{{ $LANG['install_new_domain_complete_setup'] ?? '' }}
+					</button>
+					@if(!empty($LANG['install_new_domain_then_wizard']))
+						<p class="text-secondary text-center small mb-0">{{ $LANG['install_new_domain_then_wizard'] }}</p>
+					@endif
+				</div>
 			</form>
 		@else
 		<p class="text-secondary mb-4">{{ $LANG['install_intro'] ?? '' }}</p>
