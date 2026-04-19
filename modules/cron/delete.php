@@ -3,7 +3,7 @@
 checkLogin();
 
 	$sql = "DELETE FROM ".TB_PREFIX."cron WHERE id = :id AND domain_id = :domain_id";
-	$sth = dbQuery($sql, ':id', $_GET['id'], ':domain_id',domain_id::get()) 
+	$sth = dbQuery($sql, ':id', (int)$_GET['id'], ':domain_id',domain_id::get()) 
 		or die(htmlsafe(end($dbh->errorInfo())));
 	$saved = !empty($sth) ? "true" : "false";
 

@@ -168,16 +168,21 @@
 			</div>
 		</div>
 	</div>
+	@php $isCustomerPortal = (($_SESSION['SI_Auth']['role_name'] ?? '') === 'customer'); @endphp
 	<div class="card-footer">
 		<div class="d-flex align-items-center flex-wrap gap-2">
+			@if(!$isCustomerPortal)
 			<a href="./index.php?module=customers&amp;view=manage" class="btn btn-link">{{ $LANG['cancel'] ?? '' }}</a>
+			@endif
 			<div class="ms-auto d-flex flex-wrap gap-2">
-				@if(!empty($showCustomerPortalLink) && !empty($customerPortalUrl))
+				@if(!empty($showCustomerPortalLink) && !empty($customerPortalUrl) && !$isCustomerPortal)
 				<a href="{{ $customerPortalUrl }}" target="_blank" rel="noopener" class="btn btn-outline-secondary">
 					<i class="ti ti-login me-1"></i>Customer portal
 				</a>
 				@endif
+				@if(!$isCustomerPortal)
 				<a href="./index.php?module=customers&amp;view=details&amp;id={{ urlencode($customer['id'] ?? '') }}&amp;action=edit" class="btn btn-primary"><i class="ti ti-edit me-1"></i>{{ $LANG['edit'] ?? '' }}</a>
+				@endif
 			</div>
 		</div>
 	</div>

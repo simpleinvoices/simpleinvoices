@@ -19,7 +19,7 @@
 checkLogin();
 
 #get the invoice id
-$invoice_id = $_GET['id'];
+$invoice_id = (int)$_GET['id'];
 $invoice = getInvoice($invoice_id);
 si_check_invoice_access($invoice);
 $preference = getPreference($invoice['preference_id']);

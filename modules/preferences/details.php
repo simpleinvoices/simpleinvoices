@@ -8,9 +8,10 @@ if ($_POST['p_description'] != "" ) {
 }
 
 #get the invoice id
-$preference_id = $_GET['id'];
+$preference_id = (int)$_GET['id'];
 
 $preference = getPreference($preference_id);
+si_check_record_access($preference);
 $index_group = getPreference($preference['index_group']);
 
 $preferences = getActivePreferences();

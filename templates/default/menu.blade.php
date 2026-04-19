@@ -406,13 +406,17 @@
                         <a href="index.php?module=invoices&view=manage" class="btn btn-outline-secondary">
                             <i class="ti ti-list me-1"></i>{{ $LANG['manage_invoices'] ?? 'Manage Invoices' }}
                         </a>
+                        @if(!$isCustomerRole)
                         <a href="index.php?module=invoices&view=itemised" class="btn btn-primary">
                             <i class="ti ti-plus me-1"></i>{{ $LANG['new_invoice'] ?? '' }}
                         </a>
+                        @endif
                     @elseif(($module ?? '') == 'invoices' && ($view ?? '') == 'manage')
+                        @if(!$isCustomerRole)
                         <a href="index.php?module=invoices&view=itemised" class="btn btn-primary">
                             <i class="ti ti-plus me-1"></i>{{ $LANG['new_invoice'] ?? '' }}
                         </a>
+                        @endif
                     @elseif(($module ?? '') == 'customers' && ($view ?? '') == 'manage')
                         <a href="index.php?module=customers&view=add" class="btn btn-primary">
                             <i class="ti ti-plus me-1"></i>{{ $LANG['customer_add'] ?? '' }}
@@ -502,9 +506,11 @@
                         <a href="index.php?module=invoices&view=manage" class="btn btn-outline-secondary">
                             <i class="ti ti-arrow-left me-1"></i>{{ $LANG['manage_invoices'] ?? 'Manage Invoices' }}
                         </a>
+                        @if(!$isCustomerRole)
                         <a href="index.php?module=invoices&view=itemised" class="btn btn-primary">
                             <i class="ti ti-plus me-1"></i>{{ $LANG['new_invoice'] ?? 'New Invoice' }}
                         </a>
+                        @endif
                     @elseif(($module ?? '') == 'reports' && ($view ?? '') != 'index')
                         <a href="index.php?module=reports&view=index" class="btn btn-outline-secondary">
                             <i class="ti ti-arrow-left me-1"></i>{{ $LANG['all_reports'] ?? '' }}
@@ -536,6 +542,9 @@
                                     'user' => ['url' => 'index.php?module=user&view=manage', 'label' => $LANG['manage_accounts'] ?? ''],
                                 ];
                                 $back = $back_config[$module ?? ''] ?? null;
+                                if ($isCustomerRole && ($module ?? '') === 'customers') {
+                                    $back = null;
+                                }
                             }
                         @endphp
                         @if(!empty($back))

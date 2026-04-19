@@ -161,11 +161,11 @@ else if (  $op === 'edit_preference' ) {
           	  ':language', $_POST['language'],
 		  ':index_group', $_POST['index_group'],
 		  ':include_online_payment', $include_online_payment,
-		  ':id', $_GET['id'],
+		  ':id', (int)$_GET['id'],
 		  ':domain_id', $auth_session->domain_id))
 	    {
 			$saved =true;
-			invoice_denorm::refreshAllForPreference((int) $_GET['id'], $auth_session->domain_id);
+			invoice_denorm::refreshAllForPreference((int)$_GET['id'], $auth_session->domain_id);
 		//	$display_block = $LANG['save_preference_success'];
 		} else {
 			$saved = false;

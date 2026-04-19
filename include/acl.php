@@ -114,6 +114,7 @@ $acl->allow(null, 'api');
 $acl->allow(null, 'payments', 'ach');
 $acl->allow(null, 'invoices');
 $acl->allow('customer', 'customers', 'view');
+$acl->allow('customer', 'export', 'invoice');
 $acl->allow('domain_administrator');
 $acl->allow('administrator');
 $acl->allow('user');

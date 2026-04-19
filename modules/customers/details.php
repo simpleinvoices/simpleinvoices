@@ -24,11 +24,17 @@ global $auth_session, $config;
 #get the customer id
 $customer_id = (int)$_GET['id']; // Cast to integer to prevent SQL injection
 $customer = getCustomer($customer_id);
+si_check_record_access($customer);
 $customer['wording_for_enabled'] = $customer['enabled']==1?$LANG['enabled']:$LANG['disabled'];
 
 $portalDomainId = (int) ($customer['domain_id'] ?? domain_id::get());
-$siBase           = rtrim(str_replace('\\', '', dirname($_SERVER['PHP_SELF'])), '/');
-$customerPortalUrl = $siBase . '/index.php?module=auth&view=customer_login&domain_id=' . $portalDomainId;
+$siBase = rtrim(str_replace('\\', '', dirname($_SERVER['PHP_SELF'])), '/');
+$portalDomainRow = dbQuery(
+    "SELECT name FROM " . TB_PREFIX . "user_domain WHERE id = :id LIMIT 1",
+    ':id', $portalDomainId
+)->fetch(PDO::FETCH_ASSOC);
+$portalDomainSlug  = $portalDomainRow ? (string) $portalDomainRow['name'] : '';
+$customerPortalUrl = $siBase . '/index.php?module=auth&view=customer_login&domain=' . rawurlencode($portalDomainSlug);
 $showCustomerPortalLink = ((int) ($config->authentication->enabled ?? 0)) === 1
     && ($auth_session->role_name ?? '') !== 'customer';
 $bladeView->assign('customerPortalUrl', $customerPortalUrl);

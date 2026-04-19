@@ -7,7 +7,7 @@ if ($_POST['op'] =='edit' AND !empty($_POST['product_id']))
     $saved = "false";
 
 	$inventory = new inventory();
-	$inventory->id=$_GET['id'];
+	$inventory->id=(int)$_GET['id'];
 	$inventory->domain_id=domain_id::get();
 	$inventory->product_id=$_POST['product_id'];
 	$inventory->quantity=$_POST['quantity'];
@@ -24,8 +24,9 @@ $invoices->sort='id';
 $invoice_all = $invoices->select_all('count');
 
 $get_inventory = new inventory();
-$get_inventory->id = $_GET['id'];
+$get_inventory->id = (int)$_GET['id'];
 $inventory = $get_inventory->select();
+si_check_record_access($inventory);
 
 $productobj = new product();
 $product_all = $productobj->get_all();

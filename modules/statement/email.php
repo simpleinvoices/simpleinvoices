@@ -26,8 +26,10 @@ $get_format = $_GET['format'];
 $get_file_type = $_GET['filetype'];
 
 
-$biller = getBiller($_GET['biller_id']);
-$customer = getCustomer($_GET['customer_id']);
+$biller = getBiller((int)$_GET['biller_id']);
+$customer = getCustomer((int)$_GET['customer_id']);
+si_check_record_access($biller);
+si_check_record_access($customer);
 
 #create PDF name
       

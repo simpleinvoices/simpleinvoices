@@ -21,9 +21,10 @@
 checkLogin();
 
 #get the invoice id
-$biller_id = $_GET['id'];
+$biller_id = (int)$_GET['id'];
 
 $biller = getBiller($biller_id);
+si_check_record_access($biller);
 
 /*drop down list code for invoice logo */
 

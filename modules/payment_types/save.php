@@ -60,7 +60,7 @@ else if (  $op === 'edit_payment_type' ) {
 				pt_id = :id
 			AND domain_id = :domain_id";
 
-		if (dbQuery($sql, ':description', $_POST['pt_description'], ':enabled', $_POST['pt_enabled'], ':id', $_GET['id'], ':domain_id', $auth_session->domain_id)) {
+		if (dbQuery($sql, ':description', $_POST['pt_description'], ':enabled', $_POST['pt_enabled'], ':id', (int)$_GET['id'], ':domain_id', $auth_session->domain_id)) {
 			$saved = true;
 			//$display_block = $LANG['save_payment_type_success'];
 		} else {

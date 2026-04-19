@@ -20,8 +20,9 @@ if ($_POST['op'] =='edit' AND !empty($_POST['invoice_id']))
 //$invoice_all = $invoiceobj->get_all();
 
 $get_cron = new cron();
-$get_cron->id = $_GET['id'];
+$get_cron->id = (int)$_GET['id'];
 $cron = $get_cron->select();
+si_check_record_access($cron);
 
 //$bladeView -> assign('invoice_all',$invoice_all);
 $bladeView -> assign('saved',$saved);

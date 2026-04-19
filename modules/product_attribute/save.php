@@ -65,7 +65,7 @@ else if (  $op === 'edit_product_attribute' ) {
 		  ':type_id', $_POST['type_id'],
 		  ':enabled', $_POST['enabled'],
 		  ':visible', $_POST['visible'],
-		  ':id', $_GET['id'],
+		  ':id', (int)$_GET['id'],
 		  ':domain_id', $domain_id))
 	    {
 			$saved = true;

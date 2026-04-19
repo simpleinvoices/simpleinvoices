@@ -1,6 +1,16 @@
 {{-- Domain Admin: add customer or biller login account --}}
 @php $presetRole = post('role_key') ?: get('role') ?: 'customer'; @endphp
 
+@if($saved ?? false)
+<meta http-equiv="refresh" content="2;URL=index.php?module=domain_admin&amp;view=users" />
+<div class="alert alert-success">
+    <i class="ti ti-check me-1"></i>Account created successfully.
+</div>
+<a href="index.php?module=domain_admin&view=users" class="btn btn-outline-primary">
+    <i class="ti ti-users me-1"></i>Login Accounts
+</a>
+@else
+
 @if(!empty($saveError))
 <div class="alert alert-danger mb-3">
     <i class="ti ti-alert-circle me-1"></i>{{ $saveError }}
@@ -153,3 +163,5 @@ function toggleLinkedDropdown(role) {
 // Sync on page load so the hidden field has a value from the start
 document.addEventListener('DOMContentLoaded', syncLinkedId);
 </script>
+
+@endif

@@ -65,8 +65,13 @@ $sth = dbQuery(
 );
 $unlinkedBillers = (int) ($sth->fetch(PDO::FETCH_ASSOC)['cnt'] ?? 0);
 
-$siBase            = rtrim(str_replace('\\', '', dirname($_SERVER['PHP_SELF'])), '/');
-$customerPortalUrl = $siBase . '/index.php?module=auth&view=customer_login&domain_id=' . $domain_id;
+$siBase = rtrim(str_replace('\\', '', dirname($_SERVER['PHP_SELF'])), '/');
+$domainRow = dbQuery(
+    "SELECT name FROM " . TB_PREFIX . "user_domain WHERE id = :id LIMIT 1",
+    ':id', $domain_id
+)->fetch(PDO::FETCH_ASSOC);
+$domainSlug        = $domainRow ? (string) $domainRow['name'] : '';
+$customerPortalUrl = $siBase . '/index.php?module=auth&view=customer_login&domain=' . rawurlencode($domainSlug);
 
 $bladeView->assign('customerUserCount', $customerUserCount);
 $bladeView->assign('billerUserCount', $billerUserCount);

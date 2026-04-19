@@ -21,9 +21,10 @@
 checkLogin();
 
 #get the invoice id
-$id = $_GET['id'];
+$id = (int)$_GET['id'];
 
 $user = user::getUser($id);
+si_check_record_access($user);
 $roles = user::getUserRoles();
 
 $saveReturnModule = '';

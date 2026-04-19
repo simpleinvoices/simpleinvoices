@@ -12,7 +12,8 @@ jsFormValidationEnd();
 jsEnd();
 /*end validation code*/
 
-$payment = getPayment($_GET['id']);
+$payment = getPayment((int)$_GET['id']);
+si_check_record_access($payment);
 
 /*Code to get the Invoice preference - so can link from this screen back to the invoice - START */
 $invoice = getInvoice($payment['ac_inv_id']);

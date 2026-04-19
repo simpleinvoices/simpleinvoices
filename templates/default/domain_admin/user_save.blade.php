@@ -11,6 +11,7 @@
     </a>
 @elseif($saved ?? false)
     {{-- Success redirects from user_save.php --}}
+    <meta http-equiv="refresh" content="2;URL=index.php?module=domain_admin&amp;view=users" />
     <div class="alert alert-success">
         <i class="ti ti-check me-1"></i>Account saved successfully.
     </div>

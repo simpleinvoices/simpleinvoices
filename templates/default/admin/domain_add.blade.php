@@ -11,9 +11,14 @@
                 <i class="ti ti-asterisk text-danger" style="font-size:.7rem;"></i>
             </label>
             <input type="text" name="name" value="{{ post('name') }}" class="form-control"
-                   placeholder="e.g. acme-corp" required autocomplete="off" />
-            <div class="invalid-feedback">Domain name is required.</div>
-            <div class="form-hint">Must be unique. Used to isolate tenant data.</div>
+                   placeholder="e.g. acme-corp" required autocomplete="off"
+                   pattern="[a-zA-Z0-9_\-]+"
+                   oninput="this.value=this.value.replace(/[^a-zA-Z0-9_\-]/g,'')" />
+            <div class="invalid-feedback">Only letters, numbers, hyphens and underscores are allowed.</div>
+            <div class="form-hint">
+                Only letters, numbers, <code>-</code> and <code>_</code> — no spaces or special characters.<br>
+                This name is used as the login portal identifier, e.g. the custom login page URL for this domain's users.
+            </div>
         </div>
         <hr class="my-4" />
         <h6 class="text-muted mb-3">Domain administrator</h6>

@@ -8,13 +8,14 @@ if ($_POST['value'] != "" ) {
 }
 
 #get the id
-$id = $_GET['id'];
+$id = (int)$_GET['id'];
 
 $domain_id = domain_id::get();
 
 $sql = "SELECT * FROM ".TB_PREFIX."products_values WHERE id = :id AND domain_id = :domain_id";
 $sth = dbQuery($sql, ':id', $id, ':domain_id', $domain_id);
 $product_value = $sth->fetch();
+si_check_record_access($product_value);
 $bladeView -> assign("product_value", $product_value);
 
 $sql_attr_sel = "SELECT * FROM ".TB_PREFIX."products_attributes WHERE id = :id AND domain_id = :domain_id";

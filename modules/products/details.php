@@ -3,9 +3,10 @@
 checkLogin();
 
 #get the invoice id
-$product_id = $_GET['id'];
+$product_id = (int)$_GET['id'];
 
 $product = getProduct($product_id);
+si_check_record_access($product);
 
 #get custom field labels
 $customFieldLabel = getCustomFieldLabels();

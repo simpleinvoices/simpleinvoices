@@ -83,8 +83,10 @@ if (isset($_POST['submit']))
 $billers = getActiveBillers();
 $customers = getActiveCustomers();
 
-$biller_details = getBiller($biller_id);
-$customer_details = getCustomer($customer_id);
+$biller_details = $biller_id ? getBiller((int)$biller_id) : [];
+$customer_details = $customer_id ? getCustomer((int)$customer_id) : [];
+if ($biller_id && empty($biller_details)) si_check_record_access(false);
+if ($customer_id && empty($customer_details)) si_check_record_access(false);
 $bladeView -> assign('biller_id', $biller_id);
 $bladeView -> assign('biller_details', $biller_details);
 $bladeView -> assign('customer_id', $customer_id);

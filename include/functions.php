@@ -21,12 +21,30 @@ function checkLogin() {
 }
 
 /**
- * Deny access if the logged-in user is a customer or biller who does not own
- * the given invoice.  No-op for administrators and when auth is disabled.
+ * Abort with 403 if a record returned by a get*() function is empty (not found
+ * or belongs to a different domain_id).  All get*() functions already filter by
+ * the session domain_id in their WHERE clause, so an empty result means either
+ * the record does not exist or the caller tried to access another tenant's data.
  *
- * @param array $invoice  Row returned by getInvoice() / invoice::select()
+ * @param mixed  $record  Return value from getInvoice(), getCustomer(), etc.
  */
-function si_check_invoice_access(array $invoice) {
+function si_check_record_access($record): void {
+	global $LANG;
+	if (empty($record)) {
+		header('HTTP/1.1 403 Forbidden');
+		exit($LANG['denied_page'] ?? 'You are not allowed to view this page');
+	}
+}
+
+/**
+ * Deny access if the logged-in user is a customer or biller who does not own
+ * the given invoice.  Also aborts if the invoice record is empty (not found /
+ * wrong domain).  No-op for administrators and when auth is disabled.
+ *
+ * @param array|false $invoice  Row returned by getInvoice() / invoice::select()
+ */
+function si_check_invoice_access($invoice): void {
+	si_check_record_access($invoice);
 	global $auth_session;
 	if (!isset($auth_session) || !is_object($auth_session)) return;
 	$role = $auth_session->role_name ?? '';

@@ -7,30 +7,36 @@ require_once './include/auth/password.php';
 $siBase = rtrim(str_replace('\\', '', dirname($_SERVER['PHP_SELF'])), '/');
 $errorMessage = '';
 
-$portalDomainId = isset($_GET['domain_id']) ? (int) $_GET['domain_id'] : 0;
-if ($portalDomainId < 1 && isset($_POST['portal_domain_id'])) {
-    $portalDomainId = (int) $_POST['portal_domain_id'];
-}
+$portalDomainId = 0;
+$domainName     = '';
 
-$domainName = '';
-$resolvePortalDomain = static function (int $id): array {
+$resolveByName = static function (string $name): array {
+    if ($name === '') {
+        return [0, ''];
+    }
+    $dsth = dbQuery(
+        'SELECT id, name FROM ' . TB_PREFIX . 'user_domain WHERE name = :name LIMIT 1',
+        ':name', $name
+    );
+    $drow = $dsth ? $dsth->fetch(PDO::FETCH_ASSOC) : false;
+    return $drow ? [(int) $drow['id'], (string) $drow['name']] : [0, ''];
+};
+
+$resolveById = static function (int $id): array {
     if ($id < 1) {
         return [0, ''];
     }
     $dsth = dbQuery(
-        'SELECT name FROM ' . TB_PREFIX . 'user_domain WHERE id = :id LIMIT 1',
-        ':id',
-        $id
+        'SELECT id, name FROM ' . TB_PREFIX . 'user_domain WHERE id = :id LIMIT 1',
+        ':id', $id
     );
     $drow = $dsth ? $dsth->fetch(PDO::FETCH_ASSOC) : false;
-    if ($drow) {
-        return [$id, (string) $drow['name']];
-    }
-    return [0, ''];
+    return $drow ? [(int) $drow['id'], (string) $drow['name']] : [0, ''];
 };
 
-if ($portalDomainId > 0) {
-    list($portalDomainId, $domainName) = $resolvePortalDomain($portalDomainId);
+$domainSlug = isset($_GET['domain']) ? preg_replace('/[^a-zA-Z0-9_-]/', '', (string) $_GET['domain']) : '';
+if ($domainSlug !== '') {
+    list($portalDomainId, $domainName) = $resolveByName($domainSlug);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'customer_login') {
@@ -40,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'custo
     if ($sessionToken === '' || !hash_equals($sessionToken, $token)) {
         $errorMessage = $LANG['invalid_csrf'] ?? 'Invalid request. Please try again.';
     } else {
-        list($portalDomainId, $domainName) = $resolvePortalDomain($portalDomainId);
+        list($portalDomainId, $domainName) = $resolveById((int) ($_POST['portal_domain_id'] ?? 0));
     }
     if ($errorMessage === '' && $portalDomainId < 1) {
         $errorMessage = $LANG['invalid_login'] ?? 'Invalid email or password.';

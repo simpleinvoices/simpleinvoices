@@ -303,6 +303,7 @@ function getCustomer($id, $domain_id='') {
 function getBiller($id, $domain_id='') {
 	global $LANG;
 	$record = getGenericRecord('biller', $id, $domain_id);
+	if (!$record) return false;
 	$record['wording_for_enabled'] = $record['enabled']==1?$LANG['enabled']:$LANG['disabled'];
 	return $record;
 }
@@ -310,6 +311,7 @@ function getBiller($id, $domain_id='') {
 function getPreference($id, $domain_id='') {
 	global $LANG;
 	$record = getGenericRecord('preferences', $id, $domain_id, 'pref_id');
+	if (!$record) return false;
 	$record['status_wording'] = $record['status']==1?$LANG['real']:$LANG['draft'];
 	$record['enabled'] = $record['pref_enabled']==1?$LANG['enabled']:$LANG['disabled'];
 	return $record;
@@ -318,6 +320,7 @@ function getPreference($id, $domain_id='') {
 function getTaxRate($id, $domain_id='') {
 	global $LANG;
 	$record = getGenericRecord('tax', $id, $domain_id, 'tax_id');
+	if (!$record) return false;
 	$record['enabled'] = $record['tax_enabled'] == 1 ? $LANG['enabled']:$LANG['disabled'];
 	return $record;
 }
@@ -648,6 +651,7 @@ function getProduct($id, $domain_id='') {
 	$sql = "SELECT * FROM ".TB_PREFIX."products WHERE id = :id and domain_id = :domain_id";
 	$sth = dbQuery($sql, ':id', $id, ':domain_id', $domain_id);
 	$product = $sth->fetch();
+	if (!$product) return false;
 	$product['wording_for_enabled'] = $product['enabled']==1?$LANG['enabled']:$LANG['disabled'];
 	return $product;
 }
@@ -1036,6 +1040,8 @@ function getInvoice($id, $domain_id='') {
 	$sth  = dbQuery($sql, ':id', $id, ':domain_id', $domain_id);
 
 	$invoice = $sth->fetch();
+
+	if (!$invoice) return false;
 
 	$invoice['calc_date'] = date('Y-m-d', strtotime( $invoice['date'] ) );
 	$invoice['date'] = siLocal::date( $invoice['date'] );

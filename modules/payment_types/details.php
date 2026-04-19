@@ -12,9 +12,10 @@ jsEnd();
 
 
 #get the invoice id
-$payment_type_id = $_GET['id'];
+$payment_type_id = (int)$_GET['id'];
 
 $paymentType = getPaymentType($payment_type_id);
+si_check_record_access($paymentType);
 
 $bladeView->assign('paymentType',$paymentType);
 

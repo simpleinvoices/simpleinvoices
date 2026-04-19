@@ -211,6 +211,7 @@ EOD;
 			<option $selected value="{$tax['tax_id']}">$escaped</option>
 EOD;
 		}
+		$display_block_tax .= "</select>";
 	}
 
 	$description = "{$LANG['tax']}";
@@ -244,6 +245,7 @@ EOD;
 	                        $escaped</option>
 EOD;
 		}
+		$display_block_preferences .= "</select>";
 	}
 
 	$value = $display_block_preferences;
@@ -277,6 +279,7 @@ EOD;
                         $escaped</option>
 EOD;
 		}
+		$display_block_payment_type .= "</select>";
 	}
 
 	$description = "{$LANG['payment_type']}";

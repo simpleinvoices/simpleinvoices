@@ -15,9 +15,10 @@ jsEnd();
 
 
 #get the invoice id
-$tax_rate_id = $_GET['id'];
+$tax_rate_id = (int)$_GET['id'];
 
 $tax = getTaxRate($tax_rate_id);
+si_check_record_access($tax);
 $types = getTaxTypes();
 
 $bladeView -> assign("tax",$tax);

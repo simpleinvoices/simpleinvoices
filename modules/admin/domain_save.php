@@ -28,6 +28,8 @@ if ($op === 'insert_domain') {
 
     if ($name === '') {
         $error = 'Domain name is required.';
+    } elseif (!preg_match('/^[a-zA-Z0-9_-]+$/', $name)) {
+        $error = 'Domain name may only contain letters, numbers, hyphens and underscores.';
     } elseif ($admin_email === '') {
         $error = 'Domain administrator email is required.';
     } elseif (!filter_var($admin_email, FILTER_VALIDATE_EMAIL)) {
