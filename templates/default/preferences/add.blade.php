@@ -61,8 +61,8 @@
 						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_locale" title="{{ $LANG['locale'] ?? '' }}"><i class="ti ti-help"></i></a>
 					</label>
 					<select name="locale" class="form-select">
-						@foreach(($localelist ?? []) as $locale => $value)
-							<option @if($locale == $config->local->locale) selected @endif value="{{ $locale ?? '' }}">{{ $locale ?? '' }}</option>
+						@foreach(($localelist ?? []) as $localeCode)
+							<option @if((string) $localeCode === (string) ($defaultSystemLocale ?? 'en_GB')) selected @endif value="{{ $localeCode }}">{{ $localeCode }}</option>
 						@endforeach
 					</select>
 				</div>
@@ -77,13 +77,10 @@
 				</div>
 			</div>
 			<div id="pref-add-currency" class="tab-pane" role="tabpanel">
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['currency_sign'] ?? '' }}
-						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_currency_sign" title="{{ $LANG['currency_sign'] ?? '' }}"><i class="ti ti-help"></i></a>
-					</label>
-					<input type="text" name="p_currency_sign" value="{{ post('p_currency_sign') }}" class="form-control" />
-					<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_currency_sign" title="{{ $LANG['currency_sign'] ?? '' }}">{{ $LANG['currency_sign_non_dollar'] ?? '' }} <i class="ti ti-help"></i></a>
-				</div>
+				@include('templates.default.partials.currency_sign_field', [
+					'currencySignFieldName' => 'p_currency_sign',
+					'currencySignCurrentValue' => post('p_currency_sign'),
+				])
 				<div class="mb-3">
 					<label class="form-label">{{ $LANG['currency_code'] ?? '' }}
 						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_currency_code" title="{{ $LANG['currency_code'] ?? '' }}"><i class="ti ti-help"></i></a>
@@ -124,16 +121,40 @@
 					</label>
 					<div>
 						<div class="form-check form-check-inline">
-							<input type="checkbox" class="form-check-input" name="include_online_payment[]" value='paypal' id="iop_paypal" />
-							<label class="form-check-label" for="iop_paypal">{{ $LANG['paypal'] ?? '' }}</label>
+							<input type="checkbox" class="form-check-input" name="include_online_payment[]" value="stripe" id="iop_stripe" />
+							<label class="form-check-label" for="iop_stripe">Stripe</label>
 						</div>
 						<div class="form-check form-check-inline">
-							<input type="checkbox" class="form-check-input" name="include_online_payment[]" value='eway_merchant_xml' id="iop_eway" />
-							<label class="form-check-label" for="iop_eway">{{ $LANG['eway_merchant_xml'] ?? '' }}</label>
+							<input type="checkbox" class="form-check-input" name="include_online_payment[]" value="paypal_commerce" id="iop_paypal_commerce" />
+							<label class="form-check-label" for="iop_paypal_commerce">PayPal Commerce</label>
 						</div>
 						<div class="form-check form-check-inline">
-							<input type="checkbox" class="form-check-input" name="include_online_payment[]" value='paymentsgateway' id="iop_pg" />
-							<label class="form-check-label" for="iop_pg">{{ $LANG['paymentsgateway'] ?? '' }}</label>
+							<input type="checkbox" class="form-check-input" name="include_online_payment[]" value="mollie" id="iop_mollie" />
+							<label class="form-check-label" for="iop_mollie">Mollie</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input type="checkbox" class="form-check-input" name="include_online_payment[]" value="authorizenet" id="iop_authorizenet" />
+							<label class="form-check-label" for="iop_authorizenet">Authorize.net</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input type="checkbox" class="form-check-input" name="include_online_payment[]" value="eway_rapid" id="iop_eway_rapid" />
+							<label class="form-check-label" for="iop_eway_rapid">{{ $LANG['eway_rapid'] ?? 'eWay Rapid' }}</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input type="checkbox" class="form-check-input" name="include_online_payment[]" value="paymentsgateway_modern" id="iop_pg_modern" />
+							<label class="form-check-label" for="iop_pg_modern">{{ $LANG['paymentsgateway_modern'] ?? 'Payments Gateway' }}</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input type="checkbox" class="form-check-input" name="include_online_payment[]" value="kofi" id="iop_kofi" />
+							<label class="form-check-label" for="iop_kofi">Ko-fi</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input type="checkbox" class="form-check-input" name="include_online_payment[]" value="coinbase" id="iop_coinbase" />
+							<label class="form-check-label" for="iop_coinbase">{{ $LANG['coinbase_commerce'] ?? 'Coinbase Commerce' }}</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input type="checkbox" class="form-check-input" name="include_online_payment[]" value="adyen" id="iop_adyen" />
+							<label class="form-check-label" for="iop_adyen">Adyen</label>
 						</div>
 					</div>
 				</div>

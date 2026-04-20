@@ -6,6 +6,7 @@
     $hasTaxRates = isset($tax_rates) && is_array($tax_rates) && count($tax_rates) > 0;
     $hasPreferences = isset($preferences) && is_array($preferences) && count($preferences) > 0;
     $hasInvoices = isset($dash_has_invoices) ? (bool) $dash_has_invoices : (isset($latest_invoices) && is_array($latest_invoices) && count($latest_invoices) > 0);
+    $wizardCurrencyPrefDone = isset($wizard_currency_pref_done) ? (bool) $wizard_currency_pref_done : false;
     $firstRun = !$hasBillers || !$hasCustomers || !$hasProducts || !$hasInvoices;
 @endphp
 
@@ -13,8 +14,8 @@
 @php
     // Determine active wizard step — auto-advance to first incomplete step,
     // or honour an explicit ?wizard_step=N param from a redirect.
-    $wizardStep = isset($_GET['wizard_step']) ? max(1, min(4, (int)$_GET['wizard_step'])) : (
-        !$hasBillers ? 1 : (!$hasCustomers ? 2 : (!$hasProducts ? 3 : 4))
+    $wizardStep = isset($_GET['wizard_step']) ? max(1, min(5, (int)$_GET['wizard_step'])) : (
+        !$hasBillers ? 1 : (!$hasCustomers ? 2 : (!$hasProducts ? 3 : (!$wizardCurrencyPrefDone ? 4 : 5)))
     );
 @endphp
 <style>
@@ -63,7 +64,8 @@
                 1 => ['label' => $LANG['wizard_your_details'] ?? '', 'done' => $hasBillers],
                 2 => ['label' => $LANG['customer'] ?? '',                'done' => $hasCustomers],
                 3 => ['label' => $LANG['product'] ?? '',                  'done' => $hasProducts],
-                4 => ['label' => $LANG['invoice'] ?? '',                  'done' => $hasInvoices],
+                4 => ['label' => $LANG['wizard_invoice_preferences'] ?? '', 'done' => $wizardCurrencyPrefDone],
+                5 => ['label' => $LANG['invoice'] ?? '',                  'done' => $hasInvoices],
             ] as $s => $sc)
             @php
                 $sDone   = $sc['done'];
@@ -83,7 +85,7 @@
                     {{ $sc['label'] }}
                 </span>
             </div>
-            @if($s < 4)
+            @if($s < 5)
                 <div class="flex-grow-0 border-top @if($sDone) border-success @else border-secondary-subtle @endif"
                      style="width:30px;opacity:.5"></div>
             @endif
@@ -98,7 +100,8 @@
                 1 => ['icon' => 'ti-building-store', 'label' => $LANG['wizard_your_details'] ?? '',      'done' => $hasBillers],
                 2 => ['icon' => 'ti-users',           'label' => $LANG['customer'] ?? '',                    'done' => $hasCustomers],
                 3 => ['icon' => 'ti-package',         'label' => $LANG['product'] ?? '',                      'done' => $hasProducts],
-                4 => ['icon' => 'ti-file-invoice',    'label' => $LANG['wizard_create_invoice'] ?? '',  'done' => $hasInvoices],
+                4 => ['icon' => 'ti-currency-dollar', 'label' => $LANG['wizard_invoice_preferences'] ?? '', 'done' => $wizardCurrencyPrefDone],
+                5 => ['icon' => 'ti-file-invoice',    'label' => $LANG['wizard_create_invoice'] ?? '',  'done' => $hasInvoices],
             ] as $step => $cfg)
             <li class="nav-item" role="presentation">
                 <a class="nav-link @if($wizardStep == $step) active @endif"
@@ -178,10 +181,6 @@
                                 <input type="hidden" name="fax"                    value="">
                                 <input type="hidden" name="logo"                   value="">
                                 <input type="hidden" name="footer"                 value="">
-                                <input type="hidden" name="paypal_business_name"   value="">
-                                <input type="hidden" name="paypal_notify_url"      value="">
-                                <input type="hidden" name="paypal_return_url"      value="">
-                                <input type="hidden" name="eway_customer_id"       value="">
                                 <input type="hidden" name="paymentsgateway_api_id" value="">
                                 <input type="hidden" name="notes"                  value="">
                                 <input type="hidden" name="custom_field1"          value="">
@@ -422,7 +421,7 @@
                                     <div class="col-md-6">
                                         <label class="form-label">{{ $LANG['unit_price'] ?? '' }}</label>
                                         <div class="input-group">
-                                            <span class="input-group-text">{{ $preference['pref_currency_sign'] ?? '$' }}</span>
+                                            <span class="input-group-text">{{ ($wizard_default_preference['pref_currency_sign'] ?? null) ?? ($preference['pref_currency_sign'] ?? '$') }}</span>
                                             <input type="text" name="unit_price" class="form-control" placeholder="{{ $wizard_sample_product['unit_price'] ?? '' }}">
                                         </div>
                                     </div>
@@ -453,9 +452,79 @@
             </div>
 
             {{-- ═══════════════════════════════════════════════════════════
-                 STEP 4 — Create Your First Invoice
+                 STEP 4 — Invoice preferences (currency sign for default Invoice preference)
             ═══════════════════════════════════════════════════════════ --}}
             <div id="wizard-step-4" class="tab-pane @if($wizardStep == 4) active show @endif" role="tabpanel">
+                @php
+                    $wizardPref = isset($wizard_default_preference) && is_array($wizard_default_preference) ? $wizard_default_preference : [];
+                    $wizardPrefId = (int) ($wizardPref['pref_id'] ?? 0);
+                @endphp
+                @if($wizardCurrencyPrefDone)
+                    <div class="d-flex align-items-center gap-3 py-2">
+                        <span class="avatar avatar-lg bg-success-lt rounded"><i class="ti ti-check fs-2 text-success"></i></span>
+                        <div>
+                            <div class="fw-bold text-success fs-4">{{ $LANG['wizard_currency_ready'] ?? '' }}</div>
+                            <p class="text-secondary mb-2">{{ $LANG['wizard_currency_ready_tagline'] ?? '' }}</p>
+                            @if($wizardPrefId > 0)
+                            <a href="index.php?module=preferences&amp;view=details&amp;id={{ $wizardPrefId }}&amp;action=edit" class="btn btn-sm btn-outline-success">
+                                <i class="ti ti-settings me-1"></i>{{ $LANG['invoice_preferences'] ?? '' }}
+                            </a>
+                            @endif
+                        </div>
+                    </div>
+                @else
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <div class="ribbon ribbon-top bg-yellow">
+                                    <i class="ti ti-star"></i>
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex align-items-start gap-3 mb-3">
+                                        <span class="avatar avatar-md bg-indigo-lt rounded-3 flex-shrink-0">
+                                            <i class="ti ti-currency-dollar text-indigo"></i>
+                                        </span>
+                                        <div>
+                                            <h4 class="mb-1">{{ $LANG['wizard_invoice_prefs_heading'] ?? '' }}</h4>
+                                            <p class="text-secondary mb-0" style="font-size:.875rem">
+                                                {{ $LANG['wizard_invoice_prefs_description'] ?? '' }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="alert alert-info mb-0 py-2 small" role="note">
+                                        <i class="ti ti-info-circle me-1"></i>{{ $LANG['wizard_invoice_prefs_note'] ?? '' }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            @if($wizardPrefId < 1)
+                                <div class="alert alert-warning">{{ $LANG['no_preferences'] ?? '' }}</div>
+                            @else
+                            <form method="post" action="index.php?module=preferences&amp;view=wizard_currency">
+                                <input type="hidden" name="op" value="wizard_currency_sign">
+                                <input type="hidden" name="pref_id" value="{{ $wizardPrefId }}">
+                                <input type="hidden" name="from_wizard" value="1">
+                                @include('templates.default.partials.currency_sign_field', [
+                                    'currencySignFieldName' => 'pref_currency_sign',
+                                    'currencySignCurrentValue' => $wizardPref['pref_currency_sign'] ?? '',
+                                ])
+                                <div class="mt-2 d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ $LANG['wizard_save_currency_continue'] ?? '' }} <i class="ti ti-arrow-right ms-1"></i>
+                                    </button>
+                                </div>
+                            </form>
+                            @endif
+                        </div>
+                    </div>
+                @endif
+            </div>
+
+            {{-- ═══════════════════════════════════════════════════════════
+                 STEP 5 — Create Your First Invoice
+            ═══════════════════════════════════════════════════════════ --}}
+            <div id="wizard-step-5" class="tab-pane @if($wizardStep == 5) active show @endif" role="tabpanel">
                 @if($hasInvoices)
                     <div class="d-flex align-items-center gap-3 py-2">
                         <span class="avatar avatar-lg bg-success-lt rounded"><i class="ti ti-check fs-2 text-success"></i></span>

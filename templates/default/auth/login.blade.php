@@ -79,6 +79,17 @@
 									<div class="invalid-feedback">A valid email is required.</div>
 								</div>
 								<div class="mb-3">
+									<label class="form-label">{{ $LANG['language'] ?? 'Language' }} <span class="text-danger">*</span></label>
+									<select name="registration_language" class="form-select" required>
+										@php
+											$regLangDefault = post('registration_language') ?: ($registrationLanguageDefault ?? 'en_US');
+										@endphp
+										@foreach(($registrationLanguageList ?? []) as $lng)
+										<option value="{{ $lng->shortname }}" @if($regLangDefault === (string) $lng->shortname) selected @endif>{{ $lng->name }} ({{ $lng->shortname }})</option>
+										@endforeach
+									</select>
+								</div>
+								<div class="mb-3">
 									<label class="form-label">{{ $LANG['password'] ?? 'Password' }} <span class="text-danger">*</span></label>
 									<input name="admin_password" type="password" class="form-control" required autocomplete="new-password" minlength="4"
 										placeholder="{{ $LANG['password'] ?? '' }}" />

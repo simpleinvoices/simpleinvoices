@@ -1306,33 +1306,61 @@ function insertBiller() {
 		$sql = "INSERT INTO ".TB_PREFIX."biller (
 				domain_id, name, street_address, street_address2, city,
 				state, zip_code, country, phone, mobile_phone,
-				fax, email, logo, footer, paypal_business_name,
-				paypal_notify_url, paypal_return_url, eway_customer_id,
+				fax, email, logo, footer,
 				paymentsgateway_api_id, notes, custom_field1,
-				custom_field2, custom_field3, custom_field4, enabled
+				custom_field2, custom_field3, custom_field4, enabled,
+				stripe_secret_key, stripe_webhook_secret, stripe_test_mode,
+				paypal_client_id, paypal_client_secret, paypal_test_mode,
+				mollie_api_key,
+				authorizenet_login_id, authorizenet_transaction_key, authorizenet_signature_key, authorizenet_test_mode,
+				eway_api_key, eway_api_password, eway_test_mode,
+				kofi_username,
+				coinbase_api_key, coinbase_webhook_secret,
+				adyen_api_key, adyen_merchant_account, adyen_hmac_key, adyen_live_prefix, adyen_test_mode
 			) VALUES (
 				:domain_id, :name, :street_address, :street_address2, :city,
 				:state, :zip_code, :country, :phone, :mobile_phone,
-				:fax, :email, :logo, :footer, :paypal_business_name,
-				:paypal_notify_url, :paypal_return_url, :eway_customer_id,
+				:fax, :email, :logo, :footer,
 				:paymentsgateway_api_id, :notes, :custom_field1,
-				:custom_field2, :custom_field3, :custom_field4, :enabled
+				:custom_field2, :custom_field3, :custom_field4, :enabled,
+				:stripe_secret_key, :stripe_webhook_secret, :stripe_test_mode,
+				:paypal_client_id, :paypal_client_secret, :paypal_test_mode,
+				:mollie_api_key,
+				:authorizenet_login_id, :authorizenet_transaction_key, :authorizenet_signature_key, :authorizenet_test_mode,
+				:eway_api_key, :eway_api_password, :eway_test_mode,
+				:kofi_username,
+				:coinbase_api_key, :coinbase_webhook_secret,
+				:adyen_api_key, :adyen_merchant_account, :adyen_hmac_key, :adyen_live_prefix, :adyen_test_mode
 			)";
 	} else {
 		$sql = "INSERT INTO ".TB_PREFIX."biller (
 				id, domain_id, name, street_address, street_address2, city,
 				state, zip_code, country, phone, mobile_phone,
-				fax, email, logo, footer, paypal_business_name,
-				paypal_notify_url, paypal_return_url, eway_customer_id,
+				fax, email, logo, footer,
 				paymentsgateway_api_id, notes, custom_field1,
-				custom_field2, custom_field3, custom_field4, enabled
+				custom_field2, custom_field3, custom_field4, enabled,
+				stripe_secret_key, stripe_webhook_secret, stripe_test_mode,
+				paypal_client_id, paypal_client_secret, paypal_test_mode,
+				mollie_api_key,
+				authorizenet_login_id, authorizenet_transaction_key, authorizenet_signature_key, authorizenet_test_mode,
+				eway_api_key, eway_api_password, eway_test_mode,
+				kofi_username,
+				coinbase_api_key, coinbase_webhook_secret,
+				adyen_api_key, adyen_merchant_account, adyen_hmac_key, adyen_live_prefix, adyen_test_mode
 			) VALUES (
 				NULL, :domain_id, :name, :street_address, :street_address2, :city,
 				:state, :zip_code, :country, :phone, :mobile_phone,
-				:fax, :email, :logo, :footer, :paypal_business_name,
-				:paypal_notify_url, :paypal_return_url, :eway_customer_id,
+				:fax, :email, :logo, :footer,
 				:paymentsgateway_api_id, :notes, :custom_field1,
-				:custom_field2, :custom_field3, :custom_field4, :enabled
+				:custom_field2, :custom_field3, :custom_field4, :enabled,
+				:stripe_secret_key, :stripe_webhook_secret, :stripe_test_mode,
+				:paypal_client_id, :paypal_client_secret, :paypal_test_mode,
+				:mollie_api_key,
+				:authorizenet_login_id, :authorizenet_transaction_key, :authorizenet_signature_key, :authorizenet_test_mode,
+				:eway_api_key, :eway_api_password, :eway_test_mode,
+				:kofi_username,
+				:coinbase_api_key, :coinbase_webhook_secret,
+				:adyen_api_key, :adyen_merchant_account, :adyen_hmac_key, :adyen_live_prefix, :adyen_test_mode
 			)";
 	}
 
@@ -1350,10 +1378,6 @@ function insertBiller() {
 		':email', $_POST['email'],
 		':logo', $_POST['logo'],
 		':footer', $_POST['footer'],
-		':paypal_business_name', $_POST['paypal_business_name'],
-		':paypal_notify_url', $_POST['paypal_notify_url'],
-		':paypal_return_url', $_POST['paypal_return_url'],
-		':eway_customer_id', $_POST['eway_customer_id'],
 		':paymentsgateway_api_id', $_POST['paymentsgateway_api_id'],
 		':notes', $_POST['notes'],
 		':custom_field1', $_POST['custom_field1'],
@@ -1361,6 +1385,28 @@ function insertBiller() {
 		':custom_field3', $_POST['custom_field3'],
 		':custom_field4', $_POST['custom_field4'],
 		':enabled', $_POST['enabled'],
+		':stripe_secret_key', $_POST['stripe_secret_key'] ?? '',
+		':stripe_webhook_secret', $_POST['stripe_webhook_secret'] ?? '',
+		':stripe_test_mode', (int) ($_POST['stripe_test_mode'] ?? 1),
+		':paypal_client_id', $_POST['paypal_client_id'] ?? '',
+		':paypal_client_secret', $_POST['paypal_client_secret'] ?? '',
+		':paypal_test_mode', (int) ($_POST['paypal_test_mode'] ?? 1),
+		':mollie_api_key', $_POST['mollie_api_key'] ?? '',
+		':authorizenet_login_id', $_POST['authorizenet_login_id'] ?? '',
+		':authorizenet_transaction_key', $_POST['authorizenet_transaction_key'] ?? '',
+		':authorizenet_signature_key', $_POST['authorizenet_signature_key'] ?? '',
+		':authorizenet_test_mode', (int) ($_POST['authorizenet_test_mode'] ?? 1),
+		':eway_api_key', $_POST['eway_api_key'] ?? '',
+		':eway_api_password', $_POST['eway_api_password'] ?? '',
+		':eway_test_mode', (int) ($_POST['eway_test_mode'] ?? 1),
+		':kofi_username', $_POST['kofi_username'] ?? '',
+		':coinbase_api_key', $_POST['coinbase_api_key'] ?? '',
+		':coinbase_webhook_secret', $_POST['coinbase_webhook_secret'] ?? '',
+		':adyen_api_key', $_POST['adyen_api_key'] ?? '',
+		':adyen_merchant_account', $_POST['adyen_merchant_account'] ?? '',
+		':adyen_hmac_key', $_POST['adyen_hmac_key'] ?? '',
+		':adyen_live_prefix', $_POST['adyen_live_prefix'] ?? '',
+		':adyen_test_mode', (int) ($_POST['adyen_test_mode'] ?? 1),
 		':domain_id', $domain_id
 		);
 	/*
@@ -1395,17 +1441,35 @@ function updateBiller() {
 				email = :email,
 				logo = :logo,
 				footer = :footer,
-				paypal_business_name = :paypal_business_name,
-				paypal_notify_url = :paypal_notify_url,
-				paypal_return_url = :paypal_return_url,
-				eway_customer_id = :eway_customer_id,
 				paymentsgateway_api_id = :paymentsgateway_api_id,
 				notes = :notes,
 				custom_field1 = :custom_field1,
 				custom_field2 = :custom_field2,
 				custom_field3 = :custom_field3,
 				custom_field4 = :custom_field4,
-				enabled = :enabled
+				enabled = :enabled,
+				stripe_secret_key = :stripe_secret_key,
+				stripe_webhook_secret = :stripe_webhook_secret,
+				stripe_test_mode = :stripe_test_mode,
+				paypal_client_id = :paypal_client_id,
+				paypal_client_secret = :paypal_client_secret,
+				paypal_test_mode = :paypal_test_mode,
+				mollie_api_key = :mollie_api_key,
+				authorizenet_login_id = :authorizenet_login_id,
+				authorizenet_transaction_key = :authorizenet_transaction_key,
+				authorizenet_signature_key = :authorizenet_signature_key,
+				authorizenet_test_mode = :authorizenet_test_mode,
+				eway_api_key = :eway_api_key,
+				eway_api_password = :eway_api_password,
+				eway_test_mode = :eway_test_mode,
+				kofi_username = :kofi_username,
+				coinbase_api_key = :coinbase_api_key,
+				coinbase_webhook_secret = :coinbase_webhook_secret,
+				adyen_api_key = :adyen_api_key,
+				adyen_merchant_account = :adyen_merchant_account,
+				adyen_hmac_key = :adyen_hmac_key,
+				adyen_live_prefix = :adyen_live_prefix,
+				adyen_test_mode = :adyen_test_mode
 			WHERE
 				id = :id
 			AND domain_id = :domain_id";
@@ -1424,10 +1488,6 @@ function updateBiller() {
 		':email', $_POST['email'],
 		':logo', $_POST['logo'],
 		':footer', $_POST['footer'],
-		':paypal_business_name', $_POST['paypal_business_name'],
-		':paypal_notify_url', $_POST['paypal_notify_url'],
-		':paypal_return_url', $_POST['paypal_return_url'],
-		':eway_customer_id', $_POST['eway_customer_id'],
 		':paymentsgateway_api_id', $_POST['paymentsgateway_api_id'],
 		':notes', $_POST['notes'],
 		':custom_field1', $_POST['custom_field1'],
@@ -1435,6 +1495,28 @@ function updateBiller() {
 		':custom_field3', $_POST['custom_field3'],
 		':custom_field4', $_POST['custom_field4'],
 		':enabled', $_POST['enabled'],
+		':stripe_secret_key', $_POST['stripe_secret_key'] ?? '',
+		':stripe_webhook_secret', $_POST['stripe_webhook_secret'] ?? '',
+		':stripe_test_mode', (int) ($_POST['stripe_test_mode'] ?? 1),
+		':paypal_client_id', $_POST['paypal_client_id'] ?? '',
+		':paypal_client_secret', $_POST['paypal_client_secret'] ?? '',
+		':paypal_test_mode', (int) ($_POST['paypal_test_mode'] ?? 1),
+		':mollie_api_key', $_POST['mollie_api_key'] ?? '',
+		':authorizenet_login_id', $_POST['authorizenet_login_id'] ?? '',
+		':authorizenet_transaction_key', $_POST['authorizenet_transaction_key'] ?? '',
+		':authorizenet_signature_key', $_POST['authorizenet_signature_key'] ?? '',
+		':authorizenet_test_mode', (int) ($_POST['authorizenet_test_mode'] ?? 1),
+		':eway_api_key', $_POST['eway_api_key'] ?? '',
+		':eway_api_password', $_POST['eway_api_password'] ?? '',
+		':eway_test_mode', (int) ($_POST['eway_test_mode'] ?? 1),
+		':kofi_username', $_POST['kofi_username'] ?? '',
+		':coinbase_api_key', $_POST['coinbase_api_key'] ?? '',
+		':coinbase_webhook_secret', $_POST['coinbase_webhook_secret'] ?? '',
+		':adyen_api_key', $_POST['adyen_api_key'] ?? '',
+		':adyen_merchant_account', $_POST['adyen_merchant_account'] ?? '',
+		':adyen_hmac_key', $_POST['adyen_hmac_key'] ?? '',
+		':adyen_live_prefix', $_POST['adyen_live_prefix'] ?? '',
+		':adyen_test_mode', (int) ($_POST['adyen_test_mode'] ?? 1),
 		':id', $_GET['id']
 		);
 }
@@ -2571,10 +2653,13 @@ function mysqlPatchAlterInnoDbWithKeyIfMissing($tableSuffix, $indexName, $column
  * Locale / language tokens substituted into essential_data.json (LOCALE, LANGUAGE).
  */
 function install_essential_data_locale_tokens(): array {
-	global $config;
 	$loc = 'en_GB';
-	if (isset($config->local->locale) && (string) $config->local->locale !== '') {
-		$loc = (string) $config->local->locale;
+	if (function_exists('getSystemDefaults') && function_exists('checkTableExists')
+		&& checkTableExists(TB_PREFIX . 'system_defaults')) {
+		$defaults = getSystemDefaults();
+		if (is_array($defaults) && !empty($defaults['language'])) {
+			$loc = (string) $defaults['language'];
+		}
 	}
 	return [$loc, $loc];
 }
@@ -2598,10 +2683,11 @@ function install_essential_data_global_table_keys(): array {
 /**
  * Build concatenated INSERT SQL from essential_data.json for one domain.
  *
- * @param int  $targetDomainId      Substituted for DOMAIN-ID placeholders.
- * @param bool $includeGlobalTables If false, omit patch manager, roles, demo user, etc.
+ * @param int         $targetDomainId      Substituted for DOMAIN-ID placeholders.
+ * @param bool        $includeGlobalTables If false, omit patch manager, roles, demo user, etc.
+ * @param string|null $domainUiLanguage    If set, LOCALE/LANGUAGE in essential_data (e.g. public registration).
  */
-function install_build_essential_data_sql(int $targetDomainId, bool $includeGlobalTables): string {
+function install_build_essential_data_sql(int $targetDomainId, bool $includeGlobalTables, ?string $domainUiLanguage = null): string {
 	$path = realpath(__DIR__ . '/../databases/json/essential_data.json');
 	if ($path === false || !is_readable($path)) {
 		throw new RuntimeException('essential_data.json not found or not readable');
@@ -2619,9 +2705,14 @@ function install_build_essential_data_sql(int $targetDomainId, bool $includeGlob
 	if ($json === false) {
 		throw new RuntimeException('Failed to encode essential data');
 	}
-	[$locale, $language] = install_essential_data_locale_tokens();
+	if ($domainUiLanguage !== null && $domainUiLanguage !== '') {
+		$locale          = si_normalize_registration_language($domainUiLanguage);
+		$languageToken   = $locale;
+	} else {
+		[$locale, $languageToken] = install_essential_data_locale_tokens();
+	}
 	$pattern_find    = ['si_', 'DOMAIN-ID', 'LOCALE', 'LANGUAGE'];
-	$pattern_replace = [TB_PREFIX, (string) $targetDomainId, $locale, $language];
+	$pattern_replace = [TB_PREFIX, (string) $targetDomainId, $locale, $languageToken];
 	$json = str_replace($pattern_find, $pattern_replace, $json);
 	$decoded = json_decode($json, true);
 	if (!is_array($decoded)) {
@@ -3283,6 +3374,9 @@ function run_sql_patch($id, $patch) {
 			si_patch340_backfill_invoice_denorm();
 		} elseif ((int) $id === 341) {
 			si_patch341_invoice_denorm_indexes();
+		} elseif ((int) $id === 342) {
+			require_once __DIR__ . '/global_app_settings.php';
+			si_patch342_global_config();
 		} else {
 			dbQuery($patch['patch']);
 		}

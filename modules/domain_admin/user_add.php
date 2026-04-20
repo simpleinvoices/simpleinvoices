@@ -39,5 +39,7 @@ $billers = $sth->fetchAll(PDO::FETCH_ASSOC);
 
 $bladeView->assign('customers', $customers);
 $bladeView->assign('billers', $billers);
+$bladeView->assign('userUiLanguageList', si_get_ui_language_list_sorted());
+$bladeView->assign('userPreferredValue', trim((string) ($_POST['preferred_language'] ?? '')));
 $bladeView->assign('domainUserSaveCsrfToken', siNonce('domain_user_save'));
 $bladeView->assign('pageActive', 'domain_admin');

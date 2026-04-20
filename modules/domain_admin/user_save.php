@@ -15,6 +15,7 @@ if (!in_array($auth_session->role_name ?? '', $allowed_roles, true)) {
 }
 
 require_once __DIR__ . '/../../include/auth/password.php';
+require_once __DIR__ . '/../../include/user_ui_language.php';
 
 $domain_id = (int) $auth_session->domain_id;
 $op        = !empty($_POST['op']) ? preg_replace('/[^a-z_]/', '', (string) $_POST['op']) : null;
@@ -56,20 +57,40 @@ if ($op === 'insert_domain_user') {
             $role_id      = $allowed_role_map[$role_key];
             $passwordHash = auth_hash_password($password);
             list($authStaffEmail, $authCustomerKey) = auth_identity_columns_for_role($role_id, $domain_id, $email);
-            $sth = dbQuery(
-                "INSERT INTO " . TB_PREFIX . "user
-                 (email, name, password, role_id, domain_id, enabled, user_id, auth_staff_email, auth_customer_key)
-                 VALUES (:email, :name, :password, :role_id, :domain_id, :enabled, :user_id, :auth_staff_email, :auth_customer_key)",
-                ':email',     $email,
-                ':name',      $name,
-                ':password',  $passwordHash,
-                ':role_id',   $role_id,
-                ':domain_id', $domain_id,
-                ':enabled',   $enabled,
-                ':user_id',   $linked_id,
-                ':auth_staff_email', $authStaffEmail,
-                ':auth_customer_key', $authCustomerKey
-            );
+            $prefCol = checkFieldExists(TB_PREFIX . 'user', 'preferred_language');
+            $prefVal = $prefCol ? si_user_preferred_language_from_post() : null;
+            if ($prefCol) {
+                $sth = dbQuery(
+                    "INSERT INTO " . TB_PREFIX . "user
+                     (email, name, password, role_id, domain_id, enabled, user_id, auth_staff_email, auth_customer_key, preferred_language)
+                     VALUES (:email, :name, :password, :role_id, :domain_id, :enabled, :user_id, :auth_staff_email, :auth_customer_key, :pref_lang)",
+                    ':email',     $email,
+                    ':name',      $name,
+                    ':password',  $passwordHash,
+                    ':role_id',   $role_id,
+                    ':domain_id', $domain_id,
+                    ':enabled',   $enabled,
+                    ':user_id',   $linked_id,
+                    ':auth_staff_email', $authStaffEmail,
+                    ':auth_customer_key', $authCustomerKey,
+                    ':pref_lang', $prefVal
+                );
+            } else {
+                $sth = dbQuery(
+                    "INSERT INTO " . TB_PREFIX . "user
+                     (email, name, password, role_id, domain_id, enabled, user_id, auth_staff_email, auth_customer_key)
+                     VALUES (:email, :name, :password, :role_id, :domain_id, :enabled, :user_id, :auth_staff_email, :auth_customer_key)",
+                    ':email',     $email,
+                    ':name',      $name,
+                    ':password',  $passwordHash,
+                    ':role_id',   $role_id,
+                    ':domain_id', $domain_id,
+                    ':enabled',   $enabled,
+                    ':user_id',   $linked_id,
+                    ':auth_staff_email', $authStaffEmail,
+                    ':auth_customer_key', $authCustomerKey
+                );
+            }
             if ($sth) {
                 $saved = true;
             } else {
@@ -118,45 +139,90 @@ if ($op === 'update_domain_user') {
                 $role_id = $allowed_role_map[$role_key];
                 $sth     = null;
                 list($authStaffEmail, $authCustomerKey) = auth_identity_columns_for_role($role_id, $domain_id, $email);
+                $prefCol = checkFieldExists(TB_PREFIX . 'user', 'preferred_language');
+                $prefVal = $prefCol ? si_user_preferred_language_from_post() : null;
 
                 if ($password !== '' && strlen($password) < 4) {
                     $saveError = 'Password must be at least 4 characters.';
                 } elseif ($password !== '') {
                     $passwordHash = auth_hash_password($password);
-                    $sth = dbQuery(
-                        "UPDATE " . TB_PREFIX . "user
-                         SET email=:email, name=:name, password=:password,
-                             role_id=:role_id, enabled=:enabled, user_id=:user_id,
-                             auth_staff_email=:auth_staff_email, auth_customer_key=:auth_customer_key
-                         WHERE id=:id AND domain_id=:domain_id",
-                        ':email',     $email,
-                        ':name',      $name,
-                        ':password',  $passwordHash,
-                        ':role_id',   $role_id,
-                        ':enabled',   $enabled,
-                        ':user_id',   $linked_id,
-                        ':auth_staff_email', $authStaffEmail,
-                        ':auth_customer_key', $authCustomerKey,
-                        ':id',        $id,
-                        ':domain_id', $domain_id
-                    );
+                    if ($prefCol) {
+                        $sth = dbQuery(
+                            "UPDATE " . TB_PREFIX . "user
+                             SET email=:email, name=:name, password=:password,
+                                 role_id=:role_id, enabled=:enabled, user_id=:user_id,
+                                 auth_staff_email=:auth_staff_email, auth_customer_key=:auth_customer_key,
+                                 preferred_language=:pref_lang
+                             WHERE id=:id AND domain_id=:domain_id",
+                            ':email',     $email,
+                            ':name',      $name,
+                            ':password',  $passwordHash,
+                            ':role_id',   $role_id,
+                            ':enabled',   $enabled,
+                            ':user_id',   $linked_id,
+                            ':auth_staff_email', $authStaffEmail,
+                            ':auth_customer_key', $authCustomerKey,
+                            ':pref_lang', $prefVal,
+                            ':id',        $id,
+                            ':domain_id', $domain_id
+                        );
+                    } else {
+                        $sth = dbQuery(
+                            "UPDATE " . TB_PREFIX . "user
+                             SET email=:email, name=:name, password=:password,
+                                 role_id=:role_id, enabled=:enabled, user_id=:user_id,
+                                 auth_staff_email=:auth_staff_email, auth_customer_key=:auth_customer_key
+                             WHERE id=:id AND domain_id=:domain_id",
+                            ':email',     $email,
+                            ':name',      $name,
+                            ':password',  $passwordHash,
+                            ':role_id',   $role_id,
+                            ':enabled',   $enabled,
+                            ':user_id',   $linked_id,
+                            ':auth_staff_email', $authStaffEmail,
+                            ':auth_customer_key', $authCustomerKey,
+                            ':id',        $id,
+                            ':domain_id', $domain_id
+                        );
+                    }
                 } else {
-                    $sth = dbQuery(
-                        "UPDATE " . TB_PREFIX . "user
-                         SET email=:email, name=:name,
-                             role_id=:role_id, enabled=:enabled, user_id=:user_id,
-                             auth_staff_email=:auth_staff_email, auth_customer_key=:auth_customer_key
-                         WHERE id=:id AND domain_id=:domain_id",
-                        ':email',     $email,
-                        ':name',      $name,
-                        ':role_id',   $role_id,
-                        ':enabled',   $enabled,
-                        ':user_id',   $linked_id,
-                        ':auth_staff_email', $authStaffEmail,
-                        ':auth_customer_key', $authCustomerKey,
-                        ':id',        $id,
-                        ':domain_id', $domain_id
-                    );
+                    if ($prefCol) {
+                        $sth = dbQuery(
+                            "UPDATE " . TB_PREFIX . "user
+                             SET email=:email, name=:name,
+                                 role_id=:role_id, enabled=:enabled, user_id=:user_id,
+                                 auth_staff_email=:auth_staff_email, auth_customer_key=:auth_customer_key,
+                                 preferred_language=:pref_lang
+                             WHERE id=:id AND domain_id=:domain_id",
+                            ':email',     $email,
+                            ':name',      $name,
+                            ':role_id',   $role_id,
+                            ':enabled',   $enabled,
+                            ':user_id',   $linked_id,
+                            ':auth_staff_email', $authStaffEmail,
+                            ':auth_customer_key', $authCustomerKey,
+                            ':pref_lang', $prefVal,
+                            ':id',        $id,
+                            ':domain_id', $domain_id
+                        );
+                    } else {
+                        $sth = dbQuery(
+                            "UPDATE " . TB_PREFIX . "user
+                             SET email=:email, name=:name,
+                                 role_id=:role_id, enabled=:enabled, user_id=:user_id,
+                                 auth_staff_email=:auth_staff_email, auth_customer_key=:auth_customer_key
+                             WHERE id=:id AND domain_id=:domain_id",
+                            ':email',     $email,
+                            ':name',      $name,
+                            ':role_id',   $role_id,
+                            ':enabled',   $enabled,
+                            ':user_id',   $linked_id,
+                            ':auth_staff_email', $authStaffEmail,
+                            ':auth_customer_key', $authCustomerKey,
+                            ':id',        $id,
+                            ':domain_id', $domain_id
+                        );
+                    }
                 }
                 if ($sth !== null) {
                     $saved = $sth ? true : false;
@@ -166,6 +232,14 @@ if ($op === 'update_domain_user') {
                 }
             }
         }
+    }
+}
+
+if ($saved && $op === 'update_domain_user' && checkFieldExists(TB_PREFIX . 'user', 'preferred_language')) {
+    $editedId = (int) ($_POST['id'] ?? 0);
+    if ($editedId === (int) ($auth_session->id ?? 0)) {
+        $pv = si_user_preferred_language_from_post();
+        $auth_session->ui_language = $pv === null ? '' : $pv;
     }
 }
 

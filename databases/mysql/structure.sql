@@ -29,10 +29,6 @@ CREATE TABLE IF NOT EXISTS `si_biller` (
   `email` varchar(255) DEFAULT NULL,
   `logo` varchar(255) DEFAULT NULL,
   `footer` text,
-  `paypal_business_name` varchar(255) DEFAULT NULL,
-  `paypal_notify_url` varchar(255) DEFAULT NULL,
-  `paypal_return_url` varchar(255) DEFAULT NULL,
-  `eway_customer_id` varchar(255) DEFAULT NULL,
   `paymentsgateway_api_id` varchar(255) DEFAULT NULL,
   `notes` text,
   `custom_field1` varchar(255) DEFAULT NULL,
@@ -40,6 +36,28 @@ CREATE TABLE IF NOT EXISTS `si_biller` (
   `custom_field3` varchar(255) DEFAULT NULL,
   `custom_field4` varchar(255) DEFAULT NULL,
   `enabled` TINYINT(1) DEFAULT 1 NOT NULL,
+  `stripe_secret_key` varchar(255) DEFAULT NULL,
+  `stripe_webhook_secret` varchar(255) DEFAULT NULL,
+  `stripe_test_mode` TINYINT(1) NOT NULL DEFAULT 1,
+  `paypal_client_id` varchar(255) DEFAULT NULL,
+  `paypal_client_secret` varchar(255) DEFAULT NULL,
+  `paypal_test_mode` TINYINT(1) NOT NULL DEFAULT 1,
+  `mollie_api_key` varchar(255) DEFAULT NULL,
+  `authorizenet_login_id` varchar(255) DEFAULT NULL,
+  `authorizenet_transaction_key` varchar(255) DEFAULT NULL,
+  `authorizenet_signature_key` varchar(255) DEFAULT NULL,
+  `authorizenet_test_mode` TINYINT(1) NOT NULL DEFAULT 1,
+  `eway_api_key` varchar(255) DEFAULT NULL,
+  `eway_api_password` varchar(255) DEFAULT NULL,
+  `eway_test_mode` TINYINT(1) NOT NULL DEFAULT 1,
+  `kofi_username` varchar(100) DEFAULT NULL,
+  `coinbase_api_key` varchar(255) DEFAULT NULL,
+  `coinbase_webhook_secret` varchar(255) DEFAULT NULL,
+  `adyen_api_key` varchar(255) DEFAULT NULL,
+  `adyen_merchant_account` varchar(255) DEFAULT NULL,
+  `adyen_hmac_key` varchar(255) DEFAULT NULL,
+  `adyen_live_prefix` varchar(100) DEFAULT NULL,
+  `adyen_test_mode` TINYINT(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`domain_id`,`id`),
   KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -339,6 +357,12 @@ CREATE TABLE IF NOT EXISTS `si_system_defaults` (
   UNIQUE KEY `UnqNameInDomain` (`domain_id`, `name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE TABLE IF NOT EXISTS `si_global_config` (
+  `name` varchar(64) NOT NULL,
+  `value` text,
+  PRIMARY KEY (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 CREATE TABLE IF NOT EXISTS `si_tax` (
   `tax_id` int(11) NOT NULL AUTO_INCREMENT,
   `tax_description` varchar(50) DEFAULT NULL,
@@ -361,6 +385,7 @@ CREATE TABLE IF NOT EXISTS `si_user` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `auth_staff_email` varchar(255) DEFAULT NULL,
   `auth_customer_key` varchar(384) DEFAULT NULL,
+  `preferred_language` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`domain_id`,`id`),
   KEY `id` (`id`),
   UNIQUE KEY `UnqAuthStaffEmail` (`auth_staff_email`),

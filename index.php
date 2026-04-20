@@ -28,6 +28,10 @@ $action = isset($_GET['case'])  ? filenameEscape($_GET['case'])    : null;
 
 require_once("./include/init.php");
 
+// Hold HTML in a buffer so handlers can clear it and send a Location header after POST (see admin app_settings, domain_save).
+if (PHP_SAPI !== 'cli') {
+	ob_start();
+}
 
 /*
 	GetCustomPath: override template or module with custom one if it exists, else return default path if it exists
@@ -70,6 +74,27 @@ $bladeView -> assign("config",$config); // to toggle the login / logout button v
 $bladeView -> assign("siUrl",$siUrl);//used for template css
 
 $bladeView -> assign("LANG",$LANG);
+$bladeView->assign('uiLanguage', $language);
+$menuUiLanguageList = getLanguageList();
+if (is_array($menuUiLanguageList)) {
+	usort(
+		$menuUiLanguageList,
+		static function ($a, $b) {
+			return strcasecmp((string) ($a->name ?? ''), (string) ($b->name ?? ''));
+		}
+	);
+}
+$bladeView->assign('uiLanguageList', $menuUiLanguageList ?? []);
+$uiLanguageUserPreference = '';
+if ((int) ($config->authentication->enabled ?? 0) === 1
+	&& empty($auth_session->fake_auth ?? null)
+	&& isset($auth_session->id)) {
+	$uiLanguageUserPreference = isset($auth_session->ui_language)
+		? trim((string) $auth_session->ui_language)
+		: '';
+}
+$bladeView->assign('uiLanguageUserPreference', $uiLanguageUserPreference);
+$bladeView->assign('domainUiLanguageCode', getDefaultLanguage());
 //For Making easy enabled pop-menus (see biller)
 $bladeView -> assign("enabled",array($LANG['disabled'],$LANG['enabled']));
 
@@ -112,6 +137,24 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
 			}
 		} catch (Exception $e) {
 			// ignore
+		}
+	}
+	// New organisation (domain > 1): auto-import essentials for logged-in users — same as after register / login.
+	if (
+		$install_tables_exists === true
+		&& $install_data_exists === false
+		&& $config->authentication->enabled == 1
+		&& isset($auth_session->id)
+		&& (int) ($auth_session->domain_id ?? 1) > 1
+	) {
+		$autoDom = (int) $auth_session->domain_id;
+		if (domainHasEssentialBootstrapData($autoDom)) {
+			$install_data_exists = true;
+		} else {
+			require_once __DIR__ . '/include/install_workspace_bootstrap.php';
+			if (install_bootstrap_new_domain_essentials($autoDom)) {
+				$install_data_exists = true;
+			}
 		}
 	}
 	if ( ($install_tables_exists == true) AND ($install_data_exists == false) )
@@ -183,6 +226,19 @@ if (
 		header('Location: ' . rtrim($siUrl, '/') . '/index.php?module=install&view=index&step=setup');
 		exit;
 	}
+}
+
+// Workspace ready: do not show install UI for secondary domains (e.g. bookmarked setup URL).
+if (
+	$install_tables_exists === true
+	&& !empty($install_data_exists)
+	&& $module === 'install'
+	&& $view === 'index'
+	&& isset($auth_session->id)
+	&& (int) ($auth_session->domain_id ?? 1) > 1
+) {
+	header('Location: ' . rtrim($siUrl, '/') . '/index.php?module=index&view=index');
+	exit;
 }
 
 /*

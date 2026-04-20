@@ -8,13 +8,15 @@
 /**
  * Create a new domain (organisation) and its domain administrator login.
  *
- * @return array{success:bool,error:?string}
+ * @param string|null $domain_language Default UI language for the new domain (system_defaults + admin user preference).
+ * @return array{success:bool,error:?string,domain_id?:int}
  */
 function auth_try_create_domain_with_administrator(
     string $name,
     string $admin_email,
     string $admin_name,
-    string $admin_password
+    string $admin_password,
+    ?string $domain_language = null
 ): array {
     require_once __DIR__ . '/password.php';
 
@@ -49,6 +51,10 @@ function auth_try_create_domain_with_administrator(
     );
     if ($dup_domain && $dup_domain->fetch(PDO::FETCH_ASSOC)) {
         return ['success' => false, 'error' => 'That domain name is already in use. Please choose a different name.'];
+    }
+
+    if (auth_is_staff_login_email_in_use($admin_email)) {
+        return ['success' => false, 'error' => 'This email is already used for a staff or administrator login. Use a different email, or sign in with that account.'];
     }
 
     $role_sth = dbQuery(
@@ -106,8 +112,25 @@ function auth_try_create_domain_with_administrator(
             ':domain_id', $new_domain_id,
             ':email', $admin_email
         );
-        if (!$user_check || !$user_check->fetch(PDO::FETCH_ASSOC)) {
+        $new_user_row = $user_check ? $user_check->fetch(PDO::FETCH_ASSOC) : false;
+        if (!$new_user_row) {
             throw new RuntimeException('user_insert');
+        }
+        $new_user_id = (int) ($new_user_row['id'] ?? 0);
+        if ($new_user_id < 1) {
+            throw new RuntimeException('user_insert');
+        }
+        if ($domain_language !== null && $domain_language !== '' && checkFieldExists(TB_PREFIX . 'user', 'preferred_language')) {
+            $norm = si_normalize_registration_language($domain_language);
+            dbQuery(
+                'UPDATE ' . TB_PREFIX . 'user SET preferred_language = :p WHERE id = :id AND domain_id = :d',
+                ':p',
+                $norm,
+                ':id',
+                $new_user_id,
+                ':d',
+                $new_domain_id
+            );
         }
 
         $dbh->commit();
@@ -120,7 +143,7 @@ function auth_try_create_domain_with_administrator(
     }
 
     if ($tx_ok) {
-        return ['success' => true, 'error' => null];
+        return ['success' => true, 'error' => null, 'domain_id' => $new_domain_id];
     }
 
     return ['success' => false, 'error' => 'Could not create the domain and administrator account — the domain name or email may already be in use.'];

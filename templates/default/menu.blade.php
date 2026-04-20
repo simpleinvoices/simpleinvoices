@@ -43,6 +43,25 @@
                     <i class="ti ti-sun fs-4"></i>
                 </a>
             </div>
+            @if($authEnabled && $currentUserId !== '')
+            <div class="nav-item dropdown me-2">
+                <form method="post" action="index.php?module=user&view=save_ui_language" class="dropdown">
+                    {!! antiCSRFHiddenInput('ui_language') !!}
+                    <a href="#" class="nav-link px-0" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false" aria-haspopup="true" title="{{ $LANG['language'] ?? '' }}" aria-label="{{ $LANG['language'] ?? '' }}">
+                        <i class="ti ti-language fs-4"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                        <h6 class="dropdown-header">{{ $LANG['language'] ?? '' }}</h6>
+                        <button type="submit" name="preferred_language" value="" class="dropdown-item @if(($uiLanguageUserPreference ?? '') === '') active @endif">
+                            {{ $LANG['ui_language_domain_default'] ?? '' }}@if(!empty($domainUiLanguageCode ?? '')) ({{ $domainUiLanguageCode }}) @endif
+                        </button>
+                        @foreach(($uiLanguageList ?? []) as $lng)
+                        <button type="submit" name="preferred_language" value="{{ $lng->shortname }}" class="dropdown-item @if(($uiLanguageUserPreference ?? '') === (string) $lng->shortname) active @endif">{{ $lng->name }} ({{ $lng->shortname }})</button>
+                        @endforeach
+                    </div>
+                </form>
+            </div>
+            @endif
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="{{ $LANG['user_menu'] ?? '' }}" aria-expanded="false">
                     <span class="avatar avatar-sm rounded-circle bg-primary-lt">
@@ -238,6 +257,10 @@
                                href="index.php?module=admin&view=index">
                                 <i class="ti ti-layout-dashboard me-2 text-secondary"></i>Admin Dashboard
                             </a>
+                            <a class="dropdown-item @if(($module ?? '') == 'admin' && ($view ?? '') == 'app_settings') active @endif"
+                               href="index.php?module=admin&view=app_settings">
+                                <i class="ti ti-palette me-2 text-secondary"></i>{{ $LANG['admin_app_appearance_menu'] ?? 'App appearance' }}
+                            </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item @if(($module ?? '') == 'admin' && in_array($view ?? '', ['domains','domain_add','domain_edit'])) active @endif"
                                href="index.php?module=admin&view=domains">
@@ -380,6 +403,7 @@
         // Override titles for admin and domain_admin modules
         $admin_titles = [
             'admin_index'               => 'Admin Dashboard',
+            'admin_app_settings'        => 'App appearance',
             'admin_domains'             => 'Manage Domains',
             'admin_domain_add'          => 'Add Domain',
             'admin_domain_edit'         => 'Edit Domain',

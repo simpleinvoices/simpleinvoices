@@ -4,12 +4,12 @@
 $op = $_POST['op'] ?? null;
 
 
-$include_online_payment ='';
-foreach ($_POST['include_online_payment'] as $k => $v) {
+$include_online_payment = '';
+$iop_values = $_POST['include_online_payment'] ?? [];
+foreach ($iop_values as $k => $v) {
     $include_online_payment .= $v;
-    if ($k !=  end(array_keys($_POST['include_online_payment'])))
-    {
-    	$include_online_payment .= ','; 
+    if ($k != array_key_last($iop_values)) {
+        $include_online_payment .= ',';
     }
 }
 

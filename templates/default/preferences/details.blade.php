@@ -57,9 +57,15 @@
 					<tr>
 						<th>{{ $LANG['include_online_payment'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_detail_line" title="{{ $LANG['invoice_detail_line'] ?? '' }}"><i class="ti ti-help"></i></a></th>
 						<td>
-							<div class="form-check form-check-inline"><input type="checkbox" class="form-check-input" disabled @if(in_array("paypal", explode(",", $preference['include_online_payment'] ?? ''))) checked @endif /><label class="form-check-label">{{ $LANG['paypal'] ?? '' }}</label></div>
-							<div class="form-check form-check-inline"><input type="checkbox" class="form-check-input" disabled @if(in_array("eway_merchant_xml", explode(",", $preference['include_online_payment'] ?? ''))) checked @endif /><label class="form-check-label">{{ $LANG['eway_merchant_xml'] ?? '' }}</label></div>
-							<div class="form-check form-check-inline"><input type="checkbox" class="form-check-input" disabled @if(in_array("paymentsgateway", explode(",", $preference['include_online_payment'] ?? ''))) checked @endif /><label class="form-check-label">{{ $LANG['paymentsgateway'] ?? '' }}</label></div>
+							<div class="form-check form-check-inline"><input type="checkbox" class="form-check-input" disabled @if(in_array("stripe", explode(",", $preference['include_online_payment'] ?? ''))) checked @endif /><label class="form-check-label">Stripe</label></div>
+							<div class="form-check form-check-inline"><input type="checkbox" class="form-check-input" disabled @if(in_array("paypal_commerce", explode(",", $preference['include_online_payment'] ?? ''))) checked @endif /><label class="form-check-label">PayPal Commerce</label></div>
+							<div class="form-check form-check-inline"><input type="checkbox" class="form-check-input" disabled @if(in_array("mollie", explode(",", $preference['include_online_payment'] ?? ''))) checked @endif /><label class="form-check-label">Mollie</label></div>
+							<div class="form-check form-check-inline"><input type="checkbox" class="form-check-input" disabled @if(in_array("authorizenet", explode(",", $preference['include_online_payment'] ?? ''))) checked @endif /><label class="form-check-label">Authorize.net</label></div>
+							<div class="form-check form-check-inline"><input type="checkbox" class="form-check-input" disabled @if(in_array("eway_rapid", explode(",", $preference['include_online_payment'] ?? ''))) checked @endif /><label class="form-check-label">{{ $LANG['eway_rapid'] ?? 'eWay Rapid' }}</label></div>
+							<div class="form-check form-check-inline"><input type="checkbox" class="form-check-input" disabled @if(in_array("paymentsgateway_modern", explode(",", $preference['include_online_payment'] ?? ''))) checked @endif /><label class="form-check-label">{{ $LANG['paymentsgateway_modern'] ?? 'Payments Gateway' }}</label></div>
+							<div class="form-check form-check-inline"><input type="checkbox" class="form-check-input" disabled @if(in_array("kofi", explode(",", $preference['include_online_payment'] ?? ''))) checked @endif /><label class="form-check-label">Ko-fi</label></div>
+							<div class="form-check form-check-inline"><input type="checkbox" class="form-check-input" disabled @if(in_array("coinbase", explode(",", $preference['include_online_payment'] ?? ''))) checked @endif /><label class="form-check-label">{{ $LANG['coinbase_commerce'] ?? 'Coinbase Commerce' }}</label></div>
+							<div class="form-check form-check-inline"><input type="checkbox" class="form-check-input" disabled @if(in_array("adyen", explode(",", $preference['include_online_payment'] ?? ''))) checked @endif /><label class="form-check-label">Adyen</label></div>
 						</td>
 					</tr>
 					<tr><th>{{ $LANG['invoice_payment_method'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_payment_method" title="{{ $LANG['invoice_payment_method'] ?? '' }}"><i class="ti ti-help"></i></a></th><td>{{ $preference['pref_inv_payment_method'] ?? '' }}</td></tr>
@@ -148,26 +154,25 @@
 				<div class="mb-3">
 					<label class="form-label">{{ $LANG['language'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_language" title="{{ $LANG['language'] ?? '' }}"><i class="ti ti-help"></i></a></label>
 					<select name="language" class="form-select">
-						@foreach(($localelist ?? []) as $language => $value)
-							<option @if($language == ($preference['language'] ?? '')) selected @endif value="{{ $language ?? '' }}">{{ $language ?? '' }}</option>
+						@foreach(($languageList ?? []) as $lng)
+							<option value="{{ $lng->shortname ?? '' }}" @if((string) ($preference['language'] ?? '') === (string) ($lng->shortname ?? '')) selected @endif>{{ $lng->name ?? '' }} ({{ $lng->shortname ?? '' }})</option>
 						@endforeach
 					</select>
 				</div>
 				<div class="mb-3">
 					<label class="form-label">{{ $LANG['locale'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_locale" title="{{ $LANG['locale'] ?? '' }}"><i class="ti ti-help"></i></a></label>
 					<select name="locale" class="form-select">
-						@foreach(($localelist ?? []) as $locale => $value)
-							<option @if($locale == ($preference['locale'] ?? '')) selected @endif value="{{ $locale ?? '' }}">{{ $locale ?? '' }}</option>
+						@foreach(($localelist ?? []) as $localeCode)
+							<option @if((string) $localeCode === (string) ($preference['locale'] ?? '')) selected @endif value="{{ $localeCode }}">{{ $localeCode }}</option>
 						@endforeach
 					</select>
 				</div>
 			</div>
 			<div id="pref-edit-currency" class="tab-pane" role="tabpanel">
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['currency_sign'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_currency_sign" title="{{ $LANG['currency_sign'] ?? '' }}"><i class="ti ti-help"></i></a></label>
-					<input type="text" name="pref_currency_sign" value="{{ $preference['pref_currency_sign'] ?? '' }}" class="form-control" />
-					<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_currency_sign" title="{{ $LANG['currency_sign'] ?? '' }}">{{ $LANG['currency_sign_non_dollar'] ?? '' }} <i class="ti ti-help"></i></a>
-				</div>
+				@include('templates.default.partials.currency_sign_field', [
+					'currencySignFieldName' => 'pref_currency_sign',
+					'currencySignCurrentValue' => $preference['pref_currency_sign'] ?? '',
+				])
 				<div class="mb-3">
 					<label class="form-label">{{ $LANG['currency_code'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_currency_code" title="{{ $LANG['currency_code'] ?? '' }}"><i class="ti ti-help"></i></a></label>
 					<input type="text" name="currency_code" value="{{ $preference['currency_code'] ?? '' }}" class="form-control" />
@@ -196,16 +201,40 @@
 					<label class="form-label">{{ $LANG['include_online_payment'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_detail_line" title="{{ $LANG['invoice_detail_line'] ?? '' }}"><i class="ti ti-help"></i></a></label>
 					<div>
 						<div class="form-check form-check-inline">
-							<input type="checkbox" class="form-check-input" name="include_online_payment[]" value="paypal" id="pref_edit_iop_paypal" @if(in_array("paypal", explode(",", $preference['include_online_payment'] ?? ''))) checked @endif />
-							<label class="form-check-label" for="pref_edit_iop_paypal">{{ $LANG['paypal'] ?? '' }}</label>
+							<input type="checkbox" class="form-check-input" name="include_online_payment[]" value="stripe" id="pref_edit_iop_stripe" @if(in_array("stripe", explode(",", $preference['include_online_payment'] ?? ''))) checked @endif />
+							<label class="form-check-label" for="pref_edit_iop_stripe">Stripe</label>
 						</div>
 						<div class="form-check form-check-inline">
-							<input type="checkbox" class="form-check-input" name="include_online_payment[]" value="eway_merchant_xml" id="pref_edit_iop_eway" @if(in_array("eway_merchant_xml", explode(",", $preference['include_online_payment'] ?? ''))) checked @endif />
-							<label class="form-check-label" for="pref_edit_iop_eway">{{ $LANG['eway_merchant_xml'] ?? '' }}</label>
+							<input type="checkbox" class="form-check-input" name="include_online_payment[]" value="paypal_commerce" id="pref_edit_iop_paypal_commerce" @if(in_array("paypal_commerce", explode(",", $preference['include_online_payment'] ?? ''))) checked @endif />
+							<label class="form-check-label" for="pref_edit_iop_paypal_commerce">PayPal Commerce</label>
 						</div>
 						<div class="form-check form-check-inline">
-							<input type="checkbox" class="form-check-input" name="include_online_payment[]" value="paymentsgateway" id="pref_edit_iop_pg" @if(in_array("paymentsgateway", explode(",", $preference['include_online_payment'] ?? ''))) checked @endif />
-							<label class="form-check-label" for="pref_edit_iop_pg">{{ $LANG['paymentsgateway'] ?? '' }}</label>
+							<input type="checkbox" class="form-check-input" name="include_online_payment[]" value="mollie" id="pref_edit_iop_mollie" @if(in_array("mollie", explode(",", $preference['include_online_payment'] ?? ''))) checked @endif />
+							<label class="form-check-label" for="pref_edit_iop_mollie">Mollie</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input type="checkbox" class="form-check-input" name="include_online_payment[]" value="authorizenet" id="pref_edit_iop_authorizenet" @if(in_array("authorizenet", explode(",", $preference['include_online_payment'] ?? ''))) checked @endif />
+							<label class="form-check-label" for="pref_edit_iop_authorizenet">Authorize.net</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input type="checkbox" class="form-check-input" name="include_online_payment[]" value="eway_rapid" id="pref_edit_iop_eway_rapid" @if(in_array("eway_rapid", explode(",", $preference['include_online_payment'] ?? ''))) checked @endif />
+							<label class="form-check-label" for="pref_edit_iop_eway_rapid">{{ $LANG['eway_rapid'] ?? 'eWay Rapid' }}</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input type="checkbox" class="form-check-input" name="include_online_payment[]" value="paymentsgateway_modern" id="pref_edit_iop_pg_modern" @if(in_array("paymentsgateway_modern", explode(",", $preference['include_online_payment'] ?? ''))) checked @endif />
+							<label class="form-check-label" for="pref_edit_iop_pg_modern">{{ $LANG['paymentsgateway_modern'] ?? 'Payments Gateway' }}</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input type="checkbox" class="form-check-input" name="include_online_payment[]" value="kofi" id="pref_edit_iop_kofi" @if(in_array("kofi", explode(",", $preference['include_online_payment'] ?? ''))) checked @endif />
+							<label class="form-check-label" for="pref_edit_iop_kofi">Ko-fi</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input type="checkbox" class="form-check-input" name="include_online_payment[]" value="coinbase" id="pref_edit_iop_coinbase" @if(in_array("coinbase", explode(",", $preference['include_online_payment'] ?? ''))) checked @endif />
+							<label class="form-check-label" for="pref_edit_iop_coinbase">{{ $LANG['coinbase_commerce'] ?? 'Coinbase Commerce' }}</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input type="checkbox" class="form-check-input" name="include_online_payment[]" value="adyen" id="pref_edit_iop_adyen" @if(in_array("adyen", explode(",", $preference['include_online_payment'] ?? ''))) checked @endif />
+							<label class="form-check-label" for="pref_edit_iop_adyen">Adyen</label>
 						</div>
 					</div>
 				</div>

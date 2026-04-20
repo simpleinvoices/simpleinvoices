@@ -39,6 +39,20 @@
                    placeholder="Optional" autocomplete="name" />
         </div>
         <div class="mb-3">
+            <label class="form-label">{{ $LANG['language'] ?? 'Language' }}
+                <i class="ti ti-asterisk text-danger" style="font-size:.7rem;"></i>
+            </label>
+            <select name="registration_language" class="form-select" required>
+                @php
+                    $regLangDefault = post('registration_language') ?: ($registrationLanguageDefault ?? 'en_US');
+                @endphp
+                @foreach(($registrationLanguageList ?? []) as $lng)
+                <option value="{{ $lng->shortname }}" @if($regLangDefault === (string) $lng->shortname) selected @endif>{{ $lng->name }} ({{ $lng->shortname }})</option>
+                @endforeach
+            </select>
+            <div class="form-hint">Default language for this organisation (system defaults and the new administrator account).</div>
+        </div>
+        <div class="mb-3">
             <label class="form-label">Administrator password
                 <i class="ti ti-asterisk text-danger" style="font-size:.7rem;"></i>
             </label>

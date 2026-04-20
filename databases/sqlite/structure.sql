@@ -309,6 +309,11 @@ CREATE TABLE IF NOT EXISTS si_system_defaults (
 );
 CREATE UNIQUE INDEX IF NOT EXISTS si_system_defaults_pk ON si_system_defaults (domain_id, id);
 
+CREATE TABLE IF NOT EXISTS si_global_config (
+  name  VARCHAR(64) NOT NULL PRIMARY KEY,
+  value TEXT
+);
+
 CREATE TABLE IF NOT EXISTS si_tax (
   tax_id          INTEGER PRIMARY KEY AUTOINCREMENT,
   tax_description TEXT DEFAULT NULL,
@@ -329,7 +334,8 @@ CREATE TABLE IF NOT EXISTS si_user (
   enabled   INTEGER NOT NULL DEFAULT 1,
   user_id   INTEGER NOT NULL DEFAULT 0,
   auth_staff_email   TEXT DEFAULT NULL,
-  auth_customer_key  TEXT DEFAULT NULL
+  auth_customer_key  TEXT DEFAULT NULL,
+  preferred_language TEXT DEFAULT NULL
 );
 CREATE UNIQUE INDEX IF NOT EXISTS si_user_pk ON si_user (domain_id, id);
 CREATE UNIQUE INDEX IF NOT EXISTS si_user_unq_auth_staff_email ON si_user (auth_staff_email);

@@ -3,12 +3,13 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-//gets the long language name out of the short name
-$lang = getDefaultLanguage();
+// Display language as "Name (shortname)" on the manage row
+$langCode = getDefaultLanguage();
+$lang     = $langCode;
 $languages = getLanguageList();
-foreach($languages as $language) {
-	if($language->shortname == $lang) {
-		$lang = $language->name;
+foreach ($languages as $language) {
+	if ($language->shortname == $langCode) {
+		$lang = $language->name . ' (' . $language->shortname . ')';
 		break;
 	}
 }

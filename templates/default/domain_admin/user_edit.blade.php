@@ -11,6 +11,9 @@
     $curEnabled = $isPost
         ? (int) $curEnabledPost
         : (int) ($u['enabled'] ?? 1);
+    $curPrefLang = $isPost
+        ? trim((string) ($_POST['preferred_language'] ?? ''))
+        : trim((string) ($u['preferred_language'] ?? ''));
 @endphp
 
 @if($saved ?? false)
@@ -112,6 +115,7 @@
                    minlength="4" />
             <div class="invalid-feedback">New password must be at least 4 characters.</div>
         </div>
+        @include('user.preferred_language_field', ['userPreferredValue' => $curPrefLang])
         <div class="mb-3">
             <label class="form-label">Status</label>
             <select name="enabled" class="form-select">

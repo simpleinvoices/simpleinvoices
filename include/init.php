@@ -3,7 +3,7 @@
  * Zend framework init - start
  */
 set_include_path(get_include_path() . PATH_SEPARATOR . "./include/class");
-set_include_path(get_include_path() . PATH_SEPARATOR . "./library/"); // Legacy libs (e.g. paypal.class.php, encryption.php)
+set_include_path(get_include_path() . PATH_SEPARATOR . "./library/");
 // PDF library path no longer needed - using Composer autoloader
 set_include_path(get_include_path() . PATH_SEPARATOR . "./include/");
 
@@ -31,8 +31,6 @@ $auth_session = new LegacyAuthSession('SI_Auth');
 
 #ini_set('display_errors',true);
 
-// Legacy library that's not available via Composer
-require_once("library/paypal/paypal.class.php");
 include_once('./include/functions.php');
 include_once('./include/report_chart_guard.php');
 
@@ -149,9 +147,11 @@ spl_autoload_register(function ($class_name) {
 $db = db::getInstance();
 
 include_once("./include/sql_queries.php");
+require_once __DIR__ . '/global_app_settings.php';
 
 // Blade modifiers are registered in BladeView::registerDirectives(); use {{ htmlsafe($var) }} etc. in templates
 $install_tables_exists = checkTableExists(TB_PREFIX."biller");
+mergeGlobalAppSettingsIntoConfig($config);
 // $install_data_exists is set after include_auth.php (domain-scoped essential data check)
 
 //TODO - add this as a function in sql_queries.php or a class file
@@ -187,6 +187,11 @@ checkConnection();
 
 include('./include/include_auth.php');
 
+if ((int) ($config->authentication->enabled ?? 0) === 1 && empty($auth_session->fake_auth)) {
+	require_once __DIR__ . '/user_ui_language.php';
+	si_apply_user_ui_language();
+}
+
 $install_data_exists = false;
 if ($install_tables_exists == true) {
 	$install_data_exists = checkDataExists();
@@ -219,6 +224,7 @@ $early_exit[] = "invoice_template";
 $early_exit[] = "payments_print";
 #$early_exit[] = "reports_report_statement";
 $early_exit[] = "documentation_view";
+$early_exit[] = "user_save_ui_language";
 //$early_exit[] = "install_index";
 // Backup download must run before any HTML is output so it can send file headers
 if ($module === 'options' && $view === 'backup_database' && ($_POST['op'] ?? '') === 'backup_db') {

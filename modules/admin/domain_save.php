@@ -25,10 +25,27 @@ if ($op === 'insert_domain') {
     $admin_email    = (string) ($_POST['admin_email'] ?? '');
     $admin_name     = (string) ($_POST['admin_name'] ?? '');
     $admin_password = (string) ($_POST['admin_password'] ?? '');
+    $registration_language = isset($_POST['registration_language'])
+        ? trim((string) $_POST['registration_language'])
+        : '';
 
-    $result = auth_try_create_domain_with_administrator($name, $admin_email, $admin_name, $admin_password);
+    $result = auth_try_create_domain_with_administrator(
+        $name,
+        $admin_email,
+        $admin_name,
+        $admin_password,
+        $registration_language !== '' ? $registration_language : null
+    );
     if ($result['success']) {
         $saved = true;
+        $newDomainId = (int) ($result['domain_id'] ?? 0);
+        if ($newDomainId > 1 && !domainHasEssentialBootstrapData($newDomainId)) {
+            require_once __DIR__ . '/../../include/install_workspace_bootstrap.php';
+            $bootstrapLang = $registration_language !== ''
+                ? si_normalize_registration_language($registration_language)
+                : null;
+            install_bootstrap_new_domain_essentials($newDomainId, $bootstrapLang);
+        }
     } else {
         $error = $result['error'];
     }

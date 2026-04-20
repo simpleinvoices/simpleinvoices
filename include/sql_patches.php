@@ -1262,7 +1262,7 @@ ADD `language` VARCHAR( 255 ) NULL ;";
     $patch['206']['date'] = "20090826";
 
     $patch['207']['name'] = "Populate the status, locale, and language fields in preferences table";
-    $patch['207']['patch'] = "UPDATE `".TB_PREFIX."preferences` SET status = '1', locale = '".$config->local->locale."', language = '".$language."' ;";
+    $patch['207']['patch'] = "UPDATE `".TB_PREFIX."preferences` SET status = '1', locale = '".$language."', language = '".$language."' ;";
     $patch['207']['date'] = "20090826";
 
     $patch['208']['name'] = "Populate the status, locale, and language fields in preferences table";
@@ -2253,4 +2253,539 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['341']['name'] = "si_invoices: indexes for domain lists, charts, denorm owing filters";
     $patch['341']['patch'] = 'SELECT 1';
     $patch['341']['date'] = "20260418";
+
+    $patch['342']['name'] = "Add si_global_config for installation-wide app branding (header/footer)";
+    $patch['342']['patch'] = 'SELECT 1';
+    $patch['342']['date'] = "20260419";
+
+    $patch['343']['name'] = "si_user: preferred_language for per-user UI language override";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['343']['patch'] = checkFieldExists(TB_PREFIX . 'user', 'preferred_language')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'user ADD COLUMN preferred_language VARCHAR(32) NULL';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['343']['patch'] = checkFieldExists(TB_PREFIX . 'user', 'preferred_language')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'user` ADD COLUMN `preferred_language` VARCHAR(32) NULL';
+            break;
+    }
+    $patch['343']['date'] = "20260419";
+
+    // ── Payment gateway columns in si_biller ─────────────────────────────────
+
+    $patch['344']['name'] = "si_biller: stripe_secret_key for Stripe payment gateway";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['344']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'stripe_secret_key')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN stripe_secret_key VARCHAR(255) NULL';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['344']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'stripe_secret_key')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `stripe_secret_key` VARCHAR(255) NULL';
+            break;
+    }
+    $patch['344']['date'] = "20260420";
+
+    $patch['345']['name'] = "si_biller: stripe_webhook_secret for Stripe webhook verification";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['345']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'stripe_webhook_secret')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN stripe_webhook_secret VARCHAR(255) NULL';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['345']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'stripe_webhook_secret')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `stripe_webhook_secret` VARCHAR(255) NULL';
+            break;
+    }
+    $patch['345']['date'] = "20260420";
+
+    $patch['346']['name'] = "si_biller: stripe_test_mode flag (1=test, 0=live)";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['346']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'stripe_test_mode')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN stripe_test_mode TINYINT(1) NOT NULL DEFAULT 1';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['346']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'stripe_test_mode')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `stripe_test_mode` TINYINT(1) NOT NULL DEFAULT 1';
+            break;
+    }
+    $patch['346']['date'] = "20260420";
+
+    $patch['347']['name'] = "si_biller: paypal_client_id for PayPal Commerce Platform";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['347']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'paypal_client_id')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN paypal_client_id VARCHAR(255) NULL';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['347']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'paypal_client_id')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `paypal_client_id` VARCHAR(255) NULL';
+            break;
+    }
+    $patch['347']['date'] = "20260420";
+
+    $patch['348']['name'] = "si_biller: paypal_client_secret for PayPal Commerce Platform";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['348']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'paypal_client_secret')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN paypal_client_secret VARCHAR(255) NULL';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['348']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'paypal_client_secret')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `paypal_client_secret` VARCHAR(255) NULL';
+            break;
+    }
+    $patch['348']['date'] = "20260420";
+
+    $patch['349']['name'] = "si_biller: paypal_test_mode flag (1=sandbox, 0=live)";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['349']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'paypal_test_mode')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN paypal_test_mode TINYINT(1) NOT NULL DEFAULT 1';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['349']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'paypal_test_mode')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `paypal_test_mode` TINYINT(1) NOT NULL DEFAULT 1';
+            break;
+    }
+    $patch['349']['date'] = "20260420";
+
+    $patch['350']['name'] = "si_biller: mollie_api_key for Mollie payment gateway";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['350']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'mollie_api_key')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN mollie_api_key VARCHAR(255) NULL';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['350']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'mollie_api_key')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `mollie_api_key` VARCHAR(255) NULL';
+            break;
+    }
+    $patch['350']['date'] = "20260420";
+
+    $patch['351']['name'] = "si_biller: authorizenet_login_id for Authorize.net";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['351']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'authorizenet_login_id')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN authorizenet_login_id VARCHAR(255) NULL';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['351']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'authorizenet_login_id')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `authorizenet_login_id` VARCHAR(255) NULL';
+            break;
+    }
+    $patch['351']['date'] = "20260420";
+
+    $patch['352']['name'] = "si_biller: authorizenet_transaction_key for Authorize.net";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['352']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'authorizenet_transaction_key')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN authorizenet_transaction_key VARCHAR(255) NULL';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['352']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'authorizenet_transaction_key')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `authorizenet_transaction_key` VARCHAR(255) NULL';
+            break;
+    }
+    $patch['352']['date'] = "20260420";
+
+    $patch['353']['name'] = "si_biller: authorizenet_signature_key for Authorize.net webhook verification";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['353']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'authorizenet_signature_key')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN authorizenet_signature_key VARCHAR(255) NULL';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['353']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'authorizenet_signature_key')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `authorizenet_signature_key` VARCHAR(255) NULL';
+            break;
+    }
+    $patch['353']['date'] = "20260420";
+
+    $patch['354']['name'] = "si_biller: authorizenet_test_mode flag (1=sandbox, 0=live)";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['354']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'authorizenet_test_mode')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN authorizenet_test_mode TINYINT(1) NOT NULL DEFAULT 1';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['354']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'authorizenet_test_mode')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `authorizenet_test_mode` TINYINT(1) NOT NULL DEFAULT 1';
+            break;
+    }
+    $patch['354']['date'] = "20260420";
+
+    $patch['355']['name'] = "si_biller: eway_api_key for eWay Rapid API";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['355']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'eway_api_key')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN eway_api_key VARCHAR(255) NULL';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['355']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'eway_api_key')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `eway_api_key` VARCHAR(255) NULL';
+            break;
+    }
+    $patch['355']['date'] = "20260420";
+
+    $patch['356']['name'] = "si_biller: eway_api_password for eWay Rapid API";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['356']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'eway_api_password')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN eway_api_password VARCHAR(255) NULL';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['356']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'eway_api_password')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `eway_api_password` VARCHAR(255) NULL';
+            break;
+    }
+    $patch['356']['date'] = "20260420";
+
+    $patch['357']['name'] = "si_biller: eway_test_mode flag (1=sandbox, 0=live)";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['357']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'eway_test_mode')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN eway_test_mode TINYINT(1) NOT NULL DEFAULT 1';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['357']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'eway_test_mode')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `eway_test_mode` TINYINT(1) NOT NULL DEFAULT 1';
+            break;
+    }
+    $patch['357']['date'] = "20260420";
+
+    $patch['358']['name'] = "si_biller: kofi_username for Ko-fi tip link";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['358']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'kofi_username')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN kofi_username VARCHAR(100) NULL';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['358']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'kofi_username')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `kofi_username` VARCHAR(100) NULL';
+            break;
+    }
+    $patch['358']['date'] = "20260420";
+
+    $patch['359']['name'] = "si_biller: coinbase_api_key for Coinbase Commerce";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['359']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'coinbase_api_key')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN coinbase_api_key VARCHAR(255) NULL';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['359']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'coinbase_api_key')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `coinbase_api_key` VARCHAR(255) NULL';
+            break;
+    }
+    $patch['359']['date'] = "20260420";
+
+    $patch['360']['name'] = "si_biller: coinbase_webhook_secret for Coinbase Commerce webhook verification";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['360']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'coinbase_webhook_secret')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN coinbase_webhook_secret VARCHAR(255) NULL';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['360']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'coinbase_webhook_secret')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `coinbase_webhook_secret` VARCHAR(255) NULL';
+            break;
+    }
+    $patch['360']['date'] = "20260420";
+
+    $patch['361']['name'] = "si_biller: adyen_api_key for Adyen";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['361']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'adyen_api_key')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN adyen_api_key VARCHAR(255) NULL';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['361']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'adyen_api_key')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `adyen_api_key` VARCHAR(255) NULL';
+            break;
+    }
+    $patch['361']['date'] = "20260420";
+
+    $patch['362']['name'] = "si_biller: adyen_merchant_account for Adyen";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['362']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'adyen_merchant_account')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN adyen_merchant_account VARCHAR(255) NULL';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['362']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'adyen_merchant_account')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `adyen_merchant_account` VARCHAR(255) NULL';
+            break;
+    }
+    $patch['362']['date'] = "20260420";
+
+    $patch['363']['name'] = "si_biller: adyen_hmac_key for Adyen webhook verification";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['363']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'adyen_hmac_key')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN adyen_hmac_key VARCHAR(255) NULL';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['363']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'adyen_hmac_key')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `adyen_hmac_key` VARCHAR(255) NULL';
+            break;
+    }
+    $patch['363']['date'] = "20260420";
+
+    $patch['364']['name'] = "si_biller: adyen_live_prefix for Adyen live endpoint";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['364']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'adyen_live_prefix')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN adyen_live_prefix VARCHAR(100) NULL';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['364']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'adyen_live_prefix')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `adyen_live_prefix` VARCHAR(100) NULL';
+            break;
+    }
+    $patch['364']['date'] = "20260420";
+
+    $patch['365']['name'] = "si_biller: adyen_test_mode flag (1=test, 0=live)";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['365']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'adyen_test_mode')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN adyen_test_mode TINYINT(1) NOT NULL DEFAULT 1';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['365']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'adyen_test_mode')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `adyen_test_mode` TINYINT(1) NOT NULL DEFAULT 1';
+            break;
+    }
+    $patch['365']['date'] = "20260420";
+
+    // ── Legacy column cleanup ─────────────────────────────────────────────────
+
+    $patch['366']['name'] = "si_biller: drop legacy eway_customer_id (replaced by eway_api_key/eway_api_password)";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['366']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'eway_customer_id')
+                ? 'ALTER TABLE ' . TB_PREFIX . 'biller DROP COLUMN eway_customer_id'
+                : 'SELECT 1';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['366']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'eway_customer_id')
+                ? 'ALTER TABLE `' . TB_PREFIX . 'biller` DROP COLUMN `eway_customer_id`'
+                : 'SELECT 1';
+            break;
+    }
+    $patch['366']['date'] = "20260420";
+
+    $patch['367']['name'] = "si_biller: drop legacy paypal_business_name (replaced by PayPal Commerce)";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['367']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'paypal_business_name')
+                ? 'ALTER TABLE ' . TB_PREFIX . 'biller DROP COLUMN paypal_business_name'
+                : 'SELECT 1';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['367']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'paypal_business_name')
+                ? 'ALTER TABLE `' . TB_PREFIX . 'biller` DROP COLUMN `paypal_business_name`'
+                : 'SELECT 1';
+            break;
+    }
+    $patch['367']['date'] = "20260420";
+
+    $patch['368']['name'] = "si_biller: drop legacy paypal_notify_url";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['368']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'paypal_notify_url')
+                ? 'ALTER TABLE ' . TB_PREFIX . 'biller DROP COLUMN paypal_notify_url'
+                : 'SELECT 1';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['368']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'paypal_notify_url')
+                ? 'ALTER TABLE `' . TB_PREFIX . 'biller` DROP COLUMN `paypal_notify_url`'
+                : 'SELECT 1';
+            break;
+    }
+    $patch['368']['date'] = "20260420";
+
+    $patch['369']['name'] = "si_biller: drop legacy paypal_return_url";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['369']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'paypal_return_url')
+                ? 'ALTER TABLE ' . TB_PREFIX . 'biller DROP COLUMN paypal_return_url'
+                : 'SELECT 1';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['369']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'paypal_return_url')
+                ? 'ALTER TABLE `' . TB_PREFIX . 'biller` DROP COLUMN `paypal_return_url`'
+                : 'SELECT 1';
+            break;
+    }
+    $patch['369']['date'] = "20260420";
+
+    $patch['370']['name'] = "si_customers: drop credit_card_holder_name (PCI cleanup — stored cards no longer used)";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['370']['patch'] = checkFieldExists(TB_PREFIX . 'customers', 'credit_card_holder_name')
+                ? 'ALTER TABLE ' . TB_PREFIX . 'customers DROP COLUMN credit_card_holder_name'
+                : 'SELECT 1';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['370']['patch'] = checkFieldExists(TB_PREFIX . 'customers', 'credit_card_holder_name')
+                ? 'ALTER TABLE `' . TB_PREFIX . 'customers` DROP COLUMN `credit_card_holder_name`'
+                : 'SELECT 1';
+            break;
+    }
+    $patch['370']['date'] = "20260420";
+
+    $patch['371']['name'] = "si_customers: drop credit_card_number (PCI cleanup)";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['371']['patch'] = checkFieldExists(TB_PREFIX . 'customers', 'credit_card_number')
+                ? 'ALTER TABLE ' . TB_PREFIX . 'customers DROP COLUMN credit_card_number'
+                : 'SELECT 1';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['371']['patch'] = checkFieldExists(TB_PREFIX . 'customers', 'credit_card_number')
+                ? 'ALTER TABLE `' . TB_PREFIX . 'customers` DROP COLUMN `credit_card_number`'
+                : 'SELECT 1';
+            break;
+    }
+    $patch['371']['date'] = "20260420";
+
+    $patch['372']['name'] = "si_customers: drop credit_card_expiry_month (PCI cleanup)";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['372']['patch'] = checkFieldExists(TB_PREFIX . 'customers', 'credit_card_expiry_month')
+                ? 'ALTER TABLE ' . TB_PREFIX . 'customers DROP COLUMN credit_card_expiry_month'
+                : 'SELECT 1';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['372']['patch'] = checkFieldExists(TB_PREFIX . 'customers', 'credit_card_expiry_month')
+                ? 'ALTER TABLE `' . TB_PREFIX . 'customers` DROP COLUMN `credit_card_expiry_month`'
+                : 'SELECT 1';
+            break;
+    }
+    $patch['372']['date'] = "20260420";
+
+    $patch['373']['name'] = "si_customers: drop credit_card_expiry_year (PCI cleanup)";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['373']['patch'] = checkFieldExists(TB_PREFIX . 'customers', 'credit_card_expiry_year')
+                ? 'ALTER TABLE ' . TB_PREFIX . 'customers DROP COLUMN credit_card_expiry_year'
+                : 'SELECT 1';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['373']['patch'] = checkFieldExists(TB_PREFIX . 'customers', 'credit_card_expiry_year')
+                ? 'ALTER TABLE `' . TB_PREFIX . 'customers` DROP COLUMN `credit_card_expiry_year`'
+                : 'SELECT 1';
+            break;
+    }
+    $patch['373']['date'] = "20260420";
 

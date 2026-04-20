@@ -111,6 +111,7 @@
                    required autocomplete="new-password" minlength="4" />
             <div class="invalid-feedback">Password is required (at least 4 characters).</div>
         </div>
+        @include('user.preferred_language_field', ['userPreferredValue' => $userPreferredValue ?? ''])
         <div class="mb-3">
             <label class="form-label">Status</label>
             <select name="enabled" class="form-select">

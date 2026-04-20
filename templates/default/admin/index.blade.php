@@ -35,6 +35,18 @@
                 <h3 class="card-title">Admin Actions</h3>
             </div>
             <div class="list-group list-group-flush">
+                <a href="index.php?module=admin&view=app_settings" class="list-group-item list-group-item-action">
+                    <div class="row align-items-center">
+                        <div class="col-auto">
+                            <span class="avatar bg-azure-lt"><i class="ti ti-palette"></i></span>
+                        </div>
+                        <div class="col">
+                            <div class="fw-medium">{{ $LANG['admin_app_appearance'] ?? 'App appearance' }}</div>
+                            <div class="text-secondary small">{{ $LANG['admin_app_appearance_help'] ?? 'Product name, logo, and footer links for all domains' }}</div>
+                        </div>
+                        <div class="col-auto text-secondary"><i class="ti ti-chevron-right"></i></div>
+                    </div>
+                </a>
                 <a href="index.php?module=admin&view=domains" class="list-group-item list-group-item-action">
                     <div class="row align-items-center">
                         <div class="col-auto">

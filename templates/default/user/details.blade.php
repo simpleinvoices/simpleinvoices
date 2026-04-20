@@ -26,6 +26,10 @@
 				<th>{{ $LANG['enabled'] ?? '' }}</th>
 				<td>{{ $user['lang_enabled'] ?? '' }}</td>
 			</tr>
+			<tr>
+				<th>{{ $LANG['language'] ?? '' }}</th>
+				<td>{{ $userPreferredDisplay ?? '' }}</td>
+			</tr>
 		</table>
 	</div>
 	<div class="card-footer">
@@ -77,6 +81,7 @@
 			       minlength="4" />
 			<div class="invalid-feedback">New password must be at least 4 characters when set.</div>
 		</div>
+		@include('user.preferred_language_field', ['userPreferredValue' => $userPreferredValue ?? ''])
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['enabled'] ?? '' }}</label>
 			{html_options name=enabled options=$enabled selected=$user['enabled'] class="form-select"}

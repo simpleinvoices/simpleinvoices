@@ -7,6 +7,22 @@
  */
 
 /**
+ * Extra SELECT columns for si_user when preferred_language exists (patch 343+).
+ */
+function auth_user_preferred_language_select_fragment(): string
+{
+	static $cached = null;
+	if ($cached !== null) {
+		return $cached;
+	}
+	$cached = checkFieldExists(TB_PREFIX . 'user', 'preferred_language')
+		? ', u.preferred_language'
+		: '';
+
+	return $cached;
+}
+
+/**
  * Verify a plain-text password against a stored hash.
  * Supports: bcrypt/argon2 (password_verify) and legacy MD5 (for migration).
  *
@@ -104,6 +120,43 @@ function auth_identity_columns_for_role($roleId, $domainId, $email)
 }
 
 /**
+ * Whether an email is already used as a staff/biller login (global identity; unique auth_staff_email).
+ */
+function auth_is_staff_login_email_in_use($email): bool
+{
+    $norm = auth_normalize_email((string) $email);
+    if ($norm === null) {
+        return false;
+    }
+    if (auth_user_has_identity_columns()) {
+        $sth = dbQuery(
+            'SELECT 1 FROM ' . TB_PREFIX . 'user WHERE auth_staff_email = :n LIMIT 1',
+            ':n',
+            $norm
+        );
+
+        return (bool) ($sth && $sth->fetch());
+    }
+
+    $schema = auth_detect_schema();
+    if ($schema === 'modern' || $schema === 'mid') {
+        $sth = dbQuery(
+            "SELECT 1 FROM " . TB_PREFIX . "user u
+             INNER JOIN " . TB_PREFIX . "user_role r ON (u.role_id = r.id)
+             WHERE LOWER(TRIM(u.email)) = :norm
+             AND r.name IN ('administrator','domain_administrator','user','operator','biller','viewer')
+             LIMIT 1",
+            ':norm',
+            $norm
+        );
+
+        return (bool) ($sth && $sth->fetch());
+    }
+
+    return false;
+}
+
+/**
  * Upgrade a stored hash to bcrypt if it is MD5 or if bcrypt cost has changed.
  */
 function auth_upgrade_user_password_hash($id, $domainId, $plainPassword)
@@ -136,8 +189,9 @@ function auth_authenticate_staff_user($email, $password)
         $emailPredicate = auth_user_has_identity_columns()
             ? 'u.auth_staff_email = :norm '
             : 'LOWER(TRIM(u.email)) = :norm ';
+        $prefSel        = auth_user_preferred_language_select_fragment();
         $sth            = dbQuery(
-            "SELECT u.id, u.email, u.name, u.password, r.name AS role_name, u.domain_id, u.user_id
+            "SELECT u.id, u.email, u.name, u.password, r.name AS role_name, u.domain_id, u.user_id{$prefSel}
              FROM " . TB_PREFIX . "user u
              INNER JOIN " . TB_PREFIX . "user_role r ON (u.role_id = r.id)
              WHERE " . $emailPredicate . "AND u.enabled = :enabled
@@ -161,8 +215,9 @@ function auth_authenticate_staff_user($email, $password)
         if ($norm === null) {
             return false;
         }
-        $sth = dbQuery(
-            "SELECT u.id, u.email, u.password, r.name AS role_name, u.domain_id
+        $prefSel = auth_user_preferred_language_select_fragment();
+        $sth     = dbQuery(
+            "SELECT u.id, u.email, u.password, r.name AS role_name, u.domain_id{$prefSel}
              FROM " . TB_PREFIX . "user u
              INNER JOIN " . TB_PREFIX . "user_role r ON (u.role_id = r.id)
              WHERE LOWER(TRIM(u.email)) = :norm AND u.enabled = :enabled
@@ -239,10 +294,11 @@ function auth_authenticate_customer_user($email, $password, $domainId)
         return false;
     }
 
+    $prefSelCust = auth_user_preferred_language_select_fragment();
     if (auth_user_has_identity_columns()) {
         $key = $domainId . ':' . $norm;
         $sth = dbQuery(
-            "SELECT u.id, u.email, u.name, u.password, r.name AS role_name, u.domain_id, u.user_id
+            "SELECT u.id, u.email, u.name, u.password, r.name AS role_name, u.domain_id, u.user_id{$prefSelCust}
              FROM " . TB_PREFIX . "user u
              INNER JOIN " . TB_PREFIX . "user_role r ON (u.role_id = r.id)
              WHERE u.auth_customer_key = :akey AND u.enabled = :enabled AND r.name = 'customer'",
@@ -251,7 +307,7 @@ function auth_authenticate_customer_user($email, $password, $domainId)
         );
     } else {
         $sth = dbQuery(
-            "SELECT u.id, u.email, u.name, u.password, r.name AS role_name, u.domain_id, u.user_id
+            "SELECT u.id, u.email, u.name, u.password, r.name AS role_name, u.domain_id, u.user_id{$prefSelCust}
              FROM " . TB_PREFIX . "user u
              INNER JOIN " . TB_PREFIX . "user_role r ON (u.role_id = r.id)
              WHERE u.domain_id = :domain_id AND u.enabled = :enabled AND r.name = 'customer'

@@ -18,6 +18,12 @@
 					'icon' => 'ti-users',
 				])
 				@include('system_defaults.manage_row', [
+					'label' => $LANG['language'] ?? '',
+					'value' => $defaultLanguage ?? '',
+					'edit_param' => 'language',
+					'icon' => 'ti-language',
+				])
+				@include('system_defaults.manage_row', [
 					'label' => $LANG['default_tax'] ?? '',
 					'value' => $defaultTax['tax_description'] ?? '',
 					'edit_param' => 'tax',
@@ -149,12 +155,6 @@
 		{{-- Localisation & form --}}
 		<div class="card mb-4">
 			<div class="list-group list-group-flush">
-				@include('system_defaults.manage_row', [
-					'label' => $LANG['language'] ?? '',
-					'value' => $defaultLanguage ?? '',
-					'edit_param' => 'language',
-					'icon' => 'ti-language',
-				])
 				@include('system_defaults.manage_row', [
 					'label' => $LANG['number_of_taxes_per_line_item'] ?? '',
 					'value' => $defaults['tax_per_line_item'] ?? '',

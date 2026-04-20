@@ -628,8 +628,9 @@ class export
             $bladeView->assign('LANG', $LANG);
         }
         if ($pref_locale = $preference['locale'] and strlen($pref_locale) > 4) {
-            global $config;
-            $config->local->locale = $pref_locale;
+            siLocal::setLocaleOverride($pref_locale);
+        } else {
+            siLocal::setLocaleOverride(null);
         }
     }
 }

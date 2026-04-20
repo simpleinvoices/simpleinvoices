@@ -17,7 +17,9 @@ authentication.enabled              = true
 authentication.allow_public_domain_registration = false
 authentication.http                 = 
 
-local.locale                        = en_GB
+; Locale for number/date formatting (Intl) and UI language: si_system_defaults.language (Settings → System Preferences)
+
+; Export / PDF / precision / confirm line-item delete live in si_system_defaults (Settings → System Preferences)
 
 email.host                          = localhost
 email.smtp_auth                     = false
@@ -34,20 +36,10 @@ nonce.timelimit                     = 3600
 
 version.name                        = 2013.1.beta.8
 
-; Header branding (top-left logo and name). Override in custom.config.php or via Docker env SI_APP_NAME / SI_APP_LOGO
-app.name                            = Simple Invoices
-app.logo                            = 
-app.website                         = http://www.simpleinvoices.org
-app.website_label                   = Website
-app.footer_link1_label              = Simple Invoices
-app.footer_link1_url                = http://www.simpleinvoices.org
-app.footer_link2_label              = Forum
-app.footer_link2_url                = http://www.simpleinvoices.org/+
-app.footer_link3_label              = Blog
-app.footer_link3_url                = http://www.simpleinvoices.org/blog
-app.footer_link4_label              = Support
-app.footer_link4_url                = http://www.simpleinvoices.org/forum
-app.footer_text                     = Thank you for using
+; Header/footer branding (app name, logo URL, footer links) is stored in the database
+; table si_global_config after SQL patch 342. Site administrator: Admin → App appearance.
+; Optional overrides in custom.config.php (app.name, app.logo, …) apply only until the DB
+; holds a value for each key.
  
 debug.level                         = All
 debug.error_reporting               = E_ERROR

@@ -2,10 +2,33 @@
 /* Class: wrapper class for zend locale*/
 class siLocal
 {
+	/** Per-request override (e.g. invoice preference locale for PDF/export). */
+	private static ?string $localeOverride = null;
+
+	/**
+	 * Override Intl formatting locale for the current request (e.g. from invoice preference).
+	 * Pass null to use system default language from si_system_defaults.
+	 */
+	public static function setLocaleOverride(?string $locale): void
+	{
+		self::$localeOverride = ($locale !== null && $locale !== '') ? $locale : null;
+	}
+
 	private static function localeString($locale): string
 	{
-		global $config;
-		return $locale ?: (string) ($config->local->locale ?? 'en_US');
+		if ($locale !== null && $locale !== '') {
+			return (string) $locale;
+		}
+		if (self::$localeOverride !== null) {
+			return self::$localeOverride;
+		}
+		if (function_exists('getDefaultLanguage')) {
+			$lang = getDefaultLanguage();
+			if ($lang !== null && $lang !== '') {
+				return (string) $lang;
+			}
+		}
+		return 'en_GB';
 	}
 
 	private static function getPrecision(): int
@@ -15,9 +38,9 @@ class siLocal
 			global $config;
 			if (function_exists('getSystemDefaults')) {
 				$defaults = getSystemDefaults();
-				$precision = isset($defaults['precision']) ? (int) $defaults['precision'] : (int) ($config->local->precision ?? 2);
+				$precision = isset($defaults['precision']) ? (int) $defaults['precision'] : (int) ($config->local?->precision ?? 2);
 			} else {
-				$precision = (int) ($config->local->precision ?? 2);
+				$precision = (int) ($config->local?->precision ?? 2);
 			}
 		}
 		return $precision;

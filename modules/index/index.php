@@ -25,6 +25,19 @@ function dashboard_has_any_row(string $table, $domain_id): bool
     return (bool) $r;
 }
 
+/**
+ * One random row from a sample_data.json list (wizard placeholders / wizardFill JSON).
+ */
+function dashboard_random_sample_row(array $rows): array
+{
+    if ($rows === []) {
+        return [];
+    }
+    $k = array_rand($rows);
+
+    return $rows[$k];
+}
+
 $has_billers     = dashboard_has_enabled_row('biller', 'enabled', $domain_id);
 $has_customers   = dashboard_has_enabled_row('customers', 'enabled', $domain_id);
 $has_products    = dashboard_has_enabled_row('products', 'enabled', $domain_id);
@@ -45,15 +58,22 @@ if ($first_run_wizard) {
     $sample_data = ($sample_json && file_exists($sample_json))
         ? json_decode(file_get_contents($sample_json), true)
         : [];
-    $bladeView->assign('wizard_sample_biller', $sample_data['si_biller'][0] ?? []);
-    $bladeView->assign('wizard_sample_customer', $sample_data['si_customers'][0] ?? []);
-    $bladeView->assign('wizard_sample_product', $sample_data['si_products'][0] ?? []);
+    $bladeView->assign('wizard_sample_biller', dashboard_random_sample_row($sample_data['si_biller'] ?? []));
+    $bladeView->assign('wizard_sample_customer', dashboard_random_sample_row($sample_data['si_customers'] ?? []));
+    $bladeView->assign('wizard_sample_product', dashboard_random_sample_row($sample_data['si_products'] ?? []));
 } else {
     // Avoid loading thousands of rows for dashboard chrome / charts
     $billers = $customers = $products = $taxes = $preferences = [];
 }
 
 $defaults = getSystemDefaults();
+
+if (! $has_invoices) {
+	require_once __DIR__ . '/../../include/class/CurrencySignHelper.php';
+	$wizard_default_preference = getDefaultPreference($domain_id) ?: [];
+	$bladeView->assign('wizard_default_preference', $wizard_default_preference);
+	$bladeView->assign('wizard_currency_pref_done', ! empty($_SESSION['wizard_currency_pref_done']));
+}
 
 $bladeView->assign('first_run_wizard', $first_run_wizard);
 $bladeView->assign('dash_has_billers', $has_billers);

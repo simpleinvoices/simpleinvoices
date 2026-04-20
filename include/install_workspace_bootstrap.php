@@ -42,9 +42,10 @@ function install_execute_sql_file($sql_content)
  * Import essential_data.json for one domain (omit global/first-install-only tables).
  * Idempotent if bootstrap rows already exist.
  *
+ * @param string|null $domainUiLanguage LOCALE/LANGUAGE for essential_data (e.g. chosen at registration).
  * @return bool true when domainHasEssentialBootstrapData is satisfied afterward
  */
-function install_bootstrap_new_domain_essentials(int $targetDomainId): bool
+function install_bootstrap_new_domain_essentials(int $targetDomainId, ?string $domainUiLanguage = null): bool
 {
     if ($targetDomainId < 2) {
         return false;
@@ -57,7 +58,7 @@ function install_bootstrap_new_domain_essentials(int $targetDomainId): bool
     }
 
     try {
-        $essentialSql = install_build_essential_data_sql($targetDomainId, false);
+        $essentialSql = install_build_essential_data_sql($targetDomainId, false, $domainUiLanguage);
         if ($essentialSql !== '') {
             install_execute_sql_file($essentialSql);
         }

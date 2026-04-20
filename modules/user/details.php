@@ -41,6 +41,21 @@ if (!empty($_GET['return_module']) && !empty($_GET['return_view'])) {
 
 $bladeView->assign('user', $user);
 $bladeView->assign('roles', $roles);
+$bladeView->assign('userUiLanguageList', si_get_ui_language_list_sorted());
+$pref = trim((string) ($user['preferred_language'] ?? ''));
+$bladeView->assign('userPreferredValue', $pref);
+if ($pref === '') {
+	$userPreferredDisplay = ($LANG['ui_language_domain_default'] ?? '') . ' (' . getDefaultLanguage() . ')';
+} else {
+	$userPreferredDisplay = $pref;
+	foreach (si_get_ui_language_list_sorted() as $lng) {
+		if ((string) $lng->shortname === $pref) {
+			$userPreferredDisplay = $lng->name . ' (' . $lng->shortname . ')';
+			break;
+		}
+	}
+}
+$bladeView->assign('userPreferredDisplay', $userPreferredDisplay);
 $bladeView->assign('userSaveCsrfToken', siNonce('user_save'));
 $bladeView->assign('saveReturnModule', $saveReturnModule);
 $bladeView->assign('saveReturnView', $saveReturnView);

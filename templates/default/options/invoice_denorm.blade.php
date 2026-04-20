@@ -28,9 +28,9 @@
 					<input type="hidden" name="csrfprotectionbysr" value="{{ $invoiceDenormCsrfToken ?? '' }}" />
 					<input type="hidden" name="op" value="verify_denorm" />
 					<button type="submit" class="card-body text-start w-100 btn btn-light border rounded-3">
-						<div class="d-flex align-items-center">
-							<i class="ti ti-search me-2" style="font-size: 2rem;"></i>
-							<div>
+						<div class="d-flex align-items-start gap-2">
+							<i class="ti ti-search flex-shrink-0" style="font-size: 2rem;"></i>
+							<div class="min-w-0 flex-grow-1 text-break">
 								<div class="fw-medium">{{ $LANG['invoice_denorm_verify'] ?? 'Verify' }}</div>
 								<div class="small text-secondary">{{ $LANG['invoice_denorm_verify_hint'] ?? '' }}</div>
 							</div>
@@ -44,9 +44,9 @@
 					<input type="hidden" name="csrfprotectionbysr" value="{{ $invoiceDenormCsrfToken ?? '' }}" />
 					<input type="hidden" name="op" value="rebuild_denorm" />
 					<button type="submit" class="card-body text-start w-100 btn btn-light border rounded-3">
-						<div class="d-flex align-items-center">
-							<i class="ti ti-refresh me-2" style="font-size: 2rem;"></i>
-							<div>
+						<div class="d-flex align-items-start gap-2">
+							<i class="ti ti-refresh flex-shrink-0" style="font-size: 2rem;"></i>
+							<div class="min-w-0 flex-grow-1 text-break">
 								<div class="fw-medium">{{ $LANG['invoice_denorm_rebuild'] ?? 'Rebuild' }}</div>
 								<div class="small text-secondary">{{ $LANG['invoice_denorm_rebuild_hint'] ?? '' }}</div>
 							</div>

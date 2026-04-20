@@ -104,6 +104,169 @@ function getLanguageList() {
 	return $languages;
 }
 
+/**
+ * Installed UI languages for account forms, sorted by display name.
+ *
+ * @return array<int, SimpleXMLElement>|array{}
+ */
+function si_get_ui_language_list_sorted(): array
+{
+	$list = getLanguageList();
+	if (!is_array($list)) {
+		return [];
+	}
+	usort(
+		$list,
+		static function ($a, $b) {
+			return strcasecmp((string) ($a->name ?? ''), (string) ($b->name ?? ''));
+		}
+	);
+
+	return $list;
+}
+
+/**
+ * True if lang/{code}/lang.php exists (validated UI language folder name).
+ */
+function si_lang_folder_exists(string $code): bool
+{
+	$code = trim($code);
+	if ($code === '' || !preg_match('/^[a-zA-Z0-9_]+$/', $code)) {
+		return false;
+	}
+
+	return is_file(__DIR__ . '/../lang/' . $code . '/lang.php');
+}
+
+/**
+ * Language chosen at public registration — must exist on disk; fallback en_GB.
+ */
+function si_normalize_registration_language(?string $code): string
+{
+	$c = trim((string) $code);
+
+	return ($c !== '' && si_lang_folder_exists($c)) ? $c : 'en_GB';
+}
+
+/**
+ * Parsed HTTP Accept-Language entries, highest quality first.
+ *
+ * @return array<int, array{tag: string, q: float}>
+ */
+function si_parse_accept_language_entries(): array
+{
+	$raw = $_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? '';
+	$raw = is_string($raw) ? trim($raw) : '';
+	if ($raw === '') {
+		return [];
+	}
+	$out = [];
+	foreach (explode(',', $raw) as $piece) {
+		$piece = trim($piece);
+		if ($piece === '') {
+			continue;
+		}
+		$q       = 1.0;
+		$langTag = $piece;
+		if (preg_match('/;\s*q\s*=\s*([0-9.]+)/i', $piece, $qm)) {
+			$q = (float) $qm[1];
+			$langTag = trim(preg_replace('/;\s*q\s*=\s*[0-9.]+/i', '', $piece));
+		}
+		$langTag = trim((string) preg_replace('/;.*$/', '', $langTag));
+		if ($langTag !== '') {
+			$out[] = ['tag' => $langTag, 'q' => $q];
+		}
+	}
+	usort(
+		$out,
+		static function ($a, $b) {
+			if ($a['q'] === $b['q']) {
+				return 0;
+			}
+
+			return ($a['q'] < $b['q']) ? 1 : -1;
+		}
+	);
+
+	return $out;
+}
+
+/**
+ * Map one Accept-Language tag to possible locale folder names (e.g. de-DE → de_DE, de).
+ *
+ * @return list<string>
+ */
+function si_browser_tag_to_locale_candidates(string $tag): array
+{
+	$tag = trim($tag);
+	if ($tag === '') {
+		return [];
+	}
+	$out = [];
+	if (preg_match('/^([A-Za-z]{2,3})(?:[-_]([A-Za-z]{2}))?/i', $tag, $m)) {
+		$lang   = strtolower($m[1]);
+		$region = isset($m[2]) ? strtoupper($m[2]) : null;
+		if ($region !== null && $region !== '') {
+			$out[] = $lang . '_' . $region;
+		}
+		$out[] = $lang;
+	}
+
+	return array_values(array_unique($out));
+}
+
+/**
+ * Choose an installed UI language from the browser's Accept-Language header.
+ * Falls back to $fallback (default en_US) when installed, then en_GB, then the first available code.
+ *
+ * @param list<string> $availableCodes Shortnames from getLanguageList() (info.xml)
+ */
+function si_pick_ui_language_from_browser(array $availableCodes, string $fallback = 'en_US'): string
+{
+	$codes = array_values(array_filter(array_unique(array_map('trim', $availableCodes))));
+	if ($codes === []) {
+		return si_normalize_registration_language($fallback);
+	}
+	$map = [];
+	foreach ($codes as $c) {
+		$map[strtolower($c)] = $c;
+	}
+	foreach (si_parse_accept_language_entries() as $entry) {
+		foreach (si_browser_tag_to_locale_candidates($entry['tag']) as $cand) {
+			$key = strtolower($cand);
+			if (isset($map[$key])) {
+				return $map[$key];
+			}
+		}
+	}
+	// Bare "en" without region: prefer en_US, then en_GB, then any en_*.
+	foreach (si_parse_accept_language_entries() as $entry) {
+		$t = strtolower(trim($entry['tag']));
+		if (preg_match('/^[a-z]{2}$/', $t) && $t === 'en') {
+			foreach (['en_US', 'en_GB'] as $try) {
+				if (isset($map[strtolower($try)])) {
+					return $map[strtolower($try)];
+				}
+			}
+			foreach ($codes as $c) {
+				if (stripos($c, 'en_') === 0) {
+					return $c;
+				}
+			}
+		}
+	}
+	if (isset($map[strtolower($fallback)])) {
+		return $map[strtolower($fallback)];
+	}
+	foreach (['en_US', 'en_GB'] as $try) {
+		if (isset($map[strtolower($try)])) {
+			return $map[strtolower($try)];
+		}
+	}
+
+	return $codes[0];
+}
+
 $LANG = getLanguageArray();
 //TODO: if (getenv("HTTP_ACCEPT_LANGUAGE") != available language) AND (config lang != en) ) {
 // then use config lang

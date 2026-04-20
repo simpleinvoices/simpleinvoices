@@ -4,98 +4,82 @@ function smarty_function_online_payment_link($params, $_unused = null) {
     global $LANG;
     global $siUrl;
     global $config;
-		global $siUrl;
+
     $domain_id = domain_id::get($params['domain_id']);
+    $url       = getURL();
+    $types     = array_map('trim', explode(',', (string) ($params['type'] ?? '')));
+    $invoice_id = (int) ($params['invoice'] ?? 0);
 
-    $url = getURL();
-    if (in_array("paypal",explode(",", $params['type'])))
-    {
-
-        $link = "<a 
-            href=\"https://www.paypal.com/xclick/?business=".urlencode($params['business'])."&item_name=".urlencode($params['item_name'])."&invoice=".urlencode($params['invoice'])."&amount=".urlencode(number_format($params['amount'], 2, '.', ''))."&currency_code=".urlencode($params['currency_code'])."&notify_url=".urlencode($params['notify_url'])."&return=".urlencode($params['return_url'])."&no_shipping=1&no_note=1&custom=domain_id:".urlencode($domain_id)."; \">";
-
-        if($params['include_image'] == "true")
-        {
-            $link .= "<img border='0' src='".urlsafe($url)."/images/common/pay_with_paypal.gif'/>";
-        } else {
-            $link .= htmlspecialchars((string)($params['link_wording'] ?? ''), ENT_QUOTES, 'UTF-8');
-        } 
-
-        $link .= "</a>";
-
+    // ── PayPal Commerce Platform (v2 Orders) ───────────────────────────────────
+    if (in_array('paypal_commerce', $types) && $invoice_id > 0 && (float) ($params['amount'] ?? 0) > 0) {
+        $link  = '<a href="' . htmlspecialchars($siUrl, ENT_QUOTES) . '/index.php?module=api&view=paypal_checkout&invoice_id=' . $invoice_id . '" class="btn btn-sm btn-outline-primary me-1">';
+        $link .= '<i class="ti ti-brand-paypal me-1"></i>' . htmlspecialchars($LANG['pay_with_paypal'] ?? 'Pay with PayPal', ENT_QUOTES, 'UTF-8');
+        $link .= '</a>';
         echo $link;
     }
 
-    if (in_array("eway_shared",explode(",", $params['type'])))
-    {
-
-        $link = "<a 
-            href=\"https://www.paypal.com/xclick/?business=".urlencode($params['business']."
-            &item_name=".urlencode($params['item_name'])."&invoice=".urlencode($params['invoice'])."
-            &amount=".urlencode(number_format($params['amount'], 2, '.', ''))."&currency_code=".$params['currency_code'])."
-            &return=http://vcsweb.com.au&no_shipping=1&no_note=1\">";
-
-        if($params['include_image'] == "true")
-        {
-            $link .= "<img border='0' src='".urlsafe($url)."/images/common/pay_with_eway.gif'/>";
-        } else {
-            $link .= htmlspecialchars((string)($params['link_wording'] ?? ''), ENT_QUOTES, 'UTF-8');
-        } 
-
-        $link .= "</a>";
-
+    // ── Stripe ─────────────────────────────────────────────────────────────────
+    if (in_array('stripe', $types) && $invoice_id > 0 && (float) ($params['amount'] ?? 0) > 0) {
+        $link  = '<a href="' . htmlspecialchars($siUrl, ENT_QUOTES) . '/index.php?module=api&view=stripe_checkout&invoice_id=' . $invoice_id . '" class="btn btn-sm btn-outline-primary me-1">';
+        $link .= '<i class="ti ti-credit-card me-1"></i>' . htmlspecialchars($LANG['pay_with_stripe'] ?? 'Pay with Stripe', ENT_QUOTES, 'UTF-8');
+        $link .= '</a>';
         echo $link;
     }
 
-    if (in_array("paymentsgateway",explode(",", $params['type'])))
-    {
+    // ── Mollie ─────────────────────────────────────────────────────────────────
+    if (in_array('mollie', $types) && $invoice_id > 0 && (float) ($params['amount'] ?? 0) > 0) {
+        $link  = '<a href="' . htmlspecialchars($siUrl, ENT_QUOTES) . '/index.php?module=api&view=mollie_checkout&invoice_id=' . $invoice_id . '" class="btn btn-sm btn-outline-primary me-1">';
+        $link .= '<i class="ti ti-credit-card me-1"></i>' . htmlspecialchars($LANG['pay_with_mollie'] ?? 'Pay with Mollie', ENT_QUOTES, 'UTF-8');
+        $link .= '</a>';
+        echo $link;
+    }
 
+    // ── Authorize.net ──────────────────────────────────────────────────────────
+    if (in_array('authorizenet', $types) && $invoice_id > 0 && (float) ($params['amount'] ?? 0) > 0) {
+        $link  = '<a href="' . htmlspecialchars($siUrl, ENT_QUOTES) . '/index.php?module=api&view=authorizenet_checkout&invoice_id=' . $invoice_id . '" class="btn btn-sm btn-outline-primary me-1">';
+        $link .= '<i class="ti ti-credit-card me-1"></i>' . htmlspecialchars($LANG['pay_with_authorizenet'] ?? 'Pay with Authorize.net', ENT_QUOTES, 'UTF-8');
+        $link .= '</a>';
+        echo $link;
+    }
 
-        // $today = date('Y-m-d',$x);
-        /*
-           $datetime1 = new DateTime('0001-01-01');
-           $datetime2 = new DateTime('now', new DateTimeZone('UTC'));
-           $interval = $datetime1->diff($datetime2);
-        //$interval->format('%a %h %i %s ') ;
-        $seconds = ( $interval->format('%a') * 24 * 60 * 60) + ( $interval->format('%h') * 60 * 60 )+  ($interval->format('%i') * 60) + ( $interval->format('%s') ) ;
-         */
-        //$time = time() + 62135596800;
-        //$seconds =  $time . '0000000';
+    // ── Ko-fi (tip / donate) ──────────────────────────────────────────────────
+    if (in_array('kofi', $types) && $invoice_id > 0) {
+        $link  = '<a href="' . htmlspecialchars($siUrl, ENT_QUOTES) . '/index.php?module=api&view=kofi_checkout&invoice_id=' . $invoice_id . '" class="btn btn-sm btn-outline-warning me-1" target="_blank">';
+        $link .= '<i class="ti ti-coffee me-1"></i>' . htmlspecialchars($LANG['pay_with_kofi'] ?? 'Support on Ko-fi', ENT_QUOTES, 'UTF-8');
+        $link .= '</a>';
+        echo $link;
+    }
 
-        //get biller secure trans key here
-       // $hash_info = $params['api_id'] ."|1|1.0|". number_format($params['amount'], 2, '.', '') ."|". $seconds. "|". $params['invoice'] ;
-        //$hash = hash_hmac('md5', $hash_info, $params['transaction_password']) ;
+    // ── Coinbase Commerce ─────────────────────────────────────────────────────
+    if (in_array('coinbase', $types) && $invoice_id > 0 && (float) ($params['amount'] ?? 0) > 0) {
+        $link  = '<a href="' . htmlspecialchars($siUrl, ENT_QUOTES) . '/index.php?module=api&view=coinbase_checkout&invoice_id=' . $invoice_id . '" class="btn btn-sm btn-outline-primary me-1">';
+        $link .= '<i class="ti ti-currency-bitcoin me-1"></i>' . htmlspecialchars($LANG['pay_with_coinbase'] ?? 'Pay with Crypto', ENT_QUOTES, 'UTF-8');
+        $link .= '</a>';
+        echo $link;
+    }
 
-        $link = "<a 
-            href='https://swp.paymentsgateway.net/co/default.aspx?pg_api_login_id=". 
-            urlencode($params['api_id'])
-            . "&pg_billto_postal_name_company=". urlencode($params['customer']['name'])
-            . "&pg_version_number=1.0&pg_total_amount=" .
-            urlencode(number_format($params['amount'], 2, '.', ''))
-            ."&pg_transaction_order_number=". urlencode($params['invoice'])
-            ."&pg_billto_postal_name_first=". urlencode($params['customer']['attention'])
-            ."&pg_billto_postal_name_last=-&pg_billto_postal_street_line1=". urlencode($params['customer']['street_address'])
-            ."&pg_billto_postal_street_line2=". urlencode($params['customer']['street_address2'])
-            ."&pg_billto_postal_city=". urlencode($params['customer']['city'])
-            ."&pg_billto_postal_stateprov=". urlencode($params['customer']['state'])
-            ."&pg_billto_postal_postalcode=". urlencode($params['customer']['zip_code'])
-            ."&pg_billto_telecom_phone_number=". urlencode($params['customer']['phone'])
-            ."&pg_billto_online_email=". $params['customer']['email']
-            ."&pg_consumerorderid=". $params['invoice']
-            ."&pg_return_url=". $siUrl. "/api-ach&pg_save_client=2'>";
+    // ── Adyen ─────────────────────────────────────────────────────────────────
+    if (in_array('adyen', $types) && $invoice_id > 0 && (float) ($params['amount'] ?? 0) > 0) {
+        $link  = '<a href="' . htmlspecialchars($siUrl, ENT_QUOTES) . '/index.php?module=api&view=adyen_checkout&invoice_id=' . $invoice_id . '" class="btn btn-sm btn-outline-primary me-1">';
+        $link .= '<i class="ti ti-credit-card me-1"></i>' . htmlspecialchars($LANG['pay_with_adyen'] ?? 'Pay with Adyen', ENT_QUOTES, 'UTF-8');
+        $link .= '</a>';
+        echo $link;
+    }
 
-        if($params['include_image'] == "true")
-        {
-            $link .= "<img border='0' src='".urlsafe($url)."/images/common/pay_with_ach.gif'/>";
-        } else {
-            $link .= htmlspecialchars((string)($params['link_wording'] ?? ''), ENT_QUOTES, 'UTF-8');
-        } 
+    // ── eWay Rapid ────────────────────────────────────────────────────────────
+    if (in_array('eway_rapid', $types) && $invoice_id > 0 && (float) ($params['amount'] ?? 0) > 0) {
+        $link  = '<a href="' . htmlspecialchars($siUrl, ENT_QUOTES) . '/index.php?module=api&view=eway_checkout&invoice_id=' . $invoice_id . '" class="btn btn-sm btn-outline-primary me-1">';
+        $link .= '<i class="ti ti-credit-card me-1"></i>' . htmlspecialchars($LANG['pay_with_eway'] ?? 'Pay with eWay', ENT_QUOTES, 'UTF-8');
+        $link .= '</a>';
+        echo $link;
+    }
 
-        $link .= "</a>";
-
+    // ── Payments Gateway (modern redirect) ────────────────────────────────────
+    if (in_array('paymentsgateway_modern', $types) && $invoice_id > 0 && (float) ($params['amount'] ?? 0) > 0) {
+        $link  = '<a href="' . htmlspecialchars($siUrl, ENT_QUOTES) . '/index.php?module=api&view=paymentsgateway_checkout&invoice_id=' . $invoice_id . '" class="btn btn-sm btn-outline-primary me-1">';
+        $link .= '<i class="ti ti-credit-card me-1"></i>' . htmlspecialchars($LANG['pay_with_paymentsgateway'] ?? 'Pay Online', ENT_QUOTES, 'UTF-8');
+        $link .= '</a>';
         echo $link;
     }
 
 }
-
-?>

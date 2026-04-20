@@ -40,6 +40,7 @@
 				@endforeach
 			</select>
 		</div>
+		@include('user.preferred_language_field', ['userPreferredValue' => $userPreferredValue ?? ''])
 		<div class="mb-3">
 			<label class="form-label">{{ $LANG['password'] ?? '' }}</label>
 			<input type="password" name="password_field" value="{{ post('password_field') }}" autocomplete="new-password" class="form-control"

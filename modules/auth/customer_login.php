@@ -65,6 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'custo
             $auth_session->role_name = (string) ($user['role_name'] ?? '');
             $auth_session->domain_id = (string) ($user['domain_id'] ?? '1');
             $auth_session->user_id   = (string) ($user['user_id'] ?? '0');
+            $auth_session->ui_language = trim((string) ($user['preferred_language'] ?? ''));
 
             unset($_SESSION['login_csrf_token']);
 

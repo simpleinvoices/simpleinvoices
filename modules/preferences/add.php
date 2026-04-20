@@ -13,11 +13,13 @@ $bladeView -> assign('save',$save);
 $defaults = getSystemDefaults();
 $preferences = getActivePreferences();
 require_once __DIR__ . '/../../include/class/LocaleHelper.php';
+require_once __DIR__ . '/../../include/class/CurrencySignHelper.php';
 $localelist = LocaleHelper::getLocaleList();
 
 $bladeView->assign('preferences',$preferences);
 $bladeView->assign('defaults',$defaults);
 $bladeView->assign('localelist',$localelist);
+$bladeView->assign('defaultSystemLocale', getDefaultLanguage());
 
 $bladeView -> assign('pageActive', 'preference');
 $bladeView -> assign('subPageActive', 'preferences_add');

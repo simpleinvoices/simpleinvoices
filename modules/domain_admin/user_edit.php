@@ -25,8 +25,11 @@ if (!empty($_POST['email'])) {
     include './modules/domain_admin/user_save.php';
 } else {
     // Load the user — must belong to this domain and be customer or biller role
+    $prefSel = checkFieldExists(TB_PREFIX . 'user', 'preferred_language')
+        ? ', u.preferred_language'
+        : '';
     $sth = dbQuery(
-        "SELECT u.id, u.email, u.name, u.enabled, u.user_id, u.role_id,
+        "SELECT u.id, u.email, u.name, u.enabled, u.user_id, u.role_id{$prefSel},
                 r.name AS role_name
          FROM " . TB_PREFIX . "user u
          JOIN " . TB_PREFIX . "user_role r ON u.role_id = r.id
@@ -64,5 +67,6 @@ $billers = $sth->fetchAll(PDO::FETCH_ASSOC);
 
 $bladeView->assign('customers', $customers);
 $bladeView->assign('billers', $billers);
+$bladeView->assign('userUiLanguageList', si_get_ui_language_list_sorted());
 $bladeView->assign('domainUserSaveCsrfToken', siNonce('domain_user_save'));
 $bladeView->assign('pageActive', 'domain_admin');

@@ -28,6 +28,8 @@ if ($_POST['email'] != "") {
 
 $bladeView->assign('save', $save);
 $bladeView->assign('roles', $roles);
+$bladeView->assign('userUiLanguageList', si_get_ui_language_list_sorted());
+$bladeView->assign('userPreferredValue', trim((string) ($_POST['preferred_language'] ?? '')));
 $bladeView->assign('userSaveCsrfToken', siNonce('user_save'));
 
 $bladeView -> assign('pageActive', 'user');

@@ -104,24 +104,9 @@
 			</div>
 			<div id="bill-add-payment" class="tab-pane" role="tabpanel">
 				<div class="mb-3">
-					<label class="form-label">{{ $LANG['paypal_business_name'] ?? '' }}</label>
-					<input type="text" name="paypal_business_name" value="{{ post('paypal_business_name') }}" class="form-control" />
-				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['paypal_notify_url'] ?? '' }}</label>
-					<input type="text" name="paypal_notify_url" value="{{ post('paypal_notify_url') }}" class="form-control" />
-				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['paypal_return_url'] ?? '' }}</label>
-					<input type="text" name="paypal_return_url" value="{{ post('paypal_return_url') }}" class="form-control" />
-				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['eway_customer_id'] ?? '' }}</label>
-					<input type="text" name="eway_customer_id" value="{{ post('eway_customer_id') }}" class="form-control" />
-				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['paymentsgateway_api_id'] ?? '' }}</label>
+					<label class="form-label">{{ $LANG['paymentsgateway_api_id'] ?? 'Payments Gateway API Login ID' }}</label>
 					<input type="text" name="paymentsgateway_api_id" value="{{ post('paymentsgateway_api_id') }}" class="form-control" />
+					<small class="form-hint">{{ $LANG['paymentsgateway_api_id_hint'] ?? 'Your PaymentsGateway.net API Login ID. Configure other payment gateways after saving.' }}</small>
 				</div>
 			</div>
 			<div id="bill-add-custom" class="tab-pane" role="tabpanel">
