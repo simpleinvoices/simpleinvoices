@@ -41,7 +41,7 @@
 			</div>
 			<div id="pref-view-currency" class="tab-pane" role="tabpanel">
 				<table class="table table-vcenter">
-					<tr><th>{{ $LANG['currency_sign'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_currency_sign" title="{{ $LANG['currency_sign'] ?? '' }}"><i class="ti ti-help"></i></a></th><td>{{ $preference['pref_currency_sign'] }}</td></tr>
+					<tr><th>{{ $LANG['currency_sign'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_currency_sign" title="{{ $LANG['currency_sign'] ?? '' }}"><i class="ti ti-help"></i></a></th><td>{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }}</td></tr>
 					<tr><th>{{ $LANG['currency_code'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_currency_code" title="{{ $LANG['currency_code'] ?? '' }}"><i class="ti ti-help"></i></a></th><td>{{ $preference['currency_code'] ?? '' }}</td></tr>
 				</table>
 			</div>

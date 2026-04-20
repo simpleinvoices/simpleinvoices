@@ -163,6 +163,10 @@ class BladeView
         if (file_exists($helpersPath)) {
             require_once $helpersPath;
         }
+        $currencySignHelper = __DIR__ . '/class/CurrencySignHelper.php';
+        if (file_exists($currencySignHelper)) {
+            require_once $currencySignHelper;
+        }
         // Invoice template plugin (online payment link) – still uses legacy name for compatibility.
         $defaultInvoicePlugins = __DIR__ . '/../templates/invoices/default/plugins';
         if (!function_exists('smarty_function_online_payment_link')) {
@@ -417,6 +421,9 @@ class BladeView
                     if ($modifier === 'htmlsafe') {
                         return '{{ ' . $expr . ' }}';
                     }
+                    if ($modifier === 'si_currency_display') {
+                        return '{{ CurrencySignHelper::forDisplay(' . $expr . ') }}';
+                    }
                     $fnMap = [
                         'urlsafe'                  => 'urlsafe(%s)',
                         'outhtml'                  => 'outhtml(%s)',
@@ -469,6 +476,7 @@ class BladeView
             'siLocal_number_trim'  => 'siLocal::number_trim(%s)',
             'siLocal_number_formatted' => 'siLocal::number(%s)',
             'siLocal_date'     => 'siLocal::date(%s)',
+            'si_currency_display' => 'CurrencySignHelper::forDisplay(%s)',
             'unescape'         => 'outhtml(%s)',
             'urlencode'        => 'urlencode(%s)',
             'nl2br'            => 'nl2br(%s)',
@@ -548,6 +556,9 @@ class BladeView
                     $args = isset($m[3]) ? trim($m[3], ':') : '';
                     if ($modifier === 'htmlsafe' && $args === '') {
                         return '{{ ' . $expr . ' }}';
+                    }
+                    if ($modifier === 'si_currency_display' && $args === '') {
+                        return '{{ CurrencySignHelper::forDisplay(' . $expr . ') }}';
                     }
                     if (isset($simpleMods[$modifier]) && $args === '') {
                         return '{!! ' . sprintf($simpleMods[$modifier], $expr) . ' !!}';

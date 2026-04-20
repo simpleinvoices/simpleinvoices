@@ -356,146 +356,257 @@
 				</div>
 			</div>
 			<div id="bill-edit-payment" class="tab-pane" role="tabpanel">
-				<h4 class="mt-2 mb-3">Stripe</h4>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['stripe_secret_key'] ?? 'Stripe Secret Key' }}</label>
-					<input type="password" name="stripe_secret_key" value="{{ $biller['stripe_secret_key'] ?? '' }}" class="form-control" autocomplete="new-password" />
-					<small class="form-hint">{{ $LANG['stripe_secret_key_hint'] ?? 'From Stripe Dashboard → Developers → API keys (sk_live_… or sk_test_…)' }}</small>
-				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['stripe_webhook_secret'] ?? 'Stripe Webhook Secret' }}</label>
-					<input type="password" name="stripe_webhook_secret" value="{{ $biller['stripe_webhook_secret'] ?? '' }}" class="form-control" autocomplete="new-password" />
-					<small class="form-hint">{{ $LANG['stripe_webhook_secret_hint'] ?? 'From Stripe Dashboard → Developers → Webhooks → your endpoint (whsec_…). Webhook URL: ' }}{{ $siUrl ?? '' }}/index.php?module=api&amp;view=stripe_webhook&amp;biller_id={{ $biller['id'] ?? '' }}&amp;domain_id={{ $biller['domain_id'] ?? '' }}</small>
-				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['stripe_test_mode'] ?? 'Stripe Test Mode' }}</label>
-					<select name="stripe_test_mode" class="form-select">
-						<option value="1" @if(($biller['stripe_test_mode'] ?? 1) == 1) selected @endif>{{ $LANG['yes'] ?? 'Yes' }} (test)</option>
-						<option value="0" @if(($biller['stripe_test_mode'] ?? 1) == 0) selected @endif>{{ $LANG['no'] ?? 'No' }} (live)</option>
-					</select>
-				</div>
+				<div class="accordion" id="editPaymentAccordion">
 
-				<h4 class="mt-4 mb-3">PayPal Commerce</h4>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['paypal_client_id'] ?? 'PayPal Client ID' }}</label>
-					<input type="text" name="paypal_client_id" value="{{ $biller['paypal_client_id'] ?? '' }}" class="form-control" />
-					<small class="form-hint">{{ $LANG['paypal_client_id_hint'] ?? 'From PayPal Developer Dashboard → My Apps → your app → Client ID' }}</small>
-				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['paypal_client_secret'] ?? 'PayPal Client Secret' }}</label>
-					<input type="password" name="paypal_client_secret" value="{{ $biller['paypal_client_secret'] ?? '' }}" class="form-control" autocomplete="new-password" />
-				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['paypal_test_mode'] ?? 'PayPal Sandbox Mode' }}</label>
-					<select name="paypal_test_mode" class="form-select">
-						<option value="1" @if(($biller['paypal_test_mode'] ?? 1) == 1) selected @endif>{{ $LANG['yes'] ?? 'Yes' }} (sandbox)</option>
-						<option value="0" @if(($biller['paypal_test_mode'] ?? 1) == 0) selected @endif>{{ $LANG['no'] ?? 'No' }} (live)</option>
-					</select>
-				</div>
+					{{-- Stripe --}}
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="eph-stripe">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#epc-stripe" aria-expanded="false" aria-controls="epc-stripe">
+								<i class="ti ti-brand-stripe me-2"></i>Stripe
+								@if(!empty($biller['stripe_secret_key']))<span class="badge bg-success ms-2">{{ $LANG['configured'] ?? 'Configured' }}</span>@endif
+							</button>
+						</h2>
+						<div id="epc-stripe" class="accordion-collapse collapse" aria-labelledby="eph-stripe">
+							<div class="accordion-body">
+								<div class="mb-3">
+									<label class="form-label">{{ $LANG['stripe_secret_key'] ?? 'Stripe Secret Key' }}</label>
+									<input type="password" name="stripe_secret_key" value="{{ $biller['stripe_secret_key'] ?? '' }}" class="form-control" autocomplete="new-password" />
+									<small class="form-hint">{{ $LANG['stripe_secret_key_hint'] ?? 'From Stripe Dashboard → Developers → API keys (sk_live_… or sk_test_…)' }}</small>
+								</div>
+								<div class="mb-3">
+									<label class="form-label">{{ $LANG['stripe_webhook_secret'] ?? 'Stripe Webhook Secret' }}</label>
+									<input type="password" name="stripe_webhook_secret" value="{{ $biller['stripe_webhook_secret'] ?? '' }}" class="form-control" autocomplete="new-password" />
+									<small class="form-hint">{{ $LANG['stripe_webhook_secret_hint'] ?? 'From Stripe Dashboard → Developers → Webhooks → your endpoint (whsec_…). Webhook URL: ' }}{{ $siUrl ?? '' }}/index.php?module=api&amp;view=stripe_webhook&amp;biller_id={{ $biller['id'] ?? '' }}&amp;domain_id={{ $biller['domain_id'] ?? '' }}</small>
+								</div>
+								<div class="mb-0">
+									<label class="form-label">{{ $LANG['stripe_test_mode'] ?? 'Stripe Test Mode' }}</label>
+									<select name="stripe_test_mode" class="form-select">
+										<option value="1" @if(($biller['stripe_test_mode'] ?? 1) == 1) selected @endif>{{ $LANG['yes'] ?? 'Yes' }} (test)</option>
+										<option value="0" @if(($biller['stripe_test_mode'] ?? 1) == 0) selected @endif>{{ $LANG['no'] ?? 'No' }} (live)</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
 
-				<h4 class="mt-4 mb-3">Mollie</h4>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['mollie_api_key'] ?? 'Mollie API Key' }}</label>
-					<input type="password" name="mollie_api_key" value="{{ $biller['mollie_api_key'] ?? '' }}" class="form-control" autocomplete="new-password" />
-					<small class="form-hint">{{ $LANG['mollie_api_key_hint'] ?? 'From Mollie Dashboard → Developers → API keys (test_… or live_…). Webhook URL: ' }}{{ $siUrl ?? '' }}/index.php?module=api&amp;view=mollie_webhook</small>
-				</div>
+					{{-- PayPal --}}
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="eph-paypal">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#epc-paypal" aria-expanded="false" aria-controls="epc-paypal">
+								<i class="ti ti-brand-paypal me-2"></i>PayPal Commerce
+								@if(!empty($biller['paypal_client_id']))<span class="badge bg-success ms-2">{{ $LANG['configured'] ?? 'Configured' }}</span>@endif
+							</button>
+						</h2>
+						<div id="epc-paypal" class="accordion-collapse collapse" aria-labelledby="eph-paypal">
+							<div class="accordion-body">
+								<div class="mb-3">
+									<label class="form-label">{{ $LANG['paypal_client_id'] ?? 'PayPal Client ID' }}</label>
+									<input type="text" name="paypal_client_id" value="{{ $biller['paypal_client_id'] ?? '' }}" class="form-control" />
+									<small class="form-hint">{{ $LANG['paypal_client_id_hint'] ?? 'From PayPal Developer Dashboard → My Apps → your app → Client ID' }}</small>
+								</div>
+								<div class="mb-3">
+									<label class="form-label">{{ $LANG['paypal_client_secret'] ?? 'PayPal Client Secret' }}</label>
+									<input type="password" name="paypal_client_secret" value="{{ $biller['paypal_client_secret'] ?? '' }}" class="form-control" autocomplete="new-password" />
+								</div>
+								<div class="mb-0">
+									<label class="form-label">{{ $LANG['paypal_test_mode'] ?? 'PayPal Sandbox Mode' }}</label>
+									<select name="paypal_test_mode" class="form-select">
+										<option value="1" @if(($biller['paypal_test_mode'] ?? 1) == 1) selected @endif>{{ $LANG['yes'] ?? 'Yes' }} (sandbox)</option>
+										<option value="0" @if(($biller['paypal_test_mode'] ?? 1) == 0) selected @endif>{{ $LANG['no'] ?? 'No' }} (live)</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
 
-				<h4 class="mt-4 mb-3">Authorize.net</h4>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['authorizenet_login_id'] ?? 'API Login ID' }}</label>
-					<input type="text" name="authorizenet_login_id" value="{{ $biller['authorizenet_login_id'] ?? '' }}" class="form-control" />
-				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['authorizenet_transaction_key'] ?? 'Transaction Key' }}</label>
-					<input type="password" name="authorizenet_transaction_key" value="{{ $biller['authorizenet_transaction_key'] ?? '' }}" class="form-control" autocomplete="new-password" />
-				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['authorizenet_signature_key'] ?? 'Signature Key' }}
-						<small class="text-muted">({{ $LANG['optional'] ?? 'optional' }})</small>
-					</label>
-					<input type="password" name="authorizenet_signature_key" value="{{ $biller['authorizenet_signature_key'] ?? '' }}" class="form-control" autocomplete="new-password" />
-					<small class="form-hint">{{ $LANG['authorizenet_signature_key_hint'] ?? 'Used to verify webhook notifications. From Authorize.net Merchant Interface → Account → API Credentials & Keys.' }}
-					{{ $LANG['authorizenet_webhook_url_hint'] ?? 'Webhook URL: ' }}{{ $siUrl ?? '' }}/index.php?module=api&amp;view=authorizenet_webhook&amp;biller_id={{ $biller['id'] ?? '' }}&amp;domain_id={{ $biller['domain_id'] ?? '' }}</small>
-				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['authorizenet_test_mode'] ?? 'Authorize.net Sandbox Mode' }}</label>
-					<select name="authorizenet_test_mode" class="form-select">
-						<option value="1" @if(($biller['authorizenet_test_mode'] ?? 1) == 1) selected @endif>{{ $LANG['yes'] ?? 'Yes' }} (sandbox)</option>
-						<option value="0" @if(($biller['authorizenet_test_mode'] ?? 1) == 0) selected @endif>{{ $LANG['no'] ?? 'No' }} (live)</option>
-					</select>
-				</div>
+					{{-- Mollie --}}
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="eph-mollie">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#epc-mollie" aria-expanded="false" aria-controls="epc-mollie">
+								<i class="ti ti-credit-card me-2"></i>Mollie
+								@if(!empty($biller['mollie_api_key']))<span class="badge bg-success ms-2">{{ $LANG['configured'] ?? 'Configured' }}</span>@endif
+							</button>
+						</h2>
+						<div id="epc-mollie" class="accordion-collapse collapse" aria-labelledby="eph-mollie">
+							<div class="accordion-body">
+								<div class="mb-0">
+									<label class="form-label">{{ $LANG['mollie_api_key'] ?? 'Mollie API Key' }}</label>
+									<input type="password" name="mollie_api_key" value="{{ $biller['mollie_api_key'] ?? '' }}" class="form-control" autocomplete="new-password" />
+									<small class="form-hint">{{ $LANG['mollie_api_key_hint'] ?? 'From Mollie Dashboard → Developers → API keys (test_… or live_…). Webhook URL: ' }}{{ $siUrl ?? '' }}/index.php?module=api&amp;view=mollie_webhook</small>
+								</div>
+							</div>
+						</div>
+					</div>
 
-				<h4 class="mt-4 mb-3">{{ $LANG['eway_rapid'] ?? 'eWay Rapid' }}</h4>
+					{{-- Authorize.net --}}
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="eph-authnet">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#epc-authnet" aria-expanded="false" aria-controls="epc-authnet">
+								<i class="ti ti-credit-card me-2"></i>Authorize.net
+								@if(!empty($biller['authorizenet_login_id']))<span class="badge bg-success ms-2">{{ $LANG['configured'] ?? 'Configured' }}</span>@endif
+							</button>
+						</h2>
+						<div id="epc-authnet" class="accordion-collapse collapse" aria-labelledby="eph-authnet">
+							<div class="accordion-body">
+								<div class="mb-3">
+									<label class="form-label">{{ $LANG['authorizenet_login_id'] ?? 'API Login ID' }}</label>
+									<input type="text" name="authorizenet_login_id" value="{{ $biller['authorizenet_login_id'] ?? '' }}" class="form-control" />
+								</div>
+								<div class="mb-3">
+									<label class="form-label">{{ $LANG['authorizenet_transaction_key'] ?? 'Transaction Key' }}</label>
+									<input type="password" name="authorizenet_transaction_key" value="{{ $biller['authorizenet_transaction_key'] ?? '' }}" class="form-control" autocomplete="new-password" />
+								</div>
+								<div class="mb-3">
+									<label class="form-label">{{ $LANG['authorizenet_signature_key'] ?? 'Signature Key' }}
+										<small class="text-muted">({{ $LANG['optional'] ?? 'optional' }})</small>
+									</label>
+									<input type="password" name="authorizenet_signature_key" value="{{ $biller['authorizenet_signature_key'] ?? '' }}" class="form-control" autocomplete="new-password" />
+									<small class="form-hint">{{ $LANG['authorizenet_signature_key_hint'] ?? 'Used to verify webhook notifications. From Authorize.net Merchant Interface → Account → API Credentials & Keys.' }}
+									{{ $LANG['authorizenet_webhook_url_hint'] ?? 'Webhook URL: ' }}{{ $siUrl ?? '' }}/index.php?module=api&amp;view=authorizenet_webhook&amp;biller_id={{ $biller['id'] ?? '' }}&amp;domain_id={{ $biller['domain_id'] ?? '' }}</small>
+								</div>
+								<div class="mb-0">
+									<label class="form-label">{{ $LANG['authorizenet_test_mode'] ?? 'Authorize.net Sandbox Mode' }}</label>
+									<select name="authorizenet_test_mode" class="form-select">
+										<option value="1" @if(($biller['authorizenet_test_mode'] ?? 1) == 1) selected @endif>{{ $LANG['yes'] ?? 'Yes' }} (sandbox)</option>
+										<option value="0" @if(($biller['authorizenet_test_mode'] ?? 1) == 0) selected @endif>{{ $LANG['no'] ?? 'No' }} (live)</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
 
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['eway_api_key'] ?? 'eWay API Key' }}</label>
-					<input type="password" name="eway_api_key" value="{{ $biller['eway_api_key'] ?? '' }}" class="form-control" autocomplete="new-password" />
-					<small class="form-hint">{{ $LANG['eway_api_key_hint'] ?? 'From eWay My.eWay → API Keys (Rapid API Key)' }}</small>
-				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['eway_api_password'] ?? 'eWay API Password' }}</label>
-					<input type="password" name="eway_api_password" value="{{ $biller['eway_api_password'] ?? '' }}" class="form-control" autocomplete="new-password" />
-				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['eway_test_mode'] ?? 'eWay Sandbox Mode' }}</label>
-					<select name="eway_test_mode" class="form-select">
-						<option value="1" @if(($biller['eway_test_mode'] ?? 1) == 1) selected @endif>{{ $LANG['yes'] ?? 'Yes' }} (sandbox)</option>
-						<option value="0" @if(($biller['eway_test_mode'] ?? 1) == 0) selected @endif>{{ $LANG['no'] ?? 'No' }} (live)</option>
-					</select>
-				</div>
+					{{-- eWay --}}
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="eph-eway">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#epc-eway" aria-expanded="false" aria-controls="epc-eway">
+								<i class="ti ti-credit-card me-2"></i>{{ $LANG['eway_rapid'] ?? 'eWay Rapid' }}
+								@if(!empty($biller['eway_api_key']))<span class="badge bg-success ms-2">{{ $LANG['configured'] ?? 'Configured' }}</span>@endif
+							</button>
+						</h2>
+						<div id="epc-eway" class="accordion-collapse collapse" aria-labelledby="eph-eway">
+							<div class="accordion-body">
+								<div class="mb-3">
+									<label class="form-label">{{ $LANG['eway_api_key'] ?? 'eWay API Key' }}</label>
+									<input type="password" name="eway_api_key" value="{{ $biller['eway_api_key'] ?? '' }}" class="form-control" autocomplete="new-password" />
+									<small class="form-hint">{{ $LANG['eway_api_key_hint'] ?? 'From eWay My.eWay → API Keys (Rapid API Key)' }}</small>
+								</div>
+								<div class="mb-3">
+									<label class="form-label">{{ $LANG['eway_api_password'] ?? 'eWay API Password' }}</label>
+									<input type="password" name="eway_api_password" value="{{ $biller['eway_api_password'] ?? '' }}" class="form-control" autocomplete="new-password" />
+								</div>
+								<div class="mb-0">
+									<label class="form-label">{{ $LANG['eway_test_mode'] ?? 'eWay Sandbox Mode' }}</label>
+									<select name="eway_test_mode" class="form-select">
+										<option value="1" @if(($biller['eway_test_mode'] ?? 1) == 1) selected @endif>{{ $LANG['yes'] ?? 'Yes' }} (sandbox)</option>
+										<option value="0" @if(($biller['eway_test_mode'] ?? 1) == 0) selected @endif>{{ $LANG['no'] ?? 'No' }} (live)</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
 
-				<h4 class="mt-4 mb-3">Ko-fi</h4>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['kofi_username'] ?? 'Ko-fi Username' }}</label>
-					<input type="text" name="kofi_username" value="{{ $biller['kofi_username'] ?? '' }}" class="form-control" />
-					<small class="form-hint">{{ $LANG['kofi_username_hint'] ?? 'Your Ko-fi page username (e.g. yourname from ko-fi.com/yourname). Customers will be sent to your Ko-fi tip page.' }}</small>
-				</div>
+					{{-- Ko-fi --}}
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="eph-kofi">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#epc-kofi" aria-expanded="false" aria-controls="epc-kofi">
+								<i class="ti ti-coffee me-2"></i>Ko-fi
+								@if(!empty($biller['kofi_username']))<span class="badge bg-success ms-2">{{ $LANG['configured'] ?? 'Configured' }}</span>@endif
+							</button>
+						</h2>
+						<div id="epc-kofi" class="accordion-collapse collapse" aria-labelledby="eph-kofi">
+							<div class="accordion-body">
+								<div class="mb-0">
+									<label class="form-label">{{ $LANG['kofi_username'] ?? 'Ko-fi Username' }}</label>
+									<input type="text" name="kofi_username" value="{{ $biller['kofi_username'] ?? '' }}" class="form-control" />
+									<small class="form-hint">{{ $LANG['kofi_username_hint'] ?? 'Your Ko-fi page username (e.g. yourname from ko-fi.com/yourname). Customers will be sent to your Ko-fi tip page.' }}</small>
+								</div>
+							</div>
+						</div>
+					</div>
 
-				<h4 class="mt-4 mb-3">{{ $LANG['coinbase_commerce'] ?? 'Coinbase Commerce' }}</h4>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['coinbase_api_key'] ?? 'Coinbase Commerce API Key' }}</label>
-					<input type="password" name="coinbase_api_key" value="{{ $biller['coinbase_api_key'] ?? '' }}" class="form-control" autocomplete="new-password" />
-					<small class="form-hint">{{ $LANG['coinbase_api_key_hint'] ?? 'From Coinbase Commerce → Settings → API keys' }}</small>
-				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['coinbase_webhook_secret'] ?? 'Webhook Shared Secret' }}</label>
-					<input type="password" name="coinbase_webhook_secret" value="{{ $biller['coinbase_webhook_secret'] ?? '' }}" class="form-control" autocomplete="new-password" />
-					<small class="form-hint">{{ $LANG['coinbase_webhook_secret_hint'] ?? 'From Coinbase Commerce → Settings → Webhook subscriptions. Webhook URL: ' }}{{ $siUrl ?? '' }}/index.php?module=api&amp;view=coinbase_webhook&amp;biller_id={{ $biller['id'] ?? '' }}&amp;domain_id={{ $biller['domain_id'] ?? '' }}</small>
-				</div>
+					{{-- Coinbase --}}
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="eph-coinbase">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#epc-coinbase" aria-expanded="false" aria-controls="epc-coinbase">
+								<i class="ti ti-currency-bitcoin me-2"></i>{{ $LANG['coinbase_commerce'] ?? 'Coinbase Commerce' }}
+								@if(!empty($biller['coinbase_api_key']))<span class="badge bg-success ms-2">{{ $LANG['configured'] ?? 'Configured' }}</span>@endif
+							</button>
+						</h2>
+						<div id="epc-coinbase" class="accordion-collapse collapse" aria-labelledby="eph-coinbase">
+							<div class="accordion-body">
+								<div class="mb-3">
+									<label class="form-label">{{ $LANG['coinbase_api_key'] ?? 'Coinbase Commerce API Key' }}</label>
+									<input type="password" name="coinbase_api_key" value="{{ $biller['coinbase_api_key'] ?? '' }}" class="form-control" autocomplete="new-password" />
+									<small class="form-hint">{{ $LANG['coinbase_api_key_hint'] ?? 'From Coinbase Commerce → Settings → API keys' }}</small>
+								</div>
+								<div class="mb-0">
+									<label class="form-label">{{ $LANG['coinbase_webhook_secret'] ?? 'Webhook Shared Secret' }}</label>
+									<input type="password" name="coinbase_webhook_secret" value="{{ $biller['coinbase_webhook_secret'] ?? '' }}" class="form-control" autocomplete="new-password" />
+									<small class="form-hint">{{ $LANG['coinbase_webhook_secret_hint'] ?? 'From Coinbase Commerce → Settings → Webhook subscriptions. Webhook URL: ' }}{{ $siUrl ?? '' }}/index.php?module=api&amp;view=coinbase_webhook&amp;biller_id={{ $biller['id'] ?? '' }}&amp;domain_id={{ $biller['domain_id'] ?? '' }}</small>
+								</div>
+							</div>
+						</div>
+					</div>
 
-				<h4 class="mt-4 mb-3">Adyen</h4>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['adyen_api_key'] ?? 'Adyen API Key' }}</label>
-					<input type="password" name="adyen_api_key" value="{{ $biller['adyen_api_key'] ?? '' }}" class="form-control" autocomplete="new-password" />
-					<small class="form-hint">{{ $LANG['adyen_api_key_hint'] ?? 'From Adyen Customer Area → Developers → API credentials' }}</small>
-				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['adyen_merchant_account'] ?? 'Merchant Account' }}</label>
-					<input type="text" name="adyen_merchant_account" value="{{ $biller['adyen_merchant_account'] ?? '' }}" class="form-control" />
-				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['adyen_hmac_key'] ?? 'Webhook HMAC Key' }}</label>
-					<input type="password" name="adyen_hmac_key" value="{{ $biller['adyen_hmac_key'] ?? '' }}" class="form-control" autocomplete="new-password" />
-					<small class="form-hint">{{ $LANG['adyen_hmac_key_hint'] ?? 'From Adyen Customer Area → Developers → Webhooks → your endpoint → HMAC key. Webhook URL: ' }}{{ $siUrl ?? '' }}/index.php?module=api&amp;view=adyen_webhook</small>
-				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['adyen_live_prefix'] ?? 'Live Endpoint Prefix' }}</label>
-					<input type="text" name="adyen_live_prefix" value="{{ $biller['adyen_live_prefix'] ?? '' }}" class="form-control" />
-					<small class="form-hint">{{ $LANG['adyen_live_prefix_hint'] ?? 'Required for live mode only. Found in Adyen Customer Area → Developers → API URLs (e.g. 1797a841fbb37ca7).' }}</small>
-				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['adyen_test_mode'] ?? 'Adyen Test Mode' }}</label>
-					<select name="adyen_test_mode" class="form-select">
-						<option value="1" @if(($biller['adyen_test_mode'] ?? 1) == 1) selected @endif>{{ $LANG['yes'] ?? 'Yes' }} (test)</option>
-						<option value="0" @if(($biller['adyen_test_mode'] ?? 1) == 0) selected @endif>{{ $LANG['no'] ?? 'No' }} (live)</option>
-					</select>
-				</div>
+					{{-- Adyen --}}
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="eph-adyen">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#epc-adyen" aria-expanded="false" aria-controls="epc-adyen">
+								<i class="ti ti-credit-card me-2"></i>Adyen
+								@if(!empty($biller['adyen_api_key']))<span class="badge bg-success ms-2">{{ $LANG['configured'] ?? 'Configured' }}</span>@endif
+							</button>
+						</h2>
+						<div id="epc-adyen" class="accordion-collapse collapse" aria-labelledby="eph-adyen">
+							<div class="accordion-body">
+								<div class="mb-3">
+									<label class="form-label">{{ $LANG['adyen_api_key'] ?? 'Adyen API Key' }}</label>
+									<input type="password" name="adyen_api_key" value="{{ $biller['adyen_api_key'] ?? '' }}" class="form-control" autocomplete="new-password" />
+									<small class="form-hint">{{ $LANG['adyen_api_key_hint'] ?? 'From Adyen Customer Area → Developers → API credentials' }}</small>
+								</div>
+								<div class="mb-3">
+									<label class="form-label">{{ $LANG['adyen_merchant_account'] ?? 'Merchant Account' }}</label>
+									<input type="text" name="adyen_merchant_account" value="{{ $biller['adyen_merchant_account'] ?? '' }}" class="form-control" />
+								</div>
+								<div class="mb-3">
+									<label class="form-label">{{ $LANG['adyen_hmac_key'] ?? 'Webhook HMAC Key' }}</label>
+									<input type="password" name="adyen_hmac_key" value="{{ $biller['adyen_hmac_key'] ?? '' }}" class="form-control" autocomplete="new-password" />
+									<small class="form-hint">{{ $LANG['adyen_hmac_key_hint'] ?? 'From Adyen Customer Area → Developers → Webhooks → your endpoint → HMAC key. Webhook URL: ' }}{{ $siUrl ?? '' }}/index.php?module=api&amp;view=adyen_webhook</small>
+								</div>
+								<div class="mb-3">
+									<label class="form-label">{{ $LANG['adyen_live_prefix'] ?? 'Live Endpoint Prefix' }}</label>
+									<input type="text" name="adyen_live_prefix" value="{{ $biller['adyen_live_prefix'] ?? '' }}" class="form-control" />
+									<small class="form-hint">{{ $LANG['adyen_live_prefix_hint'] ?? 'Required for live mode only. Found in Adyen Customer Area → Developers → API URLs (e.g. 1797a841fbb37ca7).' }}</small>
+								</div>
+								<div class="mb-0">
+									<label class="form-label">{{ $LANG['adyen_test_mode'] ?? 'Adyen Test Mode' }}</label>
+									<select name="adyen_test_mode" class="form-select">
+										<option value="1" @if(($biller['adyen_test_mode'] ?? 1) == 1) selected @endif>{{ $LANG['yes'] ?? 'Yes' }} (test)</option>
+										<option value="0" @if(($biller['adyen_test_mode'] ?? 1) == 0) selected @endif>{{ $LANG['no'] ?? 'No' }} (live)</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
 
-				<h4 class="mt-4 mb-3">{{ $LANG['paymentsgateway_modern'] ?? 'Payments Gateway' }}</h4>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['paymentsgateway_api_id'] ?? 'API Login ID' }}</label>
-					<input type="text" name="paymentsgateway_api_id" value="{{ $biller['paymentsgateway_api_id'] ?? '' }}" class="form-control" />
-					<small class="form-hint">{{ $LANG['paymentsgateway_api_id_hint'] ?? 'Your PaymentsGateway.net API Login ID. Return URL will be configured automatically.' }}</small>
+					{{-- Payments Gateway --}}
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="eph-pgw">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#epc-pgw" aria-expanded="false" aria-controls="epc-pgw">
+								<i class="ti ti-credit-card me-2"></i>{{ $LANG['paymentsgateway_modern'] ?? 'Payments Gateway' }}
+								@if(!empty($biller['paymentsgateway_api_id']))<span class="badge bg-success ms-2">{{ $LANG['configured'] ?? 'Configured' }}</span>@endif
+							</button>
+						</h2>
+						<div id="epc-pgw" class="accordion-collapse collapse" aria-labelledby="eph-pgw">
+							<div class="accordion-body">
+								<div class="mb-0">
+									<label class="form-label">{{ $LANG['paymentsgateway_api_id'] ?? 'API Login ID' }}</label>
+									<input type="text" name="paymentsgateway_api_id" value="{{ $biller['paymentsgateway_api_id'] ?? '' }}" class="form-control" />
+									<small class="form-hint">{{ $LANG['paymentsgateway_api_id_hint'] ?? 'Your PaymentsGateway.net API Login ID. Return URL will be configured automatically.' }}</small>
+								</div>
+							</div>
+						</div>
+					</div>
+
 				</div>
 			</div>
 			<div id="bill-edit-custom" class="tab-pane" role="tabpanel">

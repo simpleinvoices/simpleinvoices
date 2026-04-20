@@ -7,6 +7,20 @@
 class CurrencySignHelper
 {
     /**
+     * Decode HTML entities in stored preference for UI output.
+     * Values may be literal symbols or entities (e.g. &#8364;) for legacy PDF/HTML compatibility;
+     * Blade {{ }} escapes ampersands, which would show the entity as plain text without this step.
+     */
+    public static function forDisplay(?string $stored): string
+    {
+        if ($stored === null || $stored === '') {
+            return '';
+        }
+
+        return html_entity_decode(trim($stored), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    }
+
+    /**
      * @return list<array{label: string, presets: list<array{value: string, label: string, aliases?: list<string>}>}>
      */
     public static function getPresetGroups(): array

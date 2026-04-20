@@ -193,15 +193,15 @@
 
 		<tr>
 				<td class="" >{{ $LANG['total'] ?? '' }}: </td>
-				<td class="" align="right" colspan="3">{{ $preference['pref_currency_sign'] }} {{ ($invoice['total'] ?? '')|siLocal_number }}</td>
+				<td class="" align="right" colspan="3">{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['total'] ?? '')|siLocal_number }}</td>
 		</tr>
 		<tr>
 				<td class="">{{ $LANG['paid'] ?? '' }}:</td>
-				<td class="" align="right" colspan="3" >{{ $preference['pref_currency_sign'] }} {{ ($invoice['paid'] ?? '')|siLocal_number }}</td>
+				<td class="" align="right" colspan="3" >{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['paid'] ?? '')|siLocal_number }}</td>
 		</tr>
 		<tr>
 				<td nowrap class="">{{ $LANG['owing'] ?? '' }}:</td>
-				<td class="" align="right" colspan="3" >{{ $preference['pref_currency_sign'] }} {{ ($invoice['owing'] ?? '')|siLocal_number }}</td>
+				<td class="" align="right" colspan="3" >{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['owing'] ?? '')|siLocal_number }}</td>
 		</tr>
 
 	</table>
@@ -228,8 +228,8 @@
 			<tr class="" >
 				<td class="col-qty">{{ ($invoiceItem['quantity'] ?? '')|siLocal_number_trim }}</td>
 				<td class="" colspan="3">{!! outhtml($invoiceItem['product']['description'] ?? '') !!}</td>
-				<td class="" align="right">{{ $preference['pref_currency_sign'] }} {{ ($invoiceItem['unit_price'] ?? '')|siLocal_number }}</td>
-				<td class="" align="right">{{ $preference['pref_currency_sign'] }} {{ ($invoiceItem['gross_total'] ?? '')|siLocal_number }}</td>
+				<td class="" align="right">{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoiceItem['unit_price'] ?? '')|siLocal_number }}</td>
+				<td class="" align="right">{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoiceItem['gross_total'] ?? '')|siLocal_number }}</td>
 			</tr>
 					@if(($invoiceItem['attribute'] ?? null) != null)
                             <tr class="si_product_attribute">
@@ -241,7 +241,7 @@
                                        @if(($v['visible'] ?? null) == true )
                                         <td class="si_product_attribute">
                                             @if(($v['type'] ?? null) == 'decimal')
-                                              {{ $v['name'] }}: {{ $preference['pref_currency_sign'] }} {{ ($v['value'] ?? '')|siLocal_number }};
+                                              {{ $v['name'] }}: {{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($v['value'] ?? '')|siLocal_number }};
                                              @elseif(($v['value'] ?? '') != '')
                                                {{ $v['name'] }}: {{ $v['value'] }};
                                             @endif
@@ -326,8 +326,8 @@
 				<td class=""></td>
 				<td class=""></td>
 				<td class=""></td>
-				<td align="right" class="">{{ $preference['pref_currency_sign'] }} {{ ($invoiceItem['unit_price'] ?? '')|siLocal_number }}</td>
-				<td align="right" class="">{{ $preference['pref_currency_sign'] }} {{ ($invoiceItem['total'] ?? '')|siLocal_number }}</td>
+				<td align="right" class="">{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoiceItem['unit_price'] ?? '')|siLocal_number }}</td>
+				<td align="right" class="">{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoiceItem['total'] ?? '')|siLocal_number }}</td>
 			</tr>
 			@endforeach
 	@endif
@@ -371,7 +371,7 @@
 	<tr>
         <td colspan="2"></td>
 		<td colspan="3" align="right">{{ $LANG['sub_total'] ?? '' }}&nbsp;</td>
-		<td colspan="1" align="right">@if($invoice_number_of_taxes > 1)<u>@endif{{ $preference['pref_currency_sign'] }} {{ ($invoice['gross'] ?? '')|siLocal_number }}@if($invoice_number_of_taxes > 1)</u>@endif</td>
+		<td colspan="1" align="right">@if($invoice_number_of_taxes > 1)<u>@endif{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['gross'] ?? '')|siLocal_number }}@if($invoice_number_of_taxes > 1)</u>@endif</td>
     </tr>
     @endif
 	@if($invoice_number_of_taxes > 1 )
@@ -385,7 +385,7 @@
     	<tr>
 	        <td colspan="2"></td>
 			<td colspan="3" align="right">{{ $line['tax_name'] ?? '' }}&nbsp;</td>
-			<td colspan="1" align="right">{{ $preference['pref_currency_sign'] ?? '' }} {{ siLocal::number($line['tax_amount'] ?? 0) }}</td>
+			<td colspan="1" align="right">{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ siLocal::number($line['tax_amount'] ?? 0) }}</td>
 	    </tr>
 	    @endif
 	@endforeach
@@ -394,7 +394,7 @@
 	<tr>
         <td colspan="2"></td>
 		<td colspan="3" align="right">{{ $LANG['tax_total'] ?? '' }}&nbsp;</td>
-		<td colspan="1" align="right"><u>{{ $preference['pref_currency_sign'] }} {{ ($invoice['total_tax'] ?? '')|siLocal_number }}</u></td>
+		<td colspan="1" align="right"><u>{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['total_tax'] ?? '')|siLocal_number }}</u></td>
     </tr>
     @endif
 	@if($invoice_number_of_taxes > 1)
@@ -405,13 +405,13 @@
     <tr>
         <td colspan="2"></td>
 		<td colspan="3" align="right"><b>{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['amount'] ?? '' }}&nbsp;</b></td>
-		<td colspan="1" align="right"><span class="double_underline"><u>{{ $preference['pref_currency_sign'] }} {{ ($invoice['total'] ?? '')|siLocal_number }}</u></span></td>
+		<td colspan="1" align="right"><span class="double_underline"><u>{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['total'] ?? '')|siLocal_number }}</u></span></td>
     </tr>
     {{-- tax section - end --}}
 {{-- <tr>
 			<td class="" colspan="2"></td>
 			<td align="right" colspan="3">{{ $LANG['sub_total'] ?? '' }}</td>
-			<td align="right" class="">{{ $preference['pref_currency_sign'] }} {{ ($invoice['gross'] ?? '')|siLocal_number }}</td>
+			<td align="right" class="">{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['gross'] ?? '')|siLocal_number }}</td>
 		</tr>
 
     @foreach(($invoice['tax_grouped'] ?? []) as $line)
@@ -421,7 +421,7 @@
 		<tr class=''>
 	        <td colspan="2"></td>
 			<td colspan="3" align="right">{{ $line['tax_name'] ?? '' }}</td>
-			<td colspan="1" align="right">{{ $preference['pref_currency_sign'] ?? '' }} {{ siLocal::number($line['tax_amount'] ?? 0) }}</td>
+			<td colspan="1" align="right">{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ siLocal::number($line['tax_amount'] ?? 0) }}</td>
 	    </tr>
 
 	    @endif
@@ -431,7 +431,7 @@
 	<tr class=''>
         <td colspan="2"></td>
 		<td colspan="3" align="right">{{ $LANG['tax_total'] ?? '' }}</td>
-		<td colspan="1" align="right"><u>{{ $preference['pref_currency_sign'] }} {{ ($invoice['total_tax'] ?? '')|siLocal_number }}</u></td>
+		<td colspan="1" align="right"><u>{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['total_tax'] ?? '')|siLocal_number }}</u></td>
     </tr>
 
 	<tr class="">
@@ -440,7 +440,7 @@
 	<tr class="">
 		<td class="" colspan="2"></td>
 		<td class="" align="right" colspan="3"><b>{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['amount'] ?? '' }}</b></td>
-		<td  class="" align="right"><span class="double_underline" >{{ $preference['pref_currency_sign'] }} {{ ($invoice['total'] ?? '')|siLocal_number }}</span></td>
+		<td  class="" align="right"><span class="double_underline" >{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['total'] ?? '')|siLocal_number }}</span></td>
 	</tr> --}}
 	<tr>
 		<td colspan="6"><br /><br /></td>

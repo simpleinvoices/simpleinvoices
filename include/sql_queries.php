@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/gateway_secrets_crypto.php';
+
 if(LOGGING) {
 	//Logging connection to prevent mysql_insert_id problems. Need to be called before the second connect...
 	$log_dbh = db_connector();
@@ -296,6 +298,7 @@ function getBiller($id, $domain_id='') {
 	global $LANG;
 	$record = getGenericRecord('biller', $id, $domain_id);
 	if (!$record) return false;
+	$record = si_biller_row_decrypt_gateway_secrets($record);
 	$record['wording_for_enabled'] = $record['enabled']==1?$LANG['enabled']:$LANG['disabled'];
 	return $record;
 }
@@ -415,6 +418,7 @@ function getBillers($domain_id='') {
 
 	for($i=0; $biller = $sth->fetch(); $i++) {
 
+		$biller = si_biller_row_decrypt_gateway_secrets($biller);
   		if ($biller['enabled'] == 1) {
   			$biller['enabled'] = $LANG['enabled'];
   		} else {
@@ -436,7 +440,12 @@ function getActiveBillers($domain_id='') {
 	}
 	$sth = dbQuery($sql,':domain_id',$domain_id);
 
-	return $sth->fetchAll();
+	$rows = $sth->fetchAll();
+	foreach ($rows as $i => $row) {
+		$rows[$i] = si_biller_row_decrypt_gateway_secrets($row);
+	}
+
+	return $rows;
 }
 
 function getTaxTypes() {
@@ -1300,6 +1309,7 @@ function getInvoiceType($id) {
 function insertBiller() {
 	global $db_server;
 	$domain_id = domain_id::get();
+	$gkey = si_gateway_secrets_get_raw_key();
 
 	// pgsql/sqlite: omit id column (auto-generated); mysql: explicit NULL triggers AUTO_INCREMENT
 	if ($db_server == 'pgsql' || $db_server == 'sqlite') {
@@ -1385,26 +1395,26 @@ function insertBiller() {
 		':custom_field3', $_POST['custom_field3'],
 		':custom_field4', $_POST['custom_field4'],
 		':enabled', $_POST['enabled'],
-		':stripe_secret_key', $_POST['stripe_secret_key'] ?? '',
-		':stripe_webhook_secret', $_POST['stripe_webhook_secret'] ?? '',
+		':stripe_secret_key', si_gateway_secret_encrypt(trim((string) ($_POST['stripe_secret_key'] ?? '')), $gkey),
+		':stripe_webhook_secret', si_gateway_secret_encrypt(trim((string) ($_POST['stripe_webhook_secret'] ?? '')), $gkey),
 		':stripe_test_mode', (int) ($_POST['stripe_test_mode'] ?? 1),
 		':paypal_client_id', $_POST['paypal_client_id'] ?? '',
-		':paypal_client_secret', $_POST['paypal_client_secret'] ?? '',
+		':paypal_client_secret', si_gateway_secret_encrypt(trim((string) ($_POST['paypal_client_secret'] ?? '')), $gkey),
 		':paypal_test_mode', (int) ($_POST['paypal_test_mode'] ?? 1),
-		':mollie_api_key', $_POST['mollie_api_key'] ?? '',
-		':authorizenet_login_id', $_POST['authorizenet_login_id'] ?? '',
-		':authorizenet_transaction_key', $_POST['authorizenet_transaction_key'] ?? '',
-		':authorizenet_signature_key', $_POST['authorizenet_signature_key'] ?? '',
+		':mollie_api_key', si_gateway_secret_encrypt(trim((string) ($_POST['mollie_api_key'] ?? '')), $gkey),
+		':authorizenet_login_id', si_gateway_secret_encrypt(trim((string) ($_POST['authorizenet_login_id'] ?? '')), $gkey),
+		':authorizenet_transaction_key', si_gateway_secret_encrypt(trim((string) ($_POST['authorizenet_transaction_key'] ?? '')), $gkey),
+		':authorizenet_signature_key', si_gateway_secret_encrypt(trim((string) ($_POST['authorizenet_signature_key'] ?? '')), $gkey),
 		':authorizenet_test_mode', (int) ($_POST['authorizenet_test_mode'] ?? 1),
-		':eway_api_key', $_POST['eway_api_key'] ?? '',
-		':eway_api_password', $_POST['eway_api_password'] ?? '',
+		':eway_api_key', si_gateway_secret_encrypt(trim((string) ($_POST['eway_api_key'] ?? '')), $gkey),
+		':eway_api_password', si_gateway_secret_encrypt(trim((string) ($_POST['eway_api_password'] ?? '')), $gkey),
 		':eway_test_mode', (int) ($_POST['eway_test_mode'] ?? 1),
 		':kofi_username', $_POST['kofi_username'] ?? '',
-		':coinbase_api_key', $_POST['coinbase_api_key'] ?? '',
-		':coinbase_webhook_secret', $_POST['coinbase_webhook_secret'] ?? '',
-		':adyen_api_key', $_POST['adyen_api_key'] ?? '',
+		':coinbase_api_key', si_gateway_secret_encrypt(trim((string) ($_POST['coinbase_api_key'] ?? '')), $gkey),
+		':coinbase_webhook_secret', si_gateway_secret_encrypt(trim((string) ($_POST['coinbase_webhook_secret'] ?? '')), $gkey),
+		':adyen_api_key', si_gateway_secret_encrypt(trim((string) ($_POST['adyen_api_key'] ?? '')), $gkey),
 		':adyen_merchant_account', $_POST['adyen_merchant_account'] ?? '',
-		':adyen_hmac_key', $_POST['adyen_hmac_key'] ?? '',
+		':adyen_hmac_key', si_gateway_secret_encrypt(trim((string) ($_POST['adyen_hmac_key'] ?? '')), $gkey),
 		':adyen_live_prefix', $_POST['adyen_live_prefix'] ?? '',
 		':adyen_test_mode', (int) ($_POST['adyen_test_mode'] ?? 1),
 		':domain_id', $domain_id
@@ -1423,6 +1433,7 @@ function insertBiller() {
 function updateBiller() {
 
 	$domain_id = domain_id::get();
+	$gkey = si_gateway_secrets_get_raw_key();
 
 	$sql = "UPDATE
 				".TB_PREFIX."biller
@@ -1495,26 +1506,26 @@ function updateBiller() {
 		':custom_field3', $_POST['custom_field3'],
 		':custom_field4', $_POST['custom_field4'],
 		':enabled', $_POST['enabled'],
-		':stripe_secret_key', $_POST['stripe_secret_key'] ?? '',
-		':stripe_webhook_secret', $_POST['stripe_webhook_secret'] ?? '',
+		':stripe_secret_key', si_gateway_secret_encrypt(trim((string) ($_POST['stripe_secret_key'] ?? '')), $gkey),
+		':stripe_webhook_secret', si_gateway_secret_encrypt(trim((string) ($_POST['stripe_webhook_secret'] ?? '')), $gkey),
 		':stripe_test_mode', (int) ($_POST['stripe_test_mode'] ?? 1),
 		':paypal_client_id', $_POST['paypal_client_id'] ?? '',
-		':paypal_client_secret', $_POST['paypal_client_secret'] ?? '',
+		':paypal_client_secret', si_gateway_secret_encrypt(trim((string) ($_POST['paypal_client_secret'] ?? '')), $gkey),
 		':paypal_test_mode', (int) ($_POST['paypal_test_mode'] ?? 1),
-		':mollie_api_key', $_POST['mollie_api_key'] ?? '',
-		':authorizenet_login_id', $_POST['authorizenet_login_id'] ?? '',
-		':authorizenet_transaction_key', $_POST['authorizenet_transaction_key'] ?? '',
-		':authorizenet_signature_key', $_POST['authorizenet_signature_key'] ?? '',
+		':mollie_api_key', si_gateway_secret_encrypt(trim((string) ($_POST['mollie_api_key'] ?? '')), $gkey),
+		':authorizenet_login_id', si_gateway_secret_encrypt(trim((string) ($_POST['authorizenet_login_id'] ?? '')), $gkey),
+		':authorizenet_transaction_key', si_gateway_secret_encrypt(trim((string) ($_POST['authorizenet_transaction_key'] ?? '')), $gkey),
+		':authorizenet_signature_key', si_gateway_secret_encrypt(trim((string) ($_POST['authorizenet_signature_key'] ?? '')), $gkey),
 		':authorizenet_test_mode', (int) ($_POST['authorizenet_test_mode'] ?? 1),
-		':eway_api_key', $_POST['eway_api_key'] ?? '',
-		':eway_api_password', $_POST['eway_api_password'] ?? '',
+		':eway_api_key', si_gateway_secret_encrypt(trim((string) ($_POST['eway_api_key'] ?? '')), $gkey),
+		':eway_api_password', si_gateway_secret_encrypt(trim((string) ($_POST['eway_api_password'] ?? '')), $gkey),
 		':eway_test_mode', (int) ($_POST['eway_test_mode'] ?? 1),
 		':kofi_username', $_POST['kofi_username'] ?? '',
-		':coinbase_api_key', $_POST['coinbase_api_key'] ?? '',
-		':coinbase_webhook_secret', $_POST['coinbase_webhook_secret'] ?? '',
-		':adyen_api_key', $_POST['adyen_api_key'] ?? '',
+		':coinbase_api_key', si_gateway_secret_encrypt(trim((string) ($_POST['coinbase_api_key'] ?? '')), $gkey),
+		':coinbase_webhook_secret', si_gateway_secret_encrypt(trim((string) ($_POST['coinbase_webhook_secret'] ?? '')), $gkey),
+		':adyen_api_key', si_gateway_secret_encrypt(trim((string) ($_POST['adyen_api_key'] ?? '')), $gkey),
 		':adyen_merchant_account', $_POST['adyen_merchant_account'] ?? '',
-		':adyen_hmac_key', $_POST['adyen_hmac_key'] ?? '',
+		':adyen_hmac_key', si_gateway_secret_encrypt(trim((string) ($_POST['adyen_hmac_key'] ?? '')), $gkey),
 		':adyen_live_prefix', $_POST['adyen_live_prefix'] ?? '',
 		':adyen_test_mode', (int) ($_POST['adyen_test_mode'] ?? 1),
 		':id', $_GET['id']

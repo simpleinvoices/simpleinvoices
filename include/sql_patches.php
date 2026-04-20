@@ -2789,3 +2789,44 @@ PRIMARY KEY ( `domain_id`, `id` )
     }
     $patch['373']['date'] = "20260420";
 
+    $patch['374']['name'] = "si_biller: widen gateway secret columns for libsodium payloads (si1:…)";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+            $patch['374']['patch'] = 'ALTER TABLE ' . TB_PREFIX . 'biller '
+                . 'ALTER COLUMN stripe_secret_key TYPE VARCHAR(768), '
+                . 'ALTER COLUMN stripe_webhook_secret TYPE VARCHAR(768), '
+                . 'ALTER COLUMN paypal_client_secret TYPE VARCHAR(768), '
+                . 'ALTER COLUMN mollie_api_key TYPE VARCHAR(768), '
+                . 'ALTER COLUMN authorizenet_login_id TYPE VARCHAR(768), '
+                . 'ALTER COLUMN authorizenet_transaction_key TYPE VARCHAR(768), '
+                . 'ALTER COLUMN authorizenet_signature_key TYPE VARCHAR(768), '
+                . 'ALTER COLUMN eway_api_key TYPE VARCHAR(768), '
+                . 'ALTER COLUMN eway_api_password TYPE VARCHAR(768), '
+                . 'ALTER COLUMN coinbase_api_key TYPE VARCHAR(768), '
+                . 'ALTER COLUMN coinbase_webhook_secret TYPE VARCHAR(768), '
+                . 'ALTER COLUMN adyen_api_key TYPE VARCHAR(768), '
+                . 'ALTER COLUMN adyen_hmac_key TYPE VARCHAR(768)';
+            break;
+        case 'pdo_sqlite':
+            $patch['374']['patch'] = 'SELECT 1';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['374']['patch'] = 'ALTER TABLE `' . TB_PREFIX . 'biller` '
+                . 'MODIFY `stripe_secret_key` VARCHAR(768) NULL, '
+                . 'MODIFY `stripe_webhook_secret` VARCHAR(768) NULL, '
+                . 'MODIFY `paypal_client_secret` VARCHAR(768) NULL, '
+                . 'MODIFY `mollie_api_key` VARCHAR(768) NULL, '
+                . 'MODIFY `authorizenet_login_id` VARCHAR(768) NULL, '
+                . 'MODIFY `authorizenet_transaction_key` VARCHAR(768) NULL, '
+                . 'MODIFY `authorizenet_signature_key` VARCHAR(768) NULL, '
+                . 'MODIFY `eway_api_key` VARCHAR(768) NULL, '
+                . 'MODIFY `eway_api_password` VARCHAR(768) NULL, '
+                . 'MODIFY `coinbase_api_key` VARCHAR(768) NULL, '
+                . 'MODIFY `coinbase_webhook_secret` VARCHAR(768) NULL, '
+                . 'MODIFY `adyen_api_key` VARCHAR(768) NULL, '
+                . 'MODIFY `adyen_hmac_key` VARCHAR(768) NULL';
+            break;
+    }
+    $patch['374']['date'] = "20260420";
+

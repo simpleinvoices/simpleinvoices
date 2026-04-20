@@ -33,6 +33,7 @@ if ($_POST['name'] != "") {
 $bladeView->assign('files', $files);
 $bladeView->assign('customFieldLabel', $customFieldLabel);
 $bladeView->assign('save', $save);
+$bladeView->assign('currentDomainId', domain_id::get());
 
 $bladeView -> assign('pageActive', 'biller');
 $bladeView -> assign('subPageActive', 'biller_add');

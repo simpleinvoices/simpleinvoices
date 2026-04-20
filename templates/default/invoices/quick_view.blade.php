@@ -1,6 +1,6 @@
 {{-- Invoice Quick View --}}
 @php
-    $currency = $preference['pref_currency_sign'] ?? '';
+    $currency = CurrencySignHelper::forDisplay($preference['pref_currency_sign'] ?? '');
 @endphp
 
 <div class="card mb-3">

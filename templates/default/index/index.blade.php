@@ -421,7 +421,7 @@
                                     <div class="col-md-6">
                                         <label class="form-label">{{ $LANG['unit_price'] ?? '' }}</label>
                                         <div class="input-group">
-                                            <span class="input-group-text">{{ ($wizard_default_preference['pref_currency_sign'] ?? null) ?? ($preference['pref_currency_sign'] ?? '$') }}</span>
+                                            <span class="input-group-text">{{ CurrencySignHelper::forDisplay(($wizard_default_preference['pref_currency_sign'] ?? null) ?? ($preference['pref_currency_sign'] ?? '$')) }}</span>
                                             <input type="text" name="unit_price" class="form-control" placeholder="{{ $wizard_sample_product['unit_price'] ?? '' }}">
                                         </div>
                                     </div>
