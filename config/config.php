@@ -30,7 +30,6 @@ email.secure                        =
 email.ack                           = false
 email.use_local_sendmail            = false
 
-encryption.default.key              = this_is_the_encryption_key_change_it
 ; 32-byte key for libsodium-encrypted gateway secrets in si_biller (64 hex chars, base64 of 32 bytes, or raw 32 bytes). Leave empty to store secrets as plaintext. Docker: SI_GATEWAY_SECRETS_KEY.
 encryption.gateway_secrets.key      = 
 nonce.key                           = this_should_be_random_and_secret_so_change_it

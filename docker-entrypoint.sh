@@ -79,7 +79,6 @@ php -r '
       "SI_EMAIL_SECURE" => "email.secure",
       "SI_EMAIL_ACK" => "email.ack",
       "SI_EMAIL_USE_LOCAL_SENDMAIL" => "email.use_local_sendmail",
-      "SI_ENCRYPTION_DEFAULT_KEY" => "encryption.default.key",
       "SI_GATEWAY_SECRETS_KEY" => "encryption.gateway_secrets.key",
       "SI_NONCE_KEY" => "nonce.key",
       "SI_NONCE_TIMELIMIT" => "nonce.timelimit",
