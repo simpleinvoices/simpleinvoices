@@ -60,56 +60,176 @@
 				</table>
 			</div>
 			<div id="bill-view-payment" class="tab-pane" role="tabpanel">
-				<h4 class="mt-2">Stripe</h4>
-				<table class="table table-vcenter table-wrap mb-3">
-					<tr><th>{{ $LANG['stripe_secret_key'] ?? 'Stripe Secret Key' }}</th><td>{{ !empty($biller['stripe_secret_key']) ? '••••••••' . substr($biller['stripe_secret_key'], -4) : '' }}</td></tr>
-					<tr><th>{{ $LANG['stripe_webhook_secret'] ?? 'Stripe Webhook Secret' }}</th><td>{{ !empty($biller['stripe_webhook_secret']) ? '••••' : '' }}</td></tr>
-					<tr><th>{{ $LANG['stripe_test_mode'] ?? 'Stripe Test Mode' }}</th><td>{{ ($biller['stripe_test_mode'] ?? 1) ? ($LANG['yes'] ?? 'Yes') : ($LANG['no'] ?? 'No') }}</td></tr>
-				</table>
-				<h4>PayPal Commerce</h4>
-				<table class="table table-vcenter table-wrap mb-3">
-					<tr><th>{{ $LANG['paypal_client_id'] ?? 'PayPal Client ID' }}</th><td>{{ $biller['paypal_client_id'] ?? '' }}</td></tr>
-					<tr><th>{{ $LANG['paypal_client_secret'] ?? 'PayPal Client Secret' }}</th><td>{{ !empty($biller['paypal_client_secret']) ? '••••' : '' }}</td></tr>
-					<tr><th>{{ $LANG['paypal_test_mode'] ?? 'PayPal Sandbox Mode' }}</th><td>{{ ($biller['paypal_test_mode'] ?? 1) ? ($LANG['yes'] ?? 'Yes') : ($LANG['no'] ?? 'No') }}</td></tr>
-				</table>
-				<h4>Mollie</h4>
-				<table class="table table-vcenter table-wrap mb-3">
-					<tr><th>{{ $LANG['mollie_api_key'] ?? 'Mollie API Key' }}</th><td>{{ !empty($biller['mollie_api_key']) ? '••••' . substr($biller['mollie_api_key'], -4) : '' }}</td></tr>
-				</table>
-				<h4>Authorize.net</h4>
-				<table class="table table-vcenter table-wrap mb-3">
-					<tr><th>{{ $LANG['authorizenet_login_id'] ?? 'API Login ID' }}</th><td>{{ $biller['authorizenet_login_id'] ?? '' }}</td></tr>
-					<tr><th>{{ $LANG['authorizenet_transaction_key'] ?? 'Transaction Key' }}</th><td>{{ !empty($biller['authorizenet_transaction_key']) ? '••••' : '' }}</td></tr>
-					<tr><th>{{ $LANG['authorizenet_signature_key'] ?? 'Signature Key' }}</th><td>{{ !empty($biller['authorizenet_signature_key']) ? '••••' : '' }}</td></tr>
-					<tr><th>{{ $LANG['authorizenet_test_mode'] ?? 'Sandbox Mode' }}</th><td>{{ ($biller['authorizenet_test_mode'] ?? 1) ? ($LANG['yes'] ?? 'Yes') : ($LANG['no'] ?? 'No') }}</td></tr>
-				</table>
-				<h4>{{ $LANG['eway_rapid'] ?? 'eWay Rapid' }}</h4>
-				<table class="table table-vcenter table-wrap mb-3">
-					<tr><th>{{ $LANG['eway_api_key'] ?? 'eWay API Key' }}</th><td>{{ !empty($biller['eway_api_key']) ? '••••' . substr($biller['eway_api_key'], -4) : '' }}</td></tr>
-					<tr><th>{{ $LANG['eway_api_password'] ?? 'eWay API Password' }}</th><td>{{ !empty($biller['eway_api_password']) ? '••••' : '' }}</td></tr>
-					<tr><th>{{ $LANG['eway_test_mode'] ?? 'eWay Sandbox Mode' }}</th><td>{{ ($biller['eway_test_mode'] ?? 1) ? ($LANG['yes'] ?? 'Yes') : ($LANG['no'] ?? 'No') }}</td></tr>
-				</table>
-				<h4>Ko-fi</h4>
-				<table class="table table-vcenter table-wrap mb-3">
-					<tr><th>{{ $LANG['kofi_username'] ?? 'Ko-fi Username' }}</th><td>{{ $biller['kofi_username'] ?? '' }}</td></tr>
-				</table>
-				<h4>{{ $LANG['coinbase_commerce'] ?? 'Coinbase Commerce' }}</h4>
-				<table class="table table-vcenter table-wrap mb-3">
-					<tr><th>{{ $LANG['coinbase_api_key'] ?? 'Coinbase API Key' }}</th><td>{{ !empty($biller['coinbase_api_key']) ? '••••' . substr($biller['coinbase_api_key'], -4) : '' }}</td></tr>
-					<tr><th>{{ $LANG['coinbase_webhook_secret'] ?? 'Webhook Secret' }}</th><td>{{ !empty($biller['coinbase_webhook_secret']) ? '••••' : '' }}</td></tr>
-				</table>
-				<h4>Adyen</h4>
-				<table class="table table-vcenter table-wrap mb-3">
-					<tr><th>{{ $LANG['adyen_api_key'] ?? 'Adyen API Key' }}</th><td>{{ !empty($biller['adyen_api_key']) ? '••••' . substr($biller['adyen_api_key'], -4) : '' }}</td></tr>
-					<tr><th>{{ $LANG['adyen_merchant_account'] ?? 'Merchant Account' }}</th><td>{{ $biller['adyen_merchant_account'] ?? '' }}</td></tr>
-					<tr><th>{{ $LANG['adyen_hmac_key'] ?? 'HMAC Key' }}</th><td>{{ !empty($biller['adyen_hmac_key']) ? '••••' : '' }}</td></tr>
-					<tr><th>{{ $LANG['adyen_live_prefix'] ?? 'Live Endpoint Prefix' }}</th><td>{{ $biller['adyen_live_prefix'] ?? '' }}</td></tr>
-					<tr><th>{{ $LANG['adyen_test_mode'] ?? 'Adyen Test Mode' }}</th><td>{{ ($biller['adyen_test_mode'] ?? 1) ? ($LANG['yes'] ?? 'Yes') : ($LANG['no'] ?? 'No') }}</td></tr>
-				</table>
-				<h4>{{ $LANG['paymentsgateway_modern'] ?? 'Payments Gateway' }}</h4>
-				<table class="table table-vcenter table-wrap mb-3">
-					<tr><th>{{ $LANG['paymentsgateway_api_id'] ?? 'API Login ID' }}</th><td>{{ $biller['paymentsgateway_api_id'] ?? '' }}</td></tr>
-				</table>
+				<div class="accordion" id="viewPaymentAccordion">
+
+					{{-- Stripe --}}
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="vph-stripe">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#vpc-stripe" aria-expanded="false" aria-controls="vpc-stripe">
+								<i class="ti ti-brand-stripe me-2"></i>Stripe
+								@if(!empty($biller['stripe_secret_key']))<span class="badge bg-success ms-2">{{ $LANG['configured'] ?? 'Configured' }}</span>@endif
+							</button>
+						</h2>
+						<div id="vpc-stripe" class="accordion-collapse collapse" aria-labelledby="vph-stripe">
+							<div class="accordion-body p-0">
+								<table class="table table-vcenter table-wrap mb-0">
+									<tr><th>{{ $LANG['stripe_secret_key'] ?? 'Stripe Secret Key' }}</th><td>{{ !empty($biller['stripe_secret_key']) ? '••••••••' . substr($biller['stripe_secret_key'], -4) : '' }}</td></tr>
+									<tr><th>{{ $LANG['stripe_webhook_secret'] ?? 'Stripe Webhook Secret' }}</th><td>{{ !empty($biller['stripe_webhook_secret']) ? '••••' : '' }}</td></tr>
+									<tr><th>{{ $LANG['stripe_test_mode'] ?? 'Stripe Test Mode' }}</th><td>{{ ($biller['stripe_test_mode'] ?? 1) ? ($LANG['yes'] ?? 'Yes') : ($LANG['no'] ?? 'No') }}</td></tr>
+								</table>
+							</div>
+						</div>
+					</div>
+
+					{{-- PayPal --}}
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="vph-paypal">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#vpc-paypal" aria-expanded="false" aria-controls="vpc-paypal">
+								<i class="ti ti-brand-paypal me-2"></i>PayPal Commerce
+								@if(!empty($biller['paypal_client_id']))<span class="badge bg-success ms-2">{{ $LANG['configured'] ?? 'Configured' }}</span>@endif
+							</button>
+						</h2>
+						<div id="vpc-paypal" class="accordion-collapse collapse" aria-labelledby="vph-paypal">
+							<div class="accordion-body p-0">
+								<table class="table table-vcenter table-wrap mb-0">
+									<tr><th>{{ $LANG['paypal_client_id'] ?? 'PayPal Client ID' }}</th><td>{{ $biller['paypal_client_id'] ?? '' }}</td></tr>
+									<tr><th>{{ $LANG['paypal_client_secret'] ?? 'PayPal Client Secret' }}</th><td>{{ !empty($biller['paypal_client_secret']) ? '••••' : '' }}</td></tr>
+									<tr><th>{{ $LANG['paypal_test_mode'] ?? 'PayPal Sandbox Mode' }}</th><td>{{ ($biller['paypal_test_mode'] ?? 1) ? ($LANG['yes'] ?? 'Yes') : ($LANG['no'] ?? 'No') }}</td></tr>
+								</table>
+							</div>
+						</div>
+					</div>
+
+					{{-- Mollie --}}
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="vph-mollie">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#vpc-mollie" aria-expanded="false" aria-controls="vpc-mollie">
+								<i class="ti ti-credit-card me-2"></i>Mollie
+								@if(!empty($biller['mollie_api_key']))<span class="badge bg-success ms-2">{{ $LANG['configured'] ?? 'Configured' }}</span>@endif
+							</button>
+						</h2>
+						<div id="vpc-mollie" class="accordion-collapse collapse" aria-labelledby="vph-mollie">
+							<div class="accordion-body p-0">
+								<table class="table table-vcenter table-wrap mb-0">
+									<tr><th>{{ $LANG['mollie_api_key'] ?? 'Mollie API Key' }}</th><td>{{ !empty($biller['mollie_api_key']) ? '••••' . substr($biller['mollie_api_key'], -4) : '' }}</td></tr>
+								</table>
+							</div>
+						</div>
+					</div>
+
+					{{-- Authorize.net --}}
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="vph-authnet">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#vpc-authnet" aria-expanded="false" aria-controls="vpc-authnet">
+								<i class="ti ti-credit-card me-2"></i>Authorize.net
+								@if(!empty($biller['authorizenet_login_id']))<span class="badge bg-success ms-2">{{ $LANG['configured'] ?? 'Configured' }}</span>@endif
+							</button>
+						</h2>
+						<div id="vpc-authnet" class="accordion-collapse collapse" aria-labelledby="vph-authnet">
+							<div class="accordion-body p-0">
+								<table class="table table-vcenter table-wrap mb-0">
+									<tr><th>{{ $LANG['authorizenet_login_id'] ?? 'API Login ID' }}</th><td>{{ $biller['authorizenet_login_id'] ?? '' }}</td></tr>
+									<tr><th>{{ $LANG['authorizenet_transaction_key'] ?? 'Transaction Key' }}</th><td>{{ !empty($biller['authorizenet_transaction_key']) ? '••••' : '' }}</td></tr>
+									<tr><th>{{ $LANG['authorizenet_signature_key'] ?? 'Signature Key' }}</th><td>{{ !empty($biller['authorizenet_signature_key']) ? '••••' : '' }}</td></tr>
+									<tr><th>{{ $LANG['authorizenet_test_mode'] ?? 'Sandbox Mode' }}</th><td>{{ ($biller['authorizenet_test_mode'] ?? 1) ? ($LANG['yes'] ?? 'Yes') : ($LANG['no'] ?? 'No') }}</td></tr>
+								</table>
+							</div>
+						</div>
+					</div>
+
+					{{-- eWay --}}
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="vph-eway">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#vpc-eway" aria-expanded="false" aria-controls="vpc-eway">
+								<i class="ti ti-credit-card me-2"></i>{{ $LANG['eway_rapid'] ?? 'eWay Rapid' }}
+								@if(!empty($biller['eway_api_key']))<span class="badge bg-success ms-2">{{ $LANG['configured'] ?? 'Configured' }}</span>@endif
+							</button>
+						</h2>
+						<div id="vpc-eway" class="accordion-collapse collapse" aria-labelledby="vph-eway">
+							<div class="accordion-body p-0">
+								<table class="table table-vcenter table-wrap mb-0">
+									<tr><th>{{ $LANG['eway_api_key'] ?? 'eWay API Key' }}</th><td>{{ !empty($biller['eway_api_key']) ? '••••' . substr($biller['eway_api_key'], -4) : '' }}</td></tr>
+									<tr><th>{{ $LANG['eway_api_password'] ?? 'eWay API Password' }}</th><td>{{ !empty($biller['eway_api_password']) ? '••••' : '' }}</td></tr>
+									<tr><th>{{ $LANG['eway_test_mode'] ?? 'eWay Sandbox Mode' }}</th><td>{{ ($biller['eway_test_mode'] ?? 1) ? ($LANG['yes'] ?? 'Yes') : ($LANG['no'] ?? 'No') }}</td></tr>
+								</table>
+							</div>
+						</div>
+					</div>
+
+					{{-- Ko-fi --}}
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="vph-kofi">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#vpc-kofi" aria-expanded="false" aria-controls="vpc-kofi">
+								<i class="ti ti-coffee me-2"></i>Ko-fi
+								@if(!empty($biller['kofi_username']))<span class="badge bg-success ms-2">{{ $LANG['configured'] ?? 'Configured' }}</span>@endif
+							</button>
+						</h2>
+						<div id="vpc-kofi" class="accordion-collapse collapse" aria-labelledby="vph-kofi">
+							<div class="accordion-body p-0">
+								<table class="table table-vcenter table-wrap mb-0">
+									<tr><th>{{ $LANG['kofi_username'] ?? 'Ko-fi Username' }}</th><td>{{ $biller['kofi_username'] ?? '' }}</td></tr>
+								</table>
+							</div>
+						</div>
+					</div>
+
+					{{-- Coinbase --}}
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="vph-coinbase">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#vpc-coinbase" aria-expanded="false" aria-controls="vpc-coinbase">
+								<i class="ti ti-currency-bitcoin me-2"></i>{{ $LANG['coinbase_commerce'] ?? 'Coinbase Commerce' }}
+								@if(!empty($biller['coinbase_api_key']))<span class="badge bg-success ms-2">{{ $LANG['configured'] ?? 'Configured' }}</span>@endif
+							</button>
+						</h2>
+						<div id="vpc-coinbase" class="accordion-collapse collapse" aria-labelledby="vph-coinbase">
+							<div class="accordion-body p-0">
+								<table class="table table-vcenter table-wrap mb-0">
+									<tr><th>{{ $LANG['coinbase_api_key'] ?? 'Coinbase API Key' }}</th><td>{{ !empty($biller['coinbase_api_key']) ? '••••' . substr($biller['coinbase_api_key'], -4) : '' }}</td></tr>
+									<tr><th>{{ $LANG['coinbase_webhook_secret'] ?? 'Webhook Secret' }}</th><td>{{ !empty($biller['coinbase_webhook_secret']) ? '••••' : '' }}</td></tr>
+								</table>
+							</div>
+						</div>
+					</div>
+
+					{{-- Adyen --}}
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="vph-adyen">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#vpc-adyen" aria-expanded="false" aria-controls="vpc-adyen">
+								<i class="ti ti-credit-card me-2"></i>Adyen
+								@if(!empty($biller['adyen_api_key']))<span class="badge bg-success ms-2">{{ $LANG['configured'] ?? 'Configured' }}</span>@endif
+							</button>
+						</h2>
+						<div id="vpc-adyen" class="accordion-collapse collapse" aria-labelledby="vph-adyen">
+							<div class="accordion-body p-0">
+								<table class="table table-vcenter table-wrap mb-0">
+									<tr><th>{{ $LANG['adyen_api_key'] ?? 'Adyen API Key' }}</th><td>{{ !empty($biller['adyen_api_key']) ? '••••' . substr($biller['adyen_api_key'], -4) : '' }}</td></tr>
+									<tr><th>{{ $LANG['adyen_merchant_account'] ?? 'Merchant Account' }}</th><td>{{ $biller['adyen_merchant_account'] ?? '' }}</td></tr>
+									<tr><th>{{ $LANG['adyen_hmac_key'] ?? 'HMAC Key' }}</th><td>{{ !empty($biller['adyen_hmac_key']) ? '••••' : '' }}</td></tr>
+									<tr><th>{{ $LANG['adyen_live_prefix'] ?? 'Live Endpoint Prefix' }}</th><td>{{ $biller['adyen_live_prefix'] ?? '' }}</td></tr>
+									<tr><th>{{ $LANG['adyen_test_mode'] ?? 'Adyen Test Mode' }}</th><td>{{ ($biller['adyen_test_mode'] ?? 1) ? ($LANG['yes'] ?? 'Yes') : ($LANG['no'] ?? 'No') }}</td></tr>
+								</table>
+							</div>
+						</div>
+					</div>
+
+					{{-- Payments Gateway --}}
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="vph-pgw">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#vpc-pgw" aria-expanded="false" aria-controls="vpc-pgw">
+								<i class="ti ti-credit-card me-2"></i>{{ $LANG['paymentsgateway_modern'] ?? 'Payments Gateway' }}
+								@if(!empty($biller['paymentsgateway_api_id']))<span class="badge bg-success ms-2">{{ $LANG['configured'] ?? 'Configured' }}</span>@endif
+							</button>
+						</h2>
+						<div id="vpc-pgw" class="accordion-collapse collapse" aria-labelledby="vph-pgw">
+							<div class="accordion-body p-0">
+								<table class="table table-vcenter table-wrap mb-0">
+									<tr><th>{{ $LANG['paymentsgateway_api_id'] ?? 'API Login ID' }}</th><td>{{ $biller['paymentsgateway_api_id'] ?? '' }}</td></tr>
+								</table>
+							</div>
+						</div>
+					</div>
+
+				</div>
 			</div>
 			<div id="bill-view-custom" class="tab-pane" role="tabpanel">
 				<table class="table table-vcenter table-wrap">

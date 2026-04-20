@@ -223,19 +223,28 @@ function blade_html_options(array $params) {
 }
 }
 
+if (!function_exists('showCustomFieldsForBlade')) {
+/**
+ * Render additional plugin-based custom fields for a category/item.
+ * The plugin-based extra custom field system was removed; the 4 standard custom fields
+ * (custom_field1–4) are rendered directly in Blade templates. This stub satisfies the
+ * @showCustomFields directive calls that remain in those templates.
+ */
+function showCustomFieldsForBlade($categorieId, $itemId = '') {
+    return '';
+}
+}
+
 if (!function_exists('blade_show_custom_fields')) {
 /**
  * Render custom fields for a category/item (tag form: {showCustomFields categorieId="1" itemId="..."}).
  *
  * @param array $params categorieId, itemId
- * @return string HTML from showCustomFieldsForBlade()
+ * @return string HTML
  */
 function blade_show_custom_fields(array $params) {
     $categorieId = $params['categorieId'] ?? '';
     $itemId = $params['itemId'] ?? '';
-    if (!function_exists('showCustomFieldsForBlade')) {
-        require_once __DIR__ . '/manageCustomFields.php';
-    }
     return showCustomFieldsForBlade($categorieId, $itemId);
 }
 }
