@@ -197,7 +197,6 @@ if ($install_tables_exists == true) {
 	$install_data_exists = checkDataExists();
 }
 
-include_once('./include/manageCustomFields.php');
 include_once("./include/validation.php");
 
 //if authentication enabled then do acl check etc..
