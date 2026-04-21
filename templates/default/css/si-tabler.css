@@ -836,6 +836,38 @@ a.segmented-control-item {
     align-items: center;
 }
 
+/* ── Tom Select sizing: match Bootstrap/Tabler form-select heights ──────── */
+.ts-wrapper.form-select .ts-control,
+.ts-wrapper.form-select.single.input-active .ts-control {
+    padding: var(--tblr-input-padding-y, 0.4375rem) var(--tblr-input-padding-x, 0.75rem);
+    min-height: unset;
+    font-size: var(--tblr-input-font-size, 0.875rem);
+    line-height: var(--tblr-input-line-height, 1.4285714286);
+}
+
+.ts-wrapper.form-select-sm .ts-control,
+.ts-wrapper.form-select-sm.single.input-active .ts-control {
+    padding: var(--tblr-input-padding-y-sm, 0.25rem) var(--tblr-input-padding-x-sm, 0.5rem);
+    min-height: unset;
+    font-size: var(--tblr-input-font-size-sm, 0.875rem);
+    line-height: var(--tblr-input-line-height, 1.4285714286);
+}
+
+/* ── Quick-add buttons (product + / customer +) ─────────────────────────── */
+/* Match the muted secondary colour used by the segmented-control row buttons */
+.si-add-customer-btn,
+.si-add-product-row-btn {
+    color: var(--tblr-secondary);
+    border-color: var(--tblr-border-color);
+    background: transparent;
+}
+.si-add-customer-btn:hover,
+.si-add-product-row-btn:hover {
+    color: var(--tblr-body-color);
+    border-color: var(--tblr-border-color);
+    background-color: rgba(0, 0, 0, 0.06);
+}
+
 /* ── Mobile grid / table fixes ──────────────────────────────────────────────
  * table-layout: auto lets a table exceed width:100% to fit content, even
  * inside a table-responsive scroll wrapper.  Switch to fixed on small screens
