@@ -1,4 +1,4 @@
-{{-- manage_sqlpatches.blade.php — applied SQL patches list --}}
+{{-- manage_sqlpatches.blade.php - applied SQL patches list --}}
 
 @php $total = count($patches ?? []); @endphp
 

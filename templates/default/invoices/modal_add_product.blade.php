@@ -33,7 +33,7 @@
 				</div>
 				<div id="si-new-product-error" class="alert alert-danger mt-3 d-none"></div>
 			</div>
-			<div class="modal-footer">
+			<div class="modal-footer justify-content-between">
 				<button type="button" class="btn btn-link" data-bs-dismiss="modal">{{ $LANG['cancel'] ?? 'Cancel' }}</button>
 				<button type="button" id="si-save-product-btn" class="btn btn-primary">
 					<i class="ti ti-check me-1"></i>{{ $LANG['save'] ?? 'Save' }}

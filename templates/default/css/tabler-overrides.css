@@ -3,7 +3,7 @@
  * Keeps legacy SI classes working and aligns with Tabler layout
  */
 
-/* Slate base theme — matches Tabler's ?theme-base=slate */
+/* Slate base theme - matches Tabler's ?theme-base=slate */
 [data-bs-theme-base='slate'] {
 	--tblr-gray-50: #f8fafc;
 	--tblr-gray-100: #f1f5f9;
@@ -89,7 +89,7 @@ html, body {
 	vertical-align: middle;
 }
 
-/* Messages as alerts — use Tabler color variables */
+/* Messages as alerts - use Tabler color variables */
 .si_message {
 	background: var(--tblr-info-lt, #e7f5ff);
 	border: 1px solid rgba(var(--tblr-info-rgb, 66, 153, 225), 0.3);
@@ -115,7 +115,7 @@ html, body {
 	color: var(--tblr-warning, #f59f00);
 }
 
-/* Forms: card-style and form controls — Tabler surface colors */
+/* Forms: card-style and form controls - Tabler surface colors */
 .si_form {
 	background: var(--tblr-bg-surface, #fff);
 	border: 1px solid var(--tblr-border-color, #e6e7e9);
@@ -245,7 +245,7 @@ html, body {
 	font-size: 1rem;
 }
 
-/* Filters (e.g. invoices manage) — use Tabler primary for selected state */
+/* Filters (e.g. invoices manage) - use Tabler primary for selected state */
 .si_filters_invoices,
 .si_buttons_manage_invoices {
 	margin-bottom: 1rem;

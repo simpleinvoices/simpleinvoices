@@ -104,7 +104,6 @@ $LANG['cron_id'] = "ID Cron";//1
 $LANG['cron_log'] = "Journal Cron";//1
 $LANG['currency_code'] = "Code de la devise";//1
 $LANG['currency_sign'] = "Symbole de la monnaie";//1
-$LANG['currency_sign_non_dollar'] = "Pour les monnaies qui ne sont pas des Euros, des Livres Sterlings ou des Dollards, merci de lire ceci";//1
 $LANG['custom_field'] = "Champ Optionnel";//1
 $LANG['custom_field1'] = "Champ Optionnel 1";//1
 $LANG['custom_field2'] = "Champ Optionnel 2";//1

@@ -101,7 +101,6 @@ $LANG['cron_id'] = "ID Cron";//1
 $LANG['cron_log'] = "Log cron";//1
 $LANG['currency_code'] = "Kode mata uang";//1
 $LANG['currency_sign'] = "Simbol mata uang";//1
-$LANG['currency_sign_non_dollar'] = "Untuk mata uang Euro, Poundsterling, dan non-\$, bacalah pesan berikut ";//1
 $LANG['custom_field'] = "Custom field";//1
 $LANG['custom_field1'] = "Custom field 1";//1
 $LANG['custom_field2'] = "Custom field 2";//1

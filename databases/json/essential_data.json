@@ -124,13 +124,19 @@
         {
             "pt_id": "1",
             "domain_id": "DOMAIN-ID",
-            "pt_description": "Cash",
+            "pt_description": "Electronic payment",
             "pt_enabled": "1"
         },
         {
             "pt_id": "2",
             "domain_id": "DOMAIN-ID",
             "pt_description": "Credit Card",
+            "pt_enabled": "1"
+        },
+        {
+            "pt_id": "3",
+            "domain_id": "DOMAIN-ID",
+            "pt_description": "Cash",
             "pt_enabled": "1"
         }
     ],
@@ -155,12 +161,12 @@
             "pref_inv_heading": "Invoice",
             "pref_inv_wording": "Invoice",
             "pref_inv_detail_heading": "Details",
-            "pref_inv_detail_line": "Payment is to be made within 14 days of the invoice being sent",
+            "pref_inv_detail_line": "Payment terms: {invoice.payment_term_label}",
             "pref_inv_payment_method": "Electronic Funds Transfer",
-            "pref_inv_payment_line1_name": "Account name",
-            "pref_inv_payment_line1_value": "H. & M. Simpson",
+            "pref_inv_payment_line1_name": "Account name:",
+            "pref_inv_payment_line1_value": "{{ Account name - edit in Invoice Preferences }}",
             "pref_inv_payment_line2_name": "Account number:",
-            "pref_inv_payment_line2_value": "0123-4567-7890",
+            "pref_inv_payment_line2_value": "{{ Account number - edit in Invoice Preferences }}",
             "status": "1",
             "locale": "LOCALE",
             "language": "LANGUAGE",

@@ -1705,6 +1705,32 @@ function productDescriptionExists($description, $excludeProductId = null, $domai
 	return (bool) ($sth && $sth->fetch());
 }
 
+/**
+ * Whether another biller in this domain already has the same name (trimmed, case-insensitive).
+ *
+ * @param string $name
+ * @param int|null $excludeBillerId When set, ignore this biller id (for edits).
+ * @param string $domain_id
+ */
+function billerNameExists($name, $excludeBillerId = null, $domain_id = '') {
+	$domain_id = domain_id::get($domain_id);
+	$norm = mb_strtolower(trim((string) $name), 'UTF-8');
+	if ($norm === '') {
+		return false;
+	}
+	$sql = "SELECT 1 FROM " . TB_PREFIX . "biller
+		WHERE domain_id = :domain_id AND LOWER(TRIM(name)) = :norm";
+	$args = [':domain_id', $domain_id, ':norm', $norm];
+	if ($excludeBillerId !== null && (int) $excludeBillerId > 0) {
+		$sql .= " AND id <> :exclude_id";
+		$args[] = ':exclude_id';
+		$args[] = (int) $excludeBillerId;
+	}
+	$sql .= " LIMIT 1";
+	$sth = dbQuery($sql, ...$args);
+	return (bool) ($sth && $sth->fetch());
+}
+
 function updateCustomer() {
 	global $config;
 	$domain_id = domain_id::get();

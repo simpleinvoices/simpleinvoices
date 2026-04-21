@@ -101,7 +101,6 @@ $LANG['cron_id'] = "Cron ID";//1
 $LANG['cron_log'] = "Cron log";//1
 $LANG['currency_code'] = "Kód měny";//1
 $LANG['currency_sign'] = "Symbol měny";//1
-$LANG['currency_sign_non_dollar'] = "Euro, Libra, nedolarový symbol - čtěte více";//1
 $LANG['custom_field'] = "Volitelné pole";//1
 $LANG['custom_field1'] = "Volitelné pole 1";//1
 $LANG['custom_field2'] = "Volitelné pole 2";//1

@@ -78,7 +78,7 @@
                         $roleBadge = $u['role_name'] === 'customer' ? 'bg-blue-lt' : 'bg-orange-lt';
                     @endphp
                     <tr>
-                        <td class="fw-medium">{{ $u['name'] ?: '—' }}</td>
+                        <td class="fw-medium">{{ $u['name'] ?: '-' }}</td>
                         <td class="text-secondary">{{ $u['email'] }}</td>
                         <td>
                             <span class="badge {{ $roleBadge }}">

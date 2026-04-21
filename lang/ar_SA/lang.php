@@ -101,7 +101,6 @@ $LANG['cron_id'] = "معرّف Cron";//1
 $LANG['cron_log'] = "سجل Cron";//1
 $LANG['currency_code'] = "رمز العملة";//1
 $LANG['currency_sign'] = "شكل العمله";//1
-$LANG['currency_sign_non_dollar'] = "يورو ، باوند ، بدون رمز رجاء اقراء هذا";//1
 $LANG['custom_field'] = "تخصيص حقل";//1
 $LANG['custom_field1'] = "تخصيص حقل 1";//1
 $LANG['custom_field2'] = "تخصيص حقل 2";//1

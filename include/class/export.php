@@ -554,6 +554,7 @@ class export
                 $billerobj->domain_id = $this->domain_id;
                 $biller      = $billerobj->select($invoice['biller_id']);
                 $preference  = getPreference($invoice['preference_id'], $this->domain_id);
+                $preference  = InvoiceTokens::expandPreference($preference, $invoice, $biller, $customer);
                 $defaults    = getSystemDefaults($this->domain_id);
                 $logo        = getLogo($biller);
                 $logo        = str_replace(" ", "%20", $logo);

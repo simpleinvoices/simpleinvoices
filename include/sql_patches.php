@@ -3082,3 +3082,38 @@ PRIMARY KEY ( `domain_id`, `id` )
     }
     $patch['386']['date'] = "20260421";
 
+    $patch['387']['name'] = "si_preferences: widen preference varchar fields to 255";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+            $patch['387']['patch'] = 'ALTER TABLE ' . TB_PREFIX . 'preferences '
+                . 'ALTER COLUMN pref_description TYPE VARCHAR(255), '
+                . 'ALTER COLUMN pref_currency_sign TYPE VARCHAR(255), '
+                . 'ALTER COLUMN pref_inv_heading TYPE VARCHAR(255), '
+                . 'ALTER COLUMN pref_inv_wording TYPE VARCHAR(255), '
+                . 'ALTER COLUMN pref_inv_detail_heading TYPE VARCHAR(255), '
+                . 'ALTER COLUMN pref_inv_payment_method TYPE VARCHAR(255), '
+                . 'ALTER COLUMN pref_inv_payment_line1_name TYPE VARCHAR(255), '
+                . 'ALTER COLUMN pref_inv_payment_line1_value TYPE VARCHAR(255), '
+                . 'ALTER COLUMN pref_inv_payment_line2_name TYPE VARCHAR(255), '
+                . 'ALTER COLUMN pref_inv_payment_line2_value TYPE VARCHAR(255)';
+            break;
+        case 'pdo_sqlite':
+            $patch['387']['patch'] = 'SELECT 1';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['387']['patch'] = 'ALTER TABLE `' . TB_PREFIX . 'preferences` '
+                . 'MODIFY `pref_description` VARCHAR(255) NULL, '
+                . 'MODIFY `pref_currency_sign` VARCHAR(255) NULL, '
+                . 'MODIFY `pref_inv_heading` VARCHAR(255) NULL, '
+                . 'MODIFY `pref_inv_wording` VARCHAR(255) NULL, '
+                . 'MODIFY `pref_inv_detail_heading` VARCHAR(255) NULL, '
+                . 'MODIFY `pref_inv_payment_method` VARCHAR(255) NULL, '
+                . 'MODIFY `pref_inv_payment_line1_name` VARCHAR(255) NULL, '
+                . 'MODIFY `pref_inv_payment_line1_value` VARCHAR(255) NULL, '
+                . 'MODIFY `pref_inv_payment_line2_name` VARCHAR(255) NULL, '
+                . 'MODIFY `pref_inv_payment_line2_value` VARCHAR(255) NULL';
+            break;
+    }
+    $patch['387']['date'] = "20260421";
+

@@ -119,7 +119,7 @@
 			@endfor
 			<div class="col col-lg-2 small fw-medium text-secondary">{{ $LANG['unit_price'] ?? '' }}</div>
 			<div class="col-auto d-flex align-items-end">
-				<div class="segmented-control segmented-control-sm invisible" aria-hidden="true">
+				<div class="segmented-control invisible" aria-hidden="true">
 					<span class="segmented-control-item"><span class="segmented-control-label"><i class="ti ti-chevron-down"></i></span></span>
 					<span class="segmented-control-item"><span class="segmented-control-label"><i class="ti ti-chevrons-down"></i></span></span>
 				</div>
@@ -136,7 +136,7 @@
 							type="text"
 							name="quantity{{ $line }}"
 							id="quantity{{ $line }}"
-							class="form-control form-control-sm"
+							class="form-control"
 							@if($line == '0') required @endif
 							@if(get('quantity' . $line)) value="{{ get('quantity' . $line) }}" @endif
 						/>
@@ -146,12 +146,12 @@
 						@if($products == null)
 							<p class="text-muted mb-0"><em>{{ $LANG['no_products'] ?? '' }}</em></p>
 						@else
-							<div class="input-group input-group-sm si-product-input-group">
+							<div class="input-group si-product-input-group">
 								<select
 									id="products{{ $line }}"
 									name="products{{ $line }}"
 									rel="{{ $line }}"
-									class="form-select form-select-sm product_change"
+									class="form-select product_change"
 									@if($line == '0') required @endif
 								>
 									<option value=""></option>
@@ -174,7 +174,7 @@
 						<select
 							id="tax_id[{{ $line }}][{{ $taxIdx }}]"
 							name="tax_id[{{ $line }}][{{ $taxIdx }}]"
-							class="form-select form-select-sm"
+							class="form-select"
 						>
 							<option value=""></option>
 							@foreach(($taxes ?? []) as $taxOption)
@@ -191,13 +191,13 @@
 						<input
 							id="unit_price{{ $line }}"
 							name="unit_price{{ $line }}"
-							class="form-control form-control-sm"
+							class="form-control"
 							@if($line == '0') required @endif
 							@if(get('unit_price' . $line)) value="{{ get('unit_price' . $line) }}" @else value="" @endif
 						/>
 					</div>
 					<div class="col-auto d-flex align-items-end">
-						<div class="segmented-control segmented-control-sm">
+						<div class="segmented-control">
 							<label class="segmented-control-item si-expand-desc" title="{{ $LANG['description'] ?? '' }}">
 								<input type="checkbox" class="segmented-control-input">
 								<span class="segmented-control-label"><i class="ti ti-chevron-down"></i></span>
@@ -218,7 +218,7 @@
 				</div>
 				<div class="row g-2 details si_hide mt-1">
 					<div class="col-12 col-lg">
-						<textarea class="form-control form-control-sm detail-editor" name="description{{ $line }}" id="description{{ $line }}" rows="1"></textarea>
+						<textarea class="form-control detail-editor" name="description{{ $line }}" id="description{{ $line }}" rows="1"></textarea>
 					</div>
 				</div>
 			</div>
@@ -273,5 +273,6 @@
 
 @include('templates.default.invoices.modal_add_product')
 @include('templates.default.invoices.modal_add_customer')
+@include('templates.default.invoices.modal_add_biller')
 
 @endif

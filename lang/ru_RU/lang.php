@@ -103,7 +103,6 @@ $LANG['cron_id'] = "ID Cron";//1
 $LANG['cron_log'] = "Журнал Cron";//1
 $LANG['currency_code'] = "Код валюты";//1
 $LANG['currency_sign'] = "Знак валюты";//1
-$LANG['currency_sign_non_dollar'] = "Евро, Фунты, валюта без значка \$ - читайте здесь";//1
 $LANG['custom_field'] = "Пользовательское поле";//1
 $LANG['custom_field1'] = "Пользовательское поле 1";//1
 $LANG['custom_field2'] = "Пользовательское поле 2";//1

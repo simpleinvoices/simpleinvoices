@@ -101,7 +101,6 @@ $LANG['cron_id'] = "Cron ID";//1
 $LANG['cron_log'] = "Cron дневник";//1
 $LANG['currency_code'] = "Код на валута";//1
 $LANG['currency_sign'] = "Символ на валута";//1
-$LANG['currency_sign_non_dollar'] = "Евро, Паунд,не-\$ знак - моля, прочетете това";//1
 $LANG['custom_field'] = "Потребителско поле";//1
 $LANG['custom_field1'] = "Потребителско поле 1";//1
 $LANG['custom_field2'] = "Потребителско поле 2";//1

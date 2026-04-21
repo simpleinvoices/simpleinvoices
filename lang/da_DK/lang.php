@@ -110,7 +110,6 @@ $LANG['cron_id'] = "Cron-id";//1
 $LANG['cron_log'] = "Cron-log";//1
 $LANG['currency_code'] = "Valutakode";//1
 $LANG['currency_sign'] = "Valuta tegn";//1
-$LANG['currency_sign_non_dollar'] = "Euro, pund, ikke-\$ tegn l&#230;s venligst dette";//1
 $LANG['custom_field'] = "Brugerdefineret felt";//1
 $LANG['custom_field1'] = "Brugerdefineret felt 1";//1
 $LANG['custom_field2'] = "Brugerdefineret felt 2";//1

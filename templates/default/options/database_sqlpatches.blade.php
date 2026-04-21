@@ -1,9 +1,9 @@
-{{-- database_sqlpatches.blade.php — Tabler.io styled DB patch wizard --}}
+{{-- database_sqlpatches.blade.php - Tabler.io styled DB patch wizard --}}
 
 @php $mode = $page['mode'] ?? 'list'; @endphp
 
 {{-- ═══════════════════════════════════════════════════════════════════════
-     MODE: done — all patches already applied, redirect to dashboard
+     MODE: done - all patches already applied, redirect to dashboard
      ═══════════════════════════════════════════════════════════════════════ --}}
 @if($mode === 'done')
 
@@ -54,7 +54,7 @@
 </script>
 
 {{-- ═══════════════════════════════════════════════════════════════════════
-     MODE: list — show pending patches, prompt user to apply
+     MODE: list - show pending patches, prompt user to apply
      ═══════════════════════════════════════════════════════════════════════ --}}
 @elseif($mode === 'list')
 
@@ -132,7 +132,7 @@
 </div>
 
 {{-- ═══════════════════════════════════════════════════════════════════════
-     MODE: backup — step 2, download backup then continue to apply
+     MODE: backup - step 2, download backup then continue to apply
      ═══════════════════════════════════════════════════════════════════════ --}}
 @elseif($mode === 'backup')
 
@@ -160,9 +160,9 @@
         <div class="d-flex gap-2">
             <i class="ti ti-info-circle flex-shrink-0 mt-1"></i>
             <div class="small">
-                <strong>SQL</strong> — a full dump of your database (structure + data).
+                <strong>SQL</strong> - a full dump of your database (structure + data).
                 Restore it with any MySQL client if something goes wrong. Best for disaster recovery.<br>
-                <strong>JSON</strong> — your data only, in a portable format.
+                <strong>JSON</strong> - your data only, in a portable format.
                 Use it to migrate to a different database engine (MySQL → PostgreSQL, etc.) or import into a fresh install.
                 It does not contain table structure, so it cannot replace a SQL backup for recovery.
             </div>
@@ -178,7 +178,7 @@
                 </span>
                 <div class="flex-fill">
                     <div class="fw-semibold">SQL Backup <span class="badge bg-primary-lt text-primary ms-1">Recommended</span></div>
-                    <div class="text-secondary small">Full database dump — structure and data. Use this to restore if patches fail.</div>
+                    <div class="text-secondary small">Full database dump - structure and data. Use this to restore if patches fail.</div>
                 </div>
                 <button type="button" class="btn btn-primary" id="si_patch_sql_btn" onclick="siPatchDownload('sql', this)">
                     <i class="ti ti-download me-1"></i>Download SQL
@@ -283,7 +283,7 @@ function siPatchDownload(type, btn) {
 </script>
 
 {{-- ═══════════════════════════════════════════════════════════════════════
-     MODE: run — patches applied, show results and redirect
+     MODE: run - patches applied, show results and redirect
      ═══════════════════════════════════════════════════════════════════════ --}}
 @elseif($mode === 'run')
 
@@ -395,7 +395,7 @@ function siPatchDownload(type, btn) {
 </script>
 
 {{-- ═══════════════════════════════════════════════════════════════════════
-     MODE: init — first-time patch table initialisation
+     MODE: init - first-time patch table initialisation
      ═══════════════════════════════════════════════════════════════════════ --}}
 @elseif($mode === 'init')
 

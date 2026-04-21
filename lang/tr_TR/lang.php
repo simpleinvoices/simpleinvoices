@@ -104,7 +104,6 @@ $LANG['cron_id'] = "Cron Kimliği";//1
 $LANG['cron_log'] = "Cron günlüğü";//1
 $LANG['currency_code'] = "Para birimi kodu";//1
 $LANG['currency_sign'] = "Parabirimi Sembolü";//1
-$LANG['currency_sign_non_dollar'] = "Euro, Sterlin, $ dışı semboller için lütfen bunu okuyun";//1
 $LANG['custom_field'] = "Size Özel";//1
 $LANG['custom_field1'] = "Size Özel 1";//1
 $LANG['custom_field2'] = "Size Özel 2";//1

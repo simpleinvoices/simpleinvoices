@@ -45,7 +45,7 @@
                                 <i class="ti ti-building me-1"></i>{{ $u['domain_name'] }}
                             </span>
                         </td>
-                        <td class="fw-medium">{{ $u['name'] ?: '—' }}</td>
+                        <td class="fw-medium">{{ $u['name'] ?: '-' }}</td>
                         <td class="text-secondary">{{ $u['email'] }}</td>
                         <td>
                             @if($u['enabled'])

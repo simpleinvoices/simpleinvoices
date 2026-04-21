@@ -1,4 +1,4 @@
-{{-- Customer portal login — domain-scoped; uses header (Tabler) like staff login --}}
+{{-- Customer portal login - domain-scoped; uses header (Tabler) like staff login --}}
 @include('templates.default.header')
 @php
 	$appName = $config->app?->name ?? ($LANG['simple_invoices'] ?? '');

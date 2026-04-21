@@ -31,7 +31,7 @@
 
 	@if($showChart)
 	@include('templates.default.reports.chart_truncation_notice')
-	{{-- Chart: horizontal bar — sales by biller --}}
+	{{-- Chart: horizontal bar - sales by biller --}}
 	<div class="card-body border-bottom p-2">
 		<div id="chart-biller-total" style="min-height:{{ $chartHeight }}px;"></div>
 	</div>

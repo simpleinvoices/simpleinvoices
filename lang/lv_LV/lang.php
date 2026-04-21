@@ -104,7 +104,6 @@ $LANG['cron_id'] = "Cron ID";//1
 $LANG['cron_log'] = "Cron žurnāls";//1
 $LANG['currency_code'] = "Valūtas kods";//1
 $LANG['currency_sign'] = "Valūtas zīme";//1
-$LANG['currency_sign_non_dollar'] = "Euro, Pound, ne-\$ zīme, lūdzu, izlasiet šo";//1
 $LANG['custom_field'] = "Pielāgots lauks";//1
 $LANG['custom_field1'] = "Pielāgots lauks 1";//1
 $LANG['custom_field2'] = "Pielāgots lauks 2";//1

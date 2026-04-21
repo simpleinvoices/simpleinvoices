@@ -105,7 +105,6 @@ $LANG['cron_id'] = "ID Cron";//1
 $LANG['cron_log'] = "Jurnal Cron";//1
 $LANG['currency_code'] = "Cod valută";//1
 $LANG['currency_sign'] = "Simbol moneda";//1
-$LANG['currency_sign_non_dollar'] = "Euro, Liră, semn non-\$ vă rugăm citiți aceasta";//1
 $LANG['custom_field'] = "Camp personalizat";//1
 $LANG['custom_field1'] = "Camp personalizat 1";//1
 $LANG['custom_field2'] = "Camp personalizat 2";//1

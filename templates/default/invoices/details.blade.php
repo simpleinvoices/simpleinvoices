@@ -43,12 +43,17 @@
 				@if($billers == null)
 					<p class="text-muted mb-0"><em>{{ $LANG['no_billers'] ?? '' }}</em></p>
 				@else
-					<select name="biller_id" class="form-select form-select-sm" required>
-						<option value=""></option>
-						@foreach(($billers ?? []) as $biller)
-							<option @if($biller['id'] == $invoice['biller_id']) selected @endif value="{{ $biller['id'] ?? '' }}">{{ $biller['name'] ?? '' }}</option>
-						@endforeach
-					</select>
+					<div class="input-group input-group-sm">
+						<select name="biller_id" class="form-select form-select-sm" required>
+							<option value=""></option>
+							@foreach(($billers ?? []) as $biller)
+								<option @if($biller['id'] == $invoice['biller_id']) selected @endif value="{{ $biller['id'] ?? '' }}">{{ $biller['name'] ?? '' }}</option>
+							@endforeach
+						</select>
+						<button type="button" class="btn btn-outline-secondary si-add-biller-btn" title="{{ $LANG['add_biller'] ?? 'Add new biller' }}">
+							<i class="ti ti-building-store"></i>
+						</button>
+					</div>
 				@endif
 			</div>
 			<div class="col-md-4">
@@ -301,3 +306,4 @@
 
 @include('templates.default.invoices.modal_add_product')
 @include('templates.default.invoices.modal_add_customer')
+@include('templates.default.invoices.modal_add_biller')

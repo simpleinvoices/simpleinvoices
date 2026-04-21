@@ -38,9 +38,6 @@
 		@endif
 	</div>
 </div>
-<div class="mb-0">
-	<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_currency_sign" title="{{ $LANG['currency_sign'] ?? '' }}">{{ $LANG['currency_sign_non_dollar'] ?? '' }} <i class="ti ti-help"></i></a>
-</div>
 <script>
 (function () {
 	var sel        = document.getElementById('si_currency_sign_select');

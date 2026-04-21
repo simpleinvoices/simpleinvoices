@@ -101,7 +101,6 @@ $LANG['cron_id'] = "ID Cron";//1
 $LANG['cron_log'] = "Registro Cron";//1
 $LANG['currency_code'] = "Código de moneda";//1
 $LANG['currency_sign'] = "Signo de moneda";//1
-$LANG['currency_sign_non_dollar'] = "Euro, Libra, sin signo de \$ por favor lee esto";//1
 $LANG['custom_field'] = "Campo personalizado";//1
 $LANG['custom_field1'] = "Campo personalizado 1";//1
 $LANG['custom_field2'] = "Campo personalizado 2";//1

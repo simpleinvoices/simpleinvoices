@@ -101,7 +101,6 @@ $LANG['cron_id'] = "Croni ID";//1
 $LANG['cron_log'] = "Croni logi";//1
 $LANG['currency_code'] = "Valuutakood";//1
 $LANG['currency_sign'] = "Valuuta sümbol";//1
-$LANG['currency_sign_non_dollar'] = "Valuuta sümbol (mitte dollar)";//1
 $LANG['custom_field'] = "Kohandatud väli";//1
 $LANG['custom_field1'] = "Kohandatud väli 1";//1
 $LANG['custom_field2'] = "Kohandatud väli 2";//1

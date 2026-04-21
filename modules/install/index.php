@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../../include/install_workspace_bootstrap.php';
+require_once __DIR__ . '/../../include/auth/password.php';
 
 global $db_server, $auth_session, $install_tables_exists, $install_data_exists;
 
@@ -72,7 +73,6 @@ if (isset($_POST['op']) && $_POST['op'] === 'install_database') {
         $adminEmail    = trim($_POST['install_admin_email'] ?? '');
         $adminPassword = $_POST['install_admin_password'] ?? '';
         if ($adminEmail !== '' && $adminPassword !== '') {
-            include_once('./include/auth/password.php');
             $hashedPassword = auth_hash_password($adminPassword);
             dbQuery(
                 "UPDATE " . TB_PREFIX . "user SET email = :email, password = :pw, auth_staff_email = :email2 WHERE id = 1",
@@ -81,6 +81,21 @@ if (isset($_POST['op']) && $_POST['op'] === 'install_database') {
                 ':email2', $adminEmail
             );
         }
+        // Auto-login with the credentials just set (or the defaults if none were supplied)
+        $loginEmail    = $adminEmail !== '' ? $adminEmail : 'demo@simpleinvoices.org';
+        $loginPassword = $adminPassword !== '' ? $adminPassword : 'demo';
+        $user = auth_authenticate_staff_user($loginEmail, $loginPassword);
+        if ($user) {
+            session_regenerate_id(true);
+            $auth_session->id          = (string) $user['id'];
+            $auth_session->email       = (string) $user['email'];
+            $auth_session->name        = (string) ($user['name'] ?? '');
+            $auth_session->role_name   = (string) ($user['role_name'] ?? '');
+            $auth_session->domain_id   = (string) ($user['domain_id'] ?? '1');
+            $auth_session->user_id     = (string) ($user['user_id'] ?? '0');
+            $auth_session->ui_language = trim((string) ($user['preferred_language'] ?? ''));
+        }
+
         $redirect_after_install = 'index.php?module=index&view=index';
     } elseif (isset($_POST['op'])) {
         $install_error = true;

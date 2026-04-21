@@ -13,7 +13,7 @@
     $isBillerRole     = ($currentRoleName === 'biller');
 @endphp
 
-{{-- Row 1: Top bar — logo + user controls --}}
+{{-- Row 1: Top bar - logo + user controls --}}
 <header class="navbar navbar-expand-md d-print-none" data-bs-theme="dark">
     <div class="container-xl">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="{{ $LANG['toggle_navigation'] ?? '' }}">

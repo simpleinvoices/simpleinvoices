@@ -67,7 +67,7 @@
         <div class="mb-3" id="customerDropdown" @if($curRole === 'biller') style="display:none" @endif>
             <label class="form-label">Link to Customer</label>
             <select id="linked_id_customer" class="form-select" onchange="syncLinkedId()">
-                <option value="">— select customer —</option>
+                <option value="">- select customer -</option>
                 @foreach(($customers ?? []) as $c)
                     <option value="{{ $c['id'] }}"
                             @if($curRole === 'customer' && (int)$c['id'] === $curId) selected @endif>
@@ -81,7 +81,7 @@
         <div class="mb-3" id="billerDropdown" @if($curRole !== 'biller') style="display:none" @endif>
             <label class="form-label">Link to Biller</label>
             <select id="linked_id_biller" class="form-select" onchange="syncLinkedId()">
-                <option value="">— select biller —</option>
+                <option value="">- select biller -</option>
                 @foreach(($billers ?? []) as $b)
                     <option value="{{ $b['id'] }}"
                             @if($curRole === 'biller' && (int)$b['id'] === $curId) selected @endif>

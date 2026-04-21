@@ -101,7 +101,6 @@ $LANG['cron_id'] = "Cron azonosító";//1
 $LANG['cron_log'] = "Cron napló";//1
 $LANG['currency_code'] = "Currency code";//1
 $LANG['currency_sign'] = "Currency sign";//1
-$LANG['currency_sign_non_dollar'] = "Euro, Pound, nem \$ jel, kérjük, olvassa el ezt";//1
 $LANG['custom_field'] = "Custom field";//1
 $LANG['custom_field1'] = "Custom field 1";//1
 $LANG['custom_field2'] = "Custom field 2";//1

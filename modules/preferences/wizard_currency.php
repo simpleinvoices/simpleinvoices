@@ -12,17 +12,20 @@ require_once __DIR__ . '/../../include/class/invoice_denorm.php';
 $saved = false;
 
 if (($_POST['op'] ?? '') === 'wizard_currency_sign') {
-	$pref_id = (int) ($_POST['pref_id'] ?? 0);
-	$sign    = $_POST['pref_currency_sign'] ?? '';
-	$code    = $_POST['currency_code'] ?? '';
+	$pref_id         = (int) ($_POST['pref_id'] ?? 0);
+	$sign            = $_POST['pref_currency_sign'] ?? '';
+	$code            = $_POST['currency_code'] ?? '';
+	$payment_term_id = isset($_POST['payment_term_id']) && $_POST['payment_term_id'] !== ''
+		? (int) $_POST['payment_term_id'] : null;
 	$preference = getPreference($pref_id);
 	if ($preference) {
 		si_check_record_access($preference);
-		$sql = 'UPDATE ' . TB_PREFIX . 'preferences SET pref_currency_sign = :sign, currency_code = :code WHERE pref_id = :id AND domain_id = :domain_id';
-		if (dbQuery($sql, ':sign', $sign, ':code', $code, ':id', $pref_id, ':domain_id', $auth_session->domain_id)) {
+		$sql = 'UPDATE ' . TB_PREFIX . 'preferences SET pref_currency_sign = :sign, currency_code = :code, payment_term_id = :payment_term_id WHERE pref_id = :id AND domain_id = :domain_id';
+		if (dbQuery($sql, ':sign', $sign, ':code', $code, ':payment_term_id', $payment_term_id, ':id', $pref_id, ':domain_id', $auth_session->domain_id)) {
 			$saved = true;
 			invoice_denorm::refreshAllForPreference($pref_id, $auth_session->domain_id);
 			$_SESSION['wizard_currency_pref_done'] = 1;
+			$_SESSION['wizard_invoice_prefs_done'] = 1;
 		}
 	}
 }

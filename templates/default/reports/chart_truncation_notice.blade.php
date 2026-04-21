@@ -42,16 +42,16 @@
 			<p class="small text-secondary mb-0 mt-2">{{ $LANG['report_chart_threshold_detail'] ?? '' }}</p>
 			<ul class="small text-secondary mb-0 mt-1">
 				@if(!empty($g['skip_inv']))
-				<li>{{ $LANG['report_chart_skip_invoices'] ?? '' }}: {{ $g['inv'] ?? '—' }} &gt; {{ $g['max_inv'] ?? 1000 }}</li>
+				<li>{{ $LANG['report_chart_skip_invoices'] ?? '' }}: {{ $g['inv'] ?? '-' }} &gt; {{ $g['max_inv'] ?? 1000 }}</li>
 				@endif
 				@if(!empty($g['skip_cat']))
-				<li>{{ $LANG['report_chart_skip_categories'] ?? '' }}: {{ $g['cat_count'] ?? '—' }} &gt; {{ $g['max_cat'] ?? 150 }}</li>
+				<li>{{ $LANG['report_chart_skip_categories'] ?? '' }}: {{ $g['cat_count'] ?? '-' }} &gt; {{ $g['max_cat'] ?? 150 }}</li>
 				@endif
 				@if(!empty($g['skip_ser']))
-				<li>{{ $LANG['report_chart_skip_series'] ?? '' }}: {{ $g['ser_count'] ?? '—' }} &gt; {{ $g['max_ser'] ?? 150 }}</li>
+				<li>{{ $LANG['report_chart_skip_series'] ?? '' }}: {{ $g['ser_count'] ?? '-' }} &gt; {{ $g['max_ser'] ?? 150 }}</li>
 				@endif
 				@if(!empty($g['skip_cells']))
-				<li>{{ $LANG['report_chart_skip_density'] ?? '' }}: {{ $g['cell_count'] ?? '—' }} &gt; {{ $g['max_cells'] ?? 2500 }}</li>
+				<li>{{ $LANG['report_chart_skip_density'] ?? '' }}: {{ $g['cell_count'] ?? '-' }} &gt; {{ $g['max_cells'] ?? 2500 }}</li>
 				@endif
 			</ul>
 			@endif

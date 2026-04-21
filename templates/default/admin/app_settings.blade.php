@@ -1,4 +1,4 @@
-{{-- App appearance — installation-wide; administrator only --}}
+{{-- App appearance - installation-wide; administrator only --}}
 @if(!empty($appSettingsSaved))
     <div id="app-settings-saved-alert" class="alert alert-success mb-3" role="alert">
         <i class="ti ti-check me-1"></i>{{ $LANG['save_success'] ?? 'Saved successfully.' }}

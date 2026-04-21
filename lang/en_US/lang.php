@@ -101,7 +101,6 @@ $LANG['cron_id'] = "Cron ID";//1
 $LANG['cron_log'] = "Cron log";//1
 $LANG['currency_code'] = "Currency code";//1
 $LANG['currency_sign'] = "Currency sign";//1
-$LANG['currency_sign_non_dollar'] = "Euro, Pound, non-\$ sign please read this";//1
 $LANG['currency_sign_custom'] = "Custom symbol or HTML code…";//1
 $LANG['custom_field'] = "Custom field";//1
 $LANG['custom_field1'] = "Custom field 1";//1
@@ -314,7 +313,7 @@ $LANG['install_step_config'] = "Enter the correct database connection details in
 $LANG['install_step_db'] = "Create a blank MySQL database preferably with UTF-8 collation";//1
 $LANG['install_step_review'] = "Review the connection details below and if correct click the button to install the database and essential data.";//1
 $LANG['install_new_domain_welcome_title'] = "Welcome to your new workspace";//1
-$LANG['install_new_domain_welcome_body'] = "You're signed in to a new organization for the first time. The next short step creates default invoice settings and templates for this workspace—no database setup required.";//1
+$LANG['install_new_domain_welcome_body'] = "You're signed in to a new organization for the first time. The next short step creates default invoice settings and templates for this workspace - no database setup required.";//1
 $LANG['install_new_domain_combined_intro'] = "Almost ready. One click creates default invoice preferences, tax, and templates for this organization. After that, we will guide you through the quick start steps.";//1
 $LANG['install_new_domain_then_wizard'] = "Next: short guided steps for your business and first invoice.";//1
 $LANG['install_new_domain_continue'] = "Continue to setup";//1
@@ -392,7 +391,7 @@ $LANG['mobile_short'] = "Mob.";//1
 $LANG['money'] = "Money";//1
 $LANG['monthly_activity'] = "Monthly activity";//1
 $LANG['dash_aging_no_outstanding'] = "No outstanding receivables";//1
-$LANG['dash_aging_all_clear_sub'] = "Nothing owing by age — all invoices are fully paid.";//1
+$LANG['dash_aging_all_clear_sub'] = "Nothing owing by age - all invoices are fully paid.";//1
 $LANG['monthly_sales_per_year'] = "Monthly Sales and Payments per year";//1
 $LANG['months'] = "months";//1
 $LANG['more_info'] = "More info";//1
@@ -823,7 +822,7 @@ $LANG['backup_copy_sql_title'] = "Copy SQL to clipboard";//1
 $LANG['backup_copy_json_title'] = "Copy JSON to clipboard";//1
 $LANG['backup_back_to_options'] = "Back to options";//1
 
-$LANG['tax_rate_none'] = "— none —";//1
+$LANG['tax_rate_none'] = "- none -";//1
 
 // Itemised invoice (extra line items link)
 $LANG['add_more_line_items'] = "Add 5 more line items";//1

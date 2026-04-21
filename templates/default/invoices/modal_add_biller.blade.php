@@ -1,36 +1,32 @@
-{{-- Modal: quick-add a new customer from the invoice form --}}
-<div class="modal modal-blur fade" id="modal-add-customer" tabindex="-1" role="dialog" aria-hidden="true">
+{{-- Modal: quick-add a new biller from the invoice form --}}
+<div class="modal modal-blur fade" id="modal-add-biller" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered modal-md" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title"><i class="ti ti-user-plus me-2"></i>{{ $LANG['add_customer'] ?? 'Add New Customer' }}</h5>
+				<h5 class="modal-title"><i class="ti ti-building-store me-2"></i>{{ $LANG['add_biller'] ?? 'Add New Biller' }}</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ $LANG['close'] ?? 'Close' }}"></button>
 			</div>
 			<div class="modal-body">
 				<div class="mb-3">
-					<label class="form-label required" for="si-new-customer-name">{{ $LANG['name'] ?? 'Name' }}</label>
-					<input type="text" id="si-new-customer-name" class="form-control" autocomplete="off" />
+					<label class="form-label required" for="si-new-biller-name">{{ $LANG['biller_name'] ?? $LANG['name'] ?? 'Name' }}</label>
+					<input type="text" id="si-new-biller-name" class="form-control" autocomplete="off" />
 					<div class="invalid-feedback">{{ $LANG['required_field'] ?? 'Required' }}</div>
 				</div>
 				<div class="row g-3 mb-3">
 					<div class="col-sm-6">
-						<label class="form-label" for="si-new-customer-attention">{{ $LANG['attention'] ?? 'Attention / Contact' }}</label>
-						<input type="text" id="si-new-customer-attention" class="form-control" autocomplete="off" />
+						<label class="form-label" for="si-new-biller-email">{{ $LANG['email'] ?? 'Email' }}</label>
+						<input type="email" id="si-new-biller-email" class="form-control" autocomplete="off" />
 					</div>
 					<div class="col-sm-6">
-						<label class="form-label" for="si-new-customer-email">{{ $LANG['email'] ?? 'Email' }}</label>
-						<input type="email" id="si-new-customer-email" class="form-control" autocomplete="off" />
+						<label class="form-label" for="si-new-biller-phone">{{ $LANG['phone'] ?? 'Phone' }}</label>
+						<input type="text" id="si-new-biller-phone" class="form-control" autocomplete="off" />
 					</div>
 				</div>
-				<div class="mb-0">
-					<label class="form-label" for="si-new-customer-phone">{{ $LANG['phone'] ?? 'Phone' }}</label>
-					<input type="text" id="si-new-customer-phone" class="form-control" autocomplete="off" />
-				</div>
-				<div id="si-new-customer-error" class="alert alert-danger mt-3 d-none"></div>
+				<div id="si-new-biller-error" class="alert alert-danger mt-3 d-none"></div>
 			</div>
 			<div class="modal-footer justify-content-between">
 				<button type="button" class="btn btn-link" data-bs-dismiss="modal">{{ $LANG['cancel'] ?? 'Cancel' }}</button>
-				<button type="button" id="si-save-customer-btn" class="btn btn-primary">
+				<button type="button" id="si-save-biller-btn" class="btn btn-primary">
 					<i class="ti ti-check me-1"></i>{{ $LANG['save'] ?? 'Save' }}
 				</button>
 			</div>
@@ -40,13 +36,12 @@
 
 <script>
 (function () {
-	var modalEl  = document.getElementById('modal-add-customer');
-	var saveBtn  = document.getElementById('si-save-customer-btn');
-	var nameEl   = document.getElementById('si-new-customer-name');
-	var attnEl   = document.getElementById('si-new-customer-attention');
-	var emailEl  = document.getElementById('si-new-customer-email');
-	var phoneEl  = document.getElementById('si-new-customer-phone');
-	var errorEl  = document.getElementById('si-new-customer-error');
+	var modalEl  = document.getElementById('modal-add-biller');
+	var saveBtn  = document.getElementById('si-save-biller-btn');
+	var nameEl   = document.getElementById('si-new-biller-name');
+	var emailEl  = document.getElementById('si-new-biller-email');
+	var phoneEl  = document.getElementById('si-new-biller-phone');
+	var errorEl  = document.getElementById('si-new-biller-error');
 
 	modalEl.addEventListener('hidden.bs.modal', function () {
 		nameEl.classList.remove('is-invalid');
@@ -62,11 +57,10 @@
 	});
 
 	document.addEventListener('click', function (e) {
-		var btn = e.target.closest('.si-add-customer-btn');
+		var btn = e.target.closest('.si-add-biller-btn');
 		if (!btn) return;
 		e.preventDefault();
 		nameEl.value  = '';
-		attnEl.value  = '';
 		emailEl.value = '';
 		phoneEl.value = '';
 		bootstrap.Modal.getOrCreateInstance(modalEl).show();
@@ -85,21 +79,17 @@
 		saveBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span>{{ $LANG['saving'] ?? 'Saving...' }}';
 
 		var body = new FormData();
-		body.append('name',      name);
-		body.append('attention', attnEl.value);
-		body.append('email',     emailEl.value);
-		body.append('phone',     phoneEl.value);
+		body.append('name',  name);
+		body.append('email', emailEl.value);
+		body.append('phone', phoneEl.value);
 
-		fetch('./index.php?module=invoices&view=add_customer_modal_ajax', { method: 'POST', body: body })
+		fetch('./index.php?module=invoices&view=add_biller_modal_ajax', { method: 'POST', body: body })
 			.then(function (r) { return r.json(); })
 			.then(function (result) {
 				if (result.success) {
 					bootstrap.Modal.getInstance(modalEl).hide();
 
-					// Update every customer_id select on the page.
-					// If Tom Select has wrapped it, use the Tom Select API so the
-					// visual widget updates; otherwise fall back to raw DOM.
-					document.querySelectorAll('select[name="customer_id"]').forEach(function (sel) {
+					document.querySelectorAll('select[name="biller_id"]').forEach(function (sel) {
 						var id   = String(result.id);
 						var text = result.name;
 						if (sel.tomselect) {
@@ -118,7 +108,6 @@
 					});
 
 					nameEl.value  = '';
-					attnEl.value  = '';
 					emailEl.value = '';
 					phoneEl.value = '';
 				} else {

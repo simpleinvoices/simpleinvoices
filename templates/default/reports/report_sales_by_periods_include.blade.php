@@ -109,7 +109,7 @@
 			return { name: String(yr), data: ydata };
 		});
 
-		// Use distinct colours — accent for first year, then rotate
+		// Use distinct colours - accent for first year, then rotate
 		var colours = years.map(function(yr, idx) {
 			return lineColours[idx % lineColours.length];
 		});

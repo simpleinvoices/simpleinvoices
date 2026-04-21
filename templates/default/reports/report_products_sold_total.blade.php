@@ -31,7 +31,7 @@
 
 	@if($showChart)
 	@include('templates.default.reports.chart_truncation_notice')
-	{{-- Chart: horizontal bar — top rows when dataset is large --}}
+	{{-- Chart: horizontal bar - top rows when dataset is large --}}
 	<div class="card-body border-bottom p-2">
 		<div id="chart-products-total" style="min-height:{{ $chartHeight }}px;"></div>
 	</div>

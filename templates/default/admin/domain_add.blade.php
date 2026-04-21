@@ -16,7 +16,7 @@
                    oninput="this.value=this.value.replace(/[^a-zA-Z0-9_\-]/g,'')" />
             <div class="invalid-feedback">Only letters, numbers, hyphens and underscores are allowed.</div>
             <div class="form-hint">
-                Only letters, numbers, <code>-</code> and <code>_</code> — no spaces or special characters.<br>
+                Only letters, numbers, <code>-</code> and <code>_</code> - no spaces or special characters.<br>
                 This name is used as the login portal identifier, e.g. the custom login page URL for this domain's users.
             </div>
         </div>

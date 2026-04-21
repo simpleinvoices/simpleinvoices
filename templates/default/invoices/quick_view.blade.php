@@ -253,6 +253,40 @@
             </div>
         </div>
 
+        {{-- Invoice details / payment instructions --}}
+        @php
+            $hasDetail = !empty($preference['pref_inv_detail_heading'])
+                      || !empty($preference['pref_inv_detail_line'])
+                      || !empty($preference['pref_inv_payment_method'])
+                      || !empty($preference['pref_inv_payment_line1_name'])
+                      || !empty($preference['pref_inv_payment_line1_value'])
+                      || !empty($preference['pref_inv_payment_line2_name'])
+                      || !empty($preference['pref_inv_payment_line2_value'])
+                      || !empty($biller['footer']);
+        @endphp
+        @if($hasDetail)
+        <div class="mt-4 pt-3 border-top">
+            @if(!empty($preference['pref_inv_detail_heading']))
+            <div class="fw-semibold mb-1">{{ $preference['pref_inv_detail_heading'] }}</div>
+            @endif
+            @if(!empty($preference['pref_inv_detail_line']))
+            <div class="text-secondary small mb-1"><em>{!! outhtml($preference['pref_inv_detail_line']) !!}</em></div>
+            @endif
+            @if(!empty($preference['pref_inv_payment_method']))
+            <div class="text-secondary small mb-1">{{ $preference['pref_inv_payment_method'] }}</div>
+            @endif
+            @if(!empty($preference['pref_inv_payment_line1_name']) || !empty($preference['pref_inv_payment_line1_value']))
+            <div class="text-secondary small mb-1">{{ $preference['pref_inv_payment_line1_name'] ?? '' }} {{ $preference['pref_inv_payment_line1_value'] ?? '' }}</div>
+            @endif
+            @if(!empty($preference['pref_inv_payment_line2_name']) || !empty($preference['pref_inv_payment_line2_value']))
+            <div class="text-secondary small">{{ $preference['pref_inv_payment_line2_name'] ?? '' }} {{ $preference['pref_inv_payment_line2_value'] ?? '' }}</div>
+            @endif
+            @if(!empty($biller['footer']))
+            <div class="text-secondary small mt-2 pt-2 border-top">{!! outhtml($biller['footer']) !!}</div>
+            @endif
+        </div>
+        @endif
+
     </div>
 </div>
 

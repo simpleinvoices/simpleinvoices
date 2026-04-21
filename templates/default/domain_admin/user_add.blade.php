@@ -55,7 +55,7 @@
             <select id="linked_id_customer" class="form-select"
                     onchange="syncLinkedId()"
                     @if($presetRole !== 'biller') required @endif>
-                <option value="">— select customer —</option>
+                <option value="">- select customer -</option>
                 @foreach(($customers ?? []) as $c)
                     <option value="{{ $c['id'] }}"
                             @if($presetRole === 'customer' && (int)$c['id'] === $presetLinkedId) selected @endif>
@@ -75,7 +75,7 @@
             <select id="linked_id_biller" class="form-select"
                     onchange="syncLinkedId()"
                     @if($presetRole === 'biller') required @endif>
-                <option value="">— select biller —</option>
+                <option value="">- select biller -</option>
                 @foreach(($billers ?? []) as $b)
                     <option value="{{ $b['id'] }}"
                             @if($presetRole === 'biller' && (int)$b['id'] === $presetLinkedId) selected @endif>

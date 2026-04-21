@@ -104,7 +104,6 @@ $LANG['cron_id'] = "ID e cron-it";//1
 $LANG['cron_log'] = "Regjistri i cron-it";//1
 $LANG['currency_code'] = "Kodi i monedhës";//1
 $LANG['currency_sign'] = "Kartmonedha";//1
-$LANG['currency_sign_non_dollar'] = "Euro, Pound, shenja jo-$ ju lutemi lexoni këtë";//1
 $LANG['custom_field'] = "Fushe e vecante";//1
 $LANG['custom_field1'] = "Fushe e vecante 1";//1
 $LANG['custom_field2'] = "Fushe e vecante 2";//1

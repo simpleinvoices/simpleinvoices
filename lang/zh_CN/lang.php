@@ -101,7 +101,6 @@ $LANG['cron_id'] = "Cron ID";//1
 $LANG['cron_log'] = "Cron 日志";//1
 $LANG['currency_code'] = "货币代码";//1
 $LANG['currency_sign'] = "货币符号";//1
-$LANG['currency_sign_non_dollar'] = "欧元, 英镑, 非\$符号请阅读这里";//1
 $LANG['custom_field'] = "自定义字段";//1
 $LANG['custom_field1'] = "自定义字段1";//1
 $LANG['custom_field2'] = "自定义字段2";//1

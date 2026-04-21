@@ -33,12 +33,17 @@
 			@if($billers == null)
 				<p class="text-muted mb-0"><em>{{ $LANG['no_billers'] ?? '' }}</em></p>
 			@else
-				<select name="biller_id" class="form-select form-select-sm" required placeholder="{{ $LANG['biller'] ?? 'Biller' }}">
-					<option value=""></option>
-					@foreach(($billers ?? []) as $biller)
-						<option @if($biller['id'] == ($defaults['biller'] ?? '')) selected @endif value="{{ $biller['id'] ?? '' }}">{{ $biller['name'] ?? '' }}</option>
-					@endforeach
-				</select>
+				<div class="input-group">
+					<select name="biller_id" class="form-select" required placeholder="{{ $LANG['biller'] ?? 'Biller' }}">
+						<option value=""></option>
+						@foreach(($billers ?? []) as $biller)
+							<option @if($biller['id'] == ($defaults['biller'] ?? '')) selected @endif value="{{ $biller['id'] ?? '' }}">{{ $biller['name'] ?? '' }}</option>
+						@endforeach
+					</select>
+					<button type="button" class="btn btn-outline-secondary si-add-biller-btn" title="{{ $LANG['add_biller'] ?? 'Add new biller' }}">
+						<i class="ti ti-building-store"></i>
+					</button>
+				</div>
 			@endif
 		</div>
 		<div class="col-md-5">
@@ -46,8 +51,8 @@
 			@if($customers == null)
 				<p class="text-muted mb-0"><em>{{ $LANG['no_customers'] ?? '' }}</em></p>
 			@else
-				<div class="input-group input-group-sm">
-					<select name="customer_id" class="form-select form-select-sm" required placeholder="{{ $LANG['customer'] ?? 'Customer' }}">
+				<div class="input-group">
+					<select name="customer_id" class="form-select" required placeholder="{{ $LANG['customer'] ?? 'Customer' }}">
 						<option value=""></option>
 						@foreach(($customers ?? []) as $customer)
 							<option @if($customer['id'] == ($defaults['customer'] ?? '')) selected @endif value="{{ $customer['id'] ?? '' }}">{{ $customer['name'] ?? '' }}</option>
@@ -63,7 +68,7 @@
 			<label class="form-label mb-1">{{ $LANG['date_formatted'] ?? '' }}</label>
 			<div class="input-icon">
 				<span class="input-icon-addon"><i class="ti ti-calendar"></i></span>
-				<input type="text" class="form-control form-control-sm date-picker" name="date" id="date1"
+				<input type="text" class="form-control date-picker" name="date" id="date1"
 					required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
 					@if(get('date'))
 						value="{{ get('date') }}"

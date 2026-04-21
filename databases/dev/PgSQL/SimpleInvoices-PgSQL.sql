@@ -79,17 +79,17 @@ SELECT setval('si_tax_tax_id_seq', 7);
 
 CREATE TABLE si_preferences (
   pref_id serial PRIMARY KEY,
-  pref_description varchar(50) ,
-  pref_currency_sign varchar(50) ,
-  pref_inv_heading varchar(50) ,
-  pref_inv_wording varchar(50) ,
-  pref_inv_detail_heading varchar(50) ,
+  pref_description varchar(255) ,
+  pref_currency_sign varchar(255) ,
+  pref_inv_heading varchar(255) ,
+  pref_inv_wording varchar(255) ,
+  pref_inv_detail_heading varchar(255) ,
   pref_inv_detail_line text,
-  pref_inv_payment_method varchar(50) ,
-  pref_inv_payment_line1_name varchar(50) ,
-  pref_inv_payment_line1_value varchar(50) ,
-  pref_inv_payment_line2_name varchar(50) ,
-  pref_inv_payment_line2_value varchar(50) ,
+  pref_inv_payment_method varchar(255) ,
+  pref_inv_payment_line1_name varchar(255) ,
+  pref_inv_payment_line1_value varchar(255) ,
+  pref_inv_payment_line2_name varchar(255) ,
+  pref_inv_payment_line2_value varchar(255) ,
   pref_enabled boolean NOT NULL default true
 );
 

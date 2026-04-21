@@ -105,7 +105,6 @@ $LANG['cron_id'] = "Cron ID";//1
 $LANG['cron_log'] = "Cron dnevnik";//1
 $LANG['currency_code'] = "Koda valute";//1
 $LANG['currency_sign'] = "Oznaka valute";//1
-$LANG['currency_sign_non_dollar'] = "Euro, Funt, ne-\$ znak, prosimo preberite";//1
 $LANG['custom_field'] = "Prosta polja";//1
 $LANG['custom_field1'] = "Prosta polja 1";//1
 $LANG['custom_field2'] = "Prosta polja 2";//1

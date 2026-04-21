@@ -52,7 +52,7 @@
                                 </form>
                                 @elseif((int)$d['id'] !== 1)
                                 <button class="btn btn-sm btn-outline-danger" disabled
-                                        title="Cannot delete — domain has users assigned">
+                                        title="Cannot delete - domain has users assigned">
                                     <i class="ti ti-trash me-1"></i>Delete
                                 </button>
                                 @endif

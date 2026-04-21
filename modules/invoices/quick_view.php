@@ -31,6 +31,7 @@ $invoice_type =  getInvoiceType($invoice['type_id']);
 $customer = getCustomer($invoice['customer_id']);
 $biller = getBiller($invoice['biller_id']);
 $preference = getPreference($invoice['preference_id']);
+$preference = InvoiceTokens::expandPreference($preference, $invoice, $biller, $customer);
 $defaults = getSystemDefaults();
 
 $invoiceobj = new invoice();

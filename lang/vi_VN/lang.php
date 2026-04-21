@@ -101,7 +101,6 @@ $LANG['cron_id'] = "ID Cron";//1
 $LANG['cron_log'] = "Nhật ký cron";//1
 $LANG['currency_code'] = "Mã đồng tiền";//1
 $LANG['currency_sign'] = "Ký hiệu đồng tiền";//1
-$LANG['currency_sign_non_dollar'] = "Euro, Pound, dấu non-\$ vui lòng đọc";//1
 $LANG['custom_field'] = "Trường mở rộng";//1
 $LANG['custom_field1'] = "Trường dữ liệu mỡ rộng 1";//1
 $LANG['custom_field2'] = "Trường dữ liệu mỡ rộng 2";//1

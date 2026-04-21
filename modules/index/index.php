@@ -71,8 +71,14 @@ $defaults = getSystemDefaults();
 if (! $has_invoices) {
 	require_once __DIR__ . '/../../include/class/CurrencySignHelper.php';
 	$wizard_default_preference = getDefaultPreference($domain_id) ?: [];
+	$wizard_payment_terms_rows = getPaymentTerms() ?: [];
+	// Step 4 includes payment terms when any exist; legacy session from the currency-only
+	// wizard must not show "Done" until the user submits again with terms in the form.
+	$wizard_invoice_prefs_done = ! empty($_SESSION['wizard_invoice_prefs_done'])
+		|| (! empty($_SESSION['wizard_currency_pref_done']) && count($wizard_payment_terms_rows) === 0);
 	$bladeView->assign('wizard_default_preference', $wizard_default_preference);
-	$bladeView->assign('wizard_currency_pref_done', ! empty($_SESSION['wizard_currency_pref_done']));
+	$bladeView->assign('wizard_currency_pref_done', $wizard_invoice_prefs_done);
+	$bladeView->assign('wizard_payment_terms', $wizard_payment_terms_rows);
 }
 
 $bladeView->assign('first_run_wizard', $first_run_wizard);

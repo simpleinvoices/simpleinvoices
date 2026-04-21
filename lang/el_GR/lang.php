@@ -104,7 +104,6 @@ $LANG['cron_id'] = "Αναγνωριστικό Cron";//1
 $LANG['cron_log'] = "Αρχείο καταγραφής Cron";//1
 $LANG['currency_code'] = "Κωδικός νομίσματος";//1
 $LANG['currency_sign'] = "Σύμβολο Νομίσματος";//1
-$LANG['currency_sign_non_dollar'] = "Ευρώ, λίρα, μη σημάδι \$ διαβάστε αυτό";//1
 $LANG['custom_field'] = "Ελεύθερο Πεδίο";//1
 $LANG['custom_field1'] = "Ελεύθερο Πεδίο 1";//1
 $LANG['custom_field2'] = "Ελεύθερο Πεδίο 2";//1

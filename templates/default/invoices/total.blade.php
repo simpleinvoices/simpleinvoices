@@ -193,3 +193,4 @@
 </form>
 
 @include('templates.default.invoices.modal_add_customer')
+@include('templates.default.invoices.modal_add_biller')

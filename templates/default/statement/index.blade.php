@@ -115,20 +115,20 @@
 						<span class="avatar avatar-sm bg-blue text-white rounded"><i class="ti ti-building-store"></i></span>
 						<div>
 							<div class="text-secondary small">{{ $LANG['biller'] ?? '' }}</div>
-							<div class="fw-semibold">{{ $biller_details['name'] ?? '—' }}</div>
+							<div class="fw-semibold">{{ $biller_details['name'] ?? '-' }}</div>
 						</div>
 					</div>
 					<div class="d-flex align-items-center gap-2">
 						<span class="avatar avatar-sm bg-blue text-white rounded"><i class="ti ti-user"></i></span>
 						<div>
 							<div class="text-secondary small">{{ $LANG['customer'] ?? '' }}</div>
-							<div class="fw-semibold">{{ $customer_details['name'] ?? '—' }}</div>
+							<div class="fw-semibold">{{ $customer_details['name'] ?? '-' }}</div>
 						</div>
 					</div>
 					@if($filter_by_date == "yes")
 					<div class="mt-2 pt-2 border-top border-blue-subtle">
 						<span class="badge bg-blue-lt text-blue">
-							<i class="ti ti-calendar me-1"></i>{{ $start_date ?? '' }} — {{ $end_date ?? '' }}
+							<i class="ti ti-calendar me-1"></i>{{ $start_date ?? '' }} - {{ $end_date ?? '' }}
 						</span>
 					</div>
 					@endif

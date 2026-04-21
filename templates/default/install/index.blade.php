@@ -96,7 +96,7 @@
 			<p class="text-secondary mb-3">{{ $LANG['install_admin_login_intro'] ?? 'Set the email and password for the default administrator account.' }}</p>
 			<div class="alert alert-info mb-3 py-2">
 				<i class="ti ti-info-circle me-1"></i>
-				Default login: <strong>demo@simpleinvoices.org</strong> / <strong>demo</strong> — update these fields to change them before installing.
+				Default login: <strong>demo@simpleinvoices.org</strong> / <strong>demo</strong> - update these fields to change them before installing.
 			</div>
 			<div class="mb-3">
 				<label class="form-label" for="install_admin_email">{{ $LANG['email'] ?? 'Email' }}</label>

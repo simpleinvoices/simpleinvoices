@@ -104,7 +104,6 @@ $LANG['cron_id'] = "Cron ID";//1
 $LANG['cron_log'] = "Cron log";//1
 $LANG['currency_code'] = "Kodiċi tal-munita";//1
 $LANG['currency_sign'] = "Munita";//1
-$LANG['currency_sign_non_dollar'] = "Euro, Pound, non-\$ sinjal jekk jogħġbok aqra dan";//1
 $LANG['custom_field'] = "Personalizzazjoni";//1
 $LANG['custom_field1'] = "Personalizzazjoni 1";//1
 $LANG['custom_field2'] = "Personalizzazjoni 2";//1

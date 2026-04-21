@@ -16,10 +16,6 @@ CREATE TABLE IF NOT EXISTS `si_biller` (
   `email` varchar(255) DEFAULT NULL,
   `logo` varchar(255) DEFAULT NULL,
   `footer` text,
-  `paypal_business_name` varchar(255) DEFAULT NULL,
-  `paypal_notify_url` varchar(255) DEFAULT NULL,
-  `paypal_return_url` varchar(255) DEFAULT NULL,
-  `eway_customer_id` varchar(255) DEFAULT NULL,
   `paymentsgateway_api_id` varchar(255) DEFAULT NULL,
   `notes` text,
   `custom_field1` varchar(255) DEFAULT NULL,
@@ -27,14 +23,37 @@ CREATE TABLE IF NOT EXISTS `si_biller` (
   `custom_field3` varchar(255) DEFAULT NULL,
   `custom_field4` varchar(255) DEFAULT NULL,
   `enabled` TINYINT(1) DEFAULT 1 NOT NULL,
-  PRIMARY KEY (`domain_id`,`id`)
-) ENGINE=MyISAM;
+  `stripe_secret_key` varchar(768) DEFAULT NULL,
+  `stripe_webhook_secret` varchar(768) DEFAULT NULL,
+  `stripe_test_mode` TINYINT(1) NOT NULL DEFAULT 1,
+  `paypal_client_id` varchar(255) DEFAULT NULL,
+  `paypal_client_secret` varchar(768) DEFAULT NULL,
+  `paypal_test_mode` TINYINT(1) NOT NULL DEFAULT 1,
+  `mollie_api_key` varchar(768) DEFAULT NULL,
+  `authorizenet_login_id` varchar(768) DEFAULT NULL,
+  `authorizenet_transaction_key` varchar(768) DEFAULT NULL,
+  `authorizenet_signature_key` varchar(768) DEFAULT NULL,
+  `authorizenet_test_mode` TINYINT(1) NOT NULL DEFAULT 1,
+  `eway_api_key` varchar(768) DEFAULT NULL,
+  `eway_api_password` varchar(768) DEFAULT NULL,
+  `eway_test_mode` TINYINT(1) NOT NULL DEFAULT 1,
+  `kofi_username` varchar(100) DEFAULT NULL,
+  `coinbase_api_key` varchar(768) DEFAULT NULL,
+  `coinbase_webhook_secret` varchar(768) DEFAULT NULL,
+  `adyen_api_key` varchar(768) DEFAULT NULL,
+  `adyen_merchant_account` varchar(255) DEFAULT NULL,
+  `adyen_hmac_key` varchar(768) DEFAULT NULL,
+  `adyen_live_prefix` varchar(100) DEFAULT NULL,
+  `adyen_test_mode` TINYINT(1) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`domain_id`,`id`),
+  KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO `si_biller` (`id`, `domain_id`, `name`, `street_address`, `street_address2`, `city`, `state`, `zip_code`, `country`, `phone`, `mobile_phone`, `fax`, `email`, `logo`, `footer`, `paypal_business_name`, `paypal_notify_url`, `paypal_return_url`, `eway_customer_id`, `paymentsgateway_api_id`, `notes`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `enabled`) VALUES
- (1, 1, 'Mr Plough', '43 Evergreen Terace', '', 'Springfield', 'NY', '90245', '', '04 5689 0456', '0456 4568 8966', '04 5689 8956', 'homer@mrplough.com', 'ubuntulogo.png', '', '', '', '', '', '', '', '', '', '7898-87987-87', '', '1')
-,(2, 1, 'Homer Simpson', '43 Evergreen Terace', NULL, 'Springfield', 'NY', '90245', NULL, '04 5689 0456', '0456 4568 8966', '04 5689 8956', 'homer@yahoo.com', NULL, NULL, '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '1')
-,(3, 1, 'The Beer Baron', '43 Evergreen Terace', NULL, 'Springfield', 'NY', '90245', NULL, '04 5689 0456', '0456 4568 8966', '04 5689 8956', 'beerbaron@yahoo.com', NULL, NULL, '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '1')
-,(4, 1, 'Fawlty Towers', '13 Seaside Drive', NULL, 'Torquay', 'Brixton on Avon', '65894', 'United Kingdom', '089 6985 4569', '0425 5477 8789', '089 6985 4568', 'penny@fawltytowers.co.uk', NULL, NULL, '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '1');
+INSERT INTO `si_biller` (`id`, `domain_id`, `name`, `street_address`, `street_address2`, `city`, `state`, `zip_code`, `country`, `phone`, `mobile_phone`, `fax`, `email`, `logo`, `footer`, `paymentsgateway_api_id`, `notes`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `enabled`) VALUES
+ (1, 1, 'Mr Plough', '43 Evergreen Terace', '', 'Springfield', 'NY', '90245', '', '04 5689 0456', '0456 4568 8966', '04 5689 8956', 'homer@mrplough.com', 'ubuntulogo.png', '', '', '', '', '', '7898-87987-87', '', '1')
+,(2, 1, 'Homer Simpson', '43 Evergreen Terace', NULL, 'Springfield', 'NY', '90245', NULL, '04 5689 0456', '0456 4568 8966', '04 5689 8956', 'homer@yahoo.com', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '1')
+,(3, 1, 'The Beer Baron', '43 Evergreen Terace', NULL, 'Springfield', 'NY', '90245', NULL, '04 5689 0456', '0456 4568 8966', '04 5689 8956', 'beerbaron@yahoo.com', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '1')
+,(4, 1, 'Fawlty Towers', '13 Seaside Drive', NULL, 'Torquay', 'Brixton on Avon', '65894', 'United Kingdom', '089 6985 4569', '0425 5477 8789', '089 6985 4568', 'penny@fawltytowers.co.uk', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '1');
 
 CREATE TABLE IF NOT EXISTS `si_cron` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -203,6 +222,29 @@ INSERT INTO `si_invoice_type` (`inv_ty_id`, `inv_ty_description`) VALUES
 ,(2, 'Itemised')
 ,(3, 'Consulting');
 
+CREATE TABLE IF NOT EXISTS `si_payment_terms` (
+  `term_id` int(11) NOT NULL AUTO_INCREMENT,
+  `term_code` varchar(32) NOT NULL,
+  `term_label` varchar(120) NOT NULL,
+  `calc_kind` varchar(32) NOT NULL,
+  `param_int` int(11) DEFAULT NULL,
+  `sort_order` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`term_id`),
+  UNIQUE KEY `term_code` (`term_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT IGNORE INTO `si_payment_terms` (`term_id`, `term_code`, `term_label`, `calc_kind`, `param_int`, `sort_order`) VALUES
+ (1, 'NET_7',     'Net 7',                                'NET_DAYS', 7,    10)
+,(2, 'NET_10',    'Net 10',                               'NET_DAYS', 10,   20)
+,(3, 'NET_14',    'Net 14',                               'NET_DAYS', 14,   30)
+,(4, 'NET_30',    'Net 30',                               'NET_DAYS', 30,   40)
+,(5, 'NET_60',    'Net 60',                               'NET_DAYS', 60,   50)
+,(6, 'NET_90',    'Net 90',                               'NET_DAYS', 90,   60)
+,(7, 'EOM',       'End of month (EOM)',                   'EOM',      NULL, 70)
+,(8, 'NET_30_EOM','Net 30 EOM (EOM + 30 days)',           'EOM_PLUS_DAYS', 30, 80)
+,(9, 'EOM_45',    '45 EOM (45 days after month end)',     'EOM_PLUS_DAYS', 45, 90)
+,(10,'MFI_15',    '15 MFI (15th of month following invoice)', 'MFI_DAY', 15, 100);
+
 CREATE TABLE IF NOT EXISTS `si_invoices` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `index_id` int(11) NOT NULL,
@@ -217,6 +259,10 @@ CREATE TABLE IF NOT EXISTS `si_invoices` (
   `custom_field3` varchar(50) DEFAULT NULL,
   `custom_field4` varchar(50) DEFAULT NULL,
   `note` text,
+  `payment_term_id` int(11) DEFAULT NULL,
+  `due_date` date DEFAULT NULL,
+  `currency_sign` varchar(50) DEFAULT NULL,
+  `currency_code` varchar(25) DEFAULT NULL,
   `denorm_invoice_total` decimal(25,6) NOT NULL DEFAULT 0,
   `denorm_amount_paid` decimal(25,6) NOT NULL DEFAULT 0,
   `denorm_amount_owing` decimal(25,6) NOT NULL DEFAULT 0,
@@ -288,17 +334,17 @@ INSERT INTO `si_payment_types` (`pt_id`, `domain_id`, `pt_description`, `pt_enab
 CREATE TABLE IF NOT EXISTS `si_preferences` (
   `pref_id` int(11) NOT NULL AUTO_INCREMENT,
   `domain_id` int(11) NOT NULL DEFAULT '1',
-  `pref_description` varchar(50) DEFAULT NULL,
-  `pref_currency_sign` varchar(50) DEFAULT NULL,
-  `pref_inv_heading` varchar(50) DEFAULT NULL,
-  `pref_inv_wording` varchar(50) DEFAULT NULL,
-  `pref_inv_detail_heading` varchar(50) DEFAULT NULL,
+  `pref_description` varchar(255) DEFAULT NULL,
+  `pref_currency_sign` varchar(255) DEFAULT NULL,
+  `pref_inv_heading` varchar(255) DEFAULT NULL,
+  `pref_inv_wording` varchar(255) DEFAULT NULL,
+  `pref_inv_detail_heading` varchar(255) DEFAULT NULL,
   `pref_inv_detail_line` text,
-  `pref_inv_payment_method` varchar(50) DEFAULT NULL,
-  `pref_inv_payment_line1_name` varchar(50) DEFAULT NULL,
-  `pref_inv_payment_line1_value` varchar(50) DEFAULT NULL,
-  `pref_inv_payment_line2_name` varchar(50) DEFAULT NULL,
-  `pref_inv_payment_line2_value` varchar(50) DEFAULT NULL,
+  `pref_inv_payment_method` varchar(255) DEFAULT NULL,
+  `pref_inv_payment_line1_name` varchar(255) DEFAULT NULL,
+  `pref_inv_payment_line1_value` varchar(255) DEFAULT NULL,
+  `pref_inv_payment_line2_name` varchar(255) DEFAULT NULL,
+  `pref_inv_payment_line2_value` varchar(255) DEFAULT NULL,
   `pref_enabled` TINYINT(1) DEFAULT 1 NOT NULL,
   `status` TINYINT(1) NOT NULL,
   `locale` varchar(255) DEFAULT NULL,
@@ -307,8 +353,10 @@ CREATE TABLE IF NOT EXISTS `si_preferences` (
   `currency_code` varchar(25) DEFAULT NULL,
   `include_online_payment` varchar(255) DEFAULT NULL,
   `currency_position` varchar(25) DEFAULT NULL,
-  PRIMARY KEY (`domain_id`,`pref_id`)
-) ENGINE=MyISAM;
+  `payment_term_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`domain_id`,`pref_id`),
+  KEY `pref_id` (`pref_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `si_preferences` (`pref_id`, `domain_id`, `pref_description`, `pref_currency_sign`, `pref_inv_heading`, `pref_inv_wording`, `pref_inv_detail_heading`, `pref_inv_detail_line`, `pref_inv_payment_method`, `pref_inv_payment_line1_name`, `pref_inv_payment_line1_value`, `pref_inv_payment_line2_name`, `pref_inv_payment_line2_value`, `pref_enabled`, `status`, `locale`, `language`, `index_group`, `currency_code`, `include_online_payment`, `currency_position`) VALUES
  (1, 1, 'Invoice', '$', 'Invoice', 'Invoice', 'Details', 'Payment is to be made within 14 days of the invoice being sent', 'Electronic Funds Transfer', 'Account name', 'H. & M. Simpson', 'Account number:', '0123-4567-7890', '1', 1, 'en_GB', 'en_GB', 1, 'USD', NULL, 'left')

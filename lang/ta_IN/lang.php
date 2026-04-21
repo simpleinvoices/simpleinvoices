@@ -104,7 +104,6 @@ $LANG['cron_id'] = "Cron ID";//1
 $LANG['cron_log'] = "Cron பதிவு";//1
 $LANG['currency_code'] = "நாணய குறியீடு";//1
 $LANG['currency_sign'] = "நாணய அடையாளம்";//1
-$LANG['currency_sign_non_dollar'] = "யூரோ, பவுண்ட், அல்லாத \$ இல்லாத குறியீடு இதை வாசிக்கவும்";//1
 $LANG['custom_field'] = "தனிப்பயன் புலம்";//1
 $LANG['custom_field1'] = "தனிப்பயன் புலம் 1";//1
 $LANG['custom_field2'] = "தனிப்பயன் புலம் 2";//1

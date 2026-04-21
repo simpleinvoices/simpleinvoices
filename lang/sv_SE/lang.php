@@ -104,7 +104,6 @@ $LANG['cron_id'] = "Cron-ID";//1
 $LANG['cron_log'] = "Cron-logg";//1
 $LANG['currency_code'] = "Valuta tecken";//1
 $LANG['currency_sign'] = "Valuta tecken";//1
-$LANG['currency_sign_non_dollar'] = "Euro, Pund, icke-\$ tecken läs detta";//1
 $LANG['custom_field'] = "Egendefinierat fält";//1
 $LANG['custom_field1'] = "Egendefinierat fält 1";//1
 $LANG['custom_field2'] = "Egendefinierat fält 2";//1

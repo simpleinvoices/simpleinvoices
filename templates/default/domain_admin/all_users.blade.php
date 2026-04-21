@@ -87,7 +87,7 @@
                         $linkedName = match($u['role_name']) {
                             'customer' => $u['customer_name'] ?? '<span class="text-danger">unlinked</span>',
                             'biller'   => $u['biller_name']   ?? '<span class="text-danger">unlinked</span>',
-                            default    => '—',
+                            default    => '-',
                         };
                         $editUrl = in_array($u['role_name'], ['customer', 'biller'])
                             ? 'index.php?module=domain_admin&view=user_edit&id=' . urlencode($u['id'])
@@ -95,7 +95,7 @@
                                 . '&return_module=domain_admin&return_view=all_users';
                     @endphp
                     <tr>
-                        <td class="fw-medium">{{ $u['name'] ?: '—' }}</td>
+                        <td class="fw-medium">{{ $u['name'] ?: '-' }}</td>
                         <td class="text-secondary">{{ $u['email'] }}</td>
                         <td>
                             <span class="badge {{ $rc['badge'] }}">

@@ -12,7 +12,7 @@
 
 @if($firstRun)
 @php
-    // Determine active wizard step — auto-advance to first incomplete step,
+    // Determine active wizard step - auto-advance to first incomplete step,
     // or honour an explicit ?wizard_step=N param from a redirect.
     $wizardStep = isset($_GET['wizard_step']) ? max(1, min(5, (int)$_GET['wizard_step'])) : (
         !$hasBillers ? 1 : (!$hasCustomers ? 2 : (!$hasProducts ? 3 : (!$wizardCurrencyPrefDone ? 4 : 5)))
@@ -126,8 +126,8 @@
         <div class="tab-content">
 
             {{-- ═══════════════════════════════════════════════════════════
-                 STEP 1 — Your Details (Biller)
-                 A Biller is the entity that creates invoices — you or your business.
+                 STEP 1 - Your Details (Biller)
+                 A Biller is the entity that creates invoices - you or your business.
             ═══════════════════════════════════════════════════════════ --}}
             <div id="wizard-step-1" class="tab-pane @if($wizardStep == 1) active show @endif" role="tabpanel">
                 @if($hasBillers)
@@ -240,7 +240,7 @@
             </div>
 
             {{-- ═══════════════════════════════════════════════════════════
-                 STEP 2 — Add a Customer
+                 STEP 2 - Add a Customer
             ═══════════════════════════════════════════════════════════ --}}
             <div id="wizard-step-2" class="tab-pane @if($wizardStep == 2) active show @endif" role="tabpanel">
                 @if($hasCustomers)
@@ -350,7 +350,7 @@
             </div>
 
             {{-- ═══════════════════════════════════════════════════════════
-                 STEP 3 — Add a Product / Service
+                 STEP 3 - Add a Product / Service
             ═══════════════════════════════════════════════════════════ --}}
             <div id="wizard-step-3" class="tab-pane @if($wizardStep == 3) active show @endif" role="tabpanel">
                 @if($hasProducts)
@@ -399,7 +399,7 @@
                             <form method="post" action="index.php?module=products&amp;view=add">
                                 <input type="hidden" name="op"          value="insert_product">
                                 <input type="hidden" name="from_wizard" value="1">
-                                {{-- cost/reorder_level omitted — insertProduct() treats missing keys as NULL (numeric cols) --}}
+                                {{-- cost/reorder_level omitted - insertProduct() treats missing keys as NULL (numeric cols) --}}
                                 <input type="hidden" name="default_tax_id"       value="">
                                 <input type="hidden" name="custom_field1"        value="">
                                 <input type="hidden" name="custom_field2"        value="">
@@ -452,7 +452,7 @@
             </div>
 
             {{-- ═══════════════════════════════════════════════════════════
-                 STEP 4 — Invoice preferences (currency sign for default Invoice preference)
+                 STEP 4 - Invoice preferences (currency sign for default Invoice preference)
             ═══════════════════════════════════════════════════════════ --}}
             <div id="wizard-step-4" class="tab-pane @if($wizardStep == 4) active show @endif" role="tabpanel">
                 @php
@@ -485,7 +485,7 @@
                                             <i class="ti ti-currency-dollar text-indigo"></i>
                                         </span>
                                         <div>
-                                            <h4 class="mb-1">{{ $LANG['wizard_invoice_prefs_heading'] ?? '' }}</h4>
+                                            <h4 class="mb-1">{{ $LANG['wizard_invoice_preferences'] ?? '' }}</h4>
                                             <p class="text-secondary mb-0" style="font-size:.875rem">
                                                 {{ $LANG['wizard_invoice_prefs_description'] ?? '' }}
                                             </p>
@@ -511,7 +511,22 @@
                                     'currencyCodeFieldName'    => 'currency_code',
                                     'currencyCodeCurrentValue' => $wizardPref['currency_code'] ?? '',
                                 ])
-                                <div class="mt-2 d-flex justify-content-end">
+                                <div class="row g-3 mt-1">
+                                    <div class="col-12">
+                                        <label class="form-label">{{ $LANG['payment_terms'] ?? '' }}</label>
+                                        <select name="payment_term_id" class="form-select">
+                                            <option value="">{{ $LANG['payment_term_none'] ?? '-' }}</option>
+                                            @foreach(($wizard_payment_terms ?? []) as $term)
+                                                <option value="{{ $term['term_id'] ?? '' }}"
+                                                    @if(($term['term_id'] ?? '') == ($wizardPref['payment_term_id'] ?? '')) selected @endif>
+                                                    {{ $term['term_label'] ?? '' }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <small class="text-secondary">{{ $LANG['wizard_payment_terms_hint'] ?? 'Default payment terms applied to new invoices.' }}</small>
+                                    </div>
+                                </div>
+                                <div class="mt-3 d-flex justify-content-end">
                                     <button type="submit" class="btn btn-primary">
                                         {{ $LANG['wizard_save_currency_continue'] ?? '' }} <i class="ti ti-arrow-right ms-1"></i>
                                     </button>
@@ -524,7 +539,7 @@
             </div>
 
             {{-- ═══════════════════════════════════════════════════════════
-                 STEP 5 — Create Your First Invoice
+                 STEP 5 - Create Your First Invoice
             ═══════════════════════════════════════════════════════════ --}}
             <div id="wizard-step-5" class="tab-pane @if($wizardStep == 5) active show @endif" role="tabpanel">
                 @if($hasInvoices)
@@ -1291,7 +1306,7 @@
     var annualChart = new ApexCharts(document.getElementById('chart-annual'), buildAnnualOptions());
     annualChart.render();
 
-    // Debtor aging radial chart (skipped when all invoices paid and nothing owing — static success UI instead)
+    // Debtor aging radial chart (skipped when all invoices paid and nothing owing - static success UI instead)
     var agingData = @json($aging_chart ?? []);
     var dashAgingAllClear = @json(!empty($dash_aging_all_clear));
 

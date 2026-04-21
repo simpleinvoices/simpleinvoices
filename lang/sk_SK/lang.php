@@ -104,7 +104,6 @@ $LANG['cron_id'] = "ID cronu";//1
 $LANG['cron_log'] = "Záznam cronu";//1
 $LANG['currency_code'] = "Kód meny";//1
 $LANG['currency_sign'] = "Symbol meny";//1
-$LANG['currency_sign_non_dollar'] = "Symbol meny inej ako dolár";//1
 $LANG['custom_field'] = "Voliteľné pole";//1
 $LANG['custom_field1'] = "Voliteľné pole 1";//1
 $LANG['custom_field2'] = "Voliteľné pole 2";//1

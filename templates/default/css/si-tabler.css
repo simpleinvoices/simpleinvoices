@@ -12,7 +12,7 @@
     --tblr-link-color: #45aaf2;
 }
 
-/* Light grey outline buttons — match Tabler preview slate style */
+/* Light grey outline buttons - match Tabler preview slate style */
 .btn-outline-secondary {
     --tblr-btn-color: var(--tblr-body-color);
     --tblr-btn-border-color: var(--tblr-border-color);
@@ -33,7 +33,7 @@
     vertical-align: middle;
 }
 
-/* Font stack — background left to Tabler's CSS variables so dark mode works */
+/* Font stack - background left to Tabler's CSS variables so dark mode works */
 body {
     font-family: "Inter Var", Inter, -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
 }
@@ -48,7 +48,7 @@ body {
     margin-top: 0 !important;
 }
 
-/* Page header styling (OVERVIEW / Dashboard row) — transparent like Tabler demo */
+/* Page header styling (OVERVIEW / Dashboard row) - transparent like Tabler demo */
 .page-header {
     background: transparent;
     border-bottom: none;
@@ -130,9 +130,9 @@ body {
 /* Legacy hide/show utility */
 .si_hide { display: none !important; }
 
-/* Invoice line items — responsive grid layout */
+/* Invoice line items - responsive grid layout */
 
-/* Button-sized segmented control — matches .btn default sizing */
+/* Button-sized segmented control - matches .btn default sizing */
 .segmented-control-btn .segmented-control-label {
     padding: 0.4375rem 1rem;
     font-size: 0.875rem;
@@ -616,7 +616,7 @@ td.index_table {
     z-index: 1050;
 }
 
-/* Icon sizing — matches Tabler demo nav proportions */
+/* Icon sizing - matches Tabler demo nav proportions */
 .nav-link .ti,
 .nav-link-icon .ti,
 .dropdown-item .ti {
@@ -629,7 +629,7 @@ td.index_table {
     vertical-align: middle;
 }
 
-/* Responsive small button — full size on sm+, icon-only compact on xs */
+/* Responsive small button - full size on sm+, icon-only compact on xs */
 @media (max-width: 575.98px) {
     .btn-sm-mobile {
         --tblr-btn-padding-y: .2rem;
@@ -641,7 +641,7 @@ td.index_table {
     .btn-sm-mobile .ti {
         font-size: 1rem;
     }
-    /* Hide the dropdown caret — the ⋮ icon already signals a menu, and the
+    /* Hide the dropdown caret - the ⋮ icon already signals a menu, and the
        ::after triangle pushes the button ~5px wider than the 2.5rem column. */
     .btn-sm-mobile::after {
         display: none !important;
@@ -755,7 +755,7 @@ a.segmented-control-item {
 
 /*
  * The bootstrap5 theme sets the control background to `transparent` and uses
- * `var(--bs-body-bg)` for the dropdown — both of which can produce a see-through
+ * `var(--bs-body-bg)` for the dropdown - both of which can produce a see-through
  * appearance inside Tabler's stacking contexts.  Override with Tabler's own
  * surface token so both light and dark modes always get a solid, opaque panel.
  */
@@ -767,7 +767,7 @@ a.segmented-control-item {
     color: var(--tblr-body-color);
 }
 
-/* Prevent the selected value from wrapping — matches native <select> behaviour */
+/* Prevent the selected value from wrapping - matches native <select> behaviour */
 .ts-wrapper.single .ts-control {
     flex-wrap: nowrap;
     overflow: hidden;
@@ -779,7 +779,7 @@ a.segmented-control-item {
     min-width: 0;
 }
 
-/* Strip Bootstrap's X icon from all invalid fields — red border is enough */
+/* Strip Bootstrap's X icon from all invalid fields - red border is enough */
 .form-control.is-invalid,
 .form-select.is-invalid,
 .was-validated .form-control:invalid,
@@ -795,7 +795,7 @@ a.segmented-control-item {
     background-image: none !important;
 }
 
-/* Dropdown panel — solid background, decent shadow, rounded corners */
+/* Dropdown panel - solid background, decent shadow, rounded corners */
 .ts-dropdown,
 .ts-dropdown.form-control,
 .ts-dropdown.form-select {
@@ -808,7 +808,7 @@ a.segmented-control-item {
     color: var(--tblr-body-color);
 }
 
-/* Dark mode — override with a solid dark surface */
+/* Dark mode - override with a solid dark surface */
 [data-bs-theme="dark"] .ts-wrapper.form-select .ts-control,
 [data-bs-theme="dark"] .ts-wrapper.form-select.single.input-active .ts-control {
     background: #1e293b !important;
@@ -836,13 +836,28 @@ a.segmented-control-item {
     align-items: center;
 }
 
-/* ── Tom Select sizing: match Bootstrap/Tabler form-select heights ──────── */
+/* ── Tom Select sizing: match Tabler form-select heights ────────────────── */
+/* TomSelect's bootstrap5 theme already sets padding:0 on .ts-wrapper.form-select,
+   so height is driven by .ts-control alone.  The critical fix is using Tabler's
+   actual form-select padding (.5625rem vertical, 1rem left) rather than the
+   form-control padding (0.4375rem) that --tblr-input-padding-y resolves to -
+   those differ by 4px per side, making TomSelect visibly shorter than native
+   form-select elements. */
+.ts-wrapper.form-select,
+.ts-wrapper.form-select-sm {
+    padding: 0 !important;
+    height: auto !important;
+}
+
 .ts-wrapper.form-select .ts-control,
 .ts-wrapper.form-select.single.input-active .ts-control {
-    padding: var(--tblr-input-padding-y, 0.4375rem) var(--tblr-input-padding-x, 0.75rem);
+    /* 0.5625rem matches Tabler's form-select padding-y exactly */
+    padding-top: 0.5625rem;
+    padding-bottom: 0.5625rem;
+    padding-left: 1rem;
     min-height: unset;
-    font-size: var(--tblr-input-font-size, 0.875rem);
-    line-height: var(--tblr-input-line-height, 1.4285714286);
+    font-size: 0.875rem;
+    line-height: 1.25rem;
 }
 
 .ts-wrapper.form-select-sm .ts-control,
@@ -853,16 +868,18 @@ a.segmented-control-item {
     line-height: var(--tblr-input-line-height, 1.4285714286);
 }
 
-/* ── Quick-add buttons (product + / customer +) ─────────────────────────── */
+/* ── Quick-add buttons (product + / customer + / biller +) ──────────────── */
 /* Match the muted secondary colour used by the segmented-control row buttons */
 .si-add-customer-btn,
-.si-add-product-row-btn {
+.si-add-product-row-btn,
+.si-add-biller-btn {
     color: var(--tblr-secondary);
     border-color: var(--tblr-border-color);
     background: transparent;
 }
 .si-add-customer-btn:hover,
-.si-add-product-row-btn:hover {
+.si-add-product-row-btn:hover,
+.si-add-biller-btn:hover {
     color: var(--tblr-body-color);
     border-color: var(--tblr-border-color);
     background-color: rgba(0, 0, 0, 0.06);

@@ -278,17 +278,17 @@ INSERT INTO "si_payment_types" ("pt_id", "domain_id", "pt_description", "pt_enab
 CREATE TABLE IF NOT EXISTS "si_preferences" (
   "pref_id" INTEGER PRIMARY KEY,
   "domain_id" int(11) NOT NULL default '1',
-  "pref_description" varchar(50) default NULL,
-  "pref_currency_sign" varchar(50) default NULL,
-  "pref_inv_heading" varchar(50) default NULL,
-  "pref_inv_wording" varchar(50) default NULL,
-  "pref_inv_detail_heading" varchar(50) default NULL,
+  "pref_description" varchar(255) default NULL,
+  "pref_currency_sign" varchar(255) default NULL,
+  "pref_inv_heading" varchar(255) default NULL,
+  "pref_inv_wording" varchar(255) default NULL,
+  "pref_inv_detail_heading" varchar(255) default NULL,
   "pref_inv_detail_line" text,
-  "pref_inv_payment_method" varchar(50) default NULL,
-  "pref_inv_payment_line1_name" varchar(50) default NULL,
-  "pref_inv_payment_line1_value" varchar(50) default NULL,
-  "pref_inv_payment_line2_name" varchar(50) default NULL,
-  "pref_inv_payment_line2_value" varchar(50) default NULL,
+  "pref_inv_payment_method" varchar(255) default NULL,
+  "pref_inv_payment_line1_name" varchar(255) default NULL,
+  "pref_inv_payment_line1_value" varchar(255) default NULL,
+  "pref_inv_payment_line2_name" varchar(255) default NULL,
+  "pref_inv_payment_line2_value" varchar(255) default NULL,
   "pref_enabled" varchar(1) NOT NULL default '1'
 
 ) ;

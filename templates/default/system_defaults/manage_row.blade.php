@@ -17,7 +17,7 @@
 			</div>
 		</div>
 		<div class="col-auto text-secondary">
-			{{ $value ?? '—' }}
+			{{ $value ?? '-' }}
 		</div>
 		<div class="col-auto">
 			<a href="index.php?module=system_defaults&amp;view=edit&amp;submit={{ urlencode($edit_param ?? '') }}" class="btn btn-outline-primary" title="{{ $LANG['edit'] ?? '' }}">

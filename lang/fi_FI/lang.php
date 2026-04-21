@@ -104,7 +104,6 @@ $LANG['cron_id'] = "Cron-tunnus";//1
 $LANG['cron_log'] = "Cron-loki";//1
 $LANG['currency_code'] = "Valuuttakoodi";//1
 $LANG['currency_sign'] = "Valuutan tunnus";//1
-$LANG['currency_sign_non_dollar'] = "Euro, Pound, ei-\$ sign lue tämä";//1
 $LANG['custom_field'] = "Muokattava kenttä";//1
 $LANG['custom_field1'] = "Muokattava kenttä 1";//1
 $LANG['custom_field2'] = "Muokattava kenttä 2";//1

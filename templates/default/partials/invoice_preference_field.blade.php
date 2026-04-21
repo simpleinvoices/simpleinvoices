@@ -21,7 +21,7 @@
 		@if(($preferences ?? null) == null)
 			<p class="text-muted mb-0"><em>{{ $LANG['no_preferences'] ?? '' }}</em></p>
 		@else
-			<select name="preference_id" id="si_invoice_preference_id" class="form-select form-select-sm">
+			<select name="preference_id" id="si_invoice_preference_id" class="form-select">
 				@foreach(($preferences ?? []) as $pref)
 					<option
 						@if(($pref['pref_id'] ?? '') == $selectedPrefId) selected @endif
@@ -36,7 +36,7 @@
 	</div>
 	<div class="col-12 col-sm-6 col-xl-3">
 		<label class="form-label mb-1" for="si_invoice_currency_select">{{ $LANG['currency_sign'] ?? 'Currency' }}</label>
-		<select id="si_invoice_currency_select" class="form-select form-select-sm" autocomplete="off">
+		<select id="si_invoice_currency_select" class="form-select" autocomplete="off">
 			@foreach(CurrencySignHelper::getPresetGroups() as $g)
 				<optgroup label="{{ $g['label'] }}">
 					@foreach($g['presets'] as $p)
@@ -55,13 +55,13 @@
 		<div id="si_invoice_currency_custom_wrap" class="mt-1 {{ $currencyIsCustom ? '' : 'd-none' }}">
 			<div class="row g-1">
 				<div class="col">
-					<input type="text" id="si_invoice_currency_sign_custom" class="form-control form-control-sm"
+					<input type="text" id="si_invoice_currency_sign_custom" class="form-control"
 						placeholder="{{ $LANG['currency_sign'] ?? 'Symbol' }}"
 						value="{{ $currencyIsCustom ? $currentCurrencySign : '' }}"
 						autocomplete="off" />
 				</div>
 				<div class="col">
-					<input type="text" id="si_invoice_currency_code_custom" class="form-control form-control-sm"
+					<input type="text" id="si_invoice_currency_code_custom" class="form-control"
 						placeholder="{{ $LANG['currency_code'] ?? 'Code (e.g. USD)' }}"
 						value="{{ $currencyIsCustom ? $currentCurrencyCode : '' }}"
 						autocomplete="off" maxlength="10" />
@@ -71,7 +71,7 @@
 	</div>
 	<div class="col-12 col-sm-6 col-xl-3">
 		<label class="form-label mb-1" for="si_invoice_payment_term_id">{{ $LANG['payment_terms'] ?? 'Payment terms' }}</label>
-		<select name="payment_term_id" id="si_invoice_payment_term_id" class="form-select form-select-sm">
+		<select name="payment_term_id" id="si_invoice_payment_term_id" class="form-select">
 			<option value="">{{ $LANG['payment_term_none'] ?? '-' }}</option>
 			@foreach(($paymentTerms ?? []) as $pt)
 				<option
@@ -86,7 +86,7 @@
 	<div class="col-12 col-sm-6 col-xl-3">
 		<label class="form-label mb-1" for="si_invoice_due_date_preview">{{ $LANG['due_date'] ?? 'Due date' }}</label>
 		<input type="text" readonly tabindex="-1" id="si_invoice_due_date_preview" data-initial="{{ $calcDueDate }}"
-			class="form-control form-control-sm fw-medium bg-body-secondary border text-body"
+			class="form-control fw-medium bg-body-secondary border text-body"
 			value="{{ $calcDueDate !== '' ? $calcDueDate : '-' }}"
 			aria-readonly="true" />
 	</div>
