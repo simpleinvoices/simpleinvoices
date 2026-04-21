@@ -1,7 +1,7 @@
 <?php
 /*
  * Script: admin/domain_save.php
- *   Insert / update / delete a domain — administrator role only
+ *   Insert / update / delete a domain - administrator role only
  *
  * License: GPL v3 or above
  */
@@ -67,7 +67,7 @@ if ($op === 'update_domain') {
         );
         $saved = (bool) $sth;
         if (!$saved) {
-            $error = 'Could not update domain — the name may already be taken.';
+            $error = 'Could not update domain - the name may already be taken.';
         }
     }
 }
@@ -90,7 +90,7 @@ if ($op === 'delete_domain') {
         $cnt = (int) ($check->fetch(PDO::FETCH_ASSOC)['cnt'] ?? 0);
 
         if ($cnt > 0) {
-            $error = "Cannot delete domain — it still has {$cnt} user(s) assigned to it.";
+            $error = "Cannot delete domain - it still has {$cnt} user(s) assigned to it.";
         } else {
             $sth = dbQuery(
                 "DELETE FROM " . TB_PREFIX . "user_domain WHERE id = :id",

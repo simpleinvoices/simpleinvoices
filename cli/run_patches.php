@@ -1,11 +1,11 @@
 <?php
 /**
- * CLI patch runner — applies pending SQL patches at container/CLI startup.
+ * CLI patch runner - applies pending SQL patches at container/CLI startup.
  *
  * Usage:  php cli/run_patches.php
  *
  * Called automatically by docker-entrypoint.sh after the config is written and
- * the database is accepting connections.  Safe to run manually too — already-applied
+ * the database is accepting connections.  Safe to run manually too - already-applied
  * patches are skipped, so re-running is idempotent.
  *
  * Does nothing until the database looks install-ready: `si_biller` exists and
@@ -55,10 +55,10 @@ if (!isset($config->extension) || !$config->extension) {
 }
 
 // ---------------------------------------------------------------------------
-// Core includes — order matters; mirrors init.php
+// Core includes - order matters; mirrors init.php
 // ---------------------------------------------------------------------------
 
-// htmlsafe(), simpleInvoicesError(), filenameEscape() — used by sql_queries.php
+// htmlsafe(), simpleInvoicesError(), filenameEscape() - used by sql_queries.php
 include_once './include/init_pre.php';
 include_once './include/functions.php';
 
@@ -73,11 +73,11 @@ spl_autoload_register(function (string $class_name): void {
 });
 
 // db.php: db class used directly by getSystemDefaults() via `new db()`.
-// Must be explicit — the autoloader above would find it, but $config must already
+// Must be explicit - the autoloader above would find it, but $config must already
 // be in scope when the constructor runs, so eager-load it here.
 include_once './include/class/db.php';
 
-// domain_id: lives in include/class/domain/id.php — autoloader maps to wrong path.
+// domain_id: lives in include/class/domain/id.php - autoloader maps to wrong path.
 include_once './include/class/domain/id.php';
 
 // $auth_session stub: sql_queries.php reads $auth_session->id unconditionally in
@@ -85,7 +85,7 @@ include_once './include/class/domain/id.php';
 $auth_session = (object) ['id' => 0, 'domain_id' => 1];
 
 // $logger stub: invoice::max() calls $logger->log() as a global. Provide a no-op
-// so it doesn't fatal — we don't need the log output in the CLI runner.
+// so it doesn't fatal - we don't need the log output in the CLI runner.
 $logger = new class {
     public function log(string $message, string $level = ''): void {}
     public function info(string $message, array $context = []): void {}
@@ -125,15 +125,15 @@ if ($install_tables_exists && checkTableExists(TB_PREFIX . 'sql_patchmanager')) 
         $has_patch_history = false;
     }
 }
-// Web installer “essential” bootstrap — OR any existing patch history (upgrades / Docker volumes with real data).
+// Web installer “essential” bootstrap - OR any existing patch history (upgrades / Docker volumes with real data).
 $installer_bootstrap_ok = checkDataExists();
 $ready_for_patches      = $install_tables_exists && ($installer_bootstrap_ok || $has_patch_history);
 if (!$install_tables_exists || !$ready_for_patches) {
-    $log('[patches] Skipping — database not ready (need si_biller plus installer essential data, or at least one row in si_sql_patchmanager).');
+    $log('[patches] Skipping - database not ready (need si_biller plus installer essential data, or at least one row in si_sql_patchmanager).');
     exit(0);
 }
 if ($has_patch_history && !$installer_bootstrap_ok) {
-    $log('[patches] Detected existing patch history — applying pending migrations (installer bootstrap check skipped).');
+    $log('[patches] Detected existing patch history - applying pending migrations (installer bootstrap check skipped).');
 }
 
 $total   = max(array_keys($patch));
@@ -173,7 +173,7 @@ for ($i = 0; $i <= $total; $i++) {
 }
 
 if ($applied > 0) {
-    $log("[patches] Done — {$applied} patch(es) applied, {$skipped} already up to date.");
+    $log("[patches] Done - {$applied} patch(es) applied, {$skipped} already up to date.");
 } else {
     $log("[patches] Database already up to date ({$skipped} patches checked).");
 }

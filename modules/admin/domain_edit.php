@@ -1,7 +1,7 @@
 <?php
 /*
  * Script: admin/domain_edit.php
- *   Edit an existing domain — administrator role only
+ *   Edit an existing domain - administrator role only
  *
  * License: GPL v3 or above
  */

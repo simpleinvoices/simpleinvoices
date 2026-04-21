@@ -1,6 +1,6 @@
 <?php
 /**
- * JSON backup import (CLI) — same restore as Options → Database backup → JSON import,
+ * JSON backup import (CLI) - same restore as Options → Database backup → JSON import,
  * without web server / PHP-FPM timeouts.
  *
  * Usage:

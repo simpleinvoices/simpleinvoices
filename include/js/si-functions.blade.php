@@ -146,7 +146,7 @@
 		function byId(r, id) { return clonedRow.querySelector('#' + id) || clonedRow.querySelector('[id="' + id + '"]'); }
 		var trashLink = byId(clonedRow, 'trash_link' + rowID_old); if (trashLink) { trashLink.id = 'trash_link' + rowID_new; trashLink.name = 'trash_link' + rowID_new; trashLink.href = '#'; trashLink.setAttribute('rel', String(rowID_new)); }
 		var trashLinkEdit = byId(clonedRow, 'trash_link_edit' + rowID_old); if (trashLinkEdit) { trashLinkEdit.id = 'trash_link_edit' + rowID_new; trashLinkEdit.name = 'trash_link_edit' + rowID_new; trashLinkEdit.href = '#'; trashLinkEdit.setAttribute('rel', String(rowID_new)); }
-		// Row 0 has no trash button — append a real one to the cloned row's segmented control
+		// Row 0 has no trash button - append a real one to the cloned row's segmented control
 		var isEdit = !!document.getElementById('delete0');
 		var linkClass = isEdit ? 'trash_link_edit' : 'trash_link';
 		var linkId = isEdit ? 'trash_link_edit' + rowID_new : 'trash_link' + rowID_new;
@@ -209,7 +209,7 @@
 			newDesc.rows = 1;
 			detailsCol.appendChild(newDesc);
 		}
-		// Remove toggle-all button — only belongs on row 0
+		// Remove toggle-all button - only belongs on row 0
 		clonedRow.querySelectorAll('.si-toggle-all-desc').forEach(function(el) { el.remove(); });
 		// New rows always start with description hidden (no content yet)
 		clonedRow.querySelectorAll('.details').forEach(function (el) {

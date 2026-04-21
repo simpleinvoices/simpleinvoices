@@ -12,7 +12,7 @@ if (!empty($_GET['id'])) {
 	$invoice = getInvoice($_GET['id']);
 	$preference = getPreference($invoice['preference_id']);
 	$subPageActive = "payment_filter_invoice";
-	// Lightweight existence check — actual data comes from xml.php with pagination
+	// Lightweight existence check - actual data comes from xml.php with pagination
 	$sth = dbQuery(
 		"SELECT COUNT(*) AS cnt FROM ".TB_PREFIX."payment WHERE ac_inv_id = :id AND domain_id = :domain_id",
 		':id', $inv_id, ':domain_id', $domain_id
@@ -25,7 +25,7 @@ elseif (!empty($_GET['c_id'])) {
 	$c_id = $_GET['c_id'];
 	$customer = getCustomer($_GET['c_id']);
 	$subPageActive = "payment_filter_customer";
-	// Lightweight existence check — actual data comes from xml.php with pagination
+	// Lightweight existence check - actual data comes from xml.php with pagination
 	$sth = dbQuery(
 		"SELECT COUNT(*) AS cnt
 		 FROM ".TB_PREFIX."payment ap
@@ -39,7 +39,7 @@ elseif (!empty($_GET['c_id'])) {
 #if you want to show all payments - no filters
 else {
 	$subPageActive = "payment_manage";
-	// Lightweight existence check — actual data comes from xml.php with pagination
+	// Lightweight existence check - actual data comes from xml.php with pagination
 	$p = new payment();
 	$payments = ($p->count() > 0) ? [true] : null;
 }

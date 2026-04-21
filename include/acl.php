@@ -126,7 +126,7 @@ $acl->allow('operator', 'billers', 'view');
 $acl->allow('operator', 'customers', 'manage');
 $acl->allow('operator', 'customers', 'view');
 
-// deny rules — admin panel is administrator-only; domain_admin for domain_administrator+administrator
+// deny rules - admin panel is administrator-only; domain_admin for domain_administrator+administrator
 $acl->deny('user', 'domain_admin');
 $acl->deny('operator', 'domain_admin');
 $acl->deny('viewer', 'domain_admin');

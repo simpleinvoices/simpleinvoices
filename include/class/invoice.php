@@ -378,7 +378,7 @@ class invoice {
             $sort_outer = 'type_id';
         }
 
-        // Paginate ids first (all DB backends); detail rows read denorm fields only — no line-item aggregate joins.
+        // Paginate ids first (all DB backends); detail rows read denorm fields only - no line-item aggregate joins.
         $dirSql = (strtoupper((string) $dir) === 'ASC') ? 'ASC' : 'DESC';
         $can_fast_page = (
             $type !== 'grid_total'

@@ -5,7 +5,7 @@ $__rpt_snap = array_keys($bladeView->getAssigns());
 
 /*
 * Script: report_sales_by_period.php
-* 	Sales reports by period — monthly + annual sales and payments, split by currency.
+* 	Sales reports by period - monthly + annual sales and payments, split by currency.
 *
 * Uses a small number of aggregate queries (grouped by year-month + currency) instead of
 * one query per month/year, for large databases on MySQL, PostgreSQL, and SQLite.

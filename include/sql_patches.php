@@ -1856,7 +1856,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     }
     $patch['310']['date']  = "20260408";
 
-    // --- Category C: single-column PK — InnoDB already compatible, ENGINE change only --
+    // --- Category C: single-column PK - InnoDB already compatible, ENGINE change only --
 
     $patch['311']['name']  = "Migrate si_invoice_item_tax to InnoDB";
     if ($config->database->adapter === "pdo_mysql") {
@@ -2721,7 +2721,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     }
     $patch['369']['date'] = "20260420";
 
-    $patch['370']['name'] = "si_customers: drop credit_card_holder_name (PCI cleanup — stored cards no longer used)";
+    $patch['370']['name'] = "si_customers: drop credit_card_holder_name (PCI cleanup - stored cards no longer used)";
     switch ($config->database->adapter) {
         case 'pdo_pgsql':
         case 'pdo_sqlite':

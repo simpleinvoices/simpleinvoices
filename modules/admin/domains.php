@@ -1,7 +1,7 @@
 <?php
 /*
  * Script: admin/domains.php
- *   Domain list — administrator role only
+ *   Domain list - administrator role only
  *
  * License: GPL v3 or above
  */

@@ -4,7 +4,7 @@ if (($__rpt = report_cache_get($__rpt_name, (int)$auth_session->domain_id)) !== 
 $__rpt_snap = array_keys($bladeView->getAssigns());
 
 /*
- * Aging totals by bucket and currency — uses si_invoices denorm_amount_* (invoice_denorm).
+ * Aging totals by bucket and currency - uses si_invoices denorm_amount_* (invoice_denorm).
  */
 
 global $db_server;

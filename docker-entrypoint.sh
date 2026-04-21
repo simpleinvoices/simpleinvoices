@@ -81,7 +81,7 @@ php -r '
       "SI_GATEWAY_SECRETS_KEY" => "encryption.gateway_secrets.key",
       "SI_NONCE_KEY" => "nonce.key",
       "SI_NONCE_TIMELIMIT" => "nonce.timelimit",
-      // App branding (name, logo, footer) is in si_global_config — Admin → App appearance.
+      // App branding (name, logo, footer) is in si_global_config - Admin → App appearance.
       "SI_DEBUG_LEVEL" => "debug.level",
       "SI_DEBUG_ERROR_REPORTING" => "debug.error_reporting",
       "SI_PHP_DATE_TIMEZONE" => "phpSettings.date.timezone",
@@ -141,9 +141,9 @@ if [ -n "${SI_DB_HOST}" ] && [ "${SI_DATABASE_ADAPTER:-pdo_mysql}" != "pdo_sqlit
 fi
 
 # Auto-apply any pending SQL patches after the web installer has run (schema + essential data).
-# Idempotent — already-applied patches are skipped. Set SI_AUTO_MIGRATE=false to disable.
+# Idempotent - already-applied patches are skipped. Set SI_AUTO_MIGRATE=false to disable.
 case "${SI_AUTO_MIGRATE:-true}" in
-  false|0|no|off) echo "Entrypoint: SI_AUTO_MIGRATE disabled — skipping SQL patches." ;;
+  false|0|no|off) echo "Entrypoint: SI_AUTO_MIGRATE disabled - skipping SQL patches." ;;
   *) echo "Entrypoint: running SQL patches..."
      php /var/www/html/cli/run_patches.php ;;
 esac

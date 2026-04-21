@@ -22,7 +22,7 @@ $op        = !empty($_POST['op']) ? preg_replace('/[^a-z_]/', '', (string) $_POS
 $saved     = false;
 $saveError = null;
 
-// Role IDs for customer and biller (fixed — only these two are manageable here)
+// Role IDs for customer and biller (fixed - only these two are manageable here)
 $allowed_role_map = ['customer' => 5, 'biller' => 6];
 
 if ($op === 'insert_domain_user') {
@@ -94,7 +94,7 @@ if ($op === 'insert_domain_user') {
             if ($sth) {
                 $saved = true;
             } else {
-                $saveError = 'Could not create account — the email address may already be in use.';
+                $saveError = 'Could not create account - the email address may already be in use.';
             }
         }
     }
@@ -227,7 +227,7 @@ if ($op === 'update_domain_user') {
                 if ($sth !== null) {
                     $saved = $sth ? true : false;
                     if (!$saved) {
-                        $saveError = 'Could not update account — the email may already be in use.';
+                        $saveError = 'Could not update account - the email may already be in use.';
                     }
                 }
             }

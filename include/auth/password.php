@@ -59,7 +59,7 @@ function auth_hash_password($password)
 }
 
 /**
- * Return true if the stored hash should be upgraded — covers both legacy MD5
+ * Return true if the stored hash should be upgraded - covers both legacy MD5
  * and bcrypt hashes whose cost no longer matches the current setting.
  *
  * @param string $storedHash Hash from database

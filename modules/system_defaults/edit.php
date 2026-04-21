@@ -382,9 +382,9 @@ elseif ($_GET['submit'] == 'spreadsheet') {
 	$default = 'spreadsheet';
 	$current = $defaults['spreadsheet'] ?? 'xlsx';
 	$formats = [
-		'xlsx' => '.xlsx — Excel (OpenXML)',
-		'ods'  => '.ods — OpenDocument Spreadsheet',
-		'xls'  => '.xls — Excel 97-2003 (legacy)',
+		'xlsx' => '.xlsx - Excel (OpenXML)',
+		'ods'  => '.ods - OpenDocument Spreadsheet',
+		'xls'  => '.xls - Excel 97-2003 (legacy)',
 	];
 	$select = '<select name="value" class="form-select">';
 	foreach ($formats as $fmt => $label) {
@@ -399,9 +399,9 @@ elseif ($_GET['submit'] == 'wordprocessor') {
 	$default = 'wordprocessor';
 	$current = $defaults['wordprocessor'] ?? 'docx';
 	$formats = [
-		'docx' => '.docx — Word (OpenXML)',
-		'odt'  => '.odt — OpenDocument Text',
-		'doc'  => '.doc — Word 97-2003 (legacy)',
+		'docx' => '.docx - Word (OpenXML)',
+		'odt'  => '.odt - OpenDocument Text',
+		'doc'  => '.doc - Word 97-2003 (legacy)',
 	];
 	$select = '<select name="value" class="form-select">';
 	foreach ($formats as $fmt => $label) {

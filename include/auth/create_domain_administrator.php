@@ -63,7 +63,7 @@ function auth_try_create_domain_with_administrator(
     $role_row = $role_sth ? $role_sth->fetch(PDO::FETCH_ASSOC) : false;
     $role_id  = (int) ($role_row['id'] ?? 0);
     if ($role_id < 1) {
-        return ['success' => false, 'error' => 'Could not create domain — the domain_administrator role is missing from the database.'];
+        return ['success' => false, 'error' => 'Could not create domain - the domain_administrator role is missing from the database.'];
     }
 
     global $dbh;
@@ -146,5 +146,5 @@ function auth_try_create_domain_with_administrator(
         return ['success' => true, 'error' => null, 'domain_id' => $new_domain_id];
     }
 
-    return ['success' => false, 'error' => 'Could not create the domain and administrator account — the domain name or email may already be in use.'];
+    return ['success' => false, 'error' => 'Could not create the domain and administrator account - the domain name or email may already be in use.'];
 }

@@ -24,7 +24,7 @@ if ($id < 1) {
 if (!empty($_POST['email'])) {
     include './modules/domain_admin/user_save.php';
 } else {
-    // Load the user — must belong to this domain and be customer or biller role
+    // Load the user - must belong to this domain and be customer or biller role
     $prefSel = checkFieldExists(TB_PREFIX . 'user', 'preferred_language')
         ? ', u.preferred_language'
         : '';

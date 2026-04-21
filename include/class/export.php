@@ -294,7 +294,7 @@ class export
         try {
             $phpWord = $buildDoc($fragment);
         } catch (\Throwable $e) {
-            // Logos often use URLs; if the image cannot be fetched, PhpWord throws — retry without <img>.
+            // Logos often use URLs; if the image cannot be fetched, PhpWord throws - retry without <img>.
             $stripped = preg_replace('/<img\b[^>]*\/?>/i', '', $fragment);
             $phpWord  = $buildDoc($stripped !== '' ? $stripped : '<p></p>');
         }

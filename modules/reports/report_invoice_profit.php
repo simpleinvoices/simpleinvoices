@@ -1,7 +1,7 @@
 <?php
 
 /*
-* Profit per invoice for a date range — avoids N×M per-invoice/per-product queries.
+* Profit per invoice for a date range - avoids N×M per-invoice/per-product queries.
 * Loads line quantities and average inventory costs in bulk (MySQL, PostgreSQL, SQLite).
 */
 

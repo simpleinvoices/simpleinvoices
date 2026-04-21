@@ -4,7 +4,7 @@ if (($__rpt = report_cache_get($__rpt_name, (int)$auth_session->domain_id)) !== 
 $__rpt_snap = array_keys($bladeView->getAssigns());
 
 /*
- * Debtors by aging — age in days from SQL (no per-row DateTime); bucket from integer age in PHP.
+ * Debtors by aging - age in days from SQL (no per-row DateTime); bucket from integer age in PHP.
  * One row per invoice: denormalised totals on si_invoices.
  */
 

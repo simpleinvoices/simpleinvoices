@@ -342,7 +342,7 @@ class backup_db {
                 $dbh->exec("PRAGMA foreign_keys=OFF");
             }
 
-            // Clear existing rows — children before parents (reverse import order).
+            // Clear existing rows - children before parents (reverse import order).
             // PostgreSQL uses TRUNCATE CASCADE so order does not matter there.
             foreach (array_reverse($to_restore) as $table) {
                 $qi = $oDB->quoteIdent($table);
@@ -353,11 +353,11 @@ class backup_db {
                         $dbh->exec("DELETE FROM $qi");
                     }
                 } catch (\Exception $e) {
-                    // Table may not exist in the target schema — skip it
+                    // Table may not exist in the target schema - skip it
                 }
             }
 
-            // Insert rows — parents before children
+            // Insert rows - parents before children
             foreach ($to_restore as $table) {
                 if (empty($data[$table])) {
                     continue;
@@ -426,7 +426,7 @@ class backup_db {
                      )"
                 );
             } catch (\Exception $e) {
-                // Sequence may not exist — ignore
+                // Sequence may not exist - ignore
             }
         }
     }

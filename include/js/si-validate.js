@@ -1,12 +1,12 @@
 /**
- * Form validation — Bootstrap 5 / Tabler style.
+ * Form validation - Bootstrap 5 / Tabler style.
  * Uses class="needs-validation" novalidate + required HTML attributes.
  * Features:
  *   - Tom Select wrapper validation sync
  *   - Tab-aware: switches to the tab containing the first invalid field
  *   - Invoice line items: always validates row 0; validates rows 1+ only if
  *     they have a product or quantity entered (partial rows)
- *   - Invoice forms: only marks invalid fields red — no green on valid fields
+ *   - Invoice forms: only marks invalid fields red - no green on valid fields
  */
 (function () {
 	'use strict';
@@ -125,7 +125,7 @@
 	/**
 	 * For invoice forms (#itemtable present): apply is-invalid directly to each
 	 * native-invalid field without adding was-validated to the form.
-	 * This means only broken fields get highlighted — valid fields stay unstyled.
+	 * This means only broken fields get highlighted - valid fields stay unstyled.
 	 */
 	function applyInvalidClasses(form) {
 		form.querySelectorAll('input:invalid, select:invalid, textarea:invalid').forEach(function (el) {
@@ -138,7 +138,7 @@
 		if (!first) return;
 		switchToTab(first);
 		var focusEl = first;
-		// Tom Select wrappers aren't focusable — focus the inner text input instead.
+		// Tom Select wrappers aren't focusable - focus the inner text input instead.
 		// Handle: (a) first IS the .ts-wrapper, (b) first is the hidden <select> whose
 		// .ts-wrapper is the next sibling (Tom Select inserts it there, not as an ancestor).
 		var tsWrapper = null;

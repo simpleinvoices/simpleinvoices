@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Shared thresholds for ApexCharts on report pages — tables stay full; charts show a capped “top N” slice when needed.
+ * Shared thresholds for ApexCharts on report pages - tables stay full; charts show a capped “top N” slice when needed.
  */
 if (! function_exists('si_report_chart_display_limit')) {
     /**

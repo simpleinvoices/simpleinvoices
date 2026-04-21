@@ -49,7 +49,7 @@ services:
       timeout: 5s
       retries: 5
 
-  # Adminer works with PostgreSQL — just point it at the pgsql db service
+  # Adminer works with PostgreSQL - just point it at the pgsql db service
   adminer:
     environment:
       ADMINER_DEFAULT_SERVER: db

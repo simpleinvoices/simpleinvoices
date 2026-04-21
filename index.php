@@ -139,7 +139,7 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
 			// ignore
 		}
 	}
-	// New organisation (domain > 1): auto-import essentials for logged-in users — same as after register / login.
+	// New organisation (domain > 1): auto-import essentials for logged-in users - same as after register / login.
 	if (
 		$install_tables_exists === true
 		&& $install_data_exists === false
@@ -242,7 +242,7 @@ if (
 }
 
 /*
-* Unlinked customer/biller check — show a friendly error if the logged-in
+* Unlinked customer/biller check - show a friendly error if the logged-in
 * customer or biller account has no linked entity (user_id == 0).
 * Allow the logout route through so the user can still sign out.
 */

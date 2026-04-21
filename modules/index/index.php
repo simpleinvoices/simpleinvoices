@@ -331,7 +331,7 @@ $bladeView->assign('chart_last12_by_curr',  $chart_last12_by_curr);
 $bladeView->assign('chart_data_by_curr',    $chart_data_by_curr);
 $bladeView->assign('annual_totals_by_curr', $annual_totals_by_curr);
 
-// Debtor aging buckets — pre-aggregated line totals + payments (one row per invoice; no line-item join fan-out)
+// Debtor aging buckets - pre-aggregated line totals + payments (one row per invoice; no line-item join fan-out)
 $aging_bucket_sql = '';
 switch ($db_server) {
     case 'pgsql':
@@ -406,7 +406,7 @@ foreach ($aging_buckets as $label => $amount) {
 $bladeView->assign('aging_chart', $aging_chart);
 $bladeView->assign('aging_total', round($aging_total, 2));
 
-// Invoice paid percentage — denorm_amount_owing; only invoices with ≥1 line row (prior INNER JOIN semantics)
+// Invoice paid percentage - denorm_amount_owing; only invoices with ≥1 line row (prior INNER JOIN semantics)
 $paid_sql = "SELECT COUNT(*) AS total_count,
     SUM(CASE WHEN iv.denorm_amount_owing <= 0 THEN 1 ELSE 0 END) AS paid_count
     FROM " . TB_PREFIX . "invoices iv
@@ -444,7 +444,7 @@ $bladeView->assign('alltime_pmt_monthly', $alltime_pmt_monthly);
 $bladeView->assign('dash_alltime_inv_total', round(array_sum($alltime_inv_monthly), 2));
 $bladeView->assign('dash_alltime_pmt_total', round(array_sum($alltime_pmt_monthly), 2));
 
-// Monthly volume counts — two aggregate queries
+// Monthly volume counts - two aggregate queries
 $inv_count_sql = '';
 $pmt_count_sql = '';
 switch ($db_server) {

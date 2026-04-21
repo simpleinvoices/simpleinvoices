@@ -1,7 +1,7 @@
 <?php
 /*
  * Script: admin/domain_add.php
- *   Add a new domain — administrator role only
+ *   Add a new domain - administrator role only
  *
  * License: GPL v3 or above
  */

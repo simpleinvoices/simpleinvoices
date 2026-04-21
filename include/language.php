@@ -139,7 +139,7 @@ function si_lang_folder_exists(string $code): bool
 }
 
 /**
- * Language chosen at public registration — must exist on disk; fallback en_GB.
+ * Language chosen at public registration - must exist on disk; fallback en_GB.
  */
 function si_normalize_registration_language(?string $code): string
 {

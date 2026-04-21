@@ -29,47 +29,47 @@ class CurrencySignHelper
             [
                 'label' => 'Americas & Pacific dollars',
                 'presets' => [
-                    ['value' => '$',   'code' => 'USD', 'label' => 'US Dollar — USD ($)',             'aliases' => ['&#36;', 'US$', 'USD']],
-                    ['value' => 'C$',  'code' => 'CAD', 'label' => 'Canadian Dollar — CAD (C$)',      'aliases' => ['CAD', 'CA$']],
-                    ['value' => 'A$',  'code' => 'AUD', 'label' => 'Australian Dollar — AUD (A$)',    'aliases' => ['AUD']],
-                    ['value' => 'NZ$', 'code' => 'NZD', 'label' => 'New Zealand Dollar — NZD (NZ$)', 'aliases' => ['NZD']],
-                    ['value' => 'MX$', 'code' => 'MXN', 'label' => 'Mexican Peso — MXN (MX$)',       'aliases' => ['MXN']],
-                    ['value' => 'R$',  'code' => 'BRL', 'label' => 'Brazilian Real — BRL (R$)',       'aliases' => ['BRL']],
-                    ['value' => 'S$',  'code' => 'SGD', 'label' => 'Singapore Dollar — SGD (S$)',     'aliases' => ['SGD']],
+                    ['value' => '$',   'code' => 'USD', 'label' => 'US Dollar - USD ($)',             'aliases' => ['&#36;', 'US$', 'USD']],
+                    ['value' => 'C$',  'code' => 'CAD', 'label' => 'Canadian Dollar - CAD (C$)',      'aliases' => ['CAD', 'CA$']],
+                    ['value' => 'A$',  'code' => 'AUD', 'label' => 'Australian Dollar - AUD (A$)',    'aliases' => ['AUD']],
+                    ['value' => 'NZ$', 'code' => 'NZD', 'label' => 'New Zealand Dollar - NZD (NZ$)', 'aliases' => ['NZD']],
+                    ['value' => 'MX$', 'code' => 'MXN', 'label' => 'Mexican Peso - MXN (MX$)',       'aliases' => ['MXN']],
+                    ['value' => 'R$',  'code' => 'BRL', 'label' => 'Brazilian Real - BRL (R$)',       'aliases' => ['BRL']],
+                    ['value' => 'S$',  'code' => 'SGD', 'label' => 'Singapore Dollar - SGD (S$)',     'aliases' => ['SGD']],
                 ],
             ],
             [
                 'label' => 'Europe & UK',
                 'presets' => [
-                    ['value' => '&#8364;', 'code' => 'EUR', 'label' => 'Euro — EUR (€)',                      'aliases' => ['€', '&euro;', 'EUR']],
-                    ['value' => '&#163;',  'code' => 'GBP', 'label' => 'Pound sterling — GBP (£)',            'aliases' => ['£', '&pound;', 'GBP']],
-                    ['value' => 'CHF',     'code' => 'CHF', 'label' => 'Swiss Franc — CHF',                   'aliases' => ['Fr.', 'SFr.']],
-                    ['value' => 'kr',      'code' => 'SEK', 'label' => 'Swedish Krona — SEK (kr)',            'aliases' => ['SEK', 'kr.']],
-                    ['value' => 'kr',      'code' => 'DKK', 'label' => 'Danish Krone — DKK (kr)',             'aliases' => ['DKK']],
-                    ['value' => 'kr',      'code' => 'NOK', 'label' => 'Norwegian Krone — NOK (kr)',          'aliases' => ['NOK']],
-                    ['value' => 'zł',      'code' => 'PLN', 'label' => 'Polish Zloty — PLN (zł)',             'aliases' => ['PLN']],
-                    ['value' => 'Kč',      'code' => 'CZK', 'label' => 'Czech Koruna — CZK (Kč)',            'aliases' => ['CZK']],
-                    ['value' => 'Ft',      'code' => 'HUF', 'label' => 'Hungarian Forint — HUF (Ft)',         'aliases' => ['HUF']],
-                    ['value' => 'lei',     'code' => 'RON', 'label' => 'Romanian Leu — RON (lei)',            'aliases' => ['RON']],
-                    ['value' => 'лв',      'code' => 'BGN', 'label' => 'Bulgarian Lev — BGN (лв)',            'aliases' => ['BGN', 'лв.']],
-                    ['value' => '₺',       'code' => 'TRY', 'label' => 'Turkish Lira — TRY (₺)',              'aliases' => ['TRY', 'TL']],
-                    ['value' => 'дин.',    'code' => 'RSD', 'label' => 'Serbian Dinar — RSD (дин.)',          'aliases' => ['RSD', 'дин']],
-                    ['value' => '₽',       'code' => 'RUB', 'label' => 'Russian Ruble — RUB (₽)',             'aliases' => ['RUB', 'руб.']],
+                    ['value' => '&#8364;', 'code' => 'EUR', 'label' => 'Euro - EUR (€)',                      'aliases' => ['€', '&euro;', 'EUR']],
+                    ['value' => '&#163;',  'code' => 'GBP', 'label' => 'Pound sterling - GBP (£)',            'aliases' => ['£', '&pound;', 'GBP']],
+                    ['value' => 'CHF',     'code' => 'CHF', 'label' => 'Swiss Franc - CHF',                   'aliases' => ['Fr.', 'SFr.']],
+                    ['value' => 'kr',      'code' => 'SEK', 'label' => 'Swedish Krona - SEK (kr)',            'aliases' => ['SEK', 'kr.']],
+                    ['value' => 'kr',      'code' => 'DKK', 'label' => 'Danish Krone - DKK (kr)',             'aliases' => ['DKK']],
+                    ['value' => 'kr',      'code' => 'NOK', 'label' => 'Norwegian Krone - NOK (kr)',          'aliases' => ['NOK']],
+                    ['value' => 'zł',      'code' => 'PLN', 'label' => 'Polish Zloty - PLN (zł)',             'aliases' => ['PLN']],
+                    ['value' => 'Kč',      'code' => 'CZK', 'label' => 'Czech Koruna - CZK (Kč)',            'aliases' => ['CZK']],
+                    ['value' => 'Ft',      'code' => 'HUF', 'label' => 'Hungarian Forint - HUF (Ft)',         'aliases' => ['HUF']],
+                    ['value' => 'lei',     'code' => 'RON', 'label' => 'Romanian Leu - RON (lei)',            'aliases' => ['RON']],
+                    ['value' => 'лв',      'code' => 'BGN', 'label' => 'Bulgarian Lev - BGN (лв)',            'aliases' => ['BGN', 'лв.']],
+                    ['value' => '₺',       'code' => 'TRY', 'label' => 'Turkish Lira - TRY (₺)',              'aliases' => ['TRY', 'TL']],
+                    ['value' => 'дин.',    'code' => 'RSD', 'label' => 'Serbian Dinar - RSD (дин.)',          'aliases' => ['RSD', 'дин']],
+                    ['value' => '₽',       'code' => 'RUB', 'label' => 'Russian Ruble - RUB (₽)',             'aliases' => ['RUB', 'руб.']],
                 ],
             ],
             [
                 'label' => 'Asia, Africa & Middle East',
                 'presets' => [
-                    ['value' => '¥',  'code' => 'CNY', 'label' => 'Chinese Yuan — CNY (¥)',          'aliases' => ['CNY', '元', 'RMB']],
-                    ['value' => '¥',  'code' => 'JPY', 'label' => 'Japanese Yen — JPY (¥)',          'aliases' => ['JPY']],
-                    ['value' => 'NT$','code' => 'TWD', 'label' => 'New Taiwan Dollar — TWD (NT$)',   'aliases' => ['TWD']],
-                    ['value' => 'HK$','code' => 'HKD', 'label' => 'Hong Kong Dollar — HKD (HK$)',   'aliases' => ['HKD']],
-                    ['value' => '₹',  'code' => 'INR', 'label' => 'Indian Rupee — INR (₹)',          'aliases' => ['&#8377;', 'INR', 'Rs']],
-                    ['value' => 'Rp', 'code' => 'IDR', 'label' => 'Indonesian Rupiah — IDR (Rp)',   'aliases' => ['IDR']],
-                    ['value' => '₫',  'code' => 'VND', 'label' => 'Vietnamese Dong — VND (₫)',      'aliases' => ['VND']],
-                    ['value' => '₪',  'code' => 'ILS', 'label' => 'Israeli Shekel — ILS (₪)',       'aliases' => ['ILS', 'NIS']],
-                    ['value' => '﷼',  'code' => 'SAR', 'label' => 'Saudi Riyal — SAR (﷼)',           'aliases' => ['SAR', 'ر.س']],
-                    ['value' => 'R',  'code' => 'ZAR', 'label' => 'South African Rand — ZAR (R)',   'aliases' => ['ZAR']],
+                    ['value' => '¥',  'code' => 'CNY', 'label' => 'Chinese Yuan - CNY (¥)',          'aliases' => ['CNY', '元', 'RMB']],
+                    ['value' => '¥',  'code' => 'JPY', 'label' => 'Japanese Yen - JPY (¥)',          'aliases' => ['JPY']],
+                    ['value' => 'NT$','code' => 'TWD', 'label' => 'New Taiwan Dollar - TWD (NT$)',   'aliases' => ['TWD']],
+                    ['value' => 'HK$','code' => 'HKD', 'label' => 'Hong Kong Dollar - HKD (HK$)',   'aliases' => ['HKD']],
+                    ['value' => '₹',  'code' => 'INR', 'label' => 'Indian Rupee - INR (₹)',          'aliases' => ['&#8377;', 'INR', 'Rs']],
+                    ['value' => 'Rp', 'code' => 'IDR', 'label' => 'Indonesian Rupiah - IDR (Rp)',   'aliases' => ['IDR']],
+                    ['value' => '₫',  'code' => 'VND', 'label' => 'Vietnamese Dong - VND (₫)',      'aliases' => ['VND']],
+                    ['value' => '₪',  'code' => 'ILS', 'label' => 'Israeli Shekel - ILS (₪)',       'aliases' => ['ILS', 'NIS']],
+                    ['value' => '﷼',  'code' => 'SAR', 'label' => 'Saudi Riyal - SAR (﷼)',           'aliases' => ['SAR', 'ر.س']],
+                    ['value' => 'R',  'code' => 'ZAR', 'label' => 'South African Rand - ZAR (R)',   'aliases' => ['ZAR']],
                 ],
             ],
             [
@@ -129,7 +129,7 @@ class CurrencySignHelper
                     }
                 }
                 if (!$signMatch) { continue; }
-                // Sign matched — if caller gave a code and it also matches, return immediately
+                // Sign matched - if caller gave a code and it also matches, return immediately
                 if ($code !== '' && ($p['code'] ?? '') === $code) {
                     return $p;
                 }

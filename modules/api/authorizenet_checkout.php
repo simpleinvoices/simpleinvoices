@@ -27,7 +27,7 @@ try {
     $token     = $gateway->getHostedPageToken($invoice_id, (string) $inv['index_id'], (float) $inv['owing'], $successUrl, $cancelUrl);
     $hostedUrl = $gateway->getHostedPageBaseUrl();
 
-    // Authorize.net Accept Hosted requires a form POST — output an auto-submit page.
+    // Authorize.net Accept Hosted requires a form POST - output an auto-submit page.
     echo '<!DOCTYPE html><html><head><title>Redirecting to payment...</title></head><body>';
     echo '<form id="anet_form" method="POST" action="' . htmlspecialchars($hostedUrl, ENT_QUOTES) . '">';
     echo '<input type="hidden" name="token" value="' . htmlspecialchars($token, ENT_QUOTES) . '" />';

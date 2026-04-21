@@ -88,7 +88,7 @@
 		// Tom Select copies all classes from the original <select> to its wrapper
 		// div, including any validation classes.  The wrapper has no .value
 		// property, so si-validate.js treats it as always-empty and blocks form
-		// submission.  Strip the validation class from the wrapper — the hidden
+		// submission.  Strip the validation class from the wrapper - the hidden
 		// <select> (kept in sync by Tom Select) is what the validator should check.
 		if (ts.wrapper) {
 			ts.wrapper.classList.remove('validate[required]');

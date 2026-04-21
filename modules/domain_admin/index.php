@@ -1,7 +1,7 @@
 <?php
 /*
  * Script: domain_admin/index.php
- *   Domain admin dashboard — domain_administrator and administrator roles only
+ *   Domain admin dashboard - domain_administrator and administrator roles only
  *
  * License: GPL v3 or above
  */

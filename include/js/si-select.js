@@ -1,7 +1,7 @@
 /**
  * Tom Select initialiser for biller, customer, preference and invoice dropdowns.
  *
- * Targets server-rendered <select> elements by name — no AJAX required, all
+ * Targets server-rendered <select> elements by name - no AJAX required, all
  * options are already in the DOM.  Provides search/filter and a consistent UI
  * that matches the product-line Tom Select widgets.
  */
@@ -25,7 +25,7 @@
 
 		// Capture the server-rendered selected value BEFORE Tom Select initialises.
 		// With allowEmptyOption: false on required selects, Tom Select may discard
-		// a pre-selected value during setup — we restore it afterwards.
+		// a pre-selected value during setup - we restore it afterwards.
 		var initialValue = el.value;
 
 		var ts = new TomSelect(el, {
@@ -39,7 +39,7 @@
 		});
 
 		// Tom Select copies all classes from the <select> to its wrapper div.
-		// Strip validate[required] from the wrapper — si-validate.js should
+		// Strip validate[required] from the wrapper - si-validate.js should
 		// check the hidden <select> (kept in sync by Tom Select), not the div.
 		if (ts.wrapper) {
 			ts.wrapper.classList.remove('validate[required]');
@@ -47,7 +47,7 @@
 
 		// Restore pre-selected value if Tom Select lost it during init (see above).
 		if (initialValue && ts.getValue() !== initialValue) {
-			ts.setValue(initialValue, true); // silent — don't fire onChange
+			ts.setValue(initialValue, true); // silent - don't fire onChange
 		}
 
 		// Clear is-invalid state (set by si-validate.js) when user picks a value.

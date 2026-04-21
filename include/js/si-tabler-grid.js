@@ -441,7 +441,7 @@
 						? '<span class="status status-green">' + (labels.enabled || 'Enabled') + '</span>'
 						: '<span class="status status-red">' + (labels.disabled || 'Disabled') + '</span>';
 				} else if (o.colModel[c].mobileFormatter && content !== '\u00A0') {
-					// Render full text on sm+, truncated version on xs — no JS resize logic needed.
+					// Render full text on sm+, truncated version on xs - no JS resize logic needed.
 					var mobileText = o.colModel[c].mobileFormatter(content);
 					if (mobileText !== content) {
 						content = '<span class="d-none d-sm-inline">' + escapeHtml(content) + '</span>' +
@@ -480,7 +480,7 @@
 			ul.className = 'pagination mb-0';
 
 			if (o.largeDataset) {
-				// Large dataset mode: show only Prev / Next — no numbered pages
+				// Large dataset mode: show only Prev / Next - no numbered pages
 				// (total count reflects whole table, not the active filter, so page numbers mislead)
 				var atFirst = this.page <= 1;
 				var atLast  = this.rowCount < Math.max(1, parseInt(o.rp, 10) || 10);
