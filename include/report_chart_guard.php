@@ -172,3 +172,21 @@ if (! function_exists('si_report_chart_allow')) {
         ];
     }
 }
+
+if (! function_exists('si_report_dominant_currency')) {
+    /**
+     * Returns the most-used currency_sign stored on invoices for the given domain.
+     * Used by aggregate reports to prefix monetary totals with the correct symbol.
+     */
+    function si_report_dominant_currency(int $domain_id): string
+    {
+        $sql = 'SELECT currency_sign, COUNT(*) AS cnt
+                FROM ' . TB_PREFIX . 'invoices
+                WHERE domain_id = :domain_id AND currency_sign IS NOT NULL AND currency_sign <> \'\'
+                GROUP BY currency_sign
+                ORDER BY cnt DESC
+                LIMIT 1';
+        $row = dbQuery($sql, ':domain_id', $domain_id)->fetch();
+        return $row ? (string) ($row['currency_sign'] ?? '') : '';
+    }
+}

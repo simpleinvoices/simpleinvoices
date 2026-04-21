@@ -39,7 +39,7 @@
 	
 	        @if($invoicePaid != 0)
 				<div class="alert alert-warning">
-					{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $invoice['index_id'] ?? '' }} {{ $LANG['delete_has_payments1'] ?? '' }} {{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ siLocal::number($invoicePaid ?? 0) }} {{ $LANG['delete_has_payments2'] ?? '' }}
+					{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $invoice['index_id'] ?? '' }} {{ $LANG['delete_has_payments1'] ?? '' }} {{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ siLocal::number($invoicePaid ?? 0) }} {{ $LANG['delete_has_payments2'] ?? '' }}
 				</div>
     	    @endif
 

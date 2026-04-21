@@ -31,6 +31,7 @@ $billers = getActiveBillers();
 $defaults = getSystemDefaults();
 $taxes = getTaxes();
 $preferences = getActivePreferences();
+$paymentTerms = getPaymentTerms();
 $products = getActiveProducts();
 
 
@@ -136,6 +137,7 @@ $bladeView -> assign("preference",$preference);
 $bladeView -> assign("billers",$billers);
 $bladeView -> assign("taxes",$taxes);
 $bladeView -> assign("preferences",$preferences);
+$bladeView -> assign("paymentTerms",$paymentTerms);
 $bladeView -> assign("products",$products);
 $bladeView -> assign("customFields",$customFields);
 $bladeView -> assign("lines",count($invoiceItems));

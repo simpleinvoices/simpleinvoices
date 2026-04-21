@@ -28,11 +28,19 @@ $saved = false;
 $type = $_POST['type'];
 $id = null;
 
-
+$save_error = null;
+$block_insert_duplicate_total_product = false;
+if (isset($_POST['action']) && $_POST['action'] === 'insert' && isset($type) && (string) $type === (string) total_invoice) {
+	$td = trim($_POST['description'] ?? '');
+	if ($td !== '' && productDescriptionExists($td)) {
+		$block_insert_duplicate_total_product = true;
+		$save_error = 'duplicate_product_description';
+	}
+}
 
 if ($_POST['action'] == "insert" ) {
 
-	if(insertInvoice($type)) {
+	if (!$block_insert_duplicate_total_product && insertInvoice($type)) {
 		$id = lastInsertId();
 		//saveCustomFieldValues($_POST['categorie'],$invoice_id);
 		$saved = true;
@@ -80,13 +88,17 @@ if ($_POST['action'] == "insert" ) {
 
 	if($type == total_invoice && $saved) {
 		$logger->log('Total style invoice updated, product ID: '.$_POST['products0'], LegacyLogger::INFO);
-		$sql = "UPDATE ".TB_PREFIX."products SET unit_price = :price, description = :description WHERE id = :id AND domain_id = :domain_id";
-		dbQuery($sql,
-			':price', $_POST['unit_price'],
-			':description', $_POST['description0'],
-			':id', $_POST['products0'],
-			':domain_id', $auth_session->domain_id
-			);
+		$pidEdit = (int) ($_POST['products0'] ?? 0);
+		$dEdit = trim((string) ($_POST['description0'] ?? ''));
+		if ($dEdit === '' || !productDescriptionExists($dEdit, $pidEdit)) {
+			$sql = "UPDATE ".TB_PREFIX."products SET unit_price = :price, description = :description WHERE id = :id AND domain_id = :domain_id";
+			dbQuery($sql,
+				':price', $_POST['unit_price'],
+				':description', $_POST['description0'],
+				':id', $_POST['products0'],
+				':domain_id', $auth_session->domain_id
+				);
+		}
 	}
 
     
@@ -137,5 +149,6 @@ if ($saved && $id) {
 }
 $bladeView->assign('saved', $saved);
 $bladeView->assign('id', $id);
+$bladeView->assign('save_error', $save_error);
 
 ?>

@@ -41,6 +41,7 @@ if(isset($_GET['id'])) {
 }
 $customer = getCustomer($invoice['customer_id']);
 $biller = getBiller($invoice['biller_id']);
+$preference = getPreference($invoice['preference_id']);
 $defaults = getSystemDefaults();
 $pt = getPaymentType($defaults['payment_type']);
 
@@ -57,6 +58,7 @@ $bladeView -> assign("paymentTypes",$paymentTypes);
 $bladeView -> assign("defaults",$defaults);
 $bladeView -> assign("biller",$biller);
 $bladeView -> assign("customer",$customer);
+$bladeView -> assign("preference",$preference);
 $bladeView -> assign("invoice",$invoice);
 $bladeView -> assign("today",$today);
 

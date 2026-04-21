@@ -136,82 +136,103 @@ for ($m = 1; $m <= 12; $m++) {
 $range_start = sprintf('%04d-01-01', $chart_start_year);
 $range_end   = sprintf('%04d-01-01', $chart_current_year + 1);
 
-// Monthly invoice totals & payment totals: two aggregate queries (replaces hundreds of per-month queries)
+// Monthly invoice totals & payment totals: two aggregate queries grouped by currency
 $inv_month_sql = '';
 $pmt_month_sql = '';
 switch ($db_server) {
     case 'pgsql':
-        $inv_month_sql = "SELECT to_char(iv.date::timestamp, 'YYYY-MM') AS ym, SUM(iv.denorm_invoice_total) AS t
+        $inv_month_sql = "SELECT to_char(iv.date::timestamp, 'YYYY-MM') AS ym, iv.currency_sign, iv.currency_code, SUM(iv.denorm_invoice_total) AS t
             FROM " . TB_PREFIX . "invoices iv
             INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id=iv.preference_id AND pr.domain_id=iv.domain_id)
             WHERE pr.status='1' AND iv.domain_id=:domain_id
               AND iv.date >= :d_start AND iv.date < :d_end
-            GROUP BY 1";
-        $pmt_month_sql = "SELECT to_char(ap.ac_date::timestamp, 'YYYY-MM') AS ym, SUM(ap.ac_amount) AS t
+            GROUP BY 1, iv.currency_sign, iv.currency_code";
+        $pmt_month_sql = "SELECT to_char(ap.ac_date::timestamp, 'YYYY-MM') AS ym, iv.currency_sign, iv.currency_code, SUM(ap.ac_amount) AS t
             FROM " . TB_PREFIX . "payment ap
+            INNER JOIN " . TB_PREFIX . "invoices iv ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
             WHERE ap.domain_id=:domain_id
               AND ap.ac_date >= :d_start AND ap.ac_date < :d_end
-            GROUP BY 1";
+            GROUP BY 1, iv.currency_sign, iv.currency_code";
         break;
     case 'sqlite':
-        $inv_month_sql = "SELECT strftime('%Y-%m', iv.date) AS ym, SUM(iv.denorm_invoice_total) AS t
+        $inv_month_sql = "SELECT strftime('%Y-%m', iv.date) AS ym, iv.currency_sign, iv.currency_code, SUM(iv.denorm_invoice_total) AS t
             FROM " . TB_PREFIX . "invoices iv
             INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id=iv.preference_id AND pr.domain_id=iv.domain_id)
             WHERE pr.status='1' AND iv.domain_id=:domain_id
               AND date(iv.date) >= date(:d_start) AND date(iv.date) < date(:d_end)
-            GROUP BY 1";
-        $pmt_month_sql = "SELECT strftime('%Y-%m', ap.ac_date) AS ym, SUM(ap.ac_amount) AS t
+            GROUP BY 1, iv.currency_sign, iv.currency_code";
+        $pmt_month_sql = "SELECT strftime('%Y-%m', ap.ac_date) AS ym, iv.currency_sign, iv.currency_code, SUM(ap.ac_amount) AS t
             FROM " . TB_PREFIX . "payment ap
+            INNER JOIN " . TB_PREFIX . "invoices iv ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
             WHERE ap.domain_id=:domain_id
               AND datetime(ap.ac_date) >= datetime(:d_start) AND datetime(ap.ac_date) < datetime(:d_end)
-            GROUP BY 1";
+            GROUP BY 1, iv.currency_sign, iv.currency_code";
         break;
     default:
-        $inv_month_sql = "SELECT DATE_FORMAT(iv.date, '%Y-%m') AS ym, SUM(iv.denorm_invoice_total) AS t
+        $inv_month_sql = "SELECT DATE_FORMAT(iv.date, '%Y-%m') AS ym, iv.currency_sign, iv.currency_code, SUM(iv.denorm_invoice_total) AS t
             FROM " . TB_PREFIX . "invoices iv
             INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id=iv.preference_id AND pr.domain_id=iv.domain_id)
             WHERE pr.status='1' AND iv.domain_id=:domain_id
               AND iv.date >= :d_start AND iv.date < :d_end
-            GROUP BY DATE_FORMAT(iv.date, '%Y-%m')";
-        $pmt_month_sql = "SELECT DATE_FORMAT(ap.ac_date, '%Y-%m') AS ym, SUM(ap.ac_amount) AS t
+            GROUP BY DATE_FORMAT(iv.date, '%Y-%m'), iv.currency_sign, iv.currency_code";
+        $pmt_month_sql = "SELECT DATE_FORMAT(ap.ac_date, '%Y-%m') AS ym, iv.currency_sign, iv.currency_code, SUM(ap.ac_amount) AS t
             FROM " . TB_PREFIX . "payment ap
+            INNER JOIN " . TB_PREFIX . "invoices iv ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
             WHERE ap.domain_id=:domain_id
               AND ap.ac_date >= :d_start AND ap.ac_date < :d_end
-            GROUP BY DATE_FORMAT(ap.ac_date, '%Y-%m')";
+            GROUP BY DATE_FORMAT(ap.ac_date, '%Y-%m'), iv.currency_sign, iv.currency_code";
         break;
 }
 
-$inv_by_ym = [];
+// Per-currency maps: $inv_by_curr_ym[$curr_key][$ym] = amount
+// $currencies_map[$curr_key] = ['sign' => ..., 'code' => ..., 'decoded_sign' => ...]
+$currencies_map  = [];
+$inv_by_curr_ym  = [];
+$pmt_by_curr_ym  = [];
+
+require_once __DIR__ . '/../../include/class/CurrencySignHelper.php';
+
 foreach (
-    dbQuery(
-        $inv_month_sql,
-        ':domain_id',
-        $domain_id,
-        ':d_start',
-        $range_start,
-        ':d_end',
-        $range_end
-    )->fetchAll(PDO::FETCH_ASSOC) as $row
+    dbQuery($inv_month_sql, ':domain_id', $domain_id, ':d_start', $range_start, ':d_end', $range_end)
+        ->fetchAll(PDO::FETCH_ASSOC) as $row
 ) {
     if (! empty($row['ym'])) {
-        $inv_by_ym[$row['ym']] = round((float) ($row['t'] ?? 0), 2);
+        $sign = $row['currency_sign'] ?? '';
+        $code = $row['currency_code'] ?? '';
+        $curr_key = ($code ?: '') . '||' . ($sign ?: '');
+        if (! isset($currencies_map[$curr_key])) {
+            $currencies_map[$curr_key] = ['sign' => $sign, 'code' => $code, 'decoded_sign' => \CurrencySignHelper::forDisplay($sign)];
+        }
+        $inv_by_curr_ym[$curr_key][$row['ym']] = round((float) ($row['t'] ?? 0), 2);
     }
 }
 
-$pmt_by_ym = [];
 foreach (
-    dbQuery(
-        $pmt_month_sql,
-        ':domain_id',
-        $domain_id,
-        ':d_start',
-        $range_start,
-        ':d_end',
-        $range_end
-    )->fetchAll(PDO::FETCH_ASSOC) as $row
+    dbQuery($pmt_month_sql, ':domain_id', $domain_id, ':d_start', $range_start, ':d_end', $range_end)
+        ->fetchAll(PDO::FETCH_ASSOC) as $row
 ) {
     if (! empty($row['ym'])) {
-        $pmt_by_ym[$row['ym']] = round((float) ($row['t'] ?? 0), 2);
+        $sign = $row['currency_sign'] ?? '';
+        $code = $row['currency_code'] ?? '';
+        $curr_key = ($code ?: '') . '||' . ($sign ?: '');
+        if (! isset($currencies_map[$curr_key])) {
+            $currencies_map[$curr_key] = ['sign' => $sign, 'code' => $code, 'decoded_sign' => \CurrencySignHelper::forDisplay($sign)];
+        }
+        $pmt_by_curr_ym[$curr_key][$row['ym']] = round((float) ($row['t'] ?? 0), 2);
+    }
+}
+
+// Aggregate totals across all currencies (for stat cards)
+$inv_by_ym = [];
+$pmt_by_ym = [];
+foreach ($inv_by_curr_ym as $ym_data) {
+    foreach ($ym_data as $ym => $amt) {
+        $inv_by_ym[$ym] = ($inv_by_ym[$ym] ?? 0) + $amt;
+    }
+}
+foreach ($pmt_by_curr_ym as $ym_data) {
+    foreach ($ym_data as $ym => $amt) {
+        $pmt_by_ym[$ym] = ($pmt_by_ym[$ym] ?? 0) + $amt;
     }
 }
 
@@ -264,6 +285,45 @@ foreach ($chart_years as $y) {
     ];
 }
 $bladeView->assign('annual_totals', $annual_totals);
+
+// Per-currency chart data for multi-currency dashboard charts
+$chart_last12_by_curr  = [];
+$chart_data_by_curr    = [];
+$annual_totals_by_curr = [];
+foreach ($currencies_map as $curr_key => $meta) {
+    $inv_c = $inv_by_curr_ym[$curr_key] ?? [];
+    $pmt_c = $pmt_by_curr_ym[$curr_key] ?? [];
+
+    $inv12 = [];
+    $pmt12 = [];
+    for ($i = 11; $i >= 0; $i--) {
+        $d     = (clone $dash_month_anchor)->modify('-' . $i . ' months');
+        $ym    = $d->format('Y-m');
+        $inv12[] = round((float) ($inv_c[$ym] ?? 0), 2);
+        $pmt12[] = round((float) ($pmt_c[$ym] ?? 0), 2);
+    }
+    $chart_last12_by_curr[$curr_key] = array_merge($meta, ['invoices' => $inv12, 'payments' => $pmt12]);
+
+    $years_data = [];
+    foreach ($chart_years as $y) {
+        $inv_yr = [];
+        $pmt_yr = [];
+        for ($m = 1; $m <= 12; $m++) {
+            $ym      = sprintf('%04d-%02d', $y, $m);
+            $inv_yr[] = $inv_c[$ym] ?? 0.0;
+            $pmt_yr[] = $pmt_c[$ym] ?? 0.0;
+        }
+        $chart_data_by_curr[$curr_key][$y] = ['invoices' => $inv_yr, 'payments' => $pmt_yr];
+        $years_data[$y] = [
+            'invoices' => round(array_sum($inv_yr), 2),
+            'payments' => round(array_sum($pmt_yr), 2),
+        ];
+    }
+    $annual_totals_by_curr[$curr_key] = ['meta' => $meta, 'years' => $years_data];
+}
+$bladeView->assign('chart_last12_by_curr',  $chart_last12_by_curr);
+$bladeView->assign('chart_data_by_curr',    $chart_data_by_curr);
+$bladeView->assign('annual_totals_by_curr', $annual_totals_by_curr);
 
 // Debtor aging buckets — pre-aggregated line totals + payments (one row per invoice; no line-item join fan-out)
 $aging_bucket_sql = '';
@@ -499,6 +559,7 @@ switch ($db_server) {
 // Recent payments: same join shape as Manage Payments grid (LEFT JOIN payment_types); order by date then id
 $latest_payments_sth = dbQuery(
     "SELECT ap.id, ap.ac_inv_id, ap.ac_amount,
+            iv.currency_sign AS currency_sign,
             c.name AS cname,
             b.name AS bname,
             $dash_pmt_index_name AS index_name,
@@ -518,6 +579,9 @@ $latest_payments = $latest_payments_sth->fetchAll(PDO::FETCH_ASSOC);
 
 $bladeView->assign('latest_invoices', $latest_invoices);
 $bladeView->assign('latest_payments', $latest_payments);
+
+$dash_currency_sign = si_report_dominant_currency((int) $domain_id);
+$bladeView->assign('dash_currency_sign', $dash_currency_sign);
 
     // ── Persist computed data to cache ─────────────────────────────────────
     if (! $first_run_wizard) {
@@ -545,6 +609,10 @@ $bladeView->assign('latest_payments', $latest_payments);
             'dash_total_pmt_volume'  => array_sum($alltime_pmt_counts),
             'latest_invoices'        => $latest_invoices,
             'latest_payments'        => $latest_payments,
+            'dash_currency_sign'     => $dash_currency_sign,
+            'chart_last12_by_curr'   => $chart_last12_by_curr,
+            'chart_data_by_curr'     => $chart_data_by_curr,
+            'annual_totals_by_curr'  => $annual_totals_by_curr,
         ];
         if (! is_dir($_dash_cache_dir)) {
             @mkdir($_dash_cache_dir, 0755, true);

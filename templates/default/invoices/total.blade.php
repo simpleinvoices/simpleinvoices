@@ -154,17 +154,15 @@
 				@endfor
 			@endif
 		@endif
-		<div class="col-12 @if($inv_totals_match_header) col-md-3 @elseif($inv_tax_field_count === 0) col-md-6 @else col @endif">
-			<label class="form-label">{{ $LANG['inv_pref'] ?? '' }}</label>
-			@if($preferences == null)
-				<p class="text-muted mb-0"><em>{{ $LANG['no_preferences'] ?? '' }}</em></p>
-			@else
-				<select name="preference_id" class="form-select">
-				@foreach(($preferences ?? []) as $preference)
-					<option @if(($preference['pref_id'] ?? '') == ($defaults['preference'] ?? '')) selected @endif value="{{ $preference['pref_id'] ?? '' }}">{{ $preference['pref_description'] ?? '' }}</option>
-				@endforeach
-				</select>
-			@endif
+	</div>
+
+	<div class="row g-3 mb-3">
+		<div class="col-12">
+			@include('templates.default.partials.invoice_preference_field', [
+				'selectedPrefId' => $defaults['preference'] ?? '',
+				'selectedTermId' => '',
+				'calcDueDate'    => '',
+			])
 		</div>
 	</div>
 
@@ -193,3 +191,5 @@
 <input type="hidden" name="type" value="1" />
 
 </form>
+
+@include('templates.default.invoices.modal_add_customer')

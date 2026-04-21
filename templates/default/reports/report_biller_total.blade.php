@@ -53,7 +53,7 @@
 				<tr>
 					<td class="text-secondary">{{ $i + 1 }}</td>
 					<td class="fw-medium">{{ $biller['name'] ?? '' }}</td>
-					<td class="text-end fw-semibold">{{ siLocal::number($biller['sum_total'] ?? 0) ?: '-' }}</td>
+					<td class="text-end fw-semibold">{{ ($biller['currency_sign'] ?? '')|si_currency_display }}{{ siLocal::number($biller['sum_total'] ?? 0) ?: '-' }}@if(!empty($biller['currency_code'])) <span class="badge bg-secondary-lt text-muted ms-1" style="font-size:.7rem">{{ $biller['currency_code'] }}</span>@endif</td>
 					<td class="d-none d-md-table-cell">
 						<div class="d-flex align-items-center gap-2">
 							<div class="progress flex-grow-1" style="height:6px;">

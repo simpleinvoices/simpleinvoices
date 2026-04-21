@@ -49,7 +49,7 @@ try {
         $invoice_id,
         (string) $inv['index_id'],
         (float) $inv['owing'],
-        (string) ($pref['currency_code'] ?? 'USD'),
+        (string) ($inv['currency_code'] ?? $pref['currency_code'] ?? 'USD'),
         $successUrl,
         '',
         '',

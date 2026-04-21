@@ -91,9 +91,9 @@
 					</td>
 					<td>{{ $invoice['biller'] ?? '' }}</td>
 					<td>{{ $invoice['customer'] ?? '' }}</td>
-					<td class="text-end">{{ siLocal::number($invoice['inv_total'] ?? 0) ?: '-' }}</td>
-					<td class="text-end text-secondary">{{ siLocal::number($invoice['inv_paid'] ?? 0) ?: '-' }}</td>
-					<td class="text-end fw-bold {{ $c['text'] }}">{{ siLocal::number($invoice['inv_owing'] ?? 0) ?: '-' }}</td>
+					<td class="text-end">{{ ($invoice['currency_sign'] ?? '')|si_currency_display }}{{ siLocal::number($invoice['inv_total'] ?? 0) ?: '-' }}</td>
+					<td class="text-end text-secondary">{{ ($invoice['currency_sign'] ?? '')|si_currency_display }}{{ siLocal::number($invoice['inv_paid'] ?? 0) ?: '-' }}</td>
+					<td class="text-end fw-bold {{ $c['text'] }}">{{ ($invoice['currency_sign'] ?? '')|si_currency_display }}{{ siLocal::number($invoice['inv_owing'] ?? 0) ?: '-' }}</td>
 					<td class="text-secondary">{{ $invoice['date'] ?? '' }}</td>
 					<td class="text-end">
 						<span class="badge {{ $c['bg'] }} {{ $c['text'] }}">{{ $invoice['age'] ?? '' }}d</span>

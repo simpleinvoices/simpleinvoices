@@ -147,6 +147,15 @@ CREATE TABLE IF NOT EXISTS si_invoice_type (
   inv_ty_description TEXT NOT NULL DEFAULT ''
 );
 
+CREATE TABLE IF NOT EXISTS si_payment_terms (
+  term_id    INTEGER PRIMARY KEY AUTOINCREMENT,
+  term_code  TEXT NOT NULL UNIQUE,
+  term_label TEXT NOT NULL,
+  calc_kind  TEXT NOT NULL,
+  param_int  INTEGER DEFAULT NULL,
+  sort_order INTEGER NOT NULL DEFAULT 0
+);
+
 CREATE TABLE IF NOT EXISTS si_invoices (
   id            INTEGER PRIMARY KEY AUTOINCREMENT,
   index_id      INTEGER NOT NULL,
@@ -161,6 +170,8 @@ CREATE TABLE IF NOT EXISTS si_invoices (
   custom_field3 TEXT DEFAULT NULL,
   custom_field4 TEXT DEFAULT NULL,
   note          TEXT,
+  payment_term_id INTEGER DEFAULT NULL,
+  due_date        TEXT DEFAULT NULL,
   denorm_invoice_total          REAL NOT NULL DEFAULT 0,
   denorm_amount_paid            REAL NOT NULL DEFAULT 0,
   denorm_amount_owing           REAL NOT NULL DEFAULT 0,
@@ -203,7 +214,9 @@ CREATE TABLE IF NOT EXISTS si_payment (
   online_payment_id TEXT DEFAULT NULL,
   denorm_invoice_index_name TEXT NOT NULL DEFAULT '',
   denorm_biller_name        TEXT NOT NULL DEFAULT '',
-  denorm_customer_name      TEXT NOT NULL DEFAULT ''
+  denorm_customer_name      TEXT NOT NULL DEFAULT '',
+  denorm_currency_sign      TEXT NOT NULL DEFAULT '',
+  denorm_currency_code      TEXT NOT NULL DEFAULT ''
 );
 CREATE UNIQUE INDEX IF NOT EXISTS si_payment_pk         ON si_payment (domain_id, id);
 CREATE INDEX IF NOT EXISTS si_payment_domain_id          ON si_payment (domain_id);
@@ -241,7 +254,8 @@ CREATE TABLE IF NOT EXISTS si_preferences (
   index_group                INTEGER NOT NULL,
   currency_code              TEXT DEFAULT NULL,
   include_online_payment     TEXT DEFAULT NULL,
-  currency_position          TEXT DEFAULT NULL
+  currency_position          TEXT DEFAULT NULL,
+  payment_term_id            INTEGER DEFAULT NULL
 );
 CREATE UNIQUE INDEX IF NOT EXISTS si_preferences_pk ON si_preferences (domain_id, pref_id);
 

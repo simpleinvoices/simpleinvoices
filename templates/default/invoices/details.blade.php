@@ -27,11 +27,11 @@
 				<div class="input-icon">
 					<span class="input-icon-addon"><i class="ti ti-calendar"></i></span>
 					@if($invoice['id'] == null)
-						<input type="text" class="form-control date-picker" name="date" id="date1"
+						<input type="text" class="form-control form-control-sm date-picker" name="date" id="date1"
 							required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
 							value="{{ date('Y-m-d') }}" />
 					@else
-						<input type="text" class="form-control date-picker" name="date" id="date1"
+						<input type="text" class="form-control form-control-sm date-picker" name="date" id="date1"
 							required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
 							value="{{ $invoice['calc_date'] ?? '' }}" />
 					@endif
@@ -43,7 +43,7 @@
 				@if($billers == null)
 					<p class="text-muted mb-0"><em>{{ $LANG['no_billers'] ?? '' }}</em></p>
 				@else
-					<select name="biller_id" class="form-select" required>
+					<select name="biller_id" class="form-select form-select-sm" required>
 						<option value=""></option>
 						@foreach(($billers ?? []) as $biller)
 							<option @if($biller['id'] == $invoice['biller_id']) selected @endif value="{{ $biller['id'] ?? '' }}">{{ $biller['name'] ?? '' }}</option>
@@ -56,12 +56,17 @@
 				@if($customers == null)
 					<p class="text-muted mb-0"><em>{{ $LANG['no_customers'] ?? '' }}</em></p>
 				@else
-					<select name="customer_id" class="form-select" required>
-						<option value=""></option>
-						@foreach(($customers ?? []) as $customer)
-							<option @if($customer['id'] == $invoice['customer_id']) selected @endif value="{{ $customer['id'] ?? '' }}">{{ $customer['name'] ?? '' }}</option>
-						@endforeach
-					</select>
+					<div class="input-group input-group-sm">
+						<select name="customer_id" class="form-select form-select-sm" required>
+							<option value=""></option>
+							@foreach(($customers ?? []) as $customer)
+								<option @if($customer['id'] == $invoice['customer_id']) selected @endif value="{{ $customer['id'] ?? '' }}">{{ $customer['name'] ?? '' }}</option>
+							@endforeach
+						</select>
+						<button type="button" class="btn btn-outline-secondary si-add-customer-btn" title="{{ $LANG['add_customer'] ?? 'Add new customer' }}">
+							<i class="ti ti-user-plus"></i>
+						</button>
+					</div>
 				@endif
 			</div>
 		</div>
@@ -158,19 +163,22 @@
 							@if($products == null)
 								<p class="text-muted mb-0"><em>{{ $LANG['no_products'] ?? '' }}</em></p>
 							@else
-								<select
-									name="products{{ $line }}"
-									id="products{{ $line }}"
-									rel="{{ $line }}"
-									class="form-select form-select-sm product_change"
-								>
-									@foreach(($products ?? []) as $product)
-										@if($product['id'] == $invoiceItem['product_id'])
-											<option value="{{ $product['id'] }}" selected>{{ $product['description'] }}</option>
-											@break
-										@endif
-									@endforeach
-								</select>
+								<div class="input-group input-group-sm si-product-input-group">
+									<select
+										name="products{{ $line }}"
+										id="products{{ $line }}"
+										rel="{{ $line }}"
+										class="form-select form-select-sm product_change"
+									>
+										@foreach(($products ?? []) as $product)
+											@if($product['id'] == $invoiceItem['product_id'])
+												<option value="{{ $product['id'] }}" selected>{{ $product['description'] }}</option>
+												@break
+											@endif
+										@endforeach
+									</select>
+									<button type="button" class="btn btn-outline-secondary si-add-product-row-btn" title="{{ $LANG['add_product'] ?? 'Add new product' }}"><i class="ti ti-plus"></i></button>
+								</div>
 							@endif
 						</div>
 						{{-- Mobile line break: taxes + price wrap to a second line below qty+product --}}
@@ -253,19 +261,16 @@
 
 		@endif
 
-		{{-- Preference (shared) --}}
+		{{-- Preference, currency, payment terms, due date --}}
 		<div class="row g-3">
-			<div class="col-md-6">
-				<label class="form-label">{{ $LANG['inv_pref'] ?? '' }}</label>
-				@if($preferences == null)
-					<p class="text-muted mb-0"><em>{{ $LANG['no_preferences'] ?? '' }}</em></p>
-				@else
-					<select name="preference_id" class="form-select">
-						@foreach(($preferences ?? []) as $preference)
-							<option @if(($preference['pref_id'] ?? '') == ($invoice['preference_id'] ?? $defaults['preference'] ?? '')) selected @endif value="{{ $preference['pref_id'] }}">{{ $preference['pref_description'] }}</option>
-						@endforeach
-					</select>
-				@endif
+			<div class="col-12">
+				@include('templates.default.partials.invoice_preference_field', [
+					'selectedPrefId'      => $invoice['preference_id'] ?? $defaults['preference'] ?? '',
+					'currentCurrencySign' => $invoice['currency_sign'] ?? '',
+					'currentCurrencyCode' => $invoice['currency_code'] ?? '',
+					'selectedTermId'      => $invoice['payment_term_id'] ?? '',
+					'calcDueDate'         => $invoice['calc_due_date'] ?? '',
+				])
 			</div>
 		</div>
 
@@ -293,3 +298,6 @@
 <input type="hidden" id="max_items" name="max_items" value="{{ $lines }}" />
 
 </form>
+
+@include('templates.default.invoices.modal_add_product')
+@include('templates.default.invoices.modal_add_customer')

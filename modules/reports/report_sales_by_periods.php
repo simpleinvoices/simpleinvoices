@@ -5,9 +5,9 @@ $__rpt_snap = array_keys($bladeView->getAssigns());
 
 /*
 * Script: report_sales_by_period.php
-* 	Sales reports by period — monthly + annual sales and payments.
+* 	Sales reports by period — monthly + annual sales and payments, split by currency.
 *
-* Uses a small number of aggregate queries (grouped by year-month) instead of
+* Uses a small number of aggregate queries (grouped by year-month + currency) instead of
 * one query per month/year, for large databases on MySQL, PostgreSQL, and SQLite.
 */
 
@@ -27,10 +27,7 @@ $sth                = dbQuery($sql, ':domain_id', $auth_session->domain_id);
 $invoice_start_array = $sth->fetch();
 
 if (empty($invoice_start_array['date'])) {
-    $bladeView->assign('data', [
-        'sales'    => ['months' => [], 'months_rate' => [], 'total' => [], 'total_rate' => []],
-        'payments' => ['months' => [], 'months_rate' => [], 'total' => [], 'total_rate' => []],
-    ]);
+    $bladeView->assign('currencies_data', []);
     $bladeView->assign('all_years', []);
     $bladeView->assign('chart_years', []);
     $bladeView->assign('report_chart_guard', si_report_chart_allow(0, 0, 1));
@@ -53,147 +50,162 @@ $inv_month_sql = '';
 $pmt_month_sql = '';
 switch ($db_server) {
     case 'pgsql':
-        $inv_month_sql = "SELECT to_char(iv.date::timestamp, 'YYYY-MM') AS ym, SUM(iv.denorm_invoice_total) AS t
+        $inv_month_sql = "SELECT to_char(iv.date::timestamp, 'YYYY-MM') AS ym, iv.currency_sign, iv.currency_code, SUM(iv.denorm_invoice_total) AS t
             FROM " . TB_PREFIX . "invoices iv
             INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id=iv.preference_id AND pr.domain_id=iv.domain_id)
             WHERE pr.status='1' AND iv.domain_id=:domain_id
               AND iv.date >= :d_start AND iv.date < :d_end
-            GROUP BY 1";
-        $pmt_month_sql = "SELECT to_char(ap.ac_date::timestamp, 'YYYY-MM') AS ym, SUM(ap.ac_amount) AS t
+            GROUP BY 1, iv.currency_sign, iv.currency_code";
+        $pmt_month_sql = "SELECT to_char(ap.ac_date::timestamp, 'YYYY-MM') AS ym, iv.currency_sign, iv.currency_code, SUM(ap.ac_amount) AS t
             FROM " . TB_PREFIX . "payment ap
+            INNER JOIN " . TB_PREFIX . "invoices iv ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
             WHERE ap.domain_id=:domain_id
               AND ap.ac_date >= :d_start AND ap.ac_date < :d_end
-            GROUP BY 1";
+            GROUP BY 1, iv.currency_sign, iv.currency_code";
         break;
     case 'sqlite':
-        $inv_month_sql = "SELECT strftime('%Y-%m', iv.date) AS ym, SUM(iv.denorm_invoice_total) AS t
+        $inv_month_sql = "SELECT strftime('%Y-%m', iv.date) AS ym, iv.currency_sign, iv.currency_code, SUM(iv.denorm_invoice_total) AS t
             FROM " . TB_PREFIX . "invoices iv
             INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id=iv.preference_id AND pr.domain_id=iv.domain_id)
             WHERE pr.status='1' AND iv.domain_id=:domain_id
               AND date(iv.date) >= date(:d_start) AND date(iv.date) < date(:d_end)
-            GROUP BY 1";
-        $pmt_month_sql = "SELECT strftime('%Y-%m', ap.ac_date) AS ym, SUM(ap.ac_amount) AS t
+            GROUP BY 1, iv.currency_sign, iv.currency_code";
+        $pmt_month_sql = "SELECT strftime('%Y-%m', ap.ac_date) AS ym, iv.currency_sign, iv.currency_code, SUM(ap.ac_amount) AS t
             FROM " . TB_PREFIX . "payment ap
+            INNER JOIN " . TB_PREFIX . "invoices iv ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
             WHERE ap.domain_id=:domain_id
               AND datetime(ap.ac_date) >= datetime(:d_start) AND datetime(ap.ac_date) < datetime(:d_end)
-            GROUP BY 1";
+            GROUP BY 1, iv.currency_sign, iv.currency_code";
         break;
     default:
-        $inv_month_sql = "SELECT DATE_FORMAT(iv.date, '%Y-%m') AS ym, SUM(iv.denorm_invoice_total) AS t
+        $inv_month_sql = "SELECT DATE_FORMAT(iv.date, '%Y-%m') AS ym, iv.currency_sign, iv.currency_code, SUM(iv.denorm_invoice_total) AS t
             FROM " . TB_PREFIX . "invoices iv
             INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id=iv.preference_id AND pr.domain_id=iv.domain_id)
             WHERE pr.status='1' AND iv.domain_id=:domain_id
               AND iv.date >= :d_start AND iv.date < :d_end
-            GROUP BY DATE_FORMAT(iv.date, '%Y-%m')";
-        $pmt_month_sql = "SELECT DATE_FORMAT(ap.ac_date, '%Y-%m') AS ym, SUM(ap.ac_amount) AS t
+            GROUP BY DATE_FORMAT(iv.date, '%Y-%m'), iv.currency_sign, iv.currency_code";
+        $pmt_month_sql = "SELECT DATE_FORMAT(ap.ac_date, '%Y-%m') AS ym, iv.currency_sign, iv.currency_code, SUM(ap.ac_amount) AS t
             FROM " . TB_PREFIX . "payment ap
+            INNER JOIN " . TB_PREFIX . "invoices iv ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
             WHERE ap.domain_id=:domain_id
               AND ap.ac_date >= :d_start AND ap.ac_date < :d_end
-            GROUP BY DATE_FORMAT(ap.ac_date, '%Y-%m')";
+            GROUP BY DATE_FORMAT(ap.ac_date, '%Y-%m'), iv.currency_sign, iv.currency_code";
         break;
 }
 
-$inv_by_ym = [];
+// Keyed: $inv_by_curr_ym[$curr_key][$ym] = amount
+// $curr_meta[$curr_key] = ['currency_sign' => ..., 'currency_code' => ...]
+$inv_by_curr_ym = [];
+$pmt_by_curr_ym = [];
+$curr_meta = [];
+
 foreach (
-    dbQuery(
-        $inv_month_sql,
-        ':domain_id',
-        $auth_session->domain_id,
-        ':d_start',
-        $range_start,
-        ':d_end',
-        $range_end
-    )->fetchAll(PDO::FETCH_ASSOC) as $row
+    dbQuery($inv_month_sql, ':domain_id', $auth_session->domain_id, ':d_start', $range_start, ':d_end', $range_end)
+        ->fetchAll(PDO::FETCH_ASSOC) as $row
 ) {
     if (! empty($row['ym'])) {
-        $inv_by_ym[$row['ym']] = (float) ($row['t'] ?? 0);
+        $sign = $row['currency_sign'] ?? '';
+        $code = $row['currency_code'] ?? '';
+        $curr_key = ($code ?: '') . '||' . ($sign ?: '');
+        $curr_meta[$curr_key] = ['currency_sign' => $sign, 'currency_code' => $code];
+        $inv_by_curr_ym[$curr_key][$row['ym']] = round((float) ($row['t'] ?? 0), 2);
     }
 }
 
-$pmt_by_ym = [];
 foreach (
-    dbQuery(
-        $pmt_month_sql,
-        ':domain_id',
-        $auth_session->domain_id,
-        ':d_start',
-        $range_start,
-        ':d_end',
-        $range_end
-    )->fetchAll(PDO::FETCH_ASSOC) as $row
+    dbQuery($pmt_month_sql, ':domain_id', $auth_session->domain_id, ':d_start', $range_start, ':d_end', $range_end)
+        ->fetchAll(PDO::FETCH_ASSOC) as $row
 ) {
     if (! empty($row['ym'])) {
-        $pmt_by_ym[$row['ym']] = (float) ($row['t'] ?? 0);
+        $sign = $row['currency_sign'] ?? '';
+        $code = $row['currency_code'] ?? '';
+        $curr_key = ($code ?: '') . '||' . ($sign ?: '');
+        $curr_meta[$curr_key] = $curr_meta[$curr_key] ?? ['currency_sign' => $sign, 'currency_code' => $code];
+        $pmt_by_curr_ym[$curr_key][$row['ym']] = round((float) ($row['t'] ?? 0), 2);
     }
 }
 
-function _myRate($this_year_amount, $last_year_amount, $precision = 2)
-{
-    if (! $last_year_amount) {
-        return '';
+if (! function_exists('_myRate')) {
+    function _myRate($this_year_amount, $last_year_amount, $precision = 2)
+    {
+        $this_year_amount = (float) $this_year_amount;
+        $last_year_amount = (float) $last_year_amount;
+        if ($last_year_amount == 0.0) {
+            return '';
+        }
+        return round(($this_year_amount - $last_year_amount) / $last_year_amount * 100, $precision);
     }
-    $this_year_amount = (float) $this_year_amount;
-    $last_year_amount = (float) $last_year_amount;
-    if ($last_year_amount == 0.0) {
-        return '';
-    }
-
-    return round(($this_year_amount - $last_year_amount) / $last_year_amount * 100, $precision);
 }
+
+// Collect all currency keys that appear in either invoices or payments
+$all_currencies = array_unique(array_merge(array_keys($inv_by_curr_ym), array_keys($pmt_by_curr_ym)));
+sort($all_currencies);
 
 $years = [];
-$data  = [
-    'sales'    => ['months' => [], 'months_rate' => [], 'total' => [], 'total_rate' => []],
-    'payments' => ['months' => [], 'months_rate' => [], 'total' => [], 'total_rate' => []],
-];
-
-for ($m = 1; $m <= 12; $m++) {
-    $mk                                      = str_pad((string) $m, 2, '0', STR_PAD_LEFT);
-    $data['sales']['months'][$mk]           = [];
-    $data['sales']['months_rate'][$mk]      = [];
-    $data['payments']['months'][$mk]        = [];
-    $data['payments']['months_rate'][$mk]   = [];
+for ($y = $year_start_range; $y <= $this_year; $y++) {
+    array_unshift($years, $y);
 }
 
-for ($year = $year_start_range; $year <= $this_year; $year++) {
-    array_unshift($years, $year);
+// Build per-currency data structures matching the shape the template expects
+$currencies_data = [];
+foreach ($all_currencies as $currency) {
+    $inv_by_ym = $inv_by_curr_ym[$currency] ?? [];
+    $pmt_by_ym = $pmt_by_curr_ym[$currency] ?? [];
+    $meta = $curr_meta[$currency] ?? ['currency_sign' => $currency, 'currency_code' => ''];
+
+    $d = [
+        'sales'    => ['months' => [], 'months_rate' => [], 'total' => [], 'total_rate' => []],
+        'payments' => ['months' => [], 'months_rate' => [], 'total' => [], 'total_rate' => []],
+    ];
+
     for ($m = 1; $m <= 12; $m++) {
         $mk = str_pad((string) $m, 2, '0', STR_PAD_LEFT);
-        $ym = sprintf('%04d-%02d', $year, $m);
-        $data['sales']['months'][$mk][$year]    = array_key_exists($ym, $inv_by_ym) ? $inv_by_ym[$ym] : null;
-        $data['payments']['months'][$mk][$year] = array_key_exists($ym, $pmt_by_ym) ? $pmt_by_ym[$ym] : null;
+        $d['sales']['months'][$mk]         = [];
+        $d['sales']['months_rate'][$mk]    = [];
+        $d['payments']['months'][$mk]      = [];
+        $d['payments']['months_rate'][$mk] = [];
     }
-}
 
-for ($year = $year_start_range; $year <= $this_year; $year++) {
-    $ys = 0.0;
-    $yp = 0.0;
-    for ($m = 1; $m <= 12; $m++) {
-        $mk = str_pad((string) $m, 2, '0', STR_PAD_LEFT);
-        $ys += (float) ($data['sales']['months'][$mk][$year] ?? 0);
-        $yp += (float) ($data['payments']['months'][$mk][$year] ?? 0);
-    }
-    $data['sales']['total'][$year]    = $ys != 0.0 ? $ys : null;
-    $data['payments']['total'][$year] = $yp != 0.0 ? $yp : null;
-}
-
-for ($year = $year_start_range; $year <= $this_year; $year++) {
-    $data['sales']['total_rate'][$year]    = _myRate($data['sales']['total'][$year] ?? 0, $data['sales']['total'][$year - 1] ?? 0);
-    $data['payments']['total_rate'][$year] = _myRate($data['payments']['total'][$year] ?? 0, $data['payments']['total'][$year - 1] ?? 0);
-}
-
-for ($m = 1; $m <= 12; $m++) {
-    $mk = str_pad((string) $m, 2, '0', STR_PAD_LEFT);
     for ($year = $year_start_range; $year <= $this_year; $year++) {
-        $data['sales']['months_rate'][$mk][$year] = _myRate(
-            $data['sales']['months'][$mk][$year] ?? 0,
-            $data['sales']['months'][$mk][$year - 1] ?? 0
-        );
-        $data['payments']['months_rate'][$mk][$year] = _myRate(
-            $data['payments']['months'][$mk][$year] ?? 0,
-            $data['payments']['months'][$mk][$year - 1] ?? 0
-        );
+        for ($m = 1; $m <= 12; $m++) {
+            $mk = str_pad((string) $m, 2, '0', STR_PAD_LEFT);
+            $ym = sprintf('%04d-%02d', $year, $m);
+            $d['sales']['months'][$mk][$year]    = array_key_exists($ym, $inv_by_ym) ? $inv_by_ym[$ym] : null;
+            $d['payments']['months'][$mk][$year] = array_key_exists($ym, $pmt_by_ym) ? $pmt_by_ym[$ym] : null;
+        }
     }
+
+    for ($year = $year_start_range; $year <= $this_year; $year++) {
+        $ys = 0.0; $yp = 0.0;
+        for ($m = 1; $m <= 12; $m++) {
+            $mk = str_pad((string) $m, 2, '0', STR_PAD_LEFT);
+            $ys += (float) ($d['sales']['months'][$mk][$year] ?? 0);
+            $yp += (float) ($d['payments']['months'][$mk][$year] ?? 0);
+        }
+        $d['sales']['total'][$year]    = $ys != 0.0 ? $ys : null;
+        $d['payments']['total'][$year] = $yp != 0.0 ? $yp : null;
+    }
+
+    for ($year = $year_start_range; $year <= $this_year; $year++) {
+        $d['sales']['total_rate'][$year]    = _myRate($d['sales']['total'][$year] ?? 0, $d['sales']['total'][$year - 1] ?? 0);
+        $d['payments']['total_rate'][$year] = _myRate($d['payments']['total'][$year] ?? 0, $d['payments']['total'][$year - 1] ?? 0);
+    }
+
+    for ($m = 1; $m <= 12; $m++) {
+        $mk = str_pad((string) $m, 2, '0', STR_PAD_LEFT);
+        for ($year = $year_start_range; $year <= $this_year; $year++) {
+            $d['sales']['months_rate'][$mk][$year] = _myRate(
+                $d['sales']['months'][$mk][$year] ?? 0,
+                $d['sales']['months'][$mk][$year - 1] ?? 0
+            );
+            $d['payments']['months_rate'][$mk][$year] = _myRate(
+                $d['payments']['months'][$mk][$year] ?? 0,
+                $d['payments']['months'][$mk][$year - 1] ?? 0
+            );
+        }
+    }
+
+    $currencies_data[$currency] = array_merge($meta, ['sales' => $d['sales'], 'payments' => $d['payments']]);
 }
 
 $ycount    = count($years);
@@ -205,7 +217,7 @@ $chart_years = $must ? array_slice($years, 0, min($lim, $ycount)) : $years;
 $report_chart_guard = si_report_chart_display_guard($threshold, $ycount, count($chart_years));
 $report_chart_guard['chart_time_periods'] = true;
 
-$bladeView->assign('data', $data);
+$bladeView->assign('currencies_data', $currencies_data);
 $bladeView->assign('all_years', $years);
 $bladeView->assign('chart_years', $chart_years);
 $bladeView->assign('report_chart_guard', $report_chart_guard);

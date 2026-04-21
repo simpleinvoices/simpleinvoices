@@ -30,7 +30,7 @@ try {
         $invoice_id,
         (string) $inv['index_id'],
         (float) $inv['owing'],
-        (string) ($pref['currency_code'] ?? 'EUR'),
+        (string) ($inv['currency_code'] ?? $pref['currency_code'] ?? 'EUR'),
         $successUrl,
         $cancelUrl,
         $webhookUrl,

@@ -1,6 +1,6 @@
 {{-- Invoice Quick View --}}
 @php
-    $currency = CurrencySignHelper::forDisplay($preference['pref_currency_sign'] ?? '');
+    $currency = CurrencySignHelper::forDisplay($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '');
 @endphp
 
 <div class="card mb-3">
@@ -64,6 +64,19 @@
                     <div class="text-uppercase text-secondary small fw-medium mb-2">{{ $LANG['date_upper'] ?? '' }}</div>
                     <div>{{ $invoice['date'] ?? '' }}</div>
                 </div>
+                @if(!empty($invoice['payment_term_id']) || !empty($invoice['calc_due_date']))
+                <div class="col-md-6">
+                    <div class="text-uppercase text-secondary small fw-medium mb-2">{{ $LANG['payment_term_code'] ?? 'Payment term code' }}</div>
+                    <div class="fw-medium">{{ !empty($invoice['payment_term_code']) ? $invoice['payment_term_code'] : (!empty($invoice['payment_term_label']) ? $invoice['payment_term_label'] : '-') }}</div>
+                    @if(!empty($invoice['payment_term_code']) && !empty($invoice['payment_term_label']))
+                    <div class="text-secondary small mt-1">{{ $invoice['payment_term_label'] }}</div>
+                    @endif
+                </div>
+                <div class="col-md-6">
+                    <div class="text-uppercase text-secondary small fw-medium mb-2">{{ $LANG['due_date'] ?? 'Due date' }}</div>
+                    <div class="fw-medium">{{ !empty($invoice['calc_due_date']) ? ($invoice['due_date'] ?? '') : '-' }}</div>
+                </div>
+                @endif
             </div>
             @if(!empty($customField['1']) || !empty($customField['2']) || !empty($customField['3']) || !empty($customField['4']))
             <div class="row g-3 mt-1">

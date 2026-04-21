@@ -2830,3 +2830,255 @@ PRIMARY KEY ( `domain_id`, `id` )
     }
     $patch['374']['date'] = "20260420";
 
+    $patch['375']['name'] = "si_invoices: add currency_sign column";
+    switch ($db_server) {
+        case 'pgsql':
+            $patch['375']['patch'] = checkFieldExists(TB_PREFIX . 'invoices', 'currency_sign')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'invoices ADD COLUMN currency_sign VARCHAR(50) NULL';
+            break;
+        case 'sqlite':
+            $patch['375']['patch'] = checkFieldExists(TB_PREFIX . 'invoices', 'currency_sign')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'invoices ADD COLUMN currency_sign VARCHAR(50) NULL';
+            break;
+        default:
+            $patch['375']['patch'] = checkFieldExists(TB_PREFIX . 'invoices', 'currency_sign')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'invoices` ADD `currency_sign` VARCHAR(50) NULL';
+            break;
+    }
+    $patch['375']['date'] = "20260420";
+
+    $patch['376']['name'] = "si_invoices: add currency_code column";
+    switch ($db_server) {
+        case 'pgsql':
+            $patch['376']['patch'] = checkFieldExists(TB_PREFIX . 'invoices', 'currency_code')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'invoices ADD COLUMN currency_code VARCHAR(25) NULL';
+            break;
+        case 'sqlite':
+            $patch['376']['patch'] = checkFieldExists(TB_PREFIX . 'invoices', 'currency_code')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'invoices ADD COLUMN currency_code VARCHAR(25) NULL';
+            break;
+        default:
+            $patch['376']['patch'] = checkFieldExists(TB_PREFIX . 'invoices', 'currency_code')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'invoices` ADD `currency_code` VARCHAR(25) NULL';
+            break;
+    }
+    $patch['376']['date'] = "20260420";
+
+    $patch['377']['name'] = "si_invoices: backfill currency_sign from preferences";
+    switch ($db_server) {
+        case 'pgsql':
+            $patch['377']['patch'] = 'UPDATE ' . TB_PREFIX . 'invoices i'
+                . ' SET currency_sign = p.pref_currency_sign'
+                . ' FROM ' . TB_PREFIX . 'preferences p'
+                . ' WHERE p.pref_id = i.preference_id AND p.domain_id = i.domain_id'
+                . ' AND (i.currency_sign IS NULL OR i.currency_sign = \'\')';
+            break;
+        case 'sqlite':
+            $patch['377']['patch'] = 'UPDATE ' . TB_PREFIX . 'invoices'
+                . ' SET currency_sign = (SELECT p.pref_currency_sign FROM ' . TB_PREFIX . 'preferences p'
+                . ' WHERE p.pref_id = ' . TB_PREFIX . 'invoices.preference_id'
+                . ' AND p.domain_id = ' . TB_PREFIX . 'invoices.domain_id)'
+                . ' WHERE currency_sign IS NULL OR currency_sign = \'\'';
+            break;
+        default:
+            $patch['377']['patch'] = 'UPDATE ' . TB_PREFIX . 'invoices i'
+                . ' INNER JOIN ' . TB_PREFIX . 'preferences p ON p.pref_id = i.preference_id AND p.domain_id = i.domain_id'
+                . ' SET i.currency_sign = p.pref_currency_sign'
+                . ' WHERE i.currency_sign IS NULL OR i.currency_sign = \'\'';
+            break;
+    }
+    $patch['377']['date'] = "20260420";
+
+    $patch['378']['name'] = "si_invoices: backfill currency_code from preferences";
+    switch ($db_server) {
+        case 'pgsql':
+            $patch['378']['patch'] = 'UPDATE ' . TB_PREFIX . 'invoices i'
+                . ' SET currency_code = p.currency_code'
+                . ' FROM ' . TB_PREFIX . 'preferences p'
+                . ' WHERE p.pref_id = i.preference_id AND p.domain_id = i.domain_id'
+                . ' AND (i.currency_code IS NULL OR i.currency_code = \'\')';
+            break;
+        case 'sqlite':
+            $patch['378']['patch'] = 'UPDATE ' . TB_PREFIX . 'invoices'
+                . ' SET currency_code = (SELECT p.currency_code FROM ' . TB_PREFIX . 'preferences p'
+                . ' WHERE p.pref_id = ' . TB_PREFIX . 'invoices.preference_id'
+                . ' AND p.domain_id = ' . TB_PREFIX . 'invoices.domain_id)'
+                . ' WHERE currency_code IS NULL OR currency_code = \'\'';
+            break;
+        default:
+            $patch['378']['patch'] = 'UPDATE ' . TB_PREFIX . 'invoices i'
+                . ' INNER JOIN ' . TB_PREFIX . 'preferences p ON p.pref_id = i.preference_id AND p.domain_id = i.domain_id'
+                . ' SET i.currency_code = p.currency_code'
+                . ' WHERE i.currency_code IS NULL OR i.currency_code = \'\'';
+            break;
+    }
+    $patch['378']['date'] = "20260420";
+
+    $patch['379']['name'] = "si_payment: denormalised currency_sign and currency_code from invoice";
+    $patch['379']['patch'] = 'SELECT 1';
+    $patch['379']['date'] = "20260420";
+
+    $patch['380']['name'] = "si_payment_terms: create global payment terms table";
+    switch ($db_server) {
+        case 'pgsql':
+            $patch['380']['patch'] = checkTableExists(TB_PREFIX . 'payment_terms')
+                ? 'SELECT 1'
+                : 'CREATE TABLE ' . TB_PREFIX . 'payment_terms ('
+                . 'term_id SERIAL PRIMARY KEY,'
+                . 'term_code VARCHAR(32) NOT NULL UNIQUE,'
+                . 'term_label VARCHAR(120) NOT NULL,'
+                . 'calc_kind VARCHAR(32) NOT NULL,'
+                . 'param_int INTEGER NULL,'
+                . 'sort_order INTEGER NOT NULL DEFAULT 0'
+                . ')';
+            break;
+        case 'sqlite':
+            $patch['380']['patch'] = checkTableExists(TB_PREFIX . 'payment_terms')
+                ? 'SELECT 1'
+                : 'CREATE TABLE ' . TB_PREFIX . 'payment_terms ('
+                . 'term_id INTEGER PRIMARY KEY AUTOINCREMENT,'
+                . 'term_code VARCHAR(32) NOT NULL UNIQUE,'
+                . 'term_label VARCHAR(120) NOT NULL,'
+                . 'calc_kind VARCHAR(32) NOT NULL,'
+                . 'param_int INTEGER NULL,'
+                . 'sort_order INTEGER NOT NULL DEFAULT 0'
+                . ')';
+            break;
+        default:
+            $patch['380']['patch'] = checkTableExists(TB_PREFIX . 'payment_terms')
+                ? 'SELECT 1'
+                : 'CREATE TABLE `' . TB_PREFIX . 'payment_terms` ('
+                . '`term_id` int(11) NOT NULL AUTO_INCREMENT,'
+                . '`term_code` varchar(32) NOT NULL,'
+                . '`term_label` varchar(120) NOT NULL,'
+                . '`calc_kind` varchar(32) NOT NULL,'
+                . '`param_int` int(11) DEFAULT NULL,'
+                . '`sort_order` int(11) NOT NULL DEFAULT 0,'
+                . 'PRIMARY KEY (`term_id`),'
+                . 'UNIQUE KEY `term_code` (`term_code`)'
+                . ') ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci';
+            break;
+    }
+    $patch['380']['date'] = "20260421";
+
+    $patch['381']['name'] = "si_payment_terms: seed standard terms";
+    $seedRows = "(1, 'NET_7', 'Net 7', 'NET_DAYS', 7, 10),"
+        . "(2, 'NET_10', 'Net 10', 'NET_DAYS', 10, 20),"
+        . "(3, 'NET_14', 'Net 14', 'NET_DAYS', 14, 30),"
+        . "(4, 'NET_30', 'Net 30', 'NET_DAYS', 30, 40),"
+        . "(5, 'NET_60', 'Net 60', 'NET_DAYS', 60, 50),"
+        . "(6, 'NET_90', 'Net 90', 'NET_DAYS', 90, 60),"
+        . "(7, 'EOM', 'End of month (EOM)', 'EOM', NULL, 70),"
+        . "(8, 'NET_30_EOM', 'Net 30 EOM (EOM + 30 days)', 'EOM_PLUS_DAYS', 30, 80),"
+        . "(9, 'EOM_45', '45 EOM (45 days after month end)', 'EOM_PLUS_DAYS', 45, 90),"
+        . "(10, 'MFI_15', '15 MFI (15th of month following invoice)', 'MFI_DAY', 15, 100)";
+    switch ($db_server) {
+        case 'pgsql':
+            $patch['381']['patch'] = 'INSERT INTO ' . TB_PREFIX . 'payment_terms'
+                . ' (term_id, term_code, term_label, calc_kind, param_int, sort_order) VALUES ' . $seedRows
+                . ' ON CONFLICT (term_code) DO NOTHING';
+            break;
+        case 'sqlite':
+            $patch['381']['patch'] = 'INSERT OR IGNORE INTO ' . TB_PREFIX . 'payment_terms'
+                . ' (term_id, term_code, term_label, calc_kind, param_int, sort_order) VALUES ' . $seedRows;
+            break;
+        default:
+            $patch['381']['patch'] = 'INSERT IGNORE INTO `' . TB_PREFIX . 'payment_terms`'
+                . ' (`term_id`, `term_code`, `term_label`, `calc_kind`, `param_int`, `sort_order`) VALUES ' . $seedRows;
+            break;
+    }
+    $patch['381']['date'] = "20260421";
+
+    $patch['382']['name'] = "si_payment_terms: PostgreSQL sequence sync after seed";
+    $patch['382']['patch'] = ($db_server === 'pgsql')
+        ? "SELECT setval(pg_get_serial_sequence('" . TB_PREFIX . "payment_terms', 'term_id'), COALESCE((SELECT MAX(term_id) FROM " . TB_PREFIX . 'payment_terms), 1))'
+        : 'SELECT 1';
+    $patch['382']['date'] = "20260421";
+
+    $patch['383']['name'] = "si_preferences: add payment_term_id";
+    switch ($db_server) {
+        case 'pgsql':
+            $patch['383']['patch'] = checkFieldExists(TB_PREFIX . 'preferences', 'payment_term_id')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'preferences ADD COLUMN payment_term_id INTEGER NULL';
+            break;
+        case 'sqlite':
+            $patch['383']['patch'] = checkFieldExists(TB_PREFIX . 'preferences', 'payment_term_id')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'preferences ADD COLUMN payment_term_id INTEGER NULL';
+            break;
+        default:
+            $patch['383']['patch'] = checkFieldExists(TB_PREFIX . 'preferences', 'payment_term_id')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'preferences` ADD `payment_term_id` int(11) NULL';
+            break;
+    }
+    $patch['383']['date'] = "20260421";
+
+    $patch['384']['name'] = "si_invoices: add payment_term_id";
+    switch ($db_server) {
+        case 'pgsql':
+            $patch['384']['patch'] = checkFieldExists(TB_PREFIX . 'invoices', 'payment_term_id')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'invoices ADD COLUMN payment_term_id INTEGER NULL';
+            break;
+        case 'sqlite':
+            $patch['384']['patch'] = checkFieldExists(TB_PREFIX . 'invoices', 'payment_term_id')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'invoices ADD COLUMN payment_term_id INTEGER NULL';
+            break;
+        default:
+            $patch['384']['patch'] = checkFieldExists(TB_PREFIX . 'invoices', 'payment_term_id')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'invoices` ADD `payment_term_id` int(11) NULL';
+            break;
+    }
+    $patch['384']['date'] = "20260421";
+
+    $patch['385']['name'] = "si_invoices: add due_date";
+    switch ($db_server) {
+        case 'pgsql':
+            $patch['385']['patch'] = checkFieldExists(TB_PREFIX . 'invoices', 'due_date')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'invoices ADD COLUMN due_date DATE NULL';
+            break;
+        case 'sqlite':
+            $patch['385']['patch'] = checkFieldExists(TB_PREFIX . 'invoices', 'due_date')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'invoices ADD COLUMN due_date DATE NULL';
+            break;
+        default:
+            $patch['385']['patch'] = checkFieldExists(TB_PREFIX . 'invoices', 'due_date')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'invoices` ADD `due_date` DATE NULL';
+            break;
+    }
+    $patch['385']['date'] = "20260421";
+
+    $patch['386']['name'] = "si_preferences: default payment_term_id to Net 14";
+    switch ($db_server) {
+        case 'pgsql':
+            $patch['386']['patch'] = 'UPDATE ' . TB_PREFIX . 'preferences p'
+                . ' SET payment_term_id = (SELECT t.term_id FROM ' . TB_PREFIX . 'payment_terms t WHERE t.term_code = \'NET_14\' LIMIT 1)'
+                . ' WHERE payment_term_id IS NULL';
+            break;
+        case 'sqlite':
+            $patch['386']['patch'] = 'UPDATE ' . TB_PREFIX . 'preferences'
+                . ' SET payment_term_id = (SELECT term_id FROM ' . TB_PREFIX . 'payment_terms WHERE term_code = \'NET_14\' LIMIT 1)'
+                . ' WHERE payment_term_id IS NULL';
+            break;
+        default:
+            $patch['386']['patch'] = 'UPDATE ' . TB_PREFIX . 'preferences p'
+                . ' INNER JOIN ' . TB_PREFIX . 'payment_terms t ON t.term_code = \'NET_14\''
+                . ' SET p.payment_term_id = t.term_id'
+                . ' WHERE p.payment_term_id IS NULL';
+            break;
+    }
+    $patch['386']['date'] = "20260421";
+

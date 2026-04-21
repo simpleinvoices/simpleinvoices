@@ -146,21 +146,24 @@
 						@if($products == null)
 							<p class="text-muted mb-0"><em>{{ $LANG['no_products'] ?? '' }}</em></p>
 						@else
-							<select
-								id="products{{ $line }}"
-								name="products{{ $line }}"
-								rel="{{ $line }}"
-								class="form-select form-select-sm product_change"
-								@if($line == '0') required @endif
-							>
-								<option value=""></option>
-								@foreach(($products ?? []) as $product)
-									@if($product['id'] == ((get())['product'][$line] ?? null))
-										<option value="{{ $product['id'] }}" selected>{{ $product['description'] }}</option>
-										@break
-									@endif
-								@endforeach
-							</select>
+							<div class="input-group input-group-sm si-product-input-group">
+								<select
+									id="products{{ $line }}"
+									name="products{{ $line }}"
+									rel="{{ $line }}"
+									class="form-select form-select-sm product_change"
+									@if($line == '0') required @endif
+								>
+									<option value=""></option>
+									@foreach(($products ?? []) as $product)
+										@if($product['id'] == ((get())['product'][$line] ?? null))
+											<option value="{{ $product['id'] }}" selected>{{ $product['description'] }}</option>
+											@break
+										@endif
+									@endforeach
+								</select>
+								<button type="button" class="btn btn-outline-secondary si-add-product-row-btn" title="{{ $LANG['add_product'] ?? 'Add new product' }}"><i class="ti ti-plus"></i></button>
+							</div>
 						@endif
 					</div>
 					{{-- Mobile line break: taxes + price wrap to a second line below qty+product --}}
@@ -244,19 +247,13 @@
 				<label class="form-label">{{ $LANG['notes'] ?? '' }}</label>
 				<textarea class="form-control editor" name="note" rows="4">{{ get('note') }}</textarea>
 			</div>
-			<div class="col-md-6">
-				<label class="form-label">{{ $LANG['inv_pref'] ?? '' }}
-					<a class="cluetip ms-1" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_invoice_custom_fields" title="{{ $LANG['want_more_fields'] ?? '' }}"><i class="ti ti-help"></i></a>
-				</label>
-				@if($preferences == null)
-					<p class="text-muted mb-0"><em>{{ $LANG['no_preferences'] ?? '' }}</em></p>
-				@else
-					<select name="preference_id" class="form-select">
-						@foreach(($preferences ?? []) as $preference)
-							<option @if(($preference['pref_id'] ?? '') == ($defaults['preference'] ?? '')) selected @endif value="{{ $preference['pref_id'] ?? '' }}">{{ $preference['pref_description'] ?? '' }}</option>
-						@endforeach
-					</select>
-				@endif
+			<div class="col-12">
+				@include('templates.default.partials.invoice_preference_field', [
+					'selectedPrefId' => $defaults['preference'] ?? '',
+					'selectedTermId' => '',
+					'calcDueDate'    => '',
+				])
+				<a class="cluetip text-secondary small mt-1 d-inline-block" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_invoice_custom_fields" title="{{ $LANG['want_more_fields'] ?? '' }}"><i class="ti ti-help"></i></a>
 			</div>
 		</div>
 
@@ -273,5 +270,8 @@
 </div>
 
 </form>
+
+@include('templates.default.invoices.modal_add_product')
+@include('templates.default.invoices.modal_add_customer')
 
 @endif

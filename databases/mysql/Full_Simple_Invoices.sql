@@ -263,6 +263,8 @@ CREATE TABLE IF NOT EXISTS `si_payment` (
   `denorm_invoice_index_name` varchar(255) NOT NULL DEFAULT '',
   `denorm_biller_name` varchar(255) NOT NULL DEFAULT '',
   `denorm_customer_name` varchar(255) NOT NULL DEFAULT '',
+  `denorm_currency_sign` varchar(50) NOT NULL DEFAULT '',
+  `denorm_currency_code` varchar(25) NOT NULL DEFAULT '',
   PRIMARY KEY (`domain_id`,`id`),
   KEY `domain_id` (`domain_id`),
   KEY `ac_inv_id` (`ac_inv_id`),

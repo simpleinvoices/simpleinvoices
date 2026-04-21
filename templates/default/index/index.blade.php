@@ -506,8 +506,10 @@
                                 <input type="hidden" name="pref_id" value="{{ $wizardPrefId }}">
                                 <input type="hidden" name="from_wizard" value="1">
                                 @include('templates.default.partials.currency_sign_field', [
-                                    'currencySignFieldName' => 'pref_currency_sign',
+                                    'currencySignFieldName'    => 'pref_currency_sign',
                                     'currencySignCurrentValue' => $wizardPref['pref_currency_sign'] ?? '',
+                                    'currencyCodeFieldName'    => 'currency_code',
+                                    'currencyCodeCurrentValue' => $wizardPref['currency_code'] ?? '',
                                 ])
                                 <div class="mt-2 d-flex justify-content-end">
                                     <button type="submit" class="btn btn-primary">
@@ -758,7 +760,7 @@
                                 <i class="ti ti-window-maximize" style="font-size:.9rem"></i>
                             </a>
                         </div>
-                        <div class="h2 mb-0">{{ siLocal::number($dash_alltime_inv_total ?? 0) }}</div>
+                        <div class="h2 mb-0">{{ ($dash_currency_sign ?? '')|si_currency_display }}{{ siLocal::number($dash_alltime_inv_total ?? 0) }}</div>
                     </div>
                     <div class="mt-auto w-100 flex-shrink-0">
                         <div id="sparkline-invoices" style="height:40px"></div>
@@ -866,7 +868,7 @@
                         <span class="d-sm-none">{{ $custShort }}</span>
                     </td>
                     <td class="d-none d-sm-table-cell text-end text-secondary">{{ siLocal::date($inv['date'] ?? '') }}</td>
-                    <td class="text-end">{{ siLocal::number($inv['invoice_total'] ?? 0) }}</td>
+                    <td class="text-end">{{ ($inv['currency_sign'] ?? '')|si_currency_display }}{{ siLocal::number($inv['invoice_total'] ?? 0) }}</td>
                     <td class="text-center">
                         @if($isDraft)
                             <span class="d-none d-sm-inline"><span class="status status-secondary"><span class="status-dot"></span>{{ $LANG['draft'] ?? '' }}</span></span>
@@ -940,7 +942,7 @@
                     <td class="d-none d-sm-table-cell">{{ $pmt['index_name'] ?? '' }}</td>
                     <td>{{ $pmt['cname'] ?? '' }}</td>
                     <td class="d-none d-sm-table-cell">{{ $pmt['bname'] ?? '' }}</td>
-                    <td class="text-end">{{ siLocal::number($pmt['ac_amount'] ?? 0) }}</td>
+                    <td class="text-end">{{ ($pmt['currency_sign'] ?? '')|si_currency_display }}{{ siLocal::number($pmt['ac_amount'] ?? 0) }}</td>
                     <td class="text-center text-secondary d-none d-sm-table-cell">{{ siLocal::date($pmt['date'] ?? '') }}</td>
                 </tr>
                 @empty
@@ -965,7 +967,7 @@
                         <i class="ti ti-window-maximize" style="font-size:.9rem"></i>
                     </a>
                 </div>
-                <div class="h2 mb-0">{{ siLocal::number($dash_alltime_pmt_total ?? 0) }}</div>
+                <div class="h2 mb-0">{{ ($dash_currency_sign ?? '')|si_currency_display }}{{ siLocal::number($dash_alltime_pmt_total ?? 0) }}</div>
             </div>
             <div id="sparkline-payments" style="height:40px"></div>
         </div>
@@ -1053,14 +1055,29 @@
 <script src="https://cdn.jsdelivr.net/npm/apexcharts@latest/dist/apexcharts.min.js"></script>
 <script>
 (function () {
-    var labels       = @json($chart_labels ?? []);
-    var datasets     = @json($chart_data ?? []);
-    var last12       = @json($chart_last12 ?? ['labels' => [], 'invoices' => [], 'payments' => []]);
-    var invoiceLabel = @json($LANG['invoices'] ?? '');
-    var paymentLabel = @json($LANG['payments'] ?? '');
-    var last12Label  = @json($LANG['dash_chart_last_12_months'] ?? 'Last 12 months');
-    var annualTotals = @json($annual_totals ?? []);
-    var annualYears  = @json($chart_years ?? []);
+    var labels         = @json($chart_labels ?? []);
+    var datasets       = @json($chart_data ?? []);
+    var last12         = @json($chart_last12 ?? ['labels' => [], 'invoices' => [], 'payments' => []]);
+    var invoiceLabel   = @json($LANG['invoices'] ?? '');
+    var paymentLabel   = @json($LANG['payments'] ?? '');
+    var last12Label    = @json($LANG['dash_chart_last_12_months'] ?? 'Last 12 months');
+    var annualTotals   = @json($annual_totals ?? []);
+    var annualYears    = @json($chart_years ?? []);
+    var dashCurrSign   = @json(\CurrencySignHelper::forDisplay($dash_currency_sign ?? ''));
+    var last12ByCurr   = @json($chart_last12_by_curr ?? []);
+    var datasetsByCurr = @json($chart_data_by_curr ?? []);
+    var annualByCurr   = @json($annual_totals_by_curr ?? []);
+    var currKeys       = Object.keys(last12ByCurr);
+    var multiCurr      = currKeys.length > 1;
+
+    // Two-tone pairs per currency: invoices/payments share a hue, different currencies get different hues
+    var currPalettes = [
+        ['#45aaf2', '#2fb344'],
+        ['#f59f00', '#fd7e14'],
+        ['#7048e8', '#ae3ec9'],
+        ['#e03131', '#d6336c'],
+        ['#0ca678', '#099268'],
+    ];
 
     function cssVar(name) {
         return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
@@ -1072,17 +1089,47 @@
         var success   = cssVar('--tblr-success')      || '#2fb344';
         var bodyColor = cssVar('--tblr-body-color')   || '#1d273b';
         var borderCol = cssVar('--tblr-border-color') || '#e6e7e9';
-        var catLabels, invData, payData;
-        if (period === 'last12') {
-            catLabels = last12.labels || [];
-            invData   = last12.invoices || [];
-            payData   = last12.payments || [];
+        var catLabels = period === 'last12' ? (last12.labels || []) : labels;
+        var series = [], seriesSigns = [], colors = [];
+
+        if (multiCurr) {
+            currKeys.forEach(function (k, ci) {
+                var meta   = last12ByCurr[k] || {};
+                var sign   = meta.decoded_sign || '';
+                var code   = meta.code || '';
+                var suffix = code ? ' (' + code + ')' : '';
+                var pair   = currPalettes[ci % currPalettes.length];
+                var invData, payData;
+                if (period === 'last12') {
+                    invData = meta.invoices || [];
+                    payData = meta.payments || [];
+                } else {
+                    var pack = ((datasetsByCurr[k] || {})[period]) || ((datasetsByCurr[k] || {})[String(period)]) || {};
+                    invData = pack.invoices || [];
+                    payData = pack.payments || [];
+                }
+                series.push({ name: invoiceLabel + suffix, data: invData });
+                seriesSigns.push(sign);
+                colors.push(pair[0]);
+                series.push({ name: paymentLabel + suffix, data: payData });
+                seriesSigns.push(sign);
+                colors.push(pair[1]);
+            });
         } else {
-            catLabels = labels;
-            var pack  = datasets[period] || datasets[String(period)] || { invoices: [], payments: [] };
-            invData   = pack.invoices || [];
-            payData   = pack.payments || [];
+            var invData, payData;
+            if (period === 'last12') {
+                invData = last12.invoices || [];
+                payData = last12.payments || [];
+            } else {
+                var pack = datasets[period] || datasets[String(period)] || {};
+                invData = pack.invoices || [];
+                payData = pack.payments || [];
+            }
+            series = [{ name: invoiceLabel, data: invData }, { name: paymentLabel, data: payData }];
+            seriesSigns = [dashCurrSign, dashCurrSign];
+            colors = [primary, success];
         }
+
         return {
             chart: {
                 type: 'area',
@@ -1092,10 +1139,7 @@
                 animations: { enabled: false },
                 background: 'transparent'
             },
-            series: [
-                { name: invoiceLabel, data: invData },
-                { name: paymentLabel, data: payData }
-            ],
+            series: series,
             xaxis: {
                 categories: catLabels,
                 labels: { style: { colors: bodyColor } },
@@ -1105,10 +1149,10 @@
             yaxis: {
                 labels: {
                     style: { colors: bodyColor },
-                    formatter: function (v) { return v.toLocaleString(); }
+                    formatter: function (v) { return (seriesSigns[0] || dashCurrSign) + v.toLocaleString(); }
                 }
             },
-            colors: [primary, success],
+            colors: colors,
             stroke: { width: 2, curve: 'smooth' },
             fill: {
                 type: 'gradient',
@@ -1121,7 +1165,16 @@
             },
             dataLabels: { enabled: false },
             grid: { borderColor: borderCol, strokeDashArray: 4 },
-            tooltip: { theme: isDark ? 'dark' : 'light' }
+            tooltip: {
+                theme: isDark ? 'dark' : 'light',
+                y: {
+                    formatter: function (v, opts) {
+                        var sign = seriesSigns[opts && opts.seriesIndex] !== undefined
+                            ? seriesSigns[opts.seriesIndex] : dashCurrSign;
+                        return sign + v.toLocaleString();
+                    }
+                }
+            }
         };
     }
 
@@ -1162,9 +1215,32 @@
         var success   = cssVar('--tblr-success')      || '#2fb344';
         var bodyColor = cssVar('--tblr-body-color')   || '#1d273b';
         var borderCol = cssVar('--tblr-border-color') || '#e6e7e9';
+        var series = [], seriesSigns = [], colors = [];
 
-        var invData = annualYears.map(function (y) { return (annualTotals[y] || {}).invoices || 0; });
-        var pmtData = annualYears.map(function (y) { return (annualTotals[y] || {}).payments || 0; });
+        if (multiCurr) {
+            Object.keys(annualByCurr).forEach(function (k, ci) {
+                var entry  = annualByCurr[k] || {};
+                var meta   = entry.meta || {};
+                var years  = entry.years || {};
+                var sign   = meta.decoded_sign || '';
+                var code   = meta.code || '';
+                var suffix = code ? ' (' + code + ')' : '';
+                var pair   = currPalettes[ci % currPalettes.length];
+                series.push({ name: invoiceLabel + suffix, data: annualYears.map(function (y) { return (years[y] || {}).invoices || 0; }) });
+                seriesSigns.push(sign);
+                colors.push(pair[0]);
+                series.push({ name: paymentLabel + suffix, data: annualYears.map(function (y) { return (years[y] || {}).payments || 0; }) });
+                seriesSigns.push(sign);
+                colors.push(pair[1]);
+            });
+        } else {
+            series = [
+                { name: invoiceLabel, data: annualYears.map(function (y) { return (annualTotals[y] || {}).invoices || 0; }) },
+                { name: paymentLabel, data: annualYears.map(function (y) { return (annualTotals[y] || {}).payments || 0; }) }
+            ];
+            seriesSigns = [dashCurrSign, dashCurrSign];
+            colors = [primary, success];
+        }
 
         return {
             chart: {
@@ -1175,10 +1251,7 @@
                 animations: { enabled: false },
                 background: 'transparent'
             },
-            series: [
-                { name: invoiceLabel, data: invData },
-                { name: paymentLabel, data: pmtData }
-            ],
+            series: series,
             xaxis: {
                 categories: annualYears,
                 labels: { style: { colors: bodyColor } },
@@ -1188,10 +1261,10 @@
             yaxis: {
                 labels: {
                     style: { colors: bodyColor },
-                    formatter: function (v) { return v.toLocaleString(); }
+                    formatter: function (v) { return (seriesSigns[0] || dashCurrSign) + v.toLocaleString(); }
                 }
             },
-            colors: [primary, success],
+            colors: colors,
             plotOptions: {
                 bar: { columnWidth: '60%', borderRadius: 3 }
             },
@@ -1202,7 +1275,16 @@
             },
             dataLabels: { enabled: false },
             grid: { borderColor: borderCol, strokeDashArray: 4 },
-            tooltip: { theme: isDark ? 'dark' : 'light' }
+            tooltip: {
+                theme: isDark ? 'dark' : 'light',
+                y: {
+                    formatter: function (v, opts) {
+                        var sign = seriesSigns[opts && opts.seriesIndex] !== undefined
+                            ? seriesSigns[opts.seriesIndex] : dashCurrSign;
+                        return sign + v.toLocaleString();
+                    }
+                }
+            }
         };
     }
 
@@ -1248,7 +1330,7 @@
                             color: bodyColor,
                             formatter: function (val, opts) {
                                 var idx = opts && opts.seriesIndex != null ? opts.seriesIndex : 0;
-                                return amounts[idx] !== undefined ? amounts[idx].toLocaleString() : val + '%';
+                                return amounts[idx] !== undefined ? dashCurrSign + amounts[idx].toLocaleString() : val + '%';
                             }
                         },
                         total: {
@@ -1257,7 +1339,7 @@
                             color: bodyColor,
                             formatter: function () {
                                 var t = agingData.reduce(function (s, b) { return s + b.amount; }, 0);
-                                return t.toLocaleString();
+                                return dashCurrSign + t.toLocaleString();
                             }
                         }
                     }
@@ -1269,7 +1351,7 @@
                 y: {
                     formatter: function (val, opts) {
                         var idx = opts && opts.seriesIndex != null ? opts.seriesIndex : 0;
-                        return amounts[idx] !== undefined ? amounts[idx].toLocaleString() : val + '%';
+                        return amounts[idx] !== undefined ? dashCurrSign + amounts[idx].toLocaleString() : val + '%';
                     }
                 }
             }

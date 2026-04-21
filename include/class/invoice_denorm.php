@@ -103,13 +103,17 @@ class invoice_denorm
                     ON (p.ac_inv_id = iv.id AND p.domain_id = iv.domain_id)
                 SET p.denorm_invoice_index_name = iv.denorm_index_name,
                     p.denorm_biller_name = iv.denorm_biller_name,
-                    p.denorm_customer_name = iv.denorm_customer_name
+                    p.denorm_customer_name = iv.denorm_customer_name,
+                    p.denorm_currency_sign = COALESCE(iv.currency_sign, \'\'),
+                    p.denorm_currency_code = COALESCE(iv.currency_code, \'\')
                 WHERE p.ac_inv_id = :iid AND p.domain_id = :domain_id';
         } elseif ($db_server === 'pgsql') {
             $sql = 'UPDATE ' . TB_PREFIX . 'payment p SET
                     denorm_invoice_index_name = iv.denorm_index_name,
                     denorm_biller_name = iv.denorm_biller_name,
-                    denorm_customer_name = iv.denorm_customer_name
+                    denorm_customer_name = iv.denorm_customer_name,
+                    denorm_currency_sign = COALESCE(iv.currency_sign, \'\'),
+                    denorm_currency_code = COALESCE(iv.currency_code, \'\')
                 FROM ' . TB_PREFIX . 'invoices iv
                 WHERE p.ac_inv_id = iv.id AND p.domain_id = iv.domain_id
                 AND p.ac_inv_id = :iid AND p.domain_id = :domain_id';
@@ -120,7 +124,11 @@ class invoice_denorm
                 denorm_biller_name = (SELECT iv.denorm_biller_name FROM ' . TB_PREFIX . 'invoices iv
                     WHERE iv.id = p.ac_inv_id AND iv.domain_id = p.domain_id),
                 denorm_customer_name = (SELECT iv.denorm_customer_name FROM ' . TB_PREFIX . 'invoices iv
-                    WHERE iv.id = p.ac_inv_id AND iv.domain_id = p.domain_id)
+                    WHERE iv.id = p.ac_inv_id AND iv.domain_id = p.domain_id),
+                denorm_currency_sign = COALESCE((SELECT iv.currency_sign FROM ' . TB_PREFIX . 'invoices iv
+                    WHERE iv.id = p.ac_inv_id AND iv.domain_id = p.domain_id), \'\'),
+                denorm_currency_code = COALESCE((SELECT iv.currency_code FROM ' . TB_PREFIX . 'invoices iv
+                    WHERE iv.id = p.ac_inv_id AND iv.domain_id = p.domain_id), \'\')
                 WHERE p.ac_inv_id = :iid AND p.domain_id = :domain_id';
         }
         dbQuery($sql, ':iid', $invoiceId, ':domain_id', $domainId);

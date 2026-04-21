@@ -7,6 +7,8 @@ $__rpt_snap = array_keys($bladeView->getAssigns());
 SELECT
         c.id AS cid
       , c.name AS customer
+      , iv.currency_sign
+      , iv.currency_code
       , SUM(iv.denorm_invoice_total) AS inv_total
       , SUM(iv.denorm_amount_paid) AS inv_paid
       , SUM(iv.denorm_amount_owing) AS inv_owing
@@ -17,7 +19,7 @@ FROM
 WHERE
           c.domain_id = :domain_id
 GROUP BY
-	c.id, c.name
+	c.id, c.name, iv.currency_sign, iv.currency_code
 ORDER BY
 	inv_owing DESC;
 ';

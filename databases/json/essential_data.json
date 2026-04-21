@@ -134,6 +134,18 @@
             "pt_enabled": "1"
         }
     ],
+    "si_payment_terms": [
+        {"term_id": "1", "term_code": "NET_7", "term_label": "Net 7", "calc_kind": "NET_DAYS", "param_int": "7", "sort_order": "10"},
+        {"term_id": "2", "term_code": "NET_10", "term_label": "Net 10", "calc_kind": "NET_DAYS", "param_int": "10", "sort_order": "20"},
+        {"term_id": "3", "term_code": "NET_14", "term_label": "Net 14", "calc_kind": "NET_DAYS", "param_int": "14", "sort_order": "30"},
+        {"term_id": "4", "term_code": "NET_30", "term_label": "Net 30", "calc_kind": "NET_DAYS", "param_int": "30", "sort_order": "40"},
+        {"term_id": "5", "term_code": "NET_60", "term_label": "Net 60", "calc_kind": "NET_DAYS", "param_int": "60", "sort_order": "50"},
+        {"term_id": "6", "term_code": "NET_90", "term_label": "Net 90", "calc_kind": "NET_DAYS", "param_int": "90", "sort_order": "60"},
+        {"term_id": "7", "term_code": "EOM", "term_label": "End of month (EOM)", "calc_kind": "EOM", "param_int": "", "sort_order": "70"},
+        {"term_id": "8", "term_code": "NET_30_EOM", "term_label": "Net 30 EOM (EOM + 30 days)", "calc_kind": "EOM_PLUS_DAYS", "param_int": "30", "sort_order": "80"},
+        {"term_id": "9", "term_code": "EOM_45", "term_label": "45 EOM (45 days after month end)", "calc_kind": "EOM_PLUS_DAYS", "param_int": "45", "sort_order": "90"},
+        {"term_id": "10", "term_code": "MFI_15", "term_label": "15 MFI (15th of month following invoice)", "calc_kind": "MFI_DAY", "param_int": "15", "sort_order": "100"}
+    ],
     "si_preferences": [
         {
             "pref_id": "1",
@@ -155,6 +167,7 @@
             "index_group": "1",
             "currency_code": "USD",
             "currency_position": "left",
+            "payment_term_id": "3",
             "pref_enabled": "1"
         },
         {
@@ -177,6 +190,7 @@
             "index_group": "1",
             "currency_code": "USD",
             "currency_position": "left",
+            "payment_term_id": "3",
             "pref_enabled": "1"
         },
         {
@@ -199,6 +213,7 @@
             "index_group": "1",
             "currency_code": "USD",
             "currency_position": "left",
+            "payment_term_id": "3",
             "pref_enabled": "1"
         },
         {
@@ -221,6 +236,7 @@
             "index_group": "1",
             "currency_code": "USD",
             "currency_position": "left",
+            "payment_term_id": "3",
             "pref_enabled": "1"
         }
     ],

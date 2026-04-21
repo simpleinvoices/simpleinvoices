@@ -22,7 +22,7 @@
 		// preload immediately so results are ready without any interaction.
 		var isLargeDataset = (typeof si_conf_large_dataset !== 'undefined') && si_conf_large_dataset;
 
-		var ts = new TomSelect(selectEl, {
+		var tsOptions = {
 			valueField:   'id',
 			labelField:   'description',
 			searchField:  ['description'],
@@ -37,8 +37,6 @@
 					.catch(function () { callback(); });
 			},
 
-			// Directly call the existing product-change handler instead of
-			// relying on a native DOM change event (Tom Select may not fire one).
 			onChange: function (value) {
 				// Keep wrapper validation classes in sync after a failed submit.
 				// Invoice forms skip was-validated and set is-invalid directly, so
@@ -66,7 +64,26 @@
 					invoice_product_change(value, row, qEl ? qEl.value : '');
 				}
 			}
-		});
+		};
+
+		// When the add-product modal is present, wire up a "create" option so
+		// typing a name that doesn't match shows "+ Add '<name>' as new product".
+		var addProductModal = document.getElementById('modal-add-product');
+		if (addProductModal) {
+			tsOptions.create = function (input, callback) {
+				window._siProductModalCallback = callback;
+				var descEl = document.getElementById('si-new-product-description');
+				if (descEl) descEl.value = input;
+				bootstrap.Modal.getOrCreateInstance(addProductModal).show();
+			};
+			tsOptions.render = {
+				option_create: function (data, escape) {
+					return '<div class="create d-flex align-items-center gap-1"><i class="ti ti-plus"></i> Add <strong>' + escape(data.input) + '</strong> as new product</div>';
+				}
+			};
+		}
+
+		var ts = new TomSelect(selectEl, tsOptions);
 
 		// Tom Select copies all classes from the original <select> to its wrapper
 		// div, including any validation classes.  The wrapper has no .value
@@ -75,6 +92,21 @@
 		// <select> (kept in sync by Tom Select) is what the validator should check.
 		if (ts.wrapper) {
 			ts.wrapper.classList.remove('validate[required]');
+		}
+
+		// When the select lives inside a Bootstrap input-group (so a "+ Add" button
+		// sits flush against it), Tom Select's wrapper must flex like a form-control.
+		// Bootstrap's input-group styles only target .form-control/.form-select as
+		// direct children, so we patch the wrapper and its inner control manually.
+		if (ts.wrapper && selectEl.closest('.input-group')) {
+			ts.wrapper.style.flex     = '1 1 auto';
+			ts.wrapper.style.width    = 'auto';
+			ts.wrapper.style.minWidth = '0';
+			var ctrl = ts.wrapper.querySelector('.ts-control');
+			if (ctrl) {
+				ctrl.style.borderTopRightRadius    = '0';
+				ctrl.style.borderBottomRightRadius = '0';
+			}
 		}
 	}
 

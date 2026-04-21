@@ -195,7 +195,8 @@ foreach ($payments as $row) {
 	$xml .= "<cell><![CDATA[".$row['index_name']."]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['cname']."]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['bname']."]]></cell>";
-	$xml .= "<cell><![CDATA[".siLocal::number($row['ac_amount'])."]]></cell>";
+	$amt_cell = htmlspecialchars(CurrencySignHelper::forDisplay($row['denorm_currency_sign'] ?? ''), ENT_QUOTES, 'UTF-8') . siLocal::number($row['ac_amount']);
+	$xml .= "<cell><![CDATA[".$amt_cell."]]></cell>";
 	$xml .= "<cell><![CDATA[".siLocal::date($row['date'])."]]></cell>";
 	$xml .= "</row>";
 }

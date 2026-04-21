@@ -4,7 +4,7 @@ if (($__rpt = report_cache_get($__rpt_name, (int)$auth_session->domain_id)) !== 
 $__rpt_snap = array_keys($bladeView->getAssigns());
 
 /*
- * Aging totals by bucket — uses si_invoices denorm_amount_* (invoice_denorm).
+ * Aging totals by bucket and currency — uses si_invoices denorm_amount_* (invoice_denorm).
  */
 
 global $db_server;
@@ -14,7 +14,7 @@ $bucket_order = ['0-14' => 0, '15-30' => 1, '31-60' => 2, '61-90' => 3, '90+' =>
 $aging_sql = '';
 switch ($db_server) {
     case 'pgsql':
-        $aging_sql = "SELECT bucket,
+        $aging_sql = "SELECT bucket, currency_sign,
             SUM(inv_total) AS inv_total,
             SUM(inv_paid) AS inv_paid,
             SUM(owing) AS inv_owing
@@ -26,6 +26,8 @@ switch ($db_server) {
                 WHEN (CURRENT_DATE - iv.date::date) <= 90 THEN '61-90'
                 ELSE '90+'
             END AS bucket,
+            iv.currency_sign,
+            iv.currency_code,
             iv.denorm_invoice_total AS inv_total,
             iv.denorm_amount_paid AS inv_paid,
             iv.denorm_amount_owing AS owing
@@ -34,10 +36,10 @@ switch ($db_server) {
             WHERE pr.status = 1 AND iv.domain_id = :domain_id
               AND iv.denorm_amount_owing > 0
         ) x
-        GROUP BY bucket";
+        GROUP BY bucket, currency_sign, currency_code";
         break;
     case 'sqlite':
-        $aging_sql = "SELECT bucket,
+        $aging_sql = "SELECT bucket, currency_sign,
             SUM(inv_total) AS inv_total,
             SUM(inv_paid) AS inv_paid,
             SUM(owing) AS inv_owing
@@ -49,6 +51,8 @@ switch ($db_server) {
                 WHEN CAST((julianday('now') - julianday(date(iv.date))) AS INTEGER) <= 90 THEN '61-90'
                 ELSE '90+'
             END AS bucket,
+            iv.currency_sign,
+            iv.currency_code,
             iv.denorm_invoice_total AS inv_total,
             iv.denorm_amount_paid AS inv_paid,
             iv.denorm_amount_owing AS owing
@@ -57,10 +61,10 @@ switch ($db_server) {
             WHERE pr.status = 1 AND iv.domain_id = :domain_id
               AND iv.denorm_amount_owing > 0
         ) x
-        GROUP BY bucket";
+        GROUP BY bucket, currency_sign, currency_code";
         break;
     default:
-        $aging_sql = "SELECT bucket,
+        $aging_sql = "SELECT bucket, currency_sign,
             SUM(inv_total) AS inv_total,
             SUM(inv_paid) AS inv_paid,
             SUM(owing) AS inv_owing
@@ -72,6 +76,8 @@ switch ($db_server) {
                 WHEN DATEDIFF(CURDATE(), DATE(iv.date)) <= 90 THEN '61-90'
                 ELSE '90+'
             END AS bucket,
+            iv.currency_sign,
+            iv.currency_code,
             iv.denorm_invoice_total AS inv_total,
             iv.denorm_amount_paid AS inv_paid,
             iv.denorm_amount_owing AS owing
@@ -80,42 +86,39 @@ switch ($db_server) {
             WHERE pr.status = 1 AND iv.domain_id = :domain_id
               AND iv.denorm_amount_owing > 0
         ) x
-        GROUP BY bucket";
+        GROUP BY bucket, currency_sign, currency_code";
         break;
 }
 
-$by_bucket = [];
+// Build flat array of rows; sort by bucket order then currency.
+$rows = [];
+$sum_total = $sum_paid = $sum_owing = 0.0;
 foreach (dbQuery($aging_sql, ':domain_id', $auth_session->domain_id)->fetchAll(PDO::FETCH_ASSOC) as $row) {
     $b = $row['bucket'] ?? '';
-    if ($b !== '') {
-        $by_bucket[$b] = [
-            'inv_total' => (float) ($row['inv_total'] ?? 0),
-            'inv_paid'  => (float) ($row['inv_paid'] ?? 0),
-            'inv_owing' => (float) ($row['inv_owing'] ?? 0),
-        ];
+    if ($b === '') {
+        continue;
     }
-}
-
-$sum_total = $sum_paid = $sum_owing = 0.0;
-$periods   = [];
-foreach (array_keys($bucket_order) as $b) {
-    $r = $by_bucket[$b] ?? ['inv_total' => 0, 'inv_paid' => 0, 'inv_owing' => 0];
-    $periods[$b] = [
-        'aging'     => $b,
-        'inv_total' => $r['inv_total'],
-        'inv_paid'  => $r['inv_paid'],
-        'inv_owing' => $r['inv_owing'],
+    $rows[] = [
+        'aging'         => $b,
+        'currency_sign' => $row['currency_sign'] ?? '',
+        'currency_code' => $row['currency_code'] ?? '',
+        'inv_total'     => (float) ($row['inv_total'] ?? 0),
+        'inv_paid'      => (float) ($row['inv_paid'] ?? 0),
+        'inv_owing'     => (float) ($row['inv_owing'] ?? 0),
     ];
-    $sum_total += $r['inv_total'];
-    $sum_paid += $r['inv_paid'];
-    $sum_owing += $r['inv_owing'];
+    $sum_total += (float) ($row['inv_total'] ?? 0);
+    $sum_paid  += (float) ($row['inv_paid']  ?? 0);
+    $sum_owing += (float) ($row['inv_owing'] ?? 0);
 }
 
-uksort($periods, function ($a, $b) use ($bucket_order) {
-    return $bucket_order[$a] - $bucket_order[$b];
+usort($rows, function ($a, $b) use ($bucket_order) {
+    $bo = ($bucket_order[$a['aging']] ?? 99) <=> ($bucket_order[$b['aging']] ?? 99);
+    if ($bo !== 0) return $bo;
+    $cc = strcmp($a['currency_code'] ?? '', $b['currency_code'] ?? '');
+    return $cc !== 0 ? $cc : strcmp($a['currency_sign'] ?? '', $b['currency_sign'] ?? '');
 });
 
-$bladeView->assign('data', array_values($periods));
+$bladeView->assign('data', $rows);
 $bladeView->assign('sum_total', $sum_total);
 $bladeView->assign('sum_paid', $sum_paid);
 $bladeView->assign('sum_owing', $sum_owing);

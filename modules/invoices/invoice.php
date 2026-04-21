@@ -90,6 +90,7 @@ $bladeView -> assign("customers",$customers);
 $bladeView -> assign("taxes",$taxes);
 $bladeView -> assign("products",$products);
 $bladeView -> assign("preferences",$preferences);
+$bladeView -> assign("paymentTerms", getPaymentTerms());
 $bladeView -> assign("dynamic_line_items",$dynamic_line_items);
 $bladeView -> assign("show_custom_field",$show_custom_field);
 

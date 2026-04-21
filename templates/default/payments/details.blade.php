@@ -76,7 +76,7 @@
 						</td>
 						<td>{{ $payment['date'] ?? '' }}</td>
 						<td>{{ $paymentType['pt_description'] ?? '' }}</td>
-						<td class="text-end fw-semibold">{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }}{{ siLocal::number($payment['ac_amount'] ?? 0) }}</td>
+						<td class="text-end fw-semibold">{{ CurrencySignHelper::forDisplay($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }}{{ siLocal::number($payment['ac_amount'] ?? 0) }}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -88,7 +88,7 @@
 				<table class="table table-sm table-borderless mb-0">
 					<tr>
 						<td class="text-secondary">{{ $LANG['amount'] ?? '' }}</td>
-						<td class="text-end fw-bold fs-4">{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }}{{ siLocal::number($payment['ac_amount'] ?? 0) }}</td>
+						<td class="text-end fw-bold fs-4">{{ CurrencySignHelper::forDisplay($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }}{{ siLocal::number($payment['ac_amount'] ?? 0) }}</td>
 					</tr>
 				</table>
 			</div>

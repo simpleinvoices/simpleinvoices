@@ -101,7 +101,7 @@
 					<td>{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $invoice['index_id'] ?? $payment['ac_inv_id'] ?? '' }}</td>
 					<td>{{ $payment['date'] ?? '' }}</td>
 					<td>{{ $paymentType['pt_description'] ?? '' }}</td>
-					<td class="text-end">{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }}{{ siLocal::number($payment['ac_amount'] ?? 0) }}</td>
+					<td class="text-end">{{ CurrencySignHelper::forDisplay($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }}{{ siLocal::number($payment['ac_amount'] ?? 0) }}</td>
 				</tr>
 			</tbody>
 		</table>
@@ -109,7 +109,7 @@
 		{{-- Total --}}
 		<div class="si-print-total">
 			<span class="text-secondary">{{ $LANG['amount'] ?? '' }}</span>
-			<span class="amount">{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }}{{ siLocal::number($payment['ac_amount'] ?? 0) }}</span>
+			<span class="amount">{{ CurrencySignHelper::forDisplay($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }}{{ siLocal::number($payment['ac_amount'] ?? 0) }}</span>
 		</div>
 
 		@if(!empty($payment['online_payment_id']))

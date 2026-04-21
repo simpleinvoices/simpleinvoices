@@ -186,6 +186,24 @@ class invoice {
 
 	$invoice['calc_date'] = date('Y-m-d', strtotime( $invoice['date'] ) );
 	$invoice['date'] = siLocal::date( $invoice['date'] );
+
+	$rawDue = $invoice['due_date'] ?? null;
+	$invoice['calc_due_date'] = (!empty($rawDue) && $rawDue !== '0000-00-00') ? date('Y-m-d', strtotime($rawDue)) : '';
+	if ($invoice['calc_due_date'] !== '') {
+		$invoice['due_date'] = siLocal::date($rawDue);
+	} else {
+		$invoice['due_date'] = '';
+	}
+	$invoice['payment_term_label'] = '';
+	$invoice['payment_term_code'] = '';
+	if (!empty($invoice['payment_term_id']) && function_exists('getPaymentTerm')) {
+		$pt = getPaymentTerm($invoice['payment_term_id']);
+		if ($pt) {
+			$invoice['payment_term_label'] = $pt['term_label'];
+			$invoice['payment_term_code'] = $pt['term_code'] ?? '';
+		}
+	}
+
 	$invoice['total'] = getInvoiceTotal($invoice['id'], $domain_id);
 	$invoice['gross'] = $this->getInvoiceGross($invoice['id'], $this->domain_id);
 	$invoice['paid'] = calc_invoice_paid($invoice['id'], $domain_id);
@@ -412,7 +430,8 @@ class invoice {
                      iv.type_id AS type_id,
                      iv.denorm_preference_description AS preference,
                      iv.denorm_preference_status AS status,
-                     iv.denorm_index_name AS index_name
+                     iv.denorm_index_name AS index_name,
+                     iv.currency_sign
                 FROM " . TB_PREFIX . "invoices iv
                 WHERE FALSE";
                     } else {
@@ -431,7 +450,8 @@ class invoice {
                      iv.type_id AS type_id,
                      iv.denorm_preference_description AS preference,
                      iv.denorm_preference_status AS status,
-                     iv.denorm_index_name AS index_name
+                     iv.denorm_index_name AS index_name,
+                     iv.currency_sign
                 FROM " . TB_PREFIX . "invoices iv
                 WHERE iv.domain_id = :domain_id
                     AND iv.id IN ($inList)
@@ -458,7 +478,8 @@ class invoice {
                      iv.type_id AS type_id,
                      iv.denorm_preference_description AS preference,
                      iv.denorm_preference_status AS status,
-                     iv.denorm_index_name AS index_name
+                     iv.denorm_index_name AS index_name,
+                     iv.currency_sign
                 FROM " . TB_PREFIX . "invoices iv
                 WHERE iv.domain_id = :domain_id
                     $where";
@@ -497,7 +518,8 @@ class invoice {
                      iv.type_id AS type_id,
                      iv.denorm_preference_description AS preference,
                      iv.denorm_preference_status AS status,
-                     iv.denorm_index_name AS index_name
+                     iv.denorm_index_name AS index_name,
+                     iv.currency_sign
                 FROM " . TB_PREFIX . "invoices iv
                 WHERE 0";
                     } else {
@@ -516,7 +538,8 @@ class invoice {
                      iv.type_id AS type_id,
                      iv.denorm_preference_description AS preference,
                      iv.denorm_preference_status AS status,
-                     iv.denorm_index_name AS index_name
+                     iv.denorm_index_name AS index_name,
+                     iv.currency_sign
                 FROM " . TB_PREFIX . "invoices iv
                 WHERE iv.domain_id = :domain_id
                     AND iv.id IN ($inList)
@@ -543,7 +566,8 @@ class invoice {
                      iv.type_id AS type_id,
                      iv.denorm_preference_description AS preference,
                      iv.denorm_preference_status AS status,
-                     iv.denorm_index_name AS index_name
+                     iv.denorm_index_name AS index_name,
+                     iv.currency_sign
                 FROM " . TB_PREFIX . "invoices iv
                 WHERE iv.domain_id = :domain_id
                     $where";
@@ -592,7 +616,8 @@ class invoice {
                      iv.type_id AS type_id,
                      iv.denorm_preference_description AS preference,
                      iv.denorm_preference_status AS status,
-                     iv.denorm_index_name AS index_name
+                     iv.denorm_index_name AS index_name,
+                     iv.currency_sign
                 FROM " . TB_PREFIX . "invoices iv
                 WHERE iv.domain_id = :domain_id AND 1 = 0";
                     } else {
@@ -611,7 +636,8 @@ class invoice {
                      iv.type_id AS type_id,
                      iv.denorm_preference_description AS preference,
                      iv.denorm_preference_status AS status,
-                     iv.denorm_index_name AS index_name
+                     iv.denorm_index_name AS index_name,
+                     iv.currency_sign
                 FROM " . TB_PREFIX . "invoices iv
                 WHERE iv.domain_id = :domain_id
                     AND iv.id IN ($inList)
@@ -632,7 +658,8 @@ class invoice {
                      iv.type_id AS type_id,
                      iv.denorm_preference_description AS preference,
                      iv.denorm_preference_status AS status,
-                     iv.denorm_index_name AS index_name
+                     iv.denorm_index_name AS index_name,
+                     iv.currency_sign
                 FROM " . TB_PREFIX . "invoices iv
                 WHERE iv.domain_id = :domain_id
                     $where";

@@ -167,6 +167,24 @@
 				<td nowrap class="si-modern-muted">{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['date'] ?? '' }}:</td>
 				<td class="si-modern-summary-val" align="right" colspan="3">{{ $invoice['date'] }}</td>
 		</tr>
+		@if(!empty($invoice['payment_term_id']) || !empty($invoice['payment_term_code']) || !empty($invoice['payment_term_label']))
+		<tr>
+				<td nowrap class="si-modern-muted">{{ $LANG['payment_term_code'] ?? 'Payment term code' }}:</td>
+				<td class="si-modern-summary-val" align="right" colspan="3">{{ !empty($invoice['payment_term_code']) ? $invoice['payment_term_code'] : ($invoice['payment_term_label'] ?? '') }}</td>
+		</tr>
+		@endif
+		@if(!empty($invoice['payment_term_code']) && !empty($invoice['payment_term_label']))
+		<tr>
+				<td nowrap class="si-modern-muted">{{ $LANG['payment_terms'] ?? 'Payment terms' }}:</td>
+				<td class="si-modern-summary-val" align="right" colspan="3">{{ $invoice['payment_term_label'] }}</td>
+		</tr>
+		@endif
+		@if(!empty($invoice['calc_due_date']))
+		<tr>
+				<td nowrap class="si-modern-muted">{{ $LANG['due_date'] ?? 'Due date' }}:</td>
+				<td class="si-modern-summary-val" align="right" colspan="3">{{ $invoice['due_date'] ?? '' }}</td>
+		</tr>
+		@endif
 	<!-- Show the Invoice Custom Fields if valid -->
 		@if(($invoice['custom_field1'] ?? null) != null)
 		<tr>
@@ -195,15 +213,15 @@
 
 		<tr>
 				<td class="si-modern-muted" >{{ $LANG['total'] ?? '' }}: </td>
-				<td class="si-modern-summary-val" align="right" colspan="3">{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['total'] ?? '')|siLocal_number }}</td>
+				<td class="si-modern-summary-val" align="right" colspan="3">{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['total'] ?? '')|siLocal_number }}</td>
 		</tr>
 		<tr>
 				<td class="si-modern-muted">{{ $LANG['paid'] ?? '' }}:</td>
-				<td class="si-modern-summary-val" align="right" colspan="3" >{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['paid'] ?? '')|siLocal_number }}</td>
+				<td class="si-modern-summary-val" align="right" colspan="3" >{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['paid'] ?? '')|siLocal_number }}</td>
 		</tr>
 		<tr>
 				<td nowrap class="si-modern-owing-label">{{ $LANG['owing'] ?? '' }}:</td>
-				<td class="si-modern-owing-val" align="right" colspan="3" >{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['owing'] ?? '')|siLocal_number }}</td>
+				<td class="si-modern-owing-val" align="right" colspan="3" >{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['owing'] ?? '')|siLocal_number }}</td>
 		</tr>
 
 	</table>
@@ -238,8 +256,8 @@
 			<tr class="si-modern-item-row" >
 				<td class="col-qty">{{ ($invoiceItem['quantity'] ?? '')|siLocal_number_trim }}</td>
 				<td class="" colspan="3">{!! outhtml($invoiceItem['product']['description'] ?? '') !!}</td>
-				<td class="si-modern-num" align="right">{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoiceItem['unit_price'] ?? '')|siLocal_number }}</td>
-				<td class="si-modern-num" align="right">{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoiceItem['gross_total'] ?? '')|siLocal_number }}</td>
+				<td class="si-modern-num" align="right">{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoiceItem['unit_price'] ?? '')|siLocal_number }}</td>
+				<td class="si-modern-num" align="right">{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoiceItem['gross_total'] ?? '')|siLocal_number }}</td>
 			</tr>
 					@if(($invoiceItem['attribute'] ?? null) != null)
                             <tr class="si_product_attribute si-modern-attr">
@@ -251,7 +269,7 @@
                                        @if(($v['visible'] ?? null) == true )
                                         <td class="si_product_attribute">
                                             @if(($v['type'] ?? null) == 'decimal')
-                                              {{ $v['name'] }}: {{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($v['value'] ?? '')|siLocal_number }};
+                                              {{ $v['name'] }}: {{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($v['value'] ?? '')|siLocal_number }};
                                              @elseif(($v['value'] ?? '') != '')
                                                {{ $v['name'] }}: {{ $v['value'] }};
                                             @endif
@@ -336,8 +354,8 @@
 				<td class=""></td>
 				<td class=""></td>
 				<td class=""></td>
-				<td align="right" class="si-modern-num">{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoiceItem['unit_price'] ?? '')|siLocal_number }}</td>
-				<td align="right" class="si-modern-num">{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoiceItem['total'] ?? '')|siLocal_number }}</td>
+				<td align="right" class="si-modern-num">{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoiceItem['unit_price'] ?? '')|siLocal_number }}</td>
+				<td align="right" class="si-modern-num">{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoiceItem['total'] ?? '')|siLocal_number }}</td>
 			</tr>
 			@endforeach
 	@endif
@@ -381,7 +399,7 @@
 	<tr>
         <td colspan="2"></td>
 		<td colspan="3" align="right" class="si-modern-muted">{{ $LANG['sub_total'] ?? '' }}&nbsp;</td>
-		<td colspan="1" align="right" class="si-modern-num">@if($invoice_number_of_taxes > 1)<u>@endif{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['gross'] ?? '')|siLocal_number }}@if($invoice_number_of_taxes > 1)</u>@endif</td>
+		<td colspan="1" align="right" class="si-modern-num">@if($invoice_number_of_taxes > 1)<u>@endif{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['gross'] ?? '')|siLocal_number }}@if($invoice_number_of_taxes > 1)</u>@endif</td>
     </tr>
     @endif
 	@if($invoice_number_of_taxes > 1 )
@@ -395,7 +413,7 @@
     	<tr>
 	        <td colspan="2"></td>
 			<td colspan="3" align="right" class="si-modern-muted">{{ $line['tax_name'] ?? '' }}&nbsp;</td>
-			<td colspan="1" align="right" class="si-modern-num">{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ siLocal::number($line['tax_amount'] ?? 0) }}</td>
+			<td colspan="1" align="right" class="si-modern-num">{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ siLocal::number($line['tax_amount'] ?? 0) }}</td>
 	    </tr>
 	    @endif
 	@endforeach
@@ -404,7 +422,7 @@
 	<tr>
         <td colspan="2"></td>
 		<td colspan="3" align="right" class="si-modern-muted">{{ $LANG['tax_total'] ?? '' }}&nbsp;</td>
-		<td colspan="1" align="right" class="si-modern-num"><u>{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['total_tax'] ?? '')|siLocal_number }}</u></td>
+		<td colspan="1" align="right" class="si-modern-num"><u>{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['total_tax'] ?? '')|siLocal_number }}</u></td>
     </tr>
     @endif
 	@if($invoice_number_of_taxes > 1)
@@ -415,7 +433,7 @@
     <tr class="si-modern-total-row">
         <td colspan="2"></td>
 		<td colspan="3" align="right"><b>{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['amount'] ?? '' }}&nbsp;</b></td>
-		<td colspan="1" align="right"><span class="si-modern-total-amount">{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['total'] ?? '')|siLocal_number }}</span></td>
+		<td colspan="1" align="right"><span class="si-modern-total-amount">{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['total'] ?? '')|siLocal_number }}</span></td>
     </tr>
     {{-- tax section - end --}}
 	<tr>
@@ -450,7 +468,7 @@
 			{online_payment_link
 				type=$preference['include_online_payment']
 				invoice=$invoice['id']
-				amount=$invoice['owing'] currency_code=$preference['currency_code']
+				amount=$invoice['owing'] currency_code=($invoice['currency_code'] ?? $preference['currency_code'] ?? '')
 				domain_id=$invoice['domain_id']
 			}
 

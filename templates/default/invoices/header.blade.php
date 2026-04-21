@@ -27,13 +27,13 @@
 		<a class="cluetip text-secondary" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_invoice_types" title="{{ $LANG['invoice_type'] ?? '' }}" aria-label="{{ $LANG['invoice_type'] ?? '' }}"><i class="ti ti-help"></i></a>
 	</div>
 
-	<div class="row g-3 mb-3">
+	<div class="row g-3 mb-3 si-invoice-header-row">
 		<div class="col-md-4">
-			<label class="form-label">{{ $LANG['biller'] ?? '' }}</label>
+			<label class="form-label mb-1">{{ $LANG['biller'] ?? '' }}</label>
 			@if($billers == null)
 				<p class="text-muted mb-0"><em>{{ $LANG['no_billers'] ?? '' }}</em></p>
 			@else
-				<select name="biller_id" class="form-select" required placeholder="{{ $LANG['biller'] ?? 'Biller' }}">
+				<select name="biller_id" class="form-select form-select-sm" required placeholder="{{ $LANG['biller'] ?? 'Biller' }}">
 					<option value=""></option>
 					@foreach(($billers ?? []) as $biller)
 						<option @if($biller['id'] == ($defaults['biller'] ?? '')) selected @endif value="{{ $biller['id'] ?? '' }}">{{ $biller['name'] ?? '' }}</option>
@@ -42,23 +42,28 @@
 			@endif
 		</div>
 		<div class="col-md-5">
-			<label class="form-label">{{ $LANG['customer'] ?? '' }}</label>
+			<label class="form-label mb-1">{{ $LANG['customer'] ?? '' }}</label>
 			@if($customers == null)
 				<p class="text-muted mb-0"><em>{{ $LANG['no_customers'] ?? '' }}</em></p>
 			@else
-				<select name="customer_id" class="form-select" required placeholder="{{ $LANG['customer'] ?? 'Customer' }}">
-					<option value=""></option>
-					@foreach(($customers ?? []) as $customer)
-						<option @if($customer['id'] == ($defaults['customer'] ?? '')) selected @endif value="{{ $customer['id'] ?? '' }}">{{ $customer['name'] ?? '' }}</option>
-					@endforeach
-				</select>
+				<div class="input-group input-group-sm">
+					<select name="customer_id" class="form-select form-select-sm" required placeholder="{{ $LANG['customer'] ?? 'Customer' }}">
+						<option value=""></option>
+						@foreach(($customers ?? []) as $customer)
+							<option @if($customer['id'] == ($defaults['customer'] ?? '')) selected @endif value="{{ $customer['id'] ?? '' }}">{{ $customer['name'] ?? '' }}</option>
+						@endforeach
+					</select>
+					<button type="button" class="btn btn-outline-secondary si-add-customer-btn" title="{{ $LANG['add_customer'] ?? 'Add new customer' }}">
+						<i class="ti ti-user-plus"></i>
+					</button>
+				</div>
 			@endif
 		</div>
 		<div class="col-md-3">
-			<label class="form-label">{{ $LANG['date_formatted'] ?? '' }}</label>
+			<label class="form-label mb-1">{{ $LANG['date_formatted'] ?? '' }}</label>
 			<div class="input-icon">
 				<span class="input-icon-addon"><i class="ti ti-calendar"></i></span>
-				<input type="text" class="form-control date-picker" name="date" id="date1"
+				<input type="text" class="form-control form-control-sm date-picker" name="date" id="date1"
 					required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
 					@if(get('date'))
 						value="{{ get('date') }}"

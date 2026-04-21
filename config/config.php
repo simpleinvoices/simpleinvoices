@@ -27,7 +27,6 @@ email.username                      =
 email.password                      = 
 email.smtpport                      = 25
 email.secure                        = 
-email.ack                           = false
 email.use_local_sendmail            = false
 
 ; 32-byte key for libsodium-encrypted gateway secrets in si_biller (64 hex chars, base64 of 32 bytes, or raw 32 bytes). Leave empty to store secrets as plaintext. Docker: SI_GATEWAY_SECRETS_KEY.

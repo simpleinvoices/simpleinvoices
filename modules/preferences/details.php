@@ -14,6 +14,15 @@ $preference = getPreference($preference_id);
 si_check_record_access($preference);
 $index_group = getPreference($preference['index_group']);
 
+$paymentTerms = getPaymentTerms();
+$prefPaymentTermLabel = '';
+if (!empty($preference['payment_term_id'])) {
+	$pt = getPaymentTerm($preference['payment_term_id']);
+	if ($pt) {
+		$prefPaymentTermLabel = $pt['term_label'];
+	}
+}
+
 $preferences = getActivePreferences();
 $defaults = getSystemDefaults();
 $status = array(array('id'=>'0','status'=>$LANG['draft']), array('id'=>'1','status'=>$LANG['real']));
@@ -23,6 +32,8 @@ $localelist = LocaleHelper::getLocaleList();
 $languageList = getLanguageList();
 
 $bladeView->assign('preference',$preference);
+$bladeView->assign('paymentTerms',$paymentTerms);
+$bladeView->assign('prefPaymentTermLabel',$prefPaymentTermLabel);
 $bladeView->assign('defaults',$defaults);
 $bladeView->assign('index_group',$index_group);
 $bladeView->assign('preferences',$preferences);

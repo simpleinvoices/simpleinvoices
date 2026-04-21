@@ -312,6 +312,100 @@ function getPreference($id, $domain_id='') {
 	return $record;
 }
 
+function getPaymentTerms() {
+	$sql = "SELECT * FROM ".TB_PREFIX."payment_terms ORDER BY sort_order ASC, term_id ASC";
+	$sth = dbQuery($sql);
+	return $sth->fetchAll();
+}
+
+function getPaymentTerm($id) {
+	if ($id === null || $id === '' || (int)$id <= 0) {
+		return false;
+	}
+	$sql = "SELECT * FROM ".TB_PREFIX."payment_terms WHERE term_id = :id";
+	$sth = dbQuery($sql, ':id', (int)$id);
+	$row = $sth->fetch();
+	return $row ?: false;
+}
+
+/**
+ * @return list<string>
+ */
+function getPaymentTermCalcKindCodes(): array {
+	return ['NET_DAYS', 'EOM', 'EOM_PLUS_DAYS', 'MFI_DAY'];
+}
+
+function paymentTermCodeExists(string $code, ?int $excludeTermId = null): bool {
+	$sql = "SELECT 1 FROM ".TB_PREFIX."payment_terms WHERE term_code = :code";
+	if ($excludeTermId !== null && $excludeTermId > 0) {
+		$sql .= " AND term_id <> :tid";
+		$sth = dbQuery($sql, ':code', $code, ':tid', $excludeTermId);
+	} else {
+		$sth = dbQuery($sql, ':code', $code);
+	}
+	return (bool) $sth->fetch();
+}
+
+/**
+ * @param array{term_code:string,term_label:string,calc_kind:string,param_int:int|null,sort_order:int} $row
+ */
+function insertPaymentTerm(array $row): bool {
+	$code = $row['term_code'];
+	$label = $row['term_label'];
+	$kind = $row['calc_kind'];
+	$param = $row['param_int'];
+	$sort = (int) $row['sort_order'];
+
+	$sql = "INSERT INTO ".TB_PREFIX."payment_terms (term_code, term_label, calc_kind, param_int, sort_order)"
+		." VALUES (:code, :label, :kind, :param, :sort)";
+	return (bool) dbQuery($sql,
+		':code', $code,
+		':label', $label,
+		':kind', $kind,
+		':param', $param,
+		':sort', $sort
+	);
+}
+
+/**
+ * @param array{term_code:string,term_label:string,calc_kind:string,param_int:int|null,sort_order:int} $row
+ */
+function updatePaymentTerm(int $termId, array $row): bool {
+	$sql = "UPDATE ".TB_PREFIX."payment_terms SET"
+		." term_code = :code,"
+		." term_label = :label,"
+		." calc_kind = :kind,"
+		." param_int = :param,"
+		." sort_order = :sort"
+		." WHERE term_id = :id";
+	return (bool) dbQuery($sql,
+		':code', $row['term_code'],
+		':label', $row['term_label'],
+		':kind', $row['calc_kind'],
+		':param', $row['param_int'],
+		':sort', (int) $row['sort_order'],
+		':id', $termId
+	);
+}
+
+function deletePaymentTerm(int $termId): bool {
+	if ($termId <= 0) {
+		return false;
+	}
+	dbQuery(
+		"UPDATE ".TB_PREFIX."preferences SET payment_term_id = NULL WHERE payment_term_id = :id",
+		':id',
+		$termId
+	);
+	dbQuery(
+		"UPDATE ".TB_PREFIX."invoices SET payment_term_id = NULL WHERE payment_term_id = :id",
+		':id',
+		$termId
+	);
+	$sql = "DELETE FROM ".TB_PREFIX."payment_terms WHERE term_id = :id";
+	return (bool) dbQuery($sql, ':id', $termId);
+}
+
 function getTaxRate($id, $domain_id='') {
 	global $LANG;
 	$record = getGenericRecord('tax', $id, $domain_id, 'tax_id');
@@ -711,6 +805,10 @@ function insertProductComplete($enabled=1,$visible=1,$description, $unit_price, 
 function insertProduct($enabled=1,$visible=1, $domain_id='') {
     global $logger;
 	$domain_id = domain_id::get($domain_id);
+	$descTrim = trim((string) ($_POST['description'] ?? ''));
+	if ($descTrim !== '' && productDescriptionExists($descTrim, null, $domain_id)) {
+		return false;
+	}
 
 	if (isset($_POST['enabled'])) $enabled = $_POST['enabled'];
     //select all attributes
@@ -802,6 +900,11 @@ function insertProduct($enabled=1,$visible=1, $domain_id='') {
 function updateProduct($domain_id='') {
 
 	$domain_id = domain_id::get($domain_id);
+	$descTrim = trim((string) ($_POST['description'] ?? ''));
+	$editId = (int) ($_GET['id'] ?? 0);
+	if ($descTrim !== '' && $editId > 0 && productDescriptionExists($descTrim, $editId, $domain_id)) {
+		return false;
+	}
 
     //select all attributes
     $sql = "SELECT * FROM ".TB_PREFIX."products_attributes WHERE domain_id = :domain_id";
@@ -1046,6 +1149,24 @@ function getInvoice($id, $domain_id='') {
 
 	$invoice['calc_date'] = date('Y-m-d', strtotime( $invoice['date'] ) );
 	$invoice['date'] = siLocal::date( $invoice['date'] );
+
+	$rawDue = $invoice['due_date'] ?? null;
+	$invoice['calc_due_date'] = (!empty($rawDue) && $rawDue !== '0000-00-00') ? date('Y-m-d', strtotime($rawDue)) : '';
+	if ($invoice['calc_due_date'] !== '') {
+		$invoice['due_date'] = siLocal::date($rawDue);
+	} else {
+		$invoice['due_date'] = '';
+	}
+	$invoice['payment_term_label'] = '';
+	$invoice['payment_term_code'] = '';
+	if (!empty($invoice['payment_term_id'])) {
+		$pt = getPaymentTerm($invoice['payment_term_id']);
+		if ($pt) {
+			$invoice['payment_term_label'] = $pt['term_label'];
+			$invoice['payment_term_code'] = $pt['term_code'] ?? '';
+		}
+	}
+
 	$invoice['total'] = getInvoiceTotal($invoice['id']);
 
 	$invoiceobj = new invoice();
@@ -1532,9 +1653,65 @@ function updateBiller() {
 		);
 }
 
+/**
+ * Whether another customer in this domain already has the same name (trimmed, case-insensitive).
+ *
+ * @param string $name
+ * @param int|null $excludeCustomerId When set, ignore this customer id (for edits).
+ * @param string $domain_id
+ */
+function customerNameExists($name, $excludeCustomerId = null, $domain_id = '') {
+	$domain_id = domain_id::get($domain_id);
+	$norm = mb_strtolower(trim((string) $name), 'UTF-8');
+	if ($norm === '') {
+		return false;
+	}
+	$sql = "SELECT 1 FROM " . TB_PREFIX . "customers
+		WHERE domain_id = :domain_id AND LOWER(TRIM(name)) = :norm";
+	$args = [':domain_id', $domain_id, ':norm', $norm];
+	if ($excludeCustomerId !== null && (int) $excludeCustomerId > 0) {
+		$sql .= " AND id <> :exclude_id";
+		$args[] = ':exclude_id';
+		$args[] = (int) $excludeCustomerId;
+	}
+	$sql .= " LIMIT 1";
+	$sth = dbQuery($sql, ...$args);
+	return (bool) ($sth && $sth->fetch());
+}
+
+/**
+ * Whether another product in this domain already has the same description (trimmed, case-insensitive).
+ *
+ * @param string $description
+ * @param int|null $excludeProductId When set, ignore this product id (for edits).
+ * @param string $domain_id
+ */
+function productDescriptionExists($description, $excludeProductId = null, $domain_id = '') {
+	$domain_id = domain_id::get($domain_id);
+	$norm = mb_strtolower(trim((string) $description), 'UTF-8');
+	if ($norm === '') {
+		return false;
+	}
+	$sql = "SELECT 1 FROM " . TB_PREFIX . "products
+		WHERE domain_id = :domain_id AND LOWER(TRIM(description)) = :norm";
+	$args = [':domain_id', $domain_id, ':norm', $norm];
+	if ($excludeProductId !== null && (int) $excludeProductId > 0) {
+		$sql .= " AND id <> :exclude_id";
+		$args[] = ':exclude_id';
+		$args[] = (int) $excludeProductId;
+	}
+	$sql .= " LIMIT 1";
+	$sth = dbQuery($sql, ...$args);
+	return (bool) ($sth && $sth->fetch());
+}
+
 function updateCustomer() {
 	global $config;
 	$domain_id = domain_id::get();
+	$nameTrim = trim((string) ($_POST['name'] ?? ''));
+	if ($nameTrim !== '' && customerNameExists($nameTrim, (int) ($_GET['id'] ?? 0), $domain_id)) {
+		return false;
+	}
 	$sql = "UPDATE
 				".TB_PREFIX."customers
 			SET
@@ -1590,6 +1767,10 @@ function updateCustomer() {
 function insertCustomer() {
     global $config;
 	$domain_id = domain_id::get();
+	$nameTrim = trim((string) ($_POST['name'] ?? ''));
+	if ($nameTrim !== '' && customerNameExists($nameTrim, null, $domain_id)) {
+		return false;
+	}
 
 	$sql = "INSERT INTO
 			".TB_PREFIX."customers
@@ -1930,6 +2111,10 @@ function SqlDateWithTime($in_date){
 }
 
 function insertInvoice($type, $domain_id='') {
+	if (!class_exists('CurrencySignHelper')) {
+		require_once __DIR__ . '/class/CurrencySignHelper.php';
+	}
+	require_once __DIR__ . '/class/PaymentTermCalculator.php';
 	global $db_server;
 	$domain_id = domain_id::get($domain_id);
 
@@ -1939,34 +2124,60 @@ function insertInvoice($type, $domain_id='') {
 		return null;
 	}
 
+	$pref_group=getPreference($_POST['preference_id'], $domain_id);
+
+	// Snapshot currency from preference; allow override from POST (JS pre-populated fields).
+	// Always store the decoded display form (€ not &#8364;) so JS comparisons work consistently.
+	$currency_sign = CurrencySignHelper::forDisplay($_POST['currency_sign'] ?? $pref_group['pref_currency_sign'] ?? '');
+	$currency_code = trim($_POST['currency_code'] ?? $pref_group['currency_code'] ?? '');
+
+	//also set the current time (if null or =00:00:00)
+	$clean_date=SqlDateWithTime($_POST['date']);
+
+	$ptId = isset($_POST['payment_term_id']) ? (int)$_POST['payment_term_id'] : 0;
+	if ($ptId <= 0) {
+		$ptId = isset($pref_group['payment_term_id']) ? (int)$pref_group['payment_term_id'] : 0;
+	}
+	$termRow = ($ptId > 0) ? getPaymentTerm($ptId) : false;
+	$paymentTermId = null;
+	$dueDateSql = null;
+	if ($termRow) {
+		$paymentTermId = (int)$termRow['term_id'];
+		$invYmd = substr($clean_date, 0, 10);
+		$dueDateSql = PaymentTermCalculator::dueDateFromTerm($invYmd, $termRow);
+	}
+
 	if ($db_server == 'pgsql' || $db_server == 'sqlite') {
 		// pgsql/sqlite: omit id column so the sequence/AUTOINCREMENT generates it
 		$sql = "INSERT INTO ".TB_PREFIX."invoices (
 				index_id, domain_id, biller_id, customer_id,
 				type_id, preference_id, date, note,
-				custom_field1, custom_field2, custom_field3, custom_field4
+				custom_field1, custom_field2, custom_field3, custom_field4,
+				currency_sign, currency_code,
+				payment_term_id, due_date
 			) VALUES (
 				:index_id, :domain_id, :biller_id, :customer_id,
 				:type, :preference_id, :date, :note,
-				:customField1, :customField2, :customField3, :customField4
+				:customField1, :customField2, :customField3, :customField4,
+				:currency_sign, :currency_code,
+				:payment_term_id, :due_date
 			)";
 	} else {
 		// MySQL: explicit NULL triggers AUTO_INCREMENT
 		$sql = "INSERT INTO ".TB_PREFIX."invoices (
 				id, index_id, domain_id, biller_id, customer_id,
 				type_id, preference_id, date, note,
-				custom_field1, custom_field2, custom_field3, custom_field4
+				custom_field1, custom_field2, custom_field3, custom_field4,
+				currency_sign, currency_code,
+				payment_term_id, due_date
 			) VALUES (
 				NULL, :index_id, :domain_id, :biller_id, :customer_id,
 				:type, :preference_id, :date, :note,
-				:customField1, :customField2, :customField3, :customField4
+				:customField1, :customField2, :customField3, :customField4,
+				:currency_sign, :currency_code,
+				:payment_term_id, :due_date
 			)";
 	}
-
-    $pref_group=getPreference($_POST['preference_id'], $domain_id);
-
-	//also set the current time (if null or =00:00:00)
-	$clean_date=SqlDateWithTime($_POST['date']);
 
 	$sth= dbQuery($sql,
 		#':index_id', index::next('invoice',$pref_group['index_group'], $domain_id,$_POST['biller_id']),
@@ -1981,7 +2192,11 @@ function insertInvoice($type, $domain_id='') {
 		':customField1',	$_POST['customField1'],
 		':customField2',	$_POST['customField2'],
 		':customField3',	$_POST['customField3'],
-		':customField4',	$_POST['customField4']
+		':customField4',	$_POST['customField4'],
+		':currency_sign',	$currency_sign,
+		':currency_code',	$currency_code,
+		':payment_term_id',	$paymentTermId,
+		':due_date',		$dueDateSql
 		);
 
     #index::increment('invoice',$pref_group['index_group'], $domain_id,$_POST['biller_id']);
@@ -1992,7 +2207,10 @@ function insertInvoice($type, $domain_id='') {
 }
 
 function updateInvoice($invoice_id, $domain_id='') {
-	
+	if (!class_exists('CurrencySignHelper')) {
+		require_once __DIR__ . '/class/CurrencySignHelper.php';
+	}
+	require_once __DIR__ . '/class/PaymentTermCalculator.php';
 //  global $logger;
     global $db_server;
     $domain_id = domain_id::get($domain_id);
@@ -2020,6 +2238,25 @@ function updateInvoice($invoice_id, $domain_id='') {
 		$invoice_type, $_POST['preference_id'])) {
 		return null;
 	}
+	// Snapshot currency from preference; allow override from POST (JS pre-populated fields).
+	// Always store decoded display form (€ not &#8364;) for consistent JS comparisons.
+	$currency_sign = CurrencySignHelper::forDisplay($_POST['currency_sign'] ?? $new_pref_group['pref_currency_sign'] ?? '');
+	$currency_code = trim($_POST['currency_code'] ?? $new_pref_group['currency_code'] ?? '');
+
+	$clean_date = SqlDateWithTime($_POST['date']);
+	$ptId = isset($_POST['payment_term_id']) ? (int)$_POST['payment_term_id'] : 0;
+	if ($ptId <= 0) {
+		$ptId = isset($new_pref_group['payment_term_id']) ? (int)$new_pref_group['payment_term_id'] : 0;
+	}
+	$termRow = ($ptId > 0) ? getPaymentTerm($ptId) : false;
+	$paymentTermId = null;
+	$dueDateSql = null;
+	if ($termRow) {
+		$paymentTermId = (int)$termRow['term_id'];
+		$invYmd = substr($clean_date, 0, 10);
+		$dueDateSql = PaymentTermCalculator::dueDateFromTerm($invYmd, $termRow);
+	}
+
 	$sql = "UPDATE
 			".TB_PREFIX."invoices
 		SET
@@ -2032,22 +2269,30 @@ function updateInvoice($invoice_id, $domain_id='') {
 			custom_field1 = :customField1,
 			custom_field2 = :customField2,
 			custom_field3 = :customField3,
-			custom_field4 = :customField4
+			custom_field4 = :customField4,
+			currency_sign = :currency_sign,
+			currency_code = :currency_code,
+			payment_term_id = :payment_term_id,
+			due_date = :due_date
 		WHERE
 			id = :invoice_id
 		AND domain_id = :domain_id";
-			
+
 	$ok = dbQuery($sql,
         ':index_id', $index_id,
 		':biller_id', $_POST['biller_id'],
 		':customer_id', $_POST['customer_id'],
 		':preference_id', $_POST['preference_id'],
-		':date', SqlDateWithTime($_POST['date']),
+		':date', $clean_date,
 		':note', trim($_POST['note']),
 		':customField1', $_POST['customField1'],
 		':customField2', $_POST['customField2'],
 		':customField3', $_POST['customField3'],
 		':customField4', $_POST['customField4'],
+		':currency_sign', $currency_sign,
+		':currency_code', $currency_code,
+		':payment_term_id', $paymentTermId,
+		':due_date', $dueDateSql,
 		':invoice_id', $invoice_id,
 		':domain_id', $domain_id
 		);
@@ -2983,6 +3228,7 @@ function pdfThis($html,$file_location="",$pdfname)
 					'margin_right'  => (float) ($sysDefaults['pdfrightmargin'] ?? 15),
 					'margin_top'    => (float) ($sysDefaults['pdftopmargin'] ?? 15),
 					'margin_bottom' => (float) ($sysDefaults['pdfbottommargin'] ?? 15),
+					'useSubstitutions' => true,
 				]);
 
 				$mpdf->WriteHTML($html_to_pdf);
@@ -3257,6 +3503,67 @@ function si_patch339_payment_denorm_columns(): void {
 }
 
 /**
+ * SQL patch 379: denormalised invoice currency on si_payment (grid/reports; same as invoice).
+ */
+function si_patch379_payment_currency_denorm_columns(): void {
+	global $db_server;
+	$t   = TB_PREFIX . 'payment';
+	$inv = TB_PREFIX . 'invoices';
+	if ($db_server === 'mysql') {
+		$defs = [
+			'denorm_currency_sign' => 'VARCHAR(50) NOT NULL DEFAULT \'\'',
+			'denorm_currency_code' => 'VARCHAR(25) NOT NULL DEFAULT \'\'',
+		];
+		$add = [];
+		foreach ($defs as $col => $def) {
+			if (!checkFieldExists($t, $col)) {
+				$add[] = 'ADD COLUMN `' . $col . '` ' . $def;
+			}
+		}
+		if ($add !== []) {
+			dbQuery('ALTER TABLE `' . $t . '` ' . implode(', ', $add));
+		}
+		if (checkFieldExists($t, 'denorm_currency_sign') && checkFieldExists($inv, 'currency_sign')) {
+			dbQuery(
+				'UPDATE `' . $t . '` p INNER JOIN `' . $inv . '` iv ON (p.ac_inv_id = iv.id AND p.domain_id = iv.domain_id) '
+				. 'SET p.denorm_currency_sign = COALESCE(iv.currency_sign, \'\'), p.denorm_currency_code = COALESCE(iv.currency_code, \'\')'
+			);
+		}
+		return;
+	}
+	if ($db_server === 'pgsql') {
+		dbQuery("ALTER TABLE {$t} ADD COLUMN IF NOT EXISTS denorm_currency_sign VARCHAR(50) NOT NULL DEFAULT ''");
+		dbQuery("ALTER TABLE {$t} ADD COLUMN IF NOT EXISTS denorm_currency_code VARCHAR(25) NOT NULL DEFAULT ''");
+		if (checkFieldExists($inv, 'currency_sign')) {
+			dbQuery(
+				"UPDATE {$t} p SET denorm_currency_sign = COALESCE(iv.currency_sign, ''), denorm_currency_code = COALESCE(iv.currency_code, '') "
+				. "FROM {$inv} iv WHERE p.ac_inv_id = iv.id AND p.domain_id = iv.domain_id"
+			);
+		}
+		return;
+	}
+	$sqliteCols = [
+		'denorm_currency_sign' => 'TEXT NOT NULL DEFAULT \'\'',
+		'denorm_currency_code' => 'TEXT NOT NULL DEFAULT \'\'',
+	];
+	foreach ($sqliteCols as $col => $def) {
+		if (!checkFieldExists($t, $col)) {
+			dbQuery("ALTER TABLE {$t} ADD COLUMN {$col} {$def}");
+		}
+	}
+	if (checkFieldExists($inv, 'currency_sign')) {
+		dbQuery(
+			'UPDATE ' . $t . ' AS p SET denorm_currency_sign = COALESCE((SELECT iv.currency_sign FROM ' . $inv
+			. ' iv WHERE iv.id = p.ac_inv_id AND iv.domain_id = p.domain_id), \'\')'
+		);
+		dbQuery(
+			'UPDATE ' . $t . ' AS p SET denorm_currency_code = COALESCE((SELECT iv.currency_code FROM ' . $inv
+			. ' iv WHERE iv.id = p.ac_inv_id AND iv.domain_id = p.domain_id), \'\')'
+		);
+	}
+}
+
+/**
  * SQL patch 340: populate denormalised columns for all invoices (all domains).
  */
 function si_patch340_backfill_invoice_denorm(): void {
@@ -3385,6 +3692,8 @@ function run_sql_patch($id, $patch) {
 			si_patch340_backfill_invoice_denorm();
 		} elseif ((int) $id === 341) {
 			si_patch341_invoice_denorm_indexes();
+		} elseif ((int) $id === 379) {
+			si_patch379_payment_currency_denorm_columns();
 		} elseif ((int) $id === 342) {
 			require_once __DIR__ . '/global_app_settings.php';
 			si_patch342_global_config();

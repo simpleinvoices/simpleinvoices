@@ -84,16 +84,12 @@
 </tr>
 
 <tr>
-<td class="details_screen">{{ $LANG['inv_pref'] ?? '' }}</td><td>
-@if($preferences == null )
-	<p><em>{{ $LANG['no_preferences'] ?? '' }}</em></p>
-@else
-	<select name="preference_id" class="form-select">
-	@foreach(($preferences ?? []) as $preference)
-		<option @if(($preference['pref_id'] ?? '') == ($defaults['preference'] ?? '')) selected @endif value="{{ $preference['pref_id'] ?? '' }}">{{ $preference['pref_description'] ?? '' }}</option>
-	@endforeach
-	</select>
-@endif
+<td class="details_screen align-top">{{ $LANG['inv_pref'] ?? '' }}</td><td>
+@include('templates.default.partials.invoice_preference_field', [
+	'selectedPrefId' => $defaults['preference'] ?? '',
+	'selectedTermId' => '',
+	'calcDueDate'    => '',
+])
 </td>
 </tr>	
 <tr>

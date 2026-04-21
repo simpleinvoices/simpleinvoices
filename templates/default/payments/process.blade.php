@@ -9,19 +9,19 @@
 						<strong>{{ $invoice['preference'] ?? '' }}</strong> {{ $invoice['index_id'] ?? '' }}
 					</div>
 					<div class="col mb-2">
-						<strong>{{ $LANG['total'] ?? '' }}:</strong> {{ number_format($invoice['total'] ?? 0, 2) }}
+						<strong>{{ $LANG['total'] ?? '' }}:</strong> {{ CurrencySignHelper::forDisplay($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }}{{ number_format($invoice['total'] ?? 0, 2) }}
 					</div>
 					<div class="col mb-2">
 						<strong>{{ $LANG['biller'] ?? '' }}:</strong> {{ $biller['name'] ?? '' }}
 					</div>
 					<div class="col mb-2">
-						<strong>{{ $LANG['paid'] ?? '' }}:</strong> {{ number_format($invoice['paid'] ?? 0, 2) }}
+						<strong>{{ $LANG['paid'] ?? '' }}:</strong> {{ CurrencySignHelper::forDisplay($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }}{{ number_format($invoice['paid'] ?? 0, 2) }}
 					</div>
 					<div class="col mb-2">
 						<strong>{{ $LANG['customer'] ?? '' }}:</strong> {{ $customer['name'] ?? '' }}
 					</div>
 					<div class="col mb-2">
-						<strong>{{ $LANG['owing'] ?? '' }}:</strong> <u>{{ number_format($invoice['owing'] ?? 0, 2) }}</u>
+						<strong>{{ $LANG['owing'] ?? '' }}:</strong> <u>{{ CurrencySignHelper::forDisplay($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }}{{ number_format($invoice['owing'] ?? 0, 2) }}</u>
 					</div>
 				</div>
 			</div>
@@ -29,7 +29,10 @@
 				<label class="form-label">{{ $LANG['amount'] ?? '' }}
 					<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_process_payment_auto_amount" title="{{ $LANG['process_payment_auto_amount'] ?? '' }}"><i class="ti ti-help"></i></a>
 				</label>
-				<input type="text" name="ac_amount" class="form-control" value="{{ $invoice['owing'] ?? '' }}" />
+				<div class="input-group">
+					<span class="input-group-text">{{ CurrencySignHelper::forDisplay($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }}</span>
+					<input type="text" name="ac_amount" class="form-control" value="{{ $invoice['owing'] ?? '' }}" />
+				</div>
 			</div>
 			<div class="mb-3">
 				<label class="form-label">{{ $LANG['date_formatted'] ?? '' }}</label>
@@ -48,14 +51,17 @@
 				<select name="invoice_id" id="payment-invoice-id" class="form-select" required>
 					<option value=''></option>
 					@foreach(($invoice_all ?? []) as $invoice)
-						<option value="{{ siLocal::number($invoice['id'] ?? '') }}" data-owing="{{ siLocal::number($invoice['owing'] ?? 0) }}">{{ $invoice['index_name'] ?? '' }} ({{ $invoice['biller'] ?? '' }}, {{ $invoice['customer'] ?? '' }}, {{ $LANG['total'] ?? '' }} {{ $invoice['invoice_total'] ?? '' }} : {{ $LANG['owing'] ?? '' }} {{ siLocal::number($invoice['owing'] ?? 0) }})</option>
+						<option value="{{ siLocal::number($invoice['id'] ?? '') }}" data-owing="{{ siLocal::number($invoice['owing'] ?? 0) }}" data-currency-sign="{{ CurrencySignHelper::forDisplay($invoice['currency_sign'] ?? '') }}">{{ $invoice['index_name'] ?? '' }} ({{ $invoice['biller'] ?? '' }}, {{ $invoice['customer'] ?? '' }}, {{ $LANG['total'] ?? '' }} {{ $invoice['invoice_total'] ?? '' }} : {{ $LANG['owing'] ?? '' }} {{ siLocal::number($invoice['owing'] ?? 0) }})</option>
 					@endforeach
 				</select>
 				<div class="invalid-feedback">{{ $LANG['required_field'] ?? 'Required' }}</div>
 			</div>
 			<div class="mb-3">
 				<label class="form-label">{{ $LANG['amount'] ?? '' }}</label>
-				<input type="text" name="ac_amount" id="payment-amount" class="form-control" />
+				<div class="input-group">
+					<span class="input-group-text" id="payment-currency-addon">{{ CurrencySignHelper::forDisplay($preference['pref_currency_sign'] ?? '')|si_currency_display }}</span>
+					<input type="text" name="ac_amount" id="payment-amount" class="form-control" />
+				</div>
 			</div>
 			<div class="mb-3">
 				<label class="form-label">{{ $LANG['date_formatted'] ?? '' }}</label>
@@ -104,6 +110,7 @@
 	document.addEventListener('DOMContentLoaded', function () {
 		var invoiceSelect = document.getElementById('payment-invoice-id');
 		var amountInput = document.getElementById('payment-amount');
+		var curAddon = document.getElementById('payment-currency-addon');
 
 		if (!invoiceSelect || !amountInput) {
 			return;
@@ -112,6 +119,10 @@
 		function syncAmountFromInvoice() {
 			var selectedOption = invoiceSelect.options[invoiceSelect.selectedIndex];
 			amountInput.value = selectedOption ? (selectedOption.getAttribute('data-owing') || '') : '';
+			if (curAddon && selectedOption) {
+				var s = selectedOption.getAttribute('data-currency-sign') || '';
+				curAddon.textContent = s;
+			}
 		}
 
 		invoiceSelect.addEventListener('change', syncAmountFromInvoice);

@@ -14,19 +14,23 @@ $__rpt_snap = array_keys($bladeView->getAssigns());
 
     $sql = "SELECT
               pr.index_group AS grp
+            , per_inv.currency_sign
+            , per_inv.currency_code
             , $agg AS template
             , COUNT(*) AS count
             , SUM(per_inv.inv_sum) AS sum_total
     FROM (
         SELECT iv.id, iv.preference_id, iv.domain_id,
-            iv.denorm_invoice_total AS inv_sum
+            iv.denorm_invoice_total AS inv_sum,
+            iv.currency_sign,
+            iv.currency_code
         FROM {$t}invoices iv
         INNER JOIN {$t}preferences pr2 ON (pr2.pref_id = iv.preference_id AND pr2.domain_id = iv.domain_id)
         WHERE pr2.status = '1'
           AND iv.domain_id = :domain_id
     ) per_inv
     INNER JOIN {$t}preferences pr ON (pr.pref_id = per_inv.preference_id AND pr.domain_id = per_inv.domain_id)
-    GROUP BY pr.index_group
+    GROUP BY pr.index_group, per_inv.currency_sign, per_inv.currency_code
     ";
 
     $sth = dbQuery($sql, ':domain_id', $auth_session->domain_id);

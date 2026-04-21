@@ -33,6 +33,24 @@
 							<td>{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['date'] ?? '' }}</td>
 							<td class="text-end">{{ $invoice['date'] ?? '' }}</td>
 						</tr>
+						@if(!empty($invoice['payment_term_id']) || !empty($invoice['payment_term_code']) || !empty($invoice['payment_term_label']))
+						<tr>
+							<td>{{ $LANG['payment_term_code'] ?? 'Payment term code' }}</td>
+							<td class="text-end">{{ !empty($invoice['payment_term_code']) ? $invoice['payment_term_code'] : ($invoice['payment_term_label'] ?? '-') }}</td>
+						</tr>
+						@endif
+						@if(!empty($invoice['payment_term_code']) && !empty($invoice['payment_term_label']))
+						<tr>
+							<td>{{ $LANG['payment_terms'] ?? 'Payment terms' }}</td>
+							<td class="text-end">{{ $invoice['payment_term_label'] }}</td>
+						</tr>
+						@endif
+						@if(!empty($invoice['calc_due_date']))
+						<tr>
+							<td>{{ $LANG['due_date'] ?? 'Due date' }}</td>
+							<td class="text-end">{{ $invoice['due_date'] ?? '' }}</td>
+						</tr>
+						@endif
 						@if(!empty($invoice['custom_field1']))
 						<tr>
 							<td>{{ $customFieldLabels['invoice_cf1'] ?? '' }}</td>

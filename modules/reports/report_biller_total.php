@@ -5,15 +5,17 @@ $__rpt_snap = array_keys($bladeView->getAssigns());
   $sql = '
 SELECT
     b.name
+  , iv.currency_sign
+  , iv.currency_code
   , SUM(iv.denorm_invoice_total) AS sum_total
-FROM ' . TB_PREFIX . 'biller b 
+FROM ' . TB_PREFIX . 'biller b
     INNER JOIN ' . TB_PREFIX . 'invoices iv ON (b.id = iv.biller_id AND b.domain_id = iv.domain_id)
     INNER JOIN ' . TB_PREFIX . 'preferences pr ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id)
 WHERE
 	    pr.status =\'1\'
 	AND b.domain_id = :domain_id
-GROUP BY 
-	b.name
+GROUP BY
+	b.name, iv.currency_sign, iv.currency_code
 ';
 
   $biller_sales = dbQuery($sql, ':domain_id', $auth_session->domain_id);

@@ -16,6 +16,9 @@ foreach ($iop_values as $k => $v) {
 #insert invoice_preference
 if (  $op === 'insert_preference' ) {
 
+	$payment_term_id = isset($_POST['payment_term_id']) && $_POST['payment_term_id'] !== ''
+		? (int)$_POST['payment_term_id'] : null;
+
 	$sql = "INSERT into
 		".TB_PREFIX."preferences
 		(
@@ -37,7 +40,8 @@ if (  $op === 'insert_preference' ) {
 		        locale,
 		        language,
 		        index_group,
-			include_online_payment
+			include_online_payment,
+			payment_term_id
 		)
 	VALUES
 		(
@@ -59,7 +63,8 @@ if (  $op === 'insert_preference' ) {
             :locale,
             :language,
             :index_group,
-			:include_online_payment
+			:include_online_payment,
+			:payment_term_id
 		 )";
 
 	if (dbQuery($sql,
@@ -81,7 +86,8 @@ if (  $op === 'insert_preference' ) {
 	  ':language', $_POST['locale'],
 	  ':index_group', empty($_POST['index_group']) ? lastInsertId() : $_POST['index_group']  ,
 	  ':include_online_payment', $include_online_payment,
-	  ':enabled', $_POST['pref_enabled']
+	  ':enabled', $_POST['pref_enabled'],
+	  ':payment_term_id', $payment_term_id
 	  )) {
 		$saved = true;
 		$new_pref_id = (int) lastInsertId();
@@ -117,6 +123,9 @@ if (  $op === 'insert_preference' ) {
 else if (  $op === 'edit_preference' ) {
 
 	if (isset($_POST['save_preference'])) {
+		$payment_term_id = isset($_POST['payment_term_id']) && $_POST['payment_term_id'] !== ''
+			? (int)$_POST['payment_term_id'] : null;
+
 		$sql = "UPDATE
 				".TB_PREFIX."preferences
 			SET
@@ -137,7 +146,8 @@ else if (  $op === 'edit_preference' ) {
 				locale = :locale,
 				language = :language,
  		        index_group = :index_group,
- 		        include_online_payment = :include_online_payment
+ 		        include_online_payment = :include_online_payment,
+				payment_term_id = :payment_term_id
 			WHERE
 				pref_id = :id
 			AND domain_id = :domain_id";
@@ -161,6 +171,7 @@ else if (  $op === 'edit_preference' ) {
           	  ':language', $_POST['language'],
 		  ':index_group', $_POST['index_group'],
 		  ':include_online_payment', $include_online_payment,
+		  ':payment_term_id', $payment_term_id,
 		  ':id', (int)$_GET['id'],
 		  ':domain_id', $auth_session->domain_id))
 	    {

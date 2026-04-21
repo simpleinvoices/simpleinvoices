@@ -13,7 +13,8 @@ $__rpt_snap = array_keys($bladeView->getAssigns());
       iv.denorm_invoice_total AS inv_total,
       iv.denorm_amount_paid AS inv_paid,
       iv.denorm_amount_owing AS inv_owing,
-      iv.date
+      iv.date,
+      iv.currency_sign
 	FROM
         ' . TB_PREFIX . 'invoices iv
         LEFT JOIN ' . TB_PREFIX . 'preferences pr   ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id)

@@ -41,8 +41,19 @@
 			</div>
 			<div id="pref-view-currency" class="tab-pane" role="tabpanel">
 				<table class="table table-vcenter">
-					<tr><th>{{ $LANG['currency_sign'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_currency_sign" title="{{ $LANG['currency_sign'] ?? '' }}"><i class="ti ti-help"></i></a></th><td>{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }}</td></tr>
-					<tr><th>{{ $LANG['currency_code'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_currency_code" title="{{ $LANG['currency_code'] ?? '' }}"><i class="ti ti-help"></i></a></th><td>{{ $preference['currency_code'] ?? '' }}</td></tr>
+					<tr>
+						<th>{{ $LANG['currency_sign'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_currency_sign" title="{{ $LANG['currency_sign'] ?? '' }}"><i class="ti ti-help"></i></a></th>
+						<td>
+							{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }}
+							@if(!empty($preference['currency_code']))
+								<span class="text-secondary ms-1">({{ $preference['currency_code'] }})</span>
+							@endif
+						</td>
+					</tr>
+					<tr>
+						<th>{{ $LANG['payment_terms'] ?? 'Payment terms' }}</th>
+						<td>{{ $prefPaymentTermLabel ?? '' }}</td>
+					</tr>
 				</table>
 			</div>
 			<div id="pref-view-wording" class="tab-pane" role="tabpanel">
@@ -170,12 +181,19 @@
 			</div>
 			<div id="pref-edit-currency" class="tab-pane" role="tabpanel">
 				@include('templates.default.partials.currency_sign_field', [
-					'currencySignFieldName' => 'pref_currency_sign',
+					'currencySignFieldName'    => 'pref_currency_sign',
 					'currencySignCurrentValue' => $preference['pref_currency_sign'] ?? '',
+					'currencyCodeFieldName'    => 'currency_code',
+					'currencyCodeCurrentValue' => $preference['currency_code'] ?? '',
 				])
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['currency_code'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_currency_code" title="{{ $LANG['currency_code'] ?? '' }}"><i class="ti ti-help"></i></a></label>
-					<input type="text" name="currency_code" value="{{ $preference['currency_code'] ?? '' }}" class="form-control" />
+				<div class="mb-3 mt-3">
+					<label class="form-label">{{ $LANG['payment_terms'] ?? 'Payment terms' }}</label>
+					<select name="payment_term_id" class="form-select">
+						<option value="">{{ $LANG['payment_term_none'] ?? '-' }}</option>
+						@foreach(($paymentTerms ?? []) as $pt)
+							<option value="{{ $pt['term_id'] ?? '' }}" @if((string)($preference['payment_term_id'] ?? '') === (string)($pt['term_id'] ?? '')) selected @endif>{{ $pt['term_label'] ?? '' }}</option>
+						@endforeach
+					</select>
 				</div>
 			</div>
 			<div id="pref-edit-wording" class="tab-pane" role="tabpanel">

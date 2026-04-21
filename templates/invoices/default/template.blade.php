@@ -165,6 +165,24 @@
 				<td nowrap class="">{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['date'] ?? '' }}:</td>
 				<td class="" align="right" colspan="3">{{ $invoice['date'] }}</td>
 		</tr>
+		@if(!empty($invoice['payment_term_id']) || !empty($invoice['payment_term_code']) || !empty($invoice['payment_term_label']))
+		<tr>
+				<td nowrap class="">{{ $LANG['payment_term_code'] ?? 'Payment term code' }}:</td>
+				<td class="" align="right" colspan="3">{{ !empty($invoice['payment_term_code']) ? $invoice['payment_term_code'] : ($invoice['payment_term_label'] ?? '') }}</td>
+		</tr>
+		@endif
+		@if(!empty($invoice['payment_term_code']) && !empty($invoice['payment_term_label']))
+		<tr>
+				<td nowrap class="">{{ $LANG['payment_terms'] ?? 'Payment terms' }}:</td>
+				<td class="" align="right" colspan="3">{{ $invoice['payment_term_label'] }}</td>
+		</tr>
+		@endif
+		@if(!empty($invoice['calc_due_date']))
+		<tr>
+				<td nowrap class="">{{ $LANG['due_date'] ?? 'Due date' }}:</td>
+				<td class="" align="right" colspan="3">{{ $invoice['due_date'] ?? '' }}</td>
+		</tr>
+		@endif
 	<!-- Show the Invoice Custom Fields if valid -->
 		@if(($invoice['custom_field1'] ?? null) != null)
 		<tr>
@@ -193,15 +211,15 @@
 
 		<tr>
 				<td class="" >{{ $LANG['total'] ?? '' }}: </td>
-				<td class="" align="right" colspan="3">{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['total'] ?? '')|siLocal_number }}</td>
+				<td class="" align="right" colspan="3">{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['total'] ?? '')|siLocal_number }}</td>
 		</tr>
 		<tr>
 				<td class="">{{ $LANG['paid'] ?? '' }}:</td>
-				<td class="" align="right" colspan="3" >{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['paid'] ?? '')|siLocal_number }}</td>
+				<td class="" align="right" colspan="3" >{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['paid'] ?? '')|siLocal_number }}</td>
 		</tr>
 		<tr>
 				<td nowrap class="">{{ $LANG['owing'] ?? '' }}:</td>
-				<td class="" align="right" colspan="3" >{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['owing'] ?? '')|siLocal_number }}</td>
+				<td class="" align="right" colspan="3" >{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['owing'] ?? '')|siLocal_number }}</td>
 		</tr>
 
 	</table>
@@ -228,8 +246,8 @@
 			<tr class="" >
 				<td class="col-qty">{{ ($invoiceItem['quantity'] ?? '')|siLocal_number_trim }}</td>
 				<td class="" colspan="3">{!! outhtml($invoiceItem['product']['description'] ?? '') !!}</td>
-				<td class="" align="right">{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoiceItem['unit_price'] ?? '')|siLocal_number }}</td>
-				<td class="" align="right">{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoiceItem['gross_total'] ?? '')|siLocal_number }}</td>
+				<td class="" align="right">{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoiceItem['unit_price'] ?? '')|siLocal_number }}</td>
+				<td class="" align="right">{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoiceItem['gross_total'] ?? '')|siLocal_number }}</td>
 			</tr>
 					@if(($invoiceItem['attribute'] ?? null) != null)
                             <tr class="si_product_attribute">
@@ -241,7 +259,7 @@
                                        @if(($v['visible'] ?? null) == true )
                                         <td class="si_product_attribute">
                                             @if(($v['type'] ?? null) == 'decimal')
-                                              {{ $v['name'] }}: {{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($v['value'] ?? '')|siLocal_number }};
+                                              {{ $v['name'] }}: {{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($v['value'] ?? '')|siLocal_number }};
                                              @elseif(($v['value'] ?? '') != '')
                                                {{ $v['name'] }}: {{ $v['value'] }};
                                             @endif
@@ -326,8 +344,8 @@
 				<td class=""></td>
 				<td class=""></td>
 				<td class=""></td>
-				<td align="right" class="">{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoiceItem['unit_price'] ?? '')|siLocal_number }}</td>
-				<td align="right" class="">{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoiceItem['total'] ?? '')|siLocal_number }}</td>
+				<td align="right" class="">{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoiceItem['unit_price'] ?? '')|siLocal_number }}</td>
+				<td align="right" class="">{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoiceItem['total'] ?? '')|siLocal_number }}</td>
 			</tr>
 			@endforeach
 	@endif
@@ -371,7 +389,7 @@
 	<tr>
         <td colspan="2"></td>
 		<td colspan="3" align="right">{{ $LANG['sub_total'] ?? '' }}&nbsp;</td>
-		<td colspan="1" align="right">@if($invoice_number_of_taxes > 1)<u>@endif{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['gross'] ?? '')|siLocal_number }}@if($invoice_number_of_taxes > 1)</u>@endif</td>
+		<td colspan="1" align="right">@if($invoice_number_of_taxes > 1)<u>@endif{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['gross'] ?? '')|siLocal_number }}@if($invoice_number_of_taxes > 1)</u>@endif</td>
     </tr>
     @endif
 	@if($invoice_number_of_taxes > 1 )
@@ -385,7 +403,7 @@
     	<tr>
 	        <td colspan="2"></td>
 			<td colspan="3" align="right">{{ $line['tax_name'] ?? '' }}&nbsp;</td>
-			<td colspan="1" align="right">{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ siLocal::number($line['tax_amount'] ?? 0) }}</td>
+			<td colspan="1" align="right">{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ siLocal::number($line['tax_amount'] ?? 0) }}</td>
 	    </tr>
 	    @endif
 	@endforeach
@@ -394,7 +412,7 @@
 	<tr>
         <td colspan="2"></td>
 		<td colspan="3" align="right">{{ $LANG['tax_total'] ?? '' }}&nbsp;</td>
-		<td colspan="1" align="right"><u>{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['total_tax'] ?? '')|siLocal_number }}</u></td>
+		<td colspan="1" align="right"><u>{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['total_tax'] ?? '')|siLocal_number }}</u></td>
     </tr>
     @endif
 	@if($invoice_number_of_taxes > 1)
@@ -405,13 +423,13 @@
     <tr>
         <td colspan="2"></td>
 		<td colspan="3" align="right"><b>{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['amount'] ?? '' }}&nbsp;</b></td>
-		<td colspan="1" align="right"><span class="double_underline"><u>{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['total'] ?? '')|siLocal_number }}</u></span></td>
+		<td colspan="1" align="right"><span class="double_underline"><u>{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['total'] ?? '')|siLocal_number }}</u></span></td>
     </tr>
     {{-- tax section - end --}}
 {{-- <tr>
 			<td class="" colspan="2"></td>
 			<td align="right" colspan="3">{{ $LANG['sub_total'] ?? '' }}</td>
-			<td align="right" class="">{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['gross'] ?? '')|siLocal_number }}</td>
+			<td align="right" class="">{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['gross'] ?? '')|siLocal_number }}</td>
 		</tr>
 
     @foreach(($invoice['tax_grouped'] ?? []) as $line)
@@ -421,7 +439,7 @@
 		<tr class=''>
 	        <td colspan="2"></td>
 			<td colspan="3" align="right">{{ $line['tax_name'] ?? '' }}</td>
-			<td colspan="1" align="right">{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ siLocal::number($line['tax_amount'] ?? 0) }}</td>
+			<td colspan="1" align="right">{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ siLocal::number($line['tax_amount'] ?? 0) }}</td>
 	    </tr>
 
 	    @endif
@@ -431,7 +449,7 @@
 	<tr class=''>
         <td colspan="2"></td>
 		<td colspan="3" align="right">{{ $LANG['tax_total'] ?? '' }}</td>
-		<td colspan="1" align="right"><u>{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['total_tax'] ?? '')|siLocal_number }}</u></td>
+		<td colspan="1" align="right"><u>{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['total_tax'] ?? '')|siLocal_number }}</u></td>
     </tr>
 
 	<tr class="">
@@ -440,7 +458,7 @@
 	<tr class="">
 		<td class="" colspan="2"></td>
 		<td class="" align="right" colspan="3"><b>{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['amount'] ?? '' }}</b></td>
-		<td  class="" align="right"><span class="double_underline" >{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['total'] ?? '')|siLocal_number }}</span></td>
+		<td  class="" align="right"><span class="double_underline" >{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['total'] ?? '')|siLocal_number }}</span></td>
 	</tr> --}}
 	<tr>
 		<td colspan="6"><br /><br /></td>
@@ -474,7 +492,7 @@
 			{online_payment_link
 				type=$preference['include_online_payment']
 				invoice=$invoice['id']
-				amount=$invoice['owing'] currency_code=$preference['currency_code']
+				amount=$invoice['owing'] currency_code=($invoice['currency_code'] ?? $preference['currency_code'] ?? '')
 				domain_id=$invoice['domain_id']
 			}
 

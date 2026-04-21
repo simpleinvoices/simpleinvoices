@@ -185,6 +185,17 @@ CREATE TABLE IF NOT EXISTS `si_invoice_type` (
   PRIMARY KEY (`inv_ty_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE TABLE IF NOT EXISTS `si_payment_terms` (
+  `term_id` int(11) NOT NULL AUTO_INCREMENT,
+  `term_code` varchar(32) NOT NULL,
+  `term_label` varchar(120) NOT NULL,
+  `calc_kind` varchar(32) NOT NULL,
+  `param_int` int(11) DEFAULT NULL,
+  `sort_order` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`term_id`),
+  UNIQUE KEY `term_code` (`term_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 CREATE TABLE IF NOT EXISTS `si_invoices` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `index_id` int(11) NOT NULL,
@@ -199,6 +210,8 @@ CREATE TABLE IF NOT EXISTS `si_invoices` (
   `custom_field3` varchar(50) DEFAULT NULL,
   `custom_field4` varchar(50) DEFAULT NULL,
   `note` text,
+  `payment_term_id` int(11) DEFAULT NULL,
+  `due_date` date DEFAULT NULL,
   `denorm_invoice_total` decimal(25,6) NOT NULL DEFAULT 0,
   `denorm_amount_paid` decimal(25,6) NOT NULL DEFAULT 0,
   `denorm_amount_owing` decimal(25,6) NOT NULL DEFAULT 0,
@@ -243,6 +256,8 @@ CREATE TABLE IF NOT EXISTS `si_payment` (
   `denorm_invoice_index_name` varchar(255) NOT NULL DEFAULT '',
   `denorm_biller_name` varchar(255) NOT NULL DEFAULT '',
   `denorm_customer_name` varchar(255) NOT NULL DEFAULT '',
+  `denorm_currency_sign` varchar(50) NOT NULL DEFAULT '',
+  `denorm_currency_code` varchar(25) NOT NULL DEFAULT '',
   PRIMARY KEY (`domain_id`,`id`),
   KEY `id` (`id`),
   KEY `domain_id` (`domain_id`),
@@ -283,6 +298,7 @@ CREATE TABLE IF NOT EXISTS `si_preferences` (
   `currency_code` varchar(25) DEFAULT NULL,
   `include_online_payment` varchar(255) DEFAULT NULL,
   `currency_position` varchar(25) DEFAULT NULL,
+  `payment_term_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`domain_id`,`pref_id`),
   KEY `pref_id` (`pref_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

@@ -78,14 +78,19 @@
 			</div>
 			<div id="pref-add-currency" class="tab-pane" role="tabpanel">
 				@include('templates.default.partials.currency_sign_field', [
-					'currencySignFieldName' => 'p_currency_sign',
+					'currencySignFieldName'    => 'p_currency_sign',
 					'currencySignCurrentValue' => post('p_currency_sign'),
+					'currencyCodeFieldName'    => 'currency_code',
+					'currencyCodeCurrentValue' => post('currency_code'),
 				])
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['currency_code'] ?? '' }}
-						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_currency_code" title="{{ $LANG['currency_code'] ?? '' }}"><i class="ti ti-help"></i></a>
-					</label>
-					<input type="text" name="currency_code" value="{{ post('currency_code') }}" class="form-control" />
+				<div class="mb-3 mt-3">
+					<label class="form-label">{{ $LANG['payment_terms'] ?? 'Payment terms' }}</label>
+					<select name="payment_term_id" class="form-select">
+						<option value="">{{ $LANG['payment_term_none'] ?? '-' }}</option>
+						@foreach(($paymentTerms ?? []) as $pt)
+							<option value="{{ $pt['term_id'] ?? '' }}" @if((string) post('payment_term_id') === (string)($pt['term_id'] ?? '')) selected @endif>{{ $pt['term_label'] ?? '' }}</option>
+						@endforeach
+					</select>
 				</div>
 			</div>
 			<div id="pref-add-wording" class="tab-pane" role="tabpanel">

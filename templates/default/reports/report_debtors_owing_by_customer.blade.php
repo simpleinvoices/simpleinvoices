@@ -52,9 +52,9 @@
 				<tr>
 					<td class="text-secondary">{{ $customer['cid'] ?? '' }}</td>
 					<td class="fw-medium">{{ $customer['customer'] ?? '' }}</td>
-					<td class="text-end">{{ siLocal::number($customer['inv_total'] ?? 0) ?: '-' }}</td>
-					<td class="text-end text-secondary">{{ siLocal::number($customer['inv_paid'] ?? 0) ?: '-' }}</td>
-					<td class="text-end fw-bold text-red">{{ siLocal::number($customer['inv_owing'] ?? 0) ?: '-' }}</td>
+					<td class="text-end">{{ ($customer['currency_sign'] ?? '')|si_currency_display }}{{ siLocal::number($customer['inv_total'] ?? 0) ?: '-' }}</td>
+					<td class="text-end text-secondary">{{ ($customer['currency_sign'] ?? '')|si_currency_display }}{{ siLocal::number($customer['inv_paid'] ?? 0) ?: '-' }}</td>
+					<td class="text-end fw-bold text-red">{{ ($customer['currency_sign'] ?? '')|si_currency_display }}{{ siLocal::number($customer['inv_owing'] ?? 0) ?: '-' }}@if(!empty($customer['currency_code'])) <span class="badge bg-secondary-lt text-muted ms-1" style="font-size:.7rem">{{ $customer['currency_code'] }}</span>@endif</td>
 				</tr>
 			@endforeach
 			</tbody>

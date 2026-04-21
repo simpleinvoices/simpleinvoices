@@ -33,6 +33,7 @@ $sql = 'SELECT
 			iv.denorm_amount_paid AS inv_paid,
 			iv.denorm_amount_owing AS inv_owing,
 			iv.date,
+			iv.currency_sign,
 			' . $age_days_sql . ' AS age_days
 		FROM
             ' . TB_PREFIX . 'invoices iv

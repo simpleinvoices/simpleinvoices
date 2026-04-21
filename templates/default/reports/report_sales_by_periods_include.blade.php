@@ -6,6 +6,7 @@
 	$rg         = $report_chart_guard ?? ['enabled' => true];
 	$hasData    = !empty($this_data['months']) && !empty($years);
 	$showChart  = $hasData && !empty($rg['enabled']) && !empty($chart_js_years);
+	$summary_currency_sign = $summary_currency_sign ?? '';
 
 	// Build JS-ready month labels and per-year series
 	// months: [ '01' => [ year => amount ], ... ]
@@ -36,7 +37,7 @@
 		<tr class="fw-bold table-active">
 			<th>{{ $LANG['total'] ?? '' }}</th>
 		@foreach(($years ?? []) as $year)
-			<td class="text-end">{{ siLocal::number($this_data['total'][$year] ?? 0) ?: '-' }}</td>
+			<td class="text-end">{{ ($summary_currency_sign)|si_currency_display }}{{ siLocal::number($this_data['total'][$year] ?? 0) ?: '-' }}</td>
 @if($show_rates ?? false)
 			@php $rate = $this_data['total_rate'][$year] ?? 0; @endphp
 			<td class="rate text-end small">
@@ -56,7 +57,7 @@
 		<tr>
 			<th class="text-secondary">{{ ucfirst(siLocal::date('2000-' . $month . '-01', 'month')) }}</th>
 		@foreach(($years ?? []) as $year)
-			<td class="text-end">{{ siLocal::number($amount[$year] ?? 0) ?: '-' }}</td>
+			<td class="text-end">{{ ($summary_currency_sign)|si_currency_display }}{{ siLocal::number($amount[$year] ?? 0) ?: '-' }}</td>
 @if($show_rates ?? false)
 			@php $mrate = $this_data['months_rate'][$month][$year] ?? 0; @endphp
 			<td class="rate text-end small">
