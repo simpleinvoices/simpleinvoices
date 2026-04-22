@@ -25,18 +25,17 @@
 		<div class="tab-content">
 			<div id="pref-view-details" class="tab-pane active" role="tabpanel">
 				<table class="table table-vcenter">
-		<tr>
-			<th>{{ $LANG['description'] ?? '' }} 
-				<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_description" title="{{ $LANG['description'] ?? '' }}">
-				<i class="ti ti-help"></i> </a>
-			</th>
-			<td>{{ $preference['pref_description'] }}</td>
-		</tr>
-		<tr><th>{{ $LANG['enabled'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_enabled" title="{{ $LANG['enabled'] ?? '' }}"><i class="ti ti-help"></i></a></th><td>{{ $preference['enabled'] }}</td></tr>
-		<tr><th>{{ $LANG['status'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_status" title="{{ $LANG['status'] ?? '' }}"><i class="ti ti-help"></i></a></th><td>{{ $preference['status_wording'] }}</td></tr>
-		<tr><th>{{ $LANG['invoice_numbering_group'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_numbering_group" title="{{ $LANG['invoice_numbering_group'] ?? '' }}"><i class="ti ti-help"></i></a></th><td>{{ $index_group['pref_description'] ?? '' }}</td></tr>
-		<tr><th>{{ $LANG['language'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_language" title="{{ $LANG['language'] ?? '' }}"><i class="ti ti-help"></i></a></th><td>{{ $preference['language'] }}</td></tr>
-		<tr><th>{{ $LANG['locale'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_locale" title="{{ $LANG['locale'] ?? '' }}"><i class="ti ti-help"></i></a></th><td>{{ $preference['locale'] }}</td></tr>
+					<tr>
+						<th>{{ $LANG['description'] ?? '' }}
+							<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_description" title="{{ $LANG['description'] ?? '' }}"><i class="ti ti-help"></i></a>
+						</th>
+						<td>{{ $preference['pref_description'] }}</td>
+					</tr>
+					<tr><th>{{ $LANG['status'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_status" title="{{ $LANG['status'] ?? '' }}"><i class="ti ti-help"></i></a></th><td>{{ $preference['status_wording'] }}</td></tr>
+					<tr><th>{{ $LANG['invoice_numbering_group'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_numbering_group" title="{{ $LANG['invoice_numbering_group'] ?? '' }}"><i class="ti ti-help"></i></a></th><td>{{ $index_group['pref_description'] ?? '' }}</td></tr>
+					<tr><th>{{ $LANG['enabled'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_enabled" title="{{ $LANG['enabled'] ?? '' }}"><i class="ti ti-help"></i></a></th><td>{{ $preference['enabled'] }}</td></tr>
+					<tr><th>{{ $LANG['language'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_language" title="{{ $LANG['language'] ?? '' }}"><i class="ti ti-help"></i></a></th><td>{{ $preference['language'] }}</td></tr>
+					<tr><th>{{ $LANG['locale'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_locale" title="{{ $LANG['locale'] ?? '' }}"><i class="ti ti-help"></i></a></th><td>{{ $preference['locale'] }}</td></tr>
 				</table>
 			</div>
 			<div id="pref-view-currency" class="tab-pane" role="tabpanel">

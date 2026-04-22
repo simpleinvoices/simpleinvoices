@@ -34,6 +34,9 @@
 				<a class="nav-link" href="#bill-add-payment" data-bs-toggle="tab" role="tab"><i class="ti ti-credit-card me-1"></i>{{ $LANG['payment'] ?? '' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
+				<a class="nav-link" href="#bill-add-bank" data-bs-toggle="tab" role="tab"><i class="ti ti-building-bank me-1"></i>{{ $LANG['bank_details'] ?? 'Bank Details' }}</a>
+			</li>
+			<li class="nav-item" role="presentation">
 				<a class="nav-link" href="#bill-add-custom" data-bs-toggle="tab" role="tab"><i class="ti ti-adjustments me-1"></i>{{ $LANG['custom_fields'] ?? '' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
@@ -355,6 +358,33 @@
 						</div>
 					</div>
 
+				</div>
+			</div>
+			<div id="bill-add-bank" class="tab-pane" role="tabpanel">
+				<p class="text-muted small mb-3">{{ $LANG['bank_details_hint'] ?? 'Bank account details for electronic transfers. Use tokens like {biller.bank_account_name} in invoice preferences.' }}</p>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['bank_account_name'] ?? 'Account Name' }}</label>
+					<input type="text" name="bank_account_name" value="{{ post('bank_account_name') }}" class="form-control" />
+					<small class="form-hint">{{ $LANG['bank_account_name_hint'] ?? 'Legal name on the account' }}</small>
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['bank_name'] ?? 'Bank Name' }}</label>
+					<input type="text" name="bank_name" value="{{ post('bank_name') }}" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['bank_swift_bic'] ?? 'SWIFT / BIC' }}</label>
+					<input type="text" name="bank_swift_bic" value="{{ post('bank_swift_bic') }}" class="form-control" />
+					<small class="form-hint">{{ $LANG['bank_swift_bic_hint'] ?? 'Bank identifier — universal for international transfers' }}</small>
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['bank_account_number'] ?? 'Account Number / IBAN' }}</label>
+					<input type="text" name="bank_account_number" value="{{ post('bank_account_number') }}" class="form-control" />
+					<small class="form-hint">{{ $LANG['bank_account_number_hint'] ?? 'IBAN (EU) or local account number' }}</small>
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['bank_routing_sort_code'] ?? 'Routing / Sort Code' }}</label>
+					<input type="text" name="bank_routing_sort_code" value="{{ post('bank_routing_sort_code') }}" class="form-control" />
+					<small class="form-hint">{{ $LANG['bank_routing_sort_code_hint'] ?? 'BSB (AU), ABA (US), Sort Code (UK), Transit (CA) — leave blank if using IBAN' }}</small>
 				</div>
 			</div>
 			<div id="bill-add-custom" class="tab-pane" role="tabpanel">

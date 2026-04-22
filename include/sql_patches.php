@@ -3117,3 +3117,88 @@ PRIMARY KEY ( `domain_id`, `id` )
     }
     $patch['387']['date'] = "20260421";
 
+    $patch['388']['name'] = "si_biller: bank_account_name for bank transfer details";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['388']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'bank_account_name')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN bank_account_name VARCHAR(255) NULL';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['388']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'bank_account_name')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `bank_account_name` VARCHAR(255) NULL';
+            break;
+    }
+    $patch['388']['date'] = "20260422";
+
+    $patch['389']['name'] = "si_biller: bank_name for bank transfer details";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['389']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'bank_name')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN bank_name VARCHAR(255) NULL';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['389']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'bank_name')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `bank_name` VARCHAR(255) NULL';
+            break;
+    }
+    $patch['389']['date'] = "20260422";
+
+    $patch['390']['name'] = "si_biller: bank_swift_bic for bank transfer details";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['390']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'bank_swift_bic')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN bank_swift_bic VARCHAR(50) NULL';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['390']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'bank_swift_bic')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `bank_swift_bic` VARCHAR(50) NULL';
+            break;
+    }
+    $patch['390']['date'] = "20260422";
+
+    $patch['391']['name'] = "si_biller: bank_account_number (also IBAN) for bank transfer details";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['391']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'bank_account_number')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN bank_account_number VARCHAR(100) NULL';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['391']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'bank_account_number')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `bank_account_number` VARCHAR(100) NULL';
+            break;
+    }
+    $patch['391']['date'] = "20260422";
+
+    $patch['392']['name'] = "si_biller: bank_routing_sort_code (BSB/ABA/Sort Code) for bank transfer details";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+        case 'pdo_sqlite':
+            $patch['392']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'bank_routing_sort_code')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN bank_routing_sort_code VARCHAR(50) NULL';
+            break;
+        case 'pdo_mysql':
+        default:
+            $patch['392']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'bank_routing_sort_code')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `bank_routing_sort_code` VARCHAR(50) NULL';
+            break;
+    }
+    $patch['392']['date'] = "20260422";
+

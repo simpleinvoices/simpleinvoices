@@ -1447,7 +1447,8 @@ function insertBiller() {
 				eway_api_key, eway_api_password, eway_test_mode,
 				kofi_username,
 				coinbase_api_key, coinbase_webhook_secret,
-				adyen_api_key, adyen_merchant_account, adyen_hmac_key, adyen_live_prefix, adyen_test_mode
+				adyen_api_key, adyen_merchant_account, adyen_hmac_key, adyen_live_prefix, adyen_test_mode,
+				bank_account_name, bank_name, bank_swift_bic, bank_account_number, bank_routing_sort_code
 			) VALUES (
 				:domain_id, :name, :street_address, :street_address2, :city,
 				:state, :zip_code, :country, :phone, :mobile_phone,
@@ -1461,7 +1462,8 @@ function insertBiller() {
 				:eway_api_key, :eway_api_password, :eway_test_mode,
 				:kofi_username,
 				:coinbase_api_key, :coinbase_webhook_secret,
-				:adyen_api_key, :adyen_merchant_account, :adyen_hmac_key, :adyen_live_prefix, :adyen_test_mode
+				:adyen_api_key, :adyen_merchant_account, :adyen_hmac_key, :adyen_live_prefix, :adyen_test_mode,
+				:bank_account_name, :bank_name, :bank_swift_bic, :bank_account_number, :bank_routing_sort_code
 			)";
 	} else {
 		$sql = "INSERT INTO ".TB_PREFIX."biller (
@@ -1477,7 +1479,8 @@ function insertBiller() {
 				eway_api_key, eway_api_password, eway_test_mode,
 				kofi_username,
 				coinbase_api_key, coinbase_webhook_secret,
-				adyen_api_key, adyen_merchant_account, adyen_hmac_key, adyen_live_prefix, adyen_test_mode
+				adyen_api_key, adyen_merchant_account, adyen_hmac_key, adyen_live_prefix, adyen_test_mode,
+				bank_account_name, bank_name, bank_swift_bic, bank_account_number, bank_routing_sort_code
 			) VALUES (
 				NULL, :domain_id, :name, :street_address, :street_address2, :city,
 				:state, :zip_code, :country, :phone, :mobile_phone,
@@ -1491,7 +1494,8 @@ function insertBiller() {
 				:eway_api_key, :eway_api_password, :eway_test_mode,
 				:kofi_username,
 				:coinbase_api_key, :coinbase_webhook_secret,
-				:adyen_api_key, :adyen_merchant_account, :adyen_hmac_key, :adyen_live_prefix, :adyen_test_mode
+				:adyen_api_key, :adyen_merchant_account, :adyen_hmac_key, :adyen_live_prefix, :adyen_test_mode,
+				:bank_account_name, :bank_name, :bank_swift_bic, :bank_account_number, :bank_routing_sort_code
 			)";
 	}
 
@@ -1538,6 +1542,11 @@ function insertBiller() {
 		':adyen_hmac_key', si_gateway_secret_encrypt(trim((string) ($_POST['adyen_hmac_key'] ?? '')), $gkey),
 		':adyen_live_prefix', $_POST['adyen_live_prefix'] ?? '',
 		':adyen_test_mode', (int) ($_POST['adyen_test_mode'] ?? 1),
+		':bank_account_name', $_POST['bank_account_name'] ?? '',
+		':bank_name', $_POST['bank_name'] ?? '',
+		':bank_swift_bic', $_POST['bank_swift_bic'] ?? '',
+		':bank_account_number', $_POST['bank_account_number'] ?? '',
+		':bank_routing_sort_code', $_POST['bank_routing_sort_code'] ?? '',
 		':domain_id', $domain_id
 		);
 	/*
@@ -1601,7 +1610,12 @@ function updateBiller() {
 				adyen_merchant_account = :adyen_merchant_account,
 				adyen_hmac_key = :adyen_hmac_key,
 				adyen_live_prefix = :adyen_live_prefix,
-				adyen_test_mode = :adyen_test_mode
+				adyen_test_mode = :adyen_test_mode,
+				bank_account_name = :bank_account_name,
+				bank_name = :bank_name,
+				bank_swift_bic = :bank_swift_bic,
+				bank_account_number = :bank_account_number,
+				bank_routing_sort_code = :bank_routing_sort_code
 			WHERE
 				id = :id
 			AND domain_id = :domain_id";
@@ -1649,6 +1663,11 @@ function updateBiller() {
 		':adyen_hmac_key', si_gateway_secret_encrypt(trim((string) ($_POST['adyen_hmac_key'] ?? '')), $gkey),
 		':adyen_live_prefix', $_POST['adyen_live_prefix'] ?? '',
 		':adyen_test_mode', (int) ($_POST['adyen_test_mode'] ?? 1),
+		':bank_account_name', $_POST['bank_account_name'] ?? '',
+		':bank_name', $_POST['bank_name'] ?? '',
+		':bank_swift_bic', $_POST['bank_swift_bic'] ?? '',
+		':bank_account_number', $_POST['bank_account_number'] ?? '',
+		':bank_routing_sort_code', $_POST['bank_routing_sort_code'] ?? '',
 		':id', $_GET['id']
 		);
 }
