@@ -72,11 +72,22 @@ if (! $has_invoices) {
 	require_once __DIR__ . '/../../include/class/CurrencySignHelper.php';
 	$wizard_default_preference = getDefaultPreference($domain_id) ?: [];
 	$wizard_payment_terms_rows = getPaymentTerms() ?: [];
+	$wizard_default_biller = [];
+	if (! empty($defaults['biller'])) {
+		$wizard_default_biller = getBiller((int) $defaults['biller'], $domain_id) ?: [];
+	}
+	if (empty($wizard_default_biller) && ! empty($billers) && is_array($billers)) {
+		$first_biller_id = (int) ($billers[0]['id'] ?? 0);
+		if ($first_biller_id > 0) {
+			$wizard_default_biller = getBiller($first_biller_id, $domain_id) ?: [];
+		}
+	}
 	// Step 4 includes payment terms when any exist; legacy session from the currency-only
 	// wizard must not show "Done" until the user submits again with terms in the form.
 	$wizard_invoice_prefs_done = ! empty($_SESSION['wizard_invoice_prefs_done'])
 		|| (! empty($_SESSION['wizard_currency_pref_done']) && count($wizard_payment_terms_rows) === 0);
 	$bladeView->assign('wizard_default_preference', $wizard_default_preference);
+	$bladeView->assign('wizard_default_biller', $wizard_default_biller);
 	$bladeView->assign('wizard_currency_pref_done', $wizard_invoice_prefs_done);
 	$bladeView->assign('wizard_payment_terms', $wizard_payment_terms_rows);
 }

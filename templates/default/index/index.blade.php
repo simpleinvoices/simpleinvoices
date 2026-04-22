@@ -458,6 +458,8 @@
                 @php
                     $wizardPref = isset($wizard_default_preference) && is_array($wizard_default_preference) ? $wizard_default_preference : [];
                     $wizardPrefId = (int) ($wizardPref['pref_id'] ?? 0);
+                    $wizardBiller = isset($wizard_default_biller) && is_array($wizard_default_biller) ? $wizard_default_biller : [];
+                    $wizardBillerId = (int) ($wizardBiller['id'] ?? 0);
                 @endphp
                 @if($wizardCurrencyPrefDone)
                     <div class="d-flex align-items-center gap-3 py-2">
@@ -491,8 +493,12 @@
                                             </p>
                                         </div>
                                     </div>
-                                    <div class="alert alert-info mb-0 py-2 small" role="note">
-                                        <i class="ti ti-info-circle me-1"></i>{{ $LANG['wizard_invoice_prefs_note'] ?? '' }}
+                                    <div class="alert alert-info mb-2 py-2 small" role="note">
+                                        <i class="ti ti-settings me-1"></i>{{ $LANG['wizard_invoice_prefs_note'] ?? '' }}
+                                    </div>
+                                    <div class="alert alert-secondary mb-0 py-2 small" role="note">
+                                        <div><i class="ti ti-building-bank me-1"></i>{{ $LANG['wizard_bank_details_optional'] ?? '' }}</div>
+                                        <div class="mt-1"><i class="ti ti-credit-card me-1"></i>{{ $LANG['wizard_online_payment_biller_note'] ?? '' }}</div>
                                     </div>
                                 </div>
                             </div>
@@ -524,6 +530,53 @@
                                             @endforeach
                                         </select>
                                         <small class="text-secondary">{{ $LANG['wizard_payment_terms_hint'] ?? 'Default payment terms applied to new invoices.' }}</small>
+                                    </div>
+                                </div>
+                                <div class="mt-4 pt-3 border-top">
+                                    <div class="d-flex align-items-start gap-3 mb-3">
+                                        <span class="avatar avatar-md bg-azure-lt rounded-3 flex-shrink-0">
+                                            <i class="ti ti-building-bank text-azure"></i>
+                                        </span>
+                                        <div>
+                                            <h4 class="mb-1">{{ $LANG['bank_details'] ?? 'Bank details' }}</h4>
+                                            <p class="text-secondary mb-0" style="font-size:.875rem">
+                                                {{ $LANG['wizard_bank_details_optional'] ?? '' }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">{{ $LANG['bank_account_name'] ?? 'Account Name' }}</label>
+                                            <input type="text" name="bank_account_name" value="{{ $wizardBiller['bank_account_name'] ?? '' }}" class="form-control" />
+                                            <small class="form-hint">{{ $LANG['bank_account_name_hint'] ?? 'Legal name on the account' }}</small>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">{{ $LANG['bank_name'] ?? 'Bank Name' }}</label>
+                                            <input type="text" name="bank_name" value="{{ $wizardBiller['bank_name'] ?? '' }}" class="form-control" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">{{ $LANG['bank_account_number'] ?? 'Account Number / IBAN' }}</label>
+                                            <input type="text" name="bank_account_number" value="{{ $wizardBiller['bank_account_number'] ?? '' }}" class="form-control" />
+                                            <small class="form-hint">{{ $LANG['bank_account_number_hint'] ?? 'IBAN (EU) or local account number' }}</small>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">{{ $LANG['bank_routing_sort_code'] ?? 'Routing / Sort Code' }}</label>
+                                            <input type="text" name="bank_routing_sort_code" value="{{ $wizardBiller['bank_routing_sort_code'] ?? '' }}" class="form-control" />
+                                            <small class="form-hint">{{ $LANG['bank_routing_sort_code_hint'] ?? 'BSB (AU), ABA (US), Sort Code (UK), Transit (CA) — leave blank if using IBAN' }}</small>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">{{ $LANG['bank_swift_bic'] ?? 'SWIFT / BIC' }}</label>
+                                            <input type="text" name="bank_swift_bic" value="{{ $wizardBiller['bank_swift_bic'] ?? '' }}" class="form-control" />
+                                            <small class="form-hint">{{ $LANG['bank_swift_bic_hint'] ?? 'Bank identifier — universal for international transfers' }}</small>
+                                        </div>
+                                    </div>
+                                    <div class="alert alert-secondary mt-3 mb-0 py-2 small" role="note">
+                                        <i class="ti ti-credit-card me-1"></i>{{ $LANG['wizard_online_payment_biller_note'] ?? '' }}
+                                        @if($wizardBillerId > 0)
+                                            <a href="index.php?module=billers&amp;view=details&amp;id={{ $wizardBillerId }}&amp;action=edit" class="alert-link ms-1">
+                                                <i class="ti ti-external-link me-1"></i>{{ $LANG['wizard_edit_biller_details'] ?? '' }}
+                                            </a>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="mt-3 d-flex justify-content-end">

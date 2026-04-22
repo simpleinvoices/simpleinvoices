@@ -58,6 +58,11 @@ CREATE TABLE IF NOT EXISTS `si_biller` (
   `adyen_hmac_key` varchar(768) DEFAULT NULL,
   `adyen_live_prefix` varchar(100) DEFAULT NULL,
   `adyen_test_mode` TINYINT(1) NOT NULL DEFAULT 1,
+  `bank_account_name` varchar(255) DEFAULT NULL,
+  `bank_name` varchar(255) DEFAULT NULL,
+  `bank_swift_bic` varchar(50) DEFAULT NULL,
+  `bank_account_number` varchar(100) DEFAULT NULL,
+  `bank_routing_sort_code` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`domain_id`,`id`),
   KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

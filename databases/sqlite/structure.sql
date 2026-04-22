@@ -45,7 +45,12 @@ CREATE TABLE IF NOT EXISTS si_biller (
   adyen_merchant_account       TEXT DEFAULT NULL,
   adyen_hmac_key               TEXT DEFAULT NULL,
   adyen_live_prefix            TEXT DEFAULT NULL,
-  adyen_test_mode              INTEGER NOT NULL DEFAULT 1
+  adyen_test_mode              INTEGER NOT NULL DEFAULT 1,
+  bank_account_name            TEXT DEFAULT NULL,
+  bank_name                    TEXT DEFAULT NULL,
+  bank_swift_bic               TEXT DEFAULT NULL,
+  bank_account_number          TEXT DEFAULT NULL,
+  bank_routing_sort_code       TEXT DEFAULT NULL
 );
 CREATE UNIQUE INDEX IF NOT EXISTS si_biller_pk ON si_biller (domain_id, id);
 

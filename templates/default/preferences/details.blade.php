@@ -60,6 +60,7 @@
 					<tr><th>{{ $LANG['invoice_heading'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_heading" title="{{ $LANG['invoice_heading'] ?? '' }}"><i class="ti ti-help"></i></a></th><td>{{ $preference['pref_inv_heading'] ?? '' }}</td></tr>
 					<tr><th>{{ $LANG['invoice_wording'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_wording" title="{{ $LANG['invoice_wording'] ?? '' }}"><i class="ti ti-help"></i></a></th><td>{{ $preference['pref_inv_wording'] ?? '' }}</td></tr>
 					<tr><th>{{ $LANG['invoice_detail_heading'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_detail_heading" title="{{ $LANG['invoice_detail_heading'] ?? '' }}"><i class="ti ti-help"></i></a></th><td>{{ $preference['pref_inv_detail_heading'] ?? '' }}</td></tr>
+					<tr><th>{{ $LANG['invoice_detail_line'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_detail_line" title="{{ $LANG['invoice_detail_line'] ?? '' }}"><i class="ti ti-help"></i></a></th><td>{{ $preference['pref_inv_detail_line'] ?? '' }}</td></tr>
 				</table>
 			</div>
 			<div id="pref-view-payment" class="tab-pane" role="tabpanel">

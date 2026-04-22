@@ -46,6 +46,11 @@ CREATE TABLE IF NOT EXISTS si_biller (
   adyen_hmac_key               VARCHAR(768) DEFAULT NULL,
   adyen_live_prefix            VARCHAR(100) DEFAULT NULL,
   adyen_test_mode              SMALLINT NOT NULL DEFAULT 1,
+  bank_account_name            VARCHAR(255) DEFAULT NULL,
+  bank_name                    VARCHAR(255) DEFAULT NULL,
+  bank_swift_bic               VARCHAR(50) DEFAULT NULL,
+  bank_account_number          VARCHAR(100) DEFAULT NULL,
+  bank_routing_sort_code       VARCHAR(50) DEFAULT NULL,
   PRIMARY KEY (domain_id, id)
 );
 

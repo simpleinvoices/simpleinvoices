@@ -175,6 +175,11 @@ CREATE TABLE si_biller (
   custom_field2 varchar(255),
   custom_field3 varchar(255),
   custom_field4 varchar(255),
+  bank_account_name varchar(255),
+  bank_name varchar(255),
+  bank_swift_bic varchar(50),
+  bank_account_number varchar(100),
+  bank_routing_sort_code varchar(50),
   enabled boolean NOT NULL default true
 );
 

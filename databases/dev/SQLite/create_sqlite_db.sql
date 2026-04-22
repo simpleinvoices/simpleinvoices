@@ -38,6 +38,11 @@ CREATE TABLE IF NOT EXISTS "si_biller" (
   "custom_field2" varchar(255) default NULL,
   "custom_field3" varchar(255) default NULL,
   "custom_field4" varchar(255) default NULL,
+  "bank_account_name" varchar(255) default NULL,
+  "bank_name" varchar(255) default NULL,
+  "bank_swift_bic" varchar(50) default NULL,
+  "bank_account_number" varchar(100) default NULL,
+  "bank_routing_sort_code" varchar(50) default NULL,
   "enabled" varchar(1) NOT NULL default '1'
 
 ) ;
