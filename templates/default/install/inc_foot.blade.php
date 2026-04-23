@@ -2,11 +2,8 @@
 			@php
 				$appWebsite = $config->app?->website ?? 'http://www.simpleinvoices.org';
 			@endphp
-			<div class="alert alert-info mt-4 mb-0" role="alert">
-				<strong>{{ $LANG['note'] ?? '' }}:</strong>
-				{{ $LANG['install_help'] ?? '' }}
-				<a href="{{ $appWebsite }}" target="_blank" rel="noopener" class="alert-link">{{ $LANG['install_documentation'] ?? '' }}</a>
-				( <a href="{{ $appWebsite }}" target="_blank" rel="noopener" class="alert-link">{{ $appWebsite }}</a> )
+			<div class="text-center mt-4 text-secondary small">
+				Need help? Visit <a href="{{ $appWebsite }}" target="_blank" rel="noopener">{{ $appWebsite }}</a> for documentation and support.
 			</div>
 			@endif
 		</div>

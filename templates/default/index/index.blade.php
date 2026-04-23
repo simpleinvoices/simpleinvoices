@@ -461,6 +461,19 @@
                     $wizardBiller = isset($wizard_default_biller) && is_array($wizard_default_biller) ? $wizard_default_biller : [];
                     $wizardBillerId = (int) ($wizardBiller['id'] ?? 0);
                 @endphp
+                @php
+                    $wizardPaymentProcessors = [
+                        ['label' => 'Stripe', 'provider' => 'stripe'],
+                        ['label' => 'PayPal', 'provider' => 'paypal'],
+                        ['label' => 'Mollie', 'provider' => 'ideal'],
+                        ['label' => 'Authorize.net', 'provider' => 'authorize'],
+                        ['label' => ($LANG['eway_rapid'] ?? 'eWay Rapid'), 'provider' => 'eway'],
+                        ['label' => ($LANG['paymentsgateway_modern'] ?? 'Payments Gateway'), 'provider' => 'sage'],
+                        ['label' => 'Ko-fi', 'provider' => 'cash-app'],
+                        ['label' => ($LANG['coinbase_commerce'] ?? 'Coinbase Commerce'), 'provider' => 'bitcoin'],
+                        ['label' => 'Adyen', 'provider' => 'adyen'],
+                    ];
+                @endphp
                 @if($wizardCurrencyPrefDone)
                     <div class="d-flex align-items-center gap-3 py-2">
                         <span class="avatar avatar-lg bg-success-lt rounded"><i class="ti ti-check fs-2 text-success"></i></span>
@@ -499,6 +512,20 @@
                                     <div class="alert alert-secondary mb-0 py-2 small" role="note">
                                         <div><i class="ti ti-building-bank me-1"></i>{{ $LANG['wizard_bank_details_optional'] ?? '' }}</div>
                                         <div class="mt-1"><i class="ti ti-credit-card me-1"></i>{{ $LANG['wizard_online_payment_biller_note'] ?? '' }}</div>
+                                        <div class="si-wizard-payment-providers">
+                                            @foreach($wizardPaymentProcessors as $processor)
+                                            <div class="si-wizard-payment-provider" title="{{ $processor['label'] }}">
+                                                @if(!empty($processor['provider']))
+                                                <span class="payment si-payment-icon si-payment-provider-{{ $processor['provider'] }}" aria-hidden="true"></span>
+                                                @else
+                                                <span class="avatar avatar-sm bg-primary-lt rounded-2">
+                                                    <i class="ti ti-credit-card text-primary"></i>
+                                                </span>
+                                                @endif
+                                                <span>{{ $processor['label'] }}</span>
+                                            </div>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -571,12 +598,26 @@
                                         </div>
                                     </div>
                                     <div class="alert alert-secondary mt-3 mb-0 py-2 small" role="note">
-                                        <i class="ti ti-credit-card me-1"></i>{{ $LANG['wizard_online_payment_biller_note'] ?? '' }}
-                                        @if($wizardBillerId > 0)
-                                            <a href="index.php?module=billers&amp;view=details&amp;id={{ $wizardBillerId }}&amp;action=edit" class="alert-link ms-1">
-                                                <i class="ti ti-external-link me-1"></i>{{ $LANG['wizard_edit_biller_details'] ?? '' }}
-                                            </a>
-                                        @endif
+                                        <div class="d-flex align-items-center flex-wrap gap-2">
+                                            <span><i class="ti ti-credit-card me-1"></i>{{ $LANG['wizard_online_payment_biller_note'] ?? '' }}</span>
+                                            @if($wizardBillerId > 0)
+                                                <a href="index.php?module=billers&amp;view=details&amp;id={{ $wizardBillerId }}&amp;action=edit" class="alert-link">
+                                                    <i class="ti ti-external-link me-1"></i>{{ $LANG['wizard_edit_biller_details'] ?? '' }}
+                                                </a>
+                                            @endif
+                                        </div>
+                                        <div class="si-payment-badges-compact">
+                                            @foreach($wizardPaymentProcessors as $processor)
+                                            <span class="si-payment-badge-compact" title="{{ $processor['label'] }}">
+                                                @if(!empty($processor['provider']))
+                                                <span class="payment si-payment-icon si-payment-provider-{{ $processor['provider'] }}" aria-hidden="true"></span>
+                                                @else
+                                                <i class="ti ti-credit-card text-secondary" style="font-size:0.75rem"></i>
+                                                @endif
+                                                <span>{{ $processor['label'] }}</span>
+                                            </span>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="mt-3 d-flex justify-content-end">
@@ -1103,7 +1144,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ $LANG['close'] ?? '' }}"></button>
             </div>
             <div class="modal-body d-flex gap-2 flex-wrap">
-                <a href="#" title="{{ ($LANG['export_tooltip'] ?? '') }} {{ ($LANG['export_pdf_tooltip'] ?? '') }}" class="btn btn-outline-danger export_pdf export_window">
+                <a href="#" title="{{ ($LANG['export_tooltip'] ?? '') }} {{ ($LANG['export_pdf_tooltip'] ?? '') }}" class="btn btn-outline-danger export_pdf export_window" target="_blank" rel="noopener">
                     <i class="ti ti-file-certificate me-1"></i>{{ $LANG['export_pdf'] ?? '' }}
                 </a>
                 <a href="#" title="{{ ($LANG['export_tooltip'] ?? '') }} {{ ($LANG['export_xls_tooltip'] ?? '') }} .{{ $defaults['spreadsheet'] ?? 'xlsx' }}" class="btn btn-outline-success export_xls export_window">

@@ -51,7 +51,7 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ $LANG['close'] ?? '' }}"></button>
 				</div>
 				<div class="modal-body d-flex gap-2 flex-wrap">
-					<a href="#" title='{{ $LANG['export_tooltip'] ?? '' }} {{ $LANG['export_pdf_tooltip'] ?? '' }}' class='btn btn-outline-danger export_pdf export_window'>
+					<a href="#" title='{{ $LANG['export_tooltip'] ?? '' }} {{ $LANG['export_pdf_tooltip'] ?? '' }}' class='btn btn-outline-danger export_pdf export_window' target="_blank" rel="noopener">
 						<i class="ti ti-file-certificate me-1"></i>{{ $LANG['export_pdf'] ?? '' }}
 					</a>
 					<a href="#" title='{{ $LANG['export_tooltip'] ?? '' }} {{ $LANG['export_xls_tooltip'] ?? '' }} .{{ $defaults['spreadsheet'] ?? 'xlsx' }}' class='btn btn-outline-success export_xls export_window'>

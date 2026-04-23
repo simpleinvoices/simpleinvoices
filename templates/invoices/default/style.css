@@ -83,3 +83,153 @@ tr {margin: 0px;      padding: 0px;}
  min-width: 3em;
  white-space: nowrap;
 }
+
+.si-payment-method {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.si-payment-icon {
+  display: inline-block;
+  width: 3em;
+  height: 1.85em;
+  margin-right: 0.5em;
+  vertical-align: middle;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  object-fit: contain;
+  border-radius: 0.25em;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.si-payment-provider-paypal { background-image: url("../img/payments/paypal.svg"); }
+.si-payment-provider-stripe { background-image: url("../img/payments/stripe.svg"); }
+.si-payment-provider-adyen { background-image: url("../img/payments/adyen.svg"); }
+.si-payment-provider-authorize { background-image: url("../img/payments/authorize.svg"); }
+.si-payment-provider-eway { background-image: url("../img/payments/eway.svg"); }
+.si-payment-provider-visa { background-image: url("../img/payments/visa.svg"); }
+.si-payment-provider-mastercard { background-image: url("../img/payments/mastercard.svg"); }
+.si-payment-provider-americanexpress { background-image: url("../img/payments/americanexpress.svg"); }
+.si-payment-provider-applepay { background-image: url("../img/payments/applepay.svg"); }
+.si-payment-provider-google-pay { background-image: url("../img/payments/google-pay.svg"); }
+.si-payment-provider-shop-pay { background-image: url("../img/payments/shop-pay.svg"); }
+.si-payment-provider-cash-app { background-image: url("../img/payments/cash-app.svg"); }
+.si-payment-provider-bitcoin { background-image: url("../img/payments/bitcoin.svg"); }
+.si-payment-provider-ethereum { background-image: url("../img/payments/ethereum.svg"); }
+.si-payment-provider-litecoin { background-image: url("../img/payments/litecoin.svg"); }
+.si-payment-provider-klarna { background-image: url("../img/payments/klarna.svg"); }
+.si-payment-provider-skrill { background-image: url("../img/payments/skrill.svg"); }
+.si-payment-provider-braintree { background-image: url("../img/payments/braintree.svg"); }
+.si-payment-provider-square { background-image: url("../img/payments/square.svg"); }
+.si-payment-provider-shopify { background-image: url("../img/payments/shopify.svg"); }
+.si-payment-provider-sage { background-image: url("../img/payments/sage.svg"); }
+.si-payment-provider-worldpay { background-image: url("../img/payments/worldpay.svg"); }
+.si-payment-provider-dinersclub { background-image: url("../img/payments/dinersclub.svg"); }
+.si-payment-provider-discover { background-image: url("../img/payments/discover.svg"); }
+.si-payment-provider-jcb { background-image: url("../img/payments/jcb.svg"); }
+.si-payment-provider-unionpay { background-image: url("../img/payments/unionpay.svg"); }
+.si-payment-provider-sepa { background-image: url("../img/payments/sepa.svg"); }
+.si-payment-provider-ideal { background-image: url("../img/payments/ideal.svg"); }
+.si-payment-provider-giropay { background-image: url("../img/payments/giropay.svg"); }
+.si-payment-provider-bancontact { background-image: url("../img/payments/bancontact.svg"); }
+.si-payment-provider-alipay { background-image: url("../img/payments/alipay.svg"); }
+.si-payment-provider-we-chat-pay { background-image: url("../img/payments/we-chat-pay.svg"); }
+.si-payment-provider-bitpay { background-image: url("../img/payments/bitpay.svg"); }
+.si-payment-provider-monero { background-image: url("../img/payments/monero.svg"); }
+.si-payment-provider-tether { background-image: url("../img/payments/tether.svg"); }
+.si-payment-provider-solana { background-image: url("../img/payments/solana.svg"); }
+.si-payment-provider-ripple { background-image: url("../img/payments/ripple.svg"); }
+.si-payment-provider-metamask { background-image: url("../img/payments/metamask.svg"); }
+.si-payment-provider-binance-usd { background-image: url("../img/payments/binance-usd.svg"); }
+.si-payment-provider-venmo { background-image: url("../img/payments/venmo.svg"); }
+.si-payment-provider-zelle { background-image: url("../img/payments/zelle.svg"); }
+.si-payment-provider-wise { background-image: url("../img/payments/wise.svg"); }
+.si-payment-provider-westernunion { background-image: url("../img/payments/westernunion.svg"); }
+.si-payment-provider-moneygram { background-image: url("../img/payments/moneygram.svg"); }
+.si-payment-provider-maestro { background-image: url("../img/payments/maestro.svg"); }
+.si-payment-provider-mir { background-image: url("../img/payments/mir.svg"); }
+.si-payment-provider-samsung-pay { background-image: url("../img/payments/samsung-pay.svg"); }
+.si-payment-provider-verifone { background-image: url("../img/payments/verifone.svg"); }
+.si-payment-provider-revolut-pay { background-image: url("../img/payments/revolut-pay.svg"); }
+.si-payment-provider-affirm { background-image: url("../img/payments/affirm.svg"); }
+.si-payment-provider-paysafe { background-image: url("../img/payments/paysafe.svg"); }
+.si-payment-provider-neteller { background-image: url("../img/payments/neteller.svg"); }
+.si-payment-provider-payoneer { background-image: url("../img/payments/payoneer.svg"); }
+.si-payment-provider-payu { background-image: url("../img/payments/payu.svg"); }
+.si-payment-provider-webmoney { background-image: url("../img/payments/webmoney.svg"); }
+.si-payment-provider-dwolla { background-image: url("../img/payments/dwolla.svg"); }
+.si-payment-provider-paymill { background-image: url("../img/payments/paymill.svg"); }
+.si-payment-provider-payone { background-image: url("../img/payments/payone.svg"); }
+.si-payment-provider-stax { background-image: url("../img/payments/stax.svg"); }
+.si-payment-provider-amazon-pay { background-image: url("../img/payments/amazon-pay.svg"); }
+.si-payment-provider-googlewallet { background-image: url("../img/payments/googlewallet.svg"); }
+
+/* Payment icons in buttons */
+.btn .si-payment-icon {
+	width: 1.5rem;
+	height: 1rem;
+	vertical-align: middle;
+	box-shadow: none;
+	border-radius: 0.25rem;
+	margin-right: 0.35rem;
+}
+
+.btn-sm .si-payment-icon {
+	width: 1.25rem;
+	height: 0.85rem;
+}
+
+/* Payment links section – horizontal row of branded buttons */
+.si-payment-links {
+  margin-top: 0.625em;
+}
+
+.si-payment-links-heading {
+  font-size: 0.7em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #64748b;
+  margin-bottom: 0.5em;
+}
+
+.si-payment-links-row {
+  display: block;
+  line-height: 1;
+}
+
+.si-payment-pay-btn {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0.45em 0.85em;
+  border: 1px solid #d1d5db;
+  border-radius: 0.35em;
+  background: #ffffff;
+  color: #333333;
+  text-decoration: none;
+  font-size: 0.8125em;
+  font-weight: 500;
+  line-height: 1;
+  margin-right: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.si-payment-pay-btn:hover {
+  border-color: #3b82f6;
+  background: #f9fafb;
+  text-decoration: none;
+}
+
+.si-payment-pay-btn .si-payment-icon {
+  width: 2.5em;
+  height: 1.55em;
+  box-shadow: none;
+  vertical-align: middle;
+  margin-right: 0.45em;
+}
+
+.si-payment-pay-label {
+  white-space: nowrap;
+  vertical-align: middle;
+}

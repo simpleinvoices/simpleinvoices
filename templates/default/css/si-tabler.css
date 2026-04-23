@@ -38,6 +38,270 @@ body {
     font-family: "Inter Var", Inter, -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
 }
 
+.si-payment-method {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+}
+
+.si-payment-method .si-payment-icon {
+    transition: transform 0.15s ease;
+}
+
+.si-payment-method .si-payment-icon:hover {
+    transform: scale(1.1);
+    z-index: 1;
+}
+
+/* Compact payment method display for invoice details */
+.si-payment-method-compact {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.si-payment-method-compact .si-payment-icon {
+    width: 2rem;
+    height: 1.25rem;
+}
+
+/* Prominent payment method display for quick view */
+.si-payment-method-prominent {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.si-payment-prominent-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--tblr-border-color);
+    border-radius: 0.5rem;
+    background: var(--tblr-bg-surface);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.si-payment-prominent-item:hover {
+    border-color: var(--tblr-primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.si-payment-prominent-item .si-payment-icon {
+    width: 3rem;
+    height: 1.875rem;
+}
+
+.si-payment-prominent-label {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--tblr-body-color);
+    line-height: 1.2;
+}
+
+.si-payment-icon {
+    flex: 0 0 auto;
+    height: 1.5rem;
+    width: 2.5rem;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    object-fit: contain;
+    border-radius: 0.375rem;
+    box-shadow: 0 0 0 1px rgba(4, 32, 69, 0.08);
+    vertical-align: middle;
+}
+
+.si-payment-provider-paypal { background-image: url("../../invoices/img/payments/paypal.svg"); }
+.si-payment-provider-stripe { background-image: url("../../invoices/img/payments/stripe.svg"); }
+.si-payment-provider-adyen { background-image: url("../../invoices/img/payments/adyen.svg"); }
+.si-payment-provider-authorize { background-image: url("../../invoices/img/payments/authorize.svg"); }
+.si-payment-provider-eway { background-image: url("../../invoices/img/payments/eway.svg"); }
+.si-payment-provider-visa { background-image: url("../../invoices/img/payments/visa.svg"); }
+.si-payment-provider-mastercard { background-image: url("../../invoices/img/payments/mastercard.svg"); }
+.si-payment-provider-americanexpress { background-image: url("../../invoices/img/payments/americanexpress.svg"); }
+.si-payment-provider-applepay { background-image: url("../../invoices/img/payments/applepay.svg"); }
+.si-payment-provider-google-pay { background-image: url("../../invoices/img/payments/google-pay.svg"); }
+.si-payment-provider-shop-pay { background-image: url("../../invoices/img/payments/shop-pay.svg"); }
+.si-payment-provider-cash-app { background-image: url("../../invoices/img/payments/cash-app.svg"); }
+.si-payment-provider-bitcoin { background-image: url("../../invoices/img/payments/bitcoin.svg"); }
+.si-payment-provider-ethereum { background-image: url("../../invoices/img/payments/ethereum.svg"); }
+.si-payment-provider-litecoin { background-image: url("../../invoices/img/payments/litecoin.svg"); }
+.si-payment-provider-klarna { background-image: url("../../invoices/img/payments/klarna.svg"); }
+.si-payment-provider-skrill { background-image: url("../../invoices/img/payments/skrill.svg"); }
+.si-payment-provider-braintree { background-image: url("../../invoices/img/payments/braintree.svg"); }
+.si-payment-provider-square { background-image: url("../../invoices/img/payments/square.svg"); }
+.si-payment-provider-shopify { background-image: url("../../invoices/img/payments/shopify.svg"); }
+.si-payment-provider-sage { background-image: url("../../invoices/img/payments/sage.svg"); }
+.si-payment-provider-worldpay { background-image: url("../../invoices/img/payments/worldpay.svg"); }
+.si-payment-provider-dinersclub { background-image: url("../../invoices/img/payments/dinersclub.svg"); }
+.si-payment-provider-discover { background-image: url("../../invoices/img/payments/discover.svg"); }
+.si-payment-provider-jcb { background-image: url("../../invoices/img/payments/jcb.svg"); }
+.si-payment-provider-unionpay { background-image: url("../../invoices/img/payments/unionpay.svg"); }
+.si-payment-provider-sepa { background-image: url("../../invoices/img/payments/sepa.svg"); }
+.si-payment-provider-ideal { background-image: url("../../invoices/img/payments/ideal.svg"); }
+.si-payment-provider-giropay { background-image: url("../../invoices/img/payments/giropay.svg"); }
+.si-payment-provider-bancontact { background-image: url("../../invoices/img/payments/bancontact.svg"); }
+.si-payment-provider-alipay { background-image: url("../../invoices/img/payments/alipay.svg"); }
+.si-payment-provider-we-chat-pay { background-image: url("../../invoices/img/payments/we-chat-pay.svg"); }
+.si-payment-provider-bitpay { background-image: url("../../invoices/img/payments/bitpay.svg"); }
+.si-payment-provider-monero { background-image: url("../../invoices/img/payments/monero.svg"); }
+.si-payment-provider-tether { background-image: url("../../invoices/img/payments/tether.svg"); }
+.si-payment-provider-solana { background-image: url("../../invoices/img/payments/solana.svg"); }
+.si-payment-provider-ripple { background-image: url("../../invoices/img/payments/ripple.svg"); }
+.si-payment-provider-metamask { background-image: url("../../invoices/img/payments/metamask.svg"); }
+.si-payment-provider-binance-usd { background-image: url("../../invoices/img/payments/binance-usd.svg"); }
+.si-payment-provider-venmo { background-image: url("../../invoices/img/payments/venmo.svg"); }
+.si-payment-provider-zelle { background-image: url("../../invoices/img/payments/zelle.svg"); }
+.si-payment-provider-wise { background-image: url("../../invoices/img/payments/wise.svg"); }
+.si-payment-provider-westernunion { background-image: url("../../invoices/img/payments/westernunion.svg"); }
+.si-payment-provider-moneygram { background-image: url("../../invoices/img/payments/moneygram.svg"); }
+.si-payment-provider-maestro { background-image: url("../../invoices/img/payments/maestro.svg"); }
+.si-payment-provider-mir { background-image: url("../../invoices/img/payments/mir.svg"); }
+.si-payment-provider-samsung-pay { background-image: url("../../invoices/img/payments/samsung-pay.svg"); }
+.si-payment-provider-verifone { background-image: url("../../invoices/img/payments/verifone.svg"); }
+.si-payment-provider-revolut-pay { background-image: url("../../invoices/img/payments/revolut-pay.svg"); }
+.si-payment-provider-affirm { background-image: url("../../invoices/img/payments/affirm.svg"); }
+.si-payment-provider-afterpay { background-image: url("../../invoices/img/payments/affirm.svg"); }
+.si-payment-provider-paysafe { background-image: url("../../invoices/img/payments/paysafe.svg"); }
+.si-payment-provider-neteller { background-image: url("../../invoices/img/payments/neteller.svg"); }
+.si-payment-provider-payoneer { background-image: url("../../invoices/img/payments/payoneer.svg"); }
+.si-payment-provider-payu { background-image: url("../../invoices/img/payments/payu.svg"); }
+.si-payment-provider-payza { background-image: url("../../invoices/img/payments/payza.svg"); }
+.si-payment-provider-webmoney { background-image: url("../../invoices/img/payments/webmoney.svg"); }
+.si-payment-provider-dwolla { background-image: url("../../invoices/img/payments/dwolla.svg"); }
+.si-payment-provider-paymill { background-image: url("../../invoices/img/payments/paymill.svg"); }
+.si-payment-provider-payone { background-image: url("../../invoices/img/payments/payone.svg"); }
+.si-payment-provider-stax { background-image: url("../../invoices/img/payments/stax.svg"); }
+.si-payment-provider-spingo { background-image: url("../../invoices/img/payments/spingo.svg"); }
+.si-payment-provider-solo { background-image: url("../../invoices/img/payments/solo.svg"); }
+.si-payment-provider-switch { background-image: url("../../invoices/img/payments/switch.svg"); }
+.si-payment-provider-laser { background-image: url("../../invoices/img/payments/laser.svg"); }
+.si-payment-provider-ogone { background-image: url("../../invoices/img/payments/ogone.svg"); }
+.si-payment-provider-okpay { background-image: url("../../invoices/img/payments/okpay.svg"); }
+.si-payment-provider-paybox { background-image: url("../../invoices/img/payments/paybox.svg"); }
+.si-payment-provider-paysafecard { background-image: url("../../invoices/img/payments/paysafecard.svg"); }
+.si-payment-provider-2checkout { background-image: url("../../invoices/img/payments/2checkout.svg"); }
+.si-payment-provider-amazon-pay { background-image: url("../../invoices/img/payments/amazon-pay.svg"); }
+.si-payment-provider-googlewallet { background-image: url("../../invoices/img/payments/googlewallet.svg"); }
+
+.si-payment-option-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.si-payment-option-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.35rem 0.55rem;
+    border: 1px solid var(--tblr-border-color);
+    border-radius: 999px;
+    background: var(--tblr-bg-surface);
+    color: var(--tblr-body-color);
+    font-size: 0.8125rem;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.si-payment-option-badge .si-payment-icon {
+    width: 2rem;
+    height: 1.2rem;
+}
+
+/* Wizard payment providers grid display */
+.si-wizard-payment-providers {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+}
+
+.si-wizard-payment-provider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    padding: 0.75rem 0.5rem;
+    background: var(--tblr-bg-surface);
+    border: 1px solid var(--tblr-border-color);
+    border-radius: var(--tblr-border-radius-lg);
+    transition: all 0.2s ease;
+}
+
+.si-wizard-payment-provider:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    border-color: var(--tblr-border-hover-color, var(--tblr-border-color));
+}
+
+.si-wizard-payment-provider .si-payment-icon {
+    width: 3rem;
+    height: 2rem;
+    box-shadow: none;
+    border-radius: 0.25rem;
+}
+
+.si-wizard-payment-provider span {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    color: var(--tblr-secondary);
+    text-align: center;
+    line-height: 1.2;
+}
+
+/* Compact inline payment badges for bank section */
+.si-payment-badges-compact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+}
+
+.si-payment-badge-compact {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.25rem 0.5rem;
+    background: var(--tblr-bg-surface-secondary);
+    border: 1px solid var(--tblr-border-color);
+    border-radius: var(--tblr-border-radius);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--tblr-body-color);
+}
+
+.si-payment-badge-compact .si-payment-icon {
+    width: 1.75rem;
+    height: 1rem;
+    box-shadow: none;
+}
+
+/* Payment icons in buttons (online payment links) */
+.btn .si-payment-icon {
+    width: 1.5rem;
+    height: 1rem;
+    vertical-align: middle;
+    box-shadow: none;
+    border-radius: 0.25rem;
+    margin-right: 0.35rem;
+}
+
+.btn-lg .si-payment-icon {
+    width: 1.75rem;
+    height: 1.15rem;
+}
+
+.btn-sm .si-payment-icon {
+    width: 1.25rem;
+    height: 0.85rem;
+}
+
 /* Remove default Tabler page-body margins and page-header top margin */
 .page-body {
     margin-top: 0 !important;
@@ -996,4 +1260,3 @@ a.segmented-control-item {
         max-height: 40vh;
     }
 }
-

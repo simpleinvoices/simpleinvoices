@@ -263,6 +263,7 @@
                       || !empty($preference['pref_inv_payment_line2_name'])
                       || !empty($preference['pref_inv_payment_line2_value'])
                       || !empty($biller['footer']);
+            $hasPaymentMethod = !empty($preference['pref_inv_payment_method']) || !empty($preference['include_online_payment']);
         @endphp
         @if($hasDetail)
         <div class="mt-4 pt-3 border-top">
@@ -272,8 +273,15 @@
             @if(!empty($preference['pref_inv_detail_line']))
             <div class="text-secondary small mb-1"><em>{!! outhtml($preference['pref_inv_detail_line']) !!}</em></div>
             @endif
-            @if(!empty($preference['pref_inv_payment_method']))
-            <div class="text-secondary small mb-1">{{ $preference['pref_inv_payment_method'] }}</div>
+            @if($hasPaymentMethod)
+            <div class="si-payment-section mt-3">
+                <div class="text-secondary small fw-medium mb-2">{{ $LANG['payment_method'] ?? 'Payment method' }}</div>
+                @include('templates.default.partials.payment_processor_badge', [
+                    'methodText' => $preference['pref_inv_payment_method'] ?? '',
+                    'onlinePayments' => $preference['include_online_payment'] ?? '',
+                    'wrapperClass' => 'si-payment-method-prominent',
+                ])
+            </div>
             @endif
             @if(!empty($preference['pref_inv_payment_line1_name']) || !empty($preference['pref_inv_payment_line1_value']))
             <div class="text-secondary small mb-1">{{ $preference['pref_inv_payment_line1_name'] ?? '' }} {{ $preference['pref_inv_payment_line1_value'] ?? '' }}</div>

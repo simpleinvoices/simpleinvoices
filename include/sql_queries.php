@@ -3264,6 +3264,63 @@ function pdfThis($html,$file_location="",$pdfname)
 					);
 				}
 
+				// Resolve relative url() paths in background-image (and other CSS
+				// properties) to absolute filesystem paths.  When stylesheets are
+				// inlined into <style> tags the browser/mPDF can no longer resolve
+				// relative paths against the CSS file's directory, so we rewrite
+				// them here.  Where possible we embed as data-URIs (base64) for
+				// maximum PDF compatibility.
+				if ($app_root !== false) {
+					$html_to_pdf = preg_replace_callback(
+						'/url\(\s*["\']?\s*(\.\.\/[^)\s"\']+|\.\/[^)\s"\']+)\s*["\']?\s*\)/',
+						function ($m) use ($app_root) {
+							$rel = $m[1];
+							$rel = str_replace('\\', '/', $rel);
+							$resolved = null;
+							// Try to resolve against known invoice template directories
+							$dirs = glob($app_root . '/templates/invoices/*/style.css');
+							foreach ($dirs as $cssFile) {
+								$cssDir = str_replace('\\', '/', dirname($cssFile));
+								$candidate = rtrim($cssDir, '/') . '/' . $rel;
+								// Normalise ../ segments
+								while (strpos($candidate, '/../') !== false) {
+									$candidate = preg_replace('#/[^/]+/\.\.#', '', $candidate, 1);
+								}
+								$real = str_replace('\\', '/', realpath($candidate) ?: $candidate);
+								if (is_file($real)) {
+									$resolved = $real;
+									break;
+								}
+							}
+							// Fallback: resolve relative to app root
+							if ($resolved === null) {
+								$candidate = $app_root . '/' . $rel;
+								while (strpos($candidate, '/../') !== false) {
+									$candidate = preg_replace('#/[^/]+/\.\.#', '', $candidate, 1);
+								}
+								$real = str_replace('\\', '/', realpath($candidate) ?: $candidate);
+								if (is_file($real)) {
+									$resolved = $real;
+								}
+							}
+							if ($resolved === null) {
+								return $m[0];
+							}
+							// Embed as data-URI for maximum PDF compatibility
+							$ext = strtolower(pathinfo($resolved, PATHINFO_EXTENSION));
+							$mimeMap = ['svg' => 'image/svg+xml', 'png' => 'image/png', 'jpg' => 'image/jpeg', 'jpeg' => 'image/jpeg', 'gif' => 'image/gif', 'webp' => 'image/webp'];
+							$mime = $mimeMap[$ext] ?? 'application/octet-stream';
+							$data = @file_get_contents($resolved);
+							if ($data !== false) {
+								$base64 = base64_encode($data);
+								return 'url("data:' . $mime . ';base64,' . $base64 . '")';
+							}
+							return 'url("' . $resolved . '")';
+						},
+						$html_to_pdf
+					);
+				}
+
 				$format = $sysDefaults['pdfpapersize'] ?? 'A4';
 				$mpdf = new \Mpdf\Mpdf([
 					'mode' => 'utf-8',

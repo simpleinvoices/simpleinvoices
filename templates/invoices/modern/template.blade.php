@@ -449,7 +449,12 @@
 		<td class="si-modern-detail-line" colspan="6"><i>{{ $preference['pref_inv_detail_line'] ?? '' | outhtml }}</i></td>
 	</tr>
 	<tr>
-		<td class="si-modern-detail-line" colspan="6">{{ $preference['pref_inv_payment_method'] ?? '' }}</td>
+		<td class="si-modern-detail-line" colspan="6">
+			@include('templates.default.partials.payment_processor_badge', [
+				'methodText' => $preference['pref_inv_payment_method'] ?? '',
+				'onlinePayments' => $preference['include_online_payment'] ?? '',
+			])
+		</td>
 	</tr>
 	<tr>
 		<td class="si-modern-detail-line" colspan="6">{{ $preference['pref_inv_payment_line1_name'] ?? '' }} {{ $preference['pref_inv_payment_line1_value'] ?? '' }}</td>
@@ -464,14 +469,13 @@
 		<td colspan="6"><div class="si-modern-footer" align="center">{{ $biller['footer'] ?? '' | outhtml }}</div></td>
 	</tr>
 	<tr>
-		<td>
+		<td colspan="6">
 			{online_payment_link
 				type=$preference['include_online_payment']
 				invoice=$invoice['id']
 				amount=$invoice['owing'] currency_code=($invoice['currency_code'] ?? $preference['currency_code'] ?? '')
 				domain_id=$invoice['domain_id']
 			}
-
 		</td>
 	</tr>
 
