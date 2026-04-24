@@ -759,7 +759,7 @@ function getProduct($id, $domain_id='') {
 	return mysqlQuery($sql);
 }*/
 
-function insertProductComplete($enabled=1,$visible=1,$description, $unit_price, $custom_field1 = NULL, $custom_field2, $custom_field3, $custom_field4, $notes, $domain_id='') {
+function insertProductComplete($description, $unit_price, $custom_field2, $custom_field3, $custom_field4, $notes, $enabled = 1, $visible = 1, $custom_field1 = null, $domain_id = '') {
 
 	$domain_id = domain_id::get($domain_id);
 
@@ -3169,7 +3169,7 @@ function getNumberOfDoneSQLPatches() {
 	return $patches['count'];
 }
 
-function pdfThis($html,$file_location="",$pdfname)
+function pdfThis($html, $file_location = '', $pdfname = 'invoice')
 {
 
 	global $config;

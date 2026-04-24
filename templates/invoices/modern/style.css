@@ -445,7 +445,7 @@ td, th { margin: 0; padding: 0; vertical-align: top; }
 	}
 }
 
-/* Payment links section – horizontal row of branded buttons */
+/* Payment links section – horizontal row of branded buttons (table/mPDF-safe) */
 .si-payment-links {
 	margin-top: 0.75em;
 }
@@ -457,49 +457,91 @@ td, th { margin: 0; padding: 0; vertical-align: top; }
 	letter-spacing: 0.06em;
 	color: #64748b;
 	color: var(--si-modern-text-muted, #64748b);
-	margin-bottom: 0.5em;
+	margin: 0 0 0.5em 0;
+	padding-bottom: 6px;
+	border-bottom: 1px solid #e2e8f0;
 }
 
-.si-payment-links-row {
-  display: block;
-  line-height: 1;
+.si-payment-links-table {
+	width: 100%;
+	border-collapse: collapse;
+	border: 1px solid #e2e8f0;
+	margin-top: 4px;
+	table-layout: fixed;
+}
+
+td.si-payment-links-cell {
+	vertical-align: top !important;
+	text-align: left;
+	padding: 10px 14px !important;
+	box-sizing: border-box;
+}
+
+td.si-payment-links-cell:last-child {
+	border-right: none !important;
 }
 
 .si-payment-pay-btn {
-  display: inline-block;
-  vertical-align: middle;
-  padding: 0.55em 1em;
-  border: 1px solid #e2e8f0;
-  border: 1px solid var(--si-modern-border-light, #e2e8f0);
-  border-radius: 0.4em;
-  background: #ffffff;
-  color: #1e293b;
-  color: var(--si-modern-text, #1e293b);
-  text-decoration: none;
-  font-size: 0.8125em;
-  font-weight: 500;
-  line-height: 1;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-  margin-right: 0.625em;
-  margin-bottom: 0.5em;
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 2px 0;
+	border: none;
+	border-radius: 0;
+	outline: none;
+	background: transparent;
+	color: #1e293b;
+	color: var(--si-modern-text, #1e293b);
+	text-decoration: none;
+	font-size: 0.8125em;
+	font-weight: 500;
+	line-height: 1.4;
+	margin: 0;
+	text-align: left;
+	transition: background 0.15s ease;
 }
 
 .si-payment-pay-btn:hover {
-	border-color: #3b82f6;
-	box-shadow: 0 2px 8px rgba(59, 130, 246, 0.12);
+	box-shadow: none;
 	background: #f8fafc;
 	text-decoration: none;
 }
 
-.si-payment-pay-btn .si-payment-icon {
-  width: 2.5em;
-  height: 1.55em;
-  box-shadow: none;
-  vertical-align: middle;
-  margin-right: 0.5em;
+.si-payment-pay-pair {
+	display: table;
+	width: 100%;
+	table-layout: fixed;
+}
+
+.si-payment-pay-icon-wrap {
+	display: table-cell;
+	width: 44px;
+	max-width: 44px;
+	vertical-align: top;
+	text-align: center;
+	padding: 2px 8px 0 0;
+}
+
+.si-payment-pay-text-col {
+	display: table-cell;
+	vertical-align: top;
+	width: auto;
+}
+
+.si-payment-pay-btn-img {
+	display: block;
+	width: 40px;
+	height: 25px;
+	margin: 0 auto;
+	border: 0;
+	outline: none;
+	box-shadow: none;
+	object-fit: contain;
 }
 
 .si-payment-pay-label {
-  white-space: nowrap;
-  vertical-align: middle;
+	display: block;
+	white-space: normal;
+	line-height: 1.35;
+	word-break: break-word;
 }

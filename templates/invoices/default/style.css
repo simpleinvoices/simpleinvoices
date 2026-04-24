@@ -180,7 +180,7 @@ tr {margin: 0px;      padding: 0px;}
 	height: 0.85rem;
 }
 
-/* Payment links section – horizontal row of branded buttons */
+/* Payment links section – horizontal row of branded buttons (table/mPDF-safe) */
 .si-payment-links {
   margin-top: 0.625em;
 }
@@ -191,45 +191,90 @@ tr {margin: 0px;      padding: 0px;}
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: #64748b;
-  margin-bottom: 0.5em;
+  margin: 0 0 0.5em 0;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #e2e8f0;
 }
 
-.si-payment-links-row {
-  display: block;
-  line-height: 1;
+/* Payment grid: outer table + inner table per link (mPDF + global td{padding:0}) */
+.si-payment-links-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #e2e8f0;
+  margin-top: 4px;
+  table-layout: fixed;
+}
+
+td.si-payment-links-cell {
+  vertical-align: top !important;
+  text-align: left;
+  padding: 10px 14px !important;
+  box-sizing: border-box;
+}
+
+td.si-payment-links-cell:last-child {
+  border-right: none !important;
 }
 
 .si-payment-pay-btn {
-  display: inline-block;
-  vertical-align: middle;
-  padding: 0.45em 0.85em;
-  border: 1px solid #d1d5db;
-  border-radius: 0.35em;
-  background: #ffffff;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 2px 0;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  background: transparent;
   color: #333333;
   text-decoration: none;
   font-size: 0.8125em;
   font-weight: 500;
-  line-height: 1;
-  margin-right: 0.5em;
-  margin-bottom: 0.5em;
+  line-height: 1.4;
+  margin: 0;
+  text-align: left;
 }
 
 .si-payment-pay-btn:hover {
-  border-color: #3b82f6;
   background: #f9fafb;
   text-decoration: none;
 }
 
-.si-payment-pay-btn .si-payment-icon {
-  width: 2.5em;
-  height: 1.55em;
+/* Icon + label row inside the link (no HTML table inside <a> — breaks mPDF link annotations) */
+.si-payment-pay-pair {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.si-payment-pay-icon-wrap {
+  display: table-cell;
+  width: 44px;
+  max-width: 44px;
+  vertical-align: top;
+  text-align: center;
+  padding: 2px 8px 0 0;
+}
+
+.si-payment-pay-text-col {
+  display: table-cell;
+  vertical-align: top;
+  width: auto;
+}
+
+.si-payment-pay-btn-img {
+  display: block;
+  width: 40px;
+  height: 25px;
+  margin: 0 auto;
+  border: 0;
+  outline: none;
   box-shadow: none;
-  vertical-align: middle;
-  margin-right: 0.45em;
+  object-fit: contain;
 }
 
 .si-payment-pay-label {
-  white-space: nowrap;
-  vertical-align: middle;
+  display: block;
+  white-space: normal;
+  line-height: 1.35;
+  word-break: break-word;
 }

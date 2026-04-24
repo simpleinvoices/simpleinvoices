@@ -300,12 +300,7 @@
 		<div class="si-tabler-inv-detail-card" style="background-color:#f8fafc;border:1px solid #e2e8f0;">
 			<div class="si-tabler-inv-detail-heading">{{ $preference['pref_inv_detail_heading'] ?? '' }}</div>
 			<div class="si-tabler-inv-detail-line"><i>{{ ($preference['pref_inv_detail_line'] ?? '') | outhtml }}</i></div>
-			<div class="si-tabler-inv-detail-line">
-				@include('templates.default.partials.payment_processor_badge', [
-					'methodText' => $preference['pref_inv_payment_method'] ?? '',
-					'onlinePayments' => $preference['include_online_payment'] ?? '',
-				])
-			</div>
+			<div class="si-tabler-inv-detail-line">{{ $preference['pref_inv_payment_method'] ?? '' }}</div>
 			<div class="si-tabler-inv-detail-line">{{ $preference['pref_inv_payment_line1_name'] ?? '' }} {{ $preference['pref_inv_payment_line1_value'] ?? '' }}</div>
 			<div class="si-tabler-inv-detail-line">{{ $preference['pref_inv_payment_line2_name'] ?? '' }} {{ $preference['pref_inv_payment_line2_value'] ?? '' }}</div>
 		</div>

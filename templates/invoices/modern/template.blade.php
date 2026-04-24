@@ -449,12 +449,7 @@
 		<td class="si-modern-detail-line" colspan="6"><i>{{ $preference['pref_inv_detail_line'] ?? '' | outhtml }}</i></td>
 	</tr>
 	<tr>
-		<td class="si-modern-detail-line" colspan="6">
-			@include('templates.default.partials.payment_processor_badge', [
-				'methodText' => $preference['pref_inv_payment_method'] ?? '',
-				'onlinePayments' => $preference['include_online_payment'] ?? '',
-			])
-		</td>
+		<td class="si-modern-detail-line" colspan="6">{{ $preference['pref_inv_payment_method'] ?? '' }}</td>
 	</tr>
 	<tr>
 		<td class="si-modern-detail-line" colspan="6">{{ $preference['pref_inv_payment_line1_name'] ?? '' }} {{ $preference['pref_inv_payment_line1_value'] ?? '' }}</td>
