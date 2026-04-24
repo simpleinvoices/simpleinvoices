@@ -163,10 +163,16 @@
                                     </div>
                                     <hr class="my-3">
                                     <p class="text-secondary small mb-2">{{ $LANG['wizard_try_sample'] ?? '' }}</p>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary w-100"
-                                            onclick="wizardFill('biller')">
-                                        <i class="ti ti-wand me-1"></i>{{ $LANG['wizard_use_sample_biller'] ?? '' }}
-                                    </button>
+                                    <div class="d-flex gap-2">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary flex-grow-1"
+                                                onclick="wizardFill('biller')">
+                                            <i class="ti ti-wand me-1"></i>{{ $LANG['wizard_use_sample_biller'] ?? '' }}
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary"
+                                                onclick="wizardShuffle('biller')" title="{{ $LANG['wizard_try_another_sample'] ?? 'Try another sample' }}">
+                                            <i class="ti ti-refresh"></i>
+                                        </button>
+                                    </div>
                                     <p class="text-muted small mt-2 mb-0">{{ $LANG['wizard_prefills_form'] ?? '' }}</p>
                                 </div>
                             </div>
@@ -276,10 +282,16 @@
                                     </div>
                                     <hr class="my-3">
                                     <p class="text-secondary small mb-2">{{ $LANG['wizard_try_sample'] ?? '' }}</p>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary w-100"
-                                            onclick="wizardFill('customer')">
-                                        <i class="ti ti-wand me-1"></i>{{ $LANG['wizard_use_sample_customer'] ?? '' }}
-                                    </button>
+                                    <div class="d-flex gap-2">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary flex-grow-1"
+                                                onclick="wizardFill('customer')">
+                                            <i class="ti ti-wand me-1"></i>{{ $LANG['wizard_use_sample_customer'] ?? '' }}
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary"
+                                                onclick="wizardShuffle('customer')" title="{{ $LANG['wizard_try_another_sample'] ?? 'Try another sample' }}">
+                                            <i class="ti ti-refresh"></i>
+                                        </button>
+                                    </div>
                                     <p class="text-muted small mt-2 mb-0">{{ $LANG['wizard_sample_replace_later'] ?? '' }}</p>
                                 </div>
                             </div>
@@ -386,10 +398,16 @@
                                     </div>
                                     <hr class="my-3">
                                     <p class="text-secondary small mb-2">{{ $LANG['wizard_try_sample'] ?? '' }}</p>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary w-100"
-                                            onclick="wizardFill('product')">
-                                        <i class="ti ti-wand me-1"></i>{{ $LANG['wizard_use_sample_product'] ?? '' }}
-                                    </button>
+                                    <div class="d-flex gap-2">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary flex-grow-1"
+                                                onclick="wizardFill('product')">
+                                            <i class="ti ti-wand me-1"></i>{{ $LANG['wizard_use_sample_product'] ?? '' }}
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary"
+                                                onclick="wizardShuffle('product')" title="{{ $LANG['wizard_try_another_sample'] ?? 'Try another sample' }}">
+                                            <i class="ti ti-refresh"></i>
+                                        </button>
+                                    </div>
                                     <p class="text-muted small mt-2 mb-0">{{ $LANG['wizard_sample_replace_later'] ?? '' }}</p>
                                 </div>
                             </div>
@@ -507,11 +525,11 @@
                                         </div>
                                     </div>
                                     <div class="alert alert-info mb-2 py-2 small" role="note">
-                                        <i class="ti ti-settings me-1"></i>{{ $LANG['wizard_invoice_prefs_note'] ?? '' }}
+                                        <div><i class="ti ti-settings me-1"></i>{{ $LANG['wizard_invoice_prefs_note'] ?? '' }}</div>
                                     </div>
                                     <div class="alert alert-secondary mb-0 py-2 small" role="note">
                                         <div><i class="ti ti-building-bank me-1"></i>{{ $LANG['wizard_bank_details_optional'] ?? '' }}</div>
-                                        <div class="mt-1"><i class="ti ti-credit-card me-1"></i>{{ $LANG['wizard_online_payment_biller_note'] ?? '' }}</div>
+                                        <div class="mt-1"><i class="ti ti-file-invoice me-1"></i>{{ $LANG['wizard_online_payment_biller_note'] ?? '' }}</div>
                                         <div class="si-wizard-payment-providers">
                                             @foreach($wizardPaymentProcessors as $processor)
                                             <div class="si-wizard-payment-provider" title="{{ $processor['label'] }}">
@@ -714,17 +732,31 @@
 {{-- Wizard sample-data prefill --}}
 <script>
 (function () {
-    var samples = {
-        biller: @json($wizard_sample_biller ?? []),
-        customer: @json($wizard_sample_customer ?? []),
-        product: @json($wizard_sample_product ?? [])
+    var sampleArrays = {
+        biller: @json($wizard_sample_billers ?? []),
+        customer: @json($wizard_sample_customers ?? []),
+        product: @json($wizard_sample_products ?? [])
     };
+
+    var sampleIndex = { biller: 0, customer: 0, product: 0 };
+
+    Object.keys(sampleIndex).forEach(function (type) {
+        var arr = sampleArrays[type];
+        if (arr && arr.length > 0) {
+            sampleIndex[type] = Math.floor(Math.random() * arr.length);
+        }
+    });
+
+    function getCurrentSample(type) {
+        var arr = sampleArrays[type];
+        if (!arr || arr.length === 0) return {};
+        return arr[sampleIndex[type]] || {};
+    }
 
     function fill(form, field, value) {
         var el = form.querySelector('[name="' + field + '"]');
         if (!el || el.type === 'hidden') return;
         if (el.tagName === 'SELECT') {
-            // try to select by value; fall back silently
             for (var i = 0; i < el.options.length; i++) {
                 if (el.options[i].value == value) { el.selectedIndex = i; break; }
             }
@@ -733,8 +765,15 @@
         }
     }
 
+    function highlightFields(form) {
+        form.querySelectorAll('input:not([type=hidden]), select').forEach(function (el) {
+            el.classList.add('is-valid');
+            setTimeout(function () { el.classList.remove('is-valid'); }, 2000);
+        });
+    }
+
     window.wizardFill = function (type) {
-        var s   = samples[type] || {};
+        var s   = getCurrentSample(type);
         var paneId = type === 'biller' ? 'wizard-step-1'
                    : type === 'customer' ? 'wizard-step-2'
                    : 'wizard-step-3';
@@ -764,11 +803,24 @@
             fill(form, 'default_tax_id', s.default_tax_id);
         }
 
-        // Highlight filled fields briefly so user notices the prefill
-        form.querySelectorAll('input:not([type=hidden]), select').forEach(function (el) {
-            el.classList.add('is-valid');
-            setTimeout(function () { el.classList.remove('is-valid'); }, 2000);
-        });
+        highlightFields(form);
+    };
+
+    window.wizardShuffle = function (type) {
+        var arr = sampleArrays[type];
+        if (!arr || arr.length <= 1) return;
+        sampleIndex[type] = (sampleIndex[type] + 1) % arr.length;
+        wizardFill(type);
+
+        var paneId = type === 'biller' ? 'wizard-step-1'
+                   : type === 'customer' ? 'wizard-step-2'
+                   : 'wizard-step-3';
+        var btn = document.querySelector('#' + paneId + ' .ti-refresh');
+        if (btn) {
+            btn.style.transition = 'transform 0.4s ease';
+            btn.style.transform = 'rotate(360deg)';
+            setTimeout(function () { btn.style.transform = ''; }, 400);
+        }
     };
 })();
 </script>

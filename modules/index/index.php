@@ -61,6 +61,9 @@ if ($first_run_wizard) {
     $bladeView->assign('wizard_sample_biller', dashboard_random_sample_row($sample_data['si_biller'] ?? []));
     $bladeView->assign('wizard_sample_customer', dashboard_random_sample_row($sample_data['si_customers'] ?? []));
     $bladeView->assign('wizard_sample_product', dashboard_random_sample_row($sample_data['si_products'] ?? []));
+    $bladeView->assign('wizard_sample_billers', $sample_data['si_biller'] ?? []);
+    $bladeView->assign('wizard_sample_customers', $sample_data['si_customers'] ?? []);
+    $bladeView->assign('wizard_sample_products', $sample_data['si_products'] ?? []);
 } else {
     // Avoid loading thousands of rows for dashboard chrome / charts
     $billers = $customers = $products = $taxes = $preferences = [];

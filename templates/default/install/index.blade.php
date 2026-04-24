@@ -6,19 +6,24 @@
 		window.location.replace(@json($redirect_after_install));
 	</script>
 @endif
+@php
+	$dbPort = trim((string)($config->database->params->port ?? ''));
+	$dbHost = (string)($config->database->params->host ?? '');
+	$dbAdapter = (string)($config->database->adapter ?? '');
+@endphp
 
-<div class="card card-lg">
+<div class="card shadow-sm border-0 w-100">
 	<div class="card-status-top {{ !empty($redirect_after_install) ? 'bg-success' : 'bg-primary' }}"></div>
-	<div class="card-header">
-		<h3 class="card-title">
+	<div class="card-header border-0 pb-0">
+		<h1 class="card-title h3 mb-0">
 			@if(!empty($redirect_after_install))
-				<i class="ti ti-circle-check me-2"></i>{{ $LANG['setup_complete'] ?? '' }}
+				<i class="ti ti-circle-check me-2 text-success"></i>{{ $LANG['setup_complete'] ?? '' }}
 			@elseif(!empty($install_new_domain_bootstrap))
 				<i class="ti ti-sparkles me-2"></i>{{ $LANG['install_new_domain_welcome_title'] ?? '' }}
 			@else
 				<i class="ti ti-rocket me-2"></i>{{ $LANG['setup_database'] ?? '' }}
 			@endif
-		</h3>
+		</h1>
 	</div>
 	<div class="card-body">
 		{{-- Success state --}}
@@ -47,95 +52,137 @@
 
 		{{-- Fresh install --}}
 		@else
-			<p class="text-secondary mb-4">{{ $LANG['install_intro'] ?? '' }}</p>
+			<p class="text-secondary lead fs-5 mb-4">{{ $LANG['install_intro'] ?? '' }}</p>
 
-			{{-- Steps --}}
-			<div class="row g-3 mb-4">
-				<div class="col-md-4">
-					<div class="d-flex align-items-start">
-						<span class="badge bg-primary-lt text-primary rounded-pill me-2" style="min-width:1.75rem;">1</span>
-						<div>
-							<strong class="d-block">{{ $LANG['install_step_db'] ?? '' }}</strong>
-							<small class="text-secondary">Ensure your database server is running</small>
+			<h2 class="h4 mb-3">{{ $LANG['install_section_prereq'] ?? 'Before you begin' }}</h2>
+			<div class="row g-3 g-lg-4 mb-4">
+				<div class="col-12 col-lg-4">
+					<div class="card h-100 border border-secondary-lt">
+						<div class="card-body p-3 p-md-4">
+							<div class="d-flex align-items-start gap-3">
+								<span class="badge bg-primary text-white rounded-pill flex-shrink-0" style="min-width:1.75rem;">1</span>
+								<div class="min-w-0">
+									<strong class="d-block mb-2 fs-5">{{ $LANG['install_step_db'] ?? '' }}</strong>
+									<p class="text-secondary mb-0 small lh-base">{{ $LANG['install_step_1_sub'] ?? 'Create a database for your server.' }}</p>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-4">
-					<div class="d-flex align-items-start">
-						<span class="badge bg-primary-lt text-primary rounded-pill me-2" style="min-width:1.75rem;">2</span>
-						<div>
-							<strong class="d-block">{{ $LANG['install_step_config'] ?? 'Configure database' }}</strong>
-							<small class="text-secondary">Enter connection details in <code>config/config.php</code></small>
+				<div class="col-12 col-lg-4">
+					<div class="card h-100 border border-secondary-lt">
+						<div class="card-body p-3 p-md-4">
+							<div class="d-flex align-items-start gap-3">
+								<span class="badge bg-primary text-white rounded-pill flex-shrink-0" style="min-width:1.75rem;">2</span>
+								<div class="min-w-0">
+									<strong class="d-block mb-2 fs-5">{{ $LANG['install_step_config'] ?? '' }}</strong>
+									<p class="text-secondary mb-0 small lh-base">{{ $LANG['install_step_2_sub'] ?? '' }}</p>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-4">
-					<div class="d-flex align-items-start">
-						<span class="badge bg-primary-lt text-primary rounded-pill me-2" style="min-width:1.75rem;">3</span>
-						<div>
-							<strong class="d-block">{{ $LANG['install_step_review'] ?? 'Review &amp; install' }}</strong>
-							<small class="text-secondary">Verify details below and click install</small>
+				<div class="col-12 col-lg-4">
+					<div class="card h-100 border border-secondary-lt">
+						<div class="card-body p-3 p-md-4">
+							<div class="d-flex align-items-start gap-3">
+								<span class="badge bg-primary text-white rounded-pill flex-shrink-0" style="min-width:1.75rem;">3</span>
+								<div class="min-w-0">
+									<strong class="d-block mb-2 fs-5">{{ $LANG['install_step_review'] ?? '' }}</strong>
+									<p class="text-secondary mb-0 small lh-base">{{ $LANG['install_step_3_sub'] ?? '' }}</p>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 
-			{{-- Docker note --}}
-			<div class="alert alert-light border mb-4 py-2 small">
-				<i class="ti ti-brand-docker me-1 text-secondary"></i>
-				<strong class="text-secondary">Docker users:</strong>
-				Set database details via environment variables (<code>SI_DB_HOST</code>, <code>SI_DB_NAME</code>, <code>SI_DB_USER</code>, <code>SI_DB_PASSWORD</code>, <code>SI_DATABASE_ADAPTER</code>) in your <code>.env</code> or <code>docker-compose.yml</code>.
+			<div class="row g-3 g-lg-4 mb-4">
+				<div class="col-12 col-lg-6">
+					<div class="card h-100 border-0 bg-azure-lt">
+						<div class="card-body p-3 p-md-4">
+							<div class="d-flex align-items-center gap-2 mb-2">
+								<span class="avatar avatar-sm bg-azure-lt text-azure">
+									<i class="ti ti-brand-docker"></i>
+								</span>
+								<h3 class="h5 mb-0">{{ $LANG['install_docker_title'] ?? 'Using Docker' }}</h3>
+							</div>
+							<p class="text-secondary small mb-0 lh-base">{{ $LANG['install_docker_help'] ?? '' }}</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-lg-6">
+					<div class="card h-100 border-0 bg-teal-lt">
+						<div class="card-body p-3 p-md-4">
+							<div class="d-flex align-items-center gap-2 mb-2">
+								<span class="avatar avatar-sm bg-teal-lt text-teal">
+									<i class="ti ti-file-code"></i>
+								</span>
+								<h3 class="h5 mb-0">{{ $LANG['install_php_title'] ?? 'Not using Docker' }}</h3>
+							</div>
+							<p class="text-secondary small mb-0 lh-base">{{ $LANG['install_php_config_help'] ?? '' }}</p>
+						</div>
+					</div>
+				</div>
 			</div>
 
 			@if(!empty($install_error))
 				<div class="alert alert-danger mb-4">{{ $LANG['sample_data_error_msg'] ?? '' }}</div>
 			@endif
 
-			{{-- Database connection details --}}
-			<h5 class="mb-3"><i class="ti ti-database me-1 text-secondary"></i>Database Connection</h5>
+			<h2 class="h4 mb-3"><i class="ti ti-plug-connected me-1 text-secondary"></i>{{ $LANG['install_section_connection'] ?? 'Connection' }}</h2>
 			<div class="table-responsive mb-4">
-				<table class="table table-vcenter card-table table-bordered">
+				<table class="table table-vcenter card-table table-bordered mb-0">
 					<tbody>
 						<tr>
-							<td class="text-secondary" style="width:30%">Host</td>
-							<td><code>{{ $config->database->params->host ?? '' }}</code></td>
+							<td class="text-secondary" style="width:32%">{{ $LANG['install_connection_adapter'] ?? 'Adapter' }}</td>
+							<td><code class="user-select-all">{{ $dbAdapter !== '' ? $dbAdapter : '—' }}</code></td>
 						</tr>
 						<tr>
-							<td class="text-secondary">Database</td>
-							<td><code>{{ $config->database->params->dbname ?? '' }}</code></td>
+							<td class="text-secondary">{{ $LANG['host'] ?? 'Host' }}</td>
+							<td><code class="user-select-all">{{ $dbHost !== '' ? $dbHost : '—' }}</code></td>
 						</tr>
 						<tr>
-							<td class="text-secondary">Username</td>
-							<td><code>{{ $config->database->params->username ?? '' }}</code></td>
+							<td class="text-secondary">{{ $LANG['install_connection_port'] ?? 'Port' }}</td>
+							<td><code class="user-select-all">{{ $dbPort !== '' ? $dbPort : '—' }}</code></td>
 						</tr>
 						<tr>
-							<td class="text-secondary">Password</td>
+							<td class="text-secondary">{{ $LANG['database'] ?? 'Database' }}</td>
+							<td><code class="user-select-all">{{ $config->database->params->dbname ?? '' }}</code></td>
+						</tr>
+						<tr>
+							<td class="text-secondary">{{ $LANG['username'] ?? 'Username' }}</td>
+							<td><code class="user-select-all">{{ $config->database->params->username ?? '' }}</code></td>
+						</tr>
+						<tr>
+							<td class="text-secondary">{{ $LANG['password'] ?? 'Password' }}</td>
 							<td><code>••••••••••</code></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 
-			{{-- Admin login form --}}
 			<form method="post" action="./index.php?module=install&amp;view=index">
 				<input type="hidden" name="op" value="install_database" />
-				<h5 class="mb-3"><i class="ti ti-user-shield me-1 text-secondary"></i>Admin Account</h5>
-				<p class="text-secondary mb-3">Set the login credentials for the default administrator.</p>
+				<h2 class="h4 mb-2"><i class="ti ti-user-shield me-1 text-secondary"></i>{{ $LANG['install_section_admin'] ?? 'First administrator' }}</h2>
+				<p class="text-secondary small mb-3">{{ $LANG['install_default_admin_blurb'] ?? '' }}</p>
 				<div class="row g-3 mb-4">
 					<div class="col-sm-6">
-						<label class="form-label" for="install_admin_email">Email</label>
+						<label class="form-label" for="install_admin_email">{{ $LANG['email'] ?? 'Email' }}</label>
 						<input type="email" class="form-control" id="install_admin_email" name="install_admin_email"
-							value="demo@simpleinvoices.org" required maxlength="255" />
+							value="demo@simpleinvoices.org" required maxlength="255" autocomplete="username" />
 					</div>
 					<div class="col-sm-6">
-						<label class="form-label" for="install_admin_password">Password</label>
+						<label class="form-label" for="install_admin_password">{{ $LANG['password'] ?? 'Password' }}</label>
 						<input type="password" class="form-control" id="install_admin_password" name="install_admin_password"
 							value="demo" required minlength="4" maxlength="255" autocomplete="new-password" />
 					</div>
 				</div>
-				<button type="submit" class="btn btn-primary btn-lg">
-					<i class="ti ti-database-import me-1"></i>{{ $LANG['install_database_and_essential'] ?? 'Install Database' }}
-				</button>
+				<div class="d-flex flex-wrap align-items-center gap-2">
+					<button type="submit" class="btn btn-primary btn-lg">
+						<i class="ti ti-database-import me-1"></i>{{ $LANG['install_database_and_essential'] ?? 'Install Database' }}
+					</button>
+				</div>
 			</form>
 		@endif
 	</div>
