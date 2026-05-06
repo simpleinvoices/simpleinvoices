@@ -170,29 +170,41 @@
 					</label>
 					<input type="text" name="p_inv_payment_method" value="{{ post('p_inv_payment_method') }}" class="form-control" />
 				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['invoice_payment_line_1_name'] ?? '' }}
-						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_payment_line1_name" title="{{ $LANG['invoice_payment_line_1_name'] ?? '' }}"><i class="ti ti-help"></i></a>
-					</label>
-					<input type="text" name="p_inv_payment_line1_name" value="{{ post('p_inv_payment_line1_name') }}" class="form-control" />
+				<div class="row g-3">
+					<div class="col-md-6">
+						<div class="mb-3">
+							<label class="form-label">{{ $LANG['invoice_payment_line_1_name'] ?? '' }}
+								<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_payment_line1_name" title="{{ $LANG['invoice_payment_line_1_name'] ?? '' }}"><i class="ti ti-help"></i></a>
+							</label>
+							<input type="text" name="p_inv_payment_line1_name" value="{{ post('p_inv_payment_line1_name') }}" class="form-control" />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="mb-3">
+							<label class="form-label">{{ $LANG['invoice_payment_line_1_value'] ?? '' }}
+								<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_payment_line1_value" title="{{ $LANG['invoice_payment_line_1_value'] ?? '' }}"><i class="ti ti-help"></i></a>
+							</label>
+							<input type="text" name="p_inv_payment_line1_value" value="{{ post('p_inv_payment_line1_value') }}" class="form-control" />
+						</div>
+					</div>
 				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['invoice_payment_line_1_value'] ?? '' }}
-						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_payment_line1_value" title="{{ $LANG['invoice_payment_line_1_value'] ?? '' }}"><i class="ti ti-help"></i></a>
-					</label>
-					<input type="text" name="p_inv_payment_line1_value" value="{{ post('p_inv_payment_line1_value') }}" class="form-control" />
-				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['invoice_payment_line_2_name'] ?? '' }}
-						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_payment_line2_name" title="{{ $LANG['invoice_payment_line_2_name'] ?? '' }}"><i class="ti ti-help"></i></a>
-					</label>
-					<input type="text" name="p_inv_payment_line2_name" value="{{ post('p_inv_payment_line2_name') }}" class="form-control" />
-				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['invoice_payment_line_2_value'] ?? '' }}
-						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_payment_line2_value" title="{{ $LANG['invoice_payment_line_2_value'] ?? '' }}"><i class="ti ti-help"></i></a>
-					</label>
-					<input type="text" name="p_inv_payment_line2_value" value="{{ post('p_inv_payment_line2_value') }}" class="form-control" />
+				<div class="row g-3">
+					<div class="col-md-6">
+						<div class="mb-3">
+							<label class="form-label">{{ $LANG['invoice_payment_line_2_name'] ?? '' }}
+								<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_payment_line2_name" title="{{ $LANG['invoice_payment_line_2_name'] ?? '' }}"><i class="ti ti-help"></i></a>
+							</label>
+							<input type="text" name="p_inv_payment_line2_name" value="{{ post('p_inv_payment_line2_name') }}" class="form-control" />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="mb-3">
+							<label class="form-label">{{ $LANG['invoice_payment_line_2_value'] ?? '' }}
+								<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_payment_line2_value" title="{{ $LANG['invoice_payment_line_2_value'] ?? '' }}"><i class="ti ti-help"></i></a>
+							</label>
+							<input type="text" name="p_inv_payment_line2_value" value="{{ post('p_inv_payment_line2_value') }}" class="form-control" />
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -615,6 +615,9 @@
                                             <small class="form-hint">{{ $LANG['bank_swift_bic_hint'] ?? 'Bank identifier — universal for international transfers' }}</small>
                                         </div>
                                     </div>
+                                    <div class="alert alert-info mt-3 mb-0 py-2 small" role="note">
+                                        <div><i class="ti ti-info-circle me-1"></i>{{ $LANG['wizard_bank_token_hint'] ?? 'Use tokens like {biller.bank_account_name}, {biller.bank_name}, {biller.bank_swift_bic}, {biller.bank_account_number}, and {biller.bank_routing_sort_code} in invoice preferences (Payment tab) and the biller invoice footer to auto-fill bank details when the invoice is rendered.' }}</div>
+                                    </div>
                                     <div class="alert alert-secondary mt-3 mb-0 py-2 small" role="note">
                                         <div class="d-flex align-items-center flex-wrap gap-2">
                                             <span><i class="ti ti-credit-card me-1"></i>{{ $LANG['wizard_online_payment_biller_note'] ?? '' }}</span>
