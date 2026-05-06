@@ -3359,13 +3359,19 @@ function pdfThis($html, $file_location = '', $pdfname = 'invoice')
 // ------------------------------------------------------------------------------
 function getNumberOfDonePatches() {
 
+	if (!checkTableExists(TB_PREFIX . 'sql_patchmanager')) {
+		return 0;
+	}
+
 	$check_patches_sql = "SELECT max(sql_patch_ref) AS count FROM ".TB_PREFIX."sql_patchmanager ";
 	$sth = dbQuery($check_patches_sql);
 
 	$patches = $sth->fetch();
 
 	//Returns number of patches applied
-	return $patches['count'];
+	$count = is_array($patches) ? ($patches['count'] ?? null) : null;
+
+	return ($count === null || $count === '') ? 0 : (int) $count;
 }
 
 // ------------------------------------------------------------------------------

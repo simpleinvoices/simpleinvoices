@@ -215,6 +215,7 @@
 				</div>
 			</div>
 			<div id="pref-edit-payment" class="tab-pane" role="tabpanel">
+				<p class="text-muted small mb-3">{{ $LANG['payment_token_hint'] ?? 'Tokens are replaced with live values when the invoice is rendered. Biller bank details: {biller.bank_account_name}, {biller.bank_name}, {biller.bank_swift_bic}, {biller.bank_account_number}, {biller.bank_routing_sort_code}. Other tokens: {biller.name}, {biller.email}, {biller.phone}, {customer.name}, {invoice.total}, {invoice.owing}.' }}</p>
 				<div class="mb-3">
 					<label class="form-label">{{ $LANG['include_online_payment'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_detail_line" title="{{ $LANG['invoice_detail_line'] ?? '' }}"><i class="ti ti-help"></i></a></label>
 					<div>

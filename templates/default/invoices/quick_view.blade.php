@@ -18,6 +18,10 @@
                 <input type="radio" class="segmented-control-input">
                 <span class="segmented-control-label"><i class="ti ti-edit me-md-1"></i><span class="d-none d-md-inline">{{ $LANG['edit'] ?? '' }}</span></span>
             </label>
+            <label class="segmented-control-item" title="{{ $LANG['duplicate'] ?? 'Duplicate' }}" onclick="window.location='index.php?module=invoices&amp;view=duplicate&amp;id={{ urlencode($invoice['id'] ?? '') }}'">
+                <input type="radio" class="segmented-control-input">
+                <span class="segmented-control-label"><i class="ti ti-copy me-md-1"></i><span class="d-none d-md-inline">{{ $LANG['duplicate'] ?? 'Duplicate' }}</span></span>
+            </label>
             <label class="segmented-control-item" title="{{ $LANG['process_payment'] ?? '' }}" onclick="window.location='index.php?module=payments&amp;view=process&amp;id={{ urlencode($invoice['id'] ?? '') }}&amp;op=pay_selected_invoice'">
                 <input type="radio" class="segmented-control-input">
                 <span class="segmented-control-label"><i class="ti ti-cash me-md-1"></i><span class="d-none d-md-inline">{{ $LANG['process_payment'] ?? '' }}</span></span>

@@ -21,7 +21,9 @@ if (isset($_POST['op']) && $_POST['op'] === 'install_database') {
     $targetDomainId = isset($auth_session->domain_id) ? (int) $auth_session->domain_id : 1;
     $locTokens = install_essential_data_locale_tokens();
     // Full essential bundle (incl. sql_patchmanager, roles, demo user) only when the DB has never recorded a patch.
-    $includeGlobalEssential = (getNumberOfDoneSQLPatches() == 0);
+    // Before structure.sql runs, si_sql_patchmanager does not exist yet — do not query it.
+    $includeGlobalEssential = !checkTableExists(TB_PREFIX . 'sql_patchmanager')
+        || (getNumberOfDoneSQLPatches() == 0);
 
     if (checkTableExists() == false) {
         $import = new import();

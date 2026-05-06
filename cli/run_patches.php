@@ -13,6 +13,10 @@
  * custom_fields), matching index.php / init.php, or (b) `si_sql_patchmanager`
  * already has rows (existing deployment / restored DB) so pending patches can
  * be applied even if the bootstrap check fails.
+ *
+ * That readiness check runs before `include/sql_patches.php` is loaded, because
+ * the patch file runs database queries at parse time (empty SQLite would otherwise
+ * fatal on missing `si_sql_patchmanager`).
  */
 
 // Must run from app root so all relative paths (config, includes, vendor) resolve correctly.
@@ -101,12 +105,6 @@ include_once './include/sql_queries.php';
 // Must come AFTER sql_queries.php because it calls checkTableExists() at include-time.
 include_once './include/language.php';
 
-// sql_patches.php: builds the $patch array, executing DB queries and class
-// instantiations at include-time (getNumberOfDonePatches, getSystemDefaults,
-// checkTableExists, checkFieldExists, new invoice(), $language, $config->*, …).
-// All of the above must be in scope before this line.
-include_once './include/sql_patches.php';
-
 // ---------------------------------------------------------------------------
 // CLI-friendly patch runner
 // ---------------------------------------------------------------------------
@@ -115,6 +113,9 @@ $log = static function (string $message): void {
     echo $message . "\n";
 };
 
+// Must run BEFORE sql_patches.php is loaded: that file calls getNumberOfDonePatches()
+// and other DB logic at include-time. Fresh/empty SQLite has no tables yet — including
+// sql_patches.php would fatal before we could skip here.
 $install_tables_exists = checkTableExists(TB_PREFIX . 'biller');
 $has_patch_history     = false;
 if ($install_tables_exists && checkTableExists(TB_PREFIX . 'sql_patchmanager')) {
@@ -135,6 +136,12 @@ if (!$install_tables_exists || !$ready_for_patches) {
 if ($has_patch_history && !$installer_bootstrap_ok) {
     $log('[patches] Detected existing patch history - applying pending migrations (installer bootstrap check skipped).');
 }
+
+// sql_patches.php: builds the $patch array, executing DB queries and class
+// instantiations at include-time (getNumberOfDonePatches, getSystemDefaults,
+// checkTableExists, checkFieldExists, new invoice(), $language, $config->*, …).
+// All of the above must be in scope before this line.
+include_once './include/sql_patches.php';
 
 $total   = max(array_keys($patch));
 $applied = 0;

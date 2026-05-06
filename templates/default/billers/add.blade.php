@@ -361,30 +361,31 @@
 				</div>
 			</div>
 			<div id="bill-add-bank" class="tab-pane" role="tabpanel">
-				<p class="text-muted small mb-3">{{ $LANG['bank_details_hint'] ?? 'Bank account details for electronic transfers. Use tokens like {biller.bank_account_name} in invoice preferences.' }}</p>
+				<p class="text-muted small mb-3">{{ $LANG['bank_details_hint'] ?? 'Bank account details for electronic transfers. Each field has a corresponding token (shown below) that can be used in invoice preferences and the invoice footer to auto-fill values at render time.' }}</p>
 				<div class="mb-3">
 					<label class="form-label">{{ $LANG['bank_account_name'] ?? 'Account Name' }}</label>
 					<input type="text" name="bank_account_name" value="{{ post('bank_account_name') }}" class="form-control" />
-					<small class="form-hint">{{ $LANG['bank_account_name_hint'] ?? 'Legal name on the account' }}</small>
+					<small class="form-hint">{{ $LANG['bank_account_name_hint'] ?? 'Legal name on the account' }} &mdash; Token: <code>{biller.bank_account_name}</code></small>
 				</div>
 				<div class="mb-3">
 					<label class="form-label">{{ $LANG['bank_name'] ?? 'Bank Name' }}</label>
 					<input type="text" name="bank_name" value="{{ post('bank_name') }}" class="form-control" />
+					<small class="form-hint">{{ $LANG['bank_name_hint'] ?? 'Name of the bank or financial institution' }} &mdash; Token: <code>{biller.bank_name}</code></small>
 				</div>
 				<div class="mb-3">
 					<label class="form-label">{{ $LANG['bank_swift_bic'] ?? 'SWIFT / BIC' }}</label>
 					<input type="text" name="bank_swift_bic" value="{{ post('bank_swift_bic') }}" class="form-control" />
-					<small class="form-hint">{{ $LANG['bank_swift_bic_hint'] ?? 'Bank identifier — universal for international transfers' }}</small>
+					<small class="form-hint">{{ $LANG['bank_swift_bic_hint'] ?? 'Bank identifier — universal for international transfers' }} &mdash; Token: <code>{biller.bank_swift_bic}</code></small>
 				</div>
 				<div class="mb-3">
 					<label class="form-label">{{ $LANG['bank_account_number'] ?? 'Account Number / IBAN' }}</label>
 					<input type="text" name="bank_account_number" value="{{ post('bank_account_number') }}" class="form-control" />
-					<small class="form-hint">{{ $LANG['bank_account_number_hint'] ?? 'IBAN (EU) or local account number' }}</small>
+					<small class="form-hint">{{ $LANG['bank_account_number_hint'] ?? 'IBAN (EU) or local account number' }} &mdash; Token: <code>{biller.bank_account_number}</code></small>
 				</div>
 				<div class="mb-3">
 					<label class="form-label">{{ $LANG['bank_routing_sort_code'] ?? 'Routing / Sort Code' }}</label>
 					<input type="text" name="bank_routing_sort_code" value="{{ post('bank_routing_sort_code') }}" class="form-control" />
-					<small class="form-hint">{{ $LANG['bank_routing_sort_code_hint'] ?? 'BSB (AU), ABA (US), Sort Code (UK), Transit (CA) — leave blank if using IBAN' }}</small>
+					<small class="form-hint">{{ $LANG['bank_routing_sort_code_hint'] ?? 'BSB (AU), ABA (US), Sort Code (UK), Transit (CA) — leave blank if using IBAN' }} &mdash; Token: <code>{biller.bank_routing_sort_code}</code></small>
 				</div>
 			</div>
 			<div id="bill-add-custom" class="tab-pane" role="tabpanel">
@@ -424,6 +425,7 @@
 				<div class="mb-3">
 					<label class="form-label">{{ $LANG['invoice_footer'] ?? '' }}</label>
 					<textarea class="form-control editor" name="footer" rows="4">{{ post('footer') }}</textarea>
+					<small class="form-hint">{{ $LANG['footer_token_hint'] ?? 'Tokens like {biller.bank_account_name}, {biller.bank_name}, {invoice.total}, and {customer.name} are replaced with live values when the invoice is rendered.' }}</small>
 				</div>
 				<div class="mb-3">
 					<label class="form-label">{{ $LANG['notes'] ?? '' }}</label>

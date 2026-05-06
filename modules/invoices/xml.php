@@ -94,6 +94,8 @@ $xml ="";
 		}
 		if ($auth_session->role_name !== 'customer') {
 			$action .= '<a class="dropdown-item" href="index.php?module=invoices&amp;view=email&amp;stage=1&amp;id='.$row['id'].'"><i class="ti ti-mail-forward me-2"></i>'.$LANG['email'].' '.$inv_label.'</a>';
+			$action .= '<div class="dropdown-divider"></div>';
+			$action .= '<a class="dropdown-item" href="index.php?module=invoices&amp;view=duplicate&amp;id='.$row['id'].'"><i class="ti ti-copy me-2"></i>'.$LANG['duplicate'].' '.$inv_label.'</a>';
 		}
 		$action .= '</div></div>';
 		$xml .= "<cell><![CDATA[".$action."]]></cell>";

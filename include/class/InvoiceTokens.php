@@ -11,6 +11,9 @@
  *   pref_inv_detail_heading, pref_inv_detail_line, pref_inv_payment_method,
  *   pref_inv_payment_line1_name, pref_inv_payment_line1_value,
  *   pref_inv_payment_line2_name, pref_inv_payment_line2_value
+ *
+ * Also expanded via expandString():
+ *   si_biller.footer
  */
 class InvoiceTokens
 {
@@ -75,6 +78,15 @@ class InvoiceTokens
             '{customer.email}'            => (string) ($customer['email'] ?? ''),
             '{customer.phone}'            => (string) ($customer['phone'] ?? ''),
         ];
+    }
+
+    /**
+     * Expand tokens in an arbitrary string value.
+     */
+    public static function expandString(string $value, array $invoice, array $biller, array $customer, array $preference): string
+    {
+        $map = static::buildMap($invoice, $biller, $customer, $preference);
+        return str_replace(array_keys($map), array_values($map), $value);
     }
 
     /**
