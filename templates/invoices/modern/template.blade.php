@@ -213,15 +213,15 @@
 
 		<tr>
 				<td class="si-modern-muted" >{{ $LANG['total'] ?? '' }}: </td>
-				<td class="si-modern-summary-val" align="right" colspan="3">{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['total'] ?? '')|siLocal_number }}</td>
+				<td class="si-modern-summary-val" align="right" colspan="3">{!! CurrencySignHelper::formatInvoice($invoice['total'] ?? 0, $invoice, $preference) !!}</td>
 		</tr>
 		<tr>
 				<td class="si-modern-muted">{{ $LANG['paid'] ?? '' }}:</td>
-				<td class="si-modern-summary-val" align="right" colspan="3" >{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['paid'] ?? '')|siLocal_number }}</td>
+				<td class="si-modern-summary-val" align="right" colspan="3" >{!! CurrencySignHelper::formatInvoice($invoice['paid'] ?? 0, $invoice, $preference) !!}</td>
 		</tr>
 		<tr>
 				<td nowrap class="si-modern-owing-label">{{ $LANG['owing'] ?? '' }}:</td>
-				<td class="si-modern-owing-val" align="right" colspan="3" >{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['owing'] ?? '')|siLocal_number }}</td>
+				<td class="si-modern-owing-val" align="right" colspan="3" >{!! CurrencySignHelper::formatInvoice($invoice['owing'] ?? 0, $invoice, $preference) !!}</td>
 		</tr>
 
 	</table>
@@ -256,8 +256,8 @@
 			<tr class="si-modern-item-row" >
 				<td class="col-qty">{{ ($invoiceItem['quantity'] ?? '')|siLocal_number_trim }}</td>
 				<td class="" colspan="3">{!! outhtml($invoiceItem['product']['description'] ?? '') !!}</td>
-				<td class="si-modern-num" align="right">{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoiceItem['unit_price'] ?? '')|siLocal_number }}</td>
-				<td class="si-modern-num" align="right">{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoiceItem['gross_total'] ?? '')|siLocal_number }}</td>
+				<td class="si-modern-num" align="right>{!! CurrencySignHelper::formatInvoice($invoiceItem['unit_price'] ?? 0, $invoice, $preference) !!}</td>
+				<td class="si-modern-num" align="right>{!! CurrencySignHelper::formatInvoice($invoiceItem['gross_total'] ?? 0, $invoice, $preference) !!}</td>
 			</tr>
 					@if(($invoiceItem['attribute'] ?? null) != null)
                             <tr class="si_product_attribute si-modern-attr">
@@ -269,7 +269,7 @@
                                        @if(($v['visible'] ?? null) == true )
                                         <td class="si_product_attribute">
                                             @if(($v['type'] ?? null) == 'decimal')
-                                              {{ $v['name'] }}: {{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($v['value'] ?? '')|siLocal_number }};
+                                              {{ $v['name'] }}: {!! CurrencySignHelper::formatInvoice($v['value'] ?? 0, $invoice, $preference) !!};
                                              @elseif(($v['value'] ?? '') != '')
                                                {{ $v['name'] }}: {{ $v['value'] }};
                                             @endif
@@ -354,8 +354,8 @@
 				<td class=""></td>
 				<td class=""></td>
 				<td class=""></td>
-				<td align="right" class="si-modern-num">{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoiceItem['unit_price'] ?? '')|siLocal_number }}</td>
-				<td align="right" class="si-modern-num">{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoiceItem['total'] ?? '')|siLocal_number }}</td>
+				<td align="right" class="si-modern-num">{!! CurrencySignHelper::formatInvoice($invoiceItem['unit_price'] ?? 0, $invoice, $preference) !!}</td>
+				<td align="right" class="si-modern-num">{!! CurrencySignHelper::formatInvoice($invoiceItem['total'] ?? 0, $invoice, $preference) !!}</td>
 			</tr>
 			@endforeach
 	@endif
@@ -399,7 +399,7 @@
 	<tr>
         <td colspan="2"></td>
 		<td colspan="3" align="right" class="si-modern-muted">{{ $LANG['sub_total'] ?? '' }}&nbsp;</td>
-		<td colspan="1" align="right" class="si-modern-num">@if($invoice_number_of_taxes > 1)<u>@endif{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['gross'] ?? '')|siLocal_number }}@if($invoice_number_of_taxes > 1)</u>@endif</td>
+		<td colspan="1" align="right" class="si-modern-num">@if($invoice_number_of_taxes > 1)<u>@endif{!! CurrencySignHelper::formatInvoice($invoice['gross'] ?? 0, $invoice, $preference) !!}@if($invoice_number_of_taxes > 1)</u>@endif</td>
     </tr>
     @endif
 	@if($invoice_number_of_taxes > 1 )
@@ -413,7 +413,7 @@
     	<tr>
 	        <td colspan="2"></td>
 			<td colspan="3" align="right" class="si-modern-muted">{{ $line['tax_name'] ?? '' }}&nbsp;</td>
-			<td colspan="1" align="right" class="si-modern-num">{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ siLocal::number($line['tax_amount'] ?? 0) }}</td>
+			<td colspan="1" align="right" class="si-modern-num">{!! CurrencySignHelper::formatInvoice($line['tax_amount'] ?? 0, $invoice, $preference) !!}</td>
 	    </tr>
 	    @endif
 	@endforeach
@@ -422,7 +422,7 @@
 	<tr>
         <td colspan="2"></td>
 		<td colspan="3" align="right" class="si-modern-muted">{{ $LANG['tax_total'] ?? '' }}&nbsp;</td>
-		<td colspan="1" align="right" class="si-modern-num"><u>{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['total_tax'] ?? '')|siLocal_number }}</u></td>
+		<td colspan="1" align="right" class="si-modern-num"><u>{!! CurrencySignHelper::formatInvoice($invoice['total_tax'] ?? 0, $invoice, $preference) !!}</u></td>
     </tr>
     @endif
 	@if($invoice_number_of_taxes > 1)
@@ -433,7 +433,7 @@
     <tr class="si-modern-total-row">
         <td colspan="2"></td>
 		<td colspan="3" align="right"><b>{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['amount'] ?? '' }}&nbsp;</b></td>
-		<td colspan="1" align="right"><span class="si-modern-total-amount">{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['total'] ?? '')|siLocal_number }}</span></td>
+		<td colspan="1" align="right"><span class="si-modern-total-amount">{!! CurrencySignHelper::formatInvoice($invoice['total'] ?? 0, $invoice, $preference) !!}</span></td>
     </tr>
     {{-- tax section - end --}}
 	<tr>
@@ -468,7 +468,7 @@
 			{online_payment_link
 				type=$preference['include_online_payment']
 				invoice=$invoice['id']
-				amount=$invoice['owing'] currency_code=($invoice['currency_code'] ?? $preference['currency_code'] ?? '')
+				amount=$invoice['owing'] currency_code=($invoice['currency_code'] ?? $preference['currency_code'] ?? '', !empty($invoice['show_currency_code'] ?? $preference['show_currency_code'] ?? false))
 				domain_id=$invoice['domain_id']
 			}
 		</td>

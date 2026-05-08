@@ -54,8 +54,8 @@
 			<tr class="tbl1-left tbl1-right tbl1-bottom">
 				<td class="tbl1-left tbl1-bottom" ></td>
 				<td colspan="3" class="tbl1-bottom"></td>
-				<td class="tbl1-bottom">{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ $invoiceItem['unit_price'] ?? '' | siLocal_number }}</td>
-				<td class="tbl1-right tbl1-bottom" align="right">{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ $invoiceItem['total'] ?? '' | siLocal_number }}</td>
+				<td class="tbl1-bottom">{!! CurrencySignHelper::formatInvoice($invoiceItem['unit_price'] ?? 0, $invoice, $preference) !!}</td>
+				<td class="tbl1-right tbl1-bottom" align="right">{!! CurrencySignHelper::formatInvoice($invoiceItem['total'] ?? 0, $invoice, $preference) !!}</td>
 			</tr>
 	
 	@endforeach
@@ -80,5 +80,5 @@
 		<tr>
 			<td colspan="3"></td>
 			<td align="right" colspan="2">{{ $LANG['gross_total'] ?? '' }}</td>
-			<td align="right">{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ $invoice_gross_total | siLocal_number }}</td>
+			<td align="right">{!! CurrencySignHelper::formatInvoice($invoice_gross_total ?? 0, $invoice, $preference) !!}</td>
 		</tr>	

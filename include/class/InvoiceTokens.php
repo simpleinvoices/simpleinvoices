@@ -35,10 +35,11 @@ class InvoiceTokens
     {
         require_once __DIR__ . '/../class/CurrencySignHelper.php';
 
-        $currSign = CurrencySignHelper::forDisplay(
-            $invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? ''
-        );
-        $fmt = static fn($v): string => $currSign . siLocal::number((float) ($v ?? 0));
+        $sign = $invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '';
+        $code = $invoice['currency_code'] ?? $preference['currency_code'] ?? '';
+        $position = $invoice['currency_position'] ?? $preference['currency_position'] ?? '';
+        $currSign = CurrencySignHelper::forDisplay($sign);
+        $fmt = static fn($v): string => CurrencySignHelper::format((float) ($v ?? 0), $sign, $position, $code);
 
         $dueDate = '';
         if (!empty($invoice['calc_due_date'])) {
@@ -61,6 +62,8 @@ class InvoiceTokens
             '{invoice.note}'              => (string) ($invoice['note'] ?? ''),
             '{invoice.payment_term}'      => (string) ($invoice['payment_term_code'] ?? ''),
             '{invoice.payment_term_label}'=> (string) ($invoice['payment_term_label'] ?? ''),
+            '{preference.payment_bank_name}'=> (string) ($preference['payment_bank_name'] ?? ''),
+            '{preference.payment_reference}'=> (string) ($preference['payment_reference'] ?? ''),
             '{biller.name}'               => (string) ($biller['name'] ?? ''),
             '{biller.email}'              => (string) ($biller['email'] ?? ''),
             '{biller.phone}'              => (string) ($biller['phone'] ?? ''),

@@ -60,11 +60,11 @@
 					<label class="form-label">{{ $LANG['locale'] ?? '' }}
 						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_locale" title="{{ $LANG['locale'] ?? '' }}"><i class="ti ti-help"></i></a>
 					</label>
-					<select name="locale" class="form-select">
-						@foreach(($localelist ?? []) as $localeCode)
-							<option @if((string) $localeCode === (string) ($defaultSystemLocale ?? 'en_GB')) selected @endif value="{{ $localeCode }}">{{ $localeCode }}</option>
-						@endforeach
-					</select>
+				<select name="locale" class="form-select">
+					@foreach(($localelist ?? []) as $localeCode => $localeLabel)
+						<option @if((string) $localeCode === (string) ($defaultSystemLocale ?? 'en_GB')) selected @endif value="{{ $localeCode }}">{{ $localeLabel }}</option>
+					@endforeach
+				</select>
 				</div>
 				<div class="mb-3">
 					<label class="form-label">{{ $LANG['enabled'] ?? '' }}
@@ -78,11 +78,22 @@
 			</div>
 			<div id="pref-add-currency" class="tab-pane" role="tabpanel">
 				@include('templates.default.partials.currency_sign_field', [
-					'currencySignFieldName'    => 'p_currency_sign',
-					'currencySignCurrentValue' => post('p_currency_sign'),
-					'currencyCodeFieldName'    => 'currency_code',
-					'currencyCodeCurrentValue' => post('currency_code'),
+					'currencySignFieldName'        => 'p_currency_sign',
+					'currencySignCurrentValue'     => post('p_currency_sign'),
+					'currencyCodeFieldName'        => 'currency_code',
+					'currencyCodeCurrentValue'     => post('currency_code'),
+					'currencyPositionFieldName'    => 'currency_position',
+					'currencyPositionCurrentValue' => $preference['currency_position'] ?? '',
+					'currencyIdFieldName'          => 'currency_id',
+					'currencyIdCurrentValue'       => post('currency_id'),
 				])
+				<div class="mb-3 mt-3">
+					<div class="form-check form-switch">
+						<input type="hidden" name="show_currency_code" value="0" />
+						<input class="form-check-input" type="checkbox" name="show_currency_code" id="si_show_currency_code" value="1" @if(post('show_currency_code')) checked @endif />
+						<label class="form-check-label" for="si_show_currency_code">{{ $LANG['show_currency_code'] ?? 'Show currency code on invoices' }}</label>
+					</div>
+				</div>
 				<div class="mb-3 mt-3">
 					<label class="form-label">{{ $LANG['payment_terms'] ?? 'Payment terms' }}</label>
 					<select name="payment_term_id" class="form-select">
@@ -91,6 +102,14 @@
 							<option value="{{ $pt['term_id'] ?? '' }}" @if((string) post('payment_term_id') === (string)($pt['term_id'] ?? '')) selected @endif>{{ $pt['term_label'] ?? '' }}</option>
 						@endforeach
 					</select>
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['payment_bank_name'] ?? 'Bank name' }}</label>
+					<input type="text" name="payment_bank_name" value="{{ post('payment_bank_name') }}" class="form-control" placeholder="e.g. First National Bank" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['payment_reference'] ?? 'Payment reference' }}</label>
+					<input type="text" name="payment_reference" value="{{ post('payment_reference') }}" class="form-control" placeholder="e.g. Invoice #{invoice.number}" />
 				</div>
 			</div>
 			<div id="pref-add-wording" class="tab-pane" role="tabpanel">

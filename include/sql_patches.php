@@ -1362,8 +1362,8 @@ ADD `language` VARCHAR( 255 ) NULL ;";
             $patch['225']['patch'] = "ALTER TABLE  `".TB_PREFIX."biller` ADD `paypal_notify_url` VARCHAR( 255 ) NULL AFTER  `paypal_business_name`";
             $patch['225']['date'] = "20100209";
 
-            $patch['226']['name'] = "Define currency in preferences";
-            $patch['226']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD `currency_code` VARCHAR( 25 ) NULL ;";
+            $patch['226']['name'] = "Define currency in preferences (now resolved via si_currencies)";
+            $patch['226']['patch'] = "";
             $patch['226']['date'] = "20100209";
 
             $patch['227']['name'] = "Create cron table to handle recurrence";
@@ -1402,8 +1402,8 @@ ADD `language` VARCHAR( 255 ) NULL ;";
         $patch['231']['patch'] = "ALTER TABLE  `".TB_PREFIX."payment` ADD `online_payment_id` VARCHAR( 255 ) NULL AFTER  `domain_id`";
         $patch['231']['date'] = "20100226";
 
-        $patch['232']['name'] = "Define currency display in preferences";
-        $patch['232']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD `currency_position` VARCHAR( 25 ) NULL ;";
+        $patch['232']['name'] = "Define currency display in preferences (now resolved via si_currencies)";
+        $patch['232']['patch'] = "";
         $patch['232']['date'] = "20100227";
 
         $patch['233']['name'] = "Add system default to control invoice number by biller -- dummy patch -- this sql was removed";
@@ -2860,24 +2860,8 @@ PRIMARY KEY ( `domain_id`, `id` )
     }
     $patch['375']['date'] = "20260420";
 
-    $patch['376']['name'] = "si_invoices: add currency_code column";
-    switch ($db_server) {
-        case 'pgsql':
-            $patch['376']['patch'] = checkFieldExists(TB_PREFIX . 'invoices', 'currency_code')
-                ? 'SELECT 1'
-                : 'ALTER TABLE ' . TB_PREFIX . 'invoices ADD COLUMN currency_code VARCHAR(25) NULL';
-            break;
-        case 'sqlite':
-            $patch['376']['patch'] = checkFieldExists(TB_PREFIX . 'invoices', 'currency_code')
-                ? 'SELECT 1'
-                : 'ALTER TABLE ' . TB_PREFIX . 'invoices ADD COLUMN currency_code VARCHAR(25) NULL';
-            break;
-        default:
-            $patch['376']['patch'] = checkFieldExists(TB_PREFIX . 'invoices', 'currency_code')
-                ? 'SELECT 1'
-                : 'ALTER TABLE `' . TB_PREFIX . 'invoices` ADD `currency_code` VARCHAR(25) NULL';
-            break;
-    }
+    $patch['376']['name'] = "si_invoices: add currency_code column (now resolved via si_currencies)";
+    $patch['376']['patch'] = 'SELECT 1';
     $patch['376']['date'] = "20260420";
 
     $patch['377']['name'] = "si_invoices: backfill currency_sign from preferences";
@@ -2905,29 +2889,8 @@ PRIMARY KEY ( `domain_id`, `id` )
     }
     $patch['377']['date'] = "20260420";
 
-    $patch['378']['name'] = "si_invoices: backfill currency_code from preferences";
-    switch ($db_server) {
-        case 'pgsql':
-            $patch['378']['patch'] = 'UPDATE ' . TB_PREFIX . 'invoices i'
-                . ' SET currency_code = p.currency_code'
-                . ' FROM ' . TB_PREFIX . 'preferences p'
-                . ' WHERE p.pref_id = i.preference_id AND p.domain_id = i.domain_id'
-                . ' AND (i.currency_code IS NULL OR i.currency_code = \'\')';
-            break;
-        case 'sqlite':
-            $patch['378']['patch'] = 'UPDATE ' . TB_PREFIX . 'invoices'
-                . ' SET currency_code = (SELECT p.currency_code FROM ' . TB_PREFIX . 'preferences p'
-                . ' WHERE p.pref_id = ' . TB_PREFIX . 'invoices.preference_id'
-                . ' AND p.domain_id = ' . TB_PREFIX . 'invoices.domain_id)'
-                . ' WHERE currency_code IS NULL OR currency_code = \'\'';
-            break;
-        default:
-            $patch['378']['patch'] = 'UPDATE ' . TB_PREFIX . 'invoices i'
-                . ' INNER JOIN ' . TB_PREFIX . 'preferences p ON p.pref_id = i.preference_id AND p.domain_id = i.domain_id'
-                . ' SET i.currency_code = p.currency_code'
-                . ' WHERE i.currency_code IS NULL OR i.currency_code = \'\'';
-            break;
-    }
+    $patch['378']['name'] = "si_invoices: backfill currency_code from preferences (now resolved via si_currencies)";
+    $patch['378']['patch'] = 'SELECT 1';
     $patch['378']['date'] = "20260420";
 
     $patch['379']['name'] = "si_payment: denormalised currency_sign and currency_code from invoice";
@@ -3211,4 +3174,183 @@ PRIMARY KEY ( `domain_id`, `id` )
             break;
     }
     $patch['392']['date'] = "20260422";
+
+    $patch['393']['name'] = "Add currency_position to invoices and payments (now resolved via si_currencies)";
+    $patch['393']['patch'] = 'SELECT 1';
+    $patch['393']['date'] = "20260508";
+
+    $patch['394']['name'] = "Create si_currencies table, link preferences/invoices, and migrate existing currencies";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+            $p394 = '';
+            if (!checkTableExists(TB_PREFIX . 'currencies')) {
+                $p394 .= "CREATE TABLE " . TB_PREFIX . "currencies (
+                    id SERIAL PRIMARY KEY,
+                    domain_id INTEGER NOT NULL DEFAULT 1,
+                    currency_code VARCHAR(10) NOT NULL DEFAULT '',
+                    currency_sign VARCHAR(50) NOT NULL DEFAULT '',
+                    currency_position VARCHAR(25) NOT NULL DEFAULT 'left',
+                    is_default SMALLINT NOT NULL DEFAULT 0,
+                    enabled SMALLINT NOT NULL DEFAULT 1
+                ); ";
+                $p394 .= "CREATE INDEX idx_currencies_domain ON " . TB_PREFIX . "currencies (domain_id); ";
+            }
+            $p394 .= checkFieldExists(TB_PREFIX . 'preferences', 'currency_id')
+                ? '' : "ALTER TABLE " . TB_PREFIX . "preferences ADD COLUMN currency_id INTEGER DEFAULT NULL; ";
+            $p394 .= checkFieldExists(TB_PREFIX . 'invoices', 'currency_id')
+                ? '' : "ALTER TABLE " . TB_PREFIX . "invoices ADD COLUMN currency_id INTEGER DEFAULT NULL; ";
+
+            // Seed preset currencies (idempotent via ON CONFLICT)
+            $p394 .= "INSERT INTO " . TB_PREFIX . "currencies (domain_id, currency_code, currency_sign, currency_position, enabled) VALUES
+                (1, 'USD', '$', 'left', 1), (1, 'CAD', 'C$', 'left', 1), (1, 'AUD', 'A$', 'left', 1),
+                (1, 'NZD', 'NZ$', 'left', 1), (1, 'MXN', 'MX$', 'left', 1), (1, 'BRL', 'R$', 'right', 1),
+                (1, 'SGD', 'S$', 'left', 1), (1, 'EUR', '€', 'right', 1), (1, 'GBP', '£', 'left', 1),
+                (1, 'CHF', 'Fr.', 'right', 1), (1, 'SEK', 'kr', 'right', 1), (1, 'DKK', 'kr', 'right', 1),
+                (1, 'NOK', 'kr', 'right', 1), (1, 'PLN', 'zł', 'right', 1), (1, 'CZK', 'Kč', 'right', 1),
+                (1, 'HUF', 'Ft', 'right', 1), (1, 'RON', 'lei', 'right', 1), (1, 'BGN', 'лв', 'right', 1),
+                (1, 'TRY', '₺', 'left', 1), (1, 'RSD', 'дин.', 'right', 1), (1, 'RUB', '₽', 'right', 1),
+                (1, 'CNY', '¥', 'left', 1), (1, 'JPY', '¥', 'left', 1), (1, 'TWD', 'NT$', 'left', 1),
+                (1, 'HKD', 'HK$', 'left', 1), (1, 'INR', '₹', 'left', 1), (1, 'IDR', 'Rp', 'right', 1),
+                (1, 'VND', '₫', 'right', 1), (1, 'ILS', '₪', 'left', 1), (1, 'SAR', '﷼', 'left', 1),
+                (1, 'ZAR', 'R', 'right', 1), (1, 'BTC', '₿', 'left', 1), (1, 'ETH', 'Ξ', 'left', 1)
+                ON CONFLICT DO NOTHING; ";
+
+            $patch['394']['patch'] = $p394;
+            break;
+
+        case 'pdo_sqlite':
+            $p394 = '';
+            if (!checkTableExists(TB_PREFIX . 'currencies')) {
+                $p394 .= "CREATE TABLE " . TB_PREFIX . "currencies (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    domain_id INTEGER NOT NULL DEFAULT 1,
+                    currency_code TEXT NOT NULL DEFAULT '',
+                    currency_sign TEXT NOT NULL DEFAULT '',
+                    currency_position TEXT NOT NULL DEFAULT 'left',
+                    is_default INTEGER NOT NULL DEFAULT 0,
+                    enabled INTEGER NOT NULL DEFAULT 1
+                ); ";
+                $p394 .= "CREATE INDEX idx_currencies_domain ON " . TB_PREFIX . "currencies (domain_id); ";
+            }
+            $p394 .= checkFieldExists(TB_PREFIX . 'preferences', 'currency_id')
+                ? '' : "ALTER TABLE " . TB_PREFIX . "preferences ADD COLUMN currency_id INTEGER DEFAULT NULL; ";
+            $p394 .= checkFieldExists(TB_PREFIX . 'invoices', 'currency_id')
+                ? '' : "ALTER TABLE " . TB_PREFIX . "invoices ADD COLUMN currency_id INTEGER DEFAULT NULL; ";
+
+            // Seed preset currencies (SQLite: simple INSERT, duplicates ignored by transaction or we accept them)
+            $p394 .= "INSERT OR IGNORE INTO " . TB_PREFIX . "currencies (domain_id, currency_code, currency_sign, currency_position, enabled) VALUES
+                (1, 'USD', '$', 'left', 1), (1, 'CAD', 'C$', 'left', 1), (1, 'AUD', 'A$', 'left', 1),
+                (1, 'NZD', 'NZ$', 'left', 1), (1, 'MXN', 'MX$', 'left', 1), (1, 'BRL', 'R$', 'right', 1),
+                (1, 'SGD', 'S$', 'left', 1), (1, 'EUR', '€', 'right', 1), (1, 'GBP', '£', 'left', 1),
+                (1, 'CHF', 'Fr.', 'right', 1), (1, 'SEK', 'kr', 'right', 1), (1, 'DKK', 'kr', 'right', 1),
+                (1, 'NOK', 'kr', 'right', 1), (1, 'PLN', 'zł', 'right', 1), (1, 'CZK', 'Kč', 'right', 1),
+                (1, 'HUF', 'Ft', 'right', 1), (1, 'RON', 'lei', 'right', 1), (1, 'BGN', 'лв', 'right', 1),
+                (1, 'TRY', '₺', 'left', 1), (1, 'RSD', 'дин.', 'right', 1), (1, 'RUB', '₽', 'right', 1),
+                (1, 'CNY', '¥', 'left', 1), (1, 'JPY', '¥', 'left', 1), (1, 'TWD', 'NT$', 'left', 1),
+                (1, 'HKD', 'HK$', 'left', 1), (1, 'INR', '₹', 'left', 1), (1, 'IDR', 'Rp', 'right', 1),
+                (1, 'VND', '₫', 'right', 1), (1, 'ILS', '₪', 'left', 1), (1, 'SAR', '﷼', 'left', 1),
+                (1, 'ZAR', 'R', 'right', 1), (1, 'BTC', '₿', 'left', 1), (1, 'ETH', 'Ξ', 'left', 1); ";
+
+            $patch['394']['patch'] = $p394;
+            break;
+
+        case 'pdo_mysql':
+        default:
+            $p394 = '';
+            if (!checkTableExists(TB_PREFIX . 'currencies')) {
+                $p394 .= "CREATE TABLE `" . TB_PREFIX . "currencies` (
+                    `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                    `domain_id` INT NOT NULL DEFAULT 1,
+                    `currency_code` VARCHAR(10) NOT NULL DEFAULT '',
+                    `currency_sign` VARCHAR(50) NOT NULL DEFAULT '',
+                    `currency_position` VARCHAR(25) NOT NULL DEFAULT 'left',
+                    `is_default` TINYINT NOT NULL DEFAULT 0,
+                    `enabled` TINYINT NOT NULL DEFAULT 1,
+                    KEY `idx_domain` (`domain_id`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci; ";
+            }
+            $p394 .= checkFieldExists(TB_PREFIX . 'preferences', 'currency_id')
+                ? '' : "ALTER TABLE `" . TB_PREFIX . "preferences` ADD COLUMN `currency_id` INT DEFAULT NULL; ";
+            $p394 .= checkFieldExists(TB_PREFIX . 'invoices', 'currency_id')
+                ? '' : "ALTER TABLE `" . TB_PREFIX . "invoices` ADD COLUMN `currency_id` INT DEFAULT NULL; ";
+
+            // Seed preset currencies (ON DUPLICATE KEY UPDATE makes it idempotent)
+            $p394 .= "INSERT INTO `" . TB_PREFIX . "currencies` (`domain_id`, `currency_code`, `currency_sign`, `currency_position`, `enabled`) VALUES
+                (1, 'USD', '$', 'left', 1), (1, 'CAD', 'C$', 'left', 1), (1, 'AUD', 'A$', 'left', 1),
+                (1, 'NZD', 'NZ$', 'left', 1), (1, 'MXN', 'MX$', 'left', 1), (1, 'BRL', 'R$', 'right', 1),
+                (1, 'SGD', 'S$', 'left', 1), (1, 'EUR', '€', 'right', 1), (1, 'GBP', '£', 'left', 1),
+                (1, 'CHF', 'Fr.', 'right', 1), (1, 'SEK', 'kr', 'right', 1), (1, 'DKK', 'kr', 'right', 1),
+                (1, 'NOK', 'kr', 'right', 1), (1, 'PLN', 'zł', 'right', 1), (1, 'CZK', 'Kč', 'right', 1),
+                (1, 'HUF', 'Ft', 'right', 1), (1, 'RON', 'lei', 'right', 1), (1, 'BGN', 'лв', 'right', 1),
+                (1, 'TRY', '₺', 'left', 1), (1, 'RSD', 'дин.', 'right', 1), (1, 'RUB', '₽', 'right', 1),
+                (1, 'CNY', '¥', 'left', 1), (1, 'JPY', '¥', 'left', 1), (1, 'TWD', 'NT$', 'left', 1),
+                (1, 'HKD', 'HK$', 'left', 1), (1, 'INR', '₹', 'left', 1), (1, 'IDR', 'Rp', 'right', 1),
+                (1, 'VND', '₫', 'right', 1), (1, 'ILS', '₪', 'left', 1), (1, 'SAR', '﷼', 'left', 1),
+                (1, 'ZAR', 'R', 'right', 1), (1, 'BTC', '₿', 'left', 1), (1, 'ETH', 'Ξ', 'left', 1)
+                ON DUPLICATE KEY UPDATE `currency_sign`=VALUES(`currency_sign`), `currency_position`=VALUES(`currency_position`); ";
+
+            $patch['394']['patch'] = $p394;
+            break;
+    }
+    $patch['394']['date'] = "20260508";
+
+    $patch['395']['name'] = "Add show_currency_code toggle to preferences and invoices";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+            $p395 = '';
+            $p395 .= checkFieldExists(TB_PREFIX . 'preferences', 'show_currency_code')
+                ? '' : "ALTER TABLE " . TB_PREFIX . "preferences ADD COLUMN show_currency_code SMALLINT NOT NULL DEFAULT 0; ";
+            $p395 .= checkFieldExists(TB_PREFIX . 'invoices', 'show_currency_code')
+                ? '' : "ALTER TABLE " . TB_PREFIX . "invoices ADD COLUMN show_currency_code SMALLINT NOT NULL DEFAULT 0; ";
+            $patch['395']['patch'] = $p395;
+            break;
+        case 'pdo_sqlite':
+            $p395 = '';
+            $p395 .= checkFieldExists(TB_PREFIX . 'preferences', 'show_currency_code')
+                ? '' : "ALTER TABLE " . TB_PREFIX . "preferences ADD COLUMN show_currency_code INTEGER NOT NULL DEFAULT 0; ";
+            $p395 .= checkFieldExists(TB_PREFIX . 'invoices', 'show_currency_code')
+                ? '' : "ALTER TABLE " . TB_PREFIX . "invoices ADD COLUMN show_currency_code INTEGER NOT NULL DEFAULT 0; ";
+            $patch['395']['patch'] = $p395;
+            break;
+        case 'pdo_mysql':
+        default:
+            $p395 = '';
+            $p395 .= checkFieldExists(TB_PREFIX . 'preferences', 'show_currency_code')
+                ? '' : "ALTER TABLE `" . TB_PREFIX . "preferences` ADD COLUMN `show_currency_code` TINYINT NOT NULL DEFAULT 0; ";
+            $p395 .= checkFieldExists(TB_PREFIX . 'invoices', 'show_currency_code')
+                ? '' : "ALTER TABLE `" . TB_PREFIX . "invoices` ADD COLUMN `show_currency_code` TINYINT NOT NULL DEFAULT 0; ";
+            $patch['395']['patch'] = $p395;
+            break;
+    }
+    $patch['395']['date'] = "20260508";
+
+    $patch['396']['name'] = "Add payment_bank_name and payment_reference to preferences";
+    switch ($config->database->adapter) {
+        case 'pdo_pgsql':
+            $p396 = '';
+            $p396 .= checkFieldExists(TB_PREFIX . 'preferences', 'payment_bank_name')
+                ? '' : "ALTER TABLE " . TB_PREFIX . "preferences ADD COLUMN payment_bank_name VARCHAR(255) DEFAULT NULL; ";
+            $p396 .= checkFieldExists(TB_PREFIX . 'preferences', 'payment_reference')
+                ? '' : "ALTER TABLE " . TB_PREFIX . "preferences ADD COLUMN payment_reference VARCHAR(255) DEFAULT NULL; ";
+            $patch['396']['patch'] = $p396;
+            break;
+        case 'pdo_sqlite':
+            $p396 = '';
+            $p396 .= checkFieldExists(TB_PREFIX . 'preferences', 'payment_bank_name')
+                ? '' : "ALTER TABLE " . TB_PREFIX . "preferences ADD COLUMN payment_bank_name TEXT DEFAULT NULL; ";
+            $p396 .= checkFieldExists(TB_PREFIX . 'preferences', 'payment_reference')
+                ? '' : "ALTER TABLE " . TB_PREFIX . "preferences ADD COLUMN payment_reference TEXT DEFAULT NULL; ";
+            $patch['396']['patch'] = $p396;
+            break;
+        case 'pdo_mysql':
+        default:
+            $p396 = '';
+            $p396 .= checkFieldExists(TB_PREFIX . 'preferences', 'payment_bank_name')
+                ? '' : "ALTER TABLE `" . TB_PREFIX . "preferences` ADD COLUMN `payment_bank_name` VARCHAR(255) DEFAULT NULL; ";
+            $p396 .= checkFieldExists(TB_PREFIX . 'preferences', 'payment_reference')
+                ? '' : "ALTER TABLE `" . TB_PREFIX . "preferences` ADD COLUMN `payment_reference` VARCHAR(255) DEFAULT NULL; ";
+            $patch['396']['patch'] = $p396;
+            break;
+    }
+    $patch['396']['date'] = "20260508";
 

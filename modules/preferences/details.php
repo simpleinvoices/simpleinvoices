@@ -28,7 +28,9 @@ $defaults = getSystemDefaults();
 $status = array(array('id'=>'0','status'=>$LANG['draft']), array('id'=>'1','status'=>$LANG['real']));
 require_once __DIR__ . '/../../include/class/LocaleHelper.php';
 require_once __DIR__ . '/../../include/class/CurrencySignHelper.php';
+require_once __DIR__ . '/../../include/class/siCurrencies.php';
 $localelist = LocaleHelper::getLocaleList();
+$currencies = siCurrencies::getForDomain();
 $languageList = getLanguageList();
 
 $bladeView->assign('preference',$preference);
@@ -40,6 +42,7 @@ $bladeView->assign('preferences',$preferences);
 $bladeView->assign('status',$status);
 $bladeView->assign('localelist',$localelist);
 $bladeView->assign('languageList', is_array($languageList) ? $languageList : []);
+$bladeView->assign('currencies', $currencies);
 
 $bladeView -> assign('pageActive', 'preference');
 $subPageActive = $_GET['action'] =="view"  ? "preferences_view" : "preferences_edit" ;

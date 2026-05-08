@@ -17,7 +17,9 @@ RUN apk add --no-cache \
     freetype \
     libzip \
     libxml2 \
-    nginx
+    nginx \
+    icu-libs \
+    icu-data-full
 
 # PHP extensions (dom/xml for htmlpurifier etc.)
 # pdo_sqlite: built into PHP but needs sqlite-dev at build time

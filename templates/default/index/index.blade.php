@@ -557,10 +557,14 @@
                                 <input type="hidden" name="pref_id" value="{{ $wizardPrefId }}">
                                 <input type="hidden" name="from_wizard" value="1">
                                 @include('templates.default.partials.currency_sign_field', [
-                                    'currencySignFieldName'    => 'pref_currency_sign',
-                                    'currencySignCurrentValue' => $wizardPref['pref_currency_sign'] ?? '',
-                                    'currencyCodeFieldName'    => 'currency_code',
-                                    'currencyCodeCurrentValue' => $wizardPref['currency_code'] ?? '',
+                                    'currencySignFieldName'        => 'pref_currency_sign',
+                                    'currencySignCurrentValue'     => $wizardPref['pref_currency_sign'] ?? '',
+                                    'currencyCodeFieldName'        => 'currency_code',
+                                    'currencyCodeCurrentValue'     => $wizardPref['currency_code'] ?? '',
+                                    'currencyPositionFieldName'    => 'currency_position',
+                                    'currencyPositionCurrentValue' => $wizard_default_preference['currency_position'] ?? '',
+                                    'currencyIdFieldName'          => 'currency_id',
+                                    'currencyIdCurrentValue'       => $wizardPref['currency_id'] ?? '',
                                 ])
                                 <div class="row g-3 mt-1">
                                     <div class="col-12">
@@ -924,7 +928,7 @@
                                 <i class="ti ti-window-maximize" style="font-size:.9rem"></i>
                             </a>
                         </div>
-                        <div class="h2 mb-0">{{ ($dash_currency_sign ?? '')|si_currency_display }}{{ siLocal::number($dash_alltime_inv_total ?? 0) }}</div>
+                        <div class="h2 mb-0">{!! CurrencySignHelper::format($dash_alltime_inv_total ?? 0, $dash_currency_sign ?? '', $dash_currency_position ?? '', $dash_currency_code ?? '') !!}</div>
                     </div>
                     <div class="mt-auto w-100 flex-shrink-0">
                         <div id="sparkline-invoices" style="height:40px"></div>
@@ -1032,7 +1036,7 @@
                         <span class="d-sm-none">{{ $custShort }}</span>
                     </td>
                     <td class="d-none d-sm-table-cell text-end text-secondary">{{ siLocal::date($inv['date'] ?? '') }}</td>
-                    <td class="text-end">{{ ($inv['currency_sign'] ?? '')|si_currency_display }}{{ siLocal::number($inv['invoice_total'] ?? 0) }}</td>
+                    <td class="text-end">{!! CurrencySignHelper::format($inv['invoice_total'] ?? 0, $inv['currency_sign'] ?? '', $inv['currency_position'] ?? '', $inv['currency_code'] ?? '') !!}</td>
                     <td class="text-center">
                         @if($isDraft)
                             <span class="d-none d-sm-inline"><span class="status status-secondary"><span class="status-dot"></span>{{ $LANG['draft'] ?? '' }}</span></span>
@@ -1106,7 +1110,7 @@
                     <td class="d-none d-sm-table-cell">{{ $pmt['index_name'] ?? '' }}</td>
                     <td>{{ $pmt['cname'] ?? '' }}</td>
                     <td class="d-none d-sm-table-cell">{{ $pmt['bname'] ?? '' }}</td>
-                    <td class="text-end">{{ ($pmt['currency_sign'] ?? '')|si_currency_display }}{{ siLocal::number($pmt['ac_amount'] ?? 0) }}</td>
+                    <td class="text-end">{!! CurrencySignHelper::format($pmt['ac_amount'] ?? 0, $pmt['denorm_currency_sign'] ?? '', $pmt['denorm_currency_position'] ?? '', $pmt['denorm_currency_code'] ?? '') !!}</td>
                     <td class="text-center text-secondary d-none d-sm-table-cell">{{ siLocal::date($pmt['date'] ?? '') }}</td>
                 </tr>
                 @empty
@@ -1131,7 +1135,7 @@
                         <i class="ti ti-window-maximize" style="font-size:.9rem"></i>
                     </a>
                 </div>
-                <div class="h2 mb-0">{{ ($dash_currency_sign ?? '')|si_currency_display }}{{ siLocal::number($dash_alltime_pmt_total ?? 0) }}</div>
+                <div class="h2 mb-0">{!! CurrencySignHelper::format($dash_alltime_pmt_total ?? 0, $dash_currency_sign ?? '', $dash_currency_position ?? '', $dash_currency_code ?? '') !!}</div>
             </div>
             <div id="sparkline-payments" style="height:40px"></div>
         </div>
@@ -1228,6 +1232,13 @@
     var annualTotals   = @json($annual_totals ?? []);
     var annualYears    = @json($chart_years ?? []);
     var dashCurrSign   = @json(\CurrencySignHelper::forDisplay($dash_currency_sign ?? ''));
+    var dashCurrPos    = @json(($dash_currency_position ?? '') ?: 'left');
+    function siFmtCurr(v, sign, pos) {
+        sign = sign || dashCurrSign || '';
+        pos = pos || dashCurrPos || 'left';
+        var num = Number(v).toLocaleString();
+        return pos === 'right' ? num + ' ' + sign : sign + num;
+    }
     var last12ByCurr   = @json($chart_last12_by_curr ?? []);
     var datasetsByCurr = @json($chart_data_by_curr ?? []);
     var annualByCurr   = @json($annual_totals_by_curr ?? []);
@@ -1313,7 +1324,7 @@
             yaxis: {
                 labels: {
                     style: { colors: bodyColor },
-                    formatter: function (v) { return (seriesSigns[0] || dashCurrSign) + v.toLocaleString(); }
+                    formatter: function (v) { return siFmtCurr(v, seriesSigns[0] || dashCurrSign, dashCurrPos); }
                 }
             },
             colors: colors,
@@ -1335,7 +1346,7 @@
                     formatter: function (v, opts) {
                         var sign = seriesSigns[opts && opts.seriesIndex] !== undefined
                             ? seriesSigns[opts.seriesIndex] : dashCurrSign;
-                        return sign + v.toLocaleString();
+                        return siFmtCurr(v, sign, dashCurrPos);
                     }
                 }
             }
@@ -1425,7 +1436,7 @@
             yaxis: {
                 labels: {
                     style: { colors: bodyColor },
-                    formatter: function (v) { return (seriesSigns[0] || dashCurrSign) + v.toLocaleString(); }
+                    formatter: function (v) { return siFmtCurr(v, seriesSigns[0] || dashCurrSign, dashCurrPos); }
                 }
             },
             colors: colors,
@@ -1445,7 +1456,7 @@
                     formatter: function (v, opts) {
                         var sign = seriesSigns[opts && opts.seriesIndex] !== undefined
                             ? seriesSigns[opts.seriesIndex] : dashCurrSign;
-                        return sign + v.toLocaleString();
+                        return siFmtCurr(v, sign, dashCurrPos);
                     }
                 }
             }
@@ -1494,7 +1505,7 @@
                             color: bodyColor,
                             formatter: function (val, opts) {
                                 var idx = opts && opts.seriesIndex != null ? opts.seriesIndex : 0;
-                                return amounts[idx] !== undefined ? dashCurrSign + amounts[idx].toLocaleString() : val + '%';
+                                return amounts[idx] !== undefined ? siFmtCurr(amounts[idx], dashCurrSign, dashCurrPos) : val + '%';
                             }
                         },
                         total: {
@@ -1503,7 +1514,7 @@
                             color: bodyColor,
                             formatter: function () {
                                 var t = agingData.reduce(function (s, b) { return s + b.amount; }, 0);
-                                return dashCurrSign + t.toLocaleString();
+                                return siFmtCurr(t, dashCurrSign, dashCurrPos);
                             }
                         }
                     }
@@ -1515,7 +1526,7 @@
                 y: {
                     formatter: function (val, opts) {
                         var idx = opts && opts.seriesIndex != null ? opts.seriesIndex : 0;
-                        return amounts[idx] !== undefined ? dashCurrSign + amounts[idx].toLocaleString() : val + '%';
+                        return amounts[idx] !== undefined ? siFmtCurr(amounts[idx], dashCurrSign, dashCurrPos) : val + '%';
                     }
                 }
             }

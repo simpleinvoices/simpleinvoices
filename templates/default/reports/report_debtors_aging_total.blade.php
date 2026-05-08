@@ -64,9 +64,9 @@
 						</span>
 					</td>
 					<td class="text-secondary">{{ ($curr)|si_currency_display }}{{ !empty($period['currency_code']) ? ' ' . $period['currency_code'] : ($curr ? '' : '-') }}</td>
-					<td class="text-end">{{ ($curr)|si_currency_display }}{{ siLocal::number($period['inv_total'] ?? 0) ?: '-' }}</td>
-					<td class="text-end text-secondary">{{ ($curr)|si_currency_display }}{{ siLocal::number($period['inv_paid'] ?? 0) ?: '-' }}</td>
-					<td class="text-end fw-bold {{ $c['text'] }}">{{ ($curr)|si_currency_display }}{{ siLocal::number($period['inv_owing'] ?? 0) ?: '-' }}</td>
+					<td class="text-end">{!! CurrencySignHelper::format($period['inv_total'] ?? 0, $curr, '', $period['currency_code'] ?? '') !!}</td>
+					<td class="text-end text-secondary">{!! CurrencySignHelper::format($period['inv_paid'] ?? 0, $curr, '', $period['currency_code'] ?? '') !!}</td>
+					<td class="text-end fw-bold {{ $c['text'] }}">{!! CurrencySignHelper::format($period['inv_owing'] ?? 0, $curr, '', $period['currency_code'] ?? '') !!}</td>
 				</tr>
 			@endforeach
 			</tbody>

@@ -200,7 +200,8 @@ CREATE TABLE IF NOT EXISTS si_invoices (
   payment_term_id INTEGER DEFAULT NULL,
   due_date        DATE DEFAULT NULL,
   currency_sign   VARCHAR(50) DEFAULT NULL,
-  currency_code   VARCHAR(25) DEFAULT NULL,
+  currency_id INTEGER DEFAULT NULL,
+  show_currency_code SMALLINT NOT NULL DEFAULT 0,
   denorm_invoice_total          NUMERIC(25,6) NOT NULL DEFAULT 0,
   denorm_amount_paid            NUMERIC(25,6) NOT NULL DEFAULT 0,
   denorm_amount_owing           NUMERIC(25,6) NOT NULL DEFAULT 0,
@@ -245,7 +246,6 @@ CREATE TABLE IF NOT EXISTS si_payment (
   denorm_biller_name        VARCHAR(255) NOT NULL DEFAULT '',
   denorm_customer_name    VARCHAR(255) NOT NULL DEFAULT '',
   denorm_currency_sign      VARCHAR(50) NOT NULL DEFAULT '',
-  denorm_currency_code      VARCHAR(25) NOT NULL DEFAULT '',
   PRIMARY KEY (domain_id, id)
 );
 CREATE INDEX IF NOT EXISTS si_payment_domain_id ON si_payment (domain_id);
@@ -261,6 +261,17 @@ CREATE TABLE IF NOT EXISTS si_payment_types (
   pt_enabled     SMALLINT NOT NULL DEFAULT 1,
   PRIMARY KEY (domain_id, pt_id)
 );
+
+CREATE TABLE IF NOT EXISTS si_currencies (
+  id                SERIAL PRIMARY KEY,
+  domain_id         INTEGER DEFAULT 1,
+  currency_code     VARCHAR(10) DEFAULT '',
+  currency_sign     VARCHAR(50) DEFAULT '',
+  currency_position VARCHAR(25) DEFAULT 'left',
+  is_default        SMALLINT DEFAULT 0,
+  enabled           SMALLINT DEFAULT 1
+);
+CREATE INDEX IF NOT EXISTS idx_currencies_domain ON si_currencies (domain_id);
 
 CREATE TABLE IF NOT EXISTS si_preferences (
   pref_id                    SERIAL,
@@ -281,10 +292,11 @@ CREATE TABLE IF NOT EXISTS si_preferences (
   locale                     VARCHAR(255) DEFAULT NULL,
   language                   VARCHAR(255) DEFAULT NULL,
   index_group                INTEGER NOT NULL,
-  currency_code              VARCHAR(25) DEFAULT NULL,
-  include_online_payment     VARCHAR(255) DEFAULT NULL,
-  currency_position          VARCHAR(25) DEFAULT NULL,
+  currency_id                INTEGER DEFAULT NULL,
+  show_currency_code         SMALLINT NOT NULL DEFAULT 0,
   payment_term_id            INTEGER DEFAULT NULL,
+  payment_bank_name          VARCHAR(255) DEFAULT NULL,
+  payment_reference          VARCHAR(255) DEFAULT NULL,
   PRIMARY KEY (domain_id, pref_id)
 );
 

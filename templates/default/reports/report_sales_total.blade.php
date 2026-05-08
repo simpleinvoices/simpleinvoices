@@ -51,7 +51,7 @@
 				<tr>
 					<td class="fw-medium">{{ $total_sales['template'] ?? '' }}</td>
 					<td class="text-end text-secondary">{{ siLocal::number($total_sales['count'] ?? 0) ?: '-' }}</td>
-					<td class="text-end fw-semibold">{{ ($total_sales['currency_sign'] ?? '')|si_currency_display }}{{ siLocal::number($total_sales['sum_total'] ?? 0) ?: '-' }}@if(!empty($total_sales['currency_code'])) <span class="badge bg-secondary-lt text-muted ms-1" style="font-size:.7rem">{{ $total_sales['currency_code'] }}</span>@endif</td>
+					<td class="text-end fw-semibold">{!! CurrencySignHelper::format($total_sales['sum_total'] ?? 0, $total_sales['currency_sign'] ?? '', '', $total_sales['currency_code'] ?? '') !!}@if(!empty($total_sales['currency_code'])) <span class="badge bg-secondary-lt text-muted ms-1" style="font-size:.7rem">{{ $total_sales['currency_code'] }}</span>@endif</td>
 					<td class="d-none d-md-table-cell">
 						<div class="d-flex align-items-center gap-2">
 							<div class="progress flex-grow-1" style="height:6px;">

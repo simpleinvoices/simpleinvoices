@@ -1,7 +1,4 @@
 {{-- Invoice Quick View --}}
-@php
-    $currency = CurrencySignHelper::forDisplay($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '');
-@endphp
 
 <div class="card mb-3">
 
@@ -177,8 +174,8 @@
                     <tr>
                         <td class="text-end">{{ siLocal::number_trim($invoiceItem['quantity'] ?? 0) }}</td>
                         <td>{!! outhtml($invoiceItem['product']['description'] ?? '') !!}</td>
-                        <td class="text-end text-nowrap">{{ $currency }}{{ siLocal::number($invoiceItem['unit_price'] ?? 0) }}</td>
-                        <td class="text-end text-nowrap">{{ $currency }}{{ siLocal::number($invoiceItem['gross_total'] ?? 0) }}</td>
+                        <td class="text-end text-nowrap">{!! CurrencySignHelper::formatInvoice($invoiceItem['unit_price'] ?? 0, $invoice, $preference) !!}</td>
+                        <td class="text-end text-nowrap">{!! CurrencySignHelper::formatInvoice($invoiceItem['gross_total'] ?? 0, $invoice, $preference) !!}</td>
                     </tr>
                     @if(!empty($invoiceItem['attribute']))
                     <tr class="table-light">
@@ -186,7 +183,7 @@
                         <td colspan="3" class="text-secondary small">
                             @foreach(($invoiceItem['attribute_json'] ?? []) as $k => $v)
                                 @if(($v['type'] ?? '') == 'decimal')
-                                    {{ $v['name'] ?? '' }}: {{ $currency }}{{ siLocal::number($v['value'] ?? 0) }};
+                                    {{ $v['name'] ?? '' }}: {!! CurrencySignHelper::formatInvoice($v['value'] ?? 0, $invoice, $preference) !!};
                                 @elseif(!empty($v['value']))
                                     {{ $v['name'] ?? '' }}: {{ $v['value'] }};
                                 @endif
@@ -233,26 +230,26 @@
                 @if(($invoice_number_of_taxes ?? 0) > 0)
                 <div class="d-flex gap-4 justify-content-between mb-1">
                     <span class="text-secondary">{{ $LANG['sub_total'] ?? '' }}</span>
-                    <span>{{ $currency }}{{ siLocal::number($invoice['gross'] ?? 0) }}</span>
+                    <span>{!! CurrencySignHelper::formatInvoice($invoice['gross'] ?? 0, $invoice, $preference) !!}</span>
                 </div>
                 @endif
                 @foreach(($invoice['tax_grouped'] ?? []) as $taxLine)
                 @if(($taxLine['tax_amount'] ?? '0') != '0')
                 <div class="d-flex gap-4 justify-content-between mb-1">
                     <span class="text-secondary">{{ $taxLine['tax_name'] ?? '' }}</span>
-                    <span>{{ $currency }}{{ siLocal::number($taxLine['tax_amount'] ?? 0) }}</span>
+                    <span>{!! CurrencySignHelper::formatInvoice($taxLine['tax_amount'] ?? 0, $invoice, $preference) !!}</span>
                 </div>
                 @endif
                 @endforeach
                 @if(($invoice_number_of_taxes ?? 0) > 1)
                 <div class="d-flex gap-4 justify-content-between mb-1">
                     <span class="text-secondary">{{ $LANG['tax_total'] ?? '' }}</span>
-                    <span>{{ $currency }}{{ siLocal::number($invoice['total_tax'] ?? 0) }}</span>
+                    <span>{!! CurrencySignHelper::formatInvoice($invoice['total_tax'] ?? 0, $invoice, $preference) !!}</span>
                 </div>
                 @endif
                 <div class="d-flex gap-4 justify-content-between pt-2 border-top fw-bold fs-4">
                     <span>{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['amount'] ?? '' }}</span>
-                    <span>{{ $currency }}{{ siLocal::number($invoice['total'] ?? 0) }}</span>
+                    <span>{!! CurrencySignHelper::formatInvoice($invoice['total'] ?? 0, $invoice, $preference) !!}</span>
                 </div>
             </div>
         </div>
@@ -313,15 +310,15 @@
                 <div class="row g-3 text-center">
                     <div class="col-4">
                         <div class="text-secondary small mb-1">{{ $LANG['total'] ?? '' }}</div>
-                        <div class="fw-bold">{{ $currency }}{{ siLocal::number($invoice['total'] ?? 0) }}</div>
+                        <div class="fw-bold">{!! CurrencySignHelper::formatInvoice($invoice['total'] ?? 0, $invoice, $preference) !!}</div>
                     </div>
                     <div class="col-4">
                         <div class="text-secondary small mb-1"><a href="index.php?module=payments&amp;view=manage&amp;id={{ urlencode($invoice['id'] ?? '') }}">{{ $LANG['paid'] ?? '' }}</a></div>
-                        <div class="fw-bold">{{ $currency }}{{ siLocal::number($invoice['paid'] ?? 0) }}</div>
+                        <div class="fw-bold">{!! CurrencySignHelper::formatInvoice($invoice['paid'] ?? 0, $invoice, $preference) !!}</div>
                     </div>
                     <div class="col-4">
                         <div class="text-secondary small mb-1">{{ $LANG['owing'] ?? '' }}</div>
-                        <div class="fw-bold {{ ($invoice['owing'] ?? 0) > 0 ? 'text-danger' : 'text-success' }}">{{ $currency }}{{ siLocal::number($invoice['owing'] ?? 0) }}</div>
+                        <div class="fw-bold {{ ($invoice['owing'] ?? 0) > 0 ? 'text-danger' : 'text-success' }}">{!! CurrencySignHelper::formatInvoice($invoice['owing'] ?? 0, $invoice, $preference) !!}</div>
                     </div>
                 </div>
                 @if(!empty($invoice_age))
@@ -342,15 +339,15 @@
                 <div class="row g-3 text-center">
                     <div class="col-4">
                         <div class="text-secondary small mb-1">{{ $LANG['total'] ?? '' }}</div>
-                        <div class="fw-bold">{{ $currency }}{{ siLocal::number($customerAccount['total'] ?? 0) }}</div>
+                        <div class="fw-bold">{!! CurrencySignHelper::formatInvoice($customerAccount['total'] ?? 0, $invoice, $preference) !!}</div>
                     </div>
                     <div class="col-4">
                         <div class="text-secondary small mb-1"><a href="index.php?module=payments&amp;view=manage&amp;c_id={{ urlencode($customer['id'] ?? '') }}">{{ $LANG['paid'] ?? '' }}</a></div>
-                        <div class="fw-bold">{{ $currency }}{{ siLocal::number($customerAccount['paid'] ?? 0) }}</div>
+                        <div class="fw-bold">{!! CurrencySignHelper::formatInvoice($customerAccount['paid'] ?? 0, $invoice, $preference) !!}</div>
                     </div>
                     <div class="col-4">
                         <div class="text-secondary small mb-1">{{ $LANG['owing'] ?? '' }}</div>
-                        <div class="fw-bold {{ ($customerAccount['owing'] ?? 0) > 0 ? 'text-danger' : 'text-success' }}">{{ $currency }}{{ siLocal::number($customerAccount['owing'] ?? 0) }}</div>
+                        <div class="fw-bold {{ ($customerAccount['owing'] ?? 0) > 0 ? 'text-danger' : 'text-success' }}">{!! CurrencySignHelper::formatInvoice($customerAccount['owing'] ?? 0, $invoice, $preference) !!}</div>
                     </div>
                 </div>
             </div>

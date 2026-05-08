@@ -150,8 +150,8 @@
 			<tr>
 				<td class="si-tabler-qty-cell">{{ ($invoiceItem['quantity'] ?? '')|siLocal_number_trim }}</td>
 				<td>{!! outhtml($invoiceItem['product']['description'] ?? '') !!}</td>
-				<td class="text-end">{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoiceItem['unit_price'] ?? '')|siLocal_number }}</td>
-				<td class="text-end">{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoiceItem['gross_total'] ?? '')|siLocal_number }}</td>
+				<td class="text-end">{!! CurrencySignHelper::formatInvoice($invoiceItem['unit_price'] ?? 0, $invoice, $preference) !!}</td>
+				<td class="text-end">{!! CurrencySignHelper::formatInvoice($invoiceItem['gross_total'] ?? 0, $invoice, $preference) !!}</td>
 			</tr>
 			@if(($invoiceItem['attribute'] ?? null) != null)
 			<tr class="si_product_attribute">
@@ -160,7 +160,7 @@
 					@foreach(($invoiceItem['attribute_json'] ?? []) as $k => $v)
 						@if(($v['visible'] ?? null) == true)
 							@if(($v['type'] ?? null) == 'decimal')
-								{{ $v['name'] ?? '' }}: {{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($v['value'] ?? '')|siLocal_number }};
+								{{ $v['name'] ?? '' }}: {!! CurrencySignHelper::formatInvoice($v['value'] ?? 0, $invoice, $preference) !!};
 							@elseif(!empty($v['value']))
 								{{ $v['name'] ?? '' }}: {{ $v['value'] }};
 							@endif
@@ -236,8 +236,8 @@
 			<tr>
 				<td></td>
 				<td></td>
-				<td class="text-end">{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoiceItem['unit_price'] ?? '')|siLocal_number }}</td>
-				<td class="text-end">{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoiceItem['total'] ?? '')|siLocal_number }}</td>
+				<td class="text-end">{!! CurrencySignHelper::formatInvoice($invoiceItem['unit_price'] ?? 0, $invoice, $preference) !!}</td>
+				<td class="text-end">{!! CurrencySignHelper::formatInvoice($invoiceItem['total'] ?? 0, $invoice, $preference) !!}</td>
 			</tr>
 			@endforeach
 		</tbody>
@@ -272,19 +272,19 @@
 				<td class="si-tabler-inv-totals-wrap">
 					<table class="si-tabler-inv-totals">
 						@if(($invoice_number_of_taxes ?? 0) > 0)
-						<tr><td>{{ $LANG['sub_total'] ?? '' }}</td><td class="text-end">@if(($invoice_number_of_taxes ?? 0) > 1)<u>@endif{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['gross'] ?? '')|siLocal_number }}@if(($invoice_number_of_taxes ?? 0) > 1)</u>@endif</td></tr>
+						<tr><td>{{ $LANG['sub_total'] ?? '' }}</td><td class="text-end">@if(($invoice_number_of_taxes ?? 0) > 1)<u>@endif{!! CurrencySignHelper::formatInvoice($invoice['gross'] ?? 0, $invoice, $preference) !!}@if(($invoice_number_of_taxes ?? 0) > 1)</u>@endif</td></tr>
 						@endif
 						@foreach(($invoice['tax_grouped'] ?? []) as $line)
 							@if(($line['tax_amount'] ?? 0) != "0")
-							<tr><td>{{ $line['tax_name'] ?? '' }}</td><td class="text-end">{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ siLocal::number($line['tax_amount'] ?? 0) }}</td></tr>
+							<tr><td>{{ $line['tax_name'] ?? '' }}</td><td class="text-end">{!! CurrencySignHelper::formatInvoice($line['tax_amount'] ?? 0, $invoice, $preference) !!}</td></tr>
 							@endif
 						@endforeach
 						@if(($invoice_number_of_taxes ?? 0) > 1)
-						<tr><td>{{ $LANG['tax_total'] ?? '' }}</td><td class="text-end"><u>{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['total_tax'] ?? '')|siLocal_number }}</u></td></tr>
+						<tr><td>{{ $LANG['tax_total'] ?? '' }}</td><td class="text-end"><u>{!! CurrencySignHelper::formatInvoice($invoice['total_tax'] ?? 0, $invoice, $preference) !!}</u></td></tr>
 						@endif
 						<tr class="si-tabler-inv-total-due">
 							<td>{{ $LANG['total'] ?? '' }}</td>
-							<td class="text-end">{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoice['total'] ?? '')|siLocal_number }}</td>
+							<td class="text-end">{!! CurrencySignHelper::formatInvoice($invoice['total'] ?? 0, $invoice, $preference) !!}</td>
 						</tr>
 					</table>
 				</td>

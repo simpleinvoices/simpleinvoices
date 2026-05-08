@@ -280,7 +280,7 @@
                     @endif
 
                     {{-- Settings --}}
-                    <li class="nav-item dropdown @if(in_array($module ?? '', ['options','system_defaults','custom_fields','tax_rates','preferences','payment_types','payment_terms'])) active @endif">
+                    <li class="nav-item dropdown @if(in_array($module ?? '', ['options','system_defaults','custom_fields','tax_rates','preferences','payment_types','payment_terms','currencies'])) active @endif">
                         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
                             <span class="nav-link-icon d-md-none d-lg-inline-block"><i class="ti ti-adjustments-horizontal"></i></span>
                             <span class="nav-link-title">{{ $LANG['settings'] ?? '' }}</span>
@@ -303,6 +303,9 @@
                             </a>
                             <a class="dropdown-item @if(($module ?? '') == 'payment_terms') active @endif" href="index.php?module=payment_terms&view=manage">
                                 <i class="ti ti-calendar me-2 text-secondary"></i>{{ $LANG['payment_terms_menu'] ?? 'Payment terms' }}
+                            </a>
+                            <a class="dropdown-item @if(($module ?? '') == 'currencies') active @endif" href="index.php?module=currencies&view=manage">
+                                <i class="ti ti-currency-dollar me-2 text-secondary"></i>{{ $LANG['currencies'] ?? 'Currencies' }}
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item @if(($module ?? '') == 'options' && ($view ?? '') == 'index') active @endif" href="index.php?module=options&view=index">
@@ -397,6 +400,10 @@
             'payment_terms_add' => 'add_payment_term',
             'payment_terms_details' => 'payment_term_details',
             'payment_terms_save' => 'manage_payment_terms',
+            'currencies_manage' => 'currencies',
+            'currencies_add' => 'currencies',
+            'currencies_details' => 'currencies',
+            'currencies_save' => 'currencies',
             'options_index' => 'options',
             'options_backup_database' => 'backup_database',
             'options_invoice_denorm' => 'invoice_denorm_title',
@@ -497,6 +504,10 @@
                         <a href="index.php?module=payment_terms&view=add" class="btn btn-primary">
                             <i class="ti ti-plus me-1"></i>{{ $LANG['add_payment_term'] ?? 'Add payment term' }}
                         </a>
+                    @elseif(($module ?? '') == 'currencies' && ($view ?? '') == 'manage')
+                        <a href="index.php?module=currencies&view=add" class="btn btn-primary">
+                            <i class="ti ti-plus me-1"></i>{{ $LANG['add_currency'] ?? 'Add currency' }}
+                        </a>
                     @elseif(($module ?? '') == 'preferences' && ($view ?? '') == 'manage')
                         <a href="index.php?module=preferences&view=add" class="btn btn-primary">
                             <i class="ti ti-plus me-1"></i>{{ $LANG['add_new_preference'] ?? '' }}
@@ -572,6 +583,7 @@
                                     'tax_rates' => ['url' => 'index.php?module=tax_rates&view=manage', 'label' => $LANG['tax_rates'] ?? ''],
                                     'payment_types' => ['url' => 'index.php?module=payment_types&view=manage', 'label' => $LANG['payment_types'] ?? ''],
                                     'payment_terms' => ['url' => 'index.php?module=payment_terms&view=manage', 'label' => $LANG['payment_terms_menu'] ?? 'Payment terms'],
+                                    'currencies' => ['url' => 'index.php?module=currencies&view=manage', 'label' => $LANG['currencies'] ?? 'Currencies'],
                                     'custom_fields' => ['url' => 'index.php?module=custom_fields&view=manage', 'label' => $LANG['custom_fields_upper'] ?? ''],
                                     'system_defaults' => ['url' => 'index.php?module=system_defaults&view=manage', 'label' => $LANG['system_preferences'] ?? ''],
                                     'preferences' => ['url' => 'index.php?module=preferences&view=manage', 'label' => $LANG['invoice_preferences'] ?? ''],

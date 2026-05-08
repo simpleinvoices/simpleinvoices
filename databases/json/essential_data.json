@@ -171,8 +171,6 @@
             "locale": "LOCALE",
             "language": "LANGUAGE",
             "index_group": "1",
-            "currency_code": "USD",
-            "currency_position": "left",
             "payment_term_id": "3",
             "pref_enabled": "1"
         },
@@ -194,8 +192,6 @@
             "locale": "LOCALE",
             "language": "LANGUAGE",
             "index_group": "1",
-            "currency_code": "USD",
-            "currency_position": "left",
             "payment_term_id": "3",
             "pref_enabled": "1"
         },
@@ -217,8 +213,6 @@
             "locale": "LOCALE",
             "language": "LANGUAGE",
             "index_group": "1",
-            "currency_code": "USD",
-            "currency_position": "left",
             "payment_term_id": "3",
             "pref_enabled": "1"
         },
@@ -240,8 +234,6 @@
             "locale": "LOCALE",
             "language": "LANGUAGE",
             "index_group": "1",
-            "currency_code": "USD",
-            "currency_position": "left",
             "payment_term_id": "3",
             "pref_enabled": "1"
         }

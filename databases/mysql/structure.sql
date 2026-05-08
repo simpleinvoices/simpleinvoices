@@ -218,7 +218,8 @@ CREATE TABLE IF NOT EXISTS `si_invoices` (
   `payment_term_id` int(11) DEFAULT NULL,
   `due_date` date DEFAULT NULL,
   `currency_sign` varchar(50) DEFAULT NULL,
-  `currency_code` varchar(25) DEFAULT NULL,
+  `currency_id` int(11) DEFAULT NULL,
+  `show_currency_code` tinyint NOT NULL DEFAULT 0,
   `denorm_invoice_total` decimal(25,6) NOT NULL DEFAULT 0,
   `denorm_amount_paid` decimal(25,6) NOT NULL DEFAULT 0,
   `denorm_amount_owing` decimal(25,6) NOT NULL DEFAULT 0,
@@ -264,7 +265,6 @@ CREATE TABLE IF NOT EXISTS `si_payment` (
   `denorm_biller_name` varchar(255) NOT NULL DEFAULT '',
   `denorm_customer_name` varchar(255) NOT NULL DEFAULT '',
   `denorm_currency_sign` varchar(50) NOT NULL DEFAULT '',
-  `denorm_currency_code` varchar(25) NOT NULL DEFAULT '',
   PRIMARY KEY (`domain_id`,`id`),
   KEY `id` (`id`),
   KEY `domain_id` (`domain_id`),
@@ -281,6 +281,18 @@ CREATE TABLE IF NOT EXISTS `si_payment_types` (
   `pt_enabled` TINYINT(1) DEFAULT 1 NOT NULL,
   PRIMARY KEY (`domain_id`,`pt_id`),
   KEY `pt_id` (`pt_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `si_currencies` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `domain_id` int(11) NOT NULL DEFAULT '1',
+  `currency_code` varchar(10) NOT NULL DEFAULT '',
+  `currency_sign` varchar(50) NOT NULL DEFAULT '',
+  `currency_position` varchar(25) NOT NULL DEFAULT 'left',
+  `is_default` TINYINT(1) NOT NULL DEFAULT 0,
+  `enabled` TINYINT(1) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`),
+  KEY `idx_domain` (`domain_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `si_preferences` (
@@ -302,10 +314,12 @@ CREATE TABLE IF NOT EXISTS `si_preferences` (
   `locale` varchar(255) DEFAULT NULL,
   `language` varchar(255) DEFAULT NULL,
   `index_group` int(11) NOT NULL,
-  `currency_code` varchar(25) DEFAULT NULL,
+  `currency_id` int(11) DEFAULT NULL,
+  `show_currency_code` tinyint NOT NULL DEFAULT 0,
   `include_online_payment` varchar(255) DEFAULT NULL,
-  `currency_position` varchar(25) DEFAULT NULL,
   `payment_term_id` int(11) DEFAULT NULL,
+  `payment_bank_name` varchar(255) DEFAULT NULL,
+  `payment_reference` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`domain_id`,`pref_id`),
   KEY `pref_id` (`pref_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

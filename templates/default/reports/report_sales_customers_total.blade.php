@@ -54,7 +54,7 @@
 				<tr>
 					<td class="text-secondary">{{ $i + 1 }}</td>
 					<td class="fw-medium">{{ $customer['name'] ?? '' }}</td>
-					<td class="text-end fw-semibold">{{ ($customer['currency_sign'] ?? '')|si_currency_display }}{{ siLocal::number($customer['sum_total'] ?? 0) ?: '-' }}@if(!empty($customer['currency_code'])) <span class="badge bg-secondary-lt text-muted ms-1" style="font-size:.7rem">{{ $customer['currency_code'] }}</span>@endif</td>
+					<td class="text-end fw-semibold">{!! CurrencySignHelper::format($customer['sum_total'] ?? 0, $customer['currency_sign'] ?? '', '', $customer['currency_code'] ?? '') !!}@if(!empty($customer['currency_code'])) <span class="badge bg-secondary-lt text-muted ms-1" style="font-size:.7rem">{{ $customer['currency_code'] }}</span>@endif</td>
 					<td class="d-none d-md-table-cell">
 						<div class="d-flex align-items-center gap-2">
 							<div class="progress flex-grow-1" style="height:6px;">

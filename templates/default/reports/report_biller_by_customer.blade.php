@@ -107,7 +107,7 @@
 				@foreach(($biller['customers'] ?? []) as $customer)
 					<tr>
 						<td>{{ $customer['name'] ?? '' }}</td>
-						<td class="text-end fw-semibold">{{ ($customer['currency_sign'] ?? '')|si_currency_display }}{{ siLocal::number($customer['sum_total'] ?? 0) ?: '-' }}@if(!empty($customer['currency_code'])) <span class="badge bg-secondary-lt text-muted ms-1" style="font-size:.7rem">{{ $customer['currency_code'] }}</span>@endif</td>
+						<td class="text-end fw-semibold">{!! CurrencySignHelper::format($customer['sum_total'] ?? 0, $customer['currency_sign'] ?? '', '', $customer['currency_code'] ?? '') !!}@if(!empty($customer['currency_code'])) <span class="badge bg-secondary-lt text-muted ms-1" style="font-size:.7rem">{{ $customer['currency_code'] }}</span>@endif</td>
 					</tr>
 				@endforeach
 				</tbody>

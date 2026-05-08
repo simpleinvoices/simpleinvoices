@@ -20,7 +20,7 @@
 				@foreach($taxes as $row)
 					<tr>
 						<td class="text-secondary">{{ ($row['currency_sign'] ?? '')|si_currency_display }}{{ !empty($row['currency_code']) ? ' ' . $row['currency_code'] : '' }}</td>
-						<td class="text-end fw-bold text-orange">{{ ($row['currency_sign'] ?? '')|si_currency_display }}{{ siLocal::number($row['sum_tax_total'] ?? 0) ?: '-' }}</td>
+						<td class="text-end fw-bold text-orange">{!! CurrencySignHelper::format($row['sum_tax_total'] ?? 0, $row['currency_sign'] ?? '', '', $row['currency_code'] ?? '') !!}</td>
 					</tr>
 				@endforeach
 				</tbody>
@@ -38,7 +38,7 @@
 							</span>
 						</div>
 						<div class="display-5 fw-bold text-orange mb-2">
-							{{ ($taxes[0]['currency_sign'] ?? '')|si_currency_display }}{{ siLocal::number($taxes[0]['sum_tax_total'] ?? 0) ?: '-' }}
+							{!! CurrencySignHelper::format($taxes[0]['sum_tax_total'] ?? 0, $taxes[0]['currency_sign'] ?? '', '', $taxes[0]['currency_code'] ?? '') !!}
 						</div>
 						<div class="text-secondary">{{ $LANG['total_taxes'] ?? '' }}</div>
 					</div>

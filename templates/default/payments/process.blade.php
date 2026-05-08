@@ -9,19 +9,19 @@
 						<strong>{{ $invoice['preference'] ?? '' }}</strong> {{ $invoice['index_id'] ?? '' }}
 					</div>
 					<div class="col mb-2">
-						<strong>{{ $LANG['total'] ?? '' }}:</strong> {{ CurrencySignHelper::forDisplay($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }}{{ number_format($invoice['total'] ?? 0, 2) }}
+						<strong>{{ $LANG['total'] ?? '' }}:</strong> {!! CurrencySignHelper::formatInvoice($invoice['total'] ?? 0, $invoice, $preference) !!}
 					</div>
 					<div class="col mb-2">
 						<strong>{{ $LANG['biller'] ?? '' }}:</strong> {{ $biller['name'] ?? '' }}
 					</div>
 					<div class="col mb-2">
-						<strong>{{ $LANG['paid'] ?? '' }}:</strong> {{ CurrencySignHelper::forDisplay($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }}{{ number_format($invoice['paid'] ?? 0, 2) }}
+						<strong>{{ $LANG['paid'] ?? '' }}:</strong> {!! CurrencySignHelper::formatInvoice($invoice['paid'] ?? 0, $invoice, $preference) !!}
 					</div>
 					<div class="col mb-2">
 						<strong>{{ $LANG['customer'] ?? '' }}:</strong> {{ $customer['name'] ?? '' }}
 					</div>
 					<div class="col mb-2">
-						<strong>{{ $LANG['owing'] ?? '' }}:</strong> <u>{{ CurrencySignHelper::forDisplay($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }}{{ number_format($invoice['owing'] ?? 0, 2) }}</u>
+						<strong>{{ $LANG['owing'] ?? '' }}:</strong> <u>{!! CurrencySignHelper::formatInvoice($invoice['owing'] ?? 0, $invoice, $preference) !!}</u>
 					</div>
 				</div>
 			</div>

@@ -15,12 +15,15 @@ $preferences = getActivePreferences();
 $paymentTerms = getPaymentTerms();
 require_once __DIR__ . '/../../include/class/LocaleHelper.php';
 require_once __DIR__ . '/../../include/class/CurrencySignHelper.php';
+require_once __DIR__ . '/../../include/class/siCurrencies.php';
 $localelist = LocaleHelper::getLocaleList();
+$currencies = siCurrencies::getForDomain();
 
 $bladeView->assign('preferences',$preferences);
 $bladeView->assign('paymentTerms',$paymentTerms);
 $bladeView->assign('defaults',$defaults);
 $bladeView->assign('localelist',$localelist);
+$bladeView->assign('currencies', $currencies);
 $bladeView->assign('defaultSystemLocale', getDefaultLanguage());
 
 $bladeView -> assign('pageActive', 'preference');

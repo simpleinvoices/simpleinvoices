@@ -305,10 +305,22 @@ function getBiller($id, $domain_id='') {
 
 function getPreference($id, $domain_id='') {
 	global $LANG;
+	$domain_id = domain_id::get($domain_id);
 	$record = getGenericRecord('preferences', $id, $domain_id, 'pref_id');
 	if (!$record) return false;
 	$record['status_wording'] = $record['status']==1?$LANG['real']:$LANG['draft'];
 	$record['enabled'] = $record['pref_enabled']==1?$LANG['enabled']:$LANG['disabled'];
+
+	// Resolve currency_code/position from si_currencies via currency_id
+	if (!empty($record['currency_id'])) {
+		require_once __DIR__ . '/class/siCurrencies.php';
+		$currRow = siCurrencies::getById((int) $record['currency_id'], $domain_id);
+		if ($currRow) {
+			$record['currency_code'] = $currRow['currency_code'] ?? '';
+			$record['currency_position'] = $currRow['currency_position'] ?? 'left';
+		}
+	}
+
 	return $record;
 }
 
@@ -1184,6 +1196,18 @@ function getInvoice($id, $domain_id='') {
 	$invoice['total_tax'] = $result['total_tax'];
 
 	$invoice['tax_grouped'] = taxesGroupedForInvoice($id);
+
+	// Live-resolve currency fields from si_currencies so position/sign/code
+	// reflect current table values rather than stale denormalised snapshots.
+	if (!empty($invoice['currency_id'])) {
+		require_once __DIR__ . '/class/siCurrencies.php';
+		$currRow = siCurrencies::getById((int) $invoice['currency_id'], $domain_id);
+		if ($currRow) {
+			$invoice['currency_position'] = $currRow['currency_position'] ?? $invoice['currency_position'] ?? '';
+			$invoice['currency_sign']     = CurrencySignHelper::forDisplay($currRow['currency_sign'] ?? $invoice['currency_sign'] ?? '');
+			$invoice['currency_code']     = $currRow['currency_code'] ?? $invoice['currency_code'] ?? '';
+		}
+	}
 
 	return $invoice;
 }
@@ -2160,6 +2184,7 @@ function insertInvoice($type, $domain_id='') {
 		require_once __DIR__ . '/class/CurrencySignHelper.php';
 	}
 	require_once __DIR__ . '/class/PaymentTermCalculator.php';
+	require_once __DIR__ . '/class/siCurrencies.php';
 	global $db_server;
 	$domain_id = domain_id::get($domain_id);
 
@@ -2175,6 +2200,46 @@ function insertInvoice($type, $domain_id='') {
 	// Always store the decoded display form (€ not &#8364;) so JS comparisons work consistently.
 	$currency_sign = CurrencySignHelper::forDisplay($_POST['currency_sign'] ?? $pref_group['pref_currency_sign'] ?? '');
 	$currency_code = trim($_POST['currency_code'] ?? $pref_group['currency_code'] ?? '');
+
+	// Resolve currency_id: user selection (POST) > lookup by sign+code > preference fallback
+	$currency_id = !empty($_POST['currency_id']) ? (int) $_POST['currency_id'] : null;
+	if (!$currency_id && ($currency_code !== '' || $currency_sign !== '')) {
+		$currRow = siCurrencies::findByCode($domain_id, $currency_code ?: '')
+			?: siCurrencies::findBySign($domain_id, $currency_sign);
+		if ($currRow) {
+			$currency_id = (int) $currRow['id'];
+		}
+	}
+	if (!$currency_id && !empty($pref_group['currency_id'])) {
+		$currRow = siCurrencies::getById((int) $pref_group['currency_id'], $domain_id);
+		if ($currRow) {
+			$currency_id = (int) $currRow['id'];
+		}
+	}
+
+	// Position is managed by si_currencies (via currency_id) first, then preference fallback
+	$currency_position = '';
+	if ($currency_id > 0) {
+		$currRow = siCurrencies::getById($currency_id, $domain_id);
+		if ($currRow) {
+			$currency_position = $currRow['currency_position'] ?? '';
+		}
+	}
+	if ($currency_position !== 'left' && $currency_position !== 'right') {
+		$currency_position = trim($pref_group['currency_position'] ?? '');
+	}
+	if ($currency_position !== 'left' && $currency_position !== 'right') {
+		$currency_position = CurrencySignHelper::defaultPositionForSign($currency_sign, $currency_code);
+	}
+
+	if (!$currency_id && ($currency_sign !== '' || $currency_code !== '')) {
+		$currRow = siCurrencies::findOrCreate($domain_id, $currency_sign, $currency_code, $currency_position);
+		if ($currRow) {
+			$currency_id = (int) $currRow['id'];
+		}
+	}
+
+	$show_currency_code = !empty($pref_group['show_currency_code']) ? 1 : 0;
 
 	//also set the current time (if null or =00:00:00)
 	$clean_date=SqlDateWithTime($_POST['date']);
@@ -2198,13 +2263,13 @@ function insertInvoice($type, $domain_id='') {
 				index_id, domain_id, biller_id, customer_id,
 				type_id, preference_id, date, note,
 				custom_field1, custom_field2, custom_field3, custom_field4,
-				currency_sign, currency_code,
+				currency_sign, currency_id, show_currency_code,
 				payment_term_id, due_date
 			) VALUES (
 				:index_id, :domain_id, :biller_id, :customer_id,
 				:type, :preference_id, :date, :note,
 				:customField1, :customField2, :customField3, :customField4,
-				:currency_sign, :currency_code,
+				:currency_sign, :currency_id, :show_currency_code,
 				:payment_term_id, :due_date
 			)";
 	} else {
@@ -2213,13 +2278,13 @@ function insertInvoice($type, $domain_id='') {
 				id, index_id, domain_id, biller_id, customer_id,
 				type_id, preference_id, date, note,
 				custom_field1, custom_field2, custom_field3, custom_field4,
-				currency_sign, currency_code,
+				currency_sign, currency_id, show_currency_code,
 				payment_term_id, due_date
 			) VALUES (
 				NULL, :index_id, :domain_id, :biller_id, :customer_id,
 				:type, :preference_id, :date, :note,
 				:customField1, :customField2, :customField3, :customField4,
-				:currency_sign, :currency_code,
+				:currency_sign, :currency_id, :show_currency_code,
 				:payment_term_id, :due_date
 			)";
 	}
@@ -2239,7 +2304,8 @@ function insertInvoice($type, $domain_id='') {
 		':customField3',	$_POST['customField3'],
 		':customField4',	$_POST['customField4'],
 		':currency_sign',	$currency_sign,
-		':currency_code',	$currency_code,
+		':currency_id',		$currency_id,
+		':show_currency_code', $show_currency_code,
 		':payment_term_id',	$paymentTermId,
 		':due_date',		$dueDateSql
 		);
@@ -2288,6 +2354,47 @@ function updateInvoice($invoice_id, $domain_id='') {
 	$currency_sign = CurrencySignHelper::forDisplay($_POST['currency_sign'] ?? $new_pref_group['pref_currency_sign'] ?? '');
 	$currency_code = trim($_POST['currency_code'] ?? $new_pref_group['currency_code'] ?? '');
 
+	// Resolve currency_id: user selection (POST) > lookup by sign+code > preference fallback
+	require_once __DIR__ . '/class/siCurrencies.php';
+	$currency_id = !empty($_POST['currency_id']) ? (int) $_POST['currency_id'] : null;
+	if (!$currency_id && ($currency_code !== '' || $currency_sign !== '')) {
+		$currRow = siCurrencies::findByCode($domain_id, $currency_code ?: '')
+			?: siCurrencies::findBySign($domain_id, $currency_sign);
+		if ($currRow) {
+			$currency_id = (int) $currRow['id'];
+		}
+	}
+	if (!$currency_id && !empty($new_pref_group['currency_id'])) {
+		$currRow = siCurrencies::getById((int) $new_pref_group['currency_id'], $domain_id);
+		if ($currRow) {
+			$currency_id = (int) $currRow['id'];
+		}
+	}
+
+	// Position is managed by si_currencies (via currency_id) first, then preference fallback
+	$currency_position = '';
+	if ($currency_id > 0) {
+		$currRow = siCurrencies::getById($currency_id, $domain_id);
+		if ($currRow) {
+			$currency_position = $currRow['currency_position'] ?? '';
+		}
+	}
+	if ($currency_position !== 'left' && $currency_position !== 'right') {
+		$currency_position = trim($new_pref_group['currency_position'] ?? '');
+	}
+	if ($currency_position !== 'left' && $currency_position !== 'right') {
+		$currency_position = CurrencySignHelper::defaultPositionForSign($currency_sign, $currency_code);
+	}
+
+	if (!$currency_id && ($currency_sign !== '' || $currency_code !== '')) {
+		$currRow = siCurrencies::findOrCreate($domain_id, $currency_sign, $currency_code, $currency_position);
+		if ($currRow) {
+			$currency_id = (int) $currRow['id'];
+		}
+	}
+
+	$show_currency_code = !empty($new_pref_group['show_currency_code']) ? 1 : 0;
+
 	$clean_date = SqlDateWithTime($_POST['date']);
 	$ptId = isset($_POST['payment_term_id']) ? (int)$_POST['payment_term_id'] : 0;
 	if ($ptId <= 0) {
@@ -2316,7 +2423,8 @@ function updateInvoice($invoice_id, $domain_id='') {
 			custom_field3 = :customField3,
 			custom_field4 = :customField4,
 			currency_sign = :currency_sign,
-			currency_code = :currency_code,
+			currency_id = :currency_id,
+			show_currency_code = :show_currency_code,
 			payment_term_id = :payment_term_id,
 			due_date = :due_date
 		WHERE
@@ -2335,7 +2443,8 @@ function updateInvoice($invoice_id, $domain_id='') {
 		':customField3', $_POST['customField3'],
 		':customField4', $_POST['customField4'],
 		':currency_sign', $currency_sign,
-		':currency_code', $currency_code,
+		':currency_id', $currency_id,
+		':show_currency_code', $show_currency_code,
 		':payment_term_id', $paymentTermId,
 		':due_date', $dueDateSql,
 		':invoice_id', $invoice_id,

@@ -1,7 +1,34 @@
 <?php
 # Deal with op and add some basic sanity checking
 
+require_once __DIR__ . '/../../include/class/siCurrencies.php';
+
 $op = $_POST['op'] ?? null;
+
+function _resolvePreferenceCurrency(int $domainId): array
+{
+    $currencyId = isset($_POST['currency_id']) && $_POST['currency_id'] !== ''
+        ? (int) $_POST['currency_id'] : 0;
+
+    if ($currencyId > 0) {
+        $row = siCurrencies::getById($currencyId, $domainId);
+        if ($row) {
+            return [
+                'currency_id'   => (int) $row['id'],
+                'currency_sign' => CurrencySignHelper::forDisplay($row['currency_sign'] ?? ''),
+            ];
+        }
+    }
+
+    // Fall back to raw POST fields (custom currency or legacy path)
+    $sign = CurrencySignHelper::forDisplay($_POST['pref_currency_sign'] ?? $_POST['p_currency_sign'] ?? '');
+
+    $row = siCurrencies::findOrCreate($domainId, $sign, '', '');
+    return [
+        'currency_id'   => (int) ($row['id'] ?? 0),
+        'currency_sign' => $sign,
+    ];
+}
 
 
 $include_online_payment = '';
@@ -19,13 +46,18 @@ if (  $op === 'insert_preference' ) {
 	$payment_term_id = isset($_POST['payment_term_id']) && $_POST['payment_term_id'] !== ''
 		? (int)$_POST['payment_term_id'] : null;
 
+	$curr = _resolvePreferenceCurrency($auth_session->domain_id);
+
+	$showCurrencyCode = !empty($_POST['show_currency_code']) ? 1 : 0;
+
 	$sql = "INSERT into
 		".TB_PREFIX."preferences
 		(
 			domain_id,
 			pref_description,
 			pref_currency_sign,
-			currency_code,
+			currency_id,
+			show_currency_code,
 			pref_inv_heading,
 			pref_inv_wording,
 			pref_inv_detail_heading,
@@ -41,14 +73,17 @@ if (  $op === 'insert_preference' ) {
 		        language,
 		        index_group,
 			include_online_payment,
-			payment_term_id
+			payment_term_id,
+			payment_bank_name,
+			payment_reference
 		)
 	VALUES
 		(
 			:domain_id,
 			:description,
 			:currency_sign,
-			:currency_code,
+			:currency_id,
+			:show_currency_code,
 			:heading,
 			:wording,
 			:detail_heading,
@@ -64,14 +99,17 @@ if (  $op === 'insert_preference' ) {
             :language,
             :index_group,
 			:include_online_payment,
-			:payment_term_id
+			:payment_term_id,
+			:payment_bank_name,
+			:payment_reference
 		 )";
 
 	if (dbQuery($sql,
 	  ':domain_id', $auth_session->domain_id,
 	  ':description', $_POST['p_description'],
-	  ':currency_sign', $_POST['p_currency_sign'],
-	  ':currency_code', $_POST['currency_code'],
+	  ':currency_sign', $curr['currency_sign'],
+	  ':currency_id', $curr['currency_id'] ?: null,
+	  ':show_currency_code', $showCurrencyCode,
 	  ':heading', $_POST['p_inv_heading'],
 	  ':wording', $_POST['p_inv_wording'],
 	  ':detail_heading', $_POST['p_inv_detail_heading'],
@@ -87,7 +125,9 @@ if (  $op === 'insert_preference' ) {
 	  ':index_group', empty($_POST['index_group']) ? lastInsertId() : $_POST['index_group']  ,
 	  ':include_online_payment', $include_online_payment,
 	  ':enabled', $_POST['pref_enabled'],
-	  ':payment_term_id', $payment_term_id
+	  ':payment_term_id', $payment_term_id,
+	  ':payment_bank_name', trim($_POST['payment_bank_name'] ?? ''),
+	  ':payment_reference', trim($_POST['payment_reference'] ?? '')
 	  )) {
 		$saved = true;
 		$new_pref_id = (int) lastInsertId();
@@ -126,12 +166,16 @@ else if (  $op === 'edit_preference' ) {
 		$payment_term_id = isset($_POST['payment_term_id']) && $_POST['payment_term_id'] !== ''
 			? (int)$_POST['payment_term_id'] : null;
 
+		$curr = _resolvePreferenceCurrency($auth_session->domain_id);
+		$showCurrencyCode = !empty($_POST['show_currency_code']) ? 1 : 0;
+
 		$sql = "UPDATE
 				".TB_PREFIX."preferences
 			SET
 				pref_description = :description,
 				pref_currency_sign = :currency_sign,
-				currency_code = :currency_code,
+				currency_id = :currency_id,
+				show_currency_code = :show_currency_code,
 				pref_inv_heading = :heading,
 				pref_inv_wording = :wording,
 				pref_inv_detail_heading = :detail_heading,
@@ -145,17 +189,20 @@ else if (  $op === 'edit_preference' ) {
 				status = :status,
 				locale = :locale,
 				language = :language,
- 		        index_group = :index_group,
- 		        include_online_payment = :include_online_payment,
-				payment_term_id = :payment_term_id
+  		        index_group = :index_group,
+  		        include_online_payment = :include_online_payment,
+				payment_term_id = :payment_term_id,
+				payment_bank_name = :payment_bank_name,
+				payment_reference = :payment_reference
 			WHERE
 				pref_id = :id
 			AND domain_id = :domain_id";
 
 		if (dbQuery($sql, 
 		  ':description', $_POST['pref_description'],
-		  ':currency_sign', $_POST['pref_currency_sign'],
-		  ':currency_code', $_POST['currency_code'],
+		  ':currency_sign', $curr['currency_sign'],
+		  ':currency_id', $curr['currency_id'] ?: null,
+		  ':show_currency_code', $showCurrencyCode,
 		  ':heading', $_POST['pref_inv_heading'],
 		  ':wording', $_POST['pref_inv_wording'],
 		  ':detail_heading', $_POST['pref_inv_detail_heading'],
@@ -168,10 +215,12 @@ else if (  $op === 'edit_preference' ) {
 		  ':enabled', $_POST['pref_enabled'],
 		  ':status', $_POST['status'],
 		  ':locale', $_POST['locale'],
-          	  ':language', $_POST['language'],
+           	  ':language', $_POST['language'],
 		  ':index_group', $_POST['index_group'],
 		  ':include_online_payment', $include_online_payment,
 		  ':payment_term_id', $payment_term_id,
+		  ':payment_bank_name', trim($_POST['payment_bank_name'] ?? ''),
+		  ':payment_reference', trim($_POST['payment_reference'] ?? ''),
 		  ':id', (int)$_GET['id'],
 		  ':domain_id', $auth_session->domain_id))
 	    {
@@ -194,4 +243,3 @@ $bladeView -> assign('saved',$saved);
 
 $bladeView -> assign('pageActive', 'preference');
 $bladeView -> assign('active_tab', '#setting');
-?>

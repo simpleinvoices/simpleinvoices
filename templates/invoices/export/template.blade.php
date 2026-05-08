@@ -80,15 +80,15 @@
 
 		<tr>
 				<td >{{ $LANG['total'] ?? '' }}: </td>
-				<td colspan="3">{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }}{{ number_format($invoice['total'] ?? 0, 2) }}</td>
+				<td colspan="3">{!! CurrencySignHelper::formatInvoice($invoice['total'] ?? 0, $invoice, $preference) !!}</td>
 		</tr>
 		<tr>
 				<td >{{ $LANG['paid'] ?? '' }}:</td>
-				<td colspan="3">{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }}{{ number_format($invoice['paid'] ?? 0, 2) }}</td>
+				<td colspan="3">{!! CurrencySignHelper::formatInvoice($invoice['paid'] ?? 0, $invoice, $preference) !!}</td>
 		</tr>
 		<tr>
 				<td nowrap >{{ $LANG['owing'] ?? '' }}:</td>
-				<td colspan="3">{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }}{{ number_format($invoice['owing'] ?? 0, 2) }}</td>
+				<td colspan="3">{!! CurrencySignHelper::formatInvoice($invoice['owing'] ?? 0, $invoice, $preference) !!}</td>
 		</tr>
 
 </table>
@@ -316,7 +316,7 @@
 	<tr>
         <td colspan="2"></td>
 		<td colspan="3" align="right">{{ $LANG['sub_total'] ?? '' }}&nbsp;</td>
-		<td colspan="1" align="right">@if($invoice_number_of_taxes > 1)<u>@endif{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ $invoice['gross'] ?? '' | siLocal_number }}@if($invoice_number_of_taxes > 1)</u>@endif</td>
+		<td colspan="1" align="right">@if($invoice_number_of_taxes > 1)<u>@endif{!! CurrencySignHelper::formatInvoice($invoice['gross'] ?? 0, $invoice, $preference) !!}@if($invoice_number_of_taxes > 1)</u>@endif</td>
     </tr>
     @endif
 	@if($invoice_number_of_taxes > 1 )
@@ -330,7 +330,7 @@
     	<tr>
 	        <td colspan="2"></td>
 			<td colspan="3" align="right">{{ $line['tax_name'] ?? '' }}&nbsp;</td>
-			<td colspan="1" align="right">{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ siLocal::number($line['tax_amount'] ?? 0) }}</td>
+			<td colspan="1" align="right">{!! CurrencySignHelper::formatInvoice($line['tax_amount'] ?? 0, $invoice, $preference) !!}</td>
 	    </tr>
 	    @endif
 	@endforeach
@@ -339,7 +339,7 @@
 	<tr>
         <td colspan="2"></td>
 		<td colspan="3" align="right">{{ $LANG['tax_total'] ?? '' }}&nbsp;</td>
-		<td colspan="1" align="right"><u>{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ $invoice['total_tax'] ?? '' | siLocal_number }}</u></td>
+		<td colspan="1" align="right"><u>{!! CurrencySignHelper::formatInvoice($invoice['total_tax'] ?? 0, $invoice, $preference) !!}</u></td>
     </tr>
     @endif
 	@if($invoice_number_of_taxes > 1)
@@ -350,7 +350,7 @@
     <tr>
         <td colspan="2"></td>
 		<td colspan="3" align="right"><b>{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['amount'] ?? '' }}&nbsp;</b></td>
-		<td colspan="1" align="right"><span class="double_underline">{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ $invoice['total'] ?? '' | siLocal_number }}</span></td>
+		<td colspan="1" align="right"><span class="double_underline">{!! CurrencySignHelper::formatInvoice($invoice['total'] ?? 0, $invoice, $preference) !!}</span></td>
     </tr>
     {{-- tax section - end --}}
 
@@ -361,7 +361,7 @@
     	<tr class='details_screen'>
 	        <td colspan="2"></td>
 			<td colspan="3" align="right">{{ $line['tax_name'] ?? '' }}</td>
-			<td colspan="1" align="right">{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ siLocal::number($line['tax_amount'] ?? 0) }}</td>
+			<td colspan="1" align="right">{!! CurrencySignHelper::formatInvoice($line['tax_amount'] ?? 0, $invoice, $preference) !!}</td>
 	    </tr>
 	    
 	    @endif
@@ -372,7 +372,7 @@
 	<tr >
 		<td colspan="3"></td>
 		<td align="right" colspan="2">{{ $LANG['tax_total'] ?? '' }}</td>
-		<td align="right" >{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ number_format($invoice['total_tax'] ?? 0, 2) }}</td>
+		<td align="right" >{!! CurrencySignHelper::formatInvoice($invoice['total_tax'] ?? 0, $invoice, $preference) !!}</td>
 	</tr>
 	<tr >
 		<td colspan="6" ><br /></td>
@@ -380,7 +380,7 @@
 	<tr >
 		<td colspan="3"></td>
 		<td align="right" colspan="2"><b>{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['amount'] ?? '' }}</b></td>
-		<td  align="right"><u>{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ number_format($invoice['total'] ?? 0, 2) }}</u></td>
+		<td  align="right"><u>{!! CurrencySignHelper::formatInvoice($invoice['total'] ?? 0, $invoice, $preference) !!}</u></td>
 	</tr> --}}
 	<tr>
 		<td colspan="6"><br /><br /></td>

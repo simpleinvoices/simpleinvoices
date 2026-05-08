@@ -119,9 +119,9 @@
 					<td class="fw-medium">{{ $invoice['preference'] ?? '' }} {{ $invoice['index_id'] ?? '' }}</td>
 					<td>{{ $invoice['biller'] ?? '' }}</td>
 					<td>{{ $invoice['customer'] ?? '' }}</td>
-					<td class="text-end">{{ ($invoice['currency_sign'] ?? '')|si_currency_display }}{{ siLocal::number($invoice['invoice_total'] ?? 0) }}</td>
-					<td class="text-end text-secondary">{{ ($invoice['currency_sign'] ?? '')|si_currency_display }}{{ siLocal::number($invoice['cost'] ?? 0) }}</td>
-					<td class="text-end fw-bold {{ $profit_color }}">{{ ($invoice['currency_sign'] ?? '')|si_currency_display }}{{ siLocal::number($profit) }}</td>
+					<td class="text-end">{!! CurrencySignHelper::format($invoice['invoice_total'] ?? 0, $invoice['currency_sign'] ?? '', '', $invoice['currency_code'] ?? '') !!}</td>
+					<td class="text-end text-secondary">{!! CurrencySignHelper::format($invoice['cost'] ?? 0, $invoice['currency_sign'] ?? '', '', $invoice['currency_code'] ?? '') !!}</td>
+					<td class="text-end fw-bold {{ $profit_color }}">{!! CurrencySignHelper::format($profit, $invoice['currency_sign'] ?? '', '', $invoice['currency_code'] ?? '') !!}</td>
 				</tr>
 			@endforeach
 			</tbody>

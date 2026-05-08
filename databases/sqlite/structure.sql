@@ -196,7 +196,8 @@ CREATE TABLE IF NOT EXISTS si_invoices (
   payment_term_id INTEGER DEFAULT NULL,
   due_date        TEXT DEFAULT NULL,
   currency_sign   TEXT DEFAULT NULL,
-  currency_code   TEXT DEFAULT NULL,
+  currency_id INTEGER DEFAULT NULL,
+  show_currency_code INTEGER NOT NULL DEFAULT 0,
   denorm_invoice_total          REAL NOT NULL DEFAULT 0,
   denorm_amount_paid            REAL NOT NULL DEFAULT 0,
   denorm_amount_owing           REAL NOT NULL DEFAULT 0,
@@ -240,8 +241,7 @@ CREATE TABLE IF NOT EXISTS si_payment (
   denorm_invoice_index_name TEXT NOT NULL DEFAULT '',
   denorm_biller_name        TEXT NOT NULL DEFAULT '',
   denorm_customer_name      TEXT NOT NULL DEFAULT '',
-  denorm_currency_sign      TEXT NOT NULL DEFAULT '',
-  denorm_currency_code      TEXT NOT NULL DEFAULT ''
+  denorm_currency_sign      TEXT NOT NULL DEFAULT ''
 );
 CREATE UNIQUE INDEX IF NOT EXISTS si_payment_pk         ON si_payment (domain_id, id);
 CREATE INDEX IF NOT EXISTS si_payment_domain_id          ON si_payment (domain_id);
@@ -257,6 +257,17 @@ CREATE TABLE IF NOT EXISTS si_payment_types (
   pt_enabled     INTEGER NOT NULL DEFAULT 1
 );
 CREATE UNIQUE INDEX IF NOT EXISTS si_payment_types_pk ON si_payment_types (domain_id, pt_id);
+
+CREATE TABLE IF NOT EXISTS si_currencies (
+  id                INTEGER PRIMARY KEY AUTOINCREMENT,
+  domain_id         INTEGER DEFAULT 1,
+  currency_code     TEXT DEFAULT '',
+  currency_sign     TEXT DEFAULT '',
+  currency_position TEXT DEFAULT 'left',
+  is_default        INTEGER DEFAULT 0,
+  enabled           INTEGER DEFAULT 1
+);
+CREATE INDEX IF NOT EXISTS idx_currencies_domain ON si_currencies (domain_id);
 
 CREATE TABLE IF NOT EXISTS si_preferences (
   pref_id                    INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -277,10 +288,11 @@ CREATE TABLE IF NOT EXISTS si_preferences (
   locale                     TEXT DEFAULT NULL,
   language                   TEXT DEFAULT NULL,
   index_group                INTEGER NOT NULL,
-  currency_code              TEXT DEFAULT NULL,
-  include_online_payment     TEXT DEFAULT NULL,
-  currency_position          TEXT DEFAULT NULL,
-  payment_term_id            INTEGER DEFAULT NULL
+  currency_id                INTEGER DEFAULT NULL,
+  show_currency_code         INTEGER NOT NULL DEFAULT 0,
+  payment_term_id            INTEGER DEFAULT NULL,
+  payment_bank_name          TEXT DEFAULT NULL,
+  payment_reference          TEXT DEFAULT NULL
 );
 CREATE UNIQUE INDEX IF NOT EXISTS si_preferences_pk ON si_preferences (domain_id, pref_id);
 

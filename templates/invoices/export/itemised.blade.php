@@ -11,8 +11,8 @@
 			<tr>
 				<td>{{ ($invoiceItem['quantity'] ?? '')|siLocal_number_trim }}</td>
 				<td colspan="3">{!! outhtml($invoiceItem['product']['description'] ?? '') !!}</td>
-				<td>{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoiceItem['unit_price'] ?? '')|siLocal_number }}</td>
-				<td align="right">{{ ($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }} {{ ($invoiceItem['gross_total'] ?? '')|siLocal_number }}</td>
+				<td>{!! CurrencySignHelper::formatInvoice($invoiceItem['unit_price'] ?? 0, $invoice, $preference) !!}</td>
+				<td align="right">{!! CurrencySignHelper::formatInvoice($invoiceItem['gross_total'] ?? 0, $invoice, $preference) !!}</td>
 			</tr>
 			@if(($invoiceItem['description'] ?? null) != null)
 				<tr >

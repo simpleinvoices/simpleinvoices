@@ -273,6 +273,7 @@
 					'selectedPrefId'      => $invoice['preference_id'] ?? $defaults['preference'] ?? '',
 					'currentCurrencySign' => $invoice['currency_sign'] ?? '',
 					'currentCurrencyCode' => $invoice['currency_code'] ?? '',
+					'currentCurrencyId'   => $invoice['currency_id'] ?? '',
 					'selectedTermId'      => $invoice['payment_term_id'] ?? '',
 					'calcDueDate'         => $invoice['calc_due_date'] ?? '',
 				])

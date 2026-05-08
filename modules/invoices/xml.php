@@ -103,7 +103,7 @@ $xml ="";
 		$xml .= "<cell><![CDATA[".$row['biller']."]]></cell>";
 		$xml .= "<cell><![CDATA[".$row['customer']."]]></cell>";
 		$xml .= "<cell><![CDATA[".siLocal::date($row['date'])."]]></cell>";
-		$xml .= "<cell><![CDATA[".htmlspecialchars(CurrencySignHelper::forDisplay($row['currency_sign'] ?? '')).siLocal::number($row['invoice_total'])."]]></cell>";
+		$xml .= "<cell><![CDATA[".htmlspecialchars(CurrencySignHelper::format($row['invoice_total'], $row['currency_sign'] ?? '', $row['currency_position'] ?? '', $row['currency_code'] ?? ''))."]]></cell>";
 		if ($row['status']) {
 			if ($row['owing'] <= 0) {
 				$status_html = '<span class="d-none d-sm-inline"><span class="status status-green">Paid</span></span><span class="d-sm-none"><span class="status status-green"><span class="status-dot"></span></span></span>';

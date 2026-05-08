@@ -597,11 +597,20 @@ $latest_payments_sth = dbQuery(
 );
 $latest_payments = $latest_payments_sth->fetchAll(PDO::FETCH_ASSOC);
 
+// Resolve currency_code/position from sign for payments (denorm columns removed)
+foreach ($latest_payments as &$pmt) {
+    $pmt['denorm_currency_position'] = CurrencySignHelper::defaultPositionForSign($pmt['denorm_currency_sign'] ?? '');
+    $pmt['denorm_currency_code'] = CurrencySignHelper::codeForSign($pmt['denorm_currency_sign'] ?? '');
+}
+unset($pmt);
+
 $bladeView->assign('latest_invoices', $latest_invoices);
 $bladeView->assign('latest_payments', $latest_payments);
 
 $dash_currency_sign = si_report_dominant_currency((int) $domain_id);
+$dash_currency_position = CurrencySignHelper::defaultPositionForSign($dash_currency_sign);
 $bladeView->assign('dash_currency_sign', $dash_currency_sign);
+$bladeView->assign('dash_currency_position', $dash_currency_position);
 
     // ── Persist computed data to cache ─────────────────────────────────────
     if (! $first_run_wizard) {
@@ -630,6 +639,7 @@ $bladeView->assign('dash_currency_sign', $dash_currency_sign);
             'latest_invoices'        => $latest_invoices,
             'latest_payments'        => $latest_payments,
             'dash_currency_sign'     => $dash_currency_sign,
+            'dash_currency_position' => $dash_currency_position,
             'chart_last12_by_curr'   => $chart_last12_by_curr,
             'chart_data_by_curr'     => $chart_data_by_curr,
             'annual_totals_by_curr'  => $annual_totals_by_curr,

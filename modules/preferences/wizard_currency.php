@@ -8,21 +8,31 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
 }
 
 require_once __DIR__ . '/../../include/class/invoice_denorm.php';
+require_once __DIR__ . '/../../include/class/siCurrencies.php';
 
 $saved = false;
 $defaults = getSystemDefaults();
 
 if (($_POST['op'] ?? '') === 'wizard_currency_sign') {
 	$pref_id         = (int) ($_POST['pref_id'] ?? 0);
-	$sign            = $_POST['pref_currency_sign'] ?? '';
-	$code            = $_POST['currency_code'] ?? '';
+	$sign            = CurrencySignHelper::forDisplay($_POST['pref_currency_sign'] ?? '');
+	$code            = trim($_POST['currency_code'] ?? '');
+	$position        = trim($_POST['currency_position'] ?? '');
 	$payment_term_id = isset($_POST['payment_term_id']) && $_POST['payment_term_id'] !== ''
 		? (int) $_POST['payment_term_id'] : null;
+
+	if ($position !== 'left' && $position !== 'right') {
+		$position = CurrencySignHelper::defaultPositionForSign($sign, $code);
+	}
+
+	$currRow = siCurrencies::findOrCreate($auth_session->domain_id, $sign, $code, $position);
+	$currency_id = $currRow ? (int) $currRow['id'] : 0;
+
 	$preference = getPreference($pref_id);
 	if ($preference) {
 		si_check_record_access($preference);
-		$sql = 'UPDATE ' . TB_PREFIX . 'preferences SET pref_currency_sign = :sign, currency_code = :code, payment_term_id = :payment_term_id WHERE pref_id = :id AND domain_id = :domain_id';
-		if (dbQuery($sql, ':sign', $sign, ':code', $code, ':payment_term_id', $payment_term_id, ':id', $pref_id, ':domain_id', $auth_session->domain_id)) {
+		$sql = 'UPDATE ' . TB_PREFIX . 'preferences SET pref_currency_sign = :sign, currency_id = :currency_id, payment_term_id = :payment_term_id WHERE pref_id = :id AND domain_id = :domain_id';
+		if (dbQuery($sql, ':sign', $sign, ':currency_id', $currency_id ?: null, ':payment_term_id', $payment_term_id, ':id', $pref_id, ':domain_id', $auth_session->domain_id)) {
 			$default_biller_id = (int) (($defaults['biller'] ?? 0));
 			if ($default_biller_id <= 0) {
 				$billers = getBillers($auth_session->domain_id) ?: [];

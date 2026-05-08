@@ -70,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					'years' => $years,
 					'chart_js_years' => $chart_js_years,
 					'summary_currency_sign' => $currency_sign,
+					'summary_currency_code' => $currency_code,
 				])
 			</div>
 			<div class="col-md-6">
@@ -86,6 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					'years' => $years,
 					'chart_js_years' => $chart_js_years,
 					'summary_currency_sign' => $currency_sign,
+					'summary_currency_code' => $currency_code,
 				])
 			</div>
 		</div>
