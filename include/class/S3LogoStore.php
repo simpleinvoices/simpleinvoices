@@ -79,7 +79,12 @@ class S3LogoStore
         return self::$filesystem;
     }
 
-    public static function upload(string $tmpPath, string $originalName): ?string
+    private static function s3Key(int $domain_id, string $filename): string
+    {
+        return $domain_id . '/' . $filename;
+    }
+
+    public static function upload(int $domain_id, string $tmpPath, string $originalName): ?string
     {
         $fs = self::instance();
         if ($fs === null) {
@@ -104,8 +109,9 @@ class S3LogoStore
         if ($stream === false) {
             return null;
         }
+        $key = self::s3Key($domain_id, $uuid);
         try {
-            $fs->writeStream($uuid, $stream, [
+            $fs->writeStream($key, $stream, [
                 'ContentType' => $mimeTypes[$ext] ?? 'application/octet-stream',
             ]);
         } finally {
@@ -116,15 +122,16 @@ class S3LogoStore
         return $uuid;
     }
 
-    public static function delete(string $filename): bool
+    public static function delete(int $domain_id, string $filename): bool
     {
         $fs = self::instance();
         if ($fs === null) {
             return false;
         }
+        $key = self::s3Key($domain_id, $filename);
         try {
-            if ($fs->fileExists($filename)) {
-                $fs->delete($filename);
+            if ($fs->fileExists($key)) {
+                $fs->delete($key);
                 return true;
             }
             return false;
@@ -134,18 +141,20 @@ class S3LogoStore
         }
     }
 
-    public static function list(): array
+    public static function list(int $domain_id): array
     {
         $fs = self::instance();
         if ($fs === null) {
             return [];
         }
+        $prefix = $domain_id . '/';
         try {
-            $items = $fs->listContents('', false);
+            $items = $fs->listContents($prefix, false);
             $files = [];
             foreach ($items as $item) {
                 if ($item->isFile()) {
-                    $files[] = $item->path();
+                    $base = basename($item->path());
+                    $files[] = $base;
                 }
             }
             sort($files);
@@ -156,28 +165,30 @@ class S3LogoStore
         }
     }
 
-    public static function getStream(string $filename)
+    public static function getStream(int $domain_id, string $filename)
     {
         $fs = self::instance();
         if ($fs === null) {
             return null;
         }
+        $key = self::s3Key($domain_id, $filename);
         try {
-            return $fs->readStream($filename);
+            return $fs->readStream($key);
         } catch (\Throwable $e) {
             error_log('S3LogoStore::getStream error: ' . $e->getMessage());
             return null;
         }
     }
 
-    public static function getMimeType(string $filename): ?string
+    public static function getMimeType(int $domain_id, string $filename): ?string
     {
         $fs = self::instance();
         if ($fs === null) {
             return null;
         }
+        $key = self::s3Key($domain_id, $filename);
         try {
-            return $fs->mimeType($filename);
+            return $fs->mimeType($key);
         } catch (\Throwable $e) {
             return null;
         }

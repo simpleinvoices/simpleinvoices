@@ -28,9 +28,10 @@ if (empty($logo)) {
 $is_uuid = preg_match('/^[a-f0-9]{36}\.(png|jpg|jpeg|gif|webp)$/i', $logo);
 
 if ($is_uuid) {
-    $stream = S3LogoStore::getStream($logo);
+    $domain_id = (int)($biller['domain_id'] ?? 1);
+    $stream = S3LogoStore::getStream($domain_id, $logo);
     if ($stream !== null && is_resource($stream)) {
-        $mime = S3LogoStore::getMimeType($logo) ?: 'image/png';
+        $mime = S3LogoStore::getMimeType($domain_id, $logo) ?: 'image/png';
         $cacheSeconds = 86400;
         header('Content-Type: ' . $mime);
         header('Cache-Control: public, max-age=' . $cacheSeconds);

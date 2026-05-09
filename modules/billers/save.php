@@ -31,13 +31,14 @@ if ($uploadedFile && !empty($uploadedFile['tmp_name']) && $uploadedFile['error']
 		$ext = strtolower(pathinfo($uploadedFile['name'], PATHINFO_EXTENSION));
 		$allowed = ['png', 'jpg', 'jpeg', 'gif', 'webp'];
 		if (in_array($ext, $allowed, true)) {
-			$uuidFilename = S3LogoStore::upload($uploadedFile['tmp_name'], $uploadedFile['name']);
+			$domain_id = (int) domain_id::get();
+			$uuidFilename = S3LogoStore::upload($domain_id, $uploadedFile['tmp_name'], $uploadedFile['name']);
 			if ($uuidFilename !== null) {
 				// Delete old S3 logo if editing
 				if ($op === 'edit_biller' && !empty($_POST['existing_logo'])) {
 					$oldLogo = $_POST['existing_logo'];
 					if (preg_match('/^[a-f0-9]{36}\.(png|jpg|jpeg|gif|webp)$/i', $oldLogo)) {
-						S3LogoStore::delete($oldLogo);
+						S3LogoStore::delete($domain_id, $oldLogo);
 					}
 				}
 				$_POST['logo'] = $uuidFilename;

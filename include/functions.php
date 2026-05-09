@@ -97,7 +97,7 @@ function getLogoList() {
 			}
 		}
 	}
-	$s3Files = S3LogoStore::list();
+	$s3Files = S3LogoStore::list((int) domain_id::get());
 	foreach ($s3Files as $f) {
 		$ext = strtolower(pathinfo($f, PATHINFO_EXTENSION));
 		if (in_array($ext, $allowed, true)) {
