@@ -91,9 +91,9 @@
 					</td>
 					<td>{{ $invoice['biller'] ?? '' }}</td>
 					<td>{{ $invoice['customer'] ?? '' }}</td>
-					<td class="text-end">{!! CurrencySignHelper::format($invoice['inv_total'] ?? 0, $invoice['currency_sign'] ?? '', '', $invoice['currency_code'] ?? '') !!}</td>
-					<td class="text-end text-secondary">{!! CurrencySignHelper::format($invoice['inv_paid'] ?? 0, $invoice['currency_sign'] ?? '', '', $invoice['currency_code'] ?? '') !!}</td>
-					<td class="text-end fw-bold {{ $c['text'] }}">{!! CurrencySignHelper::format($invoice['inv_owing'] ?? 0, $invoice['currency_sign'] ?? '', '', $invoice['currency_code'] ?? '') !!}</td>
+					<td class="text-end">{!! CurrencySignHelper::format($invoice['inv_total'] ?? 0, $invoice['currency_sign'] ?? '', '', $invoice['denorm_currency_code'] ?? '') !!}</td>
+					<td class="text-end text-secondary">{!! CurrencySignHelper::format($invoice['inv_paid'] ?? 0, $invoice['currency_sign'] ?? '', '', $invoice['denorm_currency_code'] ?? '') !!}</td>
+					<td class="text-end fw-bold {{ $c['text'] }}">{!! CurrencySignHelper::format($invoice['inv_owing'] ?? 0, $invoice['currency_sign'] ?? '', '', $invoice['denorm_currency_code'] ?? '') !!}</td>
 					<td class="text-secondary">{{ $invoice['date'] ?? '' }}</td>
 					<td class="text-end">
 						<span class="badge {{ $c['bg'] }} {{ $c['text'] }}">{{ $invoice['age'] ?? '' }}d</span>

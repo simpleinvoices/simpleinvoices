@@ -93,6 +93,8 @@ if (! $has_invoices) {
 	$bladeView->assign('wizard_default_biller', $wizard_default_biller);
 	$bladeView->assign('wizard_currency_pref_done', $wizard_invoice_prefs_done);
 	$bladeView->assign('wizard_payment_terms', $wizard_payment_terms_rows);
+	$wizard_index_group = (int) ($wizard_default_preference['index_group'] ?? 1);
+	$bladeView->assign('wizard_next_invoice_number', index::next('invoice', $wizard_index_group, $domain_id));
 }
 
 $bladeView->assign('first_run_wizard', $first_run_wizard);
@@ -161,46 +163,43 @@ $inv_month_sql = '';
 $pmt_month_sql = '';
 switch ($db_server) {
     case 'pgsql':
-        $inv_month_sql = "SELECT to_char(iv.date::timestamp, 'YYYY-MM') AS ym, iv.currency_sign, iv.currency_code, SUM(iv.denorm_invoice_total) AS t
+        $inv_month_sql = "SELECT to_char(iv.date::timestamp, 'YYYY-MM') AS ym, iv.currency_sign, iv.denorm_currency_code, SUM(iv.denorm_invoice_total) AS t
             FROM " . TB_PREFIX . "invoices iv
             INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id=iv.preference_id AND pr.domain_id=iv.domain_id)
             WHERE pr.status='1' AND iv.domain_id=:domain_id
               AND iv.date >= :d_start AND iv.date < :d_end
-            GROUP BY 1, iv.currency_sign, iv.currency_code";
-        $pmt_month_sql = "SELECT to_char(ap.ac_date::timestamp, 'YYYY-MM') AS ym, iv.currency_sign, iv.currency_code, SUM(ap.ac_amount) AS t
+            GROUP BY 1, iv.currency_sign, iv.denorm_currency_code";
+        $pmt_month_sql = "SELECT to_char(ap.ac_date::timestamp, 'YYYY-MM') AS ym, ap.denorm_currency_sign AS currency_sign, ap.denorm_currency_code AS currency_code, SUM(ap.ac_amount) AS t
             FROM " . TB_PREFIX . "payment ap
-            INNER JOIN " . TB_PREFIX . "invoices iv ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
             WHERE ap.domain_id=:domain_id
               AND ap.ac_date >= :d_start AND ap.ac_date < :d_end
-            GROUP BY 1, iv.currency_sign, iv.currency_code";
+            GROUP BY 1, ap.denorm_currency_sign, ap.denorm_currency_code";
         break;
     case 'sqlite':
-        $inv_month_sql = "SELECT strftime('%Y-%m', iv.date) AS ym, iv.currency_sign, iv.currency_code, SUM(iv.denorm_invoice_total) AS t
+        $inv_month_sql = "SELECT strftime('%Y-%m', iv.date) AS ym, iv.currency_sign, iv.denorm_currency_code, SUM(iv.denorm_invoice_total) AS t
             FROM " . TB_PREFIX . "invoices iv
             INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id=iv.preference_id AND pr.domain_id=iv.domain_id)
             WHERE pr.status='1' AND iv.domain_id=:domain_id
               AND date(iv.date) >= date(:d_start) AND date(iv.date) < date(:d_end)
-            GROUP BY 1, iv.currency_sign, iv.currency_code";
-        $pmt_month_sql = "SELECT strftime('%Y-%m', ap.ac_date) AS ym, iv.currency_sign, iv.currency_code, SUM(ap.ac_amount) AS t
+            GROUP BY 1, iv.currency_sign, iv.denorm_currency_code";
+        $pmt_month_sql = "SELECT strftime('%Y-%m', ap.ac_date) AS ym, ap.denorm_currency_sign AS currency_sign, ap.denorm_currency_code AS currency_code, SUM(ap.ac_amount) AS t
             FROM " . TB_PREFIX . "payment ap
-            INNER JOIN " . TB_PREFIX . "invoices iv ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
             WHERE ap.domain_id=:domain_id
               AND datetime(ap.ac_date) >= datetime(:d_start) AND datetime(ap.ac_date) < datetime(:d_end)
-            GROUP BY 1, iv.currency_sign, iv.currency_code";
+            GROUP BY 1, ap.denorm_currency_sign, ap.denorm_currency_code";
         break;
     default:
-        $inv_month_sql = "SELECT DATE_FORMAT(iv.date, '%Y-%m') AS ym, iv.currency_sign, iv.currency_code, SUM(iv.denorm_invoice_total) AS t
+        $inv_month_sql = "SELECT DATE_FORMAT(iv.date, '%Y-%m') AS ym, iv.currency_sign, iv.denorm_currency_code, SUM(iv.denorm_invoice_total) AS t
             FROM " . TB_PREFIX . "invoices iv
             INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id=iv.preference_id AND pr.domain_id=iv.domain_id)
             WHERE pr.status='1' AND iv.domain_id=:domain_id
               AND iv.date >= :d_start AND iv.date < :d_end
-            GROUP BY DATE_FORMAT(iv.date, '%Y-%m'), iv.currency_sign, iv.currency_code";
-        $pmt_month_sql = "SELECT DATE_FORMAT(ap.ac_date, '%Y-%m') AS ym, iv.currency_sign, iv.currency_code, SUM(ap.ac_amount) AS t
+            GROUP BY DATE_FORMAT(iv.date, '%Y-%m'), iv.currency_sign, iv.denorm_currency_code";
+        $pmt_month_sql = "SELECT DATE_FORMAT(ap.ac_date, '%Y-%m') AS ym, ap.denorm_currency_sign AS currency_sign, ap.denorm_currency_code AS currency_code, SUM(ap.ac_amount) AS t
             FROM " . TB_PREFIX . "payment ap
-            INNER JOIN " . TB_PREFIX . "invoices iv ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
             WHERE ap.domain_id=:domain_id
               AND ap.ac_date >= :d_start AND ap.ac_date < :d_end
-            GROUP BY DATE_FORMAT(ap.ac_date, '%Y-%m'), iv.currency_sign, iv.currency_code";
+            GROUP BY DATE_FORMAT(ap.ac_date, '%Y-%m'), ap.denorm_currency_sign, ap.denorm_currency_code";
         break;
 }
 
@@ -218,7 +217,7 @@ foreach (
 ) {
     if (! empty($row['ym'])) {
         $sign = $row['currency_sign'] ?? '';
-        $code = $row['currency_code'] ?? '';
+        $code = $row['denorm_currency_code'] ?? '';
         $curr_key = ($code ?: '') . '||' . ($sign ?: '');
         if (! isset($currencies_map[$curr_key])) {
             $currencies_map[$curr_key] = ['sign' => $sign, 'code' => $code, 'decoded_sign' => \CurrencySignHelper::forDisplay($sign)];
@@ -233,7 +232,7 @@ foreach (
 ) {
     if (! empty($row['ym'])) {
         $sign = $row['currency_sign'] ?? '';
-        $code = $row['currency_code'] ?? '';
+        $code = $row['denorm_currency_code'] ?? '';
         $curr_key = ($code ?: '') . '||' . ($sign ?: '');
         if (! isset($currencies_map[$curr_key])) {
             $currencies_map[$curr_key] = ['sign' => $sign, 'code' => $code, 'decoded_sign' => \CurrencySignHelper::forDisplay($sign)];
@@ -579,6 +578,7 @@ switch ($db_server) {
 // Recent payments: same join shape as Manage Payments grid (LEFT JOIN payment_types); order by date then id
 $latest_payments_sth = dbQuery(
     "SELECT ap.id, ap.ac_inv_id, ap.ac_amount,
+            ap.denorm_currency_code, ap.denorm_currency_locale,
             iv.currency_sign AS currency_sign,
             c.name AS cname,
             b.name AS bname,
@@ -597,10 +597,11 @@ $latest_payments_sth = dbQuery(
 );
 $latest_payments = $latest_payments_sth->fetchAll(PDO::FETCH_ASSOC);
 
-// Resolve currency_code/position from sign for payments (denorm columns removed)
+// Denormalised currency fields on payments use denorm_currency_code/locale from DB; fallback to sign-derived values
 foreach ($latest_payments as &$pmt) {
-    $pmt['denorm_currency_position'] = CurrencySignHelper::defaultPositionForSign($pmt['denorm_currency_sign'] ?? '');
-    $pmt['denorm_currency_code'] = CurrencySignHelper::codeForSign($pmt['denorm_currency_sign'] ?? '');
+    $pmt['denorm_currency_code'] = $pmt['denorm_currency_code'] ?? CurrencySignHelper::codeForSign($pmt['denorm_currency_sign'] ?? '');
+    $pmt['denorm_currency_locale'] = $pmt['denorm_currency_locale'] ?? '';
+    $pmt['denorm_currency_position'] = CurrencySignHelper::defaultPositionForSign($pmt['denorm_currency_sign'] ?? '', $pmt['denorm_currency_code'] ?? '');
 }
 unset($pmt);
 
@@ -608,8 +609,12 @@ $bladeView->assign('latest_invoices', $latest_invoices);
 $bladeView->assign('latest_payments', $latest_payments);
 
 $dash_currency_sign = si_report_dominant_currency((int) $domain_id);
-$dash_currency_position = CurrencySignHelper::defaultPositionForSign($dash_currency_sign);
+$dash_currency_code = CurrencySignHelper::codeForSign($dash_currency_sign);
+$dash_currency_locale = getDefaultLanguage() ?: 'en_GB';
+$dash_currency_position = CurrencySignHelper::defaultPositionForSign($dash_currency_sign, $dash_currency_code);
 $bladeView->assign('dash_currency_sign', $dash_currency_sign);
+$bladeView->assign('dash_currency_code', $dash_currency_code);
+$bladeView->assign('dash_currency_locale', $dash_currency_locale);
 $bladeView->assign('dash_currency_position', $dash_currency_position);
 
     // ── Persist computed data to cache ─────────────────────────────────────

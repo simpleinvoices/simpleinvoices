@@ -311,7 +311,7 @@ function getPreference($id, $domain_id='') {
 	$record['status_wording'] = $record['status']==1?$LANG['real']:$LANG['draft'];
 	$record['enabled'] = $record['pref_enabled']==1?$LANG['enabled']:$LANG['disabled'];
 
-	// Resolve currency_code/position from si_currencies via currency_id
+	// Resolve currency_code/position from si_currency via currency_id
 	if (!empty($record['currency_id'])) {
 		require_once __DIR__ . '/class/siCurrencies.php';
 		$currRow = siCurrencies::getById((int) $record['currency_id'], $domain_id);
@@ -1196,19 +1196,6 @@ function getInvoice($id, $domain_id='') {
 	$invoice['total_tax'] = $result['total_tax'];
 
 	$invoice['tax_grouped'] = taxesGroupedForInvoice($id);
-
-	// Live-resolve currency fields from si_currencies so position/sign/code
-	// reflect current table values rather than stale denormalised snapshots.
-	if (!empty($invoice['currency_id'])) {
-		require_once __DIR__ . '/class/siCurrencies.php';
-		$currRow = siCurrencies::getById((int) $invoice['currency_id'], $domain_id);
-		if ($currRow) {
-			$invoice['currency_position'] = $currRow['currency_position'] ?? $invoice['currency_position'] ?? '';
-			$invoice['currency_sign']     = CurrencySignHelper::forDisplay($currRow['currency_sign'] ?? $invoice['currency_sign'] ?? '');
-			$invoice['currency_code']     = $currRow['currency_code'] ?? $invoice['currency_code'] ?? '';
-		}
-	}
-
 	return $invoice;
 }
 
@@ -2217,7 +2204,7 @@ function insertInvoice($type, $domain_id='') {
 		}
 	}
 
-	// Position is managed by si_currencies (via currency_id) first, then preference fallback
+	// Position is managed by si_currency (via currency_id) first, then preference fallback
 	$currency_position = '';
 	if ($currency_id > 0) {
 		$currRow = siCurrencies::getById($currency_id, $domain_id);
@@ -2241,6 +2228,15 @@ function insertInvoice($type, $domain_id='') {
 
 	$show_currency_code = !empty($pref_group['show_currency_code']) ? 1 : 0;
 
+	// Denormalise currency_code and currency_locale from preference
+	if ($currency_id > 0 && ($currency_code === '')) {
+		$tmpCur = siCurrencies::getById($currency_id, $domain_id);
+		if ($tmpCur) {
+			$currency_code = $tmpCur['currency_code'] ?? '';
+		}
+	}
+	$currency_locale = trim($pref_group['locale'] ?? '');
+
 	//also set the current time (if null or =00:00:00)
 	$clean_date=SqlDateWithTime($_POST['date']);
 
@@ -2263,13 +2259,15 @@ function insertInvoice($type, $domain_id='') {
 				index_id, domain_id, biller_id, customer_id,
 				type_id, preference_id, date, note,
 				custom_field1, custom_field2, custom_field3, custom_field4,
-				currency_sign, currency_id, show_currency_code,
+				currency_sign, denorm_currency_code, denorm_currency_locale,
+				currency_id, show_currency_code,
 				payment_term_id, due_date
 			) VALUES (
 				:index_id, :domain_id, :biller_id, :customer_id,
 				:type, :preference_id, :date, :note,
 				:customField1, :customField2, :customField3, :customField4,
-				:currency_sign, :currency_id, :show_currency_code,
+				:currency_sign, :currency_code, :currency_locale,
+				:currency_id, :show_currency_code,
 				:payment_term_id, :due_date
 			)";
 	} else {
@@ -2278,13 +2276,15 @@ function insertInvoice($type, $domain_id='') {
 				id, index_id, domain_id, biller_id, customer_id,
 				type_id, preference_id, date, note,
 				custom_field1, custom_field2, custom_field3, custom_field4,
-				currency_sign, currency_id, show_currency_code,
+				currency_sign, denorm_currency_code, denorm_currency_locale,
+				currency_id, show_currency_code,
 				payment_term_id, due_date
 			) VALUES (
 				NULL, :index_id, :domain_id, :biller_id, :customer_id,
 				:type, :preference_id, :date, :note,
 				:customField1, :customField2, :customField3, :customField4,
-				:currency_sign, :currency_id, :show_currency_code,
+				:currency_sign, :currency_code, :currency_locale,
+				:currency_id, :show_currency_code,
 				:payment_term_id, :due_date
 			)";
 	}
@@ -2304,6 +2304,8 @@ function insertInvoice($type, $domain_id='') {
 		':customField3',	$_POST['customField3'],
 		':customField4',	$_POST['customField4'],
 		':currency_sign',	$currency_sign,
+		':currency_code',	$currency_code,
+		':currency_locale',	$currency_locale,
 		':currency_id',		$currency_id,
 		':show_currency_code', $show_currency_code,
 		':payment_term_id',	$paymentTermId,
@@ -2313,6 +2315,11 @@ function insertInvoice($type, $domain_id='') {
     #index::increment('invoice',$pref_group['index_group'], $domain_id,$_POST['biller_id']);
 	// Needed only if si_index table exists
     index::increment('invoice',$pref_group['index_group'], $domain_id);
+
+    $insert_id = lastInsertId();
+    if ($insert_id > 0) {
+        invoice_denorm::refreshForInvoice((int) $insert_id, $domain_id);
+    }
 
     return $sth;
 }
@@ -2371,7 +2378,7 @@ function updateInvoice($invoice_id, $domain_id='') {
 		}
 	}
 
-	// Position is managed by si_currencies (via currency_id) first, then preference fallback
+	// Position is managed by si_currency (via currency_id) first, then preference fallback
 	$currency_position = '';
 	if ($currency_id > 0) {
 		$currRow = siCurrencies::getById($currency_id, $domain_id);
@@ -2394,6 +2401,15 @@ function updateInvoice($invoice_id, $domain_id='') {
 	}
 
 	$show_currency_code = !empty($new_pref_group['show_currency_code']) ? 1 : 0;
+
+	// Denormalise currency_code and currency_locale from preference
+	if ($currency_id > 0 && ($currency_code === '')) {
+		$tmpCur = siCurrencies::getById($currency_id, $domain_id);
+		if ($tmpCur) {
+			$currency_code = $tmpCur['currency_code'] ?? '';
+		}
+	}
+	$currency_locale = trim($new_pref_group['locale'] ?? '');
 
 	$clean_date = SqlDateWithTime($_POST['date']);
 	$ptId = isset($_POST['payment_term_id']) ? (int)$_POST['payment_term_id'] : 0;
@@ -2423,6 +2439,8 @@ function updateInvoice($invoice_id, $domain_id='') {
 			custom_field3 = :customField3,
 			custom_field4 = :customField4,
 			currency_sign = :currency_sign,
+			denorm_currency_code = :currency_code,
+			denorm_currency_locale = :currency_locale,
 			currency_id = :currency_id,
 			show_currency_code = :show_currency_code,
 			payment_term_id = :payment_term_id,
@@ -2443,6 +2461,8 @@ function updateInvoice($invoice_id, $domain_id='') {
 		':customField3', $_POST['customField3'],
 		':customField4', $_POST['customField4'],
 		':currency_sign', $currency_sign,
+		':currency_code', $currency_code,
+		':currency_locale', $currency_locale,
 		':currency_id', $currency_id,
 		':show_currency_code', $show_currency_code,
 		':payment_term_id', $paymentTermId,
@@ -3743,7 +3763,7 @@ function si_patch379_payment_currency_denorm_columns(): void {
 		if (checkFieldExists($t, 'denorm_currency_sign') && checkFieldExists($inv, 'currency_sign')) {
 			dbQuery(
 				'UPDATE `' . $t . '` p INNER JOIN `' . $inv . '` iv ON (p.ac_inv_id = iv.id AND p.domain_id = iv.domain_id) '
-				. 'SET p.denorm_currency_sign = COALESCE(iv.currency_sign, \'\'), p.denorm_currency_code = COALESCE(iv.currency_code, \'\')'
+				. 'SET p.denorm_currency_sign = COALESCE(iv.currency_sign, \'\'), p.denorm_currency_code = COALESCE(iv.denorm_currency_code, \'\')'
 			);
 		}
 		return;
@@ -3753,7 +3773,7 @@ function si_patch379_payment_currency_denorm_columns(): void {
 		dbQuery("ALTER TABLE {$t} ADD COLUMN IF NOT EXISTS denorm_currency_code VARCHAR(25) NOT NULL DEFAULT ''");
 		if (checkFieldExists($inv, 'currency_sign')) {
 			dbQuery(
-				"UPDATE {$t} p SET denorm_currency_sign = COALESCE(iv.currency_sign, ''), denorm_currency_code = COALESCE(iv.currency_code, '') "
+				"UPDATE {$t} p SET denorm_currency_sign = COALESCE(iv.currency_sign, ''), denorm_currency_code = COALESCE(iv.denorm_currency_code, '') "
 				. "FROM {$inv} iv WHERE p.ac_inv_id = iv.id AND p.domain_id = iv.domain_id"
 			);
 		}
@@ -3774,7 +3794,7 @@ function si_patch379_payment_currency_denorm_columns(): void {
 			. ' iv WHERE iv.id = p.ac_inv_id AND iv.domain_id = p.domain_id), \'\')'
 		);
 		dbQuery(
-			'UPDATE ' . $t . ' AS p SET denorm_currency_code = COALESCE((SELECT iv.currency_code FROM ' . $inv
+			'UPDATE ' . $t . ' AS p SET denorm_currency_code = COALESCE((SELECT iv.denorm_currency_code FROM ' . $inv
 			. ' iv WHERE iv.id = p.ac_inv_id AND iv.domain_id = p.domain_id), \'\')'
 		);
 	}
@@ -3901,17 +3921,17 @@ function run_sql_patch($id, $patch) {
 		#so run the patch
 		if ((int) $id === 335 && $db_server === 'sqlite') {
 			si_sqlite_patch335_rebuild_si_user();
-		} elseif ((int) $id === 338) {
+		} elseif ((int) $id === 356) {
 			si_patch338_invoice_denorm_columns();
-		} elseif ((int) $id === 339) {
+		} elseif ((int) $id === 357) {
 			si_patch339_payment_denorm_columns();
-		} elseif ((int) $id === 340) {
+		} elseif ((int) $id === 358) {
 			si_patch340_backfill_invoice_denorm();
-		} elseif ((int) $id === 341) {
+		} elseif ((int) $id === 359) {
 			si_patch341_invoice_denorm_indexes();
-		} elseif ((int) $id === 379) {
+		} elseif ((int) $id === 366) {
 			si_patch379_payment_currency_denorm_columns();
-		} elseif ((int) $id === 342) {
+		} elseif ((int) $id === 360) {
 			require_once __DIR__ . '/global_app_settings.php';
 			si_patch342_global_config();
 		} else {

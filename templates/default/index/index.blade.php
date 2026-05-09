@@ -567,7 +567,7 @@
                                     'currencyIdCurrentValue'       => $wizardPref['currency_id'] ?? '',
                                 ])
                                 <div class="row g-3 mt-1">
-                                    <div class="col-12">
+                                    <div class="col-md-6">
                                         <label class="form-label">{{ $LANG['payment_terms'] ?? '' }}</label>
                                         <select name="payment_term_id" class="form-select">
                                             <option value="">{{ $LANG['payment_term_none'] ?? '-' }}</option>
@@ -579,6 +579,13 @@
                                             @endforeach
                                         </select>
                                         <small class="text-secondary">{{ $LANG['wizard_payment_terms_hint'] ?? 'Default payment terms applied to new invoices.' }}</small>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">{{ $LANG['starting_invoice_number'] ?? 'Starting invoice number' }}</label>
+                                        <input type="number" name="set_starting_invoice_number" class="form-control"
+                                            min="1" placeholder="1"
+                                            value="{{ $wizard_next_invoice_number ?? '' }}">
+                                        <small class="text-secondary">{{ $LANG['wizard_starting_number_hint'] ?? 'The first invoice will use this number. Leave blank to start at 1.' }}</small>
                                     </div>
                                 </div>
                                 <div class="mt-4 pt-3 border-top">
@@ -928,7 +935,7 @@
                                 <i class="ti ti-window-maximize" style="font-size:.9rem"></i>
                             </a>
                         </div>
-                        <div class="h2 mb-0">{!! CurrencySignHelper::format($dash_alltime_inv_total ?? 0, $dash_currency_sign ?? '', $dash_currency_position ?? '', $dash_currency_code ?? '') !!}</div>
+                        <div class="h2 mb-0">{!! CurrencySignHelper::format($dash_alltime_inv_total ?? 0, $dash_currency_sign ?? '', '', $dash_currency_code ?? '', false, $dash_currency_locale ?? '') !!}</div>
                     </div>
                     <div class="mt-auto w-100 flex-shrink-0">
                         <div id="sparkline-invoices" style="height:40px"></div>
@@ -1036,7 +1043,7 @@
                         <span class="d-sm-none">{{ $custShort }}</span>
                     </td>
                     <td class="d-none d-sm-table-cell text-end text-secondary">{{ siLocal::date($inv['date'] ?? '') }}</td>
-                    <td class="text-end">{!! CurrencySignHelper::format($inv['invoice_total'] ?? 0, $inv['currency_sign'] ?? '', $inv['currency_position'] ?? '', $inv['currency_code'] ?? '') !!}</td>
+                    <td class="text-end">{!! CurrencySignHelper::format($inv['invoice_total'] ?? 0, $inv['currency_sign'] ?? '', '', $inv['denorm_currency_code'] ?? '', false, $inv['denorm_currency_locale'] ?? '') !!}</td>
                     <td class="text-center">
                         @if($isDraft)
                             <span class="d-none d-sm-inline"><span class="status status-secondary"><span class="status-dot"></span>{{ $LANG['draft'] ?? '' }}</span></span>
@@ -1110,7 +1117,7 @@
                     <td class="d-none d-sm-table-cell">{{ $pmt['index_name'] ?? '' }}</td>
                     <td>{{ $pmt['cname'] ?? '' }}</td>
                     <td class="d-none d-sm-table-cell">{{ $pmt['bname'] ?? '' }}</td>
-                    <td class="text-end">{!! CurrencySignHelper::format($pmt['ac_amount'] ?? 0, $pmt['denorm_currency_sign'] ?? '', $pmt['denorm_currency_position'] ?? '', $pmt['denorm_currency_code'] ?? '') !!}</td>
+                    <td class="text-end">{!! CurrencySignHelper::format($pmt['ac_amount'] ?? 0, $pmt['denorm_currency_sign'] ?? '', '', $pmt['denorm_currency_code'] ?? '', false, $pmt['denorm_currency_locale'] ?? '') !!}</td>
                     <td class="text-center text-secondary d-none d-sm-table-cell">{{ siLocal::date($pmt['date'] ?? '') }}</td>
                 </tr>
                 @empty
@@ -1135,7 +1142,7 @@
                         <i class="ti ti-window-maximize" style="font-size:.9rem"></i>
                     </a>
                 </div>
-                <div class="h2 mb-0">{!! CurrencySignHelper::format($dash_alltime_pmt_total ?? 0, $dash_currency_sign ?? '', $dash_currency_position ?? '', $dash_currency_code ?? '') !!}</div>
+                <div class="h2 mb-0">{!! CurrencySignHelper::format($dash_alltime_pmt_total ?? 0, $dash_currency_sign ?? '', '', $dash_currency_code ?? '', false, $dash_currency_locale ?? '') !!}</div>
             </div>
             <div id="sparkline-payments" style="height:40px"></div>
         </div>

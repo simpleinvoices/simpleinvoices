@@ -16,7 +16,7 @@ class invoice_denorm
             return;
         }
 
-        $sqlInv = 'SELECT id, index_id, biller_id, customer_id, preference_id, type_id, date
+        $sqlInv = 'SELECT id, index_id, biller_id, customer_id, preference_id, type_id, date, currency_id
             FROM ' . TB_PREFIX . 'invoices
             WHERE id = :id AND domain_id = :domain_id';
         $sth = dbQuery($sqlInv, ':id', $invoiceId, ':domain_id', $domainId);
@@ -52,7 +52,7 @@ class invoice_denorm
         $prefDesc = '';
         $prefWording = '';
         $prefStatus = 0;
-        $sqlP = 'SELECT pref_description, pref_inv_wording, status FROM ' . TB_PREFIX . 'preferences
+        $sqlP = 'SELECT pref_description, pref_inv_wording, status, locale FROM ' . TB_PREFIX . 'preferences
             WHERE pref_id = :pid AND domain_id = :domain_id';
         $rp = dbQuery($sqlP, ':pid', $inv['preference_id'], ':domain_id', $domainId)->fetch(PDO::FETCH_ASSOC);
         if ($rp) {
@@ -63,17 +63,33 @@ class invoice_denorm
 
         $indexName = trim($prefWording . ' ' . $inv['index_id']);
 
-        $sqlUp = 'UPDATE ' . TB_PREFIX . 'invoices SET
-            denorm_invoice_total = :tot,
-            denorm_amount_paid = :paid,
-            denorm_amount_owing = :owing,
-            denorm_biller_name = :bname,
-            denorm_customer_name = :cname,
-            denorm_index_name = :iname,
-            denorm_preference_description = :pdesc,
-            denorm_preference_status = :pstat
-            WHERE id = :id AND domain_id = :domain_id';
-        dbQuery($sqlUp,
+        $currencyCode = '';
+        $currencyLocale = '';
+        $currencySign = '';
+        if (!empty($inv['currency_id'])) {
+            $sqlCur = 'SELECT currency_code, currency_sign FROM ' . TB_PREFIX . 'currency WHERE id = :cid AND domain_id = :domain_id';
+            $rcCur = dbQuery($sqlCur, ':cid', $inv['currency_id'], ':domain_id', $domainId)->fetch(PDO::FETCH_ASSOC);
+            if ($rcCur) {
+                $currencyCode = (string) ($rcCur['currency_code'] ?? '');
+                $currencySign = (string) ($rcCur['currency_sign'] ?? '');
+            }
+        }
+        if ($rp['locale'] ?? '') {
+            $currencyLocale = (string) $rp['locale'];
+        }
+
+        $setClauses = [
+            'denorm_invoice_total = :tot',
+            'denorm_amount_paid = :paid',
+            'denorm_amount_owing = :owing',
+            'denorm_biller_name = :bname',
+            'denorm_customer_name = :cname',
+            'denorm_index_name = :iname',
+            'denorm_preference_description = :pdesc',
+            'denorm_preference_status = :pstat',
+            'denorm_currency_locale = :clocale',
+        ];
+        $flatParams = [
             ':tot', $total,
             ':paid', $paid,
             ':owing', $owing,
@@ -82,9 +98,23 @@ class invoice_denorm
             ':iname', $indexName,
             ':pdesc', $prefDesc,
             ':pstat', $prefStatus,
+            ':clocale', $currencyLocale,
             ':id', $invoiceId,
-            ':domain_id', $domainId
-        );
+            ':domain_id', $domainId,
+        ];
+
+        if ($currencySign !== '' && $currencyCode !== '') {
+            $setClauses[] = 'currency_sign = :csign';
+            $setClauses[] = 'denorm_currency_code = :ccode';
+            $flatParams[] = ':csign';
+            $flatParams[] = $currencySign;
+            $flatParams[] = ':ccode';
+            $flatParams[] = $currencyCode;
+        }
+
+        $sqlUp = 'UPDATE ' . TB_PREFIX . 'invoices SET ' . implode(', ', $setClauses)
+            . ' WHERE id = :id AND domain_id = :domain_id';
+        dbQuery($sqlUp, ...$flatParams);
 
         self::syncPaymentDenormForInvoice($invoiceId, $domainId);
     }
@@ -104,14 +134,18 @@ class invoice_denorm
                 SET p.denorm_invoice_index_name = iv.denorm_index_name,
                     p.denorm_biller_name = iv.denorm_biller_name,
                     p.denorm_customer_name = iv.denorm_customer_name,
-                    p.denorm_currency_sign = COALESCE(iv.currency_sign, \'\')
+                    p.denorm_currency_sign = COALESCE(iv.currency_sign, \'\'),
+                    p.denorm_currency_code = COALESCE(iv.denorm_currency_code, \'\'),
+                    p.denorm_currency_locale = COALESCE(iv.denorm_currency_locale, \'\')
                 WHERE p.ac_inv_id = :iid AND p.domain_id = :domain_id';
         } elseif ($db_server === 'pgsql') {
             $sql = 'UPDATE ' . TB_PREFIX . 'payment p SET
                     denorm_invoice_index_name = iv.denorm_index_name,
                     denorm_biller_name = iv.denorm_biller_name,
                     denorm_customer_name = iv.denorm_customer_name,
-                    denorm_currency_sign = COALESCE(iv.currency_sign, \'\')
+                    denorm_currency_sign = COALESCE(iv.currency_sign, \'\'),
+                    denorm_currency_code = COALESCE(iv.denorm_currency_code, \'\'),
+                    denorm_currency_locale = COALESCE(iv.denorm_currency_locale, \'\')
                 FROM ' . TB_PREFIX . 'invoices iv
                 WHERE p.ac_inv_id = iv.id AND p.domain_id = iv.domain_id
                 AND p.ac_inv_id = :iid AND p.domain_id = :domain_id';
@@ -124,6 +158,10 @@ class invoice_denorm
                 denorm_customer_name = (SELECT iv.denorm_customer_name FROM ' . TB_PREFIX . 'invoices iv
                     WHERE iv.id = p.ac_inv_id AND iv.domain_id = p.domain_id),
                 denorm_currency_sign = COALESCE((SELECT iv.currency_sign FROM ' . TB_PREFIX . 'invoices iv
+                    WHERE iv.id = p.ac_inv_id AND iv.domain_id = p.domain_id), \'\'),
+                denorm_currency_code = COALESCE((SELECT iv.denorm_currency_code FROM ' . TB_PREFIX . 'invoices iv
+                    WHERE iv.id = p.ac_inv_id AND iv.domain_id = p.domain_id), \'\'),
+                denorm_currency_locale = COALESCE((SELECT iv.denorm_currency_locale FROM ' . TB_PREFIX . 'invoices iv
                     WHERE iv.id = p.ac_inv_id AND iv.domain_id = p.domain_id), \'\')
                 WHERE p.ac_inv_id = :iid AND p.domain_id = :domain_id';
         }

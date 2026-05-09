@@ -151,6 +151,12 @@ CREATE TABLE IF NOT EXISTS `si_extensions` (
 INSERT INTO `si_extensions` (`id`, `domain_id`, `name`, `description`, `enabled`) VALUES
  (1, 0, 'core', 'Core part of Simple Invoices - always enabled', '1');
 
+CREATE TABLE IF NOT EXISTS `si_global_config` (
+  `name` varchar(64) NOT NULL,
+  `value` text,
+  PRIMARY KEY (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 CREATE TABLE IF NOT EXISTS `si_index` (
   `id` int(11) NOT NULL,
   `node` varchar(255) NOT NULL,
@@ -336,7 +342,7 @@ INSERT INTO `si_payment_types` (`pt_id`, `domain_id`, `pt_description`, `pt_enab
  (1, 1, 'Cash', '1')
 ,(2, 1, 'Credit Card', '1');
 
-CREATE TABLE IF NOT EXISTS `si_currencies` (
+CREATE TABLE IF NOT EXISTS `si_currency` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `domain_id` int(11) NOT NULL DEFAULT '1',
   `currency_code` varchar(10) NOT NULL DEFAULT '',
@@ -347,6 +353,41 @@ CREATE TABLE IF NOT EXISTS `si_currencies` (
   PRIMARY KEY (`id`),
   KEY `idx_domain` (`domain_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `si_currency` (`id`, `domain_id`, `currency_code`, `currency_sign`, `currency_position`, `is_default`, `enabled`) VALUES
+(1,  1, 'USD', '$',   'left',  1, 1),
+(2,  1, 'CAD', 'C$',  'left',  0, 1),
+(3,  1, 'AUD', 'A$',  'left',  0, 1),
+(4,  1, 'NZD', 'NZ$', 'left',  0, 1),
+(5,  1, 'MXN', 'MX$', 'left',  0, 1),
+(6,  1, 'BRL', 'R$',  'right', 0, 1),
+(7,  1, 'SGD', 'S$',  'left',  0, 1),
+(8,  1, 'EUR', '€',   'right', 0, 1),
+(9,  1, 'GBP', '£',   'left',  0, 1),
+(10, 1, 'CHF', 'Fr.', 'right', 0, 1),
+(11, 1, 'SEK', 'kr',  'right', 0, 1),
+(12, 1, 'DKK', 'kr',  'right', 0, 1),
+(13, 1, 'NOK', 'kr',  'right', 0, 1),
+(14, 1, 'PLN', 'zł',  'right', 0, 1),
+(15, 1, 'CZK', 'Kč',  'right', 0, 1),
+(16, 1, 'HUF', 'Ft',  'right', 0, 1),
+(17, 1, 'RON', 'lei', 'right', 0, 1),
+(18, 1, 'BGN', 'лв',  'right', 0, 1),
+(19, 1, 'TRY', '₺',   'left',  0, 1),
+(20, 1, 'RSD', 'дин.','right', 0, 1),
+(21, 1, 'RUB', '₽',   'right', 0, 1),
+(22, 1, 'CNY', '¥',   'left',  0, 1),
+(23, 1, 'JPY', '¥',   'left',  0, 1),
+(24, 1, 'TWD', 'NT$', 'left',  0, 1),
+(25, 1, 'HKD', 'HK$', 'left',  0, 1),
+(26, 1, 'INR', '₹',   'left',  0, 1),
+(27, 1, 'IDR', 'Rp',  'right', 0, 1),
+(28, 1, 'VND', '₫',   'right', 0, 1),
+(29, 1, 'ILS', '₪',   'left',  0, 1),
+(30, 1, 'SAR', '﷼',   'left',  0, 1),
+(31, 1, 'ZAR', 'R',   'right', 0, 1),
+(32, 1, 'BTC', '₿',   'left',  0, 1),
+(33, 1, 'ETH', 'Ξ',   'left',  0, 1);
 
 CREATE TABLE IF NOT EXISTS `si_preferences` (
   `pref_id` int(11) NOT NULL AUTO_INCREMENT,

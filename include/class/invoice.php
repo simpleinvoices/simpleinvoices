@@ -50,7 +50,7 @@ class invoice {
 
 		$pref_group = getPreference($this->preference_id, $this->domain_id);
 
-		// Resolve currency from preference / si_currencies (same logic as insertInvoice)
+		// Resolve currency from preference / si_currency (same logic as insertInvoice)
 		require_once __DIR__ . '/class/CurrencySignHelper.php';
 		$currency_sign = CurrencySignHelper::forDisplay($pref_group['pref_currency_sign'] ?? '');
 		$currency_code = trim($pref_group['currency_code'] ?? '');
@@ -80,29 +80,42 @@ class invoice {
 		}
 		$show_currency_code = !empty($pref_group['show_currency_code']) ? 1 : 0;
 
+		// Denormalise currency_code and currency_locale from preference
+		if ($currency_id > 0 && ($currency_code === '')) {
+			$tmpCur = siCurrencies::getById($currency_id, $this->domain_id);
+			if ($tmpCur) {
+				$currency_code = $tmpCur['currency_code'] ?? '';
+			}
+		}
+		$currency_locale = trim($pref_group['locale'] ?? '');
+
 		if ($db_server == 'pgsql' || $db_server == 'sqlite') {
 			$sql = "INSERT INTO ".TB_PREFIX."invoices (
 					index_id, domain_id, biller_id, customer_id,
 					type_id, preference_id, date, note,
 					custom_field1, custom_field2, custom_field3, custom_field4,
-					currency_sign, currency_id, show_currency_code
+					currency_sign, denorm_currency_code, denorm_currency_locale,
+					currency_id, show_currency_code
 				) VALUES (
 					:index_id, :domain_id, :biller_id, :customer_id,
 					:type_id, :preference_id, :date, :note,
 					:customField1, :customField2, :customField3, :customField4,
-					:currency_sign, :currency_id, :show_currency_code
+					:currency_sign, :currency_code, :currency_locale,
+					:currency_id, :show_currency_code
 				)";
 		} else {
 			$sql = "INSERT INTO ".TB_PREFIX."invoices (
 					id, index_id, domain_id, biller_id, customer_id,
 					type_id, preference_id, date, note,
 					custom_field1, custom_field2, custom_field3, custom_field4,
-					currency_sign, currency_id, show_currency_code
+					currency_sign, denorm_currency_code, denorm_currency_locale,
+					currency_id, show_currency_code
 				) VALUES (
 					NULL, :index_id, :domain_id, :biller_id, :customer_id,
 					:type_id, :preference_id, :date, :note,
 					:customField1, :customField2, :customField3, :customField4,
-					:currency_sign, :currency_id, :show_currency_code
+					:currency_sign, :currency_code, :currency_locale,
+					:currency_id, :show_currency_code
 				)";
 		}
 
@@ -121,7 +134,7 @@ class invoice {
 			':customField4',  $this->custom_field4,
 			':currency_sign',  $currency_sign,
 			':currency_code',  $currency_code,
-			':currency_position', $currency_position,
+			':currency_locale', $currency_locale,
 			':currency_id',    $currency_id,
 			':show_currency_code', $show_currency_code
 		);
@@ -244,18 +257,6 @@ class invoice {
 	$invoice['total_tax'] = $result2['total_tax'];
 		
 	$invoice['tax_grouped'] = taxesGroupedForInvoice($id);
-
-	// Live-resolve currency fields from si_currencies so position/sign/code
-	// reflect current table values rather than stale denormalised snapshots.
-	if (!empty($invoice['currency_id'])) {
-		require_once __DIR__ . '/siCurrencies.php';
-		$currRow = siCurrencies::getById((int) $invoice['currency_id'], $this->domain_id);
-		if ($currRow) {
-			$invoice['currency_position'] = $currRow['currency_position'] ?? $invoice['currency_position'] ?? '';
-			$invoice['currency_sign']     = CurrencySignHelper::forDisplay($currRow['currency_sign'] ?? $invoice['currency_sign'] ?? '');
-			$invoice['currency_code']     = $currRow['currency_code'] ?? $invoice['currency_code'] ?? '';
-		}
-	}
 
 	return $invoice;
     
@@ -469,6 +470,8 @@ class invoice {
                      iv.denorm_preference_status AS status,
                      iv.denorm_index_name AS index_name,
                      iv.currency_sign,
+                     iv.denorm_currency_code,
+                     iv.denorm_currency_locale,
                 FROM " . TB_PREFIX . "invoices iv
                 WHERE FALSE";
                     } else {
@@ -489,6 +492,8 @@ class invoice {
                      iv.denorm_preference_status AS status,
                      iv.denorm_index_name AS index_name,
                      iv.currency_sign,
+                     iv.denorm_currency_code,
+                     iv.denorm_currency_locale,
                 FROM " . TB_PREFIX . "invoices iv
                 WHERE iv.domain_id = :domain_id
                     AND iv.id IN ($inList)
@@ -517,6 +522,8 @@ class invoice {
                      iv.denorm_preference_status AS status,
                      iv.denorm_index_name AS index_name,
                      iv.currency_sign,
+                     iv.denorm_currency_code,
+                     iv.denorm_currency_locale,
                 FROM " . TB_PREFIX . "invoices iv
                 WHERE iv.domain_id = :domain_id
                     $where";
@@ -557,6 +564,8 @@ class invoice {
                      iv.denorm_preference_status AS status,
                      iv.denorm_index_name AS index_name,
                      iv.currency_sign,
+                     iv.denorm_currency_code,
+                     iv.denorm_currency_locale,
                 FROM " . TB_PREFIX . "invoices iv
                 WHERE 0";
                     } else {
@@ -577,6 +586,8 @@ class invoice {
                      iv.denorm_preference_status AS status,
                      iv.denorm_index_name AS index_name,
                      iv.currency_sign,
+                     iv.denorm_currency_code,
+                     iv.denorm_currency_locale,
                 FROM " . TB_PREFIX . "invoices iv
                 WHERE iv.domain_id = :domain_id
                     AND iv.id IN ($inList)
@@ -605,6 +616,8 @@ class invoice {
                      iv.denorm_preference_status AS status,
                      iv.denorm_index_name AS index_name,
                      iv.currency_sign,
+                     iv.denorm_currency_code,
+                     iv.denorm_currency_locale,
                 FROM " . TB_PREFIX . "invoices iv
                 WHERE iv.domain_id = :domain_id
                     $where";
@@ -655,6 +668,8 @@ class invoice {
                      iv.denorm_preference_status AS status,
                      iv.denorm_index_name AS index_name,
                      iv.currency_sign,
+                     iv.denorm_currency_code,
+                     iv.denorm_currency_locale,
                 FROM " . TB_PREFIX . "invoices iv
                 WHERE iv.domain_id = :domain_id AND 1 = 0";
                     } else {
@@ -675,6 +690,8 @@ class invoice {
                      iv.denorm_preference_status AS status,
                      iv.denorm_index_name AS index_name,
                      iv.currency_sign,
+                     iv.denorm_currency_code,
+                     iv.denorm_currency_locale,
                 FROM " . TB_PREFIX . "invoices iv
                 WHERE iv.domain_id = :domain_id
                     AND iv.id IN ($inList)
@@ -697,6 +714,8 @@ class invoice {
                      iv.denorm_preference_status AS status,
                      iv.denorm_index_name AS index_name,
                      iv.currency_sign,
+                     iv.denorm_currency_code,
+                     iv.denorm_currency_locale,
                 FROM " . TB_PREFIX . "invoices iv
                 WHERE iv.domain_id = :domain_id
                     $where";

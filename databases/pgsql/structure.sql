@@ -200,6 +200,8 @@ CREATE TABLE IF NOT EXISTS si_invoices (
   payment_term_id INTEGER DEFAULT NULL,
   due_date        DATE DEFAULT NULL,
   currency_sign   VARCHAR(50) DEFAULT NULL,
+  denorm_currency_code   VARCHAR(10) DEFAULT NULL,
+  denorm_currency_locale VARCHAR(32) DEFAULT NULL,
   currency_id INTEGER DEFAULT NULL,
   show_currency_code SMALLINT NOT NULL DEFAULT 0,
   denorm_invoice_total          NUMERIC(25,6) NOT NULL DEFAULT 0,
@@ -246,6 +248,8 @@ CREATE TABLE IF NOT EXISTS si_payment (
   denorm_biller_name        VARCHAR(255) NOT NULL DEFAULT '',
   denorm_customer_name    VARCHAR(255) NOT NULL DEFAULT '',
   denorm_currency_sign      VARCHAR(50) NOT NULL DEFAULT '',
+  denorm_currency_code      VARCHAR(10) NOT NULL DEFAULT '',
+  denorm_currency_locale    VARCHAR(32) NOT NULL DEFAULT '',
   PRIMARY KEY (domain_id, id)
 );
 CREATE INDEX IF NOT EXISTS si_payment_domain_id ON si_payment (domain_id);
@@ -262,7 +266,7 @@ CREATE TABLE IF NOT EXISTS si_payment_types (
   PRIMARY KEY (domain_id, pt_id)
 );
 
-CREATE TABLE IF NOT EXISTS si_currencies (
+CREATE TABLE IF NOT EXISTS si_currency (
   id                SERIAL PRIMARY KEY,
   domain_id         INTEGER DEFAULT 1,
   currency_code     VARCHAR(10) DEFAULT '',
@@ -271,7 +275,7 @@ CREATE TABLE IF NOT EXISTS si_currencies (
   is_default        SMALLINT DEFAULT 0,
   enabled           SMALLINT DEFAULT 1
 );
-CREATE INDEX IF NOT EXISTS idx_currencies_domain ON si_currencies (domain_id);
+CREATE INDEX IF NOT EXISTS idx_currency_domain ON si_currency (domain_id);
 
 CREATE TABLE IF NOT EXISTS si_preferences (
   pref_id                    SERIAL,

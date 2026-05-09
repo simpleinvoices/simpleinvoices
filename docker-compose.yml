@@ -42,6 +42,13 @@ services:
       - SI_AUTO_MIGRATE=${SI_AUTO_MIGRATE:-true}
       # Optional: PHP-FPM concurrent workers (image default 20). Raise if logs warn about pm.max_children.
       - SI_PHP_FPM_MAX_CHILDREN=${SI_PHP_FPM_MAX_CHILDREN:-}
+      # S3-compatible storage for biller logos (e.g. MinIO)
+      - SI_S3_ENABLED=${SI_S3_ENABLED:-}
+      - SI_S3_ENDPOINT=${SI_S3_ENDPOINT:-}
+      - SI_S3_KEY=${SI_S3_KEY:-}
+      - SI_S3_SECRET=${SI_S3_SECRET:-}
+      - SI_S3_BUCKET=${SI_S3_BUCKET:-}
+      - SI_S3_REGION=${SI_S3_REGION:-}
     networks:
       - simpleinvoices-net
 
@@ -65,6 +72,27 @@ services:
       timeout: 5s
       retries: 5
 
+  # MinIO: S3-compatible object storage for biller logos
+  minio:
+    image: minio/minio:latest
+    command: server /data --console-address ":9001"
+    ports:
+      - "${MINIO_API_PORT:-9000}:9000"
+      - "${MINIO_CONSOLE_PORT:-9001}:9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
+    volumes:
+      - minio_data:/data
+    networks:
+      - simpleinvoices-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
   # Adminer: minimal DB UI (replaces phpMyAdmin; official image is small)
   adminer:
     image: adminer:latest
@@ -83,6 +111,7 @@ services:
 volumes:
   mysql_data:
   sqlite_data:
+  minio_data:
 
 networks:
   simpleinvoices-net:

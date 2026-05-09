@@ -97,6 +97,13 @@ function getLogoList() {
 			}
 		}
 	}
+	$s3Files = S3LogoStore::list();
+	foreach ($s3Files as $f) {
+		$ext = strtolower(pathinfo($f, PATHINFO_EXTENSION));
+		if (in_array($ext, $allowed, true)) {
+			$files[] = $f;
+		}
+	}
 	sort($files);
 	return $files;
 }
@@ -106,7 +113,7 @@ function getLogo($biller) {
 	$url = getURL();
 
 	if(!empty($biller['logo'])) {
-		return $url."/templates/invoices/logos/".$biller['logo'];
+		return $url."/index.php?module=billers&view=logo&id=".$biller['id'];
 	}
 	else {
 		return $url."/templates/invoices/logos/_default_blank_logo.png";

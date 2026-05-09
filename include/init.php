@@ -226,6 +226,10 @@ $early_exit[] = "documentation_view";
 $early_exit[] = "user_save_ui_language";
 //$early_exit[] = "install_index";
 // Backup download must run before any HTML is output so it can send file headers
+if ($module === 'billers' && $view === 'logo') {
+	$early_exit[] = 'billers_logo';
+}
+
 if ($module === 'options' && $view === 'backup_database' && ($_POST['op'] ?? '') === 'backup_db') {
 	$early_exit[] = 'options_backup_database';
 }

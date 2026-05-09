@@ -160,7 +160,7 @@ if (  $op === 'insert_preference' ) {
 
 #edit preference
 
-else if (  $op === 'edit_preference' ) {
+	else if (  $op === 'edit_preference' ) {
 
 	if (isset($_POST['save_preference'])) {
 		$payment_term_id = isset($_POST['payment_term_id']) && $_POST['payment_term_id'] !== ''
@@ -215,7 +215,7 @@ else if (  $op === 'edit_preference' ) {
 		  ':enabled', $_POST['pref_enabled'],
 		  ':status', $_POST['status'],
 		  ':locale', $_POST['locale'],
-           	  ':language', $_POST['language'],
+            	  ':language', $_POST['language'],
 		  ':index_group', $_POST['index_group'],
 		  ':include_online_payment', $include_online_payment,
 		  ':payment_term_id', $payment_term_id,
@@ -224,20 +224,76 @@ else if (  $op === 'edit_preference' ) {
 		  ':id', (int)$_GET['id'],
 		  ':domain_id', $auth_session->domain_id))
 	    {
-			$saved =true;
 			invoice_denorm::refreshAllForPreference((int)$_GET['id'], $auth_session->domain_id);
-		//	$display_block = $LANG['save_preference_success'];
+
+			$start_err = null;
+			$start_num = trim($_POST['set_starting_invoice_number'] ?? '');
+			if ($start_num !== '' && ctype_digit($start_num)) {
+				$new_start = (int) $start_num;
+				$index_group = (int) $_POST['index_group'];
+
+				$sql_max = "SELECT MAX(index_id) AS max_idx
+					FROM " . TB_PREFIX . "invoices
+					WHERE domain_id = :domain_id AND preference_id IN (
+						SELECT pref_id FROM " . TB_PREFIX . "preferences
+						WHERE index_group = :index_group AND domain_id = :domain_id2
+					)";
+				$sth = dbQuery($sql_max,
+					':domain_id', $auth_session->domain_id,
+					':index_group', $index_group,
+					':domain_id2', $auth_session->domain_id);
+				$row = $sth->fetch();
+				$max_existing = (int) ($row['max_idx'] ?? 0);
+
+				$current_next = index::next('invoice', $index_group, $auth_session->domain_id);
+
+				if ($new_start <= $max_existing) {
+					$start_err = "Starting number must be greater than the highest existing invoice number ($max_existing) in this numbering group.";
+				} elseif ($new_start < 1) {
+					$start_err = "Starting number must be at least 1.";
+				} else {
+					$set_id = $new_start - 1;
+					$sql_idx = "SELECT id FROM " . TB_PREFIX . "index
+						WHERE node = 'invoice' AND sub_node = :sub_node
+						AND domain_id = :domain_id";
+					$sth_idx = dbQuery($sql_idx,
+						':sub_node', $index_group,
+						':domain_id', $auth_session->domain_id);
+					$exists = $sth_idx->fetch();
+
+					if ($exists) {
+						dbQuery(
+							"UPDATE " . TB_PREFIX . "index SET id = :id
+							WHERE node = 'invoice' AND sub_node = :sub_node AND domain_id = :domain_id",
+							':id', $set_id,
+							':sub_node', $index_group,
+							':domain_id', $auth_session->domain_id
+						);
+					} else {
+						dbQuery(
+							"INSERT INTO " . TB_PREFIX . "index (id, node, sub_node, sub_node_2, domain_id)
+							VALUES (:id, 'invoice', :sub_node, 0, :domain_id)",
+							':id', $set_id,
+							':sub_node', $index_group,
+							':domain_id', $auth_session->domain_id
+						);
+					}
+				}
+			}
+
+			$params = '&saved=1';
+			if ($start_err !== null) {
+				$_SESSION['si_starting_number_error'] = $start_err;
+				$params .= '&start_err=1';
+			}
+			header('Location: index.php?module=preferences&view=details&id=' . (int)$_GET['id'] . '&action=edit' . $params);
+			exit;
 		} else {
 			$saved = false;
-			//$display_block = $LANG['save_preference_failure'];
 		}
 
-		//header( 'refresh: 2; url=manage_preferences.php' );
-	//	$refresh_total = "<META HTTP-EQUIV=REFRESH CONTENT=2;URL=index.php?module=preferences&view=manage>";
-
 		}
-
-}
+	}
 
 $bladeView -> assign('saved',$saved); 
 

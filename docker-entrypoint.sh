@@ -89,6 +89,12 @@ php -r '
       "SI_PHP_DISPLAY_ERRORS" => "phpSettings.display_errors",
       "SI_PHP_LOG_ERRORS" => "phpSettings.log_errors",
       "SI_PHP_ERROR_LOG" => "phpSettings.error_log",
+      "SI_S3_ENABLED" => "s3.enabled",
+      "SI_S3_ENDPOINT" => "s3.endpoint",
+      "SI_S3_KEY" => "s3.key",
+      "SI_S3_SECRET" => "s3.secret",
+      "SI_S3_BUCKET" => "s3.bucket",
+      "SI_S3_REGION" => "s3.region",
   ];
 
   $formatValue = static function (string $value): string {

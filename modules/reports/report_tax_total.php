@@ -4,13 +4,13 @@ if (($__rpt = report_cache_get($__rpt_name, (int)$auth_session->domain_id)) !== 
 $__rpt_snap = array_keys($bladeView->getAssigns());
 
 $sql = "
-SELECT iv.currency_sign, iv.currency_code, SUM(ii.tax_amount) AS sum_tax_total
+SELECT iv.currency_sign, iv.denorm_currency_code, SUM(ii.tax_amount) AS sum_tax_total
 FROM ".TB_PREFIX."invoice_items ii
 	INNER JOIN ".TB_PREFIX."invoices iv ON (ii.invoice_id = iv.id AND ii.domain_id = iv.domain_id)
 	INNER JOIN ".TB_PREFIX."preferences pr ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id)
 WHERE pr.status = 1 AND ii.domain_id = :domain_id
-GROUP BY iv.currency_sign, iv.currency_code
-ORDER BY iv.currency_code, iv.currency_sign
+GROUP BY iv.currency_sign, iv.denorm_currency_code
+ORDER BY iv.denorm_currency_code, iv.currency_sign
 ";
 
 $sth = dbQuery($sql, ':domain_id', $auth_session->domain_id);
@@ -20,7 +20,7 @@ $total_taxes = 0.0;
 foreach ($sth->fetchAll(PDO::FETCH_ASSOC) as $row) {
     $taxes[] = [
         'currency_sign' => $row['currency_sign'] ?? '',
-        'currency_code' => $row['currency_code'] ?? '',
+        'currency_code' => $row['denorm_currency_code'] ?? '',
         'sum_tax_total' => (float) ($row['sum_tax_total'] ?? 0),
     ];
     $total_taxes += (float) ($row['sum_tax_total'] ?? 0);

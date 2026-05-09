@@ -16,7 +16,7 @@
 @else
 
 {{-- if no biller name was inserted --}}
-<form name="frmpost" action="index.php?module=billers&amp;view=add" method="post" id="frmpost" class="needs-validation" novalidate>
+<form name="frmpost" action="index.php?module=billers&amp;view=add" method="post" id="frmpost" enctype="multipart/form-data" class="needs-validation" novalidate>
 
 <div class="card">
 	<div class="card-header">
@@ -420,6 +420,8 @@
 					<label class="form-label">{{ $LANG['logo_file'] ?? '' }}
 						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_insert_biller_text" title="{{ $LANG['logo_file'] ?? '' }}"><i class="ti ti-help"></i></a>
 					</label>
+					<input type="file" name="logo_file" accept="image/png,image/jpeg,image/gif,image/webp" class="form-control mb-2">
+					<small class="form-hint">Max 2MB. PNG, JPG, GIF, or WebP. Uploaded logos are stored in S3-compatible storage.</small>
 					{html_options name=logo output=$files values=$files selected=$files[0] class="form-select"}
 				</div>
 				<div class="mb-3">

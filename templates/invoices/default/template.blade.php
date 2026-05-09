@@ -492,7 +492,7 @@
 			{online_payment_link
 				type=$preference['include_online_payment']
 				invoice=$invoice['id']
-				amount=$invoice['owing'] currency_code=($invoice['currency_code'] ?? $preference['currency_code'] ?? '', !empty($invoice['show_currency_code'] ?? $preference['show_currency_code'] ?? false))
+				amount=$invoice['owing'] currency_code=($invoice['denorm_currency_code'] ?? $invoice['currency_code'] ?? $preference['currency_code'] ?? '', !empty($invoice['show_currency_code'] ?? $preference['show_currency_code'] ?? false))
 				domain_id=$invoice['domain_id']
 			}
 		</td>

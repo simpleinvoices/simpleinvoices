@@ -33,6 +33,7 @@
 					</tr>
 					<tr><th>{{ $LANG['status'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_status" title="{{ $LANG['status'] ?? '' }}"><i class="ti ti-help"></i></a></th><td>{{ $preference['status_wording'] }}</td></tr>
 					<tr><th>{{ $LANG['invoice_numbering_group'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_numbering_group" title="{{ $LANG['invoice_numbering_group'] ?? '' }}"><i class="ti ti-help"></i></a></th><td>{{ $index_group['pref_description'] ?? '' }}</td></tr>
+					<tr><th>{{ $LANG['next_invoice_number'] ?? 'Next invoice number' }}</th><td><strong>{{ $next_invoice_number }}</strong></td></tr>
 					<tr><th>{{ $LANG['enabled'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_enabled" title="{{ $LANG['enabled'] ?? '' }}"><i class="ti ti-help"></i></a></th><td>{{ $preference['enabled'] }}</td></tr>
 					<tr><th>{{ $LANG['language'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_language" title="{{ $LANG['language'] ?? '' }}"><i class="ti ti-help"></i></a></th><td>{{ $preference['language'] }}</td></tr>
 					<tr><th>{{ $LANG['locale'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_locale" title="{{ $LANG['locale'] ?? '' }}"><i class="ti ti-help"></i></a></th><td>{{ $localelist[$preference['locale'] ?? ''] ?? $preference['locale'] ?? '' }}</td></tr>
@@ -133,6 +134,12 @@
 		</ul>
 	</div>
 	<div class="card-body">
+		@if($saved_flag)
+			<div class="alert alert-success alert-dismissible"><button type="button" class="btn-close" data-bs-dismiss="alert"></button>{{ $LANG['save_preference_success'] ?? 'Preference saved successfully.' }}</div>
+		@endif
+		@if(!empty($starting_number_error))
+			<div class="alert alert-warning alert-dismissible"><button type="button" class="btn-close" data-bs-dismiss="alert"></button>{!! htmlspecialchars($starting_number_error) !!}</div>
+		@endif
 		<div class="tab-content">
 			<div id="pref-edit-details" class="tab-pane active" role="tabpanel">
 				<div class="mb-3">
@@ -162,6 +169,26 @@
 							@endforeach
 						</select>
 					@endif
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['next_invoice_number'] ?? 'Next invoice number' }}</label>
+					<p class="form-control-plaintext mb-0"><strong id="next_invoice_number_display">{{ $next_invoice_number }}</strong></p>
+					<div class="mt-2" id="starting_number_input_wrapper" style="display:none">
+						<div class="input-group">
+							<span class="input-group-text">Set starting number from</span>
+							<input type="number" class="form-control" name="set_starting_invoice_number"
+								id="set_starting_invoice_number"
+								min="{{ max(($max_existing_index_id ?? 0) + 1, 1) }}"
+								placeholder="{{ $next_invoice_number }}">
+							<button type="button" class="btn btn-outline-secondary" id="cancel_starting_input">
+								<i class="ti ti-x"></i> Cancel
+							</button>
+						</div>
+						<div class="form-text">Next number will be set to this value. Must be greater than <strong id="starting_number_max_ref">{{ $max_existing_index_id ?? 0 }}</strong> (highest existing invoice number in this group).</div>
+					</div>
+					<button type="button" class="btn btn-outline-secondary btn-sm mt-2" id="show_starting_input">
+						<i class="ti ti-pencil me-1"></i>Change starting number
+					</button>
 				</div>
 				<div class="mb-3">
 					<label class="form-label">{{ $LANG['enabled'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_enabled" title="{{ $LANG['enabled'] ?? '' }}"><i class="ti ti-help"></i></a></label>
@@ -333,4 +360,61 @@
 
 <input type="hidden" name="op" value="edit_preference" />
 @endif
+
+<script>
+(function() {
+'use strict';
+var indexNextMap = {!! $index_next_map ?? '{}' !!};
+var displayEl = document.getElementById('next_invoice_number_display');
+var inputWrapper = document.getElementById('starting_number_input_wrapper');
+var showBtn = document.getElementById('show_starting_input');
+var cancelBtn = document.getElementById('cancel_starting_input');
+var inputEl = document.getElementById('set_starting_invoice_number');
+var maxRefEl = document.getElementById('starting_number_max_ref');
+var indexGroupSel = document.querySelector('select[name="index_group"]');
+
+function updateDisplay(ngid) {
+	var gid = parseInt(ngid, 10) || 0;
+	if (gid > 0 && indexNextMap[gid] !== undefined) {
+		displayEl.textContent = indexNextMap[gid];
+		inputEl.min = Math.max(1, (indexNextMap[gid]));
+		return;
+	}
+	if (gid <= 0) return;
+	fetch('./index.php?module=preferences&view=index_lookup_ajax&index_group=' + encodeURIComponent(gid))
+		.then(function(r) { return r.json(); })
+		.then(function(data) {
+			indexNextMap[gid] = data.next;
+			displayEl.textContent = data.next;
+			inputEl.min = Math.max((data.max_existing || 0) + 1, 1);
+			inputEl.placeholder = data.next;
+			if (maxRefEl) maxRefEl.textContent = data.max_existing || 0;
+		})
+		.catch(function() {});
+}
+
+if (indexGroupSel) {
+	indexGroupSel.addEventListener('change', function() {
+		updateDisplay(this.value);
+	});
+}
+
+if (showBtn) {
+	showBtn.addEventListener('click', function() {
+		this.style.display = 'none';
+		inputWrapper.style.display = 'block';
+		inputEl.focus();
+		if (!inputEl.value) inputEl.value = displayEl.textContent;
+	});
+}
+
+if (cancelBtn) {
+	cancelBtn.addEventListener('click', function() {
+		inputWrapper.style.display = 'none';
+		showBtn.style.display = '';
+		inputEl.value = '';
+	});
+}
+})();
+</script>
 </form>

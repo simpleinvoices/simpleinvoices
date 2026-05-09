@@ -8,7 +8,7 @@ SELECT
       b.name  AS Biller
 	, c.name AS Customer
 	, iv.currency_sign
-	, iv.currency_code
+	, iv.denorm_currency_code
 	, SUM(iv.denorm_invoice_total) AS SUM_TOTAL
 FROM ' . TB_PREFIX . 'biller b
     INNER JOIN ' . TB_PREFIX . 'invoices iv ON (b.id = iv.biller_id AND b.domain_id = iv.domain_id)
@@ -18,7 +18,7 @@ WHERE
 	    pr.status =\'1\'
 	AND b.domain_id = :domain_id
 GROUP BY
-	b.name, c.name, iv.currency_sign, iv.currency_code
+	b.name, c.name, iv.currency_sign, iv.denorm_currency_code
 ';
 
 	$customer_result = dbQuery($sql, ':domain_id', $auth_session->domain_id);
@@ -30,7 +30,7 @@ GROUP BY
 	  $c = array();
 	  $c['name'] = $customer['Customer'];
 	  $c['currency_sign'] = $customer['currency_sign'];
-	  $c['currency_code'] = $customer['currency_code'] ?? '';
+	  $c['currency_code'] = $customer['denorm_currency_code'] ?? '';
 	  $c['sum_total'] = $customer['SUM_TOTAL'];
 
 	  $billers[$customer['Biller']]['name'] = $customer['Biller'];

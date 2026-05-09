@@ -27,7 +27,7 @@ switch ($db_server) {
                 ELSE '90+'
             END AS bucket,
             iv.currency_sign,
-            iv.currency_code,
+            iv.denorm_currency_code,
             iv.denorm_invoice_total AS inv_total,
             iv.denorm_amount_paid AS inv_paid,
             iv.denorm_amount_owing AS owing
@@ -36,7 +36,7 @@ switch ($db_server) {
             WHERE pr.status = 1 AND iv.domain_id = :domain_id
               AND iv.denorm_amount_owing > 0
         ) x
-        GROUP BY bucket, currency_sign, currency_code";
+        GROUP BY bucket, currency_sign, denorm_currency_code";
         break;
     case 'sqlite':
         $aging_sql = "SELECT bucket, currency_sign,
@@ -52,7 +52,7 @@ switch ($db_server) {
                 ELSE '90+'
             END AS bucket,
             iv.currency_sign,
-            iv.currency_code,
+            iv.denorm_currency_code,
             iv.denorm_invoice_total AS inv_total,
             iv.denorm_amount_paid AS inv_paid,
             iv.denorm_amount_owing AS owing
@@ -61,7 +61,7 @@ switch ($db_server) {
             WHERE pr.status = 1 AND iv.domain_id = :domain_id
               AND iv.denorm_amount_owing > 0
         ) x
-        GROUP BY bucket, currency_sign, currency_code";
+        GROUP BY bucket, currency_sign, denorm_currency_code";
         break;
     default:
         $aging_sql = "SELECT bucket, currency_sign,
@@ -77,7 +77,7 @@ switch ($db_server) {
                 ELSE '90+'
             END AS bucket,
             iv.currency_sign,
-            iv.currency_code,
+            iv.denorm_currency_code,
             iv.denorm_invoice_total AS inv_total,
             iv.denorm_amount_paid AS inv_paid,
             iv.denorm_amount_owing AS owing
@@ -86,7 +86,7 @@ switch ($db_server) {
             WHERE pr.status = 1 AND iv.domain_id = :domain_id
               AND iv.denorm_amount_owing > 0
         ) x
-        GROUP BY bucket, currency_sign, currency_code";
+        GROUP BY bucket, currency_sign, denorm_currency_code";
         break;
 }
 
@@ -101,7 +101,7 @@ foreach (dbQuery($aging_sql, ':domain_id', $auth_session->domain_id)->fetchAll(P
     $rows[] = [
         'aging'         => $b,
         'currency_sign' => $row['currency_sign'] ?? '',
-        'currency_code' => $row['currency_code'] ?? '',
+        'currency_code' => $row['denorm_currency_code'] ?? '',
         'inv_total'     => (float) ($row['inv_total'] ?? 0),
         'inv_paid'      => (float) ($row['inv_paid'] ?? 0),
         'inv_owing'     => (float) ($row['inv_owing'] ?? 0),

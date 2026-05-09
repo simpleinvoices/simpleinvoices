@@ -50,46 +50,43 @@ $inv_month_sql = '';
 $pmt_month_sql = '';
 switch ($db_server) {
     case 'pgsql':
-        $inv_month_sql = "SELECT to_char(iv.date::timestamp, 'YYYY-MM') AS ym, iv.currency_sign, iv.currency_code, SUM(iv.denorm_invoice_total) AS t
+        $inv_month_sql = "SELECT to_char(iv.date::timestamp, 'YYYY-MM') AS ym, iv.currency_sign, iv.denorm_currency_code, SUM(iv.denorm_invoice_total) AS t
             FROM " . TB_PREFIX . "invoices iv
             INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id=iv.preference_id AND pr.domain_id=iv.domain_id)
             WHERE pr.status='1' AND iv.domain_id=:domain_id
               AND iv.date >= :d_start AND iv.date < :d_end
-            GROUP BY 1, iv.currency_sign, iv.currency_code";
-        $pmt_month_sql = "SELECT to_char(ap.ac_date::timestamp, 'YYYY-MM') AS ym, iv.currency_sign, iv.currency_code, SUM(ap.ac_amount) AS t
+            GROUP BY 1, iv.currency_sign, iv.denorm_currency_code";
+        $pmt_month_sql = "SELECT to_char(ap.ac_date::timestamp, 'YYYY-MM') AS ym, ap.denorm_currency_sign AS currency_sign, ap.denorm_currency_code AS currency_code, SUM(ap.ac_amount) AS t
             FROM " . TB_PREFIX . "payment ap
-            INNER JOIN " . TB_PREFIX . "invoices iv ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
             WHERE ap.domain_id=:domain_id
               AND ap.ac_date >= :d_start AND ap.ac_date < :d_end
-            GROUP BY 1, iv.currency_sign, iv.currency_code";
+            GROUP BY 1, ap.denorm_currency_sign, ap.denorm_currency_code";
         break;
     case 'sqlite':
-        $inv_month_sql = "SELECT strftime('%Y-%m', iv.date) AS ym, iv.currency_sign, iv.currency_code, SUM(iv.denorm_invoice_total) AS t
+        $inv_month_sql = "SELECT strftime('%Y-%m', iv.date) AS ym, iv.currency_sign, iv.denorm_currency_code, SUM(iv.denorm_invoice_total) AS t
             FROM " . TB_PREFIX . "invoices iv
             INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id=iv.preference_id AND pr.domain_id=iv.domain_id)
             WHERE pr.status='1' AND iv.domain_id=:domain_id
               AND date(iv.date) >= date(:d_start) AND date(iv.date) < date(:d_end)
-            GROUP BY 1, iv.currency_sign, iv.currency_code";
-        $pmt_month_sql = "SELECT strftime('%Y-%m', ap.ac_date) AS ym, iv.currency_sign, iv.currency_code, SUM(ap.ac_amount) AS t
+            GROUP BY 1, iv.currency_sign, iv.denorm_currency_code";
+        $pmt_month_sql = "SELECT strftime('%Y-%m', ap.ac_date) AS ym, ap.denorm_currency_sign AS currency_sign, ap.denorm_currency_code AS currency_code, SUM(ap.ac_amount) AS t
             FROM " . TB_PREFIX . "payment ap
-            INNER JOIN " . TB_PREFIX . "invoices iv ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
             WHERE ap.domain_id=:domain_id
               AND datetime(ap.ac_date) >= datetime(:d_start) AND datetime(ap.ac_date) < datetime(:d_end)
-            GROUP BY 1, iv.currency_sign, iv.currency_code";
+            GROUP BY 1, ap.denorm_currency_sign, ap.denorm_currency_code";
         break;
     default:
-        $inv_month_sql = "SELECT DATE_FORMAT(iv.date, '%Y-%m') AS ym, iv.currency_sign, iv.currency_code, SUM(iv.denorm_invoice_total) AS t
+        $inv_month_sql = "SELECT DATE_FORMAT(iv.date, '%Y-%m') AS ym, iv.currency_sign, iv.denorm_currency_code, SUM(iv.denorm_invoice_total) AS t
             FROM " . TB_PREFIX . "invoices iv
             INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id=iv.preference_id AND pr.domain_id=iv.domain_id)
             WHERE pr.status='1' AND iv.domain_id=:domain_id
               AND iv.date >= :d_start AND iv.date < :d_end
-            GROUP BY DATE_FORMAT(iv.date, '%Y-%m'), iv.currency_sign, iv.currency_code";
-        $pmt_month_sql = "SELECT DATE_FORMAT(ap.ac_date, '%Y-%m') AS ym, iv.currency_sign, iv.currency_code, SUM(ap.ac_amount) AS t
+            GROUP BY DATE_FORMAT(iv.date, '%Y-%m'), iv.currency_sign, iv.denorm_currency_code";
+        $pmt_month_sql = "SELECT DATE_FORMAT(ap.ac_date, '%Y-%m') AS ym, ap.denorm_currency_sign AS currency_sign, ap.denorm_currency_code AS currency_code, SUM(ap.ac_amount) AS t
             FROM " . TB_PREFIX . "payment ap
-            INNER JOIN " . TB_PREFIX . "invoices iv ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
             WHERE ap.domain_id=:domain_id
               AND ap.ac_date >= :d_start AND ap.ac_date < :d_end
-            GROUP BY DATE_FORMAT(ap.ac_date, '%Y-%m'), iv.currency_sign, iv.currency_code";
+            GROUP BY DATE_FORMAT(ap.ac_date, '%Y-%m'), ap.denorm_currency_sign, ap.denorm_currency_code";
         break;
 }
 
@@ -105,7 +102,7 @@ foreach (
 ) {
     if (! empty($row['ym'])) {
         $sign = $row['currency_sign'] ?? '';
-        $code = $row['currency_code'] ?? '';
+        $code = $row['denorm_currency_code'] ?? '';
         $curr_key = ($code ?: '') . '||' . ($sign ?: '');
         $curr_meta[$curr_key] = ['currency_sign' => $sign, 'currency_code' => $code];
         $inv_by_curr_ym[$curr_key][$row['ym']] = round((float) ($row['t'] ?? 0), 2);
@@ -118,7 +115,7 @@ foreach (
 ) {
     if (! empty($row['ym'])) {
         $sign = $row['currency_sign'] ?? '';
-        $code = $row['currency_code'] ?? '';
+        $code = $row['denorm_currency_code'] ?? '';
         $curr_key = ($code ?: '') . '||' . ($sign ?: '');
         $curr_meta[$curr_key] = $curr_meta[$curr_key] ?? ['currency_sign' => $sign, 'currency_code' => $code];
         $pmt_by_curr_ym[$curr_key][$row['ym']] = round((float) ($row['t'] ?? 0), 2);

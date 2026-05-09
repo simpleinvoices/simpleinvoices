@@ -6,7 +6,7 @@
 *
 * License:
 *	 GPL v3 or above --}}
-<form name="frmpost" action="index.php?module=billers&amp;view=save&amp;id={{ get('id') }}" method="post" id="frmpost" class="needs-validation" novalidate>
+<form name="frmpost" action="index.php?module=billers&amp;view=save&amp;id={{ get('id') }}" method="post" id="frmpost" enctype="multipart/form-data" class="needs-validation" novalidate>
 
 @if(get('action')== 'view' )
 
@@ -258,7 +258,7 @@
 						<th>{{ $LANG['logo_file'] ?? '' }}</th>
 						<td>
 							@if(!empty($biller['logo']))
-								<img src="templates/invoices/logos/{{ $biller['logo'] }}" alt="{{ $biller['logo'] }}" class="img-fluid"><br>{{ $biller['logo'] }}
+								<img src="index.php?module=billers&amp;view=logo&amp;id={{ $biller['id'] }}" alt="{{ $biller['logo'] }}" class="img-fluid"><br>{{ $biller['logo'] }}
 							@endif
 						</td>
 					</tr>
@@ -684,6 +684,12 @@
 					<label class="form-label">{{ $LANG['logo_file'] ?? '' }}
 						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_insert_biller_text" title="{{ $LANG['logo_file'] ?? '' }}"><i class="ti ti-help"></i></a>
 					</label>
+					@if(!empty($biller['logo']))
+						<img src="index.php?module=billers&amp;view=logo&amp;id={{ $biller['id'] }}" alt="Current logo" class="img-fluid mb-2 d-block" style="max-height:80px">
+					@endif
+					<input type="hidden" name="existing_logo" value="{{ $biller['logo'] ?? '' }}">
+					<input type="file" name="logo_file" accept="image/png,image/jpeg,image/gif,image/webp" class="form-control mb-2">
+					<small class="form-hint">Max 2MB. PNG, JPG, GIF, or WebP. Upload replaces current logo.</small>
 					{html_options name=logo output=$files values=$files selected=$biller['logo'] class="form-select"}
 				</div>
 				<div class="mb-3">

@@ -29,6 +29,14 @@ email.smtpport                      = 25
 email.secure                        = 
 email.use_local_sendmail            = false
 
+; S3-compatible storage for biller logos (MinIO, AWS S3, etc.)
+s3.enabled                          = false
+s3.endpoint                         = 
+s3.key                              = 
+s3.secret                           = 
+s3.bucket                           = 
+s3.region                           = us-east-1
+
 ; 32-byte key for libsodium-encrypted gateway secrets in si_biller (64 hex chars, base64 of 32 bytes, or raw 32 bytes). Leave empty to store secrets as plaintext. Docker: SI_GATEWAY_SECRETS_KEY.
 encryption.gateway_secrets.key      = 
 nonce.key                           = this_should_be_random_and_secret_so_change_it

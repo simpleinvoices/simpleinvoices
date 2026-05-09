@@ -687,38 +687,38 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
     $patch['133']['date'] = "20071126";
 
     $patch['134']['name'] = "Drop non-int compatible default from si_sql_patchmanager";
-    switch ($config->database->adapter)
+    switch ($db_server)
     {
-		case "pdo_pgsql" :
+		case 'pgsql':
         	$patch['134']['patch'] = "ALTER TABLE ".TB_PREFIX."sql_patchmanager ALTER COLUMN sql_patch_ref DROP DEFAULT;";
         	break;
-		case "pdo_mysql" :
+		case 'mysql':
 		default :
 			$patch['134']['patch'] = "SELECT 1+1;";
     }
     $patch['134']['date'] = "20071218";
 
     $patch['135']['name'] = "Change sql_patch_ref type in sql_patchmanager to int";
-    switch ($config->database->adapter)
+    switch ($db_server)
     {
-		case "pdo_pgsql" :
+		case 'pgsql':
         	$patch['135']['patch'] = "ALTER TABLE  ".TB_PREFIX."sql_patchmanager ALTER COLUMN sql_patch_ref TYPE int USING to_number(sql_patch_ref, '999');";
         	break;
-		case "pdo_mysql" :
+		case 'mysql':
 		default :
    			$patch['135']['patch'] = "ALTER TABLE  `".TB_PREFIX."sql_patchmanager` change `sql_patch_ref` `sql_patch_ref` int NOT NULL ;";
     }
     $patch['135']['date'] = "20071218";
 
     $patch['136']['name'] = "Create domain mapping table";
-    switch ($config->database->adapter)
+    switch ($db_server)
     {
-		case "pdo_pgsql" :
+		case 'pgsql':
 			$patch['136']['patch'] = "CREATE TABLE ".TB_PREFIX."user_domain (
 	            id serial PRIMARY KEY,
             	name text UNIQUE NOT NULL;";
          	break;
-		case "pdo_mysql" :
+		case 'mysql':
 		default :
         	$patch['136']['patch'] = "CREATE TABLE ".TB_PREFIX."user_domain (
 	    		`id` int(11) NOT NULL auto_increment  PRIMARY KEY,
@@ -729,12 +729,12 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
 
     $patch['137']['name'] = "Insert default domain";
-    switch ($config->database->adapter)
+    switch ($db_server)
     {
-		case "pdo_pgsql" :
+		case 'pgsql':
 			$patch['137']['patch'] = "INSERT INTO ".TB_PREFIX."user_domain (name) VALUES ('default');";
 			break;
-		case "pdo_mysql" :
+		case 'mysql':
 		default:
 			$patch['137']['patch'] = "INSERT INTO ".TB_PREFIX."user_domain (name) VALUES ('default');";
     }
@@ -742,12 +742,12 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
     //TODO postgres patch
 
     $patch['138']['name'] = "Add domain_id to payment_types table";
-    switch ($config->database->adapter)
+    switch ($db_server)
     {
-		case "pdo_pgsql" :
+		case 'pgsql':
 			$patch['138']['patch'] = "ALTER TABLE ".TB_PREFIX."payment_types ADD COLUMN domain_id int NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
 			break;
-		case "pdo_mysql" :
+		case 'mysql':
 		default:
    			$patch['138']['patch'] = "ALTER TABLE `".TB_PREFIX."payment_types` ADD `domain_id` INT  NOT NULL AFTER `pt_id` ;";
     }
@@ -755,35 +755,35 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['139']['name'] = "Add domain_id to preferences table";
     $patch['139']['patch'] = "ALTER TABLE `".TB_PREFIX."preferences` ADD `domain_id` INT  NOT NULL AFTER `pref_id` ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
         $patch['139']['patch'] = "ALTER TABLE ".TB_PREFIX."preferences ADD COLUMN domain_id int NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
     }
     $patch['139']['date'] = "200712";
 
     $patch['140']['name'] = "Add domain_id to products table";
     $patch['140']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `domain_id` INT  NOT NULL AFTER `id` ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
         $patch['140']['patch'] = "ALTER TABLE ".TB_PREFIX."products ADD COLUMN domain_id int NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
     }
     $patch['140']['date'] = "200712";
 
     $patch['141']['name'] = "Add domain_id to billers table";
     $patch['141']['patch'] = "ALTER TABLE `".TB_PREFIX."biller` ADD `domain_id` INT  NOT NULL AFTER `id` ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
         $patch['141']['patch'] = "ALTER TABLE ".TB_PREFIX."biller ADD COLUMN domain_id int NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
     }
     $patch['141']['date'] = "200712";
 
     $patch['142']['name'] = "Add domain_id to invoices table";
     $patch['142']['patch'] = "ALTER TABLE `".TB_PREFIX."invoices` ADD `domain_id` INT NOT NULL AFTER `id` ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
         $patch['142']['patch'] = "ALTER TABLE ".TB_PREFIX."invoices ADD COLUMN domain_id int NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
     }
     $patch['142']['date'] = "200712";
 
     $patch['143']['name'] = "Add domain_id to customers table";
     $patch['143']['patch'] = "ALTER TABLE `".TB_PREFIX."customers` ADD `domain_id` INT NOT NULL AFTER `id` ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
         $patch['143']['patch'] = "ALTER TABLE ".TB_PREFIX."customers ADD COLUMN domain_id int NOT NULL REFERENCES ".TB_PREFIX."domain(id);";
     }
     $patch['143']['date'] = "200712";
@@ -791,21 +791,21 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['144']['name'] = "Change group field to user_role_id in users table";
     $patch['144']['patch'] = "ALTER TABLE `".TB_PREFIX."users` CHANGE `user_group` `user_role_id` INT  DEFAULT '1' NOT NULL;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
         $patch['144']['patch'] = "ALTER TABLE ".TB_PREFIX."users RENAME COLUMN user_group TO user_role_id;";
     }
     $patch['144']['date'] = "20080102";
 
     $patch['145']['name'] = "Change domain field to user_domain_id in users table";
     $patch['145']['patch'] = "ALTER TABLE `" . TB_PREFIX . "users` CHANGE `user_domain` `user_domain_id` INT  DEFAULT '1' NOT NULL;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
         $patch['145']['patch'] = "ALTER TABLE " . TB_PREFIX . "users RENAME COLUMN user_domain TO user_domain_id;";
     }
     $patch['145']['date'] = "20080102";
 
     $patch['146']['name'] = "Drop old auth_challenges table";
     $patch['146']['patch'] = "DROP TABLE IF EXISTS `".TB_PREFIX."auth_challenges`;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
         /* SC: auth_challenges creation was already removed from the postgres
          *     schema before this patch
          */
@@ -818,7 +818,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 	    `id` int(11) NOT NULL auto_increment  PRIMARY KEY,
             `name` varchar(191) UNIQUE NOT NULL
             ) ENGINE=MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
         $patch['147']['patch'] = "CREATE TABLE ".TB_PREFIX."user_role (
             id serial PRIMARY KEY,
             name text UNIQUE NOT NULL
@@ -828,7 +828,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['148']['name'] = "Insert default user group";
     $patch['148']['patch'] = "INSERT INTO ".TB_PREFIX."user_role (name) VALUES ('administrator');";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
         $patch['148']['patch'] = "INSERT INTO ".TB_PREFIX."user_role (name) VALUES ('administrator');";
     }
     $patch['148']['date'] = "20080102";
@@ -836,7 +836,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['149']['name'] = "Table = Account_payments Field = ac_amount : change field type and length to decimal";
     $patch['149']['patch'] = "ALTER TABLE `".TB_PREFIX."account_payments` CHANGE `ac_amount` `ac_amount` DECIMAL( 25, 6 ) NOT NULL;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
         $patch['149']['name'] = "Widen ac_amount field of account_payments";
         $patch['149']['patch'] = "ALTER TABLE ".TB_PREFIX."account_payments ALTER COLUMN ac_amount TYPE numeric(25, 6)";
     }
@@ -844,7 +844,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['150']['name'] = "Table = Invoice_items Field = quantity : change field type and length to decimal";
     $patch['150']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `quantity` `quantity` DECIMAL( 25, 6 ) NOT NULL DEFAULT '0' ";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
         $patch['150']['name'] = "Widen quantity field of invoice_items";
         $patch['150']['patch'] = "ALTER TABLE ".TB_PREFIX."invoice_items ALTER COLUMN quantity TYPE numeric(25, 6)";
     }
@@ -852,7 +852,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['151']['name'] = "Table = Invoice_items Field = unit_price : change field type and length to decimal";
     $patch['151']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `unit_price` `unit_price` DECIMAL( 25, 6 ) NULL DEFAULT '0.00' ";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
         $patch['151']['name'] = "Widen unit_price field of invoice_items";
         $patch['151']['patch'] = "ALTER TABLE ".TB_PREFIX."invoice_items ALTER COLUMN unit_price TYPE numeric(25, 6)";
     }
@@ -860,7 +860,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['152']['name'] = "Table = Invoice_items Field = tax : change field type and length to decimal";
     $patch['152']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `tax` `tax` DECIMAL( 25, 6 ) NULL DEFAULT '0.00' ";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
         $patch['152']['name'] = "Widen tax field of invoice_items";
         $patch['152']['patch'] = "ALTER TABLE ".TB_PREFIX."invoice_items ALTER COLUMN tax TYPE numeric(25, 6)";
     }
@@ -868,7 +868,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['153']['name'] = "Table = Invoice_items Field = tax_amount : change field type and length to decimal";
     $patch['153']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `tax_amount` `tax_amount` DECIMAL( 25, 6 ) NULL DEFAULT '0.00'";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
         $patch['153']['name'] = "Widen tax_amount field of invoice_items";
         $patch['153']['patch'] = "ALTER TABLE ".TB_PREFIX."invoice_items ALTER COLUMN tax_amount TYPE numeric(25, 6)";
     }
@@ -876,7 +876,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['154']['name'] = "Table = Invoice_items Field = gross_total : change field type and length to decimal";
     $patch['154']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `gross_total` `gross_total` DECIMAL( 25, 6 ) NULL DEFAULT '0.00'";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
         $patch['154']['name'] = "Widen gross_total field of invoice_items";
         $patch['154']['patch'] = "ALTER TABLE ".TB_PREFIX."invoice_items ALTER COLUMN gross_total TYPE numeric(25, 6)";
     }
@@ -884,7 +884,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['155']['name'] = "Table = Invoice_items Field = total : change field type and length to decimal";
     $patch['155']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` CHANGE `total` `total` DECIMAL( 25, 6 ) NULL DEFAULT '0.00' ";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
         $patch['155']['name'] = "Widen total field of invoice_items";
         $patch['155']['patch'] = "ALTER TABLE ".TB_PREFIX."invoice_items ALTER COLUMN total TYPE numeric(25, 6)";
     }
@@ -892,7 +892,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['156']['name'] = "Table = Products Field = unit_price : change field type and length to decimal";
     $patch['156']['patch'] = "ALTER TABLE `".TB_PREFIX."products` CHANGE `unit_price` `unit_price` DECIMAL( 25, 6 ) NULL DEFAULT '0.00'";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
         $patch['156']['name'] = "Widen unit_price field of products";
         $patch['156']['patch'] = "ALTER TABLE ".TB_PREFIX."products ALTER COLUMN unit_price TYPE numeric(25, 6)";
     }
@@ -900,7 +900,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['157']['name'] = "Table = Tax Field = quantity : change field type and length to decimal";
     $patch['157']['patch'] = "ALTER TABLE `".TB_PREFIX."tax` CHANGE `tax_percentage` `tax_percentage` DECIMAL( 25, 6 ) NULL DEFAULT '0.00'";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
         $patch['157']['name'] = "Widen tax_percentage field of tax";
         $patch['157']['patch'] = "ALTER TABLE ".TB_PREFIX."tax ALTER COLUMN tax_percentage TYPE numeric(25, 6)";
     }
@@ -908,7 +908,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['158']['name'] = "Rename table si_account_payments to si_payment";
     $patch['158']['patch'] = "RENAME TABLE `".TB_PREFIX."account_payments` TO  `".TB_PREFIX."payment`;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
         $patch['158']['patch'] = "RENAME TABLE `".TB_PREFIX."account_payments` TO  `".TB_PREFIX."payment`";
     }
     $patch['158']['date'] = "20081201";
@@ -916,7 +916,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['159']['name'] = "Add domain_id to payments table";
     $patch['159']['patch'] = "ALTER TABLE  `".TB_PREFIX."payment` ADD  `domain_id` INT NOT NULL ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
         $patch['159']['patch'] = "ALTER TABLE  `".TB_PREFIX."payment` ADD  `domain_id` INT NOT NULL ";
     }
     $patch['159']['date'] = "20081201";
@@ -924,7 +924,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['160']['name'] = "Add domain_id to tax table";
     $patch['160']['patch'] = "ALTER TABLE  `".TB_PREFIX."tax` ADD  `domain_id` INT NOT NULL ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
         $patch['160']['patch'] = "ALTER TABLE  `".TB_PREFIX."tax` ADD  `domain_id` INT NOT NULL ";
     }
     $patch['160']['date'] = "20081201";
@@ -932,7 +932,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['161']['name'] = "Change user table from si_users to si_user";
     $patch['161']['patch'] = "RENAME TABLE `".TB_PREFIX."users` TO  `".TB_PREFIX."user` ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
         $patch['161']['patch'] = "RENAME TABLE `".TB_PREFIX."users` TO  `".TB_PREFIX."user`";
     }
     $patch['161']['date'] = "20081201";
@@ -946,7 +946,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 		`tax_rate` DECIMAL( 25, 6 ) NOT NULL ,
 		`tax_amount` DECIMAL( 25, 6 ) NOT NULL
 		) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
 	    $patch['162']['patch'] = "CREATE TABLE `".TB_PREFIX."invoice_item_tax` (
 			`id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 			`invoice_item_id` INT( 11 ) NOT NULL ,
@@ -961,7 +961,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 	//do conversion
     $patch['163']['name'] = "Convert tax info in si_invoice_items to si_invoice_item_tax";
     $patch['163']['patch'] = "insert into `".TB_PREFIX."invoice_item_tax` (invoice_item_id, tax_id, tax_type, tax_rate, tax_amount) select id, tax_id, '%', tax, tax_amount from `".TB_PREFIX."invoice_items`;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
     	$patch['163']['patch'] = "insert into `".TB_PREFIX."invoice_item_tax` (invoice_item_id, tax_id, tax_type, tax_rate, tax_amount) select id, tax_id, '%', tax, tax_amount from `".TB_PREFIX."invoice_items;";
     }
     $patch['163']['date'] = "20081212";
@@ -969,42 +969,42 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['164']['name'] = "Add default tax id into products table";
     $patch['164']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `default_tax_id` INT( 11 ) NULL AFTER `unit_price` ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
     	$patch['164']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `default_tax_id` INT( 11 ) NULL AFTER `unit_price` ;";
     }
     $patch['164']['date'] = "20081212";
 
     $patch['165']['name'] = "Add default tax id 2 into products table";
     $patch['165']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `default_tax_id_2` INT( 11 ) NULL AFTER `default_tax_id` ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
     	$patch['165']['patch'] = "ALTER TABLE `".TB_PREFIX."products` ADD `default_tax_id_2` INT( 11 ) NULL AFTER `default_tax_id` ;";
     }
     $patch['165']['date'] = "20081212";
 
     $patch['166']['name'] = "Add default tax into product items";
     $patch['166']['patch'] = "update `".TB_PREFIX."products` set default_tax_id = (select value from `".TB_PREFIX."system_defaults` where name ='tax');";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
     	$patch['166']['patch'] = "update `".TB_PREFIX."products` set default_tax_id = (select value from `".TB_PREFIX."system_defaults` where name ='tax');";
     }
     $patch['166']['date'] = "20081212";
 
     $patch['167']['name'] = "Add default number of taxes per line item into system_defaults";
     $patch['167']['patch'] = "insert into `".TB_PREFIX."system_defaults` values ('','tax_per_line_item','1')";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
     	$patch['167']['patch'] = "insert into `".TB_PREFIX."system_defaults` values ('','tax_per_line_item','1')";
     }
     $patch['167']['date'] = "20081212";
 
     $patch['168']['name'] = "Add tax type";
     $patch['168']['patch'] = "ALTER TABLE `".TB_PREFIX."tax` ADD `type` VARCHAR( 1 ) NULL AFTER `tax_percentage` ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
 	    $patch['168']['patch'] = "ALTER TABLE `".TB_PREFIX."tax` ADD `type` VARCHAR( 1 ) NULL AFTER `tax_percentage` ;";
     }
     $patch['168']['date'] = "20081212";
 
     $patch['169']['name'] = "Set tax type on current taxes to %";
     $patch['169']['patch'] = "UPDATE `".TB_PREFIX."tax` SET `type` = '%' ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
 	    $patch['169']['patch'] = "UPDATE `".TB_PREFIX."tax` SET `type` = '%';";
     }
     $patch['169']['date'] = "20081212";
@@ -1015,63 +1015,63 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['170']['name'] = "Set domain_id on tax table to 1";
     $patch['170']['patch'] = "UPDATE `".TB_PREFIX."tax` SET `domain_id` = '1' ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
 	    $patch['170']['patch'] = "UPDATE `".TB_PREFIX."tax` SET `domain_id` = '1';";
     }
     $patch['170']['date'] = "20081229";
 
     $patch['171']['name'] = "Set domain_id on payment table to 1";
     $patch['171']['patch'] = "UPDATE `".TB_PREFIX."payment` SET `domain_id` = '1' ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
 	    $patch['171']['patch'] = "UPDATE `".TB_PREFIX."payment` SET `domain_id` = '1';";
     }
     $patch['171']['date'] = "20081229";
 
     $patch['172']['name'] = "Set domain_id on payment_types table to 1";
     $patch['172']['patch'] = "UPDATE `".TB_PREFIX."payment_types` SET `domain_id` = '1' ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
 	    $patch['172']['patch'] = "UPDATE `".TB_PREFIX."payment_types` SET `domain_id` = '1';";
     }
     $patch['172']['date'] = "20081229";
 
     $patch['173']['name'] = "Set domain_id on preference table to 1";
     $patch['173']['patch'] = "UPDATE `".TB_PREFIX."preferences` SET `domain_id` = '1' ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
 	    $patch['173']['patch'] = "UPDATE `".TB_PREFIX."preferences` SET `domain_id` = '1';";
     }
     $patch['173']['date'] = "20081229";
 
     $patch['174']['name'] = "Set domain_id on products table to 1";
     $patch['174']['patch'] = "UPDATE `".TB_PREFIX."products` SET `domain_id` = '1' ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
 	    $patch['174']['patch'] = "UPDATE `".TB_PREFIX."products` SET `domain_id` = '1';";
     }
     $patch['174']['date'] = "20081229";
 
     $patch['175']['name'] = "Set domain_id on biller table to 1";
     $patch['175']['patch'] = "UPDATE `".TB_PREFIX."biller` SET `domain_id` = '1' ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
 	    $patch['175']['patch'] = "UPDATE `".TB_PREFIX."biller` SET `domain_id` = '1';";
     }
     $patch['175']['date'] = "20081229";
 
     $patch['176']['name'] = "Set domain_id on invoices table to 1";
     $patch['176']['patch'] = "UPDATE `".TB_PREFIX."invoices` SET `domain_id` = '1' ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
 	    $patch['176']['patch'] = "UPDATE `".TB_PREFIX."invoices` SET `domain_id` = '1';";
     }
     $patch['176']['date'] = "20081229";
 
     $patch['177']['name'] = "Set domain_id on customers table to 1";
     $patch['177']['patch'] = "UPDATE `".TB_PREFIX."customers` SET `domain_id` = '1' ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
 	    $patch['177']['patch'] = "UPDATE `".TB_PREFIX."customers` SET `domain_id` = '1';";
     }
     $patch['177']['date'] = "20081229";
 
     $patch['178']['name'] = "Rename si_user.user_id to si_user.id";
     $patch['178']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_id` `id` int(11) ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
 	    $patch['178']['patch'] = "UPDATE `".TB_PREFIX."user` CHANGE `user_id` `id` int(11);";
     }
     $patch['178']['date'] = "20081229";
@@ -1079,7 +1079,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['179']['name'] = "Rename si_user.user_email to si_user.email";
     $patch['179']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_email` `email` VARCHAR( 191 );";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
 	    $patch['179']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_email` `email` VARCHAR( 191 );";
     }
     $patch['179']['date'] = "20081229";
@@ -1087,7 +1087,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['180']['name'] = "Rename si_user.user_name to si_user.name";
     $patch['180']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_name` `name` VARCHAR( 255 );";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
 	    $patch['180']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_name` `name` VARCHAR( 255 );";
     }
     $patch['180']['date'] = "20081229";
@@ -1095,7 +1095,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['181']['name'] = "Rename si_user.user_role_id to si_user.role_id";
     $patch['181']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_role_id` `role_id` int(11);";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
 	    $patch['181']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_role_id` `role_id` int(11);";
     }
     $patch['181']['date'] = "20081229";
@@ -1103,7 +1103,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['182']['name'] = "Rename si_user.user_domain_id to si_user.domain_id";
     $patch['182']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_domain_id` `domain_id` int(11) ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
 	    $patch['182']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_domain_id` `domain_id` int(11) ;";
     }
     $patch['182']['date'] = "20081229";
@@ -1111,7 +1111,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['183']['name'] = "Rename si_user.user_password to si_user.password";
     $patch['183']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_password` `password` VARCHAR( 255 )  ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
 	    $patch['183']['patch'] = "ALTER TABLE `".TB_PREFIX."user` CHANGE `user_password` `password` VARCHAR( 255 ) ;";
     }
     $patch['183']['date'] = "20081229";
@@ -1119,7 +1119,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['184']['name'] = "Drop name column from si_user table";
     $patch['184']['patch'] = "ALTER TABLE `".TB_PREFIX."user` DROP `name`  ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
 	    $patch['184']['patch'] = "ALTER TABLE `".TB_PREFIX."user` DROP `name`  ;";
     }
     $patch['184']['date'] = "20081230";
@@ -1127,7 +1127,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['185']['name'] = "Drop old defaults table";
     $patch['185']['patch'] = "DROP TABLE `".TB_PREFIX."defaults` ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
 	    $patch['185']['patch'] = "DROP TABLE `".TB_PREFIX."defaults`  ;";
     }
     $patch['185']['date'] = "20081230";
@@ -1135,7 +1135,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['186']['name'] = "Set domain_id on customers table to 1";
     $patch['186']['patch'] = "ALTER TABLE  `".TB_PREFIX."custom_fields` ADD  `domain_id` INT NOT NULL ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
 	    $patch['186']['patch'] = "ALTER TABLE  `".TB_PREFIX."custom_fields` ADD  `domain_id` INT NOT NULL ;";
     }
     $patch['186']['date'] = "20081230";
@@ -1143,7 +1143,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['187']['name'] = "Set domain_id on custom_feilds table to 1";
     $patch['187']['patch'] = "UPDATE `".TB_PREFIX."custom_fields` SET `domain_id` = '1' ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
 	    $patch['187']['patch'] = "UPDATE `".TB_PREFIX."custom_fields` SET `domain_id` = '1';";
     }
     $patch['187']['date'] = "20081230";
@@ -1151,7 +1151,7 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
 
     $patch['188']['name'] = "Drop tax_id column from si_invoice_items table";
     $patch['188']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` DROP `tax_id`  ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
 	    $patch['188']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` DROP `tax_id`  ;";
     }
     $patch['188']['date'] = "20090118";
@@ -1159,56 +1159,56 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
     //TODO: postgres and sqlite patch
     $patch['189']['name'] = "Drop tax column from si_invoice_items table";
     $patch['189']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` DROP `tax`  ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
 	    $patch['189']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` DROP `tax`  ;";
     }
     $patch['189']['date'] = "20090118";
 
     $patch['190']['name'] = "Insert user role - user";
     $patch['190']['patch'] = "INSERT INTO ".TB_PREFIX."user_role (name) VALUES ('user');";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
         $patch['190']['patch'] = "INSERT INTO ".TB_PREFIX."user_role (name) VALUES ('user');";
     }
     $patch['190']['date'] = "20090215";
 
     $patch['191']['name'] = "Insert user role - viewer";
 	$patch['191']['patch'] = "INSERT INTO ".TB_PREFIX."user_role (name) VALUES ('viewer');";
-	if ($config->database->adapter == "pdo_pgsql") {
+	if ($db_server == 'pgsql') {
 		$patch['191']['patch'] = "INSERT INTO ".TB_PREFIX."user_role (name) VALUES ('viewer');";
 	}
 	$patch['191']['date'] = "20090215";
 
     $patch['192']['name'] = "Insert user role - customer";
     $patch['192']['patch'] = "INSERT INTO ".TB_PREFIX."user_role (name) VALUES ('customer');";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
         $patch['192']['patch'] = "INSERT INTO ".TB_PREFIX."user_role (name) VALUES ('customer');";
     }
     $patch['192']['date'] = "20090215";
 
     $patch['193']['name'] = "Insert user role - biller";
     $patch['193']['patch'] = "INSERT INTO ".TB_PREFIX."user_role (name) VALUES ('biller');";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
         $patch['193']['patch'] = "INSERT INTO ".TB_PREFIX."user_role (name) VALUES ('biller');";
     }
     $patch['193']['date'] = "20090215";
 
     $patch['194']['name'] = "User table - auto increment";
     $patch['194']['patch'] = "ALTER TABLE ".TB_PREFIX."user CHANGE id id INT( 11 ) NOT NULL AUTO_INCREMENT;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
         $patch['194']['patch'] = "ALTER TABLE ".TB_PREFIX."user CHANGE id id INT( 11 ) NOT NULL AUTO_INCREMENT";
     }
     $patch['194']['date'] = "20090215";
 
     $patch['195']['name'] = "User table - add enabled field";
     $patch['195']['patch'] = "ALTER TABLE ".TB_PREFIX."user ADD enabled INT( 1 ) NOT NULL ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
         $patch['195']['patch'] = "ALTER TABLE ".TB_PREFIX."user ADD enabled INT( 1 ) NOT NULL ;";
     }
     $patch['195']['date'] = "20090215";
 
     $patch['196']['name'] = "User table - make all existing users enabled";
     $patch['196']['patch'] = "UPDATE ".TB_PREFIX."user SET enabled = 1 ;";
-    if ($config->database->adapter == "pdo_pgsql") {
+    if ($db_server == 'pgsql') {
         $patch['196']['patch'] = "UPDATE ".TB_PREFIX."user SET enabled = 1;";
     }
     $patch['196']['date'] = "20090217";
@@ -1362,7 +1362,7 @@ ADD `language` VARCHAR( 255 ) NULL ;";
             $patch['225']['patch'] = "ALTER TABLE  `".TB_PREFIX."biller` ADD `paypal_notify_url` VARCHAR( 255 ) NULL AFTER  `paypal_business_name`";
             $patch['225']['date'] = "20100209";
 
-            $patch['226']['name'] = "Define currency in preferences (now resolved via si_currencies)";
+            $patch['226']['name'] = "Define currency in preferences (now resolved via si_currency)";
             $patch['226']['patch'] = "";
             $patch['226']['date'] = "20100209";
 
@@ -1402,7 +1402,7 @@ ADD `language` VARCHAR( 255 ) NULL ;";
         $patch['231']['patch'] = "ALTER TABLE  `".TB_PREFIX."payment` ADD `online_payment_id` VARCHAR( 255 ) NULL AFTER  `domain_id`";
         $patch['231']['date'] = "20100226";
 
-        $patch['232']['name'] = "Define currency display in preferences (now resolved via si_currencies)";
+        $patch['232']['name'] = "Define currency display in preferences (now resolved via si_currency)";
         $patch['232']['patch'] = "";
         $patch['232']['date'] = "20100227";
 
@@ -1715,7 +1715,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['293']['date']  = "20161004";
 
     $patch['294']['name']  = "Add name field to user table for display name";
-    if ($config->database->adapter === "pdo_pgsql") {
+    if ($db_server === 'pgsql') {
         $patch['294']['patch'] = "ALTER TABLE ".TB_PREFIX."user ADD COLUMN name VARCHAR(255) NULL;";
     } else {
         $patch['294']['patch'] = "ALTER TABLE `".TB_PREFIX."user` ADD COLUMN `name` VARCHAR(255) NULL AFTER `email`;";
@@ -1736,7 +1736,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     // --- Category A: composite PK where auto-increment column is not leftmost --
 
     $patch['295']['name']  = "Migrate si_biller to InnoDB: add KEY id for AUTO_INCREMENT";
-    if ($config->database->adapter === "pdo_mysql") {
+    if ($db_server === 'mysql') {
         $patch['295']['patch'] = mysqlPatchAlterInnoDbWithKeyIfMissing('biller', 'id', 'id');
     } else {
         $patch['295']['patch'] = "SELECT 1";
@@ -1744,7 +1744,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['295']['date']  = "20260408";
 
     $patch['296']['name']  = "Migrate si_cron to InnoDB: add KEY id for AUTO_INCREMENT";
-    if ($config->database->adapter === "pdo_mysql") {
+    if ($db_server === 'mysql') {
         $patch['296']['patch'] = mysqlPatchAlterInnoDbWithKeyIfMissing('cron', 'id', 'id');
     } else {
         $patch['296']['patch'] = "SELECT 1";
@@ -1752,7 +1752,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['296']['date']  = "20260408";
 
     $patch['297']['name']  = "Migrate si_cron_log to InnoDB: add KEY id for AUTO_INCREMENT";
-    if ($config->database->adapter === "pdo_mysql") {
+    if ($db_server === 'mysql') {
         $patch['297']['patch'] = mysqlPatchAlterInnoDbWithKeyIfMissing('cron_log', 'id', 'id');
     } else {
         $patch['297']['patch'] = "SELECT 1";
@@ -1760,7 +1760,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['297']['date']  = "20260408";
 
     $patch['298']['name']  = "Migrate si_customers to InnoDB: add KEY id for AUTO_INCREMENT";
-    if ($config->database->adapter === "pdo_mysql") {
+    if ($db_server === 'mysql') {
         $patch['298']['patch'] = mysqlPatchAlterInnoDbWithKeyIfMissing('customers', 'id', 'id');
     } else {
         $patch['298']['patch'] = "SELECT 1";
@@ -1768,7 +1768,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['298']['date']  = "20260408";
 
     $patch['299']['name']  = "Migrate si_inventory to InnoDB: add KEY id for AUTO_INCREMENT";
-    if ($config->database->adapter === "pdo_mysql") {
+    if ($db_server === 'mysql') {
         $patch['299']['patch'] = mysqlPatchAlterInnoDbWithKeyIfMissing('inventory', 'id', 'id');
     } else {
         $patch['299']['patch'] = "SELECT 1";
@@ -1776,7 +1776,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['299']['date']  = "20260408";
 
     $patch['300']['name']  = "Migrate si_invoices to InnoDB: add KEY id for AUTO_INCREMENT";
-    if ($config->database->adapter === "pdo_mysql") {
+    if ($db_server === 'mysql') {
         $patch['300']['patch'] = mysqlPatchAlterInnoDbWithKeyIfMissing('invoices', 'id', 'id');
     } else {
         $patch['300']['patch'] = "SELECT 1";
@@ -1784,7 +1784,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['300']['date']  = "20260408";
 
     $patch['301']['name']  = "Migrate si_payment to InnoDB: add KEY id for AUTO_INCREMENT";
-    if ($config->database->adapter === "pdo_mysql") {
+    if ($db_server === 'mysql') {
         $patch['301']['patch'] = mysqlPatchAlterInnoDbWithKeyIfMissing('payment', 'id', 'id');
     } else {
         $patch['301']['patch'] = "SELECT 1";
@@ -1792,7 +1792,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['301']['date']  = "20260408";
 
     $patch['302']['name']  = "Migrate si_payment_types to InnoDB: add KEY pt_id for AUTO_INCREMENT";
-    if ($config->database->adapter === "pdo_mysql") {
+    if ($db_server === 'mysql') {
         $patch['302']['patch'] = mysqlPatchAlterInnoDbWithKeyIfMissing('payment_types', 'pt_id', 'pt_id');
     } else {
         $patch['302']['patch'] = "SELECT 1";
@@ -1800,7 +1800,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['302']['date']  = "20260408";
 
     $patch['303']['name']  = "Migrate si_preferences to InnoDB: add KEY pref_id for AUTO_INCREMENT";
-    if ($config->database->adapter === "pdo_mysql") {
+    if ($db_server === 'mysql') {
         $patch['303']['patch'] = mysqlPatchAlterInnoDbWithKeyIfMissing('preferences', 'pref_id', 'pref_id');
     } else {
         $patch['303']['patch'] = "SELECT 1";
@@ -1808,7 +1808,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['303']['date']  = "20260408";
 
     $patch['304']['name']  = "Migrate si_products to InnoDB: add KEY id for AUTO_INCREMENT";
-    if ($config->database->adapter === "pdo_mysql") {
+    if ($db_server === 'mysql') {
         $patch['304']['patch'] = mysqlPatchAlterInnoDbWithKeyIfMissing('products', 'id', 'id');
     } else {
         $patch['304']['patch'] = "SELECT 1";
@@ -1816,7 +1816,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['304']['date']  = "20260408";
 
     $patch['305']['name']  = "Migrate si_system_defaults to InnoDB: add KEY id for AUTO_INCREMENT";
-    if ($config->database->adapter === "pdo_mysql") {
+    if ($db_server === 'mysql') {
         $patch['305']['patch'] = mysqlPatchAlterInnoDbWithKeyIfMissing('system_defaults', 'id', 'id');
     } else {
         $patch['305']['patch'] = "SELECT 1";
@@ -1824,7 +1824,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['305']['date']  = "20260408";
 
     $patch['306']['name']  = "Migrate si_tax to InnoDB: add KEY tax_id for AUTO_INCREMENT";
-    if ($config->database->adapter === "pdo_mysql") {
+    if ($db_server === 'mysql') {
         $patch['306']['patch'] = mysqlPatchAlterInnoDbWithKeyIfMissing('tax', 'tax_id', 'tax_id');
     } else {
         $patch['306']['patch'] = "SELECT 1";
@@ -1832,7 +1832,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['306']['date']  = "20260408";
 
     $patch['307']['name']  = "Migrate si_user to InnoDB: add KEY id for AUTO_INCREMENT";
-    if ($config->database->adapter === "pdo_mysql") {
+    if ($db_server === 'mysql') {
         $patch['307']['patch'] = mysqlPatchAlterInnoDbWithKeyIfMissing('user', 'id', 'id');
     } else {
         $patch['307']['patch'] = "SELECT 1";
@@ -1843,7 +1843,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     // No KEY needed; ENGINE change only.
 
     $patch['308']['name']  = "Migrate si_custom_fields to InnoDB";
-    if ($config->database->adapter === "pdo_mysql") {
+    if ($db_server === 'mysql') {
         $patch['308']['patch'] = "ALTER TABLE `".TB_PREFIX."custom_fields` ENGINE=InnoDB";
     } else {
         $patch['308']['patch'] = "SELECT 1";
@@ -1851,7 +1851,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['308']['date']  = "20260408";
 
     $patch['309']['name']  = "Migrate si_extensions to InnoDB";
-    if ($config->database->adapter === "pdo_mysql") {
+    if ($db_server === 'mysql') {
         $patch['309']['patch'] = "ALTER TABLE `".TB_PREFIX."extensions` ENGINE=InnoDB";
     } else {
         $patch['309']['patch'] = "SELECT 1";
@@ -1859,7 +1859,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['309']['date']  = "20260408";
 
     $patch['310']['name']  = "Migrate si_log to InnoDB";
-    if ($config->database->adapter === "pdo_mysql") {
+    if ($db_server === 'mysql') {
         $patch['310']['patch'] = "ALTER TABLE `".TB_PREFIX."log` ENGINE=InnoDB";
     } else {
         $patch['310']['patch'] = "SELECT 1";
@@ -1869,7 +1869,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     // --- Category C: single-column PK - InnoDB already compatible, ENGINE change only --
 
     $patch['311']['name']  = "Migrate si_invoice_item_tax to InnoDB";
-    if ($config->database->adapter === "pdo_mysql") {
+    if ($db_server === 'mysql') {
         $patch['311']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_item_tax` ENGINE=InnoDB";
     } else {
         $patch['311']['patch'] = "SELECT 1";
@@ -1877,7 +1877,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['311']['date']  = "20260408";
 
     $patch['312']['name']  = "Migrate si_invoice_items to InnoDB";
-    if ($config->database->adapter === "pdo_mysql") {
+    if ($db_server === 'mysql') {
         $patch['312']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_items` ENGINE=InnoDB";
     } else {
         $patch['312']['patch'] = "SELECT 1";
@@ -1885,7 +1885,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['312']['date']  = "20260408";
 
     $patch['313']['name']  = "Migrate si_invoice_type to InnoDB";
-    if ($config->database->adapter === "pdo_mysql") {
+    if ($db_server === 'mysql') {
         $patch['313']['patch'] = "ALTER TABLE `".TB_PREFIX."invoice_type` ENGINE=InnoDB";
     } else {
         $patch['313']['patch'] = "SELECT 1";
@@ -1893,7 +1893,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['313']['date']  = "20260408";
 
     $patch['314']['name']  = "Migrate si_index to InnoDB";
-    if ($config->database->adapter === "pdo_mysql") {
+    if ($db_server === 'mysql') {
         $patch['314']['patch'] = "ALTER TABLE `".TB_PREFIX."index` ENGINE=InnoDB";
     } else {
         $patch['314']['patch'] = "SELECT 1";
@@ -1901,7 +1901,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['314']['date']  = "20260408";
 
     $patch['315']['name']  = "Migrate si_products_attribute_type to InnoDB";
-    if ($config->database->adapter === "pdo_mysql") {
+    if ($db_server === 'mysql') {
         $patch['315']['patch'] = "ALTER TABLE `".TB_PREFIX."products_attribute_type` ENGINE=InnoDB";
     } else {
         $patch['315']['patch'] = "SELECT 1";
@@ -1909,7 +1909,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['315']['date']  = "20260408";
 
     $patch['316']['name']  = "Migrate si_products_attributes to InnoDB";
-    if ($config->database->adapter === "pdo_mysql") {
+    if ($db_server === 'mysql') {
         $patch['316']['patch'] = "ALTER TABLE `".TB_PREFIX."products_attributes` ENGINE=InnoDB";
     } else {
         $patch['316']['patch'] = "SELECT 1";
@@ -1917,7 +1917,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['316']['date']  = "20260408";
 
     $patch['317']['name']  = "Migrate si_products_values to InnoDB";
-    if ($config->database->adapter === "pdo_mysql") {
+    if ($db_server === 'mysql') {
         $patch['317']['patch'] = "ALTER TABLE `".TB_PREFIX."products_values` ENGINE=InnoDB";
     } else {
         $patch['317']['patch'] = "SELECT 1";
@@ -1925,7 +1925,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['317']['date']  = "20260408";
 
     $patch['318']['name']  = "Migrate si_sql_patchmanager to InnoDB";
-    if ($config->database->adapter === "pdo_mysql") {
+    if ($db_server === 'mysql') {
         $patch['318']['patch'] = "ALTER TABLE `".TB_PREFIX."sql_patchmanager` ENGINE=InnoDB";
     } else {
         $patch['318']['patch'] = "SELECT 1";
@@ -1933,7 +1933,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['318']['date']  = "20260408";
 
     $patch['319']['name']  = "Migrate si_user_domain to InnoDB";
-    if ($config->database->adapter === "pdo_mysql") {
+    if ($db_server === 'mysql') {
         $patch['319']['patch'] = "ALTER TABLE `".TB_PREFIX."user_domain` ENGINE=InnoDB";
     } else {
         $patch['319']['patch'] = "SELECT 1";
@@ -1941,7 +1941,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['319']['date']  = "20260408";
 
     $patch['320']['name']  = "Migrate si_user_role to InnoDB";
-    if ($config->database->adapter === "pdo_mysql") {
+    if ($db_server === 'mysql') {
         $patch['320']['patch'] = "ALTER TABLE `".TB_PREFIX."user_role` ENGINE=InnoDB";
     } else {
         $patch['320']['patch'] = "SELECT 1";
@@ -1949,14 +1949,14 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['320']['date']  = "20260408";
 
     $patch['321']['name']  = "Add default export template system default";
-    switch ($config->database->adapter) {
-        case "pdo_pgsql":
+    switch ($db_server) {
+        case 'pgsql':
             $patch['321']['patch'] = "INSERT INTO ".TB_PREFIX."system_defaults (name, value, domain_id, extension_id) VALUES ('export_template', 'export', 1, 0) ON CONFLICT (domain_id, name) DO NOTHING";
             break;
-        case "pdo_sqlite":
+        case 'sqlite':
             $patch['321']['patch'] = "INSERT OR IGNORE INTO ".TB_PREFIX."system_defaults (name, value, domain_id, extension_id) VALUES ('export_template', 'export', 1, 0)";
             break;
-        case "pdo_mysql":
+        case 'mysql':
         default:
             $patch['321']['patch'] = "INSERT INTO ".TB_PREFIX."system_defaults (id, name, value, domain_id, extension_id) VALUES (NULL, 'export_template', 'export', 1, 0) ON DUPLICATE KEY UPDATE value = value";
             break;
@@ -1964,14 +1964,14 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['321']['date']  = "20260410";
 
     $patch['322']['name']  = "Add precision to system_defaults";
-    switch ($config->database->adapter) {
-        case "pdo_pgsql":
+    switch ($db_server) {
+        case 'pgsql':
             $patch['322']['patch'] = "INSERT INTO ".TB_PREFIX."system_defaults (name, value, domain_id, extension_id) VALUES ('precision', '2', 1, 0) ON CONFLICT (domain_id, name) DO NOTHING";
             break;
-        case "pdo_sqlite":
+        case 'sqlite':
             $patch['322']['patch'] = "INSERT OR IGNORE INTO ".TB_PREFIX."system_defaults (name, value, domain_id, extension_id) VALUES ('precision', '2', 1, 0)";
             break;
-        case "pdo_mysql":
+        case 'mysql':
         default:
             $patch['322']['patch'] = "INSERT INTO ".TB_PREFIX."system_defaults (id, name, value, domain_id, extension_id) VALUES (NULL, 'precision', '2', 1, 0) ON DUPLICATE KEY UPDATE value = value";
             break;
@@ -1979,14 +1979,14 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['322']['date']  = "20260411";
 
     $patch['323']['name']  = "Add confirm_delete_line_item to system_defaults";
-    switch ($config->database->adapter) {
-        case "pdo_pgsql":
+    switch ($db_server) {
+        case 'pgsql':
             $patch['323']['patch'] = "INSERT INTO ".TB_PREFIX."system_defaults (name, value, domain_id, extension_id) VALUES ('confirm_delete_line_item', '0', 1, 0) ON CONFLICT (domain_id, name) DO NOTHING";
             break;
-        case "pdo_sqlite":
+        case 'sqlite':
             $patch['323']['patch'] = "INSERT OR IGNORE INTO ".TB_PREFIX."system_defaults (name, value, domain_id, extension_id) VALUES ('confirm_delete_line_item', '0', 1, 0)";
             break;
-        case "pdo_mysql":
+        case 'mysql':
         default:
             $patch['323']['patch'] = "INSERT INTO ".TB_PREFIX."system_defaults (id, name, value, domain_id, extension_id) VALUES (NULL, 'confirm_delete_line_item', '0', 1, 0) ON DUPLICATE KEY UPDATE value = value";
             break;
@@ -1998,8 +1998,8 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['324']['date']  = "20260411";
 
     $patch['325']['name']  = "Ensure PDF margin/papersize settings exist in system_defaults";
-    switch ($config->database->adapter) {
-        case "pdo_pgsql":
+    switch ($db_server) {
+        case 'pgsql':
             $patch['325']['patch'] = "
                 INSERT INTO ".TB_PREFIX."system_defaults (name, value, domain_id, extension_id) VALUES ('pdfpapersize', 'A4', 1, 0) ON CONFLICT (domain_id, name) DO NOTHING;
                 INSERT INTO ".TB_PREFIX."system_defaults (name, value, domain_id, extension_id) VALUES ('pdfleftmargin', '15', 1, 0) ON CONFLICT (domain_id, name) DO NOTHING;
@@ -2010,7 +2010,7 @@ PRIMARY KEY ( `domain_id`, `id` )
                 INSERT INTO ".TB_PREFIX."system_defaults (name, value, domain_id, extension_id) VALUES ('wordprocessor', 'docx', 1, 0) ON CONFLICT (domain_id, name) DO NOTHING;
             ";
             break;
-        case "pdo_sqlite":
+        case 'sqlite':
             $patch['325']['patch'] = "
                 INSERT OR IGNORE INTO ".TB_PREFIX."system_defaults (name, value, domain_id, extension_id) VALUES ('pdfpapersize', 'A4', 1, 0);
                 INSERT OR IGNORE INTO ".TB_PREFIX."system_defaults (name, value, domain_id, extension_id) VALUES ('pdfleftmargin', '15', 1, 0);
@@ -2021,7 +2021,7 @@ PRIMARY KEY ( `domain_id`, `id` )
                 INSERT OR IGNORE INTO ".TB_PREFIX."system_defaults (name, value, domain_id, extension_id) VALUES ('wordprocessor', 'docx', 1, 0);
             ";
             break;
-        case "pdo_mysql":
+        case 'mysql':
         default:
             $patch['325']['patch'] = "
                 INSERT INTO ".TB_PREFIX."system_defaults (id, name, value, domain_id, extension_id) VALUES (NULL, 'pdfpapersize', 'A4', 1, 0) ON DUPLICATE KEY UPDATE value = value;
@@ -2037,12 +2037,12 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['325']['date']  = "20260411";
 
     $patch['326']['name']  = "Add composite index on invoices (domain_id, preference_id, date) for reports and dashboard";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
+    switch ($db_server) {
+        case 'pgsql':
+        case 'sqlite':
             $patch['326']['patch'] = 'CREATE INDEX IF NOT EXISTS si_inv_dom_pref_date ON ' . TB_PREFIX . 'invoices (domain_id, preference_id, date)';
             break;
-        case 'pdo_mysql':
+        case 'mysql':
         default:
             $patch['326']['patch'] = checkMysqlIndexExists(TB_PREFIX . 'invoices', 'si_inv_dom_pref_date')
                 ? 'SELECT 1'
@@ -2052,12 +2052,12 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['326']['date']  = '20260412';
 
     $patch['327']['name']  = "Add composite index on invoice_items (domain_id, invoice_id) for domain-scoped line lookups";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
+    switch ($db_server) {
+        case 'pgsql':
+        case 'sqlite':
             $patch['327']['patch'] = 'CREATE INDEX IF NOT EXISTS si_ii_dom_invoice ON ' . TB_PREFIX . 'invoice_items (domain_id, invoice_id)';
             break;
-        case 'pdo_mysql':
+        case 'mysql':
         default:
             $patch['327']['patch'] = checkMysqlIndexExists(TB_PREFIX . 'invoice_items', 'si_ii_dom_invoice')
                 ? 'SELECT 1'
@@ -2067,12 +2067,12 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['327']['date']  = '20260412';
 
     $patch['328']['name']  = "Add composite index on payment (domain_id, ac_date) for payment reports";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
+    switch ($db_server) {
+        case 'pgsql':
+        case 'sqlite':
             $patch['328']['patch'] = 'CREATE INDEX IF NOT EXISTS si_pay_dom_ac_date ON ' . TB_PREFIX . 'payment (domain_id, ac_date)';
             break;
-        case 'pdo_mysql':
+        case 'mysql':
         default:
             $patch['328']['patch'] = checkMysqlIndexExists(TB_PREFIX . 'payment', 'si_pay_dom_ac_date')
                 ? 'SELECT 1'
@@ -2082,12 +2082,12 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['328']['date']  = '20260412';
 
     $patch['329']['name']  = 'Add composite index on payment (domain_id, ac_inv_id) for invoice list aggregates';
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
+    switch ($db_server) {
+        case 'pgsql':
+        case 'sqlite':
             $patch['329']['patch'] = 'CREATE INDEX IF NOT EXISTS si_pay_dom_ac_inv ON ' . TB_PREFIX . 'payment (domain_id, ac_inv_id)';
             break;
-        case 'pdo_mysql':
+        case 'mysql':
         default:
             $patch['329']['patch'] = checkMysqlIndexExists(TB_PREFIX . 'payment', 'si_pay_dom_ac_inv')
                 ? 'SELECT 1'
@@ -2097,14 +2097,14 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['329']['date']  = '20260413';
 
     $patch['330']['name'] = "Add domain_id to products_attributes for multi-tenancy";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
+    switch ($db_server) {
+        case 'pgsql':
+        case 'sqlite':
             $patch['330']['patch'] = checkFieldExists(TB_PREFIX.'products_attributes', 'domain_id')
                 ? 'SELECT 1'
                 : "ALTER TABLE ".TB_PREFIX."products_attributes ADD COLUMN domain_id INT NOT NULL DEFAULT 1";
             break;
-        case 'pdo_mysql':
+        case 'mysql':
         default:
             $patch['330']['patch'] = checkFieldExists(TB_PREFIX.'products_attributes', 'domain_id')
                 ? 'SELECT 1'
@@ -2114,14 +2114,14 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['330']['date'] = "20260416";
 
     $patch['331']['name'] = "Add domain_id to products_values for multi-tenancy";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
+    switch ($db_server) {
+        case 'pgsql':
+        case 'sqlite':
             $patch['331']['patch'] = checkFieldExists(TB_PREFIX.'products_values', 'domain_id')
                 ? 'SELECT 1'
                 : "ALTER TABLE ".TB_PREFIX."products_values ADD COLUMN domain_id INT NOT NULL DEFAULT 1";
             break;
-        case 'pdo_mysql':
+        case 'mysql':
         default:
             $patch['331']['patch'] = checkFieldExists(TB_PREFIX.'products_values', 'domain_id')
                 ? 'SELECT 1'
@@ -2131,14 +2131,14 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['331']['date'] = "20260416";
 
     $patch['332']['name'] = "si_user: add auth_staff_email for staff/biller login identity";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
+    switch ($db_server) {
+        case 'pgsql':
+        case 'sqlite':
             $patch['332']['patch'] = checkFieldExists(TB_PREFIX . 'user', 'auth_staff_email')
                 ? 'SELECT 1'
                 : 'ALTER TABLE ' . TB_PREFIX . 'user ADD COLUMN auth_staff_email VARCHAR(255) NULL';
             break;
-        case 'pdo_mysql':
+        case 'mysql':
         default:
             $patch['332']['patch'] = checkFieldExists(TB_PREFIX . 'user', 'auth_staff_email')
                 ? 'SELECT 1'
@@ -2148,14 +2148,14 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['332']['date'] = "20260418";
 
     $patch['333']['name'] = "si_user: add auth_customer_key for per-domain customer login identity";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
+    switch ($db_server) {
+        case 'pgsql':
+        case 'sqlite':
             $patch['333']['patch'] = checkFieldExists(TB_PREFIX . 'user', 'auth_customer_key')
                 ? 'SELECT 1'
                 : 'ALTER TABLE ' . TB_PREFIX . 'user ADD COLUMN auth_customer_key VARCHAR(384) NULL';
             break;
-        case 'pdo_mysql':
+        case 'mysql':
         default:
             $patch['333']['patch'] = checkFieldExists(TB_PREFIX . 'user', 'auth_customer_key')
                 ? 'SELECT 1'
@@ -2165,8 +2165,8 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['333']['date'] = "20260418";
 
     $patch['334']['name'] = "si_user: backfill auth_staff_email and auth_customer_key";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
+    switch ($db_server) {
+        case 'pgsql':
             $patch['334']['patch'] = "UPDATE " . TB_PREFIX . "user SET
                 auth_staff_email = CASE
                     WHEN role_id IN (1,2,3,4,6,7) AND email IS NOT NULL AND TRIM(email) <> '' THEN LOWER(TRIM(email))
@@ -2175,7 +2175,7 @@ PRIMARY KEY ( `domain_id`, `id` )
                     WHEN role_id = 5 AND email IS NOT NULL AND TRIM(email) <> '' THEN domain_id::text || ':' || LOWER(TRIM(email))
                     ELSE NULL END";
             break;
-        case 'pdo_sqlite':
+        case 'sqlite':
             $patch['334']['patch'] = "UPDATE " . TB_PREFIX . "user SET
                 auth_staff_email = CASE
                     WHEN role_id IN (1,2,3,4,6,7) AND email IS NOT NULL AND TRIM(email) <> '' THEN LOWER(TRIM(email))
@@ -2184,7 +2184,7 @@ PRIMARY KEY ( `domain_id`, `id` )
                     WHEN role_id = 5 AND email IS NOT NULL AND TRIM(email) <> '' THEN domain_id || ':' || LOWER(TRIM(email))
                     ELSE NULL END";
             break;
-        case 'pdo_mysql':
+        case 'mysql':
         default:
             $patch['334']['patch'] = "UPDATE " . TB_PREFIX . "user SET
                 auth_staff_email = CASE
@@ -2198,14 +2198,14 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['334']['date'] = "20260418";
 
     $patch['335']['name'] = "si_user: drop global unique on email (replaced by auth identity columns)";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
+    switch ($db_server) {
+        case 'pgsql':
             $patch['335']['patch'] = 'ALTER TABLE ' . TB_PREFIX . 'user DROP CONSTRAINT IF EXISTS ' . TB_PREFIX . 'user_email_key';
             break;
-        case 'pdo_sqlite':
+        case 'sqlite':
             $patch['335']['patch'] = 'SELECT 1';
             break;
-        case 'pdo_mysql':
+        case 'mysql':
         default:
             $patch['335']['patch'] = checkMysqlIndexExists(TB_PREFIX . 'user', 'UnqEMail')
                 ? 'ALTER TABLE `' . TB_PREFIX . 'user` DROP INDEX `UnqEMail`'
@@ -2215,14 +2215,14 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['335']['date'] = "20260418";
 
     $patch['336']['name'] = "si_user: unique index on auth_staff_email (staff/biller global identity)";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
+    switch ($db_server) {
+        case 'pgsql':
             $patch['336']['patch'] = 'CREATE UNIQUE INDEX IF NOT EXISTS ' . TB_PREFIX . 'user_unq_auth_staff_email ON ' . TB_PREFIX . 'user (auth_staff_email)';
             break;
-        case 'pdo_sqlite':
+        case 'sqlite':
             $patch['336']['patch'] = 'CREATE UNIQUE INDEX IF NOT EXISTS ' . TB_PREFIX . 'user_unq_auth_staff_email ON ' . TB_PREFIX . 'user (auth_staff_email)';
             break;
-        case 'pdo_mysql':
+        case 'mysql':
         default:
             $patch['336']['patch'] = checkMysqlIndexExists(TB_PREFIX . 'user', 'UnqAuthStaffEmail')
                 ? 'SELECT 1'
@@ -2232,14 +2232,14 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['336']['date'] = "20260418";
 
     $patch['337']['name'] = "si_user: unique index on auth_customer_key (customer per-domain identity)";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
+    switch ($db_server) {
+        case 'pgsql':
             $patch['337']['patch'] = 'CREATE UNIQUE INDEX IF NOT EXISTS ' . TB_PREFIX . 'user_unq_auth_customer_key ON ' . TB_PREFIX . 'user (auth_customer_key)';
             break;
-        case 'pdo_sqlite':
+        case 'sqlite':
             $patch['337']['patch'] = 'CREATE UNIQUE INDEX IF NOT EXISTS ' . TB_PREFIX . 'user_unq_auth_customer_key ON ' . TB_PREFIX . 'user (auth_customer_key)';
             break;
-        case 'pdo_mysql':
+        case 'mysql':
         default:
             $patch['337']['patch'] = checkMysqlIndexExists(TB_PREFIX . 'user', 'UnqAuthCustomerKey')
                 ? 'SELECT 1'
@@ -2269,14 +2269,14 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['342']['date'] = "20260419";
 
     $patch['343']['name'] = "si_user: preferred_language for per-user UI language override";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
+    switch ($db_server) {
+        case 'pgsql':
+        case 'sqlite':
             $patch['343']['patch'] = checkFieldExists(TB_PREFIX . 'user', 'preferred_language')
                 ? 'SELECT 1'
                 : 'ALTER TABLE ' . TB_PREFIX . 'user ADD COLUMN preferred_language VARCHAR(32) NULL';
             break;
-        case 'pdo_mysql':
+        case 'mysql':
         default:
             $patch['343']['patch'] = checkFieldExists(TB_PREFIX . 'user', 'preferred_language')
                 ? 'SELECT 1'
@@ -2286,621 +2286,520 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['343']['date'] = "20260419";
 
     // ── Payment gateway columns in si_biller ─────────────────────────────────
+    // Consolidates old patches 344-374: credential columns at VARCHAR(768)
+    // for libsodium-encrypted payloads, test-mode flags, legacy column drops,
+    // and PCI credit-card column cleanup.
 
-    $patch['344']['name'] = "si_biller: stripe_secret_key for Stripe payment gateway";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
-            $patch['344']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'stripe_secret_key')
-                ? 'SELECT 1'
-                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN stripe_secret_key VARCHAR(255) NULL';
+    $patch['344']['name'] = "si_biller: add all payment gateway credential columns";
+    switch ($db_server) {
+        case 'pgsql':
+        case 'sqlite':
+            $gateway_credential_fields = [
+                'stripe_secret_key'            => 768,
+                'stripe_webhook_secret'        => 768,
+                'paypal_client_id'             => 255,
+                'paypal_client_secret'         => 768,
+                'mollie_api_key'               => 768,
+                'authorizenet_login_id'        => 768,
+                'authorizenet_transaction_key' => 768,
+                'authorizenet_signature_key'   => 768,
+                'eway_api_key'                 => 768,
+                'eway_api_password'            => 768,
+                'kofi_username'                => 100,
+                'coinbase_api_key'             => 768,
+                'coinbase_webhook_secret'      => 768,
+                'adyen_api_key'                => 768,
+                'adyen_merchant_account'       => 255,
+                'adyen_hmac_key'               => 768,
+                'adyen_live_prefix'            => 100,
+            ];
+            $p344 = '';
+            foreach ($gateway_credential_fields as $f => $w) {
+                $p344 .= checkFieldExists(TB_PREFIX . 'biller', $f)
+                    ? '' : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN ' . $f . ' VARCHAR(' . $w . ') NULL; ';
+            }
+            $patch['344']['patch'] = $p344 !== '' ? rtrim($p344) : 'SELECT 1';
             break;
-        case 'pdo_mysql':
         default:
             $patch['344']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'stripe_secret_key')
                 ? 'SELECT 1'
-                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `stripe_secret_key` VARCHAR(255) NULL';
+                : "ALTER TABLE `" . TB_PREFIX . "biller` "
+                . "ADD COLUMN `stripe_secret_key` VARCHAR(768) NULL, "
+                . "ADD COLUMN `stripe_webhook_secret` VARCHAR(768) NULL, "
+                . "ADD COLUMN `paypal_client_id` VARCHAR(255) NULL, "
+                . "ADD COLUMN `paypal_client_secret` VARCHAR(768) NULL, "
+                . "ADD COLUMN `mollie_api_key` VARCHAR(768) NULL, "
+                . "ADD COLUMN `authorizenet_login_id` VARCHAR(768) NULL, "
+                . "ADD COLUMN `authorizenet_transaction_key` VARCHAR(768) NULL, "
+                . "ADD COLUMN `authorizenet_signature_key` VARCHAR(768) NULL, "
+                . "ADD COLUMN `eway_api_key` VARCHAR(768) NULL, "
+                . "ADD COLUMN `eway_api_password` VARCHAR(768) NULL, "
+                . "ADD COLUMN `kofi_username` VARCHAR(100) NULL, "
+                . "ADD COLUMN `coinbase_api_key` VARCHAR(768) NULL, "
+                . "ADD COLUMN `coinbase_webhook_secret` VARCHAR(768) NULL, "
+                . "ADD COLUMN `adyen_api_key` VARCHAR(768) NULL, "
+                . "ADD COLUMN `adyen_merchant_account` VARCHAR(255) NULL, "
+                . "ADD COLUMN `adyen_hmac_key` VARCHAR(768) NULL, "
+                . "ADD COLUMN `adyen_live_prefix` VARCHAR(100) NULL";
             break;
     }
     $patch['344']['date'] = "20260420";
 
-    $patch['345']['name'] = "si_biller: stripe_webhook_secret for Stripe webhook verification";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
-            $patch['345']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'stripe_webhook_secret')
-                ? 'SELECT 1'
-                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN stripe_webhook_secret VARCHAR(255) NULL';
+    $patch['345']['name'] = "si_biller: add payment gateway test-mode flags";
+    switch ($db_server) {
+        case 'pgsql':
+            $test_flags = ['stripe_test_mode', 'paypal_test_mode', 'authorizenet_test_mode', 'eway_test_mode', 'adyen_test_mode'];
+            $p345 = '';
+            foreach ($test_flags as $f) {
+                $p345 .= checkFieldExists(TB_PREFIX . 'biller', $f)
+                    ? '' : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN ' . $f . ' SMALLINT NOT NULL DEFAULT 1; ';
+            }
+            $patch['345']['patch'] = $p345 !== '' ? rtrim($p345) : 'SELECT 1';
             break;
-        case 'pdo_mysql':
+        case 'sqlite':
+            $test_flags = ['stripe_test_mode', 'paypal_test_mode', 'authorizenet_test_mode', 'eway_test_mode', 'adyen_test_mode'];
+            $p345 = '';
+            foreach ($test_flags as $f) {
+                $p345 .= checkFieldExists(TB_PREFIX . 'biller', $f)
+                    ? '' : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN ' . $f . ' INTEGER NOT NULL DEFAULT 1; ';
+            }
+            $patch['345']['patch'] = $p345 !== '' ? rtrim($p345) : 'SELECT 1';
+            break;
         default:
-            $patch['345']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'stripe_webhook_secret')
+            $patch['345']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'stripe_test_mode')
                 ? 'SELECT 1'
-                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `stripe_webhook_secret` VARCHAR(255) NULL';
+                : "ALTER TABLE `" . TB_PREFIX . "biller` "
+                . "ADD COLUMN `stripe_test_mode` TINYINT(1) NOT NULL DEFAULT 1, "
+                . "ADD COLUMN `paypal_test_mode` TINYINT(1) NOT NULL DEFAULT 1, "
+                . "ADD COLUMN `authorizenet_test_mode` TINYINT(1) NOT NULL DEFAULT 1, "
+                . "ADD COLUMN `eway_test_mode` TINYINT(1) NOT NULL DEFAULT 1, "
+                . "ADD COLUMN `adyen_test_mode` TINYINT(1) NOT NULL DEFAULT 1";
             break;
     }
     $patch['345']['date'] = "20260420";
 
-    $patch['346']['name'] = "si_biller: stripe_test_mode flag (1=test, 0=live)";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
-            $patch['346']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'stripe_test_mode')
-                ? 'SELECT 1'
-                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN stripe_test_mode TINYINT(1) NOT NULL DEFAULT 1';
+    // ── Legacy column cleanup ─────────────────────────────────────────────────
+
+    $patch['346']['name'] = "si_biller: drop legacy payment columns (eway_customer_id, paypal_business_name, paypal_notify_url, paypal_return_url)";
+    switch ($db_server) {
+        case 'pgsql':
+        case 'sqlite':
+            $legacy_biller_fields = ['eway_customer_id', 'paypal_business_name', 'paypal_notify_url', 'paypal_return_url'];
+            $p346 = '';
+            foreach ($legacy_biller_fields as $f) {
+                $p346 .= checkFieldExists(TB_PREFIX . 'biller', $f)
+                    ? 'ALTER TABLE ' . TB_PREFIX . 'biller DROP COLUMN ' . $f . '; '
+                    : '';
+            }
+            $patch['346']['patch'] = $p346 !== '' ? rtrim($p346) : 'SELECT 1';
             break;
-        case 'pdo_mysql':
         default:
-            $patch['346']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'stripe_test_mode')
-                ? 'SELECT 1'
-                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `stripe_test_mode` TINYINT(1) NOT NULL DEFAULT 1';
+            $patch['346']['patch'] = '';
+            $patch['346']['patch'] .= checkFieldExists(TB_PREFIX . 'biller', 'eway_customer_id')
+                ? 'ALTER TABLE `' . TB_PREFIX . 'biller` DROP COLUMN `eway_customer_id`; ' : '';
+            $patch['346']['patch'] .= checkFieldExists(TB_PREFIX . 'biller', 'paypal_business_name')
+                ? 'ALTER TABLE `' . TB_PREFIX . 'biller` DROP COLUMN `paypal_business_name`; ' : '';
+            $patch['346']['patch'] .= checkFieldExists(TB_PREFIX . 'biller', 'paypal_notify_url')
+                ? 'ALTER TABLE `' . TB_PREFIX . 'biller` DROP COLUMN `paypal_notify_url`; ' : '';
+            $patch['346']['patch'] .= checkFieldExists(TB_PREFIX . 'biller', 'paypal_return_url')
+                ? 'ALTER TABLE `' . TB_PREFIX . 'biller` DROP COLUMN `paypal_return_url`; ' : '';
+            $patch['346']['patch'] = $patch['346']['patch'] !== '' ? rtrim($patch['346']['patch']) : 'SELECT 1';
             break;
     }
     $patch['346']['date'] = "20260420";
 
-    $patch['347']['name'] = "si_biller: paypal_client_id for PayPal Commerce Platform";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
-            $patch['347']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'paypal_client_id')
-                ? 'SELECT 1'
-                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN paypal_client_id VARCHAR(255) NULL';
+    $patch['347']['name'] = "si_customers: drop PCI credit card columns (credit_card_holder_name, credit_card_number, credit_card_expiry_month, credit_card_expiry_year)";
+    switch ($db_server) {
+        case 'pgsql':
+        case 'sqlite':
+            $pci_fields = ['credit_card_holder_name', 'credit_card_number', 'credit_card_expiry_month', 'credit_card_expiry_year'];
+            $p347 = '';
+            foreach ($pci_fields as $f) {
+                $p347 .= checkFieldExists(TB_PREFIX . 'customers', $f)
+                    ? 'ALTER TABLE ' . TB_PREFIX . 'customers DROP COLUMN ' . $f . '; '
+                    : '';
+            }
+            $patch['347']['patch'] = $p347 !== '' ? rtrim($p347) : 'SELECT 1';
             break;
-        case 'pdo_mysql':
         default:
-            $patch['347']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'paypal_client_id')
-                ? 'SELECT 1'
-                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `paypal_client_id` VARCHAR(255) NULL';
+            $patch['347']['patch'] = '';
+            $patch['347']['patch'] .= checkFieldExists(TB_PREFIX . 'customers', 'credit_card_holder_name')
+                ? 'ALTER TABLE `' . TB_PREFIX . 'customers` DROP COLUMN `credit_card_holder_name`; ' : '';
+            $patch['347']['patch'] .= checkFieldExists(TB_PREFIX . 'customers', 'credit_card_number')
+                ? 'ALTER TABLE `' . TB_PREFIX . 'customers` DROP COLUMN `credit_card_number`; ' : '';
+            $patch['347']['patch'] .= checkFieldExists(TB_PREFIX . 'customers', 'credit_card_expiry_month')
+                ? 'ALTER TABLE `' . TB_PREFIX . 'customers` DROP COLUMN `credit_card_expiry_month`; ' : '';
+            $patch['347']['patch'] .= checkFieldExists(TB_PREFIX . 'customers', 'credit_card_expiry_year')
+                ? 'ALTER TABLE `' . TB_PREFIX . 'customers` DROP COLUMN `credit_card_expiry_year`; ' : '';
+            $patch['347']['patch'] = $patch['347']['patch'] !== '' ? rtrim($patch['347']['patch']) : 'SELECT 1';
             break;
     }
     $patch['347']['date'] = "20260420";
 
-    $patch['348']['name'] = "si_biller: paypal_client_secret for PayPal Commerce Platform";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
-            $patch['348']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'paypal_client_secret')
-                ? 'SELECT 1'
-                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN paypal_client_secret VARCHAR(255) NULL';
-            break;
-        case 'pdo_mysql':
-        default:
-            $patch['348']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'paypal_client_secret')
-                ? 'SELECT 1'
-                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `paypal_client_secret` VARCHAR(255) NULL';
-            break;
-    }
-    $patch['348']['date'] = "20260420";
+    // ── Products multi-tenancy ────────────────────────────────────────────────
 
-    $patch['349']['name'] = "si_biller: paypal_test_mode flag (1=sandbox, 0=live)";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
-            $patch['349']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'paypal_test_mode')
-                ? 'SELECT 1'
-                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN paypal_test_mode TINYINT(1) NOT NULL DEFAULT 1';
-            break;
-        case 'pdo_mysql':
-        default:
-            $patch['349']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'paypal_test_mode')
-                ? 'SELECT 1'
-                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `paypal_test_mode` TINYINT(1) NOT NULL DEFAULT 1';
-            break;
-    }
-    $patch['349']['date'] = "20260420";
-
-    $patch['350']['name'] = "si_biller: mollie_api_key for Mollie payment gateway";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
-            $patch['350']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'mollie_api_key')
-                ? 'SELECT 1'
-                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN mollie_api_key VARCHAR(255) NULL';
-            break;
-        case 'pdo_mysql':
-        default:
-            $patch['350']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'mollie_api_key')
-                ? 'SELECT 1'
-                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `mollie_api_key` VARCHAR(255) NULL';
-            break;
-    }
-    $patch['350']['date'] = "20260420";
-
-    $patch['351']['name'] = "si_biller: authorizenet_login_id for Authorize.net";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
-            $patch['351']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'authorizenet_login_id')
-                ? 'SELECT 1'
-                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN authorizenet_login_id VARCHAR(255) NULL';
-            break;
-        case 'pdo_mysql':
-        default:
-            $patch['351']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'authorizenet_login_id')
-                ? 'SELECT 1'
-                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `authorizenet_login_id` VARCHAR(255) NULL';
-            break;
-    }
-    $patch['351']['date'] = "20260420";
-
-    $patch['352']['name'] = "si_biller: authorizenet_transaction_key for Authorize.net";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
-            $patch['352']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'authorizenet_transaction_key')
-                ? 'SELECT 1'
-                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN authorizenet_transaction_key VARCHAR(255) NULL';
-            break;
-        case 'pdo_mysql':
-        default:
-            $patch['352']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'authorizenet_transaction_key')
-                ? 'SELECT 1'
-                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `authorizenet_transaction_key` VARCHAR(255) NULL';
-            break;
-    }
-    $patch['352']['date'] = "20260420";
-
-    $patch['353']['name'] = "si_biller: authorizenet_signature_key for Authorize.net webhook verification";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
-            $patch['353']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'authorizenet_signature_key')
-                ? 'SELECT 1'
-                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN authorizenet_signature_key VARCHAR(255) NULL';
-            break;
-        case 'pdo_mysql':
-        default:
-            $patch['353']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'authorizenet_signature_key')
-                ? 'SELECT 1'
-                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `authorizenet_signature_key` VARCHAR(255) NULL';
-            break;
-    }
-    $patch['353']['date'] = "20260420";
-
-    $patch['354']['name'] = "si_biller: authorizenet_test_mode flag (1=sandbox, 0=live)";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
-            $patch['354']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'authorizenet_test_mode')
-                ? 'SELECT 1'
-                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN authorizenet_test_mode TINYINT(1) NOT NULL DEFAULT 1';
-            break;
-        case 'pdo_mysql':
-        default:
-            $patch['354']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'authorizenet_test_mode')
-                ? 'SELECT 1'
-                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `authorizenet_test_mode` TINYINT(1) NOT NULL DEFAULT 1';
-            break;
-    }
-    $patch['354']['date'] = "20260420";
-
-    $patch['355']['name'] = "si_biller: eway_api_key for eWay Rapid API";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
-            $patch['355']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'eway_api_key')
-                ? 'SELECT 1'
-                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN eway_api_key VARCHAR(255) NULL';
-            break;
-        case 'pdo_mysql':
-        default:
-            $patch['355']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'eway_api_key')
-                ? 'SELECT 1'
-                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `eway_api_key` VARCHAR(255) NULL';
-            break;
-    }
-    $patch['355']['date'] = "20260420";
-
-    $patch['356']['name'] = "si_biller: eway_api_password for eWay Rapid API";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
-            $patch['356']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'eway_api_password')
-                ? 'SELECT 1'
-                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN eway_api_password VARCHAR(255) NULL';
-            break;
-        case 'pdo_mysql':
-        default:
-            $patch['356']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'eway_api_password')
-                ? 'SELECT 1'
-                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `eway_api_password` VARCHAR(255) NULL';
-            break;
-    }
-    $patch['356']['date'] = "20260420";
-
-    $patch['357']['name'] = "si_biller: eway_test_mode flag (1=sandbox, 0=live)";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
-            $patch['357']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'eway_test_mode')
-                ? 'SELECT 1'
-                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN eway_test_mode TINYINT(1) NOT NULL DEFAULT 1';
-            break;
-        case 'pdo_mysql':
-        default:
-            $patch['357']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'eway_test_mode')
-                ? 'SELECT 1'
-                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `eway_test_mode` TINYINT(1) NOT NULL DEFAULT 1';
-            break;
-    }
-    $patch['357']['date'] = "20260420";
-
-    $patch['358']['name'] = "si_biller: kofi_username for Ko-fi tip link";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
-            $patch['358']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'kofi_username')
-                ? 'SELECT 1'
-                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN kofi_username VARCHAR(100) NULL';
-            break;
-        case 'pdo_mysql':
-        default:
-            $patch['358']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'kofi_username')
-                ? 'SELECT 1'
-                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `kofi_username` VARCHAR(100) NULL';
-            break;
-    }
-    $patch['358']['date'] = "20260420";
-
-    $patch['359']['name'] = "si_biller: coinbase_api_key for Coinbase Commerce";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
-            $patch['359']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'coinbase_api_key')
-                ? 'SELECT 1'
-                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN coinbase_api_key VARCHAR(255) NULL';
-            break;
-        case 'pdo_mysql':
-        default:
-            $patch['359']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'coinbase_api_key')
-                ? 'SELECT 1'
-                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `coinbase_api_key` VARCHAR(255) NULL';
-            break;
-    }
-    $patch['359']['date'] = "20260420";
-
-    $patch['360']['name'] = "si_biller: coinbase_webhook_secret for Coinbase Commerce webhook verification";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
-            $patch['360']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'coinbase_webhook_secret')
-                ? 'SELECT 1'
-                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN coinbase_webhook_secret VARCHAR(255) NULL';
-            break;
-        case 'pdo_mysql':
-        default:
-            $patch['360']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'coinbase_webhook_secret')
-                ? 'SELECT 1'
-                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `coinbase_webhook_secret` VARCHAR(255) NULL';
-            break;
-    }
-    $patch['360']['date'] = "20260420";
-
-    $patch['361']['name'] = "si_biller: adyen_api_key for Adyen";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
-            $patch['361']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'adyen_api_key')
-                ? 'SELECT 1'
-                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN adyen_api_key VARCHAR(255) NULL';
-            break;
-        case 'pdo_mysql':
-        default:
-            $patch['361']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'adyen_api_key')
-                ? 'SELECT 1'
-                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `adyen_api_key` VARCHAR(255) NULL';
-            break;
-    }
-    $patch['361']['date'] = "20260420";
-
-    $patch['362']['name'] = "si_biller: adyen_merchant_account for Adyen";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
-            $patch['362']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'adyen_merchant_account')
-                ? 'SELECT 1'
-                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN adyen_merchant_account VARCHAR(255) NULL';
-            break;
-        case 'pdo_mysql':
-        default:
-            $patch['362']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'adyen_merchant_account')
-                ? 'SELECT 1'
-                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `adyen_merchant_account` VARCHAR(255) NULL';
-            break;
-    }
-    $patch['362']['date'] = "20260420";
-
-    $patch['363']['name'] = "si_biller: adyen_hmac_key for Adyen webhook verification";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
-            $patch['363']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'adyen_hmac_key')
-                ? 'SELECT 1'
-                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN adyen_hmac_key VARCHAR(255) NULL';
-            break;
-        case 'pdo_mysql':
-        default:
-            $patch['363']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'adyen_hmac_key')
-                ? 'SELECT 1'
-                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `adyen_hmac_key` VARCHAR(255) NULL';
-            break;
-    }
-    $patch['363']['date'] = "20260420";
-
-    $patch['364']['name'] = "si_biller: adyen_live_prefix for Adyen live endpoint";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
-            $patch['364']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'adyen_live_prefix')
-                ? 'SELECT 1'
-                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN adyen_live_prefix VARCHAR(100) NULL';
-            break;
-        case 'pdo_mysql':
-        default:
-            $patch['364']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'adyen_live_prefix')
-                ? 'SELECT 1'
-                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `adyen_live_prefix` VARCHAR(100) NULL';
-            break;
-    }
-    $patch['364']['date'] = "20260420";
-
-    $patch['365']['name'] = "si_biller: adyen_test_mode flag (1=test, 0=live)";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
-            $patch['365']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'adyen_test_mode')
-                ? 'SELECT 1'
-                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN adyen_test_mode TINYINT(1) NOT NULL DEFAULT 1';
-            break;
-        case 'pdo_mysql':
-        default:
-            $patch['365']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'adyen_test_mode')
-                ? 'SELECT 1'
-                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `adyen_test_mode` TINYINT(1) NOT NULL DEFAULT 1';
-            break;
-    }
-    $patch['365']['date'] = "20260420";
-
-    // ── Legacy column cleanup ─────────────────────────────────────────────────
-
-    $patch['366']['name'] = "si_biller: drop legacy eway_customer_id (replaced by eway_api_key/eway_api_password)";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
-            $patch['366']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'eway_customer_id')
-                ? 'ALTER TABLE ' . TB_PREFIX . 'biller DROP COLUMN eway_customer_id'
-                : 'SELECT 1';
-            break;
-        case 'pdo_mysql':
-        default:
-            $patch['366']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'eway_customer_id')
-                ? 'ALTER TABLE `' . TB_PREFIX . 'biller` DROP COLUMN `eway_customer_id`'
-                : 'SELECT 1';
-            break;
-    }
-    $patch['366']['date'] = "20260420";
-
-    $patch['367']['name'] = "si_biller: drop legacy paypal_business_name (replaced by PayPal Commerce)";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
-            $patch['367']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'paypal_business_name')
-                ? 'ALTER TABLE ' . TB_PREFIX . 'biller DROP COLUMN paypal_business_name'
-                : 'SELECT 1';
-            break;
-        case 'pdo_mysql':
-        default:
-            $patch['367']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'paypal_business_name')
-                ? 'ALTER TABLE `' . TB_PREFIX . 'biller` DROP COLUMN `paypal_business_name`'
-                : 'SELECT 1';
-            break;
-    }
-    $patch['367']['date'] = "20260420";
-
-    $patch['368']['name'] = "si_biller: drop legacy paypal_notify_url";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
-            $patch['368']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'paypal_notify_url')
-                ? 'ALTER TABLE ' . TB_PREFIX . 'biller DROP COLUMN paypal_notify_url'
-                : 'SELECT 1';
-            break;
-        case 'pdo_mysql':
-        default:
-            $patch['368']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'paypal_notify_url')
-                ? 'ALTER TABLE `' . TB_PREFIX . 'biller` DROP COLUMN `paypal_notify_url`'
-                : 'SELECT 1';
-            break;
-    }
-    $patch['368']['date'] = "20260420";
-
-    $patch['369']['name'] = "si_biller: drop legacy paypal_return_url";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
-            $patch['369']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'paypal_return_url')
-                ? 'ALTER TABLE ' . TB_PREFIX . 'biller DROP COLUMN paypal_return_url'
-                : 'SELECT 1';
-            break;
-        case 'pdo_mysql':
-        default:
-            $patch['369']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'paypal_return_url')
-                ? 'ALTER TABLE `' . TB_PREFIX . 'biller` DROP COLUMN `paypal_return_url`'
-                : 'SELECT 1';
-            break;
-    }
-    $patch['369']['date'] = "20260420";
-
-    $patch['370']['name'] = "si_customers: drop credit_card_holder_name (PCI cleanup - stored cards no longer used)";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
-            $patch['370']['patch'] = checkFieldExists(TB_PREFIX . 'customers', 'credit_card_holder_name')
-                ? 'ALTER TABLE ' . TB_PREFIX . 'customers DROP COLUMN credit_card_holder_name'
-                : 'SELECT 1';
-            break;
-        case 'pdo_mysql':
-        default:
-            $patch['370']['patch'] = checkFieldExists(TB_PREFIX . 'customers', 'credit_card_holder_name')
-                ? 'ALTER TABLE `' . TB_PREFIX . 'customers` DROP COLUMN `credit_card_holder_name`'
-                : 'SELECT 1';
-            break;
-    }
-    $patch['370']['date'] = "20260420";
-
-    $patch['371']['name'] = "si_customers: drop credit_card_number (PCI cleanup)";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
-            $patch['371']['patch'] = checkFieldExists(TB_PREFIX . 'customers', 'credit_card_number')
-                ? 'ALTER TABLE ' . TB_PREFIX . 'customers DROP COLUMN credit_card_number'
-                : 'SELECT 1';
-            break;
-        case 'pdo_mysql':
-        default:
-            $patch['371']['patch'] = checkFieldExists(TB_PREFIX . 'customers', 'credit_card_number')
-                ? 'ALTER TABLE `' . TB_PREFIX . 'customers` DROP COLUMN `credit_card_number`'
-                : 'SELECT 1';
-            break;
-    }
-    $patch['371']['date'] = "20260420";
-
-    $patch['372']['name'] = "si_customers: drop credit_card_expiry_month (PCI cleanup)";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
-            $patch['372']['patch'] = checkFieldExists(TB_PREFIX . 'customers', 'credit_card_expiry_month')
-                ? 'ALTER TABLE ' . TB_PREFIX . 'customers DROP COLUMN credit_card_expiry_month'
-                : 'SELECT 1';
-            break;
-        case 'pdo_mysql':
-        default:
-            $patch['372']['patch'] = checkFieldExists(TB_PREFIX . 'customers', 'credit_card_expiry_month')
-                ? 'ALTER TABLE `' . TB_PREFIX . 'customers` DROP COLUMN `credit_card_expiry_month`'
-                : 'SELECT 1';
-            break;
-    }
-    $patch['372']['date'] = "20260420";
-
-    $patch['373']['name'] = "si_customers: drop credit_card_expiry_year (PCI cleanup)";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
-            $patch['373']['patch'] = checkFieldExists(TB_PREFIX . 'customers', 'credit_card_expiry_year')
-                ? 'ALTER TABLE ' . TB_PREFIX . 'customers DROP COLUMN credit_card_expiry_year'
-                : 'SELECT 1';
-            break;
-        case 'pdo_mysql':
-        default:
-            $patch['373']['patch'] = checkFieldExists(TB_PREFIX . 'customers', 'credit_card_expiry_year')
-                ? 'ALTER TABLE `' . TB_PREFIX . 'customers` DROP COLUMN `credit_card_expiry_year`'
-                : 'SELECT 1';
-            break;
-    }
-    $patch['373']['date'] = "20260420";
-
-    $patch['374']['name'] = "si_biller: widen gateway secret columns for libsodium payloads (si1:…)";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-            $patch['374']['patch'] = 'ALTER TABLE ' . TB_PREFIX . 'biller '
-                . 'ALTER COLUMN stripe_secret_key TYPE VARCHAR(768), '
-                . 'ALTER COLUMN stripe_webhook_secret TYPE VARCHAR(768), '
-                . 'ALTER COLUMN paypal_client_secret TYPE VARCHAR(768), '
-                . 'ALTER COLUMN mollie_api_key TYPE VARCHAR(768), '
-                . 'ALTER COLUMN authorizenet_login_id TYPE VARCHAR(768), '
-                . 'ALTER COLUMN authorizenet_transaction_key TYPE VARCHAR(768), '
-                . 'ALTER COLUMN authorizenet_signature_key TYPE VARCHAR(768), '
-                . 'ALTER COLUMN eway_api_key TYPE VARCHAR(768), '
-                . 'ALTER COLUMN eway_api_password TYPE VARCHAR(768), '
-                . 'ALTER COLUMN coinbase_api_key TYPE VARCHAR(768), '
-                . 'ALTER COLUMN coinbase_webhook_secret TYPE VARCHAR(768), '
-                . 'ALTER COLUMN adyen_api_key TYPE VARCHAR(768), '
-                . 'ALTER COLUMN adyen_hmac_key TYPE VARCHAR(768)';
-            break;
-        case 'pdo_sqlite':
-            $patch['374']['patch'] = 'SELECT 1';
-            break;
-        case 'pdo_mysql':
-        default:
-            $patch['374']['patch'] = 'ALTER TABLE `' . TB_PREFIX . 'biller` '
-                . 'MODIFY `stripe_secret_key` VARCHAR(768) NULL, '
-                . 'MODIFY `stripe_webhook_secret` VARCHAR(768) NULL, '
-                . 'MODIFY `paypal_client_secret` VARCHAR(768) NULL, '
-                . 'MODIFY `mollie_api_key` VARCHAR(768) NULL, '
-                . 'MODIFY `authorizenet_login_id` VARCHAR(768) NULL, '
-                . 'MODIFY `authorizenet_transaction_key` VARCHAR(768) NULL, '
-                . 'MODIFY `authorizenet_signature_key` VARCHAR(768) NULL, '
-                . 'MODIFY `eway_api_key` VARCHAR(768) NULL, '
-                . 'MODIFY `eway_api_password` VARCHAR(768) NULL, '
-                . 'MODIFY `coinbase_api_key` VARCHAR(768) NULL, '
-                . 'MODIFY `coinbase_webhook_secret` VARCHAR(768) NULL, '
-                . 'MODIFY `adyen_api_key` VARCHAR(768) NULL, '
-                . 'MODIFY `adyen_hmac_key` VARCHAR(768) NULL';
-            break;
-    }
-    $patch['374']['date'] = "20260420";
-
-    $patch['375']['name'] = "si_invoices: add currency_sign column";
+    $patch['348']['name'] = "Add domain_id to products_attributes for multi-tenancy";
     switch ($db_server) {
         case 'pgsql':
-            $patch['375']['patch'] = checkFieldExists(TB_PREFIX . 'invoices', 'currency_sign')
+        case 'sqlite':
+            $patch['348']['patch'] = checkFieldExists(TB_PREFIX.'products_attributes', 'domain_id')
+                ? 'SELECT 1'
+                : "ALTER TABLE ".TB_PREFIX."products_attributes ADD COLUMN domain_id INT NOT NULL DEFAULT 1";
+            break;
+        default:
+            $patch['348']['patch'] = checkFieldExists(TB_PREFIX.'products_attributes', 'domain_id')
+                ? 'SELECT 1'
+                : "ALTER TABLE `".TB_PREFIX."products_attributes` ADD COLUMN `domain_id` INT(11) NOT NULL DEFAULT '1' AFTER `id`, ADD KEY `idx_pa_domain_id` (`domain_id`)";
+            break;
+    }
+    $patch['348']['date'] = "20260416";
+
+    $patch['349']['name'] = "Add domain_id to products_values for multi-tenancy";
+    switch ($db_server) {
+        case 'pgsql':
+        case 'sqlite':
+            $patch['349']['patch'] = checkFieldExists(TB_PREFIX.'products_values', 'domain_id')
+                ? 'SELECT 1'
+                : "ALTER TABLE ".TB_PREFIX."products_values ADD COLUMN domain_id INT NOT NULL DEFAULT 1";
+            break;
+        default:
+            $patch['349']['patch'] = checkFieldExists(TB_PREFIX.'products_values', 'domain_id')
+                ? 'SELECT 1'
+                : "ALTER TABLE `".TB_PREFIX."products_values` ADD COLUMN `domain_id` INT(11) NOT NULL DEFAULT '1' AFTER `id`, ADD KEY `idx_pv_domain_id` (`domain_id`)";
+            break;
+    }
+    $patch['349']['date'] = "20260416";
+
+    // ── Auth identity redesign ────────────────────────────────────────────────
+
+    $patch['350']['name'] = "si_user: add auth_staff_email for staff/biller login identity";
+    switch ($db_server) {
+        case 'pgsql':
+        case 'sqlite':
+            $patch['350']['patch'] = checkFieldExists(TB_PREFIX . 'user', 'auth_staff_email')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'user ADD COLUMN auth_staff_email VARCHAR(255) NULL';
+            break;
+        default:
+            $patch['350']['patch'] = checkFieldExists(TB_PREFIX . 'user', 'auth_staff_email')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'user` ADD COLUMN `auth_staff_email` VARCHAR(255) NULL';
+            break;
+    }
+    $patch['350']['date'] = "20260418";
+
+    $patch['351']['name'] = "si_user: add auth_customer_key for per-domain customer login identity";
+    switch ($db_server) {
+        case 'pgsql':
+        case 'sqlite':
+            $patch['351']['patch'] = checkFieldExists(TB_PREFIX . 'user', 'auth_customer_key')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'user ADD COLUMN auth_customer_key VARCHAR(384) NULL';
+            break;
+        default:
+            $patch['351']['patch'] = checkFieldExists(TB_PREFIX . 'user', 'auth_customer_key')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'user` ADD COLUMN `auth_customer_key` VARCHAR(384) NULL';
+            break;
+    }
+    $patch['351']['date'] = "20260418";
+
+    $patch['352']['name'] = "si_user: backfill auth_staff_email and auth_customer_key";
+    switch ($db_server) {
+        case 'pgsql':
+            $patch['352']['patch'] = "UPDATE " . TB_PREFIX . "user SET
+                auth_staff_email = CASE
+                    WHEN role_id IN (1,2,3,4,6,7) AND email IS NOT NULL AND TRIM(email) <> '' THEN LOWER(TRIM(email))
+                    ELSE NULL END,
+                auth_customer_key = CASE
+                    WHEN role_id = 5 AND email IS NOT NULL AND TRIM(email) <> '' THEN domain_id::text || ':' || LOWER(TRIM(email))
+                    ELSE NULL END";
+            break;
+        case 'sqlite':
+            $patch['352']['patch'] = "UPDATE " . TB_PREFIX . "user SET
+                auth_staff_email = CASE
+                    WHEN role_id IN (1,2,3,4,6,7) AND email IS NOT NULL AND TRIM(email) <> '' THEN LOWER(TRIM(email))
+                    ELSE NULL END,
+                auth_customer_key = CASE
+                    WHEN role_id = 5 AND email IS NOT NULL AND TRIM(email) <> '' THEN domain_id || ':' || LOWER(TRIM(email))
+                    ELSE NULL END";
+            break;
+        default:
+            $patch['352']['patch'] = "UPDATE " . TB_PREFIX . "user SET
+                auth_staff_email = CASE
+                    WHEN role_id IN (1,2,3,4,6,7) AND email IS NOT NULL AND TRIM(email) <> '' THEN LOWER(TRIM(email))
+                    ELSE NULL END,
+                auth_customer_key = CASE
+                    WHEN role_id = 5 AND email IS NOT NULL AND TRIM(email) <> '' THEN CONCAT(domain_id, ':', LOWER(TRIM(email)))
+                    ELSE NULL END";
+            break;
+    }
+    $patch['352']['date'] = "20260418";
+
+    $patch['353']['name'] = "si_user: drop global unique on email (replaced by auth identity columns)";
+    switch ($db_server) {
+        case 'pgsql':
+            $patch['353']['patch'] = 'ALTER TABLE ' . TB_PREFIX . 'user DROP CONSTRAINT IF EXISTS ' . TB_PREFIX . 'user_email_key';
+            break;
+        case 'sqlite':
+            $patch['353']['patch'] = 'SELECT 1';
+            break;
+        default:
+            $patch['353']['patch'] = checkMysqlIndexExists(TB_PREFIX . 'user', 'UnqEMail')
+                ? 'ALTER TABLE `' . TB_PREFIX . 'user` DROP INDEX `UnqEMail`'
+                : 'SELECT 1';
+            break;
+    }
+    $patch['353']['date'] = "20260418";
+
+    $patch['354']['name'] = "si_user: unique index on auth_staff_email (staff/biller global identity)";
+    switch ($db_server) {
+        case 'pgsql':
+            $patch['354']['patch'] = 'CREATE UNIQUE INDEX IF NOT EXISTS ' . TB_PREFIX . 'user_unq_auth_staff_email ON ' . TB_PREFIX . 'user (auth_staff_email)';
+            break;
+        case 'sqlite':
+            $patch['354']['patch'] = 'CREATE UNIQUE INDEX IF NOT EXISTS ' . TB_PREFIX . 'user_unq_auth_staff_email ON ' . TB_PREFIX . 'user (auth_staff_email)';
+            break;
+        default:
+            $patch['354']['patch'] = checkMysqlIndexExists(TB_PREFIX . 'user', 'UnqAuthStaffEmail')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'user` ADD UNIQUE INDEX `UnqAuthStaffEmail` (`auth_staff_email`)';
+            break;
+    }
+    $patch['354']['date'] = "20260418";
+
+    $patch['355']['name'] = "si_user: unique index on auth_customer_key (customer per-domain identity)";
+    switch ($db_server) {
+        case 'pgsql':
+            $patch['355']['patch'] = 'CREATE UNIQUE INDEX IF NOT EXISTS ' . TB_PREFIX . 'user_unq_auth_customer_key ON ' . TB_PREFIX . 'user (auth_customer_key)';
+            break;
+        case 'sqlite':
+            $patch['355']['patch'] = 'CREATE UNIQUE INDEX IF NOT EXISTS ' . TB_PREFIX . 'user_unq_auth_customer_key ON ' . TB_PREFIX . 'user (auth_customer_key)';
+            break;
+        default:
+            $patch['355']['patch'] = checkMysqlIndexExists(TB_PREFIX . 'user', 'UnqAuthCustomerKey')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'user` ADD UNIQUE INDEX `UnqAuthCustomerKey` (`auth_customer_key`)';
+            break;
+    }
+    $patch['355']['date'] = "20260418";
+
+    // ── Denormalised columns (maintained by invoice_denorm) ──────────────────
+
+    $patch['356']['name'] = "si_invoices: denormalised list columns (totals, names, index label; maintained by invoice_denorm)";
+    $patch['356']['patch'] = 'SELECT 1';
+    $patch['356']['date'] = "20260418";
+
+    $patch['357']['name'] = "si_payment: denormalised display columns for payments grid (copies from invoice)";
+    $patch['357']['patch'] = 'SELECT 1';
+    $patch['357']['date'] = "20260418";
+
+    $patch['358']['name'] = "Backfill invoice/payment denormalised columns for all domains";
+    $patch['358']['patch'] = 'SELECT 1';
+    $patch['358']['date'] = "20260418";
+
+    $patch['359']['name'] = "si_invoices: indexes for domain lists, charts, denorm owing filters";
+    $patch['359']['patch'] = 'SELECT 1';
+    $patch['359']['date'] = "20260418";
+
+    $patch['360']['name'] = "Add si_global_config for installation-wide app branding (header/footer)";
+    $patch['360']['patch'] = 'SELECT 1';
+    $patch['360']['date'] = "20260419";
+
+    // ── User language preference ──────────────────────────────────────────────
+
+    $patch['361']['name'] = "si_user: preferred_language for per-user UI language override";
+    switch ($db_server) {
+        case 'pgsql':
+        case 'sqlite':
+            $patch['361']['patch'] = checkFieldExists(TB_PREFIX . 'user', 'preferred_language')
+                ? 'SELECT 1'
+                : 'ALTER TABLE ' . TB_PREFIX . 'user ADD COLUMN preferred_language VARCHAR(32) NULL';
+            break;
+        default:
+            $patch['361']['patch'] = checkFieldExists(TB_PREFIX . 'user', 'preferred_language')
+                ? 'SELECT 1'
+                : 'ALTER TABLE `' . TB_PREFIX . 'user` ADD COLUMN `preferred_language` VARCHAR(32) NULL';
+            break;
+    }
+    $patch['361']['date'] = "20260419";
+
+    // ── Invoice currency ──────────────────────────────────────────────────────
+
+    $patch['362']['name'] = "si_invoices: add currency_sign column";
+    switch ($db_server) {
+        case 'pgsql':
+            $patch['362']['patch'] = checkFieldExists(TB_PREFIX . 'invoices', 'currency_sign')
                 ? 'SELECT 1'
                 : 'ALTER TABLE ' . TB_PREFIX . 'invoices ADD COLUMN currency_sign VARCHAR(50) NULL';
             break;
         case 'sqlite':
-            $patch['375']['patch'] = checkFieldExists(TB_PREFIX . 'invoices', 'currency_sign')
+            $patch['362']['patch'] = checkFieldExists(TB_PREFIX . 'invoices', 'currency_sign')
                 ? 'SELECT 1'
                 : 'ALTER TABLE ' . TB_PREFIX . 'invoices ADD COLUMN currency_sign VARCHAR(50) NULL';
             break;
         default:
-            $patch['375']['patch'] = checkFieldExists(TB_PREFIX . 'invoices', 'currency_sign')
+            $patch['362']['patch'] = checkFieldExists(TB_PREFIX . 'invoices', 'currency_sign')
                 ? 'SELECT 1'
                 : 'ALTER TABLE `' . TB_PREFIX . 'invoices` ADD `currency_sign` VARCHAR(50) NULL';
             break;
     }
-    $patch['375']['date'] = "20260420";
+    $patch['362']['date'] = "20260420";
 
-    $patch['376']['name'] = "si_invoices: add currency_code column (now resolved via si_currencies)";
-    $patch['376']['patch'] = 'SELECT 1';
-    $patch['376']['date'] = "20260420";
-
-    $patch['377']['name'] = "si_invoices: backfill currency_sign from preferences";
+    $patch['363']['name'] = "si_invoices: add denorm_currency_code and denorm_currency_locale columns";
     switch ($db_server) {
         case 'pgsql':
-            $patch['377']['patch'] = 'UPDATE ' . TB_PREFIX . 'invoices i'
+            $p363 = '';
+            $p363 .= checkFieldExists(TB_PREFIX . 'invoices', 'denorm_currency_code')
+                ? '' : 'ALTER TABLE ' . TB_PREFIX . 'invoices ADD COLUMN denorm_currency_code VARCHAR(10) DEFAULT NULL; ';
+            $p363 .= checkFieldExists(TB_PREFIX . 'invoices', 'denorm_currency_locale')
+                ? '' : 'ALTER TABLE ' . TB_PREFIX . 'invoices ADD COLUMN denorm_currency_locale VARCHAR(32) DEFAULT NULL; ';
+            $patch['363']['patch'] = $p363 !== '' ? $p363 : 'SELECT 1';
+            break;
+        case 'sqlite':
+            $p363 = '';
+            $p363 .= checkFieldExists(TB_PREFIX . 'invoices', 'denorm_currency_code')
+                ? '' : 'ALTER TABLE ' . TB_PREFIX . 'invoices ADD COLUMN denorm_currency_code VARCHAR(10) DEFAULT NULL; ';
+            $p363 .= checkFieldExists(TB_PREFIX . 'invoices', 'denorm_currency_locale')
+                ? '' : 'ALTER TABLE ' . TB_PREFIX . 'invoices ADD COLUMN denorm_currency_locale VARCHAR(32) DEFAULT NULL; ';
+            $patch['363']['patch'] = $p363 !== '' ? $p363 : 'SELECT 1';
+            break;
+        default:
+            $p363 = '';
+            $p363 .= checkFieldExists(TB_PREFIX . 'invoices', 'denorm_currency_code')
+                ? '' : 'ALTER TABLE `' . TB_PREFIX . 'invoices` ADD `denorm_currency_code` VARCHAR(10) DEFAULT NULL; ';
+            $p363 .= checkFieldExists(TB_PREFIX . 'invoices', 'denorm_currency_locale')
+                ? '' : 'ALTER TABLE `' . TB_PREFIX . 'invoices` ADD `denorm_currency_locale` VARCHAR(32) DEFAULT NULL; ';
+            $patch['363']['patch'] = $p363 !== '' ? $p363 : 'SELECT 1';
+            break;
+    }
+    $patch['363']['date'] = "20260420";
+
+    $patch['364']['name'] = "si_invoices: backfill currency_sign from preferences";
+    switch ($db_server) {
+        case 'pgsql':
+            $patch['364']['patch'] = 'UPDATE ' . TB_PREFIX . 'invoices i'
                 . ' SET currency_sign = p.pref_currency_sign'
                 . ' FROM ' . TB_PREFIX . 'preferences p'
                 . ' WHERE p.pref_id = i.preference_id AND p.domain_id = i.domain_id'
                 . ' AND (i.currency_sign IS NULL OR i.currency_sign = \'\')';
             break;
         case 'sqlite':
-            $patch['377']['patch'] = 'UPDATE ' . TB_PREFIX . 'invoices'
+            $patch['364']['patch'] = 'UPDATE ' . TB_PREFIX . 'invoices'
                 . ' SET currency_sign = (SELECT p.pref_currency_sign FROM ' . TB_PREFIX . 'preferences p'
                 . ' WHERE p.pref_id = ' . TB_PREFIX . 'invoices.preference_id'
                 . ' AND p.domain_id = ' . TB_PREFIX . 'invoices.domain_id)'
                 . ' WHERE currency_sign IS NULL OR currency_sign = \'\'';
             break;
         default:
-            $patch['377']['patch'] = 'UPDATE ' . TB_PREFIX . 'invoices i'
+            $patch['364']['patch'] = 'UPDATE ' . TB_PREFIX . 'invoices i'
                 . ' INNER JOIN ' . TB_PREFIX . 'preferences p ON p.pref_id = i.preference_id AND p.domain_id = i.domain_id'
                 . ' SET i.currency_sign = p.pref_currency_sign'
                 . ' WHERE i.currency_sign IS NULL OR i.currency_sign = \'\'';
             break;
     }
-    $patch['377']['date'] = "20260420";
+    $patch['364']['date'] = "20260420";
 
-    $patch['378']['name'] = "si_invoices: backfill currency_code from preferences (now resolved via si_currencies)";
-    $patch['378']['patch'] = 'SELECT 1';
-    $patch['378']['date'] = "20260420";
-
-    $patch['379']['name'] = "si_payment: denormalised currency_sign and currency_code from invoice";
-    $patch['379']['patch'] = 'SELECT 1';
-    $patch['379']['date'] = "20260420";
-
-    $patch['380']['name'] = "si_payment_terms: create global payment terms table";
+    $patch['365']['name'] = "si_invoices: backfill denorm_currency_code from si_currencies and denorm_currency_locale from preferences";
     switch ($db_server) {
         case 'pgsql':
-            $patch['380']['patch'] = checkTableExists(TB_PREFIX . 'payment_terms')
+            $patch['365']['patch'] = 'UPDATE ' . TB_PREFIX . 'invoices i'
+                . ' SET denorm_currency_code = c.currency_code'
+                . ' FROM ' . TB_PREFIX . 'currencies c'
+                . ' WHERE c.id = i.currency_id AND c.domain_id = i.domain_id'
+                . ' AND (i.denorm_currency_code IS NULL OR i.denorm_currency_code = \'\')'
+                . ' AND i.currency_id IS NOT NULL;'
+                . ' UPDATE ' . TB_PREFIX . 'invoices i'
+                . ' SET denorm_currency_locale = p.locale'
+                . ' FROM ' . TB_PREFIX . 'preferences p'
+                . ' WHERE p.pref_id = i.preference_id AND p.domain_id = i.domain_id'
+                . ' AND (i.denorm_currency_locale IS NULL OR i.denorm_currency_locale = \'\')';
+            break;
+        case 'sqlite':
+            $patch['365']['patch'] = 'UPDATE ' . TB_PREFIX . 'invoices'
+                . ' SET denorm_currency_code = (SELECT c.currency_code FROM ' . TB_PREFIX . 'currencies c'
+                . ' WHERE c.id = ' . TB_PREFIX . 'invoices.currency_id AND c.domain_id = ' . TB_PREFIX . 'invoices.domain_id)'
+                . ' WHERE currency_id IS NOT NULL AND (denorm_currency_code IS NULL OR denorm_currency_code = \'\');'
+                . ' UPDATE ' . TB_PREFIX . 'invoices'
+                . ' SET denorm_currency_locale = (SELECT p.locale FROM ' . TB_PREFIX . 'preferences p'
+                . ' WHERE p.pref_id = ' . TB_PREFIX . 'invoices.preference_id AND p.domain_id = ' . TB_PREFIX . 'invoices.domain_id)'
+                . ' WHERE (denorm_currency_locale IS NULL OR denorm_currency_locale = \'\')';
+            break;
+        default:
+            $patch['365']['patch'] = 'UPDATE ' . TB_PREFIX . 'invoices i'
+                . ' INNER JOIN ' . TB_PREFIX . 'currencies c ON c.id = i.currency_id AND c.domain_id = i.domain_id'
+                . ' SET i.denorm_currency_code = c.currency_code'
+                . ' WHERE (i.denorm_currency_code IS NULL OR i.denorm_currency_code = \'\')'
+                . ' AND i.currency_id IS NOT NULL;'
+                . ' UPDATE ' . TB_PREFIX . 'invoices i'
+                . ' INNER JOIN ' . TB_PREFIX . 'preferences p ON p.pref_id = i.preference_id AND p.domain_id = i.domain_id'
+                . ' SET i.denorm_currency_locale = p.locale'
+                . ' WHERE (i.denorm_currency_locale IS NULL OR i.denorm_currency_locale = \'\')';
+            break;
+    }
+    $patch['365']['date'] = "20260420";
+
+    $patch['366']['name'] = "si_payment: denormalised currency_code and currency_locale from invoice";
+    switch ($db_server) {
+        case 'pgsql':
+            $p366 = '';
+            $p366 .= checkFieldExists(TB_PREFIX . 'payment', 'denorm_currency_code')
+                ? '' : 'ALTER TABLE ' . TB_PREFIX . 'payment ADD COLUMN denorm_currency_code VARCHAR(10) NOT NULL DEFAULT \'\'; ';
+            $p366 .= checkFieldExists(TB_PREFIX . 'payment', 'denorm_currency_locale')
+                ? '' : 'ALTER TABLE ' . TB_PREFIX . 'payment ADD COLUMN denorm_currency_locale VARCHAR(32) NOT NULL DEFAULT \'\'; ';
+            if ($p366 !== '') {
+                $p366 .= 'UPDATE ' . TB_PREFIX . 'payment ap'
+                    . ' SET denorm_currency_code = COALESCE(iv.denorm_currency_code, \'\'),'
+                    . ' denorm_currency_locale = COALESCE(iv.denorm_currency_locale, \'\')'
+                    . ' FROM ' . TB_PREFIX . 'invoices iv'
+                    . ' WHERE iv.id = ap.ac_inv_id AND iv.domain_id = ap.domain_id;';
+            } else {
+                $p366 = 'SELECT 1';
+            }
+            $patch['366']['patch'] = $p366;
+            break;
+        case 'sqlite':
+            $p366 = '';
+            $p366 .= checkFieldExists(TB_PREFIX . 'payment', 'denorm_currency_code')
+                ? '' : 'ALTER TABLE ' . TB_PREFIX . 'payment ADD COLUMN denorm_currency_code VARCHAR(10) NOT NULL DEFAULT \'\'; ';
+            $p366 .= checkFieldExists(TB_PREFIX . 'payment', 'denorm_currency_locale')
+                ? '' : 'ALTER TABLE ' . TB_PREFIX . 'payment ADD COLUMN denorm_currency_locale VARCHAR(32) NOT NULL DEFAULT \'\'; ';
+            if ($p366 !== '') {
+                $p366 .= 'UPDATE ' . TB_PREFIX . 'payment AS ap'
+                    . ' SET denorm_currency_code = (SELECT COALESCE(iv.denorm_currency_code, \'\') FROM ' . TB_PREFIX . 'invoices iv'
+                    . ' WHERE iv.id = ap.ac_inv_id AND iv.domain_id = ap.domain_id),'
+                    . ' denorm_currency_locale = (SELECT COALESCE(iv.denorm_currency_locale, \'\') FROM ' . TB_PREFIX . 'invoices iv'
+                    . ' WHERE iv.id = ap.ac_inv_id AND iv.domain_id = ap.domain_id);';
+            } else {
+                $p366 = 'SELECT 1';
+            }
+            $patch['366']['patch'] = $p366;
+            break;
+        default:
+            $p366 = '';
+            $p366 .= checkFieldExists(TB_PREFIX . 'payment', 'denorm_currency_code')
+                ? '' : 'ALTER TABLE `' . TB_PREFIX . 'payment` ADD `denorm_currency_code` VARCHAR(10) NOT NULL DEFAULT \'\'; ';
+            $p366 .= checkFieldExists(TB_PREFIX . 'payment', 'denorm_currency_locale')
+                ? '' : 'ALTER TABLE `' . TB_PREFIX . 'payment` ADD `denorm_currency_locale` VARCHAR(32) NOT NULL DEFAULT \'\'; ';
+            if ($p366 !== '') {
+                $p366 .= 'UPDATE ' . TB_PREFIX . 'payment ap'
+                    . ' INNER JOIN ' . TB_PREFIX . 'invoices iv ON iv.id = ap.ac_inv_id AND iv.domain_id = ap.domain_id'
+                    . ' SET ap.denorm_currency_code = COALESCE(iv.denorm_currency_code, \'\'),'
+                    . ' ap.denorm_currency_locale = COALESCE(iv.denorm_currency_locale, \'\');';
+            } else {
+                $p366 = 'SELECT 1';
+            }
+            $patch['366']['patch'] = $p366;
+            break;
+    }
+    $patch['366']['date'] = "20260420";
+
+    // ── Payment terms ─────────────────────────────────────────────────────────
+
+    $patch['367']['name'] = "si_payment_terms: create global payment terms table";
+    switch ($db_server) {
+        case 'pgsql':
+            $patch['367']['patch'] = checkTableExists(TB_PREFIX . 'payment_terms')
                 ? 'SELECT 1'
                 : 'CREATE TABLE ' . TB_PREFIX . 'payment_terms ('
                 . 'term_id SERIAL PRIMARY KEY,'
@@ -2912,7 +2811,7 @@ PRIMARY KEY ( `domain_id`, `id` )
                 . ')';
             break;
         case 'sqlite':
-            $patch['380']['patch'] = checkTableExists(TB_PREFIX . 'payment_terms')
+            $patch['367']['patch'] = checkTableExists(TB_PREFIX . 'payment_terms')
                 ? 'SELECT 1'
                 : 'CREATE TABLE ' . TB_PREFIX . 'payment_terms ('
                 . 'term_id INTEGER PRIMARY KEY AUTOINCREMENT,'
@@ -2924,7 +2823,7 @@ PRIMARY KEY ( `domain_id`, `id` )
                 . ')';
             break;
         default:
-            $patch['380']['patch'] = checkTableExists(TB_PREFIX . 'payment_terms')
+            $patch['367']['patch'] = checkTableExists(TB_PREFIX . 'payment_terms')
                 ? 'SELECT 1'
                 : 'CREATE TABLE `' . TB_PREFIX . 'payment_terms` ('
                 . '`term_id` int(11) NOT NULL AUTO_INCREMENT,'
@@ -2938,9 +2837,9 @@ PRIMARY KEY ( `domain_id`, `id` )
                 . ') ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci';
             break;
     }
-    $patch['380']['date'] = "20260421";
+    $patch['367']['date'] = "20260421";
 
-    $patch['381']['name'] = "si_payment_terms: seed standard terms";
+    $patch['368']['name'] = "si_payment_terms: seed standard terms";
     $seedRows = "(1, 'NET_7', 'Net 7', 'NET_DAYS', 7, 10),"
         . "(2, 'NET_10', 'Net 10', 'NET_DAYS', 10, 20),"
         . "(3, 'NET_14', 'Net 14', 'NET_DAYS', 14, 30),"
@@ -2953,112 +2852,112 @@ PRIMARY KEY ( `domain_id`, `id` )
         . "(10, 'MFI_15', '15 MFI (15th of month following invoice)', 'MFI_DAY', 15, 100)";
     switch ($db_server) {
         case 'pgsql':
-            $patch['381']['patch'] = 'INSERT INTO ' . TB_PREFIX . 'payment_terms'
+            $patch['368']['patch'] = 'INSERT INTO ' . TB_PREFIX . 'payment_terms'
                 . ' (term_id, term_code, term_label, calc_kind, param_int, sort_order) VALUES ' . $seedRows
                 . ' ON CONFLICT (term_code) DO NOTHING';
             break;
         case 'sqlite':
-            $patch['381']['patch'] = 'INSERT OR IGNORE INTO ' . TB_PREFIX . 'payment_terms'
+            $patch['368']['patch'] = 'INSERT OR IGNORE INTO ' . TB_PREFIX . 'payment_terms'
                 . ' (term_id, term_code, term_label, calc_kind, param_int, sort_order) VALUES ' . $seedRows;
             break;
         default:
-            $patch['381']['patch'] = 'INSERT IGNORE INTO `' . TB_PREFIX . 'payment_terms`'
+            $patch['368']['patch'] = 'INSERT IGNORE INTO `' . TB_PREFIX . 'payment_terms`'
                 . ' (`term_id`, `term_code`, `term_label`, `calc_kind`, `param_int`, `sort_order`) VALUES ' . $seedRows;
             break;
     }
-    $patch['381']['date'] = "20260421";
+    $patch['368']['date'] = "20260421";
 
-    $patch['382']['name'] = "si_payment_terms: PostgreSQL sequence sync after seed";
-    $patch['382']['patch'] = ($db_server === 'pgsql')
+    $patch['369']['name'] = "si_payment_terms: PostgreSQL sequence sync after seed";
+    $patch['369']['patch'] = ($db_server === 'pgsql')
         ? "SELECT setval(pg_get_serial_sequence('" . TB_PREFIX . "payment_terms', 'term_id'), COALESCE((SELECT MAX(term_id) FROM " . TB_PREFIX . 'payment_terms), 1))'
         : 'SELECT 1';
-    $patch['382']['date'] = "20260421";
+    $patch['369']['date'] = "20260421";
 
-    $patch['383']['name'] = "si_preferences: add payment_term_id";
+    $patch['370']['name'] = "si_preferences: add payment_term_id";
     switch ($db_server) {
         case 'pgsql':
-            $patch['383']['patch'] = checkFieldExists(TB_PREFIX . 'preferences', 'payment_term_id')
+            $patch['370']['patch'] = checkFieldExists(TB_PREFIX . 'preferences', 'payment_term_id')
                 ? 'SELECT 1'
                 : 'ALTER TABLE ' . TB_PREFIX . 'preferences ADD COLUMN payment_term_id INTEGER NULL';
             break;
         case 'sqlite':
-            $patch['383']['patch'] = checkFieldExists(TB_PREFIX . 'preferences', 'payment_term_id')
+            $patch['370']['patch'] = checkFieldExists(TB_PREFIX . 'preferences', 'payment_term_id')
                 ? 'SELECT 1'
                 : 'ALTER TABLE ' . TB_PREFIX . 'preferences ADD COLUMN payment_term_id INTEGER NULL';
             break;
         default:
-            $patch['383']['patch'] = checkFieldExists(TB_PREFIX . 'preferences', 'payment_term_id')
+            $patch['370']['patch'] = checkFieldExists(TB_PREFIX . 'preferences', 'payment_term_id')
                 ? 'SELECT 1'
                 : 'ALTER TABLE `' . TB_PREFIX . 'preferences` ADD `payment_term_id` int(11) NULL';
             break;
     }
-    $patch['383']['date'] = "20260421";
+    $patch['370']['date'] = "20260421";
 
-    $patch['384']['name'] = "si_invoices: add payment_term_id";
+    $patch['371']['name'] = "si_invoices: add payment_term_id";
     switch ($db_server) {
         case 'pgsql':
-            $patch['384']['patch'] = checkFieldExists(TB_PREFIX . 'invoices', 'payment_term_id')
+            $patch['371']['patch'] = checkFieldExists(TB_PREFIX . 'invoices', 'payment_term_id')
                 ? 'SELECT 1'
                 : 'ALTER TABLE ' . TB_PREFIX . 'invoices ADD COLUMN payment_term_id INTEGER NULL';
             break;
         case 'sqlite':
-            $patch['384']['patch'] = checkFieldExists(TB_PREFIX . 'invoices', 'payment_term_id')
+            $patch['371']['patch'] = checkFieldExists(TB_PREFIX . 'invoices', 'payment_term_id')
                 ? 'SELECT 1'
                 : 'ALTER TABLE ' . TB_PREFIX . 'invoices ADD COLUMN payment_term_id INTEGER NULL';
             break;
         default:
-            $patch['384']['patch'] = checkFieldExists(TB_PREFIX . 'invoices', 'payment_term_id')
+            $patch['371']['patch'] = checkFieldExists(TB_PREFIX . 'invoices', 'payment_term_id')
                 ? 'SELECT 1'
                 : 'ALTER TABLE `' . TB_PREFIX . 'invoices` ADD `payment_term_id` int(11) NULL';
             break;
     }
-    $patch['384']['date'] = "20260421";
+    $patch['371']['date'] = "20260421";
 
-    $patch['385']['name'] = "si_invoices: add due_date";
+    $patch['372']['name'] = "si_invoices: add due_date";
     switch ($db_server) {
         case 'pgsql':
-            $patch['385']['patch'] = checkFieldExists(TB_PREFIX . 'invoices', 'due_date')
+            $patch['372']['patch'] = checkFieldExists(TB_PREFIX . 'invoices', 'due_date')
                 ? 'SELECT 1'
                 : 'ALTER TABLE ' . TB_PREFIX . 'invoices ADD COLUMN due_date DATE NULL';
             break;
         case 'sqlite':
-            $patch['385']['patch'] = checkFieldExists(TB_PREFIX . 'invoices', 'due_date')
+            $patch['372']['patch'] = checkFieldExists(TB_PREFIX . 'invoices', 'due_date')
                 ? 'SELECT 1'
                 : 'ALTER TABLE ' . TB_PREFIX . 'invoices ADD COLUMN due_date DATE NULL';
             break;
         default:
-            $patch['385']['patch'] = checkFieldExists(TB_PREFIX . 'invoices', 'due_date')
+            $patch['372']['patch'] = checkFieldExists(TB_PREFIX . 'invoices', 'due_date')
                 ? 'SELECT 1'
                 : 'ALTER TABLE `' . TB_PREFIX . 'invoices` ADD `due_date` DATE NULL';
             break;
     }
-    $patch['385']['date'] = "20260421";
+    $patch['372']['date'] = "20260421";
 
-    $patch['386']['name'] = "si_preferences: default payment_term_id to Net 14";
+    $patch['373']['name'] = "si_preferences: default payment_term_id to Net 14";
     switch ($db_server) {
         case 'pgsql':
-            $patch['386']['patch'] = 'UPDATE ' . TB_PREFIX . 'preferences p'
+            $patch['373']['patch'] = 'UPDATE ' . TB_PREFIX . 'preferences p'
                 . ' SET payment_term_id = (SELECT t.term_id FROM ' . TB_PREFIX . 'payment_terms t WHERE t.term_code = \'NET_14\' LIMIT 1)'
                 . ' WHERE payment_term_id IS NULL';
             break;
         case 'sqlite':
-            $patch['386']['patch'] = 'UPDATE ' . TB_PREFIX . 'preferences'
+            $patch['373']['patch'] = 'UPDATE ' . TB_PREFIX . 'preferences'
                 . ' SET payment_term_id = (SELECT term_id FROM ' . TB_PREFIX . 'payment_terms WHERE term_code = \'NET_14\' LIMIT 1)'
                 . ' WHERE payment_term_id IS NULL';
             break;
         default:
-            $patch['386']['patch'] = 'UPDATE ' . TB_PREFIX . 'preferences p'
+            $patch['373']['patch'] = 'UPDATE ' . TB_PREFIX . 'preferences p'
                 . ' INNER JOIN ' . TB_PREFIX . 'payment_terms t ON t.term_code = \'NET_14\''
                 . ' SET p.payment_term_id = t.term_id'
                 . ' WHERE p.payment_term_id IS NULL';
             break;
     }
-    $patch['386']['date'] = "20260421";
+    $patch['373']['date'] = "20260421";
 
-    $patch['387']['name'] = "si_preferences: widen preference varchar fields to 255";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-            $patch['387']['patch'] = 'ALTER TABLE ' . TB_PREFIX . 'preferences '
+    $patch['374']['name'] = "si_preferences: widen preference varchar fields to 255";
+    switch ($db_server) {
+        case 'pgsql':
+            $patch['374']['patch'] = 'ALTER TABLE ' . TB_PREFIX . 'preferences '
                 . 'ALTER COLUMN pref_description TYPE VARCHAR(255), '
                 . 'ALTER COLUMN pref_currency_sign TYPE VARCHAR(255), '
                 . 'ALTER COLUMN pref_inv_heading TYPE VARCHAR(255), '
@@ -3070,12 +2969,11 @@ PRIMARY KEY ( `domain_id`, `id` )
                 . 'ALTER COLUMN pref_inv_payment_line2_name TYPE VARCHAR(255), '
                 . 'ALTER COLUMN pref_inv_payment_line2_value TYPE VARCHAR(255)';
             break;
-        case 'pdo_sqlite':
-            $patch['387']['patch'] = 'SELECT 1';
+        case 'sqlite':
+            $patch['374']['patch'] = 'SELECT 1';
             break;
-        case 'pdo_mysql':
         default:
-            $patch['387']['patch'] = 'ALTER TABLE `' . TB_PREFIX . 'preferences` '
+            $patch['374']['patch'] = 'ALTER TABLE `' . TB_PREFIX . 'preferences` '
                 . 'MODIFY `pref_description` VARCHAR(255) NULL, '
                 . 'MODIFY `pref_currency_sign` VARCHAR(255) NULL, '
                 . 'MODIFY `pref_inv_heading` VARCHAR(255) NULL, '
@@ -3088,103 +2986,49 @@ PRIMARY KEY ( `domain_id`, `id` )
                 . 'MODIFY `pref_inv_payment_line2_value` VARCHAR(255) NULL';
             break;
     }
-    $patch['387']['date'] = "20260421";
+    $patch['374']['date'] = "20260421";
 
-    $patch['388']['name'] = "si_biller: bank_account_name for bank transfer details";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
-            $patch['388']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'bank_account_name')
-                ? 'SELECT 1'
-                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN bank_account_name VARCHAR(255) NULL';
+    // ── Bank transfer columns in si_biller ──────────────────────────────────
+
+    $patch['375']['name'] = "si_biller: add bank transfer columns (name, bank_name, swift_bic, account_number, routing_sort_code)";
+    switch ($db_server) {
+        case 'pgsql':
+        case 'sqlite':
+            $bank_fields = [
+                'bank_account_name'     => 255,
+                'bank_name'             => 255,
+                'bank_swift_bic'        => 50,
+                'bank_account_number'   => 100,
+                'bank_routing_sort_code'=> 50,
+            ];
+            $p375 = '';
+            foreach ($bank_fields as $f => $w) {
+                $p375 .= checkFieldExists(TB_PREFIX . 'biller', $f)
+                    ? '' : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN ' . $f . ' VARCHAR(' . $w . ') NULL; ';
+            }
+            $patch['375']['patch'] = $p375 !== '' ? rtrim($p375) : 'SELECT 1';
             break;
-        case 'pdo_mysql':
         default:
-            $patch['388']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'bank_account_name')
+            $patch['375']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'bank_account_name')
                 ? 'SELECT 1'
-                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `bank_account_name` VARCHAR(255) NULL';
+                : "ALTER TABLE `" . TB_PREFIX . "biller` "
+                . "ADD COLUMN `bank_account_name` VARCHAR(255) NULL, "
+                . "ADD COLUMN `bank_name` VARCHAR(255) NULL, "
+                . "ADD COLUMN `bank_swift_bic` VARCHAR(50) NULL, "
+                . "ADD COLUMN `bank_account_number` VARCHAR(100) NULL, "
+                . "ADD COLUMN `bank_routing_sort_code` VARCHAR(50) NULL";
             break;
     }
-    $patch['388']['date'] = "20260422";
+    $patch['375']['date'] = "20260422";
 
-    $patch['389']['name'] = "si_biller: bank_name for bank transfer details";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
-            $patch['389']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'bank_name')
-                ? 'SELECT 1'
-                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN bank_name VARCHAR(255) NULL';
-            break;
-        case 'pdo_mysql':
-        default:
-            $patch['389']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'bank_name')
-                ? 'SELECT 1'
-                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `bank_name` VARCHAR(255) NULL';
-            break;
-    }
-    $patch['389']['date'] = "20260422";
+    // ── Currency system ───────────────────────────────────────────────────────
 
-    $patch['390']['name'] = "si_biller: bank_swift_bic for bank transfer details";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
-            $patch['390']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'bank_swift_bic')
-                ? 'SELECT 1'
-                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN bank_swift_bic VARCHAR(50) NULL';
-            break;
-        case 'pdo_mysql':
-        default:
-            $patch['390']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'bank_swift_bic')
-                ? 'SELECT 1'
-                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `bank_swift_bic` VARCHAR(50) NULL';
-            break;
-    }
-    $patch['390']['date'] = "20260422";
-
-    $patch['391']['name'] = "si_biller: bank_account_number (also IBAN) for bank transfer details";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
-            $patch['391']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'bank_account_number')
-                ? 'SELECT 1'
-                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN bank_account_number VARCHAR(100) NULL';
-            break;
-        case 'pdo_mysql':
-        default:
-            $patch['391']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'bank_account_number')
-                ? 'SELECT 1'
-                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `bank_account_number` VARCHAR(100) NULL';
-            break;
-    }
-    $patch['391']['date'] = "20260422";
-
-    $patch['392']['name'] = "si_biller: bank_routing_sort_code (BSB/ABA/Sort Code) for bank transfer details";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-        case 'pdo_sqlite':
-            $patch['392']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'bank_routing_sort_code')
-                ? 'SELECT 1'
-                : 'ALTER TABLE ' . TB_PREFIX . 'biller ADD COLUMN bank_routing_sort_code VARCHAR(50) NULL';
-            break;
-        case 'pdo_mysql':
-        default:
-            $patch['392']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'bank_routing_sort_code')
-                ? 'SELECT 1'
-                : 'ALTER TABLE `' . TB_PREFIX . 'biller` ADD COLUMN `bank_routing_sort_code` VARCHAR(50) NULL';
-            break;
-    }
-    $patch['392']['date'] = "20260422";
-
-    $patch['393']['name'] = "Add currency_position to invoices and payments (now resolved via si_currencies)";
-    $patch['393']['patch'] = 'SELECT 1';
-    $patch['393']['date'] = "20260508";
-
-    $patch['394']['name'] = "Create si_currencies table, link preferences/invoices, and migrate existing currencies";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-            $p394 = '';
-            if (!checkTableExists(TB_PREFIX . 'currencies')) {
-                $p394 .= "CREATE TABLE " . TB_PREFIX . "currencies (
+    $patch['376']['name'] = "Create si_currency table, link preferences/invoices, and migrate existing currencies";
+    switch ($db_server) {
+        case 'pgsql':
+            $p376 = '';
+            if (!checkTableExists(TB_PREFIX . 'currency')) {
+                $p376 .= "CREATE TABLE " . TB_PREFIX . "currency (
                     id SERIAL PRIMARY KEY,
                     domain_id INTEGER NOT NULL DEFAULT 1,
                     currency_code VARCHAR(10) NOT NULL DEFAULT '',
@@ -3193,15 +3037,14 @@ PRIMARY KEY ( `domain_id`, `id` )
                     is_default SMALLINT NOT NULL DEFAULT 0,
                     enabled SMALLINT NOT NULL DEFAULT 1
                 ); ";
-                $p394 .= "CREATE INDEX idx_currencies_domain ON " . TB_PREFIX . "currencies (domain_id); ";
+                $p376 .= "CREATE INDEX idx_currency_domain ON " . TB_PREFIX . "currency (domain_id); ";
             }
-            $p394 .= checkFieldExists(TB_PREFIX . 'preferences', 'currency_id')
+            $p376 .= checkFieldExists(TB_PREFIX . 'preferences', 'currency_id')
                 ? '' : "ALTER TABLE " . TB_PREFIX . "preferences ADD COLUMN currency_id INTEGER DEFAULT NULL; ";
-            $p394 .= checkFieldExists(TB_PREFIX . 'invoices', 'currency_id')
+            $p376 .= checkFieldExists(TB_PREFIX . 'invoices', 'currency_id')
                 ? '' : "ALTER TABLE " . TB_PREFIX . "invoices ADD COLUMN currency_id INTEGER DEFAULT NULL; ";
 
-            // Seed preset currencies (idempotent via ON CONFLICT)
-            $p394 .= "INSERT INTO " . TB_PREFIX . "currencies (domain_id, currency_code, currency_sign, currency_position, enabled) VALUES
+            $p376 .= "INSERT INTO " . TB_PREFIX . "currency (domain_id, currency_code, currency_sign, currency_position, enabled) VALUES
                 (1, 'USD', '$', 'left', 1), (1, 'CAD', 'C$', 'left', 1), (1, 'AUD', 'A$', 'left', 1),
                 (1, 'NZD', 'NZ$', 'left', 1), (1, 'MXN', 'MX$', 'left', 1), (1, 'BRL', 'R$', 'right', 1),
                 (1, 'SGD', 'S$', 'left', 1), (1, 'EUR', '€', 'right', 1), (1, 'GBP', '£', 'left', 1),
@@ -3215,13 +3058,13 @@ PRIMARY KEY ( `domain_id`, `id` )
                 (1, 'ZAR', 'R', 'right', 1), (1, 'BTC', '₿', 'left', 1), (1, 'ETH', 'Ξ', 'left', 1)
                 ON CONFLICT DO NOTHING; ";
 
-            $patch['394']['patch'] = $p394;
+            $patch['376']['patch'] = $p376;
             break;
 
-        case 'pdo_sqlite':
-            $p394 = '';
-            if (!checkTableExists(TB_PREFIX . 'currencies')) {
-                $p394 .= "CREATE TABLE " . TB_PREFIX . "currencies (
+        case 'sqlite':
+            $p376 = '';
+            if (!checkTableExists(TB_PREFIX . 'currency')) {
+                $p376 .= "CREATE TABLE " . TB_PREFIX . "currency (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     domain_id INTEGER NOT NULL DEFAULT 1,
                     currency_code TEXT NOT NULL DEFAULT '',
@@ -3230,15 +3073,14 @@ PRIMARY KEY ( `domain_id`, `id` )
                     is_default INTEGER NOT NULL DEFAULT 0,
                     enabled INTEGER NOT NULL DEFAULT 1
                 ); ";
-                $p394 .= "CREATE INDEX idx_currencies_domain ON " . TB_PREFIX . "currencies (domain_id); ";
+                $p376 .= "CREATE INDEX idx_currency_domain ON " . TB_PREFIX . "currency (domain_id); ";
             }
-            $p394 .= checkFieldExists(TB_PREFIX . 'preferences', 'currency_id')
+            $p376 .= checkFieldExists(TB_PREFIX . 'preferences', 'currency_id')
                 ? '' : "ALTER TABLE " . TB_PREFIX . "preferences ADD COLUMN currency_id INTEGER DEFAULT NULL; ";
-            $p394 .= checkFieldExists(TB_PREFIX . 'invoices', 'currency_id')
+            $p376 .= checkFieldExists(TB_PREFIX . 'invoices', 'currency_id')
                 ? '' : "ALTER TABLE " . TB_PREFIX . "invoices ADD COLUMN currency_id INTEGER DEFAULT NULL; ";
 
-            // Seed preset currencies (SQLite: simple INSERT, duplicates ignored by transaction or we accept them)
-            $p394 .= "INSERT OR IGNORE INTO " . TB_PREFIX . "currencies (domain_id, currency_code, currency_sign, currency_position, enabled) VALUES
+            $p376 .= "INSERT OR IGNORE INTO " . TB_PREFIX . "currency (domain_id, currency_code, currency_sign, currency_position, enabled) VALUES
                 (1, 'USD', '$', 'left', 1), (1, 'CAD', 'C$', 'left', 1), (1, 'AUD', 'A$', 'left', 1),
                 (1, 'NZD', 'NZ$', 'left', 1), (1, 'MXN', 'MX$', 'left', 1), (1, 'BRL', 'R$', 'right', 1),
                 (1, 'SGD', 'S$', 'left', 1), (1, 'EUR', '€', 'right', 1), (1, 'GBP', '£', 'left', 1),
@@ -3251,14 +3093,13 @@ PRIMARY KEY ( `domain_id`, `id` )
                 (1, 'VND', '₫', 'right', 1), (1, 'ILS', '₪', 'left', 1), (1, 'SAR', '﷼', 'left', 1),
                 (1, 'ZAR', 'R', 'right', 1), (1, 'BTC', '₿', 'left', 1), (1, 'ETH', 'Ξ', 'left', 1); ";
 
-            $patch['394']['patch'] = $p394;
+            $patch['376']['patch'] = $p376;
             break;
 
-        case 'pdo_mysql':
         default:
-            $p394 = '';
-            if (!checkTableExists(TB_PREFIX . 'currencies')) {
-                $p394 .= "CREATE TABLE `" . TB_PREFIX . "currencies` (
+            $p376 = '';
+            if (!checkTableExists(TB_PREFIX . 'currency')) {
+                $p376 .= "CREATE TABLE `" . TB_PREFIX . "currency` (
                     `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                     `domain_id` INT NOT NULL DEFAULT 1,
                     `currency_code` VARCHAR(10) NOT NULL DEFAULT '',
@@ -3269,13 +3110,12 @@ PRIMARY KEY ( `domain_id`, `id` )
                     KEY `idx_domain` (`domain_id`)
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci; ";
             }
-            $p394 .= checkFieldExists(TB_PREFIX . 'preferences', 'currency_id')
+            $p376 .= checkFieldExists(TB_PREFIX . 'preferences', 'currency_id')
                 ? '' : "ALTER TABLE `" . TB_PREFIX . "preferences` ADD COLUMN `currency_id` INT DEFAULT NULL; ";
-            $p394 .= checkFieldExists(TB_PREFIX . 'invoices', 'currency_id')
+            $p376 .= checkFieldExists(TB_PREFIX . 'invoices', 'currency_id')
                 ? '' : "ALTER TABLE `" . TB_PREFIX . "invoices` ADD COLUMN `currency_id` INT DEFAULT NULL; ";
 
-            // Seed preset currencies (ON DUPLICATE KEY UPDATE makes it idempotent)
-            $p394 .= "INSERT INTO `" . TB_PREFIX . "currencies` (`domain_id`, `currency_code`, `currency_sign`, `currency_position`, `enabled`) VALUES
+            $p376 .= "INSERT INTO `" . TB_PREFIX . "currency` (`domain_id`, `currency_code`, `currency_sign`, `currency_position`, `enabled`) VALUES
                 (1, 'USD', '$', 'left', 1), (1, 'CAD', 'C$', 'left', 1), (1, 'AUD', 'A$', 'left', 1),
                 (1, 'NZD', 'NZ$', 'left', 1), (1, 'MXN', 'MX$', 'left', 1), (1, 'BRL', 'R$', 'right', 1),
                 (1, 'SGD', 'S$', 'left', 1), (1, 'EUR', '€', 'right', 1), (1, 'GBP', '£', 'left', 1),
@@ -3289,68 +3129,65 @@ PRIMARY KEY ( `domain_id`, `id` )
                 (1, 'ZAR', 'R', 'right', 1), (1, 'BTC', '₿', 'left', 1), (1, 'ETH', 'Ξ', 'left', 1)
                 ON DUPLICATE KEY UPDATE `currency_sign`=VALUES(`currency_sign`), `currency_position`=VALUES(`currency_position`); ";
 
-            $patch['394']['patch'] = $p394;
+            $patch['376']['patch'] = $p376;
             break;
     }
-    $patch['394']['date'] = "20260508";
+    $patch['376']['date'] = "20260508";
 
-    $patch['395']['name'] = "Add show_currency_code toggle to preferences and invoices";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-            $p395 = '';
-            $p395 .= checkFieldExists(TB_PREFIX . 'preferences', 'show_currency_code')
+    $patch['377']['name'] = "Add show_currency_code toggle to preferences and invoices";
+    switch ($db_server) {
+        case 'pgsql':
+            $p377 = '';
+            $p377 .= checkFieldExists(TB_PREFIX . 'preferences', 'show_currency_code')
                 ? '' : "ALTER TABLE " . TB_PREFIX . "preferences ADD COLUMN show_currency_code SMALLINT NOT NULL DEFAULT 0; ";
-            $p395 .= checkFieldExists(TB_PREFIX . 'invoices', 'show_currency_code')
+            $p377 .= checkFieldExists(TB_PREFIX . 'invoices', 'show_currency_code')
                 ? '' : "ALTER TABLE " . TB_PREFIX . "invoices ADD COLUMN show_currency_code SMALLINT NOT NULL DEFAULT 0; ";
-            $patch['395']['patch'] = $p395;
+            $patch['377']['patch'] = $p377;
             break;
-        case 'pdo_sqlite':
-            $p395 = '';
-            $p395 .= checkFieldExists(TB_PREFIX . 'preferences', 'show_currency_code')
+        case 'sqlite':
+            $p377 = '';
+            $p377 .= checkFieldExists(TB_PREFIX . 'preferences', 'show_currency_code')
                 ? '' : "ALTER TABLE " . TB_PREFIX . "preferences ADD COLUMN show_currency_code INTEGER NOT NULL DEFAULT 0; ";
-            $p395 .= checkFieldExists(TB_PREFIX . 'invoices', 'show_currency_code')
+            $p377 .= checkFieldExists(TB_PREFIX . 'invoices', 'show_currency_code')
                 ? '' : "ALTER TABLE " . TB_PREFIX . "invoices ADD COLUMN show_currency_code INTEGER NOT NULL DEFAULT 0; ";
-            $patch['395']['patch'] = $p395;
+            $patch['377']['patch'] = $p377;
             break;
-        case 'pdo_mysql':
         default:
-            $p395 = '';
-            $p395 .= checkFieldExists(TB_PREFIX . 'preferences', 'show_currency_code')
+            $p377 = '';
+            $p377 .= checkFieldExists(TB_PREFIX . 'preferences', 'show_currency_code')
                 ? '' : "ALTER TABLE `" . TB_PREFIX . "preferences` ADD COLUMN `show_currency_code` TINYINT NOT NULL DEFAULT 0; ";
-            $p395 .= checkFieldExists(TB_PREFIX . 'invoices', 'show_currency_code')
+            $p377 .= checkFieldExists(TB_PREFIX . 'invoices', 'show_currency_code')
                 ? '' : "ALTER TABLE `" . TB_PREFIX . "invoices` ADD COLUMN `show_currency_code` TINYINT NOT NULL DEFAULT 0; ";
-            $patch['395']['patch'] = $p395;
+            $patch['377']['patch'] = $p377;
             break;
     }
-    $patch['395']['date'] = "20260508";
+    $patch['377']['date'] = "20260508";
 
-    $patch['396']['name'] = "Add payment_bank_name and payment_reference to preferences";
-    switch ($config->database->adapter) {
-        case 'pdo_pgsql':
-            $p396 = '';
-            $p396 .= checkFieldExists(TB_PREFIX . 'preferences', 'payment_bank_name')
+    $patch['378']['name'] = "Add payment_bank_name and payment_reference to preferences";
+    switch ($db_server) {
+        case 'pgsql':
+            $p378 = '';
+            $p378 .= checkFieldExists(TB_PREFIX . 'preferences', 'payment_bank_name')
                 ? '' : "ALTER TABLE " . TB_PREFIX . "preferences ADD COLUMN payment_bank_name VARCHAR(255) DEFAULT NULL; ";
-            $p396 .= checkFieldExists(TB_PREFIX . 'preferences', 'payment_reference')
+            $p378 .= checkFieldExists(TB_PREFIX . 'preferences', 'payment_reference')
                 ? '' : "ALTER TABLE " . TB_PREFIX . "preferences ADD COLUMN payment_reference VARCHAR(255) DEFAULT NULL; ";
-            $patch['396']['patch'] = $p396;
+            $patch['378']['patch'] = $p378;
             break;
-        case 'pdo_sqlite':
-            $p396 = '';
-            $p396 .= checkFieldExists(TB_PREFIX . 'preferences', 'payment_bank_name')
+        case 'sqlite':
+            $p378 = '';
+            $p378 .= checkFieldExists(TB_PREFIX . 'preferences', 'payment_bank_name')
                 ? '' : "ALTER TABLE " . TB_PREFIX . "preferences ADD COLUMN payment_bank_name TEXT DEFAULT NULL; ";
-            $p396 .= checkFieldExists(TB_PREFIX . 'preferences', 'payment_reference')
+            $p378 .= checkFieldExists(TB_PREFIX . 'preferences', 'payment_reference')
                 ? '' : "ALTER TABLE " . TB_PREFIX . "preferences ADD COLUMN payment_reference TEXT DEFAULT NULL; ";
-            $patch['396']['patch'] = $p396;
+            $patch['378']['patch'] = $p378;
             break;
-        case 'pdo_mysql':
         default:
-            $p396 = '';
-            $p396 .= checkFieldExists(TB_PREFIX . 'preferences', 'payment_bank_name')
+            $p378 = '';
+            $p378 .= checkFieldExists(TB_PREFIX . 'preferences', 'payment_bank_name')
                 ? '' : "ALTER TABLE `" . TB_PREFIX . "preferences` ADD COLUMN `payment_bank_name` VARCHAR(255) DEFAULT NULL; ";
-            $p396 .= checkFieldExists(TB_PREFIX . 'preferences', 'payment_reference')
+            $p378 .= checkFieldExists(TB_PREFIX . 'preferences', 'payment_reference')
                 ? '' : "ALTER TABLE `" . TB_PREFIX . "preferences` ADD COLUMN `payment_reference` VARCHAR(255) DEFAULT NULL; ";
-            $patch['396']['patch'] = $p396;
+            $patch['378']['patch'] = $p378;
             break;
     }
-    $patch['396']['date'] = "20260508";
-
+    $patch['378']['date'] = "20260508";

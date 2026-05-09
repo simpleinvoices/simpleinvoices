@@ -23,6 +23,29 @@ checkLogin();
 
 $op = $_POST['op'] ?? null;
 
+# Handle logo file upload (S3 storage)
+$uploadedFile = $_FILES['logo_file'] ?? null;
+if ($uploadedFile && !empty($uploadedFile['tmp_name']) && $uploadedFile['error'] === UPLOAD_ERR_OK) {
+	$maxSize = 2 * 1024 * 1024; // 2MB
+	if ($uploadedFile['size'] <= $maxSize) {
+		$ext = strtolower(pathinfo($uploadedFile['name'], PATHINFO_EXTENSION));
+		$allowed = ['png', 'jpg', 'jpeg', 'gif', 'webp'];
+		if (in_array($ext, $allowed, true)) {
+			$uuidFilename = S3LogoStore::upload($uploadedFile['tmp_name'], $uploadedFile['name']);
+			if ($uuidFilename !== null) {
+				// Delete old S3 logo if editing
+				if ($op === 'edit_biller' && !empty($_POST['existing_logo'])) {
+					$oldLogo = $_POST['existing_logo'];
+					if (preg_match('/^[a-f0-9]{36}\.(png|jpg|jpeg|gif|webp)$/i', $oldLogo)) {
+						S3LogoStore::delete($oldLogo);
+					}
+				}
+				$_POST['logo'] = $uuidFilename;
+			}
+		}
+	}
+}
+
 #insert biller
 
 $saved = false;
