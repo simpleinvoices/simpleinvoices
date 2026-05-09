@@ -1,4 +1,9 @@
 {
+    "config": {
+        "platform": {
+            "php": "8.2"
+        }
+    },
     "require": {
         "mpdf/mpdf": "^8.2",
         "ezyang/htmlpurifier": "^4.18",

@@ -471,7 +471,7 @@ class invoice {
                      iv.denorm_index_name AS index_name,
                      iv.currency_sign,
                      iv.denorm_currency_code,
-                     iv.denorm_currency_locale,
+                     iv.denorm_currency_locale
                 FROM " . TB_PREFIX . "invoices iv
                 WHERE FALSE";
                     } else {
@@ -493,7 +493,7 @@ class invoice {
                      iv.denorm_index_name AS index_name,
                      iv.currency_sign,
                      iv.denorm_currency_code,
-                     iv.denorm_currency_locale,
+                     iv.denorm_currency_locale
                 FROM " . TB_PREFIX . "invoices iv
                 WHERE iv.domain_id = :domain_id
                     AND iv.id IN ($inList)
@@ -523,7 +523,7 @@ class invoice {
                      iv.denorm_index_name AS index_name,
                      iv.currency_sign,
                      iv.denorm_currency_code,
-                     iv.denorm_currency_locale,
+                     iv.denorm_currency_locale
                 FROM " . TB_PREFIX . "invoices iv
                 WHERE iv.domain_id = :domain_id
                     $where";
@@ -565,7 +565,7 @@ class invoice {
                      iv.denorm_index_name AS index_name,
                      iv.currency_sign,
                      iv.denorm_currency_code,
-                     iv.denorm_currency_locale,
+                     iv.denorm_currency_locale
                 FROM " . TB_PREFIX . "invoices iv
                 WHERE 0";
                     } else {
@@ -587,7 +587,7 @@ class invoice {
                      iv.denorm_index_name AS index_name,
                      iv.currency_sign,
                      iv.denorm_currency_code,
-                     iv.denorm_currency_locale,
+                     iv.denorm_currency_locale
                 FROM " . TB_PREFIX . "invoices iv
                 WHERE iv.domain_id = :domain_id
                     AND iv.id IN ($inList)
@@ -617,7 +617,7 @@ class invoice {
                      iv.denorm_index_name AS index_name,
                      iv.currency_sign,
                      iv.denorm_currency_code,
-                     iv.denorm_currency_locale,
+                     iv.denorm_currency_locale
                 FROM " . TB_PREFIX . "invoices iv
                 WHERE iv.domain_id = :domain_id
                     $where";
@@ -669,7 +669,7 @@ class invoice {
                      iv.denorm_index_name AS index_name,
                      iv.currency_sign,
                      iv.denorm_currency_code,
-                     iv.denorm_currency_locale,
+                     iv.denorm_currency_locale
                 FROM " . TB_PREFIX . "invoices iv
                 WHERE iv.domain_id = :domain_id AND 1 = 0";
                     } else {
@@ -691,7 +691,7 @@ class invoice {
                      iv.denorm_index_name AS index_name,
                      iv.currency_sign,
                      iv.denorm_currency_code,
-                     iv.denorm_currency_locale,
+                     iv.denorm_currency_locale
                 FROM " . TB_PREFIX . "invoices iv
                 WHERE iv.domain_id = :domain_id
                     AND iv.id IN ($inList)
@@ -715,7 +715,7 @@ class invoice {
                      iv.denorm_index_name AS index_name,
                      iv.currency_sign,
                      iv.denorm_currency_code,
-                     iv.denorm_currency_locale,
+                     iv.denorm_currency_locale
                 FROM " . TB_PREFIX . "invoices iv
                 WHERE iv.domain_id = :domain_id
                     $where";
