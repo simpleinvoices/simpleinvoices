@@ -48,8 +48,6 @@ if (  $op === 'insert_preference' ) {
 
 	$curr = _resolvePreferenceCurrency($auth_session->domain_id);
 
-	$showCurrencyCode = !empty($_POST['show_currency_code']) ? 1 : 0;
-
 	$sql = "INSERT into
 		".TB_PREFIX."preferences
 		(
@@ -57,7 +55,6 @@ if (  $op === 'insert_preference' ) {
 			pref_description,
 			pref_currency_sign,
 			currency_id,
-			show_currency_code,
 			pref_inv_heading,
 			pref_inv_wording,
 			pref_inv_detail_heading,
@@ -74,42 +71,52 @@ if (  $op === 'insert_preference' ) {
 		        index_group,
 			include_online_payment,
 			payment_term_id,
-			payment_bank_name,
-			payment_reference
-		)
-	VALUES
-		(
-			:domain_id,
-			:description,
-			:currency_sign,
-			:currency_id,
-			:show_currency_code,
-			:heading,
-			:wording,
-			:detail_heading,
-			:detail_line,
-			:payment_method,
-			:payment_line1_name,
-			:payment_line1_value,
-			:payment_line2_name,
-			:payment_line2_value,
-			:enabled,
+		pref_inv_payment_line0_name,
+		pref_inv_payment_line0_value,
+		pref_inv_payment_line3_name,
+		pref_inv_payment_line3_value,
+		pref_inv_payment_line4_name,
+		pref_inv_payment_line4_value,
+		pref_inv_payment_line5_name,
+		pref_inv_payment_line5_value
+	)
+VALUES
+	(
+		:domain_id,
+		:description,
+		:currency_sign,
+		:currency_id,
+		:heading,
+		:wording,
+		:detail_heading,
+		:detail_line,
+		:payment_method,
+		:payment_line1_name,
+		:payment_line1_value,
+		:payment_line2_name,
+		:payment_line2_value,
+		:enabled,
             :status,
             :locale,
             :language,
             :index_group,
-			:include_online_payment,
-			:payment_term_id,
-			:payment_bank_name,
-			:payment_reference
-		 )";
+		:include_online_payment,
+		:payment_term_id,
+		:payment_line0_name,
+		:payment_line0_value,
+		:payment_line3_name,
+		:payment_line3_value,
+		:payment_line4_name,
+		:payment_line4_value,
+		:payment_line5_name,
+		:payment_line5_value
+	 )";
 
 	if (dbQuery($sql,
 	  ':domain_id', $auth_session->domain_id,
 	  ':description', $_POST['p_description'],
 	  ':currency_sign', $curr['currency_sign'],
 	  ':currency_id', $curr['currency_id'] ?: null,
-	  ':show_currency_code', $showCurrencyCode,
 	  ':heading', $_POST['p_inv_heading'],
 	  ':wording', $_POST['p_inv_wording'],
 	  ':detail_heading', $_POST['p_inv_detail_heading'],
@@ -126,8 +133,14 @@ if (  $op === 'insert_preference' ) {
 	  ':include_online_payment', $include_online_payment,
 	  ':enabled', $_POST['pref_enabled'],
 	  ':payment_term_id', $payment_term_id,
-	  ':payment_bank_name', trim($_POST['payment_bank_name'] ?? ''),
-	  ':payment_reference', trim($_POST['payment_reference'] ?? '')
+	  ':payment_line0_name', trim($_POST['pref_inv_payment_line0_name'] ?? ''),
+	  ':payment_line0_value', trim($_POST['pref_inv_payment_line0_value'] ?? ''),
+	  ':payment_line3_name', trim($_POST['pref_inv_payment_line3_name'] ?? ''),
+	  ':payment_line3_value', trim($_POST['pref_inv_payment_line3_value'] ?? ''),
+	  ':payment_line4_name', trim($_POST['pref_inv_payment_line4_name'] ?? ''),
+	  ':payment_line4_value', trim($_POST['pref_inv_payment_line4_value'] ?? ''),
+	  ':payment_line5_name', trim($_POST['pref_inv_payment_line5_name'] ?? ''),
+	  ':payment_line5_value', trim($_POST['pref_inv_payment_line5_value'] ?? '')
 	  )) {
 		$saved = true;
 		$new_pref_id = (int) lastInsertId();
@@ -167,7 +180,6 @@ if (  $op === 'insert_preference' ) {
 			? (int)$_POST['payment_term_id'] : null;
 
 		$curr = _resolvePreferenceCurrency($auth_session->domain_id);
-		$showCurrencyCode = !empty($_POST['show_currency_code']) ? 1 : 0;
 
 		$sql = "UPDATE
 				".TB_PREFIX."preferences
@@ -175,7 +187,6 @@ if (  $op === 'insert_preference' ) {
 				pref_description = :description,
 				pref_currency_sign = :currency_sign,
 				currency_id = :currency_id,
-				show_currency_code = :show_currency_code,
 				pref_inv_heading = :heading,
 				pref_inv_wording = :wording,
 				pref_inv_detail_heading = :detail_heading,
@@ -191,9 +202,15 @@ if (  $op === 'insert_preference' ) {
 				language = :language,
   		        index_group = :index_group,
   		        include_online_payment = :include_online_payment,
-				payment_term_id = :payment_term_id,
-				payment_bank_name = :payment_bank_name,
-				payment_reference = :payment_reference
+			payment_term_id = :payment_term_id,
+			pref_inv_payment_line0_name = :payment_line0_name,
+			pref_inv_payment_line0_value = :payment_line0_value,
+			pref_inv_payment_line3_name = :payment_line3_name,
+			pref_inv_payment_line3_value = :payment_line3_value,
+			pref_inv_payment_line4_name = :payment_line4_name,
+			pref_inv_payment_line4_value = :payment_line4_value,
+			pref_inv_payment_line5_name = :payment_line5_name,
+			pref_inv_payment_line5_value = :payment_line5_value
 			WHERE
 				pref_id = :id
 			AND domain_id = :domain_id";
@@ -202,7 +219,6 @@ if (  $op === 'insert_preference' ) {
 		  ':description', $_POST['pref_description'],
 		  ':currency_sign', $curr['currency_sign'],
 		  ':currency_id', $curr['currency_id'] ?: null,
-		  ':show_currency_code', $showCurrencyCode,
 		  ':heading', $_POST['pref_inv_heading'],
 		  ':wording', $_POST['pref_inv_wording'],
 		  ':detail_heading', $_POST['pref_inv_detail_heading'],
@@ -219,9 +235,15 @@ if (  $op === 'insert_preference' ) {
 		  ':index_group', $_POST['index_group'],
 		  ':include_online_payment', $include_online_payment,
 		  ':payment_term_id', $payment_term_id,
-		  ':payment_bank_name', trim($_POST['payment_bank_name'] ?? ''),
-		  ':payment_reference', trim($_POST['payment_reference'] ?? ''),
-		  ':id', (int)$_GET['id'],
+	  ':payment_line0_name', trim($_POST['pref_inv_payment_line0_name'] ?? ''),
+	  ':payment_line0_value', trim($_POST['pref_inv_payment_line0_value'] ?? ''),
+	  ':payment_line3_name', trim($_POST['pref_inv_payment_line3_name'] ?? ''),
+	  ':payment_line3_value', trim($_POST['pref_inv_payment_line3_value'] ?? ''),
+	  ':payment_line4_name', trim($_POST['pref_inv_payment_line4_name'] ?? ''),
+	  ':payment_line4_value', trim($_POST['pref_inv_payment_line4_value'] ?? ''),
+	  ':payment_line5_name', trim($_POST['pref_inv_payment_line5_name'] ?? ''),
+	  ':payment_line5_value', trim($_POST['pref_inv_payment_line5_value'] ?? ''),
+	  ':id', (int)$_GET['id'],
 		  ':domain_id', $auth_session->domain_id))
 	    {
 			invoice_denorm::refreshAllForPreference((int)$_GET['id'], $auth_session->domain_id);

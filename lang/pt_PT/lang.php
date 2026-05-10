@@ -25,6 +25,8 @@
 #all
 $LANG['about'] = "Sobre";//1
 $LANG['account_info'] = "Informação de Conta";//1
+$LANG['account_name'] = "Account name";//0
+$LANG['account_number'] = "Account number";//0
 $LANG['actions'] = "Acções";//1
 $LANG['add'] = "Adicionar";//1
 $LANG['add_biller'] = "Adicionar Empresa";//1
@@ -176,6 +178,7 @@ $LANG['due'] = "Vencido";//1
 $LANG['edit'] = "Editar";//1
 $LANG['edit_profile'] = "Editar Perfil";//1
 $LANG['edit_view_tooltip'] = "Editar";//1
+$LANG['electronic_funds_transfer'] = "Electronic Funds Transfer";//0
 $LANG['email'] = "E-mail";//1
 $LANG['email_bcc'] = "Email BCC (Cópia Oculta)";//1
 $LANG['email_biller'] = "Enviar email ao faturante";//1

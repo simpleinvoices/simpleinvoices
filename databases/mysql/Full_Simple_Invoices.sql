@@ -274,7 +274,6 @@ CREATE TABLE IF NOT EXISTS `si_invoices` (
   `due_date` date DEFAULT NULL,
   `currency_sign` varchar(50) DEFAULT NULL,
   `currency_id` int(11) DEFAULT NULL,
-  `show_currency_code` tinyint NOT NULL DEFAULT 0,
   `denorm_invoice_total` decimal(25,6) NOT NULL DEFAULT 0,
   `denorm_amount_paid` decimal(25,6) NOT NULL DEFAULT 0,
   `denorm_amount_owing` decimal(25,6) NOT NULL DEFAULT 0,
@@ -409,20 +408,25 @@ CREATE TABLE IF NOT EXISTS `si_preferences` (
   `language` varchar(255) DEFAULT NULL,
   `index_group` int(11) NOT NULL,
   `currency_id` int(11) DEFAULT NULL,
-  `show_currency_code` tinyint NOT NULL DEFAULT 0,
   `include_online_payment` varchar(255) DEFAULT NULL,
   `payment_term_id` int(11) DEFAULT NULL,
-  `payment_bank_name` varchar(255) DEFAULT NULL,
-  `payment_reference` varchar(255) DEFAULT NULL,
+  `pref_inv_payment_line0_name` varchar(255) DEFAULT NULL,
+  `pref_inv_payment_line0_value` varchar(255) DEFAULT NULL,
+  `pref_inv_payment_line3_name` varchar(255) DEFAULT NULL,
+  `pref_inv_payment_line3_value` varchar(255) DEFAULT NULL,
+  `pref_inv_payment_line4_name` varchar(255) DEFAULT NULL,
+  `pref_inv_payment_line4_value` varchar(255) DEFAULT NULL,
+  `pref_inv_payment_line5_name` varchar(255) DEFAULT NULL,
+  `pref_inv_payment_line5_value` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`domain_id`,`pref_id`),
   KEY `pref_id` (`pref_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO `si_preferences` (`pref_id`, `domain_id`, `pref_description`, `pref_currency_sign`, `pref_inv_heading`, `pref_inv_wording`, `pref_inv_detail_heading`, `pref_inv_detail_line`, `pref_inv_payment_method`, `pref_inv_payment_line1_name`, `pref_inv_payment_line1_value`, `pref_inv_payment_line2_name`, `pref_inv_payment_line2_value`, `pref_enabled`, `status`, `locale`, `language`, `index_group`, `currency_id`, `show_currency_code`, `include_online_payment`, `payment_term_id`, `payment_bank_name`, `payment_reference`) VALUES
- (1, 1, 'Invoice', '$', 'Invoice', 'Invoice', 'Details', 'Payment is to be made within 14 days of the invoice being sent', 'Electronic Funds Transfer', 'Account name', '{biller.bank_account_name}', 'Account number:', '{biller.bank_routing_sort_code} {biller.bank_account_number}', '1', 1, 'en_GB', 'en_GB', 1, NULL, 0, NULL, NULL, NULL, NULL)
-,(2, 1, 'Receipt', '$', 'Receipt', 'Receipt', 'Details', '<br />This transaction has been paid in full, please keep this receipt as proof of purchase.<br /> Thank you', '', '', '', '', '', '1', 1, 'en_GB', 'en_GB', 1, NULL, 0, NULL, NULL, NULL, NULL)
-,(3, 1, 'Estimate', '$', 'Estimate', 'Estimate', 'Details', '<br />This is an estimate of the final value of services rendered.<br />Thank you', '', '', '', '', '', '1', 0, 'en_GB', 'en_GB', 1, NULL, 0, NULL, NULL, NULL, NULL)
-,(4, 1, 'Quote', '$', 'Quote', 'Quote', 'Details', '<br />This is a quote of the final value of services rendered.<br />Thank you', '', '', '', '', '', '1', 0, 'en_GB', 'en_GB', 1, NULL, 0, NULL, NULL, NULL, NULL);
+INSERT INTO `si_preferences` (`pref_id`, `domain_id`, `pref_description`, `pref_currency_sign`, `pref_inv_heading`, `pref_inv_wording`, `pref_inv_detail_heading`, `pref_inv_detail_line`, `pref_inv_payment_method`, `pref_inv_payment_line1_name`, `pref_inv_payment_line1_value`, `pref_inv_payment_line2_name`, `pref_inv_payment_line2_value`, `pref_enabled`, `status`, `locale`, `language`, `index_group`, `currency_id`, `include_online_payment`, `payment_term_id`, `pref_inv_payment_line0_name`, `pref_inv_payment_line0_value`, `pref_inv_payment_line3_name`, `pref_inv_payment_line3_value`, `pref_inv_payment_line4_name`, `pref_inv_payment_line4_value`, `pref_inv_payment_line5_name`, `pref_inv_payment_line5_value`) VALUES
+ (1, 1, 'Invoice', '$', 'Invoice', 'Invoice', 'Details', 'Payment is to be made within 14 days of the invoice being sent', 'Electronic Funds Transfer', 'Account name', '{biller.bank_account_name}', 'Account number:', '{biller.bank_routing_sort_code} {biller.bank_account_number}', '1', 1, 'en_GB', 'en_GB', 1, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+,(2, 1, 'Receipt', '$', 'Receipt', 'Receipt', 'Details', '<br />This transaction has been paid in full, please keep this receipt as proof of purchase.<br /> Thank you', '', '', '', '', '', '1', 1, 'en_GB', 'en_GB', 1, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+,(3, 1, 'Estimate', '$', 'Estimate', 'Estimate', 'Details', '<br />This is an estimate of the final value of services rendered.<br />Thank you', '', '', '', '', '', '1', 0, 'en_GB', 'en_GB', 1, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+,(4, 1, 'Quote', '$', 'Quote', 'Quote', 'Details', '<br />This is a quote of the final value of services rendered.<br />Thank you', '', '', '', '', '', '1', 0, 'en_GB', 'en_GB', 1, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 CREATE TABLE IF NOT EXISTS `si_products` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

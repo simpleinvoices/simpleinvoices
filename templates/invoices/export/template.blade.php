@@ -34,16 +34,10 @@
 				<td nowrap >{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['date'] ?? '' }}:</td>
 				<td colspan="3">{{ $invoice['date'] ?? '' }}</td>
 		</tr>
-		@if(!empty($invoice['payment_term_id']) || !empty($invoice['payment_term_code']) || !empty($invoice['payment_term_label']))
-		<tr>
-				<td nowrap>{{ $LANG['payment_term_code'] ?? 'Payment term code' }}:</td>
-				<td colspan="3">{{ !empty($invoice['payment_term_code']) ? $invoice['payment_term_code'] : ($invoice['payment_term_label'] ?? '') }}</td>
-		</tr>
-		@endif
-		@if(!empty($invoice['payment_term_code']) && !empty($invoice['payment_term_label']))
+		@if(!empty($invoice['payment_term_id']) || !empty($invoice['payment_term_label']))
 		<tr>
 				<td nowrap>{{ $LANG['payment_terms'] ?? 'Payment terms' }}:</td>
-				<td colspan="3">{{ $invoice['payment_term_label'] }}</td>
+				<td colspan="3">{{ $invoice['payment_term_label'] ?? '' }}</td>
 		</tr>
 		@endif
 		@if(!empty($invoice['calc_due_date']))

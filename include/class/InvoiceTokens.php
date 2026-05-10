@@ -9,8 +9,12 @@
  *
  * Supported fields (Invoice Preferences):
  *   pref_inv_detail_heading, pref_inv_detail_line, pref_inv_payment_method,
+ *   pref_inv_payment_line0_name, pref_inv_payment_line0_value,
  *   pref_inv_payment_line1_name, pref_inv_payment_line1_value,
- *   pref_inv_payment_line2_name, pref_inv_payment_line2_value
+ *   pref_inv_payment_line2_name, pref_inv_payment_line2_value,
+ *   pref_inv_payment_line3_name, pref_inv_payment_line3_value,
+ *   pref_inv_payment_line4_name, pref_inv_payment_line4_value,
+ *   pref_inv_payment_line5_name, pref_inv_payment_line5_value
  *
  * Also expanded via expandString():
  *   si_biller.footer
@@ -22,16 +26,24 @@ class InvoiceTokens
         'pref_inv_detail_heading',
         'pref_inv_detail_line',
         'pref_inv_payment_method',
+        'pref_inv_payment_line0_name',
+        'pref_inv_payment_line0_value',
         'pref_inv_payment_line1_name',
         'pref_inv_payment_line1_value',
         'pref_inv_payment_line2_name',
         'pref_inv_payment_line2_value',
+        'pref_inv_payment_line3_name',
+        'pref_inv_payment_line3_value',
+        'pref_inv_payment_line4_name',
+        'pref_inv_payment_line4_value',
+        'pref_inv_payment_line5_name',
+        'pref_inv_payment_line5_value',
     ];
 
     /**
      * Build the token -> value map from invoice, biller, customer, and preference data.
      */
-    public static function buildMap(array $invoice, array $biller, array $customer, array $preference): array
+    public static function buildMap(array $invoice, array $biller, array $customer, array $preference, array $lang = []): array
     {
         require_once __DIR__ . '/../class/CurrencySignHelper.php';
 
@@ -60,10 +72,16 @@ class InvoiceTokens
             '{invoice.currency}'          => $currSign,
             '{invoice.currency_code}'     => (string) ($invoice['currency_code'] ?? $preference['currency_code'] ?? ''),
             '{invoice.note}'              => (string) ($invoice['note'] ?? ''),
-            '{invoice.payment_term}'      => (string) ($invoice['payment_term_code'] ?? ''),
+            '{invoice.payment_term}'      => (string) ($invoice['payment_term_label'] ?? ''),
             '{invoice.payment_term_label}'=> (string) ($invoice['payment_term_label'] ?? ''),
-            '{preference.payment_bank_name}'=> (string) ($preference['payment_bank_name'] ?? ''),
-            '{preference.payment_reference}'=> (string) ($preference['payment_reference'] ?? ''),
+            '{preference.pref_inv_payment_line0_name}'=> (string) ($preference['pref_inv_payment_line0_name'] ?? ''),
+            '{preference.pref_inv_payment_line0_value}'=> (string) ($preference['pref_inv_payment_line0_value'] ?? ''),
+            '{preference.pref_inv_payment_line3_name}'=> (string) ($preference['pref_inv_payment_line3_name'] ?? ''),
+            '{preference.pref_inv_payment_line3_value}'=> (string) ($preference['pref_inv_payment_line3_value'] ?? ''),
+            '{preference.pref_inv_payment_line4_name}'=> (string) ($preference['pref_inv_payment_line4_name'] ?? ''),
+            '{preference.pref_inv_payment_line4_value}'=> (string) ($preference['pref_inv_payment_line4_value'] ?? ''),
+            '{preference.pref_inv_payment_line5_name}'=> (string) ($preference['pref_inv_payment_line5_name'] ?? ''),
+            '{preference.pref_inv_payment_line5_value}'=> (string) ($preference['pref_inv_payment_line5_value'] ?? ''),
             '{biller.name}'               => (string) ($biller['name'] ?? ''),
             '{biller.email}'              => (string) ($biller['email'] ?? ''),
             '{biller.phone}'              => (string) ($biller['phone'] ?? ''),
@@ -80,24 +98,29 @@ class InvoiceTokens
             '{customer.name}'             => (string) ($customer['name'] ?? ''),
             '{customer.email}'            => (string) ($customer['email'] ?? ''),
             '{customer.phone}'            => (string) ($customer['phone'] ?? ''),
+            '{lang.account_name}'               => (string) ($lang['account_name'] ?? ''),
+            '{lang.account_number}'             => (string) ($lang['account_number'] ?? ''),
+            '{lang.payment_terms}'              => (string) ($lang['payment_terms'] ?? ''),
+            '{lang.details}'                    => (string) ($lang['details'] ?? ''),
+            '{lang.electronic_funds_transfer}'  => (string) ($lang['electronic_funds_transfer'] ?? ''),
         ];
     }
 
     /**
      * Expand tokens in an arbitrary string value.
      */
-    public static function expandString(string $value, array $invoice, array $biller, array $customer, array $preference): string
+    public static function expandString(string $value, array $invoice, array $biller, array $customer, array $preference, array $lang = []): string
     {
-        $map = static::buildMap($invoice, $biller, $customer, $preference);
+        $map = static::buildMap($invoice, $biller, $customer, $preference, $lang);
         return str_replace(array_keys($map), array_values($map), $value);
     }
 
     /**
      * Return a copy of $preference with all expandable text fields resolved.
      */
-    public static function expandPreference(array $preference, array $invoice, array $biller, array $customer): array
+    public static function expandPreference(array $preference, array $invoice, array $biller, array $customer, array $lang = []): array
     {
-        $map = static::buildMap($invoice, $biller, $customer, $preference);
+        $map = static::buildMap($invoice, $biller, $customer, $preference, $lang);
 
         foreach (self::EXPANDABLE as $field) {
             if (isset($preference[$field]) && $preference[$field] !== '') {

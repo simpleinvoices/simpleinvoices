@@ -167,16 +167,10 @@
 				<td nowrap class="si-modern-muted">{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['date'] ?? '' }}:</td>
 				<td class="si-modern-summary-val" align="right" colspan="3">{{ $invoice['date'] }}</td>
 		</tr>
-		@if(!empty($invoice['payment_term_id']) || !empty($invoice['payment_term_code']) || !empty($invoice['payment_term_label']))
-		<tr>
-				<td nowrap class="si-modern-muted">{{ $LANG['payment_term_code'] ?? 'Payment term code' }}:</td>
-				<td class="si-modern-summary-val" align="right" colspan="3">{{ !empty($invoice['payment_term_code']) ? $invoice['payment_term_code'] : ($invoice['payment_term_label'] ?? '') }}</td>
-		</tr>
-		@endif
-		@if(!empty($invoice['payment_term_code']) && !empty($invoice['payment_term_label']))
+		@if(!empty($invoice['payment_term_id']) || !empty($invoice['payment_term_label']))
 		<tr>
 				<td nowrap class="si-modern-muted">{{ $LANG['payment_terms'] ?? 'Payment terms' }}:</td>
-				<td class="si-modern-summary-val" align="right" colspan="3">{{ $invoice['payment_term_label'] }}</td>
+				<td class="si-modern-summary-val" align="right" colspan="3">{{ $invoice['payment_term_label'] ?? '' }}</td>
 		</tr>
 		@endif
 		@if(!empty($invoice['calc_due_date']))
@@ -468,7 +462,7 @@
 			{online_payment_link
 				type=$preference['include_online_payment']
 				invoice=$invoice['id']
-				amount=$invoice['owing'] currency_code=($invoice['denorm_currency_code'] ?? $invoice['currency_code'] ?? $preference['currency_code'] ?? '', !empty($invoice['show_currency_code'] ?? $preference['show_currency_code'] ?? false))
+				amount=$invoice['owing'] currency_code=($invoice['denorm_currency_code'] ?? $invoice['currency_code'] ?? $preference['currency_code'] ?? '')
 				domain_id=$invoice['domain_id']
 			}
 		</td>

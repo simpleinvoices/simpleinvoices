@@ -21,6 +21,8 @@ regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
 #all
 $LANG['about'] = "Om";//1
 $LANG['account_info'] = "Konto Information";//1
+$LANG['account_name'] = "Account name";//0
+$LANG['account_number'] = "Account number";//0
 $LANG['actions'] = "Handlingar";//1
 $LANG['add'] = "Lägg till";//1
 $LANG['add_biller'] = "Lägg till Fordringsägare";//1
@@ -172,6 +174,7 @@ $LANG['due'] = "Förfallen";//1
 $LANG['edit'] = "Redigera";//1
 $LANG['edit_profile'] = "Redigera Profil";//1
 $LANG['edit_view_tooltip'] = "Redigera";//1
+$LANG['electronic_funds_transfer'] = "Electronic Funds Transfer";//0
 $LANG['email'] = "E-post";//1
 $LANG['email_bcc'] = "E-post BCC (Blind Carbon Copy)";//1
 $LANG['email_biller'] = "Skicka E-post till faktura hanteraren";//1

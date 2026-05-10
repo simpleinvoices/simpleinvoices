@@ -5,6 +5,8 @@
     $currentCurrencyId     = $currentCurrencyId ?? '';
     $selectedTermId        = $selectedTermId ?? '';
     $calcDueDate           = $calcDueDate ?? '';
+    $nextInvoiceId         = $nextInvoiceId ?? '';
+    $showInvoiceIdPreview  = $showInvoiceIdPreview ?? false;
 
     $currencyMatched = CurrencySignHelper::findPresetForStored($currentCurrencySign, $currentCurrencyCode);
 
@@ -36,14 +38,15 @@
 		@else
 			<select name="preference_id" id="si_invoice_preference_id" class="form-select">
 				@foreach(($preferences ?? []) as $pref)
-					<option
-						@if(($pref['pref_id'] ?? '') == $selectedPrefId) selected @endif
-						value="{{ $pref['pref_id'] ?? '' }}"
-						data-currency-sign="{{ CurrencySignHelper::forDisplay($pref['pref_currency_sign'] ?? '') }}"
-						data-currency-code="{{ $pref['currency_code'] ?? '' }}"
-						data-currency-id="{{ $pref['currency_id'] ?? '' }}"
-						data-payment-term-id="{{ $pref['payment_term_id'] ?? '' }}"
-					>{{ $pref['pref_description'] ?? '' }}</option>
+				<option
+					@if(($pref['pref_id'] ?? '') == $selectedPrefId) selected @endif
+					value="{{ $pref['pref_id'] ?? '' }}"
+					data-currency-sign="{{ CurrencySignHelper::forDisplay($pref['pref_currency_sign'] ?? '') }}"
+					data-currency-code="{{ $pref['currency_code'] ?? '' }}"
+					data-currency-id="{{ $pref['currency_id'] ?? '' }}"
+					data-payment-term-id="{{ $pref['payment_term_id'] ?? '' }}"
+					data-index-group="{{ $pref['index_group'] ?? '' }}"
+				>{{ $pref['pref_description'] ?? '' }}</option>
 				@endforeach
 			</select>
 		@endif
@@ -88,6 +91,15 @@
 			value="{{ $calcDueDate !== '' ? $calcDueDate : '-' }}"
 			aria-readonly="true" />
 	</div>
+	@if($showInvoiceIdPreview)
+	<div class="col-12 col-sm-6 col-xl-4">
+		<label class="form-label mb-1" for="si_invoice_id_preview">{{ $LANG['invoice_id'] ?? 'Invoice ID' }}</label>
+		<input type="text" readonly tabindex="-1" id="si_invoice_id_preview" data-initial="{{ $nextInvoiceId }}"
+			class="form-control fw-medium bg-body-secondary border text-body"
+			value="{{ $nextInvoiceId !== '' ? $nextInvoiceId : '-' }}"
+			aria-readonly="true" />
+	</div>
+	@endif
 </div>
 
 <script>
@@ -188,6 +200,31 @@
 		var ymd = siDueDateFromTerm(dateEl.value, kind, param);
 		out.value = ymd || '-';
 	}
+	function siUpdateInvoiceIdPreview() {
+		var out = document.getElementById('si_invoice_id_preview');
+		if (!out || !prefSel) return;
+		var prefOpt = prefSel.options[prefSel.selectedIndex];
+		if (!prefOpt) return;
+		var indexGroup = prefOpt.getAttribute('data-index-group') || '';
+		if (indexGroup === '') {
+			out.value = '-';
+			return;
+		}
+		var xhr = new XMLHttpRequest();
+		xhr.onload = function () {
+			try {
+				var data = JSON.parse(xhr.responseText);
+				out.value = (data.next !== undefined) ? String(data.next) : '-';
+			} catch (e) {
+				out.value = '-';
+			}
+		};
+		xhr.onerror = function () {
+			out.value = '-';
+		};
+		xhr.open('GET', 'index.php?module=preferences&view=index_lookup_ajax&index_group=' + encodeURIComponent(indexGroup), true);
+		xhr.send();
+	}
 	function syncPaymentTermFromPreference() {
 		if (!prefSel || !termSel) return;
 		var prefOpt = prefSel.options[prefSel.selectedIndex];
@@ -209,6 +246,7 @@
 		prefSel.addEventListener('change', function () {
 			syncCurrencyFromPreference();
 			syncPaymentTermFromPreference();
+			siUpdateInvoiceIdPreview();
 		});
 	}
 
@@ -235,5 +273,10 @@
 		}
 		siUpdateDueDatePreview();
 	}
+	var idOut0 = document.getElementById('si_invoice_id_preview');
+	if (idOut0 && idOut0.getAttribute('data-initial')) {
+		idOut0.value = idOut0.getAttribute('data-initial');
+	}
+	siUpdateInvoiceIdPreview();
 })();
 </script>

@@ -3134,60 +3134,61 @@ PRIMARY KEY ( `domain_id`, `id` )
     }
     $patch['376']['date'] = "20260508";
 
-    $patch['377']['name'] = "Add show_currency_code toggle to preferences and invoices";
+    $patch['377']['name'] = "Add pref_inv_payment_line0-5 name/value fields to preferences";
     switch ($db_server) {
         case 'pgsql':
             $p377 = '';
-            $p377 .= checkFieldExists(TB_PREFIX . 'preferences', 'show_currency_code')
-                ? '' : "ALTER TABLE " . TB_PREFIX . "preferences ADD COLUMN show_currency_code SMALLINT NOT NULL DEFAULT 0; ";
-            $p377 .= checkFieldExists(TB_PREFIX . 'invoices', 'show_currency_code')
-                ? '' : "ALTER TABLE " . TB_PREFIX . "invoices ADD COLUMN show_currency_code SMALLINT NOT NULL DEFAULT 0; ";
+            $p377 .= checkFieldExists(TB_PREFIX . 'preferences', 'payment_bank_name')
+                ? "ALTER TABLE " . TB_PREFIX . "preferences RENAME COLUMN payment_bank_name TO pref_inv_payment_line0_name; "
+                : (checkFieldExists(TB_PREFIX . 'preferences', 'pref_inv_payment_line0_name')
+                    ? '' : "ALTER TABLE " . TB_PREFIX . "preferences ADD COLUMN pref_inv_payment_line0_name VARCHAR(255) DEFAULT NULL; ");
+            $p377 .= checkFieldExists(TB_PREFIX . 'preferences', 'payment_reference')
+                ? "ALTER TABLE " . TB_PREFIX . "preferences RENAME COLUMN payment_reference TO pref_inv_payment_line0_value; "
+                : (checkFieldExists(TB_PREFIX . 'preferences', 'pref_inv_payment_line0_value')
+                    ? '' : "ALTER TABLE " . TB_PREFIX . "preferences ADD COLUMN pref_inv_payment_line0_value VARCHAR(255) DEFAULT NULL; ");
+            for ($i = 3; $i <= 5; $i++) {
+                $p377 .= checkFieldExists(TB_PREFIX . 'preferences', "pref_inv_payment_line{$i}_name")
+                    ? '' : "ALTER TABLE " . TB_PREFIX . "preferences ADD COLUMN pref_inv_payment_line{$i}_name VARCHAR(255) DEFAULT NULL; ";
+                $p377 .= checkFieldExists(TB_PREFIX . 'preferences', "pref_inv_payment_line{$i}_value")
+                    ? '' : "ALTER TABLE " . TB_PREFIX . "preferences ADD COLUMN pref_inv_payment_line{$i}_value VARCHAR(255) DEFAULT NULL; ";
+            }
             $patch['377']['patch'] = $p377;
             break;
         case 'sqlite':
             $p377 = '';
-            $p377 .= checkFieldExists(TB_PREFIX . 'preferences', 'show_currency_code')
-                ? '' : "ALTER TABLE " . TB_PREFIX . "preferences ADD COLUMN show_currency_code INTEGER NOT NULL DEFAULT 0; ";
-            $p377 .= checkFieldExists(TB_PREFIX . 'invoices', 'show_currency_code')
-                ? '' : "ALTER TABLE " . TB_PREFIX . "invoices ADD COLUMN show_currency_code INTEGER NOT NULL DEFAULT 0; ";
+            $p377 .= checkFieldExists(TB_PREFIX . 'preferences', 'payment_bank_name')
+                ? "ALTER TABLE " . TB_PREFIX . "preferences RENAME COLUMN payment_bank_name TO pref_inv_payment_line0_name; "
+                : (checkFieldExists(TB_PREFIX . 'preferences', 'pref_inv_payment_line0_name')
+                    ? '' : "ALTER TABLE " . TB_PREFIX . "preferences ADD COLUMN pref_inv_payment_line0_name TEXT DEFAULT NULL; ");
+            $p377 .= checkFieldExists(TB_PREFIX . 'preferences', 'payment_reference')
+                ? "ALTER TABLE " . TB_PREFIX . "preferences RENAME COLUMN payment_reference TO pref_inv_payment_line0_value; "
+                : (checkFieldExists(TB_PREFIX . 'preferences', 'pref_inv_payment_line0_value')
+                    ? '' : "ALTER TABLE " . TB_PREFIX . "preferences ADD COLUMN pref_inv_payment_line0_value TEXT DEFAULT NULL; ");
+            for ($i = 3; $i <= 5; $i++) {
+                $p377 .= checkFieldExists(TB_PREFIX . 'preferences', "pref_inv_payment_line{$i}_name")
+                    ? '' : "ALTER TABLE " . TB_PREFIX . "preferences ADD COLUMN pref_inv_payment_line{$i}_name TEXT DEFAULT NULL; ";
+                $p377 .= checkFieldExists(TB_PREFIX . 'preferences', "pref_inv_payment_line{$i}_value")
+                    ? '' : "ALTER TABLE " . TB_PREFIX . "preferences ADD COLUMN pref_inv_payment_line{$i}_value TEXT DEFAULT NULL; ";
+            }
             $patch['377']['patch'] = $p377;
             break;
         default:
             $p377 = '';
-            $p377 .= checkFieldExists(TB_PREFIX . 'preferences', 'show_currency_code')
-                ? '' : "ALTER TABLE `" . TB_PREFIX . "preferences` ADD COLUMN `show_currency_code` TINYINT NOT NULL DEFAULT 0; ";
-            $p377 .= checkFieldExists(TB_PREFIX . 'invoices', 'show_currency_code')
-                ? '' : "ALTER TABLE `" . TB_PREFIX . "invoices` ADD COLUMN `show_currency_code` TINYINT NOT NULL DEFAULT 0; ";
+            $p377 .= checkFieldExists(TB_PREFIX . 'preferences', 'payment_bank_name')
+                ? "ALTER TABLE `" . TB_PREFIX . "preferences` CHANGE COLUMN `payment_bank_name` `pref_inv_payment_line0_name` VARCHAR(255) DEFAULT NULL; "
+                : (checkFieldExists(TB_PREFIX . 'preferences', 'pref_inv_payment_line0_name')
+                    ? '' : "ALTER TABLE `" . TB_PREFIX . "preferences` ADD COLUMN `pref_inv_payment_line0_name` VARCHAR(255) DEFAULT NULL; ");
+            $p377 .= checkFieldExists(TB_PREFIX . 'preferences', 'payment_reference')
+                ? "ALTER TABLE `" . TB_PREFIX . "preferences` CHANGE COLUMN `payment_reference` `pref_inv_payment_line0_value` VARCHAR(255) DEFAULT NULL; "
+                : (checkFieldExists(TB_PREFIX . 'preferences', 'pref_inv_payment_line0_value')
+                    ? '' : "ALTER TABLE `" . TB_PREFIX . "preferences` ADD COLUMN `pref_inv_payment_line0_value` VARCHAR(255) DEFAULT NULL; ");
+            for ($i = 3; $i <= 5; $i++) {
+                $p377 .= checkFieldExists(TB_PREFIX . 'preferences', "pref_inv_payment_line{$i}_name")
+                    ? '' : "ALTER TABLE `" . TB_PREFIX . "preferences` ADD COLUMN `pref_inv_payment_line{$i}_name` VARCHAR(255) DEFAULT NULL; ";
+                $p377 .= checkFieldExists(TB_PREFIX . 'preferences', "pref_inv_payment_line{$i}_value")
+                    ? '' : "ALTER TABLE `" . TB_PREFIX . "preferences` ADD COLUMN `pref_inv_payment_line{$i}_value` VARCHAR(255) DEFAULT NULL; ";
+            }
             $patch['377']['patch'] = $p377;
             break;
     }
     $patch['377']['date'] = "20260508";
-
-    $patch['378']['name'] = "Add payment_bank_name and payment_reference to preferences";
-    switch ($db_server) {
-        case 'pgsql':
-            $p378 = '';
-            $p378 .= checkFieldExists(TB_PREFIX . 'preferences', 'payment_bank_name')
-                ? '' : "ALTER TABLE " . TB_PREFIX . "preferences ADD COLUMN payment_bank_name VARCHAR(255) DEFAULT NULL; ";
-            $p378 .= checkFieldExists(TB_PREFIX . 'preferences', 'payment_reference')
-                ? '' : "ALTER TABLE " . TB_PREFIX . "preferences ADD COLUMN payment_reference VARCHAR(255) DEFAULT NULL; ";
-            $patch['378']['patch'] = $p378;
-            break;
-        case 'sqlite':
-            $p378 = '';
-            $p378 .= checkFieldExists(TB_PREFIX . 'preferences', 'payment_bank_name')
-                ? '' : "ALTER TABLE " . TB_PREFIX . "preferences ADD COLUMN payment_bank_name TEXT DEFAULT NULL; ";
-            $p378 .= checkFieldExists(TB_PREFIX . 'preferences', 'payment_reference')
-                ? '' : "ALTER TABLE " . TB_PREFIX . "preferences ADD COLUMN payment_reference TEXT DEFAULT NULL; ";
-            $patch['378']['patch'] = $p378;
-            break;
-        default:
-            $p378 = '';
-            $p378 .= checkFieldExists(TB_PREFIX . 'preferences', 'payment_bank_name')
-                ? '' : "ALTER TABLE `" . TB_PREFIX . "preferences` ADD COLUMN `payment_bank_name` VARCHAR(255) DEFAULT NULL; ";
-            $p378 .= checkFieldExists(TB_PREFIX . 'preferences', 'payment_reference')
-                ? '' : "ALTER TABLE `" . TB_PREFIX . "preferences` ADD COLUMN `payment_reference` VARCHAR(255) DEFAULT NULL; ";
-            $patch['378']['patch'] = $p378;
-            break;
-    }
-    $patch['378']['date'] = "20260508";

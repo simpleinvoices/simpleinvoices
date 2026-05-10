@@ -17,13 +17,10 @@ if (($_POST['op'] ?? '') === 'wizard_currency_sign') {
 	$pref_id         = (int) ($_POST['pref_id'] ?? 0);
 	$sign            = CurrencySignHelper::forDisplay($_POST['pref_currency_sign'] ?? '');
 	$code            = trim($_POST['currency_code'] ?? '');
-	$position        = trim($_POST['currency_position'] ?? '');
 	$payment_term_id = isset($_POST['payment_term_id']) && $_POST['payment_term_id'] !== ''
 		? (int) $_POST['payment_term_id'] : null;
 
-	if ($position !== 'left' && $position !== 'right') {
-		$position = CurrencySignHelper::defaultPositionForSign($sign, $code);
-	}
+	$position        = CurrencySignHelper::defaultPositionForSign($sign, $code);
 
 	$currRow = siCurrencies::findOrCreate($auth_session->domain_id, $sign, $code, $position);
 	$currency_id = $currRow ? (int) $currRow['id'] : 0;

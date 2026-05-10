@@ -18,6 +18,8 @@ regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
 #all
 $LANG['about'] = "حول النظام";//1
 $LANG['account_info'] = "معلومات الحساب";//1
+$LANG['account_name'] = "Account name";//0
+$LANG['account_number'] = "Account number";//0
 $LANG['actions'] = "الإجراءات";//1
 $LANG['add'] = "أضف";//1
 $LANG['add_biller'] = "إضافة مفوتر";//1
@@ -169,6 +171,7 @@ $LANG['due'] = "مستحق";//1
 $LANG['edit'] = "تحرير";//1
 $LANG['edit_profile'] = "تعديل الملف الشخصي";//1
 $LANG['edit_view_tooltip'] = "تحرير";//1
+$LANG['electronic_funds_transfer'] = "Electronic Funds Transfer";//0
 $LANG['email'] = "الايميل";//1
 $LANG['email_bcc'] = "نسخة مخفية الى ()";//1
 $LANG['email_biller'] = "مراسلة الدافع";//1

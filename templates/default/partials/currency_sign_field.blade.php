@@ -2,8 +2,6 @@
     $currencySignCurrentValue  = $currencySignCurrentValue ?? '';
     $currencyCodeFieldName     = $currencyCodeFieldName ?? null;
     $currencyCodeCurrentValue  = $currencyCodeCurrentValue ?? '';
-    $currencyPositionFieldName = $currencyPositionFieldName ?? null;
-    $currencyPositionCurrentValue = $currencyPositionCurrentValue ?? '';
     $currencyIdFieldName       = $currencyIdFieldName ?? null;
     $currencyIdCurrentValue    = $currencyIdCurrentValue ?? '';
 
@@ -24,19 +22,14 @@
             }
         }
         $isCustom = ($matchedCurrency === null) && ($currencySignCurrentValue !== '' || $currencyCodeCurrentValue !== '');
-        $resolvedPosition = CurrencySignHelper::resolvePosition($currencySignCurrentValue, $currencyCodeCurrentValue, $currencyPositionCurrentValue);
     } else {
         $matched = CurrencySignHelper::findPresetForStored($currencySignCurrentValue, $currencyCodeCurrentValue);
         $isCustom = $matched === null;
-        $resolvedPosition = CurrencySignHelper::resolvePosition($currencySignCurrentValue, $currencyCodeCurrentValue, $currencyPositionCurrentValue);
     }
 @endphp
 <input type="hidden" name="{{ $currencySignFieldName }}" id="si_currency_sign_hidden" value="{{ $currencySignCurrentValue }}" />
 @if($currencyCodeFieldName)
 <input type="hidden" name="{{ $currencyCodeFieldName }}" id="si_currency_code_hidden" value="{{ $currencyCodeCurrentValue }}" />
-@endif
-@if($currencyPositionFieldName)
-<input type="hidden" name="{{ $currencyPositionFieldName }}" id="si_currency_position_hidden" value="{{ $resolvedPosition }}" />
 @endif
 @if($currencyIdFieldName)
 <input type="hidden" name="{{ $currencyIdFieldName }}" id="si_currency_id_hidden" value="{{ $currencyIdCurrentValue }}" />
@@ -81,34 +74,16 @@
 		@endif
 	</div>
 </div>
-@if($currencyPositionFieldName)
-<div class="mb-3">
-	<label class="form-label" for="si_currency_position_select">{{ $LANG['currency_position'] ?? 'Sign position' }}</label>
-	<select id="si_currency_position_select" class="form-select" autocomplete="off">
-		<option value="left"@if($resolvedPosition === 'left') selected="selected"@endif>{{ $LANG['currency_position_left'] ?? 'Before number' }}</option>
-		<option value="right"@if($resolvedPosition === 'right') selected="selected"@endif>{{ $LANG['currency_position_right'] ?? 'After number' }}</option>
-	</select>
-</div>
-@endif
 <script>
 (function () {
 	var sel        = document.getElementById('si_currency_sign_select');
 	var signHidden = document.getElementById('si_currency_sign_hidden');
 	var codeHidden = document.getElementById('si_currency_code_hidden');
-	var posHidden  = document.getElementById('si_currency_position_hidden');
 	var idHidden   = document.getElementById('si_currency_id_hidden');
-	var posSelect  = document.getElementById('si_currency_position_select');
 	var wrap       = document.getElementById('si_currency_sign_custom_wrap');
 	var customSign = document.getElementById('si_currency_sign_custom');
 	var customCode = document.getElementById('si_currency_code_custom');
 	if (!sel || !signHidden || !wrap || !customSign) { return; }
-
-	function getDefaultPosition() {
-		if (!sel) return 'left';
-		if (sel.value === '__custom__') return 'left';
-		var opt = sel.options[sel.selectedIndex];
-		return opt ? (opt.getAttribute('data-position') || 'left') : 'left';
-	}
 
 	function syncAll() {
 		if (sel.value === '__custom__') {
@@ -128,9 +103,6 @@
 				idHidden.value = opt2 ? (opt2.getAttribute('data-id') || '') : '';
 			}
 		}
-		if (posHidden) {
-			posHidden.value = posSelect ? posSelect.value : getDefaultPosition();
-		}
 	}
 
 	function syncSignOnly() {
@@ -145,18 +117,7 @@
 
 	sel.addEventListener('change', function () {
 		syncAll();
-		if (posSelect && !posSelect.dataset.userOverride) {
-			var defaultPos = getDefaultPosition();
-			posSelect.value = defaultPos;
-			if (posHidden) { posHidden.value = defaultPos; }
-		}
 	});
-	if (posSelect) {
-		posSelect.addEventListener('change', function () {
-			if (posHidden) { posHidden.value = posSelect.value; }
-			posSelect.dataset.userOverride = '1';
-		});
-	}
 	customSign.addEventListener('input', function () {
 		if (sel.value === '__custom__') { signHidden.value = customSign.value; }
 	});

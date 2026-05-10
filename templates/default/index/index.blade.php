@@ -470,7 +470,7 @@
             </div>
 
             {{-- ═══════════════════════════════════════════════════════════
-                 STEP 4 - Invoice preferences (currency sign for default Invoice preference)
+                 STEP 4 - Invoice preferences (currency for default Invoice preference)
             ═══════════════════════════════════════════════════════════ --}}
             <div id="wizard-step-4" class="tab-pane @if($wizardStep == 4) active show @endif" role="tabpanel">
                 @php
@@ -561,8 +561,6 @@
                                     'currencySignCurrentValue'     => $wizardPref['pref_currency_sign'] ?? '',
                                     'currencyCodeFieldName'        => 'currency_code',
                                     'currencyCodeCurrentValue'     => $wizardPref['currency_code'] ?? '',
-                                    'currencyPositionFieldName'    => 'currency_position',
-                                    'currencyPositionCurrentValue' => $wizard_default_preference['currency_position'] ?? '',
                                     'currencyIdFieldName'          => 'currency_id',
                                     'currencyIdCurrentValue'       => $wizardPref['currency_id'] ?? '',
                                 ])

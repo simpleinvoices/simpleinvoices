@@ -199,7 +199,6 @@ CREATE TABLE IF NOT EXISTS si_invoices (
   denorm_currency_code   TEXT DEFAULT NULL,
   denorm_currency_locale TEXT DEFAULT NULL,
   currency_id INTEGER DEFAULT NULL,
-  show_currency_code INTEGER NOT NULL DEFAULT 0,
   denorm_invoice_total          REAL NOT NULL DEFAULT 0,
   denorm_amount_paid            REAL NOT NULL DEFAULT 0,
   denorm_amount_owing           REAL NOT NULL DEFAULT 0,
@@ -293,10 +292,15 @@ CREATE TABLE IF NOT EXISTS si_preferences (
   language                   TEXT DEFAULT NULL,
   index_group                INTEGER NOT NULL,
   currency_id                INTEGER DEFAULT NULL,
-  show_currency_code         INTEGER NOT NULL DEFAULT 0,
   payment_term_id            INTEGER DEFAULT NULL,
-  payment_bank_name          TEXT DEFAULT NULL,
-  payment_reference          TEXT DEFAULT NULL
+  pref_inv_payment_line0_name TEXT DEFAULT NULL,
+  pref_inv_payment_line0_value TEXT DEFAULT NULL,
+  pref_inv_payment_line3_name TEXT DEFAULT NULL,
+  pref_inv_payment_line3_value TEXT DEFAULT NULL,
+  pref_inv_payment_line4_name TEXT DEFAULT NULL,
+  pref_inv_payment_line4_value TEXT DEFAULT NULL,
+  pref_inv_payment_line5_name TEXT DEFAULT NULL,
+  pref_inv_payment_line5_value TEXT DEFAULT NULL
 );
 CREATE UNIQUE INDEX IF NOT EXISTS si_preferences_pk ON si_preferences (domain_id, pref_id);
 

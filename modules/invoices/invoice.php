@@ -51,6 +51,12 @@ if (!isset($_GET['customer']) && is_array($customers) && count($customers) === 1
 }
 $defaultTax = getDefaultTax();
 $defaultPreference = getDefaultPreference();
+$nextInvoiceId = '';
+if ($defaultPreference && !empty($defaultPreference['index_group'])) {
+    $nextInvoiceId = (string) index::next('invoice', $defaultPreference['index_group'], $auth_session->domain_id);
+}
+$bladeView->assign('nextInvoiceId', $nextInvoiceId);
+$bladeView->assign('showInvoiceIdPreview', true);
 
 // Template expects an array of row indices (0, 1, 2, ...); DB stores the count (e.g. 5)
 if (!empty($_GET['line_items'])) {

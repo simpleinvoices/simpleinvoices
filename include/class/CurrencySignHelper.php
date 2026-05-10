@@ -268,8 +268,7 @@ class CurrencySignHelper
         $sign = $invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '';
         $position = $invoice['currency_position'] ?? $preference['currency_position'] ?? '';
         $code = $invoice['denorm_currency_code'] ?? $invoice['currency_code'] ?? $preference['currency_code'] ?? '';
-        $showCode = !empty($invoice['show_currency_code'] ?? $preference['show_currency_code'] ?? false);
         $locale = $invoice['denorm_currency_locale'] ?? $preference['locale'] ?? '';
-        return self::format($amount, $sign, $position, $code, $showCode, $locale);
+        return self::format($amount, $sign, $position, $code, false, $locale);
     }
 }

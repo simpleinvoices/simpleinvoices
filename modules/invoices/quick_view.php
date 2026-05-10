@@ -31,9 +31,9 @@ $invoice_type =  getInvoiceType($invoice['type_id']);
 $customer = getCustomer($invoice['customer_id']);
 $biller = getBiller($invoice['biller_id']);
 $preference = getPreference($invoice['preference_id']);
-$preference = InvoiceTokens::expandPreference($preference, $invoice, $biller, $customer);
+$preference = InvoiceTokens::expandPreference($preference, $invoice, $biller, $customer, $LANG);
 if (!empty($biller['footer'])) {
-    $biller['footer'] = InvoiceTokens::expandString($biller['footer'], $invoice, $biller, $customer, $preference);
+    $biller['footer'] = InvoiceTokens::expandString($biller['footer'], $invoice, $biller, $customer, $preference, $LANG);
 }
 $defaults = getSystemDefaults();
 

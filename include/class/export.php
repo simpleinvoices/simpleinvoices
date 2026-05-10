@@ -554,9 +554,13 @@ class export
                 $billerobj->domain_id = $this->domain_id;
                 $biller      = $billerobj->select($invoice['biller_id']);
                 $preference  = getPreference($invoice['preference_id'], $this->domain_id);
-                $preference  = InvoiceTokens::expandPreference($preference, $invoice, $biller, $customer);
+                $LANG        = getLanguageArray($preference['language']);
+                if (!is_array($LANG)) {
+                    $LANG = [];
+                }
+                $preference  = InvoiceTokens::expandPreference($preference, $invoice, $biller, $customer, $LANG);
                 if (!empty($biller['footer'])) {
-                    $biller['footer'] = InvoiceTokens::expandString($biller['footer'], $invoice, $biller, $customer, $preference);
+                    $biller['footer'] = InvoiceTokens::expandString($biller['footer'], $invoice, $biller, $customer, $preference, $LANG);
                 }
                 $defaults    = getSystemDefaults($this->domain_id);
                 $logo        = getLogo($biller);

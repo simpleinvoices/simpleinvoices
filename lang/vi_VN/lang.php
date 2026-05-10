@@ -18,6 +18,8 @@ regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
 #all
 $LANG['about'] = "Giới thiệu";//1
 $LANG['account_info'] = "Thông tin tài khoản";//1
+$LANG['account_name'] = "Account name";//0
+$LANG['account_number'] = "Account number";//0
 $LANG['actions'] = "Thao tác";//1
 $LANG['add'] = "Thêm";//1
 $LANG['add_biller'] = "Thêm NV Bán Hàng";//1
@@ -169,6 +171,7 @@ $LANG['due'] = "Nợ";//1
 $LANG['edit'] = "Sửa đổi";//1
 $LANG['edit_profile'] = "Chỉnh Sửa Hồ Sơ";//1
 $LANG['edit_view_tooltip'] = "Sửa đổi";//1
+$LANG['electronic_funds_transfer'] = "Electronic Funds Transfer";//0
 $LANG['email'] = "Thư điện tử";//1
 $LANG['email_bcc'] = "BCC";//1
 $LANG['email_biller'] = "Gửi thư điện tử đến NV Bán Hàng";//1

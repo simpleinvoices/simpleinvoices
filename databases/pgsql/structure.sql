@@ -203,7 +203,6 @@ CREATE TABLE IF NOT EXISTS si_invoices (
   denorm_currency_code   VARCHAR(10) DEFAULT NULL,
   denorm_currency_locale VARCHAR(32) DEFAULT NULL,
   currency_id INTEGER DEFAULT NULL,
-  show_currency_code SMALLINT NOT NULL DEFAULT 0,
   denorm_invoice_total          NUMERIC(25,6) NOT NULL DEFAULT 0,
   denorm_amount_paid            NUMERIC(25,6) NOT NULL DEFAULT 0,
   denorm_amount_owing           NUMERIC(25,6) NOT NULL DEFAULT 0,
@@ -297,10 +296,15 @@ CREATE TABLE IF NOT EXISTS si_preferences (
   language                   VARCHAR(255) DEFAULT NULL,
   index_group                INTEGER NOT NULL,
   currency_id                INTEGER DEFAULT NULL,
-  show_currency_code         SMALLINT NOT NULL DEFAULT 0,
   payment_term_id            INTEGER DEFAULT NULL,
-  payment_bank_name          VARCHAR(255) DEFAULT NULL,
-  payment_reference          VARCHAR(255) DEFAULT NULL,
+  pref_inv_payment_line0_name VARCHAR(255) DEFAULT NULL,
+  pref_inv_payment_line0_value VARCHAR(255) DEFAULT NULL,
+  pref_inv_payment_line3_name VARCHAR(255) DEFAULT NULL,
+  pref_inv_payment_line3_value VARCHAR(255) DEFAULT NULL,
+  pref_inv_payment_line4_name VARCHAR(255) DEFAULT NULL,
+  pref_inv_payment_line4_value VARCHAR(255) DEFAULT NULL,
+  pref_inv_payment_line5_name VARCHAR(255) DEFAULT NULL,
+  pref_inv_payment_line5_value VARCHAR(255) DEFAULT NULL,
   PRIMARY KEY (domain_id, pref_id)
 );
 

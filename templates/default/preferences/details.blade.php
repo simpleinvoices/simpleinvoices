@@ -220,18 +220,10 @@
 					'currencySignCurrentValue'     => $preference['pref_currency_sign'] ?? '',
 					'currencyCodeFieldName'        => 'currency_code',
 					'currencyCodeCurrentValue'     => $preference['currency_code'] ?? '',
-					'currencyPositionFieldName'    => 'currency_position',
-					'currencyPositionCurrentValue' => $preference['currency_position'] ?? '',
 					'currencyIdFieldName'          => 'currency_id',
 					'currencyIdCurrentValue'       => $preference['currency_id'] ?? '',
 				])
-				<div class="mb-3 mt-3">
-					<div class="form-check form-switch">
-						<input type="hidden" name="show_currency_code" value="0" />
-						<input class="form-check-input" type="checkbox" name="show_currency_code" id="si_show_currency_code" value="1" @if(!empty($preference['show_currency_code'])) checked @endif />
-						<label class="form-check-label" for="si_show_currency_code">{{ $LANG['show_currency_code'] ?? 'Show currency code on invoices' }}</label>
-					</div>
-				</div>
+
 				<div class="mb-3 mt-3">
 					<label class="form-label">{{ $LANG['payment_terms'] ?? 'Payment terms' }}</label>
 					<select name="payment_term_id" class="form-select">
@@ -242,12 +234,36 @@
 					</select>
 				</div>
 				<div class="mb-3">
-					<label class="form-label">{{ $LANG['payment_bank_name'] ?? 'Bank name' }}</label>
-					<input type="text" name="payment_bank_name" value="{{ $preference['payment_bank_name'] ?? '' }}" class="form-control" placeholder="e.g. First National Bank" />
+					<label class="form-label">{{ $LANG['payment_line0_name'] ?? 'Payment line 0 name' }}</label>
+					<input type="text" name="pref_inv_payment_line0_name" value="{{ $preference['pref_inv_payment_line0_name'] ?? '' }}" class="form-control" placeholder="e.g. Bank name" />
 				</div>
 				<div class="mb-3">
-					<label class="form-label">{{ $LANG['payment_reference'] ?? 'Payment reference' }}</label>
-					<input type="text" name="payment_reference" value="{{ $preference['payment_reference'] ?? '' }}" class="form-control" placeholder="e.g. Invoice #{invoice.number}" />
+					<label class="form-label">{{ $LANG['payment_line0_value'] ?? 'Payment line 0 value' }}</label>
+					<input type="text" name="pref_inv_payment_line0_value" value="{{ $preference['pref_inv_payment_line0_value'] ?? '' }}" class="form-control" placeholder="e.g. Invoice #{invoice.number}" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['payment_line3_name'] ?? 'Payment line 3 name' }}</label>
+					<input type="text" name="pref_inv_payment_line3_name" value="{{ $preference['pref_inv_payment_line3_name'] ?? '' }}" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['payment_line3_value'] ?? 'Payment line 3 value' }}</label>
+					<input type="text" name="pref_inv_payment_line3_value" value="{{ $preference['pref_inv_payment_line3_value'] ?? '' }}" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['payment_line4_name'] ?? 'Payment line 4 name' }}</label>
+					<input type="text" name="pref_inv_payment_line4_name" value="{{ $preference['pref_inv_payment_line4_name'] ?? '' }}" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['payment_line4_value'] ?? 'Payment line 4 value' }}</label>
+					<input type="text" name="pref_inv_payment_line4_value" value="{{ $preference['pref_inv_payment_line4_value'] ?? '' }}" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['payment_line5_name'] ?? 'Payment line 5 name' }}</label>
+					<input type="text" name="pref_inv_payment_line5_name" value="{{ $preference['pref_inv_payment_line5_name'] ?? '' }}" class="form-control" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['payment_line5_value'] ?? 'Payment line 5 value' }}</label>
+					<input type="text" name="pref_inv_payment_line5_value" value="{{ $preference['pref_inv_payment_line5_value'] ?? '' }}" class="form-control" />
 				</div>
 			</div>
 			<div id="pref-edit-wording" class="tab-pane" role="tabpanel">

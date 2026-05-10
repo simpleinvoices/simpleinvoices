@@ -67,11 +67,8 @@
                 </div>
                 @if(!empty($invoice['payment_term_id']) || !empty($invoice['calc_due_date']))
                 <div class="col-md-6">
-                    <div class="text-uppercase text-secondary small fw-medium mb-2">{{ $LANG['payment_term_code'] ?? 'Payment term code' }}</div>
-                    <div class="fw-medium">{{ !empty($invoice['payment_term_code']) ? $invoice['payment_term_code'] : (!empty($invoice['payment_term_label']) ? $invoice['payment_term_label'] : '-') }}</div>
-                    @if(!empty($invoice['payment_term_code']) && !empty($invoice['payment_term_label']))
-                    <div class="text-secondary small mt-1">{{ $invoice['payment_term_label'] }}</div>
-                    @endif
+                    <div class="text-uppercase text-secondary small fw-medium mb-2">{{ $LANG['payment_terms'] ?? 'Payment terms' }}</div>
+                    <div class="fw-medium">{{ !empty($invoice['payment_term_label']) ? $invoice['payment_term_label'] : '-' }}</div>
                 </div>
                 <div class="col-md-6">
                     <div class="text-uppercase text-secondary small fw-medium mb-2">{{ $LANG['due_date'] ?? 'Due date' }}</div>

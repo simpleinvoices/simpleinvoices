@@ -21,6 +21,8 @@ regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
 #all
 $LANG['about'] = "Tietoja ohjelmasta";//1
 $LANG['account_info'] = "Tilin tiedot";//1
+$LANG['account_name'] = "Account name";//0
+$LANG['account_number'] = "Account number";//0
 $LANG['actions'] = "Toiminnot";//1
 $LANG['add'] = "Lisää";//1
 $LANG['add_biller'] = "Uusi laskuttaja";//1
@@ -172,6 +174,7 @@ $LANG['due'] = "Erääntynyt";//1
 $LANG['edit'] = "Muokkaa";//1
 $LANG['edit_profile'] = "Muokkaa Profiilia";//1
 $LANG['edit_view_tooltip'] = "Muokkaa";//1
+$LANG['electronic_funds_transfer'] = "Electronic Funds Transfer";//0
 $LANG['email'] = "Sähköposti";//1
 $LANG['email_bcc'] = "Sähköposti BCC (piilojäljennös)";//1
 $LANG['email_biller'] = "Lähetä sähköposti laskuttajalle";//1

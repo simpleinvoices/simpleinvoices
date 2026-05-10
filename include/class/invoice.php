@@ -78,8 +78,6 @@ class invoice {
 				$currency_id = (int) $currRow['id'];
 			}
 		}
-		$show_currency_code = !empty($pref_group['show_currency_code']) ? 1 : 0;
-
 		// Denormalise currency_code and currency_locale from preference
 		if ($currency_id > 0 && ($currency_code === '')) {
 			$tmpCur = siCurrencies::getById($currency_id, $this->domain_id);
@@ -95,13 +93,13 @@ class invoice {
 					type_id, preference_id, date, note,
 					custom_field1, custom_field2, custom_field3, custom_field4,
 					currency_sign, denorm_currency_code, denorm_currency_locale,
-					currency_id, show_currency_code
+					currency_id
 				) VALUES (
 					:index_id, :domain_id, :biller_id, :customer_id,
 					:type_id, :preference_id, :date, :note,
 					:customField1, :customField2, :customField3, :customField4,
 					:currency_sign, :currency_code, :currency_locale,
-					:currency_id, :show_currency_code
+					:currency_id
 				)";
 		} else {
 			$sql = "INSERT INTO ".TB_PREFIX."invoices (
@@ -109,13 +107,13 @@ class invoice {
 					type_id, preference_id, date, note,
 					custom_field1, custom_field2, custom_field3, custom_field4,
 					currency_sign, denorm_currency_code, denorm_currency_locale,
-					currency_id, show_currency_code
+					currency_id
 				) VALUES (
 					NULL, :index_id, :domain_id, :biller_id, :customer_id,
 					:type_id, :preference_id, :date, :note,
 					:customField1, :customField2, :customField3, :customField4,
 					:currency_sign, :currency_code, :currency_locale,
-					:currency_id, :show_currency_code
+					:currency_id
 				)";
 		}
 
@@ -135,8 +133,7 @@ class invoice {
 			':currency_sign',  $currency_sign,
 			':currency_code',  $currency_code,
 			':currency_locale', $currency_locale,
-			':currency_id',    $currency_id,
-			':show_currency_code', $show_currency_code
+			':currency_id',    $currency_id
 		);
 
 	    index::increment('invoice', $pref_group['index_group'], $this->domain_id);

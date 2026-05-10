@@ -18,6 +18,8 @@ regex :%s/;/ /1/;// 1\/\/1/g - remove the spaces
 #all
 $LANG['about'] = "O programu";//1
 $LANG['account_info'] = "Informace o účtu";//1
+$LANG['account_name'] = "Account name";//0
+$LANG['account_number'] = "Account number";//0
 $LANG['actions'] = "Akce";//1
 $LANG['add'] = "Přidat";//1
 $LANG['add_biller'] = "Přidat dodavatele";//1
@@ -169,6 +171,7 @@ $LANG['due'] = "Nezaplacené";//1
 $LANG['edit'] = "Upravit";//1
 $LANG['edit_profile'] = "Upravit profil";//1
 $LANG['edit_view_tooltip'] = "Upravit";//1
+$LANG['electronic_funds_transfer'] = "Electronic Funds Transfer";//0
 $LANG['email'] = "E-mail";//1
 $LANG['email_bcc'] = "E-mail - skrytá kopie";//1
 $LANG['email_biller'] = "Poslat dodavateli";//1
