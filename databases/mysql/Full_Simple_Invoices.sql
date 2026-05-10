@@ -166,7 +166,7 @@ CREATE TABLE IF NOT EXISTS `si_index` (
 ) ENGINE=MyISAM;
 
 INSERT INTO `si_index` (`id`, `node`, `sub_node`, `sub_node_2`, `domain_id`) VALUES
- (1, 'invoice', '1', '', 1);
+ (1, 'invoice', '1', '0', 1);
 
 CREATE TABLE IF NOT EXISTS `si_inventory` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
