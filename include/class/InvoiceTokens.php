@@ -103,6 +103,9 @@ class InvoiceTokens
             '{lang.payment_terms}'              => (string) ($lang['payment_terms'] ?? ''),
             '{lang.details}'                    => (string) ($lang['details'] ?? ''),
             '{lang.electronic_funds_transfer}'  => (string) ($lang['electronic_funds_transfer'] ?? ''),
+            '{lang.bank_name}'                  => (string) ($lang['bank_name'] ?? ''),
+            '{lang.swift_bic}'                  => (string) ($lang['swift_bic'] ?? ''),
+            '{lang.invoice_reference}'          => (string) ($lang['invoice_reference'] ?? ''),
         ];
     }
 

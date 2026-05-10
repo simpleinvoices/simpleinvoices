@@ -309,7 +309,7 @@
 				</div>
 			</div>
 			<div id="pref-edit-payment" class="tab-pane" role="tabpanel">
-				<p class="text-muted small mb-3">{{ $LANG['payment_token_hint'] ?? 'Tokens are replaced with live values when the invoice is rendered. Biller bank details: {biller.bank_account_name}, {biller.bank_name}, {biller.bank_swift_bic}, {biller.bank_account_number}, {biller.bank_routing_sort_code}. Other tokens: {biller.name}, {biller.email}, {biller.phone}, {customer.name}, {invoice.total}, {invoice.owing}.' }}</p>
+				<p class="text-muted small mb-3">{{ $LANG['payment_token_hint'] ?? 'Tokens are replaced with live values when the invoice is rendered. Biller bank tokens: {biller.bank_name}, {biller.bank_account_number}, {biller.bank_swift_bic}, {biller.bank_routing_sort_code}, {biller.bank_account_name}. Language labels: {lang.bank_name}, {lang.account_number}, {lang.swift_bic}, {lang.invoice_reference}, {lang.details}, {lang.payment_terms}, {lang.account_name}, {lang.electronic_funds_transfer}. Other tokens: {biller.name}, {biller.email}, {biller.phone}, {customer.name}, {invoice.total}, {invoice.owing}, {invoice.number}.' }}</p>
 				<div class="mb-3">
 					<label class="form-label">{{ $LANG['include_online_payment'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_detail_line" title="{{ $LANG['invoice_detail_line'] ?? '' }}"><i class="ti ti-help"></i></a></label>
 					<div>
@@ -387,13 +387,13 @@
 					<div class="col-md-6">
 						<div class="mb-3">
 							<label class="form-label">{{ $LANG['invoice_payment_line_0_name'] ?? '' }}</label>
-							<input type="text" name="pref_inv_payment_line0_name" value="{{ $preference['pref_inv_payment_line0_name'] ?? '' }}" class="form-control" placeholder="e.g. Bank name" />
+							<input type="text" name="pref_inv_payment_line0_name" value="{{ $preference['pref_inv_payment_line0_name'] ?? '' }}" class="form-control" placeholder="{lang.bank_name}" />
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="mb-3">
 							<label class="form-label">{{ $LANG['invoice_payment_line_0_value'] ?? '' }}</label>
-							<input type="text" name="pref_inv_payment_line0_value" value="{{ $preference['pref_inv_payment_line0_value'] ?? '' }}" class="form-control" placeholder="e.g. {invoice.number}" />
+							<input type="text" name="pref_inv_payment_line0_value" value="{{ $preference['pref_inv_payment_line0_value'] ?? '' }}" class="form-control" placeholder="{biller.bank_name}" />
 						</div>
 					</div>
 				</div>
@@ -401,13 +401,13 @@
 					<div class="col-md-6">
 						<div class="mb-3">
 							<label class="form-label">{{ $LANG['invoice_payment_line_3_name'] ?? '' }}</label>
-							<input type="text" name="pref_inv_payment_line3_name" value="{{ $preference['pref_inv_payment_line3_name'] ?? '' }}" class="form-control" />
+							<input type="text" name="pref_inv_payment_line3_name" value="{{ $preference['pref_inv_payment_line3_name'] ?? '' }}" class="form-control" placeholder="{lang.account_number}" />
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="mb-3">
 							<label class="form-label">{{ $LANG['invoice_payment_line_3_value'] ?? '' }}</label>
-							<input type="text" name="pref_inv_payment_line3_value" value="{{ $preference['pref_inv_payment_line3_value'] ?? '' }}" class="form-control" />
+							<input type="text" name="pref_inv_payment_line3_value" value="{{ $preference['pref_inv_payment_line3_value'] ?? '' }}" class="form-control" placeholder="{biller.bank_account_number}" />
 						</div>
 					</div>
 				</div>
@@ -415,13 +415,13 @@
 					<div class="col-md-6">
 						<div class="mb-3">
 							<label class="form-label">{{ $LANG['invoice_payment_line_4_name'] ?? '' }}</label>
-							<input type="text" name="pref_inv_payment_line4_name" value="{{ $preference['pref_inv_payment_line4_name'] ?? '' }}" class="form-control" />
+							<input type="text" name="pref_inv_payment_line4_name" value="{{ $preference['pref_inv_payment_line4_name'] ?? '' }}" class="form-control" placeholder="{lang.swift_bic}" />
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="mb-3">
 							<label class="form-label">{{ $LANG['invoice_payment_line_4_value'] ?? '' }}</label>
-							<input type="text" name="pref_inv_payment_line4_value" value="{{ $preference['pref_inv_payment_line4_value'] ?? '' }}" class="form-control" />
+							<input type="text" name="pref_inv_payment_line4_value" value="{{ $preference['pref_inv_payment_line4_value'] ?? '' }}" class="form-control" placeholder="{biller.bank_swift_bic}" />
 						</div>
 					</div>
 				</div>
@@ -429,13 +429,13 @@
 					<div class="col-md-6">
 						<div class="mb-3">
 							<label class="form-label">{{ $LANG['invoice_payment_line_5_name'] ?? '' }}</label>
-							<input type="text" name="pref_inv_payment_line5_name" value="{{ $preference['pref_inv_payment_line5_name'] ?? '' }}" class="form-control" />
+							<input type="text" name="pref_inv_payment_line5_name" value="{{ $preference['pref_inv_payment_line5_name'] ?? '' }}" class="form-control" placeholder="{lang.invoice_reference}" />
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="mb-3">
 							<label class="form-label">{{ $LANG['invoice_payment_line_5_value'] ?? '' }}</label>
-							<input type="text" name="pref_inv_payment_line5_value" value="{{ $preference['pref_inv_payment_line5_value'] ?? '' }}" class="form-control" />
+							<input type="text" name="pref_inv_payment_line5_value" value="{{ $preference['pref_inv_payment_line5_value'] ?? '' }}" class="form-control" placeholder="{invoice.number}" />
 						</div>
 					</div>
 				</div>
