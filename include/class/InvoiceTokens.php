@@ -104,6 +104,10 @@ class InvoiceTokens
             '{lang.details}'                    => (string) ($lang['details'] ?? ''),
             '{lang.electronic_funds_transfer}'  => (string) ($lang['electronic_funds_transfer'] ?? ''),
             '{lang.bank_name}'                  => (string) ($lang['bank_name'] ?? ''),
+            '{lang.bank_account_name}'          => (string) ($lang['bank_account_name'] ?? ''),
+            '{lang.bank_account_number}'        => (string) ($lang['bank_account_number'] ?? ''),
+            '{lang.bank_swift_bic}'             => (string) ($lang['bank_swift_bic'] ?? ''),
+            '{lang.bank_routing_sort_code}'     => (string) ($lang['bank_routing_sort_code'] ?? ''),
             '{lang.swift_bic}'                  => (string) ($lang['swift_bic'] ?? ''),
             '{lang.invoice_reference}'          => (string) ($lang['invoice_reference'] ?? ''),
         ];
