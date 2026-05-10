@@ -2700,12 +2700,12 @@ PRIMARY KEY ( `domain_id`, `id` )
     }
     $patch['364']['date'] = "20260420";
 
-    $patch['365']['name'] = "si_invoices: backfill denorm_currency_code from si_currencies and denorm_currency_locale from preferences";
+    $patch['365']['name'] = "si_invoices: backfill denorm_currency_code from si_currency and denorm_currency_locale from preferences";
     switch ($db_server) {
         case 'pgsql':
             $patch['365']['patch'] = 'UPDATE ' . TB_PREFIX . 'invoices i'
                 . ' SET denorm_currency_code = c.currency_code'
-                . ' FROM ' . TB_PREFIX . 'currencies c'
+                . ' FROM ' . TB_PREFIX . 'currency c'
                 . ' WHERE c.id = i.currency_id AND c.domain_id = i.domain_id'
                 . ' AND (i.denorm_currency_code IS NULL OR i.denorm_currency_code = \'\')'
                 . ' AND i.currency_id IS NOT NULL;'
@@ -2717,7 +2717,7 @@ PRIMARY KEY ( `domain_id`, `id` )
             break;
         case 'sqlite':
             $patch['365']['patch'] = 'UPDATE ' . TB_PREFIX . 'invoices'
-                . ' SET denorm_currency_code = (SELECT c.currency_code FROM ' . TB_PREFIX . 'currencies c'
+                . ' SET denorm_currency_code = (SELECT c.currency_code FROM ' . TB_PREFIX . 'currency c'
                 . ' WHERE c.id = ' . TB_PREFIX . 'invoices.currency_id AND c.domain_id = ' . TB_PREFIX . 'invoices.domain_id)'
                 . ' WHERE currency_id IS NOT NULL AND (denorm_currency_code IS NULL OR denorm_currency_code = \'\');'
                 . ' UPDATE ' . TB_PREFIX . 'invoices'
@@ -2727,7 +2727,7 @@ PRIMARY KEY ( `domain_id`, `id` )
             break;
         default:
             $patch['365']['patch'] = 'UPDATE ' . TB_PREFIX . 'invoices i'
-                . ' INNER JOIN ' . TB_PREFIX . 'currencies c ON c.id = i.currency_id AND c.domain_id = i.domain_id'
+                . ' INNER JOIN ' . TB_PREFIX . 'currency c ON c.id = i.currency_id AND c.domain_id = i.domain_id'
                 . ' SET i.denorm_currency_code = c.currency_code'
                 . ' WHERE (i.denorm_currency_code IS NULL OR i.denorm_currency_code = \'\')'
                 . ' AND i.currency_id IS NOT NULL;'
@@ -3023,7 +3023,7 @@ PRIMARY KEY ( `domain_id`, `id` )
 
     // ── Currency system ───────────────────────────────────────────────────────
 
-    $patch['376']['name'] = "Create si_currency table, link preferences/invoices, and migrate existing currencies";
+    $patch['376']['name'] = "Create si_currency table, link preferences/invoices, and migrate existing currency";
     switch ($db_server) {
         case 'pgsql':
             $p376 = '';
