@@ -93,6 +93,30 @@
 						<th>{{ $LANG['invoice_payment_line_2_value'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_payment_line2_value" title="{{ $LANG['invoice_payment_line_2_value'] ?? '' }}"><i class="ti ti-help"></i></a></th>
 						<td>{{ $preference['pref_inv_payment_line2_value'] ?? '' }}</td>
 					</tr>
+					<tr>
+						<th>{{ $LANG['invoice_payment_line_0_name'] ?? '' }}</th>
+						<td>{{ $preference['pref_inv_payment_line0_name'] ?? '' }}</td>
+						<th>{{ $LANG['invoice_payment_line_0_value'] ?? '' }}</th>
+						<td>{{ $preference['pref_inv_payment_line0_value'] ?? '' }}</td>
+					</tr>
+					<tr>
+						<th>{{ $LANG['invoice_payment_line_3_name'] ?? '' }}</th>
+						<td>{{ $preference['pref_inv_payment_line3_name'] ?? '' }}</td>
+						<th>{{ $LANG['invoice_payment_line_3_value'] ?? '' }}</th>
+						<td>{{ $preference['pref_inv_payment_line3_value'] ?? '' }}</td>
+					</tr>
+					<tr>
+						<th>{{ $LANG['invoice_payment_line_4_name'] ?? '' }}</th>
+						<td>{{ $preference['pref_inv_payment_line4_name'] ?? '' }}</td>
+						<th>{{ $LANG['invoice_payment_line_4_value'] ?? '' }}</th>
+						<td>{{ $preference['pref_inv_payment_line4_value'] ?? '' }}</td>
+					</tr>
+					<tr>
+						<th>{{ $LANG['invoice_payment_line_5_name'] ?? '' }}</th>
+						<td>{{ $preference['pref_inv_payment_line5_name'] ?? '' }}</td>
+						<th>{{ $LANG['invoice_payment_line_5_value'] ?? '' }}</th>
+						<td>{{ $preference['pref_inv_payment_line5_value'] ?? '' }}</td>
+					</tr>
 				</table>
 			</div>
 		</div>
@@ -356,6 +380,62 @@
 						<div class="mb-3">
 							<label class="form-label">{{ $LANG['invoice_payment_line_2_value'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_payment_line2_value" title="{{ $LANG['invoice_payment_line_2_value'] ?? '' }}"><i class="ti ti-help"></i></a></label>
 							<input type="text" name="pref_inv_payment_line2_value" value="{{ $preference['pref_inv_payment_line2_value'] ?? '' }}" class="form-control" />
+						</div>
+					</div>
+				</div>
+				<div class="row g-3">
+					<div class="col-md-6">
+						<div class="mb-3">
+							<label class="form-label">{{ $LANG['invoice_payment_line_0_name'] ?? '' }}</label>
+							<input type="text" name="pref_inv_payment_line0_name" value="{{ $preference['pref_inv_payment_line0_name'] ?? '' }}" class="form-control" placeholder="e.g. Bank name" />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="mb-3">
+							<label class="form-label">{{ $LANG['invoice_payment_line_0_value'] ?? '' }}</label>
+							<input type="text" name="pref_inv_payment_line0_value" value="{{ $preference['pref_inv_payment_line0_value'] ?? '' }}" class="form-control" placeholder="e.g. {invoice.number}" />
+						</div>
+					</div>
+				</div>
+				<div class="row g-3">
+					<div class="col-md-6">
+						<div class="mb-3">
+							<label class="form-label">{{ $LANG['invoice_payment_line_3_name'] ?? '' }}</label>
+							<input type="text" name="pref_inv_payment_line3_name" value="{{ $preference['pref_inv_payment_line3_name'] ?? '' }}" class="form-control" />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="mb-3">
+							<label class="form-label">{{ $LANG['invoice_payment_line_3_value'] ?? '' }}</label>
+							<input type="text" name="pref_inv_payment_line3_value" value="{{ $preference['pref_inv_payment_line3_value'] ?? '' }}" class="form-control" />
+						</div>
+					</div>
+				</div>
+				<div class="row g-3">
+					<div class="col-md-6">
+						<div class="mb-3">
+							<label class="form-label">{{ $LANG['invoice_payment_line_4_name'] ?? '' }}</label>
+							<input type="text" name="pref_inv_payment_line4_name" value="{{ $preference['pref_inv_payment_line4_name'] ?? '' }}" class="form-control" />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="mb-3">
+							<label class="form-label">{{ $LANG['invoice_payment_line_4_value'] ?? '' }}</label>
+							<input type="text" name="pref_inv_payment_line4_value" value="{{ $preference['pref_inv_payment_line4_value'] ?? '' }}" class="form-control" />
+						</div>
+					</div>
+				</div>
+				<div class="row g-3">
+					<div class="col-md-6">
+						<div class="mb-3">
+							<label class="form-label">{{ $LANG['invoice_payment_line_5_name'] ?? '' }}</label>
+							<input type="text" name="pref_inv_payment_line5_name" value="{{ $preference['pref_inv_payment_line5_name'] ?? '' }}" class="form-control" />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="mb-3">
+							<label class="form-label">{{ $LANG['invoice_payment_line_5_value'] ?? '' }}</label>
+							<input type="text" name="pref_inv_payment_line5_value" value="{{ $preference['pref_inv_payment_line5_value'] ?? '' }}" class="form-control" />
 						</div>
 					</div>
 				</div>
