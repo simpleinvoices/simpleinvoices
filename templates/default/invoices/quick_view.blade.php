@@ -256,10 +256,12 @@
             $hasDetail = !empty($preference['pref_inv_detail_heading'])
                       || !empty($preference['pref_inv_detail_line'])
                       || !empty($preference['pref_inv_payment_method'])
-                      || !empty($preference['pref_inv_payment_line1_name'])
+                      || !empty($preference['pref_inv_payment_line0_value'])
                       || !empty($preference['pref_inv_payment_line1_value'])
-                      || !empty($preference['pref_inv_payment_line2_name'])
                       || !empty($preference['pref_inv_payment_line2_value'])
+                      || !empty($preference['pref_inv_payment_line3_value'])
+                      || !empty($preference['pref_inv_payment_line4_value'])
+                      || !empty($preference['pref_inv_payment_line5_value'])
                       || !empty($biller['footer']);
             $hasPaymentMethod = !empty($preference['pref_inv_payment_method']) || !empty($preference['include_online_payment']);
         @endphp
@@ -281,11 +283,23 @@
                 ])
             </div>
             @endif
-            @if(!empty($preference['pref_inv_payment_line1_name']) || !empty($preference['pref_inv_payment_line1_value']))
+            @if(!empty($preference['pref_inv_payment_line0_value']))
+            <div class="text-secondary small mb-1">{{ $preference['pref_inv_payment_line0_name'] ?? '' }} {{ $preference['pref_inv_payment_line0_value'] ?? '' }}</div>
+            @endif
+            @if(!empty($preference['pref_inv_payment_line1_value']))
             <div class="text-secondary small mb-1">{{ $preference['pref_inv_payment_line1_name'] ?? '' }} {{ $preference['pref_inv_payment_line1_value'] ?? '' }}</div>
             @endif
-            @if(!empty($preference['pref_inv_payment_line2_name']) || !empty($preference['pref_inv_payment_line2_value']))
-            <div class="text-secondary small">{{ $preference['pref_inv_payment_line2_name'] ?? '' }} {{ $preference['pref_inv_payment_line2_value'] ?? '' }}</div>
+            @if(!empty($preference['pref_inv_payment_line2_value']))
+            <div class="text-secondary small mb-1">{{ $preference['pref_inv_payment_line2_name'] ?? '' }} {{ $preference['pref_inv_payment_line2_value'] ?? '' }}</div>
+            @endif
+            @if(!empty($preference['pref_inv_payment_line3_value']))
+            <div class="text-secondary small mb-1">{{ $preference['pref_inv_payment_line3_name'] ?? '' }} {{ $preference['pref_inv_payment_line3_value'] ?? '' }}</div>
+            @endif
+            @if(!empty($preference['pref_inv_payment_line4_value']))
+            <div class="text-secondary small mb-1">{{ $preference['pref_inv_payment_line4_name'] ?? '' }} {{ $preference['pref_inv_payment_line4_value'] ?? '' }}</div>
+            @endif
+            @if(!empty($preference['pref_inv_payment_line5_value']))
+            <div class="text-secondary small">{{ $preference['pref_inv_payment_line5_name'] ?? '' }} {{ $preference['pref_inv_payment_line5_value'] ?? '' }}</div>
             @endif
             @if(!empty($biller['footer']))
             <div class="text-secondary small mt-2 pt-2 border-top">{!! outhtml($biller['footer']) !!}</div>

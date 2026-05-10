@@ -125,7 +125,7 @@
 				</div>
 				<div class="mb-3">
 					<label class="form-label">{{ $LANG['payment_line5_value'] ?? 'Payment line 5 value' }}</label>
-					<input type="text" name="pref_inv_payment_line5_value" value="{{ post('pref_inv_payment_line5_value') }}" class="form-control" placeholder="{invoice.number}" />
+					<input type="text" name="pref_inv_payment_line5_value" value="{{ post('pref_inv_payment_line5_value') }}" class="form-control" placeholder="Invoice #{invoice.number}" />
 				</div>
 			</div>
 			<div id="pref-add-wording" class="tab-pane" role="tabpanel">

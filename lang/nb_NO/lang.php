@@ -63,6 +63,7 @@ $LANG['backup_done'] = "Din database er sikkerhetskopiert til %s, du kan fortset
 $LANG['backup_howto'] = "For å lage en sikkerhetskopi av din database, trykk på lenken nedenfor.";//1
 $LANG['backup_note_to_file'] = "Dette vil utføre en sikkerhetskopi av din database og legge den i database_backups mappen.";//1
 $LANG['backup_your_database'] = "Ta sikkerhetskopi av din database";//1
+$LANG['bank_routing_sort_code'] = "Routing / Sort Code";//0
 $LANG['before_starting'] = "Det er bare et par ting som gjenstår før du kan starte å fakturere.";//1
 $LANG['biller'] = "Operatør";//1
 $LANG['biller_details'] = "Operatørdetaljer";//1

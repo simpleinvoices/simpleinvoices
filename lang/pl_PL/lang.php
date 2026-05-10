@@ -63,6 +63,7 @@ $LANG['backup_done'] = "Baza danych została kopia zapasowa do pliku% s, można 
 $LANG['backup_howto'] = "Aby zrobić kopię zapasową bazy danych Simple Invoices kliknij poniższy link";//1
 $LANG['backup_note_to_file'] = "Tutaj będziesz mógł  wykonać kopię zapasową bazy danych do pliku w katalogu database_backups.";//1
 $LANG['backup_your_database'] = "Zrób kopię zapasową bazy danych";//1
+$LANG['bank_routing_sort_code'] = "Routing / Sort Code";//0
 $LANG['before_starting'] = "Jest tylko kilka rzeczy do zrobienia, zanim będzie można rozpocząć fakturowanie";//1
 $LANG['biller'] = "Sprzedawca";//1
 $LANG['biller_details'] = "Szczegóły Sprzedawca";//1

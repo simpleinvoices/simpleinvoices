@@ -63,6 +63,7 @@ $LANG['backup_done'] = "Databáze byla zálohována do souboru %s.";//1
 $LANG['backup_howto'] = "Kliknutím na odkaz níže vytvoříte zálohu databáze.";//1
 $LANG['backup_note_to_file'] = "Tímto vytvoříte zálohu databáze do souboru ve složce database_backups.";//1
 $LANG['backup_your_database'] = "Zálohovat dazabázi";//1
+$LANG['bank_routing_sort_code'] = "Routing / Sort Code";//0
 $LANG['before_starting'] = "Než začnete fakturovat, musíte nastavit pár věcí";//1
 $LANG['biller'] = "Dodavatel";//1
 $LANG['biller_details'] = "Údaje dodavatele";//1

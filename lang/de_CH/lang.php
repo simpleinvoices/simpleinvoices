@@ -66,6 +66,7 @@ $LANG['backup_done'] = "Ihre Datenbank wurde unter der Datei %s gesichert. Sie k
 $LANG['backup_howto'] = "Um eine Sicherung Ihrer Simple Invoices Datenbank zu erstellen klicken Sie auf den unteren Link.";//1
 $LANG['backup_note_to_file'] = "Eine Sicherung Ihrer Datenbank wird als Datei in das Verzeichnis database_backups geschrieben.";//1
 $LANG['backup_your_database'] = "Sichern sie Ihre Datenbank.";//1
+$LANG['bank_routing_sort_code'] = "Routing / Sort Code";//0
 $LANG['before_starting'] = "Es sind nur wenige Dinge zu tun bevor sie mit der Erstellung von Rechnungen beginnen können.";//1
 $LANG['biller'] = "Gläubiger";//1
 $LANG['biller_details'] = "Gläubigerdetails";//1

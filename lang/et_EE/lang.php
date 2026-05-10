@@ -63,6 +63,7 @@ $LANG['backup_done'] = "Teie andmebaas on nüüd varundatud faili %s, võite Sim
 $LANG['backup_howto'] = "Simple Invoices andmebaasi varundamiseks klõpsake alloleval lingil";//1
 $LANG['backup_note_to_file'] = "See varundab teie andmebaasi faili teie database_backups kausta.";//1
 $LANG['backup_your_database'] = "Varundage oma andmebaas";//1
+$LANG['bank_routing_sort_code'] = "Routing / Sort Code";//0
 $LANG['before_starting'] = "Enne arve koostamist tuleb teha paar asja";//1
 $LANG['biller'] = "Arve koostaja";//1
 $LANG['biller_details'] = "Arve koostaja andmed";//1

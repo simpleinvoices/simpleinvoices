@@ -66,6 +66,7 @@ $LANG['backup_done'] = "Uw database backup is opgeslagen naar het bestand %s, u 
 $LANG['backup_howto'] = "Om een backup te maken van uw Simple Invoices database, klik op de link hier onder";//1
 $LANG['backup_note_to_file'] = "Dit zal uw database backuppen naar een bestand in de map database_backups";//1
 $LANG['backup_your_database'] = "Uw database backup aanmaken";//1
+$LANG['bank_routing_sort_code'] = "Routing / Sort Code";//0
 $LANG['before_starting'] = "Er zijn nog een paar dingen te doen voordat u kunt beginnen met factureren";//1
 $LANG['biller'] = "Bedrijf";//1
 $LANG['biller_details'] = "Details bedrijf";//1

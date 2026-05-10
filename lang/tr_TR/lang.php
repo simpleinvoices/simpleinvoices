@@ -66,6 +66,7 @@ $LANG['backup_done'] = "Veritabanınız %s dosyasına yedeklendi, Simple Invoice
 $LANG['backup_howto'] = "Simple Invoices veritabanınızı yedeklemek için aşağıdaki bağlantıya tıklayın";//1
 $LANG['backup_note_to_file'] = "Bu işlem veritabanınızı database_backups dizinine bir dosya olarak yedekleyecektir.";//1
 $LANG['backup_your_database'] = "Veritabanınızı yedekleyin";//1
+$LANG['bank_routing_sort_code'] = "Routing / Sort Code";//0
 $LANG['before_starting'] = "Faturalamaya başlamadan önce yapmanız gereken birkaç şey var";//1
 $LANG['biller'] = "Müþteri Temsilcisi";//1
 $LANG['biller_details'] = "Müþteri Temsilcisi Detalarýný Görüntüle";//1

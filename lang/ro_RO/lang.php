@@ -67,6 +67,7 @@ $LANG['backup_done'] = "Baza de date a fost salvată în fișierul %s, puteți c
 $LANG['backup_howto'] = "Pentru a face o copie de rezervă a bazei de date Simple Invoices, faceți clic pe linkul de mai jos";//1
 $LANG['backup_note_to_file'] = "Aceasta va salva baza de date într-un fișier în directorul database_backups.";//1
 $LANG['backup_your_database'] = "Salvați baza de date";//1
+$LANG['bank_routing_sort_code'] = "Routing / Sort Code";//0
 $LANG['before_starting'] = "Mai sunt doar cateva lucruri de finalizat inainte sa poti incepe sa facturezi";//1
 $LANG['biller'] = "Furnizor";//1
 $LANG['biller_details'] = "Detalii furnizor";//1

@@ -70,6 +70,7 @@ $LANG['backup_done'] = "A sua base de dados foi guardada no ficheiro %s, pode co
 $LANG['backup_howto'] = "Para fazer uma cópia de segurança da base de dados Simple Invoices clique no link abaixo";//1
 $LANG['backup_note_to_file'] = "Isto irá guardar a sua base de dados num ficheiro na pasta database_backups.";//1
 $LANG['backup_your_database'] = "Cópia de segurança da base de dados";//1
+$LANG['bank_routing_sort_code'] = "Routing / Sort Code";//0
 $LANG['before_starting'] = "Há apenas algumas coisas a fazer antes de poder começar a faturar";//1
 $LANG['biller'] = "Empresa";//1
 $LANG['biller_details'] = "Detalhas da empresa";//1

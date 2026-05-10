@@ -66,6 +66,7 @@ $LANG['backup_done'] = "Tietokantasi on nyt varmuuskopioitu tiedostoon %s, voit 
 $LANG['backup_howto'] = "Varmuuskopioidaksesi Simple Invoices -tietokantasi klikkaa alla olevaa linkkiä";//1
 $LANG['backup_note_to_file'] = "Tämä varmuuskopioi tietokantasi tiedostoon database_backups-hakemistoon.";//1
 $LANG['backup_your_database'] = "Varmuuskopioi tietokanta";//1
+$LANG['bank_routing_sort_code'] = "Routing / Sort Code";//0
 $LANG['before_starting'] = "Muutama asia tehtävänä ennen laskutuksen aloittamista";//1
 $LANG['biller'] = "Laskuttaja";//1
 $LANG['biller_details'] = "Laskuttajan tiedot";//1

@@ -66,6 +66,7 @@ $LANG['backup_done'] = "Baza e të dhënave u rezervua në skedarin %s, mund të
 $LANG['backup_howto'] = "Për të bërë rezervë të bazës së të dhënave të Simple Invoices klikoni lidhjen e mëposhtme";//1
 $LANG['backup_note_to_file'] = "Kjo do të rezervojë bazën tuaj të të dhënave në një skedar në direktorinë database_backups.";//1
 $LANG['backup_your_database'] = "Rezervoni bazën tuaj të të dhënave";//1
+$LANG['bank_routing_sort_code'] = "Routing / Sort Code";//0
 $LANG['before_starting'] = "Ka vetëm disa gjëra për të bërë para se të filloni faturimin";//1
 $LANG['biller'] = "Faturues";//1
 $LANG['biller_details'] = "Detaje te Faturuesit";//1

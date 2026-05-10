@@ -66,6 +66,7 @@ $LANG['backup_done'] = "Jūsu datu bāze ir dublēta failā %s, varat turpināt 
 $LANG['backup_howto'] = "Lai izveidotu Simple Invoices datu bāzes dublējumu, noklikšķiniet uz tālāk esošās saites";//1
 $LANG['backup_note_to_file'] = "Tas dublēs jūsu datu bāzi failā jūsu database_backups direktorijā.";//1
 $LANG['backup_your_database'] = "Dublēt datu bāzi";//1
+$LANG['bank_routing_sort_code'] = "Routing / Sort Code";//0
 $LANG['before_starting'] = "Ir dažas lietas, kas jāizpilda, pirms varat sākt rēķinu izrakstīšanu";//1
 $LANG['biller'] = "Kreditors";//1
 $LANG['biller_details'] = "Kreditora info";//1

@@ -66,6 +66,7 @@ $LANG['backup_done'] = "Su base de datos ha sido respaldada en el archivo %s, ah
 $LANG['backup_howto'] = "Para respaldar su base de datos de Simple Invoices haga click en el enlace inferior";//1
 $LANG['backup_note_to_file'] = "Esto realizará una copia de seguridad de su base de datos en el directorio database_backups.";//1
 $LANG['backup_your_database'] = "Respalde su base de datos";//1
+$LANG['bank_routing_sort_code'] = "Routing / Sort Code";//0
 $LANG['before_starting'] = "Sólo hay un par de cosas por hacer antes de que pueda comenzar a facturar";//1
 $LANG['biller'] = "Emisor";//1
 $LANG['biller_details'] = "Detalles del emisor";//1

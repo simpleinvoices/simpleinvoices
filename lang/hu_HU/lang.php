@@ -63,6 +63,7 @@ $LANG['backup_done'] = "Az adatbázis elmentésre került a %s fájlba, most má
 $LANG['backup_howto'] = "To make a backup of your Simple Invoices database click the below link";//1
 $LANG['backup_note_to_file'] = "Ez mentést fog készíteni az adatbázisról az adatbázis_mentések mappába";//1
 $LANG['backup_your_database'] = "Adatbázis mentése";//1
+$LANG['bank_routing_sort_code'] = "Routing / Sort Code";//0
 $LANG['before_starting'] = "There are just a couple of things to do before you can start invoicing";//1
 $LANG['biller'] = "Biller";//1
 $LANG['biller_details'] = "Biller details";//1

@@ -63,6 +63,7 @@ $LANG['backup_done'] = "Вашата база данни е архивирана
 $LANG['backup_howto'] = "За да направите архив на Вашата Simple Invoices база данни, кликнте на връзката по-долу.";//1
 $LANG['backup_note_to_file'] = "Това ще архивира Вашата база данни във файл в папката database_backups.";//1
 $LANG['backup_your_database'] = "Архивирайте Вашата база данни";//1
+$LANG['bank_routing_sort_code'] = "Routing / Sort Code";//0
 $LANG['before_starting'] = "Има да направите няколко неща преди да започнете да фактурирате.";//1
 $LANG['biller'] = "Издател";//1
 $LANG['biller_details'] = "Детайли за издател";//1

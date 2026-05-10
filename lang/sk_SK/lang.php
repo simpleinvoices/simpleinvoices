@@ -66,6 +66,7 @@ $LANG['backup_done'] = "Záloha je hotová";//1
 $LANG['backup_howto'] = "Ako zálohovať";//1
 $LANG['backup_note_to_file'] = "Zálohovať poznámku do súboru";//1
 $LANG['backup_your_database'] = "Zálohovať databázu";//1
+$LANG['bank_routing_sort_code'] = "Routing / Sort Code";//0
 $LANG['before_starting'] = "Treba ešte spraviť niekoľko vecí predtým, ako začneš fakturovať";//1
 $LANG['biller'] = "Dodávateľ";//1
 $LANG['biller_details'] = "Údaje dodávateľa";//1

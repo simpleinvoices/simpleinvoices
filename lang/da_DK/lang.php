@@ -72,6 +72,7 @@ $LANG['backup_done'] = "Din database er sikkerhedskopieret til filen %s, og du k
 $LANG['backup_howto'] = "For at sikkerhedskopiere din Simple Invoices database, skal du klikke p&#229; linket nedenfor";//1
 $LANG['backup_note_to_file'] = "Dette vil sikkerhedskopiere din database til en fil i din database_sikkerhedskopi mappe.";//1
 $LANG['backup_your_database'] = "Sikkerhedskopier din database";//1
+$LANG['bank_routing_sort_code'] = "Routing / Sort Code";//0
 $LANG['before_starting'] = "Der er blot nogle f&#229; ting at g&#248;re, f&#248;r du kan starte din fakturering";//1
 $LANG['biller'] = "Kreditor";//1
 $LANG['biller_details'] = "Kreditor detaljer";//1

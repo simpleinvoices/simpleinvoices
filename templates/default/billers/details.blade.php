@@ -238,9 +238,9 @@
 				<table class="table table-vcenter table-wrap">
 					<tr><th>{{ $LANG['bank_account_name'] ?? 'Account Name' }}</th><td>{{ $biller['bank_account_name'] ?? '' }}</td></tr>
 					<tr><th>{{ $LANG['bank_name'] ?? 'Bank Name' }}</th><td>{{ $biller['bank_name'] ?? '' }}</td></tr>
-					<tr><th>{{ $LANG['bank_swift_bic'] ?? 'SWIFT / BIC' }}</th><td>{{ $biller['bank_swift_bic'] ?? '' }}</td></tr>
 					<tr><th>{{ $LANG['bank_account_number'] ?? 'Account Number / IBAN' }}</th><td>{{ $biller['bank_account_number'] ?? '' }}</td></tr>
 					<tr><th>{{ $LANG['bank_routing_sort_code'] ?? 'Routing / Sort Code' }}</th><td>{{ $biller['bank_routing_sort_code'] ?? '' }}</td></tr>
+					<tr><th>{{ $LANG['bank_swift_bic'] ?? 'SWIFT / BIC' }}</th><td>{{ $biller['bank_swift_bic'] ?? '' }}</td></tr>
 				</table>
 			</div>
 			<div id="bill-view-custom" class="tab-pane" role="tabpanel">
@@ -637,11 +637,6 @@
 					<small class="form-hint">{{ $LANG['bank_name_hint'] ?? 'Name of the bank or financial institution' }} &mdash; Token: <code>{biller.bank_name}</code></small>
 				</div>
 				<div class="mb-3">
-					<label class="form-label">{{ $LANG['bank_swift_bic'] ?? 'SWIFT / BIC' }}</label>
-					<input type="text" name="bank_swift_bic" value="{{ $biller['bank_swift_bic'] ?? '' }}" class="form-control" />
-					<small class="form-hint">{{ $LANG['bank_swift_bic_hint'] ?? 'Bank identifier — universal for international transfers' }} &mdash; Token: <code>{biller.bank_swift_bic}</code></small>
-				</div>
-				<div class="mb-3">
 					<label class="form-label">{{ $LANG['bank_account_number'] ?? 'Account Number / IBAN' }}</label>
 					<input type="text" name="bank_account_number" value="{{ $biller['bank_account_number'] ?? '' }}" class="form-control" />
 					<small class="form-hint">{{ $LANG['bank_account_number_hint'] ?? 'IBAN (EU) or local account number' }} &mdash; Token: <code>{biller.bank_account_number}</code></small>
@@ -650,6 +645,11 @@
 					<label class="form-label">{{ $LANG['bank_routing_sort_code'] ?? 'Routing / Sort Code' }}</label>
 					<input type="text" name="bank_routing_sort_code" value="{{ $biller['bank_routing_sort_code'] ?? '' }}" class="form-control" />
 					<small class="form-hint">{{ $LANG['bank_routing_sort_code_hint'] ?? 'BSB (AU), ABA (US), Sort Code (UK), Transit (CA) — leave blank if using IBAN' }} &mdash; Token: <code>{biller.bank_routing_sort_code}</code></small>
+				</div>
+				<div class="mb-3">
+					<label class="form-label">{{ $LANG['bank_swift_bic'] ?? 'SWIFT / BIC' }}</label>
+					<input type="text" name="bank_swift_bic" value="{{ $biller['bank_swift_bic'] ?? '' }}" class="form-control" />
+					<small class="form-hint">{{ $LANG['bank_swift_bic_hint'] ?? 'Bank identifier — universal for international transfers' }} &mdash; Token: <code>{biller.bank_swift_bic}</code></small>
 				</div>
 			</div>
 			<div id="bill-edit-custom" class="tab-pane" role="tabpanel">

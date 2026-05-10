@@ -66,6 +66,7 @@ $LANG['backup_done'] = "La còpia de seguretat de la base de dades s'ha desat al
 $LANG['backup_howto'] = "Per fer una còpia de seguretat de la base de dades de Simple Invoices, feu clic a l'enllaç inferior";//1
 $LANG['backup_note_to_file'] = "Això farà una còpia de seguretat de la base de dades a un fitxer al directori database_backups.";//1
 $LANG['backup_your_database'] = "Còpia de seguretat de la base de dades";//1
+$LANG['bank_routing_sort_code'] = "Routing / Sort Code";//0
 $LANG['before_starting'] = "Hi ha un parell de coses a fer abans de poder començar a facturar";//1
 $LANG['biller'] = "Facturador";//1
 $LANG['biller_details'] = "Detalls Facturador";//1

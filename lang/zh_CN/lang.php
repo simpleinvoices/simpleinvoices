@@ -63,6 +63,7 @@ $LANG['backup_done'] = "您的数据已经备份到文件 %s, 你现在可以继
 $LANG['backup_howto'] = "如需备份你的Simple Invoices数据库，请点击下面的链接";//1
 $LANG['backup_note_to_file'] = "这个操作将在database_backups目录中创建一个数据备份文件.";//1
 $LANG['backup_your_database'] = "备份你的数据";//1
+$LANG['bank_routing_sort_code'] = "Routing / Sort Code";//0
 $LANG['before_starting'] = "在你开始使用之前，还有几项工作需要完成";//1
 $LANG['biller'] = "收账人";//1
 $LANG['biller_details'] = "收账人详细资料";//1

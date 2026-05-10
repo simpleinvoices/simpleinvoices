@@ -63,6 +63,7 @@ $LANG['backup_done'] = "La base de datos se ha respaldado en el archivo %s, pued
 $LANG['backup_howto'] = "Para crear un respaldo de tu base de datos \"Factura Simple\"  da click en link de abajo";//1
 $LANG['backup_note_to_file'] = "Esto respaldara tu base de datos a un archivo en el directorio \"Respaldo_Datos\"";//1
 $LANG['backup_your_database'] = "Respaldar tu base de datos";//1
+$LANG['bank_routing_sort_code'] = "Routing / Sort Code";//0
 $LANG['before_starting'] = "Solo hay un par de cosas para hacer antes que puedas crear una factura";//1
 $LANG['biller'] = "Proveedor";//1
 $LANG['biller_details'] = "Detalles de proveedor";//1

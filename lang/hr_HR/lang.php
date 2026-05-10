@@ -63,6 +63,7 @@ $LANG['backup_done'] = "Za vašu bazu podataka napravljena je sigurnosna kopija 
 $LANG['backup_howto'] = "Da bi uradili sigurnosnu kopiju baze podataka kliknite na link ispod";//1
 $LANG['backup_note_to_file'] = "To će pohraniti bazu podataka u datoteku u vašem database_backups direktoriju.";//1
 $LANG['backup_your_database'] = "Backup baze podataka";//1
+$LANG['bank_routing_sort_code'] = "Routing / Sort Code";//0
 $LANG['before_starting'] = "Tu su samo nekoliko stvari koje treba učiniti prije nego što možete početi fakturiranje";//1
 $LANG['biller'] = "Uplatitelj";//1
 $LANG['biller_details'] = "Podaci uplatitelja";//1

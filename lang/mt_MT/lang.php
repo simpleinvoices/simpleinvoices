@@ -66,6 +66,7 @@ $LANG['backup_done'] = "Id-database tiegħek issa ġiet backed-up fil-fajl %s, t
 $LANG['backup_howto'] = "Biex tagħmel backup tad-database ta' Simple Invoices ikklikkja l-link hawn taħt";//1
 $LANG['backup_note_to_file'] = "Dan se jibbackja d-database tiegħek f'fajl fid-direktorja database_backups.";//1
 $LANG['backup_your_database'] = "Ibbackja d-database tiegħek";//1
+$LANG['bank_routing_sort_code'] = "Routing / Sort Code";//0
 $LANG['before_starting'] = "Hemm biss ftit affarijiet x'tagħmel qabel ma tibda tinvoiċja";//1
 $LANG['biller'] = "Bejjiegħ";//1
 $LANG['biller_details'] = "Dettalji tal-Bejjiegħ";//1

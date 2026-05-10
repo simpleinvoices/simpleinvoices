@@ -63,6 +63,7 @@ $LANG['backup_done'] = "Pembuatan cadangan database ke nama file %s telah berhas
 $LANG['backup_howto'] = "Klik link di bawah ini untuk membuat cadangan database Simple Invoices";//1
 $LANG['backup_note_to_file'] = "Proses ini akan membuat cadangan database ke file di dalam folder \"database_backups\"";//1
 $LANG['backup_your_database'] = "Buatlah cadangan database anda";//1
+$LANG['bank_routing_sort_code'] = "Routing / Sort Code";//0
 $LANG['before_starting'] = "Ada beberapa hal yang harus dilakukan sebelum pembuatan nota";//1
 $LANG['biller'] = "Biller";//1
 $LANG['biller_details'] = "Informasi Biller";//1

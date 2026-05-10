@@ -63,6 +63,7 @@ $LANG['backup_done'] = "Cơ sở dữ liệu của bạn đã được sao lưu 
 $LANG['backup_howto'] = "Để sao lưu dừ liệu bạn nhấn vào liên kế dưới đây:";//1
 $LANG['backup_note_to_file'] = "Hành động này sẽ lưu dữ liệu của bạn vào tập tin trong thư mục  database_backups.";//1
 $LANG['backup_your_database'] = "Sao lưu dữ liệu của bạn";//1
+$LANG['bank_routing_sort_code'] = "Routing / Sort Code";//0
 $LANG['before_starting'] = "Đây là 1 trong những bước bạn cần làm trước khi làm hóa đơn";//1
 $LANG['biller'] = "NV Bán Hàng";//1
 $LANG['biller_details'] = "Chi tiết NV Bán Hàng";//1

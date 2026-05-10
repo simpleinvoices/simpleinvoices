@@ -67,6 +67,7 @@ $LANG['backup_done'] = "Varnostna kopija baze je bila shranjena v datoteko %s, n
 $LANG['backup_howto'] = "Za varnostno kopiranje baze Simple Invoices kliknite spodnjo povezavo";//1
 $LANG['backup_note_to_file'] = "To bo shranilo varnostno kopijo baze v datoteko v mapo database_backups.";//1
 $LANG['backup_your_database'] = "Varnostno kopiranje baze";//1
+$LANG['bank_routing_sort_code'] = "Routing / Sort Code";//0
 $LANG['before_starting'] = "Pred začetkom fakturiranja je potrebno narediti še nekaj stvari";//1
 $LANG['biller'] = "Ponudnik";//1
 $LANG['biller_details'] = "Podatki ponudnika";//1

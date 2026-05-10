@@ -66,6 +66,7 @@ $LANG['backup_done'] = "Din databas är nu kopierad till fil %s, du kan nu forts
 $LANG['backup_howto'] = "För att skapa en säkerhetskopia av din Simple Invoices databas, klicka på länken nedan";//1
 $LANG['backup_note_to_file'] = "Detta skapar en säkerhetskopia av din databas till en fil i database_backups katalogen";//1
 $LANG['backup_your_database'] = "Säkerhetskopiera din databas";//1
+$LANG['bank_routing_sort_code'] = "Routing / Sort Code";//0
 $LANG['before_starting'] = "Det finns bara ett fåtal saker att göra innan du kan börja fakturera";//1
 $LANG['biller'] = "Fordringsägare";//1
 $LANG['biller_details'] = "Fordringsägarens Detaljer";//1

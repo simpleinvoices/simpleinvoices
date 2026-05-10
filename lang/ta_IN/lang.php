@@ -66,6 +66,7 @@ $LANG['backup_done'] = "உங்கள் தரவுத்தளம் இப
 $LANG['backup_howto'] = "உங்கள் எளிய பற்றுச்சீட்டுகள் தரவுத்தளத்தின் காப்புப்பிரதி எடுக்க கீழே உள்ள இணைப்பை கிளிக் செய்யவும்";//1
 $LANG['backup_note_to_file'] = "இது உங்கள் தரவுத்தள உங்கள் database_backups கோப்பகத்தில் ஒரு கோப்பிற்கு காப்பு பிரதி எடுக்கும்.";//1
 $LANG['backup_your_database'] = "உங்கள் தரவுத்தள காப்பு";//1
+$LANG['bank_routing_sort_code'] = "Routing / Sort Code";//0
 $LANG['before_starting'] = "நீங்கள் தொடங்கும் முன் ஒரு சில விஷயங்களை செய்ய வேண்டும்";//1
 $LANG['biller'] = "பில்லர்";//1
 $LANG['biller_details'] = "பில்லர் விவரங்கள்";//1

@@ -66,6 +66,7 @@ $LANG['backup_done'] = "Il database è stato salvato nel file %s, adesso puoi co
 $LANG['backup_howto'] = "Per eseguire un backup di Simple Invoices clicca il link sottostante";//1
 $LANG['backup_note_to_file'] = "Questo avvierà il backup del database su un file nella tua cartella database_backups.";//1
 $LANG['backup_your_database'] = "Esegui il backup del database";//1
+$LANG['bank_routing_sort_code'] = "Routing / Sort Code";//0
 $LANG['before_starting'] = "Ci sono alcune formalità da eseguire prima di iniziare a fatturare.";//1
 $LANG['biller'] = "Venditore";//1
 $LANG['biller_details'] = "Dettagli Venditore";//1

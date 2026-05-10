@@ -63,6 +63,7 @@ $LANG['backup_done'] = "Vaša baza je sada rezervno kopirana u datoteku %s, mož
 $LANG['backup_howto'] = "Da biste napravili rezervnu kopiju baze Simple Invoices kliknite na link ispod";//1
 $LANG['backup_note_to_file'] = "Ovo će napraviti rezervnu kopiju vaše baze u datoteku u direktorijumu database_backups.";//1
 $LANG['backup_your_database'] = "Napravite rezervnu kopiju baze";//1
+$LANG['bank_routing_sort_code'] = "Routing / Sort Code";//0
 $LANG['before_starting'] = "Postoji samo nekoliko stvari koje treba uraditi pre nego što počnete sa fakturisanjem";//1
 $LANG['biller'] = "Izdavalac faktura";//1
 $LANG['biller_details'] = "Detalji izdavaoca faktura";//1

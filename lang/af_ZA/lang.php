@@ -63,6 +63,7 @@ $LANG['backup_done'] = "U databasis is nou gerugsteun na die lêer %s, u kan Sim
 $LANG['backup_howto'] = "Om 'n rugsteun van u Simple Invoices databasis te maak, klik op die onderstaande skakel";//1
 $LANG['backup_note_to_file'] = "Dit sal u databasis rugsteun na 'n lêer in u database_backups-gids.";//1
 $LANG['backup_your_database'] = "Rugsteun u databasis";//1
+$LANG['bank_routing_sort_code'] = "Routing / Sort Code";//0
 $LANG['before_starting'] = "Daar is net 'n paar dinge om te doen voordat u kan begin faktureer";//1
 $LANG['biller'] = "Fakturator";//1
 $LANG['biller_details'] = "Fakturator besonderhede";//1
