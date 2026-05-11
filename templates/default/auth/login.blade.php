@@ -46,6 +46,16 @@
 									<label class="form-label">{{ $LANG['password'] ?? '' }}</label>
 									<input name="pass" type="password" class="form-control" title="password" placeholder="{{ $LANG['password'] ?? '' }}" autocomplete="current-password" />
 								</div>
+								<div class="mb-3">
+									<label class="form-label">{{ $LANG['language'] ?? 'Language' }}</label>
+									<select name="ui_language" class="form-select">
+										<option value="">{{ $LANG['ui_language_domain_default'] ?? 'Use system default' }}</option>
+										@php $loginLangDefault = $loginLanguageDefault ?? ''; @endphp
+										@foreach(($languageList ?? []) as $lng)
+										<option value="{{ $lng->shortname }}" @if($loginLangDefault === (string) $lng->shortname) selected @endif>{{ $lng->name }} ({{ $lng->shortname }})</option>
+										@endforeach
+									</select>
+								</div>
 								@if($errorMessage)
 								<div class="alert alert-danger">{{ outhtml($errorMessage ?? '') }}</div>
 								@endif

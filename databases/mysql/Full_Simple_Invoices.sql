@@ -235,26 +235,27 @@ INSERT INTO `si_invoice_type` (`inv_ty_id`, `inv_ty_description`) VALUES
 
 CREATE TABLE IF NOT EXISTS `si_payment_terms` (
   `term_id` int(11) NOT NULL AUTO_INCREMENT,
+  `domain_id` int(11) NOT NULL DEFAULT '1',
   `term_code` varchar(32) NOT NULL,
   `term_label` varchar(120) NOT NULL,
   `calc_kind` varchar(32) NOT NULL,
   `param_int` int(11) DEFAULT NULL,
   `sort_order` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`term_id`),
-  UNIQUE KEY `term_code` (`term_code`)
+  UNIQUE KEY `term_domain_code` (`domain_id`, `term_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT IGNORE INTO `si_payment_terms` (`term_id`, `term_code`, `term_label`, `calc_kind`, `param_int`, `sort_order`) VALUES
- (1, 'NET_7',     'Net 7',                                'NET_DAYS', 7,    10)
-,(2, 'NET_10',    'Net 10',                               'NET_DAYS', 10,   20)
-,(3, 'NET_14',    'Net 14',                               'NET_DAYS', 14,   30)
-,(4, 'NET_30',    'Net 30',                               'NET_DAYS', 30,   40)
-,(5, 'NET_60',    'Net 60',                               'NET_DAYS', 60,   50)
-,(6, 'NET_90',    'Net 90',                               'NET_DAYS', 90,   60)
-,(7, 'EOM',       'End of month (EOM)',                   'EOM',      NULL, 70)
-,(8, 'NET_30_EOM','Net 30 EOM (EOM + 30 days)',           'EOM_PLUS_DAYS', 30, 80)
-,(9, 'EOM_45',    '45 EOM (45 days after month end)',     'EOM_PLUS_DAYS', 45, 90)
-,(10,'MFI_15',    '15 MFI (15th of month following invoice)', 'MFI_DAY', 15, 100);
+INSERT IGNORE INTO `si_payment_terms` (`term_id`, `domain_id`, `term_code`, `term_label`, `calc_kind`, `param_int`, `sort_order`) VALUES
+ (1,  1, 'NET_7',     'Net 7',                                'NET_DAYS', 7,    10)
+,(2,  1, 'NET_10',    'Net 10',                               'NET_DAYS', 10,   20)
+,(3,  1, 'NET_14',    'Net 14',                               'NET_DAYS', 14,   30)
+,(4,  1, 'NET_30',    'Net 30',                               'NET_DAYS', 30,   40)
+,(5,  1, 'NET_60',    'Net 60',                               'NET_DAYS', 60,   50)
+,(6,  1, 'NET_90',    'Net 90',                               'NET_DAYS', 90,   60)
+,(7,  1, 'EOM',       'End of month (EOM)',                   'EOM',      NULL, 70)
+,(8,  1, 'NET_30_EOM','Net 30 EOM (EOM + 30 days)',           'EOM_PLUS_DAYS', 30, 80)
+,(9,  1, 'EOM_45',    '45 EOM (45 days after month end)',     'EOM_PLUS_DAYS', 45, 90)
+,(10, 1, 'MFI_15',    '15 MFI (15th of month following invoice)', 'MFI_DAY', 15, 100);
 
 CREATE TABLE IF NOT EXISTS `si_invoices` (
   `id` int(10) NOT NULL AUTO_INCREMENT,

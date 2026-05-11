@@ -267,6 +267,60 @@ function si_pick_ui_language_from_browser(array $availableCodes, string $fallbac
 	return $codes[0];
 }
 
+/**
+ * Return the locale-appropriate currency info from preset groups.
+ * Maps locale codes (en_GB, de_DE, etc.) to currency presets used by
+ * CurrencySignHelper so the first-run wizard starts with a sensible default.
+ *
+ * @return array{sign: string, code: string, position: string}|null
+ */
+function si_locale_to_currency_info(string $locale): ?array
+{
+	$locale = strtolower(trim($locale));
+
+	// Locale → ISO 4217 currency code mapping
+	$localeCurrencyMap = [
+		'en_us' => 'USD', 'es_mx' => 'MXN',
+		'en_gb' => 'GBP',
+		'de_de' => 'EUR', 'fr_fr' => 'EUR', 'es_es' => 'EUR', 'it_it' => 'EUR',
+		'nl_nl' => 'EUR', 'pt_pt' => 'EUR', 'fi_fi' => 'EUR', 'el_gr' => 'EUR',
+		'sk_sk' => 'EUR', 'sl_si' => 'EUR', 'et_ee' => 'EUR', 'lv_lv' => 'EUR',
+		'mt_mt' => 'EUR', 'hr_hr' => 'EUR', 'ca_es' => 'EUR', 'eu_es' => 'EUR',
+		'gl_es' => 'EUR', 'oc_es' => 'EUR', 'sq_al' => 'EUR',
+		'de_ch' => 'CHF',
+		'pl_pl' => 'PLN', 'cs_cz' => 'CZK', 'hu_hu' => 'HUF', 'ro_ro' => 'RON',
+		'bg_bg' => 'BGN', 'tr_tr' => 'TRY', 'ru_ru' => 'RUB',
+		'sv_se' => 'SEK', 'nb_no' => 'NOK', 'da_dk' => 'DKK',
+		'id_id' => 'IDR', 'vi_vn' => 'VND',
+		'zh_cn' => 'CNY', 'zh_hk' => 'HKD', 'zh_tw' => 'TWD',
+		'ja_jp' => 'JPY', 'ko_kr' => 'KRW',
+		'af_za' => 'ZAR', 'ar_sa' => 'SAR', 'sr_rs' => 'RSD',
+		'ta_in' => 'INR', 'hi_in' => 'INR',
+	];
+
+	$code = $localeCurrencyMap[$locale] ?? null;
+	if ($code !== null) {
+		// CurrencySignHelper may not be loaded yet at language.php include time.
+		// Callers are expected to require/include it before invoking this function.
+		if (class_exists('CurrencySignHelper')) {
+			foreach (CurrencySignHelper::getPresetGroups() as $group) {
+				foreach ($group['presets'] as $p) {
+					if (($p['code'] ?? '') === $code) {
+						return [
+							'sign'     => $p['value'],
+							'code'     => $p['code'],
+							'position' => $p['position']
+								?? CurrencySignHelper::defaultPositionForSign($p['value'], $p['code']),
+						];
+					}
+				}
+			}
+		}
+	}
+
+	return null;
+}
+
 $LANG = getLanguageArray();
 //TODO: if (getenv("HTTP_ACCEPT_LANGUAGE") != available language) AND (config lang != en) ) {
 // then use config lang

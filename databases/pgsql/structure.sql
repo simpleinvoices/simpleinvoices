@@ -175,12 +175,14 @@ CREATE TABLE IF NOT EXISTS si_invoice_type (
 
 CREATE TABLE IF NOT EXISTS si_payment_terms (
   term_id    SERIAL,
-  term_code  VARCHAR(32) NOT NULL UNIQUE,
+  domain_id  INTEGER NOT NULL DEFAULT 1,
+  term_code  VARCHAR(32) NOT NULL,
   term_label VARCHAR(120) NOT NULL,
   calc_kind  VARCHAR(32) NOT NULL,
   param_int  INTEGER DEFAULT NULL,
   sort_order INTEGER NOT NULL DEFAULT 0,
-  PRIMARY KEY (term_id)
+  PRIMARY KEY (term_id),
+  UNIQUE (domain_id, term_code)
 );
 
 CREATE TABLE IF NOT EXISTS si_invoices (

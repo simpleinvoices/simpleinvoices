@@ -192,13 +192,14 @@ CREATE TABLE IF NOT EXISTS `si_invoice_type` (
 
 CREATE TABLE IF NOT EXISTS `si_payment_terms` (
   `term_id` int(11) NOT NULL AUTO_INCREMENT,
+  `domain_id` int(11) NOT NULL DEFAULT '1',
   `term_code` varchar(32) NOT NULL,
   `term_label` varchar(120) NOT NULL,
   `calc_kind` varchar(32) NOT NULL,
   `param_int` int(11) DEFAULT NULL,
   `sort_order` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`term_id`),
-  UNIQUE KEY `term_code` (`term_code`)
+  UNIQUE KEY `term_domain_code` (`domain_id`, `term_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `si_invoices` (

@@ -5,13 +5,25 @@ class siLocal
 	/** Per-request override (e.g. invoice preference locale for PDF/export). */
 	private static ?string $localeOverride = null;
 
+	/** User-level locale from si_user.preferred_language, applied once per request. */
+	private static ?string $userLocale = null;
+
 	/**
 	 * Override Intl formatting locale for the current request (e.g. from invoice preference).
-	 * Pass null to use system default language from si_system_defaults.
+	 * Pass null to fall back to user locale → system default.
 	 */
 	public static function setLocaleOverride(?string $locale): void
 	{
 		self::$localeOverride = ($locale !== null && $locale !== '') ? $locale : null;
+	}
+
+	/**
+	 * Set the logged-in user's locale (from si_user.preferred_language).
+	 * Lower priority than explicit setLocaleOverride() but higher than system default.
+	 */
+	public static function setUserLocale(?string $locale): void
+	{
+		self::$userLocale = ($locale !== null && $locale !== '') ? $locale : null;
 	}
 
 	private static function localeString($locale): string
@@ -21,6 +33,9 @@ class siLocal
 		}
 		if (self::$localeOverride !== null) {
 			return self::$localeOverride;
+		}
+		if (self::$userLocale !== null) {
+			return self::$userLocale;
 		}
 		if (function_exists('getDefaultLanguage')) {
 			$lang = getDefaultLanguage();

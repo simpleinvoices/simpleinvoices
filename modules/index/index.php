@@ -74,6 +74,15 @@ $defaults = getSystemDefaults();
 if (! $has_invoices) {
 	require_once __DIR__ . '/../../include/class/CurrencySignHelper.php';
 	$wizard_default_preference = getDefaultPreference($domain_id) ?: [];
+
+	if ($first_run_wizard && !empty($language)) {
+		$localeCurrency = si_locale_to_currency_info($language);
+		if ($localeCurrency !== null) {
+			$wizard_default_preference['pref_currency_sign'] = $localeCurrency['sign'];
+			$wizard_default_preference['currency_code'] = $localeCurrency['code'];
+		}
+	}
+
 	$wizard_payment_terms_rows = getPaymentTerms() ?: [];
 	$wizard_default_biller = [];
 	if (! empty($defaults['biller'])) {

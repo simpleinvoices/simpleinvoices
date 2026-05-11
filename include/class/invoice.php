@@ -232,7 +232,7 @@ class invoice {
 	$invoice['payment_term_label'] = '';
 	$invoice['payment_term_code'] = '';
 	if (!empty($invoice['payment_term_id']) && function_exists('getPaymentTerm')) {
-		$pt = getPaymentTerm($invoice['payment_term_id']);
+		$pt = getPaymentTerm($invoice['payment_term_id'], $this->domain_id);
 		if ($pt) {
 			$invoice['payment_term_label'] = $pt['term_label'];
 			$invoice['payment_term_code'] = $pt['term_code'] ?? '';

@@ -3192,3 +3192,34 @@ PRIMARY KEY ( `domain_id`, `id` )
             break;
     }
     $patch['377']['date'] = "20260508";
+
+    $patch['378']['name'] = "Add domain_id to si_payment_terms";
+    switch ($db_server) {
+        case 'pgsql':
+            $p378 = '';
+            $p378 .= checkFieldExists(TB_PREFIX . 'payment_terms', 'domain_id')
+                ? '' : "ALTER TABLE " . TB_PREFIX . "payment_terms ADD COLUMN domain_id INTEGER NOT NULL DEFAULT 1; "
+                    . "ALTER TABLE " . TB_PREFIX . "payment_terms DROP CONSTRAINT IF EXISTS si_payment_terms_term_code_key; " 
+                    . "ALTER TABLE " . TB_PREFIX . "payment_terms ADD UNIQUE (domain_id, term_code); ";
+            $patch['378']['patch'] = $p378;
+            break;
+        case 'sqlite':
+            $p378 = '';
+            $p378 .= checkFieldExists(TB_PREFIX . 'payment_terms', 'domain_id')
+                ? '' : "ALTER TABLE " . TB_PREFIX . "payment_terms ADD COLUMN domain_id INTEGER NOT NULL DEFAULT 1; ";
+            $patch['378']['patch'] = $p378;
+            break;
+        default:
+            $p378 = '';
+            $p378 .= checkFieldExists(TB_PREFIX . 'payment_terms', 'domain_id')
+                ? '' : "ALTER TABLE `" . TB_PREFIX . "payment_terms` ADD COLUMN `domain_id` INT(11) NOT NULL DEFAULT '1' AFTER `term_id`; "
+                    . "ALTER TABLE `" . TB_PREFIX . "payment_terms` DROP INDEX `term_code`; "
+                    . "ALTER TABLE `" . TB_PREFIX . "payment_terms` ADD UNIQUE INDEX `term_domain_code` (`domain_id`, `term_code`); ";
+            $patch['378']['patch'] = $p378;
+            break;
+    }
+    $patch['378']['date'] = "20260511";
+
+    $patch['379']['name'] = "si_preferences: backfill currency_id from pref_currency_sign via si_currency";
+    $patch['379']['patch'] = "SELECT 'Backfill preferences.currency_id from pref_currency_sign via si_currency (PHP handler)'";
+    $patch['379']['date'] = "20260511";

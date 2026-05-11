@@ -20,11 +20,11 @@ if (!preg_match('/^(asc|desc)$/iD', $dir)) {
 }
 
 $valid_search_fields = ['term_id', 'term_code', 'term_label'];
-$where = '';
+$where = ' AND domain_id = :domain_id ';
 $query = $_REQUEST['query'] ?? null;
 $qtype = $_REQUEST['qtype'] ?? null;
 if (!empty($qtype) && !empty($query) && in_array($qtype, $valid_search_fields, true)) {
-	$where = " AND $qtype LIKE :query ";
+	$where .= " AND $qtype LIKE :query ";
 } else {
 	$qtype = null;
 	$query = null;
@@ -45,12 +45,14 @@ $sqlList = 'SELECT term_id, term_code, term_label, calc_kind, param_int, sort_or
 
 $sqlCount = 'SELECT COUNT(*) FROM '.TB_PREFIX.'payment_terms WHERE 1=1 '.$where;
 
+$domain_id = domain_id::get();
+
 if (empty($query)) {
-	$sth = dbQuery($sqlList);
-	$sthCount = dbQuery($sqlCount);
+	$sth = dbQuery($sqlList, ':domain_id', $domain_id);
+	$sthCount = dbQuery($sqlCount, ':domain_id', $domain_id);
 } else {
-	$sth = dbQuery($sqlList, ':query', '%'.$query.'%');
-	$sthCount = dbQuery($sqlCount, ':query', '%'.$query.'%');
+	$sth = dbQuery($sqlList, ':domain_id', $domain_id, ':query', '%'.$query.'%');
+	$sthCount = dbQuery($sqlCount, ':domain_id', $domain_id, ':query', '%'.$query.'%');
 }
 
 $rows = $sth->fetchAll(PDO::FETCH_ASSOC);

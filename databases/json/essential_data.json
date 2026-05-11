@@ -143,6 +143,7 @@
     "si_payment_terms": [
         {
             "term_id": "1",
+            "domain_id": "DOMAIN-ID",
             "term_code": "NET_7",
             "term_label": "Net 7",
             "calc_kind": "NET_DAYS",
@@ -151,6 +152,7 @@
         },
         {
             "term_id": "2",
+            "domain_id": "DOMAIN-ID",
             "term_code": "NET_10",
             "term_label": "Net 10",
             "calc_kind": "NET_DAYS",
@@ -159,6 +161,7 @@
         },
         {
             "term_id": "3",
+            "domain_id": "DOMAIN-ID",
             "term_code": "NET_14",
             "term_label": "Net 14",
             "calc_kind": "NET_DAYS",
@@ -167,6 +170,7 @@
         },
         {
             "term_id": "4",
+            "domain_id": "DOMAIN-ID",
             "term_code": "NET_30",
             "term_label": "Net 30",
             "calc_kind": "NET_DAYS",
@@ -175,6 +179,7 @@
         },
         {
             "term_id": "5",
+            "domain_id": "DOMAIN-ID",
             "term_code": "NET_60",
             "term_label": "Net 60",
             "calc_kind": "NET_DAYS",
@@ -183,6 +188,7 @@
         },
         {
             "term_id": "6",
+            "domain_id": "DOMAIN-ID",
             "term_code": "NET_90",
             "term_label": "Net 90",
             "calc_kind": "NET_DAYS",
@@ -191,6 +197,7 @@
         },
         {
             "term_id": "7",
+            "domain_id": "DOMAIN-ID",
             "term_code": "EOM",
             "term_label": "End of month (EOM)",
             "calc_kind": "EOM",
@@ -199,6 +206,7 @@
         },
         {
             "term_id": "8",
+            "domain_id": "DOMAIN-ID",
             "term_code": "NET_30_EOM",
             "term_label": "Net 30 EOM (EOM + 30 days)",
             "calc_kind": "EOM_PLUS_DAYS",
@@ -207,6 +215,7 @@
         },
         {
             "term_id": "9",
+            "domain_id": "DOMAIN-ID",
             "term_code": "EOM_45",
             "term_label": "45 EOM (45 days after month end)",
             "calc_kind": "EOM_PLUS_DAYS",
@@ -215,6 +224,7 @@
         },
         {
             "term_id": "10",
+            "domain_id": "DOMAIN-ID",
             "term_code": "MFI_15",
             "term_label": "15 MFI (15th of month following invoice)",
             "calc_kind": "MFI_DAY",

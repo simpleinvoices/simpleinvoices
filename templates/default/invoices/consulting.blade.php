@@ -89,6 +89,7 @@
 	'selectedPrefId' => $defaults['preference'] ?? '',
 	'selectedTermId' => '',
 	'calcDueDate'    => '',
+	'isNewInvoice'   => true,
 ])
 </td>
 </tr>	

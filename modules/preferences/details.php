@@ -17,7 +17,7 @@ $index_group = getPreference($preference['index_group']);
 $paymentTerms = getPaymentTerms();
 $prefPaymentTermLabel = '';
 if (!empty($preference['payment_term_id'])) {
-	$pt = getPaymentTerm($preference['payment_term_id']);
+	$pt = getPaymentTerm($preference['payment_term_id'], domain_id::get());
 	if ($pt) {
 		$prefPaymentTermLabel = $pt['term_label'];
 	}

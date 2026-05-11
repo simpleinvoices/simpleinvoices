@@ -45,8 +45,11 @@ class index
 
         $index = $sth->fetch();
 
-        if($index['id'] == "") $id = 1;
-        else $id = $index['id'] + 1;
+        if (!$index || $index['id'] === null || $index['id'] === '') {
+            $id = 1;
+        } else {
+            $id = (int)$index['id'] + 1;
+        }
         
         return $id;
 
@@ -59,18 +62,12 @@ class index
         $next = index::next($node, $sub_node, $domain_id, $sub_node_2);
 
         if ($sub_node_2 != 0) {
-            if ($next == 1)
-            {
-                $sql = "INSERT INTO ".TB_PREFIX."index (id, node, sub_node, sub_node_2, domain_id) 
-                        VALUES (:id, :node, :sub_node, :sub_node_2, :domain_id)";
-            } else {
-                $sql ="UPDATE ".TB_PREFIX."index 
-                        SET   id = :id 
-                        WHERE node = :node
-                        AND   sub_node = :sub_node
-                        AND   sub_node_2 = :sub_node_2
-                        AND   domain_id = :domain_id";
-            }
+            $sql = "UPDATE ".TB_PREFIX."index 
+                    SET   id = :id 
+                    WHERE node = :node
+                    AND   sub_node = :sub_node
+                    AND   sub_node_2 = :sub_node_2
+                    AND   domain_id = :domain_id";
 
             $sth = dbQuery($sql,
                         ':id',$next,
@@ -78,24 +75,39 @@ class index
                  ':sub_node', $sub_node,
                ':sub_node_2', $sub_node_2,
                  ':domain_id',$domain_id);
-        } else {
-            if ($next == 1)
-            {
+
+            if ($sth && $sth->rowCount() == 0) {
                 $sql = "INSERT INTO ".TB_PREFIX."index (id, node, sub_node, sub_node_2, domain_id) 
-                        VALUES (:id, :node, :sub_node, '0', :domain_id)";
-            } else {
-                $sql ="UPDATE ".TB_PREFIX."index 
-                        SET   id = :id 
-                        WHERE node = :node
-                        AND   sub_node = :sub_node
-                        AND   domain_id = :domain_id";
+                        VALUES (:id, :node, :sub_node, :sub_node_2, :domain_id)";
+                dbQuery($sql,
+                            ':id',$next,
+                          ':node',$node,
+                     ':sub_node', $sub_node,
+                   ':sub_node_2', $sub_node_2,
+                     ':domain_id',$domain_id);
             }
+        } else {
+            $sql = "UPDATE ".TB_PREFIX."index 
+                    SET   id = :id 
+                    WHERE node = :node
+                    AND   sub_node = :sub_node
+                    AND   domain_id = :domain_id";
 
             $sth = dbQuery($sql,
                         ':id',$next,
                       ':node',$node,
                  ':sub_node', $sub_node,
                  ':domain_id',$domain_id);
+
+            if ($sth && $sth->rowCount() == 0) {
+                $sql = "INSERT INTO ".TB_PREFIX."index (id, node, sub_node, sub_node_2, domain_id) 
+                        VALUES (:id, :node, :sub_node, '0', :domain_id)";
+                dbQuery($sql,
+                            ':id',$next,
+                          ':node',$node,
+                     ':sub_node', $sub_node,
+                     ':domain_id',$domain_id);
+            }
         }
 
         return $next;

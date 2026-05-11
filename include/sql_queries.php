@@ -324,18 +324,20 @@ function getPreference($id, $domain_id='') {
 	return $record;
 }
 
-function getPaymentTerms() {
-	$sql = "SELECT * FROM ".TB_PREFIX."payment_terms ORDER BY sort_order ASC, term_id ASC";
-	$sth = dbQuery($sql);
+function getPaymentTerms($domain_id='') {
+	$domain_id = domain_id::get($domain_id);
+	$sql = "SELECT * FROM ".TB_PREFIX."payment_terms WHERE domain_id = :domain_id ORDER BY sort_order ASC, term_id ASC";
+	$sth = dbQuery($sql, ':domain_id', $domain_id);
 	return $sth->fetchAll();
 }
 
-function getPaymentTerm($id) {
+function getPaymentTerm($id, $domain_id='') {
 	if ($id === null || $id === '' || (int)$id <= 0) {
 		return false;
 	}
-	$sql = "SELECT * FROM ".TB_PREFIX."payment_terms WHERE term_id = :id";
-	$sth = dbQuery($sql, ':id', (int)$id);
+	$domain_id = domain_id::get($domain_id);
+	$sql = "SELECT * FROM ".TB_PREFIX."payment_terms WHERE term_id = :id AND domain_id = :domain_id";
+	$sth = dbQuery($sql, ':id', (int)$id, ':domain_id', $domain_id);
 	$row = $sth->fetch();
 	return $row ?: false;
 }
@@ -347,19 +349,20 @@ function getPaymentTermCalcKindCodes(): array {
 	return ['NET_DAYS', 'EOM', 'EOM_PLUS_DAYS', 'MFI_DAY'];
 }
 
-function paymentTermCodeExists(string $code, ?int $excludeTermId = null): bool {
-	$sql = "SELECT 1 FROM ".TB_PREFIX."payment_terms WHERE term_code = :code";
+function paymentTermCodeExists(string $code, ?int $excludeTermId = null, $domain_id=''): bool {
+	$domain_id = domain_id::get($domain_id);
+	$sql = "SELECT 1 FROM ".TB_PREFIX."payment_terms WHERE term_code = :code AND domain_id = :domain_id";
 	if ($excludeTermId !== null && $excludeTermId > 0) {
 		$sql .= " AND term_id <> :tid";
-		$sth = dbQuery($sql, ':code', $code, ':tid', $excludeTermId);
+		$sth = dbQuery($sql, ':code', $code, ':domain_id', $domain_id, ':tid', $excludeTermId);
 	} else {
-		$sth = dbQuery($sql, ':code', $code);
+		$sth = dbQuery($sql, ':code', $code, ':domain_id', $domain_id);
 	}
 	return (bool) $sth->fetch();
 }
 
 /**
- * @param array{term_code:string,term_label:string,calc_kind:string,param_int:int|null,sort_order:int} $row
+ * @param array{domain_id:int,term_code:string,term_label:string,calc_kind:string,param_int:int|null,sort_order:int} $row
  */
 function insertPaymentTerm(array $row): bool {
 	$code = $row['term_code'];
@@ -367,10 +370,12 @@ function insertPaymentTerm(array $row): bool {
 	$kind = $row['calc_kind'];
 	$param = $row['param_int'];
 	$sort = (int) $row['sort_order'];
+	$domain_id = domain_id::get($row['domain_id'] ?? '');
 
-	$sql = "INSERT INTO ".TB_PREFIX."payment_terms (term_code, term_label, calc_kind, param_int, sort_order)"
-		." VALUES (:code, :label, :kind, :param, :sort)";
+	$sql = "INSERT INTO ".TB_PREFIX."payment_terms (domain_id, term_code, term_label, calc_kind, param_int, sort_order)"
+		." VALUES (:domain_id, :code, :label, :kind, :param, :sort)";
 	return (bool) dbQuery($sql,
+		':domain_id', $domain_id,
 		':code', $code,
 		':label', $label,
 		':kind', $kind,
@@ -382,40 +387,43 @@ function insertPaymentTerm(array $row): bool {
 /**
  * @param array{term_code:string,term_label:string,calc_kind:string,param_int:int|null,sort_order:int} $row
  */
-function updatePaymentTerm(int $termId, array $row): bool {
+function updatePaymentTerm(int $termId, array $row, $domain_id=''): bool {
+	$domain_id = domain_id::get($domain_id);
 	$sql = "UPDATE ".TB_PREFIX."payment_terms SET"
 		." term_code = :code,"
 		." term_label = :label,"
 		." calc_kind = :kind,"
 		." param_int = :param,"
 		." sort_order = :sort"
-		." WHERE term_id = :id";
+		." WHERE term_id = :id AND domain_id = :domain_id";
 	return (bool) dbQuery($sql,
 		':code', $row['term_code'],
 		':label', $row['term_label'],
 		':kind', $row['calc_kind'],
 		':param', $row['param_int'],
 		':sort', (int) $row['sort_order'],
-		':id', $termId
+		':id', $termId,
+		':domain_id', $domain_id
 	);
 }
 
-function deletePaymentTerm(int $termId): bool {
+function deletePaymentTerm(int $termId, $domain_id=''): bool {
 	if ($termId <= 0) {
 		return false;
 	}
+	$domain_id = domain_id::get($domain_id);
 	dbQuery(
-		"UPDATE ".TB_PREFIX."preferences SET payment_term_id = NULL WHERE payment_term_id = :id",
-		':id',
-		$termId
+		"UPDATE ".TB_PREFIX."preferences SET payment_term_id = NULL WHERE payment_term_id = :id AND domain_id = :domain_id",
+		':id', $termId,
+		':domain_id', $domain_id
 	);
 	dbQuery(
-		"UPDATE ".TB_PREFIX."invoices SET payment_term_id = NULL WHERE payment_term_id = :id",
-		':id',
-		$termId
+		"UPDATE ".TB_PREFIX."invoices SET payment_term_id = NULL WHERE payment_term_id = :id AND domain_id = :domain_id",
+		':id', $termId,
+		':domain_id', $domain_id
 	);
-	$sql = "DELETE FROM ".TB_PREFIX."payment_terms WHERE term_id = :id";
-	return (bool) dbQuery($sql, ':id', $termId);
+	$sql = "DELETE FROM ".TB_PREFIX."payment_terms WHERE term_id = :id AND domain_id = :domain_id";
+	return (bool) dbQuery($sql, ':id', $termId, ':domain_id', $domain_id);
 }
 
 function getTaxRate($id, $domain_id='') {
@@ -1172,7 +1180,7 @@ function getInvoice($id, $domain_id='') {
 	$invoice['payment_term_label'] = '';
 	$invoice['payment_term_code'] = '';
 	if (!empty($invoice['payment_term_id'])) {
-		$pt = getPaymentTerm($invoice['payment_term_id']);
+		$pt = getPaymentTerm($invoice['payment_term_id'], $domain_id);
 		if ($pt) {
 			$invoice['payment_term_label'] = $pt['term_label'];
 			$invoice['payment_term_code'] = $pt['term_code'] ?? '';
@@ -2235,11 +2243,8 @@ function insertInvoice($type, $domain_id='') {
 	}
 	$currency_locale = trim($pref_group['locale'] ?? '');
 
-	//also set the current time (if null or =00:00:00)
-	$clean_date=SqlDateWithTime($_POST['date']);
-
 	$ptId = isset($_POST['payment_term_id']) ? (int)$_POST['payment_term_id'] : 0;
-	$termRow = ($ptId > 0) ? getPaymentTerm($ptId) : false;
+	$termRow = ($ptId > 0) ? getPaymentTerm($ptId, $domain_id) : false;
 	$paymentTermId = null;
 	$dueDateSql = null;
 	if ($termRow) {
@@ -2405,7 +2410,7 @@ function updateInvoice($invoice_id, $domain_id='') {
 
 	$clean_date = SqlDateWithTime($_POST['date']);
 	$ptId = isset($_POST['payment_term_id']) ? (int)$_POST['payment_term_id'] : 0;
-	$termRow = ($ptId > 0) ? getPaymentTerm($ptId) : false;
+	$termRow = ($ptId > 0) ? getPaymentTerm($ptId, $domain_id) : false;
 	$paymentTermId = null;
 	$dueDateSql = null;
 	if ($termRow) {
@@ -3069,9 +3074,14 @@ function mysqlPatchAlterInnoDbWithKeyIfMissing($tableSuffix, $indexName, $column
 /**
  * Locale / language tokens substituted into essential_data.json (LOCALE, LANGUAGE).
  */
-function install_essential_data_locale_tokens(): array {
+function install_essential_data_locale_tokens(?string $installLanguage = null): array {
 	$loc = 'en_GB';
-	if (function_exists('getSystemDefaults') && function_exists('checkTableExists')
+	if ($installLanguage !== null && trim($installLanguage) !== '') {
+		$candidate = si_normalize_registration_language($installLanguage);
+		if ($candidate !== '') {
+			$loc = $candidate;
+		}
+	} elseif (function_exists('getSystemDefaults') && function_exists('checkTableExists')
 		&& checkTableExists(TB_PREFIX . 'system_defaults')) {
 		$defaults = getSystemDefaults();
 		if (is_array($defaults) && !empty($defaults['language'])) {
@@ -3798,6 +3808,43 @@ function si_patch340_backfill_invoice_denorm(): void {
 	}
 }
 
+function si_patch379_backfill_preference_currency_id(): void {
+	require_once __DIR__ . '/class/siCurrencies.php';
+	require_once __DIR__ . '/class/CurrencySignHelper.php';
+
+	$rows = dbQuery('SELECT pref_id, domain_id, pref_currency_sign FROM ' . TB_PREFIX . 'preferences
+		WHERE currency_id IS NULL AND pref_currency_sign IS NOT NULL AND pref_currency_sign != \'\'')
+		->fetchAll(PDO::FETCH_ASSOC);
+
+	if (empty($rows)) {
+		return;
+	}
+
+	$domainIds = array_unique(array_map('intval', array_column($rows, 'domain_id')));
+	foreach ($domainIds as $did) {
+		siCurrencies::seedDefaults($did);
+	}
+
+	foreach ($rows as $row) {
+		$domainId = (int) $row['domain_id'];
+		$sign     = CurrencySignHelper::forDisplay($row['pref_currency_sign']);
+		if ($sign === '') {
+			continue;
+		}
+
+		$currRow = siCurrencies::findBySign($domainId, $sign)
+			?: siCurrencies::findOrCreate($domainId, $sign);
+
+		if ($currRow && !empty($currRow['id'])) {
+			dbQuery('UPDATE ' . TB_PREFIX . 'preferences SET currency_id = :cid
+				WHERE pref_id = :pid AND domain_id = :did',
+				':cid', (int) $currRow['id'],
+				':pid', (int) $row['pref_id'],
+				':did', $domainId);
+		}
+	}
+}
+
 /**
  * SQL patch 341: secondary indexes on si_invoices for domain-scoped lists, charts,
  * and filters that use denorm_* (manage grid sort, customer/biller scoping, owing buckets).
@@ -3918,6 +3965,8 @@ function run_sql_patch($id, $patch) {
 			si_patch341_invoice_denorm_indexes();
 		} elseif ((int) $id === 366) {
 			si_patch379_payment_currency_denorm_columns();
+		} elseif ((int) $id === 379) {
+			si_patch379_backfill_preference_currency_id();
 		} elseif ((int) $id === 360) {
 			require_once __DIR__ . '/global_app_settings.php';
 			si_patch342_global_config();

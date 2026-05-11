@@ -7,6 +7,7 @@
     $calcDueDate           = $calcDueDate ?? '';
     $nextInvoiceId         = $nextInvoiceId ?? '';
     $showInvoiceIdPreview  = $showInvoiceIdPreview ?? false;
+    $isNewInvoice          = $isNewInvoice ?? false;
 
     $currencyMatched = CurrencySignHelper::findPresetForStored($currentCurrencySign, $currentCurrencyCode);
 
@@ -108,9 +109,10 @@
 	var curSel     = document.getElementById('si_invoice_currency_select');
 	var signH      = document.getElementById('si_invoice_currency_sign');
 	var codeH      = document.getElementById('si_invoice_currency_code');
-	var idH        = document.getElementById('si_invoice_currency_id');
-	var termSel    = document.getElementById('si_invoice_payment_term_id');
-	var dateEl     = document.getElementById('date1');
+		var idH        = document.getElementById('si_invoice_currency_id');
+		var termSel    = document.getElementById('si_invoice_payment_term_id');
+		var dateEl     = document.getElementById('date1');
+		var isNewInvoice = {{ $isNewInvoice ? 'true' : 'false' }};
 
 	if (!curSel || !signH || !codeH) { return; }
 
@@ -185,24 +187,20 @@
 	}
 	function siUpdateDueDatePreview() {
 		var out = document.getElementById('si_invoice_due_date_preview');
-		var container = document.getElementById('si_invoice_due_date_container');
 		if (!out) return;
 		if (!dateEl || !termSel) {
 			out.value = '-';
-			if (container) container.style.display = 'none';
 			return;
 		}
 		var opt = termSel.options[termSel.selectedIndex];
 		if (!opt || !opt.value) {
 			out.value = '-';
-			if (container) container.style.display = 'none';
 			return;
 		}
 		var kind = opt.getAttribute('data-calc-kind') || '';
 		var param = opt.getAttribute('data-param') || '';
 		var ymd = siDueDateFromTerm(dateEl.value, kind, param);
 		out.value = ymd || '-';
-		if (container) container.style.display = '';
 	}
 	function siUpdateInvoiceIdPreview() {
 		var out = document.getElementById('si_invoice_id_preview');
@@ -272,7 +270,7 @@
 	if (out0 && out0.getAttribute('data-initial')) {
 		out0.value = out0.getAttribute('data-initial');
 	} else {
-		if (termSel && (!termSel.value || termSel.value === '') && prefSel) {
+		if (termSel && (!termSel.value || termSel.value === '') && prefSel && isNewInvoice) {
 			syncPaymentTermFromPreference();
 		}
 		siUpdateDueDatePreview();

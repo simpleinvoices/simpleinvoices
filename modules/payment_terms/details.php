@@ -10,7 +10,8 @@ jsFormValidationEnd();
 jsEnd();
 
 $termId = (int) ($_GET['id'] ?? 0);
-$term = getPaymentTerm($termId);
+$domain_id = domain_id::get();
+$term = getPaymentTerm($termId, $domain_id);
 si_check_record_access($term);
 
 $action = $_GET['action'] ?? 'view';

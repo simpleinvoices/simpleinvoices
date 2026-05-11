@@ -40,6 +40,19 @@
 			@endif
 			<form method="post" action="./index.php?module=install&amp;view=index&amp;step=setup">
 				<input type="hidden" name="op" value="install_database" />
+				@if(!empty($installLanguageList))
+				<div class="mb-4 text-center">
+					<label class="form-label fw-semibold">{{ $LANG['language'] ?? 'Language' }}</label>
+					<select name="install_language" class="form-select mx-auto" style="max-width: 20rem;">
+						@php
+							$instLangDefault = (isset($_POST['install_language']) ? trim((string) $_POST['install_language']) : '') ?: ($installLanguageDefault ?? 'en_US');
+						@endphp
+						@foreach($installLanguageList as $lng)
+						<option value="{{ $lng->shortname }}" @if($instLangDefault === (string) $lng->shortname) selected @endif>{{ $lng->name }} ({{ $lng->shortname }})</option>
+						@endforeach
+					</select>
+				</div>
+				@endif
 				<div class="d-grid gap-2 col-md-8 col-lg-6 mx-auto">
 					<button type="submit" class="btn btn-primary btn-lg" autofocus>
 						<i class="ti ti-check me-1"></i>{{ $LANG['install_new_domain_complete_setup'] ?? '' }}
@@ -164,6 +177,20 @@
 
 			<form method="post" action="./index.php?module=install&amp;view=index">
 				<input type="hidden" name="op" value="install_database" />
+				@if(!empty($installLanguageList))
+				<div class="mb-4">
+					<label class="form-label fw-semibold">{{ $LANG['language'] ?? 'Language' }}</label>
+					<select name="install_language" class="form-select" style="max-width: 20rem;">
+						@php
+							$instLangDefault = (isset($_POST['install_language']) ? trim((string) $_POST['install_language']) : '') ?: ($installLanguageDefault ?? 'en_US');
+						@endphp
+						@foreach($installLanguageList as $lng)
+						<option value="{{ $lng->shortname }}" @if($instLangDefault === (string) $lng->shortname) selected @endif>{{ $lng->name }} ({{ $lng->shortname }})</option>
+						@endforeach
+					</select>
+					<p class="text-secondary small mt-1 mb-0">The currency and locale defaults on your new installation will match this choice.</p>
+				</div>
+				@endif
 				<h2 class="h4 mb-2"><i class="ti ti-user-shield me-1 text-secondary"></i>{{ $LANG['install_section_admin'] ?? 'First administrator' }}</h2>
 				<p class="text-secondary small mb-3">{{ $LANG['install_default_admin_blurb'] ?? '' }}</p>
 				<div class="row g-3 mb-4">

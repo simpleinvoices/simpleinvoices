@@ -34,12 +34,13 @@ if ($op === 'insert_payment_term') {
 	}
 } elseif ($op === 'delete_payment_term') {
 	$id = (int) ($_POST['term_id'] ?? 0);
-	$term = getPaymentTerm($id);
+	$domain_id = domain_id::get();
+	$term = getPaymentTerm($id, $domain_id);
 	if (empty($term)) {
 		$saved = false;
 		$display_block = $LANG['save_payment_term_failure'] ?? 'Could not save.';
 	} else {
-		if (deletePaymentTerm($id)) {
+		if (deletePaymentTerm($id, $domain_id)) {
 			$saved = true;
 			$display_block = $LANG['delete_payment_term_success'] ?? 'Deleted.';
 			$refresh_total = "<meta http-equiv='refresh' content='1;url=index.php?module=payment_terms&amp;view=manage' />";
@@ -61,6 +62,8 @@ $bladeView->assign('active_tab', '#setting');
  */
 function si_payment_term_validate_and_save_row(?int $termId): array {
 	global $LANG;
+
+	$domain_id = domain_id::get();
 
 	$codeRaw = trim((string) ($_POST['term_code'] ?? ''));
 	$code = strtoupper(preg_replace('/[^A-Za-z0-9_]/', '_', $codeRaw));
@@ -103,11 +106,12 @@ function si_payment_term_validate_and_save_row(?int $termId): array {
 		}
 	}
 
-	if (paymentTermCodeExists($code, $termId)) {
+	if (paymentTermCodeExists($code, $termId, $domain_id)) {
 		return ['ok' => false, 'message' => $LANG['payment_term_error_code_unique'] ?? 'That code is already in use.'];
 	}
 
 	$row = [
+		'domain_id' => $domain_id,
 		'term_code' => $code,
 		'term_label' => $label,
 		'calc_kind' => $kind,
@@ -118,7 +122,7 @@ function si_payment_term_validate_and_save_row(?int $termId): array {
 	if ($termId === null || $termId <= 0) {
 		$ok = insertPaymentTerm($row);
 	} else {
-		$ok = updatePaymentTerm($termId, $row);
+		$ok = updatePaymentTerm($termId, $row, $domain_id);
 	}
 
 	if ($ok) {

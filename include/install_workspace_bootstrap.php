@@ -31,6 +31,19 @@ function install_execute_sql_file($sql_content)
         'strlen'
     );
 
+    global $db_server;
+    if ($db_server === 'sqlite') {
+        $statements = array_map(
+            function ($stmt) {
+                if (stripos($stmt, 'INSERT into') === 0) {
+                    return 'INSERT OR IGNORE into' . substr($stmt, strlen('INSERT into'));
+                }
+                return $stmt;
+            },
+            $statements
+        );
+    }
+
     foreach ($statements as $stmt) {
         dbQuery($stmt);
     }

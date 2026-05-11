@@ -56,11 +56,16 @@ function si_apply_user_ui_language(): void
 	}
 
 	if ($pref === '') {
+		siLocal::setUserLocale(null);
 		return;
 	}
 	if (!si_lang_folder_exists($pref)) {
+		siLocal::setUserLocale(null);
 		return;
 	}
+
+	siLocal::setUserLocale($pref);
+
 	if ($pref === $language) {
 		return;
 	}

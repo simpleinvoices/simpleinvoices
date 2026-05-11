@@ -98,13 +98,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'login
         if ($user) {
             session_regenerate_id(true);
 
+            if (isset($_POST['ui_language'])) {
+                $selectedLang = trim((string) $_POST['ui_language']);
+                if ($selectedLang !== '' && si_lang_folder_exists($selectedLang)) {
+                    dbQuery(
+                        'UPDATE ' . TB_PREFIX . 'user SET preferred_language = :pl WHERE id = :id AND domain_id = :d',
+                        ':pl', $selectedLang,
+                        ':id', (int) $user['id'],
+                        ':d', (int) ($user['domain_id'] ?? 1)
+                    );
+                    $auth_session->ui_language = $selectedLang;
+                } else {
+                    dbQuery(
+                        'UPDATE ' . TB_PREFIX . 'user SET preferred_language = NULL WHERE id = :id AND domain_id = :d',
+                        ':id', (int) $user['id'],
+                        ':d', (int) ($user['domain_id'] ?? 1)
+                    );
+                    $auth_session->ui_language = '';
+                }
+            } else {
+                $auth_session->ui_language = trim((string) ($user['preferred_language'] ?? ''));
+            }
+
             $auth_session->id        = (string) $user['id'];
             $auth_session->email     = (string) $user['email'];
             $auth_session->name      = (string) ($user['name'] ?? '');
             $auth_session->role_name = (string) ($user['role_name'] ?? '');
             $auth_session->domain_id = (string) ($user['domain_id'] ?? '1');
             $auth_session->user_id   = (string) ($user['user_id'] ?? '0');
-            $auth_session->ui_language = trim((string) ($user['preferred_language'] ?? ''));
 
             $loginDomainId = (int) ($user['domain_id'] ?? 0);
             if ($loginDomainId > 1 && !domainHasEssentialBootstrapData($loginDomainId)) {
@@ -154,6 +175,12 @@ foreach ($registrationLangList ?? [] as $entry) {
 $bladeView->assign(
 	'registrationLanguageDefault',
 	si_pick_ui_language_from_browser($registrationAvailableCodes, 'en_US')
+);
+
+$bladeView->assign('languageList', $registrationLangList ?? []);
+$bladeView->assign(
+	'loginLanguageDefault',
+	si_pick_ui_language_from_browser($registrationAvailableCodes, 'en_GB')
 );
 
 $bladeView->assign('loginCsrfToken', $loginCsrfToken);

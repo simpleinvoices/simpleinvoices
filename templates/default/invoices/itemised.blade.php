@@ -252,6 +252,7 @@
 					'selectedPrefId' => $defaults['preference'] ?? '',
 					'selectedTermId' => '',
 					'calcDueDate'    => '',
+					'isNewInvoice'   => true,
 				])
 				<a class="cluetip text-secondary small mt-1 d-inline-block" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_invoice_custom_fields" title="{{ $LANG['want_more_fields'] ?? '' }}"><i class="ti ti-help"></i></a>
 			</div>

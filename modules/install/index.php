@@ -14,12 +14,41 @@ $install_new_domain_bootstrap = ($install_tables_exists === true)
 	&& ($install_data_exists === false)
 	&& ($domainIdForInstall > 1);
 
+// ── Language selector for the installer ──────────────────────────────────
+$installLangList = getLanguageList();
+if (is_array($installLangList)) {
+	usort(
+		$installLangList,
+		static function ($a, $b) {
+			return strcasecmp((string) ($a->name ?? ''), (string) ($b->name ?? ''));
+		}
+	);
+}
+$installAvailableCodes = [];
+foreach ($installLangList ?? [] as $entry) {
+	if (isset($entry->shortname) && (string) $entry->shortname !== '') {
+		$installAvailableCodes[] = (string) $entry->shortname;
+	}
+}
+$installLangDefault = si_pick_ui_language_from_browser($installAvailableCodes, 'en_US');
+$bladeView->assign('installLanguageList', $installLangList ?? []);
+$bladeView->assign('installLanguageDefault', $installLangDefault);
+
 if (isset($_POST['op']) && $_POST['op'] === 'install_database') {
     global $auth_session;
 
     $install_successful = true;
     $targetDomainId = isset($auth_session->domain_id) ? (int) $auth_session->domain_id : 1;
-    $locTokens = install_essential_data_locale_tokens();
+
+    $installLanguage = isset($_POST['install_language'])
+        ? trim((string) $_POST['install_language'])
+        : '';
+    if ($installLanguage === '' && $install_new_domain_bootstrap) {
+        $installLanguage = trim((string) ($auth_session->ui_language ?? ''));
+    }
+    $locTokens = install_essential_data_locale_tokens(
+        $installLanguage !== '' ? $installLanguage : null
+    );
     // Full essential bundle (incl. sql_patchmanager, roles, demo user) only when the DB has never recorded a patch.
     // Before structure.sql runs, si_sql_patchmanager does not exist yet — do not query it.
     $includeGlobalEssential = !checkTableExists(TB_PREFIX . 'sql_patchmanager')
@@ -51,7 +80,7 @@ if (isset($_POST['op']) && $_POST['op'] === 'install_database') {
         $need_essential = !isset($install_data_exists) || $install_data_exists == false;
         if ($need_essential) {
             try {
-                $essentialSql = install_build_essential_data_sql($targetDomainId, $includeGlobalEssential);
+                $essentialSql = install_build_essential_data_sql($targetDomainId, $includeGlobalEssential, $installLanguage !== '' ? $installLanguage : null);
                 if ($essentialSql !== '') {
                     $install_successful = install_execute_sql_file($essentialSql);
                 }
@@ -101,6 +130,37 @@ if (isset($_POST['op']) && $_POST['op'] === 'install_database') {
         $redirect_after_install = 'index.php?module=index&view=index';
     } elseif (isset($_POST['op'])) {
         $install_error = true;
+    }
+
+    // After a successful install, set the default currency to match the
+    // chosen locale so the first-run wizard pre-selects a sensible option.
+    if ($install_successful && !empty($redirect_after_install)) {
+        $installedLocale = $locTokens[0];
+        require_once __DIR__ . '/../../include/class/CurrencySignHelper.php';
+        require_once __DIR__ . '/../../include/class/siCurrencies.php';
+        $currencyInfo = si_locale_to_currency_info($installedLocale);
+        if ($currencyInfo !== null) {
+            dbQuery(
+                'UPDATE ' . TB_PREFIX . 'preferences SET pref_currency_sign = :sign, currency_code = :code, currency_position = :pos WHERE domain_id = :domain_id',
+                ':sign', $currencyInfo['sign'],
+                ':code', $currencyInfo['code'],
+                ':pos', $currencyInfo['position'],
+                ':domain_id', $targetDomainId
+            );
+            $currRow = siCurrencies::findOrCreate(
+                $targetDomainId,
+                $currencyInfo['sign'],
+                $currencyInfo['code'],
+                $currencyInfo['position']
+            );
+            if ($currRow && ($currRow['id'] ?? 0) > 0) {
+                dbQuery(
+                    'UPDATE ' . TB_PREFIX . 'preferences SET currency_id = :cid WHERE domain_id = :domain_id',
+                    ':cid', $currRow['id'],
+                    ':domain_id', $targetDomainId
+                );
+            }
+        }
     }
 }
 
