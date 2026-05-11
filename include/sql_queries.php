@@ -2239,9 +2239,6 @@ function insertInvoice($type, $domain_id='') {
 	$clean_date=SqlDateWithTime($_POST['date']);
 
 	$ptId = isset($_POST['payment_term_id']) ? (int)$_POST['payment_term_id'] : 0;
-	if ($ptId <= 0) {
-		$ptId = isset($pref_group['payment_term_id']) ? (int)$pref_group['payment_term_id'] : 0;
-	}
 	$termRow = ($ptId > 0) ? getPaymentTerm($ptId) : false;
 	$paymentTermId = null;
 	$dueDateSql = null;
@@ -2408,9 +2405,6 @@ function updateInvoice($invoice_id, $domain_id='') {
 
 	$clean_date = SqlDateWithTime($_POST['date']);
 	$ptId = isset($_POST['payment_term_id']) ? (int)$_POST['payment_term_id'] : 0;
-	if ($ptId <= 0) {
-		$ptId = isset($new_pref_group['payment_term_id']) ? (int)$new_pref_group['payment_term_id'] : 0;
-	}
 	$termRow = ($ptId > 0) ? getPaymentTerm($ptId) : false;
 	$paymentTermId = null;
 	$dueDateSql = null;

@@ -84,7 +84,7 @@
 			@endforeach
 		</select>
 	</div>
-	<div class="col-12 col-sm-6 col-xl-4">
+	<div class="col-12 col-sm-6 col-xl-4" id="si_invoice_due_date_container">
 		<label class="form-label mb-1" for="si_invoice_due_date_preview">{{ $LANG['due_date'] ?? 'Due date' }}</label>
 		<input type="text" readonly tabindex="-1" id="si_invoice_due_date_preview" data-initial="{{ $calcDueDate }}"
 			class="form-control fw-medium bg-body-secondary border text-body"
@@ -185,20 +185,24 @@
 	}
 	function siUpdateDueDatePreview() {
 		var out = document.getElementById('si_invoice_due_date_preview');
+		var container = document.getElementById('si_invoice_due_date_container');
 		if (!out) return;
 		if (!dateEl || !termSel) {
 			out.value = '-';
+			if (container) container.style.display = 'none';
 			return;
 		}
 		var opt = termSel.options[termSel.selectedIndex];
 		if (!opt || !opt.value) {
 			out.value = '-';
+			if (container) container.style.display = 'none';
 			return;
 		}
 		var kind = opt.getAttribute('data-calc-kind') || '';
 		var param = opt.getAttribute('data-param') || '';
 		var ymd = siDueDateFromTerm(dateEl.value, kind, param);
 		out.value = ymd || '-';
+		if (container) container.style.display = '';
 	}
 	function siUpdateInvoiceIdPreview() {
 		var out = document.getElementById('si_invoice_id_preview');
