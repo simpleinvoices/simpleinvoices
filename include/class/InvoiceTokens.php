@@ -47,7 +47,7 @@ class InvoiceTokens
     {
         require_once __DIR__ . '/../class/CurrencySignHelper.php';
 
-        $sign = $invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '';
+        $sign = $invoice['currency_sign'] ?? $preference['currency_sign'] ?? '';
         $code = $invoice['denorm_currency_code'] ?? $invoice['currency_code'] ?? $preference['currency_code'] ?? '';
         $position = $invoice['currency_position'] ?? $preference['currency_position'] ?? '';
         $currSign = CurrencySignHelper::forDisplay($sign);

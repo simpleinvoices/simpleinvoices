@@ -201,19 +201,11 @@ class siCurrencies
             }
         }
 
-        // Fall back to denorm columns
-        $sign = CurrencySignHelper::forDisplay($preference['pref_currency_sign'] ?? '');
-        $code = trim($preference['currency_code'] ?? '');
-        $position = trim($preference['currency_position'] ?? '');
-        if ($position !== 'left' && $position !== 'right') {
-            $position = CurrencySignHelper::defaultPositionForSign($sign, $code);
-        }
-
         return [
             'id'                => 0,
-            'currency_sign'     => $sign,
-            'currency_code'     => $code,
-            'currency_position' => $position,
+            'currency_sign'     => '',
+            'currency_code'     => '',
+            'currency_position' => 'left',
         ];
     }
 

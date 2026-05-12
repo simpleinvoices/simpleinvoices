@@ -5,7 +5,7 @@ require_once __DIR__ . '/../../include/class/siCurrencies.php';
 
 $op = $_POST['op'] ?? null;
 
-function _resolvePreferenceCurrency(int $domainId): array
+function _resolvePreferenceCurrency(int $domainId): int
 {
     $currencyId = isset($_POST['currency_id']) && $_POST['currency_id'] !== ''
         ? (int) $_POST['currency_id'] : 0;
@@ -13,21 +13,11 @@ function _resolvePreferenceCurrency(int $domainId): array
     if ($currencyId > 0) {
         $row = siCurrencies::getById($currencyId, $domainId);
         if ($row) {
-            return [
-                'currency_id'   => (int) $row['id'],
-                'currency_sign' => CurrencySignHelper::forDisplay($row['currency_sign'] ?? ''),
-            ];
+            return (int) $row['id'];
         }
     }
 
-    // Fall back to raw POST fields (custom currency or legacy path)
-    $sign = CurrencySignHelper::forDisplay($_POST['pref_currency_sign'] ?? $_POST['p_currency_sign'] ?? '');
-
-    $row = siCurrencies::findOrCreate($domainId, $sign, '', '');
-    return [
-        'currency_id'   => (int) ($row['id'] ?? 0),
-        'currency_sign' => $sign,
-    ];
+    return 0;
 }
 
 
@@ -53,7 +43,6 @@ if (  $op === 'insert_preference' ) {
 		(
 			domain_id,
 			pref_description,
-			pref_currency_sign,
 			currency_id,
 			pref_inv_heading,
 			pref_inv_wording,
@@ -84,7 +73,6 @@ VALUES
 	(
 		:domain_id,
 		:description,
-		:currency_sign,
 		:currency_id,
 		:heading,
 		:wording,
@@ -115,8 +103,7 @@ VALUES
 	if (dbQuery($sql,
 	  ':domain_id', $auth_session->domain_id,
 	  ':description', $_POST['p_description'],
-	  ':currency_sign', $curr['currency_sign'],
-	  ':currency_id', $curr['currency_id'] ?: null,
+	  ':currency_id', $curr ?: null,
 	  ':heading', $_POST['p_inv_heading'],
 	  ':wording', $_POST['p_inv_wording'],
 	  ':detail_heading', $_POST['p_inv_detail_heading'],
@@ -185,7 +172,6 @@ VALUES
 				".TB_PREFIX."preferences
 			SET
 				pref_description = :description,
-				pref_currency_sign = :currency_sign,
 				currency_id = :currency_id,
 				pref_inv_heading = :heading,
 				pref_inv_wording = :wording,
@@ -217,8 +203,7 @@ VALUES
 
 		if (dbQuery($sql, 
 		  ':description', $_POST['pref_description'],
-		  ':currency_sign', $curr['currency_sign'],
-		  ':currency_id', $curr['currency_id'] ?: null,
+		  ':currency_id', $curr ?: null,
 		  ':heading', $_POST['pref_inv_heading'],
 		  ':wording', $_POST['pref_inv_wording'],
 		  ':detail_heading', $_POST['pref_inv_detail_heading'],

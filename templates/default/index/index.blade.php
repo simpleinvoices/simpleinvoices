@@ -439,7 +439,7 @@
                                     <div class="col-md-6">
                                         <label class="form-label">{{ $LANG['unit_price'] ?? '' }}</label>
                                         <div class="input-group">
-                                            <span class="input-group-text">{{ CurrencySignHelper::forDisplay(($wizard_default_preference['pref_currency_sign'] ?? null) ?? ($preference['pref_currency_sign'] ?? '$')) }}</span>
+                                            <span class="input-group-text">{{ CurrencySignHelper::forDisplay(($wizard_default_preference['currency_sign'] ?? null) ?? ($preference['currency_sign'] ?? '$')) }}</span>
                                             <input type="text" name="unit_price" class="form-control" placeholder="{{ $wizard_sample_product['unit_price'] ?? '' }}">
                                         </div>
                                     </div>
@@ -558,7 +558,7 @@
                                 <input type="hidden" name="from_wizard" value="1">
                                 @include('templates.default.partials.currency_sign_field', [
                                     'currencySignFieldName'        => 'pref_currency_sign',
-                                    'currencySignCurrentValue'     => $wizardPref['pref_currency_sign'] ?? '',
+                                    'currencySignCurrentValue'     => $wizardPref['currency_sign'] ?? $wizardPref['pref_currency_sign'] ?? '',
                                     'currencyCodeFieldName'        => 'currency_code',
                                     'currencyCodeCurrentValue'     => $wizardPref['currency_code'] ?? '',
                                     'currencyIdFieldName'          => 'currency_id',

@@ -265,7 +265,7 @@ class CurrencySignHelper
      */
     public static function formatInvoice($amount, array $invoice, array $preference = []): string
     {
-        $sign = $invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '';
+        $sign = $invoice['currency_sign'] ?? $preference['currency_sign'] ?? '';
         $position = $invoice['currency_position'] ?? $preference['currency_position'] ?? '';
         $code = $invoice['denorm_currency_code'] ?? $invoice['currency_code'] ?? $preference['currency_code'] ?? '';
         $locale = $invoice['denorm_currency_locale'] ?? $preference['locale'] ?? '';

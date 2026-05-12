@@ -311,12 +311,13 @@ function getPreference($id, $domain_id='') {
 	$record['status_wording'] = $record['status']==1?$LANG['real']:$LANG['draft'];
 	$record['enabled'] = $record['pref_enabled']==1?$LANG['enabled']:$LANG['disabled'];
 
-	// Resolve currency_code/position from si_currency via currency_id
+	// Resolve currency sign/code/position from si_currency via currency_id
 	if (!empty($record['currency_id'])) {
 		require_once __DIR__ . '/class/siCurrencies.php';
 		$currRow = siCurrencies::getById((int) $record['currency_id'], $domain_id);
 		if ($currRow) {
-			$record['currency_code'] = $currRow['currency_code'] ?? '';
+			$record['currency_sign']     = $currRow['currency_sign'] ?? '';
+			$record['currency_code']     = $currRow['currency_code'] ?? '';
 			$record['currency_position'] = $currRow['currency_position'] ?? 'left';
 		}
 	}
@@ -496,7 +497,11 @@ function getActivePreferences($domain_id='') {
 
 	$domain_id = domain_id::get($domain_id);
 
-	$sql = "SELECT * FROM ".TB_PREFIX."preferences WHERE pref_enabled and domain_id = :domain_id ORDER BY pref_description";
+	$sql = "SELECT p.*, COALESCE(c.currency_sign, p.pref_currency_sign) as currency_sign, c.currency_code, c.currency_position
+		FROM ".TB_PREFIX."preferences p
+		LEFT JOIN ".TB_PREFIX."currency c ON c.id = p.currency_id AND c.domain_id = p.domain_id
+		WHERE p.pref_enabled AND p.domain_id = :domain_id
+		ORDER BY p.pref_description";
 	$sth  = dbQuery($sql, ':domain_id', $domain_id);
 
 	return $sth->fetchAll();
@@ -2193,7 +2198,7 @@ function insertInvoice($type, $domain_id='') {
 
 	// Snapshot currency from preference; allow override from POST (JS pre-populated fields).
 	// Always store the decoded display form (€ not &#8364;) so JS comparisons work consistently.
-	$currency_sign = CurrencySignHelper::forDisplay($_POST['currency_sign'] ?? $pref_group['pref_currency_sign'] ?? '');
+	$currency_sign = CurrencySignHelper::forDisplay($_POST['currency_sign'] ?? $pref_group['currency_sign'] ?? '');
 	$currency_code = trim($_POST['currency_code'] ?? $pref_group['currency_code'] ?? '');
 
 	// Resolve currency_id: user selection (POST) > lookup by sign+code > preference fallback
@@ -2357,7 +2362,7 @@ function updateInvoice($invoice_id, $domain_id='') {
 	}
 	// Snapshot currency from preference; allow override from POST (JS pre-populated fields).
 	// Always store decoded display form (€ not &#8364;) for consistent JS comparisons.
-	$currency_sign = CurrencySignHelper::forDisplay($_POST['currency_sign'] ?? $new_pref_group['pref_currency_sign'] ?? '');
+	$currency_sign = CurrencySignHelper::forDisplay($_POST['currency_sign'] ?? $new_pref_group['currency_sign'] ?? '');
 	$currency_code = trim($_POST['currency_code'] ?? $new_pref_group['currency_code'] ?? '');
 
 	// Resolve currency_id: user selection (POST) > lookup by sign+code > preference fallback

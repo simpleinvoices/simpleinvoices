@@ -78,7 +78,7 @@ if (! $has_invoices) {
 	if ($first_run_wizard && !empty($language)) {
 		$localeCurrency = si_locale_to_currency_info($language);
 		if ($localeCurrency !== null) {
-			$wizard_default_preference['pref_currency_sign'] = $localeCurrency['sign'];
+			$wizard_default_preference['currency_sign'] = $localeCurrency['sign'];
 			$wizard_default_preference['currency_code'] = $localeCurrency['code'];
 		}
 	}

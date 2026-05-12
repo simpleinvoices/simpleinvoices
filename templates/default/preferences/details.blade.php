@@ -44,7 +44,7 @@
 					<tr>
 						<th>{{ $LANG['currency_sign'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_currency_sign" title="{{ $LANG['currency_sign'] ?? '' }}"><i class="ti ti-help"></i></a></th>
 						<td>
-							{{ ($preference['pref_currency_sign'] ?? '')|si_currency_display }}
+							{{ ($preference['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }}
 							@if(!empty($preference['currency_code']))
 								<span class="text-secondary ms-1">({{ $preference['currency_code'] }})</span>
 							@endif
@@ -241,7 +241,7 @@
 			<div id="pref-edit-currency" class="tab-pane" role="tabpanel">
 				@include('templates.default.partials.currency_sign_field', [
 					'currencySignFieldName'        => 'pref_currency_sign',
-					'currencySignCurrentValue'     => $preference['pref_currency_sign'] ?? '',
+					'currencySignCurrentValue'     => $preference['currency_sign'] ?? $preference['pref_currency_sign'] ?? '',
 					'currencyCodeFieldName'        => 'currency_code',
 					'currencyCodeCurrentValue'     => $preference['currency_code'] ?? '',
 					'currencyIdFieldName'          => 'currency_id',

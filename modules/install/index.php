@@ -140,13 +140,6 @@ if (isset($_POST['op']) && $_POST['op'] === 'install_database') {
         require_once __DIR__ . '/../../include/class/siCurrencies.php';
         $currencyInfo = si_locale_to_currency_info($installedLocale);
         if ($currencyInfo !== null) {
-            dbQuery(
-                'UPDATE ' . TB_PREFIX . 'preferences SET pref_currency_sign = :sign, currency_code = :code, currency_position = :pos WHERE domain_id = :domain_id',
-                ':sign', $currencyInfo['sign'],
-                ':code', $currencyInfo['code'],
-                ':pos', $currencyInfo['position'],
-                ':domain_id', $targetDomainId
-            );
             $currRow = siCurrencies::findOrCreate(
                 $targetDomainId,
                 $currencyInfo['sign'],

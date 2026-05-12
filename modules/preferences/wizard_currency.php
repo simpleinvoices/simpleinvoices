@@ -15,21 +15,30 @@ $defaults = getSystemDefaults();
 
 if (($_POST['op'] ?? '') === 'wizard_currency_sign') {
 	$pref_id         = (int) ($_POST['pref_id'] ?? 0);
-	$sign            = CurrencySignHelper::forDisplay($_POST['pref_currency_sign'] ?? '');
 	$code            = trim($_POST['currency_code'] ?? '');
+	$currency_id     = (int) ($_POST['currency_id'] ?? 0);
 	$payment_term_id = isset($_POST['payment_term_id']) && $_POST['payment_term_id'] !== ''
 		? (int) $_POST['payment_term_id'] : null;
 
-	$position        = CurrencySignHelper::defaultPositionForSign($sign, $code);
+	if ($currency_id > 0) {
+		$currRow = siCurrencies::getById($currency_id, $auth_session->domain_id);
+		if (!$currRow) {
+			$currency_id = 0;
+		}
+	}
 
-	$currRow = siCurrencies::findOrCreate($auth_session->domain_id, $sign, $code, $position);
-	$currency_id = $currRow ? (int) $currRow['id'] : 0;
+	if ($currency_id === 0) {
+		$sign     = CurrencySignHelper::forDisplay($_POST['pref_currency_sign'] ?? '');
+		$position = CurrencySignHelper::defaultPositionForSign($sign, $code);
+		$currRow  = siCurrencies::findOrCreate($auth_session->domain_id, $sign, $code, $position);
+		$currency_id = $currRow ? (int) $currRow['id'] : 0;
+	}
 
 	$preference = getPreference($pref_id);
 	if ($preference) {
 		si_check_record_access($preference);
-		$sql = 'UPDATE ' . TB_PREFIX . 'preferences SET pref_currency_sign = :sign, currency_id = :currency_id, payment_term_id = :payment_term_id WHERE pref_id = :id AND domain_id = :domain_id';
-		if (dbQuery($sql, ':sign', $sign, ':currency_id', $currency_id ?: null, ':payment_term_id', $payment_term_id, ':id', $pref_id, ':domain_id', $auth_session->domain_id)) {
+		$sql = 'UPDATE ' . TB_PREFIX . 'preferences SET currency_id = :currency_id, payment_term_id = :payment_term_id WHERE pref_id = :id AND domain_id = :domain_id';
+		if (dbQuery($sql, ':currency_id', $currency_id ?: null, ':payment_term_id', $payment_term_id, ':id', $pref_id, ':domain_id', $auth_session->domain_id)) {
 			$default_biller_id = (int) (($defaults['biller'] ?? 0));
 			if ($default_biller_id <= 0) {
 				$billers = getBillers($auth_session->domain_id) ?: [];

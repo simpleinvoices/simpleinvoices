@@ -30,7 +30,7 @@
 					<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_process_payment_auto_amount" title="{{ $LANG['process_payment_auto_amount'] ?? '' }}"><i class="ti ti-help"></i></a>
 				</label>
 				<div class="input-group">
-					<span class="input-group-text">{{ CurrencySignHelper::forDisplay($invoice['currency_sign'] ?? $preference['pref_currency_sign'] ?? '')|si_currency_display }}</span>
+					<span class="input-group-text">{{ CurrencySignHelper::forDisplay($invoice['currency_sign'] ?? $preference['currency_sign'] ?? '')|si_currency_display }}</span>
 					<input type="text" name="ac_amount" class="form-control" value="{{ $invoice['owing'] ?? '' }}" />
 				</div>
 			</div>
@@ -59,7 +59,7 @@
 			<div class="mb-3">
 				<label class="form-label">{{ $LANG['amount'] ?? '' }}</label>
 				<div class="input-group">
-					<span class="input-group-text" id="payment-currency-addon">{{ CurrencySignHelper::forDisplay($preference['pref_currency_sign'] ?? '')|si_currency_display }}</span>
+					<span class="input-group-text" id="payment-currency-addon">{{ CurrencySignHelper::forDisplay($preference['currency_sign'] ?? '')|si_currency_display }}</span>
 					<input type="text" name="ac_amount" id="payment-amount" class="form-control" />
 				</div>
 			</div>

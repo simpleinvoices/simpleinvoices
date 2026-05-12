@@ -2738,7 +2738,7 @@
         {
             "id": "8",
             "name": "language",
-            "value": "en_GB",
+            "value": "LANGUAGE",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },

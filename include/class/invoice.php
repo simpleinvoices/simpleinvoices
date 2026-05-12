@@ -52,7 +52,7 @@ class invoice {
 
 		// Resolve currency from preference / si_currency (same logic as insertInvoice)
 		require_once __DIR__ . '/class/CurrencySignHelper.php';
-		$currency_sign = CurrencySignHelper::forDisplay($pref_group['pref_currency_sign'] ?? '');
+		$currency_sign = $pref_group['currency_sign'] ?? '';
 		$currency_code = trim($pref_group['currency_code'] ?? '');
 
 		$currency_id = null;
