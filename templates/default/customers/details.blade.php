@@ -14,28 +14,28 @@
 	<div class="card-header">
 		<ul class="nav nav-tabs card-header-tabs" role="tablist">
 			<li class="nav-item" role="presentation">
-				<a class="nav-link active" href="#cust-view-details" data-bs-toggle="tab" role="tab"><i class="ti ti-info-circle me-1"></i>{{ $LANG['details'] ?? '' }}</a>
+				<a class="nav-link active" href="#cust-view-details" data-bs-toggle="tab" role="tab"><i class="ti ti-info-circle me-1"></i><span class="d-none d-md-inline">{{ $LANG['details'] ?? '' }}</span></a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#cust-view-address" data-bs-toggle="tab" role="tab"><i class="ti ti-map-pin me-1"></i>{{ $LANG['address'] ?? '' }}</a>
+				<a class="nav-link" href="#cust-view-address" data-bs-toggle="tab" role="tab"><i class="ti ti-map-pin me-1"></i><span class="d-none d-md-inline">{{ $LANG['address'] ?? '' }}</span></a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#cust-view-contact" data-bs-toggle="tab" role="tab"><i class="ti ti-phone me-1"></i>{{ $LANG['contacts'] ?? '' }}</a>
+				<a class="nav-link" href="#cust-view-contact" data-bs-toggle="tab" role="tab"><i class="ti ti-phone me-1"></i><span class="d-none d-md-inline">{{ $LANG['contacts'] ?? '' }}</span></a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#cust-view-custom" data-bs-toggle="tab" role="tab"><i class="ti ti-adjustments me-1"></i>{{ $LANG['custom_fields'] ?? '' }}</a>
+				<a class="nav-link" href="#cust-view-custom" data-bs-toggle="tab" role="tab"><i class="ti ti-adjustments me-1"></i><span class="d-none d-md-inline">{{ $LANG['custom_fields'] ?? '' }}</span></a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#cust-view-notes" data-bs-toggle="tab" role="tab"><i class="ti ti-notes me-1"></i>{{ $LANG['notes'] ?? '' }}</a>
+				<a class="nav-link" href="#cust-view-notes" data-bs-toggle="tab" role="tab"><i class="ti ti-notes me-1"></i><span class="d-none d-md-inline">{{ $LANG['notes'] ?? '' }}</span></a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#cust-view-summary" data-bs-toggle="tab" role="tab"><i class="ti ti-report-money me-1"></i>{{ $LANG['summary_of_accounts'] ?? '' }}</a>
+				<a class="nav-link" href="#cust-view-summary" data-bs-toggle="tab" role="tab"><i class="ti ti-report-money me-1"></i><span class="d-none d-md-inline">{{ $LANG['summary_of_accounts'] ?? '' }}</span></a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#cust-view-unpaid" data-bs-toggle="tab" role="tab"><i class="ti ti-receipt-off me-1"></i>{{ $LANG['unpaid_invoices'] ?? '' }}</a>
+				<a class="nav-link" href="#cust-view-unpaid" data-bs-toggle="tab" role="tab"><i class="ti ti-receipt-off me-1"></i><span class="d-none d-md-inline">{{ $LANG['unpaid_invoices'] ?? '' }}</span></a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#cust-view-invoices" data-bs-toggle="tab" role="tab"><i class="ti ti-list me-1"></i>{{ $LANG['customer'] ?? '' }} {{ $LANG['invoice_listings'] ?? '' }}</a>
+				<a class="nav-link" href="#cust-view-invoices" data-bs-toggle="tab" role="tab"><i class="ti ti-list me-1"></i><span class="d-none d-md-inline">{{ $LANG['customer'] ?? '' }} {{ $LANG['invoice_listings'] ?? '' }}</span></a>
 			</li>
 		</ul>
 	</div>
@@ -201,19 +201,19 @@
 	<div class="card-header">
 		<ul class="nav nav-tabs card-header-tabs" role="tablist">
 			<li class="nav-item" role="presentation">
-				<a class="nav-link active" href="#cust-edit-details" data-bs-toggle="tab" role="tab"><i class="ti ti-info-circle me-1"></i>{{ $LANG['details'] ?? '' }}</a>
+				<a class="nav-link active" href="#cust-edit-details" data-bs-toggle="tab" role="tab"><i class="ti ti-info-circle me-1"></i><span class="d-none d-md-inline">{{ $LANG['details'] ?? '' }}</span></a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#cust-edit-address" data-bs-toggle="tab" role="tab"><i class="ti ti-map-pin me-1"></i>{{ $LANG['address'] ?? '' }}</a>
+				<a class="nav-link" href="#cust-edit-address" data-bs-toggle="tab" role="tab"><i class="ti ti-map-pin me-1"></i><span class="d-none d-md-inline">{{ $LANG['address'] ?? '' }}</span></a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#cust-edit-contact" data-bs-toggle="tab" role="tab"><i class="ti ti-phone me-1"></i>{{ $LANG['contacts'] ?? '' }}</a>
+				<a class="nav-link" href="#cust-edit-contact" data-bs-toggle="tab" role="tab"><i class="ti ti-phone me-1"></i><span class="d-none d-md-inline">{{ $LANG['contacts'] ?? '' }}</span></a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#cust-edit-custom" data-bs-toggle="tab" role="tab"><i class="ti ti-adjustments me-1"></i>{{ $LANG['custom_fields'] ?? '' }}</a>
+				<a class="nav-link" href="#cust-edit-custom" data-bs-toggle="tab" role="tab"><i class="ti ti-adjustments me-1"></i><span class="d-none d-md-inline">{{ $LANG['custom_fields'] ?? '' }}</span></a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#cust-edit-notes" data-bs-toggle="tab" role="tab"><i class="ti ti-notes me-1"></i>{{ $LANG['notes'] ?? '' }}</a>
+				<a class="nav-link" href="#cust-edit-notes" data-bs-toggle="tab" role="tab"><i class="ti ti-notes me-1"></i><span class="d-none d-md-inline">{{ $LANG['notes'] ?? '' }}</span></a>
 			</li>
 		</ul>
 	</div>

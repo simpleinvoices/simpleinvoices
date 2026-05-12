@@ -2248,6 +2248,7 @@ function insertInvoice($type, $domain_id='') {
 	}
 	$currency_locale = trim($pref_group['locale'] ?? '');
 
+	$clean_date = SqlDateWithTime($_POST['date']);
 	$ptId = isset($_POST['payment_term_id']) ? (int)$_POST['payment_term_id'] : 0;
 	$termRow = ($ptId > 0) ? getPaymentTerm($ptId, $domain_id) : false;
 	$paymentTermId = null;

@@ -14,25 +14,25 @@
 	<div class="card-header">
 		<ul class="nav nav-tabs card-header-tabs" role="tablist">
 			<li class="nav-item" role="presentation">
-				<a class="nav-link active" href="#bill-view-details" data-bs-toggle="tab" role="tab"><i class="ti ti-info-circle me-1"></i>{{ $LANG['details'] ?? '' }}</a>
+				<a class="nav-link active" href="#bill-view-details" data-bs-toggle="tab" role="tab"><i class="ti ti-info-circle me-1"></i><span class="d-none d-md-inline">{{ $LANG['details'] ?? '' }}</span></a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#bill-view-address" data-bs-toggle="tab" role="tab"><i class="ti ti-map-pin me-1"></i>{{ $LANG['address'] ?? '' }}</a>
+				<a class="nav-link" href="#bill-view-address" data-bs-toggle="tab" role="tab"><i class="ti ti-map-pin me-1"></i><span class="d-none d-md-inline">{{ $LANG['address'] ?? '' }}</span></a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#bill-view-contact" data-bs-toggle="tab" role="tab"><i class="ti ti-phone me-1"></i>{{ $LANG['contacts'] ?? '' }}</a>
+				<a class="nav-link" href="#bill-view-contact" data-bs-toggle="tab" role="tab"><i class="ti ti-phone me-1"></i><span class="d-none d-md-inline">{{ $LANG['contacts'] ?? '' }}</span></a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#bill-view-payment" data-bs-toggle="tab" role="tab"><i class="ti ti-credit-card me-1"></i>{{ $LANG['payment'] ?? '' }}</a>
+				<a class="nav-link" href="#bill-view-payment" data-bs-toggle="tab" role="tab"><i class="ti ti-credit-card me-1"></i><span class="d-none d-md-inline">{{ $LANG['payment'] ?? '' }}</span></a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#bill-view-bank" data-bs-toggle="tab" role="tab"><i class="ti ti-building-bank me-1"></i>{{ $LANG['bank_details'] ?? 'Bank Details' }}</a>
+				<a class="nav-link" href="#bill-view-bank" data-bs-toggle="tab" role="tab"><i class="ti ti-building-bank me-1"></i><span class="d-none d-md-inline">{{ $LANG['bank_details'] ?? 'Bank Details' }}</span></a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#bill-view-custom" data-bs-toggle="tab" role="tab"><i class="ti ti-adjustments me-1"></i>{{ $LANG['custom_fields'] ?? '' }}</a>
+				<a class="nav-link" href="#bill-view-custom" data-bs-toggle="tab" role="tab"><i class="ti ti-adjustments me-1"></i><span class="d-none d-md-inline">{{ $LANG['custom_fields'] ?? '' }}</span></a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#bill-view-invoice" data-bs-toggle="tab" role="tab"><i class="ti ti-file-invoice me-1"></i>{{ $LANG['invoice'] ?? '' }}</a>
+				<a class="nav-link" href="#bill-view-invoice" data-bs-toggle="tab" role="tab"><i class="ti ti-file-invoice me-1"></i><span class="d-none d-md-inline">{{ $LANG['invoice'] ?? '' }}</span></a>
 			</li>
 		</ul>
 	</div>
@@ -287,25 +287,25 @@
 	<div class="card-header">
 		<ul class="nav nav-tabs card-header-tabs" role="tablist">
 			<li class="nav-item" role="presentation">
-				<a class="nav-link active" href="#bill-edit-details" data-bs-toggle="tab" role="tab"><i class="ti ti-info-circle me-1"></i>{{ $LANG['details'] ?? '' }}</a>
+				<a class="nav-link active" href="#bill-edit-details" data-bs-toggle="tab" role="tab"><i class="ti ti-info-circle me-1"></i><span class="d-none d-md-inline">{{ $LANG['details'] ?? '' }}</span></a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#bill-edit-address" data-bs-toggle="tab" role="tab"><i class="ti ti-map-pin me-1"></i>{{ $LANG['address'] ?? '' }}</a>
+				<a class="nav-link" href="#bill-edit-address" data-bs-toggle="tab" role="tab"><i class="ti ti-map-pin me-1"></i><span class="d-none d-md-inline">{{ $LANG['address'] ?? '' }}</span></a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#bill-edit-contact" data-bs-toggle="tab" role="tab"><i class="ti ti-phone me-1"></i>{{ $LANG['contacts'] ?? '' }}</a>
+				<a class="nav-link" href="#bill-edit-contact" data-bs-toggle="tab" role="tab"><i class="ti ti-phone me-1"></i><span class="d-none d-md-inline">{{ $LANG['contacts'] ?? '' }}</span></a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#bill-edit-payment" data-bs-toggle="tab" role="tab"><i class="ti ti-credit-card me-1"></i>{{ $LANG['payment'] ?? '' }}</a>
+				<a class="nav-link" href="#bill-edit-payment" data-bs-toggle="tab" role="tab"><i class="ti ti-credit-card me-1"></i><span class="d-none d-md-inline">{{ $LANG['payment'] ?? '' }}</span></a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#bill-edit-bank" data-bs-toggle="tab" role="tab"><i class="ti ti-building-bank me-1"></i>{{ $LANG['bank_details'] ?? 'Bank Details' }}</a>
+				<a class="nav-link" href="#bill-edit-bank" data-bs-toggle="tab" role="tab"><i class="ti ti-building-bank me-1"></i><span class="d-none d-md-inline">{{ $LANG['bank_details'] ?? 'Bank Details' }}</span></a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#bill-edit-custom" data-bs-toggle="tab" role="tab"><i class="ti ti-adjustments me-1"></i>{{ $LANG['custom_fields'] ?? '' }}</a>
+				<a class="nav-link" href="#bill-edit-custom" data-bs-toggle="tab" role="tab"><i class="ti ti-adjustments me-1"></i><span class="d-none d-md-inline">{{ $LANG['custom_fields'] ?? '' }}</span></a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#bill-edit-invoice" data-bs-toggle="tab" role="tab"><i class="ti ti-file-invoice me-1"></i>{{ $LANG['invoice'] ?? '' }}</a>
+				<a class="nav-link" href="#bill-edit-invoice" data-bs-toggle="tab" role="tab"><i class="ti ti-file-invoice me-1"></i><span class="d-none d-md-inline">{{ $LANG['invoice'] ?? '' }}</span></a>
 			</li>
 		</ul>
 	</div>
