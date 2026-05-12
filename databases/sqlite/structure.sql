@@ -278,7 +278,6 @@ CREATE TABLE IF NOT EXISTS si_preferences (
   pref_id                    INTEGER PRIMARY KEY AUTOINCREMENT,
   domain_id                  INTEGER NOT NULL DEFAULT 1,
   pref_description           TEXT DEFAULT NULL,
-  pref_currency_sign         TEXT DEFAULT NULL,
   pref_inv_heading           TEXT DEFAULT NULL,
   pref_inv_wording           TEXT DEFAULT NULL,
   pref_inv_detail_heading    TEXT DEFAULT NULL,

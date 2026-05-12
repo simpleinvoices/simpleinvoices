@@ -282,7 +282,6 @@ CREATE TABLE IF NOT EXISTS si_preferences (
   pref_id                    SERIAL,
   domain_id                  INTEGER NOT NULL DEFAULT 1,
   pref_description           VARCHAR(255) DEFAULT NULL,
-  pref_currency_sign         VARCHAR(255) DEFAULT NULL,
   pref_inv_heading           VARCHAR(255) DEFAULT NULL,
   pref_inv_wording           VARCHAR(255) DEFAULT NULL,
   pref_inv_detail_heading    VARCHAR(255) DEFAULT NULL,

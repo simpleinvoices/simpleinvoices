@@ -303,7 +303,6 @@ CREATE TABLE IF NOT EXISTS `si_preferences` (
   `pref_id` int(11) NOT NULL AUTO_INCREMENT,
   `domain_id` int(11) NOT NULL DEFAULT '1',
   `pref_description` varchar(255) DEFAULT NULL,
-  `pref_currency_sign` varchar(255) DEFAULT NULL,
   `pref_inv_heading` varchar(255) DEFAULT NULL,
   `pref_inv_wording` varchar(255) DEFAULT NULL,
   `pref_inv_detail_heading` varchar(255) DEFAULT NULL,

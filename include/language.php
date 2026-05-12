@@ -281,9 +281,9 @@ function si_locale_to_currency_info(string $locale): ?array
 	// Locale → ISO 4217 currency code mapping
 	$localeCurrencyMap = [
 		'en_us' => 'USD', 'es_mx' => 'MXN',
-		'en_gb' => 'GBP',
+		'en_au' => 'AUD', 'en_gb' => 'GBP',
 		'de_de' => 'EUR', 'fr_fr' => 'EUR', 'es_es' => 'EUR', 'it_it' => 'EUR',
-		'nl_nl' => 'EUR', 'pt_pt' => 'EUR', 'fi_fi' => 'EUR', 'el_gr' => 'EUR',
+		'nl_nl' => 'EUR', 		'pt_br' => 'BRL', 'pt_pt' => 'EUR', 'fi_fi' => 'EUR', 'el_gr' => 'EUR',
 		'sk_sk' => 'EUR', 'sl_si' => 'EUR', 'et_ee' => 'EUR', 'lv_lv' => 'EUR',
 		'mt_mt' => 'EUR', 'hr_hr' => 'EUR', 'ca_es' => 'EUR', 'eu_es' => 'EUR',
 		'gl_es' => 'EUR', 'oc_es' => 'EUR', 'sq_al' => 'EUR',

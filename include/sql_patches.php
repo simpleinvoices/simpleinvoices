@@ -3223,3 +3223,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['379']['name'] = "si_preferences: backfill currency_id from pref_currency_sign via si_currency";
     $patch['379']['patch'] = "SELECT 'Backfill preferences.currency_id from pref_currency_sign via si_currency (PHP handler)'";
     $patch['379']['date'] = "20260511";
+
+    $patch['380']['name'] = "si_preferences: drop legacy pref_currency_sign column (replaced by currency_id)";
+    $patch['380']['patch'] = "ALTER TABLE ".TB_PREFIX."preferences DROP COLUMN pref_currency_sign";
+    $patch['380']['date'] = "20260512";

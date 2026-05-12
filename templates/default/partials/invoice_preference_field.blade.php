@@ -42,7 +42,7 @@
 				<option
 					@if(($pref['pref_id'] ?? '') == $selectedPrefId) selected @endif
 					value="{{ $pref['pref_id'] ?? '' }}"
-					data-currency-sign="{{ CurrencySignHelper::forDisplay($pref['currency_sign'] ?? $pref['pref_currency_sign'] ?? '') }}"
+					data-currency-sign="{{ CurrencySignHelper::forDisplay($pref['currency_sign'] ?? '') }}"
 					data-currency-code="{{ $pref['currency_code'] ?? '' }}"
 					data-currency-id="{{ $pref['currency_id'] ?? '' }}"
 					data-payment-term-id="{{ $pref['payment_term_id'] ?? '' }}"

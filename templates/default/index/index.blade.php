@@ -557,8 +557,8 @@
                                 <input type="hidden" name="pref_id" value="{{ $wizardPrefId }}">
                                 <input type="hidden" name="from_wizard" value="1">
                                 @include('templates.default.partials.currency_sign_field', [
-                                    'currencySignFieldName'        => 'pref_currency_sign',
-                                    'currencySignCurrentValue'     => $wizardPref['currency_sign'] ?? $wizardPref['pref_currency_sign'] ?? '',
+                                    'currencySignFieldName'        => 'currency_sign_value',
+                                    'currencySignCurrentValue'     => $wizardPref['currency_sign'] ?? '',
                                     'currencyCodeFieldName'        => 'currency_code',
                                     'currencyCodeCurrentValue'     => $wizardPref['currency_code'] ?? '',
                                     'currencyIdFieldName'          => 'currency_id',

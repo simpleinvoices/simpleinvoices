@@ -28,7 +28,7 @@ if (($_POST['op'] ?? '') === 'wizard_currency_sign') {
 	}
 
 	if ($currency_id === 0) {
-		$sign     = CurrencySignHelper::forDisplay($_POST['pref_currency_sign'] ?? '');
+		$sign     = CurrencySignHelper::forDisplay($_POST['currency_sign_value'] ?? '');
 		$position = CurrencySignHelper::defaultPositionForSign($sign, $code);
 		$currRow  = siCurrencies::findOrCreate($auth_session->domain_id, $sign, $code, $position);
 		$currency_id = $currRow ? (int) $currRow['id'] : 0;

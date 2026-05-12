@@ -497,7 +497,7 @@ function getActivePreferences($domain_id='') {
 
 	$domain_id = domain_id::get($domain_id);
 
-	$sql = "SELECT p.*, COALESCE(c.currency_sign, p.pref_currency_sign) as currency_sign, c.currency_code, c.currency_position
+	$sql = "SELECT p.*, c.currency_sign, c.currency_code, c.currency_position
 		FROM ".TB_PREFIX."preferences p
 		LEFT JOIN ".TB_PREFIX."currency c ON c.id = p.currency_id AND c.domain_id = p.domain_id
 		WHERE p.pref_enabled AND p.domain_id = :domain_id
