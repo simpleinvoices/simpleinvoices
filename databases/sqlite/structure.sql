@@ -50,7 +50,11 @@ CREATE TABLE IF NOT EXISTS si_biller (
   bank_name                    TEXT DEFAULT NULL,
   bank_swift_bic               TEXT DEFAULT NULL,
   bank_account_number          TEXT DEFAULT NULL,
-  bank_routing_sort_code       TEXT DEFAULT NULL
+  bank_routing_sort_code       TEXT DEFAULT NULL,
+  tax_id_name_1                TEXT DEFAULT NULL,
+  tax_id_label_1               TEXT DEFAULT NULL,
+  tax_id_name_2                TEXT DEFAULT NULL,
+  tax_id_label_2               TEXT DEFAULT NULL
 );
 CREATE UNIQUE INDEX IF NOT EXISTS si_biller_pk ON si_biller (domain_id, id);
 
@@ -106,6 +110,10 @@ CREATE TABLE IF NOT EXISTS si_customers (
   custom_field2  TEXT DEFAULT NULL,
   custom_field3  TEXT DEFAULT NULL,
   custom_field4  TEXT DEFAULT NULL,
+  tax_id_name_1  TEXT DEFAULT NULL,
+  tax_id_label_1 TEXT DEFAULT NULL,
+  tax_id_name_2  TEXT DEFAULT NULL,
+  tax_id_label_2 TEXT DEFAULT NULL,
   enabled        INTEGER NOT NULL DEFAULT 1
 );
 CREATE UNIQUE INDEX IF NOT EXISTS si_customers_pk ON si_customers (domain_id, id);

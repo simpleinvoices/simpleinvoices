@@ -2679,6 +2679,30 @@
             "sql_patch": "Add pref_inv_payment_line0-5 name/value fields to preferences",
             "sql_release": "20260508",
             "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "378",
+            "sql_patch": "Add domain_id to si_payment_terms",
+            "sql_release": "20260511",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "379",
+            "sql_patch": "si_preferences: backfill currency_id from pref_currency_sign via si_currency",
+            "sql_release": "20260511",
+            "sql_statement": "SELECT 'Backfill preferences.currency_id from pref_currency_sign via si_currency (PHP handler)'"
+        },
+        {
+            "sql_patch_ref": "380",
+            "sql_patch": "si_preferences: drop legacy pref_currency_sign column (replaced by currency_id)",
+            "sql_release": "20260512",
+            "sql_statement": "ALTER TABLE si_preferences DROP COLUMN pref_currency_sign"
+        },
+        {
+            "sql_patch_ref": "381",
+            "sql_patch": "Add tax_id_name_1, tax_id_label_1, tax_id_name_2, tax_id_label_2 to si_biller and si_customers",
+            "sql_release": "20260513",
+            "sql_statement": "PHP: si_patch381_tax_id_columns() — converts varchar(768) gateway columns to TEXT, then adds tax_id columns"
         }
     ],
     "si_system_defaults": [

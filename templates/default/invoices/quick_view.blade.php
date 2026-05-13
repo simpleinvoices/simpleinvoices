@@ -115,6 +115,8 @@
                     @if(!empty($biller['custom_field2']) && !empty($customFieldLabels['biller_cf2'])){{ $customFieldLabels['biller_cf2'] }}: {{ $biller['custom_field2'] }}<br />@endif
                     @if(!empty($biller['custom_field3']) && !empty($customFieldLabels['biller_cf3'])){{ $customFieldLabels['biller_cf3'] }}: {{ $biller['custom_field3'] }}<br />@endif
                     @if(!empty($biller['custom_field4']) && !empty($customFieldLabels['biller_cf4'])){{ $customFieldLabels['biller_cf4'] }}: {{ $biller['custom_field4'] }}<br />@endif
+                    @if(!empty($biller['tax_id_name_1'])){{ $biller['tax_id_label_1'] ?? '' }}: {{ $biller['tax_id_name_1'] ?? '' }}<br />@endif
+                    @if(!empty($biller['tax_id_name_2'])){{ $biller['tax_id_label_2'] ?? '' }}: {{ $biller['tax_id_name_2'] ?? '' }}<br />@endif
                     @showCustomFields(1, $biller['id'] ?? '')
                 </div>
             </div>
@@ -141,6 +143,8 @@
                     @if(!empty($customer['custom_field2']) && !empty($customFieldLabels['customer_cf2'])){{ $customFieldLabels['customer_cf2'] }}: {{ $customer['custom_field2'] }}<br />@endif
                     @if(!empty($customer['custom_field3']) && !empty($customFieldLabels['customer_cf3'])){{ $customFieldLabels['customer_cf3'] }}: {{ $customer['custom_field3'] }}<br />@endif
                     @if(!empty($customer['custom_field4']) && !empty($customFieldLabels['customer_cf4'])){{ $customFieldLabels['customer_cf4'] }}: {{ $customer['custom_field4'] }}<br />@endif
+                    @if(!empty($customer['tax_id_name_1'])){{ $customer['tax_id_label_1'] ?? '' }}: {{ $customer['tax_id_name_1'] ?? '' }}<br />@endif
+                    @if(!empty($customer['tax_id_name_2'])){{ $customer['tax_id_label_2'] ?? '' }}: {{ $customer['tax_id_name_2'] ?? '' }}<br />@endif
                     @showCustomFields(2, $customer['id'] ?? '')
                 </div>
             </div>

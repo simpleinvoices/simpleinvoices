@@ -36,6 +36,9 @@
 				<a class="nav-link" href="#cust-add-custom" data-bs-toggle="tab" role="tab"><i class="ti ti-adjustments me-1"></i><span class="d-none d-md-inline">{{ $LANG['custom_fields'] ?? '' }}</span></a>
 			</li>
 			<li class="nav-item" role="presentation">
+				<a class="nav-link" href="#cust-add-taxids" data-bs-toggle="tab" role="tab"><i class="ti ti-id me-1"></i><span class="d-none d-md-inline">{{ $LANG['tax_id_tab_label'] ?? 'Tax IDs' }}</span></a>
+			</li>
+			<li class="nav-item" role="presentation">
 				<a class="nav-link" href="#cust-add-notes" data-bs-toggle="tab" role="tab"><i class="ti ti-notes me-1"></i><span class="d-none d-md-inline">{{ $LANG['notes'] ?? '' }}</span></a>
 			</li>
 		</ul>
@@ -137,6 +140,34 @@
 					<input type="text" name="custom_field4" value="{{ post('custom_field4') }}" class="form-control" />
 				</div>
 				@showCustomFields(2, '')
+			</div>
+			<div id="cust-add-taxids" class="tab-pane" role="tabpanel">
+				<div class="row g-3">
+					<div class="col-md-6">
+						<div class="mb-3">
+							<label class="form-label">{{ $LANG['tax_id_label_1'] ?? 'Tax ID Type 1' }}</label>
+							<input type="text" name="tax_id_label_1" value="{{ post('tax_id_label_1') }}" class="form-control" placeholder="{{ $LANG['tax_id_label_placeholder'] ?? 'e.g. EIN, VAT, ABN' }}" />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="mb-3">
+							<label class="form-label">{{ $LANG['tax_id_name_1'] ?? 'Tax ID 1' }}</label>
+							<input type="text" name="tax_id_name_1" value="{{ post('tax_id_name_1') }}" class="form-control" placeholder="{{ $LANG['tax_id_name_placeholder'] ?? 'Enter tax ID number' }}" />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="mb-3">
+							<label class="form-label">{{ $LANG['tax_id_label_2'] ?? 'Tax ID Type 2' }}</label>
+							<input type="text" name="tax_id_label_2" value="{{ post('tax_id_label_2') }}" class="form-control" placeholder="{{ $LANG['tax_id_label_placeholder'] ?? 'e.g. State Tax ID, ACN' }}" />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="mb-3">
+							<label class="form-label">{{ $LANG['tax_id_name_2'] ?? 'Tax ID 2' }}</label>
+							<input type="text" name="tax_id_name_2" value="{{ post('tax_id_name_2') }}" class="form-control" placeholder="{{ $LANG['tax_id_name_placeholder'] ?? 'Enter tax ID number' }}" />
+						</div>
+					</div>
+				</div>
 			</div>
 			<div id="cust-add-notes" class="tab-pane" role="tabpanel">
 				<div class="mb-3">

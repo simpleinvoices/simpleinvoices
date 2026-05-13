@@ -321,6 +321,76 @@ function si_locale_to_currency_info(string $locale): ?array
 	return null;
 }
 
+/**
+ * Return the default tax ID labels (primary and secondary) for a given locale.
+ * e.g. en_gb → ['primary' => 'VAT Registration Number', 'secondary' => 'CRN (Company Registration Number)']
+ *
+ * @return array{primary: string, secondary: string}|null
+ */
+function si_locale_to_tax_id_label(string $locale): ?array
+{
+	$locale = strtolower(trim($locale));
+
+	// Locale → [primary label, secondary label]
+	$map = [
+		'en_us' => ['EIN', 'State Tax ID'],
+		'en_gb' => ['VAT Registration Number', 'CRN (Company Registration Number)'],
+		'en_au' => ['ABN', 'ACN'],
+		'en_ca' => ['Business Number', 'GST/HST Number'],
+		'de_de' => ['USt-IdNr.', 'Handelsregisternummer'],
+		'de_ch' => ['UID', 'Handelsregisternummer'],
+		'fr_fr' => ['Numéro TVA', 'SIRET'],
+		'es_es' => ['NIF', 'CIF'],
+		'it_it' => ['Partita IVA', 'Codice Fiscale'],
+		'nl_nl' => ['BTW-nummer', 'KVK-nummer'],
+		'pt_br' => ['CNPJ', 'Inscrição Estadual'],
+		'pt_pt' => ['NIF', 'NIPC'],
+		'pl_pl' => ['NIP', 'REGON'],
+		'sv_se' => ['Momsreg.nr', 'Organisationsnummer'],
+		'da_dk' => ['CVR', 'SE-nummer'],
+		'nb_no' => ['Org.nr.', 'MVA'],
+		'fi_fi' => ['Y-tunnus', 'ALV-numero'],
+		'cs_cz' => ['DIČ', 'IČO'],
+		'hu_hu' => ['Adószám', 'Cégjegyzékszám'],
+		'ro_ro' => ['CIF', 'Reg. Com.'],
+		'bg_bg' => ['ЕИК', 'ДДС номер'],
+		'ru_ru' => ['ИНН', 'КПП'],
+		'tr_tr' => ['Vergi No', 'Ticaret Sicil No'],
+		'ja_jp' => ['法人番号', '適格請求書発行事業者登録番号'],
+		'ko_kr' => ['사업자등록번호', '법인등록번호'],
+		'zh_cn' => ['统一社会信用代码', '税务登记号'],
+		'zh_hk' => ['商業登記號碼', 'CR Number'],
+		'zh_tw' => ['統一編號', '營利事業登記編號'],
+		'id_id' => ['NPWP', 'NIB'],
+		'vi_vn' => ['MST', 'GPKD'],
+		'af_za' => ['VAT Number', 'Company Registration Number'],
+		'ar_sa' => ['VAT Registration Number', 'Commercial Registration'],
+		'hi_in' => ['GSTIN', 'PAN'],
+		'ta_in' => ['GSTIN', 'PAN'],
+		'sk_sk' => ['IČ DPH', 'IČO'],
+		'sl_si' => ['Davčna št.', 'Matična št.'],
+		'et_ee' => ['KMKR', 'Registrikood'],
+		'lv_lv' => ['PVN Nr.', 'Reģ. Nr.'],
+		'mt_mt' => ['VAT Number', 'Company Registration Number'],
+		'hr_hr' => ['OIB', 'MBS'],
+		'ca_es' => ['NIF', 'CIF'],
+		'eu_es' => ['IFK', 'IFZ'],
+		'gl_es' => ['NIF', 'CIF'],
+		'oc_es' => ['NIF', 'CIF'],
+		'sq_al' => ['NUIS', 'NIPT'],
+		'sr_rs' => ['PIB', 'Matični broj'],
+		'el_gr' => ['ΑΦΜ', 'ΓΕΜΗ'],
+		'es_mx' => ['RFC', 'Registro Público de Comercio'],
+	];
+
+	$pair = $map[$locale] ?? null;
+	if ($pair === null) {
+		return null;
+	}
+
+	return ['primary' => $pair[0], 'secondary' => $pair[1]];
+}
+
 $LANG = getLanguageArray();
 //TODO: if (getenv("HTTP_ACCEPT_LANGUAGE") != available language) AND (config lang != en) ) {
 // then use config lang

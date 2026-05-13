@@ -3227,3 +3227,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['380']['name'] = "si_preferences: drop legacy pref_currency_sign column (replaced by currency_id)";
     $patch['380']['patch'] = "ALTER TABLE ".TB_PREFIX."preferences DROP COLUMN pref_currency_sign";
     $patch['380']['date'] = "20260512";
+
+    $patch['381']['name'] = "Add tax_id_name_1, tax_id_label_1, tax_id_name_2, tax_id_label_2 to si_biller and si_customers";
+    $patch['381']['patch'] = "PHP: si_patch381_tax_id_columns() — converts varchar(768) gateway columns to TEXT, then adds tax_id columns";
+    $patch['381']['date'] = "20260513";

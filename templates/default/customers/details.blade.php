@@ -26,6 +26,9 @@
 				<a class="nav-link" href="#cust-view-custom" data-bs-toggle="tab" role="tab"><i class="ti ti-adjustments me-1"></i><span class="d-none d-md-inline">{{ $LANG['custom_fields'] ?? '' }}</span></a>
 			</li>
 			<li class="nav-item" role="presentation">
+				<a class="nav-link" href="#cust-view-taxids" data-bs-toggle="tab" role="tab"><i class="ti ti-id me-1"></i><span class="d-none d-md-inline">{{ $LANG['tax_id_tab_label'] ?? 'Tax IDs' }}</span></a>
+			</li>
+			<li class="nav-item" role="presentation">
 				<a class="nav-link" href="#cust-view-notes" data-bs-toggle="tab" role="tab"><i class="ti ti-notes me-1"></i><span class="d-none d-md-inline">{{ $LANG['notes'] ?? '' }}</span></a>
 			</li>
 			<li class="nav-item" role="presentation">
@@ -73,6 +76,14 @@
 					<tr><th>{{ $customFieldLabel['customer_cf2'] ?? '' }}</th><td>{{ $customer['custom_field2'] ?? '' }}</td></tr>
 					<tr><th>{{ $customFieldLabel['customer_cf3'] ?? '' }}</th><td>{{ $customer['custom_field3'] ?? '' }}</td></tr>
 					<tr><th>{{ $customFieldLabel['customer_cf4'] ?? '' }}</th><td>{{ $customer['custom_field4'] ?? '' }}</td></tr>
+				</table>
+			</div>
+			<div id="cust-view-taxids" class="tab-pane" role="tabpanel">
+				<table class="table table-vcenter table-wrap">
+					<tr><th>{{ $LANG['tax_id_label_1'] ?? 'Tax ID Type 1' }}</th><td>{{ $customer['tax_id_label_1'] ?? '' }}</td></tr>
+					<tr><th>{{ $LANG['tax_id_name_1'] ?? 'Tax ID 1' }}</th><td>{{ $customer['tax_id_name_1'] ?? '' }}</td></tr>
+					<tr><th>{{ $LANG['tax_id_label_2'] ?? 'Tax ID Type 2' }}</th><td>{{ $customer['tax_id_label_2'] ?? '' }}</td></tr>
+					<tr><th>{{ $LANG['tax_id_name_2'] ?? 'Tax ID 2' }}</th><td>{{ $customer['tax_id_name_2'] ?? '' }}</td></tr>
 				</table>
 			</div>
 			<div id="cust-view-notes" class="tab-pane" role="tabpanel">
@@ -213,6 +224,9 @@
 				<a class="nav-link" href="#cust-edit-custom" data-bs-toggle="tab" role="tab"><i class="ti ti-adjustments me-1"></i><span class="d-none d-md-inline">{{ $LANG['custom_fields'] ?? '' }}</span></a>
 			</li>
 			<li class="nav-item" role="presentation">
+				<a class="nav-link" href="#cust-edit-taxids" data-bs-toggle="tab" role="tab"><i class="ti ti-id me-1"></i><span class="d-none d-md-inline">{{ $LANG['tax_id_tab_label'] ?? 'Tax IDs' }}</span></a>
+			</li>
+			<li class="nav-item" role="presentation">
 				<a class="nav-link" href="#cust-edit-notes" data-bs-toggle="tab" role="tab"><i class="ti ti-notes me-1"></i><span class="d-none d-md-inline">{{ $LANG['notes'] ?? '' }}</span></a>
 			</li>
 		</ul>
@@ -314,6 +328,34 @@
 					<input type="text" name="custom_field4" value="{{ $customer['custom_field4'] ?? '' }}" class="form-control" />
 				</div>
 				@showCustomFields(2, get('customer'))
+			</div>
+			<div id="cust-edit-taxids" class="tab-pane" role="tabpanel">
+				<div class="row g-3">
+					<div class="col-md-6">
+						<div class="mb-3">
+							<label class="form-label">{{ $LANG['tax_id_label_1'] ?? 'Tax ID Type 1' }}</label>
+							<input type="text" name="tax_id_label_1" value="{{ $customer['tax_id_label_1'] ?? '' }}" class="form-control" placeholder="{{ $LANG['tax_id_label_placeholder'] ?? 'e.g. EIN, VAT, ABN' }}" />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="mb-3">
+							<label class="form-label">{{ $LANG['tax_id_name_1'] ?? 'Tax ID 1' }}</label>
+							<input type="text" name="tax_id_name_1" value="{{ $customer['tax_id_name_1'] ?? '' }}" class="form-control" placeholder="{{ $LANG['tax_id_name_placeholder'] ?? 'Enter tax ID number' }}" />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="mb-3">
+							<label class="form-label">{{ $LANG['tax_id_label_2'] ?? 'Tax ID Type 2' }}</label>
+							<input type="text" name="tax_id_label_2" value="{{ $customer['tax_id_label_2'] ?? '' }}" class="form-control" placeholder="{{ $LANG['tax_id_label_placeholder'] ?? 'e.g. State Tax ID, ACN' }}" />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="mb-3">
+							<label class="form-label">{{ $LANG['tax_id_name_2'] ?? 'Tax ID 2' }}</label>
+							<input type="text" name="tax_id_name_2" value="{{ $customer['tax_id_name_2'] ?? '' }}" class="form-control" placeholder="{{ $LANG['tax_id_name_placeholder'] ?? 'Enter tax ID number' }}" />
+						</div>
+					</div>
+				</div>
 			</div>
 			<div id="cust-edit-notes" class="tab-pane" role="tabpanel">
 				<div class="mb-3">

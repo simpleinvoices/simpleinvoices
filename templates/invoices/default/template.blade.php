@@ -74,6 +74,8 @@
 	{print_if_not_null label=$customFieldLabels['biller_cf2'] field=$biller['custom_field2'] class1='' class2='' colspan="3"}
 	{print_if_not_null label=$customFieldLabels['biller_cf3'] field=$biller['custom_field3'] class1='' class2='' colspan="3"}
 	{print_if_not_null label=$customFieldLabels['biller_cf4'] field=$biller['custom_field4'] class1='' class2='' colspan="3"}
+	{print_if_not_null label=$biller['tax_id_label_1'] field=$biller['tax_id_name_1'] class1='' class2='' colspan="3"}
+	{print_if_not_null label=$biller['tax_id_label_2'] field=$biller['tax_id_name_2'] class1='' class2='' colspan="3"}
 
 		<tr>
 				<td class="" colspan="4"> </td>
@@ -145,6 +147,8 @@
 	{print_if_not_null label=$customFieldLabels['customer_cf2'] field=$customer['custom_field2'] class1='' class2='' colspan="3"}
 	{print_if_not_null label=$customFieldLabels['customer_cf3'] field=$customer['custom_field3'] class1='' class2='' colspan="3"}
 	{print_if_not_null label=$customFieldLabels['customer_cf4'] field=$customer['custom_field4'] class1='' class2='' colspan="3"}
+	{print_if_not_null label=$customer['tax_id_label_1'] field=$customer['tax_id_name_1'] class1='' class2='' colspan="3"}
+	{print_if_not_null label=$customer['tax_id_label_2'] field=$customer['tax_id_name_2'] class1='' class2='' colspan="3"}
 
 		<tr>
 			<td class="" colspan="4"></td>

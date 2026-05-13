@@ -175,6 +175,18 @@
 				<td  colspan="3">{{ $biller['custom_field4'] ?? '' }}</td>
         </tr>	
 		@endif
+         @if($biller['tax_id_name_1'] != null )
+         <tr>
+                 <td >{{ $biller['tax_id_label_1'] ?? '' }}:</td>
+ 				<td  colspan="3">{{ $biller['tax_id_name_1'] ?? '' }}</td>
+         </tr>	
+ 		@endif
+         @if($biller['tax_id_name_2'] != null )
+         <tr>
+                 <td >{{ $biller['tax_id_label_2'] ?? '' }}:</td>
+ 				<td  colspan="3">{{ $biller['tax_id_name_2'] ?? '' }}</td>
+         </tr>	
+ 		@endif
 		<tr>
 				<td colspan="4"></td>
 		</tr>
@@ -278,6 +290,18 @@
 						<td  colspan="3">{{ $customer['custom_field4'] ?? '' }}</td>
                 </tr>	
 			@endif
+         	@if($customer['tax_id_name_1'] != null )
+                 <tr>
+                         <td >{{ $customer['tax_id_label_1'] ?? '' }}:</td>
+ 						<td  colspan="3">{{ $customer['tax_id_name_1'] ?? '' }}</td>
+                 </tr>	
+ 			@endif
+         	@if($customer['tax_id_name_2'] != null )
+                 <tr>
+                         <td >{{ $customer['tax_id_label_2'] ?? '' }}:</td>
+ 						<td  colspan="3">{{ $customer['tax_id_name_2'] ?? '' }}</td>
+                 </tr>	
+ 			@endif
                 
 				<tr>
 						<td colspan="4"></td>

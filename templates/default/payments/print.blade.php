@@ -61,6 +61,8 @@
 						{{ $biller['city'] ?? '' }}{{ !empty($biller['city']) && (!empty($biller['state']) || !empty($biller['zip_code'])) ? ', ' : '' }}{{ $biller['state'] ?? '' }}{{ !empty($biller['state']) && !empty($biller['zip_code']) ? ' ' : '' }}{{ $biller['zip_code'] ?? '' }}<br />
 					@endif
 					@if(!empty($biller['country'])){{ $biller['country'] ?? '' }}<br />@endif
+					@if(!empty($biller['tax_id_name_1'])){{ $biller['tax_id_label_1'] ?? '' }}: {{ $biller['tax_id_name_1'] ?? '' }}<br />@endif
+					@if(!empty($biller['tax_id_name_2'])){{ $biller['tax_id_label_2'] ?? '' }}: {{ $biller['tax_id_name_2'] ?? '' }}<br />@endif
 					@if(!empty($biller['email'])){{ $biller['email'] ?? '' }}@endif
 				</div>
 			</div>
@@ -75,6 +77,8 @@
 						{{ $customer['city'] ?? '' }}{{ !empty($customer['city']) && (!empty($customer['state']) || !empty($customer['zip_code'])) ? ', ' : '' }}{{ $customer['state'] ?? '' }}{{ !empty($customer['state']) && !empty($customer['zip_code']) ? ' ' : '' }}{{ $customer['zip_code'] ?? '' }}<br />
 					@endif
 					@if(!empty($customer['country'])){{ $customer['country'] ?? '' }}<br />@endif
+					@if(!empty($customer['tax_id_name_1'])){{ $customer['tax_id_label_1'] ?? '' }}: {{ $customer['tax_id_name_1'] ?? '' }}<br />@endif
+					@if(!empty($customer['tax_id_name_2'])){{ $customer['tax_id_label_2'] ?? '' }}: {{ $customer['tax_id_name_2'] ?? '' }}<br />@endif
 					@if(!empty($customer['phone'])){{ $LANG['phone_short'] ?? '' }}: {{ $customer['phone'] ?? '' }}<br />@endif
 					@if(!empty($customer['email'])){{ $customer['email'] ?? '' }}@endif
 				</div>

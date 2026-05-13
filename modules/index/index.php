@@ -83,6 +83,12 @@ if (! $has_invoices) {
 		}
 	}
 
+	$wizard_default_tax_id_label = ($first_run_wizard && !empty($language))
+		? si_locale_to_tax_id_label($language)
+		: null;
+	$bladeView->assign('wizard_default_tax_id_label_1', $wizard_default_tax_id_label['primary'] ?? '');
+	$bladeView->assign('wizard_default_tax_id_label_2', $wizard_default_tax_id_label['secondary'] ?? '');
+
 	$wizard_payment_terms_rows = getPaymentTerms() ?: [];
 	$wizard_default_biller = [];
 	if (! empty($defaults['biller'])) {

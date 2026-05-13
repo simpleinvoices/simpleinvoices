@@ -1004,6 +1004,35 @@ $LANG['report_chart_skip_categories'] = "Categories";//1
 $LANG['report_chart_skip_series'] = "Series";//1
 $LANG['report_chart_skip_density'] = "Chart size (categories × series)";//1
 
+// --- Tax ID fields ---
+$LANG['tax_id_tab_label'] = "Tax IDs";//1
+$LANG['tax_id_label_1'] = "Tax ID Type 1";//1
+$LANG['tax_id_name_1'] = "Tax ID 1";//1
+$LANG['tax_id_label_2'] = "Tax ID Type 2";//1
+$LANG['tax_id_name_2'] = "Tax ID 2";//1
+$LANG['tax_id_label_placeholder'] = "e.g. EIN, VAT, ABN";//1
+$LANG['tax_id_name_placeholder'] = "Enter tax ID number";//1
+$LANG['tax_id_type_au'] = "ABN";//1
+$LANG['tax_id_type_br'] = "CNPJ";//1
+$LANG['tax_id_type_ca'] = "Business Number";//1
+$LANG['tax_id_type_de'] = "USt-IdNr.";//1
+$LANG['tax_id_type_es'] = "NIF";//1
+$LANG['tax_id_type_fr'] = "Numéro TVA";//1
+$LANG['tax_id_type_gb'] = "VAT Registration Number";//1
+$LANG['tax_id_type_it'] = "Partita IVA";//1
+$LANG['tax_id_type_nl'] = "BTW-nummer";//1
+$LANG['tax_id_type_us'] = "EIN";//1
+$LANG['tax_id_type_us_secondary'] = "State Tax ID";//1
+$LANG['tax_id_type_gb_secondary'] = "CRN (Company Registration Number)";//1
+$LANG['tax_id_type_au_secondary'] = "ACN";//1
+$LANG['tax_id_type_ca_secondary'] = "GST/HST Number";//1
+$LANG['tax_id_type_de_secondary'] = "Handelsregisternummer";//1
+$LANG['tax_id_type_fr_secondary'] = "SIRET";//1
+$LANG['tax_id_type_es_secondary'] = "CIF";//1
+$LANG['tax_id_type_it_secondary'] = "Codice Fiscale";//1
+$LANG['tax_id_type_nl_secondary'] = "KVK-nummer";//1
+$LANG['tax_id_type_br_secondary'] = "Inscrição Estadual";//1
+
 // --- First-run wizard strings ---
 
 

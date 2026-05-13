@@ -195,6 +195,11 @@
                                 <input type="hidden" name="custom_field4"          value="">
                                 <input type="hidden" name="enabled"                value="1">
 
+                                <input type="hidden" name="tax_id_label_1"         value="{{ $wizard_default_tax_id_label_1 ?? '' }}">
+                                <input type="hidden" name="tax_id_name_1"          value="">
+                                <input type="hidden" name="tax_id_label_2"         value="{{ $wizard_default_tax_id_label_2 ?? '' }}">
+                                <input type="hidden" name="tax_id_name_2"          value="">
+
                                 <div class="row g-3">
                                     <div class="col-12">
                                         <label class="form-label fw-bold">
@@ -314,6 +319,11 @@
                                 <input type="hidden" name="custom_field3"   value="">
                                 <input type="hidden" name="custom_field4"   value="">
                                 <input type="hidden" name="enabled"         value="1">
+
+                                <input type="hidden" name="tax_id_label_1"  value="{{ $wizard_default_tax_id_label_1 ?? '' }}">
+                                <input type="hidden" name="tax_id_name_1"   value="">
+                                <input type="hidden" name="tax_id_label_2"  value="{{ $wizard_default_tax_id_label_2 ?? '' }}">
+                                <input type="hidden" name="tax_id_name_2"   value="">
 
                                 <div class="row g-3">
                                     <div class="col-12">

@@ -1472,7 +1472,8 @@ function insertBiller() {
 				kofi_username,
 				coinbase_api_key, coinbase_webhook_secret,
 				adyen_api_key, adyen_merchant_account, adyen_hmac_key, adyen_live_prefix, adyen_test_mode,
-				bank_account_name, bank_name, bank_swift_bic, bank_account_number, bank_routing_sort_code
+				bank_account_name, bank_name, bank_swift_bic, bank_account_number, bank_routing_sort_code,
+				tax_id_name_1, tax_id_label_1, tax_id_name_2, tax_id_label_2
 			) VALUES (
 				:domain_id, :name, :street_address, :street_address2, :city,
 				:state, :zip_code, :country, :phone, :mobile_phone,
@@ -1487,7 +1488,8 @@ function insertBiller() {
 				:kofi_username,
 				:coinbase_api_key, :coinbase_webhook_secret,
 				:adyen_api_key, :adyen_merchant_account, :adyen_hmac_key, :adyen_live_prefix, :adyen_test_mode,
-				:bank_account_name, :bank_name, :bank_swift_bic, :bank_account_number, :bank_routing_sort_code
+				:bank_account_name, :bank_name, :bank_swift_bic, :bank_account_number, :bank_routing_sort_code,
+				:tax_id_name_1, :tax_id_label_1, :tax_id_name_2, :tax_id_label_2
 			)";
 	} else {
 		$sql = "INSERT INTO ".TB_PREFIX."biller (
@@ -1504,7 +1506,8 @@ function insertBiller() {
 				kofi_username,
 				coinbase_api_key, coinbase_webhook_secret,
 				adyen_api_key, adyen_merchant_account, adyen_hmac_key, adyen_live_prefix, adyen_test_mode,
-				bank_account_name, bank_name, bank_swift_bic, bank_account_number, bank_routing_sort_code
+				bank_account_name, bank_name, bank_swift_bic, bank_account_number, bank_routing_sort_code,
+				tax_id_name_1, tax_id_label_1, tax_id_name_2, tax_id_label_2
 			) VALUES (
 				NULL, :domain_id, :name, :street_address, :street_address2, :city,
 				:state, :zip_code, :country, :phone, :mobile_phone,
@@ -1519,7 +1522,8 @@ function insertBiller() {
 				:kofi_username,
 				:coinbase_api_key, :coinbase_webhook_secret,
 				:adyen_api_key, :adyen_merchant_account, :adyen_hmac_key, :adyen_live_prefix, :adyen_test_mode,
-				:bank_account_name, :bank_name, :bank_swift_bic, :bank_account_number, :bank_routing_sort_code
+				:bank_account_name, :bank_name, :bank_swift_bic, :bank_account_number, :bank_routing_sort_code,
+				:tax_id_name_1, :tax_id_label_1, :tax_id_name_2, :tax_id_label_2
 			)";
 	}
 
@@ -1571,6 +1575,10 @@ function insertBiller() {
 		':bank_swift_bic', $_POST['bank_swift_bic'] ?? '',
 		':bank_account_number', $_POST['bank_account_number'] ?? '',
 		':bank_routing_sort_code', $_POST['bank_routing_sort_code'] ?? '',
+		':tax_id_name_1', $_POST['tax_id_name_1'] ?? '',
+		':tax_id_label_1', $_POST['tax_id_label_1'] ?? '',
+		':tax_id_name_2', $_POST['tax_id_name_2'] ?? '',
+		':tax_id_label_2', $_POST['tax_id_label_2'] ?? '',
 		':domain_id', $domain_id
 		);
 	/*
@@ -1639,7 +1647,11 @@ function updateBiller() {
 				bank_name = :bank_name,
 				bank_swift_bic = :bank_swift_bic,
 				bank_account_number = :bank_account_number,
-				bank_routing_sort_code = :bank_routing_sort_code
+				bank_routing_sort_code = :bank_routing_sort_code,
+				tax_id_name_1 = :tax_id_name_1,
+				tax_id_label_1 = :tax_id_label_1,
+				tax_id_name_2 = :tax_id_name_2,
+				tax_id_label_2 = :tax_id_label_2
 			WHERE
 				id = :id
 			AND domain_id = :domain_id";
@@ -1692,6 +1704,10 @@ function updateBiller() {
 		':bank_swift_bic', $_POST['bank_swift_bic'] ?? '',
 		':bank_account_number', $_POST['bank_account_number'] ?? '',
 		':bank_routing_sort_code', $_POST['bank_routing_sort_code'] ?? '',
+		':tax_id_name_1', $_POST['tax_id_name_1'] ?? '',
+		':tax_id_label_1', $_POST['tax_id_label_1'] ?? '',
+		':tax_id_name_2', $_POST['tax_id_name_2'] ?? '',
+		':tax_id_label_2', $_POST['tax_id_label_2'] ?? '',
 		':id', $_GET['id']
 		);
 }
@@ -1803,6 +1819,10 @@ function updateCustomer() {
 				custom_field2 = :custom_field2,
 				custom_field3 = :custom_field3,
 				custom_field4 = :custom_field4,
+				tax_id_name_1 = :tax_id_name_1,
+				tax_id_label_1 = :tax_id_label_1,
+				tax_id_name_2 = :tax_id_name_2,
+				tax_id_label_2 = :tax_id_label_2,
 				enabled = :enabled
 			WHERE
 				id = :id
@@ -1828,6 +1848,10 @@ function updateCustomer() {
 			':custom_field2', $_POST['custom_field2'],
 			':custom_field3', $_POST['custom_field3'],
 			':custom_field4', $_POST['custom_field4'],
+			':tax_id_name_1', $_POST['tax_id_name_1'] ?? '',
+			':tax_id_label_1', $_POST['tax_id_label_1'] ?? '',
+			':tax_id_name_2', $_POST['tax_id_name_2'] ?? '',
+			':tax_id_label_2', $_POST['tax_id_label_2'] ?? '',
 			':enabled', $_POST['enabled'],
 			':id', $_GET['id']
 		);
@@ -1848,7 +1872,9 @@ function insertCustomer() {
 				city, state, zip_code, country, phone, mobile_phone,
 				fax, email, notes,
 				custom_field1, custom_field2,
-				custom_field3, custom_field4, enabled
+				custom_field3, custom_field4,
+				tax_id_name_1, tax_id_label_1, tax_id_name_2, tax_id_label_2,
+				enabled
 			)
 			VALUES
 			(
@@ -1856,7 +1882,9 @@ function insertCustomer() {
 				:city, :state, :zip_code, :country, :phone, :mobile_phone,
 				:fax, :email, :notes,
 				:custom_field1, :custom_field2,
-				:custom_field3, :custom_field4, :enabled
+				:custom_field3, :custom_field4,
+				:tax_id_name_1, :tax_id_label_1, :tax_id_name_2, :tax_id_label_2,
+				:enabled
 			)";
 
 	return dbQuery($sql,
@@ -1878,6 +1906,10 @@ function insertCustomer() {
 		':custom_field2', $_POST['custom_field2']  ?? '',
 		':custom_field3', $_POST['custom_field3']  ?? '',
 		':custom_field4', $_POST['custom_field4']  ?? '',
+		':tax_id_name_1', $_POST['tax_id_name_1']  ?? '',
+		':tax_id_label_1', $_POST['tax_id_label_1'] ?? '',
+		':tax_id_name_2', $_POST['tax_id_name_2']  ?? '',
+		':tax_id_label_2', $_POST['tax_id_label_2'] ?? '',
 		':enabled',       $_POST['enabled']        ?? '',
 		':domain_id',     $domain_id
 		);
@@ -3848,7 +3880,62 @@ function si_patch379_backfill_preference_currency_id(): void {
 				':pid', (int) $row['pref_id'],
 				':did', $domainId);
 		}
-	}
+    }
+}
+
+function si_patch381_tax_id_columns(): void {
+    $prefix = TB_PREFIX;
+
+    $biller = "{$prefix}biller";
+    $customers = "{$prefix}customers";
+
+    // Convert oversized varchar(768) gateway key/secret columns to TEXT
+    // to stay under MySQL's 65535-byte row size limit.
+    $text_columns = [
+        'stripe_secret_key',
+        'stripe_webhook_secret',
+        'paypal_client_secret',
+        'mollie_api_key',
+        'authorizenet_login_id',
+        'authorizenet_transaction_key',
+        'authorizenet_signature_key',
+        'eway_api_key',
+        'eway_api_password',
+        'coinbase_api_key',
+        'coinbase_webhook_secret',
+        'adyen_api_key',
+        'adyen_hmac_key',
+    ];
+
+    foreach ($text_columns as $col) {
+        dbQuery("ALTER TABLE `{$biller}` MODIFY COLUMN `{$col}` TEXT DEFAULT NULL");
+    }
+
+    if (!checkFieldExists($biller, 'tax_id_name_1')) {
+        dbQuery("ALTER TABLE `{$biller}` ADD COLUMN `tax_id_name_1` varchar(255) DEFAULT NULL AFTER `bank_routing_sort_code`");
+    }
+    if (!checkFieldExists($biller, 'tax_id_label_1')) {
+        dbQuery("ALTER TABLE `{$biller}` ADD COLUMN `tax_id_label_1` varchar(255) DEFAULT NULL AFTER `tax_id_name_1`");
+    }
+    if (!checkFieldExists($biller, 'tax_id_name_2')) {
+        dbQuery("ALTER TABLE `{$biller}` ADD COLUMN `tax_id_name_2` varchar(255) DEFAULT NULL AFTER `tax_id_label_1`");
+    }
+    if (!checkFieldExists($biller, 'tax_id_label_2')) {
+        dbQuery("ALTER TABLE `{$biller}` ADD COLUMN `tax_id_label_2` varchar(255) DEFAULT NULL AFTER `tax_id_name_2`");
+    }
+
+    if (!checkFieldExists($customers, 'tax_id_name_1')) {
+        dbQuery("ALTER TABLE `{$customers}` ADD COLUMN `tax_id_name_1` varchar(255) DEFAULT NULL AFTER `custom_field4`");
+    }
+    if (!checkFieldExists($customers, 'tax_id_label_1')) {
+        dbQuery("ALTER TABLE `{$customers}` ADD COLUMN `tax_id_label_1` varchar(255) DEFAULT NULL AFTER `tax_id_name_1`");
+    }
+    if (!checkFieldExists($customers, 'tax_id_name_2')) {
+        dbQuery("ALTER TABLE `{$customers}` ADD COLUMN `tax_id_name_2` varchar(255) DEFAULT NULL AFTER `tax_id_label_1`");
+    }
+    if (!checkFieldExists($customers, 'tax_id_label_2')) {
+        dbQuery("ALTER TABLE `{$customers}` ADD COLUMN `tax_id_label_2` varchar(255) DEFAULT NULL AFTER `tax_id_name_2`");
+    }
 }
 
 /**
@@ -3973,12 +4060,14 @@ function run_sql_patch($id, $patch) {
 			si_patch379_payment_currency_denorm_columns();
 		} elseif ((int) $id === 379) {
 			si_patch379_backfill_preference_currency_id();
-		} elseif ((int) $id === 360) {
-			require_once __DIR__ . '/global_app_settings.php';
-			si_patch342_global_config();
-		} else {
-			dbQuery($patch['patch']);
-		}
+        } elseif ((int) $id === 360) {
+            require_once __DIR__ . '/global_app_settings.php';
+            si_patch342_global_config();
+        } elseif ((int) $id === 381) {
+            si_patch381_tax_id_columns();
+        } else {
+            dbQuery($patch['patch']);
+        }
 
 		$patch_row['id']		= $escaped_id;
 		$patch_row['name']		= $patch_name;
