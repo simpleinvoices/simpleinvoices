@@ -1,0 +1,326 @@
+{
+    "si_biller": [
+        {
+            "name": "Vanderlay Industries",
+            "email": "art@vanderlayindustries.com",
+            "phone": "212-555-0173",
+            "street_address": "129 West 81st Street, Apt 5A",
+            "city": "New York",
+            "state": "NY",
+            "zip_code": "10024",
+            "country": "United States",
+            "tax_id_label_1": "EIN",
+            "tax_id_name_1": "12-3456789",
+            "tax_id_label_2": "VAT",
+            "tax_id_name_2": ""
+        },
+        {
+            "name": "Kruger Industrial Smoothing",
+            "email": "george@krugersmoothing.com",
+            "phone": "212-555-8901",
+            "street_address": "200 Park Avenue, Suite 1400",
+            "city": "New York",
+            "state": "NY",
+            "zip_code": "10166",
+            "country": "United States",
+            "tax_id_label_1": "EIN",
+            "tax_id_name_1": "98-7654321",
+            "tax_id_label_2": "VAT",
+            "tax_id_name_2": ""
+        },
+        {
+            "name": "Puddy's Auto Repair",
+            "email": "david.puddy@puttysautorepair.com",
+            "phone": "212-555-6789",
+            "street_address": "453 Broadway",
+            "city": "New York",
+            "state": "NY",
+            "zip_code": "10013",
+            "country": "United States",
+            "tax_id_label_1": "EIN",
+            "tax_id_name_1": "55-1234567",
+            "tax_id_label_2": "VAT",
+            "tax_id_name_2": ""
+        },
+        {
+            "name": "J. Peterman Catalog",
+            "email": "elaine@jpeterman.com",
+            "phone": "212-555-3421",
+            "street_address": "570 Lexington Avenue",
+            "city": "New York",
+            "state": "NY",
+            "zip_code": "10022",
+            "country": "United States",
+            "tax_id_label_1": "EIN",
+            "tax_id_name_1": "77-8889991",
+            "tax_id_label_2": "VAT",
+            "tax_id_name_2": ""
+        },
+        {
+            "name": "Kramerica Industries",
+            "email": "cosmo@kramerica.com",
+            "phone": "212-555-5555",
+            "street_address": "129 West 81st Street, Apt 5B",
+            "city": "New York",
+            "state": "NY",
+            "zip_code": "10024",
+            "country": "United States",
+            "tax_id_label_1": "EIN",
+            "tax_id_name_1": "44-5551234",
+            "tax_id_label_2": "VAT",
+            "tax_id_name_2": ""
+        },
+        {
+            "name": "Kenny Rogers Roasters",
+            "email": "info@kennysroasters.com",
+            "phone": "212-555-2233",
+            "street_address": "301 W 57th Street",
+            "city": "New York",
+            "state": "NY",
+            "zip_code": "10019",
+            "country": "United States",
+            "tax_id_label_1": "EIN",
+            "tax_id_name_1": "33-9876543",
+            "tax_id_label_2": "VAT",
+            "tax_id_name_2": ""
+        },
+        {
+            "name": "Somni Fabrics Ltd",
+            "email": "bob.sacamano@somnifabrics.com",
+            "phone": "020-7946-0123",
+            "street_address": "14 Commercial Road",
+            "city": "London",
+            "state": "",
+            "zip_code": "E1 6LP",
+            "country": "United Kingdom",
+            "tax_id_label_1": "VAT",
+            "tax_id_name_1": "GB123456789",
+            "tax_id_label_2": "UTR",
+            "tax_id_name_2": "1234567890"
+        },
+        {
+            "name": "Reggie's Diner",
+            "email": "reggie@reggiesnyc.com",
+            "phone": "212-555-9988",
+            "street_address": "112 Greene Street",
+            "city": "New York",
+            "state": "NY",
+            "zip_code": "10012",
+            "country": "United States",
+            "tax_id_label_1": "EIN",
+            "tax_id_name_1": "22-3344556",
+            "tax_id_label_2": "VAT",
+            "tax_id_name_2": ""
+        },
+        {
+            "name": "Newman's Delivery Service",
+            "email": "newman@newmansdelivery.com",
+            "phone": "212-555-6666",
+            "street_address": "321 W 33rd Street",
+            "city": "New York",
+            "state": "NY",
+            "zip_code": "10001",
+            "country": "United States",
+            "tax_id_label_1": "EIN",
+            "tax_id_name_1": "11-2233445",
+            "tax_id_label_2": "VAT",
+            "tax_id_name_2": ""
+        }
+    ],
+    "si_customers": [
+        {
+            "name": "Monk's Cafe",
+            "attention": "Larry the Manager",
+            "department": "",
+            "email": "larry@monkscafe.com",
+            "phone": "212-555-4321",
+            "street_address": "2880 Broadway",
+            "city": "New York",
+            "tax_id_label_1": "EIN",
+            "tax_id_name_1": "99-8877665",
+            "tax_id_label_2": "VAT",
+            "tax_id_name_2": ""
+        },
+        {
+            "name": "The Soup Kitchen",
+            "attention": "Yev Kassem",
+            "department": "",
+            "email": "yev@thesoupkitchen.com",
+            "phone": "212-555-7890",
+            "street_address": "259 W 55th Street",
+            "city": "New York",
+            "tax_id_label_1": "EIN",
+            "tax_id_name_1": "88-7766554",
+            "tax_id_label_2": "VAT",
+            "tax_id_name_2": ""
+        },
+        {
+            "name": "Mendy's Restaurant",
+            "attention": "Kenny Bania",
+            "department": "",
+            "email": "kenny@mendys.com",
+            "phone": "212-555-5678",
+            "street_address": "247 W 72nd Street",
+            "city": "New York",
+            "tax_id_label_1": "EIN",
+            "tax_id_name_1": "77-6655443",
+            "tax_id_label_2": "VAT",
+            "tax_id_name_2": ""
+        },
+        {
+            "name": "Jackie Chiles Esq.",
+            "attention": "Jackie Chiles",
+            "department": "Litigation",
+            "email": "jackie@jackiechileslaw.com",
+            "phone": "212-555-1100",
+            "street_address": "440 Park Avenue, Suite 3100",
+            "city": "New York",
+            "tax_id_label_1": "EIN",
+            "tax_id_name_1": "66-5544332",
+            "tax_id_label_2": "VAT",
+            "tax_id_name_2": ""
+        },
+        {
+            "name": "Romano Park Florists",
+            "attention": "Bob Sacamano",
+            "department": "",
+            "email": "bob@romanoparkflorists.com",
+            "phone": "212-555-3344",
+            "street_address": "85 Greenwich Avenue",
+            "city": "New York",
+            "tax_id_label_1": "EIN",
+            "tax_id_name_1": "55-4433221",
+            "tax_id_label_2": "VAT",
+            "tax_id_name_2": ""
+        },
+        {
+            "name": "Festivus Celebrations Ltd",
+            "attention": "Frank Costanza",
+            "department": "Airs and Grievances",
+            "email": "frank@festivuscelebrations.com",
+            "phone": "718-555-2200",
+            "street_address": "1344 Queens Boulevard",
+            "city": "Queens",
+            "tax_id_label_1": "EIN",
+            "tax_id_name_1": "44-3322110",
+            "tax_id_label_2": "VAT",
+            "tax_id_name_2": ""
+        },
+        {
+            "name": "Pitt Enterprises",
+            "attention": "Mr. Pitt",
+            "department": "",
+            "email": "justin@pittenterprises.com",
+            "phone": "212-555-0099",
+            "street_address": "740 Park Avenue, Penthouse",
+            "city": "New York",
+            "tax_id_label_1": "EIN",
+            "tax_id_name_1": "33-2211009",
+            "tax_id_label_2": "VAT",
+            "tax_id_name_2": ""
+        },
+        {
+            "name": "US Postal Service - Manhattan",
+            "attention": "Newman",
+            "department": "Special Deliveries",
+            "email": "newman@usps-manhattan.com",
+            "phone": "212-555-6666",
+            "street_address": "321 W 33rd Street",
+            "city": "New York",
+            "tax_id_label_1": "EIN",
+            "tax_id_name_1": "22-1100998",
+            "tax_id_label_2": "VAT",
+            "tax_id_name_2": ""
+        },
+        {
+            "name": "New York Yankees",
+            "attention": "George Steinbrenner",
+            "department": "Baseball Operations",
+            "email": "george.steinbrenner@yankees.com",
+            "phone": "718-555-6100",
+            "street_address": "1 East 161st Street",
+            "city": "Bronx",
+            "tax_id_label_1": "EIN",
+            "tax_id_name_1": "11-0099887",
+            "tax_id_label_2": "VAT",
+            "tax_id_name_2": ""
+        }
+    ],
+    "si_products": [
+        {
+            "description": "Architectural consultation",
+            "unit_price": "150",
+            "default_tax_id": "1"
+        },
+        {
+            "description": "Import/export brokerage",
+            "unit_price": "140",
+            "default_tax_id": "1"
+        },
+        {
+            "description": "Industrial smoothing service",
+            "unit_price": "125",
+            "default_tax_id": "1"
+        },
+        {
+            "description": "Latex fabrication - sales meeting",
+            "unit_price": "29.99",
+            "default_tax_id": "1"
+        },
+        {
+            "description": "Coffee - per cup",
+            "unit_price": "9.99",
+            "default_tax_id": "1"
+        },
+        {
+            "description": "Hourly consultation rate",
+            "unit_price": "175",
+            "default_tax_id": "1"
+        },
+        {
+            "description": "Marble rye bread (loaf)",
+            "unit_price": "4.50",
+            "default_tax_id": "1"
+        },
+        {
+            "description": "Big Salad",
+            "unit_price": "14.95",
+            "default_tax_id": "1"
+        },
+        {
+            "description": "Calzone delivery",
+            "unit_price": "8.50",
+            "default_tax_id": "1"
+        },
+        {
+            "description": "Chrome plating service",
+            "unit_price": "250",
+            "default_tax_id": "1"
+        },
+        {
+            "description": "Pretzel - bag of",
+            "unit_price": "3.75",
+            "default_tax_id": "1"
+        },
+        {
+            "description": "Apt staging and interior design",
+            "unit_price": "350",
+            "default_tax_id": "1"
+        },
+        {
+            "description": "Marine biology consultation",
+            "unit_price": "75",
+            "default_tax_id": "1"
+        },
+        {
+            "description": "The sea was angry that day my friends - lecture fee",
+            "unit_price": "200",
+            "default_tax_id": "1"
+        },
+        {
+            "description": "Golf ball retrieval from the sea - per ball",
+            "unit_price": "5",
+            "default_tax_id": "1"
+        }
+    ]
+}
