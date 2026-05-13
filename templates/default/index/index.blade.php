@@ -195,8 +195,6 @@
                                 <input type="hidden" name="custom_field4"          value="">
                                 <input type="hidden" name="enabled"                value="1">
 
-                                <input type="hidden" name="tax_id_label_1"         value="{{ $wizard_default_tax_id_label_1 ?? '' }}">
-                                <input type="hidden" name="tax_id_name_1"          value="">
                                 <input type="hidden" name="tax_id_label_2"         value="{{ $wizard_default_tax_id_label_2 ?? '' }}">
                                 <input type="hidden" name="tax_id_name_2"          value="">
 
@@ -234,6 +232,17 @@
                                     <div class="col-12">
                                         <label class="form-label">{{ $LANG['country'] ?? '' }}</label>
                                         <input type="text" name="country" class="form-control" placeholder="{{ $wizard_sample_biller['country'] ?? '' }}">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">{{ $LANG['tax_id_label_1'] ?? 'Tax ID Type 1' }}</label>
+                                        <input type="text" name="tax_id_label_1" class="form-control" value="{{ $wizard_default_tax_id_label_1 ?? '' }}" placeholder="{{ $LANG['tax_id_label_placeholder'] ?? 'e.g. EIN, VAT, ABN' }}">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">{{ $LANG['tax_id_name_1'] ?? 'Tax ID 1' }}</label>
+                                        <input type="text" name="tax_id_name_1" class="form-control" placeholder="{{ $LANG['tax_id_name_placeholder'] ?? 'Enter tax ID number' }}">
+                                    </div>
+                                    <div class="col-12">
+                                        <small class="text-secondary">{{ $LANG['wizard_tax_id_note'] ?? 'You can add more tax details later from the biller / customer section.' }}</small>
                                     </div>
                                 </div>
                                 <div class="mt-4 d-flex justify-content-between align-items-center">
@@ -320,8 +329,6 @@
                                 <input type="hidden" name="custom_field4"   value="">
                                 <input type="hidden" name="enabled"         value="1">
 
-                                <input type="hidden" name="tax_id_label_1"  value="{{ $wizard_default_tax_id_label_1 ?? '' }}">
-                                <input type="hidden" name="tax_id_name_1"   value="">
                                 <input type="hidden" name="tax_id_label_2"  value="{{ $wizard_default_tax_id_label_2 ?? '' }}">
                                 <input type="hidden" name="tax_id_name_2"   value="">
 
@@ -355,6 +362,17 @@
                                     <div class="col-md-8">
                                         <label class="form-label">{{ $LANG['city'] ?? '' }}</label>
                                         <input type="text" name="city" class="form-control" placeholder="{{ $wizard_sample_customer['city'] ?? '' }}">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">{{ $LANG['tax_id_label_1'] ?? 'Tax ID Type 1' }}</label>
+                                        <input type="text" name="tax_id_label_1" class="form-control" value="{{ $wizard_default_tax_id_label_1 ?? '' }}" placeholder="{{ $LANG['tax_id_label_placeholder'] ?? 'e.g. EIN, VAT, ABN' }}">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">{{ $LANG['tax_id_name_1'] ?? 'Tax ID 1' }}</label>
+                                        <input type="text" name="tax_id_name_1" class="form-control" placeholder="{{ $LANG['tax_id_name_placeholder'] ?? 'Enter tax ID number' }}">
+                                    </div>
+                                    <div class="col-12">
+                                        <small class="text-secondary">{{ $LANG['wizard_tax_id_note'] ?? 'You can add more tax details later from the biller / customer section.' }}</small>
                                     </div>
                                 </div>
                                 <div class="mt-4 d-flex justify-content-between align-items-center">
@@ -811,6 +829,8 @@
             fill(form, 'state',          s.state);
             fill(form, 'zip_code',       s.zip_code);
             fill(form, 'country',        s.country);
+            fill(form, 'tax_id_label_1', s.tax_id_label_1);
+            fill(form, 'tax_id_name_1',  s.tax_id_name_1);
         } else if (type === 'customer') {
             fill(form, 'name',           s.name);
             fill(form, 'attention',      s.attention);
@@ -819,6 +839,8 @@
             fill(form, 'phone',          s.phone);
             fill(form, 'street_address', s.street_address);
             fill(form, 'city',           s.city);
+            fill(form, 'tax_id_label_1', s.tax_id_label_1);
+            fill(form, 'tax_id_name_1',  s.tax_id_name_1);
         } else if (type === 'product') {
             fill(form, 'description',    s.description);
             fill(form, 'unit_price',     s.unit_price);

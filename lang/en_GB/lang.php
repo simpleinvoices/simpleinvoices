@@ -879,6 +879,7 @@ $LANG['wizard_use_sample_biller'] = "Use sample biller data";//1
 $LANG['wizard_use_sample_customer'] = "Use sample customer data";//1
 $LANG['wizard_use_sample_product'] = "Use sample product data";//1
 $LANG['wizard_try_another_sample'] = "Try another sample";//1
+$LANG['wizard_tax_id_note'] = "You can add more tax details later from the biller and customer sections.";//1
 $LANG['wizard_your_details'] = "Your Details";//1
 $LANG['wizard_invoice_preferences'] = "Getting paid";//1
 $LANG['wizard_invoice_prefs_heading'] = "Currency sign";//1
