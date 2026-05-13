@@ -1007,12 +1007,14 @@ $LANG['report_chart_skip_density'] = "Chart size (categories × series)";//1
 
 // --- Tax ID fields ---
 $LANG['tax_id_tab_label'] = "Tax IDs";//1
-$LANG['tax_id_label_1'] = "Tax ID Type 1";//1
-$LANG['tax_id_name_1'] = "Tax ID 1";//1
-$LANG['tax_id_label_2'] = "Tax ID Type 2";//1
-$LANG['tax_id_name_2'] = "Tax ID 2";//1
+$LANG['tax_id_label_1'] = "Tax ID Type";//1
+$LANG['tax_id_name_1'] = "Tax ID Number";//1
+$LANG['tax_id_label_2'] = "Additional ID Type";//1
+$LANG['tax_id_name_2'] = "Additional ID Number";//1
 $LANG['tax_id_label_placeholder'] = "e.g. EIN, VAT, ABN";//1
 $LANG['tax_id_name_placeholder'] = "Enter tax ID number";//1
+$LANG['tax_id_label_2_placeholder'] = "e.g. State Tax ID (USA), SIRET (France), CRN (UK), CIF (Spain), KVK (Netherlands)";//1
+$LANG['tax_id_name_2_placeholder'] = "Enter additional ID number";//1
 $LANG['tax_id_type_au'] = "ABN";//1
 $LANG['tax_id_type_br'] = "CNPJ";//1
 $LANG['tax_id_type_ca'] = "Business Number";//1

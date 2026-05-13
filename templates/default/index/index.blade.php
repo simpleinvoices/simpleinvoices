@@ -234,11 +234,11 @@
                                         <input type="text" name="country" class="form-control" placeholder="{{ $wizard_sample_biller['country'] ?? '' }}">
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">{{ $LANG['tax_id_label_1'] ?? 'Tax ID Type 1' }}</label>
+                                        <label class="form-label">{{ $LANG['tax_id_label_1'] ?? 'Tax ID Type' }}</label>
                                         <input type="text" name="tax_id_label_1" class="form-control" placeholder="{{ $LANG['tax_id_label_placeholder'] ?? 'e.g. EIN, VAT, ABN' }}">
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">{{ $LANG['tax_id_name_1'] ?? 'Tax ID 1' }}</label>
+                                        <label class="form-label">{{ $LANG['tax_id_name_1'] ?? 'Tax ID Number' }}</label>
                                         <input type="text" name="tax_id_name_1" class="form-control" placeholder="{{ $LANG['tax_id_name_placeholder'] ?? 'Enter tax ID number' }}">
                                     </div>
                                     <div class="col-12">
@@ -364,11 +364,11 @@
                                         <input type="text" name="city" class="form-control" placeholder="{{ $wizard_sample_customer['city'] ?? '' }}">
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">{{ $LANG['tax_id_label_1'] ?? 'Tax ID Type 1' }}</label>
+                                        <label class="form-label">{{ $LANG['tax_id_label_1'] ?? 'Tax ID Type' }}</label>
                                         <input type="text" name="tax_id_label_1" class="form-control" placeholder="{{ $LANG['tax_id_label_placeholder'] ?? 'e.g. EIN, VAT, ABN' }}">
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">{{ $LANG['tax_id_name_1'] ?? 'Tax ID 1' }}</label>
+                                        <label class="form-label">{{ $LANG['tax_id_name_1'] ?? 'Tax ID Number' }}</label>
                                         <input type="text" name="tax_id_name_1" class="form-control" placeholder="{{ $LANG['tax_id_name_placeholder'] ?? 'Enter tax ID number' }}">
                                     </div>
                                     <div class="col-12">

@@ -80,10 +80,10 @@
 			</div>
 			<div id="cust-view-taxids" class="tab-pane" role="tabpanel">
 				<table class="table table-vcenter table-wrap">
-					<tr><th>{{ $LANG['tax_id_label_1'] ?? 'Tax ID Type 1' }}</th><td>{{ $customer['tax_id_label_1'] ?? '' }}</td></tr>
-					<tr><th>{{ $LANG['tax_id_name_1'] ?? 'Tax ID 1' }}</th><td>{{ $customer['tax_id_name_1'] ?? '' }}</td></tr>
-					<tr><th>{{ $LANG['tax_id_label_2'] ?? 'Tax ID Type 2' }}</th><td>{{ $customer['tax_id_label_2'] ?? '' }}</td></tr>
-					<tr><th>{{ $LANG['tax_id_name_2'] ?? 'Tax ID 2' }}</th><td>{{ $customer['tax_id_name_2'] ?? '' }}</td></tr>
+					<tr><th>{{ $LANG['tax_id_label_1'] ?? 'Tax ID Type' }}</th><td>{{ $customer['tax_id_label_1'] ?? '' }}</td></tr>
+					<tr><th>{{ $LANG['tax_id_name_1'] ?? 'Tax ID Number' }}</th><td>{{ $customer['tax_id_name_1'] ?? '' }}</td></tr>
+					<tr><th>{{ $LANG['tax_id_label_2'] ?? 'Additional ID Type' }}</th><td>{{ $customer['tax_id_label_2'] ?? '' }}</td></tr>
+					<tr><th>{{ $LANG['tax_id_name_2'] ?? 'Additional ID Number' }}</th><td>{{ $customer['tax_id_name_2'] ?? '' }}</td></tr>
 				</table>
 			</div>
 			<div id="cust-view-notes" class="tab-pane" role="tabpanel">
@@ -333,26 +333,26 @@
 				<div class="row g-3">
 					<div class="col-md-6">
 						<div class="mb-3">
-							<label class="form-label">{{ $LANG['tax_id_label_1'] ?? 'Tax ID Type 1' }}</label>
+							<label class="form-label">{{ $LANG['tax_id_label_1'] ?? 'Tax ID Type' }}</label>
 							<input type="text" name="tax_id_label_1" value="{{ $customer['tax_id_label_1'] ?? '' }}" class="form-control" placeholder="{{ $LANG['tax_id_label_placeholder'] ?? 'e.g. EIN, VAT, ABN' }}" />
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="mb-3">
-							<label class="form-label">{{ $LANG['tax_id_name_1'] ?? 'Tax ID 1' }}</label>
+							<label class="form-label">{{ $LANG['tax_id_name_1'] ?? 'Tax ID Number' }}</label>
 							<input type="text" name="tax_id_name_1" value="{{ $customer['tax_id_name_1'] ?? '' }}" class="form-control" placeholder="{{ $LANG['tax_id_name_placeholder'] ?? 'Enter tax ID number' }}" />
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="mb-3">
-							<label class="form-label">{{ $LANG['tax_id_label_2'] ?? 'Tax ID Type 2' }}</label>
-							<input type="text" name="tax_id_label_2" value="{{ $customer['tax_id_label_2'] ?? '' }}" class="form-control" placeholder="{{ $LANG['tax_id_label_placeholder'] ?? 'e.g. State Tax ID, ACN' }}" />
+							<label class="form-label">{{ $LANG['tax_id_label_2'] ?? 'Additional ID Type' }}</label>
+							<input type="text" name="tax_id_label_2" value="{{ $customer['tax_id_label_2'] ?? '' }}" class="form-control" placeholder="{{ $LANG['tax_id_label_2_placeholder'] ?? 'e.g. State Tax ID (USA), SIRET (France), CRN (UK), CIF (Spain), KVK (Netherlands)' }}" />
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="mb-3">
-							<label class="form-label">{{ $LANG['tax_id_name_2'] ?? 'Tax ID 2' }}</label>
-							<input type="text" name="tax_id_name_2" value="{{ $customer['tax_id_name_2'] ?? '' }}" class="form-control" placeholder="{{ $LANG['tax_id_name_placeholder'] ?? 'Enter tax ID number' }}" />
+							<label class="form-label">{{ $LANG['tax_id_name_2'] ?? 'Additional ID Number' }}</label>
+							<input type="text" name="tax_id_name_2" value="{{ $customer['tax_id_name_2'] ?? '' }}" class="form-control" placeholder="{{ $LANG['tax_id_name_2_placeholder'] ?? 'Enter additional ID number' }}" />
 						</div>
 					</div>
 				</div>
