@@ -33,8 +33,10 @@
 					</tr>
 					<tr><th>{{ $LANG['status'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_status" title="{{ $LANG['status'] ?? '' }}"><i class="ti ti-help"></i></a></th><td>{{ $preference['status_wording'] }}</td></tr>
 					<tr><th>{{ $LANG['invoice_numbering_group'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_numbering_group" title="{{ $LANG['invoice_numbering_group'] ?? '' }}"><i class="ti ti-help"></i></a></th><td>{{ $index_group['pref_description'] ?? '' }}</td></tr>
-					<tr><th>{{ $LANG['next_invoice_number'] ?? 'Next invoice number' }}</th><td><strong>{{ $next_invoice_number }}</strong></td></tr>
-					<tr><th>{{ $LANG['enabled'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_enabled" title="{{ $LANG['enabled'] ?? '' }}"><i class="ti ti-help"></i></a></th><td>{{ $preference['enabled'] }}</td></tr>
+				<tr><th>{{ $LANG['next_invoice_number'] ?? 'Next invoice number' }}</th><td><strong>{{ $next_invoice_number }}</strong></td></tr>
+				<tr><th>{{ $LANG['invoice_id_prefix'] ?? 'Invoice ID Prefix' }}</th><td>{{ $preference['pref_invoice_id_prefix'] ?? '' }}</td></tr>
+				<tr><th>{{ $LANG['invoice_id_format'] ?? 'Invoice Number Format' }}</th><td>{{ $preference['pref_invoice_id_format'] ?? '' }}</td></tr>
+				<tr><th>{{ $LANG['enabled'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_enabled" title="{{ $LANG['enabled'] ?? '' }}"><i class="ti ti-help"></i></a></th><td>{{ $preference['enabled'] }}</td></tr>
 					<tr><th>{{ $LANG['language'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_language" title="{{ $LANG['language'] ?? '' }}"><i class="ti ti-help"></i></a></th><td>{{ $preference['language'] }}</td></tr>
 					<tr><th>{{ $LANG['locale'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_locale" title="{{ $LANG['locale'] ?? '' }}"><i class="ti ti-help"></i></a></th><td>{{ $localelist[$preference['locale'] ?? ''] ?? $preference['locale'] ?? '' }}</td></tr>
 				</table>
@@ -210,11 +212,21 @@
 						</div>
 						<div class="form-text">Next number will be set to this value. Must be greater than <strong id="starting_number_max_ref">{{ $max_existing_index_id ?? 0 }}</strong> (highest existing invoice number in this group).</div>
 					</div>
-					<button type="button" class="btn btn-outline-secondary btn-sm mt-2" id="show_starting_input">
-						<i class="ti ti-pencil me-1"></i>Change starting number
-					</button>
-				</div>
-				<div class="mb-3">
+				<button type="button" class="btn btn-outline-secondary btn-sm mt-2" id="show_starting_input">
+					<i class="ti ti-pencil me-1"></i>Change starting number
+				</button>
+			</div>
+			<div class="mb-3">
+				<label class="form-label">{{ $LANG['invoice_id_prefix'] ?? 'Invoice ID Prefix' }}</label>
+				<input type="text" name="pref_invoice_id_prefix" value="{{ $preference['pref_invoice_id_prefix'] ?? '' }}" class="form-control" placeholder="e.g. DGN-" />
+				<div class="form-text">Optional prefix prepended to invoice number (e.g. DGN- → DGN-000345).</div>
+			</div>
+			<div class="mb-3">
+				<label class="form-label">{{ $LANG['invoice_id_format'] ?? 'Invoice Number Format' }}</label>
+				<input type="text" name="pref_invoice_id_format" value="{{ $preference['pref_invoice_id_format'] ?? '' }}" class="form-control" placeholder="e.g. %06d" />
+				<div class="form-text">{{ $LANG['invoice_id_format_help'] ?? 'PHP sprintf format for the numeric part of the invoice ID. Use %06d for 6-digit zero-padded numbers (000345), %08d for 8-digit, etc. Leave empty for no padding.' }}</div>
+			</div>
+			<div class="mb-3">
 					<label class="form-label">{{ $LANG['enabled'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_enabled" title="{{ $LANG['enabled'] ?? '' }}"><i class="ti ti-help"></i></a></label>
 					<select name="pref_enabled" class="form-select">
 						<option value="1" @if(($preference['pref_enabled'] ?? '') == '1') selected @endif>{{ $LANG['enabled'] ?? '' }}</option>

@@ -55,6 +55,7 @@ CREATE TABLE IF NOT EXISTS si_biller (
   tax_id_label_1               VARCHAR(255) DEFAULT NULL,
   tax_id_name_2                VARCHAR(255) DEFAULT NULL,
   tax_id_label_2               VARCHAR(255) DEFAULT NULL,
+  biller_invoice_prefix         VARCHAR(50) DEFAULT NULL,
   PRIMARY KEY (domain_id, id)
 );
 
@@ -314,6 +315,8 @@ CREATE TABLE IF NOT EXISTS si_preferences (
   pref_inv_payment_line4_value VARCHAR(255) DEFAULT NULL,
   pref_inv_payment_line5_name VARCHAR(255) DEFAULT NULL,
   pref_inv_payment_line5_value VARCHAR(255) DEFAULT NULL,
+  pref_invoice_id_prefix VARCHAR(50) DEFAULT NULL,
+  pref_invoice_id_format VARCHAR(20) DEFAULT NULL,
   PRIMARY KEY (domain_id, pref_id)
 );
 

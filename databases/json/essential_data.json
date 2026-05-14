@@ -142,6 +142,24 @@
     ],
     "si_payment_terms": [
         {
+            "term_id": "11",
+            "domain_id": "DOMAIN-ID",
+            "term_code": "SAME_DAY",
+            "term_label": "Same Day",
+            "calc_kind": "NET_DAYS",
+            "param_int": "0",
+            "sort_order": "4"
+        },
+        {
+            "term_id": "12",
+            "domain_id": "DOMAIN-ID",
+            "term_code": "NEXT_DAY",
+            "term_label": "Next Day",
+            "calc_kind": "NET_DAYS",
+            "param_int": "1",
+            "sort_order": "6"
+        },
+        {
             "term_id": "1",
             "domain_id": "DOMAIN-ID",
             "term_code": "NET_7",

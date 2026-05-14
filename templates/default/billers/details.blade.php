@@ -273,7 +273,8 @@
 							@endif
 						</td>
 					</tr>
-					<tr><th>{{ $LANG['invoice_footer'] ?? '' }}</th><td>{{ $biller['footer'] }}</td></tr>
+					<tr><th>{{ $LANG['biller_invoice_prefix'] ?? 'Invoice ID Prefix' }}</th><td>{{ $biller['biller_invoice_prefix'] ?? '' }}</td></tr>
+				<tr><th>{{ $LANG['invoice_footer'] ?? '' }}</th><td>{{ $biller['footer'] }}</td></tr>
 					<tr><th>{{ $LANG['notes'] ?? '' }}</th><td>{{ $biller['notes'] }}</td></tr>
 				</table>
 			</div>
@@ -721,9 +722,14 @@
 					</div>
 				</div>
 			</div>
-			<div id="bill-edit-invoice" class="tab-pane" role="tabpanel">
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['logo_file'] ?? '' }}
+		<div id="bill-edit-invoice" class="tab-pane" role="tabpanel">
+			<div class="mb-3">
+				<label class="form-label">{{ $LANG['biller_invoice_prefix'] ?? 'Invoice ID Prefix' }}</label>
+				<input type="text" name="biller_invoice_prefix" value="{{ $biller['biller_invoice_prefix'] ?? '' }}" class="form-control" placeholder="e.g. RNP-" />
+				<div class="form-text">Optional prefix prepended to invoice IDs from this biller (e.g. RNP- → RNP-INV-000345).</div>
+			</div>
+			<div class="mb-3">
+				<label class="form-label">{{ $LANG['logo_file'] ?? '' }}
 						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_insert_biller_text" title="{{ $LANG['logo_file'] ?? '' }}"><i class="ti ti-help"></i></a>
 					</label>
 					@if(!empty($biller['logo']))

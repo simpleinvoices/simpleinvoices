@@ -67,7 +67,9 @@ if (  $op === 'insert_preference' ) {
 		pref_inv_payment_line4_name,
 		pref_inv_payment_line4_value,
 		pref_inv_payment_line5_name,
-		pref_inv_payment_line5_value
+		pref_inv_payment_line5_value,
+		pref_invoice_id_prefix,
+		pref_invoice_id_format
 	)
 VALUES
 	(
@@ -97,7 +99,9 @@ VALUES
 		:payment_line4_name,
 		:payment_line4_value,
 		:payment_line5_name,
-		:payment_line5_value
+		:payment_line5_value,
+		:invoice_id_prefix,
+		:invoice_id_format
 	 )";
 
 	if (dbQuery($sql,
@@ -127,7 +131,9 @@ VALUES
 	  ':payment_line4_name', trim($_POST['pref_inv_payment_line4_name'] ?? ''),
 	  ':payment_line4_value', trim($_POST['pref_inv_payment_line4_value'] ?? ''),
 	  ':payment_line5_name', trim($_POST['pref_inv_payment_line5_name'] ?? ''),
-	  ':payment_line5_value', trim($_POST['pref_inv_payment_line5_value'] ?? '')
+	  ':payment_line5_value', trim($_POST['pref_inv_payment_line5_value'] ?? ''),
+	  ':invoice_id_prefix', trim($_POST['pref_invoice_id_prefix'] ?? ''),
+	  ':invoice_id_format', trim($_POST['pref_invoice_id_format'] ?? '')
 	  )) {
 		$saved = true;
 		$new_pref_id = (int) lastInsertId();
@@ -196,7 +202,9 @@ VALUES
 			pref_inv_payment_line4_name = :payment_line4_name,
 			pref_inv_payment_line4_value = :payment_line4_value,
 			pref_inv_payment_line5_name = :payment_line5_name,
-			pref_inv_payment_line5_value = :payment_line5_value
+			pref_inv_payment_line5_value = :payment_line5_value,
+			pref_invoice_id_prefix = :invoice_id_prefix,
+			pref_invoice_id_format = :invoice_id_format
 			WHERE
 				pref_id = :id
 			AND domain_id = :domain_id";
@@ -228,6 +236,8 @@ VALUES
 	  ':payment_line4_value', trim($_POST['pref_inv_payment_line4_value'] ?? ''),
 	  ':payment_line5_name', trim($_POST['pref_inv_payment_line5_name'] ?? ''),
 	  ':payment_line5_value', trim($_POST['pref_inv_payment_line5_value'] ?? ''),
+	  ':invoice_id_prefix', trim($_POST['pref_invoice_id_prefix'] ?? ''),
+	  ':invoice_id_format', trim($_POST['pref_invoice_id_format'] ?? ''),
 	  ':id', (int)$_GET['id'],
 		  ':domain_id', $auth_session->domain_id))
 	    {

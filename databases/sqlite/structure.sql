@@ -54,7 +54,8 @@ CREATE TABLE IF NOT EXISTS si_biller (
   tax_id_name_1                TEXT DEFAULT NULL,
   tax_id_label_1               TEXT DEFAULT NULL,
   tax_id_name_2                TEXT DEFAULT NULL,
-  tax_id_label_2               TEXT DEFAULT NULL
+  tax_id_label_2               TEXT DEFAULT NULL,
+  biller_invoice_prefix         TEXT DEFAULT NULL
 );
 CREATE UNIQUE INDEX IF NOT EXISTS si_biller_pk ON si_biller (domain_id, id);
 
@@ -309,7 +310,9 @@ CREATE TABLE IF NOT EXISTS si_preferences (
   pref_inv_payment_line4_name TEXT DEFAULT NULL,
   pref_inv_payment_line4_value TEXT DEFAULT NULL,
   pref_inv_payment_line5_name TEXT DEFAULT NULL,
-  pref_inv_payment_line5_value TEXT DEFAULT NULL
+  pref_inv_payment_line5_value TEXT DEFAULT NULL,
+  pref_invoice_id_prefix TEXT DEFAULT NULL,
+  pref_invoice_id_format TEXT DEFAULT NULL
 );
 CREATE UNIQUE INDEX IF NOT EXISTS si_preferences_pk ON si_preferences (domain_id, pref_id);
 

@@ -189,21 +189,17 @@ class invoice {
 		return $inv_item_id;
 	}
 
-    public function select($id, $domain_id='')
+	public function select($id, $domain_id='')
     {
 		global $logger;
 		global $db_server;
 
 		if(!empty($domain_id)) $this->domain_id = $domain_id;
 
-		$index_name_expr = ($db_server === 'mysql')
-			? "(SELECT CONCAT(p.pref_inv_wording,' ',i.index_id))"
-			: "(p.pref_inv_wording || ' ' || CAST(i.index_id AS TEXT))";
-
 		$sql = "SELECT
                     i.*,
 		            i.date as date_original,
-                    $index_name_expr as index_name,
+                    i.denorm_index_name as index_name,
                     p.pref_inv_wording AS preference,
                     p.status
                 FROM 
@@ -266,17 +262,11 @@ class invoice {
 
 		$domain_id = domain_id::get($domain_id);
 
-		$index_name_expr = ($db_server === 'mysql')
-			? "(SELECT CONCAT(p.pref_inv_wording,' ',i.index_id))"
-			: "(p.pref_inv_wording || ' ' || CAST(i.index_id AS TEXT))";
-
 		$sql = "SELECT
                     i.id as id,
-                    $index_name_expr as index_name
+                    i.denorm_index_name as index_name
                 FROM 
-                    ".TB_PREFIX."invoices i LEFT JOIN 
-					".TB_PREFIX."preferences p  
-						ON (i.preference_id = p.pref_id AND i.domain_id = p.domain_id)
+                    ".TB_PREFIX."invoices i
                 WHERE 
                     i.domain_id = :domain_id                    
                 ORDER BY 

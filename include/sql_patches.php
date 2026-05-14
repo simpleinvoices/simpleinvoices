@@ -3231,3 +3231,50 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['381']['name'] = "Add tax_id_name_1, tax_id_label_1, tax_id_name_2, tax_id_label_2 to si_biller and si_customers";
     $patch['381']['patch'] = "PHP: si_patch381_tax_id_columns() — converts varchar(768) gateway columns to TEXT, then adds tax_id columns";
     $patch['381']['date'] = "20260513";
+
+    $patch['382']['name']  = "Add pref_invoice_id_prefix and pref_invoice_id_format to si_preferences";
+    switch ($db_server) {
+        case 'pgsql':
+            $p382 = '';
+            $p382 .= checkFieldExists(TB_PREFIX . 'preferences', 'pref_invoice_id_prefix')
+                ? '' : "ALTER TABLE " . TB_PREFIX . "preferences ADD COLUMN pref_invoice_id_prefix VARCHAR(50) DEFAULT NULL; ";
+            $p382 .= checkFieldExists(TB_PREFIX . 'preferences', 'pref_invoice_id_format')
+                ? '' : "ALTER TABLE " . TB_PREFIX . "preferences ADD COLUMN pref_invoice_id_format VARCHAR(20) DEFAULT NULL; ";
+            $patch['382']['patch'] = $p382 !== '' ? rtrim($p382) : 'SELECT 1';
+            break;
+        case 'sqlite':
+            $p382 = '';
+            $p382 .= checkFieldExists(TB_PREFIX . 'preferences', 'pref_invoice_id_prefix')
+                ? '' : "ALTER TABLE " . TB_PREFIX . "preferences ADD COLUMN pref_invoice_id_prefix VARCHAR(50) DEFAULT NULL; ";
+            $p382 .= checkFieldExists(TB_PREFIX . 'preferences', 'pref_invoice_id_format')
+                ? '' : "ALTER TABLE " . TB_PREFIX . "preferences ADD COLUMN pref_invoice_id_format VARCHAR(20) DEFAULT NULL; ";
+            $patch['382']['patch'] = $p382 !== '' ? rtrim($p382) : 'SELECT 1';
+            break;
+        case 'mysql':
+        default:
+            $p382 = '';
+            $p382 .= checkFieldExists(TB_PREFIX . 'preferences', 'pref_invoice_id_prefix')
+                ? '' : "ALTER TABLE `" . TB_PREFIX . "preferences` ADD COLUMN `pref_invoice_id_prefix` VARCHAR(50) DEFAULT NULL; ";
+            $p382 .= checkFieldExists(TB_PREFIX . 'preferences', 'pref_invoice_id_format')
+                ? '' : "ALTER TABLE `" . TB_PREFIX . "preferences` ADD COLUMN `pref_invoice_id_format` VARCHAR(20) DEFAULT NULL; ";
+            $patch['382']['patch'] = $p382 !== '' ? rtrim($p382) : 'SELECT 1';
+            break;
+    }
+    $patch['382']['date']  = "20260514";
+
+    $patch['383']['name']  = "Add biller_invoice_prefix to si_biller";
+    switch ($db_server) {
+        case 'pgsql':
+        case 'sqlite':
+            $patch['383']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'biller_invoice_prefix')
+                ? 'SELECT 1'
+                : "ALTER TABLE " . TB_PREFIX . "biller ADD COLUMN biller_invoice_prefix VARCHAR(50) DEFAULT NULL";
+            break;
+        case 'mysql':
+        default:
+            $patch['383']['patch'] = checkFieldExists(TB_PREFIX . 'biller', 'biller_invoice_prefix')
+                ? 'SELECT 1'
+                : "ALTER TABLE `" . TB_PREFIX . "biller` ADD COLUMN `biller_invoice_prefix` VARCHAR(50) DEFAULT NULL";
+            break;
+    }
+    $patch['383']['date']  = "20260514";

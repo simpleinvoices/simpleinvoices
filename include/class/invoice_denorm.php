@@ -36,10 +36,12 @@ class invoice_denorm
         $owing = $total - $paid;
 
         $billerName = '';
-        $sqlB = 'SELECT name FROM ' . TB_PREFIX . 'biller WHERE id = :id AND domain_id = :domain_id';
+        $billerPrefix = '';
+        $sqlB = 'SELECT name, biller_invoice_prefix FROM ' . TB_PREFIX . 'biller WHERE id = :id AND domain_id = :domain_id';
         $rb = dbQuery($sqlB, ':id', $inv['biller_id'], ':domain_id', $domainId)->fetch(PDO::FETCH_ASSOC);
         if ($rb) {
             $billerName = (string) $rb['name'];
+            $billerPrefix = $rb['biller_invoice_prefix'] ?? '';
         }
 
         $custName = '';
@@ -52,7 +54,7 @@ class invoice_denorm
         $prefDesc = '';
         $prefWording = '';
         $prefStatus = 0;
-        $sqlP = 'SELECT pref_description, pref_inv_wording, status, locale FROM ' . TB_PREFIX . 'preferences
+        $sqlP = 'SELECT pref_description, pref_inv_wording, status, locale, pref_invoice_id_prefix, pref_invoice_id_format FROM ' . TB_PREFIX . 'preferences
             WHERE pref_id = :pid AND domain_id = :domain_id';
         $rp = dbQuery($sqlP, ':pid', $inv['preference_id'], ':domain_id', $domainId)->fetch(PDO::FETCH_ASSOC);
         if ($rp) {
@@ -61,7 +63,10 @@ class invoice_denorm
             $prefStatus = (int) $rp['status'];
         }
 
-        $indexName = trim($prefWording . ' ' . $inv['index_id']);
+        $prefPrefix = $rp['pref_invoice_id_prefix'] ?? '';
+        $format = $rp['pref_invoice_id_format'] ?? '';
+        $formattedId = $format !== '' ? sprintf($format, (int)$inv['index_id']) : (string)$inv['index_id'];
+        $indexName = trim($prefWording . ' ' . $billerPrefix . $prefPrefix . $formattedId);
 
         $currencyCode = '';
         $currencyLocale = '';

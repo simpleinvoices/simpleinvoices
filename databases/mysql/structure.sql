@@ -67,6 +67,7 @@ CREATE TABLE IF NOT EXISTS `si_biller` (
   `tax_id_label_1` varchar(255) DEFAULT NULL,
   `tax_id_name_2` varchar(255) DEFAULT NULL,
   `tax_id_label_2` varchar(255) DEFAULT NULL,
+  `biller_invoice_prefix` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`domain_id`,`id`),
   KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -336,6 +337,8 @@ CREATE TABLE IF NOT EXISTS `si_preferences` (
   `pref_inv_payment_line4_value` varchar(255) DEFAULT NULL,
   `pref_inv_payment_line5_name` varchar(255) DEFAULT NULL,
   `pref_inv_payment_line5_value` varchar(255) DEFAULT NULL,
+  `pref_invoice_id_prefix` varchar(50) DEFAULT NULL,
+  `pref_invoice_id_format` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`domain_id`,`pref_id`),
   KEY `pref_id` (`pref_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

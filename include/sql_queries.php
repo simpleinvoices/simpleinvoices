@@ -1472,10 +1472,11 @@ function insertBiller() {
 				kofi_username,
 				coinbase_api_key, coinbase_webhook_secret,
 				adyen_api_key, adyen_merchant_account, adyen_hmac_key, adyen_live_prefix, adyen_test_mode,
-				bank_account_name, bank_name, bank_swift_bic, bank_account_number, bank_routing_sort_code,
-				tax_id_name_1, tax_id_label_1, tax_id_name_2, tax_id_label_2
-			) VALUES (
-				:domain_id, :name, :street_address, :street_address2, :city,
+			bank_account_name, bank_name, bank_swift_bic, bank_account_number, bank_routing_sort_code,
+			tax_id_name_1, tax_id_label_1, tax_id_name_2, tax_id_label_2,
+			biller_invoice_prefix
+		) VALUES (
+			:domain_id, :name, :street_address, :street_address2, :city,
 				:state, :zip_code, :country, :phone, :mobile_phone,
 				:fax, :email, :logo, :footer,
 				:paymentsgateway_api_id, :notes, :custom_field1,
@@ -1488,12 +1489,13 @@ function insertBiller() {
 				:kofi_username,
 				:coinbase_api_key, :coinbase_webhook_secret,
 				:adyen_api_key, :adyen_merchant_account, :adyen_hmac_key, :adyen_live_prefix, :adyen_test_mode,
-				:bank_account_name, :bank_name, :bank_swift_bic, :bank_account_number, :bank_routing_sort_code,
-				:tax_id_name_1, :tax_id_label_1, :tax_id_name_2, :tax_id_label_2
-			)";
-	} else {
-		$sql = "INSERT INTO ".TB_PREFIX."biller (
-				id, domain_id, name, street_address, street_address2, city,
+			:bank_account_name, :bank_name, :bank_swift_bic, :bank_account_number, :bank_routing_sort_code,
+			:tax_id_name_1, :tax_id_label_1, :tax_id_name_2, :tax_id_label_2,
+			:biller_invoice_prefix
+		)";
+} else {
+	$sql = "INSERT INTO ".TB_PREFIX."biller (
+			id, domain_id, name, street_address, street_address2, city,
 				state, zip_code, country, phone, mobile_phone,
 				fax, email, logo, footer,
 				paymentsgateway_api_id, notes, custom_field1,
@@ -1506,10 +1508,11 @@ function insertBiller() {
 				kofi_username,
 				coinbase_api_key, coinbase_webhook_secret,
 				adyen_api_key, adyen_merchant_account, adyen_hmac_key, adyen_live_prefix, adyen_test_mode,
-				bank_account_name, bank_name, bank_swift_bic, bank_account_number, bank_routing_sort_code,
-				tax_id_name_1, tax_id_label_1, tax_id_name_2, tax_id_label_2
-			) VALUES (
-				NULL, :domain_id, :name, :street_address, :street_address2, :city,
+			bank_account_name, bank_name, bank_swift_bic, bank_account_number, bank_routing_sort_code,
+			tax_id_name_1, tax_id_label_1, tax_id_name_2, tax_id_label_2,
+			biller_invoice_prefix
+		) VALUES (
+			NULL, :domain_id, :name, :street_address, :street_address2, :city,
 				:state, :zip_code, :country, :phone, :mobile_phone,
 				:fax, :email, :logo, :footer,
 				:paymentsgateway_api_id, :notes, :custom_field1,
@@ -1522,12 +1525,13 @@ function insertBiller() {
 				:kofi_username,
 				:coinbase_api_key, :coinbase_webhook_secret,
 				:adyen_api_key, :adyen_merchant_account, :adyen_hmac_key, :adyen_live_prefix, :adyen_test_mode,
-				:bank_account_name, :bank_name, :bank_swift_bic, :bank_account_number, :bank_routing_sort_code,
-				:tax_id_name_1, :tax_id_label_1, :tax_id_name_2, :tax_id_label_2
-			)";
-	}
+			:bank_account_name, :bank_name, :bank_swift_bic, :bank_account_number, :bank_routing_sort_code,
+			:tax_id_name_1, :tax_id_label_1, :tax_id_name_2, :tax_id_label_2,
+			:biller_invoice_prefix
+		)";
+}
 
-	return dbQuery($sql,
+return dbQuery($sql,
 		':name', $_POST['name'],
 		':street_address', $_POST['street_address'],
 		':street_address2', $_POST['street_address2'],
@@ -1577,10 +1581,11 @@ function insertBiller() {
 		':bank_routing_sort_code', $_POST['bank_routing_sort_code'] ?? '',
 		':tax_id_name_1', $_POST['tax_id_name_1'] ?? '',
 		':tax_id_label_1', $_POST['tax_id_label_1'] ?? '',
-		':tax_id_name_2', $_POST['tax_id_name_2'] ?? '',
-		':tax_id_label_2', $_POST['tax_id_label_2'] ?? '',
-		':domain_id', $domain_id
-		);
+	':tax_id_name_2', $_POST['tax_id_name_2'] ?? '',
+	':tax_id_label_2', $_POST['tax_id_label_2'] ?? '',
+	':biller_invoice_prefix', trim($_POST['biller_invoice_prefix'] ?? ''),
+	':domain_id', $domain_id
+	);
 	/*
 	if($query = mysqlQuery($sql)) {
 		
@@ -1650,9 +1655,10 @@ function updateBiller() {
 				bank_routing_sort_code = :bank_routing_sort_code,
 				tax_id_name_1 = :tax_id_name_1,
 				tax_id_label_1 = :tax_id_label_1,
-				tax_id_name_2 = :tax_id_name_2,
-				tax_id_label_2 = :tax_id_label_2
-			WHERE
+			tax_id_name_2 = :tax_id_name_2,
+			tax_id_label_2 = :tax_id_label_2,
+			biller_invoice_prefix = :biller_invoice_prefix
+		WHERE
 				id = :id
 			AND domain_id = :domain_id";
 	return dbQuery($sql,
@@ -1706,10 +1712,11 @@ function updateBiller() {
 		':bank_routing_sort_code', $_POST['bank_routing_sort_code'] ?? '',
 		':tax_id_name_1', $_POST['tax_id_name_1'] ?? '',
 		':tax_id_label_1', $_POST['tax_id_label_1'] ?? '',
-		':tax_id_name_2', $_POST['tax_id_name_2'] ?? '',
-		':tax_id_label_2', $_POST['tax_id_label_2'] ?? '',
-		':id', $_GET['id']
-		);
+	':tax_id_name_2', $_POST['tax_id_name_2'] ?? '',
+	':tax_id_label_2', $_POST['tax_id_label_2'] ?? '',
+	':biller_invoice_prefix', trim($_POST['biller_invoice_prefix'] ?? ''),
+	':id', $_GET['id']
+	);
 }
 
 /**
@@ -4066,7 +4073,9 @@ function run_sql_patch($id, $patch) {
         } elseif ((int) $id === 381) {
             si_patch381_tax_id_columns();
         } else {
-            dbQuery($patch['patch']);
+            if (!empty($patch['patch'])) {
+                dbQuery($patch['patch']);
+            }
         }
 
 		$patch_row['id']		= $escaped_id;

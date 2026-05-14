@@ -578,15 +578,12 @@ $latest_invoices      = $latest_invoices_sth->fetchAll(PDO::FETCH_ASSOC);
 
 switch ($db_server) {
     case 'pgsql':
-        $dash_pmt_index_name = "(pr.pref_inv_wording || ' ' || CAST(iv.index_id AS TEXT))";
         $dash_pmt_date       = "TO_CHAR(ap.ac_date, 'YYYY-MM-DD')";
         break;
     case 'sqlite':
-        $dash_pmt_index_name = "(pr.pref_inv_wording || ' ' || CAST(iv.index_id AS TEXT))";
         $dash_pmt_date       = "strftime('%Y-%m-%d', ap.ac_date)";
         break;
     default:
-        $dash_pmt_index_name = "CONCAT(pr.pref_inv_wording, ' ', iv.index_id)";
         $dash_pmt_date       = "DATE_FORMAT(ap.ac_date,'%Y-%m-%d')";
         break;
 }
@@ -597,13 +594,12 @@ $latest_payments_sth = dbQuery(
             iv.currency_sign AS currency_sign,
             c.name AS cname,
             b.name AS bname,
-            $dash_pmt_index_name AS index_name,
+            iv.denorm_index_name AS index_name,
             $dash_pmt_date AS date
      FROM " . TB_PREFIX . "payment ap
      INNER JOIN " . TB_PREFIX . "invoices iv ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
      INNER JOIN " . TB_PREFIX . "customers c ON (c.id = iv.customer_id AND c.domain_id = iv.domain_id)
      INNER JOIN " . TB_PREFIX . "biller b ON (b.id = iv.biller_id AND b.domain_id = iv.domain_id)
-     INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id = iv.preference_id AND pr.domain_id = ap.domain_id)
      LEFT JOIN " . TB_PREFIX . "payment_types pt ON (pt.pt_id = ap.ac_payment_type AND pt.domain_id = ap.domain_id)
      WHERE ap.domain_id = :domain_id
      ORDER BY ap.ac_date DESC, ap.id DESC
