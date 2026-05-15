@@ -226,7 +226,7 @@
 				<tr><td colspan="7" class="py-1 table-light"></td></tr>
 				@endif
 				<tr>
-					<td class="fw-medium">{{ $invoice['preference'] ?? '' }} {{ $invoice['index_id'] ?? '' }}</td>
+					<td class="fw-medium">{{ $invoice['index_name'] ?? '' }}</td>
 					<td class="text-secondary">{{ siLocal::date($invoice['date'] ?? '') }}</td>
 					<td>{{ $invoice['biller'] ?? '' }}</td>
 					<td>{{ $invoice['customer'] ?? '' }}</td>

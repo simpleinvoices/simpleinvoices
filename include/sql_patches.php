@@ -3278,3 +3278,7 @@ PRIMARY KEY ( `domain_id`, `id` )
             break;
     }
     $patch['383']['date']  = "20260514";
+
+    $patch['384']['name']  = "si_invoices: add denorm_index_id column and backfill";
+    $patch['384']['patch'] = "PHP: si_patch384_denorm_index_id()";
+    $patch['384']['date']  = "20260515";

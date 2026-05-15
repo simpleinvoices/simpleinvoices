@@ -2,7 +2,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<title>{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['number_short'] ?? '' }}: {{ $invoice['index_id'] ?? '' }}</title>
+<title>{{ $invoice['index_name'] ?? '' }}</title>
 </head>
 <body>
 <br />
@@ -28,7 +28,7 @@
 		</tr>
 		<tr>
 				<td >{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['number_short'] ?? '' }}:</td>
-				<td colspan="3">{{ $invoice['index_id'] ?? '' }}</td>
+				<td colspan="3">{{ $invoice['denorm_index_id'] ?? '' }}</td>
 		</tr>
 		<tr>
 				<td nowrap >{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['date'] ?? '' }}:</td>

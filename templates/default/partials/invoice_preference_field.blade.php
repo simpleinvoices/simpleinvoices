@@ -47,6 +47,8 @@
 					data-currency-id="{{ $pref['currency_id'] ?? '' }}"
 					data-payment-term-id="{{ $pref['payment_term_id'] ?? '' }}"
 					data-index-group="{{ $pref['index_group'] ?? '' }}"
+					data-pref-invoice-prefix="{{ $pref['pref_invoice_id_prefix'] ?? '' }}"
+					data-pref-invoice-format="{{ $pref['pref_invoice_id_format'] ?? '' }}"
 				>{{ $pref['pref_description'] ?? '' }}</option>
 				@endforeach
 			</select>
@@ -202,6 +204,33 @@
 		var ymd = siDueDateFromTerm(dateEl.value, kind, param);
 		out.value = ymd || '-';
 	}
+	function siSprintfD(format, num) {
+		if (!format) return String(num);
+		var m = format.match(/^%0?(\d*)d$/);
+		if (!m) return String(num);
+		var width = parseInt(m[1], 10) || 0;
+		if (width === 0) return String(num);
+		return String(num).padStart(width, '0');
+	}
+	function siBuildInvoiceIdPreview(indexId) {
+		var billerPrefix = '';
+		var billerSel = document.querySelector('select[name="biller_id"]');
+		if (billerSel && billerSel.selectedIndex >= 0) {
+			var bOpt = billerSel.options[billerSel.selectedIndex];
+			billerPrefix = bOpt ? (bOpt.getAttribute('data-biller-invoice-prefix') || '') : '';
+		}
+		var prefPrefix = '';
+		var prefFormat = '';
+		if (prefSel && prefSel.selectedIndex >= 0) {
+			var pOpt = prefSel.options[prefSel.selectedIndex];
+			if (pOpt) {
+				prefPrefix = pOpt.getAttribute('data-pref-invoice-prefix') || '';
+				prefFormat = pOpt.getAttribute('data-pref-invoice-format') || '';
+			}
+		}
+		var formatted = siSprintfD(prefFormat, indexId);
+		return billerPrefix + prefPrefix + formatted;
+	}
 	function siUpdateInvoiceIdPreview() {
 		var out = document.getElementById('si_invoice_id_preview');
 		if (!out || !prefSel) return;
@@ -216,7 +245,8 @@
 		xhr.onload = function () {
 			try {
 				var data = JSON.parse(xhr.responseText);
-				out.value = (data.next !== undefined) ? String(data.next) : '-';
+				var nextId = (data.next !== undefined) ? parseInt(data.next, 10) : 0;
+				out.value = nextId ? siBuildInvoiceIdPreview(nextId) : '-';
 			} catch (e) {
 				out.value = '-';
 			}
@@ -248,6 +278,13 @@
 		prefSel.addEventListener('change', function () {
 			syncCurrencyFromPreference();
 			syncPaymentTermFromPreference();
+			siUpdateInvoiceIdPreview();
+		});
+	}
+
+	var billerSel = document.querySelector('select[name="biller_id"]');
+	if (billerSel) {
+		billerSel.addEventListener('change', function () {
 			siUpdateInvoiceIdPreview();
 		});
 	}

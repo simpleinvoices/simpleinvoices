@@ -225,6 +225,7 @@
 				<label class="form-label">{{ $LANG['invoice_id_format'] ?? 'Invoice Number Format' }}</label>
 				<input type="text" name="pref_invoice_id_format" value="{{ $preference['pref_invoice_id_format'] ?? '' }}" class="form-control" placeholder="e.g. %06d" />
 				<div class="form-text">{{ $LANG['invoice_id_format_help'] ?? 'PHP sprintf format for the numeric part of the invoice ID. Use %06d for 6-digit zero-padded numbers (000345), %08d for 8-digit, etc. Leave empty for no padding.' }}</div>
+				<div class="form-text text-warning">After changing the invoice prefix or format, go to <a href="index.php?module=options&amp;view=invoice_denorm">Invoice List Cache</a> and run <strong>Rebuild normalised fields</strong> to update existing invoices.</div>
 			</div>
 			<div class="mb-3">
 					<label class="form-label">{{ $LANG['enabled'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_enabled" title="{{ $LANG['enabled'] ?? '' }}"><i class="ti ti-help"></i></a></label>

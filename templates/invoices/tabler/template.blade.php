@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['number_short'] ?? '' }}: {{ $invoice['index_id'] ?? '' }}</title>
+	<title>{{ $invoice['index_name'] ?? '' }}</title>
 	@if(!empty($css_inline))
 	<style type="text/css">{{ $css_inline }}</style>
 	@else
@@ -23,11 +23,11 @@
 				</td>
 				<td class="si-tabler-inv-header-summary">
 					<div class="si-tabler-inv-kicker">{{ $preference['pref_inv_heading'] ?? ($preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '')) }}</div>
-					<h1 class="si-tabler-inv-h1"># {{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $invoice['index_id'] ?? '' }}</h1>
+					<h1 class="si-tabler-inv-h1"># {{ $invoice['index_name'] ?? '' }}</h1>
 					<table class="si-tabler-inv-summary-table">
 						<tr>
 							<td>{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['number_short'] ?? '' }}</td>
-							<td class="text-end">{{ $invoice['index_id'] ?? '' }}</td>
+							<td class="text-end">{{ $invoice['denorm_index_id'] ?? '' }}</td>
 						</tr>
 						<tr>
 							<td>{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['date'] ?? '' }}</td>

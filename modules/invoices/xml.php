@@ -74,7 +74,7 @@ $xml ="";
 	
 	foreach ($invoices as $row) {
 		$xml .= "<row id='".$row['id']."'>";
-		$inv_label = htmlspecialchars($row['preference'] . ' ' . $row['index_id']);
+		$inv_label = htmlspecialchars($row['index_name']);
 		$action  = '<div class="dropdown">';
 		$action .= '<a class="btn btn-outline-secondary dropdown-toggle btn-sm-mobile" data-bs-toggle="dropdown" aria-expanded="false"><span class="d-none d-sm-inline-flex align-items-center"><i class="ti ti-settings me-1"></i>'.$LANG['actions'].'</span><span class="d-sm-none"><i class="ti ti-dots-vertical" aria-hidden="true"></i></span></a>';
 		$action .= '<div class="dropdown-menu dropdown-menu-end">';

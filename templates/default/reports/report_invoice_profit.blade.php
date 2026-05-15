@@ -116,7 +116,7 @@
 				</tr>
 				@endif
 				<tr>
-					<td class="fw-medium">{{ $invoice['preference'] ?? '' }} {{ $invoice['index_id'] ?? '' }}</td>
+					<td class="fw-medium">{{ $invoice['index_name'] ?? '' }}</td>
 					<td>{{ $invoice['biller'] ?? '' }}</td>
 					<td>{{ $invoice['customer'] ?? '' }}</td>
 					<td class="text-end">{!! CurrencySignHelper::format($invoice['invoice_total'] ?? 0, $invoice['currency_sign'] ?? '', '', $invoice['denorm_currency_code'] ?? '') !!}</td>
@@ -141,7 +141,7 @@
 <script>
 (function () {
 	var invoices = @json($chartInvoices);
-	var labels   = invoices.map(function(r){ return (r.preference || '') + ' ' + (r.index_id || ''); });
+	var labels   = invoices.map(function(r){ return r.index_name || ''; });
 	var totals   = invoices.map(function(r){ return parseFloat(r.invoice_total || 0); });
 	var costs    = invoices.map(function(r){ return parseFloat(r.cost || 0); });
 	var profits  = invoices.map(function(r){ return parseFloat(r.profit || 0); });

@@ -216,6 +216,7 @@ CREATE TABLE IF NOT EXISTS si_invoices (
   denorm_biller_name            TEXT NOT NULL DEFAULT '',
   denorm_customer_name          TEXT NOT NULL DEFAULT '',
   denorm_index_name             TEXT NOT NULL DEFAULT '',
+  denorm_index_id               TEXT NOT NULL DEFAULT '',
   denorm_preference_description TEXT NOT NULL DEFAULT '',
   denorm_preference_status      INTEGER NOT NULL DEFAULT 0
 );

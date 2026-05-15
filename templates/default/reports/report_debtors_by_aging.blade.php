@@ -85,10 +85,7 @@
 			@foreach(($period['invoices'] ?? []) as $invoice)
 				<tr>
 					<td class="text-secondary">{{ $invoice['id'] ?? '' }}</td>
-					<td class="fw-medium">
-						{{ $invoice['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }}
-						{{ $invoice['index_id'] ?? '' }}
-					</td>
+					<td class="fw-medium">{{ $invoice['index_name'] ?? '' }}</td>
 					<td>{{ $invoice['biller'] ?? '' }}</td>
 					<td>{{ $invoice['customer'] ?? '' }}</td>
 					<td class="text-end">{!! CurrencySignHelper::format($invoice['inv_total'] ?? 0, $invoice['currency_sign'] ?? '', '', $invoice['denorm_currency_code'] ?? '') !!}</td>

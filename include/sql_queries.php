@@ -1209,6 +1209,7 @@ function getInvoice($id, $domain_id='') {
 	$invoice['total_tax'] = $result['total_tax'];
 
 	$invoice['tax_grouped'] = taxesGroupedForInvoice($id);
+	$invoice['index_name'] = $invoice['denorm_index_name'] ?? '';
 	return $invoice;
 }
 
@@ -1979,6 +1980,7 @@ function getCustomerInvoices($id, $domain_id='') {
 		iv.denorm_invoice_total AS total,
 		iv.denorm_amount_paid AS paid,
 		iv.denorm_amount_owing AS owing,
+		iv.denorm_index_name AS index_name,
 		pr.status,
 		pr.pref_inv_wording
 	FROM 
@@ -3693,6 +3695,7 @@ function si_patch338_invoice_denorm_columns(): void {
 			'denorm_biller_name'             => 'VARCHAR(255) NOT NULL DEFAULT \'\'',
 			'denorm_customer_name'           => 'VARCHAR(255) NOT NULL DEFAULT \'\'',
 			'denorm_index_name'              => 'VARCHAR(255) NOT NULL DEFAULT \'\'',
+			'denorm_index_id'                => 'VARCHAR(255) NOT NULL DEFAULT \'\'',
 			'denorm_preference_description'  => 'VARCHAR(255) NOT NULL DEFAULT \'\'',
 			'denorm_preference_status'       => 'SMALLINT NOT NULL DEFAULT 0',
 		];
@@ -3715,6 +3718,7 @@ function si_patch338_invoice_denorm_columns(): void {
 			'denorm_biller_name'             => 'VARCHAR(255) NOT NULL DEFAULT \'\'',
 			'denorm_customer_name'           => 'VARCHAR(255) NOT NULL DEFAULT \'\'',
 			'denorm_index_name'              => 'VARCHAR(255) NOT NULL DEFAULT \'\'',
+			'denorm_index_id'                => 'VARCHAR(255) NOT NULL DEFAULT \'\'',
 			'denorm_preference_description'  => 'VARCHAR(255) NOT NULL DEFAULT \'\'',
 			'denorm_preference_status'       => 'SMALLINT NOT NULL DEFAULT 0',
 		];
@@ -3730,6 +3734,7 @@ function si_patch338_invoice_denorm_columns(): void {
 		'denorm_biller_name'             => 'TEXT NOT NULL DEFAULT \'\'',
 		'denorm_customer_name'           => 'TEXT NOT NULL DEFAULT \'\'',
 		'denorm_index_name'              => 'TEXT NOT NULL DEFAULT \'\'',
+		'denorm_index_id'                => 'TEXT NOT NULL DEFAULT \'\'',
 		'denorm_preference_description'  => 'TEXT NOT NULL DEFAULT \'\'',
 		'denorm_preference_status'       => 'INTEGER NOT NULL DEFAULT 0',
 	];
@@ -3846,6 +3851,22 @@ function si_patch379_payment_currency_denorm_columns(): void {
  * SQL patch 340: populate denormalised columns for all invoices (all domains).
  */
 function si_patch340_backfill_invoice_denorm(): void {
+	$sth = dbQuery('SELECT DISTINCT domain_id FROM ' . TB_PREFIX . 'invoices');
+	$domains = $sth->fetchAll(PDO::FETCH_COLUMN, 0);
+	foreach ($domains as $did) {
+		invoice_denorm::rebuildDomain((int) $did);
+	}
+}
+
+function si_patch384_denorm_index_id(): void {
+	global $db_server;
+	if (!checkFieldExists(TB_PREFIX . 'invoices', 'denorm_index_id')) {
+		if ($db_server === 'mysql') {
+			dbQuery("ALTER TABLE `" . TB_PREFIX . "invoices` ADD COLUMN `denorm_index_id` VARCHAR(255) NOT NULL DEFAULT ''");
+		} else {
+			dbQuery("ALTER TABLE " . TB_PREFIX . "invoices ADD COLUMN denorm_index_id VARCHAR(255) NOT NULL DEFAULT ''");
+		}
+	}
 	$sth = dbQuery('SELECT DISTINCT domain_id FROM ' . TB_PREFIX . 'invoices');
 	$domains = $sth->fetchAll(PDO::FETCH_COLUMN, 0);
 	foreach ($domains as $did) {
@@ -4072,6 +4093,8 @@ function run_sql_patch($id, $patch) {
             si_patch342_global_config();
         } elseif ((int) $id === 381) {
             si_patch381_tax_id_columns();
+        } elseif ((int) $id === 384) {
+            si_patch384_denorm_index_id();
         } else {
             if (!empty($patch['patch'])) {
                 dbQuery($patch['patch']);

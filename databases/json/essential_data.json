@@ -2721,6 +2721,24 @@
             "sql_patch": "Add tax_id_name_1, tax_id_label_1, tax_id_name_2, tax_id_label_2 to si_biller and si_customers",
             "sql_release": "20260513",
             "sql_statement": "PHP: si_patch381_tax_id_columns() — converts varchar(768) gateway columns to TEXT, then adds tax_id columns"
+        },
+        {
+            "sql_patch_ref": "382",
+            "sql_patch": "Add pref_invoice_id_prefix and pref_invoice_id_format to si_preferences",
+            "sql_release": "20260514",
+            "sql_statement": "ALTER TABLE si_preferences ADD COLUMN pref_invoice_id_prefix VARCHAR(50) DEFAULT NULL; ADD COLUMN pref_invoice_id_format VARCHAR(20) DEFAULT NULL"
+        },
+        {
+            "sql_patch_ref": "383",
+            "sql_patch": "Add biller_invoice_prefix to si_biller",
+            "sql_release": "20260514",
+            "sql_statement": "ALTER TABLE si_biller ADD COLUMN biller_invoice_prefix VARCHAR(50) DEFAULT NULL"
+        },
+        {
+            "sql_patch_ref": "384",
+            "sql_patch": "si_invoices: add denorm_index_id column and backfill",
+            "sql_release": "20260515",
+            "sql_statement": "PHP: si_patch384_denorm_index_id() — adds denorm_index_id to si_invoices and rebuilds denorm for all domains"
         }
     ],
     "si_system_defaults": [

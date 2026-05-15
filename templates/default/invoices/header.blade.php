@@ -37,7 +37,7 @@
 					<select name="biller_id" class="form-select" required placeholder="{{ $LANG['biller'] ?? 'Biller' }}">
 						<option value=""></option>
 						@foreach(($billers ?? []) as $biller)
-							<option @if($biller['id'] == ($defaults['biller'] ?? '')) selected @endif value="{{ $biller['id'] ?? '' }}">{{ $biller['name'] ?? '' }}</option>
+							<option @if($biller['id'] == ($defaults['biller'] ?? '')) selected @endif value="{{ $biller['id'] ?? '' }}" data-biller-invoice-prefix="{{ $biller['biller_invoice_prefix'] ?? '' }}">{{ $biller['name'] ?? '' }}</option>
 						@endforeach
 					</select>
 					<button type="button" class="btn btn-outline-secondary si-add-biller-btn" title="{{ $LANG['add_biller'] ?? 'Add new biller' }}">

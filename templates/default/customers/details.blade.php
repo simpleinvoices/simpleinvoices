@@ -130,7 +130,7 @@
 										<a title="{{ $LANG['process_payment_for'] ?? '' }} {{ $invoice['preference'] }} {{ $invoice['id'] }}" href='index.php?module=payments&view=process&id={{ $invoice['id'] }}&op=pay_selected_invoice' class="btn btn-icon btn-outline-success"><i class="ti ti-currency-dollar"></i></a>
 										<a href="index.php?module=invoices&amp;view=quick_view&id={{ urlencode($invoice['id'] ?? '') }}" class="btn btn-icon btn-outline-primary"><i class="ti ti-eye"></i></a>
 									</td>
-									<td><a href="index.php?module=invoices&amp;view=quick_view&id={{ urlencode($invoice['id'] ?? '') }}">{{ $invoice['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $invoice['index_id'] ?? '' }}</a></td>
+									<td><a href="index.php?module=invoices&amp;view=quick_view&id={{ urlencode($invoice['id'] ?? '') }}">{{ $invoice['index_name'] ?? '' }}</a></td>
 									<td>{{ $invoice['date'] ?? '' }}</td>
 									<td>{{ number_format($invoice['total'] ?? '', 2) }}</td>
 									<td>{{ number_format($invoice['paid'] ?? '', 2) }}</td>
@@ -158,7 +158,7 @@
 							<tbody>
 							@foreach(($invoices ?? []) as $invoice)
 								<tr class="index_table">
-									<td class="first"><a href="index.php?module=invoices&amp;view=quick_view&id={{ urlencode($invoice['id'] ?? '') }}">{{ $invoice['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $invoice['index_id'] ?? '' }}</a></td>
+									<td class="first"><a href="index.php?module=invoices&amp;view=quick_view&id={{ urlencode($invoice['id'] ?? '') }}">{{ $invoice['index_name'] ?? '' }}</a></td>
 									<td>{{ $invoice['date'] ?? '' }}</td>
 									<td>{{ number_format($invoice['total'] ?? '', 2) }}</td>
 @if($invoice['status'] > 0)

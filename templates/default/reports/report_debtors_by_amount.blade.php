@@ -53,10 +53,7 @@
 			@foreach($data as $invoice)
 				<tr>
 					<td class="text-secondary">{{ $invoice['id'] ?? '' }}</td>
-					<td class="fw-medium">
-						{{ $invoice['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }}
-						{{ $invoice['index_id'] ?? '' }}
-					</td>
+					<td class="fw-medium">{{ $invoice['index_name'] ?? '' }}</td>
 					<td>{{ $invoice['biller'] ?? '' }}</td>
 					<td>{{ $invoice['customer'] ?? '' }}</td>
 					<td class="text-end">{!! CurrencySignHelper::format($invoice['inv_total'] ?? 0, $invoice['currency_sign'] ?? '', '', $invoice['denorm_currency_code'] ?? '') !!}</td>
@@ -80,7 +77,7 @@
 (function () {
 	var chartRows = @json(array_map(function($r){
 		return [
-			($r['pref_inv_wording'] ?? 'Inv') . ' ' . ($r['index_id'] ?? $r['id'] ?? ''),
+			($r['index_name'] ?? $r['pref_inv_wording'] . ' ' . ($r['index_id'] ?? $r['id'] ?? '')),
 			(float)($r['inv_owing'] ?? 0)
 		];
 	}, $chart_data));

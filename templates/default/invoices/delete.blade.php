@@ -21,7 +21,7 @@
     	    @if($invoicePaid == 0)
 				<div class="card">
 					<div class="card-body">
-						<p>{{ $LANG['confirm_delete'] ?? '' }} {{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $invoice['index_id'] ?? '' }}</p>
+						<p>{{ $LANG['confirm_delete'] ?? '' }} {{ $invoice['index_name'] ?? '' }}</p>
 						<form name="frmpost" action="index.php?module=invoices&amp;view=delete&amp;stage=2&amp;id={{ urlencode(get('id')) }}" method="post">
 							<div class="btn-list">
 								<button type="submit" class="btn btn-danger" name="submit">
@@ -39,7 +39,7 @@
 	
 	        @if($invoicePaid != 0)
 				<div class="alert alert-warning">
-					{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $invoice['index_id'] ?? '' }} {{ $LANG['delete_has_payments1'] ?? '' }} {!! CurrencySignHelper::formatInvoice($invoicePaid ?? 0, $invoice, $preference) !!} {{ $LANG['delete_has_payments2'] ?? '' }}
+					{{ $invoice['index_name'] ?? '' }} {{ $LANG['delete_has_payments1'] ?? '' }} {!! CurrencySignHelper::formatInvoice($invoicePaid ?? 0, $invoice, $preference) !!} {{ $LANG['delete_has_payments2'] ?? '' }}
 				</div>
     	    @endif
 

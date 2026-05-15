@@ -92,16 +92,18 @@
 					document.querySelectorAll('select[name="biller_id"]').forEach(function (sel) {
 						var id   = String(result.id);
 						var text = result.name;
+						var prefix = result.biller_invoice_prefix || '';
+						var opt = document.createElement('option');
+						opt.value = id;
+						opt.text  = text;
+						opt.setAttribute('data-biller-invoice-prefix', prefix);
+						sel.appendChild(opt);
 						if (sel.tomselect) {
 							sel.tomselect.addOption({ value: id, text: text });
 							sel.tomselect.setValue(id);
 						} else {
 							Array.from(sel.options).forEach(function (o) { o.selected = false; });
-							var opt = document.createElement('option');
-							opt.value    = id;
-							opt.text     = text;
 							opt.selected = true;
-							sel.appendChild(opt);
 							sel.value = id;
 						}
 						sel.classList.remove('is-invalid');

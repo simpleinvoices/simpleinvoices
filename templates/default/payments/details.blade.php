@@ -72,7 +72,7 @@
 					<tr>
 						<td>{{ $payment['id'] ?? '' }}</td>
 						<td>
-							<a href="index.php?module=invoices&amp;view=quick_view&amp;id={{ urlencode($payment['ac_inv_id'] ?? '') }}&amp;action=view">{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $invoice['index_id'] ?? $payment['ac_inv_id'] ?? '' }}</a>
+							<a href="index.php?module=invoices&amp;view=quick_view&amp;id={{ urlencode($payment['ac_inv_id'] ?? '') }}&amp;action=view">{{ $invoice['index_name'] ?? $payment['ac_inv_id'] ?? '' }}</a>
 						</td>
 						<td>{{ $payment['date'] ?? '' }}</td>
 						<td>{{ $paymentType['pt_description'] ?? '' }}</td>

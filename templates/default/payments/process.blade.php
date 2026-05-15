@@ -6,7 +6,7 @@
 			<div class="mb-4 p-3 bg-light rounded">
 				<div class="row row-cols-1 row-cols-md-2">
 					<div class="col mb-2">
-						<strong>{{ $invoice['preference'] ?? '' }}</strong> {{ $invoice['index_id'] ?? '' }}
+						<strong>{{ $invoice['index_name'] ?? '' }}</strong>
 					</div>
 					<div class="col mb-2">
 						<strong>{{ $LANG['total'] ?? '' }}:</strong> {!! CurrencySignHelper::formatInvoice($invoice['total'] ?? 0, $invoice, $preference) !!}

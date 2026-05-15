@@ -67,6 +67,7 @@ class invoice_denorm
         $format = $rp['pref_invoice_id_format'] ?? '';
         $formattedId = $format !== '' ? sprintf($format, (int)$inv['index_id']) : (string)$inv['index_id'];
         $indexName = trim($prefWording . ' ' . $billerPrefix . $prefPrefix . $formattedId);
+        $index = trim($billerPrefix . $prefPrefix . $formattedId);
 
         $currencyCode = '';
         $currencyLocale = '';
@@ -90,6 +91,7 @@ class invoice_denorm
             'denorm_biller_name = :bname',
             'denorm_customer_name = :cname',
             'denorm_index_name = :iname',
+            'denorm_index_id = :indexval',
             'denorm_preference_description = :pdesc',
             'denorm_preference_status = :pstat',
             'denorm_currency_locale = :clocale',
@@ -101,6 +103,7 @@ class invoice_denorm
             ':bname', $billerName,
             ':cname', $custName,
             ':iname', $indexName,
+            ':indexval', $index,
             ':pdesc', $prefDesc,
             ':pstat', $prefStatus,
             ':clocale', $currencyLocale,

@@ -102,7 +102,7 @@
 			<tbody>
 				<tr>
 					<td>{{ $payment['id'] ?? '' }}</td>
-					<td>{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $invoice['index_id'] ?? $payment['ac_inv_id'] ?? '' }}</td>
+					<td>{{ $invoice['index_name'] ?? $payment['ac_inv_id'] ?? '' }}</td>
 					<td>{{ $payment['date'] ?? '' }}</td>
 					<td>{{ $paymentType['pt_description'] ?? '' }}</td>
 					<td class="text-end">{!! CurrencySignHelper::formatInvoice($payment['ac_amount'] ?? 0, $invoice, $preference) !!}</td>

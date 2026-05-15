@@ -77,7 +77,10 @@ if (ob_get_length()) {
 }
 header('Content-Type: application/json');
 if ($newId > 0) {
-	echo json_encode(['success' => true, 'id' => $newId, 'name' => $name]);
+	$stmt = dbQuery('SELECT biller_invoice_prefix FROM ' . TB_PREFIX . 'biller WHERE id = :id AND domain_id = :domain_id',
+		':id', $newId, ':domain_id', $auth_session->domain_id);
+	$row = $stmt->fetch(PDO::FETCH_ASSOC);
+	echo json_encode(['success' => true, 'id' => $newId, 'name' => $name, 'biller_invoice_prefix' => $row['biller_invoice_prefix'] ?? '']);
 } else {
 	echo json_encode(['success' => false, 'error' => 'Save failed']);
 }

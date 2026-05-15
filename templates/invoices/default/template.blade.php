@@ -6,7 +6,7 @@
 @else
 <link rel="stylesheet" type="text/css" href="{{ $css|urlsafe }}" media="all">
 @endif
-<title>{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['number_short'] ?? '' }}: {{ $invoice['index_id'] ?? '' }}</title>
+<title>{{ $invoice['index_name'] ?? '' }}</title>
 </head>
 <body>
 <br />
@@ -163,7 +163,7 @@
 		</tr>
 		<tr>
 				<td class="">{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['number_short'] ?? '' }}:</td>
-				<td class="" align="right" colspan="3">{{ $invoice['index_id'] }}</td>
+				<td class="" align="right" colspan="3">{{ $invoice['denorm_index_id'] ?? '' }}</td>
 		</tr>
 		<tr>
 				<td nowrap class="">{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['date'] ?? '' }}:</td>

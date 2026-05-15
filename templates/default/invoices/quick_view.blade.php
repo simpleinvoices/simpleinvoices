@@ -59,7 +59,7 @@
             <div class="row g-4">
                 <div class="col-md-6">
                     <div class="text-uppercase text-secondary small fw-medium mb-2">{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }}</div>
-                    <div class="fw-bold">{{ $invoice['index_id'] ?? '' }}</div>
+                    <div class="fw-bold">{{ $invoice['index_name'] ?? '' }}</div>
                 </div>
                 <div class="col-md-6">
                     <div class="text-uppercase text-secondary small fw-medium mb-2">{{ $LANG['date_upper'] ?? '' }}</div>
@@ -319,7 +319,7 @@
     <div class="col-md-6">
         <div class="card">
             <div class="card-header">
-                <div class="card-title mb-0">{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $invoice['index_id'] ?? '' }}</div>
+                <div class="card-title mb-0">{{ $invoice['index_name'] ?? '' }}</div>
             </div>
             <div class="card-body">
                 <div class="row g-3 text-center">

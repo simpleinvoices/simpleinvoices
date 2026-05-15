@@ -53,7 +53,20 @@ $defaultTax = getDefaultTax();
 $defaultPreference = getDefaultPreference();
 $nextInvoiceId = '';
 if ($defaultPreference && !empty($defaultPreference['index_group'])) {
-    $nextInvoiceId = (string) index::next('invoice', $defaultPreference['index_group'], $auth_session->domain_id);
+    $nextId = index::next('invoice', $defaultPreference['index_group'], $auth_session->domain_id);
+    $billerPrefix = '';
+    if (!empty($defaults['biller'])) {
+        foreach ($billers as $b) {
+            if ((string)$b['id'] === (string)$defaults['biller']) {
+                $billerPrefix = $b['biller_invoice_prefix'] ?? '';
+                break;
+            }
+        }
+    }
+    $prefPrefix = $defaultPreference['pref_invoice_id_prefix'] ?? '';
+    $prefFormat = $defaultPreference['pref_invoice_id_format'] ?? '';
+    $formattedId = $prefFormat !== '' ? sprintf($prefFormat, (int)$nextId) : (string)$nextId;
+    $nextInvoiceId = $billerPrefix . $prefPrefix . $formattedId;
 }
 $bladeView->assign('nextInvoiceId', $nextInvoiceId);
 $bladeView->assign('showInvoiceIdPreview', true);

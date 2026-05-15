@@ -292,6 +292,7 @@ CREATE TABLE IF NOT EXISTS `si_invoices` (
   `denorm_biller_name` varchar(255) NOT NULL DEFAULT '',
   `denorm_customer_name` varchar(255) NOT NULL DEFAULT '',
   `denorm_index_name` varchar(255) NOT NULL DEFAULT '',
+  `denorm_index_id` varchar(255) NOT NULL DEFAULT '',
   `denorm_preference_description` varchar(255) NOT NULL DEFAULT '',
   `denorm_preference_status` smallint NOT NULL DEFAULT 0,
   PRIMARY KEY (`domain_id`,`id`),

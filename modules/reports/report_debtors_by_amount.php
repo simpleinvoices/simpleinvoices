@@ -7,6 +7,7 @@ $__rpt_snap = array_keys($bladeView->getAssigns());
    $sql = 'SELECT
       iv.id,
       iv.index_id,
+      iv.denorm_index_name AS index_name,
       pr.pref_inv_wording,
       iv.denorm_biller_name AS biller,
       iv.denorm_customer_name AS customer,

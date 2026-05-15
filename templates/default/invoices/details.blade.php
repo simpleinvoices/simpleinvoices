@@ -20,7 +20,7 @@
 		<div class="row g-3 mb-3">
 			<div class="col-md-2">
 				<label class="form-label">{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['number_short'] ?? '' }}</label>
-				<div class="form-control-plaintext fw-bold">{{ $invoice['index_id'] ?? '' }}</div>
+				<div class="form-control-plaintext fw-bold">{{ $invoice['index_name'] ?? '' }}</div>
 			</div>
 			<div class="col-md-2">
 				<label class="form-label">{{ $LANG['date_formatted'] ?? '' }}</label>
@@ -47,7 +47,7 @@
 						<select name="biller_id" class="form-select form-select-sm" required>
 							<option value=""></option>
 							@foreach(($billers ?? []) as $biller)
-								<option @if($biller['id'] == $invoice['biller_id']) selected @endif value="{{ $biller['id'] ?? '' }}">{{ $biller['name'] ?? '' }}</option>
+								<option @if($biller['id'] == $invoice['biller_id']) selected @endif value="{{ $biller['id'] ?? '' }}" data-biller-invoice-prefix="{{ $biller['biller_invoice_prefix'] ?? '' }}">{{ $biller['name'] ?? '' }}</option>
 							@endforeach
 						</select>
 						<button type="button" class="btn btn-outline-secondary si-add-biller-btn" title="{{ $LANG['add_biller'] ?? 'Add new biller' }}">
