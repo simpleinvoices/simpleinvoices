@@ -27,11 +27,11 @@
 				<div class="input-icon">
 					<span class="input-icon-addon"><i class="ti ti-calendar"></i></span>
 					@if($invoice['id'] == null)
-						<input type="text" class="form-control form-control-sm date-picker" name="date" id="date1"
-							required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
-							value="{{ date('Y-m-d') }}" />
-					@else
-						<input type="text" class="form-control form-control-sm date-picker" name="date" id="date1"
+					<input type="text" class="form-control date-picker" name="date" id="date1"
+						required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
+						value="{{ date('Y-m-d') }}" />
+				@else
+					<input type="text" class="form-control date-picker" name="date" id="date1"
 							required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
 							value="{{ $invoice['calc_date'] ?? '' }}" />
 					@endif
@@ -43,8 +43,8 @@
 				@if($billers == null)
 					<p class="text-muted mb-0"><em>{{ $LANG['no_billers'] ?? '' }}</em></p>
 				@else
-					<div class="input-group input-group-sm">
-						<select name="biller_id" class="form-select form-select-sm" required>
+					<div class="input-group">
+						<select name="biller_id" class="form-select" required>
 							<option value=""></option>
 							@foreach(($billers ?? []) as $biller)
 								<option @if($biller['id'] == $invoice['biller_id']) selected @endif value="{{ $biller['id'] ?? '' }}" data-biller-invoice-prefix="{{ $biller['biller_invoice_prefix'] ?? '' }}">{{ $biller['name'] ?? '' }}</option>
@@ -61,8 +61,8 @@
 				@if($customers == null)
 					<p class="text-muted mb-0"><em>{{ $LANG['no_customers'] ?? '' }}</em></p>
 				@else
-					<div class="input-group input-group-sm">
-						<select name="customer_id" class="form-select form-select-sm" required>
+					<div class="input-group">
+						<select name="customer_id" class="form-select" required>
 							<option value=""></option>
 							@foreach(($customers ?? []) as $customer)
 								<option @if($customer['id'] == $invoice['customer_id']) selected @endif value="{{ $customer['id'] ?? '' }}">{{ $customer['name'] ?? '' }}</option>
@@ -159,7 +159,7 @@
 								name="quantity{{ $line }}"
 								id="quantity{{ $line }}"
 								value="{{ siLocal::number_trim($invoiceItem['quantity'] ?? 0) }}"
-								class="form-control form-control-sm text-end"
+								class="form-control text-end"
 							/>
 							<input type="hidden" name="line_item{{ $line }}" id="line_item{{ $line }}" value="{{ $invoiceItem['id'] ?? '' }}" />
 						</div>
@@ -168,12 +168,12 @@
 							@if($products == null)
 								<p class="text-muted mb-0"><em>{{ $LANG['no_products'] ?? '' }}</em></p>
 							@else
-								<div class="input-group input-group-sm si-product-input-group">
+								<div class="input-group si-product-input-group">
 									<select
 										name="products{{ $line }}"
 										id="products{{ $line }}"
 										rel="{{ $line }}"
-										class="form-select form-select-sm product_change"
+										class="form-select product_change"
 									>
 										@foreach(($products ?? []) as $product)
 											@if($product['id'] == $invoiceItem['product_id'])
@@ -194,7 +194,7 @@
 							<select
 								id="tax_id[{{ $line }}][{{ $taxIdx }}]"
 								name="tax_id[{{ $line }}][{{ $taxIdx }}]"
-								class="form-select form-select-sm"
+								class="form-select"
 							>
 								<option value=""></option>
 								@foreach(($taxes ?? []) as $taxOption)
@@ -209,7 +209,7 @@
 								id="unit_price{{ $line }}"
 								name="unit_price{{ $line }}"
 								value="{{ siLocal::number_formatted($invoiceItem['unit_price'] ?? 0) }}"
-								class="form-control form-control-sm text-end"
+								class="form-control text-end"
 							/>
 						</div>
 						<div class="col-auto d-flex align-items-end">
