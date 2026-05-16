@@ -3048,14 +3048,17 @@ PRIMARY KEY ( `domain_id`, `id` )
                 (1, 'USD', '$', 'left', 1), (1, 'CAD', 'C$', 'left', 1), (1, 'AUD', 'A$', 'left', 1),
                 (1, 'NZD', 'NZ$', 'left', 1), (1, 'MXN', 'MX$', 'left', 1), (1, 'BRL', 'R$', 'right', 1),
                 (1, 'SGD', 'S$', 'left', 1), (1, 'EUR', '€', 'right', 1), (1, 'GBP', '£', 'left', 1),
-                (1, 'CHF', 'Fr.', 'right', 1), (1, 'SEK', 'kr', 'right', 1), (1, 'DKK', 'kr', 'right', 1),
+                (1, 'CHF', 'CHF', 'right', 1), (1, 'SEK', 'kr', 'right', 1), (1, 'DKK', 'kr', 'right', 1),
                 (1, 'NOK', 'kr', 'right', 1), (1, 'PLN', 'zł', 'right', 1), (1, 'CZK', 'Kč', 'right', 1),
                 (1, 'HUF', 'Ft', 'right', 1), (1, 'RON', 'lei', 'right', 1), (1, 'BGN', 'лв', 'right', 1),
                 (1, 'TRY', '₺', 'left', 1), (1, 'RSD', 'дин.', 'right', 1), (1, 'RUB', '₽', 'right', 1),
                 (1, 'CNY', '¥', 'left', 1), (1, 'JPY', '¥', 'left', 1), (1, 'TWD', 'NT$', 'left', 1),
                 (1, 'HKD', 'HK$', 'left', 1), (1, 'INR', '₹', 'left', 1), (1, 'IDR', 'Rp', 'right', 1),
                 (1, 'VND', '₫', 'right', 1), (1, 'ILS', '₪', 'left', 1), (1, 'SAR', '﷼', 'left', 1),
-                (1, 'ZAR', 'R', 'right', 1), (1, 'BTC', '₿', 'left', 1), (1, 'ETH', 'Ξ', 'left', 1)
+                (1, 'ZAR', 'R', 'right', 1), (1, 'BTC', '₿', 'left', 1), (1, 'ETH', 'Ξ', 'left', 1),
+                (1, 'KRW', '₩', 'left', 1), (1, 'LTC', 'Ł', 'left', 1), (1, 'ADA', '₳', 'left', 1),
+                (1, 'XRP', 'XRP', 'left', 1), (1, 'SOL', 'SOL', 'left', 1), (1, 'BNB', 'BNB', 'left', 1),
+                (1, 'USDT', 'USDT', 'left', 1), (1, 'USDC', 'USDC', 'left', 1), (1, 'DOGE', 'DOGE', 'left', 1)
                 ON CONFLICT DO NOTHING; ";
 
             $patch['376']['patch'] = $p376;
@@ -3084,14 +3087,17 @@ PRIMARY KEY ( `domain_id`, `id` )
                 (1, 'USD', '$', 'left', 1), (1, 'CAD', 'C$', 'left', 1), (1, 'AUD', 'A$', 'left', 1),
                 (1, 'NZD', 'NZ$', 'left', 1), (1, 'MXN', 'MX$', 'left', 1), (1, 'BRL', 'R$', 'right', 1),
                 (1, 'SGD', 'S$', 'left', 1), (1, 'EUR', '€', 'right', 1), (1, 'GBP', '£', 'left', 1),
-                (1, 'CHF', 'Fr.', 'right', 1), (1, 'SEK', 'kr', 'right', 1), (1, 'DKK', 'kr', 'right', 1),
+                (1, 'CHF', 'CHF', 'right', 1), (1, 'SEK', 'kr', 'right', 1), (1, 'DKK', 'kr', 'right', 1),
                 (1, 'NOK', 'kr', 'right', 1), (1, 'PLN', 'zł', 'right', 1), (1, 'CZK', 'Kč', 'right', 1),
                 (1, 'HUF', 'Ft', 'right', 1), (1, 'RON', 'lei', 'right', 1), (1, 'BGN', 'лв', 'right', 1),
                 (1, 'TRY', '₺', 'left', 1), (1, 'RSD', 'дин.', 'right', 1), (1, 'RUB', '₽', 'right', 1),
                 (1, 'CNY', '¥', 'left', 1), (1, 'JPY', '¥', 'left', 1), (1, 'TWD', 'NT$', 'left', 1),
                 (1, 'HKD', 'HK$', 'left', 1), (1, 'INR', '₹', 'left', 1), (1, 'IDR', 'Rp', 'right', 1),
                 (1, 'VND', '₫', 'right', 1), (1, 'ILS', '₪', 'left', 1), (1, 'SAR', '﷼', 'left', 1),
-                (1, 'ZAR', 'R', 'right', 1), (1, 'BTC', '₿', 'left', 1), (1, 'ETH', 'Ξ', 'left', 1); ";
+                (1, 'ZAR', 'R', 'right', 1), (1, 'BTC', '₿', 'left', 1), (1, 'ETH', 'Ξ', 'left', 1),
+                (1, 'KRW', '₩', 'left', 1), (1, 'LTC', 'Ł', 'left', 1), (1, 'ADA', '₳', 'left', 1),
+                (1, 'XRP', 'XRP', 'left', 1), (1, 'SOL', 'SOL', 'left', 1), (1, 'BNB', 'BNB', 'left', 1),
+                (1, 'USDT', 'USDT', 'left', 1), (1, 'USDC', 'USDC', 'left', 1), (1, 'DOGE', 'DOGE', 'left', 1); ";
 
             $patch['376']['patch'] = $p376;
             break;
@@ -3119,14 +3125,17 @@ PRIMARY KEY ( `domain_id`, `id` )
                 (1, 'USD', '$', 'left', 1), (1, 'CAD', 'C$', 'left', 1), (1, 'AUD', 'A$', 'left', 1),
                 (1, 'NZD', 'NZ$', 'left', 1), (1, 'MXN', 'MX$', 'left', 1), (1, 'BRL', 'R$', 'right', 1),
                 (1, 'SGD', 'S$', 'left', 1), (1, 'EUR', '€', 'right', 1), (1, 'GBP', '£', 'left', 1),
-                (1, 'CHF', 'Fr.', 'right', 1), (1, 'SEK', 'kr', 'right', 1), (1, 'DKK', 'kr', 'right', 1),
+                (1, 'CHF', 'CHF', 'right', 1), (1, 'SEK', 'kr', 'right', 1), (1, 'DKK', 'kr', 'right', 1),
                 (1, 'NOK', 'kr', 'right', 1), (1, 'PLN', 'zł', 'right', 1), (1, 'CZK', 'Kč', 'right', 1),
                 (1, 'HUF', 'Ft', 'right', 1), (1, 'RON', 'lei', 'right', 1), (1, 'BGN', 'лв', 'right', 1),
                 (1, 'TRY', '₺', 'left', 1), (1, 'RSD', 'дин.', 'right', 1), (1, 'RUB', '₽', 'right', 1),
                 (1, 'CNY', '¥', 'left', 1), (1, 'JPY', '¥', 'left', 1), (1, 'TWD', 'NT$', 'left', 1),
                 (1, 'HKD', 'HK$', 'left', 1), (1, 'INR', '₹', 'left', 1), (1, 'IDR', 'Rp', 'right', 1),
                 (1, 'VND', '₫', 'right', 1), (1, 'ILS', '₪', 'left', 1), (1, 'SAR', '﷼', 'left', 1),
-                (1, 'ZAR', 'R', 'right', 1), (1, 'BTC', '₿', 'left', 1), (1, 'ETH', 'Ξ', 'left', 1)
+                (1, 'ZAR', 'R', 'right', 1), (1, 'BTC', '₿', 'left', 1), (1, 'ETH', 'Ξ', 'left', 1),
+                (1, 'KRW', '₩', 'left', 1), (1, 'LTC', 'Ł', 'left', 1), (1, 'ADA', '₳', 'left', 1),
+                (1, 'XRP', 'XRP', 'left', 1), (1, 'SOL', 'SOL', 'left', 1), (1, 'BNB', 'BNB', 'left', 1),
+                (1, 'USDT', 'USDT', 'left', 1), (1, 'USDC', 'USDC', 'left', 1), (1, 'DOGE', 'DOGE', 'left', 1)
                 ON DUPLICATE KEY UPDATE `currency_sign`=VALUES(`currency_sign`), `currency_position`=VALUES(`currency_position`); ";
 
             $patch['376']['patch'] = $p376;

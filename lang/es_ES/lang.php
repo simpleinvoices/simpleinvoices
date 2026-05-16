@@ -5,7 +5,7 @@
 *   Castellano - Spanish translation file
 *
 * Authors:
-*  Esteban Mat&iacute;as Vergara, Anton Meixome, Agustin Henze, Facundo Ameal
+*  Esteban Matías Vergara, Anton Meixome, Agustin Henze, Facundo Ameal
 *
 * Last edited:
 *    2016-10-04

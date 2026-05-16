@@ -73,13 +73,30 @@ $defaults = getSystemDefaults();
 
 if (! $has_invoices) {
 	require_once __DIR__ . '/../../include/class/CurrencySignHelper.php';
+	require_once __DIR__ . '/../../include/class/siCurrencies.php';
 	$wizard_default_preference = getDefaultPreference($domain_id) ?: [];
 
-	if ($first_run_wizard && !empty($language)) {
+	if (!empty($language)) {
 		$localeCurrency = si_locale_to_currency_info($language);
-		if ($localeCurrency !== null) {
+		// Resolve currency sign and code from the stored currency_id first;
+		// fall back to locale-based default when nothing is stored yet.
+		$currencyId = (int) ($wizard_default_preference['currency_id'] ?? 0);
+		if ($currencyId > 0) {
+			$currRow = siCurrencies::getById($currencyId, (int) $domain_id);
+			if ($currRow) {
+				$wizard_default_preference['currency_sign'] = $currRow['currency_sign'] ?? '';
+				$wizard_default_preference['currency_code'] = $currRow['currency_code'] ?? '';
+			}
+		}
+		$hasSign = !empty($wizard_default_preference['currency_sign'] ?? null);
+		if (!$hasSign && $localeCurrency !== null) {
 			$wizard_default_preference['currency_sign'] = $localeCurrency['sign'];
 			$wizard_default_preference['currency_code'] = $localeCurrency['code'];
+			$hasSign = true;
+		}
+		if (!$hasSign) {
+			$wizard_default_preference['currency_sign'] = '$';
+			$wizard_default_preference['currency_code'] = 'USD';
 		}
 	}
 

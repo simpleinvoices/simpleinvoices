@@ -133,6 +133,7 @@ $LANG['credits'] = "Credits";//1
 $LANG['cron_id'] = "Cron ID";//1
 $LANG['cron_log'] = "Cron log";//1
 $LANG['currency_code'] = "Currency code";//1
+$LANG['currency'] = "Currency";//1
 $LANG['currency_sign'] = "Currency sign";//1
 $LANG['currency_sign_custom'] = "Custom symbol or HTML code…";//1
 $LANG['custom_field'] = "Custom field";//1

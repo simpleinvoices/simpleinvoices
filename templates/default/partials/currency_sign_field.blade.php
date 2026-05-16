@@ -35,8 +35,8 @@
 <input type="hidden" name="{{ $currencyIdFieldName }}" id="si_currency_id_hidden" value="{{ $currencyIdCurrentValue }}" />
 @endif
 <div class="mb-3">
-	<label class="form-label" for="si_currency_sign_select">{{ $LANG['currency_sign'] ?? '' }}
-		<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_currency_sign" title="{{ $LANG['currency_sign'] ?? '' }}"><i class="ti ti-help"></i></a>
+	<label class="form-label" for="si_currency_sign_select">{{ $LANG['currency'] ?? 'Currency' }}
+		<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_currency_sign" title="{{ $LANG['currency'] ?? 'Currency' }}"><i class="ti ti-help"></i></a>
 	</label>
 	<select id="si_currency_sign_select" class="form-select" autocomplete="off">
 		@if($useDbCurrencies)

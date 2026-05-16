@@ -11,7 +11,7 @@
 				<a class="nav-link active" href="#pref-view-details" data-bs-toggle="tab" role="tab"><i class="ti ti-info-circle me-1"></i>{{ $LANG['details'] ?? '' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#pref-view-currency" data-bs-toggle="tab" role="tab"><i class="ti ti-currency-dollar me-1"></i>{{ $LANG['currency_sign'] ?? '' }}</a>
+				<a class="nav-link" href="#pref-view-currency" data-bs-toggle="tab" role="tab"><i class="ti ti-currency-dollar me-1"></i>{{ $LANG['currency'] ?? 'Currency' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
 				<a class="nav-link" href="#pref-view-wording" data-bs-toggle="tab" role="tab"><i class="ti ti-pencil me-1"></i>{{ $LANG['invoice_heading'] ?? '' }}</a>
@@ -44,7 +44,7 @@
 			<div id="pref-view-currency" class="tab-pane" role="tabpanel">
 				<table class="table table-vcenter">
 					<tr>
-						<th>{{ $LANG['currency_sign'] ?? '' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_currency_sign" title="{{ $LANG['currency_sign'] ?? '' }}"><i class="ti ti-help"></i></a></th>
+						<th>{{ $LANG['currency'] ?? 'Currency' }} <a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_currency_sign" title="{{ $LANG['currency'] ?? 'Currency' }}"><i class="ti ti-help"></i></a></th>
 						<td>
 							{{ ($preference['currency_sign'] ?? '')|si_currency_display }}
 							@if(!empty($preference['currency_code']))
@@ -149,7 +149,7 @@
 				<a class="nav-link active" href="#pref-edit-details" data-bs-toggle="tab" role="tab"><i class="ti ti-info-circle me-1"></i>{{ $LANG['details'] ?? '' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#pref-edit-currency" data-bs-toggle="tab" role="tab"><i class="ti ti-currency-dollar me-1"></i>{{ $LANG['currency_sign'] ?? '' }}</a>
+				<a class="nav-link" href="#pref-edit-currency" data-bs-toggle="tab" role="tab"><i class="ti ti-currency-dollar me-1"></i>{{ $LANG['currency'] ?? 'Currency' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
 				<a class="nav-link" href="#pref-edit-wording" data-bs-toggle="tab" role="tab"><i class="ti ti-pencil me-1"></i>{{ $LANG['invoice_heading'] ?? '' }}</a>

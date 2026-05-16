@@ -61,6 +61,7 @@ class CurrencySignHelper
                 'label' => 'Asia, Africa & Middle East',
                 'presets' => [
                     ['value' => '¥',  'code' => 'CNY', 'label' => 'Chinese Yuan - CNY (¥)',          'aliases' => ['CNY', '元', 'RMB']],
+                    ['value' => '₩',  'code' => 'KRW', 'label' => 'South Korean Won - KRW (₩)',       'aliases' => ['KRW']],
                     ['value' => '¥',  'code' => 'JPY', 'label' => 'Japanese Yen - JPY (¥)',          'aliases' => ['JPY']],
                     ['value' => 'NT$','code' => 'TWD', 'label' => 'New Taiwan Dollar - TWD (NT$)',   'aliases' => ['TWD']],
                     ['value' => 'HK$','code' => 'HKD', 'label' => 'Hong Kong Dollar - HKD (HK$)',   'aliases' => ['HKD']],

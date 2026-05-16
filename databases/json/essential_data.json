@@ -3108,7 +3108,7 @@
             "id": "10",
             "domain_id": "DOMAIN-ID",
             "currency_code": "CHF",
-            "currency_sign": "Fr.",
+            "currency_sign": "CHF",
             "currency_position": "right",
             "is_default": "0",
             "enabled": "1"
@@ -3316,6 +3316,87 @@
             "domain_id": "DOMAIN-ID",
             "currency_code": "ETH",
             "currency_sign": "Ξ",
+            "currency_position": "left",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "34",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "KRW",
+            "currency_sign": "₩",
+            "currency_position": "left",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "35",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "LTC",
+            "currency_sign": "Ł",
+            "currency_position": "left",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "36",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "ADA",
+            "currency_sign": "₳",
+            "currency_position": "left",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "37",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "XRP",
+            "currency_sign": "XRP",
+            "currency_position": "left",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "38",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "SOL",
+            "currency_sign": "SOL",
+            "currency_position": "left",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "39",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "BNB",
+            "currency_sign": "BNB",
+            "currency_position": "left",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "40",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "USDT",
+            "currency_sign": "USDT",
+            "currency_position": "left",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "41",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "USDC",
+            "currency_sign": "USDC",
+            "currency_position": "left",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "42",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "DOGE",
+            "currency_sign": "DOGE",
             "currency_position": "left",
             "is_default": "0",
             "enabled": "1"

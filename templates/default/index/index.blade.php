@@ -555,24 +555,6 @@
                                     <div class="alert alert-info mb-2 py-2 small" role="note">
                                         <div><i class="ti ti-settings me-1"></i>{{ $LANG['wizard_invoice_prefs_note'] ?? '' }}</div>
                                     </div>
-                                    <div class="alert alert-secondary mb-0 py-2 small" role="note">
-                                        <div><i class="ti ti-building-bank me-1"></i>{{ $LANG['wizard_bank_details_optional'] ?? '' }}</div>
-                                        <div class="mt-1"><i class="ti ti-file-invoice me-1"></i>{{ $LANG['wizard_online_payment_biller_note'] ?? '' }}</div>
-                                        <div class="si-wizard-payment-providers">
-                                            @foreach($wizardPaymentProcessors as $processor)
-                                            <div class="si-wizard-payment-provider" title="{{ $processor['label'] }}">
-                                                @if(!empty($processor['provider']))
-                                                <span class="payment si-payment-icon si-payment-provider-{{ $processor['provider'] }}" aria-hidden="true"></span>
-                                                @else
-                                                <span class="avatar avatar-sm bg-primary-lt rounded-2">
-                                                    <i class="ti ti-credit-card text-primary"></i>
-                                                </span>
-                                                @endif
-                                                <span>{{ $processor['label'] }}</span>
-                                            </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>

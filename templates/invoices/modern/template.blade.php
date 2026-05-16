@@ -451,32 +451,38 @@
 	</tr>
 	@if(!empty(($preference['pref_inv_payment_line0_value'] ?? '')))
 	<tr>
-		<td class="si-modern-detail-line" colspan="6">{{ $preference['pref_inv_payment_line0_name'] ?? '' }} {{ $preference['pref_inv_payment_line0_value'] ?? '' }}</td>
+		<td class="si-modern-detail-line" colspan="3">{{ $preference['pref_inv_payment_line0_name'] ?? '' }}</td>
+		<td class="si-modern-detail-line" colspan="3">{{ $preference['pref_inv_payment_line0_value'] ?? '' }}</td>
 	</tr>
 	@endif
 	@if(!empty(($preference['pref_inv_payment_line1_value'] ?? '')))
 	<tr>
-		<td class="si-modern-detail-line" colspan="6">{{ $preference['pref_inv_payment_line1_name'] ?? '' }} {{ $preference['pref_inv_payment_line1_value'] ?? '' }}</td>
+		<td class="si-modern-detail-line" colspan="3">{{ $preference['pref_inv_payment_line1_name'] ?? '' }}</td>
+		<td class="si-modern-detail-line" colspan="3">{{ $preference['pref_inv_payment_line1_value'] ?? '' }}</td>
 	</tr>
 	@endif
 	@if(!empty(($preference['pref_inv_payment_line2_value'] ?? '')))
 	<tr>
-		<td class="si-modern-detail-line" colspan="6">{{ $preference['pref_inv_payment_line2_name'] ?? '' }} {{ $preference['pref_inv_payment_line2_value'] ?? '' }}</td>
+		<td class="si-modern-detail-line" colspan="3">{{ $preference['pref_inv_payment_line2_name'] ?? '' }}</td>
+		<td class="si-modern-detail-line" colspan="3">{{ $preference['pref_inv_payment_line2_value'] ?? '' }}</td>
 	</tr>
 	@endif
 	@if(!empty(($preference['pref_inv_payment_line3_value'] ?? '')))
 	<tr>
-		<td class="si-modern-detail-line" colspan="6">{{ $preference['pref_inv_payment_line3_name'] ?? '' }} {{ $preference['pref_inv_payment_line3_value'] ?? '' }}</td>
+		<td class="si-modern-detail-line" colspan="3">{{ $preference['pref_inv_payment_line3_name'] ?? '' }}</td>
+		<td class="si-modern-detail-line" colspan="3">{{ $preference['pref_inv_payment_line3_value'] ?? '' }}</td>
 	</tr>
 	@endif
 	@if(!empty(($preference['pref_inv_payment_line4_value'] ?? '')))
 	<tr>
-		<td class="si-modern-detail-line" colspan="6">{{ $preference['pref_inv_payment_line4_name'] ?? '' }} {{ $preference['pref_inv_payment_line4_value'] ?? '' }}</td>
+		<td class="si-modern-detail-line" colspan="3">{{ $preference['pref_inv_payment_line4_name'] ?? '' }}</td>
+		<td class="si-modern-detail-line" colspan="3">{{ $preference['pref_inv_payment_line4_value'] ?? '' }}</td>
 	</tr>
 	@endif
 	@if(!empty(($preference['pref_inv_payment_line5_value'] ?? '')))
 	<tr>
-		<td class="si-modern-detail-line" colspan="6">{{ $preference['pref_inv_payment_line5_name'] ?? '' }} {{ $preference['pref_inv_payment_line5_value'] ?? '' }}</td>
+		<td class="si-modern-detail-line" colspan="3">{{ $preference['pref_inv_payment_line5_name'] ?? '' }}</td>
+		<td class="si-modern-detail-line" colspan="3">{{ $preference['pref_inv_payment_line5_value'] ?? '' }}</td>
 	</tr>
 	@endif
 	<tr>

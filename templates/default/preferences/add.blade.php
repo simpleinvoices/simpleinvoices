@@ -11,7 +11,7 @@
 				<a class="nav-link active" href="#pref-add-details" data-bs-toggle="tab" role="tab"><i class="ti ti-info-circle me-1"></i>{{ $LANG['details'] ?? '' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#pref-add-currency" data-bs-toggle="tab" role="tab"><i class="ti ti-currency-dollar me-1"></i>{{ $LANG['currency_sign'] ?? '' }}</a>
+				<a class="nav-link" href="#pref-add-currency" data-bs-toggle="tab" role="tab"><i class="ti ti-currency-dollar me-1"></i>{{ $LANG['currency'] ?? 'Currency' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
 				<a class="nav-link" href="#pref-add-wording" data-bs-toggle="tab" role="tab"><i class="ti ti-pencil me-1"></i>{{ $LANG['invoice_heading'] ?? '' }}</a>

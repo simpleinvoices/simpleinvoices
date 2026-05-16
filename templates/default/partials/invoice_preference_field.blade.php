@@ -9,19 +9,63 @@
     $showInvoiceIdPreview  = $showInvoiceIdPreview ?? false;
     $isNewInvoice          = $isNewInvoice ?? false;
 
-    $currencyMatched = CurrencySignHelper::findPresetForStored($currentCurrencySign, $currentCurrencyCode);
-
-    // Build code → DB id map for data-id attributes on currency <option> tags
-    $currencyCodeToId = [];
+    // Load all currencies from the database
+    $allCurrencies = [];
     try {
         $allCurrencies = \siCurrencies::getForDomain(\domain_id::get());
-        foreach ($allCurrencies as $c) {
-            if (!empty($c['currency_code'])) {
-                $currencyCodeToId[$c['currency_code']] = (int) $c['id'];
+    } catch (\Throwable $e) {
+        $allCurrencies = [];
+    }
+
+    // Build code→group_label and code→order from presets, for grouping/sorting
+    $presetCodeGroup = [];
+    $presetCodeOrder = [];
+    $groupOrder = 0;
+    foreach (CurrencySignHelper::getPresetGroups() as $g) {
+        $pos = 0;
+        foreach ($g['presets'] as $p) {
+            $code = $p['code'] ?? '';
+            if ($code !== '') {
+                $presetCodeGroup[$code] = $g['label'];
+                $presetCodeOrder[$code] = [$groupOrder, $pos];
+            }
+            $pos++;
+        }
+        $groupOrder++;
+    }
+
+    // Partition DB currencies into known (has preset group) and custom
+    $groupedCurrencies = [];
+    $otherCurrencies = [];
+    foreach ($allCurrencies as $c) {
+        $code = $c['currency_code'] ?? '';
+        if ($code !== '') {
+            if (isset($presetCodeGroup[$code])) {
+                $groupedCurrencies[] = $c;
+            } else {
+                $otherCurrencies[] = $c;
             }
         }
-    } catch (\Throwable $e) {
-        $currencyCodeToId = [];
+    }
+
+    // Sort grouped currencies by preset order
+    usort($groupedCurrencies, function ($a, $b) use ($presetCodeOrder) {
+        $oA = $presetCodeOrder[$a['currency_code']] ?? [999, 999];
+        $oB = $presetCodeOrder[$b['currency_code']] ?? [999, 999];
+        return $oA <=> $oB;
+    });
+
+    // Determine if the current currency is the selected one in this DB list
+    $currentSelectedId = null;
+    if ($currentCurrencyId !== '' && $currentCurrencyId > 0) {
+        $currentSelectedId = (int) $currentCurrencyId;
+    }
+    if ($currentSelectedId === null || $currentSelectedId === 0) {
+        $currentSelectedCode = (string) $currentCurrencyCode;
+        $currentSelectedSign = CurrencySignHelper::forDisplay((string) $currentCurrencySign);
+    } else {
+        $currentSelectedCode = null;
+        $currentSelectedSign = null;
     }
 @endphp
 
@@ -55,22 +99,42 @@
 		@endif
 	</div>
 	<div class="col-12 col-sm-6 col-xl-4">
-		<label class="form-label mb-1" for="si_invoice_currency_select">{{ $LANG['currency_sign'] ?? 'Currency' }}</label>
+		<label class="form-label mb-1" for="si_invoice_currency_select">{{ $LANG['currency'] ?? 'Currency' }}</label>
 		<select id="si_invoice_currency_select" class="form-select" autocomplete="off">
-			@foreach(CurrencySignHelper::getPresetGroups() as $g)
-				<optgroup label="{{ $g['label'] }}">
-					@foreach($g['presets'] as $p)
-						<option
-							value="{{ CurrencySignHelper::forDisplay($p['value']) }}"
-							data-code="{{ $p['code'] ?? '' }}"
-							data-id="{{ $currencyCodeToId[$p['code']] ?? '' }}"
-							@if($currencyMatched !== null && ($currencyMatched['code'] ?? '') === ($p['code'] ?? '') && CurrencySignHelper::forDisplay($currencyMatched['value']) === CurrencySignHelper::forDisplay($p['value']))
-								selected
-							@endif
-						>{{ $p['label'] }}</option>
+			@php $lastGroup = null; @endphp
+			@foreach($groupedCurrencies as $c)
+				@php
+					$grp = $presetCodeGroup[$c['currency_code'] ?? ''] ?? '';
+					$displaySign = CurrencySignHelper::forDisplay($c['currency_sign'] ?? '');
+					$code = $c['currency_code'] ?? '';
+					$id   = (int) ($c['id'] ?? 0);
+					$sel  = ($currentSelectedId !== null && $currentSelectedId > 0)
+						? ($id === $currentSelectedId)
+						: ($code === $currentSelectedCode && $displaySign === $currentSelectedSign);
+				@endphp
+				@if($grp !== $lastGroup)
+					@if($lastGroup !== null) </optgroup> @endif
+					<optgroup label="{{ $grp }}">
+					@php $lastGroup = $grp; @endphp
+				@endif
+				<option value="{{ $displaySign }}" data-code="{{ $code }}" data-id="{{ $id }}"@if($sel) selected @endif>{{ $code }} - {{ $displaySign }}</option>
+			@endforeach
+			@if($lastGroup !== null) </optgroup> @endif
+			@if(!empty($otherCurrencies))
+				<optgroup label="Other">
+					@foreach($otherCurrencies as $c)
+						@php
+							$displaySign = CurrencySignHelper::forDisplay($c['currency_sign'] ?? '');
+							$code = $c['currency_code'] ?? '';
+							$id   = (int) ($c['id'] ?? 0);
+							$sel  = ($currentSelectedId !== null && $currentSelectedId > 0)
+								? ($id === $currentSelectedId)
+								: ($code === $currentSelectedCode && $displaySign === $currentSelectedSign);
+						@endphp
+						<option value="{{ $displaySign }}" data-code="{{ $code }}" data-id="{{ $id }}"@if($sel) selected @endif>{{ $code }} - {{ $displaySign }}</option>
 					@endforeach
 				</optgroup>
-			@endforeach
+			@endif
 		</select>
 	</div>
 	<div class="col-12 col-sm-6 col-xl-4">
