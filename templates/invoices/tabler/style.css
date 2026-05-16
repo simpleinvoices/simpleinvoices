@@ -438,18 +438,6 @@ td, th { padding: 0.5rem 0.75rem; vertical-align: top; }
 	color: var(--si-inv-text-muted);
 	margin-bottom: 0.35rem;
 }
-.si-tabler-inv-detail-row {
-	display: flex;
-	justify-content: space-between;
-}
-.si-tabler-inv-detail-label {
-	flex-shrink: 0;
-	margin-right: 1rem;
-}
-.si-tabler-inv-detail-value {
-	text-align: right;
-	word-break: break-word;
-}
 .si-tabler-inv-footer {
 	margin-top: 1.5rem;
 	padding-top: 1rem;
