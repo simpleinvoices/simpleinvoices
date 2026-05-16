@@ -25,6 +25,8 @@ $bladeView->assign('defaults',$defaults);
 $bladeView->assign('localelist',$localelist);
 $bladeView->assign('currencies', $currencies);
 $bladeView->assign('defaultSystemLocale', getDefaultLanguage());
+$languageList = getLanguageList();
+$bladeView->assign('languageList', is_array($languageList) ? $languageList : []);
 
 $bladeView -> assign('pageActive', 'preference');
 $bladeView -> assign('subPageActive', 'preferences_add');

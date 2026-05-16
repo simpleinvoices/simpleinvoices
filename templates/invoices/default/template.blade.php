@@ -169,12 +169,6 @@
 				<td nowrap class="">{{ $preference['pref_inv_wording'] ?? ($LANG['invoice'] ?? '') }} {{ $LANG['date'] ?? '' }}:</td>
 				<td class="" align="right" colspan="3">{{ $invoice['date'] }}</td>
 		</tr>
-		@if(!empty($invoice['payment_term_id']) || !empty($invoice['payment_term_label']))
-		<tr>
-				<td nowrap class="">{{ $LANG['payment_terms'] ?? 'Payment terms' }}:</td>
-				<td class="" align="right" colspan="3">{{ $invoice['payment_term_label'] ?? '' }}</td>
-		</tr>
-		@endif
 		@if(!empty($invoice['calc_due_date']))
 		<tr>
 				<td nowrap class="">{{ $LANG['due_date'] ?? 'Due date' }}:</td>
@@ -467,15 +461,19 @@
 	<tr>
 		<td class="tbl1-bottom col1" colspan="6"><b>{{ $preference['pref_inv_detail_heading'] ?? '' }}</b></td>
 	</tr>
+	@if(!empty(($preference['pref_inv_detail_line'] ?? '')))
 	<tr>
 		<td class="" colspan="6"><i>{{ $preference['pref_inv_detail_line'] ?? '' | outhtml }}</i></td>
 	</tr>
-	<tr>
-		<td class="" colspan="6">{{ $preference['pref_inv_payment_method'] ?? '' }}</td>
-	</tr>
-	@if(!empty($invoice['payment_term_id']) || !empty($invoice['payment_term_label']))
+	@endif
+	@if(!empty($invoice['payment_term_id']))
 	<tr>
 		<td class="" colspan="6">{{ $LANG['payment_terms'] ?? 'Payment terms' }}: {{ $invoice['payment_term_label'] ?? '' }}</td>
+	</tr>
+	@endif
+	@if(!empty(($preference['pref_inv_payment_method'] ?? '')))
+	<tr>
+		<td class="" colspan="6">{{ $preference['pref_inv_payment_method'] ?? '' }}</td>
 	</tr>
 	@endif
 	@if(!empty(($preference['pref_inv_payment_line0_value'] ?? '')))

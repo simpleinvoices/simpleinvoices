@@ -11,7 +11,7 @@
 				<a class="nav-link active" href="#pref-add-details" data-bs-toggle="tab" role="tab"><i class="ti ti-info-circle me-1"></i>{{ $LANG['details'] ?? '' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
-				<a class="nav-link" href="#pref-add-currency" data-bs-toggle="tab" role="tab"><i class="ti ti-currency-dollar me-1"></i>{{ $LANG['currency'] ?? 'Currency' }}</a>
+				<a class="nav-link" href="#pref-add-localization" data-bs-toggle="tab" role="tab"><i class="ti ti-world me-1"></i>{{ $LANG['localization'] ?? 'Localization' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
 				<a class="nav-link" href="#pref-add-wording" data-bs-toggle="tab" role="tab"><i class="ti ti-pencil me-1"></i>{{ $LANG['invoice_heading'] ?? '' }}</a>
@@ -32,14 +32,52 @@
 					<input type="text" class="form-control" name="p_description" value="{{ post('p_description') }}" required />
 					<div class="invalid-feedback">{{ $LANG['required_field'] ?? 'Required' }}</div>
 				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['status'] ?? '' }}
-						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_status" title="{{ $LANG['status'] ?? '' }}"><i class="ti ti-help"></i></a>
-					</label>
-					<select name="status" class="form-select">
-						<option value="1" selected>{{ $LANG['real'] ?? '' }}</option>
-						<option value="0">{{ $LANG['draft'] ?? '' }}</option>
-					</select>
+				<div class="row g-3">
+					<div class="col-md-6">
+						@include('templates.default.partials.currency_sign_field', [
+							'currencySignFieldName'        => 'p_currency_sign',
+							'currencySignCurrentValue'     => post('p_currency_sign'),
+							'currencyCodeFieldName'        => 'currency_code',
+							'currencyCodeCurrentValue'     => post('currency_code'),
+							'currencyIdFieldName'          => 'currency_id',
+							'currencyIdCurrentValue'       => post('currency_id'),
+						])
+					</div>
+					<div class="col-md-6">
+						<div class="mb-3">
+							<label class="form-label">{{ $LANG['payment_terms'] ?? 'Payment terms' }}</label>
+							<select name="payment_term_id" class="form-select">
+								<option value="">{{ $LANG['payment_term_none'] ?? '-' }}</option>
+								@foreach(($paymentTerms ?? []) as $pt)
+									<option value="{{ $pt['term_id'] ?? '' }}" @if((string) post('payment_term_id') === (string)($pt['term_id'] ?? '')) selected @endif>{{ $pt['term_label'] ?? '' }}</option>
+								@endforeach
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="row g-3">
+					<div class="col-md-6">
+						<div class="mb-3">
+							<label class="form-label">{{ $LANG['status'] ?? '' }}
+								<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_status" title="{{ $LANG['status'] ?? '' }}"><i class="ti ti-help"></i></a>
+							</label>
+							<select name="status" class="form-select">
+								<option value="1" selected>{{ $LANG['real'] ?? '' }}</option>
+								<option value="0">{{ $LANG['draft'] ?? '' }}</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="mb-3">
+							<label class="form-label">{{ $LANG['enabled'] ?? '' }}
+								<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_enabled" title="{{ $LANG['enabled'] ?? '' }}"><i class="ti ti-help"></i></a>
+							</label>
+							<select name="pref_enabled" class="form-select">
+								<option value="1" selected>{{ $LANG['enabled'] ?? '' }}</option>
+								<option value="0">{{ $LANG['disabled'] ?? '' }}</option>
+							</select>
+						</div>
+					</div>
 				</div>
 				<div class="mb-3">
 					<label class="form-label">{{ $LANG['invoice_numbering_group'] ?? '' }}
@@ -56,102 +94,72 @@
 						</select>
 					@endif
 				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['locale'] ?? '' }}
-						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_locale" title="{{ $LANG['locale'] ?? '' }}"><i class="ti ti-help"></i></a>
-					</label>
-				<select name="locale" class="form-select">
-					@foreach(($localelist ?? []) as $localeCode => $localeLabel)
-						<option @if((string) $localeCode === (string) ($defaultSystemLocale ?? 'en_GB')) selected @endif value="{{ $localeCode }}">{{ $localeLabel }}</option>
-					@endforeach
-				</select>
-				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['enabled'] ?? '' }}
-						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_enabled" title="{{ $LANG['enabled'] ?? '' }}"><i class="ti ti-help"></i></a>
-					</label>
-					<select name="pref_enabled" class="form-select">
-						<option value="1" selected>{{ $LANG['enabled'] ?? '' }}</option>
-						<option value="0">{{ $LANG['disabled'] ?? '' }}</option>
-					</select>
-				</div>
 			</div>
-			<div id="pref-add-currency" class="tab-pane" role="tabpanel">
-				@include('templates.default.partials.currency_sign_field', [
-					'currencySignFieldName'        => 'p_currency_sign',
-					'currencySignCurrentValue'     => post('p_currency_sign'),
-					'currencyCodeFieldName'        => 'currency_code',
-					'currencyCodeCurrentValue'     => post('currency_code'),
-					'currencyIdFieldName'          => 'currency_id',
-					'currencyIdCurrentValue'       => post('currency_id'),
-				])
-
-				<div class="mb-3 mt-3">
-					<label class="form-label">{{ $LANG['payment_terms'] ?? 'Payment terms' }}</label>
-					<select name="payment_term_id" class="form-select">
-						<option value="">{{ $LANG['payment_term_none'] ?? '-' }}</option>
-						@foreach(($paymentTerms ?? []) as $pt)
-							<option value="{{ $pt['term_id'] ?? '' }}" @if((string) post('payment_term_id') === (string)($pt['term_id'] ?? '')) selected @endif>{{ $pt['term_label'] ?? '' }}</option>
-						@endforeach
-					</select>
-				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['payment_line0_name'] ?? 'Payment line 0 name' }}</label>
-					<input type="text" name="pref_inv_payment_line0_name" value="{{ post('pref_inv_payment_line0_name') }}" class="form-control" placeholder="{lang.bank_name}" />
-				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['payment_line0_value'] ?? 'Payment line 0 value' }}</label>
-					<input type="text" name="pref_inv_payment_line0_value" value="{{ post('pref_inv_payment_line0_value') }}" class="form-control" placeholder="{biller.bank_name}" />
-				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['payment_line3_name'] ?? 'Payment line 3 name' }}</label>
-					<input type="text" name="pref_inv_payment_line3_name" value="{{ post('pref_inv_payment_line3_name') }}" class="form-control" placeholder="{lang.account_number}" />
-				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['payment_line3_value'] ?? 'Payment line 3 value' }}</label>
-					<input type="text" name="pref_inv_payment_line3_value" value="{{ post('pref_inv_payment_line3_value') }}" class="form-control" placeholder="{biller.bank_account_number}" />
-				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['payment_line4_name'] ?? 'Payment line 4 name' }}</label>
-					<input type="text" name="pref_inv_payment_line4_name" value="{{ post('pref_inv_payment_line4_name') }}" class="form-control" placeholder="{lang.swift_bic}" />
-				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['payment_line4_value'] ?? 'Payment line 4 value' }}</label>
-					<input type="text" name="pref_inv_payment_line4_value" value="{{ post('pref_inv_payment_line4_value') }}" class="form-control" placeholder="{biller.bank_swift_bic}" />
-				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['payment_line5_name'] ?? 'Payment line 5 name' }}</label>
-					<input type="text" name="pref_inv_payment_line5_name" value="{{ post('pref_inv_payment_line5_name') }}" class="form-control" placeholder="{lang.invoice_reference}" />
-				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['payment_line5_value'] ?? 'Payment line 5 value' }}</label>
-					<input type="text" name="pref_inv_payment_line5_value" value="{{ post('pref_inv_payment_line5_value') }}" class="form-control" placeholder="Invoice #{invoice.number}" />
+			<div id="pref-add-localization" class="tab-pane" role="tabpanel">
+				<div class="row g-3">
+					<div class="col-md-6">
+						<div class="mb-3">
+							<label class="form-label">{{ $LANG['language'] ?? '' }}
+								<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_language" title="{{ $LANG['language'] ?? '' }}"><i class="ti ti-help"></i></a>
+							</label>
+							<select name="language" class="form-select">
+								<option value="">{{ $LANG['ui_language_domain_default'] ?? 'Use organisation default' }}</option>
+								@foreach(($languageList ?? []) as $lng)
+									<option value="{{ $lng->shortname ?? '' }}" @if((string) post('language') === (string) ($lng->shortname ?? '')) selected @endif>{{ $lng->name ?? '' }} ({{ $lng->shortname ?? '' }})</option>
+								@endforeach
+							</select>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="mb-3">
+							<label class="form-label">{{ $LANG['locale'] ?? '' }}
+								<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_locale" title="{{ $LANG['locale'] ?? '' }}"><i class="ti ti-help"></i></a>
+							</label>
+							<select name="locale" class="form-select">
+								@foreach(($localelist ?? []) as $localeCode => $localeLabel)
+									<option @if((string) $localeCode === (string) ($defaultSystemLocale ?? 'en_GB')) selected @endif value="{{ $localeCode }}">{{ $localeLabel }}</option>
+								@endforeach
+							</select>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div id="pref-add-wording" class="tab-pane" role="tabpanel">
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['invoice_heading'] ?? '' }}
-						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_heading" title="{{ $LANG['invoice_heading'] ?? '' }}"><i class="ti ti-help"></i></a>
-					</label>
-					<input type="text" name="p_inv_heading" value="{{ post('p_inv_heading') }}" class="form-control" />
+				<div class="row g-3">
+					<div class="col-md-6">
+						<div class="mb-3">
+							<label class="form-label">{{ $LANG['invoice_heading'] ?? '' }}
+								<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_heading" title="{{ $LANG['invoice_heading'] ?? '' }}"><i class="ti ti-help"></i></a>
+							</label>
+							<input type="text" name="p_inv_heading" value="{{ post('p_inv_heading') }}" class="form-control" />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="mb-3">
+							<label class="form-label">{{ $LANG['invoice_wording'] ?? '' }}
+								<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_wording" title="{{ $LANG['invoice_wording'] ?? '' }}"><i class="ti ti-help"></i></a>
+							</label>
+							<input type="text" name="p_inv_wording" value="{{ post('p_inv_wording') }}" class="form-control" />
+						</div>
+					</div>
 				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['invoice_wording'] ?? '' }}
-						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_wording" title="{{ $LANG['invoice_wording'] ?? '' }}"><i class="ti ti-help"></i></a>
-					</label>
-					<input type="text" name="p_inv_wording" value="{{ post('p_inv_wording') }}" class="form-control" />
-				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['invoice_detail_heading'] ?? '' }}
-						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_detail_heading" title="{{ $LANG['invoice_detail_heading'] ?? '' }}"><i class="ti ti-help"></i></a>
-					</label>
-					<input type="text" name="p_inv_detail_heading" value="{{ post('p_inv_detail_heading') }}" class="form-control" />
-				</div>
-				<div class="mb-3">
-					<label class="form-label">{{ $LANG['invoice_detail_line'] ?? '' }}
-						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_detail_line" title="{{ $LANG['invoice_detail_line'] ?? '' }}"><i class="ti ti-help"></i></a>
-					</label>
-					<input type="text" name="p_inv_detail_line" value="{{ post('p_inv_detail_line') }}" class="form-control" />
+				<div class="row g-3">
+					<div class="col-md-6">
+						<div class="mb-3">
+							<label class="form-label">{{ $LANG['invoice_detail_heading'] ?? '' }}
+								<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_detail_heading" title="{{ $LANG['invoice_detail_heading'] ?? '' }}"><i class="ti ti-help"></i></a>
+							</label>
+							<input type="text" name="p_inv_detail_heading" value="{{ post('p_inv_detail_heading') }}" class="form-control" />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="mb-3">
+							<label class="form-label">{{ $LANG['invoice_detail_line'] ?? '' }}
+								<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_detail_line" title="{{ $LANG['invoice_detail_line'] ?? '' }}"><i class="ti ti-help"></i></a>
+							</label>
+							<input type="text" name="p_inv_detail_line" value="{{ post('p_inv_detail_line') }}" class="form-control" />
+						</div>
+					</div>
 				</div>
 			</div>
 			<div id="pref-add-payment" class="tab-pane" role="tabpanel">
@@ -208,6 +216,20 @@
 				<div class="row g-3">
 					<div class="col-md-6">
 						<div class="mb-3">
+							<label class="form-label">{{ $LANG['invoice_payment_line_0_name'] ?? '' }}</label>
+							<input type="text" name="pref_inv_payment_line0_name" value="{{ post('pref_inv_payment_line0_name') }}" class="form-control" placeholder="{lang.bank_name}" />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="mb-3">
+							<label class="form-label">{{ $LANG['invoice_payment_line_0_value'] ?? '' }}</label>
+							<input type="text" name="pref_inv_payment_line0_value" value="{{ post('pref_inv_payment_line0_value') }}" class="form-control" placeholder="{biller.bank_name}" />
+						</div>
+					</div>
+				</div>
+				<div class="row g-3">
+					<div class="col-md-6">
+						<div class="mb-3">
 							<label class="form-label">{{ $LANG['invoice_payment_line_1_name'] ?? '' }}
 								<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_payment_line1_name" title="{{ $LANG['invoice_payment_line_1_name'] ?? '' }}"><i class="ti ti-help"></i></a>
 							</label>
@@ -238,6 +260,48 @@
 								<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_payment_line2_value" title="{{ $LANG['invoice_payment_line_2_value'] ?? '' }}"><i class="ti ti-help"></i></a>
 							</label>
 							<input type="text" name="p_inv_payment_line2_value" value="{{ post('p_inv_payment_line2_value') }}" class="form-control" />
+						</div>
+					</div>
+				</div>
+				<div class="row g-3">
+					<div class="col-md-6">
+						<div class="mb-3">
+							<label class="form-label">{{ $LANG['invoice_payment_line_3_name'] ?? '' }}</label>
+							<input type="text" name="pref_inv_payment_line3_name" value="{{ post('pref_inv_payment_line3_name') }}" class="form-control" placeholder="{lang.account_number}" />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="mb-3">
+							<label class="form-label">{{ $LANG['invoice_payment_line_3_value'] ?? '' }}</label>
+							<input type="text" name="pref_inv_payment_line3_value" value="{{ post('pref_inv_payment_line3_value') }}" class="form-control" placeholder="{biller.bank_account_number}" />
+						</div>
+					</div>
+				</div>
+				<div class="row g-3">
+					<div class="col-md-6">
+						<div class="mb-3">
+							<label class="form-label">{{ $LANG['invoice_payment_line_4_name'] ?? '' }}</label>
+							<input type="text" name="pref_inv_payment_line4_name" value="{{ post('pref_inv_payment_line4_name') }}" class="form-control" placeholder="{lang.swift_bic}" />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="mb-3">
+							<label class="form-label">{{ $LANG['invoice_payment_line_4_value'] ?? '' }}</label>
+							<input type="text" name="pref_inv_payment_line4_value" value="{{ post('pref_inv_payment_line4_value') }}" class="form-control" placeholder="{biller.bank_swift_bic}" />
+						</div>
+					</div>
+				</div>
+				<div class="row g-3">
+					<div class="col-md-6">
+						<div class="mb-3">
+							<label class="form-label">{{ $LANG['invoice_payment_line_5_name'] ?? '' }}</label>
+							<input type="text" name="pref_inv_payment_line5_name" value="{{ post('pref_inv_payment_line5_name') }}" class="form-control" placeholder="{lang.invoice_reference}" />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="mb-3">
+							<label class="form-label">{{ $LANG['invoice_payment_line_5_value'] ?? '' }}</label>
+							<input type="text" name="pref_inv_payment_line5_value" value="{{ post('pref_inv_payment_line5_value') }}" class="form-control" placeholder="Invoice #{invoice.number}" />
 						</div>
 					</div>
 				</div>
