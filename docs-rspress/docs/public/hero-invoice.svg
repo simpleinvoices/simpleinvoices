@@ -1,15 +1,78 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" fill="none">
-  <rect width="600" height="400" rx="12" fill="#f1f5f9"/>
-  <rect x="60" y="40" width="480" height="60" rx="8" fill="#206bc4"/>
-  <text x="300" y="78" text-anchor="middle" fill="white" font-family="system-ui,sans-serif" font-size="22" font-weight="700">INVOICE</text>
-  <rect x="60" y="120" width="220" height="40" rx="6" fill="white" stroke="#e2e8f0"/>
-  <rect x="340" y="120" width="200" height="40" rx="6" fill="white" stroke="#e2e8f0"/>
-  <rect x="60" y="175" width="220" height="40" rx="6" fill="white" stroke="#e2e8f0"/>
-  <rect x="340" y="175" width="200" height="40" rx="6" fill="white" stroke="#e2e8f0"/>
-  <rect x="60" y="240" width="480" height="4" rx="2" fill="#e2e8f0"/>
-  <rect x="60" y="255" width="480" height="30" rx="6" fill="white" stroke="#e2e8f0"/>
-  <rect x="60" y="295" width="480" height="30" rx="6" fill="white" stroke="#e2e8f0"/>
-  <rect x="60" y="335" width="480" height="30" rx="6" fill="white" stroke="#e2e8f0"/>
-  <rect x="340" y="375" width="200" height="16" rx="4" fill="#206bc4" opacity="0.9"/>
-  <text x="440" y="387" text-anchor="middle" fill="white" font-family="system-ui,sans-serif" font-size="11" font-weight="600">Total: $1,234.56</text>
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Browser Frame -->
+  <rect width="800" height="600" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+  <path d="M0 12C0 5.37258 5.37258 0 12 0H788C794.627 0 800 5.37258 800 12V40H0V12Z" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="2"/>
+  <circle cx="20" cy="20" r="5" fill="#FF5F56"/>
+  <circle cx="40" cy="20" r="5" fill="#FFBD2E"/>
+  <circle cx="60" cy="20" r="5" fill="#27C93F"/>
+
+  <!-- Sidebar -->
+  <rect x="0" y="40" width="200" height="560" fill="#1A202C"/>
+  <rect x="20" y="70" width="160" height="36" rx="8" fill="#2D3748"/>
+  <rect x="36" y="80" width="16" height="16" rx="4" fill="#63B3ED"/>
+  <rect x="64" y="84" width="80" height="8" rx="4" fill="#E2E8F0"/>
+
+  <rect x="36" y="120" width="16" height="16" rx="4" fill="#A0AEC0"/>
+  <rect x="64" y="124" width="60" height="8" rx="4" fill="#4A5568"/>
+
+  <rect x="36" y="160" width="16" height="16" rx="4" fill="#A0AEC0"/>
+  <rect x="64" y="164" width="70" height="8" rx="4" fill="#4A5568"/>
+
+  <rect x="36" y="200" width="16" height="16" rx="4" fill="#A0AEC0"/>
+  <rect x="64" y="204" width="50" height="8" rx="4" fill="#4A5568"/>
+
+  <!-- Main Content -->
+  <rect x="200" y="40" width="600" height="560" fill="#F7FAFC"/>
+
+  <!-- Header -->
+  <text x="232" y="85" font-family="Inter, sans-serif" font-size="24" font-weight="700" fill="#2D3748">Dashboard</text>
+  <rect x="660" y="60" width="110" height="36" rx="8" fill="#3182CE"/>
+  <text x="685" y="83" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF">+ New</text>
+
+  <!-- Cards -->
+  <rect x="232" y="120" width="170" height="100" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="248" y="145" font-family="Inter, sans-serif" font-size="12" font-weight="500" fill="#718096">Total Invoiced</text>
+  <text x="248" y="180" font-family="Inter, sans-serif" font-size="24" font-weight="700" fill="#2D3748">€45,230</text>
+  <text x="248" y="205" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#48BB78">↑ 12.5%</text>
+
+  <rect x="417" y="120" width="170" height="100" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="433" y="145" font-family="Inter, sans-serif" font-size="12" font-weight="500" fill="#718096">Outstanding</text>
+  <text x="433" y="180" font-family="Inter, sans-serif" font-size="24" font-weight="700" fill="#E53E3E">€12,400</text>
+  <text x="433" y="205" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#718096">24 Unpaid</text>
+
+  <rect x="602" y="120" width="170" height="100" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="618" y="145" font-family="Inter, sans-serif" font-size="12" font-weight="500" fill="#718096">Avg. Payment</text>
+  <text x="618" y="180" font-family="Inter, sans-serif" font-size="24" font-weight="700" fill="#2D3748">8 Days</text>
+  <text x="618" y="205" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#3182CE">3d Faster</text>
+
+  <!-- Table -->
+  <rect x="232" y="240" width="540" height="340" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="250" y="275" font-family="Inter, sans-serif" font-size="18" font-weight="700" fill="#2D3748">Recent Invoices</text>
+
+  <rect x="232" y="290" width="540" height="40" fill="#F7FAFC"/>
+  <text x="250" y="315" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#718096">CLIENT</text>
+  <text x="450" y="315" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#718096">AMOUNT</text>
+  <text x="650" y="315" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#718096">STATUS</text>
+
+  <line x1="232" y1="330" x2="772" y2="330" stroke="#E2E8F0"/>
+  <text x="250" y="360" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="#2D3748">Acme Corp</text>
+  <text x="450" y="360" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#2D3748">€1,200.00</text>
+  <rect x="650" y="343" width="60" height="22" rx="11" fill="#C6F6D5"/>
+  <text x="665" y="358" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#2F855A">Paid</text>
+
+  <line x1="232" y1="380" x2="772" y2="380" stroke="#E2E8F0"/>
+  <text x="250" y="410" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="#2D3748">Globex Inc.</text>
+  <text x="450" y="410" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#2D3748">€2,450.00</text>
+  <rect x="650" y="393" width="80" height="22" rx="11" fill="#FED7D7"/>
+  <text x="662" y="408" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#C53030">Pending</text>
+
+  <line x1="232" y1="430" x2="772" y2="430" stroke="#E2E8F0"/>
+  <text x="250" y="460" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="#2D3748">Stark Ind.</text>
+  <text x="450" y="460" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#2D3748">€5,000.00</text>
+  <rect x="650" y="443" width="60" height="22" rx="11" fill="#C6F6D5"/>
+  <text x="665" y="458" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#2F855A">Paid</text>
+
+  <!-- Graph -->
+  <path d="M250 540 Q350 500 450 520 T650 480 T750 500" fill="none" stroke="#3182CE" stroke-width="3"/>
+  <path d="M250 540 Q350 500 450 520 T650 480 T750 500 V560 H250 Z" fill="#3182CE" opacity="0.1"/>
 </svg>

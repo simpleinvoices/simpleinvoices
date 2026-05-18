@@ -57,31 +57,94 @@ features:
     link: /features/recurring-invoices
 ---
 
-import { Tab, Tabs } from '@rspress/core/theme';
+import { Tab, Tabs, SvgWrapper } from '@rspress/core/theme';
+import { SiSqlite, SiMysql, SiPostgresql } from '@icons-pack/react-simple-icons';
 
-<div style={{ maxWidth: '600px', margin: '40px auto', padding: '0 20px' }}>
-  <h3 style={{ textAlign: 'center', marginBottom: '20px' }}>Install the Package</h3>
+<div style={{ maxWidth: '700px' }}>
+  30 seconds setup with Docker 
+👉 <a href="/guide/installation-manual.html" class="rp-link">Full Installation guide →</a>
   
-  <Tabs groupId="package-manager">
-    <Tab label="npm">
-      ```bash
-      npm install my-awesome-package
+  <Tabs groupId="database-engine">
+    <Tab
+      label={
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+          <SvgWrapper icon={SiSqlite} width={16} height={16} />
+          SQLite
+        </span>
+      }
+    >
+      
+      ```bash 
+      # No database setup needed, run instantly
+
+      docker run -d --name simpleinvoices \
+        -p 8080:80 \
+        -e DB_ENGINE=sqlite \
+        simpleinvoices/simpleinvoices:latest
+      ```
+
+    </Tab>
+    <Tab
+      label={
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+          <SvgWrapper icon={SiMysql} width={16} height={16} />
+          MySQL
+        </span>
+      }
+    >
+      
+
+      ```yaml
+      #Save as `docker-compose.yml` and run `docker compose up -d`:
+      services:
+        app:
+          image: simpleinvoices/simpleinvoices:latest
+          ports: ["8080:80"]
+          environment:
+            DB_ENGINE: mysql
+            DB_HOST: db
+            DB_NAME: simpleinvoices
+            DB_USER: si
+            DB_PASSWORD: sipass
+        db:
+          image: mysql:8.0
+          environment:
+            MYSQL_DATABASE: simpleinvoices
+            MYSQL_USER: si
+            MYSQL_PASSWORD: sipass
+            MYSQL_ROOT_PASSWORD: rootpass
       ```
     </Tab>
-    <Tab label="pnpm">
-      ```bash
-      pnpm add my-awesome-package
-      ```
-    </Tab>
-    <Tab label="yarn">
-      ```bash
-      yarn add my-awesome-package
-      ```
-    </Tab>
-    <Tab label="bun">
-      ```bash
-      bun add my-awesome-package
+    <Tab
+      label={
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+          <SvgWrapper icon={SiPostgresql} width={16} height={16} />
+          PostgreSQL
+        </span>
+      }
+    >
+      
+
+      ```yaml
+      # Save as `docker-compose.yml` and run `docker compose up -d`:
+      services:
+        app:
+          image: simpleinvoices/simpleinvoices:latest
+          ports: ["8080:80"]
+          environment:
+            DB_ENGINE: pgsql
+            DB_HOST: db
+            DB_NAME: simpleinvoices
+            DB_USER: si
+            DB_PASSWORD: sipass
+        db:
+          image: postgres:16
+          environment:
+            POSTGRES_DB: simpleinvoices
+            POSTGRES_USER: si
+            POSTGRES_PASSWORD: sipass
       ```
     </Tab>
   </Tabs>
 </div>
+

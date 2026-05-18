@@ -9,6 +9,7 @@
     "preview": "rspress preview"
   },
   "dependencies": {
+    "@icons-pack/react-simple-icons": "^13.11.1",
     "@rspress/core": "^2.0.10",
     "@rspress/plugin-rss": "^2.0.11"
   },
