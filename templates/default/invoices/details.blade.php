@@ -103,7 +103,7 @@
 							>
 								<option value=""></option>
 								@foreach(($taxes ?? []) as $taxOption)
-									<option @if(($invoiceItems[0]['tax'][$taxIdx] ?? '') === ($taxOption['tax_id'] ?? '')) selected @endif value="{{ $taxOption['tax_id'] ?? '' }}">{{ $taxOption['tax_description'] ?? '' }}</option>
+									<option @if(($invoiceItems[0]['tax'][$taxIdx] ?? '') === ($taxOption['tax_id'] ?? '')) selected @endif value="{{ $taxOption['tax_id'] ?? '' }}">{{ $taxOption['tax_description'] ?? '' }} ({{ ($taxOption['type'] ?? '') === '$' ? '$' : '' }}{{ (float)($taxOption['tax_percentage'] ?? 0) }}{{ ($taxOption['type'] ?? '') !== '$' ? '%' : '' }})</option>
 								@endforeach
 							</select>
 						@endfor
@@ -198,7 +198,7 @@
 							>
 								<option value=""></option>
 								@foreach(($taxes ?? []) as $taxOption)
-									<option @if(($invoiceItem['tax'][$taxIdx] ?? '') === ($taxOption['tax_id'] ?? '')) selected @endif value="{{ $taxOption['tax_id'] ?? '' }}">{{ $taxOption['tax_description'] ?? '' }}</option>
+									<option @if(($invoiceItem['tax'][$taxIdx] ?? '') === ($taxOption['tax_id'] ?? '')) selected @endif value="{{ $taxOption['tax_id'] ?? '' }}">{{ $taxOption['tax_description'] ?? '' }} ({{ ($taxOption['type'] ?? '') === '$' ? '$' : '' }}{{ (float)($taxOption['tax_percentage'] ?? 0) }}{{ ($taxOption['type'] ?? '') !== '$' ? '%' : '' }})</option>
 								@endforeach
 							</select>
 						</div>

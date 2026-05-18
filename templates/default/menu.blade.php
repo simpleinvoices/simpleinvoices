@@ -113,6 +113,12 @@
                             <span class="nav-link-title">My Invoices</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php?module=documentation&view=docs">
+                            <span class="nav-link-icon d-md-none d-lg-inline-block"><i class="ti ti-book"></i></span>
+                            <span class="nav-link-title">Docs</span>
+                        </a>
+                    </li>
                 </ul>
                 @else
                 {{-- ── Full nav for all other roles ── --}}
@@ -210,6 +216,16 @@
                             <span class="nav-link-title">{{ $LANG['all_reports'] ?? '' }}</span>
                         </a>
                     </li>
+
+                    {{-- Documentation --}}
+                    @if(($module ?? '') != 'documentation')
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php?module=documentation&view=docs">
+                            <span class="nav-link-icon d-md-none d-lg-inline-block"><i class="ti ti-book"></i></span>
+                            <span class="nav-link-title">Docs</span>
+                        </a>
+                    </li>
+                    @endif
 
                 </ul>
                 @endif

@@ -147,7 +147,7 @@
 					<select id="tax_id[0][{{ $taxIdx }}]" name="tax_id[0][{{ $taxIdx }}]" class="form-select">
 						<option value=""></option>
 					@foreach(($taxes ?? []) as $taxOption)
-						<option @if(($taxOption['tax_id'] ?? '') == ($defaults['tax'] ?? '') && $taxIdx == 0) selected @endif value="{{ $taxOption['tax_id'] ?? '' }}">{{ $taxOption['tax_description'] ?? '' }}</option>
+						<option @if(($taxOption['tax_id'] ?? '') == ($defaults['tax'] ?? '') && $taxIdx == 0) selected @endif value="{{ $taxOption['tax_id'] ?? '' }}">{{ $taxOption['tax_description'] ?? '' }} ({{ ($taxOption['type'] ?? '') === '$' ? '$' : '' }}{{ (float)($taxOption['tax_percentage'] ?? 0) }}{{ ($taxOption['type'] ?? '') !== '$' ? '%' : '' }})</option>
 					@endforeach
 					</select>
 				</div>

@@ -1239,7 +1239,7 @@
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/apexcharts@latest/dist/apexcharts.min.js"></script>
+<script src="./templates/default/vendor/apexcharts/apexcharts.min.js"></script>
 <script>
 (function () {
     var labels         = @json($chart_labels ?? []);

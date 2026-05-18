@@ -1,0 +1,3 @@
+# Prevent parent rewrite rules from intercepting this directory.
+# All files in docs/ are served as static — no PHP processing.
+RewriteEngine Off

@@ -33,8 +33,8 @@
     </footer>
 </div>{{-- /page-wrapper --}}
 </div>{{-- /page --}}
-<script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta20/dist/js/tabler.min.js" defer></script>
-<script src="./include/js/si-help-popover.js" defer></script>
+<script src="./templates/default/vendor/tabler-core/tabler.min.js" defer></script>
+<script src="./include/js/si-help-modal.js" defer></script>
 @if(($module ?? '') === 'reports')
 <script src="./include/js/si-report-sort.js" defer></script>
 @endif

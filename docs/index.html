@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Invoices – Documentation</title>
+    <link rel="stylesheet" href="vendor/docsify/themes/vue.css">
+    <style>
+        :root {
+            --theme-color: #206bc4;
+            --theme-color-light: #e9f0f9;
+        }
+        .app-nav { margin-right: 20px; }
+        .sidebar { background: #f8f9fa; }
+        .markdown-section { max-width: 900px; }
+        iframe body { margin: 0; }
+    </style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+    window.$docsify = {
+        name: 'Simple Invoices',
+        nameLink: '/',
+        repo: '',
+        routerMode: 'hash',
+        loadSidebar: true,
+        loadNavbar: false,
+        subMaxLevel: 3,
+        auto2top: true,
+        search: {
+            paths: 'auto',
+            placeholder: 'Search documentation…',
+            noData: 'No results found.',
+            depth: 4
+        }
+    };
+</script>
+<script src="vendor/docsify/docsify.min.js"></script>
+<script src="vendor/docsify/plugins/search.min.js"></script>
+</body>
+</html>

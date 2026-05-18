@@ -115,7 +115,7 @@
 	if (typeof ApexCharts !== 'undefined') { initChart(); }
 	else {
 		var s = document.createElement('script');
-		s.src = 'https://cdn.jsdelivr.net/npm/apexcharts@latest/dist/apexcharts.min.js';
+		s.src = './templates/default/vendor/apexcharts/apexcharts.min.js';
 		s.onload = initChart; document.head.appendChild(s);
 	}
 })();

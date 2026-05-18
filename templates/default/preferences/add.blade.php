@@ -11,6 +11,9 @@
 				<a class="nav-link active" href="#pref-add-details" data-bs-toggle="tab" role="tab"><i class="ti ti-info-circle me-1"></i>{{ $LANG['details'] ?? '' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
+				<a class="nav-link" href="#pref-add-numbering" data-bs-toggle="tab" role="tab"><i class="ti ti-hash me-1"></i>{{ $LANG['numbering'] ?? 'Numbering' }}</a>
+			</li>
+			<li class="nav-item" role="presentation">
 				<a class="nav-link" href="#pref-add-localization" data-bs-toggle="tab" role="tab"><i class="ti ti-world me-1"></i>{{ $LANG['localization'] ?? 'Localization' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
@@ -45,7 +48,7 @@
 					</div>
 					<div class="col-md-6">
 						<div class="mb-3">
-							<label class="form-label">{{ $LANG['payment_terms'] ?? 'Payment terms' }}</label>
+							<label class="form-label">{{ $LANG['default_payment_terms'] ?? 'Default payment terms' }}</label>
 							<select name="payment_term_id" class="form-select">
 								<option value="">{{ $LANG['payment_term_none'] ?? '-' }}</option>
 								@foreach(($paymentTerms ?? []) as $pt)
@@ -79,6 +82,8 @@
 						</div>
 					</div>
 				</div>
+			</div>
+			<div id="pref-add-numbering" class="tab-pane" role="tabpanel">
 				<div class="mb-3">
 					<label class="form-label">{{ $LANG['invoice_numbering_group'] ?? '' }}
 						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_numbering_group" title="{{ $LANG['invoice_numbering_group'] ?? '' }}"><i class="ti ti-help"></i></a>

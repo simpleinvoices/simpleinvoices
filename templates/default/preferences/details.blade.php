@@ -11,6 +11,9 @@
 				<a class="nav-link active" href="#pref-view-details" data-bs-toggle="tab" role="tab"><i class="ti ti-info-circle me-1"></i>{{ $LANG['details'] ?? '' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
+				<a class="nav-link" href="#pref-view-numbering" data-bs-toggle="tab" role="tab"><i class="ti ti-hash me-1"></i>{{ $LANG['numbering'] ?? 'Numbering' }}</a>
+			</li>
+			<li class="nav-item" role="presentation">
 				<a class="nav-link" href="#pref-view-localization" data-bs-toggle="tab" role="tab"><i class="ti ti-world me-1"></i>{{ $LANG['localization'] ?? 'Localization' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
@@ -32,15 +35,15 @@
 						<td colspan="3">{{ $preference['pref_description'] }}</td>
 					</tr>
 					<tr>
-						<th class="col-4">{{ $LANG['currency'] ?? 'Currency' }}
-							<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_currency_sign" title="{{ $LANG['currency'] ?? 'Currency' }}"><i class="ti ti-help"></i></a>
+						<th class="col-4">{{ $LANG['default_currency'] ?? 'Default currency' }}
+							<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_currency_sign" title="{{ $LANG['default_currency'] ?? 'Default currency' }}"><i class="ti ti-help"></i></a>
 						</th>
 						<td>{{ ($preference['currency_sign'] ?? '')|si_currency_display }}
 							@if(!empty($preference['currency_code']))
 								<span class="text-secondary ms-1">({{ $preference['currency_code'] }})</span>
 							@endif
 						</td>
-						<th class="col-4">{{ $LANG['payment_terms'] ?? 'Payment terms' }}</th>
+						<th class="col-4">{{ $LANG['default_payment_terms'] ?? 'Default payment terms' }}</th>
 						<td>{{ $prefPaymentTermLabel ?? '' }}</td>
 					</tr>
 					<tr>
@@ -53,12 +56,16 @@
 						</th>
 						<td>{{ $preference['enabled'] }}</td>
 					</tr>
+				</table>
+			</div>
+			<div id="pref-view-numbering" class="tab-pane" role="tabpanel">
+				<table class="table table-vcenter">
 					<tr>
-						<th>{{ $LANG['invoice_numbering_group'] ?? '' }}
+						<th class="col-4">{{ $LANG['invoice_numbering_group'] ?? '' }}
 							<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_numbering_group" title="{{ $LANG['invoice_numbering_group'] ?? '' }}"><i class="ti ti-help"></i></a>
 						</th>
 						<td>{{ $index_group['pref_description'] ?? '' }}</td>
-						<th>{{ $LANG['next_invoice_number'] ?? 'Next invoice number' }}</th>
+						<th class="col-4">{{ $LANG['next_invoice_number'] ?? 'Next invoice number' }}</th>
 						<td><strong>{{ $next_invoice_number }}</strong></td>
 					</tr>
 					<tr>
@@ -211,6 +218,9 @@
 				<a class="nav-link active" href="#pref-edit-details" data-bs-toggle="tab" role="tab"><i class="ti ti-info-circle me-1"></i>{{ $LANG['details'] ?? '' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
+				<a class="nav-link" href="#pref-edit-numbering" data-bs-toggle="tab" role="tab"><i class="ti ti-hash me-1"></i>{{ $LANG['numbering'] ?? 'Numbering' }}</a>
+			</li>
+			<li class="nav-item" role="presentation">
 				<a class="nav-link" href="#pref-edit-localization" data-bs-toggle="tab" role="tab"><i class="ti ti-world me-1"></i>{{ $LANG['localization'] ?? 'Localization' }}</a>
 			</li>
 			<li class="nav-item" role="presentation">
@@ -251,7 +261,7 @@
 					</div>
 					<div class="col-md-6">
 						<div class="mb-3">
-							<label class="form-label">{{ $LANG['payment_terms'] ?? 'Payment terms' }}</label>
+							<label class="form-label">{{ $LANG['default_payment_terms'] ?? 'Default payment terms' }}</label>
 							<select name="payment_term_id" class="form-select">
 								<option value="">{{ $LANG['payment_term_none'] ?? '-' }}</option>
 								@foreach(($paymentTerms ?? []) as $pt)
@@ -286,6 +296,8 @@
 						</div>
 					</div>
 				</div>
+			</div>
+			<div id="pref-edit-numbering" class="tab-pane" role="tabpanel">
 				<div class="mb-3">
 					<label class="form-label">{{ $LANG['invoice_numbering_group'] ?? '' }}
 						<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_inv_pref_invoice_numbering_group" title="{{ $LANG['invoice_numbering_group'] ?? '' }}"><i class="ti ti-help"></i></a>

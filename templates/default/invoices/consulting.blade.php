@@ -76,7 +76,7 @@
 @else
 	<select name="tax_id" class="form-select">
 	@foreach(($taxes ?? []) as $tax)
-		<option @if($tax['tax_id'] == $defaults->tax) selected @endif value="{{ $tax['tax_id'] ?? '' }}">{{ $tax['tax_description'] ?? '' }}</option>
+		<option @if($tax['tax_id'] == $defaults->tax) selected @endif value="{{ $tax['tax_id'] ?? '' }}">{{ $tax['tax_description'] ?? '' }} ({{ ($tax['type'] ?? '') === '$' ? '$' : '' }}{{ (float)($tax['tax_percentage'] ?? 0) }}{{ ($tax['type'] ?? '') !== '$' ? '%' : '' }})</option>
 	@endforeach
 	</select>
 @endif

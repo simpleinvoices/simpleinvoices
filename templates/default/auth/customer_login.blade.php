@@ -61,7 +61,7 @@
 </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.4.0/dist/js/tabler.min.js"></script>
+<script src="./templates/default/vendor/tabler-core/tabler.min.js"></script>
 @verbatim
 <script>
 document.addEventListener('DOMContentLoaded', function() {

@@ -22,7 +22,7 @@
 						<select id="si-new-product-tax" class="form-select">
 							<option value="">{{ $LANG['none'] ?? 'None' }}</option>
 							@foreach(($taxes ?? []) as $taxOpt)
-								<option value="{{ $taxOpt['tax_id'] ?? '' }}">{{ $taxOpt['tax_description'] ?? '' }}</option>
+								<option value="{{ $taxOpt['tax_id'] ?? '' }}">{{ $taxOpt['tax_description'] ?? '' }} ({{ ($taxOpt['type'] ?? '') === '$' ? '$' : '' }}{{ (float)($taxOpt['tax_percentage'] ?? 0) }}{{ ($taxOpt['type'] ?? '') !== '$' ? '%' : '' }})</option>
 							@endforeach
 						</select>
 					</div>
