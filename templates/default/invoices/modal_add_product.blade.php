@@ -83,7 +83,7 @@
 		priceEl.value = '0.00';
 		taxEl.value   = '';
 		notesEl.value = '';
-		bootstrap.Modal.getOrCreateInstance(modalEl).show();
+		tabler.Modal.getOrCreateInstance(modalEl).show();
 	});
 
 	saveBtn.addEventListener('click', function () {
@@ -108,7 +108,7 @@
 			.then(function (r) { return r.json(); })
 			.then(function (result) {
 				if (result.success) {
-					bootstrap.Modal.getInstance(modalEl).hide();
+					tabler.Modal.getInstance(modalEl).hide();
 
 					var id   = String(result.id);
 					var desc = result.description;

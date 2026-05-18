@@ -114,7 +114,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?module=documentation&view=docs">
+                        <a class="nav-link si-open-docs" href="#" data-docs-route="/">
                             <span class="nav-link-icon d-md-none d-lg-inline-block"><i class="ti ti-book"></i></span>
                             <span class="nav-link-title">Docs</span>
                         </a>
@@ -220,7 +220,7 @@
                     {{-- Documentation --}}
                     @if(($module ?? '') != 'documentation')
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?module=documentation&view=docs">
+                        <a class="nav-link si-open-docs" href="#" data-docs-route="/">
                             <span class="nav-link-icon d-md-none d-lg-inline-block"><i class="ti ti-book"></i></span>
                             <span class="nav-link-title">Docs</span>
                         </a>
@@ -369,7 +369,6 @@
             'invoices_manage' => 'manage_invoices',
             'invoices_itemised' => 'new_invoice_itemised',
             'invoices_total' => 'new_invoice_total',
-            'invoices_consulting' => 'new_invoice_consulting',
             'invoices_details' => 'invoice',
             'invoices_add_invoice_item' => 'add_invoice_item',
             'invoices_manage_js' => 'manage_invoices',

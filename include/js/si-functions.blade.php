@@ -230,7 +230,7 @@
 		itemtable.appendChild(clonedRow);
 		if (window.hugeRTE && detailsCol) {
 			var isDarkAdd = document.documentElement.getAttribute('data-bs-theme') === 'dark';
-			var sharedAdd = { base_url: 'https://cdn.jsdelivr.net/npm/hugerte@1.0.10', suffix: '.min', menubar: false, statusbar: false, promotion: false, branding: false, content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, sans-serif; font-size: 14px; }' };
+			var sharedAdd = { base_url: './templates/default/vendor/hugerte', suffix: '.min', menubar: false, statusbar: false, promotion: false, branding: false, content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, sans-serif; font-size: 14px; }' };
 			if (isDarkAdd) { sharedAdd.skin = 'oxide-dark'; sharedAdd.content_css = 'dark'; }
 			window.hugeRTE.init(Object.assign({}, sharedAdd, { selector: '#description' + rowID_new, plugins: 'lists autoresize', toolbar: 'bold italic | bullist numlist', min_height: 50, max_height: 150 }));
 		}
@@ -243,7 +243,7 @@
 		var doc = document.querySelector('.export_doc'); if (doc) doc.setAttribute('href', 'index.php?module=export&view=invoice&id=' + row_number + '&format=file&filetype=' + wordprocessor);
 		var xls = document.querySelector('.export_xls'); if (xls) xls.setAttribute('href', 'index.php?module=export&view=invoice&id=' + row_number + '&format=file&filetype=' + spreadsheet);
 		var el = document.getElementById('export_dialog');
-		if (el && window.bootstrap && window.bootstrap.Modal) { var m = window.bootstrap.Modal.getOrCreateInstance(el); m.show(); }
+		if (el && window.tabler && window.tabler.Modal) { var m = window.tabler.Modal.getOrCreateInstance(el); m.show(); }
 	}
 
 	function siToggleAllDesc(show) {

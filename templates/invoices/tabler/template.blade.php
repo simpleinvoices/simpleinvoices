@@ -189,59 +189,6 @@
 		</table>
 		@endif
 
-		{{-- Line items: Type 3 consulting --}}
-		@if(($invoice['type_id'] ?? null) == 3)
-		<table class="si-tabler-inv-table table-card">
-			<colgroup>
-				<col class="si-tabler-col-qty" />
-				<col class="si-tabler-col-item" />
-				<col class="si-tabler-col-unit" />
-				<col class="si-tabler-col-amount" />
-			</colgroup>
-			<thead>
-				<tr>
-					<th class="si-tabler-col-qty" bgcolor="#f8fafc">{{ $LANG['quantity_short'] ?? '' }}</th>
-					<th bgcolor="#f8fafc">{{ $LANG['item'] ?? '' }}</th>
-					<th class="text-end si-tabler-col-unit" bgcolor="#f8fafc">{{ $LANG['unit_cost'] ?? '' }}</th>
-					<th class="text-end si-tabler-col-amount" bgcolor="#f8fafc">{{ $LANG['price'] ?? '' }}</th>
-				</tr>
-			</thead>
-		<tbody>
-			@foreach(($invoiceItems ?? []) as $invoiceItem)
-			<tr>
-				<td class="si-tabler-qty-cell">{{ ($invoiceItem['quantity'] ?? '')|siLocal_number }}</td>
-				<td>{!! outhtml($invoiceItem['product']['description'] ?? '') !!}</td>
-				<td></td>
-				<td></td>
-			</tr>
-			@if(!empty($invoiceItem['product']['custom_field1']) || !empty($invoiceItem['product']['custom_field2']) || !empty($invoiceItem['product']['custom_field3']) || !empty($invoiceItem['product']['custom_field4']))
-			<tr class="si-tabler-inv-line-cf">
-				<td></td>
-				<td colspan="3">
-					@if(!empty($invoiceItem['product']['custom_field1']))<span>{{ $customFieldLabels['product_cf1'] ?? '' }}: {{ $invoiceItem['product']['custom_field1'] ?? '' }}</span>@endif
-					@if(!empty($invoiceItem['product']['custom_field2']))<span>{{ $customFieldLabels['product_cf2'] ?? '' }}: {{ $invoiceItem['product']['custom_field2'] ?? '' }}</span>@endif
-					@if(!empty($invoiceItem['product']['custom_field3']))<span>{{ $customFieldLabels['product_cf3'] ?? '' }}: {{ $invoiceItem['product']['custom_field3'] ?? '' }}</span>@endif
-					@if(!empty($invoiceItem['product']['custom_field4']))<span>{{ $customFieldLabels['product_cf4'] ?? '' }}: {{ $invoiceItem['product']['custom_field4'] ?? '' }}</span>@endif
-				</td>
-			</tr>
-			@endif
-			@if(!empty($invoiceItem['description']))
-			<tr class="si-tabler-inv-line-desc">
-				<td></td>
-				<td colspan="3"><i>{{ $LANG['description'] ?? '' }}: </i>{!! outhtml($invoiceItem['description'] ?? '') !!}</td>
-			</tr>
-			@endif
-			<tr>
-				<td></td>
-				<td></td>
-				<td class="text-end">{!! CurrencySignHelper::formatInvoice($invoiceItem['unit_price'] ?? 0, $invoice, $preference) !!}</td>
-				<td class="text-end">{!! CurrencySignHelper::formatInvoice($invoiceItem['total'] ?? 0, $invoice, $preference) !!}</td>
-			</tr>
-			@endforeach
-		</tbody>
-		</table>
-		@endif
-
 		{{-- Line items: Type 1 total (description only) --}}
 		@if(($invoice['type_id'] ?? null) == 1)
 		<table class="si-tabler-inv-table table-card">
@@ -256,7 +203,7 @@
 		</table>
 		@endif
 
-		@if((($invoice['type_id'] ?? null) == 2 && !empty($invoice['note'])) || (($invoice['type_id'] ?? null) == 3 && !empty($invoice['note'])))
+		@if(($invoice['type_id'] ?? null) == 2 && !empty($invoice['note']))
 		<div class="si-tabler-inv-notes">
 			<b>{{ $LANG['notes'] ?? '' }}:</b><br />
 			{{ ($invoice['note'] ?? '') | outhtml }}

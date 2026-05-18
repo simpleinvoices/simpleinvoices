@@ -181,7 +181,7 @@
 								<option
 									value="{{ $taxOption['tax_id'] ?? '' }}"
 									@if(($taxOption['tax_id'] ?? '') == ((get())['tax'][$line][$taxIdx] ?? null)) selected @endif
-								>{{ $taxOption['tax_description'] ?? '' }}</option>
+								>{{ $taxOption['tax_description'] ?? '' }} ({{ ($taxOption['type'] ?? '') === '$' ? '$' : '' }}{{ (float)($taxOption['tax_percentage'] ?? 0) }}{{ ($taxOption['type'] ?? '') !== '$' ? '%' : '' }})</option>
 							@endforeach
 						</select>
 					</div>
@@ -254,7 +254,7 @@
 					'calcDueDate'    => '',
 					'isNewInvoice'   => true,
 				])
-				<a class="cluetip text-secondary small mt-1 d-inline-block" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_invoice_custom_fields" title="{{ $LANG['want_more_fields'] ?? '' }}"><i class="ti ti-help"></i></a>
+				<a class="cluetip text-secondary small mt-1 d-inline-block" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_invoice_custom_fields" title="{{ $LANG['want_more_fields'] ?? '' }}"><i class="ti ti-help me-1"></i>{{ $LANG['want_more_fields'] ?? '' }}</a>
 			</div>
 		</div>
 

@@ -33,10 +33,10 @@
     </footer>
 </div>{{-- /page-wrapper --}}
 </div>{{-- /page --}}
-<script src="./templates/default/vendor/tabler-core/tabler.min.js" defer></script>
-<script src="./include/js/si-help-modal.js" defer></script>
+<script src="{{ $siUrl }}/templates/default/vendor/tabler-core/tabler.min.js" defer></script>
+<script src="{{ $siUrl }}/include/js/si-help-modal.js" defer></script>
 @if(($module ?? '') === 'reports')
-<script src="./include/js/si-report-sort.js" defer></script>
+<script src="{{ $siUrl }}/include/js/si-report-sort.js" defer></script>
 @endif
 {{-- Global preview modal (invoice / payment print preview) --}}
 <div class="modal fade" id="si_preview_modal" tabindex="-1" aria-labelledby="si_preview_modal_label" aria-hidden="true">
@@ -100,8 +100,8 @@ function siPreviewModal(url, title, pdfUrl) {
             pdfIcon.classList.add('d-none');
         }
     }
-    var bsModal = window.bootstrap && window.bootstrap.Modal
-        ? window.bootstrap.Modal.getOrCreateInstance(modal) : null;
+    var bsModal = window.tabler && window.tabler.Modal
+        ? window.tabler.Modal.getOrCreateInstance(modal) : null;
     if (bsModal) bsModal.show();
     modal.addEventListener('hidden.bs.modal', function handler() {
         if (iframe) iframe.src = 'about:blank';

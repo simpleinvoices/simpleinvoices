@@ -74,7 +74,7 @@
 				window._siProductModalCallback = callback;
 				var descEl = document.getElementById('si-new-product-description');
 				if (descEl) descEl.value = input;
-				bootstrap.Modal.getOrCreateInstance(addProductModal).show();
+				tabler.Modal.getOrCreateInstance(addProductModal).show();
 			};
 			tsOptions.render = {
 				option_create: function (data, escape) {

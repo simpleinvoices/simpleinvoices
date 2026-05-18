@@ -114,11 +114,8 @@
         {
             "inv_ty_id": "2",
             "inv_ty_description": "Itemised"
-        },
-        {
-            "inv_ty_id": "3",
-            "inv_ty_description": "Consulting"
         }
+
     ],
     "si_payment_types": [
         {
@@ -1650,9 +1647,9 @@
         },
         {
             "sql_patch_ref": "203",
-            "sql_patch": "Move all old consulting style invoices to itemised",
+            "sql_patch": "Move all old consulting style invoices to itemised (consulting type removed)",
             "sql_release": "20090704",
-            "sql_statement": "UPDATE si_invoices SET type_id = 2 where type_id = 3"
+            "sql_statement": "DELETE FROM si_invoice_type WHERE inv_ty_id = 3 ; UPDATE si_invoices SET type_id = 2 where type_id = 3"
         },
         {
             "sql_patch_ref": "204",
@@ -2773,7 +2770,7 @@
         {
             "id": "5",
             "name": "line_items",
-            "value": "5",
+            "value": "2",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },
@@ -2928,6 +2925,13 @@
             "id": "27",
             "name": "confirm_delete_line_item",
             "value": "0",
+            "domain_id": "DOMAIN-ID",
+            "extension_id": "1"
+        },
+        {
+            "id": "28",
+            "name": "export_template",
+            "value": "export",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         }

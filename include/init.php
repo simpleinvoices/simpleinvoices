@@ -260,5 +260,3 @@ include_once("./include/backup.lib.php");
 
 $defaults = getSystemDefaults();
 $bladeView -> assign("defaults",$defaults);
-
-?>

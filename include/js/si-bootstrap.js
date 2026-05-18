@@ -38,7 +38,7 @@
 			btn.addEventListener('click', function () {
 				if (typeof confirmDeleteFn === 'function') confirmDeleteFn();
 				confirmDeleteFn = null;
-				var Modal = window.bootstrap && window.bootstrap.Modal;
+				var Modal = window.tabler && window.tabler.Modal;
 				var m = div._bsModal || (Modal && Modal.getInstance(div));
 				if (m) m.hide();
 			});
@@ -49,8 +49,8 @@
 		open: function (deleteFn) {
 			confirmDeleteFn = deleteFn;
 			if (!confirmModalEl) createConfirmModal();
-			if (window.bootstrap && window.bootstrap.Modal && confirmModalEl) {
-				var m = window.bootstrap.Modal.getOrCreateInstance(confirmModalEl);
+			if (window.tabler && window.tabler.Modal && confirmModalEl) {
+				var m = window.tabler.Modal.getOrCreateInstance(confirmModalEl);
 				m.show();
 			}
 		}
@@ -109,8 +109,8 @@
 		else if (/^\d+$/.test(String(activeTab).trim())) idx = parseInt(activeTab, 10);
 		if (idx >= 0) {
 			var link = links[idx];
-			if (window.bootstrap && window.bootstrap.Tab && link) {
-				window.bootstrap.Tab.getOrCreateInstance(link).show();
+			if (window.tabler && window.tabler.Tab && link) {
+				window.tabler.Tab.getOrCreateInstance(link).show();
 			}
 			return;
 		}
@@ -118,7 +118,7 @@
 		if (want.indexOf('#') !== 0) want = '#' + want;
 		for (var i = 0; i < links.length; i++) {
 			if (links[i].getAttribute('href') === want) {
-				if (window.bootstrap && window.bootstrap.Tab) window.bootstrap.Tab.getOrCreateInstance(links[i]).show();
+				if (window.tabler && window.tabler.Tab) window.tabler.Tab.getOrCreateInstance(links[i]).show();
 				break;
 			}
 		}

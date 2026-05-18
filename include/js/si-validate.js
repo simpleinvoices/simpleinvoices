@@ -38,8 +38,8 @@
 		var pane = el.closest('.tab-pane');
 		if (!pane || !pane.id) return;
 		var tabLink = document.querySelector('a[data-bs-toggle="tab"][href="#' + pane.id + '"]');
-		if (tabLink && window.bootstrap && window.bootstrap.Tab) {
-			window.bootstrap.Tab.getOrCreateInstance(tabLink).show();
+		if (tabLink && window.tabler && window.tabler.Tab) {
+			window.tabler.Tab.getOrCreateInstance(tabLink).show();
 		}
 	}
 

@@ -308,56 +308,6 @@
              	@endforeach
 	@endif
 
-	@if(($invoice['type_id'] ?? null) == 3 )
-			<tr class="si-modern-th">
-				<td class="si-modern-th col-qty" bgcolor="#f1f5f9"><b>{{ $LANG['quantity_short'] ?? '' }}</b></td>
-				<td colspan="3" class="si-modern-th" bgcolor="#f1f5f9"><b>{{ $LANG['item'] ?? '' }}</b></td>
-				<td align="right" class="si-modern-th" bgcolor="#f1f5f9"><b>{{ $LANG['unit_cost'] ?? '' }}</b></td>
-				<td align="right" class="si-modern-th" bgcolor="#f1f5f9"><b>{{ $LANG['price'] ?? '' }}</b></td>
-			</tr>
-
-			@foreach(($invoiceItems ?? []) as $invoiceItem)
-	
-			<tr class="si-modern-item-row">
-				<td class="col-qty">{{ ($invoiceItem['quantity'] ?? '')|siLocal_number }}</td>
-				<td>{!! outhtml($invoiceItem['product']['description'] ?? '') !!}</td>
-				<td class="" colspan="4"></td>
-			</tr>
-            <tr class="si-modern-item-sep">
-                <td class=""></td>
-				<td class="" colspan="5">
-                    <table width="100%">
-                        <tr>
-
-					{inv_itemised_cf label=$customFieldLabels['product_cf1'] field=$invoiceItem['product']['custom_field1']}
-					{do_tr number=1 class="blank-class"}
-					{inv_itemised_cf label=$customFieldLabels['product_cf2'] field=$invoiceItem['product']['custom_field2']}
-					{do_tr number=2 class="blank-class"}
-					{inv_itemised_cf label=$customFieldLabels['product_cf3'] field=$invoiceItem['product']['custom_field3']}
-					{do_tr number=3 class="blank-class"}
-					{inv_itemised_cf label=$customFieldLabels['product_cf4'] field=$invoiceItem['product']['custom_field4']}
-					{do_tr number=4 class="blank-class"}
-
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-
-			<tr class="si-modern-line-desc">
-				<td class=""></td>
-				<td class="" colspan="5"><i>{{ $LANG['description'] ?? '' }}: </i>{!! outhtml($invoiceItem['description'] ?? '') !!}</td>
-			</tr>
-			<tr class="si-modern-item-row">
-				<td class="" ></td>
-				<td class=""></td>
-				<td class=""></td>
-				<td class=""></td>
-				<td align="right" class="si-modern-num">{!! CurrencySignHelper::formatInvoice($invoiceItem['unit_price'] ?? 0, $invoice, $preference) !!}</td>
-				<td align="right" class="si-modern-num">{!! CurrencySignHelper::formatInvoice($invoiceItem['total'] ?? 0, $invoice, $preference) !!}</td>
-			</tr>
-			@endforeach
-	@endif
-
 	@if(($invoice['type_id'] ?? null) == 1 )
 		    <table class="left si-modern-block-table" width="100%">
 
@@ -374,7 +324,7 @@
 		@endforeach
 	@endif
 
-@if((($invoice['type_id'] ?? null) == 2 && ($invoice['note'] ?? '') != "") || (($invoice['type_id'] ?? null) == 3 && ($invoice['note'] ?? '') != "" )  )
+@if(($invoice['type_id'] ?? null) == 2 && ($invoice['note'] ?? '') != "")
 
 		<tr>
 			<td class="" colspan="6"><br /></td>

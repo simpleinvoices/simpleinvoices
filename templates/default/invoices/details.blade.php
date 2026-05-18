@@ -120,7 +120,7 @@
 
 		@endif
 
-		@if($invoice['type_id'] == 2 || $invoice['type_id'] == 3)
+		@if($invoice['type_id'] == 2)
 
 			@php
 				$showDetailsInitially = false;

@@ -36,8 +36,16 @@ copy(
     path.join(vendorDir, 'tabler-core', 'tabler.min.css')
 );
 copy(
+    path.join(root, 'node_modules', '@tabler', 'core', 'dist', 'css', 'tabler.min.css.map'),
+    path.join(vendorDir, 'tabler-core', 'tabler.min.css.map')
+);
+copy(
     path.join(root, 'node_modules', '@tabler', 'core', 'dist', 'js', 'tabler.min.js'),
     path.join(vendorDir, 'tabler-core', 'tabler.min.js')
+);
+copy(
+    path.join(root, 'node_modules', '@tabler', 'core', 'dist', 'js', 'tabler.min.js.map'),
+    path.join(vendorDir, 'tabler-core', 'tabler.min.js.map')
 );
 
 // @tabler/icons-webfont v3.44.0 - only copy fonts referenced by the CSS
@@ -61,8 +69,16 @@ copy(
     path.join(vendorDir, 'tom-select', 'tom-select.bootstrap5.min.css')
 );
 copy(
+    path.join(root, 'node_modules', 'tom-select', 'dist', 'css', 'tom-select.bootstrap5.min.css.map'),
+    path.join(vendorDir, 'tom-select', 'tom-select.bootstrap5.min.css.map')
+);
+copy(
     path.join(root, 'node_modules', 'tom-select', 'dist', 'js', 'tom-select.complete.min.js'),
     path.join(vendorDir, 'tom-select', 'tom-select.complete.min.js')
+);
+copy(
+    path.join(root, 'node_modules', 'tom-select', 'dist', 'js', 'tom-select.complete.min.js.map'),
+    path.join(vendorDir, 'tom-select', 'tom-select.complete.min.js.map')
 );
 
 // hugerte v1.0.10 (flat package, no dist/ dir)
@@ -116,21 +132,6 @@ copyDir(
     path.join(root, 'node_modules', '@fontsource', 'inter', 'files'),
     path.join(vendorDir, 'inter', 'files'),
     interFilter
-);
-
-// docsify v4.13.1 - documentation SPA
-console.log('\n[docsify]');
-copy(
-    path.join(root, 'node_modules', 'docsify', 'lib', 'docsify.min.js'),
-    path.join(vendorDir, 'docsify', 'docsify.min.js')
-);
-copy(
-    path.join(root, 'node_modules', 'docsify', 'lib', 'themes', 'vue.css'),
-    path.join(vendorDir, 'docsify', 'themes', 'vue.css')
-);
-copy(
-    path.join(root, 'node_modules', 'docsify', 'lib', 'plugins', 'search.min.js'),
-    path.join(vendorDir, 'docsify', 'plugins', 'search.min.js')
 );
 
 console.log('\nDone. Vendor assets written to templates/default/vendor/');

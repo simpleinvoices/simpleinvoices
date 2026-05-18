@@ -320,10 +320,6 @@
 		@include($template_path . '.itemised')
 	@endif
 
-	@if($invoice['type_id'] == 3 )
-		@include($template_path . '.consulting')
-	@endif
-
 	@if($invoice['type_id'] == 1 )
 		@include($template_path . '.total')
 	@endif

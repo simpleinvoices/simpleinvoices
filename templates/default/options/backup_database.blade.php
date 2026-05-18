@@ -299,7 +299,7 @@ function pageDownload(type, btn) {
 
 // ── SQL modal ─────────────────────────────────────────────────────────────
 function openSQLModal() {
-	var modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('si_sql_modal'));
+	var modal = tabler.Modal.getOrCreateInstance(document.getElementById('si_sql_modal'));
 	modal.show();
 
 	if (_siBackup.sql !== null) return; // already loaded
@@ -338,7 +338,7 @@ function _renderJSONModal() {
 }
 
 function openJSONModal() {
-	var modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('si_json_modal'));
+	var modal = tabler.Modal.getOrCreateInstance(document.getElementById('si_json_modal'));
 	modal.show();
 
 	if (typeof _siBackup.json === 'string') { _renderJSONModal(); return; }

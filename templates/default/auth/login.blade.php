@@ -127,7 +127,7 @@
 </div>
 </div>
 
-<script src="./templates/default/vendor/tabler-core/tabler.min.js"></script>
+<script src="{{ $siUrl }}/templates/default/vendor/tabler-core/tabler.min.js"></script>
 @verbatim
 <script>
 document.addEventListener('DOMContentLoaded', function() {

@@ -77,7 +77,7 @@
 {{-- Invoice preference, currency, payment terms, due date preview (one row on large screens). Use -sm to match line-item controls on new invoice. --}}
 <div class="row g-2 align-items-start si-invoice-pref-currency-terms">
 	<div class="col-12 col-sm-6 col-xl-4">
-		<label class="form-label mb-1" for="si_invoice_preference_id">{{ $LANG['inv_pref'] ?? '' }}</label>
+		<label class="form-label mb-1" for="si_invoice_preference_id">{{ $LANG['inv_pref'] ?? '' }} <a class="cluetip text-secondary" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_invoice_preference" title="{{ $LANG['inv_pref'] ?? '' }}"><i class="ti ti-help"></i></a></label>
 		@if(($preferences ?? null) == null)
 			<p class="text-muted mb-0"><em>{{ $LANG['no_preferences'] ?? '' }}</em></p>
 		@else
@@ -99,7 +99,7 @@
 		@endif
 	</div>
 	<div class="col-12 col-sm-6 col-xl-4">
-		<label class="form-label mb-1" for="si_invoice_currency_select">{{ $LANG['currency'] ?? 'Currency' }}</label>
+		<label class="form-label mb-1" for="si_invoice_currency_select">{{ $LANG['currency'] ?? 'Currency' }} <a class="cluetip text-secondary" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_invoice_currency" title="{{ $LANG['currency'] ?? 'Currency' }}"><i class="ti ti-help"></i></a></label>
 		<select id="si_invoice_currency_select" class="form-select" autocomplete="off">
 			@php $lastGroup = null; @endphp
 			@foreach($groupedCurrencies as $c)
@@ -138,7 +138,7 @@
 		</select>
 	</div>
 	<div class="col-12 col-sm-6 col-xl-4">
-		<label class="form-label mb-1" for="si_invoice_payment_term_id">{{ $LANG['payment_terms'] ?? 'Payment terms' }}</label>
+		<label class="form-label mb-1" for="si_invoice_payment_term_id">{{ $LANG['payment_terms'] ?? 'Payment terms' }} <a class="cluetip text-secondary" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_payment_terms" title="{{ $LANG['payment_terms'] ?? '' }}"><i class="ti ti-help"></i></a></label>
 		<select name="payment_term_id" id="si_invoice_payment_term_id" class="form-select">
 			<option value="">{{ $LANG['payment_term_none'] ?? '-' }}</option>
 			@foreach(($paymentTerms ?? []) as $pt)
@@ -152,7 +152,7 @@
 		</select>
 	</div>
 	<div class="col-12 col-sm-6 col-xl-4" id="si_invoice_due_date_container">
-		<label class="form-label mb-1" for="si_invoice_due_date_preview">{{ $LANG['due_date'] ?? 'Due date' }}</label>
+		<label class="form-label mb-1" for="si_invoice_due_date_preview">{{ $LANG['due_date'] ?? 'Due date' }} <a class="cluetip text-secondary" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_due_date" title="{{ $LANG['due_date'] ?? '' }}"><i class="ti ti-help"></i></a></label>
 		<input type="text" readonly tabindex="-1" id="si_invoice_due_date_preview" data-initial="{{ $calcDueDate }}"
 			class="form-control fw-medium bg-body-secondary border text-body"
 			value="{{ $calcDueDate !== '' ? $calcDueDate : '-' }}"
@@ -160,7 +160,7 @@
 	</div>
 	@if($showInvoiceIdPreview)
 	<div class="col-12 col-sm-6 col-xl-4">
-		<label class="form-label mb-1" for="si_invoice_id_preview">{{ $LANG['invoice_id'] ?? 'Invoice ID' }}</label>
+		<label class="form-label mb-1" for="si_invoice_id_preview">{{ $LANG['invoice_id'] ?? 'Invoice ID' }} <a class="cluetip text-secondary" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_invoice_id" title="{{ $LANG['invoice_id'] ?? 'Invoice ID' }}"><i class="ti ti-help"></i></a></label>
 		<input type="text" readonly tabindex="-1" id="si_invoice_id_preview" data-initial="{{ $nextInvoiceId }}"
 			class="form-control fw-medium bg-body-secondary border text-body"
 			value="{{ $nextInvoiceId !== '' ? $nextInvoiceId : '-' }}"

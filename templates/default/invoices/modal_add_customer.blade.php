@@ -69,7 +69,7 @@
 		attnEl.value  = '';
 		emailEl.value = '';
 		phoneEl.value = '';
-		bootstrap.Modal.getOrCreateInstance(modalEl).show();
+		tabler.Modal.getOrCreateInstance(modalEl).show();
 	});
 
 	saveBtn.addEventListener('click', function () {
@@ -94,7 +94,7 @@
 			.then(function (r) { return r.json(); })
 			.then(function (result) {
 				if (result.success) {
-					bootstrap.Modal.getInstance(modalEl).hide();
+					tabler.Modal.getInstance(modalEl).hide();
 
 					// Update every customer_id select on the page.
 					// If Tom Select has wrapped it, use the Tom Select API so the

@@ -239,8 +239,7 @@ CREATE TABLE IF NOT EXISTS `si_invoice_type` (
 
 INSERT INTO `si_invoice_type` (`inv_ty_id`, `inv_ty_description`) VALUES
  (1, 'Total')
-,(2, 'Itemised')
-,(3, 'Consulting');
+,(2, 'Itemised');
 
 CREATE TABLE IF NOT EXISTS `si_payment_terms` (
   `term_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -734,7 +733,7 @@ INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_rele
 ,(201,200,'Update extensions table','20090529','UPDATE si_extensions SET id = 0 WHERE name = core LIMIT 1')
 ,(202,201,'Set domain_id on system defaults table to 1','20090622','UPDATE si_system_defaults SET domain_id = 1')
 ,(203,202,'Set extension_id on system defaults table to 1','20090622','UPDATE si_system_defaults SET extension_id = 1')
-,(204,203,'Move all old consulting style invoices to itemised','20090704','UPDATE si_invoices SET type_id = 2 where type_id = 3')
+,(204,203,'Move all old consulting style invoices to itemised (consulting type removed)','20090704','DELETE FROM si_invoice_type WHERE inv_ty_id = 3 ; UPDATE si_invoices SET type_id = 2 where type_id = 3')
 ,(205,204,'','','')
 ,(206,205,'','','')
 ,(207,206,'','','')
@@ -842,7 +841,7 @@ INSERT INTO `si_system_defaults` (`id`, `name`, `value`, `domain_id`, `extension
 ,('2','customer','','1','1')
 ,('3','tax','1','1','1')
 ,('4','preference','1','1','1')
-,('5','line_items','5','1','1')
+,('5','line_items','2','1','1')
 ,('6','template','default','1','1')
 ,('7','payment_type','1','1','1')
 ,('8','language','en_GB','1','1')
@@ -864,7 +863,8 @@ INSERT INTO `si_system_defaults` (`id`, `name`, `value`, `domain_id`, `extension
 ,('24','product_attributes','0','1','1')
 ,('25','large_dataset','0','1','1')
 ,('26','precision','2','1','1')
-,('27','confirm_delete_line_item','0','1','1');
+,('27','confirm_delete_line_item','0','1','1')
+,('28','export_template','export','1','1');
 
 CREATE TABLE IF NOT EXISTS `si_tax` (
   `tax_id` int(11) NOT NULL AUTO_INCREMENT,

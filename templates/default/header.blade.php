@@ -18,14 +18,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta name="robots" content="noindex, nofollow" />
-    <link rel="shortcut icon" href="./images/common/favicon.ico" />
-    <link rel="stylesheet" href="./templates/default/vendor/inter/inter.css" />
-    <link rel="stylesheet" href="./templates/default/vendor/tabler-core/tabler.min.css" />
-    <link rel="stylesheet" href="./templates/default/vendor/tabler-icons/tabler-icons.min.css" />
-    <link rel="stylesheet" href="./templates/default/vendor/tom-select/tom-select.bootstrap5.min.css" />
-    <link rel="stylesheet" href="./templates/default/css/si-tabler.css" />
-    <link rel="stylesheet" href="./templates/default/css/print.css" media="print" />
-    <script src="./include/js/si-init.js"></script>
+    <link rel="shortcut icon" href="{{ $siUrl }}/images/common/favicon.ico" />
+    <link rel="stylesheet" href="{{ $siUrl }}/templates/default/vendor/inter/inter.css" />
+    <link rel="stylesheet" href="{{ $siUrl }}/templates/default/vendor/tabler-core/tabler.min.css" />
+    <link rel="stylesheet" href="{{ $siUrl }}/templates/default/vendor/tabler-icons/tabler-icons.min.css" />
+    <link rel="stylesheet" href="{{ $siUrl }}/templates/default/vendor/tom-select/tom-select.bootstrap5.min.css" />
+    <link rel="stylesheet" href="{{ $siUrl }}/templates/default/css/si-tabler.css" />
+    <link rel="stylesheet" href="{{ $siUrl }}/templates/default/css/print.css" media="print" />
+    <script src="{{ $siUrl }}/include/js/si-init.js"></script>
     @php
         $si_grid_lang = [
             'search' => $LANG['grid_search'] ?? '',
@@ -41,18 +41,18 @@
     <script>
         window.SI_GRID_LANG = @json($si_grid_lang);
     </script>
-    <script src="./include/js/si-tabler-grid.js"></script>
-    <script src="./include/js/si-bootstrap.js"></script>
-    <script src="./templates/default/vendor/hugerte/hugerte.min.js"></script>
-    <script src="./templates/default/vendor/litepicker/litepicker.js"></script>
-    <script src="./include/js/si-litepicker.js"></script>
-    <script src="./include/js/si-autocomplete.js"></script>
-    <script src="./templates/default/vendor/tom-select/tom-select.complete.min.js"></script>
+    <script src="{{ $siUrl }}/include/js/si-tabler-grid.js"></script>
+    <script src="{{ $siUrl }}/include/js/si-bootstrap.js"></script>
+    <script src="{{ $siUrl }}/templates/default/vendor/hugerte/hugerte.min.js"></script>
+    <script src="{{ $siUrl }}/templates/default/vendor/litepicker/litepicker.js"></script>
+    <script src="{{ $siUrl }}/include/js/si-litepicker.js"></script>
+    <script src="{{ $siUrl }}/include/js/si-autocomplete.js"></script>
+    <script src="{{ $siUrl }}/templates/default/vendor/tom-select/tom-select.complete.min.js"></script>
     @include('include.js.si-functions')
     @include('include.js.si-conf')
-    <script src="./include/js/si-validate.js"></script>
-    <script src="./include/js/si-product-select.js"></script>
-    <script src="./include/js/si-select.js"></script>
+    <script src="{{ $siUrl }}/include/js/si-validate.js"></script>
+    <script src="{{ $siUrl }}/include/js/si-product-select.js"></script>
+    <script src="{{ $siUrl }}/include/js/si-select.js"></script>
     <script>
         function siToggleTheme(e) {
             if (e) e.preventDefault();

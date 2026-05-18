@@ -20,7 +20,7 @@ var si_conf_large_dataset = @json((bool)(($defaults['large_dataset'] ?? '0') == 
 		if (document.querySelector('#custom-tab-by-hash')) {
 			document.querySelector('#custom-tab-by-hash').addEventListener('click', function(e) { var w = window.open(this.href, '', 'directories,location,menubar,resizable,scrollbars,status,toolbar'); if (w) w.focus(); e.preventDefault(); });
 		}
-		// Help links: Bootstrap/Tabler popovers with content from rel URL (si-help-popover.js)
+		// Help links: modal with embedded Docsify documentation (si-help-modal.js)
 
 	if (!(
 		(navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/iPad/i))
@@ -29,7 +29,7 @@ var si_conf_large_dataset = @json((bool)(($defaults['large_dataset'] ?? '0') == 
 		if (window.hugeRTE) {
 			var isDark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
 			var sharedOpts = {
-				base_url: 'https://cdn.jsdelivr.net/npm/hugerte@1.0.10',
+				base_url: './templates/default/vendor/hugerte',
 				suffix: '.min',
 				menubar: false,
 				statusbar: false,
@@ -82,7 +82,7 @@ var si_conf_large_dataset = @json((bool)(($defaults['large_dataset'] ?? '0') == 
 		if (t) { e.preventDefault(); var id = t.getAttribute('rel'); if (si_conf_delete_line_item && window.siConfirmDeleteModal) siConfirmDeleteModal.open(function(){ delete_line_item(id); }); else delete_line_item(id); return; }
 		if (e.target.closest && e.target.closest('.add_line_item')) { e.preventDefault(); add_line_item(); return; }
 		if (e.target.closest && e.target.closest('.invoice_save')) { var g = document.getElementById('gmail_loading'); if (g) g.style.display = ''; siLog('debug','invoice save'); count_invoice_line_items(); if (g) g.style.display = 'none'; return; }
-		if (e.target.closest && e.target.closest('.export_window')) { var ed = document.getElementById('export_dialog'); if (ed && window.bootstrap && window.bootstrap.Modal) { var m = bootstrap.Modal.getInstance(ed); if (m) m.hide(); } return; }
+		if (e.target.closest && e.target.closest('.export_window')) { var ed = document.getElementById('export_dialog'); if (ed && window.tabler && window.tabler.Modal) { var m = tabler.Modal.getInstance(ed); if (m) m.hide(); } return; }
 		t = e.target.closest ? e.target.closest('.invoice_export_dialog') : null;
 		if (t) { e.preventDefault(); export_invoice(t.getAttribute('rel'), si_conf_spreadsheet, si_conf_wordprocessor); }
 	});

@@ -31,7 +31,6 @@ if( ($auth_session->role_name =='customer')
 		 ) {
 	if (   $acl_view == 'itemised' 
 		|| $acl_view == 'total' 
-		|| $acl_view == 'consulting' 
 		|| $acl_action == 'view'
 		|| ($acl_action != '' && isset($_GET['id']) && $_GET['id'] != $auth_session->user_id) ) {
 

@@ -63,7 +63,7 @@ function si_check_invoice_access($invoice): void {
 
 /**
  * Per-line tax values from POST. Itemised/total invoices use tax_id[line][slot];
- * consulting / product_consulting use a single scalar tax_id for all lines.
+ * product_consulting use a single scalar tax_id for all lines.
  *
  * @param int|string $lineIndex
  * @return array

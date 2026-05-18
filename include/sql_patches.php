@@ -36,8 +36,8 @@
 	$patch['8']['patch'] = "ALTER TABLE ".TB_PREFIX."defaults CHANGE def_inv_template def_inv_template VARCHAR( 50 ) DEFAULT NULL";
 	$patch['8']['date'] = "20060526";
 
-	$patch['9']['name'] = "Add consulting style invoice";
-	$patch['9']['patch'] = "INSERT INTO ".TB_PREFIX."invoice_type ( inv_ty_id , inv_ty_description ) VALUES (3, 'Consulting')";
+	$patch['9']['name'] = "Add consulting style invoice (removed - consulting type no longer supported)";
+	$patch['9']['patch'] = "SELECT 1"; // Consulting invoice type removed, this patch is now a no-op
 	$patch['9']['date'] = "20060531";
 
 	$patch['10']['name'] = "Add enabled to biller";
@@ -1248,8 +1248,8 @@ PRIMARY KEY  (`user_id`)) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unic
     $patch['202']['patch'] = "UPDATE `".TB_PREFIX."system_defaults` SET `extension_id` = '1' ;";
     $patch['202']['date'] = "20090622";
 
-    $patch['203']['name'] = "Move all old consulting style invoices to itemised";
-    $patch['203']['patch'] = "UPDATE `".TB_PREFIX."invoices` SET `type_id` = '2' where `type_id`=3 ;";
+    $patch['203']['name'] = "Move all old consulting style invoices to itemised (consulting type removed)";
+    $patch['203']['patch'] = "DELETE FROM `".TB_PREFIX."invoice_type` WHERE `inv_ty_id` = 3 ; UPDATE `".TB_PREFIX."invoices` SET `type_id` = '2' where `type_id`=3 ;";
     $patch['203']['date'] = "20090704";
 
     $patch['204']['name'] = "Create index table to handle new invoice numbering system";

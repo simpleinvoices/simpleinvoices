@@ -45,7 +45,6 @@ foreach ($customers as $customer) {
 		<tr>
 			<td>{$name}&nbsp;&nbsp;</td>
 			<td><a href="index.php?module=invoices&amp;view=itemised&amp;customer_id={$id}">Itemised</a> |</td> 
-			<td><a href="index.php?module=invoices&amp;view=consulting&amp;customer_id={$id}">&nbsp;Consulting</a> |</td> 
 			<td><a href="index.php?module=invoices&amp;view=total&amp;customer_id={$id}">&nbsp;Total</a></td> 
 		</tr>
 EOD;

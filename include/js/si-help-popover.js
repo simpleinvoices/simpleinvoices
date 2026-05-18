@@ -36,7 +36,7 @@
 	}
 
 	function initHelpPopovers() {
-		if (!window.bootstrap || !window.bootstrap.Popover) return;
+		if (!window.tabler || !window.tabler.Popover) return;
 		var links = document.querySelectorAll('a.cluetip[rel]');
 		links.forEach(function (el) {
 			var url = el.getAttribute('rel');
@@ -45,7 +45,7 @@
 			el.addEventListener('click', function (e) {
 				e.preventDefault();
 			});
-			var popover = new window.bootstrap.Popover(el, {
+			var popover = new window.tabler.Popover(el, {
 				trigger: 'click',
 				html: true,
 				title: title,
@@ -70,7 +70,7 @@
 		document.addEventListener('click', function (e) {
 			var target = e.target;
 			document.querySelectorAll('a.cluetip[rel]').forEach(function (link) {
-				var inst = window.bootstrap.Popover.getInstance(link);
+				var inst = window.tabler.Popover.getInstance(link);
 				if (!inst) return;
 				var tipId = link.getAttribute('aria-describedby');
 				var tip = tipId ? document.getElementById(tipId) : null;
@@ -82,7 +82,7 @@
 		document.addEventListener('keydown', function (e) {
 			if (e.key !== 'Escape') return;
 			document.querySelectorAll('a.cluetip[rel]').forEach(function (link) {
-				var inst = window.bootstrap.Popover.getInstance(link);
+				var inst = window.tabler.Popover.getInstance(link);
 				if (inst) inst.hide();
 			});
 		});

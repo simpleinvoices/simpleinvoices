@@ -3,7 +3,9 @@
   "private": true,
   "description": "Vendor frontend assets for Simple Invoices",
   "scripts": {
-    "copy-assets": "node scripts/copy-assets.js"
+    "copy-assets": "node scripts/copy-assets.js",
+    "build-docs": "cd docs-rspress && npm install && npm run build",
+    "dev-docs": "cd docs-rspress && npm run dev"
   },
   "dependencies": {
     "@fontsource/inter": "5.2.8",
@@ -12,7 +14,6 @@
     "apexcharts": "5.12.0",
     "hugerte": "1.0.10",
     "litepicker": "2.0.12",
-    "tom-select": "2.6.1",
-    "docsify": "4.13.1"
+    "tom-select": "2.6.1"
   }
 }

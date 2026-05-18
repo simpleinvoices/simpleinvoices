@@ -158,8 +158,8 @@
         </div>
         @endif
 
-        {{-- Itemised (type 2) or Consulting (type 3): line items table --}}
-        @if(($invoice['type_id'] ?? 0) == 2 || ($invoice['type_id'] ?? 0) == 3)
+        {{-- Itemised (type 2): line items table --}}
+        @if(($invoice['type_id'] ?? 0) == 2)
         <div class="table-responsive mb-2">
             <table class="table table-vcenter table-sm">
                 <thead>

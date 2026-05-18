@@ -6,6 +6,8 @@ vendor/
 .cursor*
 *.md
 !CLAUDE.md
+!docs/**/*.md
+!docs/index.html
 # Local/cache
 tmp/
 *.log

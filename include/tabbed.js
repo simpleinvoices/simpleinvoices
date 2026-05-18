@@ -208,9 +208,6 @@ var accordion = new Ext.Panel({
     	'new-invoice-itemised' : function(){
     		updateTab('tab-inv-itemised',"New Invoice: Itemised","index.php?module=invoices&view=itemised");
     	},
-    	'new-invoice-consulting' : function(){
-    		updateTab('tab-inv-consulting',"New Invoice: Consulting","index.php?module=invoices&view=consulting");
-    	},
     	'invoice-types' : function(){
     		updateTab('help-tab','Invoice Help',"docs.php?p=ReadMe#faqs-types");
     	},

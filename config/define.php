@@ -8,7 +8,6 @@ define("DISABLED","0"); //
 //invoice styles
 define("total_invoice","1"); // 
 define("itemised_invoice","2"); // 
-define("consulting_invoice","3"); // 
 
 //To turn logging on set the below to true - not needed as it is set in System Defaults
 #define("LOGGING",false);
