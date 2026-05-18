@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+  <head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Docker Installation Recommended - Simple Invoices</title>
+<script>{;const saved = localStorage.getItem('rspress-theme-appearance');const preferDark = window.matchMedia('(prefers-color-scheme: dark)').matches;const isDark = !saved || saved === 'auto' ? preferDark : saved === 'dark';document.documentElement.classList.toggle('dark', isDark);document.documentElement.classList.toggle('rp-dark', isDark);document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';}</script>
+<link href="/static/css/styles.788f7d0799.css" rel="stylesheet">
+<script defer src="/static/js/styles.8ac7885153.js"></script>
+<script defer src="/static/js/lib-react.12a014d3ef.js"></script>
+<script defer src="/static/js/lib-router.6c832d1f65.js"></script>
+<script defer src="/static/js/3470.5a95287f74.js"></script>
+<script defer src="/static/js/index.c14e1ad886.js"></script>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Rspress v2.0.11">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Docker Installation Recommended - Simple Invoices">
+<meta name="description" content="Docker is the fastest way to run Simple Invoices. The included Dockerfile and docker-compose.yml handle everything — PHP, Nginx, database, and frontend assets.">
+<meta property="og:description" content="Docker is the fastest way to run Simple Invoices. The included Dockerfile and docker-compose.yml handle everything — PHP, Nginx, database, and frontend assets."></head>
+
+  <body>
+    <div id="__rspress_root"><header class="rp-nav"><div class="rp-nav__left"><div class="rp-nav__title"><a href="/" class="rp-nav__title__link rp-link"><span>Simple Invoices</span></a></div></div><div class="rp-nav__right"><button class="rp-search-button"><div class="rp-search-button__content"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 20 21" class="rp-search-button__icon"><path fill="currentColor" d="M8.333 1.913A6.667 6.667 0 0 1 15 8.58c0 1.54-.525 2.957-1.402 4.085l4.49 4.492a.834.834 0 0 1-1.177 1.178l-4.491-4.49a6.64 6.64 0 0 1-4.087 1.402 6.667 6.667 0 0 1 0-13.334m0 1.667a5 5 0 1 0 0 10 5 5 0 0 0 0-10"></path></svg><span class="rp-search-button__word">Search</span></div><div class="rp-search-button__hotkey" style="opacity:0"><span></span><span>K</span></div></button><div class="rp-search-button--mobile"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 20 21"><path fill="currentColor" d="M8.333 1.913A6.667 6.667 0 0 1 15 8.58c0 1.54-.525 2.957-1.402 4.085l4.49 4.492a.834.834 0 0 1-1.177 1.178l-4.491-4.49a6.64 6.64 0 0 1-4.087 1.402 6.667 6.667 0 0 1 0-13.334m0 1.667a5 5 0 1 0 0 10 5 5 0 0 0 0-10"></path></svg></div><ul class="rp-nav-menu rp-nav-menu--right"><li class="rp-nav-menu__item rp-nav-menu__item--active"><a href="/guide/getting-started.html" class="rp-nav-menu__item__container rp-link">Guides</a></li><li class="rp-nav-menu__item"><a href="/features/free-open-source.html" class="rp-nav-menu__item__container rp-link">Features</a></li><li class="rp-nav-menu__item"><a href="/help/index.html" class="rp-nav-menu__item__container rp-link">Help Topics</a></li><li class="rp-nav-menu__item"><a href="/blog/welcome-to-simple-invoices.html" class="rp-nav-menu__item__container rp-link">Blog</a></li><li class="rp-nav-menu__item"><a href="/get-involved/index.html" class="rp-nav-menu__item__container rp-link">Get Involved</a></li></ul><div class="rp-nav__others"><div class="rp-nav-menu__divider"></div><div class="rp-switch-appearance"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24" class="rp-switch-appearance__icon rp-switch-appearance__icon--sun"><path fill="currentColor" d="m7.001 15.848-1.226 1.226a.58.58 0 0 0 0 .818.58.58 0 0 0 .818 0l1.226-1.226a.58.58 0 0 0 0-.818.58.58 0 0 0-.818 0m-.352-8.735a.584.584 0 0 0 .825-.825L6.237 5.051a.584.584 0 0 0-.825.825zM5.011 11.07h-1.75a.584.584 0 0 0 0 1.167h1.75c.324 0 .584-.26.584-.583a.585.585 0 0 0-.584-.584m7.003-5.835c.324 0 .584-.26.584-.584V2.9a.58.58 0 0 0-.584-.584.58.58 0 0 0-.583.583V4.65c0 .323.262.584.583.584m5.616 1.621 1.226-1.225a.58.58 0 0 0 0-.818.58.58 0 0 0-.818 0l-1.226 1.225a.58.58 0 0 0 0 .818.576.576 0 0 0 .818 0m3.138 4.214h-1.75a.58.58 0 0 0-.584.584c0 .324.26.584.583.584h1.751a.584.584 0 1 0 0-1.167m-3.389 5.124a.584.584 0 0 0-.825.825l1.238 1.238a.584.584 0 0 0 .825-.826zm-5.365-9.795a5.256 5.256 0 0 0-5.257 5.258 5.256 5.256 0 0 0 5.257 5.257 5.256 5.256 0 0 0 5.257-5.257 5.256 5.256 0 0 0-5.257-5.258m0 11.675a.58.58 0 0 0-.583.583v1.751a.582.582 0 1 0 1.167 0v-1.75a.584.584 0 0 0-.584-.584"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" viewBox="0 0 19 19" class="rp-switch-appearance__icon rp-switch-appearance__icon--moon"><path fill="currentColor" d="M9.166 0a9.2 9.2 0 0 1 1.857.188.834.834 0 0 1 .042 1.623 4.47 4.47 0 1 0 5.457 5.457l.048-.135a.834.834 0 0 1 1.575.177q.186.902.188 1.856A9.168 9.168 0 1 1 9.166 0"></path></svg></div><div class="rp-social-links"><a href="https://github.com/simpleinvoices/simpleinvoices" target="_blank" rel="noopener noreferrer" class="rp-social-links__item"><div class="rp-social-links__icon"><div class="rp-social-links__icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12c0 5.303 3.438 9.8 8.205 11.385c.6.113.82-.258.82-.577c0-.285-.01-1.04-.015-2.04c-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729c1.205.084 1.838 1.236 1.838 1.236c1.07 1.835 2.809 1.305 3.495.998c.108-.776.417-1.305.76-1.605c-2.665-.3-5.466-1.332-5.466-5.93c0-1.31.465-2.38 1.235-3.22c-.135-.303-.54-1.523.105-3.176c0 0 1.005-.322 3.3 1.23c.96-.267 1.98-.399 3-.405c1.02.006 2.04.138 3 .405c2.28-1.552 3.285-1.23 3.285-1.23c.645 1.653.24 2.873.12 3.176c.765.84 1.23 1.91 1.23 3.22c0 4.61-2.805 5.625-5.475 5.92c.42.36.81 1.096.81 2.22c0 1.606-.015 2.896-.015 3.286c0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></div></div></a><a href="https://codeberg.org/simpleinvoices" target="_blank" rel="noopener noreferrer" class="rp-social-links__item"><div class="rp-social-links__icon"><div class="rp-social-links__icon"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.999.747A11.974 11.974 0 0 0 0 12.75c0 2.254.635 4.465 1.833 6.376L11.837 6.19c.072-.092.251-.092.323 0l4.178 5.402h-2.992l.065.239h3.113l.882 1.138h-3.674l.103.374h3.86l.777 1.003h-4.358l.135.483h4.593l.695.894h-5.038l.165.589h5.326l.609.785h-5.717l.182.65h6.038l.562.727h-6.397l.183.65h6.717A12.003 12.003 0 0 0 24 12.75 11.977 11.977 0 0 0 11.999.747zm3.654 19.104.182.65h5.326c.173-.204.353-.433.513-.65zm.385 1.377.18.65h3.563c.233-.198.485-.428.712-.65zm.383 1.377.182.648h1.203c.356-.204.685-.412 1.042-.648z" fill="currentColor"/></svg></div></div></a><a href="https://sr.ht/~simpleinvoices" target="_blank" rel="noopener noreferrer" class="rp-social-links__item"><div class="rp-social-links__icon"><div class="rp-social-links__icon"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.371 0 0 5.371 0 12s5.371 12 12 12 12-5.371 12-12S18.629 0 12 0Zm0 21.677A9.675 9.675 0 0 1 2.323 12 9.675 9.675 0 0 1 12 2.323 9.675 9.675 0 0 1 21.677 12 9.675 9.675 0 0 1 12 21.677Z" fill="currentColor"/></svg></div></div></a><a href="https://git.simpleinvoices.org" target="_blank" rel="noopener noreferrer" class="rp-social-links__item"><div class="rp-social-links__icon"><div class="rp-social-links__icon"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M16.7773 0c1.6018 0 2.9004 1.2986 2.9004 2.9005s-1.2986 2.9004-2.9004 2.9004c-1.0854 0-2.0315-.596-2.5288-1.4787H12.91c-2.3322 0-4.2272 1.8718-4.2649 4.195l-.0007 2.1175a7.0759 7.0759 0 0 1 4.148-1.4205l.1176-.001 1.3385.0002c.4973-.8827 1.4434-1.4788 2.5288-1.4788 1.6018 0 2.9004 1.2986 2.9004 2.9005s-1.2986 2.9004-2.9004 2.9004c-1.0854 0-2.0315-.596-2.5288-1.4787H12.91c-2.3322 0-4.2272 1.8718-4.2649 4.195l-.0007 2.319c.8827.4973 1.4788 1.4434 1.4788 2.5287 0 1.602-1.2986 2.9005-2.9005 2.9005-1.6018 0-2.9004-1.2986-2.9004-2.9005 0-1.0853.596-2.0314 1.4788-2.5287l-.0002-9.9831c0-3.887 3.1195-7.0453 6.9915-7.108l.1176-.001h1.3385C14.7458.5962 15.692 0 16.7773 0ZM7.2227 19.9052c-.6596 0-1.1943.5347-1.1943 1.1943s.5347 1.1943 1.1943 1.1943 1.1944-.5347 1.1944-1.1943-.5348-1.1943-1.1944-1.1943Zm9.5546-10.4644c-.6596 0-1.1944.5347-1.1944 1.1943s.5348 1.1943 1.1944 1.1943c.6596 0 1.1943-.5347 1.1943-1.1943s-.5347-1.1943-1.1943-1.1943Zm0-7.7346c-.6596 0-1.1944.5347-1.1944 1.1943s.5348 1.1943 1.1944 1.1943c.6596 0 1.1943-.5347 1.1943-1.1943s-.5347-1.1943-1.1943-1.1943Z" fill="currentColor"/></svg></div></div></a><a href="/rss/blog.xml" target="_blank" rel="noopener noreferrer" class="rp-social-links__item"><div class="rp-social-links__icon"><div class="rp-social-links__icon"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.199 24C19.199 13.467 10.533 4.8 0 4.8V0c13.165 0 24 10.835 24 24h-4.801zM3.291 17.415c1.814 0 3.293 1.479 3.293 3.295 0 1.813-1.485 3.29-3.301 3.29C1.47 24 0 22.526 0 20.71s1.475-3.294 3.291-3.295zM15.909 24h-4.665c0-6.169-5.075-11.245-11.244-11.245V8.09c8.727 0 15.909 7.184 15.909 15.91z" fill="currentColor"/></svg></div></div></a><ul class="rp-hover-group rp-hover-group--hidden rp-hover-group--right"></ul></div></div><button aria-label="mobile hamburger" class="rp-nav-hamburger rp-nav-hamburger__sm"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="none" viewBox="0 0 21 21"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.667" d="M3.645 5.225h13.333M3.645 10.225h13.333M3.645 15.225h13.333"></path></svg></button><button aria-label="mobile hamburger" class="rp-nav-hamburger rp-nav-hamburger__md"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="none" viewBox="0 0 21 21"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.667" d="M3.645 5.225h13.333M3.645 10.225h13.333M3.645 15.225h13.333"></path></svg><ul class="rp-hover-group rp-hover-group--hidden rp-hover-group--right"><div class="rp-nav-menu__others-mobile__container"><div class="rp-nav-hamburger__md__hover-group"><div class="rp-nav-screen-appearance"><div class="rp-nav-screen-appearance__left">Theme</div><div class="rp-nav-screen-appearance__right"></div></div><div class="rp-nav-screen-divider"></div><div class="rp-social-links"><a href="https://github.com/simpleinvoices/simpleinvoices" target="_blank" rel="noopener noreferrer" class="rp-social-links__item"><div class="rp-social-links__icon"><div class="rp-social-links__icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12c0 5.303 3.438 9.8 8.205 11.385c.6.113.82-.258.82-.577c0-.285-.01-1.04-.015-2.04c-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729c1.205.084 1.838 1.236 1.838 1.236c1.07 1.835 2.809 1.305 3.495.998c.108-.776.417-1.305.76-1.605c-2.665-.3-5.466-1.332-5.466-5.93c0-1.31.465-2.38 1.235-3.22c-.135-.303-.54-1.523.105-3.176c0 0 1.005-.322 3.3 1.23c.96-.267 1.98-.399 3-.405c1.02.006 2.04.138 3 .405c2.28-1.552 3.285-1.23 3.285-1.23c.645 1.653.24 2.873.12 3.176c.765.84 1.23 1.91 1.23 3.22c0 4.61-2.805 5.625-5.475 5.92c.42.36.81 1.096.81 2.22c0 1.606-.015 2.896-.015 3.286c0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></div></div></a><a href="https://codeberg.org/simpleinvoices" target="_blank" rel="noopener noreferrer" class="rp-social-links__item"><div class="rp-social-links__icon"><div class="rp-social-links__icon"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.999.747A11.974 11.974 0 0 0 0 12.75c0 2.254.635 4.465 1.833 6.376L11.837 6.19c.072-.092.251-.092.323 0l4.178 5.402h-2.992l.065.239h3.113l.882 1.138h-3.674l.103.374h3.86l.777 1.003h-4.358l.135.483h4.593l.695.894h-5.038l.165.589h5.326l.609.785h-5.717l.182.65h6.038l.562.727h-6.397l.183.65h6.717A12.003 12.003 0 0 0 24 12.75 11.977 11.977 0 0 0 11.999.747zm3.654 19.104.182.65h5.326c.173-.204.353-.433.513-.65zm.385 1.377.18.65h3.563c.233-.198.485-.428.712-.65zm.383 1.377.182.648h1.203c.356-.204.685-.412 1.042-.648z" fill="currentColor"/></svg></div></div></a><a href="https://sr.ht/~simpleinvoices" target="_blank" rel="noopener noreferrer" class="rp-social-links__item"><div class="rp-social-links__icon"><div class="rp-social-links__icon"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.371 0 0 5.371 0 12s5.371 12 12 12 12-5.371 12-12S18.629 0 12 0Zm0 21.677A9.675 9.675 0 0 1 2.323 12 9.675 9.675 0 0 1 12 2.323 9.675 9.675 0 0 1 21.677 12 9.675 9.675 0 0 1 12 21.677Z" fill="currentColor"/></svg></div></div></a><a href="https://git.simpleinvoices.org" target="_blank" rel="noopener noreferrer" class="rp-social-links__item"><div class="rp-social-links__icon"><div class="rp-social-links__icon"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M16.7773 0c1.6018 0 2.9004 1.2986 2.9004 2.9005s-1.2986 2.9004-2.9004 2.9004c-1.0854 0-2.0315-.596-2.5288-1.4787H12.91c-2.3322 0-4.2272 1.8718-4.2649 4.195l-.0007 2.1175a7.0759 7.0759 0 0 1 4.148-1.4205l.1176-.001 1.3385.0002c.4973-.8827 1.4434-1.4788 2.5288-1.4788 1.6018 0 2.9004 1.2986 2.9004 2.9005s-1.2986 2.9004-2.9004 2.9004c-1.0854 0-2.0315-.596-2.5288-1.4787H12.91c-2.3322 0-4.2272 1.8718-4.2649 4.195l-.0007 2.319c.8827.4973 1.4788 1.4434 1.4788 2.5287 0 1.602-1.2986 2.9005-2.9005 2.9005-1.6018 0-2.9004-1.2986-2.9004-2.9005 0-1.0853.596-2.0314 1.4788-2.5287l-.0002-9.9831c0-3.887 3.1195-7.0453 6.9915-7.108l.1176-.001h1.3385C14.7458.5962 15.692 0 16.7773 0ZM7.2227 19.9052c-.6596 0-1.1943.5347-1.1943 1.1943s.5347 1.1943 1.1943 1.1943 1.1944-.5347 1.1944-1.1943-.5348-1.1943-1.1944-1.1943Zm9.5546-10.4644c-.6596 0-1.1944.5347-1.1944 1.1943s.5348 1.1943 1.1944 1.1943c.6596 0 1.1943-.5347 1.1943-1.1943s-.5347-1.1943-1.1943-1.1943Zm0-7.7346c-.6596 0-1.1944.5347-1.1944 1.1943s.5348 1.1943 1.1944 1.1943c.6596 0 1.1943-.5347 1.1943-1.1943s-.5347-1.1943-1.1943-1.1943Z" fill="currentColor"/></svg></div></div></a><a href="/rss/blog.xml" target="_blank" rel="noopener noreferrer" class="rp-social-links__item"><div class="rp-social-links__icon"><div class="rp-social-links__icon"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.199 24C19.199 13.467 10.533 4.8 0 4.8V0c13.165 0 24 10.835 24 24h-4.801zM3.291 17.415c1.814 0 3.293 1.479 3.293 3.295 0 1.813-1.485 3.29-3.301 3.29C1.47 24 0 22.526 0 20.71s1.475-3.294 3.291-3.295zM15.909 24h-4.665c0-6.169-5.075-11.245-11.244-11.245V8.09c8.727 0 15.909 7.184 15.909 15.91z" fill="currentColor"/></svg></div></div></a><ul class="rp-hover-group rp-hover-group--hidden rp-hover-group--right"></ul></div></div></div></ul></button></div></header><div class="rp-doc-layout__menu"><div class="rp-sidebar-menu"><button type="button" class="rp-sidebar-menu__left"><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M4 6h24v2H4zm0 18h24v2H4zm0-12h24v2H4zm0 6h24v2H4z"></path></svg><span>Menu</span></button><button type="button" class="rp-sidebar-menu__right"><span class="rp-sidebar-menu__right__text">ON THIS PAGE</span><svg width="14" height="14" class="rp-progress-circle"><circle cx="7" cy="7" r="6" stroke-linecap="round" fill="none" stroke="var(--rp-c-divider-light)" stroke-width="2"></circle><circle cx="7" cy="7" r="6" stroke-linecap="round" fill="none" stroke="var(--rp-c-brand)" stroke-width="2" stroke-dasharray="37.69911184307752" stroke-dashoffset="37.69911184307752" transform="rotate(-90 7 7)" style="transition:stroke-dashoffset 0.3s"></circle></svg><svg width="1em" height="1em" viewBox="0 0 32 32" class="rp-sidebar-menu__right__icon" style="transform:rotate(0deg);transition:transform 0.2s ease-out"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"></path></svg></button></div></div><div class="rp-doc-layout__container"><aside class="rp-doc-layout__sidebar rp-scrollbar"><div class="rp-sidebar-section-header"><div class="rp-sidebar-section-header__left"><span>About &amp; Setup</span></div><div class="rp-sidebar-section-header__right"></div></div><a href="/guide/getting-started.html" class="rp-sidebar-item rp-link" style="padding-left:12px" data-depth="0"><div class="rp-sidebar-item__left"><span>What is Simple Invoices</span></div><div class="rp-sidebar-item__right"></div></a><a href="/guide/installation.html" class="rp-sidebar-item rp-link" style="padding-left:12px" data-depth="0"><div class="rp-sidebar-item__left"><span>Installation</span></div><div class="rp-sidebar-item__right"></div></a><a href="/guide/installation-docker.html" class="rp-sidebar-item rp-sidebar-item--active rp-link" style="padding-left:12px" data-depth="0"><div class="rp-sidebar-item__left"><span>Docker Installation <span class="badge bg-success">Recommended</span></span></div><div class="rp-sidebar-item__right"></div></a><a href="/guide/installation-manual.html" class="rp-sidebar-item rp-link" style="padding-left:12px" data-depth="0"><div class="rp-sidebar-item__left"><span>Manual Installation</span></div><div class="rp-sidebar-item__right"></div></a><a href="/guide/npm-assets.html" class="rp-sidebar-item rp-link" style="padding-left:12px" data-depth="0"><div class="rp-sidebar-item__left"><span>NPM &amp; Frontend Assets</span></div><div class="rp-sidebar-item__right"></div></a><div class="rp-sidebar-divider--dashed" style="padding-left:12px"></div><div class="rp-sidebar-section-header"><div class="rp-sidebar-section-header__left"><span>Using Simple Invoices</span></div><div class="rp-sidebar-section-header__right"></div></div><a href="/guide/first-run.html" class="rp-sidebar-item rp-link" style="padding-left:12px" data-depth="0"><div class="rp-sidebar-item__left"><span>First Run</span></div><div class="rp-sidebar-item__right"></div></a><a href="/guide/invoices.html" class="rp-sidebar-item rp-link" style="padding-left:12px" data-depth="0"><div class="rp-sidebar-item__left"><span>Managing Invoices</span></div><div class="rp-sidebar-item__right"></div></a><a href="/guide/payments.html" class="rp-sidebar-item rp-link" style="padding-left:12px" data-depth="0"><div class="rp-sidebar-item__left"><span>Managing Payments</span></div><div class="rp-sidebar-item__right"></div></a><a href="/guide/customers.html" class="rp-sidebar-item rp-link" style="padding-left:12px" data-depth="0"><div class="rp-sidebar-item__left"><span>Managing Customers</span></div><div class="rp-sidebar-item__right"></div></a><a href="/guide/products.html" class="rp-sidebar-item rp-link" style="padding-left:12px" data-depth="0"><div class="rp-sidebar-item__left"><span>Managing Products</span></div><div class="rp-sidebar-item__right"></div></a><a href="/guide/reports.html" class="rp-sidebar-item rp-link" style="padding-left:12px" data-depth="0"><div class="rp-sidebar-item__left"><span>Reports</span></div><div class="rp-sidebar-item__right"></div></a><a href="/guide/settings.html" class="rp-sidebar-item rp-link" style="padding-left:12px" data-depth="0"><div class="rp-sidebar-item__left"><span>Settings &amp; Configuration</span></div><div class="rp-sidebar-item__right"></div></a></aside><div class="rp-doc-layout__doc"><main class="rp-doc-layout__doc-container"><div class="rp-doc rspress-doc"><!--$--><h1 class="rp-toc-include" id="docker-installation-recommended"><a href="#docker-installation-recommended" class="rp-header-anchor rp-link" aria-hidden="true">#</a>Docker Installation <span class="badge bg-success">Recommended</span> </h1>
+<p>Docker is the fastest way to run Simple Invoices. The included <code>Dockerfile</code> and <code>docker-compose.yml</code> handle everything — PHP, Nginx, database, and frontend assets.</p>
+<h2 class="rp-toc-include" id="quick-start"><a href="#quick-start" class="rp-header-anchor rp-link" aria-hidden="true">#</a>Quick Start</h2>
+<div class="rp-codeblock language-bash"><div class="rp-codeblock__content"><div class="rp-codeblock__content__scroll-container rp-scrollbar rp-scrollbar--always"><pre class="shiki css-variables" style="background-color:var(--shiki-background);color:var(--shiki-foreground)" tabindex="0" data-lang="bash"><code><span class="line"><span style="color:var(--shiki-token-comment)"># Clone the repository</span></span>
+<span class="line"><span style="color:var(--shiki-token-function)">git</span><span style="color:var(--shiki-token-string)"> clone</span><span style="color:var(--shiki-token-string)"> https://github.com/simpleinvoices/simpleinvoices.git</span></span>
+<span class="line"><span style="color:var(--shiki-token-function)">cd</span><span style="color:var(--shiki-token-string)"> simpleinvoices</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--shiki-token-comment)"># Copy and configure environment</span></span>
+<span class="line"><span style="color:var(--shiki-token-function)">cp</span><span style="color:var(--shiki-token-string)"> .env</span><span style="color:var(--shiki-token-string)"> .env.local</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--shiki-token-comment)"># Edit .env.local — set your database credentials and configuration</span></span>
+<span class="line"><span style="color:var(--shiki-token-comment)"># The default settings use MySQL/MariaDB with sensible defaults.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--shiki-token-comment)"># Start with MySQL/MariaDB (default)</span></span>
+<span class="line"><span style="color:var(--shiki-token-function)">docker</span><span style="color:var(--shiki-token-string)"> compose</span><span style="color:var(--shiki-token-string)"> up</span><span style="color:var(--shiki-token-string)"> -d</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--shiki-token-comment)"># Open http://localhost:8888 in your browser</span></span></code></pre></div><div class="rp-code-button-group"><button class="rp-code-button-group__button rp-code-wrap-button" title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrapped"><path fill="currentColor" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrap"><path fill="currentColor" d="M16 7H3V5h13zM3 19h13v-2H3zm19-7-4-3v2H3v2h15v2z"></path></svg></button><button class="rp-code-button-group__button rp-code-copy-button" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--copy"><path fill="currentColor" d="M20 8v12H8V8zm0-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2"></path><path fill="currentColor" d="M4 16H2V4a2 2 0 0 1 2-2h12v2H4Z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--success"><path fill="currentColor" d="m9.55 18-5.7-5.7 1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z"></path></svg></button></div></div></div>
+<p>The application will be available at <code>http://localhost:8888</code>. Login with the default credentials if this is your first run.</p>
+<h2 class="rp-toc-include" id="choosing-a-database"><a href="#choosing-a-database" class="rp-header-anchor rp-link" aria-hidden="true">#</a>Choosing a Database</h2>
+<p>Simple Invoices supports three database backends. Switch by editing your <code>.env.local</code> file and using the matching compose command:</p>
+<h3 class="rp-toc-include" id="mysql--mariadb-default"><a href="#mysql--mariadb-default" class="rp-header-anchor rp-link" aria-hidden="true">#</a>MySQL / MariaDB (default)</h3>
+<div class="rp-codeblock language-bash"><div class="rp-codeblock__content"><div class="rp-codeblock__content__scroll-container rp-scrollbar rp-scrollbar--always"><pre class="shiki css-variables" style="background-color:var(--shiki-background);color:var(--shiki-foreground)" tabindex="0" data-lang="bash"><code><span class="line"><span style="color:var(--shiki-token-comment)"># .env.local — leave the MySQL block uncommented (defaults)</span></span>
+<span class="line"><span style="color:var(--shiki-token-function)">docker</span><span style="color:var(--shiki-token-string)"> compose</span><span style="color:var(--shiki-token-string)"> up</span><span style="color:var(--shiki-token-string)"> -d</span></span></code></pre></div><div class="rp-code-button-group"><button class="rp-code-button-group__button rp-code-wrap-button" title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrapped"><path fill="currentColor" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrap"><path fill="currentColor" d="M16 7H3V5h13zM3 19h13v-2H3zm19-7-4-3v2H3v2h15v2z"></path></svg></button><button class="rp-code-button-group__button rp-code-copy-button" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--copy"><path fill="currentColor" d="M20 8v12H8V8zm0-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2"></path><path fill="currentColor" d="M4 16H2V4a2 2 0 0 1 2-2h12v2H4Z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--success"><path fill="currentColor" d="m9.55 18-5.7-5.7 1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z"></path></svg></button></div></div></div>
+<h3 class="rp-toc-include" id="postgresql"><a href="#postgresql" class="rp-header-anchor rp-link" aria-hidden="true">#</a>PostgreSQL</h3>
+<p>Comment out the MySQL block in <code>.env.local</code>, uncomment the PostgreSQL block, then:</p>
+<div class="rp-codeblock language-bash"><div class="rp-codeblock__content"><div class="rp-codeblock__content__scroll-container rp-scrollbar rp-scrollbar--always"><pre class="shiki css-variables" style="background-color:var(--shiki-background);color:var(--shiki-foreground)" tabindex="0" data-lang="bash"><code><span class="line"><span style="color:var(--shiki-token-function)">docker</span><span style="color:var(--shiki-token-string)"> compose</span><span style="color:var(--shiki-token-string)"> -f</span><span style="color:var(--shiki-token-string)"> docker-compose.yml</span><span style="color:var(--shiki-token-string)"> -f</span><span style="color:var(--shiki-token-string)"> docker-compose.pgsql.yml</span><span style="color:var(--shiki-token-string)"> up</span><span style="color:var(--shiki-token-string)"> -d</span></span></code></pre></div><div class="rp-code-button-group"><button class="rp-code-button-group__button rp-code-wrap-button" title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrapped"><path fill="currentColor" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrap"><path fill="currentColor" d="M16 7H3V5h13zM3 19h13v-2H3zm19-7-4-3v2H3v2h15v2z"></path></svg></button><button class="rp-code-button-group__button rp-code-copy-button" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--copy"><path fill="currentColor" d="M20 8v12H8V8zm0-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2"></path><path fill="currentColor" d="M4 16H2V4a2 2 0 0 1 2-2h12v2H4Z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--success"><path fill="currentColor" d="m9.55 18-5.7-5.7 1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z"></path></svg></button></div></div></div>
+<h3 class="rp-toc-include" id="sqlite-no-separate-db-container"><a href="#sqlite-no-separate-db-container" class="rp-header-anchor rp-link" aria-hidden="true">#</a>SQLite (no separate DB container)</h3>
+<p>Comment out the MySQL block, uncomment the SQLite block:</p>
+<div class="rp-codeblock language-bash"><div class="rp-codeblock__content"><div class="rp-codeblock__content__scroll-container rp-scrollbar rp-scrollbar--always"><pre class="shiki css-variables" style="background-color:var(--shiki-background);color:var(--shiki-foreground)" tabindex="0" data-lang="bash"><code><span class="line"><span style="color:var(--shiki-token-function)">docker</span><span style="color:var(--shiki-token-string)"> compose</span><span style="color:var(--shiki-token-string)"> -f</span><span style="color:var(--shiki-token-string)"> docker-compose.yml</span><span style="color:var(--shiki-token-string)"> -f</span><span style="color:var(--shiki-token-string)"> docker-compose.sqlite.yml</span><span style="color:var(--shiki-token-string)"> up</span><span style="color:var(--shiki-token-string)"> -d</span></span></code></pre></div><div class="rp-code-button-group"><button class="rp-code-button-group__button rp-code-wrap-button" title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrapped"><path fill="currentColor" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrap"><path fill="currentColor" d="M16 7H3V5h13zM3 19h13v-2H3zm19-7-4-3v2H3v2h15v2z"></path></svg></button><button class="rp-code-button-group__button rp-code-copy-button" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--copy"><path fill="currentColor" d="M20 8v12H8V8zm0-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2"></path><path fill="currentColor" d="M4 16H2V4a2 2 0 0 1 2-2h12v2H4Z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--success"><path fill="currentColor" d="m9.55 18-5.7-5.7 1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z"></path></svg></button></div></div></div>
+<h2 class="rp-toc-include" id="environment-configuration"><a href="#environment-configuration" class="rp-header-anchor rp-link" aria-hidden="true">#</a>Environment Configuration</h2>
+<p>Copy <code>.env</code> to <code>.env.local</code> and adjust the following key settings:</p>
+<h3 class="rp-toc-include" id="database"><a href="#database" class="rp-header-anchor rp-link" aria-hidden="true">#</a>Database</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>Variable</th><th>Description</th><th>Default</th></tr></thead><tbody><tr><td><code>SI_DATABASE_ADAPTER</code></td><td><code>pdo_mysql</code>, <code>pdo_pgsql</code>, or <code>pdo_sqlite</code></td><td><code>pdo_mysql</code></td></tr><tr><td><code>SI_DB_HOST</code></td><td>Database hostname</td><td><code>db</code></td></tr><tr><td><code>SI_DB_PORT</code></td><td>Database port</td><td><code>3306</code></td></tr><tr><td><code>SI_DB_USER</code></td><td>Database username</td><td><code>root</code></td></tr><tr><td><code>SI_DB_PASSWORD</code></td><td>Database password</td><td><code>rootpassword</code></td></tr><tr><td><code>SI_DB_NAME</code></td><td>Database name</td><td><code>simple_invoices</code></td></tr></tbody></table></div>
+<h3 class="rp-toc-include" id="application"><a href="#application" class="rp-header-anchor rp-link" aria-hidden="true">#</a>Application</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>Variable</th><th>Description</th><th>Default</th></tr></thead><tbody><tr><td><code>APP_ENV</code></td><td>Environment (<code>local</code>, <code>production</code>)</td><td><code>local</code></td></tr><tr><td><code>APP_DEBUG</code></td><td>Enable debug mode</td><td><code>true</code></td></tr><tr><td><code>SI_APP_PORT</code></td><td>Host port for the web app</td><td><code>8888</code></td></tr><tr><td><code>DB_PORT</code></td><td>Host port for the database</td><td><code>3307</code></td></tr><tr><td><code>ADMINER_PORT</code></td><td>Host port for Adminer</td><td><code>8081</code></td></tr></tbody></table></div>
+<h3 class="rp-toc-include" id="authentication"><a href="#authentication" class="rp-header-anchor rp-link" aria-hidden="true">#</a>Authentication</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>Variable</th><th>Description</th><th>Default</th></tr></thead><tbody><tr><td><code>SI_AUTHENTICATION_ENABLED</code></td><td>Enable user login</td><td><code>true</code></td></tr><tr><td><code>SI_AUTHENTICATION_ALLOW_PUBLIC_DOMAIN_REGISTRATION</code></td><td>Allow self-registration</td><td><code>false</code></td></tr><tr><td><code>SI_NONCE_KEY</code></td><td>CSRF protection key</td><td>Random string</td></tr></tbody></table></div>
+<h3 class="rp-toc-include" id="email"><a href="#email" class="rp-header-anchor rp-link" aria-hidden="true">#</a>Email</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>Variable</th><th>Description</th><th>Default</th></tr></thead><tbody><tr><td><code>SI_EMAIL_HOST</code></td><td>SMTP server hostname</td><td><code>localhost</code></td></tr><tr><td><code>SI_EMAIL_SMTP_AUTH</code></td><td>Require SMTP authentication</td><td><code>false</code></td></tr><tr><td><code>SI_EMAIL_USERNAME</code></td><td>SMTP username</td><td>(empty)</td></tr><tr><td><code>SI_EMAIL_PASSWORD</code></td><td>SMTP password</td><td>(empty)</td></tr><tr><td><code>SI_EMAIL_SMTPPORT</code></td><td>SMTP port</td><td><code>25</code></td></tr><tr><td><code>SI_EMAIL_SECURE</code></td><td>Encryption (<code>tls</code>, <code>ssl</code>, or empty)</td><td>(empty)</td></tr><tr><td><code>SI_EMAIL_USE_LOCAL_SENDMAIL</code></td><td>Use server sendmail</td><td><code>false</code></td></tr></tbody></table></div>
+<h3 class="rp-toc-include" id="debug--logging"><a href="#debug--logging" class="rp-header-anchor rp-link" aria-hidden="true">#</a>Debug &amp; Logging</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>Variable</th><th>Description</th><th>Default</th></tr></thead><tbody><tr><td><code>SI_DEBUG_LEVEL</code></td><td>Log level (<code>ALL</code>, <code>DEBUG</code>, <code>INFO</code>, <code>WARN</code>, <code>ERROR</code>, <code>FATAL</code>, <code>OFF</code>)</td><td><code>All</code></td></tr><tr><td><code>SI_DEBUG_ERROR_REPORTING</code></td><td>PHP error reporting level</td><td><code>E_ERROR</code></td></tr><tr><td><code>SI_PHP_DATE_TIMEZONE</code></td><td>Server timezone</td><td><code>Europe/London</code></td></tr><tr><td><code>SI_PHP_DISPLAY_ERRORS</code></td><td>Show errors in browser</td><td><code>1</code></td></tr><tr><td><code>SI_PHP_ERROR_LOG</code></td><td>Error log path</td><td><code>tmp/log/php.log</code></td></tr><tr><td><code>SI_DB_WAIT_MAX</code></td><td>Seconds to wait for DB before timeout</td><td><code>30</code></td></tr><tr><td><code>SI_AUTO_MIGRATE</code></td><td>Auto-apply DB patches on startup</td><td><code>true</code></td></tr></tbody></table></div>
+<h3 class="rp-toc-include" id="security"><a href="#security" class="rp-header-anchor rp-link" aria-hidden="true">#</a>Security</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>Variable</th><th>Description</th></tr></thead><tbody><tr><td><code>SI_GATEWAY_SECRETS_KEY</code></td><td>32-byte hex key for encrypting payment gateway credentials. Generate with: <code>php -r &#x27;echo bin2hex(random_bytes(32)), PHP_EOL;&#x27;</code></td></tr></tbody></table></div>
+<h3 class="rp-toc-include" id="s3-storage-optional"><a href="#s3-storage-optional" class="rp-header-anchor rp-link" aria-hidden="true">#</a>S3 Storage (optional)</h3>
+<p>For storing biller logos on S3-compatible object storage:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>Variable</th><th>Description</th><th>Default</th></tr></thead><tbody><tr><td><code>SI_S3_ENABLED</code></td><td>Enable S3 logo upload</td><td><code>false</code></td></tr><tr><td><code>SI_S3_ENDPOINT</code></td><td>S3 endpoint URL</td><td>(empty)</td></tr><tr><td><code>SI_S3_KEY</code></td><td>Access key</td><td>(empty)</td></tr><tr><td><code>SI_S3_SECRET</code></td><td>Secret key</td><td>(empty)</td></tr><tr><td><code>SI_S3_BUCKET</code></td><td>Bucket name</td><td><code>si-biller-logos</code></td></tr><tr><td><code>SI_S3_REGION</code></td><td>Region</td><td><code>garage</code></td></tr></tbody></table></div>
+<blockquote>
+<p><strong>Garage (self-hosted S3):</strong> Run <code>docker compose -f docker-compose.yml -f docker-compose.s3.yml up -d</code>, then <code>bash scripts/setup-garage.sh</code> to create the bucket and generate credentials.</p>
+</blockquote>
+<h2 class="rp-toc-include" id="included-services"><a href="#included-services" class="rp-header-anchor rp-link" aria-hidden="true">#</a>Included Services</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>Service</th><th>Description</th><th>Port</th></tr></thead><tbody><tr><td><strong>simpleinvoices</strong></td><td>PHP-FPM + Nginx serving the application</td><td><code>8888</code></td></tr><tr><td><strong>db</strong></td><td>MariaDB database (optional with SQLite)</td><td><code>3307</code></td></tr><tr><td><strong>adminer</strong></td><td>Web-based database management tool</td><td><code>8081</code></td></tr></tbody></table></div>
+<p>Access Adminer at <code>http://localhost:8081</code> to browse or manage your database directly.</p>
+<h2 class="rp-toc-include" id="architecture"><a href="#architecture" class="rp-header-anchor rp-link" aria-hidden="true">#</a>Architecture</h2>
+<p>The Docker image is built with a <strong>multi-stage Dockerfile</strong>:</p>
+<ol>
+<li>
+<p><strong>Stage 1 (Node.js)</strong> — Installs npm dependencies and copies frontend vendor assets into <code>templates/default/vendor/</code>. This stage is throwaway — only the built assets are kept.</p>
+</li>
+<li>
+<p><strong>Stage 2 (PHP-FPM + Nginx)</strong> — Alpine Linux with PHP 8.2, Nginx, and all required PHP extensions. Copies frontend assets from Stage 1, installs Composer dependencies, and configures Nginx to serve the application.</p>
+</li>
+</ol>
+<p>The final image contains <strong>no Node.js</strong> — only the compiled vendor assets. This keeps the image small and secure.</p>
+<h2 class="rp-toc-include" id="updating"><a href="#updating" class="rp-header-anchor rp-link" aria-hidden="true">#</a>Updating</h2>
+<p>To update to the latest version:</p>
+<div class="rp-codeblock language-bash"><div class="rp-codeblock__content"><div class="rp-codeblock__content__scroll-container rp-scrollbar rp-scrollbar--always"><pre class="shiki css-variables" style="background-color:var(--shiki-background);color:var(--shiki-foreground)" tabindex="0" data-lang="bash"><code><span class="line"><span style="color:var(--shiki-token-function)">git</span><span style="color:var(--shiki-token-string)"> pull</span></span>
+<span class="line"><span style="color:var(--shiki-token-function)">docker</span><span style="color:var(--shiki-token-string)"> compose</span><span style="color:var(--shiki-token-string)"> build</span><span style="color:var(--shiki-token-string)"> --no-cache</span><span style="color:var(--shiki-token-string)"> simpleinvoices</span></span>
+<span class="line"><span style="color:var(--shiki-token-function)">docker</span><span style="color:var(--shiki-token-string)"> compose</span><span style="color:var(--shiki-token-string)"> up</span><span style="color:var(--shiki-token-string)"> -d</span></span></code></pre></div><div class="rp-code-button-group"><button class="rp-code-button-group__button rp-code-wrap-button" title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrapped"><path fill="currentColor" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrap"><path fill="currentColor" d="M16 7H3V5h13zM3 19h13v-2H3zm19-7-4-3v2H3v2h15v2z"></path></svg></button><button class="rp-code-button-group__button rp-code-copy-button" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--copy"><path fill="currentColor" d="M20 8v12H8V8zm0-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2"></path><path fill="currentColor" d="M4 16H2V4a2 2 0 0 1 2-2h12v2H4Z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--success"><path fill="currentColor" d="m9.55 18-5.7-5.7 1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z"></path></svg></button></div></div></div>
+<p>Database patches are applied automatically on startup (when <code>SI_AUTO_MIGRATE=true</code>).</p>
+<h2 class="rp-toc-include" id="stopping"><a href="#stopping" class="rp-header-anchor rp-link" aria-hidden="true">#</a>Stopping</h2>
+<div class="rp-codeblock language-bash"><div class="rp-codeblock__content"><div class="rp-codeblock__content__scroll-container rp-scrollbar rp-scrollbar--always"><pre class="shiki css-variables" style="background-color:var(--shiki-background);color:var(--shiki-foreground)" tabindex="0" data-lang="bash"><code><span class="line"><span style="color:var(--shiki-token-comment)"># Stop all services (keeps volumes)</span></span>
+<span class="line"><span style="color:var(--shiki-token-function)">docker</span><span style="color:var(--shiki-token-string)"> compose</span><span style="color:var(--shiki-token-string)"> down</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--shiki-token-comment)"># Stop and remove volumes (deletes database data)</span></span>
+<span class="line"><span style="color:var(--shiki-token-function)">docker</span><span style="color:var(--shiki-token-string)"> compose</span><span style="color:var(--shiki-token-string)"> down</span><span style="color:var(--shiki-token-string)"> -v</span></span></code></pre></div><div class="rp-code-button-group"><button class="rp-code-button-group__button rp-code-wrap-button" title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrapped"><path fill="currentColor" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrap"><path fill="currentColor" d="M16 7H3V5h13zM3 19h13v-2H3zm19-7-4-3v2H3v2h15v2z"></path></svg></button><button class="rp-code-button-group__button rp-code-copy-button" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--copy"><path fill="currentColor" d="M20 8v12H8V8zm0-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2"></path><path fill="currentColor" d="M4 16H2V4a2 2 0 0 1 2-2h12v2H4Z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--success"><path fill="currentColor" d="m9.55 18-5.7-5.7 1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z"></path></svg></button></div></div></div>
+<h2 class="rp-toc-include" id="troubleshooting"><a href="#troubleshooting" class="rp-header-anchor rp-link" aria-hidden="true">#</a>Troubleshooting</h2>
+<h3 class="rp-toc-include" id="port-already-in-use"><a href="#port-already-in-use" class="rp-header-anchor rp-link" aria-hidden="true">#</a>Port already in use</h3>
+<p>Change the <code>SI_APP_PORT</code> in <code>.env.local</code> to a free port (e.g., <code>8080</code>).</p>
+<h3 class="rp-toc-include" id="database-connection-refused"><a href="#database-connection-refused" class="rp-header-anchor rp-link" aria-hidden="true">#</a>Database connection refused</h3>
+<p>The app waits up to <code>SI_DB_WAIT_MAX</code> seconds (default 30) for the database to become ready. If you see connection errors, check that:</p>
+<ul>
+<li>The database service is running: <code>docker compose ps</code></li>
+<li>Database credentials match those in <code>.env.local</code></li>
+<li>The database adapter matches your chosen compose profile</li>
+</ul>
+<h3 class="rp-toc-include" id="permission-errors-on-tmp"><a href="#permission-errors-on-tmp" class="rp-header-anchor rp-link" aria-hidden="true">#</a>Permission errors on <code>tmp/</code></h3>
+<p>The Dockerfile sets correct permissions automatically (<code>chown -R www-data:www-data</code>). If you manually bind-mount the <code>tmp/</code> directory, ensure the host directory is writable by UID 82 (www-data in Alpine).</p>
+<h3 class="rp-toc-include" id="rebuilding-after-dependency-changes"><a href="#rebuilding-after-dependency-changes" class="rp-header-anchor rp-link" aria-hidden="true">#</a>Rebuilding after dependency changes</h3>
+<div class="rp-codeblock language-bash"><div class="rp-codeblock__content"><div class="rp-codeblock__content__scroll-container rp-scrollbar rp-scrollbar--always"><pre class="shiki css-variables" style="background-color:var(--shiki-background);color:var(--shiki-foreground)" tabindex="0" data-lang="bash"><code><span class="line"><span style="color:var(--shiki-token-function)">docker</span><span style="color:var(--shiki-token-string)"> compose</span><span style="color:var(--shiki-token-string)"> build</span><span style="color:var(--shiki-token-string)"> --no-cache</span><span style="color:var(--shiki-token-string)"> simpleinvoices</span></span>
+<span class="line"><span style="color:var(--shiki-token-function)">docker</span><span style="color:var(--shiki-token-string)"> compose</span><span style="color:var(--shiki-token-string)"> up</span><span style="color:var(--shiki-token-string)"> -d</span></span></code></pre></div><div class="rp-code-button-group"><button class="rp-code-button-group__button rp-code-wrap-button" title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrapped"><path fill="currentColor" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrap"><path fill="currentColor" d="M16 7H3V5h13zM3 19h13v-2H3zm19-7-4-3v2H3v2h15v2z"></path></svg></button><button class="rp-code-button-group__button rp-code-copy-button" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--copy"><path fill="currentColor" d="M20 8v12H8V8zm0-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2"></path><path fill="currentColor" d="M4 16H2V4a2 2 0 0 1 2-2h12v2H4Z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--success"><path fill="currentColor" d="m9.55 18-5.7-5.7 1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z"></path></svg></button></div></div></div>
+<p>No-cache builds ensure fresh npm and composer installs.</p><!--/$--></div><footer class="rp-doc-footer"><div class="rp-doc-footer__edit"></div><div class="rp-doc-footer__divider"></div><div class="rp-prev-next-page"><a href="/guide/installation.html" class="rp-prev-next-page__item rp-prev-next-page__prev rp-link"><span class="rp-prev-next-page__item__desc">Previous page</span><span class="rp-prev-next-page__item__title"><svg width="1em" height="1em" viewBox="0 0 32 32" class="rp-prev-next-page__icon rp-prev-next-page__rotate_180"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"></path></svg><span>Installation</span></span></a><a href="/guide/installation-manual.html" class="rp-prev-next-page__item rp-prev-next-page__next rp-link"><span class="rp-prev-next-page__item__desc">Next page</span><span class="rp-prev-next-page__item__title"><span>Manual Installation</span><svg width="1em" height="1em" viewBox="0 0 32 32" class="rp-prev-next-page__icon"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"></path></svg></span></a></div></footer></main></div><aside class="rp-doc-layout__outline rp-scrollbar"><div class="rp-outline"><div class="rp-outline__title">ON THIS PAGE<svg width="14" height="14" class="rp-progress-circle"><circle cx="7" cy="7" r="6" stroke-linecap="round" fill="none" stroke="var(--rp-c-divider-light)" stroke-width="2"></circle><circle cx="7" cy="7" r="6" stroke-linecap="round" fill="none" stroke="var(--rp-c-brand)" stroke-width="2" stroke-dasharray="37.69911184307752" stroke-dashoffset="37.69911184307752" transform="rotate(-90 7 7)" style="transition:stroke-dashoffset 0.3s"></circle></svg></div><nav class="rp-outline__toc rp-scrollbar"><a href="#quick-start" class="rp-toc-item rp-link" title="Quick Start" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">Quick Start</span></a><a href="#choosing-a-database" class="rp-toc-item rp-link" title="Choosing a Database" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">Choosing a Database</span></a><a href="#mysql--mariadb-default" class="rp-toc-item rp-link" title="MySQL / MariaDB (default)" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">MySQL / MariaDB (default)</span></a><a href="#postgresql" class="rp-toc-item rp-link" title="PostgreSQL" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">PostgreSQL</span></a><a href="#sqlite-no-separate-db-container" class="rp-toc-item rp-link" title="SQLite (no separate DB container)" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">SQLite (no separate DB container)</span></a><a href="#environment-configuration" class="rp-toc-item rp-link" title="Environment Configuration" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">Environment Configuration</span></a><a href="#database" class="rp-toc-item rp-link" title="Database" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">Database</span></a><a href="#application" class="rp-toc-item rp-link" title="Application" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">Application</span></a><a href="#authentication" class="rp-toc-item rp-link" title="Authentication" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">Authentication</span></a><a href="#email" class="rp-toc-item rp-link" title="Email" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">Email</span></a><a href="#debug--logging" class="rp-toc-item rp-link" title="Debug &amp; Logging" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">Debug &amp; Logging</span></a><a href="#security" class="rp-toc-item rp-link" title="Security" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">Security</span></a><a href="#s3-storage-optional" class="rp-toc-item rp-link" title="S3 Storage (optional)" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">S3 Storage (optional)</span></a><a href="#included-services" class="rp-toc-item rp-link" title="Included Services" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">Included Services</span></a><a href="#architecture" class="rp-toc-item rp-link" title="Architecture" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">Architecture</span></a><a href="#updating" class="rp-toc-item rp-link" title="Updating" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">Updating</span></a><a href="#stopping" class="rp-toc-item rp-link" title="Stopping" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">Stopping</span></a><a href="#troubleshooting" class="rp-toc-item rp-link" title="Troubleshooting" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">Troubleshooting</span></a><a href="#port-already-in-use" class="rp-toc-item rp-link" title="Port already in use" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">Port already in use</span></a><a href="#database-connection-refused" class="rp-toc-item rp-link" title="Database connection refused" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">Database connection refused</span></a><a href="#permission-errors-on-tmp" class="rp-toc-item rp-link" title="Permission errors on tmp/" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">Permission errors on <code>tmp/</code></span></a><a href="#rebuilding-after-dependency-changes" class="rp-toc-item rp-link" title="Rebuilding after dependency changes" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">Rebuilding after dependency changes</span></a></nav><div class="rp-outline__divider"></div><div class="rp-outline__bottom"></div></div></aside></div></div>
+    <div id="__rspress_modal_container"></div>
+  </body>
+</html>

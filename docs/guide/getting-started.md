@@ -1,45 +1,34 @@
-# Getting Started
+# What is Simple Invoices
 
-Simple Invoices is a web-based invoice management system. This guide covers the basics of setting up and navigating the application.
+Simple Invoices is a **web-based invoice management system** — free, open-source, and self-hosted. It lets you create, manage, and send invoices from any device with a browser. No app installation required.
 
-## Dashboard
+It's built on a traditional LAMP stack (PHP + MySQL/MariaDB/PostgreSQL/SQLite) and has been running since **2005**, making it one of the longest-running open-source invoicing projects.
 
-After logging in, you'll land on the Dashboard. The dashboard provides an overview of:
+**[Installation →](/guide/installation)** Get Simple Invoices running
 
-- Total invoices, payments, and revenue
-- Recent invoices and their status
-- Charts showing revenue trends and debtor aging
+## Key Capabilities
 
-## Navigation
+- **Create invoices** — Itemised (line-by-line) or total-style invoices
+- **Manage customers & billers** — Detailed client and vendor records with custom fields
+- **Track payments** — Record payments, accept online payments via 9 gateways
+- **Recurring invoices** — Automate repeat billing on any schedule
+- **Multi-language** — 41+ languages, per-invoice language settings
+- **Multi-currency** — 40+ currencies with locale-aware formatting
+- **Multi-domain** — Run multiple isolated invoice workspaces from one install
+- **PDF invoices** — Generate professional PDFs with your logo
+- **Email invoices** — Send invoices with PDF attachments via SMTP
+- **Reports** — Sales, debtor, profit, and aging reports with charts
 
-The top navigation bar provides access to all modules:
+## How It Works
 
-| Menu | Purpose |
-|------|---------|
-| **Home** | Return to the dashboard |
-| **Invoices** | Create and manage invoices |
-| **Payments** | Record and track payments |
-| **People** | Customers, Billers, and user accounts |
-| **Products** | Product catalog and inventory |
-| **Reports** | Sales, payments, and financial reports |
-| **Settings** | System configuration and preferences |
+1. **Set up** billers (your company details) and customers
+2. **Add** your products or services
+3. **Create** an invoice — select biller, customer, items, tax, and preferences
+4. **Send** via email with PDF attachment, or download/print the PDF
+5. **Track** payments and view reports
 
-## First Steps
+## Next Steps
 
-1. **Configure your company** — Go to Settings → System Preferences to set your company name, address, and defaults
-2. **Add billers** — Go to People → Billers to add one or more billing entities
-3. **Add customers** — Go to People → Customers to add your clients
-4. **Add products** — Go to Products → Manage Products to add your services or goods
-5. **Create your first invoice** — Go to Invoices → New Invoice
-
-## Roles & Permissions
-
-Simple Invoices supports multiple user roles:
-
-| Role | Description |
-|------|-------------|
-| **Administrator** | Full access to all features and settings |
-| **Domain Administrator** | Manages users and domains |
-| **User** | Standard access to invoices, payments, customers |
-| **Customer** | Portal access for viewing own invoices and making payments |
-| **Biller** | Access limited to their own invoices and customers |
+- **[Installation →](/guide/installation)** — Get Simple Invoices running
+- **[First Run →](/guide/first-run)** — What to do after logging in for the first time
+- **[Using Simple Invoices →](/guide/invoices)** — Detailed guides for each module

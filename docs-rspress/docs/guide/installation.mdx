@@ -1,0 +1,126 @@
+import { Tabs, Tab } from '@rspress/core/theme';
+
+# Installation
+
+Simple Invoices can be installed in two ways. Choose the one that fits your setup.
+
+## <span class="badge bg-success me-1">Recommended</span> Docker
+
+Docker is the fastest way to get running. Pick your database:
+
+<Tabs>
+  <Tab label="SQLite">
+
+No database setup needed:
+
+```bash
+docker run -d --name simpleinvoices \
+  -p 8080:80 \
+  -e DB_ENGINE=sqlite \
+  simpleinvoices/simpleinvoices:latest
+```
+
+Visit [http://localhost:8080](http://localhost:8080)
+
+  </Tab>
+  <Tab label="MySQL (Compose)">
+
+```yaml
+services:
+  app:
+    image: simpleinvoices/simpleinvoices:latest
+    ports: ["8080:80"]
+    environment:
+      DB_ENGINE: mysql
+      DB_HOST: db
+      DB_NAME: simpleinvoices
+      DB_USER: si
+      DB_PASSWORD: sipass
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: simpleinvoices
+      MYSQL_USER: si
+      MYSQL_PASSWORD: sipass
+      MYSQL_ROOT_PASSWORD: rootpass
+```
+
+Save as `docker-compose.yml`, run `docker compose up -d`
+
+  </Tab>
+  <Tab label="PostgreSQL (Compose)">
+
+```yaml
+services:
+  app:
+    image: simpleinvoices/simpleinvoices:latest
+    ports: ["8080:80"]
+    environment:
+      DB_ENGINE: pgsql
+      DB_HOST: db
+      DB_NAME: simpleinvoices
+      DB_USER: si
+      DB_PASSWORD: sipass
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: simpleinvoices
+      POSTGRES_USER: si
+      POSTGRES_PASSWORD: sipass
+```
+
+Save as `docker-compose.yml`, run `docker compose up -d`
+
+  </Tab>
+  <Tab label="MariaDB (Compose)">
+
+```yaml
+services:
+  app:
+    image: simpleinvoices/simpleinvoices:latest
+    ports: ["8080:80"]
+    environment:
+      DB_ENGINE: mysql
+      DB_HOST: db
+      DB_NAME: simpleinvoices
+      DB_USER: si
+      DB_PASSWORD: sipass
+  db:
+    image: mariadb:11
+    environment:
+      MYSQL_DATABASE: simpleinvoices
+      MYSQL_USER: si
+      MYSQL_PASSWORD: sipass
+      MYSQL_ROOT_PASSWORD: rootpass
+```
+
+Save as `docker-compose.yml`, run `docker compose up -d`
+
+  </Tab>
+</Tabs>
+
+👉 **[Full Docker guide →](/guide/installation-docker)**
+
+- No PHP or database setup required on your host
+- Multi-stage build handles frontend assets automatically
+- Supports MySQL, PostgreSQL, MariaDB, and SQLite
+- Automatic database migration on startup
+
+## Manual Installation
+
+For advanced users who prefer full control, or when running on shared hosting / existing LAMP stacks.
+
+👉 **[Manual Installation →](/guide/installation-manual)**
+
+- Requires PHP 8.1+, a web server, and a database
+- Manual dependency installation with Composer and npm
+- Full control over the server environment
+
+## Post-Installation (both methods)
+
+Once installed, follow the same first-run steps:
+
+- Set the admin password on first login
+- Configure email settings under **Settings → System Preferences**
+- Add billers, customers, and products before creating invoices
+- Review and adjust tax rates and payment types

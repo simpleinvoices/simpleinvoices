@@ -11,7 +11,7 @@ Maintain a database of your customers (clients) with contact details and custom 
    - **Email** — For sending invoices
    - **Address** — Street, city, state, ZIP, country
    - **Phone**, **Mobile**, **Fax** — Contact numbers
-4. Optionally add custom fields (see [Custom Fields](help/custom-fields.md))
+4. Optionally add custom fields (see [Custom Fields](/help/custom-fields))
 5. Click **Save**
 
 ## Customer Types

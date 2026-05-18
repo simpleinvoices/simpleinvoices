@@ -23,7 +23,7 @@ Access via **Settings → System Preferences**:
 
 ## Custom Fields
 
-See [Custom Fields](help/custom-fields.md) for details on extending your data.
+See [Custom Fields](/help/custom-fields) for details on extending your data.
 
 ## Tax Rates
 

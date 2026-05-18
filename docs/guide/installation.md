@@ -6,7 +6,7 @@ Simple Invoices can be installed in two ways. Choose the one that fits your setu
 
 Docker is the fastest and simplest way to get up and running. Everything is pre-configured — database, PHP, web server, and frontend assets.
 
-👉 **[Docker Installation →](guide/installation-docker.md)**
+👉 **[Docker Installation →](/guide/installation-docker)**
 
 - No PHP or database setup required on your host
 - Multi-stage build handles frontend assets automatically
@@ -18,7 +18,7 @@ Docker is the fastest and simplest way to get up and running. Everything is pre-
 
 For advanced users who prefer full control, or when running on shared hosting / existing LAMP stacks.
 
-👉 **[Manual Installation →](guide/installation-manual.md)**
+👉 **[Manual Installation →](/guide/installation-manual)**
 
 - Requires PHP 8.1+, a web server, and a database
 - Manual dependency installation with Composer and npm
