@@ -1,105 +1,89 @@
 <?php
+$__rpt_name = basename(__FILE__, '.php');
+if (($__rpt = report_cache_get($__rpt_name, (int)$auth_session->domain_id)) !== null) { foreach ($__rpt as $k => $v) $bladeView->assign($k, $v); return; }
+$__rpt_snap = array_keys($bladeView->getAssigns());
 
-   if ($db_server == 'pgsql') {
-      $sql = "SELECT
-        iv.id,
-        b.name AS biller,
-        c.name AS customer,
+/*
+ * Debtors by aging - age in days from SQL (no per-row DateTime); bucket from integer age in PHP.
+ * One row per invoice: denormalised totals on si_invoices.
+ */
 
-        coalesce(ii.total, 0) AS inv_total,
-        coalesce(ap.total, 0) AS inv_paid,
-        coalesce(ii.total, 0) - coalesce(ap.total, 0) as inv_owing,
+global $db_server;
 
-        to_char(iv.date,'YYYY-MM-DD') as date,
-        age(iv.date) as age,
-        (CASE   WHEN age(iv.date) <= '14 days'::interval THEN '0-14'
-                WHEN age(iv.date) <= '30 days'::interval THEN '15-30'
-                WHEN age(iv.date) <= '60 days'::interval THEN '31-60'
-                WHEN age(iv.date) <= '90 days'::interval THEN '61-90'
-                ELSE '90+'
-        END) as aging
+$age_days_sql = '';
+switch ($db_server) {
+    case 'pgsql':
+        $age_days_sql = '(CURRENT_DATE - iv.date::date)';
+        break;
+    case 'sqlite':
+        $age_days_sql = "CAST((julianday('now') - julianday(date(iv.date))) AS INTEGER)";
+        break;
+    default:
+        $age_days_sql = 'DATEDIFF(CURDATE(), DATE(iv.date))';
+        break;
+}
 
-	FROM
-        ".TB_PREFIX."invoices iv INNER JOIN
-	".TB_PREFIX."biller b ON (b.id = iv.biller_id) INNER JOIN
-	".TB_PREFIX."customers c ON (c.id = iv.customer_id) LEFT JOIN
-        (SELECT i.invoice_id, sum(i.total) AS total
-         FROM ".TB_PREFIX."invoice_items i GROUP BY i.invoice_id
-        ) ii ON (iv.id = ii.invoice_id) LEFT JOIN
-        (SELECT p.ac_inv_id, sum(p.ac_amount) AS total
-         FROM ".TB_PREFIX."payments p GROUP BY p.ac_inv_id
-        ) ap ON (iv.id = ap.ac_inv_id)
-	ORDER BY
-        age DESC;
-    ";
-       } else {
-	
-          $sql = "SELECT
-			iv.id, 
+$sql = 'SELECT
+			iv.id,
 			iv.index_id,
+			iv.denorm_index_name AS index_name,
 			pr.pref_inv_wording,
-			b.name AS biller, 
-			c.name AS customer, 
---			COUNT(ii.invoice_id) AS items,
-			SUM(COALESCE(ii.total, 0)) AS inv_total,
-			COALESCE(ap.inv_paid, 0) AS inv_paid,
---    inv_total - inv_paid AS inv_owing,
-			SUM(COALESCE(ii.total, 0)) - COALESCE(ap.inv_paid, 0) AS inv_owing,
-
-			DATE_FORMAT(`date`,'%Y-%m-%e') AS `date`,
-			(SELECT DATEDIFF(NOW(),`date`)) AS age,
-			(CASE WHEN DATEDIFF(NOW(),`date`) <= 14 THEN '0-14'
-				  WHEN DATEDIFF(NOW(),`date`) <= 30 THEN '15-30'
-				  WHEN DATEDIFF(NOW(),`date`) <= 60 THEN '31-60'
-				  WHEN DATEDIFF(NOW(),`date`) <= 90 THEN '61-90'
-				  ELSE '90+'
-			END ) AS Aging
-
+			iv.denorm_biller_name AS biller,
+			iv.denorm_customer_name AS customer,
+			iv.denorm_invoice_total AS inv_total,
+			iv.denorm_amount_paid AS inv_paid,
+			iv.denorm_amount_owing AS inv_owing,
+			iv.date,
+			iv.currency_sign,
+			iv.denorm_currency_code,
+			' . $age_days_sql . ' AS age_days
 		FROM
-            ".TB_PREFIX."invoices iv  
-            LEFT JOIN ".TB_PREFIX."invoice_items ii ON (ii.invoice_id    = iv.id      AND ii.domain_id = iv.domain_id)  
-            LEFT JOIN ".TB_PREFIX."biller b         ON (iv.biller_id     = b.id       AND  b.domain_id = iv.domain_id)
-            LEFT JOIN ".TB_PREFIX."customers c      ON (iv.customer_id   = c.id       AND  c.domain_id = iv.domain_id)
-            LEFT JOIN ".TB_PREFIX."preferences pr   ON (iv.preference_id = pr.pref_id AND pr.domain_id = iv.domain_id)
-            LEFT JOIN (
-				SELECT ac_inv_id, domain_id, SUM(COALESCE(ac_amount, 0)) AS inv_paid 
-					FROM ".TB_PREFIX."payment 
-					GROUP BY ac_inv_id, domain_id
-			) ap ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
-		WHERE   
+            ' . TB_PREFIX . 'invoices iv
+            LEFT JOIN ' . TB_PREFIX . 'preferences pr   ON (iv.preference_id = pr.pref_id AND pr.domain_id = iv.domain_id)
+		WHERE
 				pr.status    = 1
 			AND iv.domain_id = :domain_id
-		GROUP BY 
-			iv.id
-		HAVING 
-			inv_owing > 0
-		ORDER BY 
-			age DESC;
-		";
+			AND iv.denorm_amount_owing > 0
+		ORDER BY
+			iv.date ASC';
+
+$invoice_results = dbQuery($sql, ':domain_id', $auth_session->domain_id);
+
+$total_owed = 0;
+$periods    = [
+    '0-14'  => ['name' => '0-14', 'invoices' => [], 'sum_total' => 0],
+    '15-30' => ['name' => '15-30', 'invoices' => [], 'sum_total' => 0],
+    '31-60' => ['name' => '31-60', 'invoices' => [], 'sum_total' => 0],
+    '61-90' => ['name' => '61-90', 'invoices' => [], 'sum_total' => 0],
+    '90+'   => ['name' => '90+', 'invoices' => [], 'sum_total' => 0],
+];
+
+while ($invoice = $invoice_results->fetch()) {
+    $age = (int) ($invoice['age_days'] ?? 0);
+    if ($age <= 14) {
+        $bucket = '0-14';
+    } elseif ($age <= 30) {
+        $bucket = '15-30';
+    } elseif ($age <= 60) {
+        $bucket = '31-60';
+    } elseif ($age <= 90) {
+        $bucket = '61-90';
+    } else {
+        $bucket = '90+';
     }
 
-    $invoice_results = dbQuery($sql, ':domain_id', $auth_session->domain_id);
+    $invoice['age']   = $age;
+    $invoice['Aging'] = $bucket;
 
-    $total_owed = 0;
-    $periods = array();
+    $periods[$bucket]['invoices'][] = $invoice;
+    $periods[$bucket]['sum_total'] += (float) $invoice['inv_owing'];
+    $total_owed += (float) $invoice['inv_owing'];
+}
 
-    while($invoice = $invoice_results->fetch()) {
-      $periods[$invoice['Aging']]['name'] = $invoice['Aging'];
+$bladeView->assign('data', $periods);
+$bladeView->assign('total_owed', $total_owed);
 
-      if (!array_key_exists('invoices', $periods[$invoice['Aging']])) {
-         $periods[$invoice['Aging']]['invoices'] = array();
-      }
-
-      array_push($periods[$invoice['Aging']]['invoices'], $invoice);
-
-      $periods[$invoice['Aging']]['sum_total'] += $invoice['inv_owing'];
-
-      $total_owed += $invoice['inv_owing'];
-    }
-
-    $smarty -> assign('data', $periods);
-    $smarty -> assign('total_owed', $total_owed);
-
-    $smarty -> assign('pageActive', 'report');
-    $smarty -> assign('active_tab', '#home');
-?>
+$bladeView->assign('pageActive', 'report');
+$bladeView->assign('active_tab', '#home');
+report_cache_set($__rpt_name, (int)$auth_session->domain_id,
+    array_diff_key($bladeView->getAssigns(), array_flip($__rpt_snap)));

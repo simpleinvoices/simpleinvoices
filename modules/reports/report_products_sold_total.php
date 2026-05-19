@@ -1,8 +1,15 @@
-<?php 
+<?php
+$__rpt_name = basename(__FILE__, '.php');
+if (($__rpt = report_cache_get($__rpt_name, (int)$auth_session->domain_id)) !== null) { foreach ($__rpt as $k => $v) $bladeView->assign($k, $v); return; }
+$__rpt_snap = array_keys($bladeView->getAssigns());
 
+  $inv_count = si_report_active_invoice_count($auth_session->domain_id);
+
+  // Group by product id so distinct products are not merged when descriptions match
   $sql = "
 SELECT 
-	  p.description
+	  p.id AS product_id
+	, p.description
 	, SUM(ii.quantity) AS sum_quantity
 FROM ".TB_PREFIX."invoice_items ii 
 	INNER JOIN ".TB_PREFIX."invoices iv    ON (ii.invoice_id = iv.id AND iv.domain_id = ii.domain_id) 
@@ -12,7 +19,7 @@ WHERE 	p.visible
     AND pr.status = 1
     AND p.domain_id = :domain_id
 GROUP BY
-	p.description
+	p.id, p.description
 ";
 
   $product_sales = dbQuery($sql, ':domain_id', $auth_session->domain_id);
@@ -20,14 +27,20 @@ GROUP BY
   $total_quantity = 0;
   $products = array();
 
-  while($product = $product_sales->fetch()) {
-    $total_quantity += $product['sum_quantity'];
-    array_push($products, $product);
+  while ($product = $product_sales->fetch()) {
+      $total_quantity += $product['sum_quantity'];
+      array_push($products, $product);
   }
 
-  $smarty -> assign('data', $products);
-  $smarty -> assign('total_quantity', $total_quantity);
+  $chart_pack = si_report_chart_top_rows_by_key($products, 'sum_quantity', $inv_count, 1);
 
-	$smarty -> assign('pageActive', 'report');
-	$smarty -> assign('active_tab', '#home');
+  $bladeView->assign('data', $products);
+  $bladeView->assign('report_chart_data', $chart_pack['rows']);
+  $bladeView->assign('total_quantity', $total_quantity);
+  $bladeView->assign('report_chart_guard', $chart_pack['guard']);
+
+  $bladeView->assign('pageActive', 'report');
+  $bladeView->assign('active_tab', '#home');
+report_cache_set($__rpt_name, (int)$auth_session->domain_id,
+    array_diff_key($bladeView->getAssigns(), array_flip($__rpt_snap)));
 ?>

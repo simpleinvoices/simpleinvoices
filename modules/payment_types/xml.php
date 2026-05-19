@@ -2,11 +2,11 @@
 
 header("Content-type: text/xml");
 
-$start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
-$dir = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "ASC" ;
-$sort = (isset($_POST['sortname'])) ? $_POST['sortname'] : "pt_description" ;
-$rp = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
-$page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
+$start = (isset($_REQUEST['start'])) ? $_REQUEST['start'] : "0" ;
+$dir = (isset($_REQUEST['sortorder'])) ? $_REQUEST['sortorder'] : "ASC" ;
+$sort = (isset($_REQUEST['sortname'])) ? $_REQUEST['sortname'] : "pt_description" ;
+$rp = (isset($_REQUEST['rp'])) ? $_REQUEST['rp'] : "25" ;
+$page = (isset($_REQUEST['page'])) ? $_REQUEST['page'] : "1" ;
 
 
 function sql($type='', $dir, $sort, $rp, $page )
@@ -27,7 +27,7 @@ function sql($type='', $dir, $sort, $rp, $page )
 
 	/*SQL Limit - start*/
 	$start = (($page-1) * $rp);
-	$limit = "LIMIT $start, $rp";
+	$limit = "LIMIT $rp OFFSET $start";
 
 	if($type =="count")
 	{
@@ -40,8 +40,8 @@ function sql($type='', $dir, $sort, $rp, $page )
 	}
 
 	$where = "";
-	$query = isset($_POST['query']) ? $_POST['query'] : null;
-	$qtype = isset($_POST['qtype']) ? $_POST['qtype'] : null;
+	$query = $_REQUEST['query'] ?? null;
+	$qtype = $_REQUEST['qtype'] ?? null;
 	if ( ! (empty($qtype) || empty($query)) ) {
 		if ( in_array($qtype, $valid_search_fields) ) {
 			$where = " AND $qtype LIKE :query ";
@@ -86,18 +86,22 @@ $sth = sql('', $dir, $sort, $rp, $page);
 $sth_count_rows = sql('count',$dir, $sort, $rp, $page);
 
 $payment_types = $sth->fetchAll(PDO::FETCH_ASSOC);
-$count = $sth_count_rows->rowCount();
+$count = count($sth_count_rows->fetchAll());
 
 $xml .= "<rows>";
 $xml .= "<page>$page</page>";
 $xml .= "<total>$count</total>";
 
 foreach ($payment_types as $row) {
-	$xml .= "<row id='".$row['pref_id']."'>";
-	$xml .= "<cell><![CDATA[
-		<a class='index_table' title='".$LANG['view']." ".$LANG['payment_type']." ".$row['pt_description']."' href='index.php?module=payment_types&view=details&id=".$row['pt_id']."&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-		<a class='index_table' title='".$LANG['edit']." ".$LANG['payment_type']." ".$row['pt_description']."' href='index.php?module=payment_types&view=details&id=".$row['pt_id']."&action=edit'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-	]]></cell>";
+	$desc_esc = htmlspecialchars($row['pt_description']);
+	$action  = '<div class="dropdown">';
+	$action .= '<a class="btn btn-outline-secondary dropdown-toggle btn-sm-mobile" data-bs-toggle="dropdown" aria-expanded="false"><span class="d-none d-sm-inline-flex align-items-center"><i class="ti ti-settings me-1"></i>'.$LANG['actions'].'</span><span class="d-sm-none"><i class="ti ti-dots-vertical" aria-hidden="true"></i></span></a>';
+	$action .= '<div class="dropdown-menu dropdown-menu-end">';
+	$action .= '<a class="dropdown-item" href="index.php?module=payment_types&amp;view=details&amp;id='.$row['pt_id'].'&amp;action=view"><i class="ti ti-eye me-2"></i>'.$LANG['view'].' '.$desc_esc.'</a>';
+	$action .= '<a class="dropdown-item" href="index.php?module=payment_types&amp;view=details&amp;id='.$row['pt_id'].'&amp;action=edit"><i class="ti ti-edit me-2"></i>'.$LANG['edit'].' '.$desc_esc.'</a>';
+	$action .= '</div></div>';
+	$xml .= "<row id='".$row['pt_id']."'>";
+	$xml .= "<cell><![CDATA[".$action."]]></cell>";
 	$xml .= "<cell><![CDATA[".$row['pt_description']."]]></cell>";
 	if ($row['enabled']==$LANG['enabled']) {
 		$xml .= "<cell><![CDATA[<img src='images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				

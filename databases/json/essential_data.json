@@ -114,113 +114,250 @@
         {
             "inv_ty_id": "2",
             "inv_ty_description": "Itemised"
-        },
-        {
-            "inv_ty_id": "3",
-            "inv_ty_description": "Consulting"
         }
+
     ],
     "si_payment_types": [
         {
             "pt_id": "1",
             "domain_id": "DOMAIN-ID",
-            "pt_description": "Cash",
+            "pt_description": "Electronic payment",
             "pt_enabled": "1"
         },
         {
             "pt_id": "2",
-            "domain_id": "1",
+            "domain_id": "DOMAIN-ID",
             "pt_description": "Credit Card",
             "pt_enabled": "1"
+        },
+        {
+            "pt_id": "3",
+            "domain_id": "DOMAIN-ID",
+            "pt_description": "Cash",
+            "pt_enabled": "1"
+        }
+    ],
+    "si_payment_terms": [
+        {
+            "term_id": "11",
+            "domain_id": "DOMAIN-ID",
+            "term_code": "SAME_DAY",
+            "term_label": "Same Day",
+            "calc_kind": "NET_DAYS",
+            "param_int": "0",
+            "sort_order": "4"
+        },
+        {
+            "term_id": "12",
+            "domain_id": "DOMAIN-ID",
+            "term_code": "NEXT_DAY",
+            "term_label": "Next Day",
+            "calc_kind": "NET_DAYS",
+            "param_int": "1",
+            "sort_order": "6"
+        },
+        {
+            "term_id": "1",
+            "domain_id": "DOMAIN-ID",
+            "term_code": "NET_7",
+            "term_label": "Net 7",
+            "calc_kind": "NET_DAYS",
+            "param_int": "7",
+            "sort_order": "10"
+        },
+        {
+            "term_id": "2",
+            "domain_id": "DOMAIN-ID",
+            "term_code": "NET_10",
+            "term_label": "Net 10",
+            "calc_kind": "NET_DAYS",
+            "param_int": "10",
+            "sort_order": "20"
+        },
+        {
+            "term_id": "3",
+            "domain_id": "DOMAIN-ID",
+            "term_code": "NET_14",
+            "term_label": "Net 14",
+            "calc_kind": "NET_DAYS",
+            "param_int": "14",
+            "sort_order": "30"
+        },
+        {
+            "term_id": "4",
+            "domain_id": "DOMAIN-ID",
+            "term_code": "NET_30",
+            "term_label": "Net 30",
+            "calc_kind": "NET_DAYS",
+            "param_int": "30",
+            "sort_order": "40"
+        },
+        {
+            "term_id": "5",
+            "domain_id": "DOMAIN-ID",
+            "term_code": "NET_60",
+            "term_label": "Net 60",
+            "calc_kind": "NET_DAYS",
+            "param_int": "60",
+            "sort_order": "50"
+        },
+        {
+            "term_id": "6",
+            "domain_id": "DOMAIN-ID",
+            "term_code": "NET_90",
+            "term_label": "Net 90",
+            "calc_kind": "NET_DAYS",
+            "param_int": "90",
+            "sort_order": "60"
+        },
+        {
+            "term_id": "7",
+            "domain_id": "DOMAIN-ID",
+            "term_code": "EOM",
+            "term_label": "End of month (EOM)",
+            "calc_kind": "EOM",
+            "param_int": "",
+            "sort_order": "70"
+        },
+        {
+            "term_id": "8",
+            "domain_id": "DOMAIN-ID",
+            "term_code": "NET_30_EOM",
+            "term_label": "Net 30 EOM (EOM + 30 days)",
+            "calc_kind": "EOM_PLUS_DAYS",
+            "param_int": "30",
+            "sort_order": "80"
+        },
+        {
+            "term_id": "9",
+            "domain_id": "DOMAIN-ID",
+            "term_code": "EOM_45",
+            "term_label": "45 EOM (45 days after month end)",
+            "calc_kind": "EOM_PLUS_DAYS",
+            "param_int": "45",
+            "sort_order": "90"
+        },
+        {
+            "term_id": "10",
+            "domain_id": "DOMAIN-ID",
+            "term_code": "MFI_15",
+            "term_label": "15 MFI (15th of month following invoice)",
+            "calc_kind": "MFI_DAY",
+            "param_int": "15",
+            "sort_order": "100"
         }
     ],
     "si_preferences": [
         {
             "pref_id": "1",
-            "domain_id": "1",
+            "domain_id": "DOMAIN-ID",
             "pref_description": "Invoice",
-            "pref_currency_sign": "$",
             "pref_inv_heading": "Invoice",
             "pref_inv_wording": "Invoice",
-            "pref_inv_detail_heading": "Details",
-            "pref_inv_detail_line": "Payment is to be made within 14 days of the invoice being sent",
-            "pref_inv_payment_method": "Electronic Funds Transfer",
-            "pref_inv_payment_line1_name": "Account name",
-            "pref_inv_payment_line1_value": "H. & M. Simpson",
-            "pref_inv_payment_line2_name": "Account number:",
-            "pref_inv_payment_line2_value": "0123-4567-7890",
+            "pref_inv_detail_heading": "{lang.details}",
+            "pref_inv_detail_line": "{lang.payment_terms}: {invoice.payment_term_label}",
+            "pref_inv_payment_method": "{lang.electronic_funds_transfer}",
+            "pref_inv_payment_line0_name": "{lang.bank_name}:",
+            "pref_inv_payment_line0_value": "{biller.bank_name}",
+            "pref_inv_payment_line1_name": "{lang.account_name}:",
+            "pref_inv_payment_line1_value": "{biller.bank_account_name}",
+            "pref_inv_payment_line2_name": "{lang.bank_routing_sort_code}:",
+            "pref_inv_payment_line2_value": "{biller.bank_routing_sort_code}",
+            "pref_inv_payment_line3_name": "{lang.account_number}:",
+            "pref_inv_payment_line3_value": "{biller.bank_account_number}",
+            "pref_inv_payment_line4_name": "{lang.swift_bic}:",
+            "pref_inv_payment_line4_value": "{biller.bank_swift_bic}",
+            "pref_inv_payment_line5_name": "{lang.invoice_reference}:",
+            "pref_inv_payment_line5_value": "",
             "status": "1",
             "locale": "LOCALE",
             "language": "LANGUAGE",
             "index_group": "1",
-            "currency_code": "USD",
-            "currency_position": "left",
+            "payment_term_id": "3",
             "pref_enabled": "1"
         },
         {
             "pref_id": "2",
-            "domain_id": "1",
+            "domain_id": "DOMAIN-ID",
             "pref_description": "Receipt",
-            "pref_currency_sign": "$",
             "pref_inv_heading": "Receipt",
             "pref_inv_wording": "Receipt",
-            "pref_inv_detail_heading": "Details",
+            "pref_inv_detail_heading": "{lang.details}",
             "pref_inv_detail_line": "<br />This transaction has been paid in full, please keep this receipt as proof of purchase.<br /> Thank you",
             "pref_inv_payment_method": "",
-            "pref_inv_payment_line1_name": "",
-            "pref_inv_payment_line1_value": "",
-            "pref_inv_payment_line2_name": "",
-            "pref_inv_payment_line2_value": "",
+            "pref_inv_payment_line0_name": "{lang.bank_name}",
+            "pref_inv_payment_line0_value": "{biller.bank_name}",
+            "pref_inv_payment_line1_name": "{lang.account_name}",
+            "pref_inv_payment_line1_value": "{biller.bank_account_name}",
+            "pref_inv_payment_line2_name": "{lang.bank_routing_sort_code}",
+            "pref_inv_payment_line2_value": "{biller.bank_routing_sort_code}",
+            "pref_inv_payment_line3_name": "{lang.account_number}",
+            "pref_inv_payment_line3_value": "{biller.bank_account_number}",
+            "pref_inv_payment_line4_name": "{lang.swift_bic}",
+            "pref_inv_payment_line4_value": "{biller.bank_swift_bic}",
+            "pref_inv_payment_line5_name": "{lang.invoice_reference}",
+            "pref_inv_payment_line5_value": "",
             "status": "1",
             "locale": "LOCALE",
             "language": "LANGUAGE",
             "index_group": "1",
-            "currency_code": "USD",
-            "currency_position": "left",
+            "payment_term_id": "3",
             "pref_enabled": "1"
         },
         {
             "pref_id": "3",
-            "domain_id": "1",
+            "domain_id": "DOMAIN-ID",
             "pref_description": "Estimate",
-            "pref_currency_sign": "$",
             "pref_inv_heading": "Estimate",
             "pref_inv_wording": "Estimate",
-            "pref_inv_detail_heading": "Details",
+            "pref_inv_detail_heading": "{lang.details}",
             "pref_inv_detail_line": "<br />This is an estimate of the final value of services rendered.<br />Thank you",
             "pref_inv_payment_method": "",
-            "pref_inv_payment_line1_name": "",
-            "pref_inv_payment_line1_value": "",
-            "pref_inv_payment_line2_name": "",
-            "pref_inv_payment_line2_value": "",
+            "pref_inv_payment_line0_name": "{lang.bank_name}",
+            "pref_inv_payment_line0_value": "{biller.bank_name}",
+            "pref_inv_payment_line1_name": "{lang.account_name}",
+            "pref_inv_payment_line1_value": "{biller.bank_account_name}",
+            "pref_inv_payment_line2_name": "{lang.bank_routing_sort_code}",
+            "pref_inv_payment_line2_value": "{biller.bank_routing_sort_code}",
+            "pref_inv_payment_line3_name": "{lang.account_number}",
+            "pref_inv_payment_line3_value": "{biller.bank_account_number}",
+            "pref_inv_payment_line4_name": "{lang.swift_bic}",
+            "pref_inv_payment_line4_value": "{biller.bank_swift_bic}",
+            "pref_inv_payment_line5_name": "{lang.invoice_reference}",
+            "pref_inv_payment_line5_value": "",
             "status": "0",
             "locale": "LOCALE",
             "language": "LANGUAGE",
             "index_group": "1",
-            "currency_code": "USD",
-            "currency_position": "left",
+            "payment_term_id": "3",
             "pref_enabled": "1"
         },
         {
             "pref_id": "4",
-            "domain_id": "1",
+            "domain_id": "DOMAIN-ID",
             "pref_description": "Quote",
-            "pref_currency_sign": "$",
             "pref_inv_heading": "Quote",
             "pref_inv_wording": "Quote",
-            "pref_inv_detail_heading": "Details",
+            "pref_inv_detail_heading": "{lang.details}",
             "pref_inv_detail_line": "<br />This is a quote of the final value of services rendered.<br />Thank you",
             "pref_inv_payment_method": "",
-            "pref_inv_payment_line1_name": "",
-            "pref_inv_payment_line1_value": "",
-            "pref_inv_payment_line2_name": "",
-            "pref_inv_payment_line2_value": "",
+            "pref_inv_payment_line0_name": "{lang.bank_name}",
+            "pref_inv_payment_line0_value": "{biller.bank_name}",
+            "pref_inv_payment_line1_name": "{lang.account_name}",
+            "pref_inv_payment_line1_value": "{biller.bank_account_name}",
+            "pref_inv_payment_line2_name": "{lang.bank_routing_sort_code}",
+            "pref_inv_payment_line2_value": "{biller.bank_routing_sort_code}",
+            "pref_inv_payment_line3_name": "{lang.account_number}",
+            "pref_inv_payment_line3_value": "{biller.bank_account_number}",
+            "pref_inv_payment_line4_name": "{lang.swift_bic}",
+            "pref_inv_payment_line4_value": "{biller.bank_swift_bic}",
+            "pref_inv_payment_line5_name": "{lang.invoice_reference}",
+            "pref_inv_payment_line5_value": "",
             "status": "0",
             "locale": "LOCALE",
             "language": "LANGUAGE",
             "index_group": "1",
-            "currency_code": "USD",
-            "currency_position": "left",
+            "payment_term_id": "3",
             "pref_enabled": "1"
         }
     ],
@@ -1510,9 +1647,9 @@
         },
         {
             "sql_patch_ref": "203",
-            "sql_patch": "Move all old consulting style invoices to itemised",
+            "sql_patch": "Move all old consulting style invoices to itemised (consulting type removed)",
             "sql_release": "20090704",
-            "sql_statement": "UPDATE si_invoices SET type_id = 2 where type_id = 3"
+            "sql_statement": "DELETE FROM si_invoice_type WHERE inv_ty_id = 3 ; UPDATE si_invoices SET type_id = 2 where type_id = 3"
         },
         {
             "sql_patch_ref": "204",
@@ -2053,6 +2190,552 @@
             "sql_patch": "Add department to the customers",
             "sql_release": "20161004",
             "sql_statement": "ALTER TABLE si_customers ADD COLUMN department VARCHAR(255) NULL AFTER name"
+        },
+        {
+            "sql_patch_ref": "294",
+            "sql_patch": "Prepare user table for Laravel Fortify",
+            "sql_release": "20260329",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "295",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "296",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "297",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "298",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "299",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "300",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "301",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "302",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "303",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "304",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "305",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "306",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "307",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "308",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "309",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "310",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "311",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "312",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "313",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "314",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "315",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "316",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "317",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "318",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "319",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "320",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "321",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "322",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "323",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "324",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "325",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "326",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "327",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "328",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "329",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "330",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "331",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "332",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "333",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "334",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "335",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "336",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "337",
+            "sql_patch": "",
+            "sql_release": "",
+            "sql_statement": ""
+        },
+        {
+            "sql_patch_ref": "338",
+            "sql_patch": "si_invoices: denormalised list columns (totals, names, index label; maintained by invoice_denorm)",
+            "sql_release": "20260418",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "339",
+            "sql_patch": "si_payment: denormalised display columns for payments grid (copies from invoice)",
+            "sql_release": "20260418",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "340",
+            "sql_patch": "Backfill invoice/payment denormalised columns for all domains",
+            "sql_release": "20260418",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "341",
+            "sql_patch": "si_invoices: indexes for domain lists, charts, denorm owing filters",
+            "sql_release": "20260418",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "342",
+            "sql_patch": "Add si_global_config for installation-wide app branding (header/footer)",
+            "sql_release": "20260419",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "343",
+            "sql_patch": "si_user: preferred_language for per-user UI language override",
+            "sql_release": "20260419",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "344",
+            "sql_patch": "si_biller: add all payment gateway credential columns",
+            "sql_release": "20260420",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "345",
+            "sql_patch": "si_biller: add payment gateway test-mode flags",
+            "sql_release": "20260420",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "346",
+            "sql_patch": "si_biller: drop legacy payment columns (eway_customer_id, paypal_business_name, paypal_notify_url, paypal_return_url)",
+            "sql_release": "20260420",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "347",
+            "sql_patch": "si_customers: drop PCI credit card columns (credit_card_holder_name, credit_card_number, credit_card_expiry_month, credit_card_expiry_year)",
+            "sql_release": "20260420",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "348",
+            "sql_patch": "Add domain_id to products_attributes for multi-tenancy",
+            "sql_release": "20260416",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "349",
+            "sql_patch": "Add domain_id to products_values for multi-tenancy",
+            "sql_release": "20260416",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "350",
+            "sql_patch": "si_user: add auth_staff_email for staff/biller login identity",
+            "sql_release": "20260418",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "351",
+            "sql_patch": "si_user: add auth_customer_key for per-domain customer login identity",
+            "sql_release": "20260418",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "352",
+            "sql_patch": "si_user: backfill auth_staff_email and auth_customer_key",
+            "sql_release": "20260418",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "353",
+            "sql_patch": "si_user: drop global unique on email (replaced by auth identity columns)",
+            "sql_release": "20260418",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "354",
+            "sql_patch": "si_user: unique index on auth_staff_email (staff/biller global identity)",
+            "sql_release": "20260418",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "355",
+            "sql_patch": "si_user: unique index on auth_customer_key (customer per-domain identity)",
+            "sql_release": "20260418",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "356",
+            "sql_patch": "si_invoices: denormalised list columns (totals, names, index label; maintained by invoice_denorm)",
+            "sql_release": "20260418",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "357",
+            "sql_patch": "si_payment: denormalised display columns for payments grid (copies from invoice)",
+            "sql_release": "20260418",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "358",
+            "sql_patch": "Backfill invoice/payment denormalised columns for all domains",
+            "sql_release": "20260418",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "359",
+            "sql_patch": "si_invoices: indexes for domain lists, charts, denorm owing filters",
+            "sql_release": "20260418",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "360",
+            "sql_patch": "Add si_global_config for installation-wide app branding (header/footer)",
+            "sql_release": "20260419",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "361",
+            "sql_patch": "si_user: preferred_language for per-user UI language override",
+            "sql_release": "20260419",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "362",
+            "sql_patch": "si_invoices: add currency_sign column",
+            "sql_release": "20260420",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "363",
+            "sql_patch": "si_invoices: add denorm_currency_code and denorm_currency_locale columns",
+            "sql_release": "20260420",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "364",
+            "sql_patch": "si_invoices: backfill currency_sign from preferences",
+            "sql_release": "20260420",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "365",
+            "sql_patch": "si_invoices: backfill denorm_currency_code from si_currencies and denorm_currency_locale from preferences",
+            "sql_release": "20260420",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "366",
+            "sql_patch": "si_payment: denormalised currency_code and currency_locale from invoice",
+            "sql_release": "20260420",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "367",
+            "sql_patch": "si_payment_terms: create global payment terms table",
+            "sql_release": "20260421",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "368",
+            "sql_patch": "si_payment_terms: seed standard terms",
+            "sql_release": "20260421",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "369",
+            "sql_patch": "si_payment_terms: PostgreSQL sequence sync after seed",
+            "sql_release": "20260421",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "370",
+            "sql_patch": "si_preferences: add payment_term_id",
+            "sql_release": "20260421",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "371",
+            "sql_patch": "si_invoices: add payment_term_id",
+            "sql_release": "20260421",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "372",
+            "sql_patch": "si_invoices: add due_date",
+            "sql_release": "20260421",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "373",
+            "sql_patch": "si_preferences: default payment_term_id to Net 14",
+            "sql_release": "20260421",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "374",
+            "sql_patch": "si_preferences: widen preference varchar fields to 255",
+            "sql_release": "20260421",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "375",
+            "sql_patch": "si_biller: add bank transfer columns (name, bank_name, swift_bic, account_number, routing_sort_code)",
+            "sql_release": "20260422",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "376",
+            "sql_patch": "Create si_currency table, link preferences/invoices, and migrate existing currencies",
+            "sql_release": "20260508",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "377",
+            "sql_patch": "Add pref_inv_payment_line0-5 name/value fields to preferences",
+            "sql_release": "20260508",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "378",
+            "sql_patch": "Add domain_id to si_payment_terms",
+            "sql_release": "20260511",
+            "sql_statement": "SELECT 1"
+        },
+        {
+            "sql_patch_ref": "379",
+            "sql_patch": "si_preferences: backfill currency_id from pref_currency_sign via si_currency",
+            "sql_release": "20260511",
+            "sql_statement": "SELECT 'Backfill preferences.currency_id from pref_currency_sign via si_currency (PHP handler)'"
+        },
+        {
+            "sql_patch_ref": "380",
+            "sql_patch": "si_preferences: drop legacy pref_currency_sign column (replaced by currency_id)",
+            "sql_release": "20260512",
+            "sql_statement": "ALTER TABLE si_preferences DROP COLUMN pref_currency_sign"
+        },
+        {
+            "sql_patch_ref": "381",
+            "sql_patch": "Add tax_id_name_1, tax_id_label_1, tax_id_name_2, tax_id_label_2 to si_biller and si_customers",
+            "sql_release": "20260513",
+            "sql_statement": "PHP: si_patch381_tax_id_columns() — converts varchar(768) gateway columns to TEXT, then adds tax_id columns"
+        },
+        {
+            "sql_patch_ref": "382",
+            "sql_patch": "Add pref_invoice_id_prefix and pref_invoice_id_format to si_preferences",
+            "sql_release": "20260514",
+            "sql_statement": "ALTER TABLE si_preferences ADD COLUMN pref_invoice_id_prefix VARCHAR(50) DEFAULT NULL; ADD COLUMN pref_invoice_id_format VARCHAR(20) DEFAULT NULL"
+        },
+        {
+            "sql_patch_ref": "383",
+            "sql_patch": "Add biller_invoice_prefix to si_biller",
+            "sql_release": "20260514",
+            "sql_statement": "ALTER TABLE si_biller ADD COLUMN biller_invoice_prefix VARCHAR(50) DEFAULT NULL"
+        },
+        {
+            "sql_patch_ref": "384",
+            "sql_patch": "si_invoices: add denorm_index_id column and backfill",
+            "sql_release": "20260515",
+            "sql_statement": "PHP: si_patch384_denorm_index_id() — adds denorm_index_id to si_invoices and rebuilds denorm for all domains"
         }
     ],
     "si_system_defaults": [
@@ -2087,7 +2770,7 @@
         {
             "id": "5",
             "name": "line_items",
-            "value": "5",
+            "value": "2",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },
@@ -2108,7 +2791,7 @@
         {
             "id": "8",
             "name": "language",
-            "value": "en_GB",
+            "value": "LANGUAGE",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },
@@ -2122,119 +2805,133 @@
         {
             "id": "10",
             "name": "spreadsheet",
-            "value": "xls",
+            "value": "xlsx",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },
         {
             "id": "11",
             "name": "wordprocessor",
-            "value": "doc",
+            "value": "docx",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },
         {
             "id": "12",
-            "name": "pdfscreensize",
-            "value": "800",
-            "domain_id": "DOMAIN-ID",
-            "extension_id": "1"
-        },
-        {
-            "id": "13",
             "name": "pdfpapersize",
             "value": "A4",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },
         {
-            "id": "14",
+            "id": "13",
             "name": "pdfleftmargin",
             "value": "15",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },
         {
-            "id": "15",
+            "id": "14",
             "name": "pdfrightmargin",
             "value": "15",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },
         {
-            "id": "16",
+            "id": "15",
             "name": "pdftopmargin",
             "value": "15",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },
         {
-            "id": "17",
+            "id": "16",
             "name": "pdfbottommargin",
             "value": "15",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },
         {
-            "id": "18",
+            "id": "17",
             "name": "emailhost",
             "value": "localhost",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },
         {
-            "id": "19",
+            "id": "18",
             "name": "emailusername",
             "value": "",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },
         {
-            "id": "20",
+            "id": "19",
             "name": "emailpassword",
             "value": "",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },
         {
-            "id": "21",
+            "id": "20",
             "name": "logging",
             "value": "0",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },
         {
-            "id": "22",
+            "id": "21",
             "name": "delete",
             "value": "N",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },
         {
-            "id": "23",
+            "id": "22",
             "name": "tax_per_line_item",
             "value": "1",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },
         {
-            "id": "24",
+            "id": "23",
             "name": "inventory",
             "value": "0",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },
         {
-            "id": "25",
+            "id": "24",
             "name": "product_attributes",
             "value": "0",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         },
         {
-            "id": "26",
+            "id": "25",
             "name": "large_dataset",
             "value": "0",
+            "domain_id": "DOMAIN-ID",
+            "extension_id": "1"
+        },
+        {
+            "id": "26",
+            "name": "precision",
+            "value": "2",
+            "domain_id": "DOMAIN-ID",
+            "extension_id": "1"
+        },
+        {
+            "id": "27",
+            "name": "confirm_delete_line_item",
+            "value": "0",
+            "domain_id": "DOMAIN-ID",
+            "extension_id": "1"
+        },
+        {
+            "id": "28",
+            "name": "export_template",
+            "value": "export",
             "domain_id": "DOMAIN-ID",
             "extension_id": "1"
         }
@@ -2287,9 +2984,10 @@
             "email": "demo@simpleinvoices.org",
             "role_id": "1",
             "domain_id": "DOMAIN-ID",
-            "password": "fe01ce2a7fbac8fafaed7c982a04e229",
+            "password": "$2y$12$prV4Dpbb4ukkI4IeCnEMAu75HdxwuRNpN/G/V2eDdrva2esCLqqCq",
             "enabled": "1",
-            "user_id": "0"
+            "user_id": "0",
+            "auth_staff_email": "demo@simpleinvoices.org"
         }
     ],
     "si_user_domain": [
@@ -2326,6 +3024,386 @@
         {
             "id": "7",
             "name": "viewer"
+        }
+    ],
+    "si_currency": [
+        {
+            "id": "1",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "USD",
+            "currency_sign": "$",
+            "currency_position": "left",
+            "is_default": "1",
+            "enabled": "1"
+        },
+        {
+            "id": "2",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "CAD",
+            "currency_sign": "C$",
+            "currency_position": "left",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "3",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "AUD",
+            "currency_sign": "A$",
+            "currency_position": "left",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "4",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "NZD",
+            "currency_sign": "NZ$",
+            "currency_position": "left",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "5",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "MXN",
+            "currency_sign": "MX$",
+            "currency_position": "left",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "6",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "BRL",
+            "currency_sign": "R$",
+            "currency_position": "right",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "7",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "SGD",
+            "currency_sign": "S$",
+            "currency_position": "left",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "8",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "EUR",
+            "currency_sign": "€",
+            "currency_position": "right",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "9",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "GBP",
+            "currency_sign": "£",
+            "currency_position": "left",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "10",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "CHF",
+            "currency_sign": "CHF",
+            "currency_position": "right",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "11",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "SEK",
+            "currency_sign": "kr",
+            "currency_position": "right",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "12",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "DKK",
+            "currency_sign": "kr",
+            "currency_position": "right",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "13",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "NOK",
+            "currency_sign": "kr",
+            "currency_position": "right",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "14",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "PLN",
+            "currency_sign": "zł",
+            "currency_position": "right",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "15",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "CZK",
+            "currency_sign": "Kč",
+            "currency_position": "right",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "16",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "HUF",
+            "currency_sign": "Ft",
+            "currency_position": "right",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "17",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "RON",
+            "currency_sign": "lei",
+            "currency_position": "right",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "18",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "BGN",
+            "currency_sign": "лв",
+            "currency_position": "right",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "19",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "TRY",
+            "currency_sign": "₺",
+            "currency_position": "left",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "20",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "RSD",
+            "currency_sign": "дин.",
+            "currency_position": "right",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "21",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "RUB",
+            "currency_sign": "₽",
+            "currency_position": "right",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "22",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "CNY",
+            "currency_sign": "¥",
+            "currency_position": "left",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "23",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "JPY",
+            "currency_sign": "¥",
+            "currency_position": "left",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "24",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "TWD",
+            "currency_sign": "NT$",
+            "currency_position": "left",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "25",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "HKD",
+            "currency_sign": "HK$",
+            "currency_position": "left",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "26",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "INR",
+            "currency_sign": "₹",
+            "currency_position": "left",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "27",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "IDR",
+            "currency_sign": "Rp",
+            "currency_position": "right",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "28",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "VND",
+            "currency_sign": "₫",
+            "currency_position": "right",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "29",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "ILS",
+            "currency_sign": "₪",
+            "currency_position": "left",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "30",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "SAR",
+            "currency_sign": "﷼",
+            "currency_position": "left",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "31",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "ZAR",
+            "currency_sign": "R",
+            "currency_position": "right",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "32",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "BTC",
+            "currency_sign": "₿",
+            "currency_position": "left",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "33",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "ETH",
+            "currency_sign": "Ξ",
+            "currency_position": "left",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "34",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "KRW",
+            "currency_sign": "₩",
+            "currency_position": "left",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "35",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "LTC",
+            "currency_sign": "Ł",
+            "currency_position": "left",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "36",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "ADA",
+            "currency_sign": "₳",
+            "currency_position": "left",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "37",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "XRP",
+            "currency_sign": "XRP",
+            "currency_position": "left",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "38",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "SOL",
+            "currency_sign": "SOL",
+            "currency_position": "left",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "39",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "BNB",
+            "currency_sign": "BNB",
+            "currency_position": "left",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "40",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "USDT",
+            "currency_sign": "USDT",
+            "currency_position": "left",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "41",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "USDC",
+            "currency_sign": "USDC",
+            "currency_position": "left",
+            "is_default": "0",
+            "enabled": "1"
+        },
+        {
+            "id": "42",
+            "domain_id": "DOMAIN-ID",
+            "currency_code": "DOGE",
+            "currency_sign": "DOGE",
+            "currency_position": "left",
+            "is_default": "0",
+            "enabled": "1"
         }
     ]
 }

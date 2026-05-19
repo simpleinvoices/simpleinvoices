@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <langfile version="1.0.0" type="language">
-	<name>Chinese</name>
+	<name>中文（香港）</name>
 	<shortname>zh_HK</shortname>
-	<englishname>Hong Kong</englishname>
+	<englishname>Chinese (Hong Kong)</englishname>
 	<version>1.0.0</version>
 	<creationDate>2013-10-16</creationDate>
 	<author></author>

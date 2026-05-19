@@ -10,12 +10,20 @@
 * 	http://www.simpleinvoices.org
  */
 
-$sql = "SELECT count(*) as count FROM ".TB_PREFIX."user";
-$sth = dbQuery($sql) or die(htmlsafe(end($dbh->errorInfo())));
+checkLogin();
+
+$sql = "SELECT count(*) as count FROM ".TB_PREFIX."user WHERE domain_id = :domain_id";
+$sth = dbQuery($sql, ':domain_id', domain_id::get()) or die(htmlsafe(end($dbh->errorInfo())));
 $number_of_rows  = $sth->fetch(PDO::FETCH_ASSOC);
 
-$smarty -> assign("number_of_rows",$number_of_rows);
+$bladeView -> assign("number_of_rows",$number_of_rows);
 
-$smarty -> assign('pageActive', 'user');
-$smarty -> assign('active_tab', '#people');
+$userSavedOp = (string) ($_GET['user_saved'] ?? '');
+if (!in_array($userSavedOp, ['insert_user', 'edit_user'], true)) {
+    $userSavedOp = '';
+}
+$bladeView->assign('userSavedOp', $userSavedOp);
+
+$bladeView -> assign('pageActive', 'user');
+$bladeView -> assign('active_tab', '#people');
 ?>

@@ -16,7 +16,7 @@
 
 	$pageActive = "reports";
 
-	$smarty->assign('pageActive', $pageActive);
-	$smarty->assign('showReport', $showReport);
+	$bladeView->assign('pageActive', $pageActive);
+	$bladeView->assign('showReport', $showReport);
 	
 ?>

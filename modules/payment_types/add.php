@@ -5,7 +5,7 @@
 checkLogin();
 
 
-$smarty -> assign('pageActive', 'payment_type');
-$smarty -> assign('subPageActive', 'payment_types_add');
-$smarty -> assign('active_tab', '#setting');
+$bladeView -> assign('pageActive', 'payment_type');
+$bladeView -> assign('subPageActive', 'payment_types_add');
+$bladeView -> assign('active_tab', '#setting');
 ?>

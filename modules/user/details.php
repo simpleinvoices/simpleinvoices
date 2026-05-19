@@ -21,16 +21,46 @@
 checkLogin();
 
 #get the invoice id
-$id = $_GET['id'];
+$id = (int)$_GET['id'];
 
 $user = user::getUser($id);
+si_check_record_access($user);
 $roles = user::getUserRoles();
 
+$saveReturnModule = '';
+$saveReturnView   = '';
+if (!empty($_GET['return_module']) && !empty($_GET['return_view'])) {
+    $rm = filenameEscape((string) $_GET['return_module']);
+    $rv = filenameEscape((string) $_GET['return_view']);
+    if (($rm === 'admin' && $rv === 'domain_admin_users')
+        || ($rm === 'domain_admin' && $rv === 'all_users')) {
+        $saveReturnModule = $rm;
+        $saveReturnView   = $rv;
+    }
+}
 
-$smarty->assign('user', $user);
-$smarty->assign('roles', $roles);
+$bladeView->assign('user', $user);
+$bladeView->assign('roles', $roles);
+$bladeView->assign('userUiLanguageList', si_get_ui_language_list_sorted());
+$pref = trim((string) ($user['preferred_language'] ?? ''));
+$bladeView->assign('userPreferredValue', $pref);
+if ($pref === '') {
+	$userPreferredDisplay = ($LANG['ui_language_domain_default'] ?? '') . ' (' . getDefaultLanguage() . ')';
+} else {
+	$userPreferredDisplay = $pref;
+	foreach (si_get_ui_language_list_sorted() as $lng) {
+		if ((string) $lng->shortname === $pref) {
+			$userPreferredDisplay = $lng->name . ' (' . $lng->shortname . ')';
+			break;
+		}
+	}
+}
+$bladeView->assign('userPreferredDisplay', $userPreferredDisplay);
+$bladeView->assign('userSaveCsrfToken', siNonce('user_save'));
+$bladeView->assign('saveReturnModule', $saveReturnModule);
+$bladeView->assign('saveReturnView', $saveReturnView);
 /*
-$smarty -> assign('enabled', array(
+$bladeView -> assign('enabled', array(
                                 0 => $LANG['disabled'],
 				1 => $LANG['enabled']
 			)
@@ -38,8 +68,8 @@ $smarty -> assign('enabled', array(
  */
  
 
-$smarty -> assign('pageActive', 'user');
+$bladeView -> assign('pageActive', 'user');
 $subPageActive = $_GET['action'] =="view"  ? "user_view" : "user_edit" ;
-$smarty -> assign('subPageActive', $subPageActive);
-$smarty -> assign('active_tab', '#people');
+$bladeView -> assign('subPageActive', $subPageActive);
+$bladeView -> assign('active_tab', '#people');
 ?>

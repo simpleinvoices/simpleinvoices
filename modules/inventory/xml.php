@@ -3,10 +3,10 @@
 header("Content-type: text/xml");
 
 //$start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
-$dir = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "DESC" ;
-$sort = (isset($_POST['sortname'])) ? $_POST['sortname'] : "id" ;
-$rp = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
-$page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
+$dir = (isset($_REQUEST['sortorder'])) ? $_REQUEST['sortorder'] : "DESC" ;
+$sort = (isset($_REQUEST['sortname'])) ? $_REQUEST['sortname'] : "id" ;
+$rp = (isset($_REQUEST['rp'])) ? $_REQUEST['rp'] : "25" ;
+$page = (isset($_REQUEST['page'])) ? $_REQUEST['page'] : "1" ;
 
 //$sql = "SELECT * FROM ".TB_PREFIX."invoices LIMIT $start, $limit";
 $inventory = new inventory();
@@ -23,11 +23,15 @@ $count = $sth_count_rows;
 	$xml .= "<total>$count</total>";
 	
 	foreach ($inventory_all as $row) {
+		$name_esc = htmlspecialchars($row['description'] ?? $row['name'] ?? (string)$row['id']);
+		$action  = '<div class="dropdown">';
+		$action .= '<a class="btn btn-outline-secondary dropdown-toggle btn-sm-mobile" data-bs-toggle="dropdown" aria-expanded="false"><span class="d-none d-sm-inline-flex align-items-center"><i class="ti ti-settings me-1"></i>'.$LANG['actions'].'</span><span class="d-sm-none"><i class="ti ti-dots-vertical" aria-hidden="true"></i></span></a>';
+		$action .= '<div class="dropdown-menu dropdown-menu-end">';
+		$action .= '<a class="dropdown-item" href="index.php?module=inventory&amp;view=view&amp;id='.$row['id'].'"><i class="ti ti-eye me-2"></i>'.$LANG['view'].' '.$name_esc.'</a>';
+		$action .= '<a class="dropdown-item" href="index.php?module=inventory&amp;view=edit&amp;id='.$row['id'].'"><i class="ti ti-edit me-2"></i>'.$LANG['edit'].' '.$name_esc.'</a>';
+		$action .= '</div></div>';
 		$xml .= "<row id='".$row['id']."'>";
-		$xml .= "<cell><![CDATA[
-		<a class='index_table' title='{$LANG['view']} ".$row['name']."' href='index.php?module=inventory&view=view&id=$row['id']'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-		<a class='index_table' title='{$LANG['edit']} ".$row['name']."' href='index.php?module=inventory&view=edit&id=$row['id']'><img src='images/common/edit.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-		]]></cell>";
+		$xml .= "<cell><![CDATA[".$action."]]></cell>";
 		$xml .= "<cell><![CDATA[".$row['date']."]]></cell>";		
 		$xml .= "<cell><![CDATA[".$row['description']."]]></cell>";
 		$xml .= "<cell><![CDATA[".siLocal::number($row['quantity'])."]]></cell>";

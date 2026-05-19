@@ -27,8 +27,7 @@ abstract class CustomField {
 	var $description;
 	var $fieldId;	//to differentiate between the instances of a plug-in
 	
-	/* Constructor: name and id for each CustomField needed. */
-	public function CustomField($id,$name) {
+	public function __construct($id, $name) {
 		$this->id = $id;
 		$this->name = $name;
 	}
@@ -39,10 +38,8 @@ abstract class CustomField {
 	function updatePlugin() {
 	}
 	
-	/***** Please overwrite the following functions *****/
-	function printInputField() {
+	function printInputField($id = null, $itemId = null) {
 	}
-	/***** Please overwrite the above functions *****/
 	
 	/* Updates the custom field value */
 	function updateInput($value, $itemId) {
@@ -122,7 +119,7 @@ abstract class CustomField {
 	function getDescription($id) {
 		global $LANG;
 
-		$sql = "SELECT description FROM ".TB_PREFIX."customFields WHERE id = :id";
+		$sql = "SELECT description FROM ".TB_PREFIX."custom_fields WHERE id = :id";
 		$sth = dbQuery($sql, ':id', $id);
 		$field = $sth->fetch();
 		

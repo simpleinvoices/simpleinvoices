@@ -18,8 +18,8 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-$smarty -> display("../templates/default/menu.tpl");
-$smarty -> display("../templates/default/main.tpl");
+$bladeView->display("templates/default/menu.blade.php");
+$bladeView->display("templates/default/main.blade.php");
 
 	$startdate = (isset($_POST['startdate'])) ? $_POST['startdate'] : date("Y-m-d",strtotime("last Year"));
 	$startdate = htmlsafe($startdate);
@@ -98,7 +98,7 @@ if($sth != null) {
 echo "</div>";
 
 $pageActive = "invoices";
-$smarty -> assign("invoices",$invoices);
+$bladeView -> assign("invoices",$invoices);
 //getMenuStructure();
 // till template is made
 exit();

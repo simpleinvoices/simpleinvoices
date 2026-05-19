@@ -1,0 +1,151 @@
+---
+pageType: home
+link-rss: blog
+hero:
+  name: Simple Invoices
+  text: Free, open-source invoicing since 2005
+  tagline: Create and manage invoices, clients, and payments - web-based invoicing <mark style="background:#fef08a;padding:0 4px;border-radius:3px;">on your own server</mark>
+  image:
+    src: /hero-invoice.svg
+    alt: Simple Invoices interface
+  actions:
+    - theme: brand
+      text: Install
+      link: /guide/installation
+    - theme: alt
+      text: Features
+      link: /features/free-open-source
+    - theme: alt
+      text: Get Involved
+      link: /get-involved
+features:
+  - title: Multi-Language
+    details: 41+ languages with per-invoice language settings. Your admin team works in English while customers see invoices in their native language.
+    icon: 🌐
+    link: /features/multi-language
+  - title: Multi-Currency
+    details: 40+ preset currencies plus custom currencies. Each invoice can use a different currency with locale-aware formatting.
+    icon: 💱
+    link: /features/multi-currency
+  - title: Free and Open Source
+    details: GPLv3 licensed. No license fees, no per-user charges. Full source code available. Your data stays in your database on your server.
+    icon: 📖
+    link: /features/free-open-source
+  - title: Multi-Domain SaaS
+    details: Run unlimited isolated invoice domains from one installation. Perfect for SaaS platforms, multi-brand orgs, and regional offices.
+    icon: 🏢
+    link: /features/multi-domain
+  - title: Professional PDFs
+    details: Generate beautiful PDF invoices with your logo. Multiple templates available. Email invoices with PDF attachments automatically.
+    icon: 📄
+    link: /features/pdf-invoices
+  - title: Online Payments
+    details: Accept payments via Stripe, PayPal, Mollie, Coinbase, and more. Nine integrated gateways with per-invoice configuration.
+    icon: 💳
+    link: /features/online-payments
+  - title: Web-Based and Mobile
+    details: Runs in any browser. Responsive design works on desktop, tablet, and phone. No app installation required.
+    icon: 📱
+    link: /features/web-based
+  - title: Multi-Database
+    details: MySQL, MariaDB, PostgreSQL, or SQLite. Switch between engines. SQLite needs zero setup — the entire database is one file.
+    icon: 🗄️
+    link: /features/multi-database
+  - title: Recurring Invoices
+    details: Automate repeat billing. Daily, weekly, monthly, or yearly recurrence. Auto-email to customers with PDF attachments.
+    icon: 🔄
+    link: /features/recurring-invoices
+---
+
+import { Tab, Tabs, SvgWrapper } from '@rspress/core/theme';
+import { SiSqlite, SiMysql, SiPostgresql } from '@icons-pack/react-simple-icons';
+
+<div style={{ maxWidth: '700px' }}>
+  30 seconds setup with Docker 👇
+
+  <Tabs groupId="database-engine">
+    <Tab
+      label={
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+          <SvgWrapper icon={SiSqlite} width={16} height={16} />
+          SQLite
+        </span>
+      }
+    >
+      
+      ```bash 
+      # No database setup needed, run instantly
+      docker run -d --name simpleinvoices \
+        -p 8080:80 \
+        -e DB_ENGINE=sqlite \
+        simpleinvoices/simpleinvoices:latest
+      # Full install guide -> https://simpleinvoices.org/guide/installation.html
+      ```
+
+    </Tab>
+    <Tab
+      label={
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+          <SvgWrapper icon={SiMysql} width={16} height={16} />
+          MySQL
+        </span>
+      }
+    >
+      
+
+      ```yaml
+      #Save as `docker-compose.yml` and run `docker compose up -d`:
+      services:
+        app:
+          image: simpleinvoices/simpleinvoices:latest
+          ports: ["8080:80"]
+          environment:
+            DB_ENGINE: mysql
+            DB_HOST: db
+            DB_NAME: simpleinvoices
+            DB_USER: si
+            DB_PASSWORD: sipass
+        db:
+          image: mysql:8.0
+          environment:
+            MYSQL_DATABASE: simpleinvoices
+            MYSQL_USER: si
+            MYSQL_PASSWORD: sipass
+            MYSQL_ROOT_PASSWORD: rootpass
+      # Full install guide -> https://simpleinvoices.org/guide/installation.html
+      ```
+    </Tab>
+    <Tab
+      label={
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+          <SvgWrapper icon={SiPostgresql} width={16} height={16} />
+          PostgreSQL
+        </span>
+      }
+    >
+      
+
+      ```yaml
+      # Save as `docker-compose.yml` and run `docker compose up -d`:
+      services:
+        app:
+          image: simpleinvoices/simpleinvoices:latest
+          ports: ["8080:80"]
+          environment:
+            DB_ENGINE: pgsql
+            DB_HOST: db
+            DB_NAME: simpleinvoices
+            DB_USER: si
+            DB_PASSWORD: sipass
+        db:
+          image: postgres:16
+          environment:
+            POSTGRES_DB: simpleinvoices
+            POSTGRES_USER: si
+            POSTGRES_PASSWORD: sipass
+      # Full install guide -> https://simpleinvoices.org/guide/installation.html
+      ```
+    </Tab>
+  </Tabs>
+</div>
+

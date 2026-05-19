@@ -1,21 +1,23 @@
 <?php
-// -Gates 5/5/2008 added domain_id to parameters 
+// -Gates 5/5/2008 added domain_id to parameters
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
 # Deal with op and add some basic sanity checking
 
-$op = !empty( $_POST['op'] ) ? addslashes( $_POST['op'] ) : NULL;
+$op = $_POST['op'] ?? null;
 
 
 #insert invoice_preference
 if (  $op === 'insert_product_attribute' ) {
 
+	$domain_id = domain_id::get();
 	$sql = "INSERT into
 		".TB_PREFIX."products_attributes
+		(domain_id, name, type_id, enabled, visible)
 	VALUES
 		(
-			NULL,
+			:domain_id,
 			:name,
 			:type_id,
 			:enabled,
@@ -23,13 +25,16 @@ if (  $op === 'insert_product_attribute' ) {
 		 )";
 
 	if (dbQuery($sql,
+	  ':domain_id', $domain_id,
 	  ':name', $_POST['name'],
 	  ':type_id', $_POST['type_id'],
 	  ':enabled', $_POST['enabled'],
 	  ':visible', $_POST['visible']
 	  )) {
+		$saved = true;
 		$display_block = "Successfully saved";
 	} else {
+		$saved = false;
 		$display_block = "Error occurred with saving";
 	}
 
@@ -43,6 +48,7 @@ if (  $op === 'insert_product_attribute' ) {
 else if (  $op === 'edit_product_attribute' ) {
 
 	if (isset($_POST['save_product_attribute'])) {
+		$domain_id = domain_id::get();
 		$sql = "UPDATE
 				".TB_PREFIX."products_attributes
 			SET
@@ -51,17 +57,21 @@ else if (  $op === 'edit_product_attribute' ) {
 				enabled = :enabled,
 				visible = :visible
 			WHERE
-				id = :id";
+				id = :id
+			AND domain_id = :domain_id";
 
-		if (dbQuery($sql, 
+		if (dbQuery($sql,
 		  ':name', $_POST['name'],
 		  ':type_id', $_POST['type_id'],
 		  ':enabled', $_POST['enabled'],
 		  ':visible', $_POST['visible'],
-		  ':id', $_GET['id']))
+		  ':id', (int)$_GET['id'],
+		  ':domain_id', $domain_id))
 	    {
+			$saved = true;
 			$display_block = "Successfully saved";
 		} else {
+			$saved = false;
 			$display_block = "Error occurred with saving";
 		}
 
@@ -80,9 +90,10 @@ else if (  $op === 'edit_product_attribute' ) {
 $refresh_total = isset($refresh_total) ? $refresh_total : '&nbsp';
 
 $pageActive = "product_attribute_manage";
-$smarty->assign('pageActive', $pageActive);
-$smarty -> assign('active_tab', '#product');
+$bladeView->assign('pageActive', $pageActive);
+$bladeView -> assign('active_tab', '#product');
 
-$smarty -> assign('display_block',$display_block); 
-$smarty -> assign('refresh_total',$refresh_total); 
+$bladeView -> assign('saved', isset($saved) ? $saved : null);
+$bladeView -> assign('display_block',$display_block);
+$bladeView -> assign('refresh_total',$refresh_total);
 ?>

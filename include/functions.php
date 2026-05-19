@@ -20,20 +20,91 @@ function checkLogin() {
 	}
 }
 
-function getLogoList() {
-	$dirname="./templates/invoices/logos";
-	$ext = array("jpg", "png", "jpeg", "gif");
-	$files = array();
-	if($handle = opendir($dirname)) {
-		while(false !== ($file = readdir($handle)))
-		for($i=0;$i<sizeof($ext);$i++)
-		if(stristr($file, ".".$ext[$i])) //NOT case sensitive: OK with JpeG, JPG, ecc.
-		$files[] = $file;
-		closedir($handle);
+/**
+ * Abort with 403 if a record returned by a get*() function is empty (not found
+ * or belongs to a different domain_id).  All get*() functions already filter by
+ * the session domain_id in their WHERE clause, so an empty result means either
+ * the record does not exist or the caller tried to access another tenant's data.
+ *
+ * @param mixed  $record  Return value from getInvoice(), getCustomer(), etc.
+ */
+function si_check_record_access($record): void {
+	global $LANG;
+	if (empty($record)) {
+		header('HTTP/1.1 403 Forbidden');
+		exit($LANG['denied_page'] ?? 'You are not allowed to view this page');
 	}
+}
 
+/**
+ * Deny access if the logged-in user is a customer or biller who does not own
+ * the given invoice.  Also aborts if the invoice record is empty (not found /
+ * wrong domain).  No-op for administrators and when auth is disabled.
+ *
+ * @param array|false $invoice  Row returned by getInvoice() / invoice::select()
+ */
+function si_check_invoice_access($invoice): void {
+	si_check_record_access($invoice);
+	global $auth_session;
+	if (!isset($auth_session) || !is_object($auth_session)) return;
+	$role = $auth_session->role_name ?? '';
+	if ($role === 'customer') {
+		if ((string)($invoice['customer_id'] ?? '') !== (string)$auth_session->user_id) {
+			header('HTTP/1.1 403 Forbidden');
+			die('Access denied: you do not have permission to view this invoice.');
+		}
+	} elseif ($role === 'biller') {
+		if ((string)($invoice['biller_id'] ?? '') !== (string)$auth_session->user_id) {
+			header('HTTP/1.1 403 Forbidden');
+			die('Access denied: you do not have permission to view this invoice.');
+		}
+	}
+}
+
+/**
+ * Per-line tax values from POST. Itemised/total invoices use tax_id[line][slot];
+ * product_consulting use a single scalar tax_id for all lines.
+ *
+ * @param int|string $lineIndex
+ * @return array
+ */
+function invoice_tax_ids_for_line_from_post($lineIndex) {
+	if (!isset($_POST['tax_id'])) {
+		return array();
+	}
+	$t = $_POST['tax_id'];
+	if (is_array($t)) {
+		if (!array_key_exists($lineIndex, $t)) {
+			return array();
+		}
+		$row = $t[$lineIndex];
+		if ($row === null || $row === '') {
+			return array();
+		}
+		return is_array($row) ? $row : array($row);
+	}
+	return array($t);
+}
+
+function getLogoList() {
+	$dirname = "./templates/invoices/logos";
+	$allowed = ['jpg', 'png', 'jpeg', 'gif'];
+	$files   = [];
+	if (is_dir($dirname)) {
+		foreach (new DirectoryIterator($dirname) as $fileInfo) {
+			if ($fileInfo->isFile() && in_array(strtolower($fileInfo->getExtension()), $allowed, true)) {
+				$files[] = $fileInfo->getFilename();
+			}
+		}
+	}
+	$s3Files = S3LogoStore::list((int) domain_id::get());
+	foreach ($s3Files as $f) {
+		$ext = strtolower(pathinfo($f, PATHINFO_EXTENSION));
+		if (in_array($ext, $allowed, true)) {
+			$files[] = $f;
+		}
+	}
 	sort($files);
-	
 	return $files;
 }
 
@@ -42,7 +113,7 @@ function getLogo($biller) {
 	$url = getURL();
 
 	if(!empty($biller['logo'])) {
-		return $url."/templates/invoices/logos/".$biller['logo'];
+		return $url."/index.php?module=billers&view=logo&id=".$biller['id'];
 	}
 	else {
 		return $url."/templates/invoices/logos/_default_blank_logo.png";
@@ -99,14 +170,14 @@ function get_custom_field_name($field) {
 
 function dropDown($choiceArray, $defVal) {
 
-	$dropDown = '<select name="value">' . "\n";
+	$dropDown = '<select name="value" class="form-select">' . "\n";
 
 	foreach ($choiceArray as $key => $value)
 	{
 		if ($key == $defVal) {
-			$dropDown .= "\n" . '<OPTION SELECTED style="font-weight: bold" value='.$key.'>'.$value.'</OPTION>';
+			$dropDown .= "\n" . '<option selected style="font-weight: bold" value="'.htmlspecialchars($key, ENT_QUOTES).'">'.$value.'</option>';
 		} else {
-			$dropDown .= "\n" . '<OPTION '.$selected.' value='.$key.'>'.$value.'</OPTION>';
+			$dropDown .= "\n" . '<option value="'.htmlspecialchars($key, ENT_QUOTES).'">'.$value.'</option>';
 		}
 	}
 	$dropDown .= "\n</select>";
@@ -361,7 +432,7 @@ function verifySiNonce($hash, $action, $userid = false)
     global $config;
     
     $tickTock = floor(time()/$config->nonce->timelimit);
-    if(!isempty($hash) AND ($hash === siNonce($action, $userid) OR $hash === siNonce($action, $userid, $tickTock-1)))
+    if(!empty($hash) AND ($hash === siNonce($action, $userid) OR $hash === siNonce($action, $userid, $tickTock-1)))
     {
         return true;
     }
@@ -379,4 +450,65 @@ function requireCSRFProtection($action = 'all', $userid = false)
 function antiCSRFHiddenInput($action = 'all', $userid = false)
 {
     return '<input type="hidden" name="csrfprotectionbysr" value="'.htmlsafe(siNonce($action, $userid)).'" />';
+}
+
+/**
+ * Invalidate all cached data for a domain: dashboard aggregates, invoice grid
+ * pages, payment grid pages, and report pages.
+ * Call this after any write that changes invoice or payment data.
+ */
+function dashboard_cache_clear(int $domain_id): void
+{
+    // Flat-dir caches keyed by domain prefix
+    $targets = [
+        './tmp/cache/dashboard'    => 'dash_' . $domain_id . '_*.json',
+        './tmp/cache/invoices_xml' => 'inv_'  . $domain_id . '_*.xml',
+        './tmp/cache/payments_xml' => 'pmt_'  . $domain_id . '_*.xml',
+    ];
+    foreach ($targets as $dir => $pattern) {
+        if (! is_dir($dir)) {
+            continue;
+        }
+        foreach (glob($dir . '/' . $pattern) ?: [] as $f) {
+            @unlink($f);
+        }
+    }
+    // Report caches live in their own per-domain subdirectory
+    $rpt_dir = './tmp/cache/reports/' . $domain_id;
+    if (is_dir($rpt_dir)) {
+        foreach (glob($rpt_dir . '/*.json') ?: [] as $f) {
+            @unlink($f);
+        }
+    }
+}
+
+/**
+ * Load a cached report payload for the given report name, domain, and optional
+ * request params.  Returns the cached assign array, or null on miss/expiry.
+ * TTL is 5 minutes; also cleared on any invoice/payment write.
+ */
+function report_cache_get(string $name, int $domain_id, array $params = []): ?array
+{
+    $dir  = './tmp/cache/reports/' . $domain_id;
+    $key  = md5(serialize($params));
+    $file = $dir . '/' . $name . '_' . $key . '.json';
+    if (file_exists($file) && (time() - filemtime($file)) < 300) {
+        $data = json_decode(file_get_contents($file), true);
+        return is_array($data) ? $data : null;
+    }
+    return null;
+}
+
+/**
+ * Persist a report's bladeView assigns to the file cache.
+ */
+function report_cache_set(string $name, int $domain_id, array $data, array $params = []): void
+{
+    $dir  = './tmp/cache/reports/' . $domain_id;
+    if (! is_dir($dir)) {
+        @mkdir($dir, 0755, true);
+    }
+    $key  = md5(serialize($params));
+    $file = $dir . '/' . $name . '_' . $key . '.json';
+    @file_put_contents($file, json_encode($data), LOCK_EX);
 }

@@ -8,18 +8,27 @@ checkLogin();
 if ($_POST['p_description'] != "" ) {
 	include("./modules/preferences/save.php");
 }
-$smarty -> assign('save',$save);
+$bladeView -> assign('save',$save);
 
 $defaults = getSystemDefaults();
 $preferences = getActivePreferences();
+$paymentTerms = getPaymentTerms();
+require_once __DIR__ . '/../../include/class/LocaleHelper.php';
+require_once __DIR__ . '/../../include/class/CurrencySignHelper.php';
+require_once __DIR__ . '/../../include/class/siCurrencies.php';
+$localelist = LocaleHelper::getLocaleList();
+$currencies = siCurrencies::getForDomain();
 
-$localelist = Zend_Locale::getLocaleList();
+$bladeView->assign('preferences',$preferences);
+$bladeView->assign('paymentTerms',$paymentTerms);
+$bladeView->assign('defaults',$defaults);
+$bladeView->assign('localelist',$localelist);
+$bladeView->assign('currencies', $currencies);
+$bladeView->assign('defaultSystemLocale', getDefaultLanguage());
+$languageList = getLanguageList();
+$bladeView->assign('languageList', is_array($languageList) ? $languageList : []);
 
-$smarty->assign('preferences',$preferences);
-$smarty->assign('defaults',$defaults);
-$smarty->assign('localelist',$localelist);
-
-$smarty -> assign('pageActive', 'preference');
-$smarty -> assign('subPageActive', 'preferences_add');
-$smarty -> assign('active_tab', '#setting');
+$bladeView -> assign('pageActive', 'preference');
+$bladeView -> assign('subPageActive', 'preferences_add');
+$bladeView -> assign('active_tab', '#setting');
 ?>

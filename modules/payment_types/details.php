@@ -12,14 +12,15 @@ jsEnd();
 
 
 #get the invoice id
-$payment_type_id = $_GET['id'];
+$payment_type_id = (int)$_GET['id'];
 
 $paymentType = getPaymentType($payment_type_id);
+si_check_record_access($paymentType);
 
-$smarty->assign('paymentType',$paymentType);
+$bladeView->assign('paymentType',$paymentType);
 
-$smarty -> assign('pageActive', 'payment_type');
+$bladeView -> assign('pageActive', 'payment_type');
 $subPageActive = $_GET['action'] =="view"  ? "payment_types_view" : "payment_types_edit" ;
-$smarty -> assign('subPageActive', $subPageActive);
-$smarty -> assign('active_tab', '#setting');
+$bladeView -> assign('subPageActive', $subPageActive);
+$bladeView -> assign('active_tab', '#setting');
 ?>

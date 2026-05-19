@@ -21,11 +21,11 @@ checkLogin();
 
 $pageActive = "invoices";
 
-$logger->log('Itemised invoice created', Zend_Log::INFO);
+$logger->log('Itemised invoice created', LegacyLogger::INFO);
 
 include('./modules/invoices/invoice.php');
 
-$smarty -> assign('pageActive', 'invoice_new');
-$smarty -> assign('subPageActive', 'invoice_new_itemised');
-$smarty -> assign('active_tab', '#money');
+$bladeView -> assign('pageActive', 'invoice_new');
+$bladeView -> assign('subPageActive', 'invoice_new_itemised');
+$bladeView -> assign('active_tab', '#money');
 ?>

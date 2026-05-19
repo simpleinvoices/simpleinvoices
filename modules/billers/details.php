@@ -21,9 +21,10 @@
 checkLogin();
 
 #get the invoice id
-$biller_id = $_GET['id'];
+$biller_id = (int)$_GET['id'];
 
 $biller = getBiller($biller_id);
+si_check_record_access($biller);
 
 /*drop down list code for invoice logo */
 
@@ -34,20 +35,20 @@ $files = getLogoList();
 #get custom field labels
 $customFieldLabel = getCustomFieldLabels();
 
-$smarty->assign('biller', $biller);
+$bladeView->assign('biller', $biller);
 /*
-$smarty -> assign('enabled', array(
+$bladeView -> assign('enabled', array(
                                 0 => $LANG['disabled'],
 				1 => $LANG['enabled']
 			)
 		);
  */
  
-$smarty->assign('files', $files);
-$smarty->assign('customFieldLabel', $customFieldLabel);
+$bladeView->assign('files', $files);
+$bladeView->assign('customFieldLabel', $customFieldLabel);
 
-$smarty -> assign('pageActive', 'biller');
+$bladeView -> assign('pageActive', 'biller');
 $subPageActive = $_GET['action'] =="view"  ? "biller_view" : "biller_edit" ;
-$smarty -> assign('subPageActive', $subPageActive);
-$smarty -> assign('active_tab', '#people');
+$bladeView -> assign('subPageActive', $subPageActive);
+$bladeView -> assign('active_tab', '#people');
 ?>

@@ -9,55 +9,59 @@ if(isset($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] > 0)
     //	$output = '';
 
 
-	if($states->rowCount() > 0)
-	{	
-		$row = $states->fetch();
-
+	$row = $states->fetch();
+	if($row !== false)
+	{
+        $html = '';
         $json_att = json_decode($row['attribute']);
         if($json_att !== null AND $row['attribute'] !== '[]')
         {
-        $html ="<tr id='json_html". $row_id ."'><td></td><td colspan='5'><table><tr>";
+        $html = "<div id='json_html". $row_id ."' class='si-attr-row d-flex flex-wrap gap-2 align-items-end mt-1 mb-1'>";
         foreach($json_att as $k=>$v)
         {
             if($v == 'true')
             {
-                $attr_name_sql = sprintf('select 
-                    a.name as name, a.enabled as enabled,  t.name type 
-                    from 
-                        si_products_attributes as a, 
-                        si_products_attribute_type as t 
-                   where 
-                        a.type_id = t.id
-                        AND a.id = %d', $k);
-                $attr_name = dbQuery($attr_name_sql);
+                $attr_id = (int)$k;
+                $attr_name_sql = "SELECT a.name as name, a.enabled as enabled, t.name type
+                    FROM ".TB_PREFIX."products_attributes as a,
+                         ".TB_PREFIX."products_attribute_type as t
+                   WHERE a.type_id = t.id
+                     AND a.id = :attr_id
+                     AND a.domain_id = :domain_id";
+                $attr_name = dbQuery($attr_name_sql, ':attr_id', $attr_id, ':domain_id', $auth_session->domain_id);
                 $attr_name = $attr_name->fetch();
 
-                $sql2 = sprintf("select a.name as name, v.id as id, v.value as value, v.enabled as enabled from ".TB_PREFIX."products_attributes a, ".TB_PREFIX."products_values v where a.id = v.attribute_id AND a.id = %d", $k);
-                $states2 = dbQuery($sql2);
+                $sql2 = "SELECT a.name as name, v.id as id, v.value as value, v.enabled as enabled
+                         FROM ".TB_PREFIX."products_attributes a
+                             JOIN ".TB_PREFIX."products_values v
+                                 ON (v.attribute_id = a.id AND v.domain_id = a.domain_id)
+                         WHERE a.id = :attr_id
+                           AND a.domain_id = :domain_id";
+                $states2 = dbQuery($sql2, ':attr_id', $attr_id, ':domain_id', $auth_session->domain_id);
 
                 if($attr_name['enabled'] =='1' AND $attr_name['type'] == 'list')
                 {
-                    $html .= "<td>".$attr_name['name']."<select name='attribute[".$row_id."][".$k."]'>";
+                    $html .= "<div><label class='form-label small mb-1'>".htmlspecialchars($attr_name['name'])."</label><select name='attribute[".$row_id."][".$k."]' class='form-select form-select-sm'>";
                     foreach($states2 as $att_key=>$att_val)
                     {
                         if($att_val['enabled'] == '1')
                         {
-                            $html .= "<option value='". $att_val['id']. "'>".$att_val['value']."</option>";
+                            $html .= "<option value='". $att_val['id']. "'>".htmlspecialchars($att_val['value'])."</option>";
                         }
                     }
-                    $html .= "</select></td>";
+                    $html .= "</select></div>";
                 }
                 if($attr_name['enabled'] =='1' AND $attr_name['type'] == 'free'  )
                 {
-                    $html .= "<td>".$attr_name['name']."<input name='attribute[".$row_id."][".$k."]' /></td>";
+                    $html .= "<div><label class='form-label small mb-1'>".htmlspecialchars($attr_name['name'])."</label><input class='form-control form-control-sm' name='attribute[".$row_id."][".$k."]' /></div>";
                 }
                 if($attr_name['enabled'] =='1' AND $attr_name['type'] == 'decimal' )
                 {
-                    $html .= "<td>".$attr_name['name']."<input name='attribute[".$row_id."][".$k."]' size='5'/></td>";
+                    $html .= "<div><label class='form-label small mb-1'>".htmlspecialchars($attr_name['name'])."</label><input class='form-control form-control-sm' style='width:6rem' name='attribute[".$row_id."][".$k."]' /></div>";
                 }
             }
         }
-                    $html .= "</tr></table></td></tr>";
+        $html .= "</div>";
         }
 	//	print_r($row);
 	//		$output .= '<input id="state" class="field select two-third addr" value="'.$row['unit_price'].'"/>';

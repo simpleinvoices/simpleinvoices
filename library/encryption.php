@@ -1,5 +1,15 @@
-<?php 
+<?php
 
+/**
+ * Legacy symmetric obfuscation helper (custom alphabet + MD5-derived material).
+ *
+ * This class is not loaded or used anywhere in current Simple Invoices. It predates
+ * modern crypto and must not be used for payment gateway secrets or other sensitive
+ * data - use libsodium via include/gateway_secrets_crypto.php (SI_GATEWAY_SECRETS_KEY)
+ * for those fields.
+ *
+ * Kept in the tree for historical reference only; new code should not depend on it.
+ */
 
 class encryption 
 { 

@@ -2,169 +2,211 @@
 
 header("Content-type: text/xml");
 
-//$start = (isset($_POST['start'])) ? $_POST['start'] : "0" ;
-$dir = (isset($_POST['sortorder'])) ? $_POST['sortorder'] : "DESC" ;
-$sort = (isset($_POST['sortname'])) ? $_POST['sortname'] : "ap.id" ;
-$rp = (isset($_POST['rp'])) ? $_POST['rp'] : "25" ;
-$page = (isset($_POST['page'])) ? $_POST['page'] : "1" ;
+$dir  = $_REQUEST['sortorder'] ?? 'DESC';
+$sort = $_REQUEST['sortname'] ?? 'ap.id';
+$rp   = max(10, (int)($_REQUEST['rp'] ?? 10));
+$page = max(1, (int)($_REQUEST['page'] ?? 1));
 
-function sql($type='', $dir, $sort, $rp, $page )
+// ── Payment grid XML cache ───────────────────────────────────────────────────
+$_pmt_cache_dir  = dirname(dirname(__DIR__)) . '/tmp/cache/payments_xml';
+$_pmt_cache_key  = md5(serialize([
+    $auth_session->domain_id,
+    $auth_session->role_name ?? '',
+    $auth_session->user_id   ?? '',
+    $dir, $sort, $rp, $page,
+    $_REQUEST['query'] ?? '',
+    $_REQUEST['qtype'] ?? '',
+    $_GET['id']  ?? '',
+    $_GET['c_id'] ?? '',
+]));
+$_pmt_cache_file = $_pmt_cache_dir . '/pmt_' . (int) $auth_session->domain_id . '_' . $_pmt_cache_key . '.xml';
+$_pmt_cache_ttl  = 300; // 5 minutes; also cleared immediately on any invoice/payment write
+
+if (file_exists($_pmt_cache_file) && (time() - filemtime($_pmt_cache_file)) < $_pmt_cache_ttl) {
+    echo file_get_contents($_pmt_cache_file);
+    exit;
+}
+// ── end cache check ──────────────────────────────────────────────────────────
+
+/**
+ * @param  string  $type  '' for grid rows, 'count' for SQL COUNT(*) (no ORDER/LIMIT)
+ */
+function sql($type = '', $dir, $sort, $rp, $page)
 {
-	global $config;
+	global $db_server;
 	global $auth_session;
 
-	$valid_search_fields = array('ap.id','b.name', 'c.name');
+	$search_map = [
+		'ap.id'   => 'ap.id',
+		'b.name'  => 'ap.denorm_biller_name',
+		'c.name'  => 'ap.denorm_customer_name',
+	];
 
-	//SC: Safety checking values that will be directly subbed in
-	if (intval($start) != $start) {
-		$start = 0;
-	}
-	if (intval($limit) != $limit) {
-		$limit = 25;
-	}
-	if (!preg_match('/^(asc|desc)$/iD', $dir)) {
+	if (! preg_match('/^(asc|desc)$/iD', $dir)) {
 		$dir = 'DESC';
 	}
 
-	/*SQL Limit - start*/
-	$start = (($page-1) * $rp);
-	$limit = "LIMIT $start, $rp";
+	$start = (($page - 1) * $rp);
+	$limit = "LIMIT $rp OFFSET $start";
 
-	if($type =="count")
-	{
-		unset($limit);
-	}
-	/*SQL Limit - end*/
-
-	$where = "";
-	$query = isset($_POST['query']) ? $_POST['query'] : null;
-	$qtype = isset($_POST['qtype']) ? $_POST['qtype'] : null;
-	if ( ! (empty($qtype) || empty($query)) ) {
-		if ( in_array($qtype, $valid_search_fields) ) {
-			$where = " AND $qtype LIKE :query ";
+	$where = '';
+	$query = $_REQUEST['query'] ?? null;
+	$qtype = $_REQUEST['qtype'] ?? null;
+	if (! (empty($qtype) || empty($query))) {
+		if (isset($search_map[$qtype])) {
+			$where = ' AND ' . $search_map[$qtype] . ' LIKE :query ';
 		} else {
 			$qtype = null;
 			$query = null;
 		}
 	}
 
+	// Map grid column names to safe SQL expressions (denormalised list columns on si_payment)
+	$sortMap = [
+		'id'        => 'ap.id',
+		'ap.id'     => 'ap.id',
+		'ac_inv_id' => 'ap.ac_inv_id',
+		'customer'  => 'ap.denorm_customer_name',
+		'biller'    => 'ap.denorm_biller_name',
+		'ac_amount' => 'ap.ac_amount',
+		'date'      => 'ap.ac_date',
+	];
+	$sort = $sortMap[$sort] ?? 'ap.id';
 
-	/*Check that the sort field is OK*/
-	$validFields = array('ap.id', 'ac_inv_id', 'description', 'unit_price','enabled');
+	$date_expr = ($db_server === 'sqlite')
+		? "strftime('%Y-%m-%d', ap.ac_date)"
+		: ($db_server === 'pgsql'
+			? "TO_CHAR(ap.ac_date, 'YYYY-MM-DD')"
+			: "DATE_FORMAT(ap.ac_date,'%Y-%m-%d')");
+	$desc_expr = ($db_server === 'mysql')
+		? "COALESCE(pt.pt_description, '')"
+		: "COALESCE(pt.pt_description, '')";
 
-	if (in_array($sort, $validFields)) {
-		$sort = $sort;
-	} else {
-		$sort = "ap.id";
+	$from_join = '
+			FROM ' . TB_PREFIX . 'payment ap
+			LEFT JOIN ' . TB_PREFIX . 'payment_types pt ON (pt.pt_id = ap.ac_payment_type AND pt.domain_id = ap.domain_id)
+			WHERE ap.domain_id = :domain_id ';
+
+	// Customer-scoped payment list needs invoice row for customer_id match
+	$from_join_iv = '
+			FROM ' . TB_PREFIX . 'payment ap
+			INNER JOIN ' . TB_PREFIX . 'invoices iv ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
+			LEFT JOIN ' . TB_PREFIX . 'payment_types pt ON (pt.pt_id = ap.ac_payment_type AND pt.domain_id = ap.domain_id)
+			WHERE ap.domain_id = :domain_id ';
+
+	$domain_id = $auth_session->domain_id;
+
+	if ($type === 'count') {
+		$count_head = 'SELECT COUNT(*) AS cnt ';
+		if (! empty($_GET['id'])) {
+			$id       = $_GET['id'];
+			$countSql = $count_head . $from_join . ' AND ap.ac_inv_id = :invoice_id ' . $where;
+			if (empty($query)) {
+				return dbQuery($countSql, ':domain_id', $domain_id, ':invoice_id', $id);
+			}
+
+			return dbQuery($countSql, ':domain_id', $domain_id, ':invoice_id', $id, ':query', "%$query%");
+		}
+		if (! empty($_GET['c_id'])) {
+			$id       = $_GET['c_id'];
+			$countSql = $count_head . $from_join_iv . ' AND iv.customer_id = :cid ' . $where;
+			if (empty($query)) {
+				return dbQuery($countSql, ':domain_id', $domain_id, ':cid', $id);
+			}
+
+			return dbQuery($countSql, ':domain_id', $domain_id, ':cid', $id, ':query', "%$query%");
+		}
+		$countSql = $count_head . $from_join . $where;
+		if (empty($query)) {
+			return dbQuery($countSql, ':domain_id', $domain_id);
+		}
+
+		return dbQuery($countSql, ':domain_id', $domain_id, ':query', "%$query%");
 	}
 
-	$sql = "SELECT 
-				ap.*
-				, c.name as cname
-				, (SELECT CONCAT(pr.pref_inv_wording,' ',iv.index_id)) as index_name
-				, b.name as bname
-				, pt.pt_description AS description
-				, ac_notes AS notes
-				, DATE_FORMAT(ac_date,'%Y-%m-%d') AS date
-			FROM 
-				".TB_PREFIX."payment ap
-				INNER JOIN ".TB_PREFIX."invoices iv      ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
-				INNER JOIN ".TB_PREFIX."customers c      ON (c.id = iv.customer_id AND c.domain_id = iv.domain_id)
-				INNER JOIN ".TB_PREFIX."biller b         ON (b.id = iv.biller_id AND b.domain_id = iv.domain_id)
-				INNER JOIN ".TB_PREFIX."preferences pr   ON (pr.pref_id = iv.preference_id AND pr.domain_id = ap.domain_id)
-				INNER JOIN ".TB_PREFIX."payment_types pt ON (pt.pt_id = ap.ac_payment_type AND pt.domain_id = ap.domain_id)
-			WHERE 
-				ap.domain_id = :domain_id ";
+	$select = "SELECT ap.*
+				, ap.denorm_customer_name AS cname
+				, ap.denorm_invoice_index_name AS index_name
+				, ap.denorm_biller_name AS bname
+				, $desc_expr AS description
+				, ap.ac_notes AS notes
+				, $date_expr AS date ";
 
-	#if coming from another page where you want to filter by just one invoice
-	if (!empty($_GET['id'])) {
-
-		$id = $_GET['id'];
-		
-		$sql .= " 
+	if (! empty($_GET['id'])) {
+		$id  = $_GET['id'];
+		$sql = $select . $from_join . "
 			AND ap.ac_inv_id = :invoice_id
 			$where
-			ORDER BY 
-				$sort $dir 
+			ORDER BY $sort $dir
 			$limit";
-		
 		if (empty($query)) {
-			$result = dbQuery($sql, ':domain_id', $auth_session->domain_id, ':invoice_id', $id);
-		} else {
-			$result = dbQuery($sql, ':domain_id', $auth_session->domain_id, ':invoice_id', $id, ':query', "%$query%");
+			return dbQuery($sql, ':domain_id', $domain_id, ':invoice_id', $id);
 		}
-	}
-	#if coming from another page where you want to filter by just one customer
-	elseif (!empty($_GET['c_id'])) {
-		
-		//$query = getCustomerPayments($_GET['c_id']);
-		$id = $_GET['c_id'];
-		$sql .= " 
-			AND c.id = :id 
-			ORDER BY 
-				$sort $dir  
-			$limit";
 
-		$result = dbQuery($sql, ':id', $id, ':domain_id', $auth_session->domain_id);
-		
+		return dbQuery($sql, ':domain_id', $domain_id, ':invoice_id', $id, ':query', "%$query%");
 	}
-	#if you want to show all invoices - no filters
-	else {
-		//$query = getPayments();
-		
-		$sql .= " 
-				$where
-			ORDER BY 
-				$sort $dir 
+	if (! empty($_GET['c_id'])) {
+		$id  = $_GET['c_id'];
+		$sql = $select . $from_join_iv . "
+			AND iv.customer_id = :cid
+			$where
+			ORDER BY $sort $dir
 			$limit";
-					
 		if (empty($query)) {
-			$result =  dbQuery($sql, ':domain_id', $auth_session->domain_id);
-		} else {
-			$result =  dbQuery($sql, ':domain_id', $auth_session->domain_id, ':query', "%$query%");
+			return dbQuery($sql, ':domain_id', $domain_id, ':cid', $id);
 		}
+
+		return dbQuery($sql, ':domain_id', $domain_id, ':cid', $id, ':query', "%$query%");
 	}
-	
-	return $result;
+
+	$sql = $select . $from_join . "
+			$where
+			ORDER BY $sort $dir
+			$limit";
+	if (empty($query)) {
+		return dbQuery($sql, ':domain_id', $domain_id);
+	}
+
+	return dbQuery($sql, ':domain_id', $domain_id, ':query', "%$query%");
 }
 
-$sth = sql('', $dir, $sort, $rp, $page);
-$sth_count_rows = sql('count',$dir, $sort, $rp, $page);
+$sth              = sql('', $dir, $sort, $rp, $page);
+$sth_count_rows   = sql('count', $dir, $sort, $rp, $page);
+$payments         = $sth->fetchAll(PDO::FETCH_ASSOC);
+$count_row = $sth_count_rows->fetch(PDO::FETCH_ASSOC);
+$count     = (int) ($count_row['cnt'] ?? 0);
 
-$payments = $sth->fetchAll(PDO::FETCH_ASSOC);
-$count = $sth_count_rows->rowCount();
-/*
-$sqlTotal = "SELECT count(id) AS count FROM ".TB_PREFIX."payment";
-$tth = dbQuery($sqlTotal) or die(end($dbh->errorInfo()));
-$resultCount = $tth->fetch();
-$count = $resultCount[0];
-//echo sql2xml($customers, $count);
-*/
+$xml  = "<rows>";
+$xml .= "<page>$page</page>";
+$xml .= "<total>$count</total>";
 
-	$xml  = "<rows>";
-	$xml .= "<page>$page</page>";
-	$xml .= "<total>$count</total>";
-	
-	foreach ($payments as $row) {
-		
-		$notes = si_truncate($row['ac_notes'],'13','...');
-		$xml .= "<row id='".$row['id']."'>";
-	$xml .= "<cell><![CDATA[
-	<a class='index_table' title='".$LANG['view']." ".$row['name']."' href='index.php?module=payments&view=details&id=".$row['id']."&action=view'><img src='images/common/view.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-	<a class='index_table' title='".$LANG['print_preview_tooltip']." ".$row['id']."' href='index.php?module=payments&view=print&id=".$row['id']."'><img src='images/common/printer.png' height='16' border='-5px' padding='-4px' valign='bottom' /></a>
-	]]></cell>";
-		$xml .= "<cell><![CDATA[".$row['id']."]]></cell>";
-		$xml .= "<cell><![CDATA[".$row['index_name']."]]></cell>";		
-		$xml .= "<cell><![CDATA[".$row['cname']."]]></cell>";
-		$xml .= "<cell><![CDATA[".$row['bname']."]]></cell>";
-		$xml .= "<cell><![CDATA[".siLocal::number($row['ac_amount'])."]]></cell>";
-		$xml .= "<cell><![CDATA[".$notes."]]></cell>";
-		$xml .= "<cell><![CDATA[".$row['description']."]]></cell>";
-		$xml .= "<cell><![CDATA[".siLocal::date($row['date'])."]]></cell>";
-	
-		$xml .= "</row>";		
-	}
-	$xml .= "</rows>";
+foreach ($payments as $row) {
+	$label_esc = htmlspecialchars($row['index_name'] ?? (string)$row['id']);
+	$action    = '<div class="dropdown">';
+	$action .= '<a class="btn btn-outline-secondary dropdown-toggle btn-sm-mobile" data-bs-toggle="dropdown" aria-expanded="false"><span class="d-none d-sm-inline-flex align-items-center"><i class="ti ti-settings me-1"></i>'.$LANG['actions'].'</span><span class="d-sm-none"><i class="ti ti-dots-vertical" aria-hidden="true"></i></span></a>';
+	$action .= '<div class="dropdown-menu dropdown-menu-end">';
+	$action .= '<a class="dropdown-item" href="index.php?module=payments&amp;view=details&amp;id='.$row['id'].'&amp;action=view"><i class="ti ti-eye me-2"></i>'.$LANG['view'].' '.$label_esc.'</a>';
+	$pay_pdf_url = htmlspecialchars('index.php?module=export&view=payment&id='.$row['id'].'&format=pdf', ENT_QUOTES);
+	$action .= '<a class="dropdown-item si-preview-link" href="index.php?module=payments&amp;view=print&amp;id='.$row['id'].'" data-preview-title="'.htmlspecialchars($LANG['print_preview_tooltip'].' '.$label_esc, ENT_QUOTES).'" data-preview-pdf="'.$pay_pdf_url.'"><i class="ti ti-printer me-2"></i>'.$LANG['print_preview_tooltip'].' '.$label_esc.'</a>';
+	$action .= '</div></div>';
+	$xml .= "<row id='".$row['id']."'>";
+	$xml .= "<cell><![CDATA[".$action."]]></cell>";
+	$xml .= "<cell><![CDATA[".$row['id']."]]></cell>";
+	$xml .= "<cell><![CDATA[".$row['index_name']."]]></cell>";
+	$xml .= "<cell><![CDATA[".$row['cname']."]]></cell>";
+	$xml .= "<cell><![CDATA[".$row['bname']."]]></cell>";
+	$amt_cell = htmlspecialchars(CurrencySignHelper::format($row['ac_amount'], $row['denorm_currency_sign'] ?? '', '', $row['denorm_currency_code'] ?? '', false, $row['denorm_currency_locale'] ?? ''), ENT_QUOTES, 'UTF-8');
+	$xml .= "<cell><![CDATA[".$amt_cell."]]></cell>";
+	$xml .= "<cell><![CDATA[".siLocal::date($row['date'])."]]></cell>";
+	$xml .= "</row>";
+}
+$xml .= "</rows>";
+
+// ── Write xml cache ───────────────────────────────────────────────────────────
+if (! is_dir($_pmt_cache_dir)) {
+    @mkdir($_pmt_cache_dir, 0755, true);
+}
+@file_put_contents($_pmt_cache_file, $xml, LOCK_EX);
+// ── end cache write ───────────────────────────────────────────────────────────
 
 echo $xml;
-?>

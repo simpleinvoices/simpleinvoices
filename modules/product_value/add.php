@@ -9,15 +9,16 @@ if ($_POST['value'] !== '' ) {
 	include("./modules/product_value/save.php");
 }
 
-$sql = "SELECT * FROM ".TB_PREFIX."products_attributes";
-$sth =  dbQuery($sql);
+$domain_id = domain_id::get();
+$sql = "SELECT * FROM ".TB_PREFIX."products_attributes WHERE domain_id = :domain_id";
+$sth = dbQuery($sql, ':domain_id', $domain_id);
 $product_attributes = $sth->fetchAll();
 
 $pageActive = "product_value_add";
-$smarty->assign('pageActive', $pageActive);
-$smarty -> assign('active_tab', '#product');
+$bladeView->assign('pageActive', $pageActive);
+$bladeView -> assign('active_tab', '#product');
 
-$smarty -> assign("product_attributes", $product_attributes);
-$smarty -> assign('save',$save);
+$bladeView -> assign("product_attributes", $product_attributes);
+$bladeView -> assign('save',$save);
 
 ?>

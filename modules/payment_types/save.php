@@ -7,7 +7,7 @@ checkLogin();
 
 # Deal with op and add some basic sanity checking
 
-$op = !empty( $_POST['op'] ) ? addslashes( $_POST['op'] ) : NULL;
+$op = $_POST['op'] ?? null;
 
 #insert payment type
 
@@ -18,13 +18,13 @@ $sql = "INSERT INTO ".TB_PREFIX."tax VALUES ('$_POST['tax_description']','$_POST
 */
 
 	if ($db_server == 'pgsql') {
-		$sql = "INSERT into ".TB_PREFIX."payment_types
+		$sql = "INSERT INTO ".TB_PREFIX."payment_types
 				(domain_id, pt_description, pt_enabled)
 			VALUES
-				(:domain_id', :description, :enabled)";
+				(:domain_id, :description, :enabled)";
 	} else {
-		$sql = "INSERT into
-				".TB_PREFIX."payment_types
+		// MySQL and SQLite: NULL auto-fills the auto-increment id column
+		$sql = "INSERT INTO ".TB_PREFIX."payment_types
 			VALUES
 				(NULL, :domain_id, :description, :enabled)";
 	}
@@ -57,9 +57,10 @@ else if (  $op === 'edit_payment_type' ) {
 				pt_description = :description,
 				pt_enabled = :enabled
 			WHERE
-				pt_id = :id";
+				pt_id = :id
+			AND domain_id = :domain_id";
 
-		if (dbQuery($sql, ':description', $_POST['pt_description'], ':enabled', $_POST['pt_enabled'], ':id', $_GET['id'])) {
+		if (dbQuery($sql, ':description', $_POST['pt_description'], ':enabled', $_POST['pt_enabled'], ':id', (int)$_GET['id'], ':domain_id', $auth_session->domain_id)) {
 			$saved = true;
 			//$display_block = $LANG['save_payment_type_success'];
 		} else {
@@ -79,10 +80,10 @@ else if (  $op === 'edit_payment_type' ) {
 $refresh_total = isset($refresh_total) ? $refresh_total : '&nbsp';
 
 
-$smarty -> assign('display_block',$display_block); 
-$smarty -> assign('refresh_total',$refresh_total); 
-$smarty -> assign('saved',$saved); 
+$bladeView -> assign('display_block',$display_block); 
+$bladeView -> assign('refresh_total',$refresh_total); 
+$bladeView -> assign('saved',$saved); 
 
-$smarty -> assign('pageActive', 'payment_type');
-$smarty -> assign('active_tab', '#setting');
+$bladeView -> assign('pageActive', 'payment_type');
+$bladeView -> assign('active_tab', '#setting');
 ?>

@@ -21,11 +21,11 @@
 checkLogin();
 
 $pageActive = "invoices";
-$smarty->assign('pageActive', $pageActive);
+$bladeView->assign('pageActive', $pageActive);
 
 include('./modules/invoices/invoice.php');
 
-$smarty -> assign('pageActive', 'invoice_new');
-$smarty -> assign('subPageActive', 'invoice_new_total');
-$smarty -> assign('active_tab', '#money');
+$bladeView -> assign('pageActive', 'invoice_new');
+$bladeView -> assign('subPageActive', 'invoice_new_total');
+$bladeView -> assign('active_tab', '#money');
 ?>

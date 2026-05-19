@@ -1,22 +1,76 @@
 <?php
 /* Class: wrapper class for zend locale*/
-class siLocal 
+class siLocal
 {
-	/*Function: wrapper function for zend_locale_format::toNumber*/
-	public static function number($number,$precision="",$locale="")
+	/** Per-request override (e.g. invoice preference locale for PDF/export). */
+	private static ?string $localeOverride = null;
+
+	/** User-level locale from si_user.preferred_language, applied once per request. */
+	private static ?string $userLocale = null;
+
+	/**
+	 * Override Intl formatting locale for the current request (e.g. from invoice preference).
+	 * Pass null to fall back to user locale → system default.
+	 */
+	public static function setLocaleOverride(?string $locale): void
 	{
-		global $config;
-		
-		$locale = ($locale == "") ? new Zend_Locale($config->local->locale) : $locale;
-		$load_precision = $config->local->precision; 
-		
-		$precision = ($precision == "") ? $load_precision : $precision;
-		$formatted_number = Zend_Locale_Format::toNumber($number, array('precision' => $precision, 'locale' => $locale));
-		
-		//trim zeros from decimal point if enabled
-		//if ($config->local->trim_zeros == "y") { $formatted_number = rtrim(trim($formatted_number, '0'), '.'); }
-		
-		return $formatted_number;
+		self::$localeOverride = ($locale !== null && $locale !== '') ? $locale : null;
+	}
+
+	/**
+	 * Set the logged-in user's locale (from si_user.preferred_language).
+	 * Lower priority than explicit setLocaleOverride() but higher than system default.
+	 */
+	public static function setUserLocale(?string $locale): void
+	{
+		self::$userLocale = ($locale !== null && $locale !== '') ? $locale : null;
+	}
+
+	private static function localeString($locale): string
+	{
+		if ($locale !== null && $locale !== '') {
+			return (string) $locale;
+		}
+		if (self::$localeOverride !== null) {
+			return self::$localeOverride;
+		}
+		if (self::$userLocale !== null) {
+			return self::$userLocale;
+		}
+		if (function_exists('getDefaultLanguage')) {
+			$lang = getDefaultLanguage();
+			if ($lang !== null && $lang !== '') {
+				return (string) $lang;
+			}
+		}
+		return 'en_GB';
+	}
+
+	private static function getPrecision(): int
+	{
+		static $precision = null;
+		if ($precision === null) {
+			global $config;
+			if (function_exists('getSystemDefaults')) {
+				$defaults = getSystemDefaults();
+				$precision = isset($defaults['precision']) ? (int) $defaults['precision'] : (int) ($config->local?->precision ?? 2);
+			} else {
+				$precision = (int) ($config->local?->precision ?? 2);
+			}
+		}
+		return $precision;
+	}
+
+	/*Function: wrapper function using IntlNumberFormatter*/
+	public static function number($number, $precision = "", $locale = "")
+	{
+		$locale = self::localeString($locale);
+		$precision = $precision === "" ? self::getPrecision() : (int) $precision;
+
+		$formatter = new \NumberFormatter($locale, \NumberFormatter::DECIMAL);
+		$formatter->setAttribute(\NumberFormatter::FRACTION_DIGITS, $precision);
+
+		return $formatter->format((float) $number);
 	}
 	
     /*
@@ -37,61 +91,54 @@ class siLocal
 
 	public static function number_trim($number)
 	{
-        
-        global $config;        
-
 		$formatted_number = siLocal::number($number);
-    
-        //get the precision and add 1 - for the decimal place and reverse the sign
-        $position = ($config->local->precision + 1 ) * -1;
+        $precision = self::getPrecision();
+        $position = ($precision + 1) * -1;
 
-        if(substr($formatted_number,$position,'1') == ".")
-        {
+        if (substr($formatted_number, $position, 1) === ".") {
 		    $formatted_number = rtrim(trim($formatted_number, '0'), '.');
         }
-        if(substr($formatted_number,$position,'1') == ",")
-        {
-            $formatted_number = rtrim(trim($formatted_number, '0'), ','); /* Added to deal with "," */
+        if (substr($formatted_number, $position, 1) === ",") {
+            $formatted_number = rtrim(trim($formatted_number, '0'), ',');
         }	
         return $formatted_number;
 	}
 	
-	/*Function: wrapper function for zend_date*/
-	public static function date($date,$length="",$locale="")
+	/*Function: wrapper function for IntlDateFormatter*/
+	public static function date($date, $length = "", $locale = "")
 	{
-		global $config;
-		
-		$locale = ($locale == "") ? new Zend_Locale($config->local->locale) : $locale;
-		$length == "" ? $length = "medium" : $length = $length;
-		/*
-		 * Length can be any of the Zend_Date lengths - FULL, LONG, MEDIUM, SHORT
-		 */
+		$locale = self::localeString($locale);
 
-		$formatted_date = new Zend_Date($date,'yyyy-MM-dd');
-		
-		switch ($length) {
-			case "full":
-			    return $formatted_date->get(Zend_Date::DATE_FULL,$locale);
-			    break;
-			case "long":
-			    return $formatted_date->get(Zend_Date::DATE_LONG,$locale);
-			    break;
-			case "medium":
-			    return $formatted_date->get(Zend_Date::DATE_MEDIUM,$locale);
-			    break;
-			case "short":
-			    return $formatted_date->get(Zend_Date::DATE_SHORT,$locale);
-			    break;
-			case "month":
-			    return $formatted_date->get(Zend_Date::MONTH_NAME,$locale);
-			    break;
-			case "month_short":
-			    return $formatted_date->get(Zend_Date::MONTH_NAME_SHORT,$locale);
-			    break;
-			default:
-				return $formatted_date->get(Zend_Date::DATE_SHORT,$locale);
+		try {
+			$dateTime = $date instanceof \DateTimeInterface ? $date : new \DateTime($date);
+		} catch (\Throwable $e) {
+			return (string) $date;
 		}
-		
+
+		$length = $length ?: 'medium';
+
+		$style = match ($length) {
+			'full' => \IntlDateFormatter::FULL,
+			'long' => \IntlDateFormatter::LONG,
+			'medium' => \IntlDateFormatter::MEDIUM,
+			'short' => \IntlDateFormatter::SHORT,
+			default => \IntlDateFormatter::SHORT,
+		};
+
+		$pattern = null;
+		if ($length === 'month') {
+			$pattern = 'LLLL';
+		} elseif ($length === 'month_short') {
+			$pattern = 'LLL';
+		}
+
+		if ($pattern !== null) {
+			$formatter = new \IntlDateFormatter($locale, \IntlDateFormatter::FULL, \IntlDateFormatter::NONE, $dateTime->getTimezone()->getName(), \IntlDateFormatter::GREGORIAN, $pattern);
+		} else {
+			$formatter = new \IntlDateFormatter($locale, $style, \IntlDateFormatter::NONE, $dateTime->getTimezone()->getName());
+		}
+
+		return $formatter->format($dateTime);
 	}
 
 
@@ -102,9 +149,7 @@ class siLocal
 	 */
 	public static function number_formatted($number)
 	{
-		global $config;
-	
-		$number_formatted = number_format($number, $config->local->precision, '.', '');
+		$number_formatted = number_format($number, self::getPrecision(), '.', '');
 		return $number_formatted;
 	}
 }

@@ -21,17 +21,20 @@ checkLogin();
 
 # Deal with op and add some basic sanity checking
 
-$op = !empty( $_POST['op'] ) ? addslashes( $_POST['op'] ) : NULL;
+$op = $_POST['op'] ?? null;
 
 #insert customer
 
 $saved = false;
+$save_error = null;
 
 if ($op === "insert_customer") {
 
 	if (insertCustomer()) {
 		$saved = true;
-		// saveCustomFieldValues($_POST['categorie'],lastInsertId());
+		invoice_denorm::refreshAllForCustomer((int) lastInsertId());
+	} elseif (customerNameExists(trim((string) ($_POST['name'] ?? '')))) {
+		$save_error = 'duplicate_customer_name';
 	}
 }
 
@@ -42,13 +45,16 @@ if ( $op === 'edit_customer' ) {
 		if (updateCustomer()) {
 
 			$saved = true;
-			//updateCustomFieldValues($_POST['categorie'],$_GET['customer']);
+			invoice_denorm::refreshAllForCustomer((int) $_GET['customer']);
+		} elseif (customerNameExists(trim((string) ($_POST['name'] ?? '')), (int) ($_GET['id'] ?? 0))) {
+			$save_error = 'duplicate_customer_name';
 		}
 	}
 }
 
-$smarty -> assign('saved',$saved); 
+$bladeView -> assign('saved',$saved);
+$bladeView -> assign('save_error', $save_error);
 
-$smarty -> assign('pageActive', 'customer');
-$smarty -> assign('active_tab', '#people');
+$bladeView -> assign('pageActive', 'customer');
+$bladeView -> assign('active_tab', '#people');
 ?>

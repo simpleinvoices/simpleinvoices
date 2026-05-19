@@ -1,0 +1,17 @@
+[
+  { "type": "section-header", "label": "About & Setup" },
+  "getting-started",
+  "installation",
+  "installation-docker",
+  "installation-manual",
+  "npm-assets",
+  { "type": "divider", "dashed": true },
+  { "type": "section-header", "label": "Using Simple Invoices" },
+  "first-run",
+  "invoices",
+  "payments",
+  "customers",
+  "products",
+  "reports",
+  "settings"
+]

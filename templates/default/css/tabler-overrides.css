@@ -1,0 +1,295 @@
+/*
+ * Tabler.io overrides for Simple Invoices
+ * Keeps legacy SI classes working and aligns with Tabler layout
+ */
+
+/* Slate base theme - matches Tabler's ?theme-base=slate */
+[data-bs-theme-base='slate'] {
+	--tblr-gray-50: #f8fafc;
+	--tblr-gray-100: #f1f5f9;
+	--tblr-gray-200: #e2e8f0;
+	--tblr-gray-300: #cbd5e1;
+	--tblr-gray-400: #94a3b8;
+	--tblr-gray-500: #64748b;
+	--tblr-gray-600: #475569;
+	--tblr-gray-700: #334155;
+	--tblr-gray-800: #1e293b;
+	--tblr-gray-900: #0f172a;
+	--tblr-gray-950: #020617;
+	--tblr-body-bg: #f1f5f9;
+}
+
+/* Override legacy main.css font-family and background to match Tabler defaults */
+html, body {
+	font-family: "Inter Var", Inter, -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif !important;
+	background-color: var(--tblr-body-bg, #f1f5f9) !important;
+}
+
+/* Remove default Tabler page-body margins and page-header top margin */
+.page-body {
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+}
+
+.page-wrapper .page-header {
+	margin-top: 0 !important;
+}
+
+/* Content area: work with Tabler container, keep flexigrid width calculation */
+#Container.si_wrap,
+.si_wrap {
+	max-width: 100%;
+	padding: 1.5rem 0;
+	margin-top: 0;
+	padding-top: 1.5rem;
+	background: transparent;
+	border: none;
+	box-shadow: none;
+	border-radius: 0;
+}
+
+/* Legacy toolbar: style as Tabler buttons */
+.si_toolbar .btn,
+.si_toolbar a:not(.dropdown-item):not(.nav-link) {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	padding: 0.375rem 0.75rem;
+	font-size: 0.875rem;
+	font-family: inherit;
+	border-radius: var(--tblr-border-radius, 4px);
+	text-decoration: none;
+	color: var(--tblr-body-color, #1f2937);
+	background: var(--tblr-bg-surface, #fff);
+	border: 1px solid var(--tblr-border-color, #e6e7e9);
+	margin-right: 0.5rem;
+	transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+}
+.si_toolbar a:hover,
+.si_toolbar .btn:hover {
+	background: var(--tblr-bg-surface-secondary, #f9fafb);
+	border-color: var(--tblr-border-color-active, #c8c9ca);
+	color: var(--tblr-body-color, #1f2937);
+}
+.si_toolbar .positive,
+.si_toolbar a.positive,
+.si_toolbar button.positive {
+	background: var(--tblr-primary, #066fd1);
+	border-color: transparent;
+	color: #fff;
+}
+.si_toolbar .positive:hover,
+.si_toolbar a.positive:hover {
+	background: var(--tblr-primary-darken, #0560b8);
+	border-color: transparent;
+}
+.si_toolbar img {
+	height: 1em;
+	width: auto;
+	vertical-align: middle;
+}
+
+/* Messages as alerts - use Tabler color variables */
+.si_message {
+	background: var(--tblr-info-lt, #e7f5ff);
+	border: 1px solid rgba(var(--tblr-info-rgb, 66, 153, 225), 0.3);
+	color: var(--tblr-info, #4299e1);
+	border-radius: var(--tblr-border-radius, 4px);
+	padding: 0.75rem 1rem;
+	margin-bottom: 1rem;
+	font-family: inherit;
+}
+.si_message_ok {
+	background: var(--tblr-success-lt, #d3f9d8);
+	border: 1px solid rgba(var(--tblr-success-rgb, 47, 179, 68), 0.3);
+	color: var(--tblr-success, #2fb344);
+}
+.si_message_error {
+	background: var(--tblr-danger-lt, #ffe3e3);
+	border: 1px solid rgba(var(--tblr-danger-rgb, 214, 57, 57), 0.3);
+	color: var(--tblr-danger, #d63939);
+}
+.si_message_warning {
+	background: var(--tblr-warning-lt, #fff9db);
+	border: 1px solid rgba(var(--tblr-warning-rgb, 245, 159, 0), 0.3);
+	color: var(--tblr-warning, #f59f00);
+}
+
+/* Forms: card-style and form controls - Tabler surface colors */
+.si_form {
+	background: var(--tblr-bg-surface, #fff);
+	border: 1px solid var(--tblr-border-color, #e6e7e9);
+	border-radius: var(--tblr-border-radius, 4px);
+	padding: 1.5rem;
+	margin-bottom: 1.5rem;
+	box-shadow: var(--tblr-shadow-card, 0 1px 3px rgba(0,0,0,0.04));
+	font-family: inherit;
+}
+.si_form table {
+	width: 100%;
+}
+.si_form th,
+.si_form td {
+	padding: 0.5rem 0.75rem;
+	border-bottom: 1px solid var(--tblr-border-color, #e6e7e9);
+}
+.si_form th {
+	text-align: left;
+	color: var(--tblr-secondary, #6b7280);
+	font-weight: 500;
+	width: 40%;
+}
+.si_form input[type="text"],
+.si_form input[type="password"],
+.si_form input[type="email"],
+.si_form input[type="number"],
+.si_form select,
+.si_form textarea {
+	width: 100%;
+	max-width: 24rem;
+	padding: 0.4375rem 0.75rem;
+	font-size: 0.875rem;
+	font-family: inherit;
+	border: 1px solid var(--tblr-border-color, #e6e7e9);
+	border-radius: var(--tblr-border-radius, 4px);
+	background: var(--tblr-bg-forms, #fff);
+	color: var(--tblr-body-color, #1f2937);
+	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.si_form input:focus,
+.si_form select:focus,
+.si_form textarea:focus {
+	border-color: var(--tblr-primary, #066fd1);
+	outline: 0;
+	box-shadow: 0 0 0 0.25rem rgba(var(--tblr-primary-rgb, 6, 111, 209), 0.25);
+}
+
+/* Form toolbar buttons (save/cancel) */
+.si_toolbar_form .btn,
+.si_toolbar_form .positive,
+.si_toolbar_form .negative,
+.si_toolbar_form a {
+	margin-right: 0.5rem;
+	font-family: inherit;
+}
+.si_toolbar_form button.positive,
+.si_toolbar_form button[type="submit"],
+.si_toolbar_form a.positive {
+	color: #fff;
+	background: var(--tblr-primary, #066fd1);
+	border: 1px solid transparent;
+	border-radius: var(--tblr-border-radius, 4px);
+	padding: 0.4375rem 1rem;
+	font-size: 0.875rem;
+	font-weight: 500;
+	cursor: pointer;
+	transition: background-color .15s ease-in-out;
+}
+.si_toolbar_form button.positive:hover,
+.si_toolbar_form button[type="submit"]:hover,
+.si_toolbar_form a.positive:hover {
+	background: var(--tblr-primary-darken, #0560b8);
+}
+.si_toolbar_form a.negative {
+	color: var(--tblr-body-color, #1f2937);
+	background: var(--tblr-bg-surface, #fff);
+	border: 1px solid var(--tblr-border-color, #e6e7e9);
+	border-radius: var(--tblr-border-radius, 4px);
+	padding: 0.4375rem 1rem;
+	font-size: 0.875rem;
+	font-weight: 500;
+	text-decoration: none;
+}
+.si_toolbar_form a.negative:hover {
+	background: var(--tblr-bg-surface-secondary, #f9fafb);
+	border-color: var(--tblr-border-color-active, #c8c9ca);
+}
+
+/* Table toolbar (e.g. dashboard setup) */
+.si_table_toolbar {
+	background: var(--tblr-bg-surface, #fff);
+	border: 1px solid var(--tblr-border-color, #e6e7e9);
+	border-radius: var(--tblr-border-radius, 4px);
+	padding: 1rem 1.5rem;
+	margin-bottom: 1rem;
+}
+.si_table_toolbar th,
+.si_table_toolbar td {
+	padding: 0.5rem 0;
+	vertical-align: middle;
+}
+.si_table_toolbar th {
+	text-align: right;
+	font-weight: 500;
+	color: var(--tblr-secondary, #6b7280);
+	padding-right: 1rem;
+}
+.si_table_toolbar .si_toolbar a {
+	margin-right: 0.5rem;
+}
+
+/* Index / dashboard blocks */
+.si_index .si_toolbar a {
+	display: inline-flex;
+	align-items: center;
+}
+.si_index_help {
+	background: var(--tblr-bg-surface, #fff);
+	border: 1px solid var(--tblr-border-color, #e6e7e9);
+	border-radius: var(--tblr-border-radius, 4px);
+	padding: 1rem 1.5rem;
+	margin-bottom: 1.5rem;
+}
+.si_index_help h2 {
+	margin-top: 0;
+	font-size: 1rem;
+}
+
+/* Filters (e.g. invoices manage) - use Tabler primary for selected state */
+.si_filters_invoices,
+.si_buttons_manage_invoices {
+	margin-bottom: 1rem;
+}
+.si_filters_links a {
+	padding: 0.25rem 0.5rem;
+	margin-right: 0.25rem;
+	border-radius: var(--tblr-border-radius, 4px);
+	text-decoration: none;
+	color: var(--tblr-body-color, #1f2937);
+	font-family: inherit;
+	transition: color .15s ease-in-out, background-color .15s ease-in-out;
+}
+.si_filters_links a:hover {
+	background: var(--tblr-bg-surface-secondary, #f9fafb);
+}
+.si_filters_links a.selected {
+	background: var(--tblr-primary, #066fd1);
+	color: #fff;
+}
+
+/* Data grids/tables: all rows white (no alternating stripe) */
+.table tbody tr,
+.table-striped tbody tr {
+	background-color: #fff !important;
+}
+
+/* Tabler grid container (replaces flexigrid) */
+#manageGrid.si-tabler-grid-container {
+	width: 100%;
+}
+
+.si-tabler-grid-container .table-responsive {
+	overflow: visible;
+}
+
+.si-tabler-grid-container .dropdown-menu {
+	z-index: 1050;
+}
+
+/* Print */
+@media print {
+	#Container.si_wrap {
+		background: transparent;
+		box-shadow: none;
+	}
+}

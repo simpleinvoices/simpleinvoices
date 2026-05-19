@@ -8,8 +8,6 @@
 *	 GPL v3 or above
 */
 
-//minor change to test github emails - test
-
 //stop browsing to files directly - all viewing to be handled by index.php
 //if browse not defined then the page will exit
 define("BROWSE","browse");
@@ -30,6 +28,10 @@ $action = isset($_GET['case'])  ? filenameEscape($_GET['case'])    : null;
 
 require_once("./include/init.php");
 
+// Hold HTML in a buffer so handlers can clear it and send a Location header after POST (see admin app_settings, domain_save).
+if (PHP_SAPI !== 'cli') {
+	ob_start();
+}
 
 /*
 	GetCustomPath: override template or module with custom one if it exists, else return default path if it exists
@@ -44,11 +46,11 @@ function GetCustomPath($name,$mode='template'){
 	$out = null; // Initialize return variable
 	
 	if($mode=='template'){
-		if($use_custom and file_exists("{$my_custom_path}default_template/{$name}.tpl")){
-			$out="custom/default_template/{$name}.tpl";
+		if($use_custom and file_exists("{$my_custom_path}default_template/{$name}.blade.php")){
+			$out="custom/default_template/{$name}.blade.php";
 		}
-		elseif(file_exists("./templates/default/{$name}.tpl")){
-			$out="templates/default/{$name}.tpl";
+		elseif(file_exists("./templates/default/{$name}.blade.php")){
+			$out="templates/default/{$name}.blade.php";
 		}
 	}
 	if($mode=='module'){
@@ -63,32 +65,38 @@ function GetCustomPath($name,$mode='template'){
 }
 	
 
-foreach($config->extension as $extension)
-{
-	/*
-	* If extension is enabled then continue and include the requested file for that extension if it exists
-	*/	
-	if($extension->enabled == "1")
-	{
-		//echo "Enabled:".$value['name']."<br><br>";
-		if(file_exists("./extensions/$extension->name/include/init.php"))
-		{
-			require_once("./extensions/$extension->name/include/init.php");
-		}
-	}
-}
 /*
 * The include configs and requirements stuff section - end
 */
 
-$smarty -> assign("config",$config); // to toggle the login / logout button visibility in the menu
-$smarty -> assign("module",$module);
-$smarty -> assign("view",$view);
-$smarty -> assign("siUrl",$siUrl);//used for template css
+$bladeView -> assign("config",$config); // to toggle the login / logout button visibility in the menu
+// module/view are assigned after routing below so defaults (e.g. bare index.php → index/index) match $module/$view
+$bladeView -> assign("siUrl",$siUrl);//used for template css
 
-$smarty -> assign("LANG",$LANG);
+$bladeView -> assign("LANG",$LANG);
+$bladeView->assign('uiLanguage', $language);
+$menuUiLanguageList = getLanguageList();
+if (is_array($menuUiLanguageList)) {
+	usort(
+		$menuUiLanguageList,
+		static function ($a, $b) {
+			return strcasecmp((string) ($a->name ?? ''), (string) ($b->name ?? ''));
+		}
+	);
+}
+$bladeView->assign('uiLanguageList', $menuUiLanguageList ?? []);
+$uiLanguageUserPreference = '';
+if ((int) ($config->authentication->enabled ?? 0) === 1
+	&& empty($auth_session->fake_auth ?? null)
+	&& isset($auth_session->id)) {
+	$uiLanguageUserPreference = isset($auth_session->ui_language)
+		? trim((string) $auth_session->ui_language)
+		: '';
+}
+$bladeView->assign('uiLanguageUserPreference', $uiLanguageUserPreference);
+$bladeView->assign('domainUiLanguageCode', getDefaultLanguage());
 //For Making easy enabled pop-menus (see biller)
-$smarty -> assign("enabled",array($LANG['disabled'],$LANG['enabled']));
+$bladeView -> assign("enabled",array($LANG['disabled'],$LANG['enabled']));
 
 /*
 * Menu - hide or show menu
@@ -114,17 +122,46 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
     if ( $install_tables_exists == false )
     { 
 		$module="install";
-		//$view="index";
-		$view == "structure" ? $view ="structure" : $view="index";
+		// install UI and logic live in module/view install/index only
+		$view = "index";
         //do installer
         $skip_db_patches = true;
 		
     }
+	// Re-check essential data for this domain (same $db as installer)
+	if ( $install_tables_exists == true && ( !isset($install_data_exists) || $install_data_exists == false ) ) {
+		try {
+			$domainId = isset($auth_session->domain_id) ? (int) $auth_session->domain_id : 1;
+			if (domainHasEssentialBootstrapData($domainId)) {
+				$install_data_exists = true;
+			}
+		} catch (Exception $e) {
+			// ignore
+		}
+	}
+	// New organisation (domain > 1): auto-import essentials for logged-in users - same as after register / login.
+	if (
+		$install_tables_exists === true
+		&& $install_data_exists === false
+		&& $config->authentication->enabled == 1
+		&& isset($auth_session->id)
+		&& (int) ($auth_session->domain_id ?? 1) > 1
+	) {
+		$autoDom = (int) $auth_session->domain_id;
+		if (domainHasEssentialBootstrapData($autoDom)) {
+			$install_data_exists = true;
+		} else {
+			require_once __DIR__ . '/include/install_workspace_bootstrap.php';
+			if (install_bootstrap_new_domain_essentials($autoDom)) {
+				$install_data_exists = true;
+			}
+		}
+	}
 	if ( ($install_tables_exists == true) AND ($install_data_exists == false) )
     { 
 	    $module = "install";
-		$view == "essential" ? $view ="essential" : $view="structure";
-		//$view = "essential";
+		// Same installer as fresh DB; structure/essential views were never templated
+		$view = "index";
         //do installer
         $skip_db_patches = true;
     }
@@ -139,31 +176,27 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
 		if ( ($config->authentication->enabled == 1 AND isset($auth_session->id)) OR ($config->authentication->enabled == false) )	
 		{
 			include_once('./include/sql_patches.php');
-			if (getNumberOfPatches() > 0 ) {
+			// Allow AJAX/API requests through even when patches are pending
+			// (e.g. the backup download endpoint used by the upgrade wizard)
+			$is_ajax_request = strstr($view, 'ajax') || strstr($view, 'xml') || strstr($module, 'api') || $module === 'export';
+			if (!$is_ajax_request && getNumberOfPatches() > 0 ) {
 				$view = "database_sqlpatches";
 				$module = "options";
-				
+
 				if($action == "run") {
 					runPatches();
+				} elseif($action == "backup") {
+					backupStep();
 				} else {
 					listPatches();
 				}
 				$menu = false;
 			} else {
-				//If no invoices in db then show home page as default - else show Manage Invoices page
+				//If no module specified, show the home/index page
 				if ($module==null)
 				{
-					$invoiceobj = new invoice();
-					if ( $invoiceobj->are_there_any() > "0" )  
-					{
-					    $module = "invoices" ;
-						$view = "manage";
-					
-					} else { 
-					    $module = "index" ;
-						$view = "index";
-					}
-					unset($invoiceobj);
+				    $module = "index" ;
+					$view = "index";
 				}
 			}
 		}
@@ -171,76 +204,84 @@ if (($module == "options") && ($view == "database_sqlpatches")) {
 
 }
 
+$bladeView->assign("module", $module);
+$bladeView->assign("view", $view);
 
 /*
-* dont include the header if requested file is an invoice template - for print preview etc.. header is not needed 
+ * New workspace (domain > 1): skip the extra welcome-only install screen and open setup directly.
+ * Must run before any HTML output (see header below).
+ */
+if (
+	$module === 'install'
+	&& $view === 'index'
+	&& $install_tables_exists === true
+	&& (!isset($install_data_exists) || $install_data_exists === false)
+) {
+	$domainIdInstall = isset($auth_session->domain_id) ? (int) $auth_session->domain_id : 1;
+	if (
+		$domainIdInstall > 1
+		&& empty($_POST['op'])
+		&& (($_GET['step'] ?? '') !== 'setup')
+	) {
+		header('Location: ' . rtrim($siUrl, '/') . '/index.php?module=install&view=index&step=setup');
+		exit;
+	}
+}
+
+// Workspace ready: do not show install UI for secondary domains (e.g. bookmarked setup URL).
+if (
+	$install_tables_exists === true
+	&& !empty($install_data_exists)
+	&& $module === 'install'
+	&& $view === 'index'
+	&& isset($auth_session->id)
+	&& (int) ($auth_session->domain_id ?? 1) > 1
+) {
+	header('Location: ' . rtrim($siUrl, '/') . '/index.php?module=index&view=index');
+	exit;
+}
+
+/*
+* Unlinked customer/biller check - show a friendly error if the logged-in
+* customer or biller account has no linked entity (user_id == 0).
+* Allow the logout route through so the user can still sign out.
+*/
+if (
+    $config->authentication->enabled == 1 &&
+    isset($auth_session->role_name) &&
+    in_array($auth_session->role_name, ['customer', 'biller'], true) &&
+    (int) ($auth_session->user_id ?? 0) === 0 &&
+    !($module === 'auth' && $view === 'logout')
+) {
+    $bladeView->assign('unlinkedRole', $auth_session->role_name);
+    $bladeView->display(GetCustomPath('header'));
+    $bladeView->display(GetCustomPath('menu'));
+    $bladeView->display(GetCustomPath('main'));
+    $bladeView->display(GetCustomPath('auth/unlinked_account'));
+    $bladeView->display(GetCustomPath('footer'));
+    exit(0);
+}
+
+/*
+* dont include the header if requested file is an invoice template - for print preview etc.. header is not needed
 */
 
 if (($module == "invoices" ) && (strstr($view,"template"))) {
-
-
-		/*
-		* If extension is enabled load the extension php file for the module	
-		* Note: this system is probably slow - if you got a better method for handling extensions let me know
-		*/
-		$extensionInvoiceTemplateFile = 0;
-		foreach($config->extension as $extension)
-		{
-			/*
-			* If extension is enabled then continue and include the requested file for that extension if it exists
-			*/	
-			if($extension->enabled == "1")
-			{
-				//echo "Enabled:".$value['name']."<br><br>";
-				if(file_exists("./extensions/$extension->name/modules/invoices/template.php")) {
-			
-					include_once("./extensions/$extension->name/modules/invoices/template.php");
-					$extensionInvoiceTemplateFile++;
-				}
-			}
-		}
-		/*
-		* If no extension php file for requested file load the normal php file if it exists
-		*/
-		
-		if( ($extensionInvoiceTemplateFile == 0) AND ($my_path=GetCustomPath("invoices/template",'module') ) ) 
-		{
-			/* (soif) This /modules/invoices/template.php is empty : Should we really keep it? */
+		if ($my_path = GetCustomPath("invoices/template", 'module')) {
 			include_once($my_path);
 		}
-
-
-	exit(0);
+		exit(0);
 }
 
 /*
 * xml or ajax page requeset - start
 */
 
-	if( strstr($module,"api") OR (strstr($view,"xml") OR (strstr($view,"ajax")) ) )
-	{	
-		$extensionXml = 0;
-		foreach($config->extension as $extension)
-		{
-			/*
-			* If extension is enabled then continue and include the requested file for that extension if it exists
-			*/	
-			if($extension->enabled == "1")
-			{
-				if(file_exists("./extensions/$extension->name/modules/$module/$view.php")) 
-				{
-					include("./extensions/$extension->name/modules/$module/$view.php");
-					$extensionXml++;
-				}
-			}
-		}
-		/*
-		* If no extension php file for requested file load the normal php file if it exists
-		*/
-		if($extensionXml == 0 and $my_path=GetCustomPath("$module/$view",'module')){
+	if( strstr($module,"api") OR $module === "export" OR (strstr($view,"xml") OR (strstr($view,"ajax")) ) )
+	{
+		if ($my_path = GetCustomPath("$module/$view", 'module')) {
 			include($my_path);
 		}
-
 		exit(0);
 	}
 /*
@@ -261,58 +302,11 @@ $file= "$module/$view";
 	*/
 
 /*
-* If extension is enabled load its javascript files	- start
-* Note: this system is probably slow - if you got a better method for handling extensions let me know
-*/
-	$extension_jquery_files = "";
-	
-	foreach($config->extension as $extension)
-	{
-		/*
-		* If extension is enabled then continue and include the requested file for that extension if it exists
-		*/	
-		if($extension->enabled == "1")
-		{
-			if(file_exists("./extensions/$extension->name/include/jquery/$extension->name.jquery.ext.js")) {
-				$extension_jquery_files .= "<script type=\"text/javascript\" src=\"./extensions/$extension->name/include/jquery/$extension->name.jquery.ext.js\"></script>";
-			}
-		}
-	}
-	
-	$smarty -> assign("extension_jquery_files",$extension_jquery_files);
-/*
-* If extension is enabled load its javascript files	- end
-*/
-/*
-* Header - start 
+* Header - start
 */
 if( !in_array($module."_".$view, $early_exit) )
 {
-		$extensionHeader = 0;
-		foreach($config->extension as $extension)
-		{
-			/*
-			* If extension is enabled then continue and include the requested file for that extension if it exists
-			*/	
-			if($extension->enabled == "1")
-			{
-				if(file_exists("./extensions/$extension->name/templates/default/header.tpl")) 
-				{
-					$smarty -> display("extensions/$extension->name/templates/default/header.tpl");
-
-					$extensionHeader++;
-				}
-			}
-		}
-		/*
-		* If no extension php file for requested file load the normal template file if it exists
-		*/
-		
-		if($extensionHeader == 0) 
-		{
-			$smarty -> display(GetCustomPath('header'));
-		}
-		
+		$bladeView->display(GetCustomPath('header'));
 }
 /*
 * Prep the page - load the header stuff - end
@@ -324,32 +318,7 @@ if( !in_array($module."_".$view, $early_exit) )
 */
 
 	
-		/*
-		* If extension is enabled load the extension php file for the module	
-		* Note: this system is probably slow - if you got a better method for handling extensions let me know
-		*/
-		$extensionPHPFile = 0;
-		foreach($config->extension as $extension)
-		{
-			/*
-			* If extension is enabled then continue and include the requested file for that extension if it exists
-			*/	
-			if($extension->enabled == "1")
-			{
-
-
-				//echo "Enabled:".$value['name']."<br><br>";
-				if(file_exists("./extensions/$extension->name/modules/$module/$view.php")) {
-
-					include_once("./extensions/$extension->name/modules/$module/$view.php");
-					$extensionPHPFile++;
-				}
-			}
-		}
-		/*
-		* If no extension php file for requested file load the normal php file if it exists
-		*/
-		if( ($extensionPHPFile == 0) and  $my_path=GetCustomPath("$module/$view",'module') ){
+		if ($my_path = GetCustomPath("$module/$view", 'module')) {
 			include($my_path);
 		}
 
@@ -363,37 +332,9 @@ if($module == "export" OR $view == "export" OR $module == "api")
 
 }	
 
-/*
-* If extension is enabled load its post load javascript files	- start
-* By Post load - i mean post of the .php so that it can used info from the .php in the javascript
-* Note: this system is probably slow - if you got a better method for handling extensions let me know
-*/
-	$extensionPostLoadJquery = 0;
-	foreach($config->extension as $extension)
-	{
-		/*
-		* If extension is enabled then continue and include the requested file for that extension if it exists
-		*/	
-		if($extension->enabled == "1")
-		{
-			if(file_exists("./extensions/$extension->name/include/jquery/$extension->name.post_load.jquery.ext.js.tpl")) {
-					$smarty -> display("extensions/$extension->name/include/jquery/$extension->name.post_load.jquery.ext.js.tpl");
-			}
-		}
-		
+	if ($module != 'auth') {
+		$bladeView->display("include/js/si-post-load.blade.php");
 	}
-	/*
-	* If no extension php file for requested file load the normal php file if it exists
-	* Don't load it in the authentication module. It's not needed! Generates wrong HTML code.
-	*/
-	if($extensionPostLoadJquery == 0 AND $module !='auth') 
-	{
-		$smarty -> display("include/jquery/post_load.jquery.ext.js.tpl");
-	}
-
-/*
-* If extension is enabled load its javascript files	- end
-*/
 		
 		
 		
@@ -402,142 +343,52 @@ if($module == "export" OR $view == "export" OR $module == "api")
 * Menu : If extension has custom menu use it else use default - start
 */
 
-	if($menu == "true")
-	{	
-		$extensionMenu = 0;
-		foreach($config->extension as $extension)
-		{
-			/*
-			* If extension is enabled then continue and include the requested file for that extension if it exists
-			*/	
-			if($extension->enabled == "1")
-			{
-				if(file_exists("./extensions/$extension->name/templates/default/menu.tpl")) 
-				{
-					$smarty -> display("extensions/$extension->name/templates/default/menu.tpl");
-					$extensionMenu++;
-				}
-			}
-		}
-		/*
-		* If no extension php file for requested file load the normal php file if it exists
-		*/
-		if($extensionMenu == "0") 
-		{
-			$smarty -> display(GetCustomPath('menu'));
-		}
+	if ($menu == "true") {
+		$bladeView->display(GetCustomPath('menu'));
 	}
 /*
 * Menu : If extension has custom menu use it else use default - end
 */
 
 
-/*
-* Main : If extension has custom layout use it else use default - start
-*/
-
-    if( !in_array($module."_".$view, $early_exit) )
-    {
-		$extensionMain = 0;
-		foreach($config->extension as $extension)
-		{
-			/*
-			* If extension is enabled then continue and include the requested file for that extension if it exists
-			*/	
-			if($extension->enabled == "1")
-			{
-				if(file_exists("./extensions/$extension->name/templates/default/main.tpl")) 
-				{
-					$smarty -> display("extensions/$extension->name/templates/default/main.tpl");
-					$extensionMain++;
-				}
-			}
-		}
-		/*
-		* If no extension php file for requested file load the normal php file if it exists
-		*/
-		if($extensionMain == "0") 
-		{
-			$smarty -> display(GetCustomPath('main'));
-		}
-    }
-    
-/*
-* Main : If extension has custom menu use it else use default - end
-*/
-
-
-/*
-* Include the smarty template for the requested page section - start
-*/
-
-	/*
-	* If no extensions template is applicable then show the default one
-	* use the $extensionTemplates variable to count the number of applicable extensions template
-	* --if = 0 after checking all extensions then show default
-	*/
-	$extensionTemplates = 0;
-	$my_tpl_path='';
-	foreach($config->extension as $extension)
-	{
-		/*
-		* If extension is enabled then continue and include the requested file for that extension if it exists
-		*/	
-		if($extension->enabled == "1")
-		{
-			if(file_exists("./extensions/$extension->name/templates/default/$module/$view.tpl")) 
-			{
-				$path 		= "extensions/$extension->name/templates/default/$module/";
-				$my_tpl_path="extensions/{$extension->name}/templates/default/$module/$view.tpl";
-				$extensionTemplates++;
-			}	
-		}
+	if ( !in_array($module."_".$view, $early_exit) ) {
+		$bladeView->display(GetCustomPath('main'));
 	}
-	/*
-	* If no application templates found then show default template
-	* TODO Note: if more than one extension has got a template for the requested file than thats trouble :(
-	* - we really need a better extensions system
-	*/
 
-	if( $extensionTemplates == 0 ) 
-	{ 
-		if($my_tpl_path=GetCustomPath("$module/$view")){
-			$path = dirname($my_tpl_path).'/';
-			$extensionTemplates++;
-		}
-	}
-	
-	$smarty->assign("path",$path);
+
+/*
+* Include the Blade view for the requested page section - start
+*/
+
+	$my_tpl_path = GetCustomPath("$module/$view");
+	$path = $my_tpl_path ? dirname($my_tpl_path).'/' : '';
+	$bladeView->assign("path", $path);
 	
 	// Debug and error handling for empty template path
 	if (empty($my_tpl_path)) {
 		error_log("ERROR: Empty template path for module='$module', view='$view'");
 		error_log("GetCustomPath result: " . var_export(GetCustomPath("$module/$view"), true));
-		error_log("Extension templates checked: $extensionTemplates");
+		error_log("Template path empty for this request");
 		
 		echo "<h2>Template Error</h2>";
 		echo "<p>Unable to find template for module '<strong>$module</strong>' and view '<strong>$view</strong>'</p>";
 		echo "<p>Checked paths:</p>";
 		echo "<ul>";
-		echo "<li>Custom: ./custom/default_template/$module/$view.tpl</li>";
-		echo "<li>Default: ./templates/default/$module/$view.tpl</li>";
+		echo "<li>Custom: ./custom/default_template/$module/$view.blade.php</li>";
+		echo "<li>Default: ./templates/default/$module/$view.blade.php</li>";
 		echo "</ul>";
 		
 		// Try to provide helpful suggestion
-		if (file_exists("./templates/default/$module/$view.tpl")) {
+		if (file_exists("./templates/default/$module/$view.blade.php")) {
 			echo "<p><strong>Note:</strong> Default template exists but GetCustomPath didn't find it!</p>";
 		}
 		
 		exit(1);
 	}
 	
-	$smarty -> display($my_tpl_path);
+	$bladeView -> display($my_tpl_path);
 	
-	// If no smarty template - add message - onyl uncomment for dev - commented out for release
-	if ($extensionTemplates == 0 )
-	{
-		error_log("NOTEMPLATE!!!");
-	}
+	// If no template path was found, error already logged above
 
 /*
 * Include the template for the requested page section - end
@@ -546,31 +397,8 @@ if($module == "export" OR $view == "export" OR $module == "api")
 /*
 * Footer - start 
 */
-	if( !in_array($module."_".$view, $early_exit) )
-	{
-		$extensionFooter = 0;
-		foreach($config->extension as $extension)
-		{
-			/*
-			* If extension is enabled then continue and include the requested file for that extension if it exists
-			*/	
-			if($extension->enabled == "1")
-			{
-				if(file_exists("./extensions/$extension->name/templates/default/footer.tpl")) 
-				{
-					$smarty -> display("extensions/$extension->name/templates/default/footer.tpl");
-					$extensionFooter++;
-				}
-			}
-		}
-		/*
-		* If no extension php file for requested file load the normal php file if it exists
-		*/
-		if($extensionFooter == 0) 
-		{
-			$smarty -> display(GetCustomPath('footer'));
-		}
-	
+	if ( !in_array($module."_".$view, $early_exit) ) {
+		$bladeView->display(GetCustomPath('footer'));
 	}
 
 	

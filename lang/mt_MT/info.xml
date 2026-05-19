@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <langfile version="1.0.0" type="language">
-	<name>Maltese</name>
+	<name>Malti</name>
 	<shortname>mt_MT</shortname>
-	<englishname>MT</englishname>
+	<englishname>Maltese</englishname>
 	<version>1.0.0</version>
 	<creationDate>2009-02-21</creationDate>
 	<author>Michel Bugeja</author>

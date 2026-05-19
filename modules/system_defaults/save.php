@@ -10,7 +10,7 @@ if (isset($_POST['op']) && $_POST['op'] == 'update_system_defaults' ) {
 	$saved = updateDefault($_POST['name'],$_POST['value']);
 }
 
-$smarty->assign('saved',      $saved);
-$smarty->assign('pageActive', 'system_default');
-$smarty->assign('active_tab', '#setting');
+$bladeView->assign('saved',      $saved);
+$bladeView->assign('pageActive', 'system_default');
+$bladeView->assign('active_tab', '#setting');
 ?>

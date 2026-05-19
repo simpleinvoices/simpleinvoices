@@ -1,0 +1,68 @@
+<div id="left">
+<b>Invoice Preference Tokens</b>
+<p>
+Invoice Preference text fields support dynamic tokens - placeholders that are replaced with live invoice data when an invoice is viewed or exported. Tokens are stored verbatim in the database and expanded only at render time, so saving a preference never alters previously issued invoices.
+</p>
+
+<b>Token format</b>
+<p>
+Tokens use single curly braces: <code>{invoice.total}</code>, <code>{biller.name}</code>, etc.
+This is intentionally different from Blade <code>{{ }}</code> syntax and is safe to store in the database.
+</p>
+
+<b>Supported fields</b>
+<p>
+Tokens are expanded in the following Invoice Preference fields (Settings → Invoice Preferences):
+</p>
+<ul>
+  <li>Detail heading</li>
+  <li>Detail line</li>
+  <li>Payment method</li>
+  <li>Payment line 1 - name and value</li>
+  <li>Payment line 2 - name and value</li>
+</ul>
+
+<b>Example</b>
+<p>
+Storing <code>Please pay {invoice.owing} by {invoice.due_date}. Reference: {invoice.number}</code> in the Detail Line field will render as, for example, <em>Please pay $150.00 by 30 May 2026. Reference: INV-0042</em> when the invoice is viewed.
+</p>
+
+<b>Invoice tokens</b>
+<table border="1" cellpadding="4" cellspacing="0">
+  <tr><th>Token</th><th>Value</th></tr>
+  <tr><td><code>{invoice.number}</code></td><td>Invoice number / ID</td></tr>
+  <tr><td><code>{invoice.date}</code></td><td>Invoice date (locale-formatted)</td></tr>
+  <tr><td><code>{invoice.due_date}</code></td><td>Due date (locale-formatted, blank if not set)</td></tr>
+  <tr><td><code>{invoice.total}</code></td><td>Total amount including tax, e.g. $1,234.56</td></tr>
+  <tr><td><code>{invoice.subtotal}</code></td><td>Subtotal before tax</td></tr>
+  <tr><td><code>{invoice.tax}</code></td><td>Total tax amount</td></tr>
+  <tr><td><code>{invoice.paid}</code></td><td>Amount already paid</td></tr>
+  <tr><td><code>{invoice.owing}</code></td><td>Amount still owing</td></tr>
+  <tr><td><code>{invoice.currency}</code></td><td>Currency sign only, e.g. $</td></tr>
+  <tr><td><code>{invoice.currency_code}</code></td><td>Currency code, e.g. USD</td></tr>
+  <tr><td><code>{invoice.note}</code></td><td>Invoice note text</td></tr>
+  <tr><td><code>{invoice.payment_term}</code></td><td>Payment term code, e.g. NET_30</td></tr>
+  <tr><td><code>{invoice.payment_term_label}</code></td><td>Payment term label, e.g. Net 30 days</td></tr>
+</table>
+
+<b>Biller tokens</b>
+<table border="1" cellpadding="4" cellspacing="0">
+  <tr><th>Token</th><th>Value</th></tr>
+  <tr><td><code>{biller.name}</code></td><td>Biller name</td></tr>
+  <tr><td><code>{biller.email}</code></td><td>Biller email address</td></tr>
+  <tr><td><code>{biller.phone}</code></td><td>Biller phone number</td></tr>
+  <tr><td><code>{biller.address}</code></td><td>Street address</td></tr>
+  <tr><td><code>{biller.city}</code></td><td>City</td></tr>
+  <tr><td><code>{biller.state}</code></td><td>State / region</td></tr>
+  <tr><td><code>{biller.zip}</code></td><td>Postcode / ZIP code</td></tr>
+  <tr><td><code>{biller.country}</code></td><td>Country</td></tr>
+</table>
+
+<b>Customer tokens</b>
+<table border="1" cellpadding="4" cellspacing="0">
+  <tr><th>Token</th><th>Value</th></tr>
+  <tr><td><code>{customer.name}</code></td><td>Customer name</td></tr>
+  <tr><td><code>{customer.email}</code></td><td>Customer email address</td></tr>
+  <tr><td><code>{customer.phone}</code></td><td>Customer phone number</td></tr>
+</table>
+</div>

@@ -1,21 +1,23 @@
 <?php
 
-$auth_session = new Zend_Session_Namespace('Zend_Auth');
+global $auth_session;
 
-//print_r($_SESSION);
-
-$acl_view   = (isset($_GET['view']) ? $_GET['view'] : null);
-$acl_action = (isset($_GET['action']) ? $_GET['action'] : null);
-if (empty($acl_action)) {
-	// no action is given
-	if (!empty($acl_view)) {
-		// view is available with no action
-		$checkPermission = $acl->isAllowed($auth_session->role_name, $module, $acl_view) ?  "allowed" : "denied"; // allowed
+	// Install wizard: no ACL until schema and essential data exist (guest OK).
+	if ($module === 'install' && (!$install_tables_exists || !$install_data_exists)) {
+		return;
 	}
-} else {
-	// action available
-	$checkPermission = $acl->isAllowed($auth_session->role_name, $module, $acl_action) ?  "allowed" : "denied"; // allowed
-}
+
+	$acl_view   = $_GET['view'] ?? null;
+	$acl_action = $_GET['action'] ?? null;
+	$role_name  = $auth_session->role_name ?? '';
+
+	if ($acl_action === null && $acl_view !== null) {
+		$checkPermission = $acl->isAllowed($role_name, $module, $acl_view) ? "allowed" : "denied";
+	} elseif ($acl_action !== null) {
+		$checkPermission = $acl->isAllowed($role_name, $module, $acl_action) ? "allowed" : "denied";
+	} else {
+		$checkPermission = "allowed";
+	}
 
 //basic customer page check 
 if( ($auth_session->role_name =='customer') AND ($module == 'customers') AND ($_GET['id'] != $auth_session->user_id) )
@@ -29,7 +31,6 @@ if( ($auth_session->role_name =='customer')
 		 ) {
 	if (   $acl_view == 'itemised' 
 		|| $acl_view == 'total' 
-		|| $acl_view == 'consulting' 
 		|| $acl_action == 'view'
 		|| ($acl_action != '' && isset($_GET['id']) && $_GET['id'] != $auth_session->user_id) ) {
 

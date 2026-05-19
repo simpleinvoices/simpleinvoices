@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <langfile version="1.0.0" type="language">
-	<name>Portugues</name>
+	<name>Português</name>
 	<shortname>pt_PT</shortname>
-	<englishname>Portuguese</englishname>
+	<englishname>Portuguese (Portugal)</englishname>
 	<version>1.0.0</version>
 	<creationDate>2004-09-20</creationDate>
 	<author>Murray Buckley, Max, Augusto Campos, Rui Gouveia</author>

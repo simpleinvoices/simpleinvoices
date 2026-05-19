@@ -1,0 +1,95 @@
+services:
+  simpleinvoices:
+    build: .
+    ports:
+      - "${SI_APP_PORT:-8888}:80"
+    depends_on:
+      db:
+        condition: service_healthy
+        required: false   # set to false for SQLite or external PostgreSQL
+    volumes:
+      - sqlite_data:/var/www/html/databases/sqlite
+    environment:
+      - SI_DB_HOST=${SI_DB_HOST}
+      - SI_DB_PORT=${SI_DB_PORT}
+      - SI_DB_USER=${SI_DB_USER}
+      - SI_DB_PASSWORD=${SI_DB_PASSWORD}
+      - SI_DB_NAME=${SI_DB_NAME}
+      - SI_DATABASE_ADAPTER=${SI_DATABASE_ADAPTER}
+      - SI_DATABASE_UTF8=${SI_DATABASE_UTF8}
+      - SI_AUTHENTICATION_ENABLED=${SI_AUTHENTICATION_ENABLED}
+      - SI_AUTHENTICATION_ALLOW_PUBLIC_DOMAIN_REGISTRATION=${SI_AUTHENTICATION_ALLOW_PUBLIC_DOMAIN_REGISTRATION}
+      - SI_AUTHENTICATION_HTTP=${SI_AUTHENTICATION_HTTP}
+      - SI_EMAIL_HOST=${SI_EMAIL_HOST}
+      - SI_EMAIL_SMTP_AUTH=${SI_EMAIL_SMTP_AUTH}
+      - SI_EMAIL_USERNAME=${SI_EMAIL_USERNAME}
+      - SI_EMAIL_PASSWORD=${SI_EMAIL_PASSWORD}
+      - SI_EMAIL_SMTPPORT=${SI_EMAIL_SMTPPORT}
+      - SI_EMAIL_SECURE=${SI_EMAIL_SECURE}
+      - SI_EMAIL_USE_LOCAL_SENDMAIL=${SI_EMAIL_USE_LOCAL_SENDMAIL}
+      - SI_GATEWAY_SECRETS_KEY=${SI_GATEWAY_SECRETS_KEY:-}
+      - SI_NONCE_KEY=${SI_NONCE_KEY}
+      - SI_NONCE_TIMELIMIT=${SI_NONCE_TIMELIMIT}
+      - SI_DEBUG_LEVEL=${SI_DEBUG_LEVEL}
+      - SI_DEBUG_ERROR_REPORTING=${SI_DEBUG_ERROR_REPORTING}
+      - SI_PHP_DATE_TIMEZONE=${SI_PHP_DATE_TIMEZONE}
+      - SI_PHP_DISPLAY_STARTUP_ERRORS=${SI_PHP_DISPLAY_STARTUP_ERRORS}
+      - SI_PHP_DISPLAY_ERRORS=${SI_PHP_DISPLAY_ERRORS}
+      - SI_PHP_LOG_ERRORS=${SI_PHP_LOG_ERRORS}
+      - SI_PHP_ERROR_LOG=${SI_PHP_ERROR_LOG}
+      - SI_DB_WAIT_MAX=${SI_DB_WAIT_MAX}
+      # Set to false/0/no/off to skip automatic SQL patch migration on startup.
+      - SI_AUTO_MIGRATE=${SI_AUTO_MIGRATE:-true}
+      # Optional: PHP-FPM concurrent workers (image default 20). Raise if logs warn about pm.max_children.
+      - SI_PHP_FPM_MAX_CHILDREN=${SI_PHP_FPM_MAX_CHILDREN:-}
+      # S3-compatible storage for biller logos (Garage, MinIO, AWS S3, etc.)
+      - SI_S3_ENABLED=${SI_S3_ENABLED:-}
+      - SI_S3_ENDPOINT=${SI_S3_ENDPOINT:-}
+      - SI_S3_KEY=${SI_S3_KEY:-}
+      - SI_S3_SECRET=${SI_S3_SECRET:-}
+      - SI_S3_BUCKET=${SI_S3_BUCKET:-}
+      - SI_S3_REGION=${SI_S3_REGION:-}
+    networks:
+      - simpleinvoices-net
+
+  db:
+    image: yobasystems/alpine-mariadb:11.4.9
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "${DB_PORT:-3307}:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - simpleinvoices-net
+    healthcheck:
+      test: ["CMD-SHELL", "mariadb -u root -p\"$$MYSQL_ROOT_PASSWORD\" -e 'SELECT 1' || exit 1"]
+      start_period: 30s
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Adminer: minimal DB UI (replaces phpMyAdmin; official image is small)
+  adminer:
+    image: adminer:latest
+    environment:
+      ADMINER_DEFAULT_SERVER: ${ADMINER_DEFAULT_SERVER}
+      ADMINER_DEFAULT_USERNAME: ${ADMINER_DEFAULT_USERNAME}
+      ADMINER_DEFAULT_PASSWORD: ${ADMINER_DEFAULT_PASSWORD}
+    ports:
+      - "${ADMINER_PORT:-8081}:8080"
+    #depends_on:
+    #  db:
+    #    condition: service_healthy
+    networks:
+      - simpleinvoices-net
+
+volumes:
+  mysql_data:
+  sqlite_data:
+
+networks:
+  simpleinvoices-net:

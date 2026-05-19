@@ -8,11 +8,13 @@ if ($_POST['name'] != "" ) {
 }
 
 #get the invoice id
-$id = $_GET['id'];
+$id = (int)$_GET['id'];
 
-$sql_prod = "SELECT * FROM ".TB_PREFIX."products_attributes WHERE id = :id;";
-$sth_prod =  dbQuery($sql_prod, ':id', $id);
+$domain_id = domain_id::get();
+$sql_prod = "SELECT * FROM ".TB_PREFIX."products_attributes WHERE id = :id AND domain_id = :domain_id";
+$sth_prod = dbQuery($sql_prod, ':id', $id, ':domain_id', $domain_id);
 $product_attribute = $sth_prod->fetch();
+si_check_record_access($product_attribute);
 $type = product_attributes::get($id);
 $product_attribute['type'] = $type['type'];
 
@@ -20,15 +22,15 @@ $sql2= "SELECT id, name FROM ".TB_PREFIX."products_attribute_type";
 $sth2 =  dbQuery($sql2);
 $types = $sth2->fetchAll(PDO::FETCH_ASSOC);
 
-$smarty -> assign("types", $types);
+$bladeView -> assign("types", $types);
 
 
 $product_attribute['wording_for_enabled'] = $product_attribute['enabled']==1?$LANG['enabled']:$LANG['disabled'];
 $product_attribute['wording_for_visible'] = $product_attribute['visible']==1?$LANG['enabled']:$LANG['disabled'];
 $pageActive = "product_attribute_manage";
-$smarty->assign('pageActive', $pageActive);
-$smarty -> assign('active_tab', '#product');
+$bladeView->assign('pageActive', $pageActive);
+$bladeView -> assign('active_tab', '#product');
 
-$smarty->assign('product_attribute',$product_attribute);
+$bladeView->assign('product_attribute',$product_attribute);
 
 ?>

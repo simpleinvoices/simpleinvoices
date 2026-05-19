@@ -1,0 +1,66 @@
+{{-- * View: add (Blade)
+* 	User add template
+*
+* Last edited:
+* 	 2008-08-25
+*
+* License:
+*	 GPL v3 or above --}}
+
+
+@if(!empty(post('email')) && form_submitted(null))
+	@include('templates.default.user.save')
+@else
+
+<form name="frmpost" action="index.php?module=user&amp;view=add" method="post" id="frmpost" autocomplete="off" class="needs-validation" novalidate>
+<div class="card">
+	<div class="card-body">
+		<div class="mb-3">
+			<label class="form-label">{{ $LANG['name'] ?? '' }}</label>
+			<input type="text" name="name" value="{{ post('name') }}" id="name" autocomplete="off" class="form-control" />
+		</div>
+		<div class="mb-3">
+			<label class="form-label">{{ $LANG['email'] ?? '' }}
+			<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_required_field" title="{{ $LANG['required_field'] ?? '' }}">
+				<i class="ti ti-asterisk text-danger"></i>
+			</a>
+			</label>
+			<input type="text" name="email" value="{{ post('email') }}" id="email" autocomplete="off" class="form-control" required />
+			<div class="invalid-feedback">{{ $LANG['required_field'] ?? 'Required' }}</div>
+		</div>
+		<div class="mb-3">
+			<label class="form-label">{{ $LANG['role'] ?? '' }}
+			<a class="cluetip" href="#" rel="index.php?module=documentation&amp;view=view&amp;page=help_user_role" title="{{ $LANG['role'] ?? '' }}">
+				<i class="ti ti-help"></i>
+			</a>
+			</label>
+			<select name="role" class="form-select">
+				@foreach(($roles ?? []) as $role)
+					<option value="{{ $role['id'] ?? '' }}">{{ $role['name'] ?? '' }}</option>
+				@endforeach
+			</select>
+		</div>
+		@include('user.preferred_language_field', ['userPreferredValue' => $userPreferredValue ?? ''])
+		<div class="mb-3">
+			<label class="form-label">{{ $LANG['password'] ?? '' }}</label>
+			<input type="password" name="password_field" value="{{ post('password_field') }}" autocomplete="new-password" class="form-control"
+			       minlength="4" />
+			<div class="invalid-feedback">Password must be at least 4 characters when set.</div>
+		</div>
+		<div class="mb-3">
+			<label class="form-label">{{ $LANG['enabled'] ?? '' }}</label>
+			{html_options name=enabled options=$enabled selected=1 class="form-select"}
+		</div>
+	</div>
+	<div class="card-footer">
+		<div class="d-flex">
+			<a href="./index.php?module=user&view=manage" class="btn btn-link">{{ $LANG['cancel'] ?? '' }}</a>
+			<button type="submit" class="btn btn-primary ms-auto" name="submit" value="Insert User"><i class="ti ti-check me-1"></i>{{ $LANG['save'] ?? '' }}
+			</button>
+		</div>
+	</div>
+</div>
+<input type="hidden" name="op" value="insert_user" />
+<input type="hidden" name="csrfprotectionbysr" value="{{ $userSaveCsrfToken ?? '' }}" />
+</form>
+@endif

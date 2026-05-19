@@ -40,7 +40,7 @@ else if ($_GET["submit"] == "def_inv_template") {
 
 	$escaped = htmlsafe($defaults['template']);
 	$display_block_templates_list = <<<EOD
-	<select name="value">
+	<select name="value" class="form-select">
 EOD;
 
 	$display_block_templates_list .= <<<EOD
@@ -76,6 +76,49 @@ EOD;
 
 }
 
+else if ($_GET["submit"] == "def_export_template") {
+
+	$default = "export_template";
+	/*drop down list code for export template - only show the folder names in templates/invoices/*/
+
+	$handle = opendir("./templates/invoices/");
+	while ($template = readdir($handle)) {
+		if ($template != ".." && $template != "." && $template != "logos" && $template != ".svn" && $template != "template.php" && $template != "template.php~") {
+			$export_files[] = $template;
+		}
+	}
+	closedir($handle);
+	sort($export_files);
+
+	$escaped = htmlsafe($defaults['export_template']);
+	$display_block_export_templates = <<<EOD
+	<select name="value" class="form-select">
+EOD;
+
+	$display_block_export_templates .= <<<EOD
+	<option selected value='$escaped' style="font-weight: bold" >$escaped</option>
+EOD;
+
+	foreach ($export_files as $var) {
+		$var = htmlsafe($var);
+		$display_block_export_templates .= "<option value='$var' >";
+		$display_block_export_templates .= $var;
+		$display_block_export_templates .= "</option>";
+	}
+
+	$display_block_export_templates .= "</select>";
+
+	jsBegin();
+	jsFormValidationBegin("frmpost");
+	jsValidateRequired("def_export_template", "{$LANG['default_export_template']}");
+	jsFormValidationEnd();
+	jsEnd();
+
+	$description = $LANG['default_export_template'] ?? 'Default export template (xlsx/docx)';
+	$value = $display_block_export_templates;
+
+}
+
 else if ($_GET["submit"] == "biller") {
 
 	$default = "biller";
@@ -88,7 +131,7 @@ else if ($_GET["submit"] == "biller") {
 	}
 	else {
 
-		$display_block_biller = '<select name="value">
+		$display_block_biller = '<select name="value" class="form-select">
 			<option value="0"> </option>';
 
 		foreach($billers as $biller) {
@@ -119,7 +162,7 @@ else if ($_GET["submit"] == "customer") {
 
 	} else {
 		//has records, so display them
-		$display_block_customer = '<select name="value">
+		$display_block_customer = '<select name="value" class="form-select">
                 <option value="0"> </option>';
 
 
@@ -153,7 +196,7 @@ else if ($_GET['submit'] == "tax") {
 		//has records, so display them
 
 		$display_block_tax = <<<EOD
-	        <select name="value">
+	        <select name="value" class="form-select">
 
                 <option value='0'> </option>
 EOD;
@@ -168,6 +211,7 @@ EOD;
 			<option $selected value="{$tax['tax_id']}">$escaped</option>
 EOD;
 		}
+		$display_block_tax .= "</select>";
 	}
 
 	$description = "{$LANG['tax']}";
@@ -186,7 +230,7 @@ else if ($_GET["submit"] == "preference_id") {
 		$default = "preference";
 		//has records, so display them
 		$display_block_preferences = <<<EOD
-	        <select name="value">
+	        <select name="value" class="form-select">
 
                 <option value='0'> </option>
 EOD;
@@ -201,6 +245,7 @@ EOD;
 	                        $escaped</option>
 EOD;
 		}
+		$display_block_preferences .= "</select>";
 	}
 
 	$value = $display_block_preferences;
@@ -220,7 +265,7 @@ else if ($_GET["submit"] == "def_payment_type") {
 		$default = "payment_type";
 		//has records, so display them
 		$display_block_payment_type = <<<EOD
-                <select name="value">
+                <select name="value" class="form-select">
 
                 <option value='0'> </option>
 EOD;
@@ -234,6 +279,7 @@ EOD;
                         $escaped</option>
 EOD;
 		}
+		$display_block_payment_type .= "</select>";
 	}
 
 	$description = "{$LANG['payment_type']}";
@@ -264,13 +310,13 @@ else if($_GET['submit'] == "language") {
 	
 	$description = $LANG['language'];
 	//print_r($languages);
-	$value = "<select name='value'>";
+	$value = "<select name='value' class='form-select'>";
 	foreach($languages as $language) {
 		$selected = "";
 		if($language->shortname == $lang) {
 			$selected = " selected ";
 		}
-		$value .= "<option $selected value='".htmlsafe($language->shortname)."'>".htmlsafe("$language->name ($language->englishname) ($language->shortname)")."</option>";
+		$value .= "<option $selected value='".htmlsafe($language->shortname)."'>".htmlsafe($language->name . ' (' . $language->shortname . ')')."</option>";
 	}
 	$value .= "</select>";
 	
@@ -307,21 +353,85 @@ else if ($_GET['submit'] == "large_dataset") {
 	$description = $LANG['large_dataset'];
 	$value = dropDown($array, $defaults[$default]);
 }
+elseif ($_GET['submit'] == 'pdfpapersize') {
+	$default = 'pdfpapersize';
+	$current = $defaults['pdfpapersize'] ?? 'A4';
+	$papersizes = ['A4', 'A3', 'A5', 'Letter', 'Legal', 'Tabloid', 'B4', 'B5'];
+	$select = '<select name="value" class="form-select">';
+	foreach ($papersizes as $size) {
+		$selected = ($size === $current) ? "selected style='font-weight: bold'" : '';
+		$select .= "<option $selected value='".htmlsafe($size)."'>".htmlsafe($size)."</option>";
+	}
+	$select .= '</select>';
+	$value = $select;
+	$description = $LANG['pdf_paper_size'] ?? 'PDF Paper Size';
+}
+elseif (in_array($_GET['submit'], ['pdfleftmargin', 'pdfrightmargin', 'pdftopmargin', 'pdfbottommargin'])) {
+	$marginLabels = [
+		'pdfleftmargin'   => $LANG['pdf_left_margin']   ?? 'PDF Left Margin (mm)',
+		'pdfrightmargin'  => $LANG['pdf_right_margin']  ?? 'PDF Right Margin (mm)',
+		'pdftopmargin'    => $LANG['pdf_top_margin']    ?? 'PDF Top Margin (mm)',
+		'pdfbottommargin' => $LANG['pdf_bottom_margin'] ?? 'PDF Bottom Margin (mm)',
+	];
+	$default = htmlsafe($_GET['submit']);
+	$escaped = htmlsafe($defaults[$default] ?? '15');
+	$value = "<input type='number' min='0' max='100' name='value' value='$escaped' class='form-control'>";
+	$description = $marginLabels[$default];
+}
+elseif ($_GET['submit'] == 'spreadsheet') {
+	$default = 'spreadsheet';
+	$current = $defaults['spreadsheet'] ?? 'xlsx';
+	$formats = [
+		'xlsx' => '.xlsx - Excel (OpenXML)',
+		'ods'  => '.ods - OpenDocument Spreadsheet',
+		'xls'  => '.xls - Excel 97-2003 (legacy)',
+	];
+	$select = '<select name="value" class="form-select">';
+	foreach ($formats as $fmt => $label) {
+		$selected = ($fmt === $current) ? "selected style='font-weight: bold'" : '';
+		$select .= "<option $selected value='".htmlsafe($fmt)."'>".htmlsafe($label)."</option>";
+	}
+	$select .= '</select>';
+	$value = $select;
+	$description = $LANG['spreadsheet_format'] ?? 'Spreadsheet Export Format';
+}
+elseif ($_GET['submit'] == 'wordprocessor') {
+	$default = 'wordprocessor';
+	$current = $defaults['wordprocessor'] ?? 'docx';
+	$formats = [
+		'docx' => '.docx - Word (OpenXML)',
+		'odt'  => '.odt - OpenDocument Text',
+		'doc'  => '.doc - Word 97-2003 (legacy)',
+	];
+	$select = '<select name="value" class="form-select">';
+	foreach ($formats as $fmt => $label) {
+		$selected = ($fmt === $current) ? "selected style='font-weight: bold'" : '';
+		$select .= "<option $selected value='".htmlsafe($fmt)."'>".htmlsafe($label)."</option>";
+	}
+	$select .= '</select>';
+	$value = $select;
+	$description = $LANG['wordprocessor_format'] ?? 'Word Processor Export Format';
+}
+elseif ($_GET['submit'] == 'precision') {
+	$default = 'precision';
+	$escaped = htmlsafe($defaults['precision'] ?? '2');
+	$value = "<input type='number' min='0' max='10' name='value' value='$escaped' class='form-control'>";
+	$description = $LANG['decimal_precision'] ?? 'Decimal Precision (number of decimal places)';
+}
+elseif ($_GET['submit'] == 'confirm_delete_line_item') {
+	$array = [0 => $LANG['disabled'] ?? 'Disabled', 1 => $LANG['enabled'] ?? 'Enabled'];
+	$default = 'confirm_delete_line_item';
+	$description = $LANG['confirm_delete_line_item'] ?? 'Confirm Before Deleting Line Items';
+	$value = dropDown($array, $defaults[$default] ?? '0');
+}
 else {
 	$description = "{$LANG['no_defaults']}";
 }
 
-
-/*$smarty->assign('pageActive', $pageActive);
-$smarty->assign('files', $files);
-$smarty->assign('customFieldLabel', $customFieldLabel);
-$smarty->assign('save', $save);
-$smarty->assign('lang', $lang);
-$smarty->assign('billers',$billers);*/
-$smarty->assign('defaults', $defaults);
-$smarty->assign('value',$value);
-$smarty->assign('description',$description);
-$smarty->assign('default',$default);
+$bladeView->assign('defaults', $defaults);
+$bladeView->assign('value',$value);
+$bladeView->assign('description',$description);
+$bladeView->assign('default',$default);
 
 
 
@@ -338,6 +448,6 @@ function compareNameIndex($a,$b) {
 	return -1;
 }
 
-$smarty -> assign('pageActive', 'system_default');
-$smarty -> assign('active_tab', '#setting');
+$bladeView -> assign('pageActive', 'system_default');
+$bladeView -> assign('active_tab', '#setting');
 ?>

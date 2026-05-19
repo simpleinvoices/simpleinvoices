@@ -18,8 +18,8 @@
 
 checkLogin();
 
-$smarty -> display("../templates/default/menu.tpl");
-$smarty -> display("../templates/default/main.tpl");
+$bladeView->display("templates/default/menu.blade.php");
+$bladeView->display("templates/default/main.blade.php");
 
 echo <<<EOD
 	<div>
@@ -29,18 +29,23 @@ echo <<<EOD
 	</form>
 EOD;
 
-$customers = searchCustomers($_POST['name']);
+$searchName = $_POST['name'] ?? '';
+$customers = searchCustomers($searchName);
+if (!is_array($customers)) {
+	$customers = array();
+}
 
 echo "<table> <br />";
 
-foreach($customers as $customer) {
+foreach ($customers as $customer) {
+	$name = htmlspecialchars((string) ($customer['name'] ?? ''), ENT_QUOTES, 'UTF-8');
+	$id = (int) ($customer['id'] ?? 0);
 	echo <<<EOD
 		
 		<tr>
-			<td>$customer['name']&nbsp;&nbsp;</td>
-			<td><a href="index.php?module=invoices&view=itemised&customer_id=$customer['id']">Itemised</a> |</td> 
-			<td><a href="index.php?module=invoices&view=consulting&customer_id=$customer['id']">&nbsp;Consulting</a> |</td> 
-			<td><a href="index.php?module=invoices&view=total&customer_id=$customer['id']">&nbsp;Total</a></td> 
+			<td>{$name}&nbsp;&nbsp;</td>
+			<td><a href="index.php?module=invoices&amp;view=itemised&amp;customer_id={$id}">Itemised</a> |</td> 
+			<td><a href="index.php?module=invoices&amp;view=total&amp;customer_id={$id}">&nbsp;Total</a></td> 
 		</tr>
 EOD;
 }

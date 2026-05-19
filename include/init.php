@@ -3,24 +3,25 @@
  * Zend framework init - start
  */
 set_include_path(get_include_path() . PATH_SEPARATOR . "./include/class");
-set_include_path(get_include_path() . PATH_SEPARATOR . "./library/"); // Still needed for custom libraries (paypal, WebApp, etc.)
+set_include_path(get_include_path() . PATH_SEPARATOR . "./library/");
 // PDF library path no longer needed - using Composer autoloader
 set_include_path(get_include_path() . PATH_SEPARATOR . "./include/");
 
 // Load Composer autoloader for all managed libraries
 require_once('./vendor/autoload.php');
 
-//session_start();
-Zend_Session::start();
-$auth_session = new Zend_Session_Namespace('Zend_Auth');
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_name('PHPSESSID');
+    session_start([
+        'cookie_secure' => false,
+        'cookie_httponly' => true,
+        'cookie_samesite' => 'Lax',
+    ]);
+}
 
+include_once('./include/class/LegacyAuthSession.php');
+$auth_session = new LegacyAuthSession('SI_Auth');
 
-//start use of zend_cache   
-$frontendOptions = array(
-    'lifetime' => 7200, // cache lifetime of 2 hours
-    'automatic_serialization' => true
-);
-                   
 
 /* 
  * Zend framework init - end
@@ -30,9 +31,8 @@ $frontendOptions = array(
 
 #ini_set('display_errors',true);
 
-// Legacy library that's not available via Composer
-require_once("library/paypal/paypal.class.php");
 include_once('./include/functions.php');
+include_once('./include/report_chart_guard.php');
 
 //ob_start('addCSRFProtection');
 
@@ -44,18 +44,18 @@ if (!is_writable('./tmp')) {
 /*
  * log file - start
  */
-$logFile = "./tmp/log/si.log";
-if (!is_file($logFile))
-{
-	$createLogFile = fopen($logFile, 'w') or die(simpleInvoicesError('notWriteable','folder','tmp/log'));
-	fclose($createLogFile);
-}
-if (!is_writable($logFile)) {
-	
-   simpleInvoicesError('notWriteable','file',$logFile);
-}
-$writer = new Zend_Log_Writer_Stream($logFile);
-$logger = new Zend_Log($writer);
+	$logFile = "./tmp/log/si.log";
+	if (!is_file($logFile))
+	{
+		$createLogFile = fopen($logFile, 'w') or die(simpleInvoicesError('notWriteable','folder','tmp/log'));
+		fclose($createLogFile);
+	}
+	if (!is_writable($logFile)) {
+		
+	   simpleInvoicesError('notWriteable','file',$logFile);
+	}
+	include_once('./include/class/LegacyLogger.php');
+	$logger = new LegacyLogger($logFile);
 /*
  * log file - end
  */
@@ -64,57 +64,32 @@ if (!is_writable('./tmp/cache')) {
     
    simpleInvoicesError('notWriteable','file','./tmp/cache');
 }
-/*
- * Zend Framework cache section - start
- * -- must come after the tmp dir writeable check
- */
-$backendOptions = array(
-    'cache_dir' => './tmp/' // Directory where to put the cache files
-);
-                                   
-// getting a Zend_Cache_Core object
-$cache = Zend_Cache::factory('Core',
-                             'File',
-                             $frontendOptions,
-                             $backendOptions);
 
-//required for some servers
-Zend_Date::setOptions(array('cache' => $cache)); // Active aussi pour Zend_Locale
-/*
- * Zend Framework cache section - end
- */
-
-$smarty = new Smarty();
-
-$smarty->debugging = false;
-
-// Set template directory for proper path resolution
-$smarty->setTemplateDir(array(
+$bladeViewPaths = array(
+    '.',
     './templates/default/',
-    './',
     './templates/',
     './custom/',
     './custom/default_template/',
-    './include/jquery/',
-    './modules/',
-    './extensions/'
-));
-
-//cache directory. Have to be writeable (chmod 777)
-$smarty->setCompileDir("tmp/cache");
-if(!is_writable($smarty->getCompileDir())) {
-	simpleInvoicesError("notWriteable", 'folder', $smarty->getCompileDir());
-	//exit("Simple Invoices Error : The folder <i>".$smarty -> compile_dir."</i> has to be writeable");
+    './include/js/',
+    './modules/'
+);
+$bladeCachePath = './tmp/cache';
+if (!is_writable($bladeCachePath)) {
+	simpleInvoicesError("notWriteable", 'folder', $bladeCachePath);
 }
 
-//adds own smarty plugins
-$smarty->addPluginsDir("plugins");
-$smarty->addPluginsDir("include/smarty_plugins");
-
-//add stripslash smarty function - updated for Smarty v4 API
-$smarty->registerPlugin('modifier', 'unescape', 'stripslashes');
-/* 
- * Smarty inint - end
+if (!class_exists('Jenssegers\Blade\Blade')) {
+	simpleInvoicesError('notWriteable', 'library', 'jenssegers/blade (run: composer update)');
+}
+require_once(__DIR__ . '/blade_view.php');
+/**
+ * Global Blade view for the request (assign / display / fetch). Used by index.php and modules.
+ * @var BladeView
+ */
+$bladeView = new BladeView($bladeViewPaths, $bladeCachePath);
+/*
+ * Blade template engine init - end
  */
 
 
@@ -124,33 +99,40 @@ $install_path = htmlsafe($path['dirname'] ?? '');
 
 
 include_once('./config/define.php');
+include_once('./include/class/ConfigLoader.php');
 
 /*
  * Include another config file if required
  */
-if( is_file('./config/custom.config.php') ){
-     $config = new Zend_Config_Ini('./config/custom.config.php', $environment,true);
-} else {
-    $config = new Zend_Config_Ini('./config/config.php', $environment,true);	//added 'true' to allow modifications from db
-}
+	if( is_file('./config/custom.config.php') ){
+	     $config = ConfigLoader::load('./config/custom.config.php', $environment);
+	} else {
+	    $config = ConfigLoader::load('./config/config.php', $environment);
+	}	//added 'true' to allow modifications from db
+
+// Global database adapter type: 'mysql', 'pgsql', or 'sqlite'
+$db_server = substr($config->database->adapter, 4);
 
 //set up app with relevant php setting
 date_default_timezone_set($config->phpSettings->date->timezone);
-error_reporting($config->debug->error_reporting);
+$errorReporting = $config->debug->error_reporting;
+if (!is_int($errorReporting)) {
+	$errorReporting = trim((string) $errorReporting);
+	if (defined($errorReporting)) {
+		$errorReporting = constant($errorReporting);
+	} elseif (is_numeric($errorReporting)) {
+		$errorReporting = (int) $errorReporting;
+	} else {
+		$errorReporting = E_ERROR;
+	}
+}
+error_reporting($errorReporting);
 ini_set('display_startup_errors', $config->phpSettings->display_startup_errors);  
 ini_set('display_errors', $config->phpSettings->display_errors); 
 ini_set('log_errors', $config->phpSettings->log_errors); 
 ini_set('error_log', $config->phpSettings->error_log); 
 
 
-
-$zendDb = Zend_Db::factory($config->database->adapter, array(
-    'host'     => $config->database->params->host,
-    'username' => $config->database->params->username,
-    'password' => $config->database->params->password,
-    'dbname'   => $config->database->params->dbname,
-    'port'     => $config->database->params->port)
-);
 
 //include_once("./include/sql_patches.php");
 
@@ -165,24 +147,12 @@ spl_autoload_register(function ($class_name) {
 $db = db::getInstance();
 
 include_once("./include/sql_queries.php");
+require_once __DIR__ . '/global_app_settings.php';
 
-// Smarty 4.x compatible modifier registration
-$smarty->registerPlugin('modifier', 'siLocal_number', array("siLocal", "number"));
-$smarty->registerPlugin('modifier', 'siLocal_number_clean', array("siLocal", "number_clean"));
-$smarty->registerPlugin('modifier', 'siLocal_number_trim', array("siLocal", "number_trim"));
-$smarty->registerPlugin('modifier', 'siLocal_number_formatted', array("siLocal", "number_formatted"));
-$smarty->registerPlugin('modifier', 'siLocal_date', array("siLocal", "date"));
-$smarty->registerPlugin('modifier', 'htmlsafe', 'htmlsafe');
-$smarty->registerPlugin('modifier', 'urlsafe', 'urlsafe');
-$smarty->registerPlugin('modifier', 'urlencode', 'urlencode');
-$smarty->registerPlugin('modifier', 'outhtml', 'outhtml');
-$smarty->registerPlugin('modifier', 'htmlout', 'outhtml'); //common typo
-$smarty->registerPlugin('modifier', 'urlescape', 'urlencode'); //common typo 
+// Blade modifiers are registered in BladeView::registerDirectives(); use {{ htmlsafe($var) }} etc. in templates
 $install_tables_exists = checkTableExists(TB_PREFIX."biller");
-if ($install_tables_exists == true)
-{
-	$install_data_exists = checkDataExists();
-}
+mergeGlobalAppSettingsIntoConfig($config);
+// $install_data_exists is set after include_auth.php (domain-scoped essential data check)
 
 //TODO - add this as a function in sql_queries.php or a class file
 //if ( ($install_tables_exists != false) AND ($install_data_exists != false) )
@@ -190,38 +160,43 @@ if ( $install_tables_exists != false )
 {
 	if (getNumberOfDoneSQLPatches() > "196")
 	{
-	    $sql="SELECT * from ".TB_PREFIX."extensions WHERE (domain_id = :domain_id OR domain_id =  0 ) ORDER BY domain_id ASC";
-	    $sth = dbQuery($sql,':domain_id', $auth_session->domain_id ) or die(htmlsafe(end($dbh->errorInfo())));
-
-	    while ( $this_extension = $sth->fetch() ) 
-	    { 
-	    	$DB_extensions[$this_extension['name']] = $this_extension; 
-	    }
-	    $config->extension = $DB_extensions;
+		// Only load core - extensions have been removed
+		$sql = "SELECT * FROM ".TB_PREFIX."extensions WHERE name = 'core' AND (domain_id = :domain_id OR domain_id = 0) ORDER BY domain_id DESC LIMIT 1";
+		$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id);
+		$core = $sth ? $sth->fetch() : null;
+		if ($core) {
+			$config->extension = ConfigData::fromArray(['core' => $core]);
+		}
 	}
 }
 
-// If no extension loaded, load Core
-if (! $config->extension)
+if (!isset($config->extension) || !$config->extension)
 {
-	$extension_core = new Zend_Config(array('core'=>array(
-		'id'=>1,
-		'domain_id'=>1,
-		'name'=>'core',
-		'description'=>'Core part of Simple Invoices - always enabled',
-		'enabled'=>1
-		)));
-	$config->extension = $extension_core;
+		$config->extension = ConfigData::fromArray(['core' => array(
+			'id' => 0,
+			'domain_id' => 0,
+			'name' => 'core',
+			'description' => 'Core part of Simple Invoices - always enabled',
+			'enabled' => '1'
+		)]);
 }
 
 include_once('./include/language.php');
 
-//add class files for extensions
-
 checkConnection();
 
 include('./include/include_auth.php');
-include_once('./include/manageCustomFields.php');
+
+if ((int) ($config->authentication->enabled ?? 0) === 1 && empty($auth_session->fake_auth)) {
+	require_once __DIR__ . '/user_ui_language.php';
+	si_apply_user_ui_language();
+}
+
+$install_data_exists = false;
+if ($install_tables_exists == true) {
+	$install_data_exists = checkDataExists();
+}
+
 include_once("./include/validation.php");
 
 //if authentication enabled then do acl check etc..
@@ -237,25 +212,36 @@ Array: Early_exit
 */
 $early_exit = array();
 $early_exit[] = "auth_login";
+$early_exit[] = "auth_customer_login";
 $early_exit[] = "api_cron";
 $early_exit[] = "auth_logout";
 $early_exit[] = "export_pdf";
 $early_exit[] = "export_invoice";
+$early_exit[] = "export_payment";
 $early_exit[] = "statement_export";
 $early_exit[] = "invoice_template";
 $early_exit[] = "payments_print";
 #$early_exit[] = "reports_report_statement";
 $early_exit[] = "documentation_view";
+$early_exit[] = "user_save_ui_language";
 //$early_exit[] = "install_index";
+// Backup download must run before any HTML is output so it can send file headers
+if ($module === 'billers' && $view === 'logo') {
+	$early_exit[] = 'billers_logo';
+}
+
+if ($module === 'options' && $view === 'backup_database' && ($_POST['op'] ?? '') === 'backup_db') {
+	$early_exit[] = 'options_backup_database';
+}
 
 
 switch ($module)
 {
-	case "export" :	
-		$smarty_output = "fetch";
+	case "export" :
+		$blade_output = "fetch";
 		break;
 	default :
-		$smarty_output = "display";
+		$blade_output = "display";
 		break;
 }
 
@@ -273,6 +259,4 @@ $siUrl = getURL();
 include_once("./include/backup.lib.php");
 
 $defaults = getSystemDefaults();
-$smarty -> assign("defaults",$defaults);
-
-?>
+$bladeView -> assign("defaults",$defaults);

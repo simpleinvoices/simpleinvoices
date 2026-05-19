@@ -2,58 +2,97 @@
 
 //stop the direct browsing to this file - let index.php handle which files get displayed
 
-//checkLogin();
+checkLogin();
 
-$smarty -> assign('pageActive', 'backup');
-$smarty -> assign('active_tab', '#setting');
+$bladeView -> assign('pageActive', 'backup');
+$bladeView -> assign('active_tab', '#setting');
+$backup_action = 'backup_database';
+$errors        = [];
+$import_success = false;
 
-if ($_GET['op'] == "backup_db") {
+$op = ($_POST['op'] ?? '');
 
+// ── SQL backup download ────────────────────────────────────────────────────
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && $op === 'backup_db') {
+	requireCSRFProtection($backup_action);
 
-	$today = date("YmdGisa");
-	$oBack    = new backup_db;
-	$oBack->filename = "./tmp/database_backups/simple_invoices_backup_$today.sql"; // output file name
-	$oBack->start_backup();
+	$today    = date("Ymd_His");
+	$filename = "simple_invoices_backup_{$today}.sql";
 
+	header('Content-Type: application/octet-stream');
+	header('Content-Disposition: attachment; filename="' . $filename . '"');
+	header('Cache-Control: no-cache, no-store, must-revalidate');
+	header('Pragma: no-cache');
+	header('Expires: 0');
 
-	$txt=sprintf($LANG['backup_done'],$oBack->filename);
-
-	$display_block =<<<EOF
-<div class="si_center">
-<pre>
-<table>
-	{$oBack->output}
-</table>
-</pre>
-</div>
-$txt
-	<div class="si_help_div">
-			<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_backup_database_fwrite" title="{$LANG['fwrite_error']}"><img src="./images/common/help-small.png" alt="" />{$LANG['fwrite_error']}</a>
-	</div>
-
-EOF;
-
+	$oBack  = new backup_db();
+	$handle = fopen('php://output', 'wb');
+	$oBack->start_backup($handle);
+	fclose($handle);
+	exit();
 }
 
-else {
+// ── JSON export download ───────────────────────────────────────────────────
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && $op === 'export_json') {
+	requireCSRFProtection($backup_action);
 
-$display_block = <<<EOF
-<div class="si_center">
-{$LANG['backup_howto']}
+	$today    = date("Ymd_His");
+	$filename = "simple_invoices_data_{$today}.json";
 
-		<div class='si_toolbar si_toolbar_top'>
-			
-			<a href='index.php?module=options&amp;view=backup_database&amp;op=backup_db'><img src="./images/common/database_save.png" alt=""/>{$LANG['backup_database_now']}</a>
-		</div>
+	header('Content-Type: application/octet-stream');
+	header('Content-Disposition: attachment; filename="' . $filename . '"');
+	header('Cache-Control: no-cache, no-store, must-revalidate');
+	header('Pragma: no-cache');
+	header('Expires: 0');
 
-{$LANG['note']}: {$LANG['backup_note_to_file']}
-</div>
-
-	<div class="si_help_div">
-		<a class="cluetip" href="#"	rel="index.php?module=documentation&amp;view=view&amp;page=help_backup_database" title="{$LANG['database_backup']}"><img src="./images/common/important.png" alt="" />{$LANG['more_info']}</a>
-	</div>
-EOF;
+	$oBack  = new backup_db();
+	$handle = fopen('php://output', 'wb');
+	$oBack->export_json($handle);
+	fclose($handle);
+	exit();
 }
 
-$smarty->assign('display_block', $display_block);
+// ── JSON import ────────────────────────────────────────────────────────────
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && $op === 'import_json') {
+	requireCSRFProtection($backup_action);
+
+	$upload = $_FILES['json_file'] ?? null;
+
+	if (!$upload || $upload['error'] !== UPLOAD_ERR_OK) {
+		$upload_errors = [
+			UPLOAD_ERR_INI_SIZE   => 'File exceeds the server upload size limit.',
+			UPLOAD_ERR_FORM_SIZE  => 'File exceeds the form size limit.',
+			UPLOAD_ERR_PARTIAL    => 'File was only partially uploaded.',
+			UPLOAD_ERR_NO_FILE    => 'No file was selected.',
+			UPLOAD_ERR_NO_TMP_DIR => 'Server temporary directory is missing.',
+			UPLOAD_ERR_CANT_WRITE => 'Server could not write the uploaded file.',
+			UPLOAD_ERR_EXTENSION  => 'A PHP extension blocked the upload.',
+		];
+		$errors[] = $upload_errors[$upload['error'] ?? -1] ?? 'File upload failed.';
+	} else {
+		$json_string = file_get_contents($upload['tmp_name']);
+		if ($json_string === false) {
+			$errors[] = 'Could not read the uploaded file.';
+		} else {
+			// Quick sanity check before handing to restore
+			$decoded = json_decode($json_string, true);
+			if (!is_array($decoded)) {
+				$errors[] = 'The uploaded file is not valid JSON: ' . json_last_error_msg();
+			} else {
+				try {
+					$oBack = new backup_db();
+					$oBack->restore_from_json($json_string);
+					$import_success = true;
+				} catch (\Exception $e) {
+					$errors[] = 'Import failed: ' . $e->getMessage();
+					error_log('JSON import error: ' . $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine());
+				}
+			}
+		}
+	}
+}
+
+$bladeView->assign('backupActionToken', siNonce($backup_action));
+$bladeView->assign('backupErrors',      $errors);
+$bladeView->assign('importSuccess',     $import_success);
 ?>

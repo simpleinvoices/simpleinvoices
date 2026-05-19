@@ -1,60 +1,28 @@
 <?php
+$__rpt_name = basename(__FILE__, '.php');
+if (($__rpt = report_cache_get($__rpt_name, (int)$auth_session->domain_id)) !== null) { foreach ($__rpt as $k => $v) $bladeView->assign($k, $v); return; }
+$__rpt_snap = array_keys($bladeView->getAssigns());
 
-  if ($db_server == 'pgsql') {
-      $sql = "SELECT
-        c.id AS cid,
-        c.name AS customer,
-        sum(coalesce(ii.total, 0)) AS inv_total,
-        sum(coalesce(ap.ac_amount, 0)) AS inv_paid,
-        sum(coalesce(ii.total, 0)) -
-        sum(coalesce(ap.ac_amount, 0)) AS inv_owing
-
-FROM
-        ".TB_PREFIX."customers c LEFT JOIN
-        ".TB_PREFIX."invoices iv ON (c.id = iv.customer_id) LEFT JOIN
-	(SELECT i.invoice_id, coalesce(sum(i.total), 0) AS total
-         FROM ".TB_PREFIX."invoice_items i GROUP BY i.invoice_id
-        ) ii ON (iv.id = ii.invoice_id) LEFT JOIN
-	(SELECT p.ac_inv_id, coalesce(sum(p.ac_amount), 0) AS ac_amount
-         FROM ".TB_PREFIX."payment p GROUP BY p.ac_inv_id
-        ) ap ON (iv.id = ap.ac_inv_id)
-GROUP BY
-        c.id, c.name
-ORDER BY
-        inv_owing DESC;
-   ";
-  } else {
-      $sql = "
+  $sql = '
 SELECT
         c.id AS cid
       , c.name AS customer
-      , SUM(COALESCE(ii.total, 0)) AS inv_total
-      , COALESCE(ap.inv_paid, 0) AS inv_paid
-      , SUM(COALESCE(ii.total, 0)) - COALESCE(ap.inv_paid, 0) AS inv_owing
+      , iv.currency_sign
+      , iv.denorm_currency_code
+      , SUM(iv.denorm_invoice_total) AS inv_total
+      , SUM(iv.denorm_amount_paid) AS inv_paid
+      , SUM(iv.denorm_amount_owing) AS inv_owing
 FROM
-      ".TB_PREFIX."customers c 
-      LEFT JOIN ".TB_PREFIX."invoices iv      ON (iv.customer_id = c.id AND iv.domain_id = c.domain_id)
-      LEFT JOIN ".TB_PREFIX."invoice_items ii ON (ii.invoice_id = iv.id AND ii.domain_id = iv.domain_id)
-      LEFT JOIN ".TB_PREFIX."preferences pr   ON (iv.preference_id = pr.pref_id AND pr.domain_id = iv.domain_id)
-      LEFT JOIN (
-  SELECT 
-	  iv1.customer_id
-	, ap1.domain_id
-	, SUM(COALESCE(ap1.ac_amount, 0)) AS inv_paid 
-  FROM  ".TB_PREFIX."payment ap1
-      LEFT JOIN ".TB_PREFIX."invoices iv1   ON (ap1.ac_inv_id = iv1.id AND ap1.domain_id = iv1.domain_id)
-      LEFT JOIN ".TB_PREFIX."preferences pr1 ON (pr1.pref_id = iv1.preference_id AND pr1.domain_id = iv1.domain_id)
-  WHERE
-      pr1.status = 1
-  GROUP BY iv1.customer_id, ap1.domain_id
-      ) ap ON (ap.customer_id = c.id AND ap.domain_id = c.domain_id)
+      ' . TB_PREFIX . 'customers c
+      INNER JOIN ' . TB_PREFIX . 'invoices iv      ON (iv.customer_id = c.id AND iv.domain_id = c.domain_id)
+      INNER JOIN ' . TB_PREFIX . 'preferences pr   ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id AND pr.status = 1)
 WHERE
-          pr.status   = 1
-      AND c.domain_id = :domain_id
-GROUP BY 
-	c.id;
-";
-  }
+          c.domain_id = :domain_id
+GROUP BY
+	c.id, c.name, iv.currency_sign, iv.denorm_currency_code
+ORDER BY
+	inv_owing DESC;
+';
 
   $customer_results = dbQuery($sql, ':domain_id', $auth_session->domain_id);
 
@@ -66,9 +34,16 @@ GROUP BY
     array_push($customers, $customer);
   }
 
-  $smarty -> assign('data', $customers);
-  $smarty -> assign('total_owed', $total_owed);   
+  $inv = si_report_active_invoice_count($auth_session->domain_id);
+  $chart_pack = si_report_chart_top_rows_by_key($customers, 'inv_owing', $inv, 1);
 
-  $smarty -> assign('pageActive', 'report');
-  $smarty -> assign('active_tab', '#home');
+  $bladeView -> assign('data', $customers);
+  $bladeView -> assign('report_chart_data', $chart_pack['rows']);
+  $bladeView -> assign('total_owed', $total_owed);
+  $bladeView -> assign('report_chart_guard', $chart_pack['guard']);
+
+  $bladeView -> assign('pageActive', 'report');
+  $bladeView -> assign('active_tab', '#home');
+report_cache_set($__rpt_name, (int)$auth_session->domain_id,
+    array_diff_key($bladeView->getAssigns(), array_flip($__rpt_snap)));
 ?>

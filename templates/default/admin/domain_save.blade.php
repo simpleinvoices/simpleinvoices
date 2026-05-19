@@ -1,0 +1,26 @@
+{{-- Admin: domain save result (included by domain_add/domain_edit on form submission) --}}
+@if(!empty($saveError))
+    <div class="alert alert-danger">
+        <i class="ti ti-alert-circle me-1"></i>{{ $saveError }}
+    </div>
+    <a href="javascript:history.back()" class="btn btn-outline-secondary me-2">
+        <i class="ti ti-arrow-left me-1"></i>Go Back
+    </a>
+    <a href="index.php?module=admin&view=domains" class="btn btn-outline-primary">
+        <i class="ti ti-building me-1"></i>All Domains
+    </a>
+@elseif($saved ?? false)
+    {{-- insert/update success redirects from domain_save.php; other ops may land here --}}
+    <meta http-equiv="refresh" content="2;URL=index.php?module=admin&amp;view=domains" />
+    <div class="alert alert-success">
+        <i class="ti ti-check me-1"></i>
+        @if(($savedOp ?? '') === 'insert_domain')
+            Domain and domain administrator account were created successfully.
+        @else
+            Domain saved successfully.
+        @endif
+    </div>
+    <a href="index.php?module=admin&view=domains" class="btn btn-outline-primary">
+        <i class="ti ti-building me-1"></i>Manage Domains
+    </a>
+@endif

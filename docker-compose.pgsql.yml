@@ -1,0 +1,60 @@
+# PostgreSQL override for Simple Invoices
+#
+# Usage:
+#   docker compose -f docker-compose.yml -f docker-compose.pgsql.yml up
+#
+# Or set in your shell:
+#   export COMPOSE_FILE=docker-compose.yml:docker-compose.pgsql.yml
+#   docker compose up
+#
+# Required environment variables (add to your .env file):
+#   POSTGRES_PASSWORD=yourpassword
+#   POSTGRES_DB=simple_invoices
+#   POSTGRES_USER=siuser
+#   SI_DB_USER=siuser
+#   SI_DB_PASSWORD=yourpassword
+#   SI_DB_NAME=simple_invoices
+
+services:
+  simpleinvoices:
+    depends_on:
+      db:
+        condition: service_healthy
+        required: true
+    environment:
+      - SI_DATABASE_ADAPTER=pdo_pgsql
+      - SI_DB_HOST=db
+      - SI_DB_PORT=${SI_DB_PORT:-5432}
+      - SI_DB_USER=${SI_DB_USER:-siuser}
+      - SI_DB_PASSWORD=${SI_DB_PASSWORD:-sipassword}
+      - SI_DB_NAME=${SI_DB_NAME:-simple_invoices}
+
+  # Replace MariaDB with PostgreSQL
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-sipassword}
+      POSTGRES_DB: ${POSTGRES_DB:-simple_invoices}
+      POSTGRES_USER: ${POSTGRES_USER:-siuser}
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - pgsql_data:/var/lib/postgresql/data
+    networks:
+      - simpleinvoices-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-siuser} -d ${POSTGRES_DB:-simple_invoices}"]
+      start_period: 20s
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Adminer works with PostgreSQL - just point it at the pgsql db service
+  adminer:
+    environment:
+      ADMINER_DEFAULT_SERVER: db
+      ADMINER_DEFAULT_USERNAME: ${POSTGRES_USER:-siuser}
+      ADMINER_DEFAULT_PASSWORD: ${POSTGRES_PASSWORD:-sipassword}
+
+volumes:
+  pgsql_data:

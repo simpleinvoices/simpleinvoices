@@ -21,7 +21,7 @@ checkLogin();
 
 $files = getLogoList();
 
-$smarty->assign("files", $files);
+$bladeView->assign("files", $files);
 
 #get custom field labels
 $customFieldLabel = getCustomFieldLabels();
@@ -30,12 +30,13 @@ if ($_POST['name'] != "") {
 	include ("./modules/billers/save.php");
 }
 
-$smarty->assign('files', $files);
-$smarty->assign('customFieldLabel', $customFieldLabel);
-$smarty->assign('save', $save);
+$bladeView->assign('files', $files);
+$bladeView->assign('customFieldLabel', $customFieldLabel);
+$bladeView->assign('save', $save);
+$bladeView->assign('currentDomainId', domain_id::get());
 
-$smarty -> assign('pageActive', 'biller');
-$smarty -> assign('subPageActive', 'biller_add');
-$smarty -> assign('active_tab', '#people');
+$bladeView -> assign('pageActive', 'biller');
+$bladeView -> assign('subPageActive', 'biller_add');
+$bladeView -> assign('active_tab', '#people');
 
 ?>

@@ -1,0 +1,1262 @@
+/*
+ * Simple Invoices - Tabler/Bootstrap 5 custom overrides
+ * Layout: Horizontal top navbar (Tabler default)
+ */
+
+/* Azure colour scheme */
+:root {
+    --tblr-primary: #45aaf2;
+    --tblr-primary-rgb: 69, 170, 242;
+    --tblr-azure: #45aaf2;
+    --tblr-azure-rgb: 69, 170, 242;
+    --tblr-link-color: #45aaf2;
+}
+
+/* Light grey outline buttons - match Tabler preview slate style */
+.btn-outline-secondary {
+    --tblr-btn-color: var(--tblr-body-color);
+    --tblr-btn-border-color: var(--tblr-border-color);
+    --tblr-btn-hover-color: var(--tblr-body-color);
+    --tblr-btn-hover-bg: var(--tblr-bg-surface-secondary);
+    --tblr-btn-hover-border-color: var(--tblr-border-color);
+    --tblr-btn-active-color: var(--tblr-body-color);
+    --tblr-btn-active-bg: var(--tblr-bg-surface-secondary);
+    --tblr-btn-active-border-color: var(--tblr-border-color);
+}
+
+/* Top navbar brand */
+.navbar-brand {
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+}
+.navbar-brand i.ti {
+    vertical-align: middle;
+}
+
+/* Font stack - background left to Tabler's CSS variables so dark mode works */
+body {
+    font-family: "Inter Var", Inter, -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+}
+
+.si-payment-method {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+}
+
+.si-payment-method .si-payment-icon {
+    transition: transform 0.15s ease;
+}
+
+.si-payment-method .si-payment-icon:hover {
+    transform: scale(1.1);
+    z-index: 1;
+}
+
+/* Compact payment method display for invoice details */
+.si-payment-method-compact {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.si-payment-method-compact .si-payment-icon {
+    width: 2rem;
+    height: 1.25rem;
+}
+
+/* Prominent payment method display for quick view */
+.si-payment-method-prominent {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.si-payment-prominent-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--tblr-border-color);
+    border-radius: 0.5rem;
+    background: var(--tblr-bg-surface);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.si-payment-prominent-item:hover {
+    border-color: var(--tblr-primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.si-payment-prominent-item .si-payment-icon {
+    width: 3rem;
+    height: 1.875rem;
+}
+
+.si-payment-prominent-label {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--tblr-body-color);
+    line-height: 1.2;
+}
+
+.si-payment-icon {
+    flex: 0 0 auto;
+    height: 1.5rem;
+    width: 2.5rem;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    object-fit: contain;
+    border-radius: 0.375rem;
+    box-shadow: 0 0 0 1px rgba(4, 32, 69, 0.08);
+    vertical-align: middle;
+}
+
+.si-payment-provider-paypal { background-image: url("../../invoices/img/payments/paypal.svg"); }
+.si-payment-provider-stripe { background-image: url("../../invoices/img/payments/stripe.svg"); }
+.si-payment-provider-adyen { background-image: url("../../invoices/img/payments/adyen.svg"); }
+.si-payment-provider-authorize { background-image: url("../../invoices/img/payments/authorize.svg"); }
+.si-payment-provider-eway { background-image: url("../../invoices/img/payments/eway.svg"); }
+.si-payment-provider-visa { background-image: url("../../invoices/img/payments/visa.svg"); }
+.si-payment-provider-mastercard { background-image: url("../../invoices/img/payments/mastercard.svg"); }
+.si-payment-provider-americanexpress { background-image: url("../../invoices/img/payments/americanexpress.svg"); }
+.si-payment-provider-applepay { background-image: url("../../invoices/img/payments/applepay.svg"); }
+.si-payment-provider-google-pay { background-image: url("../../invoices/img/payments/google-pay.svg"); }
+.si-payment-provider-shop-pay { background-image: url("../../invoices/img/payments/shop-pay.svg"); }
+.si-payment-provider-cash-app { background-image: url("../../invoices/img/payments/cash-app.svg"); }
+.si-payment-provider-bitcoin { background-image: url("../../invoices/img/payments/bitcoin.svg"); }
+.si-payment-provider-ethereum { background-image: url("../../invoices/img/payments/ethereum.svg"); }
+.si-payment-provider-litecoin { background-image: url("../../invoices/img/payments/litecoin.svg"); }
+.si-payment-provider-klarna { background-image: url("../../invoices/img/payments/klarna.svg"); }
+.si-payment-provider-skrill { background-image: url("../../invoices/img/payments/skrill.svg"); }
+.si-payment-provider-braintree { background-image: url("../../invoices/img/payments/braintree.svg"); }
+.si-payment-provider-square { background-image: url("../../invoices/img/payments/square.svg"); }
+.si-payment-provider-shopify { background-image: url("../../invoices/img/payments/shopify.svg"); }
+.si-payment-provider-sage { background-image: url("../../invoices/img/payments/sage.svg"); }
+.si-payment-provider-worldpay { background-image: url("../../invoices/img/payments/worldpay.svg"); }
+.si-payment-provider-dinersclub { background-image: url("../../invoices/img/payments/dinersclub.svg"); }
+.si-payment-provider-discover { background-image: url("../../invoices/img/payments/discover.svg"); }
+.si-payment-provider-jcb { background-image: url("../../invoices/img/payments/jcb.svg"); }
+.si-payment-provider-unionpay { background-image: url("../../invoices/img/payments/unionpay.svg"); }
+.si-payment-provider-sepa { background-image: url("../../invoices/img/payments/sepa.svg"); }
+.si-payment-provider-ideal { background-image: url("../../invoices/img/payments/ideal.svg"); }
+.si-payment-provider-giropay { background-image: url("../../invoices/img/payments/giropay.svg"); }
+.si-payment-provider-bancontact { background-image: url("../../invoices/img/payments/bancontact.svg"); }
+.si-payment-provider-alipay { background-image: url("../../invoices/img/payments/alipay.svg"); }
+.si-payment-provider-we-chat-pay { background-image: url("../../invoices/img/payments/we-chat-pay.svg"); }
+.si-payment-provider-bitpay { background-image: url("../../invoices/img/payments/bitpay.svg"); }
+.si-payment-provider-monero { background-image: url("../../invoices/img/payments/monero.svg"); }
+.si-payment-provider-tether { background-image: url("../../invoices/img/payments/tether.svg"); }
+.si-payment-provider-solana { background-image: url("../../invoices/img/payments/solana.svg"); }
+.si-payment-provider-ripple { background-image: url("../../invoices/img/payments/ripple.svg"); }
+.si-payment-provider-metamask { background-image: url("../../invoices/img/payments/metamask.svg"); }
+.si-payment-provider-binance-usd { background-image: url("../../invoices/img/payments/binance-usd.svg"); }
+.si-payment-provider-venmo { background-image: url("../../invoices/img/payments/venmo.svg"); }
+.si-payment-provider-zelle { background-image: url("../../invoices/img/payments/zelle.svg"); }
+.si-payment-provider-wise { background-image: url("../../invoices/img/payments/wise.svg"); }
+.si-payment-provider-westernunion { background-image: url("../../invoices/img/payments/westernunion.svg"); }
+.si-payment-provider-moneygram { background-image: url("../../invoices/img/payments/moneygram.svg"); }
+.si-payment-provider-maestro { background-image: url("../../invoices/img/payments/maestro.svg"); }
+.si-payment-provider-mir { background-image: url("../../invoices/img/payments/mir.svg"); }
+.si-payment-provider-samsung-pay { background-image: url("../../invoices/img/payments/samsung-pay.svg"); }
+.si-payment-provider-verifone { background-image: url("../../invoices/img/payments/verifone.svg"); }
+.si-payment-provider-revolut-pay { background-image: url("../../invoices/img/payments/revolut-pay.svg"); }
+.si-payment-provider-affirm { background-image: url("../../invoices/img/payments/affirm.svg"); }
+.si-payment-provider-afterpay { background-image: url("../../invoices/img/payments/affirm.svg"); }
+.si-payment-provider-paysafe { background-image: url("../../invoices/img/payments/paysafe.svg"); }
+.si-payment-provider-neteller { background-image: url("../../invoices/img/payments/neteller.svg"); }
+.si-payment-provider-payoneer { background-image: url("../../invoices/img/payments/payoneer.svg"); }
+.si-payment-provider-payu { background-image: url("../../invoices/img/payments/payu.svg"); }
+.si-payment-provider-payza { background-image: url("../../invoices/img/payments/payza.svg"); }
+.si-payment-provider-webmoney { background-image: url("../../invoices/img/payments/webmoney.svg"); }
+.si-payment-provider-dwolla { background-image: url("../../invoices/img/payments/dwolla.svg"); }
+.si-payment-provider-paymill { background-image: url("../../invoices/img/payments/paymill.svg"); }
+.si-payment-provider-payone { background-image: url("../../invoices/img/payments/payone.svg"); }
+.si-payment-provider-stax { background-image: url("../../invoices/img/payments/stax.svg"); }
+.si-payment-provider-spingo { background-image: url("../../invoices/img/payments/spingo.svg"); }
+.si-payment-provider-solo { background-image: url("../../invoices/img/payments/solo.svg"); }
+.si-payment-provider-switch { background-image: url("../../invoices/img/payments/switch.svg"); }
+.si-payment-provider-laser { background-image: url("../../invoices/img/payments/laser.svg"); }
+.si-payment-provider-ogone { background-image: url("../../invoices/img/payments/ogone.svg"); }
+.si-payment-provider-okpay { background-image: url("../../invoices/img/payments/okpay.svg"); }
+.si-payment-provider-paybox { background-image: url("../../invoices/img/payments/paybox.svg"); }
+.si-payment-provider-paysafecard { background-image: url("../../invoices/img/payments/paysafecard.svg"); }
+.si-payment-provider-2checkout { background-image: url("../../invoices/img/payments/2checkout.svg"); }
+.si-payment-provider-amazon-pay { background-image: url("../../invoices/img/payments/amazon-pay.svg"); }
+.si-payment-provider-googlewallet { background-image: url("../../invoices/img/payments/googlewallet.svg"); }
+
+.si-payment-option-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.si-payment-option-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.35rem 0.55rem;
+    border: 1px solid var(--tblr-border-color);
+    border-radius: 999px;
+    background: var(--tblr-bg-surface);
+    color: var(--tblr-body-color);
+    font-size: 0.8125rem;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.si-payment-option-badge .si-payment-icon {
+    width: 2rem;
+    height: 1.2rem;
+}
+
+/* Wizard payment providers grid display */
+.si-wizard-payment-providers {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+}
+
+.si-wizard-payment-provider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    padding: 0.75rem 0.5rem;
+    background: var(--tblr-bg-surface);
+    border: 1px solid var(--tblr-border-color);
+    border-radius: var(--tblr-border-radius-lg);
+    transition: all 0.2s ease;
+}
+
+.si-wizard-payment-provider:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    border-color: var(--tblr-border-hover-color, var(--tblr-border-color));
+}
+
+.si-wizard-payment-provider .si-payment-icon {
+    width: 3rem;
+    height: 2rem;
+    box-shadow: none;
+    border-radius: 0.25rem;
+}
+
+.si-wizard-payment-provider span {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    color: var(--tblr-secondary);
+    text-align: center;
+    line-height: 1.2;
+}
+
+/* Compact inline payment badges for bank section */
+.si-payment-badges-compact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+}
+
+.si-payment-badge-compact {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.25rem 0.5rem;
+    background: var(--tblr-bg-surface-secondary);
+    border: 1px solid var(--tblr-border-color);
+    border-radius: var(--tblr-border-radius);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--tblr-body-color);
+}
+
+.si-payment-badge-compact .si-payment-icon {
+    width: 1.75rem;
+    height: 1rem;
+    box-shadow: none;
+}
+
+/* Payment icons in buttons (online payment links) */
+.btn .si-payment-icon {
+    width: 1.5rem;
+    height: 1rem;
+    vertical-align: middle;
+    box-shadow: none;
+    border-radius: 0.25rem;
+    margin-right: 0.35rem;
+}
+
+.btn-lg .si-payment-icon {
+    width: 1.75rem;
+    height: 1.15rem;
+}
+
+.btn-sm .si-payment-icon {
+    width: 1.25rem;
+    height: 0.85rem;
+}
+
+/* Remove default Tabler page-body margins and page-header top margin */
+.page-body {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.page-wrapper .page-header {
+    margin-top: 0 !important;
+}
+
+/* Page header styling (OVERVIEW / Dashboard row) - transparent like Tabler demo */
+.page-header {
+    background: transparent;
+    border-bottom: none;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+}
+.page-pretitle {
+    text-transform: uppercase;
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--tblr-secondary);
+    margin-bottom: 0.125rem;
+}
+.page-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+}
+
+/* Legacy flexigrid / manage grid integration */
+.flexigrid {
+    border: 1px solid var(--tblr-border-color);
+    border-radius: var(--tblr-border-radius);
+    overflow: hidden;
+    background: var(--tblr-bg-surface);
+}
+.flexigrid table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.flexigrid th,
+.flexigrid td {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    border-bottom: 1px solid var(--tblr-border-color);
+    vertical-align: middle;
+}
+.flexigrid thead th {
+    background: var(--tblr-bg-surface-secondary);
+    font-weight: 600;
+    color: var(--tblr-body-color);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+.flexigrid tbody tr:hover {
+    background: rgba(var(--tblr-primary-rgb), 0.04);
+}
+.flexigrid .pDiv {
+    padding: 0.5rem 0.75rem;
+    border-top: 1px solid var(--tblr-border-color);
+    background: var(--tblr-bg-surface);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+}
+.flexigrid .pDiv input {
+    width: 50px;
+    text-align: center;
+    padding: 0.25rem 0.5rem;
+    border: 1px solid var(--tblr-border-color);
+    border-radius: var(--tblr-border-radius);
+    font-size: 0.8125rem;
+}
+.flexigrid .pGroup .pcontrol,
+.flexigrid .pGroup span {
+    vertical-align: middle;
+}
+.flexigrid .hDiv {
+    overflow: hidden;
+}
+.flexigrid .bDiv {
+    overflow: auto;
+}
+
+/* Legacy hide/show utility */
+.si_hide { display: none !important; }
+
+/* Invoice line items - responsive grid layout */
+
+/* Button-sized segmented control - matches .btn default sizing */
+.segmented-control-btn .segmented-control-label {
+    padding: 0.4375rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+}
+.segmented-control-btn .ti {
+    font-size: 1.25rem;
+    vertical-align: middle;
+}
+
+/* Compact segmented control for line item actions (expand/delete) */
+.segmented-control-sm .segmented-control-label {
+    padding: 0.2rem 0.45rem;
+    font-size: 0.875rem;
+    line-height: 1.4;
+}
+
+/* Line item action icons (expand, toggle-all) */
+.si-expand-desc .ti,
+.si-toggle-all-desc .ti { font-size: 1rem; }
+
+/* Mobile: each line item renders as a card */
+@media (max-width: 991.98px) {
+    .si-line-item {
+        border: 1px solid var(--tblr-border-color);
+        border-radius: var(--tblr-border-radius);
+        padding: 0.625rem;
+        margin-bottom: 0.5rem;
+        background: var(--tblr-bg-surface);
+    }
+
+    /* Separator between qty+product row and taxes+price row */
+    .si-mobile-row-break {
+        border-top: 1px solid var(--tblr-border-color-light, #e6e7e9);
+        margin-top: 0.125rem;
+        margin-bottom: 0.125rem;
+    }
+
+    /* Unit price label right-aligned on mobile to match the right-aligned input */
+    .si-unit-price-col .form-label {
+        text-align: right;
+        display: block;
+    }
+}
+
+/* Desktop: subtle separator between items */
+@media (min-width: 992px) {
+    .si-line-item {
+        padding: 0.25rem 0.25rem;
+        margin-bottom: 0.25rem;
+    }
+    .si-line-item + .si-line-item {
+        border-top: 1px solid var(--tblr-border-color-light, #e6e7e9);
+    }
+}
+
+/* Legacy SI class compatibility */
+.si_message {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: var(--tblr-border-radius);
+    background: var(--tblr-bg-surface);
+    border: 1px solid var(--tblr-border-color);
+    color: var(--tblr-secondary);
+}
+.si_message_ok {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: var(--tblr-border-radius);
+    background: var(--tblr-success-lt);
+    border: 1px solid rgba(var(--tblr-success-rgb), 0.3);
+    color: var(--tblr-success);
+}
+.si_message_error {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: var(--tblr-border-radius);
+    background: var(--tblr-danger-lt);
+    border: 1px solid rgba(var(--tblr-danger-rgb), 0.3);
+    color: var(--tblr-danger);
+}
+
+/* Save result screens */
+.si-save-card {
+    width: 100%;
+    max-width: none;
+}
+
+.si-save-alert {
+    width: 100%;
+    padding: 1rem 1.125rem;
+    border-radius: calc(var(--tblr-border-radius) + 2px);
+    margin-bottom: 0;
+}
+
+.si-save-alert .alert-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--tblr-body-color);
+}
+
+.si-save-alert .text-secondary {
+    line-height: 1.55;
+}
+
+.si-save-alert-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: 1.5rem;
+    min-width: 1.5rem;
+    font-size: 1.25rem;
+    line-height: 1;
+    margin-top: 0.125rem;
+}
+
+.si-save-alert.alert-success .si-save-alert-icon {
+    color: var(--tblr-success);
+}
+
+.si-save-alert.alert-warning .si-save-alert-icon {
+    color: var(--tblr-warning);
+}
+
+.si-save-alert-note {
+    margin-top: 0.75rem;
+    font-size: 0.8125rem;
+    color: var(--tblr-secondary);
+}
+
+/* Legacy toolbar (manage pages) */
+.si_toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+.si_toolbar a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--tblr-body-color);
+    background: var(--tblr-bg-surface);
+    border: 1px solid var(--tblr-border-color);
+    border-radius: var(--tblr-border-radius);
+    text-decoration: none;
+    transition: background 0.15s, border-color 0.15s;
+}
+.si_toolbar a:hover {
+    background: var(--tblr-bg-surface-secondary);
+    border-color: var(--tblr-border-color-active);
+}
+.si_toolbar a img {
+    width: 16px;
+    height: 16px;
+}
+
+/* Legacy toolbar dialog (export options) */
+.si_toolbar_dialog {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.75rem 0;
+}
+
+/* Legacy form layout */
+.si_form {
+    margin-bottom: 1.5rem;
+}
+.si_form table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.si_form table th {
+    text-align: right;
+    padding: 0.5rem 1rem 0.5rem 0;
+    font-weight: 500;
+    width: 30%;
+    vertical-align: top;
+    color: var(--tblr-secondary);
+    font-size: 0.875rem;
+}
+.si_form table td {
+    padding: 0.5rem 0;
+}
+.si_form input[type="text"],
+.si_form input[type="email"],
+.si_form input[type="password"],
+.si_form input[type="number"],
+.si_form select,
+.si_form textarea {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    padding: 0.4375rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.4285714286;
+    color: var(--tblr-body-color);
+    background: var(--tblr-bg-forms);
+    border: 1px solid var(--tblr-border-color);
+    border-radius: var(--tblr-border-radius);
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.si_form input:focus,
+.si_form select:focus,
+.si_form textarea:focus {
+    border-color: var(--tblr-primary);
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(var(--tblr-primary-rgb), 0.25);
+}
+
+.si_form_view table th {
+    color: var(--tblr-secondary);
+}
+.si_form_view table td {
+    font-weight: 500;
+}
+
+/* Toolbar buttons (save/cancel) */
+.si_toolbar_form {
+    display: flex;
+    gap: 0.5rem;
+    padding-top: 1rem;
+    margin-top: 1rem;
+    border-top: 1px solid var(--tblr-border-color);
+}
+.si_toolbar_form button,
+.si_toolbar_form .positive {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.4375rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: var(--tblr-border-radius);
+    text-decoration: none;
+    cursor: pointer;
+}
+.si_toolbar_form button.positive,
+.si_toolbar_form button[type="submit"] {
+    color: #fff;
+    background: var(--tblr-primary);
+    border: 1px solid var(--tblr-primary);
+}
+.si_toolbar_form button.positive:hover,
+.si_toolbar_form button[type="submit"]:hover {
+    background: var(--tblr-primary-darken);
+}
+.si_toolbar_form a.positive {
+    color: #fff;
+    background: var(--tblr-primary);
+    border: 1px solid var(--tblr-primary);
+}
+.si_toolbar_form a.positive:hover {
+    background: var(--tblr-primary-darken);
+}
+.si_toolbar_form a.negative {
+    color: var(--tblr-body-color);
+    background: var(--tblr-bg-surface);
+    border: 1px solid var(--tblr-border-color);
+}
+.si_toolbar_form a.negative:hover {
+    background: var(--tblr-bg-surface-secondary);
+}
+.si_toolbar_form img {
+    width: 16px;
+    height: 16px;
+}
+
+/* Invoice manage filters */
+.si_filters_invoices {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem 0;
+}
+.si_filters_title {
+    font-weight: 600;
+    font-size: 0.8125rem;
+    color: var(--tblr-secondary);
+}
+.si_filters_links {
+    display: flex;
+    gap: 0;
+}
+.si_filters_links a {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--tblr-secondary);
+    background: var(--tblr-bg-surface);
+    border: 1px solid var(--tblr-border-color);
+    text-decoration: none;
+    margin-left: -1px;
+}
+.si_filters_links a:first-child,
+.si_filters_links a.first {
+    border-radius: var(--tblr-border-radius) 0 0 var(--tblr-border-radius);
+    margin-left: 0;
+}
+.si_filters_links a:last-child {
+    border-radius: 0 var(--tblr-border-radius) var(--tblr-border-radius) 0;
+}
+.si_filters_links a:hover {
+    background: var(--tblr-bg-surface-secondary);
+    z-index: 1;
+}
+.si_filters_links a.selected {
+    background: var(--tblr-primary);
+    border-color: var(--tblr-primary);
+    color: #fff;
+    z-index: 2;
+}
+
+/* Legacy index page link grids */
+.si_index h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 1.5rem 0 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--tblr-border-color);
+}
+.si_index h2:first-child {
+    margin-top: 0;
+}
+
+/* Settings index cards */
+.si_index_settings .si_toolbar {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.75rem;
+}
+.si_index_settings .si_toolbar a {
+    flex-direction: column;
+    padding: 1rem;
+    text-align: center;
+    gap: 0.5rem;
+}
+.si_index_settings .si_toolbar a img {
+    width: 24px;
+    height: 24px;
+}
+
+/* Help links */
+.si_help_div {
+    padding: 0.75rem 0;
+    font-size: 0.8125rem;
+}
+.si_help_div a {
+    color: var(--tblr-secondary);
+    text-decoration: none;
+}
+.si_help_div a:hover {
+    color: var(--tblr-primary);
+}
+.si_help_div img {
+    width: 14px;
+    height: 14px;
+    margin-left: 2px;
+}
+
+/* Legacy tables (manage tables, etc.) */
+table.manage,
+table#live-grid {
+    width: 100%;
+    border-collapse: collapse;
+}
+table.manage th,
+table#live-grid th {
+    background: var(--tblr-bg-surface-secondary);
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--tblr-secondary);
+    border-bottom: 1px solid var(--tblr-border-color);
+}
+table.manage td,
+table#live-grid td {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    border-bottom: 1px solid var(--tblr-border-color);
+    vertical-align: middle;
+}
+table.manage tbody tr:hover,
+table#live-grid tbody tr:hover {
+    background: rgba(var(--tblr-primary-rgb), 0.04);
+}
+td.index_table {
+    vertical-align: middle;
+}
+
+/* Quick view / details action toolbars */
+.si_toolbar_top {
+    margin-bottom: 1rem;
+}
+.si_toolbar_top_left {
+    justify-content: flex-start;
+}
+
+/* Print-only */
+.print_only { display: none; }
+
+@media print {
+    .print_only { display: block; }
+    .d-print-none { display: none !important; }
+    .navbar { display: none !important; }
+    .page-header { display: none !important; }
+    .footer { display: none !important; }
+}
+
+/* jQuery UI dialog overrides for Tabler compatibility */
+.ui-dialog {
+    border-radius: var(--tblr-border-radius);
+    border: 1px solid var(--tblr-border-color);
+    background: var(--tblr-bg-surface);
+    box-shadow: var(--tblr-box-shadow);
+    padding: 0;
+}
+.ui-dialog-titlebar {
+    padding: 0.75rem 1rem;
+    background: var(--tblr-bg-surface-secondary);
+    border-bottom: 1px solid var(--tblr-border-color);
+    border-radius: var(--tblr-border-radius) var(--tblr-border-radius) 0 0;
+}
+.ui-dialog-content {
+    padding: 1rem;
+}
+
+/* jQuery datepicker overrides */
+.ui-datepicker {
+    border-radius: var(--tblr-border-radius);
+    border: 1px solid var(--tblr-border-color);
+    background: var(--tblr-bg-surface);
+    box-shadow: var(--tblr-box-shadow);
+    padding: 0.5rem;
+}
+
+/* Ensure old images don't break layout */
+.si_toolbar img,
+.si_form img,
+.si_toolbar_form img {
+    max-width: 20px;
+    height: auto;
+}
+
+/* Quick view invoice */
+.si_invoice_quick_view {
+    background: var(--tblr-bg-surface);
+    border: 1px solid var(--tblr-border-color);
+    border-radius: var(--tblr-border-radius);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Statement / invoice print view */
+.si_invoice_content table {
+    width: 100%;
+}
+
+/* Remove old background */
+.si_grey_background { display: none; }
+
+/* Center util */
+.si_center { text-align: center; margin-bottom: 1rem; }
+
+/* Allow dropdown menus to overflow the table-responsive wrapper */
+.si-tabler-grid-container .table-responsive,
+.si-dash-recent-table .table-responsive {
+    overflow: visible;
+}
+
+.si-tabler-grid-container .dropdown-menu,
+.si-dash-recent-table .dropdown-menu {
+    z-index: 1050;
+}
+
+/* Icon sizing - matches Tabler demo nav proportions */
+.nav-link .ti,
+.nav-link-icon .ti,
+.dropdown-item .ti {
+    font-size: 1.25rem;
+    vertical-align: middle;
+}
+
+.btn .ti {
+    font-size: 1.25rem;
+    vertical-align: middle;
+}
+
+/* Responsive small button - full size on sm+, icon-only compact on xs */
+@media (max-width: 575.98px) {
+    .btn-sm-mobile {
+        --tblr-btn-padding-y: .2rem;
+        --tblr-btn-padding-x: .35rem;
+        padding: .2rem .35rem;          /* explicit fallback if CSS vars aren't picked up */
+        font-size: .875rem;
+        border-radius: var(--tblr-border-radius-sm, .25rem);
+    }
+    .btn-sm-mobile .ti {
+        font-size: 1rem;
+    }
+    /* Hide the dropdown caret - the ⋮ icon already signals a menu, and the
+       ::after triangle pushes the button ~5px wider than the 2.5rem column. */
+    .btn-sm-mobile::after {
+        display: none !important;
+    }
+}
+
+/* Segmented control (not in Tabler v1.4.0, polyfilled here) */
+.segmented-control {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px;
+    gap: 2px;
+    background: var(--tblr-bg-surface-secondary, #f1f5f9);
+    border: 1px solid var(--tblr-border-color);
+    border-radius: var(--tblr-border-radius);
+}
+
+.segmented-control-item {
+    display: flex;
+    margin: 0;
+    cursor: pointer;
+}
+
+.segmented-control-input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    width: 0;
+    height: 0;
+}
+
+.segmented-control-label {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3rem 0.75rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.4;
+    border-radius: calc(var(--tblr-border-radius) - 1px);
+    color: var(--tblr-secondary);
+    white-space: nowrap;
+    user-select: none;
+    cursor: pointer;
+    transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+}
+
+.segmented-control-item:hover .segmented-control-label {
+    color: var(--tblr-body-color);
+    background: rgba(0, 0, 0, 0.06);
+}
+
+.segmented-control-input:checked + .segmented-control-label {
+    background: var(--tblr-bg-surface);
+    color: var(--tblr-body-color);
+    box-shadow: var(--tblr-box-shadow-sm, 0 1px 2px rgba(0,0,0,.08));
+}
+
+/* Segmented control as navigation links (e.g. new invoice type) */
+a.segmented-control-item {
+    text-decoration: none;
+    color: inherit;
+}
+.segmented-control-item.active .segmented-control-label,
+.segmented-control-item[aria-current="page"] .segmented-control-label {
+    background: var(--tblr-bg-surface);
+    color: var(--tblr-body-color);
+    box-shadow: var(--tblr-box-shadow-sm, 0 1px 2px rgba(0,0,0,.08));
+}
+.segmented-control-item.active:hover .segmented-control-label,
+.segmented-control-item[aria-current="page"]:hover .segmented-control-label {
+    color: var(--tblr-body-color);
+}
+
+/* Help popovers (content loaded from documentation page) */
+.si-help-popover.popover {
+    max-width: 360px;
+}
+.si-help-popover .popover-body {
+    max-height: 20rem;
+    overflow-y: auto;
+}
+
+/* Report tables: lightweight client-side sorting */
+.si-report-sortable thead th[aria-sort] {
+    white-space: nowrap;
+}
+
+.si-report-sort-trigger {
+    cursor: pointer;
+    user-select: none;
+}
+
+.si-report-sort-trigger:focus-visible {
+    outline: 2px solid rgba(var(--tblr-primary-rgb), 0.35);
+    outline-offset: -2px;
+}
+
+.si-report-sort-icon {
+    font-size: 1rem;
+    margin-left: 0.35rem;
+    color: var(--tblr-secondary);
+    vertical-align: middle;
+}
+
+.si-report-sort-trigger[aria-sort="ascending"] .si-report-sort-icon,
+.si-report-sort-trigger[aria-sort="descending"] .si-report-sort-icon {
+    color: var(--tblr-primary);
+}
+
+/* ── Tom Select ─────────────────────────────────────────────────────────── */
+
+/*
+ * The bootstrap5 theme sets the control background to `transparent` and uses
+ * `var(--bs-body-bg)` for the dropdown - both of which can produce a see-through
+ * appearance inside Tabler's stacking contexts.  Override with Tabler's own
+ * surface token so both light and dark modes always get a solid, opaque panel.
+ */
+
+/* Control (the visible input area) */
+.ts-wrapper.form-select .ts-control,
+.ts-wrapper.form-select.single.input-active .ts-control {
+    background: #fff !important;
+    color: var(--tblr-body-color);
+}
+
+/* Prevent the selected value from wrapping - matches native <select> behaviour */
+.ts-wrapper.single .ts-control {
+    flex-wrap: nowrap;
+    overflow: hidden;
+}
+.ts-wrapper.single .ts-control .item {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+}
+
+/* Strip Bootstrap's X icon from all invalid fields - red border is enough */
+.form-control.is-invalid,
+.form-select.is-invalid,
+.was-validated .form-control:invalid,
+.was-validated .form-select:invalid {
+    background-image: none;
+    padding-right: inherit;
+}
+
+/* Validation state: red border on the wrapper (TomSelect sets border: none on .ts-control) */
+.ts-wrapper.is-invalid {
+    border: 1px solid #dc3545 !important;
+    box-shadow: 0 0 0 1px #dc3545 !important;
+    background-image: none !important;
+}
+
+/* Dropdown panel - solid background, decent shadow, rounded corners */
+.ts-dropdown,
+.ts-dropdown.form-control,
+.ts-dropdown.form-select {
+    background: #fff !important;
+    background-color: #fff !important;
+    border: 1px solid var(--tblr-border-color);
+    border-radius: var(--tblr-border-radius);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    z-index: 1060;
+    color: var(--tblr-body-color);
+}
+
+/* Dark mode - override with a solid dark surface */
+[data-bs-theme="dark"] .ts-wrapper.form-select .ts-control,
+[data-bs-theme="dark"] .ts-wrapper.form-select.single.input-active .ts-control {
+    background: #1e293b !important;
+}
+[data-bs-theme="dark"] .ts-dropdown,
+[data-bs-theme="dark"] .ts-dropdown.form-control,
+[data-bs-theme="dark"] .ts-dropdown.form-select {
+    background: #1e293b !important;
+    background-color: #1e293b !important;
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Hover / keyboard-active row */
+.ts-dropdown .option.active,
+.ts-dropdown .option:hover {
+    background-color: var(--tblr-primary);
+    color: #fff;
+    border-radius: calc(var(--tblr-border-radius) - 1px);
+}
+
+/* Adequate touch targets for option rows */
+.ts-dropdown .option {
+    min-height: 2.25rem;
+    display: flex;
+    align-items: center;
+}
+
+/* ── Tom Select sizing: match Tabler form-select heights ────────────────── */
+/* TomSelect's bootstrap5 theme already sets padding:0 on .ts-wrapper.form-select,
+   so height is driven by .ts-control alone.  The critical fix is using Tabler's
+   actual form-select padding (.5625rem vertical, 1rem left) rather than the
+   form-control padding (0.4375rem) that --tblr-input-padding-y resolves to -
+   those differ by 4px per side, making TomSelect visibly shorter than native
+   form-select elements. */
+.ts-wrapper.form-select,
+.ts-wrapper.form-select-sm {
+    padding: 0 !important;
+    height: auto !important;
+}
+
+.ts-wrapper.form-select .ts-control,
+.ts-wrapper.form-select.single.input-active .ts-control {
+    /* 0.5625rem matches Tabler's form-select padding-y exactly */
+    padding-top: 0.5625rem;
+    padding-bottom: 0.5625rem;
+    padding-left: 1rem;
+    min-height: unset;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+.ts-wrapper.form-select-sm .ts-control,
+.ts-wrapper.form-select-sm.single.input-active .ts-control {
+    padding: var(--tblr-input-padding-y-sm, 0.25rem) var(--tblr-input-padding-x-sm, 0.5rem);
+    min-height: unset;
+    font-size: var(--tblr-input-font-size-sm, 0.875rem);
+    line-height: var(--tblr-input-line-height, 1.4285714286);
+}
+
+/* ── Quick-add buttons (product + / customer + / biller +) ──────────────── */
+/* Match the muted secondary colour used by the segmented-control row buttons */
+.si-add-customer-btn,
+.si-add-product-row-btn,
+.si-add-biller-btn {
+    color: var(--tblr-secondary);
+    border-color: var(--tblr-border-color);
+    background: transparent;
+}
+.si-add-customer-btn:hover,
+.si-add-product-row-btn:hover,
+.si-add-biller-btn:hover {
+    color: var(--tblr-body-color);
+    border-color: var(--tblr-border-color);
+    background-color: rgba(0, 0, 0, 0.06);
+}
+
+/* ── Mobile grid / table fixes ──────────────────────────────────────────────
+ * table-layout: auto lets a table exceed width:100% to fit content, even
+ * inside a table-responsive scroll wrapper.  Switch to fixed on small screens
+ * so the table cannot be wider than its container, and truncate cell text.
+ */
+@media (max-width: 575.98px) {
+    /* Grid (siTablerGrid) and dashboard recent-invoice/payment tables */
+    .si-tabler-grid-container .table,
+    .si-dash-recent-table .table {
+        table-layout: fixed;
+    }
+    /* Give the actions column (w-1) an explicit width.
+     * Tabler's .w-1 sets width:1%!important so we need !important to win. */
+    .si-tabler-grid-container .table .w-1,
+    .si-dash-recent-table .table .w-1 {
+        width: 2.5rem !important;
+    }
+    /* Data cells: clip overflowing text instead of stretching the column.
+     * overflow:visible on the w-1 (actions) cell lets the open dropdown menu
+     * escape its narrow column without being clipped. */
+    .si-tabler-grid-container .table th:not(.w-1),
+    .si-dash-recent-table .table th:not(.w-1) {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    .si-tabler-grid-container .table td:not(.w-1),
+    .si-dash-recent-table .table td:not(.w-1) {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    /* Actions column td: allow the dropdown panel to escape its narrow cell */
+    .si-tabler-grid-container .table td.w-1,
+    .si-dash-recent-table .table td.w-1 {
+        overflow: visible;
+    }
+    /* Dropdown menus inside grid tables: open to the right so they don't
+     * cover the invoice-ID column. Bootstrap's dropdown-menu-end + Popper
+     * flips to bottom-start on mobile which lands directly over that column. */
+    .si-tabler-grid-container .table .dropdown-menu,
+    .si-dash-recent-table .table .dropdown-menu {
+        right: auto !important;
+        left:  0    !important;
+    }
+}
+
+/* siTablerGrid toolbar search: single row, compact field selector */
+.si-grid-search-input-group .form-select {
+    flex: 0 1 auto;
+    max-width: 11rem;
+    width: auto;
+}
+/* Manage Invoices: narrower field selector so more room for the query input */
+#manageGrid .si-grid-search-input-group .form-select {
+    max-width: 8rem;
+}
+.si-grid-search-input-group .form-control {
+    min-width: 0;
+}
+.si-grid-search-input-group input[name="q"] {
+    min-width: 0;
+}
+/* Collapsible search: phones and tablets (below Bootstrap lg) */
+@media (max-width: 991.98px) {
+    /* Anchor the flyout so the toggle stays on the header row */
+    .si-grid-search {
+        position: relative;
+        align-self: flex-end;
+    }
+    .si-grid-search-fields:not(.si-grid-search-fields--open) {
+        display: none !important;
+    }
+    .si-grid-search-fields.si-grid-search-fields--open {
+        display: block !important;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        z-index: 1040;
+        width: min(calc(100vw - 2rem), 36rem);
+        margin-top: 0.25rem;
+        padding: 0.75rem;
+        background: var(--tblr-bg-surface, #fff);
+        border: 1px solid var(--tblr-border-color, rgba(0, 0, 0, 0.08));
+        border-radius: var(--tblr-border-radius, 0.25rem);
+        box-shadow: var(--tblr-shadow-dropdown, 0 0.5rem 1rem rgba(0, 0, 0, 0.12));
+    }
+    .si-grid-search-fields.si-grid-search-fields--open .si-grid-search-input-group {
+        width: 100%;
+    }
+}
+@media (min-width: 992px) {
+    .si-grid-search-toggle {
+        display: none !important;
+    }
+    .si-grid-search-fields {
+        display: block !important;
+    }
+}
+
+/* Mobile: larger tap targets, capped height */
+@media (max-width: 991.98px) {
+    .ts-dropdown .option {
+        min-height: 2.75rem;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+    .ts-dropdown {
+        max-height: 40vh;
+    }
+}

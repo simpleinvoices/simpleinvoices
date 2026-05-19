@@ -4,8 +4,8 @@
 checkLogin();
 
 
-$smarty -> assign("patches",getSQLPatches());
+$bladeView -> assign("patches",getSQLPatches());
 
-$smarty -> assign('pageActive', 'sqlpatch');
-$smarty -> assign('active_tab', '#setting');
+$bladeView -> assign('pageActive', 'sqlpatch');
+$bladeView -> assign('active_tab', '#setting');
 ?>

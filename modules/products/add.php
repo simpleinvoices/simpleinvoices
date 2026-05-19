@@ -11,16 +11,17 @@ $taxes = getActiveTaxes();
 if ($_POST['description'] != "" ) {
 	include("./modules/products/save.php");
 }
-$smarty -> assign("defaults",getSystemDefaults());
-$smarty -> assign('customFieldLabel',$customFieldLabel);
-$smarty -> assign('save',$save);
-$smarty -> assign('taxes',$taxes);
+$bladeView -> assign("defaults",getSystemDefaults());
+$bladeView -> assign('customFieldLabel',$customFieldLabel);
+$bladeView -> assign('save',$save);
+$bladeView -> assign('taxes',$taxes);
 
-$sql = "select * from ".TB_PREFIX."products_attributes where enabled ='1'";
-$sth =  dbQuery($sql);
+$domain_id = domain_id::get();
+$sql = "SELECT * FROM ".TB_PREFIX."products_attributes WHERE enabled = '1' AND domain_id = :domain_id";
+$sth = dbQuery($sql, ':domain_id', $domain_id);
 $attributes = $sth->fetchAll();
 
-$smarty -> assign("attributes", $attributes);
-$smarty -> assign('pageActive', 'product_add');
-$smarty -> assign('active_tab', '#product');
+$bladeView -> assign("attributes", $attributes);
+$bladeView -> assign('pageActive', 'product_add');
+$bladeView -> assign('active_tab', '#product');
 ?>

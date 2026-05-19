@@ -17,16 +17,16 @@ $customFieldLabels = getCustomFieldLabels();
 $paymentType = getPaymentType($payment['ac_payment_type']);
 $preference = getPreference($invoice['preference_id']);
 
-$smarty -> assign("payment",$payment);
-$smarty -> assign("invoice",$invoice);
-$smarty -> assign("biller",$biller);
-$smarty -> assign("logo",$logo);
-$smarty -> assign("customer",$customer);
-$smarty -> assign("invoiceType",$invoiceType);
-$smarty -> assign("paymentType",$paymentType);
-$smarty -> assign("preference",$preference);
-$smarty -> assign("customFieldLabels",$customFieldLabels);
+$bladeView -> assign("payment",$payment);
+$bladeView -> assign("invoice",$invoice);
+$bladeView -> assign("biller",$biller);
+$bladeView -> assign("logo",$logo);
+$bladeView -> assign("customer",$customer);
+$bladeView -> assign("invoiceType",$invoiceType);
+$bladeView -> assign("paymentType",$paymentType);
+$bladeView -> assign("preference",$preference);
+$bladeView -> assign("customFieldLabels",$customFieldLabels);
 
-$smarty -> assign('pageActive', 'payment');
-$smarty -> assign('active_tab', '#money');
+$bladeView -> assign('pageActive', 'payment');
+$bladeView -> assign('active_tab', '#money');
 ?>

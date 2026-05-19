@@ -104,7 +104,9 @@ class payment
             ':online_payment_id',$this->online_payment_id,
             ':domain_id',$this->domain_id 
         );
-    
+        if ($sth) {
+            invoice_denorm::refreshForInvoice((int) $this->ac_inv_id, $this->domain_id);
+        }
        return $sth;
     }
 

@@ -1,18 +1,22 @@
 <?php
-  $sql = "
-SELECT 
-    b.name 
-  , SUM(ii.total) AS sum_total
-FROM ".TB_PREFIX."biller b 
-    INNER JOIN ".TB_PREFIX."invoices iv ON (b.id = iv.biller_id AND b.domain_id = iv.domain_id)
-    INNER JOIN ".TB_PREFIX."invoice_items ii ON (ii.invoice_id = iv.id AND ii.domain_id = iv.domain_id)
-    INNER JOIN ".TB_PREFIX."preferences pr ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id)
+$__rpt_name = basename(__FILE__, '.php');
+if (($__rpt = report_cache_get($__rpt_name, (int)$auth_session->domain_id)) !== null) { foreach ($__rpt as $k => $v) $bladeView->assign($k, $v); return; }
+$__rpt_snap = array_keys($bladeView->getAssigns());
+  $sql = '
+SELECT
+    b.name
+  , iv.currency_sign
+  , iv.denorm_currency_code
+  , SUM(iv.denorm_invoice_total) AS sum_total
+FROM ' . TB_PREFIX . 'biller b
+    INNER JOIN ' . TB_PREFIX . 'invoices iv ON (b.id = iv.biller_id AND b.domain_id = iv.domain_id)
+    INNER JOIN ' . TB_PREFIX . 'preferences pr ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id)
 WHERE
-	    pr.status ='1'
+	    pr.status =\'1\'
 	AND b.domain_id = :domain_id
-GROUP BY 
-	b.name
-";
+GROUP BY
+	b.name, iv.currency_sign, iv.denorm_currency_code
+';
 
   $biller_sales = dbQuery($sql, ':domain_id', $auth_session->domain_id);
 
@@ -24,9 +28,16 @@ GROUP BY
     array_push($billers, $biller);
   }
 
-  $smarty -> assign('data', $billers);
-  $smarty -> assign('total_sales', $total_sales);
+  $inv = si_report_active_invoice_count($auth_session->domain_id);
+  $chart_pack = si_report_chart_top_rows_by_key($billers, 'sum_total', $inv, 1);
 
-  $smarty -> assign('pageActive', 'report');
-  $smarty -> assign('active_tab', '#home');
+  $bladeView -> assign('data', $billers);
+  $bladeView -> assign('report_chart_data', $chart_pack['rows']);
+  $bladeView -> assign('total_sales', $total_sales);
+  $bladeView -> assign('report_chart_guard', $chart_pack['guard']);
+
+  $bladeView -> assign('pageActive', 'report');
+  $bladeView -> assign('active_tab', '#home');
+report_cache_set($__rpt_name, (int)$auth_session->domain_id,
+    array_diff_key($bladeView->getAssigns(), array_flip($__rpt_snap)));
 ?>

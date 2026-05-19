@@ -7,7 +7,7 @@ if ($_POST['op'] =='edit' AND !empty($_POST['product_id']))
     $saved = "false";
 
 	$inventory = new inventory();
-	$inventory->id=$_GET['id'];
+	$inventory->id=(int)$_GET['id'];
 	$inventory->domain_id=domain_id::get();
 	$inventory->product_id=$_POST['product_id'];
 	$inventory->quantity=$_POST['quantity'];
@@ -24,15 +24,16 @@ $invoices->sort='id';
 $invoice_all = $invoices->select_all('count');
 
 $get_inventory = new inventory();
-$get_inventory->id = $_GET['id'];
+$get_inventory->id = (int)$_GET['id'];
 $inventory = $get_inventory->select();
+si_check_record_access($inventory);
 
 $productobj = new product();
 $product_all = $productobj->get_all();
-$smarty -> assign('product_all',$product_all);
-$smarty -> assign('saved',$saved);
-$smarty -> assign('inventory',$inventory);
+$bladeView -> assign('product_all',$product_all);
+$bladeView -> assign('saved',$saved);
+$bladeView -> assign('inventory',$inventory);
 
-$smarty -> assign('pageActive', 'inventory');
-$smarty -> assign('subPageActive', 'inventory_edit');
-$smarty -> assign('active_tab', '#product');
+$bladeView -> assign('pageActive', 'inventory');
+$bladeView -> assign('subPageActive', 'inventory_edit');
+$bladeView -> assign('active_tab', '#product');

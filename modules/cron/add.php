@@ -21,9 +21,9 @@ $invoices = new invoice();
 $invoices->sort='id';
 $invoice_all = $invoices->select_all('count');
 
-$smarty -> assign('invoice_all',$invoice_all);
-$smarty -> assign('saved',$saved);
+$bladeView -> assign('invoice_all',$invoice_all);
+$bladeView -> assign('saved',$saved);
 
-$smarty -> assign('pageActive', 'cron');
-$smarty -> assign('subPageActive', 'cron_add');
-$smarty -> assign('active_tab', '#money');
+$bladeView -> assign('pageActive', 'cron');
+$bladeView -> assign('subPageActive', 'cron_add');
+$bladeView -> assign('active_tab', '#money');

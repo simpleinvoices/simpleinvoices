@@ -15,16 +15,17 @@ jsEnd();
 
 
 #get the invoice id
-$tax_rate_id = $_GET['id'];
+$tax_rate_id = (int)$_GET['id'];
 
 $tax = getTaxRate($tax_rate_id);
+si_check_record_access($tax);
 $types = getTaxTypes();
 
-$smarty -> assign("tax",$tax);
-$smarty -> assign("types",$types);
+$bladeView -> assign("tax",$tax);
+$bladeView -> assign("types",$types);
 
-$smarty -> assign('pageActive', 'tax_rate');
+$bladeView -> assign('pageActive', 'tax_rate');
 $subPageActive = $_GET['action'] =="view"  ? "tax_rates_view" : "tax_rates_edit" ;
-$smarty -> assign('subPageActive', $subPageActive);
-$smarty -> assign('active_tab', '#setting');
+$bladeView -> assign('subPageActive', $subPageActive);
+$bladeView -> assign('active_tab', '#setting');
 ?>

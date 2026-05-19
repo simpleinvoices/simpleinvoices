@@ -20,10 +20,11 @@ if ( isset($_POST['process_payment']) ) {
 	$payment->ac_date			= SqlDateWithTime($_POST['ac_date']);
 	$payment->ac_payment_type	= $_POST['ac_payment_type'];
 	$result = $payment->insert();
-	
-	$saved = !empty($result) ? "true" : "false";
-	if($saved =='true')
+
+	$saved = !empty($result);
+	if($saved)
 	{
+		dashboard_cache_clear((int) $auth_session->domain_id);
 		$display_block =  $LANG['save_payment_success'];
 	} else {
 		$display_block =  $LANG['save_payment_failure']."<br />".$sql;
@@ -32,8 +33,9 @@ if ( isset($_POST['process_payment']) ) {
 	$refresh_total = "<meta http-equiv='refresh' content='27;url=index.php?module=payments&view=manage' />";
 }
 
-$smarty->assign('display_block', $display_block);
+$bladeView->assign('saved', isset($saved) ? $saved : null);
+$bladeView->assign('display_block', $display_block);
 
-$smarty -> assign('pageActive', 'payment');
-$smarty -> assign('active_tab', '#money');
+$bladeView -> assign('pageActive', 'payment');
+$bladeView -> assign('active_tab', '#money');
 ?>

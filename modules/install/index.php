@@ -1,20 +1,163 @@
 <?php
 
-//JSON import
-/*
-$importjson = new importjson();
-$importjson->file = "./databases/JSON/EssentialData.json";
-//$importjson->debug = true;
-$importjson->pattern_find = "si_";
-$importjson->pattern_replace = TB_PREFIX;
-dbQuery($importjson->collate());
+require_once __DIR__ . '/../../include/install_workspace_bootstrap.php';
+require_once __DIR__ . '/../../include/auth/password.php';
 
-//SQL import
-$import = new import();
-$import->file = "./databases/MySQL/1-Structure.sql";
-$import->pattern_find = "si_";
-$import->pattern_replace = TB_PREFIX;
-//dbQuery($import->collate());
-*/
+global $db_server, $auth_session, $install_tables_exists, $install_data_exists;
+
 $menu = false;
+$redirect_after_install = null;
+$install_error = false;
+
+$domainIdForInstall = isset($auth_session->domain_id) ? (int) $auth_session->domain_id : 1;
+$install_new_domain_bootstrap = ($install_tables_exists === true)
+	&& ($install_data_exists === false)
+	&& ($domainIdForInstall > 1);
+
+// ── Language selector for the installer ──────────────────────────────────
+$installLangList = getLanguageList();
+if (is_array($installLangList)) {
+	usort(
+		$installLangList,
+		static function ($a, $b) {
+			return strcasecmp((string) ($a->name ?? ''), (string) ($b->name ?? ''));
+		}
+	);
+}
+$installAvailableCodes = [];
+foreach ($installLangList ?? [] as $entry) {
+	if (isset($entry->shortname) && (string) $entry->shortname !== '') {
+		$installAvailableCodes[] = (string) $entry->shortname;
+	}
+}
+$installLangDefault = si_pick_ui_language_from_browser($installAvailableCodes, 'en_US');
+$bladeView->assign('installLanguageList', $installLangList ?? []);
+$bladeView->assign('installLanguageDefault', $installLangDefault);
+
+if (isset($_POST['op']) && $_POST['op'] === 'install_database') {
+    global $auth_session;
+
+    $install_successful = true;
+    $targetDomainId = isset($auth_session->domain_id) ? (int) $auth_session->domain_id : 1;
+
+    $installLanguage = isset($_POST['install_language'])
+        ? trim((string) $_POST['install_language'])
+        : '';
+    if ($installLanguage === '' && $install_new_domain_bootstrap) {
+        $installLanguage = trim((string) ($auth_session->ui_language ?? ''));
+    }
+    $locTokens = install_essential_data_locale_tokens(
+        $installLanguage !== '' ? $installLanguage : null
+    );
+    // Full essential bundle (incl. sql_patchmanager, roles, demo user) only when the DB has never recorded a patch.
+    // Before structure.sql runs, si_sql_patchmanager does not exist yet — do not query it.
+    $includeGlobalEssential = !checkTableExists(TB_PREFIX . 'sql_patchmanager')
+        || (getNumberOfDoneSQLPatches() == 0);
+
+    if (checkTableExists() == false) {
+        $import = new import();
+
+        // Select the schema file that matches the configured database type.
+        if ($db_server == 'pgsql') {
+            $import->file = "./databases/pgsql/structure.sql";
+        } elseif ($db_server == 'sqlite') {
+            $import->file = "./databases/sqlite/structure.sql";
+        } else {
+            $import->file = "./databases/mysql/structure.sql";
+        }
+
+        $import->pattern_find    = ['si_', 'DOMAIN-ID', 'LOCALE', 'LANGUAGE'];
+        $import->pattern_replace = [TB_PREFIX, (string) $targetDomainId, $locTokens[0], $locTokens[1]];
+
+        try {
+            $install_successful = install_execute_sql_file($import->collate());
+        } catch (Exception $e) {
+            $install_successful = false;
+        }
+    }
+
+    if ($install_successful && checkTableExists(TB_PREFIX."customers") == true) {
+        $need_essential = !isset($install_data_exists) || $install_data_exists == false;
+        if ($need_essential) {
+            try {
+                $essentialSql = install_build_essential_data_sql($targetDomainId, $includeGlobalEssential, $installLanguage !== '' ? $installLanguage : null);
+                if ($essentialSql !== '') {
+                    $install_successful = install_execute_sql_file($essentialSql);
+                }
+            } catch (Exception $e) {
+                $install_successful = false;
+            }
+        }
+
+        if ($install_successful && $includeGlobalEssential) {
+            // The schema imported from structure.sql already reflects the latest
+            // state.  Mark every patch as done so the patch-runner page never
+            // appears on first login (patches are only for upgrading older installs).
+            include_once('./include/sql_patches.php');
+            install_mark_all_patches_done();
+            invoice_denorm::rebuildDomain($targetDomainId);
+        }
+    }
+
+    if ($install_successful && checkTableExists(TB_PREFIX."biller") == true && checkDataExists($targetDomainId) == true) {
+        // Update admin login credentials if provided
+        $adminEmail    = trim($_POST['install_admin_email'] ?? '');
+        $adminPassword = $_POST['install_admin_password'] ?? '';
+        if ($adminEmail !== '' && $adminPassword !== '') {
+            $hashedPassword = auth_hash_password($adminPassword);
+            dbQuery(
+                "UPDATE " . TB_PREFIX . "user SET email = :email, password = :pw, auth_staff_email = :email2 WHERE id = 1",
+                ':email', $adminEmail,
+                ':pw', $hashedPassword,
+                ':email2', $adminEmail
+            );
+        }
+        // Auto-login with the credentials just set (or the defaults if none were supplied)
+        $loginEmail    = $adminEmail !== '' ? $adminEmail : 'demo@simpleinvoices.org';
+        $loginPassword = $adminPassword !== '' ? $adminPassword : 'demo';
+        $user = auth_authenticate_staff_user($loginEmail, $loginPassword);
+        if ($user) {
+            session_regenerate_id(true);
+            $auth_session->id          = (string) $user['id'];
+            $auth_session->email       = (string) $user['email'];
+            $auth_session->name        = (string) ($user['name'] ?? '');
+            $auth_session->role_name   = (string) ($user['role_name'] ?? '');
+            $auth_session->domain_id   = (string) ($user['domain_id'] ?? '1');
+            $auth_session->user_id     = (string) ($user['user_id'] ?? '0');
+            $auth_session->ui_language = trim((string) ($user['preferred_language'] ?? ''));
+        }
+
+        $redirect_after_install = 'index.php?module=index&view=index';
+    } elseif (isset($_POST['op'])) {
+        $install_error = true;
+    }
+
+    // After a successful install, set the default currency to match the
+    // chosen locale so the first-run wizard pre-selects a sensible option.
+    if ($install_successful && !empty($redirect_after_install)) {
+        $installedLocale = $locTokens[0];
+        require_once __DIR__ . '/../../include/class/CurrencySignHelper.php';
+        require_once __DIR__ . '/../../include/class/siCurrencies.php';
+        $currencyInfo = si_locale_to_currency_info($installedLocale);
+        if ($currencyInfo !== null) {
+            $currRow = siCurrencies::findOrCreate(
+                $targetDomainId,
+                $currencyInfo['sign'],
+                $currencyInfo['code'],
+                $currencyInfo['position']
+            );
+            if ($currRow && ($currRow['id'] ?? 0) > 0) {
+                dbQuery(
+                    'UPDATE ' . TB_PREFIX . 'preferences SET currency_id = :cid WHERE domain_id = :domain_id',
+                    ':cid', $currRow['id'],
+                    ':domain_id', $targetDomainId
+                );
+            }
+        }
+    }
+}
+
+$bladeView->assign('redirect_after_install', $redirect_after_install);
+$bladeView->assign('install_error', $install_error);
+$bladeView->assign('install_new_domain_bootstrap', $install_new_domain_bootstrap);
 ?>

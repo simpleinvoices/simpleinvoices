@@ -7,8 +7,8 @@ checkLogin();
 $get_cronlog = new cronlog();
 $cronlogs = $get_cronlog->select();
 
-$smarty -> assign("cronlogs",$cronlogs);
+$bladeView -> assign("cronlogs",$cronlogs);
 
-$smarty -> assign('pageActive', 'options');
-$smarty -> assign('active_tab', '#setting');
+$bladeView -> assign('pageActive', 'options');
+$bladeView -> assign('active_tab', '#setting');
 ?>

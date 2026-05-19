@@ -3,30 +3,33 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-//gets the long language name out of the short name
-$lang = getDefaultLanguage();
+// Display language as "Name (shortname)" on the manage row
+$langCode = getDefaultLanguage();
+$lang     = $langCode;
 $languages = getLanguageList();
-foreach($languages as $language) {
-	if($language->shortname == $lang) {
-		$lang = $language->name;
+foreach ($languages as $language) {
+	if ($language->shortname == $langCode) {
+		$lang = $language->name . ' (' . $language->shortname . ')';
 		break;
 	}
 }
 
 
-$smarty -> assign("defaults", getSystemDefaults());
-$smarty -> assign("defaultBiller", getDefaultBiller());
-$smarty -> assign("defaultCustomer", getDefaultCustomer());
-$smarty -> assign("defaultTax", getDefaultTax());
-$smarty -> assign("defaultPreference", getDefaultPreference());
-$smarty -> assign("defaultPaymentType", getDefaultPaymentType());
-$smarty -> assign("defaultDelete", getDefaultDelete());
-$smarty -> assign("defaultLogging", getDefaultLogging());
-$smarty -> assign("defaultInventory", getDefaultInventory());
-$smarty -> assign("defaultProductAttributes", getDefaultProductAttributes());
-$smarty -> assign("defaultLargeDataset", getDefaultLargeDataset());
-$smarty -> assign("defaultLanguage", $lang);
+$sysDefaults = getSystemDefaults();
+$bladeView -> assign("defaults", $sysDefaults);
+$bladeView -> assign("defaultBiller", getDefaultBiller());
+$bladeView -> assign("defaultCustomer", getDefaultCustomer());
+$bladeView -> assign("defaultTax", getDefaultTax());
+$bladeView -> assign("defaultPreference", getDefaultPreference());
+$bladeView -> assign("defaultPaymentType", getDefaultPaymentType());
+$bladeView -> assign("defaultDelete", getDefaultDelete());
+$bladeView -> assign("defaultLogging", getDefaultLogging());
+$bladeView -> assign("defaultInventory", getDefaultInventory());
+$bladeView -> assign("defaultProductAttributes", getDefaultProductAttributes());
+$bladeView -> assign("defaultLargeDataset", getDefaultLargeDataset());
+$bladeView -> assign("defaultLanguage", $lang);
+$bladeView -> assign("defaultConfirmDeleteLineItem", getDefaultGeneric('confirm_delete_line_item'));
 
-$smarty -> assign('pageActive', 'system_default');
-$smarty -> assign('active_tab', '#setting');
+$bladeView -> assign('pageActive', 'system_default');
+$bladeView -> assign('active_tab', '#setting');
 ?>

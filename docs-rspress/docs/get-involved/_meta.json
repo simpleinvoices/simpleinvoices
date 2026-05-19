@@ -1,0 +1,5 @@
+[
+  { "type": "file", "name": "index", "label": "Overview" },
+  { "type": "file", "name": "dev-setup", "label": "Development Setup" },
+  { "type": "file", "name": "license", "label": "License (GPLv3)" }
+]

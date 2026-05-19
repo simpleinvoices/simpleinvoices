@@ -84,7 +84,7 @@ Simple Invoices - Changelog
 		<li>Invoice PDF EMail (Boolean variable in config.php) now supports Confirm Reading Receipt to Sender</li>
 		<li>screen.css now has th.sortable_rt class - useful for right align for numeric fields - available in the modules/module-name/manage.php files</li>
 		<li>General Code cleanup</li>
-		<li>Increased limit from 100 to 1000000 billers / clients / inv_prefs - look in modules/invoices/total.php, itemised.php, consulting.php</li>
+		<li>Increased limit from 100 to 1000000 billers / clients / inv_prefs - look in modules/invoices/total.php, itemised.php</li>
 		<li>Changes in config/config.php made backwards compatible for use with older config.php</li>
 		<li>Invoice PDF EMail now supports SecureSMTP and user configurable SMTP Port</li>
 		<li>Updated PHPMailer to v2.10 Beta 1 for PHP5</li>
@@ -202,7 +202,7 @@ Simple Invoices - Changelog
 <ul><li>2007-02-02
 	<ul>
 		<li><a href="http://code.google.com/p/simpleinvoices/issues/detail?id=73">Issue 73</a>Security: Controller.php doesnt validate the $_GET input
-		<li><a href="http://code.google.com/p/simpleinvoices/issues/detail?id=71">Issue 71</a>Null Invoice: Consulting style issue
+		<li><a href="http://code.google.com/p/simpleinvoices/issues/detail?id=71">Issue 71</a> Null Invoice: Consulting style issue (consulting type since removed)
 		<li>Manage tables font size reduction
 		<li>Known Issue: <a href="http://code.google.com/p/simpleinvoices/issues/detail?id=73">Issue 72</a>Sort not working correctly for numbers
 	</ul>
@@ -292,7 +292,7 @@ Simple Invoices - Changelog
 <ul><li>2006-09-28
 	<ul>
 		<li>Invoices are now editable!!
-		<li>Invoice - consulting now includes an optional notes section - similar to the other 2 invoice styles
+		<li>Invoice - consulting (since removed) - previously included an optional notes section - similar to the other 2 invoice styles
 		<li>Authentification work started
 	</ul>
 </ul>
@@ -425,7 +425,7 @@ Simple Invoices - Changelog
 <ul><li>2006-05-31
 	<ul>
 		<li>Database Backup - this now works, so the user can backup the Simple Invoices database at will through Simple Invoices
-		<li>Invoice - Consulting: new invoice type added, this is a cross between and total and an itemised invoice, allowing the user to create an invoice with multiple items and editable item descriptions - similar to how a consulting firm creates invoices
+		<li>Invoice - Consulting: new invoice type added (since removed), this is a cross between and total and an itemised invoice, allowing the user to create an invoice with multiple items and editable item descriptions - similar to how a consulting firm creates invoices
 		<li>SQL Patches
 			<ul>
 				<li>INSERT INTO si_invoice_type ( inv_ty_id , inv_ty_description ) VALUES (3, 'Consulting')

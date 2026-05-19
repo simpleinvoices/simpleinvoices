@@ -99,18 +99,19 @@ class cron {
     public function select_all($type='', $dir='DESC', $rp='25', $page='1')
 	{
 		global $LANG;
+		global $db_server;
 		$valid_search_fields = array('iv.id', 'b.name', 'cron.id', 'aging');
 
 		/*SQL Limit - start*/
 		$start = (($page-1) * $rp);
-		$limit = "LIMIT ".$start.", ".$rp;
+		$limit = "LIMIT ".$rp." OFFSET ".$start;
 		/*SQL Limit - end*/
 
 		/*SQL where - start*/
 
 		$where = "";
-		$query = isset($_POST['query']) ? $_POST['query'] : null;
-		$qtype = isset($_POST['qtype']) ? $_POST['qtype'] : null;
+		$query = $_POST['query'] ?? null;
+		$qtype = $_POST['qtype'] ?? null;
 		if ( ! (empty($qtype) || empty($query)) ) {
 			if ( in_array($qtype, $valid_search_fields) ) {
 				$where = " AND $qtype LIKE :query ";
@@ -127,7 +128,7 @@ class cron {
 		if (!empty($this->sort)) {
 		    $sort = $this->sort;
 		} else {
-		    $sort = "id";
+		    $sort = "cron.id";
 		}
 
 		if($type =="count" OR $type =="no_limit")
@@ -140,18 +141,14 @@ class cron {
 		$sql = "SELECT
 				cron.*
                 , cron.id as cron_id
-                , (SELECT CONCAT(pf.pref_description,' ',iv.index_id)) as index_name
+                , iv.denorm_index_name as index_name
 			FROM 
 				".TB_PREFIX."cron cron 
 				INNER JOIN ".TB_PREFIX."invoices iv 
 					ON (cron.invoice_id = iv.id AND cron.domain_id = iv.domain_id)
-				INNER JOIN ".TB_PREFIX."preferences pf 
-					ON (iv.preference_id = pf.pref_id AND iv.domain_id = pf.domain_id)
 			 WHERE 
 				cron.domain_id = :domain_id
 				$where
-			GROUP BY
-			    cron.id
 			ORDER BY
 				$sort $dir
 			$limit";
@@ -164,7 +161,7 @@ class cron {
 
 		if($type =="count")
 		{
-			return $sth->rowCount();
+			return count($sth->fetchAll());
 		} else {
 			return $sth->fetchAll();
 		}
@@ -172,20 +169,25 @@ class cron {
 
     public function select_crons_to_run()
     {
-        // Use this function to select crons that need to run each day across all domain_id values
+        global $db_server;
+        // SQLite has no NOW(); keep semantics aligned with MySQL (BETWEEN + NULL end_date => unknown, row excluded).
+        if ($db_server === 'mysql') {
+            $cron_active_dates = 'NOW() BETWEEN cron.start_date AND cron.end_date';
+        } elseif ($db_server === 'pgsql') {
+            $cron_active_dates = 'CURRENT_DATE BETWEEN cron.start_date AND cron.end_date::date';
+        } else {
+            $cron_active_dates = "date('now') BETWEEN date(cron.start_date) AND date(cron.end_date)";
+        }
 
         $sql = "SELECT
                   cron.*
                 , cron.id as cron_id
-                , (SELECT CONCAT(pf.pref_description,' ',iv.index_id)) as index_name
+                , iv.denorm_index_name as index_name
             FROM 
                 ".TB_PREFIX."cron cron 
                 INNER JOIN ".TB_PREFIX."invoices iv 
                     ON (cron.invoice_id = iv.id AND cron.domain_id = iv.domain_id)
-                INNER JOIN ".TB_PREFIX."preferences pf 
-                    ON (iv.preference_id = pf.pref_id AND iv.domain_id = pf.domain_id)
-            WHERE NOW() BETWEEN cron.start_date AND cron.end_date
-            GROUP BY cron.id, cron.domain_id
+            WHERE $cron_active_dates
         ";
 
         $sth = dbQuery($sql);
@@ -196,17 +198,16 @@ class cron {
 
 	public function select()
 	{
+		global $db_server;
 		global $LANG;
 
 		$sql = "SELECT
 				cron.*
-                , (SELECT CONCAT(pf.pref_description,' ',iv.index_id)) as index_name
+                , iv.denorm_index_name as index_name
 			FROM 
 				".TB_PREFIX."cron cron 
 				INNER JOIN ".TB_PREFIX."invoices iv 
 					ON (cron.invoice_id = iv.id AND cron.domain_id = iv.domain_id)
-				INNER JOIN ".TB_PREFIX."preferences pf 
-					ON (iv.preference_id = pf.pref_id AND iv.domain_id = pf.domain_id)
 			WHERE cron.domain_id = :domain_id
 			  AND cron.id = :id;";
 		$sth = dbQuery($sql, ':domain_id', $this->domain_id, ':id', $this->id);
@@ -387,131 +388,6 @@ class cron {
                             $email -> subject = $email->set_subject();
                             $email -> attachment = $pdf_file_name_invoice;
                             $return['email_message'] = $email -> send ();
-
-                        }
-
-                        //Check that all details are OK before doing the eway payment
-                        $eway_check = new eway();
-                        $eway_check->domain_id  = $domain_id;
-                        $eway_check->invoice    = $invoice;
-                        $eway_check->customer   = $customer;
-                        $eway_check->biller     = $biller;
-                        $eway_check->preference = $preference;
-                        $eway_pre_check = $eway_check->pre_check();
-
-                        //do eway payment
-                        if ($eway_pre_check == 'true')         
-                        {
-                            
-                            // input customerID,  method (REAL_TIME, REAL_TIME_CVN, GEO_IP_ANTI_FRAUD) and liveGateway or not
-                            $eway = new eway();
-                            $eway->domain_id = $domain_id;
-                            $eway->invoice   = $invoice;
-                            $eway->biller    = $biller ;
-                            $eway->customer  = $customer;
-                            $payment_done = $eway->payment();  
-                            
-                            $payment_id = $db->lastInsertID();
-
-                            $pdf_file_name_receipt = 'payment'.$payment_id.'.pdf';
-                            if ($payment_done =='true')
-                            {
-                                //do email of receipt to biller and customer
-                                if( ($value['email_biller'] == "1") OR ($value['email_customer'] == "1") )
-                                {
-
-                                    /*
-                                    * If you want a new copy of the invoice being emailed to the customer 
-                                    * use this code
-                                    */
-                                    $export_rec = new export();
-                                    $export_rec -> domain_id = $domain_id;
-                                    $export_rec -> format = "pdf";
-                                    $export_rec -> file_location = 'file';
-                                    $export_rec -> module = 'invoice';
-                                    $export_rec -> id = $invoice['id'];
-                                    $export_rec -> execute();
-
-                                    #$attachment = file_get_contents('./tmp/cache/' . $pdf_file_name);
-                                    $email_rec = new email();
-                                    $email_rec -> domain_id = $domain_id;
-                                    $email_rec -> format = 'cron_invoice';
-
-                                        $email_body_rec = new email_body();
-                                        $email_body_rec->email_type = 'cron_invoice_receipt';
-                                        $email_body_rec->customer_name = $customer['name'];
-                                        $email_body_rec->invoice_name = $invoice['index_name'];
-                                        $email_body_rec->biller_name = $biller['name'];
-                                    
-                                    $email_rec -> notes = $email_body_rec->create();
-                                    $email_rec -> from = $biller['email'];
-                                    $email_rec -> from_friendly = $biller['name'];
-									$email_rec -> to = $this->getEmailSendAddresses($value, $customer['email'], $biller['email']);
-                                    $email_rec -> invoice_name = $invoice['index_name'];
-                                    $email_rec -> attachment = $pdf_file_name_invoice;
-                                    $email_rec -> subject = $email_rec->set_subject('invoice_eway_receipt');
-                                    $return['email_message'] = $email_rec -> send ();
-
-
-                                    /*
-                                    * If you want a receipt as PDF being emailed to the customer
-                                    * uncomment the code below
-                                    */
-                                    /*
-                                    $export = new export();
-                                    $export -> format = "pdf";
-                                    $export -> file_location = 'file';
-                                    $export -> module = 'payment';
-                                    $export -> id = $payment_id;
-                                    $export -> execute();
-
-                                    $email = new email();
-                                    $email -> format = 'cron_payment';
-
-                                        $email_body = new email_body();
-                                        $email_body->email_type = 'cron_payment';
-                                        $email_body->customer_name = $customer['name'];
-                                        $email_body->invoice_name = 'payment'.$payment_id;
-                                        $email_body->biller_name = $biller['name'];
-                                    
-                                    $email -> notes = $email_body->create();
-                                    $email -> from = $biller['email'];
-                                    $email -> from_friendly = $biller['name'];
-                                    if($value['email_customer'] == "1")
-                                    {
-                                        $email -> to = $customer['email'];
-                                    }
-                                    if($value['email_biller'] == "1" AND $value['email_customer'] == "1")
-                                    {
-                                        $email -> to = $customer['email'].";".$biller['email'];
-                                    }
-                                    if($value['email_biller'] == "1" AND $value['email_customer'] == "0")
-                                    {
-                                        $email -> to = $customer['email'];
-                                    }
-                                    $email -> subject = $pdf_file_name_receipt." from ".$biller['name'];
-                                    $email -> attachment = $pdf_file_name_receipt;
-                                    $return['email_message'] = $email->send();
-                                    */
-                                }
-
-                            } else {
-                                //do email to biller/admin - say error
-
-                                $email = new email();
-                                $email -> domain_id = $domain_id;
-                                $email -> format = 'cron_payment';
-                                $email -> from = $biller['email'];
-                                $email -> from_friendly = $biller['name'];
-                                $email -> to = $biller['email'];
-                                $email -> subject = "Payment failed for ".$invoice['index_name'];
-                                $error_message ="Invoice:  ".$invoice['index_name']."<br /> Amount: ".$invoice['total']." <br />";
-                                foreach($eway->get_message() as $key => $value)
-                                    $error_message .= "\n<br>\$ewayResponseFields[\"$key\"] = $value";
-                                $email -> notes = $error_message;
-                                $return['email_message'] = $email->send();
-
-                            }
 
                         }
 

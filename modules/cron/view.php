@@ -20,12 +20,13 @@ if ($_POST['op'] =='edit' AND !empty($_POST['invoice_id']))
 //$invoice_all = $invoiceobj->get_all();
 
 $get_cron = new cron();
-$get_cron->id = $_GET['id'];
+$get_cron->id = (int)$_GET['id'];
 $cron = $get_cron->select();
+si_check_record_access($cron);
 
-//$smarty -> assign('invoice_all',$invoice_all);
-$smarty -> assign('saved',$saved);
-$smarty -> assign('cron',$cron);
-$smarty -> assign('pageActive', 'cron');
-$smarty -> assign('subPageActive', 'cron_view');
-$smarty -> assign('active_tab', '#money');
+//$bladeView -> assign('invoice_all',$invoice_all);
+$bladeView -> assign('saved',$saved);
+$bladeView -> assign('cron',$cron);
+$bladeView -> assign('pageActive', 'cron');
+$bladeView -> assign('subPageActive', 'cron_view');
+$bladeView -> assign('active_tab', '#money');

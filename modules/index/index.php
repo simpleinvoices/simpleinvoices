@@ -3,39 +3,694 @@
 //stop the direct browsing to this file - let index.php handle which files get displayed
 checkLogin();
 
-$debtor = getTopDebtor();
-$customer = getTopCustomer();
-$biller = getTopBiller();
+global $db_server;
 
-$billers = getBillers();
-$customers = getCustomers();
-$taxes = getTaxes();
-$products = getProducts();
-$preferences = getPreferences();
-$defaults = getSystemDefaults();
+$domain_id = $auth_session->domain_id;
 
-if ($billers == null OR $customers == null OR $taxes == null OR $products == null OR $preferences == null)
+/**
+ * Fast check: at least one enabled row (matches getBillers/getCustomers/getProducts semantics).
+ */
+function dashboard_has_enabled_row(string $table, string $enabled_col, $domain_id): bool
 {
-    $first_run_wizard =true;
-    $smarty -> assign("first_run_wizard",$first_run_wizard);
+    $sql = 'SELECT 1 FROM ' . TB_PREFIX . $table . ' WHERE domain_id = :domain_id AND (' . $enabled_col . " = 1 OR " . $enabled_col . " = '1') LIMIT 1";
+    $r   = dbQuery($sql, ':domain_id', $domain_id)->fetch();
+    return (bool) $r;
 }
 
-$smarty -> assign("mysql",$mysql);
-$smarty -> assign("db_server",$db_server);
-/*
-$smarty -> assign("patch",count($patch));
-$smarty -> assign("max_patches_applied", $max_patches_applied);
-*/
-$smarty -> assign("biller", $biller);
-$smarty -> assign("billers", $billers);
-$smarty -> assign("customer", $customer);
-$smarty -> assign("customers", $customers);
-$smarty -> assign("taxes", $taxes);
-$smarty -> assign("products", $products);
-$smarty -> assign("preferences", $preferences);
-$smarty -> assign("debtor", $debtor);
-$smarty -> assign("language", $language);
-//$smarty -> assign("title", $title);
+/** Any row in table for domain (tax/preferences include disabled rows). */
+function dashboard_has_any_row(string $table, $domain_id): bool
+{
+    $sql = 'SELECT 1 FROM ' . TB_PREFIX . $table . ' WHERE domain_id = :domain_id LIMIT 1';
+    $r   = dbQuery($sql, ':domain_id', $domain_id)->fetch();
+    return (bool) $r;
+}
 
-$smarty -> assign('pageActive', 'dashboard');
-$smarty -> assign('active_tab', '#home');
+/**
+ * One random row from a sample_data.json list (wizard placeholders / wizardFill JSON).
+ */
+function dashboard_random_sample_row(array $rows): array
+{
+    if ($rows === []) {
+        return [];
+    }
+    $k = array_rand($rows);
+
+    return $rows[$k];
+}
+
+$has_billers     = dashboard_has_enabled_row('biller', 'enabled', $domain_id);
+$has_customers   = dashboard_has_enabled_row('customers', 'enabled', $domain_id);
+$has_products    = dashboard_has_enabled_row('products', 'enabled', $domain_id);
+$has_taxes       = dashboard_has_any_row('tax', $domain_id);
+$has_preferences = dashboard_has_any_row('preferences', $domain_id);
+$has_invoices    = dashboard_has_any_row('invoices', $domain_id);
+
+$first_run_wizard = ! $has_billers || ! $has_customers || ! $has_taxes || ! $has_products || ! $has_preferences;
+
+if ($first_run_wizard) {
+    $billers     = getBillers();
+    $customers   = getCustomers();
+    $taxes       = getTaxes();
+    $products    = getProducts();
+    $preferences = getPreferences();
+
+    $sample_json = realpath(__DIR__ . '/../../databases/json/sample_data.json');
+    $sample_data = ($sample_json && file_exists($sample_json))
+        ? json_decode(file_get_contents($sample_json), true)
+        : [];
+    $bladeView->assign('wizard_sample_biller', dashboard_random_sample_row($sample_data['si_biller'] ?? []));
+    $bladeView->assign('wizard_sample_customer', dashboard_random_sample_row($sample_data['si_customers'] ?? []));
+    $bladeView->assign('wizard_sample_product', dashboard_random_sample_row($sample_data['si_products'] ?? []));
+    $bladeView->assign('wizard_sample_billers', $sample_data['si_biller'] ?? []);
+    $bladeView->assign('wizard_sample_customers', $sample_data['si_customers'] ?? []);
+    $bladeView->assign('wizard_sample_products', $sample_data['si_products'] ?? []);
+} else {
+    // Avoid loading thousands of rows for dashboard chrome / charts
+    $billers = $customers = $products = $taxes = $preferences = [];
+}
+
+$defaults = getSystemDefaults();
+
+if (! $has_invoices) {
+	require_once __DIR__ . '/../../include/class/CurrencySignHelper.php';
+	require_once __DIR__ . '/../../include/class/siCurrencies.php';
+	$wizard_default_preference = getDefaultPreference($domain_id) ?: [];
+
+	if (!empty($language)) {
+		$localeCurrency = si_locale_to_currency_info($language);
+		// Resolve currency sign and code from the stored currency_id first;
+		// fall back to locale-based default when nothing is stored yet.
+		$currencyId = (int) ($wizard_default_preference['currency_id'] ?? 0);
+		if ($currencyId > 0) {
+			$currRow = siCurrencies::getById($currencyId, (int) $domain_id);
+			if ($currRow) {
+				$wizard_default_preference['currency_sign'] = $currRow['currency_sign'] ?? '';
+				$wizard_default_preference['currency_code'] = $currRow['currency_code'] ?? '';
+			}
+		}
+		$hasSign = !empty($wizard_default_preference['currency_sign'] ?? null);
+		if (!$hasSign && $localeCurrency !== null) {
+			$wizard_default_preference['currency_sign'] = $localeCurrency['sign'];
+			$wizard_default_preference['currency_code'] = $localeCurrency['code'];
+			$hasSign = true;
+		}
+		if (!$hasSign) {
+			$wizard_default_preference['currency_sign'] = '$';
+			$wizard_default_preference['currency_code'] = 'USD';
+		}
+	}
+
+	$wizard_default_tax_id_label = ($first_run_wizard && !empty($language))
+		? si_locale_to_tax_id_label($language)
+		: null;
+	$bladeView->assign('wizard_default_tax_id_label_1', $wizard_default_tax_id_label['primary'] ?? '');
+	$bladeView->assign('wizard_default_tax_id_label_2', $wizard_default_tax_id_label['secondary'] ?? '');
+
+	$wizard_payment_terms_rows = getPaymentTerms() ?: [];
+	$wizard_default_biller = [];
+	if (! empty($defaults['biller'])) {
+		$wizard_default_biller = getBiller((int) $defaults['biller'], $domain_id) ?: [];
+	}
+	if (empty($wizard_default_biller) && ! empty($billers) && is_array($billers)) {
+		$first_biller_id = (int) ($billers[0]['id'] ?? 0);
+		if ($first_biller_id > 0) {
+			$wizard_default_biller = getBiller($first_biller_id, $domain_id) ?: [];
+		}
+	}
+	// Step 4 includes payment terms when any exist; legacy session from the currency-only
+	// wizard must not show "Done" until the user submits again with terms in the form.
+	$wizard_invoice_prefs_done = ! empty($_SESSION['wizard_invoice_prefs_done'])
+		|| (! empty($_SESSION['wizard_currency_pref_done']) && count($wizard_payment_terms_rows) === 0);
+	$bladeView->assign('wizard_default_preference', $wizard_default_preference);
+	$bladeView->assign('wizard_default_biller', $wizard_default_biller);
+	$bladeView->assign('wizard_currency_pref_done', $wizard_invoice_prefs_done);
+	$bladeView->assign('wizard_payment_terms', $wizard_payment_terms_rows);
+	$wizard_index_group = (int) ($wizard_default_preference['index_group'] ?? 1);
+	$bladeView->assign('wizard_next_invoice_number', index::next('invoice', $wizard_index_group, $domain_id));
+}
+
+$bladeView->assign('first_run_wizard', $first_run_wizard);
+$bladeView->assign('dash_has_billers', $has_billers);
+$bladeView->assign('dash_has_customers', $has_customers);
+$bladeView->assign('dash_has_products', $has_products);
+$bladeView->assign('dash_has_invoices', $has_invoices);
+$bladeView->assign('mysql', $mysql);
+$bladeView->assign('db_server', $db_server);
+$bladeView->assign('billers', $billers);
+$bladeView->assign('customers', $customers);
+$bladeView->assign('taxes', $taxes);
+$bladeView->assign('products', $products);
+$bladeView->assign('preferences', $preferences);
+$bladeView->assign('defaults', $defaults);
+$bladeView->assign('language', $language);
+
+// ── Dashboard data cache ────────────────────────────────────────────────────
+// Expensive chart/aging/payment aggregate queries are cached per domain per
+// clock-hour.  Cache expires automatically each new hour; to force a refresh
+// delete (or truncate) all files in tmp/cache/dashboard/.
+$_dash_cache_dir  = './tmp/cache/dashboard';
+$_dash_ttl_bucket = (int) floor(time() / 3600);   // increments once every 60 min
+$_dash_cache_file = sprintf('%s/dash_%d_%d.json', $_dash_cache_dir, (int) $domain_id, $_dash_ttl_bucket);
+$_dash_from_cache = false;
+
+if (! $first_run_wizard && is_readable($_dash_cache_file)) {
+    $_dash_data = json_decode(file_get_contents($_dash_cache_file), true);
+    if (is_array($_dash_data)) {
+        foreach ($_dash_data as $_k => $_v) {
+            $bladeView->assign($_k, $_v);
+        }
+        $_dash_from_cache = true;
+    }
+    unset($_dash_data, $_k, $_v);
+}
+
+if (! $_dash_from_cache) {
+
+// Dashboard chart: monthly invoices & payments for all years since first invoice (max 10)
+$max_chart_years    = 10;
+$chart_current_year = (int) date('Y');
+
+$r = dbQuery(
+    "SELECT MIN(iv.date) AS min_date FROM " . TB_PREFIX . "invoices iv
+     INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id=iv.preference_id AND pr.domain_id=iv.domain_id)
+     WHERE pr.status='1' AND iv.domain_id=:domain_id",
+    ':domain_id', $domain_id
+)->fetch();
+
+$first_invoice_year = ! empty($r['min_date']) ? (int) date('Y', strtotime((string) $r['min_date'])) : $chart_current_year;
+$chart_start_year   = ($chart_current_year - $first_invoice_year + 1 > $max_chart_years)
+                        ? $chart_current_year - $max_chart_years + 1
+                        : $first_invoice_year;
+
+$chart_labels = [];
+for ($m = 1; $m <= 12; $m++) {
+    $chart_labels[] = date('M', mktime(0, 0, 0, $m, 1));
+}
+
+$range_start = sprintf('%04d-01-01', $chart_start_year);
+$range_end   = sprintf('%04d-01-01', $chart_current_year + 1);
+
+// Monthly invoice totals & payment totals: two aggregate queries grouped by currency
+$inv_month_sql = '';
+$pmt_month_sql = '';
+switch ($db_server) {
+    case 'pgsql':
+        $inv_month_sql = "SELECT to_char(iv.date::timestamp, 'YYYY-MM') AS ym, iv.currency_sign, iv.denorm_currency_code, SUM(iv.denorm_invoice_total) AS t
+            FROM " . TB_PREFIX . "invoices iv
+            INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id=iv.preference_id AND pr.domain_id=iv.domain_id)
+            WHERE pr.status='1' AND iv.domain_id=:domain_id
+              AND iv.date >= :d_start AND iv.date < :d_end
+            GROUP BY 1, iv.currency_sign, iv.denorm_currency_code";
+        $pmt_month_sql = "SELECT to_char(ap.ac_date::timestamp, 'YYYY-MM') AS ym, ap.denorm_currency_sign AS currency_sign, ap.denorm_currency_code AS currency_code, SUM(ap.ac_amount) AS t
+            FROM " . TB_PREFIX . "payment ap
+            WHERE ap.domain_id=:domain_id
+              AND ap.ac_date >= :d_start AND ap.ac_date < :d_end
+            GROUP BY 1, ap.denorm_currency_sign, ap.denorm_currency_code";
+        break;
+    case 'sqlite':
+        $inv_month_sql = "SELECT strftime('%Y-%m', iv.date) AS ym, iv.currency_sign, iv.denorm_currency_code, SUM(iv.denorm_invoice_total) AS t
+            FROM " . TB_PREFIX . "invoices iv
+            INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id=iv.preference_id AND pr.domain_id=iv.domain_id)
+            WHERE pr.status='1' AND iv.domain_id=:domain_id
+              AND date(iv.date) >= date(:d_start) AND date(iv.date) < date(:d_end)
+            GROUP BY 1, iv.currency_sign, iv.denorm_currency_code";
+        $pmt_month_sql = "SELECT strftime('%Y-%m', ap.ac_date) AS ym, ap.denorm_currency_sign AS currency_sign, ap.denorm_currency_code AS currency_code, SUM(ap.ac_amount) AS t
+            FROM " . TB_PREFIX . "payment ap
+            WHERE ap.domain_id=:domain_id
+              AND datetime(ap.ac_date) >= datetime(:d_start) AND datetime(ap.ac_date) < datetime(:d_end)
+            GROUP BY 1, ap.denorm_currency_sign, ap.denorm_currency_code";
+        break;
+    default:
+        $inv_month_sql = "SELECT DATE_FORMAT(iv.date, '%Y-%m') AS ym, iv.currency_sign, iv.denorm_currency_code, SUM(iv.denorm_invoice_total) AS t
+            FROM " . TB_PREFIX . "invoices iv
+            INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id=iv.preference_id AND pr.domain_id=iv.domain_id)
+            WHERE pr.status='1' AND iv.domain_id=:domain_id
+              AND iv.date >= :d_start AND iv.date < :d_end
+            GROUP BY DATE_FORMAT(iv.date, '%Y-%m'), iv.currency_sign, iv.denorm_currency_code";
+        $pmt_month_sql = "SELECT DATE_FORMAT(ap.ac_date, '%Y-%m') AS ym, ap.denorm_currency_sign AS currency_sign, ap.denorm_currency_code AS currency_code, SUM(ap.ac_amount) AS t
+            FROM " . TB_PREFIX . "payment ap
+            WHERE ap.domain_id=:domain_id
+              AND ap.ac_date >= :d_start AND ap.ac_date < :d_end
+            GROUP BY DATE_FORMAT(ap.ac_date, '%Y-%m'), ap.denorm_currency_sign, ap.denorm_currency_code";
+        break;
+}
+
+// Per-currency maps: $inv_by_curr_ym[$curr_key][$ym] = amount
+// $currencies_map[$curr_key] = ['sign' => ..., 'code' => ..., 'decoded_sign' => ...]
+$currencies_map  = [];
+$inv_by_curr_ym  = [];
+$pmt_by_curr_ym  = [];
+
+require_once __DIR__ . '/../../include/class/CurrencySignHelper.php';
+
+foreach (
+    dbQuery($inv_month_sql, ':domain_id', $domain_id, ':d_start', $range_start, ':d_end', $range_end)
+        ->fetchAll(PDO::FETCH_ASSOC) as $row
+) {
+    if (! empty($row['ym'])) {
+        $sign = $row['currency_sign'] ?? '';
+        $code = $row['denorm_currency_code'] ?? '';
+        $curr_key = ($code ?: '') . '||' . ($sign ?: '');
+        if (! isset($currencies_map[$curr_key])) {
+            $currencies_map[$curr_key] = ['sign' => $sign, 'code' => $code, 'decoded_sign' => \CurrencySignHelper::forDisplay($sign)];
+        }
+        $inv_by_curr_ym[$curr_key][$row['ym']] = round((float) ($row['t'] ?? 0), 2);
+    }
+}
+
+foreach (
+    dbQuery($pmt_month_sql, ':domain_id', $domain_id, ':d_start', $range_start, ':d_end', $range_end)
+        ->fetchAll(PDO::FETCH_ASSOC) as $row
+) {
+    if (! empty($row['ym'])) {
+        $sign = $row['currency_sign'] ?? '';
+        $code = $row['denorm_currency_code'] ?? '';
+        $curr_key = ($code ?: '') . '||' . ($sign ?: '');
+        if (! isset($currencies_map[$curr_key])) {
+            $currencies_map[$curr_key] = ['sign' => $sign, 'code' => $code, 'decoded_sign' => \CurrencySignHelper::forDisplay($sign)];
+        }
+        $pmt_by_curr_ym[$curr_key][$row['ym']] = round((float) ($row['t'] ?? 0), 2);
+    }
+}
+
+// Aggregate totals across all currencies (for stat cards)
+$inv_by_ym = [];
+$pmt_by_ym = [];
+foreach ($inv_by_curr_ym as $ym_data) {
+    foreach ($ym_data as $ym => $amt) {
+        $inv_by_ym[$ym] = ($inv_by_ym[$ym] ?? 0) + $amt;
+    }
+}
+foreach ($pmt_by_curr_ym as $ym_data) {
+    foreach ($ym_data as $ym => $amt) {
+        $pmt_by_ym[$ym] = ($pmt_by_ym[$ym] ?? 0) + $amt;
+    }
+}
+
+$chart_years = [];
+$chart_data  = [];
+for ($y = $chart_start_year; $y <= $chart_current_year; $y++) {
+    $chart_years[] = $y;
+    $invoices = [];
+    $payments = [];
+    for ($m = 1; $m <= 12; $m++) {
+        $ym = sprintf('%04d-%02d', $y, $m);
+        $invoices[] = $inv_by_ym[$ym] ?? 0.0;
+        $payments[] = $pmt_by_ym[$ym] ?? 0.0;
+    }
+    $chart_data[$y] = ['invoices' => $invoices, 'payments' => $payments];
+}
+
+// Rolling last 12 calendar months (oldest → newest), for default dashboard chart view
+$chart_last12_labels   = [];
+$chart_last12_invoices = [];
+$chart_last12_payments = [];
+try {
+    $dash_month_anchor = new DateTime('first day of this month');
+} catch (Exception $e) {
+    $dash_month_anchor = new DateTime(date('Y-m-01'));
+}
+for ($i = 11; $i >= 0; $i--) {
+    $d                         = (clone $dash_month_anchor)->modify('-' . $i . ' months');
+    $ym                        = $d->format('Y-m');
+    $chart_last12_labels[]     = $d->format('M Y');
+    $chart_last12_invoices[]   = round((float) ($inv_by_ym[$ym] ?? 0), 2);
+    $chart_last12_payments[]   = round((float) ($pmt_by_ym[$ym] ?? 0), 2);
+}
+
+$bladeView->assign('chart_last12', [
+    'labels'   => $chart_last12_labels,
+    'invoices' => $chart_last12_invoices,
+    'payments' => $chart_last12_payments,
+]);
+$bladeView->assign('chart_current_year', $chart_current_year);
+$bladeView->assign('chart_years', $chart_years);
+$bladeView->assign('chart_labels', $chart_labels);
+$bladeView->assign('chart_data', $chart_data);
+
+$annual_totals = [];
+foreach ($chart_years as $y) {
+    $annual_totals[$y] = [
+        'invoices' => round(array_sum($chart_data[$y]['invoices']), 2),
+        'payments' => round(array_sum($chart_data[$y]['payments']), 2),
+    ];
+}
+$bladeView->assign('annual_totals', $annual_totals);
+
+// Per-currency chart data for multi-currency dashboard charts
+$chart_last12_by_curr  = [];
+$chart_data_by_curr    = [];
+$annual_totals_by_curr = [];
+foreach ($currencies_map as $curr_key => $meta) {
+    $inv_c = $inv_by_curr_ym[$curr_key] ?? [];
+    $pmt_c = $pmt_by_curr_ym[$curr_key] ?? [];
+
+    $inv12 = [];
+    $pmt12 = [];
+    for ($i = 11; $i >= 0; $i--) {
+        $d     = (clone $dash_month_anchor)->modify('-' . $i . ' months');
+        $ym    = $d->format('Y-m');
+        $inv12[] = round((float) ($inv_c[$ym] ?? 0), 2);
+        $pmt12[] = round((float) ($pmt_c[$ym] ?? 0), 2);
+    }
+    $chart_last12_by_curr[$curr_key] = array_merge($meta, ['invoices' => $inv12, 'payments' => $pmt12]);
+
+    $years_data = [];
+    foreach ($chart_years as $y) {
+        $inv_yr = [];
+        $pmt_yr = [];
+        for ($m = 1; $m <= 12; $m++) {
+            $ym      = sprintf('%04d-%02d', $y, $m);
+            $inv_yr[] = $inv_c[$ym] ?? 0.0;
+            $pmt_yr[] = $pmt_c[$ym] ?? 0.0;
+        }
+        $chart_data_by_curr[$curr_key][$y] = ['invoices' => $inv_yr, 'payments' => $pmt_yr];
+        $years_data[$y] = [
+            'invoices' => round(array_sum($inv_yr), 2),
+            'payments' => round(array_sum($pmt_yr), 2),
+        ];
+    }
+    $annual_totals_by_curr[$curr_key] = ['meta' => $meta, 'years' => $years_data];
+}
+$bladeView->assign('chart_last12_by_curr',  $chart_last12_by_curr);
+$bladeView->assign('chart_data_by_curr',    $chart_data_by_curr);
+$bladeView->assign('annual_totals_by_curr', $annual_totals_by_curr);
+
+// Debtor aging buckets - pre-aggregated line totals + payments (one row per invoice; no line-item join fan-out)
+$aging_bucket_sql = '';
+switch ($db_server) {
+    case 'pgsql':
+        $aging_bucket_sql = "SELECT bucket, SUM(owing) AS amt FROM (
+            SELECT CASE
+                WHEN (CURRENT_DATE - iv.date::date) <= 14 THEN '0-14'
+                WHEN (CURRENT_DATE - iv.date::date) <= 30 THEN '15-30'
+                WHEN (CURRENT_DATE - iv.date::date) <= 60 THEN '31-60'
+                WHEN (CURRENT_DATE - iv.date::date) <= 90 THEN '61-90'
+                ELSE '90+'
+            END AS bucket,
+            iv.denorm_amount_owing AS owing
+            FROM " . TB_PREFIX . "invoices iv
+            LEFT JOIN " . TB_PREFIX . "preferences pr ON (iv.preference_id = pr.pref_id AND pr.domain_id = iv.domain_id)
+            WHERE pr.status = 1 AND iv.domain_id = :domain_id
+              AND iv.denorm_amount_owing > 0
+        ) x GROUP BY bucket";
+        break;
+    case 'sqlite':
+        $aging_bucket_sql = "SELECT bucket, SUM(owing) AS amt FROM (
+            SELECT CASE
+                WHEN CAST((julianday('now') - julianday(date(iv.date))) AS INTEGER) <= 14 THEN '0-14'
+                WHEN CAST((julianday('now') - julianday(date(iv.date))) AS INTEGER) <= 30 THEN '15-30'
+                WHEN CAST((julianday('now') - julianday(date(iv.date))) AS INTEGER) <= 60 THEN '31-60'
+                WHEN CAST((julianday('now') - julianday(date(iv.date))) AS INTEGER) <= 90 THEN '61-90'
+                ELSE '90+'
+            END AS bucket,
+            iv.denorm_amount_owing AS owing
+            FROM " . TB_PREFIX . "invoices iv
+            LEFT JOIN " . TB_PREFIX . "preferences pr ON (iv.preference_id = pr.pref_id AND pr.domain_id = iv.domain_id)
+            WHERE pr.status = 1 AND iv.domain_id = :domain_id
+              AND iv.denorm_amount_owing > 0
+        ) x GROUP BY bucket";
+        break;
+    default:
+        $aging_bucket_sql = "SELECT bucket, SUM(owing) AS amt FROM (
+            SELECT CASE
+                WHEN DATEDIFF(CURDATE(), DATE(iv.date)) <= 14 THEN '0-14'
+                WHEN DATEDIFF(CURDATE(), DATE(iv.date)) <= 30 THEN '15-30'
+                WHEN DATEDIFF(CURDATE(), DATE(iv.date)) <= 60 THEN '31-60'
+                WHEN DATEDIFF(CURDATE(), DATE(iv.date)) <= 90 THEN '61-90'
+                ELSE '90+'
+            END AS bucket,
+            iv.denorm_amount_owing AS owing
+            FROM " . TB_PREFIX . "invoices iv
+            LEFT JOIN " . TB_PREFIX . "preferences pr ON (iv.preference_id = pr.pref_id AND pr.domain_id = iv.domain_id)
+            WHERE pr.status = 1 AND iv.domain_id = :domain_id
+              AND iv.denorm_amount_owing > 0
+        ) x GROUP BY bucket";
+        break;
+}
+
+$aging_buckets = ['0-14' => 0.0, '15-30' => 0.0, '31-60' => 0.0, '61-90' => 0.0, '90+' => 0.0];
+$aging_total   = 0.0;
+foreach (dbQuery($aging_bucket_sql, ':domain_id', $domain_id)->fetchAll(PDO::FETCH_ASSOC) as $row) {
+    $b = $row['bucket'] ?? '';
+    if (isset($aging_buckets[$b])) {
+        $amt = (float) ($row['amt'] ?? 0);
+        $aging_buckets[$b] = $amt;
+        $aging_total += $amt;
+    }
+}
+
+$aging_chart = [];
+foreach ($aging_buckets as $label => $amount) {
+    $aging_chart[] = [
+        'label'   => $label . ' days',
+        'amount'  => round($amount, 2),
+        'percent' => $aging_total > 0 ? round($amount / $aging_total * 100, 1) : 0,
+    ];
+}
+$bladeView->assign('aging_chart', $aging_chart);
+$bladeView->assign('aging_total', round($aging_total, 2));
+
+// Invoice paid percentage - denorm_amount_owing; only invoices with ≥1 line row (prior INNER JOIN semantics)
+$paid_sql = "SELECT COUNT(*) AS total_count,
+    SUM(CASE WHEN iv.denorm_amount_owing <= 0 THEN 1 ELSE 0 END) AS paid_count
+    FROM " . TB_PREFIX . "invoices iv
+    INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id)
+    WHERE pr.status = 1 AND iv.domain_id = :domain_id
+      AND EXISTS (
+          SELECT 1 FROM " . TB_PREFIX . "invoice_items ii
+          WHERE ii.invoice_id = iv.id AND ii.domain_id = iv.domain_id
+      )";
+$paid_row      = dbQuery($paid_sql, ':domain_id', $domain_id)->fetch();
+$dash_paid_pct = ($paid_row['total_count'] > 0)
+    ? round(($paid_row['paid_count'] ?? 0) / $paid_row['total_count'] * 100, 1) : 0;
+$dash_total_inv_count = (int) ($paid_row['total_count'] ?? 0);
+$dash_paid_inv_count  = (int) ($paid_row['paid_count'] ?? 0);
+$dash_all_invoices_paid = $dash_total_inv_count > 0 && $dash_paid_inv_count >= $dash_total_inv_count;
+$dash_aging_all_clear   = $dash_all_invoices_paid && round($aging_total, 2) <= 0;
+$bladeView->assign('dash_paid_pct', $dash_paid_pct);
+$bladeView->assign('dash_total_inv_count', $dash_total_inv_count);
+$bladeView->assign('dash_paid_inv_count', $dash_paid_inv_count);
+$bladeView->assign('dash_all_invoices_paid', $dash_all_invoices_paid);
+$bladeView->assign('dash_aging_all_clear', $dash_aging_all_clear);
+
+$alltime_inv_monthly = [];
+$alltime_pmt_monthly = [];
+foreach ($chart_years as $y) {
+    foreach ($chart_data[$y]['invoices'] as $v) {
+        $alltime_inv_monthly[] = $v;
+    }
+    foreach ($chart_data[$y]['payments'] as $v) {
+        $alltime_pmt_monthly[] = $v;
+    }
+}
+$bladeView->assign('alltime_inv_monthly', $alltime_inv_monthly);
+$bladeView->assign('alltime_pmt_monthly', $alltime_pmt_monthly);
+$bladeView->assign('dash_alltime_inv_total', round(array_sum($alltime_inv_monthly), 2));
+$bladeView->assign('dash_alltime_pmt_total', round(array_sum($alltime_pmt_monthly), 2));
+
+// Monthly volume counts - two aggregate queries
+$inv_count_sql = '';
+$pmt_count_sql = '';
+switch ($db_server) {
+    case 'pgsql':
+        $inv_count_sql = "SELECT to_char(iv.date::timestamp, 'YYYY-MM') AS ym, COUNT(DISTINCT iv.id) AS c
+            FROM " . TB_PREFIX . "invoices iv
+            INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id)
+            WHERE pr.status = '1' AND iv.domain_id = :domain_id
+              AND iv.date >= :d_start AND iv.date < :d_end
+            GROUP BY 1";
+        $pmt_count_sql = "SELECT to_char(ap.ac_date::timestamp, 'YYYY-MM') AS ym, COUNT(*) AS c
+            FROM " . TB_PREFIX . "payment ap
+            WHERE ap.domain_id = :domain_id
+              AND ap.ac_date >= :d_start AND ap.ac_date < :d_end
+            GROUP BY 1";
+        break;
+    case 'sqlite':
+        $inv_count_sql = "SELECT strftime('%Y-%m', iv.date) AS ym, COUNT(DISTINCT iv.id) AS c
+            FROM " . TB_PREFIX . "invoices iv
+            INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id)
+            WHERE pr.status = '1' AND iv.domain_id = :domain_id
+              AND date(iv.date) >= date(:d_start) AND date(iv.date) < date(:d_end)
+            GROUP BY 1";
+        $pmt_count_sql = "SELECT strftime('%Y-%m', ap.ac_date) AS ym, COUNT(*) AS c
+            FROM " . TB_PREFIX . "payment ap
+            WHERE ap.domain_id = :domain_id
+              AND datetime(ap.ac_date) >= datetime(:d_start) AND datetime(ap.ac_date) < datetime(:d_end)
+            GROUP BY 1";
+        break;
+    default:
+        $inv_count_sql = "SELECT DATE_FORMAT(iv.date, '%Y-%m') AS ym, COUNT(DISTINCT iv.id) AS c
+            FROM " . TB_PREFIX . "invoices iv
+            INNER JOIN " . TB_PREFIX . "preferences pr ON (pr.pref_id = iv.preference_id AND pr.domain_id = iv.domain_id)
+            WHERE pr.status = '1' AND iv.domain_id = :domain_id
+              AND iv.date >= :d_start AND iv.date < :d_end
+            GROUP BY DATE_FORMAT(iv.date, '%Y-%m')";
+        $pmt_count_sql = "SELECT DATE_FORMAT(ap.ac_date, '%Y-%m') AS ym, COUNT(*) AS c
+            FROM " . TB_PREFIX . "payment ap
+            WHERE ap.domain_id = :domain_id
+              AND ap.ac_date >= :d_start AND ap.ac_date < :d_end
+            GROUP BY DATE_FORMAT(ap.ac_date, '%Y-%m')";
+        break;
+}
+
+$inv_count_by_ym = [];
+foreach (
+    dbQuery(
+        $inv_count_sql,
+        ':domain_id',
+        $domain_id,
+        ':d_start',
+        $range_start,
+        ':d_end',
+        $range_end
+    )->fetchAll(PDO::FETCH_ASSOC) as $row
+) {
+    if (! empty($row['ym'])) {
+        $inv_count_by_ym[$row['ym']] = (int) ($row['c'] ?? 0);
+    }
+}
+$pmt_count_by_ym = [];
+foreach (
+    dbQuery(
+        $pmt_count_sql,
+        ':domain_id',
+        $domain_id,
+        ':d_start',
+        $range_start,
+        ':d_end',
+        $range_end
+    )->fetchAll(PDO::FETCH_ASSOC) as $row
+) {
+    if (! empty($row['ym'])) {
+        $pmt_count_by_ym[$row['ym']] = (int) ($row['c'] ?? 0);
+    }
+}
+
+$alltime_inv_counts = [];
+$alltime_pmt_counts = [];
+for ($y = $chart_start_year; $y <= $chart_current_year; $y++) {
+    for ($m = 1; $m <= 12; $m++) {
+        $ym                   = sprintf('%04d-%02d', $y, $m);
+        $alltime_inv_counts[] = $inv_count_by_ym[$ym] ?? 0;
+        $alltime_pmt_counts[] = $pmt_count_by_ym[$ym] ?? 0;
+    }
+}
+$bladeView->assign('alltime_inv_counts', $alltime_inv_counts);
+$bladeView->assign('alltime_pmt_counts', $alltime_pmt_counts);
+$bladeView->assign('dash_total_inv_volume', array_sum($alltime_inv_counts));
+$bladeView->assign('dash_total_pmt_volume', array_sum($alltime_pmt_counts));
+
+// Latest 5 invoices / payments
+$invoice = new invoice();
+$invoice->domain_id = $auth_session->domain_id ?? domain_id::get();
+if ($auth_session->role_name === 'customer') {
+    $invoice->customer = $auth_session->user_id;
+} elseif ($auth_session->role_name === 'biller') {
+    $invoice->biller = $auth_session->user_id;
+}
+$invoice->sort = 'iv.id';
+$latest_invoices_sth = $invoice->select_all('', 'DESC', 5, 1, '');
+$latest_invoices      = $latest_invoices_sth->fetchAll(PDO::FETCH_ASSOC);
+
+switch ($db_server) {
+    case 'pgsql':
+        $dash_pmt_date       = "TO_CHAR(ap.ac_date, 'YYYY-MM-DD')";
+        break;
+    case 'sqlite':
+        $dash_pmt_date       = "strftime('%Y-%m-%d', ap.ac_date)";
+        break;
+    default:
+        $dash_pmt_date       = "DATE_FORMAT(ap.ac_date,'%Y-%m-%d')";
+        break;
+}
+// Recent payments: same join shape as Manage Payments grid (LEFT JOIN payment_types); order by date then id
+$latest_payments_sth = dbQuery(
+    "SELECT ap.id, ap.ac_inv_id, ap.ac_amount,
+            ap.denorm_currency_code, ap.denorm_currency_locale,
+            iv.currency_sign AS currency_sign,
+            c.name AS cname,
+            b.name AS bname,
+            iv.denorm_index_name AS index_name,
+            $dash_pmt_date AS date
+     FROM " . TB_PREFIX . "payment ap
+     INNER JOIN " . TB_PREFIX . "invoices iv ON (ap.ac_inv_id = iv.id AND ap.domain_id = iv.domain_id)
+     INNER JOIN " . TB_PREFIX . "customers c ON (c.id = iv.customer_id AND c.domain_id = iv.domain_id)
+     INNER JOIN " . TB_PREFIX . "biller b ON (b.id = iv.biller_id AND b.domain_id = iv.domain_id)
+     LEFT JOIN " . TB_PREFIX . "payment_types pt ON (pt.pt_id = ap.ac_payment_type AND pt.domain_id = ap.domain_id)
+     WHERE ap.domain_id = :domain_id
+     ORDER BY ap.ac_date DESC, ap.id DESC
+     LIMIT 5",
+    ':domain_id', $domain_id
+);
+$latest_payments = $latest_payments_sth->fetchAll(PDO::FETCH_ASSOC);
+
+// Denormalised currency fields on payments use denorm_currency_code/locale from DB; fallback to sign-derived values
+foreach ($latest_payments as &$pmt) {
+    $pmt['denorm_currency_code'] = $pmt['denorm_currency_code'] ?? CurrencySignHelper::codeForSign($pmt['denorm_currency_sign'] ?? '');
+    $pmt['denorm_currency_locale'] = $pmt['denorm_currency_locale'] ?? '';
+    $pmt['denorm_currency_position'] = CurrencySignHelper::defaultPositionForSign($pmt['denorm_currency_sign'] ?? '', $pmt['denorm_currency_code'] ?? '');
+}
+unset($pmt);
+
+$bladeView->assign('latest_invoices', $latest_invoices);
+$bladeView->assign('latest_payments', $latest_payments);
+
+$dash_currency_sign = si_report_dominant_currency((int) $domain_id);
+$dash_currency_code = CurrencySignHelper::codeForSign($dash_currency_sign);
+$dash_currency_locale = getDefaultLanguage() ?: 'en_GB';
+$dash_currency_position = CurrencySignHelper::defaultPositionForSign($dash_currency_sign, $dash_currency_code);
+$bladeView->assign('dash_currency_sign', $dash_currency_sign);
+$bladeView->assign('dash_currency_code', $dash_currency_code);
+$bladeView->assign('dash_currency_locale', $dash_currency_locale);
+$bladeView->assign('dash_currency_position', $dash_currency_position);
+
+    // ── Persist computed data to cache ─────────────────────────────────────
+    if (! $first_run_wizard) {
+        $_dash_payload = [
+            'chart_last12'           => ['labels' => $chart_last12_labels, 'invoices' => $chart_last12_invoices, 'payments' => $chart_last12_payments],
+            'chart_current_year'     => $chart_current_year,
+            'chart_years'            => $chart_years,
+            'chart_labels'           => $chart_labels,
+            'chart_data'             => $chart_data,
+            'annual_totals'          => $annual_totals,
+            'aging_chart'            => $aging_chart,
+            'aging_total'            => $aging_total,
+            'dash_paid_pct'          => $dash_paid_pct,
+            'dash_total_inv_count'   => $dash_total_inv_count,
+            'dash_paid_inv_count'    => $dash_paid_inv_count,
+            'dash_all_invoices_paid' => $dash_all_invoices_paid,
+            'dash_aging_all_clear'   => $dash_aging_all_clear,
+            'alltime_inv_monthly'    => $alltime_inv_monthly,
+            'alltime_pmt_monthly'    => $alltime_pmt_monthly,
+            'dash_alltime_inv_total' => round(array_sum($alltime_inv_monthly), 2),
+            'dash_alltime_pmt_total' => round(array_sum($alltime_pmt_monthly), 2),
+            'alltime_inv_counts'     => $alltime_inv_counts,
+            'alltime_pmt_counts'     => $alltime_pmt_counts,
+            'dash_total_inv_volume'  => array_sum($alltime_inv_counts),
+            'dash_total_pmt_volume'  => array_sum($alltime_pmt_counts),
+            'latest_invoices'        => $latest_invoices,
+            'latest_payments'        => $latest_payments,
+            'dash_currency_sign'     => $dash_currency_sign,
+            'dash_currency_position' => $dash_currency_position,
+            'chart_last12_by_curr'   => $chart_last12_by_curr,
+            'chart_data_by_curr'     => $chart_data_by_curr,
+            'annual_totals_by_curr'  => $annual_totals_by_curr,
+        ];
+        if (! is_dir($_dash_cache_dir)) {
+            @mkdir($_dash_cache_dir, 0755, true);
+        }
+        @file_put_contents($_dash_cache_file, json_encode($_dash_payload), LOCK_EX);
+        // Remove stale cache files for this domain (previous hour buckets)
+        foreach (glob($_dash_cache_dir . '/dash_' . (int) $domain_id . '_*.json') ?: [] as $_f) {
+            if (realpath($_f) !== realpath($_dash_cache_file)) {
+                @unlink($_f);
+            }
+        }
+        unset($_dash_payload, $_f);
+    }
+
+} // end if (!$_dash_from_cache)
+
+$bladeView->assign('pageActive', 'dashboard');
+$bladeView->assign('active_tab', '#home');

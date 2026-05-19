@@ -26,8 +26,10 @@ $get_format = $_GET['format'];
 $get_file_type = $_GET['filetype'];
 
 
-$biller = getBiller($_GET['biller_id']);
-$customer = getCustomer($_GET['customer_id']);
+$biller = getBiller((int)$_GET['biller_id']);
+$customer = getCustomer((int)$_GET['customer_id']);
+si_check_record_access($biller);
+si_check_record_access($customer);
 
 #create PDF name
       
@@ -71,12 +73,12 @@ else if ($_GET['stage'] == 3 ) {
 	$message = "How did you get here :)";
 }
 
-$smarty -> assign('message', $message);
-$smarty -> assign('biller',$biller);
-$smarty -> assign('customer',$customer);
-$smarty -> assign('invoice',$invoice);
-$smarty -> assign('preferences',$preference);
+$bladeView -> assign('message', $message);
+$bladeView -> assign('biller',$biller);
+$bladeView -> assign('customer',$customer);
+$bladeView -> assign('invoice',$invoice);
+$bladeView -> assign('preferences',$preference);
 
-$smarty -> assign('pageActive', 'report');
-$smarty -> assign('active_tab', '#home');
+$bladeView -> assign('pageActive', 'report');
+$bladeView -> assign('active_tab', '#home');
 ?>

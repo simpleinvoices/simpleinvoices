@@ -21,11 +21,11 @@ checkLogin();
 
 $pageActive = "invoice";
 
-//$smarty -> assign("invoices",$invoices);
-$smarty -> assign("number_of_invoices",$number_of_invoices);
+//$bladeView -> assign("invoices",$invoices);
+$bladeView -> assign("number_of_invoices",$number_of_invoices);
 
-$smarty -> assign('pageActive', $pageActive);
-$smarty -> assign('active_tab', '#money');
+$bladeView -> assign('pageActive', $pageActive);
+$bladeView -> assign('active_tab', '#money');
 
 $having="";
 if(isset($_GET['having']))
@@ -34,4 +34,7 @@ if(isset($_GET['having']))
 }
 $url =  'index.php?module=invoices&view=xml'.$having;
 
-$smarty -> assign('url', $url);
+$bladeView -> assign('url', $url);
+
+$large_dataset = getDefaultLargeDataset();
+$bladeView -> assign('large_dataset', $large_dataset);

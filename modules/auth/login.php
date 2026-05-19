@@ -1,161 +1,191 @@
 <?php
-/*
-* Script: login.php
-* 	Login page
-*
-* License:
-*	 GPL v3 or above
-*/
 
 $menu = false;
-// we must never forget to start the session
-//so config.php works ok without using index.php define browse
-define("BROWSE","browse");
 
-Zend_Session::start();
-/*
-echo  substr($_SERVER['SCRIPT_FILENAME'], -9, 5);
-require_once 'include/init.php';
-*/
-// Create an in-memory SQLite database connection
-////require_once 'Zend/Db/Adapter/Pdo/Mysql.php';
-//$dbAdapter = new Zend_Db_Adapter_Pdo_Mysql(array('dbname' => ':memory:'));
-/*
-$dbAdapter = new Zend_Db_Adapter_Pdo_Mysql(array(
-    'host'     => $config->database->params->host,
-    'username' => $config->database->params->username,
-    'password' => $config->database->params->password,
-    'dbname'   => $config->database->params->dbname
-));
-*/
-/*
-$dbAdapter = Zend_Db::factory($config->database->adapter, array(
-    'host'     => $config->database->params->host,
-    'username' => $config->database->params->username,
-    'password' => $config->database->params->password,
-    'dbname'   => $config->database->params->dbname)
+require_once('./include/auth/password.php');
+
+$siBase = rtrim(str_replace('\\', '', dirname($_SERVER['PHP_SELF'])), '/');
+$errorMessage   = '';
+$registerError  = '';
+
+$cfgPublicReg = $config->authentication->allow_public_domain_registration ?? false;
+$publicRegistrationEnabled = (
+    $cfgPublicReg === true
+    || $cfgPublicReg === 1
+    || (is_string($cfgPublicReg) && in_array(strtolower(trim($cfgPublicReg)), ['1', 'true', 'yes', 'on'], true))
 );
-*/
 
-$errorMessage = '';
+$registerAllowed = $publicRegistrationEnabled
+    && !empty($install_tables_exists)
+    && function_exists('checkDataExists')
+    && checkDataExists(1);
 
-if (!empty($_POST['user']) && !empty($_POST['pass'])) 
-{
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'register') {
+    if (!$registerAllowed) {
+        $registerError = $LANG['denied_page'] ?? 'Registration is not available.';
+    } else {
+        $token         = (string) ($_POST['csrfprotectionbysr'] ?? '');
+        $sessionToken  = (string) ($_SESSION['register_csrf_token'] ?? '');
 
-////	require_once 'Zend/Auth/Adapter/DbTable.php';
+        if ($sessionToken === '' || !hash_equals($sessionToken, $token)) {
+            $registerError = $LANG['invalid_csrf'] ?? 'Invalid request. Please try again.';
+        } else {
+            require_once __DIR__ . '/../../include/auth/create_domain_administrator.php';
 
-	// Configure the instance with constructor parameters...
-	//$authAdapter = new Zend_Auth_Adapter_DbTable($dbAdapter, 'users', 'username', 'password');
+            $domain_name     = (string) ($_POST['domain_name'] ?? '');
+            $admin_email_reg = (string) ($_POST['admin_email'] ?? '');
+            $admin_password  = (string) ($_POST['admin_password'] ?? '');
+            $registration_language = isset($_POST['registration_language'])
+                ? trim((string) $_POST['registration_language'])
+                : '';
 
-	// ...or configure the instance with setter methods
-	$authAdapter = new Zend_Auth_Adapter_DbTable($zendDb);
+            $result = auth_try_create_domain_with_administrator(
+                $domain_name,
+                $admin_email_reg,
+                '',
+                $admin_password,
+                $registration_language !== '' ? $registration_language : null
+            );
 
-	$PatchesDone = getNumberOfDoneSQLPatches();
+            if ($result['success']) {
+                $user = auth_authenticate_staff_user($admin_email_reg, $admin_password);
 
-	//sql patch 161 changes user table name - need to accomodate
-	$user_table = ($PatchesDone < "161") ? "users" : "user";
-	$user_email = ($PatchesDone < "184") ? "user_email" : "email";
-	$user_password = ($PatchesDone < "184") ? "user_password" : "password";
+                if ($user) {
+                    session_regenerate_id(true);
 
-	$authAdapter->setTableName(TB_PREFIX.$user_table)
-				->setIdentityColumn($user_email)
-				->setCredentialColumn($user_password)
-				->setCredentialTreatment('MD5(?)');
+                    $auth_session->id        = (string) $user['id'];
+                    $auth_session->email     = (string) $user['email'];
+                    $auth_session->name      = (string) ($user['name'] ?? '');
+                    $auth_session->role_name = (string) ($user['role_name'] ?? '');
+                    $auth_session->domain_id = (string) ($user['domain_id'] ?? '1');
+                    $auth_session->user_id   = (string) ($user['user_id'] ?? '0');
+                    $auth_session->ui_language = trim((string) ($user['preferred_language'] ?? ''));
 
-    $userEmail   = $_POST['user'];
-    $password = $_POST['pass'];
+                    $newDomainId = (int) ($user['domain_id'] ?? 0);
+                    if ($newDomainId > 1 && !domainHasEssentialBootstrapData($newDomainId)) {
+                        require_once __DIR__ . '/../../include/install_workspace_bootstrap.php';
+                        $bootstrapLang = $registration_language !== ''
+                            ? si_normalize_registration_language($registration_language)
+                            : null;
+                        install_bootstrap_new_domain_essentials($newDomainId, $bootstrapLang);
+                    }
 
-	// Set the input credential values (e.g., from a login form)
-	$authAdapter->setIdentity($userEmail)
-	            ->setCredential($password);
+                    unset($_SESSION['register_csrf_token'], $_SESSION['login_csrf_token']);
 
-	// Perform the authentication query, saving the result
-	$result = $authAdapter->authenticate();
+                    header('Location: ' . $siBase . '/index.php?module=index&view=index');
+                    exit;
+                }
 
-	if ($result->isValid()) {
-		
-		Zend_Session::start();
+                $registerError = 'Your organisation was created but sign-in failed. Please try logging in with the same email and password.';
+            } else {
+                $registerError = (string) $result['error'];
+            }
+        }
+    }
+}
 
-		/*
-		* grab user data  from the database
-		*/
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'login') {
+    $token = (string) ($_POST['csrfprotectionbysr'] ?? '');
+    $sessionToken = (string) ($_SESSION['login_csrf_token'] ?? '');
 
-		//patch 147 adds user_role table - need to accomodate pre and post patch 147
-		if ( $PatchesDone < "147" ) {
-			$result = $zendDb->fetchRow("
-				SELECT 
-					u.user_id AS id, u.user_email, u.user_name
-				FROM 
-					".TB_PREFIX."users u
-				WHERE 
-					user_email = ?", $userEmail
-			);
-			$result['role_name']="administrator";
+    if ($sessionToken === '' || !hash_equals($sessionToken, $token)) {
+        $errorMessage = $LANG['invalid_csrf'] ?? 'Invalid request. Please try again.';
+    } else {
+        $email    = trim((string) ($_POST['user'] ?? ''));
+        $password = (string) ($_POST['pass'] ?? '');
+        $user     = auth_authenticate_staff_user($email, $password);
 
-		} elseif ( $PatchesDone < "184" ) {
-			$result = $zendDb->fetchRow("
-				SELECT 
-					u.user_id AS id, u.user_email, u.user_name, r.name AS role_name, u.user_domain_id
-				FROM 
-					".TB_PREFIX."user u 
-					LEFT JOIN ".TB_PREFIX."user_role r ON (u.user_role_id = r.id)
-				WHERE 
-					u.user_email = ?", $userEmail
-			);
+        if ($user) {
+            session_regenerate_id(true);
 
-		} elseif ( $PatchesDone < "292" ) {
-			$result = $zendDb->fetchRow("
-				SELECT 
-					u.id, u.email, r.name AS role_name, u.domain_id, 0 AS user_id
-				FROM 
-					".TB_PREFIX."user u 
-					LEFT JOIN ".TB_PREFIX."user_role r ON (u.role_id = r.id)
-				WHERE 
-					u.email = ? AND u.enabled = '".ENABLED."'", $userEmail
-			);
+            if (isset($_POST['ui_language'])) {
+                $selectedLang = trim((string) $_POST['ui_language']);
+                if ($selectedLang !== '' && si_lang_folder_exists($selectedLang)) {
+                    dbQuery(
+                        'UPDATE ' . TB_PREFIX . 'user SET preferred_language = :pl WHERE id = :id AND domain_id = :d',
+                        ':pl', $selectedLang,
+                        ':id', (int) $user['id'],
+                        ':d', (int) ($user['domain_id'] ?? 1)
+                    );
+                    $auth_session->ui_language = $selectedLang;
+                } else {
+                    dbQuery(
+                        'UPDATE ' . TB_PREFIX . 'user SET preferred_language = NULL WHERE id = :id AND domain_id = :d',
+                        ':id', (int) $user['id'],
+                        ':d', (int) ($user['domain_id'] ?? 1)
+                    );
+                    $auth_session->ui_language = '';
+                }
+            } else {
+                $auth_session->ui_language = trim((string) ($user['preferred_language'] ?? ''));
+            }
 
-		// Customer / Biller User ID available on and after Patch 292
-		} else {
-			$result = $zendDb->fetchRow("
-				SELECT 
-					u.id, u.email, r.name AS role_name, u.domain_id, u.user_id
-				FROM 
-					".TB_PREFIX."user u 
-					LEFT JOIN ".TB_PREFIX."user_role r ON (u.role_id = r.id)
-				WHERE 
-					u.email = ? AND u.enabled = '".ENABLED."'", $userEmail
-			);
-		}		
-		/*
-		* chuck the user details sans password into the Zend_auth session
-		*/
-		$authNamespace = new Zend_Session_Namespace('Zend_Auth');
-		$authNamespace->setExpirationSeconds(60 * 60);
-		foreach ($result as $key => $value)
-		{
-			$authNamespace->$key = $value;
+            $auth_session->id        = (string) $user['id'];
+            $auth_session->email     = (string) $user['email'];
+            $auth_session->name      = (string) ($user['name'] ?? '');
+            $auth_session->role_name = (string) ($user['role_name'] ?? '');
+            $auth_session->domain_id = (string) ($user['domain_id'] ?? '1');
+            $auth_session->user_id   = (string) ($user['user_id'] ?? '0');
+
+            $loginDomainId = (int) ($user['domain_id'] ?? 0);
+            if ($loginDomainId > 1 && !domainHasEssentialBootstrapData($loginDomainId)) {
+                require_once __DIR__ . '/../../include/install_workspace_bootstrap.php';
+                install_bootstrap_new_domain_essentials($loginDomainId);
+            }
+
+            unset($_SESSION['login_csrf_token']);
+
+            if (($user['role_name'] ?? '') === 'customer' && (int) ($user['user_id'] ?? 0) > 0) {
+                header('Location: ' . $siBase . '/index.php?module=invoices&view=manage');
+            } else {
+                header('Location: ' . $siBase . '/index.php?module=index&view=index');
+            }
+            exit;
+        }
+
+        $errorMessage = $LANG['invalid_login'] ?? 'Invalid email or password.';
+    }
+}
+
+$loginCsrfToken = bin2hex(random_bytes(16));
+$_SESSION['login_csrf_token'] = $loginCsrfToken;
+
+$registerCsrfToken = bin2hex(random_bytes(16));
+$_SESSION['register_csrf_token'] = $registerCsrfToken;
+
+$registerTabActive = ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'register');
+
+$registrationLangList = getLanguageList();
+if (is_array($registrationLangList)) {
+	usort(
+		$registrationLangList,
+		static function ($a, $b) {
+			return strcasecmp((string) ($a->name ?? ''), (string) ($b->name ?? ''));
 		}
+	);
+}
 
-		if ($authNamespace->role_name == 'customer' && $authNamespace->user_id > 0) {
-			header('Location: index.php?module=customers&view=details&action=view&id='.$authNamespace->user_id);
-		} else {
-			header('Location: .');
-		}
-
-	} else {
-	
-        $errorMessage = 'Sorry, wrong user / password';
-	
+$bladeView->assign('registrationLanguageList', $registrationLangList ?? []);
+$registrationAvailableCodes = [];
+foreach ($registrationLangList ?? [] as $entry) {
+	if (isset($entry->shortname) && (string) $entry->shortname !== '') {
+		$registrationAvailableCodes[] = (string) $entry->shortname;
 	}
-
 }
+$bladeView->assign(
+	'registrationLanguageDefault',
+	si_pick_ui_language_from_browser($registrationAvailableCodes, 'en_US')
+);
 
-if($_POST['action'] == 'login' && (empty($_POST['user']) OR empty($_POST['pass'])))
-{
+$bladeView->assign('languageList', $registrationLangList ?? []);
+$bladeView->assign(
+	'loginLanguageDefault',
+	si_pick_ui_language_from_browser($registrationAvailableCodes, 'en_GB')
+);
 
-        $errorMessage = 'Username and password required';
-}
-
-// No translations for login since user's lang not known as yet
-$smarty->assign("errorMessage",$errorMessage);
-?>
+$bladeView->assign('loginCsrfToken', $loginCsrfToken);
+$bladeView->assign('registerCsrfToken', $registerCsrfToken);
+$bladeView->assign('errorMessage', $errorMessage);
+$bladeView->assign('registerError', $registerError);
+$bladeView->assign('registerAllowed', $registerAllowed);
+$bladeView->assign('registerTabActive', $registerTabActive);

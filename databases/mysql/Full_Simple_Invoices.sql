@@ -16,10 +16,6 @@ CREATE TABLE IF NOT EXISTS `si_biller` (
   `email` varchar(255) DEFAULT NULL,
   `logo` varchar(255) DEFAULT NULL,
   `footer` text,
-  `paypal_business_name` varchar(255) DEFAULT NULL,
-  `paypal_notify_url` varchar(255) DEFAULT NULL,
-  `paypal_return_url` varchar(255) DEFAULT NULL,
-  `eway_customer_id` varchar(255) DEFAULT NULL,
   `paymentsgateway_api_id` varchar(255) DEFAULT NULL,
   `notes` text,
   `custom_field1` varchar(255) DEFAULT NULL,
@@ -27,14 +23,47 @@ CREATE TABLE IF NOT EXISTS `si_biller` (
   `custom_field3` varchar(255) DEFAULT NULL,
   `custom_field4` varchar(255) DEFAULT NULL,
   `enabled` TINYINT(1) DEFAULT 1 NOT NULL,
-  PRIMARY KEY (`domain_id`,`id`)
-) ENGINE=MyISAM;
+  `stripe_secret_key` text DEFAULT NULL,
+  `stripe_webhook_secret` text DEFAULT NULL,
+  `stripe_test_mode` TINYINT(1) NOT NULL DEFAULT 1,
+  `paypal_client_id` varchar(255) DEFAULT NULL,
+  `paypal_client_secret` text DEFAULT NULL,
+  `paypal_test_mode` TINYINT(1) NOT NULL DEFAULT 1,
+  `mollie_api_key` text DEFAULT NULL,
+  `authorizenet_login_id` text DEFAULT NULL,
+  `authorizenet_transaction_key` text DEFAULT NULL,
+  `authorizenet_signature_key` text DEFAULT NULL,
+  `authorizenet_test_mode` TINYINT(1) NOT NULL DEFAULT 1,
+  `eway_api_key` text DEFAULT NULL,
+  `eway_api_password` text DEFAULT NULL,
+  `eway_test_mode` TINYINT(1) NOT NULL DEFAULT 1,
+  `kofi_username` varchar(100) DEFAULT NULL,
+  `coinbase_api_key` text DEFAULT NULL,
+  `coinbase_webhook_secret` text DEFAULT NULL,
+  `adyen_api_key` text DEFAULT NULL,
+  `adyen_merchant_account` varchar(255) DEFAULT NULL,
+  `adyen_hmac_key` text DEFAULT NULL,
+  `adyen_live_prefix` varchar(100) DEFAULT NULL,
+  `adyen_test_mode` TINYINT(1) NOT NULL DEFAULT 1,
+  `bank_account_name` varchar(255) DEFAULT NULL,
+  `bank_name` varchar(255) DEFAULT NULL,
+  `bank_swift_bic` varchar(50) DEFAULT NULL,
+  `bank_account_number` varchar(100) DEFAULT NULL,
+  `bank_routing_sort_code` varchar(50) DEFAULT NULL,
+  `tax_id_name_1` varchar(255) DEFAULT NULL,
+  `tax_id_label_1` varchar(255) DEFAULT NULL,
+  `tax_id_name_2` varchar(255) DEFAULT NULL,
+  `tax_id_label_2` varchar(255) DEFAULT NULL,
+  `biller_invoice_prefix` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`domain_id`,`id`),
+  KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO `si_biller` (`id`, `domain_id`, `name`, `street_address`, `street_address2`, `city`, `state`, `zip_code`, `country`, `phone`, `mobile_phone`, `fax`, `email`, `logo`, `footer`, `paypal_business_name`, `paypal_notify_url`, `paypal_return_url`, `eway_customer_id`, `paymentsgateway_api_id`, `notes`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `enabled`) VALUES
- (1, 1, 'Mr Plough', '43 Evergreen Terace', '', 'Springfield', 'NY', '90245', '', '04 5689 0456', '0456 4568 8966', '04 5689 8956', 'homer@mrplough.com', 'ubuntulogo.png', '', '', '', '', '', '', '', '', '', '7898-87987-87', '', '1')
-,(2, 1, 'Homer Simpson', '43 Evergreen Terace', NULL, 'Springfield', 'NY', '90245', NULL, '04 5689 0456', '0456 4568 8966', '04 5689 8956', 'homer@yahoo.com', NULL, NULL, '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '1')
-,(3, 1, 'The Beer Baron', '43 Evergreen Terace', NULL, 'Springfield', 'NY', '90245', NULL, '04 5689 0456', '0456 4568 8966', '04 5689 8956', 'beerbaron@yahoo.com', NULL, NULL, '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '1')
-,(4, 1, 'Fawlty Towers', '13 Seaside Drive', NULL, 'Torquay', 'Brixton on Avon', '65894', 'United Kingdom', '089 6985 4569', '0425 5477 8789', '089 6985 4568', 'penny@fawltytowers.co.uk', NULL, NULL, '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '1');
+INSERT INTO `si_biller` (`id`, `domain_id`, `name`, `street_address`, `street_address2`, `city`, `state`, `zip_code`, `country`, `phone`, `mobile_phone`, `fax`, `email`, `logo`, `footer`, `paymentsgateway_api_id`, `notes`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `enabled`) VALUES
+ (1, 1, 'Mr Plough', '43 Evergreen Terace', '', 'Springfield', 'NY', '90245', '', '04 5689 0456', '0456 4568 8966', '04 5689 8956', 'homer@mrplough.com', 'ubuntulogo.png', '', '', '', '', '', '7898-87987-87', '', '1')
+,(2, 1, 'Homer Simpson', '43 Evergreen Terace', NULL, 'Springfield', 'NY', '90245', NULL, '04 5689 0456', '0456 4568 8966', '04 5689 8956', 'homer@yahoo.com', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '1')
+,(3, 1, 'The Beer Baron', '43 Evergreen Terace', NULL, 'Springfield', 'NY', '90245', NULL, '04 5689 0456', '0456 4568 8966', '04 5689 8956', 'beerbaron@yahoo.com', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '1')
+,(4, 1, 'Fawlty Towers', '13 Seaside Drive', NULL, 'Torquay', 'Brixton on Avon', '65894', 'United Kingdom', '089 6985 4569', '0425 5477 8789', '089 6985 4568', 'penny@fawltytowers.co.uk', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '1');
 
 CREATE TABLE IF NOT EXISTS `si_cron` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -106,6 +135,10 @@ CREATE TABLE IF NOT EXISTS `si_customers` (
   `custom_field2` varchar(255) DEFAULT NULL,
   `custom_field3` varchar(255) DEFAULT NULL,
   `custom_field4` varchar(255) DEFAULT NULL,
+  `tax_id_name_1` varchar(255) DEFAULT NULL,
+  `tax_id_label_1` varchar(255) DEFAULT NULL,
+  `tax_id_name_2` varchar(255) DEFAULT NULL,
+  `tax_id_label_2` varchar(255) DEFAULT NULL,
   `enabled` TINYINT(1) DEFAULT 1 NOT NULL,
   PRIMARY KEY (`domain_id`,`id`)
 ) ENGINE=MyISAM;
@@ -127,6 +160,12 @@ CREATE TABLE IF NOT EXISTS `si_extensions` (
 INSERT INTO `si_extensions` (`id`, `domain_id`, `name`, `description`, `enabled`) VALUES
  (1, 0, 'core', 'Core part of Simple Invoices - always enabled', '1');
 
+CREATE TABLE IF NOT EXISTS `si_global_config` (
+  `name` varchar(64) NOT NULL,
+  `value` text,
+  PRIMARY KEY (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 CREATE TABLE IF NOT EXISTS `si_index` (
   `id` int(11) NOT NULL,
   `node` varchar(255) NOT NULL,
@@ -136,7 +175,7 @@ CREATE TABLE IF NOT EXISTS `si_index` (
 ) ENGINE=MyISAM;
 
 INSERT INTO `si_index` (`id`, `node`, `sub_node`, `sub_node_2`, `domain_id`) VALUES
- (1, 'invoice', '1', '', 1);
+ (1, 'invoice', '1', '0', 1);
 
 CREATE TABLE IF NOT EXISTS `si_inventory` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -181,7 +220,8 @@ CREATE TABLE IF NOT EXISTS `si_invoice_items` (
   `attribute` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `invoice_id` (`invoice_id`),
-  KEY `DomainInv` (`invoice_id`, `domain_id`)
+  KEY `DomainInv` (`invoice_id`, `domain_id`),
+  KEY `si_ii_dom_invoice` (`domain_id`, `invoice_id`)
 ) ENGINE=MyISAM;
 
 INSERT INTO `si_invoice_items` (`id`, `invoice_id`, `domain_id`, `quantity`, `product_id`, `unit_price`, `tax_amount`, `gross_total`, `description`, `total`) VALUES
@@ -199,8 +239,31 @@ CREATE TABLE IF NOT EXISTS `si_invoice_type` (
 
 INSERT INTO `si_invoice_type` (`inv_ty_id`, `inv_ty_description`) VALUES
  (1, 'Total')
-,(2, 'Itemised')
-,(3, 'Consulting');
+,(2, 'Itemised');
+
+CREATE TABLE IF NOT EXISTS `si_payment_terms` (
+  `term_id` int(11) NOT NULL AUTO_INCREMENT,
+  `domain_id` int(11) NOT NULL DEFAULT '1',
+  `term_code` varchar(32) NOT NULL,
+  `term_label` varchar(120) NOT NULL,
+  `calc_kind` varchar(32) NOT NULL,
+  `param_int` int(11) DEFAULT NULL,
+  `sort_order` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`term_id`),
+  UNIQUE KEY `term_domain_code` (`domain_id`, `term_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT IGNORE INTO `si_payment_terms` (`term_id`, `domain_id`, `term_code`, `term_label`, `calc_kind`, `param_int`, `sort_order`) VALUES
+ (1,  1, 'NET_7',     'Net 7',                                'NET_DAYS', 7,    10)
+,(2,  1, 'NET_10',    'Net 10',                               'NET_DAYS', 10,   20)
+,(3,  1, 'NET_14',    'Net 14',                               'NET_DAYS', 14,   30)
+,(4,  1, 'NET_30',    'Net 30',                               'NET_DAYS', 30,   40)
+,(5,  1, 'NET_60',    'Net 60',                               'NET_DAYS', 60,   50)
+,(6,  1, 'NET_90',    'Net 90',                               'NET_DAYS', 90,   60)
+,(7,  1, 'EOM',       'End of month (EOM)',                   'EOM',      NULL, 70)
+,(8,  1, 'NET_30_EOM','Net 30 EOM (EOM + 30 days)',           'EOM_PLUS_DAYS', 30, 80)
+,(9,  1, 'EOM_45',    '45 EOM (45 days after month end)',     'EOM_PLUS_DAYS', 45, 90)
+,(10, 1, 'MFI_15',    '15 MFI (15th of month following invoice)', 'MFI_DAY', 15, 100);
 
 CREATE TABLE IF NOT EXISTS `si_invoices` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
@@ -216,12 +279,32 @@ CREATE TABLE IF NOT EXISTS `si_invoices` (
   `custom_field3` varchar(50) DEFAULT NULL,
   `custom_field4` varchar(50) DEFAULT NULL,
   `note` text,
+  `payment_term_id` int(11) DEFAULT NULL,
+  `due_date` date DEFAULT NULL,
+  `currency_sign` varchar(50) DEFAULT NULL,
+  `denorm_currency_code` varchar(10) DEFAULT NULL,
+  `denorm_currency_locale` varchar(32) DEFAULT NULL,
+  `currency_id` int(11) DEFAULT NULL,
+  `denorm_invoice_total` decimal(25,6) NOT NULL DEFAULT 0,
+  `denorm_amount_paid` decimal(25,6) NOT NULL DEFAULT 0,
+  `denorm_amount_owing` decimal(25,6) NOT NULL DEFAULT 0,
+  `denorm_biller_name` varchar(255) NOT NULL DEFAULT '',
+  `denorm_customer_name` varchar(255) NOT NULL DEFAULT '',
+  `denorm_index_name` varchar(255) NOT NULL DEFAULT '',
+  `denorm_index_id` varchar(255) NOT NULL DEFAULT '',
+  `denorm_preference_description` varchar(255) NOT NULL DEFAULT '',
+  `denorm_preference_status` smallint NOT NULL DEFAULT 0,
   PRIMARY KEY (`domain_id`,`id`),
   KEY `domain_id` (`domain_id`),
   KEY `biller_id` (`biller_id`),
   KEY `customer_id` (`customer_id`),
   KEY `UniqDIB` (`index_id`, `preference_id`, `biller_id`, `domain_id`), 
-  KEY `IdxDI` (`index_id`, `preference_id`, `domain_id`)
+  KEY `IdxDI` (`index_id`, `preference_id`, `domain_id`),
+  KEY `si_inv_dom_pref_date` (`domain_id`, `preference_id`, `date`),
+  KEY `si_inv_dom_cust` (`domain_id`, `customer_id`),
+  KEY `si_inv_dom_biller` (`domain_id`, `biller_id`),
+  KEY `si_inv_dom_idxid` (`domain_id`, `index_id`),
+  KEY `si_inv_dom_pstat_owing` (`domain_id`, `denorm_preference_status`, `denorm_amount_owing`)
 ) ENGINE=MyISAM;
 
 INSERT INTO `si_invoices` (`id`, `index_id`, `domain_id`, `biller_id`, `customer_id`, `type_id`, `preference_id`, `date`, `custom_field1`, `custom_field2`, `custom_field3`, `custom_field4`, `note`) VALUES
@@ -246,10 +329,18 @@ CREATE TABLE IF NOT EXISTS `si_payment` (
   `ac_payment_type` int(10) NOT NULL DEFAULT '1',
   `domain_id` int(11) NOT NULL,
   `online_payment_id` varchar(255) DEFAULT NULL,
+  `denorm_invoice_index_name` varchar(255) NOT NULL DEFAULT '',
+  `denorm_biller_name` varchar(255) NOT NULL DEFAULT '',
+  `denorm_customer_name` varchar(255) NOT NULL DEFAULT '',
+  `denorm_currency_sign` varchar(50) NOT NULL DEFAULT '',
+  `denorm_currency_code` varchar(10) NOT NULL DEFAULT '',
+  `denorm_currency_locale` varchar(32) NOT NULL DEFAULT '',
   PRIMARY KEY (`domain_id`,`id`),
   KEY `domain_id` (`domain_id`),
   KEY `ac_inv_id` (`ac_inv_id`),
-  KEY `ac_amount` (`ac_amount`)
+  KEY `ac_amount` (`ac_amount`),
+  KEY `si_pay_dom_ac_date` (`domain_id`, `ac_date`),
+  KEY `si_pay_dom_ac_inv` (`domain_id`, `ac_inv_id`)
 ) ENGINE=MyISAM;
 
 CREATE TABLE IF NOT EXISTS `si_payment_types` (
@@ -264,36 +355,102 @@ INSERT INTO `si_payment_types` (`pt_id`, `domain_id`, `pt_description`, `pt_enab
  (1, 1, 'Cash', '1')
 ,(2, 1, 'Credit Card', '1');
 
+CREATE TABLE IF NOT EXISTS `si_currency` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `domain_id` int(11) NOT NULL DEFAULT '1',
+  `currency_code` varchar(10) NOT NULL DEFAULT '',
+  `currency_sign` varchar(50) NOT NULL DEFAULT '',
+  `currency_position` varchar(25) NOT NULL DEFAULT 'left',
+  `is_default` TINYINT(1) NOT NULL DEFAULT 0,
+  `enabled` TINYINT(1) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`),
+  KEY `idx_domain` (`domain_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `si_currency` (`id`, `domain_id`, `currency_code`, `currency_sign`, `currency_position`, `is_default`, `enabled`) VALUES
+(1,  1, 'USD', '$',   'left',  1, 1),
+(2,  1, 'CAD', 'C$',  'left',  0, 1),
+(3,  1, 'AUD', 'A$',  'left',  0, 1),
+(4,  1, 'NZD', 'NZ$', 'left',  0, 1),
+(5,  1, 'MXN', 'MX$', 'left',  0, 1),
+(6,  1, 'BRL', 'R$',  'right', 0, 1),
+(7,  1, 'SGD', 'S$',  'left',  0, 1),
+(8,  1, 'EUR', '€',   'right', 0, 1),
+(9,  1, 'GBP', '£',   'left',  0, 1),
+(10, 1, 'CHF', 'CHF', 'right', 0, 1),
+(11, 1, 'SEK', 'kr',  'right', 0, 1),
+(12, 1, 'DKK', 'kr',  'right', 0, 1),
+(13, 1, 'NOK', 'kr',  'right', 0, 1),
+(14, 1, 'PLN', 'zł',  'right', 0, 1),
+(15, 1, 'CZK', 'Kč',  'right', 0, 1),
+(16, 1, 'HUF', 'Ft',  'right', 0, 1),
+(17, 1, 'RON', 'lei', 'right', 0, 1),
+(18, 1, 'BGN', 'лв',  'right', 0, 1),
+(19, 1, 'TRY', '₺',   'left',  0, 1),
+(20, 1, 'RSD', 'дин.','right', 0, 1),
+(21, 1, 'RUB', '₽',   'right', 0, 1),
+(22, 1, 'CNY', '¥',   'left',  0, 1),
+(23, 1, 'JPY', '¥',   'left',  0, 1),
+(24, 1, 'TWD', 'NT$', 'left',  0, 1),
+(25, 1, 'HKD', 'HK$', 'left',  0, 1),
+(26, 1, 'INR', '₹',   'left',  0, 1),
+(27, 1, 'IDR', 'Rp',  'right', 0, 1),
+(28, 1, 'VND', '₫',   'right', 0, 1),
+(29, 1, 'ILS', '₪',   'left',  0, 1),
+(30, 1, 'SAR', '﷼',   'left',  0, 1),
+(31, 1, 'ZAR', 'R',   'right', 0, 1),
+(32, 1, 'BTC', '₿',   'left',  0, 1),
+(33, 1, 'ETH', 'Ξ',   'left',  0, 1),
+(34, 1, 'KRW', '₩',   'left',  0, 1),
+(35, 1, 'LTC', 'Ł',   'left',  0, 1),
+(36, 1, 'ADA', '₳',   'left',  0, 1),
+(37, 1, 'XRP', 'XRP', 'left',  0, 1),
+(38, 1, 'SOL', 'SOL', 'left',  0, 1),
+(39, 1, 'BNB', 'BNB', 'left',  0, 1),
+(40, 1, 'USDT','USDT','left',  0, 1),
+(41, 1, 'USDC','USDC','left',  0, 1),
+(42, 1, 'DOGE','DOGE','left',  0, 1);
+
 CREATE TABLE IF NOT EXISTS `si_preferences` (
   `pref_id` int(11) NOT NULL AUTO_INCREMENT,
   `domain_id` int(11) NOT NULL DEFAULT '1',
-  `pref_description` varchar(50) DEFAULT NULL,
-  `pref_currency_sign` varchar(50) DEFAULT NULL,
-  `pref_inv_heading` varchar(50) DEFAULT NULL,
-  `pref_inv_wording` varchar(50) DEFAULT NULL,
-  `pref_inv_detail_heading` varchar(50) DEFAULT NULL,
+  `pref_description` varchar(255) DEFAULT NULL,
+  `pref_inv_heading` varchar(255) DEFAULT NULL,
+  `pref_inv_wording` varchar(255) DEFAULT NULL,
+  `pref_inv_detail_heading` varchar(255) DEFAULT NULL,
   `pref_inv_detail_line` text,
-  `pref_inv_payment_method` varchar(50) DEFAULT NULL,
-  `pref_inv_payment_line1_name` varchar(50) DEFAULT NULL,
-  `pref_inv_payment_line1_value` varchar(50) DEFAULT NULL,
-  `pref_inv_payment_line2_name` varchar(50) DEFAULT NULL,
-  `pref_inv_payment_line2_value` varchar(50) DEFAULT NULL,
+  `pref_inv_payment_method` varchar(255) DEFAULT NULL,
+  `pref_inv_payment_line1_name` varchar(255) DEFAULT NULL,
+  `pref_inv_payment_line1_value` varchar(255) DEFAULT NULL,
+  `pref_inv_payment_line2_name` varchar(255) DEFAULT NULL,
+  `pref_inv_payment_line2_value` varchar(255) DEFAULT NULL,
   `pref_enabled` TINYINT(1) DEFAULT 1 NOT NULL,
   `status` TINYINT(1) NOT NULL,
   `locale` varchar(255) DEFAULT NULL,
   `language` varchar(255) DEFAULT NULL,
   `index_group` int(11) NOT NULL,
-  `currency_code` varchar(25) DEFAULT NULL,
+  `currency_id` int(11) DEFAULT NULL,
   `include_online_payment` varchar(255) DEFAULT NULL,
-  `currency_position` varchar(25) DEFAULT NULL,
-  PRIMARY KEY (`domain_id`,`pref_id`)
-) ENGINE=MyISAM;
+  `payment_term_id` int(11) DEFAULT NULL,
+  `pref_inv_payment_line0_name` varchar(255) DEFAULT NULL,
+  `pref_inv_payment_line0_value` varchar(255) DEFAULT NULL,
+  `pref_inv_payment_line3_name` varchar(255) DEFAULT NULL,
+  `pref_inv_payment_line3_value` varchar(255) DEFAULT NULL,
+  `pref_inv_payment_line4_name` varchar(255) DEFAULT NULL,
+  `pref_inv_payment_line4_value` varchar(255) DEFAULT NULL,
+  `pref_inv_payment_line5_name` varchar(255) DEFAULT NULL,
+  `pref_inv_payment_line5_value` varchar(255) DEFAULT NULL,
+  `pref_invoice_id_prefix` varchar(50) DEFAULT NULL,
+  `pref_invoice_id_format` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`domain_id`,`pref_id`),
+  KEY `pref_id` (`pref_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO `si_preferences` (`pref_id`, `domain_id`, `pref_description`, `pref_currency_sign`, `pref_inv_heading`, `pref_inv_wording`, `pref_inv_detail_heading`, `pref_inv_detail_line`, `pref_inv_payment_method`, `pref_inv_payment_line1_name`, `pref_inv_payment_line1_value`, `pref_inv_payment_line2_name`, `pref_inv_payment_line2_value`, `pref_enabled`, `status`, `locale`, `language`, `index_group`, `currency_code`, `include_online_payment`, `currency_position`) VALUES
- (1, 1, 'Invoice', '$', 'Invoice', 'Invoice', 'Details', 'Payment is to be made within 14 days of the invoice being sent', 'Electronic Funds Transfer', 'Account name', 'H. & M. Simpson', 'Account number:', '0123-4567-7890', '1', 1, 'en_GB', 'en_GB', 1, 'USD', NULL, 'left')
-,(2, 1, 'Receipt', '$', 'Receipt', 'Receipt', 'Details', '<br />This transaction has been paid in full, please keep this receipt as proof of purchase.<br /> Thank you', '', '', '', '', '', '1', 1, 'en_GB', 'en_GB', 1, 'USD', NULL, 'left')
-,(3, 1, 'Estimate', '$', 'Estimate', 'Estimate', 'Details', '<br />This is an estimate of the final value of services rendered.<br />Thank you', '', '', '', '', '', '1', 0, 'en_GB', 'en_GB', 1, 'USD', NULL, 'left')
-,(4, 1, 'Quote', '$', 'Quote', 'Quote', 'Details', '<br />This is a quote of the final value of services rendered.<br />Thank you', '', '', '', '', '', '1', 0, 'en_GB', 'en_GB', 1, 'USD', NULL, 'left');
+INSERT INTO `si_preferences` (`pref_id`, `domain_id`, `pref_description`, `pref_inv_heading`, `pref_inv_wording`, `pref_inv_detail_heading`, `pref_inv_detail_line`, `pref_inv_payment_method`, `pref_inv_payment_line1_name`, `pref_inv_payment_line1_value`, `pref_inv_payment_line2_name`, `pref_inv_payment_line2_value`, `pref_enabled`, `status`, `locale`, `language`, `index_group`, `currency_id`, `include_online_payment`, `payment_term_id`, `pref_inv_payment_line0_name`, `pref_inv_payment_line0_value`, `pref_inv_payment_line3_name`, `pref_inv_payment_line3_value`, `pref_inv_payment_line4_name`, `pref_inv_payment_line4_value`, `pref_inv_payment_line5_name`, `pref_inv_payment_line5_value`, `pref_invoice_id_prefix`, `pref_invoice_id_format`) VALUES
+ (1, 1, 'Invoice', 'Invoice', 'Invoice', 'Details', 'Payment is to be made within 14 days of the invoice being sent', 'Electronic Funds Transfer', '{lang.account_name}', '{biller.bank_account_name}', '{lang.account_number}', '{biller.bank_account_number}', '1', 1, 'en_GB', 'en_GB', 1, NULL, 0, NULL, '{lang.bank_name}', '{biller.bank_name}', '{lang.account_number}', '{biller.bank_account_number}', '{lang.swift_bic}', '{biller.bank_swift_bic}', '{lang.invoice_reference}', '{invoice.number}', NULL, NULL)
+ ,(2, 1, 'Receipt', 'Receipt', 'Receipt', 'Details', '<br />This transaction has been paid in full, please keep this receipt as proof of purchase.<br /> Thank you', '', '{lang.account_name}', '{biller.bank_account_name}', '{lang.account_number}', '{biller.bank_account_number}', '1', 1, 'en_GB', 'en_GB', 1, NULL, 0, NULL, '{lang.bank_name}', '{biller.bank_name}', '{lang.account_number}', '{biller.bank_account_number}', '{lang.swift_bic}', '{biller.bank_swift_bic}', '{lang.invoice_reference}', '{invoice.number}', NULL, NULL)
+ ,(3, 1, 'Estimate', 'Estimate', 'Estimate', 'Details', '<br />This is an estimate of the final value of services rendered.<br />Thank you', '', '{lang.account_name}', '{biller.bank_account_name}', '{lang.account_number}', '{biller.bank_account_number}', '1', 0, 'en_GB', 'en_GB', 1, NULL, 0, NULL, '{lang.bank_name}', '{biller.bank_name}', '{lang.account_number}', '{biller.bank_account_number}', '{lang.swift_bic}', '{biller.bank_swift_bic}', '{lang.invoice_reference}', '{invoice.number}', NULL, NULL)
+ ,(4, 1, 'Quote', 'Quote', 'Quote', 'Details', '<br />This is a quote of the final value of services rendered.<br />Thank you', '', '{lang.account_name}', '{biller.bank_account_name}', '{lang.account_number}', '{biller.bank_account_number}', '1', 0, 'en_GB', 'en_GB', 1, NULL, 0, NULL, '{lang.bank_name}', '{biller.bank_name}', '{lang.account_number}', '{biller.bank_account_number}', '{lang.swift_bic}', '{biller.bank_swift_bic}', '{lang.invoice_reference}', '{invoice.number}', NULL, NULL);
 
 CREATE TABLE IF NOT EXISTS `si_products` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -576,7 +733,7 @@ INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_rele
 ,(201,200,'Update extensions table','20090529','UPDATE si_extensions SET id = 0 WHERE name = core LIMIT 1')
 ,(202,201,'Set domain_id on system defaults table to 1','20090622','UPDATE si_system_defaults SET domain_id = 1')
 ,(203,202,'Set extension_id on system defaults table to 1','20090622','UPDATE si_system_defaults SET extension_id = 1')
-,(204,203,'Move all old consulting style invoices to itemised','20090704','UPDATE si_invoices SET type_id = 2 where type_id = 3')
+,(204,203,'Move all old consulting style invoices to itemised (consulting type removed)','20090704','DELETE FROM si_invoice_type WHERE inv_ty_id = 3 ; UPDATE si_invoices SET type_id = 2 where type_id = 3')
 ,(205,204,'','','')
 ,(206,205,'','','')
 ,(207,206,'','','')
@@ -666,7 +823,8 @@ INSERT INTO `si_sql_patchmanager`(`sql_id`,`sql_patch_ref`,`sql_patch`,`sql_rele
 ,(291,290,'','','')
 ,(292,291,'','','')
 ,(293,292,'','','')
-,(294,293,'Add department to the customers','20161004','ALTER TABLE `si_customers` ADD COLUMN `department` VARCHAR(255) NULL AFTER `name`');
+,(294,293,'Add department to the customers','20161004','ALTER TABLE `si_customers` ADD COLUMN `department` VARCHAR(255) NULL AFTER `name`')
+,(294,294,'Add name field to user table for display name','20260331','ALTER TABLE `si_user` ADD COLUMN `name` VARCHAR(255) NULL AFTER `email`');
 
 CREATE TABLE IF NOT EXISTS `si_system_defaults` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -683,28 +841,30 @@ INSERT INTO `si_system_defaults` (`id`, `name`, `value`, `domain_id`, `extension
 ,('2','customer','','1','1')
 ,('3','tax','1','1','1')
 ,('4','preference','1','1','1')
-,('5','line_items','5','1','1')
+,('5','line_items','2','1','1')
 ,('6','template','default','1','1')
 ,('7','payment_type','1','1','1')
 ,('8','language','en_GB','1','1')
 ,('9','dateformate','Y-m-d','1','1')
-,('10','spreadsheet','xls','1','1')
-,('11','wordprocessor','doc','1','1')
-,('12','pdfscreensize','800','1','1')
-,('13','pdfpapersize','A4','1','1')
-,('14','pdfleftmargin','15','1','1')
-,('15','pdfrightmargin','15','1','1')
-,('16','pdftopmargin','15','1','1')
-,('17','pdfbottommargin','15','1','1')
-,('18','emailhost','localhost','1','1')
-,('19','emailusername','','1','1')
-,('20','emailpassword','','1','1')
-,('21','logging','0','1','1')
-,('22','delete','N','1','1')
-,('23','tax_per_line_item','1','1','1')
-,('24','inventory','0','1','1')
-,('25','product_attributes','0','1','1')
-,('26','large_dataset','0','1','1');
+,('10','spreadsheet','xlsx','1','1')
+,('11','wordprocessor','docx','1','1')
+,('12','pdfpapersize','A4','1','1')
+,('13','pdfleftmargin','15','1','1')
+,('14','pdfrightmargin','15','1','1')
+,('15','pdftopmargin','15','1','1')
+,('16','pdfbottommargin','15','1','1')
+,('17','emailhost','localhost','1','1')
+,('18','emailusername','','1','1')
+,('19','emailpassword','','1','1')
+,('20','logging','0','1','1')
+,('21','delete','N','1','1')
+,('22','tax_per_line_item','1','1','1')
+,('23','inventory','0','1','1')
+,('24','product_attributes','0','1','1')
+,('25','large_dataset','0','1','1')
+,('26','precision','2','1','1')
+,('27','confirm_delete_line_item','0','1','1')
+,('28','export_template','export','1','1');
 
 CREATE TABLE IF NOT EXISTS `si_tax` (
   `tax_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -726,17 +886,21 @@ INSERT INTO `si_tax` (`tax_id`, `tax_description`, `tax_percentage`, `type`, `ta
 CREATE TABLE IF NOT EXISTS `si_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
   `role_id` int(11) DEFAULT NULL,
   `domain_id` int(11) NOT NULL DEFAULT '0',
   `password` varchar(64) DEFAULT NULL,
   `enabled` TINYINT(1) DEFAULT 1 NOT NULL,
   `user_id` int(11) NOT NULL DEFAULT '0',
+  `auth_staff_email` varchar(255) DEFAULT NULL,
+  `auth_customer_key` varchar(384) DEFAULT NULL,
   PRIMARY KEY (`domain_id`,`id`),
-  UNIQUE KEY `UnqEMailPwd` (`email`, `password`)
+  UNIQUE KEY `UnqAuthStaffEmail` (`auth_staff_email`),
+  UNIQUE KEY `UnqAuthCustomerKey` (`auth_customer_key`)
 ) ENGINE=MyISAM;
 
-INSERT INTO `si_user` (`id`, `email`, `role_id`, `domain_id`, `password`, `enabled`, `user_id`) VALUES
- (1, 'demo@simpleinvoices.org', 1, 1, 'fe01ce2a7fbac8fafaed7c982a04e229', 1, 0);
+INSERT INTO `si_user` (`id`, `email`, `role_id`, `domain_id`, `password`, `enabled`, `user_id`, `auth_staff_email`, `auth_customer_key`) VALUES
+ (1, 'demo@simpleinvoices.org', 1, 1, '$2y$12$prV4Dpbb4ukkI4IeCnEMAu75HdxwuRNpN/G/V2eDdrva2esCLqqCq', 1, 0, 'demo@simpleinvoices.org', NULL);
 
 CREATE TABLE IF NOT EXISTS `si_user_domain` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -763,4 +927,3 @@ INSERT INTO `si_user_role` (`id`, `name`) VALUES
 ,(5, 'customer')
 ,(6, 'biller')
 ,(7, 'viewer');
-

@@ -4,8 +4,8 @@
 checkLogin();
 
 $pageActive = "product_value_manage";
-$smarty->assign('pageActive', $pageActive);
-$smarty -> assign('active_tab', '#product');
+$bladeView->assign('pageActive', $pageActive);
+$bladeView -> assign('active_tab', '#product');
 
 
 ?>

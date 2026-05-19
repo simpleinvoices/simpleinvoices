@@ -1,0 +1,52 @@
+# S3-compatible object storage for biller logos (Garage)
+#
+# Usage:
+#   docker compose -f docker-compose.yml -f docker-compose.s3.yml up -d
+#   bash scripts/setup-garage.sh   # one-time setup
+#
+# Or set in your shell:
+#   export COMPOSE_FILE=docker-compose.yml:docker-compose.s3.yml
+#   docker compose up -d
+#
+# Required environment variables (add to your .env file):
+#   SI_S3_ENABLED=true
+#   SI_S3_ENDPOINT=http://garage:3900
+#   SI_S3_KEY=<from setup script output>
+#   SI_S3_SECRET=<from setup script output>
+#   SI_S3_BUCKET=si-biller-logos
+#   SI_S3_REGION=garage
+
+services:
+  simpleinvoices:
+    depends_on:
+      garage:
+        condition: service_healthy
+        required: false
+    environment:
+      - SI_S3_ENDPOINT=${SI_S3_ENDPOINT:-http://garage:3900}
+      - SI_S3_REGION=${SI_S3_REGION:-garage}
+
+  # Garage: lightweight S3-compatible object storage (Rust, AGPL 3.0)
+  # https://garagehq.deuxfleurs.fr
+  garage:
+    image: dxflrs/garage:v1.0.1
+    ports:
+      - "${GARAGE_S3_PORT:-3900}:3900"
+    environment:
+      - GARAGE_RPC_SECRET=${GARAGE_RPC_SECRET:-garage-rpc-secret-change-me}
+    volumes:
+      - garage_meta:/var/lib/garage/meta
+      - garage_data:/var/lib/garage/data
+    networks:
+      - simpleinvoices-net
+    healthcheck:
+      test: ["CMD", "garage", "status", "--check"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    restart: unless-stopped
+
+volumes:
+  garage_meta:
+  garage_data:

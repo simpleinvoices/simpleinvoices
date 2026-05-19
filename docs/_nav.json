@@ -1,0 +1,27 @@
+[
+  {
+    "text": "Guides",
+    "link": "/guide/getting-started",
+    "activeMatch": "^/guide/"
+  },
+  {
+    "text": "Features",
+    "link": "/features/free-open-source",
+    "activeMatch": "^/features/"
+  },
+  {
+    "text": "Help Topics",
+    "link": "/help/index",
+    "activeMatch": "^/help/"
+  },
+  {
+    "text": "Blog",
+    "link": "/blog/welcome-to-simple-invoices",
+    "activeMatch": "^/blog/"
+  },
+  {
+    "text": "Get Involved",
+    "link": "/get-involved/index",
+    "activeMatch": "^/get-involved/"
+  }
+]

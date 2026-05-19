@@ -24,12 +24,17 @@ $invoice_id = $_GET['id'];
 
 
 $invoice = getInvoice($invoice_id);
+si_check_invoice_access($invoice);
 $invoice_number_of_taxes = numberOfTaxesForInvoice($invoice_id);
 $invoice_type =  getInvoiceType($invoice['type_id']);
 
 $customer = getCustomer($invoice['customer_id']);
 $biller = getBiller($invoice['biller_id']);
 $preference = getPreference($invoice['preference_id']);
+$preference = InvoiceTokens::expandPreference($preference, $invoice, $biller, $customer, $LANG);
+if (!empty($biller['footer'])) {
+    $biller['footer'] = InvoiceTokens::expandString($biller['footer'], $invoice, $biller, $customer, $preference, $LANG);
+}
 $defaults = getSystemDefaults();
 
 $invoiceobj = new invoice();
@@ -44,7 +49,7 @@ else {
     $invoice_age ="";
 }
 
-	$url_for_pdf = "./index.php?module=export&view=pdf&id=" . $invoice['id'];
+	$url_for_pdf = './index.php?module=export&view=invoice&id=' . rawurlencode((string) $invoice['id']) . '&format=pdf';
         
 	$invoice['url_for_pdf'] = $url_for_pdf;
 
@@ -55,31 +60,31 @@ for($i=1;$i<=4;$i++) {
 }
 
 
-$sql = "SELECT * FROM ".TB_PREFIX."products_attributes";
-$sth =  dbQuery($sql);
+$sql = "SELECT * FROM ".TB_PREFIX."products_attributes WHERE domain_id = :domain_id";
+$sth = dbQuery($sql, ':domain_id', $auth_session->domain_id);
 $attributes = $sth->fetchAll();
-$smarty -> assign("attributes", $attributes);
+$bladeView -> assign("attributes", $attributes);
 //Customer accounts sections
 $customerAccount = null;
 $customerAccount['total'] = calc_customer_total($customer['id'],'',true);
 $customerAccount['paid'] = calc_customer_paid($customer['id'],'',true);
 $customerAccount['owing'] = $customerAccount['total'] - $customerAccount['paid'];
 
-$smarty -> assign('pageActive', 'invoice');
-$smarty -> assign('subPageActive', 'invoice_view');
-$smarty -> assign('active_tab', '#money');
-$smarty -> assign("customField",$customField);
-$smarty -> assign("customFieldLabels",$customFieldLabels);
-$smarty -> assign("invoice_age",$invoice_age);
-$smarty -> assign("invoice_number_of_taxes",$invoice_number_of_taxes);
-$smarty -> assign("invoiceItems",$invoiceItems);
-$smarty -> assign("defaults",$defaults);
-$smarty -> assign("preference",$preference);
-$smarty -> assign("biller",$biller);
-$smarty -> assign("customer",$customer);
-$smarty -> assign("invoice_type",$invoice_type);
-$smarty -> assign("invoice",$invoice);
-$smarty -> assign("wordprocessor",$config->export->wordprocessor);
-$smarty -> assign("spreadsheet",$config->export->spreadsheet);
-$smarty -> assign("customerAccount",$customerAccount);
+$bladeView -> assign('pageActive', 'invoice');
+$bladeView -> assign('subPageActive', 'invoice_view');
+$bladeView -> assign('active_tab', '#money');
+$bladeView -> assign("customField",$customField);
+$bladeView -> assign("customFieldLabels",$customFieldLabels);
+$bladeView -> assign("invoice_age",$invoice_age);
+$bladeView -> assign("invoice_number_of_taxes",$invoice_number_of_taxes);
+$bladeView -> assign("invoiceItems",$invoiceItems);
+$bladeView -> assign("defaults",$defaults);
+$bladeView -> assign("preference",$preference);
+$bladeView -> assign("biller",$biller);
+$bladeView -> assign("customer",$customer);
+$bladeView -> assign("invoice_type",$invoice_type);
+$bladeView -> assign("invoice",$invoice);
+$bladeView -> assign("wordprocessor", $defaults['wordprocessor'] ?? 'docx');
+$bladeView -> assign("spreadsheet", $defaults['spreadsheet'] ?? 'xlsx');
+$bladeView -> assign("customerAccount",$customerAccount);
 ?>

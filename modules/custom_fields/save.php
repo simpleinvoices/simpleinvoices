@@ -19,7 +19,7 @@
 checkLogin();
 
 # Deal with op and add some basic sanity checking
-$op = !empty( $_POST['op'] ) ? addslashes( $_POST['op'] ) : NULL;
+$op = $_POST['op'] ?? null;
 
 #edit custom field
 if (  $op === 'edit_custom_field' ) {
@@ -32,9 +32,11 @@ if (  $op === 'edit_custom_field' ) {
 			  AND domain_id = :domain_id";
 
 		// @formatter:on
-		if (dbQuery($sql, ':id', $_GET['id'], ':label', $_POST['cf_custom_label'], ':domain_id', $auth_session->domain_id)) {
+		if (dbQuery($sql, ':id', (int)$_GET['id'], ':label', $_POST['cf_custom_label'], ':domain_id', $auth_session->domain_id)) {
+			$saved = true;
 			$display_block =  $LANG['save_custom_field_success'];
 		} else {
+			$saved = false;
 			$display_block =  $LANG['save_custom_field_failure'];
 			global $dbh;
 			$display_block .=  end($dbh->errorInfo());
@@ -52,9 +54,10 @@ if (  $op === 'edit_custom_field' ) {
 
 $refresh_total = isset($refresh_total) ? $refresh_total : '&nbsp';
 
-$smarty -> assign('display_block',$display_block); 
-$smarty -> assign('refresh_total',$refresh_total); 
+$bladeView -> assign('saved', isset($saved) ? $saved : null);
+$bladeView -> assign('display_block',$display_block);
+$bladeView -> assign('refresh_total',$refresh_total);
 
-$smarty -> assign('pageActive', 'custom_field');
-$smarty -> assign('active_tab', '#setting');
+$bladeView -> assign('pageActive', 'custom_field');
+$bladeView -> assign('active_tab', '#setting');
 ?>

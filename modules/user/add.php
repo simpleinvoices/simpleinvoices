@@ -26,11 +26,14 @@ if ($_POST['email'] != "") {
 	include ("./modules/user/save.php");
 }
 
-$smarty->assign('save', $save);
-$smarty->assign('roles', $roles);
+$bladeView->assign('save', $save);
+$bladeView->assign('roles', $roles);
+$bladeView->assign('userUiLanguageList', si_get_ui_language_list_sorted());
+$bladeView->assign('userPreferredValue', trim((string) ($_POST['preferred_language'] ?? '')));
+$bladeView->assign('userSaveCsrfToken', siNonce('user_save'));
 
-$smarty -> assign('pageActive', 'user');
-$smarty -> assign('subPageActive', 'user_add');
-$smarty -> assign('active_tab', '#people');
+$bladeView -> assign('pageActive', 'user');
+$bladeView -> assign('subPageActive', 'user_add');
+$bladeView -> assign('active_tab', '#people');
 
 ?>

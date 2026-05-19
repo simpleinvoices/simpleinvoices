@@ -4,7 +4,7 @@ class user
 {
 
 
-	function getUserRoles()
+	static function getUserRoles()
 	{
 	
 //		$sql = "select id, name from ".TB_PREFIX."user_role where name != 'biller' AND name != 'customer' order by id";
@@ -15,7 +15,7 @@ class user
 
 	}
 
-	function getUser($id)
+	static function getUser($id)
 	{
 	
 		global $auth_session;
