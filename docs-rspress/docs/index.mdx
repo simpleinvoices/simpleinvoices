@@ -4,20 +4,20 @@ link-rss: blog
 hero:
   name: Simple Invoices
   text: Free, open-source invoicing since 2005
-  tagline: Create and manage invoices, clients, and payments on your own server
+  tagline: Create and manage invoices, clients, and payments - web-based invoicing <mark style="background:#fef08a;padding:0 4px;border-radius:3px;">on your own server</mark>
   image:
     src: /hero-invoice.svg
     alt: Simple Invoices interface
   actions:
     - theme: brand
-      text: Quick Start
+      text: Install
       link: /guide/installation
     - theme: alt
       text: Features
       link: /features/free-open-source
     - theme: alt
-      text: GitHub
-      link: https://github.com/simpleinvoices/simpleinvoices
+      text: Get Involved
+      link: /get-involved
 features:
   - title: Multi-Language
     details: 41+ languages with per-invoice language settings. Your admin team works in English while customers see invoices in their native language.
@@ -61,9 +61,8 @@ import { Tab, Tabs, SvgWrapper } from '@rspress/core/theme';
 import { SiSqlite, SiMysql, SiPostgresql } from '@icons-pack/react-simple-icons';
 
 <div style={{ maxWidth: '700px' }}>
-  30 seconds setup with Docker 
-👉 <a href="/guide/installation-manual.html" class="rp-link">Full Installation guide →</a>
-  
+  30 seconds setup with Docker 👇
+
   <Tabs groupId="database-engine">
     <Tab
       label={
@@ -76,11 +75,11 @@ import { SiSqlite, SiMysql, SiPostgresql } from '@icons-pack/react-simple-icons'
       
       ```bash 
       # No database setup needed, run instantly
-
       docker run -d --name simpleinvoices \
         -p 8080:80 \
         -e DB_ENGINE=sqlite \
         simpleinvoices/simpleinvoices:latest
+      # Full install guide -> https://simpleinvoices.org/guide/installation.html
       ```
 
     </Tab>
@@ -113,6 +112,7 @@ import { SiSqlite, SiMysql, SiPostgresql } from '@icons-pack/react-simple-icons'
             MYSQL_USER: si
             MYSQL_PASSWORD: sipass
             MYSQL_ROOT_PASSWORD: rootpass
+      # Full install guide -> https://simpleinvoices.org/guide/installation.html
       ```
     </Tab>
     <Tab
@@ -143,6 +143,7 @@ import { SiSqlite, SiMysql, SiPostgresql } from '@icons-pack/react-simple-icons'
             POSTGRES_DB: simpleinvoices
             POSTGRES_USER: si
             POSTGRES_PASSWORD: sipass
+      # Full install guide -> https://simpleinvoices.org/guide/installation.html
       ```
     </Tab>
   </Tabs>
