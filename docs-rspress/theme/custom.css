@@ -1,3 +1,15 @@
 .rp-home-hero {
   margin: auto;
 }
+
+html.si-embed .rp-nav__title {
+  display: none !important;
+}
+
+html.si-embed .rp-nav-menu__item:has(a[href*="/blog/"]) {
+  display: none !important;
+}
+
+html.si-embed nav.rp-nav .rp-nav-hamburger .rp-nav-menu__item:has(a[href*="/blog/"]) {
+  display: none !important;
+}

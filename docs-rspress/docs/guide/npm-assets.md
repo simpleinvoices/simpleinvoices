@@ -13,7 +13,6 @@ Simple Invoices uses **npm** (Node Package Manager) to manage frontend vendor li
 | `litepicker` | Date picker |
 | `apexcharts` | Interactive charts |
 | `@fontsource/inter` | Inter font (self-hosted) |
-| `docsify` | Documentation site engine |
 
 ## What npm does
 

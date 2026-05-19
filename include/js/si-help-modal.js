@@ -1,6 +1,6 @@
 /**
- * Help modal – replaces popover with Docsify iframe.
- * Maps help page IDs from cluetip rel URLs to Docsify hash routes.
+ * Help modal – opens Rspress documentation in an iframe.
+ * Maps help page IDs from cluetip rel URLs to Rspress routes.
  */
 (function () {
     'use strict';
@@ -233,7 +233,8 @@
         var qidx     = route.indexOf('?');
         var cleanRoute = qidx >= 0 ? route.substring(0, qidx) : route;
         var query    = qidx >= 0 ? route.substring(qidx) : '';
-                var docsUrl  = './docs' + cleanRoute + '.html' + query;
+                var embedQs  = query ? query + '&embed=1' : '?embed=1';
+                var docsUrl  = './docs' + cleanRoute + '.html' + embedQs;
 
         // Show spinner
         if (loading) loading.style.display = '';
@@ -241,7 +242,7 @@
         iframe.src = docsUrl;
 
         // "Open in new tab" link in header → docs homepage
-        var rootDocsUrl = './docs/index.html';
+        var rootDocsUrl = './docs/index.html?embed=1';
         var openLink  = modal.querySelector('#si_help_open_link');
         if (openLink)  openLink.href  = rootDocsUrl;
 
@@ -289,10 +290,11 @@
                 var qidx     = route.indexOf('?');
                 var cleanRoute = qidx >= 0 ? route.substring(0, qidx) : route;
                 var query    = qidx >= 0 ? route.substring(qidx) : '';
-        var docsUrl  = './docs' + cleanRoute + '.html' + query;
+        var embedQs  = query ? query + '&embed=1' : '?embed=1';
+        var docsUrl  = './docs' + cleanRoute + '.html' + embedQs;
                 if (loading) loading.style.display = '';
                 iframe.src = docsUrl;
-                var rootDocsUrl = './docs/index.html';
+                var rootDocsUrl = './docs/index.html?embed=1';
                 var openLink  = modal.querySelector('#si_help_open_link');
                 if (openLink)  openLink.href  = rootDocsUrl;
                 if (window.tabler && window.tabler.Modal) {

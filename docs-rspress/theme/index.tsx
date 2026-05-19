@@ -21,4 +21,6 @@ export function HomeLayout(props: any) {
   );
 }
 
+export { default as EmbedDetector } from './EmbedDetector';
+
 export * from '@rspress/core/theme-original';
