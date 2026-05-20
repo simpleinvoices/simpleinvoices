@@ -8,5 +8,5 @@
     }
 </style>
 <div class="docs-wrapper">
-    <iframe src="./docs/index.html" title="Documentation"></iframe>
+    <iframe src="./docs/index.html?embed=1" title="Documentation"></iframe>
 </div>

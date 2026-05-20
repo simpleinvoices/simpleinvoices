@@ -113,13 +113,7 @@
                             <span class="nav-link-title">My Invoices</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link si-open-docs" href="#" data-docs-route="/">
-                            <span class="nav-link-icon d-md-none d-lg-inline-block"><i class="ti ti-book"></i></span>
-                            <span class="nav-link-title">Docs</span>
-                        </a>
-                    </li>
-                </ul>
+                    </ul>
                 @else
                 {{-- ── Full nav for all other roles ── --}}
                 <ul class="navbar-nav">
@@ -217,17 +211,7 @@
                         </a>
                     </li>
 
-                    {{-- Documentation --}}
-                    @if(($module ?? '') != 'documentation')
-                    <li class="nav-item">
-                        <a class="nav-link si-open-docs" href="#" data-docs-route="/">
-                            <span class="nav-link-icon d-md-none d-lg-inline-block"><i class="ti ti-book"></i></span>
-                            <span class="nav-link-title">Docs</span>
-                        </a>
-                    </li>
-                    @endif
-
-                </ul>
+</ul>
                 @endif
                 @if(!$isCustomerRole)
                 <ul class="navbar-nav ms-md-auto">

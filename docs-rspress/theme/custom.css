@@ -1,3 +1,27 @@
 .rp-home-hero {
   margin: auto;
 }
+
+.si-home-tabs .rp-codeblock__content__scroll-container {
+  overflow-x: visible;
+}
+
+.si-home-tabs pre.shiki,
+.si-home-tabs pre.shiki code,
+.si-home-tabs pre.shiki .line {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+html.si-embed .rp-nav__title {
+  display: none !important;
+}
+
+html.si-embed .rp-nav-menu__item:has(a[href*="/blog/"]) {
+  display: none !important;
+}
+
+html.si-embed nav.rp-nav .rp-nav-hamburger .rp-nav-menu__item:has(a[href*="/blog/"]) {
+  display: none !important;
+}
