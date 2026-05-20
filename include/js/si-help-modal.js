@@ -185,10 +185,6 @@
             '      <h5 class="modal-title fw-bold">' +
             '        <i class="ti ti-book-2 me-2 text-primary"></i><span id="si_help_modal_title">Documentation</span>' +
             '      </h5>' +
-            '      <a id="si_help_open_link" href="./docs/index.html" target="_blank" rel="noopener"' +
-            '         class="btn btn-sm btn-ghost-secondary d-none d-sm-inline-flex" title="Open in new tab">' +
-            '        <i class="ti ti-external-link me-1"></i>Open in Tab' +
-            '      </a>' +
             '      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>' +
             '    </div>' +
             '    <div class="modal-body p-0 position-relative">' +
@@ -233,18 +229,13 @@
         var qidx     = route.indexOf('?');
         var cleanRoute = qidx >= 0 ? route.substring(0, qidx) : route;
         var query    = qidx >= 0 ? route.substring(qidx) : '';
-                var embedQs  = query ? query + '&embed=1' : '?embed=1';
-                var docsUrl  = './docs' + cleanRoute + '.html' + embedQs;
+        var embedQs  = query ? query + '&embed=1' : '?embed=1';
+        var docsUrl  = './docs' + cleanRoute + '.html' + embedQs;
 
         // Show spinner
         if (loading) loading.style.display = '';
 
         iframe.src = docsUrl;
-
-        // "Open in new tab" link in header → docs homepage
-        var rootDocsUrl = './docs/index.html?embed=1';
-        var openLink  = modal.querySelector('#si_help_open_link');
-        if (openLink)  openLink.href  = rootDocsUrl;
 
         var titleEl = modal.querySelector('.modal-title');
         if (titleEl && title) {
@@ -290,13 +281,10 @@
                 var qidx     = route.indexOf('?');
                 var cleanRoute = qidx >= 0 ? route.substring(0, qidx) : route;
                 var query    = qidx >= 0 ? route.substring(qidx) : '';
-        var embedQs  = query ? query + '&embed=1' : '?embed=1';
-        var docsUrl  = './docs' + cleanRoute + '.html' + embedQs;
+                var embedQs  = query ? query + '&embed=1' : '?embed=1';
+                var docsUrl  = './docs' + cleanRoute + '.html' + embedQs;
                 if (loading) loading.style.display = '';
                 iframe.src = docsUrl;
-                var rootDocsUrl = './docs/index.html?embed=1';
-                var openLink  = modal.querySelector('#si_help_open_link');
-                if (openLink)  openLink.href  = rootDocsUrl;
                 if (window.tabler && window.tabler.Modal) {
                     var inst = window.tabler.Modal.getOrCreateInstance(modal);
                     inst.show();
