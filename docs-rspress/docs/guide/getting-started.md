@@ -1,6 +1,6 @@
 # What is Simple Invoices
 
-Simple Invoices is a **web-based invoice management system**: free, open-source, and self-hosted. It lets you create, manage, and send invoices from any device with a browser. No app installation required.
+Simple Invoices is a **web-based invoice management system**: free, open-source, and self-hosted. It lets you create, manage, and send invoices from any device with a browser.
 
 It's built on a traditional LAMP stack (PHP + MySQL/MariaDB/PostgreSQL/SQLite) and has been running since **2005**, making it one of the longest-running open-source invoicing projects.
 
