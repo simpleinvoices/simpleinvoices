@@ -3292,45 +3292,6 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['384']['patch'] = "PHP: si_patch384_denorm_index_id()";
     $patch['384']['date']  = "20260515";
 
-    $patch['385']['name'] = "si_payment: add missing denorm_currency_locale column (patch 366 follow-up) and backfill";
-    switch ($db_server) {
-        case 'pgsql':
-            $p385 = '';
-            $p385 .= checkFieldExists(TB_PREFIX . 'payment', 'denorm_currency_locale')
-                ? '' : "ALTER TABLE " . TB_PREFIX . "payment ADD COLUMN denorm_currency_locale VARCHAR(32) NOT NULL DEFAULT ''; ";
-            if ($p385 !== '') {
-                $p385 .= "UPDATE " . TB_PREFIX . "payment p SET denorm_currency_locale = COALESCE(iv.denorm_currency_locale, '') "
-                    . "FROM " . TB_PREFIX . "invoices iv WHERE iv.id = p.ac_inv_id AND iv.domain_id = p.domain_id;";
-            } else {
-                $p385 = 'SELECT 1';
-            }
-            $patch['385']['patch'] = $p385;
-            break;
-        case 'sqlite':
-            $p385 = '';
-            $p385 .= checkFieldExists(TB_PREFIX . 'payment', 'denorm_currency_locale')
-                ? '' : "ALTER TABLE " . TB_PREFIX . "payment ADD COLUMN denorm_currency_locale TEXT NOT NULL DEFAULT ''; ";
-            if ($p385 !== '') {
-                $p385 .= "UPDATE " . TB_PREFIX . "payment AS p SET denorm_currency_locale = (SELECT COALESCE(iv.denorm_currency_locale, '') "
-                    . "FROM " . TB_PREFIX . "invoices iv WHERE iv.id = p.ac_inv_id AND iv.domain_id = p.domain_id);";
-            } else {
-                $p385 = 'SELECT 1';
-            }
-            $patch['385']['patch'] = $p385;
-            break;
-        case 'mysql':
-        default:
-            $p385 = '';
-            $p385 .= checkFieldExists(TB_PREFIX . 'payment', 'denorm_currency_locale')
-                ? '' : "ALTER TABLE `" . TB_PREFIX . "payment` ADD COLUMN `denorm_currency_locale` VARCHAR(32) NOT NULL DEFAULT ''; ";
-            if ($p385 !== '') {
-                $p385 .= "UPDATE " . TB_PREFIX . "payment p INNER JOIN " . TB_PREFIX . "invoices iv "
-                    . "ON (p.ac_inv_id = iv.id AND p.domain_id = iv.domain_id) "
-                    . "SET p.denorm_currency_locale = COALESCE(iv.denorm_currency_locale, '');";
-            } else {
-                $p385 = 'SELECT 1';
-            }
-            $patch['385']['patch'] = $p385;
-            break;
-    }
+    $patch['385']['name'] = "si_payment: add missing denorm_currency_locale column (patch 366 follow-up) and rebuild denorm columns";
+    $patch['385']['patch'] = "PHP: si_patch385_payment_locale_column_and_rebuild()";
     $patch['385']['date'] = "20260517";

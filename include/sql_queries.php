@@ -3874,6 +3874,31 @@ function si_patch384_denorm_index_id(): void {
 	}
 }
 
+function si_patch385_payment_locale_column_and_rebuild(): void {
+	global $db_server;
+	$t = TB_PREFIX . 'payment';
+	if (!checkFieldExists($t, 'denorm_currency_locale')) {
+		if ($db_server === 'mysql') {
+			dbQuery('ALTER TABLE `' . $t . '` ADD COLUMN `denorm_currency_locale` VARCHAR(32) NOT NULL DEFAULT \'\'');
+		} elseif ($db_server === 'pgsql') {
+			dbQuery("ALTER TABLE {$t} ADD COLUMN IF NOT EXISTS denorm_currency_locale VARCHAR(32) NOT NULL DEFAULT ''");
+		} else {
+			dbQuery("ALTER TABLE {$t} ADD COLUMN denorm_currency_locale TEXT NOT NULL DEFAULT ''");
+		}
+	}
+	// Patch 366's combined UPDATE (see si_patch379_payment_currency_denorm_columns()
+	// above) referenced this column before it existed, so on any database that has
+	// already run patches 356-358/384, that UPDATE failed atomically every time -
+	// leaving denorm_invoice_index_name/denorm_biller_name/denorm_customer_name blank
+	// on si_payment too, not just the currency columns. Do a full rebuild rather than
+	// just backfilling the one column.
+	$sth = dbQuery('SELECT DISTINCT domain_id FROM ' . TB_PREFIX . 'invoices');
+	$domains = $sth->fetchAll(PDO::FETCH_COLUMN, 0);
+	foreach ($domains as $did) {
+		invoice_denorm::rebuildDomain((int) $did);
+	}
+}
+
 function si_patch379_backfill_preference_currency_id(): void {
 	require_once __DIR__ . '/class/siCurrencies.php';
 	require_once __DIR__ . '/class/CurrencySignHelper.php';
@@ -4095,6 +4120,8 @@ function run_sql_patch($id, $patch) {
             si_patch381_tax_id_columns();
         } elseif ((int) $id === 384) {
             si_patch384_denorm_index_id();
+        } elseif ((int) $id === 385) {
+            si_patch385_payment_locale_column_and_rebuild();
         } else {
             if (!empty($patch['patch'])) {
                 dbQuery($patch['patch']);
