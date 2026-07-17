@@ -3514,7 +3514,7 @@ function pdfThis($html, $file_location = '', $pdfname = 'invoice')
 				} elseif ($file_location === "download") {
 					$mpdf->Output($filename, \Mpdf\Output\Destination::DOWNLOAD);
 				} else {
-					$mpdf->Output($filename, \Mpdf\Output\Destination::FILE);
+					$mpdf->Output('./tmp/cache/' . $filename, \Mpdf\Output\Destination::FILE);
 				}
 
 			} catch (\Mpdf\MpdfException $e) {
