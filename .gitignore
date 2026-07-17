@@ -1,5 +1,6 @@
 *.bak
 *.swp
+.env.local
 custom.config.php
 %%*
 *.tpl.php
