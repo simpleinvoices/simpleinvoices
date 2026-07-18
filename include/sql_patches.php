@@ -3291,3 +3291,7 @@ PRIMARY KEY ( `domain_id`, `id` )
     $patch['384']['name']  = "si_invoices: add denorm_index_id column and backfill";
     $patch['384']['patch'] = "PHP: si_patch384_denorm_index_id()";
     $patch['384']['date']  = "20260515";
+
+    $patch['385']['name'] = "si_payment: add missing denorm_currency_locale column (patch 366 follow-up) and rebuild denorm columns";
+    $patch['385']['patch'] = "PHP: si_patch385_payment_locale_column_and_rebuild()";
+    $patch['385']['date'] = "20260517";
