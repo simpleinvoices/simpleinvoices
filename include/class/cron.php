@@ -125,11 +125,20 @@ class cron {
 		
 
 		/*Check that the sort field is OK*/
-		if (!empty($this->sort)) {
-		    $sort = $this->sort;
-		} else {
-		    $sort = "cron.id";
-		}
+		/* Map the requested sort column to a fixed, safe SQL expression.
+		   Never interpolate the raw request value into ORDER BY (SQLi). */
+		$validSortFields = array(
+		    'id'             => 'cron.id',
+		    'start_date'     => 'cron.start_date',
+		    'end_date'       => 'cron.end_date',
+		    'recurrence'     => 'cron.recurrence',
+		    'email_biller'   => 'cron.email_biller',
+		    'email_customer' => 'cron.email_customer',
+		);
+		$sort = $validSortFields[$this->sort] ?? 'cron.id';
+
+		/* Constrain the sort direction to exactly ASC or DESC. */
+		$dir = (strtoupper((string) $dir) === 'ASC') ? 'ASC' : 'DESC';
 
 		if($type =="count" OR $type =="no_limit")
 		{
