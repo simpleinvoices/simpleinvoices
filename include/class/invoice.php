@@ -519,7 +519,7 @@ class invoice {
                 $inner_sql
                 ) AS si_invoice_grid
                 $post_from_filter
-                ORDER BY $sort_outer $dir
+                ORDER BY $sort_outer $dirSql
                 $limit";
                 }
                 break;
@@ -613,7 +613,7 @@ class invoice {
                 $inner_sql
                 ) AS si_invoice_grid
                 $post_from_filter
-                ORDER BY $sort_outer $dir
+                ORDER BY $sort_outer $dirSql
                 $limit";
                 }
                 break;
@@ -711,7 +711,7 @@ class invoice {
                 $inner_sql
                 ) AS si_invoice_grid
                 $post_from_filter
-                ORDER BY $sort_outer $dir
+                ORDER BY $sort_outer $dirSql
                 $limit";
                 }
                 break;
