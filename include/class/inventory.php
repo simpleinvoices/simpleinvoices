@@ -74,19 +74,36 @@ class inventory {
     public function select_all($type='', $dir='DESC', $rp='25', $page='1')
 	{
 		global $LANG;
-		$valid_search_fields = array('p.description', 'iv.date', 'iv.quantity', 'iv.cost', 'iv.quantity * iv.cost');
+		$valid_search_fields = array('p.description', 'inv.date', 'inv.quantity', 'inv.cost', 'inv.quantity * inv.cost');
 
-		/*SQL Limit - start*/
-		$start = (($page-1) * $rp);
-		$limit = " LIMIT $rp OFFSET $start";
-		/*SQL Limit - end*/
+		// LIMIT/OFFSET and ORDER BY identifiers cannot be bound as SQL values.
+		// Normalize pagination and map sort keys to fixed SQL expressions before
+		// interpolating them into the query.
+		$rp = filter_var(is_scalar($rp) ? $rp : null, FILTER_VALIDATE_INT);
+		$rp = ($rp === false || $rp < 1) ? 25 : min($rp, 500);
+		$page = filter_var(is_scalar($page) ? $page : null, FILTER_VALIDATE_INT);
+		$page = ($page === false || $page < 1) ? 1 : min($page, 1000000);
+		$start = ($page - 1) * $rp;
+
+		$sortFields = array(
+			'id'          => 'inv.id',
+			'date'        => 'inv.date',
+			'description' => 'p.description',
+			'quantity'    => 'inv.quantity',
+			'cost'        => 'inv.cost',
+			'total_cost'  => '(inv.quantity * inv.cost)',
+		);
+		$sortKey = is_string($this->sort) ? $this->sort : '';
+		$sort = $sortFields[$sortKey] ?? 'inv.id';
+		$dir = (is_scalar($dir) && strtoupper((string) $dir) === 'ASC') ? 'ASC' : 'DESC';
+		$limit = ($type === 'count') ? '' : " LIMIT $rp OFFSET $start";
 
 		/*SQL where - start*/
 		$where = "";
-		$query = $_POST['query'] ?? null;
-		$qtype = $_POST['qtype'] ?? null;
+		$query = isset($_POST['query']) && is_scalar($_POST['query']) ? (string) $_POST['query'] : null;
+		$qtype = isset($_POST['qtype']) && is_scalar($_POST['qtype']) ? (string) $_POST['qtype'] : null;
 		if ( ! (empty($qtype) || empty($query)) ) {
-			if ( in_array($qtype, $valid_search_fields) ) {
+			if ( is_string($qtype) && in_array($qtype, $valid_search_fields, true) ) {
 				$where = " AND $qtype LIKE :query ";
 			} else {
 				$qtype = null;
@@ -96,28 +113,12 @@ class inventory {
 		/*SQL where - end*/
 		
 
-		/*Check that the sort field is OK*/
-		if (!empty($this->sort)) {
-		    $sort = $this->sort;
-		} else {
-		    $sort = "inv.id";
-		}
+		$select = ($type === 'count')
+			? 'COUNT(*) AS total'
+			: 'inv.id AS id, inv.product_id, inv.date, p.description, COALESCE(p.reorder_level, 0) AS reorder_level, inv.quantity, inv.cost, inv.quantity * inv.cost AS total_cost';
+		$orderBy = ($type === 'count') ? '' : "ORDER BY $sort $dir";
 
-		if($type =="count")
-		{
-		    $limit="";
-		}
-
-
-		$sql = "SELECT
-				inv.id AS id,
-				inv.product_id,
-				inv.date,
-				inv.quantity,
-				p.description,
-				COALESCE(p.reorder_level, 0) AS reorder_level,
-				inv.cost,
-				inv.quantity * inv.cost AS total_cost
+		$sql = "SELECT $select
 			FROM
 				".TB_PREFIX."products p
 				LEFT JOIN ".TB_PREFIX."inventory inv
@@ -125,8 +126,7 @@ class inventory {
 			WHERE
 				inv.domain_id = :domain_id
 				$where
-			ORDER BY
-				$sort $dir
+			$orderBy
 			$limit";
 
 		if (empty($query)) {
@@ -135,12 +135,7 @@ class inventory {
 			$sth = dbQuery($sql, ':domain_id', $this->domain_id, ':query', "%$query%");
 		}
 
-		if($type =="count")
-		{
-			return count($sth->fetchAll());
-		} else {
-			return $sth->fetchAll();
-		}
+		return ($type === 'count') ? (int) $sth->fetchColumn() : $sth->fetchAll();
 	}
 
 	public function select()

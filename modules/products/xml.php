@@ -8,6 +8,9 @@ $sort = (isset($_REQUEST['sortname'])) ? $_REQUEST['sortname'] : "description" ;
 $rp = (isset($_REQUEST['rp'])) ? $_REQUEST['rp'] : "25" ;
 $page = (isset($_REQUEST['page'])) ? $_REQUEST['page'] : "1" ;
 
+$rp = is_scalar($rp ?? ($limit ?? null)) ? max(1, min(500, (int) ($rp ?? $limit))) : 25;
+$page = is_scalar($page) ? max(1, min(1000000, (int) $page)) : 1;
+
 $defaults = getSystemDefaults();
 $bladeView -> assign("defaults",$defaults);
 
@@ -36,7 +39,7 @@ foreach ($products_all as $row) {
 	$action .= '</div></div>';
 	$xml .= "<row id='".$row['iso']."'>";
 	$xml .= "<cell><![CDATA[".$action."]]></cell>";
-	$xml .= "<cell><![CDATA[".$row['description']."]]></cell>";
+	$xml .= "<cell>" . siGridXmlCell($row['description']) . "</cell>";
 	$xml .= "<cell><![CDATA[".siLocal::number($row['unit_price'])."]]></cell>";
     if($defaults['inventory'] == '1')
     {

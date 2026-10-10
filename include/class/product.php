@@ -44,6 +44,10 @@ class product
         global $config;
         global $LANG;
 
+        // LIMIT/OFFSET cannot use bound placeholders on every supported driver.
+        $rp = is_scalar($rp) ? max(1, min(500, (int) $rp)) : 25;
+        $page = is_scalar($page) ? max(1, min(1000000, (int) $page)) : 1;
+
         $valid_search_fields = array('id', 'description', 'unit_price');
 
         if (intval($rp) != $rp) {
@@ -77,9 +81,8 @@ class product
         /*Check that the sort field is OK*/
         $validFields = array('id', 'description', 'unit_price', 'enabled');
 
-        if (!in_array($sort, $validFields)) {
-            $sort = "p.id";
-        }
+        $sortMap = ['id' => 'p.id', 'description' => 'p.description', 'unit_price' => 'p.unit_price', 'enabled' => 'p.enabled'];
+        $sort = is_string($sort) ? ($sortMap[$sort] ?? 'p.id') : 'p.id';
 
         // Use LEFT JOINs with pre-aggregated subqueries so that:
         //  - each named param (:domain_id, :domain_id2, :domain_id3) is unique (required by

@@ -7,6 +7,9 @@ $sort = (isset($_REQUEST['sortname'])) ? $_REQUEST['sortname'] : "name" ;
 $limit = (isset($_REQUEST['rp'])) ? $_REQUEST['rp'] : "25" ;
 $page = (isset($_REQUEST['page'])) ? $_REQUEST['page'] : "1" ;
 
+$rp = is_scalar($rp ?? ($limit ?? null)) ? max(1, min(500, (int) ($rp ?? $limit))) : 25;
+$page = is_scalar($page) ? max(1, min(1000000, (int) $page)) : 1;
+
 $valid_search_fields = array('id', 'name');
 
 //SC: Safety checking values that will be directly subbed in

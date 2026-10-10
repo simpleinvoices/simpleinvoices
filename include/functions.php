@@ -453,6 +453,20 @@ function antiCSRFHiddenInput($action = 'all', $userid = false)
 }
 
 /**
+ * Encode a grid cell as XML CDATA while keeping untrusted text inert when the
+ * client renders the cell as HTML. Pass trusted HTML only for prebuilt action
+ * controls whose dynamic values have already been escaped.
+ */
+function siGridXmlCell($value, bool $trustedHtml = false): string
+{
+	$content = (string) ($value ?? '');
+	if (!$trustedHtml) {
+		$content = htmlspecialchars($content, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+	}
+	return '<![CDATA[' . str_replace(']]>', ']]]]><![CDATA[>', $content) . ']]>';
+}
+
+/**
  * Invalidate all cached data for a domain: dashboard aggregates, invoice grid
  * pages, payment grid pages, and report pages.
  * Call this after any write that changes invoice or payment data.

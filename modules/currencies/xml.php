@@ -13,6 +13,9 @@ $sort = ($_REQUEST['sortname'] ?? 'currency_code');
 $rp = (int) ($_REQUEST['rp'] ?? 25);
 $page = (int) ($_REQUEST['page'] ?? 1);
 
+$rp = is_scalar($rp ?? ($limit ?? null)) ? max(1, min(500, (int) ($rp ?? $limit))) : 25;
+$page = is_scalar($page) ? max(1, min(1000000, (int) $page)) : 1;
+
 function sql($type = '', $dir, $sort, $rp, $page)
 {
 	global $auth_session;

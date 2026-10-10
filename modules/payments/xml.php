@@ -7,6 +7,9 @@ $sort = $_REQUEST['sortname'] ?? 'ap.id';
 $rp   = max(10, (int)($_REQUEST['rp'] ?? 10));
 $page = max(1, (int)($_REQUEST['page'] ?? 1));
 
+$rp = is_scalar($rp ?? ($limit ?? null)) ? max(1, min(500, (int) ($rp ?? $limit))) : 25;
+$page = is_scalar($page) ? max(1, min(1000000, (int) $page)) : 1;
+
 // ── Payment grid XML cache ───────────────────────────────────────────────────
 $_pmt_cache_dir  = dirname(dirname(__DIR__)) . '/tmp/cache/payments_xml';
 $_pmt_cache_key  = md5(serialize([
@@ -191,10 +194,10 @@ foreach ($payments as $row) {
 	$action .= '</div></div>';
 	$xml .= "<row id='".$row['id']."'>";
 	$xml .= "<cell><![CDATA[".$action."]]></cell>";
-	$xml .= "<cell><![CDATA[".$row['id']."]]></cell>";
-	$xml .= "<cell><![CDATA[".$row['index_name']."]]></cell>";
-	$xml .= "<cell><![CDATA[".$row['cname']."]]></cell>";
-	$xml .= "<cell><![CDATA[".$row['bname']."]]></cell>";
+	$xml .= "<cell>" . siGridXmlCell($row['id']) . "</cell>";
+	$xml .= "<cell>" . siGridXmlCell($row['index_name']) . "</cell>";
+	$xml .= "<cell>" . siGridXmlCell($row['cname']) . "</cell>";
+	$xml .= "<cell>" . siGridXmlCell($row['bname']) . "</cell>";
 	$amt_cell = htmlspecialchars(CurrencySignHelper::format($row['ac_amount'], $row['denorm_currency_sign'] ?? '', '', $row['denorm_currency_code'] ?? '', false, $row['denorm_currency_locale'] ?? ''), ENT_QUOTES, 'UTF-8');
 	$xml .= "<cell><![CDATA[".$amt_cell."]]></cell>";
 	$xml .= "<cell><![CDATA[".siLocal::date($row['date'])."]]></cell>";

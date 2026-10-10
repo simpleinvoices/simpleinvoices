@@ -15,6 +15,9 @@ $sort = $_REQUEST['sortname'] ?? "index_id";
 $rp = (int)($_REQUEST['rp'] ?? 10);
 $having = $_REQUEST['having'] ?? "";
 $page = (int)($_REQUEST['page'] ?? 1);
+
+$rp = is_scalar($rp ?? ($limit ?? null)) ? max(1, min(500, (int) ($rp ?? $limit))) : 25;
+$page = is_scalar($page) ? max(1, min(1000000, (int) $page)) : 1;
 if ($page < 1) $page = 1;
 if ($rp < 10) $rp = 10;
 
@@ -71,7 +74,7 @@ $xml ="";
 	$xml .= "<rows>";
 	$xml .= "<page>$page</page>";
 	$xml .= "<total>". $invoice_count ."</total>";
-	
+
 	foreach ($invoices as $row) {
 		$xml .= "<row id='".$row['id']."'>";
 		$inv_label = htmlspecialchars($row['index_name']);
@@ -99,9 +102,9 @@ $xml ="";
 		}
 		$action .= '</div></div>';
 		$xml .= "<cell><![CDATA[".$action."]]></cell>";
-		$xml .= "<cell><![CDATA[".$row['index_name']."]]></cell>";		
-		$xml .= "<cell><![CDATA[".$row['biller']."]]></cell>";
-		$xml .= "<cell><![CDATA[".$row['customer']."]]></cell>";
+		$xml .= "<cell>" . siGridXmlCell($row['index_name']) . "</cell>";
+		$xml .= "<cell>" . siGridXmlCell($row['biller']) . "</cell>";
+		$xml .= "<cell>" . siGridXmlCell($row['customer']) . "</cell>";
 		$xml .= "<cell><![CDATA[".siLocal::date($row['date'])."]]></cell>";
 		$xml .= "<cell><![CDATA[".htmlspecialchars(CurrencySignHelper::format($row['invoice_total'], $row['currency_sign'] ?? '', '', $row['denorm_currency_code'] ?? '', false, $row['denorm_currency_locale'] ?? ''))."]]></cell>";
 		if ($row['status']) {
@@ -125,8 +128,8 @@ $xml ="";
 		} else {
 			$xml .= "<cell><![CDATA[<span class=\"d-none d-sm-inline\"><span class=\"status status-secondary\"><span class=\"status-dot\"></span>Draft</span></span><span class=\"d-sm-none\"><span class=\"status status-secondary\"><span class=\"status-dot\"></span></span></span>]]></cell>";
 		}
-		$xml .= "<cell><![CDATA[".$row['preference']."]]></cell>";				
-		$xml .= "</row>";		
+		$xml .= "<cell>" . siGridXmlCell($row['preference']) . "</cell>";
+		$xml .= "</row>";
 	}
 	$xml .= "</rows>";
 

@@ -45,11 +45,11 @@ abstract class CustomField {
 	function updateInput($value, $itemId) {
 		global $dbh;
 		
-		$sql = "SELECT * FROM ".TB_PREFIX."customFieldValues WHERE customFieldID = $this->fieldId AND itemID = $itemId";
-		
-		error_log($sql);
-		$sth = $dbh->prepare('SELECT * FROM '.TB_PREFIX.'customFieldValues WHERE customFieldID = :field AND itemID = :item');
-		$sth->execute(':field', $this->fieldId, ':item', $itemId);
+		$sth = dbQuery('SELECT * FROM '.TB_PREFIX.'customFieldValues WHERE customFieldID = :field AND itemID = :item',
+			':field', $this->fieldId, ':item', $itemId);
+		if (!$sth) {
+			return;
+		}
 		$result = $sth->fetch();
 		
 		if($result == null) {
@@ -123,7 +123,14 @@ abstract class CustomField {
 		$sth = dbQuery($sql, ':id', $id);
 		$field = $sth->fetch();
 		
-		return eval('return "'.$field['description'].'";');
+		$description = (string) ($field['description'] ?? '');
+		return preg_replace_callback(
+			'/\{?\$LANG\[[\'\"]([A-Za-z0-9_.-]+)[\'\"]\]\}?/',
+			static function (array $matches) use ($LANG): string {
+				return (string) ($LANG[$matches[1]] ?? $matches[0]);
+			},
+			$description
+		);
 	}
 	
 	//TODO: activate and deactivate plugins... What happens if you delete a plug-in?

@@ -11,6 +11,9 @@ $sort = (isset($_REQUEST['sortname'])) ? $_REQUEST['sortname'] : "name" ;
 $rp = (isset($_REQUEST['rp'])) ? $_REQUEST['rp'] : "25" ;
 $page = (isset($_REQUEST['page'])) ? $_REQUEST['page'] : "1" ;
 
+$rp = is_scalar($rp ?? ($limit ?? null)) ? max(1, min(500, (int) ($rp ?? $limit))) : 25;
+$page = is_scalar($page) ? max(1, min(1000000, (int) $page)) : 1;
+
 $xml ="";
 
 function sql($type='', $start, $dir, $sort, $rp, $page )
@@ -116,7 +119,7 @@ $count = count($sth_count_rows->fetchAll());
 		$action .= '</div></div>';
 		$xml .= "<row id='".$row['CID']."'>";
 		$xml .= "<cell><![CDATA[".$action."]]></cell>";
-		$xml .= "<cell><![CDATA[".$row['name']."]]></cell>";
+		$xml .= "<cell>" . siGridXmlCell($row['name']) . "</cell>";
 		$xml .= "<cell><![CDATA[".siLocal::number($row['customer_total'])."]]></cell>";
 		$xml .= "<cell><![CDATA[".siLocal::number($row['paid'])."]]></cell>";
 		$xml .= "<cell><![CDATA[".siLocal::number($row['owing'])."]]></cell>";

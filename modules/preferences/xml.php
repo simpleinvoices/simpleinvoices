@@ -8,6 +8,9 @@ $sort = (isset($_REQUEST['sortname'])) ? $_REQUEST['sortname'] : "pref_descripti
 $rp = (isset($_REQUEST['rp'])) ? $_REQUEST['rp'] : "25" ;
 $page = (isset($_REQUEST['page'])) ? $_REQUEST['page'] : "1" ;
 
+$rp = is_scalar($rp ?? ($limit ?? null)) ? max(1, min(500, (int) ($rp ?? $limit))) : 25;
+$page = is_scalar($page) ? max(1, min(1000000, (int) $page)) : 1;
+
 
 function sql($type='', $dir, $sort, $rp, $page )
 {
@@ -102,7 +105,7 @@ foreach ($preferences as $row) {
 	$action .= '</div></div>';
 	$xml .= "<row id='".$row['pref_id']."'>";
 	$xml .= "<cell><![CDATA[".$action."]]></cell>";
-	$xml .= "<cell><![CDATA[".$row['pref_description']."]]></cell>";
+	$xml .= "<cell>" . siGridXmlCell($row['pref_description']) . "</cell>";
 	if ($row['enabled']==$LANG['enabled']) {
 		$xml .= "<cell><![CDATA[<img src='images/common/tick.png' alt='".$row['enabled']."' title='".$row['enabled']."' />]]></cell>";				
 	}	

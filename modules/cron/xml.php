@@ -8,6 +8,9 @@ $sort = (isset($_REQUEST['sortname'])) ? $_REQUEST['sortname'] : "id" ;
 $rp = (isset($_REQUEST['rp'])) ? $_REQUEST['rp'] : "25" ;
 $page = (isset($_REQUEST['page'])) ? $_REQUEST['page'] : "1" ;
 
+$rp = is_scalar($rp ?? ($limit ?? null)) ? max(1, min(500, (int) ($rp ?? $limit))) : 25;
+$page = is_scalar($page) ? max(1, min(1000000, (int) $page)) : 1;
+
 //$sql = "SELECT * FROM ".TB_PREFIX."cron LIMIT $start, $limit";
 
 $cron = new cron();
@@ -40,11 +43,11 @@ $xml ="";
 		$xml .= "<cell><![CDATA[".$action."]]></cell>";
 		#$xml .= "<cell><![CDATA[".siLocal::date($row['start_date'])."]]></cell>";
 		#$xml .= "<cell><![CDATA[".siLocal::date($row['end_date'])."]]></cell>";
-		$xml .= "<cell><![CDATA[".$row['start_date']."]]></cell>";
-		$xml .= "<cell><![CDATA[".$row['end_date']."]]></cell>";
+		$xml .= "<cell>" . siGridXmlCell($row['start_date']) . "</cell>";
+		$xml .= "<cell>" . siGridXmlCell($row['end_date']) . "</cell>";
 		$xml .= "<cell><![CDATA[".$row['recurrence']." ".$row['recurrence_type']."]]></cell>";
-		$xml .= "<cell><![CDATA[".$row['email_biller_nice']."]]></cell>";
-		$xml .= "<cell><![CDATA[".$row['email_customer_nice']."]]></cell>";
+		$xml .= "<cell>" . siGridXmlCell($row['email_biller_nice']) . "</cell>";
+		$xml .= "<cell>" . siGridXmlCell($row['email_customer_nice']) . "</cell>";
 		$xml .= "</row>";		
 	}
 

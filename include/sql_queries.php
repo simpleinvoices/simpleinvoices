@@ -137,10 +137,10 @@ function dbQuery($sqlQuery) {
 		$sth->execute();
 		dbLogger($sqlQuery);
 	} catch(Exception $e){
-		echo $e->getMessage();
-		$errInfo = ($sth instanceof PDOStatement) ? $sth->errorInfo() : [];
-		$errTail = is_array($errInfo) && $errInfo !== [] ? (string) end($errInfo) : '';
-		echo "dbQuery: Dude, what happened to your query?:<br /><br /> ".htmlsafe($sqlQuery)."<br />".htmlsafe($errTail);
+		// SQL text and driver errors can contain schema details and user data. Keep
+		// diagnostics in the server log instead of returning them to the browser.
+		error_log('Database query failed: ' . $e->getMessage() . ' [query: ' . $sqlQuery . ']');
+		return false;
 	}
 
 	return $sth;

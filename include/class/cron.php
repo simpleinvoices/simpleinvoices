@@ -100,6 +100,9 @@ class cron {
 	{
 		global $LANG;
 		global $db_server;
+		// These values become SQL LIMIT/OFFSET literals, so normalize them here.
+		$rp = is_scalar($rp) ? max(1, min(500, (int) $rp)) : 25;
+		$page = is_scalar($page) ? max(1, min(1000000, (int) $page)) : 1;
 		$valid_search_fields = array('iv.id', 'b.name', 'cron.id', 'aging');
 
 		/*SQL Limit - start*/

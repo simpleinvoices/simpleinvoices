@@ -1,6 +1,10 @@
 *.bak
 *.swp
-.env.local
+/.env
+/.env.local
+/.env.*
+!/.env.example
+!/.env.override.example
 custom.config.php
 %%*
 *.tpl.php
