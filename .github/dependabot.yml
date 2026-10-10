@@ -4,18 +4,38 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    groups:
+      composer-security:
+        applies-to: security-updates
+        patterns:
+          - "*"
 
   - package-ecosystem: npm
     directory: /
     schedule:
       interval: weekly
+    groups:
+      npm-security:
+        applies-to: security-updates
+        patterns:
+          - "*"
 
   - package-ecosystem: npm
     directory: /docs-rspress
     schedule:
       interval: weekly
+    groups:
+      docs-npm-security:
+        applies-to: security-updates
+        patterns:
+          - "*"
 
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: weekly
+    groups:
+      github-actions-security:
+        applies-to: security-updates
+        patterns:
+          - "*"
