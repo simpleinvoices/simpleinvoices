@@ -29,7 +29,7 @@ fs.rmSync(vendorDir, { recursive: true, force: true });
 
 console.log('\nCopying assets:');
 
-// @tabler/core v1.4.0
+// @tabler/core v1.6.1
 console.log('\n[@tabler/core]');
 copy(
     path.join(root, 'node_modules', '@tabler', 'core', 'dist', 'css', 'tabler.min.css'),
@@ -48,7 +48,7 @@ copy(
     path.join(vendorDir, 'tabler-core', 'tabler.min.js.map')
 );
 
-// @tabler/icons-webfont v3.44.0 - only copy fonts referenced by the CSS
+// @tabler/icons-webfont v3.49.0 - only copy fonts referenced by the CSS
 console.log('\n[@tabler/icons-webfont]');
 copy(
     path.join(root, 'node_modules', '@tabler', 'icons-webfont', 'dist', 'tabler-icons.min.css'),
@@ -62,7 +62,7 @@ for (const fontFile of ['tabler-icons.woff2', 'tabler-icons.woff', 'tabler-icons
     );
 }
 
-// tom-select v2.6.1
+// tom-select v2.6.2
 console.log('\n[tom-select]');
 copy(
     path.join(root, 'node_modules', 'tom-select', 'dist', 'css', 'tom-select.bootstrap5.min.css'),
@@ -81,7 +81,7 @@ copy(
     path.join(vendorDir, 'tom-select', 'tom-select.complete.min.js.map')
 );
 
-// hugerte v1.0.10 (flat package, no dist/ dir)
+// hugerte v1.0.14 (flat package, no dist/ dir)
 console.log('\n[hugerte]');
 copy(
     path.join(root, 'node_modules', 'hugerte', 'hugerte.min.js'),
@@ -101,7 +101,7 @@ copy(
     path.join(vendorDir, 'litepicker', 'litepicker.js')
 );
 
-// apexcharts v5.12.0
+// apexcharts v7.8.0
 console.log('\n[apexcharts]');
 copy(
     path.join(root, 'node_modules', 'apexcharts', 'dist', 'apexcharts.min.js'),
