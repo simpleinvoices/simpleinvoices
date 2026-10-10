@@ -24,7 +24,7 @@ jobs:
           driver: cloud
           endpoint: "simpleinvoices/simpleinvoices-build"
       - name: Build and push
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           tags: "${{ vars.DOCKER_USER }}/docker-build-cloud-demo:latest"
           # For pull requests, export results to the build cache.
