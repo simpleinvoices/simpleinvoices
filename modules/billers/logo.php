@@ -14,10 +14,12 @@ if ($biller_id <= 0) {
 }
 
 $biller = getBiller($biller_id);
-if (!$biller || !si_check_record_access($biller)) {
+if (!$biller) {
     http_response_code(404);
     exit(0);
 }
+// Exit with 403 if the biller is empty or belongs to a different domain.
+si_check_record_access($biller);
 
 $logo = $biller['logo'] ?? '';
 if (empty($logo)) {
