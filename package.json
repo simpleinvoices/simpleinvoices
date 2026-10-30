@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@fontsource/inter": "5.3.0",
-    "@tabler/core": "1.6.1",
+    "@tabler/core": "1.7.1",
     "@tabler/icons-webfont": "3.49.0",
     "apexcharts": "8.3.1",
     "hugerte": "1.0.14",
