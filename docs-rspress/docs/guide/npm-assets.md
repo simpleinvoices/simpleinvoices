@@ -78,7 +78,7 @@ npm run copy-assets
 Or specify an exact version:
 
 ```bash
-npm install apexcharts@5.12.0
+npm install apexcharts@8.8.1
 npm run copy-assets
 ```
 

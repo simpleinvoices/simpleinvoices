@@ -9,11 +9,11 @@
   },
   "dependencies": {
     "@fontsource/inter": "5.3.0",
-    "@tabler/core": "1.6.1",
-    "@tabler/icons-webfont": "3.49.0",
-    "apexcharts": "8.3.1",
-    "hugerte": "1.0.14",
+    "@tabler/core": "1.7.4",
+    "@tabler/icons-webfont": "3.51.0",
+    "apexcharts": "8.8.1",
+    "hugerte": "1.0.15",
     "litepicker": "2.0.12",
-    "tom-select": "2.6.2"
+    "tom-select": "2.7.0"
   }
 }

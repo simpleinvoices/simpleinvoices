@@ -40,8 +40,8 @@ if (!$molliePayment->isPaid()) {
     exit('OK');
 }
 
-$meta       = $molliePayment->metadata ?? null;
-$invoice_id = (int) ($meta->invoice_id ?? 0);
+$meta       = (array) ($molliePayment->metadata ?? []);
+$invoice_id = (int) ($meta['invoice_id'] ?? 0);
 
 if ($invoice_id > 0) {
     gatewayRecordPayment(
