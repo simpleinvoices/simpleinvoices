@@ -353,7 +353,7 @@ class invoice {
         switch ($having) 
         {   
             case "date_between":
-                $sql_having = "HAVING date between '$this->start_date' and '$this->end_date'";
+                $sql_having = "HAVING date between '" . preg_replace('/[^-0-9 :]/', '', (string)$this->start_date) . "' and '" . preg_replace('/[^-0-9 :]/', '', (string)$this->end_date) . "'";
                 break;
             case "money_owed":
                 $sql_having = "HAVING ( owing > 0 ) ";
@@ -374,7 +374,7 @@ class invoice {
         switch ($having_and) 
         {   
             case "date_between":
-                $sql_having .= "AND ( date between '$this->start_date' and '$this->end_date' )";
+                $sql_having .= "AND ( date between '" . preg_replace('/[^-0-9 :]/', '', (string)$this->start_date) . "' and '" . preg_replace('/[^-0-9 :]/', '', (string)$this->end_date) . "' )";
                 break;
             case "money_owed":
                 $sql_having .= "AND ( owing > 0 ) AND ( status = 1 ) ";
@@ -738,7 +738,7 @@ class invoice {
 
         if($this->filter == "date")
         {
-            $where = "AND date BETWEEN '$this->start_date' AND '$this->end_date'";
+            $where = "AND date BETWEEN '" . preg_replace('/[^-0-9 :]/', '', (string)$this->start_date) . "' AND '" . preg_replace('/[^-0-9 :]/', '', (string)$this->end_date) . "'";
         }
 
 		$sql = "SELECT i.*, p.pref_description AS preference FROM ".TB_PREFIX."invoices i LEFT JOIN ".TB_PREFIX."preferences p  ON (i.preference_id = p.pref_id AND i.domain_id = p.domain_id) WHERE i.domain_id = :domain_id ORDER BY i.id";

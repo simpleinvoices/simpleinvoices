@@ -197,12 +197,12 @@
 					<div class="col-sm-6">
 						<label class="form-label" for="install_admin_email">{{ $LANG['email'] ?? 'Email' }}</label>
 						<input type="email" class="form-control" id="install_admin_email" name="install_admin_email"
-							value="demo@simpleinvoices.org" required maxlength="255" autocomplete="username" />
+							placeholder="admin@example.com" required maxlength="255" autocomplete="username" />
 					</div>
 					<div class="col-sm-6">
 						<label class="form-label" for="install_admin_password">{{ $LANG['password'] ?? 'Password' }}</label>
 						<input type="password" class="form-control" id="install_admin_password" name="install_admin_password"
-							value="demo" required minlength="4" maxlength="255" autocomplete="new-password" />
+							placeholder="Choose a strong password" required minlength="4" maxlength="255" autocomplete="new-password" />
 					</div>
 				</div>
 				<div class="d-flex flex-wrap align-items-center gap-2">
