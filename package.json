@@ -10,7 +10,7 @@
   "dependencies": {
     "@fontsource/inter": "5.3.0",
     "@tabler/core": "1.7.4",
-    "@tabler/icons-webfont": "3.51.0",
+    "@tabler/icons-webfont": "3.52.0",
     "apexcharts": "8.8.1",
     "hugerte": "1.0.15",
     "litepicker": "2.0.12",
